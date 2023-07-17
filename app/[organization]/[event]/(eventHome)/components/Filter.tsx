@@ -22,7 +22,6 @@ const Filter = ({ event }: { event: IEvent }) => {
       value: date,
       type: "date",
       filterFunc: async (item: Session) => {
-        console.log(item.start.toLocaleDateString(), date);
         return item.start.toLocaleDateString() === date;
       },
     });

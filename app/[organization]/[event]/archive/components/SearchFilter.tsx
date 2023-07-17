@@ -28,7 +28,6 @@ const SearchFilter = <T extends object>({
   useEffect(() => {
     // current filter options to selected items
     currentFilterOptions.filter((option) => {
-      console.log(option);
       if (!selectedItems.includes(option) && option.type == filterOptions[0].type) {
         setSelectedItems([...selectedItems, option]);
       }

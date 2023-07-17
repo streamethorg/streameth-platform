@@ -27,7 +27,6 @@ export default async function Page({
     session: string;
   };
 }) {
-  console.log(params);
   const sController = new SessionController();
   const session = await sController.getSession(params.session, params.event);
 

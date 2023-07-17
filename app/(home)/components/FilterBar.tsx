@@ -29,7 +29,6 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
         value: "date",
         type: "date",
         filterFunc: async (item: IEvent) => {
-          console.log(item.start.toLocaleDateString(), date);
           return item.start.toLocaleDateString() < date;
         },
       },
