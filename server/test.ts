@@ -3,12 +3,12 @@ import EventController from "./controller/event";
 import { IEvent, IDataImporter } from "./model/event";
 const run = async () => {
   const Organization = {
-    name: "Spagetteth",
+    name: "Funding the Commons",
     description:
-      "The Italian Ethereum movement to buidl an open sauce future together.",
-    url: "https://www.spaghett-eth.com/",
-    logo: "https://www.spaghett-eth.com/assets/logoNav.6b3e7427.png",
-    location: "Italy",
+      "We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry.",
+    url: "https://fundingthecommons.io/",
+    logo: "https://fundingthecommons.io/assets/logoNav.6b3e7427.png",
+    location: "France",
   };
 
   const orgController = new OrganizationController();
@@ -17,18 +17,18 @@ const run = async () => {
   );
 
   const Event = {
-    name: "Spagetteth Naples",
+    name: "Funding the Commons",
     description:
-      "The Italian Ethereum movement to buidl an open sauce future together.",
-    start: new Date("2023-04-24T00:00:00.000Z"), // "2021-10-01T00:00:00.000Z
-    end: new Date("2023-04-26T00:00:00.000Z"), // "2021-10-01T00:00:00.000Z
-    location: "Naples, Italy",
+      "We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry.",
+    start: new Date("2023-07-15T00:00:00.000Z"), // "2021-10-01T00:00:00.000Z
+    end: new Date("2023-07-16T00:00:00.000Z"), // "2021-10-01T00:00:00.000Z
+    location: "Paris, France",
     organizationId: organizationInstance.id,
     dataImporter: [
       {
         type: "gsheet" as "gsheet",
         config: {
-          sheetId: "17aPr5DDYwH2pv20xpdS_Ci08r0pkgpWD-mm5-vDre2w",
+          sheetId: "1BgG-lFPM_DRQaboWd09WTLmToKzP1qMuATdA7OKO0zI",
           apiKey: "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4",
         },
       },
