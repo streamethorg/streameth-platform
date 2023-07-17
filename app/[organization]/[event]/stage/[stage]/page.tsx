@@ -4,19 +4,23 @@ import StageController from "@/server/controller/stage";
 import { notFound } from "next/navigation";
 interface Params {
   params: {
+    organization: string;
     event: string;
     stage: string;
   };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams({
+  params: { organization, event },
+}: {
+  params: { organization: string; event: string };
+}) {
   const stageController = new StageController();
   const stages = (await stageController.getAllStages()).map((stage) => {
     return {
-      params: {
-        event: stage.eventId,
-        stage: stage.id,
-      },
+      organization: organization,
+      event: event,
+      stage: stage.id,
     };
   });
   return stages;

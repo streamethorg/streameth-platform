@@ -5,19 +5,7 @@ import StageController from "@/server/controller/stage";
 import { FilterContextProvider } from "../archive/components/FilterContext";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  const eventController = new EventController();
-  const allEvents = await eventController.getAllEvents();
-  const paths = allEvents.map((event) => {
-    return {
-      params: {
-        organization: event.organizationId,
-        event: event.id,
-      },
-    };
-  });
-  return paths;
-}
+
 
 const EventPage = async ({
   params,

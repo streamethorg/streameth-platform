@@ -9,6 +9,17 @@ import {
 } from "@heroicons/react/24/outline";
 import { notFound } from "next/navigation";
 
+
+export async function generateStaticParams() {
+  const eventController = new EventController();
+  const allEvents = await eventController.getAllEvents();
+  const paths = allEvents.map((event) => ({
+    organization: event.organizationId,
+    event: event.id,
+  }));
+  return paths;
+}
+
 const Layout = async ({
   children,
   params,
