@@ -167,6 +167,8 @@ export default class Importer extends BaseImporter {
         this.stageController.getStage("farabeuf_amphitheater", this.event.id),
       ]);
 
+      const endTime = this.getEndTime(Time, Duration);
+
       const session = {
         name: Talk,
         description: Description ?? "",
