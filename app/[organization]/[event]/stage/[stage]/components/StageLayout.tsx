@@ -48,7 +48,7 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
   }
 
   return (
-    <div className="flex flex-col w-full lg:max-h-full h-full lg:flex-row relative">
+    <div className="flex flex-col w-full lg:max-h-full h-full lg:flex-row relative overflow-scroll">
       <div className="flex flex-col flex-grow h-full w-full lg:w-[70%] lg:overflow-y-scroll box-border">
         <div className="lg:h-3/4 w-full lg:p-4 lg:pb-2 ">
           <Player playbackId={currentSession.playbackId} playerName={currentSession.name} />
@@ -58,7 +58,7 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
           <SessionInfoBox session={currentSession.toJson()} />
         </div>
       </div>
-      <div className=" flex flex-col flex-grow pt-2 px-4 lg:p-4 lg:pl-0 w-full lg:w-[30%] h-full ">
+      <div className=" flex flex-col flex-grow mb-4 lg:mb-0 pt-2 px-4 lg:p-4 lg:pl-0 w-full lg:w-[30%] h-full ">
         <PluginBar
           tabs={[
             {

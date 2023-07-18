@@ -19,7 +19,7 @@ const ScheduleCard = ({
       }}
     >
       {showTime && (
-        <div className="flex flex-col justify-center items-center w-32 bg-tertiary rounded-tl rounded-bl   p-4 ">
+        <div className="flex flex-col justify-center items-center w-36 bg-tertiary rounded-tl rounded-bl   p-4 ">
           <p className="text-main-text text-2xl font-bold mb-2">
             {session.start.getDate().toLocaleString()}
           </p>

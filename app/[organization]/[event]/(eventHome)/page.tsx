@@ -40,7 +40,6 @@ const EventPage = async ({
       </FilterContextProvider>
     );
   } catch (e) {
-    console.log(e);
     return notFound();
   }
 };

@@ -64,7 +64,7 @@ const SchedulePage = ({
         }]`}
       >
         <ScheduleGrid />
-        <div className="w-[calc(100%-6rem)] flex flex-row h-full ml-auto">
+        <div className="w-[calc(100%-5rem)] flex flex-row h-full ml-auto">
           {isMobile ? (
             <SessionsOnGrid stageId={selectedStage} />
           ) : (

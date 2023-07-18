@@ -54,24 +54,25 @@ export const Player = ({
   );
 
   return (
-    <div className="bg-black h-full w-full flex items-center justify-center  ">
-      <div className="fixed lg:relative">
-      <LivepeerPlayer
-        mediaElementRef={mediaElementRef}
-        objectFit="contain"
-        playbackId={playbackId}
-        showTitle={false}
-        showPipButton={false}
-        muted={false}
-        autoPlay
-        priority
-        lowLatency
-        viewerId={address}
-        poster={<OfflinePlayer />}
-        showLoadingSpinner={false}
-      />
+    <div className=" bg-black h-full w-full flex items-center justify-center  ">
+      <div className="fixed flex w-full  md:relative">
+        <LivepeerPlayer
+          objectFit="cover"
+          mediaElementRef={mediaElementRef}
+          playbackId={playbackId}
+          showTitle={false}
+          showPipButton={false}
+          muted={false}
+          autoPlay
+          priority
+          lowLatency
+          viewerId={address}
+          poster={<OfflinePlayer />}
+          showLoadingSpinner={false}
+        />
       </div>
-      <div className="lg:hidden lg:h-3/4 w-full lg:p-4 lg:pb-2 aspect-video"></div>
+
+      <div className="md:hidden bg-zinc-50 lg:h-3/4 w-full lg:p-4 lg:pb-2 aspect-video" />
     </div>
   );
 };

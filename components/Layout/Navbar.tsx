@@ -40,9 +40,9 @@ export default function Navbar({
   };
 
   return (
-    <header className="shadow md:shadow-sm z-20 bg-base md:border-r border-primary absolute bottom-0 md:top-0 md:left-0 w-full md:w-20 md:h-screen">
-      <div className="flex flex-row md:flex-col md:items-center justify-between ">
-        <div className="hidden items-center md:flex md:py-2">
+    <header className="shadow lg:shadow-sm z-20 bg-base lg:border-r border-primary absolute bottom-0 lg:top-0 lg:left-0 w-full lg:w-20 lg:h-screen">
+      <div className="flex flex-row lg:flex-col lg:items-center justify-between ">
+        <div className="hidden items-center lg:flex lg:py-2">
           <Link href="/">
             <span className="sr-only">Logo</span>
             <Image src={img} alt="Logo" width={50} />
@@ -50,27 +50,27 @@ export default function Navbar({
         </div>
         <nav
           aria-label="Global"
-          className={`text-main-text text-center w-full space-x-3 lg:space-x-0 justify-between lg:gap-8 text-md font-medium flex flex-row lg:flex-col `}
+          className={`text-main-text   text-center w-full space-x-3 lg:space-x-0 justify-between lg:gap-8 text-sm lg:text-md font-medium flex flex-row lg:flex-col `}
         >
           {pages.map((item) => (
             <Link
               key={item.name}
-              className={`h-full w-full py-1 hover:text-gray-300 cursor-pointer ${
-                pathname === item.href && "bg-accent text-white rounded"
+              className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
+                pathname === item.href && "bg-accent rounded"
               }`}
               href={item.href}
             >
-              <div className="w-8 h-8 m-auto p-1">{item.icon}</div>
+              <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">{item.icon}</div>
               <p className="">{item.name}</p>
             </Link>
           ))}
           <div
             onClick={stageModal}
-            className={`h-full w-full py-1 hover:text-gray-300 cursor-pointer ${
-              pathname.includes("/stage/") && "bg-accent text-white rounded"
+            className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
+              pathname.includes("/stage/") && "bg-accent  rounded"
             }`}
           >
-            <div className="w-6 h-6 m-auto">
+            <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
               <CameraIcon />
             </div>
             stages

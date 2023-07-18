@@ -64,7 +64,7 @@ const Layout = async ({
           };
         })}
       />
-      <main className="flex lg:h-full w-full lg:w-[calc(100%-5rem)] h-[calc(100%-5rem)]   ml-auto bg-[#f5f5f5] overflow-hidden">
+      <main className="flex lg:h-full w-full lg:w-[calc(100%-5rem)] h-[calc(100%-3rem)]    ml-auto bg-[#f5f5f5] overflow-hidden">
         {children}
       </main>
     </div>
