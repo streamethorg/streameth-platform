@@ -20,16 +20,16 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
   });
 
   const handleTabClick = () => {
-    const date = isShowCurrent
-      ? new Date().toLocaleDateString()
-      : new Date(0).toLocaleDateString();
     setFilterOptions([
       {
         name: "date",
         value: "date",
         type: "date",
         filterFunc: async (item: IEvent) => {
-          return item.start.toLocaleDateString() < date;
+          console.log(item.start.getTime(), Date.now());
+          return isShowCurrent
+            ? item.start.getTime() < Date.now()
+            : item.start.getTime() > Date.now();
         },
       },
     ]);
