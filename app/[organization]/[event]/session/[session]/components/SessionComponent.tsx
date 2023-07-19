@@ -1,10 +1,9 @@
 import Session from "@/server/model/session";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import Player from "@/components/misc/Player";
-import StageTabs from "@/components/Layout/PluginBar";
 import SessionInfoBox from "@/components/sessions/SessionInfoBox";
 import ComponetCard from "@/components/misc/ComponentCard";
 import SpeakerIconList from "@/components/speakers/SpeakerIconList";
+
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (
     <ComponetCard title="Speakers">

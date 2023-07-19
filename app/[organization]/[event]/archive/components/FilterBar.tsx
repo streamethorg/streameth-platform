@@ -6,7 +6,8 @@ import { ISession } from "@/server/model/session";
 import { ISpeaker } from "@/server/model/speaker";
 import { IStage } from "@/server/model/stage";
 import ComponentCard from "@/components/misc/ComponentCard";
-export default async function FilterBar({
+
+export default function FilterBar({
   sessions,
   speakers,
   stages,
@@ -41,7 +42,7 @@ export default async function FilterBar({
 
   const sessionDateFilters = () => {
     const uniqueDates = Array.from(
-      new Set(sessions.map((session) => session.start.toLocaleDateString()))
+      new Set(sessions.map((session) => session.start.toDateString()))
     );
 
     uniqueDates.sort((a, b) => {
@@ -53,7 +54,7 @@ export default async function FilterBar({
       value: date,
       type: "date",
       filterFunc: async (item: ISession) => {
-        return item.start.toLocaleDateString() === date;
+        return item.start.toDateString() === date;
       },
     }));
   };

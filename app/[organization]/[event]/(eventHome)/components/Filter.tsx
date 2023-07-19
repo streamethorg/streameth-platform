@@ -16,13 +16,13 @@ const Filter = ({ event }: { event: IEvent }) => {
   for (let i = 0; i < days; i++) {
     const date = new Date(
       event.start.getTime() + i * 24 * 60 * 60 * 1000
-    ).toLocaleDateString();
+    ).toDateString();
     dates.push({
       name: "date",
       value: date,
       type: "date",
       filterFunc: async (item: Session) => {
-        return item.start.toLocaleDateString() === date;
+        return item.start.toDateString() === date;
       },
     });
   }

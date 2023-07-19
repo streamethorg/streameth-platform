@@ -36,7 +36,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
           {event.name} - {event.organizationId}
         </p>
         <p className="text-secondary-text">
-          {event.start.toLocaleDateString()} - {event.end.toLocaleDateString()}
+          {event.start.toDateString()} - {event.end.toDateString()}
         </p>
         </div>
 
