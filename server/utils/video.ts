@@ -4,16 +4,17 @@ import path from 'path';
 import fs from 'fs';
 
 export async function extractFirstFrame(hlsUrl: string, filePath: string) {
+  console.log(hlsUrl, filePath)
   // Check if the file already exists
   if (fs.existsSync(filePath)) {
     console.log('File already exists, skipping frame extraction.');
     return;
   }
   // replace index.m3u8 with 720p0/index.m3u8
-  hlsUrl = hlsUrl.replace('index.m3u8', '1080p0/index.m3u8');
+  hlsUrl = hlsUrl.replace('index.m3u8', 'index1080p0.m3u8');
   let response = await axios.get(hlsUrl);
   if (!response.data) {
-    hlsUrl = hlsUrl.replace('1080p0/index.m3u8', '720p0/index.m3u8');
+    hlsUrl = hlsUrl.replace('1080p0/index.m3u8', 'index720p0.m3u8');
     response = await axios.get(hlsUrl);
   }
   const body = response.data;

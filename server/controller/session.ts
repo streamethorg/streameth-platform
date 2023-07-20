@@ -46,10 +46,12 @@ export default class SessionController {
       const session = await this.getSession(sessionId, eventId);
       const path = await Session.getSessionImagePath(sessionId);
       if(!session.videoUrl) {
+
         throw new Error("No video url found for session " + sessionId);
       }
       await extractFirstFrame(session.videoUrl, path);
     } catch (error) {
+      console.log(error);
       const logger = new LoggerService();
       logger.logError(sessionId + " " + error);
     }

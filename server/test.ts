@@ -3,12 +3,12 @@ import EventController from "./controller/event";
 import { IEvent, IDataImporter } from "./model/event";
 const run = async () => {
   const Organization = {
-    name: "Spagetteth",
+    name: "ETHPorto",
     description:
-      "The Italian Ethereum movement to buidl an open sauce future together.",
-    url: "https://www.spaghett-eth.com/",
-    logo: "https://www.spaghett-eth.com/assets/logoNav.6b3e7427.png",
-    location: "Italy",
+      "ETHPorto is collaborating with a local nonprofit, Transformers, in an effort to support the local community and explore new ways to finance public goods through quadratic voting",
+    url: "https://ethporto.org/",
+    logo: "https://pbs.twimg.com/profile_images/1613498246403395590/BF_dNWpk_400x400.jpg",
+    location: "Porto, Portugal",
   };
 
   const orgController = new OrganizationController();
@@ -17,18 +17,18 @@ const run = async () => {
   );
 
   const Event = {
-    name: "Spagetteth Naples",
+    name: "EthPorto 2023",
     description:
-      "The Italian Ethereum movement to buidl an open sauce future together.",
-    start: new Date("2023-04-24T00:00:00.000Z"), // "2021-10-01T00:00:00.000Z
-    end: new Date("2023-04-26T00:00:00.000Z"), // "2021-10-01T00:00:00.000Z
-    location: "Naples, Italy",
+      "March 16-18th, 2023 🇵🇹 Bringing the first ETH event to the beautiful city of Porto",
+    start: new Date("2023-03-16T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
+    end: new Date("2023-03-18T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
+    location: "Porto, Portugal",
     organizationId: organizationInstance.id,
     dataImporter: [
       {
         type: "gsheet" as "gsheet",
         config: {
-          sheetId: "17aPr5DDYwH2pv20xpdS_Ci08r0pkgpWD-mm5-vDre2w",
+          sheetId: "1oe2C9BFunInC0-rLVOHuQQ3Uu5osOHUlAJxLooLd69c",
           apiKey: "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4",
         },
       },

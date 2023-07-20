@@ -3,12 +3,12 @@ import { google } from "googleapis";
 import Event, { IDataImporter } from "../../model/event";
 import { generateId } from "../../utils";
 // Constants
-const SPEAKER_SHEET = "Speakers";
-const SPEAKER_DATA_RANGE = "A3:I";
-const STAGE_SHEET = "Stages";
-const STAGE_DATA_RANGE = "A3:D";
-const SESSION_SHEET = "Sessions";
-const SESSION_DATA_RANGE = "A3:N";
+const SPEAKER_SHEET = "Sheet1";
+const SPEAKER_DATA_RANGE = "F4:I";
+const STAGE_SHEET = "Sheet1";
+const STAGE_DATA_RANGE = "A4:D";
+const SESSION_SHEET = "Sheet1";
+const SESSION_DATA_RANGE = "K4:W";
 
 // Setting up a queue for the Google Sheets API
 // const API_QUEUE = new PQueue({ concurrency: 1, interval: 1500 });
@@ -75,7 +75,7 @@ export default class Importer extends BaseImporter {
       try {
         await this.speakerController.createSpeaker(speaker);
       } catch (e) {
-        console.error(e);
+        console.error(speaker);
       }
     }
   }
@@ -94,7 +94,7 @@ export default class Importer extends BaseImporter {
       try {
         await this.stageController.createStage(stage);
       } catch (e) {
-        //console.error(e, stage);
+        console.error(stage);
       }
     }
   }
@@ -117,13 +117,13 @@ export default class Importer extends BaseImporter {
         Speaker3,
         Speaker4,
         Speaker5,
-        Speaker6,
         video,
       ] = row;
-
+      console.log(row, video)
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
       const speakerIds = speakerIdsRaw.map((speakerId) => {
-        return speakerId ? generateId(speakerId) : "";
+        if (!speakerId) return null;
+        return generateId(speakerId.replace("speaker_", "").replace("_", " "));
       });
 
       const speakerPromises = speakerIds
@@ -135,7 +135,7 @@ export default class Importer extends BaseImporter {
       const [speakers, stage] = await Promise.all([
         Promise.all(speakerPromises),
         this.stageController.getStage(
-          stageId === "stage_Gulf_Stage" ? "gulf_stage" : "volcano_stage",
+          generateId(stageId.replace("stage_", "").replace("_", " ")),
           this.event.id
         ),
       ]);
