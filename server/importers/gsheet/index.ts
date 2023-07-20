@@ -61,15 +61,23 @@ export default class Importer extends BaseImporter {
   }
 
   public override async generateSpeakers(): Promise<any> {
-    let allSpeakers: ISpeaker;
+    let allSpeakers: ISpeaker[] = [];
 
     const data = await this.getDataForRange(SPEAKER_SHEET, SPEAKER_DATA_RANGE);
 
-    const speakerNames = [...new Set(data.flat().filter(Boolean))];
+    const speakerNamesObj: { [key: string]: boolean } = {};
+    data
+      .flat()
+      .filter(Boolean)
+      .forEach((name: string) => {
+        speakerNamesObj[name as string] = true;
+      });
+
+    const speakerNames = Object.keys(speakerNamesObj);
 
     for (const name of speakerNames) {
       const speaker = {
-        id: name as string, // assuming the name is unique and can be used as an id
+        id: name as string,
         name: name as string,
         bio: "No description",
         eventId: this.event.id,
@@ -79,6 +87,8 @@ export default class Importer extends BaseImporter {
         await this.speakerController.createSpeaker(speaker).catch((e) => {
           console.error(e);
         });
+
+        allSpeakers.push(speaker);
       } catch (e) {
         console.error(speaker);
       }
@@ -111,12 +121,6 @@ export default class Importer extends BaseImporter {
       endHours += Math.floor(endMinutes / 60);
       endMinutes = endMinutes % 60;
     }
-
-    const endTime = `${String(endHours).padStart(2, "0")}:${String(
-      endMinutes
-    ).padStart(2, "0")}`;
-
-    return endTime;
   }
 
   public override async generateSessions(): Promise<void> {
@@ -152,8 +156,7 @@ export default class Importer extends BaseImporter {
 
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
       const speakerIds = speakerIdsRaw.map((speakerId) => {
-        if (!speakerId) return null;
-        return generateId(speakerId.replace("speaker_", "").replace("_", " "));
+        return speakerId ? generateId(speakerId) : "";
       });
 
       const speakerPromises = speakerIds
