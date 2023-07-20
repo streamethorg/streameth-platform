@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const Modal = ({
   open,
   onClose,
@@ -7,6 +9,18 @@ const Modal = ({
   onClose: () => void;
   children: React.ReactNode;
 }) => {
+  useEffect(() => {
+    const handleNavigationChange = () => {
+      if (open) {
+        onClose();
+      }
+    };
+    window.addEventListener("beforeunload", handleNavigationChange);
+    return () => {
+      window.removeEventListener("beforeunload", handleNavigationChange);
+    };
+  }, [open, onClose]);
+
   if (!open) {
     return null;
   }

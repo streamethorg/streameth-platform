@@ -39,7 +39,7 @@ export default async function ArchivePage({ params }: Params) {
         <div className="w-full pt-0 p-4 lg:pt-4 overflow-y-scroll">
           <FilteredItems />
         </div>
-        <div className="w-full lg:w-1/3 lg:max-w-[25rem] px-4 pt-4 mb-4 md:p-4 md:mb-0 lg:pl-1">
+        <div className="w-full lg:w-1/3 lg:max-w-[25rem] px-4 pt-2 mb-2 md:p-4 md:mb-0 lg:pl-1">
           <FilterBar sessions={sessions} speakers={speakers} stages={stages} />
         </div>
       </FilterContextProvider>

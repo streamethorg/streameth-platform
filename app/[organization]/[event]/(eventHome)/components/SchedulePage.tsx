@@ -1,17 +1,12 @@
 "use client";
-import {
-  useContext,
-  useMemo,
-  useState,
-  useLayoutEffect,
-  useEffect,
-} from "react";
+import { useState, useLayoutEffect, useContext } from "react";
 import { IStage } from "@/server/model/stage";
 import { CELL_HEIGHT } from "../utils";
 import ScheduleGrid from "./ScheduleGrid";
 import SessionsOnGrid from "./SessionsOnGrid";
 import { IEvent } from "@/server/model/event";
 import DateFilter from "./Filter";
+import { MobileContext } from "@/components/context/MobileContext";
 const SchedulePage = ({
   stages,
   event,
@@ -19,23 +14,19 @@ const SchedulePage = ({
   stages: IStage[];
   event: IEvent;
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
   const [selectedStage, setSelectedStage] = useState(stages[0].id);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setIsMobile(window.innerWidth <= 768);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
+  const {isMobile, isLoading} = useContext(MobileContext)
+
+  if (isLoading) {
+    return <>loading</>
+  }
 
   return (
     <>
-      <div className="flex flex-row md:flex-col bg-base">
+      <div className="flex flex-row flex-wrap md:flex-col bg-base justify-center">
         <DateFilter event={event} />
         {isMobile ? (
-          <div className="flex flex-row w-full justify-center items-center p-2 ">
+          <div className="flex flex-row justify-center items-center p-2 ">
             <select
               className="text-xl cursor-pointer font-bold box-border"
               value={selectedStage}
@@ -51,7 +42,10 @@ const SchedulePage = ({
         ) : (
           <div className="w-[calc(100%-6rem)] flex flex-row ml-auto">
             {stages.map((stage) => (
-              <div className="w-full p-4 text-center text-xl font-bold text-accent uppercase" key={stage.id}>
+              <div
+                className="w-full p-4 text-center text-xl font-bold text-accent uppercase"
+                key={stage.id}
+              >
                 {stage.name}
               </div>
             ))}

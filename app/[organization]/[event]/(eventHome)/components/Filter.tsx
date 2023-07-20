@@ -6,11 +6,14 @@ import {
   FilterContext,
   FilterOption,
 } from "../../archive/components/FilterContext";
+import { MobileContext } from "@/components/context/MobileContext";
+
+
 
 const Filter = ({ event }: { event: IEvent }) => {
   const { setFilterOptions } = useContext(FilterContext);
+  const {isLoading, isMobile} = useContext(MobileContext)
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
   const days = event.end.getDate() - event.start.getDate() + 1;
   const dates: FilterOption<Session>[] = [];
   for (let i = 0; i < days; i++) {
@@ -27,22 +30,16 @@ const Filter = ({ event }: { event: IEvent }) => {
     });
   }
 
-  // Check for mobile device
-  useLayoutEffect(() => {
-    function updateSize() {
-      setIsMobile(window.innerWidth <= 768);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
   useEffect(() => {
     setFilterOptions([dates[selectedIndex]]);
   }, [selectedIndex]);
 
+  if(isLoading) {
+    return <>loading</>
+  }
+
   return (
-    <div className="flex flex-row w-full space-x-3 justify-center p-2 md:p-4 box-border">
+    <div className="flex flex-row space-x-3 justify-center p-2 md:p-4 box-border">
       {isMobile ? (
         <select
           className="text-xl cursor-pointer font-bold"

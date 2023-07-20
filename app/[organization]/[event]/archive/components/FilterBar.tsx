@@ -84,7 +84,7 @@ export default function FilterBar({
   return (
     <ComponentCard>
       <NavigationBarWrapper>
-        <div className="md:flex flex-col w-full relative py-4 ">
+        <div className="md:flex flex-col w-full relative py-2 md:py-4 ">
           <p className="text-lg font-bold mb-2 text-accent uppercase ">
             Search
           </p>

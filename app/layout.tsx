@@ -3,7 +3,9 @@ import { Quicksand } from "next/font/google";
 import { Metadata } from "next";
 import GeneralContext from "@/components/context/GeneralContext";
 import { ModalContextProvider } from "@/components/context/ModalContext";
+import { MobileContextProvider } from "@/components/context/MobileContext";
 import Navbar from "@/components/Layout/NavbarTop";
+
 const quicksand = Quicksand({
   subsets: ["latin", "latin-ext"],
 });
@@ -22,12 +24,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${quicksand.className}`}>
         <GeneralContext>
-          <ModalContextProvider>
-            <div className="bg-background flex flex-col h-screen w-screen overflow-hidden">
-              <Navbar />
-              {children}
-            </div>
-          </ModalContextProvider>
+          <MobileContextProvider>
+            <ModalContextProvider>
+              <div className="bg-background flex flex-col h-screen w-screen overflow-hidden">
+                <Navbar />
+                {children}
+              </div>
+            </ModalContextProvider>
+          </MobileContextProvider>
         </GeneralContext>
       </body>
     </html>
