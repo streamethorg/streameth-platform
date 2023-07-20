@@ -54,7 +54,7 @@ export default class Importer extends BaseImporter {
     // )) as any;
     const response = await this.connection.spreadsheets.values.get({
       spreadsheetId: this.sheetId,
-      range: `Presentation Schedule!${range}`,
+      range: `ETHBerlin!${range}`,
     });
     const rows = response.data.values;
     return rows ?? [];
@@ -125,9 +125,11 @@ export default class Importer extends BaseImporter {
     const data = await this.getDataForRange(SESSION_SHEET, SESSION_DATA_RANGE);
     for (const row of data) {
       const [
-        Time,
-        date,
         Talk,
+        Description,
+        Room,
+        Start,
+        End,
         Speaker1,
         Speaker2,
         Speaker3,
@@ -165,8 +167,6 @@ export default class Importer extends BaseImporter {
         this.stageController.getStage("farabeuf_amphitheater", this.event.id),
       ]);
 
-      const endTime = this.getEndTime(Time, Duration);
-
       const session = {
         name: Talk,
         description: Description ?? "",
@@ -174,11 +174,9 @@ export default class Importer extends BaseImporter {
         eventId: this.event.id,
         organizationId: this.event.organizationId,
         speakers: speakers,
-        start: new Date(`${date} ${Time}`),
-        end: new Date(`${date} ${endTime}`),
+        start: new Date(`${Start}`),
+        end: new Date(`${End}`),
         videoUrl: Video,
-        startCut,
-        endCut,
       };
 
       try {
