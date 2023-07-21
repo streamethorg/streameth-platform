@@ -33,7 +33,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
         </div>
         <div className="border-b-2 border-accent  p-2 py-4 flex flex-col">
         <p className=" text-md uppercase my-2 ">
-          {event.name} - {event.organizationId}
+          {event.name}
         </p>
         <p className="text-secondary-text">
           {event.start.toDateString()} - {event.end.toDateString()}
