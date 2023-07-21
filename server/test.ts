@@ -17,7 +17,7 @@ const run = async () => {
   );
 
   const Event = {
-    name: "Funding the Commons",
+    name: "Funding the Commons Paris 2023",
     description:
       "We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry.",
     start: new Date("2023-07-15T00:00:00.000Z"), // "2021-10-01T00:00:00.000Z
