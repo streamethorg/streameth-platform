@@ -18,7 +18,7 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
           />
       ) : (
         <iframe
-          className=" rounded w-full p-4"
+          className=" rounded w-full h-full p-4"
           src={`https://stingray-app-u9f8x.ondigitalocean.app/${conversationId}?isCastr=${false}&address=${userAddress}`}
         />
       )}
