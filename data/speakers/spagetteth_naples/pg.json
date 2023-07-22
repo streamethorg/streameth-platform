@@ -1,1 +1,7 @@
-{"id":"pg","name":"PG","bio":"Bankless DAO","eventId":"spagetteth_naples","photo":"https://naples.spaghett-eth.com/images/speakers/pg.jpeg"}
+{
+  "id": "pg",
+  "name": "PG",
+  "bio": "Bankless DAO",
+  "eventId": "spagetteth_naples",
+  "photo": "https://naples.spaghett-eth.com/images/speakers/pg.jpeg"
+}

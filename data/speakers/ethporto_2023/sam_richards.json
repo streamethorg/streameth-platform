@@ -1,1 +1,7 @@
-{"id":"sam_richards","name":"Sam Richards","bio":"Ethereum Foundation","eventId":"ethporto_2023","photo":"https://ethporto.org/assets/speakers/sam.jpg"}
+{
+  "id": "sam_richards",
+  "name": "Sam Richards",
+  "bio": "Ethereum Foundation",
+  "eventId": "ethporto_2023",
+  "photo": "https://ethporto.org/assets/speakers/sam.jpg"
+}

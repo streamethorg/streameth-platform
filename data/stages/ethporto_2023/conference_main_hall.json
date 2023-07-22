@@ -1,1 +1,6 @@
-{"id":"conference_main_hall","name":"Conference main hall","eventId":"ethporto_2023","streamSettings":{"streamId":"7718a79e-a2f3-46ae-bf44-9e005f2bb2d1"}}
+{
+  "id": "conference_main_hall",
+  "name": "Conference main hall",
+  "eventId": "ethporto_2023",
+  "streamSettings": { "streamId": "7718a79e-a2f3-46ae-bf44-9e005f2bb2d1" }
+}

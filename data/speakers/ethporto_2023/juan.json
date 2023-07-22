@@ -1,1 +1,7 @@
-{"id":"juan","name":"Juan","bio":"MakerDAO & DAOcraft","eventId":"ethporto_2023","photo":"https://ethporto.org/assets/speakers/Juan.jpg"}
+{
+  "id": "juan",
+  "name": "Juan",
+  "bio": "MakerDAO & DAOcraft",
+  "eventId": "ethporto_2023",
+  "photo": "https://ethporto.org/assets/speakers/Juan.jpg"
+}

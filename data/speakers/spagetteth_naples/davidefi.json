@@ -1,1 +1,7 @@
-{"id":"davidefi","name":"DavideFi","bio":"Trader Joe","eventId":"spagetteth_naples","photo":"https://naples.spaghett-eth.com/images/speakers/davideFi.jpeg"}
+{
+  "id": "davidefi",
+  "name": "DavideFi",
+  "bio": "Trader Joe",
+  "eventId": "spagetteth_naples",
+  "photo": "https://naples.spaghett-eth.com/images/speakers/davideFi.jpeg"
+}
