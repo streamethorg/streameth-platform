@@ -1,1 +1,19 @@
-{"id":"introduction_to_quadratic_voting","name":"Introduction to Quadratic Voting","description":"Nick will explain how quadratic voting works, why it is important and even do a few fun votes with you to try it out and help you get all set for the big open track winner voting.","start":"2022-09-18T11:00:00.000Z","end":"2022-09-18T11:45:00.000Z","stageId":"lexis","speakers":[{"id":"nick_almond","name":"Nick Almond","bio":"No description","eventId":"ethberlin_2022"}],"videoUrl":"https://livepeercdn.com/recordings/d2b58a82-0c14-4daa-a721-4f262a76b189/index.m3u8","playbackId":"d2b58a82-0c14-4daa-a721-4f262a76b189","eventId":"ethberlin_2022"}
+{
+  "id": "introduction_to_quadratic_voting",
+  "name": "Introduction to Quadratic Voting",
+  "description": "Nick will explain how quadratic voting works, why it is important and even do a few fun votes with you to try it out and help you get all set for the big open track winner voting.",
+  "start": "2022-09-18T11:00:00.000Z",
+  "end": "2022-09-18T11:45:00.000Z",
+  "stageId": "lexis",
+  "speakers": [
+    {
+      "id": "nick_almond",
+      "name": "Nick Almond",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    }
+  ],
+  "videoUrl": "https://livepeercdn.com/recordings/d2b58a82-0c14-4daa-a721-4f262a76b189/index.m3u8",
+  "playbackId": "d2b58a82-0c14-4daa-a721-4f262a76b189",
+  "eventId": "ethberlin_2022"
+}
