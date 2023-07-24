@@ -20,8 +20,8 @@ const run = async () => {
     name: "ETHBerlin 2022",
     description:
       "ETHBerlin³ (2022) was a hackathon, a cultural festival, an educational event, a platform for hacktivism, and a community initiative to push the decentralized ecosystem forward.",
-    start: new Date("2022-08-16T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
-    end: new Date("2022-08-18T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
+    start: new Date("2022-09-16T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
+    end: new Date("2022-09-18T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
     location: "Berlin, Germany",
     organizationId: organizationInstance.id,
     dataImporter: [
