@@ -45,8 +45,7 @@ export default class SessionController {
     try {
       const session = await this.getSession(sessionId, eventId);
       const path = await Session.getSessionImagePath(sessionId);
-      if(!session.videoUrl) {
-
+      if (!session.videoUrl) {
         throw new Error("No video url found for session " + sessionId);
       }
       await extractFirstFrame(session.videoUrl, path);

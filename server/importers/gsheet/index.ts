@@ -2,6 +2,7 @@ import BaseImporter from "../baseImporter";
 import { google } from "googleapis";
 import Event, { IDataImporter } from "../../model/event";
 import { generateId } from "../../utils";
+
 // Constants
 const SPEAKER_SHEET = "ETHBerlin";
 const SPEAKER_DATA_RANGE = "F4:I";
@@ -67,13 +68,15 @@ export default class Importer extends BaseImporter {
       const [id, name, description, avatar] = row;
       const speaker = {
         name,
-        bio: description ?? "No Description",
+        bio: description ?? "No description",
         photo: avatar,
         eventId: this.event.id,
       };
 
       try {
-        await this.speakerController.createSpeaker(speaker);
+        if (speaker) {
+          await this.speakerController.createSpeaker(speaker);
+        }
       } catch (e) {
         console.error(speaker);
       }
@@ -119,14 +122,16 @@ export default class Importer extends BaseImporter {
         Speaker5,
         Video,
       ] = row;
+
+      console.log(row);
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
 
-      const speakerPromises = speakerIdsRaw.map((speakerId) =>
-        this.speakerController.getSpeaker(
-          generateId(speakerId.replace("speaker_", "").replace("_", " ")),
-          this.event.id
-        )
-      );
+      const speakerPromises = speakerIdsRaw.filter(Boolean).map((speakerId) => {
+          return this.speakerController.getSpeaker(
+            generateId(speakerId.replace("speaker_", "").replace("_", " ")),
+            this.event.id
+          );
+      });
 
       const [speakers, stage] = await Promise.all([
         Promise.all(speakerPromises),

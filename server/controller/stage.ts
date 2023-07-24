@@ -21,6 +21,7 @@ export default class StageController {
   ): Promise<Stage> {
     const stageQuery = await Stage.getStagePath(eventId, stageId);
     const data = await this.controller.get(stageQuery);
+
     return new Stage({ ...data });
   }
 
