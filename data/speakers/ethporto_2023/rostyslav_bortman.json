@@ -1,1 +1,7 @@
-{"id":"rostyslav_bortman","name":"Rostyslav Bortman","bio":"IdeaSoft.io","eventId":"ethporto_2023","photo":"https://ethporto.org/assets/speakers/Rostyslav.jpg"}
+{
+  "id": "rostyslav_bortman",
+  "name": "Rostyslav Bortman",
+  "bio": "IdeaSoft.io",
+  "eventId": "ethporto_2023",
+  "photo": "https://ethporto.org/assets/speakers/Rostyslav.jpg"
+}

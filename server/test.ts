@@ -1,14 +1,14 @@
 import OrganizationController from "./controller/organization";
 import EventController from "./controller/event";
-import { IEvent, IDataImporter } from "./model/event";
+
 const run = async () => {
   const Organization = {
-    name: "ETHPorto",
+    name: "ETHBerlin",
     description:
-      "ETHPorto is collaborating with a local nonprofit, Transformers, in an effort to support the local community and explore new ways to finance public goods through quadratic voting",
-    url: "https://ethporto.org/",
-    logo: "https://pbs.twimg.com/profile_images/1613498246403395590/BF_dNWpk_400x400.jpg",
-    location: "Porto, Portugal",
+      "ETHBerlin is known as the hackathon extravaganza, a cultural festival, an educational event, a platform for hacktivism, and a community initiative to push the decentralized ecosystem forward. ETHBerlin³ is the third edition, and we've come a long way since we hosted our first hackathon in 2018.",
+    url: "https://ethberlin.ooo/",
+    logo: "https://ethberlin.ooo/ETHBerlin.gif",
+    location: "Berlin, Germany",
   };
 
   const orgController = new OrganizationController();
@@ -17,18 +17,18 @@ const run = async () => {
   );
 
   const Event = {
-    name: "EthPorto 2023",
+    name: "ETHBerlin 2022",
     description:
-      "March 16-18th, 2023 🇵🇹 Bringing the first ETH event to the beautiful city of Porto",
-    start: new Date("2023-03-16T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
-    end: new Date("2023-03-18T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
-    location: "Porto, Portugal",
+      "ETHBerlin³ (2022) was a hackathon, a cultural festival, an educational event, a platform for hacktivism, and a community initiative to push the decentralized ecosystem forward.",
+    start: new Date("2022-09-16T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
+    end: new Date("2022-09-18T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
+    location: "Berlin, Germany",
     organizationId: organizationInstance.id,
     dataImporter: [
       {
         type: "gsheet" as "gsheet",
         config: {
-          sheetId: "1oe2C9BFunInC0-rLVOHuQQ3Uu5osOHUlAJxLooLd69c",
+          sheetId: "1EJg7Z0WpyhdRa89Noti5lRb-iRjywGqa9_MbN6FsdWM",
           apiKey: "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4",
         },
       },

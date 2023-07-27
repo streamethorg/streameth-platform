@@ -2,12 +2,13 @@ import BaseImporter from "../baseImporter";
 import { google } from "googleapis";
 import Event, { IDataImporter } from "../../model/event";
 import { generateId } from "../../utils";
+
 // Constants
-const SPEAKER_SHEET = "Sheet1";
+const SPEAKER_SHEET = "ETHBerlin";
 const SPEAKER_DATA_RANGE = "F4:I";
-const STAGE_SHEET = "Sheet1";
+const STAGE_SHEET = "ETHBerlin";
 const STAGE_DATA_RANGE = "A4:D";
-const SESSION_SHEET = "Sheet1";
+const SESSION_SHEET = "ETHBerlin";
 const SESSION_DATA_RANGE = "K4:W";
 
 // Setting up a queue for the Google Sheets API
@@ -67,13 +68,15 @@ export default class Importer extends BaseImporter {
       const [id, name, description, avatar] = row;
       const speaker = {
         name,
-        bio: description,
+        bio: description ?? "No description",
         photo: avatar,
         eventId: this.event.id,
       };
 
       try {
-        await this.speakerController.createSpeaker(speaker);
+        if (speaker) {
+          await this.speakerController.createSpeaker(speaker);
+        }
       } catch (e) {
         console.error(speaker);
       }
@@ -117,17 +120,18 @@ export default class Importer extends BaseImporter {
         Speaker3,
         Speaker4,
         Speaker5,
-        video,
+        Video,
       ] = row;
-      console.log(row, video);
+
+      console.log(row);
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
 
-      const speakerPromises = speakerIdsRaw.map((speakerId) =>
-        this.speakerController.getSpeaker(
-          generateId(speakerId.replace("speaker_", "").replace("_", " ")),
-          this.event.id
-        )
-      );
+      const speakerPromises = speakerIdsRaw.filter(Boolean).map((speakerId) => {
+          return this.speakerController.getSpeaker(
+            generateId(speakerId.replace("speaker_", "").replace("_", " ")),
+            this.event.id
+          );
+      });
 
       const [speakers, stage] = await Promise.all([
         Promise.all(speakerPromises),
@@ -146,7 +150,7 @@ export default class Importer extends BaseImporter {
         speakers: speakers,
         start: new Date(`${Day} ${Start}`),
         end: new Date(`${Day} ${End}`),
-        videoUrl: video,
+        videoUrl: Video,
       };
 
       try {

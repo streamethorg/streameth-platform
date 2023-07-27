@@ -1,0 +1,19 @@
+{
+  "id": "data_provenance_and_the_climate_crisis",
+  "name": "Data Provenance and the Climate Crisis",
+  "description": "In this video, Alan Renzel discusses the importance of data provenance in sustainability claims and introduces Filecoin Green, a project focused on connecting Filecoin to renewable energy in a publicly verifiable way. He explains the need for new tools for impact evaluation in the sustainability space and how the current tools are insufficient for auditing claims. Alan introduces Transform.Storage, a set of tools built to address these problems, and explains how they can be implemented in projects. He also highlights the importance of verifiability in claims about the real world and how Web3 technology can enhance this verifiability. Alan discusses the concept of anchoring data in content addresses and using compute diagrams to track data transformation across different sources. He provides examples of how Transponder.Storage can be used in projects, such as carbon offset projects, and explains the different layers of useful data, including assets, raw data, functions, and provenance. Alan demonstrates how to use Transponder.Storage to tag data with relevant provenance information and plug it into compute platforms. He also mentions upcoming features like private data, monetization of data and code, and impact evaluation as a service. The video concludes with a demonstration of using Transponder.Storage to decarbonize travel to ECC by estimating CO2 emissions and retiring offsets through a compute pipeline.\n\nIn this video, Alan Renzel discusses data provenance and its importance in addressing the climate crisis. He introduces Filecoin Green, a project focused on connecting Filecoin to renewable energy in a publicly verifiable way. Alan highlights the need for new tools to evaluate the impact of sustainability claims, such as those related to renewable energy and carbon emissions. He introduces Transform.Storage, a set of tools built to address these challenges. Alan explains how these tools can be implemented in projects and offers the audience an opportunity to use them to decarbonize their travel to ECC for free. He emphasizes the importance of verifiability in claims about the real world and how Web3 tools can enhance this verifiability. Alan also discusses the data model used in these tools, which includes assets, raw data, functions, and provenance information. He demonstrates how users can create types, tag assets with providence information, and use content-addressed data in their projects. Alan concludes by mentioning future developments, such as private data, monetization options, and impact evaluation as a service. The video ends with a demonstration of using the tools to offset carbon emissions from travel.\n\nIn this video, Alan Renzel discusses the importance of data provenance in sustainability claims and introduces the tools developed by File",
+  "start": "2023-07-16T13:25:00.000Z",
+  "end": "2023-07-16T13:40:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "alan_ransil",
+      "name": "Alan Ransil",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/3d25wtugb5a24p0i/index.m3u8",
+  "playbackId": "3d25wtugb5a24p0i",
+  "eventId": "funding_the_commons_paris_2023"
+}
