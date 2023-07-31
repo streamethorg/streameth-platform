@@ -1,1 +1,20 @@
-{"id":"its_too_late_mev_has_already_achieved_agi","name":"It’s Too Late… MEV has Already Achieved AGI","description":"cryptoxai.wtf","start":"2023-05-07T05:30:00.000Z","end":"2023-05-07T06:30:00.000Z","stageId":"lighthouse","speakers":[{"id":"phil_daian","name":"Phil Daian","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/d507akyh73c5cktw/index.m3u8","playbackId":"d507akyh73c5cktw","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "its_too_late_mev_has_already_achieved_agi",
+  "name": "It’s Too Late… MEV has Already Achieved AGI",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "phil_daian",
+      "name": "Phil Daian",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/d507akyh73c5cktw/index.m3u8",
+  "playbackId": "d507akyh73c5cktw",
+  "eventId": "zuzalu_montenegro_2023"
+}

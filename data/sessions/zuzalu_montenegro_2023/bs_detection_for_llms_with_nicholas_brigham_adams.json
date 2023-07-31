@@ -1,1 +1,20 @@
-{"id":"bs_detection_for_llms_with_nicholas_brigham_adams","name":"BS detection for LLMs with Nicholas Brigham Adams","description":"This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.","start":"2023-05-06T06:45:00.000Z","end":"2023-05-06T07:45:00.000Z","stageId":"ballroom","speakers":[{"id":"ai_x_crypto_summit","name":"AI x Crypto Summit","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/30be4b4bqxmacrbw/index.m3u8","playbackId":"30be4b4bqxmacrbw","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "bs_detection_for_llms_with_nicholas_brigham_adams",
+  "name": "BS detection for LLMs with Nicholas Brigham Adams",
+  "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
+  "start": "2023-05-06T06:45:00.000Z",
+  "end": "2023-05-06T07:45:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "ai_x_crypto_summit",
+      "name": "AI x Crypto Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/30be4b4bqxmacrbw/index.m3u8",
+  "playbackId": "30be4b4bqxmacrbw",
+  "eventId": "zuzalu_montenegro_2023"
+}

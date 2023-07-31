@@ -1,1 +1,20 @@
-{"id":"longevity_interventions__which_make_sense_and_which_dont","name":"Longevity Interventions - Which make sense and which don't?","description":"Speakers: Elisabeth Roider &amp; Dani Ruiz","start":"2023-05-13T09:30:00.000Z","end":"2023-05-13T10:30:00.000Z","stageId":"dome","speakers":[{"id":"elisabeth_roider","name":"Elisabeth Roider","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/00b8364yd7kmymks/index.m3u8","playbackId":"00b8364yd7kmymks","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "longevity_interventions__which_make_sense_and_which_dont",
+  "name": "Longevity Interventions - Which make sense and which don't?",
+  "description": "Speakers: Elisabeth Roider &amp; Dani Ruiz",
+  "start": "2023-05-13T09:30:00.000Z",
+  "end": "2023-05-13T10:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "elisabeth_roider",
+      "name": "Elisabeth Roider",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/00b8364yd7kmymks/index.m3u8",
+  "playbackId": "00b8364yd7kmymks",
+  "eventId": "zuzalu_montenegro_2023"
+}

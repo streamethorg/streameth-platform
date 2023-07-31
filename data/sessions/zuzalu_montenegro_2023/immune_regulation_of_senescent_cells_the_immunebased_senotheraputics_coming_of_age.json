@@ -1,1 +1,20 @@
-{"id":"immune_regulation_of_senescent_cells_the_immunebased_senotheraputics_coming_of_age","name":"Immune regulation of senescent cells, the immune-based senotheraputics coming of age","description":"Speaker: Amit Sharma - SENS Research Foundation&nbsp;","start":"2023-05-13T06:45:00.000Z","end":"2023-05-13T07:45:00.000Z","stageId":"dome","speakers":[{"id":"amit_sharma","name":"Amit Sharma","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/9f58qfodspwex5tk/index.m3u8","playbackId":"9f58qfodspwex5tk","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "immune_regulation_of_senescent_cells_the_immunebased_senotheraputics_coming_of_age",
+  "name": "Immune regulation of senescent cells, the immune-based senotheraputics coming of age",
+  "description": "Speaker: Amit Sharma - SENS Research Foundation&nbsp;",
+  "start": "2023-05-13T06:45:00.000Z",
+  "end": "2023-05-13T07:45:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "amit_sharma",
+      "name": "Amit Sharma",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/9f58qfodspwex5tk/index.m3u8",
+  "playbackId": "9f58qfodspwex5tk",
+  "eventId": "zuzalu_montenegro_2023"
+}

@@ -1,1 +1,6 @@
-{"id":"lighthouse","name":"Lighthouse","eventId":"zuzalu_montenegro_2023","streamSettings":{"streamId":"123"}}
+{
+  "id": "lighthouse",
+  "name": "Lighthouse",
+  "eventId": "zuzalu_montenegro_2023",
+  "streamSettings": { "streamId": "123" }
+}

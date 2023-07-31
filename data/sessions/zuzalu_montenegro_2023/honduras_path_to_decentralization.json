@@ -1,1 +1,34 @@
-{"id":"honduras_path_to_decentralization","name":"Honduras' path to decentralization","description":"Learn about what is happening in Honduras from leaders of Prospera and Ciudad Morazan.&nbsp;\nGabriel Delgado (CDO, Prospera), Massimo Mazzone (Founder, Ciudad Morazan)\nModerator: Peter Young (Free Cities Foundation)\n","start":"2023-04-30T07:00:00.000Z","end":"2023-04-30T08:00:00.000Z","stageId":"dome","speakers":[{"id":"gabriel_delgado_ayau","name":"Gabriel Delgado Ayau","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"},{"id":"massimo_mazzone","name":"Massimo Mazzone","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"},{"id":"peter_young","name":"Peter Young","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/6e72vsn1y4246ayu/index.m3u8","playbackId":"6e72vsn1y4246ayu","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "honduras_path_to_decentralization",
+  "name": "Honduras' path to decentralization",
+  "description": "Learn about what is happening in Honduras from leaders of Prospera and Ciudad Morazan.&nbsp;\nGabriel Delgado (CDO, Prospera), Massimo Mazzone (Founder, Ciudad Morazan)\nModerator: Peter Young (Free Cities Foundation)\n",
+  "start": "2023-04-30T07:00:00.000Z",
+  "end": "2023-04-30T08:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "gabriel_delgado_ayau",
+      "name": "Gabriel Delgado Ayau",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "massimo_mazzone",
+      "name": "Massimo Mazzone",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "peter_young",
+      "name": "Peter Young",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/6e72vsn1y4246ayu/index.m3u8",
+  "playbackId": "6e72vsn1y4246ayu",
+  "eventId": "zuzalu_montenegro_2023"
+}

@@ -1,1 +1,20 @@
-{"id":"hacking_zuzalu_passport_workshop_1","name":"Hacking Zuzalu Passport Workshop #1","description":"The video is a workshop on how to integrate with the Zuzeloo Passport, which allows for anonymous authentication. The speaker shows how to build applications on top of it and demonstrates a minimal viable example using the Zuzeloo Confessions website. The video is code-heavy, but the speaker provides repositories and packages to help with integration. The workshop is interactive, and the speaker encourages questions. The video covers the basics of how to use the Passport and how to construct zero-knowledge proofs.","start":"2023-04-17T14:30:00.000Z","end":"2023-04-17T16:00:00.000Z","stageId":"ballroom","speakers":[{"id":"ivan_chub","name":"Ivan Chub","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/b2434d0mi7stlseu/index.m3u8","playbackId":"b2434d0mi7stlseu","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "hacking_zuzalu_passport_workshop_1",
+  "name": "Hacking Zuzalu Passport Workshop #1",
+  "description": "The video is a workshop on how to integrate with the Zuzeloo Passport, which allows for anonymous authentication. The speaker shows how to build applications on top of it and demonstrates a minimal viable example using the Zuzeloo Confessions website. The video is code-heavy, but the speaker provides repositories and packages to help with integration. The workshop is interactive, and the speaker encourages questions. The video covers the basics of how to use the Passport and how to construct zero-knowledge proofs.",
+  "start": "2023-04-17T14:30:00.000Z",
+  "end": "2023-04-17T16:00:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "ivan_chub",
+      "name": "Ivan Chub",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/b2434d0mi7stlseu/index.m3u8",
+  "playbackId": "b2434d0mi7stlseu",
+  "eventId": "zuzalu_montenegro_2023"
+}

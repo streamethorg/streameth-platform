@@ -1,1 +1,20 @@
-{"id":"introduction_to_zk_and_adjacent_cryptography_for_machine_learners","name":"Introduction to ZK and Adjacent Cryptography for Machine Learners","description":"This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.","start":"2023-05-05T10:30:00.000Z","end":"2023-05-05T11:30:00.000Z","stageId":"ballroom","speakers":[{"id":"barry_whitehat","name":"Barry Whitehat","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/d46d7j4quda2lx35/index.m3u8","playbackId":"d46d7j4quda2lx35","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "introduction_to_zk_and_adjacent_cryptography_for_machine_learners",
+  "name": "Introduction to ZK and Adjacent Cryptography for Machine Learners",
+  "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
+  "start": "2023-05-05T10:30:00.000Z",
+  "end": "2023-05-05T11:30:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "barry_whitehat",
+      "name": "Barry Whitehat",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/d46d7j4quda2lx35/index.m3u8",
+  "playbackId": "d46d7j4quda2lx35",
+  "eventId": "zuzalu_montenegro_2023"
+}

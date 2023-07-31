@@ -1,1 +1,20 @@
-{"id":"advancing_lifespan_phased_wave_innovations_in_laser_and_ultrasound_technologies","name":"Advancing Lifespan: Phased Wave Innovations in Laser and Ultrasound Technologies","description":"Can we see more deeply than an MRI can into our own bodies, using consumer-grade tech, from the comfort and privacy of our homes? This talk explores the cutting-edge advancements of phased wave technologies, leveraging the micron-level precision of lasers and ultrasound, with immense potential to redefine not only disease diagnosis but also treatment, and to extend human lifespans equitably across the board. I'll share compelling outcomes in curing aggressive cancers, stroke, and clinical depression utilizing a singular, cost-efficient non-invasive device. Additionally, we have compelling evidence that this same approach can be used to neutralize pathogens, to attenuate inflammation and prevent inflammatory cascades (eg cytokine storms), and to investigate and control neurodegenerative disease. Please join us for a discussion about an approach that could soon become a pillar of decentralized healthcare and DIY longevity. This could be precision medicine for everybody.&nbsp;","start":"2023-05-12T10:00:00.000Z","end":"2023-05-12T11:00:00.000Z","stageId":"dome","speakers":[{"id":"marylou_jepsen","name":"Mary-Lou Jepsen","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/4fba7n9t6m2v2fam/index.m3u8","playbackId":"4fba7n9t6m2v2fam","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "advancing_lifespan_phased_wave_innovations_in_laser_and_ultrasound_technologies",
+  "name": "Advancing Lifespan: Phased Wave Innovations in Laser and Ultrasound Technologies",
+  "description": "Can we see more deeply than an MRI can into our own bodies, using consumer-grade tech, from the comfort and privacy of our homes? This talk explores the cutting-edge advancements of phased wave technologies, leveraging the micron-level precision of lasers and ultrasound, with immense potential to redefine not only disease diagnosis but also treatment, and to extend human lifespans equitably across the board. I'll share compelling outcomes in curing aggressive cancers, stroke, and clinical depression utilizing a singular, cost-efficient non-invasive device. Additionally, we have compelling evidence that this same approach can be used to neutralize pathogens, to attenuate inflammation and prevent inflammatory cascades (eg cytokine storms), and to investigate and control neurodegenerative disease. Please join us for a discussion about an approach that could soon become a pillar of decentralized healthcare and DIY longevity. This could be precision medicine for everybody.&nbsp;",
+  "start": "2023-05-12T10:00:00.000Z",
+  "end": "2023-05-12T11:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "marylou_jepsen",
+      "name": "Mary-Lou Jepsen",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/4fba7n9t6m2v2fam/index.m3u8",
+  "playbackId": "4fba7n9t6m2v2fam",
+  "eventId": "zuzalu_montenegro_2023"
+}

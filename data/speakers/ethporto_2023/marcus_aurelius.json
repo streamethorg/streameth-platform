@@ -1,1 +1,7 @@
-{"id":"marcus_aurelius","name":"Marcus Aurelius","bio":"KlimaDAO","eventId":"ethporto_2023","photo":"https://ethporto.org/assets/speakers/marcus.jpg"}
+{
+  "id": "marcus_aurelius",
+  "name": "Marcus Aurelius",
+  "bio": "KlimaDAO",
+  "eventId": "ethporto_2023",
+  "photo": "https://ethporto.org/assets/speakers/marcus.jpg"
+}

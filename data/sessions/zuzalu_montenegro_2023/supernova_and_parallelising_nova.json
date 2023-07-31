@@ -1,1 +1,27 @@
-{"id":"supernova_and_parallelising_nova","name":"SuperNova and Parallelising Nova","description":"Continuing our deep dive on Nova, this workshop will explore the details of SuperNova and parallelised Nova proving. We will discuss the intricacies of SuperNova and the new paradigm of IVC it introduces (NIVC). Then, we'll dive into an orthogonal idea that further enhances the efficiency of Nova provers in practical settings: parallelization of Nova and SuperNova proving! Additionally, we will share some insights, benchmarks, and challenges observed in concrete experiments with a parallelised Nova implementation as part of a recent Nova zkVM effort.","start":"2023-04-21T14:30:00.000Z","end":"2023-04-21T16:30:00.000Z","stageId":"ballroom","speakers":[{"id":"nalin_bhardwaj","name":"Nalin Bhardwaj","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"},{"id":"carlos_perez","name":"Carlos Perez","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/1ffdwxan6adl1eoo/index.m3u8","playbackId":"1ffdwxan6adl1eoo","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "supernova_and_parallelising_nova",
+  "name": "SuperNova and Parallelising Nova",
+  "description": "Continuing our deep dive on Nova, this workshop will explore the details of SuperNova and parallelised Nova proving. We will discuss the intricacies of SuperNova and the new paradigm of IVC it introduces (NIVC). Then, we'll dive into an orthogonal idea that further enhances the efficiency of Nova provers in practical settings: parallelization of Nova and SuperNova proving! Additionally, we will share some insights, benchmarks, and challenges observed in concrete experiments with a parallelised Nova implementation as part of a recent Nova zkVM effort.",
+  "start": "2023-04-21T14:30:00.000Z",
+  "end": "2023-04-21T16:30:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "nalin_bhardwaj",
+      "name": "Nalin Bhardwaj",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "carlos_perez",
+      "name": "Carlos Perez",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/1ffdwxan6adl1eoo/index.m3u8",
+  "playbackId": "1ffdwxan6adl1eoo",
+  "eventId": "zuzalu_montenegro_2023"
+}

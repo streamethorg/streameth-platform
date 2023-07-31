@@ -1,1 +1,27 @@
-{"id":"longevity_zero_to_one_science_pitfalls","name":"Longevity Zero to One: Science Pitfalls","description":"Session 4: Science Pitfalls\nA.k.a How to inoculate against bad science and dubious claims.\n\nLongevity has a long history of snake oil salesmen and overpromises. How do you tell good science from bad? This session covers common ways science is misinterpreted, misaligned, and what to watch out for as you navigate the longevity science landscape.&nbsp;\n\nTopics:\n- Failed aging theories\n- Reproducibility crisis\n- Artisanal science\n- Bad incentives\n- Low impact work vs high impact work\n\nAbout the course\nLongevity Zero to One is a course designed to get you from zero biology to a general understanding of the intervention landscape and bottlenecks to progress. We on helping participants apply their existing skillsets to high-impact areas in longevity.\n\nAttending all sessions is highly recommended.\n\nIf you don’t have a biology background, we highly recommend attending the 1st session (General Biology) and 2nd session (Aging Biology). If you do have a background in biology, feel free to skip the 1st session!","start":"2023-05-08T08:00:00.000Z","end":"2023-05-08T16:00:00.000Z","stageId":"dome","speakers":[{"id":"cat_thu","name":"Cat Thu","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"},{"id":"ksenia_winslow","name":"Ksenia Winslow","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/bfcfgytrfwmihpr6/index.m3u8","playbackId":"bfcfgytrfwmihpr6","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "longevity_zero_to_one_science_pitfalls",
+  "name": "Longevity Zero to One: Science Pitfalls",
+  "description": "Session 4: Science Pitfalls\nA.k.a How to inoculate against bad science and dubious claims.\n\nLongevity has a long history of snake oil salesmen and overpromises. How do you tell good science from bad? This session covers common ways science is misinterpreted, misaligned, and what to watch out for as you navigate the longevity science landscape.&nbsp;\n\nTopics:\n- Failed aging theories\n- Reproducibility crisis\n- Artisanal science\n- Bad incentives\n- Low impact work vs high impact work\n\nAbout the course\nLongevity Zero to One is a course designed to get you from zero biology to a general understanding of the intervention landscape and bottlenecks to progress. We on helping participants apply their existing skillsets to high-impact areas in longevity.\n\nAttending all sessions is highly recommended.\n\nIf you don’t have a biology background, we highly recommend attending the 1st session (General Biology) and 2nd session (Aging Biology). If you do have a background in biology, feel free to skip the 1st session!",
+  "start": "2023-05-08T08:00:00.000Z",
+  "end": "2023-05-08T16:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "cat_thu",
+      "name": "Cat Thu",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "ksenia_winslow",
+      "name": "Ksenia Winslow",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/bfcfgytrfwmihpr6/index.m3u8",
+  "playbackId": "bfcfgytrfwmihpr6",
+  "eventId": "zuzalu_montenegro_2023"
+}

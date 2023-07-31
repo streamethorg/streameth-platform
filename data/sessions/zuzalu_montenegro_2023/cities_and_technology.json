@@ -1,1 +1,20 @@
-{"id":"cities_and_technology","name":"Cities and Technology","description":"3:00 - 5:30 Cities x Technology\n3:00pm - 3.30pm - Niklas Anzinger - New Cities &amp; Technological Progress\n3:30pm - 4:15pm: Small Group Workshops 1, New Cities x Technology\nAmphitheater: Mac Davis, Minicircle - Gene Therapy Clinical Trials in Prospera\nDome: Ryan Rzepecki, Spectra - The City That Builds Cities\nThe Boardroom: Elaine Wang, Metropolis - A Charter Zone in Palau\nBallroom: Ott Vatter, Productized eGovernance - From Estonia to Prospera\n\n4:15 - 4:45 Break\n\n4:45pm - 5:30pm: Small Group Workshops 2, New Cities x Technology\nAmphitheater: Kristof de Spiegeleer, Infrastructure for a Decentralized Internet in Zanzibar\nDome: Sebastian Brunemeier, Healthspan Capital - Longevity Network States and Post-FDA Societies\nThe Boardroom: Ben Southwood, Works in Progress - Accelerating technological innovation\nBallroom: Jonathan Dockrell, SkyTrades - Property Rights in the Sky","start":"2023-04-30T11:00:00.000Z","end":"2023-04-30T12:00:00.000Z","stageId":"dome","speakers":[{"id":"mark_lutter","name":"Mark Lutter","bio":"No description","eventId":"zuzalu_montenegro_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/9dffnnhtstp0bl9t/index.m3u8","playbackId":"9dffnnhtstp0bl9t","eventId":"zuzalu_montenegro_2023"}
+{
+  "id": "cities_and_technology",
+  "name": "Cities and Technology",
+  "description": "3:00 - 5:30 Cities x Technology\n3:00pm - 3.30pm - Niklas Anzinger - New Cities &amp; Technological Progress\n3:30pm - 4:15pm: Small Group Workshops 1, New Cities x Technology\nAmphitheater: Mac Davis, Minicircle - Gene Therapy Clinical Trials in Prospera\nDome: Ryan Rzepecki, Spectra - The City That Builds Cities\nThe Boardroom: Elaine Wang, Metropolis - A Charter Zone in Palau\nBallroom: Ott Vatter, Productized eGovernance - From Estonia to Prospera\n\n4:15 - 4:45 Break\n\n4:45pm - 5:30pm: Small Group Workshops 2, New Cities x Technology\nAmphitheater: Kristof de Spiegeleer, Infrastructure for a Decentralized Internet in Zanzibar\nDome: Sebastian Brunemeier, Healthspan Capital - Longevity Network States and Post-FDA Societies\nThe Boardroom: Ben Southwood, Works in Progress - Accelerating technological innovation\nBallroom: Jonathan Dockrell, SkyTrades - Property Rights in the Sky",
+  "start": "2023-04-30T11:00:00.000Z",
+  "end": "2023-04-30T12:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "mark_lutter",
+      "name": "Mark Lutter",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/9dffnnhtstp0bl9t/index.m3u8",
+  "playbackId": "9dffnnhtstp0bl9t",
+  "eventId": "zuzalu_montenegro_2023"
+}
