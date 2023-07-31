@@ -3,12 +3,12 @@ import EventController from "./controller/event";
 import { IEvent, IDataImporter } from "./model/event";
 const run = async () => {
   const Organization = {
-    name: "ETHPorto",
+    name: "Zuzalu",
     description:
-      "ETHPorto is collaborating with a local nonprofit, Transformers, in an effort to support the local community and explore new ways to finance public goods through quadratic voting",
-    url: "https://ethporto.org/",
-    logo: "https://pbs.twimg.com/profile_images/1613498246403395590/BF_dNWpk_400x400.jpg",
-    location: "Porto, Portugal",
+      "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
+    url: "https://zuzalu.city/",
+    logo: "https://zuzalu.city/_next/image?url=https%3A%2F%2Fpolcxtixgqxfuvrqgthn.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fzulalu-images%2Fzulalologo.png&w=256&q=75",
+    location: "Unknown",
   };
 
   const orgController = new OrganizationController();
@@ -17,18 +17,18 @@ const run = async () => {
   );
 
   const Event = {
-    name: "EthPorto 2023",
+    name: "Zuzalu Montenegro 2023",
     description:
-      "March 16-18th, 2023 🇵🇹 Bringing the first ETH event to the beautiful city of Porto",
-    start: new Date("2023-03-16T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
-    end: new Date("2023-03-18T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
-    location: "Porto, Portugal",
+      "Join 200 core residents brought together by a shared desire to learn, create, live longer and healthier lives, and build self-sustaining communities.",
+    start: new Date("2023-03-25T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
+    end: new Date("2023-05-25T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
+    location: "Montenegro",
     organizationId: organizationInstance.id,
     dataImporter: [
       {
         type: "gsheet" as "gsheet",
         config: {
-          sheetId: "1oe2C9BFunInC0-rLVOHuQQ3Uu5osOHUlAJxLooLd69c",
+          sheetId: "1rukvr7Q33TnUZI5RyiX6h_tGJ-pKQzwFeD0Z5OQExoM",
           apiKey: "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4",
         },
       },
