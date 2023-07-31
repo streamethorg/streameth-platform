@@ -4,12 +4,12 @@ import Event, { IDataImporter } from "../../model/event";
 import { generateId } from "../../utils";
 
 // Constants
-const SPEAKER_SHEET = "ETHBerlin";
-const SPEAKER_DATA_RANGE = "F4:I";
-const STAGE_SHEET = "ETHBerlin";
-const STAGE_DATA_RANGE = "A4:D";
-const SESSION_SHEET = "ETHBerlin";
-const SESSION_DATA_RANGE = "K4:W";
+const SPEAKER_SHEET = "Speakers";
+const SPEAKER_DATA_RANGE = "A3:D";
+const STAGE_SHEET = "Stages";
+const STAGE_DATA_RANGE = "A3:D";
+const SESSION_SHEET = "Sessions";
+const SESSION_DATA_RANGE = "A3:M";
 
 // Setting up a queue for the Google Sheets API
 // const API_QUEUE = new PQueue({ concurrency: 1, interval: 1500 });
@@ -65,14 +65,18 @@ export default class Importer extends BaseImporter {
   public override async generateSpeakers(): Promise<void> {
     const data = await this.getDataForRange(SPEAKER_SHEET, SPEAKER_DATA_RANGE);
     for (const row of data) {
-      const [id, name, description, avatar] = row;
+      const [name, description, avatar, twitterHandle] = row;
       const speaker = {
         name,
         bio: description ?? "No description",
-        photo: avatar,
+        photo:
+          avatar ??
+          "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing",
+        twitter: twitterHandle,
         eventId: this.event.id,
       };
 
+      console.log(row);
       try {
         if (speaker) {
           await this.speakerController.createSpeaker(speaker);
@@ -127,10 +131,10 @@ export default class Importer extends BaseImporter {
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
 
       const speakerPromises = speakerIdsRaw.filter(Boolean).map((speakerId) => {
-          return this.speakerController.getSpeaker(
-            generateId(speakerId.replace("speaker_", "").replace("_", " ")),
-            this.event.id
-          );
+        return this.speakerController.getSpeaker(
+          generateId(speakerId),
+          this.event.id
+        );
       });
 
       const [speakers, stage] = await Promise.all([
