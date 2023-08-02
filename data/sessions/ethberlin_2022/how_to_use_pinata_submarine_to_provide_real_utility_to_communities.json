@@ -1,0 +1,19 @@
+{
+  "id": "how_to_use_pinata_submarine_to_provide_real_utility_to_communities",
+  "name": "How To Use Pinata Submarine To Provide Real Utility To Communities",
+  "description": "In this workshop, you will learn how to use Submarining and create token gated experiences for your community!",
+  "start": "2022-09-16T20:15:00.000Z",
+  "end": "2022-09-16T20:45:00.000Z",
+  "stageId": "lexis",
+  "speakers": [
+    {
+      "id": "steve_simkins",
+      "name": "Steve Simkins",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    }
+  ],
+  "videoUrl": "https://livepeercdn.com/recordings/d9ac0abf-b495-48e0-8e42-e2e26f39278d/index.m3u8",
+  "playbackId": "d9ac0abf-b495-48e0-8e42-e2e26f39278d",
+  "eventId": "ethberlin_2022"
+}

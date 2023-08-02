@@ -1,4 +1,5 @@
 import FsController from "./dataStore/fs";
+import fs from "fs";
 // import DbController from './dataStore/db'
 
 interface IBaseController<T> {
@@ -32,6 +33,11 @@ export default class BaseController<T> implements IBaseController<T> {
   }
 
   async get(query: string): Promise<T> {
+    if (fs.lstatSync(query).isDirectory()) {
+      console.error(`${query} is a directory, not a file.`);
+      process.exit(1)
+    }
+
     return this.store.read(query).then((data) => JSON.parse(data));
   }
 

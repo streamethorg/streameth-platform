@@ -1,6 +1,6 @@
 import OrganizationController from "./controller/organization";
 import EventController from "./controller/event";
-import { IEvent, IDataImporter } from "./model/event";
+
 const run = async () => {
   const Organization = {
     name: "Zuzalu",

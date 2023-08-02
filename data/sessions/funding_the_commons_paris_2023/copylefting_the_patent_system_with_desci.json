@@ -1,0 +1,19 @@
+{
+  "id": "copylefting_the_patent_system_with_desci",
+  "name": "\"Copylefting the patent system with DeSci\"",
+  "description": "This video introduces a new project called D.A. that aims to revolutionize the patent system and promote more collaborative and cooperative innovation. The current patent system is criticized for being inefficient, costly, and exclusionary, leading to redundant innovation and negative outcomes for society. D.A. proposes a solution by creating a decentralized collaboration system where ideas can be submitted, reviewed, and developed into patent applications. Approved patents are then placed in a defensive patent pool with copyleft restrictions, allowing non-commercial use without permission and encouraging derivative works to be added to the pool. The video explains how the system would work, from idea submission to inclusion in the patent pool, and discusses potential concerns about monopolistic practices. The project also highlights the application of this system in other industries such as AI and pharmaceuticals. Overall, D.A. aims to foster open innovation, incentivize collaboration, and provide economic rewards for scientific progress in a more inclusive and cooperative manner.",
+  "start": "2023-07-15T10:45:00.000Z",
+  "end": "2023-07-15T11:05:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "primavera_de_filippi",
+      "name": "Primavera De Filippi",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/75fc9vlx25ym4jts/index.m3u8",
+  "playbackId": "75fc9vlx25ym4jts",
+  "eventId": "funding_the_commons_paris_2023"
+}
