@@ -19,10 +19,10 @@ export default async function SessionComponent({
   return (
     <div className="flex flex-col w-full max-h-full h-full lg:flex-row relative overflow-y-scroll">
       <div className="flex flex-col w-full lg:flex-grow lg:h-full lg:w-[70%] box-border">
-        <div className="lg:h-3/4 w-full lg:p-4 pb-2 lg:pr-2">
-          <Player playbackId={session.playbackId} playerName={session.name} />
+        <div className="aspect-ratio: 16 / 9 lg:h-3/4 w-full lg:p-4 lg:pr-2">
+            <Player playbackId={session.playbackId} playerName={session.name} />
         </div>
-        <div className="lg:h-1/4 p-4 pt-2 lg:pr-2 ">
+        <div className="p-4 mg:pt-2 lg:pt-0 lg:pr-2">
           <SessionInfoBox session={session.toJson()} />
         </div>
       </div>
