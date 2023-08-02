@@ -23,7 +23,6 @@ export default function SpeakerIcon({
   onSpeakerClick,
   size = "sm",
   onlyImage = false,
-  twitter = false,
 }: Props) {
   // TODO: Fix types avatar and avatarUrl
   const avatar = speaker.photo ?? CreateBlockie(speaker.name);
@@ -43,7 +42,7 @@ export default function SpeakerIcon({
       {!onlyImage && (
         <span className="text-main-text text-lg">{speaker.name}</span>
       )}
-      {twitter && (
+      {speaker.twitter && (
         <SocialIcon
           url={`https://twitter.com/${speaker.twitter}`}
           target="_blank"
