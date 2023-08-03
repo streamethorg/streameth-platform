@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import EventController from "./server/controller/event";
-import OrganizationController from "./server/controller/organization";
+import Event from "@/server/model/event";
+
 export const config = {
   matcher: [
     /*
@@ -16,19 +16,31 @@ export const config = {
   ],
 };
 
-export function middleware(request: NextRequest) {
-  console.log("path ", request.url.split("/"));
+export async function middleware(request: NextRequest) {
   let org;
   let event;
-  const eventController = new EventController();
-  const organizationController = new OrganizationController();
+  let page;
   try {
-    org = request.url.split("/")[4];
-    event = request.url.split("/")[5];
-    console.log(organizationController.getOrganization(org));
+    org = request.url.split("/")[3];
+    event = request.url.split("/")[4];
+    page = request.url.split("/")[5];
+    const url = new URL(
+      `/api/organizations/${org}/events/${event}`,
+      request.url
+    ).href;
+    const response = await fetch(url.replace("localhost", "127.0.0.1"), {
+      method: "GET",
+    });
+    if (!response.ok) {
+      throw new Error("HTTP error " + response.status);
+    }
+    const data: Event = await response.json();
+    if (data.archiveMode && page !== "archive" && page !== "session") {
+      return NextResponse.redirect(
+        new URL(`/${org}/${event}/archive`, request.url)
+      );
+    }
   } catch (e) {
     console.log(e);
   }
-
-  // return NextResponse.redirect(new URL('/home', request.url))
 }
