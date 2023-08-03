@@ -122,7 +122,7 @@ export default class Importer extends BaseImporter {
       console.log(row, video)
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
       const speakerIds = speakerIdsRaw.map((speakerId) => {
-        if (!speakerId) return null;
+        if (!speakerId) return "";
         return generateId(speakerId.replace("speaker_", "").replace("_", " "));
       });
 
