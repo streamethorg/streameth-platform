@@ -18,8 +18,8 @@ export default async function SessionComponent({
 }) {
   return (
     <div className="flex flex-col w-full max-h-full h-full lg:flex-row relative overflow-y-scroll">
-      <div className="flex flex-col w-full lg:flex-grow lg:h-full lg:w-[70%] box-border">
-        <div className="aspect-ratio: 16 / 9 lg:h-3/4 w-full lg:p-4 lg:pr-2">
+      <div className="flex flex-col w-full lg:min-h-[55vw] lg:flex-grow lg:h-full lg:w-[70%] box-border">
+        <div className="lg:h-3/4 w-full lg:p-4 lg:pr-2">
           <Player playbackId={session.playbackId} playerName={session.name} />
         </div>
         <div className="p-4 mg:pt-2 lg:pt-0 lg:pr-2">
