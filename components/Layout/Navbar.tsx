@@ -50,7 +50,7 @@ export default function Navbar({
         </div>
         <nav
           aria-label="Global"
-          className={`text-main-text   text-center w-full space-x-3 lg:space-x-0 justify-between lg:gap-8 text-sm lg:text-md font-medium flex flex-row lg:flex-col `}
+          className={`text-main-text text-center w-full space-x-3 my-1 lg:space-x-0 justify-between lg:gap-3 text-sm lg:text-md font-medium flex flex-row lg:flex-col `}
         >
           {pages.map((item) => (
             <Link
@@ -60,7 +60,9 @@ export default function Navbar({
               }`}
               href={item.href}
             >
-              <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">{item.icon}</div>
+              <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
+                {item.icon}
+              </div>
               <p className="">{item.name}</p>
             </Link>
           ))}

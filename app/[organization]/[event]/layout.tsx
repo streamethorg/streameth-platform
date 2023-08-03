@@ -9,7 +9,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { notFound } from "next/navigation";
 
-
 export async function generateStaticParams() {
   const eventController = new EventController();
   const allEvents = await eventController.getAllEvents();
@@ -41,7 +40,7 @@ const Layout = async ({
   const pages = [
     {
       href: `/${params.organization}/${params.event}`,
-      name: "Home",
+      name: "Schedule",
       icon: <HomeIcon />,
     },
     {
@@ -51,9 +50,8 @@ const Layout = async ({
     },
   ];
 
-  //
   return (
-    <div className="flex flex-col md:flex-row flex-grow overflow-hidden  ">
+    <div className="flex flex-col md:flex-row flex-grow overflow-hidden">
       <Navbar
         pages={pages}
         stages={stages.map((stage) => {
