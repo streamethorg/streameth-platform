@@ -14,7 +14,7 @@ export async function GET(
       params.sessionId,
       params.eventId
     );
-    return NextResponse.json({ data });
+    return NextResponse.json(data);
   } catch (e) {
     console.log(e);
     return NextResponse.json({});

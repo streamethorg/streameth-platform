@@ -9,7 +9,7 @@ export async function GET(
   const id = params.id;
   try {
     const data = await organizationController.getOrganization(id);
-    return NextResponse.json({ data });
+    return NextResponse.json(data);
   } catch (e) {
     console.log(e);
     return NextResponse.json({});

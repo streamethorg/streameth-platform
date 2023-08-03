@@ -60,21 +60,25 @@ export default function Navbar({
               }`}
               href={item.href}
             >
-              <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">{item.icon}</div>
+              <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
+                {item.icon}
+              </div>
               <p className="">{item.name}</p>
             </Link>
           ))}
-          <div
-            onClick={stageModal}
-            className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
-              pathname.includes("/stage/") && "bg-accent  rounded"
-            }`}
-          >
-            <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
-              <CameraIcon />
+          {stages.length > 0 && (
+            <div
+              onClick={stageModal}
+              className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
+                pathname.includes("/stage/") && "bg-accent  rounded"
+              }`}
+            >
+              <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
+                <CameraIcon />
+              </div>
+              stages
             </div>
-            stages
-          </div>
+          )}
         </nav>
       </div>
     </header>

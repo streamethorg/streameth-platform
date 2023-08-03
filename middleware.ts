@@ -35,7 +35,10 @@ export async function middleware(request: NextRequest) {
       throw new Error("HTTP error " + response.status);
     }
     const data: Event = await response.json();
+    console.log(data)
+
     if (data.archiveMode && page !== "archive" && page !== "session") {
+
       return NextResponse.redirect(
         new URL(`/${org}/${event}/archive`, request.url)
       );

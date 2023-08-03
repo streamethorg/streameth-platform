@@ -12,7 +12,7 @@ export async function GET(
   const sessionController = new SessionController();
   try {
     const data = await sessionController.getAllSessionsForEvent(params.eventId);
-    return NextResponse.json({ data });
+    return NextResponse.json(data);
   } catch (e) {
     console.log(e);
     return NextResponse.json({});
