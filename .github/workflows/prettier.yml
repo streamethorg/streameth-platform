@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn && yarn clean
 
       - name: Check code formatting
         run: npx prettier --check ./data/**/*.json ./app/**/*.tsx ./components/**/*.tsx
