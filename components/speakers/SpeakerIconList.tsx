@@ -16,7 +16,6 @@ export default function SpeakerIconList({ speakers, onSpeakerClick }: Props) {
             key={speaker.id}
             speaker={speaker}
             onSpeakerClick={onSpeakerClick}
-            twitter
           />
         </div>
       ))}
