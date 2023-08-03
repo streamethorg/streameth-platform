@@ -1,27 +1,27 @@
-"use client";
-import { useState, createContext } from "react";
-import Modal from "@/components/Layout/Modal";
+'use client'
+import { useState, createContext } from 'react'
+import Modal from '@/components/Layout/Modal'
 
 const ModalContext = createContext<{
-  modal: React.ReactNode | null;
-  openModal: (modal: React.ReactNode) => void;
-  closeModal: () => void;
+  modal: React.ReactNode | null
+  openModal: (modal: React.ReactNode) => void
+  closeModal: () => void
 }>({
   modal: null,
   openModal: () => {},
   closeModal: () => {},
-});
+})
 
 const ModalContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [modal, setModal] = useState<React.ReactNode | null>(null);
+  const [modal, setModal] = useState<React.ReactNode | null>(null)
 
   const openModal = (modal: React.ReactNode) => {
-    setModal(modal);
-  };
+    setModal(modal)
+  }
 
   const closeModal = () => {
-    setModal(null);
-  };
+    setModal(null)
+  }
 
   return (
     <ModalContext.Provider value={{ modal, openModal, closeModal }}>
@@ -30,8 +30,7 @@ const ModalContextProvider = ({ children }: { children: React.ReactNode }) => {
       </Modal>
       {children}
     </ModalContext.Provider>
-  );
-};
+  )
+}
 
-
-export { ModalContext, ModalContextProvider };
+export { ModalContext, ModalContextProvider }
