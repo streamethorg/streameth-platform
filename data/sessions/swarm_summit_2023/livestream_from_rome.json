@@ -1,1 +1,19 @@
-{"id":"livestream_from_rome","name":"Livestream from Rome","description":"","start":"2023-06-21T17:00:00.000Z","end":"2023-06-21T19:30:00.000Z","stageId":"rome","speakers":[{"id":"panel_discussion","name":"Panel Discussion","bio":"No description","eventId":"swarm_summit_2023","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"playbackId":"","eventId":"swarm_summit_2023"}
+{
+  "id": "livestream_from_rome",
+  "name": "Livestream from Rome",
+  "description": "",
+  "start": "2023-06-21T17:00:00.000Z",
+  "end": "2023-06-21T19:30:00.000Z",
+  "stageId": "rome",
+  "speakers": [
+    {
+      "id": "panel_discussion",
+      "name": "Panel Discussion",
+      "bio": "No description",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "swarm_summit_2023"
+}
