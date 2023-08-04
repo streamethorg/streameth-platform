@@ -1,0 +1,20 @@
+{
+  "id": "why_covid_is_still_a_problem_and_what_we_can_do_about_it",
+  "name": "Why covid is still a problem, and what we can do about it",
+  "description": "The video discusses the current state of COVID-19 and the work being done by Plopbacks, a company working on COVID vaccines. The speaker emphasizes the danger of the virus and the need to continue to take it seriously, despite it falling out of the media spotlight. The discussion covers the dangers of the virus and the potential for future pandemics. The video also explores non-pharmaceutical interventions, such as being outdoors and improving indoor air quality, as well as the importance of vaccines.",
+  "start": "2023-04-26T08:00:00.000Z",
+  "end": "2023-04-26T09:00:00.000Z",
+  "stageId": "amphitheater",
+  "speakers": [
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ff84k08hper90hc3/index.m3u8",
+  "playbackId": "ff84k08hper90hc3",
+  "eventId": "zuzalu_montenegro_2023"
+}
