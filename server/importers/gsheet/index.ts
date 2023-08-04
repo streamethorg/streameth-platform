@@ -119,18 +119,19 @@ export default class Importer extends BaseImporter {
         Speaker5,
         video,
       ] = row;
-      console.log(row, video)
+      console.log(row, video);
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
       const speakerIds = speakerIdsRaw.map((speakerId) => {
         if (!speakerId) return "";
         return generateId(speakerId.replace("speaker_", "").replace("_", " "));
       });
 
-      const speakerPromises = speakerIds
-        .filter((speakerId) => !!speakerId)
-        .map((speakerId) =>
-          this.speakerController.getSpeaker(speakerId, this.event.id)
-        );
+      const speakerPromises = speakerIdsRaw.map((speakerId) =>
+        this.speakerController.getSpeaker(
+          generateId(speakerId.replace("speaker_", "").replace("_", " ")),
+          this.event.id
+        )
+      );
 
       const [speakers, stage] = await Promise.all([
         Promise.all(speakerPromises),
