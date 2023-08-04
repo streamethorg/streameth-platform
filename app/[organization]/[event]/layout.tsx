@@ -2,6 +2,7 @@ import Navbar from "@/components/Layout/Navbar";
 import EventController from "@/server/controller/event";
 import StageController from "@/server/controller/stage";
 import Stage from "@/server/model/stage";
+import Event from "@/server/model/event";
 import {
   HomeIcon,
   ArchiveBoxArrowDownIcon,
@@ -30,9 +31,13 @@ const Layout = async ({
   };
 }) => {
   const stageController = new StageController();
+  const eventController = new EventController();
+
   let stages: Stage[] = [];
+  let event: Event;
   try {
     stages = await stageController.getAllStagesForEvent(params.event);
+    event = await eventController.getEvent(params.event, params.organization);
   } catch (e) {
     return notFound();
   }
@@ -50,6 +55,12 @@ const Layout = async ({
     },
   ];
 
+  if(event.archiveMode) {
+    pages.splice(0, 1);
+    stages = [];
+  }
+
+  //
   return (
     <div className="flex flex-col md:flex-row flex-grow overflow-hidden">
       <Navbar

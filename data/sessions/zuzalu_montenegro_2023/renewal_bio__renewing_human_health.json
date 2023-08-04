@@ -1,0 +1,20 @@
+{
+  "id": "renewal_bio__renewing_human_health",
+  "name": "Renewal Bio - Renewing Human Health",
+  "description": "Ohad Gafni",
+  "start": "2023-05-14T06:00:00.000Z",
+  "end": "2023-05-14T07:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "ohad_gafni",
+      "name": "Ohad Gafni",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/45d9adi7fv70kyd9/index.m3u8",
+  "playbackId": "45d9adi7fv70kyd9",
+  "eventId": "zuzalu_montenegro_2023"
+}

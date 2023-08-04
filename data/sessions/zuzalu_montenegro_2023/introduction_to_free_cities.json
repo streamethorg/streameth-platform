@@ -1,0 +1,20 @@
+{
+  "id": "introduction_to_free_cities",
+  "name": "Introduction to Free Cities",
+  "description": "I'm sorry, but that description does not provide enough information to summarize. Please provide a more detailed description of the video.",
+  "start": "2023-04-30T05:30:00.000Z",
+  "end": "2023-04-30T06:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "titus_gebel",
+      "name": "Titus Gebel",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/fca52k4kg55mf701/index.m3u8",
+  "playbackId": "fca52k4kg55mf701",
+  "eventId": "zuzalu_montenegro_2023"
+}

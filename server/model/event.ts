@@ -26,6 +26,7 @@ export interface IEvent {
   organizationId: IOrganization["id"];
   dataImporter?: IDataImporter[];
   eventCover?: string;
+  archiveMode?: boolean;
 }
 
 export default class Event implements IEvent {
@@ -54,6 +55,8 @@ export default class Event implements IEvent {
 
   eventCover?: string;
 
+  archiveMode?: boolean;
+
   constructor({
     id,
     name,
@@ -64,6 +67,7 @@ export default class Event implements IEvent {
     organizationId,
     dataImporter,
     eventCover,
+    archiveMode,
   }: Omit<IEvent, "id"> & { id?: string }) {
     this.id = id ?? generateId(name);
     this.name = name;
@@ -74,6 +78,7 @@ export default class Event implements IEvent {
     this.organizationId = organizationId;
     this.dataImporter = dataImporter;
     this.eventCover = eventCover;
+    this.archiveMode = archiveMode ?? true;
     this.validateThis();
   }
 

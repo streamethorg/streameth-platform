@@ -1,0 +1,20 @@
+{
+  "id": "foundations_for_building_network_states",
+  "name": "Foundations for Building Network States",
+  "description": "In this video, Paul Kahlas discusses the concept of network states and how they could foster a more open buyer economy in fields like biology and medicine. He explores the issues with centralized authorities in science, such as funding, replication, and accessibility, and how network states could solve these problems. Kahlas defines a network state as a decentralized and voluntary organization that transcends traditional nation state boundaries and allows individuals to collaborate, exchange resources, and govern themselves based on shared values and interests. He also discusses the importance of digital identity, flexibility, and shared values in creating a successful network state.",
+  "start": "2023-04-01T08:00:00.000Z",
+  "end": "2023-04-01T08:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "paul_kohlhaas_molecule",
+      "name": "Paul Kohlhaas, Molecule",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/fb237ymlxns8pkq3/index.m3u8",
+  "playbackId": "fb237ymlxns8pkq3",
+  "eventId": "zuzalu_montenegro_2023"
+}
