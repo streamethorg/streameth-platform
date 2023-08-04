@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 // @ts-ignore
 import mux from "mux-embed";
 import Image from "next/image";
-
+import Logo from "@/public/logo.png";
 const OfflinePlayer = () => {
   return (
     <div className="bg-black flex items-center justify-center flex-col w-full h-full">
@@ -20,7 +20,7 @@ const OfflinePlayer = () => {
         target="_blank"
         rel="noreferrer"
       >
-        <Image src="/streameth.png" width={100} height={100} alt="streamETH" />
+        <Image src={Logo} width={100} height={100} alt="streamETH" />
       </a>
     </div>
   );
@@ -29,9 +29,11 @@ const OfflinePlayer = () => {
 export const Player = ({
   playbackId,
   playerName,
+  coverImage,
 }: {
   playbackId?: string;
   playerName: string;
+  coverImage?: string;
 }) => {
   const { address } = useAccount();
 
@@ -67,7 +69,7 @@ export const Player = ({
           priority
           lowLatency
           viewerId={address}
-          poster={<OfflinePlayer />}
+          poster={coverImage ?? <OfflinePlayer />}
           showLoadingSpinner={false}
         />
       </div>

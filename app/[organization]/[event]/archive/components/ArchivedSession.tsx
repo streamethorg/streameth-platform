@@ -13,7 +13,7 @@ const ArchivedSession = ({
   learnMore?: boolean;
   goToStage?: boolean;
 }) => {
-  const [image, setImage] = useState("/sessions/" + session.eventId + "/" + session.id + ".jpg");
+  const [image, setImage] = useState(session.coverImage);
   const alt = "/events/" + session.eventId + ".png"
   const component = (
     <div className="flex flex-col rounded h-full p-4 shadow box-border bg-base">
