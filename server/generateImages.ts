@@ -12,7 +12,7 @@ async function main() {
 
   for (const session of sessions) {
     try {
-      const path = await Session.getSessionImagePath(session.id);
+      const path = await Session.getSessionImagePath(eventId, session.id);
       if (!session.videoUrl) {
         throw new Error("No video url found for session " + session.id);
       }
@@ -20,7 +20,6 @@ async function main() {
     } catch (error) {
       console.log("error",session.videoUrl, error);
     }
-    return
   }
 }
 

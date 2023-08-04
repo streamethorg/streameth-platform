@@ -124,8 +124,9 @@ export default class Session implements ISession {
   }
 
   static async getSessionImagePath(
+    eventId: ISession["eventId"],
     sessionId: ISession["id"]
   ): Promise<string> {
-    return path.join(PUBLIC_PATH, "sessions", `${sessionId}.png`);
+    return path.join(PUBLIC_PATH, "sessions", eventId, `${sessionId}.jpg`);
   }
 }

@@ -22,18 +22,16 @@ export async function extractFirstFrame(hlsUrl: string, filePath: string) {
     throw new Error("No .ts URL found in HLS stream");
   }
 
-  console.log("TSURL", tsUrl);
-  const tsAbsoluteUrl = path.join(tsUrl);
-
-  ffmpeg(tsAbsoluteUrl)
+  ffmpeg(hlsUrl)
     .on("error", function (err) {
       console.log("An error occurred: " + err.message);
     })
     .screenshots({
       count: 1,
+      folder: ".",
       filename: filePath,
-      timestamps: ["80%"],
       size: "1920x1080",
+      timemarks: ["00:00:14.000"],
     })
     .on("end", function () {
       console.log("Frames: extracted");
