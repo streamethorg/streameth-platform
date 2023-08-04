@@ -1,0 +1,27 @@
+{
+  "id": "protocol_guild_funding_ethereums_core_protocol_work",
+  "name": "Protocol Guild: Funding Ethereum's Core Protocol Work",
+  "description": "This video discusses a public goods funding mechanism unique to Ethereum's core protocol work called the Protocol Guild. The Guild aims to incentivize talented individuals from all over the world to contribute to Ethereum's vision of being a global network that empowers individuals. The Guild is a list of 128 active core protocol contributors, and donations to this work can be made to a single Ethereum address, with funds distributed based on a retroactive time weighting and a forward-looking vesting module. The Guild aims to reduce contributor churn and facilitate knowledge transfer by creating long-term incentives for contributors to continue contributing.",
+  "start": "2023-04-12T08:00:00.000Z",
+  "end": "2023-04-12T08:50:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "cheeky_gorilla",
+      "name": "Cheeky Gorilla",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "tim_beiko",
+      "name": "Tim Beiko",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/784fl2fj7mr7x61t/index.m3u8",
+  "playbackId": "784fl2fj7mr7x61t",
+  "eventId": "zuzalu_montenegro_2023"
+}

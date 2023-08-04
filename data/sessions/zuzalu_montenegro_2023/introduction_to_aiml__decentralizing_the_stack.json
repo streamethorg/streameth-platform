@@ -1,0 +1,20 @@
+{
+  "id": "introduction_to_aiml__decentralizing_the_stack",
+  "name": "Introduction to AI/ML & Decentralizing the Stack",
+  "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
+  "start": "2023-05-05T07:45:00.000Z",
+  "end": "2023-05-05T08:45:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "ai_x_crypto_summit",
+      "name": "AI x Crypto Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/096c74mvtx98spnf/index.m3u8",
+  "playbackId": "096c74mvtx98spnf",
+  "eventId": "zuzalu_montenegro_2023"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "a_charter_city_and_digital_freezone_in_zanzibar",
+  "name": "A Charter City and Digital Freezone in Zanzibar",
+  "description": "Kristof de Spiegeleer, Threefold",
+  "start": "2023-04-30T12:45:00.000Z",
+  "end": "2023-04-30T13:45:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "niklas_anzinger",
+      "name": "Niklas Anzinger",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/3e5f98zrvw74aa3z/index.m3u8",
+  "playbackId": "3e5f98zrvw74aa3z",
+  "eventId": "zuzalu_montenegro_2023"
+}
