@@ -10,7 +10,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
 
   return (
     <Link href={`${event.organizationId}/${event.id}`}>
-      <div className="flex flex-col rounded p-4 shadow box-border bg-base">
+      <div className="flex flex-col rounded m-3 p-4 shadow box-border bg-base">
         <div className="aspect-video relative">
           <Image
             className="rounded"

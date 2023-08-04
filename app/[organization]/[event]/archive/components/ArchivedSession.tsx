@@ -13,8 +13,8 @@ const ArchivedSession = ({
   learnMore?: boolean;
   goToStage?: boolean;
 }) => {
-  const [image, setImage] = useState("/sessions/" + session.id + ".png");
-
+  const [image, setImage] = useState(session.coverImage);
+  const alt = "/events/" + session.eventId + ".png"
   const component = (
     <div className="flex flex-col rounded h-full p-4 shadow box-border bg-base">
       <div className="aspect-video relative">
@@ -22,17 +22,17 @@ const ArchivedSession = ({
           className="rounded"
           alt="session image"
           quality={80}
-          src={image}
+          src={image ?? ""}
           fill
           style={{
             objectFit: "cover",
           }}
           onError={() => {
-            setImage(Logo.src);
+            setImage(alt);
           }}
           onLoadingComplete={(result) => {
             if (result.naturalHeight === 0) {
-              setImage(Logo.src);
+              setImage(alt);
             }
           }}
         />

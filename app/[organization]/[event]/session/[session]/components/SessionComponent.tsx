@@ -21,7 +21,11 @@ export default async function SessionComponent({
       <div className="flex flex-col w-full lg:min-h-[55vw] lg:flex-grow lg:h-full lg:w-[70%] box-border">
         <div className="lg:max-h-[50vw]">
           <div className="lg:h-3/4 w-full lg:p-4 lg:pr-2">
-            <Player playbackId={session.playbackId} playerName={session.name} />
+            <Player
+              playbackId={session.playbackId}
+              playerName={session.name}
+              coverImage={session.coverImage}
+            />
           </div>
           <div className="p-4 mg:pt-2 lg:pt-0 lg:pr-2">
             <SessionInfoBox session={session.toJson()} />

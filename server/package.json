@@ -6,7 +6,8 @@
   "module": "CommonJS",
   "scripts": {
     "cli": "ts-node cli.ts",
-    "local-test": "ts-node test.ts"
+    "local-test": "ts-node test.ts",
+    "generate-images": "ts-node generateImages.ts"
   },
   "dependencies": {
     "class-validator": "^0.14.0",

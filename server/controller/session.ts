@@ -1,7 +1,5 @@
 import BaseController from "./baseController";
-import { extractFirstFrame } from "../utils/video";
 import Session, { ISession } from "../model/session";
-import LivepeerService from "../services/livepeer";
 import LoggerService from "../services/logger";
 export default class SessionController {
   private controller: BaseController<ISession>;
@@ -38,21 +36,5 @@ export default class SessionController {
     return sessions;
   }
 
-  public async generateVideoFrame(
-    sessionId: ISession["id"],
-    eventId: ISession["eventId"]
-  ): Promise<void> {
-    try {
-      const session = await this.getSession(sessionId, eventId);
-      const path = await Session.getSessionImagePath(sessionId);
-      if (!session.videoUrl) {
-        throw new Error("No video url found for session " + sessionId);
-      }
-      await extractFirstFrame(session.videoUrl, path);
-    } catch (error) {
-      console.log(error);
-      const logger = new LoggerService();
-      logger.logError(sessionId + " " + error);
-    }
-  }
+
 }

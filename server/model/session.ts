@@ -17,6 +17,7 @@ export interface ISession {
   playbackId?: string;
   eventId: IEvent["id"];
   track?: string[];
+  coverImage?: string;
 }
 
 export default class Session implements ISession {
@@ -50,6 +51,8 @@ export default class Session implements ISession {
 
   track?: string[];
 
+  coverImage?: string;
+
   constructor({
     name,
     description,
@@ -60,6 +63,7 @@ export default class Session implements ISession {
     videoUrl,
     eventId,
     track,
+    coverImage,
   }: Omit<ISession, "id"> & { id?: string }) {
     this.id = generateId(name);
     this.name = name;
@@ -72,6 +76,8 @@ export default class Session implements ISession {
     this.playbackId = this.getPlaybackId();
     this.eventId = eventId;
     this.track = track;
+    this.coverImage =
+      coverImage ?? "/sessions/" + this.eventId + "/" + this.id + ".jpg";
     this.validateThis();
   }
 
@@ -124,8 +130,9 @@ export default class Session implements ISession {
   }
 
   static async getSessionImagePath(
+    eventId: ISession["eventId"],
     sessionId: ISession["id"]
   ): Promise<string> {
-    return path.join(PUBLIC_PATH, "sessions", `${sessionId}.png`);
+    return path.join(PUBLIC_PATH, "sessions", eventId, `${sessionId}.jpg`);
   }
 }
