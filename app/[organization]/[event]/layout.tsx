@@ -2,13 +2,13 @@ import Navbar from "@/components/Layout/Navbar";
 import EventController from "@/server/controller/event";
 import StageController from "@/server/controller/stage";
 import Stage from "@/server/model/stage";
+import Event from "@/server/model/event";
 import {
   HomeIcon,
   ArchiveBoxArrowDownIcon,
   ViewColumnsIcon,
 } from "@heroicons/react/24/outline";
 import { notFound } from "next/navigation";
-
 
 export async function generateStaticParams() {
   const eventController = new EventController();
@@ -31,9 +31,13 @@ const Layout = async ({
   };
 }) => {
   const stageController = new StageController();
+  const eventController = new EventController();
+
   let stages: Stage[] = [];
+  let event: Event;
   try {
     stages = await stageController.getAllStagesForEvent(params.event);
+    event = await eventController.getEvent(params.event, params.organization);
   } catch (e) {
     return notFound();
   }
@@ -41,7 +45,7 @@ const Layout = async ({
   const pages = [
     {
       href: `/${params.organization}/${params.event}`,
-      name: "Home",
+      name: "Schedule",
       icon: <HomeIcon />,
     },
     {
@@ -51,9 +55,14 @@ const Layout = async ({
     },
   ];
 
+  if(event.archiveMode) {
+    pages.splice(0, 1);
+    stages = [];
+  }
+
   //
   return (
-    <div className="flex flex-col md:flex-row flex-grow overflow-hidden  ">
+    <div className="flex flex-col md:flex-row flex-grow overflow-hidden">
       <Navbar
         pages={pages}
         stages={stages.map((stage) => {

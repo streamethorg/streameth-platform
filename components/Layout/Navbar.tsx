@@ -1,31 +1,31 @@
-"use client";
-import { useState, useContext } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { ModalContext } from "../context/ModalContext";
-import { CameraIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import img from "@/public/logo.png";
+'use client'
+import { useState, useContext } from 'react'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { ModalContext } from '../context/ModalContext'
+import { CameraIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
+import img from '@/public/logo.png'
 interface Page {
-  name: string;
-  href: string;
-  icon: JSX.Element;
+  name: string
+  href: string
+  icon: JSX.Element
 }
 
 export default function Navbar({
   pages,
   stages,
 }: {
-  stages: Page[];
+  stages: Page[]
   pages: {
-    name: string;
-    href: string;
-    icon: JSX.Element;
-  }[];
+    name: string
+    href: string
+    icon: JSX.Element
+  }[]
 }) {
-  const pathname = usePathname();
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const { openModal } = useContext(ModalContext);
+  const pathname = usePathname()
+  const [isNavOpen, setIsNavOpen] = useState(false)
+  const { openModal } = useContext(ModalContext)
 
   const stageModal = () => {
     openModal(
@@ -36,8 +36,8 @@ export default function Navbar({
           </Link>
         ))}
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <header className="shadow lg:shadow-sm z-20 bg-base lg:border-r border-primary absolute bottom-0 lg:top-0 lg:left-0 w-full lg:w-20 lg:h-screen">
@@ -50,33 +50,31 @@ export default function Navbar({
         </div>
         <nav
           aria-label="Global"
-          className={`text-main-text   text-center w-full space-x-3 lg:space-x-0 justify-between lg:gap-8 text-sm lg:text-md font-medium flex flex-row lg:flex-col `}
-        >
+          className={`text-main-text text-center w-full space-x-3 my-1 lg:space-x-0 justify-between lg:gap-3 text-sm lg:text-md font-medium flex flex-row lg:flex-col `}>
           {pages.map((item) => (
             <Link
               key={item.name}
-              className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
-                pathname === item.href && "bg-accent rounded"
-              }`}
-              href={item.href}
-            >
+              className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${pathname === item.href && 'bg-accent rounded'}`}
+              href={item.href}>
               <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">{item.icon}</div>
               <p className="">{item.name}</p>
             </Link>
           ))}
-          <div
-            onClick={stageModal}
-            className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
-              pathname.includes("/stage/") && "bg-accent  rounded"
-            }`}
-          >
-            <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
-              <CameraIcon />
+          {stages.length > 0 && (
+            <div
+              onClick={stageModal}
+              className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
+                pathname.includes("/stage/") && "bg-accent  rounded"
+              }`}
+            >
+              <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
+                <CameraIcon />
+              </div>
+              stages
             </div>
-            stages
-          </div>
+          )}
         </nav>
       </div>
     </header>
-  );
+  )
 }

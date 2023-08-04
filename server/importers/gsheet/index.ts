@@ -129,6 +129,10 @@ export default class Importer extends BaseImporter {
 
       console.log(row);
       const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
+      const speakerIds = speakerIdsRaw.map((speakerId) => {
+        if (!speakerId) return "";
+        return generateId(speakerId.replace("speaker_", "").replace("_", " "));
+      });
 
       const speakerPromises = speakerIdsRaw.filter(Boolean).map((speakerId) => {
         return this.speakerController.getSpeaker(

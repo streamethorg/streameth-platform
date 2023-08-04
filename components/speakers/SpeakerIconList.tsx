@@ -1,9 +1,9 @@
-import Speaker from "@/server/model/speaker";
-import SpeakerIcon from "@/components/speakers/SpeakerIcon";
+import Speaker from '@/server/model/speaker'
+import SpeakerIcon from '@/components/speakers/SpeakerIcon'
 
 interface Props {
-  speakers: Speaker[];
-  onSpeakerClick?: (speaker: Speaker) => void;
+  speakers: Speaker[]
+  onSpeakerClick?: (speaker: Speaker) => void
 }
 
 export default function SpeakerIconList({ speakers, onSpeakerClick }: Props) {
@@ -11,15 +11,9 @@ export default function SpeakerIconList({ speakers, onSpeakerClick }: Props) {
     <div className={`flex flex-col gap-2`}>
       {speakers.map((speaker) => (
         <div key={speaker.id} className="flex flex-row gap-2">
-          <SpeakerIcon
-            size="md"
-            key={speaker.id}
-            speaker={speaker}
-            onSpeakerClick={onSpeakerClick}
-            twitter
-          />
+          <SpeakerIcon size="md" key={speaker.id} speaker={speaker} onSpeakerClick={onSpeakerClick} />
         </div>
       ))}
     </div>
-  );
+  )
 }
