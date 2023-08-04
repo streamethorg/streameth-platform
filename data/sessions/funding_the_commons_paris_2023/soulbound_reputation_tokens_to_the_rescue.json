@@ -1,0 +1,19 @@
+{
+  "id": "soulbound_reputation_tokens_to_the_rescue",
+  "name": "\"Soulbound Reputation Tokens to the Rescue\"",
+  "description": "In this video, Omodju Miller discusses the importance of funding open source projects in the crypto field. He shares his experiences working at Google.org and GitHub, highlighting the challenges faced by corporations in funding social problems and coordinating decentralized industries. Miller proposes a solution involving a token-based system that assigns value to developers' contributions and encourages corporations to commit a percentage of their profits or equity to fund this system. He encourages others to take on this project and offers his expertise as an advisor.",
+  "start": "2023-07-15T12:20:00.000Z",
+  "end": "2023-07-15T12:40:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "omoju_miller",
+      "name": "Omoju Miller",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c2efy2sop40jw4vn/index.m3u8",
+  "playbackId": "c2efy2sop40jw4vn",
+  "eventId": "funding_the_commons_paris_2023"
+}

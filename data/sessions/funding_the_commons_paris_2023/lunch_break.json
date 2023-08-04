@@ -1,0 +1,12 @@
+{
+  "id": "lunch_break",
+  "name": "Lunch Break",
+  "description": "",
+  "start": "2023-07-16T11:00:00.000Z",
+  "end": "2023-07-16T12:00:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [],
+  "videoUrl": "",
+  "playbackId": "",
+  "eventId": "funding_the_commons_paris_2023"
+}

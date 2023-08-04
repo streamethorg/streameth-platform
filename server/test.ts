@@ -1,14 +1,14 @@
 import OrganizationController from "./controller/organization";
 import EventController from "./controller/event";
-import { IEvent, IDataImporter } from "./model/event";
+
 const run = async () => {
   const Organization = {
-    name: "ETHPorto",
+    name: "Swarm",
     description:
-      "ETHPorto is collaborating with a local nonprofit, Transformers, in an effort to support the local community and explore new ways to finance public goods through quadratic voting",
-    url: "https://ethporto.org/",
-    logo: "https://pbs.twimg.com/profile_images/1613498246403395590/BF_dNWpk_400x400.jpg",
-    location: "Porto, Portugal",
+      "Swarm is a distributed storage platform and content distribution service, a native base layer service of the ethereum web3 stack that aims to provide a decentralized and redundant store for dapp code, user data, blockchain and state data. Swarm sets out to provide various base layer services for web3, including node-to-node messaging, media streaming, decentralised database services and scalable state-channel infrastructure for decentralised service economies.",
+    url: "https://www.ethswarm.org/",
+    logo: "https://web3edge.io/wp-content/uploads/2022/08/swarm-spotlight-600x300.png",
+    location: "Virtual",
   };
 
   const orgController = new OrganizationController();
@@ -17,18 +17,18 @@ const run = async () => {
   );
 
   const Event = {
-    name: "EthPorto 2023",
+    name: "Swarm Summit 2023",
     description:
-      "March 16-18th, 2023 🇵🇹 Bringing the first ETH event to the beautiful city of Porto",
-    start: new Date("2023-03-16T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
-    end: new Date("2023-03-18T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
-    location: "Porto, Portugal",
+      "As the summer light symbolically vanquished the darkness on 21 June, Swarm network kicked off its three-day Swarm Virtual Summit. This year, the network’s global community gathered in the virtual world, giving all its diverse members a chance to watch and listen to leading voices and keen enthusiasts across different fields on the online stage.",
+    start: new Date("2023-06-21T00:00:00.000Z"), // "2021-09-30T00:00:00.000Z
+    end: new Date("2023-06-23T00:00:00.000Z"), // "2021-10-02T00:00:00.000Z
+    location: "Virtual",
     organizationId: organizationInstance.id,
     dataImporter: [
       {
         type: "gsheet" as "gsheet",
         config: {
-          sheetId: "1oe2C9BFunInC0-rLVOHuQQ3Uu5osOHUlAJxLooLd69c",
+          sheetId: "129T5ggZEdmH_u_2Sp1-LJShcoOqgBGDWosVBQQ6IfYg",
           apiKey: "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4",
         },
       },

@@ -1,0 +1,31 @@
+{
+  "id": "fireside_chat_with_chelsea_manning_and_jaya_klara_brekke__moderated_by_evin_mcmullen",
+  "name": "Fireside Chat with Chelsea Manning and Jaya Klara Brekke - moderated by Evin McMullen",
+  "description": "During this fireside chat, Chelsea, Jaya and Evin will talk all things privacy: The urgency of privacy today, cypherpunk vision, and future vision for privacy. They will also touch on the Merge, as well as Chelsea's views on secure hardware and the future vision for privacy as an intervention into the data economy.",
+  "start": "2022-09-18T13:15:00.000Z",
+  "end": "2022-09-18T14:00:00.000Z",
+  "stageId": "lexis",
+  "speakers": [
+    {
+      "id": "chelsea_manning",
+      "name": "Chelsea Manning",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    },
+    {
+      "id": "evin_mcmullen",
+      "name": "Evin McMullen",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    },
+    {
+      "id": "jaya_klara_brekke",
+      "name": "Jaya Klara Brekke",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    }
+  ],
+  "videoUrl": "https://livepeercdn.com/recordings/50fe4340-2403-4de7-b502-26ee179b0ca8/index.m3u8",
+  "playbackId": "50fe4340-2403-4de7-b502-26ee179b0ca8",
+  "eventId": "ethberlin_2022"
+}

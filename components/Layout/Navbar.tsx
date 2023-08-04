@@ -50,7 +50,7 @@ export default function Navbar({
         </div>
         <nav
           aria-label="Global"
-          className={`text-main-text   text-center w-full space-x-3 lg:space-x-0 justify-between lg:gap-8 text-sm lg:text-md font-medium flex flex-row lg:flex-col `}
+          className={`text-main-text text-center w-full space-x-3 my-1 lg:space-x-0 justify-between lg:gap-3 text-sm lg:text-md font-medium flex flex-row lg:flex-col `}
         >
           {pages.map((item) => (
             <Link

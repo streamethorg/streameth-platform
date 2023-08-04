@@ -1,0 +1,19 @@
+{
+  "id": "bringing_programmable_privacy_to_web3",
+  "name": "Bringing programmable privacy to Web3",
+  "description": "In this workshop, we will be demoing MantaPay, where users can transact popular assets while simultaneously reaping the benefits of on-chain privacy through ZKP. We will also talk about The future of ZK Applications & Poseidon VM: the zkApp friendly VM with EVM Compatibility.",
+  "start": "2022-09-16T18:00:00.000Z",
+  "end": "2022-09-16T18:45:00.000Z",
+  "stageId": "creators_lab",
+  "speakers": [
+    {
+      "id": "shumo_chu",
+      "name": "Shumo Chu",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    }
+  ],
+  "videoUrl": "https://livepeercdn.com/recordings/787c8234-ed6c-4d36-b2ea-297275ac94f5/index.m3u8",
+  "playbackId": "787c8234-ed6c-4d36-b2ea-297275ac94f5",
+  "eventId": "ethberlin_2022"
+}

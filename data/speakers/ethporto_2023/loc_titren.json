@@ -1,1 +1,7 @@
-{"id":"loc_titren","name":"Loïc Titren","bio":"Kiln","eventId":"ethporto_2023","photo":"https://ethporto.org/assets/speakers/loic.jpg"}
+{
+  "id": "loc_titren",
+  "name": "Loïc Titren",
+  "bio": "Kiln",
+  "eventId": "ethporto_2023",
+  "photo": "https://ethporto.org/assets/speakers/loic.jpg"
+}

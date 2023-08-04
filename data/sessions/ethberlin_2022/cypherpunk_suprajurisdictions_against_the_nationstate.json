@@ -1,0 +1,19 @@
+{
+  "id": "cypherpunk_suprajurisdictions_against_the_nationstate",
+  "name": "Cypherpunk Suprajurisdictions against the Nation-State",
+  "description": "The sanctions of Tornado Cash have implications for base layer neutrality and open source developers, threatening the utility of crypto, taking a proactive approach I propose introducing a concept of sovereignty to crypto networks and to take an active approach in competing directly with the State.",
+  "start": "2022-09-18T11:45:00.000Z",
+  "end": "2022-09-18T12:30:00.000Z",
+  "stageId": "lexis",
+  "speakers": [
+    {
+      "id": "jarrad_hope",
+      "name": "Jarrad Hope",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    }
+  ],
+  "videoUrl": "https://livepeercdn.com/recordings/073c2084-3c72-4a2e-ad12-63d2febe21c4/index.m3u8",
+  "playbackId": "073c2084-3c72-4a2e-ad12-63d2febe21c4",
+  "eventId": "ethberlin_2022"
+}

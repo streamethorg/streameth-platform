@@ -1,0 +1,19 @@
+{
+  "id": "whats_at_stake_eth__public_goods_funding",
+  "name": "What's at Stake: ETH & Public Goods Funding",
+  "description": "",
+  "start": "2023-07-15T08:55:00.000Z",
+  "end": "2023-07-15T09:25:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "julian_zawistowski",
+      "name": "Julian Zawistowski",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/17568rdz5sqfcy48/index.m3u8",
+  "playbackId": "17568rdz5sqfcy48",
+  "eventId": "funding_the_commons_paris_2023"
+}

@@ -1,1 +1,7 @@
-{"id":"gustavo_silva","name":"Gustavo Silva","bio":"ConsenSys","eventId":"ethporto_2023","photo":"https://ethporto.org/assets/speakers/Gustavo.jpg"}
+{
+  "id": "gustavo_silva",
+  "name": "Gustavo Silva",
+  "bio": "ConsenSys",
+  "eventId": "ethporto_2023",
+  "photo": "https://ethporto.org/assets/speakers/Gustavo.jpg"
+}
