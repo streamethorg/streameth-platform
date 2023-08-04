@@ -23,9 +23,7 @@ const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
   return (
     <div className="flex flex-col w-full h-full ">
       <ComponetCard title={session.name} date={session.start}>
-        <p className="text-main-text md:text-lg text-justify">
-          {session.description}
-        </p>
+        <p className="text-main-text md:text-lg text-justify">{session.description}</p>
         <div className="flex flex-col md:flex-row w-full h-full">
           <div className="flex w-full md:flex-col md:w-1/4 md:ml-auto">
             <p className="w-full md:text-lg text-secondary-text text-left md:text-right"></p>
@@ -33,9 +31,7 @@ const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
               <CodeBracketIcon
                 className="p-1 cursor-pointer ml-auto h-8 w-8 text-accent font-medium"
                 onClick={() => {
-                  modal.openModal(
-                    <EmbedSessionModal stageId={session.stageId} />
-                  );
+                  modal.openModal(<EmbedSessionModal stageId={session.stageId} />)
                 }}
               />
               <ShareIcon className="p-1 h-8 w-8 cursor-pointer ml-3 text-accent" />
