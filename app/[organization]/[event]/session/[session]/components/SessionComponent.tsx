@@ -1,17 +1,21 @@
-import Session from '@/server/model/session'
-import Player from '@/components/misc/Player'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
-import ComponetCard from '@/components/misc/ComponentCard'
-import SpeakerIconList from '@/components/speakers/SpeakerIconList'
+import Session from "@/server/model/session";
+import Player from "@/components/misc/Player";
+import SessionInfoBox from "@/components/sessions/SessionInfoBox";
+import ComponetCard from "@/components/misc/ComponentCard";
+import SpeakerIconList from "@/components/speakers/SpeakerIconList";
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (
     <ComponetCard title="Speakers">
       <SpeakerIconList speakers={session.speakers} />
     </ComponetCard>
-  )
-}
-export default async function SessionComponent({ session }: { session: Session }) {
+  );
+};
+export default async function SessionComponent({
+  session,
+}: {
+  session: Session;
+}) {
   return (
     <div className="flex flex-col w-full max-h-full h-full lg:flex-row relative overflow-y-scroll">
       <div className="flex flex-col w-full lg:min-h-[55vw] lg:flex-grow lg:h-full lg:w-[70%] box-border">
@@ -31,5 +35,5 @@ export default async function SessionComponent({ session }: { session: Session }
         </div>
       </div>
     </div>
-  )
+  );
 }
