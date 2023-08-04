@@ -2,11 +2,9 @@ import { extractFirstFrame } from "./utils/video";
 import SessionController from "./controller/session";
 import Session from "./model/session";
 
-const eventId = "ethporto_2023";
+const eventId = "funding_the_commons_paris_2023";
 
 async function main() {
-  // const eventController = new EventController();
-  // const event = await eventController.getEvent(eventId, organizationId);
   const sessionController = new SessionController();
   const sessions = await sessionController.getAllSessionsForEvent(eventId);
 
