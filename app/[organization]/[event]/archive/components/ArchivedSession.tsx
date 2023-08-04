@@ -22,7 +22,7 @@ const ArchivedSession = ({
           className="rounded"
           alt="session image"
           quality={80}
-          src={image}
+          src={image ?? ""}
           fill
           style={{
             objectFit: "cover",

@@ -17,7 +17,7 @@ export interface ISession {
   playbackId?: string;
   eventId: IEvent["id"];
   track?: string[];
-  coverImage: string;
+  coverImage?: string;
 }
 
 export default class Session implements ISession {
@@ -51,7 +51,7 @@ export default class Session implements ISession {
 
   track?: string[];
 
-  coverImage: string;
+  coverImage?: string;
 
   constructor({
     name,
