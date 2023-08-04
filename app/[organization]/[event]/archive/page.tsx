@@ -19,6 +19,10 @@ export default async function ArchivePage({ params }: Params) {
     return session.toJson();
   });
 
+  const videoSessions = sessions.filter((session) => {
+    return session.videoUrl != undefined;
+  });
+
   const speakerController = new SpeakerController();
   const speakers = (
     await speakerController.getAllSpeakersForEvent(params.event)
@@ -35,12 +39,16 @@ export default async function ArchivePage({ params }: Params) {
 
   return (
     <div className="flex flex-col-reverse justify-end lg:flex-row w-full overflow-y-hidden">
-      <FilterContextProvider items={sessions}>
+      <FilterContextProvider items={videoSessions}>
         <div className="w-full pt-0 p-4 lg:pt-4 overflow-y-scroll">
           <FilteredItems />
         </div>
         <div className="w-full lg:w-1/3 lg:max-w-[25rem] px-4 pt-2 mb-2 md:p-4 md:mb-0 lg:pl-1">
-          <FilterBar sessions={sessions} speakers={speakers} stages={stages} />
+          <FilterBar
+            sessions={videoSessions}
+            speakers={speakers}
+            stages={stages}
+          />
         </div>
       </FilterContextProvider>
     </div>
