@@ -54,8 +54,8 @@ export const Player = ({
   );
 
   return (
-    <div className=" bg-black h-full w-full flex items-center justify-center  ">
-      <div className="fixed flex w-full  md:relative">
+    <div className="aspect-ratio: 16 / 9 h-full w-full flex items-center justify-center  ">
+      <div className="fixed flex w-full md:relative">
         <LivepeerPlayer
           objectFit="cover"
           mediaElementRef={mediaElementRef}
