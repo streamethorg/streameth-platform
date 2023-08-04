@@ -2,7 +2,7 @@ import { extractFirstFrame } from "./utils/video";
 import SessionController from "./controller/session";
 import Session from "./model/session";
 
-const eventId = "ethBerlin_2022";
+const eventId = "ethporto_2023";
 
 async function main() {
   // const eventController = new EventController();
