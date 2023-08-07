@@ -1,6 +1,6 @@
 "use client";
 
-import { Player as LivepeerPlayer } from "@livepeer/react";
+import { Player as LivepeerPlayer, useAssetMetrics, useAsset} from "@livepeer/react";
 import { useCallback } from "react";
 import { useAccount } from "wagmi";
 // @ts-ignore
@@ -37,6 +37,7 @@ export const Player = ({
 }) => {
   const { address } = useAccount();
 
+
   const mediaElementRef = useCallback(
     (ref: HTMLMediaElement) => {
       if (ref && process.env.NEXT_PUBLIC_MUX_ENV_KEY) {
@@ -55,27 +56,23 @@ export const Player = ({
     [playerName]
   );
 
-  return (
-    <div className="aspect-ratio: 16 / 9 h-full w-full flex items-center justify-center  ">
-      <div className="fixed flex w-full md:relative">
-        <LivepeerPlayer
-          objectFit="cover"
-          mediaElementRef={mediaElementRef}
-          playbackId={playbackId}
-          showTitle={false}
-          showPipButton={false}
-          muted={false}
-          autoPlay
-          priority
-          lowLatency
-          viewerId={address}
-          poster={coverImage ?? <OfflinePlayer />}
-          showLoadingSpinner={false}
-        />
-      </div>
 
-      <div className="md:hidden bg-zinc-50 lg:h-3/4 w-full lg:p-4 lg:pb-2 aspect-video" />
-    </div>
+
+  return (
+    <LivepeerPlayer
+      mediaElementRef={mediaElementRef}
+      playbackId={playbackId}
+      showTitle={false}
+      showPipButton={false}
+      muted={true}
+      autoPlay
+      priority
+      lowLatency
+      // poster={<OfflinePlayer />}
+      showLoadingSpinner={true}
+      controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
+      viewerId={address}
+    />
   );
 };
 
