@@ -1,0 +1,13 @@
+{
+  "id": "zuzalu_2023__new_cities__network_states",
+  "name": "Zuzalu 2023 - New Cities & Network States",
+  "description": "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
+  "start": "2023-04-30T00:00:00.000Z",
+  "end": "2023-05-01T00:00:00.000Z",
+  "location": "Montenegro",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    { "type": "gsheet", "config": { "sheetId": "1uT9UNYJiMJLaPjBwtEHfoUMXaGy8ZD9cTN2LN4dlydc", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+  ],
+  "archiveMode": true
+}

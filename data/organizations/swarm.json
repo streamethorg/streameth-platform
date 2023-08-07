@@ -1,1 +1,8 @@
-{"id":"swarm","name":"Swarm","description":"Swarm is a distributed storage platform and content distribution service, a native base layer service of the ethereum web3 stack that aims to provide a decentralized and redundant store for dapp code, user data, blockchain and state data. Swarm sets out to provide various base layer services for web3, including node-to-node messaging, media streaming, decentralised database services and scalable state-channel infrastructure for decentralised service economies.","url":"https://www.ethswarm.org/","logo":"https://web3edge.io/wp-content/uploads/2022/08/swarm-spotlight-600x300.png","location":"Virtual"}
+{
+  "id": "swarm",
+  "name": "Swarm",
+  "description": "Swarm is a distributed storage platform and content distribution service, a native base layer service of the ethereum web3 stack that aims to provide a decentralized and redundant store for dapp code, user data, blockchain and state data. Swarm sets out to provide various base layer services for web3, including node-to-node messaging, media streaming, decentralised database services and scalable state-channel infrastructure for decentralised service economies.",
+  "url": "https://www.ethswarm.org/",
+  "logo": "https://web3edge.io/wp-content/uploads/2022/08/swarm-spotlight-600x300.png",
+  "location": "Virtual"
+}

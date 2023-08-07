@@ -1,0 +1,27 @@
+{
+  "id": "public_good_funding_wtf",
+  "name": "Public Good Funding- WTF?",
+  "description": "In the accompanying video, the speakers discuss the importance of funding public goods and introduce the Ethereum Community Fund (ECF) as a mechanism for funding public goods projects. They explain the different components of the ECF platform, including evaluation criteria, community coordination, and governance. The second speaker focuses on the challenges of coordinating projects and communities in the Web3 ecosystem and emphasizes the need for a community-owned knowledge base to ensure trustworthy information.",
+  "start": "2023-04-14T10:00:00.000Z",
+  "end": "2023-04-14T11:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "alddo",
+      "name": "Alddo",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__public_goods",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "qj",
+      "name": "QJ",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__public_goods",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/618dhyp75d4orciq/index.m3u8",
+  "playbackId": "618dhyp75d4orciq",
+  "eventId": "zuzalu_2023__public_goods"
+}

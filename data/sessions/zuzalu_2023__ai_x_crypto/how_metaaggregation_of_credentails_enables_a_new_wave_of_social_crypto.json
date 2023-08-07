@@ -1,0 +1,27 @@
+{
+  "id": "how_metaaggregation_of_credentails_enables_a_new_wave_of_social_crypto",
+  "name": "How Meta-Aggregation of Credentails Enables A New Wave of Social Crypto",
+  "description": "A description...",
+  "start": "2023-05-04T05:30:00.000Z",
+  "end": "2023-05-04T06:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "gary_sheng",
+      "name": "Gary Sheng",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__ai_x_crypto",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "launamu",
+      "name": "LauNaMu",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__ai_x_crypto",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ec0dbn0jkl60wmtl/index.m3u8",
+  "playbackId": "ec0dbn0jkl60wmtl",
+  "eventId": "zuzalu_2023__ai_x_crypto"
+}

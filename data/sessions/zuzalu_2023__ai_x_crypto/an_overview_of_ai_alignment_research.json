@@ -1,0 +1,20 @@
+{
+  "id": "an_overview_of_ai_alignment_research",
+  "name": "An Overview of AI Alignment Research",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "jessica_taylor",
+      "name": "Jessica Taylor",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__ai_x_crypto",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/42a9xlf5fv4wotf8/index.m3u8",
+  "playbackId": "42a9xlf5fv4wotf8",
+  "eventId": "zuzalu_2023__ai_x_crypto"
+}

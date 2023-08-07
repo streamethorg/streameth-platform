@@ -1,0 +1,13 @@
+{
+  "id": "zuzalu_2023__public_goods",
+  "name": "Zuzalu 2023 - Public Goods",
+  "description": "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
+  "start": "2023-04-12T00:00:00.000Z",
+  "end": "2023-04-15T00:00:00.000Z",
+  "location": "Montenegro",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    { "type": "gsheet", "config": { "sheetId": "1DtKqSLXTw9ujLcNPmA26MY6UuiQm75dol2Hh5xH6Tkc", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+  ],
+  "archiveMode": true
+}

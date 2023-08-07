@@ -1,0 +1,20 @@
+{
+  "id": "longevity_zero_to_one__20230507_3",
+  "name": "Longevity Zero to One - 2023-05-07 3",
+  "description": "",
+  "start": "2023-05-07T14:30:00.000Z",
+  "end": "2023-05-07T15:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "cat_thu",
+      "name": "Cat Thu",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__longevity_01",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/82a60n0nq9rxps77/index.m3u8",
+  "playbackId": "82a60n0nq9rxps77",
+  "eventId": "zuzalu_2023__longevity_01"
+}

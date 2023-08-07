@@ -1,0 +1,20 @@
+{
+  "id": "progressive_brain_tissue_replacement__a_key_component_to_defeating_aging",
+  "name": "Progressive brain tissue replacement - a key component to defeating aging.",
+  "description": "Speaker: Prof. Jean Hebert",
+  "start": "2023-05-14T05:30:00.000Z",
+  "end": "2023-05-14T06:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "prof_jean_hebert",
+      "name": "Prof. Jean Hebert",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__longevity_biotech_conference",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/1832q3ksdjm5yh9m/index.m3u8",
+  "playbackId": "1832q3ksdjm5yh9m",
+  "eventId": "zuzalu_2023__longevity_biotech_conference"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "hack_your_own_genome_workshop_part_i",
+  "name": "Hack your own genome workshop, part I",
+  "description": "The first part of the hack-your-own-genome workshop explains:\n* How and where can I sequence your genome?\n* How do health and longevity are connected with genetics? Which longevity genes do I have?\n* How can I analyze my or somebodies genome with open-source tools and libraries?\n* When I see an exciting gene or gene variant, how can I check it in my genome and interpret my genotype?\n* Most of the traits are polygenic. How can I evaluate my polygenic risk scores\n* Which types of genomic apps exist?\nThe talk will heavily utilize http://dna-seq.github.io/ open-source tools and apps that we develop.",
+  "start": "2023-05-04T07:00:00.000Z",
+  "end": "2023-05-04T08:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "anton_kulaga",
+      "name": "Anton Kulaga",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__ai_x_crypto",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/8a99mwho0kp0s5ot/index.m3u8",
+  "playbackId": "8a99mwho0kp0s5ot",
+  "eventId": "zuzalu_2023__ai_x_crypto"
+}

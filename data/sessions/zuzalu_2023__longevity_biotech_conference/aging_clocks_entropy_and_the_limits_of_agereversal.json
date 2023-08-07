@@ -1,0 +1,20 @@
+{
+  "id": "aging_clocks_entropy_and_the_limits_of_agereversal",
+  "name": "Aging clocks, entropy, and the limits of age-reversal",
+  "description": "Speaker: Peter Fedichev",
+  "start": "2023-05-14T12:30:00.000Z",
+  "end": "2023-05-14T13:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "peter_fedichev",
+      "name": "Peter Fedichev",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__longevity_biotech_conference",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c9f06ug2xjhv9pft/index.m3u8",
+  "playbackId": "c9f06ug2xjhv9pft",
+  "eventId": "zuzalu_2023__longevity_biotech_conference"
+}
