@@ -13,7 +13,7 @@ const ComponentCard = ({
 }) => {
   return (
     <div
-      className={`${streatch && "h-full"} shadow rounded flex flex-col bg-base`}
+      className={`${streatch && "h-full"} drop-shadow-md flex flex-col bg-base`}
     >
       {title && (
         <div className="flex font-bold flex-row rounded-t border-b-2 border-accent text-main-text p-3 px-4 uppercase ">
