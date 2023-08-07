@@ -14,17 +14,17 @@ const run = async () => {
   const organizationInstance = await orgController.createOrganization(Organization)
 
   const Event = {
-    name: 'Zuzalu 2023 - Public Goods',
+    name: 'Zuzalu 2023 - Jurisdictions for Longevity',
     description: 'Zuzalu is a first-of-its-kind pop-up city community in Montenegro.',
-    start: new Date('2023-04-12T00:00:00.000Z'), // "2021-09-30T00:00:00.000Z
-    end: new Date('2023-04-15T00:00:00.000Z'), // "2021-10-02T00:00:00.000Z
+    start: new Date('2023-04-09T00:00:00.000Z'), // "2021-09-30T00:00:00.000Z
+    end: new Date('2023-04-11T00:00:00.000Z'), // "2021-10-02T00:00:00.000Z
     location: 'Montenegro',
     organizationId: organizationInstance.id,
     dataImporter: [
       {
         type: 'gsheet' as 'gsheet',
         config: {
-          sheetId: '1DtKqSLXTw9ujLcNPmA26MY6UuiQm75dol2Hh5xH6Tkc',
+          sheetId: '1KYyLZGlO1nLJYbTzQbUvOX_KrRAhYYwZdhGIVE1kwD4',
           apiKey: 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w',
         },
       },
