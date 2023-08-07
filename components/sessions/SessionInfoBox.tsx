@@ -5,14 +5,9 @@ import { ShareIcon, CodeBracketIcon } from "@heroicons/react/24/outline";
 import EmbedSessionModal from "@/components/sessions/EmbedSession";
 import { ModalContext } from "@/components/context/ModalContext";
 import ComponetCard from "../misc/ComponentCard";
-import { useAsset, useAssetMetrics } from "@livepeer/react";
+import { useAsset, useAssetMetrics, usePlaybackInfo } from "@livepeer/react";
 
 const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
-  const modal = useContext(ModalContext);
-  // const { data, isLoading } = useAsset(session?.playbackId || "");
-  // const { data: metrics } = useAssetMetrics({
-  //   // data.id ?? "",
-  // });
   if (!session) {
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -25,22 +20,6 @@ const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
       <p className="text-main-text md:text-lg text-justify">
         {session.description}
       </p>
-      <div className="flex flex-col md:flex-row w-full h-full">
-        <div className="flex w-full md:flex-col md:w-1/4 md:ml-auto">
-          <p className="w-full md:text-lg text-secondary-text text-left md:text-right"></p>
-          <div className="flex flex-row md:w-full pt-2 mt-auto">
-            <CodeBracketIcon
-              className="p-1 cursor-pointer ml-auto h-8 w-8 text-accent font-medium"
-              onClick={() => {
-                modal.openModal(
-                  <EmbedSessionModal stageId={session.stageId} />
-                );
-              }}
-            />
-            <ShareIcon className="p-1 h-8 w-8 cursor-pointer ml-3 text-accent" />
-          </div>
-        </div>
-      </div>
     </ComponetCard>
   );
 };
