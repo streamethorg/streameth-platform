@@ -128,8 +128,7 @@ export default class Importer extends BaseImporter {
       }
 
       try {
-        const item = await this.sessionController.createSession(session)
-        await this.sessionController.generateVideoFrame(item.id, item.eventId)
+       await this.sessionController.createSession(session);
       } catch (e) {
         console.error(e)
       }

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",
-    "build": "next build",
+    "build": "  next build",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "prettier:fix": "prettier --write ./data/**/**/*.json ./app/*.tsx ./components/",

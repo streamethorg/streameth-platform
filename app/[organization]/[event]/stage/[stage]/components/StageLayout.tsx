@@ -51,9 +51,13 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
     <div className="flex flex-col w-full lg:max-h-full h-full lg:flex-row relative overflow-scroll">
       <div className="flex flex-col flex-grow h-full w-full lg:w-[70%] lg:overflow-y-scroll box-border">
         <div className="lg:h-3/4 w-full lg:p-4 lg:pb-2 ">
-          <Player playbackId={currentSession.playbackId} playerName={currentSession.name} />
+          <Player
+            playbackId={currentSession.playbackId}
+            playerName={currentSession.name}
+            coverImage={currentSession.coverImage}
+          />
         </div>
-      
+
         <div className="lg:h-1/4 p-4 lg:pt-2">
           <SessionInfoBox session={currentSession.toJson()} />
         </div>
