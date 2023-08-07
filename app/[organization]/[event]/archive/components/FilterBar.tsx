@@ -1,7 +1,7 @@
 "use client";
+import { useState } from "react";
 import SearchFilter from "./SearchFilter";
 import SelectFilter from "./SelectFilter";
-import NavigationBarWrapper from "./NavigationBarWrapper";
 import { ISession } from "@/server/model/session";
 import { ISpeaker } from "@/server/model/speaker";
 import { IStage } from "@/server/model/stage";
@@ -16,6 +16,7 @@ export default function FilterBar({
   speakers: ISpeaker[];
   stages: IStage[];
 }) {
+  const [isOpen, setIsOpen] = useState(false);
   const speakerFilters = speakers.map((speaker) => {
     return {
       name: speaker.name,
@@ -82,17 +83,32 @@ export default function FilterBar({
   });
 
   return (
-    <ComponentCard>
-      <NavigationBarWrapper>
-        <div className="md:flex flex-col w-full relative py-2 md:py-4 ">
-          <p className="text-lg font-bold mb-2 text-accent uppercase ">
-            Search
+    <div className="drop-shadow-md md:drop-shadow-none md:shadow md:rounded-md bg-base">
+      <div className="md:flex flex-col w-full relative px-4 py-2 md:p-4">
+        <p className="text-lg font-bold mb-2 text-accent uppercase ">Search</p>
+        <SearchFilter
+          filterOptions={sessionFilters}
+          filterName="session name"
+        />
+        <SearchFilter filterOptions={speakerFilters} filterName="speaker" />
+        <div className="lg:hidden">
+          <p
+            className="text-lg mt-4 mb-2 font-bold text-accent uppercase "
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            More filters
           </p>
-          <SearchFilter
-            filterOptions={sessionFilters}
-            filterName="session name"
-          />
-          <SearchFilter filterOptions={speakerFilters} filterName="speaker" />
+          {isOpen && (
+            <>
+              <SelectFilter filterOptions={stageFilters} filterName="Stage" />
+              <SelectFilter
+                filterOptions={sessionDateFilters()}
+                filterName="Date"
+              />
+            </>
+          )}
+        </div>
+        <div className="hidden lg:block">
           <p className="text-lg mt-4 mb-2 font-bold text-accent uppercase ">
             More filters
           </p>
@@ -103,7 +119,7 @@ export default function FilterBar({
           />
           {/* <SelectFilter filterOptions={trackFilter} filterName="Track" /> */}
         </div>
-      </NavigationBarWrapper>
-    </ComponentCard>
+      </div>
+    </div>
   );
 }

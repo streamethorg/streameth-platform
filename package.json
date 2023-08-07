@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
-    "@livepeer/react": "^2.5.5",
+    "@livepeer/react": "^2.8.0",
     "@rainbow-me/rainbowkit": "^1.0.2",
     "@types/fluent-ffmpeg": "^2.1.21",
     "@types/node": "20.3.0",

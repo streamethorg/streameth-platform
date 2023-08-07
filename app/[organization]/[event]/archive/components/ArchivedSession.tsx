@@ -1,9 +1,8 @@
 import { ISession } from "@/server/model/session";
 import Image from "next/image";
-import Logo from "@/public/logo.png";
 import { useState } from "react";
 import Link from "next/link";
-
+import Card from "@/components/misc/Card";
 const ArchivedSession = ({
   session,
   learnMore = false,
@@ -16,7 +15,7 @@ const ArchivedSession = ({
   const [image, setImage] = useState(session.coverImage);
   const alt = "/events/" + session.eventId + ".png"
   const component = (
-    <div className="flex flex-col rounded h-full p-4 shadow box-border bg-base">
+    <Card>
       <div className="aspect-video relative">
         <Image
           className="rounded"
@@ -40,7 +39,7 @@ const ArchivedSession = ({
       <p className="border-b-2 border-accent  p-2 py-4 flex flex-grow text-md ">
         {session.name}
       </p>
-    </div>
+    </Card>
   );
   if (learnMore) return <Link href={"session/" + session.id}>{component}</Link>;
   if (goToStage)

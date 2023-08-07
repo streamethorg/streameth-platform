@@ -4,13 +4,13 @@ import { IEvent } from "@/server/model/event";
 import Image from "next/image";
 import Logo from "@/public/logo.png";
 import Link from "next/link";
-
+import Card from "@/components/misc/Card";
 const EventCard = ({ event }: { event: IEvent }) => {
   const [image, setImage] = useState("/events/" + event.id + ".png");
 
   return (
     <Link href={`${event.organizationId}/${event.id}`}>
-      <div className="flex flex-col rounded m-3 p-4 shadow box-border bg-base">
+      <Card>
         <div className="aspect-video relative">
           <Image
             className="rounded"
@@ -37,7 +37,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
             {event.start.toDateString()} - {event.end.toDateString()}
           </p>
         </div>
-      </div>
+      </Card>
     </Link>
   );
 };

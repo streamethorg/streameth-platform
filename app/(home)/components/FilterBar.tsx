@@ -40,7 +40,7 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
   }, [isShowCurrent]);
 
   return (
-    <div className="bg-base p-4 w-full flex justify-center items-center drop-shadow-md">
+    <div className="bg-base p-4 sticky top-0 z-40 w-full flex justify-center items-center drop-shadow-md">
       <div className=" w-full flex flex-col sm:flex-row items-center">
         <div className="flex flex-row w-full justify-center md:justify-start">
           <h1
