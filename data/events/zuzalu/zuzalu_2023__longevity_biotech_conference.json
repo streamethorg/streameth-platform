@@ -1,1 +1,13 @@
-{"id":"zuzalu_2023__longevity_biotech_conference","name":"Zuzalu 2023 - Longevity Biotech Conference","description":"Zuzalu is a first-of-its-kind pop-up city community in Montenegro.","start":"2023-04-01T00:00:00.000Z","end":"2023-04-02T00:00:00.000Z","location":"Montenegro","organizationId":"zuzalu","dataImporter":[{"type":"gsheet","config":{"sheetId":"1GzBqh0jziaGiLH1I9M5ee9PH0numlD5abTibfs1zW0o","apiKey":"AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w"}}],"archiveMode":true}
+{
+  "id": "zuzalu_2023__longevity_biotech_conference",
+  "name": "Zuzalu 2023 - Longevity Biotech Conference",
+  "description": "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
+  "start": "2023-04-01T00:00:00.000Z",
+  "end": "2023-04-02T00:00:00.000Z",
+  "location": "Montenegro",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    { "type": "gsheet", "config": { "sheetId": "1GzBqh0jziaGiLH1I9M5ee9PH0numlD5abTibfs1zW0o", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+  ],
+  "archiveMode": true
+}

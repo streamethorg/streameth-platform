@@ -1,1 +1,20 @@
-{"id":"introduction_to_medical_biostasis","name":"Introduction to Medical Biostasis","description":"Speaker: Dr Emil Kendziorra","start":"2023-05-13T11:30:00.000Z","end":"2023-05-13T12:30:00.000Z","stageId":"dome","speakers":[{"id":"dr_emil_kendziorra","name":"Dr. Emil Kendziorra","bio":"No description","eventId":"zuzalu_2023__longevity_biotech_conference","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/1928um22pozj23d7/index.m3u8","playbackId":"1928um22pozj23d7","eventId":"zuzalu_2023__longevity_biotech_conference"}
+{
+  "id": "introduction_to_medical_biostasis",
+  "name": "Introduction to Medical Biostasis",
+  "description": "Speaker: Dr Emil Kendziorra",
+  "start": "2023-05-13T11:30:00.000Z",
+  "end": "2023-05-13T12:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "dr_emil_kendziorra",
+      "name": "Dr. Emil Kendziorra",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__longevity_biotech_conference",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/1928um22pozj23d7/index.m3u8",
+  "playbackId": "1928um22pozj23d7",
+  "eventId": "zuzalu_2023__longevity_biotech_conference"
+}

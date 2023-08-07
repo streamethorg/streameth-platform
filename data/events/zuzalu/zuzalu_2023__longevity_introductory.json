@@ -1,1 +1,13 @@
-{"id":"zuzalu_2023__longevity_introductory","name":"Zuzalu 2023 - Longevity Introductory","description":"Zuzalu is a first-of-its-kind pop-up city community in Montenegro.","start":"2023-03-24T00:00:00.000Z","end":"2023-03-31T00:00:00.000Z","location":"Montenegro","organizationId":"zuzalu","dataImporter":[{"type":"gsheet","config":{"sheetId":"1_CsWVC9yfgDhOHMpJd5lr8d7_fcIzOX_Cz_LBXPzbmc","apiKey":"AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w"}}],"archiveMode":true}
+{
+  "id": "zuzalu_2023__longevity_introductory",
+  "name": "Zuzalu 2023 - Longevity Introductory",
+  "description": "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
+  "start": "2023-03-24T00:00:00.000Z",
+  "end": "2023-03-31T00:00:00.000Z",
+  "location": "Montenegro",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    { "type": "gsheet", "config": { "sheetId": "1_CsWVC9yfgDhOHMpJd5lr8d7_fcIzOX_Cz_LBXPzbmc", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+  ],
+  "archiveMode": true
+}

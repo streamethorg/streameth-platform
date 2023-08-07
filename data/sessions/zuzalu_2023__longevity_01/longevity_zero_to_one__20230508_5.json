@@ -1,1 +1,20 @@
-{"id":"longevity_zero_to_one__20230508_5","name":"Longevity Zero to One - 2023-05-08 5","description":"","start":"2023-05-08T07:00:00.000Z","end":"2023-05-08T15:00:00.000Z","stageId":"dome","speakers":[{"id":"cat_thu","name":"Cat Thu","bio":"No description","eventId":"zuzalu_2023__longevity_01","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/e5f05equjieyco4x/index.m3u8","playbackId":"e5f05equjieyco4x","eventId":"zuzalu_2023__longevity_01"}
+{
+  "id": "longevity_zero_to_one__20230508_5",
+  "name": "Longevity Zero to One - 2023-05-08 5",
+  "description": "",
+  "start": "2023-05-08T07:00:00.000Z",
+  "end": "2023-05-08T15:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "cat_thu",
+      "name": "Cat Thu",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__longevity_01",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/e5f05equjieyco4x/index.m3u8",
+  "playbackId": "e5f05equjieyco4x",
+  "eventId": "zuzalu_2023__longevity_01"
+}

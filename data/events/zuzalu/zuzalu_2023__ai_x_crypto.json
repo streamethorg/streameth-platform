@@ -1,1 +1,13 @@
-{"id":"zuzalu_2023__ai_x_crypto","name":"Zuzalu 2023 - AI x Crypto","description":"Zuzalu is a first-of-its-kind pop-up city community in Montenegro.","start":"2023-05-04T00:00:00.000Z","end":"2023-05-06T00:00:00.000Z","location":"Montenegro","organizationId":"zuzalu","dataImporter":[{"type":"gsheet","config":{"sheetId":"1yBxwb9R5YcUOuJ9_af4GgeSwWmnXvD1FXHtpbm1LsKE","apiKey":"AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w"}}],"archiveMode":true}
+{
+  "id": "zuzalu_2023__ai_x_crypto",
+  "name": "Zuzalu 2023 - AI x Crypto",
+  "description": "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
+  "start": "2023-05-04T00:00:00.000Z",
+  "end": "2023-05-06T00:00:00.000Z",
+  "location": "Montenegro",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    { "type": "gsheet", "config": { "sheetId": "1yBxwb9R5YcUOuJ9_af4GgeSwWmnXvD1FXHtpbm1LsKE", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+  ],
+  "archiveMode": true
+}

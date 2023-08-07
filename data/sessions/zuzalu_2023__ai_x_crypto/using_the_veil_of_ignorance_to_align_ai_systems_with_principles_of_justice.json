@@ -1,1 +1,20 @@
-{"id":"using_the_veil_of_ignorance_to_align_ai_systems_with_principles_of_justice","name":"Using the Veil of Ignorance to Align AI Systems with Principles of Justice","description":"cryptoxai.wtf","start":"2023-05-07T05:30:00.000Z","end":"2023-05-07T06:30:00.000Z","stageId":"lighthouse","speakers":[{"id":"saffron_huang","name":"Saffron Huang","bio":"No description","eventId":"zuzalu_2023__ai_x_crypto","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/ce09680qpydjvp5x/index.m3u8","playbackId":"ce09680qpydjvp5x","eventId":"zuzalu_2023__ai_x_crypto"}
+{
+  "id": "using_the_veil_of_ignorance_to_align_ai_systems_with_principles_of_justice",
+  "name": "Using the Veil of Ignorance to Align AI Systems with Principles of Justice",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "saffron_huang",
+      "name": "Saffron Huang",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__ai_x_crypto",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ce09680qpydjvp5x/index.m3u8",
+  "playbackId": "ce09680qpydjvp5x",
+  "eventId": "zuzalu_2023__ai_x_crypto"
+}

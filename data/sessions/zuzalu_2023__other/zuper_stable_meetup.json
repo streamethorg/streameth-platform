@@ -1,1 +1,34 @@
-{"id":"zuper_stable_meetup","name":"Zuper Stable Meetup","description":"This video explores the question of who is considered R&B, delving into the history and evolution of the genre and discussing various artists who have contributed to its development.","start":"2023-04-26T15:00:00.000Z","end":"2023-04-26T16:00:00.000Z","stageId":"dome","speakers":[{"id":"pablo_penguin","name":"Pablo Penguin","bio":"No description","eventId":"zuzalu_2023__other","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"},{"id":"benjamin_qidao","name":"Benjamin QiDao","bio":"No description","eventId":"zuzalu_2023__other","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"},{"id":"david_liebowitz","name":"David Liebowitz","bio":"No description","eventId":"zuzalu_2023__other","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/8d44cagmwxjix1di/index.m3u8","playbackId":"8d44cagmwxjix1di","eventId":"zuzalu_2023__other"}
+{
+  "id": "zuper_stable_meetup",
+  "name": "Zuper Stable Meetup",
+  "description": "This video explores the question of who is considered R&B, delving into the history and evolution of the genre and discussing various artists who have contributed to its development.",
+  "start": "2023-04-26T15:00:00.000Z",
+  "end": "2023-04-26T16:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "pablo_penguin",
+      "name": "Pablo Penguin",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__other",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "benjamin_qidao",
+      "name": "Benjamin QiDao",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__other",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    },
+    {
+      "id": "david_liebowitz",
+      "name": "David Liebowitz",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__other",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/8d44cagmwxjix1di/index.m3u8",
+  "playbackId": "8d44cagmwxjix1di",
+  "eventId": "zuzalu_2023__other"
+}

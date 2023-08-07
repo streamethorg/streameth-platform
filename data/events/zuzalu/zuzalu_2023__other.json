@@ -1,1 +1,13 @@
-{"id":"zuzalu_2023__other","name":"Zuzalu 2023 - Other","description":"Zuzalu is a first-of-its-kind pop-up city community in Montenegro.","start":"2023-03-25T00:00:00.000Z","end":"2023-05-25T00:00:00.000Z","location":"Montenegro","organizationId":"zuzalu","dataImporter":[{"type":"gsheet","config":{"sheetId":"1rvWyrBKIMCscwRGTciU0cnEiTGcpYzXxkLv9UH31seI","apiKey":"AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w"}}],"archiveMode":true}
+{
+  "id": "zuzalu_2023__other",
+  "name": "Zuzalu 2023 - Other",
+  "description": "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
+  "start": "2023-03-25T00:00:00.000Z",
+  "end": "2023-05-25T00:00:00.000Z",
+  "location": "Montenegro",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    { "type": "gsheet", "config": { "sheetId": "1rvWyrBKIMCscwRGTciU0cnEiTGcpYzXxkLv9UH31seI", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+  ],
+  "archiveMode": true
+}

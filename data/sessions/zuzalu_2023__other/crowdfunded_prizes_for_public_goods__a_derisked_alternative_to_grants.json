@@ -1,1 +1,20 @@
-{"id":"crowdfunded_prizes_for_public_goods__a_derisked_alternative_to_grants","name":"Crowdfunded Prizes for Public Goods - a De-risked Alternative to Grants","description":"There will be an introductory talk about crowdfunded prizes and then we will open a conversation on how to improve funding for public goods through peer to peer collaboration rather than bureaucracy.&nbsp;","start":"2023-04-26T12:00:00.000Z","end":"2023-04-26T13:00:00.000Z","stageId":"dome","speakers":[{"id":"noah_chon_lee","name":"Noah Chon Lee","bio":"No description","eventId":"zuzalu_2023__other","photo":"https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"}],"videoUrl":"https://lp-playback.com/hls/8698sne92ljl97yd/index.m3u8","playbackId":"8698sne92ljl97yd","eventId":"zuzalu_2023__other"}
+{
+  "id": "crowdfunded_prizes_for_public_goods__a_derisked_alternative_to_grants",
+  "name": "Crowdfunded Prizes for Public Goods - a De-risked Alternative to Grants",
+  "description": "There will be an introductory talk about crowdfunded prizes and then we will open a conversation on how to improve funding for public goods through peer to peer collaboration rather than bureaucracy.&nbsp;",
+  "start": "2023-04-26T12:00:00.000Z",
+  "end": "2023-04-26T13:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "noah_chon_lee",
+      "name": "Noah Chon Lee",
+      "bio": "No description",
+      "eventId": "zuzalu_2023__other",
+      "photo": "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/8698sne92ljl97yd/index.m3u8",
+  "playbackId": "8698sne92ljl97yd",
+  "eventId": "zuzalu_2023__other"
+}
