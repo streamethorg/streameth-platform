@@ -55,25 +55,26 @@ const Layout = async ({
     },
   ];
 
-  if(event.archiveMode) {
-    pages.splice(0, 1);
-    stages = [];
-  }
-
   //
   return (
-    <div className="flex flex-col md:flex-row flex-grow overflow-hidden">
-      <Navbar
-        pages={pages}
-        stages={stages.map((stage) => {
-          return {
-            href: `/${params.organization}/${stage.eventId}/stage/${stage.id}`,
-            name: stage.name,
-            icon: <ViewColumnsIcon />,
-          };
-        })}
-      />
-      <main className="flex lg:h-full w-full lg:w-[calc(100%-5rem)] h-[calc(100%-3rem)]    ml-auto bg-[#f5f5f5] overflow-hidden">
+    <div className="flex flex-col md:flex-row md:overflow-hidden lg:h-full">
+      {!event.archiveMode && (
+        <Navbar
+          pages={pages}
+          stages={stages.map((stage) => {
+            return {
+              href: `/${params.organization}/${stage.eventId}/stage/${stage.id}`,
+              name: stage.name,
+              icon: <ViewColumnsIcon />,
+            };
+          })}
+        />
+      )}
+      <main
+        className={`flex lg:h-full ${
+          event.archiveMode ? " w-full" : "md:w-[calc(100%-5rem)]"
+        } ml-auto bg-background`}
+      >
         {children}
       </main>
     </div>

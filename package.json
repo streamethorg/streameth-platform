@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",
-    "build": "next build",
+    "build": "  next build",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "prettier:fix": "prettier --write ./data/**/**/*.json ./app/*.tsx ./components/",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
-    "@livepeer/react": "^2.5.5",
+    "@livepeer/react": "^2.8.0",
     "@rainbow-me/rainbowkit": "^1.0.2",
     "@types/fluent-ffmpeg": "^2.1.21",
     "@types/node": "20.3.0",

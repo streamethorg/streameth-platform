@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GeneralContext>
           <MobileContextProvider>
             <ModalContextProvider>
-              <div className="bg-background flex flex-col h-screen w-screen overflow-hidden">
+              <div className="bg-background flex flex-col h-[100dvh] lg:overflow-hidden w-screen">
                 <Navbar />
                 {children}
               </div>
