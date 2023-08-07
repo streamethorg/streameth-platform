@@ -83,8 +83,8 @@ export default function FilterBar({
   });
 
   return (
-    <ComponentCard>
-      <div className="md:flex flex-col w-full relative py-2 md:py-4 ">
+    <div className="drop-shadow-md md:drop-shadow-none md:shadow md:rounded-md bg-base">
+      <div className="md:flex flex-col w-full relative px-4 py-2 md:p-4">
         <p className="text-lg font-bold mb-2 text-accent uppercase ">Search</p>
         <SearchFilter
           filterOptions={sessionFilters}
@@ -120,6 +120,6 @@ export default function FilterBar({
           {/* <SelectFilter filterOptions={trackFilter} filterName="Track" /> */}
         </div>
       </div>
-    </ComponentCard>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 const Card = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex flex-col rounded-md mt-1 lg:m-3 p-4 shadow box-border bg-base">
+  <div className="flex flex-col rounded-md h-full p-4 shadow box-border bg-base">
     {children}
   </div>
 );

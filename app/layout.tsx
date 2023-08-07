@@ -26,7 +26,7 @@ export default function RootLayout({
         <GeneralContext>
           <MobileContextProvider>
             <ModalContextProvider>
-              <div className="bg-background flex flex-col h-[100dvh]  w-screen">
+              <div className="bg-background flex flex-col h-[100dvh] lg:overflow-hidden w-screen">
                 <Navbar />
                 {children}
               </div>
