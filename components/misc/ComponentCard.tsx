@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 const ComponentCard = ({
   children,
@@ -23,7 +23,7 @@ const ComponentCard = ({
       )}
       <div className="p-4 flex flex-col">{children}</div>
     </div>
-  );
-};
+  )
+}
 
-export default ComponentCard;
+export default ComponentCard
