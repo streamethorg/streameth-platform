@@ -1,0 +1,20 @@
+{
+  "id": "web3_lagos_conference_2023",
+  "name": "Web3 Lagos Conference 2023",
+  "description": "The Web3 Lagos Conference is the largest Web3 Event in Lagos, Nigeria. This conference will bring together Web3 enthusiasts from all over Nigeria and beyond. Here, community meets technology for three days of intensive Networking and Learning experiences.",
+  "start": "2023-08-31T00:00:00.000Z",
+  "end": "2023-09-02T00:00:00.000Z",
+  "location": "The Zone, Gbagada, Lagos State.",
+  "organizationId": "web3bridge",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "",
+        "apiKey": ""
+      }
+    }
+  ],
+  "website": "https://event.web3bridge.com/",
+  "archiveMode": false
+}

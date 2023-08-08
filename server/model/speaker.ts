@@ -27,7 +27,6 @@ export default class Speaker implements ISpeaker {
   @IsNotEmpty()
   eventId: IEvent["id"];
 
-  @IsUrl()
   @IsOptional()
   twitter?: string;
 
@@ -39,7 +38,6 @@ export default class Speaker implements ISpeaker {
   @IsOptional()
   website?: string;
 
-  @IsUrl()
   @IsOptional()
   photo?: string;
 

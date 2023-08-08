@@ -65,18 +65,15 @@ export default class Importer extends BaseImporter {
   public override async generateSpeakers(): Promise<void> {
     const data = await this.getDataForRange(SPEAKER_SHEET, SPEAKER_DATA_RANGE);
     for (const row of data) {
-      const [name, description, avatar, twitterHandle] = row;
+      const [name, description, twitterHandle, avatar] = row;
       const speaker = {
         name,
-        bio: description ?? "No description",
-        photo:
-          avatar ??
-          "https://drive.google.com/file/d/1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa/view?usp=sharing",
+        bio: "No description",
+        photo: avatar == "" ? undefined : avatar,
         twitter: twitterHandle,
         eventId: this.event.id,
       };
 
-      console.log(row);
       try {
         if (speaker) {
           await this.speakerController.createSpeaker(speaker);
@@ -90,7 +87,7 @@ export default class Importer extends BaseImporter {
   public override async generateStages(): Promise<void> {
     const data = await this.getDataForRange(STAGE_SHEET, STAGE_DATA_RANGE);
     for (const row of data) {
-      const [id, name, streamId, image] = row;
+      const [name, streamId, image] = row;
       const stage = {
         name,
         eventId: this.event.id,
@@ -111,58 +108,56 @@ export default class Importer extends BaseImporter {
 
     const data = await this.getDataForRange(SESSION_SHEET, SESSION_DATA_RANGE);
     for (const row of data) {
-      const [
-        id,
-        Name,
-        Description,
-        stageId,
-        Day,
-        Start,
-        End,
-        Speaker1,
-        Speaker2,
-        Speaker3,
-        Speaker4,
-        Speaker5,
-        Video,
-      ] = row;
-
-      console.log(row);
-      const speakerIdsRaw = [Speaker1, Speaker2, Speaker3, Speaker4, Speaker5];
-      const speakerIds = speakerIdsRaw.map((speakerId) => {
-        if (!speakerId) return "";
-        return generateId(speakerId.replace("speaker_", "").replace("_", " "));
-      });
-
-      const speakerPromises = speakerIdsRaw.filter(Boolean).map((speakerId) => {
-        return this.speakerController.getSpeaker(
-          generateId(speakerId),
-          this.event.id
-        );
-      });
-
-      const [speakers, stage] = await Promise.all([
-        Promise.all(speakerPromises),
-        this.stageController.getStage(
-          generateId(stageId.replace("stage_", "").replace("_", " ")),
-          this.event.id
-        ),
-      ]);
-
-      const session = {
-        name: Name,
-        description: Description,
-        stageId: stage.id,
-        eventId: this.event.id,
-        organizationId: this.event.organizationId,
-        speakers: speakers,
-        start: new Date(`${Day} ${Start}`),
-        end: new Date(`${Day} ${End}`),
-        videoUrl: Video,
-      };
-
       try {
-       await this.sessionController.createSession(session);
+        const [
+          Name,
+          Description,
+          stageId,
+          Day,
+          Start,
+          End,
+          Speaker1,
+          Speaker2,
+          Speaker3,
+          Speaker4,
+          Speaker5,
+          Video,
+        ] = row;
+
+        const speakerIdsRaw = [
+          Speaker1,
+          Speaker2,
+          Speaker3,
+          Speaker4,
+          Speaker5,
+        ];
+        const speakerPromises = speakerIdsRaw
+          .filter(Boolean)
+          .map((speakerId) => {
+            return this.speakerController.getSpeaker(
+              generateId(speakerId),
+              this.event.id
+            );
+          });
+
+        const [speakers, stage] = await Promise.all([
+          Promise.all(speakerPromises),
+          this.stageController.getStage(generateId(stageId), this.event.id),
+        ]);
+
+        const session = {
+          name: Name,
+          description: Description,
+          stageId: stage.id,
+          eventId: this.event.id,
+          organizationId: this.event.organizationId,
+          speakers: speakers,
+          start: new Date(`${Day} ${Start}`),
+          end: new Date(`${Day} ${End}`),
+          videoUrl: Video,
+        };
+
+        await this.sessionController.createSession(session);
       } catch (e) {
         console.error(e);
       }
