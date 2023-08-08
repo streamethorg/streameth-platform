@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <FilterContextProvider items={allEvents}>
-      <main className="flex flex-col bg-background w-screen m-auto lg:overflow-hidden">
+      <main className="flex flex-col bg-background w-screen mx-auto lg:overflow-hidden">
         <FilterBar events={allEvents} />
         <EventList />
       </main>

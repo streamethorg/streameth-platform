@@ -1,1 +1,11 @@
-{"id":"ethaccra_2023","name":"EthAccra 2023","description":"ETHAccra is a 3-day hackathon striving to educate young generations of web3 developers and builders. ETHAccra wants to gather the best Ethereum builders in the world to create truly disruptive projects. ","start":"2023-09-07T00:00:00.000Z","end":"2023-09-09T00:00:00.000Z","location":"Accra, Ghana","organizationId":"ethaccra","dataImporter":[{"type":"gsheet","config":{"sheetId":"","apiKey":""}}],"website":"https://www.ethaccra.xyz/","archiveMode":false}
+{
+  "id": "ethaccra_2023",
+  "name": "EthAccra 2023",
+  "description": "ETHAccra is a 3-day hackathon striving to educate young generations of web3 developers and builders. ETHAccra wants to gather the best Ethereum builders in the world to create truly disruptive projects. ",
+  "start": "2023-09-07T00:00:00.000Z",
+  "end": "2023-09-09T00:00:00.000Z",
+  "location": "Accra, Ghana",
+  "organizationId": "ethaccra",
+  "website": "https://www.ethaccra.xyz/",
+  "archiveMode": false
+}
