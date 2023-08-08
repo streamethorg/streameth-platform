@@ -13,7 +13,7 @@ const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
       <div className="w-full h-full flex justify-center items-center">
         <p>There are no sessions scheduled for this stage.</p>
       </div>
-    );
+    )
   }
   return (
     <ComponetCard title={session.name} date={session.start}>
@@ -24,4 +24,4 @@ const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
   );
 };
 
-export default SessionInfoBox;
+export default SessionInfoBox

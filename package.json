@@ -6,7 +6,9 @@
     "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "  next build",
     "start": "next start -H 0.0.0.0 -p 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier:fix": "prettier --write ./data/**/**/*.json ./app/*.tsx ./components/",
+    "prettier:check": "prettier --check ./data/**/**/*.json ./app/*.tsx ./components/"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -38,6 +40,7 @@
     "wagmi": "^1.2.0"
   },
   "devDependencies": {
-    "@types/react-scroll": "^1.8.7"
+    "@types/react-scroll": "^1.8.7",
+    "prettier": "^3.0.1"
   }
 }

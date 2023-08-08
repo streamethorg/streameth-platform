@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { Player as LivepeerPlayer, useAssetMetrics, useAsset} from "@livepeer/react";
 import { useCallback } from "react";
@@ -23,8 +23,8 @@ const OfflinePlayer = () => {
         <Image src={Logo} width={100} height={100} alt="streamETH" />
       </a>
     </div>
-  );
-};
+  )
+}
 
 export const Player = ({
   playbackId,
@@ -41,20 +41,20 @@ export const Player = ({
   const mediaElementRef = useCallback(
     (ref: HTMLMediaElement) => {
       if (ref && process.env.NEXT_PUBLIC_MUX_ENV_KEY) {
-        const initTime = mux.utils.now();
+        const initTime = mux.utils.now()
         mux.monitor(ref, {
           debug: false,
           data: {
             env_key: process.env.NEXT_PUBLIC_MUX_ENV_KEY, // required
             // Metadata fields
-            player_name: playerName ?? "livepeer player", // any arbitrary string you want to use to identify this player
+            player_name: playerName ?? 'livepeer player', // any arbitrary string you want to use to identify this player
             player_init_time: initTime,
           },
-        });
+        })
       }
     },
     [playerName]
-  );
+  )
 
 
 
@@ -76,4 +76,4 @@ export const Player = ({
   );
 };
 
-export default Player;
+export default Player
