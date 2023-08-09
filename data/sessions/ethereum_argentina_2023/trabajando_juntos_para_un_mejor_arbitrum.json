@@ -1,1 +1,21 @@
-{"id":"trabajando_juntos_para_un_mejor_arbitrum","name":"Trabajando juntos para un mejor Arbitrum","description":"","start":"2023-08-19T12:00:00.000Z","end":"2023-08-19T12:30:00.000Z","stageId":"second_stage","speakers":[{"id":"ana_belen","name":"Ana belen","bio":"No description","eventId":"ethereum_argentina_2023","twitter":"","photo":"https://storage.tally.so/private/2-1-.png?id=yPk9ad&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlQazlhZCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY5MDQ4MDgzNX0.zCkTcpKgfcyx_H0l4jeH2LFFIylw9GzAw4oXeOiSs2k&signature=6279a02510f7bf72901de7878fe284d9d2022ef33f9ee6c43393c3f1d4afd7ec"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/trabajando_juntos_para_un_mejor_arbitrum.jpg"}
+{
+  "id": "trabajando_juntos_para_un_mejor_arbitrum",
+  "name": "Trabajando juntos para un mejor Arbitrum",
+  "description": "",
+  "start": "2023-08-19T12:00:00.000Z",
+  "end": "2023-08-19T12:30:00.000Z",
+  "stageId": "second_stage",
+  "speakers": [
+    {
+      "id": "ana_belen",
+      "name": "Ana belen",
+      "bio": "No description",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "",
+      "photo": "https://storage.tally.so/private/2-1-.png?id=yPk9ad&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlQazlhZCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY5MDQ4MDgzNX0.zCkTcpKgfcyx_H0l4jeH2LFFIylw9GzAw4oXeOiSs2k&signature=6279a02510f7bf72901de7878fe284d9d2022ef33f9ee6c43393c3f1d4afd7ec"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/trabajando_juntos_para_un_mejor_arbitrum.jpg"
+}

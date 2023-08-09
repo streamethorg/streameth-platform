@@ -1,1 +1,21 @@
-{"id":"crypto_ux_the_art_of_hiding_the_essential","name":"Crypto UX: The Art of Hiding the Essential","description":"","start":"2023-08-18T08:30:00.000Z","end":"2023-08-18T09:00:00.000Z","stageId":"main_stage","speakers":[{"id":"ged","name":"Ged","bio":"No description","eventId":"ethereum_argentina_2023","twitter":"@0xged","photo":"https://storage.tally.so/private/progress_image_100_35927e62-f329-4e7e-8256-5c8851a88e10.webp?id=rjGo8p&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJqR284cCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODQzMTAzNn0.gEZFtn0cwo3MnvXFVpld0vuzkBQdDgd5kDacXXm_EcE&signature=875c598f033ac9c41435259ad1f73fd7b39c34c5aafb0a70808336643c78f388"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/crypto_ux_the_art_of_hiding_the_essential.jpg"}
+{
+  "id": "crypto_ux_the_art_of_hiding_the_essential",
+  "name": "Crypto UX: The Art of Hiding the Essential",
+  "description": "",
+  "start": "2023-08-18T08:30:00.000Z",
+  "end": "2023-08-18T09:00:00.000Z",
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "ged",
+      "name": "Ged",
+      "bio": "No description",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@0xged",
+      "photo": "https://storage.tally.so/private/progress_image_100_35927e62-f329-4e7e-8256-5c8851a88e10.webp?id=rjGo8p&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJqR284cCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODQzMTAzNn0.gEZFtn0cwo3MnvXFVpld0vuzkBQdDgd5kDacXXm_EcE&signature=875c598f033ac9c41435259ad1f73fd7b39c34c5aafb0a70808336643c78f388"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/crypto_ux_the_art_of_hiding_the_essential.jpg"
+}

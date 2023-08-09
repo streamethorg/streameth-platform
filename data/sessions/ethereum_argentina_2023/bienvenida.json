@@ -1,1 +1,20 @@
-{"id":"bienvenida","name":"Bienvenida","description":"","start":"2023-08-18T06:30:00.000Z","end":"2023-08-18T07:00:00.000Z","stageId":"main_stage","speakers":[{"id":"ethereum_argentina_team","name":"Ethereum Argentina Team","bio":"No description","eventId":"ethereum_argentina_2023","twitter":"@EtherArgentina"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/bienvenida.jpg"}
+{
+  "id": "bienvenida",
+  "name": "Bienvenida",
+  "description": "",
+  "start": "2023-08-18T06:30:00.000Z",
+  "end": "2023-08-18T07:00:00.000Z",
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "ethereum_argentina_team",
+      "name": "Ethereum Argentina Team",
+      "bio": "No description",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@EtherArgentina"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/bienvenida.jpg"
+}

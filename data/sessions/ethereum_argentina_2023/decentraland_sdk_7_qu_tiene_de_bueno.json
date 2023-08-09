@@ -1,1 +1,12 @@
-{"id":"decentraland_sdk_7_qu_tiene_de_bueno","name":"Decentraland SDK 7: Qué tiene de bueno?","description":"","start":"2023-08-18T12:00:00.000Z","end":"2023-08-18T13:00:00.000Z","stageId":"workshop_2","speakers":[{"id":"nicolas_earnshaw","name":"Nicolas Earnshaw","bio":"No description","eventId":"ethereum_argentina_2023"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/decentraland_sdk_7_qu_tiene_de_bueno.jpg"}
+{
+  "id": "decentraland_sdk_7_qu_tiene_de_bueno",
+  "name": "Decentraland SDK 7: Qué tiene de bueno?",
+  "description": "",
+  "start": "2023-08-18T12:00:00.000Z",
+  "end": "2023-08-18T13:00:00.000Z",
+  "stageId": "workshop_2",
+  "speakers": [{ "id": "nicolas_earnshaw", "name": "Nicolas Earnshaw", "bio": "No description", "eventId": "ethereum_argentina_2023" }],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/decentraland_sdk_7_qu_tiene_de_bueno.jpg"
+}

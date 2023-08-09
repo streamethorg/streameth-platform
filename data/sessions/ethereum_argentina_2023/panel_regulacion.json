@@ -1,1 +1,17 @@
-{"id":"panel_regulacion","name":"Panel Regulacion","description":"","start":"2023-08-18T14:30:00.000Z","end":"2023-08-18T15:00:00.000Z","stageId":"main_stage","speakers":[{"id":"juan_pablo_fridenberg","name":"Juan Pablo Fridenberg","bio":"No description","eventId":"ethereum_argentina_2023"},{"id":"juanma_caceres","name":"Juanma Caceres","bio":"No description","eventId":"ethereum_argentina_2023"},{"id":"maria_sol_ms","name":"Maria Sol Más","bio":"No description","eventId":"ethereum_argentina_2023"},{"id":"santigo_mora","name":"Santigo Mora","bio":"No description","eventId":"ethereum_argentina_2023"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/panel_regulacion.jpg"}
+{
+  "id": "panel_regulacion",
+  "name": "Panel Regulacion",
+  "description": "",
+  "start": "2023-08-18T14:30:00.000Z",
+  "end": "2023-08-18T15:00:00.000Z",
+  "stageId": "main_stage",
+  "speakers": [
+    { "id": "juan_pablo_fridenberg", "name": "Juan Pablo Fridenberg", "bio": "No description", "eventId": "ethereum_argentina_2023" },
+    { "id": "juanma_caceres", "name": "Juanma Caceres", "bio": "No description", "eventId": "ethereum_argentina_2023" },
+    { "id": "maria_sol_ms", "name": "Maria Sol Más", "bio": "No description", "eventId": "ethereum_argentina_2023" },
+    { "id": "santigo_mora", "name": "Santigo Mora", "bio": "No description", "eventId": "ethereum_argentina_2023" }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/panel_regulacion.jpg"
+}
