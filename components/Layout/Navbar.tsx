@@ -40,7 +40,7 @@ export default function Navbar({
   }
 
   return (
-    <header className="shadow lg:shadow-sm z-20 bg-base lg:border-r border-primary absolute bottom-0 lg:top-0 lg:left-0 w-full lg:w-20 lg:h-screen">
+    <header className=" shadow lg:shadow-sm z-20 bg-base lg:border-r border-primary fixed bottom-0 lg:top-0 lg:left-0 w-full lg:w-20 lg:h-screen">
       <div className="flex flex-row lg:flex-col lg:items-center justify-between ">
         <div className="hidden items-center lg:flex lg:py-2">
           <Link href="/">

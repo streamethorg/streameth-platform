@@ -7,7 +7,7 @@ import { SocialIcon } from 'react-social-icons'
 
 export default function Navbar() {
   return (
-    <header className="flex flex-row bg-base border-b border-primary w-full ml-auto p-4 py-2 ">
+    <header className=" flex flex-row bg-base border-b border-primary w-full ml-auto p-4 py-2 ">
       <div className=" flex items-center w-20">
         <Link href="/" className="">
           <span className="sr-only">Logo</span>
