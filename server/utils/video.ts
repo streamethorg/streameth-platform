@@ -1,10 +1,8 @@
 import ffmpeg from "fluent-ffmpeg";
 import axios from "axios";
-import path from "path";
 import fs from "fs";
 
 export async function extractFirstFrame(hlsUrl: string, filePath: string) {
-  console.log(hlsUrl, filePath);
   // Check if the file already exists
   if (fs.existsSync(filePath)) {
     console.log("File already exists, skipping frame extraction.");
@@ -21,7 +19,6 @@ export async function extractFirstFrame(hlsUrl: string, filePath: string) {
   // if (!tsUrl) {
   //   throw new Error("No .ts URL found in HLS stream");
   // }
-console.log(tsUrl)
 ffmpeg(hlsUrl)
 .screenshots({
   timemarks: ['00:00:06.000'],

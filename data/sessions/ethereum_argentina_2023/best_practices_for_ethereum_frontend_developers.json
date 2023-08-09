@@ -1,0 +1,12 @@
+{
+  "id": "best_practices_for_ethereum_frontend_developers",
+  "name": "Best Practices for Ethereum Frontend Developers",
+  "description": "",
+  "start": "2023-08-19T13:00:00.000Z",
+  "end": "2023-08-19T14:00:00.000Z",
+  "stageId": "workshop_2",
+  "speakers": [{ "id": "andrew_schmidt", "name": "Andrew Schmidt", "bio": "No description", "eventId": "ethereum_argentina_2023" }],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/best_practices_for_ethereum_frontend_developers.jpg"
+}

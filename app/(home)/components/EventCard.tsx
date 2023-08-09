@@ -1,15 +1,38 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { IEvent } from "@/server/model/event";
 import Image from "next/image";
 import Logo from "@/public/logo.png";
-import Link from "next/link";
 import Card from "@/components/misc/Card";
+import { ModalContext } from "@/components/context/ModalContext";
+import { useRouter } from "next/navigation";
+import {hasData} from "@/server/utils";
+
 const EventCard = ({ event }: { event: IEvent }) => {
   const [image, setImage] = useState("/events/" + event.id + ".png");
+  const { openModal } = useContext(ModalContext);
+  const router = useRouter();
+  
+  const onCardClick = () => {
+    if (hasData({event})) {
+      router.push(`${event.organizationId}/${event.id}`);
+    } else {
+      openModal(
+        <div className="flex flex-col items-center">
+          <h1 className="text-2xl text-main-text font-bold">
+            This event has no data yet
+          </h1>
+          <p className="text-secondary-text text-center">
+            This event has no data. Please contact the event organizer to
+            request access.
+          </p>
+        </div>
+      );
+    }
+  };
 
   return (
-    <Link href={`${event.organizationId}/${event.id}`}>
+    <a onClick={onCardClick}>
       <Card>
         <div className="aspect-video relative">
           <Image
@@ -38,7 +61,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
           </p>
         </div>
       </Card>
-    </Link>
+    </a>
   );
 };
 

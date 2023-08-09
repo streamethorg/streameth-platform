@@ -1,0 +1,21 @@
+{
+  "id": "a_defi_portfolio__tracking__solution",
+  "name": "A DEFI Portfolio  Tracking  Solution",
+  "description": "",
+  "start": "2023-08-18T10:00:00.000Z",
+  "end": "2023-08-18T11:00:00.000Z",
+  "stageId": "workshop_1",
+  "speakers": [
+    {
+      "id": "uri",
+      "name": "Uri",
+      "bio": "No description",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "",
+      "photo": "https://storage.tally.so/private/Captura-de-pantalla-02.08.2023-a-12.01.38-p.-m..png?id=b5EkG0&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI1RWtHMCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY5MDk4ODUyN30.FcHEXdnCiN_QLnWt793_C85qA_twnoHO3Pw6dbzdtYM&signature=81d3535c31c2f0e8384f240686f8bc66b4403b2141571116fc26207efa3a3777"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/a_defi_portfolio__tracking__solution.jpg"
+}

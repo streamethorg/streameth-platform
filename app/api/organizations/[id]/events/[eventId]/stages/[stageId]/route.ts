@@ -8,7 +8,6 @@ export async function GET(
     params: { id: string; eventId: string; stageId: string };
   }
 ) {
-  console.log("params", params);
   const stageController = new StageController();
   try {
     const data = await stageController.getStage(params.stageId, params.eventId);

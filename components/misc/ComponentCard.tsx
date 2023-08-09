@@ -6,15 +6,13 @@ const ComponentCard = ({
   date,
   streatch = false,
 }: {
-  streatch?: boolean;
-  title?: string;
-  date?: Date;
-  children: React.ReactNode;
+  streatch?: boolean
+  title?: string
+  date?: Date
+  children: React.ReactNode
 }) => {
   return (
-    <div
-      className={`shadow rounded flex flex-col bg-base`}
-    >
+    <div className={`shadow rounded flex flex-col bg-base`}>
       {title && (
         <div className="flex font-bold flex-col md:flex-row rounded-t border-b-2 border-accent text-main-text p-3 px-4 uppercase ">
           {title}

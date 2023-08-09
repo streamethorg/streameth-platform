@@ -6,7 +6,7 @@ import { FilterContext } from "@/app/[organization]/[event]/archive/components/F
 
 const FilterBar = ({ events }: { events: IEvent[] }) => {
   const { setFilterOptions } = useContext(FilterContext);
-  const [isShowCurrent, setIsShowCurrent] = useState(true);
+  const [isShowCurrent, setIsShowCurrent] = useState(false);
 
   const eventFilter = events.map((event) => {
     return {
@@ -26,7 +26,6 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
         value: "date",
         type: "date",
         filterFunc: async (item: IEvent) => {
-          console.log(item.start.getTime(), Date.now());
           return isShowCurrent
             ? item.start.getTime() < Date.now()
             : item.start.getTime() > Date.now();

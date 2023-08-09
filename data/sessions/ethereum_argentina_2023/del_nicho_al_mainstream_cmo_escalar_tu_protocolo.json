@@ -1,0 +1,21 @@
+{
+  "id": "del_nicho_al_mainstream_cmo_escalar_tu_protocolo",
+  "name": "Del nicho al mainstream. Cómo escalar tu protocolo",
+  "description": "",
+  "start": "2023-08-18T09:00:00.000Z",
+  "end": "2023-08-18T09:30:00.000Z",
+  "stageId": "second_stage",
+  "speakers": [
+    {
+      "id": "juani_gallo",
+      "name": "Juani Gallo",
+      "bio": "No description",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "",
+      "photo": "https://storage.tally.so/private/EEFA91EF-AF24-433B-B0BE-C6F0E53A7D95.jpeg?id=9q2LGp&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlxMkxHcCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODQwMDAwMX0.PTbnd1zdTJ48Jqj_2g2dP2RRVhb6AwqMob5IsYuvNn0&signature=c55471967d4194ba15f40ed66e442fdf651ea3b6727b3a6caee9d7cf7e12ae13"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/del_nicho_al_mainstream_cmo_escalar_tu_protocolo.jpg"
+}

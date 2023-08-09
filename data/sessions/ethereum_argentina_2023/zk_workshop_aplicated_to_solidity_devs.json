@@ -1,0 +1,21 @@
+{
+  "id": "zk_workshop_aplicated_to_solidity_devs",
+  "name": " ZK workshop aplicated to solidity devs",
+  "description": "",
+  "start": "2023-08-18T08:10:00.000Z",
+  "end": "2023-08-18T09:00:00.000Z",
+  "stageId": "workshop_1",
+  "speakers": [
+    {
+      "id": "ahmed",
+      "name": "Ahmed",
+      "bio": "No description",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "",
+      "photo": "https://storage.tally.so/private/06-removebg-preview.png?id=A74bRo&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkE3NGJSbyIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODc0OTMyNX0.P3WvNd5DIMr0634Z3YDS_zMlBOgsIP17rA1WDgRE_Kg&signature=8f180e9c9ccaa42a22e876635af382f8c52e1f0b8f0b764c42c1ec30c789bfb0"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/zk_workshop_aplicated_to_solidity_devs.jpg"
+}

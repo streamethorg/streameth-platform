@@ -2,6 +2,7 @@ import EventController from '@/server/controller/event'
 import EventList from '@/app/(home)/components/EventList'
 import FilterBar from './components/FilterBar'
 import { FilterContextProvider } from '@/app/[organization]/[event]/archive/components/FilterContext'
+import { hasData } from '@/server/utils'
 export default async function Home() {
   const eventController = new EventController()
   const allEvents = (await eventController.getAllEvents()).map((event) => {
@@ -10,7 +11,7 @@ export default async function Home() {
 
   return (
     <FilterContextProvider items={allEvents}>
-      <main className="flex flex-col bg-background w-screen m-auto lg:overflow-hidden">
+      <main className="flex flex-col bg-background w-screen mx-auto lg:overflow-hidden">
         <FilterBar events={allEvents} />
         <EventList />
       </main>
