@@ -1,1 +1,8 @@
-{"id":"ethereum_argentina","name":"Ethereum Argentina","description":"The Argentinian Ethereum community is thrilled to announce the Ethereum Argentina event. This four-day event will take place from August 16th to 19th at the Centro de Convenciones (CEC) in Buenos Aires. The event serves as a dynamic platform for users, educators, students, entrepreneurs, developers, and blockchain enthusiasts to gather, exchange knowledge, share news, and showcase their experiences within the Ethereum and blockchain technology space.","url":"https://ethereumargentina.org/","logo":"https://pbs.twimg.com/profile_images/1651503136152928256/dqUQ6F0d_400x400.jpg","location":"Buenos Aires, Argentina"}
+{
+  "id": "ethereum_argentina",
+  "name": "Ethereum Argentina",
+  "description": "The Argentinian Ethereum community is thrilled to announce the Ethereum Argentina event. This four-day event will take place from August 16th to 19th at the Centro de Convenciones (CEC) in Buenos Aires. The event serves as a dynamic platform for users, educators, students, entrepreneurs, developers, and blockchain enthusiasts to gather, exchange knowledge, share news, and showcase their experiences within the Ethereum and blockchain technology space.",
+  "url": "https://ethereumargentina.org/",
+  "logo": "https://pbs.twimg.com/profile_images/1651503136152928256/dqUQ6F0d_400x400.jpg",
+  "location": "Buenos Aires, Argentina"
+}

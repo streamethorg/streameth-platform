@@ -26,7 +26,6 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
         value: "date",
         type: "date",
         filterFunc: async (item: IEvent) => {
-          console.log(item.start.getTime(), Date.now());
           return isShowCurrent
             ? item.start.getTime() < Date.now()
             : item.start.getTime() > Date.now();

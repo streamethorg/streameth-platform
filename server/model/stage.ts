@@ -1,7 +1,6 @@
 import { IsNotEmpty, validate } from "class-validator";
 import { IEvent } from "./event";
 import { generateId, BASE_PATH } from "../utils";
-import { IOrganization } from "./organization";
 import path from "path";
 export interface IStreamSettings {
   streamId: string;

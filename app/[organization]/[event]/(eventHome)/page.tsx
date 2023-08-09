@@ -4,6 +4,7 @@ import SchedulePage from "./components/SchedulePage";
 import StageController from "@/server/controller/stage";
 import { FilterContextProvider } from "../archive/components/FilterContext";
 import { notFound } from "next/navigation";
+import { hasData } from "@/server/utils";
 
 
 
@@ -24,6 +25,9 @@ const EventPage = async ({
       params.event,
       params.organization
     );
+
+    if (!hasData({event})) return notFound();
+
     const stages = await stageController.getAllStagesForEvent(event.id);
     const sessions = await sessionController.getAllSessionsForEvent(event.id);
 

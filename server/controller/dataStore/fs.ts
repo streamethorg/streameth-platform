@@ -29,11 +29,20 @@ export default class FsController {
   }
 
   public async read(path: string): Promise<string> {
-    return this.readFileAsync(path, { encoding: "utf8" });
+    try {
+    return await this.readFileAsync(path, { encoding: "utf8" });
+  }
+    catch (e) {
+      return "";
+    }
   }
 
   public async readAll(path: string): Promise<string[]> {
-    return this.readdirAsync(path);
+    try {
+      return await this.readdirAsync(path);
+    } catch (e) {
+      return [];
+    }
   }
 
   public async write(filePath: string, data: string): Promise<void> {

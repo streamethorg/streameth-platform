@@ -3,18 +3,18 @@ import { useState, useContext } from "react";
 import { IEvent } from "@/server/model/event";
 import Image from "next/image";
 import Logo from "@/public/logo.png";
-import Link from "next/link";
 import Card from "@/components/misc/Card";
 import { ModalContext } from "@/components/context/ModalContext";
 import { useRouter } from "next/navigation";
+import {hasData} from "@/server/utils";
+
 const EventCard = ({ event }: { event: IEvent }) => {
   const [image, setImage] = useState("/events/" + event.id + ".png");
-  const hasData = event.dataImporter != undefined;
   const { openModal } = useContext(ModalContext);
   const router = useRouter();
   
   const onCardClick = () => {
-    if (hasData) {
+    if (hasData({event})) {
       router.push(`${event.organizationId}/${event.id}`);
     } else {
       openModal(

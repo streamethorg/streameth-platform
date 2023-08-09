@@ -82,7 +82,7 @@ export default class Event implements IEvent {
     this.dataImporter = dataImporter;
     this.eventCover = eventCover;
     this.website = website;
-    this.archiveMode = archiveMode ?? false;
+    this.archiveMode = archiveMode ?? true;
     this.validateThis();
   }
 

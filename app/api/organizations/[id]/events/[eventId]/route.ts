@@ -6,7 +6,6 @@ export async function GET(
   { params }: { params: { id: string; eventId: string } }
 ) {
   const eventController = new EventController();
-  console.log(params);
   try {
     const data = await eventController.getEvent(params.eventId, params.id);
     return NextResponse.json(data);

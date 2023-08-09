@@ -12,7 +12,6 @@ export default class OrganizationController {
     organizationId: IOrganization["id"]
   ): Promise<Organization> {
     const organizationQuery = await Organization.getOrganizationPath(organizationId);
-    console.log("organizationQuery ", organizationQuery);
     const data = await this.controller.get(organizationQuery);
     return new Organization({ ...data });
   }

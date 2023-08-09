@@ -8,7 +8,6 @@ export async function GET(
     params: { id: string; eventId: string };
   }
 ) {
-  console.log(params);
   const sessionController = new SessionController();
   try {
     const data = await sessionController.getAllSessionsForEvent(params.eventId);
