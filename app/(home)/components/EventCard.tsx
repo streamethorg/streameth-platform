@@ -12,9 +12,10 @@ const EventCard = ({ event }: { event: IEvent }) => {
   const [image, setImage] = useState('/events/' + event.id + '.png')
   const { openModal } = useContext(ModalContext)
   const router = useRouter()
+  const isAvailable = hasData({ event })
 
   const onCardClick = () => {
-    if (hasData({ event })) {
+    if (isAvailable) {
       router.push(`${event.organizationId}/${event.id}`)
     } else {
       openModal(
@@ -28,7 +29,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
 
   return (
     <a onClick={onCardClick}>
-      <Card>
+      <Card isAvailable={isAvailable}>
         <div className="aspect-video relative">
           <Image
             className="rounded"
