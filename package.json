@@ -7,8 +7,8 @@
     "build": "  next build",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
-    "prettier:fix": "prettier --write ./data/**/**/*.json ./app/*.tsx ./components/",
-    "prettier:check": "prettier --check ./data/**/**/*.json ./app/*.tsx ./components/"
+    "prettier:fix": "prettier --write './data' './app' './components'",
+    "prettier:check": "prettier --check './data' './app' './components'"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
