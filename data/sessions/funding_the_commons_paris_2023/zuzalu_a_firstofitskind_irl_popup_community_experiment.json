@@ -5,15 +5,9 @@
   "start": "2023-07-15T14:20:00.000Z",
   "end": "2023-07-15T14:40:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "janine_leger",
-      "name": "Janine Leger",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/687586kfc8xgy2t7/index.m3u8",
-  "playbackId": "687586kfc8xgy2t7",
-  "eventId": "funding_the_commons_paris_2023"
+  "speakers": [{ "id": "janine_leger", "name": "Janine Leger", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
+  "videoUrl": "https://lp-playback.com/hls/2b3fbsjhsqpivblo/index.m3u8",
+  "playbackId": "2b3fbsjhsqpivblo",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/zuzalu_a_firstofitskind_irl_popup_community_experiment.jpg"
 }

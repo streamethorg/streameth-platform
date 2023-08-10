@@ -5,15 +5,9 @@
   "start": "2023-07-15T09:55:00.000Z",
   "end": "2023-07-15T10:25:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "juan_benet",
-      "name": "Juan Benet",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/58d4v6a74i3opcfj/index.m3u8",
-  "playbackId": "58d4v6a74i3opcfj",
-  "eventId": "funding_the_commons_paris_2023"
+  "speakers": [{ "id": "juan_benet", "name": "Juan Benet", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
+  "videoUrl": "https://lp-playback.com/hls/9e3beiavxfquana8/index.m3u8",
+  "playbackId": "9e3beiavxfquana8",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/priorities_for_public_goods_builders_in_2023.jpg"
 }

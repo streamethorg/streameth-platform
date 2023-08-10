@@ -6,26 +6,12 @@
   "end": "2023-07-16T12:40:00.000Z",
   "stageId": "farabeuf_amphitheater",
   "speakers": [
-    {
-      "id": "jesse_pollak_creator_of_base_and_head_of_protocols_coinbase",
-      "name": "​Jesse Pollak, Creator of Base and Head of Protocols, Coinbase",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "lucas_vogelsang_cofounder_centrifuge",
-      "name": "​Lucas Vogelsang, Co-Founder, Centrifuge",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "cassidy_daly_product_strategy_centrifuge__moderator",
-      "name": "​Cassidy Daly, Product Strategy, Centrifuge - Moderator",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
+    { "id": "jesse_pollak", "name": "​Jesse Pollak", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
+    { "id": "cassidy_daly", "name": "​Cassidy Daly", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
+    { "id": "lucas_vogelsang", "name": "​Lucas Vogelsang", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }
   ],
   "videoUrl": "https://lp-playback.com/hls/09fdb5d2bpvnaec7/index.m3u8",
   "playbackId": "09fdb5d2bpvnaec7",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/invisible_hands_tangible_solutions_is_capitalism_really_the_problem.jpg"
 }

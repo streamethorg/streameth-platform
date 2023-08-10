@@ -5,15 +5,9 @@
   "start": "2023-07-15T10:25:00.000Z",
   "end": "2023-07-15T10:45:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "marieke_flament",
-      "name": "Marieke Flament",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/542b8o1292y53xkc/index.m3u8",
-  "playbackId": "542b8o1292y53xkc",
-  "eventId": "funding_the_commons_paris_2023"
+  "speakers": [{ "id": "marieke_flament", "name": "Marieke Flament", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
+  "videoUrl": "https://lp-playback.com/hls/869ehitkdoo69tly/index.m3u8",
+  "playbackId": "869ehitkdoo69tly",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/the_open_web_is_near_how_the_bos_ndc_and_daos_are_creating_a_decentralized_web.jpg"
 }

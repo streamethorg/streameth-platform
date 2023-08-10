@@ -6,14 +6,10 @@
   "end": "2023-07-15T11:05:00.000Z",
   "stageId": "farabeuf_amphitheater",
   "speakers": [
-    {
-      "id": "primavera_de_filippi",
-      "name": "Primavera De Filippi",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
+    { "id": "primavera_de_filippi", "name": "Primavera De Filippi", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }
   ],
-  "videoUrl": "https://lp-playback.com/hls/75fc9vlx25ym4jts/index.m3u8",
-  "playbackId": "75fc9vlx25ym4jts",
-  "eventId": "funding_the_commons_paris_2023"
+  "videoUrl": "https://lp-playback.com/hls/fbdane04kz9cy0md/index.m3u8",
+  "playbackId": "fbdane04kz9cy0md",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/copylefting_the_patent_system_with_desci.jpg"
 }
