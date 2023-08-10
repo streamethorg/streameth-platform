@@ -20,7 +20,7 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
     return <div>Loading</div>
   }
   return (
-    <div className="relative flex flex-col h-96 lg:h-full">
+    <div className="relative flex flex-col min-h-[96rem] lg:h-full">
       {isDisconnected ? (
         <>
           <iframe className="h-full" src={`https://stingray-app-u9f8x.ondigitalocean.app/${conversationId}?isCastr=${true}`} />

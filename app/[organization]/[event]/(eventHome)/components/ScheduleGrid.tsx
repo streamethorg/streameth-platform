@@ -5,7 +5,7 @@ import { useContext, useMemo } from 'react'
 export default function ScheduleGrid({ children }: { children: React.ReactNode }) {
   const { filteredItems: sessions } = useContext(FilterContext)
   const earliestTime = useMemo(() => getEarliestTime(sessions), [sessions])
-  const totalSlots = useMemo(() => getTotalSlots(sessions, earliestTime), [sessions, earliestTime]) 
+  const totalSlots = useMemo(() => getTotalSlots(sessions, earliestTime), [sessions, earliestTime]) + 11
 
   return (
     <div className="flex flex-col w-full relative " style={{ height: totalSlots * CELL_HEIGHT + 'rem' }}>

@@ -19,7 +19,7 @@ export default function PluginBar({
 
   return (
     <div className="flex flex-col rounded shadow h-full bg-base">
-      <div className="z-50 flex flex-row w-full bg-secondary p-4">
+      <div className="flex flex-row w-full bg-secondary p-4">
         {tabs.map((tab) => (
           <div key={tab.id} onClick={() => setSelectedId(tab.id)} className="m-2 w-full ">
             <div

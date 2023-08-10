@@ -42,8 +42,8 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
 
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
-      <div className="flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:gap-4 lg:overflow-scroll">
-        <div className=" md:relative">
+      <div className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:gap-4 lg:overflow-scroll">
+        <div className="md:relative">
           <ActionsComponent session={currentSession} title />
           <Player playbackId={currentSession.playbackId} playerName={currentSession.name} coverImage={currentSession.coverImage} />
         </div>

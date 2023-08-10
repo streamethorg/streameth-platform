@@ -2,14 +2,10 @@ import { useEffect } from 'react'
 
 const Modal = ({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) => {
   useEffect(() => {
-    const handleNavigationChange = () => {
+    return () => {
       if (open) {
         onClose()
       }
-    }
-    window.addEventListener('beforeunload', handleNavigationChange)
-    return () => {
-      window.removeEventListener('beforeunload', handleNavigationChange)
     }
   }, [open, onClose])
 
