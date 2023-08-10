@@ -14,7 +14,7 @@ const run = async () => {
   const organizationInstance = await orgController.createOrganization(Organization)
 
   const Event = {
-    name: 'Zuzalu Montenegro 2023 - CryptoxAI',
+    name: 'Zuzalu Montenegro 2023 - Other',
     description:
       'Join 200 core residents brought together by a shared desire to learn, create, live longer and healthier lives, and build self-sustaining communities.',
     start: new Date('2023-03-25T00:00:00.000Z'),
@@ -25,7 +25,7 @@ const run = async () => {
       {
         type: 'gsheet' as 'gsheet',
         config: {
-          sheetId: '1yBxwb9R5YcUOuJ9_af4GgeSwWmnXvD1FXHtpbm1LsKE',
+          sheetId: '1rvWyrBKIMCscwRGTciU0cnEiTGcpYzXxkLv9UH31seI',
           apiKey: 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w',
         },
       },

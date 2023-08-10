@@ -1,0 +1,18 @@
+{
+  "id": "zuzalu_town_hall_activation",
+  "name": "Zuzalu Town Hall Activation",
+  "description": "A weekly gathering of our entire community that is HIGHLY encouraged for all current residents to attend.&nbsp;\nThis is your chance to help shape the future of our community! Come learn about important information for the week, learn about how the community and Zuzalu is evolving, and make a meaningful impact on our collective vision for Zuzalu now and in the future.\n\nAs residents of the Zuzalu community, your participation is crucial for our continued success. ",
+  "start": "2023-04-25T12:30:00.000Z",
+  "end": "2023-04-25T13:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    { "id": "janine_leger", "name": "Janine Leger", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
+    { "id": "vitalik_buterin", "name": "Vitalik Buterin", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
+    { "id": "milos_x", "name": "Milos x", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
+    { "id": "nicole_sun", "name": "Nicole Sun", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/8712yvnwrg6thsjl/index.m3u8",
+  "playbackId": "8712yvnwrg6thsjl",
+  "eventId": "zuzalu_montenegro_2023__other",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__other/zuzalu_town_hall_activation.jpg"
+}
