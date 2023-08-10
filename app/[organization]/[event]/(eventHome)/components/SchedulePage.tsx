@@ -19,7 +19,7 @@ const SchedulePage = ({ stages, event }: { stages: IStage[]; event: IEvent }) =>
 
   return (
     <>
-      <div className="sticky top-0 z-50 flex flex-row flex-wrap md:flex-col bg-base justify-center">
+      <div className="sticky top-0 z-10 flex flex-row flex-wrap md:flex-col bg-base justify-center">
         <DateFilter event={event} />
         <StageSelect stages={stages} selectedStage={selectedStage} setSelectedStage={setSelectedStage} />
       </div>

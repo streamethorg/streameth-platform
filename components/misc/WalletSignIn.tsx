@@ -1,5 +1,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-export const WalletSignIn = () => {
+
+
+const SignIn = () => {
   return (
     <ConnectButton.Custom>
       {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
@@ -18,7 +20,7 @@ export const WalletSignIn = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button onClick={openConnectModal} type="button">
+                  <button className="w-full" onClick={openConnectModal} type="button">
                     Connect Wallet
                   </button>
                 )
@@ -61,5 +63,12 @@ export const WalletSignIn = () => {
     </ConnectButton.Custom>
   )
 }
+
+export const WalletSignIn = () => (
+  <div className="ml-2 relative border rounded border-accent bg-white hover:shadow-md shadow-slate-500 px-5 py-2 text-sm font-medium text-accent">
+    {/* <span className="absolute  bg-gray-300 hover:bg-white text-sm font-medium text-black h-full w-[90%] -z-20" /> */}
+    <SignIn />
+  </div>
+)
 
 export default WalletSignIn

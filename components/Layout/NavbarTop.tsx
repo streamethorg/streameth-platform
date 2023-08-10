@@ -17,10 +17,6 @@ export default function Navbar() {
       <div className="flex flex-row items-center justify-end  w-full">
         <SocialIcon url={`https://twitter.com/streameth`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
         <SocialIcon url={`https://github.com/efdevcon/streameth`} target="_blank" bgColor="#fff" fgColor="#000" className={`"h-8 w-8"`} />
-        <div className="ml-2 relative border rounded border-accent bg-white hover:shadow-md shadow-slate-500 px-5 py-2 text-sm font-medium text-accent">
-          <span className="absolute  bg-gray-300 hover:bg-white text-sm font-medium text-black h-full w-[90%] -z-20" />
-          <WalletSignIn />
-        </div>
       </div>
     </header>
   )
