@@ -33,7 +33,7 @@ export default function PluginBar({
           </div>
         ))}
       </div>
-      <div className="flex flex-col w-full flex-grow" key={selectedId}>
+      <div className="flex flex-col w-full flex-grow lg:overflow-scroll" key={selectedId}>
         {selectedTab.content}
       </div>
     </div>
