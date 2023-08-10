@@ -1,1 +1,16 @@
-{"id":"seaside_chat_alignment_as_a_layer_in_the_stack","name":"Seaside Chat: Alignment as a Layer in the Stack","description":"cryptoxai.wtf","start":"2023-05-07T05:30:00.000Z","end":"2023-05-07T06:30:00.000Z","stageId":"lighthouse","speakers":[{"id":"rob_knight","name":"Rob Knight","bio":"No description","eventId":"zuzalu_montenegro_2023__cryptoxai"},{"id":"nate_soares","name":"Nate Soares","bio":"No description","eventId":"zuzalu_montenegro_2023__cryptoxai"}],"videoUrl":"https://lp-playback.com/hls/2acbl6qs6bj5p1ri/index.m3u8","playbackId":"2acbl6qs6bj5p1ri","eventId":"zuzalu_montenegro_2023__cryptoxai","coverImage":"/sessions/zuzalu_montenegro_2023__cryptoxai/seaside_chat_alignment_as_a_layer_in_the_stack.jpg"}
+{
+  "id": "seaside_chat_alignment_as_a_layer_in_the_stack",
+  "name": "Seaside Chat: Alignment as a Layer in the Stack",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    { "id": "rob_knight", "name": "Rob Knight", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" },
+    { "id": "nate_soares", "name": "Nate Soares", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/2acbl6qs6bj5p1ri/index.m3u8",
+  "playbackId": "2acbl6qs6bj5p1ri",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/seaside_chat_alignment_as_a_layer_in_the_stack.jpg"
+}

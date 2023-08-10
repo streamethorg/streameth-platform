@@ -1,1 +1,13 @@
-{"id":"problems_that_organisations_in_the_public_goods_space_are_facing_and_possible_solutions","name":"Problems that Organisations in the Public Goods Space are facing, and Possible Solutions","description":"The video is a discussion about whether or not Ethereum is a public good. The participants debate the definition of public goods and whether Ethereum is non-excludable and non-rivalrous. They also discuss the issues of financial exclusion and censorship on the Ethereum network. The group ultimately concludes that the traditional definition of public goods may not apply to modern technology and that the concept needs to be redefined.","start":"2023-04-14T11:30:00.000Z","end":"2023-04-14T12:50:00.000Z","stageId":"dome","speakers":[{"id":"manu_alzuru","name":"Manu Alzuru","bio":"No description","eventId":"zuzalu_montenegro_2023__public_goods"}],"videoUrl":"https://lp-playback.com/hls/62b4cnvlox0m1bp5/index.m3u8","playbackId":"62b4cnvlox0m1bp5","eventId":"zuzalu_montenegro_2023__public_goods","coverImage":"/sessions/zuzalu_montenegro_2023__public_goods/problems_that_organisations_in_the_public_goods_space_are_facing_and_possible_solutions.jpg"}
+{
+  "id": "problems_that_organisations_in_the_public_goods_space_are_facing_and_possible_solutions",
+  "name": "Problems that Organisations in the Public Goods Space are facing, and Possible Solutions",
+  "description": "The video is a discussion about whether or not Ethereum is a public good. The participants debate the definition of public goods and whether Ethereum is non-excludable and non-rivalrous. They also discuss the issues of financial exclusion and censorship on the Ethereum network. The group ultimately concludes that the traditional definition of public goods may not apply to modern technology and that the concept needs to be redefined.",
+  "start": "2023-04-14T11:30:00.000Z",
+  "end": "2023-04-14T12:50:00.000Z",
+  "stageId": "dome",
+  "speakers": [{ "id": "manu_alzuru", "name": "Manu Alzuru", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }],
+  "videoUrl": "https://lp-playback.com/hls/62b4cnvlox0m1bp5/index.m3u8",
+  "playbackId": "62b4cnvlox0m1bp5",
+  "eventId": "zuzalu_montenegro_2023__public_goods",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/problems_that_organisations_in_the_public_goods_space_are_facing_and_possible_solutions.jpg"
+}

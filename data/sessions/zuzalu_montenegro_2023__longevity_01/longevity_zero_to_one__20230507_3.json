@@ -1,1 +1,13 @@
-{"id":"longevity_zero_to_one__20230507_3","name":"Longevity Zero to One - 2023-05-07 3","description":"","start":"2023-05-07T14:30:00.000Z","end":"2023-05-07T15:30:00.000Z","stageId":"dome","speakers":[{"id":"cat_thu","name":"Cat Thu","bio":"No description","eventId":"zuzalu_montenegro_2023__longevity_01"}],"videoUrl":"https://lp-playback.com/hls/82a60n0nq9rxps77/index.m3u8","playbackId":"82a60n0nq9rxps77","eventId":"zuzalu_montenegro_2023__longevity_01","coverImage":"/sessions/zuzalu_montenegro_2023__longevity_01/longevity_zero_to_one__20230507_3.jpg"}
+{
+  "id": "longevity_zero_to_one__20230507_3",
+  "name": "Longevity Zero to One - 2023-05-07 3",
+  "description": "",
+  "start": "2023-05-07T14:30:00.000Z",
+  "end": "2023-05-07T15:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [{ "id": "cat_thu", "name": "Cat Thu", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_01" }],
+  "videoUrl": "https://lp-playback.com/hls/82a60n0nq9rxps77/index.m3u8",
+  "playbackId": "82a60n0nq9rxps77",
+  "eventId": "zuzalu_montenegro_2023__longevity_01",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_01/longevity_zero_to_one__20230507_3.jpg"
+}

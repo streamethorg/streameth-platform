@@ -1,1 +1,13 @@
-{"id":"new_cities_and_network_states__takeaways","name":"New Cities and Network States - Takeaways","description":"Panel Discussion: Summary, Takeaways and Next Steps. Mark Lutter, Patri Friedman, Vitalik Buterin\n","start":"2023-04-30T12:00:00.000Z","end":"2023-04-30T13:00:00.000Z","stageId":"dome","speakers":[{"id":"mark_lutter","name":"Mark Lutter","bio":"No description","eventId":"zuzalu_montenegro_2023__network_states"}],"videoUrl":"https://lp-playback.com/hls/96b2q3rrvv16qnl8/index.m3u8","playbackId":"96b2q3rrvv16qnl8","eventId":"zuzalu_montenegro_2023__network_states","coverImage":"/sessions/zuzalu_montenegro_2023__network_states/new_cities_and_network_states__takeaways.jpg"}
+{
+  "id": "new_cities_and_network_states__takeaways",
+  "name": "New Cities and Network States - Takeaways",
+  "description": "Panel Discussion: Summary, Takeaways and Next Steps. Mark Lutter, Patri Friedman, Vitalik Buterin\n",
+  "start": "2023-04-30T12:00:00.000Z",
+  "end": "2023-04-30T13:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [{ "id": "mark_lutter", "name": "Mark Lutter", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" }],
+  "videoUrl": "https://lp-playback.com/hls/96b2q3rrvv16qnl8/index.m3u8",
+  "playbackId": "96b2q3rrvv16qnl8",
+  "eventId": "zuzalu_montenegro_2023__network_states",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__network_states/new_cities_and_network_states__takeaways.jpg"
+}

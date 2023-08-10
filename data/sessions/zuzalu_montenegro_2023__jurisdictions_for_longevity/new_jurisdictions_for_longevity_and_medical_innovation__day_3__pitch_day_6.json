@@ -1,1 +1,13 @@
-{"id":"new_jurisdictions_for_longevity_and_medical_innovation__day_3__pitch_day_6","name":"New Jurisdictions for Longevity and Medical Innovation - Day 3 - pitch day 6","description":"","start":"2023-04-11T17:30:00.000Z","end":"2023-04-11T17:40:00.000Z","stageId":"dome","speakers":[{"id":"kia","name":"Kia","bio":"No description","eventId":"zuzalu_montenegro_2023__jurisdictions_for_longevity"}],"videoUrl":"https://lp-playback.com/hls/d412etb5f6471g0l/index.m3u8","playbackId":"d412etb5f6471g0l","eventId":"zuzalu_montenegro_2023__jurisdictions_for_longevity","coverImage":"/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/new_jurisdictions_for_longevity_and_medical_innovation__day_3__pitch_day_6.jpg"}
+{
+  "id": "new_jurisdictions_for_longevity_and_medical_innovation__day_3__pitch_day_6",
+  "name": "New Jurisdictions for Longevity and Medical Innovation - Day 3 - pitch day 6",
+  "description": "",
+  "start": "2023-04-11T17:30:00.000Z",
+  "end": "2023-04-11T17:40:00.000Z",
+  "stageId": "dome",
+  "speakers": [{ "id": "kia", "name": "Kia", "bio": "No description", "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity" }],
+  "videoUrl": "https://lp-playback.com/hls/d412etb5f6471g0l/index.m3u8",
+  "playbackId": "d412etb5f6471g0l",
+  "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/new_jurisdictions_for_longevity_and_medical_innovation__day_3__pitch_day_6.jpg"
+}

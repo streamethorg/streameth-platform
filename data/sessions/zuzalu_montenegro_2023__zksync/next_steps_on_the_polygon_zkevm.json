@@ -1,1 +1,13 @@
-{"id":"next_steps_on_the_polygon_zkevm","name":"Next steps on the Polygon zkEVM","description":"The video features indistinct music playing in the background while showing Celeste-alus bites and 54-bit songs.","start":"2023-04-18T13:30:00.000Z","end":"2023-04-18T14:15:00.000Z","stageId":"dome","speakers":[{"id":"jordi","name":"Jordi","bio":"No description","eventId":"zuzalu_montenegro_2023__zksync"}],"videoUrl":"https://lp-playback.com/hls/c6c3tsnugri7kss9/index.m3u8","playbackId":"c6c3tsnugri7kss9","eventId":"zuzalu_montenegro_2023__zksync","coverImage":"/sessions/zuzalu_montenegro_2023__zksync/next_steps_on_the_polygon_zkevm.jpg"}
+{
+  "id": "next_steps_on_the_polygon_zkevm",
+  "name": "Next steps on the Polygon zkEVM",
+  "description": "The video features indistinct music playing in the background while showing Celeste-alus bites and 54-bit songs.",
+  "start": "2023-04-18T13:30:00.000Z",
+  "end": "2023-04-18T14:15:00.000Z",
+  "stageId": "dome",
+  "speakers": [{ "id": "jordi", "name": "Jordi", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "videoUrl": "https://lp-playback.com/hls/c6c3tsnugri7kss9/index.m3u8",
+  "playbackId": "c6c3tsnugri7kss9",
+  "eventId": "zuzalu_montenegro_2023__zksync",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/next_steps_on_the_polygon_zkevm.jpg"
+}

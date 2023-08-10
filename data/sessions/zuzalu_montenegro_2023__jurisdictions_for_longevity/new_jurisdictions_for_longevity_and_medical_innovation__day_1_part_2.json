@@ -1,1 +1,15 @@
-{"id":"new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_2","name":"New Jurisdictions for Longevity and Medical Innovation - Day 1, part 2","description":"","start":"2023-04-09T10:00:00.000Z","end":"2023-04-09T10:30:00.000Z","stageId":"dome","speakers":[{"id":"adam_gries","name":"Adam Gries","bio":"No description","eventId":"zuzalu_montenegro_2023__jurisdictions_for_longevity"}],"videoUrl":"https://lp-playback.com/hls/178ef24n5qpwvz9w/index.m3u8","playbackId":"178ef24n5qpwvz9w","eventId":"zuzalu_montenegro_2023__jurisdictions_for_longevity","coverImage":"/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_2.jpg"}
+{
+  "id": "new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_2",
+  "name": "New Jurisdictions for Longevity and Medical Innovation - Day 1, part 2",
+  "description": "",
+  "start": "2023-04-09T10:00:00.000Z",
+  "end": "2023-04-09T10:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    { "id": "adam_gries", "name": "Adam Gries", "bio": "No description", "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity" }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/178ef24n5qpwvz9w/index.m3u8",
+  "playbackId": "178ef24n5qpwvz9w",
+  "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_2.jpg"
+}

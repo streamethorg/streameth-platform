@@ -1,1 +1,13 @@
-{"id":"zero_knowledge_machine_learning_101_under_the_hood","name":"Zero Knowledge Machine Learning 101: Under the Hood","description":"This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.","start":"2023-05-05T11:00:00.000Z","end":"2023-05-05T12:00:00.000Z","stageId":"ballroom","speakers":[{"id":"jason_morton","name":"Jason Morton","bio":"No description","eventId":"zuzalu_montenegro_2023__cryptoxai"}],"videoUrl":"https://lp-playback.com/hls/5f981j7wtzoht63k/index.m3u8","playbackId":"5f981j7wtzoht63k","eventId":"zuzalu_montenegro_2023__cryptoxai","coverImage":"/sessions/zuzalu_montenegro_2023__cryptoxai/zero_knowledge_machine_learning_101_under_the_hood.jpg"}
+{
+  "id": "zero_knowledge_machine_learning_101_under_the_hood",
+  "name": "Zero Knowledge Machine Learning 101: Under the Hood",
+  "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
+  "start": "2023-05-05T11:00:00.000Z",
+  "end": "2023-05-05T12:00:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [{ "id": "jason_morton", "name": "Jason Morton", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }],
+  "videoUrl": "https://lp-playback.com/hls/5f981j7wtzoht63k/index.m3u8",
+  "playbackId": "5f981j7wtzoht63k",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/zero_knowledge_machine_learning_101_under_the_hood.jpg"
+}
