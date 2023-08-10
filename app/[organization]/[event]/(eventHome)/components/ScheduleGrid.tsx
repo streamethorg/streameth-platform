@@ -5,10 +5,10 @@ import { useContext, useMemo } from 'react'
 export default function ScheduleGrid({ children }: { children: React.ReactNode }) {
   const { filteredItems: sessions } = useContext(FilterContext)
   const earliestTime = useMemo(() => getEarliestTime(sessions), [sessions])
-  const totalSlots = useMemo(() => getTotalSlots(sessions, earliestTime), [sessions, earliestTime]) + 11
+  const totalSlots = useMemo(() => getTotalSlots(sessions, earliestTime), [sessions, earliestTime]) 
 
   return (
-    <div className="flex flex-col w-full relative md:overflow-scroll max-h-full" style={{ height: totalSlots * CELL_HEIGHT + 'rem' }}>
+    <div className="flex flex-col w-full relative " style={{ height: totalSlots * CELL_HEIGHT + 'rem' }}>
       {Array.from({ length: totalSlots }, (_, i) => (
         <div key={i} className="w-full h-full border-t p-4">
           <h1 className="w-full text-sm text-secondary-text">
