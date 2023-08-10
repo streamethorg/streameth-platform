@@ -14,7 +14,7 @@ const run = async () => {
   const organizationInstance = await orgController.createOrganization(Organization)
 
   const Event = {
-    name: 'Zuzalu Montenegro 2023 - Synthetic Biology',
+    name: 'Zuzalu Montenegro 2023 - Public Goods',
     description:
       'Join 200 core residents brought together by a shared desire to learn, create, live longer and healthier lives, and build self-sustaining communities.',
     start: new Date('2023-03-25T00:00:00.000Z'),
@@ -25,7 +25,7 @@ const run = async () => {
       {
         type: 'gsheet' as 'gsheet',
         config: {
-          sheetId: '1cKin8UyfylwbrNcU_4r0TldAaFDdv5yvhyU1WQuoSqQ',
+          sheetId: '1DtKqSLXTw9ujLcNPmA26MY6UuiQm75dol2Hh5xH6Tkc',
           apiKey: 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w',
         },
       },
