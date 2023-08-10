@@ -3,7 +3,7 @@ import SessionController from './controller/session'
 import Session from './model/session'
 import fs from 'fs'
 
-const eventId = 'funding_the_commons_paris_2023'
+const eventId = 'zuzalu_montenegro_2023__zksync'
 
 async function main() {
   const sessionController = new SessionController()

@@ -5,7 +5,7 @@ import { generateId } from '../../utils'
 
 // Constants
 const SPEAKER_SHEET = 'Speakers'
-const SPEAKER_DATA_RANGE = 'A3:D'
+const SPEAKER_DATA_RANGE = 'A2:D'
 const STAGE_SHEET = 'Stages'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
@@ -60,7 +60,7 @@ export default class Importer extends BaseImporter {
       const [name, description, twitterHandle, avatar] = row
       const speaker = {
         name,
-        bio: 'No description',
+        bio: description ?? 'No description',
         photo: avatar == '' ? undefined : avatar,
         twitter: twitterHandle,
         eventId: this.event.id,
