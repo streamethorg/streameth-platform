@@ -5,9 +5,16 @@
   "start": "2023-04-26T12:00:00.000Z",
   "end": "2023-04-26T13:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "noah_chon_lee", "name": "Noah Chon Lee", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }],
+  "speakers": [
+    {
+      "id": "noah_chon_lee",
+      "name": "Noah Chon Lee",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/8698sne92ljl97yd/index.m3u8",
   "playbackId": "8698sne92ljl97yd",
   "eventId": "zuzalu_montenegro_2023__other",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__other/crowdfunded_prizes_for_public_goods__a_derisked_alternative_to_grants.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

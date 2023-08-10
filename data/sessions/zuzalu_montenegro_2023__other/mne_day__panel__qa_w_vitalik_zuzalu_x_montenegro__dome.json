@@ -6,14 +6,39 @@
   "end": "2023-05-15T08:15:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "zoe", "name": "Zoe", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
-    { "id": "tomiwa", "name": "Tomiwa", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
-    { "id": "vitalik_buterin", "name": "Vitalik Buterin", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
-    { "id": "milojko_spajic", "name": "Milojko Spajic", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
-    { "id": "dritan_abazovic", "name": "Dritan Abazovic", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }
+    {
+      "id": "zoe",
+      "name": "Zoe",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    },
+    {
+      "id": "tomiwa",
+      "name": "Tomiwa",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    },
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    },
+    {
+      "id": "milojko_spajic",
+      "name": "Milojko Spajic",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    },
+    {
+      "id": "dritan_abazovic",
+      "name": "Dritan Abazovic",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/abbdp9vkzttwo2dq/index.m3u8",
   "playbackId": "abbdp9vkzttwo2dq",
   "eventId": "zuzalu_montenegro_2023__other",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__other/mne_day__panel__qa_w_vitalik_zuzalu_x_montenegro__dome.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

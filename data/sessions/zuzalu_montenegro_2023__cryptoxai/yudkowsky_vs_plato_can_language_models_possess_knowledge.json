@@ -5,9 +5,16 @@
   "start": "2023-05-07T05:30:00.000Z",
   "end": "2023-05-07T06:30:00.000Z",
   "stageId": "lighthouse",
-  "speakers": [{ "id": "tarun_chitra", "name": "Tarun Chitra", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }],
+  "speakers": [
+    {
+      "id": "tarun_chitra",
+      "name": "Tarun Chitra",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/996at94lz24ghirx/index.m3u8",
   "playbackId": "996at94lz24ghirx",
   "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/yudkowsky_vs_plato_can_language_models_possess_knowledge.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

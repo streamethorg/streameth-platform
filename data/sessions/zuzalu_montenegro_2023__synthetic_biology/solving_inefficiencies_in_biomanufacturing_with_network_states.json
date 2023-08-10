@@ -6,10 +6,15 @@
   "end": "2023-04-02T08:30:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "kristen_allbright", "name": "Kristen Allbright", "bio": "Prokarium", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }
+    {
+      "id": "kristen_allbright",
+      "name": "Kristen Allbright",
+      "bio": "Prokarium",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/c108nkq5ofnw1lta/index.m3u8",
   "playbackId": "c108nkq5ofnw1lta",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/solving_inefficiencies_in_biomanufacturing_with_network_states.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

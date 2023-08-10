@@ -6,11 +6,21 @@
   "end": "2023-05-13T16:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "cat", "name": "Cat", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" },
-    { "id": "dave_gobel", "name": "Dave Gobel", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" }
+    {
+      "id": "cat",
+      "name": "Cat",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    },
+    {
+      "id": "dave_gobel",
+      "name": "Dave Gobel",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/84e8r4mxjmpgtco3/index.m3u8",
   "playbackId": "84e8r4mxjmpgtco3",
   "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_biotech_conference/long_term_view_on_longevity_a_chat_with_dave_gobel.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -6,11 +6,21 @@
   "end": "2023-04-30T06:30:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "patrick_lamson_hall", "name": "Patrick Lamson Hall", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" },
-    { "id": "nuria_forques", "name": "Nuria Forques", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" }
+    {
+      "id": "patrick_lamson_hall",
+      "name": "Patrick Lamson Hall",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    },
+    {
+      "id": "nuria_forques",
+      "name": "Nuria Forques",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/9fb9xrib8s93a3cu/index.m3u8",
   "playbackId": "9fb9xrib8s93a3cu",
   "eventId": "zuzalu_montenegro_2023__network_states",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__network_states/what_is_a_city_and_how_does_it_work.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -6,12 +6,27 @@
   "end": "2023-04-30T08:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "gabriel_delgado_ayau", "name": "Gabriel Delgado Ayau", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" },
-    { "id": "massimo_mazzone", "name": "Massimo Mazzone", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" },
-    { "id": "peter_young", "name": "Peter Young", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" }
+    {
+      "id": "gabriel_delgado_ayau",
+      "name": "Gabriel Delgado Ayau",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    },
+    {
+      "id": "massimo_mazzone",
+      "name": "Massimo Mazzone",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    },
+    {
+      "id": "peter_young",
+      "name": "Peter Young",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/6e72vsn1y4246ayu/index.m3u8",
   "playbackId": "6e72vsn1y4246ayu",
   "eventId": "zuzalu_montenegro_2023__network_states",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__network_states/honduras_path_to_decentralization.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

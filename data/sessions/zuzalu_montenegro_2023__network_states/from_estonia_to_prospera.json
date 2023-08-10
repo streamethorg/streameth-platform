@@ -5,9 +5,16 @@
   "start": "2023-04-30T11:30:00.000Z",
   "end": "2023-04-30T12:30:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "ott_vatter", "name": "Ott Vatter", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" }],
+  "speakers": [
+    {
+      "id": "ott_vatter",
+      "name": "Ott Vatter",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/cf5eq325nsa3so90/index.m3u8",
   "playbackId": "cf5eq325nsa3so90",
   "eventId": "zuzalu_montenegro_2023__network_states",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__network_states/from_estonia_to_prospera.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

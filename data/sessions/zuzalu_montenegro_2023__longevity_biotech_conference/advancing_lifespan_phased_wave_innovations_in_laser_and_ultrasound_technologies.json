@@ -6,10 +6,15 @@
   "end": "2023-05-12T11:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "marylou_jepsen", "name": "Mary-Lou Jepsen", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" }
+    {
+      "id": "marylou_jepsen",
+      "name": "Mary-Lou Jepsen",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/4fba7n9t6m2v2fam/index.m3u8",
   "playbackId": "4fba7n9t6m2v2fam",
   "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_biotech_conference/advancing_lifespan_phased_wave_innovations_in_laser_and_ultrasound_technologies.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

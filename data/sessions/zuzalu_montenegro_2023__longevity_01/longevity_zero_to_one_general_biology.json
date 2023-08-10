@@ -6,13 +6,33 @@
   "end": "2023-05-07T16:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "cat_thu", "name": "Cat Thu", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_01" },
-    { "id": "boris_dyakov", "name": "Boris Dyakov", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_01" },
-    { "id": "ryan_spangler", "name": "Ryan Spangler", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_01" },
-    { "id": "ksenia_winslow", "name": "Ksenia Winslow", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_01" }
+    {
+      "id": "cat_thu",
+      "name": "Cat Thu",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_01"
+    },
+    {
+      "id": "boris_dyakov",
+      "name": "Boris Dyakov",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_01"
+    },
+    {
+      "id": "ryan_spangler",
+      "name": "Ryan Spangler",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_01"
+    },
+    {
+      "id": "ksenia_winslow",
+      "name": "Ksenia Winslow",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_01"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/298e7nybwat2jgih/index.m3u8",
   "playbackId": "298e7nybwat2jgih",
   "eventId": "zuzalu_montenegro_2023__longevity_01",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_01/longevity_zero_to_one_general_biology.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

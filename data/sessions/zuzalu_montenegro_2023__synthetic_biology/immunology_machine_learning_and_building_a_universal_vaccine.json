@@ -6,10 +6,15 @@
   "end": "2023-04-01T10:30:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "jake_glanville", "name": "Jake Glanville", "bio": "CEO and Founder, Centivax", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }
+    {
+      "id": "jake_glanville",
+      "name": "Jake Glanville",
+      "bio": "CEO and Founder, Centivax",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/fc5b5wojyv4dqhax/index.m3u8",
   "playbackId": "fc5b5wojyv4dqhax",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/immunology_machine_learning_and_building_a_universal_vaccine.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

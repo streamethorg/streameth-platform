@@ -5,9 +5,16 @@
   "start": "2023-04-18T13:30:00.000Z",
   "end": "2023-04-18T15:00:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "yi", "name": "Yi", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "yi",
+      "name": "Yi",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/030brdypg0lr8hlk/index.m3u8",
   "playbackId": "030brdypg0lr8hlk",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/build_a_zk_circuit_in_halo2__the_easy_way.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

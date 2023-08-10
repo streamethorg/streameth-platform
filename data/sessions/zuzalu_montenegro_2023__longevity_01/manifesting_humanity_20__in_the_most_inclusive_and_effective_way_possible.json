@@ -5,9 +5,16 @@
   "start": "2023-05-10T14:30:00.000Z",
   "end": "2023-05-10T15:30:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "gary_sheng", "name": "Gary Sheng", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_01" }],
+  "speakers": [
+    {
+      "id": "gary_sheng",
+      "name": "Gary Sheng",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_01"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/0c24yl7u20hc0emn/index.m3u8",
   "playbackId": "0c24yl7u20hc0emn",
   "eventId": "zuzalu_montenegro_2023__longevity_01",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_01/manifesting_humanity_20__in_the_most_inclusive_and_effective_way_possible.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

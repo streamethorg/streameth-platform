@@ -5,9 +5,16 @@
   "start": "2023-04-13T13:30:00.000Z",
   "end": "2023-04-13T15:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "michael_smith", "name": "Michael Smith", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }],
+  "speakers": [
+    {
+      "id": "michael_smith",
+      "name": "Michael Smith",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/4dc3pp435a50vbgh/index.m3u8",
   "playbackId": "4dc3pp435a50vbgh",
   "eventId": "zuzalu_montenegro_2023__public_goods",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/presenting_michael_smith__inventor_of_a_revolutionary_regenerative_technology_regen_ai__desci__blockchain__public_good.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

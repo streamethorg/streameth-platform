@@ -5,9 +5,16 @@
   "start": "2023-05-06T11:30:00.000Z",
   "end": "2023-05-06T12:30:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "ai_x_crypto_summit", "name": "AI x Crypto Summit", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }],
+  "speakers": [
+    {
+      "id": "ai_x_crypto_summit",
+      "name": "AI x Crypto Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/6f31j07y4dw9yga3/index.m3u8",
   "playbackId": "6f31j07y4dw9yga3",
   "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/intro_to_ppmlzk_for_healthcare.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

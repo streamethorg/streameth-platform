@@ -6,10 +6,15 @@
   "end": "2023-04-02T06:45:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "jennifer_holmgren", "name": "Jennifer Holmgren", "bio": "CEO, LanzaTech", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }
+    {
+      "id": "jennifer_holmgren",
+      "name": "Jennifer Holmgren",
+      "bio": "CEO, LanzaTech",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/4d42dcr1k3foko83/index.m3u8",
   "playbackId": "4d42dcr1k3foko83",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/synthetic_biology_for_carbon_negative_manufacturing_of_chemicals_and_materials.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

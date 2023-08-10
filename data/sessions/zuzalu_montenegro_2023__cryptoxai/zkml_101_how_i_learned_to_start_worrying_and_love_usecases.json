@@ -5,9 +5,16 @@
   "start": "2023-05-05T11:30:00.000Z",
   "end": "2023-05-05T12:30:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "ai_x_crypto_summit", "name": "AI x Crypto Summit", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }],
+  "speakers": [
+    {
+      "id": "ai_x_crypto_summit",
+      "name": "AI x Crypto Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/9088vhpqwg3oowlw/index.m3u8",
   "playbackId": "9088vhpqwg3oowlw",
   "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/zkml_101_how_i_learned_to_start_worrying_and_love_usecases.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

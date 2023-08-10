@@ -5,9 +5,16 @@
   "start": "2023-04-21T13:00:00.000Z",
   "end": "2023-04-21T13:30:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "filip_pajic", "name": "Filip Pajic", "bio": "Scroll", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "filip_pajic",
+      "name": "Filip Pajic",
+      "bio": "Scroll",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/3be7i1ebwih72dds/index.m3u8",
   "playbackId": "3be7i1ebwih72dds",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/scaling_ethereum_with_zero_knowledge_proofs.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

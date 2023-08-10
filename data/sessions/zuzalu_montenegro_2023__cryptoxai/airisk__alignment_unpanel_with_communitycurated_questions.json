@@ -6,11 +6,21 @@
   "end": "2023-05-06T11:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "ai_x_crypto_summit", "name": "AI x Crypto Summit", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" },
-    { "id": "nima_asghari", "name": "NiMA Asghari", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }
+    {
+      "id": "ai_x_crypto_summit",
+      "name": "AI x Crypto Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    },
+    {
+      "id": "nima_asghari",
+      "name": "NiMA Asghari",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/3c6c62lv2iab8x5j/index.m3u8",
   "playbackId": "3c6c62lv2iab8x5j",
   "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/airisk__alignment_unpanel_with_communitycurated_questions.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -5,9 +5,16 @@
   "start": "2023-05-04T07:00:00.000Z",
   "end": "2023-05-04T08:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "anton_kulaga", "name": "Anton Kulaga", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }],
+  "speakers": [
+    {
+      "id": "anton_kulaga",
+      "name": "Anton Kulaga",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/8a99mwho0kp0s5ot/index.m3u8",
   "playbackId": "8a99mwho0kp0s5ot",
   "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/hack_your_own_genome_workshop_part_i.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

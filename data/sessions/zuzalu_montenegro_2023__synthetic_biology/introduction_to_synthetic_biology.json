@@ -6,10 +6,15 @@
   "end": "2023-04-01T06:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "john_cumbers", "name": "John Cumbers", "bio": "CEO & Founder, SynBioBeta", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }
+    {
+      "id": "john_cumbers",
+      "name": "John Cumbers",
+      "bio": "CEO & Founder, SynBioBeta",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/9125xrzahxfeswbk/index.m3u8",
   "playbackId": "9125xrzahxfeswbk",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/introduction_to_synthetic_biology.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

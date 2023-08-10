@@ -5,9 +5,16 @@
   "start": "2023-04-19T13:00:00.000Z",
   "end": "2023-04-19T14:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "roger", "name": "Roger", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "roger",
+      "name": "Roger",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/bd9ch2lqrnvt6cwg/index.m3u8",
   "playbackId": "bd9ch2lqrnvt6cwg",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/intermediate_circom_circuit_writing.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

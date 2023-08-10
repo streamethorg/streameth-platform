@@ -5,9 +5,16 @@
   "start": "2023-04-19T13:00:00.000Z",
   "end": "2023-04-19T14:00:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "ariel_gabizon", "name": "Ariel Gabizon", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "ariel_gabizon",
+      "name": "Ariel Gabizon",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/f3dcw5v0phzv01mi/index.m3u8",
   "playbackId": "f3dcw5v0phzv01mi",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/recent_advances_in_pairing_based_snarks.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

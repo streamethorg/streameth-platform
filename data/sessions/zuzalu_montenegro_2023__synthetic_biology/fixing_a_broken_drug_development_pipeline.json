@@ -5,9 +5,16 @@
   "start": "2023-04-01T10:30:00.000Z",
   "end": "2023-04-01T11:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "alok_tayi", "name": "Alok Tayi", "bio": "CEO & Founder, Vibe Bio", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }],
+  "speakers": [
+    {
+      "id": "alok_tayi",
+      "name": "Alok Tayi",
+      "bio": "CEO & Founder, Vibe Bio",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/b06dhe8iy8m6sx0k/index.m3u8",
   "playbackId": "b06dhe8iy8m6sx0k",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/fixing_a_broken_drug_development_pipeline.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

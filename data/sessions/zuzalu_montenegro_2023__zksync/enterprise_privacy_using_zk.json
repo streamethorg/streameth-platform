@@ -5,9 +5,16 @@
   "start": "2023-04-18T15:00:00.000Z",
   "end": "2023-04-18T15:30:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "paul_brody", "name": "Paul Brody", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "paul_brody",
+      "name": "Paul Brody",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/b61ee4sc6q80l9m2/index.m3u8",
   "playbackId": "b61ee4sc6q80l9m2",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/enterprise_privacy_using_zk.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

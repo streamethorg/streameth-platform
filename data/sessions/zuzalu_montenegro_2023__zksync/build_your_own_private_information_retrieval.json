@@ -5,9 +5,16 @@
   "start": "2023-04-20T13:00:00.000Z",
   "end": "2023-04-20T14:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "janmajaya_mall", "name": "Janmajaya Mall", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "janmajaya_mall",
+      "name": "Janmajaya Mall",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/e32ad50sk3ywai6y/index.m3u8",
   "playbackId": "e32ad50sk3ywai6y",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/build_your_own_private_information_retrieval.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

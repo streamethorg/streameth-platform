@@ -5,9 +5,16 @@
   "start": "2023-04-11T12:30:00.000Z",
   "end": "2023-04-11T14:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "zuzalu_team", "name": "Zuzalu Team", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }],
+  "speakers": [
+    {
+      "id": "zuzalu_team",
+      "name": "Zuzalu Team",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/da10qwg4fc6yzvbq/index.m3u8",
   "playbackId": "da10qwg4fc6yzvbq",
   "eventId": "zuzalu_montenegro_2023__other",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__other/zuzalu_townhall_activation__20230411.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

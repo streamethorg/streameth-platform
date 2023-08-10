@@ -5,9 +5,16 @@
   "start": "2023-04-17T13:00:00.000Z",
   "end": "2023-04-17T14:30:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "jason_morton", "name": "Jason Morton", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "jason_morton",
+      "name": "Jason Morton",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/44123b1yqgs6e33l/index.m3u8",
   "playbackId": "44123b1yqgs6e33l",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/deploy_your_own_onchain_zkml_models_with_ezkl.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

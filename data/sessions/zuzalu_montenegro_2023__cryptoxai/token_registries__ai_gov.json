@@ -5,9 +5,16 @@
   "start": "2023-05-06T07:15:00.000Z",
   "end": "2023-05-06T08:15:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "ai_x_crypto_summit", "name": "AI x Crypto Summit", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }],
+  "speakers": [
+    {
+      "id": "ai_x_crypto_summit",
+      "name": "AI x Crypto Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/db3054njealpzjn3/index.m3u8",
   "playbackId": "db3054njealpzjn3",
   "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/token_registries__ai_gov.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

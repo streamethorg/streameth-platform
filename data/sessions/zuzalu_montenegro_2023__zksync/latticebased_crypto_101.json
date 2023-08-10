@@ -5,9 +5,16 @@
   "start": "2023-04-20T14:00:00.000Z",
   "end": "2023-04-20T14:30:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "alexandre_belling", "name": "Alexandre Belling", "bio": "Linea", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "alexandre_belling",
+      "name": "Alexandre Belling",
+      "bio": "Linea",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/80e0istbqqdskhno/index.m3u8",
   "playbackId": "80e0istbqqdskhno",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/latticebased_crypto_101.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

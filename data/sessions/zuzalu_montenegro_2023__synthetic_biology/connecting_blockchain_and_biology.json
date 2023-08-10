@@ -5,9 +5,16 @@
   "start": "2023-04-01T07:30:00.000Z",
   "end": "2023-04-01T08:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "benji_leibowitz", "name": "Benji Leibowitz", "bio": "Molecule", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }],
+  "speakers": [
+    {
+      "id": "benji_leibowitz",
+      "name": "Benji Leibowitz",
+      "bio": "Molecule",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/2f65fef64iowjduc/index.m3u8",
   "playbackId": "2f65fef64iowjduc",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/connecting_blockchain_and_biology.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

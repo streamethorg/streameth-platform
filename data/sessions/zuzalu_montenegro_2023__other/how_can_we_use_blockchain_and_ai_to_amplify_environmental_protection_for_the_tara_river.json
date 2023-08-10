@@ -5,9 +5,16 @@
   "start": "2023-04-25T11:30:00.000Z",
   "end": "2023-04-25T12:30:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "ilana_brown", "name": "Ilana Brown", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }],
+  "speakers": [
+    {
+      "id": "ilana_brown",
+      "name": "Ilana Brown",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/660flkqfgjycz26f/index.m3u8",
   "playbackId": "660flkqfgjycz26f",
   "eventId": "zuzalu_montenegro_2023__other",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__other/how_can_we_use_blockchain_and_ai_to_amplify_environmental_protection_for_the_tara_river.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

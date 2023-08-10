@@ -5,9 +5,16 @@
   "start": "2023-04-19T06:00:00.000Z",
   "end": "2023-04-19T07:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "eric_annan", "name": "Eric Annan", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "eric_annan",
+      "name": "Eric Annan",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/796d25md6hwwrem2/index.m3u8",
   "playbackId": "796d25md6hwwrem2",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/blockchain_use_case_in_africa.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

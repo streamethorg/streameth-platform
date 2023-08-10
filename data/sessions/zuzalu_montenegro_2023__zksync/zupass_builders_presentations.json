@@ -5,9 +5,16 @@
   "start": "2023-04-20T10:00:00.000Z",
   "end": "2023-04-20T11:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "brian", "name": "Brian", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "brian",
+      "name": "Brian",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/93c3olddguprr8kg/index.m3u8",
   "playbackId": "93c3olddguprr8kg",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/zupass_builders_presentations.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

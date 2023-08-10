@@ -5,9 +5,16 @@
   "start": "2023-04-21T14:00:00.000Z",
   "end": "2023-04-21T14:30:00.000Z",
   "stageId": "ballroom",
-  "speakers": [{ "id": "vivian_plasencia", "name": "Vivian Plasencia", "bio": "PSE - EF", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "vivian_plasencia",
+      "name": "Vivian Plasencia",
+      "bio": "PSE - EF",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/3ab2ual32f49pz2a/index.m3u8",
   "playbackId": "3ab2ual32f49pz2a",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/how_to_build_with_semaphore.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

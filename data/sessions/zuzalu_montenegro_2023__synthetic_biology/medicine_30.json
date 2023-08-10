@@ -5,9 +5,16 @@
   "start": "2023-04-02T08:45:00.000Z",
   "end": "2023-04-02T09:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "laurence_ion", "name": "Laurence Ion", "bio": "VitaDAO", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }],
+  "speakers": [
+    {
+      "id": "laurence_ion",
+      "name": "Laurence Ion",
+      "bio": "VitaDAO",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/6b2784qz4cpykcyx/index.m3u8",
   "playbackId": "6b2784qz4cpykcyx",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/medicine_30.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

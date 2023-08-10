@@ -6,10 +6,15 @@
   "end": "2023-05-14T14:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "brian_kennedy", "name": "Brian Kennedy", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" }
+    {
+      "id": "brian_kennedy",
+      "name": "Brian Kennedy",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/b21d86iyb0emnnzj/index.m3u8",
   "playbackId": "b21d86iyb0emnnzj",
   "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_biotech_conference/targeting_aging_directly.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

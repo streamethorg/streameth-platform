@@ -6,10 +6,15 @@
   "end": "2023-03-28T14:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "elisabeth_roider", "name": "Elisabeth Roider", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_introductory" }
+    {
+      "id": "elisabeth_roider",
+      "name": "Elisabeth Roider",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/44b5vgu80jc6syqv/index.m3u8",
   "playbackId": "44b5vgu80jc6syqv",
   "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_introductory/longevity_intro_day_1__elisabeth_roider.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

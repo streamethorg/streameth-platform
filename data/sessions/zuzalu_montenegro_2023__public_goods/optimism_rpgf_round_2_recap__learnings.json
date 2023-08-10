@@ -6,11 +6,21 @@
   "end": "2023-04-12T08:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "jonas", "name": "Jonas", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" },
-    { "id": "olivia", "name": "Olivia", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }
+    {
+      "id": "jonas",
+      "name": "Jonas",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    },
+    {
+      "id": "olivia",
+      "name": "Olivia",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/553avlv3hf9f342u/index.m3u8",
   "playbackId": "553avlv3hf9f342u",
   "eventId": "zuzalu_montenegro_2023__public_goods",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/optimism_rpgf_round_2_recap__learnings.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

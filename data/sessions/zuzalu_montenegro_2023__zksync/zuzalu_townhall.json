@@ -5,9 +5,16 @@
   "start": "2023-04-18T12:30:00.000Z",
   "end": "2023-04-18T13:30:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "vitalik_buterin", "name": "Vitalik Buterin", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/021ccudorno6y7i8/index.m3u8",
   "playbackId": "021ccudorno6y7i8",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/zuzalu_townhall.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -5,9 +5,16 @@
   "start": "2023-03-31T14:00:00.000Z",
   "end": "2023-03-31T15:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "adam_gries", "name": "Adam Gries", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_introductory" }],
+  "speakers": [
+    {
+      "id": "adam_gries",
+      "name": "Adam Gries",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/9887t70ol4spzwf3/index.m3u8",
   "playbackId": "9887t70ol4spzwf3",
   "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_introductory/biotesting_and_how_to_guide_your_longevity_focused_actions.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

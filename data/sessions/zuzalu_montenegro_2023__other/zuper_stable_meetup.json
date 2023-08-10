@@ -6,12 +6,27 @@
   "end": "2023-04-26T16:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "pablo_penguin", "name": "Pablo Penguin", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
-    { "id": "benjamin_qidao", "name": "Benjamin QiDao", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" },
-    { "id": "david_liebowitz", "name": "David Liebowitz", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }
+    {
+      "id": "pablo_penguin",
+      "name": "Pablo Penguin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    },
+    {
+      "id": "benjamin_qidao",
+      "name": "Benjamin QiDao",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    },
+    {
+      "id": "david_liebowitz",
+      "name": "David Liebowitz",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/8d44cagmwxjix1di/index.m3u8",
   "playbackId": "8d44cagmwxjix1di",
   "eventId": "zuzalu_montenegro_2023__other",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__other/zuper_stable_meetup.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -6,13 +6,33 @@
   "end": "2023-05-06T11:15:00.000Z",
   "stageId": "ballroom",
   "speakers": [
-    { "id": "vitalik_buterin", "name": "Vitalik Buterin", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" },
-    { "id": "jason_morton", "name": "Jason Morton", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" },
-    { "id": "stuti_pandey", "name": "Stuti Pandey", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" },
-    { "id": "ai_x_crypto_summit", "name": "AI x Crypto Summit", "bio": "No description", "eventId": "zuzalu_montenegro_2023__cryptoxai" }
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    },
+    {
+      "id": "jason_morton",
+      "name": "Jason Morton",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    },
+    {
+      "id": "stuti_pandey",
+      "name": "Stuti Pandey",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    },
+    {
+      "id": "ai_x_crypto_summit",
+      "name": "AI x Crypto Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/c12ezp8lyr0gp0ke/index.m3u8",
   "playbackId": "c12ezp8lyr0gp0ke",
   "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__cryptoxai/zkml_panel_accountability__integrity_in_ai_via_zkml.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

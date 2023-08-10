@@ -6,10 +6,15 @@
   "end": "2023-05-13T08:45:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "max_unfried", "name": "Max Unfried", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" }
+    {
+      "id": "max_unfried",
+      "name": "Max Unfried",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/e5878jsuct3kad8q/index.m3u8",
   "playbackId": "e5878jsuct3kad8q",
   "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_biotech_conference/the_union_of_crypto_and_longevity.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -5,9 +5,16 @@
   "start": "2023-04-13T12:00:00.000Z",
   "end": "2023-04-13T12:45:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "kevin_owocki", "name": "Kevin Owocki", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }],
+  "speakers": [
+    {
+      "id": "kevin_owocki",
+      "name": "Kevin Owocki",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/bebfz3sq12xhav0m/index.m3u8",
   "playbackId": "bebfz3sq12xhav0m",
   "eventId": "zuzalu_montenegro_2023__public_goods",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/celebrate_coordination_mechanisms_with_kevin_owocki.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -6,10 +6,15 @@
   "end": "2023-04-09T11:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "robin_hasnon", "name": "Robin Hasnon", "bio": "No description", "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity" }
+    {
+      "id": "robin_hasnon",
+      "name": "Robin Hasnon",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/3ca6jx8ogzdid9pq/index.m3u8",
   "playbackId": "3ca6jx8ogzdid9pq",
   "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_3.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

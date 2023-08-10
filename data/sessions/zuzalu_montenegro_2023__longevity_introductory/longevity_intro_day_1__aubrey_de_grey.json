@@ -6,10 +6,15 @@
   "end": "2023-03-28T14:15:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "aubrey_de_grey", "name": "Aubrey de Grey", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_introductory" }
+    {
+      "id": "aubrey_de_grey",
+      "name": "Aubrey de Grey",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/d4a2rvkxtdcrou77/index.m3u8",
   "playbackId": "d4a2rvkxtdcrou77",
   "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_introductory/longevity_intro_day_1__aubrey_de_grey.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

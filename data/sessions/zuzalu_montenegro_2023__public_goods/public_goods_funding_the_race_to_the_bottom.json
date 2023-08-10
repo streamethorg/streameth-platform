@@ -5,9 +5,16 @@
   "start": "2023-04-12T09:00:00.000Z",
   "end": "2023-04-12T09:55:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "kyle_weiss", "name": "Kyle Weiss", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }],
+  "speakers": [
+    {
+      "id": "kyle_weiss",
+      "name": "Kyle Weiss",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/e14bcndt72mfpcih/index.m3u8",
   "playbackId": "e14bcndt72mfpcih",
   "eventId": "zuzalu_montenegro_2023__public_goods",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/public_goods_funding_the_race_to_the_bottom.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

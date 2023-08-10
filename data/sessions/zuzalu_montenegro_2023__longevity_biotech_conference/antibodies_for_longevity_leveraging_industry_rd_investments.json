@@ -6,10 +6,15 @@
   "end": "2023-05-14T12:45:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "iosif_gershteyn", "name": "Iosif Gershteyn", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" }
+    {
+      "id": "iosif_gershteyn",
+      "name": "Iosif Gershteyn",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/ede0ozv827gnfkgn/index.m3u8",
   "playbackId": "ede0ozv827gnfkgn",
   "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_biotech_conference/antibodies_for_longevity_leveraging_industry_rd_investments.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

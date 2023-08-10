@@ -6,10 +6,15 @@
   "end": "2023-03-29T16:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "patrick_linden", "name": "Patrick Linden", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_introductory" }
+    {
+      "id": "patrick_linden",
+      "name": "Patrick Linden",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/7b0fw4qm0todu389/index.m3u8",
   "playbackId": "7b0fw4qm0todu389",
   "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_introductory/philosophy_part_1.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

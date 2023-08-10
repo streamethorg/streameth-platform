@@ -6,12 +6,27 @@
   "end": "2023-04-19T08:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "barry", "name": "Barry", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" },
-    { "id": "nalin", "name": "Nalin", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" },
-    { "id": "justin_drake", "name": "Justin Drake", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }
+    {
+      "id": "barry",
+      "name": "Barry",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    },
+    {
+      "id": "nalin",
+      "name": "Nalin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    },
+    {
+      "id": "justin_drake",
+      "name": "Justin Drake",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/51dfa8kbmc9q8dn6/index.m3u8",
   "playbackId": "51dfa8kbmc9q8dn6",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/nova_track_adhoc_session_zk_week_research_projects_discussion.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

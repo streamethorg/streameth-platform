@@ -5,9 +5,16 @@
   "start": "2023-03-29T14:00:00.000Z",
   "end": "2023-03-29T14:45:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "sergio_ruiz", "name": "Sergio Ruiz", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_introductory" }],
+  "speakers": [
+    {
+      "id": "sergio_ruiz",
+      "name": "Sergio Ruiz",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/0c97w6i72htj4dgf/index.m3u8",
   "playbackId": "0c97w6i72htj4dgf",
   "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_introductory/sergio_ruiz_reprogramming.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

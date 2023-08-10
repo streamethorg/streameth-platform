@@ -5,9 +5,16 @@
   "start": "2023-04-14T06:00:00.000Z",
   "end": "2023-04-14T07:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "david_casey", "name": "David Casey", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }],
+  "speakers": [
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/8939v3bc673hlvme/index.m3u8",
   "playbackId": "8939v3bc673hlvme",
   "eventId": "zuzalu_montenegro_2023__public_goods",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/hypercerts_and_impact_certification__holke_brammer.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

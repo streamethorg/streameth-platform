@@ -6,17 +6,27 @@
   "end": "2023-05-12T13:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "amy_proal", "name": "Amy Proal", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" },
+    {
+      "id": "amy_proal",
+      "name": "Amy Proal",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    },
     {
       "id": "vitalik_buterin",
       "name": "Vitalik Buterin",
       "bio": "No description",
       "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
     },
-    { "id": "laurence_ion", "name": "Laurence Ion", "bio": "No description", "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference" }
+    {
+      "id": "laurence_ion",
+      "name": "Laurence Ion",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/58edq3jfa6rsu5yt/index.m3u8",
   "playbackId": "58edq3jfa6rsu5yt",
   "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__longevity_biotech_conference/viruses_staying_in_the_human_body_longterm_drivers_of_aging.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

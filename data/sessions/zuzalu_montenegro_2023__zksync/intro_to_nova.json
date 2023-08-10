@@ -5,9 +5,16 @@
   "start": "2023-04-18T14:30:00.000Z",
   "end": "2023-04-18T16:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "justin_drake", "name": "Justin Drake", "bio": "No description", "eventId": "zuzalu_montenegro_2023__zksync" }],
+  "speakers": [
+    {
+      "id": "justin_drake",
+      "name": "Justin Drake",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/52b86mbusyx3xkky/index.m3u8",
   "playbackId": "52b86mbusyx3xkky",
   "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__zksync/intro_to_nova.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

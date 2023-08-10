@@ -5,9 +5,16 @@
   "start": "2023-04-11T14:00:00.000Z",
   "end": "2023-04-11T14:30:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "mac", "name": "Mac", "bio": "No description", "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity" }],
+  "speakers": [
+    {
+      "id": "mac",
+      "name": "Mac",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/710frzormsc68o3j/index.m3u8",
   "playbackId": "710frzormsc68o3j",
   "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/new_jurisdictions_for_longevity_and_medical_innovation__day_3__pitch_day.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

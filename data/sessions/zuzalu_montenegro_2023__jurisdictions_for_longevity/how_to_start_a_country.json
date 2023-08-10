@@ -5,9 +5,16 @@
   "start": "2023-04-10T08:00:00.000Z",
   "end": "2023-04-10T08:30:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "tomiowa", "name": "Tomiowa", "bio": "No description", "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity" }],
+  "speakers": [
+    {
+      "id": "tomiowa",
+      "name": "Tomiowa",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/555fcx57ugy1m73p/index.m3u8",
   "playbackId": "555fcx57ugy1m73p",
   "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/how_to_start_a_country.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

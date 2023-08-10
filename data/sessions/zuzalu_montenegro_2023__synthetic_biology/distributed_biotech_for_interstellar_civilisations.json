@@ -5,9 +5,16 @@
   "start": "2023-04-02T09:00:00.000Z",
   "end": "2023-04-02T09:15:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "sarah_rouse", "name": "Sarah Rouse", "bio": "Founder, SpaceBioDAO", "eventId": "zuzalu_montenegro_2023__synthetic_biology" }],
+  "speakers": [
+    {
+      "id": "sarah_rouse",
+      "name": "Sarah Rouse",
+      "bio": "Founder, SpaceBioDAO",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/04110jh6vr3zkhkn/index.m3u8",
   "playbackId": "04110jh6vr3zkhkn",
   "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__synthetic_biology/distributed_biotech_for_interstellar_civilisations.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

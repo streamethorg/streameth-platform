@@ -5,9 +5,16 @@
   "start": "2023-04-30T11:00:00.000Z",
   "end": "2023-04-30T12:00:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "mark_lutter", "name": "Mark Lutter", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" }],
+  "speakers": [
+    {
+      "id": "mark_lutter",
+      "name": "Mark Lutter",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/9dffnnhtstp0bl9t/index.m3u8",
   "playbackId": "9dffnnhtstp0bl9t",
   "eventId": "zuzalu_montenegro_2023__network_states",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__network_states/cities_and_technology.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -5,9 +5,16 @@
   "start": "2023-04-30T12:45:00.000Z",
   "end": "2023-04-30T13:45:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "niklas_anzinger", "name": "Niklas Anzinger", "bio": "No description", "eventId": "zuzalu_montenegro_2023__network_states" }],
+  "speakers": [
+    {
+      "id": "niklas_anzinger",
+      "name": "Niklas Anzinger",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/3e5f98zrvw74aa3z/index.m3u8",
   "playbackId": "3e5f98zrvw74aa3z",
   "eventId": "zuzalu_montenegro_2023__network_states",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__network_states/a_charter_city_and_digital_freezone_in_zanzibar.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

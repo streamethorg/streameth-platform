@@ -6,14 +6,39 @@
   "end": "2023-04-14T08:55:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "david_hoffman", "name": "David Hoffman", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" },
-    { "id": "karl", "name": "Karl", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" },
-    { "id": "liam", "name": "Liam", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" },
-    { "id": "tim_beiko", "name": "Tim Beiko", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" },
-    { "id": "cheeky_gorilla", "name": "Cheeky Gorilla", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }
+    {
+      "id": "david_hoffman",
+      "name": "David Hoffman",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    },
+    {
+      "id": "karl",
+      "name": "Karl",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    },
+    {
+      "id": "liam",
+      "name": "Liam",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    },
+    {
+      "id": "tim_beiko",
+      "name": "Tim Beiko",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    },
+    {
+      "id": "cheeky_gorilla",
+      "name": "Cheeky Gorilla",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/33628qxkx0e1zvyc/index.m3u8",
   "playbackId": "33628qxkx0e1zvyc",
   "eventId": "zuzalu_montenegro_2023__public_goods",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/debate_how_to_fund_ethereum_contributors.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

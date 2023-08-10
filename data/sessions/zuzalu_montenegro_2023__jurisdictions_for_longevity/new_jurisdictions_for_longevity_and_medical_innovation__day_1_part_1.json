@@ -6,10 +6,15 @@
   "end": "2023-04-09T10:00:00.000Z",
   "stageId": "dome",
   "speakers": [
-    { "id": "niklas_anzinger", "name": "Niklas Anzinger", "bio": "No description", "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity" }
+    {
+      "id": "niklas_anzinger",
+      "name": "Niklas Anzinger",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity"
+    }
   ],
   "videoUrl": "https://lp-playback.com/hls/689bekpgot1jfcpg/index.m3u8",
   "playbackId": "689bekpgot1jfcpg",
   "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__jurisdictions_for_longevity/new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_1.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

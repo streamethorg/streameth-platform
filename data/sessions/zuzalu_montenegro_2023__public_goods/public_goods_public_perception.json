@@ -5,9 +5,16 @@
   "start": "2023-04-12T10:00:00.000Z",
   "end": "2023-04-12T11:30:00.000Z",
   "stageId": "dome",
-  "speakers": [{ "id": "scott_moore", "name": "Scott Moore", "bio": "No description", "eventId": "zuzalu_montenegro_2023__public_goods" }],
+  "speakers": [
+    {
+      "id": "scott_moore",
+      "name": "Scott Moore",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
   "videoUrl": "https://lp-playback.com/hls/53e4mhvk89n99pdy/index.m3u8",
   "playbackId": "53e4mhvk89n99pdy",
   "eventId": "zuzalu_montenegro_2023__public_goods",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__public_goods/public_goods_public_perception.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }
