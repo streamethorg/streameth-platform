@@ -6,20 +6,11 @@
   "end": "2023-07-16T14:00:00.000Z",
   "stageId": "farabeuf_amphitheater",
   "speakers": [
-    {
-      "id": "ren_reinsberg",
-      "name": "René Reinsberg",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "marek_olszewski",
-      "name": "Marek Olszewski",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
+    { "id": "ren_reinsberg", "name": "René Reinsberg", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
+    { "id": "marek_olszewski", "name": "Marek Olszewski", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }
   ],
   "videoUrl": "https://lp-playback.com/hls/7055uxxo6c23ebdu/index.m3u8",
   "playbackId": "7055uxxo6c23ebdu",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/public_goods_that_will_onboard_the_next_billion.jpg"
 }

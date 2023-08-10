@@ -6,20 +6,11 @@
   "end": "2023-07-16T08:10:00.000Z",
   "stageId": "farabeuf_amphitheater",
   "speakers": [
-    {
-      "id": "evan_miyazono",
-      "name": "Evan Miyazono",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "matt_frehlich",
-      "name": "Matt Frehlich",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
+    { "id": "evan_miyazono", "name": "Evan Miyazono", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
+    { "id": "matt_frehlich", "name": "Matt Frehlich", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }
   ],
   "videoUrl": "https://lp-playback.com/hls/d8e6qji6q4kkl76h/index.m3u8",
   "playbackId": "d8e6qji6q4kkl76h",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/event_open_ftc_open.jpg"
 }

@@ -1,19 +1,13 @@
 {
   "id": "the_future_is_collective",
   "name": "\"The Future is Collective\"",
-  "description": "In this video, the speaker discusses the challenges and complexities of working in international development, including structural inequalities, historical injustices, capitalism, globalization, and racism. They introduce UNICEF and their Office of Innovation, which focuses on using technology to support program goals. They mention UNICEF's venture fund and acceptance of cryptocurrency. The speaker explains the concept of digital public goods (DPGs) and emphasizes UNICEF's commitment to funding them. They highlight the importance of funding young people and promoting a more equitable digital future. The video concludes with a call to include young people in projects and a discussion on the challenges of funding DPGs.",
+  "description": "In this video, Omodju Miller discusses the importance of funding open source projects in the crypto field. He shares his experiences working at Google.org and GitHub, highlighting the challenges faced by corporations in funding social problems and coordinating decentralized industries. Miller proposes a solution involving a token-based system that assigns value to developers' contributions and encourages corporations to commit a percentage of their profits or equity to fund this system. He encourages others to take on this project and offers his expertise as an advisor.",
   "start": "2023-07-15T12:40:00.000Z",
   "end": "2023-07-15T13:00:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "pia_mancini",
-      "name": "Pia Mancini",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/11a4gx2ijefz9enl/index.m3u8",
-  "playbackId": "11a4gx2ijefz9enl",
-  "eventId": "funding_the_commons_paris_2023"
+  "speakers": [{ "id": "pia_mancini", "name": "Pia Mancini", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
+  "videoUrl": "https://lp-playback.com/hls/0349tfgz2z65pv73/index.m3u8",
+  "playbackId": "0349tfgz2z65pv73",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/the_future_is_collective.jpg"
 }

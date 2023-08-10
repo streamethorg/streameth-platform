@@ -5,15 +5,9 @@
   "start": "2023-07-16T13:25:00.000Z",
   "end": "2023-07-16T13:40:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "alan_ransil",
-      "name": "Alan Ransil",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
+  "speakers": [{ "id": "alan_ransil", "name": "Alan Ransil", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
   "videoUrl": "https://lp-playback.com/hls/3d25wtugb5a24p0i/index.m3u8",
   "playbackId": "3d25wtugb5a24p0i",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/data_provenance_and_the_climate_crisis.jpg"
 }
