@@ -56,7 +56,7 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
           </h1>
         </div>
         <div className="w-full max-w-[20rem] m-auto lg:ml-auto my-4">
-          <SearchFilter filterOptions={eventFilter} filterName="Event" />
+          <SearchFilter filterOptions={eventFilter} filterName="Search for an event..." />
         </div>
       </div>
     </div>
