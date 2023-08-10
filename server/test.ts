@@ -14,7 +14,7 @@ const run = async () => {
   const organizationInstance = await orgController.createOrganization(Organization)
 
   const Event = {
-    name: 'Zuzalu Montenegro 2023 - Network States',
+    name: 'Zuzalu Montenegro 2023 - Longevity Introductory',
     description:
       'Join 200 core residents brought together by a shared desire to learn, create, live longer and healthier lives, and build self-sustaining communities.',
     start: new Date('2023-03-25T00:00:00.000Z'),
@@ -25,7 +25,7 @@ const run = async () => {
       {
         type: 'gsheet' as 'gsheet',
         config: {
-          sheetId: '1uT9UNYJiMJLaPjBwtEHfoUMXaGy8ZD9cTN2LN4dlydc',
+          sheetId: '1_CsWVC9yfgDhOHMpJd5lr8d7_fcIzOX_Cz_LBXPzbmc',
           apiKey: 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w',
         },
       },
