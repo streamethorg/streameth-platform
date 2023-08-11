@@ -1,6 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
-
 const SignIn = () => {
   return (
     <ConnectButton.Custom>

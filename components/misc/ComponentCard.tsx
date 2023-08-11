@@ -5,7 +5,7 @@ const ComponentCard = ({
   children,
   title,
   date,
-  collapasble,  
+  collapasble,
   streatch,
 }: {
   title?: string

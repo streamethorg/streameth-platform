@@ -28,9 +28,9 @@ export default function Navbar({
   const [isNavVisible, setIsNavVisible] = useState(false) // New state
 
   useEffect(() => {
-      if (isNavVisible) {
-        setIsNavVisible(false)
-      }
+    if (isNavVisible) {
+      setIsNavVisible(false)
+    }
   }, [pathname])
 
   const stageModal = () => {

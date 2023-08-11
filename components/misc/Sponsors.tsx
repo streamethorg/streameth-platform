@@ -13,30 +13,30 @@ interface SponsorCarouselProps {
 }
 
 const SponsorCarousel: React.FC<SponsorCarouselProps> = ({ sponsors: initialSponsors }) => {
-  const [sponsors, setSponsors] = useState<Sponsor[]>(initialSponsors);
-  const [translateX, setTranslateX] = useState<number>(0);
+  const [sponsors, setSponsors] = useState<Sponsor[]>(initialSponsors)
+  const [translateX, setTranslateX] = useState<number>(0)
 
   useEffect(() => {
     const slideInterval = setInterval(() => {
       goToNextSlide()
-    }, 8000);
+    }, 8000)
 
     return () => {
       clearInterval(slideInterval)
     }
-  }, [translateX]);
+  }, [translateX])
 
   const goToNextSlide = () => {
     // Shift the sponsors array to create an infinite loop effect
-    const newSponsors = [...sponsors];
-    const first = newSponsors.shift();
+    const newSponsors = [...sponsors]
+    const first = newSponsors.shift()
     if (first) {
-      newSponsors.push(first);
+      newSponsors.push(first)
     }
-    setSponsors(newSponsors);
+    setSponsors(newSponsors)
 
     // Adjust the translation
-    setTranslateX(prev => prev - 100);
+    setTranslateX((prev) => prev - 100)
   }
 
   return (
@@ -47,7 +47,7 @@ const SponsorCarousel: React.FC<SponsorCarouselProps> = ({ sponsors: initialSpon
             key={sponsor.name} // Using name as key since the order will change
             style={{
               transform: `translateX(${-100 + index * 100}%)`,
-              transition: 'transform 0.7s ease-in-out'
+              transition: 'transform 0.7s ease-in-out',
             }}
             className={`absolute top-0 w-1/4 h-full flex flex-col items-center justify-center`}>
             {/* <Image src={sponsor.image} layout='fill' objectFit="contain" alt={sponsor.name} /> */}
