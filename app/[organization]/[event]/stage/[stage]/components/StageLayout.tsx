@@ -46,7 +46,7 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
         <div className="md:relative h-full flex flex-col">
           <ActionsComponent session={currentSession} title />
           <Player playbackId={currentSession.playbackId} playerName={currentSession.name} coverImage={currentSession.coverImage} />
-          <div className="hidden lg:flex h-full ">
+          <div className="hidden lg:flex max-h-[15rem] h-full  ">
             <SponsorCarousel
               sponsors={[
                 {
@@ -78,7 +78,7 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
           </div>
         </div>
       </div>
-      <div className="block lg:hidden h-full">
+      <div className="block lg:hidden h-full p-4 pb-0">
         <SponsorCarousel
           sponsors={[
             {
@@ -108,7 +108,7 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
           ]}
         />
       </div>
-      <div className="flex flex-col w-full lg:px-2 h-full lg:w-[30%] relative mt-4 lg:mt-0">
+      <div className="flex flex-col w-full p-4 lg:p-0 lg:px-2 h-full lg:w-[30%] relative lg:mt-0">
         <PluginBar
           tabs={[
             {

@@ -14,9 +14,9 @@ const ActionsComponent = ({ session, goBackButton = false, title = false }: { se
   }
 
   return (
-    <div className="flex flex-row md:w-full p-2 bg-base rounded-t shadow">
+    <div className="flex flex-row items-center md:w-full p-4 py-2 bg-base rounded-t shadow">
       {goBackButton && <ArrowUturnLeftIcon className="p-1 h-8 w-8 cursor-pointer " onClick={onBackClick} />}
-      {title && <h1 className="text-main-text">{session.name}</h1>}
+      {title && <h1 className="text-main-text mr-2">{session.name}</h1>}
       <CodeBracketIcon
         className="p-1 cursor-pointer ml-auto h-8 w-8 text-accent font-medium"
         onClick={() => {
