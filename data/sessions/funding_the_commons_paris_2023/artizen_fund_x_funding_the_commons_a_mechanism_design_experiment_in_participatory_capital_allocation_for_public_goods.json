@@ -5,15 +5,9 @@
   "start": "2023-07-16T15:30:00.000Z",
   "end": "2023-07-16T15:45:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "artizen_fund",
-      "name": "Artizen Fund",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
+  "speakers": [{ "id": "artizen_fund", "name": "Artizen Fund", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
   "videoUrl": "https://lp-playback.com/hls/b74611ldytpm6f7k/index.m3u8",
   "playbackId": "b74611ldytpm6f7k",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/artizen_fund_x_funding_the_commons_a_mechanism_design_experiment_in_participatory_capital_allocation_for_public_goods.jpg"
 }

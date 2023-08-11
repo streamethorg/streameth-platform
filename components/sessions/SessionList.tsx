@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect } from 'react'
-import Session from '@/server/model/session'
+import { ISession } from '@/server/model/session'
 import Scroll, { Element } from 'react-scroll'
 import Link from 'next/link'
 import ScheduleCard from '../schedule/ScheduleCard'
 
 interface Props {
-  sessions: Session[]
-  currentSession?: Session
+  sessions: ISession[]
+  currentSession?: ISession
 }
 
 const scroll = Scroll.scroller
@@ -36,12 +36,12 @@ export default function SessionList({ sessions, currentSession }: Props) {
   }, [currentSession])
 
   return (
-    <ul id="sessionList" className="relative space-y-2 mt-1 overflow-y-scroll">
+    <ul id="sessionList" className="h-full relative space-y-2 p-4 lg:overflow-scroll">
       {sessions.map((i) => {
         return (
           <Element key={i.id} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
-              <ScheduleCard session={i} />
+              <ScheduleCard session={i} showTime />
             </li>
           </Element>
         )

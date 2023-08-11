@@ -1,14 +1,14 @@
 import { CELL_HEIGHT, getEarliestTime, getTotalSlots } from '../utils'
 import { FilterContext } from '../../archive/components/FilterContext'
 import { useContext, useMemo } from 'react'
-import { IEvent } from '@/server/model/event'
-export default function ScheduleGrid() {
+
+export default function ScheduleGrid({ children }: { children: React.ReactNode }) {
   const { filteredItems: sessions } = useContext(FilterContext)
   const earliestTime = useMemo(() => getEarliestTime(sessions), [sessions])
-  const totalSlots = useMemo(() => getTotalSlots(sessions, earliestTime), [sessions, earliestTime])
+  const totalSlots = useMemo(() => getTotalSlots(sessions, earliestTime), [sessions, earliestTime]) + 11
 
   return (
-    <div className="flex flex-col w-full absolute top-0 r-0" style={{ height: totalSlots * CELL_HEIGHT + 'rem' }}>
+    <div className="flex flex-col w-full relative " style={{ height: totalSlots * CELL_HEIGHT + 'rem' }}>
       {Array.from({ length: totalSlots }, (_, i) => (
         <div key={i} className="w-full h-full border-t p-4">
           <h1 className="w-full text-sm text-secondary-text">
@@ -16,6 +16,7 @@ export default function ScheduleGrid() {
           </h1>
         </div>
       ))}
+      {children}
     </div>
   )
 }

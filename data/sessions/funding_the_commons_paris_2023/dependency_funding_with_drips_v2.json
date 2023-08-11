@@ -6,14 +6,10 @@
   "end": "2023-07-15T14:20:00.000Z",
   "stageId": "farabeuf_amphitheater",
   "speakers": [
-    {
-      "id": "eleftherios_diakomichalis",
-      "name": "Eleftherios Diakomichalis ",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
+    { "id": "eleftherios_diakomichalis", "name": "Eleftherios Diakomichalis ", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }
   ],
-  "videoUrl": "https://lp-playback.com/hls/91bb2q7f7ysg6061/index.m3u8",
-  "playbackId": "91bb2q7f7ysg6061",
-  "eventId": "funding_the_commons_paris_2023"
+  "videoUrl": "https://lp-playback.com/hls/f097kdp3ga75tzb5/index.m3u8",
+  "playbackId": "f097kdp3ga75tzb5",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/dependency_funding_with_drips_v2.jpg"
 }

@@ -1,0 +1,20 @@
+{
+  "id": "hoow_plant_based_meals_movements__mindsets_can_cure_disease_",
+  "name": "Hoow Plant Based Meals, Movements, & Mindsets Can Cure Disease 🥗",
+  "description": "",
+  "start": "2023-05-12T08:30:00.000Z",
+  "end": "2023-05-12T09:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "end_of_medicine_summit",
+      "name": "End of Medicine Summit",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/5f4dcblrfhhqs4kb/index.m3u8",
+  "playbackId": "5f4dcblrfhhqs4kb",
+  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}

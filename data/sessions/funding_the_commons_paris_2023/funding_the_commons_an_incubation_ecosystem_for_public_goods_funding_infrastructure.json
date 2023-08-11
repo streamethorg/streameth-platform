@@ -6,26 +6,12 @@
   "end": "2023-07-15T08:00:00.000Z",
   "stageId": "farabeuf_amphitheater",
   "speakers": [
-    {
-      "id": "evan_miyazono",
-      "name": "Evan Miyazono",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "david_casey",
-      "name": "David Casey",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "matt_frehlich",
-      "name": "Matt Frehlich",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
+    { "id": "evan_miyazono", "name": "Evan Miyazono", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
+    { "id": "david_casey", "name": "David Casey", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
+    { "id": "matt_frehlich", "name": "Matt Frehlich", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }
   ],
-  "videoUrl": "https://lp-playback.com/hls/ecbdo0gg6wfc3w3n/index.m3u8",
-  "playbackId": "ecbdo0gg6wfc3w3n",
-  "eventId": "funding_the_commons_paris_2023"
+  "videoUrl": "https://lp-playback.com/hls/c11eq8h3yerdrtd1/index.m3u8",
+  "playbackId": "c11eq8h3yerdrtd1",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/funding_the_commons_an_incubation_ecosystem_for_public_goods_funding_infrastructure.jpg"
 }

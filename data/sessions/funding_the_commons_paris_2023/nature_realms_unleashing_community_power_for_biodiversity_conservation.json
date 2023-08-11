@@ -5,15 +5,9 @@
   "start": "2023-07-16T12:40:00.000Z",
   "end": "2023-07-16T13:00:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "mallika_robinson_cofounder_of_guardians_of_earth",
-      "name": "Mallika Robinson, Co-founder of Guardians of Earth",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
+  "speakers": [{ "id": "mallika_robinson", "name": "Mallika Robinson", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
   "videoUrl": "https://lp-playback.com/hls/4d81as2fvmqu84hk/index.m3u8",
   "playbackId": "4d81as2fvmqu84hk",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/nature_realms_unleashing_community_power_for_biodiversity_conservation.jpg"
 }

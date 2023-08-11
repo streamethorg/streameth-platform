@@ -1,0 +1,20 @@
+{
+  "id": "damage_repair_and_robust_mouse_rejuvenation",
+  "name": "Damage Repair and Robust Mouse Rejuvenation",
+  "description": "Speaker: Aubrey de Grey",
+  "start": "2023-05-12T15:15:00.000Z",
+  "end": "2023-05-12T16:15:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "aubrey_de_grey",
+      "name": "Aubrey de Grey",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/5c5ainkt06sof1wh/index.m3u8",
+  "playbackId": "5c5ainkt06sof1wh",
+  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}

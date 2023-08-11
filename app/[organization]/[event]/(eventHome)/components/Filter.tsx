@@ -12,13 +12,18 @@ const Filter = ({ event }: { event: IEvent }) => {
   const days = event.end.getDate() - event.start.getDate() + 1
   const dates: FilterOption<Session>[] = []
   for (let i = 0; i < days; i++) {
-    const date = new Date(event.start.getTime() + i * 24 * 60 * 60 * 1000).toDateString()
+    const date = new Date(event.start.getTime() + i * 24 * 60 * 60 * 1000)
+    const dateValue = new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+    }).format(date)
     dates.push({
       name: 'date',
-      value: date,
+      value: dateValue,
       type: 'date',
       filterFunc: async (item: Session) => {
-        return item.start.toDateString() === date
+        console.log(item.start, date)
+        return item.start.toDateString() === date.toDateString()
       },
     })
   }
@@ -32,7 +37,7 @@ const Filter = ({ event }: { event: IEvent }) => {
   }
 
   return (
-    <div className="flex flex-row space-x-3 justify-center p-2 md:p-4 box-border">
+    <div className="flex flex-row space-x-4 justify-center p-2 md:p-4 box-border">
       {isMobile ? (
         <select className="text-xl cursor-pointer font-bold" value={selectedIndex} onChange={(e) => setSelectedIndex(Number(e.target.value))}>
           {dates.map((date, index) => (

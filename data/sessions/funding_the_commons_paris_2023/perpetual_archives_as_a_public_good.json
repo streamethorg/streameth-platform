@@ -5,15 +5,9 @@
   "start": "2023-07-16T08:50:00.000Z",
   "end": "2023-07-16T09:20:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "danny_obrein",
-      "name": "Danny O'Brein",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
+  "speakers": [{ "id": "danny_obrein", "name": "Danny O'Brein", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
   "videoUrl": "https://lp-playback.com/hls/7c4caqo68yj33p7e/index.m3u8",
   "playbackId": "7c4caqo68yj33p7e",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/perpetual_archives_as_a_public_good.jpg"
 }

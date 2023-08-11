@@ -1,0 +1,20 @@
+{
+  "id": "public_goods_funding_the_race_to_the_bottom",
+  "name": "Public Goods Funding: the Race to the Bottom",
+  "description": "In this video, Kyle from Gikwui talks about the race to the bottom in public goods funding and how they are trying to find sustainable sources of income for it. He explains Gikwui's history and how they shifted their focus to quadratic funding and voting mechanisms. He also discusses their core products and how they enable communities to fund and protect what matters to them. Kyle emphasizes the importance of community-led decision making in public goods funding and how Gikwui has raised over $50 million for it through their community's contributions. Finally, he breaks down the sources of their funding and highlights the significant contributions from their community.",
+  "start": "2023-04-12T09:00:00.000Z",
+  "end": "2023-04-12T09:55:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "kyle_weiss",
+      "name": "Kyle Weiss",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/e14bcndt72mfpcih/index.m3u8",
+  "playbackId": "e14bcndt72mfpcih",
+  "eventId": "zuzalu_montenegro_2023__public_goods",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}

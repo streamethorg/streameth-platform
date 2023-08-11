@@ -1,0 +1,20 @@
+{
+  "id": "retro_public_harms_and_behavioral_game_theory",
+  "name": "Retro Public Harms and Behavioral Game Theory",
+  "description": "The speaker is a PC economist with a background in crypto economics. He talks about behavioral game theory and how it can be useful in the crypto space. He gives examples of how behavioral economics is already being used in the industry and explains the concept of coordination in game theory. He also conducts a thought experiment on a game involving sending ETH to his wallet and discusses the issue of free riders. He shows a graph of the results of the game being played internationally and how the hope of cooperation is often replaced by the feeling of being a sucker.",
+  "start": "2023-04-14T07:00:00.000Z",
+  "end": "2023-04-14T07:55:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "matt_stephenson",
+      "name": "Matt Stephenson",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/9769ltgisw2hxhv7/index.m3u8",
+  "playbackId": "9769ltgisw2hxhv7",
+  "eventId": "zuzalu_montenegro_2023__public_goods",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}

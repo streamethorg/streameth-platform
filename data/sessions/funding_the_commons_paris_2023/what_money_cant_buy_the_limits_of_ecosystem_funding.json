@@ -5,15 +5,9 @@
   "start": "2023-07-16T09:50:00.000Z",
   "end": "2023-07-16T10:10:00.000Z",
   "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "ori_applebaum",
-      "name": "Ori Applebaum",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
+  "speakers": [{ "id": "ori_applebaum", "name": "Ori Applebaum", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
   "videoUrl": "https://lp-playback.com/hls/092fv7vgb2eypio2/index.m3u8",
   "playbackId": "092fv7vgb2eypio2",
-  "eventId": "funding_the_commons_paris_2023"
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/what_money_cant_buy_the_limits_of_ecosystem_funding.jpg"
 }

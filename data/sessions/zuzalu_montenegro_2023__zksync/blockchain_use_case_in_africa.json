@@ -1,0 +1,20 @@
+{
+  "id": "blockchain_use_case_in_africa",
+  "name": "Blockchain use case in Africa",
+  "description": "The video's description is unclear and difficult to understand. It mentions a mat Santa and wrinkled ink, as well as preparing mild coffee and wanting to talk more in the morning. It is unclear what the video is actually about.",
+  "start": "2023-04-19T06:00:00.000Z",
+  "end": "2023-04-19T07:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "eric_annan",
+      "name": "Eric Annan",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/796d25md6hwwrem2/index.m3u8",
+  "playbackId": "796d25md6hwwrem2",
+  "eventId": "zuzalu_montenegro_2023__zksync",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}

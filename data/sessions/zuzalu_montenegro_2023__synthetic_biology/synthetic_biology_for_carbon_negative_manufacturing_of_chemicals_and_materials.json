@@ -1,0 +1,20 @@
+{
+  "id": "synthetic_biology_for_carbon_negative_manufacturing_of_chemicals_and_materials",
+  "name": "Synthetic Biology for carbon negative manufacturing of chemicals and materials",
+  "description": "In this video, the founder of Lancetec discusses the urgent need to address climate change and the company's innovative solution to rebuild the carbon economy. They use a natural organism to transform waste carbon into various products, including ethanol, jet fuel, and even clothing. The process involves plugging a reactor into an industrial site and using a continuous bio reactor to convert carbon monoxide, carbon dioxide, and hydrogen into useful products. The company has already built several commercial plants and is expanding globally. The video showcases various products made from recycled carbon emissions, including a Melbourne Adidas tennis jacket and a shoe prototype. The founder emphasizes the importance of recycling and reducing waste to combat climate change.",
+  "start": "2023-04-02T06:30:00.000Z",
+  "end": "2023-04-02T06:45:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "jennifer_holmgren",
+      "name": "Jennifer Holmgren",
+      "bio": "CEO, LanzaTech",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/4d42dcr1k3foko83/index.m3u8",
+  "playbackId": "4d42dcr1k3foko83",
+  "eventId": "zuzalu_montenegro_2023__synthetic_biology",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}
