@@ -1,0 +1,20 @@
+{
+  "id": "distributed_biotech_for_interstellar_civilisations",
+  "name": "Distributed Biotech for Interstellar Civilisations",
+  "description": "In this video, the speaker discusses the impact of microgravity and radiation on human biology in space. They introduce their co-founded project, Space BioDart, which aims to study the effects of space on human cells and democratize access to space exploration. The speaker highlights the need for a new way of designing experiments and bringing together diverse teams of researchers to study the impact of space on human biology. They mention the NASA Twin study as a blueprint for coordinating experiments and discuss the challenges of sending human cells into space. The speaker also discusses the use of CubeSats for scientific experiments and the need for automation in space experiments.",
+  "start": "2023-04-02T09:00:00.000Z",
+  "end": "2023-04-02T09:15:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "sarah_rouse",
+      "name": "Sarah Rouse",
+      "bio": "Founder, SpaceBioDAO",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/04110jh6vr3zkhkn/index.m3u8",
+  "playbackId": "04110jh6vr3zkhkn",
+  "eventId": "zuzalu_montenegro_2023__synthetic_biology",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}

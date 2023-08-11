@@ -1,0 +1,20 @@
+{
+  "id": "hacking_zuzalu_passport_workshop_2",
+  "name": "Hacking Zuzalu Passport Workshop #2",
+  "description": "This video is the second workshop about the Zuzulu passport, which allows users to log in to Zuzulu.city and prove they are a member without revealing their identity. The workshop demonstrates a new feature that allows users to prove they own a particular Ethereum address. The video shows a demo of how to use this feature and how third-party integration websites can request proof of ownership. The video also includes a discussion of the code and how the passport verifies the proof.",
+  "start": "2023-04-19T14:30:00.000Z",
+  "end": "2023-04-19T16:00:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "gubsheep",
+      "name": "gubsheep",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/61bfm7wb9c9bv1j0/index.m3u8",
+  "playbackId": "61bfm7wb9c9bv1j0",
+  "eventId": "zuzalu_montenegro_2023__zksync",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}

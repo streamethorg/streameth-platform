@@ -1,0 +1,8 @@
+{
+  "id": "name_required",
+  "name": "Name (required)",
+  "bio": "Description (Required)",
+  "eventId": "zuzalu_montenegro_2023__longevity_introductory",
+  "twitter": "Twitter Handle",
+  "photo": "Avatar URL (required)"
+}

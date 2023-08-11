@@ -1,0 +1,20 @@
+{
+  "id": "hypercerts_and_impact_certification__holke_brammer",
+  "name": "Hypercerts and Impact Certification - Holke Brammer",
+  "description": "The video discusses hypersets, a new primitive for impact funding systems. The speaker gives a brief overview of where hypersets came from and what they are, and discusses their potential applications in impact funding. They explain that hypersets represent work that is expected to have a positive impact and can be split based on the scope of impact. The speaker also mentions the importance of best practices and standards for the data fields of hypersets, particularly scope of impact. The video aims to spark a discussion around hypersets and their potential uses.",
+  "start": "2023-04-14T06:00:00.000Z",
+  "end": "2023-04-14T07:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__public_goods"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/8939v3bc673hlvme/index.m3u8",
+  "playbackId": "8939v3bc673hlvme",
+  "eventId": "zuzalu_montenegro_2023__public_goods",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+}
