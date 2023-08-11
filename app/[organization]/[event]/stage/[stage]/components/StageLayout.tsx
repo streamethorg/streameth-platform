@@ -1,12 +1,12 @@
 import Stage from '@/server/model/stage'
 import SessionController from '@/server/controller/session'
-import { InformationCircleIcon, ChatBubbleBottomCenterIcon, CalendarIcon } from '@heroicons/react/24/outline'
+import { ChatBubbleBottomCenterIcon, CalendarIcon } from '@heroicons/react/24/outline'
 import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/plugins/Chat'
 import Player from '@/components/misc/Player'
 import PluginBar from '@/components/Layout/PluginBar'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import ActionsComponent from '../../../session/[session]/components/ActionsComponent'
+import SponsorCarousel from '@/components/misc/Sponsors'
 
 export default async function StageLayout({ stage }: { stage: Stage }) {
   const sessionController = new SessionController()
@@ -43,12 +43,72 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
       <div className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:gap-4 lg:overflow-scroll">
-        <div className="md:relative">
+        <div className="md:relative h-full flex flex-col">
           <ActionsComponent session={currentSession} title />
           <Player playbackId={currentSession.playbackId} playerName={currentSession.name} coverImage={currentSession.coverImage} />
+          <div className="hidden lg:flex h-full ">
+            <SponsorCarousel
+              sponsors={[
+                {
+                  name: 'Sponsor 1',
+                  image: 'https://via.placeholder.com/150',
+                },
+                {
+                  name: 'Sponsor 2',
+                  image: 'https://via.placeholder.com/150',
+                },
+                {
+                  name: 'Sponsor 3',
+                  image: 'https://via.placeholder.com/150',
+                },
+                {
+                  name: 'Sponsor 4',
+                  image: 'https://via.placeholder.com/150',
+                },
+                {
+                  name: 'Sponsor 5',
+                  image: 'https://via.placeholder.com/150',
+                },
+                {
+                  name: 'Sponsor 6',
+                  image: 'https://via.placeholder.com/150',
+                },
+              ]}
+            />
+          </div>
         </div>
       </div>
-      <div className="flex flex-col w-full lg:px-2 h-full lg:w-[30%] relative">
+      <div className="block lg:hidden h-full">
+        <SponsorCarousel
+          sponsors={[
+            {
+              name: 'Sponsor 1',
+              image: 'https://via.placeholder.com/150',
+            },
+            {
+              name: 'Sponsor 2',
+              image: 'https://via.placeholder.com/150',
+            },
+            {
+              name: 'Sponsor 3',
+              image: 'https://via.placeholder.com/150',
+            },
+            {
+              name: 'Sponsor 4',
+              image: 'https://via.placeholder.com/150',
+            },
+            {
+              name: 'Sponsor 5',
+              image: 'https://via.placeholder.com/150',
+            },
+            {
+              name: 'Sponsor 6',
+              image: 'https://via.placeholder.com/150',
+            },
+          ]}
+        />
+      </div>
+      <div className="flex flex-col w-full lg:px-2 h-full lg:w-[30%] relative mt-4 lg:mt-0">
         <PluginBar
           tabs={[
             {

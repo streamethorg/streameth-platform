@@ -50,11 +50,11 @@ export default function Navbar({
 
   return (
     <div>
-      <button onClick={() => setIsNavVisible(!isNavVisible)} className="md:hidden p-4 absolute top-0 ml-16">
+      <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden p-4 absolute top-0 ml-16">
         {!isNavVisible ? <Bars2Icon className="w-8 h-8" /> : <XMarkIcon className="w-8 h-8" />}
       </button>
       <header
-        className={`shadow-sm z-50 bg-base border-r border-primary fixed top-0 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} md:block`}>
+        className={`shadow-sm z-50 bg-base border-r border-primary fixed top-0 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} lg:block`}>
         <div className="flex flex-col items-center justify-between ">
           <div className="items-center flex py-2">
             <Link href="/">

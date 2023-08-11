@@ -41,6 +41,7 @@ export const Player = ({ playbackId, playerName, coverImage }: { playbackId?: st
   )
 
   return (
+    <div className="relative w-full aspect-video">
     <LivepeerPlayer
       mediaElementRef={mediaElementRef}
       playbackId={playbackId}
@@ -55,6 +56,7 @@ export const Player = ({ playbackId, playerName, coverImage }: { playbackId?: st
       controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
       viewerId={address}
     />
+   </div>
   )
 }
 
