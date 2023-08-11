@@ -7,38 +7,43 @@ import Player from '@/components/misc/Player'
 import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '../../../session/[session]/components/ActionsComponent'
 import SponsorCarousel from '@/components/misc/Sponsors'
-
+import EventController from '@/server/controller/event'
 export default async function StageLayout({ stage }: { stage: Stage }) {
   const sessionController = new SessionController()
-  const getCurrentSessionForStage = async () => {
+  const eventController = new EventController()
+
+  const getSessions = async () => {
     const sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
-    const stageSessions = sessions.filter((ses) => ses.stageId === stage.id)
-    for (const session of stageSessions) {
-      const now = new Date()
-      if (session.start <= now && session.end >= now) {
-        return session
-      }
+    // sort sessions by start time
+    const sortedSessions = sessions.sort((a, b) => {
+      return new Date(a.start).getTime() - new Date(b.start).getTime()
+    })
+    let date: Date
+    if (new Date().getDate() === sortedSessions[0].start.getDate()) {
+      date = new Date()
+    } else {
+      date = sortedSessions[0].start
     }
-    return stageSessions[stageSessions.length - 1]
+
+    // return session of current date or earliest date
+    const a = sortedSessions.filter((session) => {
+      return session.start.getDate() === date.getDate()
+    })
+    return a.map((session) => session.toJson())
   }
 
-  const getSessionsForStage = async () => {
-    const sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
-    const stageSessions = sessions.filter((ses) => ses.stageId === stage.id)
-    const now = new Date()
-    return stageSessions.filter((ses) => ses.end >= now)
-  }
-
-  const sessions = (await getSessionsForStage()).sort((a, b) => a.start.getTime() - b.start.getTime())
-  const currentSession = await getCurrentSessionForStage()
-
-  if (!currentSession) {
+  const sessions = await getSessions()
+  if (!sessions) {
     return (
       <div>
         <p>There are no sessions scheduled for this stage.</p>
       </div>
     )
   }
+
+  const currentSession = sessions.find((session) => {
+    return new Date(session.start).getTime() <= new Date().getTime() && new Date(session.end).getTime() >= new Date().getTime()
+  }) || sessions[0]
 
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">

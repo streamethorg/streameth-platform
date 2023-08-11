@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect } from 'react'
-import Session from '@/server/model/session'
+import { ISession } from '@/server/model/session'
 import Scroll, { Element } from 'react-scroll'
 import Link from 'next/link'
 import ScheduleCard from '../schedule/ScheduleCard'
 
 interface Props {
-  sessions: Session[]
-  currentSession?: Session
+  sessions: ISession[]
+  currentSession?: ISession
 }
 
 const scroll = Scroll.scroller
