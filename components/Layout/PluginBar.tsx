@@ -24,16 +24,14 @@ export default function PluginBar({
           <div key={tab.id} onClick={() => setSelectedId(tab.id)} className="m-2 w-full ">
             <div
               className={`${
-                selectedId === tab.id
-                  ? 'bg-accent text-white  font-bold'
-                  : '  hover:bg-accent hover:text-white cursor-pointer text-main-text font-bold'
+                selectedId === tab.id ? 'bg-accent text-white  font-bold' : 'hover:bg-accent hover:text-white cursor-pointer text-main-text font-bold'
               } p-2 uppercase w-full rounded text-center text-sm `}>
               {tab.id}
             </div>
           </div>
         ))}
       </div>
-      <div className="flex flex-col w-full flex-grow" key={selectedId}>
+      <div className="flex flex-col w-full flex-grow lg:overflow-scroll" key={selectedId}>
         {selectedTab.content}
       </div>
     </div>

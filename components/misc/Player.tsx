@@ -41,20 +41,22 @@ export const Player = ({ playbackId, playerName, coverImage }: { playbackId?: st
   )
 
   return (
-    <LivepeerPlayer
-      mediaElementRef={mediaElementRef}
-      playbackId={playbackId}
-      showTitle={false}
-      showPipButton={false}
-      muted={true}
-      autoPlay
-      priority
-      lowLatency
-      // poster={<OfflinePlayer />}
-      showLoadingSpinner={true}
-      controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
-      viewerId={address}
-    />
+    <div className="relative w-full aspect-video">
+      <LivepeerPlayer
+        mediaElementRef={mediaElementRef}
+        playbackId={playbackId}
+        showTitle={false}
+        showPipButton={false}
+        muted={true}
+        autoPlay
+        priority
+        lowLatency
+        // poster={<OfflinePlayer />}
+        showLoadingSpinner={true}
+        controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
+        viewerId={address}
+      />
+    </div>
   )
 }
 

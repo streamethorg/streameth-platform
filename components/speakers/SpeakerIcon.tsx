@@ -29,7 +29,7 @@ export default function SpeakerIcon({ speaker, onSpeakerClick, size = 'sm', only
         style={{ backgroundImage: `url('${avatar}')` }}
       />
       {!onlyImage && <span className="text-main-text text-lg">{speaker.name}</span>}
-      {speaker.twitter && (
+      {speaker.twitter && !onlyImage && (
         <SocialIcon
           url={`https://twitter.com/${speaker.twitter}`}
           target="_blank"

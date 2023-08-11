@@ -33,23 +33,23 @@ const SessionsOnSchedule = ({ stageId }: { stageId: string }) => {
   }
 
   return (
-    <div className="flex flex-col relative w-full mr-2">
+    <>
       {sessionsWithBlank.map((session) => {
         const range = getSlotRange(session, earliestTime);
         return (
           <div
             key={session.id}
-            className="absolute top-0 left-0 w-full h-full p-1"
+            className="absolute right-0 h-full w-full p-1"
             style={{
               top: range.start * CELL_HEIGHT + "rem",
               height: (range.end - range.start) * CELL_HEIGHT + "rem",
             }}
           >
-            {session.name !== "Blank" && <ScheduleCard session={session} />}
+            {session.name !== "Blank" && <ScheduleCard session={session}  />}
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ const EventPage = async ({
       <FilterContextProvider
         items={sessions.map((session) => session.toJson())}
       >
-        <div className="w-full h-full relative">
+        <div className="w-full h-full relative md:overflow-scroll">
           <SchedulePage
             stages={stages.map((stage) => stage.toJson())}
             event={event.toJson()}

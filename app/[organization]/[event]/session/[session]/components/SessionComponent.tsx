@@ -22,7 +22,6 @@ export default async function SessionComponent({
       <div className="flex flex-col w-full h-full lg:w-[70%] box-border relative gap-4 lg:overflow-scroll">
         <div className="sticky top-0 md:relative">
           <ActionsComponent session={session} />
-
           <Player
             playbackId={session.playbackId}
             playerName={session.name}
