@@ -66,13 +66,7 @@ const Layout = async ({
           })}
         />
       )}
-      <main
-        className={`flex w-full ${
-          event.archiveMode ? " lg:w-full" : "lg:w-[calc(100%-5rem)]"
-        } ml-auto bg-background`}
-      >
-        {children}
-      </main>
+      <main className={`flex w-full ${event.archiveMode ? ' lg:w-full' : 'lg:w-[calc(100%-5rem)]'} ml-auto bg-background`}>{children}</main>
     </div>
   )
 }

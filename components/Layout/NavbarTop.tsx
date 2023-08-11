@@ -16,7 +16,13 @@ export default function Navbar() {
       </div>
       <div className="flex flex-row items-center justify-end  w-full">
         <SocialIcon url={`https://twitter.com/streameth`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
-        <SocialIcon url={`https://github.com/streamethorg/streameth-platform`} target="_blank" bgColor="#fff" fgColor="#000" className={`"h-8 w-8"`} />
+        <SocialIcon
+          url={`https://github.com/streamethorg/streameth-platform`}
+          target="_blank"
+          bgColor="#fff"
+          fgColor="#000"
+          className={`"h-8 w-8"`}
+        />
       </div>
     </header>
   )

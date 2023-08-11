@@ -27,14 +27,9 @@ const EventPage = async ({
     const sessions = await sessionController.getAllSessionsForEvent(event.id)
 
     return (
-      <FilterContextProvider
-        items={sessions.map((session) => session.toJson())}
-      >
+      <FilterContextProvider items={sessions.map((session) => session.toJson())}>
         <div className="w-full h-full relative md:overflow-scroll">
-          <SchedulePage
-            stages={stages.map((stage) => stage.toJson())}
-            event={event.toJson()}
-          />
+          <SchedulePage stages={stages.map((stage) => stage.toJson())} event={event.toJson()} />
         </div>
       </FilterContextProvider>
     )

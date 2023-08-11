@@ -9,27 +9,21 @@ export interface FilterOption<T> {
 }
 
 const FilterContext = createContext<{
-  items: any[];
-  isLoading: boolean;
-  filteredItems: any[];
-  filterOptions: FilterOption<any>[];
-  setFilterOptions: React.Dispatch<React.SetStateAction<FilterOption<any>[]>>;
+  items: any[]
+  isLoading: boolean
+  filteredItems: any[]
+  filterOptions: FilterOption<any>[]
+  setFilterOptions: React.Dispatch<React.SetStateAction<FilterOption<any>[]>>
 }>({
   items: [],
   isLoading: true,
   filteredItems: [],
   filterOptions: [],
   setFilterOptions: () => {},
-});
-const FilterContextProvider = <T extends object>({
-  children,
-  items,
-}: {
-  children: React.ReactNode;
-  items: T[];
-}) => {
-  const [filterOptions, setFilterOptions] = useState<FilterOption<T>[]>([]);
-  const [filteredItems, setFilteredItems] = useState<T[]>(items);
+})
+const FilterContextProvider = <T extends object>({ children, items }: { children: React.ReactNode; items: T[] }) => {
+  const [filterOptions, setFilterOptions] = useState<FilterOption<T>[]>([])
+  const [filteredItems, setFilteredItems] = useState<T[]>(items)
   const [isLoading, setIsLoading] = useState(true)
 
   const filterItems = async () => {
@@ -45,13 +39,11 @@ const FilterContextProvider = <T extends object>({
   }
 
   useEffect(() => {
-    filterItems().then((items) =>{
+    filterItems().then((items) => {
       setFilteredItems(items)
       setIsLoading(false)
-    } );
-  }, [filterOptions]);
-
-
+    })
+  }, [filterOptions])
 
   return (
     <FilterContext.Provider

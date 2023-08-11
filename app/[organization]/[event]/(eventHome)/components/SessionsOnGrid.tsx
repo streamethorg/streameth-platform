@@ -31,16 +31,15 @@ const SessionsOnSchedule = ({ stageId }: { stageId: string }) => {
             key={session.id}
             className="absolute right-0 h-full w-full p-1"
             style={{
-              top: range.start * CELL_HEIGHT + "rem",
-              height: (range.end - range.start) * CELL_HEIGHT + "rem",
-            }}
-          >
-            {session.name !== "Blank" && <ScheduleCard session={session}  />}
+              top: range.start * CELL_HEIGHT + 'rem',
+              height: (range.end - range.start) * CELL_HEIGHT + 'rem',
+            }}>
+            {session.name !== 'Blank' && <ScheduleCard session={session} />}
           </div>
         )
       })}
     </>
-  );
-};
+  )
+}
 
 export default SessionsOnSchedule

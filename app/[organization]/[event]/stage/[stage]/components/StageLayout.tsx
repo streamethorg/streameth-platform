@@ -41,9 +41,10 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
     )
   }
 
-  const currentSession = sessions.find((session) => {
-    return new Date(session.start).getTime() <= new Date().getTime() && new Date(session.end).getTime() >= new Date().getTime()
-  }) || sessions[0]
+  const currentSession =
+    sessions.find((session) => {
+      return new Date(session.start).getTime() <= new Date().getTime() && new Date(session.end).getTime() >= new Date().getTime()
+    }) || sessions[0]
 
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">

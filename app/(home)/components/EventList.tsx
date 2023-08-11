@@ -5,7 +5,7 @@ import EventCard from './EventCard'
 import { IEvent } from '@/server/model/event'
 
 const EventList = () => {
-  const { filteredItems, isLoading } = useContext(FilterContext);
+  const { filteredItems, isLoading } = useContext(FilterContext)
 
   if (isLoading) {
     return <></>
