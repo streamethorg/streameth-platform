@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
+
 const ComponentCard = ({
   children,
   title,
@@ -19,14 +20,18 @@ const ComponentCard = ({
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed)
   }
+
   return (
     <div className={`shadow rounded flex flex-col bg-base ${streatch && 'flex-grow'}`}>
       {title && (
-        <div className={`flex font-bold flex-row rounded-t  ${!isCollapsed && 'border-b-2 border-accent'} text-main-text p-2 px-4 uppercase `}>
-          {title}
-          {date && <div className="pt-2 text-sm md:ml-auto md:text-md md:pt-0 text-gray-400">{date.toDateString()}</div>}
+        <div
+          className={`flex font-bold flex-row items-center rounded-t  ${
+            !isCollapsed && 'border-b-2 border-accent'
+          } text-main-text p-2 px-4 uppercase `}>
+          <div className="flex-grow">{title}</div>
+          {date && <div className="pl-1 text-sm md:text-md text-gray-400">{date.toDateString()}</div>}
           {collapasble && (
-            <div className="flex ml-auto md:text-md bold">
+            <div className="flex ml-2">
               <button className="focus:outline-none" onClick={toggleCollapse}>
                 <ChevronDownIcon className={`w-6 ${isCollapsed ? 'text-accent transform rotate-180' : ''}`} />
               </button>
