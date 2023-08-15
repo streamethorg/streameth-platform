@@ -29,7 +29,7 @@ export const Player = ({
   coverImage,
 }: {
   playbackId?: string
-  streamId: string
+  streamId?: string
   playerName: string
   coverImage?: string
 }) => {

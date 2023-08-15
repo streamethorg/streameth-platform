@@ -7,32 +7,59 @@ import Player from '@/components/misc/Player'
 import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '../../../session/[session]/components/ActionsComponent'
 import SponsorCarousel from '@/components/misc/Sponsors'
-import EventController from '@/server/controller/event'
+import { ISession as SessionType } from '@/server/model/session'
+
+type Sponsor = {
+  name: string
+  image: string
+}
+
+const sponsoredData: Sponsor[] | null = null // [{ name: 'Hello', image: 'world' }]
+
+const LeftPane = ({ currentSession, stage }: { currentSession: SessionType; stage?: Stage }) => (
+  <div className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:gap-4 lg:overflow-scroll">
+    <ActionsComponent session={currentSession} title />
+    {stage && <Player streamId={stage.streamSettings.streamId} playerName={currentSession.name} coverImage={currentSession.coverImage} />}
+    {sponsoredData && <SponsorsCarousel />}
+  </div>
+)
+
+const RightPane = ({ stageId, sessions }: { stageId: string; sessions: SessionType[] }) => (
+  <div className="flex flex-col w-full p-4 lg:p-0 lg:px-2 h-full lg:w-[30%] relative lg:mt-0">
+    <PluginBar
+      tabs={[
+        { id: 'chat', header: <ChatBubbleBottomCenterIcon />, content: <Chat conversationId={stageId} /> },
+        { id: 'schedule', header: <CalendarIcon />, content: <SessionList sessions={sessions} /> },
+      ]}
+    />
+  </div>
+)
+
+const SponsorsCarousel = () => (
+  <div className="hidden lg:flex max-h-[15rem] h-full">{sponsoredData && <SponsorCarousel sponsors={sponsoredData} />}</div>
+)
+
 export default async function StageLayout({ stage }: { stage: Stage }) {
   const sessionController = new SessionController()
-  const eventController = new EventController()
 
   const getSessions = async () => {
     const sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
-    // sort sessions by start time
-    const sortedSessions = sessions.sort((a, b) => {
-      return new Date(a.start).getTime() - new Date(b.start).getTime()
-    })
-    let date: Date
-    if (new Date().getDate() === sortedSessions[0].start.getDate()) {
-      date = new Date()
-    } else {
-      date = sortedSessions[0].start
-    }
+    const sortedSessions = sessions.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+    const currentDate = new Date().getDate() === sortedSessions[0].start.getDate() ? new Date() : sortedSessions[0].start
 
-    // return session of current date or earliest date
-    const a = sortedSessions.filter((session) => {
-      return session.start.getDate() === date.getDate()
-    })
-    return a.map((session) => session.toJson())
+    return sortedSessions.filter((session) => session.start.getDate() === currentDate.getDate()).map((session) => session.toJson())
+  }
+
+  const getCurrentSession = (sessions: SessionType[]) => {
+    return (
+      sessions.find(
+        (session) => new Date(session.start).getTime() <= new Date().getTime() && new Date(session.end).getTime() >= new Date().getTime()
+      ) || sessions[0]
+    )
   }
 
   const sessions = await getSessions()
+
   if (!sessions) {
     return (
       <div>
@@ -41,94 +68,12 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
     )
   }
 
-  const currentSession = sessions.find((session) => {
-    return new Date(session.start).getTime() <= new Date().getTime() && new Date(session.end).getTime() >= new Date().getTime()
-  }) || sessions[0]
+  const currentSession = getCurrentSession(sessions)
 
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
-      <div className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:gap-4 lg:overflow-scroll">
-        <div className="md:relative h-full flex flex-col">
-          <ActionsComponent session={currentSession} title />
-          <Player playbackId={currentSession.playbackId} playerName={currentSession.name} coverImage={currentSession.coverImage} />
-          <div className="hidden lg:flex max-h-[15rem] h-full  ">
-            <SponsorCarousel
-              sponsors={[
-                {
-                  name: 'Sponsor 1',
-                  image: 'https://via.placeholder.com/150',
-                },
-                {
-                  name: 'Sponsor 2',
-                  image: 'https://via.placeholder.com/150',
-                },
-                {
-                  name: 'Sponsor 3',
-                  image: 'https://via.placeholder.com/150',
-                },
-                {
-                  name: 'Sponsor 4',
-                  image: 'https://via.placeholder.com/150',
-                },
-                {
-                  name: 'Sponsor 5',
-                  image: 'https://via.placeholder.com/150',
-                },
-                {
-                  name: 'Sponsor 6',
-                  image: 'https://via.placeholder.com/150',
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="block lg:hidden h-full p-4 pb-0">
-        <SponsorCarousel
-          sponsors={[
-            {
-              name: 'Sponsor 1',
-              image: 'https://via.placeholder.com/150',
-            },
-            {
-              name: 'Sponsor 2',
-              image: 'https://via.placeholder.com/150',
-            },
-            {
-              name: 'Sponsor 3',
-              image: 'https://via.placeholder.com/150',
-            },
-            {
-              name: 'Sponsor 4',
-              image: 'https://via.placeholder.com/150',
-            },
-            {
-              name: 'Sponsor 5',
-              image: 'https://via.placeholder.com/150',
-            },
-            {
-              name: 'Sponsor 6',
-              image: 'https://via.placeholder.com/150',
-            },
-          ]}
-        />
-      </div>
-      <div className="flex flex-col w-full p-4 lg:p-0 lg:px-2 h-full lg:w-[30%] relative lg:mt-0">
-        <PluginBar
-          tabs={[
-            {
-              id: 'chat',
-              header: <ChatBubbleBottomCenterIcon />,
-              content: <Chat conversationId={stage.id} />,
-            },
-            {
-              id: 'schedule',
-              header: <CalendarIcon />,
-              content: <SessionList sessions={sessions} />,
-            },
-          ]}
-        />
-      </div>
+      <LeftPane currentSession={currentSession} stage={stage} />
+      <RightPane stageId={stage.id} sessions={sessions} />
     </div>
   )
 }
