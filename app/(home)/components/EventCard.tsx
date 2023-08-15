@@ -1,39 +1,35 @@
-"use client";
-import { useState, useContext } from "react";
-import { IEvent } from "@/server/model/event";
-import Image from "next/image";
-import Logo from "@/public/logo.png";
-import Card from "@/components/misc/Card";
-import { ModalContext } from "@/components/context/ModalContext";
-import { useRouter } from "next/navigation";
-import {hasData} from "@/server/utils";
+'use client'
+import { useState, useContext } from 'react'
+import { IEvent } from '@/server/model/event'
+import Image from 'next/image'
+import Cover from '@/public/cover.png'
+import Card from '@/components/misc/Card'
+import { ModalContext } from '@/components/context/ModalContext'
+import { useRouter } from 'next/navigation'
+import { hasData } from '@/server/utils'
 
 const EventCard = ({ event }: { event: IEvent }) => {
-  const [image, setImage] = useState("/events/" + event.id + ".png");
-  const { openModal } = useContext(ModalContext);
-  const router = useRouter();
-  
+  const [image, setImage] = useState('/events/' + event.id + '.png')
+  const { openModal } = useContext(ModalContext)
+  const router = useRouter()
+  const isAvailable = hasData({ event })
+
   const onCardClick = () => {
-    if (hasData({event})) {
-      router.push(`${event.organizationId}/${event.id}`);
+    if (isAvailable) {
+      router.push(`${event.organizationId}/${event.id}`)
     } else {
       openModal(
         <div className="flex flex-col items-center">
-          <h1 className="text-2xl text-main-text font-bold">
-            This event has no data yet
-          </h1>
-          <p className="text-secondary-text text-center">
-            This event has no data. Please contact the event organizer to
-            request access.
-          </p>
+          <h1 className="text-2xl text-main-text font-bold">This event has no data yet</h1>
+          <p className="text-secondary-text text-center">This event has no data. Please contact the event organizer to request access.</p>
         </div>
-      );
+      )
     }
-  };
+  }
 
   return (
     <a onClick={onCardClick}>
-      <Card>
+      <Card isAvailable={isAvailable}>
         <div className="aspect-video relative">
           <Image
             className="rounded"
@@ -42,14 +38,14 @@ const EventCard = ({ event }: { event: IEvent }) => {
             src={image}
             fill
             style={{
-              objectFit: "cover",
+              objectFit: 'cover',
             }}
             onError={() => {
-              setImage(Logo.src);
+              setImage(Cover.src)
             }}
             onLoadingComplete={(result) => {
               if (result.naturalHeight === 0) {
-                setImage(Logo.src);
+                setImage(Cover.src)
               }
             }}
           />
@@ -62,7 +58,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
         </div>
       </Card>
     </a>
-  );
-};
+  )
+}
 
-export default EventCard;
+export default EventCard

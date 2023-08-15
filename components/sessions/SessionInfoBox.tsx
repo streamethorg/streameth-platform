@@ -1,11 +1,6 @@
 'use client'
-import { useContext } from 'react'
 import { ISession } from '@/server/model/session'
-import { ShareIcon, CodeBracketIcon } from '@heroicons/react/24/outline'
-import EmbedSessionModal from '@/components/sessions/EmbedSession'
-import { ModalContext } from '@/components/context/ModalContext'
 import ComponetCard from '../misc/ComponentCard'
-import { useAsset, useAssetMetrics, usePlaybackInfo } from '@livepeer/react'
 
 const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
   if (!session) {

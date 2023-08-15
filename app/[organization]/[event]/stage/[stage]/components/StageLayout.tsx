@@ -70,6 +70,7 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
 
   const currentSession = getCurrentSession(sessions)
 
+
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
       <LeftPane currentSession={currentSession} stage={stage} />
