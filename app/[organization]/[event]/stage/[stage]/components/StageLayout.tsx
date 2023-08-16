@@ -43,11 +43,21 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
   const sessionController = new SessionController()
 
   const getSessions = async () => {
-    const sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
-    const sortedSessions = sessions.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
-    const currentDate = new Date().getDate() === sortedSessions[0].start.getDate() ? new Date() : sortedSessions[0].start
+    let sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
 
-    return sortedSessions.filter((session) => session.start.getDate() === currentDate.getDate()).map((session) => session.toJson())
+    sessions = stage.id ? sessions.filter((session) => session.stageId === stage.id) : sessions
+
+    const sortedSessions = sessions.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+
+    let currentDate = new Date(sortedSessions[0].start)
+    let currentSessions = sortedSessions.filter((session) => session.start.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0])
+
+    while (currentSessions.length === 0 && currentDate <= new Date(sortedSessions[sortedSessions.length - 1].start)) {
+      currentDate.setDate(currentDate.getDate() + 1)
+      currentSessions = sortedSessions.filter((session) => session.start.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0])
+    }
+
+    return currentSessions.map((session) => session.toJson())
   }
 
   const getCurrentSession = (sessions: SessionType[]) => {

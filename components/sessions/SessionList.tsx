@@ -36,20 +36,13 @@ export default function SessionList({ sessions, currentSession, currentStage }: 
     }
   }, [currentSession])
 
-  console.log(currentSession)
-
-  const filteredSessions = currentStage ? sessions.filter((session) => session.stageId === currentStage) : sessions
-
-  console.log(currentStage)
-  console.log("filteredSessions:", filteredSessions)
-  if (filteredSessions === undefined || filteredSessions.length === 0) {
-    console.log('Empty')
+  if (sessions === undefined || sessions.length === 0) {
     return <NoSessionComponent />
   }
 
   return (
     <ul id="sessionList" className="h-full relative space-y-2 p-4 lg:overflow-scroll">
-      {filteredSessions.map((i) => {
+      {sessions.map((i) => {
         return (
           <Element key={i.id} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
