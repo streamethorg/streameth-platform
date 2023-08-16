@@ -8,6 +8,7 @@ import ScheduleCard from '../schedule/ScheduleCard'
 interface Props {
   sessions: ISession[]
   currentSession?: ISession
+  currentStage?: string
 }
 
 const scroll = Scroll.scroller
@@ -23,7 +24,7 @@ function NoSessionComponent() {
   )
 }
 
-export default function SessionList({ sessions, currentSession }: Props) {
+export default function SessionList({ sessions, currentSession, currentStage }: Props) {
   useEffect(() => {
     if (currentSession) {
       scroll.scrollTo(currentSession.id, {
@@ -35,9 +36,20 @@ export default function SessionList({ sessions, currentSession }: Props) {
     }
   }, [currentSession])
 
+  console.log(currentSession)
+
+  const filteredSessions = currentStage ? sessions.filter((session) => session.stageId === currentStage) : sessions
+
+  console.log(currentStage)
+  console.log("filteredSessions:", filteredSessions)
+  if (filteredSessions === undefined || filteredSessions.length === 0) {
+    console.log('Empty')
+    return <NoSessionComponent />
+  }
+
   return (
     <ul id="sessionList" className="h-full relative space-y-2 p-4 lg:overflow-scroll">
-      {sessions.map((i) => {
+      {filteredSessions.map((i) => {
         return (
           <Element key={i.id} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
@@ -46,7 +58,6 @@ export default function SessionList({ sessions, currentSession }: Props) {
           </Element>
         )
       })}
-      {sessions.length === 0 && <NoSessionComponent />}
     </ul>
   )
 }

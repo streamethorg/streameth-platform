@@ -29,7 +29,7 @@ const RightPane = ({ stageId, sessions }: { stageId: string; sessions: SessionTy
     <PluginBar
       tabs={[
         { id: 'chat', header: <ChatBubbleBottomCenterIcon />, content: <Chat conversationId={stageId} /> },
-        { id: 'schedule', header: <CalendarIcon />, content: <SessionList sessions={sessions} /> },
+        { id: 'schedule', header: <CalendarIcon />, content: <SessionList sessions={sessions} currentStage={stageId} /> },
       ]}
     />
   </div>

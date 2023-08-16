@@ -3,10 +3,11 @@ import SpeakerIcon from '@/components/speakers/SpeakerIcon'
 import { ModalContext } from '../context/ModalContext'
 import { useContext } from 'react'
 import ScheduleCardModal from '@/components/schedule/ScheduleCardModal'
+
 const ScheduleCard = ({ session, showTime = false }: { session: ISession; showTime?: boolean }) => {
   const { openModal } = useContext(ModalContext)
-  // test isActive
-  const isActive = session.start.getTime() < Date.now() && session.end.getTime() > Date.now()
+  const isActive = session.start.getTime() < Date.now() && session.end.getTime() > Date.now() // TODO: Test Active
+
   return (
     <div
       className="flex space-y-3 flex-col w-full h-full bg-base shadow rounded p-2 cursor-pointer"
