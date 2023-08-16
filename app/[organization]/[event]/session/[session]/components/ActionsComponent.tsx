@@ -1,5 +1,5 @@
 'use client'
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import { ISession } from '@/server/model/session'
 import { ShareIcon, CodeBracketIcon, ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 import EmbedSessionModal from '@/components/sessions/EmbedSession'
@@ -9,8 +9,19 @@ import { useRouter } from 'next/navigation'
 const ActionsComponent = ({ session, goBackButton = false, title = false }: { session: ISession; goBackButton?: boolean; title?: boolean }) => {
   const modal = useContext(ModalContext)
   const router = useRouter()
+  const [copied, setCopied] = useState(false) // State for "Copied!" message visibility
+
   const onBackClick = () => {
     router.back()
+  }
+
+  const handleShareClick = () => {
+    navigator.clipboard.writeText(window.location.href)
+
+    setCopied(true)
+    setTimeout(() => {
+      setCopied(false)
+    }, 3000)
   }
 
   return (
@@ -23,7 +34,8 @@ const ActionsComponent = ({ session, goBackButton = false, title = false }: { se
           modal.openModal(<EmbedSessionModal stageId={session.stageId} />)
         }}
       />
-      <ShareIcon className="p-1 h-8 w-8 cursor-pointer ml-3 text-accent" />
+      <ShareIcon className="p-1 h-8 w-8 cursor-pointer ml-3 text-accent" onClick={handleShareClick} />
+      {copied && <span className="ml-3 text-accent transition-opacity duration-300">Copied!</span>}
     </div>
   )
 }
