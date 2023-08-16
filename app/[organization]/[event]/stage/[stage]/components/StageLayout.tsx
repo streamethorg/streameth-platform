@@ -45,16 +45,27 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
   const getSessions = async () => {
     let sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
 
-    sessions = stage.id ? sessions.filter((session) => session.stageId === stage.id) : sessions
+    if (!sessions || !sessions.length) {
+      return []
+    }
 
-    const sortedSessions = sessions.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+    sessions = stage.id ? sessions.filter((session) => session.stageId === stage.id) : sessions
+    const sortedSessions = sessions.filter((session) => session.start).sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+
+    if (!sortedSessions || !sortedSessions.length) {
+      return []
+    }
 
     let currentDate = new Date(sortedSessions[0].start)
-    let currentSessions = sortedSessions.filter((session) => session.start.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0])
+    let currentSessions = sortedSessions.filter(
+      (session) => session.start && session.start.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0]
+    )
 
     while (currentSessions.length === 0 && currentDate <= new Date(sortedSessions[sortedSessions.length - 1].start)) {
       currentDate.setDate(currentDate.getDate() + 1)
-      currentSessions = sortedSessions.filter((session) => session.start.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0])
+      currentSessions = sortedSessions.filter(
+        (session) => session.start && session.start.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0]
+      )
     }
 
     return currentSessions.map((session) => session.toJson())
@@ -70,7 +81,7 @@ export default async function StageLayout({ stage }: { stage: Stage }) {
 
   const sessions = await getSessions()
 
-  if (!sessions) {
+  if (!sessions || sessions.length === 0) {
     return (
       <div>
         <p>There are no sessions scheduled for this stage.</p>
