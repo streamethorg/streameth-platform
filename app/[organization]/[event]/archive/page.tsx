@@ -21,6 +21,14 @@ export default async function ArchivePage({ params }: Params) {
     return session.videoUrl != undefined
   })
 
+  if (videoSessions === undefined || videoSessions.length === 0) {
+    return (
+      <div className="flex justify-center items-center w-full h-full lg:overflow-hidden">
+        <span className="text-2xl font-bold text-center">No videos are uploaded yet</span>
+      </div>
+    )
+  }
+
   const speakerController = new SpeakerController()
   const speakers = (await speakerController.getAllSpeakersForEvent(params.event)).map((speaker) => {
     return speaker.toJson()
