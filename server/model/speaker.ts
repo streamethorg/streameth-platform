@@ -21,7 +21,7 @@ export default class Speaker implements ISpeaker {
   @IsNotEmpty()
   name: string;
 
-  @IsNotEmpty()
+  // @IsNotEmpty()
   bio: string;
 
   @IsNotEmpty()
