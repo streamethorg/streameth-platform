@@ -7,6 +7,7 @@ import { createConfig, configureChains, mainnet, WagmiConfig } from 'wagmi'
 import { publicProvider } from '@wagmi/core/providers/public'
 
 import '@rainbow-me/rainbowkit/styles.css'
+import { Analytics } from '@vercel/analytics/react'
 
 const { chains, publicClient, webSocketPublicClient } = configureChains([mainnet], [publicProvider()])
 
@@ -35,6 +36,7 @@ const GeneralContext = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <WagmiConfig config={config}>
+      <Analytics />
       <RainbowKitProvider chains={chains}>
         <LivepeerConfig client={livepeerClient}>{children}</LivepeerConfig>
       </RainbowKitProvider>
