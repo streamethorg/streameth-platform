@@ -1,1 +1,8 @@
-{ "id": "goerli", "name": "Goerli", "eventId": "ethereum_argentina_2023", "streamSettings": { "streamId": "1b83-3jmu-1v8g-og78" } }
+{
+  "id": "goerli",
+  "name": "Goerli",
+  "eventId": "ethereum_argentina_2023",
+  "streamSettings": {
+    "streamId": "1b835c32-063b-4ab2-a61c-02db3e131be2"
+  }
+}
