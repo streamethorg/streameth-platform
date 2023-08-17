@@ -1,1 +1,12 @@
-{"id":"buildathon_pitch_final","name":"Buildathon Pitch Final","description":"","start":"2023-08-19T08:30:00.000Z","end":"2023-08-19T11:00:00.000Z","stageId":"goerli","speakers":[],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/buildathon_pitch_final.jpg"}
+{
+  "id": "buildathon_pitch_final",
+  "name": "Buildathon Pitch Final",
+  "description": "",
+  "start": "2023-08-19T08:30:00.000Z",
+  "end": "2023-08-19T11:00:00.000Z",
+  "stageId": "goerli",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/buildathon_pitch_final.jpg"
+}

@@ -1,1 +1,21 @@
-{"id":"cmo_mejorar_la_usabilidad_en_crypto_puede_propulsar_adopcin_masiva","name":"Cómo mejorar la usabilidad en Crypto puede propulsar Adopción Masiva","description":"","start":"2023-08-18T12:30:00.000Z","end":"2023-08-18T13:00:00.000Z","stageId":"goerli","speakers":[{"id":"jaf","name":"Jaf","bio":"Miembro del core team de Push Protocol","eventId":"ethereum_argentina_2023","twitter":"@jafetsc","photo":"https://drive.google.com/file/d/16xkFzpAWnoHIgDgpS94ng5Ymmz8INfAx/view?usp=drivesdk"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/cmo_mejorar_la_usabilidad_en_crypto_puede_propulsar_adopcin_masiva.jpg"}
+{
+  "id": "cmo_mejorar_la_usabilidad_en_crypto_puede_propulsar_adopcin_masiva",
+  "name": "Cómo mejorar la usabilidad en Crypto puede propulsar Adopción Masiva",
+  "description": "",
+  "start": "2023-08-18T12:30:00.000Z",
+  "end": "2023-08-18T13:00:00.000Z",
+  "stageId": "goerli",
+  "speakers": [
+    {
+      "id": "jaf",
+      "name": "Jaf",
+      "bio": "Miembro del core team de Push Protocol",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@jafetsc",
+      "photo": "https://drive.google.com/file/d/16xkFzpAWnoHIgDgpS94ng5Ymmz8INfAx/view?usp=drivesdk"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/cmo_mejorar_la_usabilidad_en_crypto_puede_propulsar_adopcin_masiva.jpg"
+}

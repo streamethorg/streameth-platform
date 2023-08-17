@@ -1,1 +1,21 @@
-{"id":"ai_la_bomba_deflacionaria","name":"AI: La bomba deflacionaria","description":"","start":"2023-08-17T16:30:00.000Z","end":"2023-08-17T17:00:00.000Z","stageId":"mainnet","speakers":[{"id":"hodlertom","name":"HodlerTom","bio":"Ex JP Morgan, actual COO de Defy Education, profesor de la materia de Blockchain en ITBA e investigador para Visa y MasterCard en crypto.","eventId":"ethereum_argentina_2023","twitter":"@HodlerTom","photo":"https://drive.google.com/file/d/1nHOzb1brNJ-8sRmFZKDAfBrpod0DYiqv/view "}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/ai_la_bomba_deflacionaria.jpg"}
+{
+  "id": "ai_la_bomba_deflacionaria",
+  "name": "AI: La bomba deflacionaria",
+  "description": "",
+  "start": "2023-08-17T16:30:00.000Z",
+  "end": "2023-08-17T17:00:00.000Z",
+  "stageId": "mainnet",
+  "speakers": [
+    {
+      "id": "hodlertom",
+      "name": "HodlerTom",
+      "bio": "Ex JP Morgan, actual COO de Defy Education, profesor de la materia de Blockchain en ITBA e investigador para Visa y MasterCard en crypto.",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@HodlerTom",
+      "photo": "https://drive.google.com/file/d/1nHOzb1brNJ-8sRmFZKDAfBrpod0DYiqv/view "
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/ai_la_bomba_deflacionaria.jpg"
+}

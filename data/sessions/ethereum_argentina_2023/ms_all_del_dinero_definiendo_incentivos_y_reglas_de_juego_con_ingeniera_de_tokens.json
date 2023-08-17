@@ -1,1 +1,21 @@
-{"id":"ms_all_del_dinero_definiendo_incentivos_y_reglas_de_juego_con_ingeniera_de_tokens","name":"Más allá del dinero: Definiendo incentivos y reglas de juego con Ingeniería de Tokens","description":"","start":"2023-08-18T14:00:00.000Z","end":"2023-08-18T14:30:00.000Z","stageId":"goerli","speakers":[{"id":"natyshi","name":"NatyShi","bio":"Blockchain & Crypto School Owner en @platzi | Web3 researcher & content creator | @W3Talk podcast co-host | Token Engineering Jr | \"Poniendo lo difícil en lenguaje simple\"","eventId":"ethereum_argentina_2023","twitter":"@NatyShi_","photo":"https://storage.tally.so/private/2rWpmbBA_400x400.jpg?id=MeveXl&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik1ldmVYbCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODg1NjE3NX0.A2R1uWC4yobcrpEiESTV8wRHHJ1eMBoeTCs4OWIPwkQ&signature=122ae351e82effa43f1ae01a6615d11621c48215ae1353ab78d9582687511170"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/ms_all_del_dinero_definiendo_incentivos_y_reglas_de_juego_con_ingeniera_de_tokens.jpg"}
+{
+  "id": "ms_all_del_dinero_definiendo_incentivos_y_reglas_de_juego_con_ingeniera_de_tokens",
+  "name": "Más allá del dinero: Definiendo incentivos y reglas de juego con Ingeniería de Tokens",
+  "description": "",
+  "start": "2023-08-18T14:00:00.000Z",
+  "end": "2023-08-18T14:30:00.000Z",
+  "stageId": "goerli",
+  "speakers": [
+    {
+      "id": "natyshi",
+      "name": "NatyShi",
+      "bio": "Blockchain & Crypto School Owner en @platzi | Web3 researcher & content creator | @W3Talk podcast co-host | Token Engineering Jr | \"Poniendo lo difícil en lenguaje simple\"",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@NatyShi_",
+      "photo": "https://storage.tally.so/private/2rWpmbBA_400x400.jpg?id=MeveXl&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik1ldmVYbCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODg1NjE3NX0.A2R1uWC4yobcrpEiESTV8wRHHJ1eMBoeTCs4OWIPwkQ&signature=122ae351e82effa43f1ae01a6615d11621c48215ae1353ab78d9582687511170"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/ms_all_del_dinero_definiendo_incentivos_y_reglas_de_juego_con_ingeniera_de_tokens.jpg"
+}

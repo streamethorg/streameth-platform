@@ -1,1 +1,21 @@
-{"id":"decentralizing_aggregators","name":"Decentralizing Aggregators","description":"","start":"2023-08-18T13:30:00.000Z","end":"2023-08-18T14:00:00.000Z","stageId":"goerli","speakers":[{"id":"agustin_grosso","name":"Agustin Grosso","bio":"","eventId":"ethereum_argentina_2023","twitter":"","photo":"https://storage.tally.so/private/IMG_5585-2.jpg?id=44ABQX&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0QUJRWCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODQxNTc0OX0.EiDvm3HDbLgjKkGHUEblUBMvoeZjs-GHTzaQzRrCZXs&signature=92eb402caa3a0ab704b35a8804532e8bfaa8781ab9d74baec6eb7df516914203"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/decentralizing_aggregators.jpg"}
+{
+  "id": "decentralizing_aggregators",
+  "name": "Decentralizing Aggregators",
+  "description": "",
+  "start": "2023-08-18T13:30:00.000Z",
+  "end": "2023-08-18T14:00:00.000Z",
+  "stageId": "goerli",
+  "speakers": [
+    {
+      "id": "agustin_grosso",
+      "name": "Agustin Grosso",
+      "bio": "",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "",
+      "photo": "https://storage.tally.so/private/IMG_5585-2.jpg?id=44ABQX&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0QUJRWCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODQxNTc0OX0.EiDvm3HDbLgjKkGHUEblUBMvoeZjs-GHTzaQzRrCZXs&signature=92eb402caa3a0ab704b35a8804532e8bfaa8781ab9d74baec6eb7df516914203"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/decentralizing_aggregators.jpg"
+}

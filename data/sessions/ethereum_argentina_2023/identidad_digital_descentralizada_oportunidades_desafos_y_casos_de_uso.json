@@ -1,1 +1,41 @@
-{"id":"identidad_digital_descentralizada_oportunidades_desafos_y_casos_de_uso","name":"Identidad Digital Descentralizada: oportunidades, desafíos y casos de uso","description":"","start":"2023-08-19T12:00:00.000Z","end":"2023-08-19T12:30:00.000Z","stageId":"goerli","speakers":[{"id":"pedro_alessandri","name":"Pedro Alessandri","bio":"Director General de Ciudadanía Digital GCBA - Lidera el equipo de implementación de Quark ID","eventId":"ethereum_argentina_2023","twitter":"@gcba"},{"id":"pablo_mosquella","name":"Pablo Mosquella","bio":"COO en Extrimian","eventId":"ethereum_argentina_2023","twitter":"@pmosque3"},{"id":"daniela_hansen_krogh","name":"Daniela Hansen Krogh","bio":"Directora de tecnologías y sistemas de información - INCUCAI","eventId":"ethereum_argentina_2023","twitter":"@incucaioficial"},{"id":"otto_mora","name":"Otto Mora","bio":"Tech Sales Lead Americas, Polygon ID","eventId":"ethereum_argentina_2023","twitter":"@ottomorac"},{"id":"alfonso_campenni","name":"Alfonso Campenni","bio":"Web3 social educator Metapro Academy, BizDev Proof Of Integrity, Quark ID en GCBA","eventId":"ethereum_argentina_2023"}],"playbackId":"","eventId":"ethereum_argentina_2023","coverImage":"/sessions/ethereum_argentina_2023/identidad_digital_descentralizada_oportunidades_desafos_y_casos_de_uso.jpg"}
+{
+  "id": "identidad_digital_descentralizada_oportunidades_desafos_y_casos_de_uso",
+  "name": "Identidad Digital Descentralizada: oportunidades, desafíos y casos de uso",
+  "description": "",
+  "start": "2023-08-19T12:00:00.000Z",
+  "end": "2023-08-19T12:30:00.000Z",
+  "stageId": "goerli",
+  "speakers": [
+    {
+      "id": "pedro_alessandri",
+      "name": "Pedro Alessandri",
+      "bio": "Director General de Ciudadanía Digital GCBA - Lidera el equipo de implementación de Quark ID",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@gcba"
+    },
+    { "id": "pablo_mosquella", "name": "Pablo Mosquella", "bio": "COO en Extrimian", "eventId": "ethereum_argentina_2023", "twitter": "@pmosque3" },
+    {
+      "id": "daniela_hansen_krogh",
+      "name": "Daniela Hansen Krogh",
+      "bio": "Directora de tecnologías y sistemas de información - INCUCAI",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@incucaioficial"
+    },
+    {
+      "id": "otto_mora",
+      "name": "Otto Mora",
+      "bio": "Tech Sales Lead Americas, Polygon ID",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@ottomorac"
+    },
+    {
+      "id": "alfonso_campenni",
+      "name": "Alfonso Campenni",
+      "bio": "Web3 social educator Metapro Academy, BizDev Proof Of Integrity, Quark ID en GCBA",
+      "eventId": "ethereum_argentina_2023"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/identidad_digital_descentralizada_oportunidades_desafos_y_casos_de_uso.jpg"
+}
