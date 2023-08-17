@@ -2,14 +2,14 @@
   "id": "rastreos_criptogrficos_en_causas_penales_de_argentina",
   "name": "Rastreos criptográficos en causas penales de Argentina",
   "description": "",
-  "start": "2023-08-19T14:30:00.000Z",
-  "end": "2023-08-19T15:00:00.000Z",
-  "stageId": "main_stage",
+  "start": "2023-08-19T15:00:00.000Z",
+  "end": "2023-08-19T15:30:00.000Z",
+  "stageId": "mainnet",
   "speakers": [
     {
       "id": "denis_banchero",
       "name": "Denis Banchero",
-      "bio": "No description",
+      "bio": "Abogado, Secretario en la Fiscalía de Ciberdelitos de San Isidro, con una experiencia de 11 años en el Poder Judicial. Especialista en rastreo de criptoactivos.",
       "eventId": "ethereum_argentina_2023",
       "twitter": "",
       "photo": "https://storage.tally.so/private/WhatsApp-Image-2023-07-03-at-17.26.16.jpeg?id=GxXKlj&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ikd4WEtsaiIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODQxNjI3Nn0.N3ENNGFVcbszsYl6qa9qMKNPPocZ6jX2E66eUjQMh1o&signature=cd8ac491d413745bb3e78dab23091cd4b65d96c7a34f2010d3a21c430d69e65f"

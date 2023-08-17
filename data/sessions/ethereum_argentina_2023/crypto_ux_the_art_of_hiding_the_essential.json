@@ -4,12 +4,12 @@
   "description": "",
   "start": "2023-08-18T08:30:00.000Z",
   "end": "2023-08-18T09:00:00.000Z",
-  "stageId": "main_stage",
+  "stageId": "mainnet",
   "speakers": [
     {
       "id": "ged",
       "name": "Ged",
-      "bio": "No description",
+      "bio": "Co-founder & ceo of Mean Finance, worked as a software developer for ~12 years, and has worked for some of the most known DAOs in the space. Also, an OG of the web3 LATAM crypto communities.",
       "eventId": "ethereum_argentina_2023",
       "twitter": "@0xged",
       "photo": "https://storage.tally.so/private/progress_image_100_35927e62-f329-4e7e-8256-5c8851a88e10.webp?id=rjGo8p&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJqR284cCIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODQzMTAzNn0.gEZFtn0cwo3MnvXFVpld0vuzkBQdDgd5kDacXXm_EcE&signature=875c598f033ac9c41435259ad1f73fd7b39c34c5aafb0a70808336643c78f388"

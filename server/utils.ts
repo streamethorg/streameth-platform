@@ -10,7 +10,7 @@ export const generateId = (key: string) => {
 }
 
 export const BASE_PATH = path.join(process.cwd(), 'data')
-//export const BASE_PATH = "../data";
+// export const BASE_PATH = "../data";
 export const PUBLIC_PATH = '../public'
 
 export const hasData = ({ event }: { event: IEvent }) => {

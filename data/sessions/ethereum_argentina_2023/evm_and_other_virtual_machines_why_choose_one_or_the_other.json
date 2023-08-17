@@ -1,0 +1,51 @@
+{
+  "id": "evm_and_other_virtual_machines_why_choose_one_or_the_other",
+  "name": "EVM and other virtual machines: Why choose one or the other?",
+  "description": "",
+  "start": "2023-08-19T10:30:00.000Z",
+  "end": "2023-08-19T11:00:00.000Z",
+  "stageId": "mainnet",
+  "speakers": [
+    {
+      "id": "omar_espejel",
+      "name": "Omar Espejel",
+      "bio": "Cairo Blockchain Engineer at the Starknet Foundation",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@espejeloma",
+      "photo": "https://storage.tally.so/private/1VcZRNVX_400x400-2-.png?id=EkEPKo&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkVrRVBLbyIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY5MDgxNDI4MH0.L2EmOwBm27Sxhw4ms-tM2KcLAFCNvZZcrRRy0b2eyFE&signature=4c3f7b5e68d8413868801085e6ec718e57b43735885e37676b86fbb0744e7fab"
+    },
+    {
+      "id": "omar_azhar",
+      "name": "Omar Azhar",
+      "bio": "Head of Business Development and Partnerships at zkSync.",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@zksync"
+    },
+    {
+      "id": "ahmed",
+      "name": "Ahmed",
+      "bio": "Creador de contenido educativo para desarrolladores en web3 en el canal Filosofía Código en Youtube. DevRel en Scroll. ",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@FilosofiaCodigo",
+      "photo": "https://storage.tally.so/private/06-removebg-preview.png?id=A74bRo&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkE3NGJSbyIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY4ODc0OTMyNX0.P3WvNd5DIMr0634Z3YDS_zMlBOgsIP17rA1WDgRE_Kg&signature=8f180e9c9ccaa42a22e876635af382f8c52e1f0b8f0b764c42c1ec30c789bfb0"
+    },
+    {
+      "id": "austin_marrazza",
+      "name": "Austin Marrazza\n",
+      "bio": "Product, Offchain Labs, first builders of Arbitrum\n",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@MarrazzaAustin"
+    },
+    {
+      "id": "pablo_sabbatella",
+      "name": "Pablo Sabbatella",
+      "bio": "Ethereum Security researcher",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@PabloSabbatella",
+      "photo": "https://drive.google.com/file/d/16xkFzpAWnoHIgDgpS94ng5Ymmz8INfAx/view?usp=drivesdk"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/evm_and_other_virtual_machines_why_choose_one_or_the_other.jpg"
+}

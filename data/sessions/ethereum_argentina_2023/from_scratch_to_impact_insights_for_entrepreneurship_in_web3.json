@@ -1,0 +1,21 @@
+{
+  "id": "from_scratch_to_impact_insights_for_entrepreneurship_in_web3",
+  "name": "From Scratch to Impact: Insights for entrepreneurship in Web3",
+  "description": "",
+  "start": "2023-08-19T13:00:00.000Z",
+  "end": "2023-08-19T13:30:00.000Z",
+  "stageId": "mainnet",
+  "speakers": [
+    {
+      "id": "sebas_serrano",
+      "name": "Sebas Serrano",
+      "bio": "CEO y Co-Fundador de Ripio",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@sserrano44",
+      "photo": "https://storage.tally.so/private/Sebastian-100.jpg?id=rjQpVv&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJqUXBWdiIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY5MTUyMzA4MH0.imO63e7nYYoxVoI7GPov49afqGP2beIeSgF0NHs1tkI&signature=a31464b8e7251f4ba89bee163c246dbc45e978f2aebaf027d8fda93ee949c5fb"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/from_scratch_to_impact_insights_for_entrepreneurship_in_web3.jpg"
+}

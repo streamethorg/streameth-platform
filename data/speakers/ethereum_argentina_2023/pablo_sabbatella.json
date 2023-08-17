@@ -1,1 +1,8 @@
-{ "id": "pablo_sabbatella", "name": "Pablo Sabbatella", "bio": "No description", "eventId": "ethereum_argentina_2023", "twitter": "@PabloSabbatella" }
+{
+  "id": "pablo_sabbatella",
+  "name": "Pablo Sabbatella",
+  "bio": "Ethereum Security researcher",
+  "eventId": "ethereum_argentina_2023",
+  "twitter": "@PabloSabbatella",
+  "photo": "https://drive.google.com/file/d/16xkFzpAWnoHIgDgpS94ng5Ymmz8INfAx/view?usp=drivesdk"
+}

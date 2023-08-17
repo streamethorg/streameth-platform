@@ -1,0 +1,21 @@
+{
+  "id": "tale_of_the_wallet",
+  "name": "Tale of the Wallet",
+  "description": "",
+  "start": "2023-08-19T14:30:00.000Z",
+  "end": "2023-08-19T15:00:00.000Z",
+  "stageId": "mainnet",
+  "speakers": [
+    {
+      "id": "nicolas_consigny",
+      "name": "Nicolas Consigny",
+      "bio": "Devrel at Ledger, internet's own boy.",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@Ledger",
+      "photo": "https://storage.tally.so/private/nico_pp.png?id=q4XGak&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InE0WEdhayIsImZvcm1JZCI6IjN4akxEOSIsImlhdCI6MTY5MTE4OTI4M30.4pIbsWrgSvBWhXIA8EEls_a-f8gjgQ46DcJU0Dh-W38&signature=ff53a3c4e2978003f18271911c07bfe21d7b4122455454c04a689ef83c5db4ad"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/tale_of_the_wallet.jpg"
+}

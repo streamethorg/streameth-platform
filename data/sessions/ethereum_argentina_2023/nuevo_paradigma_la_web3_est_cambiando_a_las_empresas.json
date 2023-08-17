@@ -1,0 +1,29 @@
+{
+  "id": "nuevo_paradigma_la_web3_est_cambiando_a_las_empresas",
+  "name": "Nuevo paradigma: ¿La Web3 está cambiando a las empresas?",
+  "description": "",
+  "start": "2023-08-18T10:30:00.000Z",
+  "end": "2023-08-18T11:00:00.000Z",
+  "stageId": "mainnet",
+  "speakers": [
+    { "id": "agustn_ferrar", "name": "Agustín Ferrar", "bio": "Globant", "eventId": "ethereum_argentina_2023", "twitter": "@Globant" },
+    { "id": "federico_murrone", "name": "Federico Murrone", "bio": "Lirium", "eventId": "ethereum_argentina_2023", "twitter": "@fedemurrone" },
+    {
+      "id": "juan_vita",
+      "name": "Juan Vita",
+      "bio": "Product Sr. Director Mercado Pago",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@mercadopago"
+    },
+    {
+      "id": "federico_cofman",
+      "name": "Federico Cofman",
+      "bio": "Cluster Leader de Mastercard para Argentina, Uruguay & Paraguay",
+      "eventId": "ethereum_argentina_2023",
+      "twitter": "@Mastercard"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethereum_argentina_2023",
+  "coverImage": "/sessions/ethereum_argentina_2023/nuevo_paradigma_la_web3_est_cambiando_a_las_empresas.jpg"
+}
