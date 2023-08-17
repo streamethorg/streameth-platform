@@ -38,11 +38,14 @@ export default function Navbar({
       <div className="flex flex-col items-center justify-center">
         <h1 className="font-bold uppercase mb-2 text-accent">Select a stage</h1>
         {stages.map((stage) => (
-          <div className={`p-4 border-2 rounded m-1 ${pathname === stage.href && 'bg-accent rounded text-primary'}`} key={stage.name}>
-            <Link key={stage.name} href={stage.href}>
-              <p className="">{stage.name}</p>
-            </Link>
-          </div>
+          <Link key={stage.name} href={stage.href}>
+            <div
+              className={`p-4 border-2 rounded m-1 cursor-pointer w-[200px] h-[50px] flex items-center justify-center hover:bg-gray-400
+                         ${pathname === stage.href && 'bg-accent rounded text-primary'}`}
+              key={stage.name}>
+              <p>{stage.name}</p>
+            </div>
+          </Link>
         ))}
       </div>
     )

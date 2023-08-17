@@ -26,7 +26,7 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
         value: 'date',
         type: 'date',
         filterFunc: async (item: IEvent) => {
-          return isShowCurrent ? item.start.getTime() < Date.now() : item.start.getTime() > Date.now()
+          return isShowCurrent ? item.end.getTime() < Date.now() : item.end.getTime() > Date.now()
         },
       },
     ])

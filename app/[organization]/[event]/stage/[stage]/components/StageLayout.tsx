@@ -14,7 +14,7 @@ type Sponsor = {
   image: string
 }
 
-const sponsoredData: Sponsor[] | null = null // [{ name: 'Hello', image: 'world' }]
+const sponsoredData: Sponsor[] | null = null
 
 const LeftPane = ({ currentSession, stage }: { currentSession: SessionType; stage?: Stage }) => (
   <div className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:gap-4 lg:overflow-scroll">
@@ -29,7 +29,7 @@ const RightPane = ({ stageId, sessions }: { stageId: string; sessions: SessionTy
     <PluginBar
       tabs={[
         { id: 'chat', header: <ChatBubbleBottomCenterIcon />, content: <Chat conversationId={stageId} /> },
-        { id: 'schedule', header: <CalendarIcon />, content: <SessionList sessions={sessions} /> },
+        { id: 'schedule', header: <CalendarIcon />, content: <SessionList sessions={sessions} currentStage={stageId} /> },
       ]}
     />
   </div>
@@ -39,28 +39,43 @@ const SponsorsCarousel = () => (
   <div className="hidden lg:flex max-h-[15rem] h-full">{sponsoredData && <SponsorCarousel sponsors={sponsoredData} />}</div>
 )
 
+const extractDate = (date: Date) => date.toISOString().split('T')[0]
+
+const getCurrentSession = (sessions: SessionType[]) => {
+  const now = new Date().getTime()
+  return sessions.find((session) => new Date(session.start).getTime() <= now && new Date(session.end).getTime() >= now) || sessions[0]
+}
+
 export default async function StageLayout({ stage }: { stage: Stage }) {
   const sessionController = new SessionController()
 
   const getSessions = async () => {
-    const sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
-    const sortedSessions = sessions.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
-    const currentDate = new Date().getDate() === sortedSessions[0].start.getDate() ? new Date() : sortedSessions[0].start
+    let sessions = await sessionController.getAllSessionsForEvent(stage.eventId)
 
-    return sortedSessions.filter((session) => session.start.getDate() === currentDate.getDate()).map((session) => session.toJson())
-  }
+    if (!sessions || !sessions.length) {
+      return []
+    }
 
-  const getCurrentSession = (sessions: SessionType[]) => {
-    return (
-      sessions.find(
-        (session) => new Date(session.start).getTime() <= new Date().getTime() && new Date(session.end).getTime() >= new Date().getTime()
-      ) || sessions[0]
-    )
+    sessions = stage.id ? sessions.filter((session) => session.stageId === stage.id) : sessions
+    const sortedSessions = sessions.filter((session) => session.start).sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+
+    if (!sortedSessions.length) return []
+
+    let currentDate = new Date(sortedSessions[0].start)
+    let currentSessions = sortedSessions.filter((session) => session.start && extractDate(session.start) === extractDate(currentDate))
+
+    const lastSessionDate = new Date(sortedSessions[sortedSessions.length - 1].start)
+    while (!currentSessions.length && currentDate <= lastSessionDate) {
+      currentDate.setDate(currentDate.getDate() + 1)
+      currentSessions = sortedSessions.filter((session) => session.start && extractDate(session.start) === extractDate(currentDate))
+    }
+
+    return currentSessions.map((session) => session.toJson())
   }
 
   const sessions = await getSessions()
 
-  if (!sessions) {
+  if (!sessions.length) {
     return (
       <div>
         <p>There are no sessions scheduled for this stage.</p>
