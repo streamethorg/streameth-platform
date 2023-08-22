@@ -14,3 +14,16 @@ export async function GET(request: Request, { params }: { params: { id: string }
     })
   )
 }
+
+export async function POST(request: Request, { params }: { params: { id: string } }) {
+  const eventController = new EventController()
+  try {
+    const eventData = { ...(await request.json()), organizationId: params.id }
+
+    const data = await eventController.createEvent(eventData)
+    return NextResponse.json(data)
+  } catch (e) {
+    console.log(e)
+    return NextResponse.json({ error: 'Malformed request' }, { status: 400 })
+  }
+}

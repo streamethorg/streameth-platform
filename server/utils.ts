@@ -16,3 +16,10 @@ export const PUBLIC_PATH = '../public'
 export const hasData = ({ event }: { event: IEvent }) => {
   return event.dataImporter !== undefined
 }
+
+export const apiUrl = () => {
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:3000/api'
+  }
+  return 'https://app.streameth.org/api'
+}

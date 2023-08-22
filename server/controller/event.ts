@@ -19,6 +19,7 @@ export default class EventController {
 
   public async createEvent(event: Omit<IEvent, "id">): Promise<Event> {
     const evt = new Event({ ...event });
+    await evt.validateThis();
     const eventQuery = await Event.getEventPath(evt.organizationId, evt.id);
     await this.controller.create(eventQuery, evt);
     return evt;

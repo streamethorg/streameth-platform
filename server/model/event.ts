@@ -83,7 +83,7 @@ export default class Event implements IEvent {
     this.eventCover = eventCover;
     this.website = website;
     this.archiveMode = archiveMode ?? true;
-    this.validateThis();
+    // this.validateThis();
   }
 
   async validateThis() {
