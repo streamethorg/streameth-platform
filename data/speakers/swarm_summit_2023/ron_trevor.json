@@ -1,1 +1,7 @@
-{"id":"ron_trevor","name":"Ron Trevor","bio":"Main programmer of Swarm Integration within Nextcloud","eventId":"swarm_summit_2023","twitter":"https://summit.ethswarm.org/media/avatars/ron_j8nX0Wy.jpg"}
+{
+  "id": "ron_trevor",
+  "name": "Ron Trevor",
+  "bio": "Main programmer of Swarm Integration within Nextcloud",
+  "eventId": "swarm_summit_2023",
+  "twitter": "https://summit.ethswarm.org/media/avatars/ron_j8nX0Wy.jpg"
+}

@@ -1,1 +1,7 @@
-{"id":"d","name":"D.","bio":"D. is a research engineer interested in distributed systems,  trust aware and privacy preserving computing, as well as applied mechanism design.\r\n\r\nThey are currently working on the anoma protocol specification and its prototypes.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/network_sketch_qBtEL3l.png"}
+{
+  "id": "d",
+  "name": "D.",
+  "bio": "D. is a research engineer interested in distributed systems,  trust aware and privacy preserving computing, as well as applied mechanism design.\r\n\r\nThey are currently working on the anoma protocol specification and its prototypes.",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/network_sketch_qBtEL3l.png"
+}

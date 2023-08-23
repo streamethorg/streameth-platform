@@ -1,1 +1,8 @@
-{"id":"id","name":"id","bio":"Name (required)","eventId":"spagetteth_naples","twitter":"Description (Required)","photo":"Avatar URL (required)"}
+{
+  "id": "id",
+  "name": "id",
+  "bio": "Name (required)",
+  "eventId": "spagetteth_naples",
+  "twitter": "Description (Required)",
+  "photo": "Avatar URL (required)"
+}

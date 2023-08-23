@@ -14,9 +14,11 @@ export async function generateStaticParams() {
 }
 
 const EventPage = async ({ params }: { params: { organization: string } }) => {
-  const events: IEvent[] = await (await fetch(`${apiUrl()}/organizations/${params.organization}/events`, {
-    cache: 'no-store',
-  })).json()
+  const events: IEvent[] = await (
+    await fetch(`${apiUrl()}/organizations/${params.organization}/events`, {
+      cache: 'no-store',
+    })
+  ).json()
 
   return (
     <div className="p-4 overflow-scroll">
@@ -24,7 +26,7 @@ const EventPage = async ({ params }: { params: { organization: string } }) => {
         <div className="text-blue-500">Back to Admin</div>
       </Link>
 
-      <AddEventButton organization={params.organization}  />
+      <AddEventButton organization={params.organization} />
       <ul className="space-y-4">
         {events.map((event) => (
           <EventEntry key={event.id} event={event} />

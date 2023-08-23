@@ -1,1 +1,7 @@
-{"id":"barnab_monnot","name":"Barnabé Monnot","bio":"Barnabé Monnot is a research scientist for the Robust Incentives Group, a research team of the Ethereum Foundation dedicated to the study of cryptoeconomics and mechanism design.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/BarnabeMonnot_EthereumFoundation_JjIqnnp.jpg"}
+{
+  "id": "barnab_monnot",
+  "name": "Barnabé Monnot",
+  "bio": "Barnabé Monnot is a research scientist for the Robust Incentives Group, a research team of the Ethereum Foundation dedicated to the study of cryptoeconomics and mechanism design.",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/BarnabeMonnot_EthereumFoundation_JjIqnnp.jpg"
+}

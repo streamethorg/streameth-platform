@@ -1,1 +1,20 @@
-{"id":"evolution_of_optimistic_rollup_proofs","name":"Evolution of Optimistic Rollup proofs","description":"L2 Rollups are a core component of the Ethereum scaling strategy, and the security landscape is actively changing. This talk compares the different optimistic rollup proving methods, how EIP-4844 data-availability affects a proof, and how the proof itself can be designed with the latest L2 tech.","start":"2023-09-15T11:00:00.000Z","end":"2023-09-15T11:25:00.000Z","stageId":"atelier__side_stage","speakers":[{"id":"protolambda","name":"protolambda","bio":"Protocol R&D at OP Labs, previously Eth2 researcher at EF. Working on Ethereum scaling, 4844, rollup security and blockchain architecture.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/pineapple_profile_G0mWdZk.png"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/evolution_of_optimistic_rollup_proofs.jpg"}
+{
+  "id": "evolution_of_optimistic_rollup_proofs",
+  "name": "Evolution of Optimistic Rollup proofs",
+  "description": "L2 Rollups are a core component of the Ethereum scaling strategy, and the security landscape is actively changing. This talk compares the different optimistic rollup proving methods, how EIP-4844 data-availability affects a proof, and how the proof itself can be designed with the latest L2 tech.",
+  "start": "2023-09-15T11:00:00.000Z",
+  "end": "2023-09-15T11:25:00.000Z",
+  "stageId": "atelier__side_stage",
+  "speakers": [
+    {
+      "id": "protolambda",
+      "name": "protolambda",
+      "bio": "Protocol R&D at OP Labs, previously Eth2 researcher at EF. Working on Ethereum scaling, 4844, rollup security and blockchain architecture.",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/pineapple_profile_G0mWdZk.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/evolution_of_optimistic_rollup_proofs.jpg"
+}

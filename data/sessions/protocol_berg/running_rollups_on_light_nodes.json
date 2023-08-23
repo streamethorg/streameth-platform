@@ -1,1 +1,21 @@
-{"id":"running_rollups_on_light_nodes","name":"Running rollups on light nodes","description":"Learn how to run rollup software on a data availability sampling light node.","start":"2023-09-15T14:30:00.000Z","end":"2023-09-15T15:10:00.000Z","stageId":"loft__workshop_0","speakers":[{"id":"rene","name":"rene","bio":"data availability @ celestia","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/rene_SUpKCIJ.jpg"},{"id":"nashq","name":"NashQ","bio":null,"eventId":"protocol_berg","photo":""}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/running_rollups_on_light_nodes.jpg"}
+{
+  "id": "running_rollups_on_light_nodes",
+  "name": "Running rollups on light nodes",
+  "description": "Learn how to run rollup software on a data availability sampling light node.",
+  "start": "2023-09-15T14:30:00.000Z",
+  "end": "2023-09-15T15:10:00.000Z",
+  "stageId": "loft__workshop_0",
+  "speakers": [
+    {
+      "id": "rene",
+      "name": "rene",
+      "bio": "data availability @ celestia",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/rene_SUpKCIJ.jpg"
+    },
+    { "id": "nashq", "name": "NashQ", "bio": null, "eventId": "protocol_berg", "photo": "" }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/running_rollups_on_light_nodes.jpg"
+}

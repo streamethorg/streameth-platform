@@ -1,1 +1,6 @@
-{"id":"farabeuf_amphitheater","name":"Farabeuf Amphitheater","eventId":"funding_the_commons_paris_2023","streamSettings":{"streamId":"123"}}
+{
+  "id": "farabeuf_amphitheater",
+  "name": "Farabeuf Amphitheater",
+  "eventId": "funding_the_commons_paris_2023",
+  "streamSettings": { "streamId": "123" }
+}

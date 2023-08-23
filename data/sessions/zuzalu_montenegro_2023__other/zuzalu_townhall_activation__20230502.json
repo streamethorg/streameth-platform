@@ -1,1 +1,13 @@
-{"id":"zuzalu_townhall_activation__20230502","name":"Zuzalu Townhall Activation - 2023-05-02","description":"","start":"2023-05-02T12:30:00.000Z","end":"2023-05-02T14:00:00.000Z","stageId":"dome","speakers":[{"id":"zuzalu_team","name":"Zuzalu Team","bio":"No description","eventId":"zuzalu_montenegro_2023__other"}],"videoUrl":"https://lp-playback.com/hls/8712yvnwrg6thsjl/index.m3u8","playbackId":"8712yvnwrg6thsjl","eventId":"zuzalu_montenegro_2023__other","coverImage":"/sessions/zuzalu_montenegro_2023__other/zuzalu_townhall_activation__20230502.jpg"}
+{
+  "id": "zuzalu_townhall_activation__20230502",
+  "name": "Zuzalu Townhall Activation - 2023-05-02",
+  "description": "",
+  "start": "2023-05-02T12:30:00.000Z",
+  "end": "2023-05-02T14:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [{ "id": "zuzalu_team", "name": "Zuzalu Team", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }],
+  "videoUrl": "https://lp-playback.com/hls/8712yvnwrg6thsjl/index.m3u8",
+  "playbackId": "8712yvnwrg6thsjl",
+  "eventId": "zuzalu_montenegro_2023__other",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__other/zuzalu_townhall_activation__20230502.jpg"
+}
