@@ -13,6 +13,8 @@ export const BASE_PATH = path.join(process.cwd(), 'data')
 // export const BASE_PATH = "../data";
 export const PUBLIC_PATH = '../public'
 
+export const IMAGE_BASE_PATH = path.join(process.cwd(), 'public')
+
 export const hasData = ({ event }: { event: IEvent }) => {
   return event.dataImporter !== undefined
 }

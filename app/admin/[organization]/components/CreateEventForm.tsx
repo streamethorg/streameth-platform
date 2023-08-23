@@ -1,35 +1,41 @@
-'use client'
+// 'use client'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { IOrganization } from '@/server/model/organization'
+import { IEvent } from '@/server/model/event'
+import { apiUrl } from '@/server/utils'
+import DataImporterSelect from './DataImporterInput'
+import UploadFileInput from './UploadFileInput'
+import { IDataImporter } from '@/server/model/event'
 
 interface EventFormProps {
   organizationId: string
+  event?: IEvent
 }
 
-interface FormData {
-  name: string
-  description: string
-  start: Date | string
-  end: Date | string
-  location: string
-  eventCover?: string
-  archiveMode?: boolean
-  website?: string
-}
-
-const EventForm: React.FC<EventFormProps> = ({ organizationId }) => {
-  const [formData, setFormData] = useState<FormData>({
+const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) => {
+  const [formData, setFormData] = useState<Omit<IEvent, 'id'>>({
+    organizationId: organizationId,
     name: '',
     description: '',
     start: new Date(),
     end: new Date(),
     location: '',
+    archiveMode: false,
+    website: '',
+    eventCover: '',
   })
+
+  useEffect(() => {
+    if (event) {
+      setFormData({
+        ...event,
+      })
+    }
+  }, [event])
 
   const [error, setError] = useState<string | null>(null)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
 
     if (name === 'start' || name === 'end') {
@@ -45,11 +51,25 @@ const EventForm: React.FC<EventFormProps> = ({ organizationId }) => {
     }
   }
 
+  const handleDataImporterChange = (importer: IDataImporter) => {
+    setFormData({
+      ...formData,
+      dataImporter: [importer],
+    })
+  }
+
+  const onFileUpload = (fileName: string) => {
+    setFormData({
+      ...formData,
+      eventCover: fileName,
+    })
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await axios.post(`organizations/${organizationId}/events`, formData)
-      // Handle success (e.g., show a success message, redirect, etc.)
+      await axios.post(`${apiUrl()}/organizations/${organizationId}/events`, formData)
+      window.location.reload()
     } catch (err) {
       setError('An error occurred.')
     }
@@ -99,7 +119,8 @@ const EventForm: React.FC<EventFormProps> = ({ organizationId }) => {
           className="p-2 border rounded w-full"
           required
         />
-        {/* Add other fields similarly */}
+        <UploadFileInput organizationId={organizationId} onFileUpload={onFileUpload} />
+        <DataImporterSelect onChange={handleDataImporterChange} />
         <button type="submit" className="p-2 bg-blue-500 text-white rounded">
           Submit
         </button>
@@ -109,4 +130,4 @@ const EventForm: React.FC<EventFormProps> = ({ organizationId }) => {
   )
 }
 
-export default EventForm
+export default CreateEventForm
