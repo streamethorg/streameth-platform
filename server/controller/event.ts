@@ -11,7 +11,9 @@ export default class EventController {
   public async getEvent(eventId: IEvent['id'], organizationId: IEvent['organizationId']): Promise<Event> {
     const eventQuery = await Event.getEventPath(organizationId, eventId)
     const data = await this.controller.get(eventQuery)
-    return new Event({ ...data })
+    const evt = new Event({ ...data })
+    this.importEventData(evt)
+    return evt
   }
 
   public async createEvent(event: Omit<IEvent, 'id'>): Promise<Event> {
@@ -45,6 +47,7 @@ export default class EventController {
 
   public async importEventData(event: Event): Promise<void> {
     const { dataImporter } = event
+    console.log("importing data", event)
     if (!dataImporter) return
     for (const importer of dataImporter) {
       const importedModule = await import(`../importers/${importer.type}/index`)

@@ -1,7 +1,1 @@
-{
-  "id": "name_required",
-  "name": "Name (required)",
-  "bio": "Description (Required)",
-  "eventId": "zuzalu_montenegro_2023__other",
-  "twitter": "Avatar URL (required)"
-}
+{"id":"name_required","name":"Name (required)","bio":"Description (Required)","eventId":"zuzalu_montenegro_2023__other","twitter":"Avatar URL (required)"}

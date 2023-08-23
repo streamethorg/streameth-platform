@@ -6,6 +6,15 @@
   "end": "2023-09-09T00:00:00.000Z",
   "location": "Accra, Ghana",
   "organizationId": "ethaccra",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1KAqIHN09ZVpRDT232JOXLbMZJ1-vKjpfghiHUg7TGJ0",
+        "apiKey": "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4"
+      }
+    }
+  ],
   "website": "https://www.ethaccra.xyz/",
   "archiveMode": false
 }
