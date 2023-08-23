@@ -1,8 +1,1 @@
-{
-  "id": "name_required",
-  "name": "Name (required)",
-  "bio": "Description (Required)",
-  "eventId": "zuzalu_montenegro_2023__longevity_01",
-  "twitter": "Twitter Handle",
-  "photo": "Avatar URL (required)"
-}
+{"id":"name_required","name":"Name (required)","bio":"Description (Required)","eventId":"zuzalu_montenegro_2023__longevity_01","twitter":"Twitter Handle","photo":"Avatar URL (required)"}
