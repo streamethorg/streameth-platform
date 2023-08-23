@@ -47,7 +47,6 @@ export default class EventController {
 
   public async importEventData(event: Event): Promise<void> {
     const { dataImporter } = event
-    console.log("importing data", event)
     if (!dataImporter) return
     for (const importer of dataImporter) {
       const importedModule = await import(`../importers/${importer.type}/index`)

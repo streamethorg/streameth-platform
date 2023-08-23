@@ -1,1 +1,20 @@
-{"id":"protocol_berg","name":"Protocol Berg","description":"The decentralized protocol and infrastructure conference. Protocol Berg is a one-day technical conference for protocol/system/network engineers, decentralized-infrastructure administrators, researchers, and other curious minds from different ecosystems.","start":"2023-09-15T00:00:00.000Z","end":"2023-09-16T00:00:00.000Z","location":"Berlin","organizationId":"ethberlin","dataImporter":[{"type":"gsheet","config":{"sheetId":"","apiKey":""}}],"eventCover":"protocol.png","website":"","archiveMode":false}
+{
+  "id": "protocol_berg",
+  "name": "Protocol Berg",
+  "description": "The decentralized protocol and infrastructure conference. Protocol Berg is a one-day technical conference for protocol/system/network engineers, decentralized-infrastructure administrators, researchers, and other curious minds from different ecosystems.",
+  "start": "2023-09-15T00:00:00.000Z",
+  "end": "2023-09-15T00:00:00.000Z",
+  "location": "Berlin",
+  "organizationId": "ethberlin",
+  "dataImporter": [
+    {
+      "type": "pretalx",
+      "config": {
+        "url": "https://speak.protocol.berlin/api/events/protocol-berg"
+      }
+    }
+  ],
+  "eventCover": "protocol.png",
+  "website": "",
+  "archiveMode": false
+}

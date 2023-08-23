@@ -20,10 +20,7 @@ const EventPage = async ({
 
   try {
     const event = await eventController.getEvent(params.event, params.organization)
-
-    console.log(hasData({ event }))
     if (!hasData({ event })) return notFound()
-
     const stages = await stageController.getAllStagesForEvent(event.id)
     const sessions = await sessionController.getAllSessionsForEvent(event.id)
 

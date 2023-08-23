@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import { hasData } from '@/server/utils'
 
 const EventCard = ({ event }: { event: IEvent }) => {
-  const [image, setImage] = useState('/events/' + event.id + '.png')
+  const [image, setImage] = useState('/events/' + event.eventCover ?? event.id + '.png')
   const { openModal } = useContext(ModalContext)
   const router = useRouter()
   const isAvailable = hasData({ event })
