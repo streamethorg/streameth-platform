@@ -1,1 +1,27 @@
-{"id":"closing_ceremony","name":"Closing Ceremony","description":"It's a wrap!","start":"2023-09-15T17:30:00.000Z","end":"2023-09-15T17:55:00.000Z","stageId":"magazin__main_stage","speakers":[{"id":"afri_schoedon","name":"Afri Schoedon","bio":"Head of Protocol Engineering at ChainSafe Systems. Core-Organizer ETHBerlin, Protocol Berg, and GoerliCon. Running testnets on the side.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/afri-2023_6nkQtZ4.png"},{"id":"franziska_heintel","name":"Franziska Heintel","bio":"-","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/franziska_heintel_acZXRr3.png"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/closing_ceremony.jpg"}
+{
+  "id": "closing_ceremony",
+  "name": "Closing Ceremony",
+  "description": "It's a wrap!",
+  "start": "2023-09-15T17:30:00.000Z",
+  "end": "2023-09-15T17:55:00.000Z",
+  "stageId": "magazin__main_stage",
+  "speakers": [
+    {
+      "id": "afri_schoedon",
+      "name": "Afri Schoedon",
+      "bio": "Head of Protocol Engineering at ChainSafe Systems. Core-Organizer ETHBerlin, Protocol Berg, and GoerliCon. Running testnets on the side.",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/afri-2023_6nkQtZ4.png"
+    },
+    {
+      "id": "franziska_heintel",
+      "name": "Franziska Heintel",
+      "bio": "-",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/franziska_heintel_acZXRr3.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/closing_ceremony.jpg"
+}

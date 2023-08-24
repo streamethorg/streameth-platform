@@ -1,1 +1,7 @@
-{"id":"sacha","name":"Sacha","bio":"Sacha is a developer advocate at Parity Technologies, on a mission to bring forward Polkadot’s technologies to builders of web3. When he’s not working on workshops, documentation or contributing to web3 projects, you may find him walking around somewhere on earth or playing guitar.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/sacha-profile-yellow_GeNHFWv.png"}
+{
+  "id": "sacha",
+  "name": "Sacha",
+  "bio": "Sacha is a developer advocate at Parity Technologies, on a mission to bring forward Polkadot’s technologies to builders of web3. When he’s not working on workshops, documentation or contributing to web3 projects, you may find him walking around somewhere on earth or playing guitar.",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/sacha-profile-yellow_GeNHFWv.png"
+}

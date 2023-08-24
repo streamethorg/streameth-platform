@@ -1,1 +1,20 @@
-{"id":"interplanetary_consensus_scaling_the_open_data_economy","name":"InterPlanetary Consensus: Scaling the open data economy","description":"Consensus poses a major scalability bottleneck in blockchain networks - hampering web-scale applications like Twitch, Twitter, Tiktok, or web3 alternatives to scale within web3. Interplanetary Consensus (IPC) is a new framework to enable on-demand horizontal scalability of Filecoin to meet web-scale application demands - unlocking an open data economy of composable subnets for scalable computation, fast data retrievals, application-specific gaming networks, and more on the Filecoin network.","start":"2023-09-15T13:30:00.000Z","end":"2023-09-15T14:20:00.000Z","stageId":"magazin__main_stage","speakers":[{"id":"molly_mackinlay","name":"Molly Mackinlay","bio":"Molly Mackinlay leads Engineering and Research Development at Protocol Labs. This includes OSS stewardship across IPFS, Filecoin, and libp2p; designing and managing new breakthroughs like the Filecoin Virtual Machine (FVM); and helping launch new networks like Saturn (web3 CDN) and IPC (L2 subnets). Her work at PL also involves past roles as IPFS Project Lead and launching the Filecoin mainnet. She started her career as an (A)PM at Google after graduating from Stanford.\r\n\r\nMolly also created PL Launchpad, a four-week web3 onboarding program designed to train, develop, and connect technical talent with collaborators and web3 knowledge across the Protocol Labs Network (PLN). If you’re looking for the knowledge and community to ramp into web3 - get in touch!","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/Headshot_aqESJsg.jpeg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/interplanetary_consensus_scaling_the_open_data_economy.jpg"}
+{
+  "id": "interplanetary_consensus_scaling_the_open_data_economy",
+  "name": "InterPlanetary Consensus: Scaling the open data economy",
+  "description": "Consensus poses a major scalability bottleneck in blockchain networks - hampering web-scale applications like Twitch, Twitter, Tiktok, or web3 alternatives to scale within web3. Interplanetary Consensus (IPC) is a new framework to enable on-demand horizontal scalability of Filecoin to meet web-scale application demands - unlocking an open data economy of composable subnets for scalable computation, fast data retrievals, application-specific gaming networks, and more on the Filecoin network.",
+  "start": "2023-09-15T13:30:00.000Z",
+  "end": "2023-09-15T14:20:00.000Z",
+  "stageId": "magazin__main_stage",
+  "speakers": [
+    {
+      "id": "molly_mackinlay",
+      "name": "Molly Mackinlay",
+      "bio": "Molly Mackinlay leads Engineering and Research Development at Protocol Labs. This includes OSS stewardship across IPFS, Filecoin, and libp2p; designing and managing new breakthroughs like the Filecoin Virtual Machine (FVM); and helping launch new networks like Saturn (web3 CDN) and IPC (L2 subnets). Her work at PL also involves past roles as IPFS Project Lead and launching the Filecoin mainnet. She started her career as an (A)PM at Google after graduating from Stanford.\r\n\r\nMolly also created PL Launchpad, a four-week web3 onboarding program designed to train, develop, and connect technical talent with collaborators and web3 knowledge across the Protocol Labs Network (PLN). If you’re looking for the knowledge and community to ramp into web3 - get in touch!",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/Headshot_aqESJsg.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/interplanetary_consensus_scaling_the_open_data_economy.jpg"
+}
