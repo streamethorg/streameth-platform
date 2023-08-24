@@ -14,7 +14,11 @@ export async function generateStaticParams() {
 }
 
 const EventPage = async ({ params }: { params: { organization: string } }) => {
-  const events: IEvent[] = await (await fetch(`${apiUrl()}/organizations/${params.organization}/events`)).json()
+  const events: IEvent[] = await (
+    await fetch(`${apiUrl()}/organizations/${params.organization}/events`, {
+      cache: 'no-store',
+    })
+  ).json()
 
   return (
     <div className="p-4 overflow-scroll">
