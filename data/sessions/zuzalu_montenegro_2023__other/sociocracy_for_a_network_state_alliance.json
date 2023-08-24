@@ -5,16 +5,9 @@
   "start": "2023-04-26T10:00:00.000Z",
   "end": "2023-04-26T11:00:00.000Z",
   "stageId": "dome",
-  "speakers": [
-    {
-      "id": "noah_chon_lee",
-      "name": "Noah Chon Lee",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__other"
-    }
-  ],
+  "speakers": [{ "id": "noah_chon_lee", "name": "Noah Chon Lee", "bio": "No description", "eventId": "zuzalu_montenegro_2023__other" }],
   "videoUrl": "https://lp-playback.com/hls/b90epvjkdyf4degq/index.m3u8",
   "playbackId": "b90epvjkdyf4degq",
   "eventId": "zuzalu_montenegro_2023__other",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "coverImage": "/sessions/zuzalu_montenegro_2023__other/sociocracy_for_a_network_state_alliance.jpg"
 }

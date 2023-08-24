@@ -2,7 +2,6 @@ import BaseImporter from '../baseImporter'
 import { google } from 'googleapis'
 import Event, { IDataImporter } from '../../model/event'
 import { generateId } from '../../utils'
-
 // Constants
 const SPEAKER_SHEET = 'Speakers'
 const SPEAKER_DATA_RANGE = 'A2:D'
@@ -23,10 +22,10 @@ export default class Importer extends BaseImporter {
     super(event)
     if (importer.type !== 'gsheet') throw new Error('Invalid importer type for gsheet module')
     if (!importer.config.sheetId) throw new Error('No valid sheetId set for gsheet module')
-    if (!importer.config.apiKey) throw new Error("gsheet module requires a valid 'GOOGLE_API_KEY' env variable")
+    if (!process.env.GOOGLE_API_KEY) throw new Error("gsheet module requires a valid 'GOOGLE_API_KEY' env variable")
 
     this.sheetId = importer.config.sheetId
-    this.apiKey = importer.config.apiKey
+    this.apiKey = process.env.GOOGLE_API_KEY
     this.connection = this.connectToGoogleSheets()
   }
 

@@ -22,7 +22,6 @@ const Filter = ({ event }: { event: IEvent }) => {
       value: dateValue,
       type: 'date',
       filterFunc: async (item: Session) => {
-        console.log(item.start, date)
         return item.start.toDateString() === date.toDateString()
       },
     })

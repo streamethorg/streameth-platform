@@ -1,6 +1,7 @@
 import OrganizationController from './controller/organization'
 import EventController from './controller/event'
-
+import SpeakerController from './controller/speaker'
+import SessionController from './controller/session'
 const run = async () => {
   // const Organization = {
   //   name: 'Zuzalu',
@@ -33,8 +34,21 @@ const run = async () => {
   // }
 
   const eventController = new EventController()
-  const EventInstance = await eventController.getEvent('ethereum_argentina_2023', 'ethereum_argentina')
-  await eventController.importEventData(EventInstance)
+  const speakerController = new SpeakerController()
+  const sessionController = new SessionController()
+  const EventInstance = await eventController.getAllEvents()
+  for (const event of EventInstance) {
+    try {
+      const sessions = await sessionController.getAllSessionsForEvent(event.id)
+      for (const session of sessions) {
+        if (!session.speakers) {
+          console.log(session)
+        }
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
 }
 
 run()
