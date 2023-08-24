@@ -12,7 +12,7 @@ export default class EventController {
     const eventQuery = await Event.getEventPath(organizationId, eventId)
     const data = await this.controller.get(eventQuery)
     const evt = new Event({ ...data })
-    this.importEventData(evt)
+    // this.importEventData(evt)
     return evt
   }
 

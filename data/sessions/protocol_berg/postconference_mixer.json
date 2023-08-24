@@ -1,12 +1,1 @@
-{
-  "id": "postconference_mixer",
-  "name": "Post-Conference Mixer",
-  "description": "Grab a last lemonade or a beer and talk to fellow attendees before we close down the venue.",
-  "start": "2023-09-15T18:00:00.000Z",
-  "end": "2023-09-15T18:25:00.000Z",
-  "stageId": "magazin__main_stage",
-  "speakers": [],
-  "playbackId": "",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/postconference_mixer.jpg"
-}
+{"id":"postconference_mixer","name":"Post-Conference Mixer","description":"Grab a last lemonade or a beer and talk to fellow attendees before we close down the venue.","start":"2023-09-15T18:00:00.000Z","end":"2023-09-15T18:25:00.000Z","stageId":"magazin__main_stage","speakers":[],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/postconference_mixer.jpg"}

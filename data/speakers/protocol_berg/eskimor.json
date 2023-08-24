@@ -1,7 +1,1 @@
-{
-  "id": "eskimor",
-  "name": "eskimor",
-  "bio": "I am father of twins and a programmer. At the age of 15, I heard that ordinary people can actually program computers, I bought a 1200 page book about C++ and started learning. I sticked with C++ for quite a while, learned Java, went back to C++, learned D, Python, Haskell and eventually Rust. Then I became interested in peer-to-peer systems, experimented with rust-libp2p and found that blockchains could play a major role in mitigating shortcomings of p2p systems. So it happened that I applied at Parity Technologies as a core developer. At Parity Technologies I am driving and implementing major parts of Polkadot's Parachain consensus.",
-  "eventId": "protocol_berg",
-  "photo": "https://speak.protocol.berlin/media/avatars/eskimor_U4xtWaX.png"
-}
+{"id":"eskimor","name":"eskimor","bio":"I am father of twins and a programmer. At the age of 15, I heard that ordinary people can actually program computers, I bought a 1200 page book about C++ and started learning. I sticked with C++ for quite a while, learned Java, went back to C++, learned D, Python, Haskell and eventually Rust. Then I became interested in peer-to-peer systems, experimented with rust-libp2p and found that blockchains could play a major role in mitigating shortcomings of p2p systems. So it happened that I applied at Parity Technologies as a core developer. At Parity Technologies I am driving and implementing major parts of Polkadot's Parachain consensus.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/eskimor_U4xtWaX.png"}

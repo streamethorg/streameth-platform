@@ -5,7 +5,7 @@
   "start": "2023-05-07T05:30:00.000Z",
   "end": "2023-05-07T06:30:00.000Z",
   "stageId": "lighthouse",
-  "speakers": [
+  "xspeakers": [
     {
       "id": "xinyuan_sun",
       "name": "Xinyuan Sun",
