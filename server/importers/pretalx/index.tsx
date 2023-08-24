@@ -20,7 +20,6 @@ export default class PretalxImporter extends BaseImporter {
     let request = await axios.get(`${this.apiUrl}/speakers/`)
     let speakers = request.data.results
     while (request.data.next) {
-      console.log(request.data.next)
       request = await axios.get(request.data.next)
       speakers = [...speakers, ...request.data.results]
     }

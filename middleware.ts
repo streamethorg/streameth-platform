@@ -12,7 +12,7 @@ export const config = {
      * And the ones ending with:
      * - .png (image file)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico)(?!.*\\.png$).*)",
+    "/((?!api|admin|_next/static|_next/image|favicon.ico)(?!.*\\.png$).*)",
   ],
 };
 

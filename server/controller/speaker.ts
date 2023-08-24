@@ -14,7 +14,6 @@ export default class SpeakerController {
   ): Promise<Speaker> {
     const speakerQuery = await Speaker.getSpeakerPath(eventId, speakerId);
     const data = await this.controller.get(speakerQuery);
-    console.log(new Speaker({ ...data }))
     return new Speaker({ ...data });
   }
 
