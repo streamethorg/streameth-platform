@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
-export default function EmbedSessionModal({ stageId }: { stageId: string }) {
+export default function EmbedSessionModal() {
   const [copied, setCopied] = useState(false)
 
   const generateEmbedCode = () => {
     const url = window.location.href
-    return `<iframe src="${url}embed/${stageId}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+    return `<iframe src="${url}embed/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
   }
 
   const copyToClipboard = async () => {

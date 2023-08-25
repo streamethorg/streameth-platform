@@ -8,7 +8,7 @@ import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '../../../session/[session]/components/ActionsComponent'
 import SponsorCarousel from '@/components/misc/Sponsors'
 import { ISession as SessionType } from '@/server/model/session'
-
+import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 type Sponsor = {
   name: string
   image: string
@@ -16,20 +16,23 @@ type Sponsor = {
 
 const sponsoredData: Sponsor[] | null = null
 
-const LeftPane = ({ currentSession, stage }: { currentSession: SessionType; stage?: Stage }) => (
-  <div className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:gap-4 lg:overflow-scroll">
-    <ActionsComponent session={currentSession} title />
-    {stage && <Player streamId={stage.streamSettings.streamId} playerName={currentSession.name} coverImage={currentSession.coverImage} />}
-    {sponsoredData && <SponsorsCarousel />}
+const LeftPane = ({ currentSession, stage }: { currentSession: SessionType; stage: Stage }) => (
+  <div className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
+    <ActionsComponent stage={stage} />
+    <Player streamId={stage.streamSettings.streamId} playerName={currentSession.name} coverImage={currentSession.coverImage} />
+    <div className="w-full lg:mt-4 h-full">
+    <SessionInfoBox session={currentSession} />
+    </div>
+    {/* {sponsoredData && <SponsorsCarousel />} */}
   </div>
 )
 
 const RightPane = ({ stageId, sessions }: { stageId: string; sessions: SessionType[] }) => (
-  <div className="flex flex-col w-full p-4 lg:p-0 lg:px-2 h-full lg:w-[30%] relative lg:mt-0">
+  <div className="flex flex-col w-full pt-2 lg:p-0 lg:px-2 h-full lg:w-[30%] relative lg:mt-0">
     <PluginBar
       tabs={[
-        { id: 'chat', header: <ChatBubbleBottomCenterIcon />, content: <Chat conversationId={stageId} /> },
         { id: 'schedule', header: <CalendarIcon />, content: <SessionList sessions={sessions} currentStage={stageId} /> },
+        { id: 'chat', header: <ChatBubbleBottomCenterIcon />, content: <Chat conversationId={stageId} /> },
       ]}
     />
   </div>

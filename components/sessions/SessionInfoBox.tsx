@@ -11,7 +11,7 @@ const SessionInfoBox = ({ session }: { session: ISession | undefined }) => {
     )
   }
   return (
-    <ComponetCard title={session.name} date={session.start}>
+    <ComponetCard title={session.name} date={session.start} streatch>
       <p className="text-main-text md:text-lg text-justify">{session.description}</p>
     </ComponetCard>
   )

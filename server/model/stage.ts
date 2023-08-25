@@ -16,6 +16,7 @@ export interface IStage {
   eventId: IEvent["id"];
   streamSettings: IStreamSettings;
   plugins?: IPlugin[];
+  order?: number;
 }
 
 export default class Stage implements IStage {
@@ -33,17 +34,21 @@ export default class Stage implements IStage {
 
   plugins?: IPlugin[];
 
+  order?: number;
+
   constructor({
     name,
     eventId,
     streamSettings,
     plugins,
+    order,
   }: Omit<IStage, "id"> & { id?: string }) {
     this.id = generateId(name);
     this.name = name;
     this.eventId = eventId;
     this.streamSettings = streamSettings;
     this.plugins = plugins;
+    this.order = order;
     this.validateThis();
   }
 

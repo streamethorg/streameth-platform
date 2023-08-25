@@ -59,6 +59,7 @@ export default class PretalxImporter extends BaseImporter {
         streamSettings: {
           streamId: '',
         },
+        order: stage.position + 1,
       }
 
       try {
