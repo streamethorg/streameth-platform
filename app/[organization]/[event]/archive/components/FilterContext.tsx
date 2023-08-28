@@ -28,7 +28,7 @@ const FilterContextProvider = <T extends object>({ children, items }: { children
 
   const filterItems = async () => {
     let returnItems: T[] = [...items]
-
+    console.log(filterOptions)
     if (filterOptions.length > 0) {
       for (const filterOption of filterOptions) {
         const filterResults = await Promise.all(returnItems.map(async (item) => await filterOption.filterFunc(item)))

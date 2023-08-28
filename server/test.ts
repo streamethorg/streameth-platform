@@ -39,9 +39,9 @@ const run = async () => {
   const EventInstance = await eventController.getAllEvents()
   for (const event of EventInstance) {
     try {
-      const sessions = await sessionController.getAllSessionsForEvent(event.id)
+      const sessions = await speakerController.getAllSpeakersForEvent(event.id)
       for (const session of sessions) {
-        if (!session.speakers) {
+        if (!session.id) {
           console.log(session)
         }
       }

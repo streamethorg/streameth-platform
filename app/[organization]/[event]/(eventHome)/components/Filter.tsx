@@ -1,5 +1,4 @@
-'use client'
-import { useContext, useEffect, useState, useLayoutEffect } from 'react'
+import { useContext, useEffect, useState, useMemo } from 'react'
 import { IEvent } from '@/server/model/event'
 import Session from '@/server/model/session'
 import { FilterContext, FilterOption } from '../../archive/components/FilterContext'
@@ -9,27 +8,37 @@ const Filter = ({ event }: { event: IEvent }) => {
   const { setFilterOptions } = useContext(FilterContext)
   const { isLoading, isMobile } = useContext(MobileContext)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const days = event.end.getDate() - event.start.getDate() + 1
-  const dates: FilterOption<Session>[] = []
-  for (let i = 0; i < days; i++) {
-    const date = new Date(event.start.getTime() + i * 24 * 60 * 60 * 1000)
-    const dateValue = new Intl.DateTimeFormat('en-US', {
-      month: 'long',
-      day: 'numeric',
-    }).format(date)
-    dates.push({
-      name: 'date',
-      value: dateValue,
-      type: 'date',
-      filterFunc: async (item: Session) => {
-        return item.start.toDateString() === date.toDateString()
-      },
-    })
-  }
+
+  // Calculate the difference in days between the two dates
+  const days = useMemo(() => {
+    return Math.floor((event.end.getTime() - event.start.getTime()) / (1000 * 60 * 60 * 24)) + 1
+  }, [event.end, event.start])
+
+  // Generate the date options
+  const dates = useMemo(() => {
+    const dateOptions: FilterOption<Session>[] = []
+    for (let i = 0; i < days; i++) {
+      const date = new Date(event.start.getTime() + i * 24 * 60 * 60 * 1000)
+      const dateValue = new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+        day: 'numeric',
+      }).format(date)
+
+      dateOptions.push({
+        name: 'date',
+        value: dateValue,
+        type: 'date',
+        filterFunc: async (item: Session) => {
+          return item.start.toDateString() === date.toDateString()
+        },
+      })
+    }
+    return dateOptions
+  }, [days, event.start])
 
   useEffect(() => {
     setFilterOptions([dates[selectedIndex]])
-  }, [selectedIndex])
+  }, [selectedIndex, dates])
 
   if (isLoading) {
     return <>loading</>
@@ -50,9 +59,7 @@ const Filter = ({ event }: { event: IEvent }) => {
           <h1
             key={date.value}
             className={`text-2xl cursor-pointer font-bold ${selectedIndex === index ? 'text-main-text' : 'text-secondary-text'}`}
-            onClick={() => {
-              setSelectedIndex(index)
-            }}>
+            onClick={() => setSelectedIndex(index)}>
             {date.value}
           </h1>
         ))
