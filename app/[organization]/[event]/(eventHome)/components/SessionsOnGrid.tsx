@@ -1,24 +1,34 @@
+'use client'
+import React, { useContext } from 'react'
 import { CELL_HEIGHT, getSlotRange } from '../utils'
 import { ISession } from '@/server/model/session'
 import ScheduleCard from '@/components/schedule/ScheduleCard'
+import { ScheduleContext } from './ScheduleContext'
+const SessionsOnSchedule = () => {
+  const { earliestTime, data, isLoading } = useContext(ScheduleContext)
 
-const SessionsOnSchedule = ({ sessions, earliestTime }: { sessions: ISession[]; earliestTime: number }) => {
+  if (isLoading || !data) return <div>Loading...</div>
+
   return (
-    <div className="w-full h-full relative">
-      {sessions.map((session) => {
-        const range = getSlotRange(session, earliestTime)
-        return (
-          <div
-            key={session.id}
-            className="absolute right-0 h-full w-full p-1"
-            style={{
-              top: range.start * CELL_HEIGHT + 'rem',
-              height: (range.end - range.start) * CELL_HEIGHT + 'rem',
-            }}>
-            {session.name !== 'Blank' && <ScheduleCard session={session} />}
-          </div>
-        )
-      })}
+    <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">
+      {data.stages.map((stage) => (
+        <div key={stage.stage.id} className="w-full flex flex-col relative">
+          {stage.sessions.map((session) => {
+            const range = getSlotRange(session, earliestTime)
+            return (
+              <div
+                key={session.id}
+                className="absolute right-0 h-full w-full p-1"
+                style={{
+                  top: range.start * CELL_HEIGHT + 'rem',
+                  height: (range.end - range.start) * CELL_HEIGHT + 'rem',
+                }}>
+                {session.name !== 'Blank' && <ScheduleCard session={session} />}
+              </div>
+            )
+          })}
+        </div>
+      ))}
     </div>
   )
 }

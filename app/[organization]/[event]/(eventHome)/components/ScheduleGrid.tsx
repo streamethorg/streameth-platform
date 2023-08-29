@@ -1,16 +1,10 @@
+'use client'
+import React, { useContext } from 'react'
 import { CELL_HEIGHT } from '../utils'
+import { ScheduleContext } from './ScheduleContext'
+export default function ScheduleGrid({ children }: { children: React.ReactNode }) {
+  const { totalSlots, earliestTime } = useContext(ScheduleContext)
 
-export default function ScheduleGrid({
-  children,
-  totalSlots,
-  earliestTime,
-}: {
-  children: React.ReactNode
-  totalSlots: number
-  earliestTime: number
-}) {
-  console.log(new Date(earliestTime).toLocaleTimeString())
-  
   return (
     <div className="flex flex-col w-full relative " style={{ height: totalSlots * CELL_HEIGHT + 'rem' }}>
       {Array.from({ length: totalSlots }, (_, i) => (
