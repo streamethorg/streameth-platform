@@ -4,12 +4,11 @@ import { MobileContext } from '@/components/context/MobileContext'
 import { ScheduleContext } from './ScheduleContext' // Update the path to where your ScheduleContext is located
 
 const StageSelect = () => {
-  const { isMobile, isLoading: isMobileLoading } = useContext(MobileContext)
-  const { setStage, stage, isLoading: isScheduleLoading, stages } = useContext(ScheduleContext)
+  const { isMobile } = useContext(MobileContext)
+  const { setStage, stage, stages } = useContext(ScheduleContext)
 
 
   useEffect(() => {
-    console.log('isMobile', isMobile)
     if (isMobile) {
       setStage(stages[0].id)
     }
@@ -17,12 +16,6 @@ const StageSelect = () => {
       setStage(null)
     }
   }, [isMobile])
-
-  const isLoading = isMobileLoading || isScheduleLoading
-
-  if (isLoading) {
-    return <></>
-  }
 
   const handleStageChange = (stageId: string) => {
     setStage(stageId)

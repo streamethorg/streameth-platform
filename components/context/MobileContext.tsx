@@ -1,17 +1,15 @@
 'use client'
-import { useState, useLayoutEffect, createContext } from 'react'
-
+import { useState, useLayoutEffect, useContext, createContext } from 'react'
+import { LoadingContext } from './LoadingContext'
 const MobileContext = createContext<{
   isMobile: boolean
-  isLoading: boolean
 }>({
   isMobile: true,
-  isLoading: true,
 })
 
 const MobileContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isMobile, setIsMobile] = useState(true)
-  const [isLoading, setIsLoading] = useState(true)
+  const { setIsLoading } = useContext(LoadingContext)
   useLayoutEffect(() => {
     function updateSize() {
       setIsMobile(window.innerWidth <= 768)
@@ -22,7 +20,7 @@ const MobileContextProvider = ({ children }: { children: React.ReactNode }) => {
     return () => window.removeEventListener('resize', updateSize)
   }, [])
 
-  return <MobileContext.Provider value={{ isMobile, isLoading }}>{children}</MobileContext.Provider>
+  return <MobileContext.Provider value={{ isMobile }}>{children}</MobileContext.Provider>
 }
 
 export { MobileContext, MobileContextProvider }

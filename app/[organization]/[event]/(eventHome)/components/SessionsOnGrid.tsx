@@ -5,9 +5,9 @@ import { ISession } from '@/server/model/session'
 import ScheduleCard from '@/components/schedule/ScheduleCard'
 import { ScheduleContext } from './ScheduleContext'
 const SessionsOnSchedule = () => {
-  const { earliestTime, data, isLoading } = useContext(ScheduleContext)
+  const { earliestTime, data } = useContext(ScheduleContext)
 
-  if (isLoading || !data) return <div>Loading...</div>
+  if ( !data) return <div>Error</div>
 
   return (
     <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">

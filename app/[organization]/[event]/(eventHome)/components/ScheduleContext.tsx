@@ -4,9 +4,9 @@ import { apiUrl } from '@/server/utils'
 import { DayData, ScheduleData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
+import { LoadingContext } from '@/components/context/LoadingContext'
 
 interface ScheduleContextProps {
-  isLoading: boolean
   data: DayData | null
   setDate: React.Dispatch<React.SetStateAction<string | null>>
   date: string | null
@@ -19,7 +19,6 @@ interface ScheduleContextProps {
 }
 
 const ScheduleContext = createContext<ScheduleContextProps>({
-  isLoading: true,
   data: null,
   setDate: () => {},
   date: null,
@@ -39,7 +38,7 @@ interface ScheduleContextProviderProps {
 }
 
 const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event, days, stages, children }) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const { setIsLoading } = React.useContext(LoadingContext)
   const [date, setDate] = useState<string | null>(event.start.toISOString().split('T')[0])
   const [stage, setStage] = useState<string | null>(null)
   const [schedule, setSchedule] = useState<ScheduleData | null>(null)
@@ -59,7 +58,6 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
 
     console.log('fetching schedule', date, stage)
 
-
     fetchData()
   }, [event, date, stage])
 
@@ -68,7 +66,6 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
   return (
     <ScheduleContext.Provider
       value={{
-        isLoading,
         data,
         setDate,
         setStage,
