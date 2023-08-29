@@ -4,7 +4,6 @@ import { apiUrl } from '@/server/utils'
 import { DayData, ScheduleData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
-import { getEventDays } from '@/server/utils'
 
 interface ScheduleContextProps {
   isLoading: boolean
@@ -47,7 +46,6 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('fetching schedule', date, stage)
       try {
         setIsLoading(true)
         const fetchedData = await getData({ event, date, stage })
@@ -58,6 +56,9 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
         setIsLoading(false)
       }
     }
+
+    console.log('fetching schedule', date, stage)
+
 
     fetchData()
   }, [event, date, stage])

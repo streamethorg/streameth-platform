@@ -6,9 +6,19 @@ const DateSelect = () => {
   const { dates, setDate, date} = useContext(ScheduleContext)
   const {isMobile, isLoading} = useContext(MobileContext)
 
+  useEffect(() => {
+    if (isMobile) {
+      setDate(dates[0])
+    }
+  }, [isMobile])
+  
+
+
   if (isLoading) {
     return <>loading</>
   }
+
+  
 
   return (
     <div className="flex flex-row space-x-4 justify-center p-2 md:p-4 box-border">

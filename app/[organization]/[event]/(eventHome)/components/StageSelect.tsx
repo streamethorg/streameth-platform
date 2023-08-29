@@ -1,11 +1,22 @@
 "use client"
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { MobileContext } from '@/components/context/MobileContext'
 import { ScheduleContext } from './ScheduleContext' // Update the path to where your ScheduleContext is located
 
 const StageSelect = () => {
   const { isMobile, isLoading: isMobileLoading } = useContext(MobileContext)
   const { setStage, stage, isLoading: isScheduleLoading, stages } = useContext(ScheduleContext)
+
+
+  useEffect(() => {
+    console.log('isMobile', isMobile)
+    if (isMobile) {
+      setStage(stages[0].id)
+    }
+    else {
+      setStage(null)
+    }
+  }, [isMobile])
 
   const isLoading = isMobileLoading || isScheduleLoading
 
