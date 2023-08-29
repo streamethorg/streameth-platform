@@ -1,30 +1,11 @@
-import { useMemo, useContext } from 'react'
-import { CELL_HEIGHT, getSlotRange, addBlankSessions, getEarliestTime, getTotalSlots } from '../utils'
+import { CELL_HEIGHT, getSlotRange } from '../utils'
 import { ISession } from '@/server/model/session'
 import ScheduleCard from '@/components/schedule/ScheduleCard'
-import { FilterContext } from '../../archive/components/FilterContext'
 
-const SessionsOnSchedule = ({ stageId }: { stageId: string }) => {
-  const { filteredItems: sessions } = useContext(FilterContext)
-
-  const earliestTime = useMemo(() => getEarliestTime(sessions), [sessions])
-
-  const sessionsWithBlank = useMemo(
-    () =>
-      addBlankSessions(
-        sessions.filter((session: ISession) => session.stageId === stageId).sort((a: ISession, b: ISession) => a.start.getTime() - b.start.getTime()),
-        earliestTime
-      ),
-    [stageId, sessions, earliestTime]
-  )
-
-  if (!sessions) {
-    return <div>No scheduled sessions</div>
-  }
-
+const SessionsOnSchedule = ({ sessions, earliestTime }: { sessions: ISession[]; earliestTime: number }) => {
   return (
-    <>
-      {sessionsWithBlank.map((session) => {
+    <div className="w-full h-full relative">
+      {sessions.map((session) => {
         const range = getSlotRange(session, earliestTime)
         return (
           <div
@@ -38,7 +19,7 @@ const SessionsOnSchedule = ({ stageId }: { stageId: string }) => {
           </div>
         )
       })}
-    </>
+    </div>
   )
 }
 

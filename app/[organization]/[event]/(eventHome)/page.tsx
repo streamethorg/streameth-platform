@@ -1,11 +1,10 @@
 import EventController from '@/server/controller/event'
-import SessionController from '@/server/controller/session'
-import SchedulePage from './components/SchedulePage'
-import StageController from '@/server/controller/stage'
-import { FilterContextProvider } from '../archive/components/FilterContext'
+import SessionsOnSchedule from './components/SessionsOnGrid'
+import ScheduleGrid from './components/ScheduleGrid'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
-
+import { apiUrl } from '@/server/utils'
+import { ScheduleData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
 const EventPage = async ({
   params,
 }: {
@@ -15,21 +14,25 @@ const EventPage = async ({
   }
 }) => {
   const eventController = new EventController()
-  const sessionController = new SessionController()
-  const stageController = new StageController()
 
   try {
     const event = await eventController.getEvent(params.event, params.organization)
     if (!hasData({ event })) return notFound()
-    const stages = await stageController.getAllStagesForEvent(event.id)
-    const sessions = await sessionController.getAllSessionsForEvent(event.id)
+    const schedule: ScheduleData = await (
+      await fetch(`${apiUrl()}/organizations/${event.organizationId}/events/${event.id}/schedule`, { cache: 'no-cache' })
+    ).json()
 
     return (
-      <FilterContextProvider items={sessions.map((session) => session.toJson())}>
-        <div className="w-full h-full relative md:overflow-scroll">
-          <SchedulePage stages={stages.map((stage) => stage.toJson())} event={event.toJson()} />
-        </div>
-      </FilterContextProvider>
+      <ScheduleGrid totalSlots={schedule.totalSlots} earliestTime={schedule.earliestTime}>
+        {schedule &&
+          schedule.data.map((item) => (
+            <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">
+              {item.stages.map((stage) => (
+                <SessionsOnSchedule key={stage.name} sessions={stage.sessions} earliestTime={schedule.earliestTime} />
+              ))}
+            </div>
+          ))}
+      </ScheduleGrid>
     )
   } catch (e) {
     console.log(e)
