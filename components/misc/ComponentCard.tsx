@@ -29,7 +29,7 @@ const ComponentCard = ({
             !isCollapsed && 'border-b-2 border-accent'
           } text-main-text p-2 px-4 uppercase `}>
           <div className="flex-grow">{title}</div>
-          {date && <div className="pl-1 text-sm md:text-md text-gray-400">{date.toDateString()}</div>}
+          {date && <div className="pl-1 text-sm md:text-md text-gray-400">{new Date(date).toDateString()}</div>}
           {collapasble && (
             <div className="flex ml-2">
               <button className="focus:outline-none" onClick={toggleCollapse}>
