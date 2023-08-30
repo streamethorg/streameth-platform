@@ -4,7 +4,7 @@ import { ScheduleContext } from './ScheduleContext'
 import { MobileContext } from '@/components/context/MobileContext'
 const DateSelect = () => {
   const { dates, setDate, date } = useContext(ScheduleContext)
-  const { isMobile, isLoading } = useContext(MobileContext)
+  const { isMobile } = useContext(MobileContext)
 
   useEffect(() => {
     if (isMobile) {
@@ -18,7 +18,7 @@ const DateSelect = () => {
   return (
     <div className="flex flex-row space-x-4 justify-center p-2 md:p-4 box-border">
       {isMobile ? (
-        <select className="text-xl cursor-pointer font-bold" value={date} onChange={(e) => setDate(e.target.value)}>
+        <select className="text-xl cursor-pointer font-bold" value={date ? date : ""} onChange={(e) => setDate(e.target.value)}>
           {dates.map((date, index) => (
             <option key={date} value={index}>
               {date}
