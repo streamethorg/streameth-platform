@@ -1,11 +1,11 @@
-"use client";
+'use client'
 import { ISession } from '@/server/model/session'
 import SpeakerIcon from '@/components/speakers/SpeakerIcon'
 import { ModalContext } from '../context/ModalContext'
 import { useContext } from 'react'
 import ScheduleCardModal from '@/components/schedule/ScheduleCardModal'
 
-const ScheduleCard = ({ session, showTime = false }: { session: ISession; showTime?: boolean }) => {
+const ScheduleCard = ({ session, showTime = false, speakers = false }: { session: ISession; showTime?: boolean; speakers?: boolean }) => {
   const { openModal } = useContext(ModalContext)
   // const isActive = session.start.getTime() < Date.now() && session.end.getTime() > Date.now() // TODO: Test Active
 
@@ -22,12 +22,14 @@ const ScheduleCard = ({ session, showTime = false }: { session: ISession; showTi
             {new Date(session.end).getHours().toString().padStart(2, '0') + ':' + new Date(session.end).getMinutes().toString().padStart(2, '0')}
           </p>
         )}
-        <p className="flex h-2/4 py-1 overflow-hidden text-ellipsis text-main-text text-sm font-medium uppercase">{session.name}</p>
-        <div className="flex h-2/4 py-1 items-center flex-row space-x-2">
-          {session.speakers.map((speaker) => (
-            <SpeakerIcon key={speaker.id} speaker={speaker} onlyImage />
-          ))}
-        </div>
+        <p className="flex overflow-hidden text-ellipsis text-main-text text-sm font-medium uppercase">{session.name}</p>
+        {speakers && (
+          <div className="flex h-2/4 py-1 items-center flex-row space-x-2">
+            {session.speakers.map((speaker) => (
+              <SpeakerIcon key={speaker.id} speaker={speaker} onlyImage />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

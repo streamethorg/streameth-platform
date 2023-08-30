@@ -47,7 +47,7 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const fetchedData = await getScheduleData({ event, date, stage })
+        const fetchedData = await getScheduleData({ event, day:date, stage })
         setSchedule(fetchedData)
       } catch (error) {
         console.error('Error fetching schedule:', error)
@@ -56,21 +56,17 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
       }
     }
 
-    console.log('fetching schedule', date, stage)
-
     fetchData()
   }, [event, date, stage])
-
   const data = schedule?.data?.[0] || null
-
-  return (
+  return (  
     <ScheduleContext.Provider
       value={{
         data,
         setDate,
         setStage,
         stage,
-        stages,
+        stages: data?.stages.map((stage) => stage.stage) || stages,
         totalSlots: schedule?.totalSlots || 0,
         earliestTime: schedule?.earliestTime || 0,
         date,

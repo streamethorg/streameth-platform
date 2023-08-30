@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useContext } from 'react'
 import { ChatBubbleBottomCenterIcon, CalendarIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import SessionList from '@/components/sessions/SessionList'
@@ -19,10 +19,10 @@ export default function StageLayout({ data }: { data: DayData }) {
   const tabs = [
     { id: 'schedule', header: <CalendarIcon />, content: <SessionList sessions={sessions} /> },
     { id: 'chat', header: <ChatBubbleBottomCenterIcon />, content: <Chat conversationId={stage.id} /> },
-  ];
+  ]
 
   if (isMobile) {
-    tabs.unshift({ id: 'info', header: <InformationCircleIcon />, content: <SessionInfoBox session={currentSession} /> });
+    tabs.unshift({ id: 'info', header: <InformationCircleIcon />, content: <SessionInfoBox session={currentSession} /> })
   }
 
   return (
@@ -35,9 +35,7 @@ export default function StageLayout({ data }: { data: DayData }) {
         </div>
       </div>
       <div className="flex flex-col w-full pt-2 lg:p-0 lg:px-2 h-full lg:w-[30%] relative lg:mt-0">
-        <PluginBar
-          tabs={tabs}
-        />
+        <PluginBar tabs={tabs} />
       </div>
     </div>
   )

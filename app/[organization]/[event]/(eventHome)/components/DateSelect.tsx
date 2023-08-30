@@ -6,13 +6,13 @@ const DateSelect = () => {
   const { dates, setDate, date } = useContext(ScheduleContext)
   const { isMobile } = useContext(MobileContext)
 
-  useEffect(() => {
-    if (isMobile) {
-      setDate(dates[0])
-    } else {
-      setDate(null)
-    }
-  }, [isMobile])
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     setDate(dates[0])
+  //   } else {
+  //     setDate(null)
+  //   }
+  // }, [isMobile])
 
 
   return (

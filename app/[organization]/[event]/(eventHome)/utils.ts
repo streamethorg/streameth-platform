@@ -1,12 +1,9 @@
 import { ISession } from '@/server/model/session'
-
-
-export const getTotalSlots = (sessions: ISession[], earliestTime: number) =>
-  Math.ceil((Math.max(...sessions.map((session) => session.end.getTime()), earliestTime) - earliestTime) / (1000 * 60 * 15))
+import {secondsSinceMidnight} from '@/utils/time'
 
 export const getSlotRange = (session: ISession, earliestTime: number) => {
-  const start = Math.floor((new Date(session.start).getTime() - earliestTime) / (1000 * 60 * 15))
-  const end = Math.ceil((new Date(session.end).getTime() - earliestTime) / (1000 * 60 * 15))
+  const start = Math.floor((secondsSinceMidnight(new Date(session.start)) - earliestTime)  / 60 / 15)
+  const end = Math.floor((secondsSinceMidnight(new Date(session.end)) - earliestTime) / 60 / 15)
   return { start, end }
 }
 
