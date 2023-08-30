@@ -24,7 +24,7 @@ const LoadingModal = ({ isLoading }: { isLoading: boolean }) => {
   if (isLoading) {
     return (
       <div className="fixed inset-0 z-50 bg-white flex justify-center items-center">
-        <div className="w-20 h-20 border-4 border-black rounded-full animate-spin"></div>
+        {/* <div className="w-20 h-20 border-4 border-black rounded-full animate-spin"></div> */}
         Loading...
       </div>
     )

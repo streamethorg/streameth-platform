@@ -4,9 +4,8 @@ import { ShareIcon, CodeBracketIcon, ArrowUturnLeftIcon } from '@heroicons/react
 import EmbedSessionModal from '@/components/sessions/EmbedSession'
 import { ModalContext } from '@/components/context/ModalContext'
 import { useRouter } from 'next/navigation'
-import { IStage } from '@/server/model/stage'
 
-const ActionsComponent = ({ stage, goBackButton = false }: { stage?: IStage; goBackButton?: boolean }) => {
+const ActionsComponent = ({ title, goBackButton = false }: { title?: string; goBackButton?: boolean }) => {
   const modal = useContext(ModalContext)
   const router = useRouter()
   const [copied, setCopied] = useState(false) // State for "Copied!" message visibility
@@ -27,7 +26,7 @@ const ActionsComponent = ({ stage, goBackButton = false }: { stage?: IStage; goB
   return (
     <div className="flex flex-row items-center md:w-full p-4 py-2 bg-base rounded-t shadow">
       {goBackButton && <ArrowUturnLeftIcon className="p-1 h-8 w-8 cursor-pointer " onClick={onBackClick} />}
-      {stage && <h1 className="text-main-text mr-2">{stage.name}</h1>}
+      {title && <h1 className="text-main-text mr-2">{title}</h1>}
       <CodeBracketIcon
         className="p-1 cursor-pointer ml-auto h-8 w-8 text-accent font-medium"
         onClick={() => {

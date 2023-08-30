@@ -3,8 +3,9 @@ import SessionController from '@/server/controller/session'
 import StageController from '@/server/controller/stage'
 import { ISession } from '@/server/model/session'
 import { IStage } from '@/server/model/stage'
-import { addBlankSessions, getEarliestTime, getTotalSlots } from '@/server/utils'
-
+import { addBlankSessions, getEarliestTime, getTotalSlots } from '@/utils/api'
+import { getTime, getDateAsString } from '@/utils/time'
+import { extractSearchParams } from '@/utils/api'
 interface StageData {
   stage: IStage
   sessions: ISession[]
@@ -21,9 +22,10 @@ export interface ScheduleData {
   totalSlots: number
 }
 
-type SearchParamsItems = {
+export interface ScheduleSearchParams {
   day?: string
   stage?: string
+  currentSession?: boolean
 }
 
 export async function GET(
@@ -36,8 +38,8 @@ export async function GET(
 ): Promise<NextResponse> {
   try {
     const searchParams = new URL(request.url).searchParams
-    const day = searchParams.get('day') ?? undefined
-    const stage = searchParams.get('stage') ?? undefined
+    const { day, stage, currentSession } = extractSearchParams<ScheduleSearchParams>(searchParams, ['day', 'stage', 'currentSession'])
+    console.log(day, stage, currentSession)
     const sessionController = new SessionController()
     const stageController = new StageController()
 
@@ -46,7 +48,7 @@ export async function GET(
 
     let filteredSessions = filterSessionsByDayAndStage(sessions, day, stage)
     filteredSessions = addBlankSessions(filteredSessions, earliestTime)
-
+    filteredSessions = currentSession ? filterSessionsByCurrentTime(filteredSessions) : filteredSessions
     const data: DayData[] = await organizeSessionsByDayAndStage(filteredSessions, stageController)
 
     // Sort stages based on their order property
@@ -58,18 +60,19 @@ export async function GET(
     return NextResponse.json({ error: 'An error occurred while fetching sessions.' })
   }
 }
+function filterSessionsByCurrentTime(session: ISession[]): ISession[] {
+  const currentTime = getTime(new Date())
+  return session.filter((s) => getTime(s.start) > currentTime)
+}
 
 function filterSessionsByDayAndStage(sessions: ISession[], day?: string, stage?: string): ISession[] {
-  console.log(day, stage)
-  return day || stage
-    ? sessions.filter((s) => (day ? date(s.start) === day : true) && (stage ? s.stageId === stage : true))
-    : sessions
+  return day || stage ? sessions.filter((s) => (day ? getDateAsString(s.start) === day : true) && (stage ? s.stageId === stage : true)) : sessions
 }
 
 async function organizeSessionsByDayAndStage(filteredSessions: ISession[], stageController: StageController): Promise<DayData[]> {
   return await filteredSessions.reduce(async (accPromise: Promise<DayData[]>, session: ISession) => {
     const acc = await accPromise
-    const sessionDay = date(session.start)
+    const sessionDay = getDateAsString(session.start)
     let dayData = acc.find((d) => d.day === sessionDay)
     if (!dayData) {
       dayData = { day: sessionDay, stages: [] }
@@ -93,5 +96,3 @@ function sortStagesByOrder(data: DayData[]): void {
     dayData.stages.sort((a, b) => (a.stage.order || 0) - (b.stage.order || 0))
   }
 }
-
-export const date = (date: Date) => new Date(date).toISOString().split('T')[0]

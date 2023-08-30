@@ -1,10 +1,10 @@
 'use client'
 import React, { useState, createContext, useEffect, ReactNode } from 'react'
-import { apiUrl } from '@/server/utils'
 import { DayData, ScheduleData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
 import { LoadingContext } from '@/components/context/LoadingContext'
+import { getScheduleData } from '@/utils/api'
 
 interface ScheduleContextProps {
   data: DayData | null
@@ -47,7 +47,7 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const fetchedData = await getData({ event, date, stage })
+        const fetchedData = await getScheduleData({ event, date, stage })
         setSchedule(fetchedData)
       } catch (error) {
         console.error('Error fetching schedule:', error)
@@ -82,15 +82,3 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
 }
 
 export { ScheduleContext, ScheduleContextProvider }
-
-const getData = async ({ event, date, stage }: { event: IEvent; date?: string | null; stage?: string | null }) => {
-  let url = `${apiUrl()}/organizations/${event.organizationId}/events/${event.id}/schedule`
-  if (date) url += `?date=${date}`
-  if (stage) url += `&stage=${stage}`
-  const response = await fetch(url)
-  if (!response.ok) {
-    throw new Error('Failed to fetch schedule')
-  }
-  const schedule: ScheduleData = await response.json()
-  return schedule
-}

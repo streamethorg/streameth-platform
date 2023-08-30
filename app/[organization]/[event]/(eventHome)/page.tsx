@@ -4,10 +4,10 @@ import SessionsOnSchedule from './components/SessionsOnGrid'
 import ScheduleGrid from './components/ScheduleGrid'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
-import { ScheduleContext, ScheduleContextProvider } from './components/ScheduleContext'
+import { ScheduleContextProvider } from './components/ScheduleContext'
 import StageSelect from './components/StageSelect'
 import DateSelect from './components/DateSelect'
-import { getEventDays } from '@/server/utils'
+import { getEventDays } from '@/utils/time'
 const EventPage = async ({
   params,
 }: {
