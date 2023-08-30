@@ -15,19 +15,15 @@ export default function AdminLayout(props: PropsWithChildren) {
 export function AdminWrapper(props: PropsWithChildren) {
   const { data, isSignedIn } = useSIWE()
 
-  if (!isSignedIn) {
-    return (
-      <div className="flex justify-center mt-10">
-        <p>You need to sign in to access these pages</p> <br />
+  return (
+    <div className="flex flex-col p-4 w-full">
+      <div className='flex justify-end'>
         <ConnectKitButton />
       </div>
-    )
-  }
-
-  return (
-    <div>
-      <ConnectKitButton />
-      {props.children}
+      <div>
+      {!isSignedIn && <p>You need to sign in to access these pages</p>}
+      {isSignedIn && props.children}
+      </div>
     </div>
   )
 }
