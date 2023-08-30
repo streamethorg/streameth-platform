@@ -56,13 +56,11 @@ export const getEarliestTime = (sessions: ISession[]) => {
   }
 
   const a = Math.min(...sessions.map((session) => secondsSinceMidnight(session.start)))
-  console.log(a)
   return a
 }
 
 export const getTotalSlots = (sessions: ISession[], earliestTime: number) => {
  const maxTime = Math.max(...sessions.map((session) => secondsSinceMidnight(session.end)))
- console.log( Math.ceil((maxTime - earliestTime) / 60 / 15))
   return Math.ceil((maxTime - earliestTime) / 60 / 15)
 
 }
@@ -86,7 +84,6 @@ export const getScheduleData = async ({
   if (currentSession) params.append('currentSession', 'true')
 
   const url = `${baseUrl}?${params.toString()}`
-  console.log("URL", url)
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error('Failed to fetch schedule')

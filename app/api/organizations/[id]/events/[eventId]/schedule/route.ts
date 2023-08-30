@@ -39,7 +39,6 @@ export async function GET(
   try {
     const searchParams = new URL(request.url).searchParams
     const { day, stage, currentSession } = extractSearchParams<ScheduleSearchParams>(searchParams, ['day', 'stage', 'currentSession'])
-    console.log(day, stage, currentSession)
     const sessionController = new SessionController()
     const stageController = new StageController()
 

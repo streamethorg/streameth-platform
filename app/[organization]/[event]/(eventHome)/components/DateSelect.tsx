@@ -5,7 +5,6 @@ import { MobileContext } from '@/components/context/MobileContext'
 const DateSelect = () => {
   const { dates, setDate, date } = useContext(ScheduleContext)
   const { isMobile } = useContext(MobileContext)
-  console.log(dates)
   return (
     <div className="flex flex-row space-x-4 justify-center p-2 md:p-4 box-border">
       {isMobile ? (
