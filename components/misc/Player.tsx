@@ -79,7 +79,7 @@ export const Player = ({
   if (!stream?.isActive) return <OfflinePlayer />
 
   return (
-    <div className="relative w-full aspect-video">
+    <div className="relative w-full aspect-video h-full">
       <LivepeerPlayer
         mediaElementRef={mediaElementRef}
         src={stream.playbackUrl}

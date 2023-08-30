@@ -46,7 +46,6 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true)
         const fetchedData = await getScheduleData({ event, day:date, stage })
         setSchedule(fetchedData)
       } catch (error) {
@@ -70,7 +69,7 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event
         totalSlots: schedule?.totalSlots || 0,
         earliestTime: schedule?.earliestTime || 0,
         date,
-        dates: days,
+        dates: [...days],
       }}>
       {children}
     </ScheduleContext.Provider>

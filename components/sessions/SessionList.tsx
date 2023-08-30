@@ -45,7 +45,7 @@ export default function SessionList({ sessions, currentSession }: Props) {
         return (
           <Element key={i.id} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
-              <ScheduleCard session={i} showTime />
+              <ScheduleCard session={i} showTime speakers />
             </li>
           </Element>
         )
