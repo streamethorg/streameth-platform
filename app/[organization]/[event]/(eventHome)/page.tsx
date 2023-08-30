@@ -25,7 +25,7 @@ const EventPage = async ({
     if (!hasData({ event })) return notFound()
 
     return (
-      <ScheduleContextProvider event={event} stages={stages} days={days}>
+      <ScheduleContextProvider event={event.toJson()} stages={stages} days={days}>
         <div className="w-full h-full relative md:overflow-scroll">
           <div className="sticky top-0 z-10 flex flex-row flex-wrap md:flex-col bg-base justify-center">
             <DateSelect />

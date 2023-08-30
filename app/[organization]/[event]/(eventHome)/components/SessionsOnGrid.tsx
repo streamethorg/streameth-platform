@@ -1,14 +1,12 @@
 'use client'
 import React, { useContext } from 'react'
 import { CELL_HEIGHT, getSlotRange } from '../utils'
-import { ISession } from '@/server/model/session'
 import ScheduleCard from '@/components/schedule/ScheduleCard'
 import { ScheduleContext } from './ScheduleContext'
 const SessionsOnSchedule = () => {
   const { earliestTime, data } = useContext(ScheduleContext)
 
   if ( !data) return <div>Error</div>
-
   return (
     <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">
       {data.stages.map((stage) => (

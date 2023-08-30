@@ -6,6 +6,15 @@
   "end": "2023-09-02T00:00:00.000Z",
   "location": "The Zone, Gbagada, Lagos State.",
   "organizationId": "web3bridge",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1sInPVRuI6GQKau5hVTTosLJKA7G2TQ-6M0vTgd6ZLV0",
+        "apiKey": "w"
+      }
+    }
+  ],
   "website": "https://event.web3bridge.com/",
   "archiveMode": false
 }

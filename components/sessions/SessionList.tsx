@@ -24,6 +24,17 @@ function NoSessionComponent() {
 }
 
 export default function SessionList({ sessions, currentSession }: Props) {
+  const sortedSessions = sessions.sort((a, b) => {
+    if (a.start < b.start) {
+      return -1
+    } else if (a.start > b.start) {
+      return 1
+    } else {
+      return 0
+    }
+  })
+
+
   useEffect(() => {
     if (currentSession) {
       scroll.scrollTo(currentSession.id, {
@@ -41,11 +52,12 @@ export default function SessionList({ sessions, currentSession }: Props) {
 
   return (
     <ul id="sessionList" className="h-full relative space-y-2 p-4 lg:overflow-scroll">
-      {sessions.map((i) => {
+      {sortedSessions.map((i) => {
+        if (i.name === 'Blank') return null
         return (
           <Element key={i.id} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
-              <ScheduleCard session={i} showTime />
+              <ScheduleCard session={i} showTime speakers />
             </li>
           </Element>
         )

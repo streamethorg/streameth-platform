@@ -1,9 +1,8 @@
 import { ISession } from '@/server/model/session'
-import { getTime } from './time'
+import { getTime, secondsSinceMidnight } from './time'
 import { IEvent } from '@/server/model/event'
 import { apiUrl } from '@/server/utils'
 import { ScheduleData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
-
 
 export function extractSearchParams<T extends Record<string, any>>(searchParams: URLSearchParams, keys: (keyof T)[]): T {
   const params: Partial<T> = {}
@@ -51,31 +50,40 @@ export const addBlankSessions = (sessions: ISession[], earliestTime: number): IS
   return [...sessions, ...blankSessions]
 }
 
-export const getEarliestTime = (sessions: ISession[]) => Math.min(...sessions.map((session) => session.start.getTime()))
+export const getEarliestTime = (sessions: ISession[]) => {
+  if (sessions.length === 0) {
+    return 0 // or some other default value
+  }
 
-export const getTotalSlots = (sessions: ISession[], earliestTime: number) =>
-  Math.ceil((Math.max(...sessions.map((session) => session.end.getTime()), earliestTime) - earliestTime) / (1000 * 60 * 15))
+  const a = Math.min(...sessions.map((session) => secondsSinceMidnight(session.start)))
+  return a
+}
+
+export const getTotalSlots = (sessions: ISession[], earliestTime: number) => {
+ const maxTime = Math.max(...sessions.map((session) => secondsSinceMidnight(session.end)))
+  return Math.ceil((maxTime - earliestTime) / 60 / 15)
+
+}
 
 export const getScheduleData = async ({
   event,
-  date,
+  day,
   stage,
   currentSession,
 }: {
   event: IEvent
-  date?: string | null
+  day?: string | null
   stage?: string | null
   currentSession?: boolean
 }) => {
   const baseUrl = `${apiUrl()}/organizations/${event.organizationId}/events/${event.id}/schedule`
   const params = new URLSearchParams()
-
-  if (date) params.append('date', date)
+  
+  if (day) params.append('day', day)
   if (stage) params.append('stage', stage)
   if (currentSession) params.append('currentSession', 'true')
 
   const url = `${baseUrl}?${params.toString()}`
-
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error('Failed to fetch schedule')
