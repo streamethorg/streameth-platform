@@ -8,7 +8,6 @@ import ScheduleCard from '../schedule/ScheduleCard'
 interface Props {
   sessions: ISession[]
   currentSession?: ISession
-  currentStage?: string
 }
 
 const scroll = Scroll.scroller
@@ -24,7 +23,7 @@ function NoSessionComponent() {
   )
 }
 
-export default function SessionList({ sessions, currentSession, currentStage }: Props) {
+export default function SessionList({ sessions, currentSession }: Props) {
   useEffect(() => {
     if (currentSession) {
       scroll.scrollTo(currentSession.id, {

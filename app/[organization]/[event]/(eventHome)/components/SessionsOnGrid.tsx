@@ -1,44 +1,35 @@
-import { useMemo, useContext } from 'react'
-import { CELL_HEIGHT, getSlotRange, addBlankSessions, getEarliestTime, getTotalSlots } from '../utils'
+'use client'
+import React, { useContext } from 'react'
+import { CELL_HEIGHT, getSlotRange } from '../utils'
 import { ISession } from '@/server/model/session'
 import ScheduleCard from '@/components/schedule/ScheduleCard'
-import { FilterContext } from '../../archive/components/FilterContext'
+import { ScheduleContext } from './ScheduleContext'
+const SessionsOnSchedule = () => {
+  const { earliestTime, data } = useContext(ScheduleContext)
 
-const SessionsOnSchedule = ({ stageId }: { stageId: string }) => {
-  const { filteredItems: sessions } = useContext(FilterContext)
-
-  const earliestTime = useMemo(() => getEarliestTime(sessions), [sessions])
-
-  const sessionsWithBlank = useMemo(
-    () =>
-      addBlankSessions(
-        sessions.filter((session: ISession) => session.stageId === stageId).sort((a: ISession, b: ISession) => a.start.getTime() - b.start.getTime()),
-        earliestTime
-      ),
-    [stageId, sessions, earliestTime]
-  )
-
-  if (!sessions) {
-    return <div>No scheduled sessions</div>
-  }
+  if ( !data) return <div>Error</div>
 
   return (
-    <>
-      {sessionsWithBlank.map((session) => {
-        const range = getSlotRange(session, earliestTime)
-        return (
-          <div
-            key={session.id}
-            className="absolute right-0 h-full w-full p-1"
-            style={{
-              top: range.start * CELL_HEIGHT + 'rem',
-              height: (range.end - range.start) * CELL_HEIGHT + 'rem',
-            }}>
-            {session.name !== 'Blank' && <ScheduleCard session={session} />}
-          </div>
-        )
-      })}
-    </>
+    <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">
+      {data.stages.map((stage) => (
+        <div key={stage.stage.id} className="w-full flex flex-col relative">
+          {stage.sessions.map((session) => {
+            const range = getSlotRange(session, earliestTime)
+            return (
+              <div
+                key={session.id}
+                className="absolute right-0 h-full w-full p-1"
+                style={{
+                  top: range.start * CELL_HEIGHT + 'rem',
+                  height: (range.end - range.start) * CELL_HEIGHT + 'rem',
+                }}>
+                {session.name !== 'Blank' && <ScheduleCard session={session} />}
+              </div>
+            )
+          })}
+        </div>
+      ))}
+    </div>
   )
 }
 

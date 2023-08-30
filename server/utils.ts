@@ -1,5 +1,6 @@
 import path from 'path'
 import { IEvent } from './model/event'
+
 export const generateId = (key: string) => {
   // all lowercase, no spaces, no special characters
   return key
@@ -25,3 +26,4 @@ export const apiUrl = () => {
   }
   return 'https://app.streameth.org/api'
 }
+

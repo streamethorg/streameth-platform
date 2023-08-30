@@ -1,11 +1,13 @@
 import EventController from '@/server/controller/event'
-import SessionController from '@/server/controller/session'
-import SchedulePage from './components/SchedulePage'
 import StageController from '@/server/controller/stage'
-import { FilterContextProvider } from '../archive/components/FilterContext'
+import SessionsOnSchedule from './components/SessionsOnGrid'
+import ScheduleGrid from './components/ScheduleGrid'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
-
+import { ScheduleContextProvider } from './components/ScheduleContext'
+import StageSelect from './components/StageSelect'
+import DateSelect from './components/DateSelect'
+import { getEventDays } from '@/utils/time'
 const EventPage = async ({
   params,
 }: {
@@ -15,21 +17,25 @@ const EventPage = async ({
   }
 }) => {
   const eventController = new EventController()
-  const sessionController = new SessionController()
-  const stageController = new StageController()
 
   try {
     const event = await eventController.getEvent(params.event, params.organization)
+    const stages = await new StageController().getAllStagesForEvent(params.event)
+    const days = getEventDays(event.start, event.end).map((day) => day.toISOString().split('T')[0])
     if (!hasData({ event })) return notFound()
-    const stages = await stageController.getAllStagesForEvent(event.id)
-    const sessions = await sessionController.getAllSessionsForEvent(event.id)
 
     return (
-      <FilterContextProvider items={sessions.map((session) => session.toJson())}>
+      <ScheduleContextProvider event={event} stages={stages} days={days}>
         <div className="w-full h-full relative md:overflow-scroll">
-          <SchedulePage stages={stages.map((stage) => stage.toJson())} event={event.toJson()} />
+          <div className="sticky top-0 z-10 flex flex-row flex-wrap md:flex-col bg-base justify-center">
+            <DateSelect />
+            <StageSelect />
+          </div>
+          <ScheduleGrid>
+            <SessionsOnSchedule />
+          </ScheduleGrid>
         </div>
-      </FilterContextProvider>
+      </ScheduleContextProvider>
     )
   } catch (e) {
     console.log(e)

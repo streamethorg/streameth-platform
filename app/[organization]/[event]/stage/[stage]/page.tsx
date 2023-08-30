@@ -1,7 +1,9 @@
-// `app` directory
-import StageLayout from './components/StageLayout'
 import StageController from '@/server/controller/stage'
 import { notFound } from 'next/navigation'
+import { getScheduleData } from '@/utils/api'
+import EventController from '@/server/controller/event'
+import StageLayout from './components/StageLayout'
+
 interface Params {
   params: {
     organization: string
@@ -23,10 +25,17 @@ export async function generateStaticParams({ params: { organization, event } }: 
 }
 
 export default async function Stage({ params }: Params) {
-  const stageController = new StageController()
+  const eventController = new EventController()
   try {
-    const stage = await stageController.getStage(params.stage, params.event)
-    return <StageLayout stage={stage} />
+    const event = await eventController.getEvent(params.event, params.organization)
+    const data = await getScheduleData({
+      event,
+      date: new Date().toISOString().split('T')[0],
+      stage: params.stage,
+      currentSession: true,
+    })
+
+    return <StageLayout data={data.data[0]} />
   } catch (e) {
     return notFound()
   }
