@@ -57,7 +57,7 @@ export default function Navbar({
         {!isNavVisible ? <Bars2Icon className="w-8 h-8" /> : <XMarkIcon className="w-8 h-8" />}
       </button>
       <header
-        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-0 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} lg:block`}>
+        className={`shadow-sm z-50 bg-base border-r border-primary fixed top-0 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} lg:block`}>
         <div className="flex flex-col items-center justify-between ">
           <div className="items-center flex py-2">
             <Link href="/">
