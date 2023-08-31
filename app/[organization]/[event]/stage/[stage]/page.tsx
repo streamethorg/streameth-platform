@@ -30,7 +30,7 @@ export default async function Stage({ params }: Params) {
     const event = await eventController.getEvent(params.event, params.organization)
     const data = await getScheduleData({
       event,
-      day: new Date(event.start).toISOString().split('T')[0],
+      day: new Date().toISOString().split('T')[0],
       stage: params.stage,
       currentSession: true,
     })
