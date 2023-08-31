@@ -26,6 +26,7 @@ export interface IEvent {
   eventCover?: string
   archiveMode?: boolean
   website?: string
+  timezone?: string
 }
 
 export default class Event implements IEvent {
@@ -57,6 +58,8 @@ export default class Event implements IEvent {
   archiveMode?: boolean
 
   website?: string
+
+  timezone?: string
   constructor({
     id,
     name,
@@ -69,6 +72,7 @@ export default class Event implements IEvent {
     eventCover,
     archiveMode,
     website,
+    timezone
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -81,6 +85,7 @@ export default class Event implements IEvent {
     this.eventCover = eventCover
     this.website = website
     this.archiveMode = archiveMode ?? true
+    this.timezone = timezone ?? 'utc'
     // this.validateThis();
   }
 
