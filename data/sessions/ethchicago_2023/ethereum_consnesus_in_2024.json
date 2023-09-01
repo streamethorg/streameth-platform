@@ -4,7 +4,7 @@
   "description": "The evolutionary journey of Ethereum consensus layer has been marked by significant advancements, spanning from its inception through stages like Altair, Bellatrix (merge), and Capella (withdrawal). Anticipating the year 2024, our focus shifts to forthcoming developments. What's coming in 2024?",
   "start": "2023-09-16T19:20:00.000Z",
   "end": "2023-09-16T19:40:00.000Z",
-  "stageId": "east_room__main_",
+  "stageId": "east_room",
   "speakers": [
     {
       "id": "terence",

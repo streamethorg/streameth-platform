@@ -4,7 +4,7 @@
   "description": "builders workshop for hackers to learn more about web3development",
   "start": "2023-09-15T23:05:00.000Z",
   "end": "2023-09-16T00:05:00.000Z",
-  "stageId": "lincoln_stage__builder__legal",
+  "stageId": "lincoln_stage",
   "speakers": [{ "id": "kevin_jones", "name": "Kevin Jones", "bio": null, "eventId": "ethchicago_2023", "photo": "" }],
   "playbackId": "",
   "eventId": "ethchicago_2023",

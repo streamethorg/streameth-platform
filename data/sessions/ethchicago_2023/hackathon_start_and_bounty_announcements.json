@@ -4,7 +4,7 @@
   "description": "Announce the start of the hackathon, TAIKAI registration, and Bounties",
   "start": "2023-09-15T20:00:00.000Z",
   "end": "2023-09-15T20:30:00.000Z",
-  "stageId": "oak_room_hacker_room",
+  "stageId": "oak_room",
   "speakers": [
     {
       "id": "james_he",

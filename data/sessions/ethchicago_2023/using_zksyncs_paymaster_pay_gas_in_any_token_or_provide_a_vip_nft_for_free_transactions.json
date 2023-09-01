@@ -4,7 +4,7 @@
   "description": "Using zkSyncs paymaster, pay gas in any token or provide a VIP NFT for free transactions.",
   "start": "2023-09-16T00:10:00.000Z",
   "end": "2023-09-16T01:10:00.000Z",
-  "stageId": "lincoln_stage__builder__legal",
+  "stageId": "lincoln_stage",
   "speakers": [{ "id": "billy_c_billyjitsu", "name": "Billy C (Billyjitsu)", "bio": null, "eventId": "ethchicago_2023", "photo": "" }],
   "playbackId": "",
   "eventId": "ethchicago_2023",

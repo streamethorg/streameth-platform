@@ -4,7 +4,7 @@
   "description": "Overview of bridges, rollups, shards, and other cross-chain systems. What exists, how do they work, who's full of shit, what's exciting, etc.",
   "start": "2023-09-16T20:35:00.000Z",
   "end": "2023-09-16T21:05:00.000Z",
-  "stageId": "lincoln_stage__builder__legal",
+  "stageId": "lincoln_stage",
   "speakers": [{ "id": "james_prestwich", "name": "James Prestwich", "bio": null, "eventId": "ethchicago_2023", "photo": "" }],
   "playbackId": "",
   "eventId": "ethchicago_2023",

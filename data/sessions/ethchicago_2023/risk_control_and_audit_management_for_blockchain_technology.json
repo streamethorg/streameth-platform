@@ -4,7 +4,7 @@
   "description": "Within the past few years auditing blockchain technology has become a key requirement and an asset within the crypto industry. The regulatory pressure for maintaining a mature risk and controls framework and having frequent inhouse audits over compliance with key requirements has become scrutinized and simply essential within the community. Lamentably, the crypto and blockchain communities are not too familiar with what a risk and controls framework is and how to perform an audit. Furthermore, not many are aware of core technology standards and global regulatory requirements as most of the attention has been over AML, sanction screening and transaction monitoring etc. while ignoring key Information Technology and Information Security standards. This workshop will walk the audience through the basics of risk and audit management, dive into what are some of the core IT and IS requirements for blockchain and crypto technology and also explore how to think about auditing internally before a regulatory examination.",
   "start": "2023-09-15T19:00:00.000Z",
   "end": "2023-09-15T20:00:00.000Z",
-  "stageId": "lincoln_stage__builder__legal",
+  "stageId": "lincoln_stage",
   "speakers": [{ "id": "taatiana_scripnic", "name": "Taatiana Scripnic", "bio": null, "eventId": "ethchicago_2023", "photo": "" }],
   "playbackId": "",
   "eventId": "ethchicago_2023",

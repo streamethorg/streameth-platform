@@ -4,7 +4,7 @@
   "description": "Talk: 15 or 30 minutes: organizer's call.\r\nNeeded: Projecter w/ HDMI Input.  Could do it off of PDF slides if needed.\r\n\r\nDanno Ferrin will be speaking\r\nEthereum Core Dev since 2018, working primarily on the EVM implementation for Hyperledger Besu.  Also part of the working group that is delivering the EF's Team Ipsilon' vision of EOF.\r\n\r\nThe EVM Object Format is a container format for the existing EVM architecture that provides  the needed structure to provide several long desired improvements to the EVM seen in other VM frameworks (such as subroutines and linear transpiration) while removing problematic features such as code observability and gas schedule incompatibility. This talk will provide byte-code level examples of major aspects of the code. EOF is targeting release in a hard fork after Dencun.\r\n\r\nThe intent is for a standard talk.  Beginning with the motivations and aspirations of what EOF will provide, with some concrete examples of how the current EVM bytecode is insufficient.  Then the specific changes will be discussed, including details.  The Solidity and Vyper implementations are progressing so there will likely be a section where the resulting bytecode from a similar set of source files is compared.  Q&A will be addressed both during the talk and aat the end.",
   "start": "2023-09-16T19:25:00.000Z",
   "end": "2023-09-16T19:55:00.000Z",
-  "stageId": "lincoln_stage__builder__legal",
+  "stageId": "lincoln_stage",
   "speakers": [{ "id": "danno_ferrin", "name": "Danno Ferrin", "bio": null, "eventId": "ethchicago_2023", "photo": "" }],
   "playbackId": "",
   "eventId": "ethchicago_2023",

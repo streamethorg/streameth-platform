@@ -4,7 +4,7 @@
   "description": "Building for Zero Trust",
   "start": "2023-09-16T20:00:00.000Z",
   "end": "2023-09-16T20:30:00.000Z",
-  "stageId": "lincoln_stage__builder__legal",
+  "stageId": "lincoln_stage",
   "speakers": [
     {
       "id": "andrew_brick",

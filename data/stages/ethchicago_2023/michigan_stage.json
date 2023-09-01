@@ -1,6 +1,6 @@
 {
-  "id": "lincoln_stage__builder__legal",
-  "name": "Lincoln Stage",
+  "id": "michigan_stage",
+  "name": "Michigan Stage",
   "eventId": "ethchicago_2023",
   "streamSettings": { "streamId": "" },
   "order": 1

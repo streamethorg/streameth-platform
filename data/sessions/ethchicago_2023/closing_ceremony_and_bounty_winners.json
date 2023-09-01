@@ -4,7 +4,7 @@
   "description": "Closing Ceremony,",
   "start": "2023-09-17T20:00:00.000Z",
   "end": "2023-09-17T20:30:00.000Z",
-  "stageId": "east_room__main_",
+  "stageId": "east_room",
   "speakers": [],
   "playbackId": "",
   "eventId": "ethchicago_2023",

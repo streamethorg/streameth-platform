@@ -4,7 +4,7 @@
   "description": "This workshop is a technical tutorial aimed at upskilling developers and protocol stakeholders on how to build an agent-based simulation model for their protocol or Dapp, which can greatly improve their efficiency, security, and scalability. I will give a detailed walk-through on building a data-driven ABM using real world examples, and optionally a live coding demo. The session is designed to involve high output/engagement from the participants, where by the end everyone will have built a rudimentary agent-based model for a web3 protocol / Dapp of their choice.\r\n\r\nSome basic knowledge about smart contracts, DeFi concepts, and object-oriented programming would be helpful. No prior knowledge about quantitative modeling or data science required.",
   "start": "2023-09-16T14:40:00.000Z",
   "end": "2023-09-16T15:40:00.000Z",
-  "stageId": "lincoln_stage__builder__legal",
+  "stageId": "lincoln_stage",
   "speakers": [{ "id": "mingxuan_he", "name": "Mingxuan He", "bio": null, "eventId": "ethchicago_2023", "photo": "" }],
   "playbackId": "",
   "eventId": "ethchicago_2023",
