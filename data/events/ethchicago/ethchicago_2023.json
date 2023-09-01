@@ -9,5 +9,5 @@
   "dataImporter": [
     { "type": "pretalx", "config": { "url": "https://pretalx.com/api/events/ethchi-2023", "apiToken": "c5429a10c524106246757284a2acdf3cfe9a4ed5" } }
   ],
-  "archiveMode": true
+  "archiveMode": false
 }
