@@ -35,7 +35,6 @@ export default async function Stage({ params }: Params) {
       currentSession: true,
     })
 
-
     return <StageLayout data={data.data[0]} />
   } catch (e) {
     return notFound()

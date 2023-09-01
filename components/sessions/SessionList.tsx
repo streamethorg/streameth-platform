@@ -34,7 +34,6 @@ export default function SessionList({ sessions, currentSession }: Props) {
     }
   })
 
-
   useEffect(() => {
     if (currentSession) {
       scroll.scrollTo(currentSession.id, {

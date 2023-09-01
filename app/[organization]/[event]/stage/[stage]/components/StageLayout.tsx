@@ -11,8 +11,6 @@ import { MobileContext } from '@/components/context/MobileContext'
 import { DayData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
 
 export default function StageLayout({ data }: { data: DayData }) {
-  
-
   const { isMobile } = useContext(MobileContext)
 
   if (!data) return <div>No Livestreams available for today</div>
