@@ -1,1 +1,20 @@
-{"id":"understanding_the_public_and_doing_it","name":"Understanding the Public and Doing It","description":"","start":"2023-08-31T13:05:00.000Z","end":"2023-08-31T13:45:00.000Z","stageId":"workshop_room_1","speakers":[{"id":"kevin_owocki","name":"Kevin Owocki","bio":"CEO/Founder/co-founder","eventId":"web3_lagos_conference_2023","twitter":"@supermodularxyz & @gitcoin"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/understanding_the_public_and_doing_it.jpg"}
+{
+  "id": "understanding_the_public_and_doing_it",
+  "name": "Understanding the Public and Doing It",
+  "description": "",
+  "start": "2023-08-31T13:05:00.000Z",
+  "end": "2023-08-31T13:45:00.000Z",
+  "stageId": "workshop_room_1",
+  "speakers": [
+    {
+      "id": "kevin_owocki",
+      "name": "Kevin Owocki",
+      "bio": "CEO/Founder/co-founder",
+      "eventId": "web3_lagos_conference_2023",
+      "twitter": "@supermodularxyz & @gitcoin"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/understanding_the_public_and_doing_it.jpg"
+}

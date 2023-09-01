@@ -1,1 +1,7 @@
-{"id":"trent_van_epps","name":"Trent Van Epps","bio":"Works at the Ethereum Foundation on protocol coordination. Member of the Protocol Guild","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/profile_triangle_p6CZOyc.JPG"}
+{
+  "id": "trent_van_epps",
+  "name": "Trent Van Epps",
+  "bio": "Works at the Ethereum Foundation on protocol coordination. Member of the Protocol Guild",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/profile_triangle_p6CZOyc.JPG"
+}

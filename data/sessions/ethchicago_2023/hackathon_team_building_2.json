@@ -1,1 +1,12 @@
-{"id":"hackathon_team_building_2","name":"Hackathon Team Building 2","description":"networking event to find teams, connect with teams","start":"2023-09-15T21:05:00.000Z","end":"2023-09-15T21:35:00.000Z","stageId":"oak_room_hacker_room","speakers":[],"playbackId":"","eventId":"ethchicago_2023","coverImage":"/sessions/ethchicago_2023/hackathon_team_building_2.jpg"}
+{
+  "id": "hackathon_team_building_2",
+  "name": "Hackathon Team Building 2",
+  "description": "networking event to find teams, connect with teams",
+  "start": "2023-09-15T21:05:00.000Z",
+  "end": "2023-09-15T21:35:00.000Z",
+  "stageId": "oak_room_hacker_room",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "ethchicago_2023",
+  "coverImage": "/sessions/ethchicago_2023/hackathon_team_building_2.jpg"
+}

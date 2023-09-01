@@ -1,1 +1,12 @@
-{"id":"closing_ceremony_and_bounty_winners","name":"Closing Ceremony, and bounty winners","description":"Closing Ceremony,","start":"2023-09-17T20:00:00.000Z","end":"2023-09-17T20:30:00.000Z","stageId":"east_room__main_","speakers":[],"playbackId":"","eventId":"ethchicago_2023","coverImage":"/sessions/ethchicago_2023/closing_ceremony_and_bounty_winners.jpg"}
+{
+  "id": "closing_ceremony_and_bounty_winners",
+  "name": "Closing Ceremony, and bounty winners",
+  "description": "Closing Ceremony,",
+  "start": "2023-09-17T20:00:00.000Z",
+  "end": "2023-09-17T20:30:00.000Z",
+  "stageId": "east_room__main_",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "ethchicago_2023",
+  "coverImage": "/sessions/ethchicago_2023/closing_ceremony_and_bounty_winners.jpg"
+}

@@ -1,1 +1,20 @@
-{"id":"introduction_to_formal_verification_and_symbolic_execution_for_smart_contract","name":"Introduction to formal Verification and symbolic execution for smart contract","description":"","start":"2023-08-31T10:00:00.000Z","end":"2023-08-31T10:45:00.000Z","stageId":"workshop_room_2","speakers":[{"id":"temitayo_daniel","name":"Temitayo Daniel","bio":"Co-Founder Web3bridge","eventId":"web3_lagos_conference_2023","twitter":"@Web3Bridge"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/introduction_to_formal_verification_and_symbolic_execution_for_smart_contract.jpg"}
+{
+  "id": "introduction_to_formal_verification_and_symbolic_execution_for_smart_contract",
+  "name": "Introduction to formal Verification and symbolic execution for smart contract",
+  "description": "",
+  "start": "2023-08-31T10:00:00.000Z",
+  "end": "2023-08-31T10:45:00.000Z",
+  "stageId": "workshop_room_2",
+  "speakers": [
+    {
+      "id": "temitayo_daniel",
+      "name": "Temitayo Daniel",
+      "bio": "Co-Founder Web3bridge",
+      "eventId": "web3_lagos_conference_2023",
+      "twitter": "@Web3Bridge"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/introduction_to_formal_verification_and_symbolic_execution_for_smart_contract.jpg"
+}

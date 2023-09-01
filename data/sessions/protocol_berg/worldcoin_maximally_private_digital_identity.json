@@ -1,1 +1,20 @@
-{"id":"worldcoin_maximally_private_digital_identity","name":"Worldcoin: Maximally private digital identity.","description":"With over 2M members Worldcoin has the largest anonymity set for its zero knowledge proof of personhood protocol.","start":"2023-09-15T16:30:00.000Z","end":"2023-09-15T16:55:00.000Z","stageId":"atelier__side_stage","speakers":[{"id":"remco_bloemen","name":"Remco Bloemen","bio":"Decentralization and cryptography nerd since forever. Currently leading design of self-sovereign private digital identity at Worldcoin.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/remco_h0ItXM4.jpeg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/worldcoin_maximally_private_digital_identity.jpg"}
+{
+  "id": "worldcoin_maximally_private_digital_identity",
+  "name": "Worldcoin: Maximally private digital identity.",
+  "description": "With over 2M members Worldcoin has the largest anonymity set for its zero knowledge proof of personhood protocol.",
+  "start": "2023-09-15T16:30:00.000Z",
+  "end": "2023-09-15T16:55:00.000Z",
+  "stageId": "atelier__side_stage",
+  "speakers": [
+    {
+      "id": "remco_bloemen",
+      "name": "Remco Bloemen",
+      "bio": "Decentralization and cryptography nerd since forever. Currently leading design of self-sovereign private digital identity at Worldcoin.",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/remco_h0ItXM4.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/worldcoin_maximally_private_digital_identity.jpg"
+}

@@ -1,1 +1,7 @@
-{"id":"christopher_goes","name":"Christopher Goes","bio":"Christopher Goes currently works on Anoma and Namada. Previously, he worked on IBC and the Wyvern DEX protocol. He lives in Berlin.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/christopher_tdRvbuQ.jpg"}
+{
+  "id": "christopher_goes",
+  "name": "Christopher Goes",
+  "bio": "Christopher Goes currently works on Anoma and Namada. Previously, he worked on IBC and the Wyvern DEX protocol. He lives in Berlin.",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/christopher_tdRvbuQ.jpg"
+}

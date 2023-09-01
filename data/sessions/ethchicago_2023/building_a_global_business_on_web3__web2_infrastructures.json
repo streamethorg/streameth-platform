@@ -1,1 +1,20 @@
-{"id":"building_a_global_business_on_web3__web2_infrastructures","name":"Building a global business on Web3 & Web2 infrastructures","description":"Building a successful global payment platform of the future will require the collaboration of decentralized finance infrastructure and web2 systems.","start":"2023-09-17T18:00:00.000Z","end":"2023-09-17T18:30:00.000Z","stageId":"michigan_stage__creatives__trad_business_","speakers":[{"id":"bobola_odebiyi","name":"Bobola Odebiyi","bio":"Bobola Odebiyi, CPA - Founder & CEO of CrossKudi, moved to the US with limited resources and worked from a Cabbie in Chicago to a CPA. Bobola worked at JCi, EY, and PwC, where he worked on top hedge fund and private equity clients. He has been fascinated with blockchain and other Web3 technologies since 2017. Bobola Co-led the PwC Blockchain Community of Interest and trained colleagues on utilizing emerging technologies to serve clients better. As he became more involved in the field, he started seeking “real use cases” for the technology. In 2020, he found what he was looking for in the business of international money transfers. He created a way for immigrants and international travelers to use blockchain technology to send money to their families back home. His plan made these money transfers cheaper and faster than anything else on the market. And best of all, it creates passive income opportunities for its users.","eventId":"ethchicago_2023","photo":"https://pretalx.com/media/avatars/Bobola_at_Collision_0Sq0c8F.jpg"}],"playbackId":"","eventId":"ethchicago_2023","coverImage":"/sessions/ethchicago_2023/building_a_global_business_on_web3__web2_infrastructures.jpg"}
+{
+  "id": "building_a_global_business_on_web3__web2_infrastructures",
+  "name": "Building a global business on Web3 & Web2 infrastructures",
+  "description": "Building a successful global payment platform of the future will require the collaboration of decentralized finance infrastructure and web2 systems.",
+  "start": "2023-09-17T18:00:00.000Z",
+  "end": "2023-09-17T18:30:00.000Z",
+  "stageId": "michigan_stage__creatives__trad_business_",
+  "speakers": [
+    {
+      "id": "bobola_odebiyi",
+      "name": "Bobola Odebiyi",
+      "bio": "Bobola Odebiyi, CPA - Founder & CEO of CrossKudi, moved to the US with limited resources and worked from a Cabbie in Chicago to a CPA. Bobola worked at JCi, EY, and PwC, where he worked on top hedge fund and private equity clients. He has been fascinated with blockchain and other Web3 technologies since 2017. Bobola Co-led the PwC Blockchain Community of Interest and trained colleagues on utilizing emerging technologies to serve clients better. As he became more involved in the field, he started seeking “real use cases” for the technology. In 2020, he found what he was looking for in the business of international money transfers. He created a way for immigrants and international travelers to use blockchain technology to send money to their families back home. His plan made these money transfers cheaper and faster than anything else on the market. And best of all, it creates passive income opportunities for its users.",
+      "eventId": "ethchicago_2023",
+      "photo": "https://pretalx.com/media/avatars/Bobola_at_Collision_0Sq0c8F.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago_2023",
+  "coverImage": "/sessions/ethchicago_2023/building_a_global_business_on_web3__web2_infrastructures.jpg"
+}

@@ -1,1 +1,20 @@
-{"id":"protocol_guild_funding__incentivising_core_protocol_work","name":"Protocol Guild: Funding & Incentivising Core Protocol Work","description":"The Protocol Guild aims to secure the future of Ethereum, by enabling a highly efficient way for its ecosystem and community to sustainably fund core protocol development, while rebalancing incentives for core protocol contributors.","start":"2023-09-15T09:00:00.000Z","end":"2023-09-15T09:25:00.000Z","stageId":"atelier__side_stage","speakers":[{"id":"trent_van_epps","name":"Trent Van Epps","bio":"Works at the Ethereum Foundation on protocol coordination. Member of the Protocol Guild","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/profile_triangle_p6CZOyc.JPG"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/protocol_guild_funding__incentivising_core_protocol_work.jpg"}
+{
+  "id": "protocol_guild_funding__incentivising_core_protocol_work",
+  "name": "Protocol Guild: Funding & Incentivising Core Protocol Work",
+  "description": "The Protocol Guild aims to secure the future of Ethereum, by enabling a highly efficient way for its ecosystem and community to sustainably fund core protocol development, while rebalancing incentives for core protocol contributors.",
+  "start": "2023-09-15T09:00:00.000Z",
+  "end": "2023-09-15T09:25:00.000Z",
+  "stageId": "atelier__side_stage",
+  "speakers": [
+    {
+      "id": "trent_van_epps",
+      "name": "Trent Van Epps",
+      "bio": "Works at the Ethereum Foundation on protocol coordination. Member of the Protocol Guild",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/profile_triangle_p6CZOyc.JPG"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/protocol_guild_funding__incentivising_core_protocol_work.jpg"
+}

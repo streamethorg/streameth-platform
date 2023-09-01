@@ -1,1 +1,7 @@
-{"id":"sam_hart","name":"Sam Hart","bio":"Sam is the Head of Product and Strategy at Skip, a team building MEV solutions that improve protocol sustainability and cross-chain UX. He is also Co-founder of Timewave, an organization that creates tools for intelligent on-chain resource allocation and trustless cooperation.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/headshot_square_jSlIGp9.jpeg"}
+{
+  "id": "sam_hart",
+  "name": "Sam Hart",
+  "bio": "Sam is the Head of Product and Strategy at Skip, a team building MEV solutions that improve protocol sustainability and cross-chain UX. He is also Co-founder of Timewave, an organization that creates tools for intelligent on-chain resource allocation and trustless cooperation.",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/headshot_square_jSlIGp9.jpeg"
+}

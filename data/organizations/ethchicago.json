@@ -1,1 +1,8 @@
-{"id":"ethchicago","name":"ETHChicago","description":"A community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem.","url":"https://www.ethchicago.xyz/","logo":"https://www.ethchicago.xyz/images/brand/ethchi_banner.svg","location":"Chicago"}
+{
+  "id": "ethchicago",
+  "name": "ETHChicago",
+  "description": "A community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem.",
+  "url": "https://www.ethchicago.xyz/",
+  "logo": "https://www.ethchicago.xyz/images/brand/ethchi_banner.svg",
+  "location": "Chicago"
+}

@@ -1,1 +1,12 @@
-{"id":"my_web3bridge_story","name":"My Web3bridge Story","description":"","start":"2023-09-01T12:10:00.000Z","end":"2023-09-01T12:30:00.000Z","stageId":"workshop_room_1","speakers":[],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/my_web3bridge_story.jpg"}
+{
+  "id": "my_web3bridge_story",
+  "name": "My Web3bridge Story",
+  "description": "",
+  "start": "2023-09-01T12:10:00.000Z",
+  "end": "2023-09-01T12:30:00.000Z",
+  "stageId": "workshop_room_1",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/my_web3bridge_story.jpg"
+}
