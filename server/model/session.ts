@@ -18,8 +18,8 @@ export interface ISession {
   eventId: IEvent['id']
   track?: string[]
   coverImage?: string
-  startCut?: string // Temporary solution - 00:00:00 - Shows time of video
-  endCut?: string // Temporary solution - 00:00:00 - Shows time of video
+  startCut: string // Temporary solution - 00:00:00 - Shows time of video
+  endCut: string // Temporary solution - 00:00:00 - Shows time of video
 }
 
 export default class Session implements ISession {
@@ -55,6 +55,10 @@ export default class Session implements ISession {
 
   coverImage?: string
 
+  startCut: string
+
+  endCut: string
+
   constructor({ name, description, start, end, stageId, speakers, videoUrl, eventId, track, coverImage }: Omit<ISession, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
@@ -68,6 +72,8 @@ export default class Session implements ISession {
     this.eventId = eventId
     this.track = track
     this.coverImage = coverImage ?? '/sessions/' + this.eventId + '/' + this.id + '.jpg'
+    this.startCut = "00:00:00"
+    this.endCut = "00:00:00"
     this.validateThis()
   }
 
