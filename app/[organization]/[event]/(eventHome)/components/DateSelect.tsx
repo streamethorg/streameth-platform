@@ -10,8 +10,8 @@ const DateSelect = () => {
       {isMobile ? (
         <select className="text-xl cursor-pointer font-bold" value={date ? date : ""} onChange={(e) => setDate(e.target.value)}>
           {dates.map((date, index) => (
-            <option key={date} value={index}>
-              {date}
+            <option key={date} value={date}>
+              {new Date(date).toLocaleDateString()}
             </option>
           ))}
         </select>

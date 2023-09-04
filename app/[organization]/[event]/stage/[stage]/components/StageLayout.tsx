@@ -8,17 +8,15 @@ import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '../../../session/[session]/components/ActionsComponent'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { MobileContext } from '@/components/context/MobileContext'
-import { DayData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
+import { StageInfo } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
 
-export default function StageLayout({ data }: { data: DayData }) {
-  
-
+export default function StageLayout({ data }: { data: StageInfo }) {
   const { isMobile } = useContext(MobileContext)
 
   if (!data) return <div>No Livestreams available for today</div>
 
-  const stage = data?.stages[0]?.stage
-  const sessions = data?.stages[0]?.sessions
+  const stage = data.stage
+  const sessions = data.sessions
   const currentSession = sessions[0]
 
   const tabs = [

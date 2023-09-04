@@ -30,13 +30,13 @@ export default async function Stage({ params }: Params) {
     const event = await eventController.getEvent(params.event, params.organization)
     const data = await getScheduleData({
       event,
-      day: new Date().toISOString().split('T')[0],
+      day: new Date().getTime().toString(),
       stage: params.stage,
       currentSession: true,
     })
+    console.log(data)
 
-
-    return <StageLayout data={data.data[0]} />
+    return <StageLayout data={data.days[new Date().getTime()].stages[params.stage]} />
   } catch (e) {
     return notFound()
   }

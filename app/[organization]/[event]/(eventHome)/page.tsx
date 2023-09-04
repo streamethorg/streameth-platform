@@ -21,7 +21,7 @@ const EventPage = async ({
   try {
     const event = await eventController.getEvent(params.event, params.organization)
     const stages = await new StageController().getAllStagesForEvent(params.event)
-    const days = getEventDays(event.start, event.end).map((day) => day.toISOString().split('T')[0])
+    const days = getEventDays(event.start, event.end)
     if (!hasData({ event })) return notFound()
 
     return (

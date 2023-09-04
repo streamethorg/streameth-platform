@@ -7,10 +7,11 @@ const StageSelect = () => {
   const { isMobile } = useContext(MobileContext)
   const { setStage, stage, stages } = useContext(ScheduleContext)
 
+  console.log(stages)
 
   useEffect(() => {
     if (isMobile) {
-      setStage(stages[0].id)
+      setStage(stages?.[0]?.id)
     }
     else {
       setStage(null)

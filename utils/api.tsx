@@ -2,7 +2,7 @@ import { ISession } from '@/server/model/session'
 import { getTime, secondsSinceMidnight } from './time'
 import { IEvent } from '@/server/model/event'
 import { apiUrl } from '@/server/utils'
-import { ScheduleData } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
+import { ScheduleResponse, DayInfo } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
 
 export function extractSearchParams<T extends Record<string, any>>(searchParams: URLSearchParams, keys: (keyof T)[]): T {
   const params: Partial<T> = {}
@@ -21,7 +21,7 @@ export const addBlankSessions = (sessions: ISession[], earliestTime: number): IS
   const blankSessions: ISession[] = []
   let lastSession: ISession | undefined
 
-  const createBlankSession = (start: Date, end: Date, referenceSession: ISession): ISession => ({
+  const createBlankSession = (start: number, end: number, referenceSession: ISession): ISession => ({
     id: `blank${referenceSession.id}`,
     name: 'Blank',
     start,
@@ -32,14 +32,14 @@ export const addBlankSessions = (sessions: ISession[], earliestTime: number): IS
     eventId: referenceSession.eventId,
   })
 
-  if (sessions.length > 0 && getTime(sessions[0].start) > earliestTime) {
+  if (sessions.length > 0 && sessions[0].start > earliestTime) {
     const firstSession = sessions[0]
-    blankSessions.push(createBlankSession(new Date(earliestTime), firstSession.start, firstSession))
+    blankSessions.push(createBlankSession(firstSession.start-1, firstSession.start, firstSession))
   }
 
   for (const session of sessions) {
     if (lastSession) {
-      const gap = getTime(session.start) - getTime(lastSession.end)
+      const gap = session.start - lastSession.end
       if (gap > 0) {
         blankSessions.push(createBlankSession(lastSession.end, session.start, lastSession))
       }
@@ -55,12 +55,12 @@ export const getEarliestTime = (sessions: ISession[]) => {
     return 0 // or some other default value
   }
 
-  const a = Math.min(...sessions.map((session) => secondsSinceMidnight(session.start)))
+  const a = Math.min(...sessions.map((session) => secondsSinceMidnight(new Date(session.start))))
   return a
 }
 
 export const getTotalSlots = (sessions: ISession[], earliestTime: number) => {
- const maxTime = Math.max(...sessions.map((session) => secondsSinceMidnight(session.end)))
+ const maxTime = Math.max(...sessions.map((session) => secondsSinceMidnight(new Date(session.end))))
   return Math.ceil((maxTime - earliestTime) / 60 / 15)
 
 }
@@ -72,14 +72,14 @@ export const getScheduleData = async ({
   currentSession,
 }: {
   event: IEvent
-  day?: string | null
+  day?: number | null
   stage?: string | null
   currentSession?: boolean
 }) => {
   const baseUrl = `${apiUrl()}/organizations/${event.organizationId}/events/${event.id}/schedule`
   const params = new URLSearchParams()
   
-  if (day) params.append('day', day)
+  if (day) params.append('timestamp', day.toString())
   if (stage) params.append('stage', stage)
   if (currentSession) params.append('currentSession', 'true')
 
@@ -91,6 +91,6 @@ export const getScheduleData = async ({
     throw new Error('Failed to fetch schedule')
   }
 
-  const schedule: ScheduleData = await response.json()
+  const schedule: ScheduleResponse = await response.json()
   return schedule
 }
