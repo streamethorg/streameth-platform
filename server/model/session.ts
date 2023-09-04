@@ -18,6 +18,8 @@ export interface ISession {
   eventId: IEvent['id']
   track?: string[]
   coverImage?: string
+  startCut?: string // Temporary solution - 00:00:00 - Shows time of video
+  endCut?: string // Temporary solution - 00:00:00 - Shows time of video
 }
 
 export default class Session implements ISession {
