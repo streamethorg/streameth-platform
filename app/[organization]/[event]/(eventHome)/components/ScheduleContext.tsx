@@ -42,7 +42,7 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) 
 
   useEffect(() => {
     setSchedulePositions([])
-  }, [date])
+  }, [date, stages])
 
   useEffect(() => {
     if (!schedulePositions.length) return

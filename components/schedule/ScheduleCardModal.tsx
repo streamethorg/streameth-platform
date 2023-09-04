@@ -7,6 +7,8 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
       <h1 className="text-lg text-main-text font-bold text-center">{session.name}</h1>
       <div className="flex flex-row justify-center items-center space-x-3 p-2">
         <p className="text-secondary-text">{new Date(session.start).toTimeString().slice(0, 5)}</p>
+         - 
+        <p className="text-secondary-text">{new Date(session.end).toTimeString().slice(0, 5)}</p>
       </div>
       <p className="py-4">{session.description}</p>
       <SpeakerIconList speakers={session.speakers} />

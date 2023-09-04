@@ -9,8 +9,6 @@ import { IStage } from '@/server/model/stage'
 const StageSessions = ({ stage }: { stage: IStage }) => {
   const { schedulePosition, setSchedulePositions, event, date } = useContext(ScheduleContext)
   const [sessions, setSessions] = useState<ISession[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-
   useEffect(() => {
     const fetchSessions = async () => {
       if (!event) return
@@ -25,13 +23,11 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
   }, [date])
 
   useEffect(() => {
-
     if (!sessions.length) {
       return
     }
     setSchedulePositions(sessionsSchedulePosition(sessions))
   }, [sessions])
-
 
   return (
     <div key={stage.id} className="w-full flex flex-col relative">

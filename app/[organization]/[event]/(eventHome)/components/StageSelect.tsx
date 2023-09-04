@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useContext, useEffect, useState } from 'react'
 import { MobileContext } from '@/components/context/MobileContext'
 import { ScheduleContext } from './ScheduleContext' // Update the path to where your ScheduleContext is located
@@ -13,8 +13,9 @@ const StageSelect = (props: props) => {
   useEffect(() => {
     if (isMobile) {
       setStages([props.stages[0]])
+    } else {
+      setStages(props.stages)
     }
-
   }, [isMobile])
 
   const handleStageChange = (stageId: string) => {
@@ -37,10 +38,7 @@ const StageSelect = (props: props) => {
       ) : (
         <div className="w-[calc(100%-6rem)] flex flex-row ml-auto">
           {props.stages.map((stage) => (
-            <div
-              className="w-full p-4 text-center text-xl font-bold text-accent uppercase"
-              key={stage.id}
-              onClick={() => handleStageChange(stage.id)}>
+            <div className="w-full p-4 text-center text-xl font-bold text-accent uppercase" key={stage.id}>
               {stage.name}
             </div>
           ))}

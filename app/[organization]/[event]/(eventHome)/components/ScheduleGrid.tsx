@@ -8,8 +8,8 @@ export default function ScheduleGrid({ children }: { children: React.ReactNode }
   return (
     <div className="flex flex-col w-full relative " style={{ height: schedulePosition.totalSlots * CELL_HEIGHT + 'rem' }}>
       {Array.from({ length: schedulePosition.totalSlots }, (_, i) => (
-        <div key={i} className="w-full h-full border-t p-4">
-          <h1 className="w-full text-sm text-secondary-text">{secondsToHHMM(schedulePosition.min + i * 60 * 15)}</h1>
+        <div key={i} className="w-full h-full border-t pt-0 pb-8 p-4">
+          <h1 className="w-full text-sm text-secondary-text mb-auto">{secondsToHHMM(schedulePosition.min + i * 60 * 15)}</h1>
         </div>
       ))}
       {children}
