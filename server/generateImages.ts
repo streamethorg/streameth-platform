@@ -7,7 +7,7 @@ const eventId = 'zuzalu_montenegro_2023__other'
 
 async function main() {
   const sessionController = new SessionController()
-  const sessions = await sessionController.getAllSessionsForEvent(eventId)
+  const sessions = await sessionController.getAllSessions(eventId)
 
   for (const session of sessions) {
     try {

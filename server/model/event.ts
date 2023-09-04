@@ -26,7 +26,7 @@ export interface IEvent {
   eventCover?: string
   archiveMode?: boolean
   website?: string
-  timezone?: string
+  timezone: string
 }
 
 export default class Event implements IEvent {
@@ -59,7 +59,7 @@ export default class Event implements IEvent {
 
   website?: string
 
-  timezone?: string
+  timezone: string
   constructor({
     id,
     name,

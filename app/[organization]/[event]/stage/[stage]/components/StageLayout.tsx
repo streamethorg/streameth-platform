@@ -10,9 +10,7 @@ import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { StageContext } from './StageContext'
 
 export default function StageLayout() {
-  const context = useContext(StageContext)
-  if (!context) return null
-  const { stage, sessions, currentSession } = context
+
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
 
@@ -22,6 +20,10 @@ export default function StageLayout() {
     }
   }, [stickyRef.current])
 
+  const context = useContext(StageContext)
+  if (!context) return null
+  const { stage, sessions, currentSession } = context
+  
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
       <div ref={stickyRef} className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
