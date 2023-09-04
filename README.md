@@ -17,3 +17,24 @@ Run the development server to watch the result at [http://localhost:3000](http:/
 ```bash
 yarn dev
 ```
+
+## API
+
+We make use of a simple API to get the sessions, speakers, events or organization in JSON format.
+
+### All possible routes:
+
+```bash
+curl -L -H "Accept: application/json" "http://app.streameth.org/api/organizations"
+curl -L -H "Accept: application/json" "http://app.streameth.org/api/organizations/${ORGANIZATION}/events"
+curl -L -H "Accept: application/json" "http://app.streameth.org/api/organizations/${ORGANIZATION}/events/${EVENT}/sessions"
+curl -L -H "Accept: application/json" "http://app.streameth.org/api/organizations/${ORGANIZATION}/events/${EVENT}/speakers"
+curl -L -H "Accept: application/json" "http://app.streameth.org/api/organizations/${ORGANIZATION}/events/${EVENT}/stages"
+curl -L -H "Accept: application/json" "http://app.streameth.org/api/organizations/${ORGANIZATION}/events/${EVENT}/schedule"
+```
+
+### Usage:
+
+```bash
+curl -L -H "Accept: application/json" "http://app.streameth.org/api/organizations/ethberlin/events/protocol_berg/sessions"
+```
