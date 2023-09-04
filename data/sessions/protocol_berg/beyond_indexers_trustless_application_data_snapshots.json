@@ -1,1 +1,20 @@
-{"id":"beyond_indexers_trustless_application_data_snapshots","name":"beyond indexers: trustless application data snapshots","description":"I will present a trustless application data snapshot architecture based on on-chain hashed lists. I will also demonstrate an implementation of that architecture that is used by HOPR mix nodes to sync data much faster and with very few on-chain reads. The proposed mechanism is an orders of magnitude improvement in indexing speed at the cost of one on-chain hash + read + write of a single storage slot. Our open source base contract can be easily integrated into other smart contracts and combined with various frontend libraries.","start":"2023-09-15T16:00:00.000Z","end":"2023-09-15T16:25:00.000Z","stageId":"atelier__side_stage","speakers":[{"id":"sebastian_buergel","name":"Sebastian Buergel","bio":"Sebastian Bürgel builds technical solutions that empower the individual. As founder of the private data exchange infrastructure HOPR, he contributes to establishing full stack privacy for the web3. He also co-founded two other technology startups: Validity Labs (blockchain education & services) and Sonect (fintech). Sebastian holds a Ph.D degree in Microtechnology from Swiss Federal Institute of Technology, ETH Zurich.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/HOPR_Sebastian_Burgel_LinkedIn__NOC97Bk.jpg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/beyond_indexers_trustless_application_data_snapshots.jpg"}
+{
+  "id": "beyond_indexers_trustless_application_data_snapshots",
+  "name": "beyond indexers: trustless application data snapshots",
+  "description": "I will present a trustless application data snapshot architecture based on on-chain hashed lists. I will also demonstrate an implementation of that architecture that is used by HOPR mix nodes to sync data much faster and with very few on-chain reads. The proposed mechanism is an orders of magnitude improvement in indexing speed at the cost of one on-chain hash + read + write of a single storage slot. Our open source base contract can be easily integrated into other smart contracts and combined with various frontend libraries.",
+  "start": "2023-09-15T16:00:00.000Z",
+  "end": "2023-09-15T16:25:00.000Z",
+  "stageId": "atelier__side_stage",
+  "speakers": [
+    {
+      "id": "sebastian_buergel",
+      "name": "Sebastian Buergel",
+      "bio": "Sebastian Bürgel builds technical solutions that empower the individual. As founder of the private data exchange infrastructure HOPR, he contributes to establishing full stack privacy for the web3. He also co-founded two other technology startups: Validity Labs (blockchain education & services) and Sonect (fintech). Sebastian holds a Ph.D degree in Microtechnology from Swiss Federal Institute of Technology, ETH Zurich.",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/HOPR_Sebastian_Burgel_LinkedIn__NOC97Bk.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/beyond_indexers_trustless_application_data_snapshots.jpg"
+}

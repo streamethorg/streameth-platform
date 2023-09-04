@@ -6,7 +6,7 @@ import { ScheduleContext } from './ScheduleContext'
 const SessionsOnSchedule = () => {
   const { earliestTime, data } = useContext(ScheduleContext)
 
-  if ( !data) return <div>Error</div>
+  if (!data) return <div>Error</div>
   return (
     <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">
       {data.stages.map((stage) => (

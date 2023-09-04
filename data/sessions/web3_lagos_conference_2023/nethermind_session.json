@@ -1,1 +1,20 @@
-{"id":"nethermind_session","name":"Nethermind session","description":"Nethermind session","start":"2023-09-01T10:00:00.000Z","end":"2023-09-01T10:20:00.000Z","stageId":"workshop_room_2","speakers":[{"id":"jelilat_anofiu","name":"Jelilat Anofiu","bio":"Blockchain Developer","eventId":"web3_lagos_conference_2023","twitter":"@NethermindEth"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/nethermind_session.jpg"}
+{
+  "id": "nethermind_session",
+  "name": "Nethermind session",
+  "description": "Nethermind session",
+  "start": "2023-09-01T10:00:00.000Z",
+  "end": "2023-09-01T10:20:00.000Z",
+  "stageId": "workshop_room_2",
+  "speakers": [
+    {
+      "id": "jelilat_anofiu",
+      "name": "Jelilat Anofiu",
+      "bio": "Blockchain Developer",
+      "eventId": "web3_lagos_conference_2023",
+      "twitter": "@NethermindEth"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/nethermind_session.jpg"
+}

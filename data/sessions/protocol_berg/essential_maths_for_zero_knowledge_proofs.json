@@ -1,1 +1,20 @@
-{"id":"essential_maths_for_zero_knowledge_proofs","name":"Essential Maths for Zero Knowledge Proofs","description":"A workshop explaining the essential maths needed to understand zero knowledge proofs","start":"2023-09-15T11:30:00.000Z","end":"2023-09-15T12:10:00.000Z","stageId":"loft__workshop_0","speakers":[{"id":"laurence_kirk","name":"Laurence Kirk","bio":"I am an educator and developer in the Web3 space, with a particular passion for zero knowledge proofs.\r\nI started following blockchain tech in 2011, started working on Ethereum in 2015 and started running workshops in 2017. \r\nCurrently as CEO of Extropy.IO I teach workshops about zero knowledge proofs and advanced solidity.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/smallPic_I25BuHD.png"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/essential_maths_for_zero_knowledge_proofs.jpg"}
+{
+  "id": "essential_maths_for_zero_knowledge_proofs",
+  "name": "Essential Maths for Zero Knowledge Proofs",
+  "description": "A workshop explaining the essential maths needed to understand zero knowledge proofs",
+  "start": "2023-09-15T11:30:00.000Z",
+  "end": "2023-09-15T12:10:00.000Z",
+  "stageId": "loft__workshop_0",
+  "speakers": [
+    {
+      "id": "laurence_kirk",
+      "name": "Laurence Kirk",
+      "bio": "I am an educator and developer in the Web3 space, with a particular passion for zero knowledge proofs.\r\nI started following blockchain tech in 2011, started working on Ethereum in 2015 and started running workshops in 2017. \r\nCurrently as CEO of Extropy.IO I teach workshops about zero knowledge proofs and advanced solidity.",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/smallPic_I25BuHD.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/essential_maths_for_zero_knowledge_proofs.jpg"
+}

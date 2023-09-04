@@ -1,1 +1,12 @@
-{"id":"importance_of_web3_security_and_the_role_of_quillaudits","name":"Importance of Web3 Security and the role of QuillAudits ","description":"","start":"2023-09-02T12:55:00.000Z","end":"2023-09-02T13:10:00.000Z","stageId":"mainstage","speakers":[{"id":"quill_audits","name":"QUILL AUDITS","bio":"","eventId":"web3_lagos_conference_2023","twitter":"@QuillAudits"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/importance_of_web3_security_and_the_role_of_quillaudits.jpg"}
+{
+  "id": "importance_of_web3_security_and_the_role_of_quillaudits",
+  "name": "Importance of Web3 Security and the role of QuillAudits ",
+  "description": "",
+  "start": "2023-09-02T12:55:00.000Z",
+  "end": "2023-09-02T13:10:00.000Z",
+  "stageId": "mainstage",
+  "speakers": [{ "id": "quill_audits", "name": "QUILL AUDITS", "bio": "", "eventId": "web3_lagos_conference_2023", "twitter": "@QuillAudits" }],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/importance_of_web3_security_and_the_role_of_quillaudits.jpg"
+}

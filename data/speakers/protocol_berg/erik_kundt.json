@@ -1,1 +1,7 @@
-{"id":"erik_kundt","name":"Erik Kundt","bio":"Erik (he/they) works as a freelance artist and developer with a focus on audio / visual coding and decentralized technologies.\r\n\r\nHe has worked in the area of professional music production for Native Instruments, and later on the Solidity programming language for the Ethereum Foundation. Besides these occupations, he has directed several dance, performance and documentary theater projects in their own technical fields, such as video production and mapping, VR / AR and AI.\r\n\r\nAt the moment he is mainly contributing to the Radicle stack and building tools for generative artists.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/ich_klein_quad_RgICawD.png"}
+{
+  "id": "erik_kundt",
+  "name": "Erik Kundt",
+  "bio": "Erik (he/they) works as a freelance artist and developer with a focus on audio / visual coding and decentralized technologies.\r\n\r\nHe has worked in the area of professional music production for Native Instruments, and later on the Solidity programming language for the Ethereum Foundation. Besides these occupations, he has directed several dance, performance and documentary theater projects in their own technical fields, such as video production and mapping, VR / AR and AI.\r\n\r\nAt the moment he is mainly contributing to the Radicle stack and building tools for generative artists.",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/ich_klein_quad_RgICawD.png"
+}

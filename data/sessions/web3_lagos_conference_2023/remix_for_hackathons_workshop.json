@@ -1,1 +1,14 @@
-{"id":"remix_for_hackathons_workshop","name":"Remix for Hackathons workshop","description":"","start":"2023-09-01T12:25:00.000Z","end":"2023-09-01T13:00:00.000Z","stageId":"workshop_room_2","speakers":[{"id":"david_disu","name":"David Disu","bio":"Web3 Frontend Engineer","eventId":"web3_lagos_conference_2023","twitter":"@MeProtocol"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/remix_for_hackathons_workshop.jpg"}
+{
+  "id": "remix_for_hackathons_workshop",
+  "name": "Remix for Hackathons workshop",
+  "description": "",
+  "start": "2023-09-01T12:25:00.000Z",
+  "end": "2023-09-01T13:00:00.000Z",
+  "stageId": "workshop_room_2",
+  "speakers": [
+    { "id": "david_disu", "name": "David Disu", "bio": "Web3 Frontend Engineer", "eventId": "web3_lagos_conference_2023", "twitter": "@MeProtocol" }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/remix_for_hackathons_workshop.jpg"
+}
