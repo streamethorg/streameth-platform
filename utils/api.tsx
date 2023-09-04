@@ -1,5 +1,4 @@
 import { ISession } from '@/server/model/session'
-import { secondsSinceMidnight } from './time'
 import { apiUrl } from '@/server/utils'
 import {IEvent} from '@/server/model/event'
 

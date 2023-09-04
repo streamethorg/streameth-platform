@@ -22,7 +22,6 @@ export default class SessionController {
   }
 
   public async getAllSessions(eventId: ISession['eventId'], stage?: ISession['stageId'], timestamp?: number, date?: number): Promise<Session[]> {
-    console.log("GET ALL SESSIONS", eventId, stage, timestamp, date)
     const sessions: Session[] = []
     const sessionQuery = await Session.getSessionPath(eventId)
     let data = await this.controller.getAll(sessionQuery)
@@ -30,12 +29,10 @@ export default class SessionController {
      data = data.filter((session) => session.stageId === stage)
     }
     if (timestamp) {
-     data = data.filter((session) => session.start <= timestamp)
+     data = data.filter((session) => new Date(session.start).getTime() >= timestamp)
     }
     if (date) {
-      // session day
       const filterDate = new Date(date)
-      console.log("FILTER DATE", filterDate)
     data = data.filter((session) => {
         const sessionDate = new Date(session.start)
         return (

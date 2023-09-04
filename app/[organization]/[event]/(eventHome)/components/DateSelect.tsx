@@ -26,7 +26,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
             className={` p-4 text-center text-xl font-bold ${date !== dateString ? 'text-black cursor-pointer' : 'text-accent'}`}
             onClick={() => setDate(dateString)}
             key={index}>
-            {dateString}
+            {new Date(date).toLocaleDateString()}
           </div>
         ))
       )}

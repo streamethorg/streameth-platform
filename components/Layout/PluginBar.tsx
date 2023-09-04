@@ -1,15 +1,18 @@
 'use client'
-import { useState } from 'react'
-
+import { useState, useContext } from 'react'
+import { MobileContext } from '../context/MobileContext'
 export default function PluginBar({
+  bottomOffset,
   tabs,
 }: {
+  bottomOffset: number
   tabs: {
     id: string
     header: JSX.Element
     content: JSX.Element
   }[]
 }) {
+  const {isMobile} = useContext(MobileContext)
   const [selectedId, setSelectedId] = useState(tabs[0].id)
   const selectedTab = tabs.find((tab) => tab.id === selectedId)
 
@@ -18,8 +21,8 @@ export default function PluginBar({
   }
 
   return (
-    <div className="flex flex-col rounded shadow h-full bg-base">
-      <div className="flex flex-row w-full bg-secondary p-4">
+    <div className=" flex flex-col rounded shadow h-full bg-base">
+      <div style={{ top: isMobile ? bottomOffset: "unset"}} className=" z-40 sticky md:relative md:top-[unset] flex flex-row w-full bg-secondary p-4 bg-base">
         {tabs.map((tab) => (
           <div key={tab.id} onClick={() => setSelectedId(tab.id)} className="m-2 w-full ">
             <div
