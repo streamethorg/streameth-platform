@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { ScheduleContext } from './ScheduleContext'
 import { MobileContext } from '@/components/context/MobileContext'
 const DateSelect = () => {

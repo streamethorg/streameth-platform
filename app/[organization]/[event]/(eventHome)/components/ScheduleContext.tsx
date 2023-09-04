@@ -1,33 +1,36 @@
 'use client'
-import React, { useState, createContext, useEffect, ReactNode } from 'react'
-import { DayInfo, ScheduleResponse } from '@/app/api/organizations/[id]/events/[eventId]/schedule/route'
+import React, { useState, createContext, ReactNode, useEffect } from 'react'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
-import { LoadingContext } from '@/components/context/LoadingContext'
-import { getScheduleData } from '@/utils/api'
 
 interface ScheduleContextProps {
-  data: DayInfo | null
   setDate: React.Dispatch<React.SetStateAction<number>>
-  date: number | null
+  date: number
   dates: number[]
   setStage: React.Dispatch<React.SetStateAction<string | null>>
   stage: string | null
   stages: IStage[]
-  totalSlots: number
-  earliestTime: number
+  setStages: any
+  event?: IEvent
+  schedulePosition: ISchedulePosition
+  setSchedulePositions: any
 }
 
+interface ISchedulePosition {
+  min: number
+  max: number
+  totalSlots: number
+}
 const ScheduleContext = createContext<ScheduleContextProps>({
-  data: null,
   setDate: () => {},
-  date: null,
+  date: 0,
   dates: [],
   setStage: () => {},
+  setStages: () => {},
   stage: null,
   stages: [],
-  totalSlots: 0,
-  earliestTime: 0,
+  schedulePosition: { min: 0, max: 0, totalSlots: 0 },
+  setSchedulePositions: () => {},
 })
 
 interface ScheduleContextProviderProps {
@@ -37,55 +40,67 @@ interface ScheduleContextProviderProps {
   children: ReactNode
 }
 
-const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = ({ event, days, stages, children }) => {
-  const { setIsLoading } = React.useContext(LoadingContext)
-  const [date, setDate] = useState<number>(event.start.getTime())
+const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) => {
+  const [date, setDate] = useState<number>(props.event.start.getTime())
   const [stage, setStage] = useState<string | null>(null)
-  const [schedule, setSchedule] = useState<ScheduleResponse | null>(null)
+  const [stages, setStages] = useState<IStage[]>(props.stages)
+  const [schedulePositions, setSchedulePositions] = useState<ISchedulePosition[]>([])
+  const [schedulePosition, setSchedulePosition] = useState<ISchedulePosition>({ min: 0, max: 0, totalSlots: 0 })
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchedData = await getScheduleData({ event, day: date, stage })
-        console.log(fetchedData)
-        setSchedule(fetchedData)
-      } catch (error) {
-        console.error('Error fetching schedule:', error)
-      } finally {
-        setIsLoading(false)
+    setSchedulePositions([])
+  }, [date])
+
+  useEffect(() => {
+    if (!schedulePositions.length) return
+    setSchedulePosition({ ...minMaxMaxTotalslots() })
+  }, [schedulePositions])
+
+  const updateEarliestTimes = (data: ISchedulePosition) => {
+    setSchedulePositions((schedulePositions) => [...schedulePositions, data])
+  }
+
+  const minMaxMaxTotalslots = () => {
+    if (!schedulePositions.length) {
+      return { min: 0, max: 0, totalSlots: 0 }
+    }
+
+    let returnObj = {
+      min: schedulePositions[0].min,
+      max: schedulePositions[0].max,
+      totalSlots: schedulePositions[0].totalSlots,
+    }
+
+    for (let i = 0; i < schedulePositions.length; i++) {
+      if (schedulePositions[i].min < returnObj.min) {
+        returnObj.min = schedulePositions[i].min
+      }
+      if (schedulePositions[i].max > returnObj.max) {
+        returnObj.max = schedulePositions[i].max
+      }
+      if (schedulePositions[i].totalSlots > returnObj.totalSlots) {
+        returnObj.totalSlots = schedulePositions[i].totalSlots
       }
     }
-    fetchData()
-  }, [event, date, stage])
 
-  const data = schedule?.data
-  console.log(schedule)
-  const getStages = () => {
-    console.log(data)
-    if (!data) return []
-    let items = []
-    const a = Object(data.days[date].stages)
-    console.log(a)
-    for (const item of Object(data.days[date].stages).keys()) {
-      console.log(item)
-      items.push(item.stage as IStage)
-    }
-    return items
+    return returnObj
   }
+
   return (
     <ScheduleContext.Provider
       value={{
-        data: data?.days[date] || null,
         setDate,
         setStage,
+        setStages,
         stage,
-        stages: getStages(),
-        totalSlots: schedule?.totalSlots || 0,
-        earliestTime: schedule?.earliestTime || 0,
+        stages,
         date,
-        dates: [...days],
+        dates: [...props.days],
+        event: props.event,
+        schedulePosition,
+        setSchedulePositions: updateEarliestTimes,
       }}>
-      {children}
+      {props.children}
     </ScheduleContext.Provider>
   )
 }
