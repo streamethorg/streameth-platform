@@ -4,7 +4,6 @@ import { secondsSinceMidnight } from '@/utils/time'
 export const getSlotRange = (session: ISession, earliestTime: number) => {
   const start = Math.floor((secondsSinceMidnight(new Date(session.start)) - earliestTime) / 60 / 15)
   const end = (secondsSinceMidnight(new Date(session.end)) - earliestTime) / 60 / 15
-  console.log('start', start, 'end', end)
   return { start, end }
 }
 

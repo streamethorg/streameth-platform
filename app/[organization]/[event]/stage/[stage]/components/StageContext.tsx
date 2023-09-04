@@ -26,7 +26,6 @@ export const StageContextProvider = (props: props) => {
       const filteredSessions = props.sessions.filter((session) => {
         return new Date(session.start).getTime() > currentTimestamp
       })
-      console.log(filteredSessions)
       setSessions(filteredSessions)
       setCurrentSession(filteredSessions[0])
     }

@@ -17,7 +17,6 @@ export async function GET(
   }
 ) {
   const searchParams = extractSearchParams<SessionsSearchParams>(new URL(request.url).searchParams, ['timestamp', 'date', 'stage'])
-  console.log('SEARCH PARAMS', searchParams)
   const sessionController = new SessionController()
   try {
     const data = await sessionController.getAllSessions(params.eventId, searchParams.stage, Number(searchParams.timestamp), Number(searchParams.date))
