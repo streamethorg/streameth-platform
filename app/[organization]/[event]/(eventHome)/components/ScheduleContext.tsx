@@ -6,9 +6,6 @@ import { IStage } from '@/server/model/stage'
 interface ScheduleContextProps {
   setDate: React.Dispatch<React.SetStateAction<number>>
   date: number
-  dates: number[]
-  setStage: React.Dispatch<React.SetStateAction<string | null>>
-  stage: string | null
   stages: IStage[]
   setStages: any
   event?: IEvent
@@ -24,10 +21,7 @@ interface ISchedulePosition {
 const ScheduleContext = createContext<ScheduleContextProps>({
   setDate: () => {},
   date: 0,
-  dates: [],
-  setStage: () => {},
   setStages: () => {},
-  stage: null,
   stages: [],
   schedulePosition: { min: 0, max: 0, totalSlots: 0 },
   setSchedulePositions: () => {},
@@ -42,7 +36,6 @@ interface ScheduleContextProviderProps {
 
 const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) => {
   const [date, setDate] = useState<number>(props.event.start.getTime())
-  const [stage, setStage] = useState<string | null>(null)
   const [stages, setStages] = useState<IStage[]>(props.stages)
   const [schedulePositions, setSchedulePositions] = useState<ISchedulePosition[]>([])
   const [schedulePosition, setSchedulePosition] = useState<ISchedulePosition>({ min: 0, max: 0, totalSlots: 0 })
@@ -90,12 +83,9 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) 
     <ScheduleContext.Provider
       value={{
         setDate,
-        setStage,
-        setStages,
-        stage,
-        stages,
         date,
-        dates: [...props.days],
+        setStages,
+        stages,
         event: props.event,
         schedulePosition,
         setSchedulePositions: updateEarliestTimes,

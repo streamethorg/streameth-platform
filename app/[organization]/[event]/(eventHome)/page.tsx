@@ -21,15 +21,15 @@ const EventPage = async ({
   try {
     const event = await eventController.getEvent(params.event, params.organization)
     const stages = await new StageController().getAllStagesForEvent(params.event)
-    const days = getEventDays(event.start, event.end)
+    const dates = getEventDays(event.start, event.end)
     if (!hasData({ event })) return notFound()
 
     return (
-      <ScheduleContextProvider event={event.toJson()} stages={stages} days={days}>
+      <ScheduleContextProvider event={event.toJson()} stages={stages} days={dates}>
         <div className="w-full h-full relative md:overflow-scroll">
           <div className="sticky top-0 z-10 flex flex-row flex-wrap md:flex-col bg-base justify-center">
-            <DateSelect />
-            <StageSelect />
+            <DateSelect dates={dates} />
+            <StageSelect stages={stages}/>
           </div>
           <ScheduleGrid>
             <SessionsOnSchedule />
