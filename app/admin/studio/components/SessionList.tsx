@@ -3,10 +3,12 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { useEffect, useState } from 'react'
+import { EventInfo } from '../page'
 
 dayjs.extend(duration)
 
 interface Props {
+  event: EventInfo
   streamUrl: string
   sessions: any[]
 }
@@ -19,7 +21,19 @@ export function SessionList(props: Props) {
   }, [props])
 
   async function processVideos() {
-    console.log('PROCESS VIDEOS => Send to API', editInfo)
+    const response = await fetch('/api/admin/studio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        event: props.event,
+        sessions: editInfo,
+      }),
+    })
+    await response.json()
+
+    // TODO: handle results? Should refresh sessionList with filled in values
   }
 
   return (

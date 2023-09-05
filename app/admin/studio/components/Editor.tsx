@@ -1,7 +1,5 @@
 'use client'
 
-import { IEvent } from '@/server/model/event'
-import { IStage } from '@/server/model/stage'
 import { ISession } from '@/server/model/session'
 import { apiUrl } from '@/server/utils'
 import { StreamSession, useStreamSessions } from '@livepeer/react'
@@ -10,25 +8,27 @@ import duration from 'dayjs/plugin/duration'
 import { useEffect, useState } from 'react'
 import { VideoPlayer } from './VideoPlayer'
 import { SessionList } from './SessionList'
+import { EventInfo, StageInfo } from '../page'
 
 dayjs.extend(duration)
 
 interface Props {
-  events: IEvent[]
-  stages: IStage[]
+  events: EventInfo[]
+  stages: StageInfo[]
 }
+
 export function Editor(props: Props) {
-  const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>()
-  const [selectedStage, setSelectedStage] = useState<IStage | undefined>()
+  const [selectedEvent, setSelectedEvent] = useState<EventInfo | undefined>()
+  const [selectedStage, setSelectedStage] = useState<StageInfo | undefined>()
   const [selectedStream, setSelectedStream] = useState<StreamSession | undefined>()
   const [sessions, setSessions] = useState<ISession[]>([])
 
-  const { data: streamSessions } = useStreamSessions(selectedStage?.streamSettings.streamId ?? '')
+  const { data: streamSessions } = useStreamSessions(selectedStage?.streamId ?? '')
 
   // initialize default event and stage
   useEffect(() => {
     const event = props.events[0]
-    const stage = props.stages.find((stage) => stage.eventId === event?.id)
+    const stage = props.stages.find((stage) => stage.id === event?.id)
     setSelectedEvent(event)
     setSelectedStage(stage)
   }, [props.events, props.stages])
@@ -129,11 +129,10 @@ export function Editor(props: Props) {
             />
           )}
           {!selectedStream?.recordingUrl && <p>No video stream available..</p>}
-          {/* {selectedStream && <Player title="StreamETH Video editor" playbackId={selectedStream?.id} objectFit="cover" priority showTitle={false} />} */}
         </div>
       </div>
 
-      {sessions && sessions.length > 0 && <SessionList sessions={sessions} streamUrl={selectedStream?.recordingUrl ?? ''} />}
+      {selectedEvent && sessions && sessions.length > 0 && <SessionList event={selectedEvent} sessions={sessions} streamUrl={selectedStream?.recordingUrl ?? ''} />}
     </div>
   )
 }
