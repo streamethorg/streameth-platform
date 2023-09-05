@@ -18,4 +18,3 @@ export default async function Home() {
     </FilterContextProvider>
   )
 }
-

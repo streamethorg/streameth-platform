@@ -55,7 +55,6 @@ export default async function Stage({ params }: Params) {
   }
 }
 
-
 export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
   const eventController = new EventController()
   const event = await eventController.getEvent(params.event, params.organization)

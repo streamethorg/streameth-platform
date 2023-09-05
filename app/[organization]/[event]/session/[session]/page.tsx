@@ -41,9 +41,9 @@ export async function generateMetadata({ params }: Params, parent: ResolvingMeta
       },
     }
   } catch (e) {
-console.log(e)
+    console.log(e)
     return {
-      title: "streameth session",
+      title: 'streameth session',
     }
   }
 }
