@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "decentralized_disruption",
   "name": "Decentralized disruption",
@@ -18,3 +19,8 @@
   "eventId": "web3_lagos_conference_2023",
   "coverImage": "/sessions/web3_lagos_conference_2023/decentralized_disruption.jpg"
 }
+||||||| 46ae8f0
+{"id":"decentralized_disruption","name":"Decentralized disruption","description":"","start":"2023-08-31T10:45:00.000Z","end":"2023-08-31T11:15:00.000Z","stageId":"workshop_room_1","speakers":[{"id":"adeola_adesina","name":"Adeola Adesina","bio":"Chief Experience Officer","eventId":"web3_lagos_conference_2023","twitter":"@SvelteMarketing"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/decentralized_disruption.jpg"}
+=======
+{"id":"decentralized_disruption","name":"Decentralized disruption","description":"","start":1693482300000,"end":1693484100000,"stageId":"workshop_room_1","speakers":[{"id":"adeola_adesina","name":"Adeola Adesina","bio":"Chief Experience Officer","eventId":"web3_lagos_conference_2023","twitter":"@SvelteMarketing"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/decentralized_disruption.jpg"}
+>>>>>>> upstream/main

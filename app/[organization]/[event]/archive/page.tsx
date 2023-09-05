@@ -13,7 +13,7 @@ interface Params {
 
 export default async function ArchivePage({ params }: Params) {
   const sessionController = new SessionController()
-  const sessions = (await sessionController.getAllSessionsForEvent(params.event)).map((session) => {
+  const sessions = (await sessionController.getAllSessions(params.event)).map((session) => {
     return session.toJson()
   })
 

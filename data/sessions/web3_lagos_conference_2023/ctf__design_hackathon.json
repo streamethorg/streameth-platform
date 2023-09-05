@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "ctf__design_hackathon",
   "name": "CTF & Design Hackathon",
@@ -10,3 +11,8 @@
   "eventId": "web3_lagos_conference_2023",
   "coverImage": "/sessions/web3_lagos_conference_2023/ctf__design_hackathon.jpg"
 }
+||||||| 46ae8f0
+{"id":"ctf__design_hackathon","name":"CTF & Design Hackathon","description":"","start":"2023-09-01T13:30:00.000Z","end":"2023-09-01T15:00:00.000Z","stageId":"workshop_room_2","speakers":[{"id":"hackathon_moderator","name":"Hackathon Moderator","bio":"No description","eventId":"web3_lagos_conference_2023"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/ctf__design_hackathon.jpg"}
+=======
+{"id":"ctf__design_hackathon","name":"CTF & Design Hackathon","description":"","start":1693578600000,"end":1693584000000,"stageId":"workshop_room_2","speakers":[{"id":"hackathon_moderator","name":"Hackathon Moderator","bio":"No description","eventId":"web3_lagos_conference_2023"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/ctf__design_hackathon.jpg"}
+>>>>>>> upstream/main

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "postconference_social_mixer",
   "name": "Post-Conference Social Mixer",
@@ -10,3 +11,8 @@
   "eventId": "protocol_berg",
   "coverImage": "/sessions/protocol_berg/postconference_social_mixer.jpg"
 }
+||||||| 46ae8f0
+{"id":"postconference_social_mixer","name":"Post-Conference Social Mixer","description":"Grab a drink (choice of aperitif, beer, or lemonade on us!) and mingle with fellow attendees and speakers.","start":"2023-09-15T18:00:00.000Z","end":"2023-09-15T18:25:00.000Z","stageId":"magazin__main_stage","speakers":[],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/postconference_social_mixer.jpg"}
+=======
+{"id":"postconference_social_mixer","name":"Post-Conference Social Mixer","description":"Grab a drink (choice of aperitif, beer, or lemonade on us!) and mingle with fellow attendees and speakers.","start":"2023-09-15T20:00:00+02:00","end":"2023-09-15T20:25:00+02:00","stageId":"magazin__main_stage","speakers":[],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/postconference_social_mixer.jpg"}
+>>>>>>> upstream/main

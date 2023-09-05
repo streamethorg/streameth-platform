@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "marketing_web3_in_africa__web3_and_its_economic_effects_on_africa",
   "name": "Marketing Web3 in Africa / Web3 and its economic effects on Africa.",
@@ -18,3 +19,8 @@
   "eventId": "web3_lagos_conference_2023",
   "coverImage": "/sessions/web3_lagos_conference_2023/marketing_web3_in_africa__web3_and_its_economic_effects_on_africa.jpg"
 }
+||||||| 46ae8f0
+{"id":"marketing_web3_in_africa__web3_and_its_economic_effects_on_africa","name":"Marketing Web3 in Africa / Web3 and its economic effects on Africa.","description":"","start":"2023-09-01T11:50:00.000Z","end":"2023-09-01T12:10:00.000Z","stageId":"workshop_room_1","speakers":[{"id":"babatunde_ayomide_ifedapo","name":"Babatunde Ayomide Ifedapo","bio":"Marketing & Growth Lead","eventId":"web3_lagos_conference_2023","twitter":"@WatrProtocol"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/marketing_web3_in_africa__web3_and_its_economic_effects_on_africa.jpg"}
+=======
+{"id":"marketing_web3_in_africa__web3_and_its_economic_effects_on_africa","name":"Marketing Web3 in Africa / Web3 and its economic effects on Africa.","description":"","start":1693572600000,"end":1693573800000,"stageId":"workshop_room_1","speakers":[{"id":"babatunde_ayomide_ifedapo","name":"Babatunde Ayomide Ifedapo","bio":"Marketing & Growth Lead","eventId":"web3_lagos_conference_2023","twitter":"@WatrProtocol"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/marketing_web3_in_africa__web3_and_its_economic_effects_on_africa.jpg"}
+>>>>>>> upstream/main

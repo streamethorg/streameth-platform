@@ -9,8 +9,8 @@ export interface ISession {
   id: string
   name: string
   description: string
-  start: Date
-  end: Date
+  start: number
+  end: number
   stageId: IStage['id']
   speakers: Speaker[]
   videoUrl?: string
@@ -31,10 +31,10 @@ export default class Session implements ISession {
   description: string
 
   @IsNotEmpty()
-  start: Date
+  start: number
 
   //@IsNotEmpty()
-  end: Date
+  end: number
 
   @IsNotEmpty()
   stageId: IStage['id']
@@ -57,8 +57,8 @@ export default class Session implements ISession {
     this.id = generateId(name)
     this.name = name
     this.description = description
-    this.start = new Date(start)
-    this.end = new Date(end)
+    this.start = start
+    this.end = end
     this.stageId = stageId
     this.speakers = speakers
     this.videoUrl = videoUrl
@@ -73,6 +73,16 @@ export default class Session implements ISession {
     const errors = await validate(this)
     if (errors.length > 0) {
       throw new Error(`Validation failed! ${errors}`)
+    }
+  }
+
+  getDate(): {
+    start: Date
+    end: Date
+  } {
+    return {
+      start: new Date(this.start),
+      end: new Date(this.end),
     }
   }
 

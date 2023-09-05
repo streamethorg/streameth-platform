@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "alphaday",
   "name": "Alphaday",
@@ -10,3 +11,8 @@
   "eventId": "web3_lagos_conference_2023",
   "coverImage": "/sessions/web3_lagos_conference_2023/alphaday.jpg"
 }
+||||||| 46ae8f0
+{"id":"alphaday","name":"Alphaday","description":"","start":"2023-09-02T11:15:00.000Z","end":"2023-09-02T11:30:00.000Z","stageId":"mainstage","speakers":[{"id":"alphaday","name":"ALPHADAY","bio":"","eventId":"web3_lagos_conference_2023","twitter":"@AlphadayHQ"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/alphaday.jpg"}
+=======
+{"id":"alphaday","name":"Alphaday","description":"","start":1693656900000,"end":1693657800000,"stageId":"mainstage","speakers":[{"id":"alphaday","name":"ALPHADAY","bio":"","eventId":"web3_lagos_conference_2023","twitter":"@AlphadayHQ"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/alphaday.jpg"}
+>>>>>>> upstream/main
