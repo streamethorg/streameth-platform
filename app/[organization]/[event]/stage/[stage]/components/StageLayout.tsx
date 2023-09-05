@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { ChatBubbleBottomCenterIcon, CalendarIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/plugins/Chat'
@@ -8,7 +8,7 @@ import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { StageContext } from './StageContext'
-
+import EmbedButton from '@/components/misc/EmbedButton'
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
@@ -26,7 +26,9 @@ export default function StageLayout() {
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
       <div ref={stickyRef} className="sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
-        <ActionsComponent title={stage.name} />
+        <ActionsComponent title={stage.name}>
+          <EmbedButton streamId={stage.streamSettings.streamId} playerName={stage.name} />
+        </ActionsComponent>
         <Player streamId={stage.streamSettings.streamId} playerName={stage.name} />
         <div className="hidden lg:flex w-full lg:mt-4 h-full">
           <SessionInfoBox session={currentSession} />

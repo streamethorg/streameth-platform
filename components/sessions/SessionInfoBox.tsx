@@ -2,7 +2,7 @@
 import { ISession } from '@/server/model/session'
 import ComponetCard from '../misc/ComponentCard'
 
-const SessionInfoBox = ({ session, showDate }: { session: ISession; showDate?: false }) => {
+const SessionInfoBox = ({ session, showDate }: { session: ISession; showDate?: boolean }) => {
   if (!session) return null
 
   return (

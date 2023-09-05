@@ -56,20 +56,18 @@ export const Player = ({
     [playerName]
   )
 
-  if (!stream?.isActive) return <OfflinePlayer />
+  if (!playbackId && !stream?.isActive) return <OfflinePlayer />
 
   return (
     <div className="relative w-full aspect-video h-full">
       <LivepeerPlayer
         mediaElementRef={mediaElementRef}
-        src={stream.playbackUrl}
+        playbackId={playbackId ?? stream?.playbackId}
         showTitle={false}
         showPipButton={false}
         muted={true}
+        showLoadingSpinner={false}
         autoPlay
-        priority
-        lowLatency
-        showLoadingSpinner={true}
         controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
         viewerId={address}
       />
