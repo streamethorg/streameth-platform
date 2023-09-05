@@ -1,10 +1,8 @@
 'use client'
 import { useEffect } from 'react'
 
-
 const Modal = ({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) => {
   useEffect(() => {
-
     return () => {
       if (open) {
         onClose()

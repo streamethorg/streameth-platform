@@ -57,7 +57,6 @@ export default function Navbar({
   const handleClick = (stageHref: string) => {
     router.push(stageHref)
     closeModal()
-
   }
 
   return (

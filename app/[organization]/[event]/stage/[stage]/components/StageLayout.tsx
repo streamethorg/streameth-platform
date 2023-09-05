@@ -29,7 +29,7 @@ export default function StageLayout() {
         <ActionsComponent title={stage.name} />
         <Player streamId={stage.streamSettings.streamId} playerName={stage.name} />
         <div className="hidden lg:flex w-full lg:mt-4 h-full">
-          <SessionInfoBox session={currentSession}   />
+          <SessionInfoBox session={currentSession} />
         </div>
       </div>
       <div className="flex w-full lg:mt-4 h-full p-4 lg:hidden">
