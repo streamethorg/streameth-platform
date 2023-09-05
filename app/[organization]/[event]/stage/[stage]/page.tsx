@@ -44,7 +44,7 @@ export default async function Stage({ params }: Params) {
     if (!sessions.length) return <></>
 
     return (
-      <StageContextProvider stage={stage} sessions={sessions}>
+      <StageContextProvider stage={stage.toJson()} sessions={sessions}>
         <StageLayout />
       </StageContextProvider>
     )
