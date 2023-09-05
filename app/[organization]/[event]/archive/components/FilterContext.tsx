@@ -3,7 +3,7 @@ import React, { useState, createContext, useContext, useEffect } from 'react'
 import { LoadingContext } from '@/components/context/LoadingContext'
 export interface FilterOption<T> {
   name: string
-  value: string
+  value: string | number
   type: string
   filterFunc: (item: T) => Promise<boolean>
 }

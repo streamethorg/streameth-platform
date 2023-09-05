@@ -34,7 +34,6 @@ const GeneralContext = ({ children }: { children: React.ReactNode }) => {
     []
   )
 
-  console.log(process.env.NEXT_PUBLIC_STUDIO_API_KEY)
   return (
     <WagmiConfig config={config}>
       <Analytics />
