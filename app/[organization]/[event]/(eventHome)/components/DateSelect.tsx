@@ -2,6 +2,7 @@
 import { useContext } from 'react'
 import { ScheduleContext } from './ScheduleContext'
 import { MobileContext } from '@/components/context/MobileContext'
+
 const DateSelect = ({ dates }: { dates: number[] }) => {
   const { setDate, date } = useContext(ScheduleContext)
   const { isMobile } = useContext(MobileContext)
@@ -23,10 +24,10 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
       ) : (
         dates.map((dateString, index) => (
           <div
-            className={` p-4 text-center text-xl font-bold ${date !== dateString ? 'text-black cursor-pointer' : 'text-accent'}`}
+            className={`p-4 text-center text-xl font-bold ${date !== dateString ? 'text-black cursor-pointer' : 'text-accent'}`}
             onClick={() => setDate(dateString)}
             key={index}>
-            {new Date(date).toLocaleDateString()}
+            {new Date(dateString).toLocaleDateString()}
           </div>
         ))
       )}
