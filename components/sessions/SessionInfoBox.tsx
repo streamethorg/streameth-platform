@@ -3,7 +3,6 @@ import { ISession } from '@/server/model/session'
 import ComponetCard from '../misc/ComponentCard'
 
 const SessionInfoBox = ({ session }: { session: ISession }) => {
-
   if (!session) return null
 
   return (

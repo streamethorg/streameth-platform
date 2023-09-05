@@ -56,8 +56,6 @@ export const Player = ({
     [playerName]
   )
 
-
-
   if (!stream?.isActive) return <OfflinePlayer />
 
   return (

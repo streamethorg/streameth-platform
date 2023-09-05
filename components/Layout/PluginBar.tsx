@@ -12,7 +12,7 @@ export default function PluginBar({
     content: JSX.Element
   }[]
 }) {
-  const {isMobile} = useContext(MobileContext)
+  const { isMobile } = useContext(MobileContext)
   const [selectedId, setSelectedId] = useState(tabs[0].id)
   const selectedTab = tabs.find((tab) => tab.id === selectedId)
 
@@ -22,7 +22,9 @@ export default function PluginBar({
 
   return (
     <div className=" flex flex-col rounded shadow h-full bg-base">
-      <div style={{ top: isMobile ? bottomOffset: "unset"}} className=" z-40 sticky md:relative md:top-[unset] flex flex-row w-full bg-secondary p-4 bg-base">
+      <div
+        style={{ top: isMobile ? bottomOffset : 'unset' }}
+        className=" z-40 sticky md:relative md:top-[unset] flex flex-row w-full bg-secondary p-4 bg-base">
         {tabs.map((tab) => (
           <div key={tab.id} onClick={() => setSelectedId(tab.id)} className="m-2 w-full ">
             <div

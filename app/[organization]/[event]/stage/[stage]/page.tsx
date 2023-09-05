@@ -41,7 +41,6 @@ export default async function Stage({ params }: Params) {
       timestamp: new Date().getTime(),
     })
 
-
     if (!sessions.length) return <></>
 
     return (
