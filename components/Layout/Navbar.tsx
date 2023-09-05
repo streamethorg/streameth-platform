@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ModalContext } from '../context/ModalContext'
 import { CameraIcon, Bars2Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
@@ -10,6 +11,25 @@ interface Page {
   name: string
   href: string
   icon: JSX.Element
+}
+
+const StageModal = ({ stages, handleClick }: { stages: Page[]; handleClick: (stageHref: string) => void }) => {
+  const pathname = usePathname()
+
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="font-bold uppercase mb-2 text-accent">Select a stage</h1>
+      {stages.map((stage) => (
+        <div
+          className={`p-4 border-2 rounded m-1 cursor-pointer w-[200px] h-[50px] flex items-center justify-center hover:bg-gray-400
+                       ${pathname === stage.href && 'bg-accent rounded text-primary'}`}
+          key={stage.name}
+          onClick={() => handleClick(stage.href)}>
+          <p>{stage.name}</p>
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default function Navbar({
@@ -24,8 +44,9 @@ export default function Navbar({
   }[]
 }) {
   const pathname = usePathname()
-  const { openModal } = useContext(ModalContext)
+  const { openModal, closeModal } = useContext(ModalContext)
   const [isNavVisible, setIsNavVisible] = useState(false) // New state
+  const router = useRouter()
 
   useEffect(() => {
     if (isNavVisible) {
@@ -33,22 +54,10 @@ export default function Navbar({
     }
   }, [pathname])
 
-  const stageModal = () => {
-    openModal(
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="font-bold uppercase mb-2 text-accent">Select a stage</h1>
-        {stages.map((stage) => (
-          <Link key={stage.name} href={stage.href}>
-            <div
-              className={`p-4 border-2 rounded m-1 cursor-pointer w-[200px] h-[50px] flex items-center justify-center hover:bg-gray-400
-                         ${pathname === stage.href && 'bg-accent rounded text-primary'}`}
-              key={stage.name}>
-              <p>{stage.name}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
-    )
+  const handleClick = (stageHref: string) => {
+    router.push(stageHref)
+    closeModal()
+
   }
 
   return (
@@ -79,7 +88,7 @@ export default function Navbar({
             ))}
             {stages.length > 0 && (
               <div
-                onClick={stageModal}
+                onClick={() => openModal(<StageModal stages={stages} handleClick={handleClick} />)}
                 className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
                   pathname.includes('/stage/') && 'bg-accent text-primary rounded'
                 }`}>

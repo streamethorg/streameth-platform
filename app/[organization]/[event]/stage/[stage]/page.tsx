@@ -49,7 +49,6 @@ export default async function Stage({ params }: Params) {
       </StageContextProvider>
     )
   } catch (e) {
-    console.log(e, params)
     return notFound()
   }
 }
