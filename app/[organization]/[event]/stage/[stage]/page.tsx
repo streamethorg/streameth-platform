@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Params, parent: ResolvingMeta
   const eventController = new EventController()
   const event = await eventController.getEvent(params.event, params.organization)
   const imageName = event.eventCover ? event.eventCover : event.id + '.png'
-  const imageUrl = "https://app.streameth.org/public/" + imageName
+  const imageUrl = 'https://app.streameth.org/public/' + imageName
   return {
     title: `${event.name} - ${params.stage}`,
     description: `Attend ${event.name} virtually powered by streameth here`,
