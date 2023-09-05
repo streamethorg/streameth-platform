@@ -9,6 +9,8 @@ import ActionsComponent from '@/app/[organization]/[event]/session/[session]/com
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { StageContext } from './StageContext'
 import EmbedButton from '@/components/misc/EmbedButton'
+import ShareButton from '@/components/misc/ShareButton'
+
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
@@ -28,6 +30,7 @@ export default function StageLayout() {
       <div ref={stickyRef} className="sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
         <ActionsComponent title={stage.name}>
           <EmbedButton streamId={stage.streamSettings.streamId} playerName={stage.name} />
+          <ShareButton />
         </ActionsComponent>
         <Player streamId={stage.streamSettings.streamId} playerName={stage.name} />
         <div className="hidden lg:flex w-full lg:mt-4 h-full">
