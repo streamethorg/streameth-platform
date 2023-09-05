@@ -72,7 +72,7 @@ export default class Event implements IEvent {
     eventCover,
     archiveMode,
     website,
-    timezone
+    timezone,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name

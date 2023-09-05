@@ -3,52 +3,40 @@ import EventController from './controller/event'
 import SpeakerController from './controller/speaker'
 import SessionController from './controller/session'
 const run = async () => {
-  // const Organization = {
-  //   name: 'Zuzalu',
-  //   description: 'Zuzalu is a first-of-its-kind pop-up city community in Montenegro.',
-  //   url: 'https://zuzalu.city/',
-  //   logo: 'https://zuzalu.city/_next/image?url=https%3A%2F%2Fpolcxtixgqxfuvrqgthn.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fzulalu-images%2Fzulalologo.png&w=256&q=75',
-  //   location: 'Unknown',
-  // }
+  const Organization = {
+    name: 'ETHChicago',
+    description: 'A community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem.',
+    url: 'https://www.ethchicago.xyz/',
+    logo: 'https://www.ethchicago.xyz/images/brand/ethchi_banner.svg',
+    location: 'Chicago',
+  }
 
-  // const orgController = new OrganizationController()
-  // const organizationInstance = await orgController.createOrganization(Organization)
+  const orgController = new OrganizationController()
+  const organizationInstance = await orgController.createOrganization(Organization)
 
-  // const Event = {
-  //   name: 'Zuzalu Montenegro 2023 - Other',
-  //   description:
-  //     'Join 200 core residents brought together by a shared desire to learn, create, live longer and healthier lives, and build self-sustaining communities.',
-  //   start: new Date('2023-03-25T00:00:00.000Z'),
-  //   end: new Date('2023-05-25T00:00:00.000Z'),
-  //   location: 'Montenegro',
-  //   organizationId: organizationInstance.id,
-  //   dataImporter: [
-  //     {
-  //       type: 'gsheet' as 'gsheet',
-  //       config: {
-  //         sheetId: '1rvWyrBKIMCscwRGTciU0cnEiTGcpYzXxkLv9UH31seI',
-  //         apiKey: 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w',
-  //       },
-  //     },
-  //   ],
-  // }
+  const Event = {
+    name: 'ETHChicago 2023',
+    description:
+      'Three days of building bridges between web3 builders, creators, traditional businesses, financial experts and policymakers.',
+    start: new Date('2023-09-15T00:00:00.000Z'),
+    end: new Date('2023-09-17T00:00:00.000Z'),
+    location: 'Chicago',
+    organizationId: organizationInstance.id,
+    timezone: "CDT",
+    dataImporter: [
+      {
+        type: 'pretalx' as 'pretalx',
+        config: {
+          url: 'https://pretalx.com/api/events/ethchi-2023',
+          apiToken: 'c5429a10c524106246757284a2acdf3cfe9a4ed5',
+        },
+      },
+    ],
+  }
 
   const eventController = new EventController()
-  const speakerController = new SpeakerController()
-  const sessionController = new SessionController()
-  const EventInstance = await eventController.getAllEvents()
-  for (const event of EventInstance) {
-    try {
-      const sessions = await speakerController.getAllSpeakersForEvent(event.id)
-      for (const session of sessions) {
-        if (!session.id) {
-          console.log(session)
-        }
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const EventInstance = await eventController.createEvent(Event)
+  await eventController.importEventData(EventInstance)
 }
 
 run()
