@@ -8,7 +8,6 @@ function EmbedButton({ playbackId, streamId, playerName }: { playbackId?: string
   const { openModal } = useContext(ModalContext)
 
   const generateParams = () => {
-    console.log(playbackId, streamId, playerName, "PARAMS SSS")
     const params = new URLSearchParams()
     params.append('playbackId', playbackId ?? '')
     params.append('streamId', streamId ?? '')
