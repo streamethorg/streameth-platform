@@ -23,6 +23,7 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
     archiveMode: false,
     website: '',
     eventCover: '',
+    timezone: '',
   })
 
   useEffect(() => {

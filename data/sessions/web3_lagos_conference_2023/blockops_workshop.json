@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "blockops_workshop",
   "name": "Blockops workshop",
@@ -10,3 +11,8 @@
   "eventId": "web3_lagos_conference_2023",
   "coverImage": "/sessions/web3_lagos_conference_2023/blockops_workshop.jpg"
 }
+||||||| 46ae8f0
+{"id":"blockops_workshop","name":"Blockops workshop","description":"","start":"2023-09-01T11:15:00.000Z","end":"2023-09-01T11:45:00.000Z","stageId":"workshop_room_2","speakers":[{"id":"blockops_rep","name":"BLOCKOPS REP","bio":"","eventId":"web3_lagos_conference_2023","twitter":"@blockopsnetwork"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/blockops_workshop.jpg"}
+=======
+{"id":"blockops_workshop","name":"Blockops workshop","description":"","start":1693570500000,"end":1693572300000,"stageId":"workshop_room_2","speakers":[{"id":"blockops_rep","name":"BLOCKOPS REP","bio":"","eventId":"web3_lagos_conference_2023","twitter":"@blockopsnetwork"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/blockops_workshop.jpg"}
+>>>>>>> upstream/main

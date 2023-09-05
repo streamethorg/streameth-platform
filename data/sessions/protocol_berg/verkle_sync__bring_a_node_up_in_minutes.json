@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "verkle_sync__bring_a_node_up_in_minutes",
   "name": "Verkle sync : bring a node up in minutes",
@@ -25,3 +26,8 @@
   "eventId": "protocol_berg",
   "coverImage": "/sessions/protocol_berg/verkle_sync__bring_a_node_up_in_minutes.jpg"
 }
+||||||| 46ae8f0
+{"id":"verkle_sync__bring_a_node_up_in_minutes","name":"Verkle sync : bring a node up in minutes","description":"A high-level introduction to verkle sync, a synchronization algorithm made possible by the use of verkle trees and stateless Ethereum.","start":"2023-09-15T08:30:00.000Z","end":"2023-09-15T08:55:00.000Z","stageId":"magazin__main_stage","speakers":[{"id":"guillaume_ballet","name":"Guillaume Ballet","bio":"Core developer, member of the geth team. I focus on evolutions to the protocol, and bringing research ideas to fruition.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/profil_R7V5Nb2.jpeg"},{"id":"tanishq_jasoria","name":"Tanishq Jasoria","bio":"-","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/tanishq_stBCsRC.jpeg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/verkle_sync__bring_a_node_up_in_minutes.jpg"}
+=======
+{"id":"verkle_sync__bring_a_node_up_in_minutes","name":"Verkle sync : bring a node up in minutes","description":"A high-level introduction to verkle sync, a synchronization algorithm made possible by the use of verkle trees and stateless Ethereum.","start":"2023-09-15T10:30:00+02:00","end":"2023-09-15T10:55:00+02:00","stageId":"magazin__main_stage","speakers":[{"id":"guillaume_ballet","name":"Guillaume Ballet","bio":"Core developer, member of the geth team. I focus on evolutions to the protocol, and bringing research ideas to fruition.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/profil_R7V5Nb2.jpeg"},{"id":"tanishq_jasoria","name":"Tanishq Jasoria","bio":"-","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/tanishq_stBCsRC.jpeg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/verkle_sync__bring_a_node_up_in_minutes.jpg"}
+>>>>>>> upstream/main

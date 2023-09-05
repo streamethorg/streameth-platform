@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "rawsciousness",
   "name": "Rawsciousness",
@@ -25,3 +26,8 @@
   "eventId": "protocol_berg",
   "coverImage": "/sessions/protocol_berg/rawsciousness.jpg"
 }
+||||||| 46ae8f0
+{"id":"rawsciousness","name":"Rawsciousness","description":"Exploring the Meaning of Existence in a Futuristic Crypto Epoch","start":"2023-09-15T16:00:00.000Z","end":"2023-09-15T16:40:00.000Z","stageId":"loft__workshop_0","speakers":[{"id":"grigoris","name":"Grigoris","bio":"Autonomously Interdependent\r\nBorn in 1973\r\nGrigoris","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/kkk_C5VKYvw.jpg"},{"id":"salim_virani","name":"Salim Virani","bio":"-","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/Salim_acxdmul.jpeg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/rawsciousness.jpg"}
+=======
+{"id":"rawsciousness","name":"Rawsciousness","description":"Exploring the Meaning of Existence in a Futuristic Crypto Epoch","start":"2023-09-15T18:00:00+02:00","end":"2023-09-15T18:40:00+02:00","stageId":"loft__workshop_0","speakers":[{"id":"grigoris","name":"Grigoris","bio":"Autonomously Interdependent\r\nBorn in 1973\r\nGrigoris","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/kkk_C5VKYvw.jpg"},{"id":"salim_virani","name":"Salim Virani","bio":"-","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/Salim_acxdmul.jpeg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/rawsciousness.jpg"}
+>>>>>>> upstream/main

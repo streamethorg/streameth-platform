@@ -5,7 +5,6 @@ import SelectFilter from './SelectFilter'
 import { ISession } from '@/server/model/session'
 import { ISpeaker } from '@/server/model/speaker'
 import { IStage } from '@/server/model/stage'
-import ComponentCard from '@/components/misc/ComponentCard'
 
 export default function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,18 +33,18 @@ export default function FilterBar({ sessions, speakers, stages }: { sessions: IS
   })
 
   const sessionDateFilters = () => {
-    const uniqueDates = Array.from(new Set(sessions.map((session) => session.start.toDateString())))
+    const uniqueDates = Array.from(new Set(sessions.map((session) => session.start)))
 
     uniqueDates.sort((a, b) => {
-      return new Date(a).getTime() - new Date(b).getTime()
+      return a - b
     })
 
     return uniqueDates.map((date) => ({
-      name: date,
+      name: new Date(date).toLocaleDateString(),
       value: date,
       type: 'date',
       filterFunc: async (item: ISession) => {
-        return item.start.toDateString() === date
+        return item.start === date
       },
     }))
   }

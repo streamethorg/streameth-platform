@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "id": "understanding__contributing_to_daos",
   "name": "Understanding & contributing to DAOs",
@@ -18,3 +19,8 @@
   "eventId": "web3_lagos_conference_2023",
   "coverImage": "/sessions/web3_lagos_conference_2023/understanding__contributing_to_daos.jpg"
 }
+||||||| 46ae8f0
+{"id":"understanding__contributing_to_daos","name":"Understanding & contributing to DAOs","description":"","start":"2023-08-31T10:20:00.000Z","end":"2023-08-31T10:45:00.000Z","stageId":"workshop_room_1","speakers":[{"id":"odebunmi_fiyinfoluwa","name":"Odebunmi Fiyinfoluwa","bio":"Co-Founder","eventId":"web3_lagos_conference_2023","twitter":"@UmojaLabs & @spaceventsxyz"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/understanding__contributing_to_daos.jpg"}
+=======
+{"id":"understanding__contributing_to_daos","name":"Understanding & contributing to DAOs","description":"","start":1693480800000,"end":1693482300000,"stageId":"workshop_room_1","speakers":[{"id":"odebunmi_fiyinfoluwa","name":"Odebunmi Fiyinfoluwa","bio":"Co-Founder","eventId":"web3_lagos_conference_2023","twitter":"@UmojaLabs & @spaceventsxyz"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/understanding__contributing_to_daos.jpg"}
+>>>>>>> upstream/main

@@ -16,5 +16,14 @@
     }
   ],
   "website": "https://event.web3bridge.com/",
+<<<<<<< HEAD
   "archiveMode": false
 }
+||||||| 46ae8f0
+  "archiveMode": false
+}
+=======
+  "archiveMode": false,
+  "timezone": "Africa/Lagos"
+}
+>>>>>>> upstream/main

@@ -1,1 +1,14 @@
+<<<<<<< HEAD
 { "id": "mainstage", "name": "Mainstage", "eventId": "web3_lagos_conference_2023", "streamSettings": { "streamId": "50796chgqk5sqxof" } }
+||||||| 46ae8f0
+{"id":"mainstage","name":"Mainstage","eventId":"web3_lagos_conference_2023","streamSettings":{"streamId":"50796chgqk5sqxof"}}
+=======
+{
+  "id": "mainstage",
+  "name": "Mainstage",
+  "eventId": "web3_lagos_conference_2023",
+  "streamSettings": {
+    "streamId": "252f02eb-1268-412a-b1ec-9a17b12e179f"
+  }
+}
+>>>>>>> upstream/main
