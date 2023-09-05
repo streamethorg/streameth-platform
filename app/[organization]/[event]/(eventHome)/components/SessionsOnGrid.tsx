@@ -6,6 +6,7 @@ import { ScheduleContext } from './ScheduleContext'
 import { getSessions } from '@/utils/api'
 import { ISession } from '@/server/model/session'
 import { IStage } from '@/server/model/stage'
+
 const StageSessions = ({ stage }: { stage: IStage }) => {
   const { schedulePosition, setSchedulePositions, event, date } = useContext(ScheduleContext)
   const [sessions, setSessions] = useState<ISession[]>([])

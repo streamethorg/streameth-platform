@@ -10,7 +10,7 @@ import Logo from '@/public/logo.png'
 
 const OfflinePlayer = () => {
   return (
-    <div className="min-h-[300px] md:min-h-[500px] aspect-video bg-black flex items-center justify-center flex-col h-full">
+    <div className="min-h-[300px] md:min-h-[500px] md:aspect-video bg-black flex items-center justify-center flex-col h-full">
       <div className="flex flex-col items-center justify-center space-y-2 transform -translate-y-6">
         <span className="text-2xl font-bold text-white text-center">Stream is offline</span>
         <span className="text-white dark:text-gray-300 text-xs hidden md:block text-center">Powered by</span>

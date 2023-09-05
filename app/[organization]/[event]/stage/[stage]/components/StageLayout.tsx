@@ -25,7 +25,7 @@ export default function StageLayout() {
 
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
-      <div ref={stickyRef} className="sticky top-0 z-40 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
+      <div ref={stickyRef} className="sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
         <ActionsComponent title={stage.name} />
         <Player streamId={stage.streamSettings.streamId} playerName={stage.name} />
         <div className="hidden lg:flex w-full lg:mt-4 h-full">
