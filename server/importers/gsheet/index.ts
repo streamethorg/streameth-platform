@@ -2,6 +2,9 @@ import BaseImporter from '../baseImporter'
 import { google } from 'googleapis'
 import Event, { IDataImporter } from '../../model/event'
 import { generateId } from '../../utils'
+
+import moment from 'moment-timezone'
+
 // Constants
 const SPEAKER_SHEET = 'Speakers'
 const SPEAKER_DATA_RANGE = 'A2:D'
@@ -108,7 +111,6 @@ export default class Importer extends BaseImporter {
         })
 
         const [speakers, stage] = await Promise.all([Promise.all(speakerPromises), this.stageController.getStage(generateId(stageId), this.event.id)])
-
         const session = {
           name: Name,
           description: Description,
@@ -116,8 +118,8 @@ export default class Importer extends BaseImporter {
           eventId: this.event.id,
           organizationId: this.event.organizationId,
           speakers: speakers,
-          start: new Date(`${Day} ${Start}`),
-          end: new Date(`${Day} ${End}`),
+          start: moment.tz(`${Day} ${Start}:00`, this.event.timezone).valueOf(),
+          end: moment.tz(`${Day} ${End}:00`, this.event.timezone).valueOf(),
           videoUrl: Video,
         }
 

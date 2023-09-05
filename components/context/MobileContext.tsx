@@ -8,9 +8,10 @@ const MobileContext = createContext<{
 })
 
 const MobileContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isMobile, setIsMobile] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
   const { setIsLoading } = useContext(LoadingContext)
   useLayoutEffect(() => {
+    setIsLoading(true)
     function updateSize() {
       setIsMobile(window.innerWidth <= 768)
       setIsLoading(false)

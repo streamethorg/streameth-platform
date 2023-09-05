@@ -1,8 +1,1 @@
-{
-  "id": "workshop_room_1",
-  "name": "Workshop Room 1",
-  "eventId": "web3_lagos_conference_2023",
-  "streamSettings": {
-    "streamId": "252f02eb-1268-412a-b1ec-9a17b12e179f"
-  }
-}
+{"id":"workshop_room_1","name":"Workshop Room 1","eventId":"web3_lagos_conference_2023","streamSettings":{"streamId":"a7bd08rh13lu397l"}}

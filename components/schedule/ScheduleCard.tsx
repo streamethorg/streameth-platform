@@ -7,7 +7,7 @@ import ScheduleCardModal from '@/components/schedule/ScheduleCardModal'
 
 const ScheduleCard = ({ session, showTime = false, speakers = false }: { session: ISession; showTime?: boolean; speakers?: boolean }) => {
   const { openModal } = useContext(ModalContext)
-  // const isActive = session.start.getTime() < Date.now() && session.end.getTime() > Date.now() // TODO: Test Active
+  const isActive = new Date(session.start).getTime() < Date.now() && new Date(session.end).getTime() > Date.now() // TODO: Test Active
 
   return (
     <div
@@ -30,6 +30,7 @@ const ScheduleCard = ({ session, showTime = false, speakers = false }: { session
             ))}
           </div>
         )}
+        {isActive && <p className="text-bold text-red-500 ml-auto animate-pulse">Live</p>}
       </div>
     </div>
   )

@@ -1,9 +1,10 @@
 import StageController from '@/server/controller/stage'
 import { notFound } from 'next/navigation'
-import { getScheduleData } from '@/utils/api'
+import { getSessions } from '@/utils/api'
+import { getEventDays, isSameDay } from '@/utils/time'
 import EventController from '@/server/controller/event'
 import StageLayout from './components/StageLayout'
-
+import { StageContextProvider } from './components/StageContext'
 interface Params {
   params: {
     organization: string
@@ -26,17 +27,27 @@ export async function generateStaticParams({ params: { organization, event } }: 
 
 export default async function Stage({ params }: Params) {
   const eventController = new EventController()
+  const stageController = new StageController()
   try {
     const event = await eventController.getEvent(params.event, params.organization)
-    const data = await getScheduleData({
+    const stage = await stageController.getStage(params.stage, params.event)
+    const days = getEventDays(event.start, event.end)
+    const currentDay = days.find((day) => isSameDay(day, new Date().getTime()))
+
+    const sessions = await getSessions({
       event,
-      day: new Date().toISOString().split('T')[0],
+      date: currentDay ? currentDay : days[0],
       stage: params.stage,
-      currentSession: true,
+      timestamp: new Date().getTime(),
     })
 
+    if (!sessions.length) return <></>
 
-    return <StageLayout data={data.data[0]} />
+    return (
+      <StageContextProvider stage={stage} sessions={sessions}>
+        <StageLayout />
+      </StageContextProvider>
+    )
   } catch (e) {
     return notFound()
   }

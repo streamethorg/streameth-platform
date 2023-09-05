@@ -3,7 +3,7 @@ import SessionComponent from './components/SessionComponent'
 
 export async function generateStaticParams({ params }: { params: { organization: string; event: string } }) {
   const sessionController = new SessionController()
-  const eventSessions = await sessionController.getAllSessionsForEvent(params.event)
+  const eventSessions = await sessionController.getAllSessions(params.event)
 
   return eventSessions.map((session) => ({
     organization: params.organization,
