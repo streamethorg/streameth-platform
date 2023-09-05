@@ -15,7 +15,7 @@ interface Params {
 
 export async function generateStaticParams({ params: { organization, event } }: { params: { organization: string; event: string } }) {
   const stageController = new StageController()
-  const stages = (await stageController.getAllStages()).map((stage) => {
+  const stages = (await stageController.getAllStagesForEvent(event)).map((stage) => {
     return {
       organization: organization,
       event: event,
@@ -49,7 +49,7 @@ export default async function Stage({ params }: Params) {
       </StageContextProvider>
     )
   } catch (e) {
-    console.log(e)
+    console.log(e, params)
     return notFound()
   }
 }
