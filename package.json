@@ -26,6 +26,7 @@
     "eslint-config-next": "13.4.5",
     "ethereum-blockies-base64": "^1.0.2",
     "iron-session": "^6.3.1",
+    "js-base64": "^3.7.5",
     "lokijs": "^1.5.12",
     "moment-timezone": "^0.5.43",
     "momentjs": "^2.0.0",

@@ -1,10 +1,9 @@
-import { IEvent } from '@/server/model/event'
-import { IStage } from '@/server/model/stage'
 import { Editor } from './Editor'
+import { EventInfo, StageInfo } from '../page'
 
 interface Props {
-  events: IEvent[]
-  stages: IStage[]
+  events: EventInfo[]
+  stages: StageInfo[]
 }
 
 export default async function StudioLayout(props: Props) {
