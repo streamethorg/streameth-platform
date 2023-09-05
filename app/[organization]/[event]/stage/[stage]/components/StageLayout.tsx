@@ -9,15 +9,6 @@ import ActionsComponent from '@/app/[organization]/[event]/session/[session]/com
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { StageContext } from './StageContext'
 
-<<<<<<< HEAD
-export default function StageLayout({ data }: { data: DayData }) {
-  const { isMobile } = useContext(MobileContext)
-||||||| 46ae8f0
-export default function StageLayout({ data }: { data: DayData }) {
-  
-
-  const { isMobile } = useContext(MobileContext)
-=======
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
@@ -27,7 +18,6 @@ export default function StageLayout() {
       setBottomOffset(stickyRef.current.clientHeight)
     }
   }, [stickyRef.current])
->>>>>>> upstream/main
 
   const context = useContext(StageContext)
   if (!context) return null

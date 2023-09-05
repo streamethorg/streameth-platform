@@ -76,22 +76,10 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) 
       }
     }
 
-<<<<<<< HEAD
-    fetchData()
-  }, [event, date, stage])
-  const data = schedule?.data?.[0] || null
-  return (
-||||||| 46ae8f0
-    fetchData()
-  }, [event, date, stage])
-  const data = schedule?.data?.[0] || null
-  return (  
-=======
     return returnObj
   }
 
   return (
->>>>>>> upstream/main
     <ScheduleContext.Provider
       value={{
         setDate,

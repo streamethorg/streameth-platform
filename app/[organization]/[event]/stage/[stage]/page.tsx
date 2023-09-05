@@ -41,12 +41,6 @@ export default async function Stage({ params }: Params) {
       timestamp: new Date().getTime(),
     })
 
-<<<<<<< HEAD
-    return <StageLayout data={data.data[0]} />
-||||||| 46ae8f0
-
-    return <StageLayout data={data.data[0]} />
-=======
     if (!sessions.length) return <></>
 
     return (
@@ -54,7 +48,6 @@ export default async function Stage({ params }: Params) {
         <StageLayout />
       </StageContextProvider>
     )
->>>>>>> upstream/main
   } catch (e) {
     return notFound()
   }
