@@ -26,4 +26,3 @@ export const apiUrl = () => {
   }
   return 'https://app.streameth.org/api'
 }
-
