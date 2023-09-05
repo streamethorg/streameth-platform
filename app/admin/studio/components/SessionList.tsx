@@ -70,7 +70,7 @@ export function SessionList(props: Props) {
                               [i.id]: {
                                 ...value[i.id],
                                 streamUrl: props.streamUrl,
-                                start: e.target.value,
+                                start: Number(e.target.value),
                               },
                             }
                           })
@@ -91,7 +91,7 @@ export function SessionList(props: Props) {
                               [i.id]: {
                                 ...value[i.id],
                                 streamUrl: props.streamUrl,
-                                end: e.target.value,
+                                end: Number(e.target.value),
                               },
                             }
                           })
