@@ -5,6 +5,8 @@ import { getEventDays, isSameDay } from '@/utils/time'
 import EventController from '@/server/controller/event'
 import StageLayout from './components/StageLayout'
 import { StageContextProvider } from './components/StageContext'
+import type { Metadata, ResolvingMetadata } from 'next'
+
 interface Params {
   params: {
     organization: string
@@ -50,5 +52,20 @@ export default async function Stage({ params }: Params) {
     )
   } catch (e) {
     return notFound()
+  }
+}
+
+
+export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
+  const eventController = new EventController()
+  const event = await eventController.getEvent(params.event, params.organization)
+  const imageUrl = event.eventCover ? event.eventCover : event.id + '.png'
+
+  return {
+    title: `${event.name} - ${params.stage}`,
+    description: `Attend ${event.name} virtually powered by streameth here`,
+    openGraph: {
+      images: [imageUrl],
+    },
   }
 }
