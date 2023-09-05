@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { useState, useContext } from 'react'
 import { ModalContext } from '../context/ModalContext'
 import { CodeBracketIcon } from '@heroicons/react/24/outline'
@@ -48,7 +48,12 @@ function EmbedButton({ playbackId, streamId, playerName }: { playbackId?: string
     )
   }
 
-  return <CodeBracketIcon className="border border-accent hover:bg-accent hover:text-white rounded p-1 cursor-pointer ml-auto h-8 w-8 text-accent font-medium" onClick={handleModalOpen} />
+  return (
+    <CodeBracketIcon
+      className="border border-accent hover:bg-accent hover:text-white rounded p-1 cursor-pointer ml-auto h-8 w-8 text-accent font-medium"
+      onClick={handleModalOpen}
+    />
+  )
 }
 
-export default EmbedButton;
+export default EmbedButton

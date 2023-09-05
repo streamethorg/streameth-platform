@@ -38,8 +38,12 @@ const ShareButton = () => {
     openModal(<ShareModalContent />)
   }
 
-  return <ShareIcon className="p-1 h-8 w-8 cursor-pointer ml-3 text-accent border border-accent rounded hover:bg-accent hover:text-white " onClick={handleShareClick} />
+  return (
+    <ShareIcon
+      className="p-1 h-8 w-8 cursor-pointer ml-3 text-accent border border-accent rounded hover:bg-accent hover:text-white "
+      onClick={handleShareClick}
+    />
+  )
 }
-
 
 export default ShareButton

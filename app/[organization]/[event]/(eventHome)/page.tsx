@@ -23,7 +23,7 @@ const EventPage = async ({
     const stages = (await new StageController().getAllStagesForEvent(params.event)).map((stage) => stage.toJson())
     const dates = getEventDays(event.start, event.end)
     if (!hasData({ event })) return notFound()
-    
+
     return (
       <ScheduleContextProvider event={event.toJson()} stages={stages} days={dates}>
         <div className="w-full h-full relative md:overflow-scroll">
