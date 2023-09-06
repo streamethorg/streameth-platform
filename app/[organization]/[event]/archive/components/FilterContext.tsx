@@ -36,10 +36,14 @@ const FilterContextProvider = <T extends object>({ children, items }: { children
   }
 
   useEffect(() => {
-    filterItems().then((items) => {
-      setFilteredItems(items)
-      setIsLoading(false)
-    })
+    setIsLoading(true)
+    filterItems()
+      .then((items) => {
+        setFilteredItems(items)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [filterOptions])
 
   return (

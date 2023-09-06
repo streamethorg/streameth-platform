@@ -7,6 +7,7 @@ import { ModalContext } from '../context/ModalContext'
 import { CameraIcon, Bars2Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import img from '@/public/logo.png'
+import { LoadingContext } from '../context/LoadingContext'
 interface Page {
   name: string
   href: string
@@ -45,6 +46,7 @@ export default function Navbar({
 }) {
   const pathname = usePathname()
   const { openModal, closeModal } = useContext(ModalContext)
+  const { setIsLoading } = useContext(LoadingContext)
   const [isNavVisible, setIsNavVisible] = useState(false) // New state
   const router = useRouter()
 
@@ -55,6 +57,7 @@ export default function Navbar({
   }, [pathname])
 
   const handleClick = (stageHref: string) => {
+    setIsLoading(true)
     router.push(stageHref)
     closeModal()
   }
