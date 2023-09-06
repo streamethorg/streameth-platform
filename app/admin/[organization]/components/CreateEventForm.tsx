@@ -120,6 +120,15 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
           className="p-2 border rounded w-full"
           required
         />
+        <input
+          type="text"
+          name="timezone"
+          placeholder="Timezone"
+          value={formData.timezone}
+          onChange={handleChange}
+          className="p-2 border rounded w-full"
+          required
+        />
         <UploadFileInput organizationId={organizationId} onFileUpload={onFileUpload} />
         <DataImporterSelect onChange={handleDataImporterChange} />
         <button type="submit" className="p-2 bg-blue-500 text-white rounded">

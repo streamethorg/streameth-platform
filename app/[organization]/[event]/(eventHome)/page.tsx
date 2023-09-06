@@ -8,19 +8,21 @@ import { ScheduleContextProvider } from './components/ScheduleContext'
 import StageSelect from './components/StageSelect'
 import DateSelect from './components/DateSelect'
 import { getEventDays } from '@/utils/time'
-const EventPage = async ({
-  params,
-}: {
+import type { Metadata, ResolvingMetadata } from 'next'
+
+interface Params {
   params: {
-    organization: string
     event: string
+    organization: string
   }
-}) => {
+}
+
+const EventPage = async ({ params }: Params) => {
   const eventController = new EventController()
 
   try {
     const event = await eventController.getEvent(params.event, params.organization)
-    const stages = await new StageController().getAllStagesForEvent(params.event)
+    const stages = (await new StageController().getAllStagesForEvent(params.event)).map((stage) => stage.toJson())
     const dates = getEventDays(event.start, event.end)
     if (!hasData({ event })) return notFound()
 
@@ -44,3 +46,18 @@ const EventPage = async ({
 }
 
 export default EventPage
+
+export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
+  const eventController = new EventController()
+  const event = await eventController.getEvent(params.event, params.organization)
+  const imageName = event.eventCover ? event.eventCover : event.id + '.png'
+  const imageUrl = 'https://app.streameth.org/public/' + imageName
+
+  return {
+    title: `${event.name} - Home`,
+    description: `Attend ${event.name} virtually powered by streameth here`,
+    openGraph: {
+      images: [imageUrl],
+    },
+  }
+}
