@@ -10,7 +10,7 @@ import Logo from '@/public/logo.png'
 
 const OfflinePlayer = () => {
   return (
-    <div className="min-h-[300px] md:min-h-[500px] aspect-video bg-black flex items-center justify-center flex-col h-full">
+    <div className="min-h-[300px] md:min-h-[500px] md:aspect-video bg-black flex items-center justify-center flex-col h-full">
       <div className="flex flex-col items-center justify-center space-y-2 transform -translate-y-6">
         <span className="text-2xl font-bold text-white text-center">Stream is offline</span>
         <span className="text-white dark:text-gray-300 text-xs hidden md:block text-center">Powered by</span>
@@ -56,20 +56,18 @@ export const Player = ({
     [playerName]
   )
 
-  if (!stream?.isActive) return <OfflinePlayer />
+  if (!playbackId && !stream?.isActive) return <OfflinePlayer />
 
   return (
     <div className="relative w-full aspect-video h-full">
       <LivepeerPlayer
         mediaElementRef={mediaElementRef}
-        src={stream.playbackUrl}
+        playbackId={playbackId ?? stream?.playbackId}
         showTitle={false}
         showPipButton={false}
         muted={true}
+        showLoadingSpinner={false}
         autoPlay
-        priority
-        lowLatency
-        showLoadingSpinner={true}
         controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
         viewerId={address}
       />

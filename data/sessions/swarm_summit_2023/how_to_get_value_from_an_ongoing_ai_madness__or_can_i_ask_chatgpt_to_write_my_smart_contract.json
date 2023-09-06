@@ -16,5 +16,10 @@
   ],
   "videoUrl": "https://lp-playback.com/hls/628agcpm9r0s73p2/index.m3u8",
   "playbackId": "628agcpm9r0s73p2",
-  "eventId": "swarm_summit_2023"
+  "eventId": "swarm_summit_2023",
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/ad74hf1mn6pt92x4/index.m3u8",
+    "start": 774,
+    "end": 1860
+  }
 }
