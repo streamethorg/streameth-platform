@@ -8,7 +8,8 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
   const { isMobile } = useContext(MobileContext)
 
   const handleDateChange = (date: string) => {
-    setDate(new Date(date).getTime())
+    const numericValue = Number(date)
+    setDate(numericValue)
   }
 
   return (
