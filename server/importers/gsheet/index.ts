@@ -3,6 +3,7 @@ import { google } from 'googleapis'
 import Event, { IDataImporter } from '../../model/event'
 import { generateId } from '../../utils'
 import moment from 'moment-timezone'
+import { ISpeaker } from '../../model/speaker'
 
 const SPEAKER_SHEET = 'Speakers'
 const SPEAKER_DATA_RANGE = 'A2:D'
@@ -93,7 +94,7 @@ export default class Importer extends BaseImporter {
         const [Name, Description, stageId, Day, Start, End, ...speakerIdsRaw] = row.slice(0, 11)
         const speakerPromises = speakerIdsRaw
           .filter(Boolean)
-          .map((speakerId) => this.speakerController.getSpeaker(generateId(speakerId), this.event.id))
+          .map((speakerId: string) => this.speakerController.getSpeaker(generateId(speakerId), this.event.id))
         const [speakers, stage] = await Promise.all([Promise.all(speakerPromises), this.stageController.getStage(generateId(stageId), this.event.id)])
 
         const session = {
