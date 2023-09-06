@@ -47,7 +47,7 @@ const ModalContent: React.FC<{ playbackId?: string; streamId?: string; playerNam
         <div
           className="relative bg-gray-100 px-2 py-1 border border-gray-200 w-full max-w-full overflow-hidden whitespace-nowrap cursor-pointer"
           onClick={copyToClipboard}>
-          {generateEmbedCode()}
+          {generatedEmbedCode}
         </div>
         <span
           className={`absolute bottom-3 left-0 right-0 flex items-center justify-center text-accent transition-opacity duration-200 ${copiedClass}`}>
