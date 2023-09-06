@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { useEffect, useState } from 'react'
 import { EventInfo } from '../page'
+import { ISession } from '@/server/model/session'
 
 dayjs.extend(duration)
 
@@ -50,7 +51,7 @@ export function SessionList(props: Props) {
           <tbody>
             {props.sessions
               .sort((a, b) => dayjs(a.start).valueOf() - dayjs(b.start).valueOf())
-              .map((i) => {
+              .map((i: ISession) => {
                 return (
                   <tr key={i.id} className="hover:bg-stone-200">
                     <td className="py-2">
@@ -60,7 +61,7 @@ export function SessionList(props: Props) {
                       <input
                         type="text"
                         name="start"
-                        placeholder="Start"
+                        placeholder={i.source?.start ? String(i.source?.start) : "Start"}
                         className="p-1 mr-2 w-24 text-sm border rounded"
                         required
                         onChange={(e) =>
@@ -81,7 +82,7 @@ export function SessionList(props: Props) {
                       <input
                         type="text"
                         name="end"
-                        placeholder="End"
+                        placeholder={i.source?.end ? String(i.source?.end) : "End"}
                         className="p-1  mr-2 w-24 text-sm border rounded"
                         required
                         onChange={(e) =>
