@@ -20,6 +20,7 @@ interface props {
 export const StageContextProvider = (props: props) => {
   const [currentSession, setCurrentSession] = useState<ISession>(props.sessions[0])
   const [sessions, setSessions] = useState<ISession[]>(props.sessions)
+
   useEffect(() => {
     const updateSessions = () => {
       const currentTimestamp = new Date().getTime()
