@@ -1,13 +1,13 @@
 import './globals.css'
-import { Quicksand } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import GeneralContext from '@/components/context/GeneralContext'
 import { ModalContextProvider } from '@/components/context/ModalContext'
 import { MobileContextProvider } from '@/components/context/MobileContext'
 import Navbar from '@/components/Layout/NavbarTop'
-import { LoadingContext, LoadingContextProvider } from '@/components/context/LoadingContext'
+import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { Metadata } from 'next'
 
-const quicksand = Quicksand({
+const quicksand = Inter({
   subsets: ['latin', 'latin-ext'],
 })
 
