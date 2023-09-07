@@ -1,9 +1,7 @@
 import Navbar from '@/components/Layout/Navbar'
 import EventController from '@/server/controller/event'
 import StageController from '@/server/controller/stage'
-import Stage from '@/server/model/stage'
-import Event from '@/server/model/event'
-import { HomeIcon, ArchiveBoxArrowDownIcon, ViewColumnsIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, ArchiveBoxArrowDownIcon, ViewColumnsIcon, CalendarIcon } from '@heroicons/react/24/outline'
 import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
 
@@ -41,24 +39,21 @@ const Layout = async ({
   const pages = [
     {
       href: `/${params.organization}/${params.event}`,
-      name: 'Schedule',
+      name: 'Home',
       icon: <HomeIcon />,
     },
+    {
+      href: `/${params.organization}/${params.event}/schedule`,
+      name: 'Schedule',
+      icon: <CalendarIcon />,
+    },
   ]
-
-  if (sessions.length > 0) {
-    pages.push({
-      href: `/${params.organization}/${params.event}/archive`,
-      name: 'Archive',
-      icon: <ArchiveBoxArrowDownIcon />,
-    })
-  }
 
   return (
     <div className="flex flex-col md:flex-row lg:overflow-hidden h-full">
       {!event.archiveMode && (
         <Navbar
-        event={event.toJson()}
+          event={event.toJson()}
           pages={pages}
           stages={stages.map((stage) => {
             return {

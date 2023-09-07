@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { ModalContext } from '../context/ModalContext'
 import { CameraIcon, Bars2Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import img from '@/public/logo.png'
 import { LoadingContext } from '../context/LoadingContext'
 import { IEvent } from '@/server/model/event'
 import StageModal from '@/app/[organization]/[event]/stage/[stage]/components/StageModal'
@@ -58,7 +57,7 @@ export default function Navbar({
           <div className="items-center flex py-2">
             <Link href={`/${event.organizationId}/${event.id}`}>
               <span className="sr-only">Logo</span>
-              <Image src={'/events/' + event.logo} className="rounded-full" alt="logo" width={50} height={50} />
+              <Image src={'/events/' + event.logo} className="" alt="logo" width={50} height={50} />
             </Link>
           </div>
           <nav

@@ -31,7 +31,7 @@ const EventHome = async ({ params }: { params: Params }) => {
   return (
     <div className="flex flex-col w-full ">
       <HomePageLogoAndBanner event={event.toJson()} />
-      <div className="flex-col mt-16 flex max-w-4xl mx-auto p-4 space-y-4 ">
+      <div className="flex-col mt-16 lg:mt-0 flex max-w-4xl mx-auto p-4 space-y-4 ">
         <h1 className="font-bold text-xl">{event.name}</h1>
         <p>{event.description}</p>
         <div className="flex flex-row flex-wrap justify-center items-center p-4">
