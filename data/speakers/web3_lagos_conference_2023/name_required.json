@@ -1,1 +1,8 @@
-{"id":"name_required","name":"Name (required)","bio":"Description (required)","eventId":"web3_lagos_conference_2023","twitter":"Twitter handle (only the handle, incl. @)","photo":"Custom Avatar Url"}
+{
+  "id": "name_required",
+  "name": "Name (required)",
+  "bio": "Description (required)",
+  "eventId": "web3_lagos_conference_2023",
+  "twitter": "Twitter handle (only the handle, incl. @)",
+  "photo": "Custom Avatar Url"
+}

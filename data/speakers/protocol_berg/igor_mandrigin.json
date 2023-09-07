@@ -1,1 +1,7 @@
-{"id":"igor_mandrigin","name":"Igor Mandrigin","bio":"Igor is the CTO of [Gateway.fm](http://gateway.fm/), a builder with experience in all sides of the network stack, from browsers to large-scale cloud services. He has been deeply involved in blockchain, including being a core dev to the Ethereum (Erigon nodes) and serving as a researcher. \r\nAt Gateway.fm, Igor is currently working on building Gnosis Chain and setting up large-scale distributed infrastructure services as well as helping building zk Rollups nodes design for Polygon zkEVM.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/ChadParkwavefilm_ETHSeoul_Day2_181_eq7vmbj.jpg"}
+{
+  "id": "igor_mandrigin",
+  "name": "Igor Mandrigin",
+  "bio": "Igor is the CTO of [Gateway.fm](http://gateway.fm/), a builder with experience in all sides of the network stack, from browsers to large-scale cloud services. He has been deeply involved in blockchain, including being a core dev to the Ethereum (Erigon nodes) and serving as a researcher. \r\nAt Gateway.fm, Igor is currently working on building Gnosis Chain and setting up large-scale distributed infrastructure services as well as helping building zk Rollups nodes design for Polygon zkEVM.",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/ChadParkwavefilm_ETHSeoul_Day2_181_eq7vmbj.jpg"
+}

@@ -1,1 +1,7 @@
-{"id":"max_inden","name":"Max Inden","bio":"Max is a software developer interested in distributed systems, type theory and consensus. At Protocol Labs he is stewarding the peer-to-peer networking project libp2p (https://libp2p.io/). He is maintaining the libp2p Rust implementation. Previously Max has been working on the monitoring system Prometheus as a core maintainer, focusing on its integration within the Kubernetes orchestrator.\r\n\r\nTo find out more visit https://max-inden.de/","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/7047859_E4xKGer.jpeg"}
+{
+  "id": "max_inden",
+  "name": "Max Inden",
+  "bio": "Max is a software developer interested in distributed systems, type theory and consensus. At Protocol Labs he is stewarding the peer-to-peer networking project libp2p (https://libp2p.io/). He is maintaining the libp2p Rust implementation. Previously Max has been working on the monitoring system Prometheus as a core maintainer, focusing on its integration within the Kubernetes orchestrator.\r\n\r\nTo find out more visit https://max-inden.de/",
+  "eventId": "protocol_berg",
+  "photo": "https://speak.protocol.berlin/media/avatars/7047859_E4xKGer.jpeg"
+}
