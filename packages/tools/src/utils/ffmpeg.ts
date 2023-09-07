@@ -87,12 +87,12 @@ export async function Split(sessions: { id: string; streamUrl: string; start: nu
 
     // To fix Segmentation fault (core dumped), install nscd
     // `sudo apt install nscd`
-    child.execSync(`${ffmpegPath ?? 'ffmpeg'} -i ${session.streamUrl} -ss ${session.start} -to ${session.end} -c:v libx264 -c:a copy -y ${file}`, {
+    child.execSync(`${ffmpegPath ?? 'ffmpeg'} -i ${session.streamUrl} -ss 10 -to 30 -c:v libx264 -c:a copy -y ${file}`, {
       stdio: 'inherit',
     })
 
     if (existsSync(file)) {
-      console.log('Successfully split', session.id)
+      console.log('Successfully split', session.id, 'at', file)
     }
   }
 }
