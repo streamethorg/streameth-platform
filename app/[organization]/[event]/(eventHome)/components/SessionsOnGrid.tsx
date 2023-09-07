@@ -10,6 +10,7 @@ import { IStage } from '@/server/model/stage'
 const StageSessions = ({ stage }: { stage: IStage }) => {
   const { schedulePosition, setSchedulePositions, event, date } = useContext(ScheduleContext)
   const [sessions, setSessions] = useState<ISession[]>([])
+
   useEffect(() => {
     const fetchSessions = async () => {
       if (!event) return
@@ -34,6 +35,7 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
     <div key={stage.id} className="w-full flex flex-col relative">
       {addBlankSessions(sessions, schedulePosition.min).map((session) => {
         const range = getSlotRange(session, schedulePosition.min)
+
         return (
           <div
             key={session.id}
@@ -55,7 +57,7 @@ const SessionsOnSchedule = () => {
 
   return (
     <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">
-      {stages.map((stage) => (
+      {stages.map((stage: IStage) => (
         <StageSessions key={stage.id} stage={stage} />
       ))}
     </div>

@@ -26,7 +26,7 @@ const StageModal = ({ stages, handleClick }: { stages: Page[]; handleClick: (sta
                        ${pathname === stage.href && 'bg-accent rounded text-primary'}`}
           key={stage.name}
           onClick={() => handleClick(stage.href)}>
-          <p>{stage.name}</p>
+          <p className="truncate">{stage.name}</p>
         </div>
       ))}
     </div>
