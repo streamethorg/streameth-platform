@@ -1,6 +1,6 @@
 {
-  "id": "swarm_development_update",
-  "name": "Swarm Development Update",
+  "id": "test_development_update",
+  "name": "Test Development Update",
   "description": "Callum presents a general update from research and bee for approximately 5 minutes. Antonio may interject with follow-up questions. Esad and Alok provide a more in-depth segment",
   "start": "2023-06-21T13:00:00.000Z",
   "end": "2023-06-21T13:30:00.000Z",
@@ -35,5 +35,5 @@
       "photo": "https://summit.ethswarm.org/media/avatars/IMG-20221227-WA0006_folZJzH.jpg"
     }
   ],
-  "eventId": "swarm_summit_2023"
+  "eventId": "test_summit_2023"
 }
