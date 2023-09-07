@@ -33,16 +33,15 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
 
   return (
     <div key={stage.id} className="w-full flex flex-col relative">
-      {addBlankSessions(sessions, schedulePosition.min).map((session) => {
+      {sessions.map((session) => {
         const range = getSlotRange(session, schedulePosition.min)
-
         return (
           <div
             key={session.id}
-            className="absolute right-0 h-full w-full p-1"
+            className="absolute right-0 h-full w-full"
             style={{
-              top: range.start * CELL_HEIGHT + 'rem',
-              height: (range.end - range.start) * CELL_HEIGHT + 'rem',
+              top: range.start * CELL_HEIGHT + 0.1 + 'rem',
+              height: (range.end - range.start) * CELL_HEIGHT -0.1+ 'rem',
             }}>
             {session.name !== 'Blank' && <ScheduleCard session={session} />}
           </div>
