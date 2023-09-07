@@ -74,7 +74,7 @@ export async function Join(inputs: string[], output: string) {
   await concat({
     output: output,
     videos: inputs,
-    frameFormat: 'png',
+    frameFormat: 'raw',
     transition: {
       name: 'fade', // Options: fade, directionalwipe, circleopen, squareswire
       duration: 750,
