@@ -59,7 +59,7 @@ export async function JoinSessions(sessions: string[]) {
       continue
     }
 
-    await Editly(inputs, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
+    await Join(inputs, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
   }
 }
 
