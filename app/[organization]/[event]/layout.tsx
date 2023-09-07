@@ -5,6 +5,7 @@ import Stage from '@/server/model/stage'
 import Event from '@/server/model/event'
 import { HomeIcon, ArchiveBoxArrowDownIcon, ViewColumnsIcon } from '@heroicons/react/24/outline'
 import { notFound } from 'next/navigation'
+import SessionController from '@/server/controller/session'
 
 export async function generateStaticParams() {
   const eventController = new EventController()
@@ -28,13 +29,12 @@ const Layout = async ({
 }) => {
   const stageController = new StageController()
   const eventController = new EventController()
+  const sessionController = new SessionController()
+  const event = await eventController.getEvent(params.event, params.organization)
+  const stages = await stageController.getAllStagesForEvent(params.event)
+  const sessions = await sessionController.getAllSessions(params.event)
 
-  let stages: Stage[] = []
-  let event: Event
-  try {
-    stages = await stageController.getAllStagesForEvent(params.event)
-    event = await eventController.getEvent(params.event, params.organization)
-  } catch (e) {
+  if (!event) {
     return notFound()
   }
 
@@ -44,18 +44,22 @@ const Layout = async ({
       name: 'Schedule',
       icon: <HomeIcon />,
     },
-    {
+  ]
+
+  if (sessions.length > 0) {
+    pages.push({
       href: `/${params.organization}/${params.event}/archive`,
       name: 'Archive',
       icon: <ArchiveBoxArrowDownIcon />,
-    },
-  ]
+    })
+  }
 
   //
   return (
     <div className="flex flex-col md:flex-row lg:overflow-hidden h-full">
       {!event.archiveMode && (
         <Navbar
+        event={event.toJson()}
           pages={pages}
           stages={stages.map((stage) => {
             return {

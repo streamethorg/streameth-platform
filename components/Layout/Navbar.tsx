@@ -8,35 +8,20 @@ import { CameraIcon, Bars2Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import img from '@/public/logo.png'
 import { LoadingContext } from '../context/LoadingContext'
-interface Page {
+import { IEvent } from '@/server/model/event'
+import StageModal from '@/app/[organization]/[event]/stage/[stage]/components/StageModal'
+export interface Page {
   name: string
   href: string
   icon: JSX.Element
 }
 
-const StageModal = ({ stages, handleClick }: { stages: Page[]; handleClick: (stageHref: string) => void }) => {
-  const pathname = usePathname()
-
-  return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="font-bold uppercase mb-2 text-accent">Select a stage</h1>
-      {stages.map((stage) => (
-        <div
-          className={`p-4 border-2 rounded m-1 cursor-pointer w-[200px] h-[50px] flex items-center justify-center hover:bg-gray-400
-                       ${pathname === stage.href && 'bg-accent rounded text-primary'}`}
-          key={stage.name}
-          onClick={() => handleClick(stage.href)}>
-          <p>{stage.name}</p>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 export default function Navbar({
+  event,
   pages,
   stages,
 }: {
+  event: IEvent
   stages: Page[]
   pages: {
     name: string
@@ -71,9 +56,9 @@ export default function Navbar({
         className={`shadow-sm z-40 bg-base border-r border-primary fixed top-0 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} lg:block`}>
         <div className="flex flex-col items-center justify-between ">
           <div className="items-center flex py-2">
-            <Link href="/">
+            <Link href={`/${event.organizationId}/${event.id}`}>
               <span className="sr-only">Logo</span>
-              <Image src={img} alt="Logo" width={50} />
+              <Image src={'/events/' + event.logo} className="rounded-full" alt="logo" width={50} height={50} />
             </Link>
           </div>
           <nav
