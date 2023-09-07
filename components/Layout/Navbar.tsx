@@ -72,7 +72,18 @@ export default function Navbar({
                 <p className="">{item.name}</p>
               </Link>
             ))}
-            {stages.length > 0 && (
+            {stages.length === 1 ? (
+              <div
+                onClick={() => handleClick(stages[0].href)}
+                className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
+                  pathname.includes('/stage/') && 'bg-accent text-primary rounded'
+                }`}>
+                <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
+                  <CameraIcon />
+                </div>
+                stages
+              </div>
+            ) : stages.length > 0 ? (
               <div
                 onClick={() => openModal(<StageModal stages={stages} handleClick={handleClick} />)}
                 className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
@@ -83,7 +94,7 @@ export default function Navbar({
                 </div>
                 stages
               </div>
-            )}
+            ) : null}
           </nav>
         </div>
       </header>
