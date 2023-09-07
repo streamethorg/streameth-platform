@@ -38,4 +38,5 @@ export const CONFIG = {
   mkdirSync(join(CONFIG.ASSET_FOLDER, 'outros'), { recursive: true })
   mkdirSync(join(CONFIG.ASSET_FOLDER, 'sessions'), { recursive: true })
   mkdirSync(join(CONFIG.ASSET_FOLDER, 'splits'), { recursive: true })
+  mkdirSync(join(CONFIG.ASSET_FOLDER, 'tmp'), { recursive: true })
 })()

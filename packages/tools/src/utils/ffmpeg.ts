@@ -6,6 +6,7 @@ import { CONFIG } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
 import type editly from 'editly'
+import { join } from 'path'
 
 const getEditly = async (): Promise<typeof editly> => {
   const lib = await (eval(`import('editly')`) as Promise<{
@@ -75,6 +76,7 @@ export async function Join(inputs: string[], output: string) {
     output: output,
     videos: inputs,
     frameFormat: 'raw',
+    tempDir: join(CONFIG.ASSET_FOLDER, 'tmp'),
     transition: {
       name: 'fade', // Options: fade, directionalwipe, circleopen, squareswire
       duration: 750,
