@@ -22,4 +22,3 @@ export const sessionsSchedulePosition = (sessions: ISession[]) => {
     totalSlots: Math.ceil((max - min) / 60 / 15),
   }
 }
-
