@@ -22,7 +22,7 @@ export async function AddOrUpdateFile(filename: string, data: string, folder: st
         Accept: 'application/vnd.github+json',
       },
       body: JSON.stringify({
-        message: `[ignore] update ${filename}`,
+        message: `[av] ${filename}`,
         committer: {
           name: 'github_actions',
           email: 'github-actions[bot]@users.noreply.github.com',

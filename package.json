@@ -8,7 +8,11 @@
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "prettier:fix": "prettier --write './app' './components'",
-    "prettier:check": "prettier --check './app' './components'"
+    "prettier:check": "prettier --check './app' './components'",
+    "tools": "yarn --cwd packages/tools tools",
+    "split": "yarn --cwd packages/tools run:split",
+    "join": "yarn --cwd packages/tools run:join",
+    "upload": "yarn --cwd packages/tools run:upload"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
