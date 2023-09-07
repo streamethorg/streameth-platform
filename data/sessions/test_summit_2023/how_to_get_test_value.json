@@ -14,5 +14,10 @@
       "photo": "https://summit.ethswarm.org/media/avatars/56c2eb9f3ef89043a2740464aed85024_PL4vALL.jpg"
     }
   ],
-  "eventId": "test_summit_2023"
+  "eventId": "test_summit_2023",
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/ad74hf1mn6pt92x4/index.m3u8",
+    "start": 774,
+    "end": 1860
+  }
 }
