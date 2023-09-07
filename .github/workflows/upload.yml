@@ -6,6 +6,10 @@ on:
     paths:
       - 'assets/sessions/**.mp4'
 
+defaults:
+  run:
+    working-directory: packages/tools
+
 jobs:
   build:
     runs-on: ubuntu-latest

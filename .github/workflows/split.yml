@@ -6,6 +6,10 @@ on:
     paths:
       - 'data/sessions/**/*.json'
 
+defaults:
+  run:
+    working-directory: packages/tools
+
 jobs:
   build:
     runs-on: ubuntu-latest
