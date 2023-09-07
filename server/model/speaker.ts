@@ -3,6 +3,7 @@ import { IEvent } from "./event";
 import { generateId, BASE_PATH } from "../utils";
 import path from "path";
 import { IOrganization } from "./organization";
+
 export interface ISpeaker {
   id: string;
   name: string;

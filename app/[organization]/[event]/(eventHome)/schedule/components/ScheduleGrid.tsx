@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { CELL_HEIGHT } from '../../utils'
 import { ScheduleContext } from './ScheduleContext'
 import { secondsToHHMM } from '@/utils/time'
+
 export default function ScheduleGrid({ children }: { children: React.ReactNode }) {
   const { schedulePosition } = useContext(ScheduleContext)
   return (

@@ -18,6 +18,7 @@ interface ISchedulePosition {
   max: number
   totalSlots: number
 }
+
 const ScheduleContext = createContext<ScheduleContextProps>({
   setDate: () => {},
   date: 0,
