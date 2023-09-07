@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'assets/splits/**.mp4'
+      - 'assets/splits/*.mp4'
 
 defaults:
   run:
@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - uses: FedericoCarboni/setup-ffmpeg@v2
       - run: yarn install
       - run: yarn run:join
       - uses: EndBug/add-and-commit@v9

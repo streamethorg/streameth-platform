@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'assets/sessions/**.mp4'
+      - 'assets/sessions/*.mp4'
 
 defaults:
   run:
