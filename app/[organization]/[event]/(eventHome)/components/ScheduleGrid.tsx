@@ -4,11 +4,7 @@ import { CELL_HEIGHT } from '../utils'
 import { ScheduleContext } from './ScheduleContext'
 import { secondsToHHMM } from '@/utils/time'
 
-interface ScheduleGridProps {
-  children: React.ReactNode
-}
-
-const ScheduleGrid: React.FC<ScheduleGridProps> = ({ children }) => {
+export default function ScheduleGrid({ children }: { children: React.ReactNode }) {
   const { schedulePosition } = useContext(ScheduleContext)
 
   return (
