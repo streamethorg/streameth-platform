@@ -3,6 +3,8 @@ name: Upload videos
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
       - 'assets/sessions/**.mp4'
 
@@ -26,4 +28,4 @@ jobs:
         with:
           default_author: github_actions
           message: '[new] upload videos'
-          add: '--force'
+          add: 'data/sessions --force'
