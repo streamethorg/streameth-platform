@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation'
 import { Page } from '@/components/Layout/Navbar'
 
-const  StageModal = ({ stages, handleClick }: { stages: Page[]; handleClick: (stageHref: string) => void }) => {
+const StageModal = ({ stages, handleClick }: { stages: Page[]; handleClick: (stageHref: string) => void }) => {
   const pathname = usePathname()
 
   return (
@@ -20,4 +20,4 @@ const  StageModal = ({ stages, handleClick }: { stages: Page[]; handleClick: (st
   )
 }
 
-export default StageModal 
+export default StageModal

@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import StageModal from '@/app/[organization]/[event]/stage/[stage]/components/StageModal'
 import { useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { LoadingContext } from '@/components/context/LoadingContext'
 import { IStage } from '@/server/model/stage'
 import { ViewColumnsIcon } from '@heroicons/react/24/outline'
-
 
 const StageModalButton = ({ stages }: { stages: IStage[] }) => {
   const { openModal, closeModal } = useContext(ModalContext)
