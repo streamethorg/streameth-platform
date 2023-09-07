@@ -6,7 +6,19 @@
   "end": "2023-09-09T00:00:00.000Z",
   "location": "Berlin, Germany",
   "organizationId": "funding_the_commons",
-  "dataImporter": [{ "type": "gsheet", "config": { "sheetId": "1CuefhHHDbdWH77JGnkPQODdaq880mUAhwLlOeYnwWpo", "apiKey": "w" } }],
+  "logo": "ftc_logo.jpeg",
+  "banner": "ftc_banner.jpeg",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1CuefhHHDbdWH77JGnkPQODdaq880mUAhwLlOeYnwWpo",
+        "apiKey": "w"
+      }
+    }
+  ],
+  "eventCover": "funding_the_commons_berlin_2023.jpg",
+  "website": "",
   "archiveMode": false,
   "timezone": "Europe/Berlin"
 }
