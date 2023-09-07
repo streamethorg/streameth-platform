@@ -5,6 +5,12 @@ import { generateId, BASE_PATH, PUBLIC_PATH } from '../utils'
 import { IEvent } from './event'
 import path from 'path'
 
+export interface ISource {
+  streamUrl: string
+  start: number
+  end: number
+}
+
 export interface ISession {
   id: string
   name: string
@@ -13,6 +19,7 @@ export interface ISession {
   end: number
   stageId: IStage['id']
   speakers: Speaker[]
+  source?: ISource
   videoUrl?: string
   playbackId?: string
   eventId: IEvent['id']
@@ -42,6 +49,8 @@ export default class Session implements ISession {
   @IsNotEmpty()
   speakers: Speaker[]
 
+  source?: ISource
+
   videoUrl?: string
 
   playbackId?: string
@@ -53,7 +62,7 @@ export default class Session implements ISession {
 
   coverImage?: string
 
-  constructor({ name, description, start, end, stageId, speakers, videoUrl, eventId, track, coverImage }: Omit<ISession, 'id'> & { id?: string }) {
+  constructor({ name, description, start, end, stageId, speakers, source, videoUrl, eventId, track, coverImage }: Omit<ISession, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
     this.description = description
@@ -61,6 +70,7 @@ export default class Session implements ISession {
     this.end = end
     this.stageId = stageId
     this.speakers = speakers
+    this.source = source
     this.videoUrl = videoUrl
     this.playbackId = this.getPlaybackId()
     this.eventId = eventId
