@@ -4,14 +4,12 @@ import { CELL_HEIGHT } from '../utils'
 import { ScheduleContext } from './ScheduleContext'
 import { secondsToHHMM } from '@/utils/time'
 
-
 interface ScheduleGridProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const ScheduleGrid: React.FC<ScheduleGridProps> = ({ children }) => {
-  const { schedulePosition } = useContext(ScheduleContext);
-
+  const { schedulePosition } = useContext(ScheduleContext)
 
   return (
     <div className="flex flex-col w-full relative" style={{ height: `${schedulePosition.totalSlots * CELL_HEIGHT}rem` }}>
@@ -22,7 +20,7 @@ const ScheduleGrid: React.FC<ScheduleGridProps> = ({ children }) => {
       ))}
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default ScheduleGrid;
+export default ScheduleGrid
