@@ -47,8 +47,7 @@ export default class Event implements IEvent {
   // @IsDate()
   end: Date
 
-  @IsNotEmpty()
-  logo: string
+  logo?: string
 
   @IsNotEmpty()
   location: string
