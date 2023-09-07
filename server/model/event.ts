@@ -21,6 +21,8 @@ export interface IEvent {
   start: Date
   end: Date
   location: string
+  logo?: string
+  banner?: string
   organizationId: IOrganization['id']
   dataImporter?: IDataImporter[]
   eventCover?: string
@@ -45,6 +47,8 @@ export default class Event implements IEvent {
   // @IsDate()
   end: Date
 
+  logo?: string
+
   @IsNotEmpty()
   location: string
 
@@ -59,6 +63,8 @@ export default class Event implements IEvent {
 
   website?: string
 
+  banner? : string
+
   timezone: string
   constructor({
     id,
@@ -72,7 +78,9 @@ export default class Event implements IEvent {
     eventCover,
     archiveMode,
     website,
-    timezone
+    timezone,
+    logo,
+    banner
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -82,12 +90,16 @@ export default class Event implements IEvent {
     this.location = location
     this.organizationId = organizationId
     this.dataImporter = dataImporter
-    this.eventCover = eventCover
+    this.eventCover = eventCover ? eventCover : id + '.png'
     this.website = website
     this.archiveMode = archiveMode ?? true
     this.timezone = timezone ?? 'utc'
+    this.logo = logo
+    this.banner = banner
     // this.validateThis();
   }
+
+
 
   async validateThis() {
     const errors = await validate(this)
