@@ -35,6 +35,7 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
     <div key={stage.id} className="w-full flex flex-col relative">
       {addBlankSessions(sessions, schedulePosition.min).map((session) => {
         const range = getSlotRange(session, schedulePosition.min)
+        console.log(range)
 
         return (
           <div
