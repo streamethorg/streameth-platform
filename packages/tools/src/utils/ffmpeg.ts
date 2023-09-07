@@ -5,6 +5,14 @@ import ffmpegPath from 'ffmpeg-static'
 import { CONFIG } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
+import type editly from 'editly'
+
+const getEditly = async (): Promise<typeof editly> => {
+  const lib = await (eval(`import('editly')`) as Promise<{
+    default: typeof import('editly')
+  }>)
+  return lib.default
+}
 
 export function ToStream(filepath: string) {
   return createReadStream(filepath, { encoding: 'utf8' })
@@ -51,7 +59,7 @@ export async function JoinSessions(sessions: string[]) {
       continue
     }
 
-    await Join(inputs, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
+    await Editly(inputs, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
   }
 }
 
@@ -71,6 +79,22 @@ export async function Join(inputs: string[], output: string) {
       name: 'fade', // Options: fade, directionalwipe, circleopen, squareswire
       duration: 750,
     },
+  })
+}
+
+export async function Editly(inputs: string[], output: string) {
+  const editly = await getEditly()
+  await editly({
+    fast: false, // debug
+    keepSourceAudio: true,
+    outPath: output,
+    defaults: {
+      transition: {
+        duration: 0.75,
+        name: 'fade', // https://gl-transitions.com/gallery
+      },
+    },
+    clips: inputs.map((input) => ({ layers: [{ type: 'video', path: input }] })),
   })
 }
 
