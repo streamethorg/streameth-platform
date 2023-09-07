@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: sudo apt install ffmpeg -y
+      - run: sudo apt install ffmpeg Xvfb -y
       - run: yarn install
       - run: yarn run:join
       - uses: EndBug/add-and-commit@v9
