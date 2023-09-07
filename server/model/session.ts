@@ -5,14 +5,21 @@ import { generateId, BASE_PATH, PUBLIC_PATH } from '../utils'
 import { IEvent } from './event'
 import path from 'path'
 
+export interface ISource {
+  streamUrl: string
+  start: number
+  end: number
+}
+
 export interface ISession {
   id: string
   name: string
   description: string
-  start: Date
-  end: Date
+  start: number
+  end: number
   stageId: IStage['id']
   speakers: Speaker[]
+  source?: ISource
   videoUrl?: string
   playbackId?: string
   eventId: IEvent['id']
@@ -33,16 +40,18 @@ export default class Session implements ISession {
   description: string
 
   @IsNotEmpty()
-  start: Date
+  start: number
 
   //@IsNotEmpty()
-  end: Date
+  end: number
 
   @IsNotEmpty()
   stageId: IStage['id']
 
   @IsNotEmpty()
   speakers: Speaker[]
+
+  source?: ISource
 
   videoUrl?: string
 
@@ -55,18 +64,15 @@ export default class Session implements ISession {
 
   coverImage?: string
 
-  startCut: string
-
-  endCut: string
-
-  constructor({ name, description, start, end, stageId, speakers, videoUrl, eventId, track, coverImage }: Omit<ISession, 'id'> & { id?: string }) {
+  constructor({ name, description, start, end, stageId, speakers, source, videoUrl, eventId, track, coverImage }: Omit<ISession, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
     this.description = description
-    this.start = new Date(start)
-    this.end = new Date(end)
+    this.start = start
+    this.end = end
     this.stageId = stageId
     this.speakers = speakers
+    this.source = source
     this.videoUrl = videoUrl
     this.playbackId = this.getPlaybackId()
     this.eventId = eventId
@@ -81,6 +87,16 @@ export default class Session implements ISession {
     const errors = await validate(this)
     if (errors.length > 0) {
       throw new Error(`Validation failed! ${errors}`)
+    }
+  }
+
+  getDate(): {
+    start: Date
+    end: Date
+  } {
+    return {
+      start: new Date(this.start),
+      end: new Date(this.end),
     }
   }
 

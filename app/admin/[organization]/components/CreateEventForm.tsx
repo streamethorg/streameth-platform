@@ -23,6 +23,7 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
     archiveMode: false,
     website: '',
     eventCover: '',
+    timezone: '',
   })
 
   useEffect(() => {
@@ -115,6 +116,15 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
           name="location"
           placeholder="Location"
           value={formData.location}
+          onChange={handleChange}
+          className="p-2 border rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="timezone"
+          placeholder="Timezone"
+          value={formData.timezone}
           onChange={handleChange}
           className="p-2 border rounded w-full"
           required

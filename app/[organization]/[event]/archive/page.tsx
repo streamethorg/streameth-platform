@@ -4,16 +4,18 @@ import { FilterContextProvider } from './components/FilterContext'
 import SpeakerController from '@/server/controller/speaker'
 import SessionController from '@/server/controller/session'
 import StageController from '@/server/controller/stage'
-
+import type { Metadata, ResolvingMetadata } from 'next'
+import EventController from '@/server/controller/event'
 interface Params {
   params: {
     event: string
+    organization: string
   }
 }
 
 export default async function ArchivePage({ params }: Params) {
   const sessionController = new SessionController()
-  const sessions = (await sessionController.getAllSessionsForEvent(params.event)).map((session) => {
+  const sessions = (await sessionController.getAllSessions(params.event)).map((session) => {
     return session.toJson()
   })
 
@@ -49,4 +51,18 @@ export default async function ArchivePage({ params }: Params) {
       </FilterContextProvider>
     </div>
   )
+}
+
+export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
+  const eventController = new EventController()
+  const event = await eventController.getEvent(params.event, params.organization)
+  const imageUrl = event.eventCover ? event.eventCover : event.id + '.png'
+
+  return {
+    title: `${event.name} - Archive`,
+    description: `Watch all the Streameth videos from ${event.name} here`,
+    openGraph: {
+      images: [imageUrl],
+    },
+  }
 }

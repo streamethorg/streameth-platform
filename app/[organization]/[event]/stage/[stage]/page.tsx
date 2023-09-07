@@ -1,8 +1,11 @@
 import StageController from '@/server/controller/stage'
 import { notFound } from 'next/navigation'
-import { getScheduleData } from '@/utils/api'
+import { getSessions } from '@/utils/api'
+import { getEventDays, isSameDay } from '@/utils/time'
 import EventController from '@/server/controller/event'
 import StageLayout from './components/StageLayout'
+import { StageContextProvider } from './components/StageContext'
+import type { Metadata, ResolvingMetadata } from 'next'
 
 interface Params {
   params: {
@@ -14,7 +17,7 @@ interface Params {
 
 export async function generateStaticParams({ params: { organization, event } }: { params: { organization: string; event: string } }) {
   const stageController = new StageController()
-  const stages = (await stageController.getAllStages()).map((stage) => {
+  const stages = (await stageController.getAllStagesForEvent(event)).map((stage) => {
     return {
       organization: organization,
       event: event,
@@ -26,17 +29,42 @@ export async function generateStaticParams({ params: { organization, event } }: 
 
 export default async function Stage({ params }: Params) {
   const eventController = new EventController()
+  const stageController = new StageController()
   try {
     const event = await eventController.getEvent(params.event, params.organization)
-    const data = await getScheduleData({
+    const stage = await stageController.getStage(params.stage, params.event)
+    const days = getEventDays(event.start, event.end)
+    const currentDay = days.find((day) => isSameDay(day, new Date().getTime()))
+
+    const sessions = await getSessions({
       event,
-      day: new Date().toISOString().split('T')[0],
+      date: currentDay ? currentDay : days[0],
       stage: params.stage,
-      currentSession: true,
+      timestamp: new Date().getTime(),
     })
 
-    return <StageLayout data={data.data[0]} />
+    if (!sessions.length) return <></>
+
+    return (
+      <StageContextProvider stage={stage.toJson()} sessions={sessions}>
+        <StageLayout />
+      </StageContextProvider>
+    )
   } catch (e) {
     return notFound()
+  }
+}
+
+export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
+  const eventController = new EventController()
+  const event = await eventController.getEvent(params.event, params.organization)
+  const imageName = event.eventCover ? event.eventCover : event.id + '.png'
+  const imageUrl = 'https://app.streameth.org/public/' + imageName
+  return {
+    title: `${event.name} - ${params.stage}`,
+    description: `Attend ${event.name} virtually powered by streameth here`,
+    openGraph: {
+      images: [imageUrl],
+    },
   }
 }

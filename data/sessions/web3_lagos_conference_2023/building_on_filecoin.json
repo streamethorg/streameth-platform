@@ -1,12 +1,1 @@
-{
-  "id": "building_on_filecoin",
-  "name": "Building on Filecoin",
-  "description": "",
-  "start": "2023-09-01T13:00:00.000Z",
-  "end": "2023-09-01T13:30:00.000Z",
-  "stageId": "workshop_room_2",
-  "speakers": [{ "id": "filecoinrep", "name": "FilecoinRep", "bio": "No description", "eventId": "web3_lagos_conference_2023" }],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/building_on_filecoin.jpg"
-}
+{"id":"building_on_filecoin","name":"Building on Filecoin","description":"","start":1693576800000,"end":1693578600000,"stageId":"workshop_room_2","speakers":[{"id":"filecoinrep","name":"FilecoinRep","bio":"No description","eventId":"web3_lagos_conference_2023"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/building_on_filecoin.jpg"}
