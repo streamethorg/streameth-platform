@@ -1,5 +1,5 @@
 import { AbsoluteFill, Audio, Img, staticFile } from 'remotion'
-import { MinSession as SessionType } from 'types'
+import { MinSession as SessionType } from '../types'
 
 interface Props {
   session: SessionType

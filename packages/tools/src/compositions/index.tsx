@@ -1,6 +1,6 @@
 import { Composition, Still } from 'remotion'
 import { Session } from './session'
-import { MinSession as SessionType } from 'types'
+import { MinSession as SessionType } from '../types'
 
 export const TEST_SESSION: SessionType = {
   id: 'session-1',

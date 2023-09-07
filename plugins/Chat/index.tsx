@@ -1,6 +1,6 @@
 'use client'
+import { ConnectKitButton } from 'connectkit'
 import { useEffect, useState } from 'react'
-import WalletSignIn from '@/components/misc/WalletSignIn'
 import { useAccount } from 'wagmi'
 
 const ChatBar = ({ conversationId }: { conversationId: string }) => {
@@ -26,7 +26,7 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
           <iframe className="h-full" src={`https://stingray-app-u9f8x.ondigitalocean.app/${conversationId}?isCastr=${true}`} />
           <p className=" p-4 m-auto w-full text-center">
             Connect your wallet to chat
-            <WalletSignIn />
+            <ConnectKitButton />
           </p>
         </>
       ) : (

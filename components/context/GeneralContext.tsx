@@ -2,6 +2,7 @@
 import { useMemo } from 'react'
 import { LivepeerConfig, createReactClient, studioProvider } from '@livepeer/react'
 import { Analytics } from '@vercel/analytics/react'
+import SiweContext from './SiweContext'
 
 const GeneralContext = ({ children }: { children: React.ReactNode }) => {
   const livepeerClient = useMemo(
@@ -15,10 +16,12 @@ const GeneralContext = ({ children }: { children: React.ReactNode }) => {
   )
 
   return (
-    <LivepeerConfig client={livepeerClient}>
-      <Analytics />
-      {children}
-    </LivepeerConfig>
+    <SiweContext>
+      <LivepeerConfig client={livepeerClient}>
+        <Analytics />
+        {children}
+      </LivepeerConfig>
+    </SiweContext>
   )
 }
 

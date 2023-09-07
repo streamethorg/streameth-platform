@@ -1,29 +1,8 @@
 'use client'
 
-import SiweContext from '@/components/context/SiweContext'
 import { PropsWithChildren } from 'react'
-import { ConnectKitButton, useSIWE } from 'connectkit'
+import { AdminWrapper } from './components/AdminWrapper'
 
 export default function AdminLayout(props: PropsWithChildren) {
-  return (
-    <SiweContext {...props}>
-      <AdminWrapper>{props.children}</AdminWrapper>
-    </SiweContext>
-  )
-}
-
-export function AdminWrapper(props: PropsWithChildren) {
-  const { data, isSignedIn } = useSIWE()
-
-  return (
-    <div className="flex flex-col p-4 w-full">
-      <div className='flex justify-end'>
-        <ConnectKitButton />
-      </div>
-      <div>
-      {!isSignedIn && <p>You need to sign in to access these pages</p>}
-      {isSignedIn && props.children}
-      </div>
-    </div>
-  )
+  return <AdminWrapper>{props.children}</AdminWrapper>
 }
