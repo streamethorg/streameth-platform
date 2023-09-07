@@ -1,6 +1,6 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import { CELL_HEIGHT, getSlotRange, sessionsSchedulePosition, addBlankSessions } from '../../utils'
+import { CELL_HEIGHT, getSlotRange, sessionsSchedulePosition } from '../../utils'
 import ScheduleCard from '@/components/schedule/ScheduleCard'
 import { ScheduleContext } from './ScheduleContext'
 import { getSessions } from '@/utils/api'

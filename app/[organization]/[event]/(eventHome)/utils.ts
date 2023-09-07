@@ -23,35 +23,3 @@ export const sessionsSchedulePosition = (sessions: ISession[]) => {
   }
 }
 
-export const addBlankSessions = (sessions: ISession[], earliestTime: number): ISession[] => {
-  const blankSessions: ISession[] = []
-  let lastSession: ISession | undefined
-
-  const createBlankSession = (start: number, end: number, referenceSession: ISession): ISession => ({
-    id: `blank${referenceSession.id}`,
-    name: 'Blank',
-    start,
-    end,
-    stageId: referenceSession.stageId,
-    speakers: [],
-    description: '',
-    eventId: referenceSession.eventId,
-  })
-
-  if (sessions.length > 0 && sessions[0].start > earliestTime) {
-    const firstSession = sessions[0]
-    blankSessions.push(createBlankSession(firstSession.start - 1, firstSession.start, firstSession))
-  }
-
-  for (const session of sessions) {
-    if (lastSession) {
-      const gap = session.start - lastSession.end
-      if (gap > 0) {
-        blankSessions.push(createBlankSession(lastSession.end, session.start, lastSession))
-      }
-    }
-    lastSession = session
-  }
-
-  return [...sessions, ...blankSessions]
-}
