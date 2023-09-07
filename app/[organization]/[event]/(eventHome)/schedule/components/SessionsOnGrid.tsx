@@ -41,7 +41,7 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
             className="absolute right-0 h-full w-full"
             style={{
               top: range.start * CELL_HEIGHT + 0.1 + 'rem',
-              height: (range.end - range.start) * CELL_HEIGHT -0.1+ 'rem',
+              height: (range.end - range.start) * CELL_HEIGHT - 0.1 + 'rem',
             }}>
             {session.name !== 'Blank' && <ScheduleCard session={session} />}
           </div>
