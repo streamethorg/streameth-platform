@@ -61,7 +61,7 @@ export function SessionList(props: Props) {
                       <input
                         type="text"
                         name="start"
-                        placeholder={i.source?.start ? String(i.source?.start) : "Start"}
+                        placeholder={i.source?.start ? String(i.source?.start) : 'Start'}
                         className="p-1 mr-2 w-24 text-sm border rounded"
                         required
                         onChange={(e) =>
@@ -82,7 +82,7 @@ export function SessionList(props: Props) {
                       <input
                         type="text"
                         name="end"
-                        placeholder={i.source?.end ? String(i.source?.end) : "End"}
+                        placeholder={i.source?.end ? String(i.source?.end) : 'End'}
                         className="p-1  mr-2 w-24 text-sm border rounded"
                         required
                         onChange={(e) =>

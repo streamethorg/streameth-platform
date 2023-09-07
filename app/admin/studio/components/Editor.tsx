@@ -132,7 +132,9 @@ export function Editor(props: Props) {
         </div>
       </div>
 
-      {selectedEvent && sessions && sessions.length > 0 && <SessionList event={selectedEvent} sessions={sessions} streamUrl={selectedStream?.recordingUrl ?? ''} />}
+      {selectedEvent && sessions && sessions.length > 0 && (
+        <SessionList event={selectedEvent} sessions={sessions} streamUrl={selectedStream?.recordingUrl ?? ''} />
+      )}
     </div>
   )
 }
