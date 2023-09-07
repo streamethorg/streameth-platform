@@ -26,3 +26,4 @@ jobs:
         with:
           default_author: github_actions
           message: '[new] upload videos'
+          add: '--force'
