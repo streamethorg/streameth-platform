@@ -3,8 +3,10 @@ import { ISession } from '@/server/model/session'
 import SpeakerIconList from '../speakers/SpeakerIconList'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
 const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
+
   useEffect(() => {
     const url = window.location.href
     setShowGoToStage(!url.includes('stage'))
@@ -21,8 +23,9 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
       )}
       <h1 className="text-lg text-main-text font-bold text-center">{session.name}</h1>
       <div className="flex flex-row justify-center items-center space-x-3 p-2">
-        <p className="text-secondary-text">{new Date(session.start).toTimeString().slice(0, 5)}</p>-
-        <p className="text-secondary-text">{new Date(session.end).toTimeString().slice(0, 5)}</p>
+        <span className="text-secondary-text">
+          {new Date(session.start).toTimeString().slice(0, 5)} - {new Date(session.end).toTimeString().slice(0, 5)}
+        </span>
       </div>
       <p className="py-4">{session.description}</p>
       <SpeakerIconList speakers={session.speakers} />

@@ -1,0 +1,12 @@
+{
+  "id": "test_summit_2023",
+  "name": "Test Summit 2023",
+  "description": "",
+  "start": "2023-06-21T00:00:00.000Z",
+  "end": "2023-06-23T00:00:00.000Z",
+  "location": "Virtual",
+  "organizationId": "streameth",
+  "dataImporter": [
+    { "type": "gsheet", "config": { "sheetId": "129T5ggZEdmH_u_2Sp1-LJShcoOqgBGDWosVBQQ6IfYg", "apiKey": "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4" } }
+  ]
+}

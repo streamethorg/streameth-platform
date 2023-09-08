@@ -1,82 +1,74 @@
-import { IsNotEmpty, validate } from "class-validator";
-import { IEvent } from "./event";
-import { generateId, BASE_PATH } from "../utils";
-import path from "path";
+import { IsNotEmpty, validate } from 'class-validator'
+import { IEvent } from './event'
+import { generateId, BASE_PATH } from '../utils'
+import path from 'path'
+
 export interface IStreamSettings {
-  streamId: string;
+  streamId: string
 }
 
 export interface IPlugin {
-  name: string;
+  name: string
 }
 
 export interface IStage {
-  id: string;
-  name: string;
-  eventId: IEvent["id"];
-  streamSettings: IStreamSettings;
-  plugins?: IPlugin[];
-  order?: number;
+  id: string
+  name: string
+  eventId: IEvent['id']
+  streamSettings: IStreamSettings
+  plugins?: IPlugin[]
+  order?: number
 }
 
 export default class Stage implements IStage {
   @IsNotEmpty()
-  id: string;
+  id: string
 
   @IsNotEmpty()
-  name: string;
+  name: string
 
   @IsNotEmpty()
-  eventId: IEvent["id"];
+  eventId: IEvent['id']
 
   @IsNotEmpty()
-  streamSettings: IStreamSettings;
+  streamSettings: IStreamSettings
 
-  plugins?: IPlugin[];
+  plugins?: IPlugin[]
 
-  order?: number;
+  order?: number
 
-  constructor({
-    name,
-    eventId,
-    streamSettings,
-    plugins,
-    order,
-  }: Omit<IStage, "id"> & { id?: string }) {
-    this.id = generateId(name);
-    this.name = name;
-    this.eventId = eventId;
-    this.streamSettings = streamSettings;
-    this.plugins = plugins;
-    this.order = order;
-    this.validateThis();
+  constructor({ name, eventId, streamSettings, plugins, order }: Omit<IStage, 'id'> & { id?: string }) {
+    this.id = generateId(name)
+    this.name = name
+    this.eventId = eventId
+    this.streamSettings = streamSettings
+    this.plugins = plugins
+    this.order = order
+    this.validateThis()
   }
 
   async validateThis() {
-    const errors = await validate(this);
+    const errors = await validate(this)
     if (errors.length > 0) {
-      throw new Error(`Validation failed! ${errors}`);
+      throw new Error(`Validation failed! ${errors}`)
     }
   }
 
   toJson(): IStage {
-    return { ...this };
+    return { ...this }
   }
 
-  static async fromJson(jsonData: string | Omit<IStage, "id">) {
-    const data = typeof jsonData === "string" ? JSON.parse(jsonData) : jsonData;
-    const stage = new Stage({ ...data });
-    await stage.validateThis();
-    return stage;
+  static async fromJson(jsonData: string | Omit<IStage, 'id'>) {
+    const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
+    const stage = new Stage({ ...data })
+    await stage.validateThis()
+    return stage
   }
 
-  static async  getStagePath(
-    eventId: IStage["eventId"],
-    stageId?: IStage["id"]
-  ): Promise<string> {
+  static async getStagePath(eventId: IStage['eventId'], stageId?: IStage['id']): Promise<string> {
     if (stageId) {
-      return path.join(BASE_PATH, "stages", eventId, `${stageId}.json`);
+      return path.join(BASE_PATH, 'stages', eventId, `${stageId}.json`)
     }
-    return path.join(BASE_PATH, "stages", eventId);
+    return path.join(BASE_PATH, 'stages', eventId)
   }
 }

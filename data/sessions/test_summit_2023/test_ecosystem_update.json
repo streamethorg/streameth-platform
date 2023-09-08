@@ -1,0 +1,25 @@
+{
+  "id": "test_ecosystem_update",
+  "name": "Test Ecosystem Update",
+  "description": "Swarm Foundation are thrilled to announce our new partnerships",
+  "start": "2023-06-21T13:30:00.000Z",
+  "end": "2023-06-21T13:45:00.000Z",
+  "stageId": "main",
+  "speakers": [
+    {
+      "id": "gregor_avcer",
+      "name": "Gregor Žavcer",
+      "bio": "Director of the Swarm Foundation",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://summit.ethswarm.org/media/avatars/gregor_1tERl6h.jpeg"
+    },
+    {
+      "id": "costanza_gallo",
+      "name": "Costanza Gallo",
+      "bio": "Partnerships Manager at Swarm Foundation\n\n* I've been in tech since 2012, from e-commerce startups, to fortune 500 SaaS companies, to volunteer side projects. I started exploring crypto in 2018 and in 2020 I joined the web3 fight against Internet censorship. I've never looked back since!",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://summit.ethswarm.org/media/avatars/costi_cVevjqA.jpg"
+    }
+  ],
+  "eventId": "test_summit_2023"
+}

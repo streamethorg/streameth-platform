@@ -3,52 +3,41 @@ import EventController from './controller/event'
 import SpeakerController from './controller/speaker'
 import SessionController from './controller/session'
 const run = async () => {
-  // const Organization = {
-  //   name: 'Zuzalu',
-  //   description: 'Zuzalu is a first-of-its-kind pop-up city community in Montenegro.',
-  //   url: 'https://zuzalu.city/',
-  //   logo: 'https://zuzalu.city/_next/image?url=https%3A%2F%2Fpolcxtixgqxfuvrqgthn.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fzulalu-images%2Fzulalologo.png&w=256&q=75',
-  //   location: 'Unknown',
-  // }
+  const Organization = {
+    name: 'Funding the Commons',
+    description:
+      'We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry.',
+    url: 'https://fundingthecommons.io/',
+    logo: 'https://fundingthecommons.io/assets/logoNav.6b3e7427.png',
+    location: 'Unknown',
+  }
 
-  // const orgController = new OrganizationController()
-  // const organizationInstance = await orgController.createOrganization(Organization)
+  const orgController = new OrganizationController()
+  const organizationInstance = await orgController.createOrganization(Organization)
 
-  // const Event = {
-  //   name: 'Zuzalu Montenegro 2023 - Other',
-  //   description:
-  //     'Join 200 core residents brought together by a shared desire to learn, create, live longer and healthier lives, and build self-sustaining communities.',
-  //   start: new Date('2023-03-25T00:00:00.000Z'),
-  //   end: new Date('2023-05-25T00:00:00.000Z'),
-  //   location: 'Montenegro',
-  //   organizationId: organizationInstance.id,
-  //   dataImporter: [
-  //     {
-  //       type: 'gsheet' as 'gsheet',
-  //       config: {
-  //         sheetId: '1rvWyrBKIMCscwRGTciU0cnEiTGcpYzXxkLv9UH31seI',
-  //         apiKey: 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w',
-  //       },
-  //     },
-  //   ],
-  // }
+  const Event = {
+    name: 'Funding the Commons Berlin 2023',
+    description:
+      'We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry. We do this by convening builders and practitioners, researchers and academics, and funders and philanthropists, catalyzing innovation in public goods. In the future, we seek to expand our impact by facilitating the creation of a public goods fund tied to impact evaluators, seeding projects that are conceived and incubated by the Funding the Commons community.',
+    start: new Date('2023-09-09T00:00:00.000Z'),
+    end: new Date('2023-09-09T00:00:00.000Z'),
+    location: 'Berlin, Germany',
+    organizationId: 'funding_the_commons',
+    dataImporter: [
+      {
+        type: 'gsheet' as 'gsheet',
+        config: {
+          sheetId: '1CuefhHHDbdWH77JGnkPQODdaq880mUAhwLlOeYnwWpo',
+          apiKey: 'w',
+        },
+      },
+    ],
+    timezone: "Europe/Berlin"
+  }
 
   const eventController = new EventController()
-  const speakerController = new SpeakerController()
-  const sessionController = new SessionController()
-  const EventInstance = await eventController.getAllEvents()
-  for (const event of EventInstance) {
-    try {
-      const sessions = await speakerController.getAllSpeakersForEvent(event.id)
-      for (const session of sessions) {
-        if (!session.id) {
-          console.log(session)
-        }
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const EventInstance = await eventController.createEvent(Event)
+  await eventController.importEventData(EventInstance)
 }
 
 run()

@@ -11,10 +11,12 @@ import { StageContext } from './StageContext'
 import EmbedButton from '@/components/misc/EmbedButton'
 import ShareButton from '@/components/misc/ShareButton'
 import { LoadingContext } from '@/components/context/LoadingContext'
+
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
   const { setIsLoading } = useContext(LoadingContext)
+
   useLayoutEffect(() => {
     if (stickyRef.current) {
       setBottomOffset(stickyRef.current.clientHeight)
@@ -23,7 +25,9 @@ export default function StageLayout() {
   }, [stickyRef.current])
 
   const context = useContext(StageContext)
+
   if (!context) return null
+
   const { stage, sessions, currentSession } = context
 
   return (
