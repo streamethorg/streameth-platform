@@ -9,6 +9,11 @@ export async function uploadAsset(session: any, path: string) {
     return
   }
 
+  if (session.playback?.videoUrl || session.videoUrl) {
+    console.log('Asset already uploaded', session.id)
+    return
+  }
+
   console.log('Upload asset', session.id, path)
   const { provider } = createClient({
     provider: studioProvider({
