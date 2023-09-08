@@ -15,6 +15,8 @@ export interface IPlayback {
   livepeerId: string
   videoUrl: string
   ipfsHash: string
+  format: string
+  duration: number
 }
 
 export interface ISession {

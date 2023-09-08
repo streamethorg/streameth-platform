@@ -38,7 +38,7 @@ export async function uploadAsset(session: any, path: string) {
     ],
   })
 
-  if (!response[0]) { 
+  if (!response[0]) {
     console.warn('Asset upload failed')
     return response
   }
@@ -59,6 +59,8 @@ export async function uploadAsset(session: any, path: string) {
               livepeerId: asset.playbackId,
               videoUrl: asset.playbackUrl,
               ipfsHash: asset.storage?.ipfs?.cid,
+              format: asset.videoSpec?.format,
+              duration: asset.videoSpec?.duration,
             },
           },
           null,
