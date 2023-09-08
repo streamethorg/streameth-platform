@@ -2,11 +2,11 @@ name: Split videos
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'data/sessions/**/*.json'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'data/sessions/**/*.json'
 
 defaults:
   run:

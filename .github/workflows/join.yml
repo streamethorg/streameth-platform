@@ -2,11 +2,11 @@ name: Join videos
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'assets/splits/*.mp4'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'assets/splits/*.mp4'
 
 defaults:
   run:

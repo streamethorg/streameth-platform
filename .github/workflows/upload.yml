@@ -2,11 +2,11 @@ name: Upload videos
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'assets/sessions/*.mp4'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'assets/sessions/*.mp4'
 
 defaults:
   run:
