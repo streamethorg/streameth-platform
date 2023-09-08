@@ -56,7 +56,7 @@ export const Player = ({
     [playerName]
   )
 
-  if (!playbackId && !stream?.isActive) return <OfflinePlayer />
+  // if (!playbackId && !stream?.isActive) return <OfflinePlayer />
 
   return (
     <div className="relative w-full aspect-video h-full">
