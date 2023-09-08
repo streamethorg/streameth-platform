@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: sudo apt install nscd ffmpeg xvfb -y
+      - run: sudo apt install nscd ffmpeg mesa-utils xvfb build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config -y
       - run: yarn install
       - run: yarn run:xvfb
         env:
