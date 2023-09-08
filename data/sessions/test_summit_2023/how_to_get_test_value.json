@@ -20,10 +20,5 @@
     "streamUrl": "https://lp-playback.com/hls/ad74hf1mn6pt92x4/index.m3u8",
     "start": 4,
     "end": 86
-  },
-  "playback": {
-    "livepeerId": "2870ut8ekkx9pn0i",
-    "videoUrl": "https://lp-playback.com/hls/2870ut8ekkx9pn0i/index.m3u8",
-    "ipfsHash": "bafybeiawyvj45nl7ep5ghp2yzcrigdygk4wcjlp6ebtalgfpqqju5r2cae"
   }
 }
