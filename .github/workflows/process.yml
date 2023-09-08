@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   build:
-    runs-on: large
+    runs-on: xl
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v3
