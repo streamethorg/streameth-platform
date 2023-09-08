@@ -22,6 +22,7 @@ jobs:
           node-version: 16
       - run: sudo apt install nscd ffmpeg mesa-utils xvfb build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config -y
       - run: yarn install
+      - run: npm rebuild --build-from-source gl
       - run: yarn run:process
       - uses: EndBug/add-and-commit@v9
         with:
