@@ -1,5 +1,6 @@
 {
   "id": "how_to_get_test_value",
+  "fileSize": 2533,
   "name": "How to get Test value",
   "description": "Nowadays all companies big and small are excited about an opportunity to ask AI about doing one's job and saving efforts and money let's look closely at what exactly can be done by AI today and how it can help a real blockchain delivery team. No magic, no false promises, real facts and examples.\nI'm going to talk about a variety of either freely or cheap available AI models to do the following:\n1. Create a code\n    a) Front End\n    b) Back End including Smart contracts in Solidity\n2. Test the code\n    a) Validating Smart contracts against the best practices\n    b) Creating the test cases\n    c) creating the code for functional tests\n3. Marketing & Communications (briefly as I expect we won't have time)\n    a) Creating documentation\n    b) Ctearing texts for community management\n    c) Event management support: ads, avatars, logos",
   "start": "2023-06-23T13:00:00.000Z",
@@ -19,5 +20,10 @@
     "streamUrl": "https://lp-playback.com/hls/ad74hf1mn6pt92x4/index.m3u8",
     "start": 4,
     "end": 86
+  },
+  "playback": {
+    "livepeerId": "2870ut8ekkx9pn0i",
+    "videoUrl": "https://lp-playback.com/hls/2870ut8ekkx9pn0i/index.m3u8",
+    "ipfsHash": "bafybeiawyvj45nl7ep5ghp2yzcrigdygk4wcjlp6ebtalgfpqqju5r2cae"
   }
 }
