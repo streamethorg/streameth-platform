@@ -11,7 +11,7 @@
     "prettier": "prettier './src' --write",
     "remotion": "ts-node ./src/index.ts",
     "tools": "ts-node ./src/tools.ts",
-    "server:build": "npx tsc",
+    "server:build": "tsc",
     "server:dev": "nodemon ./src/server.ts",
     "server:start": "node ./dist/server.js",
     "run:split": "ts-node ./src/scripts/split.ts",
@@ -35,6 +35,9 @@
   "sideEffects": [
     "*.css"
   ],
+  "engines": {
+    "node": ">=16"
+  },
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
     "@google-cloud/local-auth": "^2.1.1",
