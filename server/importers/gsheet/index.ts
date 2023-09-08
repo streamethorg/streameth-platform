@@ -3,7 +3,6 @@ import { google } from 'googleapis'
 import Event, { IDataImporter } from '../../model/event'
 import { generateId } from '../../utils'
 import moment from 'moment-timezone'
-import { ISpeaker } from '../../model/speaker'
 
 const SPEAKER_SHEET = 'Speakers'
 const SPEAKER_DATA_RANGE = 'A2:D'

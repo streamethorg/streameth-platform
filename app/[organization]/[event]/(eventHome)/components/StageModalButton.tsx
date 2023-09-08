@@ -18,24 +18,29 @@ const StageModalButton = ({ stages }: { stages: IStage[] }) => {
     closeModal()
   }
 
+  const handleButtonClick = () => {
+    if (stages.length === 1) {
+      const singleStage = stages[0]
+      handleClick(`${singleStage.eventId}/stage/${singleStage.id}`)
+    } else {
+      openModal(
+        <StageModal
+          stages={stages.map((stage) => {
+            return {
+              href: `${stage.eventId}/stage/${stage.id}`,
+              name: stage.name,
+              icon: <ViewColumnsIcon />,
+            }
+          })}
+          handleClick={handleClick}
+        />
+      )
+    }
+  }
+
   return (
     <div className="flex flex-row justify-center">
-      <button
-        onClick={() =>
-          openModal(
-            <StageModal
-              stages={stages.map((stage) => {
-                return {
-                  href: `${stage.eventId}/stage/${stage.id}`,
-                  name: stage.name,
-                  icon: <ViewColumnsIcon />,
-                }
-              })}
-              handleClick={handleClick}
-            />
-          )
-        }
-        className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent  rounded p-4 m-2">
+      <button onClick={handleButtonClick} className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent rounded p-4 m-2">
         Watch Livestream
       </button>
     </div>
