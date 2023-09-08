@@ -11,6 +11,12 @@ export interface ISource {
   end: number
 }
 
+export interface IPlayback {
+  livepeerId: string
+  videoUrl: string
+  ipfsHash: string
+}
+
 export interface ISession {
   id: string
   name: string
@@ -20,6 +26,7 @@ export interface ISession {
   stageId: IStage['id']
   speakers: Speaker[]
   source?: ISource
+  playback?: IPlayback
   videoUrl?: string
   playbackId?: string
   eventId: IEvent['id']
@@ -62,7 +69,19 @@ export default class Session implements ISession {
 
   coverImage?: string
 
-  constructor({ name, description, start, end, stageId, speakers, source, videoUrl, eventId, track, coverImage }: Omit<ISession, 'id'> & { id?: string }) {
+  constructor({
+    name,
+    description,
+    start,
+    end,
+    stageId,
+    speakers,
+    source,
+    videoUrl,
+    eventId,
+    track,
+    coverImage,
+  }: Omit<ISession, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
     this.description = description
