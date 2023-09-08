@@ -20,12 +20,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: sudo apt install nscd ffmpeg mesa-utils xvfb build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config -y
+      - run: sudo apt install nscd ffmpeg xvfb -y
       - run: yarn install
-      - run: npm rebuild --build-from-source gl
       - run: yarn run:xvfb
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: '[av] process videos'
-          add: 'assets/sessions/*.mp4 data/sessions/**/*.json --force'
+          message: '[av] processed videos'
+          add: 'assets/sessions/** data/sessions/** --force'
