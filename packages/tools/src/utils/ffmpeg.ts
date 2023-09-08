@@ -76,7 +76,7 @@ export async function Join(inputs: string[], output: string) {
     output: output,
     videos: inputs,
     frameFormat: 'raw',
-    tempDir: join(CONFIG.ASSET_FOLDER, 'tmp'),
+    // tempDir: join(CONFIG.ASSET_FOLDER, 'tmp'),
     transition: {
       name: 'fade', // Options: fade, directionalwipe, circleopen, squareswire
       duration: 750,
