@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import fetch from 'cross-fetch'
 import dotenv from 'dotenv'
-import { JoinSessions, Split } from 'utils/ffmpeg'
+import { JoinSessions, Split } from './utils/ffmpeg'
 
 dotenv.config()
 
