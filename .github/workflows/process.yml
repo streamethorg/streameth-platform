@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: sudo apt install nscd ffmpeg -y
       - run: yarn install
       - run: yarn run:process
       - uses: EndBug/add-and-commit@v9
