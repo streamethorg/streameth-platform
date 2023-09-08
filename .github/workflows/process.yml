@@ -1,4 +1,4 @@
-name: Join videos
+name: Process videos
 
 on:
   workflow_dispatch:
