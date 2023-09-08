@@ -19,7 +19,7 @@ export default function StageLayout() {
 
   useLayoutEffect(() => {
     if (stickyRef.current) {
-      setBottomOffset(stickyRef.current.clientHeight )
+      setBottomOffset(stickyRef.current.clientHeight)
     }
     setIsLoading(false)
   }, [stickyRef.current])

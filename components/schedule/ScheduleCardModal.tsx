@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState, useContext } from 'react'
 import { ModalContext } from '../context/ModalContext'
 import { LoadingContext } from '../context/LoadingContext'
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
@@ -23,7 +23,6 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
     closeModal()
     router.push(`stage/${session.stageId}`)
   }
-
 
   return (
     <div className="flex flex-col p-4 border-b-2 border-b-accent">
