@@ -1,7 +1,6 @@
 import OrganizationController from './controller/organization'
 import EventController from './controller/event'
-import SpeakerController from './controller/speaker'
-import SessionController from './controller/session'
+
 const run = async () => {
   const Organization = {
     name: 'Funding the Commons',
