@@ -40,7 +40,7 @@
   "eventId": "swarm_summit_2023",
   "source": {
     "streamUrl": "https://lp-playback.com/hls/7f64fjygnr9jkgu5/index.m3u8",
-    "start": 120,
-    "end": 500
+    "start": 1200,
+    "end": 1500
   }
 }
