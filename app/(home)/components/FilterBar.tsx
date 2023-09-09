@@ -27,10 +27,10 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
         type: 'date',
         filterFunc: async (item: IEvent) => {
           const endOfDay = new Date(item.end)
-          endOfDay.setHours(23, 59, 59, 999) // Set to the end of the day
+          endOfDay.setHours(23, 59, 59, 999)
 
           const startOfDay = new Date()
-          startOfDay.setHours(0, 0, 0, 0) // Set to the start of the day
+          startOfDay.setHours(0, 0, 0, 0)
 
           return isShowCurrent ? endOfDay.getTime() <= Date.now() : endOfDay.getTime() > startOfDay.getTime()
         },
