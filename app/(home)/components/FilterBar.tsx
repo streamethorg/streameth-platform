@@ -26,7 +26,13 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
         value: 'date',
         type: 'date',
         filterFunc: async (item: IEvent) => {
-          return isShowCurrent ? item.end.getTime() < Date.now() : item.end.getTime() > Date.now()
+          const endOfDay = new Date(item.end)
+          endOfDay.setHours(23, 59, 59, 999) // Set to the end of the day
+
+          const startOfDay = new Date()
+          startOfDay.setHours(0, 0, 0, 0) // Set to the start of the day
+
+          return isShowCurrent ? endOfDay.getTime() <= Date.now() : endOfDay.getTime() > startOfDay.getTime()
         },
       },
     ])
@@ -41,7 +47,7 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
       <div className=" w-full flex flex-col sm:flex-row items-center">
         <div className="flex flex-row w-full justify-center md:justify-start">
           <h1
-            className={` text-xl md:text-2xl  font-bold  ${
+            className={` text-xl md:text-2xl font-bold  ${
               isShowCurrent ? 'text-secondary-text cursor-pointer' : 'text-main-text'
             } border-r-2 border-accent pr-4`}
             onClick={() => setIsShowCurrent(false)}>

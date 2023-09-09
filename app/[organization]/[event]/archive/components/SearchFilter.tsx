@@ -1,7 +1,7 @@
 'use client'
 import { useState, useContext, useEffect } from 'react'
 import { FilterContext, FilterOption } from './FilterContext'
-import Session from '@/server/model/session'
+
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
   filterName: string
