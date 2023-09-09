@@ -12,6 +12,8 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
     setDate(numericValue)
   }
 
+  if (dates.length < 2) return null
+
   return (
     <div className="flex flex-row space-x-4 justify-center p-2 md:p-4 box-border">
       {isMobile ? (

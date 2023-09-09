@@ -21,10 +21,10 @@ export default function PluginBar({
   }
 
   return (
-    <div className=" flex flex-col rounded shadow h-full bg-base">
+    <div className=" flex flex-col rounded shadow h-full bg-base ">
       <div
         style={{ top: isMobile ? bottomOffset : 'unset' }}
-        className=" z-40 sticky md:relative rounded md:top-[unset] flex flex-row w-full bg-secondary p-4 bg-base">
+        className=" z-40 pb-0 sticky md:relative rounded md:top-[unset] flex flex-row w-full bg-secondary p-4 bg-base">
         {tabs.map((tab) => (
           <div key={tab.id} onClick={() => setSelectedId(tab.id)} className="m-2 w-full ">
             <div

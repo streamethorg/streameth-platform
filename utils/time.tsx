@@ -1,3 +1,5 @@
+import moment from 'moment-timezone'
+
 export const getTime = (date: Date): number => date.getTime()
 
 export const extractDate = (date: Date) => date.toISOString().split('T')[0]
@@ -28,6 +30,7 @@ export const secondsSinceMidnight = (date: Date) => {
 
 export const secondsToHHMM = (seconds: number) => {
   const date = new Date(0)
-  date.setSeconds(seconds)
+  
+  return moment(date.setSeconds(seconds)).local().format('HH:mm')
   return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
 }

@@ -38,7 +38,7 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
         return (
           <div
             key={session.id}
-            className="absolute right-0 h-full w-full"
+            className="absolute right-0 h-full w-full px-2"
             style={{
               top: range.start * CELL_HEIGHT + 0.1 + 'rem',
               height: (range.end - range.start) * CELL_HEIGHT - 0.1 + 'rem',
