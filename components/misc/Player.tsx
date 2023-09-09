@@ -66,7 +66,6 @@ export const Player = ({
         playbackId={playbackId ?? stream?.playbackId}
         showTitle={false}
         showPipButton={false}
-        muted={true}
         showLoadingSpinner={true}
         autoPlay
         controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
