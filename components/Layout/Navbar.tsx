@@ -54,10 +54,10 @@ export default function Navbar({
       <header
         className={`shadow-sm z-40 bg-base border-r border-primary fixed top-0 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} lg:block`}>
         <div className="flex flex-col items-center justify-between ">
-          <div className="items-center flex py-2">
+          <div className="items-center flex">
             <Link href={`/${event.organizationId}/${event.id}`}>
               <span className="sr-only">Logo</span>
-              <Image src={'/events/' + event.logo} className="" alt="logo" width={50} height={50} />
+              <Image src={'/events/' + event.logo} className="" alt="logo" width={150} height={150} />
             </Link>
           </div>
           <nav
