@@ -38,6 +38,7 @@ export const Player = ({
     streamId,
     refetchInterval: (s) => (s?.isActive ? false : 5000),
   })
+  console.log(stream)
 
   const mediaElementRef = useCallback(
     (ref: HTMLMediaElement) => {
@@ -66,7 +67,7 @@ export const Player = ({
         showTitle={false}
         showPipButton={false}
         muted={true}
-        showLoadingSpinner={false}
+        showLoadingSpinner={true}
         autoPlay
         controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
         viewerId={address}
