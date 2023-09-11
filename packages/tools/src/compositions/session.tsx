@@ -1,49 +1,93 @@
-import { AbsoluteFill, Audio, Img, staticFile } from 'remotion'
-import { MinSession as SessionType } from '../types'
+import { Sequence, AbsoluteFill, staticFile, Video, Audio, useVideoConfig, useCurrentFrame, interpolate } from 'remotion'
+import { ISession as SessionType, ISpeaker as SpeakerType } from '../types'
+import { G_AUDIO_PATH, G_ANIMATION_PATH, G_DURATION } from '../consts'
+import Text from '../components/Text'
+import { splitTextIntoString } from '../utils/stringManipulation'
+import { Rect } from '@remotion/shapes'
 
 interface Props {
-  session: SessionType
+  readonly session: SessionType
 }
 
-export const TEST_SESSION: SessionType = {
-  id: 'session-1',
-  name: 'Test Session ',
-  description: 'Lorem ipsum dolor sit amet..',
-  speakers: [
-    {
-      id: 'speaker-1',
-      name: 'Speaker 1',
-      avatar: '12',
-    },
-    {
-      id: 'speaker-2',
-      name: 'Zwei',
-      description: 'Chief Streaming Officer',
-      avatar: '123',
-      twitter: '@streameth',
-    },
-  ],
+function clampInterpolation(f: number, start: number[], end: number[]): number {
+  return interpolate(f, start, end, {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  })
 }
 
-export function Session() {
-  const session = TEST_SESSION
-  const bgImage = staticFile('images/background.png')
+export default function Session() {
+  const { session } = props
+  const { durationInFrames } = useVideoConfig()
+  const frame = useCurrentFrame()
+  const startFadeFrame = durationInFrames - 50
+
+  const opacity = clampInterpolation(frame, [startFadeFrame, durationInFrames], [0, 1])
+
+  const videoVolume = clampInterpolation(frame, [startFadeFrame, durationInFrames], [1, 0])
+
+  const computeOpacity = (f: any) => {
+    return interpolate(f, [135, 175], [1, 0], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    })
+  }
+
+  const showText = (f: any) => {
+    return interpolate(f, [15, 30], [0, 1], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    })
+  }
+
+  const videoOpacity = computeOpacity(frame)
 
   return (
-    <AbsoluteFill>
-      <Audio src={staticFile('audio/static.wav')} />
-
-      <AbsoluteFill className="bg-black">
-        <Img src={bgImage} />
-      </AbsoluteFill>
-
-      <AbsoluteFill className="content-start p-20">
-        <div>Logo</div>
-
-        <div className="flex flex-col items-center justify-center my-10">
-          <div className="my-10">{session.name}</div>
+    <>
+      <Sequence durationInFrames={G_DURATION}>
+        <Video muted style={{ opacity: videoOpacity }} src={staticFile(G_ANIMATION_PATH)} />
+      </Sequence>
+      {session.speakers!.map((speaker: SpeakerType, index: number) => (
+        <Sequence name="Name(s)" durationInFrames={G_DURATION}>
+          <div style={{ opacity: videoOpacity }}>
+            <Text text={speaker.name} x={775} y={335 - index * 80} opacity={showText(frame)} fontWeight={800} fontSize={65} />
+          </div>
+        </Sequence>
+      ))}
+      <Sequence name="Title" durationInFrames={G_DURATION}>
+        <div className="leading-tight" style={{ opacity: videoOpacity }}>
+          <Text text={splitTextIntoString(session.name, 30)} x={775} y={493} opacity={showText(frame)} fontWeight={600} />
         </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
+      </Sequence>
+      <Sequence durationInFrames={G_DURATION}>
+        <div style={{ opacity: videoOpacity }}>
+          <Rect
+            width={770}
+            height={3}
+            fill="black"
+            style={{
+              opacity: showText(frame),
+              transform: 'translateX(760px) translateY(450px)',
+            }}
+          />
+        </div>
+      </Sequence>
+      <Audio
+        src={staticFile(G_AUDIO_PATH)}
+        endAt={150}
+        volume={(f) =>
+          f < 115
+            ? interpolate(f, [0, 10], [0, 1], {
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp',
+              })
+            : interpolate(f, [115, 150], [1, 0], {
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp',
+              })
+        }
+      />
+      <AbsoluteFill style={{ backgroundColor: 'black', opacity }} />
+    </>
   )
 }
