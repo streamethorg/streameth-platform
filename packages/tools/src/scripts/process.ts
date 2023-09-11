@@ -13,8 +13,8 @@ async function Run() {
   // TODO: Refactor to use the server / SessionController
   const files = GetData(join(CONFIG.DATA_FOLDER, 'sessions'))
   const filesToProcess = files.filter((file) => file.source && !file.videoUrl && !file.playback?.videoUrl)
+  console.log(filesToProcess)
 
-  //
   await Split(
     filesToProcess.map((i) => {
       return {

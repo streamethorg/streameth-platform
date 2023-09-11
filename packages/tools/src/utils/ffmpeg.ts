@@ -6,7 +6,6 @@ import { CONFIG } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
 import type editly from 'editly'
-import { join } from 'path'
 
 const getEditly = async (): Promise<typeof editly> => {
   const lib = await (eval(`import('editly')`) as Promise<{
@@ -43,8 +42,9 @@ export async function JoinSessions(sessions: string[]) {
   console.log('Join', sessions.length, 'sessions')
 
   for (let i = 0; i < sessions.length; i++) {
-    const id = sessions[i]
+    const id = sessions[i].replace(/_/g, '-') // Remotion does not accept "_"
     const inputs = []
+
     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)
     }

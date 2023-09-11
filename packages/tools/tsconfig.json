@@ -1,21 +1,22 @@
 {
-	"compilerOptions": {
-		"target": "ES2018",
-		"module": "commonjs",
-		"jsx": "react-jsx",
-		"strict": true,
-		"noEmit": false,
-		"lib": ["es2015"],
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"noUnusedLocals": false,		
-		"outDir": "dist",
-		"baseUrl": "./src"
-	},
-	"ts-node": {
-		"require": ["tsconfig-paths/register"]
-	},
-	"include": ["./src"],
-	"exclude": ["node_modules", "./src/**/*.test.ts", "./src/**/*.spec.ts"]
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "target": "ES2018",
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": false,
+    "lib": ["es2015"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": false,
+    "outDir": "dist",
+    "baseUrl": "./src"
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules", "./src/**/*.test.ts", "./src/**/*.spec.ts"]
 }

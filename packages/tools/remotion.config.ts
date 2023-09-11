@@ -5,10 +5,10 @@
  * All configuration options: https://remotion.dev/docs/config
  */
 
-import {Config} from '@remotion/cli/config';
-import {webpackOverride} from './src/webpack-override';
+import { Config } from '@remotion/cli/config'
+import { webpackOverride } from './src/webpack-override'
 
-Config.setVideoImageFormat('jpeg');
-Config.setOverwriteOutput(true);
+Config.setVideoImageFormat('jpeg')
+Config.setOverwriteOutput(true)
 
-Config.overrideWebpackConfig(webpackOverride);
+Config.overrideWebpackConfig(webpackOverride)
