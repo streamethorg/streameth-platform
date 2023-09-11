@@ -24,9 +24,9 @@ const ScheduleCard = ({ session, showTime = false, speakers = false }: { session
         )}
         <p className="flex overflow-hidden text-ellipsis text-main-text text-sm font-medium uppercase">{session.name}</p>
         {speakers && (
-          <div className="flex h-2/4 py-1 items-center flex-row space-x-2">
+          <div className="flex mt-auto h-7 py-1 items-center flex-row">
             {session.speakers.map((speaker) => (
-              <SpeakerIcon key={speaker.id} speaker={speaker} onlyImage />
+              <SpeakerIcon size='sm' key={speaker.id} speaker={speaker} onlyImage />
             ))}
           </div>
         )}

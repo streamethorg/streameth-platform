@@ -22,12 +22,11 @@ interface Props {
 export default function SpeakerIcon({ speaker, onSpeakerClick, size = 'sm', onlyImage = false }: Props) {
   const avatar = speaker.photo ?? CreateBlockie(speaker.name)
 
-  const dimensions = 40
 
   return (
     <div className={`flex flex-row items-center text-sm ${size === 'md' ? 'h-12' : 'h-8'}`}>
-      <div onClick={() => onSpeakerClick?.(speaker)} className={`flex items-center justify-center rounded mr-2 ${size === 'md' ? 'w-12' : 'w-8'}`}>
-        <Image src={avatar} alt={speaker.name} width={dimensions} height={dimensions} className="rounded" placeholder="empty" />
+      <div onClick={() => onSpeakerClick?.(speaker)} className={`relative flex items-center justify-center rounded mr-2 ${size === 'md' ? 'h-12 w-12' : 'h-8 w-8'}`}>
+        <Image src={avatar} alt={speaker.name} layout='fill' className="rounded" placeholder="empty" />
       </div>
       {!onlyImage && <span className="text-main-text text-lg">{speaker.name}</span>}
       {speaker.twitter && !onlyImage && (
@@ -36,7 +35,7 @@ export default function SpeakerIcon({ speaker, onSpeakerClick, size = 'sm', only
           target="_blank"
           bgColor="#fff"
           fgColor="#1DA1F2"
-          className={`ml-2 ${size === 'md' ? 'h-8 w-8' : 'w-8'}`}
+          className={`ml-2 ${size === 'md' ? 'h-8 w-8' : 'h-8 w-8'}`}
         />
       )}
     </div>

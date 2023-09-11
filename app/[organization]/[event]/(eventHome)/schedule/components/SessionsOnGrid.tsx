@@ -43,7 +43,7 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
               top: range.start * CELL_HEIGHT + 0.1 + 'rem',
               height: (range.end - range.start) * CELL_HEIGHT - 0.1 + 'rem',
             }}>
-            {session.name !== 'Blank' && <ScheduleCard session={session} />}
+            {session.name !== 'Blank' && <ScheduleCard session={session} speakers />}
           </div>
         )
       })}
