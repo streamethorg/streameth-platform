@@ -74,6 +74,4 @@ export interface ISession {
   eventId: IEvent['id']
   track?: string[]
   coverImage?: string
-  startCut?: string
-  endCut?: string
 }

@@ -5,10 +5,6 @@ import Text from '../components/Text'
 import { splitTextIntoString } from '../utils/stringManipulation'
 import { Rect } from '@remotion/shapes'
 
-interface Props {
-  readonly session: SessionType
-}
-
 function clampInterpolation(f: number, start: number[], end: number[]): number {
   return interpolate(f, start, end, {
     extrapolateLeft: 'clamp',
@@ -16,8 +12,7 @@ function clampInterpolation(f: number, start: number[], end: number[]): number {
   })
 }
 
-export default function Session() {
-  const { session } = props
+export default function Session({ session }: { session: SessionType }) {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
   const startFadeFrame = durationInFrames - 50
