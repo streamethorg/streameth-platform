@@ -38,6 +38,7 @@ export const Player = ({
     streamId,
     refetchInterval: (s) => (s?.isActive ? false : 5000),
   })
+  console.log(stream)
 
   const mediaElementRef = useCallback(
     (ref: HTMLMediaElement) => {
@@ -56,7 +57,7 @@ export const Player = ({
     [playerName]
   )
 
-  if (!playbackId && !stream?.isActive) return <OfflinePlayer />
+  // if (!playbackId && !stream?.isActive) return <OfflinePlayer />
 
   return (
     <div className="relative w-full aspect-video h-full">
@@ -65,8 +66,7 @@ export const Player = ({
         playbackId={playbackId ?? stream?.playbackId}
         showTitle={false}
         showPipButton={false}
-        muted={true}
-        showLoadingSpinner={false}
+        showLoadingSpinner={true}
         autoPlay
         controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
         viewerId={address}

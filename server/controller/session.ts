@@ -29,7 +29,7 @@ export default class SessionController {
      data = data.filter((session) => session.stageId === stage)
     }
     if (timestamp) {
-     data = data.filter((session) => new Date(session.start).getTime() >= timestamp)
+     data = data.filter((session) => new Date(session.end).getTime() >= timestamp)
     }
     if (date) {
       const filterDate = new Date(date)

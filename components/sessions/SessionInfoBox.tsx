@@ -6,9 +6,11 @@ const SessionInfoBox = ({ session, showDate }: { session: ISession; showDate?: b
   if (!session) return null
 
   return (
-    <ComponetCard title={session.name} date={showDate ? new Date(session.start) : undefined}>
-      <p className="text-main-text md:text-lg text-justify">{session.description}</p>
-    </ComponetCard>
+    <div className="w-full shadow">
+      <ComponetCard title={session.name} date={showDate ? new Date(session.start) : undefined}>
+        <p className="text-main-text md:text-lg text-justify">{session.description}</p>
+      </ComponetCard>
+    </div>
   )
 }
 
