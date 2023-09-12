@@ -19,7 +19,13 @@ export async function GET(
   const searchParams = extractSearchParams<SessionsSearchParams>(new URL(request.url).searchParams, ['timestamp', 'date', 'stage'])
   const sessionController = new SessionController()
   try {
-    const data = await sessionController.getAllSessions(params.eventId, searchParams.stage, Number(searchParams.timestamp), Number(searchParams.date))
+    //params.eventId, searchParams.stage, Number(searchParams.timestamp), Number(searchParams.date))
+    const data = await sessionController.getAllSessions({
+      eventId: params.eventId,
+      stage: searchParams.stage,
+      timestamp: Number(searchParams.timestamp),
+      date: Number(searchParams.date),
+    })
     return NextResponse.json(data)
   } catch (e) {
     console.log(e)

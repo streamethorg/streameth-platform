@@ -2,7 +2,7 @@ import Session from '@/server/model/session'
 import Player from '@/components/misc/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import ComponetCard from '@/components/misc/ComponentCard'
-import SpeakerIconList from '@/components/speakers/SpeakerIconList'
+import SpeakerIconList from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerIconList'
 import ActionsComponent from './ActionsComponent'
 import EmbedButton from '@/components/misc/EmbedButton'
 

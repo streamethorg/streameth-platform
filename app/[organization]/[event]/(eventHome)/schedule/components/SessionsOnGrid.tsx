@@ -1,7 +1,7 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
 import { CELL_HEIGHT, getSlotRange, sessionsSchedulePosition } from '../../utils'
-import ScheduleCard from '@/components/schedule/ScheduleCard'
+import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 import { ScheduleContext } from './ScheduleContext'
 import { getSessions } from '@/utils/api'
 import { ISession } from '@/server/model/session'

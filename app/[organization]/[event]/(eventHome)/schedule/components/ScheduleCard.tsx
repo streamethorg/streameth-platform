@@ -1,9 +1,9 @@
 'use client'
 import { ISession } from '@/server/model/session'
-import SpeakerIcon from '@/components/speakers/SpeakerIcon'
-import { ModalContext } from '../context/ModalContext'
+import SpeakerPhoto from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerPhoto'
+import { ModalContext } from '@/components/context/ModalContext'
 import { useContext } from 'react'
-import ScheduleCardModal from '@/components/schedule/ScheduleCardModal'
+import ScheduleCardModal from './ScheduleCardModal'
 
 const ScheduleCard = ({ session, showTime = false, speakers = false }: { session: ISession; showTime?: boolean; speakers?: boolean }) => {
   const { openModal } = useContext(ModalContext)
@@ -26,7 +26,7 @@ const ScheduleCard = ({ session, showTime = false, speakers = false }: { session
         {speakers && (
           <div className="flex mt-auto py-1 items-center flex-row">
             {session.speakers.map((speaker) => (
-              <SpeakerIcon size='sm' key={speaker.id} speaker={speaker} onlyImage />
+              <SpeakerPhoto size="sm" key={speaker.id} speaker={speaker} />
             ))}
           </div>
         )}
