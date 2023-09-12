@@ -14,7 +14,7 @@ function CreateBlockie(username: string) {
 interface Props {
   speaker: ISpeaker
   size?: 'sm' | 'md'
-  onSpeakerClick?: (speaker: Speaker) => void
+  onSpeakerClick?: (speaker: ISpeaker) => void
   onlyImage?: boolean
   twitter?: boolean
 }
