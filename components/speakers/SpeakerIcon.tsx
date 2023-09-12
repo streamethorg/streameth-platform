@@ -3,7 +3,7 @@ import Speaker from '@/server/model/speaker'
 import makeBlockie from 'ethereum-blockies-base64'
 import { SocialIcon } from 'react-social-icons'
 import Image from 'next/image'
-
+import { ISpeaker } from '@/server/model/speaker'
 function CreateBlockie(username: string) {
   if (!username) {
     return ''
@@ -12,7 +12,7 @@ function CreateBlockie(username: string) {
 }
 
 interface Props {
-  speaker: Speaker
+  speaker: ISpeaker
   size?: 'sm' | 'md'
   onSpeakerClick?: (speaker: Speaker) => void
   onlyImage?: boolean
@@ -22,11 +22,12 @@ interface Props {
 export default function SpeakerIcon({ speaker, onSpeakerClick, size = 'sm', onlyImage = false }: Props) {
   const avatar = speaker.photo ?? CreateBlockie(speaker.name)
 
-
   return (
     <div className={`flex flex-row items-center text-sm ${size === 'md' ? 'h-12' : 'h-8'}`}>
-      <div onClick={() => onSpeakerClick?.(speaker)} className={`relative flex items-center justify-center rounded mr-2 ${size === 'md' ? 'h-12 w-12' : 'h-8 w-8'}`}>
-        <Image src={avatar} alt={speaker.name} layout='fill' className="rounded" placeholder="empty" />
+      <div
+        onClick={() => onSpeakerClick?.(speaker)}
+        className={`relative flex items-center justify-center rounded mr-2 ${size === 'md' ? 'h-12 w-12' : 'h-8 w-8'}`}>
+        <Image src={avatar} alt={speaker.name} layout="fill" className="rounded" placeholder="empty" />
       </div>
       {!onlyImage && <span className="text-main-text text-lg">{speaker.name}</span>}
       {speaker.twitter && !onlyImage && (

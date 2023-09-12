@@ -24,6 +24,7 @@ export default class PretalxImporter extends BaseImporter {
       speakers = [...speakers, ...request.data.results]
     }
     speakers.forEach(async (speaker: any) => {
+      console.log(speaker)
       const newSpeaker = {
         name: speaker.name,
         bio: speaker.biography,
