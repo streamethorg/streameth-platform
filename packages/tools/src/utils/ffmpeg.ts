@@ -42,7 +42,7 @@ export async function JoinSessions(sessions: string[]) {
   console.log('Join', sessions.length, 'sessions')
 
   for (let i = 0; i < sessions.length; i++) {
-    const id = sessions[i].replace(/_/g, '-') // Remotion does not accept "_"
+    const id = sessions[i]
     const inputs = []
 
     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)) {
