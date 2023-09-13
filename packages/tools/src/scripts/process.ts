@@ -27,7 +27,8 @@ async function Run() {
 
   await new Promise((r) => setTimeout(r, 1000))
 
-  await JoinSessions(filesToProcess.map((i) =>  i.id.replace('_', '-')))
+  const filesToProcessArray = filesToProcess.map((i) => i.id)
+  await JoinSessions(filesToProcessArray)
 
   await new Promise((r) => setTimeout(r, 1000))
 

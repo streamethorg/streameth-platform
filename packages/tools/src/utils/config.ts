@@ -10,7 +10,7 @@ dotenv.config({ path: join(process.cwd(), '../../', '.env.local') })
 export const CONFIG = {
   NODE_ENV: process.env.NODE_ENV || 'development',
 
-  ASSET_FOLDER: process.env.ASSET_FOLDER || join(process.cwd(), '../', 'assets'),
+  ASSET_FOLDER: process.env.ASSET_FOLDER || join(process.cwd(), '../../', 'assets'),
   DATA_FOLDER: process.env.DATA_FOLDER || join(process.cwd(), '../../', 'data'),
   BITRATE: process.env.BITRATE || 128,
 
