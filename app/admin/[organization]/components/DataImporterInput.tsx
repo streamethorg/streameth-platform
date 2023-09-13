@@ -1,13 +1,21 @@
 // DataImporterSelect.tsx
 import React, { useEffect, useState } from 'react'
-import { IDataImporter, GSheetConfig, PretalxConfig } from '@/server/model/event'
+import {
+  IDataImporter,
+  GSheetConfig,
+  PretalxConfig,
+} from '@/server/model/event'
 
 interface DataImporterSelectProps {
   onChange: (importer: IDataImporter) => void
 }
 
-const DataImporterSelect: React.FC<DataImporterSelectProps> = ({ onChange }) => {
-  const [selectedType, setSelectedType] = useState<'gsheet' | 'pretalx' | ''>('')
+const DataImporterSelect: React.FC<DataImporterSelectProps> = ({
+  onChange,
+}) => {
+  const [selectedType, setSelectedType] = useState<
+    'gsheet' | 'pretalx' | ''
+  >('')
   const [config, setConfig] = useState<GSheetConfig & PretalxConfig>({
     sheetId: '',
     apiKey: '',
@@ -15,11 +23,15 @@ const DataImporterSelect: React.FC<DataImporterSelectProps> = ({ onChange }) => 
     apiToken: '',
   })
 
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTypeChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setSelectedType(e.target.value as 'gsheet' | 'pretalx')
   }
 
-  const handleConfigChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleConfigChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = e.target
     setConfig((prev) => ({
       ...prev,
@@ -29,15 +41,24 @@ const DataImporterSelect: React.FC<DataImporterSelectProps> = ({ onChange }) => 
 
   useEffect(() => {
     if (selectedType === 'gsheet') {
-      onChange({ type: 'gsheet', config: { sheetId: config.sheetId, apiKey: config.apiKey } })
+      onChange({
+        type: 'gsheet',
+        config: { sheetId: config.sheetId, apiKey: config.apiKey },
+      })
     } else if (selectedType === 'pretalx') {
-      onChange({ type: 'pretalx', config: { url: config.url, apiToken: config.apiToken } })
+      onChange({
+        type: 'pretalx',
+        config: { url: config.url, apiToken: config.apiToken },
+      })
     }
   }, [selectedType, config])
 
   return (
     <>
-      <select value={selectedType} onChange={handleTypeChange} className="p-2 border rounded w-full">
+      <select
+        value={selectedType}
+        onChange={handleTypeChange}
+        className="p-2 border rounded w-full">
         <option value="">Select Data Importer Type</option>
         <option value="gsheet">Google Sheet</option>
         <option value="pretalx">Pretalx</option>

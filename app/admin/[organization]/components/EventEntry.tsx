@@ -20,8 +20,16 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
 
   return (
     <li className="border p-2 rounded flex justify-between items-center">
-      <Link href={`admin/${event.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
-        <img src={event.eventCover} alt={event.name} className="w-16 h-16 rounded" />
+      <Link
+        href={`admin/${event.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center space-x-2">
+        <img
+          src={event.eventCover}
+          alt={event.name}
+          className="w-16 h-16 rounded"
+        />
         <div>
           <h2 className="text-xl font-bold">{event.name}</h2>
           <p>{event.description}</p>
@@ -30,7 +38,9 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
       </Link>
       <div className="ml-auto  flex flex-row ">
         <EditEventButton event={event} />
-        <button className="bg-red-500 text-white p-2 rounded ml-2" onClick={handleDelete}>
+        <button
+          className="bg-red-500 text-white p-2 rounded ml-2"
+          onClick={handleDelete}>
           Delete
         </button>
       </div>

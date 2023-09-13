@@ -18,12 +18,20 @@ interface Props {
 }
 
 export function Editor(props: Props) {
-  const [selectedEvent, setSelectedEvent] = useState<EventInfo | undefined>()
-  const [selectedStage, setSelectedStage] = useState<StageInfo | undefined>()
-  const [selectedStream, setSelectedStream] = useState<StreamSession | undefined>()
+  const [selectedEvent, setSelectedEvent] = useState<
+    EventInfo | undefined
+  >()
+  const [selectedStage, setSelectedStage] = useState<
+    StageInfo | undefined
+  >()
+  const [selectedStream, setSelectedStream] = useState<
+    StreamSession | undefined
+  >()
   const [sessions, setSessions] = useState<ISession[]>([])
 
-  const { data: streamSessions } = useStreamSessions(selectedStage?.streamId ?? '')
+  const { data: streamSessions } = useStreamSessions(
+    selectedStage?.streamId ?? ''
+  )
 
   // initialize default event and stage
   useEffect(() => {
@@ -44,12 +52,19 @@ export function Editor(props: Props) {
   useEffect(() => {
     async function fetchSchedule() {
       if (selectedEvent && selectedStage && selectedStream) {
-        const res = await fetch(`${apiUrl()}/organizations/${selectedEvent.organizationId}/events/${selectedEvent.id}/sessions`)
+        const res = await fetch(
+          `${apiUrl()}/organizations/${
+            selectedEvent.organizationId
+          }/events/${selectedEvent.id}/sessions`
+        )
         const data: ISession[] = await res.json()
 
         // filter sessions by stage and streaming day
         const filtered = data.filter(
-          (i) => i.stageId === selectedStage?.id && dayjs(i.start).format('YYYYMMDD') === dayjs(selectedStream.createdAt).format('YYYYMMDD')
+          (i) =>
+            i.stageId === selectedStage?.id &&
+            dayjs(i.start).format('YYYYMMDD') ===
+              dayjs(selectedStream.createdAt).format('YYYYMMDD')
         )
 
         setSessions(filtered)
@@ -77,36 +92,71 @@ export function Editor(props: Props) {
   }
 
   function filterStreams(streams: StreamSession[]) {
-    return streams.filter((i) => !i.isActive && i.record && i.sourceSegmentsDuration && i.sourceSegmentsDuration > 3600)
+    return streams.filter(
+      (i) =>
+        !i.isActive &&
+        i.record &&
+        i.sourceSegmentsDuration &&
+        i.sourceSegmentsDuration > 3600
+    )
   }
 
   return (
     <div>
       <div className="flex flex-row gap-4">
         <div className="flex flex-col gap-4 font-light w-96 shrink-0">
-          <select onChange={(e) => selectEvent(e.target.value)} className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
+          <select
+            onChange={(e) => selectEvent(e.target.value)}
+            className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
             {props.events.map((event, index) => (
-              <option key={index} className="cursor-pointer py-1" value={event.id} selected={event.id === selectedEvent?.id}>
+              <option
+                key={index}
+                className="cursor-pointer py-1"
+                value={event.id}
+                selected={event.id === selectedEvent?.id}>
                 {event.name}
               </option>
             ))}
           </select>
-          <select onChange={(e) => selectStage(e.target.value)} className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
+          <select
+            onChange={(e) => selectStage(e.target.value)}
+            className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
             {props.stages
               .filter((i) => i.eventId === selectedEvent?.id)
               .map((event, index) => (
-                <option key={index} className="cursor-pointer py-1" value={event.id}>
+                <option
+                  key={index}
+                  className="cursor-pointer py-1"
+                  value={event.id}>
                   {event.name}
                 </option>
               ))}
           </select>
 
           {streamSessions && streamSessions.length > 0 && (
-            <select onChange={(e) => selectStream(e.target.value)} className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
+            <select
+              onChange={(e) => selectStream(e.target.value)}
+              className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
               {filterStreams(streamSessions).map((stream, index) => (
-                <option key={index} className="cursor-pointer py-1" value={stream.id}>
-                  {dayjs(stream.createdAt).format('MMM DD, HH:mm')} - {dayjs.duration(stream.sourceSegmentsDuration ?? 0, 'second').format('H')} hours{' '}
-                  {dayjs.duration(stream.sourceSegmentsDuration ?? 0, 'second').format('mm')} mins
+                <option
+                  key={index}
+                  className="cursor-pointer py-1"
+                  value={stream.id}>
+                  {dayjs(stream.createdAt).format('MMM DD, HH:mm')} -{' '}
+                  {dayjs
+                    .duration(
+                      stream.sourceSegmentsDuration ?? 0,
+                      'second'
+                    )
+                    .format('H')}{' '}
+                  hours{' '}
+                  {dayjs
+                    .duration(
+                      stream.sourceSegmentsDuration ?? 0,
+                      'second'
+                    )
+                    .format('mm')}{' '}
+                  mins
                 </option>
               ))}
             </select>
@@ -128,12 +178,18 @@ export function Editor(props: Props) {
               }}
             />
           )}
-          {!selectedStream?.recordingUrl && <p>No video stream available..</p>}
+          {!selectedStream?.recordingUrl && (
+            <p>No video stream available..</p>
+          )}
         </div>
       </div>
 
       {selectedEvent && sessions && sessions.length > 0 && (
-        <SessionList event={selectedEvent} sessions={sessions} streamUrl={selectedStream?.recordingUrl ?? ''} />
+        <SessionList
+          event={selectedEvent}
+          sessions={sessions}
+          streamUrl={selectedStream?.recordingUrl ?? ''}
+        />
       )}
     </div>
   )

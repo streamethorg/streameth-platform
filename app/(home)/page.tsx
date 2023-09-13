@@ -5,9 +5,11 @@ import { FilterContextProvider } from '@/app/[organization]/[event]/archive/comp
 
 export default async function Home() {
   const eventController = new EventController()
-  const allEvents = (await eventController.getAllEvents()).map((event) => {
-    return event.toJson()
-  })
+  const allEvents = (await eventController.getAllEvents()).map(
+    (event) => {
+      return event.toJson()
+    }
+  )
 
   return (
     <FilterContextProvider items={allEvents}>

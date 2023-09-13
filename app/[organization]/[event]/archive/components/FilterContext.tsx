@@ -1,5 +1,10 @@
 'use client'
-import React, { useState, createContext, useContext, useEffect } from 'react'
+import React, {
+  useState,
+  createContext,
+  useContext,
+  useEffect,
+} from 'react'
 import { LoadingContext } from '@/components/context/LoadingContext'
 export interface FilterOption<T> {
   name: string
@@ -12,15 +17,25 @@ const FilterContext = createContext<{
   items: any[]
   filteredItems: any[]
   filterOptions: FilterOption<any>[]
-  setFilterOptions: React.Dispatch<React.SetStateAction<FilterOption<any>[]>>
+  setFilterOptions: React.Dispatch<
+    React.SetStateAction<FilterOption<any>[]>
+  >
 }>({
   items: [],
   filteredItems: [],
   filterOptions: [],
   setFilterOptions: () => {},
 })
-const FilterContextProvider = <T extends object>({ children, items }: { children: React.ReactNode; items: T[] }) => {
-  const [filterOptions, setFilterOptions] = useState<FilterOption<T>[]>([])
+const FilterContextProvider = <T extends object>({
+  children,
+  items,
+}: {
+  children: React.ReactNode
+  items: T[]
+}) => {
+  const [filterOptions, setFilterOptions] = useState<
+    FilterOption<T>[]
+  >([])
   const [filteredItems, setFilteredItems] = useState<T[]>(items)
   const { setIsLoading } = useContext(LoadingContext)
 
@@ -28,8 +43,14 @@ const FilterContextProvider = <T extends object>({ children, items }: { children
     let returnItems: T[] = [...items]
     if (filterOptions.length > 0) {
       for (const filterOption of filterOptions) {
-        const filterResults = await Promise.all(returnItems.map(async (item) => await filterOption.filterFunc(item)))
-        returnItems = returnItems.filter((_, index) => filterResults[index])
+        const filterResults = await Promise.all(
+          returnItems.map(
+            async (item) => await filterOption.filterFunc(item)
+          )
+        )
+        returnItems = returnItems.filter(
+          (_, index) => filterResults[index]
+        )
       }
     }
     return returnItems

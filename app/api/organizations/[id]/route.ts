@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server'
 import OrganizationController from '@/server/controller/organization'
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const organizationController = new OrganizationController()
   const id = params.id
   try {

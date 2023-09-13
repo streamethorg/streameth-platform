@@ -1,7 +1,13 @@
 import Navbar from '@/components/Layout/Navbar'
 import EventController from '@/server/controller/event'
 import StageController from '@/server/controller/stage'
-import { HomeIcon, ArchiveBoxArrowDownIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/24/outline'
+import {
+  HomeIcon,
+  ArchiveBoxArrowDownIcon,
+  ViewColumnsIcon,
+  CalendarIcon,
+  UserGroupIcon,
+} from '@heroicons/react/24/outline'
 import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
 
@@ -28,9 +34,16 @@ const Layout = async ({
   const stageController = new StageController()
   const eventController = new EventController()
   const sessionController = new SessionController()
-  const event = await eventController.getEvent(params.event, params.organization)
-  const stages = await stageController.getAllStagesForEvent(params.event)
-  const sessions = await sessionController.getAllSessions({ eventId: params.event })
+  const event = await eventController.getEvent(
+    params.event,
+    params.organization
+  )
+  const stages = await stageController.getAllStagesForEvent(
+    params.event
+  )
+  const sessions = await sessionController.getAllSessions({
+    eventId: params.event,
+  })
 
   if (!event) {
     return notFound()
@@ -69,7 +82,12 @@ const Layout = async ({
           })}
         />
       )}
-      <main className={`flex w-full ${event.archiveMode ? ' lg:w-full' : 'lg:w-[calc(100%-5rem)]'} ml-auto bg-background`}>{children}</main>
+      <main
+        className={`flex w-full ${
+          event.archiveMode ? ' lg:w-full' : 'lg:w-[calc(100%-5rem)]'
+        } ml-auto bg-background`}>
+        {children}
+      </main>
     </div>
   )
 }

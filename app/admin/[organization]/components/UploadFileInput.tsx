@@ -2,7 +2,13 @@
 import { useEffect, useState } from 'react'
 import { apiUrl } from '@/server/utils'
 
-export function UploadFileInput({ organizationId, onFileUpload }: { organizationId: string; onFileUpload: (fileName: string) => void }) {
+export function UploadFileInput({
+  organizationId,
+  onFileUpload,
+}: {
+  organizationId: string
+  onFileUpload: (fileName: string) => void
+}) {
   const [file, setFile] = useState<File>()
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -15,10 +21,13 @@ export function UploadFileInput({ organizationId, onFileUpload }: { organization
       const data = new FormData()
       data.set('file', file)
 
-      const res = await fetch(`${apiUrl()}/organizations/${organizationId}/events/upload`, {
-        method: 'POST',
-        body: data,
-      })
+      const res = await fetch(
+        `${apiUrl()}/organizations/${organizationId}/events/upload`,
+        {
+          method: 'POST',
+          body: data,
+        }
+      )
       // handle the error
       if (!res.ok) throw new Error(await res.text())
     } catch (e: any) {
@@ -37,7 +46,11 @@ export function UploadFileInput({ organizationId, onFileUpload }: { organization
 
   return (
     <div>
-      <input type="file" name="file" onChange={(e) => setFile(e.target.files?.[0])} />
+      <input
+        type="file"
+        name="file"
+        onChange={(e) => setFile(e.target.files?.[0])}
+      />
       {loading && <p>Uploading...</p>}
     </div>
   )

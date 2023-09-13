@@ -21,13 +21,21 @@ const EventPage = async ({ params }: Params) => {
   const eventController = new EventController()
 
   try {
-    const event = await eventController.getEvent(params.event, params.organization)
-    const stages = (await new StageController().getAllStagesForEvent(params.event)).map((stage) => stage.toJson())
+    const event = await eventController.getEvent(
+      params.event,
+      params.organization
+    )
+    const stages = (
+      await new StageController().getAllStagesForEvent(params.event)
+    ).map((stage) => stage.toJson())
     const dates = getEventDays(event.start, event.end)
     if (!hasData({ event })) return notFound()
 
     return (
-      <ScheduleContextProvider event={event.toJson()} stages={stages} days={dates}>
+      <ScheduleContextProvider
+        event={event.toJson()}
+        stages={stages}
+        days={dates}>
         <div className="w-full h-full relative md:overflow-scroll">
           <div className="sticky top-0 z-10 flex flex-row flex-wrap md:flex-col bg-base justify-center">
             <DateSelect dates={dates} />
@@ -47,10 +55,18 @@ const EventPage = async ({ params }: Params) => {
 
 export default EventPage
 
-export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Params,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const eventController = new EventController()
-  const event = await eventController.getEvent(params.event, params.organization)
-  const imageName = event.eventCover ? event.eventCover : event.id + '.png'
+  const event = await eventController.getEvent(
+    params.event,
+    params.organization
+  )
+  const imageName = event.eventCover
+    ? event.eventCover
+    : event.id + '.png'
   const imageUrl = 'https://app.streameth.org/public/' + imageName
 
   return {

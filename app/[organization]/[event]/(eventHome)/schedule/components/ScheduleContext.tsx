@@ -1,5 +1,10 @@
 'use client'
-import React, { useState, createContext, ReactNode, useEffect } from 'react'
+import React, {
+  useState,
+  createContext,
+  ReactNode,
+  useEffect,
+} from 'react'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
 
@@ -35,11 +40,18 @@ interface ScheduleContextProviderProps {
   children: ReactNode
 }
 
-const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) => {
-  const [date, setDate] = useState<number>(props.event.start.getTime())
+const ScheduleContextProvider: React.FC<
+  ScheduleContextProviderProps
+> = (props) => {
+  const [date, setDate] = useState<number>(
+    props.event.start.getTime()
+  )
   const [stages, setStages] = useState<IStage[]>(props.stages)
-  const [schedulePositions, setSchedulePositions] = useState<ISchedulePosition[]>([])
-  const [schedulePosition, setSchedulePosition] = useState<ISchedulePosition>({ min: 0, max: 0, totalSlots: 0 })
+  const [schedulePositions, setSchedulePositions] = useState<
+    ISchedulePosition[]
+  >([])
+  const [schedulePosition, setSchedulePosition] =
+    useState<ISchedulePosition>({ min: 0, max: 0, totalSlots: 0 })
 
   useEffect(() => {
     setSchedulePositions([])
@@ -51,7 +63,10 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) 
   }, [schedulePositions])
 
   const updateEarliestTimes = (data: ISchedulePosition) => {
-    setSchedulePositions((schedulePositions) => [...schedulePositions, data])
+    setSchedulePositions((schedulePositions) => [
+      ...schedulePositions,
+      data,
+    ])
   }
 
   const minMaxMaxTotalslots = () => {

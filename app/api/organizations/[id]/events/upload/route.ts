@@ -1,7 +1,10 @@
 import { writeFile } from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import EventController from '@/server/controller/event'
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const data = await request.formData()
   const file: File | null = data.get('file') as unknown as File
 

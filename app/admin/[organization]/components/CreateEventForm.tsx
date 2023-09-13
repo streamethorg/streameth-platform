@@ -12,7 +12,10 @@ interface EventFormProps {
   event?: IEvent
 }
 
-const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) => {
+const CreateEventForm: React.FC<EventFormProps> = ({
+  organizationId,
+  event,
+}) => {
   const [formData, setFormData] = useState<Omit<IEvent, 'id'>>({
     organizationId: organizationId,
     name: '',
@@ -36,7 +39,9 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
 
   const [error, setError] = useState<string | null>(null)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target
 
     if (name === 'start' || name === 'end') {
@@ -69,7 +74,10 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await axios.post(`${apiUrl()}/organizations/${organizationId}/events`, formData)
+      await axios.post(
+        `${apiUrl()}/organizations/${organizationId}/events`,
+        formData
+      )
       window.location.reload()
     } catch (err) {
       setError('An error occurred.')
@@ -100,14 +108,22 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
         <input
           type="date"
           name="start"
-          value={formData.start instanceof Date ? formData.start.toISOString().split('T')[0] : formData.start}
+          value={
+            formData.start instanceof Date
+              ? formData.start.toISOString().split('T')[0]
+              : formData.start
+          }
           onChange={handleChange}
           className="p-2 border rounded w-full"
         />
         <input
           type="date"
           name="end"
-          value={formData.end instanceof Date ? formData.end.toISOString().split('T')[0] : formData.end}
+          value={
+            formData.end instanceof Date
+              ? formData.end.toISOString().split('T')[0]
+              : formData.end
+          }
           onChange={handleChange}
           className="p-2 border rounded w-full"
         />
@@ -129,9 +145,14 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
           className="p-2 border rounded w-full"
           required
         />
-        <UploadFileInput organizationId={organizationId} onFileUpload={onFileUpload} />
+        <UploadFileInput
+          organizationId={organizationId}
+          onFileUpload={onFileUpload}
+        />
         <DataImporterSelect onChange={handleDataImporterChange} />
-        <button type="submit" className="p-2 bg-blue-500 text-white rounded">
+        <button
+          type="submit"
+          className="p-2 bg-blue-500 text-white rounded">
           Submit
         </button>
       </form>

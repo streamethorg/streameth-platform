@@ -9,7 +9,14 @@ const EditOrganizationButton = ({ event }: { event: IEvent }) => {
     <div>
       <button
         className="p-2 bg-yellow-500 text-white rounded"
-        onClick={() => openModal(<CreateEventForm organizationId={event.organizationId} event={event} />)}>
+        onClick={() =>
+          openModal(
+            <CreateEventForm
+              organizationId={event.organizationId}
+              event={event}
+            />
+          )
+        }>
         Edit
       </button>
     </div>

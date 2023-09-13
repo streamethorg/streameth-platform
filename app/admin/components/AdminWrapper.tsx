@@ -10,7 +10,9 @@ export function AdminWrapper(props: PropsWithChildren) {
         <ConnectKitButton />
       </div>
       <div>
-        {!isSignedIn && <p>You need to sign in to access these pages</p>}
+        {!isSignedIn && (
+          <p>You need to sign in to access these pages</p>
+        )}
         {isSignedIn && props.children}
       </div>
     </div>

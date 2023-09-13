@@ -7,22 +7,33 @@ interface FilterProps<T> {
   filterName: string
 }
 
-const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterProps<T>) => {
-  const { setFilterOptions, filterOptions: currentFilterOptions } = useContext(FilterContext)
-  const [selectedItems, setSelectedItems] = useState<FilterOption<T>[]>([])
+const SearchFilter = <T extends object>({
+  filterOptions,
+  filterName,
+}: FilterProps<T>) => {
+  const { setFilterOptions, filterOptions: currentFilterOptions } =
+    useContext(FilterContext)
+  const [selectedItems, setSelectedItems] = useState<
+    FilterOption<T>[]
+  >([])
   const [filterInput, setFilterInput] = useState<string>('')
 
   const filteredOptions = () => {
     if (filterInput === '') {
       return filterOptions
     }
-    return filterOptions.filter((option) => option.name.toLowerCase().includes(filterInput.toLowerCase()))
+    return filterOptions.filter((option) =>
+      option.name.toLowerCase().includes(filterInput.toLowerCase())
+    )
   }
 
   useEffect(() => {
     // current filter options to selected items
     currentFilterOptions.filter((option) => {
-      if (!selectedItems.includes(option) && option.type == filterOptions[0].type) {
+      if (
+        !selectedItems.includes(option) &&
+        option.type == filterOptions[0].type
+      ) {
         setSelectedItems([...selectedItems, option])
       }
     })
@@ -35,8 +46,12 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
   }
 
   const handleOptionRemove = (option: FilterOption<T>) => {
-    setSelectedItems(selectedItems.filter((item) => item.name !== option.name))
-    setFilterOptions(currentFilterOptions.filter((item) => item.name !== option.name))
+    setSelectedItems(
+      selectedItems.filter((item) => item.name !== option.name)
+    )
+    setFilterOptions(
+      currentFilterOptions.filter((item) => item.name !== option.name)
+    )
   }
 
   return (
@@ -55,7 +70,10 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
               <div className=" py-1">{`No ${filterName} found`}</div>
             ) : (
               filteredOptions().map((option, index) => (
-                <div key={index} className="cursor-pointer py-1" onClick={() => handleOptionSelect(option)}>
+                <div
+                  key={index}
+                  className="cursor-pointer py-1"
+                  onClick={() => handleOptionSelect(option)}>
                   {option.name}
                 </div>
               ))
