@@ -15,7 +15,7 @@
     "server:dev": "nodemon ./src/server.ts",
     "server:start": "node ./dist/server.js",
     "run:process": "ts-node ./src/scripts/process.ts",
-    "run:xvfb": "xvfb-run -s '-e /dev/stdout -ac -screen 0 1920x1080x25' ts-node ./src/scripts/process.ts ",
+    "run:xvfb": "xvfb-run -e /dev/stdout -s '-ac -screen 0 1920x1080x25' ts-node ./src/scripts/process.ts ",
     "run:split": "ts-node ./src/scripts/split.ts",
     "run:join": "ts-node ./src/scripts/join.ts",
     "run:upload": "ts-node ./src/scripts/upload.ts",
