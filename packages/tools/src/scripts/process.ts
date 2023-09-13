@@ -3,7 +3,6 @@ import { join } from 'path'
 import { CONFIG } from 'utils/config'
 import { GetData } from 'utils/fs'
 import { uploadAsset } from 'utils/livepeer'
-
 // Process function runs all scripts at once
 // Split from Livestream => Join with intro/outro => Upload to Livepeer/IPFS
 
@@ -28,7 +27,8 @@ async function Run() {
 
   await new Promise((r) => setTimeout(r, 1000))
 
-  await JoinSessions(filesToProcess.map((i) => i.id))
+  const filesToProcessArray = filesToProcess.map((i) => i.id)
+  await JoinSessions(filesToProcessArray)
 
   await new Promise((r) => setTimeout(r, 1000))
 
