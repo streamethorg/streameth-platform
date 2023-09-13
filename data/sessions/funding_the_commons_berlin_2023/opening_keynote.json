@@ -21,12 +21,5 @@
   },
   "playbackId": "",
   "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/opening_keynote.jpg",
-  "playback": {
-    "livepeerId": "4265ffpo22qc7n2r",
-    "videoUrl": "https://lp-playback.com/hls/4265ffpo22qc7n2r/index.m3u8",
-    "ipfsHash": "bafybeievsheuheaprvn7bkckzeyq6k5w6nh4cv2g7kzc6bbrnqpdccv6su",
-    "format": "mp4",
-    "duration": 402
-  }
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/opening_keynote.jpg"
 }
