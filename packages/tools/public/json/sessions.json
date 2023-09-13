@@ -1,480 +1,1153 @@
 [
   {
-    "id": "circumventing_censorship_with_tor",
-    "name": "Circumventing censorship with Tor",
-    "description": "Internet freedom has declined for 12 consecutive years, shrinking online space for civil society all around the world. This terrible trend mainly affects marginalized communities, activists, journalists, dissidents, LGBTQIA people and human rights defenders. The Tor network is one of the most widely used, most private, and most secure methods for protecting a person’s privacy online. Tor-based tools offer the most private—and sometimes only—methods individuals can use to safely circumvent censorship controls, freely exchange information without fear of retaliation, and connect with like-minded communities without fear of recrimination. This presentation will cover the threats against internet freedom and stories showing how Tor has helped advance human rights and freedoms for millions of daily users.",
-    "start": 1694248200000,
-    "end": 1694249400000,
-    "stageId": "mainstage",
+    "id": "agentbased_simulations_for_protocol_design_tokenomics_and_risk_analysis_hackathon_workshop",
+    "name": "Agent-based simulations for protocol design, tokenomics, and risk analysis (hackathon workshop)",
+    "description": "This workshop is a technical tutorial aimed at upskilling developers and protocol stakeholders on how to build an agent-based simulation model for their protocol or Dapp, which can greatly improve their efficiency, security, and scalability. I will give a detailed walk-through on building a data-driven ABM using real world examples, and optionally a live coding demo. The session is designed to involve high output/engagement from the participants, where by the end everyone will have built a rudimentary agent-based model for a web3 protocol / Dapp of their choice.\r\n\r\nSome basic knowledge about smart contracts, DeFi concepts, and object-oriented programming would be helpful. No prior knowledge about quantitative modeling or data science required.",
+    "start": "2023-09-16T09:00:00-05:00",
+    "end": "2023-09-16T10:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "mingxuan_he", "name": "Mingxuan He", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/agentbased_simulations_for_protocol_design_tokenomics_and_risk_analysis_hackathon_workshop.jpg"
+  },
+  {
+    "id": "avoiding_common_smart_contract_vulnerabilities",
+    "name": "Avoiding Common Smart Contract Vulnerabilities",
+    "description": "Smart contract developers face a bevy of potential pitfalls that traditional web2 methodologies and tools are unequipped to handle. For example, reentrancy and flash loan vulnerabilities have enabled many attacks on various exchanges, and even simple functional correctness bugs can lead to costly attacks. This talk will discuss how developers can avoid these vulnerabilities in their projects, both with manual reasoning and by using tools developed by Veridise.",
+    "start": "2023-09-16T16:30:00-05:00",
+    "end": "2023-09-16T17:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
     "speakers": [
       {
-        "id": "isabela_fernandes",
-        "name": "Isabela Fernandes",
-        "bio": "The Tor Project",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@isa",
-        "photo": "https://pbs.twimg.com/profile_images/472573667289755648/Sv38FEdd_400x400.jpeg"
+        "id": "jacob_van_geffen",
+        "name": "Jacob Van Geffen",
+        "bio": "I am a Senior Research Scientist at Veridise, specializing in building formal methods tools to enable both automatic bug finding and verification. I received my PhD in programming languages at the University of Washington, studying with Emina Torlak. I completed my undergraduate degree at UT Austin, where I studied formal methods with Isil Dillig.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/jacob_eYwOnNZ.png"
       }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/circumventing_censorship_with_tor.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/avoiding_common_smart_contract_vulnerabilities.jpg"
   },
   {
-    "id": "closing_words",
-    "name": "Closing words ",
-    "description": "",
-    "start": 1694275200000,
-    "end": 1694275800000,
-    "stageId": "mainstage",
+    "id": "blockchain__supply_chain",
+    "name": "Blockchain <> Supply Chain",
+    "description": "Blockchain in Supply Chain Panel Discussion",
+    "start": "2023-09-17T10:00:00-05:00",
+    "end": "2023-09-17T11:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
     "speakers": [
-      { "id": "david_casey", "name": "David Casey", "bio": "Protocol Labs/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "todd_ziegler_justin_martin_ian_taylor_dale_chrystie_mike_lombard_brigitte_belton_brandon_hiatt",
+        "name": "Todd Ziegler, Justin Martin, Ian Taylor, Dale Chrystie, Mike Lombard, Brigitte Belton, Brandon Hiatt",
+        "bio": null,
+        "eventId": "ethchicago",
+        "photo": ""
+      }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/closing_words.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/blockchain__supply_chain.jpg"
   },
   {
-    "id": "coffee_break",
-    "name": "Coffee break ",
-    "description": "Coffee break ",
-    "start": 1694267400000,
-    "end": 1694268000000,
-    "stageId": "mainstage",
+    "id": "blockchain_brunch",
+    "name": "Blockchain Brunch",
+    "description": "The Crypto Recruiters bring their classic LinkedIn Live event to  ETHChicago IRL -- Feedback and Q&A -- facilitate ice-breaking / team-building on Friday or Saturday morning",
+    "start": "2023-09-15T13:30:00-05:00",
+    "end": "2023-09-15T14:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "emily_landon_the_crypto_recruiter",
+        "name": "Emily Landon The Crypto Recruiter",
+        "bio": "Emily Landon, better known as 'The Crypto Recruiter' has an intense passion for the blockchain, gaming, AI, compliance, and crypto world and helping people get jobs in the space. With 7 years of recruitment experience under her belt, including 4 years in the thrilling web3 ecosystem, She’s orchestrated the perfect matches for over 275 talented individuals in crypto jobs.\r\n\r\nShe’s not your average recruiter; She’s on a mission to shape and grow cultures, not just teams and help people find the RIGHT fit, not just any old job. Her style? Think positive, bubbly, and refreshingly honest. You'll always get the unfiltered truth and transparent direction.\r\n\r\nWhy did she dive into the world of crypto recruiting? It was a New Year's resolution that transformed into a 20 person team, 36k followers and over a 120k candidates reach. She firmly believes that recruiting can be an enjoyable journey when paired with the right recruiter. Quality over quantity she’s here to help you discover remarkable opportunities, not just any old job.\r\n\r\nReady to explore new opportunities? Connect with her on LinkedIn: http://linkedin.com/in/thecryptorecruiter",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/IMG_2344_TuEd305.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/blockchain_brunch.jpg"
+  },
+  {
+    "id": "blockchain_enabled_social_purpose_value_chains_organizing_to_address_the_un_sdgs",
+    "name": "Blockchain Enabled Social Purpose Value Chains: Organizing to Address the U.N. SDGs",
+    "description": "Innovations in governance will be critical if we are going to address grand societal challenges identified by the U.N. SDGs. Research is underway to design a value-chain level blockchain based governance and operations model to effectively support the achievement of a range of pressing humanitarian social goals (e.g., stable global supply of food, access to affordable housing, regional circular economies). Called the “Social Purpose Value Chain” (SPVC), this system level concept is based on the idea that a combination of blockchain technology, coopetition, reimagination of value-chain analysis in the context of social goal achievement, a relational bureaucratic governance model that is vertically integrated (i.e., shared governance by members of each step of a value chain), and a social credit incentive system would overcome several known barriers to social goal achievement (e.g., such as power and hierarchy issues in decision making, donor-driven solutions that do not effectively or efficiently address needs, contract execution failures). The SPVC concept, the status of the software research prototype supporting it, and next steps will be discussed.",
+    "start": "2023-09-17T09:00:00-05:00",
+    "end": "2023-09-17T09:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "carolee_rigsbee_sheher",
+        "name": "Carolee Rigsbee (she/her)",
+        "bio": "Carolee Rigsbee, PhD, has extensive project management and QA leadership experience gained through her work in the nuclear R&D, aerospace & defense, telecom, food manufacturing, advisory services, and higher education industries.  Specializing in strategic management as an academic, her research is focused on the design of organization governance and value chain structures and processes that strengthen stakeholder voice and reduce obstacles to the achievement of societal goals.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Rigsbee_AND9csR.jpg"
+      },
+      {
+        "id": "carol_m_jessup",
+        "name": "Carol M. Jessup",
+        "bio": "Carol M. Jessup is Professor Emerita of Accountancy at the University of Illinois Springfield.  Her Ph.D. in Business Administration is from Saint Louis University (major in Management, minor in Public Policy Studies) and BA and MA degrees in Accounting from the former Sangamon State University. \r\n \r\nCarol primarily taught auditing and governmental and nonprofit accounting, with her research interests extending to include fraud.  She was the inaugural Editor-in-Chief of The North American Accounting Studies and former chair of the Editorial Board for the Journal of Government Financial Management of the Association of Government Accountants.   She currently serves on the Governmental Accounting Auditing and Financial Reporting Technical Advisory Board for the Government Finance Officers Association and the Board of the United Way of Central Illinois.  Carol was honored by the Illinois CPA Society in September 2020 with its Experienced Leader award.\r\n\r\nApart from her academic experience, Carol held several positions in state and local government.  She was a grant accountant, an internal auditor, served as a staff member of the team that implemented Generally Accepted Accounting Principles (GAAP) in the State of Illinois, managed a municipal finance department, and provided expert witness testimony in utility regulatory proceedings.  She is a licensed CPA in Illinois and a Certified Fraud Examiner.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/caroljessup_PJEXWav.jpg"
+      },
+      { "id": "stephen_r_newell", "name": "Stephen R Newell", "bio": null, "eventId": "ethchicago", "photo": "" }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/blockchain_enabled_social_purpose_value_chains_organizing_to_address_the_un_sdgs.jpg"
+  },
+  {
+    "id": "blockchain_homies",
+    "name": "Blockchain Homies",
+    "description": "The music showcase will feature a variety of artists from the crypto music community. The music will be a mixture of genres and soundscapes, With live performance sets and streaming from the voxels metaverse.",
+    "start": "2023-09-16T19:00:00-05:00",
+    "end": "2023-09-16T21:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "xtinct",
+        "name": "XTincT",
+        "bio": "On-Chain Recording artist and creative director",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/1ed46c9c2a0b56b9a2d7ae306a835467_K5xFhkk.jpg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/blockchain_homies.jpg"
+  },
+  {
+    "id": "bounty_presentations_to_judges",
+    "name": "Bounty Presentations to Judges",
+    "description": "participants present to each bounty for judge tables",
+    "start": "2023-09-17T10:00:00-05:00",
+    "end": "2023-09-17T12:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
     "speakers": [],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/coffee_break.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/bounty_presentations_to_judges.jpg"
   },
   {
-    "id": "dialing_into_the_future_sustainable_funding__value_synergy_in_open_source",
-    "name": "Dialing into the Future: Sustainable Funding & Value Synergy in Open Source",
-    "description": "Explore the journey of Free World Dialup and how its open-source foundation paves the way for sustainable public good funding. Join Jeff Pulver as he dives into aligning stakeholder values to ensure the longevity and impact of open networks.",
-    "start": 1694256000000,
-    "end": 1694257200000,
-    "stageId": "mainstage",
+    "id": "brand30_how_web3_will_forever_change_the_brandconsumer_relationship",
+    "name": "Brand3.0: How Web3 Will Forever Change the Brand<>Consumer Relationship",
+    "description": "The brand <> customer relationship is being flipped on its head as we enter the next iteration of consumer behavior — a world where the consumer wants immersive, ownable, and hyper-personalized experiences. Web3 and blockchain technology has the opportunity to usher in this new future. In this session, we will unpack how the world’s leading brands are leveraging web3 and redefining the customer relationship from decentralized loyalty programs and omnichannel marketing, to user-controlled data and next-gen incentive design. Understand the different strategies brands are employing as they enter web3, the web3 brand maturity curve, and how your company should be thinking about web3.",
+    "start": "2023-09-16T11:00:00-05:00",
+    "end": "2023-09-16T11:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      { "id": "drew_beechler", "name": "Drew Beechler", "bio": null, "eventId": "ethchicago", "photo": "" },
+      { "id": "calid_bowen", "name": "Calid Bowen", "bio": null, "eventId": "ethchicago", "photo": "" }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/brand30_how_web3_will_forever_change_the_brandconsumer_relationship.jpg"
+  },
+  {
+    "id": "bring_your_own_brand_byob_launching_a_nocode_nouns_dao_site",
+    "name": "Bring Your Own Brand (BYOB): Launching a No-Code Nouns DAO Site",
+    "description": "Learn how to design, build, and ship your very own Nouns DAO auction and site with ZERO code.",
+    "start": "2023-09-15T16:00:00-05:00",
+    "end": "2023-09-15T17:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
     "speakers": [
       {
-        "id": "jeff_pulver",
-        "name": "Jeff Pulver",
-        "bio": "VOIP innovator",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@jeffpulver",
-        "photo": "https://pbs.twimg.com/profile_images/1602318725335683073/_c09vwSY_400x400.jpg"
-      }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/dialing_into_the_future_sustainable_funding__value_synergy_in_open_source.jpg"
-  },
-  {
-    "id": "ecoweaving_collective_action_for_the_ecocommons",
-    "name": "Ecoweaving: Collective Action for the Eco-Commons",
-    "description": "Ecoweaving is an initiative weaving people, projects, places, and worldviews in an emerging ecosystem of indigenous wisdom and innovation from intersections in finance, ecology, computational law, and beyond, with the goal of collective action and coordination around the crises in climate and ecological collapse. Join us to learn more about this extitution, gathering as individuals to attune our capacity to create change in consciousness and systems in resonance with our collective will.",
-    "start": 1694269200000,
-    "end": 1694270400000,
-    "stageId": "mainstage",
-    "speakers": [{ "id": "tony_lai", "name": "Tony Lai", "bio": "CodeX Stanford Blockchain Group", "eventId": "funding_the_commons_berlin_2023" }],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/ecoweaving_collective_action_for_the_ecocommons.jpg"
-  },
-  {
-    "id": "from_hypercerts_to_hyperboards_advancing_modern_impact_funding_systems",
-    "name": "From hypercerts to hyperboards: Advancing modern impact funding systems",
-    "description": "Hypercerts, an implementation of the idea of impact certificates, are a new primitive for impact funding system. Hyperboards provide a new visualization and functionalities for collections of hypercerts. In his talk Holke demos how hyperboards advance the uses of hypercerts to power modern impact funding systems.",
-    "start": 1694274000000,
-    "end": 1694275200000,
-    "stageId": "mainstage",
-    "speakers": [
-      { "id": "holke_brammer", "name": "Holke Brammer", "bio": "Protocol Labs/ Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/from_hypercerts_to_hyperboards_advancing_modern_impact_funding_systems.jpg"
-  },
-  {
-    "id": "funding_ethereums_core_protocol_work",
-    "name": "Funding Ethereum's Core Protocol Work",
-    "description": "The Protocol Guild enables a funding mechanism that can be used by Ethereum's ecosystem and community to help fund Ethereum's core protocol work, in a unique way that creates strong incentives to onboard and retain contributors over the long term. In this talk we'll cover learnings from our 1-year pilot, as well as our plans for the future.",
-    "start": 1694262600000,
-    "end": 1694263800000,
-    "stageId": "mainstage",
-    "speakers": [
-      {
-        "id": "cheeky_gorilla",
-        "name": "Cheeky Gorilla",
-        "bio": "Protocol Guild",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@cheeky-gorilla.eth"
-      }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/funding_ethereums_core_protocol_work.jpg"
-  },
-  {
-    "id": "funding_the_commons_builder_residency_update",
-    "name": "Funding the Commons Builder Residency Update",
-    "description": "Berlin Residency Announcement",
-    "start": 1694245800000,
-    "end": 1694247000000,
-    "stageId": "mainstage",
-    "speakers": [
-      { "id": "sara_johnstone", "name": "Sara Johnstone", "bio": "Numundo/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/funding_the_commons_builder_residency_update.jpg"
-  },
-  {
-    "id": "funding_the_commons_is_next_in_asia",
-    "name": "Funding the Commons is next in Asia!",
-    "description": "We are bringing Funding the Commons to Asia, choosing Taipei as the city to land! ",
-    "start": 1694245200000,
-    "end": 1694245800000,
-    "stageId": "mainstage",
-    "speakers": [
-      { "id": "vivian_chen", "name": "Vivian Chen", "bio": "Funding the Commons", "eventId": "funding_the_commons_berlin_2023" },
-      {
-        "id": "noah_yeh",
-        "name": "Noah Yeh",
-        "bio": "No description",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@noahyeh",
-        "photo": "https://pbs.twimg.com/profile_images/1659555571119591425/P6_thy0k_400x400.jpg"
-      }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/funding_the_commons_is_next_in_asia.jpg"
-  },
-  {
-    "id": "gitcoins_allo_protocol_empowering_communities_to_invest_in_their_future",
-    "name": "Gitcoin's Allo Protocol: Empowering communities to invest in their future",
-    "description": "Web3 has unlocked a new era of digitally connected communities. In order to thrive, these modern communities will need sophisticated tools for investing in their future. Come learn how we're creating a foundation for this new whole new category of coordination. ",
-    "start": 1694268000000,
-    "end": 1694269200000,
-    "stageId": "mainstage",
-    "speakers": [
-      {
-        "id": "nate_gosselin",
-        "name": "Nate Gosselin",
-        "bio": "Gitcoin / Allo Protocol",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@heynate_g",
-        "photo": "https://pbs.twimg.com/profile_images/1575754483103145984/J0KtHrhK_400x400.jpg"
-      }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/gitcoins_allo_protocol_empowering_communities_to_invest_in_their_future.jpg"
-  },
-  {
-    "id": "infrastructuring_open_conspiracies",
-    "name": "Infrastructuring Open Conspiracies",
-    "description": "At the intersection of mechanism art, political philosophy and ecosystem design, we will share some perspectives on designing web3-based funding mechanisms for the arts. Our starting point: the artworld is a place where a myriad of partly (in)commensurable creative practices engage in complex and mostly opaque processes of mutual qualitative evaluations, financially and memetically extending between Staatskunst, (i.e. the art of writing grants), crowdfunding, and the unfathomable swirls of the art market. ",
-    "start": 1694253600000,
-    "end": 1694254800000,
-    "stageId": "mainstage",
-    "speakers": [
-      {
-        "id": "cem_dagdelen",
-        "name": "Cem Dagdelen \n",
-        "bio": "Giza, Curve Labs",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@cemfdagdelen",
-        "photo": "https://pbs.twimg.com/profile_images/1169946787093917699/RPCSl7AV_400x400.jpg"
+        "id": "boop",
+        "name": "boop",
+        "bio": "⌐◨-◨ • designing the next web with @TheNoundation and @ratlabs_",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/soondooboop_f7oPFa3.png"
       },
       {
-        "id": "erik_bordeleau",
-        "name": "Erik Bordeleau",
-        "bio": "The Sphere + Universidade NOVA de Lisboa",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@ritornell0",
-        "photo": "https://pbs.twimg.com/profile_images/1482872850428088327/gI1XY4Il_400x400.jpg"
+        "id": "metamonk",
+        "name": "metamonk",
+        "bio": "building the next web @ratlabs_",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/metamonk_mEXZmqI.png"
       }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/infrastructuring_open_conspiracies.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/bring_your_own_brand_byob_launching_a_nocode_nouns_dao_site.jpg"
   },
   {
-    "id": "introducing_deep_a_pathway_toward_flipping_the_economics_of_ecology",
-    "name": "Introducing DEEP\nA Pathway toward Flipping the Economics of Ecology",
-    "description": "At Sovereign Nature Initiative, we develop the Decentralised Ecological Economics Protocol (DEEP) with the goal of flipping the economics of ecology. Our approach facilitates the flow of value between ecological work and digital creativity, enabling sustainable validation of ecological efforts. By effectively integrating ecological work with the digital realm through processing eco-data, we not only generate value, but we also imbue digital assets with tangible and real-life significance.",
-    "start": 1694270400000,
-    "end": 1694271600000,
-    "stageId": "mainstage",
+    "id": "build_a_dapp_quick_with_scaffoldeth_2",
+    "name": "build a dapp Quick with Scaffold-ETH 2",
+    "description": "builders workshop for hackers to learn more about web3development",
+    "start": "2023-09-15T18:00:00-05:00",
+    "end": "2023-09-15T19:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "kevin_jones", "name": "Kevin Jones", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/build_a_dapp_quick_with_scaffoldeth_2.jpg"
+  },
+  {
+    "id": "building_a_global_business_on_web3__web2_infrastructures",
+    "name": "Building a global business on Web3 & Web2 infrastructures",
+    "description": "Building a successful global payment platform of the future will require the collaboration of decentralized finance infrastructure and web2 systems.",
+    "start": "2023-09-17T10:30:00-05:00",
+    "end": "2023-09-17T11:00:00-05:00",
+    "stageId": "east_room__main_",
     "speakers": [
       {
-        "id": "andrea_leiter",
-        "name": "Andrea Leiter",
-        "bio": "Sovereign Nature Initiative, University of Amsterdam",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "andrea_leiter",
-        "photo": "https://pbs.twimg.com/profile_images/957091664283148288/vEEb8YVd_400x400.jpg"
+        "id": "bobola_odebiyi",
+        "name": "Bobola Odebiyi",
+        "bio": "Bobola Odebiyi, CPA - Founder & CEO of CrossKudi, moved to the US with limited resources and worked from a Cabbie in Chicago to a CPA. Bobola worked at JCi, EY, and PwC, where he worked on top hedge fund and private equity clients. He has been fascinated with blockchain and other Web3 technologies since 2017. Bobola Co-led the PwC Blockchain Community of Interest and trained colleagues on utilizing emerging technologies to serve clients better. As he became more involved in the field, he started seeking “real use cases” for the technology. In 2020, he found what he was looking for in the business of international money transfers. He created a way for immigrants and international travelers to use blockchain technology to send money to their families back home. His plan made these money transfers cheaper and faster than anything else on the market. And best of all, it creates passive income opportunities for its users.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Bobola_at_Collision_0Sq0c8F.jpg"
       }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/introducing_deep_a_pathway_toward_flipping_the_economics_of_ecology.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/building_a_global_business_on_web3__web2_infrastructures.jpg"
   },
   {
-    "id": "lunch_break",
-    "name": "Lunch break ",
-    "description": "Lunch break ",
-    "start": 1694257200000,
-    "end": 1694260800000,
-    "stageId": "mainstage",
+    "id": "building_an_enduring_team_and_community_with_no_funding",
+    "name": "Building an Enduring Team and Community With No Funding",
+    "description": "Many people believe you need to be an industry veteran or raised capital to build an ambitious startup team. However, in this workshop, you'll discover the third way without any funding or experience. We will provide clear, actionable, and memorable steps for you to build your dream team and startup that will endure even the worst bear markets.",
+    "start": "2023-09-17T12:00:00-05:00",
+    "end": "2023-09-17T12:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "yash_jain", "name": "Yash Jain", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/building_an_enduring_team_and_community_with_no_funding.jpg"
+  },
+  {
+    "id": "building_for_zero_trust",
+    "name": "Building for Zero Trust",
+    "description": "Building for Zero Trust",
+    "start": "2023-09-16T15:00:00-05:00",
+    "end": "2023-09-16T15:30:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+      {
+        "id": "andrew_brick",
+        "name": "Andrew Brick",
+        "bio": "Andrew got started in the Blockchain space over 11 years ago, prior to earning a Master’s of Electrical Engineering. Since then he’s worked in cybersecurity and distributed ledger technology at all levels of the stack including developing a loyalty points exchange for the NASDAQ subsidiary, designing Web3 solutions for ESG markets, and building a peer-to-peer product exchange for the developing world. Now he is the co-creator of Notoros: a zero trust developer platform built to meet the needs of highly regulated industries and US critical infrastructure. Last year his team graduated from an accelerator hosted by the US National Geospatial-Intelligence Agency, and earlier this summer was part of the inaugural cohort of University of Chicago's Transform accelerator.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/AndrewHeadshot_83a9CM3.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/building_for_zero_trust.jpg"
+  },
+  {
+    "id": "captureresistant_organizations_what_why_and_how",
+    "name": "Capture-Resistant Organizations: What, Why and How",
+    "description": "What are DAOs actually, and what can existing companies learn from them? This talk introduces the concept of the Capture-Resistant Organization to answer both of these questions.",
+    "start": "2023-09-16T12:30:00-05:00",
+    "end": "2023-09-16T13:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+      {
+        "id": "spencer_graham",
+        "name": "Spencer Graham",
+        "bio": "Spencer is a DAO operator, mechanism designer, and smart contract engineer. He has been enamored with Ethereum since 2017 and has worked full time for and in DAOs since 2020, primarily with Raid Guild and DAOhaus. Based on his experiences in DAOs, Spencer cofounded of Hats Protocol to help DAOs and other organizations be capture-resistant *and* get work done effectively.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/unnamed_A1gvV2C.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/captureresistant_organizations_what_why_and_how.jpg"
+  },
+  {
+    "id": "closing_ceremony_and_bounty_winners",
+    "name": "Closing Ceremony, and bounty winners",
+    "description": "Closing Ceremony,",
+    "start": "2023-09-17T14:30:00-05:00",
+    "end": "2023-09-17T16:00:00-05:00",
+    "stageId": "east_room__main_",
     "speakers": [],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/lunch_break.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/closing_ceremony_and_bounty_winners.jpg"
   },
   {
-    "id": "making_or_breaking_the_stablecoin_market",
-    "name": "Making or Breaking the Stablecoin Market",
-    "description": "The rise of stablecoins has presented a unique set of opportunities and challenges. Nadiem’s discussion will explore the important, yet often overlooked, role of intermediaries in the decentralized systems of stablecoin distribution, focusing on their impact on network architecture, market efficiency, and overall adoption.",
-    "start": 1694271600000,
-    "end": 1694272800000,
-    "stageId": "mainstage",
-    "speakers": [{ "id": "nadiem_sissouno", "name": "Nadiem Sissouno", "bio": "No description", "eventId": "funding_the_commons_berlin_2023" }],
+    "id": "coinflow__web3_payments",
+    "name": "Coinflow - Web3 Payments",
+    "description": "NEED",
+    "start": "2023-09-17T11:00:00-05:00",
+    "end": "2023-09-17T11:30:00-05:00",
+    "stageId": "east_room__main_",
+    "speakers": [{ "id": "daniel_lev", "name": "Daniel Lev", "bio": null, "eventId": "ethchicago", "photo": "" }],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/making_or_breaking_the_stablecoin_market.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/coinflow__web3_payments.jpg"
   },
   {
-    "id": "new_types_of_partnerships_between_civil_society_and_governments_through_open_social_innovation",
-    "name": "New types of partnerships between civil society and governments through Open Social Innovation",
-    "description": "Current societal challenges require new types of partnerships between politics, civil society and business. But effective collaboration is often hard to achieve. This talk will be about how multi- and cross-sectoral stakeholder collaboration can be orchestrated by sharing learnings from recent Open Social Innovation processes",
-    "start": 1694250000000,
-    "end": 1694251200000,
-    "stageId": "mainstage",
+    "id": "contain_your_bytecode_the_evm_object_format",
+    "name": "Contain your Bytecode: The EVM Object Format",
+    "description": "Talk: 15 or 30 minutes: organizer's call.\r\nNeeded: Projecter w/ HDMI Input.  Could do it off of PDF slides if needed.\r\n\r\nDanno Ferrin will be speaking\r\nEthereum Core Dev since 2018, working primarily on the EVM implementation for Hyperledger Besu.  Also part of the working group that is delivering the EF's Team Ipsilon' vision of EOF.\r\n\r\nThe EVM Object Format is a container format for the existing EVM architecture that provides  the needed structure to provide several long desired improvements to the EVM seen in other VM frameworks (such as subroutines and linear transpiration) while removing problematic features such as code observability and gas schedule incompatibility. This talk will provide byte-code level examples of major aspects of the code. EOF is targeting release in a hard fork after Dencun.\r\n\r\nThe intent is for a standard talk.  Beginning with the motivations and aspirations of what EOF will provide, with some concrete examples of how the current EVM bytecode is insufficient.  Then the specific changes will be discussed, including details.  The Solidity and Vyper implementations are progressing so there will likely be a section where the resulting bytecode from a similar set of source files is compared.  Q&A will be addressed both during the talk and aat the end.",
+    "start": "2023-09-16T14:30:00-05:00",
+    "end": "2023-09-16T15:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "danno_ferrin", "name": "Danno Ferrin", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/contain_your_bytecode_the_evm_object_format.jpg"
+  },
+  {
+    "id": "creating_an_inviting_uiux_for_web3_product",
+    "name": "Creating an Inviting UI/UX for Web3 Product",
+    "description": "We will go through tools such as Figma, TailwindCSS, antD etc. to help you creating an inviting UI/UX for your hackathon product.",
+    "start": "2023-09-16T09:00:00-05:00",
+    "end": "2023-09-16T10:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
     "speakers": [
       {
-        "id": "philipp_von_der_wippel",
-        "name": "Philipp von der Wippel\n",
-        "bio": "Project Together",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "vonderwippel",
-        "photo": "https://pbs.twimg.com/profile_images/1324410972606468097/Be2DfahN_400x400.jpg"
+        "id": "lucy_qiu",
+        "name": "Lucy Qiu",
+        "bio": "Full-stack engineer with previous experience at Goldman Sachs and Manta Network. Winner of multiple hackathon prizes. Background in computer science and UI/UX design. Expertise in community building.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/aec7ff29947ad444e23b9c9c768284da_b1mBTsb.jpg"
       }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/new_types_of_partnerships_between_civil_society_and_governments_through_open_social_innovation.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/creating_an_inviting_uiux_for_web3_product.jpg"
   },
   {
-    "id": "octant_and_beyond_ideas_for_regenerative_web3_selffunding",
-    "name": "Octant and beyond: ideas for regenerative web3 self-funding",
-    "description": "After a brief presentation of Octant I will discuss ideas how we can mobilize more regenerative funding for public goods with Octant-like designs.",
-    "start": 1694272800000,
-    "end": 1694274000000,
-    "stageId": "mainstage",
-    "speakers": [{ "id": "julian_zawistowski", "name": "Julian Zawistowski", "bio": "Golem", "eventId": "funding_the_commons_berlin_2023" }],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/octant_and_beyond_ideas_for_regenerative_web3_selffunding.jpg"
-  },
-  {
-    "id": "open_source_all_things",
-    "name": "Open source all things",
-    "description": "Open-source is a foundational aspect of public goods, and should not be an afterthought. In this talk, I'll share our experience of building Brave Wallet as a free and open-source project, and explore how open-source isn't just a buzzword but a key ingredient in making public goods fair and resilient.",
-    "start": 1694263800000,
-    "end": 1694265000000,
-    "stageId": "mainstage",
+    "id": "crypto_investment_research_due_diligence_in_a_new_paradigm",
+    "name": "Crypto Investment Research: Due Diligence in a New Paradigm",
+    "description": "Crypto is a completely new asset class, unlike anything we've ever seen before. With that comes a completely different investment and research approach. Discover the research methods that are unique to this digital frontier.",
+    "start": "2023-09-17T13:15:00-05:00",
+    "end": "2023-09-17T13:45:00-05:00",
+    "stageId": "east_room__main_",
     "speakers": [
       {
-        "id": "anirudha_bose",
-        "name": "Anirudha Bose",
-        "bio": "Brave",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@onybose",
-        "photo": "https://pbs.twimg.com/profile_images/1602308924686094336/IMrRX2ac_400x400.jpg"
+        "id": "ren_yu_kong",
+        "name": "Ren Yu Kong",
+        "bio": "Ren is a research analyst at Blockworks Research. He spends his day deep in the weeds of DeFi and infrastructure while building out an institutional grade crypto research platform. Prior to this, he worked at several crypto hedge funds focusing on DeFi opportunities.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Ren_Headshot_Oyxb82x.jpg"
       }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/open_source_all_things.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/crypto_investment_research_due_diligence_in_a_new_paradigm.jpg"
   },
   {
-    "id": "opening_keynote",
-    "name": "Opening keynote",
-    "description": "",
-    "start": 1694244600000,
-    "end": 1694245200000,
-    "stageId": "mainstage",
-    "speakers": [
-      { "id": "david_casey", "name": "David Casey", "bio": "Protocol Labs/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
-    ],
+    "id": "crypto_payments_state_of_the_global_payment_industry",
+    "name": "Crypto Payments- State of the global payment industry",
+    "description": "Learn about the current and future state of crypto payments from a leader in the space, Brent Traidman, head of software sales at Coinbase. Coinbase is a leading provider of global payments for businesses, non profits, and Web3 organizations. Coinbase Pay and Coinbase Commerce allow businesses and organizations to seemlessly accept crypto for donations, invoices, eCommerce, and more! Learn about the future of payments, as well as industry trends and real life utility.",
+    "start": "2023-09-15T14:00:00-05:00",
+    "end": "2023-09-15T14:30:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "brent_traidman", "name": "Brent Traidman", "bio": null, "eventId": "ethchicago", "photo": "" }],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/opening_keynote.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/crypto_payments_state_of_the_global_payment_industry.jpg"
   },
   {
-    "id": "public_goods_for_advancing_the_field_of_token_engineering",
-    "name": "Public Goods for Advancing the Field of Token Engineering",
-    "description": "Education is a positive sum game. TE Academy has attracted more than 3,000 students to its TE Fundamentals education program focused on designing, verifying, and optimizing token-based systems. Token engineering is a new, crypto-native domain in its own right. This talk is about how we structure our program, how we've built our community, our vision for education as a public good, and how we apply incentive design to our student community.\n",
-    "start": 1694261400000,
-    "end": 1694262600000,
-    "stageId": "mainstage",
-    "speakers": [
-      { "id": "angela_kreitenweis", "name": "Angela Kreitenweis", "bio": "TE Academy, Founder", "eventId": "funding_the_commons_berlin_2023" }
-    ],
+    "id": "death_is_a_business_preserving_spirituality_in_web3__music_experience",
+    "name": "Death Is A Business Preserving Spirituality in Web3 ( Music Experience)",
+    "description": "How are you connected to spirit? As we enter this web3 dimension ETH Chicago attendees  are invited to engage with a spiritual musical experience.",
+    "start": "2023-09-17T12:30:00-05:00",
+    "end": "2023-09-17T13:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "sonia_erika", "name": "Sonia Erika", "bio": null, "eventId": "ethchicago", "photo": "" }],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/public_goods_for_advancing_the_field_of_token_engineering.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/death_is_a_business_preserving_spirituality_in_web3__music_experience.jpg"
   },
   {
-    "id": "public_goods_hackathon_announcement",
-    "name": "Public Goods Hackathon Announcement",
-    "description": "",
-    "start": 1694260800000,
-    "end": 1694261400000,
-    "stageId": "mainstage",
-    "speakers": [
-      { "id": "david_casey", "name": "David Casey", "bio": "Protocol Labs/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/public_goods_hackathon_announcement.jpg"
-  },
-  {
-    "id": "putting_the_design_in_mechanism_design_tracing_the_evolution_of_economics_as_a_design_language",
-    "name": "Putting the \"design\" in mechanism design: tracing the evolution of economics as a design language. ",
-    "description": "The digital world increasingly requires us to design \"economic engines\": computational abstractions that find optimal ways allocate resources. This talk traces the origins of \"economic engineering\" and delineates the directions in which economics has to evolve to become a design language, and conversely, how engineers can adopt economic concepts in their design work.",
-    "start": 1694254800000,
-    "end": 1694256000000,
-    "stageId": "mainstage",
+    "id": "decentralized_wireless_networks",
+    "name": "Decentralized Wireless Networks",
+    "description": "Russell From - Hexagon Wireless: a decentralized wireless (DeWi) network using NFTs to build innovative mobile hybrid networks.",
+    "start": "2023-09-16T12:00:00-05:00",
+    "end": "2023-09-16T12:30:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
     "speakers": [
       {
-        "id": "oliver_beige",
-        "name": "Oliver Beige",
-        "bio": "Polycentric",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@oliverbeige",
-        "photo": "https://pbs.twimg.com/profile_images/1698304016155856896/c7iW_vUb_400x400.jpg"
-      }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/putting_the_design_in_mechanism_design_tracing_the_evolution_of_economics_as_a_design_language.jpg"
-  },
-  {
-    "id": "refunding_the_commons",
-    "name": "Refunding the Commons?",
-    "description": "In the course of his multi-year survey of applied cryptographic networks, Wassim has been reviewing efforts to use novel technological scaffolds to build organizations, institutions, and community infrastructure in the virtual realm. In this conversation, Beth McCarthy and Wassim will discuss case studies exploring the past, present, and possible futures of protocols, DAOs, public goods, decentralised communities, and the commons.",
-    "start": 1694252400000,
-    "end": 1694253600000,
-    "stageId": "mainstage",
-    "speakers": [
-      {
-        "id": "wassim_alsindi",
-        "name": "Wassim Alsindi",
-        "bio": "0xSalon, MIT Computational Law Report",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@WassimAlsindi",
-        "photo": "https://pbs.twimg.com/profile_images/1678510714594394116/i7Jpe1EC_400x400.jpg"
+        "id": "cullah",
+        "name": "Cullah",
+        "bio": "https://cullah.com/epk",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/84138847_10158056861966663_1087440755334578176_n_UO854H5.jpg"
       },
-      { "id": "beth_mccarthy", "name": "Beth McCarthy", "bio": "Curve Labs, Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      { "id": "russell_from", "name": "Russell From", "bio": null, "eventId": "ethchicago", "photo": "" },
+      { "id": "joe_petrungaro", "name": "Joe Petrungaro", "bio": null, "eventId": "ethchicago", "photo": "" }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/refunding_the_commons.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/decentralized_wireless_networks.jpg"
   },
   {
-    "id": "retroactive_public_goods_funding_2_years_in",
-    "name": "Retroactive Public Goods Funding: 2 years in",
-    "description": "I will share about Retroactive Public Goods Funding, what we learned in running 2 rounds of RetroPGF at Optimism, and what's next on our journey to summon Ether's Phoenix ",
-    "start": 1694247000000,
-    "end": 1694248200000,
-    "stageId": "mainstage",
+    "id": "defi_mev_auctions_and_what_we_need_to_do_for_defi_to_compete_with_cefi",
+    "name": "DeFi, MEV auctions, and what we need to do for DeFi to *compete* with CeFi",
+    "description": "DeFi, MEV auctions, and what we need to do for DeFi to *compete* with CeFi",
+    "start": "2023-09-15T15:00:00-05:00",
+    "end": "2023-09-15T15:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "uri_klarman", "name": "Uri Klarman", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/defi_mev_auctions_and_what_we_need_to_do_for_defi_to_compete_with_cefi.jpg"
+  },
+  {
+    "id": "driving_mass_adoption_with_account_abstraction_and_smart_accounts",
+    "name": "Driving mass adoption with account abstraction and smart accounts",
+    "description": "Smart accounts and account abstraction are the key to unlocking mass crypto adoption. Together, they enable robust onchain security and a great user experience. In this talk, you’ll learn how smart accounts and account abstraction are catalyzing a new wave of onchain activities, and what comes next.",
+    "start": "2023-09-16T13:00:00-05:00",
+    "end": "2023-09-16T13:30:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "ittai_svidler", "name": "Ittai Svidler", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/driving_mass_adoption_with_account_abstraction_and_smart_accounts.jpg"
+  },
+  {
+    "id": "empowering_afrofuturism_and_black_nerd_culture_content_growth_storytelling_in_the_age_of_web__ai",
+    "name": "Empowering Afrofuturism and Black Nerd Culture: Content Growth Storytelling in the Age of Web & AI",
+    "description": "1",
+    "start": "2023-09-16T15:00:00-05:00",
+    "end": "2023-09-16T16:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "aaron_carl_lewis", "name": "Aaron \"Carl\" Lewis", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/empowering_afrofuturism_and_black_nerd_culture_content_growth_storytelling_in_the_age_of_web__ai.jpg"
+  },
+  {
+    "id": "ercx_fast_checking_of_erc_standards_and_beyond",
+    "name": "ERCx, Fast Checking of ERC standards and Beyond",
+    "description": "We will need standard equipment for a talk. If tables are present in the room, we may have a hands-on moment where attendees can experiment with the tool.\r\n\r\nYlies Falcone will run the session.\r\n\r\nERCx (https://ercx.runtimeverification.com) is a tool suite that helps assess the behavior of smart contracts. ERCx checks the conformance of a contract to ERC (Ethereum Request for Comments) standards as well as additional desirable security properties. ERCx aims to help the Ethereum community by providing (i) contract developers with pre-deployment conformance and property checks and (ii) token investors with easy-to-run and fast quality assessment.\r\n\r\nIn this presentation, we show developers how ERCx works and how they can use it to create new tokens conformant with existing standards. Avoid repeating past mistakes and add an extra security layer when it comes to avoiding potential future exploits. We will also overview the design choices and the future of ERCx.",
+    "start": "2023-09-16T11:30:00-05:00",
+    "end": "2023-09-16T12:00:00-05:00",
+    "stageId": "east_room__main_",
     "speakers": [
       {
-        "id": "jonas_seiferth",
-        "name": "Jonas Seiferth",
-        "bio": "OP Labs",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@jonassft",
-        "photo": "https://pbs.twimg.com/profile_images/1637604783996428289/Qcbg0CqT_400x400.jpg"
+        "id": "ylis_falcone",
+        "name": "Yliès Falcone",
+        "bio": "Ylies Falcone is passionate about designing, implementing, integrating, and delivering methods and tools that help guarantee programs are safe and secure. He has more than 15 years of contributions to formal methods and software engineering, co-authoring more than 100 research papers in conferences, journals, and books. He enjoys solving problems, turning ideas into solutions, and mentoring engineers. Yliès also holds an associate Professor position at Univ. Grenoble Alpes (France).",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/CQ0A8875_id_BKxWklC.jpg"
       }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/retroactive_public_goods_funding_2_years_in.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/ercx_fast_checking_of_erc_standards_and_beyond.jpg"
   },
   {
-    "id": "tbd",
-    "name": "TBD",
-    "description": "",
-    "start": 1694266200000,
-    "end": 1694267400000,
-    "stageId": "mainstage",
-    "speakers": [
-      { "id": "eleftherios_diakomichalis", "name": "Eleftherios Diakomichalis", "bio": "Drips", "eventId": "funding_the_commons_berlin_2023" }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/tbd.jpg"
-  },
-  {
-    "id": "unpaid_position_building_a_better_and_more_sustainable_future_for_cultural_public_goods",
-    "name": "Unpaid position: Building a better and more sustainable future for cultural public goods",
-    "description": "",
-    "start": 1694265000000,
-    "end": 1694266200000,
-    "stageId": "mainstage",
+    "id": "ethereum_consnesus_in_2024",
+    "name": "Ethereum Consnesus in 2024",
+    "description": "The evolutionary journey of Ethereum consensus layer has been marked by significant advancements, spanning from its inception through stages like Altair, Bellatrix (merge), and Capella (withdrawal). Anticipating the year 2024, our focus shifts to forthcoming developments. What's coming in 2024?",
+    "start": "2023-09-16T13:30:00-05:00",
+    "end": "2023-09-16T13:50:00-05:00",
+    "stageId": "east_room__main_",
     "speakers": [
       {
-        "id": "mara_paula_fernandez",
-        "name": "María Paula Fernandez",
-        "bio": "JPG Protocol",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@mptherealmvp",
-        "photo": "https://pbs.twimg.com/profile_images/1691792912885948416/DCDgdfND_400x400.jpg"
-      },
-      { "id": "beth_mccarthy", "name": "Beth McCarthy", "bio": "Curve Labs, Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
-    ],
-    "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/unpaid_position_building_a_better_and_more_sustainable_future_for_cultural_public_goods.jpg"
-  },
-  {
-    "id": "web3_work_the_contributors_perspective",
-    "name": "Web3 Work: The Contributor’s Perspective ",
-    "description": "In this talk we’ll present the findings from our 6-month long research project of labor conditions in Web3 and DAOs, including insights from 38 DAO contributors representing >50 DAOs. We’ll discuss the present and futures of work through DAOs as they emerged from our ethnography and reflect on key challenges that organizations need to face to improve working conditions for contributors at the ecosystem-level.",
-    "start": 1694251200000,
-    "end": 1694252400000,
-    "stageId": "mainstage",
-    "speakers": [
-      {
-        "id": "laura_lotti",
-        "name": "Laura Lotti\n",
-        "bio": "Other Internet",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "lottiland",
-        "photo": "https://pbs.twimg.com/profile_images/540370794375680000/7j_egt4I_400x400.jpeg"
-      },
-      {
-        "id": "nick_houde",
-        "name": "Nick Houde",
-        "bio": "Other Internet",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "@nckhde",
-        "photo": "https://pbs.twimg.com/profile_images/1599420931016908803/YWN-Nx5c_400x400.jpg"
-      },
-      {
-        "id": "tara_merk",
-        "name": "Tara Merk",
-        "bio": "Other Internet",
-        "eventId": "funding_the_commons_berlin_2023",
-        "twitter": "mpg_dd",
-        "photo": "https://pbs.twimg.com/profile_images/1454390153666043905/sgEGWhlJ_400x400.jpg"
+        "id": "terence",
+        "name": "terence",
+        "bio": "Your favorite core dev",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Fje6QXvUAAE24Ap_AVT6MmB.jpg"
       }
     ],
     "playbackId": "",
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/web3_work_the_contributors_perspective.jpg"
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/ethereum_consnesus_in_2024.jpg"
+  },
+  {
+    "id": "every_artwork_has_a_story_nfts_memoirs_and_beyond",
+    "name": "Every Artwork Has a Story: NFTs, Memoirs, and Beyond",
+    "description": "Description of the event: NFTs have been a part of the Ethereum ecosystem since 2017 when punks and kitties began to populate the blockchain. Since then, we have built a digital art market that spans style, genre, geography, language, and more. Not only has the NFT ecosystem proven the value of digital art, it has also challenged the traditional art market, and in doing so found a place for digital art within the upper echelons of the art world.\r\n\r\n\r\nBut in a world where there are millions (and one day trillions) of NFTs, how do we capture the history, the cultural significance, the very story of each piece of digital art?\r\n\r\n\r\nMint Gold Dust has always cared about the stories behind NFTs, which is why we pioneered the memoir feature, which is a piece of text that accompanies an artwork. But in our recently launched v2, we take it one step further. We preserve that memoir on the blockchain and tie it to the NFT artwork. For the archeologists of the future, NFTs minted on our platform will not only tell the visual story of our times, but also have a written counterpart onchain. \r\n\r\n\r\nWe believe that this technology will help creators to preserve history and document the digital renaissance that we are witnessing before us today.",
+    "start": "2023-09-16T17:30:00-05:00",
+    "end": "2023-09-16T18:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "virginia_valenzuela", "name": "Virginia Valenzuela", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/every_artwork_has_a_story_nfts_memoirs_and_beyond.jpg"
+  },
+  {
+    "id": "hackathon_start_and_bounty_announcements",
+    "name": "Hackathon Start and Bounty Announcements",
+    "description": "Announce the start of the hackathon, TAIKAI registration, and Bounties",
+    "start": "2023-09-15T15:00:00-05:00",
+    "end": "2023-09-15T15:15:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "james_he",
+        "name": "James He",
+        "bio": "Testing this https://twitter.com/jameshe_eth",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/hackathon_start_and_bounty_announcements.jpg"
+  },
+  {
+    "id": "hackathon_submission_support",
+    "name": "Hackathon Submission support",
+    "description": "Table for helping with submissions",
+    "start": "2023-09-17T09:00:00-05:00",
+    "end": "2023-09-17T10:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "james_he",
+        "name": "James He",
+        "bio": "Testing this https://twitter.com/jameshe_eth",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/hackathon_submission_support.jpg"
+  },
+  {
+    "id": "hackathon_team_building_2",
+    "name": "Hackathon Team Building 2",
+    "description": "networking event to find teams, connect with teams",
+    "start": "2023-09-15T16:00:00-05:00",
+    "end": "2023-09-15T16:30:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/hackathon_team_building_2.jpg"
+  },
+  {
+    "id": "hardware_wallets_and_selfcustody__how_to_become_a_crypto_jason_bourne",
+    "name": "(Hardware Wallets and Self-Custody) - How to Become A Crypto Jason Bourne",
+    "description": "You may have heard that crypto gives you a \"Swiss bank account in your pocket\" or \"not your keys, not your coins\" but the reality is that these properties are enabled by self-custody of digital assets, which can be a daunting prospect for many people. \r\n\r\nThe goal of this talk is to focus on what you \"need to know\" to do your own self-custody, give an overview of available tools, and show how get started using DeFi applications. \r\n\r\nEnjoy the full benefits of digital assets by creating a secure setup for your non-sovereign stores of value like a Crypto Jason Bourne.",
+    "start": "2023-09-17T13:00:00-05:00",
+    "end": "2023-09-17T13:15:00-05:00",
+    "stageId": "east_room__main_",
+    "speakers": [
+      {
+        "id": "jack_miller",
+        "name": "jack miller",
+        "bio": "Partner at Cosimo Capital\r\n\r\nhttps://cosimo.fund",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/eunB_1DC_400x400_3_VXicrVp.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/hardware_wallets_and_selfcustody__how_to_become_a_crypto_jason_bourne.jpg"
+  },
+  {
+    "id": "hiring_in_web3",
+    "name": "Hiring in Web3",
+    "description": "Hiring in Web3.0",
+    "start": "2023-09-16T12:30:00-05:00",
+    "end": "2023-09-16T13:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      { "id": "dr_tammy_francis", "name": "Dr. Tammy Francis", "bio": null, "eventId": "ethchicago", "photo": "" },
+      {
+        "id": "emily_landon_the_crypto_recruiter",
+        "name": "Emily Landon The Crypto Recruiter",
+        "bio": "Emily Landon, better known as 'The Crypto Recruiter' has an intense passion for the blockchain, gaming, AI, compliance, and crypto world and helping people get jobs in the space. With 7 years of recruitment experience under her belt, including 4 years in the thrilling web3 ecosystem, She’s orchestrated the perfect matches for over 275 talented individuals in crypto jobs.\r\n\r\nShe’s not your average recruiter; She’s on a mission to shape and grow cultures, not just teams and help people find the RIGHT fit, not just any old job. Her style? Think positive, bubbly, and refreshingly honest. You'll always get the unfiltered truth and transparent direction.\r\n\r\nWhy did she dive into the world of crypto recruiting? It was a New Year's resolution that transformed into a 20 person team, 36k followers and over a 120k candidates reach. She firmly believes that recruiting can be an enjoyable journey when paired with the right recruiter. Quality over quantity she’s here to help you discover remarkable opportunities, not just any old job.\r\n\r\nReady to explore new opportunities? Connect with her on LinkedIn: http://linkedin.com/in/thecryptorecruiter",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/IMG_2344_TuEd305.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/hiring_in_web3.jpg"
+  },
+  {
+    "id": "how_to_be_an_internetartist",
+    "name": "How to be an Internet.artist",
+    "description": "Learn to broadcast your creative energy to the entire web, with Megan @trogs Troglio.\r\nThis presentation examines how to develop your source material & amplify communications with technology.",
+    "start": "2023-09-16T16:30:00-05:00",
+    "end": "2023-09-16T17:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "megan_trogs_troglio",
+        "name": "Megan @trogs Troglio",
+        "bio": "internet.Artist",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/trogsheadshot_mMyg33G.jpg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/how_to_be_an_internetartist.jpg"
+  },
+  {
+    "id": "how_to_win_every_hackathon",
+    "name": "How to WIN Every Hackathon",
+    "description": "In this talk, Tippi Fifestarr, Events Lead for DevRel University, will share a powerful framework for winning Hackathon teams and projects. WIN is an acronym for 3 steps to success in any hackathon. The idea digs into what else you can win from a hackathon, and how this can shift your career.",
+    "start": "2023-09-15T15:30:00-05:00",
+    "end": "2023-09-15T15:55:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "tippi_fifestarr_devrel_uni",
+        "name": "Tippi Fifestarr (DevRel Uni)",
+        "bio": "DevRel Uni empowers individuals to break into developer relations, while also improving the overall developer experience for companies.\r\n\r\nWe aim to provide top-quality education and training programs that equip our students with the skills, knowledge, and experiences they need to excel in this growing field, while also helping companies foster stronger relationships with their developer communities.\r\n\r\nTippi is a highly enthusiastic and creative developer relations professional with a strong background in the Ethereum, Polygon, Filecoin & Chainlink ecosystem. Experience in mentoring and contributing to decentralized projects, passionate about fostering community engagement, and skilled in organizing events and workshops. Adept at building and maintaining relationships with developers and key community members, globally.  \"I want to help the next generation of developers succeed in building transformative decentralized applications.\"",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/00222-630646407_IZqbj7d.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/how_to_win_every_hackathon.jpg"
+  },
+  {
+    "id": "legal_issues_for_artists_and_creators",
+    "name": "Legal Issues for Artists and Creators",
+    "description": "1",
+    "start": "2023-09-15T16:30:00-05:00",
+    "end": "2023-09-15T17:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "daniel_rosenbaum", "name": "Daniel Rosenbaum", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/legal_issues_for_artists_and_creators.jpg"
+  },
+  {
+    "id": "liquidity_unleashed_a_researchdriven_analysis_of_liquid_staking_derivatives_and_bank_run_risks_interactive_talk",
+    "name": "Liquidity unleashed: A research-driven analysis of liquid staking derivatives and bank run risks (interactive talk)",
+    "description": "LSDs are the #1 most popular DeFi narrative in 2023. This interactive presentation aims to give the participants an in-depth yet intuitive understanding about the LSD space, and equip them with practical tools for their own research analysis of LSD tokens. \r\n\r\nThe talk would talk around 30 minutes, plus minus 5 minutes depending on feedback from participants. I will need basic audio and video support for the presentation e.g. a projector/LED screen\r\n\r\nDraft talk structure:\r\n\r\nIntroduction\r\n\r\n- Primer on how Ethereum staking works\r\n- How did the Merge and Shapella upgrade change ETH staking\r\n- An outlook of growth in the LSD space with recent 2023 data\r\n\r\nEconomics of LSD protocols \r\n\r\n- LSDs as (shadow) banks\r\n- Supply and demand analysis for LSDs, node operators as intermediate suppliers\r\n- Liquidity analysis for LSDs: queues\r\n- Benefits: Where does LSD liquidity come from?\r\n- Risk analysis: how liquid are LSDs really? withdrawl queues and DEX vs protocol liquidity",
+    "start": "2023-09-17T10:00:00-05:00",
+    "end": "2023-09-17T10:30:00-05:00",
+    "stageId": "east_room__main_",
+    "speakers": [{ "id": "mingxuan_he", "name": "Mingxuan He", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/liquidity_unleashed_a_researchdriven_analysis_of_liquid_staking_derivatives_and_bank_run_risks_interactive_talk.jpg"
+  },
+  {
+    "id": "maxwell_degregorio__milken_institute__the_digital_assets_market_structure_bill",
+    "name": "Maxwell DeGregorio | Milken Institute | The Digital Assets Market Structure Bill",
+    "description": "Placeholder",
+    "start": "2023-09-17T09:40:00-05:00",
+    "end": "2023-09-17T10:10:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "maxwell_degregorio", "name": "Maxwell DeGregorio", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/maxwell_degregorio__milken_institute__the_digital_assets_market_structure_bill.jpg"
+  },
+  {
+    "id": "office_hours_1",
+    "name": "Office Hours 1",
+    "description": "Genius Bar Office Hours",
+    "start": "2023-09-15T20:00:00-05:00",
+    "end": "2023-09-15T21:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/office_hours_1.jpg"
+  },
+  {
+    "id": "office_hours_2",
+    "name": "Office Hours 2",
+    "description": "Genius Bar office hours for hackers",
+    "start": "2023-09-16T13:30:00-05:00",
+    "end": "2023-09-16T14:30:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/office_hours_2.jpg"
+  },
+  {
+    "id": "office_hours_3",
+    "name": "Office Hours 3",
+    "description": "Genius Bar Office Hours",
+    "start": "2023-09-16T17:00:00-05:00",
+    "end": "2023-09-16T18:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/office_hours_3.jpg"
+  },
+  {
+    "id": "office_hours_4",
+    "name": "Office Hours 4",
+    "description": "Genius Bar Office Hours",
+    "start": "2023-09-16T20:00:00-05:00",
+    "end": "2023-09-16T21:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/office_hours_4.jpg"
+  },
+  {
+    "id": "openux_office_hours",
+    "name": "OpenUX Office Hours",
+    "description": "OpenUX will provide open office hours to support high quality UX from builders in the ETH Chicago hackathon",
+    "start": "2023-09-16T11:00:00-05:00",
+    "end": "2023-09-16T12:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "openux",
+        "name": "OpenUX",
+        "bio": "Henry is a co-founder of OpenUX, a collective of experienced UX researchers empowering teams across the entire Web3 space to increase their impact. We equip builders with context, meaning, and insight by contributing expertise and promoting an ecosystem of open source user research. We aim to overcome the siloed use of UX best practices by building in the open and encouraging collaboration and sharing of insights.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Group_23_0NHWMTX.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/openux_office_hours.jpg"
+  },
+  {
+    "id": "price_oracles_with_a_hardhatfoundry_hybrid",
+    "name": "Price Oracles with a Hardhat/Foundry Hybrid",
+    "description": "Learn how to work with API3 price feeds using both the hardhat and foundry framework toolset.",
+    "start": "2023-09-15T19:00:00-05:00",
+    "end": "2023-09-15T20:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+      {
+        "id": "billy_c_billyjitsu",
+        "name": "Billy C (Billyjitsu)",
+        "bio": "Smart contract Developer and Crypto Enthusiast    |   \r\nAPI3 - Developer Relations    |    \r\nDeveloper DAO - Community Manger and hackathon lead",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Billy_Campana_ODRBbTa.jpg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/price_oracles_with_a_hardhatfoundry_hybrid.jpg"
+  },
+  {
+    "id": "prioritizing_purpose_a_strategic_blueprint_for_building_valuebased_daos",
+    "name": "Prioritizing Purpose: A Strategic Blueprint for Building Value-Based DAOs",
+    "description": "We’ll explore our philosophy, process, and tech stack behind building a 501c3 nonprofit DAO. Sharing learnings and connecting the dots between how DAOs can revolutionize the philanthropic and nonprofit sectors. Including a full case study of SpiritDAO, the first on-chain spiritual community grounded in reimagined first principles of meaning and value.",
+    "start": "2023-09-15T16:00:00-05:00",
+    "end": "2023-09-15T16:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "ron_rivers", "name": "Ron Rivers", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/prioritizing_purpose_a_strategic_blueprint_for_building_valuebased_daos.jpg"
+  },
+  {
+    "id": "quantitative_trading_strategies__finding_an_edge",
+    "name": "Quantitative Trading Strategies -- Finding an edge",
+    "description": "Discussing various ways users can find an edge (and make $!) trading crypto.  Pitfalls to avoid, unique insights into crypto specific markets and themes, and realistic case studies.  All from a veteran trader (10+ years experience across a variety of markets).",
+    "start": "2023-09-16T16:30:00-05:00",
+    "end": "2023-09-16T17:00:00-05:00",
+    "stageId": "east_room__main_",
+    "speakers": [
+      {
+        "id": "chris_barnes",
+        "name": "Chris Barnes",
+        "bio": "CEO of crypto prop trading firm.  Passionate about extracting value from markets.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/goldencb_383jBLE.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/quantitative_trading_strategies__finding_an_edge.jpg"
+  },
+  {
+    "id": "rescue_or_destroy",
+    "name": "Rescue or Destroy",
+    "description": "Art lovers and enthusiasts are invited to embark on a journey of self-discovery and exploration. If you find yourself captivated by the allure of art, spending endless hours admiring masterpieces from afar, and eagerly anticipating art shows and open studios, then \"Rescue or Destroy\" is the event yoååu've been waiting for.\r\n\r\nExperience the thrill of Rescue or Destroy as art takes center stage in a unique and exhilarating concept. Attendees will be faced with a transformative decision - the fate of the art is in their hands. Each piece showcased during the event will confront one of tow possible destinies.\r\n\r\nFirst, Passionate and decisive art lovers have the opportunity to take ownership of their favorite pieces by purchasing them directly from the event. Embrace the power to claim the object of your affection and bring it home to grace your walls, becoming a part of your daily life.\r\n\r\nSecondly, the evening holds a more daring and dramatic outcome - certain artworks will meet their end. Witness the spectacle of a large, bearded, bald man with an ax, as he skillfully transforms the pieces into hundreds of tiny fragments. It's a captivating moment that underlines the significance of every decision made.\r\n\"This is the antidote to indecision,\" says the event organizer, \"I've seen it firsthand: She who hesitates is heartbroken.\" At \"Rescue or Destroy,\" there's no room for vacillation. Embrace your love for art and participate actively in its destiny or let it burn to the ground and make way for the new.\r\n\r\n\"Rescue or Destroy\" encourages attendees to take control of their passions, embracing a sense of agency in the art world. Don't let others dictate the fate of the pieces you adore. This event celebrates the joy of art, the thrill of ownership, and the courage to let go.",
+    "start": "2023-09-15T18:30:00-05:00",
+    "end": "2023-09-15T19:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "allen_vandever", "name": "Allen Vandever", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/rescue_or_destroy.jpg"
+  },
+  {
+    "id": "resourceoriented_programming_the_future_of_smart_contracts",
+    "name": "Resource-Oriented Programming: The Future of Smart Contracts",
+    "description": "Join Josh Hannan, a senior smart contract programmer on the Flow core team as he discusses a programming paradigm that gives smart contracts developers the best tools for building complex, secure, and powerful decentralized applications",
+    "start": "2023-09-16T15:30:00-05:00",
+    "end": "2023-09-16T16:00:00-05:00",
+    "stageId": "east_room__main_",
+    "speakers": [
+      {
+        "id": "joshua_hannan",
+        "name": "Joshua Hannan",
+        "bio": "Josh joined the Flow team in 2019 to help design the Cadence programming language and leads development on Cadence Smart Contracts development standards. Josh developed and maintains many important smart contracts in the Flow ecosystem such as the original NBA Top Shot contracts, the flow epoch smart contracts, and the FlowToken smart contract.\r\n\r\nJosh completed his B.Sc from Purdue University in Electrical and Computer Engineering in 2015.  Post-graduation, Josh worked in verification engineering for the Apple Mac performance team and for IBM server hardware.  In 2017, he co-founded Modular Inc.  At Modular, he helped write a standard library of Smart Contracts for Ethereum Development, including the first implementation of the Interactive ICO protocol.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/joshheadshot_fVtC7Xo.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/resourceoriented_programming_the_future_of_smart_contracts.jpg"
+  },
+  {
+    "id": "risk_control_and_audit_management_for_blockchain_technology",
+    "name": "Risk, Control, and Audit Management for Blockchain Technology",
+    "description": "Within the past few years auditing blockchain technology has become a key requirement and an asset within the crypto industry. The regulatory pressure for maintaining a mature risk and controls framework and having frequent inhouse audits over compliance with key requirements has become scrutinized and simply essential within the community. Lamentably, the crypto and blockchain communities are not too familiar with what a risk and controls framework is and how to perform an audit. Furthermore, not many are aware of core technology standards and global regulatory requirements as most of the attention has been over AML, sanction screening and transaction monitoring etc. while ignoring key Information Technology and Information Security standards. This workshop will walk the audience through the basics of risk and audit management, dive into what are some of the core IT and IS requirements for blockchain and crypto technology and also explore how to think about auditing internally before a regulatory examination.",
+    "start": "2023-09-15T14:30:00-05:00",
+    "end": "2023-09-15T15:30:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "taatiana_scripnic", "name": "Taatiana Scripnic", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/risk_control_and_audit_management_for_blockchain_technology.jpg"
+  },
+  {
+    "id": "sign_track_and_execute_your_contract",
+    "name": "Sign, track, and execute your contract",
+    "description": "the talk addresses the challenges posed by opaque and inaccessible contract templates and tokenomics in various projects and proposed a viable solution with EthSign TokenTable, a token ownership management platform that helps users execute, track and enforce distribution. This work is proven to be valuable, especially for early-staged founder thinking about future fundraising from renown investors.",
+    "start": "2023-09-16T16:00:00-05:00",
+    "end": "2023-09-16T16:30:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "lj_huang", "name": "LJ Huang", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/sign_track_and_execute_your_contract.jpg"
+  },
+  {
+    "id": "steth_is_the_reserve_currency_of_the_internet",
+    "name": "stETH is the reserve currency of the internet?",
+    "description": "I want to talk about stETH as the reserve currency of the internet. I am going to use the analogy that stETH will serve as the backbone of defi and eth settlement in the same way the treasury market does. I have plenty of images and analogies. Also, I will talk about how ETH staking percentages are going to be far higher than people expect and I may include examples of how eigenlayer will play a part in it.",
+    "start": "2023-09-16T18:00:00-05:00",
+    "end": "2023-09-16T18:15:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "luke_besser",
+        "name": "Luke Besser",
+        "bio": "I am co-founder and Manager of Cosimo Capital, a liquid token fund.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/zapper_WxEYecB.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/steth_is_the_reserve_currency_of_the_internet.jpg"
+  },
+  {
+    "id": "sunday__land_your_next_interview__hackathon_experience",
+    "name": "Sunday - Land Your Next Interview - Hackathon Experience",
+    "description": "a special workshop for hackathon participants on sunday (about translating their recent hackathon project into an updated CV, for finding a job)",
+    "start": "2023-09-17T13:00:00-05:00",
+    "end": "2023-09-17T13:30:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "emily_landon_the_crypto_recruiter",
+        "name": "Emily Landon The Crypto Recruiter",
+        "bio": "Emily Landon, better known as 'The Crypto Recruiter' has an intense passion for the blockchain, gaming, AI, compliance, and crypto world and helping people get jobs in the space. With 7 years of recruitment experience under her belt, including 4 years in the thrilling web3 ecosystem, She’s orchestrated the perfect matches for over 275 talented individuals in crypto jobs.\r\n\r\nShe’s not your average recruiter; She’s on a mission to shape and grow cultures, not just teams and help people find the RIGHT fit, not just any old job. Her style? Think positive, bubbly, and refreshingly honest. You'll always get the unfiltered truth and transparent direction.\r\n\r\nWhy did she dive into the world of crypto recruiting? It was a New Year's resolution that transformed into a 20 person team, 36k followers and over a 120k candidates reach. She firmly believes that recruiting can be an enjoyable journey when paired with the right recruiter. Quality over quantity she’s here to help you discover remarkable opportunities, not just any old job.\r\n\r\nReady to explore new opportunities? Connect with her on LinkedIn: http://linkedin.com/in/thecryptorecruiter",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/IMG_2344_TuEd305.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/sunday__land_your_next_interview__hackathon_experience.jpg"
+  },
+  {
+    "id": "taikai_tutorial_and_submissions",
+    "name": "TAIKAI tutorial and submissions",
+    "description": "how to use the taikai platform for submissions",
+    "start": "2023-09-16T15:00:00-05:00",
+    "end": "2023-09-16T16:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "james_he",
+        "name": "James He",
+        "bio": "Testing this https://twitter.com/jameshe_eth",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/taikai_tutorial_and_submissions.jpg"
+  },
+  {
+    "id": "team_building__emotional_intelligence_board_game_playtest",
+    "name": "Team Building - Emotional Intelligence Board Game Playtest",
+    "description": "Get to know each other through an emotional intelligence board game! We designed a bunch of cool ice-breaker games for you to play with one another :)",
+    "start": "2023-09-15T14:00:00-05:00",
+    "end": "2023-09-15T15:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "lucy_qiu",
+        "name": "Lucy Qiu",
+        "bio": "Full-stack engineer with previous experience at Goldman Sachs and Manta Network. Winner of multiple hackathon prizes. Background in computer science and UI/UX design. Expertise in community building.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/aec7ff29947ad444e23b9c9c768284da_b1mBTsb.jpg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/team_building__emotional_intelligence_board_game_playtest.jpg"
+  },
+  {
+    "id": "the_future_adoption_of_blockchain",
+    "name": "The Future Adoption of Blockchain",
+    "description": "Blockchain is an incredible tool that has applications across multiple industries.  This talk is aimed at providing a look at what industries are likely to adopt blockchain next and what that adoption might look like.",
+    "start": "2023-09-17T11:30:00-05:00",
+    "end": "2023-09-17T12:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "bobbie_rachford", "name": "Bobbie Rachford", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_future_adoption_of_blockchain.jpg"
+  },
+  {
+    "id": "the_future_of_web3_music_industry",
+    "name": "The Future of Web3 Music Industry",
+    "description": "The music industry is broken and corrupted. Let's Learn from industry leaders about the current state of the music industry and get a glimpse into its future. This panel will explore opportunities and challenges presented by decentralization and how it will disrupt the global music ecosystem.",
+    "start": "2023-09-15T17:00:00-05:00",
+    "end": "2023-09-15T17:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "xtinct",
+        "name": "XTincT",
+        "bio": "On-Chain Recording artist and creative director",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/1ed46c9c2a0b56b9a2d7ae306a835467_K5xFhkk.jpg"
+      },
+      {
+        "id": "cullah",
+        "name": "Cullah",
+        "bio": "https://cullah.com/epk",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/84138847_10158056861966663_1087440755334578176_n_UO854H5.jpg"
+      },
+      {
+        "id": "baiee",
+        "name": "Bai-ee",
+        "bio": "Founder of EditTrax NFT & Housepit CHI Records. Chicago House Dj, Producer and Creative Technologist",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/fd5e3bc8a9ee16ba27f1bf9e8c098971_OCVaBw8.jpg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_future_of_web3_music_industry.jpg"
+  },
+  {
+    "id": "the_multidisciplinary_web3_creativity__collaboration_panel",
+    "name": "The Multidisciplinary Web3: Creativity & Collaboration panel",
+    "description": "In this session we’ll discuss why blockchain technology has the powerful potential of furthering creativity in multidisciplinary digital art and beyond. Tokenization has equipped artists with the ability to create, authenticate, and distribute work using any digital or digitized medium. This fuel is the perfect catalyst for all artists, musicians, dancers, poets, actors, galleries, museums, curators, platforms, and even literary novel writers – to work together, without the overarching dominance of industries.\r\n\r\nYou will hear artists and innovators offer their personal insights on how the collaborative landscape of blockchain technology has led them to where they are now and what could be the possibilities of the future.",
+    "start": "2023-09-15T15:30:00-05:00",
+    "end": "2023-09-15T16:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "willea_zwey",
+        "name": "Willea Zwey",
+        "bio": "Willea Zwey is a multidisciplinary artist and musician based in Chicago. \r\nDrawing from her background in architecture, Willea’s artwork depicts otherworldly scenes with unconventional perspectives, surreal elements, and deep storytelling.\r\nSince her 2021 debut in the digital art world, Willea's distinctive styles have gained global recognition, with her artwork auctioned on platforms including Sotheby's and exhibited worldwide, including Times Square, New York, Tokyo, London, Dubai, and Hong Kong.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-07-04_at_7.01.57_PM_qXtWIzP.png"
+      },
+      { "id": "noxis", "name": "Noxis", "bio": null, "eventId": "ethchicago", "photo": "" },
+      { "id": "sho", "name": "Sho", "bio": null, "eventId": "ethchicago", "photo": "" }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_multidisciplinary_web3_creativity__collaboration_panel.jpg"
+  },
+  {
+    "id": "the_state_of_crosschain_communications",
+    "name": "The State of Cross-chain Communications",
+    "description": "Overview of bridges, rollups, shards, and other cross-chain systems. What exists, how do they work, who's full of shit, what's exciting, etc.",
+    "start": "2023-09-16T15:30:00-05:00",
+    "end": "2023-09-16T16:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [{ "id": "james_prestwich", "name": "James Prestwich", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_state_of_crosschain_communications.jpg"
+  },
+  {
+    "id": "the_verified_web_ai_creativity_and_ownership_in_a_nonfungible_world",
+    "name": "The Verified Web: AI, Creativity and Ownership in a Non-fungible World",
+    "description": "With the emergence of generative AI, the value of novel information has escalated exponentially. Determining the origin of information has become more significant, making verification necessary. Today, we explore the idea of \"The Verified Web\" and using  Non-Fungible Tokens (NFTs) as a way to establish ownership of verified data and information. By indexing data on-chain, the World Wide Web will be divided into verifiable and \"unverified\" segments.",
+    "start": "2023-09-16T16:00:00-05:00",
+    "end": "2023-09-16T16:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "metamonk",
+        "name": "metamonk",
+        "bio": "building the next web @ratlabs_",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/metamonk_mEXZmqI.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_verified_web_ai_creativity_and_ownership_in_a_nonfungible_world.jpg"
+  },
+  {
+    "id": "token_design_101",
+    "name": "Token Design 101",
+    "description": "How protocol founders should approach designing their token model. Lessons learned from helping multiple teams do this",
+    "start": "2023-09-16T10:30:00-05:00",
+    "end": "2023-09-16T11:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+      {
+        "id": "karim",
+        "name": "Karim",
+        "bio": "Token Design expert, advisor, and investor @ Outlier Ventures",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/milady_myiM53R.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/token_design_101.jpg"
+  },
+  {
+    "id": "tokenization_of_realworld_asset",
+    "name": "Tokenization of Real-world asset.",
+    "description": "Tokenization of Real-world asset.",
+    "start": "2023-09-16T13:00:00-05:00",
+    "end": "2023-09-16T13:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "rakesh_kumar", "name": "Rakesh Kumar", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/tokenization_of_realworld_asset.jpg"
+  },
+  {
+    "id": "uiux_in_web3__how_to_win_the_eth_hackathon_with_a_unique_design",
+    "name": "UI/UX in Web3 - How to Win the ETH Hackathon With a Unique Design",
+    "description": "The world has moved on to Web3, so why are we still using the same template inherited from Web2's corporate style? In this discussion, we will explore captivating UI/UX examples and delve into how a distinct aesthetic taste and design can truly create an impact. Perhaps most importantly, this design will establish the tone of your product from the outset, increasing the likelihood of a fulfilling development process. And, of course, we'll address how to embark on this journey using tools like Figma and TailwindCSS. After all, sometimes all you need is a compelling UI/UX design to sway the judges.",
+    "start": "2023-09-16T10:30:00-05:00",
+    "end": "2023-09-16T11:00:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "lucy_qiu",
+        "name": "Lucy Qiu",
+        "bio": "Full-stack engineer with previous experience at Goldman Sachs and Manta Network. Winner of multiple hackathon prizes. Background in computer science and UI/UX design. Expertise in community building.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/aec7ff29947ad444e23b9c9c768284da_b1mBTsb.jpg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/uiux_in_web3__how_to_win_the_eth_hackathon_with_a_unique_design.jpg"
+  },
+  {
+    "id": "using_nfts_to_feed_hunger_instead_of_greed__the_full_plate_project",
+    "name": "Using NFTs to Feed Hunger Instead of Greed - The Full Plate Project",
+    "description": "Is Web3 just about the money? Or can it be leveraged to effect positive change in the real world? The Full Plate Project created by xBohiti is pushing the boundaries of what 'utility' in an NFT project can be. By using 80% of NFT sales and 100% of auction sales to buy food and supplies for people in need in Chicago, we are proving that  NFT collections can do more than \"Number go up\"",
+    "start": "2023-09-15T14:00:00-05:00",
+    "end": "2023-09-15T14:30:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+      {
+        "id": "xbohiti",
+        "name": "xBohiti",
+        "bio": "xBohiti is a Puerto Rican musician, 2D/3D artist, regenerative organic farmer, and web 3 entrepreneur from Chicago, Illinois. xBohiti creates music meant to motivate  and elevate consciousness.\r\n\r\nxBohiti also goes by the name 'Spearit Bear' which was used when first releasing music but now that they have expanded beyond music they began using their real name: 'Bohiti' which translates to \"Shaman\" from the Native Borikua language in Puerto Rico.\r\n\r\nAs an Entrepreneur, xBohiti has created many different businesses throughout their career, some of which can be found at the bottom of this page.\r\n\r\nxBohiti has an Advanced Permaculture Design Certification from the Advanced Permaculture Student Online as well as a Master's Certificate in Cannabis from Cannabis Training University, completing a Full Stack Developer Certificate and is working on new, exiting ways to put these skills to use.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/xBohiti_Brands_3_McUk15Z.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/using_nfts_to_feed_hunger_instead_of_greed__the_full_plate_project.jpg"
+  },
+  {
+    "id": "vision_setting_guided_meditation_for_hackathon_attendees",
+    "name": "Vision Setting Guided Meditation for Hackathon Attendees",
+    "description": "In this session, I will lead a guided meditation at the start of the hackathon to help teams and individuals ground and connect with their visions. This will lead to enhanced clarity, better designs, and accelerated execution.",
+    "start": "2023-09-16T16:00:00-05:00",
+    "end": "2023-09-16T16:30:00-05:00",
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+      {
+        "id": "david_prorok",
+        "name": "David Prorok",
+        "bio": "David Prorok: Meditation & Creativity Coach for Software Engineers, Builders, and Creators. \r\n\r\nFueled by boundless curiosity and a passion for merging the logical with the imaginative, my journey has been anything but linear. I love learning and trying new things, constantly exploring new avenues and expanding my mind in different dimensions. \r\n\r\nWith a Computer Science degree from UIUC, I've delved deep into the tech world, working as a software engineer at Facebook and as the Head of Product at small startups. Now, I'm sharing my technical expertise as a coach at Interview Kickstart, helping software engineers prepare for frontend engineering interviews at top tech companies.\r\n\r\nBut that's just one side of me.\r\n\r\nFor years, I've pursued my dreams of becoming a famous rapper, releasing albums and even pushed my limits by freestyle rapping for 38 minutes straight, which laid the foundation for my mixtape \"Better Than Before.\" I've hosted a podcast and built online communities. I've performed live as an improviser, a rap improviser, a rapper, and a stand up comedian. I've uploaded almost 800 videos to my YouTube channel and created thousands of ai-generated art. \r\n\r\nThrough it all, my breath has been my anchor, with a daily meditation practice complemented by 10-day intensive courses. With a sense of peace, purpose, and renewed clarity, I've transitioned into a career as a meditation and creativity coach. In a world that's constantly redefining itself, I’m here to guide leaders, especially from the tech and creative worlds, to stay centered and maximize the opportunities this era offers.\r\n\r\nIf you're a software engineer, builder, or creator looking for a bridge between logic and imagination, between code and artistry, let's connect. I'm here to be a bridge between dreams and reality.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/grateful_vQXDQ7H.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/vision_setting_guided_meditation_for_hackathon_attendees.jpg"
+  },
+  {
+    "id": "voltaire_and_the_future_of_network_governance_on_cardano",
+    "name": "Voltaire and The Future of Network Governance on Cardano",
+    "description": "When both a voting and treasury system are in place, blockchain can be truly decentralized. Our future will be in the hands of the community, who will have everything they need to grow and evolve an advanced socio-economic operating system to advance humanity.",
+    "start": "2023-09-16T10:00:00-05:00",
+    "end": "2023-09-16T10:30:00-05:00",
+    "stageId": "east_room__main_",
+    "speakers": [
+      {
+        "id": "cullah",
+        "name": "Cullah",
+        "bio": "https://cullah.com/epk",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/84138847_10158056861966663_1087440755334578176_n_UO854H5.jpg"
+      },
+      {
+        "id": "mike_mcnulty",
+        "name": "Mike McNulty",
+        "bio": "Product managers with Project Catalyst, a revolutionary Web3 innovation engine and one of the world's most significant decentralized grant funds\r\nhttps://www.linkedin.com/in/michaelpmcnulty/",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/headshot_BCC9AN5.jpg"
+      },
+      {
+        "id": "adam_rusch",
+        "name": "Adam Rusch",
+        "bio": "Prof. Adam Rusch\r\nTeaching Assistant Professor in the School of Information Sciences at the University of Illinois, as well as core contributor at Summon Platform, which offers DAO tooling. He was also the organizer / host for a CIP-1694 workshop exploring network-wide governance on Cardano, where we explored topics like delegative / liquid democracy and trusted off-chain data sources.\r\nhttps://www.linkedin.com/in/adamruschtech/",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/adam_headshot_22_UDj1C9r.jpeg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/voltaire_and_the_future_of_network_governance_on_cardano.jpg"
+  },
+  {
+    "id": "what_does_it_mean_to_go_overseas__extraterritoriality_and_jurisdictional_considerations_in_crypto_operations",
+    "name": "What does it mean to go \"overseas\"?  Extraterritoriality and jurisdictional considerations in crypto operations.",
+    "description": "What does it mean to go \"overseas\"?  Extraterritoriality and jurisdictional considerations in crypto operations. Many crypto companies and start ups erroneously believe that forming an entity overseas will keep them immune from U.S. enforcement. This discussion will cover jurisdictional considerations, especially relating to regulatory issues.",
+    "start": "2023-09-17T13:30:00-05:00",
+    "end": "2023-09-17T14:00:00-05:00",
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+      {
+        "id": "katherine_kirkpatrick",
+        "name": "Katherine Kirkpatrick",
+        "bio": "Katherine Kirkpatrick is the Chief Legal Officer of Cboe Digital. Prior to joining Cboe Digital, Katherine was General Counsel of Maple Finance, a capital-efficient corporate debt marketplace which facilitates crypto institutional borrowing via liquidity pools funded by the DeFi ecosystem. Before going “full-time crypto,” Katherine was a partner in the Special Matters and Government Investigations practice at King & Spalding, where she co-chaired the firm’s Financial Services Industry of Focus and the FinTech, Blockchain, and Cryptocurrency working group. In private practice, Katherine represented corporations and individuals under investigation by a large number of regulators, including the DOJ, SEC, CFTC, NFA, OFAC, FINRA, state AGs, the NY DFS, the Senate’s Permanent Subcommittee on Investigations, the OCC, and the Fed.  Katherine has extensive experience with digital assets and is a frequent writer and speaker on DeFi, cryptocurrency regulatory developments, anti-money laundering, and blockchain-related compliance. Katherine’s comments have been featured in publications such as the Financial Times, the American Banker, Coindesk, Reuters, and many others. In 2021, Katherine was recognized as “40 Under 40” by both Global Investigations Review and Benchmark Litigation. \r\n\r\nKatherine earned her undergraduate degree from the University of Southern California and her J.D. from Notre Dame Law School, where she serves on the Executive Advisory Committee of the board.",
+        "eventId": "ethchicago",
+        "photo": "https://pretalx.com/media/avatars/Headshot_iIB2lS0.jpg"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/what_does_it_mean_to_go_overseas__extraterritoriality_and_jurisdictional_considerations_in_crypto_operations.jpg"
+  },
+  {
+    "id": "zk_for_beginners__state_of_zk",
+    "name": "ZK for Beginners & State of ZK",
+    "description": "ZK for Beginners & State of ZK",
+    "start": "2023-09-15T14:30:00-05:00",
+    "end": "2023-09-15T15:00:00-05:00",
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [{ "id": "regina", "name": "Regina", "bio": null, "eventId": "ethchicago", "photo": "" }],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/zk_for_beginners__state_of_zk.jpg"
   }
 ]

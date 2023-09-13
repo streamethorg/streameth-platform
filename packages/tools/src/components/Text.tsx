@@ -28,6 +28,7 @@ function Text({
         fontFamily,
         fontWeight,
         opacity,
+        textAlign: 'center',
       }}>
       {lines}
     </div>

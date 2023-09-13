@@ -971,13 +971,6 @@
     style-loader "2.0.0"
     tailwindcss "^3.3.2"
 
-"@remotion/zod-types@4.0.37":
-  version "4.0.37"
-  resolved "https://registry.yarnpkg.com/@remotion/zod-types/-/zod-types-4.0.37.tgz#96b9e6c0997853d14ba623cb42576d97b8d943ea"
-  integrity sha512-ae1MiuSD2WmkMuor50CvdxQjVwMDzhMULwwF5Rj8d3GibUB8Q8jiNVPI+BLa0BOYIbCQCTJ+s/2b+EFfWvkXKA==
-  dependencies:
-    remotion "4.0.37"
-
 "@stitches/core@^1.2.8":
   version "1.2.8"
   resolved "https://registry.npmjs.org/@stitches/core/-/core-1.2.8.tgz"
