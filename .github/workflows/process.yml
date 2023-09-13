@@ -29,4 +29,4 @@ jobs:
         with:
           default_author: github_actions
           message: '[av] processed videos'
-          add: 'data/sessions/**/*.json --force'
+          add: 'packages/assets/sessions/*.mp4 data/sessions/**/*.json --force'
