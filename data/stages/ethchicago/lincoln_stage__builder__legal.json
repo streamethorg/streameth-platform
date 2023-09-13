@@ -1,1 +1,7 @@
-{"id":"lincoln_stage__builder__legal","name":"Lincoln Stage ( Builder / Legal)","eventId":"ethchicago","streamSettings":{"streamId":""},"order":1}
+{
+  "id": "lincoln_stage__builder__legal",
+  "name": "Lincoln Stage ( Builder / Legal)",
+  "eventId": "ethchicago",
+  "streamSettings": { "streamId": "5411f2e0-757a-40a5-bacd-f66d0621d2b7" },
+  "order": 1
+}

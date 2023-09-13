@@ -1,1 +1,7 @@
-{"id":"east_room__main_","name":"East Room ( Main )","eventId":"ethchicago","streamSettings":{"streamId":""},"order":1}
+{
+  "id": "east_room__main_",
+  "name": "East Room ( Main )",
+  "eventId": "ethchicago",
+  "streamSettings": { "streamId": "04910e8c-1aca-40a8-810c-c01907f97126" },
+  "order": 1
+}
