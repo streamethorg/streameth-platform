@@ -4,7 +4,7 @@ import Event from '../../model/event'
 import axios from 'axios'
 import Speaker from '../../model/speaker'
 import { generateId } from '../../utils'
-
+import moment from 'moment-timezone'
 export default class PretalxImporter extends BaseImporter {
   apiUrl: string
 
@@ -16,7 +16,6 @@ export default class PretalxImporter extends BaseImporter {
   }
 
   async generateSpeakers(): Promise<void> {
-    // fetch https://speak.protocol.berlin/api/events/protocol-berg/speakers/
     let request = await axios.get(`${this.apiUrl}/speakers/`)
     let speakers = request.data.results
     while (request.data.next) {
@@ -89,8 +88,8 @@ export default class PretalxImporter extends BaseImporter {
       const newSession = {
         name: session.title,
         description: session.abstract,
-        start: session.slot.start,
-        end: session.slot.end,
+        start: moment.tz(new Date(session.slot.start), this.event.timezone).valueOf(),
+        end: moment.tz(new Date(session.slot.end), this.event.timezone).valueOf(),
         eventId: this.event.id,
         speakers: await Promise.all(speakers),
         stageId: generateId(session.slot.room.en),

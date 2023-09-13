@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className="bg-background flex flex-col h-[100dvh] lg:overflow-hidden w-screen">
+                <div className="bg-background flex flex-col h-[100dvh] fixed lg:overflow-hidden w-screen">
                   <Navbar />
                   {children}
                 </div>

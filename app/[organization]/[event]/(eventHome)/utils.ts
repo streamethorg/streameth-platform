@@ -14,7 +14,11 @@ export const sessionsSchedulePosition = (sessions: ISession[]) => {
     return 0 // or some other default value
   }
 
-  const min = Math.min(...sessions.map((session) => secondsSinceMidnight(new Date(session.start))))
+  const min = Math.min(
+    ...sessions.map((session) => {
+      return secondsSinceMidnight(new Date(session.start))
+    })
+  )
   const max = Math.max(...sessions.map((session) => secondsSinceMidnight(new Date(session.end))))
   return {
     min,

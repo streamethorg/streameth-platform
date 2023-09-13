@@ -29,8 +29,11 @@ export const secondsSinceMidnight = (date: Date) => {
 }
 
 export const secondsToHHMM = (seconds: number) => {
-  const date = new Date(0)
-  
-  return moment(date.setSeconds(seconds)).local().format('HH:mm')
-  return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+  const hours = Math.floor(seconds / 3600)
+  const minutes = Math.floor((seconds % 3600) / 60)
+
+  const hoursStr = hours.toString().padStart(2, '0')
+  const minutesStr = minutes.toString().padStart(2, '0')
+
+  return `${hoursStr}:${minutesStr}`
 }

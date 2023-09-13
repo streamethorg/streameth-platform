@@ -21,19 +21,31 @@ export default class SessionController {
     return ses
   }
 
-  public async getAllSessions(eventId: ISession['eventId'], stage?: ISession['stageId'], timestamp?: number, date?: number): Promise<Session[]> {
+  public async getAllSessions({
+    eventId,
+    stage,
+    timestamp,
+    date,
+    speakerIds,
+  }: {
+    eventId: ISession['eventId']
+    stage?: ISession['stageId']
+    timestamp?: number
+    date?: number
+    speakerIds?: string[]
+  }): Promise<Session[]> {
     const sessions: Session[] = []
     const sessionQuery = await Session.getSessionPath(eventId)
     let data = await this.controller.getAll(sessionQuery)
     if (stage) {
-     data = data.filter((session) => session.stageId === stage)
+      data = data.filter((session) => session.stageId === stage)
     }
     if (timestamp) {
-     data = data.filter((session) => new Date(session.end).getTime() >= timestamp)
+      data = data.filter((session) => new Date(session.end).getTime() >= timestamp)
     }
     if (date) {
       const filterDate = new Date(date)
-    data = data.filter((session) => {
+      data = data.filter((session) => {
         const sessionDate = new Date(session.start)
         return (
           sessionDate.getFullYear() === filterDate.getFullYear() &&
@@ -42,6 +54,15 @@ export default class SessionController {
         )
       })
     }
+
+    if (speakerIds) {
+      data = data.filter((session) => {
+        return session.speakers.some((speaker) => speakerIds.includes(speaker.id))
+      })
+    }
+
+    // sort by start date
+    data.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
 
     for (const ses of data) {
       sessions.push(new Session({ ...ses }))

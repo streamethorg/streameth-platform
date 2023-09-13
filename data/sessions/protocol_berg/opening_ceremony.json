@@ -2,8 +2,8 @@
   "id": "opening_ceremony",
   "name": "Opening Ceremony",
   "description": "The Department of Decentralization welcomes you to Protocol Berg!\r\n\r\nWe briefly run you through the concept of the event and the program highlights of the day. Furthermore, we share logistical and operational tips on how to navigate the venue, information on food and drinks, and more.",
-  "start": "2023-09-15T09:00:00+02:00",
-  "end": "2023-09-15T09:25:00+02:00",
+  "start": 1694761200000,
+  "end": 1694762700000,
   "stageId": "magazin__main_stage",
   "speakers": [
     {

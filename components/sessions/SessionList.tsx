@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { ISession } from '@/server/model/session'
 import Scroll, { Element } from 'react-scroll'
 import Link from 'next/link'
-import ScheduleCard from '../schedule/ScheduleCard'
+import ScheduleCard from '../../app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 
 interface Props {
   sessions: ISession[]

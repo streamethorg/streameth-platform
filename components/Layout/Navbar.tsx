@@ -48,18 +48,18 @@ export default function Navbar({
 
   return (
     <div>
-      <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden p-4 absolute top-0 ml-16">
-        {!isNavVisible ? <Bars2Icon className="w-8 h-8" /> : <XMarkIcon className="w-8 h-8" />}
+      <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden p-4 absolute top-0 ml-20">
+        {!isNavVisible ? <Bars2Icon className="w-12 h-12" /> : <XMarkIcon className="w-8 h-8" />}
       </button>
+      <div className=" absolute w-20 h-20 top-0 items-center flex">
+        <Link href={`/${event.organizationId}/${event.id}`}>
+          <span className="sr-only">Logo</span>
+          <Image src={'/events/' + event.logo} className="" alt="logo" width={150} height={150} />
+        </Link>
+      </div>
       <header
-        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-0 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} lg:block`}>
+        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-20 left-0 w-20 h-screen ${isNavVisible ? 'block' : 'hidden'} lg:block`}>
         <div className="flex flex-col items-center justify-between ">
-          <div className="items-center flex">
-            <Link href={`/${event.organizationId}/${event.id}`}>
-              <span className="sr-only">Logo</span>
-              <Image src={'/events/' + event.logo} className="" alt="logo" width={150} height={150} />
-            </Link>
-          </div>
           <nav
             aria-label="Global"
             className={`text-main-text text-center w-full my-1 space-x-0 justify-between gap-3 text-md font-medium flex flex-col `}>

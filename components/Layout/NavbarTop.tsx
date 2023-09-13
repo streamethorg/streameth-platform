@@ -6,7 +6,7 @@ import { SocialIcon } from 'react-social-icons'
 
 export default function Navbar() {
   return (
-    <header className=" flex flex-row bg-base border-b border-primary w-full ml-auto pr-1.5 p-4 py-2 ">
+    <header className=" flex flex-row bg-base border-b border-primary w-full ml-auto  p-4 py-2 sticky top-0 h-20">
       <div className=" flex items-center w-20">
         <Link href="/" className="">
           <span className="sr-only">Logo</span>
@@ -14,6 +14,11 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex flex-row items-center justify-end w-full">
+        <Link href="https://app.deform.cc/form/53f6c909-c5ae-4059-8590-269e09cf5592/">
+          <div className="border-2 text-accent font-bold border-accent hover:bg-accent hover:text-white rounded-md px-4 py-2 m-2">
+            <span className="text-sm">Add your event</span>
+          </div>
+        </Link>
         <SocialIcon url={`https://twitter.com/streameth`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
         <SocialIcon
           url={`https://github.com/streamethorg/streameth-platform`}

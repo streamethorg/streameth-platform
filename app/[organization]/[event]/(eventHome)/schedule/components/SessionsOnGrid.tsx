@@ -1,7 +1,7 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
 import { CELL_HEIGHT, getSlotRange, sessionsSchedulePosition } from '../../utils'
-import ScheduleCard from '@/components/schedule/ScheduleCard'
+import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 import { ScheduleContext } from './ScheduleContext'
 import { getSessions } from '@/utils/api'
 import { ISession } from '@/server/model/session'
@@ -43,7 +43,7 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
               top: range.start * CELL_HEIGHT + 0.1 + 'rem',
               height: (range.end - range.start) * CELL_HEIGHT - 0.1 + 'rem',
             }}>
-            {session.name !== 'Blank' && <ScheduleCard session={session} />}
+            {session.name !== 'Blank' && <ScheduleCard session={session} speakers />}
           </div>
         )
       })}

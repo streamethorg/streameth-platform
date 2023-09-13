@@ -26,7 +26,7 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
       {isMobile ? (
         <div className="flex flex-row justify-center items-center p-2">
           <select
-            className="text-xl cursor-pointer font-bold box-border w-full"
+            className="text-xl text-accent cursor-pointer font-bold box-border w-full"
             value={selectedStage}
             onChange={(e) => handleStageChange(e.target.value)}>
             {stages.map((stage) => (

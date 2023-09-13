@@ -1,7 +1,7 @@
 import Navbar from '@/components/Layout/Navbar'
 import EventController from '@/server/controller/event'
 import StageController from '@/server/controller/stage'
-import { HomeIcon, ArchiveBoxArrowDownIcon, ViewColumnsIcon, CalendarIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, ArchiveBoxArrowDownIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
 
@@ -30,7 +30,7 @@ const Layout = async ({
   const sessionController = new SessionController()
   const event = await eventController.getEvent(params.event, params.organization)
   const stages = await stageController.getAllStagesForEvent(params.event)
-  const sessions = await sessionController.getAllSessions(params.event)
+  const sessions = await sessionController.getAllSessions({ eventId: params.event })
 
   if (!event) {
     return notFound()
@@ -47,10 +47,15 @@ const Layout = async ({
       name: 'Schedule',
       icon: <CalendarIcon />,
     },
+    {
+      href: `/${params.organization}/${params.event}/speakers`,
+      name: 'Speakers',
+      icon: <UserGroupIcon />,
+    },
   ]
 
   return (
-    <div className="flex flex-col md:flex-row lg:overflow-hidden h-full">
+    <div className="flex flex-col md:flex-row overflow-auto lg:overflow-hidden h-full">
       {!event.archiveMode && (
         <Navbar
           event={event.toJson()}

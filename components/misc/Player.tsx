@@ -38,7 +38,6 @@ export const Player = ({
     streamId,
     refetchInterval: (s) => (s?.isActive ? false : 5000),
   })
-  console.log(stream)
 
   const mediaElementRef = useCallback(
     (ref: HTMLMediaElement) => {
