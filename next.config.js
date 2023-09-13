@@ -1,5 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  rewrites: async () => [
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
+          value: 'watch.protocol.berlin'
+        }
+      ],
+      destination: '/ethberlin/protocol_berg',
+    },
+      ],
+
   async headers() {
     return [
       {
@@ -23,6 +36,7 @@ const nextConfig = {
  
     return config
   },
+  
   images: {
     remotePatterns: [
       {
