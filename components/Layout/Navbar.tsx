@@ -54,7 +54,7 @@ export default function Navbar({
     <div>
       <button
         onClick={() => setIsNavVisible(!isNavVisible)}
-        className="lg:hidden p-4 absolute top-0 ml-20 h-20">
+        className="lg:hidden p-2 md:p-4 absolute top-0 ml-20 h-20">
         {!isNavVisible ? (
           <div className="border-2 rounded border-accent text-accent">
             <Bars2Icon className="w-8 h-8" />
