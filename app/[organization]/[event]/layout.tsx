@@ -30,7 +30,7 @@ const Layout = async ({
   const sessionController = new SessionController()
   const event = await eventController.getEvent(params.event, params.organization)
   const stages = await stageController.getAllStagesForEvent(params.event)
-  const sessions = await sessionController.getAllSessions({eventId: params.event})
+  const sessions = await sessionController.getAllSessions({ eventId: params.event })
 
   if (!event) {
     return notFound()

@@ -4,7 +4,7 @@ import type { Metadata, ResolvingMetadata } from 'next'
 
 export async function generateStaticParams({ params }: { params: { organization: string; event: string } }) {
   const sessionController = new SessionController()
-  const eventSessions = await sessionController.getAllSessions({eventId: params.event})
+  const eventSessions = await sessionController.getAllSessions({ eventId: params.event })
 
   return eventSessions.map((session) => ({
     organization: params.organization,

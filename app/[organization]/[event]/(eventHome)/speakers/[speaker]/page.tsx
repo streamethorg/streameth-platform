@@ -21,7 +21,6 @@ export async function generateStaticParams({ params }: { params: { organization:
 }
 
 const SpeakerPage = async ({ params }: Params) => {
-  console.log(params.speaker, params.event)
   const speakerController = new SpeakerController()
   const speaker = (await speakerController.getSpeaker(params.speaker, params.event)).toJson()
   const sessionController = new SessionController()

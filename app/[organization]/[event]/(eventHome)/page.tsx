@@ -39,7 +39,6 @@ const EventHome = async ({ params }: { params: Params }) => {
           <Button link={`/${params.organization}/${params.event}/schedule`}>Schedule</Button>
           <Button link={`/${params.organization}/${params.event}/speakers`}>Speakers</Button>
           <Button link={`/${params.organization}/${params.event}/archive`}>Archive</Button>
-        
         </div>
       </div>
     </div>

@@ -16,7 +16,6 @@ export default class PretalxImporter extends BaseImporter {
   }
 
   async generateSpeakers(): Promise<void> {
-    // fetch https://speak.protocol.berlin/api/events/protocol-berg/speakers/
     let request = await axios.get(`${this.apiUrl}/speakers/`)
     let speakers = request.data.results
     while (request.data.next) {
@@ -24,7 +23,6 @@ export default class PretalxImporter extends BaseImporter {
       speakers = [...speakers, ...request.data.results]
     }
     speakers.forEach(async (speaker: any) => {
-      console.log(speaker)
       const newSpeaker = {
         name: speaker.name,
         bio: speaker.biography,
