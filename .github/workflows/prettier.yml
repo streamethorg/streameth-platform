@@ -1,8 +1,6 @@
 name: Prettier
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -12,10 +10,10 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
 

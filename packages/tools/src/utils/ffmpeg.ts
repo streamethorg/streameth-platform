@@ -6,7 +6,6 @@ import { CONFIG } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
 import type editly from 'editly'
-import { join } from 'path'
 
 const getEditly = async (): Promise<typeof editly> => {
   const lib = await (eval(`import('editly')`) as Promise<{
@@ -45,8 +44,9 @@ export async function JoinSessions(sessions: string[]) {
   for (let i = 0; i < sessions.length; i++) {
     const id = sessions[i]
     const inputs = []
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)
+
+    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)) {
+      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)
     }
     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)
