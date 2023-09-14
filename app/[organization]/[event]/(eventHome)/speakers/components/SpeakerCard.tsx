@@ -7,10 +7,10 @@ const SpeakerCard = ({ speaker }: { speaker: ISpeaker }) => {
     <Link
       href={`speakers/${speaker.id}`}
       className="m-2 flex flex-col items-center 
-    text-sm bg-white shadow rounded w-44 ">
+    text-sm bg-white shadow rounded w-40 ">
       <SpeakerPhoto speaker={speaker} size="lg" />
       <span
-        className="lg:text-lg h-24 text-main-text uppercase p-2 flex 
+        className="lg:text-lg h-16 lg:h-24 text-main-text uppercase p-2 flex 
       justify-center items-center w-full ">
         {speaker.name}
       </span>

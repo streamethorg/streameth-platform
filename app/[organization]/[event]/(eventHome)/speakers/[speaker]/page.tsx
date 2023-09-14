@@ -41,7 +41,7 @@ const SpeakerPage = async ({ params }: Params) => {
       <div className="flex flex-col justify-center items-center w-48 p-2 border bg-white border-accent rounded shadow">
         <SpeakerPhoto speaker={speaker} size="lg" />
       </div>
-      <div className=" md:ml-4 flex flex-col   max-w-xl space-y-4">
+      <div className=" md:ml-4 flex flex-col w-full  max-w-xl space-y-4">
         <div className="bg-white shadow p-4 rounded">
           <p className="text-lg font-bold uppercase mb-4">
             {speaker.name}

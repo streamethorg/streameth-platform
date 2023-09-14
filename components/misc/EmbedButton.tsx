@@ -88,7 +88,7 @@ function EmbedButton({
 
   return (
     <CodeBracketIcon
-      className="border border-accent hover:bg-accent hover:text-white rounded p-1 cursor-pointer ml-auto h-8 w-8 text-accent font-medium"
+      className="border-2 font-bold border-accent hover:bg-accent hover:text-white rounded p-1 cursor-pointer ml-auto h-8 w-8 text-accent"
       onClick={handleModalOpen}
     />
   )

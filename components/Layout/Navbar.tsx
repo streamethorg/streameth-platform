@@ -54,7 +54,7 @@ export default function Navbar({
     <div>
       <button
         onClick={() => setIsNavVisible(!isNavVisible)}
-        className="lg:hidden p-2 md:p-4 absolute top-0 ml-20 h-20">
+        className="lg:hidden md:p-4 absolute top-0 ml-20 h-16">
         {!isNavVisible ? (
           <div className="border-2 rounded border-accent text-accent">
             <Bars2Icon className="w-8 h-8" />
@@ -65,7 +65,7 @@ export default function Navbar({
           </div>
         )}
       </button>
-      <div className=" absolute w-20 h-20 top-0 items-center flex">
+      <div className=" absolute w-16 h-16 lg:w-20 lg:h-20 top-0 items-center flex">
         <Link href={`/${event.organizationId}/${event.id}`}>
           <span className="sr-only">Logo</span>
           <Image
@@ -78,7 +78,7 @@ export default function Navbar({
         </Link>
       </div>
       <header
-        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-20 left-0 w-20 h-screen ${
+        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-20 left-0 w-20 h-screen ${
           isNavVisible ? 'block' : 'hidden'
         } lg:block`}>
         <div className="flex flex-col items-center justify-between ">

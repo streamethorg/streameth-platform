@@ -25,7 +25,7 @@ const SpeakerPage = async ({ params }: Params) => {
       </div>
       <div
         className="flex flex-row flex-wrap items-center 
-      justify-center h-full overflow-scroll p-4">
+      justify-center h-full overflow-scroll p-2">
         {speakers.map((speaker) => (
           <SpeakerCard key={speaker.id} speaker={speaker} />
         ))}

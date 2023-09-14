@@ -68,7 +68,7 @@ const Layout = async ({
   ]
 
   return (
-    <div className="flex flex-col md:flex-row overflow-auto lg:overflow-hidden h-full">
+    <div className="flex flex-col md:flex-row lg:overflow-hidden h-full">
       {!event.archiveMode && (
         <Navbar
           event={event.toJson()}
