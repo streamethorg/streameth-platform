@@ -1,7 +1,1 @@
-{
-  "id": "magazin__main_stage",
-  "name": "Magazin - Main Stage",
-  "eventId": "protocol_berg",
-  "streamSettings": { "streamId": "1d0aa22a-701a-4ef7-8c6e-fa41f6eb11e1" },
-  "order": 1
-}
+{"id":"magazin__main_stage","name":"Magazin - Main Stage","eventId":"protocol_berg","streamSettings":{"streamId":""},"order":1}
