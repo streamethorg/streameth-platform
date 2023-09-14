@@ -18,7 +18,7 @@ async function Run() {
     filesToProcess.map((i) => {
       return {
         id: i.id,
-        streamUrl: i.source.streamUrl,
+        streamUrl: "https://lp-playback.com/hls/a2ae5cylmxs38npg/1080p0.mp4",
         start: i.source.start,
         end: i.source.end,
       }
