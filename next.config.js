@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  rewrites: async () => [
+  redirects: async () => [
     {
       source: '/',
       has: [
@@ -9,7 +9,8 @@ const nextConfig = {
           value: 'watch.protocol.berlin'
         }
       ],
-      destination: '/ethberlin/protocol_berg',
+      destination: 'https://watch.protocol.berlin/ethberlin/protocol_berg',
+      permanent: true,
     },
       ],
 
