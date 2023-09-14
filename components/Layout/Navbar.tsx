@@ -128,7 +128,7 @@ export default function Navbar({
                 <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">
                   <CameraIcon />
                 </div>
-                stages
+                Streams
               </div>
             ) : null}
           </nav>
