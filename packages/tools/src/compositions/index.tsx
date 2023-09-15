@@ -15,7 +15,7 @@ const sessions: SessionType[] = CURRENT_SESSION.map((session) => {
 export function Compositions() {
   return (
     <>
-      {sessions.map((session: SessionType, i: number) => (
+      {sessions.map((session: SessionType) => (
         <Composition
           id={session.id.replace(/_/g, '-')}
           component={Session}
@@ -23,11 +23,18 @@ export function Compositions() {
           height={1080}
           durationInFrames={G_DURATION}
           fps={G_FPS}
-          defaultProps={{ session: session }}
+          defaultProps={{ session }}
         />
       ))}
-      <Still id="session-hd" component={Session} width={1920} height={1080} defaultProps={{ session: sessions[0] }} />
-      <Still id="session-social" component={Session} width={1200} height={630} defaultProps={{ session: sessions[0] }} />
+
     </>
   )
 }
+
+// For in the future
+// {sessions.map((session: SessionType) => (
+//   <Still id={`still-${session.id.replace(/_/g, '-')}`} component={Session} width={1920} height={1080} defaultProps={{ session }} />
+// ))}
+// {sessions.map((session: SessionType) => (
+//   <Still id={`social-${session.id.replace(/_/g, '-')}`} component={Session} width={1200} height={630} defaultProps={{ session }} />
+// ))}

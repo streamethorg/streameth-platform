@@ -3,7 +3,6 @@ import { ISession as SessionType, ISpeaker as SpeakerType } from '../types'
 import { G_AUDIO_PATH, G_ANIMATION_PATH, G_DURATION } from '../consts'
 import Text from '../components/Text'
 import { splitTextIntoString } from '../utils/stringManipulation'
-import { Rect } from '@remotion/shapes'
 
 function clampInterpolation(f: number, start: number[], end: number[]): number {
   return interpolate(f, start, end, {
@@ -19,21 +18,21 @@ export default function Session({ session }: { session: SessionType }) {
 
   const opacity = clampInterpolation(frame, [startFadeFrame, durationInFrames], [0, 1])
 
-  const videoVolume = clampInterpolation(frame, [startFadeFrame, durationInFrames], [1, 0])
-
   const computeOpacity = (f: any) => {
-    return interpolate(f, [135, 175], [1, 0], {
+    return interpolate(f, [G_DURATION - 15, G_DURATION], [1, 0], {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     })
   }
 
   const showText = (f: any) => {
-    return interpolate(f, [15, 30], [0, 1], {
+    return interpolate(f, [110, 120], [0, 1], {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     })
   }
+
+  const allSpeakerNames = session.speakers!.map((speaker) => speaker.name).join('\n')
 
   const videoOpacity = computeOpacity(frame)
 
@@ -42,41 +41,34 @@ export default function Session({ session }: { session: SessionType }) {
       <Sequence durationInFrames={G_DURATION}>
         <Video muted style={{ opacity: videoOpacity }} src={staticFile(G_ANIMATION_PATH)} />
       </Sequence>
-      {session.speakers!.map((speaker: SpeakerType, index: number) => (
-        <Sequence name="Name(s)" durationInFrames={G_DURATION}>
-          <div style={{ opacity: videoOpacity }}>
-            <Text text={speaker.name} x={775} y={335 - index * 80} opacity={showText(frame)} fontWeight={800} fontSize={65} />
-          </div>
-        </Sequence>
-      ))}
-      <Sequence name="Title" durationInFrames={G_DURATION}>
-        <div className="leading-tight" style={{ opacity: videoOpacity }}>
-          <Text text={splitTextIntoString(session.name, 30)} x={775} y={493} opacity={showText(frame)} fontWeight={600} />
+      <Sequence name="Name(s)" durationInFrames={G_DURATION}>
+        <div
+          style={{
+            width: '100%',
+            opacity: videoOpacity,
+          }}>
+          <Text text={allSpeakerNames} x={0} y={session.name.length < 50 ? 550 : 650} color="white" fontSize={60} opacity={showText(frame)} />
         </div>
       </Sequence>
-      <Sequence durationInFrames={G_DURATION}>
-        <div style={{ opacity: videoOpacity }}>
-          <Rect
-            width={770}
-            height={3}
-            fill="black"
-            style={{
-              opacity: showText(frame),
-              transform: 'translateX(760px) translateY(450px)',
-            }}
-          />
+      <Sequence name="Title" durationInFrames={G_DURATION}>
+        <div
+          style={{
+            width: '100%',
+            opacity: videoOpacity,
+          }}>
+          <Text text={splitTextIntoString(session.name, 50)} x={0} y={450} color="white" opacity={showText(frame)} fontSize={70} fontWeight={200} />
         </div>
       </Sequence>
       <Audio
         src={staticFile(G_AUDIO_PATH)}
-        endAt={150}
+        endAt={G_DURATION}
         volume={(f) =>
-          f < 115
+          f < G_DURATION - 75
             ? interpolate(f, [0, 10], [0, 1], {
                 extrapolateLeft: 'clamp',
                 extrapolateRight: 'clamp',
               })
-            : interpolate(f, [115, 150], [1, 0], {
+            : interpolate(f, [G_DURATION - 75, G_DURATION], [1, 0], {
                 extrapolateLeft: 'clamp',
                 extrapolateRight: 'clamp',
               })

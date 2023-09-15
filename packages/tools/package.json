@@ -48,7 +48,6 @@
     "@remotion/cli": "4.0.37",
     "@remotion/google-fonts": "4.0.37",
     "@remotion/shapes": "4.0.37",
-    "@remotion/zod-types": "4.0.37",
     "cross-fetch": "^4.0.0",
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",

@@ -19,6 +19,6 @@
   ],
   "eventCover": "funding_the_commons_berlin_2023.jpg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Berlin"
 }
