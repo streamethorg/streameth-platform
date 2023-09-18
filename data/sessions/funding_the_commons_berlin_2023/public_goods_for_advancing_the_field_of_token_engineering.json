@@ -1,1 +1,24 @@
-{"id":"public_goods_for_advancing_the_field_of_token_engineering","name":"Public Goods for Advancing the Field of Token Engineering","description":"Education is a positive sum game. TE Academy has attracted more than 3,000 students to its TE Fundamentals education program focused on designing, verifying, and optimizing token-based systems. Token engineering is a new, crypto-native domain in its own right. This talk is about how we structure our program, how we've built our community, our vision for education as a public good, and how we apply incentive design to our student community.\n","start":1694261400000,"end":1694262600000,"stageId":"mainstage","speakers":[{"id":"angela_kreitenweis","name":"Angela Kreitenweis","bio":"TE Academy, Founder","eventId":"funding_the_commons_berlin_2023"}],"playbackId":"","eventId":"funding_the_commons_berlin_2023","coverImage":"/sessions/funding_the_commons_berlin_2023/public_goods_for_advancing_the_field_of_token_engineering.jpg"}
+{
+  "id": "public_goods_for_advancing_the_field_of_token_engineering",
+  "name": "Public Goods for Advancing the Field of Token Engineering",
+  "description": "Education is a positive sum game. TE Academy has attracted more than 3,000 students to its TE Fundamentals education program focused on designing, verifying, and optimizing token-based systems. Token engineering is a new, crypto-native domain in its own right. This talk is about how we structure our program, how we've built our community, our vision for education as a public good, and how we apply incentive design to our student community.\n",
+  "start": 1694261400000,
+  "end": 1694262600000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "angela_kreitenweis",
+      "name": "Angela Kreitenweis",
+      "bio": "TE Academy, Founder",
+      "eventId": "funding_the_commons_berlin_2023"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 17596,
+    "end": 19177
+  },
+  "playbackId": "",
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/public_goods_for_advancing_the_field_of_token_engineering.jpg"
+}
