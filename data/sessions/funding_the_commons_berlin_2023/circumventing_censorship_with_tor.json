@@ -1,1 +1,26 @@
-{"id":"circumventing_censorship_with_tor","name":"Circumventing censorship with Tor","description":"Internet freedom has declined for 12 consecutive years, shrinking online space for civil society all around the world. This terrible trend mainly affects marginalized communities, activists, journalists, dissidents, LGBTQIA people and human rights defenders. The Tor network is one of the most widely used, most private, and most secure methods for protecting a person’s privacy online. Tor-based tools offer the most private—and sometimes only—methods individuals can use to safely circumvent censorship controls, freely exchange information without fear of retaliation, and connect with like-minded communities without fear of recrimination. This presentation will cover the threats against internet freedom and stories showing how Tor has helped advance human rights and freedoms for millions of daily users.","start":1694248200000,"end":1694249400000,"stageId":"mainstage","speakers":[{"id":"isabela_fernandes","name":"Isabela Fernandes","bio":"The Tor Project","eventId":"funding_the_commons_berlin_2023","twitter":"@isa","photo":"https://pbs.twimg.com/profile_images/472573667289755648/Sv38FEdd_400x400.jpeg"}],"playbackId":"","eventId":"funding_the_commons_berlin_2023","coverImage":"/sessions/funding_the_commons_berlin_2023/circumventing_censorship_with_tor.jpg"}
+{
+  "id": "circumventing_censorship_with_tor",
+  "name": "Circumventing censorship with Tor",
+  "description": "Internet freedom has declined for 12 consecutive years, shrinking online space for civil society all around the world. This terrible trend mainly affects marginalized communities, activists, journalists, dissidents, LGBTQIA people and human rights defenders. The Tor network is one of the most widely used, most private, and most secure methods for protecting a person’s privacy online. Tor-based tools offer the most private—and sometimes only—methods individuals can use to safely circumvent censorship controls, freely exchange information without fear of retaliation, and connect with like-minded communities without fear of recrimination. This presentation will cover the threats against internet freedom and stories showing how Tor has helped advance human rights and freedoms for millions of daily users.",
+  "start": 1694248200000,
+  "end": 1694249400000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "isabela_fernandes",
+      "name": "Isabela Fernandes",
+      "bio": "The Tor Project",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "@isa",
+      "photo": "https://pbs.twimg.com/profile_images/472573667289755648/Sv38FEdd_400x400.jpeg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 4612,
+    "end": 5631
+  },
+  "playbackId": "",
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/circumventing_censorship_with_tor.jpg"
+}
