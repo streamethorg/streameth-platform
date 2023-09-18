@@ -1,1 +1,34 @@
-{"id":"infrastructuring_open_conspiracies","name":"Infrastructuring Open Conspiracies","description":"At the intersection of mechanism art, political philosophy and ecosystem design, we will share some perspectives on designing web3-based funding mechanisms for the arts. Our starting point: the artworld is a place where a myriad of partly (in)commensurable creative practices engage in complex and mostly opaque processes of mutual qualitative evaluations, financially and memetically extending between Staatskunst, (i.e. the art of writing grants), crowdfunding, and the unfathomable swirls of the art market. ","start":1694253600000,"end":1694254800000,"stageId":"mainstage","speakers":[{"id":"cem_dagdelen","name":"Cem Dagdelen \n","bio":"Giza, Curve Labs","eventId":"funding_the_commons_berlin_2023","twitter":"@cemfdagdelen","photo":"https://pbs.twimg.com/profile_images/1169946787093917699/RPCSl7AV_400x400.jpg"},{"id":"erik_bordeleau","name":"Erik Bordeleau","bio":"The Sphere + Universidade NOVA de Lisboa","eventId":"funding_the_commons_berlin_2023","twitter":"@ritornell0","photo":"https://pbs.twimg.com/profile_images/1482872850428088327/gI1XY4Il_400x400.jpg"}],"playbackId":"","eventId":"funding_the_commons_berlin_2023","coverImage":"/sessions/funding_the_commons_berlin_2023/infrastructuring_open_conspiracies.jpg"}
+{
+  "id": "infrastructuring_open_conspiracies",
+  "name": "Infrastructuring Open Conspiracies",
+  "description": "At the intersection of mechanism art, political philosophy and ecosystem design, we will share some perspectives on designing web3-based funding mechanisms for the arts. Our starting point: the artworld is a place where a myriad of partly (in)commensurable creative practices engage in complex and mostly opaque processes of mutual qualitative evaluations, financially and memetically extending between Staatskunst, (i.e. the art of writing grants), crowdfunding, and the unfathomable swirls of the art market. ",
+  "start": 1694253600000,
+  "end": 1694254800000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "cem_dagdelen",
+      "name": "Cem Dagdelen \n",
+      "bio": "Giza, Curve Labs",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "@cemfdagdelen",
+      "photo": "https://pbs.twimg.com/profile_images/1169946787093917699/RPCSl7AV_400x400.jpg"
+    },
+    {
+      "id": "erik_bordeleau",
+      "name": "Erik Bordeleau",
+      "bio": "The Sphere + Universidade NOVA de Lisboa",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "@ritornell0",
+      "photo": "https://pbs.twimg.com/profile_images/1482872850428088327/gI1XY4Il_400x400.jpg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 10184,
+    "end": 11212
+  },
+  "playbackId": "",
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/infrastructuring_open_conspiracies.jpg"
+}
