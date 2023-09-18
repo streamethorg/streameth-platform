@@ -1,1 +1,26 @@
-{"id":"dialing_into_the_future_sustainable_funding__value_synergy_in_open_source","name":"Dialing into the Future: Sustainable Funding & Value Synergy in Open Source","description":"Explore the journey of Free World Dialup and how its open-source foundation paves the way for sustainable public good funding. Join Jeff Pulver as he dives into aligning stakeholder values to ensure the longevity and impact of open networks.","start":1694256000000,"end":1694257200000,"stageId":"mainstage","speakers":[{"id":"jeff_pulver","name":"Jeff Pulver","bio":"VOIP innovator","eventId":"funding_the_commons_berlin_2023","twitter":"@jeffpulver","photo":"https://pbs.twimg.com/profile_images/1602318725335683073/_c09vwSY_400x400.jpg"}],"playbackId":"","eventId":"funding_the_commons_berlin_2023","coverImage":"/sessions/funding_the_commons_berlin_2023/dialing_into_the_future_sustainable_funding__value_synergy_in_open_source.jpg"}
+{
+  "id": "dialing_into_the_future_sustainable_funding__value_synergy_in_open_source",
+  "name": "Dialing into the Future: Sustainable Funding & Value Synergy in Open Source",
+  "description": "Explore the journey of Free World Dialup and how its open-source foundation paves the way for sustainable public good funding. Join Jeff Pulver as he dives into aligning stakeholder values to ensure the longevity and impact of open networks.",
+  "start": 1694256000000,
+  "end": 1694257200000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "jeff_pulver",
+      "name": "Jeff Pulver",
+      "bio": "VOIP innovator",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "@jeffpulver",
+      "photo": "https://pbs.twimg.com/profile_images/1602318725335683073/_c09vwSY_400x400.jpg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 12254,
+    "end": 13509
+  },
+  "playbackId": "",
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/dialing_into_the_future_sustainable_funding__value_synergy_in_open_source.jpg"
+}
