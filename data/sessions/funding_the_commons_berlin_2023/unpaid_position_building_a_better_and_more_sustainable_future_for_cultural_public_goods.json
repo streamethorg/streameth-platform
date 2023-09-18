@@ -1,1 +1,32 @@
-{"id":"unpaid_position_building_a_better_and_more_sustainable_future_for_cultural_public_goods","name":"Unpaid position: Building a better and more sustainable future for cultural public goods","description":"","start":1694265000000,"end":1694266200000,"stageId":"mainstage","speakers":[{"id":"mara_paula_fernandez","name":"María Paula Fernandez","bio":"JPG Protocol","eventId":"funding_the_commons_berlin_2023","twitter":"@mptherealmvp","photo":"https://pbs.twimg.com/profile_images/1691792912885948416/DCDgdfND_400x400.jpg"},{"id":"beth_mccarthy","name":"Beth McCarthy","bio":"Curve Labs, Funding the Commons","eventId":"funding_the_commons_berlin_2023"}],"playbackId":"","eventId":"funding_the_commons_berlin_2023","coverImage":"/sessions/funding_the_commons_berlin_2023/unpaid_position_building_a_better_and_more_sustainable_future_for_cultural_public_goods.jpg"}
+{
+  "id": "unpaid_position_building_a_better_and_more_sustainable_future_for_cultural_public_goods",
+  "name": "Unpaid position: Building a better and more sustainable future for cultural public goods",
+  "description": "",
+  "start": 1694265000000,
+  "end": 1694266200000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "mara_paula_fernandez",
+      "name": "María Paula Fernandez",
+      "bio": "JPG Protocol",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "@mptherealmvp",
+      "photo": "https://pbs.twimg.com/profile_images/1691792912885948416/DCDgdfND_400x400.jpg"
+    },
+    {
+      "id": "beth_mccarthy",
+      "name": "Beth McCarthy",
+      "bio": "Curve Labs, Funding the Commons",
+      "eventId": "funding_the_commons_berlin_2023"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 21271,
+    "end": 22620
+  },
+  "playbackId": "",
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/unpaid_position_building_a_better_and_more_sustainable_future_for_cultural_public_goods.jpg"
+}
