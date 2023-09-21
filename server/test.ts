@@ -3,35 +3,43 @@ import EventController from './controller/event'
 
 const run = async () => {
   const Organization = {
-    name: 'Funding the Commons',
+    name: 'ETHChicago',
     description:
-      'We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry.',
-    url: 'https://fundingthecommons.io/',
-    logo: 'https://fundingthecommons.io/assets/logoNav.6b3e7427.png',
-    location: 'Unknown',
+      'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
+    url: 'https://www.ethchicago.xyz/',
+    logo: 'https://www.ethchicago.xyz/logo.png',
+    location: 'Chicago, USA',
   }
 
   const orgController = new OrganizationController()
-  const organizationInstance = await orgController.createOrganization(Organization)
+  const organizationInstance = await orgController.createOrganization(
+    Organization
+  )
 
   const Event = {
-    name: 'Funding the Commons Berlin 2023',
+    id: 'ethchicago',
+    name: 'ETHChicago',
     description:
-      'We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry. We do this by convening builders and practitioners, researchers and academics, and funders and philanthropists, catalyzing innovation in public goods. In the future, we seek to expand our impact by facilitating the creation of a public goods fund tied to impact evaluators, seeding projects that are conceived and incubated by the Funding the Commons community.',
-    start: new Date('2023-09-09T00:00:00.000Z'),
-    end: new Date('2023-09-09T00:00:00.000Z'),
-    location: 'Berlin, Germany',
-    organizationId: 'funding_the_commons',
+      'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
+    start: new Date('2023-09-15T00:00:00.000Z'),
+    end: new Date('2023-09-17T00:00:00.000Z'),
+    location: 'Chicago, USA',
+    organizationId: 'ethchicago',
     dataImporter: [
       {
-        type: 'gsheet' as 'gsheet',
+        type: 'pretalx' as 'pretalx',
         config: {
-          sheetId: '1CuefhHHDbdWH77JGnkPQODdaq880mUAhwLlOeYnwWpo',
-          apiKey: 'w',
+          url: 'https://pretalx.com/api/events/ethchi-2023',
+          apiToken: 'k',
         },
       },
     ],
-    timezone: "Europe/Berlin"
+    logo: 'ethchicago_logo.jpeg',
+    banner: 'ethchicago_banner.jpeg',
+    website: '',
+    archiveMode: false,
+    timezone: 'America/Chicago',
+    eventCover: 'ethchicago_2023.png',
   }
 
   const eventController = new EventController()
