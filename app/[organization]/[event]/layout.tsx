@@ -3,7 +3,6 @@ import EventController from '@/server/controller/event'
 import StageController from '@/server/controller/stage'
 import {
   HomeIcon,
-  ArchiveBoxArrowDownIcon,
   ViewColumnsIcon,
   CalendarIcon,
   UserGroupIcon,
@@ -67,19 +66,27 @@ const Layout = async ({
     },
   ]
 
+  const stagePages = () => {
+    let pages = []
+    for (const stage of stages) {
+      if (stage.streamSettings.streamId) {
+        pages.push({
+          href: `/${params.organization}/${stage.eventId}/stage/${stage.id}`,
+          name: stage.name,
+          icon: <ViewColumnsIcon />,
+        })
+      }
+    }
+    return pages
+  }
+
   return (
     <div className="flex flex-col md:flex-row lg:overflow-hidden h-full">
       {!event.archiveMode && (
         <Navbar
           event={event.toJson()}
           pages={pages}
-          stages={stages.map((stage) => {
-            return {
-              href: `/${params.organization}/${stage.eventId}/stage/${stage.id}`,
-              name: stage.name,
-              icon: <ViewColumnsIcon />,
-            }
-          })}
+          stages={stagePages()}
         />
       )}
       <main

@@ -13,25 +13,27 @@ const SpeakerPhoto = ({
   speaker: ISpeaker
   size?: 'sm' | 'md' | 'lg'
 }) => {
-  const avatar =
-    speaker.photo != '' ? speaker.photo : CreateBlockie(speaker.name)
+  const avatar = speaker.photo
+    ? speaker.photo
+    : CreateBlockie(speaker.name)
   let sizeString
   if (size === 'sm') {
     sizeString = 'h-8 w-8'
   } else if (size === 'md') {
     sizeString = 'h-12 w-12'
   } else {
-    sizeString = 'w-full h-44 lg:h-52'
+    sizeString = 'w-full aspect-square'
   }
 
   return (
-    <div className={`rounded relative ${sizeString}`}>
+    <div className={` relative ${sizeString}`}>
       <Image
-        src={avatar ?? CreateBlockie(speaker.name)}
+        src={
+          speaker.photo ? speaker.photo : CreateBlockie(speaker.name)
+        }
         alt={speaker.name}
         fill
         placeholder="empty"
-        className="rounded"
       />
     </div>
   )

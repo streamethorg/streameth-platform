@@ -1,7 +1,7 @@
 'use client'
 
 import { Player as LivepeerPlayer, useStream } from '@livepeer/react'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useAccount } from 'wagmi'
 // @ts-ignore
 import mux from 'mux-embed'
@@ -70,20 +70,26 @@ export const Player = ({
   )
 
   // if (!playbackId && !stream?.isActive) return <OfflinePlayer />
-
-  return (
-    <div className="relative w-full aspect-video h-full">
-      <LivepeerPlayer
-        mediaElementRef={mediaElementRef}
-        playbackId={playbackId ?? stream?.playbackId}
-        showTitle={false}
-        showPipButton={false}
-        showLoadingSpinner={true}
-        autoPlay
-        controls={{ autohide: 0, hotkeys: false, defaultVolume: 0.6 }}
-        viewerId={address}
-      />
-    </div>
+  return useMemo(
+    () => (
+      <div className="relative w-full aspect-video h-full">
+        <LivepeerPlayer
+          mediaElementRef={mediaElementRef}
+          playbackId={playbackId ?? stream?.playbackId}
+          showTitle={false}
+          showPipButton={false}
+          showLoadingSpinner={true}
+          autoPlay
+          controls={{
+            autohide: 0,
+            hotkeys: false,
+            defaultVolume: 0.6,
+          }}
+          viewerId={address}
+        />
+      </div>
+    ),
+    []
   )
 }
 

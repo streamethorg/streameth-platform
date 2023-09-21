@@ -25,7 +25,7 @@ export default function Navbar({
   stages,
 }: {
   event: IEvent
-  stages: Page[]
+  stages: Page[] | undefined
   pages: {
     name: string
     href: string
@@ -78,7 +78,7 @@ export default function Navbar({
         </Link>
       </div>
       <header
-        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-20 left-0 w-20 h-screen ${
+        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-[76px] left-0 w-20 h-screen ${
           isNavVisible ? 'block' : 'hidden'
         } lg:block`}>
         <div className="flex flex-col items-center justify-between ">
@@ -99,7 +99,7 @@ export default function Navbar({
                 <p className="">{item.name}</p>
               </Link>
             ))}
-            {stages.length === 1 ? (
+            {stages && stages?.length === 0 ? (
               <div
                 onClick={() => handleClick(stages[0].href)}
                 className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
@@ -111,7 +111,7 @@ export default function Navbar({
                 </div>
                 stages
               </div>
-            ) : stages.length > 0 ? (
+            ) : stages ? (
               <div
                 onClick={() =>
                   openModal(
