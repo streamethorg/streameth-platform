@@ -5,7 +5,7 @@ import { generateId } from '../../utils'
 import moment from 'moment-timezone'
 
 const SPEAKER_SHEET = 'Speakers'
-const SPEAKER_DATA_RANGE = 'A2:D'
+const SPEAKER_DATA_RANGE = 'Ae:E'
 const STAGE_SHEET = 'Stages'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'

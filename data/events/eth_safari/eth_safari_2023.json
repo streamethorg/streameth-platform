@@ -17,5 +17,7 @@
   ],
   "eventCover": "undefined.png",
   "archiveMode": false,
-  "timezone": "Africa/Nairobi"
+  "timezone": "Africa/Nairobi",
+  "logo": "ethsafari_logo.jpeg",
+  "banner": "ethsafari_banner.jpeg"
 }
