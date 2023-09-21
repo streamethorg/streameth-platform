@@ -1,1 +1,24 @@
-{"id":"from_hypercerts_to_hyperboards_advancing_modern_impact_funding_systems","name":"From hypercerts to hyperboards: Advancing modern impact funding systems","description":"Hypercerts, an implementation of the idea of impact certificates, are a new primitive for impact funding system. Hyperboards provide a new visualization and functionalities for collections of hypercerts. In his talk Holke demos how hyperboards advance the uses of hypercerts to power modern impact funding systems.","start":1694274000000,"end":1694275200000,"stageId":"mainstage","speakers":[{"id":"holke_brammer","name":"Holke Brammer","bio":"Protocol Labs/ Funding the Commons","eventId":"funding_the_commons_berlin_2023"}],"playbackId":"","eventId":"funding_the_commons_berlin_2023","coverImage":"/sessions/funding_the_commons_berlin_2023/from_hypercerts_to_hyperboards_advancing_modern_impact_funding_systems.jpg"}
+{
+  "id": "from_hypercerts_to_hyperboards_advancing_modern_impact_funding_systems",
+  "name": "From hypercerts to hyperboards: Advancing modern impact funding systems",
+  "description": "Hypercerts, an implementation of the idea of impact certificates, are a new primitive for impact funding system. Hyperboards provide a new visualization and functionalities for collections of hypercerts. In his talk Holke demos how hyperboards advance the uses of hypercerts to power modern impact funding systems.",
+  "start": 1694274000000,
+  "end": 1694275200000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "holke_brammer",
+      "name": "Holke Brammer",
+      "bio": "Protocol Labs/ Funding the Commons",
+      "eventId": "funding_the_commons_berlin_2023"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 30981,
+    "end": 32182
+  },
+  "playbackId": "",
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/from_hypercerts_to_hyperboards_advancing_modern_impact_funding_systems.jpg"
+}
