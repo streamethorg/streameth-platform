@@ -6,11 +6,19 @@
   "end": "2023-09-17T00:00:00.000Z",
   "location": "Chicago, USA",
   "organizationId": "ethchicago",
-  "dataImporter": [{ "type": "pretalx", "config": { "url": "https://pretalx.com/api/events/ethchi-2023", "apiToken": "k" } }],
-  "logo": "ethchicago_logo.jpeg",
-  "banner": "ethchicago_banner.jpeg",
+  "dataImporter": [
+    {
+      "type": "pretalx",
+      "config": {
+        "url": "https://pretalx.com/api/events/ethchi-2023",
+        "apiToken": "k"
+      }
+    }
+  ],
+  "eventCover": "ethchicago_2023.png",
   "website": "",
   "archiveMode": false,
   "timezone": "America/Chicago",
-  "eventCover": "ethchicago_2023.png"
+  "logo": "ethchicago_logo.jpeg",
+  "banner": "ethchicago_banner.jpeg"
 }

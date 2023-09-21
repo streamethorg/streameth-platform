@@ -7,6 +7,12 @@
   "location": "Virtual",
   "organizationId": "swarm",
   "dataImporter": [
-    { "type": "gsheet", "config": { "sheetId": "129T5ggZEdmH_u_2Sp1-LJShcoOqgBGDWosVBQQ6IfYg", "apiKey": "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4" } }
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "129T5ggZEdmH_u_2Sp1-LJShcoOqgBGDWosVBQQ6IfYg",
+        "apiKey": "AIzaSyBfg-L5lDCUx7L-s6ubJe3z6mYeXIkIFU4"
+      }
+    }
   ]
 }

@@ -7,7 +7,13 @@
   "location": "Montenegro",
   "organizationId": "zuzalu",
   "dataImporter": [
-    { "type": "gsheet", "config": { "sheetId": "1yQzNcTxlMyrjwpM9xeukZ9rTxLzxfwKhEpykMDI_hk4", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1yQzNcTxlMyrjwpM9xeukZ9rTxLzxfwKhEpykMDI_hk4",
+        "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w"
+      }
+    }
   ],
   "archiveMode": true
 }
