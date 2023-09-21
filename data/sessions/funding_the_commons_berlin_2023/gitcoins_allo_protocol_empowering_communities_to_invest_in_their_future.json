@@ -1,1 +1,26 @@
-{"id":"gitcoins_allo_protocol_empowering_communities_to_invest_in_their_future","name":"Gitcoin's Allo Protocol: Empowering communities to invest in their future","description":"Web3 has unlocked a new era of digitally connected communities. In order to thrive, these modern communities will need sophisticated tools for investing in their future. Come learn how we're creating a foundation for this new whole new category of coordination. ","start":1694268000000,"end":1694269200000,"stageId":"mainstage","speakers":[{"id":"nate_gosselin","name":"Nate Gosselin","bio":"Gitcoin / Allo Protocol","eventId":"funding_the_commons_berlin_2023","twitter":"@heynate_g","photo":"https://pbs.twimg.com/profile_images/1575754483103145984/J0KtHrhK_400x400.jpg"}],"playbackId":"","eventId":"funding_the_commons_berlin_2023","coverImage":"/sessions/funding_the_commons_berlin_2023/gitcoins_allo_protocol_empowering_communities_to_invest_in_their_future.jpg"}
+{
+  "id": "gitcoins_allo_protocol_empowering_communities_to_invest_in_their_future",
+  "name": "Gitcoin's Allo Protocol: Empowering communities to invest in their future",
+  "description": "Web3 has unlocked a new era of digitally connected communities. In order to thrive, these modern communities will need sophisticated tools for investing in their future. Come learn how we're creating a foundation for this new whole new category of coordination. ",
+  "start": 1694268000000,
+  "end": 1694269200000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "nate_gosselin",
+      "name": "Nate Gosselin",
+      "bio": "Gitcoin / Allo Protocol",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "@heynate_g",
+      "photo": "https://pbs.twimg.com/profile_images/1575754483103145984/J0KtHrhK_400x400.jpg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 25170,
+    "end": 26019
+  },
+  "playbackId": "",
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/gitcoins_allo_protocol_empowering_communities_to_invest_in_their_future.jpg"
+}
