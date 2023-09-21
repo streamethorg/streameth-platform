@@ -3,33 +3,43 @@ import EventController from './controller/event'
 
 const run = async () => {
   const Organization = {
-    name: 'ETH Safari',
-    description: 'Welcome to the largest ETH event happening in Africa!',
-    url: 'https://ethsafari.xyz/',
-    logo: 'https://ethsafari.xyz/static/ethsafari-logo-icon-a37e9deca2bfb730665fbcb60b3f7f14.svg',
-    location: 'Unknown',
+    name: 'ETHChicago',
+    description:
+      'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
+    url: 'https://www.ethchicago.xyz/',
+    logo: 'https://www.ethchicago.xyz/logo.png',
+    location: 'Chicago, USA',
   }
 
   const orgController = new OrganizationController()
-  const organizationInstance = await orgController.createOrganization(Organization)
+  const organizationInstance = await orgController.createOrganization(
+    Organization
+  )
 
   const Event = {
-    name: 'ETH Safari 2023',
-    description: 'Welcome to the largest ETH event happening in Africa!',
-        start: new Date('2023-09-21T00:00:00.000Z'),
-    end: new Date('2023-09-23T00:00:00.000Z'),
-    location: 'Kalifi, Kenya',
-    organizationId: organizationInstance.id,
+    id: 'ethchicago',
+    name: 'ETHChicago',
+    description:
+      'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
+    start: new Date('2023-09-15T00:00:00.000Z'),
+    end: new Date('2023-09-17T00:00:00.000Z'),
+    location: 'Chicago, USA',
+    organizationId: 'ethchicago',
     dataImporter: [
       {
-        type: 'gsheet' as 'gsheet',
+        type: 'pretalx' as 'pretalx',
         config: {
-          sheetId: '1uUTWJj0yrbmGo2FF4xOkBQLbFAcpErcLxBMsrx02GPE',
-          apiKey: 'w',
+          url: 'https://pretalx.com/api/events/ethchi-2023',
+          apiToken: 'k',
         },
       },
     ],
-    timezone: "Africa/Nairobi",
+    logo: 'ethchicago_logo.jpeg',
+    banner: 'ethchicago_banner.jpeg',
+    website: '',
+    archiveMode: false,
+    timezone: 'America/Chicago',
+    eventCover: 'ethchicago_2023.png',
   }
 
   const eventController = new EventController()

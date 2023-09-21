@@ -6,7 +6,9 @@ if (!process.env.SESSION_SECRET) {
 }
 
 if (!process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID) {
-  throw new Error('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID cannot be empty.')
+  throw new Error(
+    'NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID cannot be empty.'
+  )
 }
 
 const COOKIE_NAME = process.env.COOKIE_NAME ?? 'streameth.siwe'
@@ -20,7 +22,7 @@ export const WHITELISTED_ADDRESSES = [
   '0x8289432ACD5EB0214B1C2526A5EDB480Aa06A9ab', // wslyvh.eth
   '0x22C8260b018B8896b25aBa05364E41048B6b08FC', // pablov.eth
   '0x8dE7D6eD323e67923Bed1376d6fA2525F10Bb121', // Xander
-
+  '0xCa2ea165feDC31bCc290153e2b3000979695e018', // filipo
 ]
 
 export type ISession = {
@@ -44,7 +46,9 @@ class Session {
     const sessionCookie = req.cookies.get(COOKIE_NAME)?.value
 
     if (!sessionCookie) return new Session()
-    return new Session(await unsealData<ISession>(sessionCookie, SESSION_OPTIONS))
+    return new Session(
+      await unsealData<ISession>(sessionCookie, SESSION_OPTIONS)
+    )
   }
 
   clear(res: NextResponse): Promise<void> {
@@ -56,18 +60,29 @@ class Session {
   }
 
   toJSON(): ISession {
-    return { nonce: this.nonce, address: this.address, chainId: this.chainId }
+    return {
+      nonce: this.nonce,
+      address: this.address,
+      chainId: this.chainId,
+    }
   }
 
   async persist(res: NextResponse): Promise<void> {
-    res.cookies.set(COOKIE_NAME, await sealData(this.toJSON(), SESSION_OPTIONS), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    })
+    res.cookies.set(
+      COOKIE_NAME,
+      await sealData(this.toJSON(), SESSION_OPTIONS),
+      {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+      }
+    )
   }
 }
 
-export const tap = async <T>(value: T, cb: (value: T) => Promise<unknown>): Promise<T> => {
+export const tap = async <T>(
+  value: T,
+  cb: (value: T) => Promise<unknown>
+): Promise<T> => {
   await cb(value)
   return value
 }

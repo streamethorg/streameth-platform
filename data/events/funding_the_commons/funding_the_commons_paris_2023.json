@@ -7,7 +7,13 @@
   "location": "Paris, France",
   "organizationId": "funding_the_commons",
   "dataImporter": [
-    { "type": "gsheet", "config": { "sheetId": "1JUFF93zl0Y84h70t4RMDeCfZdA4eYYKf7_0vReLx4Xg", "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w" } }
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1JUFF93zl0Y84h70t4RMDeCfZdA4eYYKf7_0vReLx4Xg",
+        "apiKey": "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w"
+      }
+    }
   ],
   "website": "https://fundingthecommons.io/",
   "archiveMode": true
