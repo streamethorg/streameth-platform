@@ -25,15 +25,16 @@ const SpeakerPhoto = ({
     sizeString = 'w-full aspect-square'
   }
 
-  console.log(speaker.photo)
   return (
     <div className={` relative ${sizeString}`}>
-        <Image
-          src={speaker.photo ? speaker.photo : CreateBlockie(speaker.name)} 
-          alt={speaker.name}
-          fill
-          placeholder="empty"
-        />
+      <Image
+        src={
+          speaker.photo ? speaker.photo : CreateBlockie(speaker.name)
+        }
+        alt={speaker.name}
+        fill
+        placeholder="empty"
+      />
     </div>
   )
 }

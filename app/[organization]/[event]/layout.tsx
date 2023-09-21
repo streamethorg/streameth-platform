@@ -66,11 +66,10 @@ const Layout = async ({
     },
   ]
 
-
   const stagePages = () => {
     let pages = []
     for (const stage of stages) {
-      if (stage.streamSettings.streamId){
+      if (stage.streamSettings.streamId) {
         pages.push({
           href: `/${params.organization}/${stage.eventId}/stage/${stage.id}`,
           name: stage.name,
