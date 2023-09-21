@@ -3,11 +3,10 @@ import EventController from './controller/event'
 
 const run = async () => {
   const Organization = {
-    name: 'Funding the Commons',
-    description:
-      'We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry.',
-    url: 'https://fundingthecommons.io/',
-    logo: 'https://fundingthecommons.io/assets/logoNav.6b3e7427.png',
+    name: 'ETH Safari',
+    description: 'Welcome to the largest ETH event happening in Africa!',
+    url: 'https://ethsafari.xyz/',
+    logo: 'https://ethsafari.xyz/static/ethsafari-logo-icon-a37e9deca2bfb730665fbcb60b3f7f14.svg',
     location: 'Unknown',
   }
 
@@ -15,23 +14,22 @@ const run = async () => {
   const organizationInstance = await orgController.createOrganization(Organization)
 
   const Event = {
-    name: 'Funding the Commons Berlin 2023',
-    description:
-      'We are individuals and organizations building new models of sustainable public goods funding and value alignment in open source networks. Our goal with Funding the Commons is to bridge the public goods community across Web2, Web3, research, philanthropy and industry. We do this by convening builders and practitioners, researchers and academics, and funders and philanthropists, catalyzing innovation in public goods. In the future, we seek to expand our impact by facilitating the creation of a public goods fund tied to impact evaluators, seeding projects that are conceived and incubated by the Funding the Commons community.',
-    start: new Date('2023-09-09T00:00:00.000Z'),
-    end: new Date('2023-09-09T00:00:00.000Z'),
-    location: 'Berlin, Germany',
-    organizationId: 'funding_the_commons',
+    name: 'ETH Safari 2023',
+    description: 'Welcome to the largest ETH event happening in Africa!',
+        start: new Date('2023-09-21T00:00:00.000Z'),
+    end: new Date('2023-09-23T00:00:00.000Z'),
+    location: 'Kalifi, Kenya',
+    organizationId: organizationInstance.id,
     dataImporter: [
       {
         type: 'gsheet' as 'gsheet',
         config: {
-          sheetId: '1CuefhHHDbdWH77JGnkPQODdaq880mUAhwLlOeYnwWpo',
+          sheetId: '1uUTWJj0yrbmGo2FF4xOkBQLbFAcpErcLxBMsrx02GPE',
           apiKey: 'w',
         },
       },
     ],
-    timezone: "Europe/Berlin"
+    timezone: "Africa/Nairobi",
   }
 
   const eventController = new EventController()
