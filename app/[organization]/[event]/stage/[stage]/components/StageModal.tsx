@@ -16,6 +16,7 @@ const StageModal = ({
         Select a stage
       </h1>
       {stages.map((stage) => (
+        
         <div
           className={`p-4 border-2 rounded m-1 cursor-pointer w-[200px] h-[50px] flex items-center justify-center hover:bg-gray-400
                        ${

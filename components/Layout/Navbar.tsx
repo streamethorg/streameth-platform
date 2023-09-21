@@ -25,7 +25,7 @@ export default function Navbar({
   stages,
 }: {
   event: IEvent
-  stages: Page[]
+  stages: Page[] | undefined
   pages: {
     name: string
     href: string
@@ -99,7 +99,7 @@ export default function Navbar({
                 <p className="">{item.name}</p>
               </Link>
             ))}
-            {stages.length === 1 ? (
+            {stages ? (
               <div
                 onClick={() => handleClick(stages[0].href)}
                 className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
@@ -111,7 +111,7 @@ export default function Navbar({
                 </div>
                 stages
               </div>
-            ) : stages.length > 0 ? (
+            ) : stages ? (
               <div
                 onClick={() =>
                   openModal(
