@@ -99,7 +99,7 @@ export default function Navbar({
                 <p className="">{item.name}</p>
               </Link>
             ))}
-            {stages ? (
+            {stages && stages?.length === 0 ? (
               <div
                 onClick={() => handleClick(stages[0].href)}
                 className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${
