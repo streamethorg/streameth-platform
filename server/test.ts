@@ -3,12 +3,12 @@ import EventController from './controller/event'
 
 const run = async () => {
   const Organization = {
-  name: 'ETHChicago',
-  description:
-    'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
-  url: 'https://www.ethchicago.xyz/',
-  logo: 'https://www.ethchicago.xyz/logo.png',
-  location: 'Chicago, USA',
+    name: 'ETHChicago',
+    description:
+      'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
+    url: 'https://www.ethchicago.xyz/',
+    logo: 'https://www.ethchicago.xyz/logo.png',
+    location: 'Chicago, USA',
   }
 
   const orgController = new OrganizationController()
@@ -27,7 +27,7 @@ const run = async () => {
     organizationId: 'ethchicago',
     dataImporter: [
       {
-        type: 'pretalx' as "pretalx",
+        type: 'pretalx' as 'pretalx',
         config: {
           url: 'https://pretalx.com/api/events/ethchi-2023',
           apiToken: 'k',
