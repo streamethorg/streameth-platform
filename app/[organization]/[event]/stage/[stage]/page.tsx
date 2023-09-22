@@ -54,7 +54,6 @@ export default async function Stage({ params }: Params) {
       eventId: event.id,
       stage: params.stage,
       timestamp: new Date().getTime(),
-      date: currentDay ? currentDay : undefined,
     })
 
     if (!sessions.length)
