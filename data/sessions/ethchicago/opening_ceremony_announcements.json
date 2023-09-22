@@ -1,1 +1,17 @@
-{"id":"opening_ceremony_announcements","name":"Opening Ceremony Announcements","description":"Opening Ceremony Announcements","start":1694817000000,"end":1694818800000,"stageId":"east_room__main_","speakers":[],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/opening_ceremony_announcements.jpg"}
+{
+  "id": "opening_ceremony_announcements",
+  "name": "Opening Ceremony Announcements",
+  "description": "Opening Ceremony Announcements",
+  "start": 1694817000000,
+  "end": 1694818800000,
+  "stageId": "east_room__main_",
+  "speakers": [],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/9a80ifytdx65lkh6/index.m3u8",
+    "start": 20400,
+    "end": 21610
+  },
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/opening_ceremony_announcements.jpg"
+}
