@@ -89,7 +89,7 @@ export const Player = ({
         />
       </div>
     ),
-    []
+    [playbackId, stream?.playbackId, mediaElementRef, address]
   )
 }
 
