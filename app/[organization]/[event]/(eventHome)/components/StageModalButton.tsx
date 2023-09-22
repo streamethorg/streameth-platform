@@ -17,6 +17,19 @@ const StageModalButton = ({ stages }: { stages: IStage[] }) => {
     router.push(stageHref)
     closeModal()
   }
+  const stagePages = () => {
+    let pages = []
+    for (const stage of stages) {
+      if (stage.streamSettings.streamId) {
+        pages.push({
+          href: `${stage.eventId}/stage/${stage.id}`,
+          name: stage.name,
+          icon: <ViewColumnsIcon />,
+        })
+      }
+    }
+    return pages
+  }
 
   const handleButtonClick = () => {
     if (stages.length === 1) {
@@ -25,13 +38,7 @@ const StageModalButton = ({ stages }: { stages: IStage[] }) => {
     } else {
       openModal(
         <StageModal
-          stages={stages.map((stage) => {
-            return {
-              href: `${stage.eventId}/stage/${stage.id}`,
-              name: stage.name,
-              icon: <ViewColumnsIcon />,
-            }
-          })}
+          stages={stagePages()}
           handleClick={handleClick}
         />
       )
