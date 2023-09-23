@@ -1,1 +1,25 @@
-{"id":"empowering_afrofuturism_and_black_nerd_culture_content_growth_storytelling_in_the_age_of_web__ai","name":"Empowering Afrofuturism and Black Nerd Culture: Content Growth Storytelling in the Age of Web & AI","description":"1","start":"2023-09-16T15:00:00-05:00","end":"2023-09-16T16:00:00-05:00","stageId":"michigan_stage__creatives__trad_business_","speakers":[{"id":"aaron_carl_lewis","name":"Aaron \"Carl\" Lewis","bio":null,"eventId":"ethchicago","photo":""}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/empowering_afrofuturism_and_black_nerd_culture_content_growth_storytelling_in_the_age_of_web__ai.jpg"}
+{
+  "id": "empowering_afrofuturism_and_black_nerd_culture_content_growth_storytelling_in_the_age_of_web__ai",
+  "name": "Empowering Afrofuturism and Black Nerd Culture: Content Growth Storytelling in the Age of Web & AI",
+  "description": "1",
+  "start": "2023-09-16T15:00:00-05:00",
+  "end": "2023-09-16T16:00:00-05:00",
+  "stageId": "michigan_stage__creatives__trad_business_",
+  "speakers": [
+    {
+      "id": "aaron_carl_lewis",
+      "name": "Aaron \"Carl\" Lewis",
+      "bio": null,
+      "eventId": "ethchicago",
+      "photo": ""
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
+    "start": 0,
+    "end": 0
+  },
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/empowering_afrofuturism_and_black_nerd_culture_content_growth_storytelling_in_the_age_of_web__ai.jpg"
+}

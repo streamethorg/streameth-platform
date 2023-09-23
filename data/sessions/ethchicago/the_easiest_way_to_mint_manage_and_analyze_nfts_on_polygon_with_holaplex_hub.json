@@ -1,1 +1,25 @@
-{"id":"the_easiest_way_to_mint_manage_and_analyze_nfts_on_polygon_with_holaplex_hub","name":"The Easiest Way to Mint, Manage, and Analyze NFTs on Polygon with Holaplex Hub","description":"NFTs are fun, but integrating them into your business can be hard.\r\n\r\nWith Holaplex Hub you can test how NFTs fit into your business strategy in minutes. Join Holaplex's very own Pontus, who isn't technical at all, as he showcases how easy it is to build a starter minting solution powered by a fully functioning end-to-end enterprise NFT management solution with analytics on stage at ETH Chicago.","start":1694971800000,"end":1694973600000,"stageId":"michigan_stage__creatives__trad_business_","speakers":[{"id":"pontus_andersson","name":"Pontus Andersson","bio":null,"eventId":"ethchicago","photo":""}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/the_easiest_way_to_mint_manage_and_analyze_nfts_on_polygon_with_holaplex_hub.jpg"}
+{
+  "id": "the_easiest_way_to_mint_manage_and_analyze_nfts_on_polygon_with_holaplex_hub",
+  "name": "The Easiest Way to Mint, Manage, and Analyze NFTs on Polygon with Holaplex Hub",
+  "description": "NFTs are fun, but integrating them into your business can be hard.\r\n\r\nWith Holaplex Hub you can test how NFTs fit into your business strategy in minutes. Join Holaplex's very own Pontus, who isn't technical at all, as he showcases how easy it is to build a starter minting solution powered by a fully functioning end-to-end enterprise NFT management solution with analytics on stage at ETH Chicago.",
+  "start": 1694971800000,
+  "end": 1694973600000,
+  "stageId": "michigan_stage__creatives__trad_business_",
+  "speakers": [
+    {
+      "id": "pontus_andersson",
+      "name": "Pontus Andersson",
+      "bio": null,
+      "eventId": "ethchicago",
+      "photo": ""
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a74dmy8t0vvqjvdt/index.m3u8",
+    "start": 12970,
+    "end": 14620
+  },
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/the_easiest_way_to_mint_manage_and_analyze_nfts_on_polygon_with_holaplex_hub.jpg"
+}

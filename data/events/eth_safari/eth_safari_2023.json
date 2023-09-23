@@ -1,0 +1,23 @@
+{
+  "id": "eth_safari_2023",
+  "name": "ETH Safari 2023",
+  "description": "Welcome to the largest ETH event happening in Africa!",
+  "start": "2023-09-21T00:00:00.000Z",
+  "end": "2023-09-23T00:00:00.000Z",
+  "location": "Kalifi, Kenya",
+  "organizationId": "eth_safari",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1uUTWJj0yrbmGo2FF4xOkBQLbFAcpErcLxBMsrx02GPE",
+        "apiKey": "w"
+      }
+    }
+  ],
+  "eventCover": "undefined.png",
+  "archiveMode": false,
+  "timezone": "Africa/Nairobi",
+  "logo": "ethsafari_logo.jpeg",
+  "banner": "ethsafari_banner.jpeg"
+}

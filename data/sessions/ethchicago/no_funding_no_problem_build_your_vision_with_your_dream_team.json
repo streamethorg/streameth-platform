@@ -1,1 +1,25 @@
-{"id":"no_funding_no_problem_build_your_vision_with_your_dream_team","name":"No Funding? No Problem: Build Your Vision With Your Dream Team.","description":"Have you ever wanted to build an ambitious product or startup, but don't have the resources, experience, or team? This is for you.","start":1694815200000,"end":1694817000000,"stageId":"east_room__main_","speakers":[{"id":"yash_jain","name":"Yash Jain","bio":"Founder, CEO, & Game Director of Hero Trainer | Digital Health Ecosystem for Gamers","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/Profile_Pic_pvNUJQR.png"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/no_funding_no_problem_build_your_vision_with_your_dream_team.jpg"}
+{
+  "id": "no_funding_no_problem_build_your_vision_with_your_dream_team",
+  "name": "No Funding? No Problem: Build Your Vision With Your Dream Team.",
+  "description": "Have you ever wanted to build an ambitious product or startup, but don't have the resources, experience, or team? This is for you.",
+  "start": 1694815200000,
+  "end": 1694817000000,
+  "stageId": "east_room__main_",
+  "speakers": [
+    {
+      "id": "yash_jain",
+      "name": "Yash Jain",
+      "bio": "Founder, CEO, & Game Director of Hero Trainer | Digital Health Ecosystem for Gamers",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/Profile_Pic_pvNUJQR.png"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/9a80ifytdx65lkh6/index.m3u8",
+    "start": 17690,
+    "end": 19000
+  },
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/no_funding_no_problem_build_your_vision_with_your_dream_team.jpg"
+}

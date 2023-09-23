@@ -1,12 +1,11 @@
 import StageController from '@/server/controller/stage'
 import { notFound } from 'next/navigation'
-import { getSessions } from '@/utils/api'
 import { getEventDays, isSameDay } from '@/utils/time'
 import EventController from '@/server/controller/event'
 import StageLayout from './components/StageLayout'
 import { StageContextProvider } from './components/StageContext'
 import type { Metadata, ResolvingMetadata } from 'next'
-
+import SessionController from '@/server/controller/session'
 interface Params {
   params: {
     organization: string
@@ -36,6 +35,7 @@ export async function generateStaticParams({
 export default async function Stage({ params }: Params) {
   const eventController = new EventController()
   const stageController = new StageController()
+  const sessionController = new SessionController()
   try {
     const event = await eventController.getEvent(
       params.event,
@@ -50,9 +50,8 @@ export default async function Stage({ params }: Params) {
       isSameDay(day, new Date().getTime())
     )
 
-    const sessions = await getSessions({
-      event,
-      date: currentDay ? currentDay : days[0],
+    const sessions = await sessionController.getAllSessions({
+      eventId: event.id,
       stage: params.stage,
       timestamp: new Date().getTime(),
     })
@@ -72,6 +71,7 @@ export default async function Stage({ params }: Params) {
       </StageContextProvider>
     )
   } catch (e) {
+    console.log('stage failed to load', e)
     return notFound()
   }
 }

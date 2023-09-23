@@ -2,7 +2,6 @@ import { IsNotEmpty, IsUrl, IsOptional, validate } from "class-validator";
 import { IEvent } from "./event";
 import { generateId, BASE_PATH } from "../utils";
 import path from "path";
-import { IOrganization } from "./organization";
 
 export interface ISpeaker {
   id: string;
@@ -13,6 +12,7 @@ export interface ISpeaker {
   github?: string;
   website?: string;
   photo?: string;
+  company?: string;
 }
 
 export default class Speaker implements ISpeaker {
@@ -42,6 +42,9 @@ export default class Speaker implements ISpeaker {
   @IsOptional()
   photo?: string;
 
+  @IsOptional()
+  company?: string;
+
   constructor({
     name,
     bio,
@@ -50,6 +53,7 @@ export default class Speaker implements ISpeaker {
     github,
     website,
     photo,
+    company
   }: Omit<ISpeaker, "id"> & { id?: string }) {
     this.id = generateId(name);
     this.name = name;
@@ -59,6 +63,7 @@ export default class Speaker implements ISpeaker {
     this.github = github;
     this.website = website;
     this.photo = photo;
+    this.company = company;
     this.validateThis();
   }
 
