@@ -42,12 +42,7 @@
       "photo": ""
     }
   ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a74dmy8t0vvqjvdt/index.m3u8",
-    "start": 4145,
-    "end": 9230
-  },
-  "playbackId": "",
+  "playbackId": "https://lp-playback.com/hls/0378b7wne4eedush/index.m3u8",
   "eventId": "ethchicago",
   "coverImage": "/sessions/ethchicago/blockchain__supply_chain.jpg"
 }
