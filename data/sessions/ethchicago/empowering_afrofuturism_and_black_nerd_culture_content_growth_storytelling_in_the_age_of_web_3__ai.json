@@ -16,7 +16,8 @@
   ],
   "source": {
     "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
-    "end": 0
+    "start": 14390,
+    "end": 17040
   },
   "playbackId": "",
   "eventId": "ethchicago",
