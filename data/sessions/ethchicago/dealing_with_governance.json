@@ -1,1 +1,25 @@
-{"id":"dealing_with_governance","name":"Dealing with Governance","description":"Governance can be a pain in the @$^ so why do we even bother? In this talk we'll go over why governance is worth dealing with, some of the well known high stakes issues, and some lesser understood pitfalls.","start":1694892600000,"end":1694894400000,"stageId":"michigan_stage__creatives__trad_business_","speakers":[{"id":"payton_rose","name":"Payton Rose","bio":"Disc golfer, governance nerd, certified dreamer. \r\n\r\nAfter serving for over two years as Governance Facilitator at MakerDAO, I have embarked on the journey of governance design work. I have a passion for making things less terrible for all involved.","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/IMG_7854_JsfGfDn.jpeg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/dealing_with_governance.jpg"}
+{
+  "id": "dealing_with_governance",
+  "name": "Dealing with Governance",
+  "description": "Governance can be a pain in the @$^ so why do we even bother? In this talk we'll go over why governance is worth dealing with, some of the well known high stakes issues, and some lesser understood pitfalls.",
+  "start": 1694892600000,
+  "end": 1694894400000,
+  "stageId": "michigan_stage__creatives__trad_business_",
+  "speakers": [
+    {
+      "id": "payton_rose",
+      "name": "Payton Rose",
+      "bio": "Disc golfer, governance nerd, certified dreamer. \r\n\r\nAfter serving for over two years as Governance Facilitator at MakerDAO, I have embarked on the journey of governance design work. I have a passion for making things less terrible for all involved.",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/IMG_7854_JsfGfDn.jpeg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
+    "start": 10930,
+    "end": 14140
+  },
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/dealing_with_governance.jpg"
+}
