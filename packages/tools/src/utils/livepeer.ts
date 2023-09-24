@@ -1,3 +1,4 @@
+import fs from 'fs'
 import { createClient, studioProvider } from '@livepeer/react'
 import { createReadStream, existsSync, writeFileSync } from 'fs'
 import { join } from 'path'
@@ -11,6 +12,11 @@ export async function uploadAsset(session: any, path: string) {
 
   if (session.playback?.videoUrl || session.videoUrl) {
     console.log('Asset already uploaded', session.id)
+    return
+  }
+
+  if (!fs.existsSync(path)) {
+    console.log('File does not exist', path)
     return
   }
 
