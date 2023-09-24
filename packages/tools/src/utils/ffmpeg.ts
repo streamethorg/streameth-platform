@@ -48,8 +48,8 @@ export async function JoinSessions(sessions: string[]) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/outros/${id}.mp4`)
     }
 
-    if (inputs.length === 0) {
-      console.log('No inputs for', id)
+    if (inputs.length <= 1) {
+      console.log('Not enough inputs to join', id)
       continue
     }
 
@@ -58,7 +58,8 @@ export async function JoinSessions(sessions: string[]) {
 }
 
 export async function Join(inputs: string[], output: string) {
-  console.log('Join', inputs.length, 'videos to', output)
+  console.log('Joining videos to', output)
+  console.log('Inputs:', inputs)
 
   if (fs.existsSync(output)) {
     console.log('File already exists', output)
