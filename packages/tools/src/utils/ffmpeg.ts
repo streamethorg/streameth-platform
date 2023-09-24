@@ -5,15 +5,7 @@ import ffmpegPath from 'ffmpeg-static'
 import { CONFIG, resetTmpFolder } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
-import type editly from 'editly'
 import { join } from 'path'
-
-const getEditly = async (): Promise<typeof editly> => {
-  const lib = await (eval(`import('editly')`) as Promise<{
-    default: typeof import('editly')
-  }>)
-  return lib.default
-}
 
 export function ToStream(filepath: string) {
   return createReadStream(filepath, { encoding: 'utf8' })
@@ -87,21 +79,21 @@ export async function Join(inputs: string[], output: string) {
   resetTmpFolder()
 }
 
-export async function Editly(inputs: string[], output: string) {
-  const editly = await getEditly()
-  await editly({
-    fast: false, // debug
-    keepSourceAudio: true,
-    outPath: output,
-    defaults: {
-      transition: {
-        duration: 0.75,
-        name: 'fade', // https://gl-transitions.com/gallery
-      },
-    },
-    clips: inputs.map((input) => ({ layers: [{ type: 'video', path: input }] })),
-  })
-}
+// export async function Editly(inputs: string[], output: string) {
+//   const editly = await getEditly()
+//   await editly({
+//     fast: false, // debug
+//     keepSourceAudio: true,
+//     outPath: output,
+//     defaults: {
+//       transition: {
+//         duration: 0.75,
+//         name: 'fade', // https://gl-transitions.com/gallery
+//       },
+//     },
+//     clips: inputs.map((input) => ({ layers: [{ type: 'video', path: input }] })),
+//   })
+// }
 
 export async function Split(sessions: { id: string; streamUrl: string; start: number; end: number }[]) {
   console.log('Splitting to', sessions.length, 'videos')
