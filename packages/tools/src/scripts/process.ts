@@ -13,7 +13,11 @@ async function Run() {
   const files = GetData(join(CONFIG.DATA_FOLDER, 'sessions'))
   const filesToProcess = files.filter(
     (file) =>
-      file.source && !file.videoUrl && !file.playback?.videoUrl &&
+      file.source &&
+      file.source.start > 0 &&
+      file.source.end > 0 &&
+      !file.videoUrl &&
+      !file.playback?.videoUrl &&
       file.eventId === 'funding_the_commons_berlin_2023'
   )
 
@@ -27,7 +31,7 @@ async function Run() {
     })
   )
   console.log('Total Sessions to process', filesToProcess.length)
-  
+
   await Split(
     filesToProcess.map((i) => {
       return {
