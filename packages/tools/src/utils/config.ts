@@ -1,6 +1,6 @@
 import { join } from 'path'
 import dotenv from 'dotenv'
-import { mkdirSync } from 'fs'
+import { mkdirSync, rmSync } from 'fs'
 
 // Load configs from current and root folder
 dotenv.config()
@@ -40,3 +40,11 @@ export const CONFIG = {
   mkdirSync(join(CONFIG.ASSET_FOLDER, 'splits'), { recursive: true })
   mkdirSync(join(CONFIG.ASSET_FOLDER, 'tmp'), { recursive: true })
 })()
+
+export function resetTmpFolder() {
+  rmSync(join(CONFIG.ASSET_FOLDER, 'tmp'), {
+    recursive: true,
+    force: true,
+  })
+  mkdirSync(join(CONFIG.ASSET_FOLDER, 'tmp'), { recursive: true })
+}

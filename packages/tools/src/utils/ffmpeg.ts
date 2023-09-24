@@ -2,10 +2,11 @@ import fs from 'fs'
 import concat from 'ffmpeg-concat'
 import ffmpeg from 'fluent-ffmpeg'
 import ffmpegPath from 'ffmpeg-static'
-import { CONFIG } from './config'
+import { CONFIG, resetTmpFolder } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
 import type editly from 'editly'
+import { join } from 'path'
 
 const getEditly = async (): Promise<typeof editly> => {
   const lib = await (eval(`import('editly')`) as Promise<{
@@ -45,8 +46,8 @@ export async function JoinSessions(sessions: string[]) {
     const id = sessions[i]
     const inputs = []
 
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)
+    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)) {
+      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)
     }
     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)
@@ -76,12 +77,14 @@ export async function Join(inputs: string[], output: string) {
     output: output,
     videos: inputs,
     frameFormat: 'raw',
-    // tempDir: join(CONFIG.ASSET_FOLDER, 'tmp'),
+    tempDir: join(CONFIG.ASSET_FOLDER, 'tmp'),
     transition: {
       name: 'fade', // Options: fade, directionalwipe, circleopen, squareswire
       duration: 750,
     },
   })
+
+  resetTmpFolder()
 }
 
 export async function Editly(inputs: string[], output: string) {
