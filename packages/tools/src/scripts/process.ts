@@ -32,26 +32,23 @@ async function Run() {
   )
   console.log('Total Sessions to process', filesToProcess.length)
 
-  await Split(
-    filesToProcess.map((i) => {
-      return {
-        id: i.id,
-        streamUrl: i.source.streamUrl, // "https://lp-playback.com/hls/a2ae5cylmxs38npg/1080p0.mp4",
-        start: i.source.start,
-        end: i.source.end,
-      }
-    })
-  )
-
-  await new Promise((r) => setTimeout(r, 1000))
-
-  const filesToProcessArray = filesToProcess.map((i) => i.id)
-  await JoinSessions(filesToProcessArray)
-
-  await new Promise((r) => setTimeout(r, 1000))
-
   for (let i = 0; i < filesToProcess.length; i++) {
     const session = filesToProcess[i]
+    await Split([
+      {
+        id: session.id,
+        streamUrl: session.source.streamUrl,
+        start: session.source.start,
+        end: session.source.end,
+      },
+    ])
+
+    await new Promise((r) => setTimeout(r, 1000))
+
+    await JoinSessions([session.id])
+
+    await new Promise((r) => setTimeout(r, 1000))
+
     await uploadAsset(
       session,
       join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`)
