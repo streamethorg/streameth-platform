@@ -38,8 +38,8 @@ export async function JoinSessions(sessions: string[]) {
     const id = sessions[i]
     const inputs = []
 
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id}.mp4`)
+    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)) {
+      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)
     }
     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)
