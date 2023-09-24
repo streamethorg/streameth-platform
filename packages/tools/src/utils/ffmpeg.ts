@@ -38,8 +38,8 @@ export async function JoinSessions(sessions: string[]) {
     const id = sessions[i]
     const inputs = []
 
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)
+    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id.replace('_', '-')}.mp4`)) {
+      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id.replace('_', '-')}.mp4`)
     }
     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)
@@ -48,8 +48,15 @@ export async function JoinSessions(sessions: string[]) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/outros/${id}.mp4`)
     }
 
-    if (inputs.length <= 1) {
-      console.log('Not enough inputs to join', id)
+    if (inputs.length === 0) {
+      console.log('No inputs found', id)
+      continue
+    }
+
+    // if split is found, but no in-/outro move to session folder
+    if (inputs.length === 1 && fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
+      console.log('Not enough inputs to join. Moving split video')
+      fs.renameSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
       continue
     }
 
@@ -80,23 +87,14 @@ export async function Join(inputs: string[], output: string) {
   resetTmpFolder()
 }
 
-// export async function Editly(inputs: string[], output: string) {
-//   const editly = await getEditly()
-//   await editly({
-//     fast: false, // debug
-//     keepSourceAudio: true,
-//     outPath: output,
-//     defaults: {
-//       transition: {
-//         duration: 0.75,
-//         name: 'fade', // https://gl-transitions.com/gallery
-//       },
-//     },
-//     clips: inputs.map((input) => ({ layers: [{ type: 'video', path: input }] })),
-//   })
-// }
-
-export async function Split(sessions: { id: string; streamUrl: string; start: number; end: number }[]) {
+export async function Split(
+  sessions: {
+    id: string
+    streamUrl: string
+    start: number
+    end: number
+  }[]
+) {
   console.log('Splitting to', sessions.length, 'videos')
 
   for (const session of sessions) {
