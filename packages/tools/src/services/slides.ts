@@ -84,6 +84,7 @@ export async function DownloadSlides(id: string) {
 
 export async function UploadDrive(session: any, path: string, parentId?: string) {
   try {
+    console.log('Upload session to Drive', session.id, path)
     const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
     const client = google.drive('v3')
 
@@ -99,6 +100,7 @@ export async function UploadDrive(session: any, path: string, parentId?: string)
       },
     })
 
+    console.log('Upload completed', upload.data.id)
     return upload.data
   } catch (ex) {
     console.log('Unable to upload to Google Drive', session)
