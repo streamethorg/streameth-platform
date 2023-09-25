@@ -20,7 +20,7 @@
     "start": 3521,
     "end": 4523
   },
-  "playbackId": "https://lp-playback.com/hls/8a5fgmjuf8t2exbx/index.m3u8",
+  "videoUrl": "https://lp-playback.com/hls/8a5fgmjuf8t2exbx/index.m3u8",
   "eventId": "funding_the_commons_berlin_2023",
   "coverImage": "/sessions/funding_the_commons_berlin_2023/retroactive_public_goods_funding_2_years_in.jpg"
 }
