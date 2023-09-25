@@ -56,7 +56,7 @@ export async function JoinSessions(sessions: string[]) {
     // if split is found, but no in-/outro move to session folder
     if (inputs.length === 1 && fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
       console.log('Not enough inputs to join. Moving split video')
-      fs.renameSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
+      fs.copyFileSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
       continue
     }
 
