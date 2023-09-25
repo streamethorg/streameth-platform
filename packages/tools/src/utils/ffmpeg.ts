@@ -2,17 +2,10 @@ import fs from 'fs'
 import concat from 'ffmpeg-concat'
 import ffmpeg from 'fluent-ffmpeg'
 import ffmpegPath from 'ffmpeg-static'
-import { CONFIG } from './config'
+import { CONFIG, resetTmpFolder } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
-import type editly from 'editly'
-
-const getEditly = async (): Promise<typeof editly> => {
-  const lib = await (eval(`import('editly')`) as Promise<{
-    default: typeof import('editly')
-  }>)
-  return lib.default
-}
+import { join } from 'path'
 
 export function ToStream(filepath: string) {
   return createReadStream(filepath, { encoding: 'utf8' })
@@ -43,10 +36,11 @@ export async function JoinSessions(sessions: string[]) {
 
   for (let i = 0; i < sessions.length; i++) {
     const id = sessions[i]
+    const introId = id.replace(/["_"]/g, '-')
     const inputs = []
 
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${id.replace("_", "-")}.mp4`)
+    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${introId}.mp4`)) {
+      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${introId}.mp4`)
     }
     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
       inputs.push(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)
@@ -56,7 +50,14 @@ export async function JoinSessions(sessions: string[]) {
     }
 
     if (inputs.length === 0) {
-      console.log('No inputs for', id)
+      console.log('No inputs found', id)
+      continue
+    }
+
+    // if split is found, but no in-/outro move to session folder
+    if (inputs.length === 1 && fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
+      console.log('Not enough inputs to join. Moving split video')
+      fs.copyFileSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
       continue
     }
 
@@ -65,7 +66,8 @@ export async function JoinSessions(sessions: string[]) {
 }
 
 export async function Join(inputs: string[], output: string) {
-  console.log('Join', inputs.length, 'videos to', output)
+  console.log('Joining videos to', output)
+  console.log('Inputs:', inputs)
 
   if (fs.existsSync(output)) {
     console.log('File already exists', output)
@@ -76,31 +78,24 @@ export async function Join(inputs: string[], output: string) {
     output: output,
     videos: inputs,
     frameFormat: 'raw',
-    // tempDir: join(CONFIG.ASSET_FOLDER, 'tmp'),
+    tempDir: join(CONFIG.ASSET_FOLDER, 'tmp'),
     transition: {
       name: 'fade', // Options: fade, directionalwipe, circleopen, squareswire
       duration: 750,
     },
   })
+
+  resetTmpFolder()
 }
 
-export async function Editly(inputs: string[], output: string) {
-  const editly = await getEditly()
-  await editly({
-    fast: false, // debug
-    keepSourceAudio: true,
-    outPath: output,
-    defaults: {
-      transition: {
-        duration: 0.75,
-        name: 'fade', // https://gl-transitions.com/gallery
-      },
-    },
-    clips: inputs.map((input) => ({ layers: [{ type: 'video', path: input }] })),
-  })
-}
-
-export async function Split(sessions: { id: string; streamUrl: string; start: number; end: number }[]) {
+export async function Split(
+  sessions: {
+    id: string
+    streamUrl: string
+    start: number
+    end: number
+  }[]
+) {
   console.log('Splitting to', sessions.length, 'videos')
 
   for (const session of sessions) {

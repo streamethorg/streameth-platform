@@ -1,13 +1,15 @@
-import { Authenticate } from './google'
+import { AuthenticateServiceAccount } from './google'
 import { CONFIG } from 'utils/config'
-import fs from 'fs'
+import fs, { createReadStream } from 'fs'
 
 export const PRESENTATION_SCOPES = ['https://www.googleapis.com/auth/presentations']
 export const DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive']
 
 export async function CreateFolders(folders: string[], parentId?: string) {
   console.log('Create folders', folders, parentId)
-  const google = await Authenticate(DRIVE_SCOPES)
+
+  // MAKE SURE NOT TO COMMIT THE SECRET FILES
+  const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
   const client = google.drive('v3')
 
   for (const folder of folders) {
@@ -40,7 +42,9 @@ export async function CreateFolders(folders: string[], parentId?: string) {
 
 export async function CreateSlide(title: string, parentId?: string) {
   console.log('CreateSlide', title)
-  const client = await Authenticate([...PRESENTATION_SCOPES, ...DRIVE_SCOPES])
+
+  // MAKE SURE NOT TO COMMIT THE SECRET FILES
+  const client = await AuthenticateServiceAccount([...PRESENTATION_SCOPES, ...DRIVE_SCOPES])
 
   const presentation = await client.slides('v1').presentations.create({
     requestBody: {
@@ -75,6 +79,32 @@ export async function DownloadSlides(id: string) {
     fs.writeFileSync(`${CONFIG.ASSET_FOLDER}/slides/${id}.pdf`, buffer)
   } else {
     console.log('Invalid slides', id)
+  }
+}
+
+export async function UploadDrive(session: any, path: string, parentId?: string) {
+  try {
+    console.log('Upload session to Drive', session.id, path)
+    const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
+    const client = google.drive('v3')
+
+    const upload = await client.files.create({
+      supportsAllDrives: true,
+      requestBody: {
+        name: session.id,
+        parents: parentId ? [parentId] : [],
+      },
+      media: {
+        mimeType: 'video/mp4',
+        body: createReadStream(path),
+      },
+    })
+
+    console.log('Upload completed', upload.data.id)
+    return upload.data
+  } catch (ex) {
+    console.log('Unable to upload to Google Drive', session)
+    console.error(ex)
   }
 }
 
