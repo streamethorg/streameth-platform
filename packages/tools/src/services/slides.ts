@@ -1,4 +1,4 @@
-import { Authenticate } from './google'
+import { AuthenticateServiceAccount } from './google'
 import { CONFIG } from 'utils/config'
 import fs from 'fs'
 
@@ -7,7 +7,9 @@ export const DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive']
 
 export async function CreateFolders(folders: string[], parentId?: string) {
   console.log('Create folders', folders, parentId)
-  const google = await Authenticate(DRIVE_SCOPES)
+
+  // MAKE SURE NOT TO COMMIT THE SECRET FILES
+  const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
   const client = google.drive('v3')
 
   for (const folder of folders) {
@@ -40,7 +42,9 @@ export async function CreateFolders(folders: string[], parentId?: string) {
 
 export async function CreateSlide(title: string, parentId?: string) {
   console.log('CreateSlide', title)
-  const client = await Authenticate([...PRESENTATION_SCOPES, ...DRIVE_SCOPES])
+
+  // MAKE SURE NOT TO COMMIT THE SECRET FILES
+  const client = await AuthenticateServiceAccount([...PRESENTATION_SCOPES, ...DRIVE_SCOPES])
 
   const presentation = await client.slides('v1').presentations.create({
     requestBody: {

@@ -35,3 +35,7 @@ yarn-error.log*
 next-env.d.ts
 error.log
 test.ts
+
+# Google Cloud secrets
+google_client_secret.json
+google_sa_secret.json
