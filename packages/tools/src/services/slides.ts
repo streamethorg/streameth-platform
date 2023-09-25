@@ -1,6 +1,6 @@
 import { AuthenticateServiceAccount } from './google'
 import { CONFIG } from 'utils/config'
-import fs from 'fs'
+import fs, { createReadStream } from 'fs'
 
 export const PRESENTATION_SCOPES = ['https://www.googleapis.com/auth/presentations']
 export const DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -79,6 +79,30 @@ export async function DownloadSlides(id: string) {
     fs.writeFileSync(`${CONFIG.ASSET_FOLDER}/slides/${id}.pdf`, buffer)
   } else {
     console.log('Invalid slides', id)
+  }
+}
+
+export async function UploadDrive(session: any, path: string, parentId?: string) {
+  try {
+    const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
+    const client = google.drive('v3')
+
+    const upload = await client.files.create({
+      supportsAllDrives: true,
+      requestBody: {
+        name: session.id,
+        parents: parentId ? [parentId] : [],
+      },
+      media: {
+        mimeType: 'video/mp4',
+        body: createReadStream(path),
+      },
+    })
+
+    return upload.data
+  } catch (ex) {
+    console.log('Unable to upload to Google Drive', session)
+    console.error(ex)
   }
 }
 

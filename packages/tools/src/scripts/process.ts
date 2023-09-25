@@ -3,6 +3,7 @@ import { join } from 'path'
 import { CONFIG } from 'utils/config'
 import { GetData } from 'utils/fs'
 import { uploadAsset } from 'utils/livepeer'
+import { UploadDrive } from 'services/slides'
 // Process function runs all scripts at once
 // Split from Livestream => Join with intro/outro => Upload to Livepeer/IPFS
 
@@ -50,7 +51,9 @@ async function Run() {
     await new Promise((r) => setTimeout(r, 1000))
 
     try {
-      await uploadAsset(session, join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`))
+      await UploadDrive(session, join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`), CONFIG.GOOGLE_DRIVE_ID)
+
+      // await uploadAsset(session, join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`))
     } catch (ex) {
       console.log('Unable to upload video')
       console.error(ex)

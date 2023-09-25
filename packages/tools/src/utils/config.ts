@@ -17,6 +17,8 @@ export const CONFIG = {
   GITHUB_API_TOKEN: process.env.GITHUB_API_TOKEN,
   GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
   LIVEPEER_API_KEY: process.env.NEXT_PUBLIC_STUDIO_API_KEY,
+
+  GOOGLE_DRIVE_ID: process.env.GOOGLE_DRIVE_ID || '1q6hzRnxuwI-KSNRknHbFJkGrohqNbK-V',
 }
 
 export const GOOGLE_SA_CREDENTIALS = {
