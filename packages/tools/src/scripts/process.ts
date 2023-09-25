@@ -49,9 +49,11 @@ async function Run() {
 
     await new Promise((r) => setTimeout(r, 1000))
 
-    await uploadAsset(
-      session,
-      join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`)
-    )
+    try {
+      await uploadAsset(session, join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`))
+    } catch (ex) {
+      console.log('Unable to upload video')
+      console.error(ex)
+    }
   }
 }
