@@ -21,14 +21,7 @@
     "start": 4612,
     "end": 5631
   },
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/e6357wglof0gpqpd/index.m3u8",
   "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/circumventing_censorship_with_tor.jpg",
-  "playback": {
-    "livepeerId": "e6357wglof0gpqpd",
-    "videoUrl": "https://lp-playback.com/hls/e6357wglof0gpqpd/index.m3u8",
-    "ipfsHash": "bafybeibkxu3y2fzcqn2dwdbsuvoymzcpfcldmzoshjhcc2i4mfkbnblzzq",
-    "format": "mp4",
-    "duration": 1025.08
-  }
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/circumventing_censorship_with_tor.jpg"
 }

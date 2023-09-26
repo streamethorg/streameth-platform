@@ -1,6 +1,6 @@
 {
-  "id": "tbd",
-  "name": "TBD",
+  "id": "interdependence_onchain_graphs__public_goods",
+  "name": "Interdependence, On-chain Graphs & Public Goods ",
   "description": "",
   "start": 1694266200000,
   "end": 1694267400000,
@@ -18,7 +18,7 @@
     "start": 22676,
     "end": 23774
   },
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/2f8fa04yg6958d4m/index.m3u8",
   "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/tbd.jpg"
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/interdependence_onchain_graphs__public_goods.jpg"
 }
