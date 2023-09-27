@@ -1,18 +1,9 @@
 import { ISession } from '@/server/model/session'
 import { secondsSinceMidnight } from '@/utils/time'
 
-export const getSlotRange = (
-  session: ISession,
-  earliestTime: number
-) => {
-  const start =
-    (secondsSinceMidnight(new Date(session.start)) - earliestTime) /
-    60 /
-    15
-  const end =
-    (secondsSinceMidnight(new Date(session.end)) - earliestTime) /
-    60 /
-    15
+export const getSlotRange = (session: ISession, earliestTime: number) => {
+  const start = (secondsSinceMidnight(new Date(session.start)) - earliestTime) / 60 / 15
+  const end = (secondsSinceMidnight(new Date(session.end)) - earliestTime) / 60 / 15
   return { start, end }
 }
 
@@ -28,11 +19,7 @@ export const sessionsSchedulePosition = (sessions: ISession[]) => {
       return secondsSinceMidnight(new Date(session.start))
     })
   )
-  const max = Math.max(
-    ...sessions.map((session) =>
-      secondsSinceMidnight(new Date(session.end))
-    )
-  )
+  const max = Math.max(...sessions.map((session) => secondsSinceMidnight(new Date(session.end))))
   return {
     min,
     max,

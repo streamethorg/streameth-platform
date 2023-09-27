@@ -10,9 +10,7 @@ interface Params {
 
 const SpeakerPage = async ({ params }: Params) => {
   const speakerController = new SpeakerController()
-  const speakers = (
-    await speakerController.getAllSpeakersForEvent(params.event)
-  ).map((speaker) => speaker.toJson())
+  const speakers = (await speakerController.getAllSpeakersForEvent(params.event)).map((speaker) => speaker.toJson())
 
   return (
     <div className="flex flex-col h-full">

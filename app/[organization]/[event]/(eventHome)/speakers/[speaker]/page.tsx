@@ -11,14 +11,9 @@ interface Params {
   }
 }
 
-export async function generateStaticParams({
-  params,
-}: {
-  params: { organization: string; event: string }
-}) {
+export async function generateStaticParams({ params }: { params: { organization: string; event: string } }) {
   const speakerController = new SpeakerController()
-  const eventSpeakers =
-    await speakerController.getAllSpeakersForEvent(params.event)
+  const eventSpeakers = await speakerController.getAllSpeakersForEvent(params.event)
   return eventSpeakers.map((speaker) => ({
     event: params.event,
     speaker: speaker.id,
@@ -27,9 +22,7 @@ export async function generateStaticParams({
 
 const SpeakerPage = async ({ params }: Params) => {
   const speakerController = new SpeakerController()
-  const speaker = (
-    await speakerController.getSpeaker(params.speaker, params.event)
-  ).toJson()
+  const speaker = (await speakerController.getSpeaker(params.speaker, params.event)).toJson()
   const sessionController = new SessionController()
   const speakerSessions = await sessionController.getAllSessions({
     eventId: params.event,
@@ -43,19 +36,13 @@ const SpeakerPage = async ({ params }: Params) => {
       </div>
       <div className=" md:ml-4 flex flex-col w-full  max-w-xl space-y-4">
         <div className="bg-white shadow p-4 rounded">
-          <p className="text-lg font-bold uppercase mb-4">
-            {speaker.name}
-          </p>
+          <p className="text-lg font-bold uppercase mb-4">{speaker.name}</p>
           <p className="text-main-text py-1">{speaker.bio}</p>
         </div>
         <div className="flex flex-col bg-white shadow p-4 rounded space-y-4">
           <p className="font-bold text-lg">Sessions</p>
           {speakerSessions.map((session, index) => (
-            <ScheduleCard
-              key={session.id}
-              session={session.toJson()}
-              showTime
-            />
+            <ScheduleCard key={session.id} session={session.toJson()} showTime />
           ))}
         </div>
       </div>

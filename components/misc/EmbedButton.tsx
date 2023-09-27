@@ -47,10 +47,7 @@ const ModalContent: React.FC<{
   return (
     <div className="flex flex-col items-center justify-center w-full h-full px-3 py-7">
       <div className="flex flex-col items-center justify-center w-full h-full">
-        <span className="text-md mb-4">
-          Easily embed this stream into your website by adding the
-          iframe code below
-        </span>
+        <span className="text-md mb-4">Easily embed this stream into your website by adding the iframe code below</span>
         <div
           className="relative bg-gray-100 px-2 py-1 border border-gray-200 w-full max-w-full overflow-hidden whitespace-nowrap cursor-pointer"
           onClick={copyToClipboard}>
@@ -65,25 +62,11 @@ const ModalContent: React.FC<{
   )
 }
 
-function EmbedButton({
-  playbackId,
-  streamId,
-  playerName,
-}: {
-  playbackId?: string
-  streamId?: string
-  playerName: string
-}) {
+function EmbedButton({ playbackId, streamId, playerName }: { playbackId?: string; streamId?: string; playerName: string }) {
   const { openModal } = useContext(ModalContext)
 
   const handleModalOpen = () => {
-    openModal(
-      <ModalContent
-        playbackId={playbackId}
-        streamId={streamId}
-        playerName={playerName}
-      />
-    )
+    openModal(<ModalContent playbackId={playbackId} streamId={streamId} playerName={playerName} />)
   }
 
   return (

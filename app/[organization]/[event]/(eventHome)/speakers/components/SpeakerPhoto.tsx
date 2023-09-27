@@ -6,16 +6,8 @@ function CreateBlockie(username: string) {
   return makeBlockie(username)
 }
 
-const SpeakerPhoto = ({
-  speaker,
-  size,
-}: {
-  speaker: ISpeaker
-  size?: 'sm' | 'md' | 'lg'
-}) => {
-  const avatar = speaker.photo
-    ? speaker.photo
-    : CreateBlockie(speaker.name)
+const SpeakerPhoto = ({ speaker, size }: { speaker: ISpeaker; size?: 'sm' | 'md' | 'lg' }) => {
+  const avatar = speaker.photo ? speaker.photo : CreateBlockie(speaker.name)
   let sizeString
   if (size === 'sm') {
     sizeString = 'h-8 w-8'
@@ -27,14 +19,7 @@ const SpeakerPhoto = ({
 
   return (
     <div className={` relative ${sizeString}`}>
-      <Image
-        src={
-          speaker.photo ? speaker.photo : CreateBlockie(speaker.name)
-        }
-        alt={speaker.name}
-        fill
-        placeholder="empty"
-      />
+      <Image src={speaker.photo ? speaker.photo : CreateBlockie(speaker.name)} alt={speaker.name} fill placeholder="empty" />
     </div>
   )
 }

@@ -13,18 +13,11 @@ export async function generateStaticParams() {
   }))
 }
 
-const EventPage = async ({
-  params,
-}: {
-  params: { organization: string }
-}) => {
+const EventPage = async ({ params }: { params: { organization: string } }) => {
   const events: IEvent[] = await (
-    await fetch(
-      `${apiUrl()}/organizations/${params.organization}/events`,
-      {
-        cache: 'no-store',
-      }
-    )
+    await fetch(`${apiUrl()}/organizations/${params.organization}/events`, {
+      cache: 'no-store',
+    })
   ).json()
 
   return (

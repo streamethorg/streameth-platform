@@ -19,25 +19,21 @@ export function VideoPlayer(props: any) {
       videoElement.classList.add('vjs-big-play-centered')
       videoRef.current.appendChild(videoElement)
 
-      const player = (playerRef.current = videojs(
-        videoElement,
-        options,
-        () => {
-          // Handle player events..
-          // player.on('waiting', () => {
-          //   videojs.log('player is waiting')
-          // })
+      const player = (playerRef.current = videojs(videoElement, options, () => {
+        // Handle player events..
+        // player.on('waiting', () => {
+        //   videojs.log('player is waiting')
+        // })
 
-          // player.on('dispose', () => {
-          //   videojs.log('player will dispose')
-          // })
+        // player.on('dispose', () => {
+        //   videojs.log('player will dispose')
+        // })
 
-          player.on('timeupdate', () => {
-            const currentTime = player.currentTime() ?? 0
-            setDuration(Math.round(currentTime))
-          })
-        }
-      ))
+        player.on('timeupdate', () => {
+          const currentTime = player.currentTime() ?? 0
+          setDuration(Math.round(currentTime))
+        })
+      }))
 
       return
     }

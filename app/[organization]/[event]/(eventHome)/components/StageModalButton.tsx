@@ -36,20 +36,13 @@ const StageModalButton = ({ stages }: { stages: IStage[] }) => {
       const singleStage = stages[0]
       handleClick(`${singleStage.eventId}/stage/${singleStage.id}`)
     } else {
-      openModal(
-        <StageModal
-          stages={stagePages()}
-          handleClick={handleClick}
-        />
-      )
+      openModal(<StageModal stages={stagePages()} handleClick={handleClick} />)
     }
   }
 
   return (
     <div className="flex flex-row justify-center">
-      <button
-        onClick={handleButtonClick}
-        className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent rounded p-4 m-2">
+      <button onClick={handleButtonClick} className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent rounded p-4 m-2">
         Watch Livestream
       </button>
     </div>

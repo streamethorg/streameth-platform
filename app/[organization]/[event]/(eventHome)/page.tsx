@@ -12,18 +12,10 @@ interface Params {
   organization: string
 }
 
-const Button = ({
-  children,
-  link,
-}: {
-  children: React.ReactNode
-  link: string
-}) => (
+const Button = ({ children, link }: { children: React.ReactNode; link: string }) => (
   <div className="flex flex-row justify-center">
     <Link href={link}>
-      <button className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent  rounded p-4 m-2">
-        {children}
-      </button>
+      <button className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent  rounded p-4 m-2">{children}</button>
     </Link>
   </div>
 )
@@ -31,13 +23,8 @@ const Button = ({
 const EventHome = async ({ params }: { params: Params }) => {
   const eventController = new EventController()
 
-  const event = await eventController.getEvent(
-    params.event,
-    params.organization
-  )
-  const stages = (
-    await new StageController().getAllStagesForEvent(params.event)
-  ).map((stage) => stage.toJson())
+  const event = await eventController.getEvent(params.event, params.organization)
+  const stages = (await new StageController().getAllStagesForEvent(params.event)).map((stage) => stage.toJson())
   const dates = getEventDays(event.start, event.end)
   if (!hasData({ event })) return notFound()
 
@@ -49,18 +36,9 @@ const EventHome = async ({ params }: { params: Params }) => {
         <p>{event.description}</p>
         <div className="flex flex-row flex-wrap justify-center items-center p-4">
           <StageModalButton stages={stages} />
-          <Button
-            link={`/${params.organization}/${params.event}/schedule`}>
-            Schedule
-          </Button>
-          <Button
-            link={`/${params.organization}/${params.event}/speakers`}>
-            Speakers
-          </Button>
-          <Button
-            link={`/${params.organization}/${params.event}/archive`}>
-            Archive
-          </Button>
+          <Button link={`/${params.organization}/${params.event}/schedule`}>Schedule</Button>
+          <Button link={`/${params.organization}/${params.event}/speakers`}>Speakers</Button>
+          <Button link={`/${params.organization}/${params.event}/archive`}>Archive</Button>
         </div>
       </div>
     </div>

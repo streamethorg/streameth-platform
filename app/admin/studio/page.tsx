@@ -17,8 +17,7 @@ export interface StageInfo {
 }
 
 export default async function Studio() {
-  const pattern =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+  const pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   const events = await new EventController().getAllEvents()
   const stages = await new StageController().getAllStages()
 
@@ -33,9 +32,7 @@ export default async function Studio() {
       }
     })
   const filteredEvents = events
-    .filter((event) =>
-      filteredStages.some((stage) => stage.eventId === event.id)
-    )
+    .filter((event) => filteredStages.some((stage) => stage.eventId === event.id))
     .map((i: IEvent) => {
       return {
         id: i.id,
@@ -44,7 +41,5 @@ export default async function Studio() {
       }
     })
 
-  return (
-    <StudioLayout events={filteredEvents} stages={filteredStages} />
-  )
+  return <StudioLayout events={filteredEvents} stages={filteredStages} />
 }

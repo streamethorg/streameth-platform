@@ -1,14 +1,9 @@
 import { NextResponse } from 'next/server'
 import EventController from '@/server/controller/event'
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   const eventController = new EventController()
-  const data = await eventController.getAllEventsForOrganization(
-    params.id
-  )
+  const data = await eventController.getAllEventsForOrganization(params.id)
 
   return NextResponse.json(
     data.map((org) => {
@@ -20,10 +15,7 @@ export async function GET(
   )
 }
 
-export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: Request, { params }: { params: { id: string } }) {
   const eventController = new EventController()
   try {
     const eventData = {
@@ -35,9 +27,6 @@ export async function POST(
     return NextResponse.json(data)
   } catch (e) {
     console.log(e)
-    return NextResponse.json(
-      { error: 'Malformed request' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Malformed request' }, { status: 400 })
   }
 }

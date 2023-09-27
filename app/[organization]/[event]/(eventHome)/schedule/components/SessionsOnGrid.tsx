@@ -1,10 +1,6 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import {
-  CELL_HEIGHT,
-  getSlotRange,
-  sessionsSchedulePosition,
-} from '../../utils'
+import { CELL_HEIGHT, getSlotRange, sessionsSchedulePosition } from '../../utils'
 import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 import { ScheduleContext } from './ScheduleContext'
 import { getSessions } from '@/utils/api'
@@ -12,8 +8,7 @@ import { ISession } from '@/server/model/session'
 import { IStage } from '@/server/model/stage'
 
 const StageSessions = ({ stage }: { stage: IStage }) => {
-  const { schedulePosition, setSchedulePositions, event, date } =
-    useContext(ScheduleContext)
+  const { schedulePosition, setSchedulePositions, event, date } = useContext(ScheduleContext)
   const [sessions, setSessions] = useState<ISession[]>([])
 
   useEffect(() => {
@@ -46,12 +41,9 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
             className="absolute right-0 h-full w-full px-2"
             style={{
               top: range.start * CELL_HEIGHT + 0.1 + 'rem',
-              height:
-                (range.end - range.start) * CELL_HEIGHT - 0.1 + 'rem',
+              height: (range.end - range.start) * CELL_HEIGHT - 0.1 + 'rem',
             }}>
-            {session.name !== 'Blank' && (
-              <ScheduleCard session={session} speakers />
-            )}
+            {session.name !== 'Blank' && <ScheduleCard session={session} speakers />}
           </div>
         )
       })}

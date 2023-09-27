@@ -18,9 +18,7 @@ interface props {
 }
 
 export const StageContextProvider = (props: props) => {
-  const [currentSession, setCurrentSession] = useState<ISession>(
-    props.sessions[0]
-  )
+  const [currentSession, setCurrentSession] = useState<ISession>(props.sessions[0])
   const [sessions, setSessions] = useState<ISession[]>(props.sessions)
 
   useEffect(() => {
@@ -44,9 +42,5 @@ export const StageContextProvider = (props: props) => {
     setCurrentSession,
   }
 
-  return (
-    <StageContext.Provider value={value}>
-      {props.children}
-    </StageContext.Provider>
-  )
+  return <StageContext.Provider value={value}>{props.children}</StageContext.Provider>
 }

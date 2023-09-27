@@ -12,23 +12,10 @@ const OfflinePlayer = () => {
   return (
     <div className="min-h-[300px] md:min-h-[500px] md:aspect-video bg-black flex items-center justify-center flex-col h-full">
       <div className="flex flex-col items-center justify-center space-y-2 transform -translate-y-6">
-        <span className="text-2xl font-bold text-white text-center">
-          Stream is offline
-        </span>
-        <span className="text-white dark:text-gray-300 text-xs hidden md:block text-center">
-          Powered by
-        </span>
-        <a
-          className="relative w-24 lg:w-32 h-6"
-          href="https://streameth.org"
-          target="_blank"
-          rel="noreferrer">
-          <Image
-            src={Logo}
-            width={200}
-            height={200}
-            alt="streamETH"
-          />
+        <span className="text-2xl font-bold text-white text-center">Stream is offline</span>
+        <span className="text-white dark:text-gray-300 text-xs hidden md:block text-center">Powered by</span>
+        <a className="relative w-24 lg:w-32 h-6" href="https://streameth.org" target="_blank" rel="noreferrer">
+          <Image src={Logo} width={200} height={200} alt="streamETH" />
         </a>
       </div>
     </div>
