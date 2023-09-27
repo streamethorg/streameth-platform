@@ -13,16 +13,11 @@ export default function SpeakerIcon({
   onlyImage?: boolean
 }) {
   return (
-    <div
-      className={`flex flex-row items-center text-sm ${
-        size === 'md' ? 'h-12' : 'h-8'
-      }`}>
+    <div className={`flex flex-row items-center text-sm ${size === 'md' ? 'h-12' : 'h-8'}`}>
       <div className="rounded m-2">
         <SpeakerPhoto speaker={speaker} size={'md'} />
       </div>
-      {!onlyImage && (
-        <span className="text-main-text text-lg">{speaker.name}</span>
-      )}
+      {!onlyImage && <span className="text-main-text text-lg">{speaker.name}</span>}
       {speaker.twitter && !onlyImage && (
         <SocialIcon
           url={`https://twitter.com/${speaker.twitter}`}

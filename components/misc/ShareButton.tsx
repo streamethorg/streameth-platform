@@ -1,29 +1,15 @@
 'use client'
 import { ModalContext } from '../context/ModalContext'
 import { useContext } from 'react'
-import {
-  FacebookShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-} from 'react-share'
+import { FacebookShareButton, RedditShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
 import { ShareIcon } from '@heroicons/react/24/outline'
-import {
-  FacebookIcon,
-  RedditIcon,
-  TelegramIcon,
-  TwitterIcon,
-  WhatsappIcon,
-} from 'react-share'
+import { FacebookIcon, RedditIcon, TelegramIcon, TwitterIcon, WhatsappIcon } from 'react-share'
 
 const ShareModalContent = () => {
   const text = `Check out this event on @streameth!`
   return (
     <div>
-      <h1 className="font-bold uppercase mb-4 text-accent text-center mx-auto">
-        Share this event
-      </h1>
+      <h1 className="font-bold uppercase mb-4 text-accent text-center mx-auto">Share this event</h1>
       <div className="flex flex-row items-center justify-center space-x-4">
         <FacebookShareButton url={window.location.href} quote={text}>
           <FacebookIcon size={42} round />

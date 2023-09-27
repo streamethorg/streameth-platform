@@ -12,9 +12,7 @@ interface SponsorCarouselProps {
   sponsors: Sponsor[]
 }
 
-const SponsorCarousel: React.FC<SponsorCarouselProps> = ({
-  sponsors: initialSponsors,
-}) => {
+const SponsorCarousel: React.FC<SponsorCarouselProps> = ({ sponsors: initialSponsors }) => {
   const [sponsors, setSponsors] = useState<Sponsor[]>(initialSponsors)
   const [translateX, setTranslateX] = useState<number>(0)
 

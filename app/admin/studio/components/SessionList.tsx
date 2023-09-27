@@ -50,27 +50,18 @@ export function SessionList(props: Props) {
           </thead>
           <tbody>
             {props.sessions
-              .sort(
-                (a, b) =>
-                  dayjs(a.start).valueOf() - dayjs(b.start).valueOf()
-              )
+              .sort((a, b) => dayjs(a.start).valueOf() - dayjs(b.start).valueOf())
               .map((i: ISession) => {
                 return (
                   <tr key={i.id} className="hover:bg-stone-200">
                     <td className="py-2">
-                      <p className="ml-2 text-ellipsis overflow-hidden">
-                        {i.name}
-                      </p>
+                      <p className="ml-2 text-ellipsis overflow-hidden">{i.name}</p>
                     </td>
                     <td>
                       <input
                         type="text"
                         name="start"
-                        placeholder={
-                          i.source?.start
-                            ? String(i.source?.start)
-                            : 'Start'
-                        }
+                        placeholder={i.source?.start ? String(i.source?.start) : 'Start'}
                         className="p-1 mr-2 w-24 text-sm border rounded"
                         required
                         onChange={(e) =>
@@ -91,11 +82,7 @@ export function SessionList(props: Props) {
                       <input
                         type="text"
                         name="end"
-                        placeholder={
-                          i.source?.end
-                            ? String(i.source?.end)
-                            : 'End'
-                        }
+                        placeholder={i.source?.end ? String(i.source?.end) : 'End'}
                         className="p-1  mr-2 w-24 text-sm border rounded"
                         required
                         onChange={(e) =>
@@ -120,9 +107,7 @@ export function SessionList(props: Props) {
       </div>
 
       <div className="mt-4">
-        <button
-          className="p-2 bg-blue-500 text-white rounded"
-          onClick={processVideos}>
+        <button className="p-2 bg-blue-500 text-white rounded" onClick={processVideos}>
           Process
         </button>
       </div>

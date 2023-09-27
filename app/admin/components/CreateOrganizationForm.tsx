@@ -9,11 +9,7 @@ interface OrganizationFormProps {
 }
 import { apiUrl } from '@/server/utils'
 
-const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({
-  onSuccess,
-  onFailure,
-  organization,
-}) => {
+const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, onFailure, organization }) => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -115,10 +111,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({
           required
         />
       </label>
-      <button
-        type="submit"
-        className="p-2 bg-blue-500 text-white rounded"
-        disabled={submitting}>
+      <button type="submit" className="p-2 bg-blue-500 text-white rounded" disabled={submitting}>
         {submitting ? 'Submitting...' : 'Submit'}
       </button>
     </form>

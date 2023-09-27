@@ -9,11 +9,7 @@ export const LoadingContext = createContext<{
   setIsLoading: () => {},
 })
 
-export const LoadingContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
+export const LoadingContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   return (

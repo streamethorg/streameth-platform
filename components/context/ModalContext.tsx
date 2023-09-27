@@ -12,11 +12,7 @@ const ModalContext = createContext<{
   closeModal: () => {},
 })
 
-const ModalContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
+const ModalContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [modal, setModal] = useState<React.ReactNode | null>(null)
 
   const openModal = (modal: React.ReactNode) => {

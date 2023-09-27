@@ -10,9 +10,7 @@ export async function GET(
 ) {
   const speakerController = new SpeakerController()
   try {
-    const data = await speakerController.getAllSpeakersForEvent(
-      params.eventId
-    )
+    const data = await speakerController.getAllSpeakersForEvent(params.eventId)
     return NextResponse.json(data)
   } catch (e) {
     console.log(e)

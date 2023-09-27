@@ -32,13 +32,10 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
           Go to Stream
         </div>
       )}
-      <h1 className="text-lg text-main-text font-bold text-center">
-        {session.name}
-      </h1>
+      <h1 className="text-lg text-main-text font-bold text-center">{session.name}</h1>
       <div className="flex flex-row justify-center items-center space-x-3 p-2">
         <span className="text-secondary-text">
-          {new Date(session.start).toTimeString().slice(0, 5)} -{' '}
-          {new Date(session.end).toTimeString().slice(0, 5)}
+          {new Date(session.start).toTimeString().slice(0, 5)} - {new Date(session.end).toTimeString().slice(0, 5)}
         </span>
       </div>
       <p className="py-4">{session.description}</p>

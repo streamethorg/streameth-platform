@@ -1,10 +1,5 @@
 import { SiweMessage } from 'siwe'
-import {
-  ConnectKitProvider,
-  SIWEConfig,
-  SIWEProvider,
-  getDefaultConfig,
-} from 'connectkit'
+import { ConnectKitProvider, SIWEConfig, SIWEProvider, getDefaultConfig } from 'connectkit'
 import { PropsWithChildren } from 'react'
 import { WagmiConfig, createConfig } from 'wagmi'
 
@@ -18,8 +13,7 @@ const siweConfig = {
       version: '1',
       uri: window.location.origin,
       domain: window.location.host,
-      statement:
-        'Sign In With Ethereum to prove you control this wallet.',
+      statement: 'Sign In With Ethereum to prove you control this wallet.',
     }).prepareMessage()
   },
   verifyMessage: async ({ message, signature }) => {
@@ -55,8 +49,7 @@ const config = createConfig(
   getDefaultConfig({
     appName: 'StreamETH',
     infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
-    walletConnectProjectId:
-      process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   })
 )
 

@@ -16,10 +16,7 @@ export async function GET(
     params: { id: string; eventId: string }
   }
 ) {
-  const searchParams = extractSearchParams<SessionsSearchParams>(
-    new URL(request.url).searchParams,
-    ['timestamp', 'date', 'stage']
-  )
+  const searchParams = extractSearchParams<SessionsSearchParams>(new URL(request.url).searchParams, ['timestamp', 'date', 'stage'])
   const sessionController = new SessionController()
   try {
     //params.eventId, searchParams.stage, Number(searchParams.timestamp), Number(searchParams.date))
