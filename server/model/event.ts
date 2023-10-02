@@ -29,6 +29,7 @@ export interface IEvent {
   archiveMode?: boolean
   website?: string
   timezone: string
+  accentColor?: string
 }
 
 export default class Event implements IEvent {
@@ -63,9 +64,11 @@ export default class Event implements IEvent {
 
   website?: string
 
-  banner? : string
+  banner?: string
 
   timezone: string
+
+  accentColor: string
   constructor({
     id,
     name,
@@ -80,7 +83,8 @@ export default class Event implements IEvent {
     website,
     timezone,
     logo,
-    banner
+    banner,
+    accentColor,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -96,10 +100,9 @@ export default class Event implements IEvent {
     this.timezone = timezone ?? 'utc'
     this.logo = logo
     this.banner = banner
+    this.accentColor = accentColor ?? '#7983ff'
     // this.validateThis();
   }
-
-
 
   async validateThis() {
     const errors = await validate(this)

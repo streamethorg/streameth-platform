@@ -24,6 +24,7 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
     website: '',
     eventCover: '',
     timezone: '',
+    accentColor: '',
   })
 
   useEffect(() => {
@@ -125,6 +126,15 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
           name="timezone"
           placeholder="Timezone"
           value={formData.timezone}
+          onChange={handleChange}
+          className="p-2 border rounded w-full"
+          required
+        />
+        <input
+          type="text"
+          name="accentColor"
+          placeholder="Accent Color"
+          value={formData.accentColor}
           onChange={handleChange}
           className="p-2 border rounded w-full"
           required
