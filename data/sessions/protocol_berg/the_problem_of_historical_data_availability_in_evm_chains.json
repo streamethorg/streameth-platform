@@ -1,1 +1,35 @@
-{"id":"the_problem_of_historical_data_availability_in_evm_chains","name":"The problem of historical data availability in EVM chains","description":"This presentation will try to explain what the problem of historical data availability is in EVM chains, why it exists and how we can try to tackle it.","start":1694780100000,"end":1694782500000,"stageId":"loft__workshop_0","speakers":[{"id":"lefteris_karapetsas","name":"Lefteris Karapetsas","bio":"Ethereum developer since 2014! Contributed to the solidity compiler and C++ ethereum. Built the DAO, saw it get destroyed, then hacked it back to save whatever we could both in ETH and ETC. Development lead for the Raiden network. Founder of rotki. I like birding :D","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/profile2_JQxOaAj.png"},{"id":"yabir_garcia","name":"Yabir Garcia","bio":"Backend developer for rotki. Background on mathematics and CS","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/xOhHvas9_400x400_CGHD8DR.jpg"},{"id":"konstantinos_paparas","name":"Konstantinos Paparas","bio":"Open-source engineer\r\nFrontend lead/Infra @ rotki","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/c3efa1bb30bd70bdd48002c1b6a2d587_jIWqpGY.jpg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/the_problem_of_historical_data_availability_in_evm_chains.jpg"}
+{
+  "id": "the_problem_of_historical_data_availability_in_evm_chains",
+  "name": "The problem of historical data availability in EVM chains",
+  "description": "This presentation will try to explain what the problem of historical data availability is in EVM chains, why it exists and how we can try to tackle it.",
+  "start": 1694780100000,
+  "end": 1694782500000,
+  "stageId": "loft__workshop_0",
+  "speakers": [
+    {
+      "id": "lefteris_karapetsas",
+      "name": "Lefteris Karapetsas",
+      "bio": "Ethereum developer since 2014! Contributed to the solidity compiler and C++ ethereum. Built the DAO, saw it get destroyed, then hacked it back to save whatever we could both in ETH and ETC. Development lead for the Raiden network. Founder of rotki. I like birding :D",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/profile2_JQxOaAj.png"
+    },
+    {
+      "id": "yabir_garcia",
+      "name": "Yabir Garcia",
+      "bio": "Backend developer for rotki. Background on mathematics and CS",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/xOhHvas9_400x400_CGHD8DR.jpg"
+    },
+    {
+      "id": "konstantinos_paparas",
+      "name": "Konstantinos Paparas",
+      "bio": "Open-source engineer\r\nFrontend lead/Infra @ rotki",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/c3efa1bb30bd70bdd48002c1b6a2d587_jIWqpGY.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ae07kobngr7zh4kz/index.m3u8",
+  "playbackId": "",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/the_problem_of_historical_data_availability_in_evm_chains.jpg"
+}
