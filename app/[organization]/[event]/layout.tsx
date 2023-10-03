@@ -4,6 +4,7 @@ import StageController from '@/server/controller/stage'
 import { HomeIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
+import ColorComponent from '../../utils/ColorComponent'
 
 export async function generateStaticParams() {
   const eventController = new EventController()
@@ -73,7 +74,9 @@ const Layout = async ({
   return (
     <div className="flex flex-col md:flex-row lg:overflow-hidden h-full">
       {!event.archiveMode && <Navbar event={event.toJson()} pages={pages} stages={stagePages()} />}
-      <main className={`flex w-full ${event.archiveMode ? ' lg:w-full' : 'lg:w-[calc(100%-5rem)]'} ml-auto bg-background`}>{children}</main>
+      <main className={`flex w-full ${event.archiveMode ? ' lg:w-full' : 'lg:w-[calc(100%-5rem)]'} ml-auto bg-background`}>
+        <ColorComponent accentColor={event.accentColor}>{children}</ColorComponent>
+      </main>
     </div>
   )
 }
