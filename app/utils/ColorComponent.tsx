@@ -20,7 +20,7 @@ const ColorComponent = ({ children, accentColor }: Props) => {
     }
   }, [accentColor, isNotOrganization])
 
-  return <div>{children}</div>
+  return children
 }
 
 export default ColorComponent
