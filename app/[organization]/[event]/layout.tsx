@@ -4,7 +4,7 @@ import StageController from '@/server/controller/stage'
 import { HomeIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
-import ColorComponent from './ColorComponent'
+import ColorComponent from '../../utils/ColorComponent'
 
 export async function generateStaticParams() {
   const eventController = new EventController()
