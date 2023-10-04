@@ -67,7 +67,7 @@ class Session {
   async persist(res: NextResponse): Promise<void> {
     res.cookies.set(COOKIE_NAME, await sealData(this.toJSON(), SESSION_OPTIONS), {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'production',
     })
   }
 }
