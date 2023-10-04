@@ -21,7 +21,7 @@ export const hasData = ({ event }: { event: IEvent }) => {
 
 export const apiUrl = () => {
   if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3000/api'
+    return 'http://127.0.0.1:3000/api'
   }
   return 'https://app.streameth.org/api'
 }
