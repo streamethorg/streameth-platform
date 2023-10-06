@@ -42,7 +42,7 @@
     "mux-embed": "^4.25.1",
     "next": "13.4.19",
     "pino-pretty": "^10.0.0",
-    "postcss": "8.4.24",
+    "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scroll": "^1.8.9",
