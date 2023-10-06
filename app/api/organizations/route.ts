@@ -26,19 +26,19 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    if (!body.organizationId) {
-      return new NextResponse('Bad Request', { status: 400 })
+
+    const environment = process.env.NODE_ENV || 'development'
+
+    if (environment === 'development') {
+      // Create event in the fs
+      await organizationController.createOrganization(await request.json())
+    } else {
+      // Write data to db
+      const folderName = `data/organizations`
+      const fileName = `${body.name.replace(/ /g, '_').toLowerCase()}.json`
+      await AddOrUpdateFile(fileName, JSON.stringify(body), folderName)
     }
-
-    // Create event in the fs
-    const data = await organizationController.createOrganization(await request.json())
-
-    // Write data to db
-    const folderName = `data/organizations`
-    const fileName = `${body.name.replace(/ /g, '_').toLowerCase()}.json`
-    await AddOrUpdateFile(fileName, JSON.stringify(body), folderName)
-
-    return NextResponse.json(data)
+    return NextResponse.json(body)
   } catch (e) {
     console.log(e)
     return NextResponse.json({ error: 'Malformed request' }, { status: 400 })

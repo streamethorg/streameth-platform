@@ -26,25 +26,26 @@ export const POST = async (req: NextRequest, { params }: { params: { id: string 
     }
 
     const body = await req.json()
-    if (!body.organizationId) {
-      return new NextResponse('Bad Request', { status: 400 })
-    }
 
     const eventData = {
       ...body,
       organizationId: params.id,
     }
 
-    // Create event in the fs
-    const eventController = new EventController()
-    const databaseData = await eventController.createEvent(eventData)
+    const environment = process.env.NODE_ENV || 'development'
 
-    // Write data to db
-    const folderName = `data/events/${body.organizationId}`
-    const fileName = `${body.name.replace(/ /g, '_').toLowerCase()}.json`
-    await AddOrUpdateFile(fileName, JSON.stringify(body), folderName)
+    if (environment === 'development') {
+      // Create event in the fs
+      const eventController = new EventController()
+      await eventController.createEvent(eventData)
+    } else {
+      // Write data to db
+      const folderName = `data/events/${body.organizationId}`
+      const fileName = `${body.name.replace(/ /g, '_').toLowerCase()}.json`
+      await AddOrUpdateFile(fileName, JSON.stringify(body), folderName)
+    }
 
-    return NextResponse.json(databaseData, { status: 200 })
+    return NextResponse.json(eventData, { status: 200 })
   } catch (e) {
     console.error(e)
     return new NextResponse('Malformed request', { status: 400 })
