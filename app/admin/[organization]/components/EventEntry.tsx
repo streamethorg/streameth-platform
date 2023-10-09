@@ -1,6 +1,5 @@
 'use client'
 import React, { useContext } from 'react'
-import axios from 'axios'
 import { IEvent } from '@/server/model/event'
 import EditEventButton from './EditEventButton'
 import Link from 'next/link'
@@ -9,15 +8,19 @@ interface EventEntryProps {
 }
 
 const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`api/events/${event.id}`)
-      // onDeleted()
-    } catch (err) {
-      console.error('An error occurred.')
-    }
+  const handleDelete = () => {
+    fetch(`api/events/${event.id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to delete event')
+        }
+      })
+      .catch((err) => {
+        console.error('An error occurred', err)
+      })
   }
-  console.log(event)
 
   return (
     <li className="border p-2 rounded flex justify-between items-center">

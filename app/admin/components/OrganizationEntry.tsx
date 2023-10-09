@@ -1,6 +1,5 @@
 'use client'
-import React, { useContext } from 'react'
-import axios from 'axios'
+import React from 'react'
 import { IOrganization } from '@/server/model/organization'
 import EditOrganizationButton from './EditOrganizationButton'
 import Link from 'next/link'
@@ -9,13 +8,19 @@ interface OrganizationEntryProps {
 }
 
 const OrganizationEntry: React.FC<OrganizationEntryProps> = ({ organization }) => {
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`api/organizations/${organization.id}`)
-      // onDeleted()
-    } catch (err) {
-      console.error('An error occurred.')
-    }
+  const handleDelete = () => {
+    fetch(`api/organizations/${organization.id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('An error occurred while deleting.')
+        }
+        // onDeleted();
+      })
+      .catch((err) => {
+        console.error('An error occurred:', err)
+      })
   }
 
   return (

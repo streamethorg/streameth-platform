@@ -1,6 +1,5 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { IOrganization } from '@/server/model/organization'
 interface OrganizationFormProps {
   onSuccess?: () => void
@@ -35,18 +34,32 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
 
-    try {
-      await axios.post(`${apiUrl()}/organizations`, formData)
-      onSuccess?.()
-    } catch (err) {
-      onFailure?.('An error occurred.')
-    } finally {
-      setSubmitting(false)
-    }
+    fetch(`${apiUrl()}/organizations`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to create organisation')
+        }
+        return response.json()
+      })
+      .then((data) => {
+        onSuccess?.()
+      })
+      .catch((err) => {
+        onFailure?.('An error occurred.')
+      })
+      .finally(() => {
+        setSubmitting(false)
+      })
   }
 
   return (

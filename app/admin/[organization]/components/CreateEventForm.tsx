@@ -1,6 +1,5 @@
 // 'use client'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { IEvent } from '@/server/model/event'
 import { apiUrl } from '@/server/utils'
 import DataImporterSelect from './DataImporterInput'
@@ -67,14 +66,28 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    try {
-      await axios.post(`${apiUrl()}/organizations/${organizationId}/events`, formData)
-      window.location.reload()
-    } catch (err) {
-      setError('An error occurred.')
-    }
+
+    fetch(`${apiUrl()}/organizations/${organizationId}/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to create event')
+        }
+        return response.json()
+      })
+      .then(() => {
+        window.location.reload()
+      })
+      .catch((err) => {
+        setError('An error occurred')
+      })
   }
 
   return (
