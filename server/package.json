@@ -11,6 +11,7 @@
     "change-image": "ts-node ./utils/change_thumbnail.ts"
   },
   "dependencies": {
+    "axios": "^1.5.1",
     "class-validator": "^0.14.0",
     "fluent-ffmpeg": "^2.1.2",
     "googleapis": "^118.0.0",
