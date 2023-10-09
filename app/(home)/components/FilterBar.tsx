@@ -5,7 +5,7 @@ import SearchFilter from '@/app/[organization]/[event]/archive/components/Search
 import { FilterContext } from '@/app/[organization]/[event]/archive/components/FilterContext'
 
 const FilterBar = ({ events }: { events: IEvent[] }) => {
-  const { setFilterOptions } = useContext(FilterContext)
+  const { filteredItems, setFilterOptions } = useContext(FilterContext)
   const [isShowCurrent, setIsShowCurrent] = useState(false)
 
   const eventFilter = events.map((event) => {
@@ -41,6 +41,11 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
   useEffect(() => {
     handleTabClick()
   }, [isShowCurrent])
+
+  // If 'Upcoming events' is empty is switches to 'Past events'
+  if (filteredItems.length === 0 && isShowCurrent === false) {
+    setIsShowCurrent(true)
+  }
 
   return (
     <div className="bg-base p-4 sticky top-0 z-40 w-full flex justify-center items-center drop-shadow-md">
