@@ -17,11 +17,12 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
       console.error('An error occurred.')
     }
   }
+  console.log(event)
 
   return (
     <li className="border p-2 rounded flex justify-between items-center">
-      <Link href={`admin/${event.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
-        <img src={event.eventCover} alt={event.name} className="w-16 h-16 rounded" />
+      <Link href={`/${event.organizationId}/${event.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+        <img src={`/events/${event.eventCover}`} alt={event.name} className="w-16 h-16 rounded" />
         <div>
           <h2 className="text-xl font-bold">{event.name}</h2>
           <p>{event.description}</p>

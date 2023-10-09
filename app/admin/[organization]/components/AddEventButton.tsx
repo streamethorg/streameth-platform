@@ -7,7 +7,7 @@ const AddOrganizationButton = ({ organization }: { organization: string }) => {
   return (
     <div>
       <button className="mb-4 p-2 bg-blue-500 text-white rounded" onClick={() => openModal(<CreateEventForm organizationId={organization} />)}>
-        Add Organization
+        Create a New Event
       </button>
     </div>
   )
