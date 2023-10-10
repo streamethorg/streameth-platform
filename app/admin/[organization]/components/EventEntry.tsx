@@ -34,7 +34,7 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
     openModal(
       <div className="flex flex-col items-center">
         <div className="font-bold mb-2">
-          <span>Are you sure you want to delete the event "{event.name}"?</span>
+          <span>{`Are you sure you want to delete the event "${event.name}"?`}</span>
         </div>
         <div>
           <button onClick={() => handleDelete()} className="bg-blue-500 hover:bg-blue-800 transition-colors text-white p-2 rounded m-2">
