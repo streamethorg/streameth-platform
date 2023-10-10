@@ -10,7 +10,6 @@ import { IEvent } from '@/server/model/event'
  */
 export async function DELETE(req: NextRequest): Promise<NextResponse> {
   const organizationId = req.nextUrl.searchParams.get('organization')
-  console.log(organizationId)
 
   if (!organizationId) {
     return NextResponse.json({ error: 'Organization does not exist' }, { status: 404 })
