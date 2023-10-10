@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { LoadingContext } from '../context/LoadingContext'
 import { IEvent } from '@/server/model/event'
 import StageModal from '@/app/[organization]/[event]/stage/[stage]/components/StageModal'
+
 export interface Page {
   name: string
   href: string

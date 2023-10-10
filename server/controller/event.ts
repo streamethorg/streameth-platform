@@ -1,6 +1,7 @@
 import BaseController from './baseController'
 import Event, { IEvent } from '../model/event'
 import OrganizationController from './organization'
+
 export default class EventController {
   private controller: BaseController<IEvent>
 
@@ -22,6 +23,20 @@ export default class EventController {
     const eventQuery = await Event.getEventPath(evt.organizationId, evt.id)
     await this.controller.create(eventQuery, evt)
     return evt
+  }
+
+  public async deleteEvent(eventId: IEvent['id'], organizationId: IEvent['organizationId']): Promise<void> {
+    if (!eventId || !organizationId) {
+      throw new Error('Invalid eventId or organizationId')
+    }
+
+    const event = await this.getEvent(eventId, organizationId)
+    if (!event) {
+      throw new Error('Event does not exist')
+    }
+
+    const eventQuery = await Event.getEventPath(organizationId, eventId)
+    this.controller.delete(eventQuery)
   }
 
   public async getAllEventsForOrganization(organizationId: IEvent['organizationId']): Promise<Event[]> {

@@ -8,7 +8,7 @@ const EditOrganizationButton = ({ event }: { event: IEvent }) => {
   return (
     <div>
       <button
-        className="p-2 bg-yellow-500 text-white rounded"
+        className="p-2 ml-2 bg-yellow-500 text-white rounded"
         onClick={() => openModal(<CreateEventForm organizationId={event.organizationId} event={event} />)}>
         Edit
       </button>
