@@ -33,7 +33,7 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
   const handleModalOpen = (event: IEvent) => {
     openModal(
       <div className="flex flex-col items-center">
-        <div className="font-bold mb-2">
+        <div className="font-bold text-center mb-2">
           <span>{`Are you sure you want to delete the event "${event.name}"?`}</span>
         </div>
         <div>
