@@ -17,27 +17,25 @@ export async function generateStaticParams() {
 const EventPage = async ({ params }: { params: { organization: string } }) => {
   let events: IEvent[] = []
 
-  try {
-    await fetch(`${apiUrl()}/organizations/${params.organization}/events`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch events')
-        }
-        return response.json()
-      })
-      .then((data) => {
-        events = data
-      })
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
+  await fetch(`${apiUrl()}/organizations/${params.organization}/events`)
+    .then((response) => {
+      if (!response.ok) {
+        return Promise.reject('Failed to fetch events')
+      }
+      return response.json()
+    })
+    .then((data) => {
+      events = data
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 
   return (
     <div className="p-4 overflow-scroll">
       <Link href="/admin">
         <div className="text-blue-500">Back to Admin</div>
       </Link>
-
       <AddEventButton organization={params.organization} />
       <ul className="space-y-4">{events?.map((event) => <EventEntry key={event?.id} event={event} />)}</ul>
     </div>
