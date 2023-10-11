@@ -34,7 +34,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
         <div className="aspect-video relative">
           <Image
             className="rounded"
-            alt="session image"
+            alt="Session image"
             quality={80}
             src={image}
             fill
