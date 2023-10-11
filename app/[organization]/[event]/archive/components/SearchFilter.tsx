@@ -1,6 +1,6 @@
 'use client'
 import { useState, useContext, useEffect } from 'react'
-import { FilterContext, FilterOption } from './FilterContext'
+import { FilterContext, FilterOption } from '../../../../../components/context/FilterContext'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
@@ -22,7 +22,7 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
   useEffect(() => {
     currentFilterOptions.forEach((option) => {
       if (!selectedItems.includes(option) && option.type === filterOptions[0].type) {
-        setSelectedItems(prevItems => [...prevItems, option])
+        setSelectedItems((prevItems) => [...prevItems, option])
       }
     })
   }, [])
@@ -37,12 +37,11 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
     setSelectedItems([])
     setFilterInput('')
     setFilterOptions([])
-
   }
 
   return (
     <div className="flex flex-col justify-between font-light w-full">
-      <div className="relative">
+      <div className="">
         <input
           type="text"
           placeholder={` ${filterName}`}
@@ -51,7 +50,7 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
           className="p-2 h-12 border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
         />
         {filterInput && selectedItems.length === 0 && (
-          <div className="absolute top-fullborder rounded-b-md shadow-md left-0 z-10 bg-primary max-h-40 w-full overflow-auto">
+          <div className="absolute top-fullborder rounded-b-md shadow-md left-0 z-50 bg-primary max-h-40 w-full overflow-auto">
             {filteredOptions().length === 0 ? (
               <div className="py-1">{`No ${filterName} found`}</div>
             ) : (
@@ -64,7 +63,9 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
           </div>
         )}
         {selectedItems.length > 0 && (
-          <div className="flex items-center justify-center absolute right-0 top-0 mt-4 mr-2 cursor-pointer bold text-white bg-accent rounded w-5 h-5" onClick={clearSelectedOption}>
+          <div
+            className="flex items-center justify-center absolute right-0 top-0 mt-4 mr-2 cursor-pointer bold text-white bg-accent rounded w-5 h-5"
+            onClick={clearSelectedOption}>
             x
           </div>
         )}

@@ -75,7 +75,7 @@ function FilterBar2({ sessions, speakers, stages }: { sessions: ISession[]; spea
   })
 
   return (
-    <div key={1} className={`absolute top-0 left-16 lg:right-1/2 lg:left-[35%] w-60 md:w-96 px-4 ${isOpen && 'h-full '} `}>
+    <div key={1} className={` w-full z-50 px-4 ${isOpen && 'h-full '} `}>
       <div className="flex flex-col justify-top items-start  w-full h-full py-2 md:py-3">
         <div className="flex flex-row w-full">
           <SearchFilter filterOptions={sessionFilters} filterName="session name" />

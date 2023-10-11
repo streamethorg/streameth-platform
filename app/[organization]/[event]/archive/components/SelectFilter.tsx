@@ -1,6 +1,6 @@
 'use client'
 import React, { useContext } from 'react'
-import { FilterContext, FilterOption } from './FilterContext'
+import { FilterContext, FilterOption } from '../../../../../components/context/FilterContext'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]

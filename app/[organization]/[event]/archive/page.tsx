@@ -1,6 +1,6 @@
 import FilterBar from './components/FilterBar'
 import FilteredItems from './components/FilteredItems'
-import { FilterContextProvider } from './components/FilterContext'
+import { FilterContextProvider } from '../../../../components/context/FilterContext'
 import SpeakerController from '@/server/controller/speaker'
 import SessionController from '@/server/controller/session'
 import StageController from '@/server/controller/stage'

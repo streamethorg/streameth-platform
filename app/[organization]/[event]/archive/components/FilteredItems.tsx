@@ -1,6 +1,6 @@
 'use client'
 import { useContext, useEffect } from 'react'
-import { FilterContext } from './FilterContext'
+import { FilterContext } from '../../../../../components/context/FilterContext'
 import ArchivedSession from './ArchivedSession'
 import { ISession } from '@/server/model/session'
 

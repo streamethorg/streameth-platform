@@ -6,7 +6,7 @@ import { MobileContextProvider } from '@/components/context/MobileContext'
 import Navbar from '@/components/Layout/NavbarTop'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
-import { FilterContextProvider } from './[organization]/[event]/archive/components/FilterContext'
+import { FilterContextProvider } from '../components/context/FilterContext'
 import { Metadata } from 'next'
 
 const quicksand = Inter({

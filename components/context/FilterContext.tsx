@@ -19,9 +19,9 @@ const FilterContext = createContext<{
   setItems: () => {},
   filteredItems: [],
   filterOptions: [],
-  setFilterOptions: () => {},
+  setFilterOptions: () => {}
 })
-const FilterContextProvider = <T extends object>({ children }: { children: React.ReactNode; items: T[] }) => {
+const FilterContextProvider = <T extends object>({ children }: { children: React.ReactNode;  }) => {
   const [filterOptions, setFilterOptions] = useState<FilterOption<T>[]>([])
   const [items, setItems] = useState<T[]>([])
   const [filteredItems, setFilteredItems] = useState<T[]>(items)
