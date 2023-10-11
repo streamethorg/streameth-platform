@@ -22,7 +22,7 @@ export const StageContextProvider = (props: props) => {
   const [sessions, setSessions] = useState<ISession[]>(props.sessions)
 
   useEffect(() => {
-    return 
+    return
     const updateSessions = () => {
       const currentTimestamp = new Date().getTime()
       const filteredSessions = props.sessions.filter((session) => {

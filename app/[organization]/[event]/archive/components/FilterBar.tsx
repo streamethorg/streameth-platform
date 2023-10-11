@@ -75,13 +75,11 @@ function FilterBar2({ sessions, speakers, stages }: { sessions: ISession[]; spea
   })
 
   return (
-    <div key={1} className={` w-full z-50 px-4 ${isOpen && 'h-full '} `}>
-      <div className="flex flex-col justify-top items-start  w-full h-full py-2 md:py-3">
-        <div className="flex flex-row w-full">
+    <div key={1} className={` w-full max-w-[600px] m-auto z-50 ${isOpen && 'h-full '} `}>
+      <div className="flex flex-col justify-top items-start  w-full h-full">
+        <div className="flex flex-row w-full h-full items-center justify-center">
           <SearchFilter filterOptions={sessionFilters} filterName="session name" />
-          <div className="ml-2  p-2 h-12 border rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm">
-            <AdjustmentsHorizontalIcon className="h-8 w-8 text-accent" onClick={() => setIsOpen(!isOpen)} />
-          </div>
+          <AdjustmentsHorizontalIcon className="h-full w-8 text-accent" onClick={() => setIsOpen(!isOpen)} />
         </div>
         {isOpen && (
           <div className=" w-full mt-1 space-y-2 bg-white rounded p-2 shadow-sm">
