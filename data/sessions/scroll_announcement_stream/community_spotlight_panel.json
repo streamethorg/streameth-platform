@@ -1,1 +1,16 @@
-{"id":"community_spotlight_panel","name":"Community Spotlight Panel","description":"","start":1697809800000,"end":1697811600000,"stageId":"virtual_stage","speakers":[{"id":"christopher_lema","name":"Christopher Lema","bio":"No description","eventId":"scroll_announcement_stream"},{"id":"helena","name":"Helena","bio":"No description","eventId":"scroll_announcement_stream"},{"id":"ye_zhang","name":"Ye Zhang","bio":"No description","eventId":"scroll_announcement_stream"}],"playbackId":"","eventId":"scroll_announcement_stream","coverImage":"/sessions/scroll_announcement_stream/community_spotlight_panel.jpg"}
+{
+  "id": "community_spotlight_panel",
+  "name": "Community Spotlight Panel",
+  "description": "",
+  "start": 1697809800000,
+  "end": 1697811600000,
+  "stageId": "virtual_stage",
+  "speakers": [
+    { "id": "christopher_lema", "name": "Christopher Lema", "bio": "No description", "eventId": "scroll_announcement_stream" },
+    { "id": "helena", "name": "Helena", "bio": "No description", "eventId": "scroll_announcement_stream" },
+    { "id": "ye_zhang", "name": "Ye Zhang", "bio": "No description", "eventId": "scroll_announcement_stream" }
+  ],
+  "playbackId": "",
+  "eventId": "scroll_announcement_stream",
+  "coverImage": "/sessions/scroll_announcement_stream/community_spotlight_panel.jpg"
+}

@@ -1,1 +1,12 @@
-{"id":"workshop_for_the_devs__copy_paste_deploy","name":"Workshop: For the Devs - Copy, Paste, Deploy!","description":"","start":1697808000000,"end":1697809800000,"stageId":"virtual_stage","speakers":[{"id":"raza","name":"Raza","bio":"No description","eventId":"scroll_announcement_stream"}],"playbackId":"","eventId":"scroll_announcement_stream","coverImage":"/sessions/scroll_announcement_stream/workshop_for_the_devs__copy_paste_deploy.jpg"}
+{
+  "id": "workshop_for_the_devs__copy_paste_deploy",
+  "name": "Workshop: For the Devs - Copy, Paste, Deploy!",
+  "description": "",
+  "start": 1697808000000,
+  "end": 1697809800000,
+  "stageId": "virtual_stage",
+  "speakers": [{ "id": "raza", "name": "Raza", "bio": "No description", "eventId": "scroll_announcement_stream" }],
+  "playbackId": "",
+  "eventId": "scroll_announcement_stream",
+  "coverImage": "/sessions/scroll_announcement_stream/workshop_for_the_devs__copy_paste_deploy.jpg"
+}
