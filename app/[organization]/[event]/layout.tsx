@@ -71,9 +71,9 @@ const Layout = async ({
   }
 
   return (
-    <div className="flex flex-col md:flex-row lg:overflow-hidden h-full">
+    <div className="flex flex-col md:flex-row overflow-hidden h-full">
       <Navbar event={event.toJson()} pages={pages} stages={stagePages()} archiveMode={event.archiveMode} />
-      <main className={`flex w-full ${event.archiveMode ? ' lg:w-full' : 'lg:w-[calc(100%-5rem)]'} ml-auto bg-background`}>
+      <main className={`flex w-full overflow-scroll ${event.archiveMode ? ' lg:w-full ' : 'lg:w-[calc(100%-5rem)] '} ml-auto bg-background`}>
         <ColorComponent accentColor={event.accentColor}>{children}</ColorComponent>
       </main>
     </div>
