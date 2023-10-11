@@ -44,6 +44,27 @@ export async function GET() {
   )
 }
 
+export function PATCH(request: NextRequest) {
+  Session.fromRequest(request)
+    .then((session) => {
+      if (!session) {
+        return new NextResponse('Unauthorized', { status: 401 })
+      }
+      return request.json()
+    })
+    .then(async (organisation: IOrganization) => {
+      const organisationController = new OrganizationController()
+
+      return organisationController.editOrganization(organisation).then(() => {
+        return NextResponse.json('Organisation has been edited', { status: 200 })
+      })
+    })
+    .catch((e) => {
+      console.log(e)
+      return NextResponse.json({ error: 'Malformed request' }, { status: 400 })
+    })
+}
+
 export function POST(request: NextRequest) {
   Session.fromRequest(request)
     .then((session) => {

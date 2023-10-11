@@ -21,6 +21,11 @@ export default class OrganizationController {
     return org
   }
 
+  public async editOrganization(organization: IOrganization): Promise<Organization> {
+    this.deleteOrganization(organization.id)
+    return this.createOrganization(organization)
+  }
+
   public async getAllOrganizations(): Promise<Organization[]> {
     const organizations: Organization[] = []
     const organizationQuery = await Organization.getOrganizationPath()
