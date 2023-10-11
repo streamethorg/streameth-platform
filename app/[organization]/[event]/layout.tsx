@@ -5,7 +5,6 @@ import { HomeIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroico
 import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
 import ColorComponent from '../../utils/ColorComponent'
-
 export async function generateStaticParams() {
   const eventController = new EventController()
   const allEvents = await eventController.getAllEvents()
