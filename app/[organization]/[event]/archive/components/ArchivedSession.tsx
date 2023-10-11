@@ -28,7 +28,7 @@ const ArchivedSession = ({ session, learnMore = false, goToStage = false }: { se
           quality={60}
           src={image!}
           fill
-          sizes='(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw'
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           style={{
             objectFit: 'cover',
           }}
