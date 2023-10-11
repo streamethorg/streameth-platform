@@ -21,15 +21,6 @@ const FormTextInput = forwardRef<HTMLInputElement, FormTextInputProps>(
         <input
           className={`flex h-12 p-3 mb-6 w-full border-medGrey border-1 rounded-lg bg-transparent font-sans placeholder:font-sans placeholder:text-grey focus-visible:border-accent focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
             ${className}`}
-          // onChange={(e) => {
-          //   if (isNumberInput) {
-          //     if (e.target.value.match(/^\d*\.?\d*$/)) {
-          //       onChange?.(e.target.value, e)
-          //     }
-          //     return
-          //   }
-          //   onChange?.(e.target.value, e)
-          // }}
           ref={ref}
           {...props}
         />

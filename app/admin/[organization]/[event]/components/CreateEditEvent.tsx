@@ -71,7 +71,7 @@ const CreateEditEvent = ({ event }: { event: IEvent }) => {
           engaging event page that will captivate your audience.
         </p>
       </div>
-      {currentStep == 1 && <CreateEditEventStepOne handleChange={handleChange} formData={formData} setFormData={setFormData} event={event} />}
+      {currentStep == 1 && <CreateEditEventStepOne handleChange={handleChange} formData={formData} setFormData={setFormData} />}
       {error && <div className="mt-4 text-red-500">{error}</div>}
     </div>
   )
