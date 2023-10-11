@@ -4,6 +4,8 @@ import { AddOrUpdateFile } from '@/server/utils/github'
 import Session from '@/utils/session'
 import EventController from '@/server/controller/event'
 import { IEvent } from '@/server/model/event'
+import { IOrganization } from '@/server/model/organization'
+import { generateId } from '@/server/utils'
 
 /*
  * The events of the organization will also be deleted
@@ -25,7 +27,7 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
   const organizationController = new OrganizationController()
   organizationController.deleteOrganization(organizationId)
 
-  return NextResponse.json({ error: 'Organization and events of the organization have been deleted' }, { status: 200 })
+  return NextResponse.json('Organization and events of the organization have been deleted', { status: 200 })
 }
 
 export async function GET() {
@@ -42,30 +44,35 @@ export async function GET() {
   )
 }
 
-export async function POST(request: NextRequest) {
-  const organizationController = new OrganizationController()
-  try {
-    const session = await Session.fromRequest(request)
-    if (!session) {
-      return new NextResponse('Unauthorized', { status: 401 })
-    }
+export function POST(request: NextRequest) {
+  Session.fromRequest(request)
+    .then((session) => {
+      if (!session) {
+        return new NextResponse('Unauthorized', { status: 401 })
+      }
 
-    const body = await request.json()
+      return request.json()
+    })
+    .then(async (organisation: IOrganization) => {
+      const organisationId = generateId(organisation.name)
+      const organisationController = new OrganizationController()
 
-    const environment = process.env.NODE_ENV || 'development'
-
-    if (environment === 'development') {
-      // Create event in the fs
-      await organizationController.createOrganization(await request.json())
-    } else {
-      // Write data to db
-      const folderName = `data/organizations`
-      const fileName = `${body.name.replace(/ /g, '_').toLowerCase()}.json`
-      await AddOrUpdateFile(fileName, JSON.stringify(body), folderName)
-    }
-    return NextResponse.json(body)
-  } catch (e) {
-    console.log(e)
-    return NextResponse.json({ error: 'Malformed request' }, { status: 400 })
-  }
+      return organisationController
+        .getOrganization(organisationId)
+        .then(() => {
+          // Organisation exists
+          return NextResponse.json({ error: 'Organisation already exists' }, { status: 400 })
+        })
+        .catch(() => {
+          // Organisation doesn't exist, proceed to create
+          return organisationController.createOrganization(organisation)
+        })
+        .then(() => {
+          return NextResponse.json('Organization has been created', { status: 200 })
+        })
+    })
+    .catch((e) => {
+      console.log(e)
+      return NextResponse.json({ error: 'Malformed request' }, { status: 400 })
+    })
 }
