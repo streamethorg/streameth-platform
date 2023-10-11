@@ -1,14 +1,16 @@
 'use client'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import SearchFilter from './SearchFilter'
 import SelectFilter from './SelectFilter'
 import { ISession } from '@/server/model/session'
 import { ISpeaker } from '@/server/model/speaker'
 import { IStage } from '@/server/model/stage'
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
-import { ModalContext } from '@/components/context/ModalContext'
-export default function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
+import { TopNavbarContext } from '@/components/context/TopNavbarContext'
+
+function FilterBar2({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
   const [isOpen, setIsOpen] = useState(false)
+
   const speakerFilters = speakers.map((speaker) => {
     return {
       name: speaker.name,
@@ -73,7 +75,7 @@ export default function FilterBar({ sessions, speakers, stages }: { sessions: IS
   })
 
   return (
-    <div className={`absolute top-0 left-16 lg:right-1/2 lg:left-[35%] w-60 md:w-96 px-4 ${isOpen && 'h-full '} `}>
+    <div key={1} className={`absolute top-0 left-16 lg:right-1/2 lg:left-[35%] w-60 md:w-96 px-4 ${isOpen && 'h-full '} `}>
       <div className="flex flex-col justify-top items-start  w-full h-full py-2 md:py-3">
         <div className="flex flex-row w-full">
           <SearchFilter filterOptions={sessionFilters} filterName="session name" />
@@ -86,10 +88,19 @@ export default function FilterBar({ sessions, speakers, stages }: { sessions: IS
             <SelectFilter filterOptions={stageFilters} filterName="Stage" />
             <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />
             <SearchFilter filterOptions={speakerFilters} filterName="speaker" />
-
           </div>
         )}
       </div>
     </div>
   )
+}
+
+export default function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
+  const { setComponents } = useContext(TopNavbarContext)
+
+  useEffect(() => {
+    setComponents([<FilterBar2 key={1} sessions={sessions} speakers={speakers} stages={stages} />])
+  }, [])
+
+  return <></>
 }

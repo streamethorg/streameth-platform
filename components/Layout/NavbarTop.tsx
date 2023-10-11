@@ -27,6 +27,9 @@ export default function Navbar() {
               <span className="text-sm">{isAdminPage ? 'Home' : 'Admin Page'}</span>
             </div>
           </Link> */}
+          {components.map((component) => {
+            return component
+          })}
           <SocialIcon url={`https://twitter.com/streameth`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
           <SocialIcon
             url={`https://github.com/streamethorg/streameth-platform`}
