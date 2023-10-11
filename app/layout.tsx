@@ -1,5 +1,5 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Ubuntu, Heebo } from 'next/font/google'
 import GeneralContext from '@/components/context/GeneralContext'
 import { ModalContextProvider } from '@/components/context/ModalContext'
 import { MobileContextProvider } from '@/components/context/MobileContext'
@@ -7,19 +7,26 @@ import Navbar from '@/components/Layout/NavbarTop'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { Metadata } from 'next'
 
-const quicksand = Inter({
-  subsets: ['latin', 'latin-ext'],
+const ubuntu = Ubuntu({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  variable: '--font-ubuntu',
+})
+
+const heebo = Heebo({
+  subsets: ['latin'],
+  variable: '--font-heebo',
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${quicksand.className}`}>
+    <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
+      <body className={`${heebo.variable} font-sans`}>
         <GeneralContext>
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className="bg-background flex flex-col h-[100dvh] lg:overflow-hidden w-screen">
+                <div className="flex flex-col h-[100dvh] lg:overflow-hidden w-screen">
                   <Navbar />
                   {children}
                 </div>

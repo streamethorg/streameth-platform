@@ -4,6 +4,7 @@ import axios from 'axios'
 import { IEvent } from '@/server/model/event'
 import EditEventButton from './EditEventButton'
 import Link from 'next/link'
+import AdminItemCard from '../../components/utils/AdminItemCard'
 interface EventEntryProps {
   event: IEvent
 }
@@ -20,22 +21,14 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
   console.log(event)
 
   return (
-    <li className="border p-2 rounded flex justify-between items-center">
-      <Link href={`/${event.organizationId}/${event.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
-        <img src={`/events/${event.eventCover}`} alt={event.name} className="w-16 h-16 rounded" />
+    <AdminItemCard>
+      <Link href={`/admin/${event.organizationId}/${event.id}`} target="_blank" rel="noopener noreferrer" className="flex flex-col">
+        <img src={`/events/${event.eventCover}`} alt={event.name} className="w-full min-h-[140px]" />
         <div>
-          <h2 className="text-xl font-bold">{event.name}</h2>
-          <p>{event.description}</p>
-          <p className="text-sm text-gray-500">{event.location}</p>
+          <h2 className="text-center mt-1 mb-0 truncate font-ubuntu">{event.name}</h2>
         </div>
       </Link>
-      <div className="ml-auto  flex flex-row ">
-        <EditEventButton event={event} />
-        <button className="bg-red-500 text-white p-2 rounded ml-2" onClick={handleDelete}>
-          Delete
-        </button>
-      </div>
-    </li>
+    </AdminItemCard>
   )
 }
 

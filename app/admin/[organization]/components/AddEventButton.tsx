@@ -2,14 +2,13 @@
 import React, { useContext } from 'react'
 import CreateEventForm from './CreateEventForm' // Assuming you have this component
 import { ModalContext } from '@/components/context/ModalContext'
+import { Button } from '@/app/utils/Button'
 const AddOrganizationButton = ({ organization }: { organization: string }) => {
   const { openModal } = useContext(ModalContext)
   return (
-    <div>
-      <button className="mb-4 p-2 bg-blue-500 text-white rounded" onClick={() => openModal(<CreateEventForm organizationId={organization} />)}>
-        Create a New Event
-      </button>
-    </div>
+    <Button variant="green" onClick={() => openModal(<CreateEventForm organizationId={organization} />)}>
+      Create a new Event
+    </Button>
   )
 }
 

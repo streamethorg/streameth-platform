@@ -100,7 +100,7 @@ export default class Event implements IEvent {
     this.timezone = timezone ?? 'utc'
     this.logo = logo
     this.banner = banner
-    this.accentColor = accentColor ?? '#7983ff'
+    this.accentColor = accentColor ?? '#351B71'
     // this.validateThis();
   }
 
