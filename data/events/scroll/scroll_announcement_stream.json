@@ -7,11 +7,11 @@
   "location": "Hanoi, Vietnam",
   "organizationId": "scroll",
   "dataImporter": [{ "type": "gsheet", "config": { "sheetId": "1nM8U6a8TlmuMzE835ZvCol9IW5vmjLD9YI0Moc_SUJE", "apiKey": "l" } }],
+  "logo": "scroll_logo.png",
   "eventCover": "scroll_banner.png",
+  "banner": "scroll_banner.png",
   "website": "http://scroll.io",
   "archiveMode": false,
   "timezone": "Asia/Ho_Chi_Minh",
-  "logo": "https://pbs.twimg.com/profile_images/1696531511519150080/Fq5O0LeN_400x400.jpg",
-  "banner": "",
   "accentColor": "#a9f6ea"
 }
