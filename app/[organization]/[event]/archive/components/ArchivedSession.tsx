@@ -6,16 +6,17 @@ import Card from '@/components/misc/Card'
 
 const ArchivedSession = ({ session, learnMore = false, goToStage = false }: { session: ISession; learnMore?: boolean; goToStage?: boolean }) => {
   const [image, setImage] = useState(session.coverImage)
+  console.log('image', image)
   const [fallback, setFallback] = useState(false)
   const alt = '/events/' + session.eventId + '.png'
 
   const handleError = () => {
-    if (!fallback) {
-      setImage(alt)
-      setFallback(true)
-    } else {
-      setImage('/cover.png')
-    }
+    // if (!fallback) {
+    //   setImage(alt)
+    //   setFallback(true)
+    // } else {
+    //   setImage('/cover.png')
+    // }
   }
 
   const component = (
@@ -27,13 +28,14 @@ const ArchivedSession = ({ session, learnMore = false, goToStage = false }: { se
           quality={60}
           src={image!}
           fill
+          sizes='(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw'
           style={{
             objectFit: 'cover',
           }}
           onError={handleError}
         />
       </div>
-      {/* <p className="border-b-2 border-accent p-2 py-4 flex flex-grow text-md ">{session.name}</p> */}
+      {/* <p className="border-b-2 border-accent p-2 py-4 flex flex-grow text-md ">{session.name}</p>  */}
     </Card>
   )
 

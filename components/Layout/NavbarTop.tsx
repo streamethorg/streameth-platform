@@ -18,7 +18,15 @@ export default function Navbar() {
         <div className=" flex items-center w-20">
           <Link href="/" className="">
             <span className="sr-only">Logo</span>
-            <Image src={logo} alt="Logo" width={50} height={50} />
+            <Image
+              src={logo}
+              alt="Logo"
+              width={50}
+              height={50}
+              onError={(e) => {
+                e.currentTarget.src = '/logo.png'
+              }}
+            />
           </Link>
         </div>
         <div className="flex flex-row items-center justify-end w-full">
