@@ -11,7 +11,7 @@ const EventList = () => {
     <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:overflow-scroll ">
       {filteredItems
         .sort((a: IEvent, b: IEvent) => {
-          return a.start.getTime() - b.start.getTime()
+          return b.start.getTime() - a.start.getTime()
         })
         .map((event: IEvent) => {
           return <EventCard key={event.id} event={event} />
