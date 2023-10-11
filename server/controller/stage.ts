@@ -42,7 +42,6 @@ export default class StageController {
     }
 
     stages.sort((a, b) => {
-
       if (a?.order && b?.order) {
         return a.order - b.order
       }
