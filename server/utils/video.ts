@@ -11,7 +11,7 @@ export async function extractFirstFrame(hlsUrl: string, filePath: string) {
 
   ffmpeg(hlsUrl)
     .screenshots({
-      timemarks: ['00:00:07.000'],
+      timemarks: ['00:00:07.500'],
       filename: filePath,
       folder: '.',
       size: '1920x1080',
