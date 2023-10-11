@@ -16,6 +16,13 @@ export const TopNavbarContext = createContext<{
 
 export const TopNavbarContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [logo, setLogo] = useState('')
+
+  useEffect(() => {
+    if (logo === '') {
+      setLogo(img.src)
+    }
+  }, [logo])
+  
   const [components, setComponents] = useState<React.ReactNode[]>([])
 
   return <TopNavbarContext.Provider value={{ logo, setLogo, components, setComponents }}>{children}</TopNavbarContext.Provider>

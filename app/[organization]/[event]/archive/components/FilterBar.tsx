@@ -79,7 +79,7 @@ function FilterBar2({ sessions, speakers, stages }: { sessions: ISession[]; spea
       <div className="flex flex-col justify-top items-start  w-full h-full">
         <div className="flex flex-row w-full h-full items-center justify-center">
           <SearchFilter filterOptions={sessionFilters} filterName="session name" />
-          <AdjustmentsHorizontalIcon className="h-full w-8 text-accent" onClick={() => setIsOpen(!isOpen)} />
+          <AdjustmentsHorizontalIcon className="h-full w-8 text-accent md:ml-2" onClick={() => setIsOpen(!isOpen)} />
         </div>
         {isOpen && (
           <div className=" w-full mt-1 space-y-2 bg-white rounded p-2 shadow-sm">
