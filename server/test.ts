@@ -1,45 +1,43 @@
 import OrganizationController from './controller/organization'
 import EventController from './controller/event'
+import moment from 'moment-timezone'
 
 const run = async () => {
   const Organization = {
-    name: 'ETHChicago',
+    name: 'Scroll',
     description:
-      'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
-    url: 'https://www.ethchicago.xyz/',
-    logo: 'https://www.ethchicago.xyz/logo.png',
-    location: 'Chicago, USA',
+      'Scroll seamlessly extends Ethereum’s capabilities through zero knowledge tech and EVM equivalence. The L2 blockchain built by Ethereum devs for Ethereum devs.',
+    url: 'https://scroll.io/',
+    logo: 'https://scroll.io/logo.png',
+    location: 'Unknown',
   }
 
   const orgController = new OrganizationController()
-  const organizationInstance = await orgController.createOrganization(
-    Organization
-  )
+  const organizationInstance = await orgController.createOrganization(Organization)
 
   const Event = {
-    id: 'ethchicago',
-    name: 'ETHChicago',
+    name: 'Scroll Announcement Stream',
     description:
-      'ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.',
-    start: new Date('2023-09-15T00:00:00.000Z'),
-    end: new Date('2023-09-17T00:00:00.000Z'),
-    location: 'Chicago, USA',
-    organizationId: 'ethchicago',
+      'Scroll seamlessly extends Ethereum’s capabilities through zero knowledge tech and EVM equivalence. The L2 blockchain built by Ethereum devs for Ethereum devs.',
+    start: new Date('2023-10-20T00:00:00.000Z'),
+    end: new Date('2023-10-20T00:00:00.000Z'),
+    location: 'Hanoi, Vietnam',
+    organizationId: 'scroll',
     dataImporter: [
       {
-        type: 'pretalx' as 'pretalx',
+        type: 'gsheet' as 'gsheet',
         config: {
-          url: 'https://pretalx.com/api/events/ethchi-2023',
-          apiToken: 'k',
+          sheetId: '1nM8U6a8TlmuMzE835ZvCol9IW5vmjLD9YI0Moc_SUJE',
+          apiKey: 'l',
         },
       },
     ],
-    logo: 'ethchicago_logo.jpeg',
-    banner: 'ethchicago_banner.jpeg',
+    logo: '',
+    banner: '',
     website: '',
     archiveMode: false,
-    timezone: 'America/Chicago',
-    eventCover: 'ethchicago_2023.png',
+    timezone: 'Asia/Ho_Chi_Minh',
+    eventCover: '',
   }
 
   const eventController = new EventController()
