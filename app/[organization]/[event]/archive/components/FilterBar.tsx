@@ -1,11 +1,12 @@
 'use client'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import SearchFilter from './SearchFilter'
 import SelectFilter from './SelectFilter'
 import { ISession } from '@/server/model/session'
 import { ISpeaker } from '@/server/model/speaker'
 import { IStage } from '@/server/model/stage'
-
+import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
+import { ModalContext } from '@/components/context/ModalContext'
 export default function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
   const [isOpen, setIsOpen] = useState(false)
   const speakerFilters = speakers.map((speaker) => {
@@ -72,28 +73,22 @@ export default function FilterBar({ sessions, speakers, stages }: { sessions: IS
   })
 
   return (
-    <div className="drop-shadow-md md:drop-shadow-none md:shadow md:rounded-md bg-base">
-      <div className="md:flex flex-col w-full relative px-4 py-2 md:p-4">
-        <p className="text-lg font-bold mb-2 text-accent uppercase ">Search</p>
-        <SearchFilter filterOptions={sessionFilters} filterName="session name" />
-        <SearchFilter filterOptions={speakerFilters} filterName="speaker" />
-        <div className="lg:hidden">
-          <p className="text-lg mt-4 mb-2 font-bold text-accent uppercase " onClick={() => setIsOpen(!isOpen)}>
-            More filters
-          </p>
-          {isOpen && (
-            <>
-              <SelectFilter filterOptions={stageFilters} filterName="Stage" />
-              <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />
-            </>
-          )}
+    <div className={`absolute top-0 left-16 lg:right-1/2 lg:left-[35%] w-60 md:w-96 px-4 ${isOpen && 'h-full '} `}>
+      <div className="flex flex-col justify-top items-start  w-full h-full py-2 md:py-3">
+        <div className="flex flex-row w-full">
+          <SearchFilter filterOptions={sessionFilters} filterName="session name" />
+          <div className="ml-2  p-2 h-12 border rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm">
+            <AdjustmentsHorizontalIcon className="h-8 w-8 text-accent" onClick={() => setIsOpen(!isOpen)} />
+          </div>
         </div>
-        <div className="hidden lg:block">
-          <p className="text-lg mt-4 mb-2 font-bold text-accent uppercase ">More filters</p>
-          <SelectFilter filterOptions={stageFilters} filterName="Stage" />
-          <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />
-          {/* <SelectFilter filterOptions={trackFilter} filterName="Track" /> */}
-        </div>
+        {isOpen && (
+          <div className=" w-full mt-1 space-y-2 bg-white rounded p-2 shadow-sm">
+            <SelectFilter filterOptions={stageFilters} filterName="Stage" />
+            <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />
+            <SearchFilter filterOptions={speakerFilters} filterName="speaker" />
+
+          </div>
+        )}
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ const SelectFilter = <T extends object>({ filterOptions, filterName }: FilterPro
   }
 
   return (
-    <div className="flex flex-col justify-between mb-2 font-light">
+    <div className="flex flex-col justify-between  font-light">
       <div className="relative">
         <select
           onChange={(e) => handleOptionSelect(filterOptions.find((option) => option.name === e.target.value)!)}

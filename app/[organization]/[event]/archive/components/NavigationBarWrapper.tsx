@@ -8,10 +8,20 @@ const NavigationBarWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className="hidden lg:flex">{children}</div>
-      <div className="lg:hidden px-4">
-        <button onClick={() => setIsOpen(!isOpen)} className="flex items-center m-auto text-accent rounded w-full text-lg font-bold text-center">
-          Filter
-        </button>
+      <div className="lg:hidden">
+        {!isOpen ? (
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="m-4 text-lg bg-accent text-white p-2 rounded border-2 border-accent">
+            Filter sessions
+          </button>
+        ) : (
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="m-4 text-lg absolute top-0 right-0 bg-accent text-white p-2 rounded border-2 border-accent">
+            close
+          </button>
+        )}
         {isOpen && children}
       </div>
     </>

@@ -18,5 +18,6 @@
   ],
   "eventCover": "protocol.png",
   "website": "",
-  "archiveMode": true
+  "archiveMode": true,
+  "accentColor": "#b83232"
 }

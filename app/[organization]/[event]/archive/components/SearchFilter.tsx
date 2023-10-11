@@ -20,27 +20,28 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
   }
 
   useEffect(() => {
-    // current filter options to selected items
-    currentFilterOptions.filter((option) => {
-      if (!selectedItems.includes(option) && option.type == filterOptions[0].type) {
-        setSelectedItems([...selectedItems, option])
+    currentFilterOptions.forEach((option) => {
+      if (!selectedItems.includes(option) && option.type === filterOptions[0].type) {
+        setSelectedItems(prevItems => [...prevItems, option])
       }
     })
   }, [])
 
   const handleOptionSelect = (option: FilterOption<T>) => {
-    setSelectedItems([...selectedItems, option])
-    setFilterInput('')
+    setSelectedItems([option])
     setFilterOptions([...currentFilterOptions, option])
+    setFilterInput(option.name)
   }
 
-  const handleOptionRemove = (option: FilterOption<T>) => {
-    setSelectedItems(selectedItems.filter((item) => item.name !== option.name))
-    setFilterOptions(currentFilterOptions.filter((item) => item.name !== option.name))
+  const clearSelectedOption = () => {
+    setSelectedItems([])
+    setFilterInput('')
+    setFilterOptions([])
+
   }
 
   return (
-    <div className="flex flex-col justify-between font-light mb-2 w-full">
+    <div className="flex flex-col justify-between font-light w-full">
       <div className="relative">
         <input
           type="text"
@@ -49,10 +50,10 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
           onChange={(e) => setFilterInput(e.target.value)}
           className="p-2 h-12 border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
         />
-        {filterInput && (
-          <div className="absolute top-fullborder rounded-b-md shadow-md left-0 z-10 bg-primary  max-h-40 w-full overflow-auto">
+        {filterInput && selectedItems.length === 0 && (
+          <div className="absolute top-fullborder rounded-b-md shadow-md left-0 z-10 bg-primary max-h-40 w-full overflow-auto">
             {filteredOptions().length === 0 ? (
-              <div className=" py-1">{`No ${filterName} found`}</div>
+              <div className="py-1">{`No ${filterName} found`}</div>
             ) : (
               filteredOptions().map((option, index) => (
                 <div key={index} className="cursor-pointer py-1" onClick={() => handleOptionSelect(option)}>
@@ -62,16 +63,11 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
             )}
           </div>
         )}
-      </div>
-      <div className="flex flex-row flex-wrap">
-        {selectedItems.map((option, index) => (
-          <div
-            key={`${option.name}-${index}`}
-            className="cursor-pointer p-1 m-1 border-2 border-accent text-sm font-light text-white bg-accent opacity-80"
-            onClick={() => handleOptionRemove(option)}>
-            {option.name}
+        {selectedItems.length > 0 && (
+          <div className="flex items-center justify-center absolute right-0 top-0 mt-4 mr-2 cursor-pointer bold text-white bg-accent rounded w-5 h-5" onClick={clearSelectedOption}>
+            x
           </div>
-        ))}
+        )}
       </div>
     </div>
   )

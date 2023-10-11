@@ -6,6 +6,7 @@ import SessionController from '@/server/controller/session'
 import StageController from '@/server/controller/stage'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EventController from '@/server/controller/event'
+import NavigationBarWrapper from './components/NavigationBarWrapper'
 interface Params {
   params: {
     event: string
@@ -45,9 +46,7 @@ export default async function ArchivePage({ params }: Params) {
     <div className="flex flex-col-reverse justify-end lg:flex-row w-full lg:h-full lg:overflow-hidden">
       <FilterContextProvider items={videoSessions}>
         <FilteredItems />
-        <div className="w-full lg:max-w-[20rem] sticky top-0 lg:pt-4 lg:pr-4">
-          <FilterBar sessions={videoSessions} speakers={speakers} stages={stages} />
-        </div>
+        <FilterBar sessions={videoSessions} speakers={speakers} stages={stages} />
       </FilterContextProvider>
     </div>
   )

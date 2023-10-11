@@ -9,7 +9,7 @@ const ArchivedSession = ({ session, learnMore = false, goToStage = false }: { se
   const alt = '/events/' + session.eventId + '.png'
   const component = (
     <Card>
-      <div className="aspect-video relative">
+      <div className="aspect-video relative w-full">
         <Image
           className="rounded"
           alt="session image"
@@ -29,10 +29,10 @@ const ArchivedSession = ({ session, learnMore = false, goToStage = false }: { se
           }}
         />
       </div>
-      <p className="border-b-2 border-accent p-2 py-4 flex flex-grow text-md ">{session.name}</p>
+      {/* <p className="border-b-2 border-accent p-2 py-4 flex flex-grow text-md ">{session.name}</p> */}
     </Card>
   )
-  if (learnMore) return <Link href={'session/' + session.id}>{component}</Link>
+  if (learnMore) return <Link className="h-full" href={'session/' + session.id}>{component}</Link>
   if (goToStage) return <Link href={'/stage/' + session.stageId}>{component}</Link>
 
   return component
