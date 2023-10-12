@@ -1,1 +1,8 @@
-{"id":"scroll","name":"Scroll","description":"Scroll seamlessly extends Ethereum’s capabilities through zero knowledge tech and EVM equivalence. The L2 blockchain built by Ethereum devs for Ethereum devs.","url":"https://scroll.io/","logo":"https://scroll.io/logo.png","location":"Unknown"}
+{
+  "id": "scroll",
+  "name": "Scroll",
+  "description": "Scroll seamlessly extends Ethereum’s capabilities through zero knowledge tech and EVM equivalence. The L2 blockchain built by Ethereum devs for Ethereum devs.",
+  "url": "https://scroll.io/",
+  "logo": "https://scroll.io/logo.png",
+  "location": "Unknown"
+}
