@@ -24,7 +24,7 @@ const ScheduleCard = ({ session, showTime = false, speakers = false }: { session
         )}
         <p className="flex overflow-hidden text-ellipsis text-main-text text-sm font-medium uppercase">{session.name}</p>
         {speakers && (
-          <div className="flex mt-auto py-1 items-center flex-row">
+          <div className="flex mt-auto py-1 items-center flex-row space-x-2">
             {session.speakers.map((speaker) => (
               <SpeakerPhoto size="sm" key={speaker.id} speaker={speaker} />
             ))}

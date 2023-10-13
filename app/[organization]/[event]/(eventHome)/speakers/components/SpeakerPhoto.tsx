@@ -10,7 +10,7 @@ const SpeakerPhoto = ({ speaker, size }: { speaker: ISpeaker; size?: 'sm' | 'md'
   const avatar = speaker.photo ? speaker.photo : CreateBlockie(speaker.name)
   let sizeString
   if (size === 'sm') {
-    sizeString = 'h-8 w-8'
+    sizeString = 'h-8 w-8 '
   } else if (size === 'md') {
     sizeString = 'h-12 w-12'
   } else {
@@ -19,7 +19,7 @@ const SpeakerPhoto = ({ speaker, size }: { speaker: ISpeaker; size?: 'sm' | 'md'
 
   return (
     <div className={` relative ${sizeString}`}>
-      <Image src={speaker.photo ? speaker.photo : CreateBlockie(speaker.name)} alt={speaker.name} fill placeholder="empty" />
+      <Image className="" src={speaker.photo ? speaker.photo : CreateBlockie(speaker.name)} alt={speaker.name} fill placeholder="empty" />
     </div>
   )
 }
