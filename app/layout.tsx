@@ -5,6 +5,8 @@ import { ModalContextProvider } from '@/components/context/ModalContext'
 import { MobileContextProvider } from '@/components/context/MobileContext'
 import Navbar from '@/components/Layout/NavbarTop'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
+import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
+import { FilterContextProvider } from '../components/context/FilterContext'
 import { Metadata } from 'next'
 
 const quicksand = Inter({
@@ -20,8 +22,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <MobileContextProvider>
               <ModalContextProvider>
                 <div className="bg-background flex flex-col h-[100dvh] lg:overflow-hidden w-screen">
-                  <Navbar />
-                  {children}
+                  <FilterContextProvider>
+                    <TopNavbarContextProvider>
+                      <Navbar />
+                      {children}
+                    </TopNavbarContextProvider>
+                  </FilterContextProvider>
                 </div>
               </ModalContextProvider>
             </MobileContextProvider>

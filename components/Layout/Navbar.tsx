@@ -9,6 +9,8 @@ import Image from 'next/image'
 import { LoadingContext } from '../context/LoadingContext'
 import { IEvent } from '@/server/model/event'
 import StageModal from '@/app/[organization]/[event]/stage/[stage]/components/StageModal'
+import { TopNavbarContext } from '../context/TopNavbarContext'
+import { arch } from 'os'
 
 export interface Page {
   name: string
@@ -20,7 +22,9 @@ export default function Navbar({
   event,
   pages,
   stages,
+  archiveMode,
 }: {
+  archiveMode?: boolean
   event: IEvent
   stages: Page[] | undefined
   pages: {
@@ -31,6 +35,7 @@ export default function Navbar({
 }) {
   const pathname = usePathname()
   const { openModal, closeModal } = useContext(ModalContext)
+  const { setLogo, logo } = useContext(TopNavbarContext)
   const { setIsLoading } = useContext(LoadingContext)
   const [isNavVisible, setIsNavVisible] = useState(false) // New state
   const router = useRouter()
@@ -46,7 +51,13 @@ export default function Navbar({
     router.push(stageHref)
     closeModal()
   }
+  useEffect(() => {
+    setLogo('/events/' + event.logo)
+  }, [event])
 
+  if (archiveMode) {
+    return <></>
+  }
   return (
     <div>
       <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden md:p-4 absolute top-0 ml-20 h-16">
@@ -60,14 +71,8 @@ export default function Navbar({
           </div>
         )}
       </button>
-      <div className=" absolute w-16 h-16 lg:w-20 lg:h-20 top-0 items-center flex">
-        <Link href={`/${event.organizationId}/${event.id}`}>
-          <span className="sr-only">Logo</span>
-          <Image src={'/events/' + event.logo} className="" alt="logo" width={150} height={150} />
-        </Link>
-      </div>
       <header
-        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-[76px] left-0 w-20 h-screen ${
+        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-[76px] left-0 w-[4.7rem] h-screen ${
           isNavVisible ? 'block' : 'hidden'
         } lg:block`}>
         <div className="flex flex-col items-center justify-between ">
