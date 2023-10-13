@@ -72,7 +72,7 @@ export default function Navbar({
         )}
       </button>
       <header
-        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-[76px] left-0 w-[4.7rem] h-screen ${
+        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-[70px] left-0 w-[5rem] h-screen ${
           isNavVisible ? 'block' : 'hidden'
         } lg:block`}>
         <div className="flex flex-col items-center justify-between ">
