@@ -5,9 +5,8 @@ import SearchFilter from '@/app/[organization]/[event]/archive/components/Search
 import { FilterContext } from '@/components/context/FilterContext'
 
 const FilterBar = ({ events }: { events: IEvent[] }) => {
-  const { filteredItems, setFilterOptions } = useContext(FilterContext)
+  const { setFilterOptions } = useContext(FilterContext)
   const [isShowCurrent, setIsShowCurrent] = useState(false)
-  const [hasCheckedEmptyUpcoming, setHasCheckedEmptyUpcoming] = useState(false)
 
   const eventFilter = events.map((event) => {
     return {
@@ -43,27 +42,19 @@ const FilterBar = ({ events }: { events: IEvent[] }) => {
     handleTabClick()
   }, [isShowCurrent])
 
-  // If 'Upcoming events' is empty is switches to 'Past events'
-  if (filteredItems.length === 0 && isShowCurrent === false) {
-    setIsShowCurrent(true)
-    setHasCheckedEmptyUpcoming(true)
-  }
-
   return (
     <div className="bg-base p-4 sticky top-0 z-40 w-full flex justify-center items-center drop-shadow-md">
       <div className=" w-full flex flex-col sm:flex-row items-center">
         <div className="flex flex-row w-full justify-center md:justify-start">
-          {!hasCheckedEmptyUpcoming && (
-            <h1
-              className={` text-xl md:text-2xl font-bold  ${
-                isShowCurrent ? 'text-secondary-text cursor-pointer' : 'text-main-text'
-              } border-r-2 border-accent pr-4`}
-              onClick={() => setIsShowCurrent(false)}>
-              Upcoming events
-            </h1>
-          )}
           <h1
-            className={`text-xl md:text-2xl text-main-text font-bold ${!hasCheckedEmptyUpcoming ? 'ml-4' : ''} ${
+            className={` text-xl md:text-2xl font-bold  ${
+              isShowCurrent ? 'text-secondary-text cursor-pointer' : 'text-main-text'
+            } border-r-2 border-accent pr-4`}
+            onClick={() => setIsShowCurrent(false)}>
+            Upcoming events
+          </h1>
+          <h1
+            className={`text-xl md:text-2xl text-main-text font-bold ml-4 ${
               !isShowCurrent ? 'text-secondary-text cursor-pointer' : 'text-main-text'
             }`}
             onClick={() => setIsShowCurrent(true)}>
