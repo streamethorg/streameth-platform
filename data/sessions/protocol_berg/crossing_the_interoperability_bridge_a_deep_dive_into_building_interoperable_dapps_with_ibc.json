@@ -1,1 +1,28 @@
-{"id":"crossing_the_interoperability_bridge_a_deep_dive_into_building_interoperable_dapps_with_ibc","name":"Crossing the Interoperability Bridge: A Deep Dive into Building Interoperable dApps with IBC","description":"This workshop will be led by Federico Kunze Küllmer, who was part of the core team that developed the Inter Blockchain Communication Protocol (IBC). Federico is also the co-founder of Evmos, an EVM compatible blockchain that supports interoperable dApps via IBC. Federico will dive deep into the technical aspects of the IBC protocol, exploring how it enables cross-chain communication and discussing how Evmos simplifies the development of interoperable dApps. Attendees will have the opportunity to learn from the speaker's firsthand experience in implementing the IBC protocol and gain valuable insights into developing successful interoperable dApps using Solidity.","start":1694791800000,"end":1694796600000,"stageId":"atelier__workshop_1","speakers":[{"id":"federico_kunze_kllmer","name":"Federico Kunze Küllmer","bio":"Evmos Co-founder. Cosmos Core Contributor. IBC Core Engineer.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/fede_eEnXITT.jpeg"},{"id":"daniel_burckhardt","name":"Daniel Burckhardt","bio":"-","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/daniel_8x0ocYg.png"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/crossing_the_interoperability_bridge_a_deep_dive_into_building_interoperable_dapps_with_ibc.jpg"}
+{
+  "id": "crossing_the_interoperability_bridge_a_deep_dive_into_building_interoperable_dapps_with_ibc",
+  "name": "Crossing the Interoperability Bridge: A Deep Dive into Building Interoperable dApps with IBC",
+  "description": "This workshop will be led by Federico Kunze Küllmer, who was part of the core team that developed the Inter Blockchain Communication Protocol (IBC). Federico is also the co-founder of Evmos, an EVM compatible blockchain that supports interoperable dApps via IBC. Federico will dive deep into the technical aspects of the IBC protocol, exploring how it enables cross-chain communication and discussing how Evmos simplifies the development of interoperable dApps. Attendees will have the opportunity to learn from the speaker's firsthand experience in implementing the IBC protocol and gain valuable insights into developing successful interoperable dApps using Solidity.",
+  "start": 1694791800000,
+  "end": 1694796600000,
+  "stageId": "atelier__workshop_1",
+  "speakers": [
+    {
+      "id": "federico_kunze_kllmer",
+      "name": "Federico Kunze Küllmer",
+      "bio": "Evmos Co-founder. Cosmos Core Contributor. IBC Core Engineer.",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/fede_eEnXITT.jpeg"
+    },
+    {
+      "id": "daniel_burckhardt",
+      "name": "Daniel Burckhardt",
+      "bio": "-",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/daniel_8x0ocYg.png"
+    }
+  ],
+  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/6fd51jy2oc8z9g42/index.m3u8",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/crossing_the_interoperability_bridge_a_deep_dive_into_building_interoperable_dapps_with_ibc.jpg"
+}
