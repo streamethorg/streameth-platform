@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OrganizationController from '@/server/controller/organization'
-import { AddOrUpdateFile } from '@/server/utils/github'
 import Session from '@/utils/session'
 import EventController from '@/server/controller/event'
 import { IEvent } from '@/server/model/event'
@@ -11,8 +10,12 @@ import { generateId } from '@/server/utils'
  * The events of the organization will also be deleted
  */
 export async function DELETE(req: NextRequest): Promise<NextResponse> {
-  const organizationId = req.nextUrl.searchParams.get('organization')
+  const session = await Session.fromRequest(req)
+  if (!session) {
+    return NextResponse.json('Unauthorized', { status: 401 })
+  }
 
+  const organizationId = req.nextUrl.searchParams.get('organization')
   if (!organizationId) {
     return NextResponse.json({ error: 'Organization does not exist' }, { status: 404 })
   }
@@ -44,14 +47,15 @@ export async function GET() {
   )
 }
 
-export function PATCH(request: NextRequest) {
-  Session.fromRequest(request)
-    .then((session) => {
-      if (!session) {
-        return new NextResponse('Unauthorized', { status: 401 })
-      }
-      return request.json()
-    })
+export async function PATCH(request: NextRequest) {
+  const session = await Session.fromRequest(request)
+
+  if (!session) {
+    return NextResponse.json('Unauthorized', { status: 401 })
+  }
+
+  return request
+    .json()
     .then(async (organisation: IOrganization) => {
       const organisationController = new OrganizationController()
 
@@ -65,15 +69,14 @@ export function PATCH(request: NextRequest) {
     })
 }
 
-export function POST(request: NextRequest) {
-  Session.fromRequest(request)
-    .then((session) => {
-      if (!session) {
-        return new NextResponse('Unauthorized', { status: 401 })
-      }
+export async function POST(request: NextRequest) {
+  const session = await Session.fromRequest(request)
+  if (!session) {
+    return NextResponse.json('Unauthorized', { status: 401 })
+  }
 
-      return request.json()
-    })
+  return request
+    .json()
     .then(async (organisation: IOrganization) => {
       const organisationId = generateId(organisation.name)
       const organisationController = new OrganizationController()

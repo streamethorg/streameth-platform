@@ -39,7 +39,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
 
@@ -48,6 +48,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(formData),
     })
       .then((response) => {
