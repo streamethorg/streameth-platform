@@ -12,10 +12,8 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
     setDate(numericValue)
   }
 
-  if (dates.length < 2) return null
-
   return (
-    <div className="flex flex-row space-x-4 justify-center p-2 md:p-4 box-border">
+    <div className=" flex flex-row space-x-4 justify-center w-full">
       {isMobile ? (
         <select className="text-xl cursor-pointer font-bold w-full" value={date ? date : ''} onChange={(e) => handleDateChange(e.target.value)}>
           {dates.map((dateNum) => (
@@ -27,10 +25,12 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
       ) : (
         dates.map((dateNum, index) => (
           <div
-            className={`p-4 text-center text-xl font-bold ${date !== dateNum ? 'text-black cursor-pointer' : 'text-accent'}`}
+            className={`ml-auto w-[calc(100%-6rem)] p-4 text-center text-xl font-bold ${
+              date !== dateNum ? 'text-black cursor-pointer' : 'text-accent'
+            }`}
             onClick={() => setDate(dateNum)}
             key={index}>
-            {new Date(dateNum).toLocaleDateString()}
+            {new Date(dateNum).toDateString().slice(0, 10)}
           </div>
         ))
       )}
