@@ -29,7 +29,7 @@ const EventPage = async ({ params }: Params) => {
     return (
       <ScheduleContextProvider event={event.toJson()} stages={stages} days={dates}>
         <div className="w-full h-full relative md:overflow-scroll">
-          <div className="sticky top-0 z-10 flex flex-row flex-wrap md:flex-col bg-base justify-center">
+          <div className="shadow text-center sticky top-0 z-10 flex flex-row flex-wrap md:flex-col bg-base justify-center">
             <DateSelect dates={dates} />
             <StageSelect stages={stages} />
           </div>

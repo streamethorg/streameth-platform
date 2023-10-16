@@ -7,15 +7,20 @@ export const TopNavbarContext = createContext<{
   setLogo: React.Dispatch<React.SetStateAction<string>>
   components: React.ReactNode[]
   setComponents: React.Dispatch<React.SetStateAction<React.ReactNode[]>>
+  homePath?: string
+  setHomePath: React.Dispatch<React.SetStateAction<string>>
 }>({
   logo: '',
   setLogo: () => {},
   components: [],
   setComponents: () => {},
+  homePath: '',
+  setHomePath: () => {},
 })
 
 export const TopNavbarContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [logo, setLogo] = useState('')
+  const [homePath, setHomePath] = useState('')
 
   useEffect(() => {
     // if (logo === '') {
@@ -25,5 +30,5 @@ export const TopNavbarContextProvider = ({ children }: { children: React.ReactNo
 
   const [components, setComponents] = useState<React.ReactNode[]>([])
 
-  return <TopNavbarContext.Provider value={{ logo, setLogo, components, setComponents }}>{children}</TopNavbarContext.Provider>
+  return <TopNavbarContext.Provider value={{ logo, setLogo, components, setComponents, homePath, setHomePath }}>{children}</TopNavbarContext.Provider>
 }
