@@ -18,7 +18,6 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
       console.error('An error occurred.')
     }
   }
-  console.log(event)
 
   return (
     <AdminItemCard>

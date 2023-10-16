@@ -12,12 +12,18 @@ interface Props {
   formData: Omit<IEvent, 'id'>
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
+  setCurrentStep: Dispatch<SetStateAction<number>>
 }
 
-const CreateEditEventStepOne = ({ handleChange, formData, setFormData }: Props) => {
+const CreateEditEventStepOne = ({ handleChange, formData, setCurrentStep }: Props) => {
   return (
     <div>
-      <div className="flex items-start justify-between mt-5 mb-10">
+      <p className="font-ubuntu text-lg pt-3 text-grey">
+        Welcome to the first step in creating your event on StreamETH! Here, you{`'`}ll provide essential details like your event{`'`}s title,
+        description, location, and dates. Additionally, you can upload your event{`'`}s digital assets, setting the foundation for a visually engaging
+        event page that will captivate your audience.
+      </p>
+      <div className="mt-5 mb-10 gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
         <div>
           <FormLabel label="Event's Logo" required toolTip toolTipHTML="Click to edit image" />
           <img src={`/events/${formData.logo}`} className="rounded-full min-w-[158px] h-[158px]" />
@@ -30,7 +36,7 @@ const CreateEditEventStepOne = ({ handleChange, formData, setFormData }: Props) 
 
         <div>
           <FormLabel label="Event's Banner Image" toolTip />
-          <img src={`/events/${formData.banner}`} className="w-[330px] h-[158px]" />
+          <img src={`/events/${formData.banner}`} className="w-[360px] h-[158px]" />
         </div>
       </div>
 
@@ -95,10 +101,12 @@ const CreateEditEventStepOne = ({ handleChange, formData, setFormData }: Props) 
 
       <div className="flex justify-end items-center gap-5">
         <div className="flex items-center gap-2">
-          <p className="text-accent text-sm">1/3</p>
+          <p className="text-accent text-sm">1/2</p>
           <StatusBarOneIcon />
         </div>
-        <Button variant="outline">Next page</Button>
+        <Button variant="outline" onClick={() => setCurrentStep(2)}>
+          Next page
+        </Button>
       </div>
     </div>
   )

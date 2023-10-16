@@ -7,7 +7,7 @@ interface FormTextInputProps extends HTMLAttributes<HTMLInputElement> {
   isNumberInput?: boolean
   type?: string
   name?: string
-  value: string
+  value?: string
   toolTip?: boolean
   toolTipHTML?: string
   required?: boolean

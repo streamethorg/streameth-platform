@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className="flex flex-col h-[100dvh] lg:overflow-hidden w-screen">
+                <div className="flex flex-col h-[100dvh] w-screen">
                   <Navbar />
                   {children}
                 </div>

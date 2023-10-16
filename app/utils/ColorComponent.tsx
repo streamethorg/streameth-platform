@@ -11,7 +11,7 @@ interface Props {
 const ColorComponent = ({ children, accentColor }: Props) => {
   const pathname = usePathname()
 
-  const isNotOrganization = pathname === '/' || pathname === '/admin'
+  const isNotOrganization = pathname === '/' || pathname.includes('admin')
   useEffect(() => {
     if (!isNotOrganization) {
       document.documentElement.style.setProperty('--colors-accent', accentColor)

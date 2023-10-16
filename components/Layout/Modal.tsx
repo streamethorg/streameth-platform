@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 
-const Modal = ({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) => {
+const Modal = ({ open, onClose, children, modalWidth }: { open: boolean; onClose: () => void; children: React.ReactNode; modalWidth: string }) => {
   useEffect(() => {
     return () => {
       if (open) {
@@ -9,6 +9,17 @@ const Modal = ({ open, onClose, children }: { open: boolean; onClose: () => void
       }
     }
   }, [open, onClose])
+
+  useEffect(() => {
+    if (open) {
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.documentElement.style.overflow = 'unset'
+      document.body.style.overflow = 'unset'
+    }
+  }, [open])
 
   if (!open) {
     return null
@@ -23,7 +34,10 @@ const Modal = ({ open, onClose, children }: { open: boolean; onClose: () => void
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true" onClick={onClose}>
           &#8203;
         </span>
-        <div className="inline-block align-bottom bg-white rounded  text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full p-4">
+        <div
+          className={`inline-block align-bottom bg-white rounded  text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle ${
+            modalWidth ? modalWidth : 'sm:max-w-lg sm:w-full'
+          } p-4`}>
           {children}
         </div>
       </div>
