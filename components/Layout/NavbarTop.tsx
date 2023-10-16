@@ -16,7 +16,7 @@ export default function Navbar() {
     <ColorComponent accentColor={colors.accent}>
       <header className="sticky z-50 flex flex-row bg-base border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">
         <div className=" flex items-center w-20">
-          <Link href={homePath ? homePath : "/"} className="">
+          <Link href={homePath ? homePath : '/'} className="">
             <span className="sr-only">Logo</span>
             <Image
               src={logo}

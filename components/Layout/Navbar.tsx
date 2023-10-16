@@ -75,7 +75,6 @@ export default function Navbar({
     setLogo('/events/' + event.logo)
   }, [event])
 
-
   if (archiveMode) {
     return <></>
   }
