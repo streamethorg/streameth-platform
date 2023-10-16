@@ -1,5 +1,4 @@
 import ffmpeg from 'fluent-ffmpeg'
-import axios from 'axios'
 import fs from 'fs'
 
 export async function extractFirstFrame(hlsUrl: string, filePath: string) {
