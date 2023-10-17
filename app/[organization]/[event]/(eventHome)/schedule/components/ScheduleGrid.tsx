@@ -13,7 +13,7 @@ function ScheduleGrid({ children }: { children: React.ReactNode }) {
       style={{
         height: `${schedulePosition.totalSlots * CELL_HEIGHT}rem`,
       }}>
-      {Array.from({ length: schedulePosition.totalSlots  }, (_, i) => (
+      {Array.from({ length: schedulePosition.totalSlots }, (_, i) => (
         <div key={i} className="w-full h-full border-t border-r border-l  ">
           <h1 className="w-full text-sm text-gray-400 mx-auto px-4">{secondsToHHMM(schedulePosition.min + i * 60 * 15)}</h1>
           {/* <div className="w-full border" /> */}

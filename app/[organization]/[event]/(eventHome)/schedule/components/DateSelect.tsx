@@ -25,9 +25,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
       ) : (
         dates.map((dateNum, index) => (
           <div
-            className={`ml-auto w-[calc(100%-6rem)] p-2 text-center text-xl ${
-              date !== dateNum ? 'text-black cursor-pointer' : 'text-black'
-            }`}
+            className={`ml-auto w-[calc(100%-6rem)] p-2 text-center text-xl ${date !== dateNum ? 'text-black cursor-pointer' : 'text-black'}`}
             onClick={() => setDate(dateNum)}
             key={index}>
             {new Date(dateNum).toDateString().slice(0, 10)}
