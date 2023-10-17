@@ -36,9 +36,8 @@ const EventHome = async ({ params }: { params: Params }) => {
             <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
             <div className=" flex flex-col space-y-2 text-left">
               <p>&#128197; When: October 20th, 8pm GMT +7</p>
-              <p>&#9200; Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
               <p>&#127759; Where: Live in Vietnam and Online</p>
-              <p>&#128421; Streamed @ launch.scroll.xyz</p>
+              <p>&#128421; Streamed @ launch.scroll.io</p>
               <Link
                 className="bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[8rem]"
                 href={
@@ -71,7 +70,7 @@ const EventHome = async ({ params }: { params: Params }) => {
             <p>
               But that{"\'"}s not all. We{"\'"}ve got a Founder conversation lined up. We{"\'"}ll discuss what{"\'"}s next post-mainnet launch, sharing our vision, the
               challenges we{"\'"}ve overcome, and the exciting journey ahead for Scroll. So, what{"\'"}s on Scroll{"\'"}s horizon? We{"\'"}ll reveal the areas we{"\'"}re
-              focusing on and how you can be a part of it. Save the Date now, and let{"\'"}s celebrate together at launch.scroll.xyz.
+              focusing on and how you can be a part of it. Save the Date now, and let{"\'"}s celebrate together at launch.scroll.io.
             </p>
             <p>
               Cheers,<br></br>
