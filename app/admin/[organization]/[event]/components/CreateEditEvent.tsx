@@ -114,6 +114,7 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
           setFormData={setFormData}
           handleDataImporterChange={handleDataImporterChange}
           setCurrentStep={setCurrentStep}
+          handleSubmit={handleSubmit}
         />
       )}
       {error && <div className="mt-4 text-red-500">{error}</div>}

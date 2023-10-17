@@ -48,7 +48,7 @@ const EventPreview = ({ formData, handleSubmit, closeModal }: EventPreviewProps)
 
   return (
     <>
-      <div className="flex justify-between w-full mb-5">
+      <div className="flex justify-between w-full">
         <div className="w-20 items-center flex">
           <span className="sr-only">Logo</span>
           <Image src={'/events/' + formData?.logo} className="" alt="logo" width={50} height={50} />
@@ -63,7 +63,9 @@ const EventPreview = ({ formData, handleSubmit, closeModal }: EventPreviewProps)
       <div className="flex flex-row w-screen lg:overflow-hidden h-full">
         <div className="text-main-text text-center my-1 space-x-0 gap-3 text-md font-medium flex flex-col">
           {pages.map((item) => (
-            <div key={item.name} className={`py-1 cursor-pointer hover:text-gray-300 bg-accent text-primary rounded`}>
+            <div
+              key={item.name}
+              className={`py-1 cursor-pointer hover:text-gray-300 ${item == pages[0] ? 'bg-accent text-primary' : 'text-accent'} rounded`}>
               <div className="w-6 h-6 lg:w-8 lg:h-8 m-auto p-1">{item.icon}</div>
               <p className="">{item.name}</p>
             </div>

@@ -14,10 +14,11 @@ export async function generateStaticParams() {
   }))
 }
 
-const EventsPage = async ({ params }: { params: { organization: string; name: string } }) => {
+const EventsPage = async ({ params }: { params: { organization: string } }) => {
   try {
     const response = await axios.get(`${apiUrl()}/organizations/${params.organization}/events`)
     const events: IEvent[] = response.data
+
     return (
       <div className="overflow-auto w-full pt-4">
         <div className="flex justify-between items-center mb-7">

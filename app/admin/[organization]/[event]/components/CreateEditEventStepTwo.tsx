@@ -20,9 +20,10 @@ interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
   setCurrentStep: Dispatch<SetStateAction<number>>
   handleDataImporterChange: (importer: IDataImporter) => void
+  handleSubmit: () => void
 }
 
-const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleChange, handleDataImporterChange }: Props) => {
+const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleChange, handleDataImporterChange, handleSubmit }: Props) => {
   const [selectedType, setSelectedType] = useState<string>(formData?.dataImporter?.[0]?.type ?? '')
   //@ts-ignore
   const [config, setConfig] = useState<GSheetConfig & PretalxConfig>(formData?.dataImporter?.[0]?.config ?? initialImporterConfig)
@@ -142,6 +143,13 @@ const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleC
           value={formData?.website}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
         />
+        <div className="mb-6">
+          <FormLabel label="Ready?" labelClassName="!mb-0" toolTip toolTipHTML="Click Publish to create event" />
+          <p className="text-sm opacity-60 text-accent mb-2">Your event page can be edited at anytime from your admin page</p>
+          <Button variant="green" className="text-green" onClick={handleSubmit}>
+            Publish Event Page
+          </Button>
+        </div>
       </div>
 
       <div className="flex justify-end items-center gap-5">

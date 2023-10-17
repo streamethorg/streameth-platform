@@ -7,6 +7,7 @@ import DocsIcon from '../assets/icons/DocsIcon'
 import { usePathname } from 'next/navigation'
 import { useAccount, useEnsName } from 'wagmi'
 import { truncateAddr } from '@/utils'
+import MediaIcon from '../assets/icons/MediaIcon'
 
 const ADMIN_MENU = [
   {
@@ -22,7 +23,7 @@ const ADMIN_MENU = [
   {
     id: '/admin/studio',
     name: 'Studio',
-    Icon: EventIcon,
+    Icon: MediaIcon,
   },
 ]
 
@@ -37,7 +38,7 @@ const AdminSideNav = () => {
     <div className="min-w-[275px] flex flex-col justify-between bg-background border-1 px-4 py-5 h-[calc(100vh-10rem)] drop-shadow-card">
       <div>
         <div className="flex items-center gap-5">
-          <Image src="/blockie.png" alt="user avatar" width={52} height={52} className="rounded-full" />
+          <Image src="/blockie.png" alt="avatar" width={52} height={52} className="rounded-full" />
           <h2 className="text-lg font-bold">{data ?? truncateAddr(address as string) ?? 'Admin'}</h2>
         </div>
 
