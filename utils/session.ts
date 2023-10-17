@@ -42,7 +42,6 @@ class Session {
   }
 
   static async fromRequest(req: NextRequest): Promise<Session | null> {
-    console.log(req.cookies.getAll())
     const sessionCookie = req.cookies.get(COOKIE_NAME)?.value
 
     if (!sessionCookie) return null

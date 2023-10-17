@@ -1,5 +1,4 @@
 import { ISession } from '@/server/model/session'
-import { apiUrl } from '@/server/utils'
 import { IEvent } from '@/server/model/event'
 
 export function extractSearchParams<T extends Record<string, any>>(searchParams: URLSearchParams, keys: (keyof T)[]): T {
@@ -16,7 +15,7 @@ export function extractSearchParams<T extends Record<string, any>>(searchParams:
 }
 
 export const getSessions = async ({ event, timestamp, stage, date }: { event: IEvent; timestamp?: number; stage?: string; date?: number }) => {
-  const baseUrl = `${apiUrl()}/organizations/${event.organizationId}/events/${event.id}/sessions`
+  const baseUrl = `api/organizations/${event.organizationId}/events/${event.id}/sessions`
   const params = new URLSearchParams()
 
   if (timestamp) {

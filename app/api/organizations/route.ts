@@ -56,10 +56,11 @@ export async function PATCH(request: NextRequest) {
 
   return request
     .json()
-    .then(async (organisation: IOrganization) => {
+    .then(async (json: any) => {
       const organisationController = new OrganizationController()
 
-      return organisationController.editOrganization(organisation).then(() => {
+      const { formData }: { formData: IOrganization } = json
+      return organisationController.editOrganization(formData).then(() => {
         return NextResponse.json('Organisation has been edited', { status: 200 })
       })
     })
@@ -71,14 +72,15 @@ export async function PATCH(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const session = await Session.fromRequest(request)
+
   if (!session) {
     return NextResponse.json('Unauthorized', { status: 401 })
   }
-
   return request
     .json()
-    .then(async (organisation: IOrganization) => {
-      const organisationId = generateId(organisation.name)
+    .then(async (json: any) => {
+      const { formData }: { formData: IOrganization } = json
+      const organisationId = generateId(formData.name)
       const organisationController = new OrganizationController()
 
       return organisationController
@@ -89,7 +91,7 @@ export async function POST(request: NextRequest) {
         })
         .catch(() => {
           // Organisation doesn't exist, proceed to create
-          return organisationController.createOrganization(organisation)
+          return organisationController.createOrganization(formData)
         })
         .then(() => {
           return NextResponse.json('Organization has been created', { status: 200 })

@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { IOrganization } from '@/server/model/organization'
 import { ModalContext } from '@/components/context/ModalContext'
-import { apiUrl } from '@/server/utils'
 
 interface OrganizationFormProps {
   onSuccess?: () => void
@@ -43,24 +42,19 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
     e.preventDefault()
     setSubmitting(true)
 
-    fetch(`${apiUrl()}/organizations`, {
+    fetch(`api/organizations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify(formData),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to create organisation')
-        }
-        return response.json()
-      })
+      .then((response) => response.json())
       .then((data) => {
         onSuccess?.()
       })
-      .catch((err) => {
+      .catch((error) => {
+        console.error('Error:', error)
         onFailure?.('An error occurred.')
       })
       .finally(() => {

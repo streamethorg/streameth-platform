@@ -1,7 +1,6 @@
 // 'use client'
 import React, { useEffect, useState } from 'react'
 import { IEvent } from '@/server/model/event'
-import { apiUrl } from '@/server/utils'
 import DataImporterSelect from './DataImporterInput'
 import UploadFileInput from './UploadFileInput'
 import { IDataImporter } from '@/server/model/event'
@@ -69,7 +68,7 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    fetch(`${apiUrl()}/organizations/${organizationId}/events`, {
+    fetch(`api/organizations/${organizationId}/events`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

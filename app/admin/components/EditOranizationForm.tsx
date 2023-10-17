@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { IOrganization } from '@/server/model/organization'
 import { ModalContext } from '@/components/context/ModalContext'
-import { apiUrl } from '@/server/utils'
 
 interface OrganizationFormProps {
   onSuccess?: () => void
@@ -43,7 +42,7 @@ const EditOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, onFa
     e.preventDefault()
     setSubmitting(true)
 
-    fetch(`${apiUrl()}/organizations`, {
+    fetch(`api/organizations`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

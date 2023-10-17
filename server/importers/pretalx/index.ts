@@ -3,6 +3,7 @@ import { IDataImporter } from '../../model/event'
 import Event from '../../model/event'
 import { generateId } from '../../utils'
 import moment from 'moment-timezone'
+
 export default class PretalxImporter extends BaseImporter {
   apiUrl: string
 
