@@ -5,8 +5,7 @@ import { hasData } from '@/server/utils'
 import { getEventDays } from '@/utils/time'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import Link from 'next/link'
-import StageModalButton from './components/StageModalButton'
-import Card from '@/components/misc/Card'
+import Markdown from 'react-markdown'
 interface Params {
   event: string
   organization: string
@@ -33,33 +32,51 @@ const EventHome = async ({ params }: { params: Params }) => {
       <HomePageLogoAndBanner event={event.toJson()} />
       <div className="max-w-4xl mx-auto mt-4">
         <div className="flex flex-col p-4 ">
-          <div className=" flex-col flex space-y-2 md:flex-row items-center">
-            <h1 className="text-4xl py-4 text-center">{event.name}</h1>
-         
+          <div className=" flex-col flex space-y-2 my-4 md:flex-col">
+            <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
+            <div className=" flex flex-col space-y-2 text-left">
+              <p>📅 When: October 20th, 8pm GMT +7</p>
+              <p>⏰ Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
+              <p>🌍 Where: Live in Vietnam and Online</p>
+              <p>🖥 Streamed @ launch.scroll.xyz</p>
+              <Link
+                className="bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[6rem]"
+                href={
+                  'https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NmFqZGU4dmVxcGgzanNxYjlzYjV1MXB0MGEgY19mZDE2YjdhZTIxZDA2NWI4OTUxYTU0MzM3NDQ1MTQ3MjEyYWI1OThhMjAzNzFlZjEzMjBjZWQ5ZWUzOWNhNTc0QGc&tmsrc=c_fd16b7ae21d065b8951a54337445147212ab598a20371ef1320ced9ee39ca574%40group.calendar.google.com'
+                }>
+                add to cal
+              </Link>
+            </div>
           </div>
           <div className="space-y-4">
             <p>
-              After three successful testnets spanning over 15 months with extensive testing and rigorous security audits, users and builders are now
-              free to explore Scroll’s zkEVM, a scaling solution nearly identical to Ethereum with lower cost, faster speed and limitless scaling
-              potential.
+              Join us on Friday, October 20th, as we celebrate a monumental moment in Scroll's journey - the launch of our Mainnet. It's a big step
+              forward, and we want to share it with you. We're bringing together a group of friends from The Graph, Aave/Lens, Dora, and more to mark
+              this occasion. We'll be diving into a range of topics, but most importantly, we'll be opening the floor for an authentic conversation
+              with community leaders from Latin America, Africa, and Southeast Asia. Together, we'll explore how zk technology is creating exciting
+              new opportunities in these regions.
             </p>
             <p>
-              {' '}
-              To celebrate this milestone with our global community, we are hosting a livestream event from our team off-site in Vietnam. You’ll
-              hear from our founders, engineering and research teams, ecosystem projects, and other members of the global Ethereum community. We’ll
-              also be sharing highlights from the past two weeks.
+              If you're a developer, join us for a hands-on build session. We're rolling up our sleeves and guiding you through the process of
+              deploying on Scroll. We'll also introduce you to the Scroll Messenger - a bridge designed for seamless communication. Plus, we'll delve
+              into the art of asset transfer from L1 to L2. Here's a sneak peek at some of the incredible minds you'll be hearing from:
             </p>
-            <p> Join us!</p>
-            <div className="font-bold md:items-center flex flex-col md:flex-row  text-center md:text-left">
-            When: October 20th, 8pm GMT +7
-            <Link
-              className="bg-accent font-bold border-2 hover:text-accent mt-2 md:mt-0 md:ml-2 hover:bg-white  text-white border-accent p-2  rounded"
-              href={
-                'https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NmFqZGU4dmVxcGgzanNxYjlzYjV1MXB0MGEgY19mZDE2YjdhZTIxZDA2NWI4OTUxYTU0MzM3NDQ1MTQ3MjEyYWI1OThhMjAzNzFlZjEzMjBjZWQ5ZWUzOWNhNTc0QGc&tmsrc=c_fd16b7ae21d065b8951a54337445147212ab598a20371ef1320ced9ee39ca574%40group.calendar.google.com'
-              }>
-              add to cal
-            </Link>
-            </div>
+            <ul>
+              <li>Bunny (Dora)</li>
+              <li>Nader (Lens)</li>
+              <li>CTRLV (Cog)</li>
+              <li>Pranav (The Graph)</li>
+              <li>Simona Pop (ENS)</li>
+            </ul>
+            <p>
+              But that's not all. We've got a Founder conversation lined up. We'll discuss what's next post-mainnet launch, sharing our vision, the
+              challenges we've overcome, and the exciting journey ahead for Scroll. So, what's on Scroll's horizon? We'll reveal the areas we're
+              focusing on and how you can be a part of it. Save the Date now, and let's celebrate together at launch.scroll.xyz.
+            </p>
+            <p>
+              Cheers,<br></br>
+              The Scroll Team
+            </p>
           </div>
 
           {/* <div className="flex flex-row flex-wrap justify-center items-center p-4">

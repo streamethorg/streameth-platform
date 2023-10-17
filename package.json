@@ -45,6 +45,7 @@
     "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-markdown": "^9.0.0",
     "react-scroll": "^1.8.9",
     "react-share": "^4.4.1",
     "react-social-icons": "^5.15.0",
