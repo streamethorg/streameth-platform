@@ -24,7 +24,7 @@ const start = async () => {
 
   const compositions = await getCompositions(bundled)
   console.log('Compositions', compositions)
-  for (const composition of compositions) {
+  for (const composition of compositions.filter((c) => c.id.includes('devconnect'))) {
     console.log(`Rendering ${composition.id}...`)
 
     await renderMedia({
@@ -34,15 +34,15 @@ const start = async () => {
       outputLocation: `assets/intros/${composition.id}.mp4`,
       onProgress,
     })
-    lastProgressPrinted = -1
 
-    if (composition.id === 'session-hd' || composition.id === 'session-social') {
-      await renderStill({
-        composition,
-        serveUrl: bundled,
-        output: `assets/${composition.id.replace('session-', '')}/${composition.id}.png`,
-      })
-    }
+    await renderStill({
+      composition,
+      serveUrl: bundled,
+      frame: 290,
+      output: `assets/stills/${composition.id}.png`,
+    })
+
+    lastProgressPrinted = -1
   }
 
   return
