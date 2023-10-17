@@ -35,16 +35,16 @@ const EventHome = async ({ params }: { params: Params }) => {
           <div className=" flex-col flex space-y-2 my-4 md:flex-col">
             <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
             <div className=" flex flex-col space-y-2 text-left">
-              <p>{"\&#128197;"} When: October 20th, 8pm GMT +7</p>
-              <p>{"\&#9200;"} Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
-              <p>{"\&#127759;"} Where: Live in Vietnam and Online</p>
-              <p>{"\&#128421;"} Streamed @ launch.scroll.xyz</p>
+              <p>&#128197; When: October 20th, 8pm GMT +7</p>
+              <p>&#9200; Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
+              <p>&#127759; Where: Live in Vietnam and Online</p>
+              <p>&#128421; Streamed @ launch.scroll.xyz</p>
               <Link
                 className="bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[6rem]"
                 href={
                   'https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NmFqZGU4dmVxcGgzanNxYjlzYjV1MXB0MGEgY19mZDE2YjdhZTIxZDA2NWI4OTUxYTU0MzM3NDQ1MTQ3MjEyYWI1OThhMjAzNzFlZjEzMjBjZWQ5ZWUzOWNhNTc0QGc&tmsrc=c_fd16b7ae21d065b8951a54337445147212ab598a20371ef1320ced9ee39ca574%40group.calendar.google.com'
                 }>
-                add to cal
+                save the date
               </Link>
             </div>
           </div>
