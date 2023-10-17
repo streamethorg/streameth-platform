@@ -1,5 +1,5 @@
-const Card = ({ children, isAvailable = true }: { children: React.ReactNode; isAvailable?: boolean }) => (
-  <div className={`flex flex-col rounded-md h-full p-4 shadow box-border ${isAvailable ? 'cursor-pointer bg-base' : 'bg-gray-200'}`}>{children}</div>
+const Card = ({ children }: { children: React.ReactNode; isAvailable?: boolean }) => (
+  <div className="border shadow rounded p-2 border-neutral-200 ">{children}</div>
 )
 
 export default Card

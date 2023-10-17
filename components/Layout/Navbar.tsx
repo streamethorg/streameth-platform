@@ -4,22 +4,46 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ModalContext } from '../context/ModalContext'
-import { CameraIcon, Bars2Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
+import { CameraIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { LoadingContext } from '../context/LoadingContext'
 import { IEvent } from '@/server/model/event'
 import StageModal from '@/app/[organization]/[event]/stage/[stage]/components/StageModal'
+import { TopNavbarContext } from '../context/TopNavbarContext'
+import { arch } from 'os'
+
 export interface Page {
   name: string
   href: string
   icon: JSX.Element
 }
 
+const NavBarButton = ({
+  isNavVisible,
+  setIsNavVisible,
+}: {
+  isNavVisible: boolean
+  setIsNavVisible: React.Dispatch<React.SetStateAction<boolean>>
+}) => (
+  <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden md:p-4 absolute top-0 right-0 z-50 mr-32 py-3">
+    {!isNavVisible ? (
+      <div className="border-2 rounded border-accent text-white bg-accent">
+        <Bars3Icon className="w-8 h-8" />
+      </div>
+    ) : (
+      <div className="border-2 border-accent rounded text-white bg-accent">
+        <XMarkIcon className="w-8 h-8" />
+      </div>
+    )}
+  </button>
+)
+
 export default function Navbar({
   event,
   pages,
   stages,
+  archiveMode,
 }: {
+  archiveMode?: boolean
   event: IEvent
   stages: Page[] | undefined
   pages: {
@@ -30,6 +54,7 @@ export default function Navbar({
 }) {
   const pathname = usePathname()
   const { openModal, closeModal } = useContext(ModalContext)
+  const { setLogo, logo, setHomePath } = useContext(TopNavbarContext)
   const { setIsLoading } = useContext(LoadingContext)
   const [isNavVisible, setIsNavVisible] = useState(false) // New state
   const router = useRouter()
@@ -38,6 +63,7 @@ export default function Navbar({
     if (isNavVisible) {
       setIsNavVisible(false)
     }
+    setHomePath(`/${event.organizationId}/${event.id}`)
   }, [pathname])
 
   const handleClick = (stageHref: string) => {
@@ -45,28 +71,19 @@ export default function Navbar({
     router.push(stageHref)
     closeModal()
   }
+  useEffect(() => {
+    setLogo('/events/' + event.logo)
+  }, [event])
+
+  if (archiveMode) {
+    return <></>
+  }
 
   return (
     <div>
-      <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden md:p-4 absolute top-0 ml-20 h-16">
-        {!isNavVisible ? (
-          <div className="border-2 rounded border-accent text-accent">
-            <Bars2Icon className="w-8 h-8" />
-          </div>
-        ) : (
-          <div className="border-2 border-accent rounded text-accent">
-            <XMarkIcon className="w-8 h-8" />
-          </div>
-        )}
-      </button>
-      <div className=" absolute w-16 h-16 lg:w-20 lg:h-20 top-0 items-center flex">
-        <Link href={`/${event.organizationId}/${event.id}`}>
-          <span className="sr-only">Logo</span>
-          <Image src={'/events/' + event.logo} className="" alt="logo" width={150} height={150} />
-        </Link>
-      </div>
+      <NavBarButton isNavVisible={isNavVisible} setIsNavVisible={setIsNavVisible} />
       <header
-        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-[76px] left-0 w-20 h-screen ${
+        className={`shadow-sm z-40 bg-base border-r border-primary fixed top-16 lg:top-[70px] left-0 w-[5rem] h-screen ${
           isNavVisible ? 'block' : 'hidden'
         } lg:block`}>
         <div className="flex flex-col items-center justify-between ">

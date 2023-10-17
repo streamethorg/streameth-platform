@@ -5,6 +5,8 @@ import { ModalContextProvider } from '@/components/context/ModalContext'
 import { MobileContextProvider } from '@/components/context/MobileContext'
 import Navbar from '@/components/Layout/NavbarTop'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
+import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
+import { FilterContextProvider } from '../components/context/FilterContext'
 import { Metadata } from 'next'
 
 const ubuntu = Ubuntu({
@@ -26,9 +28,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className="flex flex-col h-[100dvh] w-screen">
-                  <Navbar />
-                  {children}
+                <div className="bg-background flex flex-col h-[100dvh] w-screen">
+                  <FilterContextProvider>
+                    <TopNavbarContextProvider>
+                      <Navbar />
+                      {children}
+                    </TopNavbarContextProvider>
+                  </FilterContextProvider>
                 </div>
               </ModalContextProvider>
             </MobileContextProvider>

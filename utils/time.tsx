@@ -34,6 +34,6 @@ export const secondsToHHMM = (seconds: number) => {
 
   const hoursStr = hours.toString().padStart(2, '0')
   const minutesStr = minutes.toString().padStart(2, '0')
-
-  return `${hoursStr}:${minutesStr}`
+  const ampm = hours >= 12 ? 'pm' : 'am'
+  return `${hoursStr}:${minutesStr} ${ampm}`
 }

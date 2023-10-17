@@ -16,7 +16,8 @@
       }
     }
   ],
-  "eventCover": "protocol.png",
+  "eventCover": "protocol_berg.png",
   "website": "",
-  "archiveMode": true
+  "archiveMode": true,
+  "accentColor": "#b83232"
 }

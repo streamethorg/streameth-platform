@@ -1,6 +1,5 @@
 'use client'
 import { ISession } from '@/server/model/session'
-import SpeakerPhoto from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerPhoto'
 import { ModalContext } from '@/components/context/ModalContext'
 import { useContext } from 'react'
 import ScheduleCardModal from './ScheduleCardModal'
@@ -11,22 +10,25 @@ const ScheduleCard = ({ session, showTime = false, speakers = false }: { session
 
   return (
     <div
-      className="flex space-y-3 flex-col w-full h-full bg-base shadow rounded p-2 cursor-pointer"
+      className="flex space-y-3 flex-col w-full h-full bg-base border shadow rounded p-1 md:p-2 cursor-pointer"
       onClick={() => {
         openModal(<ScheduleCardModal session={session} />)
       }}>
-      <div className=" border-l border-accent flex flex-col p-4 py-2 rounded-tr rounded-br w-full h-full">
+      <div className=" border-l border-accent flex flex-col px-2 rounded-tr rounded-br w-full h-full">
         {showTime && (
           <p className="text-main-text text-sm uppercase py-1">
             {new Date(session.start).getHours().toString().padStart(2, '0') + ':' + new Date(session.start).getMinutes().toString().padStart(2, '0')}-
             {new Date(session.end).getHours().toString().padStart(2, '0') + ':' + new Date(session.end).getMinutes().toString().padStart(2, '0')}
           </p>
         )}
-        <p className="flex overflow-hidden text-ellipsis text-main-text text-sm font-medium uppercase">{session.name}</p>
+        <p className="flex text-ellipsis text-main-text text-sm lg:text-md">{session.name}</p>
         {speakers && (
-          <div className="flex mt-auto py-1 items-center flex-row">
+          <div className="flex py-1 items-center flex-row space-x-2 overflow-x-scroll mt-auto">
             {session.speakers.map((speaker) => (
-              <SpeakerPhoto size="sm" key={speaker.id} speaker={speaker} />
+              // <SpeakerPhoto size="sm" key={speaker.id} speaker={speaker} />
+              <p key={speaker.id} className="text-sm text-main-text border p-1 px-2 rounded-full whitespace-nowrap ">
+                {speaker.name}
+              </p>
             ))}
           </div>
         )}

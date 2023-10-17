@@ -1,13 +1,16 @@
 'use client'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import SearchFilter from './SearchFilter'
 import SelectFilter from './SelectFilter'
 import { ISession } from '@/server/model/session'
 import { ISpeaker } from '@/server/model/speaker'
 import { IStage } from '@/server/model/stage'
+import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
+import { TopNavbarContext } from '@/components/context/TopNavbarContext'
 
-export default function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
+function FilterBar2({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
   const [isOpen, setIsOpen] = useState(false)
+
   const speakerFilters = speakers.map((speaker) => {
     return {
       name: speaker.name,
@@ -72,29 +75,30 @@ export default function FilterBar({ sessions, speakers, stages }: { sessions: IS
   })
 
   return (
-    <div className="drop-shadow-md md:drop-shadow-none md:shadow md:rounded-md bg-base">
-      <div className="md:flex flex-col w-full relative px-4 py-2 md:p-4">
-        <p className="text-lg font-bold mb-2 text-accent uppercase ">Search</p>
-        <SearchFilter filterOptions={sessionFilters} filterName="session name" />
-        <SearchFilter filterOptions={speakerFilters} filterName="speaker" />
-        <div className="lg:hidden">
-          <p className="text-lg mt-4 mb-2 font-bold text-accent uppercase " onClick={() => setIsOpen(!isOpen)}>
-            More filters
-          </p>
-          {isOpen && (
-            <>
-              <SelectFilter filterOptions={stageFilters} filterName="Stage" />
-              <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />
-            </>
-          )}
+    <div key={1} className={` w-full max-w-[600px] m-auto z-50 ${isOpen && 'h-full '} `}>
+      <div className="flex flex-col justify-top items-start  w-full h-full">
+        <div className="flex flex-row w-full h-full items-center justify-center">
+          <SearchFilter filterOptions={sessionFilters} filterName="session name" />
+          <AdjustmentsHorizontalIcon className="h-full w-8 text-accent md:ml-2" onClick={() => setIsOpen(!isOpen)} />
         </div>
-        <div className="hidden lg:block">
-          <p className="text-lg mt-4 mb-2 font-bold text-accent uppercase ">More filters</p>
-          <SelectFilter filterOptions={stageFilters} filterName="Stage" />
-          <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />
-          {/* <SelectFilter filterOptions={trackFilter} filterName="Track" /> */}
-        </div>
+        {isOpen && (
+          <div className=" w-full mt-1 space-y-2 bg-white rounded p-2 shadow-sm">
+            <SelectFilter filterOptions={stageFilters} filterName="Stage" />
+            <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />
+            <SearchFilter filterOptions={speakerFilters} filterName="speaker" />
+          </div>
+        )}
       </div>
     </div>
   )
+}
+
+export default function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
+  const { setComponents } = useContext(TopNavbarContext)
+
+  useEffect(() => {
+    setComponents([<FilterBar2 key={1} sessions={sessions} speakers={speakers} stages={stages} />])
+  }, [])
+
+  return <></>
 }

@@ -1,6 +1,6 @@
 import FilterBar from './components/FilterBar'
 import FilteredItems from './components/FilteredItems'
-import { FilterContextProvider } from './components/FilterContext'
+import { FilterContextProvider } from '../../../../components/context/FilterContext'
 import SpeakerController from '@/server/controller/speaker'
 import SessionController from '@/server/controller/session'
 import StageController from '@/server/controller/stage'
@@ -43,12 +43,8 @@ export default async function ArchivePage({ params }: Params) {
 
   return (
     <div className="flex flex-col-reverse justify-end lg:flex-row w-full lg:h-full lg:overflow-hidden">
-      <FilterContextProvider items={videoSessions}>
-        <FilteredItems />
-        <div className="w-full lg:max-w-[20rem] sticky top-0 lg:pt-4 lg:pr-4">
-          <FilterBar sessions={videoSessions} speakers={speakers} stages={stages} />
-        </div>
-      </FilterContextProvider>
+      <FilteredItems sessions={sessions} />
+      <FilterBar sessions={videoSessions} speakers={speakers} stages={stages} />
     </div>
   )
 }
