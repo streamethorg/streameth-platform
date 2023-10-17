@@ -9,7 +9,7 @@ import CreateEditEventStepTwo from './CreateEditEventStepTwo'
 import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
 
-const CreateEditEvent = ({ event }: { event: IEvent }) => {
+const CreateEditEvent = ({ event, organizationId }: { event: IEvent; organizationId: string }) => {
   const [currentStep, setCurrentStep] = useState(1)
   const [error, setError] = useState<string | null>(null)
   const { openModal, closeModal, modalWidth } = useContext(ModalContext)
@@ -26,6 +26,7 @@ const CreateEditEvent = ({ event }: { event: IEvent }) => {
     timezone: '',
     accentColor: '',
   })
+
   useEffect(() => {
     if (event) {
       setFormData({
@@ -64,6 +65,13 @@ const CreateEditEvent = ({ event }: { event: IEvent }) => {
       setError('An error occurred.')
     }
   }
+
+  const onFileUpload = (fileName: string, key: string) => {
+    setFormData({
+      ...formData,
+      [key]: fileName,
+    })
+  }
   return (
     <div>
       <div>
@@ -84,7 +92,14 @@ const CreateEditEvent = ({ event }: { event: IEvent }) => {
         </div>
       </div>
       {currentStep == 1 && (
-        <CreateEditEventStepOne handleChange={handleChange} formData={formData} setFormData={setFormData} setCurrentStep={setCurrentStep} />
+        <CreateEditEventStepOne
+          handleChange={handleChange}
+          formData={formData}
+          setFormData={setFormData}
+          setCurrentStep={setCurrentStep}
+          organizationId={organizationId}
+          onFileUpload={onFileUpload}
+        />
       )}
       {currentStep == 2 && (
         <CreateEditEventStepTwo

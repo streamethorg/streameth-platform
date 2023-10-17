@@ -12,7 +12,7 @@ const EventPage = async ({ params }: { params: Params }) => {
 
   return (
     <div className="px-4 pb-8">
-      <CreateEditEvent event={event.toJson()} />
+      <CreateEditEvent event={event.toJson()} organizationId={params.organization} />
     </div>
   )
 }
