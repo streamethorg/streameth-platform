@@ -9,7 +9,7 @@ import StageSelect from './components/StageSelect'
 import DateSelect from './components/DateSelect'
 import { getEventDays } from '@/utils/time'
 import type { Metadata, ResolvingMetadata } from 'next'
-
+import SessionList from '@/components/sessions/SessionList'
 interface Params {
   params: {
     event: string
@@ -33,9 +33,7 @@ const EventPage = async ({ params }: Params) => {
             <DateSelect dates={dates} />
             <StageSelect stages={stages} />
           </div>
-          <ScheduleGrid>
-            <SessionsOnSchedule />
-          </ScheduleGrid>
+          <SessionsOnSchedule />
         </div>
       </ScheduleContextProvider>
     )

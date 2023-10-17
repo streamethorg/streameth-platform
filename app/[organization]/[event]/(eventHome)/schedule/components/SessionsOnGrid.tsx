@@ -6,6 +6,7 @@ import { ScheduleContext } from './ScheduleContext'
 import { getSessions } from '@/utils/api'
 import { ISession } from '@/server/model/session'
 import { IStage } from '@/server/model/stage'
+import SessionList from '@/components/sessions/SessionList'
 
 const StageSessions = ({ stage }: { stage: IStage }) => {
   const { schedulePosition, setSchedulePositions, event, date } = useContext(ScheduleContext)
@@ -33,7 +34,8 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
 
   return (
     <div key={stage.id} className="w-full flex flex-col relative">
-      {sessions.map((session) => {
+      <SessionList sessions={sessions} />
+      {/* {sessions.map((session) => {
         const range = getSlotRange(session, schedulePosition.min)
         return (
           <div
@@ -46,7 +48,7 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
             {session.name !== 'Blank' && <ScheduleCard session={session} speakers />}
           </div>
         )
-      })}
+      })} */}
     </div>
   )
 }
@@ -55,7 +57,7 @@ const SessionsOnSchedule = () => {
   const { stages } = useContext(ScheduleContext)
 
   return (
-    <div className="flex flex-row right-0 h-full absolute top-0 w-[calc(100%-5rem)]">
+    <div className="flex flex-row h-full">
       {stages.map((stage: IStage) => (
         <StageSessions key={stage.id} stage={stage} />
       ))}
