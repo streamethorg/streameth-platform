@@ -30,7 +30,7 @@ const EventHome = async ({ params }: { params: Params }) => {
   return (
     <div className="flex flex-col w-full overflow-scroll h-full space-y-[5em] ">
       <div>
-        <HomePageLogoAndBanner event={event.toJson()} />
+        {/* <HomePageLogoAndBanner event={event.toJson()} /> */}
         <div className="max-w-7xl mx-auto mt-4">
           <div className="flex flex-col p-4">
             <div className=" flex-col flex space-y-2 my-4 md:flex-col">
