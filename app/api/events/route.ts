@@ -41,9 +41,9 @@ export async function PATCH(request: NextRequest) {
   }
 
   const event = request.nextUrl.searchParams.get('event')
-  const organization = request.nextUrl.searchParams.get('organization')
+  const organizationId = request.nextUrl.searchParams.get('organization')
 
-  if (!event || !organization) {
+  if (!event || !organizationId) {
     return NextResponse.json({ error: 'Event or organization does not exist' }, { status: 500 })
   }
 
@@ -52,7 +52,7 @@ export async function PATCH(request: NextRequest) {
     .then(async (json: any) => {
       const eventController = new EventController()
       const { formData }: { formData: IEvent } = json
-      return eventController.editEvent(formData, formData.organizationId).then(() => {
+      return eventController.editEvent(formData, organizationId).then(() => {
         return NextResponse.json('Event has been edited', { status: 200 })
       })
     })
