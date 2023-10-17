@@ -37,7 +37,7 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
           </select>
         </div>
       ) : (
-        <div className="w-[calc(100%-6rem)] flex flex-row ml-auto">
+        <div className="w-full flex flex-row ml-auto">
           {stages.map((stage) => (
             <div className="w-full p-2 text-center text-3xl " key={stage.id}>
               {stage.name}

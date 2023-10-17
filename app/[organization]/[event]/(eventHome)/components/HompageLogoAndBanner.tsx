@@ -7,7 +7,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   return (
     <div className="relative w-full">
       <div className="relative">
-        <Image src={'/events/' + banner} alt="Event Cover" width={1500} height={500} className="w-full object-cover h-36 md:h-52 lg:h-96" />
+        <Image src={'/events/' + banner} alt="Event Cover" width={1500} height={500} className="w-full object-cover" />
         {/* <Image
           src={'/events/' + logo}
           alt="Event Logo"

@@ -6,6 +6,8 @@ import { getEventDays } from '@/utils/time'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import Link from 'next/link'
 import Markdown from 'react-markdown'
+import SpeakerPageComponent from './speakers/page'
+import SchedulePageComponent from './schedule/page'
 interface Params {
   event: string
   organization: string
@@ -23,18 +25,16 @@ const EventHome = async ({ params }: { params: Params }) => {
   const eventController = new EventController()
 
   const event = await eventController.getEvent(params.event, params.organization)
-  const stages = (await new StageController().getAllStagesForEvent(params.event)).map((stage) => stage.toJson())
-  const dates = getEventDays(event.start, event.end)
   if (!hasData({ event })) return notFound()
 
   return (
     <div className="flex flex-col w-full overflow-scroll h-full gap-4 ">
       <HomePageLogoAndBanner event={event.toJson()} />
-      <div className="max-w-4xl mx-auto mt-4">
-        <div className="flex flex-col p-4 ">
+      <div className="max-w-7xl mx-auto mt-4">
+        <div className="flex flex-col p-4">
           <div className=" flex-col flex space-y-2 my-4 md:flex-col">
             <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
-            <div className=" flex flex-col space-y-2 text-left">
+            <div className=" flex flex-col space-y-4 text-left">
               <p>&#128197; When: October 20th</p>
               <p>&#9200; Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
               <p>&#127759; Where: Live in Vietnam and Online</p>
@@ -87,6 +87,8 @@ const EventHome = async ({ params }: { params: Params }) => {
             </div> */}
         </div>
       </div>
+      <SpeakerPageComponent params={params} />
+      <SchedulePageComponent  params={params} />
     </div>
   )
 }
