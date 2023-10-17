@@ -39,14 +39,8 @@ export default function StageLayout() {
             <ShareButton />
           </ActionsComponent>
           <Player streamId={stage.streamSettings.streamId} playerName={stage.name} />
-          <div className="hidden lg:flex w-full lg:mt-4 h-full">
-            <SessionInfoBox session={currentSession} />
-          </div>
         </div>
-        <div className="flex w-full lg:mt-4 p-4 lg:hidden">
-          <SessionInfoBox session={currentSession} />
-        </div>
-        <div className="relative flex flex-col w-full p-4 pt-0 lg:p-0 lg:px-2 lg:h-full lg:w-[30%] lg:mt-0">
+        <div className="relative flex flex-col w-full pt-0 lg:p-0 lg:px-2 lg:h-full lg:w-[30%] lg:mt-0">
           <PluginBar
             bottomOffset={bottomOffset}
             tabs={[

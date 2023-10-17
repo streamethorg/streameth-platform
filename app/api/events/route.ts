@@ -19,7 +19,7 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
 
 export async function GET(): Promise<NextResponse> {
   const controller = new EventController()
-  const data = await controller.getAllEvents()
+  const data = await controller.getAllEvents({})
 
   return NextResponse.json(data)
 }

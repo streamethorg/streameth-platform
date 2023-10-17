@@ -4,14 +4,25 @@ import FilterBar from './components/FilterBar'
 
 export default async function Home() {
   const eventController = new EventController()
-  const allEvents = (await eventController.getAllEvents()).map((event) => {
+  const upComing = (await eventController.getAllEvents({})).map((event) => {
     return event.toJson()
   })
 
+  // const pastEvents = (await eventController.getAllEvents({}))
+  //   .map((event) => {
+  //     return event.toJson()
+  //   })
+  //   .filter((event) => {
+  //     return new Date(event.start).getTime() < new Date().getTime()
+  //   })
+
   return (
     <main className="flex flex-col bg-background w-screen mx-auto lg:overflow-hidden">
-      <FilterBar events={allEvents} />
-      <EventList events={allEvents} />
+      {/* <FilterBar events={allEvents} /> */}
+      {/* <p>Upcoming events</p> */}
+      <EventList events={upComing} />
+      {/* <p>Past events</p>
+      <EventList events={pastEvents} /> */}
     </main>
   )
 }

@@ -11,12 +11,12 @@ import { TopNavbarContext } from '../context/TopNavbarContext'
 export default function Navbar() {
   const pathname = usePathname()
   // const isAdminPage = pathname.includes('/admin')
-  const { logo, components } = useContext(TopNavbarContext)
+  const { logo, components, homePath } = useContext(TopNavbarContext)
   return (
     <ColorComponent accentColor={colors.accent}>
       <header className="sticky z-50 flex flex-row bg-base border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">
         <div className=" flex items-center w-20">
-          <Link href="/" className="">
+          <Link href={homePath ? homePath : '/'} className="">
             <span className="sr-only">Logo</span>
             <Image
               src={logo}
@@ -38,14 +38,14 @@ export default function Navbar() {
           {components.map((component) => {
             return component
           })}
-          <SocialIcon url={`https://twitter.com/streameth`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
-          <SocialIcon
+          <SocialIcon url={`https://twitter.com/Scroll_ZKP`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
+          {/* <SocialIcon
             url={`https://github.com/streamethorg/streameth-platform`}
             target="_blank"
             bgColor="#fff"
             fgColor="#000"
             className={`"h-8 w-8"`}
-          />
+          /> */}
         </div>
       </header>
     </ColorComponent>
