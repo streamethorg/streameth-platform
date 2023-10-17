@@ -25,6 +25,11 @@ export default class EventController {
     return evt
   }
 
+  public async editEvent(event: IEvent, organizationId: IEvent['organizationId']): Promise<void> {
+    this.deleteEvent(event.id, organizationId)
+    this.createEvent(event)
+  }
+
   public async deleteEvent(eventId: IEvent['id'], organizationId: IEvent['organizationId']): Promise<void> {
     if (!eventId || !organizationId) {
       throw new Error('Invalid eventId or organizationId')
@@ -49,13 +54,7 @@ export default class EventController {
     return events
   }
 
-  public async getAllEvents({
-    organizationId,
-    startDate,
-  }: {
-    organizationId?: IEvent['organizationId']
-    startDate?: number
-  }): Promise<Event[]> {
+  public async getAllEvents({ organizationId, startDate }: { organizationId?: IEvent['organizationId']; startDate?: number }): Promise<Event[]> {
     const orgController = new OrganizationController()
     const evtController = new EventController()
     const organizations = await orgController.getAllOrganizations()
