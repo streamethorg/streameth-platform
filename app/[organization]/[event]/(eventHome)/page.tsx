@@ -35,10 +35,10 @@ const EventHome = async ({ params }: { params: Params }) => {
           <div className=" flex-col flex space-y-2 my-4 md:flex-col">
             <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
             <div className=" flex flex-col space-y-2 text-left">
-              <p>📅 When: October 20th, 8pm GMT +7</p>
-              <p>⏰ Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
-              <p>🌍 Where: Live in Vietnam and Online</p>
-              <p>🖥 Streamed @ launch.scroll.xyz</p>
+              <p>{"\&#128197;"} When: October 20th, 8pm GMT +7</p>
+              <p>{"\&#9200;"} Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
+              <p>{"\&#127759;"} Where: Live in Vietnam and Online</p>
+              <p>{"\&#128421;"} Streamed @ launch.scroll.xyz</p>
               <Link
                 className="bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[6rem]"
                 href={
@@ -50,16 +50,16 @@ const EventHome = async ({ params }: { params: Params }) => {
           </div>
           <div className="space-y-4">
             <p>
-              Join us on Friday, October 20th, as we celebrate a monumental moment in Scroll's journey - the launch of our Mainnet. It's a big step
-              forward, and we want to share it with you. We're bringing together a group of friends from The Graph, Aave/Lens, Dora, and more to mark
-              this occasion. We'll be diving into a range of topics, but most importantly, we'll be opening the floor for an authentic conversation
-              with community leaders from Latin America, Africa, and Southeast Asia. Together, we'll explore how zk technology is creating exciting
+              Join us on Friday, October 20th, as we celebrate a monumental moment in Scroll{"\'"}s journey - the launch of our Mainnet. It{"\'"}s a big step
+              forward, and we want to share it with you. We{"\'"}re bringing together a group of friends from The Graph, Aave/Lens, Dora, and more to mark
+              this occasion. We{"\'"}ll be diving into a range of topics, but most importantly, we{"\'"}ll be opening the floor for an authentic conversation
+              with community leaders from Latin America, Africa, and Southeast Asia. Together, we{"\'"}ll explore how zk technology is creating exciting
               new opportunities in these regions.
             </p>
             <p>
-              If you're a developer, join us for a hands-on build session. We're rolling up our sleeves and guiding you through the process of
-              deploying on Scroll. We'll also introduce you to the Scroll Messenger - a bridge designed for seamless communication. Plus, we'll delve
-              into the art of asset transfer from L1 to L2. Here's a sneak peek at some of the incredible minds you'll be hearing from:
+              If you{"\'"}re a developer, join us for a hands-on build session. We{"\'"}re rolling up our sleeves and guiding you through the process of
+              deploying on Scroll. We{"\'"}ll also introduce you to the Scroll Messenger - a bridge designed for seamless communication. Plus, we{"\'"}ll delve
+              into the art of asset transfer from L1 to L2. Here{"\'"}s a sneak peek at some of the incredible minds you{"\'"}ll be hearing from:
             </p>
             <ul>
               <li>Bunny (Dora)</li>
@@ -69,9 +69,9 @@ const EventHome = async ({ params }: { params: Params }) => {
               <li>Simona Pop (ENS)</li>
             </ul>
             <p>
-              But that's not all. We've got a Founder conversation lined up. We'll discuss what's next post-mainnet launch, sharing our vision, the
-              challenges we've overcome, and the exciting journey ahead for Scroll. So, what's on Scroll's horizon? We'll reveal the areas we're
-              focusing on and how you can be a part of it. Save the Date now, and let's celebrate together at launch.scroll.xyz.
+              But that{"\'"}s not all. We{"\'"}ve got a Founder conversation lined up. We{"\'"}ll discuss what{"\'"}s next post-mainnet launch, sharing our vision, the
+              challenges we{"\'"}ve overcome, and the exciting journey ahead for Scroll. So, what{"\'"}s on Scroll{"\'"}s horizon? We{"\'"}ll reveal the areas we{"\'"}re
+              focusing on and how you can be a part of it. Save the Date now, and let{"\'"}s celebrate together at launch.scroll.xyz.
             </p>
             <p>
               Cheers,<br></br>
