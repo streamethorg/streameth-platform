@@ -2,7 +2,6 @@
 import React, { useContext } from 'react'
 import axios from 'axios'
 import { IEvent } from '@/server/model/event'
-import EditEventButton from './EditEventButton'
 import Link from 'next/link'
 import AdminItemCard from '../../components/utils/AdminItemCard'
 interface EventEntryProps {
@@ -21,8 +20,8 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
 
   return (
     <AdminItemCard>
-      <Link href={`/admin/${event.organizationId}/${event.id}`} target="_blank" rel="noopener noreferrer" className="flex flex-col">
-        <img src={`/events/${event.eventCover}`} alt={event.name} className="w-full min-h-[140px]" />
+      <Link href={`/admin/${event.organizationId}/${event.id}`} className="flex flex-col">
+        <img src={`/events/${event.eventCover}`} alt={event.name} className="w-full h-[140px] object-cover" />
         <div>
           <h2 className="text-center mt-1 mb-0 truncate font-ubuntu">{event.name}</h2>
         </div>

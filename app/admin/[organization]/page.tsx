@@ -3,7 +3,6 @@ import { apiUrl } from '@/server/utils'
 import { IEvent } from '@/server/model/event'
 import AddEventButton from './components/AddEventButton'
 import EventEntry from './components/EventEntry'
-import Link from 'next/link'
 import AdminItemsContainer from '../components/utils/AdminItemsContainer'
 
 export async function generateStaticParams() {

@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useContext, useEffect, useState } from 'react'
 import { Button } from '@/app/utils/Button'
 import CreateEditEventStepOne from './CreateEditEventStepOne'
@@ -8,8 +9,9 @@ import { apiUrl } from '@/server/utils'
 import CreateEditEventStepTwo from './CreateEditEventStepTwo'
 import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
+import SuccessErrorModal from './SuccessErrorModal'
 
-const CreateEditEvent = ({ event, organizationId }: { event: IEvent; organizationId: string }) => {
+const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizationId: string }) => {
   const [currentStep, setCurrentStep] = useState(1)
   const [error, setError] = useState<string | null>(null)
   const { openModal, closeModal, modalWidth } = useContext(ModalContext)
@@ -60,8 +62,12 @@ const CreateEditEvent = ({ event, organizationId }: { event: IEvent; organizatio
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${apiUrl()}/organizations/${event.organizationId}/events`, formData)
+      await axios.post(`${apiUrl()}/organizations/${organizationId}/events`, formData)
+      openModal(<SuccessErrorModal success />)
+      modalWidth('w-auto')
     } catch (err) {
+      openModal(<SuccessErrorModal success={false} />)
+      modalWidth('w-auto')
       setError('An error occurred.')
     }
   }

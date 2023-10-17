@@ -20,7 +20,7 @@ const OrganizationEntry: React.FC<OrganizationEntryProps> = ({ organization }) =
 
   return (
     <li className="border p-2 rounded flex justify-between items-center">
-      <Link href={`admin/${organization.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+      <Link href={`admin/${organization.id}`} className="flex items-center space-x-2">
         <img src={organization.logo} alt={organization.name} className="w-16 h-16 rounded" />
         <div>
           <h2 className="text-xl font-bold">{organization.name}</h2>
