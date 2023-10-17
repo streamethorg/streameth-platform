@@ -35,7 +35,8 @@ const EventHome = async ({ params }: { params: Params }) => {
           <div className=" flex-col flex space-y-2 my-4 md:flex-col">
             <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
             <div className=" flex flex-col space-y-2 text-left">
-              <p>&#128197; When: October 20th, 8pm GMT +7</p>
+              <p>&#128197; When: October 20th</p>
+              <p>&#9200; Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
               <p>&#127759; Where: Live in Vietnam and Online</p>
               <p>&#128421; Streamed @ launch.scroll.io</p>
               <Link
@@ -57,8 +58,7 @@ const EventHome = async ({ params }: { params: Params }) => {
             </p>
             <p>
               If you{"\'"}re a developer, join us for a hands-on build session. We{"\'"}re rolling up our sleeves and guiding you through the process of
-              deploying on Scroll. We{"\'"}ll also introduce you to the Scroll Messenger - a bridge designed for seamless communication. Plus, we{"\'"}ll delve
-              into the art of asset transfer from L1 to L2. Here{"\'"}s a sneak peek at some of the incredible minds you{"\'"}ll be hearing from:
+              deploying on Scroll. Here{"\'"}s a sneak peek at some of the incredible minds you{"\'"}ll be hearing from:
             </p>
             <ul>
               <li>Bunny (Dora)</li>
