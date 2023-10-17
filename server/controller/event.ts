@@ -34,14 +34,28 @@ export default class EventController {
     return events
   }
 
-  public async getAllEvents(): Promise<Event[]> {
+  public async getAllEvents({
+    organizationId,
+    startDate,
+  }: {
+    organizationId?: IEvent['organizationId']
+    startDate?: number
+  }): Promise<Event[]> {
     const orgController = new OrganizationController()
+    const evtController = new EventController()
     const organizations = await orgController.getAllOrganizations()
     const events: Event[] = []
+
     for (const organization of organizations) {
-      const data = await this.getAllEventsForOrganization(organization.id)
-      events.push(...data)
+      if (organizationId && organization.id !== organizationId) continue
+      const orgId = organization.id
+      const orgEvents = await evtController.getAllEventsForOrganization(orgId)
+      for (const event of orgEvents) {
+        if (startDate && new Date(event.start) < new Date(startDate)) continue
+        events.push(event)
+      }
     }
+
     return events
   }
 

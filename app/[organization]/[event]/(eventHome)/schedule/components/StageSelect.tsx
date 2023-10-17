@@ -24,9 +24,9 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
   return (
     <>
       {isMobile ? (
-        <div className="flex flex-row justify-center items-center p-2">
+        <div className="flex flex-row justify-center items-center">
           <select
-            className="text-xl text-accent cursor-pointer font-bold box-border w-full"
+            className="text-xl cursor-pointer font-bold box-border w-full p-2"
             value={selectedStage}
             onChange={(e) => handleStageChange(e.target.value)}>
             {stages.map((stage) => (
@@ -37,9 +37,9 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
           </select>
         </div>
       ) : (
-        <div className="w-[calc(100%-6rem)] flex flex-row ml-auto">
+        <div className="w-full flex flex-row ml-auto">
           {stages.map((stage) => (
-            <div className="w-full p-4 text-center text-xl font-bold text-accent uppercase" key={stage.id}>
+            <div className="w-full p-2 text-center text-3xl " key={stage.id}>
               {stage.name}
             </div>
           ))}

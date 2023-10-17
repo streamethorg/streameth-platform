@@ -7,7 +7,7 @@ import SessionController from '@/server/controller/session'
 import ColorComponent from '../../utils/ColorComponent'
 export async function generateStaticParams() {
   const eventController = new EventController()
-  const allEvents = await eventController.getAllEvents()
+  const allEvents = await eventController.getAllEvents({})
   const paths = allEvents.map((event) => ({
     organization: event.organizationId,
     event: event.id,
