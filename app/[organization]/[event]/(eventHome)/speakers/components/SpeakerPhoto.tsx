@@ -14,12 +14,12 @@ const SpeakerPhoto = ({ speaker, size }: { speaker: ISpeaker; size?: 'sm' | 'md'
   } else if (size === 'md') {
     sizeString = 'h-12 w-12'
   } else {
-    sizeString = 'w-full aspect-square'
+    sizeString = 'w-full aspect-square rounded'
   }
 
   return (
     <div className={` relative ${sizeString}`}>
-      <Image className="" src={speaker.photo ? speaker.photo : CreateBlockie(speaker.name)} alt={speaker.name} fill placeholder="empty" />
+      <Image className="rounded-xl" src={speaker.photo ? speaker.photo : CreateBlockie(speaker.name)} alt={speaker.name} fill placeholder="empty" />
     </div>
   )
 }

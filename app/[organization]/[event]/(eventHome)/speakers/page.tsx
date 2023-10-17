@@ -13,17 +13,12 @@ const SpeakerPage = async ({ params }: Params) => {
   const speakers = (await speakerController.getAllSpeakersForEvent(params.event)).map((speaker) => speaker.toJson())
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex flex-row items-center text-sm mb-4">
-        <span
-          className="text-xl text-accent cursor-pointer
-         font-bold box-border flex flex-col justify-center p-2 bg-white shadow-b w-full h-14">
-          Speakers
-        </span>
-      </div>
-      <div
-        className="flex flex-row flex-wrap items-center 
-      justify-center h-full overflow-scroll p-2">
+    <div className="flex flex-col h-full max-w-7xl w-full mx-auto p-2">
+      <span
+        className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">
+        Speakers
+      </span>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
         {speakers.map((speaker) => (
           <SpeakerCard key={speaker.id} speaker={speaker} />
         ))}
