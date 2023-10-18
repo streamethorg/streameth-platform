@@ -1,7 +1,6 @@
 {
-  "name": "streameth-v3",
-  "version": "0.1.0",
-  "private": true,
+  "name": "streameth-platform",
+  "version": "3.0.0",
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "  next build",

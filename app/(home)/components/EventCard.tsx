@@ -29,7 +29,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
   }
 
   return (
-    <a onClick={onCardClick}>
+    <a onClick={onCardClick} className="cursor-pointer hover:bg-gray-50 transition-all">
       <Card isAvailable={isAvailable}>
         <div className="aspect-video relative">
           <Image
@@ -51,8 +51,8 @@ const EventCard = ({ event }: { event: IEvent }) => {
             }}
           />
         </div>
-        <div className=" p-2 flex flex-col">
-          <p className=" text-md my-2 ">{event.name}</p>
+        <div className=" p-2 flex flex-col" title={event.name}>
+          <p className=" text-md my-2 truncate">{event.name}</p>
           <p className="text-md text-secondary-text">
             {event.start.toDateString()} - {event.end.toDateString()}
           </p>
