@@ -3,7 +3,7 @@ import Session from './session'
 import { ISession as SessionType } from '../types'
 import { G_FPS, G_DURATION } from '../consts'
 import CURRENT_SESSION from '../../public/json/sessions.json'
-import { DevconnectIST } from './devconnect.tsx/ist'
+import { DevconnectIST, DevconnectISTStill } from './devconnect.tsx/ist'
 import { CreateAvatar } from '../utils/avatars'
 
 const sessions: SessionType[] = CURRENT_SESSION.map((session) => {
@@ -186,8 +186,8 @@ export function Compositions() {
           }}
         />
 
-        <Still id="devconnect-ist-still" component={DevconnectIST} width={1920} height={1080} defaultProps={defaultProps} />
-        <Still id="devconnect-ist-still-social" component={DevconnectIST} width={1200} height={630} defaultProps={defaultProps} />
+        <Still id="devconnect-ist-still" component={DevconnectISTStill} width={1920} height={1080} defaultProps={defaultProps} />
+        <Still id="devconnect-ist-still-social" component={DevconnectISTStill} width={1200} height={630} defaultProps={defaultProps} />
       </Folder>
 
       <Folder name="Ftc">

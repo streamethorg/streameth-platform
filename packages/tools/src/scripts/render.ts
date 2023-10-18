@@ -35,12 +35,14 @@ const start = async () => {
       onProgress,
     })
 
-    await renderStill({
-      composition,
-      serveUrl: bundled,
-      frame: 290,
-      output: `assets/stills/${composition.id}.png`,
-    })
+    if (composition.durationInFrames >= 299) {
+      await renderStill({
+        composition,
+        serveUrl: bundled,
+        frame: 299,
+        output: `assets/stills/${composition.id}.png`,
+      })
+    }
 
     lastProgressPrinted = -1
   }
