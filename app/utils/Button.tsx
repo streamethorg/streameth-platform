@@ -1,13 +1,14 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
-const buttonVariants = cva('inline-flex items-center border-1 rounded-[8px] disabled:opacity-50  disabled:pointer-events-none', {
+const buttonVariants = cva('inline-flex items-center border rounded-[8px] disabled:opacity-50  disabled:pointer-events-none', {
   variants: {
     variant: {
       default: 'text-white bg-accent hover:bg-transparent hover:text-accent hover:border-accent',
-      destructive: 'text-red',
+      danger: 'bg-red-500 text-white',
       outline: 'text-accent bg-transparent border-accent hover:text-white hover:bg-accent',
       green: 'bg-transparent text-accent border-green',
+      yellow: 'bg-yellow-500 text-white',
     },
     size: {
       default: 'h-9 py-1 px-4',

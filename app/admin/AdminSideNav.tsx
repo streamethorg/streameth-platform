@@ -35,7 +35,7 @@ const AdminSideNav = () => {
   })
 
   return (
-    <div className="min-w-[275px] flex flex-col justify-between bg-background border-1 px-4 py-5 h-[calc(100vh-10rem)] drop-shadow-card">
+    <div className="min-w-[275px] sticky top-20 flex flex-col justify-between bg-background border px-4 py-5 h-[calc(100vh-7rem)] drop-shadow-card">
       <div>
         <div className="flex items-center gap-5">
           <Image src="/blockie.png" alt="avatar" width={52} height={52} className="rounded-full" />

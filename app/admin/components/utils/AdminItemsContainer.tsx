@@ -49,7 +49,7 @@ const AdminItemsContainer = ({ children }: ItemsContainerProps) => {
 
   return (
     <div className="relative">
-      <div ref={scrollContainerRef} className="bg-background min-h-[190px] p-4 drop-shadow-card border-1 overflow-x-auto flex gap-5 ">
+      <div ref={scrollContainerRef} className="bg-background min-h-[190px] p-4 drop-shadow-card border overflow-x-auto flex gap-5 ">
         {children}
       </div>
       {isScrolledToRight && (

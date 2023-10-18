@@ -81,7 +81,7 @@ const FormSelect = ({
           setIsShowingOptions(true)
         }}>
         <div
-          className={`h-12 p-3 w-full border-medGrey border-1 rounded-lg bg-transparent font-sans disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between cursor-pointer ${
+          className={`h-12 p-3 w-full border-medGrey border rounded-lg bg-transparent font-sans disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between cursor-pointer ${
             isShowingOptions ? 'rounded-bl-none rounded-br-none' : ''
           }`}
           onMouseDown={() => handleSelectTriggerClick()}>

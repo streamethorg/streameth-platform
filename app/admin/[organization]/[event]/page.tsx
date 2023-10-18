@@ -11,7 +11,7 @@ const EventPage = async ({ params }: { params: Params }) => {
   const event = await eventController.getEvent(params.event, params.organization)
 
   return (
-    <div className="px-4 pb-8">
+    <div className="pb-8">
       <CreateEditEvent event={event.toJson()} organizationId={params.organization} />
     </div>
   )

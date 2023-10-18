@@ -20,8 +20,8 @@ const EventsPage = async ({ params }: { params: { organization: string } }) => {
     const events: IEvent[] = response.data
 
     return (
-      <div className="overflow-auto w-full pt-4">
-        <div className="flex justify-between items-center mb-7">
+      <div className="w-full">
+        <div className="flex justify-between items-center">
           <h2 className="text-2xl">{params.organization}</h2>
 
           <AddEventButton organization={params.organization} />

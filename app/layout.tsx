@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className="bg-background flex flex-col h-[100dvh] w-screen">
+                <div className="bg-background flex flex-col h-[100dvh] lg:overflow-auto w-screen">
                   <FilterContextProvider>
                     <TopNavbarContextProvider>
                       <Navbar />

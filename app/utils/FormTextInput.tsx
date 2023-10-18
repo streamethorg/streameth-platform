@@ -19,7 +19,7 @@ const FormTextInput = forwardRef<HTMLInputElement, FormTextInputProps>(
       <div>
         {label && <FormLabel label={label} toolTip={toolTip} required={required} toolTipHTML={toolTipHTML} />}
         <input
-          className={`flex h-12 p-3 mb-6 w-full border-medGrey border-1 rounded-lg bg-transparent font-sans placeholder:font-sans placeholder:text-grey focus-visible:border-accent focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+          className={`flex h-12 p-3 mb-6 w-full border-medGrey border rounded-lg bg-transparent font-sans placeholder:font-sans placeholder:text-grey focus-visible:border-accent focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
             ${className}`}
           ref={ref}
           {...props}

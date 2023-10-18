@@ -5,7 +5,7 @@ import Link from 'next/link'
 const SpeakerCard = ({ speaker }: { speaker: ISpeaker }) => {
   return (
     <Link href={`speakers/${speaker.id}`} className="flex flex-col text-sm rounded w-full">
-      <div className="border-1 shadow rounded-xl w-32 lg:w-44 mx-auto">
+      <div className="border shadow rounded-xl w-32 lg:w-44 mx-auto">
         <SpeakerPhoto speaker={speaker} size="lg" />
       </div>
       <div className="mx-auto text-center mt-2">
