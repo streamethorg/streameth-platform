@@ -6,7 +6,6 @@ import { generateId } from '@/server/utils'
 import EventController from '@/server/controller/event'
 import { IEvent } from '@/server/model/event'
 
-
 /*
  * The events of the organization will also be deleted
  */
