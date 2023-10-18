@@ -15,6 +15,9 @@
       }
     }
   ],
+  "eventCover": "web3lagos_cover.png",
+  "logo": "web3bridge_logo.png",
+  "banner": "web3lagos_cover.png",
   "website": "https://event.web3bridge.com/",
   "archiveMode": false,
   "timezone": "Africa/Lagos"
