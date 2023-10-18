@@ -34,13 +34,7 @@ export default class EventController {
     return events
   }
 
-  public async getAllEvents({
-    organizationId,
-    startDate,
-  }: {
-    organizationId?: IEvent['organizationId']
-    startDate?: number
-  }): Promise<Event[]> {
+  public async getAllEvents({ organizationId, startDate }: { organizationId?: IEvent['organizationId']; startDate?: number }): Promise<Event[]> {
     const orgController = new OrganizationController()
     const evtController = new EventController()
     const organizations = await orgController.getAllOrganizations()
