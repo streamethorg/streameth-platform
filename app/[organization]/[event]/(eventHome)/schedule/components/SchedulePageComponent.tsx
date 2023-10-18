@@ -19,6 +19,7 @@ const SchedulePageComponent = async ({ params }: Params) => {
   const event = await eventController.getEvent(params.event, params.organization)
   const stages = (await new StageController().getAllStagesForEvent(params.event)).map((stage) => stage.toJson())
   const dates = getEventDays(event.start, event.end)
+
   return (
     <ScheduleContextProvider event={event.toJson()} stages={stages} days={dates}>
       <div className="flex flex-col max-w-7xl w-full mx-auto p-2">

@@ -30,16 +30,16 @@ const SpeakerPage = async ({ params }: Params) => {
   })
 
   return (
-    <div className="flex flex-col lg:flex-row w-full p-4 justify-center items-center space-y-4 md:space-y-0 md:justify-start md:items-start">
-      <div className="flex flex-col justify-center items-center w-48 p-2 border bg-white border-accent rounded shadow">
+    <div className="flex flex-col w-full p-4 justify-center items-center space-y-4">
+      <div className="flex justify-center items-center w-48 p-2 border bg-white border-accent rounded shadow">
         <SpeakerPhoto speaker={speaker} size="lg" />
       </div>
-      <div className=" md:ml-4 flex flex-col w-full  max-w-xl space-y-4">
-        <div className="bg-white shadow p-4 rounded">
+      <div className="flex flex-col w-full max-w-xl space-y-4">
+        <div className="bg-gray-100 shadow p-4 rounded">
           <p className="text-lg font-bold uppercase mb-4">{speaker.name}</p>
           <p className="text-main-text py-1">{speaker.bio}</p>
         </div>
-        <div className="flex flex-col bg-white shadow p-4 rounded space-y-4">
+        <div className="flex flex-col bg-gray-100 shadow p-4 rounded space-y-4">
           <p className="font-bold text-lg">Sessions</p>
           {speakerSessions.map((session, index) => (
             <ScheduleCard key={session.id} session={session.toJson()} showTime />
