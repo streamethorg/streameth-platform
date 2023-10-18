@@ -26,8 +26,14 @@ const EventsPage = async ({ params }: { params: { organization: string } }) => {
 
           <AddEventButton organization={params.organization} />
         </div>
-        <p className="my-2">Your events</p>
-        <AdminItemsContainer>{events?.map((event) => <EventEntry key={event?.id} event={event} />)}</AdminItemsContainer>
+        {events.length > 0 ? (
+          <>
+            <p className="my-2">Your events</p>
+            <AdminItemsContainer>{events?.map((event) => <EventEntry key={event?.id} event={event} />)}</AdminItemsContainer>
+          </>
+        ) : (
+          <p>There are no events at the moment. To get started, please click the &quot;Create a new Event&quot; button.</p>
+        )}
       </div>
     )
   } catch (error) {
