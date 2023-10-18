@@ -14,8 +14,8 @@ export default function Navbar() {
 
   useEffect(() => {
     if (pathname === '/') {
-      setLogo('') 
-      setHomePath('/') 
+      setLogo('')
+      setHomePath('/')
     }
   }, [pathname, setLogo, setHomePath])
 
