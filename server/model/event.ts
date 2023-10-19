@@ -15,7 +15,7 @@ export interface PretalxConfig {
 }
 
 export type IDataImporter = { type: 'gsheet'; config: GSheetConfig } | { type: 'pretalx'; config: PretalxConfig }
-export type IDataExporter = { type: 'gsheet'; config: GSheetConfig }
+export type IDataExporter = { type: 'gdrive'; config: GSheetConfig }
 
 export interface IEvent {
   id: string

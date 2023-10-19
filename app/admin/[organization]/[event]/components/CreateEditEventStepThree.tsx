@@ -16,8 +16,9 @@ const CreateEditEventStepThree = ({ formData, setFormData, setCurrentStep, handl
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">
-        Your event's identity comes to life on this final page. Select fonts, colors, and customize your event's look and feel. Personalize your event
-        even further with a custom domain address, ensuring that your event page reflects your unique brand and vision. Your event, your style!
+        Your event&apos;s identity comes to life on this final page. Select fonts, colors, and customize your event&apos;s look and feel. Personalize
+        your event even further with a custom domain address, ensuring that your event page reflects your unique brand and vision. Your event, your
+        style!
       </p>
 
       <div className="flex flex-col gap-2 mt-5">
