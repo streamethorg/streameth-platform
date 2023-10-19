@@ -51,7 +51,7 @@ async function Run() {
     await new Promise((r) => setTimeout(r, 1000))
 
     try {
-      await UploadDrive(session, join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`), CONFIG.GOOGLE_DRIVE_ID)
+      await UploadDrive(session.id, join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`), CONFIG.GOOGLE_DRIVE_ID)
 
       // await uploadAsset(session, join(CONFIG.ASSET_FOLDER, 'sessions', `${session.id}.mp4`))
     } catch (ex) {

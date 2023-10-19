@@ -82,20 +82,20 @@ export async function DownloadSlides(id: string) {
   }
 }
 
-export async function UploadDrive(session: any, path: string, parentId?: string) {
+export async function UploadDrive(name: any, path: string, type: string = 'video/mp4', parentId?: string) {
   try {
-    console.log('Upload session to Drive', session.id, path)
+    console.log('Upload session to Drive', name, path, type, parentId)
     const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
     const client = google.drive('v3')
 
     const upload = await client.files.create({
       supportsAllDrives: true,
       requestBody: {
-        name: session.id,
+        name: name,
         parents: parentId ? [parentId] : [],
       },
       media: {
-        mimeType: 'video/mp4',
+        mimeType: type,
         body: createReadStream(path),
       },
     })
@@ -103,7 +103,28 @@ export async function UploadDrive(session: any, path: string, parentId?: string)
     console.log('Upload completed', upload.data.id)
     return upload.data
   } catch (ex) {
-    console.log('Unable to upload to Google Drive', session)
+    console.log('Unable to upload to Google Drive', name)
+    console.error(ex)
+  }
+}
+
+export async function FileExists(name: any, type: string, parentId?: string) {
+  try {
+    const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
+    const client = google.drive('v3')
+
+    const files = await client.files.list({
+      q: `name='${name}' and mimeType = '${type}' and trashed=false and ${parentId ? `'${parentId}' in parents` : ''}`,
+      corpora: 'drive',
+      spaces: 'drive',
+      driveId: CONFIG.GOOGLE_DRIVE_ID,
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
+    })
+
+    return (files.data.files && files.data.files.length > 0)
+  } catch (ex) {
+    console.log('Unable to get from Google Drive', name)
     console.error(ex)
   }
 }
