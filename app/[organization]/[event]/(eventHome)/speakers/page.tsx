@@ -52,7 +52,7 @@ const SpeakerPage = ({ params }: Params) => {
 
   return (
     <div className="flex flex-col max-w-7xl w-full mx-auto p-2">
-      <div className="w-full bg-white shadow-b my-4 p-2 text-5xl flex justify-center pb-8 font-bold">Speakers</div>
+      <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl font-bold">Speakers</span>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
         {speakers.map((speaker) => (
           <div key={speaker.id} className="hover:bg-gray-50 cursor-pointer transition-colors">
