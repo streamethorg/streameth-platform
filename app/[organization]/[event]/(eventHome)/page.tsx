@@ -1,16 +1,14 @@
 import EventController from '@/server/controller/event'
-import StageController from '@/server/controller/stage'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
-import { getEventDays } from '@/utils/time'
-import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import Link from 'next/link'
-import Markdown from 'react-markdown'
 import SpeakerPageComponent from './speakers/page'
 import SchedulePageComponent from './schedule/page'
+
 interface Params {
   event: string
   organization: string
+  speaker: string
 }
 
 const Button = ({ children, link }: { children: React.ReactNode; link: string }) => (
