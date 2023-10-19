@@ -55,8 +55,8 @@ const SpeakerPage = ({ params }: Params) => {
       <div className="w-full bg-white shadow-b my-4 p-2 text-5xl flex justify-center pb-8 font-bold">Speakers</div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
         {speakers.map((speaker) => (
-          <div className='hover:bg-gray-50 cursor-pointer transition-colors'>
-          <SpeakerCard key={speaker.id} speaker={speaker} onClick={() => openModal(<SpeakerModal speaker={speaker} sessions={sessions} />)} />
+          <div key={speaker.id} className="hover:bg-gray-50 cursor-pointer transition-colors">
+            <SpeakerCard speaker={speaker} onClick={() => openModal(<SpeakerModal speaker={speaker} sessions={sessions} />)} />
           </div>
         ))}
       </div>
