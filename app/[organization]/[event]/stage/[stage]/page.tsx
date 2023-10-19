@@ -39,13 +39,13 @@ export default async function Stage({ params }: Params) {
     const sessions = await sessionController.getAllSessions({
       eventId: event.id,
       stage: params.stage,
-      timestamp: new Date().getTime(),
+      // timestamp: new Date().getTime()
     })
 
     if (!sessions.length) return <div className="justify-center items-center w-full">Stage has nothing scheduled</div>
 
     return (
-      <StageContextProvider stage={stage.toJson()} sessions={sessions}>
+      <StageContextProvider stage={stage.toJson()} sessions={sessions.map((session) => session.toJson())}>
         <StageLayout />
       </StageContextProvider>
     )

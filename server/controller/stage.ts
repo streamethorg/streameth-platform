@@ -24,7 +24,7 @@ export default class StageController {
 
   public async getAllStages(): Promise<Stage[]> {
     const eventController = new EventController()
-    const events = await eventController.getAllEvents()
+    const events = await eventController.getAllEvents({})
     const stages: Stage[] = []
     for (const event of events) {
       const data = await this.getAllStagesForEvent(event.id)
@@ -42,7 +42,6 @@ export default class StageController {
     }
 
     stages.sort((a, b) => {
-
       if (a?.order && b?.order) {
         return a.order - b.order
       }

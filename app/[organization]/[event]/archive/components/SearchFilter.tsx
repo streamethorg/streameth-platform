@@ -1,6 +1,6 @@
 'use client'
 import { useState, useContext, useEffect } from 'react'
-import { FilterContext, FilterOption } from './FilterContext'
+import { FilterContext, FilterOption } from '../../../../../components/context/FilterContext'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
@@ -20,58 +20,62 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
   }
 
   useEffect(() => {
-    // current filter options to selected items
-    currentFilterOptions.filter((option) => {
-      if (!selectedItems.includes(option) && option.type == filterOptions[0].type) {
-        setSelectedItems([...selectedItems, option])
+    currentFilterOptions.forEach((option) => {
+      if (!selectedItems.includes(option) && option.type === filterOptions[0].type) {
+        setSelectedItems((prevItems) => [...prevItems, option])
       }
     })
   }, [])
 
   const handleOptionSelect = (option: FilterOption<T>) => {
-    setSelectedItems([...selectedItems, option])
-    setFilterInput('')
+    setSelectedItems([option])
     setFilterOptions([...currentFilterOptions, option])
+    setFilterInput(option.name)
   }
 
-  const handleOptionRemove = (option: FilterOption<T>) => {
-    setSelectedItems(selectedItems.filter((item) => item.name !== option.name))
-    setFilterOptions(currentFilterOptions.filter((item) => item.name !== option.name))
+  const clearSelectedOption = () => {
+    setSelectedItems([])
+    setFilterInput('')
+    setFilterOptions([])
   }
 
   return (
-    <div className="flex flex-col justify-between font-light mb-2 w-full">
-      <div className="relative">
-        <input
-          type="text"
-          placeholder={` ${filterName}`}
-          value={filterInput}
-          onChange={(e) => setFilterInput(e.target.value)}
-          className="p-2 h-12 border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
-        />
-        {filterInput && (
-          <div className="absolute top-fullborder rounded-b-md shadow-md left-0 z-10 bg-primary  max-h-40 w-full overflow-auto">
+    <div className="flex flex-col justify-between font-light w-full h-full">
+      <div className="lg:relative">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder={` ${filterName}`}
+            value={filterInput}
+            onChange={(e) => setFilterInput(e.target.value)}
+            className="p-2  border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
+          />
+          <div className="h-full justify-center items-center flex absolute right-0 top-0">
+            {selectedItems.length > 0 && (
+              <div
+                className="flex items-center justify-center  cursor-pointer bold text-white bg-accent rounded w-5 h-5 mr-2 my-auto"
+                onClick={clearSelectedOption}>
+                x
+              </div>
+            )}
+          </div>
+        </div>
+        {filterInput && selectedItems.length === 0 && (
+          <div className="absolute left-0 md:left-[unset] top-fullborder rounded-b-md shadow-md w-full max-w-[600px] p-4 z-50 bg-primary max-h-40  overflow-auto">
             {filteredOptions().length === 0 ? (
-              <div className=" py-1">{`No ${filterName} found`}</div>
+              <div className="py-1">{`No ${filterName} found`}</div>
             ) : (
               filteredOptions().map((option, index) => (
-                <div key={index} className="cursor-pointer py-1" onClick={() => handleOptionSelect(option)}>
+                <div
+                  key={index}
+                  className="cursor-pointer py-1 lg:text-lg w-full hover:bg-accent hover:text-white"
+                  onClick={() => handleOptionSelect(option)}>
                   {option.name}
                 </div>
               ))
             )}
           </div>
         )}
-      </div>
-      <div className="flex flex-row flex-wrap">
-        {selectedItems.map((option, index) => (
-          <div
-            key={`${option.name}-${index}`}
-            className="cursor-pointer p-1 m-1 border-2 border-accent text-sm font-light text-white bg-accent opacity-80"
-            onClick={() => handleOptionRemove(option)}>
-            {option.name}
-          </div>
-        ))}
       </div>
     </div>
   )

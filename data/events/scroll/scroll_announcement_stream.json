@@ -1,0 +1,25 @@
+{
+  "id": "scroll_announcement_stream",
+  "name": "Scroll's Mainnet Housewarming Party",
+  "description": "After three successful testnets spanning over 15 months with extensive testing and rigorous security audits, users and builders are now free to explore Scroll’s zkEVM, a scaling solution nearly identical to Ethereum with lower cost, faster speed and limitless scaling potential. \n\n To celebrate this milestone with our global community, we are hosting a livestream event from our team off-site in Vietnam. \n You’ll hear from our founders, engineering and research teams, ecosystem projects, and other members of the global Ethereum community. We’ll also be sharing highlights from the past two weeks.\n Join us!",
+  "start": "2023-10-20T00:00:00.000Z",
+  "end": "2023-10-20T00:00:00.000Z",
+  "location": "Hanoi, Vietnam",
+  "organizationId": "scroll",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1nM8U6a8TlmuMzE835ZvCol9IW5vmjLD9YI0Moc_SUJE",
+        "apiKey": "l"
+      }
+    }
+  ],
+  "logo": "scroll_logo.jpg",
+  "eventCover": "scroll_banner.png",
+  "banner": "scroll_banner.png",
+  "website": "http://scroll.io",
+  "archiveMode": false,
+  "timezone": "Asia/Ho_Chi_Minh",
+  "accentColor": "#EB5132"
+}

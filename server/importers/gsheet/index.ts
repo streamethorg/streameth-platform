@@ -5,11 +5,11 @@ import { generateId } from '../../utils'
 import moment from 'moment-timezone'
 
 const SPEAKER_SHEET = 'Speakers'
-const SPEAKER_DATA_RANGE = 'Ae:E'
+const SPEAKER_DATA_RANGE = 'A3:E'
 const STAGE_SHEET = 'Stages'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
-const SESSION_DATA_RANGE = 'A3:L'
+const SESSION_DATA_RANGE = 'A2:L'
 
 export default class Importer extends BaseImporter {
   sheetId: string
@@ -23,7 +23,7 @@ export default class Importer extends BaseImporter {
     // if (!process.env.GOOGLE_API_KEY) throw new Error("Environment variable 'GOOGLE_API_KEY' is missing")
 
     this.sheetId = importer.config.sheetId
-    this.apiKey = "AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w"
+    this.apiKey = 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w'
     this.connection = this.connectToGoogleSheets()
   }
 
@@ -46,12 +46,11 @@ export default class Importer extends BaseImporter {
   public override async generateSpeakers(): Promise<void> {
     const data = await this.getDataForRange(SPEAKER_SHEET, SPEAKER_DATA_RANGE)
     for (const row of data) {
-      const [name, description, company, twitterHandle, avatar] = row
+      const [name, description, twitterHandle, avatar] = row
       const speaker = {
         name,
         bio: description || 'No description',
         photo: avatar || undefined,
-        company: company || undefined,
         twitter: twitterHandle,
         eventId: this.event.id,
       }
