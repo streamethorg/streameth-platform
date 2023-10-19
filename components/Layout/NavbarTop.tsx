@@ -5,11 +5,18 @@ import { SocialIcon } from 'react-social-icons'
 import ColorComponent from '@/app/utils/ColorComponent'
 import colors from '@/app/constants/colors'
 import { ConnectWalletButton } from '../ConnectWalletButton'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { TopNavbarContext } from '../context/TopNavbarContext'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
-  const { logo, components, homePath } = useContext(TopNavbarContext)
+  const pathname = usePathname()
+  const { logo, components, setLogo, homePath } = useContext(TopNavbarContext)
+  useEffect(() => {
+    if (pathname === '/') {
+      setLogo('')
+    }
+  }, [pathname])
   return (
     <ColorComponent accentColor={colors.accent}>
       <header className="sticky z-50 flex flex-row bg-base border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">

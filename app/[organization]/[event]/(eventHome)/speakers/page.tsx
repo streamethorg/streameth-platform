@@ -1,3 +1,3 @@
-import SpeakerPageComponent from "./components/SpeakerPageComponent";
+import SpeakerPageComponent from './components/SpeakerPageComponent'
 
-export default SpeakerPageComponent;
+export default SpeakerPageComponent

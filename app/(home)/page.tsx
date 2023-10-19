@@ -19,7 +19,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col bg-background w-screen mx-auto lg:overflow-hidden">
       {/* <FilterBar events={allEvents} /> */}
-      <p>Upcoming events</p>
+      {/* <p>Upcoming events</p> */}
       <EventList events={upComing} />
       {/* <p>Past events</p>
       <EventList events={pastEvents} /> */}

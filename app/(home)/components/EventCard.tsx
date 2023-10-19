@@ -54,7 +54,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
         <div className=" p-2 flex flex-col">
           <p className=" text-md my-2 ">{event.name}</p>
           <p className="text-md text-secondary-text">
-            {event.start.toDateString()} - {event.end.toDateString()}
+            {event.start.toDateString?.()} - {event.end.toDateString?.()}
           </p>
         </div>
       </Card>

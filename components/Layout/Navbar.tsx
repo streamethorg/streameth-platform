@@ -24,7 +24,7 @@ const NavBarButton = ({
   isNavVisible: boolean
   setIsNavVisible: React.Dispatch<React.SetStateAction<boolean>>
 }) => (
-  <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden md:p-4 absolute top-0 right-0 z-50 mr-32 py-3">
+  <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden md:p-4 absolute top-0 right-0 z-50 mr-16 py-3">
     {!isNavVisible ? (
       <div className="border-2 rounded border-accent text-white bg-accent">
         <Bars3Icon className="w-8 h-8" />
@@ -99,7 +99,7 @@ export default function Navbar({
                 <p className="">{item.name}</p>
               </Link>
             ))}
-            {stages && stages?.length === 0 ? (
+            {stages && stages?.length === 1 ? (
               <div
                 onClick={() => handleClick(stages[0].href)}
                 className={`py-1 h-full w-full cursor-pointer hover:text-gray-300 ${

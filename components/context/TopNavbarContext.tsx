@@ -22,12 +22,6 @@ export const TopNavbarContextProvider = ({ children }: { children: React.ReactNo
   const [logo, setLogo] = useState('')
   const [homePath, setHomePath] = useState('')
 
-  useEffect(() => {
-    // if (logo === '') {
-    //   setLogo(img.src)
-    // }
-  }, [logo])
-
   const [components, setComponents] = useState<React.ReactNode[]>([])
 
   return <TopNavbarContext.Provider value={{ logo, setLogo, components, setComponents, homePath, setHomePath }}>{children}</TopNavbarContext.Provider>

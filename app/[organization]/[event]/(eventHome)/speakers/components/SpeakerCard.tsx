@@ -2,9 +2,9 @@ import { ISpeaker } from '@/server/model/speaker'
 import SpeakerPhoto from './SpeakerPhoto'
 import Link from 'next/link'
 
-const SpeakerCard = ({ speaker }: { speaker: ISpeaker }) => {
+const SpeakerCard = ({ speaker, path }: { speaker: ISpeaker; path: string }) => {
   return (
-    <Link href={`speakers/${speaker.id}`} className="flex flex-col text-sm rounded w-full">
+    <Link href={path} className="flex flex-col text-sm rounded w-full">
       <div className="border shadow rounded-xl w-32 lg:w-44 mx-auto">
         <SpeakerPhoto speaker={speaker} size="lg" />
       </div>

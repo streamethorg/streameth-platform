@@ -1,5 +1,5 @@
-import SchedulePageComponent from "./components/SchedulePageComponent"
-import EventController from "@/server/controller/event"
+import SchedulePageComponent from './components/SchedulePageComponent'
+import EventController from '@/server/controller/event'
 import type { Metadata, ResolvingMetadata } from 'next'
 interface Params {
   params: {

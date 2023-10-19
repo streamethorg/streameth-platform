@@ -17,7 +17,7 @@ const SpeakerPageComponent = async ({ params }: Params) => {
       <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">Speakers</span>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
         {speakers.map((speaker) => (
-          <SpeakerCard key={speaker.id} speaker={speaker} />
+          <SpeakerCard key={speaker.id} speaker={speaker} path={`/${params.organization}/${params.event}/speakers/${speaker.id}`} />
         ))}
       </div>
     </div>
