@@ -52,7 +52,7 @@ export const DevconnectIST: React.FC<Props> = ({ type, session }) => {
 
     function titleClassName() {
         console.log('title length #', session.name.length)
-        let className = 'w-full text-center font-bold text-[#252e3d]'
+        let className = 'w-full text-center font-bold'
         if (session.name.length >= 140) className += ' text-8xl leading-none'
         if (session.name.length > 60 && session.name.length < 140) className += ' text-8xl leading-tight'
         if (session.name.length > 40 && session.name.length < 60) className += ' text-9xl leading-tight'
@@ -89,7 +89,7 @@ export const DevconnectIST: React.FC<Props> = ({ type, session }) => {
             </AbsoluteFill> */}
 
             <AbsoluteFill>
-                <div className='flex py-12 px-24 flex-col w-full space-between justify-between'>
+                <div className='flex py-12 px-24 flex-col w-full space-between justify-between text-[#252e3d]'>
                     <div className='flex relative h-32' style={{ opacity: initialOpacity }}>
                         <Sequence name='Logo' from={introTime} durationInFrames={sessionTime} layout="none">
                             <div className='absolute -top-4' style={{ left: logoMove, opacity: initialOpacity }}>
