@@ -1,8 +1,8 @@
-import StatusBarFullIcon from '@/app/assets/icons/StatusBarFullIcon'
+import StatusBarTwoIcon from '@/app/assets/icons/StatusBarTwoIcon'
 import { Button } from '@/app/utils/Button'
 import { FormTextInput } from '@/app/utils/FormTextInput'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { GSheetConfig, IDataImporter, IEvent, PretalxConfig } from '@/server/model/event'
+import { GSheetConfig, IDataExporter, IDataImporter, IEvent, PretalxConfig } from '@/server/model/event'
 import FormRadio from '@/app/utils/FormRadio'
 import FormLabel from '@/app/utils/FormLabel'
 import FormRadioBox from '@/app/utils/FormRadioBox'
@@ -14,23 +14,37 @@ const initialImporterConfig: GSheetConfig & PretalxConfig = {
   apiToken: '',
 }
 
+const initialExporterConfig: GSheetConfig = {
+  driveId: '',
+  driveApiKey: '',
+}
+
 interface Props {
   formData: Omit<IEvent, 'id'>
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
   setCurrentStep: Dispatch<SetStateAction<number>>
   handleDataImporterChange: (importer: IDataImporter) => void
-  handleSubmit: () => void
+  handleDataExporterChange: (exporter: IDataExporter) => void
 }
 
-const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleChange, handleDataImporterChange, handleSubmit }: Props) => {
+const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleDataImporterChange, handleDataExporterChange }: Props) => {
+  const [dataExportSelectedType, setDataExportSelectedType] = useState('gdrive')
   const [selectedType, setSelectedType] = useState<string>(formData?.dataImporter?.[0]?.type ?? '')
   //@ts-ignore
   const [config, setConfig] = useState<GSheetConfig & PretalxConfig>(formData?.dataImporter?.[0]?.config ?? initialImporterConfig)
+  const [exporterConfig, setExporterConfig] = useState<GSheetConfig>(formData?.dataExporter?.[0]?.config ?? initialExporterConfig)
 
   const handleConfigChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setConfig((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleExporterConfigChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setExporterConfig((prev) => ({
       ...prev,
       [name]: value,
     }))
@@ -48,8 +62,16 @@ const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleC
         config: { url: config.url, apiToken: config.apiToken },
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedType, config])
+
+  useEffect(() => {
+    if (dataExportSelectedType === 'gdrive') {
+      handleDataExporterChange({
+        type: 'gdrive',
+        config: { driveId: exporterConfig.driveId, driveApiKey: exporterConfig.driveApiKey },
+      })
+    }
+  }, [dataExportSelectedType, exporterConfig])
 
   return (
     <div>
@@ -61,8 +83,8 @@ const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleC
         <div className="flex flex-col mb-6">
           <FormLabel label="Import your schedule" toolTip />
           <div className="flex gap-5">
-            <FormRadioBox checked={selectedType === 'gsheet'} onChange={() => setSelectedType('gsheet')} label="Connect Sched" />
-            <FormRadioBox checked={selectedType === 'pretalx'} onChange={() => setSelectedType('pretalx')} label="Connect Pretalx" />
+            <FormRadioBox checked={selectedType === 'gsheet'} onChange={() => setSelectedType('gsheet')} label="Google Sheet" />
+            <FormRadioBox checked={selectedType === 'pretalx'} onChange={() => setSelectedType('pretalx')} label="Pretalx" />
           </div>
         </div>
         {selectedType === 'gsheet' && (
@@ -94,12 +116,44 @@ const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleC
               label="Pretalx API Token"
               type="text"
               name="apiToken"
-              placeholder="API Token"
+              placeholder="gsheet API Token"
               value={config.apiToken}
-              onChange={handleConfigChange}
+              onChange={handleExporterConfigChange}
             />
           </>
-        )}{' '}
+        )}
+        <div>
+          <div className='className="flex flex-col mb-6'>
+            <FormLabel
+              label="Export Event Assets"
+              toolTip
+              toolTipHTML="The dataExporter will be used for our post production/processing flows to drop our generated assets into a shared Google Drive for your event"
+            />
+            <FormRadioBox label="Google Drive" checked={dataExportSelectedType === 'gdrive'} onChange={() => setDataExportSelectedType('gsheet')} />
+          </div>
+          {dataExportSelectedType === 'gdrive' && (
+            <>
+              <FormTextInput
+                label="Drive ID"
+                type="text"
+                name="driveId"
+                placeholder="Drive ID"
+                value={exporterConfig.driveId}
+                onChange={handleExporterConfigChange}
+                className="p-2 border rounded w-full"
+              />
+              <FormTextInput
+                type="text"
+                label="API key"
+                name="driveApiKey"
+                placeholder="Drive API Key"
+                value={exporterConfig.driveApiKey}
+                onChange={handleExporterConfigChange}
+                className="p-2 border rounded w-full"
+              />
+            </>
+          )}
+        </div>
         <div className="flex flex-col mb-6">
           <FormLabel label="Archive Mode" toolTip />
           <div className="flex gap-5">
@@ -127,38 +181,18 @@ const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleC
             />
           </div>
         </div>
-        <FormTextInput
-          label="Accent colour"
-          name="accentColor"
-          placeholder="E.g. #000000"
-          toolTip
-          value={formData.accentColor}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-        />
-        <FormTextInput
-          label="Chose your custom domain for the event page (Optional)"
-          name="website"
-          placeholder="E.g. watch.ethereumstream.org"
-          toolTip
-          value={formData?.website}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-        />
-        <div className="mb-6">
-          <FormLabel label="Ready?" labelClassName="!mb-0" toolTip toolTipHTML="Click Publish to create event" />
-          <p className="text-sm opacity-60 text-accent mb-2">Your event page can be edited at anytime from your admin page</p>
-          <Button variant="green" className="text-green" onClick={handleSubmit}>
-            Publish Event Page
-          </Button>
-        </div>
       </div>
 
       <div className="flex justify-end items-center gap-5">
         <div className="flex items-center gap-2">
-          <p className="text-accent text-sm">2/2</p>
-          <StatusBarFullIcon />
+          <p className="text-accent text-sm">2/3</p>
+          <StatusBarTwoIcon />
         </div>
         <Button variant="outline" onClick={() => setCurrentStep(1)}>
           Previous page
+        </Button>
+        <Button variant="outline" onClick={() => setCurrentStep(3)}>
+          Next page
         </Button>
       </div>
     </div>

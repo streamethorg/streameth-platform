@@ -3,10 +3,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Button } from '@/app/utils/Button'
 import CreateEditEventStepOne from './CreateEditEventStepOne'
-import { IDataImporter, IEvent } from '@/server/model/event'
+import { IDataExporter, IDataImporter, IEvent } from '@/server/model/event'
 import axios from 'axios'
 import { apiUrl } from '@/server/utils'
 import CreateEditEventStepTwo from './CreateEditEventStepTwo'
+import CreateEditEventStepThree from './CreateEditEventStepThree'
 import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
 import SuccessErrorModal from './SuccessErrorModal'
@@ -27,6 +28,7 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
     eventCover: '',
     timezone: '',
     accentColor: '',
+    dataExporter: [],
   })
 
   useEffect(() => {
@@ -51,6 +53,13 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
         [name]: value,
       })
     }
+  }
+
+  const handleDataExporterChange = (exporter: IDataExporter) => {
+    setFormData({
+      ...formData,
+      dataExporter: [exporter],
+    })
   }
 
   const handleDataImporterChange = (importer: IDataImporter) => {
@@ -109,10 +118,18 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
       )}
       {currentStep == 2 && (
         <CreateEditEventStepTwo
-          handleChange={handleChange}
           formData={formData}
           setFormData={setFormData}
           handleDataImporterChange={handleDataImporterChange}
+          handleDataExporterChange={handleDataExporterChange}
+          setCurrentStep={setCurrentStep}
+        />
+      )}
+      {currentStep == 3 && (
+        <CreateEditEventStepThree
+          handleChange={handleChange}
+          formData={formData}
+          setFormData={setFormData}
           setCurrentStep={setCurrentStep}
           handleSubmit={handleSubmit}
         />

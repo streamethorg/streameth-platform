@@ -137,7 +137,7 @@ const CreateEditEventStepOne = ({ handleChange, formData, setCurrentStep, onFile
 
       <div className="flex justify-end items-center gap-5">
         <div className="flex items-center gap-2">
-          <p className="text-accent text-sm">1/2</p>
+          <p className="text-accent text-sm">1/3</p>
           <StatusBarOneIcon />
         </div>
         <Button variant="outline" onClick={() => setCurrentStep(2)}>

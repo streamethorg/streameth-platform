@@ -1,5 +1,6 @@
 import { handleKeyPress } from '@/utils'
 import React from 'react'
+import colors from '../constants/colors'
 
 interface FormRadioBoxProps {
   checked?: boolean
@@ -11,13 +12,14 @@ interface FormRadioBoxProps {
   disabled?: boolean
   value?: string | number | readonly string[] | undefined
   name?: string
+  theme?: string
 }
 
-const FormRadioBox = ({ checked, onChange, label, value, name, labelClassName = '', disabled }: FormRadioBoxProps) => {
+const FormRadioBox = ({ checked, onChange, label, value, name, labelClassName = '', disabled, theme = colors.accent }: FormRadioBoxProps) => {
   return (
     <div
       onClick={() => onChange(value)}
-      className={`border-2 rounded-lg py-2 px-4 border-dashed cursor-pointer hover:border-solid ${checked ? 'border-green' : 'border-red-500'} ${
+      className={`border-2 w-fit rounded-lg border-green py-2 px-4  cursor-pointer hover:border-solid ${checked ? 'border-solid' : 'border-dashed'} ${
         disabled ? 'pointer-events-none' : ''
       }`}
       onKeyDown={(event) => handleKeyPress(event, [' ', 'Enter'], () => onChange(value))}

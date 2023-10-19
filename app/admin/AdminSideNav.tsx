@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation'
 import { useAccount, useEnsName } from 'wagmi'
 import { truncateAddr } from '@/utils'
 import MediaIcon from '../assets/icons/MediaIcon'
+import makeBlockie from 'ethereum-blockies-base64'
 
 const ADMIN_MENU = [
   {
@@ -34,11 +35,15 @@ const AdminSideNav = () => {
     address: isConnected ? address : ('' as `0x${string}`),
   })
 
+  function CreateBlockie(username: string) {
+    return username ? makeBlockie(username) : 'streameth'
+  }
+
   return (
     <div className="min-w-[275px] sticky top-20 flex flex-col justify-between bg-background border px-4 py-5 h-[calc(100vh-7rem)] drop-shadow-card">
       <div>
         <div className="flex items-center gap-5">
-          <Image src="/blockie.png" alt="avatar" width={52} height={52} className="rounded-full" />
+          <Image src={CreateBlockie(address as string)} alt="avatar" width={52} height={52} className="rounded-full" />
           <h2 className="text-lg font-bold">{data ?? truncateAddr(address as string) ?? 'Admin'}</h2>
         </div>
 

@@ -3,8 +3,10 @@ import { IOrganization } from './organization'
 import { generateId, BASE_PATH } from '../utils'
 import path from 'path'
 export interface GSheetConfig {
-  sheetId: string
-  apiKey: string
+  sheetId?: string
+  apiKey?: string
+  driveId?: string
+  driveApiKey?: string
 }
 
 export interface PretalxConfig {
@@ -13,6 +15,7 @@ export interface PretalxConfig {
 }
 
 export type IDataImporter = { type: 'gsheet'; config: GSheetConfig } | { type: 'pretalx'; config: PretalxConfig }
+export type IDataExporter = { type: 'gsheet'; config: GSheetConfig }
 
 export interface IEvent {
   id: string
@@ -30,6 +33,7 @@ export interface IEvent {
   website?: string
   timezone: string
   accentColor?: string
+  dataExporter?: IDataExporter[]
 }
 
 export default class Event implements IEvent {
@@ -58,6 +62,8 @@ export default class Event implements IEvent {
 
   dataImporter: IDataImporter[] | undefined
 
+  dataExporter: IDataExporter[] | undefined
+
   eventCover?: string
 
   archiveMode?: boolean
@@ -85,6 +91,7 @@ export default class Event implements IEvent {
     logo,
     banner,
     accentColor,
+    dataExporter,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -101,6 +108,7 @@ export default class Event implements IEvent {
     this.logo = logo
     this.banner = banner
     this.accentColor = accentColor ?? '#351B71'
+    this.dataExporter = dataExporter
     // this.validateThis();
   }
 
