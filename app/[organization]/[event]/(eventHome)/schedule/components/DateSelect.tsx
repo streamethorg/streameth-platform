@@ -21,7 +21,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
               {
                 // {new Date(dateNum).toLocaleDateString()}
               }
-              "Thu Oct 20"
+              Thu Oct 20
             </option>
           ))}
         </select>
@@ -34,7 +34,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
             {
               // {new Date(dateNum).toDateString().slice(0, 10)}
             }
-            "Thu Oct 20"
+            Thu Oct 20
           </div>
         ))
       )}
