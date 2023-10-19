@@ -37,11 +37,6 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex flex-row items-center justify-end w-full">
-          {/* <Link href={isAdminPage ? '/' : '/admin'}>
-            <div className="border-2 text-accent font-bold border-accent hover:bg-accent hover:text-white rounded-md p-1 lg:px-4 lg:py-2 m-2">
-              <span className="text-sm">{isAdminPage ? 'Home' : 'Admin Page'}</span>
-            </div>
-          </Link> */}
           {components.map((component) => {
             return component
           })}
