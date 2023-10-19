@@ -18,7 +18,10 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
         <select className="text-xl cursor-pointer font-bold w-full p-2" value={date ? date : ''} onChange={(e) => handleDateChange(e.target.value)}>
           {dates.map((dateNum) => (
             <option key={dateNum} value={dateNum}>
-              {new Date(dateNum).toLocaleDateString()}
+              {
+                // {new Date(dateNum).toLocaleDateString()}
+              }
+              "Thu Oct 20"
             </option>
           ))}
         </select>
@@ -28,7 +31,10 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
             className={`ml-auto w-full p-2 text-center text-xl ${date !== dateNum ? 'text-black cursor-pointer' : 'text-black'}`}
             onClick={() => setDate(dateNum)}
             key={index}>
-            {new Date(dateNum).toDateString().slice(0, 10)}
+            {
+              // {new Date(dateNum).toDateString().slice(0, 10)}
+            }
+            "Thu Oct 20"
           </div>
         ))
       )}
