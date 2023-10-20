@@ -40,8 +40,7 @@ const EventHome = async ({ params }: { params: Params }) => {
                 <p>&#128421; Streamed @ launch.scroll.io</p>
                 <Link
                   className=" text-center animate-pulse bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[12rem]"
-                  href={"/scroll/scroll_announcement_stream/stage/virtual_stage"
-                  }>
+                  href={'/scroll/scroll_announcement_stream/stage/virtual_stage'}>
                   Watch livestream!
                 </Link>
               </div>
