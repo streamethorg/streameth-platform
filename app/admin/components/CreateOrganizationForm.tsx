@@ -42,7 +42,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
     e.preventDefault()
     setSubmitting(true)
 
-    fetch(`api/admin/organization`, {
+    fetch(`/api/admin/organization`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

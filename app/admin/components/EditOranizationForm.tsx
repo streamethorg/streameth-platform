@@ -42,7 +42,7 @@ const EditOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, onFa
     e.preventDefault()
     setSubmitting(true)
 
-    fetch(`api/admin/organization`, {
+    fetch(`/api/admin/organization`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

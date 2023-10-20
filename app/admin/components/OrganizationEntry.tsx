@@ -12,7 +12,7 @@ interface OrganizationEntryProps {
 
 const OrganizationEntry: React.FC<OrganizationEntryProps> = ({ organization }) => {
   const handleDelete = (organization: IOrganization) => {
-    fetch(`/api/organizations?organization=${organization.id}`, {
+    fetch(`/api/admin/organization?organization=${organization.id}`, {
       method: 'DELETE',
     })
       .then((response) => {
