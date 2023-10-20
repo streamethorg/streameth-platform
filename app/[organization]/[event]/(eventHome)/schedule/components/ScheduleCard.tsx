@@ -10,11 +10,11 @@ const ScheduleCard = ({ session, showTime = false, speakers = false }: { session
 
   return (
     <div
-      className="flex space-y-3 flex-col w-full h-full bg-base border shadow rounded p-1 md:p-2 cursor-pointer"
+      className="flex space-y-3 flex-col w-full h-full bg-base border shadow rounded p-1 md:p-2 hover:bg-gray-50 cursor-pointer transition-colors"
       onClick={() => {
         openModal(<ScheduleCardModal session={session} />)
       }}>
-      <div className=" border-l border-accent flex flex-col px-2 rounded-tr rounded-br w-full h-full">
+      <div className=" border-l border-accent hover:border-l-2 flex flex-col px-2 rounded-tr rounded-br w-full h-full">
         {showTime && (
           <p className="text-main-text text-sm uppercase py-1">
             {new Date(session.start).getHours().toString().padStart(2, '0') + ':' + new Date(session.start).getMinutes().toString().padStart(2, '0')}-
@@ -25,7 +25,6 @@ const ScheduleCard = ({ session, showTime = false, speakers = false }: { session
         {speakers && (
           <div className="flex py-1 items-center flex-row space-x-2 overflow-x-scroll mt-auto">
             {session.speakers.map((speaker) => (
-              // <SpeakerPhoto size="sm" key={speaker.id} speaker={speaker} />
               <p key={speaker.id} className="text-sm text-main-text border p-1 px-2 rounded-full whitespace-nowrap ">
                 {speaker.name}
               </p>

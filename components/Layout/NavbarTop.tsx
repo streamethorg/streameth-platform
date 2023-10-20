@@ -10,12 +10,15 @@ import { TopNavbarContext } from '../context/TopNavbarContext'
 
 export default function Navbar() {
   const pathname = usePathname()
-  const { logo, components, setLogo, homePath } = useContext(TopNavbarContext)
+  const { logo, components, homePath, setLogo, setHomePath } = useContext(TopNavbarContext)
+
   useEffect(() => {
     if (pathname === '/') {
       setLogo('')
+      setHomePath('/')
     }
-  }, [pathname])
+  }, [pathname, setLogo, setHomePath])
+
   return (
     <ColorComponent accentColor={colors.accent}>
       <header className="sticky z-50 flex flex-row bg-base border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">
