@@ -35,7 +35,7 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      e.preventDefault() // Prevent form submission if your input is within a form
+      e.preventDefault()
       performFilter()
     }
   }
