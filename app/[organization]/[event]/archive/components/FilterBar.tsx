@@ -98,6 +98,10 @@ export default function FilterBar({ sessions, speakers, stages }: { sessions: IS
 
   useEffect(() => {
     setComponents([<FilterBar2 key={1} sessions={sessions} speakers={speakers} stages={stages} />])
+
+    return () => {
+      setComponents([])
+    }
   }, [])
 
   return <></>
