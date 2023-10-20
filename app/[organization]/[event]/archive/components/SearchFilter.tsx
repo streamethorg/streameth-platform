@@ -33,6 +33,20 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
     setFilterInput(option.name)
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault() // Prevent form submission if your input is within a form
+      performFilter()
+    }
+  }
+
+  const performFilter = () => {
+    if (filterInput === '') {
+      clearSelectedOption()
+      return
+    }
+  }
+
   const clearSelectedOption = () => {
     setSelectedItems([])
     setFilterInput('')
@@ -45,17 +59,18 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
         <div className="relative">
           <input
             type="text"
-            placeholder={` ${filterName}`}
+            placeholder={`${filterName}`}
             value={filterInput}
             onChange={(e) => setFilterInput(e.target.value)}
-            className="p-2  border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
+            onKeyDown={handleKeyDown}
+            className="p-2 italic border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
           />
           <div className="h-full justify-center items-center flex absolute right-0 top-0">
             {selectedItems.length > 0 && (
               <div
                 className="flex items-center justify-center  cursor-pointer bold text-white bg-accent rounded w-5 h-5 mr-2 my-auto"
                 onClick={clearSelectedOption}>
-                x
+                X
               </div>
             )}
           </div>
