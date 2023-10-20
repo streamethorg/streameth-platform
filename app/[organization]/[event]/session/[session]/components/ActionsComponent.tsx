@@ -9,9 +9,9 @@ const ActionsComponent = ({ title, goBackButton = false, children }: { title?: s
     router.back()
   }
   return (
-    <div className="flex flex-row items-center md:w-full p-4 py-2 bg-base rounded-t shadow">
+    <div className="flex flex-row items-center md:w-full  p-4 bg-base rounded-t border ">
       {goBackButton && <ArrowUturnLeftIcon className="p-1 h-8 w-8 cursor-pointer text-accent " onClick={onBackClick} />}
-      {title && <h1 className="text-xl text-accent font-bold p-2">{title}</h1>}
+      {title && <h1 className="text-xl text-accent font-bold ">{title}</h1>}
       {children}
     </div>
   )
