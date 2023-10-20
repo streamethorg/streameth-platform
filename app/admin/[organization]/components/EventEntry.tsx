@@ -12,7 +12,7 @@ interface EventEntryProps {
 
 const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
   const handleDelete = () => {
-    fetch(`/api/events?event=${event.id}&organization=${event.organizationId}`, {
+    fetch(`/api/admin/event?event=${event.id}&organization=${event.organizationId}`, {
       method: 'DELETE',
     })
       .then((response) => {
