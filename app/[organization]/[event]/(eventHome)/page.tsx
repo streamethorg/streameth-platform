@@ -35,7 +35,7 @@ const EventHome = async ({ params }: { params: Params }) => {
               <h1 className="text-4xl py-4 text-center md:text-left font-bold">{event.name}</h1>
               <div className=" flex flex-col space-y-4 text-left">
                 <p>&#128197; When: October 20th</p>
-                <p>&#9200; Time: 9:00 AM - 10:50 AM EST / 1:00 PM - 3:50 PM UTC</p>
+                <p>&#9200; Time: 9:00 AM - 11:50 AM EST / 1:00 PM - 3:50 PM UTC</p>
                 <p>&#127759; Where: Live in Vietnam and Online</p>
                 <p>&#128421; Streamed @ launch.scroll.io</p>
                 <Link
