@@ -28,7 +28,7 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
       {showGoToStage && (
         <div
           onClick={handleGoToStage}
-          className="text-xs border-accent border-2 text-accent rounded ml-auto p-2 font-bold mb-4 hover:bg-accent hover:text-white">
+          className="text-xs border-accent border-2 cursor-pointer text-accent rounded ml-auto p-2 font-bold mb-4 hover:bg-accent hover:text-white">
           Go to Stream
         </div>
       )}
