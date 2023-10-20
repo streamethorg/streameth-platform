@@ -9,7 +9,7 @@ const SPEAKER_DATA_RANGE = 'A3:E'
 const STAGE_SHEET = 'Stages'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
-const SESSION_DATA_RANGE = 'A2:L'
+const SESSION_DATA_RANGE = 'A3:L'
 
 export default class Importer extends BaseImporter {
   sheetId: string

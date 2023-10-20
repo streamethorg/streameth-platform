@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Params, parent: ResolvingMeta
 
   return {
     title: `${event.name} - Home`,
-    description: `Attend ${event.name} virtually powered by streameth here`,
+    description: `Attend ${event.name} virtually powered by Streameth here`,
     openGraph: {
       images: [imageUrl],
     },
