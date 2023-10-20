@@ -26,8 +26,8 @@ export default class EventController {
   }
 
   public async editEvent(event: IEvent, organizationId: IEvent['organizationId']): Promise<void> {
-    this.deleteEvent(event.id, organizationId)
-    this.createEvent(event)
+    await this.deleteEvent(event.id, organizationId)
+    await this.createEvent(event)
   }
 
   public async deleteEvent(eventId: IEvent['id'], organizationId: IEvent['organizationId']): Promise<void> {

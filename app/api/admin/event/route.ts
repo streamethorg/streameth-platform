@@ -18,9 +18,8 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: 'Event or organization does not exist' }, { status: 500 })
     }
 
-    const json: any = await request.json()
+    const formData: IEvent = await request.json()
     const eventController = new EventController()
-    const { formData }: { formData: IEvent } = json
     await eventController.editEvent(formData, organizationId)
 
     return NextResponse.json('Event has been edited', { status: 200 })
@@ -70,8 +69,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: 'Event or organization does not exist' }, { status: 500 })
     }
 
-    const json: any = await request.json()
-    const { formData }: { formData: IEvent } = json
+    const formData: IEvent = await request.json()
     const generatedEventId = generateId(formData.name)
     const eventController = new EventController()
 

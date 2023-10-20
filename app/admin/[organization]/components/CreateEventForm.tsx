@@ -68,7 +68,7 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    fetch(`api/admin/event?event=${formData.name}&organization=${organizationId}`, {
+    fetch(`/api/admin/event?event=${formData.name}&organization=${organizationId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

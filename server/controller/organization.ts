@@ -22,7 +22,7 @@ export default class OrganizationController {
   }
 
   public async editOrganization(organization: IOrganization): Promise<Organization> {
-    this.deleteOrganization(organization.id)
+    await this.deleteOrganization(organization.id)
     return this.createOrganization(organization)
   }
 
