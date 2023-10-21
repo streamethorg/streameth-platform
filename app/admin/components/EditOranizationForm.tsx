@@ -10,7 +10,7 @@ interface OrganizationFormProps {
   organization?: IOrganization
 }
 
-const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, onFailure, organization }) => {
+const EditOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, onFailure, organization }) => {
   const { closeModal } = useContext(ModalContext)
 
   const [formData, setFormData] = useState({
@@ -38,23 +38,27 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
 
     fetch(`/api/admin/organization`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to create organisation')
+        }
+        return response.json()
+      })
       .then((data) => {
         onSuccess?.()
       })
-      .catch((error) => {
-        console.error('Error:', error)
+      .catch((err) => {
         onFailure?.('An error occurred.')
       })
       .finally(() => {
@@ -65,7 +69,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
 
   return (
     <>
-      <h1 className="font-bold text-center mb-3">Add an organization. All inputs are required</h1>
+      <h1 className="font-bold text-center mb-3">Edit an organization. All inputs are required</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block text-sm font-medium text-gray-700">
           Name
@@ -135,4 +139,4 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
   )
 }
 
-export default CreateOrganizationForm
+export default EditOrganizationForm

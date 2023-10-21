@@ -10,7 +10,7 @@ interface EventFormProps {
   event?: IEvent
 }
 
-const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) => {
+const EditEventForm: React.FC<EventFormProps> = ({ organizationId, event }) => {
   const [formData, setFormData] = useState<Omit<IEvent, 'id'>>({
     organizationId: organizationId,
     name: '',
@@ -69,7 +69,7 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
     e.preventDefault()
 
     fetch(`/api/admin/event?event=${formData.name}&organization=${organizationId}`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -162,4 +162,4 @@ const CreateEventForm: React.FC<EventFormProps> = ({ organizationId, event }) =>
   )
 }
 
-export default CreateEventForm
+export default EditEventForm
