@@ -22,5 +22,5 @@ module.exports = {
       position: ['responsive', 'sticky'],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

@@ -14,6 +14,7 @@ interface Params {
   }
 }
 
+// Source: https://tailwindcss.com/docs/typography-plugin
 const MarkDownComp = ({ params }: Params) => {
   const [event, setEvent] = useState<IEvent | null>(null)
 
@@ -37,10 +38,10 @@ const MarkDownComp = ({ params }: Params) => {
   }
 
   return (
-    <>
+    <article className="prose prose-neutral lg:prose-lg">
       <Markdown remarkPlugins={[remarkGfm]}>{`# ${event.name}`}</Markdown>
       <Markdown remarkPlugins={[remarkGfm]}>{event.description}</Markdown>
-    </>
+    </article>
   )
 }
 
