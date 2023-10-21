@@ -1,7 +1,7 @@
 {
   "id": "scroll_announcement_stream",
   "name": "Scroll's Mainnet Housewarming Party",
-  "description": "After three successful testnets spanning over 15 months with extensive testing and rigorous security audits, users and builders are now free to explore Scroll’s zkEVM, a scaling solution nearly identical to Ethereum with lower cost, faster speed and limitless scaling potential. \n\n To celebrate this milestone with our global community, we are hosting a livestream event from our team off-site in Vietnam. \n You’ll hear from our founders, engineering and research teams, ecosystem projects, and other members of the global Ethereum community. We’ll also be sharing highlights from the past two weeks.\n Join us!",
+  "description": "- 📅 When: October 20th\n- ⏰ Time: 9:00 AM - 11:50 AM EST / 1:00 PM - 3:50 PM UTC\n- 🌎 Where: Live in Vietnam and Online\n- 💻 Streamed @ launch.scroll.io\n- [Watch livestream!](/scroll/scroll_announcement_stream/stage/virtual_stage)\n\nJoin us on Friday, October 20th, as we celebrate a monumental moment in Scroll's journey - the launch of our Mainnet. It's a big step forward, and we want to share it with you. We're bringing together a group of friends from The Graph, Aave/Lens, Dora, and more to mark this occasion. We'll be diving into a range of topics, but most importantly, we'll be opening the floor for an authentic conversation with community leaders from Latin America, Africa, and Southeast Asia. Together, we'll explore how zk technology is creating exciting new opportunities in these regions.\n\nIf you're a developer, join us for a hands-on build session. We're rolling up our sleeves and guiding you through the process of deploying on Scroll. Here's a sneak peek at some of the incredible minds you'll be hearing from:\n\n- Bunny (Dora)\n- Nader (Lens)\n- CTRLV (Cog)\n- Pranav (The Graph)\n- Simona Pop (ENS)\n\nBut that's not all. We've got a Founder conversation lined up. We'll discuss what's next post-mainnet launch, sharing our vision, the challenges we've overcome, and the exciting journey ahead for Scroll. So, what's on Scroll's horizon? We'll reveal the areas we're focusing on and how you can be a part of it. Save the Date now, and let's celebrate together at launch.scroll.io.\n\nCheers,\nThe Scroll Team\n",
   "start": "2023-10-20T00:00:00.000Z",
   "end": "2023-10-20T00:00:00.000Z",
   "location": "Hanoi, Vietnam",
@@ -19,7 +19,7 @@
   "eventCover": "scroll_banner.png",
   "banner": "scroll_banner.png",
   "website": "http://scroll.io",
-  "archiveMode": true,
+  "archiveMode": false,
   "timezone": "Asia/Ho_Chi_Minh",
   "accentColor": "#EB5132"
 }
