@@ -1,9 +1,10 @@
 // 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IEvent } from '@/server/model/event'
 import DataImporterSelect from './DataImporterInput'
 import UploadFileInput from './UploadFileInput'
 import { IDataImporter } from '@/server/model/event'
+import { ModalContext } from '@/components/context/ModalContext'
 
 interface EventFormProps {
   organizationId: string
@@ -11,6 +12,7 @@ interface EventFormProps {
 }
 
 const EditEventForm: React.FC<EventFormProps> = ({ organizationId, event }) => {
+  const { closeModal } = useContext(ModalContext)
   const [formData, setFormData] = useState<Omit<IEvent, 'id'>>({
     organizationId: organizationId,
     name: '',
@@ -79,10 +81,8 @@ const EditEventForm: React.FC<EventFormProps> = ({ organizationId, event }) => {
         if (!response.ok) {
           throw new Error('Failed to create event')
         }
+        closeModal()
         return response.json()
-      })
-      .then(() => {
-        window.location.reload()
       })
       .catch((err) => {
         setError('An error occurred')

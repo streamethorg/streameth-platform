@@ -1,12 +1,13 @@
 import BaseController from './baseController'
 import Event, { IEvent } from '../model/event'
 import OrganizationController from './organization'
+import { getEnvironment } from '../utils'
 
 export default class EventController {
   private controller: BaseController<IEvent>
 
   constructor() {
-    this.controller = new BaseController<IEvent>('fs')
+    this.controller = new BaseController<IEvent>(getEnvironment())
   }
 
   public async getEvent(eventId: IEvent['id'], organizationId: IEvent['organizationId']): Promise<Event> {
@@ -41,7 +42,7 @@ export default class EventController {
     }
 
     const eventQuery = await Event.getEventPath(organizationId, eventId)
-    this.controller.delete(eventQuery)
+    this.controller.delete(eventQuery, organizationId)
   }
 
   public async getAllEventsForOrganization(organizationId: IEvent['organizationId']): Promise<Event[]> {

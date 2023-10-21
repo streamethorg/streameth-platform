@@ -1,11 +1,12 @@
 import BaseController from './baseController'
 import Organization, { IOrganization } from '../model/organization'
+import { getEnvironment } from '../utils'
 
 export default class OrganizationController {
   private controller: BaseController<IOrganization>
 
   constructor() {
-    this.controller = new BaseController<IOrganization>('fs')
+    this.controller = new BaseController<IOrganization>(getEnvironment())
   }
 
   public async getOrganization(organizationId: IOrganization['id']): Promise<Organization> {
@@ -47,6 +48,6 @@ export default class OrganizationController {
     }
 
     const organizationQuery = await Organization.getOrganizationPath(organizationId)
-    this.controller.delete(organizationQuery)
+    this.controller.delete(organizationQuery, organizationId)
   }
 }

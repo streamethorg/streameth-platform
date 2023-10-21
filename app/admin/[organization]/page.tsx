@@ -5,7 +5,7 @@ import EventEntry from './components/EventEntry'
 import Link from 'next/link'
 
 export async function generateStaticParams() {
-  const data = await (await fetch(`${apiUrl()}/organizations`)).json()
+  const data = await (await fetch(`${apiUrl()}/organizations`, { cache: 'no-cache' })).json()
 
   return data.map((org: { id: string }) => ({
     params: {
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 const EventPage = async ({ params }: { params: { organization: string } }) => {
   let events: IEvent[] = []
 
-  await fetch(`${apiUrl()}/organizations/${params.organization}/events`)
+  await fetch(`${apiUrl()}/organizations/${params.organization}/events`, { cache: 'no-store' })
     .then((response) => {
       if (!response.ok) {
         return Promise.reject('Failed to fetch events')

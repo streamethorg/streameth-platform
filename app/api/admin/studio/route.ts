@@ -23,8 +23,8 @@ export const POST = async (req: NextRequest) => {
 
   for (let i = 0; i < Object.keys(body.sessions).length; i++) {
     const sessionId = Object.keys(body.sessions)[i]
-    const folderName = `data/sessions/${body.event.id}`
     const fileName = `${sessionId}.json`
+    const folderName = `data/sessions/${body.event.id}/${fileName}`
     const data = await sessionController.getSession(sessionId, body.event.id)
     const update = {
       ...data,

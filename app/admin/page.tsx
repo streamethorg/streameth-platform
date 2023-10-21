@@ -4,7 +4,18 @@ import { IOrganization } from '@/server/model/organization'
 import { apiUrl } from '@/server/utils'
 
 const OrganizationList = async () => {
-  const organizations = await ((await fetch(`${apiUrl()}/organizations`, { cache: 'no-store' })).json() as Promise<IOrganization[]>)
+  let organizations: IOrganization[] = []
+  await fetch(`${apiUrl()}/organizations`, { cache: 'no-store' })
+    .then((response) => {
+      if (!response.ok) {
+        return Promise.reject('Failed to fetch organizations')
+      }
+      return response.json()
+    })
+    .then((data) => (organizations = data))
+    .catch((error) => {
+      console.error(error)
+    })
   return (
     <div className="p-4 overflow-scroll">
       <AddOrganizationButton />

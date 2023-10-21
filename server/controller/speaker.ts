@@ -1,11 +1,12 @@
 import BaseController from './baseController'
 import Speaker, { ISpeaker } from '../model/speaker'
+import { getEnvironment } from '../utils'
 
 export default class SpeakerController {
   private controller: BaseController<ISpeaker>
 
   constructor() {
-    this.controller = new BaseController<ISpeaker>('fs')
+    this.controller = new BaseController<ISpeaker>(getEnvironment())
   }
 
   public async getSpeaker(speakerId: ISpeaker['id'], eventId: ISpeaker['eventId']): Promise<Speaker> {
