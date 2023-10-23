@@ -1,6 +1,6 @@
 'use client'
+
 import { useEffect, useState } from 'react'
-import { apiUrl } from '@/server/utils'
 
 export function UploadFileInput({ organizationId, onFileUpload }: { organizationId: string; onFileUpload: (fileName: string) => void }) {
   const [file, setFile] = useState<File>()
@@ -15,7 +15,7 @@ export function UploadFileInput({ organizationId, onFileUpload }: { organization
       const data = new FormData()
       data.set('file', file)
 
-      const res = await fetch(`${apiUrl()}/organizations/${organizationId}/events/upload`, {
+      const res = await fetch(`api/organizations/${organizationId}/events/upload`, {
         method: 'POST',
         body: data,
       })

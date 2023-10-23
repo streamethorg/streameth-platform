@@ -1,6 +1,6 @@
 'use client'
-import { createContext, useEffect, useState } from 'react'
-import img from '@/public/logo.png'
+
+import { createContext, useState } from 'react'
 
 export const TopNavbarContext = createContext<{
   logo: string
@@ -21,7 +21,6 @@ export const TopNavbarContext = createContext<{
 export const TopNavbarContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [logo, setLogo] = useState('')
   const [homePath, setHomePath] = useState('')
-
   const [components, setComponents] = useState<React.ReactNode[]>([])
 
   return <TopNavbarContext.Provider value={{ logo, setLogo, components, setComponents, homePath, setHomePath }}>{children}</TopNavbarContext.Provider>

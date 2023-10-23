@@ -41,10 +41,10 @@ class Session {
     this.address = session?.address
   }
 
-  static async fromRequest(req: NextRequest): Promise<Session> {
+  static async fromRequest(req: NextRequest): Promise<Session | null> {
     const sessionCookie = req.cookies.get(COOKIE_NAME)?.value
 
-    if (!sessionCookie) return new Session()
+    if (!sessionCookie) return null
     return new Session(await unsealData<ISession>(sessionCookie, SESSION_OPTIONS))
   }
 

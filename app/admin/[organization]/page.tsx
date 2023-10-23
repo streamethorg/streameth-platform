@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { apiUrl } from '@/server/utils'
 import { IEvent } from '@/server/model/event'
 import AddEventButton from './components/AddEventButton'
@@ -15,30 +14,39 @@ export async function generateStaticParams() {
 }
 
 const EventsPage = async ({ params }: { params: { organization: string } }) => {
-  try {
-    const response = await axios.get(`${apiUrl()}/organizations/${params.organization}/events`)
-    const events: IEvent[] = response.data
+  let events: IEvent[] = []
 
-    return (
-      <div className="w-full">
-        <div className="flex justify-between items-center">
-          <h2 className="text-2xl">{params.organization}</h2>
+  await fetch(`${apiUrl()}/organizations/${params.organization}/events`)
+    .then((response) => {
+      if (!response.ok) {
+        return Promise.reject('Failed to fetch events')
+      }
+      return response.json()
+    })
+    .then((data) => {
+      events = data
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 
-          <AddEventButton organization={params.organization} />
-        </div>
-        {events.length > 0 ? (
-          <>
-            <p className="my-2">Your events</p>
-            <AdminItemsContainer>{events?.map((event) => <EventEntry key={event?.id} event={event} />)}</AdminItemsContainer>
-          </>
-        ) : (
-          <p>There are no events at the moment. To get started, please click the &quot;Create a new Event&quot; button.</p>
-        )}
+  return (
+    <div className="w-full">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl">{params.organization}</h2>
+
+        <AddEventButton organization={params.organization} />
       </div>
-    )
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
+      {events.length > 0 ? (
+        <>
+          <p className="my-2">Your events</p>
+          <AdminItemsContainer>{events?.map((event) => <EventEntry key={event?.id} event={event} />)}</AdminItemsContainer>
+        </>
+      ) : (
+        <p className="mt-5">There are no events at the moment. To get started, please click the &quot;Create a new Event&quot; button.</p>
+      )}
+    </div>
+  )
 }
 
 export default EventsPage

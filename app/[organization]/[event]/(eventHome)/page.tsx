@@ -1,16 +1,14 @@
 import EventController from '@/server/controller/event'
-import StageController from '@/server/controller/stage'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
-import { getEventDays } from '@/utils/time'
-import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import Link from 'next/link'
-import Markdown from 'react-markdown'
 import SpeakerPageComponent from './speakers/page'
 import SchedulePageComponent from './schedule/page'
+
 interface Params {
   event: string
   organization: string
+  speaker: string
 }
 
 const Button = ({ children, link }: { children: React.ReactNode; link: string }) => (
@@ -34,18 +32,16 @@ const EventHome = async ({ params }: { params: Params }) => {
         <div className="max-w-7xl mx-auto mt-4">
           <div className="flex flex-col p-4">
             <div className=" flex-col flex space-y-2 my-4 md:flex-col">
-              <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
+              <h1 className="text-4xl py-4 text-center md:text-left font-bold">{event.name}</h1>
               <div className=" flex flex-col space-y-4 text-left">
                 <p>&#128197; When: October 20th</p>
-                <p>&#9200; Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
+                <p>&#9200; Time: 9:00 AM - 11:50 AM EST / 1:00 PM - 3:50 PM UTC</p>
                 <p>&#127759; Where: Live in Vietnam and Online</p>
                 <p>&#128421; Streamed @ launch.scroll.io</p>
                 <Link
-                  className="bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[8rem]"
-                  href={
-                    'https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NmFqZGU4dmVxcGgzanNxYjlzYjV1MXB0MGEgY19mZDE2YjdhZTIxZDA2NWI4OTUxYTU0MzM3NDQ1MTQ3MjEyYWI1OThhMjAzNzFlZjEzMjBjZWQ5ZWUzOWNhNTc0QGc&tmsrc=c_fd16b7ae21d065b8951a54337445147212ab598a20371ef1320ced9ee39ca574%40group.calendar.google.com'
-                  }>
-                  save the date
+                  className=" text-center animate-pulse bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[12rem]"
+                  href={'/scroll/scroll_announcement_stream/stage/virtual_stage'}>
+                  Watch livestream!
                 </Link>
               </div>
             </div>

@@ -1,17 +1,17 @@
 'use client'
+
 import React, { useContext } from 'react'
-import CreateOrganizationModal from './CreateOrganizationForm' // Assuming you have this component
 import { ModalContext } from '@/components/context/ModalContext'
 import { IOrganization } from '@/server/model/organization'
 import { Button } from '@/app/utils/Button'
+import EditOrganizationForm from './EditOranizationForm'
+
 const EditOrganizationButton = ({ organization }: { organization: IOrganization }) => {
   const { openModal } = useContext(ModalContext)
   return (
-    <div>
-      <Button variant="yellow" onClick={() => openModal(<CreateOrganizationModal organization={organization} />)}>
-        Edit
-      </Button>
-    </div>
+    <Button variant="yellow" onClick={() => openModal(<EditOrganizationForm organization={organization} />)}>
+      Edit
+    </Button>
   )
 }
 

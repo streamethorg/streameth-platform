@@ -60,7 +60,7 @@ export default class BaseController<T> implements IBaseController<T> {
   //   return this.store.update(id, data);
   // }
 
-  // delete(id: string): Promise<T> {
-  //   return this.store.delete(id);
-  // }
+  delete(id: string) {
+    this.store.delete(id)
+  }
 }

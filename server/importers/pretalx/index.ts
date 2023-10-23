@@ -1,10 +1,9 @@
 import BaseImporter from '../baseImporter'
 import { IDataImporter } from '../../model/event'
 import Event from '../../model/event'
-import axios from 'axios'
-import Speaker from '../../model/speaker'
 import { generateId } from '../../utils'
 import moment from 'moment-timezone'
+
 export default class PretalxImporter extends BaseImporter {
   apiUrl: string
 
@@ -16,11 +15,20 @@ export default class PretalxImporter extends BaseImporter {
   }
 
   async generateSpeakers(): Promise<void> {
-    let request = await axios.get(`${this.apiUrl}/speakers/`)
-    let speakers = request.data.results
-    while (request.data.next) {
-      request = await axios.get(request.data.next)
-      speakers = [...speakers, ...request.data.results]
+    let request = await fetch(`${this.apiUrl}/speakers/`)
+    if (!request.ok) {
+      throw new Error('Network response was not ok')
+    }
+    let data = await request.json()
+    let speakers = data.results
+
+    while (data.next) {
+      request = await fetch(data.next)
+      if (!request.ok) {
+        throw new Error('Network response was not ok')
+      }
+      data = await request.json()
+      speakers = [...speakers, ...data.results]
     }
     speakers.forEach(async (speaker: any) => {
       const newSpeaker = {
@@ -44,12 +52,20 @@ export default class PretalxImporter extends BaseImporter {
   }
 
   async generateStages(): Promise<void> {
-    // fetch https://speak.protocol.berlin/api/events/protocol-berg/stages/
-    let request = await axios.get(`${this.apiUrl}/rooms/`)
-    let stages = request.data.results
-    while (request.data.next) {
-      request = await axios.get(request.data.next)
-      stages = [...stages, ...request.data.results]
+    let request = await fetch(`${this.apiUrl}/rooms/`)
+    if (!request.ok) {
+      throw new Error('Network response was not ok')
+    }
+    let data = await request.json()
+    let stages = data.results
+
+    while (data.next) {
+      request = await fetch(data.next, { method: 'GET' })
+      if (!request.ok) {
+        throw new Error('Network response was not ok')
+      }
+      data = await request.json()
+      stages = [...stages, ...data.results]
     }
     stages.forEach(async (stage: any) => {
       const newStage = {
@@ -72,13 +88,22 @@ export default class PretalxImporter extends BaseImporter {
   }
 
   async generateSessions(): Promise<void> {
-    // fetch https://speak.protocol.berlin/api/events/protocol-berg/talks/
     await Promise.all([this.generateStages(), this.generateSpeakers()])
-    let request = await axios.get(`${this.apiUrl}/talks/`)
-    let sessions = request.data.results
-    while (request.data.next) {
-      request = await axios.get(request.data.next)
-      sessions = [...sessions, ...request.data.results]
+
+    let request = await fetch(`${this.apiUrl}/talks/`)
+    if (!request.ok) {
+      throw new Error('Network response was not ok')
+    }
+    let data = await request.json()
+    let sessions = data.results
+
+    while (data.next) {
+      request = await fetch(data.next)
+      if (!request.ok) {
+        throw new Error('Network response was not ok')
+      }
+      data = await request.json()
+      sessions = [...sessions, ...data.results]
     }
 
     sessions.forEach(async (session: any) => {
