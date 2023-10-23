@@ -1,4 +1,4 @@
-import CreateEditEvent from '../[event]/components/CreateEditEvent'
+import CreateEditEvent from '../components/CreateEditEvent'
 
 interface Params {
   event: string

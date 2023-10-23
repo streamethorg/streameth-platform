@@ -1,5 +1,5 @@
 import EventController from '@/server/controller/event'
-import CreateEditEvent from './components/CreateEditEvent'
+import CreateEditEvent from '../components/CreateEditEvent'
 
 interface Params {
   event: string
