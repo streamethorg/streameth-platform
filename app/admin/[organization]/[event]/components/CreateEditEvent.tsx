@@ -4,18 +4,17 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Button } from '@/app/utils/Button'
 import CreateEditEventStepOne from './CreateEditEventStepOne'
 import { IDataExporter, IDataImporter, IEvent } from '@/server/model/event'
-import axios from 'axios'
-import { apiUrl } from '@/server/utils'
 import CreateEditEventStepTwo from './CreateEditEventStepTwo'
 import CreateEditEventStepThree from './CreateEditEventStepThree'
 import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
 import SuccessErrorModal from './SuccessErrorModal'
+import CreateEditFooter from './CreateEditFooter'
 
 const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizationId: string }) => {
   const [currentStep, setCurrentStep] = useState(1)
   const [error, setError] = useState<string | null>(null)
-  const { openModal, closeModal, modalWidth } = useContext(ModalContext)
+  const { openModal, closeModal } = useContext(ModalContext)
   const [formData, setFormData] = useState<Omit<IEvent, 'id'>>({
     organizationId: '',
     name: '',
@@ -29,6 +28,7 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
     timezone: '',
     accentColor: '',
     dataExporter: [],
+    dataImporter: [],
   })
 
   useEffect(() => {
@@ -69,16 +69,27 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
     })
   }
 
-  const handleSubmit = async () => {
-    try {
-      await axios.post(`${apiUrl()}/organizations/${organizationId}/events`, formData)
-      openModal(<SuccessErrorModal success />)
-      modalWidth('w-auto')
-    } catch (err) {
-      openModal(<SuccessErrorModal success={false} />)
-      modalWidth('w-auto')
-      setError('An error occurred.')
-    }
+  const handleSubmit = () => {
+    fetch(`/api/admin/event?event=${formData.name}&organization=${organizationId}`, {
+      method: event ? 'PATCH' : 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to create event')
+        }
+        return response.json()
+      })
+      .then(() => {
+        openModal(<SuccessErrorModal success />)
+      })
+      .catch((err) => {
+        setError('An error occurred')
+        openModal(<SuccessErrorModal success={false} />)
+      })
   }
 
   const onFileUpload = (fileName: string, key: string) => {
@@ -99,7 +110,6 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
             <Button
               onClick={() => {
                 openModal(<EventPreview closeModal={closeModal} handleSubmit={handleSubmit} formData={formData} />)
-                modalWidth('w-full')
               }}>
               Preview
             </Button>
@@ -111,7 +121,6 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
           handleChange={handleChange}
           formData={formData}
           setFormData={setFormData}
-          setCurrentStep={setCurrentStep}
           organizationId={organizationId}
           onFileUpload={onFileUpload}
         />
@@ -122,19 +131,13 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
           setFormData={setFormData}
           handleDataImporterChange={handleDataImporterChange}
           handleDataExporterChange={handleDataExporterChange}
-          setCurrentStep={setCurrentStep}
         />
       )}
       {currentStep == 3 && (
-        <CreateEditEventStepThree
-          handleChange={handleChange}
-          formData={formData}
-          setFormData={setFormData}
-          setCurrentStep={setCurrentStep}
-          handleSubmit={handleSubmit}
-        />
+        <CreateEditEventStepThree handleChange={handleChange} formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
       )}
       {error && <div className="mt-4 text-red-500">{error}</div>}
+      <CreateEditFooter event={event} setCurrentStep={setCurrentStep} currentStep={currentStep} />
     </div>
   )
 }

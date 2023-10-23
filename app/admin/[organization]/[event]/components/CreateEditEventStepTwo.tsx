@@ -22,12 +22,11 @@ const initialExporterConfig: GSheetConfig = {
 interface Props {
   formData: Omit<IEvent, 'id'>
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
-  setCurrentStep: Dispatch<SetStateAction<number>>
   handleDataImporterChange: (importer: IDataImporter) => void
   handleDataExporterChange: (exporter: IDataExporter) => void
 }
 
-const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleDataImporterChange, handleDataExporterChange }: Props) => {
+const CreateEditEventStepTwo = ({ formData, setFormData, handleDataImporterChange, handleDataExporterChange }: Props) => {
   const [dataExportSelectedType, setDataExportSelectedType] = useState('gdrive')
   const [selectedType, setSelectedType] = useState<string>(formData?.dataImporter?.[0]?.type ?? '')
   //@ts-ignore
@@ -181,19 +180,6 @@ const CreateEditEventStepTwo = ({ formData, setFormData, setCurrentStep, handleD
             />
           </div>
         </div>
-      </div>
-
-      <div className="flex justify-end items-center gap-5">
-        <div className="flex items-center gap-2">
-          <p className="text-accent text-sm">2/3</p>
-          <StatusBarTwoIcon />
-        </div>
-        <Button variant="outline" onClick={() => setCurrentStep(1)}>
-          Previous page
-        </Button>
-        <Button variant="outline" onClick={() => setCurrentStep(3)}>
-          Next page
-        </Button>
       </div>
     </div>
   )

@@ -9,10 +9,9 @@ interface Props {
   formData: Omit<IEvent, 'id'>
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
-  setCurrentStep: Dispatch<SetStateAction<number>>
   handleSubmit: () => void
 }
-const CreateEditEventStepThree = ({ formData, setFormData, setCurrentStep, handleChange, handleSubmit }: Props) => {
+const CreateEditEventStepThree = ({ formData, handleChange, handleSubmit }: Props) => {
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">
@@ -45,16 +44,6 @@ const CreateEditEventStepThree = ({ formData, setFormData, setCurrentStep, handl
         <p className="text-sm opacity-60 text-accent mb-2">Your event page can be edited at anytime from your admin page</p>
         <Button variant="green" className="text-green" onClick={handleSubmit}>
           Publish Event Page
-        </Button>
-      </div>
-
-      <div className="flex justify-end items-center gap-5">
-        <div className="flex items-center gap-2">
-          <p className="text-accent text-sm">3/3</p>
-          <StatusBarFullIcon />
-        </div>
-        <Button variant="outline" onClick={() => setCurrentStep(2)}>
-          Previous page
         </Button>
       </div>
     </div>

@@ -4,8 +4,6 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { FormTextArea } from '@/app/utils/FormTextArea'
 import { FormTextInput } from '@/app/utils/FormTextInput'
 import { IEvent } from '@/server/model/event'
-import StatusBarOneIcon from '@/app/assets/icons/StatusBarOneIcon'
-import { Button } from '@/app/utils/Button'
 import ImageFileUploader from './ImageFileUploader'
 import { apiUrl } from '@/server/utils'
 
@@ -13,11 +11,10 @@ interface Props {
   formData: Omit<IEvent, 'id'>
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
-  setCurrentStep: Dispatch<SetStateAction<number>>
   organizationId: string
   onFileUpload: (e: string, key: string) => void
 }
-const CreateEditEventStepOne = ({ handleChange, formData, setCurrentStep, onFileUpload, organizationId }: Props) => {
+const CreateEditEventStepOne = ({ handleChange, formData, onFileUpload, organizationId }: Props) => {
   const onImageSubmit = async (file: Blob, key: string, setLoading: React.Dispatch<SetStateAction<boolean>>) => {
     try {
       const data = new FormData()
@@ -133,16 +130,6 @@ const CreateEditEventStepOne = ({ handleChange, formData, setCurrentStep, onFile
           value={formData.timezone}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
         />
-      </div>
-
-      <div className="flex justify-end items-center gap-5">
-        <div className="flex items-center gap-2">
-          <p className="text-accent text-sm">1/3</p>
-          <StatusBarOneIcon />
-        </div>
-        <Button variant="outline" onClick={() => setCurrentStep(2)}>
-          Next page
-        </Button>
       </div>
     </div>
   )

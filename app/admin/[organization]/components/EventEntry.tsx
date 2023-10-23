@@ -57,13 +57,6 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
         </div>
       </Link>
     </AdminItemCard>
-    //   <div className="ml-auto flex flex-row">
-    //     <EditEventButton event={event} />
-    //     <button className="bg-red-500 text-white p-2 rounded ml-2" onClick={() => handleModalOpen(event)}>
-    //       Delete
-    //     </button>
-    //   </div>
-    // </li>
   )
 }
 
