@@ -1,7 +1,6 @@
 'use client'
 
 import { ISession } from '@/server/model/session'
-import { apiUrl } from '@/server/utils'
 import { StreamSession, useStreamSessions } from '@livepeer/react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
@@ -44,7 +43,7 @@ export function Editor(props: Props) {
   useEffect(() => {
     async function fetchSchedule() {
       if (selectedEvent && selectedStage && selectedStream) {
-        const res = await fetch(`${apiUrl()}/organizations/${selectedEvent.organizationId}/events/${selectedEvent.id}/sessions`)
+        const res = await fetch(`api/organizations/${selectedEvent.organizationId}/events/${selectedEvent.id}/sessions`)
         const data: ISession[] = await res.json()
 
         // filter sessions by stage and streaming day

@@ -1,16 +1,14 @@
 import EventController from '@/server/controller/event'
-import StageController from '@/server/controller/stage'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
-import { getEventDays } from '@/utils/time'
-import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import Link from 'next/link'
-import Markdown from 'react-markdown'
 import SpeakerPageComponent from './speakers/page'
 import SchedulePageComponent from './schedule/page'
+import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 interface Params {
   event: string
   organization: string
+  speaker: string
 }
 
 const Button = ({ children, link }: { children: React.ReactNode; link: string }) => (
@@ -43,7 +41,7 @@ const EventHome = async ({ params }: { params: Params }) => {
         <div className="max-w-7xl mx-auto mt-4">
           <div className="flex flex-col p-4">
             <div className=" flex-col flex space-y-2 my-4 md:flex-col">
-              <h1 className="text-4xl py-4 text-center md:text-left">{event.name}</h1>
+              <h1 className="text-4xl py-4 text-center md:text-left font-bold">{event.name}</h1>
               <div className=" flex flex-col space-y-4 text-left">
                 <p>&#128197; When: {new Date(event.start).toDateString()}</p>
                 <p>&#9200; Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>

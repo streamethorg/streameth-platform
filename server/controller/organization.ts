@@ -21,6 +21,11 @@ export default class OrganizationController {
     return org
   }
 
+  public async editOrganization(organization: IOrganization): Promise<Organization> {
+    await this.deleteOrganization(organization.id)
+    return this.createOrganization(organization)
+  }
+
   public async getAllOrganizations(): Promise<Organization[]> {
     const organizations: Organization[] = []
     const organizationQuery = await Organization.getOrganizationPath()
@@ -29,5 +34,19 @@ export default class OrganizationController {
       organizations.push(new Organization({ ...org }))
     }
     return organizations
+  }
+
+  public async deleteOrganization(organizationId: IOrganization['id']): Promise<void> {
+    if (!organizationId) {
+      throw new Error('Invalid eventId or organizationId')
+    }
+
+    const organization = await this.getOrganization(organizationId)
+    if (!organization) {
+      throw new Error('Event does not exist')
+    }
+
+    const organizationQuery = await Organization.getOrganizationPath(organizationId)
+    this.controller.delete(organizationQuery)
   }
 }

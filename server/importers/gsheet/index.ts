@@ -9,7 +9,7 @@ const SPEAKER_DATA_RANGE = 'A3:E'
 const STAGE_SHEET = 'Stages'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
-const SESSION_DATA_RANGE = 'A2:L'
+const SESSION_DATA_RANGE = 'A3:M'
 
 export default class Importer extends BaseImporter {
   sheetId: string
@@ -96,6 +96,8 @@ export default class Importer extends BaseImporter {
           .map((speakerId: string) => this.speakerController.getSpeaker(generateId(speakerId), this.event.id))
         const [speakers, stage] = await Promise.all([Promise.all(speakerPromises), this.stageController.getStage(generateId(stageId), this.event.id)])
 
+        console.log(row)
+
         const session = {
           name: Name,
           description: Description,
@@ -105,7 +107,7 @@ export default class Importer extends BaseImporter {
           speakers: speakers,
           start: moment.tz(`${Day} ${Start}:00`, this.event.timezone).valueOf(),
           end: moment.tz(`${Day} ${End}:00`, this.event.timezone).valueOf(),
-          videoUrl: row[11],
+          videoUrl: row[12],
         }
 
         await this.sessionController.createSession(session)

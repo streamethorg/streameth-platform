@@ -4,11 +4,10 @@ import moment from 'moment-timezone'
 
 const run = async () => {
   const Organization = {
-    name: 'Scroll',
-    description:
-      'Scroll seamlessly extends Ethereum’s capabilities through zero knowledge tech and EVM equivalence. The L2 blockchain built by Ethereum devs for Ethereum devs.',
-    url: 'https://scroll.io/',
-    logo: 'https://scroll.io/logo.png',
+    name: 'Zuzalu',
+    description: 'Zuzalu is a first-of-its-kind pop-up city community in Montenegro.',
+    url: 'https://zuzalu.city/',
+    logo: 'https://zuzalu.city/_next/image?url=https%3A%2F%2Fpolcxtixgqxfuvrqgthn.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fzulalu-images%2Fzulalologo.png&w=256&q=75',
     location: 'Unknown',
   }
 
@@ -16,18 +15,18 @@ const run = async () => {
   const organizationInstance = await orgController.createOrganization(Organization)
 
   const Event = {
-    name: 'Scroll Announcement Stream',
+    name: 'Zuzalu Montenegro 2023 - Coordi-nations and Digital Tribes',
     description:
-      'Scroll seamlessly extends Ethereum’s capabilities through zero knowledge tech and EVM equivalence. The L2 blockchain built by Ethereum devs for Ethereum devs.',
-    start: new Date('2023-10-20T00:00:00.000Z'),
-    end: new Date('2023-10-20T00:00:00.000Z'),
-    location: 'Hanoi, Vietnam',
-    organizationId: 'scroll',
+      'Join 200 core residents brought together by a shared desire to learn, create, live longer and healthier lives, and build self-sustaining communities.',
+    start: new Date('2023-05-15T00:00:00.000Z'),
+    end: new Date('2023-05-19T00:00:00.000Z'),
+  location: "Montenegro",
+    organizationId: 'zuzalu',
     dataImporter: [
       {
         type: 'gsheet' as 'gsheet',
         config: {
-          sheetId: '1nM8U6a8TlmuMzE835ZvCol9IW5vmjLD9YI0Moc_SUJE',
+          sheetId: '1S-2vBhIfOqvsTsDJU0Xt9Luaudvp7GucVVYIccvUVQ0',
           apiKey: 'l',
         },
       },
@@ -35,7 +34,7 @@ const run = async () => {
     logo: '',
     banner: '',
     website: '',
-    archiveMode: false,
+    archiveMode: true,
     timezone: 'Asia/Ho_Chi_Minh',
     eventCover: '',
   }
