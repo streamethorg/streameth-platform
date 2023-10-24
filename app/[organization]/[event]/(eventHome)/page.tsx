@@ -43,9 +43,15 @@ const EventHome = async ({ params }: { params: Params }) => {
             <div className=" flex-col flex space-y-2 my-4 md:flex-col">
               <h1 className="text-4xl py-4 text-center md:text-left font-bold">{event.name}</h1>
               <div className=" flex flex-col space-y-4 text-left">
-                <p>&#128197; When: {new Date(event.start).toDateString()}</p>
-                <p>&#9200; Time: 9:00 AM - 10:30 AM EST / 1:00 PM - 2:30 PM UTC</p>
-                <p>&#127759; Where: Live in Vietnam and Online</p>
+                <p>
+                  <span className="mr-2">&#128197;</span>When: {new Date(event.start).toDateString()}
+                </p>
+                <p>
+                  <span className="mr-2">&#9200;</span> Time: {new Date(event.start).toLocaleTimeString()}
+                </p>
+                <p>
+                  <span className="mr-2">&#127759;</span> Where: {event.location}
+                </p>
                 <p>{event.description}</p>
               </div>
             </div>

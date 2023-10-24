@@ -9,11 +9,7 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
   const { setStages } = useContext(ScheduleContext)
   const [selectedStage, setSelectedStage] = useState<string>('')
   useEffect(() => {
-    if (isMobile) {
-      setStages([stages[0]])
-    } else {
-      setStages(stages)
-    }
+    setStages([stages[0]])
   }, [isMobile])
 
   const handleStageChange = (stageId: string) => {
@@ -22,7 +18,7 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
   }
 
   return (
-    <div className="flex flex-row justify-center items-center">
+    <div>
       <select
         className="text-xl cursor-pointer font-bold box-border w-full p-2"
         value={selectedStage}

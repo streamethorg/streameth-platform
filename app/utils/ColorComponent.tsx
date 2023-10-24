@@ -42,7 +42,7 @@ const ColorComponent = ({ children, event, stages }: Props) => {
     for (const stage of stages) {
       if (stage.streamSettings.streamId) {
         pages.push({
-          href: `/${organizationId}/${stage.id}/stage/${stage.id}`,
+          href: `/${organizationId}/${id}/stage/${stage.id}`,
           name: stage.name,
           icon: <ViewColumnsIcon />,
         })

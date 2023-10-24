@@ -9,7 +9,7 @@ import { IStage } from '@/server/model/stage'
 import SessionList from '@/components/sessions/SessionList'
 
 const StageSessions = ({ stage }: { stage: IStage }) => {
-  const { schedulePosition, setSchedulePositions, event, date } = useContext(ScheduleContext)
+  const { setSchedulePositions, event, date } = useContext(ScheduleContext)
   const [sessions, setSessions] = useState<ISession[]>([])
 
   useEffect(() => {
@@ -35,20 +35,6 @@ const StageSessions = ({ stage }: { stage: IStage }) => {
   return (
     <div key={stage.id} className="w-full flex flex-col relative">
       <SessionList sessions={sessions} />
-      {/* {sessions.map((session) => {
-        const range = getSlotRange(session, schedulePosition.min)
-        return (
-          <div
-            key={session.id}
-            className="absolute right-0 h-full w-full px-2"
-            style={{
-              top: range.start * CELL_HEIGHT + 0.1 + 'rem',
-              height: (range.end - range.start) * CELL_HEIGHT - 0.1 + 'rem',
-            }}>
-            {session.name !== 'Blank' && <ScheduleCard session={session} speakers />}
-          </div>
-        )
-      })} */}
     </div>
   )
 }

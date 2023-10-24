@@ -20,7 +20,7 @@ const NavBarButton = ({
   isNavVisible: boolean
   setIsNavVisible: React.Dispatch<React.SetStateAction<boolean>>
 }) => (
-  <button onClick={() => setIsNavVisible(!isNavVisible)} className="lg:hidden z-50 w-[50px]">
+  <button onClick={() => setIsNavVisible(!isNavVisible)} className="md:hidden z-50 w-[50px]">
     {!isNavVisible ? (
       <Bars3Icon className="w-7 h-7 border-2 border-accent rounded text-white bg-accent mx-auto" />
     ) : (

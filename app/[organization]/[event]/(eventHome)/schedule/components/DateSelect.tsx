@@ -12,7 +12,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
   }
 
   return (
-    <div className="flex flex-row justify-center items-center max-h-14">
+    <div>
       <select className="text-xl cursor-pointer font-bold w-full p-2" value={date ? date : ''} onChange={(e) => handleDateChange(e.target.value)}>
         {dates.map((dateNum) => (
           <option key={dateNum} value={dateNum}>
