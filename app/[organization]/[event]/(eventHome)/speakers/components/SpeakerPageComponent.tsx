@@ -12,8 +12,12 @@ const SpeakerPageComponent = async ({ params }: Params) => {
   const speakerController = new SpeakerController()
   const speakers = (await speakerController.getAllSpeakersForEvent(params.event)).map((speaker) => speaker.toJson())
 
+  if (speakers.length == 0){
+    return <></>
+  }
+
   return (
-    <div className="flex flex-col max-w-7xl w-full mx-auto p-2">
+    <div id="speakers" className="flex flex-col max-w-7xl w-full mx-auto p-2" >
       <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">Speakers</span>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
         {speakers.map((speaker) => (
