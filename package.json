@@ -48,6 +48,7 @@
     "react-scroll": "^1.8.9",
     "react-share": "^4.4.1",
     "react-social-icons": "^6.4.0",
+    "remark-gfm": "^4.0.0",
     "sharp": "^0.32.6",
     "siwe": "^2.1.4",
     "tailwindcss": "3.3.2",
@@ -58,6 +59,7 @@
     "wagmi": "^1.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/react-scroll": "^1.8.7",
     "prettier": "3.0.1"
   }

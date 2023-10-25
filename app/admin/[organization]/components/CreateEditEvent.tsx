@@ -123,6 +123,7 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
           setFormData={setFormData}
           organizationId={organizationId}
           onFileUpload={onFileUpload}
+          handleSubmit={handleSubmit}
         />
       )}
       {currentStep == 2 && (

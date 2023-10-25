@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { HomeIcon, CalendarIcon, UserGroupIcon, CameraIcon } from '@heroicons/react/24/outline'
 import colors from '@/app/constants/colors'
 import { Button } from '@/app/utils/Button'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 const ItemButton = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-row justify-center">
@@ -83,12 +85,21 @@ const EventPreview = ({ formData, handleSubmit, closeModal }: EventPreviewProps)
                   height={500}
                   className="w-full object-cover h-36 md:h-52 lg:h-96"
                 />
+                <Image
+                  src={'/events/' + formData?.logo}
+                  alt="Event Logo"
+                  width={128}
+                  height={128}
+                  className="absolute bottom-0 translate-y-1/2 translate-x-3 lg:translate-x-1/2 w-24 h-24 lg:w-32 lg:h-32 object-cover bg-white"
+                />
               </div>
             </div>
 
             <div className="flex-col mt-0 flex max-w-4xl mb-12 mx-auto p-4 bg-white  space-y-4 ">
-              <h1 className="font-bold text-xl">{formData?.name}</h1>
-              <p>{formData?.description}</p>
+              <h1 className="font-bold text-4xl">{formData?.name}</h1>
+              <article className="prose prose-gray">
+                <Markdown remarkPlugins={[remarkGfm]}>{formData?.description}</Markdown>
+              </article>
               <div className="flex flex-row flex-wrap justify-center items-center p-4">
                 <ItemButton>Watch Livestream</ItemButton>
                 <ItemButton>Schedule</ItemButton>

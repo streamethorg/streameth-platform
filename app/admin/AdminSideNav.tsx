@@ -36,7 +36,7 @@ const AdminSideNav = () => {
   })
 
   function CreateBlockie(username: string) {
-    return username ? makeBlockie(username) : 'streameth'
+    return username ? makeBlockie(username) : makeBlockie('streameth')
   }
 
   return (

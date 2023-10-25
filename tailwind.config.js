@@ -30,7 +30,25 @@ module.exports = {
       dropShadow: {
         card: '0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
+      typography: ({ theme }) => ({
+        gray: {
+          css: {
+            h1: {
+              fontSize: theme('fontSize.2xl'),
+              marginTop: theme('spacing.2'),
+              marginBottom: theme('spacing.2'),
+            },
+            h2: {
+              fontSize: theme('fontSize.xl'),
+              marginTop: theme('spacing.1'),
+            },
+            h3: {
+              fontSize: theme('fontSize.lg'),
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

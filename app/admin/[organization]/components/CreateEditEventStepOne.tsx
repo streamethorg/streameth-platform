@@ -1,11 +1,14 @@
 'use client'
 
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useContext } from 'react'
 import { FormTextArea } from '@/app/utils/FormTextArea'
 import { FormTextInput } from '@/app/utils/FormTextInput'
 import { IEvent } from '@/server/model/event'
 import ImageFileUploader from './ImageFileUploader'
 import { apiUrl } from '@/server/utils'
+import { Button } from '@/app/utils/Button'
+import EventPreview from './EventPreview'
+import { ModalContext } from '@/components/context/ModalContext'
 
 interface Props {
   formData: Omit<IEvent, 'id'>
@@ -13,8 +16,10 @@ interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
   organizationId: string
   onFileUpload: (e: string, key: string) => void
+  handleSubmit: () => void
 }
-const CreateEditEventStepOne = ({ handleChange, formData, onFileUpload, organizationId }: Props) => {
+const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, onFileUpload, organizationId }: Props) => {
+  const { openModal, closeModal } = useContext(ModalContext)
   const onImageSubmit = async (file: Blob, key: string, setLoading: React.Dispatch<SetStateAction<boolean>>) => {
     try {
       const data = new FormData()
@@ -31,6 +36,7 @@ const CreateEditEventStepOne = ({ handleChange, formData, onFileUpload, organiza
       setLoading(false)
     }
   }
+
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">
@@ -88,9 +94,14 @@ const CreateEditEventStepOne = ({ handleChange, formData, onFileUpload, organiza
           placeholder="E.g. Ethereum Streaming: Unveil blockchain's potential. Dive into Ethereum's world with experts, trends, and innovations. Join the revolution. Don't miss out!"
           required
           toolTip
-          toolTipHTML="Enter event description"
+          toolTipHTML="This form box supports Markdown"
           value={formData.description}
           onChange={handleChange}
+          renderSecondaryLabel={
+            <Button size="xs" onClick={() => openModal(<EventPreview closeModal={closeModal} handleSubmit={handleSubmit} formData={formData} />)}>
+              Preview
+            </Button>
+          }
         />
         <FormTextInput
           label="Location"
