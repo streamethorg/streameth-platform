@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
 import { IEvent } from '@/server/model/event'
 import useLocalStorage from '@/components/hooks/useLocalStorage'
@@ -64,11 +64,16 @@ const ReserveSpotModal = ({ event }: { event: IEvent }) => {
 
 const ReserveSpotButton = ({ event }: props) => {
   const { openModal } = useContext(ModalContext)
-  const [user, setUser] = useLocalStorage<SignUp>(event.id, {
-    email: '',
-    isSignedUp: false,
-  })
+  const [user, setUser] = useState<SignUp>()
 
+  useEffect(() => {
+    if (window !== undefined) {
+      const item = window.localStorage.getItem(event.id)
+      if (item !== null) {
+        setUser(JSON.parse(item))
+      }
+    }
+  }, [])
   if (user && user.isSignedUp) {
     return <div className="text-center p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">{"you're"} signed up!</div>
   }

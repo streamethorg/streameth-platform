@@ -64,7 +64,7 @@ export default function NavbarTop() {
       </div>
       <div className="flex flex-row items-center justify-end w-full">
         {menuVisible && <Navbar pages={pages} />}
-        {components.length > 1 &&
+        {components.length > 0 &&
           components.map((component, index) => {
             return (
               <div className="w-full px-2" key={index}>
@@ -81,7 +81,7 @@ export default function NavbarTop() {
             fgColor="#000"
             className={`"h-8 w-8"`}
           />
-          {pages.length > 0 && <NavBarButton isNavVisible={menuVisible} setIsNavVisible={setMenuVisible} />}
+          {pages.length > 1 && <NavBarButton isNavVisible={menuVisible} setIsNavVisible={setMenuVisible} />}
         </div>
       </div>
     </header>
