@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 const EventsPage = async ({ params }: { params: { organization: string } }) => {
   let events: IEvent[] = []
 
-  await fetch(`${apiUrl()}/organizations/${params.organization}/events`, { cache: 'no-cache' })
+  await fetch(`${apiUrl()}/organizations/${params.organization}/events`, { next: { revalidate: 10 } })
     .then((response) => {
       if (!response.ok) {
         return Promise.reject('Failed to fetch events')
