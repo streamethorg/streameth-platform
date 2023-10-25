@@ -16,8 +16,10 @@
     }
   ],
   "eventCover": "undefined.png",
+  "logo": "swarm_logo.jpeg",
+  "banner": "swarm_banner.png",
   "website": "",
   "archiveMode": false,
   "timezone": "Europe/Berlin",
-  "accentColor": "red"
+  "accentColor": "#ff7a00"
 }

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
 import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
+import ReserveSpotButton from './components/ReserveSpotModal'
 interface Params {
   event: string
   organization: string
@@ -19,25 +20,16 @@ const Button = ({ children, link }: { children: React.ReactNode; link: string })
   </div>
 )
 
-{
-  /* <Link
-className="bg-accent font-bold border-2 hover:text-accent  hover:bg-white  text-white border-accent px-2 py-1  rounded max-w-[8rem]"
-href={
-  'https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NmFqZGU4dmVxcGgzanNxYjlzYjV1MXB0MGEgY19mZDE2YjdhZTIxZDA2NWI4OTUxYTU0MzM3NDQ1MTQ3MjEyYWI1OThhMjAzNzFlZjEzMjBjZWQ5ZWUzOWNhNTc0QGc&tmsrc=c_fd16b7ae21d065b8951a54337445147212ab598a20371ef1320ced9ee39ca574%40group.calendar.google.com'
-}>
-save the date
-</Link> */
-}
 const EventHome = async ({ params }: { params: Params }) => {
   const eventController = new EventController()
 
-  const event = await eventController.getEvent(params.event, params.organization)
+  const event = (await eventController.getEvent(params.event, params.organization)).toJson()
   if (!hasData({ event })) return notFound()
 
   return (
     <div className="flex flex-col w-full overflow-scroll h-full space-y-[5em] ">
       <div id="home">
-        {/* <HomePageLogoAndBanner event={event.toJson()} /> */}
+        <HomePageLogoAndBanner event={event} />
         <div className="max-w-7xl mx-auto mt-4">
           <div className="flex flex-col p-4">
             <div className=" flex-col flex space-y-2 my-4 md:flex-col">
@@ -52,6 +44,7 @@ const EventHome = async ({ params }: { params: Params }) => {
                 <p>
                   <span className="mr-2">&#127759;</span> Where: {event.location}
                 </p>
+                <ReserveSpotButton event={event} />
                 <p>{event.description}</p>
               </div>
             </div>

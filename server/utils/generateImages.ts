@@ -1,6 +1,6 @@
-import { extractFirstFrame } from './utils/video'
-import SessionController from './controller/session'
-import Session from './model/session'
+import { extractFirstFrame } from './video'
+import SessionController from '../controller/session'
+import Session from '../model/session'
 import fs from 'fs'
 
 const eventId = 'zuzalu_montenegro_2023__coordinations_and_digital_tribes'
