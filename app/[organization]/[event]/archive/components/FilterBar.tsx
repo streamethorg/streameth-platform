@@ -76,9 +76,9 @@ function FilterBar2({ sessions, speakers, stages }: { sessions: ISession[]; spea
 
   return (
     <div key={1} className={` w-full max-w-[600px] m-auto z-50 ${isOpen && 'h-full '} `}>
-      <div className="flex flex-col justify-top items-start  w-full h-full">
-        <div className="flex flex-row w-full h-full items-center justify-center">
-          <SearchFilter filterOptions={sessionFilters} filterName="session name" />
+      <div className="flex flex-col justify-top items-start w-full h-full">
+        <div className="flex flex-row w-full h-full items-start justify-center">
+          <SearchFilter filterOptions={sessionFilters} filterName="Session name" />
           <AdjustmentsHorizontalIcon className="h-full w-8 text-accent md:ml-2" onClick={() => setIsOpen(!isOpen)} />
         </div>
         {isOpen && (
@@ -98,6 +98,10 @@ export default function FilterBar({ sessions, speakers, stages }: { sessions: IS
 
   useEffect(() => {
     setComponents([<FilterBar2 key={1} sessions={sessions} speakers={speakers} stages={stages} />])
+
+    return () => {
+      setComponents([])
+    }
   }, [])
 
   return <></>
