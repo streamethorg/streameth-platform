@@ -30,7 +30,7 @@ const NavBarButton = ({
 )
 
 export default function NavbarTop() {
-  const { logo, pages, homePath, showNav } = useContext(TopNavbarContext)
+  const { logo, pages, homePath, showNav, components } = useContext(TopNavbarContext)
   const { isMobile } = useContext(MobileContext)
   const [menuVisible, setMenuVisible] = useState(false)
 
@@ -40,8 +40,7 @@ export default function NavbarTop() {
     } else {
       setMenuVisible(false)
     }
-  }
-  , [isMobile])
+  }, [isMobile])
 
   if (!showNav) {
     return null
@@ -65,6 +64,13 @@ export default function NavbarTop() {
       </div>
       <div className="flex flex-row items-center justify-end w-full">
         {menuVisible && <Navbar pages={pages} />}
+        {components.length > 1 && components.map((component, index) => {
+          return (
+            <div className="w-full px-2" key={index}>
+              {component}
+            </div>
+          )
+        })}
         <div className="flex">
           <SocialIcon url={`https://twitter.com/Scroll_ZKP`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
           <SocialIcon
@@ -74,7 +80,7 @@ export default function NavbarTop() {
             fgColor="#000"
             className={`"h-8 w-8"`}
           />
-          <NavBarButton isNavVisible={menuVisible} setIsNavVisible={setMenuVisible} />
+          {pages.length > 0 && <NavBarButton isNavVisible={menuVisible} setIsNavVisible={setMenuVisible} />}
         </div>
       </div>
     </header>

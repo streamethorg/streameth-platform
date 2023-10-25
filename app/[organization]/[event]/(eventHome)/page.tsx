@@ -32,7 +32,7 @@ const EventHome = async ({ params }: { params: Params }) => {
         <HomePageLogoAndBanner event={event} />
         <div id="home" className="flex flex-col px-4 ">
           <div className=" flex-col flex space-y-2 md:flex-col">
-            <h1 className="text-4xl text-center md:text-left font-bold">{event.name}</h1>
+            <h1 className="text-4xl text-left font-bold">{event.name}</h1>
             <div className=" flex flex-col space-y-4 text-left">
               <p>
                 <span className="mr-2">&#128197;</span>When: {new Date(event.start).toDateString()}

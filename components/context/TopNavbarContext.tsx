@@ -18,6 +18,8 @@ export const TopNavbarContext = createContext<{
   setStages: React.Dispatch<React.SetStateAction<Page[] | undefined>>
   showNav?: boolean
   setShowNav?: React.Dispatch<React.SetStateAction<boolean>>
+  components: React.ReactNode[]
+  setComponents: React.Dispatch<React.SetStateAction<React.ReactNode[]>>
 }>({
   logo: '',
   setLogo: () => {},
@@ -29,6 +31,8 @@ export const TopNavbarContext = createContext<{
   setStages: () => {},
   showNav: true,
   setShowNav: () => {},
+  components: [],
+  setComponents: () => {},
 })
 
 export const TopNavbarContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -37,9 +41,23 @@ export const TopNavbarContextProvider = ({ children }: { children: React.ReactNo
   const [pages, setPages] = useState<Page[]>([])
   const [stages, setStages] = useState<Page[] | undefined>([])
   const [showNav, setShowNav] = useState(true)
-
+  const [components, setComponents] = useState<React.ReactNode[]>([])
   return (
-    <TopNavbarContext.Provider value={{ logo, setLogo, pages, setPages, homePath, setHomePath, stages, setStages, showNav, setShowNav }}>
+    <TopNavbarContext.Provider
+      value={{
+        logo,
+        setLogo,
+        pages,
+        setPages,
+        homePath,
+        setHomePath,
+        stages,
+        setStages,
+        showNav,
+        setShowNav,
+        components,
+        setComponents,
+      }}>
       {children}
     </TopNavbarContext.Provider>
   )

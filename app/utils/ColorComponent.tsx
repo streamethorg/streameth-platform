@@ -2,20 +2,24 @@
 import { ReactNode, useEffect, useContext } from 'react'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
+import { ISpeaker } from '@/server/model/speaker'
+import { ISession } from '@/server/model/session'
 import { usePathname } from 'next/navigation'
 import colors from '@/constants/colors'
 import { TopNavbarContext } from '@/components/context/TopNavbarContext'
 import { HomeIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/24/outline'
-
+import FilterBar from '@/app/[organization]/[event]/archive/components/FilterBar'
 interface Props {
   children: ReactNode
   event: IEvent
   stages: IStage[]
+  speakers: ISpeaker[]
+  sessions: ISession[]
 }
 
-const ColorComponent = ({ children, event, stages }: Props) => {
+const ColorComponent = ({ children, event, stages, speakers, sessions }: Props) => {
   const pathname = usePathname()
-  const { setLogo, setHomePath, setPages } = useContext(TopNavbarContext)
+  const { setLogo, setHomePath, setPages, setComponents } = useContext(TopNavbarContext)
   const { accentColor, logo, organizationId, id } = event
   const isNotOrganization = pathname === '/' || pathname === '/admin'
 
@@ -25,17 +29,21 @@ const ColorComponent = ({ children, event, stages }: Props) => {
       name: 'Home',
       icon: <HomeIcon />,
     },
-    {
+  ]
+
+  if (sessions.length > 0)
+    pages.push({
       href: `/${organizationId}/${id}#schedule`,
       name: 'Schedule',
       icon: <CalendarIcon />,
-    },
-    {
+    })
+
+  if (speakers.length > 0)
+    pages.push({
       href: `/${organizationId}/${id}#speakers`,
       name: 'Speakers',
       icon: <UserGroupIcon />,
-    },
-  ]
+    })
 
   const stagePages = () => {
     let pages = []
@@ -57,8 +65,11 @@ const ColorComponent = ({ children, event, stages }: Props) => {
 
   useEffect(() => {
     setLogo('/events/' + logo)
-    setPages([...pages, ...stagePages()])
-
+    if (event.archiveMode) {
+      setComponents([<FilterBar key="1" sessions={sessions} speakers={speakers} stages={stages} />])
+    } else {
+      setPages([...pages, ...stagePages()])
+    }
   }, [event])
 
   useEffect(() => {

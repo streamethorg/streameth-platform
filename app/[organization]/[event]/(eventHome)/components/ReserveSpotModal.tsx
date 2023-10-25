@@ -35,6 +35,8 @@ const ReserveSpotModal = ({ event }: { event: IEvent }) => {
       })
       .finally(() => {
         setLocalIsLoading(false)
+        // reload page
+        window.location.reload()
       })
   }
   return (

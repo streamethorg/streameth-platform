@@ -3,15 +3,14 @@ import { OAuth2Client } from 'google-auth-library'
 
 class GoogleSheetService {
   sheetId: string
-  oAuth2Client: OAuth2Client
   connection: any
 
   constructor(sheetId: string) {
     this.sheetId = sheetId;
-    
+
     const serviceAccount = {
       client_email: process.env.SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY && process.env.SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/g, '\n'),
     };
 
     const jwtClient = new google.auth.JWT(
