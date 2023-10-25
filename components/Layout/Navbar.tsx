@@ -64,7 +64,8 @@ export default function Navbar({
       setIsNavVisible(false)
     }
     setHomePath(`/${event.organizationId}/${event.id}`)
-  }, [pathname])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, isNavVisible])
 
   const handleClick = (stageHref: string) => {
     setIsLoading(true)
@@ -73,6 +74,7 @@ export default function Navbar({
   }
   useEffect(() => {
     setLogo('/events/' + event.logo)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [event])
 
   if (archiveMode) {

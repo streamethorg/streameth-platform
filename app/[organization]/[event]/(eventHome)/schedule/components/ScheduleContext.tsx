@@ -48,6 +48,7 @@ const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) 
   useEffect(() => {
     if (!schedulePositions.length) return
     setSchedulePosition({ ...minMaxMaxTotalslots() })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedulePositions])
 
   const updateEarliestTimes = (data: ISchedulePosition) => {

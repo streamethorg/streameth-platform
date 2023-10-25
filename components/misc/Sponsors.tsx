@@ -24,6 +24,7 @@ const SponsorCarousel: React.FC<SponsorCarouselProps> = ({ sponsors: initialSpon
     return () => {
       clearInterval(slideInterval)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [translateX])
 
   const goToNextSlide = () => {

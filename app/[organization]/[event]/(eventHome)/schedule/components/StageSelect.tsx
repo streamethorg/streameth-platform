@@ -14,6 +14,7 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
     } else {
       setStages(stages)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile])
 
   const handleStageChange = (stageId: string) => {

@@ -22,6 +22,7 @@ export default function StageLayout() {
       setBottomOffset(stickyRef.current.clientHeight)
     }
     setIsLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stickyRef.current])
 
   const context = useContext(StageContext)

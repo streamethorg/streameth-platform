@@ -89,7 +89,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, onFileUp
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
         />
         <FormTextArea
-          label="Description"
+          label="Description (markdown)"
           name="description"
           placeholder="E.g. Ethereum Streaming: Unveil blockchain's potential. Dive into Ethereum's world with experts, trends, and innovations. Join the revolution. Don't miss out!"
           required

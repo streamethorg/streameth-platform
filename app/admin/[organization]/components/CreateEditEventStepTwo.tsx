@@ -1,5 +1,3 @@
-import StatusBarTwoIcon from '@/app/assets/icons/StatusBarTwoIcon'
-import { Button } from '@/app/utils/Button'
 import { FormTextInput } from '@/app/utils/FormTextInput'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { GSheetConfig, IDataExporter, IDataImporter, IEvent, PretalxConfig } from '@/server/model/event'
@@ -61,6 +59,7 @@ const CreateEditEventStepTwo = ({ formData, setFormData, handleDataImporterChang
         config: { url: config.url, apiToken: config.apiToken },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedType, config])
 
   useEffect(() => {
@@ -70,6 +69,7 @@ const CreateEditEventStepTwo = ({ formData, setFormData, handleDataImporterChang
         config: { driveId: exporterConfig.driveId, driveApiKey: exporterConfig.driveApiKey },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataExportSelectedType, exporterConfig])
 
   return (
