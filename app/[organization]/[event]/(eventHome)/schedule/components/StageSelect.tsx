@@ -1,19 +1,15 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { MobileContext } from '@/components/context/MobileContext'
 import { ScheduleContext } from './ScheduleContext'
 import { IStage } from '@/server/model/stage'
 
 const StageSelect = ({ stages }: { stages: IStage[] }) => {
-  const { isMobile } = useContext(MobileContext)
-  const { setStages } = useContext(ScheduleContext)
+  const { setStage } = useContext(ScheduleContext)
   const [selectedStage, setSelectedStage] = useState<string>('')
-  useEffect(() => {
-    setStages([stages[0]])
-  }, [isMobile])
 
   const handleStageChange = (stageId: string) => {
-    setStages([stages.find((stage) => stage.id === stageId)])
+    setStage(stageId)
     setSelectedStage(stageId)
   }
 
