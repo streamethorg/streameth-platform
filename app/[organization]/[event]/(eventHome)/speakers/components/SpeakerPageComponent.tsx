@@ -25,7 +25,7 @@ const SpeakerPageComponent = async ({ params }: Params) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
         {speakers.map((speaker) => (
           <div key={speaker.id} className="hover:bg-gray-50 p-4 rounded-lg cursor-pointer transition-colors">
-            <SpeakerCard speaker={speaker} sessions={sessions} />
+            <SpeakerCard speaker={speaker.toJson()} sessions={sessions.map((session) => session.toJson())} />
           </div>
         ))}
       </div>

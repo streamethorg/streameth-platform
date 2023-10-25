@@ -25,7 +25,7 @@ const SchedulePageComponent = async ({ params }: Params) => {
 
   if (!sessions.length) return null
   return (
-    <ScheduleContextProvider event={event.toJson()} stage={stages[0]} sessions={sessions}>
+    <ScheduleContextProvider event={event.toJson()} stage={stages[0]} sessions={sessions.map((session) => session.toJson())}>
       <div id="schedule" className="flex flex-col max-w-7xl w-full mx-auto p-2">
         <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">Schedule</span>
         <div className="text-center sticky z-10 flex flex-row space-x-4">
