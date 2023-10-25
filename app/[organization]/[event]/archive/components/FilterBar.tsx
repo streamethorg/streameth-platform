@@ -9,7 +9,7 @@ import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
 
 function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speakers: ISpeaker[]; stages: IStage[] }) {
   const [isOpen, setIsOpen] = useState(false)
-  const inputBarRef = useRef<HTMLDivElement>(null);
+  const inputBarRef = useRef<HTMLDivElement>(null)
 
   const speakerFilters = speakers.map((speaker) => {
     return {
@@ -85,7 +85,10 @@ function FilterBar({ sessions, speakers, stages }: { sessions: ISession[]; speak
           <div
             className="absolute w-full space-y-2 bg-white rounded p-2 shadow-sm"
             // Set the top position based on the height of the input bar.
-            style={{ top: inputBarRef.current ? inputBarRef.current.getBoundingClientRect().height + 'px' : 'auto', width: inputBarRef.current?.offsetWidth }}>
+            style={{
+              top: inputBarRef.current ? inputBarRef.current.getBoundingClientRect().height + 'px' : 'auto',
+              width: inputBarRef.current?.offsetWidth,
+            }}>
             {' '}
             <SelectFilter filterOptions={stageFilters} filterName="Stage" />
             <SelectFilter filterOptions={sessionDateFilters()} filterName="Date" />

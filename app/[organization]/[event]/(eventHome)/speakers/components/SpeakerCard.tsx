@@ -1,7 +1,7 @@
 'use client'
 import SpeakerModal from './SpeakerModal'
 import { ModalContext } from '@/components/context/ModalContext'
-import {  useContext } from 'react'
+import { useContext } from 'react'
 
 import { ISpeaker } from '@/server/model/speaker'
 import { ISession } from '@/server/model/session'

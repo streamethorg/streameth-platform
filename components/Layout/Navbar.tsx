@@ -16,13 +16,14 @@ const NavBarItem = ({
   activePage: string
   setActivePage: React.Dispatch<React.SetStateAction<string>>
 }) => {
-
   const isActive = item.name === activePage
   return (
     <Link
       onClick={() => setActivePage(item.name)}
       href={item.href}
-      className={`text-center flex flex-col py-1 h-full items-center justify-center cursor-pointer hover:text-gray-300 ${isActive && 'underline text-accent'}`}>
+      className={`text-center flex flex-col py-1 h-full items-center justify-center cursor-pointer hover:text-gray-300 ${
+        isActive && 'underline text-accent'
+      }`}>
       {item.name}
     </Link>
   )
@@ -39,7 +40,6 @@ export default function Navbar({
 }) {
   const pathName = usePathname()
   const currentPage = pages.find((page) => page.href === pathName)
-
 
   const [activePage, setActivePage] = useState(currentPage ? currentPage.name : '')
 

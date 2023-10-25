@@ -64,13 +64,14 @@ export default function NavbarTop() {
       </div>
       <div className="flex flex-row items-center justify-end w-full">
         {menuVisible && <Navbar pages={pages} />}
-        {components.length > 1 && components.map((component, index) => {
-          return (
-            <div className="w-full px-2" key={index}>
-              {component}
-            </div>
-          )
-        })}
+        {components.length > 1 &&
+          components.map((component, index) => {
+            return (
+              <div className="w-full px-2" key={index}>
+                {component}
+              </div>
+            )
+          })}
         <div className="flex">
           <SocialIcon url={`https://twitter.com/Scroll_ZKP`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
           <SocialIcon

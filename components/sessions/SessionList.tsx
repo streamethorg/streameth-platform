@@ -16,7 +16,6 @@ function NoSessionComponent() {
   return (
     <div className="flex flex-col items-center justify-center h-60 m-4 p-4">
       <p className="text-gray-600">No sessions scheduled for this stage!</p>
-   
     </div>
   )
 }

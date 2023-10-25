@@ -1,6 +1,6 @@
 import GoogleSheetService from '@/server/services/googleSheet'
 import { NextResponse } from 'next/server'
-import EventController from '@/server/controller/event';
+import EventController from '@/server/controller/event'
 export async function POST(
   request: Request,
   {
@@ -28,7 +28,6 @@ export async function POST(
   }
 
   try {
-    
     const googleSheetService = new GoogleSheetService(event.dataImporter[0].config.sheetId)
     await googleSheetService.appendData('test', [[email, params.eventId]])
     return NextResponse.json({ success: true })
