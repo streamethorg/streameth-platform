@@ -17,8 +17,10 @@ const SpeakerPageComponent = async ({ params }: Params) => {
     eventId: params.event,
   })
 
+  if (!speakers.length) return null
+
   return (
-    <div className="flex flex-col max-w-7xl w-full mx-auto p-2">
+    <div id="speakers" className="flex flex-col max-w-7xl w-full mx-auto p-2">
       <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">Speakers</span>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
         {speakers.map((speaker) => (

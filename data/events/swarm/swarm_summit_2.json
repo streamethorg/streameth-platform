@@ -1,0 +1,23 @@
+{
+  "id": "swarm_summit_2",
+  "name": "Swarm summit 2",
+  "description": "great summit",
+  "start": "2023-12-14T00:00:00.000Z",
+  "end": "2023-12-14T00:00:00.000Z",
+  "location": "virtual",
+  "organizationId": "swarm",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1-MIyFvZMjHMfa5UhoesA4hB5s9YHisBWoUyrtG0l_fg",
+        "apiKey": "s"
+      }
+    }
+  ],
+  "eventCover": "undefined.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Berlin",
+  "accentColor": "red"
+}

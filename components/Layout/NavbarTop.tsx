@@ -52,7 +52,7 @@ export default function NavbarTop() {
       <div className=" flex items-center w-20">
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
-          <Image
+          {/* <Image
             src={logo}
             alt="Logo"
             width={50}
@@ -60,7 +60,7 @@ export default function NavbarTop() {
             onError={(e) => {
               e.currentTarget.src = '/logo.png'
             }}
-          />
+          /> */}
         </Link>
       </div>
       <div className="flex flex-row items-center justify-end w-full">

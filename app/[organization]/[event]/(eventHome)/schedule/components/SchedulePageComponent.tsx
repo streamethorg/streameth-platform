@@ -22,6 +22,8 @@ const SchedulePageComponent = async ({ params }: Params) => {
   const sessions = await new SessionController().getAllSessions({
     eventId: params.event,
   })
+
+  if (!sessions.length) return null
   return (
     <ScheduleContextProvider event={event.toJson()} stage={stages[0]} sessions={sessions}>
       <div id="schedule" className="flex flex-col max-w-7xl w-full mx-auto p-2">
