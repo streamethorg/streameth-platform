@@ -2,8 +2,8 @@ import EventController from '@/server/controller/event'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
 import Link from 'next/link'
-import SpeakerPageComponent from './speakers/page'
-import SchedulePageComponent from './schedule/page'
+import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
+import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 interface Params {
   event: string

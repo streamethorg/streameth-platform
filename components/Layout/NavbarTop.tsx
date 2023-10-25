@@ -30,12 +30,11 @@ const NavBarButton = ({
 )
 
 export default function NavbarTop() {
-  const { logo, pages, homePath } = useContext(TopNavbarContext)
+  const { logo, pages, homePath, showNav } = useContext(TopNavbarContext)
   const { isMobile } = useContext(MobileContext)
   const [menuVisible, setMenuVisible] = useState(false)
 
   useEffect(() => {
-    console.log('isMobile', isMobile)
     if (!isMobile) {
       setMenuVisible(true)
     } else {
@@ -44,6 +43,9 @@ export default function NavbarTop() {
   }
   , [isMobile])
 
+  if (!showNav) {
+    return null
+  }
 
   return (
     <header className="sticky z-50 flex flex-row bg-base border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">

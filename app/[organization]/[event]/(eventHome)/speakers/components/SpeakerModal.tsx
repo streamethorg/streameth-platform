@@ -7,16 +7,10 @@ import { ISpeaker } from '@/server/model/speaker'
 
 interface Params {
   speaker: ISpeaker
-  sessions: ISession[] | null
+  sessions: ISession[]
 }
 
 const SpeakerModal = ({ sessions, speaker }: Params) => {
-  if (!sessions) {
-    return null
-  }
-
-  const speakerSessions = sessions.filter((session) => session.speakers.some((sessionSpeaker) => sessionSpeaker.id === speaker.id))
-
   return (
     <div className="flex flex-col w-full p-4 justify-center items-center space-y-4">
       <div className="flex justify-center items-center w-48 p-2">
@@ -29,7 +23,7 @@ const SpeakerModal = ({ sessions, speaker }: Params) => {
         </div>
         <div className="flex flex-col border p-4 rounded space-y-4">
           <p className="font-bold text-lg">Sessions</p>
-          {speakerSessions.map((session, index) => (
+          {sessions.map((session, index) => (
             <ScheduleCard key={session.id} session={session} showTime />
           ))}
         </div>

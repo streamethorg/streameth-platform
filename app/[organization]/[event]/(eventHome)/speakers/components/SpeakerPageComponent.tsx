@@ -1,27 +1,30 @@
-import SpeakerController from '@/server/controller/speaker'
 import SpeakerCard from './SpeakerCard'
-
+import SpeakerController from '@/server/controller/speaker'
+import SessionController from '@/server/controller/session'
 interface Params {
   params: {
-    event: string
     organization: string
+    event: string
+    speaker: string
   }
 }
 
 const SpeakerPageComponent = async ({ params }: Params) => {
   const speakerController = new SpeakerController()
-  const speakers = (await speakerController.getAllSpeakersForEvent(params.event)).map((speaker) => speaker.toJson())
-
-  if (speakers.length == 0){
-    return <></>
-  }
+  const speakers = await speakerController.getAllSpeakersForEvent(params.event)
+  const sessionController = new SessionController()
+  const sessions = await sessionController.getAllSessions({
+    eventId: params.event,
+  })
 
   return (
-    <div id="speakers" className="flex flex-col max-w-7xl w-full mx-auto p-2" >
+    <div className="flex flex-col max-w-7xl w-full mx-auto p-2">
       <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">Speakers</span>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
         {speakers.map((speaker) => (
-          <SpeakerCard key={speaker.id} speaker={speaker} path={`/${params.organization}/${params.event}/speakers/${speaker.id}`} />
+          <div key={speaker.id} className="hover:bg-gray-50 p-4 rounded-lg cursor-pointer transition-colors">
+            <SpeakerCard speaker={speaker} sessions={sessions} />
+          </div>
         ))}
       </div>
     </div>
