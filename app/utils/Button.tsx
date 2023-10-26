@@ -5,7 +5,7 @@ const buttonVariants = cva('inline-flex items-center border rounded-[8px] disabl
   variants: {
     variant: {
       default: 'text-white bg-accent hover:bg-transparent hover:text-accent hover:border-accent',
-      danger: 'bg-red-500 text-white',
+      danger: 'bg-danger text-white',
       outline: 'text-accent bg-transparent border-accent hover:text-white hover:bg-accent',
       green: 'bg-transparent text-accent border-green',
       yellow: 'bg-yellow-500 text-white',

@@ -22,6 +22,7 @@ interface Props {
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
   handleDataImporterChange: (importer: IDataImporter) => void
   handleDataExporterChange: (exporter: IDataExporter) => void
+  validationErrors?: Record<string, any>
 }
 
 const CreateEditEventStepTwo = ({ formData, setFormData, handleDataImporterChange, handleDataExporterChange }: Props) => {

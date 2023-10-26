@@ -13,6 +13,7 @@ interface ImageFileUploaderProps {
   toolTipHTML?: string
   aspectRatio?: number
   imageKey?: string
+  validationErrors?: Record<string, any>
   onImageSubmit: (event: Blob, key: string, setLoading: React.Dispatch<SetStateAction<boolean>>) => void
 }
 
@@ -26,6 +27,7 @@ const ImageFileUploader = ({
   toolTipHTML = '',
   isCircleImage = false,
   imageKey,
+  validationErrors,
   onImageSubmit,
 }: ImageFileUploaderProps) => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -73,7 +75,8 @@ const ImageFileUploader = ({
         {loading && <p className="text-medGrey text-center my-1 text-[10px]">50% - Loading image..</p>}
         <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileUpload} accept="image/*" />
       </div>
-      {error && <p className="text-red-500 text-sm my-2">{error}</p>}
+      {validationErrors && typeof validationErrors === 'string' && <div className="text-danger mb-4 mt-2">{validationErrors}</div>}
+      {error && <p className="text-danger text-sm my-2">{error}</p>}
     </div>
   )
 }

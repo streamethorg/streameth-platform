@@ -19,8 +19,9 @@ interface Props {
   organizationId: string
   onFileUpload: (e: string, key: string) => void
   handleSubmit: () => void
+  validationErrors?: Record<string, any>
 }
-const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormData, onFileUpload, organizationId }: Props) => {
+const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, formData, setFormData, onFileUpload, organizationId }: Props) => {
   const { openModal, closeModal } = useContext(ModalContext)
   const onImageSubmit = async (file: Blob, key: string, setLoading: React.Dispatch<SetStateAction<boolean>>) => {
     try {
@@ -56,6 +57,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormD
           onImageSubmit={onImageSubmit}
           toolTipHTML="Image size must have an aspect ratio of 1/1 or the dimensions of 200 x 200 pixels"
           aspectRatio={1 / 1}
+          validationErrors={validationErrors?.logo}
         />
         <ImageFileUploader
           label="Event's Cover Image"
@@ -65,6 +67,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormD
           iconClassName="left-[45%]"
           onImageSubmit={onImageSubmit}
           aspectRatio={4 / 3}
+          validationErrors={validationErrors?.eventCover}
           toolTipHTML="Image size must have an aspect ratio of 4/3 or the dimensions of 1440 x 1080 pixels"
         />
         <ImageFileUploader
@@ -74,6 +77,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormD
           className="w-[380px] h-[180px]"
           iconClassName="left-[47%]"
           onImageSubmit={onImageSubmit}
+          validationErrors={validationErrors?.banner}
           toolTipHTML="Image size must have an aspect ratio of 16:9 or the dimensions of 1920 x 1080 pixels."
           aspectRatio={16 / 9}
         />
@@ -89,6 +93,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormD
           toolTipHTML="Enter Event Name"
           value={formData.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+          validationErrors={validationErrors?.name}
         />
         <FormTextArea
           label="Description (markdown)"
@@ -99,6 +104,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormD
           toolTipHTML="This form box supports Markdown"
           value={formData.description}
           onChange={handleChange}
+          validationErrors={validationErrors?.description}
           renderSecondaryLabel={
             <Button size="xs" onClick={() => openModal(<EventPreview closeModal={closeModal} handleSubmit={handleSubmit} formData={formData} />)}>
               Preview
@@ -112,6 +118,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormD
           required
           toolTip
           value={formData.location}
+          validationErrors={validationErrors?.location}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
         />
         <FormTextInput
@@ -144,6 +151,7 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormD
           titleKey="text"
           valueKey="value"
           optionsHeight={300}
+          validationErrors={validationErrors?.timezone}
           onChange={(timezone) => setFormData({ ...formData, timezone: timezone?.text })}
         />
       </div>

@@ -14,6 +14,8 @@ import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
 import SuccessErrorModal from './SuccessErrorModal'
 import CreateEditFooter from './CreateEditFooter'
+import useValidateForm from '@/app/hooks/useValidateForm'
+import { EventFormSchema } from '@/app/constants/event'
 
 const CreateEditEvent = ({
   event,
@@ -40,6 +42,12 @@ const CreateEditEvent = ({
     dataExporter: [],
     dataImporter: [],
   })
+
+  const {
+    validationErrors,
+    validateForm,
+    setHasAttemptedFormSubmit,
+  } = useValidateForm(formData, EventFormSchema)
 
   useEffect(() => {
     if (event) {
@@ -84,29 +92,33 @@ const CreateEditEvent = ({
   }
 
   const handleSubmit = () => {
-    fetch(
-      `/api/organizations/${organizationId}/events/${formData.name}`,
-      {
-        method: event ? 'PATCH' : 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to create event')
+    const isValidForm = validateForm()
+    if (isValidForm) {
+      fetch(
+        `/api/admin/event?event=${formData.name}&organization=${organizationId}`,
+        {
+          method: event ? 'PATCH' : 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
         }
-        return response.json()
-      })
-      .then(() => {
-        openModal(<SuccessErrorModal success />)
-      })
-      .catch((err) => {
-        setError('An error occurred')
-        openModal(<SuccessErrorModal success={false} />)
-      })
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to create event')
+          }
+          return response.json()
+        })
+        .then(() => {
+          setHasAttemptedFormSubmit(false)
+          openModal(<SuccessErrorModal success />)
+        })
+        .catch((err) => {
+          setError('An error occurred')
+          openModal(<SuccessErrorModal success={false} />)
+        })
+    }
   }
 
   const onFileUpload = (fileName: string, key: string) => {
@@ -149,6 +161,7 @@ const CreateEditEvent = ({
           organizationId={organizationId}
           onFileUpload={onFileUpload}
           handleSubmit={handleSubmit}
+          validationErrors={validationErrors}
         />
       )}
       {currentStep == 2 && (
@@ -157,10 +170,12 @@ const CreateEditEvent = ({
           setFormData={setFormData}
           handleDataImporterChange={handleDataImporterChange}
           handleDataExporterChange={handleDataExporterChange}
+          validationErrors={validationErrors}
         />
       )}
       {currentStep == 3 && (
         <CreateEditEventStepThree
+          validationErrors={validationErrors}
           handleChange={handleChange}
           formData={formData}
           setFormData={setFormData}

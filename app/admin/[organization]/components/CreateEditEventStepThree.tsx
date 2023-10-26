@@ -10,6 +10,7 @@ interface Props {
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
   handleSubmit: () => void
+  validationErrors?: Record<string, any>
 }
 const CreateEditEventStepThree = ({ formData, handleChange, handleSubmit }: Props) => {
   return (

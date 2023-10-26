@@ -21,7 +21,7 @@ const ColorComponent = ({ children, event, stages, speakers, sessions }: Props) 
   const pathname = usePathname()
   const { setLogo, setHomePath, setPages, setComponents } = useContext(TopNavbarContext)
   const { accentColor, logo, organizationId, id } = event
-  const isNotOrganization = pathname === '/' || pathname === '/admin'
+  const isNotOrganization = pathname === '/' || pathname.includes('/admin')
 
   const pages = [
     {

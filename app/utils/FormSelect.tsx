@@ -28,6 +28,7 @@ interface FormSelectProps {
   emptyOptionsMessage?: string
   toolTip?: boolean
   toolTipHTML?: string
+  validationErrors?: Record<string, any>
 }
 
 const FormSelect = ({
@@ -48,6 +49,7 @@ const FormSelect = ({
   toolTip,
   required,
   toolTipHTML,
+  validationErrors,
 }: FormSelectProps) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false)
   const [dropdownPosition, setDropdownPosition] = useState('bottom')
@@ -94,9 +96,9 @@ const FormSelect = ({
           setIsShowingOptions(true)
         }}>
         <div
-          className={`${
-            isShowingOptions ? (dropdownPosition === 'top' ? 'rounded-t-none rounded-b-lg' : 'rounded-t-lg') : 'rounded-lg'
-          } h-12 p-3 w-full border-medGrey border  bg-transparent font-sans disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between cursor-pointer 
+          className={`${isShowingOptions ? (dropdownPosition === 'top' ? 'rounded-t-none rounded-b-lg' : 'rounded-t-lg') : 'rounded-lg'} ${
+            validationErrors ? 'border-danger' : 'border-medGrey'
+          } h-12 p-3 w-full  border  bg-transparent font-sans disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between cursor-pointer 
             
           `}
           onMouseDown={() => handleSelectTriggerClick()}>
@@ -107,6 +109,7 @@ const FormSelect = ({
           )}
           <ArrowDownIcon />
         </div>
+        {validationErrors && typeof validationErrors === 'string' && <div className="text-danger mt-2">{validationErrors}</div>}
 
         <SelectOptions
           options={options}

@@ -11,19 +11,21 @@ interface FormTextInputProps extends HTMLAttributes<HTMLInputElement> {
   toolTip?: boolean
   toolTipHTML?: string
   required?: boolean
+  validationErrors?: string
 }
 
 const FormTextInput = forwardRef<HTMLInputElement, FormTextInputProps>(
-  ({ className = '', isNumberInput, toolTip, toolTipHTML, required, label, ...props }, ref: Ref<HTMLInputElement>) => {
+  ({ className = '', isNumberInput, toolTip, toolTipHTML, required, label, validationErrors, ...props }, ref: Ref<HTMLInputElement>) => {
     return (
       <div>
         {label && <FormLabel label={label} toolTip={toolTip} required={required} toolTipHTML={toolTipHTML} />}
         <input
-          className={`flex h-12 p-3 mb-6 w-full border-medGrey border rounded-lg bg-transparent font-sans placeholder:font-sans placeholder:text-grey focus-visible:border-accent focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
-            ${className}`}
+          className={`flex h-12 p-3 mb-2 w-full border rounded-lg bg-transparent font-sans placeholder:font-sans placeholder:text-grey focus-visible:border-accent focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+           ${validationErrors ? '!border-danger' : 'border-medGrey'} ${className}`}
           ref={ref}
           {...props}
         />
+        <div className="text-danger mb-4">{validationErrors && validationErrors}</div>
       </div>
     )
   }
