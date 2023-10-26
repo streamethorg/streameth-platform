@@ -66,7 +66,7 @@ const AdminSideNav = () => {
         </div>
       </div>
 
-      <div className="flex justify-end bg-gray-200 cursor-pointer p-1" onClick={() => setIsCollapsed((prev) => !prev)}>
+      <div className="flex justify-end cursor-pointer p-1" onClick={() => setIsCollapsed((prev) => !prev)}>
         {isCollapsed ? <ArrowRightIcon width={23} /> : <ArrowLeftIcon width={23} />}
       </div>
     </div>
