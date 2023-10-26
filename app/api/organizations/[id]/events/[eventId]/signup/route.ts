@@ -22,7 +22,7 @@ export async function POST(
   const eventController = new EventController()
   const event = await eventController.getEvent(params.eventId, params.id)
 
-  if (!event.dataImporter || event.dataImporter.length === 0 || event.dataImporter[0].type !== 'gsheet') {
+  if (!event.dataImporter || event.dataImporter.length === 0 || event.dataImporter[0].type !== 'gsheet' || !event.dataImporter[0].config.sheetId) {
     // return 401
     return NextResponse.json({ error: 'Missing data importer' }, { status: 401 })
   }
