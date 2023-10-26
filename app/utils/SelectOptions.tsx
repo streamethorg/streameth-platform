@@ -16,6 +16,7 @@ interface SelectOptionsProps {
   emptyOptionsMessage: string
   handleSelectTriggerClick: () => void
   handleOptionClick: (option: Option) => void
+  dropdownPosition: string
 }
 
 const SelectOptions = forwardRef<HTMLDivElement, SelectOptionsProps>(
@@ -31,6 +32,7 @@ const SelectOptions = forwardRef<HTMLDivElement, SelectOptionsProps>(
       emptyOptionsMessage,
       handleSelectTriggerClick,
       handleOptionClick,
+      dropdownPosition,
     },
     ref
   ) => {
@@ -41,8 +43,10 @@ const SelectOptions = forwardRef<HTMLDivElement, SelectOptionsProps>(
           width: optionsWidth,
           display: isShowingOptions ? 'block' : 'none',
         }}
-        className={`absolute overflow-auto drop-shadow-md border-medGrey rounded-b-lg bg-white  border-x-1 border-b-1 z-40 ${
-          isShowingOptions ? 'rounded-tl-none' : ''
+        className={`absolute overflow-auto border-medGrey  bg-white border-x  z-40 ${
+          dropdownPosition === 'top'
+            ? 'bottom-full rounded-t-lg drop-shadow-top rounded-b-none border-t '
+            : 'drop-shadow-card rounded-b-lg rounded-t-none border-b'
         }`}>
         {options && options.length > 0 && (
           <div

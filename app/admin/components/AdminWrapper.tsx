@@ -8,7 +8,7 @@ export function AdminWrapper(props: PropsWithChildren) {
   return (
     <ClientOnly>
       <div className="p-4">
-        {!isSignedIn && <div>You need to sign in to access these pages</div>}
+        {!isSignedIn && <div className="flex items-center justify-center h-[calc(100vh-7rem)]">You need to sign in to access these pages</div>}
         {isSignedIn && props.children}
       </div>
     </ClientOnly>

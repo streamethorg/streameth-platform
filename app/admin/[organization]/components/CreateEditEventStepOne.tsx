@@ -9,6 +9,8 @@ import { apiUrl } from '@/server/utils'
 import { Button } from '@/app/utils/Button'
 import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
+import { FormSelect } from '@/app/utils/FormSelect'
+import { TIMEZONES } from '@/app/constants/timezones'
 
 interface Props {
   formData: Omit<IEvent, 'id'>
@@ -18,7 +20,7 @@ interface Props {
   onFileUpload: (e: string, key: string) => void
   handleSubmit: () => void
 }
-const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, onFileUpload, organizationId }: Props) => {
+const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, setFormData, onFileUpload, organizationId }: Props) => {
   const { openModal, closeModal } = useContext(ModalContext)
   const onImageSubmit = async (file: Blob, key: string, setLoading: React.Dispatch<SetStateAction<boolean>>) => {
     try {
@@ -132,14 +134,17 @@ const CreateEditEventStepOne = ({ handleChange, handleSubmit, formData, onFileUp
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
           value={formData.end instanceof Date ? formData.end.toISOString().split('T')[0] : formData.end}
         />
-        <FormTextInput
+        <FormSelect
           label="Timezone"
           required
           toolTip
-          name="timezone"
           placeholder="Timezone"
           value={formData.timezone}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+          options={TIMEZONES}
+          titleKey="text"
+          valueKey="value"
+          optionsHeight={300}
+          onChange={(timezone) => setFormData({ ...formData, timezone: timezone?.text })}
         />
       </div>
     </div>

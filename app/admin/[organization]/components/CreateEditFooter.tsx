@@ -56,7 +56,7 @@ const CreateEditFooter = ({ setCurrentStep, currentStep, event }: CreateEditFoot
     if (currentStep > 1) setCurrentStep(currentStep - 1)
   }
   return (
-    <div className="flex justify-between items-center gap-5 mt-5">
+    <div className="flex justify-between items-center flex-col lg:flex-row gap-5 mt-5">
       <div>
         {event && (
           <Button variant="danger" onClick={() => handleModalOpen(event)}>

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import SelectOptions from './SelectOptions'
 import FormLabel from './FormLabel'
@@ -6,8 +6,7 @@ import ArrowDownIcon from '../assets/icons/ArrowDownIcon'
 import useClickOutside from '../hooks/useClickOutside'
 
 interface Option {
-  title: string
-  value: string
+  [key: string]: any
 }
 
 interface FormSelectProps {
@@ -16,8 +15,8 @@ interface FormSelectProps {
   required?: boolean
   placeholder?: string
   value: string | Option
-  onChange?: (option: string) => void | ((option: Option) => void)
-  options: String[] | Option[]
+  onChange?: (option: Option) => void
+  options: Option[]
   customOptionTitle?: any
   titleKey?: string
   valueKey?: string
@@ -51,6 +50,7 @@ const FormSelect = ({
   toolTipHTML,
 }: FormSelectProps) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false)
+  const [dropdownPosition, setDropdownPosition] = useState('bottom')
   const optionsRef = useRef<HTMLDivElement>(null)
   const selectRef = useRef<HTMLDivElement>(null)
 
@@ -61,6 +61,19 @@ const FormSelect = ({
     onChange?.(option)
     setIsShowingOptions(false)
   }
+
+  useEffect(() => {
+    if (selectRef.current) {
+      const inputRect = selectRef.current.getBoundingClientRect()
+      const spaceBelow = window.innerHeight - inputRect.bottom
+
+      if (spaceBelow < optionsHeight && dropdownPosition === 'bottom') {
+        setDropdownPosition('top')
+      } else if (spaceBelow >= optionsHeight && dropdownPosition === 'top') {
+        setDropdownPosition('bottom')
+      }
+    }
+  }, [selectRef, optionsHeight, dropdownPosition])
 
   const getFormattedSelectedOptionTitle = (option: any) => {
     const title = customOptionTitle ? customOptionTitle(option!) : option
@@ -81,9 +94,11 @@ const FormSelect = ({
           setIsShowingOptions(true)
         }}>
         <div
-          className={`h-12 p-3 w-full border-medGrey border rounded-lg bg-transparent font-sans disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between cursor-pointer ${
-            isShowingOptions ? 'rounded-bl-none rounded-br-none' : ''
-          }`}
+          className={`${
+            isShowingOptions ? (dropdownPosition === 'top' ? 'rounded-t-none rounded-b-lg' : 'rounded-t-lg') : 'rounded-lg'
+          } h-12 p-3 w-full border-medGrey border  bg-transparent font-sans disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between cursor-pointer 
+            
+          `}
           onMouseDown={() => handleSelectTriggerClick()}>
           {getFormattedSelectedOptionTitle(value) ? (
             <span className="font-sans">{getFormattedSelectedOptionTitle(value)}</span>
@@ -105,6 +120,7 @@ const FormSelect = ({
           optionsWidth={optionsWidth}
           isShowingOptions={isShowingOptions}
           emptyOptionsMessage={emptyOptionsMessage}
+          dropdownPosition={dropdownPosition}
         />
       </div>
     </div>

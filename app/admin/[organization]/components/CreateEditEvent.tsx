@@ -38,7 +38,7 @@ const CreateEditEvent = ({ event, organizationId }: { event?: IEvent; organizati
       })
     }
   }, [event])
-
+  console.log(formData.timezone)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
 

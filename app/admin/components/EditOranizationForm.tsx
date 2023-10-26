@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { IOrganization } from '@/server/model/organization'
 import { ModalContext } from '@/components/context/ModalContext'
+import { revalidatePath } from 'next/cache'
 
 interface OrganizationFormProps {
   onSuccess?: () => void
@@ -53,6 +54,8 @@ const EditOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, onFa
         if (!response.ok) {
           throw new Error('Failed to create organisation')
         }
+
+        revalidatePath('/admin')
         return response.json()
       })
       .then((data) => {

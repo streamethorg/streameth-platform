@@ -26,7 +26,7 @@ const FormTextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
         <textarea
           className={`
-			  "flex min-h-[150px] font-sans mb-6 w-full border border-medGrey rounded-lg bg-transparent p-3 placeholder:text-grey placeholder:font-sans focus-visible:border-accent focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+			  "flex min-h-[170px] font-sans mb-6 w-full border border-medGrey rounded-lg bg-transparent p-3 placeholder:text-grey placeholder:font-sans focus-visible:border-accent focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
 			  ${className}
 			`}
           // value={value}

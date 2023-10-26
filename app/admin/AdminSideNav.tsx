@@ -1,14 +1,14 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import HomeIcon from '../assets/icons/HomeIcon'
 import EventIcon from '../assets/icons/EventIcon'
 import Image from 'next/image'
-import DocsIcon from '../assets/icons/DocsIcon'
 import { usePathname } from 'next/navigation'
 import { useAccount, useEnsName } from 'wagmi'
 import { truncateAddr } from '@/utils'
 import MediaIcon from '../assets/icons/MediaIcon'
 import makeBlockie from 'ethereum-blockies-base64'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 
 const ADMIN_MENU = [
   {
@@ -31,6 +31,7 @@ const ADMIN_MENU = [
 const AdminSideNav = () => {
   const pathname = usePathname()
   const { address, isConnected } = useAccount()
+  const [isCollapsed, setIsCollapsed] = useState(false)
   const { data } = useEnsName({
     address: isConnected ? address : ('' as `0x${string}`),
   })
@@ -40,11 +41,14 @@ const AdminSideNav = () => {
   }
 
   return (
-    <div className="min-w-[275px] sticky top-20 flex flex-col justify-between bg-background border px-4 py-5 h-[calc(100vh-7rem)] drop-shadow-card">
+    <div
+      className={`${
+        isCollapsed ? 'w-[80px] px-3' : 'min-w-[250px] px-4'
+      }  sticky top-20 flex flex-col justify-between bg-background border  py-5 h-[calc(100vh-7rem)] drop-shadow-card`}>
       <div>
         <div className="flex items-center gap-5">
           <Image src={CreateBlockie(address as string)} alt="avatar" width={52} height={52} className="rounded-full" />
-          <h2 className="text-lg font-bold">{data ?? truncateAddr(address as string) ?? 'Admin'}</h2>
+          {!isCollapsed && <h2 className="text-lg font-bold">{data ?? truncateAddr(address as string) ?? 'Admin'}</h2>}
         </div>
 
         <div className="flex flex-col gap-1 mt-5 justify-start">
@@ -53,20 +57,17 @@ const AdminSideNav = () => {
               key={id}
               href={id}
               className={`flex items-center gap-2 justify-start p-1 hover:rounded ${
-                pathname == id ? 'bg-white drop-shadow-card w-[220px] rounded' : ''
-              } hover:bg-white hover:outline-1 hover:drop-shadow-card hover:w-[220px]`}>
-              <Icon />
-              <p>{name}</p>
+                pathname == id ? `bg-white drop-shadow-card rounded ${isCollapsed ? 'w-full' : 'w-[190px]'}` : ''
+              } hover:bg-white hover:outline-1 hover:drop-shadow-card  ${isCollapsed ? 'hover:w-fit' : 'hover:w-[190px]'}`}>
+              <Icon width={isCollapsed ? '24' : '19'} height={isCollapsed ? '24' : '19'} />
+              {!isCollapsed && <p>{name}</p>}
             </Link>
           ))}
         </div>
       </div>
 
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2 justify-start p-1 hover:rounded hover:bg-white hover:outline-1 hover:drop-shadow-card hover:w-[220px]">
-          <DocsIcon />
-          <Link href="/">Docs</Link>
-        </div>
+      <div className="flex justify-end bg-gray-200 cursor-pointer p-1" onClick={() => setIsCollapsed((prev) => !prev)}>
+        {isCollapsed ? <ArrowRightIcon width={23} /> : <ArrowLeftIcon width={23} />}
       </div>
     </div>
   )

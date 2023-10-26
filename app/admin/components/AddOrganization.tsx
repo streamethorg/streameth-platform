@@ -6,11 +6,7 @@ import { Button } from '@/app/utils/Button'
 
 const AddOrganizationButton: React.FC = () => {
   const { openModal } = useContext(ModalContext)
-  return (
-    <Button variant="green" onClick={() => openModal(<CreateOrganizationModal />)}>
-      Create Organization
-    </Button>
-  )
+  return <Button onClick={() => openModal(<CreateOrganizationModal />)}>Create Organization</Button>
 }
 
 export default AddOrganizationButton
