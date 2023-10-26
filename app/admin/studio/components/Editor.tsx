@@ -112,7 +112,7 @@ export function Editor(props: Props) {
           )}
         </div>
         <div className="w-full h-full">
-          {selectedStream && selectedStream.recordingUrl && (
+          {selectedStream && selectedStream.record && (
             <VideoPlayer
               options={{
                 autoplay: true,
