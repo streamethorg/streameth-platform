@@ -128,7 +128,7 @@ const CreateEditEventStepTwo = ({ formData, setFormData, handleDataImporterChang
               toolTip
               toolTipHTML="The dataExporter will be used for our post production/processing flows to drop our generated assets into a shared Google Drive for your event"
             />
-            <FormRadioBox label="Google Drive" checked={dataExportSelectedType === 'gdrive'} onChange={() => setDataExportSelectedType('gsheet')} />
+            <FormRadioBox label="Google Drive" checked={dataExportSelectedType === 'gdrive'} onChange={() => setDataExportSelectedType('gdrive')} />
           </div>
           {dataExportSelectedType === 'gdrive' && (
             <>
