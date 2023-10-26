@@ -8,6 +8,7 @@ import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
 import { FilterContextProvider } from '../components/context/FilterContext'
 import { Metadata } from 'next'
+import Initializer from './Initializer'
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
@@ -20,7 +21,11 @@ const heebo = Heebo({
   variable: '--font-heebo',
 })
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
       <body className={`${heebo.variable} font-sans`}>
@@ -32,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <FilterContextProvider>
                     <TopNavbarContextProvider>
                       <Navbar />
-                      {children}
+                      <Initializer>{children}</Initializer>
                     </TopNavbarContextProvider>
                   </FilterContextProvider>
                 </div>
