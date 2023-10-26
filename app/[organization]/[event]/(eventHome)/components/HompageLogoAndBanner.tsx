@@ -4,18 +4,11 @@ import Image from 'next/image'
 const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   const { logo, banner } = event
 
+  if (!logo && !banner) return null
+
   return (
-    <div className="relative w-full">
-      <div className="relative">
-        <Image src={'/events/' + banner} alt="Event Cover" width={1500} height={500} className="w-full object-cover" />
-        <Image
-          src={'/events/' + logo}
-          alt="Event Logo"
-          width={128}
-          height={128}
-          className="absolute bottom-0 translate-y-1/2 translate-x-3 lg:translate-x-1/2 w-24 h-24 lg:w-32 lg:h-32 object-cover bg-white"
-        />
-      </div>
+    <div className="relative w-full z-[1]">
+      <Image src={'/events/' + banner} alt="Event Cover" width={1500} height={500} />
     </div>
   )
 }

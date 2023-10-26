@@ -2,95 +2,55 @@
 import React, { useState, createContext, ReactNode, useEffect } from 'react'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
-
+import { ISession } from '@/server/model/session'
+import { isSameDay } from '@/utils/time'
 interface ScheduleContextProps {
   setDate: React.Dispatch<React.SetStateAction<number>>
   date: number
-  stages: IStage[]
-  setStages: any
+  stage: IStage['id']
+  setStage: React.Dispatch<React.SetStateAction<IStage['id']>>
   event?: IEvent
-  schedulePosition: ISchedulePosition
-  setSchedulePositions: any
-}
-
-interface ISchedulePosition {
-  min: number
-  max: number
-  totalSlots: number
+  sessions: ISession[]
 }
 
 const ScheduleContext = createContext<ScheduleContextProps>({
   setDate: () => {},
   date: 0,
-  setStages: () => {},
-  stages: [],
-  schedulePosition: { min: 0, max: 0, totalSlots: 0 },
-  setSchedulePositions: () => {},
+  setStage: () => {},
+  stage: '',
+  sessions: [],
+  event: undefined,
 })
 
 interface ScheduleContextProviderProps {
   event: IEvent
-  days: number[]
-  stages: IStage[]
+  stage: IStage
   children: ReactNode
+  sessions: ISession[]
 }
 
 const ScheduleContextProvider: React.FC<ScheduleContextProviderProps> = (props) => {
   const [date, setDate] = useState<number>(props.event.start.getTime())
-  const [stages, setStages] = useState<IStage[]>(props.stages)
-  const [schedulePositions, setSchedulePositions] = useState<ISchedulePosition[]>([])
-  const [schedulePosition, setSchedulePosition] = useState<ISchedulePosition>({ min: 0, max: 0, totalSlots: 0 })
+  const [stage, setStage] = useState<IStage['id']>('')
+  const [sessions, setSessions] = useState<ISession[]>([])
 
   useEffect(() => {
-    setSchedulePositions([])
-  }, [date, stages])
-
-  useEffect(() => {
-    if (!schedulePositions.length) return
-    setSchedulePosition({ ...minMaxMaxTotalslots() })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schedulePositions])
-
-  const updateEarliestTimes = (data: ISchedulePosition) => {
-    setSchedulePositions((schedulePositions) => [...schedulePositions, data])
-  }
-
-  const minMaxMaxTotalslots = () => {
-    if (!schedulePositions.length) {
-      return { min: 0, max: 0, totalSlots: 0 }
-    }
-
-    let returnObj = {
-      min: schedulePositions[0].min,
-      max: schedulePositions[0].max,
-      totalSlots: schedulePositions[0].totalSlots,
-    }
-
-    for (let i = 0; i < schedulePositions.length; i++) {
-      if (schedulePositions[i].min < returnObj.min) {
-        returnObj.min = schedulePositions[i].min
-      }
-      if (schedulePositions[i].max > returnObj.max) {
-        returnObj.max = schedulePositions[i].max
-      }
-      if (schedulePositions[i].totalSlots > returnObj.totalSlots) {
-        returnObj.totalSlots = schedulePositions[i].totalSlots
-      }
-    }
-
-    return returnObj
-  }
+    setSessions(
+      props.sessions.filter((session) => {
+        return session.stageId === stage && isSameDay(session.start, date)
+      })
+    )
+  }, [date, stage])
 
   return (
     <ScheduleContext.Provider
       value={{
         setDate,
         date,
-        setStages,
-        stages,
+        setStage,
+        stage,
         event: props.event,
-        schedulePosition,
-        setSchedulePositions: updateEarliestTimes,
+        sessions,
       }}>
       {props.children}
     </ScheduleContext.Provider>

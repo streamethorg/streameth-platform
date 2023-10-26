@@ -1,9 +1,20 @@
+'use client'
+import SpeakerModal from './SpeakerModal'
+import { ModalContext } from '@/components/context/ModalContext'
+import { useContext } from 'react'
+
 import { ISpeaker } from '@/server/model/speaker'
+import { ISession } from '@/server/model/session'
 import SpeakerPhoto from './SpeakerPhoto'
 
-const SpeakerCard = ({ speaker, onClick }: { speaker: ISpeaker; onClick: () => void }) => {
+const SpeakerCard = ({ speaker, sessions }: { speaker: ISpeaker; sessions: ISession[] }) => {
+  const { openModal } = useContext(ModalContext)
+  const speakerSessions = sessions.filter((session) => session.speakers.some((sessionSpeaker) => sessionSpeaker.id === speaker.id))
+
   return (
-    <div onClick={onClick}>
+    <div
+      onClick={() => openModal(<SpeakerModal speaker={speaker} sessions={speakerSessions} />)}
+      className="flex flex-col items-center cursor-pointer">
       <div className="border-1 shadow rounded-xl w-32 lg:w-44 mx-auto">
         <SpeakerPhoto speaker={speaker} size="lg" />
       </div>

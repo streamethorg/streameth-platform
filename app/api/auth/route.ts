@@ -65,8 +65,7 @@ export const POST = async (req: NextRequest) => {
 export const DELETE = async (req: NextRequest) => {
   const session = await Session.fromRequest(req)
   if (!session) {
-    return NextResponse
+    return new NextResponse('', { status: 401 })
   }
-
   return tap(new NextResponse(''), (res) => session!.clear(res))
 }
