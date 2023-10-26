@@ -1,4 +1,6 @@
-import { fontFamily } from '../consts'
+import { loadFont } from '@remotion/google-fonts/Vollkorn'
+
+const { fontFamily } = loadFont()
 
 function Text({
   text,

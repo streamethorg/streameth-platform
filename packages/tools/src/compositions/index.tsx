@@ -1,204 +1,104 @@
 import { Composition, Folder, Still } from 'remotion'
-import Session from './session'
-import { ISession as SessionType } from '../types'
-import { G_FPS, G_DURATION } from '../consts'
-import CURRENT_SESSION from '../../public/json/sessions.json'
-import { DevconnectIST, DevconnectISTStill } from './devconnect.tsx/ist'
-import { CreateAvatar } from '../utils/avatars'
-
-const sessions: SessionType[] = CURRENT_SESSION.map((session) => {
-  return {
-    ...session,
-    start: new Date(session.start),
-    end: new Date(session.end),
-  }
-})
-
-const defaultProps = {
-  type: '5',
-  session: {
-    name: "Buidl the Buidlers: How You Can Create the Next Generation of Web3 Contributors",
-    start: 1694248200000,
-    end: 1694249400000,
-    speakers: [
-      {
-        id: "sarah",
-        name: "Sarah Noon",
-        photo: "https://xsgames.co/randomusers/assets/avatars/female/36.jpg"
-      },
-      {
-        id: "arthur",
-        name: "Arthur Pitt Neumann",
-        photo: "https://xsgames.co/randomusers/assets/avatars/pixel/34.jpg"
-      },
-      {
-        id: "flynn",
-        name: "James Flynn",
-        photo: CreateAvatar("flynn")
-      },
-      {
-        id: "george",
-        name: "George Bass",
-        photo: "https://xsgames.co/randomusers/assets/avatars/pixel/0.jpg"
-      },
-      {
-        id: "chidiebere",
-        name: "Chidiebere Emery",
-        photo: "https://xsgames.co/randomusers/assets/avatars/female/39.jpg"
-      },
-      {
-        id: "maria",
-        name: "Maria Nelson Luca de Witt",
-        photo: CreateAvatar("Maria Nelson")
-      },
-      {
-        id: "griff",
-        name: "Griff Yellow",
-        photo: CreateAvatar("yellow")
-      },
-      {
-        id: "andy",
-        name: "Andy Nielson",
-        photo: "https://xsgames.co/randomusers/assets/avatars/male/66.jpg"
-      },
-    ],
-  }
-}
+import Session from './ftc/session'
+import { G_FPS } from '../consts'
+import { Intro } from './devconnect/intro'
+import { Social } from './devconnect/social'
+import { MOCK_SESSION } from '../utils/mocks'
 
 export const DevconnectISTDuration = 12 * G_FPS
+export const FtcDuration = 170
 
 export function Compositions() {
   return (
     <>
       <Folder name="Devconnect">
         <Composition
-          id="devconnect-ist-1"
-          component={DevconnectIST}
+          id="evm-summit"
+          component={Intro}
           width={1920}
           height={1080}
           durationInFrames={DevconnectISTDuration}
           fps={G_FPS}
-          defaultProps={{
-            ...defaultProps,
-            type: '1',
-            session: {
-              ...defaultProps.session,
-              name: 'Buidl the Buidlers',
-              speakers: defaultProps.session.speakers.slice(0, 1)
-            }
-          }}
+          defaultProps={{ type: '1', logo: 'evm-summit', session: MOCK_SESSION[0] }}
         />
+        <Still id="evm-summit-social" component={Social} width={1200} height={630} defaultProps={{
+          type: '1',
+          logo: 'evm-summit',
+          session: MOCK_SESSION[0]
+        }} />
+
         <Composition
           id="devconnect-ist-2"
-          component={DevconnectIST}
+          component={Intro}
           width={1920}
           height={1080}
           durationInFrames={DevconnectISTDuration}
           fps={G_FPS}
-          defaultProps={{
-            ...defaultProps,
-            type: '2',
-            session: {
-              ...defaultProps.session,
-              name: 'How You Can Create the Next Generation of Web3 Contributors',
-              speakers: defaultProps.session.speakers.slice(0, 4)
-            }
-          }}
+          defaultProps={{ type: '2', session: MOCK_SESSION[1] }}
         />
+        <Still id="devconnect-ist-social-2" component={Social} width={1200} height={630} defaultProps={{
+          type: '2',
+          session: MOCK_SESSION[1]
+        }} />
+
         <Composition
           id="devconnect-ist-3"
-          component={DevconnectIST}
+          component={Intro}
           width={1920}
           height={1080}
           durationInFrames={DevconnectISTDuration}
           fps={G_FPS}
-          defaultProps={{
-            ...defaultProps,
-            type: '3',
-            session: {
-              ...defaultProps.session,
-              name: 'Buidl the Buidlers: How You Can Create the Next Generation of Web3 Contributors through Education, Peer Review, and Professional Development'
-            }
-          }}
+          defaultProps={{ type: '3', session: MOCK_SESSION[2] }}
         />
+
         <Composition
           id="devconnect-ist-4"
-          component={DevconnectIST}
+          component={Intro}
           width={1920}
           height={1080}
           durationInFrames={DevconnectISTDuration}
           fps={G_FPS}
-          defaultProps={{
-            ...defaultProps,
-            type: '4',
-            session: {
-              ...defaultProps.session,
-              name: 'Buidl the Buidlers: How You Can Create the Next Generation of Web3 Contributors'
-            }
-          }}
+          defaultProps={{ type: '4', session: MOCK_SESSION[3] }}
         />
+        
         <Composition
           id="devconnect-ist-5"
-          component={DevconnectIST}
+          component={Intro}
           width={1920}
           height={1080}
           durationInFrames={DevconnectISTDuration}
           fps={G_FPS}
-          defaultProps={{
-            ...defaultProps,
-            type: '5',
-            session: {
-              ...defaultProps.session,
-              speakers: defaultProps.session.speakers.slice(0, 3)
-            }
-          }}
+          defaultProps={{ type: '5', session: MOCK_SESSION[0] }}
         />
         <Composition
           id="devconnect-ist-6"
-          component={DevconnectIST}
+          component={Intro}
           width={1920}
           height={1080}
           durationInFrames={DevconnectISTDuration}
           fps={G_FPS}
-          defaultProps={{
-            ...defaultProps,
-            type: '6',
-            session: {
-              ...defaultProps.session,
-              speakers: defaultProps.session.speakers.slice(0, 3)
-            }
-          }}
+          defaultProps={{ type: '6', session: MOCK_SESSION[1] }}
         />
         <Composition
           id="devconnect-ist-7"
-          component={DevconnectIST}
+          component={Intro}
           width={1920}
           height={1080}
           durationInFrames={DevconnectISTDuration}
           fps={G_FPS}
-          defaultProps={{
-            ...defaultProps,
-            type: '7',
-            session: {
-              ...defaultProps.session,
-              speakers: defaultProps.session.speakers.slice(0, 3)
-            }
-          }}
+          defaultProps={{ type: '7', session: MOCK_SESSION[2] }}
         />
-
-        <Still id="devconnect-ist-still" component={DevconnectISTStill} width={1920} height={1080} defaultProps={defaultProps} />
-        <Still id="devconnect-ist-still-social" component={DevconnectISTStill} width={1200} height={630} defaultProps={defaultProps} />
       </Folder>
 
       <Folder name="Ftc">
         <Composition
-          id={sessions[0].id.replace(/_/g, '-')}
+          id={MOCK_SESSION[0].id.replace(/_/g, '-')}
           component={Session}
           width={1920}
           height={1080}
-          durationInFrames={G_DURATION}
+          durationInFrames={FtcDuration}
           fps={G_FPS}
-          defaultProps={{ session: sessions[0] }}
+          defaultProps={{ session: MOCK_SESSION[0] }}
         />
       </Folder>
     </>
