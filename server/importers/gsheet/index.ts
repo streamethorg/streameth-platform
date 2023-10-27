@@ -1,50 +1,43 @@
 import BaseImporter from '../baseImporter'
-import { google } from 'googleapis'
 import Event, { IDataImporter } from '../../model/event'
 import { generateId } from '../../utils'
 import moment from 'moment-timezone'
+import GoogleSheetService from '../../services/googleSheet/index'
 
 const SPEAKER_SHEET = 'Speakers'
 const SPEAKER_DATA_RANGE = 'A3:E'
 const STAGE_SHEET = 'Stages'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
-const SESSION_DATA_RANGE = 'A3:L'
+const SESSION_DATA_RANGE = 'A3:M'
 
 export default class Importer extends BaseImporter {
-  sheetId: string
-  apiKey: string
-  connection: any
+  googleSheetService: GoogleSheetService
 
-  constructor({ importer, event }: { importer: IDataImporter; event: Event }) {
+  constructor({
+    importer,
+    event,
+  }: {
+    importer: IDataImporter
+    event: Event
+  }) {
     super(event)
-    if (importer.type !== 'gsheet') throw new Error('Invalid importer type for gsheet module')
-    if (!importer.config.sheetId) throw new Error('Sheet ID is missing for gsheet module')
-    // if (!process.env.GOOGLE_API_KEY) throw new Error("Environment variable 'GOOGLE_API_KEY' is missing")
-
-    this.sheetId = importer.config.sheetId
-    this.apiKey = 'AIzaSyChBCoGLIXhlMxY3eI9gJMpYujvFN90v6w'
-    this.connection = this.connectToGoogleSheets()
+    if (importer.type !== 'gsheet')
+      throw new Error('Invalid importer type for gsheet module')
+    if (!importer.config.sheetId)
+      throw new Error('Sheet ID is missing for gsheet module')
+    if (!process.env.GOOGLE_API_KEY)
+      throw new Error('API key is missing for gsheet module')
+    this.googleSheetService = new GoogleSheetService(
+      importer.config.sheetId
+    )
   }
 
-  private connectToGoogleSheets() {
-    return google.sheets({
-      version: 'v4',
-      auth: this.apiKey,
-    })
-  }
-
-  private async getDataForRange(sheetName: string, range: string): Promise<any[]> {
-    const response = await this.connection.spreadsheets.values.get({
-      spreadsheetId: this.sheetId,
-      range: `${sheetName}!${range}`,
-    })
-
-    return response.data.values || []
-  }
-
-  public override async generateSpeakers(): Promise<void> {
-    const data = await this.getDataForRange(SPEAKER_SHEET, SPEAKER_DATA_RANGE)
+  async generateSpeakers(): Promise<void> {
+    const data = await this.googleSheetService.getDataForRange(
+      SPEAKER_SHEET,
+      SPEAKER_DATA_RANGE
+    )
     for (const row of data) {
       const [name, description, twitterHandle, avatar] = row
       const speaker = {
@@ -63,10 +56,13 @@ export default class Importer extends BaseImporter {
     }
   }
 
-  public override async generateStages(): Promise<void> {
-    const data = await this.getDataForRange(STAGE_SHEET, STAGE_DATA_RANGE)
+  async generateStages(): Promise<void> {
+    const data = await this.googleSheetService.getDataForRange(
+      STAGE_SHEET,
+      STAGE_DATA_RANGE
+    )
     for (const row of data) {
-      const [name, streamId, image] = row
+      const [name, streamId] = row
       const stage = {
         name,
         eventId: this.event.id,
@@ -83,18 +79,42 @@ export default class Importer extends BaseImporter {
     }
   }
 
-  public override async generateSessions(): Promise<void> {
-    await Promise.all([this.generateStages(), this.generateSpeakers()])
+  async generateSessions(): Promise<void> {
+    await Promise.all([
+      this.generateStages(),
+      this.generateSpeakers(),
+    ])
 
-    const data = await this.getDataForRange(SESSION_SHEET, SESSION_DATA_RANGE)
-
+    const data = await this.googleSheetService.getDataForRange(
+      SESSION_SHEET,
+      SESSION_DATA_RANGE
+    )
     for (const row of data) {
       try {
-        const [Name, Description, stageId, Day, Start, End, ...speakerIdsRaw] = row.slice(0, 11)
+        const [
+          Name,
+          Description,
+          stageId,
+          Day,
+          Start,
+          End,
+          ...speakerIdsRaw
+        ] = row.slice(0, 11)
         const speakerPromises = speakerIdsRaw
           .filter(Boolean)
-          .map((speakerId: string) => this.speakerController.getSpeaker(generateId(speakerId), this.event.id))
-        const [speakers, stage] = await Promise.all([Promise.all(speakerPromises), this.stageController.getStage(generateId(stageId), this.event.id)])
+          .map((speakerId: string) =>
+            this.speakerController.getSpeaker(
+              generateId(speakerId),
+              this.event.id
+            )
+          )
+        const [speakers, stage] = await Promise.all([
+          Promise.all(speakerPromises),
+          this.stageController.getStage(
+            generateId(stageId),
+            this.event.id
+          ),
+        ])
 
         const session = {
           name: Name,
@@ -103,9 +123,13 @@ export default class Importer extends BaseImporter {
           eventId: this.event.id,
           organizationId: this.event.organizationId,
           speakers: speakers,
-          start: moment.tz(`${Day} ${Start}:00`, this.event.timezone).valueOf(),
-          end: moment.tz(`${Day} ${End}:00`, this.event.timezone).valueOf(),
-          videoUrl: row[11],
+          start: moment
+            .tz(`${Day} ${Start}:00`, this.event.timezone)
+            .valueOf(),
+          end: moment
+            .tz(`${Day} ${End}:00`, this.event.timezone)
+            .valueOf(),
+          videoUrl: row[12],
         }
 
         await this.sessionController.createSession(session)

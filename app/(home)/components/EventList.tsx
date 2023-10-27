@@ -9,6 +9,7 @@ const EventList = ({ events }: { events: IEvent[] }) => {
 
   useEffect(() => {
     setItems(events)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events])
 
   return (

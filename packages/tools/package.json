@@ -14,6 +14,7 @@
     "server:build": "tsc",
     "server:dev": "nodemon ./src/server.ts",
     "server:start": "node ./dist/server.js",
+    "run:generate": "ts-node ./src/scripts/generate.ts",
     "run:process": "ts-node ./src/scripts/process.ts",
     "run:xvfb": "xvfb-run -e /dev/stdout -s '-ac -screen 0 1920x1080x24' ts-node ./src/scripts/process.ts ",
     "run:split": "ts-node ./src/scripts/split.ts",

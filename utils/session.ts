@@ -22,6 +22,7 @@ export const WHITELISTED_ADDRESSES = [
   '0x8dE7D6eD323e67923Bed1376d6fA2525F10Bb121', // Xander
   '0xCa2ea165feDC31bCc290153e2b3000979695e018', // filipo
   '0x9268d03EfF4A9A595ef619764AFCB9976c0375df', // Samuel
+  '0x98a8F0E12E509aEFfb52eb30a60784593d7927ae', // carlota
 ]
 
 export type ISession = {

@@ -10,7 +10,9 @@ export async function GET(
 ) {
   const stageController = new StageController()
   try {
-    const data = await stageController.getAllStagesForEvent(params.eventId)
+    const data = await stageController.getAllStagesForEvent(
+      params.eventId
+    )
     return NextResponse.json(data)
   } catch (e) {
     console.log(e)

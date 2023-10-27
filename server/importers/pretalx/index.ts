@@ -7,10 +7,18 @@ import moment from 'moment-timezone'
 export default class PretalxImporter extends BaseImporter {
   apiUrl: string
 
-  constructor({ importer, event }: { importer: IDataImporter; event: Event }) {
+  constructor({
+    importer,
+    event,
+  }: {
+    importer: IDataImporter
+    event: Event
+  }) {
     super(event)
-    if (importer.type !== 'pretalx') throw new Error('Invalid importer type for gsheet module')
-    if (!importer.config.url) throw new Error('No valid sheetId set for gsheet module')
+    if (importer.type !== 'pretalx')
+      throw new Error('Invalid importer type for gsheet module')
+    if (!importer.config.url)
+      throw new Error('No valid sheetId set for gsheet module')
     this.apiUrl = importer.config.url
   }
 
@@ -88,7 +96,10 @@ export default class PretalxImporter extends BaseImporter {
   }
 
   async generateSessions(): Promise<void> {
-    await Promise.all([this.generateStages(), this.generateSpeakers()])
+    await Promise.all([
+      this.generateStages(),
+      this.generateSpeakers(),
+    ])
 
     let request = await fetch(`${this.apiUrl}/talks/`)
     if (!request.ok) {
@@ -108,13 +119,20 @@ export default class PretalxImporter extends BaseImporter {
 
     sessions.forEach(async (session: any) => {
       const speakers = session.speakers.map(async (speaker: any) => {
-        return await this.speakerController.getSpeaker(generateId(speaker.name), this.event.id)
+        return await this.speakerController.getSpeaker(
+          generateId(speaker.name),
+          this.event.id
+        )
       })
       const newSession = {
         name: session.title,
         description: session.abstract,
-        start: moment.tz(new Date(session.slot.start), this.event.timezone).valueOf(),
-        end: moment.tz(new Date(session.slot.end), this.event.timezone).valueOf(),
+        start: moment
+          .tz(new Date(session.slot.start), this.event.timezone)
+          .valueOf(),
+        end: moment
+          .tz(new Date(session.slot.end), this.event.timezone)
+          .valueOf(),
         eventId: this.event.id,
         speakers: await Promise.all(speakers),
         stageId: generateId(session.slot.room.en),

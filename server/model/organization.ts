@@ -31,7 +31,13 @@ export default class Organization {
   @IsNotEmpty()
   location: string
 
-  constructor({ name, description, url, logo, location }: Omit<IOrganization, 'id'> & { id?: string }) {
+  constructor({
+    name,
+    description,
+    url,
+    logo,
+    location,
+  }: Omit<IOrganization, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
     this.description = description

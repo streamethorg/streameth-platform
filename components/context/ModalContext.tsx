@@ -1,5 +1,5 @@
 'use client'
-import { useState, createContext, useEffect } from 'react'
+import { useState, createContext } from 'react'
 import Modal from '@/components/Layout/Modal'
 
 const ModalContext = createContext<{
@@ -12,7 +12,11 @@ const ModalContext = createContext<{
   closeModal: () => {},
 })
 
-const ModalContextProvider = ({ children }: { children: React.ReactNode }) => {
+const ModalContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   const [modal, setModal] = useState<React.ReactNode | null>(null)
 
   const openModal = (modal: React.ReactNode) => {

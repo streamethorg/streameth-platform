@@ -1,10 +1,10 @@
-import Navbar from '@/components/Layout/Navbar'
 import EventController from '@/server/controller/event'
 import StageController from '@/server/controller/stage'
-import { HomeIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
+import speakerController from '@/server/controller/speaker'
 import ColorComponent from '../../utils/ColorComponent'
+
 export async function generateStaticParams() {
   const eventController = new EventController()
   const allEvents = await eventController.getAllEvents({})
@@ -27,54 +27,34 @@ const Layout = async ({
 }) => {
   const stageController = new StageController()
   const eventController = new EventController()
-  const sessionController = new SessionController()
-  const event = await eventController.getEvent(params.event, params.organization)
-  const stages = await stageController.getAllStagesForEvent(params.event)
-  const sessions = await sessionController.getAllSessions({
+  const event = await eventController.getEvent(
+    params.event,
+    params.organization
+  )
+  const stages = await stageController.getAllStagesForEvent(
+    params.event
+  )
+  const sessions = await new SessionController().getAllSessions({
     eventId: params.event,
   })
+  const speakers =
+    await new speakerController().getAllSpeakersForEvent(params.event)
 
   if (!event) {
     return notFound()
   }
 
-  const pages = [
-    {
-      href: `/${params.organization}/${params.event}`,
-      name: 'Home',
-      icon: <HomeIcon />,
-    },
-    {
-      href: `/${params.organization}/${params.event}/schedule`,
-      name: 'Schedule',
-      icon: <CalendarIcon />,
-    },
-    {
-      href: `/${params.organization}/${params.event}/speakers`,
-      name: 'Speakers',
-      icon: <UserGroupIcon />,
-    },
-  ]
-
-  const stagePages = () => {
-    let pages = []
-    for (const stage of stages) {
-      if (stage.streamSettings.streamId) {
-        pages.push({
-          href: `/${params.organization}/${stage.eventId}/stage/${stage.id}`,
-          name: stage.name,
-          icon: <ViewColumnsIcon />,
-        })
-      }
-    }
-    return pages
-  }
-
   return (
-    <div className="flex flex-col md:flex-row overflow-hidden h-full">
-      <Navbar event={event.toJson()} pages={pages} stages={stagePages()} archiveMode={event.archiveMode} />
-      <main className={`flex w-full overflow-scroll ${event.archiveMode ? ' lg:w-full ' : 'lg:w-[calc(100%-5rem)] '} ml-auto bg-background`}>
-        <ColorComponent accentColor={event.accentColor}>{children}</ColorComponent>
+    <div className="flex flex-col overflow-hidden h-full z-1">
+      <main
+        className={`flex w-full overflow-scroll  ml-auto bg-background`}>
+        <ColorComponent
+          event={event.toJson()}
+          stages={stages.map((stage) => stage.toJson())}
+          speakers={speakers.map((speaker) => speaker.toJson())}
+          sessions={sessions.map((session) => session.toJson())}>
+          {children}
+        </ColorComponent>
       </main>
     </div>
   )

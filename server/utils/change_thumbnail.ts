@@ -27,14 +27,20 @@ fs.readdir(directoryPath, (err, files) => {
               }
 
               let jsonData = JSON.parse(data)
-              jsonData.coverImage = '/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg'
+              jsonData.coverImage =
+                '/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg'
 
-              fs.writeFile(jsonPath, JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
-                if (err) {
-                  return console.log('Unable to write file:', err)
+              fs.writeFile(
+                jsonPath,
+                JSON.stringify(jsonData, null, 2),
+                'utf8',
+                (err) => {
+                  if (err) {
+                    return console.log('Unable to write file:', err)
+                  }
+                  console.log(`Updated coverImage in ${jsonFile}`)
                 }
-                console.log(`Updated coverImage in ${jsonFile}`)
-              })
+              )
             })
           }
         })

@@ -37,7 +37,13 @@ export default class Stage implements IStage {
 
   order?: number
 
-  constructor({ name, eventId, streamSettings, plugins, order }: Omit<IStage, 'id'> & { id?: string }) {
+  constructor({
+    name,
+    eventId,
+    streamSettings,
+    plugins,
+    order,
+  }: Omit<IStage, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
     this.eventId = eventId
@@ -59,15 +65,24 @@ export default class Stage implements IStage {
   }
 
   static async fromJson(jsonData: string | Omit<IStage, 'id'>) {
-    const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
+    const data =
+      typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
     const stage = new Stage({ ...data })
     await stage.validateThis()
     return stage
   }
 
-  static async getStagePath(eventId: IStage['eventId'], stageId?: IStage['id']): Promise<string> {
+  static async getStagePath(
+    eventId: IStage['eventId'],
+    stageId?: IStage['id']
+  ): Promise<string> {
     if (stageId) {
-      return path.join(BASE_PATH, 'stages', eventId, `${stageId}.json`)
+      return path.join(
+        BASE_PATH,
+        'stages',
+        eventId,
+        `${stageId}.json`
+      )
     }
     return path.join(BASE_PATH, 'stages', eventId)
   }

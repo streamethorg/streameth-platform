@@ -9,7 +9,9 @@ import { useRouter } from 'next/navigation'
 import { hasData } from '@/server/utils'
 
 const EventCard = ({ event }: { event: IEvent }) => {
-  const imageUrl = event.eventCover ? event.eventCover : event.id + '.png'
+  const imageUrl = event.eventCover
+    ? event.eventCover
+    : event.id + '.png'
   const [image, setImage] = useState('/events/' + imageUrl)
   const { openModal } = useContext(ModalContext)
   const router = useRouter()
@@ -21,15 +23,22 @@ const EventCard = ({ event }: { event: IEvent }) => {
     } else {
       openModal(
         <div className="flex flex-col items-center">
-          <h1 className="text-2xl text-main-text font-bold">This event has no data yet</h1>
-          <p className="text-secondary-text text-center">This event has no data. Please contact the event organizer to request access.</p>
+          <h1 className="text-2xl text-main-text font-bold">
+            This event has no data yet
+          </h1>
+          <p className="text-secondary-text text-center">
+            This event has no data. Please contact the event organizer
+            to request access.
+          </p>
         </div>
       )
     }
   }
 
   return (
-    <a onClick={onCardClick} className="cursor-pointer hover:bg-gray-50 transition-all">
+    <a
+      onClick={onCardClick}
+      className="cursor-pointer hover:bg-gray-50 transition-all">
       <Card isAvailable={isAvailable}>
         <div className="aspect-video relative">
           <Image
@@ -54,7 +63,8 @@ const EventCard = ({ event }: { event: IEvent }) => {
         <div className=" p-2 flex flex-col" title={event.name}>
           <p className=" text-md my-2 truncate">{event.name}</p>
           <p className="text-md text-secondary-text">
-            {event.start.toDateString?.()} - {event.end.toDateString?.()}
+            {event.start.toDateString?.()} -{' '}
+            {event.end.toDateString?.()}
           </p>
         </div>
       </Card>

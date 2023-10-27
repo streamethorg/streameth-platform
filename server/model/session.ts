@@ -96,7 +96,9 @@ export default class Session implements ISession {
     this.playbackId = this.getPlaybackId()
     this.eventId = eventId
     this.track = track
-    this.coverImage = coverImage ?? '/sessions/' + this.eventId + '/' + this.id + '.jpg'
+    this.coverImage =
+      coverImage ??
+      '/sessions/' + this.eventId + '/' + this.id + '.jpg'
     this.validateThis()
   }
 
@@ -140,7 +142,8 @@ export default class Session implements ISession {
   }
 
   static async fromJson(jsonData: string | Promise<Session>) {
-    const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
+    const data =
+      typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
     const session = new Session({
       ...data,
     })
@@ -148,18 +151,36 @@ export default class Session implements ISession {
     return session
   }
 
-  static async getSessionPath(eventId: ISession['eventId'], sessionId?: ISession['id']): Promise<string> {
+  static async getSessionPath(
+    eventId: ISession['eventId'],
+    sessionId?: ISession['id']
+  ): Promise<string> {
     if (sessionId) {
-      return path.join(BASE_PATH, 'sessions', eventId, `${sessionId}.json`)
+      return path.join(
+        BASE_PATH,
+        'sessions',
+        eventId,
+        `${sessionId}.json`
+      )
     }
     return path.join(BASE_PATH, 'sessions', eventId)
   }
 
-  static async getSessionImagePath(eventId: ISession['eventId'], sessionId: ISession['id']): Promise<string> {
-    return path.join(PUBLIC_PATH, 'sessions', eventId, `${sessionId}.jpg`)
+  static async getSessionImagePath(
+    eventId: ISession['eventId'],
+    sessionId: ISession['id']
+  ): Promise<string> {
+    return path.join(
+      PUBLIC_PATH,
+      'sessions',
+      eventId,
+      `${sessionId}.jpg`
+    )
   }
 
-  static async getSessionImageDirectory(eventId: ISession['eventId']) {
+  static async getSessionImageDirectory(
+    eventId: ISession['eventId']
+  ) {
     return path.join(PUBLIC_PATH, 'sessions', eventId)
   }
 }

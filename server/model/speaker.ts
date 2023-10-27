@@ -1,4 +1,9 @@
-import { IsNotEmpty, IsUrl, IsOptional, validate } from 'class-validator'
+import {
+  IsNotEmpty,
+  IsUrl,
+  IsOptional,
+  validate,
+} from 'class-validator'
 import { IEvent } from './event'
 import { generateId, BASE_PATH } from '../utils'
 import path from 'path'
@@ -45,7 +50,16 @@ export default class Speaker implements ISpeaker {
   @IsOptional()
   company?: string
 
-  constructor({ name, bio, eventId, twitter, github, website, photo, company }: Omit<ISpeaker, 'id'> & { id?: string }) {
+  constructor({
+    name,
+    bio,
+    eventId,
+    twitter,
+    github,
+    website,
+    photo,
+    company,
+  }: Omit<ISpeaker, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
     this.bio = bio
@@ -70,15 +84,24 @@ export default class Speaker implements ISpeaker {
   }
 
   static async fromJson(jsonData: string | Omit<ISpeaker, 'id'>) {
-    const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
+    const data =
+      typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
     const speaker = new Speaker({ ...data })
     await speaker.validateThis()
     return speaker
   }
 
-  static async getSpeakerPath(eventId: ISpeaker['eventId'], speakerId?: ISpeaker['id']): Promise<string> {
+  static async getSpeakerPath(
+    eventId: ISpeaker['eventId'],
+    speakerId?: ISpeaker['id']
+  ): Promise<string> {
     if (speakerId) {
-      return path.join(BASE_PATH, 'speakers', eventId, `${speakerId}.json`)
+      return path.join(
+        BASE_PATH,
+        'speakers',
+        eventId,
+        `${speakerId}.json`
+      )
     }
     return path.join(BASE_PATH, 'speakers', eventId)
   }

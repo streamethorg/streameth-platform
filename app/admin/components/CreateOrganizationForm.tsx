@@ -10,7 +10,11 @@ interface OrganizationFormProps {
   organization?: IOrganization
 }
 
-const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, onFailure, organization }) => {
+const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({
+  onSuccess,
+  onFailure,
+  organization,
+}) => {
   const { closeModal } = useContext(ModalContext)
 
   const [formData, setFormData] = useState({
@@ -65,7 +69,9 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
 
   return (
     <>
-      <h1 className="font-bold text-center mb-3">Add an organization. All inputs are required</h1>
+      <h1 className="font-bold text-center mb-3">
+        Add an organization. All inputs are required
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block text-sm font-medium text-gray-700">
           Name
@@ -127,7 +133,10 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({ onSuccess, on
             required
           />
         </label>
-        <button type="submit" className="p-2 bg-blue-500 text-white rounded" disabled={submitting}>
+        <button
+          type="submit"
+          className="p-2 bg-blue-500 text-white rounded"
+          disabled={submitting}>
           {submitting ? 'Submitting...' : 'Submit'}
         </button>
       </form>

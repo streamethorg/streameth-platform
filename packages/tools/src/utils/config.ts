@@ -18,7 +18,7 @@ export const CONFIG = {
   GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
   LIVEPEER_API_KEY: process.env.NEXT_PUBLIC_STUDIO_API_KEY,
 
-  GOOGLE_DRIVE_ID: process.env.GOOGLE_DRIVE_ID || '1q6hzRnxuwI-KSNRknHbFJkGrohqNbK-V',
+  GOOGLE_DRIVE_ID: process.env.GOOGLE_DRIVE_ID || '0AH0WRrJ3rWdMUk9PVA',
 }
 
 export const GOOGLE_SA_CREDENTIALS = {
