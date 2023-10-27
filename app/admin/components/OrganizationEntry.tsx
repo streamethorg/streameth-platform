@@ -58,7 +58,7 @@ const OrganizationEntry: React.FC<OrganizationEntryProps> = ({
   }
 
   return (
-    <li className="shadow p-4 flex flex-col rounded bg-background">
+    <li className="border p-4 flex flex-col rounded bg-background">
       <div className="flex justify-between">
         <Link
           href={`admin/${organization.id}`}

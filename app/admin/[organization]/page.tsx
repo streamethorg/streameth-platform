@@ -2,7 +2,6 @@ import { apiUrl } from '@/server/utils'
 import { IEvent } from '@/server/model/event'
 import AddEventButton from './components/AddEventButton'
 import EventEntry from './components/EventEntry'
-import AdminItemsContainer from '../components/utils/AdminItemsContainer'
 import EventController from '@/server/controller/event'
 import OrganizationController from '@/server/controller/organization'
 export async function generateStaticParams() {
@@ -37,7 +36,7 @@ const EventsPage = async ({
       {events.length > 0 ? (
         <div className="w-full p-4">
           <p className="my-2">Your events</p>
-          <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {events?.map((event) => (
               <EventEntry key={event?.id} event={event} />
             ))}
