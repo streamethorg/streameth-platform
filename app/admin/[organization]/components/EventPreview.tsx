@@ -1,5 +1,6 @@
+'use client'
 import { IEvent } from '@/server/model/event'
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Image from 'next/image'
 import {
   HomeIcon,
@@ -11,7 +12,8 @@ import colors from '@/app/constants/colors'
 import { Button } from '@/app/utils/Button'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-
+import { EventFormContext } from './EventFormContext'
+import { ModalContext } from '@/components/context/ModalContext'
 const ItemButton = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-row justify-center">
     <button className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent  rounded p-4 m-2">
@@ -39,17 +41,12 @@ const pages = [
   },
 ]
 
-interface EventPreviewProps {
-  formData: Omit<IEvent, 'id'>
-  closeModal: () => void
-  handleSubmit: () => void
-}
+const EventPreview = () => {
+  const { closeModal } = useContext(ModalContext)
+  const context = useContext(EventFormContext)
+  if (!context) return null
+  const { handleSubmit, formData } = context
 
-const EventPreview = ({
-  formData,
-  handleSubmit,
-  closeModal,
-}: EventPreviewProps) => {
   useEffect(() => {
     if (formData.accentColor) {
       document.documentElement.style.setProperty(

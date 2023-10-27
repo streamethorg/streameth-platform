@@ -1,21 +1,18 @@
 import { FormTextInput } from '@/app/utils/FormTextInput'
 import React, {
-  Dispatch,
-  SetStateAction,
+
   useEffect,
   useState,
 } from 'react'
 import {
   GSheetConfig,
-  IDataExporter,
-  IDataImporter,
-  IEvent,
+
   PretalxConfig,
 } from '@/server/model/event'
 import FormRadio from '@/app/utils/FormRadio'
 import FormLabel from '@/app/utils/FormLabel'
 import FormRadioBox from '@/app/utils/FormRadioBox'
-
+import { EventFormContext } from './EventFormContext'
 const initialImporterConfig: GSheetConfig & PretalxConfig = {
   sheetId: '',
   apiKey: '',
@@ -28,27 +25,24 @@ const initialExporterConfig: GSheetConfig = {
   driveApiKey: '',
 }
 
-interface Props {
-  formData: Omit<IEvent, 'id'>
-  setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
-  handleDataImporterChange: (importer: IDataImporter) => void
-  handleDataExporterChange: (exporter: IDataExporter) => void
-  validationErrors?: Record<string, any>
-}
+const CreateEditEventStepTwo = () => {
+  const context = React.useContext(EventFormContext)
+  if (!context) return null
+  const {
+    formData,
+    setFormData,
+    handleDataImporterChange,
+    handleDataExporterChange,
+  } = context
 
-const CreateEditEventStepTwo = ({
-  formData,
-  setFormData,
-  handleDataImporterChange,
-  handleDataExporterChange,
-}: Props) => {
   const [dataExportSelectedType, setDataExportSelectedType] =
     useState('gdrive')
   const [selectedType, setSelectedType] = useState<string>(
     formData?.dataImporter?.[0]?.type ?? ''
   )
-  //@ts-ignore
+ 
   const [config, setConfig] = useState<GSheetConfig & PretalxConfig>(
+     //@ts-ignore
     formData?.dataImporter?.[0]?.config ?? initialImporterConfig
   )
   const [exporterConfig, setExporterConfig] = useState<GSheetConfig>(

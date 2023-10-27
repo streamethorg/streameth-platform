@@ -9,6 +9,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   return (
     <div className="relative w-full z-[1]">
       <Image
+      className='rounded-lg'
         src={'/events/' + banner}
         alt="Event Cover"
         width={1500}

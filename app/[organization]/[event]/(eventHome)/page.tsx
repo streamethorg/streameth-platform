@@ -37,8 +37,8 @@ const EventHome = async ({ params }: { params: Params }) => {
   if (!hasData({ event })) return notFound()
 
   return (
-    <div className="flex flex-col w-full overflow-scroll h-full space-y-[5em] ">
-      <div className=" relative bg-white max-w-4xl rounded-lg mx-auto z-50 space-y-10">
+    <div className="flex flex-col w-full overflow-scroll h-full space-y-[5em] bg-accent ">
+      <div className=" relative bg-white shadow my-4 p-4 max-w-5xl rounded-lg mx-auto z-50 space-y-10">
         <HomePageLogoAndBanner event={event} />
         <div id="home" className="flex flex-col px-4 ">
           <div className=" flex-col flex space-y-2 md:flex-col">

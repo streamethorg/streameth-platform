@@ -1,22 +1,17 @@
-import React, { Dispatch, SetStateAction, useContext } from 'react'
+import React, { useContext } from 'react'
 import StatusBarOneIcon from '@/app/assets/icons/StatusBarOneIcon'
 import StatusBarTwoIcon from '@/app/assets/icons/StatusBarTwoIcon'
 import StatusBarFullIcon from '@/app/assets/icons/StatusBarFullIcon'
 import { Button } from '@/app/utils/Button'
 import { ModalContext } from '@/components/context/ModalContext'
 import { IEvent } from '@/server/model/event'
+import { EventFormContext } from './EventFormContext'
 
-interface CreateEditFooterProps {
-  currentStep: number
-  setCurrentStep: Dispatch<SetStateAction<number>>
-  event?: IEvent
-}
+const CreateEditFooter = () => {
+  const context = useContext(EventFormContext)
+  if (!context) return null
+  const { currentStep, setCurrentStep, event } = context
 
-const CreateEditFooter = ({
-  setCurrentStep,
-  currentStep,
-  event,
-}: CreateEditFooterProps) => {
   const { openModal, closeModal } = useContext(ModalContext)
   const handleDelete = () => {
     fetch(
@@ -63,7 +58,7 @@ const CreateEditFooter = ({
     if (currentStep > 1) setCurrentStep(currentStep - 1)
   }
   return (
-    <div className="flex justify-between items-center flex-col lg:flex-row gap-5 mt-5">
+    <div className="flex flex-row sticky w-full bottom-0 p-4 shadow bg-white items-center justify-between">
       <div>
         {event && (
           <Button
