@@ -47,6 +47,7 @@ const CreateEditEventStepTwo = ({
   const [selectedType, setSelectedType] = useState<string>(
     formData?.dataImporter?.[0]?.type ?? ''
   )
+
   const [config, setConfig] = useState<GSheetConfig & PretalxConfig>(
     //@ts-ignore
     formData?.dataImporter?.[0]?.config ?? initialImporterConfig

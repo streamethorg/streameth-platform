@@ -1,46 +1,37 @@
-import { Sequence, AbsoluteFill, staticFile, Audio, useVideoConfig, useCurrentFrame, interpolate, Img, OffthreadVideo, Freeze } from 'remotion'
+import { Sequence, AbsoluteFill, staticFile, Audio, useVideoConfig, useCurrentFrame, interpolate, Img, OffthreadVideo } from 'remotion'
 import { loadFont } from "@remotion/google-fonts/SofiaSansExtraCondensed"
 import { G_FPS } from '../../consts'
 import dayjs from 'dayjs'
 
-const { fontFamily } = loadFont()
+export const { fontFamily } = loadFont()
 
-interface SpeakerProps {
+export interface SpeakerProps {
     id: string
     name: string
     photo: string
 }
 
-interface SessionProps {
+export interface SessionProps {
     name: string
     start: number,
     end: number,
     speakers: SpeakerProps[],
 }
 
-type Props = {
+export type Props = {
     type: string,
     session: SessionProps
+    logo?: string
 }
 
-export const DevconnectISTStill: React.FC<Props> = ({ type, session }) => {
-    return (
-        <Freeze frame={200}>
-            <DevconnectIST type={type} session={session} />
-        </Freeze>
-    )
-}
-
-export const DevconnectIST: React.FC<Props> = ({ type, session }) => {
+export const Intro: React.FC<Props> = ({ type, session, logo }) => {
     const { durationInFrames } = useVideoConfig()
     const frame = useCurrentFrame()
 
     const audioFile = staticFile('devconnect/audio/IST-material-sound.mp3')
     const introFile = staticFile(`devconnect/intro/IST-intro-${type}.mp4`)
     const bgFile = staticFile(`devconnect/images/IST-bg-${type}.png`)
-    const logoFile = staticFile(`devconnect/logos/EVM-Summit.png`)
-
-    const positionBg = staticFile(`devconnect/images/positioning-bg.png`)
+    const logoFile = logo ? staticFile(`devconnect/logos/${logo}.png`) : ''
 
     const introTime = 5 * G_FPS
     const sessionTime = 7 * G_FPS
@@ -84,18 +75,16 @@ export const DevconnectIST: React.FC<Props> = ({ type, session }) => {
                 </Sequence>
             </AbsoluteFill>
 
-            {/* <AbsoluteFill>
-                <Img style={{ width: "100%" }} src={positionBg} />
-            </AbsoluteFill> */}
-
             <AbsoluteFill>
                 <div className='flex py-12 px-24 flex-col w-full space-between justify-between text-[#252e3d]'>
                     <div className='flex relative h-32' style={{ opacity: initialOpacity }}>
-                        <Sequence name='Logo' from={introTime} durationInFrames={sessionTime} layout="none">
-                            <div className='absolute -top-4' style={{ left: logoMove, opacity: initialOpacity }}>
-                                <Img className='h-60' src={logoFile} />
-                            </div>
-                        </Sequence>
+                        {logoFile && (
+                            <Sequence name='Logo' from={introTime} durationInFrames={sessionTime} layout="none">
+                                <div className='absolute -top-4' style={{ left: logoMove, opacity: initialOpacity }}>
+                                    <Img className='h-60' src={logoFile} />
+                                </div>
+                            </Sequence>
+                        )}
                         <Sequence name='Datetime' from={introTime} durationInFrames={sessionTime} layout="none">
                             <div className='absolute top-8 right-0 flex flex-col text-right text-4xl gap-4'>
                                 <span>{dayjs(session.start).format('MMMM DD, YYYY')}</span>

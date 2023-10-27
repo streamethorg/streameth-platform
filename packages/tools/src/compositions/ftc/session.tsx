@@ -1,24 +1,24 @@
 import { Sequence, AbsoluteFill, staticFile, Video, Audio, useVideoConfig, useCurrentFrame, interpolate } from 'remotion'
-import { ISession as SessionType, ISpeaker as SpeakerType } from '../types'
-import { G_AUDIO_PATH, G_ANIMATION_PATH, G_DURATION } from '../consts'
-import Text from '../components/Text'
-import { splitTextIntoString } from '../utils/stringManipulation'
+import { ISession as SessionType, ISpeaker as SpeakerType } from '../../utils/types'
+import { splitTextIntoString } from '../../utils/stringManipulation'
 import { Rect } from '@remotion/shapes'
+import Text from './components/Text'
 
-function clampInterpolation(f: number, start: number[], end: number[]): number {
-  return interpolate(f, start, end, {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  })
-}
+export const FtcDuration = 170
 
-export default function Session({ session }: { session: SessionType }) {
+export default function Ftc({ session }: { session: SessionType }) {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
   const startFadeFrame = durationInFrames - 50
 
-  const opacity = clampInterpolation(frame, [startFadeFrame, durationInFrames], [0, 1])
+  function clampInterpolation(f: number, start: number[], end: number[]): number {
+    return interpolate(f, start, end, {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    })
+  }
 
+  const opacity = clampInterpolation(frame, [startFadeFrame, durationInFrames], [0, 1])
   const videoVolume = clampInterpolation(frame, [startFadeFrame, durationInFrames], [1, 0])
 
   const computeOpacity = (f: any) => {
@@ -39,22 +39,22 @@ export default function Session({ session }: { session: SessionType }) {
 
   return (
     <>
-      <Sequence durationInFrames={G_DURATION}>
-        <Video muted style={{ opacity: videoOpacity }} src={staticFile(G_ANIMATION_PATH)} />
+      <Sequence durationInFrames={FtcDuration}>
+        <Video muted style={{ opacity: videoOpacity }} src={staticFile('/animations/FtC_animation.mp4')} />
       </Sequence>
       {session.speakers!.map((speaker: SpeakerType, index: number) => (
-        <Sequence name="Name(s)" durationInFrames={G_DURATION}>
+        <Sequence key={speaker.id} name="Name(s)" durationInFrames={FtcDuration}>
           <div style={{ opacity: videoOpacity }}>
             <Text text={speaker.name} x={775} y={335 - index * 80} opacity={showText(frame)} fontWeight={800} fontSize={65} />
           </div>
         </Sequence>
       ))}
-      <Sequence name="Title" durationInFrames={G_DURATION}>
+      <Sequence name="Title" durationInFrames={FtcDuration}>
         <div className="leading-tight" style={{ opacity: videoOpacity }}>
           <Text text={splitTextIntoString(session.name, 30)} x={775} y={493} opacity={showText(frame)} fontWeight={600} />
         </div>
       </Sequence>
-      <Sequence durationInFrames={G_DURATION}>
+      <Sequence durationInFrames={FtcDuration}>
         <div style={{ opacity: videoOpacity }}>
           <Rect
             width={770}
@@ -68,18 +68,18 @@ export default function Session({ session }: { session: SessionType }) {
         </div>
       </Sequence>
       <Audio
-        src={staticFile(G_AUDIO_PATH)}
+        src={staticFile('/audio/522_short1_cream-soda-day_0018.wav')}
         endAt={150}
         volume={(f) =>
           f < 115
             ? interpolate(f, [0, 10], [0, 1], {
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp',
-              })
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp',
+            })
             : interpolate(f, [115, 150], [1, 0], {
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp',
-              })
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp',
+            })
         }
       />
       <AbsoluteFill style={{ backgroundColor: 'black', opacity }} />
