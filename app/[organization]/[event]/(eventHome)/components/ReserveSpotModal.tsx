@@ -102,7 +102,7 @@ const ReserveSpotButton = ({ event }: props) => {
   return (
     <button
       onClick={handleClick}
-      className="p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
+      className="p-2 bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
       reserve a spot
     </button>
   )

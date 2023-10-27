@@ -10,11 +10,11 @@ module.exports = {
       colors: {
         base: '#ffffff',
         background: '#ffffff',
-        primary: '#f5f6fa',
+        primary: 'transparent',
         accent: 'var(--colors-accent)',
         medGrey: '#666666',
         grey: '#A9A9A9',
-        'main-text': '#2b2b2b',
+        'main-text': 'white',
         'secondary-text': '#b1b0b4',
         'accent-text': '#3d5afe',
         green: '#2CB83A',

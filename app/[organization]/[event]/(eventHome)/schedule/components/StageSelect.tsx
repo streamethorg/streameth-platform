@@ -14,18 +14,16 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
   }
 
   return (
-    <div>
-      <select
-        className="text-xl cursor-pointer font-bold box-border w-full p-2"
-        value={selectedStage}
-        onChange={(e) => handleStageChange(e.target.value)}>
-        {stages.map((stage) => (
-          <option key={stage.name} value={stage.id}>
-            {stage.name}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select
+      className="px-3 py-2 border border-accent shadow rounded-lg bg-inherit text-lg cursor-pointer box-border w-full "
+      value={selectedStage}
+      onChange={(e) => handleStageChange(e.target.value)}>
+      {stages.map((stage) => (
+        <option key={stage.name} value={stage.id}>
+          {stage.name}
+        </option>
+      ))}
+    </select>
   )
 }
 

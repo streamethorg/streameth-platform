@@ -1,6 +1,7 @@
 import SpeakerCard from './SpeakerCard'
 import SpeakerController from '@/server/controller/speaker'
 import SessionController from '@/server/controller/session'
+import ComponentWrapper from '../../components/ComponentWrapper'
 interface Params {
   params: {
     organization: string
@@ -22,17 +23,15 @@ const SpeakerPageComponent = async ({ params }: Params) => {
   if (!speakers.length) return null
 
   return (
-    <div
-      id="speakers"
-      className="flex flex-col max-w-7xl w-full mx-auto p-2">
-      <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">
+    <ComponentWrapper>
+      <span className=" w-full text-xl uppercase md:text-4xl">
         Speakers
       </span>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
+      <div className="my-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
         {speakers.map((speaker) => (
           <div
             key={speaker.id}
-            className="hover:bg-gray-50 p-4 rounded-lg cursor-pointer transition-colors">
+            className="rounded-lg cursor-pointer transition-colors">
             <SpeakerCard
               speaker={speaker.toJson()}
               sessions={sessions.map((session) => session.toJson())}
@@ -40,7 +39,7 @@ const SpeakerPageComponent = async ({ params }: Params) => {
           </div>
         ))}
       </div>
-    </div>
+    </ComponentWrapper>
   )
 }
 

@@ -12,18 +12,16 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
   }
 
   return (
-    <div>
-      <select
-        className="text-xl cursor-pointer font-bold w-full p-2"
-        value={date ? date : ''}
-        onChange={(e) => handleDateChange(e.target.value)}>
-        {dates.map((dateNum) => (
-          <option key={dateNum} value={dateNum}>
-            {new Date(dateNum).toLocaleDateString()}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select
+      className="px-3 py-2 border border-accent shadow rounded-lg bg-inherit text-lg cursor-pointer w-full box-border "
+      value={date ? date : ''}
+      onChange={(e) => handleDateChange(e.target.value)}>
+      {dates.map((dateNum) => (
+        <option key={dateNum} value={dateNum}>
+          {new Date(dateNum).toLocaleDateString()}
+        </option>
+      ))}
+    </select>
   )
 }
 
