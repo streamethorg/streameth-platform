@@ -13,7 +13,12 @@ export const TIMEZONES = [
     offset: -11,
     isdst: false,
     text: '(UTC-11:00) Coordinated Universal Time-11',
-    utc: ['Etc/GMT+11', 'Pacific/Midway', 'Pacific/Niue', 'Pacific/Pago_Pago'],
+    utc: [
+      'Etc/GMT+11',
+      'Pacific/Midway',
+      'Pacific/Niue',
+      'Pacific/Pago_Pago',
+    ],
   },
   {
     value: 'Hawaiian Standard Time',
@@ -21,7 +26,13 @@ export const TIMEZONES = [
     offset: -10,
     isdst: false,
     text: '(UTC-10:00) Hawaii',
-    utc: ['Etc/GMT+10', 'Pacific/Honolulu', 'Pacific/Johnston', 'Pacific/Rarotonga', 'Pacific/Tahiti'],
+    utc: [
+      'Etc/GMT+10',
+      'Pacific/Honolulu',
+      'Pacific/Johnston',
+      'Pacific/Rarotonga',
+      'Pacific/Tahiti',
+    ],
   },
   {
     value: 'Alaskan Standard Time',
@@ -29,7 +40,13 @@ export const TIMEZONES = [
     offset: -8,
     isdst: true,
     text: '(UTC-09:00) Alaska',
-    utc: ['America/Anchorage', 'America/Juneau', 'America/Nome', 'America/Sitka', 'America/Yakutat'],
+    utc: [
+      'America/Anchorage',
+      'America/Juneau',
+      'America/Nome',
+      'America/Sitka',
+      'America/Yakutat',
+    ],
   },
   {
     value: 'Pacific Standard Time (Mexico)',
@@ -45,7 +62,11 @@ export const TIMEZONES = [
     offset: -7,
     isdst: true,
     text: '(UTC-07:00) Pacific Daylight Time (US & Canada)',
-    utc: ['America/Los_Angeles', 'America/Tijuana', 'America/Vancouver'],
+    utc: [
+      'America/Los_Angeles',
+      'America/Tijuana',
+      'America/Vancouver',
+    ],
   },
   {
     value: 'Pacific Standard Time',
@@ -53,7 +74,12 @@ export const TIMEZONES = [
     offset: -8,
     isdst: false,
     text: '(UTC-08:00) Pacific Standard Time (US & Canada)',
-    utc: ['America/Los_Angeles', 'America/Tijuana', 'America/Vancouver', 'PST8PDT'],
+    utc: [
+      'America/Los_Angeles',
+      'America/Tijuana',
+      'America/Vancouver',
+      'PST8PDT',
+    ],
   },
   {
     value: 'US Mountain Standard Time',
@@ -61,7 +87,15 @@ export const TIMEZONES = [
     offset: -7,
     isdst: false,
     text: '(UTC-07:00) Arizona',
-    utc: ['America/Creston', 'America/Dawson', 'America/Dawson_Creek', 'America/Hermosillo', 'America/Phoenix', 'America/Whitehorse', 'Etc/GMT+7'],
+    utc: [
+      'America/Creston',
+      'America/Dawson',
+      'America/Dawson_Creek',
+      'America/Hermosillo',
+      'America/Phoenix',
+      'America/Whitehorse',
+      'Etc/GMT+7',
+    ],
   },
   {
     value: 'Mountain Standard Time (Mexico)',
@@ -133,7 +167,13 @@ export const TIMEZONES = [
     offset: -5,
     isdst: true,
     text: '(UTC-06:00) Guadalajara, Mexico City, Monterrey',
-    utc: ['America/Bahia_Banderas', 'America/Cancun', 'America/Merida', 'America/Mexico_City', 'America/Monterrey'],
+    utc: [
+      'America/Bahia_Banderas',
+      'America/Cancun',
+      'America/Merida',
+      'America/Mexico_City',
+      'America/Monterrey',
+    ],
   },
   {
     value: 'Canada Central Standard Time',
@@ -218,7 +258,11 @@ export const TIMEZONES = [
     offset: -5,
     isdst: false,
     text: '(UTC-05:00) Indiana (East)',
-    utc: ['America/Indiana/Marengo', 'America/Indiana/Vevay', 'America/Indianapolis'],
+    utc: [
+      'America/Indiana/Marengo',
+      'America/Indiana/Vevay',
+      'America/Indianapolis',
+    ],
   },
   {
     value: 'Venezuela Standard Time',
@@ -242,7 +286,14 @@ export const TIMEZONES = [
     offset: -3,
     isdst: true,
     text: '(UTC-04:00) Atlantic Time (Canada)',
-    utc: ['America/Glace_Bay', 'America/Goose_Bay', 'America/Halifax', 'America/Moncton', 'America/Thule', 'Atlantic/Bermuda'],
+    utc: [
+      'America/Glace_Bay',
+      'America/Goose_Bay',
+      'America/Halifax',
+      'America/Moncton',
+      'America/Thule',
+      'Atlantic/Bermuda',
+    ],
   },
   {
     value: 'Central Brazilian Standard Time',
@@ -439,7 +490,12 @@ export const TIMEZONES = [
     offset: 0,
     isdst: false,
     text: '(UTC) Edinburgh, London',
-    utc: ['Europe/Isle_of_Man', 'Europe/Guernsey', 'Europe/Jersey', 'Europe/London'],
+    utc: [
+      'Europe/Isle_of_Man',
+      'Europe/Guernsey',
+      'Europe/Jersey',
+      'Europe/London',
+    ],
   },
   {
     value: 'British Summer Time',
@@ -447,7 +503,12 @@ export const TIMEZONES = [
     offset: 1,
     isdst: true,
     text: '(UTC+01:00) Edinburgh, London',
-    utc: ['Europe/Isle_of_Man', 'Europe/Guernsey', 'Europe/Jersey', 'Europe/London'],
+    utc: [
+      'Europe/Isle_of_Man',
+      'Europe/Guernsey',
+      'Europe/Jersey',
+      'Europe/London',
+    ],
   },
   {
     value: 'GMT Standard Time (Lisbon)',
@@ -455,7 +516,13 @@ export const TIMEZONES = [
     offset: 1,
     isdst: true,
     text: '(UTC) Dublin, Lisbon',
-    utc: ['Atlantic/Canary', 'Atlantic/Faeroe', 'Atlantic/Madeira', 'Europe/Dublin', 'Europe/Lisbon'],
+    utc: [
+      'Atlantic/Canary',
+      'Atlantic/Faeroe',
+      'Atlantic/Madeira',
+      'Europe/Dublin',
+      'Europe/Lisbon',
+    ],
   },
   {
     value: 'Greenwich Standard Time',
@@ -513,7 +580,15 @@ export const TIMEZONES = [
     offset: 2,
     isdst: true,
     text: '(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague',
-    utc: ['Europe/Belgrade', 'Europe/Bratislava', 'Europe/Budapest', 'Europe/Ljubljana', 'Europe/Podgorica', 'Europe/Prague', 'Europe/Tirane'],
+    utc: [
+      'Europe/Belgrade',
+      'Europe/Bratislava',
+      'Europe/Budapest',
+      'Europe/Ljubljana',
+      'Europe/Podgorica',
+      'Europe/Prague',
+      'Europe/Tirane',
+    ],
   },
   {
     value: 'Romance Standard Time',
@@ -521,7 +596,13 @@ export const TIMEZONES = [
     offset: 2,
     isdst: true,
     text: '(UTC+01:00) Brussels, Copenhagen, Madrid, Paris',
-    utc: ['Africa/Ceuta', 'Europe/Brussels', 'Europe/Copenhagen', 'Europe/Madrid', 'Europe/Paris'],
+    utc: [
+      'Africa/Ceuta',
+      'Europe/Brussels',
+      'Europe/Copenhagen',
+      'Europe/Madrid',
+      'Europe/Paris',
+    ],
   },
   {
     value: 'Central European Standard Time',
@@ -529,7 +610,12 @@ export const TIMEZONES = [
     offset: 2,
     isdst: true,
     text: '(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb',
-    utc: ['Europe/Sarajevo', 'Europe/Skopje', 'Europe/Warsaw', 'Europe/Zagreb'],
+    utc: [
+      'Europe/Sarajevo',
+      'Europe/Skopje',
+      'Europe/Warsaw',
+      'Europe/Zagreb',
+    ],
   },
   {
     value: 'W. Central Africa Standard Time',
@@ -568,7 +654,12 @@ export const TIMEZONES = [
     offset: 3,
     isdst: true,
     text: '(UTC+02:00) Athens, Bucharest',
-    utc: ['Asia/Nicosia', 'Europe/Athens', 'Europe/Bucharest', 'Europe/Chisinau'],
+    utc: [
+      'Asia/Nicosia',
+      'Europe/Athens',
+      'Europe/Bucharest',
+      'Europe/Chisinau',
+    ],
   },
   {
     value: 'Middle East Standard Time',
@@ -710,7 +801,13 @@ export const TIMEZONES = [
     offset: 3,
     isdst: false,
     text: '(UTC+03:00) Kuwait, Riyadh',
-    utc: ['Asia/Aden', 'Asia/Bahrain', 'Asia/Kuwait', 'Asia/Qatar', 'Asia/Riyadh'],
+    utc: [
+      'Asia/Aden',
+      'Asia/Bahrain',
+      'Asia/Kuwait',
+      'Asia/Qatar',
+      'Asia/Riyadh',
+    ],
   },
   {
     value: 'E. Africa Standard Time',
@@ -741,7 +838,13 @@ export const TIMEZONES = [
     offset: 3,
     isdst: false,
     text: '(UTC+03:00) Moscow, St. Petersburg, Volgograd, Minsk',
-    utc: ['Europe/Kirov', 'Europe/Moscow', 'Europe/Simferopol', 'Europe/Volgograd', 'Europe/Minsk'],
+    utc: [
+      'Europe/Kirov',
+      'Europe/Moscow',
+      'Europe/Simferopol',
+      'Europe/Volgograd',
+      'Europe/Minsk',
+    ],
   },
   {
     value: 'Samara Time',
@@ -873,7 +976,15 @@ export const TIMEZONES = [
     offset: 6,
     isdst: false,
     text: '(UTC+06:00) Nur-Sultan (Astana)',
-    utc: ['Antarctica/Vostok', 'Asia/Almaty', 'Asia/Bishkek', 'Asia/Qyzylorda', 'Asia/Urumqi', 'Etc/GMT-6', 'Indian/Chagos'],
+    utc: [
+      'Antarctica/Vostok',
+      'Asia/Almaty',
+      'Asia/Bishkek',
+      'Asia/Qyzylorda',
+      'Asia/Urumqi',
+      'Etc/GMT-6',
+      'Indian/Chagos',
+    ],
   },
   {
     value: 'Bangladesh Standard Time',
@@ -940,7 +1051,15 @@ export const TIMEZONES = [
     offset: 8,
     isdst: false,
     text: '(UTC+08:00) Kuala Lumpur, Singapore',
-    utc: ['Asia/Brunei', 'Asia/Kuala_Lumpur', 'Asia/Kuching', 'Asia/Makassar', 'Asia/Manila', 'Asia/Singapore', 'Etc/GMT-8'],
+    utc: [
+      'Asia/Brunei',
+      'Asia/Kuala_Lumpur',
+      'Asia/Kuching',
+      'Asia/Makassar',
+      'Asia/Manila',
+      'Asia/Singapore',
+      'Etc/GMT-8',
+    ],
   },
   {
     value: 'W. Australia Standard Time',
@@ -980,7 +1099,13 @@ export const TIMEZONES = [
     offset: 9,
     isdst: false,
     text: '(UTC+09:00) Osaka, Sapporo, Tokyo',
-    utc: ['Asia/Dili', 'Asia/Jayapura', 'Asia/Tokyo', 'Etc/GMT-9', 'Pacific/Palau'],
+    utc: [
+      'Asia/Dili',
+      'Asia/Jayapura',
+      'Asia/Tokyo',
+      'Etc/GMT-9',
+      'Pacific/Palau',
+    ],
   },
   {
     value: 'Korea Standard Time',
@@ -1028,7 +1153,14 @@ export const TIMEZONES = [
     offset: 10,
     isdst: false,
     text: '(UTC+10:00) Guam, Port Moresby',
-    utc: ['Antarctica/DumontDUrville', 'Etc/GMT-10', 'Pacific/Guam', 'Pacific/Port_Moresby', 'Pacific/Saipan', 'Pacific/Truk'],
+    utc: [
+      'Antarctica/DumontDUrville',
+      'Etc/GMT-10',
+      'Pacific/Guam',
+      'Pacific/Port_Moresby',
+      'Pacific/Saipan',
+      'Pacific/Truk',
+    ],
   },
   {
     value: 'Tasmania Standard Time',
@@ -1052,7 +1184,15 @@ export const TIMEZONES = [
     offset: 11,
     isdst: false,
     text: '(UTC+11:00) Solomon Is., New Caledonia',
-    utc: ['Antarctica/Macquarie', 'Etc/GMT-11', 'Pacific/Efate', 'Pacific/Guadalcanal', 'Pacific/Kosrae', 'Pacific/Noumea', 'Pacific/Ponape'],
+    utc: [
+      'Antarctica/Macquarie',
+      'Etc/GMT-11',
+      'Pacific/Efate',
+      'Pacific/Guadalcanal',
+      'Pacific/Kosrae',
+      'Pacific/Noumea',
+      'Pacific/Ponape',
+    ],
   },
   {
     value: 'Vladivostok Standard Time',
@@ -1101,7 +1241,12 @@ export const TIMEZONES = [
     offset: 12,
     isdst: false,
     text: '(UTC+12:00) Magadan',
-    utc: ['Asia/Anadyr', 'Asia/Kamchatka', 'Asia/Magadan', 'Asia/Srednekolymsk'],
+    utc: [
+      'Asia/Anadyr',
+      'Asia/Kamchatka',
+      'Asia/Magadan',
+      'Asia/Srednekolymsk',
+    ],
   },
   {
     value: 'Kamchatka Standard Time',
@@ -1117,7 +1262,12 @@ export const TIMEZONES = [
     offset: 13,
     isdst: false,
     text: "(UTC+13:00) Nuku'alofa",
-    utc: ['Etc/GMT-13', 'Pacific/Enderbury', 'Pacific/Fakaofo', 'Pacific/Tongatapu'],
+    utc: [
+      'Etc/GMT-13',
+      'Pacific/Enderbury',
+      'Pacific/Fakaofo',
+      'Pacific/Tongatapu',
+    ],
   },
   {
     value: 'Samoa Standard Time',

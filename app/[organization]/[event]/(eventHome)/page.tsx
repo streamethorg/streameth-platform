@@ -12,10 +12,18 @@ interface Params {
   speaker: string
 }
 
-const Button = ({ children, link }: { children: React.ReactNode; link: string }) => (
+const Button = ({
+  children,
+  link,
+}: {
+  children: React.ReactNode
+  link: string
+}) => (
   <div className="flex flex-row justify-center">
     <Link href={link}>
-      <button className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent  rounded p-4 m-2">{children}</button>
+      <button className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent  rounded p-4 m-2">
+        {children}
+      </button>
     </Link>
   </div>
 )
@@ -23,7 +31,9 @@ const Button = ({ children, link }: { children: React.ReactNode; link: string })
 const EventHome = async ({ params }: { params: Params }) => {
   const eventController = new EventController()
 
-  const event = (await eventController.getEvent(params.event, params.organization)).toJson()
+  const event = (
+    await eventController.getEvent(params.event, params.organization)
+  ).toJson()
   if (!hasData({ event })) return notFound()
 
   return (
@@ -32,16 +42,21 @@ const EventHome = async ({ params }: { params: Params }) => {
         <HomePageLogoAndBanner event={event} />
         <div id="home" className="flex flex-col px-4 ">
           <div className=" flex-col flex space-y-2 md:flex-col">
-            <h1 className="text-4xl text-left font-bold">{event.name}</h1>
+            <h1 className="text-4xl text-left font-bold">
+              {event.name}
+            </h1>
             <div className=" flex flex-col space-y-4 text-left">
               <p>
-                <span className="mr-2">&#128197;</span>When: {new Date(event.start).toDateString()}
+                <span className="mr-2">&#128197;</span>When:{' '}
+                {new Date(event.start).toDateString()}
               </p>
               <p>
-                <span className="mr-2">&#9200;</span> Time: {new Date(event.start).toLocaleTimeString()}
+                <span className="mr-2">&#9200;</span> Time:{' '}
+                {new Date(event.start).toLocaleTimeString()}
               </p>
               <p>
-                <span className="mr-2">&#127759;</span> Where: {event.location}
+                <span className="mr-2">&#127759;</span> Where:{' '}
+                {event.location}
               </p>
               <ReserveSpotButton event={event} />
               <p>{event.description}</p>

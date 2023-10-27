@@ -4,9 +4,11 @@ import FilterBar from './components/FilterBar'
 
 export default async function Home() {
   const eventController = new EventController()
-  const upComing = (await eventController.getAllEvents({})).map((event) => {
-    return event.toJson()
-  })
+  const upComing = (await eventController.getAllEvents({})).map(
+    (event) => {
+      return event.toJson()
+    }
+  )
 
   // const pastEvents = (await eventController.getAllEvents({}))
   //   .map((event) => {

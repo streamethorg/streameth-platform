@@ -9,10 +9,18 @@ interface Params {
 }
 export default SchedulePageComponent
 
-export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Params,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const eventController = new EventController()
-  const event = await eventController.getEvent(params.event, params.organization)
-  const imageName = event.eventCover ? event.eventCover : event.id + '.png'
+  const event = await eventController.getEvent(
+    params.event,
+    params.organization
+  )
+  const imageName = event.eventCover
+    ? event.eventCover
+    : event.id + '.png'
   const imageUrl = 'https://app.streameth.org/public/' + imageName
 
   return {

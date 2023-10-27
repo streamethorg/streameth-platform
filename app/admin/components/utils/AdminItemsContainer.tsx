@@ -8,18 +8,24 @@ interface ItemsContainerProps {
 
 const AdminItemsContainer = ({ children }: ItemsContainerProps) => {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null)
-  const [isScrolledToRight, setIsScrolledToRight] = useState<boolean>(false)
+  const [isScrolledToRight, setIsScrolledToRight] =
+    useState<boolean>(false)
 
   useEffect(() => {
     const scrollRef = scrollContainerRef.current
     const handleScroll = () => {
       if (scrollRef) {
-        const scrolledToRight = scrollRef.scrollLeft + scrollRef.offsetWidth < scrollRef.scrollWidth
+        const scrolledToRight =
+          scrollRef.scrollLeft + scrollRef.offsetWidth <
+          scrollRef.scrollWidth
         setIsScrolledToRight(scrolledToRight)
       }
     }
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.addEventListener('scroll', handleScroll)
+      scrollContainerRef.current.addEventListener(
+        'scroll',
+        handleScroll
+      )
     }
 
     return () => {
@@ -49,7 +55,9 @@ const AdminItemsContainer = ({ children }: ItemsContainerProps) => {
 
   return (
     <div className="relative">
-      <div ref={scrollContainerRef} className="bg-background min-h-[190px] p-4 drop-shadow-card border overflow-x-auto flex gap-5 ">
+      <div
+        ref={scrollContainerRef}
+        className="bg-background min-h-[190px] p-4 drop-shadow-card border overflow-x-auto flex gap-5 ">
         {children}
       </div>
       {isScrolledToRight && (

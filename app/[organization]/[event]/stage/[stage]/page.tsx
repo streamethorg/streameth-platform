@@ -14,9 +14,15 @@ interface Params {
   }
 }
 
-export async function generateStaticParams({ params: { organization, event } }: { params: { organization: string; event: string } }) {
+export async function generateStaticParams({
+  params: { organization, event },
+}: {
+  params: { organization: string; event: string }
+}) {
   const stageController = new StageController()
-  const stages = (await stageController.getAllStagesForEvent(event)).map((stage) => {
+  const stages = (
+    await stageController.getAllStagesForEvent(event)
+  ).map((stage) => {
     return {
       organization: organization,
       event: event,
@@ -31,10 +37,18 @@ export default async function Stage({ params }: Params) {
   const stageController = new StageController()
   const sessionController = new SessionController()
   try {
-    const event = await eventController.getEvent(params.event, params.organization)
-    const stage = await stageController.getStage(params.stage, params.event)
+    const event = await eventController.getEvent(
+      params.event,
+      params.organization
+    )
+    const stage = await stageController.getStage(
+      params.stage,
+      params.event
+    )
     const days = getEventDays(event.start, event.end)
-    const currentDay = days.find((day) => isSameDay(day, new Date().getTime()))
+    const currentDay = days.find((day) =>
+      isSameDay(day, new Date().getTime())
+    )
 
     const sessions = await sessionController.getAllSessions({
       eventId: event.id,
@@ -42,10 +56,17 @@ export default async function Stage({ params }: Params) {
       // timestamp: new Date().getTime()
     })
 
-    if (!sessions.length) return <div className="justify-center items-center w-full">Stage has nothing scheduled</div>
+    if (!sessions.length)
+      return (
+        <div className="justify-center items-center w-full">
+          Stage has nothing scheduled
+        </div>
+      )
 
     return (
-      <StageContextProvider stage={stage.toJson()} sessions={sessions.map((session) => session.toJson())}>
+      <StageContextProvider
+        stage={stage.toJson()}
+        sessions={sessions.map((session) => session.toJson())}>
         <StageLayout />
       </StageContextProvider>
     )
@@ -55,10 +76,18 @@ export default async function Stage({ params }: Params) {
   }
 }
 
-export async function generateMetadata({ params }: Params, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Params,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const eventController = new EventController()
-  const event = await eventController.getEvent(params.event, params.organization)
-  const imageName = event.eventCover ? event.eventCover : event.id + '.png'
+  const event = await eventController.getEvent(
+    params.event,
+    params.organization
+  )
+  const imageName = event.eventCover
+    ? event.eventCover
+    : event.id + '.png'
   const imageUrl = 'https://app.streameth.org/public/' + imageName
   return {
     title: `${event.name} - ${params.stage}`,

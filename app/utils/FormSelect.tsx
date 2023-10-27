@@ -58,7 +58,8 @@ const FormSelect = ({
 
   useClickOutside(selectRef, () => setIsShowingOptions(false))
 
-  const handleSelectTriggerClick = () => setIsShowingOptions(!isShowingOptions)
+  const handleSelectTriggerClick = () =>
+    setIsShowingOptions(!isShowingOptions)
   const handleOptionClick = (option: any) => {
     onChange?.(option)
     setIsShowingOptions(false)
@@ -69,16 +70,24 @@ const FormSelect = ({
       const inputRect = selectRef.current.getBoundingClientRect()
       const spaceBelow = window.innerHeight - inputRect.bottom
 
-      if (spaceBelow < optionsHeight && dropdownPosition === 'bottom') {
+      if (
+        spaceBelow < optionsHeight &&
+        dropdownPosition === 'bottom'
+      ) {
         setDropdownPosition('top')
-      } else if (spaceBelow >= optionsHeight && dropdownPosition === 'top') {
+      } else if (
+        spaceBelow >= optionsHeight &&
+        dropdownPosition === 'top'
+      ) {
         setDropdownPosition('bottom')
       }
     }
   }, [selectRef, optionsHeight, dropdownPosition])
 
   const getFormattedSelectedOptionTitle = (option: any) => {
-    const title = customOptionTitle ? customOptionTitle(option!) : option
+    const title = customOptionTitle
+      ? customOptionTitle(option!)
+      : option
     if (title?.length! > maximumTitleLength) {
       return `${title!.substring(0, maximumTitleLength)}...`
     }
@@ -87,29 +96,48 @@ const FormSelect = ({
 
   return (
     <div className="relative mb-5">
-      {label && <FormLabel label={label} toolTip={toolTip} required={required} toolTipHTML={toolTipHTML} />}
+      {label && (
+        <FormLabel
+          label={label}
+          toolTip={toolTip}
+          required={required}
+          toolTipHTML={toolTipHTML}
+        />
+      )}
       <div
         ref={selectRef}
         style={{ width: containerWidth }}
-        className={`relative  ${disabled ? 'pointer-events-none' : ''}`}
+        className={`relative  ${
+          disabled ? 'pointer-events-none' : ''
+        }`}
         onFocus={() => {
           setIsShowingOptions(true)
         }}>
         <div
-          className={`${isShowingOptions ? (dropdownPosition === 'top' ? 'rounded-t-none rounded-b-lg' : 'rounded-t-lg') : 'rounded-lg'} ${
+          className={`${
+            isShowingOptions
+              ? dropdownPosition === 'top'
+                ? 'rounded-t-none rounded-b-lg'
+                : 'rounded-t-lg'
+              : 'rounded-lg'
+          } ${
             validationErrors ? 'border-danger' : 'border-medGrey'
           } h-12 p-3 w-full  border  bg-transparent font-sans disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between cursor-pointer 
             
           `}
           onMouseDown={() => handleSelectTriggerClick()}>
           {getFormattedSelectedOptionTitle(value) ? (
-            <span className="font-sans">{getFormattedSelectedOptionTitle(value)}</span>
+            <span className="font-sans">
+              {getFormattedSelectedOptionTitle(value)}
+            </span>
           ) : (
             <span className="font-sans text-grey">{placeholder}</span>
           )}
           <ArrowDownIcon />
         </div>
-        {validationErrors && typeof validationErrors === 'string' && <div className="text-danger mt-2">{validationErrors}</div>}
+        {validationErrors && typeof validationErrors === 'string' && (
+          <div className="text-danger mt-2">{validationErrors}</div>
+        )}
 
         <SelectOptions
           options={options}

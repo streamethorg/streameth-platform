@@ -18,13 +18,19 @@ const SpeakerModal = ({ sessions, speaker }: Params) => {
       </div>
       <div className="flex flex-col w-full max-w-xl space-y-4">
         <div className=" p-4 rounded border">
-          <p className="text-lg font-bold uppercase mb-4">{speaker.name}</p>
+          <p className="text-lg font-bold uppercase mb-4">
+            {speaker.name}
+          </p>
           <p className="text-main-text py-1">{speaker.bio}</p>
         </div>
         <div className="flex flex-col border p-4 rounded space-y-4">
           <p className="font-bold text-lg">Sessions</p>
           {sessions.map((session, index) => (
-            <ScheduleCard key={session.id} session={session} showTime />
+            <ScheduleCard
+              key={session.id}
+              session={session}
+              showTime
+            />
           ))}
         </div>
       </div>

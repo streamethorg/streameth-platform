@@ -10,12 +10,17 @@ class GoogleSheetService {
 
     const serviceAccount = {
       client_email: process.env.SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY && process.env.SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      private_key:
+        process.env.SERVICE_ACCOUNT_PRIVATE_KEY &&
+        process.env.SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/g, '\n'),
     }
 
-    const jwtClient = new google.auth.JWT(serviceAccount.client_email, undefined, serviceAccount.private_key, [
-      'https://www.googleapis.com/auth/spreadsheets',
-    ])
+    const jwtClient = new google.auth.JWT(
+      serviceAccount.client_email,
+      undefined,
+      serviceAccount.private_key,
+      ['https://www.googleapis.com/auth/spreadsheets']
+    )
 
     this.connection = google.sheets({
       version: 'v4',
@@ -23,7 +28,10 @@ class GoogleSheetService {
     })
   }
 
-  async getDataForRange(sheetName: string, range: string): Promise<any[]> {
+  async getDataForRange(
+    sheetName: string,
+    range: string
+  ): Promise<any[]> {
     const response = await this.connection.spreadsheets.values.get({
       spreadsheetId: this.sheetId,
       range: `${sheetName}!${range}`,
@@ -31,7 +39,10 @@ class GoogleSheetService {
     return response.data.values || []
   }
 
-  async appendData(sheetName: string, values: any[][]): Promise<void> {
+  async appendData(
+    sheetName: string,
+    values: any[][]
+  ): Promise<void> {
     try {
       await this.connection.spreadsheets.values.append({
         spreadsheetId: this.sheetId,

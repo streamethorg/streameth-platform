@@ -12,9 +12,12 @@ interface EventEntryProps {
 
 const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
   const handleDelete = () => {
-    fetch(`/api/admin/event?event=${event.id}&organization=${event.organizationId}`, {
-      method: 'DELETE',
-    })
+    fetch(
+      `/api/admin/event?event=${event.id}&organization=${event.organizationId}`,
+      {
+        method: 'DELETE',
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to delete event')
@@ -37,10 +40,14 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
           <span>{`Are you sure you want to delete the event "${event.name}"?`}</span>
         </div>
         <div>
-          <button onClick={() => handleDelete()} className="bg-blue-500 hover:bg-blue-800 transition-colors text-white p-2 rounded m-2">
+          <button
+            onClick={() => handleDelete()}
+            className="bg-blue-500 hover:bg-blue-800 transition-colors text-white p-2 rounded m-2">
             Yes
           </button>
-          <button onClick={() => closeModal()} className="bg-gray-200 hover:bg-gray-500 transition-colors p-2 rounded m-2">
+          <button
+            onClick={() => closeModal()}
+            className="bg-gray-200 hover:bg-gray-500 transition-colors p-2 rounded m-2">
             No
           </button>
         </div>
@@ -50,10 +57,18 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
 
   return (
     <AdminItemCard>
-      <Link href={`/admin/${event.organizationId}/${event.id}`} className="flex flex-col">
-        <img src={`/events/${event.eventCover}`} alt={event.name} className="w-full h-[140px] object-cover" />
+      <Link
+        href={`/admin/${event.organizationId}/${event.id}`}
+        className="flex flex-col">
+        <img
+          src={`/events/${event.eventCover}`}
+          alt={event.name}
+          className="w-full h-[140px] object-cover"
+        />
         <div>
-          <h2 className="text-center mt-1 mb-0 truncate font-ubuntu">{event.name}</h2>
+          <h2 className="text-center mt-1 mb-0 truncate font-ubuntu">
+            {event.name}
+          </h2>
         </div>
       </Link>
     </AdminItemCard>

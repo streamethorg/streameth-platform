@@ -12,12 +12,19 @@ interface CreateEditFooterProps {
   event?: IEvent
 }
 
-const CreateEditFooter = ({ setCurrentStep, currentStep, event }: CreateEditFooterProps) => {
+const CreateEditFooter = ({
+  setCurrentStep,
+  currentStep,
+  event,
+}: CreateEditFooterProps) => {
   const { openModal, closeModal } = useContext(ModalContext)
   const handleDelete = () => {
-    fetch(`/api/admin/event?event=${event?.id}&organization=${event?.organizationId}`, {
-      method: 'DELETE',
-    })
+    fetch(
+      `/api/admin/event?event=${event?.id}&organization=${event?.organizationId}`,
+      {
+        method: 'DELETE',
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to delete event')
@@ -59,7 +66,9 @@ const CreateEditFooter = ({ setCurrentStep, currentStep, event }: CreateEditFoot
     <div className="flex justify-between items-center flex-col lg:flex-row gap-5 mt-5">
       <div>
         {event && (
-          <Button variant="danger" onClick={() => handleModalOpen(event)}>
+          <Button
+            variant="danger"
+            onClick={() => handleModalOpen(event)}>
             Delete Event
           </Button>
         )}
@@ -69,7 +78,13 @@ const CreateEditFooter = ({ setCurrentStep, currentStep, event }: CreateEditFoot
           <p className="text-accent text-sm">
             {currentStep}/{totalPages}
           </p>
-          {currentStep == 1 ? <StatusBarOneIcon /> : currentStep == 2 ? <StatusBarTwoIcon /> : <StatusBarFullIcon />}
+          {currentStep == 1 ? (
+            <StatusBarOneIcon />
+          ) : currentStep == 2 ? (
+            <StatusBarTwoIcon />
+          ) : (
+            <StatusBarFullIcon />
+          )}
         </div>
         {currentStep > 1 && (
           <Button variant="outline" onClick={handlePreviousStep}>

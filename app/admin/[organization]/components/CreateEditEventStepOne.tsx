@@ -15,22 +15,41 @@ import { TIMEZONES } from '@/app/constants/timezones'
 interface Props {
   formData: Omit<IEvent, 'id'>
   setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
+  handleChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => void
   organizationId: string
   onFileUpload: (e: string, key: string) => void
   handleSubmit: () => void
   validationErrors?: Record<string, any>
 }
-const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, formData, setFormData, onFileUpload, organizationId }: Props) => {
+const CreateEditEventStepOne = ({
+  validationErrors,
+  handleChange,
+  handleSubmit,
+  formData,
+  setFormData,
+  onFileUpload,
+  organizationId,
+}: Props) => {
   const { openModal, closeModal } = useContext(ModalContext)
-  const onImageSubmit = async (file: Blob, key: string, setLoading: React.Dispatch<SetStateAction<boolean>>) => {
+  const onImageSubmit = async (
+    file: Blob,
+    key: string,
+    setLoading: React.Dispatch<SetStateAction<boolean>>
+  ) => {
     try {
       const data = new FormData()
       data.set('file', file)
-      const res = await fetch(`${apiUrl()}/organizations/${organizationId}/events/upload`, {
-        method: 'POST',
-        body: data,
-      })
+      const res = await fetch(
+        `${apiUrl()}/organizations/${organizationId}/events/upload`,
+        {
+          method: 'POST',
+          body: data,
+        }
+      )
       if (!res.ok) throw new Error(await res.text())
     } catch (e: any) {
       console.error(e)
@@ -43,9 +62,12 @@ const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, 
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">
-        Welcome to the first step in creating your event on StreamETH! Here, you{`'`}ll provide essential details like your event{`'`}s title,
-        description, location, and dates. Additionally, you can upload your event{`'`}s digital assets, setting the foundation for a visually engaging
-        event page that will captivate your audience.
+        Welcome to the first step in creating your event on StreamETH!
+        Here, you{`'`}ll provide essential details like your event
+        {`'`}s title, description, location, and dates. Additionally,
+        you can upload your event{`'`}s digital assets, setting the
+        foundation for a visually engaging event page that will
+        captivate your audience.
       </p>
       <div className="mt-5 mb-10 gap-5 xl:gap-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
         <ImageFileUploader
@@ -92,7 +114,9 @@ const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, 
           toolTip
           toolTipHTML="Enter Event Name"
           value={formData.name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleChange(e)
+          }
           validationErrors={validationErrors?.name}
         />
         <FormTextArea
@@ -106,7 +130,17 @@ const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, 
           onChange={handleChange}
           validationErrors={validationErrors?.description}
           renderSecondaryLabel={
-            <Button size="xs" onClick={() => openModal(<EventPreview closeModal={closeModal} handleSubmit={handleSubmit} formData={formData} />)}>
+            <Button
+              size="xs"
+              onClick={() =>
+                openModal(
+                  <EventPreview
+                    closeModal={closeModal}
+                    handleSubmit={handleSubmit}
+                    formData={formData}
+                  />
+                )
+              }>
               Preview
             </Button>
           }
@@ -119,7 +153,9 @@ const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, 
           toolTip
           value={formData.location}
           validationErrors={validationErrors?.location}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleChange(e)
+          }
         />
         <FormTextInput
           label="Select your event start date"
@@ -128,8 +164,14 @@ const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, 
           toolTip
           type="date"
           name="start"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-          value={formData.start instanceof Date ? formData.start.toISOString().split('T')[0] : formData.start}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleChange(e)
+          }
+          value={
+            formData.start instanceof Date
+              ? formData.start.toISOString().split('T')[0]
+              : formData.start
+          }
         />
         <FormTextInput
           label="Select your event end date"
@@ -138,8 +180,14 @@ const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, 
           toolTip
           type="date"
           name="end"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-          value={formData.end instanceof Date ? formData.end.toISOString().split('T')[0] : formData.end}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleChange(e)
+          }
+          value={
+            formData.end instanceof Date
+              ? formData.end.toISOString().split('T')[0]
+              : formData.end
+          }
         />
         <FormSelect
           label="Timezone"
@@ -152,7 +200,9 @@ const CreateEditEventStepOne = ({ validationErrors, handleChange, handleSubmit, 
           valueKey="value"
           optionsHeight={300}
           validationErrors={validationErrors?.timezone}
-          onChange={(timezone) => setFormData({ ...formData, timezone: timezone?.text })}
+          onChange={(timezone) =>
+            setFormData({ ...formData, timezone: timezone?.text })
+          }
         />
       </div>
     </div>

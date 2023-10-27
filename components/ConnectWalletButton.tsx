@@ -4,13 +4,17 @@ interface ConnectWalletButtonProps {
   btnText?: string
 }
 
-export const ConnectWalletButton = ({ btnText = 'Connect Wallet' }: ConnectWalletButtonProps) => {
+export const ConnectWalletButton = ({
+  btnText = 'Connect Wallet',
+}: ConnectWalletButtonProps) => {
   return (
     <ConnectKitButton.Custom>
       {({ isConnected, show, truncatedAddress, ensName }) => {
         return (
           <div className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
-            <button onClick={show} className="text-accent text-sm font-ubuntu font-bold rounded-full h-full w-full bg-white py-1 px-3">
+            <button
+              onClick={show}
+              className="text-accent text-sm font-ubuntu font-bold rounded-full h-full w-full bg-white py-1 px-3">
               {isConnected ? ensName ?? truncatedAddress : btnText}
             </button>
           </div>

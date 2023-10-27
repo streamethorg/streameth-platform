@@ -1,6 +1,10 @@
 'use client'
 import { useContext, useLayoutEffect, useRef, useState } from 'react'
-import { ChatBubbleBottomCenterIcon, CalendarIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
+import {
+  ChatBubbleBottomCenterIcon,
+  CalendarIcon,
+  InformationCircleIcon,
+} from '@heroicons/react/24/outline'
 import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/plugins/Chat'
 import Player from '@/components/misc/Player'
@@ -34,12 +38,20 @@ export default function StageLayout() {
   return (
     <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
       <div className="flex flex-col w-full lg:flex-row relative lg:gap-4">
-        <div ref={stickyRef} className="sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
+        <div
+          ref={stickyRef}
+          className="sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
           <ActionsComponent title={stage.name}>
-            <EmbedButton streamId={stage.streamSettings.streamId} playerName={stage.name} />
+            <EmbedButton
+              streamId={stage.streamSettings.streamId}
+              playerName={stage.name}
+            />
             <ShareButton />
           </ActionsComponent>
-          <Player streamId={stage.streamSettings.streamId} playerName={stage.name} />
+          <Player
+            streamId={stage.streamSettings.streamId}
+            playerName={stage.name}
+          />
         </div>
         <div className="relative flex flex-col w-full pt-0 lg:p-0 lg:px-2 lg:h-full lg:w-[30%] lg:mt-0">
           <PluginBar

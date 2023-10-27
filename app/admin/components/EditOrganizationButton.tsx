@@ -6,10 +6,20 @@ import { IOrganization } from '@/server/model/organization'
 import { Button } from '@/app/utils/Button'
 import EditOrganizationForm from './EditOranizationForm'
 
-const EditOrganizationButton = ({ organization }: { organization: IOrganization }) => {
+const EditOrganizationButton = ({
+  organization,
+}: {
+  organization: IOrganization
+}) => {
   const { openModal } = useContext(ModalContext)
   return (
-    <Button variant="yellow" onClick={() => openModal(<EditOrganizationForm organization={organization} />)}>
+    <Button
+      variant="yellow"
+      onClick={() =>
+        openModal(
+          <EditOrganizationForm organization={organization} />
+        )
+      }>
       Edit
     </Button>
   )

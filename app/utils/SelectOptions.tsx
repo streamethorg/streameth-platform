@@ -62,13 +62,27 @@ const SelectOptions = forwardRef<HTMLDivElement, SelectOptionsProps>(
                   className={`px-[10px] pt-[12px] font-sans hover:bg-background`}
                   key={option[valueKey] ?? option}
                   onMouseDown={() => handleOptionClick(option)}
-                  onKeyDown={(event) => selectOptionFocusHandle(event, () => handleOptionClick(option), handleSelectTriggerClick)}
+                  onKeyDown={(event) =>
+                    selectOptionFocusHandle(
+                      event,
+                      () => handleOptionClick(option),
+                      handleSelectTriggerClick
+                    )
+                  }
                   tabIndex={0}>
-                  <span>{customOptionTitle ? customOptionTitle(option) : option[titleKey] ?? option}</span>
+                  <span>
+                    {customOptionTitle
+                      ? customOptionTitle(option)
+                      : option[titleKey] ?? option}
+                  </span>
                 </div>
               )
             })}
-            {options && options.length < 1 && Boolean(emptyOptionsMessage) && <div className="p-[20px]">{emptyOptionsMessage}</div>}
+            {options &&
+              options.length < 1 &&
+              Boolean(emptyOptionsMessage) && (
+                <div className="p-[20px]">{emptyOptionsMessage}</div>
+              )}
           </div>
         )}
       </div>

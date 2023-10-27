@@ -2,7 +2,11 @@ import { IconProps } from '@/app/types'
 import colors from '@/app/constants/colors'
 import React from 'react'
 
-const HomeIcon = ({ pathFill = colors.accent, width = '16', height = '16' }: IconProps) => {
+const HomeIcon = ({
+  pathFill = colors.accent,
+  width = '16',
+  height = '16',
+}: IconProps) => {
   return (
     <svg
       width={width}
@@ -11,10 +15,23 @@ const HomeIcon = ({ pathFill = colors.accent, width = '16', height = '16' }: Ico
       fill={pathFill}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink">
-      <rect x="0.494141" y="0.456787" width="15" height="15" fill="url(#pattern0)" />
+      <rect
+        x="0.494141"
+        y="0.456787"
+        width="15"
+        height="15"
+        fill="url(#pattern0)"
+      />
       <defs>
-        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-          <use xlinkHref="#image0_1066_183" transform="scale(0.00195312)" />
+        <pattern
+          id="pattern0"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+          height="1">
+          <use
+            xlinkHref="#image0_1066_183"
+            transform="scale(0.00195312)"
+          />
         </pattern>
         <image
           id="image0_1066_183"

@@ -8,15 +8,26 @@ export default class SessionController {
     this.controller = new BaseController<ISession>('fs')
   }
 
-  public async getSession(sessionId: ISession['id'], eventId: ISession['eventId']): Promise<Session> {
-    const sessionQuery = await Session.getSessionPath(eventId, sessionId)
+  public async getSession(
+    sessionId: ISession['id'],
+    eventId: ISession['eventId']
+  ): Promise<Session> {
+    const sessionQuery = await Session.getSessionPath(
+      eventId,
+      sessionId
+    )
     const data = await this.controller.get(sessionQuery)
     return new Session({ ...data })
   }
 
-  public async createSession(session: Omit<ISession, 'id'>): Promise<Session> {
+  public async createSession(
+    session: Omit<ISession, 'id'>
+  ): Promise<Session> {
     const ses = new Session({ ...session })
-    const sessionQuery = await Session.getSessionPath(ses.eventId, ses.id)
+    const sessionQuery = await Session.getSessionPath(
+      ses.eventId,
+      ses.id
+    )
     await this.controller.create(sessionQuery, ses)
     return ses
   }
@@ -41,7 +52,9 @@ export default class SessionController {
       data = data.filter((session) => session.stageId === stage)
     }
     if (timestamp) {
-      data = data.filter((session) => new Date(session.end).getTime() >= timestamp)
+      data = data.filter(
+        (session) => new Date(session.end).getTime() >= timestamp
+      )
     }
     if (date) {
       const filterDate = new Date(date)
@@ -57,12 +70,17 @@ export default class SessionController {
 
     if (speakerIds) {
       data = data.filter((session) => {
-        return session.speakers.some((speaker) => speakerIds.includes(speaker.id))
+        return session.speakers.some((speaker) =>
+          speakerIds.includes(speaker.id)
+        )
       })
     }
 
     // sort by start date
-    data.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+    data.sort(
+      (a, b) =>
+        new Date(a.start).getTime() - new Date(b.start).getTime()
+    )
 
     for (const ses of data) {
       sessions.push(new Session({ ...ses }))

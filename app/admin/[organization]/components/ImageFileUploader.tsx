@@ -14,7 +14,11 @@ interface ImageFileUploaderProps {
   aspectRatio?: number
   imageKey?: string
   validationErrors?: Record<string, any>
-  onImageSubmit: (event: Blob, key: string, setLoading: React.Dispatch<SetStateAction<boolean>>) => void
+  onImageSubmit: (
+    event: Blob,
+    key: string,
+    setLoading: React.Dispatch<SetStateAction<boolean>>
+  ) => void
 }
 
 const ImageFileUploader = ({
@@ -40,7 +44,9 @@ const ImageFileUploader = ({
     }
   }
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event?.target?.files?.[0]
     if (!file) return
     setError('')
@@ -56,7 +62,9 @@ const ImageFileUploader = ({
         if (imageAspectRatio === aspectRatio && imageKey) {
           onImageSubmit(file, imageKey, setLoading)
         } else {
-          setError(`Aspect ratio does not match the required ${aspectRatio}.`)
+          setError(
+            `Aspect ratio does not match the required ${aspectRatio}.`
+          )
           setLoading(false)
         }
       }
@@ -66,16 +74,47 @@ const ImageFileUploader = ({
 
   return (
     <div>
-      {label && <FormLabel label={label} required={required} toolTip toolTipHTML={`Click to edit image. ${toolTipHTML}`} />}
-      <div onClick={handleClick} className={`relative hover:opacity-75 cursor-pointer ${isCircleImage ? 'rounded-full' : ''} ${className}`}>
-        <img src={loading ? '' : `/events/${image}` ?? ''} className={`${isCircleImage ? 'rounded-full' : ''} w-full h-full`} />
-        <div className={`absolute ${iconClassName} top-[40%] left-[40%] rounded-full bg-gray-300 opacity-75`}>
+      {label && (
+        <FormLabel
+          label={label}
+          required={required}
+          toolTip
+          toolTipHTML={`Click to edit image. ${toolTipHTML}`}
+        />
+      )}
+      <div
+        onClick={handleClick}
+        className={`relative hover:opacity-75 cursor-pointer ${
+          isCircleImage ? 'rounded-full' : ''
+        } ${className}`}>
+        <img
+          src={loading ? '' : `/events/${image}` ?? ''}
+          className={`${
+            isCircleImage ? 'rounded-full' : ''
+          } w-full h-full`}
+        />
+        <div
+          className={`absolute ${iconClassName} top-[40%] left-[40%] rounded-full bg-gray-300 opacity-75`}>
           {loading ? <LoadingIcon /> : <PlusCircleIcon />}
         </div>
-        {loading && <p className="text-medGrey text-center my-1 text-[10px]">50% - Loading image..</p>}
-        <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileUpload} accept="image/*" />
+        {loading && (
+          <p className="text-medGrey text-center my-1 text-[10px]">
+            50% - Loading image..
+          </p>
+        )}
+        <input
+          className="hidden"
+          ref={fileInputRef}
+          type="file"
+          onChange={handleFileUpload}
+          accept="image/*"
+        />
       </div>
-      {validationErrors && typeof validationErrors === 'string' && <div className="text-danger mb-4 mt-2">{validationErrors}</div>}
+      {validationErrors && typeof validationErrors === 'string' && (
+        <div className="text-danger mb-4 mt-2">
+          {validationErrors}
+        </div>
+      )}
       {error && <p className="text-danger text-sm my-2">{error}</p>}
     </div>
   )

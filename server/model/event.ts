@@ -14,7 +14,9 @@ export interface PretalxConfig {
   apiToken: string
 }
 
-export type IDataImporter = { type: 'gsheet'; config: GSheetConfig } | { type: 'pretalx'; config: PretalxConfig }
+export type IDataImporter =
+  | { type: 'gsheet'; config: GSheetConfig }
+  | { type: 'pretalx'; config: PretalxConfig }
 export type IDataExporter = { type: 'gdrive'; config: GSheetConfig }
 
 export interface IEvent {
@@ -129,9 +131,17 @@ export default class Event implements IEvent {
     return evt
   }
 
-  public static async getEventPath(organizationId: string, eventId?: string): Promise<string> {
+  public static async getEventPath(
+    organizationId: string,
+    eventId?: string
+  ): Promise<string> {
     if (eventId) {
-      return path.join(BASE_PATH, 'events', organizationId, `${eventId}.json`)
+      return path.join(
+        BASE_PATH,
+        'events',
+        organizationId,
+        `${eventId}.json`
+      )
     }
     return path.join(BASE_PATH, 'events', organizationId)
   }

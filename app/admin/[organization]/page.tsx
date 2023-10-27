@@ -13,10 +13,17 @@ export async function generateStaticParams() {
   }))
 }
 
-const EventsPage = async ({ params }: { params: { organization: string } }) => {
+const EventsPage = async ({
+  params,
+}: {
+  params: { organization: string }
+}) => {
   let events: IEvent[] = []
 
-  await fetch(`${apiUrl()}/organizations/${params.organization}/events`, { next: { revalidate: 10 } })
+  await fetch(
+    `${apiUrl()}/organizations/${params.organization}/events`,
+    { next: { revalidate: 10 } }
+  )
     .then((response) => {
       if (!response.ok) {
         return Promise.reject('Failed to fetch events')
@@ -40,10 +47,17 @@ const EventsPage = async ({ params }: { params: { organization: string } }) => {
       {events.length > 0 ? (
         <>
           <p className="my-2">Your events</p>
-          <AdminItemsContainer>{events?.map((event) => <EventEntry key={event?.id} event={event} />)}</AdminItemsContainer>
+          <AdminItemsContainer>
+            {events?.map((event) => (
+              <EventEntry key={event?.id} event={event} />
+            ))}
+          </AdminItemsContainer>
         </>
       ) : (
-        <p className="mt-5">There are no events at the moment. To get started, please click the &quot;Create a new Event&quot; button.</p>
+        <p className="mt-5">
+          There are no events at the moment. To get started, please
+          click the &quot;Create a new Event&quot; button.
+        </p>
       )}
     </div>
   )

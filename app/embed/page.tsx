@@ -3,8 +3,12 @@ import { useEffect, useState } from 'react'
 import Player from '@/components/misc/Player'
 
 const EmbedPage = () => {
-  const [playbackId, setPlaybackId] = useState<string | undefined>(undefined)
-  const [streamId, setStreamId] = useState<string | undefined>(undefined)
+  const [playbackId, setPlaybackId] = useState<string | undefined>(
+    undefined
+  )
+  const [streamId, setStreamId] = useState<string | undefined>(
+    undefined
+  )
   const [playerName, setPlayerName] = useState<string>('unknown')
 
   useEffect(() => {

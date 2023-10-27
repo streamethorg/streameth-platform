@@ -13,16 +13,33 @@ interface FormRadioProps {
   value?: boolean
 }
 
-const FormRadio = ({ checked, onChange, label, value, labelClassName = '', buttonHeight = '15', buttonWidth = '15', disabled }: FormRadioProps) => {
+const FormRadio = ({
+  checked,
+  onChange,
+  label,
+  value,
+  labelClassName = '',
+  buttonHeight = '15',
+  buttonWidth = '15',
+  disabled,
+}: FormRadioProps) => {
   return (
     <div
       tabIndex={0}
       onKeyDown={(e) => a11yEnterKeyPress(e, () => onChange(value))}
       onClick={() => onChange(value)}
-      className={`flex items-center cursor-pointer ${disabled ? 'pointer-events-none' : ''}`}>
-      <RadioButtonSolidIcon height={buttonHeight} width={buttonWidth} checked={checked} />
+      className={`flex items-center cursor-pointer ${
+        disabled ? 'pointer-events-none' : ''
+      }`}>
+      <RadioButtonSolidIcon
+        height={buttonHeight}
+        width={buttonWidth}
+        checked={checked}
+      />
 
-      {label && <div className={`ml-[10px] ${labelClassName}`}>{label}</div>}
+      {label && (
+        <div className={`ml-[10px] ${labelClassName}`}>{label}</div>
+      )}
     </div>
   )
 }

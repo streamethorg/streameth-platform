@@ -6,7 +6,13 @@ interface ToolTipIconProps {
 
 const ToolTipIcon = ({ className }: ToolTipIconProps) => {
   return (
-    <svg width="10" height="11" viewBox="0 0 10 11" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="10"
+      height="11"
+      viewBox="0 0 10 11"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
       <path
         d="M4.95981 0.143837C2.22474 0.143837 0 2.36902 0 5.10412C0 7.83921 2.22474 10.0643 4.95981 10.0643C7.69499 10.0643 9.92009 7.83913 9.92009 5.10412C9.92009 2.36902 7.69496 0.143837 4.95981 0.143837ZM4.95981 9.01414C2.80392 9.01414 1.05018 7.26001 1.05018 5.10412C1.05018 2.94822 2.80394 1.19399 4.95981 1.19399C7.11578 1.19399 8.86994 2.94822 8.86994 5.10412C8.86994 7.26001 7.11576 9.01414 4.95981 9.01414Z"
         fill="#857C98"

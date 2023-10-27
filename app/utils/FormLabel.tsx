@@ -11,7 +11,15 @@ interface FormLabelProps {
   renderSecondaryLabel?: ReactNode
 }
 
-const FormLabel = ({ label, id, required, toolTip, toolTipHTML, labelClassName = '', renderSecondaryLabel }: FormLabelProps) => {
+const FormLabel = ({
+  label,
+  id,
+  required,
+  toolTip,
+  toolTipHTML,
+  labelClassName = '',
+  renderSecondaryLabel,
+}: FormLabelProps) => {
   return (
     <label
       className={`relative text-lg text-accent flex items-center justify-between gap-1 mb-2 ${labelClassName} ${

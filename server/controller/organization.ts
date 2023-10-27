@@ -8,20 +8,30 @@ export default class OrganizationController {
     this.controller = new BaseController<IOrganization>('fs')
   }
 
-  public async getOrganization(organizationId: IOrganization['id']): Promise<Organization> {
-    const organizationQuery = await Organization.getOrganizationPath(organizationId)
+  public async getOrganization(
+    organizationId: IOrganization['id']
+  ): Promise<Organization> {
+    const organizationQuery = await Organization.getOrganizationPath(
+      organizationId
+    )
     const data = await this.controller.get(organizationQuery)
     return new Organization({ ...data })
   }
 
-  public async createOrganization(organization: Omit<IOrganization, 'id'>): Promise<Organization> {
+  public async createOrganization(
+    organization: Omit<IOrganization, 'id'>
+  ): Promise<Organization> {
     const org = new Organization({ ...organization })
-    const organizationQuery = await Organization.getOrganizationPath(org.id)
+    const organizationQuery = await Organization.getOrganizationPath(
+      org.id
+    )
     await this.controller.create(organizationQuery, org)
     return org
   }
 
-  public async editOrganization(organization: IOrganization): Promise<Organization> {
+  public async editOrganization(
+    organization: IOrganization
+  ): Promise<Organization> {
     await this.deleteOrganization(organization.id)
     return this.createOrganization(organization)
   }
@@ -36,7 +46,9 @@ export default class OrganizationController {
     return organizations
   }
 
-  public async deleteOrganization(organizationId: IOrganization['id']): Promise<void> {
+  public async deleteOrganization(
+    organizationId: IOrganization['id']
+  ): Promise<void> {
     if (!organizationId) {
       throw new Error('Invalid eventId or organizationId')
     }
@@ -46,7 +58,9 @@ export default class OrganizationController {
       throw new Error('Event does not exist')
     }
 
-    const organizationQuery = await Organization.getOrganizationPath(organizationId)
+    const organizationQuery = await Organization.getOrganizationPath(
+      organizationId
+    )
     this.controller.delete(organizationQuery)
   }
 }

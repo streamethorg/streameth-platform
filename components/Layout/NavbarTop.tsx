@@ -20,7 +20,9 @@ const NavBarButton = ({
   isNavVisible: boolean
   setIsNavVisible: React.Dispatch<React.SetStateAction<boolean>>
 }) => (
-  <button onClick={() => setIsNavVisible(!isNavVisible)} className="md:hidden z-50 w-[50px]">
+  <button
+    onClick={() => setIsNavVisible(!isNavVisible)}
+    className="md:hidden z-50 w-[50px]">
     {!isNavVisible ? (
       <Bars3Icon className="w-7 h-7 border-2 border-accent rounded text-white bg-accent mx-auto" />
     ) : (
@@ -30,7 +32,8 @@ const NavBarButton = ({
 )
 
 export default function NavbarTop() {
-  const { logo, pages, homePath, showNav, components } = useContext(TopNavbarContext)
+  const { logo, pages, homePath, showNav, components } =
+    useContext(TopNavbarContext)
   const { isMobile } = useContext(MobileContext)
   const [menuVisible, setMenuVisible] = useState(false)
 
@@ -73,7 +76,13 @@ export default function NavbarTop() {
             )
           })}
         <div className="flex">
-          <SocialIcon url={`https://twitter.com/Scroll_ZKP`} target="_blank" bgColor="#fff" fgColor="#1DA1F2" className={` "h-8 w-8"`} />
+          <SocialIcon
+            url={`https://twitter.com/Scroll_ZKP`}
+            target="_blank"
+            bgColor="#fff"
+            fgColor="#1DA1F2"
+            className={` "h-8 w-8"`}
+          />
           <SocialIcon
             url={`https://github.com/streamethorg/streameth-platform`}
             target="_blank"
@@ -81,7 +90,12 @@ export default function NavbarTop() {
             fgColor="#000"
             className={`"h-8 w-8"`}
           />
-          {pages.length > 1 && <NavBarButton isNavVisible={menuVisible} setIsNavVisible={setMenuVisible} />}
+          {pages.length > 1 && (
+            <NavBarButton
+              isNavVisible={menuVisible}
+              setIsNavVisible={setMenuVisible}
+            />
+          )}
         </div>
       </div>
     </header>
