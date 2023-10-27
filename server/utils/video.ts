@@ -1,7 +1,10 @@
 import ffmpeg from 'fluent-ffmpeg'
 import fs from 'fs'
 
-export async function extractFirstFrame(hlsUrl: string, filePath: string) {
+export async function extractFirstFrame(
+  hlsUrl: string,
+  filePath: string
+) {
   // Check if the file already exists
   if (fs.existsSync(filePath)) {
     console.log('File already exists, skipping frame extraction.')

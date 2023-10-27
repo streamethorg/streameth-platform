@@ -5,9 +5,14 @@ import { IStage } from '@/server/model/stage'
 import { ISpeaker } from '@/server/model/speaker'
 import { ISession } from '@/server/model/session'
 import { usePathname } from 'next/navigation'
-import colors from '@/constants/colors'
+import colors from '@/app/constants/colors'
 import { TopNavbarContext } from '@/components/context/TopNavbarContext'
-import { HomeIcon, ViewColumnsIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/24/outline'
+import {
+  HomeIcon,
+  ViewColumnsIcon,
+  CalendarIcon,
+  UserGroupIcon,
+} from '@heroicons/react/24/outline'
 import FilterBar from '@/app/[organization]/[event]/archive/components/FilterBar'
 interface Props {
   children: ReactNode
@@ -17,11 +22,19 @@ interface Props {
   sessions: ISession[]
 }
 
-const ColorComponent = ({ children, event, stages, speakers, sessions }: Props) => {
+const ColorComponent = ({
+  children,
+  event,
+  stages,
+  speakers,
+  sessions,
+}: Props) => {
   const pathname = usePathname()
-  const { setLogo, setHomePath, setPages, setComponents } = useContext(TopNavbarContext)
+  const { setLogo, setHomePath, setPages, setComponents } =
+    useContext(TopNavbarContext)
   const { accentColor, logo, organizationId, id } = event
-  const isNotOrganization = pathname === '/' || pathname === '/admin'
+  const isNotOrganization =
+    pathname === '/' || pathname.includes('/admin')
 
   const pages = [
     {
@@ -66,17 +79,41 @@ const ColorComponent = ({ children, event, stages, speakers, sessions }: Props) 
   useEffect(() => {
     setLogo('/events/' + logo)
     if (event.archiveMode) {
-      setComponents([<FilterBar key="1" sessions={sessions} speakers={speakers} stages={stages} />])
+      setComponents([
+        <FilterBar
+          key="1"
+          sessions={sessions}
+          speakers={speakers}
+          stages={stages}
+        />,
+      ])
     } else {
       setPages([...pages, ...stagePages()])
+    }
+    return () => {
+      setComponents([])
+      setPages([])
+      setLogo('')
     }
   }, [event])
 
   useEffect(() => {
     if (!isNotOrganization && accentColor) {
-      document.documentElement.style.setProperty('--colors-accent', accentColor)
+      document.documentElement.style.setProperty(
+        '--colors-accent',
+        accentColor
+      )
     } else {
-      document.documentElement.style.setProperty('--colors-accent', colors.accent)
+      document.documentElement.style.setProperty(
+        '--colors-accent',
+        colors.accent
+      )
+    }
+    return () => {
+      document.documentElement.style.setProperty(
+        '--colors-accent',
+        colors.accent
+      )
     }
   }, [accentColor, isNotOrganization])
 

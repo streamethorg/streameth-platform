@@ -3,10 +3,20 @@ import { promisify } from 'util'
 import * as path from 'path'
 
 export default class FsController {
-  private readFileAsync: (path: string, options: { encoding: BufferEncoding }) => Promise<string>
-  private writeFileAsync: (filePath: string, data: string, options: { encoding: BufferEncoding }) => Promise<void>
+  private readFileAsync: (
+    path: string,
+    options: { encoding: BufferEncoding }
+  ) => Promise<string>
+  private writeFileAsync: (
+    filePath: string,
+    data: string,
+    options: { encoding: BufferEncoding }
+  ) => Promise<void>
   private deleteFileAsync: (path: string) => Promise<void>
-  private mkdirAsync: (path: string, options?: fs.MakeDirectoryOptions) => Promise<void>
+  private mkdirAsync: (
+    path: string,
+    options?: fs.MakeDirectoryOptions
+  ) => Promise<void>
   private accessAsync: (path: string, mode: number) => Promise<void>
   private readdirAsync: (path: string) => Promise<string[]>
 

@@ -1,27 +1,41 @@
 'use client'
 import { useState, useContext, useEffect } from 'react'
-import { FilterContext, FilterOption } from '../../../../../components/context/FilterContext'
+import {
+  FilterContext,
+  FilterOption,
+} from '../../../../../components/context/FilterContext'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
   filterName: string
 }
 
-const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterProps<T>) => {
-  const { setFilterOptions, filterOptions: currentFilterOptions } = useContext(FilterContext)
-  const [selectedItems, setSelectedItems] = useState<FilterOption<T>[]>([])
+const SearchFilter = <T extends object>({
+  filterOptions,
+  filterName,
+}: FilterProps<T>) => {
+  const { setFilterOptions, filterOptions: currentFilterOptions } =
+    useContext(FilterContext)
+  const [selectedItems, setSelectedItems] = useState<
+    FilterOption<T>[]
+  >([])
   const [filterInput, setFilterInput] = useState<string>('')
 
   const filteredOptions = () => {
     if (filterInput === '') {
       return filterOptions
     }
-    return filterOptions.filter((option) => option.name.toLowerCase().includes(filterInput.toLowerCase()))
+    return filterOptions.filter((option) =>
+      option.name.toLowerCase().includes(filterInput.toLowerCase())
+    )
   }
 
   useEffect(() => {
     currentFilterOptions.forEach((option) => {
-      if (!selectedItems.includes(option) && option.type === filterOptions[0].type) {
+      if (
+        !selectedItems.includes(option) &&
+        option.type === filterOptions[0].type
+      ) {
         setSelectedItems((prevItems) => [...prevItems, option])
       }
     })
@@ -33,7 +47,9 @@ const SearchFilter = <T extends object>({ filterOptions, filterName }: FilterPro
     setFilterInput(option.name)
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     if (e.key === 'Enter') {
       e.preventDefault()
       performFilter()

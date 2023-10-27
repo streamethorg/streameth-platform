@@ -19,7 +19,9 @@ export const TopNavbarContext = createContext<{
   showNav?: boolean
   setShowNav?: React.Dispatch<React.SetStateAction<boolean>>
   components: React.ReactNode[]
-  setComponents: React.Dispatch<React.SetStateAction<React.ReactNode[]>>
+  setComponents: React.Dispatch<
+    React.SetStateAction<React.ReactNode[]>
+  >
 }>({
   logo: '',
   setLogo: () => {},
@@ -35,7 +37,11 @@ export const TopNavbarContext = createContext<{
   setComponents: () => {},
 })
 
-export const TopNavbarContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const TopNavbarContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   const [logo, setLogo] = useState('')
   const [homePath, setHomePath] = useState('')
   const [pages, setPages] = useState<Page[]>([])

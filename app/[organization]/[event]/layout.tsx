@@ -27,12 +27,18 @@ const Layout = async ({
 }) => {
   const stageController = new StageController()
   const eventController = new EventController()
-  const event = await eventController.getEvent(params.event, params.organization)
-  const stages = await stageController.getAllStagesForEvent(params.event)
+  const event = await eventController.getEvent(
+    params.event,
+    params.organization
+  )
+  const stages = await stageController.getAllStagesForEvent(
+    params.event
+  )
   const sessions = await new SessionController().getAllSessions({
     eventId: params.event,
   })
-  const speakers = await new speakerController().getAllSpeakersForEvent(params.event)
+  const speakers =
+    await new speakerController().getAllSpeakersForEvent(params.event)
 
   if (!event) {
     return notFound()
@@ -40,7 +46,8 @@ const Layout = async ({
 
   return (
     <div className="flex flex-col overflow-hidden h-full z-1">
-      <main className={`flex w-full overflow-scroll  ml-auto bg-background`}>
+      <main
+        className={`flex w-full overflow-scroll  ml-auto bg-background`}>
         <ColorComponent
           event={event.toJson()}
           stages={stages.map((stage) => stage.toJson())}

@@ -15,12 +15,17 @@ const scroll = Scroll.scroller
 function NoSessionComponent() {
   return (
     <div className="flex flex-col items-center justify-center h-60 m-4 p-4">
-      <p className="text-gray-600">No sessions scheduled for this stage!</p>
+      <p className="text-gray-600">
+        No sessions scheduled for this stage!
+      </p>
     </div>
   )
 }
 
-export default function SessionList({ sessions, currentSession }: Props) {
+export default function SessionList({
+  sessions,
+  currentSession,
+}: Props) {
   const sortedSessions = sessions.sort((a, b) => {
     if (a.start < b.start) {
       return -1
@@ -47,7 +52,9 @@ export default function SessionList({ sessions, currentSession }: Props) {
   }
 
   return (
-    <ul id="sessionList" className="h-full relative space-y-2 p-4 lg:overflow-scroll">
+    <ul
+      id="sessionList"
+      className="h-full relative space-y-2 p-4 lg:overflow-scroll">
       {sortedSessions.map((i) => {
         if (i.name === 'Blank') return null
         return (

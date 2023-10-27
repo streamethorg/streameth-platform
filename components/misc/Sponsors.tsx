@@ -12,7 +12,9 @@ interface SponsorCarouselProps {
   sponsors: Sponsor[]
 }
 
-const SponsorCarousel: React.FC<SponsorCarouselProps> = ({ sponsors: initialSponsors }) => {
+const SponsorCarousel: React.FC<SponsorCarouselProps> = ({
+  sponsors: initialSponsors,
+}) => {
   const [sponsors, setSponsors] = useState<Sponsor[]>(initialSponsors)
   const [translateX, setTranslateX] = useState<number>(0)
 
@@ -24,6 +26,7 @@ const SponsorCarousel: React.FC<SponsorCarouselProps> = ({ sponsors: initialSpon
     return () => {
       clearInterval(slideInterval)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [translateX])
 
   const goToNextSlide = () => {

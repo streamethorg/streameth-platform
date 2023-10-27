@@ -3,7 +3,8 @@ import SessionController from '../controller/session'
 import Session from '../model/session'
 import fs from 'fs'
 
-const eventId = 'zuzalu_montenegro_2023__coordinations_and_digital_tribes'
+const eventId =
+  'zuzalu_montenegro_2023__coordinations_and_digital_tribes'
 
 async function main() {
   const sessionController = new SessionController()
@@ -14,7 +15,10 @@ async function main() {
   for (const session of sessions) {
     try {
       const dirPath = await Session.getSessionImageDirectory(eventId)
-      const filePath = await Session.getSessionImagePath(eventId, session.id)
+      const filePath = await Session.getSessionImagePath(
+        eventId,
+        session.id
+      )
 
       if (!fs.existsSync(dirPath)) {
         console.log('Dir does not exists, creating it now.')

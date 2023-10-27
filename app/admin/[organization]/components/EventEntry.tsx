@@ -2,8 +2,8 @@
 
 import React, { useContext } from 'react'
 import { IEvent } from '@/server/model/event'
-import EditEventButton from './EditEventButton'
 import Link from 'next/link'
+import AdminItemCard from '../../components/utils/AdminItemCard'
 import { ModalContext } from '@/components/context/ModalContext'
 
 interface EventEntryProps {
@@ -12,9 +12,12 @@ interface EventEntryProps {
 
 const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
   const handleDelete = () => {
-    fetch(`/api/admin/event?event=${event.id}&organization=${event.organizationId}`, {
-      method: 'DELETE',
-    })
+    fetch(
+      `/api/admin/event?event=${event.id}&organization=${event.organizationId}`,
+      {
+        method: 'DELETE',
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to delete event')
@@ -37,10 +40,14 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
           <span>{`Are you sure you want to delete the event "${event.name}"?`}</span>
         </div>
         <div>
-          <button onClick={() => handleDelete()} className="bg-blue-500 hover:bg-blue-800 transition-colors text-white p-2 rounded m-2">
+          <button
+            onClick={() => handleDelete()}
+            className="bg-blue-500 hover:bg-blue-800 transition-colors text-white p-2 rounded m-2">
             Yes
           </button>
-          <button onClick={() => closeModal()} className="bg-gray-200 hover:bg-gray-500 transition-colors p-2 rounded m-2">
+          <button
+            onClick={() => closeModal()}
+            className="bg-gray-200 hover:bg-gray-500 transition-colors p-2 rounded m-2">
             No
           </button>
         </div>
@@ -49,22 +56,22 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
   }
 
   return (
-    <li className="border p-2 rounded flex justify-between items-center">
-      <Link href={`/${event.organizationId}/${event.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
-        <img src={`/events/${event.eventCover}`} alt={event.name} className="w-16 h-16 rounded" />
+    <AdminItemCard>
+      <Link
+        href={`/admin/${event.organizationId}/${event.id}`}
+        className="flex flex-col">
+        <img
+          src={`/events/${event.eventCover}`}
+          alt={event.name}
+          className="w-full h-[140px] object-cover"
+        />
         <div>
-          <h2 className="text-xl font-bold">{event.name}</h2>
-          <p>{event.description}</p>
-          <p className="text-sm text-gray-500">{event.location}</p>
+          <h2 className="text-center mt-1 mb-0 truncate font-ubuntu">
+            {event.name}
+          </h2>
         </div>
       </Link>
-      <div className="ml-auto flex flex-row">
-        <EditEventButton event={event} />
-        <button className="bg-red-500 text-white p-2 rounded ml-2" onClick={() => handleModalOpen(event)}>
-          Delete
-        </button>
-      </div>
-    </li>
+    </AdminItemCard>
   )
 }
 

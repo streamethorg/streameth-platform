@@ -3,8 +3,10 @@ import { IOrganization } from './organization'
 import { generateId, BASE_PATH } from '../utils'
 import path from 'path'
 export interface GSheetConfig {
-  sheetId: string
-  apiKey: string
+  sheetId?: string
+  apiKey?: string
+  driveId?: string
+  driveApiKey?: string
 }
 
 export interface PretalxConfig {
@@ -12,7 +14,10 @@ export interface PretalxConfig {
   apiToken: string
 }
 
-export type IDataImporter = { type: 'gsheet'; config: GSheetConfig } | { type: 'pretalx'; config: PretalxConfig }
+export type IDataImporter =
+  | { type: 'gsheet'; config: GSheetConfig }
+  | { type: 'pretalx'; config: PretalxConfig }
+export type IDataExporter = { type: 'gdrive'; config: GSheetConfig }
 
 export interface IEvent {
   id: string
@@ -30,6 +35,7 @@ export interface IEvent {
   website?: string
   timezone: string
   accentColor?: string
+  dataExporter?: IDataExporter[]
 }
 
 export default class Event implements IEvent {
@@ -58,6 +64,8 @@ export default class Event implements IEvent {
 
   dataImporter: IDataImporter[] | undefined
 
+  dataExporter: IDataExporter[] | undefined
+
   eventCover?: string
 
   archiveMode?: boolean
@@ -85,6 +93,7 @@ export default class Event implements IEvent {
     logo,
     banner,
     accentColor,
+    dataExporter,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -100,7 +109,8 @@ export default class Event implements IEvent {
     this.timezone = timezone ?? 'utc'
     this.logo = logo
     this.banner = banner
-    this.accentColor = accentColor ?? '#7983ff'
+    this.accentColor = accentColor ?? '#351B71'
+    this.dataExporter = dataExporter
     // this.validateThis();
   }
 
@@ -121,9 +131,17 @@ export default class Event implements IEvent {
     return evt
   }
 
-  public static async getEventPath(organizationId: string, eventId?: string): Promise<string> {
+  public static async getEventPath(
+    organizationId: string,
+    eventId?: string
+  ): Promise<string> {
     if (eventId) {
-      return path.join(BASE_PATH, 'events', organizationId, `${eventId}.json`)
+      return path.join(
+        BASE_PATH,
+        'events',
+        organizationId,
+        `${eventId}.json`
+      )
     }
     return path.join(BASE_PATH, 'events', organizationId)
   }
