@@ -47,7 +47,7 @@ const Layout = async ({
   return (
     <div className="flex flex-col overflow-hidden h-full z-1">
       <main
-        className={`flex w-full overflow-scroll  ml-auto bg-background`}>
+        className={`h-screen bg-accent flex w-full overflow-scroll  ml-auto md:h-full`}>
         <ColorComponent
           event={event.toJson()}
           stages={stages.map((stage) => stage.toJson())}

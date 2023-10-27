@@ -19,7 +19,7 @@
   "eventCover": "scroll_banner.png",
   "banner": "scroll_banner.png",
   "website": "http://scroll.io",
-  "archiveMode": true,
+  "archiveMode": false,
   "timezone": "Asia/Ho_Chi_Minh",
   "accentColor": "#EB5132"
 }

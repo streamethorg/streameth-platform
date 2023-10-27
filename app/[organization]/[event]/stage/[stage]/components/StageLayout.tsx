@@ -36,11 +36,13 @@ export default function StageLayout() {
   const { stage, sessions, currentSession } = context
 
   return (
-    <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
-      <div className="flex flex-col w-full lg:flex-row relative lg:gap-4">
+    <div className="h-full flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
+      <div className="h-full flex flex-col w-full lg:flex-row relative p-2 lg:gap-4">
         <div
           ref={stickyRef}
-          className="sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
+          className=" bg-base p-2 mb-2  md:p-4 rounded-xl sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll
+          
+          ">
           <ActionsComponent title={stage.name}>
             <EmbedButton
               streamId={stage.streamSettings.streamId}
@@ -53,7 +55,7 @@ export default function StageLayout() {
             playerName={stage.name}
           />
         </div>
-        <div className="relative flex flex-col w-full pt-0 lg:p-0 lg:px-2 lg:h-full lg:w-[30%] lg:mt-0">
+        <div className="relative flex flex-grow flex-col w-full pt-0 lg:p-0 lg:px-2 lg:h-full lg:w-[30%] lg:mt-0">
           <PluginBar
             bottomOffset={bottomOffset}
             tabs={[
