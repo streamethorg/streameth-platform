@@ -18,14 +18,19 @@ export const getEnvironment = () => {
 }
 
 export const getBasePath = () => {
-  if (environment === 'development') return path.join(process.cwd(), 'data')
+  if (environment === 'development')
+    return path.join(process.cwd(), 'data')
   return 'data'
 }
 
 export const BASE_PATH = getBasePath()
 export const PUBLIC_PATH = 'public'
 
-export const IMAGE_BASE_PATH = environment === 'development' ? path.join(process.cwd(), 'public') : 'public'
+export const IMAGE_BASE_PATH =
+  environment === 'development'
+    ? path.join(process.cwd(), 'public')
+    : 'public'
+// export const IMAGE_BASE_PATH = path.join(process.cwd(), 'public')
 
 export const hasData = ({ event }: { event: IEvent }) => {
   return event.dataImporter !== undefined

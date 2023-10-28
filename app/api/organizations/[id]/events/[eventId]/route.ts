@@ -70,9 +70,9 @@ export async function DELETE(
         { status: 500 }
       )
     }
-
+    const generatedEventId = generateId(event)
     const controller = new EventController()
-    await controller.deleteEvent(event, organizationId)
+    await controller.deleteEvent(generatedEventId, organizationId)
 
     return NextResponse.json(
       { message: 'Event has been deleted' },

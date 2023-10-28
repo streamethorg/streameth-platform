@@ -16,7 +16,9 @@ import SuccessErrorModal from './SuccessErrorModal'
 import CreateEditFooter from './CreateEditFooter'
 import useValidateForm from '@/app/hooks/useValidateForm'
 import { EventFormSchema } from '@/app/constants/event'
-
+import { useRouter } from 'next/navigation'
+import { generateId } from '@/server/utils'
+import { useTransition } from 'react'
 const CreateEditEvent = ({
   event,
   organizationId,
@@ -27,6 +29,7 @@ const CreateEditEvent = ({
   const [currentStep, setCurrentStep] = useState(1)
   const [error, setError] = useState<string | null>(null)
   const { openModal, closeModal } = useContext(ModalContext)
+  const [isPending, startTransition] = useTransition()
   const [formData, setFormData] = useState<Omit<IEvent, 'id'>>({
     organizationId,
     name: '',
@@ -42,6 +45,7 @@ const CreateEditEvent = ({
     dataExporter: [],
     dataImporter: [],
   })
+  const router = useRouter()
 
   const {
     validationErrors,
@@ -95,7 +99,7 @@ const CreateEditEvent = ({
     const isValidForm = validateForm()
     if (isValidForm) {
       fetch(
-        `/api/admin/event?event=${formData.name}&organization=${organizationId}`,
+        `/api/organizations/${organizationId}/events/${formData.name}`,
         {
           method: event ? 'PATCH' : 'POST',
           headers: {
@@ -108,11 +112,25 @@ const CreateEditEvent = ({
           if (!response.ok) {
             throw new Error('Failed to create event')
           }
+
           return response.json()
         })
         .then(() => {
           setHasAttemptedFormSubmit(false)
           openModal(<SuccessErrorModal success />)
+          !event &&
+            startTransition(() =>
+              router.push(
+                `/admin/${organizationId}/${generateId(
+                  formData.name
+                )}`
+              )
+            )
+          !event && startTransition(() => router.refresh())
+          if (isPending) {
+            return <div>Loading...</div>
+          }
+          //  router.push(`/admin/${organizationId}/${generateId(formData.name)}`)
         })
         .catch((err) => {
           setError('An error occurred')
@@ -184,6 +202,8 @@ const CreateEditEvent = ({
       )}
       {error && <div className="mt-4 text-red-500">{error}</div>}
       <CreateEditFooter
+        formData={formData}
+        organizationId={organizationId}
         event={event}
         setCurrentStep={setCurrentStep}
         currentStep={currentStep}

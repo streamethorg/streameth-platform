@@ -1,8 +1,10 @@
+export const revalidate = 0
 import { apiUrl } from '@/server/utils'
 import { IEvent } from '@/server/model/event'
 import AddEventButton from './components/AddEventButton'
 import EventEntry from './components/EventEntry'
 import AdminItemsContainer from '../components/utils/AdminItemsContainer'
+import EventController from '@/server/controller/event'
 
 export async function generateStaticParams() {
   const data = await (await fetch(`${apiUrl()}/organizations`)).json()
@@ -18,25 +20,10 @@ const EventsPage = async ({
 }: {
   params: { organization: string }
 }) => {
-  let events: IEvent[] = []
-
-  await fetch(
-    `${apiUrl()}/organizations/${params.organization}/events`,
-    { next: { revalidate: 10 } }
+  const eventController = new EventController()
+  const events = await eventController.getAllEventsForOrganization(
+    params.organization
   )
-    .then((response) => {
-      if (!response.ok) {
-        return Promise.reject('Failed to fetch events')
-      }
-      return response.json()
-    })
-    .then((data) => {
-      events = data
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-
   return (
     <div className="w-full">
       <div className="flex justify-between items-center">
@@ -44,11 +31,11 @@ const EventsPage = async ({
 
         <AddEventButton organization={params.organization} />
       </div>
-      {events.length > 0 ? (
+      {events?.length > 0 ? (
         <>
           <p className="my-2">Your events</p>
           <AdminItemsContainer>
-            {events?.map((event) => (
+            {events?.map((event: IEvent) => (
               <EventEntry key={event?.id} event={event} />
             ))}
           </AdminItemsContainer>

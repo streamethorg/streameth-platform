@@ -5,24 +5,35 @@ import StatusBarFullIcon from '@/app/assets/icons/StatusBarFullIcon'
 import { Button } from '@/app/utils/Button'
 import { ModalContext } from '@/components/context/ModalContext'
 import { IEvent } from '@/server/model/event'
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 
 interface CreateEditFooterProps {
   currentStep: number
   setCurrentStep: Dispatch<SetStateAction<number>>
   event?: IEvent
+  organizationId: string
+  formData: Omit<IEvent, 'id'>
 }
 
 const CreateEditFooter = ({
   setCurrentStep,
   currentStep,
   event,
+  organizationId,
+  formData,
 }: CreateEditFooterProps) => {
   const { openModal, closeModal } = useContext(ModalContext)
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const handleDelete = () => {
     fetch(
-      `/api/admin/event?event=${event?.id}&organization=${event?.organizationId}`,
+      `/api/organizations/${organizationId}/events/${formData.name}`,
       {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }
     )
       .then((response) => {
@@ -30,11 +41,16 @@ const CreateEditFooter = ({
           throw new Error('Failed to delete event')
         }
       })
+      .then(() => {
+        closeModal()
+        startTransition(() => router.push(`/admin/${organizationId}`))
+        startTransition(() => router.refresh())
+        if (isPending) {
+          return <div>Loading...</div>
+        }
+      })
       .catch((err) => {
         console.error('An error occurred', err)
-      })
-      .finally(() => {
-        closeModal()
       })
   }
 

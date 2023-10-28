@@ -168,9 +168,9 @@ const CreateEditEventStepOne = ({
             handleChange(e)
           }
           value={
-            formData.start instanceof Date
-              ? formData.start.toISOString().split('T')[0]
-              : formData.start
+            formData.start
+              ? new Date(formData.start).toISOString().split('T')[0]
+              : ''
           }
         />
         <FormTextInput
@@ -184,9 +184,9 @@ const CreateEditEventStepOne = ({
             handleChange(e)
           }
           value={
-            formData.end instanceof Date
-              ? formData.end.toISOString().split('T')[0]
-              : formData.end
+            formData.end
+              ? new Date(formData.end).toISOString().split('T')[0]
+              : ''
           }
         />
         <FormSelect

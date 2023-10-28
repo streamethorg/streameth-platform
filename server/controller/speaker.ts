@@ -6,7 +6,7 @@ export default class SpeakerController {
   private controller: BaseController<ISpeaker>
 
   constructor() {
-    this.controller = new BaseController<ISpeaker>(getEnvironment())
+    this.controller = new BaseController<ISpeaker>('fs')
   }
 
   public async getSpeaker(

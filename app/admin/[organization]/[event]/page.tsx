@@ -1,5 +1,7 @@
 import EventController from '@/server/controller/event'
 import CreateEditEvent from '../components/CreateEditEvent'
+import { hasData } from '@/server/utils'
+import { notFound } from 'next/navigation'
 
 interface Params {
   event: string
@@ -12,6 +14,7 @@ const EventPage = async ({ params }: { params: Params }) => {
     params.event,
     params.organization
   )
+  if (!hasData({ event })) return notFound()
 
   return (
     <div className="pb-8">

@@ -93,7 +93,7 @@ export async function GetFile(
   }
 }
 
-export async function GetAllFile(folder: string = DEFAULT_FOLDER) {
+export async function GetAllFiles(folder: string = DEFAULT_FOLDER) {
   try {
     const response = await fetch(
       `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}`,
