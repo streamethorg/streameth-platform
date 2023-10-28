@@ -75,7 +75,7 @@ export default function NavbarTop() {
               </div>
             )
           })}
-        <div className="flex">
+        {/* <div className="flex">
           <SocialIcon
             url={`https://twitter.com/Scroll_ZKP`}
             target="_blank"
@@ -96,7 +96,7 @@ export default function NavbarTop() {
               setIsNavVisible={setMenuVisible}
             />
           )}
-        </div>
+        </div> */}
       </div>
     </header>
   )

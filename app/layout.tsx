@@ -33,7 +33,7 @@ export default function RootLayout({
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className="bg-background flex flex-col h-[100dvh] lg:overflow-auto w-screen">
+                <div className=" flex flex-col h-[100dvh] lg:overflow-auto w-screen">
                   <FilterContextProvider>
                     <TopNavbarContextProvider>
                       <Navbar />
