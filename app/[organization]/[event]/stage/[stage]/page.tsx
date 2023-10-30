@@ -56,12 +56,6 @@ export default async function Stage({ params }: Params) {
       // timestamp: new Date().getTime()
     })
 
-    if (!sessions.length)
-      return (
-        <div className="justify-center items-center w-full">
-          Stage has nothing scheduled
-        </div>
-      )
 
     return (
       <StageContextProvider

@@ -12,7 +12,7 @@ interface Params {
 
 const SpeakerModal = ({ sessions, speaker }: Params) => {
   return (
-    <div className="flex flex-col w-full p-4 justify-center items-center space-y-4">
+    <div className="flex bg-base flex-col w-full p-4 justify-center items-center space-y-4">
       <div className="flex justify-center items-center w-48 p-2">
         <SpeakerPhoto speaker={speaker} size="lg" />
       </div>

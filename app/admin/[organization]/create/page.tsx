@@ -1,7 +1,6 @@
 import CreateEditEvent from '../components/CreateEditEvent'
 import { EventFormProvider } from '../components/EventFormContext'
 interface Params {
-  event: string
   organization: string
 }
 

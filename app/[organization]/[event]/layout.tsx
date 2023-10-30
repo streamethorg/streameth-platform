@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import SessionController from '@/server/controller/session'
 import speakerController from '@/server/controller/speaker'
 import ColorComponent from '../../utils/ColorComponent'
-
+import Navbar from '@/components/Layout/NavbarTop'
 export async function generateStaticParams() {
   const eventController = new EventController()
   const allEvents = await eventController.getAllEvents({})
@@ -45,9 +45,11 @@ const Layout = async ({
   }
 
   return (
-    <div className="flex flex-col  z-1 bg-accent">
-      <main
-        className={` flex w-full ml-auto md:h-full`}>
+    <div className="h-full flex flex-col  z-1 bg-accent">
+        <Navbar />
+
+      <main className={` flex w-full ml-auto md:h-full`}>
+
         <ColorComponent
           event={event.toJson()}
           stages={stages.map((stage) => stage.toJson())}
