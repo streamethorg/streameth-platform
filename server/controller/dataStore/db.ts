@@ -1,8 +1,15 @@
-import { AddOrUpdateFile, DeleteFile, GetFile, GetAllFiles } from '../../utils/github'
+import {
+  AddOrUpdateFile,
+  DeleteFile,
+  GetFile,
+  GetAllFiles,
+} from '../../utils/github'
 export default class DbController {
   public async write(query: string, data: string): Promise<void> {
     const parsedData = JSON.parse(data)
-    const fileName = `${parsedData.name.replace(/ /g, '_').toLowerCase()}.json`
+    const fileName = `${parsedData.name
+      .replace(/ /g, '_')
+      .toLowerCase()}.json`
     await AddOrUpdateFile(fileName, data, query)
   }
 
@@ -22,7 +29,10 @@ export default class DbController {
     }
   }
 
-  public async delete(filePath: string, organizationId?: string): Promise<void> {
+  public async delete(
+    filePath: string,
+    organizationId?: string
+  ): Promise<void> {
     try {
       await DeleteFile(organizationId, filePath)
     } catch (e) {

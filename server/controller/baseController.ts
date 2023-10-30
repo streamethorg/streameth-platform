@@ -34,7 +34,10 @@ export default class BaseController<T> implements IBaseController<T> {
   }
 
   async get(query: string): Promise<T> {
-    if (getEnvironment() == 'fs' && fs.lstatSync(query).isDirectory()) {
+    if (
+      getEnvironment() == 'fs' &&
+      fs.lstatSync(query).isDirectory()
+    ) {
       console.error(`${query} is a directory, not a file.`)
       process.exit(1)
     }
