@@ -12,7 +12,7 @@ interface ImageFileUploaderProps {
   isCircleImage?: boolean
   toolTipHTML?: string
   aspectRatio?: number
-  imageKey?: string
+  imageKey: string
   validationErrors?: Record<string, any>
   onImageSubmit: (
     event: Blob,
@@ -59,11 +59,7 @@ const ImageFileUploader = ({
       img.onload = () => {
         const { naturalWidth, naturalHeight } = img
         const imageAspectRatio = naturalWidth / naturalHeight
-        if (
-          aspectRatio === naturalWidth ||
-          naturalHeight ||
-          imageAspectRatio
-        ) {
+        if (imageAspectRatio === aspectRatio && imageKey) {
           onImageSubmit(file, imageKey, setLoading)
         } else {
           setError(
