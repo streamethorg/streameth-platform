@@ -26,8 +26,7 @@ export default class Importer extends BaseImporter {
       throw new Error('Invalid importer type for gsheet module')
     if (!importer.config.sheetId)
       throw new Error('Sheet ID is missing for gsheet module')
-    if (!process.env.GOOGLE_API_KEY)
-      throw new Error('API key is missing for gsheet module')
+
     this.googleSheetService = new GoogleSheetService(
       importer.config.sheetId
     )
