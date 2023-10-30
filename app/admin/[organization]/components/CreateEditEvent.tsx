@@ -16,6 +16,9 @@ import SuccessErrorModal from './SuccessErrorModal'
 import CreateEditFooter from './CreateEditFooter'
 import useValidateForm from '@/app/hooks/useValidateForm'
 import { EventFormSchema } from '@/app/constants/event'
+import { useTransition } from 'react'
+import { useRouter } from 'next/navigation'
+import { generateId } from '@/server/utils'
 
 const CreateEditEvent = ({
   event,
@@ -24,6 +27,7 @@ const CreateEditEvent = ({
   event?: IEvent
   organizationId: string
 }) => {
+  const [isPending, startTransition] = useTransition()
   const [currentStep, setCurrentStep] = useState(1)
   const [error, setError] = useState<string | null>(null)
   const { openModal, closeModal } = useContext(ModalContext)
@@ -42,7 +46,7 @@ const CreateEditEvent = ({
     dataExporter: [],
     dataImporter: [],
   })
-
+  const router = useRouter()
   const {
     validationErrors,
     validateForm,
@@ -95,7 +99,7 @@ const CreateEditEvent = ({
     const isValidForm = validateForm()
     if (isValidForm) {
       fetch(
-        `/api/admin/event?event=${formData.name}&organization=${organizationId}`,
+        `/api/organizations/${organizationId}/events/${formData.name}`,
         {
           method: event ? 'PATCH' : 'POST',
           headers: {
@@ -113,6 +117,18 @@ const CreateEditEvent = ({
         .then(() => {
           setHasAttemptedFormSubmit(false)
           openModal(<SuccessErrorModal success />)
+          !event &&
+            startTransition(() =>
+              router.push(
+                `/admin/${organizationId}/${generateId(
+                  formData.name
+                )}`
+              )
+            )
+          !event && startTransition(() => router.refresh())
+          if (isPending) {
+            return <div>Loading...</div>
+          }
         })
         .catch((err) => {
           setError('An error occurred')
