@@ -59,18 +59,18 @@ const ImageFileUploader = ({
       img.onload = () => {
         const { naturalWidth, naturalHeight } = img
         const imageAspectRatio = naturalWidth / naturalHeight
-        // if (
-        //   aspectRatio === naturalWidth ||
-        //   naturalHeight ||
-        //   imageAspectRatio
-        // ) {
-        onImageSubmit(file, imageKey, setLoading)
-        // } else {
-        //   setError(
-        //     `Aspect ratio does not match the required ${aspectRatio}.`
-        //   )
-        setLoading(false)
-        // }
+        if (
+          aspectRatio === naturalWidth ||
+          naturalHeight ||
+          imageAspectRatio
+        ) {
+          onImageSubmit(file, imageKey, setLoading)
+        } else {
+          setError(
+            `Aspect ratio does not match the required ${aspectRatio}.`
+          )
+          setLoading(false)
+        }
       }
     }
     reader.readAsDataURL(file)
