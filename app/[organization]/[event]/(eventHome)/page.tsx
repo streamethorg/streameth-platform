@@ -6,6 +6,13 @@ import StageController from '@/server/controller/stage'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
 import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import {
+  getEventLocalTime,
+  getEventTime,
+  getTime,
+} from '@/utils/time'
 interface Params {
   event: string
   organization: string
@@ -57,7 +64,9 @@ const EventHome = async ({ params }: { params: Params }) => {
               </p>
               <p>
                 <span className="mr-2">&#9200;</span> Time:{' '}
-                {new Date(event.start).toLocaleTimeString()}
+                {event?.startTime
+                  ? getEventLocalTime(event.startTime, event.timezone)
+                  : 'TBD'}
               </p>
               <p>
                 <span className="mr-2">&#127759;</span> Where:{' '}
@@ -69,7 +78,11 @@ const EventHome = async ({ params }: { params: Params }) => {
                 className="text-center p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
                 Watch livestream
               </Link>
-              <p>{event.description}</p>
+              <article className="prose max-w-full prose-gray">
+                <Markdown remarkPlugins={[remarkGfm]}>
+                  {event.description}
+                </Markdown>
+              </article>
             </div>
           </div>
         </div>
