@@ -97,7 +97,7 @@ const CreateEditEvent = ({
 
   const handleSubmit = () => {
     const isValidForm = validateForm()
-    if (isValidForm) {
+    if (true) {
       fetch(
         `/api/organizations/${organizationId}/events/${formData.name}`,
         {
