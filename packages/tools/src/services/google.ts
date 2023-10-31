@@ -3,7 +3,7 @@ import { google } from 'googleapis'
 import path from 'path'
 
 export async function Authenticate(scopes: string[]) {
-  console.log('Authenticating with Google', scopes)
+  // console.log('Authenticating with Google', scopes)
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES
   const auth = await authenticate({
@@ -16,7 +16,7 @@ export async function Authenticate(scopes: string[]) {
 }
 
 export async function AuthenticateServiceAccount(scopes: string[]) {
-  console.log('Authenticating with Google', scopes)
+  // console.log('Authenticating with Google', scopes)
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES
   const auth = new google.auth.GoogleAuth({

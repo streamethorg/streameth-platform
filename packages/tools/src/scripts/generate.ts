@@ -8,7 +8,6 @@ import { FileExists, UploadDrive } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
 
 const apiBaseUri = 'http://localhost:3000/api'
-const TEST_UPLOAD_DRIVE_ID = '1q6hzRnxuwI-KSNRknHbFJkGrohqNbK-V'
 
 start(process.argv.slice(2))
   .then(() => {
@@ -28,12 +27,10 @@ async function start(args: string[]) {
 
   if (args.length > 0) {
     const event = args[0]
-    console.log('Only generate assets for', event)
     events = events.filter((e: any) => e.id === event)
   }
 
   for (const event of events) {
-    console.log(`Generating assets for ${event.id}..`)
     await generateEventAssets(event)
   }
 
@@ -41,19 +38,20 @@ async function start(args: string[]) {
 }
 
 async function generateEventAssets(event: any) {
-  console.log('Create Remotion bundler..')
+  console.log(`Generating assets for ${event.id}..`)
   const bundled = await bundle({
     entryPoint: join(process.cwd(), 'src', 'index.ts'),
     webpackOverride: (config) => webpackOverride(config),
   })
 
-  console.log('Fetch compositions for', event.id)
-  const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id))
+  console.log('Fetch compositions..')
+  const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id) || c.id.includes(event.id.replace('_', '-')))
   if (compositions.length === 0) {
     console.log('No compositions found for. Skip rendering')
     return
   }
 
+  console.log('Fetch sessions..')
   const res = await fetch(`${apiBaseUri}/organizations/${event.organizationId}/events/${event.id}/sessions`)
   const sessions = await res.json()
   if (sessions.length === 0) {
@@ -61,8 +59,10 @@ async function generateEventAssets(event: any) {
     return
   }
 
-  if (event.dataExporter) {
-
+  let folderId = ''
+  if (event.dataExporter?.length > 0 && event.dataExporter[0].type === 'gdrive' && event.dataExporter[0].config) {
+    folderId = event.dataExporter[0].config.sheetId || event.dataExporter[0].config.driveId
+    console.log('Using Google Drive data exporter to folder', folderId)
   }
 
   const introFolder = join(CONFIG.ASSET_FOLDER, event.id, 'intros')
@@ -70,7 +70,7 @@ async function generateEventAssets(event: any) {
   mkdirSync(introFolder, { recursive: true })
   mkdirSync(socialFolder, { recursive: true })
 
-  console.log('Render compositions for sessions', sessions.length)
+  console.log(`Render ${compositions.length} compositions for # ${sessions.length} sessions`)
   for (const session of sessions) {
     console.log(' -', session.id)
 
@@ -85,11 +85,12 @@ async function generateEventAssets(event: any) {
             composition,
             serveUrl: bundled,
             outputLocation: introFilePath,
+            inputProps: { session },
             onProgress,
           })
         }
 
-        upload(composition.id, introFilePath, 'video/mp4')
+        if (folderId) upload(composition.id, introFilePath, 'video/mp4', folderId)
 
         // Generate a still from the same composition's last frame
         const introStillPath = `${introFolder}/${composition.id}.png`
@@ -99,10 +100,11 @@ async function generateEventAssets(event: any) {
             serveUrl: bundled,
             frame: composition.durationInFrames - 1,
             output: introStillPath,
+            inputProps: { session },
           })
         }
 
-        upload(composition.id, introStillPath, 'image/png')
+        if (folderId) upload(composition.id, introStillPath, 'image/png', folderId)
       }
 
       lastProgressPrinted = -1
@@ -120,14 +122,12 @@ function fileExists(path: string, fileSize = 100000) {
   return false
 }
 
-async function upload(id: string, path: string, type: string) {
-  // TODO: Need to properly fetch a Google Drive/Folder ID from Event's dataExporter
-  // - CONFIG.GOOGLE_DRIVE_ID is the root shared Drive
-  // - TEST_UPLOAD_DRIVE_ID is the (sub) folder within the root drive 
+async function upload(id: string, path: string, type: string, folderId: string) {
+  // - CONFIG.GOOGLE_DRIVE_ID is main, root drive. Files are upload to their respective sub folder Ids
   if (CONFIG.GOOGLE_DRIVE_ID) {
-    const exists = await FileExists(id, type, TEST_UPLOAD_DRIVE_ID)
+    const exists = await FileExists(id, type, folderId)
     if (!exists) {
-      await UploadDrive(id, path, type, TEST_UPLOAD_DRIVE_ID)
+      await UploadDrive(id, path, type, folderId)
     }
   }
 }
