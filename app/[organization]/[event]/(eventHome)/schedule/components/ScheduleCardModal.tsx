@@ -20,7 +20,7 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const handleGoToStage = () => {
     setIsLoading(true)
     closeModal()
-    router.push(`stage/${session.stageId}`)
+    router.push(`${session.eventId}/stage/${session.stageId}`)
   }
 
   return (

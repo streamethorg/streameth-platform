@@ -11,11 +11,11 @@ const Modal = ({
   children: React.ReactNode
 }) => {
   useEffect(() => {
-    return () => {
-      if (open) {
-        onClose()
-      }
-    }
+    // return () => {
+    //   if (open) {
+    //     onClose()
+    //   }
+    // }
   }, [open, onClose])
 
   useEffect(() => {
