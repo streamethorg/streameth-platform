@@ -12,7 +12,7 @@ interface ImageFileUploaderProps {
   isCircleImage?: boolean
   toolTipHTML?: string
   aspectRatio?: number
-  imageKey?: string
+  imageKey: string
   validationErrors?: Record<string, any>
   onImageSubmit: (
     event: Blob,
