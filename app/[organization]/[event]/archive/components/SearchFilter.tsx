@@ -79,7 +79,7 @@ const SearchFilter = <T extends object>({
             value={filterInput}
             onChange={(e) => setFilterInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="p-2 italic border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
+            className="p-2 italic  w-full bg-base rounded-xl text-main-text placeholder:text-main-text placeholder:text-sm"
           />
           <div className="h-full justify-center items-center flex absolute right-0 top-0">
             {selectedItems.length > 0 && (

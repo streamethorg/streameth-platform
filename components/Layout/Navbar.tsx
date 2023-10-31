@@ -45,6 +45,10 @@ export default function Navbar({
     currentPage ? currentPage.name : ''
   )
 
+  if (pages.length === 0) {
+    return null
+  }
+  
   return (
     <nav
       aria-label="Global"
