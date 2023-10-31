@@ -18,14 +18,17 @@
   "eventCover": "devconnect_cover.png",
   "website": "",
   "archiveMode": false,
-  "timezone": "(UTC+03:00) Istanbul",
+  "timezone": "Europe/Istanbul",
   "logo": "ethconomics_logo.png",
   "banner": "devconnect_banner.png",
   "accentColor": "red",
   "dataExporter": [
     {
       "type": "gdrive",
-      "config": { "driveId": "", "driveApiKey": "" }
+      "config": {
+        "driveId": "",
+        "driveApiKey": ""
+      }
     }
   ]
 }

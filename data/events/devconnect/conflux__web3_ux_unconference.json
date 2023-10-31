@@ -18,14 +18,17 @@
   "eventCover": "devconnect-logo.png",
   "website": "",
   "archiveMode": false,
-  "timezone": "(UTC+03:00) Istanbul",
+  "timezone": "Europe/Istanbul",
   "logo": "web3-ux-logo.png",
   "banner": "devconnect_banner.png",
   "accentColor": "black",
   "dataExporter": [
     {
       "type": "gdrive",
-      "config": { "driveId": "", "driveApiKey": "" }
+      "config": {
+        "driveId": "",
+        "driveApiKey": ""
+      }
     }
   ]
 }

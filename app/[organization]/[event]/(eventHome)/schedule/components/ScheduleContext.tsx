@@ -29,7 +29,7 @@ const ScheduleContext = createContext<ScheduleContextProps>({
 
 interface ScheduleContextProviderProps {
   event: IEvent
-  stage: IStage
+  stage: IStage['id']
   children: ReactNode
   sessions: ISession[]
 }
@@ -40,15 +40,15 @@ const ScheduleContextProvider: React.FC<
   const [date, setDate] = useState<number>(
     props.event.start.getTime()
   )
-  const [stage, setStage] = useState<IStage['id']>('')
+  const [stage, setStage] = useState<IStage['id']>(props.stage)
   const [sessions, setSessions] = useState<ISession[]>([])
 
   useEffect(() => {
     setSessions(
       props.sessions.filter((session) => {
         return (
-          session.stageId === stage && isSameDay(session.start, date)
-        )
+          session.stageId === stage && isSameDay(date, session.start)
+        ) 
       })
     )
   }, [date, stage])

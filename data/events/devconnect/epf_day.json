@@ -1,1 +1,34 @@
-{"id":"epf_day","name":"EPF Day","description":"Protocol Fellowship program event. At minimum to get the crew together, possibly to attract/inform new interested members, and maybe presentations on projects accomplished thus far.\n","start":"2023-11-17T00:00:00.000Z","end":"2023-11-17T00:00:00.000Z","location":"Istanbul, Türkiye","organizationId":"devconnect","dataImporter":[{"type":"gsheet","config":{"sheetId":"1gaf8oSQr_ekvfs2UPkiI29uCUIrbUhnzoGO8jhP5zfU","apiKey":"k"}}],"eventCover":"devconnect_cover.png","website":"","archiveMode":false,"timezone":"(UTC+03:00) Istanbul","logo":"epf-logo.jpg","banner":"devconnect_banner.png","accentColor":"#9D67A4","dataExporter":[{"type":"gdrive","config":{"driveId":"","driveApiKey":""}}]}
+{
+  "id": "epf_day",
+  "name": "EPF Day",
+  "description": "Protocol Fellowship program event. At minimum to get the crew together, possibly to attract/inform new interested members, and maybe presentations on projects accomplished thus far.\n",
+  "start": "2023-11-17T00:00:00.000Z",
+  "end": "2023-11-17T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "devconnect",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1gaf8oSQr_ekvfs2UPkiI29uCUIrbUhnzoGO8jhP5zfU",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "devconnect_cover.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "epf-logo.jpg",
+  "banner": "devconnect_banner.png",
+  "accentColor": "#9D67A4",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "",
+        "driveApiKey": ""
+      }
+    }
+  ]
+}

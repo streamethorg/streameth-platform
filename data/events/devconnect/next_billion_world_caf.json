@@ -1,1 +1,34 @@
-{"id":"next_billion_world_caf","name":"Next Billion World Café","description":"Informal discussions, facilitating exchange between leaders with real-world challenges and builders with technical expertise.\n","start":"2023-11-15T00:00:00.000Z","end":"2023-11-15T00:00:00.000Z","location":"Istanbul, Türkiye","organizationId":"devconnect","dataImporter":[{"type":"gsheet","config":{"sheetId":"15moS82XL0lIs1MA0vmi6xD3MkWpXszgs-wNPTmJ-XpM","apiKey":"k"}}],"eventCover":"devconnect_cover.png","website":"","archiveMode":false,"timezone":"(UTC+03:00) Istanbul","logo":"devconnect_cover.png","banner":"devconnect_banner.png","accentColor":"","dataExporter":[{"type":"gdrive","config":{"driveId":"","driveApiKey":""}}]}
+{
+  "id": "next_billion_world_caf",
+  "name": "Next Billion World Café",
+  "description": "Informal discussions, facilitating exchange between leaders with real-world challenges and builders with technical expertise.\n",
+  "start": "2023-11-15T00:00:00.000Z",
+  "end": "2023-11-15T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "devconnect",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "15moS82XL0lIs1MA0vmi6xD3MkWpXszgs-wNPTmJ-XpM",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "devconnect_cover.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "devconnect_cover.png",
+  "banner": "devconnect_banner.png",
+  "accentColor": "",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "",
+        "driveApiKey": ""
+      }
+    }
+  ]
+}
