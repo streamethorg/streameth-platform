@@ -55,6 +55,7 @@ export default function NavbarTop() {
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
           <Image
+          className="rounded-full"
             src={logo}
             alt="Logo"
             width={50}
