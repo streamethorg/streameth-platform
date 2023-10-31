@@ -56,7 +56,6 @@ export default async function Stage({ params }: Params) {
       // timestamp: new Date().getTime()
     })
 
-
     return (
       <StageContextProvider
         stage={stage.toJson()}

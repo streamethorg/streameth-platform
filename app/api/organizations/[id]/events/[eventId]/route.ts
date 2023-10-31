@@ -110,20 +110,11 @@ export async function POST(
     const generatedEventId = generateId(formData.name)
     const eventController = new EventController()
 
-    try {
-      await eventController.getEvent(generatedEventId, organizationId)
-      // Event exists
-      return NextResponse.json(
-        { error: 'Event already exists' },
-        { status: 400 }
-      )
-    } catch {
-      // Event doesn't exist, proceed to create
-      await eventController.createEvent(formData)
-      return NextResponse.json('Event has been created', {
-        status: 200,
-      })
-    }
+    // Event doesn't exist, proceed to create
+    await eventController.createEvent(formData)
+    return NextResponse.json('Event has been created', {
+      status: 200,
+    })
   } catch (e) {
     console.error(e)
     return NextResponse.json(

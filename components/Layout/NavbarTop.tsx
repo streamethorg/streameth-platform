@@ -77,7 +77,7 @@ export default function NavbarTop() {
           })}
         {/* <div className="flex">
           <SocialIcon
-            url={`https://twitter.com/Scroll_ZKP`}
+            url={`https://twitter.com/streameth`}
             target="_blank"
             bgColor="#fff"
             fgColor="#1DA1F2"

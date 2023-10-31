@@ -2,6 +2,7 @@ import EventController from '@/server/controller/event'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
 import Link from 'next/link'
+import StageController from '@/server/controller/stage'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
 import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
@@ -33,6 +34,11 @@ const EventHome = async ({ params }: { params: Params }) => {
   const event = (
     await eventController.getEvent(params.event, params.organization)
   ).toJson()
+
+  const stages = (
+    await new StageController().getAllStagesForEvent(params.event)
+  ).map((stage) => stage.toJson())
+
   if (!hasData({ event })) return notFound()
 
   return (

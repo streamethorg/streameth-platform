@@ -33,8 +33,26 @@ export default function StageLayout() {
 
   if (!context) return null
 
-  const { stage, sessions, currentSession } = context
+  const { stage, sessions } = context
 
+  const getPluginTabs = () => {
+    const tabs = []
+
+    if (sessions.length > 0) {
+      tabs.push({
+        id: 'schedule',
+        header: <CalendarIcon />,
+        content: <SessionList sessions={sessions} />,
+      })
+    }
+    tabs.push({
+      id: 'chat',
+      header: <ChatBubbleBottomCenterIcon />,
+      content: <Chat conversationId={stage.id} />,
+    })
+
+    return tabs
+  }
   return (
     <div className="h-full flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
 
@@ -58,18 +76,7 @@ export default function StageLayout() {
         <div className="mt-2 relative flex flex-grow flex-col w-full pt-0 lg:p-0 lg:px-2 lg:h-full lg:w-[30%] lg:mt-0">
           <PluginBar
             bottomOffset={bottomOffset}
-            tabs={[
-              {
-                id: 'schedule',
-                header: <CalendarIcon />,
-                content: <SessionList sessions={sessions} />,
-              },
-              {
-                id: 'chat',
-                header: <ChatBubbleBottomCenterIcon />,
-                content: <Chat conversationId={stage.id} />,
-              },
-            ]}
+            tabs={getPluginTabs()}
           />
         </div>
       </div>

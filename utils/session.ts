@@ -6,7 +6,9 @@ if (!process.env.SESSION_SECRET) {
 }
 
 if (!process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID) {
-  throw new Error('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID cannot be empty.')
+  throw new Error(
+    'NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID cannot be empty.'
+  )
 }
 
 const COOKIE_NAME = process.env.COOKIE_NAME ?? 'streameth.siwe'
@@ -42,11 +44,15 @@ class Session {
     this.address = session?.address
   }
 
-  static async fromRequest(req: NextRequest): Promise<Session | null> {
+  static async fromRequest(
+    req: NextRequest
+  ): Promise<Session | null> {
     const sessionCookie = req.cookies.get(COOKIE_NAME)?.value
 
     if (!sessionCookie) return null
-    return new Session(await unsealData<ISession>(sessionCookie, SESSION_OPTIONS))
+    return new Session(
+      await unsealData<ISession>(sessionCookie, SESSION_OPTIONS)
+    )
   }
 
   clear(res: NextResponse): Promise<void> {
@@ -66,14 +72,21 @@ class Session {
   }
 
   async persist(res: NextResponse): Promise<void> {
-    res.cookies.set(COOKIE_NAME, await sealData(this.toJSON(), SESSION_OPTIONS), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    })
+    res.cookies.set(
+      COOKIE_NAME,
+      await sealData(this.toJSON(), SESSION_OPTIONS),
+      {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+      }
+    )
   }
 }
 
-export const tap = async <T>(value: T, cb: (value: T) => Promise<unknown>): Promise<T> => {
+export const tap = async <T>(
+  value: T,
+  cb: (value: T) => Promise<unknown>
+): Promise<T> => {
   await cb(value)
   return value
 }
