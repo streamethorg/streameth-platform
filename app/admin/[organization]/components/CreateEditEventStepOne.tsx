@@ -33,7 +33,9 @@ const CreateEditEventStepOne = () => {
       const data = new FormData()
       data.set('file', file)
       const res = await fetch(
-        `${apiUrl()}/organizations/${formData.organizationId}/events/upload`,
+        `${apiUrl()}/organizations/${
+          formData.organizationId
+        }/events/upload`,
         {
           method: 'POST',
           body: data,

@@ -39,7 +39,6 @@ const CreateEditEvent = () => {
         {currentStep == 3 && <CreateEditEventStepThree />}
       </div>
       <CreateEditFooter />
-
     </div>
   )
 }

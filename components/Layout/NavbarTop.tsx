@@ -54,7 +54,7 @@ export default function NavbarTop() {
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
           <Image
-          className="rounded-full"
+            className="rounded-full"
             src={logo}
             alt="Logo"
             width={50}
@@ -91,12 +91,12 @@ export default function NavbarTop() {
             className={`"h-8 w-8"`}
           />
           */}
-          {pages.length > 1 && (
-            <NavBarButton
-              isNavVisible={menuVisible}
-              setIsNavVisible={setMenuVisible}
-            />
-          )}
+        {pages.length > 1 && (
+          <NavBarButton
+            isNavVisible={menuVisible}
+            setIsNavVisible={setMenuVisible}
+          />
+        )}
       </div>
     </header>
   )

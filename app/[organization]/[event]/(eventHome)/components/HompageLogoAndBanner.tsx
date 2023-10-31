@@ -9,7 +9,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   if (!logo && !banner) return null
 
   return (
-    <ComponentWrapper sectionId='home'>
+    <ComponentWrapper sectionId="home">
       <Image
         className="rounded-lg"
         src={'/events/' + banner}

@@ -25,7 +25,9 @@ const EventsPage = async ({
     organizationId: params.organization,
   })
   const organization =
-    await new OrganizationController().getOrganization(params.organization)
+    await new OrganizationController().getOrganization(
+      params.organization
+    )
 
   return (
     <>

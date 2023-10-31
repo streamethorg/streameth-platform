@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import HomeIcon from '../assets/icons/HomeIcon'

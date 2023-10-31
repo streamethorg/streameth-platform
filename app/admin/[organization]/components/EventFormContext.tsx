@@ -55,21 +55,24 @@ const EventFormProvider: React.FC<EventFormProviderProps> = ({
   const [currentStep, setCurrentStep] = useState(1)
   const [error, setError] = useState<string | null>(null)
   const { openModal, closeModal } = useContext(ModalContext)
-  const [formData, setFormData] = useLocalStorage<Omit<IEvent, 'id'>>(organizationId, {
+  const [formData, setFormData] = useLocalStorage<Omit<IEvent, 'id'>>(
     organizationId,
-    name: '',
-    description: '',
-    start: new Date(),
-    end: new Date(),
-    location: '',
-    archiveMode: false,
-    website: '',
-    eventCover: '',
-    timezone: '',
-    accentColor: '',
-    dataExporter: [],
-    dataImporter: [],
-  })
+    {
+      organizationId,
+      name: '',
+      description: '',
+      start: new Date(),
+      end: new Date(),
+      location: '',
+      archiveMode: false,
+      website: '',
+      eventCover: '',
+      timezone: '',
+      accentColor: '',
+      dataExporter: [],
+      dataImporter: [],
+    }
+  )
 
   const {
     validationErrors,

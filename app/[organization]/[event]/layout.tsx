@@ -46,10 +46,9 @@ const Layout = async ({
 
   return (
     <div className="h-full flex flex-col  z-1 bg-accent min-h-screen ">
-        <Navbar />
+      <Navbar />
 
       <main className={` flex w-full ml-auto md:h-full flex-grow`}>
-
         <ColorComponent
           event={event.toJson()}
           stages={stages.map((stage) => stage.toJson())}

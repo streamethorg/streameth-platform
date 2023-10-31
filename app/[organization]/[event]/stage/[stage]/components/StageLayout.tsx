@@ -73,8 +73,8 @@ export default function StageLayout() {
           />
         </div>
         <div
-        style={{ height: isMobile ? "100%": playerHeight }}
-        className={`w-full lg:w-[25%]`}>
+          style={{ height: isMobile ? '100%' : playerHeight }}
+          className={`w-full lg:w-[25%]`}>
           <PluginBar
             bottomOffset={bottomOffset}
             tabs={getPluginTabs()}

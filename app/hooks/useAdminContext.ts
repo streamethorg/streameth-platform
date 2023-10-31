@@ -1,8 +1,7 @@
-import React from "react"
-import { EventFormContext } from "../admin/[organization]/components/EventFormContext"
+import React from 'react'
+import { EventFormContext } from '../admin/[organization]/components/EventFormContext'
 
 const UseAdminContext = () => {
-
   const context = React.useContext(EventFormContext)
   if (!context) {
     throw new Error(
@@ -10,8 +9,6 @@ const UseAdminContext = () => {
     )
   }
   return context
-
 }
 
 export default UseAdminContext
-

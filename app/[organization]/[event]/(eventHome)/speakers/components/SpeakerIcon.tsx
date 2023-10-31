@@ -16,9 +16,7 @@ export default function SpeakerIcon({
     <div
       className={`flex flex-row items-center text-sm rounded-xl  border p-1 `}>
       <div
-        className={`rounded m-2 ${
-          size === 'md' ? 'h-12' : 'h-8'
-        }`}>
+        className={`rounded m-2 ${size === 'md' ? 'h-12' : 'h-8'}`}>
         <SpeakerPhoto speaker={speaker} size={'md'} />
       </div>
       {!onlyImage && (

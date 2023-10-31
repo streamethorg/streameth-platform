@@ -13,7 +13,7 @@ interface ImageFileUploaderProps {
   toolTipHTML?: string
   aspectRatio?: number
   imageKey?: string
-  validationErrors?: Record<string, any> | string | undefined;
+  validationErrors?: Record<string, any> | string | undefined
   onImageSubmit: (
     event: Blob,
     key: string,
