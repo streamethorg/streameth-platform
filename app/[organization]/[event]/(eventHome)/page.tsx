@@ -65,7 +65,7 @@ const EventHome = async ({ params }: { params: Params }) => {
               </p>
               {/* <ReserveSpotButton event={event} /> */}
               <Link
-                href={`/${params.organization}/${params.event}/livestream`}
+                href={`/${params.organization}/${params.event}/stage/theater`}
                 className="text-center p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
                 Watch livestream
               </Link>
