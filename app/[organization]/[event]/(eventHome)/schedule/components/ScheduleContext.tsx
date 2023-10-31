@@ -48,7 +48,7 @@ const ScheduleContextProvider: React.FC<
       props.sessions.filter((session) => {
         return (
           session.stageId === stage && isSameDay(date, session.start)
-        ) 
+        )
       })
     )
   }, [date, stage])

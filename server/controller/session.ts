@@ -27,8 +27,7 @@ export default class SessionController {
     const sessionQuery = await Session.getSessionPath(
       ses.eventId,
       ses.id
-
-      )
+    )
     ses.validateThis()
     await this.controller.create(sessionQuery, ses)
     return ses
