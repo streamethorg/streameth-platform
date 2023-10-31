@@ -3,6 +3,9 @@ import { IEvent } from '@/server/model/event'
 import Image from 'next/image'
 import ReserveSpotButton from './ReserveSpotModal'
 import ComponentWrapper from './ComponentWrapper'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { getEventPeriod } from '@/utils/time'
 const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   const { logo, banner } = event
 
@@ -29,14 +32,22 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
             </p>
             <p>
               <span className="mr-2">&#9200;</span> Time:{' '}
-              {new Date(event.start).toLocaleTimeString()}
+              {event?.startTime
+                ? `${getEventPeriod(event.startTime)} ${
+                    event.timezone
+                  }`
+                : 'TBD'}
             </p>
             <p>
               <span className="mr-2">&#127759;</span> Where:{' '}
               {event.location}
             </p>
             {/* <ReserveSpotButton event={event} /> */}
-            <p>{event.description}</p>
+            <article className="prose max-w-full prose-gray text-white">
+              <Markdown remarkPlugins={[remarkGfm]}>
+                {event.description}
+              </Markdown>
+            </article>
           </div>
         </div>
       </div>

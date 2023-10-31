@@ -36,9 +36,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
   }
 
   return (
-    <a
-      onClick={onCardClick}
-      className="cursor-pointer">
+    <a onClick={onCardClick} className="cursor-pointer">
       <Card isAvailable={isAvailable}>
         <div className="aspect-video relative">
           <Image
