@@ -1,1 +1,6 @@
-{"id":"theater","name":"Theater","eventId":"zuconnect_istanbum__ai_track","streamSettings":{}}
+{
+  "id": "theater",
+  "name": "Theater",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "streamSettings": {}
+}

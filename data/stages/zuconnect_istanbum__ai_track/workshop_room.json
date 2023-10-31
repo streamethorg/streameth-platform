@@ -1,1 +1,6 @@
-{"id":"workshop_room","name":"Workshop Room ","eventId":"zuconnect_istanbum__ai_track","streamSettings":{}}
+{
+  "id": "workshop_room",
+  "name": "Workshop Room ",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "streamSettings": {}
+}

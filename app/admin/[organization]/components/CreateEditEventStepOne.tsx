@@ -58,7 +58,10 @@ const CreateEditEventStepOne = ({
       setLoading(false)
     }
   }
-
+  console.log(
+    formData.start instanceof Date,
+    formData.start.toISOString().split('T')[0]
+  )
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">
@@ -174,6 +177,18 @@ const CreateEditEventStepOne = ({
           }
         />
         <FormTextInput
+          label="Select your event start time"
+          placeholder="E.g. 12:00"
+          required
+          toolTip
+          type="time"
+          name="startTime"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleChange(e)
+          }
+          value={formData.startTime}
+        />
+        <FormTextInput
           label="Select your event end date"
           placeholder="E.g. 12-16 November 2023"
           required
@@ -188,6 +203,18 @@ const CreateEditEventStepOne = ({
               ? formData.end.toISOString().split('T')[0]
               : formData.end
           }
+        />
+        <FormTextInput
+          label="Select your event end time"
+          placeholder="E.g. 12:00"
+          required
+          toolTip
+          type="time"
+          name="endTime"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleChange(e)
+          }
+          value={formData.endTime}
         />
         <FormSelect
           label="Timezone"

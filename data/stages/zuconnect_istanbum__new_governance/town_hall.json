@@ -1,1 +1,6 @@
-{"id":"town_hall","name":"Town Hall","eventId":"zuconnect_istanbum__new_governance","streamSettings":{}}
+{
+  "id": "town_hall",
+  "name": "Town Hall",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "streamSettings": {}
+}

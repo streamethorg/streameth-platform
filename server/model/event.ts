@@ -28,6 +28,8 @@ export interface IEvent {
   location: string
   logo?: string
   banner?: string
+  startTime?: string
+  endTime?: string
   organizationId: IOrganization['id']
   dataImporter?: IDataImporter[]
   eventCover?: string
@@ -77,6 +79,10 @@ export default class Event implements IEvent {
   timezone: string
 
   accentColor: string
+
+  startTime?: string
+
+  endTime?: string
   constructor({
     id,
     name,
@@ -94,6 +100,8 @@ export default class Event implements IEvent {
     banner,
     accentColor,
     dataExporter,
+    startTime,
+    endTime,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -111,6 +119,8 @@ export default class Event implements IEvent {
     this.banner = banner
     this.accentColor = accentColor ?? '#351B71'
     this.dataExporter = dataExporter
+    this.startTime = startTime
+    this.endTime = endTime
     // this.validateThis();
   }
 
