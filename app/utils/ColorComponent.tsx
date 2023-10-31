@@ -115,7 +115,7 @@ const ColorComponent = ({
         colors.accent
       )
     }
-  }, [accentColor, isNotOrganization])
+  }, [accentColor, isNotOrganization, pathname])
 
   return children
 }

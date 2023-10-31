@@ -1,9 +1,8 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useContext } from 'react'
+import React, { SetStateAction, useContext } from 'react'
 import { FormTextArea } from '@/app/utils/FormTextArea'
 import { FormTextInput } from '@/app/utils/FormTextInput'
-import { IEvent } from '@/server/model/event'
 import ImageFileUploader from './ImageFileUploader'
 import { apiUrl } from '@/server/utils'
 import { Button } from '@/app/utils/Button'
@@ -11,30 +10,20 @@ import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
 import { FormSelect } from '@/app/utils/FormSelect'
 import { TIMEZONES } from '@/app/constants/timezones'
+import { EventFormContext } from './EventFormContext'
 
-interface Props {
-  formData: Omit<IEvent, 'id'>
-  setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
-  handleChange: (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => void
-  organizationId: string
-  onFileUpload: (e: string, key: string) => void
-  handleSubmit: () => void
-  validationErrors?: Record<string, any>
-}
-const CreateEditEventStepOne = ({
-  validationErrors,
-  handleChange,
-  handleSubmit,
-  formData,
-  setFormData,
-  onFileUpload,
-  organizationId,
-}: Props) => {
-  const { openModal, closeModal } = useContext(ModalContext)
+const CreateEditEventStepOne = () => {
+  const { openModal } = useContext(ModalContext)
+  const context = useContext(EventFormContext)
+  if (!context) return null
+  const {
+    handleChange,
+    formData,
+    setFormData,
+    onFileUpload,
+    validationErrors,
+  } = context
+
   const onImageSubmit = async (
     file: Blob,
     key: string,
@@ -44,7 +33,9 @@ const CreateEditEventStepOne = ({
       const data = new FormData()
       data.set('file', file)
       const res = await fetch(
-        `${apiUrl()}/organizations/${organizationId}/events/upload`,
+        `${apiUrl()}/organizations/${
+          formData.organizationId
+        }/events/upload`,
         {
           method: 'POST',
           body: data,
@@ -135,15 +126,7 @@ const CreateEditEventStepOne = ({
           renderSecondaryLabel={
             <Button
               size="xs"
-              onClick={() =>
-                openModal(
-                  <EventPreview
-                    closeModal={closeModal}
-                    handleSubmit={handleSubmit}
-                    formData={formData}
-                  />
-                )
-              }>
+              onClick={() => openModal(<EventPreview />)}>
               Preview
             </Button>
           }

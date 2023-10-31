@@ -7,15 +7,13 @@ export function AdminWrapper(props: PropsWithChildren) {
 
   return (
     <ClientOnly>
-      <div className="p-4">
-        {!isSignedIn && (
-          <div className="flex flex-col space-y-4 items-center justify-center h-[calc(100vh-7rem)]">
-            You need to sign in to access these pages
-            <ConnectWalletButton />
-          </div>
-        )}
-        {isSignedIn && props.children}
-      </div>
+      {!isSignedIn && (
+        <div className="p-4 flex flex-col space-y-4 items-center justify-center h-[calc(100vh-7rem)]">
+          You need to sign in to access these pages
+          <ConnectWalletButton />
+        </div>
+      )}
+      {isSignedIn && props.children}
     </ClientOnly>
   )
 }

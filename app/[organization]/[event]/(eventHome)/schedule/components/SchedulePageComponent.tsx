@@ -6,6 +6,7 @@ import StageSelect from './StageSelect'
 import DateSelect from './DateSelect'
 import { getEventDays } from '@/utils/time'
 import SessionController from '@/server/controller/session'
+import ComponentWrapper from '../../components/ComponentWrapper'
 interface Params {
   params: {
     event: string
@@ -29,25 +30,22 @@ const SchedulePageComponent = async ({ params }: Params) => {
   })
 
   if (!sessions.length) return null
-  console.log('sessions', stages)
   return (
-    <ScheduleContextProvider
-      event={event.toJson()}
-      stage={stages[0].id}
-      sessions={sessions.map((session) => session.toJson())}>
-      <div
-        id="schedule"
-        className="flex flex-col max-w-7xl w-full mx-auto p-2">
-        <span className=" box-border flex flex-col justify-center p-2 bg-white shadow-b w-full my-4 text-5xl">
-          Schedule
-        </span>
-        <div className="text-center sticky z-10 flex flex-row space-x-4">
+    <ComponentWrapper sectionId="schedule">
+      <ScheduleContextProvider
+        event={event.toJson()}
+        stage={stages[0].id}
+        sessions={sessions.map((session) => session.toJson())}>
+        <div className=" flex flex-col md:flex-row w-full rounded-lg z-50 space-y-2 md:space-y-0 md:space-x-2 mb-4 justify-center">
+          <span className=" w-full text-xl uppercase md:text-4xl flex ">
+            Schedule
+          </span>
           <DateSelect dates={dates} />
           <StageSelect stages={stages} />
         </div>
         <SessionsOnSchedule />
-      </div>
-    </ScheduleContextProvider>
+      </ScheduleContextProvider>
+    </ComponentWrapper>
   )
 }
 

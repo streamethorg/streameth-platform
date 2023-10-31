@@ -54,7 +54,7 @@ const ShareButton = () => {
 
   return (
     <ShareIcon
-      className="font-bold p-1 h-8 w-8 cursor-pointer ml-3 text-accent border-2 border-accent rounded hover:bg-accent hover:text-white "
+      className="font-bold p-1  h-6 w-6  md:h-8 md:w-8 cursor-pointer ml-3 text-white border-2 border-white rounded hover:bg-accent hover:text-white "
       onClick={handleShareClick}
     />
   )
