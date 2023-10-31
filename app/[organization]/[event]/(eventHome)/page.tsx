@@ -8,11 +8,7 @@ import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import {
-  getEventLocalTime,
-  getEventTime,
-  getTime,
-} from '@/utils/time'
+import { getEventTime } from '@/utils/time'
 interface Params {
   event: string
   organization: string
@@ -65,7 +61,9 @@ const EventHome = async ({ params }: { params: Params }) => {
               <p>
                 <span className="mr-2">&#9200;</span> Time:{' '}
                 {event?.startTime
-                  ? getEventLocalTime(event.startTime, event.timezone)
+                  ? `${getEventTime(event.startTime)} ${
+                      event.timezone
+                    }`
                   : 'TBD'}
               </p>
               <p>
