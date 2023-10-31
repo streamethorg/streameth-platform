@@ -1,1 +1,19 @@
-{"id":"foresight_institute_existential_hope_salon","name":"Foresight Institute: Existential Hope Salon","description":"","start":1698946200000,"end":1698953400000,"stageId":"2nd_floor_gallery","speakers":[{"id":"lou_de_kerhuelvez","name":"Lou de Kerhuelvez","bio":" ","eventId":"zuconnect_istanbum__ai_track"}],"playbackId":"","eventId":"zuconnect_istanbum__ai_track","coverImage":"/sessions/zuconnect_istanbum__ai_track/foresight_institute_existential_hope_salon.jpg"}
+{
+  "id": "foresight_institute_existential_hope_salon",
+  "name": "Foresight Institute: Existential Hope Salon",
+  "description": "",
+  "start": 1698946200000,
+  "end": 1698953400000,
+  "stageId": "2nd_floor_gallery",
+  "speakers": [
+    {
+      "id": "lou_de_kerhuelvez",
+      "name": "Lou de Kerhuelvez",
+      "bio": " ",
+      "eventId": "zuconnect_istanbul__ai_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "coverImage": "/sessions/zuconnect_istanbul__ai_track/foresight_institute_existential_hope_salon.jpg"
+}

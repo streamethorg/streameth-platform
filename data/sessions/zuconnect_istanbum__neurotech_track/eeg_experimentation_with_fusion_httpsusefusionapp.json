@@ -1,1 +1,19 @@
-{"id":"eeg_experimentation_with_fusion_httpsusefusionapp","name":"EEG experimentation with Fusion (https://usefusion.app/)","description":"","start":1698750000000,"end":1698753600000,"stageId":"workshop_room","speakers":[{"id":"ore_ogundipe","name":"Ore Ogundipe","bio":"No description","eventId":"zuconnect_istanbum__neurotech_track"}],"playbackId":"","eventId":"zuconnect_istanbum__neurotech_track","coverImage":"/sessions/zuconnect_istanbum__neurotech_track/eeg_experimentation_with_fusion_httpsusefusionapp.jpg"}
+{
+  "id": "eeg_experimentation_with_fusion_httpsusefusionapp",
+  "name": "EEG experimentation with Fusion (https://usefusion.app/)",
+  "description": "",
+  "start": 1698750000000,
+  "end": 1698753600000,
+  "stageId": "workshop_room",
+  "speakers": [
+    {
+      "id": "ore_ogundipe",
+      "name": "Ore Ogundipe",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__neurotech_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_istanbul__neurotech_track",
+  "coverImage": "/sessions/zuconnect_istanbul__neurotech_track/eeg_experimentation_with_fusion_httpsusefusionapp.jpg"
+}

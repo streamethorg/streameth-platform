@@ -1,1 +1,6 @@
-{"id":"restaurant","name":"Restaurant","eventId":"zuconnect_istanbum__new_governance","streamSettings":{}}
+{
+  "id": "restaurant",
+  "name": "Restaurant",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "streamSettings": {}
+}
