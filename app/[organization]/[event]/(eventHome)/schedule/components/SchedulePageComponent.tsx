@@ -29,10 +29,11 @@ const SchedulePageComponent = async ({ params }: Params) => {
   })
 
   if (!sessions.length) return null
+  console.log('sessions', stages)
   return (
     <ScheduleContextProvider
       event={event.toJson()}
-      stage={stages[0]}
+      stage={stages[0].id}
       sessions={sessions.map((session) => session.toJson())}>
       <div
         id="schedule"

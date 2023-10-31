@@ -752,7 +752,7 @@ export const TIMEZONES = [
     abbr: 'TDT',
     offset: 3,
     isdst: false,
-    text: '(UTC+03:00) Istanbul',
+    text: 'Europe/Istanbul',
     utc: ['Europe/Istanbul'],
   },
   {

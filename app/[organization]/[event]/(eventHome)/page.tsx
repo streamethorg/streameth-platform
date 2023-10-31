@@ -2,10 +2,10 @@ import EventController from '@/server/controller/event'
 import { notFound } from 'next/navigation'
 import { hasData } from '@/server/utils'
 import Link from 'next/link'
+import StageController from '@/server/controller/stage'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
 import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
-import ReserveSpotButton from './components/ReserveSpotModal'
 interface Params {
   event: string
   organization: string
@@ -34,6 +34,11 @@ const EventHome = async ({ params }: { params: Params }) => {
   const event = (
     await eventController.getEvent(params.event, params.organization)
   ).toJson()
+
+  const stages = (
+    await new StageController().getAllStagesForEvent(params.event)
+  ).map((stage) => stage.toJson())
+
   if (!hasData({ event })) return notFound()
 
   return (
@@ -58,7 +63,12 @@ const EventHome = async ({ params }: { params: Params }) => {
                 <span className="mr-2">&#127759;</span> Where:{' '}
                 {event.location}
               </p>
-              <ReserveSpotButton event={event} />
+              {/* <ReserveSpotButton event={event} /> */}
+              <Link
+                href={`/${params.organization}/${params.event}/livestream`}
+                className="text-center p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
+                Watch livestream
+              </Link>
               <p>{event.description}</p>
             </div>
           </div>
