@@ -81,6 +81,7 @@ export default class Event implements IEvent {
   accentColor: string
 
   startTime?: string
+
   endTime?: string
   constructor({
     id,
