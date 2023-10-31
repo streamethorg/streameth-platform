@@ -1,1 +1,6 @@
-{"id":"workshop_room","name":"Workshop Room ","eventId":"zuconnect_istanbum__neurotech_track","streamSettings":{}}
+{
+  "id": "workshop_room",
+  "name": "Workshop Room ",
+  "eventId": "zuconnect_istanbul__neurotech_track",
+  "streamSettings": {}
+}

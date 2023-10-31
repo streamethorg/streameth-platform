@@ -1,1 +1,6 @@
-{"id":"balcony_room_on_1st_floor","name":"Balcony room on 1st floor","eventId":"zuconnect_istanbum__neurotech_track","streamSettings":{}}
+{
+  "id": "balcony_room_on_1st_floor",
+  "name": "Balcony room on 1st floor",
+  "eventId": "zuconnect_istanbul__neurotech_track",
+  "streamSettings": {}
+}

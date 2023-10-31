@@ -19,7 +19,7 @@ export default class EventController {
     )
     const data = await this.controller.get(eventQuery)
     const evt = new Event({ ...data })
-    // !evt.archiveMode && this.importEventData(evt)
+    !evt.archiveMode && this.importEventData(evt)
     return evt
   }
 

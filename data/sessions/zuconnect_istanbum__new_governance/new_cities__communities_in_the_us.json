@@ -1,1 +1,31 @@
-{"id":"new_cities__communities_in_the_us","name":"New Cities / Communities in the US","description":"A discussion of people building new communities and new cities","start":1698826500000,"end":1698829200000,"stageId":"theater","speakers":[{"id":"mark","name":"Mark","bio":"No description","eventId":"zuconnect_istanbum__new_governance"},{"id":"josh","name":"Josh","bio":"Earthship Session","eventId":"zuconnect_istanbum__new_governance"},{"id":"brooke","name":"Brooke","bio":"Vibecamp","eventId":"zuconnect_istanbum__new_governance"}],"playbackId":"","eventId":"zuconnect_istanbum__new_governance","coverImage":"/sessions/zuconnect_istanbum__new_governance/new_cities__communities_in_the_us.jpg"}
+{
+  "id": "new_cities__communities_in_the_us",
+  "name": "New Cities / Communities in the US",
+  "description": "A discussion of people building new communities and new cities",
+  "start": 1698826500000,
+  "end": 1698829200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "mark",
+      "name": "Mark",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "josh",
+      "name": "Josh",
+      "bio": "Earthship Session",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "brooke",
+      "name": "Brooke",
+      "bio": "Vibecamp",
+      "eventId": "zuconnect_istanbul__new_governance"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "coverImage": "/sessions/zuconnect_istanbul__new_governance/new_cities__communities_in_the_us.jpg"
+}

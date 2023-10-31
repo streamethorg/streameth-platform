@@ -1,1 +1,6 @@
-{"id":"town_hall","name":"Town Hall","eventId":"zuconnect_istanbum__neurotech_track","streamSettings":{}}
+{
+  "id": "town_hall",
+  "name": "Town Hall",
+  "eventId": "zuconnect_istanbul__neurotech_track",
+  "streamSettings": {}
+}

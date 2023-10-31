@@ -1,1 +1,6 @@
-{"id":"lab_room","name":"Lab Room","eventId":"zuconnect_istanbum__ai_track","streamSettings":{}}
+{
+  "id": "lab_room",
+  "name": "Lab Room",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "streamSettings": {}
+}

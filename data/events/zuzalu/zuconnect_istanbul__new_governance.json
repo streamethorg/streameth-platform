@@ -1,0 +1,31 @@
+{
+  "id": "zuconnect_istanbul__new_governance",
+  "name": "ZuConnect Istanbul - New Governance ",
+  "description": "Join ZuConnect, the 2023 Zuzalu gathering in Istanbul! The talks cover Ethereum, ZK tech, AI, Decentralized Social, Science, and New Governance. Join the conversation at the forefront of technology and innovation.",
+  "start": "2023-11-01T00:00:00.000Z",
+  "end": "2023-11-01T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1gMhYSzp8Sa5DvR4emv2Jr5p_SA9mJMKfeIi3y3vdZ-U",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "zuzalu-cover.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "zuzalu-logo.png",
+  "banner": "zuzalu-banner.png",
+  "accentColor": "#047C66",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": { "driveId": "", "driveApiKey": "" }
+    }
+  ]
+}

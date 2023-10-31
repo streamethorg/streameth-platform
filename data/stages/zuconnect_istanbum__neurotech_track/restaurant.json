@@ -1,1 +1,6 @@
-{"id":"restaurant","name":"Restaurant","eventId":"zuconnect_istanbum__neurotech_track","streamSettings":{}}
+{
+  "id": "restaurant",
+  "name": "Restaurant",
+  "eventId": "zuconnect_istanbul__neurotech_track",
+  "streamSettings": {}
+}
