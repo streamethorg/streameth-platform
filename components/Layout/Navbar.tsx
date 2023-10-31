@@ -48,7 +48,7 @@ export default function Navbar({
   return (
     <nav
       aria-label="Global"
-      className="z-[999999] md:w-[unset] left-0 items-center text-center drop-shadow md:relative md:top-[unset] md:drop-shadow-none bg-white flex flex-col md:items-center md:flex-row md:space-x-4 md:h-full md:mr-auto">
+      className="z-[999999] md:w-[unset] left-0 items-center text-center drop-shadow md:relative md:top-[unset] md:drop-shadow-nonetext-white bg-base p-2 rounded-xl text-white flex flex-col md:items-center md:flex-row md:space-x-4 md:h-full md:mr-auto">
       {pages.map((item) => (
         <NavBarItem
           key={item.name}
