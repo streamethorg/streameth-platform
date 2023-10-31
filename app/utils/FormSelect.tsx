@@ -28,7 +28,7 @@ interface FormSelectProps {
   emptyOptionsMessage?: string
   toolTip?: boolean
   toolTipHTML?: string
-  validationErrors?: Record<string, any>
+  validationErrors?: Record<string, any> | string | undefined
 }
 
 const FormSelect = ({

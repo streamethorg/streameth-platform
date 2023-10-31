@@ -11,11 +11,11 @@ const Modal = ({
   children: React.ReactNode
 }) => {
   useEffect(() => {
-    return () => {
-      if (open) {
-        onClose()
-      }
-    }
+    // return () => {
+    //   if (open) {
+    //     onClose()
+    //   }
+    // }
   }, [open, onClose])
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Modal = ({
           onClick={onClose}>
           &#8203;
         </span>
-        <div className="inline-block align-bottom bg-white rounded  text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle min-w-lg max-w-full p-4">
+        <div className="inline-block align-bottom bg-accent rounded-xl   text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle min-w-lg max-w-full">
           {children}
         </div>
       </div>

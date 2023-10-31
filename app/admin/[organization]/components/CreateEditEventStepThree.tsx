@@ -1,26 +1,13 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import StatusBarFullIcon from '@/app/assets/icons/StatusBarFullIcon'
+import React, { useContext } from 'react'
 import { Button } from '@/app/utils/Button'
 import FormLabel from '@/app/utils/FormLabel'
-import { IDataImporter, IEvent } from '@/server/model/event'
 import { FormTextInput } from '@/app/utils/FormTextInput'
+import { EventFormContext } from './EventFormContext'
 
-interface Props {
-  formData: Omit<IEvent, 'id'>
-  setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
-  handleChange: (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => void
-  handleSubmit: () => void
-  validationErrors?: Record<string, any>
-}
-const CreateEditEventStepThree = ({
-  formData,
-  handleChange,
-  handleSubmit,
-}: Props) => {
+const CreateEditEventStepThree = () => {
+  const context = useContext(EventFormContext)
+  if (!context) return null
+  const { formData, handleSubmit, handleChange } = context
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">

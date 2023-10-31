@@ -38,7 +38,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
   return (
     <a
       onClick={onCardClick}
-      className="cursor-pointer hover:bg-gray-50 transition-all">
+      className="cursor-pointer">
       <Card isAvailable={isAvailable}>
         <div className="aspect-video relative">
           <Image

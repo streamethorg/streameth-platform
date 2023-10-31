@@ -20,7 +20,7 @@ const ModalContextProvider = ({
   const [modal, setModal] = useState<React.ReactNode | null>(null)
 
   const openModal = (modal: React.ReactNode) => {
-    setModal(modal)
+    setModal((prev) => modal)
   }
 
   const closeModal = () => {

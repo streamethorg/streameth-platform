@@ -1,6 +1,6 @@
 import EventController from '@/server/controller/event'
 import CreateEditEvent from '../components/CreateEditEvent'
-
+import { EventFormProvider } from '../components/EventFormContext'
 interface Params {
   event: string
   organization: string
@@ -14,12 +14,11 @@ const EventPage = async ({ params }: { params: Params }) => {
   )
 
   return (
-    <div className="pb-8">
-      <CreateEditEvent
-        event={event.toJson()}
-        organizationId={params.organization}
-      />
-    </div>
+    <EventFormProvider
+      organizationId={params.organization}
+      event={event}>
+      <CreateEditEvent />
+    </EventFormProvider>
   )
 }
 

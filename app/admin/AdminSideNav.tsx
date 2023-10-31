@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import HomeIcon from '../assets/icons/HomeIcon'
@@ -46,10 +47,10 @@ const AdminSideNav = () => {
   return (
     <div
       className={`${
-        isCollapsed ? 'w-[80px] px-3' : 'min-w-[250px] px-4'
-      }  sticky top-20 flex flex-col justify-between bg-background border  py-5 h-[calc(100vh-7rem)] drop-shadow-card`}>
+        isCollapsed ? 'w-[80px]' : 'w-[250px]'
+      }  sticky top-20 flex flex-col justify-between bg-background  h-full p-4 border-r`}>
       <div>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 border-">
           <Image
             src={CreateBlockie(address as string)}
             alt="avatar"
@@ -87,7 +88,6 @@ const AdminSideNav = () => {
           ))}
         </div>
       </div>
-
       <div
         className="flex justify-end cursor-pointer p-1"
         onClick={() => setIsCollapsed((prev) => !prev)}>

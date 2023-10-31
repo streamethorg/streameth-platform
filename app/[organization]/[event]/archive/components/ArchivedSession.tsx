@@ -43,12 +43,12 @@ const ArchivedSession = ({
           onError={handleError}
         />
       </div>
-      {/* <p className="border-b-2 border-accent p-2 py-4 flex flex-grow text-md ">{session.name}</p>  */}
+      <p className=" p-2 py-4 flex flex-grow text-md ">{session.name}</p> 
     </Card>
   )
 
   if (learnMore)
-    return <Link href={'session/' + session.id}>{component}</Link>
+    return <Link className="h-full" href={'session/' + session.id}>{component}</Link>
   if (goToStage)
     return <Link href={'/stage/' + session.stageId}>{component}</Link>
 
