@@ -12,8 +12,10 @@ import colors from '@/app/constants/colors'
 import { Button } from '@/app/utils/Button'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { EventFormContext } from './EventFormContext'
 import { ModalContext } from '@/components/context/ModalContext'
+import useAdminContext from '@/app/hooks/useAdminContext'
+
+
 const ItemButton = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-row justify-center">
     <button className="hover:bg-accent font-bold hover:text-primary border-2 text-accent border-accent  rounded p-4 m-2">
@@ -43,9 +45,7 @@ const pages = [
 
 const EventPreview = () => {
   const { closeModal } = useContext(ModalContext)
-  const context = useContext(EventFormContext)
-  if (!context) return null
-  const { handleSubmit, formData } = context
+  const { handleSubmit, formData } = useAdminContext()
 
   useEffect(() => {
     if (formData.accentColor) {

@@ -5,7 +5,6 @@ import SessionList from '@/components/sessions/SessionList'
 
 const SessionsOnSchedule = () => {
   const { sessions } = useContext(ScheduleContext)
-  console.log('sessions sesionlist', sessions)
   return (
     <div className="flex flex-row h-full w-full">
       <div className="w-full flex flex-col relative">

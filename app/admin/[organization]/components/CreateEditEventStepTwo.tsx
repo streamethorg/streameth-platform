@@ -1,18 +1,11 @@
 import { FormTextInput } from '@/app/utils/FormTextInput'
-import React, {
-
-  useEffect,
-  useState,
-} from 'react'
-import {
-  GSheetConfig,
-
-  PretalxConfig,
-} from '@/server/model/event'
+import React, { useEffect, useState } from 'react'
+import { GSheetConfig, PretalxConfig } from '@/server/model/event'
 import FormRadio from '@/app/utils/FormRadio'
 import FormLabel from '@/app/utils/FormLabel'
 import FormRadioBox from '@/app/utils/FormRadioBox'
-import { EventFormContext } from './EventFormContext'
+import UseAdminContext from '@/app/hooks/useAdminContext'
+
 const initialImporterConfig: GSheetConfig & PretalxConfig = {
   sheetId: '',
   apiKey: '',
@@ -26,23 +19,21 @@ const initialExporterConfig: GSheetConfig = {
 }
 
 const CreateEditEventStepTwo = () => {
-  const context = React.useContext(EventFormContext)
-  if (!context) return null
   const {
     formData,
     setFormData,
     handleDataImporterChange,
     handleDataExporterChange,
-  } = context
+  } = UseAdminContext()
 
   const [dataExportSelectedType, setDataExportSelectedType] =
     useState('gdrive')
   const [selectedType, setSelectedType] = useState<string>(
     formData?.dataImporter?.[0]?.type ?? ''
   )
- 
+
   const [config, setConfig] = useState<GSheetConfig & PretalxConfig>(
-     //@ts-ignore
+    //@ts-ignore
     formData?.dataImporter?.[0]?.config ?? initialImporterConfig
   )
   const [exporterConfig, setExporterConfig] = useState<GSheetConfig>(

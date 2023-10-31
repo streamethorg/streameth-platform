@@ -32,7 +32,7 @@ export default function RootLayout({
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className=" flex flex-col h-[100dvh] lg:overflow-auto w-screen">
+                <div className=" flex flex-col w-screen min-h-screen bg-accent">
                   <FilterContextProvider>
                     <TopNavbarContextProvider>
                       <Initializer>{children}</Initializer>

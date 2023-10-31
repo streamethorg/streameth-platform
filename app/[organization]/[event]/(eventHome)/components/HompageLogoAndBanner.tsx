@@ -9,7 +9,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   if (!logo && !banner) return null
 
   return (
-    <ComponentWrapper>
+    <ComponentWrapper sectionId='home'>
       <Image
         className="rounded-lg"
         src={'/events/' + banner}
@@ -35,7 +35,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
               <span className="mr-2">&#127759;</span> Where:{' '}
               {event.location}
             </p>
-            <ReserveSpotButton event={event} />
+            {/* <ReserveSpotButton event={event} /> */}
             <p>{event.description}</p>
           </div>
         </div>

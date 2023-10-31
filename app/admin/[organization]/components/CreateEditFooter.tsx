@@ -6,11 +6,9 @@ import { Button } from '@/app/utils/Button'
 import { ModalContext } from '@/components/context/ModalContext'
 import { IEvent } from '@/server/model/event'
 import { EventFormContext } from './EventFormContext'
-
+import UseAdminContext from '@/app/hooks/useAdminContext'
 const CreateEditFooter = () => {
-  const context = useContext(EventFormContext)
-  if (!context) return null
-  const { currentStep, setCurrentStep, event } = context
+  const { currentStep, setCurrentStep, event } = UseAdminContext()
 
   const { openModal, closeModal } = useContext(ModalContext)
   const handleDelete = () => {

@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import { SocialIcon } from 'react-social-icons'
 import { useContext, useEffect, useState } from 'react'
 import { TopNavbarContext } from '../context/TopNavbarContext'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -22,11 +21,11 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="md:hidden z-50 w-[50px]">
+    className="md:hidden z-50 ">
     {!isNavVisible ? (
-      <Bars3Icon className="w-7 h-7 border-2 border-accent rounded text-white bg-accent mx-auto" />
+      <Bars3Icon className="w-7 h-7 bg-base  rounded text-white mx-auto" />
     ) : (
-      <XMarkIcon className="w-7 h-7 border-2 border-accent rounded text-white bg-accent mx-auto" />
+      <XMarkIcon className="w-7 h-7 bg-base  rounded  text-white mx-auto" />
     )}
   </button>
 )
@@ -50,11 +49,12 @@ export default function NavbarTop() {
   }
 
   return (
-    <header className="sticky z-50 flex flex-row bg-accent border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">
+    <header className="sticky z-[9099029] flex flex-row bg-accent border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">
       <div className=" flex items-center w-20">
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
           <Image
+          className="rounded-full"
             src={logo}
             alt="Logo"
             width={50}
@@ -90,13 +90,13 @@ export default function NavbarTop() {
             fgColor="#000"
             className={`"h-8 w-8"`}
           />
+          */}
           {pages.length > 1 && (
             <NavBarButton
               isNavVisible={menuVisible}
               setIsNavVisible={setMenuVisible}
             />
           )}
-        </div> */}
       </div>
     </header>
   )

@@ -23,7 +23,7 @@ const SpeakerPageComponent = async ({ params }: Params) => {
   if (!speakers.length) return null
 
   return (
-    <ComponentWrapper>
+    <ComponentWrapper sectionId='speakers'>
       <span className=" w-full text-xl uppercase md:text-4xl">
         Speakers
       </span>
