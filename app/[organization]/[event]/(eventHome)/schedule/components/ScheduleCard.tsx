@@ -20,11 +20,11 @@ const ScheduleCard = ({
 
   return (
     <div
-      className="flex space-y-3 flex-col w-full h-full bg-base border shadow rounded p-1 md:p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+      className="bg-black/20 flex space-y-3 flex-col w-full h-full   rounded p-2 md:p-2 text-white cursor-pointer transition-colors"
       onClick={() => {
         openModal(<ScheduleCardModal session={session} />)
       }}>
-      <div className=" border-l border-accent hover:border-l-2 flex flex-col px-2 rounded-tr rounded-br w-full h-full">
+      <div className="border-l border-white  hover:border-l-2 flex flex-col px-2 rounded-tr rounded-br w-full h-full">
         {showTime && (
           <p className="text-main-text text-sm uppercase py-1">
             {new Date(session.start)

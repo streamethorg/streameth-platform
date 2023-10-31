@@ -1,1 +1,19 @@
-{"id":"primer_zkml_part_1","name":"Primer: zkML part 1 ","description":"","start":1698936000000,"end":1698937200000,"stageId":"theater","speakers":[{"id":"jason_morton","name":"Jason Morton","bio":"No description","eventId":"zuconnect_istanbum__ai_track"}],"playbackId":"","eventId":"zuconnect_istanbum__ai_track","coverImage":"/sessions/zuconnect_istanbum__ai_track/primer_zkml_part_1.jpg"}
+{
+  "id": "primer_zkml_part_1",
+  "name": "Primer: zkML part 1 ",
+  "description": "",
+  "start": 1698936000000,
+  "end": 1698937200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "jason_morton",
+      "name": "Jason Morton",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__ai_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "coverImage": "/sessions/zuconnect_istanbul__ai_track/primer_zkml_part_1.jpg"
+}

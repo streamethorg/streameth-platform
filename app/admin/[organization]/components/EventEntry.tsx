@@ -63,7 +63,7 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
         <img
           src={`/events/${event.eventCover}`}
           alt={event.name}
-          className="w-full h-[140px] object-cover"
+          className="w-full object-cover"
         />
         <div>
           <h2 className="text-center mt-1 mb-0 truncate font-ubuntu">

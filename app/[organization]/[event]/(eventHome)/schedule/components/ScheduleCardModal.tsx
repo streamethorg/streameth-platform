@@ -20,32 +20,35 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const handleGoToStage = () => {
     setIsLoading(true)
     closeModal()
-    router.push(`stage/${session.stageId}`)
+    router.push(`${session.eventId}/stage/${session.stageId}`)
   }
 
   return (
-    <div className="flex flex-col p-4 border-b-2 border-b-accent">
-      {showGoToStage && (
-        <div
-          onClick={handleGoToStage}
-          className="text-xs border-accent border-2 cursor-pointer text-accent rounded ml-auto p-2 font-bold mb-4 hover:bg-accent hover:text-white">
-          Go to Stream
-        </div>
-      )}
-      <h1 className="text-lg text-main-text font-bold text-center">
-        {session.name}
-      </h1>
-      <div className="flex flex-col justify-center items-center text-center  p-2">
-        <span className="text-secondary-text">
+    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-4xl rounded-xl">
+      <div className="flex flex-col bg-base p-4 rounded-xl">
+        <h1 className="text-lg  font-bold ">{session.name}</h1>
+        <span className=" flex flex-row text-white">
+          {new Date(session.start).toDateString()}{' '}
           {new Date(session.start).toTimeString().slice(0, 5)} -{' '}
           {new Date(session.end).toTimeString().slice(0, 5)}
         </span>
-        <span className="text-secondary-text">
-          {new Date(session.start).toDateString()}
-        </span>
       </div>
-      <p className="py-4">{session.description}</p>
-      <SpeakerIconList speakers={session.speakers} />
+      {session.description && (
+        <p className="flex flex-col bg-base p-4 rounded-xl">
+          {session.description}
+        </p>
+      )}
+
+      <p className="flex flex-row flex-wrap">
+        <SpeakerIconList speakers={session.speakers} />
+      </p>
+      {showGoToStage && (
+        <div
+          onClick={handleGoToStage}
+          className="border text-lg  text-white cursor-pointer text-accent rounded-xl ml-auto p-2 font-bold mb-4 hover:bg-accent hover:text-white">
+          Go to Stream
+        </div>
+      )}
     </div>
   )
 }

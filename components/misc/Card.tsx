@@ -4,7 +4,7 @@ const Card = ({
   children: React.ReactNode
   isAvailable?: boolean
 }) => (
-  <div className="border shadow rounded p-2 border-neutral-200 hover:bg-gray-100 transition-colors">
+  <div className="h-full p-2 bg-base rounded-xl text-white uppercase">
     {children}
   </div>
 )

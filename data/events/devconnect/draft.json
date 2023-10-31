@@ -10,7 +10,7 @@
     {
       "type": "gsheet",
       "config": {
-        "sheetId": "1JqAnfOonw4wjhNUmgZX8Naoyi23ASR0j4VISXwgHYS8 ",
+        "sheetId": "1JqAnfOonw4wjhNUmgZX8Naoyi23ASR0j4VISXwgHYS8",
         "apiKey": "k"
       }
     }
@@ -21,7 +21,7 @@
   "timezone": "Europe/Istanbul",
   "logo": "DRAFT_logo.png",
   "banner": "Draft_banner.png",
-  "accentColor": "black",
+  "accentColor": "#36454F",
   "dataExporter": [
     {
       "type": "gdrive",
@@ -30,5 +30,6 @@
         "driveApiKey": ""
       }
     }
-  ]
+  ],
+  "startTime": "12:00"
 }

@@ -17,7 +17,7 @@ const ActionsComponent = ({
     router.back()
   }
   return (
-    <div className="flex flex-row items-center md:w-full  p-4 bg-base rounded-t border ">
+    <div className="flex flex-row items-center md:w-full text-white py-2 ">
       {goBackButton && (
         <ArrowUturnLeftIcon
           className="p-1 h-8 w-8 cursor-pointer text-accent "
@@ -25,7 +25,7 @@ const ActionsComponent = ({
         />
       )}
       {title && (
-        <h1 className="text-xl text-accent font-bold ">{title}</h1>
+        <h1 className="md:text-xl text-white uppercase ">{title}</h1>
       )}
       {children}
     </div>

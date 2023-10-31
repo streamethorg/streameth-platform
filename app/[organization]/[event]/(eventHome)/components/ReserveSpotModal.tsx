@@ -46,7 +46,7 @@ const ReserveSpotModal = ({ event }: { event: IEvent }) => {
       })
   }
   return (
-    <div className="px-10 py-4 flex flex-col max-w-lg">
+    <div className="text-white bg-base px-10 py-4 flex flex-col max-w-lg">
       <h2 className="text-2xl font-bold">Sign up to {event.name}</h2>
       <p className="mt-4">Enter your email</p>
       <div className="flex flex-row w-full space-x-2 mt-4">
@@ -102,8 +102,8 @@ const ReserveSpotButton = ({ event }: props) => {
   return (
     <button
       onClick={handleClick}
-      className="p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
-      reserve a spot
+      className="p-2 bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
+      Get notified
     </button>
   )
 }

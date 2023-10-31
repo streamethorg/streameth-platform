@@ -3,7 +3,6 @@ import { Ubuntu, Heebo } from 'next/font/google'
 import GeneralContext from '@/components/context/GeneralContext'
 import { ModalContextProvider } from '@/components/context/ModalContext'
 import { MobileContextProvider } from '@/components/context/MobileContext'
-import Navbar from '@/components/Layout/NavbarTop'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
 import { FilterContextProvider } from '../components/context/FilterContext'
@@ -33,10 +32,9 @@ export default function RootLayout({
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className="bg-background flex flex-col h-[100dvh] lg:overflow-auto w-screen">
+                <div className=" flex flex-col w-screen min-h-screen bg-accent">
                   <FilterContextProvider>
                     <TopNavbarContextProvider>
-                      <Navbar />
                       <Initializer>{children}</Initializer>
                     </TopNavbarContextProvider>
                   </FilterContextProvider>
