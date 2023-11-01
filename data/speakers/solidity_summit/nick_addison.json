@@ -1,1 +1,8 @@
-{"id":"nick_addison","name":"Nick Addison","bio":"No description","eventId":"solidity_summit","twitter":"@naddison","photo":"https://twitter.com/naddison"}
+{
+  "id": "nick_addison",
+  "name": "Nick Addison",
+  "bio": "No description",
+  "eventId": "solidity_summit",
+  "twitter": "@naddison",
+  "photo": "https://pbs.twimg.com/profile_images/755612285943488512/mE7Q3Hjt_400x400.jpg"
+}
