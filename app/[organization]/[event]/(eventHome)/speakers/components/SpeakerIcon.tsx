@@ -24,11 +24,13 @@ export default function SpeakerIcon({
       )}
       {speaker.twitter && !onlyImage && (
         <SocialIcon
-          url={`https://twitter.com/${speaker.twitter}`}
+          url={`https://x.com/${speaker.twitter}`}
           target="_blank"
-          bgColor="#fff"
-          fgColor="#1DA1F2"
-          className={`ml-2 ${size === 'md' ? 'h-8 w-8' : 'h-8 w-8'}`}
+          bgColor="#000"
+          fgColor="#fff"
+          className={`ml-2 ${
+            size === 'md' ? 'h-8 w-h-8' : 'h-8 w-8'
+          }`}
         />
       )}
     </div>
