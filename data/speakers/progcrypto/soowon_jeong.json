@@ -1,1 +1,8 @@
-{"id":"soowon_jeong","name":"Soowon Jeong","bio":"Researcher in EF PSE, built proof of concepts about cryptographic primitives and systems such as GKR. Now working on DSL and tooling for ZK. Prior to working at Ethereum Foundation, worked as a programming language developer.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1jDSObSjhVFhN9Jz1bsEziBXlSo60Ow6P/view"}
+{
+  "id": "soowon_jeong",
+  "name": "Soowon Jeong",
+  "bio": "Researcher in EF PSE, built proof of concepts about cryptographic primitives and systems such as GKR. Now working on DSL and tooling for ZK. Prior to working at Ethereum Foundation, worked as a programming language developer.",
+  "eventId": "progcrypto",
+  "twitter": "",
+  "photo": "https://drive.google.com/uc?id=1jDSObSjhVFhN9Jz1bsEziBXlSo60Ow6P"
+}

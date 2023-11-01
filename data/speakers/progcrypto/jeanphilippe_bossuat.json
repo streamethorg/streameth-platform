@@ -1,1 +1,8 @@
-{"id":"jeanphilippe_bossuat","name":"Jean-Philippe Bossuat","bio":"Jean-Philippe Bossuat started working on lattice-based fully homomorphic encryption in 2019 at the Laboratory for Data Security (LDS) at EPFL.\n\nDuring his time at the LDS, Jean-Philippe co-authored the library Lattigo, a well established Go module that implements Ring-Learning-With-Errors based homomorphic-encryption and Multiparty-Homomorphic-Encryption based protocols.\n\nHe is currently employed at Tune Insight SA as a cryptography software engineer specialized in fully homomorphic encryption. \n\nHis work focuses on maintaining the Lattigo library to the state-of-the-art, and researching, designing, implementing and optimizing FHE-based applications for privacy-preserving analytics and machine learning.\n\n","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/10z_D0ctEUK6-cCEqEAps4Di66ReupJHd/view"}
+{
+  "id": "jeanphilippe_bossuat",
+  "name": "Jean-Philippe Bossuat",
+  "bio": "Jean-Philippe Bossuat started working on lattice-based fully homomorphic encryption in 2019 at the Laboratory for Data Security (LDS) at EPFL.\n\nDuring his time at the LDS, Jean-Philippe co-authored the library Lattigo, a well established Go module that implements Ring-Learning-With-Errors based homomorphic-encryption and Multiparty-Homomorphic-Encryption based protocols.\n\nHe is currently employed at Tune Insight SA as a cryptography software engineer specialized in fully homomorphic encryption. \n\nHis work focuses on maintaining the Lattigo library to the state-of-the-art, and researching, designing, implementing and optimizing FHE-based applications for privacy-preserving analytics and machine learning.\n\n",
+  "eventId": "progcrypto",
+  "twitter": "",
+  "photo": "https://drive.google.com/uc?id=10z_D0ctEUK6-cCEqEAps4Di66ReupJHd"
+}
