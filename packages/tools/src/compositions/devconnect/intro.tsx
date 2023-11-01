@@ -43,7 +43,6 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
     const delayedOpacity = interpolate(frame, [introTime + 15, fadeTime + 15], [0, 1]);
 
     function titleClassName() {
-        console.log('title length #', session.name.length)
         let className = 'w-full text-center font-bold'
         if (session.name.length >= 140) className += ' text-8xl leading-none'
         if (session.name.length > 60 && session.name.length < 140) className += ' text-8xl leading-tight'
@@ -54,7 +53,6 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
     }
 
     function speakersClassName() {
-        console.log('# of speakers', session.speakers.length)
         let className = 'flex flex-row'
         if (session.speakers.length >= 7) className += ' gap-8'
         if (session.speakers.length > 3 && session.speakers.length < 7) className += ' gap-16'

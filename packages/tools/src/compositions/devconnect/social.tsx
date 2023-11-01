@@ -9,7 +9,6 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
     const logoFile = id ? staticFile(`devconnect/logos/${id}.png`) : ''
 
     function titleClassName() {
-        console.log('title length #', session.name.length)
         let className = 'w-full text-center font-bold'
         if (session.name.length >= 140) className += ' text-6xl leading-none'
         if (session.name.length > 60 && session.name.length < 140) className += ' text-7xl leading-tight'
@@ -20,7 +19,6 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
     }
 
     function speakersClassName() {
-        console.log('# of speakers', session.speakers.length)
         let className = 'flex flex-row'
         if (session.speakers.length >= 7) className += ' gap-4'
         if (session.speakers.length > 3 && session.speakers.length < 7) className += ' gap-8'

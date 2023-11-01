@@ -70,66 +70,121 @@ async function generateEventAssets(event: any) {
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
   mkdirSync(eventFolder, { recursive: true })
 
-  console.log(`Render ${compositions.length} compositions for # ${sessions.length} sessions`)
+  // TODO: Kinda hacky solution to check invalid Image urls here.
+  // This should get fixed on data entry or import
+  const sessionsToProcess: any[] = []
   for (const session of sessions) {
-    console.log(' -', session.id)
-    const eventType = DevconnectEvents.find(e => e.id === event.id)?.type || '1'
-    const inputProps = { type: eventType, id: event.id.replace('_', '-'), session: session }
+    const s = {
+      id: session.id,
+      name: session.name,
+      start: session.start,
+      speakers: Array<any>(),
+    }
 
-    for (const composition of compositions) {
-      const inputComposition = await selectComposition({
-        serveUrl: bundled,
-        id: composition.id,
-        inputProps: inputProps,
+    for (const speaker of session.speakers) {
+      const hasValidPhoto = await validImageUrl(speaker.photo)
+      s.speakers.push({
+        id: speaker.id,
+        name: speaker.name,
+        photo: hasValidPhoto ? speaker.photo : undefined,
       })
+    }
 
-      // Render Still social card
-      if (composition.durationInFrames === 1) {
-        const socialFilePath = `${eventFolder}/${session.id}_social.png`
-        if (!fileExists(socialFilePath)) {
-          await renderStill({
-            composition: inputComposition,
-            serveUrl: bundled,
-            output: socialFilePath,
-            inputProps: inputProps,
-          })
+    sessionsToProcess.push(s)
+  }
+
+  console.log(`Render ${compositions.length} compositions for # ${sessions.length} sessions`)
+  for (let index = 0; index < sessionsToProcess.length; index++) {
+    const session = sessionsToProcess[index]
+    console.log(`Session # ${index + 1} - ${session.id}`)
+
+    try {
+      const eventType = DevconnectEvents.find(e => e.id === event.id)?.type || '1'
+      const inputProps = { type: eventType, id: event.id.replace('_', '-'), session: session }
+
+      for (const composition of compositions) {
+        const inputComposition = await selectComposition({
+          serveUrl: bundled,
+          id: composition.id,
+          inputProps: inputProps,
+        })
+
+        // Render Stills
+        if (composition.durationInFrames === 1) {
+          const id = `${session.id}_social.png`
+          const type = 'image/png'
+          const socialFilePath = `${eventFolder}/${id}`
+
+          if (folderId) {
+            const fileExported = await FileExists(id, type, folderId) ?? false
+            if (!fileExported) {
+              const exists = fileExists(socialFilePath)
+              if (!exists) {
+                await renderStill({
+                  composition: inputComposition,
+                  serveUrl: bundled,
+                  output: socialFilePath,
+                  inputProps: inputProps,
+                })
+              }
+
+              upload(id, socialFilePath, type, folderId)
+            }
+          }
         }
 
-        if (folderId) upload(session.id, socialFilePath, 'video/mp4', folderId)
+        // Only render compositions that have frames
+        if (composition.durationInFrames > 1) {
+          const id = `${session.id}_intro.mp4`
+          const type = 'video/mp4'
+          const introFilePath = `${eventFolder}/${id}`
+
+          if (folderId) {
+            const fileExported = await FileExists(id, type, folderId) ?? false
+            if (!fileExported) {
+              const exists = fileExists(introFilePath)
+              if (!exists) {
+                await renderMedia({
+                  codec: 'h264',
+                  composition: inputComposition,
+                  serveUrl: bundled,
+                  outputLocation: introFilePath,
+                  inputProps,
+                  // onProgress,
+                })
+              }
+
+              upload(id, introFilePath, type, folderId)
+            }
+
+            // Generate a still from the same composition's last frame
+
+            const thumbnailId = `${session.id}_thumbnail.png`
+            const thumbnailType = 'image/png'
+            const thumbnailFilePath = `${eventFolder}/${thumbnailId}`
+            const thumbnailExported = await FileExists(thumbnailId, thumbnailType, folderId) ?? false
+
+            if (!thumbnailExported) {
+              const exists = fileExists(thumbnailFilePath)
+              if (!exists) {
+                await renderStill({
+                  composition: inputComposition,
+                  serveUrl: bundled,
+                  frame: composition.durationInFrames - 1,
+                  output: thumbnailFilePath,
+                  inputProps: inputProps,
+                })
+              }
+
+              upload(id, thumbnailFilePath, thumbnailType, folderId)
+            }
+          }
+        }
+
+        // lastProgressPrinted = -1
       }
-
-      // Only render compositions that have frames
-      if (composition.durationInFrames > 1) {
-        const introFilePath = `${eventFolder}/${session.id}_intro.mp4`
-        if (!fileExists(introFilePath)) {
-          await renderMedia({
-            codec: 'h264',
-            composition: inputComposition,
-            serveUrl: bundled,
-            outputLocation: introFilePath,
-            inputProps,
-            onProgress,
-          })
-        }
-
-        if (folderId) upload(session.id, introFilePath, 'video/mp4', folderId)
-
-        // Generate a still from the same composition's last frame
-        const thumbnailFilePath = `${eventFolder}/${session.id}_thumbnail.png`
-        if (!fileExists(thumbnailFilePath)) {
-          await renderStill({
-            composition: inputComposition,
-            serveUrl: bundled,
-            frame: composition.durationInFrames - 1,
-            output: thumbnailFilePath,
-            inputProps: inputProps,
-          })
-        }
-
-        if (folderId) upload(session.id, thumbnailFilePath, 'image/png', folderId)
-      }
-
-      lastProgressPrinted = -1
+    } catch (err) {
+      console.log('Error rendering session', err)
     }
   }
 }
@@ -154,12 +209,21 @@ async function upload(id: string, path: string, type: string, folderId: string) 
   }
 }
 
-let lastProgressPrinted = -1
-const onProgress: RenderMediaOnProgress = ({ progress }) => {
-  const progressPercent = Math.floor(progress * 100)
+async function validImageUrl(url?: string) {
+  if (!url) return false
 
-  if (progressPercent > lastProgressPrinted) {
-    console.log(`Rendering is ${progressPercent}% complete`)
-    lastProgressPrinted = progressPercent
-  }
+  const res = await fetch(url)
+  const buff = await res.blob()
+
+  return buff.type.startsWith('image/')
 }
+
+// let lastProgressPrinted = -1
+// const onProgress: RenderMediaOnProgress = ({ progress }) => {
+//   const progressPercent = Math.floor(progress * 100)
+
+//   if (progressPercent > lastProgressPrinted) {
+//     console.log(`Rendering is ${progressPercent}% complete`)
+//     lastProgressPrinted = progressPercent
+//   }
+// }
