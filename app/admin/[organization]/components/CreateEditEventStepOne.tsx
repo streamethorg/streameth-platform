@@ -49,10 +49,7 @@ const CreateEditEventStepOne = () => {
       setLoading(false)
     }
   }
-  console.log(
-    formData.start instanceof Date,
-    formData.start.toISOString().split('T')[0]
-  )
+
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">
