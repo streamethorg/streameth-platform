@@ -1,0 +1,21 @@
+{
+  "id": "towards_a_holistic_formalization_of_ethereums_economics",
+  "name": "Towards a Holistic Formalization of Ethereum's Economics",
+  "description": "The implications of Ethereum's economic design are not well understood. Using the tools from macrofinance, we can illuminate potential equilibrium conditions detrimental to Ethereum's security objectives and design a more robust protocol.",
+  "start": 1700052300000,
+  "end": 1700053800000,
+  "stageId": "uskudar_3",
+  "speakers": [
+    {
+      "id": "brett_palatiello",
+      "name": "Brett Palatiello",
+      "bio": "Brett was previously a general partner and head of blockchain at Interplay managing early stage crypto investments. Prior to that, Brett was a partner and portfolio manager at two quantitative trading firms.",
+      "eventId": "ethconomics",
+      "twitter": "@brettpalatiello",
+      "photo": "https://drive.google.com/uc?id=1a_4OytDBlhbE0xvN3LzqGuEGtSHPuosV"
+    }
+  ],
+  "videoUrl": "Staking Economics",
+  "eventId": "ethconomics",
+  "coverImage": "/sessions/ethconomics/towards_a_holistic_formalization_of_ethereums_economics.jpg"
+}

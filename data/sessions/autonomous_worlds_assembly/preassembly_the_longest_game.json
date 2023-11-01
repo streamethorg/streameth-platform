@@ -1,0 +1,21 @@
+{
+  "id": "preassembly_the_longest_game",
+  "name": "Pre-Assembly: The Longest Game",
+  "description": "How do gaming developers and publishers think about their long-term strategy for success? In this session, Hilmar Veigar Pétursson of CCP Games will discuss the importance of community building and nurturing a positive culture through EVE Online’s growth and evolution with its players over time. By examining these principles and tools, Pétursson will showcase how to plan for the future while maximizing the present.",
+  "start": 1700033400000,
+  "end": 1700035200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "hilmar_veigar_ptursson",
+      "name": "Hilmar Veigar Pétursson",
+      "bio": "CEO at CCPGames, makers of EVEOnline, EVEValkyrie, EVEGunjack, PlaySparc and lots of other cool stuff. Virtual World and Digital Economy enthusiast.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@HilmarVeigar",
+      "photo": "https://drive.google.com/uc?id=1ezUvZ3UyyiUoIzorK5gp1-O7804fUp68"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/preassembly_the_longest_game.jpg"
+}

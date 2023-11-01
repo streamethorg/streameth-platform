@@ -1,1 +1,8 @@
-{"id":"ye_zhang","name":"Ye Zhang","bio":"Ye Zhang is the co-founder of Scroll.  He works on zk research and strategy. His research primarily focuses on hardware acceleration for zero-knowledge proofs and theoretical proving algorithms. ","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1GQ_TEOwhEMG0Q50rBxBJw4rxSbZEfhkS/view"}
+{
+  "id": "ye_zhang",
+  "name": "Ye Zhang",
+  "bio": "Ye Zhang is the co-founder of Scroll.  He works on zk research and strategy. His research primarily focuses on hardware acceleration for zero-knowledge proofs and theoretical proving algorithms. ",
+  "eventId": "progcrypto",
+  "twitter": "",
+  "photo": "https://drive.google.com/uc?id=1GQ_TEOwhEMG0Q50rBxBJw4rxSbZEfhkS"
+}

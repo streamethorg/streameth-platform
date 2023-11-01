@@ -1,1 +1,8 @@
-{"id":"yuren_ju","name":"Yuren Ju","bio":"As a passionate software developer, exploring new advancements in the field has always been a focus. Previous work includes projects related to Wallet as a Service and Decentralized Finance (DeFi). The most recent project focuses on developing a system compliant with W3C DIDs (Decentralized Identifiers) and Semaphore protocols, while also integrating the official identity verification API from the Taiwanese government.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/19RLXoBAE-R2kdKBxM46nFO64kqs9Gmid/view"}
+{
+  "id": "yuren_ju",
+  "name": "Yuren Ju",
+  "bio": "As a passionate software developer, exploring new advancements in the field has always been a focus. Previous work includes projects related to Wallet as a Service and Decentralized Finance (DeFi). The most recent project focuses on developing a system compliant with W3C DIDs (Decentralized Identifiers) and Semaphore protocols, while also integrating the official identity verification API from the Taiwanese government.",
+  "eventId": "progcrypto",
+  "twitter": "",
+  "photo": "https://drive.google.com/uc?id=19RLXoBAE-R2kdKBxM46nFO64kqs9Gmid"
+}
