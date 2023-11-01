@@ -51,7 +51,7 @@ export const secondsToHHMM = (seconds: number) => {
   return `${hoursStr}:${minutesStr} ${ampm}`
 }
 
-export const getEventTime = (eventTime: string) => {
+export const getEventPeriod = (eventTime: string) => {
   const timeArray = eventTime.split(':')
   const date = new Date()
   date.setHours(parseInt(timeArray[0], 10))
@@ -108,5 +108,5 @@ export const getEventLocalTime = (
     .toString()
     .padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`
 
-  return `${getEventTime(newTime)} ${getLocalTimezone()} `
+  return `${getEventPeriod(newTime)} ${getLocalTimezone()} `
 }
