@@ -1,1 +1,21 @@
-{"id":"preassembly_jesus","name":"Pre-Assembly: Jesus","description":"Coming Soon","start":1700033400000,"end":1700035200000,"stageId":"beyazit","speakers":[{"id":"hilmar_veigar_ptursson","name":"Hilmar Veigar Pétursson","bio":"CEO at CCPGames, makers of EVEOnline, EVEValkyrie, EVEGunjack, PlaySparc and lots of other cool stuff. Virtual World and Digital Economy enthusiast.","eventId":"autonomous_worlds_assembly","twitter":"@HilmarVeigar","photo":"https://drive.google.com/file/d/1y-f89kIsFWtezS1tH-zzei0gUdGK5248/view?usp=drive_link"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/preassembly_jesus.jpg"}
+{
+  "id": "preassembly_jesus",
+  "name": "Pre-Assembly: Jesus",
+  "description": "Coming Soon",
+  "start": 1700033400000,
+  "end": 1700035200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "hilmar_veigar_ptursson",
+      "name": "Hilmar Veigar Pétursson",
+      "bio": "CEO at CCPGames, makers of EVEOnline, EVEValkyrie, EVEGunjack, PlaySparc and lots of other cool stuff. Virtual World and Digital Economy enthusiast.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@HilmarVeigar",
+      "photo": "https://drive.google.com/uc?id=1y-f89kIsFWtezS1tH-zzei0gUdGK5248"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/preassembly_jesus.jpg"
+}

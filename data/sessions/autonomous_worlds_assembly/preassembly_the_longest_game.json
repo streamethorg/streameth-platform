@@ -1,0 +1,21 @@
+{
+  "id": "preassembly_the_longest_game",
+  "name": "Pre-Assembly: The Longest Game",
+  "description": "What do we actually mean by the word \"world\" in its varied usages across common language (such as \"in the real world\" or \"save the world\"), fiction (as in \"worldbuilding\"), simulation, immersive technologies like VR, generative AI, and technologies of trust, coordination, and commitment like blockchains (with and without zero-knowledge mechanisms)? This session will argue that the common factor is the presence of \"protocol narratives,\" which can be understood as never-ending stories.",
+  "start": 1700033400000,
+  "end": 1700035200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "hilmar_veigar_ptursson",
+      "name": "Hilmar Veigar Pétursson",
+      "bio": "CEO at CCPGames, makers of EVEOnline, EVEValkyrie, EVEGunjack, PlaySparc and lots of other cool stuff. Virtual World and Digital Economy enthusiast.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@HilmarVeigar",
+      "photo": "https://drive.google.com/uc?id=1ezUvZ3UyyiUoIzorK5gp1-O7804fUp68"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/preassembly_the_longest_game.jpg"
+}

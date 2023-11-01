@@ -1,1 +1,8 @@
-{"id":"eduard_sanou","name":"Eduard Sanou","bio":"Learned zk in iden3 (now Polygon Hermez) while developing a decentralized identity protocol, and later a zkRollup.  Now working on the zkEVM project in PSE for nearly 2 years.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1R3q3LuCmZ6mbQFKweAGZ0dwzg4PZvBgg/view"}
+{
+  "id": "eduard_sanou",
+  "name": "Eduard Sanou",
+  "bio": "Learned zk in iden3 (now Polygon Hermez) while developing a decentralized identity protocol, and later a zkRollup.  Now working on the zkEVM project in PSE for nearly 2 years.",
+  "eventId": "progcrypto",
+  "twitter": "",
+  "photo": "https://drive.google.com/uc?id=1R3q3LuCmZ6mbQFKweAGZ0dwzg4PZvBgg"
+}

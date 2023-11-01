@@ -1,1 +1,8 @@
-{"id":"oskar_thorn","name":"Oskar Thorén","bio":"Oskar Thorén is an independent researcher, writing and researching about Zero Knowledge Proofs. Recently he has been writing about ZKPs at ZKIntro.com, exploring a Nova-based-ZK VM, HyperNova, and trying to make proving on mobile easier. Previously he founded and was Director of Research at Vac.dev, an R&D org building public good protocols for the decentralized web, with a focus on privacy and communication. Website: https://oskarth.com Twitter: https://twitter.com/oskarth","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/11p24MgtC6yPLhS2AD0TzeGFCXK2-kfnD/view"}
+{
+  "id": "oskar_thorn",
+  "name": "Oskar Thorén",
+  "bio": "Oskar Thorén is an independent researcher, writing and researching about Zero Knowledge Proofs. Recently he has been writing about ZKPs at ZKIntro.com, exploring a Nova-based-ZK VM, HyperNova, and trying to make proving on mobile easier. Previously he founded and was Director of Research at Vac.dev, an R&D org building public good protocols for the decentralized web, with a focus on privacy and communication. Website: https://oskarth.com Twitter: https://twitter.com/oskarth",
+  "eventId": "progcrypto",
+  "twitter": "",
+  "photo": "https://drive.google.com/uc?id=11p24MgtC6yPLhS2AD0TzeGFCXK2-kfnD"
+}
