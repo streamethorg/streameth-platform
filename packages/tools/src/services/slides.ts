@@ -166,7 +166,7 @@ export async function FileExists(
 export function getSlidesId(url: string): string {
   let id = url
   id = id.replace('https://docs.google.com/presentation/d/', '')
-  id = id.replace('/edit', '')
+  id = id.replace('/edit?usp=sharing', '')
   id = id.replace('/edit#slide=id.p', '')
   id = id.replace('/edit#slide=id.g13737362dea_0_1', '')
   id = id.replace(
