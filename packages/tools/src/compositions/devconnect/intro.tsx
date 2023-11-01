@@ -2,13 +2,14 @@ import { Sequence, AbsoluteFill, staticFile, Audio, useVideoConfig, useCurrentFr
 import { loadFont } from "@remotion/google-fonts/SofiaSansExtraCondensed"
 import { G_FPS } from '../../consts'
 import dayjs from 'dayjs'
+import { CreateAvatar } from '../../utils/avatars'
 
 export const { fontFamily } = loadFont()
 
 export interface SpeakerProps {
     id: string
     name: string
-    photo: string
+    photo?: string
 }
 
 export interface SessionProps {
@@ -19,19 +20,19 @@ export interface SessionProps {
 }
 
 export type Props = {
-    type: string,
+    type: string
     session: SessionProps
-    logo?: string
+    id: string,
 }
 
-export const Intro: React.FC<Props> = ({ type, session, logo }) => {
+export const Intro: React.FC<Props> = ({ type, session, id }) => {
     const { durationInFrames } = useVideoConfig()
     const frame = useCurrentFrame()
 
     const audioFile = staticFile('devconnect/audio/IST-material-sound.mp3')
     const introFile = staticFile(`devconnect/intro/IST-intro-${type}.mp4`)
     const bgFile = staticFile(`devconnect/images/IST-bg-${type}.png`)
-    const logoFile = logo ? staticFile(`devconnect/logos/${logo}.png`) : ''
+    const logoFile = id ? staticFile(`devconnect/logos/${id}.png`) : ''
 
     const introTime = 5 * G_FPS
     const sessionTime = 7 * G_FPS
@@ -104,7 +105,7 @@ export const Intro: React.FC<Props> = ({ type, session, logo }) => {
                                     {session.speakers.map((i) => {
                                         return (
                                             <div key={i.id} className='flex flex-col items-center gap-4'>
-                                                <Img className='w-48 h-48 object-cover rounded-full' src={i.photo} />
+                                                <Img className='w-48 h-48 object-cover rounded-full' src={i.photo ?? CreateAvatar(i.name)} />
                                                 <span className='text-3xl font-medium w-48 text-center leading-normal'>{i.name}</span>
                                             </div>)
                                     })}

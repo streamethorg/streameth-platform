@@ -1,11 +1,11 @@
 import { join } from 'path'
 import { bundle } from '@remotion/bundler'
-import { getCompositions } from '@remotion/renderer'
 import { webpackOverride } from '../webpack-override'
-import { RenderMediaOnProgress, renderMedia, renderStill } from '@remotion/renderer'
+import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
+import { DevconnectEvents } from 'compositions'
 
 const apiBaseUri = 'http://localhost:3000/api'
 
@@ -24,6 +24,8 @@ async function start(args: string[]) {
   console.log('Fetch non-archived events..')
   const res = await fetch(`${apiBaseUri}/events`)
   let events = (await res.json()).filter((i: any) => i.archiveMode === false)
+    // filter for Devconnect events
+    .filter((event: any) => DevconnectEvents.some(i => i.id.replace('-', '_') === event.id))
 
   if (args.length > 0) {
     const event = args[0]
@@ -65,46 +67,66 @@ async function generateEventAssets(event: any) {
     console.log('Using Google Drive data exporter to folder', folderId)
   }
 
-  const introFolder = join(CONFIG.ASSET_FOLDER, event.id, 'intros')
-  const socialFolder = join(CONFIG.ASSET_FOLDER, event.id, 'social')
-  mkdirSync(introFolder, { recursive: true })
-  mkdirSync(socialFolder, { recursive: true })
+  const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
+  mkdirSync(eventFolder, { recursive: true })
 
   console.log(`Render ${compositions.length} compositions for # ${sessions.length} sessions`)
   for (const session of sessions) {
     console.log(' -', session.id)
+    const eventType = DevconnectEvents.find(e => e.id === event.id)?.type || '1'
+    const inputProps = { type: eventType, id: event.id.replace('_', '-'), session: session }
 
     for (const composition of compositions) {
+      const inputComposition = await selectComposition({
+        serveUrl: bundled,
+        id: composition.id,
+        inputProps: inputProps,
+      })
+
+      // Render Still social card
+      if (composition.durationInFrames === 1) {
+        const socialFilePath = `${eventFolder}/${session.id}_social.png`
+        if (!fileExists(socialFilePath)) {
+          await renderStill({
+            composition: inputComposition,
+            serveUrl: bundled,
+            output: socialFilePath,
+            inputProps: inputProps,
+          })
+        }
+
+        if (folderId) upload(session.id, socialFilePath, 'video/mp4', folderId)
+      }
 
       // Only render compositions that have frames
       if (composition.durationInFrames > 1) {
-        const introFilePath = `${introFolder}/${composition.id}.mp4`
+        const introFilePath = `${eventFolder}/${session.id}_intro.mp4`
         if (!fileExists(introFilePath)) {
           await renderMedia({
             codec: 'h264',
-            composition,
+            composition: inputComposition,
             serveUrl: bundled,
             outputLocation: introFilePath,
-            inputProps: { session },
+            inputProps,
             onProgress,
           })
         }
 
-        if (folderId) upload(composition.id, introFilePath, 'video/mp4', folderId)
+        if (folderId) upload(session.id, introFilePath, 'video/mp4', folderId)
 
         // Generate a still from the same composition's last frame
-        const introStillPath = `${introFolder}/${composition.id}.png`
-        if (!fileExists(introStillPath)) {
+        const thumbnailFilePath = `${eventFolder}/${session.id}_thumbnail.png`
+        if (!fileExists(thumbnailFilePath)) {
           await renderStill({
-            composition,
+            composition: inputComposition,
             serveUrl: bundled,
             frame: composition.durationInFrames - 1,
-            output: introStillPath,
-            inputProps: { session },
+            output: thumbnailFilePath,
+            inputProps: inputProps,
           })
         }
 
-        if (folderId) upload(composition.id, introStillPath, 'image/png', folderId)
+        if (folderId) upload(session.id, thumbnailFilePath, 'image/png', folderId)
       }
 
       lastProgressPrinted = -1
