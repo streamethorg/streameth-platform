@@ -1,1 +1,8 @@
-{"id":"daniel_karmacoma_reynaud","name":"Daniel \"karmacoma\" Reynaud","bio":"No description","eventId":"solidity_summit","twitter":"@0xkarmacoma","photo":"https://pasteboard.co/CGRjWRguUEJb.png"}
+{
+  "id": "daniel_karmacoma_reynaud",
+  "name": "Daniel \"karmacoma\" Reynaud",
+  "bio": "No description",
+  "eventId": "solidity_summit",
+  "twitter": "@0xkarmacoma",
+  "photo": "/speakers/solidity_summit/daniel_karmacoma_reynaud.png"
+}
