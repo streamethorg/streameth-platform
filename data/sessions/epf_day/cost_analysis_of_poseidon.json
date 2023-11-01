@@ -1,0 +1,20 @@
+{
+  "id": "cost_analysis_of_poseidon",
+  "name": "Cost Analysis of Poseidon",
+  "description": "",
+  "start": 1700307000000,
+  "end": 1700307600000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "marcos_villagra",
+      "name": "Marcos Villagra",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@mdvillagra24"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/cost_analysis_of_poseidon.jpg"
+}

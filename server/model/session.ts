@@ -46,7 +46,7 @@ export default class Session implements ISession {
   // @IsNotEmpty()
   description: string
 
-  @IsNotEmpty()
+  // @IsNotEmpty()
   start: number
 
   //@IsNotEmpty()
