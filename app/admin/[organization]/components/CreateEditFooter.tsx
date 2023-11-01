@@ -13,7 +13,7 @@ const CreateEditFooter = () => {
   const { openModal, closeModal } = useContext(ModalContext)
   const handleDelete = () => {
     fetch(
-      `/api/admin/event?event=${event?.id}&organization=${event?.organizationId}`,
+      `/api/organizations/${event?.organizationId}/events/${event?.id}`,
       {
         method: 'DELETE',
       }

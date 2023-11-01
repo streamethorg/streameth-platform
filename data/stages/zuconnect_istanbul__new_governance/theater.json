@@ -1,8 +1,1 @@
-{
-  "id": "theater",
-  "name": "Theater",
-  "eventId": "zuconnect_istanbul__new_governance",
-  "streamSettings": {
-    "streamId": "97f79686-ccd1-48a4-889b-3c8ecf76bc30"
-  }
-}
+{"id":"theater","name":"Theater","eventId":"zuconnect_istanbul__new_governance","streamSettings":{}}
