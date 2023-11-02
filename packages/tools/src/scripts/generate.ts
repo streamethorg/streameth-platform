@@ -7,7 +7,8 @@ import { FileExists, UploadDrive } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
 import { DevconnectEvents } from 'compositions'
 
-const apiBaseUri = 'http://localhost:3000/api'
+// const apiBaseUri = CONFIG.NODE_ENV === 'development' ? 'http://localhost:3000/api' : 'https://app.streameth.org/api'
+const apiBaseUri = 'https://app.streameth.org/api'
 
 start(process.argv.slice(2))
   .then(() => {
@@ -20,6 +21,7 @@ start(process.argv.slice(2))
 
 async function start(args: string[]) {
   console.log(`Run Remotion renderer in ${CONFIG.NODE_ENV} mode..`)
+  console.log('- API Base uri', apiBaseUri)
 
   console.log('Fetch non-archived events..')
   const res = await fetch(`${apiBaseUri}/events`)
@@ -176,7 +178,7 @@ async function generateEventAssets(event: any) {
                 })
               }
 
-              upload(id, thumbnailFilePath, thumbnailType, folderId)
+              upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
             }
           }
         }

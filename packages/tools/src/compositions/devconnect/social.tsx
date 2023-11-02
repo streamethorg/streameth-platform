@@ -1,5 +1,5 @@
 import { AbsoluteFill, staticFile, Img } from 'remotion'
-import { Props, fontFamily } from './intro'
+import { Props } from './intro'
 import dayjs from 'dayjs'
 import { CreateAvatar } from '../../utils/avatars'
 
@@ -9,7 +9,7 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
     const logoFile = id ? staticFile(`devconnect/logos/${id}.png`) : ''
 
     function titleClassName() {
-        let className = 'w-full text-center font-bold'
+        let className = 'w-full text-center'
         if (session.name.length >= 140) className += ' text-6xl leading-none'
         if (session.name.length > 60 && session.name.length < 140) className += ' text-7xl leading-tight'
         if (session.name.length > 40 && session.name.length < 60) className += ' text-7xl leading-tight'
@@ -54,9 +54,9 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
                         </div>
                     </div>
                     <div className='flex relative mt-16 h-32 items-end'>
-                        <h1 className={titleClassName()} style={{ fontFamily }}>{session.name}</h1>
+                        <h1 className={titleClassName()} style={{ fontFamily: 'Sofia Sans Extra Condensed' }}>Geleneksel finans ile merkeziyetsiz finans'ın kesişimi (TBD)</h1>
                     </div>
-                    <div className='flex relative mt-8'>
+                    <div className='flex relative mt-16'>
                         <div className='flex w-full justify-center items-center'>
                             <div className={speakersClassName()}>
                                 {session.speakers.map((i) => {
