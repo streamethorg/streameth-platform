@@ -18,7 +18,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
         <div className="h-full flex flex-col w-full lg:flex-row relative items-center lg:gap-4">
           <div
             // ref={stickyRef}
-            className=" mb-2 lg:mb-0 md:p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
+            className=" mb-2 lg:mb-0 p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
             {/* <ActionsComponent title={stage.name}>
               <EmbedButton
                 streamId={stage.streamSettings.streamId}
@@ -49,7 +49,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
             />
             <Link
               href="/zuzalu/zuconnect_istanbul__ai_track"
-              className=" bg-blue rounded-[8px] p-4 text-white text-center">
+              className=" bg-blue rounded-[8px] p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
             </Link>
           </div>
