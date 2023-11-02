@@ -1,5 +1,3 @@
-import { CreateAvatar } from "./avatars";
-
 export const MOCK_SPEAKERS = [
     {
         id: "sarah",
@@ -14,12 +12,10 @@ export const MOCK_SPEAKERS = [
     {
         id: "flynn",
         name: "James Flynn",
-        photo: CreateAvatar("flynn")
     },
     {
         id: "jonathan",
         name: "Jonathan Green",
-        photo: CreateAvatar("Green")
     },
     {
         id: "george",
@@ -34,7 +30,6 @@ export const MOCK_SPEAKERS = [
     {
         id: "maria",
         name: "Maria Nelson Luca de Witt",
-        photo: CreateAvatar("Maria Nelson")
     },
     {
         id: "andy",
