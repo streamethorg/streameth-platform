@@ -1,14 +1,14 @@
-import { Sequence, AbsoluteFill, staticFile, Img, OffthreadVideo } from 'remotion'
+import { AbsoluteFill, staticFile, Img } from 'remotion'
 import { Props, fontFamily } from './intro'
 import dayjs from 'dayjs'
+import { CreateAvatar } from '../../utils/avatars'
 
-export const Social: React.FC<Props> = ({ type, session, logo }) => {
+export const Social: React.FC<Props> = ({ type, session, id }) => {
     const bgFile = staticFile(`devconnect/images/IST-bg-${type}.png`)
     const bgLogoFile = staticFile(`devconnect/images/IST-eth-logo.png`)
-    const logoFile = logo ? staticFile(`devconnect/logos/${logo}.png`) : ''
+    const logoFile = id ? staticFile(`devconnect/logos/${id}.png`) : ''
 
     function titleClassName() {
-        console.log('title length #', session.name.length)
         let className = 'w-full text-center font-bold'
         if (session.name.length >= 140) className += ' text-6xl leading-none'
         if (session.name.length > 60 && session.name.length < 140) className += ' text-7xl leading-tight'
@@ -19,7 +19,6 @@ export const Social: React.FC<Props> = ({ type, session, logo }) => {
     }
 
     function speakersClassName() {
-        console.log('# of speakers', session.speakers.length)
         let className = 'flex flex-row'
         if (session.speakers.length >= 7) className += ' gap-4'
         if (session.speakers.length > 3 && session.speakers.length < 7) className += ' gap-8'
@@ -43,7 +42,7 @@ export const Social: React.FC<Props> = ({ type, session, logo }) => {
                     <div className='flex relative h-32'>
                         {logoFile && (
                             <div className='absolute -top-4'>
-                                <Img className='h-32' src={logoFile} />
+                                <Img className='h-32 mt-4' src={logoFile} />
                             </div>
                         )}
                         <div className='absolute top-8 right-0 flex flex-col text-right text-2xl gap-4'>
@@ -63,7 +62,7 @@ export const Social: React.FC<Props> = ({ type, session, logo }) => {
                                 {session.speakers.map((i) => {
                                     return (
                                         <div key={i.id} className='flex flex-col items-center gap-4'>
-                                            <Img className='w-24 h-24 object-cover rounded-full' src={i.photo} />
+                                            <Img className='w-24 h-24 object-cover rounded-full' src={i.photo ?? CreateAvatar(i.name)} />
                                             <span className='text-xl font-medium w-32 text-center leading-normal'>{i.name}</span>
                                         </div>)
                                 })}

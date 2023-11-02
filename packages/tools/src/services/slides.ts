@@ -112,7 +112,7 @@ export async function UploadDrive(
   parentId?: string
 ) {
   try {
-    console.log('Upload session to Drive', name, path, type, parentId)
+    console.log('Upload session to Drive', parentId, name)
     const google = await AuthenticateServiceAccount(DRIVE_SCOPES)
     const client = google.drive('v3')
 
@@ -128,7 +128,6 @@ export async function UploadDrive(
       },
     })
 
-    console.log('Upload completed', upload.data.id)
     return upload.data
   } catch (ex) {
     console.log('Unable to upload to Google Drive', name)
