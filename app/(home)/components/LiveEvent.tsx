@@ -5,10 +5,10 @@ import ShareButton from '@/components/misc/ShareButton'
 import Player from '@/components/misc/Player'
 import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
 import Image from 'next/image'
-import { Button } from '@/app/utils/Button'
 import Link from 'next/link'
+import { IStage } from '@/server/model/stage'
 
-const LiveEvent = ({ stage }: StageProps) => {
+const LiveEvent = ({ stage }: { stage: IStage }) => {
   return (
     <div>
       <h3 className="font-ubuntu font-bold text-lg px-4 text-blue">
@@ -31,7 +31,7 @@ const LiveEvent = ({ stage }: StageProps) => {
               playerName={stage.name}
             />
             <p className="font-ubuntu font-medium text-lg mt-4 text-blue">
-              🔴 Live: ZuConnect Istanbul - Art Track
+              🔴 Live: ZuConnect Istanbul - AI Track
             </p>
           </div>
           <div
@@ -48,23 +48,13 @@ const LiveEvent = ({ stage }: StageProps) => {
               height={700}
             />
             <Link
-              href="/zuzalu/zuconnect_istanbul__art_track"
+              href="/zuzalu/zuconnect_istanbul__ai_track"
               className=" bg-blue rounded-[8px] p-4 text-white text-center">
               Go to Event
             </Link>
-            {/* <PluginBar
-            bottomOffset={bottomOffset}
-            tabs={getPluginTabs()}
-          /> */}
           </div>
         </div>
       </div>
-
-      {/* <StageContextProvider
-        stage={stage}
-        sessions={sessions.map((session) => session)}>
-        <StageLayout />
-      </StageContextProvider> */}
     </div>
   )
 }
