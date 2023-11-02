@@ -2,6 +2,8 @@ import EventController from '@/server/controller/event'
 import EventList from '@/app/(home)/components/EventList'
 import FilterBar from './components/FilterBar'
 import Image from 'next/image'
+import LiveEvent from './components/LiveEvent'
+import StageController from '@/server/controller/stage'
 
 export default async function Home() {
   const eventController = new EventController()
@@ -18,6 +20,11 @@ export default async function Home() {
   //   .filter((event) => {
   //     return new Date(event.start).getTime() < new Date().getTime()
   //   })
+  const stageController = new StageController()
+  const stage = await stageController.getStage(
+    'theater',
+    'zuconnect_istanbul__art_track'
+  )
 
   return (
     <main className="w-screen mx-auto">
@@ -31,6 +38,8 @@ export default async function Home() {
         <FilterBar events={upComing} />
       </div>
       <div className="flex flex-col p-4 lg:overflow-hidden">
+        <LiveEvent stage={stage.toJson()} />
+
         {/* <p>Upcoming events</p> */}
         <EventList events={upComing} />
         {/* <p>Past events</p>
