@@ -1,13 +1,20 @@
 import SchedulePageComponent from './components/SchedulePageComponent'
 import EventController from '@/server/controller/event'
 import type { Metadata, ResolvingMetadata } from 'next'
+import EmbedLayout from '@/components/Layout/EmbedLayout'
 interface Params {
   params: {
     event: string
     organization: string
   }
 }
-export default SchedulePageComponent
+export default function SchedulePage({ params }: Params) {
+  return (
+    <EmbedLayout>
+      <SchedulePageComponent params={params} />
+    </EmbedLayout>
+  )
+}
 
 export async function generateMetadata(
   { params }: Params,

@@ -1,4 +1,5 @@
 import SpeakerPageComponent from './components/SpeakerPageComponent'
+import EmbedLayout from '@/components/Layout/EmbedLayout'
 interface Params {
   params: {
     organization: string
@@ -8,7 +9,11 @@ interface Params {
 }
 
 const SpeakerPage = async ({ params }: Params) => {
-  return <SpeakerPageComponent params={params} />
+  return (
+    <EmbedLayout>
+      <SpeakerPageComponent params={params} />
+    </EmbedLayout>
+  )
 }
 
 export default SpeakerPage
