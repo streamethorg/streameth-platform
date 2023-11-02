@@ -3,12 +3,13 @@ import { bundle } from '@remotion/bundler'
 import { webpackOverride } from '../webpack-override'
 import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
-import { FileExists, UploadDrive } from 'services/slides'
+import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
 import { DevconnectEvents } from 'compositions'
 
 // const apiBaseUri = CONFIG.NODE_ENV === 'development' ? 'http://localhost:3000/api' : 'https://app.streameth.org/api'
 const apiBaseUri = 'https://app.streameth.org/api'
+const force = process.argv.slice(2).includes('--force')
 
 start(process.argv.slice(2))
   .then(() => {
@@ -21,7 +22,8 @@ start(process.argv.slice(2))
 
 async function start(args: string[]) {
   console.log(`Run Remotion renderer in ${CONFIG.NODE_ENV} mode..`)
-  console.log('- API Base uri', apiBaseUri)
+  console.log('- API base uri', apiBaseUri)
+  console.log('- force rendering', force)
 
   console.log('Fetch non-archived events..')
   const res = await fetch(`${apiBaseUri}/events`)
@@ -119,9 +121,9 @@ async function generateEventAssets(event: any) {
 
           if (folderId) {
             const fileExported = await FileExists(id, type, folderId) ?? false
-            if (!fileExported) {
+            if (!fileExported || force) {
               const exists = fileExists(socialFilePath)
-              if (!exists) {
+              if (!exists || force) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
@@ -143,9 +145,9 @@ async function generateEventAssets(event: any) {
 
           if (folderId) {
             const fileExported = await FileExists(id, type, folderId) ?? false
-            if (!fileExported) {
+            if (!fileExported || force) {
               const exists = fileExists(introFilePath)
-              if (!exists) {
+              if (!exists || force) {
                 await renderMedia({
                   codec: 'h264',
                   composition: inputComposition,
@@ -166,9 +168,9 @@ async function generateEventAssets(event: any) {
             const thumbnailFilePath = `${eventFolder}/${thumbnailId}`
             const thumbnailExported = await FileExists(thumbnailId, thumbnailType, folderId) ?? false
 
-            if (!thumbnailExported) {
+            if (!thumbnailExported || force) {
               const exists = fileExists(thumbnailFilePath)
-              if (!exists) {
+              if (!exists || force) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
@@ -204,6 +206,11 @@ function fileExists(path: string, fileSize = 100000) {
 async function upload(id: string, path: string, type: string, folderId: string) {
   // - CONFIG.GOOGLE_DRIVE_ID is main, root drive. Files are upload to their respective sub folder Ids
   if (CONFIG.GOOGLE_DRIVE_ID) {
+    if (force) {
+      await UploadOrUpdate(id, path, type, folderId)
+      return
+    }
+
     const exists = await FileExists(id, type, folderId)
     if (!exists) {
       await UploadDrive(id, path, type, folderId)
