@@ -9,9 +9,11 @@ import { DevconnectEvents } from 'compositions'
 
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
+const processArgs = process.argv.slice(2).filter(i => !i.startsWith('--'))
 const apiBaseUri = local ? 'http://localhost:3000/api' : 'https://app.streameth.org/api'
+const devconnectEvents = DevconnectEvents.map(i => ({ ...i, id: i.id.replaceAll('-', '_') }))
 
-start(process.argv.slice(2))
+start(processArgs)
   .then(() => {
     process.exit(0)
   })
@@ -28,7 +30,12 @@ async function start(args: string[]) {
   const res = await fetch(`${apiBaseUri}/events`)
   let events = (await res.json()).filter((i: any) => i.archiveMode === false)
     // filter for Devconnect events
-    .filter((event: any) => DevconnectEvents.some(i => i.id.replace('-', '_') === event.id))
+    .filter((event: any) => devconnectEvents.some(i => i.id === event.id)) // event.organizationId === 'devconnect'
+
+  console.log()
+  console.log('Events to render..')
+  events.forEach((i: any) => console.log('-', i.id))
+  console.log()
 
   if (args.length > 0) {
     const event = args[0]
@@ -38,28 +45,25 @@ async function start(args: string[]) {
   for (const event of events) {
     await generateEventAssets(event)
   }
-
-  return
 }
 
 async function generateEventAssets(event: any) {
-  console.log()
   console.log(`Generating assets for ${event.id}..`)
   const bundled = await bundle({
     entryPoint: join(process.cwd(), 'src', 'index.ts'),
     webpackOverride: (config) => webpackOverride(config),
   })
 
-  const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id) || c.id.includes(event.id.replace('_', '-')))
+  const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id) || c.id.includes(event.id.replaceAll('_', '-')))
   if (compositions.length === 0) {
-    console.log('No compositions found for. Skip rendering')
+    console.log('No compositions found. Skip rendering')
     return
   }
 
   const res = await fetch(`${apiBaseUri}/organizations/${event.organizationId}/events/${event.id}/sessions`)
   const sessions = await res.json()
   if (sessions.length === 0) {
-    console.log('No sessions found for. Skip rendering')
+    console.log('No sessions found. Skip rendering')
     return
   }
 
@@ -77,7 +81,7 @@ async function generateEventAssets(event: any) {
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
   mkdirSync(eventFolder, { recursive: true })
 
-  const eventType = DevconnectEvents.find(e => e.id === event.id.replace('_', '-'))?.type || '1'
+  const eventType = devconnectEvents.find(e => e.id === event.id)?.type || '1'
   console.log('- Event Composition Type', eventType)
 
   // TODO: Kinda hacky solution to check invalid Image urls here.
