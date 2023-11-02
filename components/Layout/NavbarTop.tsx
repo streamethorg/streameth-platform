@@ -97,6 +97,11 @@ export default function NavbarTop() {
             setIsNavVisible={setMenuVisible}
           />
         )}
+        <Link
+          href="/"
+          className="font-ubuntu p-2 rounded-xl bg-base uppercase text-sm text-white ml-5">
+          Back to overview
+        </Link>
       </div>
     </header>
   )

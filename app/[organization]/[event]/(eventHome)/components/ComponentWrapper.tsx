@@ -7,11 +7,8 @@ const ComponentWrapper = ({
 }) => {
   return (
     <div
-      style={{
-        backgroundColor: 'rgba(19,21,23,0.48)',
-      }}
       id={sectionId}
-      className="my-2 md:my-4 before:relative w-full z-[1] backdrop-blur-sm  rounded-xl p-2 md:p-4 text-white ">
+      className="my-2 md:my-4 bg-base before:relative w-full z-[1] backdrop-blur-sm  rounded-xl p-2 md:p-4 text-white ">
       {children}
     </div>
   )
