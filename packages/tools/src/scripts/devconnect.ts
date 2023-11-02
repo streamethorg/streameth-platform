@@ -7,9 +7,9 @@ import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
 import { DevconnectEvents } from 'compositions'
 
-// const apiBaseUri = CONFIG.NODE_ENV === 'development' ? 'http://localhost:3000/api' : 'https://app.streameth.org/api'
-const apiBaseUri = 'https://app.streameth.org/api'
 const force = process.argv.slice(2).includes('--force')
+const local = process.argv.slice(2).includes('--local')
+const apiBaseUri = local ? 'http://localhost:3000/api' : 'https://app.streameth.org/api'
 
 start(process.argv.slice(2))
   .then(() => {
@@ -25,7 +25,6 @@ async function start(args: string[]) {
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
 
-  console.log('Fetch non-archived events..')
   const res = await fetch(`${apiBaseUri}/events`)
   let events = (await res.json()).filter((i: any) => i.archiveMode === false)
     // filter for Devconnect events
@@ -44,20 +43,19 @@ async function start(args: string[]) {
 }
 
 async function generateEventAssets(event: any) {
+  console.log()
   console.log(`Generating assets for ${event.id}..`)
   const bundled = await bundle({
     entryPoint: join(process.cwd(), 'src', 'index.ts'),
     webpackOverride: (config) => webpackOverride(config),
   })
 
-  console.log('Fetch compositions..')
   const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id) || c.id.includes(event.id.replace('_', '-')))
   if (compositions.length === 0) {
     console.log('No compositions found for. Skip rendering')
     return
   }
 
-  console.log('Fetch sessions..')
   const res = await fetch(`${apiBaseUri}/organizations/${event.organizationId}/events/${event.id}/sessions`)
   const sessions = await res.json()
   if (sessions.length === 0) {
@@ -68,11 +66,19 @@ async function generateEventAssets(event: any) {
   let folderId = ''
   if (event.dataExporter?.length > 0 && event.dataExporter[0].type === 'gdrive' && event.dataExporter[0].config) {
     folderId = event.dataExporter[0].config.sheetId || event.dataExporter[0].config.driveId
-    console.log('Using Google Drive data exporter to folder', folderId)
+    console.log('- Google Drive data exporter', folderId)
+  }
+
+  if (!folderId) {
+    console.error('No Google Drive data exporter found. Skip rendering')
+    return
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
   mkdirSync(eventFolder, { recursive: true })
+
+  const eventType = DevconnectEvents.find(e => e.id === event.id.replace('_', '-'))?.type || '1'
+  console.log('- Event Composition Type', eventType)
 
   // TODO: Kinda hacky solution to check invalid Image urls here.
   // This should get fixed on data entry or import
@@ -103,7 +109,6 @@ async function generateEventAssets(event: any) {
     console.log(`Session # ${index + 1} - ${session.id}`)
 
     try {
-      const eventType = DevconnectEvents.find(e => e.id === event.id)?.type || '1'
       const inputProps = { type: eventType, id: event.id.replace('_', '-'), session: session }
 
       for (const composition of compositions) {
@@ -162,7 +167,6 @@ async function generateEventAssets(event: any) {
             }
 
             // Generate a still from the same composition's last frame
-
             const thumbnailId = `${session.id}_thumbnail.png`
             const thumbnailType = 'image/png'
             const thumbnailFilePath = `${eventFolder}/${thumbnailId}`
