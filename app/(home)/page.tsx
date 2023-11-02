@@ -30,7 +30,7 @@ export default async function Home() {
 
   return (
     <main className="w-screen mx-auto">
-      <div className="sticky top-0 z-[9999] bg-accent flex p-4">
+      <div className="sticky top-0 z-[9999] bg-accent flex p-4 gap-4">
         <Image
           src="/logo.png"
           width={50}
