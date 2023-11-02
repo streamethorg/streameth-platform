@@ -7,7 +7,7 @@
   "scripts": {
     "cli": "ts-node cli.ts",
     "local-test": "ts-node test.ts",
-    "generate-images": "ts-node generateImages.ts",
+    "generate-images": "ts-node utils/generateImages.ts",
     "change-image": "ts-node ./utils/change_thumbnail.ts"
   },
   "dependencies": {
