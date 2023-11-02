@@ -113,7 +113,7 @@ async function generateEventAssets(event: any) {
     console.log(`Session # ${index + 1} - ${session.id}`)
 
     try {
-      const inputProps = { type: eventType, id: event.id.replace('_', '-'), session: session }
+      const inputProps = { type: eventType, id: event.id.replaceAll('_', '-'), session: session }
 
       for (const composition of compositions) {
         const inputComposition = await selectComposition({
