@@ -1,12 +1,20 @@
 'use client'
-import { ReactNode, useEffect, useContext } from 'react'
+import {
+  ReactNode,
+  useEffect,
+  useContext,
+  ReactComponentElement,
+} from 'react'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
 import { ISpeaker } from '@/server/model/speaker'
 import { ISession } from '@/server/model/session'
 import { usePathname } from 'next/navigation'
 import colors from '@/app/constants/colors'
-import { TopNavbarContext } from '@/components/context/TopNavbarContext'
+import {
+  Page,
+  TopNavbarContext,
+} from '@/components/context/TopNavbarContext'
 import {
   HomeIcon,
   ViewColumnsIcon,
@@ -36,13 +44,7 @@ const ColorComponent = ({
   const isNotOrganization =
     pathname === '/' || pathname.includes('/admin')
 
-  const pages = [
-    {
-      href: `/${organizationId}/${id}#home`,
-      name: 'Home',
-      icon: <HomeIcon />,
-    },
-  ]
+  const pages: Page[] = []
 
   if (sessions.length > 0)
     pages.push({

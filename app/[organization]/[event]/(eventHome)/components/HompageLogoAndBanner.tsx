@@ -27,11 +27,11 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
           </h1>
           <div className=" flex flex-col space-y-4 text-left">
             <p>
-              <span className="mr-2">&#128197;</span>When:{' '}
+              <span className="mr-2">&#128197;</span>
               {new Date(event.start).toDateString()}
             </p>
             <p>
-              <span className="mr-2">&#9200;</span> Time:{' '}
+              <span className="mr-2">&#9200;</span>
               {event?.startTime
                 ? `${getEventPeriod(event.startTime)} ${
                     event.timezone
@@ -39,7 +39,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
                 : 'TBD'}
             </p>
             <p>
-              <span className="mr-2">&#127759;</span> Where:{' '}
+              <span className="mr-2">&#127759;</span>
               {event.location}
             </p>
             {/* <ReserveSpotButton event={event} /> */}
