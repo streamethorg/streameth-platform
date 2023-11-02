@@ -54,7 +54,7 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
                         </div>
                     </div>
                     <div className='flex relative mt-16 h-32 items-end'>
-                        <h1 className={titleClassName()} style={{ fontFamily: 'Sofia Sans Extra Condensed' }}>Geleneksel finans ile merkeziyetsiz finans'ın kesişimi (TBD)</h1>
+                        <h1 className={titleClassName()} style={{ fontFamily: 'Sofia Sans Extra Condensed' }}>{session.name}</h1>
                     </div>
                     <div className='flex relative mt-16'>
                         <div className='flex w-full justify-center items-center'>
