@@ -28,6 +28,7 @@ const SpeakerPhoto = ({
   return (
     <div className={` relative ${sizeString}`}>
       <Image
+        unoptimized={true}
         className="rounded-xl"
         src={
           speaker.photo ? speaker.photo : CreateBlockie(speaker.name)

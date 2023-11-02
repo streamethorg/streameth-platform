@@ -25,6 +25,7 @@ module.exports = {
         'accent-text': '#3d5afe',
         green: '#2CB83A',
         danger: '#FF5A5A',
+        'background-50': 'rgba(19,21,23,0.48)',
       },
       boxShadow: {
         '3xl': 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
