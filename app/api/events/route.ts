@@ -7,15 +7,19 @@ export async function GET(request: NextRequest) {
   const data = await controller.getAllEvents({})
 
   const searchParams = request.nextUrl.searchParams
-  const inclStages = Boolean(searchParams.get('inclStages') === 'true')
+  const inclStages = Boolean(
+    searchParams.get('inclStages') === 'true'
+  )
   if (inclStages) {
     const stageController = new StageController()
     const eventsWithStages = await Promise.all(
       data.map(async (event) => {
-        const stages = await stageController.getAllStagesForEvent(event.id)
+        const stages = await stageController.getAllStagesForEvent(
+          event.id
+        )
         return {
           ...event,
-          stages
+          stages,
         }
       })
     )
