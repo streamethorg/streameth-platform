@@ -1,0 +1,20 @@
+{
+  "id": "example_zk_workshop",
+  "name": "[EXAMPLE] Zk Workshop",
+  "description": "[EXAMPLE] Join us for an immersive ZK (Zero Knowledge) Workshop, where you'll delve deep into the fascinating world of privacy and security in blockchain technology. Led by an expert in the field, this hands-on workshop will equip you with the knowledge and skills to understand and implement Zero Knowledge proofs, a revolutionary concept in cryptography. You'll leave this workshop with a deeper understanding of ZK technology and its potential to reshape the future of blockchain applications. Don't miss this opportunity to engage with cutting-edge advancements in the crypto space.",
+  "start": 1700047500000,
+  "end": 1700049000000,
+  "stageId": "uskudar_3",
+  "speakers": [
+    {
+      "id": "akaki_mamageishvili",
+      "name": "Akaki Mamageishvili",
+      "bio": "[TBD]",
+      "eventId": "ethconomics",
+      "twitter": "@kakia1989"
+    }
+  ],
+  "videoUrl": "Transaction Fee Mechanisms",
+  "eventId": "ethconomics",
+  "coverImage": "/sessions/ethconomics/example_zk_workshop.jpg"
+}
