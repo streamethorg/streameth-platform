@@ -1,1 +1,32 @@
-{"id":"zuconnect_desci_track","name":"ZuConnect DeSci Track","description":"Join ZuConnect, the 2023 Zuzalu gathering in Istanbul! The talks cover Ethereum, ZK tech, AI, Decentralized Social, Science, and New Governance. Join the conversation at the forefront of technology and innovation.","start":"2023-11-03T00:00:00.000Z","end":"2023-11-03T00:00:00.000Z","location":"Istanbul, Türkiye","organizationId":"zuzalu","dataImporter":[{"type":"gsheet","config":{"sheetId":"1iMUdjDp2eUXKLc0v2YHdRm4nLJzO7Is_YtXVZRj0Wc0","apiKey":"w"}}],"eventCover":"zuzalu-cover.png","website":"","archiveMode":false,"timezone":"Europe/Istanbul","logo":"zuzalu-logo.png","banner":"zuzalu-banner.png","accentColor":"#047C66","dataExporter":[{"type":"gdrive","config":{"driveId":"","driveApiKey":""}}],"startTime":"10:00"}
+{
+  "id": "zuconnect_desci_track",
+  "name": "ZuConnect DeSci Track",
+  "description": "Join ZuConnect, the 2023 Zuzalu gathering in Istanbul! The talks cover Ethereum, ZK tech, AI, Decentralized Social, Science, and New Governance. Join the conversation at the forefront of technology and innovation.",
+  "start": "2023-11-03T00:00:00.000Z",
+  "end": "2023-11-03T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1iMUdjDp2eUXKLc0v2YHdRm4nLJzO7Is_YtXVZRj0Wc0",
+        "apiKey": "w"
+      }
+    }
+  ],
+  "eventCover": "zuzalu-cover.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "zuzalu-logo.png",
+  "banner": "zuzalu-banner.png",
+  "accentColor": "#047C66",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": { "driveId": "", "driveApiKey": "" }
+    }
+  ],
+  "startTime": "10:00"
+}

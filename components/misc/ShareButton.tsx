@@ -21,10 +21,10 @@ const ShareModalContent = () => {
   const text = `Check out this event on @streameth!`
   return (
     <div>
-      <h1 className="font-bold uppercase mb-4 text-accent text-center mx-auto">
+      <h1 className="font-bold uppercase mb-4 text-white text-center mx-auto pt-4">
         Share this event
       </h1>
-      <div className="flex flex-row items-center justify-center space-x-4">
+      <div className="flex flex-row items-center justify-center space-x-4 px-4 pb-4">
         <FacebookShareButton url={window.location.href} quote={text}>
           <FacebookIcon size={42} round />
         </FacebookShareButton>

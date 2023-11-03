@@ -15,7 +15,7 @@ export async function Authenticate(scopes: string[]) {
   return google
 }
 
-export async function AuthenticateServiceAccount(scopes: string[]) {
+export function AuthenticateServiceAccount(scopes: string[]) {
   // console.log('Authenticating with Google', scopes)
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES

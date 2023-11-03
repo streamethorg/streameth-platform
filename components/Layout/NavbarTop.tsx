@@ -99,7 +99,7 @@ export default function NavbarTop() {
         )}
         <Link
           href="/"
-          className="font-ubuntu p-2 rounded-xl bg-background-50 uppercase text-sm text-white ml-5">
+          className="font-ubuntu p-2 rounded-xl bg-base uppercase text-sm text-white ml-5">
           Back to overview
         </Link>
       </div>
