@@ -29,7 +29,10 @@ const UpcomingEvents = () => {
   return (
     <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll ">
       {UPCOMING.map(({ name, date, link }, index) => (
-        <Link href={link} key={index} className="cursor-pointer">
+        <Link
+          href={link}
+          key={index}
+          className="cursor-pointer px-2 hover:shadow-md rounded-xl">
           <div className="h-full rounded-xl text-white uppercase">
             <div className="aspect-video relative">
               <Image
@@ -43,13 +46,11 @@ const UpcomingEvents = () => {
                 }}
               />
             </div>
-            <div className="flex flex-col" title="Zuzalu">
-              <p className=" text-md font-medium capitalize text-blue my-2 truncate">
+            <div className="flex flex-col my-2 gap-2" title="Zuzalu">
+              <p className=" text-sm font-bold capitalize text-blue  truncate">
                 {name}
               </p>
-              <p className="text-md text-blue text-sm font-medium">
-                {date}
-              </p>
+              <p className="text-blue text-sm font-medium">{date}</p>
             </div>
           </div>
         </Link>
