@@ -15,6 +15,15 @@
       }
     }
   ],
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1C5VBsXVWvV7fWa9SoMAaMPiWsY6OkWKR",
+        "driveApiKey": ""
+      }
+    }
+  ],
   "eventCover": "wallet_unconference_logo.jpeg",
   "website": "",
   "archiveMode": false,
