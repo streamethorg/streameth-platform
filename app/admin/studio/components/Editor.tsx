@@ -1,193 +1,123 @@
 'use client'
 
-import { ISession } from '@/server/model/session'
-import { StreamSession, useStreamSessions } from '@livepeer/react'
-import dayjs from 'dayjs'
-import duration from 'dayjs/plugin/duration'
-import { useEffect, useState } from 'react'
-import { VideoPlayer } from './VideoPlayer'
-import { SessionList } from './SessionList'
-import { EventInfo, StageInfo } from '../page'
-
-dayjs.extend(duration)
+import { MediaControllerCallbackState, Player, useCreateClip } from '@livepeer/react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 interface Props {
-  events: EventInfo[]
-  stages: StageInfo[]
+  playbackId: string
+  sessionId?: string
+}
+
+const hlsConfig = {
+  liveSyncDurationCount: Infinity
+}
+
+type PlaybackStatus = {
+  progress: number
+  offset: number
+}
+
+type PlaybackStartEnd = {
+  displayTime: string
+  unix: number
 }
 
 export function Editor(props: Props) {
-  const [selectedEvent, setSelectedEvent] = useState<
-    EventInfo | undefined
-  >()
-  const [selectedStage, setSelectedStage] = useState<
-    StageInfo | undefined
-  >()
-  const [selectedStream, setSelectedStream] = useState<
-    StreamSession | undefined
-  >()
-  const [sessions, setSessions] = useState<ISession[]>([])
+  const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>()
+  const [startTime, setStartTime] = useState<PlaybackStartEnd | null>()
+  const [endTime, setEndTime] = useState<PlaybackStartEnd | null>()
+  const timerRef = useRef(0)
 
-  const { data: streamSessions } = useStreamSessions(
-    selectedStage?.streamId ?? ''
-  )
-
-  // initialize default event and stage
-  useEffect(() => {
-    const event = props.events[0]
-    const stage = props.stages.find((stage) => stage.id === event?.id)
-    setSelectedEvent(event)
-    setSelectedStage(stage)
-  }, [props.events, props.stages])
-
-  // auto select stream sessions from Livepeer
-  useEffect(() => {
-    const streams = filterStreams(streamSessions ?? [])
-    const stream = streams[0]
-    setSelectedStream(stream)
-  }, [streamSessions, selectedStage])
-
-  // fetch schedule info
-  useEffect(() => {
-    async function fetchSchedule() {
-      if (selectedEvent && selectedStage && selectedStream) {
-        const res = await fetch(
-          `api/organizations/${selectedEvent.organizationId}/events/${selectedEvent.id}/sessions`
-        )
-        const data: ISession[] = await res.json()
-
-        // filter sessions by stage and streaming day
-        const filtered = data.filter(
-          (i) =>
-            i.stageId === selectedStage?.id &&
-            dayjs(i.start).format('YYYYMMDD') ===
-              dayjs(selectedStream.createdAt).format('YYYYMMDD')
-        )
-
-        setSessions(filtered)
+  const playerProps = useMemo(() => {
+    if (props.sessionId) {
+      return {
+        src: `${process.env.NEXT_PUBLIC_RECORDINGS_BASE_URL}${props.playbackId}/${props.sessionId}/output.m3u8`,
       }
     }
-    fetchSchedule()
-  }, [selectedEvent, selectedStage, selectedStream])
 
-  function selectEvent(eventId: string) {
-    const event = props.events.find((i) => i.id === eventId)
-    const stage = props.stages.filter((i) => i.eventId === eventId)[0]
+    return {
+      playbackId: props.playbackId,
+    }
+  }, [props])
 
-    setSelectedEvent(event)
-    setSelectedStage(stage)
-  }
+  useEffect(() => {
+    return () => clearTimeout(timerRef.current)
+  }, [])
 
-  function selectStage(stageId: string) {
-    const stage = props.stages.find((i) => i.id === stageId)
-    setSelectedStage(stage)
-  }
+  const onError = useCallback((error: Error) => console.log(error), [])
+  const onPlaybackStatusUpdate = useCallback((state: { progress: number; offset: number }) => setPlaybackStatus(state), [])
+  const playbackStatusSelector = useCallback((state: MediaControllerCallbackState<HTMLMediaElement, never>) => ({
+    progress: Number(state.progress.toFixed(1)),
+    offset: Number(state.playbackOffsetMs?.toFixed(1) ?? 0),
+  }), [])
 
-  function selectStream(streamId: string) {
-    const stream = streamSessions?.find((i) => i.id === streamId)
-    setSelectedStream(stream)
-  }
+  const { data: clipAsset, mutate, isLoading } = useCreateClip({
+    sessionId: props.sessionId,
+    playbackId: props.playbackId,
+    startTime: startTime?.unix ?? 0,
+    endTime: endTime?.unix ?? 0,
+  })
 
-  function filterStreams(streams: StreamSession[]) {
-    return streams.filter(
-      (i) =>
-        !i.isActive &&
-        i.record &&
-        i.sourceSegmentsDuration &&
-        i.sourceSegmentsDuration > 3600
-    )
-  }
+  // const { data: clipPlaybackInfo } = usePlaybackInfo({
+  //   playbackId: clipAsset?.playbackId ?? undefined,
+  //   refetchInterval: (info) =>
+  //     !info?.meta?.source?.some((s) => s.hrn === 'MP4') ? 2000 : false,
+  // })
 
   return (
-    <div>
-      <div className="flex flex-row gap-4">
-        <div className="flex flex-col gap-4 font-light w-96 shrink-0">
-          <select
-            onChange={(e) => selectEvent(e.target.value)}
-            className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
-            {props.events.map((event, index) => (
-              <option
-                key={index}
-                className="cursor-pointer py-1"
-                value={event.id}
-                selected={event.id === selectedEvent?.id}>
-                {event.name}
-              </option>
-            ))}
-          </select>
-          <select
-            onChange={(e) => selectStage(e.target.value)}
-            className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
-            {props.stages
-              .filter((i) => i.eventId === selectedEvent?.id)
-              .map((event, index) => (
-                <option
-                  key={index}
-                  className="cursor-pointer py-1"
-                  value={event.id}>
-                  {event.name}
-                </option>
-              ))}
-          </select>
+    <>
+      <div style={{ margin: '16px 20px', maxWidth: 800, }}>
+        <div>
+          <Player
+            {...playerProps}
+            playRecording
+            autoPlay
+            muted
+            playbackStatusSelector={playbackStatusSelector}
+            onPlaybackStatusUpdate={onPlaybackStatusUpdate}
+            onError={onError}
+            hlsConfig={hlsConfig}
+          />
+          <div>
+            <button type='button' onClick={() => {
+              const progress = playbackStatus?.progress;
+              const offset = playbackStatus?.offset;
 
-          {streamSessions && streamSessions.length > 0 && (
-            <select
-              onChange={(e) => selectStream(e.target.value)}
-              className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
-              {filterStreams(streamSessions).map((stream, index) => (
-                <option
-                  key={index}
-                  className="cursor-pointer py-1"
-                  value={stream.id}>
-                  {dayjs(stream.createdAt).format('MMM DD, HH:mm')} -{' '}
-                  {dayjs
-                    .duration(
-                      stream.sourceSegmentsDuration ?? 0,
-                      'second'
-                    )
-                    .format('H')}{' '}
-                  hours{' '}
-                  {dayjs
-                    .duration(
-                      stream.sourceSegmentsDuration ?? 0,
-                      'second'
-                    )
-                    .format('mm')}{' '}
-                  mins
-                </option>
-              ))}
-            </select>
-          )}
+              if (progress && offset) {
+                const calculatedTime = Date.now() - offset;
+
+                if (!startTime) {
+                  setStartTime({ unix: calculatedTime, displayTime: progress.toFixed(0).toString() })
+                } else if (!endTime) {
+                  setEndTime({ unix: calculatedTime, displayTime: progress.toFixed(0).toString() })
+                } else {
+                  setStartTime(null)
+                  setEndTime(null)
+                }
+              }
+            }}>
+              {!startTime ? 'Set clip start time' : !endTime ? 'Set clip end time' : 'Reset'}
+            </button>
+          </div>
         </div>
-        <div className="w-full h-full">
-          {selectedStream && selectedStream.record && (
-            <VideoPlayer
-              options={{
-                autoplay: true,
-                controls: true,
-                responsive: true,
-                fluid: true,
-                sources: [
-                  {
-                    src: selectedStream.recordingUrl,
-                  },
-                ],
-              }}
-            />
-          )}
-          {!selectedStream?.recordingUrl && (
-            <p>No video stream available..</p>
-          )}
+
+        <div style={{ marginTop: '20px', display: 'flex', gap: '10px', }}>
+          <div style={{ flex: 1 }}>
+            <span>Start time (seconds)</span>
+            <input name="start" type="number" disabled value={startTime?.displayTime ?? ''} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <span>End time (seconds)</span>
+            <input name="end" type="number" disabled value={endTime?.displayTime ?? ''} />
+          </div>
+        </div>
+
+        <div style={{ float: 'right', marginTop: '10px' }}>
+          <button type='button' onClick={mutate} disabled={!startTime || !endTime || isLoading}>
+            Create clip
+          </button>
         </div>
       </div>
-
-      {selectedEvent && sessions && sessions.length > 0 && (
-        <SessionList
-          event={selectedEvent}
-          sessions={sessions}
-          streamUrl={selectedStream?.recordingUrl ?? ''}
-        />
-      )}
-    </div>
+    </>
   )
 }
