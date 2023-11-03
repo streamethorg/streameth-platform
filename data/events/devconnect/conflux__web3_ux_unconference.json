@@ -1,1 +1,35 @@
-{"id":"conflux__web3_ux_unconference","name":"Conflux - Web3 UX Unconference","description":"Open-source design unconference and structured working groups helping to drive improved User Experience and usability standards forward for the decentralized eco-system.\n","start":"2023-11-16T00:00:00.000Z","end":"2023-11-16T00:00:00.000Z","location":"Istanbul, Türkiye","organizationId":"devconnect","dataImporter":[{"type":"gsheet","config":{"sheetId":"19g9VZyOSMw2L5FAG7SWJdtAmDiZDMzth4Zw_EXO40x0","apiKey":"k"}}],"eventCover":"devconnect-logo.png","website":"","archiveMode":false,"timezone":"Europe/Istanbul","logo":"web3-ux-logo.png","banner":"devconnect_banner.png","accentColor":"black","dataExporter":[{"type":"gdrive","config":{"driveId":"1ikrJ2uc1q9Ac1l10G_bYyLWogKA2933W","driveApiKey":""}}],"startTime":"10:00"}
+{
+  "id": "conflux__web3_ux_unconference",
+  "name": "Conflux - Web3 UX Unconference",
+  "description": "Open-source design unconference and structured working groups helping to drive improved User Experience and usability standards forward for the decentralized eco-system.\n",
+  "start": "2023-11-16T00:00:00.000Z",
+  "end": "2023-11-16T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "devconnect",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "19g9VZyOSMw2L5FAG7SWJdtAmDiZDMzth4Zw_EXO40x0",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "devconnect_cover.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "web3-ux-logo.png",
+  "banner": "devconnect_banner.png",
+  "accentColor": "black",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1ikrJ2uc1q9Ac1l10G_bYyLWogKA2933W",
+        "driveApiKey": ""
+      }
+    }
+  ],
+  "startTime": "10:00"
+}

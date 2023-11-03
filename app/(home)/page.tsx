@@ -45,11 +45,11 @@ export default async function Home() {
 
         <HotTalks />
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
-          Next events
+          Next Events
         </p>
         <UpcomingEvents />
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
-          Upcoming events
+          Upcoming Events
         </p>
         <EventList events={upComing} />
         {/* <p>Past events</p>
