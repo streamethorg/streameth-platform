@@ -31,7 +31,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               playerName={stage.name}
             />
             <p className="font-ubuntu font-medium text-lg mt-4 text-blue">
-              🔴 Live: ZuConnect Istanbul - AI Track
+              🔴 Live: ZuConnect Istanbul - Desci Track
             </p>
           </div>
           <div

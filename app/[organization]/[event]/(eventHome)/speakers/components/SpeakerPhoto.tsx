@@ -36,6 +36,7 @@ const SpeakerPhoto = ({
         alt={speaker.name}
         fill
         placeholder="empty"
+        style={{ objectFit: 'cover' }}
       />
     </div>
   )

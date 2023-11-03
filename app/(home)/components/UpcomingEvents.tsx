@@ -4,24 +4,24 @@ import React from 'react'
 
 const UPCOMING = [
   {
-    name: 'ZuConnect Istanbul - Art Track',
-    date: 'Today',
-    link: '/zuzalu/zuconnect_istanbul__art_track',
-  },
-  {
-    name: 'ZuConnect Istanbul - AI Track',
-    date: 'Today',
-    link: '/zuzalu/zuconnect_istanbul__ai_track',
-  },
-  {
     name: 'ZuConnect Desci Track',
-    date: 'Tomorrow',
-    link: 'zuconnect_desci_track',
+    date: 'Today',
+    link: '/zuzalu/zuconnect_desci_track',
   },
   {
     name: 'ZuConnect - Public Goods Track',
-    date: 'Saturday',
+    date: 'Tomorrow',
     link: '/zuzalu/zuconnect__public_goods_track',
+  },
+  {
+    name: 'ZuConnect - ZK Track',
+    date: 'Monday',
+    link: '/zuzalu/zuconnect__zk_track',
+  },
+  {
+    name: 'ZuConnect - Decentralized Social Track',
+    date: 'Tuesday',
+    link: '/zuzalu/zuconnect__decentralized_social_track',
   },
 ]
 
