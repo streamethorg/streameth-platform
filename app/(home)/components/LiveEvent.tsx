@@ -36,7 +36,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
           </div>
           <div
             // style={{ height: isMobile ? '100%' : playerHeight }}
-            className={`w-full lg:w-[45%]  flex flex-col gap-4 mb-4`}>
+            className={`w-full lg:w-[45%] mr-4 flex flex-col gap-4 mb-4`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
               ZuConnect Istanbul 2023
             </p>
@@ -48,7 +48,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               height={700}
             />
             <Link
-              href="/zuzalu/zuconnect_istanbul__ai_track"
+              href="/zuzalu/zuconnect_desci_track"
               className=" bg-blue rounded-[8px] p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
             </Link>
