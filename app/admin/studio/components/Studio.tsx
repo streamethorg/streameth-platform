@@ -31,12 +31,14 @@ export default function Studio(props: Props) {
 
     setEvent(event)
     setStage(event.stages[0])
+    setStream({ playbackId: '' })
   }
 
   function selectStage(stageId: string) {
     const stage = event.stages.find((i: any) => i.id === stageId)
 
     setStage(stage)
+    setStream({ playbackId: '' })
   }
 
   function selectStream(streamId: string) {
