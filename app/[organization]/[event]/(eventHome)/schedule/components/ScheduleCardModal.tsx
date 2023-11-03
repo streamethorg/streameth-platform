@@ -4,13 +4,16 @@ import SpeakerIconList from '@/app/[organization]/[event]/(eventHome)/speakers/c
 import { useEffect, useState, useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
 import { LoadingContext } from '@/components/context/LoadingContext'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
   const { closeModal } = useContext(ModalContext)
   const { setIsLoading } = useContext(LoadingContext)
   const router = useRouter()
+  const pathname = usePathname()
+
+  const paramsOrgId = pathname.split('/')[1]
 
   useEffect(() => {
     const url = window.location.href
@@ -20,7 +23,10 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const handleGoToStage = () => {
     setIsLoading(true)
     closeModal()
-    router.push(`${session.eventId}/stage/${session.stageId}`)
+    const stageUrl = `/${paramsOrgId}/${session.eventId}/stage/${session.stageId}`
+    !pathname.includes('schedule')
+      ? router.push(stageUrl)
+      : window.open(stageUrl, '_blank', 'noreferrer')
   }
 
   return (
