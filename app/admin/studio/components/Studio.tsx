@@ -20,8 +20,12 @@ interface StreamParams {
 
 export default function Studio(props: Props) {
   const [event, setEvent] = useState<any>(props.events[0])
-  const [stage, setStage] = useState<any>(FilterValidStages(props.events[0].stages)[0])
-  const [stream, setStream] = useState<StreamParams>({ playbackId: '' })
+  const [stage, setStage] = useState<any>(
+    FilterValidStages(props.events[0].stages)[0]
+  )
+  const [stream, setStream] = useState<StreamParams>({
+    playbackId: '',
+  })
   const { data: streamSessions } = useStreamSessions(
     stage?.streamSettings?.streamId ?? ''
   )
@@ -42,10 +46,15 @@ export default function Studio(props: Props) {
   }
 
   function selectStream(streamId: string) {
-    const stream: any = streamSessions?.find((i: any) => i.id === streamId)
+    const stream: any = streamSessions?.find(
+      (i: any) => i.id === streamId
+    )
 
     if (stream) {
-      setStream({ playbackId: stream.playbackId, sessionId: stream.id })
+      setStream({
+        playbackId: stream.playbackId,
+        sessionId: stream.id,
+      })
     }
   }
 
@@ -54,21 +63,27 @@ export default function Studio(props: Props) {
     const stream = streams[0]
 
     if (stream) {
-      setStream({ playbackId: stream.playbackId, sessionId: stream.id })
+      setStream({
+        playbackId: stream.playbackId,
+        sessionId: stream.id,
+      })
     }
   }, [streamSessions])
 
   function filterStreamSession(streamSessions: any[]) {
     // Only show streams that have been recorded and are either active or longer than 1 hour
     // 5 day limit is how long 'clippable' streams are kept on Livepeer
-    return streamSessions?.filter((i) =>
-      i.record && dayjs(i.createdAt).isAfter(dayjs().subtract(5, 'days')) &&
-      (i.isActive || i.sourceSegmentsDuration > 3600))
+    return streamSessions?.filter(
+      (i) =>
+        i.record &&
+        dayjs(i.createdAt).isAfter(dayjs().subtract(5, 'days')) &&
+        (i.isActive || i.sourceSegmentsDuration > 3600)
+    )
   }
 
   return (
     <div className="p-8 container mx-auto">
-      <div className='flex gap-4 text-sm'>
+      <div className="flex gap-4 text-sm">
         <select
           onChange={(e) => selectEvent(e.target.value)}
           className="p-2 border w-full bg-primary">
@@ -103,23 +118,44 @@ export default function Studio(props: Props) {
           className="p-2 border w-full bg-primary"
           disabled={!streamSessions || streamSessions.length === 0}>
           {filterStreamSession(streamSessions ?? []).length === 0 && (
-            <option selected disabled>No streams found..</option>
+            <option selected disabled>
+              No streams found..
+            </option>
           )}
 
-          {filterStreamSession(streamSessions ?? []).map((stream: any) => (
-            <option
-              key={stream.id}
-              className="cursor-pointer py-1"
-              value={stream.id}>
-              {dayjs(stream.createdAt).format('MMM DD, HH:mm')} -{' '}
-              {dayjs.duration(stream.sourceSegmentsDuration ?? 0, 'second').format('H')} hours{' '}
-              {dayjs.duration(stream.sourceSegmentsDuration ?? 0, 'second').format('mm')} mins
-            </option>
-          ))}
+          {filterStreamSession(streamSessions ?? []).map(
+            (stream: any) => (
+              <option
+                key={stream.id}
+                className="cursor-pointer py-1"
+                value={stream.id}>
+                {dayjs(stream.createdAt).format('MMM DD, HH:mm')} -{' '}
+                {dayjs
+                  .duration(
+                    stream.sourceSegmentsDuration ?? 0,
+                    'second'
+                  )
+                  .format('H')}{' '}
+                hours{' '}
+                {dayjs
+                  .duration(
+                    stream.sourceSegmentsDuration ?? 0,
+                    'second'
+                  )
+                  .format('mm')}{' '}
+                mins
+              </option>
+            )
+          )}
         </select>
       </div>
 
-      {stream.playbackId && <Editor playbackId={stream.playbackId} sessionId={stream.sessionId} />}
+      {stream.playbackId && (
+        <Editor
+          playbackId={stream.playbackId}
+          sessionId={stream.sessionId}
+        />
+      )}
     </div>
   )
 }
