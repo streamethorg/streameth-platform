@@ -26,7 +26,7 @@ export default async function Home() {
   const stageController = new StageController()
   const stage = await stageController.getStage(
     'theater',
-    'zuconnect_desci_track'
+    'zuconnect__public_goods_track'
   )
 
   return (
