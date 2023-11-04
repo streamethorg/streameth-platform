@@ -23,7 +23,7 @@ const UPCOMING = [
   },
   {
     name: 'ETHGünü',
-    date: 'Tuesday',
+    date: 'Monday, 13 Nov',
     link: '/devconnect/ethgunu',
     image: '/events/ETHGunu_cover.jpeg',
   },
