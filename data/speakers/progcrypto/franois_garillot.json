@@ -1,8 +1,1 @@
-{
-  "id": "franois_garillot",
-  "name": "François Garillot",
-  "bio": "François Garillot earned his PhD in Computer Science from the prestigious Ecole Polytechnique in 2011. He has contributed to the cryptographic engineering of blockchains like Aptos, Sui, and Flow. Since early 2023, François has been actively engaged with Lurk, a Zero-Knowledge programming language that employs Arecibo, a fork of Nova, as its backend. He curates the awesome-folding repository and hosts a \"\"folding implementers\"\" Zulip where folding scheme implementers periodically assemble to exchange knowledge and track their progress.",
-  "eventId": "progcrypto",
-  "twitter": "",
-  "photo": "https://drive.google.com/uc?id=1o2YAC4yQN_tqclHQJfUAxw5tfK9VRPkm"
-}
+{"id":"franois_garillot","name":"François Garillot","bio":"François Garillot earned his PhD in Computer Science from the prestigious Ecole Polytechnique in 2011. He has contributed to the cryptographic engineering of blockchains like Aptos, Sui, and Flow. Since early 2023, François has been actively engaged with Lurk, a Zero-Knowledge programming language that employs Arecibo, a fork of Nova, as its backend. He curates the awesome-folding repository and hosts a \"\"folding implementers\"\" Zulip where folding scheme implementers periodically assemble to exchange knowledge and track their progress.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1PkmiccKi2patktlZI1ViytiaPWijQPVj/view"}
