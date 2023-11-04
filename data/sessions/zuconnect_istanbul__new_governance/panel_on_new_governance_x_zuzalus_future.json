@@ -1,1 +1,32 @@
-{"id":"panel_on_new_governance_x_zuzalus_future","name":"Panel on new governance x Zuzalu’s future","description":"Thinking about new governance, network states, agglomeration, communities, and Zuzalu","start":1698843600000,"end":1698848100000,"stageId":"theater","speakers":[{"id":"vitalik_buterin","name":"Vitalik Buterin","bio":"No description","eventId":"zuconnect_istanbul__new_governance"},{"id":"janine","name":"Janine","bio":"No description","eventId":"zuconnect_istanbul__new_governance"},{"id":"mark_lutter","name":"Mark Lutter","bio":"No description","eventId":"zuconnect_istanbul__new_governance"}],"playbackId":"","eventId":"zuconnect_istanbul__new_governance","coverImage":"/sessions/zuconnect_istanbul__new_governance/panel_on_new_governance_x_zuzalus_future.jpg"}
+{
+  "id": "panel_on_new_governance_x_zuzalus_future",
+  "name": "Panel on new governance x Zuzalu’s future",
+  "description": "Thinking about new governance, network states, agglomeration, communities, and Zuzalu",
+  "start": 1698843600000,
+  "end": 1698848100000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "janine",
+      "name": "Janine",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "mark_lutter",
+      "name": "Mark Lutter",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    }
+  ],
+  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/35be96yfekzu6a8z/index.m3u8",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "coverImage": "/sessions/zuconnect_istanbul__new_governance/panel_on_new_governance_x_zuzalus_future.jpg"
+}
