@@ -6,6 +6,7 @@ import LiveEvent from './components/LiveEvent'
 import StageController from '@/server/controller/stage'
 import Card from '@/components/misc/Card'
 import UpcomingEvents from './components/UpcomingEvents'
+import HotTalks from './components/HotTalks'
 
 export default async function Home() {
   const eventController = new EventController()
@@ -25,7 +26,7 @@ export default async function Home() {
   const stageController = new StageController()
   const stage = await stageController.getStage(
     'theater',
-    'zuconnect_desci_track'
+    'zuconnect__public_goods_track'
   )
 
   return (
@@ -42,12 +43,13 @@ export default async function Home() {
       <div className="flex flex-col p-4 lg:overflow-hidden">
         <LiveEvent stage={stage.toJson()} />
 
-        <p className="px-4 mt-5 font-ubuntu font-bold text-xl">
-          Next events
+        <HotTalks />
+        <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
+          Next Events
         </p>
         <UpcomingEvents />
-        <p className="px-4 mt-5 font-ubuntu font-bold text-xl">
-          Upcoming events
+        <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
+          Upcoming Events
         </p>
         <EventList events={upComing} />
         {/* <p>Past events</p>
