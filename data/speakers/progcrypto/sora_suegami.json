@@ -1,8 +1,1 @@
-{
-  "id": "sora_suegami",
-  "name": "Sora Suegami",
-  "bio": "I have been researching how to improve the ability of smart contracts \nwith high-functional cryptography, e.g., ZKP, witness encryption, and \ncryptographic obfuscation. I am currently working on proof of email and \nEmail Wallet, a contract wallet using emails. They allow smart contracts\n to securely import more kinds of off-chain data that users usually send\n and receive. I also research privacy-preserving smart contracts, \nespecially smart contract obfuscation (https://doi.org/10.1016/j.bcra.2022.100118).",
-  "eventId": "progcrypto",
-  "twitter": "",
-  "photo": "https://drive.google.com/uc?id=1EdKL10RwP0lBSnopJ1b-qocSbuDJSR4W"
-}
+{"id":"sora_suegami","name":"Sora Suegami","bio":"I have been researching how to improve the ability of smart contracts \nwith high-functional cryptography, e.g., ZKP, witness encryption, and \ncryptographic obfuscation. I am currently working on proof of email and \nEmail Wallet, a contract wallet using emails. They allow smart contracts\n to securely import more kinds of off-chain data that users usually send\n and receive. I also research privacy-preserving smart contracts, \nespecially smart contract obfuscation (https://doi.org/10.1016/j.bcra.2022.100118).","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1EdKL10RwP0lBSnopJ1b-qocSbuDJSR4W/view"}
