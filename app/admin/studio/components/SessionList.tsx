@@ -3,13 +3,12 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { useEffect, useState } from 'react'
-import { EventInfo } from '../page'
 import { ISession } from '@/server/model/session'
 
 dayjs.extend(duration)
 
 interface Props {
-  event: EventInfo
+  event: any
   streamUrl: string
   sessions: any[]
 }
