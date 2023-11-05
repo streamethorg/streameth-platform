@@ -8,10 +8,12 @@ import remarkGfm from 'remark-gfm'
 import { Metadata, ResolvingMetadata } from 'next'
 
 interface Params {
-  organization: string
+  params: {
+    organization: string
+  }
 }
 
-const OrganizationHome = async ({ params }: { params: Params }) => {
+export default async function OrganizationHome({ params }: Params) {
   const eventController = new EventController()
   const events = await eventController.getAllEventsForOrganization(
     params.organization
@@ -52,12 +54,12 @@ const OrganizationHome = async ({ params }: { params: Params }) => {
 }
 
 export async function generateMetadata(
-  { organization }: Params,
+  { params }: Params,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const organizationController = new OrganizationController()
   const organizationInfo =
-    await organizationController.getOrganization(organization)
+    await organizationController.getOrganization(params.organization)
 
   const imageUrl = organizationInfo.logo
   try {
@@ -76,5 +78,3 @@ export async function generateMetadata(
     }
   }
 }
-
-export default OrganizationHome
