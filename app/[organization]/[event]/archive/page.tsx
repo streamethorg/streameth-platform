@@ -4,6 +4,7 @@ import SessionController from '@/server/controller/session'
 import StageController from '@/server/controller/stage'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EventController from '@/server/controller/event'
+
 interface Params {
   params: {
     event: string
