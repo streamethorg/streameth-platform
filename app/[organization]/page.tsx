@@ -5,6 +5,7 @@ import FilterBar from '../(home)/components/FilterBar'
 import OrganizationController from '@/server/controller/organization'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { Metadata, ResolvingMetadata } from 'next'
 
 interface Params {
   organization: string
@@ -48,6 +49,32 @@ const OrganizationHome = async ({ params }: { params: Params }) => {
       </div>
     </main>
   )
+}
+
+export async function generateMetadata(
+  { organization }: Params,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const organizationController = new OrganizationController()
+  const organizationInfo =
+    await organizationController.getOrganization(organization)
+
+  const imageUrl = organizationInfo.logo
+  try {
+    return {
+      title: organizationInfo.name,
+      description: organizationInfo.description,
+      openGraph: {
+        images: [imageUrl],
+      },
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      title: organizationInfo.name,
+      description: organizationInfo.description,
+    }
+  }
 }
 
 export default OrganizationHome
