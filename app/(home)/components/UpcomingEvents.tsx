@@ -4,14 +4,8 @@ import React from 'react'
 
 const UPCOMING = [
   {
-    name: 'ZuConnect - Public Goods Track',
-    date: 'Today',
-    link: '/zuzalu/zuconnect__public_goods_track',
-    image: '/events/zuzalu-cover.png',
-  },
-  {
     name: 'ZuConnect - ZK Track',
-    date: 'Monday',
+    date: 'Tomorrow',
     link: '/zuzalu/zuconnect__zk_track',
     image: '/events/zuzalu-cover.png',
   },
@@ -26,6 +20,12 @@ const UPCOMING = [
     date: 'Monday, 13 Nov',
     link: '/devconnect/ethgunu',
     image: '/events/ETHGunu_cover.jpeg',
+  },
+  {
+    name: 'EVM Submit',
+    date: 'Tuesday, 14 Nov',
+    link: '/devconnect/evm_submit',
+    image: '/events/EVM_summit_cover.jpeg',
   },
 ]
 
