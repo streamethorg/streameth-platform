@@ -67,7 +67,7 @@ export async function generateMetadata(
     organization
   )
 
-  const imageUrl = eventInfo.eventCover
+  const imageUrl = eventInfo.banner
   try {
     return {
       title: eventInfo.name,
