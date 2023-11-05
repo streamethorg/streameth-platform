@@ -24,13 +24,13 @@ const Talks = [
     link: 'zuzalu/zuconnect_istanbul__neurotech_track/session/walkthrough_of_the_frontier_of_neurotech_technologies_companies_scientific_breakthroughs',
     image: '/events/zuzalu-cover.png',
   },
-  //   {
-  //     name: 'ZuConnect - Decentralized Social Track',
-  //     date: 'ZuConnect 2023',
-  //     speakers: '',
-  //     link: '/zuzalu/zuconnect__decentralized_social_track',
-  //     image: '/events/zuzalu-cover.png',
-  //   },
+  {
+    name: 'Zuzalu 2024 plans',
+    date: 'ZuConnect 2023',
+    speakers: '',
+    link: 'zuzalu/zuconnect_istanbul/session/zuzalu_2024_plans',
+    image: '/events/zuzalu-cover.png',
+  },
 ]
 
 const HotTalks = () => {
