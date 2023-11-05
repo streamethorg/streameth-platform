@@ -6,6 +6,10 @@ import StageController from '@/server/controller/stage'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
 import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
+import { ResolvingMetadata, Metadata } from 'next'
+import SessionController from '@/server/controller/session'
+import OrganizationController from '@/server/controller/organization'
+
 interface Params {
   event: string
   organization: string
@@ -50,6 +54,34 @@ const EventHome = async ({ params }: { params: Params }) => {
       </div>
     </div>
   )
+}
+
+export async function generateMetadata(
+  { event, organization }: Params,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const eventController = new EventController()
+  const eventInfo = await eventController.getEvent(
+    event,
+    organization
+  )
+
+  const imageUrl = eventInfo.eventCover
+  try {
+    return {
+      title: eventInfo.name,
+      description: eventInfo.description,
+      openGraph: {
+        images: [imageUrl!],
+      },
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      title: eventInfo.name,
+      description: eventInfo.description,
+    }
+  }
 }
 
 export default EventHome
