@@ -6,6 +6,7 @@ import StageController from '@/server/controller/stage'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
 import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
+
 interface Params {
   event: string
   organization: string
