@@ -23,7 +23,7 @@ const OrganizationHome = async ({ params }: { params: Params }) => {
 
   return (
     <main className="w-screen mx-auto">
-      <div className="sticky top-0 z-50 bg-accent flex p-4 gap-4">
+      <div className="sticky top-0 z-50 bg-accent flex p-4 px-9 gap-4">
         <Image
           src={organization.logo}
           width={50}
