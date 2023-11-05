@@ -1,8 +1,1 @@
-{
-  "id": "davide_crapis",
-  "name": "Davide Crapis",
-  "bio": "Davide is a Research Scientist at the Robust Incentives Group within the Ethereum Foundation. Before this, he obtained his Ph.D. from Columbia Business School and spent time at Lyft as a researcher. His current focus is on transaction fee mechanisms, L2 economics and MEV.",
-  "eventId": "ethconomics",
-  "twitter": "@DavideCrapis",
-  "photo": "https://drive.google.com/uc?id=132qc0b6OssIfRV-ZYyy1-WGn8iOiXowg"
-}
+{"id":"davide_crapis","name":"Davide Crapis","bio":"Davide is a Research Scientist at the Robust Incentives Group within the Ethereum Foundation. Before this, he obtained his Ph.D. from Columbia Business School and spent time at Lyft as a researcher. His current focus is on transaction fee mechanisms, L2 economics and MEV.","eventId":"ethconomics","twitter":"@DavideCrapis","photo":"https://drive.google.com/file/d/132qc0b6OssIfRV-ZYyy1-WGn8iOiXowg/view?usp=sharing"}

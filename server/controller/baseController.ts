@@ -38,7 +38,21 @@ export default class BaseController<T> implements IBaseController<T> {
       process.exit(1)
     }
 
-    return this.store.read(query).then((data) => JSON.parse(data))
+    return new Promise((resolve, reject) => {
+      this.store
+        .read(query)
+        .then((data) => {
+          try {
+            const parsedData = JSON.parse(data)
+            resolve(parsedData)
+          } catch (error) {
+            reject(`Error parsing JSON data: ${error}`)
+          }
+        })
+        .catch((error) => {
+          reject(`Error reading file: ${error}`)
+        })
+    })
   }
 
   async getAll(query: string): Promise<T[]> {

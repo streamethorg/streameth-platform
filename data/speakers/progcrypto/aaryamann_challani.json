@@ -1,8 +1,1 @@
-{
-  "id": "aaryamann_challani",
-  "name": "Aaryamann Challani",
-  "bio": "Most of my work is currently based around rln-relay, which brings RLN (rate-limiting-nullifier) to the p2p network context, leveraging waku. This allows spam prevention at the messaging infrastructure layer. We work closely with pse engineers to iterate on the product. privacy maxi.\nIn my free time, catch me by the pool or kayaking!",
-  "eventId": "progcrypto",
-  "twitter": "",
-  "photo": "https://drive.google.com/uc?id=1MzHirNSUaJ0SnWkhE1fKpFM1BnQ14-s5"
-}
+{"id":"aaryamann_challani","name":"Aaryamann Challani","bio":"Most of my work is currently based around rln-relay, which brings RLN (rate-limiting-nullifier) to the p2p network context, leveraging waku. This allows spam prevention at the messaging infrastructure layer. We work closely with pse engineers to iterate on the product. privacy maxi.\nIn my free time, catch me by the pool or kayaking!","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1MzHirNSUaJ0SnWkhE1fKpFM1BnQ14-s5/view"}

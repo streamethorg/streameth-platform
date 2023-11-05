@@ -1,1 +1,38 @@
-{"id":"how_digital_communities_intersect_with_legacy_countries","name":"How digital communities intersect with legacy countries","description":"","start":1698832800000,"end":1698847200000,"stageId":"theater","speakers":[{"id":"laurence_ion","name":"Laurence Ion","bio":"No description","eventId":"zuconnect_istanbul__new_governance"},{"id":"elaine","name":"Elaine","bio":"No description","eventId":"zuconnect_istanbul__new_governance"},{"id":"tomas_ruta","name":"Tomas Ruta","bio":"No description","eventId":"zuconnect_istanbul__new_governance"},{"id":"brooke","name":"Brooke","bio":"No description","eventId":"zuconnect_istanbul__new_governance"}],"playbackId":"","eventId":"zuconnect_istanbul__new_governance","coverImage":"/sessions/zuconnect_istanbul__new_governance/how_digital_communities_intersect_with_legacy_countries.jpg"}
+{
+  "id": "how_digital_communities_intersect_with_legacy_countries",
+  "name": "How digital communities intersect with legacy countries",
+  "description": "",
+  "start": 1698832800000,
+  "end": 1698847200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "laurence_ion",
+      "name": "Laurence Ion",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "elaine",
+      "name": "Elaine",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "tomas_ruta",
+      "name": "Tomas Ruta",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "brooke",
+      "name": "Brooke",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    }
+  ],
+  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/1467b5i23hjc9ybh/index.m3u8",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "coverImage": "/sessions/zuconnect_istanbul__new_governance/how_digital_communities_intersect_with_legacy_countries.jpg"
+}

@@ -2,6 +2,16 @@ import { ISpeaker } from '@/server/model/speaker'
 import Image from 'next/image'
 import makeBlockie from 'ethereum-blockies-base64'
 
+function getFileIdFromUrl(url: string) {
+  const regex = /\/file\/d\/([^\/]+)\//
+  const match = url && url?.match(regex)
+  if (match && match[1]) {
+    return `https://drive.google.com/uc?id=${match[1]}`
+  }
+  // Return the original URL if no match is found
+  return url
+}
+
 function CreateBlockie(username: string) {
   return makeBlockie(username)
 }
@@ -31,7 +41,9 @@ const SpeakerPhoto = ({
         unoptimized={true}
         className="rounded-xl"
         src={
-          speaker.photo ? speaker.photo : CreateBlockie(speaker.name)
+          speaker.photo
+            ? getFileIdFromUrl(speaker.photo)
+            : CreateBlockie(speaker.name)
         }
         alt={speaker.name}
         fill
