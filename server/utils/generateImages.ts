@@ -3,7 +3,7 @@ import SessionController from '../controller/session'
 import Session from '../model/session'
 import fs from 'fs'
 
-const eventId = 'zuconnect_istanbul__neurotech_track'
+const eventId = 'zuconnect_istanbul__new_governance'
 
 async function main() {
   const sessionController = new SessionController()

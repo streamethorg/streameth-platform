@@ -1,1 +1,20 @@
-{"id":"the_role_of_crypto_infrastructures_in_the_next_civilizational_transition","name":"The role of crypto infrastructures in the next civilizational transition","description":"Michel Bauwens, founder of the P2P Foundation will look at the broad evolution of civilization, its cycles of ascent and descent, and the patterns behind transitional periods.","start":1698819300000,"end":1698822900000,"stageId":"theater","speakers":[{"id":"michel_bauwens","name":"Michel Bauwens","bio":"\n\n\n","eventId":"zuconnect_istanbul__new_governance"}],"playbackId":"","eventId":"zuconnect_istanbul__new_governance","coverImage":"/sessions/zuconnect_istanbul__new_governance/the_role_of_crypto_infrastructures_in_the_next_civilizational_transition.jpg"}
+{
+  "id": "the_role_of_crypto_infrastructures_in_the_next_civilizational_transition",
+  "name": "The role of crypto infrastructures in the next civilizational transition",
+  "description": "Michel Bauwens, founder of the P2P Foundation will look at the broad evolution of civilization, its cycles of ascent and descent, and the patterns behind transitional periods.",
+  "start": 1698819300000,
+  "end": 1698822900000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "michel_bauwens",
+      "name": "Michel Bauwens",
+      "bio": "\n\n\n",
+      "eventId": "zuconnect_istanbul__new_governance"
+    }
+  ],
+  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/e686p6am7h2v3ztw/index.m3u8",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "coverImage": "/sessions/zuconnect_istanbul__new_governance/the_role_of_crypto_infrastructures_in_the_next_civilizational_transition.jpg"
+}
