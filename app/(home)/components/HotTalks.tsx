@@ -44,7 +44,7 @@ const HotTalks = () => {
           <Link
             href={link}
             key={index}
-            className="cursor-pointer px-2 hover:shadow-md rounded-xl">
+            className="cursor-pointer p-2 hover:shadow-md rounded-xl bg-gray-200 transition-all">
             <div className="h-full rounded-xl text-white uppercase">
               <div className="aspect-video relative">
                 <Image

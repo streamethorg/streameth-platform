@@ -31,12 +31,12 @@ const UPCOMING = [
 
 const UpcomingEvents = () => {
   return (
-    <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll ">
+    <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll">
       {UPCOMING.map(({ name, date, link, image }, index) => (
         <Link
           href={link}
           key={index}
-          className="cursor-pointer px-2 hover:shadow-md rounded-xl">
+          className="cursor-pointer p-2 hover:shadow-md rounded-xl bg-gray-200 transition-all">
           <div className="h-full rounded-xl text-white uppercase">
             <div className="aspect-video relative">
               <Image
