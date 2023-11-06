@@ -35,8 +35,25 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
         <h1 className="text-lg  font-bold ">{session.name}</h1>
         <span className=" flex flex-row text-white">
           {new Date(session.start).toDateString()}{' '}
-          {new Date(session.start).toTimeString().slice(0, 5)} -{' '}
-          {new Date(session.end).toTimeString().slice(0, 5)}
+          {new Date(session.start)
+            .getUTCHours()
+            .toString()
+            .padStart(2, '0') +
+            ':' +
+            new Date(session.start)
+              .getMinutes()
+              .toString()
+              .padStart(2, '0')}{' '}
+          -{' '}
+          {new Date(session.end)
+            .getUTCHours()
+            .toString()
+            .padStart(2, '0') +
+            ':' +
+            new Date(session.end)
+              .getMinutes()
+              .toString()
+              .padStart(2, '0')}
         </span>
       </div>
       {session.description && (
