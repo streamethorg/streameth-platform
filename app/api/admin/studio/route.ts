@@ -25,6 +25,7 @@ export const POST = async (req: NextRequest) => {
     assetId: body.assetId,
     playbackId: body.playbackId,
     videoUrl: body.videoUrl,
+    videoType: body.videoType,
   }
   await AddOrUpdateFile(fileName, JSON.stringify(update, null, 2), folderName)
 

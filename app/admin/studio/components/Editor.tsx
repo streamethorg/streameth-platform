@@ -138,6 +138,7 @@ export function Editor(props: Props) {
       assetId: clipData.asset.id,
       playbackId: clipData.asset.playbackId,
       videoUrl: `https://lp-playback.com/hls/${clipData.asset.playbackId}/index.m3u8`,
+      videoType: 'clip'
     }
     const videoRes = await fetch('/api/admin/studio', {
       method: 'POST',
