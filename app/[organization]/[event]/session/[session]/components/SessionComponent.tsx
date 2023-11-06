@@ -1,16 +1,16 @@
 import Session from '@/server/model/session'
 import Player from '@/components/misc/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
-import ComponetCard from '@/components/misc/ComponentCard'
+import ComponentCard from '@/components/misc/ComponentCard'
 import SpeakerIconList from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerIconList'
 import ActionsComponent from './ActionsComponent'
 import EmbedButton from '@/components/misc/EmbedButton'
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (
-    <ComponetCard>
+    <ComponentCard>
       <SpeakerIconList speakers={session.speakers} />
-    </ComponetCard>
+    </ComponentCard>
   )
 }
 export default async function SessionComponent({
@@ -19,7 +19,7 @@ export default async function SessionComponent({
   session: Session
 }) {
   return (
-    <div className="flex flex-col w-full max-h-full h-full lg:flex-row relative overflow-y-scrol md:p-4 gap-4">
+    <div className="flex flex-col w-full max-h-full h-full lg:flex-row relative overflow-y-scroll md:p-4 gap-4">
       <div className="sticky top-0 md:relative flex flex-col w-full h-full lg:w-[70%] box-border lg:overflow-scroll">
         <ActionsComponent goBackButton>
           <EmbedButton
