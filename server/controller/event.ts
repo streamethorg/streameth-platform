@@ -32,7 +32,7 @@ export default class EventController {
       evt.organizationId,
       evt.id
     )
-    // await this.controller.create(eventQuery, evt)
+    await this.controller.create(eventQuery, evt)
     return evt
   }
 
