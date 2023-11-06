@@ -1,4 +1,4 @@
-import { Overview } from "./components/Overview"
+import { Overview } from './components/Overview'
 
 export default async function Page() {
   const res = await fetch(`https://livepeer.studio/api/asset/`, {
@@ -12,6 +12,6 @@ export default async function Page() {
   if (data.errors) {
     console.error(data.errors)
   }
-  
+
   return <Overview clips={data ?? []} />
 }
