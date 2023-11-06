@@ -25,7 +25,7 @@ const SelectFilter = <T extends object>({
   }
 
   return (
-    <div className="flex flex-col justify-between  font-light">
+    <div className="flex flex-col  justify-between  font-light">
       <div className="relative">
         <select
           onChange={(e) =>
@@ -35,7 +35,7 @@ const SelectFilter = <T extends object>({
               )!
             )
           }
-          className="p-2 h-12 border w-full rounded text-sm  bg-primary placeholder:text-sm">
+          className="p-2 h-12 border w-full rounded-xl text-sm text-white  bg-base placeholder:text-white placeholder:text-sm">
           <option
             value=""
             className="text-sm placeholder:text-sm">{`Select ${filterName}`}</option>

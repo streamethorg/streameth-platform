@@ -7,7 +7,7 @@ import { ISpeaker } from '@/server/model/speaker'
 
 interface Params {
   speaker: ISpeaker
-  sessions: ISession[]
+  sessions?: ISession[]
 }
 
 const SpeakerModal = ({ sessions, speaker }: Params) => {
@@ -23,16 +23,18 @@ const SpeakerModal = ({ sessions, speaker }: Params) => {
           </p>
           <p className="text-main-text py-1">{speaker.bio}</p>
         </div>
-        <div className="flex flex-col text-lg bg-base p-4 rounded-xl space-y-4">
-          <p className="font-bold text-lg">Sessions</p>
-          {sessions.map((session, index) => (
-            <ScheduleCard
-              key={session.id}
-              session={session}
-              showTime
-            />
-          ))}
-        </div>
+        {sessions && (
+          <div className="flex flex-col text-lg bg-base p-4 rounded-xl space-y-4">
+            <p className="font-bold text-lg">Sessions</p>
+            {sessions?.map((session, index) => (
+              <ScheduleCard
+                key={session?.id}
+                session={session}
+                showTime
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
