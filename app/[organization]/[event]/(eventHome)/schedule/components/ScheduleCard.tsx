@@ -28,7 +28,7 @@ const ScheduleCard = ({
         {showTime && (
           <p className="text-main-text text-sm uppercase py-1">
             {new Date(session.start)
-              .getHours()
+              .getUTCHours()
               .toString()
               .padStart(2, '0') +
               ':' +
@@ -38,7 +38,7 @@ const ScheduleCard = ({
                 .padStart(2, '0')}
             -
             {new Date(session.end)
-              .getHours()
+              .getUTCHours()
               .toString()
               .padStart(2, '0') +
               ':' +
