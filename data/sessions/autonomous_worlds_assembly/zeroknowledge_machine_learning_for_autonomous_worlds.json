@@ -1,1 +1,21 @@
-{"id":"zeroknowledge_machine_learning_for_autonomous_worlds","name":"Zero-Knowledge Machine Learning for Autonomous Worlds","description":"This talk will chart into the subtle but significant ways that zero-knowledge machine learning (ZKML) can be harnessed to create richer Autonomous Worlds. Three case studies will be presented:\n\n1. Developing standalone games where the ZKML model acts as the game world itself.\n2. Using ZKML to generate a world's lore and narrative.\n3. Employing ZKML to establish \"\"onchain physics\"\" where the model sets the world's state.\n\nThe session will be accompanied by a hands-on workshop guiding participants through development and deployment.","start":1700045100000,"end":1700046000000,"stageId":"emirgan_2","speakers":[{"id":"dante","name":"Dante","bio":"Dante is currently building EZKL, a library for zero-knowledge computation. In the past, he was a dusty academic studying neural networks.","eventId":"autonomous_worlds_assembly","twitter":"@CamutoDante","photo":"https://drive.google.com/uc?id=1je-0lqr9NAtWiTuNJc33D8EoRbtufMzR"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/zeroknowledge_machine_learning_for_autonomous_worlds.jpg"}
+{
+  "id": "zeroknowledge_machine_learning_for_autonomous_worlds",
+  "name": "Zero-Knowledge Machine Learning for Autonomous Worlds",
+  "description": "This talk will chart into the subtle but significant ways that zero-knowledge machine learning (ZKML) can be harnessed to create richer Autonomous Worlds. Three case studies will be presented:\n\n1. Developing standalone games where the ZKML model acts as the game world itself.\n2. Using ZKML to generate a world's lore and narrative.\n3. Employing ZKML to establish \"\"onchain physics\"\" where the model sets the world's state.\n\nThe session will be accompanied by a hands-on workshop guiding participants through development and deployment.",
+  "start": 1700045100000,
+  "end": 1700046000000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "dante",
+      "name": "Dante",
+      "bio": "Dante is currently building EZKL, a library for zero-knowledge computation. In the past, he was a dusty academic studying neural networks.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@CamutoDante",
+      "photo": "https://drive.google.com/uc?id=1je-0lqr9NAtWiTuNJc33D8EoRbtufMzR"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/zeroknowledge_machine_learning_for_autonomous_worlds.jpg"
+}
