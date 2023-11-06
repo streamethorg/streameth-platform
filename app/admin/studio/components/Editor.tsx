@@ -83,7 +83,7 @@ export function Editor(props: Props) {
     startTime: startTime?.unix ?? 0,
     endTime: endTime?.unix ?? 0,
   })
-
+  
   const { data: clipPlaybackInfo } = usePlaybackInfo({
     playbackId: clipAsset?.playbackId ?? undefined,
     refetchInterval: (info) =>
@@ -120,7 +120,7 @@ export function Editor(props: Props) {
     }
 
     console.log('Sending Clip to Livepeer', clip)
-    const response = await fetch('https://livepeer.studio/api/clip', {
+    const clipRes = await fetch('https://livepeer.studio/api/clip', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`,
@@ -129,15 +129,30 @@ export function Editor(props: Props) {
       body: JSON.stringify(clip),
     })
 
-    const responseData = await response.json()
-    console.log('RESPONSE DATA', response)
-    console.log(responseData.asset)
+    const clipData = await clipRes.json()
+    console.log('Clip data', clipData.asset)
+
+    const video = {
+      eventId: props.eventId,
+      sessionId: id,
+      assetId: clipData.asset.id,
+      playbackId: clipData.asset.playbackId,
+      videoUrl: `https://lp-playback.com/hls/${clipData.asset.playbackId}/index.m3u8`,
+    }
+    const videoRes = await fetch('/api/admin/studio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(video),
+    })
+    await videoRes.json()
 
     setScheduleInfo((value: any) => ({
       ...value,
       [id]: {
         ...value[id],
-        clipId: responseData.asset.id,
+        clipId: clipData.asset.id,
       },
     }))
   }
