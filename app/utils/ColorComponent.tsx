@@ -42,7 +42,7 @@ const ColorComponent = ({
     useContext(TopNavbarContext)
   const { accentColor, logo, organizationId, id } = event
   const isNotOrganization =
-    pathname === '/' || pathname.includes('/admin')
+    pathname === '/' || pathname.match(/^\/[a-zA-Z0-9]+$/)
 
   const pages: Page[] = []
 
