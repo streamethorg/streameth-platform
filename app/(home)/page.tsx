@@ -26,7 +26,7 @@ export default async function Home() {
   const stageController = new StageController()
   const stage = await stageController.getStage(
     'theater',
-    'zuconnect__public_goods_track'
+    'zuconnect__zk_track'
   )
 
   return (
@@ -41,7 +41,7 @@ export default async function Home() {
         <FilterBar events={upComing} />
       </div>
       <div className="flex flex-col p-4 lg:overflow-hidden">
-        {/* <LiveEvent stage={stage.toJson()} /> */}
+        <LiveEvent stage={stage?.toJson()} />
 
         <HotTalks />
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">

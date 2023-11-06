@@ -1,3 +1,4 @@
+import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -41,38 +42,37 @@ const HotTalks = () => {
       </h3>
       <div className="h-full p-4 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll">
         {Talks.map(({ name, date, link, image, speakers }, index) => (
-          <Link
-            href={link}
-            key={index}
-            className="cursor-pointer p-2 hover:shadow-md rounded-xl bg-gray-200 transition-all">
-            <div className="h-full rounded-xl text-white uppercase">
-              <div className="aspect-video relative">
-                <Image
-                  className="rounded"
-                  alt="Session image"
-                  quality={80}
-                  src={`${image}`}
-                  fill
-                  style={{
-                    objectFit: 'cover',
-                  }}
-                />
+          <Card key={index}>
+            <Link href={link} key={index}>
+              <div className="h-full rounded-xl text-white uppercase">
+                <div className="aspect-video relative">
+                  <Image
+                    className="rounded"
+                    alt="Session image"
+                    quality={80}
+                    src={`${image}`}
+                    fill
+                    style={{
+                      objectFit: 'cover',
+                    }}
+                  />
+                </div>
+                <div
+                  className="flex flex-col gap-1 my-2"
+                  title="Zuzalu">
+                  <p className=" text-sm font-bold capitalize text-blue ">
+                    {name}
+                  </p>
+                  <p className="text-blue text-sm capitalize truncate">
+                    {speakers}
+                  </p>
+                  <p className="text-blue text-sm font-medium capitalize">
+                    {date}
+                  </p>
+                </div>
               </div>
-              <div
-                className="flex flex-col gap-1 my-2"
-                title="Zuzalu">
-                <p className=" text-sm font-bold capitalize text-blue ">
-                  {name}
-                </p>
-                <p className="text-blue text-sm capitalize truncate">
-                  {speakers}
-                </p>
-                <p className="text-blue text-sm font-medium capitalize">
-                  {date}
-                </p>
-              </div>
-            </div>
-          </Link>
+            </Link>
+          </Card>
         ))}
       </div>
     </>

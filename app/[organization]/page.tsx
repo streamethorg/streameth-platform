@@ -23,31 +23,56 @@ export default async function OrganizationHome({ params }: Params) {
   const organization = await organizationController.getOrganization(
     params.organization
   )
+  const getCover = () => {
+    if (organization?.id == 'zuzalu') {
+      return '/events/zuzalu-cover.png'
+    }
+    if (organization?.id == 'devconnect') {
+      return '/events/devconnect_cover.png'
+    }
+    return ''
+  }
+
+  const beforeStyle = {
+    content: '""',
+    backgroundImage: `url(${getCover()})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    opacity: 0.15,
+    zIndex: -1,
+  }
 
   return (
-    <main className="w-screen mx-auto">
-      <div className="sticky top-0 z-50 bg-accent flex p-4 px-9 gap-4">
+    <main className="w-screen mx-auto fixed overflow-auto h-screen">
+      <div
+        className="absolute top-0 left-0 w-full h-full"
+        style={beforeStyle}></div>
+      <div className="sticky bg-white top-0 z-50 flex p-4 px-9 gap-4">
         <Image
           src={organization.logo}
           width={50}
           height={50}
+          objectFit="cover"
           alt={`${organization.name} logo`}
         />
         <FilterBar events={events} />
       </div>
-      <div className="bg-base mx-9 my-3">
-        <p className="flex justify-center pt-4 text-white font-bold text-4xl">
+      <div className="bg-base rounded-xl mx-9 my-3">
+        <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
           {organization.name}
         </p>
-        <article className="prose prose-invert p-4">
+        <article className="prose max-w-full text-center prose-invert p-4">
           <Markdown remarkPlugins={[remarkGfm]}>
             {organization.description}
           </Markdown>
         </article>
       </div>
-      <hr className="h-px mx-9 border-0 bg-base" />
-      <div className="px-4">
-        <EventList events={events} />
+      <hr className="h-px mx-9  bg-base" />
+      <div className="overflow-auto h-screen">
+        <div className="px-4">
+          <EventList events={events} />
+        </div>
       </div>
     </main>
   )
