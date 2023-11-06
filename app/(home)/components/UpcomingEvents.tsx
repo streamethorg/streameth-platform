@@ -23,9 +23,9 @@ const UPCOMING = [
     image: '/events/ETHGunu_cover.jpeg',
   },
   {
-    name: 'EVM Submit',
+    name: 'EVM Summit',
     date: 'Tuesday, 14 Nov',
-    link: '/devconnect/evm_submit',
+    link: '/devconnect/evm_summit',
     image: '/events/EVM_summit_cover.jpeg',
   },
 ]
