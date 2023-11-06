@@ -12,6 +12,7 @@ import makeBlockie from 'ethereum-blockies-base64'
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
+  PaperClipIcon
 } from '@heroicons/react/24/outline'
 
 const ADMIN_MENU = [
@@ -24,6 +25,11 @@ const ADMIN_MENU = [
     id: '/admin',
     name: 'My organizations',
     Icon: EventIcon,
+  },
+  {
+    id: '/admin/clips',
+    name: 'Clips',
+    Icon: PaperClipIcon,
   },
   {
     id: '/admin/studio',
