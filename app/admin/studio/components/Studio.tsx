@@ -2,7 +2,7 @@
 
 import { useStreamSessions } from '@livepeer/react'
 import { Editor } from './Editor'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FilterValidStages } from '../utils/client'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
@@ -26,26 +26,50 @@ export default function Studio(props: Props) {
   const [stream, setStream] = useState<StreamParams>({
     playbackId: '',
   })
+  const [session, setSessions] = useState<any[]>([])
   const { data: streamSessions } = useStreamSessions(
     stage?.streamSettings?.streamId ?? ''
   )
 
-  function selectEvent(eventId: string) {
+  async function selectEvent(eventId: string) {
     const event = props.events.find((i: any) => i.id === eventId)
 
     setEvent(event)
     setStage(event.stages[0])
     setStream({ playbackId: '' })
+
+    const sessions = await fetchSchedule(
+      event.organizationId,
+      event.id,
+      event.stages[0].id
+    )
+    setSessions(sessions)
   }
 
-  function selectStage(stageId: string) {
+  async function selectStage(stageId: string) {
     const stage = event.stages.find((i: any) => i.id === stageId)
 
-    setStage(stage)
-    setStream({ playbackId: '' })
+    if (stage) {
+      setStage(stage)
+      setStream({ playbackId: '' })
+
+      const sessions = await fetchSchedule(
+        event.organizationId,
+        event.id,
+        stage.id
+      )
+      setSessions(sessions)
+    }
   }
 
-  function selectStream(streamId: string) {
+  const selectStreamCallback = useCallback(selectStream, [
+    event.id,
+    event.organizationId,
+    stage.id,
+    streamSessions,
+  ])
+
+  async function selectStream(streamId: string) {
     const stream: any = streamSessions?.find(
       (i: any) => i.id === streamId
     )
@@ -55,20 +79,41 @@ export default function Studio(props: Props) {
         playbackId: stream.playbackId,
         sessionId: stream.id,
       })
+
+      let sessions = await fetchSchedule(
+        event.organizationId,
+        event.id,
+        stage.id
+      )
+      sessions = sessions.filter(
+        (i: any) =>
+          dayjs(i.start).format('YYYYMMDD') ===
+          dayjs(stream.createdAt).format('YYYYMMDD')
+      )
+      setSessions(sessions)
     }
+  }
+
+  async function fetchSchedule(
+    organizationId: string,
+    eventId: string,
+    stageId: string
+  ) {
+    console.log('fetching schedule', organizationId, eventId, stageId)
+    const res = await fetch(
+      `/api/organizations/${organizationId}/events/${eventId}/sessions`
+    )
+    const data = await res.json()
+
+    const filtered = data.filter((i: any) => i.stageId === stageId)
+    return filtered
   }
 
   useEffect(() => {
     const streams = filterStreamSession(streamSessions ?? [])
     const stream = streams[0]
-
-    if (stream) {
-      setStream({
-        playbackId: stream.playbackId,
-        sessionId: stream.id,
-      })
-    }
-  }, [streamSessions])
+    selectStreamCallback(stream?.id ?? '')
+  }, [streamSessions, selectStreamCallback])
 
   function filterStreamSession(streamSessions: any[]) {
     // Only show streams that have been recorded and are either active or longer than 1 hour
@@ -114,15 +159,9 @@ export default function Studio(props: Props) {
         </select>
 
         <select
-          onChange={(e) => selectStream(e.target.value)}
+          onSelect={(e) => selectStream(e.currentTarget.value)}
           className="p-2 border w-full bg-primary"
           disabled={!streamSessions || streamSessions.length === 0}>
-          {filterStreamSession(streamSessions ?? []).length === 0 && (
-            <option selected disabled>
-              No streams found..
-            </option>
-          )}
-
           {filterStreamSession(streamSessions ?? []).map(
             (stream: any) => (
               <option
@@ -152,8 +191,10 @@ export default function Studio(props: Props) {
 
       {stream.playbackId && (
         <Editor
+          eventId={event.id}
           playbackId={stream.playbackId}
           sessionId={stream.sessionId}
+          sessions={session}
         />
       )}
     </div>
