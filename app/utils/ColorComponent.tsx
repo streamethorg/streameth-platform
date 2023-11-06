@@ -85,7 +85,7 @@ const ColorComponent = (props: Props) => {
         accentColor!
       )
     }
-  }, [props])
+  }, [props, basePath])
 
   return props.children
 }
