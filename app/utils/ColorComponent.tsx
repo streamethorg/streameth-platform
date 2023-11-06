@@ -1,125 +1,93 @@
 'use client'
-import {
-  ReactNode,
-  useEffect,
-  useContext,
-  ReactComponentElement,
-} from 'react'
+
+import { ReactNode, useEffect, useContext } from 'react'
 import { IEvent } from '@/server/model/event'
+import { IOrganization } from '@/server/model/organization'
 import { IStage } from '@/server/model/stage'
 import { ISpeaker } from '@/server/model/speaker'
 import { ISession } from '@/server/model/session'
-import { usePathname } from 'next/navigation'
-import colors from '@/app/constants/colors'
-import {
-  Page,
-  TopNavbarContext,
-} from '@/components/context/TopNavbarContext'
-import {
-  HomeIcon,
-  ViewColumnsIcon,
-  CalendarIcon,
-  UserGroupIcon,
-} from '@heroicons/react/24/outline'
+import { TopNavbarContext } from '@/components/context/TopNavbarContext'
 import FilterBar from '@/app/[organization]/[event]/archive/components/FilterBar'
-interface Props {
+
+interface IBaseProps {
   children: ReactNode
+}
+
+interface IEventProps extends IBaseProps {
   event: IEvent
   stages: IStage[]
   speakers: ISpeaker[]
   sessions: ISession[]
 }
 
-const ColorComponent = ({
-  children,
-  event,
-  stages,
-  speakers,
-  sessions,
-}: Props) => {
-  const pathname = usePathname()
+interface IOrganizationProps extends IBaseProps {
+  organization: IOrganization
+}
+
+type Props = IEventProps | IOrganizationProps
+
+function isEventProps(props: Props): props is IEventProps {
+  return (props as IEventProps).event !== undefined
+}
+
+const ColorComponent = (props: Props) => {
   const { setLogo, setHomePath, setPages, setComponents } =
     useContext(TopNavbarContext)
-  const { accentColor, logo, organizationId, id } = event
-  const isNotOrganization =
-    pathname === '/' || pathname.match(/^\/[a-zA-Z0-9]+$/)
 
-  const pages: Page[] = []
+  const entity = isEventProps(props)
+    ? props.event
+    : props.organization
+  const { logo, id } = entity
 
-  if (sessions.length > 0)
-    pages.push({
-      href: `/${organizationId}/${id}#schedule`,
-      name: 'Schedule',
-      icon: <CalendarIcon />,
-    })
+  const basePath = isEventProps(props)
+    ? `/${entity.id}/${id}`
+    : `/${id}`
 
-  if (speakers.length > 0)
-    pages.push({
-      href: `/${organizationId}/${id}#speakers`,
-      name: 'Speakers',
-      icon: <UserGroupIcon />,
-    })
-
-  const stagePages = () => {
-    let pages = []
-    for (const stage of stages) {
-      if (stage.streamSettings.streamId) {
-        pages.push({
-          href: `/${organizationId}/${id}/stage/${stage.id}`,
-          name: stage.name,
-          icon: <ViewColumnsIcon />,
-        })
-      }
+  useEffect(() => {
+    setHomePath(basePath)
+    if (isEventProps(props) && props.event.logo) {
+      setLogo(props.event.logo)
+    } else if (entity.logo) {
+      setLogo(entity.logo)
     }
-    return pages
-  }
 
-  useEffect(() => {
-    setHomePath(`/${organizationId}/${id}`)
-  }, [pathname])
-
-  useEffect(() => {
-    setLogo('/events/' + logo)
-    if (event.archiveMode) {
+    if (isEventProps(props) && props.event.archiveMode) {
       setComponents([
         <FilterBar
           key="1"
-          sessions={sessions}
-          speakers={speakers}
-          stages={stages}
+          sessions={props.sessions}
+          speakers={props.speakers}
+          stages={props.stages}
         />,
       ])
-    } else {
-      setPages([...pages, ...stagePages()])
     }
+
     return () => {
       setComponents([])
       setPages([])
       setLogo('')
     }
-  }, [event])
+  }, [entity, props, setComponents, setHomePath, setLogo, setPages])
 
   useEffect(() => {
-    if (!isNotOrganization && accentColor) {
-      document.documentElement.style.setProperty(
-        '--colors-accent',
-        accentColor
-      )
-    } else {
-      document.documentElement.style.setProperty(
-        '--colors-accent',
-        colors.accent
-      )
-    }
+    const accentColor = isEventProps(props)
+      ? props.event.accentColor
+      : props.organization.accentColor
+
+    document.documentElement.style.setProperty(
+      '--colors-accent',
+      accentColor!
+    )
+
     return () => {
       document.documentElement.style.setProperty(
         '--colors-accent',
-        colors.accent
+        accentColor!
       )
     }
-  }, [accentColor, isNotOrganization, pathname])
+  }, [props])
 
-  return children
+  return props.children
 }
 
 export default ColorComponent

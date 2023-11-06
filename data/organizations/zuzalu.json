@@ -3,6 +3,7 @@
   "name": "Zuzalu",
   "description": "Zuzalu is a first-of-its-kind pop-up city community in Montenegro.",
   "url": "https://zuzalu.city/",
-  "logo": "https://www.zuzalu.city/_next/image?url=%2Fimages%2FLogo.png&w=384&q=75",
-  "location": "Unknown"
+  "logo": "https://zuzalu.eth.limo/images/zuzalu.png",
+  "location": "Unknown",
+  "accentColor": "#047C66"
 }

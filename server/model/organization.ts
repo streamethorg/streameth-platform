@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsUrl, validate } from 'class-validator'
 import { generateId, BASE_PATH } from '../utils'
 import path from 'path'
+
 export interface IOrganization {
   id: string
   name: string
@@ -8,6 +9,7 @@ export interface IOrganization {
   url: string
   logo: string
   location: string
+  accentColor: string
 }
 
 export default class Organization {
@@ -31,12 +33,16 @@ export default class Organization {
   @IsNotEmpty()
   location: string
 
+  @IsNotEmpty()
+  accentColor: string
+
   constructor({
     name,
     description,
     url,
     logo,
     location,
+    accentColor,
   }: Omit<IOrganization, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
@@ -44,6 +50,7 @@ export default class Organization {
     this.url = url
     this.logo = logo
     this.location = location
+    this.accentColor = accentColor || '#FFFFFF'
     this.validateThis()
   }
 
