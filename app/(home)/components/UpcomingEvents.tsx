@@ -5,14 +5,8 @@ import React from 'react'
 
 const UPCOMING = [
   {
-    name: 'ZuConnect - ZK Track',
-    date: 'Today',
-    link: '/zuzalu/zuconnect__zk_track',
-    image: '/events/zuzalu-cover.png',
-  },
-  {
     name: 'ZuConnect - Decentralized Social Track',
-    date: 'Tomorrow',
+    date: 'Today',
     link: '/zuzalu/zuconnect__decentralized_social_track',
     image: '/events/zuzalu-cover.png',
   },
@@ -27,6 +21,12 @@ const UPCOMING = [
     date: 'Tuesday, 14 Nov',
     link: '/devconnect/evm_summit',
     image: '/events/EVM_summit_cover.jpeg',
+  },
+  {
+    name: 'Fe Lang Hackathon',
+    date: 'Wednesday, 15 Nov',
+    link: '/devconnect/fe_lang_hackathon',
+    image: '/events/devconnect_cover.png',
   },
 ]
 
