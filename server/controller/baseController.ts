@@ -1,12 +1,10 @@
 import FsController from './dataStore/fs'
 import fs from 'fs'
-// import DbController from './dataStore/db'
 
 interface IBaseController<T> {
   create: (query: string, data: T) => Promise<void>
   get: (query: string) => Promise<T>
   getAll: (query: string) => Promise<T[]>
-  // update: (id: string, data: T) => Promise<T>;
   // delete: (id: string) => Promise<T>;
 }
 
@@ -29,7 +27,14 @@ export default class BaseController<T> implements IBaseController<T> {
   }
 
   async create(query: string, data: T): Promise<void> {
-    return this.store.write(query, JSON.stringify(data))
+    let existingData: T | null = null
+
+    if (await this.get(query)) {
+      const rawData = await this.store.read(query)
+      existingData = JSON.parse(rawData)
+    }
+    const updatedData = { ...existingData, ...data }
+    return this.store.write(query, JSON.stringify(updatedData))
   }
 
   async get(query: string): Promise<T> {
@@ -69,10 +74,6 @@ export default class BaseController<T> implements IBaseController<T> {
     })
     return Promise.all(dataPromises)
   }
-
-  // update(id: string, data: T): Promise<T> {
-  //   return this.store.update(id, data);
-  // }
 
   delete(id: string) {
     this.store.delete(id)
