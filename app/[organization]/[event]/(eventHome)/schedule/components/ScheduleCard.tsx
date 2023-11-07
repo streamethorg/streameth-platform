@@ -17,7 +17,12 @@ const ScheduleCard = ({
   const isActive =
     new Date(session.start).getTime() < Date.now() &&
     new Date(session.end).getTime() > Date.now() // TODO: Test Active
-
+  console.log(
+    'Timee Start',
+    new Date(session.start),
+    'Timee Now',
+    Date.now()
+  )
   return (
     <div
       className="bg-black/20 flex space-y-3 flex-col w-full h-full   rounded p-2 md:p-2 text-white cursor-pointer transition-colors"
@@ -28,7 +33,7 @@ const ScheduleCard = ({
         {showTime && (
           <p className="text-main-text text-sm uppercase py-1">
             {new Date(session.start)
-              .getUTCHours()
+              .getHours()
               .toString()
               .padStart(2, '0') +
               ':' +
@@ -38,7 +43,7 @@ const ScheduleCard = ({
                 .padStart(2, '0')}
             -
             {new Date(session.end)
-              .getUTCHours()
+              .getHours()
               .toString()
               .padStart(2, '0') +
               ':' +
