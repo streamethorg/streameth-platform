@@ -26,14 +26,25 @@ export default class BaseController<T> implements IBaseController<T> {
     }
   }
 
+ mergeObjects(target, source) {
+    Object.keys(source).forEach(key => {
+      if (source[key] !== undefined) {
+        target[key] = source[key];
+      }
+    });
+    return target;
+  }
+  
+
+  
   async create(query: string, data: T): Promise<void> {
     let existingData: T | null = null
 
     if (await this.get(query)) {
       const rawData = await this.store.read(query)
       existingData = JSON.parse(rawData)
-    }
-    const updatedData = { ...existingData, ...data }
+    } 
+    const updatedData = this.mergeObjects(existingData, data)
     return this.store.write(query, JSON.stringify(updatedData))
   }
 
