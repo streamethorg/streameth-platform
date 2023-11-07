@@ -83,7 +83,7 @@ export function Editor(props: Props) {
     startTime: startTime?.unix ?? 0,
     endTime: endTime?.unix ?? 0,
   })
-  
+
   const { data: clipPlaybackInfo } = usePlaybackInfo({
     playbackId: clipAsset?.playbackId ?? undefined,
     refetchInterval: (info) =>
@@ -138,7 +138,7 @@ export function Editor(props: Props) {
       assetId: clipData.asset.id,
       playbackId: clipData.asset.playbackId,
       videoUrl: `https://lp-playback.com/hls/${clipData.asset.playbackId}/index.m3u8`,
-      videoType: 'clip'
+      videoType: 'clip',
     }
     const videoRes = await fetch('/api/admin/studio', {
       method: 'POST',
