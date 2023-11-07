@@ -159,7 +159,7 @@ export default function Studio(props: Props) {
         </select>
 
         <select
-          onSelect={(e) => selectStream(e.currentTarget.value)}
+          onChange={(e) => selectStream(e.currentTarget.value)}
           className="p-2 border w-full bg-primary"
           disabled={!streamSessions || streamSessions.length === 0}>
           {filterStreamSession(streamSessions ?? []).map(
