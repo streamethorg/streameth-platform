@@ -5,10 +5,10 @@ import React from 'react'
 
 const Talks = [
   {
-    name: 'ZuConnect Istanbul Opening Remarks',
+    name: 'Panel on new governance x Zuzalu’s future',
     date: 'ZuConnect 2023',
-    speakers: '',
-    link: 'zuzalu/zuconnect_istanbul/session/opening_remarks',
+    speakers: 'Vitalik Buterin, Janine, Mark Lutter',
+    link: 'zuzalu/zuconnect_istanbul__new_governance/session/panel_on_new_governance_x_zuzalus_future',
     image: '/events/zuzalu-cover.png',
   },
   {
@@ -26,10 +26,10 @@ const Talks = [
     image: '/events/zuzalu-cover.png',
   },
   {
-    name: 'Zuzalu 2024 plans',
+    name: 'The role of crypto infrastructures in the next civilizational transition',
     date: 'ZuConnect 2023',
-    speakers: '',
-    link: 'zuzalu/zuconnect_istanbul/session/zuzalu_2024_plans',
+    speakers: 'Michel Bauwens',
+    link: 'zuzalu/zuconnect_istanbul__new_governance/session/the_role_of_crypto_infrastructures_in_the_next_civilizational_transition',
     image: '/events/zuzalu-cover.png',
   },
 ]
