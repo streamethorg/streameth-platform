@@ -50,11 +50,7 @@ const ArchivedSession = ({
   )
 
   if (learnMore)
-    return (
-      <Link className="h-full" href={'session/' + session.id}>
-        {component}
-      </Link>
-    )
+    return <Link href={'session/' + session.id}>{component}</Link>
   if (goToStage)
     return <Link href={'/stage/' + session.stageId}>{component}</Link>
 

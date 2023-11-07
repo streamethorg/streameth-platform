@@ -49,7 +49,7 @@ export default function NavbarTop() {
   }
 
   return (
-    <header className="sticky z-[9099029] flex flex-row bg-accent border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">
+    <header className="sticky z-[9099029] flex flex-row bg-accent border-b border-primary w-full ml-auto p-4 py-2 top-0 h-16 lg:h-20">
       <div className=" flex items-center w-20">
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
@@ -65,12 +65,12 @@ export default function NavbarTop() {
           />
         </Link>
       </div>
-      <div className="flex flex-row items-center justify-end w-full">
+      <div className="flex flex-row items-center justify-between w-full">
         {menuVisible && <Navbar pages={pages} />}
         {components.length > 0 &&
           components.map((component, index) => {
             return (
-              <div className="w-full px-2" key={index}>
+              <div className="flex-1 px-2" key={index}>
                 {component}
               </div>
             )

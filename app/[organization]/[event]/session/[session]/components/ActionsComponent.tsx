@@ -17,7 +17,7 @@ const ActionsComponent = ({
     router.back()
   }
   return (
-    <div className="flex flex-row items-center md:w-full text-white py-2 ">
+    <div className="flex flex-row items-center bg-base md:w-full text-white p-2 ">
       {goBackButton && (
         <ArrowUturnLeftIcon
           className="p-1 h-8 w-8 cursor-pointer text-accent "
