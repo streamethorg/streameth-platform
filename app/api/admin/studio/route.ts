@@ -18,15 +18,23 @@ export const POST = async (req: NextRequest) => {
   const folderName = `data/sessions/${body.eventId}`
   const fileName = `${body.sessionId}.json`
   const sessionController = new SessionController()
-  const data = await sessionController.getSession(body.sessionId, body.eventId)
+  const data = await sessionController.getSession(
+    body.sessionId,
+    body.eventId
+  )
 
   const update = {
     ...data,
     assetId: body.assetId,
     playbackId: body.playbackId,
     videoUrl: body.videoUrl,
+    videoType: body.videoType,
   }
-  await AddOrUpdateFile(fileName, JSON.stringify(update, null, 2), folderName)
+  await AddOrUpdateFile(
+    fileName,
+    JSON.stringify(update, null, 2),
+    folderName
+  )
 
   return new NextResponse('Ok', { status: 200 })
 }
