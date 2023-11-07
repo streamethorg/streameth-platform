@@ -1,3 +1,12 @@
+---
+name: User Story
+about: Define a new feature
+title: As a [User, Event, Developer, etc.],
+labels: enhancement
+assignees: ''
+
+---
+
 ## User Story
 **As a** [role], **I want** [feature], **so that** [reason/benefit].
 
