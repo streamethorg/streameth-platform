@@ -32,6 +32,7 @@
     "eslint-config-next": "13.4.5",
     "ethereum-blockies-base64": "^1.0.2",
     "ethers": "^6.7.1",
+    "ethersv5": "npm:ethers@^5.7.2",
     "googleapis": "^126.0.1",
     "iron-session": "^6.3.1",
     "js-base64": "^3.7.5",
