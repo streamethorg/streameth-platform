@@ -6,11 +6,15 @@ import {
   useCreateClip,
   usePlaybackInfo,
 } from '@livepeer/react'
-import { useCallback, useMemo, useState } from 'react'
+import dayjs from 'dayjs'
+import Link from 'next/link'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 interface Props {
+  eventId: string
   playbackId: string
   sessionId?: string
+  sessions?: any[]
 }
 
 const hlsConfig = {
@@ -34,6 +38,7 @@ export function Editor(props: Props) {
   const [startTime, setStartTime] =
     useState<PlaybackStartEnd | null>()
   const [endTime, setEndTime] = useState<PlaybackStartEnd | null>()
+  const [scheduleInfo, setScheduleInfo] = useState<any>({})
 
   const playerProps = useMemo(() => {
     if (props.sessionId) {
@@ -42,9 +47,11 @@ export function Editor(props: Props) {
       }
     }
 
-    return {
-      playbackId: props.playbackId,
-    }
+    return { playbackId: props.playbackId }
+  }, [props])
+
+  useEffect(() => {
+    setScheduleInfo({})
   }, [props])
 
   const onError = useCallback(
@@ -76,7 +83,7 @@ export function Editor(props: Props) {
     startTime: startTime?.unix ?? 0,
     endTime: endTime?.unix ?? 0,
   })
-
+  
   const { data: clipPlaybackInfo } = usePlaybackInfo({
     playbackId: clipAsset?.playbackId ?? undefined,
     refetchInterval: (info) =>
@@ -100,6 +107,57 @@ export function Editor(props: Props) {
     )
   }, [clipPlaybackInfo])
 
+  async function createScheduleSession(id: string) {
+    console.log('Create schedule session', id)
+    if (!scheduleInfo[id]?.start || !scheduleInfo[id]?.end) return
+
+    const clip = {
+      sessionId: props.sessionId,
+      playbackId: props.playbackId,
+      name: `${props.eventId}||${id}`,
+      startTime: scheduleInfo[id].start.unix ?? 0,
+      endTime: scheduleInfo[id].end.unix ?? 0,
+    }
+
+    console.log('Sending Clip to Livepeer', clip)
+    const clipRes = await fetch('https://livepeer.studio/api/clip', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(clip),
+    })
+
+    const clipData = await clipRes.json()
+    console.log('Clip data', clipData.asset)
+
+    const video = {
+      eventId: props.eventId,
+      sessionId: id,
+      assetId: clipData.asset.id,
+      playbackId: clipData.asset.playbackId,
+      videoUrl: `https://lp-playback.com/hls/${clipData.asset.playbackId}/index.m3u8`,
+      videoType: 'clip'
+    }
+    const videoRes = await fetch('/api/admin/studio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(video),
+    })
+    await videoRes.json()
+
+    setScheduleInfo((value: any) => ({
+      ...value,
+      [id]: {
+        ...value[id],
+        clipId: clipData.asset.id,
+      },
+    }))
+  }
+
   return (
     <>
       <div className="w-full mt-8">
@@ -107,6 +165,7 @@ export function Editor(props: Props) {
           {...playerProps}
           playRecording
           autoPlay
+          muted
           playbackStatusSelector={playbackStatusSelector}
           onPlaybackStatusUpdate={onPlaybackStatusUpdate}
           onError={onError}
@@ -114,7 +173,12 @@ export function Editor(props: Props) {
         />
 
         <div className="flex flex-col mt-4">
-          <h2 className="text-xl">Create Custom Clip</h2>
+          <h2 className="text-xl">Custom Clips</h2>
+          <p>
+            Custom clips will be available for download (if you keep
+            the page open) or show up on{' '}
+            <Link href="/admin/clips">clips overview</Link>.
+          </p>
 
           {message && (
             <div
@@ -214,6 +278,134 @@ export function Editor(props: Props) {
               </button>
             )}
           </div>
+        </div>
+
+        <div className="flex flex-col mt-4">
+          <h2 className="text-xl">Schedule Sessions</h2>
+          <p>
+            Schedule sessions will be send for processing on our
+            backend and will be available on the archive of the event
+            when ready.
+          </p>
+
+          {props.sessions &&
+            props.sessions
+              .sort(
+                (a, b) =>
+                  dayjs(a.start).valueOf() - dayjs(b.start).valueOf()
+              )
+              .map((i: any) => {
+                return (
+                  <div
+                    key={i.id}
+                    className="flex flex-row w-full mt-4 gap-4 items-center">
+                    <p className="w-60 truncate overflow-hidden">
+                      {i.name}
+                    </p>
+
+                    <input
+                      name="start"
+                      type="number"
+                      value={
+                        scheduleInfo[i.id]?.start?.displayTime ?? ''
+                      }
+                      placeholder="Start time (in secs)"
+                      className="border border-1 p-2 max-w-[100px]"
+                      disabled
+                    />
+
+                    <button
+                      type="button"
+                      className="px-4 py-2 text-gray-600 bg-white border border-gray-200 hover:bg-gray-50 focus:outline-none focus:shadow-none"
+                      onClick={() => {
+                        const progress = playbackStatus?.progress
+                        const offset = playbackStatus?.offset
+
+                        if (progress && offset) {
+                          const calculatedTime = Date.now() - offset
+                          setScheduleInfo((value: any) => {
+                            return {
+                              ...value,
+                              [i.id]: {
+                                ...value[i.id],
+                                start: {
+                                  unix: calculatedTime,
+                                  displayTime: progress
+                                    .toFixed(0)
+                                    .toString(),
+                                },
+                              },
+                            }
+                          })
+                        }
+                      }}>
+                      Set
+                    </button>
+
+                    <input
+                      name="end"
+                      type="number"
+                      value={
+                        scheduleInfo[i.id]?.end?.displayTime ?? ''
+                      }
+                      placeholder="End time (in secs)"
+                      className="border border-1 p-2 max-w-[100px]"
+                      disabled
+                    />
+                    <button
+                      type="button"
+                      className="px-4 py-2 text-gray-600 bg-white border border-gray-200 hover:bg-gray-50 focus:outline-none"
+                      onClick={() => {
+                        const progress = playbackStatus?.progress
+                        const offset = playbackStatus?.offset
+
+                        if (progress && offset) {
+                          const calculatedTime = Date.now() - offset
+                          setScheduleInfo((value: any) => {
+                            return {
+                              ...value,
+                              [i.id]: {
+                                ...value[i.id],
+                                end: {
+                                  unix: calculatedTime,
+                                  displayTime: progress
+                                    .toFixed(0)
+                                    .toString(),
+                                },
+                              },
+                            }
+                          })
+                        }
+                      }}>
+                      Set
+                    </button>
+
+                    <button
+                      type="button"
+                      className="px-4 py-2 border bg-zinc-600 text-white focus:outline-none"
+                      onClick={() => createScheduleSession(i.id)}>
+                      Create clip
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setScheduleInfo((value: any) => ({
+                          ...value,
+                          [i.id]: undefined,
+                        }))
+                      }>
+                      Reset
+                    </button>
+
+                    {scheduleInfo[i.id]?.clipId && (
+                      <p className="w-32 truncate overflow-hidden text-sm">
+                        {scheduleInfo[i.id]?.clipId}
+                      </p>
+                    )}
+                  </div>
+                )
+              })}
         </div>
       </div>
     </>
