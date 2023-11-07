@@ -51,15 +51,26 @@ export default function RootLayout({
 export const metadata: Metadata = {
   title: 'StreamETH',
   description:
-    'We make Web3 event organization and marketing easier.',
+    'The complete solution to host your hybrid or virtual event.',
   metadataBase: new URL('https://app.streameth.org'),
   openGraph: {
+    title: 'StreamETH',
+    siteName: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
     images: {
       url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
     },
+  },
+  twitter: {
+    card: 'summary_large_image',
     title: 'StreamETH',
     description:
-      'We make Web3 event organization and marketing easier.',
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
+      alt: 'StreamETH Logo',
+    },
   },
   alternates: {
     canonical: '/',

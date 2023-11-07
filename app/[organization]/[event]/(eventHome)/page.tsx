@@ -73,14 +73,15 @@ export async function generateMetadata(
       title: eventInfo.name,
       description: eventInfo.description,
       openGraph: {
+        title: eventInfo.name,
+        description: eventInfo.description,
         images: [imageUrl!],
       },
     }
   } catch (e) {
     console.log(e)
     return {
-      title: eventInfo.name,
-      description: eventInfo.description,
+      title: 'StreamETH Event',
     }
   }
 }

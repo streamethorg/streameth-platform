@@ -51,16 +51,18 @@ export async function generateMetadata(
     : session.id + '.png'
   try {
     return {
-      title: `${session.name}`,
+      title: session.name,
       description: session.description,
       openGraph: {
+        title: session.name,
+        description: session.description,
         images: [imageUrl],
       },
     }
   } catch (e) {
     console.log(e)
     return {
-      title: 'streameth session',
+      title: 'StreamETH Session',
     }
   }
 }
