@@ -6,6 +6,7 @@ import OrganizationController from '@/server/controller/organization'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Metadata, ResolvingMetadata } from 'next'
+import ColorComponent from '../utils/ColorComponent'
 
 interface Params {
   params: {
@@ -26,33 +27,35 @@ export default async function OrganizationHome({ params }: Params) {
 
   return (
     <main className="w-screen mx-auto fixed overflow-auto h-screen">
-      <div className="sticky top-0 z-50 bg-accent pb-2">
-        <div className="flex p-4 px-8 gap-4 cursor-pointer">
-          <Image
-            src={organization.logo}
-            width={50}
-            height={50}
-            objectFit="cover"
-            alt={`${organization.name} logo`}
-          />
-          <FilterBar events={events} />
+      <ColorComponent organization={organization}>
+        <div className="sticky top-0 z-50 bg-accent pb-2">
+          <div className="flex p-4 px-8 gap-4 cursor-pointer">
+            <Image
+              src={organization.logo}
+              width={50}
+              height={50}
+              objectFit="cover"
+              alt={`${organization.name} logo`}
+            />
+            <FilterBar events={events} />
+          </div>
+          <div className="bg-base rounded-xl mx-8 my-3">
+            <p className="flex justify-center pt-4 text-white font-bold text-4xl">
+              {organization.name}
+            </p>
+            <article className="prose max-w-full text-center prose-invert p-4">
+              <Markdown remarkPlugins={[remarkGfm]}>
+                {organization.description}
+              </Markdown>
+            </article>
+          </div>
         </div>
-        <div className="bg-base rounded-xl mx-8 my-3">
-          <p className="flex justify-center pt-4 text-white font-bold text-4xl">
-            {organization.name}
-          </p>
-          <article className="prose max-w-full text-center prose-invert p-4">
-            <Markdown remarkPlugins={[remarkGfm]}>
-              {organization.description}
-            </Markdown>
-          </article>
+        <div className="overflow-auto pb-16">
+          <div className="px-4">
+            <EventList events={events} />
+          </div>
         </div>
-      </div>
-      <div className="overflow-auto pb-16">
-        <div className="px-4">
-          <EventList events={events} />
-        </div>
-      </div>
+      </ColorComponent>
     </main>
   )
 }

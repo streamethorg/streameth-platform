@@ -55,7 +55,7 @@ export default function NavbarTop() {
           <span className="sr-only">Logo</span>
           <Image
             className="rounded-full"
-            src={logo}
+            src={`/events/${logo}`}
             alt="Logo"
             width={50}
             height={50}
