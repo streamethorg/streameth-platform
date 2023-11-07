@@ -7,6 +7,7 @@ import StageController from '@/server/controller/stage'
 import Card from '@/components/misc/Card'
 import UpcomingEvents from './components/UpcomingEvents'
 import HotTalks from './components/HotTalks'
+import { Metadata } from 'next'
 
 export default async function Home() {
   const eventController = new EventController()
@@ -57,4 +58,36 @@ export default async function Home() {
       </div>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'StreamETH',
+  description:
+    'The complete solution to host your hybrid or virtual event.',
+  metadataBase: new URL('https://app.streameth.org'),
+  openGraph: {
+    title: 'StreamETH',
+    siteName: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
+      alt: 'StreamETH Logo',
+    },
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
 }

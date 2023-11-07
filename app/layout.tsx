@@ -6,7 +6,6 @@ import { MobileContextProvider } from '@/components/context/MobileContext'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
 import { FilterContextProvider } from '../components/context/FilterContext'
-import { Metadata } from 'next'
 import Initializer from './Initializer'
 
 const ubuntu = Ubuntu({
@@ -48,34 +47,3 @@ export default function RootLayout({
   )
 }
 
-export const metadata: Metadata = {
-  title: 'StreamETH',
-  description:
-    'The complete solution to host your hybrid or virtual event.',
-  metadataBase: new URL('https://app.streameth.org'),
-  openGraph: {
-    title: 'StreamETH',
-    siteName: 'StreamETH',
-    description:
-      'The complete solution to host your hybrid or virtual event.',
-    images: {
-      url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
-    },
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'StreamETH',
-    description:
-      'The complete solution to host your hybrid or virtual event.',
-    images: {
-      url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
-      alt: 'StreamETH Logo',
-    },
-  },
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en-US',
-    },
-  },
-}
