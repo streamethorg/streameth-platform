@@ -63,6 +63,11 @@ export async function generateMetadata(
     console.log(e)
     return {
       title: 'StreamETH Session',
+      openGraph: {
+        title: 'StreamETH Session',
+        description:
+          'The complete solution to host your hybrid or virtual event.',
+      },
     }
   }
 }
