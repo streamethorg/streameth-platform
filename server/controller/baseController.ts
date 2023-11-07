@@ -1,12 +1,10 @@
 import FsController from './dataStore/fs'
 import fs from 'fs'
-// import DbController from './dataStore/db'
 
 interface IBaseController<T> {
   create: (query: string, data: T) => Promise<void>
   get: (query: string) => Promise<T>
   getAll: (query: string) => Promise<T[]>
-  // update: (id: string, data: T) => Promise<T>;
   // delete: (id: string) => Promise<T>;
 }
 
@@ -28,8 +26,20 @@ export default class BaseController<T> implements IBaseController<T> {
     }
   }
 
-  async create(query: string, data: T): Promise<void> {
-    return this.store.write(query, JSON.stringify(data))
+  private mergeObjects(target: any, source: any): any {
+    Object.keys(source).forEach((key) => {
+      const sourceKey = key as keyof T;
+      if (source[sourceKey] !== undefined) { // Only overwrite if the value is not undefined
+        target[sourceKey] = source[sourceKey];
+      }
+    });
+    return target; // Return the modified target object
+  }
+
+  public async create(query: string, data: T): Promise<void> {
+    let existingData: T | null = await this.get(query) ? JSON.parse(await this.store.read(query)) : null;
+    const updatedData = this.mergeObjects(existingData as T || {} as T, data);
+    await this.store.write(query, JSON.stringify(updatedData));
   }
 
   async get(query: string): Promise<T> {
@@ -69,10 +79,6 @@ export default class BaseController<T> implements IBaseController<T> {
     })
     return Promise.all(dataPromises)
   }
-
-  // update(id: string, data: T): Promise<T> {
-  //   return this.store.update(id, data);
-  // }
 
   delete(id: string) {
     this.store.delete(id)

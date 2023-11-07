@@ -1,8 +1,1 @@
-{
-  "id": "daniel_karmacoma_reynaud",
-  "name": "Daniel \"karmacoma\" Reynaud",
-  "bio": "karma is a research engineering partner at a16z crypto, where he supports portfolio companies with protocol engineering. He is one of the authors of halmos, a smart contract symbolic execution testing tool.",
-  "eventId": "solidity_summit",
-  "twitter": "@0xkarmacoma",
-  "photo": "/speakers/solidity_summit/daniel_karmacoma_reynaud.png"
-}
+{"id":"daniel_karmacoma_reynaud","name":"Daniel \"karmacoma\" Reynaud","bio":"karma is a research engineering partner at a16z crypto, where he supports portfolio companies with protocol engineering. He is one of the authors of halmos, a smart contract symbolic execution testing tool.","eventId":"solidity_summit","twitter":"@0xkarmacoma","photo":"https://pasteboard.co/CGRjWRguUEJb.png"}
