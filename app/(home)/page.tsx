@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     description:
       'The complete solution to host your hybrid or virtual event.',
     images: {
-      url: '/banner.png',
+      url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
     },
   },
   twitter: {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     description:
       'The complete solution to host your hybrid or virtual event.',
     images: {
-      url: 'https://streameth.org/lib_wsURRdlMczHRgWBe/n7lvh3tpq34a2b6c.png?w=180&h=50&dpr=2',
+      url: '/banner.png',
       alt: 'StreamETH Logo',
     },
   },
