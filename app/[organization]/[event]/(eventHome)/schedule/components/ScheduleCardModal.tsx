@@ -31,7 +31,7 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
   }
 
   return (
-    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-4xl rounded-xl">
+    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-2xl rounded-xl">
       <div className="flex flex-col bg-base p-4 rounded-xl">
         <h1 className="text-lg  font-bold ">{session.name}</h1>
         <span className=" flex flex-row text-white">

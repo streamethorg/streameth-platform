@@ -49,7 +49,7 @@ export default function NavbarTop() {
   }
 
   return (
-    <header className="sticky z-[9099029] flex flex-row items-center bg-accent border-b border-primary w-full ml-auto p-4 py-2 top-0 h-16 lg:h-20">
+    <header className="sticky z-[99999] flex flex-row items-center bg-accent border-b border-primary w-full ml-auto p-4 py-2 top-0 h-16 lg:h-20">
       <div className=" flex items-center w-20">
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
