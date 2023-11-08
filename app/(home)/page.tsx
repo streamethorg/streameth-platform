@@ -16,7 +16,10 @@ export default async function Home() {
       return event.toJson()
     })
     .filter((event) => {
-      return event.organizationId === 'devconnect'
+      return (
+        event.organizationId === 'devconnect' ||
+        event.organizationId === 'secureum'
+      )
     })
     .sort((a, b) => {
       return new Date(a.start).getTime() - new Date(b.start).getTime()
