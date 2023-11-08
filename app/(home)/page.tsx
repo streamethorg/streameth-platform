@@ -44,10 +44,10 @@ export default async function Home() {
         <LiveEvent stage={stage?.toJson()} />
 
         <HotTalks />
-        <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
+        {/* <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
           Next Events
         </p>
-        <UpcomingEvents />
+        <UpcomingEvents /> */}
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
           Upcoming Events
         </p>
