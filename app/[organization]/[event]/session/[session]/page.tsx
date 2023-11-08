@@ -1,6 +1,7 @@
 import SessionController from '@/server/controller/session'
 import SessionComponent from './components/SessionComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
+import Session from '@/utils/session'
 
 export async function generateStaticParams({
   params,
@@ -33,8 +34,25 @@ export default async function Page({ params }: Params) {
     params.session,
     params.event
   )
+  const allSessions = await sController.getAllSessions({
+    eventId: params.event,
+  })
 
-  return <SessionComponent session={session} />
+  const currentIndex = allSessions.findIndex(
+    (s) => s.id === params.session
+  )
+  const nextSession =
+    currentIndex !== -1 && allSessions[currentIndex + 1]
+      ? allSessions[currentIndex + 1]
+      : null
+
+  return (
+    <SessionComponent
+      params={params.organization}
+      nextSession={nextSession}
+      session={session}
+    />
+  )
 }
 
 export async function generateMetadata(

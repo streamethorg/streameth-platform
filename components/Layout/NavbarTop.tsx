@@ -49,7 +49,7 @@ export default function NavbarTop() {
   }
 
   return (
-    <header className="sticky z-[9099029] flex flex-row bg-accent border-b border-primary w-full ml-auto p-4 py-2 top-0 h-16 lg:h-20">
+    <header className="sticky z-[9099029] flex flex-row items-center bg-accent border-b border-primary w-full ml-auto p-4 py-2 top-0 h-16 lg:h-20">
       <div className=" flex items-center w-20">
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
@@ -97,12 +97,12 @@ export default function NavbarTop() {
             setIsNavVisible={setMenuVisible}
           />
         )}
-        <Link
-          href="/"
-          className="font-ubuntu p-2 rounded-xl bg-base uppercase text-sm text-white ml-5">
-          Back to overview
-        </Link>
       </div>
+      <Link
+        href="/"
+        className="font-ubuntu p-2 min-w-fit flex items-center rounded-xl text-sm bg-base uppercase text-white ml-5">
+        Back to overview
+      </Link>
     </header>
   )
 }

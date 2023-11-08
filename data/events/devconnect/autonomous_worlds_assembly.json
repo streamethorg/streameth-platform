@@ -21,7 +21,7 @@
   "timezone": "Europe/Istanbul",
   "logo": "AWA_Logo.png",
   "banner": "AWA_Banner.png",
-  "accentColor": "",
+  "accentColor": "#7d4c2c",
   "dataExporter": [
     {
       "type": "gdrive",
