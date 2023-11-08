@@ -45,9 +45,30 @@ Setting up the StreamETH platform for development is straightforward. Here’s a
 
 Create a `.env` file at the root of the project and include the following variables:
 
-- `API_KEY` - Your API key for external services.
-- `DATABASE_URL` - Your local database URL.
-- More variables as required by the project.
+```bash
+# Session secret key
+SESSION_SECRET=Generate key: "openssl rand -base64 64"
+
+# WalletConnect Project ID
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id_here
+
+# Infura Project ID
+NEXT_PUBLIC_INFURA_ID=your_infura_project_id_here
+
+# Sanity Studio API Key
+NEXT_PUBLIC_STUDIO_API_KEY=your_Livepeer_studio_api_key_here
+
+# Service Account Private Key for server-to-server interactions
+SERVICE_ACCOUNT_PRIVATE_KEY=your_service_account_private_key_here
+
+# Service Account Email
+SERVICE_ACCOUNT_EMAIL=your_service_account_email_here
+
+# Google API Key for services like Google Maps, etc.
+GOOGLE_API_KEY=your_google_api_key_here
+```
+
+Make sure to replace your_..._here with your actual environment variable values.
 
 ### Running Locally
 
