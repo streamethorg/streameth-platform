@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     description:
       'The complete solution to host your hybrid or virtual event.',
     images: {
-      url: '/banner.png',
+      url: 'https://app.streameth.org/banner.png',
       alt: 'StreamETH Logo',
     },
   },
