@@ -25,7 +25,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
           <div
             className={`w-full lg:w-[45%] mr-4 flex flex-col gap-4 mb-4`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
-              ZuConnect Istanbul 2023
+              ETH Gunu Istanbul 2023
             </p>
             <Image
               className="hidden lg:block"
