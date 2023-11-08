@@ -36,11 +36,11 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               width={700}
               height={700}
             />
-            <Link
+            {/* <Link
               href="/zuzalu/zuconnect__decentralized_social_track"
               className=" bg-blue rounded-[8px] p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
