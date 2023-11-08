@@ -75,7 +75,7 @@ export async function generateMetadata(
       openGraph: {
         title: eventInfo.name,
         description: eventInfo.description,
-        images: [imageUrl!],
+        images: [`/events/${imageUrl!}`],
       },
     }
   } catch (e) {
