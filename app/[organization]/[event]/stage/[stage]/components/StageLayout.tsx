@@ -1,22 +1,19 @@
 'use client'
-import { useContext, useLayoutEffect, useRef, useState } from 'react'
-import {
-  ChatBubbleBottomCenterIcon,
-  CalendarIcon,
-  InformationCircleIcon,
-} from '@heroicons/react/24/outline'
-import SessionList from '@/components/sessions/SessionList'
-import Chat from '@/plugins/Chat'
-import Player from '@/components/misc/Player'
-import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
-import { StageContext } from './StageContext'
-import EmbedButton from '@/components/misc/EmbedButton'
-import ShareButton from '@/components/misc/ShareButton'
+import PluginBar from '@/components/Layout/PluginBar'
 import { LoadingContext } from '@/components/context/LoadingContext'
 import { MobileContext } from '@/components/context/MobileContext'
-import {Dm3Widget} from 'dm3-billboard-widget'
+import EmbedButton from '@/components/misc/EmbedButton'
+import Player from '@/components/misc/Player'
+import ShareButton from '@/components/misc/ShareButton'
+import SessionList from '@/components/sessions/SessionList'
+import {
+  CalendarIcon,
+  ChatBubbleBottomCenterIcon
+} from '@heroicons/react/24/outline'
+import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { Dm3 } from './DM3'
+import { StageContext } from './StageContext'
 
 
 

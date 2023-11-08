@@ -3,16 +3,16 @@ import 'dm3-billboard-widget/dist/styles/classic.css'
 import 'dm3-billboard-widget/dist/styles/streameth.css'
 import { useMemo, useState } from 'react'
 import {
-    useAccount,
-    useConnect,
-    usePublicClient,
-    useSignMessage,
+  useAccount,
+  useConnect,
+  usePublicClient,
+  useSignMessage,
 } from 'wagmi'
 
 import {
-    BillboardWidgetProps,
-    ClientProps,
-    Dm3Widget,
+  BillboardWidgetProps,
+  ClientProps,
+  Dm3Widget,
 } from 'dm3-billboard-widget'
 import { ethers } from 'ethersv5'
 import { SiweMessage } from 'siwe'
@@ -31,7 +31,7 @@ const defaultClientProps: Omit<
   mockedApi: false,
   billboardId: 'billboard1.bb.dm3.eth',
   billboardClientUrl: 'http://104.248.249.53/bb-client',
-  deliveryServiceEnsName: 'ds.bb.dm3.eth',
+  deliveryServiceEnsName: 'bb-ds.dm3.eth',
   offchainResolverUrl: 'http://104.248.249.53/resolver-handler',
 }
 
@@ -110,9 +110,12 @@ export const Dm3 = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 padding: '16px',
+                height: '1000px',
               }}>
               {!isConnected ? (
-                <div className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
+                <div
+                  style={{ maxHeight: '40px' }}
+                  className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
                   <button
                     onClick={connectWallet}
                     className="text-accent text-sm font-ubuntu font-bold rounded-full h-full w-full bg-white py-1 px-3">
@@ -120,7 +123,9 @@ export const Dm3 = () => {
                   </button>
                 </div>
               ) : (
-                <div className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
+                <div
+                  style={{ maxHeight: '40px' }}
+                  className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
                   <button
                     onClick={signInWithEthereum}
                     className="text-accent text-sm font-ubuntu font-bold rounded-full h-full w-full bg-white py-1 px-3">

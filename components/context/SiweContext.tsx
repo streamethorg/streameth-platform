@@ -6,7 +6,8 @@ import {
   getDefaultConfig,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
-import { WagmiConfig, createConfig } from 'wagmi'
+import { WagmiConfig, createConfig,Chain } from 'wagmi'
+import { goerli } from 'wagmi/chains'
 
 const authApi = '/api/auth'
 const siweConfig = {
@@ -53,7 +54,9 @@ const siweConfig = {
 
 const config = createConfig(
   getDefaultConfig({
+    autoConnect: true,
     appName: 'StreamETH',
+    chains:[goerli],
     infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
