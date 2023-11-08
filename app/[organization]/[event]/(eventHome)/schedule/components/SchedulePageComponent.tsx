@@ -34,7 +34,7 @@ const SchedulePageComponent = async ({ params }: Params) => {
     <ComponentWrapper sectionId="schedule">
       <ScheduleContextProvider
         event={event.toJson()}
-        stage={stages[0].id}
+        stage={stages[0]?.id}
         sessions={sessions.map((session) => session.toJson())}>
         <div className=" flex flex-col md:flex-row w-full rounded-lg z-50 space-y-2 md:space-y-0 md:space-x-2 mb-4 justify-center">
           <span className=" w-full text-xl uppercase md:text-4xl flex ">
