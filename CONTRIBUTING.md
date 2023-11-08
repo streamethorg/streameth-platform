@@ -13,13 +13,7 @@ Following these guidelines helps to communicate that you respect the time of the
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [StreamETH Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [conduct@streameth.org](mailto:conduct@streameth.org).
-
-## Got a Question or Problem?
-
-If you would like to chat about the question in real-time, you can reach out via our [Slack channel](#).
-
-For questions related to using StreamETH, start a discussion in our [GitHub Discussions](#).
+This project and everyone participating in it is governed by the [StreamETH Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. 
 
 ## Found a Bug?
 
@@ -32,9 +26,9 @@ You can _request_ a new feature by [submitting an issue](#) to our GitHub Reposi
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
+2. Give a concise Pull Request on what you build.
 2. Update the README.md with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations, and container parameters.
-3. Increase the version numbers in any examples files and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. The Pull Request will be merged once it has the sign-off of two core developers, or if it's a trivial change, it may be merged by a single core developer.
+3. The Pull Request will be merged once it has the sign-off of two core developers, or if it's a trivial change, it may be merged by a single core developer.
 
 ## Getting Started
 
