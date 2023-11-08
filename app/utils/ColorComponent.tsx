@@ -92,14 +92,16 @@ const ColorComponent = ({
   useEffect(() => {
     setLogo('/events/' + logo)
     if (event.archiveMode) {
-      setComponents([
-        <FilterBar
-          key="1"
-          sessions={sessions}
-          speakers={speakers}
-          stages={stages}
-        />,
-      ])
+      if (!pathname.includes('/session/')) {
+        setComponents([
+          <FilterBar
+            key="1"
+            sessions={sessions}
+            speakers={speakers}
+            stages={stages}
+          />,
+        ])
+      }
     } else {
       setPages([...pages, ...stagePages()])
     }
@@ -108,7 +110,7 @@ const ColorComponent = ({
       setPages([])
       setLogo('')
     }
-  }, [event])
+  }, [event, pathname])
 
   useEffect(() => {
     if (!isNotOrganization && accentColor) {

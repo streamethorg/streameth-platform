@@ -4,25 +4,34 @@ import FilterBar from './components/FilterBar'
 import Image from 'next/image'
 import LiveEvent from './components/LiveEvent'
 import StageController from '@/server/controller/stage'
-import Card from '@/components/misc/Card'
 import UpcomingEvents from './components/UpcomingEvents'
-import HotTalks from './components/HotTalks'
-
+import {
+  FilterContext,
+  FilterContextProvider,
+} from '@/components/context/FilterContext'
 export default async function Home() {
   const eventController = new EventController()
-  const upComing = (await eventController.getAllEvents({})).map(
-    (event) => {
+  const upComing = (await eventController.getAllEvents({}))
+    .map((event) => {
       return event.toJson()
-    }
-  )
+    })
+    .filter((event) => {
+      return event.organizationId === 'devconnect'
+    })
+    .sort((a, b) => {
+      return new Date(a.start).getTime() - new Date(b.start).getTime()
+    })
 
-  // const pastEvents = (await eventController.getAllEvents({}))
-  //   .map((event) => {
-  //     return event.toJson()
-  //   })
-  //   .filter((event) => {
-  //     return new Date(event.start).getTime() < new Date().getTime()
-  //   })
+  const pastEvents = (await eventController.getAllEvents({}))
+    .filter(
+      (event) =>
+        new Date(event.toJson().start).getTime() <
+        new Date().getTime()
+    )
+    .map((event) => {
+      return event.toJson()
+    })
+
   const stageController = new StageController()
   const stage = await stageController.getStage(
     'theater',
@@ -38,22 +47,18 @@ export default async function Home() {
           height={50}
           alt="Streameth logo"
         />
-        <FilterBar events={upComing} />
       </div>
       <div className="flex flex-col p-4 lg:overflow-hidden">
         <LiveEvent stage={stage?.toJson()} />
-
-        <HotTalks />
-        {/* <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
-          Next Events
-        </p>
-        <UpcomingEvents /> */}
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
           Upcoming Events
         </p>
-        <EventList events={upComing} />
-        {/* <p>Past events</p>
-      <EventList events={pastEvents} /> */}
+        <UpcomingEvents events={upComing} />
+        <div className="px-4 items-center space-y-2 space-x-4 flex flex-col md:flex-row mt-4 ">
+          <p className="font-ubuntu font-bold text-blue text-xl">Past Events</p>
+          <FilterBar events={pastEvents} />
+        </div>
+        <EventList events={pastEvents} />
       </div>
     </main>
   )
