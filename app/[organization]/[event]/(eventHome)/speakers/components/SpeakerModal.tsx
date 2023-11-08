@@ -4,6 +4,7 @@ import SpeakerPhoto from '../components/SpeakerPhoto'
 import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 import { ISession } from '@/server/model/session'
 import { ISpeaker } from '@/server/model/speaker'
+import { SocialIcon } from 'react-social-icons'
 
 interface Params {
   speaker: ISpeaker
@@ -18,9 +19,21 @@ const SpeakerModal = ({ sessions, speaker }: Params) => {
       </div>
       <div className="flex flex-col w-full max-w-xl space-y-4">
         <div className=" p-4  bg-base rounded-xl">
-          <p className="text-lg font-bold uppercase mb-4">
-            {speaker.name}
-          </p>
+          <div className="flex gap-1">
+            <p className="text-lg font-bold uppercase mb-4">
+              {speaker.name}
+            </p>
+            {speaker.twitter && (
+              <SocialIcon
+                url={`https://x.com/${speaker.twitter}`}
+                target="_blank"
+                bgColor="#000"
+                fgColor="#fff"
+                style={{ width: '25px', height: '25px' }}
+                className="ml-2 "
+              />
+            )}
+          </div>
           <p className="text-main-text py-1">{speaker.bio}</p>
         </div>
         {sessions && (
