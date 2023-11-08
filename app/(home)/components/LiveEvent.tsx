@@ -15,13 +15,13 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
         <div className="h-full flex flex-col w-full lg:flex-row relative items-center lg:gap-4">
           <div className=" mb-2 lg:mb-0 p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
             <Player
-              playbackId="https://lp-playback.com/hls/0294w9be36fgox9l/index.m3u8"
-              // streamId={stage.streamSettings.streamId}
-              playerName="Opening Remarks"
-              coverImage="/sessions/zuconnect_istanbul/opening_remarks.jpg"
+              playbackId="https://lp-playback.com/hls/5b87r8sid0m5klfk/index.m3u8"
+              streamId={stage.streamSettings.streamId}
+              playerName="Zuzalu 2024 plans"
+              coverImage="/sessions/zuconnect_istanbul/zuzalu_2024_plans.jpg"
             />
             <p className="font-ubuntu font-medium text-lg mt-4 text-blue">
-              🔴 Rec: ZuConnect Istanbul - Opening Remark
+              🔴 Rec: ZuConnect Istanbul - Zuzalu 2024 plans
             </p>
           </div>
           <div
