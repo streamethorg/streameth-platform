@@ -1,7 +1,6 @@
-import { Sequence, AbsoluteFill, staticFile, Audio, useVideoConfig, useCurrentFrame, interpolate, Img, OffthreadVideo, delayRender, continueRender } from 'remotion'
-import { G_FPS } from '../../consts'
-import dayjs from 'dayjs'
+import { Sequence, AbsoluteFill, staticFile, Audio, useVideoConfig, useCurrentFrame, interpolate, Img, OffthreadVideo } from 'remotion'
 import { CreateAvatar } from '../../utils/avatars'
+import dayjs from 'dayjs'
 
 export interface SpeakerProps {
     id: string
@@ -31,9 +30,10 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
     const bgFile = staticFile(`devconnect/images/IST-bg-${type}.png`)
     const logoFile = id ? staticFile(`devconnect/logos/${id}.png`) : ''
 
-    const introTime = 5 * G_FPS
-    const sessionTime = 7 * G_FPS
-    const fadeTime = introTime + (G_FPS / 2)
+    const frameRate = 25
+    const introTime = 5 * frameRate
+    const sessionTime = 7 * frameRate
+    const fadeTime = introTime + (frameRate / 2)
 
     const logoMove = interpolate(frame, [introTime, fadeTime], [-60, 0], { extrapolateRight: "clamp" });
     const initialOpacity = interpolate(frame, [introTime, fadeTime], [0, 1]);

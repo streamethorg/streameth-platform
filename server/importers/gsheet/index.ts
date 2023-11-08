@@ -126,8 +126,20 @@ export default class Importer extends BaseImporter {
           eventId: this.event.id,
           organizationId: this.event.organizationId,
           speakers: speakers,
-          start: moment(`${newDate()} ${Start}:00`).valueOf(),
-          end: moment(`${newDate()} ${End}:00`).valueOf(),
+          start: moment
+            .tz(
+              `${newDate()} ${Start}:00`,
+              'YYYY-MM-DD HH:mm:ss',
+              this.event.timezone
+            )
+            .valueOf(),
+          end: moment
+            .tz(
+              `${newDate()} ${End}:00`,
+              'YYYY-MM-DD HH:mm:ss',
+              this.event.timezone
+            )
+            .valueOf(),
           videoUrl: row[12],
         }
 

@@ -46,6 +46,17 @@ const ColorComponent = ({
 
   const pages: Page[] = []
 
+  const sessionWithVideo = sessions.filter(
+    (session) => session.videoUrl
+  )
+
+  if (sessionWithVideo.length > 0)
+    pages.push({
+      href: `/${organizationId}/${id}/archive`,
+      name: 'Archive',
+      icon: <ViewColumnsIcon />,
+    })
+
   if (sessions.length > 0)
     pages.push({
       href: `/${organizationId}/${id}#schedule`,
