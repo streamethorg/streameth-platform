@@ -23,10 +23,10 @@ const UPCOMING = [
     image: '/events/EVM_summit_cover.jpeg',
   },
   {
-    name: 'Fe Lang Hackathon',
+    name: 'ETHconomics',
     date: 'Wednesday, 15 Nov',
-    link: '/devconnect/fe_lang_hackathon',
-    image: '/events/devconnect_cover.png',
+    link: '/devconnect/ethconomics',
+    image: '/events/ethconomics_cover.jpeg',
   },
 ]
 

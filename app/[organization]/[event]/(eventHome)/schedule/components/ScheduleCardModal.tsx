@@ -36,7 +36,7 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
         <span className=" flex flex-row text-white">
           {new Date(session.start).toDateString()}{' '}
           {new Date(session.start)
-            .getUTCHours()
+            .getHours()
             .toString()
             .padStart(2, '0') +
             ':' +
@@ -46,7 +46,7 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
               .padStart(2, '0')}{' '}
           -{' '}
           {new Date(session.end)
-            .getUTCHours()
+            .getHours()
             .toString()
             .padStart(2, '0') +
             ':' +
