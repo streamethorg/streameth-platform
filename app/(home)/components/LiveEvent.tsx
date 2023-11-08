@@ -15,7 +15,6 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
         <div className="h-full flex flex-col w-full lg:flex-row relative items-center lg:gap-4">
           <div className=" mb-2 lg:mb-0 p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
             <Player
-              playbackId="https://lp-playback.com/hls/5b87r8sid0m5klfk/index.m3u8"
               streamId={stage.streamSettings.streamId}
               playerName="Zuzalu 2024 plans"
               coverImage="/sessions/zuconnect_istanbul/zuzalu_2024_plans.jpg"
