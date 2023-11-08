@@ -16,7 +16,7 @@ const SessionInfoBox = ({
         !description && ''
       }`}>
       <div className="flex flex-col">
-        <div className="w-full text-left text-md lg:text-lg font-medium text-main-text ">
+        <div className="w-full text-left text-md lg:text-xl mb-2 font-medium text-main-text ">
           {title}
         </div>
         {description && (

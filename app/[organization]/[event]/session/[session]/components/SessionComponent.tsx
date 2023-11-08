@@ -26,60 +26,52 @@ export default async function SessionComponent({
   params: string
 }) {
   return (
-    <div className="flex flex-col w-full max-h-full h-full lg:flex-row relative overflow-y-scroll md:p-4 gap-4">
-      <div className="w-full h-full lg:w-[70%]">
-        <div className="sticky top-0 md:relative flex flex-col rounded-b-xl  box-border lg:overflow-scroll">
-          <ActionsComponent goBackButton>
-            <EmbedButton
-              playbackId={session.playbackId}
-              playerName={session.name}
-            />
-          </ActionsComponent>
-          <Player
+    <div className="flex flex-col w-full max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 gap-4">
+      <div className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
+        <ActionsComponent goBackButton>
+          <EmbedButton
             playbackId={session.playbackId}
             playerName={session.name}
-            coverImage={session.coverImage}
           />
-        </div>
-        {nextSession?.videoUrl && (
-          <div className="mt-10 lg:w-[60%]">
-            <p className="font-medium text-xl bg-base text-white p-2 rounded-xl mb-4">
-              Next Talk
-            </p>
-            <Card>
-              <Link
-                href={
-                  `/${params}/${nextSession?.eventId}/session/` +
-                  nextSession?.id
-                }>
-                <div className="aspect-video cursor-pointer relative  w-full">
-                  <Image
-                    className="rounded-xl"
-                    alt="Session image"
-                    quality={60}
-                    src={
-                      nextSession.coverImage
-                        ? nextSession?.coverImage
-                        : ''
-                    }
-                    fill
-                    // sizes="20vw"
-                    style={{
-                      objectFit: 'cover',
-                    }}
-                  />
-                </div>
-                <p className=" p-2 py-4 text-md">
-                  {nextSession?.name}
-                </p>
-              </Link>
-            </Card>
-          </div>
-        )}
+        </ActionsComponent>
+        <Player
+          playbackId={session.playbackId}
+          playerName={session.name}
+          coverImage={session.coverImage}
+        />
       </div>
-      <div className="flex space-y-4 flex-col w-full p-2 lg:w-[30%] lg:overflow-y-scroll lg:p-0">
+      <div className="flex space-y-4 flex-col w-full p-2 lg:w-[30%]  overflow-y-scroll lg:p-0">
         <SessionInfoBox session={session.toJson()} showDate />
         <SpeakerComponent session={session} />
+        {nextSession?.videoUrl && (
+          <div className=" bg-base text-white p-2 rounded-xl mb-4">
+            <p className="font-medium text-xl  ">Next Talk</p>
+            <Link
+              href={
+                `/${params}/${nextSession?.eventId}/session/` +
+                nextSession?.id
+              }>
+              <div className="aspect-video cursor-pointer relative  w-full">
+                <Image
+                  className="rounded-xl"
+                  alt="Session image"
+                  quality={60}
+                  src={
+                    nextSession.coverImage
+                      ? nextSession?.coverImage
+                      : ''
+                  }
+                  fill
+                  // sizes="20vw"
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                />
+              </div>
+              <p className=" p-2 py-4 text-md">{nextSession?.name}</p>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )

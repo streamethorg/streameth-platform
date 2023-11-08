@@ -1,4 +1,5 @@
 import Card from '@/components/misc/Card'
+import { IEvent } from '@/server/model/event'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -30,19 +31,19 @@ const UPCOMING = [
   },
 ]
 
-const UpcomingEvents = () => {
+const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
   return (
     <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll">
-      {UPCOMING.map(({ name, date, link, image }, index) => (
-        <Card key={index}>
-          <Link href={link}>
+      {events.map(({ name, start, eventCover, organizationId, id, accentColor}, index) => (
+        <Card key={index} bgColor={accentColor}>
+          <Link href={`/${organizationId}/${id}`}>
             <div className="h-full rounded-xl text-white uppercase">
               <div className="aspect-video relative">
                 <Image
                   className="rounded"
                   alt="Session image"
                   quality={80}
-                  src={`${image}`}
+                  src={`/events/${eventCover}`}
                   fill
                   style={{
                     objectFit: 'cover',
@@ -52,11 +53,11 @@ const UpcomingEvents = () => {
               <div
                 className="flex flex-col my-2 gap-2"
                 title="Zuzalu">
-                <p className=" text-sm font-bold capitalize text-blue  truncate">
+                <p className=" text-sm font-bold capitalize  truncate">
                   {name}
                 </p>
-                <p className="text-blue text-sm font-medium">
-                  {date}
+                <p className=" text-sm font-medium">
+                  {start.toDateString()}
                 </p>
               </div>
             </div>

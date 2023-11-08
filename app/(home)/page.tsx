@@ -10,19 +10,27 @@ import HotTalks from './components/HotTalks'
 
 export default async function Home() {
   const eventController = new EventController()
-  const upComing = (await eventController.getAllEvents({})).map(
-    (event) => {
+  const upComing = (await eventController.getAllEvents({}))
+    .map((event) => {
       return event.toJson()
-    }
-  )
+    })
+    .filter((event) => {
+      return event.organizationId === 'devconnect'
+    })
+    .sort((a, b) => {
+      return new Date(a.start).getTime() - new Date(b.start).getTime()
+    })
 
-  // const pastEvents = (await eventController.getAllEvents({}))
-  //   .map((event) => {
-  //     return event.toJson()
-  //   })
-  //   .filter((event) => {
-  //     return new Date(event.start).getTime() < new Date().getTime()
-  //   })
+  const pastEvents = (await eventController.getAllEvents({}))
+    .filter(
+      (event) =>
+        new Date(event.toJson().start).getTime() <
+        new Date().getTime()
+    )
+    .map((event) => {
+      return event.toJson()
+    })
+
   const stageController = new StageController()
   const stage = await stageController.getStage(
     'theater',
@@ -43,17 +51,15 @@ export default async function Home() {
       <div className="flex flex-col p-4 lg:overflow-hidden">
         <LiveEvent stage={stage?.toJson()} />
 
-        <HotTalks />
-        <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
-          Next Events
-        </p>
-        <UpcomingEvents />
+        {/* <HotTalks /> */}
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
           Upcoming Events
         </p>
-        <EventList events={upComing} />
-        {/* <p>Past events</p>
-      <EventList events={pastEvents} /> */}
+        <UpcomingEvents events={upComing} />
+        <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
+          Past Events
+        </p>
+        <EventList events={pastEvents} />
       </div>
     </main>
   )
