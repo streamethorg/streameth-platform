@@ -1,48 +1,17 @@
-import { Composition, Folder, Still, continueRender, delayRender, staticFile } from 'remotion'
-import { G_FPS } from '../consts'
-import { Intro } from './devconnect/intro'
-import { Social } from './devconnect/social'
+import { Composition, Folder, Still, continueRender, delayRender } from 'remotion'
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
-
-export const DevconnectISTDuration = 12 * G_FPS
-export const FtcDuration = 170
-
-// 1 = blue/teal
-// 2 = teal/orange
-// 3 = yellow/orange
-// 4 = red
-// 5 = pink/purple
-// 6 = purple
-// 7 = blue
-
-export const DevconnectEvents = [
-  { id: 'epf-day', type: '5' },
-  { id: 'ethconomics', type: '4' },
-  { id: 'ethgunu', type: '7' },
-  { id: 'evm-summit', type: '3' },
-  { id: 'solidity-summit', type: '6' },
-  { id: 'light-client-summit', type: '1' },
-  { id: 'fe-lang-hackathon', type: '1' },
-  { id: 'conflux--web3-ux-unconference', type: '7' },
-  { id: 'wallet-unconference', type: '2' },
-  // { id: 'cryptographic-resilience-within-ethereum', type: '4' },
-]
+import { JoinVideos } from './join'
+import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration, DevconnectISTFont, Join, Intro, Social } from './devconnect'
 
 export function Compositions() {
   const waitForFont = delayRender()
-  const font = new FontFace(
-    `Sofia Sans Extra Condensed`,
-    `url('${staticFile('devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf')}') format('truetype')`,
-  )
+  const font = DevconnectISTFont
 
-  font
-    .load()
-    .then(() => {
-      document.fonts.add(font);
-      continueRender(waitForFont);
-    })
-    .catch((err) => console.log("Error loading font", err));
+  font.load().then(() => {
+    document.fonts.add(font)
+    continueRender(waitForFont)
+  }).catch((err) => console.log("Error loading font", err))
 
   return (
     <>
@@ -54,27 +23,53 @@ export function Compositions() {
               component={Intro}
               width={1920}
               height={1080}
-              durationInFrames={DevconnectISTDuration}
-              fps={G_FPS}
+              durationInFrames={DevconnectIntroDuration}
+              fps={DevconnectFrameRate}
               defaultProps={{ type: event.type, id: event.id, session: MOCK_SESSION[0] }}
             />
 
             <Still id={`${event.id}-social`} component={Social} width={1200} height={630} defaultProps={{ type: event.type, id: event.id, session: MOCK_SESSION[1] }} />
           </Fragment>
         ))}
-      </Folder>
 
-      {/* <Folder name="Ftc">
         <Composition
-          id={MOCK_SESSION[0].id.replace(/_/g, '-')}
-          component={Session}
+          id={'join-devconnect-ist'}
+          component={Join}
           width={1920}
           height={1080}
-          durationInFrames={FtcDuration}
-          fps={G_FPS}
-          defaultProps={{ session: MOCK_SESSION[0] }}
+          fps={DevconnectFrameRate}
+          durationInFrames={DevconnectIntroDuration + (20 * 25) + DevconnectOutroDuration - 75} // intro (12s) + example video (20s) + outro (9s) minus 25 frames (1 sec) per transition
+          defaultProps={{
+            id: 'opening_remarks',
+            eventId: 'epf-day',
+            type: '2',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            videoDuration: 20 * 25, // need to set this dynamically
+            session: MOCK_SESSION[0]
+          }}
         />
-      </Folder> */}
+      </Folder>
+
+      <Composition
+        id={'join-videos'}
+        component={JoinVideos}
+        width={1920}
+        height={1080}
+        fps={25}
+        durationInFrames={525} // Total of all video durations minus 25 frames (1 sec) per transition
+        defaultProps={{
+          videos: [{
+            pathOrUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: 150
+          }, {
+            pathOrUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: 300
+          }, {
+            pathOrUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: 150
+          }]
+        }}
+      />
     </>
   )
 }

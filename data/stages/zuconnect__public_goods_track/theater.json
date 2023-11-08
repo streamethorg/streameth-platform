@@ -1,8 +1,1 @@
-{
-  "id": "theater",
-  "name": "Theater",
-  "eventId": "zuconnect__public_goods_track",
-  "streamSettings": {
-    "streamId": "5cf49b30-0b5e-4af7-b522-d99f50cce60e"
-  }
-}
+{"id":"theater","name":"Theater","eventId":"zuconnect__public_goods_track","streamSettings":{}}
