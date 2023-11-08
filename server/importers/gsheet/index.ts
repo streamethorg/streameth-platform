@@ -118,7 +118,7 @@ export default class Importer extends BaseImporter {
           const date = Day.split('/')
           return `${date[2]}-${date[1]}-${date[0]}`
         }
-
+        debugger
         const session = {
           name: Name,
           description: Description,
@@ -126,12 +126,8 @@ export default class Importer extends BaseImporter {
           eventId: this.event.id,
           organizationId: this.event.organizationId,
           speakers: speakers,
-          start: moment
-            .tz(`${newDate()} ${Start}:00`, this.event.timezone)
-            .valueOf(),
-          end: moment
-            .tz(`${newDate()} ${End}:00`, this.event.timezone)
-            .valueOf(),
+          start: moment(`${newDate()} ${Start}:00`).valueOf(),
+          end: moment(`${newDate()} ${End}:00`).valueOf(),
           videoUrl: row[12],
         }
 

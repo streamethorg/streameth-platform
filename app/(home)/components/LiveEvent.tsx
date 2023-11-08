@@ -1,9 +1,6 @@
 'use client'
 import React from 'react'
-import EmbedButton from '@/components/misc/EmbedButton'
-import ShareButton from '@/components/misc/ShareButton'
 import Player from '@/components/misc/Player'
-import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IStage } from '@/server/model/stage'
@@ -11,31 +8,23 @@ import { IStage } from '@/server/model/stage'
 const LiveEvent = ({ stage }: { stage: IStage }) => {
   return (
     <div>
-      <h3 className="font-ubuntu font-bold text-lg px-4 text-blue">
+      {/* <h3 className="font-ubuntu font-bold text-lg px-4 text-blue">
         Happening Now!
-      </h3>
+      </h3> */}
       <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-screen">
         <div className="h-full flex flex-col w-full lg:flex-row relative items-center lg:gap-4">
-          <div
-            // ref={stickyRef}
-            className=" mb-2 lg:mb-0 p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
-            {/* <ActionsComponent title={stage.name}>
-              <EmbedButton
-                streamId={stage.streamSettings.streamId}
-                playerName={stage.name}
-              />
-              <ShareButton />
-            </ActionsComponent> */}
+          <div className=" mb-2 lg:mb-0 p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
             <Player
-              streamId={stage.streamSettings.streamId}
-              playerName={stage.name}
+              playbackId="https://lp-playback.com/hls/0294w9be36fgox9l/index.m3u8"
+              // streamId={stage.streamSettings.streamId}
+              playerName="Opening Remarks"
+              coverImage="/sessions/zuconnect_istanbul/opening_remarks.jpg"
             />
             <p className="font-ubuntu font-medium text-lg mt-4 text-blue">
-              🔴 Live: ZuConnect - Public ZK Track
+              🔴 Rec: ZuConnect Istanbul - Opening Remark
             </p>
           </div>
           <div
-            // style={{ height: isMobile ? '100%' : playerHeight }}
             className={`w-full lg:w-[45%] mr-4 flex flex-col gap-4 mb-4`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
               ZuConnect Istanbul 2023
@@ -48,7 +37,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               height={700}
             />
             <Link
-              href="/zuzalu/zuconnect__zk_track"
+              href="/zuzalu/zuconnect__decentralized_social_track"
               className=" bg-blue rounded-[8px] p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
             </Link>
