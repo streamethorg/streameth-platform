@@ -7,7 +7,7 @@ export default class EventController {
   private controller: BaseController<IEvent>
 
   constructor() {
-    this.controller = new BaseController<IEvent>(getEnvironment())
+    this.controller = new BaseController<IEvent>('fs')
   }
 
   public async getEvent(

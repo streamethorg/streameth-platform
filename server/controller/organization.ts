@@ -6,9 +6,7 @@ export default class OrganizationController {
   private controller: BaseController<IOrganization>
 
   constructor() {
-    this.controller = new BaseController<IOrganization>(
-      getEnvironment()
-    )
+    this.controller = new BaseController<IOrganization>('fs')
   }
 
   public async getOrganization(
