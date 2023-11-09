@@ -1,7 +1,7 @@
 import 'dm3-billboard-widget/dist/style.css'
 import 'dm3-billboard-widget/dist/styles/classic.css'
-import 'dm3-billboard-widget/dist/styles/streameth.css'
-import { useMemo, useState } from 'react'
+import './dm3.css'
+import { useContext, useMemo, useState } from 'react'
 import {
   useAccount,
   useConnect,
@@ -16,6 +16,7 @@ import {
 } from 'dm3-billboard-widget'
 import { ethers } from 'ethersv5'
 import { SiweMessage } from 'siwe'
+import { StageContext } from './StageContext'
 
 export const defaultOptions: BillboardWidgetProps['options'] = {
   avatarSrc: (hash) => {
@@ -43,6 +44,8 @@ export const Dm3 = () => {
   const [siweSig, setSiweSig] = useState<string>()
   const [siweMessage, setSiweMessage] = useState<SiweMessage>()
   const publicClient = usePublicClient()
+  const context = useContext(StageContext)
+  const stageId = context?.stage.id
 
   const clientProps: ClientProps = useMemo(
     () => ({
@@ -61,7 +64,7 @@ export const Dm3 = () => {
       name: 'goerli',
     }
   )
-
+  console.log('stageId', stageId)
   const connectWallet = () => {
     connect()
   }
