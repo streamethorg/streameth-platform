@@ -18,7 +18,7 @@ export default async function Home() {
     .filter((event) => {
       return (
         event.organizationId === 'devconnect' ||
-        event.organizationId === 'secureum'
+        new Date(event.start) > new Date()
       )
     })
     .sort((a, b) => {

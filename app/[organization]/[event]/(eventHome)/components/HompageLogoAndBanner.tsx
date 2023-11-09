@@ -14,11 +14,12 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   return (
     <ComponentWrapper sectionId="home">
       <Image
-        className="rounded-lg"
+        className="rounded-lg max-h-[500px]"
         src={'/events/' + banner}
         alt="Event Cover"
         width={1500}
         height={500}
+        objectFit="cover"
       />
       <div id="home" className="flex flex-col p-4">
         <div className=" flex-col flex space-y-2 md:flex-col">
