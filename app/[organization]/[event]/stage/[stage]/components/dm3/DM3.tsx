@@ -21,15 +21,11 @@ export const defaultOptions: BillboardWidgetProps['options'] = {
   timeout: 10000,
 }
 
-const defaultClientProps: Omit<
-  ClientProps,
-  'siweAddress' | 'siweSig' | 'siweMessage'
-> = {
-  mockedApi: false,
-  billboardId: 'billboard1.bb.dm3.eth',
-  billboardClientUrl: 'http://104.248.249.53/bb-client',
-  deliveryServiceEnsName: 'bb-ds.dm3.eth',
-  offchainResolverUrl: 'http://104.248.249.53/resolver-handler',
+const getBillboardId = (eventId: string, stageId: string) => {
+  const replacedEventId = eventId.replaceAll('_', '-')
+  const replacedStageId = stageId.replaceAll('_', '-')
+
+  return `${replacedEventId}-${replacedStageId}.bb.dm3.eth`
 }
 
 export const Dm3 = () => {
@@ -48,21 +44,21 @@ export const Dm3 = () => {
     }
   )
 
-  const clientProps: ClientProps = useMemo(
-    () => ({
-      ...defaultClientProps,
+  const clientProps: ClientProps = useMemo(() => {
+    return {
+      mockedApi: false,
+      billboardId: getBillboardId(
+        context?.stage.eventId!,
+        context?.stage.id!
+      ),
+      billboardClientUrl: 'http://104.248.249.53/bb-client',
+      deliveryServiceEnsName: 'bb-ds.dm3.eth',
+      offchainResolverUrl: 'http://104.248.249.53/resolver-handler',
       siweAddress: address?.toString() ?? '',
       siweMessage: JSON.stringify(siweMessage),
       siweSig: siweSig ?? '',
-    }),
-    [address, siweSig, siweMessage]
-  )
-
-  const stageId = context?.stage.id
-  console.log('stageId', stageId)
-  console.log(siweMessage)
-  console.log(siweMessage?.address)
-  console.log(address)
+    }
+  }, [address, siweSig, siweMessage, context?.stage.id])
 
   return (
     <>
