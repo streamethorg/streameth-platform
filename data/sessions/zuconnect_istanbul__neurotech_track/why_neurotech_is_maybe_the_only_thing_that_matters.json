@@ -1,0 +1,20 @@
+{
+  "id": "why_neurotech_is_maybe_the_only_thing_that_matters",
+  "name": "Why neurotech is maybe the only thing that matters",
+  "description": "Panel discussion about neurotech's relevance to AI safety/progress, longevity, and why it matters to you that you're alive at all",
+  "start": 1698746400000,
+  "end": 1698748200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "mike_johnson",
+      "name": "Mike Johnson",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__neurotech_track"
+    }
+  ],
+  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/3993lwgs40f68o1t/index.m3u8",
+  "eventId": "zuconnect_istanbul__neurotech_track",
+  "coverImage": "/sessions/zuconnect_istanbul__neurotech_track/why_neurotech_is_maybe_the_only_thing_that_matters.jpg"
+}

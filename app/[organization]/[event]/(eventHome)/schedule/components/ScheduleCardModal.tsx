@@ -4,13 +4,17 @@ import SpeakerIconList from '@/app/[organization]/[event]/(eventHome)/speakers/c
 import { useEffect, useState, useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
 import { LoadingContext } from '@/components/context/LoadingContext'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import moment from 'moment-timezone'
 
 const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
   const { closeModal } = useContext(ModalContext)
   const { setIsLoading } = useContext(LoadingContext)
   const router = useRouter()
+  const pathname = usePathname()
+
+  const paramsOrgId = pathname.split('/')[1]
 
   useEffect(() => {
     const url = window.location.href
@@ -20,32 +24,41 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const handleGoToStage = () => {
     setIsLoading(true)
     closeModal()
-    router.push(`stage/${session.stageId}`)
+    const stageUrl = `/${paramsOrgId}/${session.eventId}/stage/${session.stageId}`
+    !pathname.includes('schedule')
+      ? router.push(stageUrl)
+      : window.open(stageUrl, '_blank', 'noreferrer')
   }
 
   return (
-    <div className="flex flex-col p-4 border-b-2 border-b-accent">
+    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-2xl rounded-xl">
+      <div className="flex flex-col bg-base p-4 rounded-xl">
+        <h1 className="text-lg  font-bold ">{session.name}</h1>
+        <span className=" flex flex-row text-white">
+          {new Date(session.start).toDateString()}{' '}
+          {moment(session.start)
+            .tz('Europe/Istanbul')
+            .format('HH:mm')}{' '}
+          -{moment(session.end).tz('Europe/Istanbul').format('HH:mm')}{' '}
+          (GMT +3)
+        </span>
+      </div>
+      {session.description && (
+        <p className="flex flex-col bg-base p-4 rounded-xl">
+          {session.description}
+        </p>
+      )}
+
+      <p className="flex flex-row flex-wrap">
+        <SpeakerIconList speakers={session.speakers} />
+      </p>
       {showGoToStage && (
         <div
           onClick={handleGoToStage}
-          className="text-xs border-accent border-2 cursor-pointer text-accent rounded ml-auto p-2 font-bold mb-4 hover:bg-accent hover:text-white">
+          className="border text-lg  text-white cursor-pointer text-accent rounded-xl ml-auto p-2 font-bold mb-4 hover:bg-accent hover:text-white">
           Go to Stream
         </div>
       )}
-      <h1 className="text-lg text-main-text font-bold text-center">
-        {session.name}
-      </h1>
-      <div className="flex flex-col justify-center items-center text-center  p-2">
-        <span className="text-secondary-text">
-          {new Date(session.start).toTimeString().slice(0, 5)} -{' '}
-          {new Date(session.end).toTimeString().slice(0, 5)}
-        </span>
-        <span className="text-secondary-text">
-          {new Date(session.start).toDateString()}
-        </span>
-      </div>
-      <p className="py-4">{session.description}</p>
-      <SpeakerIconList speakers={session.speakers} />
     </div>
   )
 }

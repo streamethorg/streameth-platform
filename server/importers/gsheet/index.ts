@@ -6,7 +6,7 @@ import GoogleSheetService from '../../services/googleSheet/index'
 
 const SPEAKER_SHEET = 'Speakers'
 const SPEAKER_DATA_RANGE = 'A3:E'
-const STAGE_SHEET = 'Stages'
+const STAGE_SHEET = 'Stages (FOR INTERNAL MANAGEMENT, DO NOT EDIT)'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
 const SESSION_DATA_RANGE = 'A3:M'
@@ -26,8 +26,6 @@ export default class Importer extends BaseImporter {
       throw new Error('Invalid importer type for gsheet module')
     if (!importer.config.sheetId)
       throw new Error('Sheet ID is missing for gsheet module')
-    if (!process.env.GOOGLE_API_KEY)
-      throw new Error('API key is missing for gsheet module')
     this.googleSheetService = new GoogleSheetService(
       importer.config.sheetId
     )
@@ -115,7 +113,12 @@ export default class Importer extends BaseImporter {
             this.event.id
           ),
         ])
-
+        //change 18/11/2020 to 2020-11-18
+        const newDate = () => {
+          const date = Day.split('/')
+          return `${date[2]}-${date[1]}-${date[0]}`
+        }
+        debugger
         const session = {
           name: Name,
           description: Description,
@@ -124,10 +127,18 @@ export default class Importer extends BaseImporter {
           organizationId: this.event.organizationId,
           speakers: speakers,
           start: moment
-            .tz(`${Day} ${Start}:00`, this.event.timezone)
+            .tz(
+              `${newDate()} ${Start}:00`,
+              'YYYY-MM-DD HH:mm:ss',
+              this.event.timezone
+            )
             .valueOf(),
           end: moment
-            .tz(`${Day} ${End}:00`, this.event.timezone)
+            .tz(
+              `${newDate()} ${End}:00`,
+              'YYYY-MM-DD HH:mm:ss',
+              this.event.timezone
+            )
             .valueOf(),
           videoUrl: row[12],
         }

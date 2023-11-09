@@ -10,20 +10,21 @@ import Chat from '@/plugins/Chat'
 import Player from '@/components/misc/Player'
 import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { StageContext } from './StageContext'
 import EmbedButton from '@/components/misc/EmbedButton'
 import ShareButton from '@/components/misc/ShareButton'
 import { LoadingContext } from '@/components/context/LoadingContext'
-
+import { MobileContext } from '@/components/context/MobileContext'
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
+  const [playerHeight, setPlayerHeight] = useState(0)
   const { setIsLoading } = useContext(LoadingContext)
-
+  const { isMobile } = useContext(MobileContext)
   useLayoutEffect(() => {
     if (stickyRef.current) {
-      setBottomOffset(stickyRef.current.clientHeight)
+      setBottomOffset(stickyRef.current.clientHeight + 70)
+      setPlayerHeight(stickyRef.current.clientHeight)
     }
     setIsLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,14 +34,32 @@ export default function StageLayout() {
 
   if (!context) return null
 
-  const { stage, sessions, currentSession } = context
+  const { stage, sessions } = context
 
+  const getPluginTabs = () => {
+    const tabs = []
+
+    if (sessions.length > 0) {
+      tabs.push({
+        id: 'schedule',
+        header: <CalendarIcon />,
+        content: <SessionList sessions={sessions} />,
+      })
+    }
+    tabs.push({
+      id: 'chat',
+      header: <ChatBubbleBottomCenterIcon />,
+      content: <Chat conversationId={stage.id} />,
+    })
+
+    return tabs
+  }
   return (
-    <div className="flex flex-col w-full lg:flex-row relative lg:p-4 lg:gap-4">
-      <div className="flex flex-col w-full lg:flex-row relative lg:gap-4">
+    <div className="h-full flex flex-col w-full lg:flex-row relative lg:p-4 lg:max-h-screen">
+      <div className="h-full flex flex-col w-full lg:flex-row relative p-2 lg:gap-4">
         <div
           ref={stickyRef}
-          className="sticky top-0 z-30 flex flex-col w-full lg:h-full lg:w-[70%] box-border lg:overflow-scroll">
+          className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky top-[65px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
           <ActionsComponent title={stage.name}>
             <EmbedButton
               streamId={stage.streamSettings.streamId}
@@ -53,21 +72,12 @@ export default function StageLayout() {
             playerName={stage.name}
           />
         </div>
-        <div className="relative flex flex-col w-full pt-0 lg:p-0 lg:px-2 lg:h-full lg:w-[30%] lg:mt-0">
+        <div
+          style={{ height: isMobile ? '100%' : playerHeight }}
+          className={`w-full lg:w-[25%]`}>
           <PluginBar
             bottomOffset={bottomOffset}
-            tabs={[
-              {
-                id: 'schedule',
-                header: <CalendarIcon />,
-                content: <SessionList sessions={sessions} />,
-              },
-              {
-                id: 'chat',
-                header: <ChatBubbleBottomCenterIcon />,
-                content: <Chat conversationId={stage.id} />,
-              },
-            ]}
+            tabs={getPluginTabs()}
           />
         </div>
       </div>

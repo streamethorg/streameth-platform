@@ -1,0 +1,32 @@
+{
+  "id": "zuconnect_istanbul",
+  "name": "ZuConnect Istanbul",
+  "description": "Embark on a transformative journey at ZuConnect before DevConnect — a two-week popup village in Istanbul where the luminaries of crypto, AI, governance, decentralized science, and culture coalesce. We will convene to co-work, foster collaborations, and build and test new projects in the above mentioned fields. \n\n\nLooking for the ZuConnect Hacker Applications? Check here\n\nLooking for ZuConnect Scholarship Applications? Check here",
+  "start": "2023-10-30T11:39:18.573Z",
+  "end": "2023-10-30T11:39:18.573Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "zuzalu",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1hv434Sl3EWRyv7J69BwBEc2sq0ZlAxIrYZF1D556kjs",
+        "apiKey": "a"
+      }
+    }
+  ],
+  "eventCover": "5Ie2qQzG.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "zuzalu-logo.png",
+  "banner": "zuzalu-banner.png",
+  "accentColor": "#047C66",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": { "driveId": "", "driveApiKey": "" }
+    }
+  ],
+  "startTime": "13:00"
+}

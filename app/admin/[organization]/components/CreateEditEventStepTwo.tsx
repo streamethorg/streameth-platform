@@ -1,20 +1,10 @@
 import { FormTextInput } from '@/app/utils/FormTextInput'
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react'
-import {
-  GSheetConfig,
-  IDataExporter,
-  IDataImporter,
-  IEvent,
-  PretalxConfig,
-} from '@/server/model/event'
+import React, { useEffect, useState } from 'react'
+import { GSheetConfig, PretalxConfig } from '@/server/model/event'
 import FormRadio from '@/app/utils/FormRadio'
 import FormLabel from '@/app/utils/FormLabel'
 import FormRadioBox from '@/app/utils/FormRadioBox'
+import UseAdminContext from '@/app/hooks/useAdminContext'
 
 const initialImporterConfig: GSheetConfig & PretalxConfig = {
   sheetId: '',
@@ -28,20 +18,14 @@ const initialExporterConfig: GSheetConfig = {
   driveApiKey: '',
 }
 
-interface Props {
-  formData: Omit<IEvent, 'id'>
-  setFormData: Dispatch<SetStateAction<Omit<IEvent, 'id'>>>
-  handleDataImporterChange: (importer: IDataImporter) => void
-  handleDataExporterChange: (exporter: IDataExporter) => void
-  validationErrors?: Record<string, any>
-}
+const CreateEditEventStepTwo = () => {
+  const {
+    formData,
+    setFormData,
+    handleDataImporterChange,
+    handleDataExporterChange,
+  } = UseAdminContext()
 
-const CreateEditEventStepTwo = ({
-  formData,
-  setFormData,
-  handleDataImporterChange,
-  handleDataExporterChange,
-}: Props) => {
   const [dataExportSelectedType, setDataExportSelectedType] =
     useState('gdrive')
   const [selectedType, setSelectedType] = useState<string>(

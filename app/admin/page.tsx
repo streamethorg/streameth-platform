@@ -7,12 +7,12 @@ const OrganizationList = async () => {
   const organizations =
     await organizationController.getAllOrganizations()
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
+    <div className="h-full overflow-y-scroll ">
+      <div className="flex flex-row sticky top-0 p-4 shadow bg-white items-center justify-between">
         <h2 className="text-2xl">Welcome back</h2>
         <AddOrganizationButton />
       </div>
-      <ul className="space-y-4">
+      <ul className="space-y-4 p-4">
         {organizations.map((org) => (
           <OrganizationEntry key={org.id} organization={org} />
         ))}

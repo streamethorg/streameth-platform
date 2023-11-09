@@ -1,10 +1,19 @@
 const Card = ({
+  bgColor = 'bg-base',
   children,
 }: {
+  bgColor?: string
   children: React.ReactNode
   isAvailable?: boolean
 }) => (
-  <div className="border shadow rounded p-2 border-neutral-200 hover:bg-gray-100 transition-colors">
+  <div
+    style={{
+      backgroundColor: bgColor,
+      color: bgColor ? 'white' : 'black',
+    }}
+    className={`h-full p-2 ${
+      bgColor ? bgColor : 'bg-base'
+    } text-white transition-all rounded-xl hover:shadow-xl uppercase`}>
     {children}
   </div>
 )

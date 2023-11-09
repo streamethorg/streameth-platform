@@ -16,8 +16,8 @@ export const TopNavbarContext = createContext<{
   setHomePath: React.Dispatch<React.SetStateAction<string>>
   stages: Page[] | undefined
   setStages: React.Dispatch<React.SetStateAction<Page[] | undefined>>
-  showNav?: boolean
-  setShowNav?: React.Dispatch<React.SetStateAction<boolean>>
+  showNav: boolean
+  setShowNav: React.Dispatch<React.SetStateAction<boolean>>
   components: React.ReactNode[]
   setComponents: React.Dispatch<
     React.SetStateAction<React.ReactNode[]>

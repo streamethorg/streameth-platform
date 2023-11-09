@@ -1,12 +1,20 @@
 'use client'
-import { ReactNode, useEffect, useContext } from 'react'
+import {
+  ReactNode,
+  useEffect,
+  useContext,
+  ReactComponentElement,
+} from 'react'
 import { IEvent } from '@/server/model/event'
 import { IStage } from '@/server/model/stage'
 import { ISpeaker } from '@/server/model/speaker'
 import { ISession } from '@/server/model/session'
 import { usePathname } from 'next/navigation'
 import colors from '@/app/constants/colors'
-import { TopNavbarContext } from '@/components/context/TopNavbarContext'
+import {
+  Page,
+  TopNavbarContext,
+} from '@/components/context/TopNavbarContext'
 import {
   HomeIcon,
   ViewColumnsIcon,
@@ -34,15 +42,20 @@ const ColorComponent = ({
     useContext(TopNavbarContext)
   const { accentColor, logo, organizationId, id } = event
   const isNotOrganization =
-    pathname === '/' || pathname.includes('/admin')
+    pathname === '/' || pathname.match(/^\/[a-zA-Z0-9]+$/)
 
-  const pages = [
-    {
-      href: `/${organizationId}/${id}#home`,
-      name: 'Home',
-      icon: <HomeIcon />,
-    },
-  ]
+  const pages: Page[] = []
+
+  const sessionWithVideo = sessions.filter(
+    (session) => session.videoUrl
+  )
+
+  if (sessionWithVideo.length > 0)
+    pages.push({
+      href: `/${organizationId}/${id}/archive`,
+      name: 'Archive',
+      icon: <ViewColumnsIcon />,
+    })
 
   if (sessions.length > 0)
     pages.push({
@@ -79,14 +92,16 @@ const ColorComponent = ({
   useEffect(() => {
     setLogo('/events/' + logo)
     if (event.archiveMode) {
-      setComponents([
-        <FilterBar
-          key="1"
-          sessions={sessions}
-          speakers={speakers}
-          stages={stages}
-        />,
-      ])
+      if (!pathname.includes('/session/')) {
+        setComponents([
+          <FilterBar
+            key="1"
+            sessions={sessions}
+            speakers={speakers}
+            stages={stages}
+          />,
+        ])
+      }
     } else {
       setPages([...pages, ...stagePages()])
     }
@@ -95,7 +110,7 @@ const ColorComponent = ({
       setPages([])
       setLogo('')
     }
-  }, [event])
+  }, [event, pathname])
 
   useEffect(() => {
     if (!isNotOrganization && accentColor) {
@@ -115,7 +130,7 @@ const ColorComponent = ({
         colors.accent
       )
     }
-  }, [accentColor, isNotOrganization])
+  }, [accentColor, isNotOrganization, pathname])
 
   return children
 }

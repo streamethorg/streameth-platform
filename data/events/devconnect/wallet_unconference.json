@@ -1,0 +1,35 @@
+{
+  "id": "wallet_unconference",
+  "name": "Wallet Unconference",
+  "description": "",
+  "start": "2023-11-17T00:00:00.000Z",
+  "end": "2023-11-17T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "devconnect",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1dLl-rVjjciYA0v5EJpFxkYOhGfrdp_9aDrhjH5S",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1C5VBsXVWvV7fWa9SoMAaMPiWsY6OkWKR",
+        "driveApiKey": ""
+      }
+    }
+  ],
+  "eventCover": "wallet_unconference_logo.jpeg",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "wallet_unconference_logo.jpeg",
+  "banner": "wallet_unconference_banner.jpeg",
+  "accentColor": "gray",
+  "startTime": "8:30"
+}

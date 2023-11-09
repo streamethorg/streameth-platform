@@ -1,0 +1,20 @@
+{
+  "id": "walkthrough_of_the_frontier_of_neurotech_technologies_companies_scientific_breakthroughs",
+  "name": "Walkthrough of the frontier of neurotech (technologies, companies, scientific breakthroughs)",
+  "description": "Tutorial on what current and near-future neurotechnologies are. (No expert knowledge required to attend, but will get technical)",
+  "start": 1698748200000,
+  "end": 1698750000000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "juan_benet",
+      "name": "Juan Benet",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__neurotech_track"
+    }
+  ],
+  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/1cd33iuq0024az40/index.m3u8",
+  "eventId": "zuconnect_istanbul__neurotech_track",
+  "coverImage": "/sessions/zuconnect_istanbul__neurotech_track/walkthrough_of_the_frontier_of_neurotech_technologies_companies_scientific_breakthroughs.jpg"
+}

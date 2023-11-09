@@ -29,6 +29,7 @@ export default class SessionController {
       ses.eventId,
       ses.id
     )
+    ses.validateThis()
     await this.controller.create(sessionQuery, ses)
     return ses
   }

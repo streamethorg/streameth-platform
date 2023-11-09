@@ -1,24 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-radial':
+          'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        base: '#ffffff',
+        base: 'rgba(19,21,23,0.48)',
         background: '#ffffff',
-        primary: '#f5f6fa',
+        primary: 'transparent',
         accent: 'var(--colors-accent)',
         medGrey: '#666666',
         grey: '#A9A9A9',
-        'main-text': '#2b2b2b',
+        'main-text': 'white',
         'secondary-text': '#b1b0b4',
         'accent-text': '#3d5afe',
         green: '#2CB83A',
         danger: '#FF5A5A',
+        blue: '#351B71',
       },
       boxShadow: {
         '3xl': 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',

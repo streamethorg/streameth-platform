@@ -22,7 +22,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
       router.push(`${event.organizationId}/${event.id}`)
     } else {
       openModal(
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col  items-center">
           <h1 className="text-2xl text-main-text font-bold">
             This event has no data yet
           </h1>
@@ -36,10 +36,8 @@ const EventCard = ({ event }: { event: IEvent }) => {
   }
 
   return (
-    <a
-      onClick={onCardClick}
-      className="cursor-pointer hover:bg-gray-50 transition-all">
-      <Card isAvailable={isAvailable}>
+    <div onClick={onCardClick} className="cursor-pointer">
+      <Card isAvailable={isAvailable} bgColor="white">
         <div className="aspect-video relative">
           <Image
             className="rounded"
@@ -60,15 +58,17 @@ const EventCard = ({ event }: { event: IEvent }) => {
             }}
           />
         </div>
-        <div className=" p-2 flex flex-col" title={event.name}>
-          <p className=" text-md my-2 truncate">{event.name}</p>
-          <p className="text-md text-secondary-text">
+        <div className="p-2 flex flex-col" title={event.name}>
+          <p className="text-md text-blue font-semibold my-2 truncate">
+            {event.name}
+          </p>
+          <p className="text-md  text-blue">
             {event.start.toDateString?.()} -{' '}
             {event.end.toDateString?.()}
           </p>
         </div>
       </Card>
-    </a>
+    </div>
   )
 }
 

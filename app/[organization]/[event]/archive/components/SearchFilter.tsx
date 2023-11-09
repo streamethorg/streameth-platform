@@ -79,12 +79,16 @@ const SearchFilter = <T extends object>({
             value={filterInput}
             onChange={(e) => setFilterInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="p-2 italic border w-full rounded bg-primary text-main-text placeholder:text-main-text placeholder:text-sm"
+            className={`p-2 italic  w-full bg-base ${
+              filterInput && selectedItems.length === 0
+                ? 'rounded-t-xl'
+                : 'rounded-xl'
+            }  text-main-text placeholder:text-main-text placeholder:text-sm`}
           />
           <div className="h-full justify-center items-center flex absolute right-0 top-0">
             {selectedItems.length > 0 && (
               <div
-                className="flex items-center justify-center  cursor-pointer bold text-white bg-accent rounded w-5 h-5 mr-2 my-auto"
+                className="flex items-center justify-center  cursor-pointer bold text-white bg-base rounded-xl w-5 h-5 mr-2 my-auto"
                 onClick={clearSelectedOption}>
                 X
               </div>
@@ -92,14 +96,14 @@ const SearchFilter = <T extends object>({
           </div>
         </div>
         {filterInput && selectedItems.length === 0 && (
-          <div className="absolute left-0 md:left-[unset] top-fullborder rounded-b-md shadow-md w-full max-w-[600px] p-4 z-50 bg-primary max-h-40  overflow-auto">
+          <div className="absolute left-0 md:left-[unset]  top-fullborder rounded-b-md shadow-md w-full max-w-[600px] z-50 bg-accent max-h-40  overflow-auto">
             {filteredOptions().length === 0 ? (
-              <div className="py-1">{`No ${filterName} found`}</div>
+              <div className="p-4 text-white bg-base">{`No ${filterName} found`}</div>
             ) : (
               filteredOptions().map((option, index) => (
                 <div
                   key={index}
-                  className="cursor-pointer py-1 lg:text-lg w-full hover:bg-accent hover:text-white"
+                  className="cursor-pointer py-1 lg:text-lg w-full text-white bg-base  p-4 hover:bg-white hover:text-black"
                   onClick={() => handleOptionSelect(option)}>
                   {option.name}
                 </div>

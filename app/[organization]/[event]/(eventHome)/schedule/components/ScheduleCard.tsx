@@ -3,6 +3,7 @@ import { ISession } from '@/server/model/session'
 import { ModalContext } from '@/components/context/ModalContext'
 import { useContext } from 'react'
 import ScheduleCardModal from './ScheduleCardModal'
+import moment from 'moment-timezone'
 
 const ScheduleCard = ({
   session,
@@ -20,32 +21,21 @@ const ScheduleCard = ({
 
   return (
     <div
-      className="flex space-y-3 flex-col w-full h-full bg-base border shadow rounded p-1 md:p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+      className="bg-black/20 flex space-y-3 flex-col w-full h-full   rounded p-2 md:p-2 text-white cursor-pointer transition-colors"
       onClick={() => {
         openModal(<ScheduleCardModal session={session} />)
       }}>
-      <div className=" border-l border-accent hover:border-l-2 flex flex-col px-2 rounded-tr rounded-br w-full h-full">
+      <div className="border-l border-white  hover:border-l-2 flex flex-col px-2 rounded-tr rounded-br w-full h-full">
         {showTime && (
           <p className="text-main-text text-sm uppercase py-1">
-            {new Date(session.start)
-              .getHours()
-              .toString()
-              .padStart(2, '0') +
-              ':' +
-              new Date(session.start)
-                .getMinutes()
-                .toString()
-                .padStart(2, '0')}
+            {moment(session.start)
+              .tz('Europe/Istanbul')
+              .format('HH:mm')}{' '}
             -
-            {new Date(session.end)
-              .getHours()
-              .toString()
-              .padStart(2, '0') +
-              ':' +
-              new Date(session.end)
-                .getMinutes()
-                .toString()
-                .padStart(2, '0')}
+            {moment(session.end)
+              .tz('Europe/Istanbul')
+              .format('HH:mm')}{' '}
+            (GMT +3)
           </p>
         )}
         <p className="flex text-ellipsis text-main-text text-sm lg:text-md">

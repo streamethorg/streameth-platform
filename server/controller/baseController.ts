@@ -1,14 +1,12 @@
 import FsController from './dataStore/fs'
-import fs from 'fs'
-import { getEnvironment } from '../utils'
 import DbController from './dataStore/db'
+import fs from 'fs'
 
 interface IBaseController<T> {
   create: (query: string, data: T) => Promise<void>
   get: (query: string) => Promise<T>
   getAll: (query: string) => Promise<T[]>
-  // update: (id: string, data: T) => Promise<T>;
-  delete: (id: string) => void
+  // delete: (id: string) => Promise<T>;
 }
 
 type StoreType = 'fs' | 'db'
@@ -29,8 +27,34 @@ export default class BaseController<T> implements IBaseController<T> {
     }
   }
 
-  async create(query: string, data: T): Promise<void> {
-    return this.store.write(query, JSON.stringify(data))
+  private mergeObjects(target: any, source: any): any {
+    Object.keys(source).forEach((key) => {
+      const sourceKey = key as keyof T
+      if (source[sourceKey] !== undefined) {
+        // Only overwrite if the value is not undefined
+        target[sourceKey] = source[sourceKey]
+      }
+    })
+    return target // Return the modified target object
+  }
+
+  public async create(query: string, data: T): Promise<void> {
+    let existingData: T | null = null
+    // read the existing data
+    const existingDataString = await this.store.read(query)
+
+    if (existingDataString) {
+      existingData = JSON.parse(existingDataString)
+    }
+
+    // If no existing data is found, create new data
+    if (!existingData) {
+      existingData = {} as T // Create an empty object if no existing data is found
+    }
+
+    const updatedData = this.mergeObjects(existingData, data)
+
+    await this.store.write(query, JSON.stringify(updatedData))
   }
 
   async get(query: string): Promise<T> {
@@ -42,7 +66,21 @@ export default class BaseController<T> implements IBaseController<T> {
       process.exit(1)
     }
 
-    return this.store.read(query).then((data) => JSON.parse(data))
+    return new Promise((resolve, reject) => {
+      this.store
+        .read(query)
+        .then((data) => {
+          try {
+            const parsedData = JSON.parse(data)
+            resolve(parsedData)
+          } catch (error) {
+            reject(`Error parsing JSON data: ${error}`)
+          }
+        })
+        .catch((error) => {
+          reject(`Error reading file: ${error}`)
+        })
+    })
   }
 
   async getAll(query: string): Promise<T[]> {
@@ -62,11 +100,7 @@ export default class BaseController<T> implements IBaseController<T> {
     return Promise.all(dataPromises)
   }
 
-  // update(id: string, data: T): Promise<T> {
-  //   return this.store.update(id, data);
-  // }
-
-  delete(id: string, organizationId?: string) {
-    this.store.delete(id, organizationId)
+  delete(id: string) {
+    this.store.delete(id)
   }
 }

@@ -1,76 +1,35 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
-import { IEvent } from '@/server/model/event'
+import { useRef } from 'react'
 import SearchFilter from '@/app/[organization]/[event]/archive/components/SearchFilter'
-import { FilterContext } from '@/components/context/FilterContext'
+import { ISession } from '@/server/model/session'
+import { IEvent } from '@/server/model/event'
 
-const FilterBar = ({ events }: { events: IEvent[] }) => {
-  const { setFilterOptions } = useContext(FilterContext)
-  const [isShowCurrent, setIsShowCurrent] = useState(false)
+function FilterBar({ events }: { events?: IEvent[] }) {
+  const inputBarRef = useRef<HTMLDivElement>(null)
 
-  const eventFilter = events.map((event) => {
-    return {
-      name: event.name,
-      value: event.id,
-      type: 'event',
-      filterFunc: async (item: IEvent) => {
-        return item.id === event.id
-      },
-    }
-  })
-
-  const handleTabClick = () => {
-    setFilterOptions([
-      {
-        name: 'date',
-        value: 'date',
-        type: 'date',
-        filterFunc: async (item: IEvent) => {
-          const endOfDay = new Date(item.end)
-          endOfDay.setHours(23, 59, 59, 999)
-
-          const startOfDay = new Date()
-          startOfDay.setHours(0, 0, 0, 0)
-
-          return isShowCurrent
-            ? endOfDay.getTime() <= Date.now()
-            : endOfDay.getTime() > startOfDay.getTime()
-        },
-      },
-    ])
-  }
-
-  useEffect(() => {
-    handleTabClick()
-  }, [isShowCurrent])
+  const eventFilters = events
+    ? events.map((event) => {
+        return {
+          name: event.name,
+          value: event.id,
+          type: 'event',
+          filterFunc: async (item: ISession) => {
+            return item.eventId === event.id
+          },
+        }
+      })
+    : []
 
   return (
-    <div className="bg-base p-4 sticky top-0 z-40 w-full flex justify-center items-center drop-shadow-md">
-      <div className=" w-full flex flex-col sm:flex-row items-center">
-        <div className="flex flex-row w-full justify-center md:justify-start">
-          <h1
-            className={` text-xl md:text-2xl font-bold  ${
-              isShowCurrent
-                ? 'text-secondary-text cursor-pointer'
-                : 'text-main-text'
-            } border-r-2 border-accent pr-4`}
-            onClick={() => setIsShowCurrent(false)}>
-            Upcoming events
-          </h1>
-          <h1
-            className={`text-xl md:text-2xl text-main-text font-bold ml-4 ${
-              !isShowCurrent
-                ? 'text-secondary-text cursor-pointer'
-                : 'text-main-text'
-            }`}
-            onClick={() => setIsShowCurrent(true)}>
-            Past events
-          </h1>
-        </div>
-        <div className="w-full max-w-[20rem] m-auto lg:ml-auto my-4">
+    <div
+      key={1}
+      className={` w-full max-w-[400px] z-50 bg-transparent rounded-xl text-white `}
+      ref={inputBarRef}>
+      <div className="flex flex-col justify-top items-start  w-full h-full">
+        <div className="flex flex-row w-full h-full items-center justify-center">
           <SearchFilter
-            filterOptions={eventFilter}
-            filterName="Search for an event..."
+            filterOptions={eventFilters}
+            filterName="Event name"
           />
         </div>
       </div>

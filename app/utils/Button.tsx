@@ -9,6 +9,7 @@ const buttonVariants = cva(
         default:
           'text-white bg-accent hover:bg-transparent hover:text-accent hover:border-accent',
         danger: 'bg-danger text-white',
+        base: 'bg-base text-white hover:text-black',
         outline:
           'text-accent bg-transparent border-accent hover:text-white hover:bg-accent',
         green: 'bg-transparent text-accent border-green',

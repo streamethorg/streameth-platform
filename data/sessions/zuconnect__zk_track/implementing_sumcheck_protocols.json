@@ -1,0 +1,28 @@
+{
+  "id": "implementing_sumcheck_protocols",
+  "name": "Implementing Sumcheck Protocols",
+  "description": "",
+  "start": 1699281000000,
+  "end": 1699282800000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "althea_allen",
+      "name": "Althea Allen \n",
+      "bio": "No description",
+      "eventId": "zuconnect__zk_track"
+    },
+    {
+      "id": "zac",
+      "name": "Zac",
+      "bio": "No description",
+      "eventId": "zuconnect__zk_track"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/9216xxoyljf5v5je/index.m3u8",
+  "playbackId": "9216xxoyljf5v5je",
+  "eventId": "zuconnect__zk_track",
+  "coverImage": "/sessions/zuconnect__zk_track/implementing_sumcheck_protocols.jpg",
+  "assetId": "9216753b-08f4-4c1f-b39e-e6b695e34edc",
+  "videoType": "clip"
+}

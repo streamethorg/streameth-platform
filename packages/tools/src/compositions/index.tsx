@@ -1,106 +1,75 @@
-import { Composition, Folder, Still } from 'remotion'
-import Session from './ftc/session'
-import { G_FPS } from '../consts'
-import { Intro } from './devconnect/intro'
-import { Social } from './devconnect/social'
+import { Composition, Folder, Still, continueRender, delayRender } from 'remotion'
 import { MOCK_SESSION } from '../utils/mocks'
-
-export const DevconnectISTDuration = 12 * G_FPS
-export const FtcDuration = 170
+import { Fragment } from 'react'
+import { JoinVideos } from './join'
+import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration, DevconnectISTFont, Join, Intro, Social } from './devconnect'
 
 export function Compositions() {
+  const waitForFont = delayRender()
+  const font = DevconnectISTFont
+
+  font.load().then(() => {
+    document.fonts.add(font)
+    continueRender(waitForFont)
+  }).catch((err) => console.log("Error loading font", err))
+
   return (
     <>
       <Folder name="Devconnect">
-        <Composition
-          id="evm-summit"
-          component={Intro}
-          width={1920}
-          height={1080}
-          durationInFrames={DevconnectISTDuration}
-          fps={G_FPS}
-          defaultProps={{ type: '1', logo: 'evm-summit', session: MOCK_SESSION[0] }}
-        />
-        <Still id="evm-summit-social" component={Social} width={1200} height={630} defaultProps={{
-          type: '1',
-          logo: 'evm-summit',
-          session: MOCK_SESSION[0]
-        }} />
+        {DevconnectEvents.map((event) => (
+          <Fragment key={event.id}>
+            <Composition
+              id={event.id}
+              component={Intro}
+              width={1920}
+              height={1080}
+              durationInFrames={DevconnectIntroDuration}
+              fps={DevconnectFrameRate}
+              defaultProps={{ type: event.type, id: event.id, session: MOCK_SESSION[0] }}
+            />
+
+            <Still id={`${event.id}-social`} component={Social} width={1200} height={630} defaultProps={{ type: event.type, id: event.id, session: MOCK_SESSION[1] }} />
+          </Fragment>
+        ))}
 
         <Composition
-          id="devconnect-ist-2"
-          component={Intro}
+          id={'join-devconnect-ist'}
+          component={Join}
           width={1920}
           height={1080}
-          durationInFrames={DevconnectISTDuration}
-          fps={G_FPS}
-          defaultProps={{ type: '2', session: MOCK_SESSION[1] }}
-        />
-        <Still id="devconnect-ist-social-2" component={Social} width={1200} height={630} defaultProps={{
-          type: '2',
-          session: MOCK_SESSION[1]
-        }} />
-
-        <Composition
-          id="devconnect-ist-3"
-          component={Intro}
-          width={1920}
-          height={1080}
-          durationInFrames={DevconnectISTDuration}
-          fps={G_FPS}
-          defaultProps={{ type: '3', session: MOCK_SESSION[2] }}
-        />
-
-        <Composition
-          id="devconnect-ist-4"
-          component={Intro}
-          width={1920}
-          height={1080}
-          durationInFrames={DevconnectISTDuration}
-          fps={G_FPS}
-          defaultProps={{ type: '4', session: MOCK_SESSION[3] }}
-        />
-        
-        <Composition
-          id="devconnect-ist-5"
-          component={Intro}
-          width={1920}
-          height={1080}
-          durationInFrames={DevconnectISTDuration}
-          fps={G_FPS}
-          defaultProps={{ type: '5', session: MOCK_SESSION[0] }}
-        />
-        <Composition
-          id="devconnect-ist-6"
-          component={Intro}
-          width={1920}
-          height={1080}
-          durationInFrames={DevconnectISTDuration}
-          fps={G_FPS}
-          defaultProps={{ type: '6', session: MOCK_SESSION[1] }}
-        />
-        <Composition
-          id="devconnect-ist-7"
-          component={Intro}
-          width={1920}
-          height={1080}
-          durationInFrames={DevconnectISTDuration}
-          fps={G_FPS}
-          defaultProps={{ type: '7', session: MOCK_SESSION[2] }}
+          fps={DevconnectFrameRate}
+          durationInFrames={DevconnectIntroDuration + (20 * 25) + DevconnectOutroDuration - 75} // intro (12s) + example video (20s) + outro (9s) minus 25 frames (1 sec) per transition
+          defaultProps={{
+            id: 'opening_remarks',
+            eventId: 'epf-day',
+            type: '2',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            videoDuration: 20 * 25, // need to set this dynamically
+            session: MOCK_SESSION[0]
+          }}
         />
       </Folder>
 
-      <Folder name="Ftc">
-        <Composition
-          id={MOCK_SESSION[0].id.replace(/_/g, '-')}
-          component={Session}
-          width={1920}
-          height={1080}
-          durationInFrames={FtcDuration}
-          fps={G_FPS}
-          defaultProps={{ session: MOCK_SESSION[0] }}
-        />
-      </Folder>
+      <Composition
+        id={'join-videos'}
+        component={JoinVideos}
+        width={1920}
+        height={1080}
+        fps={25}
+        durationInFrames={525} // Total of all video durations minus 25 frames (1 sec) per transition
+        defaultProps={{
+          videos: [{
+            pathOrUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: 150
+          }, {
+            pathOrUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: 300
+          }, {
+            pathOrUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            duration: 150
+          }]
+        }}
+      />
     </>
   )
 }

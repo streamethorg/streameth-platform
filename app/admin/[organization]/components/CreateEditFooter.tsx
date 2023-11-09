@@ -1,34 +1,21 @@
-import React, { Dispatch, SetStateAction, useContext } from 'react'
+import React, { useContext } from 'react'
 import StatusBarOneIcon from '@/app/assets/icons/StatusBarOneIcon'
 import StatusBarTwoIcon from '@/app/assets/icons/StatusBarTwoIcon'
 import StatusBarFullIcon from '@/app/assets/icons/StatusBarFullIcon'
 import { Button } from '@/app/utils/Button'
 import { ModalContext } from '@/components/context/ModalContext'
 import { IEvent } from '@/server/model/event'
-import { useRouter } from 'next/navigation'
-import { useTransition } from 'react'
+import { EventFormContext } from './EventFormContext'
+import UseAdminContext from '@/app/hooks/useAdminContext'
+const CreateEditFooter = () => {
+  const { currentStep, setCurrentStep, event } = UseAdminContext()
 
-interface CreateEditFooterProps {
-  currentStep: number
-  setCurrentStep: Dispatch<SetStateAction<number>>
-  event?: IEvent
-  organizationId: string
-  formData: Omit<IEvent, 'id'>
-}
-
-const CreateEditFooter = ({
-  setCurrentStep,
-  currentStep,
-  event,
-  organizationId,
-  formData,
-}: CreateEditFooterProps) => {
   const { openModal, closeModal } = useContext(ModalContext)
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const handleDelete = () => {
     fetch(
-      `/api/organizations/${organizationId}/events/${formData.name}`,
+      `/api/organizations/${event?.organizationId}/events/${event?.id}`,
       {
         method: 'DELETE',
         headers: {
@@ -79,7 +66,7 @@ const CreateEditFooter = ({
     if (currentStep > 1) setCurrentStep(currentStep - 1)
   }
   return (
-    <div className="flex justify-between items-center flex-col lg:flex-row gap-5 mt-5">
+    <div className="flex flex-row sticky w-full bottom-0 p-4 shadow bg-white items-center justify-between">
       <div>
         {event && (
           <Button

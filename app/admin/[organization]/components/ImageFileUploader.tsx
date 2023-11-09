@@ -13,7 +13,7 @@ interface ImageFileUploaderProps {
   toolTipHTML?: string
   aspectRatio?: number
   imageKey?: string
-  validationErrors?: Record<string, any>
+  validationErrors?: Record<string, any> | string | undefined
   onImageSubmit: (
     event: Blob,
     key: string,
@@ -59,14 +59,7 @@ const ImageFileUploader = ({
       img.onload = () => {
         const { naturalWidth, naturalHeight } = img
         const imageAspectRatio = naturalWidth / naturalHeight
-        if (imageAspectRatio === aspectRatio && imageKey) {
-          onImageSubmit(file, imageKey, setLoading)
-        } else {
-          setError(
-            `Aspect ratio does not match the required ${aspectRatio}.`
-          )
-          setLoading(false)
-        }
+        if (imageKey) onImageSubmit(file, imageKey, setLoading)
       }
     }
     reader.readAsDataURL(file)

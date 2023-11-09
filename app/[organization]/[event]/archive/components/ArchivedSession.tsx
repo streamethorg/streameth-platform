@@ -43,7 +43,9 @@ const ArchivedSession = ({
           onError={handleError}
         />
       </div>
-      {/* <p className="border-b-2 border-accent p-2 py-4 flex flex-grow text-md ">{session.name}</p>  */}
+      <p className=" p-2 py-4 flex flex-grow text-md ">
+        {session.name}
+      </p>
     </Card>
   )
 

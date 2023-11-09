@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import { SocialIcon } from 'react-social-icons'
 import { useContext, useEffect, useState } from 'react'
 import { TopNavbarContext } from '../context/TopNavbarContext'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -22,11 +21,11 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="md:hidden z-50 w-[50px]">
+    className="md:hidden z-50 ">
     {!isNavVisible ? (
-      <Bars3Icon className="w-7 h-7 border-2 border-accent rounded text-white bg-accent mx-auto" />
+      <Bars3Icon className="w-7 h-7 bg-base  rounded text-white mx-auto" />
     ) : (
-      <XMarkIcon className="w-7 h-7 border-2 border-accent rounded text-white bg-accent mx-auto" />
+      <XMarkIcon className="w-7 h-7 bg-base  rounded  text-white mx-auto" />
     )}
   </button>
 )
@@ -50,11 +49,12 @@ export default function NavbarTop() {
   }
 
   return (
-    <header className="sticky z-50 flex flex-row bg-base border-b border-primary w-full ml-auto  p-4 py-2 top-0 h-16 lg:h-20">
+    <header className="sticky z-[99999] flex flex-row items-center bg-accent border-b border-primary w-full ml-auto p-4 py-2 top-0 h-16 lg:h-20">
       <div className=" flex items-center w-20">
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
           <Image
+            className="rounded-full"
             src={logo}
             alt="Logo"
             width={50}
@@ -65,19 +65,19 @@ export default function NavbarTop() {
           />
         </Link>
       </div>
-      <div className="flex flex-row items-center justify-end w-full">
+      <div className="flex flex-row items-center justify-between w-full">
         {menuVisible && <Navbar pages={pages} />}
         {components.length > 0 &&
           components.map((component, index) => {
             return (
-              <div className="w-full px-2" key={index}>
+              <div className="flex-1 px-2" key={index}>
                 {component}
               </div>
             )
           })}
-        <div className="flex">
+        {/* <div className="flex">
           <SocialIcon
-            url={`https://twitter.com/Scroll_ZKP`}
+            url={`https://twitter.com/streameth`}
             target="_blank"
             bgColor="#fff"
             fgColor="#1DA1F2"
@@ -90,14 +90,19 @@ export default function NavbarTop() {
             fgColor="#000"
             className={`"h-8 w-8"`}
           />
-          {pages.length > 1 && (
-            <NavBarButton
-              isNavVisible={menuVisible}
-              setIsNavVisible={setMenuVisible}
-            />
-          )}
-        </div>
+          */}
+        {pages.length > 1 && (
+          <NavBarButton
+            isNavVisible={menuVisible}
+            setIsNavVisible={setMenuVisible}
+          />
+        )}
       </div>
+      <Link
+        href="/"
+        className="font-ubuntu p-2 min-w-fit flex items-center rounded-xl text-sm bg-base uppercase text-white ml-5">
+        Back to overview
+      </Link>
     </header>
   )
 }

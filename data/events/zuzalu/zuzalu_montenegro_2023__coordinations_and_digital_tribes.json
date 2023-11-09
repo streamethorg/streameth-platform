@@ -6,8 +6,16 @@
   "end": "2023-05-19T00:00:00.000Z",
   "location": "Montenegro",
   "organizationId": "zuzalu",
-  "dataImporter": [{ "type": "gsheet", "config": { "sheetId": "1S-2vBhIfOqvsTsDJU0Xt9Luaudvp7GucVVYIccvUVQ0", "apiKey": "l" } }],
-  "eventCover": "undefined.png",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1S-2vBhIfOqvsTsDJU0Xt9Luaudvp7GucVVYIccvUVQ0",
+        "apiKey": "l"
+      }
+    }
+  ],
+  "eventCover": "zuzalu_logo.png",
   "website": "",
   "archiveMode": true,
   "timezone": "Asia/Ho_Chi_Minh",
