@@ -21,7 +21,7 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
         ) => (
           <Card key={index} bgColor={accentColor}>
             <Link href={`/${organizationId}/${id}`}>
-              <div className="h-full rounded-xl text-white uppercase">
+              <div className="h-full bg-base rounded-xl text-white uppercase">
                 <div className="aspect-video relative">
                   <Image
                     className="rounded"
@@ -35,12 +35,10 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
                   />
                 </div>
                 <div
-                  className="flex flex-col my-2 gap-2"
+                  className="flex  flex-col py-2 gap-2"
                   title="Zuzalu">
-                  <p className=" text-sm font-bold capitalize  truncate">
-                    {name}
-                  </p>
-                  <p className=" text-sm font-medium">
+                  <p className="px-2 font-bold truncate">{name}</p>
+                  <p className="px-2 text-md font-medium">
                     {start.toDateString()}
                   </p>
                 </div>
