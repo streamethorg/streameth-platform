@@ -3,6 +3,8 @@ import { IEvent } from './model/event'
 import { StoreType } from './controller/baseController'
 
 export const generateId = (key: string) => {
+  if (!key) return ''
+
   // all lowercase, no spaces, no special characters
   return key
     .trim()
