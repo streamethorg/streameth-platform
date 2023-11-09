@@ -88,7 +88,7 @@ export async function generateMetadata(
     openGraph: {
       title: `${event.name} - ${params.stage}`,
       description: `Attend ${event.name} virtually powered by StreamETH here`,
-      images: [`https://app.streameth.org/${imageName}`],
+      images: [`https://app.streameth.org/events/${imageName}`],
     },
   }
 }
