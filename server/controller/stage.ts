@@ -1,11 +1,12 @@
 import BaseController from './baseController'
 import Stage, { IStage } from '../model/stage'
 import EventController from './event'
+import { getEnvironment } from '../utils'
 export default class StageController {
   private controller: BaseController<IStage>
 
   constructor() {
-    this.controller = new BaseController<IStage>('fs')
+    this.controller = new BaseController<IStage>(getEnvironment())
   }
 
   public async createStage(
