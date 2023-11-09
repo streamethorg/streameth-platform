@@ -94,9 +94,6 @@ export async function GetFile(
 
 export async function GetAllFiles(folder: string = DEFAULT_FOLDER) {
   try {
-    console.log(
-      `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}`
-    )
     const response = await fetch(
       `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}`,
       {
@@ -108,7 +105,6 @@ export async function GetAllFiles(folder: string = DEFAULT_FOLDER) {
       }
     )
 
-    console.log('response: ', response)
     const files = await response.json()
 
     if (Array.isArray(files)) {

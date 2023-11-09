@@ -2,7 +2,6 @@ import path from 'path'
 import { IEvent } from './model/event'
 import { StoreType } from './controller/baseController'
 
-
 export const generateId = (key: string) => {
   // all lowercase, no spaces, no special characters
   return key
@@ -20,8 +19,8 @@ export const getEnvironment = (): StoreType => {
 }
 
 export const getBasePath = () => {
-  if (environment === 'development')
-    // return path.join(process.cwd(), 'data')
+  // if (environment === 'development')
+  // return path.join(process.cwd(), 'data')
   return 'data'
 }
 

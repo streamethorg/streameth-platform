@@ -7,6 +7,8 @@ import { ModalContext } from '@/components/context/ModalContext'
 import { IEvent } from '@/server/model/event'
 import { EventFormContext } from './EventFormContext'
 import UseAdminContext from '@/app/hooks/useAdminContext'
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 const CreateEditFooter = () => {
   const { currentStep, setCurrentStep, event } = UseAdminContext()
 
@@ -30,7 +32,9 @@ const CreateEditFooter = () => {
       })
       .then(() => {
         closeModal()
-        startTransition(() => router.push(`/admin/${organizationId}`))
+        startTransition(() =>
+          router.push(`/admin/${event?.organizationId}`)
+        )
         startTransition(() => router.refresh())
         if (isPending) {
           return <div>Loading...</div>

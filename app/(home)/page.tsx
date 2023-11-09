@@ -18,8 +18,7 @@ export default async function Home() {
     })
 
   const pastEvents = allEvents.filter(
-    (event) =>
-      new Date(event.start).getTime() < new Date().getTime()
+    (event) => new Date(event.start).getTime() < new Date().getTime()
   )
 
   return (

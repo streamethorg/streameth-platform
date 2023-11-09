@@ -13,7 +13,6 @@ export const POST = async (req: NextRequest) => {
   }
 
   const body = await req.json()
-  console.log(body)
 
   const folderName = `data/sessions/${body.eventId}`
   const fileName = `${body.sessionId}.json`

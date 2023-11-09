@@ -1,12 +1,8 @@
 import EventController from '@/server/controller/event'
 import CreateEditEvent from '../components/CreateEditEvent'
-<<<<<<< HEAD
 import { hasData } from '@/server/utils'
 import { notFound } from 'next/navigation'
-
-=======
 import { EventFormProvider } from '../components/EventFormContext'
->>>>>>> develop
 interface Params {
   event: string
   organization: string

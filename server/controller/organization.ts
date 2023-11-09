@@ -64,6 +64,6 @@ export default class OrganizationController {
     const organizationQuery = await Organization.getOrganizationPath(
       organizationId
     )
-    this.controller.delete(organizationQuery, organizationId)
+    this.controller.delete(organizationQuery)
   }
 }
