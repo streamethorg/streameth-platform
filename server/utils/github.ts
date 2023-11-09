@@ -73,7 +73,6 @@ export async function GetFile(
   filename: string,
   folder: string = DEFAULT_FOLDER
 ) {
-  console.log('GetFile: ', filename)
   try {
     const response = await fetch(
       `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${filename}`,

@@ -41,7 +41,7 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
                     {name}
                   </p>
                   <p className=" text-sm font-medium">
-                    {start.toDateString()}
+                    {new Date(start).toDateString()}
                   </p>
                 </div>
               </div>
