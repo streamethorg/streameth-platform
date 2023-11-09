@@ -1,1 +1,28 @@
-{"id":"implementing_sumcheck_protocols","name":"Implementing Sumcheck Protocols","description":"","start":1699281000000,"end":1699282800000,"stageId":"theater","speakers":[{"id":"althea_allen","name":"Althea Allen \n","bio":"No description","eventId":"zuconnect__zk_track"},{"id":"zac","name":"Zac","bio":"No description","eventId":"zuconnect__zk_track"}],"playbackId":"","eventId":"zuconnect__zk_track","coverImage":"/sessions/zuconnect__zk_track/implementing_sumcheck_protocols.jpg"}
+{
+  "id": "implementing_sumcheck_protocols",
+  "name": "Implementing Sumcheck Protocols",
+  "description": "",
+  "start": 1699281000000,
+  "end": 1699282800000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "althea_allen",
+      "name": "Althea Allen \n",
+      "bio": "No description",
+      "eventId": "zuconnect__zk_track"
+    },
+    {
+      "id": "zac",
+      "name": "Zac",
+      "bio": "No description",
+      "eventId": "zuconnect__zk_track"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c27e93ckos5honcd/index.m3u8",
+  "playbackId": "c27e93ckos5honcd",
+  "eventId": "zuconnect__zk_track",
+  "coverImage": "/sessions/zuconnect__zk_track/implementing_sumcheck_protocols.jpg",
+  "assetId": "c27e03b0-e560-47c7-a6ee-77295c69fc18",
+  "videoType": "clip"
+}
