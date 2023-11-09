@@ -1,5 +1,4 @@
 import 'dm3-billboard-widget/dist/style.css'
-import 'dm3-billboard-widget/dist/styles/classic.css'
 import { useContext, useMemo } from 'react'
 import { useAccount, useConnect, usePublicClient } from 'wagmi'
 import './dm3.css'
@@ -12,6 +11,7 @@ import {
 import { ethers } from 'ethersv5'
 import { StageContext } from '../StageContext'
 import { useDm3Siwe } from './useDm3Siwe'
+import { ConnectWalletButton } from '@/components/ConnectWalletButton'
 
 export const defaultOptions: BillboardWidgetProps['options'] = {
   avatarSrc: (hash) => {
@@ -96,11 +96,7 @@ export const Dm3 = () => {
                 <div
                   style={{ maxHeight: '40px' }}
                   className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
-                  <button
-                    onClick={() => connect()}
-                    className="text-accent text-sm font-ubuntu font-bold rounded-full h-full w-full bg-white py-1 px-3">
-                    Connect Wallet
-                  </button>
+                  <ConnectWalletButton />
                 </div>
               ) : (
                 <div
