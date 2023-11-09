@@ -62,7 +62,7 @@ export default class EventController {
       organizationId,
       eventId
     )
-    this.controller.delete(eventQuery, organizationId)
+    this.controller.delete(eventQuery)
   }
 
   public async getAllEventsForOrganization(

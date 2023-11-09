@@ -1,5 +1,7 @@
 import path from 'path'
 import { IEvent } from './model/event'
+import { StoreType } from './controller/baseController'
+
 
 export const generateId = (key: string) => {
   // all lowercase, no spaces, no special characters
@@ -12,14 +14,14 @@ export const generateId = (key: string) => {
 
 const environment = process.env.NODE_ENV || 'development'
 
-export const getEnvironment = () => {
-  if (environment === 'development') return 'fs'
+export const getEnvironment = (): StoreType => {
+  // if (environment === 'development') return 'fs'
   return 'db'
 }
 
 export const getBasePath = () => {
   if (environment === 'development')
-    return path.join(process.cwd(), 'data')
+    // return path.join(process.cwd(), 'data')
   return 'data'
 }
 

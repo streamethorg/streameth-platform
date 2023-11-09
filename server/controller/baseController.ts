@@ -1,5 +1,7 @@
 import FsController from './dataStore/fs'
 import DbController from './dataStore/db'
+import { getEnvironment } from '../utils'
+
 import fs from 'fs'
 
 interface IBaseController<T> {
@@ -9,7 +11,7 @@ interface IBaseController<T> {
   // delete: (id: string) => Promise<T>;
 }
 
-type StoreType = 'fs' | 'db'
+export type StoreType = 'fs' | 'db'
 
 export default class BaseController<T> implements IBaseController<T> {
   store: FsController | DbController
