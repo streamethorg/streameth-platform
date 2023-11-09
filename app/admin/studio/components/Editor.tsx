@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 interface Props {
+  organizationId: string
   eventId: string
   playbackId: string
   sessionId?: string
@@ -133,8 +134,10 @@ export function Editor(props: Props) {
     console.log('Clip data', clipData.asset)
 
     const video = {
+      organizationId: props.organizationId,
       eventId: props.eventId,
       sessionId: id,
+      sourceId: props.sessionId,
       assetId: clipData.asset.id,
       playbackId: clipData.asset.playbackId,
       videoUrl: `https://lp-playback.com/hls/${clipData.asset.playbackId}/index.m3u8`,
@@ -147,13 +150,13 @@ export function Editor(props: Props) {
       },
       body: JSON.stringify(video),
     })
-    await videoRes.json()
 
     setScheduleInfo((value: any) => ({
       ...value,
       [id]: {
         ...value[id],
         clipId: clipData.asset.id,
+        status: videoRes.status,
       },
     }))
   }
@@ -401,6 +404,11 @@ export function Editor(props: Props) {
                     {scheduleInfo[i.id]?.clipId && (
                       <p className="w-32 truncate overflow-hidden text-sm">
                         {scheduleInfo[i.id]?.clipId}
+                      </p>
+                    )}
+                    {i.videoUrl && (
+                      <p className="w-auto border border-1 flex-shrink truncate overflow-hidden text-sm">
+                        <Link href={i.videoUrl}>Already processed</Link>
                       </p>
                     )}
                   </div>
