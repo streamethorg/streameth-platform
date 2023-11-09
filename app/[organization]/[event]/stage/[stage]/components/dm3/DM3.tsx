@@ -1,13 +1,8 @@
 import 'dm3-billboard-widget/dist/style.css'
 import 'dm3-billboard-widget/dist/styles/classic.css'
+import { useContext, useMemo } from 'react'
+import { useAccount, useConnect, usePublicClient } from 'wagmi'
 import './dm3.css'
-import { useContext, useMemo, useState } from 'react'
-import {
-  useAccount,
-  useConnect,
-  usePublicClient,
-  useSignMessage,
-} from 'wagmi'
 
 import {
   BillboardWidgetProps,
@@ -15,14 +10,15 @@ import {
   Dm3Widget,
 } from 'dm3-billboard-widget'
 import { ethers } from 'ethersv5'
-import { SiweMessage } from 'siwe'
-import { StageContext } from './StageContext'
+import { StageContext } from '../StageContext'
+import { useDm3Siwe } from './useDm3Siwe'
 
 export const defaultOptions: BillboardWidgetProps['options'] = {
   avatarSrc: (hash) => {
     return `https://robohash.org/${hash}?size=38x38`
   },
   className: 'dm3-billboard-widget',
+  timeout: 10000,
 }
 
 const defaultClientProps: Omit<
@@ -38,14 +34,19 @@ const defaultClientProps: Omit<
 
 export const Dm3 = () => {
   const { address, isConnected } = useAccount()
-  const { signMessageAsync } = useSignMessage()
   const { connect } = useConnect()
-
-  const [siweSig, setSiweSig] = useState<string>()
-  const [siweMessage, setSiweMessage] = useState<SiweMessage>()
   const publicClient = usePublicClient()
   const context = useContext(StageContext)
-  const stageId = context?.stage.id
+  const { signInWithEthereum, siweMessage, siweSig } = useDm3Siwe(
+    address!
+  )
+  const web3Provider = new ethers.providers.StaticJsonRpcProvider(
+    publicClient.chain.rpcUrls.default.http[0],
+    {
+      chainId: publicClient.chain.id,
+      name: 'goerli',
+    }
+  )
 
   const clientProps: ClientProps = useMemo(
     () => ({
@@ -57,39 +58,15 @@ export const Dm3 = () => {
     [address, siweSig, siweMessage]
   )
 
-  const web3Provider = new ethers.providers.StaticJsonRpcProvider(
-    publicClient.chain.rpcUrls.default.http[0],
-    {
-      chainId: publicClient.chain.id,
-      name: 'goerli',
-    }
-  )
+  const stageId = context?.stage.id
   console.log('stageId', stageId)
-  const connectWallet = () => {
-    connect()
-  }
-  const signInWithEthereum = async () => {
-    const siwe = new SiweMessage({
-      domain: window.location.host,
-      address: address,
-      statement: 'Sign in with Ethereum to use dm3.',
-      uri: window.location.origin,
-      version: '1',
-      chainId: 1,
-      nonce: '0x123456789',
-      expirationTime: new Date(100000000000000).toISOString(),
-    })
-    const sig = await signMessageAsync({
-      message: siwe.prepareMessage(),
-    })
-
-    setSiweSig(sig)
-    setSiweMessage(siwe)
-  }
+  console.log(siweMessage)
+  console.log(siweMessage?.address)
+  console.log(address)
 
   return (
     <>
-      {siweSig && siweMessage ? (
+      {siweSig && siweMessage && siweMessage.address === address ? (
         <Dm3Widget
           clientProps={clientProps}
           options={{
@@ -120,7 +97,7 @@ export const Dm3 = () => {
                   style={{ maxHeight: '40px' }}
                   className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
                   <button
-                    onClick={connectWallet}
+                    onClick={() => connect()}
                     className="text-accent text-sm font-ubuntu font-bold rounded-full h-full w-full bg-white py-1 px-3">
                     Connect Wallet
                   </button>

@@ -12,7 +12,7 @@ import {
   ChatBubbleBottomCenterIcon
 } from '@heroicons/react/24/outline'
 import { useContext, useLayoutEffect, useRef, useState } from 'react'
-import { Dm3 } from './DM3'
+import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
 
 
