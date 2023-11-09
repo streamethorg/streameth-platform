@@ -30,6 +30,6 @@
   "timezone": "Europe/Istanbul",
   "logo": "wallet_unconference_logo.jpeg",
   "banner": "wallet_unconference_banner.jpeg",
-  "accentColor": "white",
+  "accentColor": "gray",
   "startTime": "8:30"
 }

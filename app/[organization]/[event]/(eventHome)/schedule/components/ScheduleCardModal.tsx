@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
 import { LoadingContext } from '@/components/context/LoadingContext'
 import { usePathname, useRouter } from 'next/navigation'
+import moment from 'moment-timezone'
 
 const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
@@ -30,30 +31,16 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
   }
 
   return (
-    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-4xl rounded-xl">
+    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-2xl rounded-xl">
       <div className="flex flex-col bg-base p-4 rounded-xl">
         <h1 className="text-lg  font-bold ">{session.name}</h1>
         <span className=" flex flex-row text-white">
           {new Date(session.start).toDateString()}{' '}
-          {new Date(session.start)
-            .getUTCHours()
-            .toString()
-            .padStart(2, '0') +
-            ':' +
-            new Date(session.start)
-              .getMinutes()
-              .toString()
-              .padStart(2, '0')}{' '}
-          -{' '}
-          {new Date(session.end)
-            .getUTCHours()
-            .toString()
-            .padStart(2, '0') +
-            ':' +
-            new Date(session.end)
-              .getMinutes()
-              .toString()
-              .padStart(2, '0')}
+          {moment(session.start)
+            .tz('Europe/Istanbul')
+            .format('HH:mm')}{' '}
+          -{moment(session.end).tz('Europe/Istanbul').format('HH:mm')}{' '}
+          (GMT +3)
         </span>
       </div>
       {session.description && (

@@ -23,7 +23,7 @@ const ComponentCard = ({
 
   return (
     <div
-      className={`shadow rounded flex flex-col bg-base ${
+      className={`shadow rounded-xl flex flex-col bg-base ${
         streatch && 'flex-grow'
       }`}>
       {title && (

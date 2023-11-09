@@ -87,7 +87,7 @@ function FilterBar({
   return (
     <div
       key={1}
-      className={` w-full max-w-[600px] m-auto z-50 ${
+      className={`w-full max-w-[600px] m-auto z-50 ${
         isOpen && 'h-full '
       } `}
       ref={inputBarRef}>
@@ -100,7 +100,7 @@ function FilterBar({
 
           {isOpen && (
             <div
-              className="absolute w-full space-y-2 bg-accent rounded p-4 shadow-sm"
+              className="absolute w-full space-y-2 bg-accent rounded-xl p-4 shadow-sm"
               // Set the top position based on the height of the input bar.
               style={{
                 top: inputBarRef.current
@@ -126,7 +126,7 @@ function FilterBar({
           )}
         </div>
         <AdjustmentsHorizontalIcon
-          className="h-full w-8 text-base md:ml-2"
+          className="h-full w-8 cursor-pointer text-base md:ml-2"
           onClick={() => setIsOpen(!isOpen)}
         />
       </div>

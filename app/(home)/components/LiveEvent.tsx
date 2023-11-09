@@ -8,24 +8,25 @@ import { IStage } from '@/server/model/stage'
 const LiveEvent = ({ stage }: { stage: IStage }) => {
   return (
     <div>
-      <h3 className="font-ubuntu font-bold text-lg px-4 text-blue">
+      {/* <h3 className="font-ubuntu font-bold text-lg px-4 text-blue">
         Happening Now!
-      </h3>
+      </h3> */}
       <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-screen">
         <div className="h-full flex flex-col w-full lg:flex-row relative items-center lg:gap-4">
           <div className=" mb-2 lg:mb-0 p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
             <Player
               streamId={stage.streamSettings.streamId}
-              playerName={stage.name}
+              playerName="Zuzalu 2024 plans"
+              coverImage="/sessions/zuconnect_istanbul/zuzalu_2024_plans.jpg"
             />
             <p className="font-ubuntu font-medium text-lg mt-4 text-blue">
-              🔴 Live: ZuConnect - Decentralized Social Track
+              🔴 Rec: ZuConnect Istanbul - Zuzalu 2024 plans
             </p>
           </div>
           <div
             className={`w-full lg:w-[45%] mr-4 flex flex-col gap-4 mb-4`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
-              ZuConnect Istanbul 2023
+              ETH Gunu Istanbul 2023
             </p>
             <Image
               className="hidden lg:block"
@@ -34,11 +35,11 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               width={700}
               height={700}
             />
-            <Link
+            {/* <Link
               href="/zuzalu/zuconnect__decentralized_social_track"
               className=" bg-blue rounded-[8px] p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
