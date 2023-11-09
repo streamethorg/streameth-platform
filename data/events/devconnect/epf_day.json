@@ -15,12 +15,12 @@
       }
     }
   ],
-  "eventCover": "epf-logo.jpg",
+  "eventCover": "EPF_Cover.jpg",
   "website": "",
   "archiveMode": false,
   "timezone": "Europe/Istanbul",
   "logo": "epf-logo.jpg",
-  "banner": "epf-logo.jpg",
+  "banner": "EPF_Banner.jpg",
   "accentColor": "#9D67A4",
   "dataExporter": [
     {
