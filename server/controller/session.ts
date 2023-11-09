@@ -6,7 +6,7 @@ export default class SessionController {
   private controller: BaseController<ISession>
 
   constructor() {
-    this.controller = new BaseController<ISession>('fs')
+    this.controller = new BaseController<ISession>('db')
   }
 
   public async getSession(
