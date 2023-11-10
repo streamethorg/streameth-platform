@@ -2,7 +2,7 @@ import { Composition, Folder, Still, continueRender, delayRender } from 'remotio
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
 import { JoinVideos } from './join'
-import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration, DevconnectISTFont, Join, Intro, Social } from './devconnect'
+import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration, DevconnectISTFont, Join, Intro, Social } from './0xparc'
 
 export function Compositions() {
   const waitForFont = delayRender()
