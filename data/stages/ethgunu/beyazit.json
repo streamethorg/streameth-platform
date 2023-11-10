@@ -1,8 +1,1 @@
-{
-  "id": "beyazit",
-  "name": "BEYAZIT",
-  "eventId": "ethgunu",
-  "streamSettings": {
-    "streamId": "ec76319c-1d17-4963-b932-d8944da5e907"
-  }
-}
+{"id":"beyazit","name":"BEYAZIT","eventId":"ethgunu","streamSettings":{"streamId":"ec76319c-1d17-4963-b932-d8944da5e907"}}

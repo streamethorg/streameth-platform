@@ -11,14 +11,29 @@ export default async function Home() {
 
   const upComing = allEvents
     .filter((event) => {
-      return event.organizationId === 'devconnect'
+      return (
+        event.organizationId === 'devconnect' ||
+        new Date(event.start) > new Date()
+      )
     })
     .sort((a, b) => {
       return new Date(a.start).getTime() - new Date(b.start).getTime()
     })
 
-  const pastEvents = allEvents.filter(
-    (event) => new Date(event.start).getTime() < new Date().getTime()
+  const pastEvents = (await eventController.getAllEvents({}))
+    .filter(
+      (event) =>
+        new Date(event.toJson().start).getTime() <
+        new Date().getTime()
+    )
+    .map((event) => {
+      return event.toJson()
+    })
+
+  const stageController = new StageController()
+  const stage = await stageController.getStage(
+    'theater',
+    'zuconnect_hackathon'
   )
 
   return (

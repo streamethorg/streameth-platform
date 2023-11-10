@@ -10,7 +10,7 @@
     {
       "type": "gsheet",
       "config": {
-        "sheetId": "1dLl-rVjjciYA0v5EJpFxkYOhGfrdp_9aDrhjH5S",
+        "sheetId": "1dLl-rVjjciYA0v5EJpFxkYOhGfrdp_9aDrhjH5S_--U",
         "apiKey": "k"
       }
     }
@@ -31,5 +31,5 @@
   "logo": "wallet_unconference_logo.jpeg",
   "banner": "wallet_unconference_banner.jpeg",
   "accentColor": "gray",
-  "startTime": "8:30"
+  "startTime": "10:00"
 }
