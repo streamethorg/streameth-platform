@@ -1,15 +1,20 @@
-import StreamethApi from '@/server/services/streameth'
+import EventController from '@/server/controller/event'
 import EventList from '@/app/(home)/components/EventList'
 import FilterBar from './components/FilterBar'
 import Image from 'next/image'
+import LiveEvent from './components/LiveEvent'
+import StageController from '@/server/controller/stage'
 import UpcomingEvents from './components/UpcomingEvents'
-import IEvent from '@/server/model/event'
+import {
+  FilterContext,
+  FilterContextProvider,
+} from '@/components/context/FilterContext'
 export default async function Home() {
-  const allEvents = await StreamethApi.get<IEvent[]>({
-    path: '/events',
-  })
-
-  const upComing = allEvents
+  const eventController = new EventController()
+  const upComing = (await eventController.getAllEvents({}))
+    .map((event) => {
+      return event.toJson()
+    })
     .filter((event) => {
       return (
         event.organizationId === 'devconnect' ||
@@ -47,6 +52,7 @@ export default async function Home() {
         />
       </div>
       <div className="flex flex-col p-4 lg:overflow-hidden">
+        {/* <LiveEvent stage={stage?.toJson()} /> */}
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
           Upcoming Events
         </p>
