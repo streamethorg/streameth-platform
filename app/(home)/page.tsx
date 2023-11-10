@@ -2,14 +2,8 @@ import EventController from '@/server/controller/event'
 import EventList from '@/app/(home)/components/EventList'
 import FilterBar from './components/FilterBar'
 import Image from 'next/image'
-import LiveEvent from './components/LiveEvent'
 import StageController from '@/server/controller/stage'
 import UpcomingEvents from './components/UpcomingEvents'
-import {
-  FilterContext,
-  FilterContextProvider,
-} from '@/components/context/FilterContext'
-import IEvent from '@/server/model/event'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 
