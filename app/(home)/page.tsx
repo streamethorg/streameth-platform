@@ -9,6 +9,10 @@ import {
   FilterContext,
   FilterContextProvider,
 } from '@/components/context/FilterContext'
+import IEvent from '@/server/model/event'
+import { SocialIcon } from 'react-social-icons'
+import Link from 'next/link'
+
 export default async function Home() {
   const eventController = new EventController()
   const upComing = (await eventController.getAllEvents({}))
@@ -43,16 +47,32 @@ export default async function Home() {
 
   return (
     <main className="w-screen mx-auto">
-      <div className="sticky top-0 z-[9999] bg-accent flex px-8 p-4 gap-4">
+      <div className="drop-shadow-sm sticky top-0 z-[9999] h-20 bg-accent flex p-2 md::px-8 md:p-4 gap-4">
         <Image
-          src="/logo.png"
-          width={50}
-          height={50}
+          className="hidden md:block"
+          src="/logo_dark.png"
           alt="Streameth logo"
+          width={276}
+          height={46}
         />
+        <Image
+          className="block md:hidden aspect-square h-full p-1"
+          src="/logo.png"
+          alt="Streameth logo"
+          height={64}
+          width={64}
+        />
+        <div className="flex flex-row ml-auto space-x-2 items-center justify-center">
+          <Link href="https://streameth.org/contact-us">
+            <div className="bg-blue border-blue text-white p-2 rounded-xl border">
+              Add your event
+            </div>
+          </Link>
+          <SocialIcon url="https://x.com/streameth" />
+          <SocialIcon url="https://github.com/streamethorg/streameth-platform" />
+        </div>
       </div>
-      <div className="flex flex-col p-4 lg:overflow-hidden">
-        {/* <LiveEvent stage={stage?.toJson()} /> */}
+      <div className="flex flex-col lg:overflow-hidden">
         <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
           Upcoming Events
         </p>

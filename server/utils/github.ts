@@ -109,7 +109,6 @@ export async function GetAllFiles(folder: string = DEFAULT_FOLDER) {
 
     if (Array.isArray(files)) {
       const fileNames = files.map((file) => file.name)
-      console.log('fileNames: ', fileNames)
       return fileNames
     } else {
       console.error('Invalid response from GitHub API')
