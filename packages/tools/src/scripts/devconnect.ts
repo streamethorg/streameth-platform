@@ -79,7 +79,9 @@ async function generateEventAssets(event: any) {
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
+  const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
   mkdirSync(eventFolder, { recursive: true })
+  mkdirSync(publicEventFolder, { recursive: true })
 
   const eventType = devconnectEvents.find(e => e.id === event.id)?.type || '1'
   console.log('- Event Composition Type', eventType)
@@ -190,7 +192,7 @@ async function generateEventAssets(event: any) {
 
               upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
 
-              const copyPath = join(process.cwd(), '../../public/sessions', event.id, thumbnailId)
+              const copyPath = join(publicEventFolder, thumbnailId)
               copyFileSync(thumbnailFilePath, copyPath)
             }
           }
