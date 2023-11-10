@@ -7,11 +7,13 @@ export async function AddOrUpdateFile(
   data: string,
   folder: string = DEFAULT_FOLDER
 ) {
+  console.log('Add or Update file', filename, folder)
   if (!process.env.GITHUB_API_TOKEN) {
     throw new Error('GITHUB_API_TOKEN not set')
   }
+
   let sha = ''
-  const file = await GetResponseFile(filename, folder)
+  const file = await GetFile(filename, folder)
   if (file) {
     sha = file.sha
   }
@@ -37,10 +39,29 @@ export async function AddOrUpdateFile(
       }
     )
 
-    if (response.status === 200) {
-      console.error('Error uploading to Github', response.status, response.statusText)
+    const body = await response.json()
+    return body
+  } catch (e) {
+    console.error('ERROR', e)
+  }
+}
 
-    }
+export async function GetFile(
+  filename: string,
+  folder: string = DEFAULT_FOLDER
+) {
+  console.log('Get file', filename, folder)
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}/${filename}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+          Accept: 'application/vnd.github+json',
+        },
+      }
+    )
 
     const body = await response.json()
     return body
@@ -73,30 +94,8 @@ export async function GetResponseFile(
   }
 }
 
-export async function GetFile(
-  filename: string,
-  folder: string = DEFAULT_FOLDER
-) {
-  try {
-    const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${filename}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
-          Accept: 'application/vnd.github.VERSION.raw',
-        },
-      }
-    )
-    const body = await response.json()
-    return JSON.stringify(body)
-  } catch (e) {
-    console.error('ERROR', e)
-    return ''
-  }
-}
-
 export async function GetAllFiles(folder: string = DEFAULT_FOLDER) {
+  console.log('GET ALL folder', folder)
   try {
     const response = await fetch(
       `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}`,
@@ -113,6 +112,7 @@ export async function GetAllFiles(folder: string = DEFAULT_FOLDER) {
 
     if (Array.isArray(files)) {
       const fileNames = files.map((file) => file.name)
+      console.log('fileNames', fileNames)
       return fileNames
     } else {
       console.error('Invalid response from GitHub API')

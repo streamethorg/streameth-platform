@@ -1,10 +1,11 @@
-import { AddOrUpdateFile } from '@/server/utils/github'
+import { AddOrUpdateFile, GetFile } from '@/server/utils/github'
 import Session from '@/utils/session'
 import { NextRequest, NextResponse } from 'next/server'
+import { decode } from 'js-base64'
 import SessionController from '@/server/controller/session'
-import { revalidatePath } from 'next/cache'
 
 export const POST = async (req: NextRequest) => {
+  const sessionController = new SessionController()
   const session = await Session.fromRequest(req)
   if (!session) {
     return new NextResponse('Unauthorized', { status: 401 })
@@ -14,32 +15,31 @@ export const POST = async (req: NextRequest) => {
   }
 
   const body = await req.json()
-
-  const folderName = `data/sessions/${body.eventId}`
-  const fileName = `${body.sessionId}.json`
-  const sessionController = new SessionController()
-  const data = await sessionController.getSession(
-    body.sessionId,
-    body.eventId
-  )
-
-  const update = {
-    ...data,
-    assetId: body.assetId,
-    playbackId: body.playbackId,
-    sourceId: body.sourceId,
-    videoUrl: body.videoUrl,
-    videoType: body.videoType,
+  if (!body.event || !body.sessions) {
+    return new NextResponse('Bad Request', { status: 400 })
   }
-  await AddOrUpdateFile(
-    fileName,
-    JSON.stringify(update, null, 2),
-    folderName
-  )
 
-  // revalidate Event page
-  revalidatePath(`/${body.organizationId}/${body.eventId}/archive`)
-  // revalidatePath(`/${body.organizationId}/${body.eventId}`)
+  console.log(body)
+
+  for (let i = 0; i < Object.keys(body.sessions).length; i++) {
+    const sessionId = Object.keys(body.sessions)[i]
+    const folderName = `data/sessions/${body.event.id}`
+    const fileName = `${sessionId}.json`
+    const data = await sessionController.getSession(
+      sessionId,
+      body.event.id
+    )
+    const update = {
+      ...data,
+      source: body.sessions[sessionId],
+    }
+    console.log(update)
+    await AddOrUpdateFile(
+      fileName,
+      JSON.stringify(update, null, 2),
+      folderName
+    )
+  }
 
   return new NextResponse('Ok', { status: 200 })
 }
