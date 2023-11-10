@@ -10,6 +10,8 @@ const STAGE_SHEET = 'Stages (FOR INTERNAL MANAGEMENT, DO NOT EDIT)'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
 const SESSION_DATA_RANGE = 'A3:M'
+const MODERATOR_SHEET = 'Moderators'
+const MODERATOR_DATA_RANGE = 'A3:E'
 
 export default class Importer extends BaseImporter {
   googleSheetService: GoogleSheetService
@@ -118,7 +120,6 @@ export default class Importer extends BaseImporter {
           const date = Day.split('/')
           return `${date[2]}-${date[1]}-${date[0]}`
         }
-        debugger
         const session = {
           name: Name,
           description: Description,
@@ -146,6 +147,31 @@ export default class Importer extends BaseImporter {
         await this.sessionController.createSession(session)
       } catch (e) {
         console.error(`Error creating session:`, e)
+      }
+    }
+  }
+
+  async generateModerators(): Promise<void> {
+    const data = await this.googleSheetService.getDataForRange(
+      MODERATOR_SHEET,
+      MODERATOR_DATA_RANGE
+    )
+
+    for (const row of data) {
+      const [name, description, twitterHandle, avatar, email] = row
+      const moderator = {
+        name,
+        bio: description || 'No description',
+        photo: avatar || undefined,
+        twitter: twitterHandle,
+        eventId: this.event.id,
+        email,
+      }
+      console.log('generating hererrrrrr', moderator)
+      try {
+        await this.moderatorController.createModerator(moderator)
+      } catch (e) {
+        console.error(`Error creating moderator:`, moderator, e)
       }
     }
   }

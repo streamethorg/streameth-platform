@@ -3,10 +3,12 @@ import EventController from '../controller/event'
 import SessionController from '../controller/session'
 import StageController from '../controller/stage'
 import Event from '../model/event'
+import ModeratorController from '../controller/moderators'
 export interface IBaseImporter {
   generateSessions(): Promise<void>
   generateStages(): Promise<void>
   generateSpeakers(): Promise<void>
+  generateModerators(): Promise<void>
 }
 
 export default class BaseImporter implements IBaseImporter {
@@ -14,6 +16,7 @@ export default class BaseImporter implements IBaseImporter {
   eventController: EventController
   sessionController: SessionController
   stageController: StageController
+  moderatorController: ModeratorController
   event: Event
 
   constructor(event: Event) {
@@ -21,6 +24,7 @@ export default class BaseImporter implements IBaseImporter {
     this.eventController = new EventController()
     this.sessionController = new SessionController()
     this.stageController = new StageController()
+    this.moderatorController = new ModeratorController()
     this.event = event
   }
 
@@ -33,6 +37,10 @@ export default class BaseImporter implements IBaseImporter {
   }
 
   async generateSpeakers(): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
+
+  async generateModerators(): Promise<void> {
     throw new Error('Method not implemented.')
   }
 }
