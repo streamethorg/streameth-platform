@@ -1,10 +1,10 @@
 import { join } from 'path'
 import { bundle } from '@remotion/bundler'
 import { webpackOverride } from '../webpack-override'
-import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
+import { getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
-import { existsSync, mkdirSync, statSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, statSync } from 'fs'
 import { DevconnectEvents } from 'compositions/devconnect'
 
 const force = process.argv.slice(2).includes('--force')
@@ -189,6 +189,9 @@ async function generateEventAssets(event: any) {
               }
 
               upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
+
+              const copyPath = join(process.cwd(), '../../public/sessions', event.id, thumbnailId)
+              copyFileSync(thumbnailFilePath, copyPath)
             }
           }
         }
