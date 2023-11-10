@@ -58,8 +58,6 @@ const EditOrganizationForm: React.FC<OrganizationFormProps> = ({
         if (!response.ok) {
           throw new Error('Failed to create organisation')
         }
-
-        revalidatePath('/admin')
         return response.json()
       })
       .then((data) => {
@@ -71,6 +69,7 @@ const EditOrganizationForm: React.FC<OrganizationFormProps> = ({
       .finally(() => {
         setSubmitting(false)
         closeModal()
+        window.location.reload()
       })
   }
 

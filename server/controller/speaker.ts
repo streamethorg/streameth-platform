@@ -1,5 +1,6 @@
 import BaseController from './baseController'
 import Speaker, { ISpeaker } from '../model/speaker'
+import { getEnvironment } from '../utils'
 
 export default class SpeakerController {
   private controller: BaseController<ISpeaker>

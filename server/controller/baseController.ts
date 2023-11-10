@@ -1,4 +1,7 @@
 import FsController from './dataStore/fs'
+import DbController from './dataStore/db'
+import { getEnvironment } from '../utils'
+
 import fs from 'fs'
 
 interface IBaseController<T> {
@@ -8,19 +11,19 @@ interface IBaseController<T> {
   // delete: (id: string) => Promise<T>;
 }
 
-type StoreType = 'fs' | 'db'
+export type StoreType = 'fs' | 'db'
 
 export default class BaseController<T> implements IBaseController<T> {
-  store: FsController
+  store: FsController | DbController
 
   constructor(store: StoreType) {
     switch (store) {
       case 'fs':
         this.store = new FsController()
         break
-      // case 'db':
-      //   this.store = new DbController();
-      //   break;
+      case 'db':
+        this.store = new DbController()
+        break
       default:
         throw new Error(`Unsupported store type: ${store}`)
     }
@@ -57,7 +60,10 @@ export default class BaseController<T> implements IBaseController<T> {
   }
 
   async get(query: string): Promise<T> {
-    if (fs.lstatSync(query).isDirectory()) {
+    if (
+      getEnvironment() == 'fs' &&
+      fs.lstatSync(query).isDirectory()
+    ) {
       console.error(`${query} is a directory, not a file.`)
       process.exit(1)
     }
@@ -81,7 +87,9 @@ export default class BaseController<T> implements IBaseController<T> {
 
   async getAll(query: string): Promise<T[]> {
     const files = await this.store.readAll(query)
-
+    if (files == undefined) {
+      return []
+    }
     const dataPromises = files.map(async (file) => {
       const data = await this.store.read(`${query}/${file}`)
       try {

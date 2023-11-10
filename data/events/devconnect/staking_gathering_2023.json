@@ -1,0 +1,27 @@
+{
+  "id": "staking_gathering_2023",
+  "name": "ETHStaker's Staking Gathering",
+  "description": "",
+  "start": "2023-11-13T00:00:00.000Z",
+  "end": "2023-11-14T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "devconnect",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1SF9Z_6Y1pkbUEX5lEL8JEvPf-Ze11Oc7OevKZVmCUYU",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "staking_cover.jpeg",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "devconnect_logo.jpg",
+  "banner": "staking_cover.jpeg",
+  "accentColor": "#000",
+
+  "startTime": "10:00"
+}

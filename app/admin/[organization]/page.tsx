@@ -1,3 +1,4 @@
+export const revalidate = 0
 import { apiUrl } from '@/server/utils'
 import { IEvent } from '@/server/model/event'
 import AddEventButton from './components/AddEventButton'

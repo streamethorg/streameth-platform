@@ -5,7 +5,7 @@ import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia,
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
-import { DevconnectEvents } from 'compositions'
+import { DevconnectEvents } from 'compositions/devconnect'
 
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
@@ -54,7 +54,7 @@ async function generateEventAssets(event: any) {
     webpackOverride: (config) => webpackOverride(config),
   })
 
-  const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id) || c.id.includes(event.id.replaceAll('_', '-')))
+  const compositions = (await getCompositions(bundled)).filter((c) => !c.id.startsWith('join-') && c.id.includes(event.id) || c.id.includes(event.id.replaceAll('_', '-')))
   if (compositions.length === 0) {
     console.log('No compositions found. Skip rendering')
     return

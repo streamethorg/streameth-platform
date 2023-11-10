@@ -1,11 +1,12 @@
 import BaseController from './baseController'
 import Session, { ISession } from '../model/session'
+import { getEnvironment } from '../utils'
 
 export default class SessionController {
   private controller: BaseController<ISession>
 
   constructor() {
-    this.controller = new BaseController<ISession>('fs')
+    this.controller = new BaseController<ISession>(getEnvironment())
   }
 
   public async getSession(
