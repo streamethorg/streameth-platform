@@ -1,10 +1,10 @@
 import { join } from 'path'
 import { bundle } from '@remotion/bundler'
 import { webpackOverride } from '../webpack-override'
-import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
+import { getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
-import { existsSync, mkdirSync, statSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, statSync } from 'fs'
 import { DevconnectEvents } from 'compositions/devconnect'
 
 const force = process.argv.slice(2).includes('--force')
@@ -79,7 +79,9 @@ async function generateEventAssets(event: any) {
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
+  const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
   mkdirSync(eventFolder, { recursive: true })
+  mkdirSync(publicEventFolder, { recursive: true })
 
   const eventType = devconnectEvents.find(e => e.id === event.id)?.type || '1'
   console.log('- Event Composition Type', eventType)
@@ -189,6 +191,9 @@ async function generateEventAssets(event: any) {
               }
 
               upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
+
+              const copyPath = join(publicEventFolder, thumbnailId)
+              copyFileSync(thumbnailFilePath, copyPath)
             }
           }
         }
