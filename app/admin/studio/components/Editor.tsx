@@ -402,12 +402,12 @@ export function Editor(props: Props) {
                     </button>
 
                     {scheduleInfo[i.id]?.clipId && (
-                      <p className="w-32 truncate overflow-hidden text-sm">
-                        {scheduleInfo[i.id]?.clipId}
+                      <p className="w-auto flex-shrink truncate overflow-hidden text-sm">
+                        Processing..
                       </p>
                     )}
                     {i.videoUrl && (
-                      <p className="w-auto border border-1 flex-shrink truncate overflow-hidden text-sm">
+                      <p className="w-auto flex-shrink truncate overflow-hidden text-sm">
                         <Link href={i.videoUrl}>Already processed</Link>
                       </p>
                     )}

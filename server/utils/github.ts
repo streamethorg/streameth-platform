@@ -10,7 +10,6 @@ export async function AddOrUpdateFile(
   if (!process.env.GITHUB_API_TOKEN) {
     throw new Error('GITHUB_API_TOKEN not set')
   }
-
   let sha = ''
   const file = await GetResponseFile(filename, folder)
   if (file) {
@@ -19,7 +18,7 @@ export async function AddOrUpdateFile(
 
   try {
     const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}`,
+      `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}/${filename}`,
       {
         method: 'PUT',
         headers: {
@@ -38,6 +37,11 @@ export async function AddOrUpdateFile(
       }
     )
 
+    if (response.status === 200) {
+      console.error('Error uploading to Github', response.status, response.statusText)
+
+    }
+
     const body = await response.json()
     return body
   } catch (e) {
@@ -51,7 +55,7 @@ export async function GetResponseFile(
 ) {
   try {
     const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}`,
+      `https://api.github.com/repos/${GITHUB_ORG}/${GITHUB_REPO}/contents/${folder}/${filename}`,
       {
         method: 'GET',
         headers: {
