@@ -21,7 +21,7 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="md:hidden z-50 ">
+    className="md:hidden z-50 ml-2">
     {!isNavVisible ? (
       <Bars3Icon className="w-7 h-7 bg-base  rounded text-white mx-auto" />
     ) : (
@@ -38,19 +38,15 @@ export default function NavbarTop() {
 
   useEffect(() => {
     if (!isMobile) {
-      
       setMenuVisible(true)
     } else {
       setMenuVisible(false)
-     
     }
   }, [isMobile])
 
   if (!showNav) {
     return null
   }
-
-
 
   return (
     <header className="sticky z-[99999] flex flex-row items-center bg-accent border-b border-primary w-full ml-auto p-2 md:p-4 py-2 top-0 h-16 lg:h-20">
@@ -70,11 +66,22 @@ export default function NavbarTop() {
         </Link>
       </div>
       <div className="flex flex-row items-center justify-end md:justify-between w-full">
-        {menuVisible && <Navbar pages={isMobile ? [...pages, {
-          name: 'Back to overview',
-          href: '/',
-          icon: <></>
-        }] : pages} />}
+        {menuVisible && (
+          <Navbar
+            pages={
+              isMobile
+                ? [
+                    ...pages,
+                    {
+                      name: 'Back to overview',
+                      href: '/',
+                      icon: <></>,
+                    },
+                  ]
+                : pages
+            }
+          />
+        )}
         {components.length > 0 &&
           components.map((component, index) => {
             return (
