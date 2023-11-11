@@ -1,6 +1,5 @@
 import BaseController from './baseController'
 import Session, { ISession } from '../model/session'
-import { getEnvironment } from '../utils'
 
 export default class SessionController {
   private controller: BaseController<ISession>

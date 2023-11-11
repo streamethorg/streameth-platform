@@ -1,6 +1,5 @@
 import FsController from './dataStore/fs'
 import DbController from './dataStore/db'
-import { getEnvironment } from '../utils'
 
 import fs from 'fs'
 
@@ -60,10 +59,7 @@ export default class BaseController<T> implements IBaseController<T> {
   }
 
   async get(query: string): Promise<T> {
-    if (
-      getEnvironment() == 'fs' &&
-      fs.lstatSync(query).isDirectory()
-    ) {
+    if (fs.lstatSync(query).isDirectory()) {
       console.error(`${query} is a directory, not a file.`)
       process.exit(1)
     }
