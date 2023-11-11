@@ -1,7 +1,6 @@
 import BaseController from './baseController'
 import Event, { IEvent } from '../model/event'
 import OrganizationController from './organization'
-import { getEnvironment } from '../utils'
 
 export default class EventController {
   private controller: BaseController<IEvent>
