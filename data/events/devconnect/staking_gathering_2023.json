@@ -19,9 +19,9 @@
   "website": "",
   "archiveMode": false,
   "timezone": "Europe/Istanbul",
-  "logo": "devconnect_logo.jpg",
+  "logo": "staking_logo.png",
   "banner": "staking_cover.jpeg",
-  "accentColor": "#000",
+  "accentColor": "#3C4043",
 
   "startTime": "10:00"
 }
