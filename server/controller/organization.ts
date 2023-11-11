@@ -1,5 +1,6 @@
 import BaseController from './baseController'
 import Organization, { IOrganization } from '../model/organization'
+import { getEnvironment } from '../utils'
 
 export default class OrganizationController {
   private controller: BaseController<IOrganization>
