@@ -56,7 +56,6 @@ const config = createConfig(
   getDefaultConfig({
     autoConnect: true,
     appName: 'StreamETH',
-    chains:[goerli],
     infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,

@@ -27,7 +27,7 @@
     "class-variance-authority": "^0.7.0",
     "connectkit": "^1.5.2",
     "dayjs": "^1.11.9",
-    "dm3-billboard-widget": "0.3.3",
+    "dm3-billboard-widget": "0.3.4",
     "encoding": "^0.1.13",
     "eslint": "8.50.0",
     "eslint-config-next": "13.4.5",

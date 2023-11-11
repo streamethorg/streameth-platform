@@ -25,7 +25,7 @@ const getBillboardId = (eventId: string, stageId: string) => {
   const replacedEventId = eventId.replaceAll('_', '-')
   const replacedStageId = stageId.replaceAll('_', '-')
 
-  return `${replacedEventId}-${replacedStageId}.bb.dm3.eth`
+  return `${replacedEventId}-${replacedStageId}.bb.devconnect.dm3.eth`
 }
 
 export const Dm3 = () => {
@@ -40,7 +40,7 @@ export const Dm3 = () => {
     publicClient.chain.rpcUrls.default.http[0],
     {
       chainId: publicClient.chain.id,
-      name: 'goerli',
+      name: 'mainnet',
     }
   )
 
@@ -51,14 +51,21 @@ export const Dm3 = () => {
         context?.stage.eventId!,
         context?.stage.id!
       ),
-      billboardClientUrl: 'http://104.248.249.53/bb-client',
-      deliveryServiceEnsName: 'bb-ds.dm3.eth',
-      offchainResolverUrl: 'http://104.248.249.53/resolver-handler',
+      billboardClientUrl: 'http://164.90.224.89/bb-client',
+      deliveryServiceEnsName: 'bb-ds.devconnect.dm3.eth',
+      offchainResolverUrl: 'http://164.90.224.89/resolver-handler',
+      userCCIPDomain: 'user.devconnect.dm3.eth',
       siweAddress: address?.toString() ?? '',
       siweMessage: JSON.stringify(siweMessage),
       siweSig: siweSig ?? '',
     }
-  }, [address, siweSig, siweMessage, context?.stage.id])
+  }, [
+    context?.stage.eventId,
+    context?.stage.id,
+    address,
+    siweMessage,
+    siweSig,
+  ])
 
   return (
     <>
