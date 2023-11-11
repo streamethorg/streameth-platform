@@ -4,9 +4,10 @@ import { webpackOverride } from '../webpack-override'
 import { getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
-import { copyFileSync, existsSync, mkdirSync, statSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync } from 'fs'
 import { DevconnectEvents } from 'compositions/devconnect'
 
+const updateSessionThumbnails = false
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
 const processArgs = process.argv.slice(2).filter(i => !i.startsWith('--'))
@@ -79,6 +80,7 @@ async function generateEventAssets(event: any) {
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
+  const dataSessionFolder = join(process.cwd(), '../../data/sessions', event.id)
   const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
   mkdirSync(eventFolder, { recursive: true })
   mkdirSync(publicEventFolder, { recursive: true })
@@ -192,8 +194,17 @@ async function generateEventAssets(event: any) {
 
               upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
 
-              const copyPath = join(publicEventFolder, thumbnailId)
-              copyFileSync(thumbnailFilePath, copyPath)
+              if (updateSessionThumbnails) {
+                const copyPath = join(publicEventFolder, thumbnailId)
+                copyFileSync(thumbnailFilePath, copyPath)
+
+                // update session file 
+                const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
+                if (existsSync(sessionFilePath)) {
+                  const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
+                  sessionFile.coverImage = `sessions/${event.id}/${thumbnailId}`
+                }
+              }
             }
           }
         }
