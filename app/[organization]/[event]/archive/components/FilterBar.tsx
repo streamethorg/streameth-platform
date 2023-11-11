@@ -44,34 +44,22 @@ function FilterBar({
   })
 
   const sessionDateFilters = () => {
-    const uniqueDates = Array.from(
-      new Set(sessions.map((session) => session.start))
+    const uniqueDatesSet = new Set(
+      sessions.map((session) =>
+        new Date(session.start).toLocaleDateString()
+      )
     )
-
-    uniqueDates.sort((a, b) => {
-      return a - b
-    })
+    const uniqueDates = Array.from(uniqueDatesSet)
 
     return uniqueDates.map((date) => ({
-      name: new Date(date).toLocaleDateString(),
+      name: date,
       value: date,
       type: 'date',
       filterFunc: async (item: ISession) => {
-        return item.start === date
+        return new Date(item.start).toLocaleDateString() === date
       },
     }))
   }
-
-  const trackFilter = sessions.map((session) => {
-    return {
-      name: session.track,
-      value: session.track,
-      type: 'track',
-      filterFunc: async (item: ISession) => {
-        return item.track === session.track
-      },
-    }
-  })
 
   const stageFilters = stages.map((stage) => {
     return {
