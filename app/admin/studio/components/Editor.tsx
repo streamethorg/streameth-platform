@@ -408,7 +408,9 @@ export function Editor(props: Props) {
                     )}
                     {i.videoUrl && (
                       <p className="w-auto flex-shrink truncate overflow-hidden text-sm">
-                        <Link href={i.videoUrl}>Already processed</Link>
+                        <Link href={i.videoUrl}>
+                          Already processed
+                        </Link>
                       </p>
                     )}
                   </div>
