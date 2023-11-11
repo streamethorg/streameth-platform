@@ -21,7 +21,7 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="md:hidden z-50 ">
+    className="md:hidden z-50 ml-2">
     {!isNavVisible ? (
       <Bars3Icon className="w-7 h-7 bg-base  rounded text-white mx-auto" />
     ) : (
