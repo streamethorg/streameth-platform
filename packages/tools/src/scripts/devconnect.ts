@@ -1,12 +1,13 @@
 import { join } from 'path'
 import { bundle } from '@remotion/bundler'
 import { webpackOverride } from '../webpack-override'
-import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
+import { getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
-import { existsSync, mkdirSync, statSync } from 'fs'
-import { DevconnectEvents } from 'compositions'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync } from 'fs'
+import { DevconnectEvents } from 'compositions/devconnect'
 
+const updateSessionThumbnails = false
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
 const processArgs = process.argv.slice(2).filter(i => !i.startsWith('--'))
@@ -54,7 +55,7 @@ async function generateEventAssets(event: any) {
     webpackOverride: (config) => webpackOverride(config),
   })
 
-  const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id) || c.id.includes(event.id.replaceAll('_', '-')))
+  const compositions = (await getCompositions(bundled)).filter((c) => !c.id.startsWith('join-') && c.id.includes(event.id) || c.id.includes(event.id.replaceAll('_', '-')))
   if (compositions.length === 0) {
     console.log('No compositions found. Skip rendering')
     return
@@ -79,7 +80,10 @@ async function generateEventAssets(event: any) {
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
+  const dataSessionFolder = join(process.cwd(), '../../data/sessions', event.id)
+  const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
   mkdirSync(eventFolder, { recursive: true })
+  mkdirSync(publicEventFolder, { recursive: true })
 
   const eventType = devconnectEvents.find(e => e.id === event.id)?.type || '1'
   console.log('- Event Composition Type', eventType)
@@ -189,6 +193,18 @@ async function generateEventAssets(event: any) {
               }
 
               upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
+
+              if (updateSessionThumbnails) {
+                const copyPath = join(publicEventFolder, thumbnailId)
+                copyFileSync(thumbnailFilePath, copyPath)
+
+                // update session file 
+                const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
+                if (existsSync(sessionFilePath)) {
+                  const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
+                  sessionFile.coverImage = `sessions/${event.id}/${thumbnailId}`
+                }
+              }
             }
           }
         }

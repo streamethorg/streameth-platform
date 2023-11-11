@@ -45,14 +45,14 @@ const ModalContent: React.FC<{
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full px-3 py-7">
+    <div className="flex flex-col items-center justify-center w-full h-full px-3 py-7 bg-base max-w-3xl">
       <div className="flex flex-col items-center justify-center w-full h-full">
-        <span className="text-md mb-4">
+        <span className="text-xl mb-4 text-white">
           Easily embed this stream into your website by adding the
           iframe code below
         </span>
         <div
-          className="relative bg-gray-100 px-2 py-1 border border-gray-200 w-full max-w-full overflow-hidden whitespace-nowrap cursor-pointer"
+          className="relative bg-base text-white rounded-xl px-2 py-1 border border-gray-200 w-full max-w-full overflow-hidden whitespace-nowrap cursor-pointer"
           onClick={copyToClipboard}>
           {generatedEmbedCode}
         </div>

@@ -14,7 +14,6 @@ const ArchivedSession = ({
   goToStage?: boolean
 }) => {
   const [image, setImage] = useState(session.coverImage)
-  console.log('image', image)
   const [fallback, setFallback] = useState(false)
   const alt = '/events/' + session.eventId + '.png'
 
