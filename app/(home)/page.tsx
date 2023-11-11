@@ -67,11 +67,16 @@ export default async function Home() {
         </div>
       </div>
       <div className="flex flex-col lg:overflow-hidden">
-        <p className="px-4 mt-3 font-ubuntu font-bold text-blue text-xl">
+        <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
           Upcoming Events
         </p>
         <UpcomingEvents events={upComing} />
-
+        <div className="px-4 items-center space-y-2 space-x-4 flex flex-col md:flex-row mt-4 ">
+          <p className="font-ubuntu font-bold text-blue text-4xl">
+            Past Events
+          </p>
+          <FilterBar events={pastEvents} />
+        </div>
         <EventList events={pastEvents} />
       </div>
     </main>
