@@ -34,7 +34,7 @@ const LoadingModal = ({ isLoading }: { isLoading: boolean }) => {
           alt="Streameth logo"
           width={100}
           height={100}
-          className=' animate-pulse'
+          className=" animate-pulse"
         />
         <p className="text-xl font-bold animate-pulse">Loading...</p>
       </div>
