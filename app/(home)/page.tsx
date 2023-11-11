@@ -71,12 +71,7 @@ export default async function Home() {
           Upcoming Events
         </p>
         <UpcomingEvents events={upComing} />
-        <div className="px-4 items-center space-y-2 space-x-4 flex flex-col md:flex-row mt-4 ">
-          <p className="font-ubuntu font-bold text-blue text-xl">
-            Past Events
-          </p>
-          <FilterBar events={pastEvents} />
-        </div>
+
         <EventList events={pastEvents} />
       </div>
     </main>
