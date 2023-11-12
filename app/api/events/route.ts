@@ -12,7 +12,9 @@ export async function GET(request: NextRequest) {
   )
 
   const controller = new EventController()
-  const data = await controller.getAllEvents({ inclUnlisted: inclUnlisted })
+  const data = await controller.getAllEvents({
+    inclUnlisted: inclUnlisted,
+  })
 
   if (inclStages) {
     const stageController = new StageController()
