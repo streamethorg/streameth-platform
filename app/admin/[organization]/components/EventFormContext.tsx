@@ -71,6 +71,7 @@ const EventFormProvider: React.FC<EventFormProviderProps> = ({
       accentColor: '',
       dataExporter: [],
       dataImporter: [],
+      enableVideoDownloader: true,
     }
   )
 

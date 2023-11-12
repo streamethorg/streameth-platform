@@ -10,7 +10,7 @@ interface Props {
 }
 
 const RadioButtonSolidIcon = ({
-  pathFill = colors.accent,
+  pathFill = colors.blue,
   height = '35',
   width = '35',
   className = '',
@@ -29,7 +29,7 @@ const RadioButtonSolidIcon = ({
         cy="17.5"
         r="17"
         fill={checked ? pathFill : ''}
-        stroke={!checked ? colors.accent : ''}
+        stroke={!checked ? colors.blue : ''}
       />
     </svg>
   )

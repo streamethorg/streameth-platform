@@ -1,15 +1,22 @@
 'use client'
+import Session from '@/server/model/session'
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import DownloaderIcon from '@/app/assets/icons/DownloaderIcon'
 
 const ActionsComponent = ({
   title,
   goBackButton = false,
   children,
+  session,
+  canDownload = false,
 }: {
+  session: Session
   title?: string
   goBackButton?: boolean
   children: React.ReactNode
+  canDownload?: boolean
 }) => {
   const router = useRouter()
 
@@ -28,6 +35,13 @@ const ActionsComponent = ({
         <h1 className="md:text-xl text-white uppercase ">{title}</h1>
       )}
       {children}
+      {canDownload && (
+        <Link
+          href={session.videoUrl as string}
+          className="cursor-pointer ml-3 text-white font-bold hover:bg-base">
+          <DownloaderIcon />
+        </Link>
+      )}
     </div>
   )
 }

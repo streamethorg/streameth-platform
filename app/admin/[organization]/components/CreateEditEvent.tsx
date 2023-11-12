@@ -18,7 +18,7 @@ const CreateEditEvent = () => {
   return (
     <div className="relative w-full h-full">
       <div className="flex flex-row sticky top-0 p-4 z-40 shadow bg-white items-center justify-between">
-        <h3 className="font-ubuntu text-accent w-3/5 text-3xl">
+        <h3 className="font-ubuntu w-3/5 text-3xl text-blue">
           Welcome to the Event Page Setup!
         </h3>
         <div className="flex gap-2 lg:gap-4 lg:flex-row flex-col">
