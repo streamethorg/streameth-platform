@@ -4,10 +4,10 @@ import { webpackOverride } from '../webpack-override'
 import { getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
-import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
 import { DevconnectEvents } from 'compositions/devconnect'
 
-const updateSessionThumbnails = false
+const updateSessionThumbnails = true
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
 const processArgs = process.argv.slice(2).filter(i => !i.startsWith('--'))
@@ -27,6 +27,7 @@ async function start(args: string[]) {
   console.log(`Run Remotion renderer in ${CONFIG.NODE_ENV} mode..`)
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
+  console.log(' - update session thumbnails', updateSessionThumbnails)
 
   const res = await fetch(`${apiBaseUri}/events`)
   let events = (await res.json()).filter((i: any) => i.archiveMode === false)
@@ -90,12 +91,13 @@ async function generateEventAssets(event: any) {
 
   // TODO: Kinda hacky solution to check invalid Image urls here.
   // This should get fixed on data entry or import
-  const sessionsToProcess: any[] = []
+  let sessionsToProcess: any[] = []
   for (const session of sessions) {
     const s = {
       id: session.id,
       name: session.name,
       start: session.start,
+      stageId: session.stageId,
       speakers: Array<any>(),
     }
 
@@ -111,6 +113,7 @@ async function generateEventAssets(event: any) {
     sessionsToProcess.push(s)
   }
 
+  sessionsToProcess = sessionsToProcess.sort((a, b) => a - b)
   console.log(`Render ${compositions.length} compositions for # ${sessions.length} sessions`)
   for (let index = 0; index < sessionsToProcess.length; index++) {
     const session = sessionsToProcess[index]
@@ -202,7 +205,10 @@ async function generateEventAssets(event: any) {
                 const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
                 if (existsSync(sessionFilePath)) {
                   const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
-                  sessionFile.coverImage = `sessions/${event.id}/${thumbnailId}`
+                  writeFileSync(sessionFilePath, JSON.stringify({
+                    ...sessionFile,
+                    coverImage: `sessions/${event.id}/${thumbnailId}`
+                  }, null, 2))
                 }
               }
             }
