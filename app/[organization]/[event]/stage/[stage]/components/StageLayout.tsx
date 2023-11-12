@@ -9,13 +9,11 @@ import ShareButton from '@/components/misc/ShareButton'
 import SessionList from '@/components/sessions/SessionList'
 import {
   CalendarIcon,
-  ChatBubbleBottomCenterIcon
+  ChatBubbleBottomCenterIcon,
 } from '@heroicons/react/24/outline'
 import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
-
-
 
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
@@ -32,8 +30,7 @@ export default function StageLayout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stickyRef.current])
 
-  const context = useContext(StageContext) 
-  
+  const context = useContext(StageContext)
 
   if (!context) return null
 
@@ -52,7 +49,7 @@ export default function StageLayout() {
     tabs.push({
       id: 'chat',
       header: <ChatBubbleBottomCenterIcon />,
-      content:   <Dm3/>
+      content: <Dm3 />,
     })
 
     return tabs
@@ -62,9 +59,8 @@ export default function StageLayout() {
       <div className="h-full flex flex-col w-full lg:flex-row relative lg:gap-4">
         <div
           ref={stickyRef}
-          className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[65%]">
+          className="bg-black mb-2 lg:mb-0 sticky  p-2 md:p-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[70%]">
           <ActionsComponent title={stage.name}>
-         
             <EmbedButton
               streamId={stage.streamSettings.streamId}
               playerName={stage.name}
@@ -78,7 +74,7 @@ export default function StageLayout() {
         </div>
         <div
           style={{ height: isMobile ? '100%' : playerHeight }}
-          className={`w-full lg:w-[35%]`}>
+          className={`w-full lg:w-[30%]`}>
           <PluginBar
             bottomOffset={bottomOffset}
             tabs={getPluginTabs()}

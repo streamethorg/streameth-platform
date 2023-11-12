@@ -5,8 +5,8 @@
   --messageBg25: var(--bg-base);
   --borderInputColor: #e0e0e0;
   --inputBg: rgb(0 0 0 / 0.2);
-  --textColorPrimary: black;
-  --textColorSecondary: #808080;
+  --textColorPrimary: '#fff';
+  --textColorSecondary: lightgray;
   --borderRadiusS: 0;
   --borderRadiusM: 0;
   --borderRadiusL: 0;
@@ -18,12 +18,57 @@
   --scrollbar-background: #f8f8f8;
 }
 
+.dm3-billboard-widget {
+  overflow: scroll !important;
+}
+.header {
+  padding: 0px !important;
+}
 .message-create-area {
   background-color: var(--messageBg25);
 }
 .dm3-send-message-btn {
-  background-color: var(--colors-accent);
+  background-color: var(--colors-accent) !important;
+  padding: 10px !important;
+  margin-left: 20px !important;
+  border-radius: 12px !important;
 }
 .dm3-send-message-btn:disabled {
-  background-color: lightgray
+  background-color: lightgray !important;
+}
+
+.empty-view {
+  min-height: auto !important;
+  margin-bottom: 20px;
+}
+.empty-info {
+  color: lightgray;
+}
+.empty-view img {
+  width: 20%;
+}
+.text-area-input {
+  border-radius: 12px !important;
+  width: calc(100% - 40px) !important;
+  padding: 10px !important;
+}
+
+.create-header {
+  overflow: hidden !important;
+  width: 200px !important;
+}
+.create-message {
+  position: absolute !important;
+}
+.text-area-wrapper {
+  width: 250px !important;
+}
+
+.message-list {
+  padding: px !important;
+}
+
+.sender {
+  color: lightgray !important;
+  font-size: 8px !important;
 }

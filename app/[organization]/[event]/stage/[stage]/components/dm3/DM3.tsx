@@ -17,7 +17,7 @@ export const defaultOptions: BillboardWidgetProps['options'] = {
   avatarSrc: (hash) => {
     return `https://robohash.org/${hash}?size=38x38`
   },
-  className: 'dm3-billboard-widget',
+  className: 'dm3-billboard-widget overflow-auto !text-white',
   timeout: 10000,
 }
 
@@ -98,16 +98,16 @@ export const Dm3 = () => {
               {!isConnected ? (
                 <div
                   style={{ maxHeight: '40px' }}
-                  className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
+                  className="rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
                   <ConnectWalletButton />
                 </div>
               ) : (
                 <div
                   style={{ maxHeight: '40px' }}
-                  className="rounded-full bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
+                  className="rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
                   <button
                     onClick={signInWithEthereum}
-                    className="text-accent text-sm font-ubuntu font-bold rounded-full h-full w-full bg-white py-1 px-3">
+                    className="text-accent text-sm font-ubuntu font-bold rounded-xl h-full w-full bg-white py-1 px-3">
                     Sign in with Ethereum
                   </button>
                 </div>
