@@ -37,6 +37,7 @@ export interface IEvent {
   website?: string
   timezone: string
   accentColor?: string
+  unlisted?: boolean
   dataExporter?: IDataExporter[]
 }
 
@@ -82,6 +83,8 @@ export default class Event implements IEvent {
 
   startTime?: string
 
+  unlisted?: boolean
+
   endTime?: string
   constructor({
     id,
@@ -102,6 +105,7 @@ export default class Event implements IEvent {
     dataExporter,
     startTime,
     endTime,
+    unlisted,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -121,6 +125,7 @@ export default class Event implements IEvent {
     this.dataExporter = dataExporter
     this.startTime = startTime
     this.endTime = endTime
+    this.unlisted = unlisted ?? false
     // this.validateThis();
   }
 
