@@ -5,7 +5,7 @@ import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia,
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
-import { DevconnectEvents } from 'compositions'
+import { DevconnectEvents } from 'compositions/autonamous_worlds_assembly'
 
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')

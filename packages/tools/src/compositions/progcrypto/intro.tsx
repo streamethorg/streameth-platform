@@ -9,8 +9,6 @@ import {
   Img,
   OffthreadVideo,
 } from 'remotion'
-import { CreateAvatar } from '../../utils/avatars'
-import dayjs from 'dayjs'
 
 export interface SpeakerProps {
   id: string
@@ -36,13 +34,15 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
   const frame = useCurrentFrame()
 
   const audioFile = staticFile('0xparc/audio/IST_material-sound.mp3')
-  const introFile = staticFile(`0xparc/intro/IST_AWA_Intro.mp4`)
+  const introFile = staticFile(
+    `0xparc/intro/IST_Progcrypto_Intro.mp4`
+  )
   const bgFile = staticFile(`0xparc/images/AWA_still.png`)
   const logoFile = ''
 
   const frameRate = 25
-  const introTime = 4 * frameRate
-  const sessionTime = 9 * frameRate
+  const introTime = 3 * frameRate
+  const sessionTime = 6 * frameRate
   const fadeTime = introTime + frameRate / 2
 
   const logoMove = interpolate(
@@ -63,15 +63,15 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
   )
   const endingOpactity = interpolate(
     frame,
-    [durationInFrames - 50, durationInFrames - 20],
+    [durationInFrames - 25, durationInFrames],
     [1, 0]
   )
   const translateYValue =
-    frame >= durationInFrames - 40
+    frame >= durationInFrames - 25
       ? interpolate(
           frame,
-          [durationInFrames - 40, durationInFrames],
-          [150, 350]
+          [durationInFrames - 25, durationInFrames],
+          [150, 220]
         )
       : 150
 
@@ -116,7 +116,7 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
       </AbsoluteFill>
 
       <AbsoluteFill>
-        <div className="flex py-12 px-24 flex-col w-full space-between justify-between text-white">
+        <div className="flex py-12 px-24 flex-col w-full space-between justify-between text-[#ED5F2B]">
           <div
             className="flex relative h-32"
             style={{ opacity: initialOpacity }}>
@@ -148,11 +148,11 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
               from={introTime + 10}
               durationInFrames={sessionTime}
               layout="none">
-              <h1
+              <div
                 className={titleClassName()}
-                style={{ fontFamily: 'Grotesk Compact Smooth' }}>
+                style={{ fontFamily: 'Grotesk Trial Medium' }}>
                 {session.name}
-              </h1>
+              </div>
             </Sequence>
           </div>
           <div
@@ -169,7 +169,9 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
               from={introTime + 10}
               durationInFrames={sessionTime}
               layout="none">
-              <div className="flex w-full justify-center items-center">
+              <div
+                className="flex w-full justify-center items-center"
+                style={{ fontFamily: 'Grotesk Trial Regular' }}>
                 <div className={speakersClassName()}>
                   {session.speakers.map((i) => {
                     return (
