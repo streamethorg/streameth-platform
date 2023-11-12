@@ -13,7 +13,7 @@ const FilteredItems = ({ sessions }: { sessions: ISession[] }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions])
   return (
-    <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4 md:overflow-scroll s-start">
+    <div className=" w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4 md:overflow-scroll s-start">
       {filteredItems.map((session: ISession) => {
         return (
           <ArchivedSession

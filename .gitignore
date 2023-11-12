@@ -39,3 +39,6 @@ test.ts
 # Google Cloud secrets
 google_client_secret.json
 google_sa_secret.json
+
+# Generated assets
+assets

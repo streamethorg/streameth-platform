@@ -1,8 +1,1 @@
-{
-  "id": "misha_komarov",
-  "name": "Misha Komarov",
-  "bio": "Misha Komarov is the founder of =nil; Foundation, a leading developer of trustless infrastructure for zero-knowledge proofs. Misha is a researcher and developer in the fields of cryptography and database management systems (DBMS). His journey in technology began in 2013 when he began contributing to BitMessage, a peer-to-peer encrypted communications protocol. He then worked with blockchain network BitShares, and Steemit, the first application built on the Steem blockchain. Mikhail worked on a fork of Steem from 2017 to 2018, before founding =nil; Foundation in April 2018.",
-  "eventId": "progcrypto",
-  "twitter": "",
-  "photo": "https://drive.google.com/uc?id=1QvWa32qIEDUI8ZQTilFEeokEVRh41lXZ"
-}
+{"id":"misha_komarov","name":"Misha Komarov","bio":"Misha Komarov is the founder of =nil; Foundation, a leading developer of trustless infrastructure for zero-knowledge proofs. Misha is a researcher and developer in the fields of cryptography and database management systems (DBMS). His journey in technology began in 2013 when he began contributing to BitMessage, a peer-to-peer encrypted communications protocol. He then worked with blockchain network BitShares, and Steemit, the first application built on the Steem blockchain. Mikhail worked on a fork of Steem from 2017 to 2018, before founding =nil; Foundation in April 2018.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/19drKabEfgg-DHJM4980hnNwXHGHCLsk_/view"}

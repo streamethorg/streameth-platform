@@ -1,8 +1,1 @@
-{
-  "id": "richard_liang",
-  "name": "Richard Liang",
-  "bio": "I am currently a PSE grantee as part of the ZKP2P project. We are building the first trustless P2P onramp powered by ZK proofs in close collaboration with the ZKEmail team. Previously, I was part of the founding team at Set Protocol where we built a DeFi index protocol and launched some popular financial products that reached >$500M in assets. Additionally, I built / contributed to a few open source ZK libraries: RSA in Noir and verifying a chain of x509 certificates in halo2. Most of my experience is in building fullstack apps / smart contract protocols, which require connecting all parts of the stack and delivering an end product to the user. ZK is the newest layer in the stack, and I'm excited to get innovative ZK powered apps into the hands of users (e.g. ZKP2P when we launch)",
-  "eventId": "progcrypto",
-  "twitter": "",
-  "photo": "https://drive.google.com/uc?id=1Hf1AI3TNqY1M78VuR78Wqk_p7mG3I6Ld"
-}
+{"id":"richard_liang","name":"Richard Liang","bio":"I am currently a PSE grantee as part of the ZKP2P project. We are building the first trustless P2P onramp powered by ZK proofs in close collaboration with the ZKEmail team. Previously, I was part of the founding team at Set Protocol where we built a DeFi index protocol and launched some popular financial products that reached >$500M in assets. Additionally, I built / contributed to a few open source ZK libraries: RSA in Noir and verifying a chain of x509 certificates in halo2. Most of my experience is in building fullstack apps / smart contract protocols, which require connecting all parts of the stack and delivering an end product to the user. ZK is the newest layer in the stack, and I'm excited to get innovative ZK powered apps into the hands of users (e.g. ZKP2P when we launch)","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1AAim8Zx_BiAHUzzGCDQo5NjotfEcZiFM/view"}

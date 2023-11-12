@@ -4,13 +4,17 @@ import SpeakerIconList from '@/app/[organization]/[event]/(eventHome)/speakers/c
 import { useEffect, useState, useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
 import { LoadingContext } from '@/components/context/LoadingContext'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import moment from 'moment-timezone'
 
 const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
   const { closeModal } = useContext(ModalContext)
   const { setIsLoading } = useContext(LoadingContext)
   const router = useRouter()
+  const pathname = usePathname()
+
+  const paramsOrgId = pathname.split('/')[1]
 
   useEffect(() => {
     const url = window.location.href
@@ -20,17 +24,23 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const handleGoToStage = () => {
     setIsLoading(true)
     closeModal()
-    router.push(`${session.eventId}/stage/${session.stageId}`)
+    const stageUrl = `/${paramsOrgId}/${session.eventId}/stage/${session.stageId}`
+    !pathname.includes('schedule')
+      ? router.push(stageUrl)
+      : window.open(stageUrl, '_blank', 'noreferrer')
   }
 
   return (
-    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-4xl rounded-xl">
+    <div className="flex flex-col space-y-4 p-4  text-white w-full bg-base md:max-w-2xl rounded-xl">
       <div className="flex flex-col bg-base p-4 rounded-xl">
         <h1 className="text-lg  font-bold ">{session.name}</h1>
         <span className=" flex flex-row text-white">
           {new Date(session.start).toDateString()}{' '}
-          {new Date(session.start).toTimeString().slice(0, 5)} -{' '}
-          {new Date(session.end).toTimeString().slice(0, 5)}
+          {moment(session.start)
+            .tz('Europe/Istanbul')
+            .format('HH:mm')}{' '}
+          -{moment(session.end).tz('Europe/Istanbul').format('HH:mm')}{' '}
+          (GMT +3)
         </span>
       </div>
       {session.description && (

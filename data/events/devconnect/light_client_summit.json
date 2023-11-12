@@ -1,1 +1,35 @@
-{"id":"light_client_summit","name":"Light Client Summit","description":"A day for builders to explore the state of light clients in the Ethereum ecosystem.\n","start":"2023-11-18T00:00:00.000Z","end":"2023-11-18T00:00:00.000Z","location":"Istanbul, Türkiye","organizationId":"devconnect","dataImporter":[{"type":"gsheet","config":{"sheetId":"1dfd6HNSZR5W844xeE6IFiggvzU_VhUa1FWjQG3GaJqs","apiKey":"k"}}],"eventCover":"devconnect_cover.png","website":"","archiveMode":false,"timezone":"Europe/Istanbul","logo":"ethlightclients_logo.png","banner":"devconnect_banner.png","accentColor":"#6ED1B4","dataExporter":[{"type":"gdrive","config":{"driveId":"1xtB13ka_Ej8BTn991B8B5tyC8OnOFg1S","driveApiKey":""}}],"startTime":"10:00"}
+{
+  "id": "light_client_summit",
+  "name": "Light Client Summit",
+  "description": "A day for builders to explore the state of light clients in the Ethereum ecosystem.\n",
+  "start": "2023-11-18T00:00:00.000Z",
+  "end": "2023-11-18T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "devconnect",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1dfd6HNSZR5W844xeE6IFiggvzU_VhUa1FWjQG3GaJqs",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "LightClient_Cover.jpg",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "ethlightclients_logo.png",
+  "banner": "LightClient _Banner.jpg",
+  "accentColor": "#6ED1B4",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1l40ph-mbHVvJQGCYoCOfbr_os1gSMidT",
+        "driveApiKey": ""
+      }
+    }
+  ],
+  "startTime": "10:00"
+}

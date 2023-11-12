@@ -14,11 +14,12 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   return (
     <ComponentWrapper sectionId="home">
       <Image
-        className="rounded-lg"
+        className="rounded-lg max-h-[500px]"
         src={'/events/' + banner}
         alt="Event Cover"
         width={1500}
         height={500}
+        objectFit="cover"
       />
       <div id="home" className="flex flex-col p-4">
         <div className=" flex-col flex space-y-2 md:flex-col">
@@ -29,13 +30,17 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
             <p>
               <span className="mr-2">&#128197;</span>
               {new Date(event.start).toDateString()}
+              {new Date(event?.start).toDateString() !==
+              new Date(event?.end).toDateString()
+                ? ` - ${new Date(event.end).toDateString()}`
+                : ''}
             </p>
             <p>
               <span className="mr-2">&#9200;</span>
               {event?.startTime
-                ? `${getEventPeriod(event.startTime)} ${
-                    event.timezone
-                  }`
+                ? `${getEventPeriod(event.startTime)} - ${
+                    event.endTime ? getEventPeriod(event.endTime) : ''
+                  } ${event.timezone}`
                 : 'TBD'}
             </p>
             <p>
@@ -43,7 +48,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
               {event.location}
             </p>
             {/* <ReserveSpotButton event={event} /> */}
-            <article className="prose max-w-full prose-gray text-white">
+            <article className="prose max-w-full prose-a:text-white prose-gray text-white">
               <Markdown remarkPlugins={[remarkGfm]}>
                 {event.description}
               </Markdown>

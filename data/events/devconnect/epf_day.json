@@ -1,1 +1,35 @@
-{"id":"epf_day","name":"EPF Day","description":"Protocol Fellowship program event. At minimum to get the crew together, possibly to attract/inform new interested members, and maybe presentations on projects accomplished thus far.\n","start":"2023-11-17T00:00:00.000Z","end":"2023-11-17T00:00:00.000Z","location":"Istanbul, Türkiye","organizationId":"devconnect","dataImporter":[{"type":"gsheet","config":{"sheetId":"1gaf8oSQr_ekvfs2UPkiI29uCUIrbUhnzoGO8jhP5zfU","apiKey":"k"}}],"eventCover":"devconnect_cover.png","website":"","archiveMode":false,"timezone":"Europe/Istanbul","logo":"epf-logo.jpg","banner":"devconnect_banner.png","accentColor":"#9D67A4","dataExporter":[{"type":"gdrive","config":{"driveId":"1XKGr516_BvfwjE5QmoObL2qsMesjEIuC","driveApiKey":""}}],"startTime":"08:30"}
+{
+  "id": "epf_day",
+  "name": "EPF Day",
+  "description": "EPF Day is the culmination of the fourth cohort of the Ethereum Protocol Fellowship, a program designed to onboard aspiring developers to the world of Ethereum core protocol research and development. Fellows will present the projects they have been working on over the past four months, on topics from all corners of Ethereum R&D.\n",
+  "start": "2023-11-17T00:00:00.000Z",
+  "end": "2023-11-17T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "devconnect",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1gaf8oSQr_ekvfs2UPkiI29uCUIrbUhnzoGO8jhP5zfU",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "EPF_Cover.jpg",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "logo": "epf-logo.jpg",
+  "banner": "EPF_Banner.jpg",
+  "accentColor": "#9D67A4",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1XKGr516_BvfwjE5QmoObL2qsMesjEIuC",
+        "driveApiKey": ""
+      }
+    }
+  ],
+  "startTime": "08:30"
+}

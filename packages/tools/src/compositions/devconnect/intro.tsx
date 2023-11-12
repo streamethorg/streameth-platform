@@ -1,10 +1,6 @@
 import { Sequence, AbsoluteFill, staticFile, Audio, useVideoConfig, useCurrentFrame, interpolate, Img, OffthreadVideo } from 'remotion'
-import { loadFont } from "@remotion/google-fonts/SofiaSansExtraCondensed"
-import { G_FPS } from '../../consts'
-import dayjs from 'dayjs'
 import { CreateAvatar } from '../../utils/avatars'
-
-export const { fontFamily } = loadFont()
+import dayjs from 'dayjs'
 
 export interface SpeakerProps {
     id: string
@@ -34,20 +30,21 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
     const bgFile = staticFile(`devconnect/images/IST-bg-${type}.png`)
     const logoFile = id ? staticFile(`devconnect/logos/${id}.png`) : ''
 
-    const introTime = 5 * G_FPS
-    const sessionTime = 7 * G_FPS
-    const fadeTime = introTime + (G_FPS / 2)
+    const frameRate = 25
+    const introTime = 5 * frameRate
+    const sessionTime = 7 * frameRate
+    const fadeTime = introTime + (frameRate / 2)
 
     const logoMove = interpolate(frame, [introTime, fadeTime], [-60, 0], { extrapolateRight: "clamp" });
     const initialOpacity = interpolate(frame, [introTime, fadeTime], [0, 1]);
     const delayedOpacity = interpolate(frame, [introTime + 15, fadeTime + 15], [0, 1]);
 
     function titleClassName() {
-        let className = 'w-full text-center font-bold'
+        let className = 'w-full text-center'
         if (session.name.length >= 140) className += ' text-8xl leading-none'
         if (session.name.length > 60 && session.name.length < 140) className += ' text-8xl leading-tight'
         if (session.name.length > 40 && session.name.length < 60) className += ' text-9xl leading-tight'
-        if (session.name.length < 40) className += ' text-[9rem]'
+        if (session.name.length < 40) className += ' text-9xl leading-tight'
 
         return className
     }
@@ -93,7 +90,7 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
                     </div>
                     <div className='flex relative mt-8 h-96 items-end' style={{ opacity: delayedOpacity }}>
                         <Sequence name='Title' from={introTime + 10} durationInFrames={sessionTime} layout="none">
-                            <h1 className={titleClassName()} style={{ fontFamily }}>{session.name}</h1>
+                            <h1 className={titleClassName()} style={{ fontFamily: 'Sofia Sans Extra Condensed' }}>{session.name}</h1>
                         </Sequence>
                     </div>
                     <div className='flex relative mt-28' style={{ opacity: delayedOpacity }}>

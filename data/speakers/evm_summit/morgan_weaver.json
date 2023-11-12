@@ -1,8 +1,1 @@
-{
-  "id": "morgan_weaver",
-  "name": "Morgan Weaver",
-  "bio": "Morgan came to Web3 in early 2022, from the fields of deep learning, DevOps, and distributed systems within the Web2 landscape. Throughout this transition, Morgan has enjoyed building knowledge in Solidity, smart contract auditing, and systems-level Web3 security.\nWhile their work at OpenZeppelin has heavily focused on onchain monitoring and automation as well as proof of concept work, it has also included contributions to security standards with the Ethereum Enterprise Alliance, and participation in many hackathons, communities and events.\nMorgan lives and works in Lisbon, and intends to help Web3 make a positive disruption is the existing social, financial, and operational structures of Web2.",
-  "eventId": "evm_summit",
-  "twitter": "",
-  "photo": "https://drive.google.com/uc?id=1Z3CVPf8311_xBSGIAvCeB6JIm9KRdjtr"
-}
+{"id":"morgan_weaver","name":"Morgan Weaver","bio":"Morgan came to Web3 in early 2022, from the fields of deep learning, DevOps, and distributed systems within the Web2 landscape. Throughout this transition, Morgan has enjoyed building knowledge in Solidity, smart contract auditing, and systems-level Web3 security.\nWhile their work at OpenZeppelin has heavily focused on onchain monitoring and automation as well as proof of concept work, it has also included contributions to security standards with the Ethereum Enterprise Alliance, and participation in many hackathons, communities and events.\nMorgan lives and works in Lisbon, and intends to help Web3 make a positive disruption is the existing social, financial, and operational structures of Web2.","eventId":"evm_summit","twitter":"","photo":"https://drive.google.com/file/d/1Z3CVPf8311_xBSGIAvCeB6JIm9KRdjtr/view"}

@@ -1,0 +1,26 @@
+{
+  "id": "swarm_winter_solstice",
+  "name": "Swarm 2.0 - The Winter Solstice Event",
+  "description": "Swarm's creation was an act of defiance. Born from the visionaries who dared to imagine a world beyond the monolithic data empires, Swarm stands as a testament to the indomitable spirit of progress. Join Swarm Foundation team members and community, on a virtual event to commemorate the beginning of Swarm 2.0.",
+  "start": "2023-12-21T00:00:00.000Z",
+  "end": "2023-12-21T00:00:00.000Z",
+  "location": "Virtual",
+  "organizationId": "swarm",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1-MIyFvZMjHMfa5UhoesA4hB5s9YHisBWoUyrtG0l_fg",
+        "apiKey": "s"
+      }
+    }
+  ],
+  "eventCover": "swarm_cover.jpeg",
+  "logo": "swarm_logo.jpeg",
+  "banner": "swarm_cover.jpeg",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "CET",
+  "accentColor": "#F6F7F9",
+  "startTime": "17:00"
+}

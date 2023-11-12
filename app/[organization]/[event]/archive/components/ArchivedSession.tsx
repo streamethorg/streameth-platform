@@ -14,7 +14,6 @@ const ArchivedSession = ({
   goToStage?: boolean
 }) => {
   const [image, setImage] = useState(session.coverImage)
-  console.log('image', image)
   const [fallback, setFallback] = useState(false)
   const alt = '/events/' + session.eventId + '.png'
 
@@ -50,11 +49,7 @@ const ArchivedSession = ({
   )
 
   if (learnMore)
-    return (
-      <Link className="h-full" href={'session/' + session.id}>
-        {component}
-      </Link>
-    )
+    return <Link href={'session/' + session.id}>{component}</Link>
   if (goToStage)
     return <Link href={'/stage/' + session.stageId}>{component}</Link>
 

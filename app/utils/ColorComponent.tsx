@@ -42,9 +42,20 @@ const ColorComponent = ({
     useContext(TopNavbarContext)
   const { accentColor, logo, organizationId, id } = event
   const isNotOrganization =
-    pathname === '/' || pathname.includes('/admin')
+    pathname === '/' || pathname.match(/^\/[a-zA-Z0-9]+$/)
 
   const pages: Page[] = []
+
+  const sessionWithVideo = sessions.filter(
+    (session) => session.videoUrl
+  )
+
+  if (sessionWithVideo.length > 0)
+    pages.push({
+      href: `/${organizationId}/${id}/archive`,
+      name: 'Archive',
+      icon: <ViewColumnsIcon />,
+    })
 
   if (sessions.length > 0)
     pages.push({
@@ -81,14 +92,16 @@ const ColorComponent = ({
   useEffect(() => {
     setLogo('/events/' + logo)
     if (event.archiveMode) {
-      setComponents([
-        <FilterBar
-          key="1"
-          sessions={sessions}
-          speakers={speakers}
-          stages={stages}
-        />,
-      ])
+      if (!pathname.includes('/session/')) {
+        setComponents([
+          <FilterBar
+            key="1"
+            sessions={sessions}
+            speakers={speakers}
+            stages={stages}
+          />,
+        ])
+      }
     } else {
       setPages([...pages, ...stagePages()])
     }
@@ -97,7 +110,7 @@ const ColorComponent = ({
       setPages([])
       setLogo('')
     }
-  }, [event])
+  }, [event, pathname])
 
   useEffect(() => {
     if (!isNotOrganization && accentColor) {
