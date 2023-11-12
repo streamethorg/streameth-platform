@@ -17,27 +17,27 @@ export const config = {
 }
 
 export async function middleware(request: NextRequest) {
-  // let org
-  // let event
-  // let page
+  let org
+  let event
+  let page
 
-  // try {
-  //   org = request.url.split('/')[3]
-  //   event = request.url.split('/')[4]
-  //   page = request.url.split('/')[5]
-  //   const url = new URL(`/api/organizations/${org}/events/${event}`, request.url).href
-  //   console.log('MIDDLEWARE LOG', url)
-  //   const response = await fetch(url.replace('localhost', '127.0.0.1'), {
-  //     method: 'GET',
-  //   })
-  //   if (!response.ok) {
-  //     throw new Error('HTTP error ' + response.status)
-  //   }
-  //   const data: Event = await response.json()
-  //   if (data.archiveMode && page !== 'archive' && page !== 'session') {
-  //     return NextResponse.redirect(new URL(`/${org}/${event}/archive`, request.url))
-  //   }
-  // } catch (e) {
-  //   console.log(e)
-  // }
+  try {
+    org = request.url.split('/')[3]
+    event = request.url.split('/')[4]
+    page = request.url.split('/')[5]
+    const url = new URL(`/api/organizations/${org}/events/${event}`, request.url).href
+    console.log('MIDDLEWARE LOG', url)
+    const response = await fetch(url.replace('localhost', '127.0.0.1'), {
+      method: 'GET',
+    })
+    if (!response.ok) {
+      throw new Error('HTTP error ' + response.status)
+    }
+    const data: Event = await response.json()
+    if (data.archiveMode && page !== 'archive' && page !== 'session') {
+      return NextResponse.redirect(new URL(`/${org}/${event}/archive`, request.url))
+    }
+  } catch (e) {
+    console.log(e)
+  }
 }
