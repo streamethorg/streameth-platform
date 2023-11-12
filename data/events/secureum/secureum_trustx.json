@@ -1,0 +1,26 @@
+{
+  "id": "secureum_trustx",
+  "name": "Secureum TrustX",
+  "description": "Secureum TrustX is a first-of-its-kind technical event dedicated to the Ethereum security ecosystem. Security is critical to Ethereum and its applications. TrustX is a flagship community event dedicated to Ethereum security.",
+  "start": "2023-11-13T00:00:00.000Z",
+  "end": "2023-11-14T00:00:00.000Z",
+  "location": "Main Stage Secureum TrustX Istanbul",
+  "organizationId": "secureum",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1sfzI87_rzdA-Xjs4gAAqOIew7P-1J4lLq2FwP_9QXKA",
+        "apiKey": "s"
+      }
+    }
+  ],
+  "eventCover": "secureum_banner.jpeg",
+  "logo": "SecureumLogo.png",
+  "banner": "secureum_banner.jpeg",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "Europe/Istanbul",
+  "accentColor": "#000000",
+  "startTime": "08:30"
+}

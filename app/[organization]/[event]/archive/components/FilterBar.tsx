@@ -44,34 +44,22 @@ function FilterBar({
   })
 
   const sessionDateFilters = () => {
-    const uniqueDates = Array.from(
-      new Set(sessions.map((session) => session.start))
+    const uniqueDatesSet = new Set(
+      sessions.map((session) =>
+        new Date(session.start).toLocaleDateString()
+      )
     )
-
-    uniqueDates.sort((a, b) => {
-      return a - b
-    })
+    const uniqueDates = Array.from(uniqueDatesSet)
 
     return uniqueDates.map((date) => ({
-      name: new Date(date).toLocaleDateString(),
+      name: date,
       value: date,
       type: 'date',
       filterFunc: async (item: ISession) => {
-        return item.start === date
+        return new Date(item.start).toLocaleDateString() === date
       },
     }))
   }
-
-  const trackFilter = sessions.map((session) => {
-    return {
-      name: session.track,
-      value: session.track,
-      type: 'track',
-      filterFunc: async (item: ISession) => {
-        return item.track === session.track
-      },
-    }
-  })
 
   const stageFilters = stages.map((stage) => {
     return {
@@ -87,7 +75,7 @@ function FilterBar({
   return (
     <div
       key={1}
-      className={` w-full max-w-[600px] m-auto z-50 ${
+      className={`w-full max-w-[600px] m-auto z-50 ${
         isOpen && 'h-full '
       } `}
       ref={inputBarRef}>
@@ -100,7 +88,7 @@ function FilterBar({
 
           {isOpen && (
             <div
-              className="absolute w-full space-y-2 bg-accent rounded p-4 shadow-sm"
+              className="absolute w-full space-y-2 bg-accent rounded-xl p-4 shadow-sm"
               // Set the top position based on the height of the input bar.
               style={{
                 top: inputBarRef.current
@@ -126,7 +114,7 @@ function FilterBar({
           )}
         </div>
         <AdjustmentsHorizontalIcon
-          className="h-full w-8 text-base md:ml-2"
+          className="h-full w-8 cursor-pointer text-base md:ml-2"
           onClick={() => setIsOpen(!isOpen)}
         />
       </div>

@@ -1,12 +1,18 @@
-import { Composition, Folder, Still, continueRender, delayRender } from 'remotion'
+import { Composition, Folder, Still, continueRender, delayRender, staticFile } from 'remotion'
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
+import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration } from './devconnect'
 import { JoinVideos } from './join'
-import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration, DevconnectISTFont, Join, Intro, Social } from './devconnect'
+import { Intro } from './devconnect/intro'
+import { Social } from './devconnect/social'
+import { Join } from './devconnect/join'
 
 export function Compositions() {
   const waitForFont = delayRender()
-  const font = DevconnectISTFont
+  const font = new FontFace(
+    `Sofia Sans Extra Condensed`,
+    `url('${staticFile('devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf')}') format('truetype')`,
+  )
 
   font.load().then(() => {
     document.fonts.add(font)

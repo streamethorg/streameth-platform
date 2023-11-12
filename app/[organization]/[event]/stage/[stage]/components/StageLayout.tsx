@@ -1,20 +1,22 @@
 'use client'
-import { useContext, useLayoutEffect, useRef, useState } from 'react'
-import {
-  ChatBubbleBottomCenterIcon,
-  CalendarIcon,
-  InformationCircleIcon,
-} from '@heroicons/react/24/outline'
-import SessionList from '@/components/sessions/SessionList'
-import Chat from '@/plugins/Chat'
-import Player from '@/components/misc/Player'
-import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
-import { StageContext } from './StageContext'
-import EmbedButton from '@/components/misc/EmbedButton'
-import ShareButton from '@/components/misc/ShareButton'
+import PluginBar from '@/components/Layout/PluginBar'
 import { LoadingContext } from '@/components/context/LoadingContext'
 import { MobileContext } from '@/components/context/MobileContext'
+import EmbedButton from '@/components/misc/EmbedButton'
+import Player from '@/components/misc/Player'
+import ShareButton from '@/components/misc/ShareButton'
+import SessionList from '@/components/sessions/SessionList'
+import {
+  CalendarIcon,
+  ChatBubbleBottomCenterIcon
+} from '@heroicons/react/24/outline'
+import { useContext, useLayoutEffect, useRef, useState } from 'react'
+import { Dm3 } from './dm3/DM3'
+import { StageContext } from './StageContext'
+
+
+
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
@@ -30,7 +32,8 @@ export default function StageLayout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stickyRef.current])
 
-  const context = useContext(StageContext)
+  const context = useContext(StageContext) 
+  
 
   if (!context) return null
 
@@ -49,18 +52,19 @@ export default function StageLayout() {
     tabs.push({
       id: 'chat',
       header: <ChatBubbleBottomCenterIcon />,
-      content: <Chat conversationId={stage.id} />,
+      content:   <Dm3/>
     })
 
     return tabs
   }
   return (
-    <div className="h-full flex flex-col w-full lg:flex-row relative lg:p-4 lg:max-h-screen">
-      <div className="h-full flex flex-col w-full lg:flex-row relative p-2 lg:gap-4">
+    <div className="h-full flex flex-col w-full lg:flex-row relative p-4 lg:max-h-screen">
+      <div className="h-full flex flex-col w-full lg:flex-row relative lg:gap-4">
         <div
           ref={stickyRef}
-          className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky top-[65px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
+          className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[65%]">
           <ActionsComponent title={stage.name}>
+         
             <EmbedButton
               streamId={stage.streamSettings.streamId}
               playerName={stage.name}
@@ -74,7 +78,7 @@ export default function StageLayout() {
         </div>
         <div
           style={{ height: isMobile ? '100%' : playerHeight }}
-          className={`w-full lg:w-[25%]`}>
+          className={`w-full lg:w-[35%]`}>
           <PluginBar
             bottomOffset={bottomOffset}
             tabs={getPluginTabs()}

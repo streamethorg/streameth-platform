@@ -34,20 +34,6 @@ export default async function ArchivePage({ params }: Params) {
     )
   }
 
-  const speakerController = new SpeakerController()
-  const speakers = (
-    await speakerController.getAllSpeakersForEvent(params.event)
-  ).map((speaker) => {
-    return speaker.toJson()
-  })
-
-  const stageController = new StageController()
-  const stages = (
-    await stageController.getAllStagesForEvent(params.event)
-  ).map((stage) => {
-    return stage.toJson()
-  })
-
   return (
     <div className="flex flex-col-reverse justify-end lg:flex-row w-full lg:h-full lg:overflow-hidden">
       <FilteredItems sessions={sessions} />

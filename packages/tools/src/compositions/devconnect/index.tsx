@@ -1,17 +1,6 @@
-import { staticFile } from "remotion"
-
-export { Intro } from './intro'
-export { Join } from './join'
-export { Social } from './social'
-
 export const DevconnectFrameRate = 25
 export const DevconnectIntroDuration = 12 * DevconnectFrameRate
 export const DevconnectOutroDuration = 9 * DevconnectFrameRate
-
-export const DevconnectISTFont = new FontFace(
-    `Sofia Sans Extra Condensed`,
-    `url('${staticFile('devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf')}') format('truetype')`,
-)
 
 // 1 = blue/teal
 // 2 = teal/orange

@@ -191,6 +191,7 @@ export default function Studio(props: Props) {
 
       {stream.playbackId && (
         <Editor
+          organizationId={event.organizationId}
           eventId={event.id}
           playbackId={stream.playbackId}
           sessionId={stream.sessionId}

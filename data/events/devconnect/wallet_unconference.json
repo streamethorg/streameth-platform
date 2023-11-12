@@ -10,7 +10,7 @@
     {
       "type": "gsheet",
       "config": {
-        "sheetId": "1dLl-rVjjciYA0v5EJpFxkYOhGfrdp_9aDrhjH5S",
+        "sheetId": "1dLl-rVjjciYA0v5EJpFxkYOhGfrdp_9aDrhjH5S_--U",
         "apiKey": "k"
       }
     }
@@ -30,6 +30,6 @@
   "timezone": "Europe/Istanbul",
   "logo": "wallet_unconference_logo.jpeg",
   "banner": "wallet_unconference_banner.jpeg",
-  "accentColor": "white",
-  "startTime": "8:30"
+  "accentColor": "gray",
+  "startTime": "10:00"
 }
