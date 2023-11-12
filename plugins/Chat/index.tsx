@@ -6,7 +6,11 @@ import { useAccount } from 'wagmi'
 const ChatBar = ({ conversationId }: { conversationId: string }) => {
   const [isLoading, setIsLoading] = useState(true)
 
-  const { isDisconnected, address: userAddress, isConnecting } = useAccount()
+  const {
+    isDisconnected,
+    address: userAddress,
+    isConnecting,
+  } = useAccount()
 
   useEffect(() => {
     if (isConnecting) {
@@ -20,10 +24,13 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
     return <div>Loading</div>
   }
   return (
-    <div className="relative flex flex-col h-80 lg:h-full text-black">
+    <div className="relative flex flex-col h-full text-black">
       {isDisconnected ? (
         <>
-          <iframe className="h-full" src={`https://stingray-app-u9f8x.ondigitalocean.app/${conversationId}?isCastr=${true}`} />
+          <iframe
+            className="h-full"
+            src={`https://stingray-app-u9f8x.ondigitalocean.app/${conversationId}?isCastr=${true}`}
+          />
           <p className=" p-4 m-auto w-full text-center flex flex-col justify-center items-center">
             Connect your wallet to chat
             <ConnectKitButton />
