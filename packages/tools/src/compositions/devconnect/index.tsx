@@ -19,5 +19,9 @@ export const DevconnectEvents = [
     { id: 'fe-lang-hackathon', type: '1' },
     { id: 'conflux--web3-ux-unconference', type: '7' },
     { id: 'wallet-unconference', type: '2' },
-    // { id: 'cryptographic-resilience-within-ethereum', type: '4' },
+    { id: 'cryptographic-resilience', type: '4' },
+    { id: 'formal-verification', type: '5' },
+    { id: 'protocol-guild', type: '3' },
+    { id: 'scholars', type: '6' },
+    { id: 'women-in-protocol', type: '2' },
 ]
