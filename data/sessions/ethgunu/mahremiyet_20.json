@@ -1,1 +1,21 @@
-{"id":"mahremiyet_20","name":"Mahremiyet 2.0","description":"Blokzincirlerde finansal mahremiyetin öneminin altını çizerek, yapılan yasaklara karşı pratik bir denge için geliştirdiğimiz kişi mahremiyetini koruyan çözüm 'Proof of Innocence' (Masumiyet Kanıtı).","start":1699884000000,"end":1699885800000,"stageId":"harbiye","speakers":[{"id":"ekrem_bal","name":"Ekrem Bal","bio":"Chainway Kurucu Ortak","eventId":"ethgunu","twitter":"@ekrembal_","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/ekrem.jpeg?raw=true"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/mahremiyet_20.jpg"}
+{
+  "id": "mahremiyet_20",
+  "name": "Mahremiyet 2.0",
+  "description": "Blokzincirlerde finansal mahremiyetin öneminin altını çizerek, yapılan yasaklara karşı pratik bir denge için geliştirdiğimiz kişi mahremiyetini koruyan çözüm 'Proof of Innocence' (Masumiyet Kanıtı).",
+  "start": 1699884000000,
+  "end": 1699885800000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "ekrem_bal",
+      "name": "Ekrem Bal",
+      "bio": "Chainway Kurucu Ortak",
+      "eventId": "ethgunu",
+      "twitter": "@ekrembal_",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/ekrem.jpeg?raw=true"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethgunu",
+  "coverImage": "sessions/ethgunu/mahremiyet_20_thumbnail.png"
+}
