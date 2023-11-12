@@ -14,7 +14,7 @@ import {
 import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
-import LivepeerIcon from '@/app/assets/icons/LivepeerIcon'
+import LivepeerIcon from '../../../../../assets/icons/LivepeerIcon'
 
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
