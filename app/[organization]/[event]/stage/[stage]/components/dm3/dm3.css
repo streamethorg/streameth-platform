@@ -13,6 +13,10 @@
   --scrollbar-background: var(--colors-accent);
 }
 
+.avatar {
+  padding-right: 0px !important;
+}
+
 .styled-scrollbars {
   --scrollbar-foreground: var(--colors-accent);
   --scrollbar-background: #f8f8f8;
@@ -58,10 +62,11 @@
   width: 200px !important;
 }
 .create-message {
-  position: absolute !important;
+  /* position: fixed !important; */
+  /* background-color: var(--inputBg); */
 }
 .text-area-wrapper {
-  width: 250px !important;
+  width: 220px !important;
 }
 
 .message-list {

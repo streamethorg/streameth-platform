@@ -12,6 +12,7 @@ import { ethers } from 'ethersv5'
 import { StageContext } from '../StageContext'
 import { useDm3Siwe } from './useDm3Siwe'
 import { ConnectWalletButton } from '@/components/ConnectWalletButton'
+import { ConnectKitButton } from 'connectkit'
 
 export const defaultOptions: BillboardWidgetProps['options'] = {
   avatarSrc: (hash) => {
@@ -91,16 +92,15 @@ export const Dm3 = () => {
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'between',
                 padding: '16px',
-                height: '1000px',
+                // height: '1000px',
               }}>
               {!isConnected ? (
-                <div
-                  style={{ maxHeight: '40px' }}
-                  className="rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
-                  <ConnectWalletButton />
-                </div>
+                <p className="text-white p-4 m-auto w-full text-center flex flex-col justify-center items-center">
+                  Connect your wallet to chat
+                  <ConnectKitButton />
+                </p>
               ) : (
                 <div
                   style={{ maxHeight: '40px' }}
