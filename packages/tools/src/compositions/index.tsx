@@ -8,31 +8,34 @@ import {
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
 import { JoinVideos } from './join'
-// import {
-//   DevconnectEvents,
-//   DevconnectFrameRate,
-//   DevconnectIntroDuration,
-//   DevconnectOutroDuration,
-//   ProgCryptoFont_Reg,
-//   ProgCryptoFont_Med,
-//   Join,
-//   Intro,
-//   Social,
-// } from './progcrypto'
 import {
   DevconnectEvents,
   DevconnectFrameRate,
   DevconnectIntroDuration,
   DevconnectOutroDuration,
-  DevconnectISTFont,
+  ProgCryptoFont_Reg,
+  ProgCryptoFont_Med,
   Join,
   Intro,
-  Social,
-} from './autonamous_worlds_assembly'
+  Social
+} from './progcrypto'
+//   Social,
+// import {
+//   DevconnectEvents,
+//   DevconnectFrameRate,
+//   DevconnectIntroDuration,
+//   DevconnectOutroDuration,
+//   DevconnectISTFont,
+//   Join,
+//   Intro,
+//   Social,
+// } from './autonamous_worlds_assembly'
 
 export function Compositions() {
   const waitForFont = delayRender()
-  const font = DevconnectISTFont
+  // const font = DevconnectISTFont
+  const font = ProgCryptoFont_Reg
+  const font2 = ProgCryptoFont_Med
 
   font
     .load()
@@ -42,13 +45,13 @@ export function Compositions() {
     })
     .catch((err) => console.log('Error loading font', err))
 
-  // font2
-  //   .load()
-  //   .then(() => {
-  //     document.fonts.add(font2)
-  //     continueRender(waitForFont)
-  //   })
-  //   .catch((err) => console.log('Error loading font', err))
+  font2
+    .load()
+    .then(() => {
+      document.fonts.add(font2)
+      continueRender(waitForFont)
+    })
+    .catch((err) => console.log('Error loading font', err))
 
   return (
     <>

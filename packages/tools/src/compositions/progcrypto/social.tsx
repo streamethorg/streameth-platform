@@ -51,7 +51,7 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
               className={titleClassName()}
               style={{
                 fontFamily: 'Grotesk Trial Medium',
-                transform: `translateY(110px)`,
+                transform: `translateY(80px)`,
               }}>
               {session.name}
             </h1>
@@ -64,7 +64,7 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
                     <div
                       key={i.id}
                       className="flex flex-col items-center gap-4"
-                      style={{ transform: `translateY(75px)` }}>
+                      style={{ transform: `translateY(55px)` }}>
                       <span className="text-xl font-medium w-32 text-center leading-normal">
                         {i.name}
                       </span>
