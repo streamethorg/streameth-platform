@@ -79,9 +79,11 @@ export default class EventController {
   public async getAllEvents({
     organizationId,
     startDate,
+    inclUnlisted = false,
   }: {
     organizationId?: IEvent['organizationId']
     startDate?: number
+    inclUnlisted?: boolean
   }): Promise<Event[]> {
     const orgController = new OrganizationController()
     const evtController = new EventController()
@@ -99,6 +101,10 @@ export default class EventController {
           continue
         events.push(event)
       }
+    }
+
+    if (!inclUnlisted) {
+      return events.filter((event) => !event.unlisted)
     }
 
     return events
