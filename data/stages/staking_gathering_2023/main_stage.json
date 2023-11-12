@@ -1,8 +1,1 @@
-{
-  "id": "main_stage",
-  "name": "Main Stage",
-  "eventId": "staking_gathering_2023",
-  "streamSettings": {
-    "streamId": "0af33fde-ae10-4e7a-8451-d30c49ca8f3b"
-  }
-}
+{"id":"main_stage","name":"Main Stage","eventId":"staking_gathering_2023","streamSettings":{"streamId":"0af33fde-ae10-4e7a-8451-d30c49ca8f3b"}}
