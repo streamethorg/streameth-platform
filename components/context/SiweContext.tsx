@@ -6,7 +6,7 @@ import {
   getDefaultConfig,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
-import { WagmiConfig, createConfig,Chain } from 'wagmi'
+import { WagmiConfig, createConfig, Chain } from 'wagmi'
 import { goerli } from 'wagmi/chains'
 
 const authApi = '/api/auth'

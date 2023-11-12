@@ -50,11 +50,11 @@ const EventHome = async ({ params }: { params: Params }) => {
           <span className=" w-full text-xl uppercase md:text-4xl flex ">
             Livestreams
           </span>
-          <div className="grid py-4 grid-cols-2 gap-4" >
+          <div className="grid py-4 grid-cols-2 gap-4">
             {stages.map((stage) => {
               return (
                 <Link
-                className="w-full md:w-full"
+                  className="w-full md:w-full"
                   key={stage.id}
                   href={`/${params.organization}/${params.event}/stage/${stage.id}`}>
                   <div className="bg-base p-4 rounded-xl cursor-pointer space-y-2 w-full">
