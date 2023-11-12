@@ -56,7 +56,6 @@ export default async function Page({ params }: Params) {
   ).toJson()
   const canDownload = event.enableVideoDownloader
 
-  console.log('jdnsidnsiidsisdsd', event)
   return (
     <SessionComponent
       params={params.organization}

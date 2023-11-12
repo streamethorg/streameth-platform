@@ -12,7 +12,7 @@ const ActionsComponent = ({
   session,
   canDownload = false,
 }: {
-  session: Session
+  session?: Session
   title?: string
   goBackButton?: boolean
   children: React.ReactNode
@@ -37,7 +37,7 @@ const ActionsComponent = ({
       {children}
       {canDownload && (
         <Link
-          href={session.videoUrl as string}
+          href={session?.videoUrl as string}
           className="cursor-pointer ml-3 text-white font-bold hover:bg-base">
           <DownloaderIcon />
         </Link>
