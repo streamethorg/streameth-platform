@@ -15,11 +15,11 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/vitalik.jpg?raw=true"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/530fqjr61525f3m4/index.m3u8",
-  "playbackId": "530fqjr61525f3m4",
   "eventId": "ethgunu",
   "coverImage": "/sessions/ethgunu/ethereum_in_30_minutes_thumbnail.png",
-  "assetId": "530f10bd-dc33-45b6-89f9-a0fefcc7a5b4",
   "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "assetId": "530f10bd-dc33-45b6-89f9-a0fefcc7a5b4",
+  "playbackId": "530fqjr61525f3m4",
+  "videoUrl": "https://lp-playback.com/hls/530fqjr61525f3m4/index.m3u8",
   "videoType": "clip"
 }
