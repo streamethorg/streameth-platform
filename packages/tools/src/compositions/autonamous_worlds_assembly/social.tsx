@@ -2,7 +2,7 @@ import { AbsoluteFill, staticFile, Img } from 'remotion'
 import { Props } from './intro'
 import dayjs from 'dayjs'
 
-export const Social: React.FC<Props> = ({ type, session, id }) => {
+export const Social: React.FC<Props> = ({ session }) => {
   const bgFile = staticFile(`0xparc/images/AWA_still.png`)
   const logoFile = ''
 
