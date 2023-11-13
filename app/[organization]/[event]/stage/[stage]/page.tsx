@@ -81,12 +81,14 @@ export async function generateMetadata(
   const imageName = event.eventCover
     ? event.eventCover
     : event.id + '.png'
-  const imageUrl = 'https://app.streameth.org/public/' + imageName
+
   return {
     title: `${event.name} - ${params.stage}`,
-    description: `Attend ${event.name} virtually powered by streameth here`,
+    description: `Attend ${event.name} virtually powered by StreamETH here`,
     openGraph: {
-      images: [imageUrl],
+      title: `${event.name} - ${params.stage}`,
+      description: `Attend ${event.name} virtually powered by StreamETH here`,
+      images: [`https://app.streameth.org/events/${imageName}`],
     },
   }
 }

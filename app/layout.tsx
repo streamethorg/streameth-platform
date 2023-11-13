@@ -6,7 +6,6 @@ import { MobileContextProvider } from '@/components/context/MobileContext'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
 import { FilterContextProvider } from '../components/context/FilterContext'
-import { Metadata } from 'next'
 import Initializer from './Initializer'
 
 const ubuntu = Ubuntu({
@@ -46,18 +45,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-}
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://app.streameth.org'),
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en-US',
-      'de-DE': '/de-DE',
-    },
-  },
-  openGraph: {
-    images: '/og-image.png',
-  },
 }

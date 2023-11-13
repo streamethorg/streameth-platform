@@ -4,6 +4,7 @@ import FilterBar from './components/FilterBar'
 import Image from 'next/image'
 import StageController from '@/server/controller/stage'
 import UpcomingEvents from './components/UpcomingEvents'
+import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 import LiveEvent from './components/LiveEvent'
@@ -78,4 +79,37 @@ export default async function Home() {
       </div>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'StreamETH',
+  description:
+    'The complete solution to host your hybrid or virtual event.',
+  metadataBase: new URL('https://app.streameth.org'),
+  openGraph: {
+    title: 'StreamETH',
+    siteName: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
+    },
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
 }
