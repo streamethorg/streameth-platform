@@ -1,3 +1,18 @@
+import { z } from "zod"
+
+export const SpeakerSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    photo: z.string().optional(),
+})
+export const SessionSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    start: z.number(),
+    end: z.number(),
+    speakers: z.array(SpeakerSchema),
+})
+
 export const MOCK_SPEAKERS = [
     {
         id: "sarah",
@@ -63,3 +78,4 @@ export const MOCK_SESSION = [{
     end: 1694249400000,
     speakers: MOCK_SPEAKERS
 }]
+
