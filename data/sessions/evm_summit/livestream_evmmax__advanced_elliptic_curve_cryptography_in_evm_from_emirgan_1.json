@@ -1,1 +1,12 @@
-{"id":"livestream_evmmax__advanced_elliptic_curve_cryptography_in_evm_from_emirgan_1","name":"Live-stream: EVMMAX - advanced Elliptic Curve Cryptography in EVM (from Emirgan 1)","description":"The EVM instruction set extension for permissionless, safe, and reasonably fast Elliptic Curve Cryptography.","start":1699966800000,"end":1699967700000,"stageId":"emirgan_2","speakers":[],"videoUrl":"EVM Future","eventId":"evm_summit","coverImage":"/sessions/evm_summit/livestream_evmmax__advanced_elliptic_curve_cryptography_in_evm_from_emirgan_1.jpg"}
+{
+  "id": "livestream_evmmax__advanced_elliptic_curve_cryptography_in_evm_from_emirgan_1",
+  "name": "Live-stream: EVMMAX - advanced Elliptic Curve Cryptography in EVM (from Emirgan 1)",
+  "description": "The EVM instruction set extension for permissionless, safe, and reasonably fast Elliptic Curve Cryptography.",
+  "start": 1699966800000,
+  "end": 1699967700000,
+  "stageId": "emirgan_2",
+  "speakers": [],
+  "videoUrl": "EVM Future",
+  "eventId": "evm_summit",
+  "coverImage": "sessions/evm_summit/livestream_evmmax__advanced_elliptic_curve_cryptography_in_evm_from_emirgan_1_thumbnail.png"
+}

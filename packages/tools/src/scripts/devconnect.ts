@@ -27,9 +27,9 @@ async function start(args: string[]) {
   console.log(`Run Remotion renderer in ${CONFIG.NODE_ENV} mode..`)
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
-  console.log(' - update session thumbnails', updateSessionThumbnails)
+  console.log('- update session thumbnails', updateSessionThumbnails)
 
-  const res = await fetch(`${apiBaseUri}/events`)
+  const res = await fetch(`${apiBaseUri}/events?inclUnlisted=true`)
   let events = (await res.json()).filter((i: any) => i.archiveMode === false)
     // filter for Devconnect events
     .filter((event: any) => devconnectEvents.some(i => i.id === event.id)) // event.organizationId === 'devconnect'

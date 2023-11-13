@@ -1,1 +1,21 @@
-{"id":"paths_to_a_faster_evm","name":"Paths to a faster EVM","description":"Lets explore paths that would make EVM faster. We we talk about parallelism, access list, ahead of time compilation, parallel claim and more.","start":1699960200000,"end":1699961100000,"stageId":"emirgan_1","speakers":[{"id":"dragan_rakita","name":"Dragan Rakita","bio":"Reth core dev, revm author","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/dragan_rakita.jpg"}],"videoUrl":"Layer 2 and zkEVMs","eventId":"evm_summit","coverImage":"/sessions/evm_summit/paths_to_a_faster_evm.jpg"}
+{
+  "id": "paths_to_a_faster_evm",
+  "name": "Paths to a faster EVM",
+  "description": "Lets explore paths that would make EVM faster. We we talk about parallelism, access list, ahead of time compilation, parallel claim and more.",
+  "start": 1699960200000,
+  "end": 1699961100000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "dragan_rakita",
+      "name": "Dragan Rakita",
+      "bio": "Reth core dev, revm author",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/dragan_rakita.jpg"
+    }
+  ],
+  "videoUrl": "Layer 2 and zkEVMs",
+  "eventId": "evm_summit",
+  "coverImage": "sessions/evm_summit/paths_to_a_faster_evm_thumbnail.png"
+}
