@@ -15,6 +15,7 @@ import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
 import LivepeerIcon from '@/app/assets/icons/LivepeerIcon'
+import Chat from '@/plugins/Chat'
 
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
@@ -50,7 +51,8 @@ export default function StageLayout() {
     tabs.push({
       id: 'chat',
       header: <ChatBubbleBottomCenterIcon />,
-      content: <Dm3 />,
+      // content: <Dm3 />,
+      content: <Chat conversationId={stage.id} />,
     })
 
     return tabs
@@ -61,7 +63,7 @@ export default function StageLayout() {
         <div className="flex flex-col lg:flex-row relative  ">
           <div
             ref={stickyRef}
-            className="bg-black mb-2 lg:mb-0 sticky  px-2 md:px-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
+            className="bg-black mb-2 lg:mb-0 sticky p-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
             <ActionsComponent title={stage.name}>
               <EmbedButton
                 streamId={stage.streamSettings.streamId}
@@ -75,7 +77,7 @@ export default function StageLayout() {
             />
           </div>
         </div>
-        <div className="bg-base font-ubuntu flex items-center gap-2 px-4 mb-3 rounded-xl w-fit">
+        <div className="bg-base font-ubuntu flex items-center gap-2 px-4 mb-4 rounded-xl w-fit">
           <p className="text-white">Powered by</p>
           <LivepeerIcon />
         </div>
