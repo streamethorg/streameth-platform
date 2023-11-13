@@ -23,7 +23,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
             </p>
           </div>
           <div
-            className={`w-full lg:w-[45%] mr-4 flex flex-col gap-4 mb-4`}>
+            className={`w-full lg:w-[45%] lg:mr-4 flex flex-col gap-4 lg:mb-6`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
               ETHGünü
             </p>
@@ -36,7 +36,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
             />
             <Link
               href="/devconnect/ethgunu"
-              className=" bg-blue rounded-[8px] p-4 mx-4 lg:mx-0 text-white text-center">
+              className=" bg-blue rounded-xl p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
             </Link>
           </div>

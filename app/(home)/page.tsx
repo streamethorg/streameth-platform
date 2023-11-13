@@ -15,18 +15,28 @@ export default async function Home() {
       return event.toJson()
     })
     .filter((event) => {
-      return new Date(event.start) > new Date()
+      const startDate = new Date(event?.start)
+      const currDate = new Date()
+      startDate.setUTCHours(0, 0, 0, 0)
+      currDate.setUTCHours(0, 0, 0, 0)
+
+      return startDate.getTime() >= currDate.getTime()
     })
     .sort((a, b) => {
       return new Date(a.start).getTime() - new Date(b.start).getTime()
     })
 
   const pastEvents = (await eventController.getAllEvents({}))
-    .filter((event) => new Date(event.toJson().start) <= new Date())
+    .filter((event) => {
+      const endDate = new Date(event?.end)
+      const currDate = new Date()
+      endDate.setUTCHours(0, 0, 0, 0)
+      currDate.setUTCHours(0, 0, 0, 0)
+      return endDate.getTime() < currDate.getTime()
+    })
     .map((event) => {
       return event.toJson()
     })
-
   const stageController = new StageController()
   const stage = await stageController.getStage('harbiye', 'ethgunu')
 
