@@ -117,8 +117,11 @@ export default function Studio(props: Props) {
     // Only show streams that have been recorded and are longer than 10 mins
     // 5 day limit is how long 'clippable' streams are kept on Livepeer
     return streamSessions?.filter((i) => {
-      return i.record && dayjs(i.createdAt).isAfter(dayjs().subtract(5, 'days')) &&
+      return (
+        i.record &&
+        dayjs(i.createdAt).isAfter(dayjs().subtract(5, 'days')) &&
         i.sourceSegmentsDuration > 600
+      )
     })
   }
 
