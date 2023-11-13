@@ -7,7 +7,13 @@
   "location": "Istanbul, Türkiye",
   "organizationId": "devconnect",
   "dataImporter": [
-    { "type": "gsheet", "config": { "sheetId": "1E8LFSL-W5eh0GQmoa4f8-kd8a3JSMUghsvakzg5dotU", "apiKey": "k" } }
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1E8LFSL-W5eh0GQmoa4f8-kd8a3JSMUghsvakzg5dotU",
+        "apiKey": "k"
+      }
+    }
   ],
   "eventCover": "",
   "website": "",
@@ -17,7 +23,13 @@
   "banner": "",
   "accentColor": "#635E8F",
   "dataExporter": [
-    { "type": "gdrive", "config": { "driveId": "1rR5akwvV6ex0Nfyj6v0GhYyYa59CcZl-", "driveApiKey": "" } }
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1rR5akwvV6ex0Nfyj6v0GhYyYa59CcZl-",
+        "driveApiKey": ""
+      }
+    }
   ],
   "startTime": "",
   "unlisted": true
