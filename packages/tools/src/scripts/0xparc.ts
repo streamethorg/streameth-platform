@@ -15,7 +15,6 @@ import {
   UploadOrUpdate,
 } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
-import { DevconnectEvents } from 'compositions/progcrypto'
 
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
@@ -25,10 +24,6 @@ const processArgs = process.argv
 const apiBaseUri = local
   ? 'http://localhost:3000/api'
   : 'https://app.streameth.org/api'
-const devconnectEvents = DevconnectEvents.map((i) => ({
-  ...i,
-  id: i.id.replaceAll('-', '_'),
-}))
 
 start(processArgs)
   .then(() => {
@@ -44,22 +39,14 @@ async function start(args: string[]) {
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
 
+  let eventsToRender = [{ id: 'progcrypto' }, { id: 'autonomous_worlds_assembly' }]
   const res = await fetch(`${apiBaseUri}/events`)
-  let events = (await res.json())
-    .filter((i: any) => i.archiveMode === false)
-    // filter for Devconnect events
-    .filter((event: any) =>
-      devconnectEvents.some((i) => i.id === event.id)
-    ) // event.organizationId === 'devconnect'
-
-  console.log()
-  console.log('Events to render..')
-  events.forEach((i: any) => console.log('-', i.id))
-  console.log()
+  let events = (await res.json()).filter((i: any) => i.archiveMode === false)
+    .filter((event: any) => eventsToRender.some(i => i.id === event.id))
 
   if (args.length > 0) {
     const event = args[0]
-    events = events.filter((e: any) => e.id === event)
+    events = events.filter((e: any) => e === event)
   }
 
   for (const event of events) {
@@ -115,10 +102,6 @@ async function generateEventAssets(event: any) {
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
   mkdirSync(eventFolder, { recursive: true })
 
-  const eventType =
-    devconnectEvents.find((e) => e.id === event.id)?.type || '1'
-  console.log('- Event Composition Type', eventType)
-
   // TODO: Kinda hacky solution to check invalid Image urls here.
   // This should get fixed on data entry or import
   const sessionsToProcess: any[] = []
@@ -151,8 +134,6 @@ async function generateEventAssets(event: any) {
 
     try {
       const inputProps = {
-        type: eventType,
-        id: event.id.replaceAll('_', '-'),
         session: session,
       }
 
@@ -292,13 +273,3 @@ async function validImageUrl(url?: string) {
 
   return buff.type.startsWith('image/')
 }
-
-// let lastProgressPrinted = -1
-// const onProgress: RenderMediaOnProgress = ({ progress }) => {
-//   const progressPercent = Math.floor(progress * 100)
-
-//   if (progressPercent > lastProgressPrinted) {
-//     console.log(`Rendering is ${progressPercent}% complete`)
-//     lastProgressPrinted = progressPercent
-//   }
-// }

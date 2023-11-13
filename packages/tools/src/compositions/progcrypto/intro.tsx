@@ -24,12 +24,10 @@ export interface SessionProps {
 }
 
 export type Props = {
-  type: string
   session: SessionProps
-  id: string
 }
 
-export const Intro: React.FC<Props> = ({ type, session, id }) => {
+export const Intro: React.FC<Props> = ({ session }) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 
@@ -69,10 +67,10 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
   const translateYValue =
     frame >= durationInFrames - 25
       ? interpolate(
-          frame,
-          [durationInFrames - 25, durationInFrames],
-          [150, 220]
-        )
+        frame,
+        [durationInFrames - 25, durationInFrames],
+        [150, 220]
+      )
       : 150
 
   function titleClassName() {

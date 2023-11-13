@@ -4,54 +4,52 @@ import {
   Still,
   continueRender,
   delayRender,
+  staticFile
 } from 'remotion'
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
 import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration } from './devconnect'
+import { Intro } from './devconnect/intro'
+import { Social } from './devconnect/social'
+import { Intro as ProgCryptoIntro } from './progcrypto/intro'
+import { Social as ProgCryptoSocial } from './progcrypto/social'
+import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
+import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
 import { JoinVideos } from './join'
-// import {
-//   DevconnectEvents,
-//   DevconnectFrameRate,
-//   DevconnectIntroDuration,
-//   DevconnectOutroDuration,
-//   ProgCryptoFont_Reg,
-//   ProgCryptoFont_Med,
-//   Join,
-//   Intro,
-//   Social,
-// } from './progcrypto'
-import {
-  DevconnectEvents,
-  DevconnectFrameRate,
-  DevconnectIntroDuration,
-  DevconnectOutroDuration,
-  DevconnectISTFont,
-  Join,
-  Intro,
-  Social,
-} from './autonamous_worlds_assembly'
 
 export function Compositions() {
   const waitForFont = delayRender()
-  const font = DevconnectISTFont
-  // const font = ProgCryptoFont_Reg
-  // const font2 = ProgCryptoFont_Med
+  const devconnectFont = new FontFace(
+    `Sofia Sans Extra Condensed`,
+    `url('${staticFile('devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf')}') format('truetype')`,
+  )
+  const progCryptoFont_Med = new FontFace(
+    `Grotesk Trial Medium`,
+    `url('${staticFile(
+      '0xparc/fonts/FKGroteskTrial-Medium.otf'
+    )}') format('opentype')`
+  )
+  const progCryptoFont_Reg = new FontFace(
+    `Grotesk Trial Regular`,
+    `url('${staticFile(
+      '0xparc/fonts/FKGroteskTrial-Regular.otf'
+    )}') format('opentype')`
+  )
 
-  font
-    .load()
-    .then(() => {
-      document.fonts.add(font)
-      continueRender(waitForFont)
-    })
-    .catch((err) => console.log('Error loading font', err))
+  devconnectFont.load().then(() => {
+    document.fonts.add(devconnectFont)
+    continueRender(waitForFont)
+  }).catch((err) => console.log('Error loading Devconnect font', err))
 
-  // font2
-  //   .load()
-  //   .then(() => {
-  //     document.fonts.add(font2)
-  //     continueRender(waitForFont)
-  //   })
-  //   .catch((err) => console.log('Error loading font', err))
+  progCryptoFont_Med.load().then(() => {
+    document.fonts.add(progCryptoFont_Med)
+    continueRender(waitForFont)
+  }).catch((err) => console.log('Error loading progCryptoFont_Med font', err))
+
+  progCryptoFont_Reg.load().then(() => {
+    document.fonts.add(progCryptoFont_Reg)
+    continueRender(waitForFont)
+  }).catch((err) => console.log('Error loading progCryptoFont_Reg font', err))
 
   return (
     <>
@@ -86,7 +84,7 @@ export function Compositions() {
           </Fragment>
         ))}
 
-        <Composition
+        {/* <Composition
           id={'join-devconnect-ist'}
           component={Join}
           width={1920}
@@ -106,6 +104,52 @@ export function Compositions() {
               'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
             videoDuration: 20 * 25, // need to set this dynamically
             session: MOCK_SESSION[0],
+          }}
+        /> */}
+      </Folder>
+
+      <Folder name="0xParc">
+        <Composition
+          id={'progcrypto'}
+          component={ProgCryptoIntro}
+          width={1920}
+          height={1080}
+          durationInFrames={DevconnectIntroDuration}
+          fps={DevconnectFrameRate}
+          defaultProps={{
+            session: MOCK_SESSION[0],
+          }}
+        />
+
+        <Still
+          id={`progcrypto-social`}
+          component={ProgCryptoSocial}
+          width={1200}
+          height={630}
+          defaultProps={{
+            session: MOCK_SESSION[1],
+          }}
+        />
+
+        <Composition
+          id={'autonomous-worlds-assembly'}
+          component={AwaIntro}
+          width={1920}
+          height={1080}
+          durationInFrames={DevconnectIntroDuration}
+          fps={DevconnectFrameRate}
+          defaultProps={{
+            session: MOCK_SESSION[0],
+          }}
+        />
+
+        <Still
+          id={`autonomous-worlds-assembly-social`}
+          component={AwaSocial}
+          width={1200}
+          height={630}
+          defaultProps={{
+            session: MOCK_SESSION[1],
           }}
         />
       </Folder>
