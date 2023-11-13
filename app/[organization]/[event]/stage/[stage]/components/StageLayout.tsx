@@ -63,7 +63,7 @@ export default function StageLayout() {
         <div className="flex flex-col lg:flex-row relative  ">
           <div
             ref={stickyRef}
-            className="bg-black mb-2 lg:mb-0 sticky  px-2 md:px-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
+            className="bg-black mb-2 lg:mb-0 sticky  p-2 md:p-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
             <ActionsComponent title={stage.name}>
               <EmbedButton
                 streamId={stage.streamSettings.streamId}
@@ -77,7 +77,7 @@ export default function StageLayout() {
             />
           </div>
         </div>
-        <div className="bg-base font-ubuntu flex items-center gap-2 px-4 mb-3 rounded-xl w-fit">
+        <div className="bg-base font-ubuntu flex items-center gap-2 px-4 mb-4 rounded-xl w-fit">
           <p className="text-white">Powered by</p>
           <LivepeerIcon />
         </div>
