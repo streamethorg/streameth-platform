@@ -15,6 +15,7 @@ import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
 import LivepeerIcon from '@/app/assets/icons/LivepeerIcon'
+import Chat from '@/plugins/Chat'
 
 export default function StageLayout() {
   const stickyRef = useRef<HTMLDivElement>(null)
@@ -50,7 +51,8 @@ export default function StageLayout() {
     tabs.push({
       id: 'chat',
       header: <ChatBubbleBottomCenterIcon />,
-      content: <Dm3 />,
+      // content: <Dm3 />,
+      content: <Chat conversationId={stage.id} />,
     })
 
     return tabs

@@ -26,6 +26,7 @@ export async function middleware(request: NextRequest) {
     event = request.url.split('/')[4]
     page = request.url.split('/')[5]
     const url = new URL(`/api/organizations/${org}/events/${event}`, request.url).href
+    console.log('MIDDLEWARE LOG', url)
     const response = await fetch(url.replace('localhost', '127.0.0.1'), {
       method: 'GET',
     })

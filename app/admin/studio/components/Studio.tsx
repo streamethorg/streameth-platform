@@ -20,9 +20,7 @@ interface StreamParams {
 
 export default function Studio(props: Props) {
   const [event, setEvent] = useState<any>(props.events[0])
-  const [stage, setStage] = useState<any>(
-    FilterValidStages(props.events[0].stages)[0]
-  )
+  const [stage, setStage] = useState<any>()
   const [stream, setStream] = useState<StreamParams>({
     playbackId: '',
   })
@@ -65,7 +63,7 @@ export default function Studio(props: Props) {
   const selectStreamCallback = useCallback(selectStream, [
     event.id,
     event.organizationId,
-    stage.id,
+    stage,
     streamSessions,
   ])
 
@@ -126,6 +124,8 @@ export default function Studio(props: Props) {
     )
   }
 
+  if (!event) return <>No events found.</>
+
   return (
     <div className="p-8 container mx-auto">
       <div className="flex gap-4 text-sm">
@@ -137,7 +137,7 @@ export default function Studio(props: Props) {
               key={index}
               className="cursor-pointer py-1"
               value={event.id}
-              selected={event.id === event.id}>
+              defaultValue={event.id}>
               {event.name}
             </option>
           ))}
