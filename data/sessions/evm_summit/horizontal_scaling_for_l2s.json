@@ -1,1 +1,21 @@
-{"id":"horizontal_scaling_for_l2s","name":"Horizontal scaling for L2s","description":"Atomic multi-chain dapps can be created with the usage of new precompiles: L1CALL and L1DELEGATECALL. This talk will go over how we could utilize these new precompiles on an L2 along with proxy contracts to unlock horizontal scaling for dapps on L2.","start":1699950300000,"end":1699951200000,"stageId":"emirgan_1","speakers":[{"id":"david_weisiger","name":"David Weisiger","bio":"Head of DevRel at Taiko Labs","eventId":"evm_summit","twitter":"","photo":"https://pbs.twimg.com/profile_images/1685864771168473088/P7qbbqjw_400x400.jpg"}],"videoUrl":"Layer 2 and zkEVMs","eventId":"evm_summit","coverImage":"/sessions/evm_summit/horizontal_scaling_for_l2s.jpg"}
+{
+  "id": "horizontal_scaling_for_l2s",
+  "name": "Horizontal scaling for L2s",
+  "description": "Atomic multi-chain dapps can be created with the usage of new precompiles: L1CALL and L1DELEGATECALL. This talk will go over how we could utilize these new precompiles on an L2 along with proxy contracts to unlock horizontal scaling for dapps on L2.",
+  "start": 1699950300000,
+  "end": 1699951200000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "david_weisiger",
+      "name": "David Weisiger",
+      "bio": "Head of DevRel at Taiko Labs",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://pbs.twimg.com/profile_images/1685864771168473088/P7qbbqjw_400x400.jpg"
+    }
+  ],
+  "videoUrl": "Layer 2 and zkEVMs",
+  "eventId": "evm_summit",
+  "coverImage": "sessions/evm_summit/horizontal_scaling_for_l2s_thumbnail.png"
+}
