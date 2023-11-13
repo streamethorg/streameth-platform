@@ -40,11 +40,13 @@ export const Player = ({
   streamId,
   playerName,
   coverImage,
+  muted = false,
 }: {
   playbackId?: string
   streamId?: string
   playerName: string
   coverImage?: string
+  muted?: boolean
 }) => {
   const { address } = useAccount()
   const { data: stream } = useStream({
@@ -80,6 +82,7 @@ export const Player = ({
           showPipButton={false}
           showLoadingSpinner={true}
           autoPlay
+          muted={muted}
           controls={{
             autohide: 0,
             hotkeys: false,
