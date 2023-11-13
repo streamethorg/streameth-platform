@@ -1,1 +1,25 @@
-{"id":"kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama","name":"Kripto Cüzdanlarını Sonraki 1 Milyar Kullanıcıya Hazır Hale Getirmek: Hesap Soyutlama","description":"Ben Doğan, Clave şirketinde araştırmacı olarak çalışmaktayım. Şu anda ana araştırma konum, cüzdanların nasıl daha güvenli hale getirilebileceği ve bu konudaki son çalışmalar. Buna yönelik olacak şekilde, bir geliştirici yada kullanıcı olarak buradaki gelişmeleri öğrenmek isteyenler için bir konuşma yapacağım. Bu konuşmanın hedef kitlesi, bu konuyu merak eden herkes.\n","start":1699878600000,"end":1699880400000,"stageId":"beyazit","speakers":[{"id":"doan_alpaslan","name":"Doğan Alpaslan","bio":"My name is Dogan, and I'm a 20-year-old researcher and analyst who specializes in blockchain infrastructure. My adventure began with my Twitter account (@doganeth). I started writing what I posted there since I think writing is the best method to learn.\n\nI began writing articles about blockchain about 1.5 years ago. I began my work as a columnist, and thousands of people have read my articles. I then became a researcher analyst for the Lytera team.\n\nI am now focusing on blockchain infrastructure, modular blockchains, and other things.\n","eventId":"ethgunu","twitter":"@DoganEth","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/dogan.jpg?raw=true"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama.jpg"}
+{
+  "id": "kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama",
+  "name": "Kripto Cüzdanlarını Sonraki 1 Milyar Kullanıcıya Hazır Hale Getirmek: Hesap Soyutlama",
+  "description": "Ben Doğan, Clave şirketinde araştırmacı olarak çalışmaktayım. Şu anda ana araştırma konum, cüzdanların nasıl daha güvenli hale getirilebileceği ve bu konudaki son çalışmalar. Buna yönelik olacak şekilde, bir geliştirici yada kullanıcı olarak buradaki gelişmeleri öğrenmek isteyenler için bir konuşma yapacağım. Bu konuşmanın hedef kitlesi, bu konuyu merak eden herkes.\n",
+  "start": 1699878600000,
+  "end": 1699880400000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "doan_alpaslan",
+      "name": "Doğan Alpaslan",
+      "bio": "My name is Dogan, and I'm a 20-year-old researcher and analyst who specializes in blockchain infrastructure. My adventure began with my Twitter account (@doganeth). I started writing what I posted there since I think writing is the best method to learn.\n\nI began writing articles about blockchain about 1.5 years ago. I began my work as a columnist, and thousands of people have read my articles. I then became a researcher analyst for the Lytera team.\n\nI am now focusing on blockchain infrastructure, modular blockchains, and other things.\n",
+      "eventId": "ethgunu",
+      "twitter": "@DoganEth",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/dogan.jpg?raw=true"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ebb884i825539i50/index.m3u8",
+  "playbackId": "ebb884i825539i50",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama.jpg",
+  "assetId": "ebb81be8-d767-4b85-802d-c583ad8d71a4",
+  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+  "videoType": "clip"
+}
