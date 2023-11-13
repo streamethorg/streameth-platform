@@ -29,6 +29,4 @@ export const ProgCryptoFont_Reg = new FontFace(
 // 5 = pink/purple
 // 6 = purple
 // 7 = blue
-export const DevconnectEvents = [
-  { id: 'progcrypto', type: '5' },
-]
+export const DevconnectEvents = [{ id: 'progcrypto', type: '1' }]

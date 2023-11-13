@@ -1,17 +1,34 @@
 import { join } from 'path'
 import { bundle } from '@remotion/bundler'
 import { webpackOverride } from '../webpack-override'
-import { RenderMediaOnProgress, getCompositions, selectComposition, renderMedia, renderStill } from '@remotion/renderer'
+import {
+  RenderMediaOnProgress,
+  getCompositions,
+  selectComposition,
+  renderMedia,
+  renderStill,
+} from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
-import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
+import {
+  FileExists,
+  UploadDrive,
+  UploadOrUpdate,
+} from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
-import { DevconnectEvents } from 'compositions/autonamous_worlds_assembly'
+import { DevconnectEvents } from 'compositions/progcrypto'
 
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
-const processArgs = process.argv.slice(2).filter(i => !i.startsWith('--'))
-const apiBaseUri = local ? 'http://localhost:3000/api' : 'https://app.streameth.org/api'
-const devconnectEvents = DevconnectEvents.map(i => ({ ...i, id: i.id.replaceAll('-', '_') }))
+const processArgs = process.argv
+  .slice(2)
+  .filter((i) => !i.startsWith('--'))
+const apiBaseUri = local
+  ? 'http://localhost:3000/api'
+  : 'https://app.streameth.org/api'
+const devconnectEvents = DevconnectEvents.map((i) => ({
+  ...i,
+  id: i.id.replaceAll('-', '_'),
+}))
 
 start(processArgs)
   .then(() => {
@@ -28,9 +45,12 @@ async function start(args: string[]) {
   console.log('- force rendering', force)
 
   const res = await fetch(`${apiBaseUri}/events`)
-  let events = (await res.json()).filter((i: any) => i.archiveMode === false)
+  let events = (await res.json())
+    .filter((i: any) => i.archiveMode === false)
     // filter for Devconnect events
-    .filter((event: any) => devconnectEvents.some(i => i.id === event.id)) // event.organizationId === 'devconnect'
+    .filter((event: any) =>
+      devconnectEvents.some((i) => i.id === event.id)
+    ) // event.organizationId === 'devconnect'
 
   console.log()
   console.log('Events to render..')
@@ -54,13 +74,19 @@ async function generateEventAssets(event: any) {
     webpackOverride: (config) => webpackOverride(config),
   })
 
-  const compositions = (await getCompositions(bundled)).filter((c) => c.id.includes(event.id) || c.id.includes(event.id.replaceAll('_', '-')))
+  const compositions = (await getCompositions(bundled)).filter(
+    (c) =>
+      c.id.includes(event.id) ||
+      c.id.includes(event.id.replaceAll('_', '-'))
+  )
   if (compositions.length === 0) {
     console.log('No compositions found. Skip rendering')
     return
   }
 
-  const res = await fetch(`${apiBaseUri}/organizations/${event.organizationId}/events/${event.id}/sessions`)
+  const res = await fetch(
+    `${apiBaseUri}/organizations/${event.organizationId}/events/${event.id}/sessions`
+  )
   const sessions = await res.json()
   if (sessions.length === 0) {
     console.log('No sessions found. Skip rendering')
@@ -68,20 +94,29 @@ async function generateEventAssets(event: any) {
   }
 
   let folderId = ''
-  if (event.dataExporter?.length > 0 && event.dataExporter[0].type === 'gdrive' && event.dataExporter[0].config) {
-    folderId = event.dataExporter[0].config.sheetId || event.dataExporter[0].config.driveId
+  if (
+    event.dataExporter?.length > 0 &&
+    event.dataExporter[0].type === 'gdrive' &&
+    event.dataExporter[0].config
+  ) {
+    folderId =
+      event.dataExporter[0].config.sheetId ||
+      event.dataExporter[0].config.driveId
     console.log('- Google Drive data exporter', folderId)
   }
 
   if (!folderId) {
-    console.error('No Google Drive data exporter found. Skip rendering')
+    console.error(
+      'No Google Drive data exporter found. Skip rendering'
+    )
     return
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
   mkdirSync(eventFolder, { recursive: true })
 
-  const eventType = devconnectEvents.find(e => e.id === event.id)?.type || '1'
+  const eventType =
+    devconnectEvents.find((e) => e.id === event.id)?.type || '1'
   console.log('- Event Composition Type', eventType)
 
   // TODO: Kinda hacky solution to check invalid Image urls here.
@@ -107,13 +142,19 @@ async function generateEventAssets(event: any) {
     sessionsToProcess.push(s)
   }
 
-  console.log(`Render ${compositions.length} compositions for # ${sessions.length} sessions`)
+  console.log(
+    `Render ${compositions.length} compositions for # ${sessions.length} sessions`
+  )
   for (let index = 0; index < sessionsToProcess.length; index++) {
     const session = sessionsToProcess[index]
     console.log(`Session # ${index + 1} - ${session.id}`)
 
     try {
-      const inputProps = { type: eventType, id: event.id.replaceAll('_', '-'), session: session }
+      const inputProps = {
+        type: eventType,
+        id: event.id.replaceAll('_', '-'),
+        session: session,
+      }
 
       for (const composition of compositions) {
         const inputComposition = await selectComposition({
@@ -129,7 +170,8 @@ async function generateEventAssets(event: any) {
           const socialFilePath = `${eventFolder}/${id}`
 
           if (folderId) {
-            const fileExported = await FileExists(id, type, folderId) ?? false
+            const fileExported =
+              (await FileExists(id, type, folderId)) ?? false
             if (!fileExported || force) {
               const exists = fileExists(socialFilePath)
               if (!exists || force) {
@@ -153,7 +195,8 @@ async function generateEventAssets(event: any) {
           const introFilePath = `${eventFolder}/${id}`
 
           if (folderId) {
-            const fileExported = await FileExists(id, type, folderId) ?? false
+            const fileExported =
+              (await FileExists(id, type, folderId)) ?? false
             if (!fileExported || force) {
               const exists = fileExists(introFilePath)
               if (!exists || force) {
@@ -174,7 +217,12 @@ async function generateEventAssets(event: any) {
             const thumbnailId = `${session.id}_thumbnail.png`
             const thumbnailType = 'image/png'
             const thumbnailFilePath = `${eventFolder}/${thumbnailId}`
-            const thumbnailExported = await FileExists(thumbnailId, thumbnailType, folderId) ?? false
+            const thumbnailExported =
+              (await FileExists(
+                thumbnailId,
+                thumbnailType,
+                folderId
+              )) ?? false
 
             if (!thumbnailExported || force) {
               const exists = fileExists(thumbnailFilePath)
@@ -188,7 +236,12 @@ async function generateEventAssets(event: any) {
                 })
               }
 
-              upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
+              upload(
+                thumbnailId,
+                thumbnailFilePath,
+                thumbnailType,
+                folderId
+              )
             }
           }
         }
@@ -211,7 +264,12 @@ function fileExists(path: string, fileSize = 100000) {
   return false
 }
 
-async function upload(id: string, path: string, type: string, folderId: string) {
+async function upload(
+  id: string,
+  path: string,
+  type: string,
+  folderId: string
+) {
   // - CONFIG.GOOGLE_DRIVE_ID is main, root drive. Files are upload to their respective sub folder Ids
   if (CONFIG.GOOGLE_DRIVE_ID) {
     if (force) {
