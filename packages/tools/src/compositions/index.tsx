@@ -9,7 +9,7 @@ import {
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
 import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration } from './devconnect'
-import { Intro } from './devconnect/intro'
+import { DevconnectISTProps, Intro } from './devconnect/intro'
 import { Social } from './devconnect/social'
 import { Intro as ProgCryptoIntro } from './progcrypto/intro'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
@@ -54,6 +54,21 @@ export function Compositions() {
   return (
     <>
       <Folder name="Devconnect">
+        <Composition
+          id='custom-render'
+          component={Intro}
+          width={1920}
+          height={1080}
+          durationInFrames={DevconnectIntroDuration}
+          fps={DevconnectFrameRate}
+          schema={DevconnectISTProps}
+          defaultProps={{
+            type: '1',
+            id: 'ethgunu',
+            session: MOCK_SESSION[0],
+          }}
+        />
+
         {DevconnectEvents.map((event) => (
           <Fragment key={event.id}>
             <Composition
