@@ -39,7 +39,11 @@ async function start(args: string[]) {
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
 
-  let events = [{ id: 'progcrypto' }, { id: 'autonomous_worlds_assembly' }]
+  let eventsToRender = [{ id: 'progcrypto' }, { id: 'autonomous_worlds_assembly' }]
+  const res = await fetch(`${apiBaseUri}/events`)
+  let events = (await res.json()).filter((i: any) => i.archiveMode === false)
+    .filter((event: any) => eventsToRender.some(i => i.id === event.id))
+
   if (args.length > 0) {
     const event = args[0]
     events = events.filter((e: any) => e === event)
