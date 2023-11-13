@@ -28,7 +28,7 @@ export default async function Home() {
     })
 
   const stageController = new StageController()
-  const stage = await stageController.getStage('HARBIYE', 'ethgunu')
+  const stage = await stageController.getStage('harbiye', 'ethgunu')
 
   return (
     <main className="w-screen mx-auto">

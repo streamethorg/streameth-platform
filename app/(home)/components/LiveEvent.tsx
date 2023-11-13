@@ -8,7 +8,7 @@ import { IStage } from '@/server/model/stage'
 const LiveEvent = ({ stage }: { stage: IStage }) => {
   return (
     <div>
-      <h3 className="font-ubuntu font-bold px-4 mt-4 text-2xl text-blue">
+      <h3 className="font-ubuntu font-bold px-4 mt-4 text-4xl text-blue">
         Happening Now!
       </h3>
       <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-screen">
@@ -18,7 +18,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               streamId={stage.streamSettings.streamId}
               playerName={stage.name}
             />
-            <p className="font-ubuntu font-medium text-lg mt-4 text-blue">
+            <p className="font-ubuntu font-medium text-2xl mt-4 text-blue">
               🔴 Live: ETHGünü
             </p>
           </div>
