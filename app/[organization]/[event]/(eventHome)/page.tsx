@@ -51,8 +51,9 @@ const EventHome = async ({ params }: { params: Params }) => {
             Livestreams
           </span>
           <div className="grid py-4 grid-cols-2 gap-4">
-            {stages.map((stage) => {
-              return (
+            {stages
+              .filter((stage) => stage?.streamSettings?.streamId)
+              .map((stage) => (
                 <Link
                   className="w-full md:w-full"
                   key={stage.id}
@@ -65,8 +66,7 @@ const EventHome = async ({ params }: { params: Params }) => {
                     <p className="uppercase text-xl">{stage.name}</p>
                   </div>
                 </Link>
-              )
-            })}
+              ))}
           </div>
         </div>
         <SchedulePageComponent params={params} />
