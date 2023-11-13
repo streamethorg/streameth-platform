@@ -6,6 +6,7 @@ import StageController from '@/server/controller/stage'
 import UpcomingEvents from './components/UpcomingEvents'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
+import LiveEvent from './components/LiveEvent'
 
 export default async function Home() {
   const eventController = new EventController()
@@ -14,30 +15,20 @@ export default async function Home() {
       return event.toJson()
     })
     .filter((event) => {
-      return (
-        event.organizationId === 'devconnect' ||
-        new Date(event.start) > new Date()
-      )
+      return new Date(event.start) > new Date()
     })
     .sort((a, b) => {
       return new Date(a.start).getTime() - new Date(b.start).getTime()
     })
 
   const pastEvents = (await eventController.getAllEvents({}))
-    .filter(
-      (event) =>
-        new Date(event.toJson().start).getTime() <
-        new Date().getTime()
-    )
+    .filter((event) => new Date(event.toJson().start) <= new Date())
     .map((event) => {
       return event.toJson()
     })
 
   const stageController = new StageController()
-  const stage = await stageController.getStage(
-    'theater',
-    'zuconnect_hackathon'
-  )
+  const stage = await stageController.getStage('harbiye', 'ethgunu')
 
   return (
     <main className="w-screen mx-auto">
@@ -67,6 +58,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="flex flex-col lg:overflow-hidden">
+        <LiveEvent stage={stage.toJson()} />
         <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
           Upcoming Events
         </p>
