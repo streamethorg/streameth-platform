@@ -37,9 +37,17 @@
       "eventId": "evm_summit",
       "twitter": "",
       "photo": "https://evmsummit.org/images/speakers/rami_khalil.jpg"
+    },
+    {
+      "id": "mamy_andrratsimbazafy",
+      "name": "Mamy André-Ratsimbazafy",
+      "bio": "Mamy has been an Ethereum core dev for 5 years, developing the Nimbus consensus client. After the success of The Merge, he now focuses on scaling Ethereum, by leading the ZK engineering team at Taiko.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/mamy_andre_ratsimbazafy.jpg"
     }
   ],
   "videoUrl": "Other",
   "eventId": "evm_summit",
-  "coverImage": "sessions/evm_summit/exploring_the_past_present_and_future_of_zkevms_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/exploring_the_past_present_and_future_of_zkevms.jpg"
 }

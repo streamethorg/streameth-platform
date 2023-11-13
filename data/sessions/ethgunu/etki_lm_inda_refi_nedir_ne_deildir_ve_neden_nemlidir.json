@@ -1,1 +1,25 @@
-{"id":"etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir","name":"Etki Ölçümü Işığında Refi: Nedir, Ne Değildir ve Neden Önemlidir?\n","description":"Regenerative Finans (ReFi), finansal sistemleri sürdürülebilirlik, yenilenebilirlik ve toplumsal adalet ekseninde yeniden yapılandırmayı hedefleyen bir yaklaşımdır. ReFi, ekonomik büyüme ve toplumsal refahın bir arada sürdürülebilir bir şekilde ilerlemesi için finansal araçları ve stratejileri kullanmayı amaçlar. Etki ölçümü, ReFi'nin bu hedeflere ne ölçüde ulaştığını değerlendirmek için kritik bir araçtır. Bu etkinlikte, ReFi'nin temel prensiplerini, etki ölçümüyle olan ilişkisini ve neden bu kadar önemli olduğunu inceleyeceğiz. Sürdürülebilir bir ekonomik sistem için ReFi'nin nasıl bir rol oynadığını ve etki ölçümünün bu süreçte nasıl bir kılavuz görevi gördüğünü keşfedeceksiniz.","start":1699884000000,"end":1699885800000,"stageId":"beyazit","speakers":[{"id":"grkem_bereket","name":"Görkem Bereket","bio":"No description","eventId":"ethgunu","twitter":"@goerrk","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/gorkem.jpeg?raw=true"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir.jpg"}
+{
+  "id": "etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir",
+  "name": "Etki Ölçümü Işığında Refi: Nedir, Ne Değildir ve Neden Önemlidir?\n",
+  "description": "Regenerative Finans (ReFi), finansal sistemleri sürdürülebilirlik, yenilenebilirlik ve toplumsal adalet ekseninde yeniden yapılandırmayı hedefleyen bir yaklaşımdır. ReFi, ekonomik büyüme ve toplumsal refahın bir arada sürdürülebilir bir şekilde ilerlemesi için finansal araçları ve stratejileri kullanmayı amaçlar. Etki ölçümü, ReFi'nin bu hedeflere ne ölçüde ulaştığını değerlendirmek için kritik bir araçtır. Bu etkinlikte, ReFi'nin temel prensiplerini, etki ölçümüyle olan ilişkisini ve neden bu kadar önemli olduğunu inceleyeceğiz. Sürdürülebilir bir ekonomik sistem için ReFi'nin nasıl bir rol oynadığını ve etki ölçümünün bu süreçte nasıl bir kılavuz görevi gördüğünü keşfedeceksiniz.",
+  "start": 1699884000000,
+  "end": 1699885800000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "grkem_bereket",
+      "name": "Görkem Bereket",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@goerrk",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/gorkem.jpeg?raw=true"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/d45d8x782pfr52dg/index.m3u8",
+  "playbackId": "d45d8x782pfr52dg",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir.jpg",
+  "assetId": "d45d76a5-febf-4bdf-9fa8-5c65dd24fa31",
+  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+  "videoType": "clip"
+}
