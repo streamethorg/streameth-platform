@@ -1,1 +1,25 @@
-{"id":"fireside_chat_with_aya_miyaguchi","name":"Fireside chat with Aya Miyaguchi","description":"A warm chat with Aya Miyaguchi about the values of Ethereum, the potential impact of Ethereum, and the Turkish ecosystem.","start":1699858800000,"end":1699860600000,"stageId":"harbiye","speakers":[{"id":"aya_miyaguchi","name":"Aya Miyaguchi","bio":"Executive Director and Eclectic Dreamer of the Ethereum Foundation.  Aya’s goal is to help Ethereum maintain its soul as an Infinite Garden, or a decentralized creative space that is open-source, inclusive and permissionless.\n","eventId":"ethgunu","twitter":"@AyaMiyagotchi","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/aya.jpeg?raw=true"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/fireside_chat_with_aya_miyaguchi.jpg"}
+{
+  "id": "fireside_chat_with_aya_miyaguchi",
+  "name": "Fireside chat with Aya Miyaguchi",
+  "description": "A warm chat with Aya Miyaguchi about the values of Ethereum, the potential impact of Ethereum, and the Turkish ecosystem.",
+  "start": 1699858800000,
+  "end": 1699860600000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "aya_miyaguchi",
+      "name": "Aya Miyaguchi",
+      "bio": "Executive Director and Eclectic Dreamer of the Ethereum Foundation.  Aya’s goal is to help Ethereum maintain its soul as an Infinite Garden, or a decentralized creative space that is open-source, inclusive and permissionless.\n",
+      "eventId": "ethgunu",
+      "twitter": "@AyaMiyagotchi",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/aya.jpeg?raw=true"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ea4ek3thtp2pk92w/index.m3u8",
+  "playbackId": "ea4ek3thtp2pk92w",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/fireside_chat_with_aya_miyaguchi_thumbnail.png",
+  "assetId": "ea4ec0f2-58cc-4d6b-b2b2-53e8d300c426",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
+}
