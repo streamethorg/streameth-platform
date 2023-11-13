@@ -11,7 +11,6 @@ import {
 import { ethers } from 'ethersv5'
 import { StageContext } from '../StageContext'
 import { useDm3Siwe } from './useDm3Siwe'
-import { ConnectWalletButton } from '@/components/ConnectWalletButton'
 import { ConnectKitButton } from 'connectkit'
 
 export const defaultOptions: BillboardWidgetProps['options'] = {
@@ -104,10 +103,8 @@ export const Dm3 = () => {
               ) : (
                 <div
                   style={{ maxHeight: '40px' }}
-                  className="rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
-                  <button
-                    onClick={signInWithEthereum}
-                    className="text-accent text-sm font-ubuntu font-bold rounded-xl h-full w-full bg-white py-1 px-3">
+                  className="text-white rounded-xl bg-black p-4 m-auto text-center flex flex-col justify-center items-center">
+                  <button onClick={signInWithEthereum}>
                     Sign in with Ethereum
                   </button>
                 </div>
