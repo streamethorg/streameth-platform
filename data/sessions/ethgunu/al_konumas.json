@@ -16,10 +16,6 @@
     }
   ],
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/al_konumas_thumbnail.png",
-  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
-  "assetId": "b97676e3-fb10-4bc6-8a92-f10a0c550510",
-  "playbackId": "b976ni0qw3s3ehs6",
-  "videoUrl": "https://lp-playback.com/hls/b976ni0qw3s3ehs6/index.m3u8",
-  "videoType": "clip"
+  "playbackId": "",
+  "coverImage": "/sessions/ethgunu/al_konumas_thumbnail.png"
 }
