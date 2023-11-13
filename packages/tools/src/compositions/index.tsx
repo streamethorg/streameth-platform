@@ -7,6 +7,7 @@ import {
 } from 'remotion'
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
+import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration } from './devconnect'
 import { JoinVideos } from './join'
 // import {
 //   DevconnectEvents,

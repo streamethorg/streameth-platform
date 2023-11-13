@@ -64,6 +64,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({
       .finally(() => {
         setSubmitting(false)
         closeModal()
+        window.location.reload()
       })
   }
 

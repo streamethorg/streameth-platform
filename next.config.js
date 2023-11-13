@@ -1,3 +1,5 @@
+const { withSentryConfig } = require('@sentry/nextjs')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   redirects: async () => [
@@ -9,8 +11,7 @@ const nextConfig = {
           value: 'watch.protocol.berlin',
         },
       ],
-      destination:
-        'https://watch.protocol.berlin/ethberlin/protocol_berg',
+      destination: 'https://watch.protocol.berlin/ethberlin/protocol_berg',
       permanent: true,
     },
     {
@@ -21,8 +22,7 @@ const nextConfig = {
           value: 'launch.scroll.io',
         },
       ],
-      destination:
-        'https://launch.scroll.io/scroll/scroll_announcement_stream',
+      destination: 'https://launch.scroll.io/scroll/scroll_announcement_stream',
       permanent: true,
     },
   ],
@@ -48,10 +48,7 @@ const nextConfig = {
       },
     ]
   },
-  webpack: (
-    config,
-    { buildId, dev, isServer, defaultLoaders, webpack }
-  ) => {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(
       new webpack.DefinePlugin({
         'process.env.FLUENTFFMPEG_COV': false,
@@ -71,6 +68,37 @@ const nextConfig = {
       },
     ],
   },
+  staticPageGenerationTimeout: 1000,
 }
 
-module.exports = nextConfig
+module.exports = withSentryConfig(
+  nextConfig,
+  {
+    // For all available options, see:
+    // https://github.com/getsentry/sentry-webpack-plugin#options
+
+    // Suppresses source map uploading logs during build
+    silent: true,
+    org: 'ethereum-foundation',
+    project: 'streameth-platform',
+  },
+  {
+    // For all available options, see:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+
+    // Upload a larger set of source maps for prettier stack traces (increases build time)
+    widenClientFileUpload: true,
+
+    // Transpiles SDK to be compatible with IE11 (increases bundle size)
+    transpileClientSDK: true,
+
+    // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
+    tunnelRoute: '/monitoring',
+
+    // Hides source maps from generated client bundles
+    hideSourceMaps: true,
+
+    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    disableLogger: true,
+  }
+)

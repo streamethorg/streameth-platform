@@ -7,15 +7,22 @@ import { ModalContext } from '@/components/context/ModalContext'
 import { IEvent } from '@/server/model/event'
 import { EventFormContext } from './EventFormContext'
 import UseAdminContext from '@/app/hooks/useAdminContext'
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
 const CreateEditFooter = () => {
   const { currentStep, setCurrentStep, event } = UseAdminContext()
 
   const { openModal, closeModal } = useContext(ModalContext)
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const handleDelete = () => {
     fetch(
       `/api/organizations/${event?.organizationId}/events/${event?.id}`,
       {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }
     )
       .then((response) => {
@@ -23,11 +30,18 @@ const CreateEditFooter = () => {
           throw new Error('Failed to delete event')
         }
       })
+      .then(() => {
+        closeModal()
+        startTransition(() =>
+          router.push(`/admin/${event?.organizationId}`)
+        )
+        startTransition(() => router.refresh())
+        if (isPending) {
+          return <div>Loading...</div>
+        }
+      })
       .catch((err) => {
         console.error('An error occurred', err)
-      })
-      .finally(() => {
-        closeModal()
       })
   }
 
