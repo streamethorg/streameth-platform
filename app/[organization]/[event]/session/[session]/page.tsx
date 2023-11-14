@@ -2,7 +2,6 @@ import SessionController from '@/server/controller/session'
 import SessionComponent from './components/SessionComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EventController from '@/server/controller/event'
-import { headers } from 'next/headers'
 
 export async function generateStaticParams({
   params,
@@ -30,6 +29,12 @@ interface Params {
 }
 
 export default async function Page({ params }: Params) {
+  const eController = new EventController()
+  const event = await eController.getEvent(
+    params.event,
+    params.organization
+  )
+
   const sController = new SessionController()
   const session = await sController.getSession(
     params.session,
@@ -47,21 +52,12 @@ export default async function Page({ params }: Params) {
       ? allSessions[currentIndex + 1]
       : null
 
-  const head = headers()
-  const pathname = head.get('next-url')
-  const getOrg = pathname?.split('/')[1] ?? ''
-  const eController = new EventController()
-  const event = (
-    await eController.getEvent(session.eventId, getOrg)
-  ).toJson()
-  const canDownload = event.enableVideoDownloader
-
   return (
     <SessionComponent
       params={params.organization}
       nextSession={nextSession}
       session={session}
-      enableVideoDownloader={canDownload}
+      event={event.toJson()}
     />
   )
 }

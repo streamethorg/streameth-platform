@@ -8,6 +8,7 @@ import EmbedButton from '@/components/misc/EmbedButton'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
+import { IEvent } from '@/server/model/event'
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (
@@ -20,18 +21,20 @@ export default async function SessionComponent({
   session,
   nextSession,
   params,
-  enableVideoDownloader,
+  event,
 }: {
   session: Session
   nextSession: Session | null
   params: string
-  enableVideoDownloader?: boolean
+  event?: IEvent
 }) {
+  console.log(event, event?.enableVideoDownloader)
+
   return (
     <div className="flex flex-col w-full m-4 md:m-0 max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 gap-4">
       <div className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
         <ActionsComponent
-          canDownload={enableVideoDownloader}
+          event={event}
           session={session}
           goBackButton>
           <EmbedButton

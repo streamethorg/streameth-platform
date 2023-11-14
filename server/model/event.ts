@@ -108,7 +108,7 @@ export default class Event implements IEvent {
     dataExporter,
     startTime,
     endTime,
-    enableVideoDownloader,
+    enableVideoDownloader = false,
     unlisted,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
