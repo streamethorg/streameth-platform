@@ -19,6 +19,9 @@ export type IDataImporter =
   | { type: 'pretalx'; config: PretalxConfig }
 export type IDataExporter = { type: 'gdrive'; config: GSheetConfig }
 
+export interface IPlugins {
+  chat: boolean
+}
 export interface IEvent {
   id: string
   name: string
@@ -39,6 +42,7 @@ export interface IEvent {
   accentColor?: string
   unlisted?: boolean
   dataExporter?: IDataExporter[]
+  plugins?: IPlugins
 }
 
 export default class Event implements IEvent {
@@ -86,6 +90,8 @@ export default class Event implements IEvent {
   unlisted?: boolean
 
   endTime?: string
+
+  plugins?: IPlugins
   constructor({
     id,
     name,
@@ -106,6 +112,7 @@ export default class Event implements IEvent {
     startTime,
     endTime,
     unlisted,
+    plugins,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -126,6 +133,7 @@ export default class Event implements IEvent {
     this.startTime = startTime
     this.endTime = endTime
     this.unlisted = unlisted ?? false
+    this.plugins = plugins
     // this.validateThis();
   }
 

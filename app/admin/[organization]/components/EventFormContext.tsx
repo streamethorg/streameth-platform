@@ -69,6 +69,9 @@ const EventFormProvider: React.FC<EventFormProviderProps> = ({
       eventCover: '',
       timezone: '',
       accentColor: '',
+      plugins: {
+        chat: false,
+      },
       dataExporter: [],
       dataImporter: [],
     }
@@ -86,6 +89,7 @@ const EventFormProvider: React.FC<EventFormProviderProps> = ({
         ...event,
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [event])
 
   const handleChange = (

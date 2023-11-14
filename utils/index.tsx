@@ -10,13 +10,20 @@ export const selectOptionFocusHandle = (
   }
 }
 
-export const a11yEnterKeyPress = (event: React.KeyboardEvent, callback: () => void) => {
+export const a11yEnterKeyPress = (
+  event: React.KeyboardEvent,
+  callback: () => void
+) => {
   if (event.key === 'Enter') {
     callback()
   }
 }
 
-export const handleKeyPress = (event: React.KeyboardEvent, targetKey: string | string[], callback: () => void): void => {
+export const handleKeyPress = (
+  event: React.KeyboardEvent,
+  targetKey: string | string[],
+  callback: () => void
+): void => {
   if (Array.isArray(targetKey) && targetKey.includes(event.key)) {
     callback()
     return
@@ -26,7 +33,16 @@ export const handleKeyPress = (event: React.KeyboardEvent, targetKey: string | s
   }
 }
 
-export const truncateAddr = (address: string, startLength = 6, endLength = 4) => {
+export const listenPressOnElement = (
+  event: React.KeyboardEvent<HTMLDivElement>,
+  callback: () => void
+) => event.which !== 9 && callback()
+
+export const truncateAddr = (
+  address: string,
+  startLength = 6,
+  endLength = 4
+) => {
   if (!address) {
     return ''
   }

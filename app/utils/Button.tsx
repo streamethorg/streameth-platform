@@ -7,12 +7,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'text-white bg-accent hover:bg-transparent hover:text-accent hover:border-accent',
+          'text-white bg-blue hover:bg-transparent hover:text-blue hover:border-blue',
         danger: 'bg-danger text-white',
         base: 'bg-base text-white hover:text-black',
         outline:
-          'text-accent bg-transparent border-accent hover:text-white hover:bg-accent',
-        green: 'bg-transparent text-accent border-green',
+          'text-blue bg-transparent border-blue hover:text-white hover:bg-blue',
+        green: 'bg-transparent text-blue border-green',
         yellow: 'bg-yellow-500 text-white',
       },
       size: {

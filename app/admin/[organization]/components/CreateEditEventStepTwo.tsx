@@ -5,6 +5,7 @@ import FormRadio from '@/app/utils/FormRadio'
 import FormLabel from '@/app/utils/FormLabel'
 import FormRadioBox from '@/app/utils/FormRadioBox'
 import UseAdminContext from '@/app/hooks/useAdminContext'
+import FormCheckbox from '@/app/utils/FormCheckbox'
 
 const initialImporterConfig: GSheetConfig & PretalxConfig = {
   sheetId: '',
@@ -189,32 +190,21 @@ const CreateEditEventStepTwo = () => {
             </>
           )}
         </div>
-        <div className="flex flex-col mb-6">
-          <FormLabel label="Archive Mode" toolTip />
-          <div className="flex gap-5">
-            <FormRadio
-              label="true"
-              buttonHeight="35"
-              checked={formData?.archiveMode}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  archiveMode: true,
-                })
-              }
-            />
-            <FormRadio
-              label="false"
-              buttonHeight="35"
-              checked={!formData?.archiveMode}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  archiveMode: false,
-                })
-              }
-            />
-          </div>
+
+        <div>
+          <FormLabel label="Choose your plug-ins" />
+          <FormCheckbox
+            label="Chat"
+            checked={formData?.plugins?.chat}
+            onChange={() =>
+              setFormData({
+                ...formData,
+                plugins: {
+                  chat: !formData?.plugins?.chat,
+                },
+              })
+            }
+          />
         </div>
       </div>
     </div>
