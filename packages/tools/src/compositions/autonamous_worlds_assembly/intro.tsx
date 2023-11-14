@@ -33,7 +33,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 
-  const audioFile = staticFile('0xparc/audio/IST_material-sound.mp3')
+  const audioFile = staticFile('0xparc/audio/going-deeper_faded.mp4')
   const introFile = staticFile(`0xparc/intro/IST_AWA_Intro.mp4`)
   const bgFile = staticFile(`0xparc/images/AWA_still.png`)
   const logoFile = ''
@@ -61,16 +61,16 @@ export const Intro: React.FC<Props> = ({ session }) => {
   )
   const endingOpactity = interpolate(
     frame,
-    [durationInFrames - 50, durationInFrames - 20],
+    [durationInFrames - 38, durationInFrames - 20],
     [1, 0]
   )
   const translateYValue =
-    frame >= durationInFrames - 40
+    frame >= durationInFrames - 38
       ? interpolate(
-        frame,
-        [durationInFrames - 40, durationInFrames],
-        [150, 350]
-      )
+          frame,
+          [durationInFrames - 38, durationInFrames],
+          [150, 350]
+        )
       : 150
 
   function titleClassName() {
@@ -139,7 +139,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                 frame < durationInFrames - 100
                   ? delayedOpacity
                   : endingOpactity,
-              transform: `translateY(${translateYValue}px)`,
+              transform: `translateY(${translateYValue + 20}px)`,
             }}>
             <Sequence
               name="Title"
@@ -160,7 +160,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                 frame < durationInFrames - 100
                   ? delayedOpacity
                   : endingOpactity,
-              transform: `translateY(${translateYValue - 100}px)`,
+              transform: `translateY(${translateYValue - 60}px)`,
             }}>
             <Sequence
               name="Speakers"
@@ -177,7 +177,11 @@ export const Intro: React.FC<Props> = ({ session }) => {
                         style={{
                           fontFamily: 'Grotesk Compact Smooth',
                         }}>
-                        <span className="text-3xl w-48 text-center leading-normal">
+                        <Img
+                          className="w-40 object-cover rounded-full"
+                          src={i.photo ?? CreateAvatar(i.name)}
+                        />
+                        <span className="text-3xl w-30 text-center leading-normal">
                           {i.name}
                         </span>
                       </div>
@@ -189,6 +193,8 @@ export const Intro: React.FC<Props> = ({ session }) => {
           </div>
         </div>
       </AbsoluteFill>
+
+      <Audio src={audioFile} />
     </AbsoluteFill>
   )
 }
