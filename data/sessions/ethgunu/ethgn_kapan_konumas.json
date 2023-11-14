@@ -1,1 +1,21 @@
-{"id":"ethgn_kapan_konumas","name":"ETHGünü Kapanış Konuşması","description":"Coming Soon","start":1699885800000,"end":1699887600000,"stageId":"harbiye","speakers":[{"id":"doruk_men","name":"Doruk İşmen","bio":"No description","eventId":"ethgunu","twitter":"","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/doruk.jpg?raw=true"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/ethgn_kapan_konumas.jpg"}
+{
+  "id": "ethgn_kapan_konumas",
+  "name": "ETHGünü Kapanış Konuşması",
+  "description": "Coming Soon",
+  "start": 1699885800000,
+  "end": 1699887600000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "doruk_men",
+      "name": "Doruk İşmen",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/doruk.jpg?raw=true"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethgunu",
+  "coverImage": "sessions/ethgunu/ethgn_kapan_konumas_thumbnail.png"
+}

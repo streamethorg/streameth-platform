@@ -1,1 +1,19 @@
-{"id":"data_availability_sampling","name":"Data availability sampling","description":"","start":1699966800000,"end":1699969200000,"stageId":"beyazit","speakers":[{"id":"mark_simkin","name":"Mark Simkin","bio":"Cryptography Reseacher at Ethereum Foundation","eventId":"cryptographic_resilience"}],"playbackId":"","eventId":"cryptographic_resilience","coverImage":"/sessions/cryptographic_resilience/data_availability_sampling.jpg"}
+{
+  "id": "data_availability_sampling",
+  "name": "Data availability sampling",
+  "description": "",
+  "start": 1699966800000,
+  "end": 1699969200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "mark_simkin",
+      "name": "Mark Simkin",
+      "bio": "Cryptography Reseacher at Ethereum Foundation",
+      "eventId": "cryptographic_resilience"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "cryptographic_resilience",
+  "coverImage": "sessions/cryptographic_resilience/data_availability_sampling_thumbnail.png"
+}
