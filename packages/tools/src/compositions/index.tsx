@@ -94,7 +94,7 @@ export function Compositions() {
 
   return (
     <>
-      {/* <Folder name="Devconnect">
+      <Folder name="Devconnect">
         <Composition
           id="custom-render"
           component={Intro}
@@ -138,7 +138,7 @@ export function Compositions() {
               }}
             />
           </Fragment>
-        ))} */}
+        ))}
 
       {/* <Composition
           id={'join-devconnect-ist'}
@@ -162,7 +162,7 @@ export function Compositions() {
             session: MOCK_SESSION[0],
           }}
         /> */}
-      {/* </Folder> */}
+      </Folder>
 
       <Folder name="0xParc">
         <Composition
