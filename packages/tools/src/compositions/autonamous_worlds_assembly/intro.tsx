@@ -178,7 +178,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                           fontFamily: 'FK Raster Grotesk',
                         }}>
                         <Img
-                          className="w-40 object-cover rounded-full"
+                          className="w-40 object-cover rounded-full border-black shadow-md"
                           src={i.photo ?? CreateAvatar(i.name)}
                         />
                         <span className="text-3xl w-30 text-center leading-normal">
