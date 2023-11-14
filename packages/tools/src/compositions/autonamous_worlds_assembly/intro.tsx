@@ -65,10 +65,10 @@ export const Intro: React.FC<Props> = ({ session }) => {
   const translateYValue =
     frame >= durationInFrames - 38
       ? interpolate(
-        frame,
-        [durationInFrames - 38, durationInFrames],
-        [150, 350]
-      )
+          frame,
+          [durationInFrames - 38, durationInFrames],
+          [150, 350]
+        )
       : 150
 
   function titleClassName() {

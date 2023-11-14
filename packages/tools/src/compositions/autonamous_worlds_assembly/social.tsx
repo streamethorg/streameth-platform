@@ -1,4 +1,4 @@
-import { AbsoluteFill, staticFile, Img } from 'remotion'
+  import { AbsoluteFill, staticFile, Img } from 'remotion'
 import { Props } from './intro'
 import { CreateAvatar } from '../../utils/avatars'
 import dayjs from 'dayjs'
@@ -10,11 +10,11 @@ export const Social: React.FC<Props> = ({ session }) => {
   function titleClassName() {
     let className = 'w-full text-center'
     if (session.name.length >= 140)
-      className += ' text-3xl leading-none'
-    if (session.name.length >= 60 && session.name.length < 140)
+      className += ' text-2xl leading-none'
+    if (session.name.length > 60 && session.name.length < 140)
+      className += ' text-2xl leading-tight'
+    if (session.name.length > 40 && session.name.length < 60)
       className += ' text-3xl leading-tight'
-    if (session.name.length >= 40 && session.name.length < 60)
-      className += ' text-4xl leading-tight'
     if (session.name.length < 40)
       className += ' text-5xl leading-tight'
 
@@ -69,7 +69,6 @@ export const Social: React.FC<Props> = ({ session }) => {
                       key={i.id}
                       className="flex flex-col items-center gap-4"
                       style={{
-                        transform: `translateY(90px)`,
                         fontFamily: 'FK Raster Grotesk',
                       }}>
                       <Img
