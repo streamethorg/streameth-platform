@@ -29,7 +29,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
             </p>
             <Image
               className="hidden lg:block"
-              src={'/events/EVM_Summit_cover.jpeg'}
+              src={'/events/EVM_summit_cover.jpeg'}
               alt="EVM Summit 2023"
               width={700}
               height={700}
