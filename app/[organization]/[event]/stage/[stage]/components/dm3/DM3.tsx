@@ -30,7 +30,6 @@ const getBillboardId = (eventId: string, stageId: string) => {
 
 export const Dm3 = () => {
   const { address, isConnected } = useAccount()
-  const { connect } = useConnect()
   const publicClient = usePublicClient()
   const context = useContext(StageContext)
   const { signInWithEthereum, siweMessage, siweSig } = useDm3Siwe(
@@ -51,9 +50,9 @@ export const Dm3 = () => {
         context?.stage.eventId!,
         context?.stage.id!
       ),
-      billboardClientUrl: 'http://164.90.224.89/bb-client',
+      billboardClientUrl: ' https://devconnect.dm3.network/bb-client',
       deliveryServiceEnsName: 'bb-ds.devconnect.dm3.eth',
-      offchainResolverUrl: 'http://164.90.224.89/resolver-handler',
+      offchainResolverUrl: ' https://devconnect.dm3.network/resolver-handler',
       userCCIPDomain: 'user.devconnect.dm3.eth',
       siweAddress: address?.toString() ?? '',
       siweMessage: JSON.stringify(siweMessage),
