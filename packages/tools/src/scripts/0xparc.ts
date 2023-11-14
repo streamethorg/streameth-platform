@@ -72,6 +72,7 @@ async function generateEventAssets(event: any) {
     return
   }
 
+  console.log('Fetch event sessions..')
   const res = await fetch(
     `${apiBaseUri}/organizations/${event.organizationId}/events/${event.id}/sessions`
   )
@@ -105,6 +106,7 @@ async function generateEventAssets(event: any) {
 
   // TODO: Kinda hacky solution to check invalid Image urls here.
   // This should get fixed on data entry or import
+  console.log('Check valid image urls..')
   const sessionsToProcess: any[] = []
   for (const session of sessions) {
     const s = {
@@ -207,12 +209,13 @@ async function generateEventAssets(event: any) {
               )) ?? false
 
             if (!thumbnailExported || force) {
+              const frameNr = composition.id.includes('autonomous') ? 132 : composition.durationInFrames - 1
               const exists = fileExists(thumbnailFilePath)
               if (!exists || force) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
-                  frame: composition.durationInFrames - 1,
+                  frame: frameNr, // Fixed frame for AWA 
                   output: thumbnailFilePath,
                   inputProps: inputProps,
                 })
