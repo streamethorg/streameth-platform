@@ -16,7 +16,8 @@ import {
 } from './devconnect'
 import { DevconnectISTProps, Intro } from './devconnect/intro'
 import { Social } from './devconnect/social'
-import { Intro as ProgCryptoIntro } from './progcrypto/intro'
+import { Intro as ProgCryptoIntro} from './progcrypto/intro'
+import { WideIntro as ProgCryptoWideIntro} from './progcrypto/intro_wide'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
 import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
@@ -173,6 +174,17 @@ export function Compositions() {
           fps={DevconnectFrameRate}
           defaultProps={{
             session: MOCK_SESSION[0],
+          }}
+        />
+
+        <Composition
+          id={'progcrypto-wide'}
+          component={ProgCryptoWideIntro}
+          width={4032}
+          height={1344}
+          durationInFrames={219}
+          fps={DevconnectFrameRate}
+          defaultProps={{ session: MOCK_SESSION[0],
           }}
         />
 

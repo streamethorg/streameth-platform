@@ -33,9 +33,8 @@ export const Intro: React.FC<Props> = ({ session }) => {
 
   const audioFile = staticFile('0xparc/audio/tails-of-love_faded.mp3')
   const introFile = staticFile(
-    `0xparc/intro/IST_Progcrypto_Intro.mp4`
+    `0xparc/intro/IST_Progcrypto_Intro.webm`
   )
-  const bgFile = staticFile(`0xparc/images/AWA_still.png`)
   const logoFile = ''
 
   const frameRate = 25
@@ -99,10 +98,6 @@ export const Intro: React.FC<Props> = ({ session }) => {
 
   return (
     <AbsoluteFill>
-      <AbsoluteFill>
-        <Img style={{ width: '100%' }} src={bgFile} />
-      </AbsoluteFill>
-
       <AbsoluteFill>
         <Sequence
           name="Intro video"
