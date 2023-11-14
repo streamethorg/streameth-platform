@@ -45,7 +45,7 @@ export function Compositions() {
   )
 
   const autonomousWorldsAssemblyFont = new FontFace(
-    `Grotesk Compact Smooth`,
+    `FK Raster Grotesk`,
     `url('${staticFile(
       '0xparc/fonts/FKRasterGroteskCompact-Smooth.ttf'
     )}') format('truetype')`
@@ -205,7 +205,7 @@ export function Compositions() {
           durationInFrames={250}
           fps={DevconnectFrameRate}
           defaultProps={{
-            session: MOCK_SESSION[3],
+            session: MOCK_SESSION[2],
           }}
         />
 

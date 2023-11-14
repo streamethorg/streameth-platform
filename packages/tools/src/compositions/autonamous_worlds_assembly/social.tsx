@@ -1,4 +1,4 @@
-import { AbsoluteFill, staticFile, Img } from 'remotion'
+  import { AbsoluteFill, staticFile, Img } from 'remotion'
 import { Props } from './intro'
 import { CreateAvatar } from '../../utils/avatars'
 import dayjs from 'dayjs'
