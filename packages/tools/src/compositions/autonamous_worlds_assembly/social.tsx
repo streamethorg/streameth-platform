@@ -48,7 +48,7 @@ export const Social: React.FC<Props> = ({ session }) => {
               className={titleClassName()}
               style={{
                 transform: `translateY(130px)`,
-                fontFamily: 'Grotesk Compact Smooth',
+                fontFamily: 'FK Raster Grotesk',
               }}>
               {session.name}
             </h1>
@@ -63,7 +63,7 @@ export const Social: React.FC<Props> = ({ session }) => {
                       className="flex flex-col items-center gap-4"
                       style={{
                         transform: `translateY(90px)`,
-                        fontFamily: 'Grotesk Compact Smooth',
+                        fontFamily: 'FK Raster Grotesk',
                       }}>
                       <span className="text-xl font-medium w-32 text-center leading-normal">
                         {i.name}
