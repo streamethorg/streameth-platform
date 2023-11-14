@@ -85,7 +85,10 @@ export function Compositions() {
       continueRender(waitForFont)
     })
     .catch((err) =>
-      console.log('Error loading autonomousWorldsAssemblyFont font', err)
+      console.log(
+        'Error loading autonomousWorldsAssemblyFont font',
+        err
+      )
     )
 
   return (
@@ -136,7 +139,7 @@ export function Compositions() {
           </Fragment>
         ))} */}
 
-        {/* <Composition
+      {/* <Composition
           id={'join-devconnect-ist'}
           component={Join}
           width={1920}
@@ -161,12 +164,12 @@ export function Compositions() {
       {/* </Folder> */}
 
       <Folder name="0xParc">
-        {/* <Composition
+        <Composition
           id={'progcrypto'}
           component={ProgCryptoIntro}
           width={1920}
           height={1080}
-          durationInFrames={DevconnectIntroDuration}
+          durationInFrames={219}
           fps={DevconnectFrameRate}
           defaultProps={{
             session: MOCK_SESSION[0],
@@ -181,7 +184,7 @@ export function Compositions() {
           defaultProps={{
             session: MOCK_SESSION[1],
           }}
-        /> */}
+        />
 
         <Composition
           id={'autonomous-worlds-assembly'}
