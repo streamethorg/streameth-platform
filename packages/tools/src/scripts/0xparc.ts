@@ -14,9 +14,10 @@ import {
   UploadDrive,
   UploadOrUpdate,
 } from 'services/slides'
-import { existsSync, mkdirSync, statSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
 import { validImageUrl } from 'utils/avatars'
 
+const updateSessionThumbnails = true
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
 const processArgs = process.argv
@@ -102,7 +103,10 @@ async function generateEventAssets(event: any) {
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
+  const dataSessionFolder = join(process.cwd(), '../../data/sessions', event.id)
+  const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
   mkdirSync(eventFolder, { recursive: true })
+  mkdirSync(publicEventFolder, { recursive: true })
 
   // TODO: Kinda hacky solution to check invalid Image urls here.
   // This should get fixed on data entry or import
@@ -227,6 +231,21 @@ async function generateEventAssets(event: any) {
                 thumbnailType,
                 folderId
               )
+            }
+
+            if (updateSessionThumbnails && fileExists(thumbnailFilePath)) {
+              const copyPath = join(publicEventFolder, thumbnailId)
+              copyFileSync(thumbnailFilePath, copyPath)
+
+              // update session file 
+              const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
+              if (existsSync(sessionFilePath)) {
+                const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
+                writeFileSync(sessionFilePath, JSON.stringify({
+                  ...sessionFile,
+                  coverImage: `/sessions/${event.id}/${thumbnailId}`
+                }, null, 2))
+              }
             }
           }
         }

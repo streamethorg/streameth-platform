@@ -1,1 +1,21 @@
-{"id":"the_forgotten_gods_event_game_design_and_technical_decisionmaking_in_live_and_onchain_competitions","name":"The Forgotten Gods Event: Game Design and Technical Decision-Making in Live and Onchain Competitions","description":"In this session, we’ll delve into the “Forgotten Gods” event, a three-week competition that unfolded within our onchain game, Pirate Nation. We’ll reflect on the intriguing social dynamics that emerged, such as faction-switching and player recruitment strategies, as well as the technical hurdles we faced, including issues like botting, community-created clients, and item burning. This discussion will provide valuable insights for developers interested in running their own engaging onchain game competitions.","start":1700048700000,"end":1700049600000,"stageId":"emirgan_2","speakers":[{"id":"matt_van","name":"Matt Van","bio":"Matt Van is head of engineering at Proof of Play, where he is working on the onchain RPG Pirate Nation.","eventId":"autonomous_worlds_assembly","twitter":"@mattvv","photo":"https://drive.google.com/uc?id=1GpHjGZmy2-NyzZ7EFdbx44Oj6HdX98D9"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/the_forgotten_gods_event_game_design_and_technical_decisionmaking_in_live_and_onchain_competitions.jpg"}
+{
+  "id": "the_forgotten_gods_event_game_design_and_technical_decisionmaking_in_live_and_onchain_competitions",
+  "name": "The Forgotten Gods Event: Game Design and Technical Decision-Making in Live and Onchain Competitions",
+  "description": "In this session, we’ll delve into the “Forgotten Gods” event, a three-week competition that unfolded within our onchain game, Pirate Nation. We’ll reflect on the intriguing social dynamics that emerged, such as faction-switching and player recruitment strategies, as well as the technical hurdles we faced, including issues like botting, community-created clients, and item burning. This discussion will provide valuable insights for developers interested in running their own engaging onchain game competitions.",
+  "start": 1700048700000,
+  "end": 1700049600000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "matt_van",
+      "name": "Matt Van",
+      "bio": "Matt Van is head of engineering at Proof of Play, where he is working on the onchain RPG Pirate Nation.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@mattvv",
+      "photo": "https://drive.google.com/uc?id=1GpHjGZmy2-NyzZ7EFdbx44Oj6HdX98D9"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/the_forgotten_gods_event_game_design_and_technical_decisionmaking_in_live_and_onchain_competitions_thumbnail.png"
+}
