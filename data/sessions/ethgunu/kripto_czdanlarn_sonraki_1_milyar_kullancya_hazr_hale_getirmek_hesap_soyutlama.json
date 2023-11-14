@@ -15,11 +15,7 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/dogan.jpg?raw=true"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/ebb884i825539i50/index.m3u8",
-  "playbackId": "ebb884i825539i50",
+  "playbackId": "",
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama.jpg",
-  "assetId": "ebb81be8-d767-4b85-802d-c583ad8d71a4",
-  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-  "videoType": "clip"
+  "coverImage": "sessions/ethgunu/kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama_thumbnail.png"
 }

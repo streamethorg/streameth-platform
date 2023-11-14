@@ -16,6 +16,7 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
             organizationId,
             id,
             accentColor,
+            end,
           },
           index
         ) => (
@@ -40,6 +41,10 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
                   <p className="px-2 font-bold truncate">{name}</p>
                   <p className="px-2 text-md font-medium">
                     {start.toDateString()}
+                    {new Date(start).toDateString() !==
+                    new Date(end).toDateString()
+                      ? ` - ${new Date(end).toDateString()}`
+                      : ''}
                   </p>
                 </div>
               </div>

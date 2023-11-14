@@ -15,11 +15,7 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/furkan.jpg?raw=true"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/903etk1us84bvx07/index.m3u8",
-  "playbackId": "903etk1us84bvx07",
+  "playbackId": "",
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/stablecoin_101.jpg",
-  "assetId": "903e9c91-b409-4aff-8b5e-4e769af14987",
-  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-  "videoType": "clip"
+  "coverImage": "sessions/ethgunu/stablecoin_101_thumbnail.png"
 }
