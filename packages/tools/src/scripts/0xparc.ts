@@ -212,7 +212,7 @@ async function generateEventAssets(event: any) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
-                  frame: composition.durationInFrames - 1,
+                  frame: event.id.contains('autonomous') ? 132 : composition.durationInFrames - 1, // Fixed frame for AWA 
                   output: thumbnailFilePath,
                   inputProps: inputProps,
                 })
