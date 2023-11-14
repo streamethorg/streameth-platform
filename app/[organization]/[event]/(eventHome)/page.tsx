@@ -62,6 +62,7 @@ const EventHome = async ({ params }: { params: Params }) => {
                     <Player
                       streamId={stage.streamSettings.streamId}
                       playerName={stage.id}
+                      muted={true}
                     />
                     <p className="uppercase text-xl">{stage.name}</p>
                   </div>
