@@ -1,9 +1,7 @@
 import {
   Sequence,
   AbsoluteFill,
-  staticFile,
-  Audio,
-  useVideoConfig,
+  staticFile, Audio, useVideoConfig,
   useCurrentFrame,
   interpolate,
   Img,
