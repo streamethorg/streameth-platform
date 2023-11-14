@@ -74,11 +74,11 @@ export const Intro: React.FC<Props> = ({ session }) => {
   function titleClassName() {
     let className = 'w-full text-center'
     if (session.name.length >= 140)
-      className += ' text-8xl leading-none'
+      className += ' text-5xl leading-none'
     if (session.name.length > 60 && session.name.length < 140)
-      className += ' text-8xl leading-tight'
+      className += ' text-6xl leading-tight'
     if (session.name.length > 40 && session.name.length < 60)
-      className += ' text-9xl leading-tight'
+      className += ' text-6xl leading-tight'
     if (session.name.length < 40)
       className += ' text-9xl leading-tight'
 
@@ -176,7 +176,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                           fontFamily: 'Grotesk Compact Smooth',
                         }}>
                         <Img
-                          className="w-40 object-cover rounded-full"
+                          className="w-40 object-cover rounded-full border-black shadow-md"
                           src={i.photo ?? CreateAvatar(i.name)}
                         />
                         <span className="text-3xl w-30 text-center leading-normal">
