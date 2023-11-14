@@ -67,10 +67,10 @@ export const Intro: React.FC<Props> = ({ session }) => {
   const translateYValue =
     frame >= durationInFrames - 38
       ? interpolate(
-          frame,
-          [durationInFrames - 38, durationInFrames],
-          [150, 350]
-        )
+        frame,
+        [durationInFrames - 38, durationInFrames],
+        [150, 350]
+      )
       : 150
 
   function titleClassName() {
@@ -114,7 +114,9 @@ export const Intro: React.FC<Props> = ({ session }) => {
       </AbsoluteFill>
 
       <AbsoluteFill>
-        <div className="flex py-12 px-24 flex-col w-full space-between justify-between text-white">
+        <div className="flex py-12 px-24 flex-col w-full space-between justify-between text-white" style={{
+          fontFamily: 'FK Raster Grotesk',
+        }}>
           <div
             className="flex relative h-32"
             style={{ opacity: initialOpacity }}>
@@ -148,7 +150,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
               layout="none">
               <h1
                 className={titleClassName()}
-                style={{ fontFamily: 'Grotesk Compact Smooth' }}>
+                style={{ fontFamily: 'FK Raster Grotesk' }}>
                 {session.name}
               </h1>
             </Sequence>
@@ -175,7 +177,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                         key={i.id}
                         className="flex flex-col items-center gap-4"
                         style={{
-                          fontFamily: 'Grotesk Compact Smooth',
+                          fontFamily: 'FK Raster Grotesk',
                         }}>
                         <Img
                           className="w-40 object-cover rounded-full"

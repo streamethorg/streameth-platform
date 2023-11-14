@@ -44,7 +44,7 @@ export function Compositions() {
   )
 
   const autonomousWorldsAssemblyFont = new FontFace(
-    `Grotesk Compact Smooth`,
+    `FK Raster Grotesk`,
     `url('${staticFile(
       '0xparc/fonts/FKRasterGroteskCompact-Smooth.ttf'
     )}') format('truetype')`
