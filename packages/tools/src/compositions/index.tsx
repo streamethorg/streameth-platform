@@ -164,7 +164,7 @@ export function Compositions() {
       </Folder>
 
       <Folder name="0xParc">
-        {/* <Composition
+        <Composition
           id={'progcrypto'}
           component={ProgCryptoIntro}
           width={1920}
@@ -184,7 +184,7 @@ export function Compositions() {
           defaultProps={{
             session: MOCK_SESSION[1],
           }}
-        /> */}
+        />
 
         <Composition
           id={'autonomous-worlds-assembly'}
