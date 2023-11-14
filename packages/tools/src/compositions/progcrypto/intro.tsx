@@ -31,7 +31,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 
-  const audioFile = staticFile('0xparc/audio/IST_material-sound.mp3')
+  const audioFile = staticFile('0xparc/audio/tails-of-love_faded.mp3')
   const introFile = staticFile(
     `0xparc/intro/IST_Progcrypto_Intro.mp4`
   )
@@ -67,10 +67,10 @@ export const Intro: React.FC<Props> = ({ session }) => {
   const translateYValue =
     frame >= durationInFrames - 25
       ? interpolate(
-        frame,
-        [durationInFrames - 25, durationInFrames],
-        [150, 220]
-      )
+          frame,
+          [durationInFrames - 25, durationInFrames],
+          [150, 220]
+        )
       : 150
 
   function titleClassName() {
@@ -188,6 +188,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
           </div>
         </div>
       </AbsoluteFill>
+      <Audio src={audioFile} />
     </AbsoluteFill>
   )
 }
