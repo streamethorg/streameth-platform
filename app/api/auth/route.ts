@@ -46,7 +46,11 @@ export const POST = async (req: NextRequest) => {
 
     // Check for whitelisted addresses on the admin panel
     if (!WHITELISTED_ADDRESSES.includes(fields.address)) {
-      console.log('Address is not on Whitelist', session, fields.address)
+      console.log(
+        'Address is not on Whitelist',
+        session,
+        fields.address
+      )
       return tap(
         new NextResponse('Invalid address.', { status: 422 }),
         (res) => session!.clear(res)
