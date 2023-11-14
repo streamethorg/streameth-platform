@@ -9,12 +9,14 @@ export const Social: React.FC<Props> = ({ session }) => {
 
   function titleClassName() {
     let className = 'w-full text-center'
-    if (session.name.length >= 140) className += ' text-2xl none'
+    if (session.name.length >= 140)
+      className += ' text-3xl leading-none'
     if (session.name.length >= 60 && session.name.length < 140)
       className += ' text-3xl leading-tight'
     if (session.name.length >= 40 && session.name.length < 60)
       className += ' text-4xl leading-tight'
-    if (session.name.length < 40) className += ' text-5xl'
+    if (session.name.length < 40)
+      className += ' text-5xl leading-tight'
 
     return className
   }
@@ -48,7 +50,7 @@ export const Social: React.FC<Props> = ({ session }) => {
             <h1
               className={titleClassName()}
               style={{
-                transform: `translateY(130px)`,
+                transform: `translateY(90px)`,
                 fontFamily: 'FK Raster Grotesk',
               }}>
               {session.name}
