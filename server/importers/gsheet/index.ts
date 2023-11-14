@@ -140,7 +140,7 @@ export default class Importer extends BaseImporter {
               this.event.timezone
             )
             .valueOf(),
-          videoUrl: row[12],
+          // moderator: row[12],
         }
 
         await this.sessionController.createSession(session)

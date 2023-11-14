@@ -31,7 +31,7 @@ const ScheduleCard = ({
             {moment(session.start)
               .tz('Europe/Istanbul')
               .format('HH:mm')}{' '}
-            -
+            -{' '}
             {moment(session.end)
               .tz('Europe/Istanbul')
               .format('HH:mm')}{' '}

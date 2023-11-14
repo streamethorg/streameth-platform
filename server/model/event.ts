@@ -37,6 +37,7 @@ export interface IEvent {
   website?: string
   timezone: string
   accentColor?: string
+  unlisted?: boolean
   dataExporter?: IDataExporter[]
   enableVideoDownloader?: boolean
 }
@@ -83,6 +84,8 @@ export default class Event implements IEvent {
 
   startTime?: string
 
+  unlisted?: boolean
+
   endTime?: string
 
   enableVideoDownloader?: boolean
@@ -106,6 +109,7 @@ export default class Event implements IEvent {
     startTime,
     endTime,
     enableVideoDownloader,
+    unlisted,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -126,6 +130,7 @@ export default class Event implements IEvent {
     this.startTime = startTime
     this.endTime = endTime
     this.enableVideoDownloader = enableVideoDownloader ?? true
+    this.unlisted = unlisted ?? false
     // this.validateThis();
   }
 

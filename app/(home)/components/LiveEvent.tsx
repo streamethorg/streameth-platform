@@ -8,7 +8,7 @@ import { IStage } from '@/server/model/stage'
 const LiveEvent = ({ stage }: { stage: IStage }) => {
   return (
     <div>
-      <h3 className="font-ubuntu font-bold text-lg px-4 text-blue">
+      <h3 className="font-ubuntu font-bold px-4 mt-4 text-4xl text-blue">
         Happening Now!
       </h3>
       <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-screen">
@@ -16,28 +16,27 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
           <div className=" mb-2 lg:mb-0 p-4 rounded-xl flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
             <Player
               streamId={stage.streamSettings.streamId}
-              playerName="Zuzalu Hackathon"
-              coverImage="/sessions/zuconnect_istanbul/zuzalu_2024_plans.jpg"
+              playerName={stage.name}
             />
-            <p className="font-ubuntu font-medium text-lg mt-4 text-blue">
-              🔴 Live: ZuConnect Hackathon
+            <p className="font-ubuntu font-medium text-2xl mt-4 text-blue">
+              🔴 Live: EVM Summit
             </p>
           </div>
           <div
-            className={`w-full lg:w-[45%] mr-4 flex flex-col gap-4 mb-4`}>
+            className={`w-full lg:w-[45%] lg:mr-4 flex flex-col gap-4 lg:mb-6`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
-              ZuConnect Hackathon
+              DevConnect - EVM Summit
             </p>
             <Image
               className="hidden lg:block"
-              src={'/events/zuzalu-cover.png'}
-              alt="Zazulu 2023"
+              src={'/events/EVM_Summit_cover.jpeg'}
+              alt="EVM Summit 2023"
               width={700}
               height={700}
             />
             <Link
-              href="/zuzalu/zuconnect_hackathon"
-              className=" bg-blue rounded-[8px] p-4 mx-4 lg:mx-0 text-white text-center">
+              href="/devconnect/evm_summit"
+              className=" bg-blue rounded-xl p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
             </Link>
           </div>

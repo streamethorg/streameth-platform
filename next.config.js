@@ -9,8 +9,7 @@ const nextConfig = {
           value: 'watch.protocol.berlin',
         },
       ],
-      destination:
-        'https://watch.protocol.berlin/ethberlin/protocol_berg',
+      destination: 'https://watch.protocol.berlin/ethberlin/protocol_berg',
       permanent: true,
     },
     {
@@ -21,8 +20,7 @@ const nextConfig = {
           value: 'launch.scroll.io',
         },
       ],
-      destination:
-        'https://launch.scroll.io/scroll/scroll_announcement_stream',
+      destination: 'https://launch.scroll.io/scroll/scroll_announcement_stream',
       permanent: true,
     },
   ],
@@ -48,10 +46,7 @@ const nextConfig = {
       },
     ]
   },
-  webpack: (
-    config,
-    { buildId, dev, isServer, defaultLoaders, webpack }
-  ) => {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(
       new webpack.DefinePlugin({
         'process.env.FLUENTFFMPEG_COV': false,

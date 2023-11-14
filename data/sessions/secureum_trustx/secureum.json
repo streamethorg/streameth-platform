@@ -1,0 +1,12 @@
+{
+  "id": "secureum",
+  "name": "Secureum TrustX",
+  "description": "Secureum\nTrustX",
+  "start": 1699854300000,
+  "end": 1699893900000,
+  "stageId": "main_stage",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/secureum.jpg"
+}

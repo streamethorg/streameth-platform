@@ -53,6 +53,7 @@ const siweConfig = {
 
 const config = createConfig(
   getDefaultConfig({
+    autoConnect: true,
     appName: 'StreamETH',
     infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
     walletConnectProjectId:

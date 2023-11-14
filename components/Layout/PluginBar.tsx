@@ -21,7 +21,7 @@ export default function PluginBar({
   }
 
   return (
-    <div className=" flex flex-col lg:relative rounded-xl p-2 md:p-4 h-[50vh] md:h-[70vh] bg-base ">
+    <div className=" flex flex-col lg:relative rounded-xl p-2 md:p-4 h-[50vh] lg:h-full overflow-auto bg-base ">
       <div
         style={{ top: isMobile ? bottomOffset : 'unset' }}
         className="bg-base z-20 pb-0 md:relative rounded md:top-[unset] flex flex-row w-full bg-secondary mb-4">
@@ -42,7 +42,7 @@ export default function PluginBar({
         ))}
       </div>
       <div
-        className="flex flex-col w-full flex-grow overflow-scroll"
+        className="flex flex-col w-full flex-grow overflow-auto"
         key={selectedId}>
         {selectedTab.content}
       </div>
