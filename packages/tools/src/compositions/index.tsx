@@ -194,7 +194,7 @@ export function Compositions() {
           durationInFrames={250}
           fps={DevconnectFrameRate}
           defaultProps={{
-            session: MOCK_SESSION[0],
+            session: MOCK_SESSION[2],
           }}
         />
 
