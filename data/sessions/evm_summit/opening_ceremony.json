@@ -1,1 +1,33 @@
-{"id":"opening_ceremony","name":"Opening Ceremony","description":"During the opening session, the organizing team will welcome the audience, introduce the topics that will be discussed, outline the structure of the event, and provide an overview of the event's objectives.","start":1699943400000,"end":1699944300000,"stageId":"emirgan_1","speakers":[{"id":"alex_beregszaszi","name":"Alex Beregszaszi","bio":"Alex is the team lead of Ipsilon at the Ethereum Foundation, a group focused on improving the EVM. Alex has been an early contributor and co-lead of the Solidity team.","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/alex_beregszaszi.jpg"},{"id":"eniko","name":"Eniko","bio":"EVM Summit organizing team member","eventId":"evm_summit","twitter":"","photo":"https://pbs.twimg.com/profile_images/1576119954599985154/S4Cw74e__400x400.jpg"}],"playbackId":"","eventId":"evm_summit","coverImage":"/sessions/evm_summit/opening_ceremony.jpg"}
+{
+  "id": "opening_ceremony",
+  "name": "Opening Ceremony",
+  "description": "During the opening session, the organizing team will welcome the audience, introduce the topics that will be discussed, outline the structure of the event, and provide an overview of the event's objectives.",
+  "start": 1699943400000,
+  "end": 1699944300000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "alex_beregszaszi",
+      "name": "Alex Beregszaszi",
+      "bio": "Alex is the team lead of Ipsilon at the Ethereum Foundation, a group focused on improving the EVM. Alex has been an early contributor and co-lead of the Solidity team.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/alex_beregszaszi.jpg"
+    },
+    {
+      "id": "eniko",
+      "name": "Eniko",
+      "bio": "EVM Summit organizing team member",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://pbs.twimg.com/profile_images/1576119954599985154/S4Cw74e__400x400.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/5cb1aqqohorks5uu/index.m3u8",
+  "playbackId": "5cb1aqqohorks5uu",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/opening_ceremony.jpg",
+  "assetId": "5cb1a15f-c6dc-465d-9a68-b95c5a79f624",
+  "sourceId": "1f82b9ab-c330-470f-abb4-352939e198f2",
+  "videoType": "clip"
+}
