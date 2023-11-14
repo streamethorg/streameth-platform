@@ -20,7 +20,7 @@ export type IDataImporter =
 export type IDataExporter = { type: 'gdrive'; config: GSheetConfig }
 
 export interface IPlugins {
-  chat: boolean
+  disableChat: boolean
 }
 export interface IEvent {
   id: string

@@ -70,7 +70,7 @@ const EventFormProvider: React.FC<EventFormProviderProps> = ({
       timezone: '',
       accentColor: '',
       plugins: {
-        chat: false,
+        disableChat: false,
       },
       dataExporter: [],
       dataImporter: [],

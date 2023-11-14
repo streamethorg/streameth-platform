@@ -195,12 +195,12 @@ const CreateEditEventStepTwo = () => {
           <FormLabel label="Choose your plug-ins" />
           <FormCheckbox
             label="Chat"
-            checked={formData?.plugins?.chat}
+            checked={formData?.plugins?.disableChat}
             onChange={() =>
               setFormData({
                 ...formData,
                 plugins: {
-                  chat: !formData?.plugins?.chat,
+                  disableChat: !formData?.plugins?.disableChat,
                 },
               })
             }
