@@ -8,7 +8,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileS
 import { DevconnectEvents } from 'compositions/devconnect'
 import { validImageUrl } from 'utils/avatars'
 
-const uploadGoogledrive = false
+const uploadGoogledrive = true
 const updateSessionThumbnails = true
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
