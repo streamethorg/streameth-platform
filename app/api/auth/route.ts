@@ -33,6 +33,7 @@ export const POST = async (req: NextRequest) => {
   let session = await Session.fromRequest(req)
 
   if (!session) {
+    console.log('Create new session')
     session = new Session()
   }
 
@@ -45,6 +46,7 @@ export const POST = async (req: NextRequest) => {
 
     // Check for whitelisted addresses on the admin panel
     if (!WHITELISTED_ADDRESSES.includes(fields.address)) {
+      console.log('Address is not on Whitelist', session, fields.address)
       return tap(
         new NextResponse('Invalid address.', { status: 422 }),
         (res) => session!.clear(res)
@@ -52,6 +54,7 @@ export const POST = async (req: NextRequest) => {
     }
 
     if (fields.nonce !== session.nonce) {
+      console.log('Invalid session nonce', session)
       return tap(
         new NextResponse('Invalid nonce.', { status: 422 }),
         (res) => session!.clear(res)
@@ -61,6 +64,7 @@ export const POST = async (req: NextRequest) => {
     session.address = fields.address
     session.chainId = fields.chainId
   } catch (error) {
+    console.log('Unable to Auth session', error)
     switch (error) {
       case SiweErrorType.INVALID_NONCE:
       case SiweErrorType.INVALID_SIGNATURE:
