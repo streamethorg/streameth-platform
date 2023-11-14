@@ -39,7 +39,8 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
           {moment(session.start)
             .tz('Europe/Istanbul')
             .format('HH:mm')}{' '}
-          -{moment(session.end).tz('Europe/Istanbul').format('HH:mm')}{' '}
+          -{' '}
+          {moment(session.end).tz('Europe/Istanbul').format('HH:mm')}{' '}
           (GMT +3)
         </span>
       </div>
