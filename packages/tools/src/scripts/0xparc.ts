@@ -15,6 +15,7 @@ import {
   UploadOrUpdate,
 } from 'services/slides'
 import { existsSync, mkdirSync, statSync } from 'fs'
+import { validImageUrl } from 'utils/avatars'
 
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
@@ -263,13 +264,4 @@ async function upload(
       await UploadDrive(id, path, type, folderId)
     }
   }
-}
-
-async function validImageUrl(url?: string) {
-  if (!url) return false
-
-  const res = await fetch(url)
-  const buff = await res.blob()
-
-  return buff.type.startsWith('image/')
 }

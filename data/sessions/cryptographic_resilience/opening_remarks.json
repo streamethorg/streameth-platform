@@ -1,1 +1,19 @@
-{"id":"opening_remarks","name":"Opening Remarks","description":"","start":1699943400000,"end":1699944300000,"stageId":"beyazit","speakers":[{"id":"mary_maller","name":"Mary Maller","bio":"Cryptography Reseacher at Ethereum Foundation","eventId":"cryptographic_resilience"}],"playbackId":"","eventId":"cryptographic_resilience","coverImage":"/sessions/cryptographic_resilience/opening_remarks.jpg"}
+{
+  "id": "opening_remarks",
+  "name": "Opening Remarks",
+  "description": "",
+  "start": 1699943400000,
+  "end": 1699944300000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "mary_maller",
+      "name": "Mary Maller",
+      "bio": "Cryptography Reseacher at Ethereum Foundation",
+      "eventId": "cryptographic_resilience"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "cryptographic_resilience",
+  "coverImage": "sessions/cryptographic_resilience/opening_remarks_thumbnail.png"
+}
