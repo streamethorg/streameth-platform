@@ -1,1 +1,28 @@
-{"id":"intro_to_pcd_sdk_workshop","name":"Intro to PCD SDK Workshop","description":"Learn about how Zupass works, and how to build applications on top of its SDK to make use of ZK proofs.","start":1700143200000,"end":1700146800000,"stageId":"dolmabahce_a","speakers":[{"id":"ivan","name":"Ivan","bio":"Ivan is a developer that works on the Zupass Application","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1wmmh7Lnr9pPTLx0MdB1iW4otEWu8Fxkh/view"},{"id":"andrew","name":"Andrew","bio":"Andrew is a software engineer who likes building systems and libraries which are reliable, fast, and secure.  His decades of experience include 7 years working on Dropbox's distributed filesystem, mobile app frameworks, and APIs.  He was recently nerdsniped by ZK Cryptography, and joined 0xPARC to design and build the infrastructure of Zupass and PCDs.","eventId":"progcrypto"}],"playbackId":"","eventId":"progcrypto","track":"Identity, Attestations, and PCDs","coverImage":"/sessions/progcrypto/intro_to_pcd_sdk_workshop.jpg"}
+{
+  "id": "intro_to_pcd_sdk_workshop",
+  "name": "Intro to PCD SDK Workshop",
+  "description": "Learn about how Zupass works, and how to build applications on top of its SDK to make use of ZK proofs.",
+  "start": 1700143200000,
+  "end": 1700146800000,
+  "stageId": "dolmabahce_a",
+  "speakers": [
+    {
+      "id": "ivan",
+      "name": "Ivan",
+      "bio": "Ivan is a developer that works on the Zupass Application",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1wmmh7Lnr9pPTLx0MdB1iW4otEWu8Fxkh/view"
+    },
+    {
+      "id": "andrew",
+      "name": "Andrew",
+      "bio": "Andrew is a software engineer who likes building systems and libraries which are reliable, fast, and secure.  His decades of experience include 7 years working on Dropbox's distributed filesystem, mobile app frameworks, and APIs.  He was recently nerdsniped by ZK Cryptography, and joined 0xPARC to design and build the infrastructure of Zupass and PCDs.",
+      "eventId": "progcrypto"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Identity, Attestations, and PCDs",
+  "coverImage": "/sessions/progcrypto/intro_to_pcd_sdk_workshop_thumbnail.png"
+}

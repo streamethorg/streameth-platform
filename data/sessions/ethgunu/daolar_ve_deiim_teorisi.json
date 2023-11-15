@@ -15,7 +15,11 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/cem.jpg?raw=true"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/10b6u6kvxiibxwge/index.m3u8",
+  "playbackId": "10b6u6kvxiibxwge",
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/daolar_ve_deiim_teorisi_thumbnail.png"
+  "coverImage": "/sessions/ethgunu/daolar_ve_deiim_teorisi_thumbnail.png",
+  "assetId": "10b66df6-decc-453e-823c-133a1e86093d",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
 }

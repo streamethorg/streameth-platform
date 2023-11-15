@@ -15,7 +15,11 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/baki.jpg?raw=true"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/9aebxl4a5gxelqjb/index.m3u8",
+  "playbackId": "9aebxl4a5gxelqjb",
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/merkeziyetsiz_finans_thumbnail.png"
+  "coverImage": "/sessions/ethgunu/merkeziyetsiz_finans_thumbnail.png",
+  "assetId": "9aeb296b-4a52-4155-ab25-88bb2ccfd422",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
 }

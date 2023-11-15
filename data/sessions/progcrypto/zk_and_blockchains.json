@@ -1,1 +1,46 @@
-{"id":"zk_and_blockchains","name":"ZK and Blockchains","description":"TBD","start":1700143200000,"end":1700146800000,"stageId":"auditorium","speakers":[{"id":"jordi_baylina","name":"Jordi Baylina","bio":"Jordi Baylina is a Co-Founder of Polygon, and the Technical Lead and Co-Founder of Polygon zkEVM. He oversees the development and implementation of Polygon zkEVM, a leading zk-rollup. As one of the most widely recognized Ethereum developers, he has made several high-impact contributions to the Ethereum community, including CIRCOM and PIL, free and open-source projects that demonstrate his commitment to Web3 values. He has a long history in the Ethereum community, including co-founding the WhiteHat Group to save funds during The DAO hack early in the network’s history. He has spent years as a sought-after auditor, leading the teams that poured over the contracts of MakerDAO and Aragon. Before Hermez, he co-founded a number of projects, including the donation platform Giveth, DAppNode, and Iden3.\n","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1RknPIHh7w60H5whqMkPrNIY8W3WMRCk6/view"},{"id":"jason_morton","name":"Jason Morton","bio":"Jason currently holds the position of Co-Founder / CEO at Zkonduit, a company specializing in making zero-knowledge easier through the use of high-level program descriptions. Prior to this, he was an Associate Professor at Penn State where he applied his expertise in algebraic geometry and tensor networks to the fields of statistics, computer science, and quantum information. Jason's academic journey began at Harvard University where he earned his A.B. in Psychology. He then pursued an M.A. in Economics from the University of Michigan. His passion for mathematics led him to the University of California, Berkeley, where he obtained his Ph.D. in Mathematics with a dissertation on \"Geometry of conditional independence,\" under the guidance of advisor Bernd Sturmfels. With a deep understanding of information-processing systems, Jason's work often revolves around exploring the common mathematical foundations across different fields. His current venture, Zkonduit's EZKL, simplifies zero-knowledge proofs with a particular focus on AI/ML models and other computational graphs, making it a trusted tool for data privacy and verification.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/uc?id=1zPU6xPxGoEuiEk1asyJ5Xea_i7f5COI5"},{"id":"zac","name":"Zac","bio":"CEO Aztec. Creator of AZTEC Protocol, co-inventor of PLONK. Inventor of Huff.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/uc?id=1jLrW54QNuyqdF2waaScfRhLN9rQacN7t"},{"id":"yi_sun","name":"Yi Sun","bio":"Yi Sun is a co-founder of Axiom, which scales data-rich applications on Ethereum by providing access to more data and more compute via ZK.  He previously researched probability and machine learning as an Assistant Professor at UChicago and did a math PhD at MIT.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/uc?id=1K1FRea5BVe2mHGqFWQjSB-OlyLueKz5O"}],"playbackId":"","eventId":"progcrypto","track":"ZK and Blockchains / zkEVMs","coverImage":"/sessions/progcrypto/zk_and_blockchains.jpg"}
+{
+  "id": "zk_and_blockchains",
+  "name": "ZK and Blockchains",
+  "description": "TBD",
+  "start": 1700143200000,
+  "end": 1700146800000,
+  "stageId": "auditorium",
+  "speakers": [
+    {
+      "id": "jordi_baylina",
+      "name": "Jordi Baylina",
+      "bio": "Jordi Baylina is a Co-Founder of Polygon, and the Technical Lead and Co-Founder of Polygon zkEVM. He oversees the development and implementation of Polygon zkEVM, a leading zk-rollup. As one of the most widely recognized Ethereum developers, he has made several high-impact contributions to the Ethereum community, including CIRCOM and PIL, free and open-source projects that demonstrate his commitment to Web3 values. He has a long history in the Ethereum community, including co-founding the WhiteHat Group to save funds during The DAO hack early in the network’s history. He has spent years as a sought-after auditor, leading the teams that poured over the contracts of MakerDAO and Aragon. Before Hermez, he co-founded a number of projects, including the donation platform Giveth, DAppNode, and Iden3.\n",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1RknPIHh7w60H5whqMkPrNIY8W3WMRCk6/view"
+    },
+    {
+      "id": "jason_morton",
+      "name": "Jason Morton",
+      "bio": "Jason currently holds the position of Co-Founder / CEO at Zkonduit, a company specializing in making zero-knowledge easier through the use of high-level program descriptions. Prior to this, he was an Associate Professor at Penn State where he applied his expertise in algebraic geometry and tensor networks to the fields of statistics, computer science, and quantum information. Jason's academic journey began at Harvard University where he earned his A.B. in Psychology. He then pursued an M.A. in Economics from the University of Michigan. His passion for mathematics led him to the University of California, Berkeley, where he obtained his Ph.D. in Mathematics with a dissertation on \"Geometry of conditional independence,\" under the guidance of advisor Bernd Sturmfels. With a deep understanding of information-processing systems, Jason's work often revolves around exploring the common mathematical foundations across different fields. His current venture, Zkonduit's EZKL, simplifies zero-knowledge proofs with a particular focus on AI/ML models and other computational graphs, making it a trusted tool for data privacy and verification.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/uc?id=1zPU6xPxGoEuiEk1asyJ5Xea_i7f5COI5"
+    },
+    {
+      "id": "zac",
+      "name": "Zac",
+      "bio": "CEO Aztec. Creator of AZTEC Protocol, co-inventor of PLONK. Inventor of Huff.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/uc?id=1jLrW54QNuyqdF2waaScfRhLN9rQacN7t"
+    },
+    {
+      "id": "yi_sun",
+      "name": "Yi Sun",
+      "bio": "Yi Sun is a co-founder of Axiom, which scales data-rich applications on Ethereum by providing access to more data and more compute via ZK.  He previously researched probability and machine learning as an Assistant Professor at UChicago and did a math PhD at MIT.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/uc?id=1K1FRea5BVe2mHGqFWQjSB-OlyLueKz5O"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "ZK and Blockchains / zkEVMs",
+  "coverImage": "/sessions/progcrypto/zk_and_blockchains_thumbnail.png"
+}
