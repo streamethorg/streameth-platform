@@ -196,12 +196,12 @@ async function generateEventAssets(event: any) {
 
         // Only render compositions that have frames
         if (composition.durationInFrames > 1) {
-          if (composition.id.includes('wide')) {
-            const id = `${session.id}_intro-wide.mov`
-            const type = 'video/mov'
-            const introFilePath = `${eventFolder}/${id}`
+          if (folderId) {
+            if (composition.id.includes('wide')) {
+              const id = `${session.id}_intro-wide.mov`
+              const type = 'video/mov'
+              const introFilePath = `${eventFolder}/${id}`
 
-            if (folderId) {
               const fileExported =
                 (await FileExists(id, type, folderId)) ?? false
               if (!fileExported || force) {
@@ -209,7 +209,7 @@ async function generateEventAssets(event: any) {
                 if (!exists || force) {
                   await renderMedia({
                     codec: 'prores',
-                    proResProfile: '4444', // Support Alpha Channel
+                    proResProfile: '4444',
                     composition: inputComposition,
                     serveUrl: bundled,
                     outputLocation: introFilePath,
@@ -217,31 +217,31 @@ async function generateEventAssets(event: any) {
                     // onProgress,
                   })
                 }
-              } else {
-                const id = `${session.id}_intro.mp4`
-                const type = 'video/mp4'
-                const introFilePath = `${eventFolder}/${id}`
 
-                if (folderId) {
-                  const fileExported =
-                    (await FileExists(id, type, folderId)) ?? false
-                  if (!fileExported || force) {
-                    const exists = fileExists(introFilePath)
-                    if (!exists || force) {
-                      await renderMedia({
-                        codec: 'h264',
-                        composition: inputComposition,
-                        serveUrl: bundled,
-                        outputLocation: introFilePath,
-                        inputProps,
-                        // onProgress,
-                      })
-                    }
-                  }
-                }
+                upload(id, introFilePath, type, folderId)
               }
+            } else {
+              const id = `${session.id}_intro.mp4`
+              const type = 'video/mp4'
+              const introFilePath = `${eventFolder}/${id}`
 
-              upload(id, introFilePath, type, folderId)
+              const fileExported =
+                (await FileExists(id, type, folderId)) ?? false
+              if (!fileExported || force) {
+                const exists = fileExists(introFilePath)
+                if (!exists || force) {
+                  await renderMedia({
+                    codec: 'h264',
+                    composition: inputComposition,
+                    serveUrl: bundled,
+                    outputLocation: introFilePath,
+                    inputProps,
+                    // onProgress,
+                  })
+                }
+
+                upload(id, introFilePath, type, folderId)
+              }
             }
 
             // Generate a still from the same composition's last frame
@@ -264,7 +264,7 @@ async function generateEventAssets(event: any) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
-                  frame: frameNr, // Fixed frame for progcrypto
+                  frame: frameNr, // Fixed frame for AWA
                   output: thumbnailFilePath,
                   inputProps: inputProps,
                 })
