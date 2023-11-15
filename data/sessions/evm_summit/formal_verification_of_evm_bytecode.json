@@ -15,11 +15,11 @@
       "photo": "https://evmsummit.org/images/speakers/david_pearce.jpg"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/25d2c6p9a94vvv9l/index.m3u8",
-  "playbackId": "25d2c6p9a94vvv9l",
+  "videoUrl": "https://lp-playback.com/hls/d638mbtu6oa0w1wp/index.m3u8",
+  "playbackId": "d638mbtu6oa0w1wp",
   "eventId": "evm_summit",
   "coverImage": "/sessions/evm_summit/formal_verification_of_evm_bytecode_thumbnail.png",
-  "assetId": "25d2c4e5-5f5e-476b-90ca-b83e4f8d6457",
+  "assetId": "d6388606-cceb-4889-934c-c2c959c7fd9f",
   "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
   "videoType": "clip"
 }
