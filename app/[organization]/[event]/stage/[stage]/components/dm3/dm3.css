@@ -1,15 +1,15 @@
 .common-styles {
   --mainBg: var(--bg-base);
-  --messageBg: rgb(0 0 0 / 0.2);
-  --messageBgOwn: rgb(0 0 0 / 0.1);
+  --messageBg: #e4e6eb;
+  --messageBgOwn: #e4e6eb;
   --messageBg25: var(--bg-base);
   --borderInputColor: #e0e0e0;
-  --inputBg: rgb(0 0 0 / 0.2);
-  --textColorPrimary: '#fff';
-  --textColorSecondary: lightgray;
-  --borderRadiusS: 0;
-  --borderRadiusM: 0;
-  --borderRadiusL: 0;
+  --inputBg: #e4e6eb;
+  --textColorPrimary: #000;
+  --textColorSecondary: #000;
+  --borderRadiusS: 12px;
+  --borderRadiusM: 12px;
+  --borderRadiusL: 12px;
   --scrollbar-background: var(--colors-accent);
 }
 
@@ -59,21 +59,38 @@
 
 .create-header {
   overflow: hidden !important;
-  width: 200px !important;
+  /* width: 200px !important; */
 }
-.create-message {
+.message {
+  color: #000 !important;
+  /* min-width: fit-content; */
+  /* width: 50%; */
   /* position: fixed !important; */
   /* background-color: var(--inputBg); */
 }
 .text-area-wrapper {
-  width: 220px !important;
+  width: 100% !important;
+}
+
+.text-area-input {
+  height: 50px !important;
 }
 
 .message-list {
   padding: px !important;
 }
 
-.sender {
-  color: lightgray !important;
-  font-size: 8px !important;
+.sender,
+.time,
+.info {
+  color: #8a8d91 !important;
+  font-size: 10px !important;
+}
+
+.content {
+  padding: 12px 8px !important;
+}
+.scroll-to-bottom-button {
+  opacity: 1 !important;
+  margin-right: 2px !important;
 }

@@ -103,12 +103,7 @@ export const Dm3 = () => {
               {!isConnected ? (
                 <p className="text-white cursor-pointer m-auto text-center flex flex-col justify-center items-center">
                   Connect your wallet to chat
-                  <button
-                    onClick={() => connectWallet()}
-                    className="rounded-xl bg-gray-800 text-center p-4 mt-2">
-                    Connect wallet
-                  </button>
-                  {/* <ConnectKitButton /> */}
+                  <ConnectKitButton />
                 </p>
               ) : (
                 <div
