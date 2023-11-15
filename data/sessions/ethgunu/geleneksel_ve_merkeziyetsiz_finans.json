@@ -15,7 +15,11 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/sant.jpg?raw=true"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/d2170czo1d2op039/index.m3u8",
+  "playbackId": "d2170czo1d2op039",
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/geleneksel_ve_merkeziyetsiz_finans_thumbnail.png"
+  "coverImage": "/sessions/ethgunu/geleneksel_ve_merkeziyetsiz_finans_thumbnail.png",
+  "assetId": "d2176f39-aee8-4737-b738-b2098edf2b67",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
 }
