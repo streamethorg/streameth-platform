@@ -1,1 +1,49 @@
-{"id":"staking_economics_panel","name":"Staking Economics Panel","description":"The Staking Economics panel will feature our two speakers, Brett and Barnabe, joined by Dankrad and moderated by Davide. We will start with a brief introduction to the main topics in Staking Economics. Then we will hear from the panelists, going deeper in their respective areas of expertise, and discuss the current state of research and important open problems. We will conclude with a Q&A from the audience.","start":1700055300000,"end":1700057100000,"stageId":"uskudar_3","speakers":[{"id":"davide_crapis","name":"Davide Crapis","bio":"Davide is a Research Scientist at the Robust Incentives Group within the Ethereum Foundation. Before this, he obtained his Ph.D. from Columbia Business School and spent time at Lyft as a researcher. His current focus is on transaction fee mechanisms, L2 economics and MEV.","eventId":"ethconomics","twitter":"@DavideCrapis","photo":"https://drive.google.com/uc?id=132qc0b6OssIfRV-ZYyy1-WGn8iOiXowg"},{"id":"dankrad_feist","name":"Dankrad Feist","bio":"After finishing his PhD in Theoretical Physics from the University of Cambridge, Dankrad Feist worked in Technology since 2013 and co-founded the e-health startup Cara Care in 2016. Starting with more casual contacts with crypto since 2013 he joined the Ethereum Foundation full time in 2019 as a Core Researcher. He has made contributions to Ethereum statelessness, sharding, and especially data availability, with the development of an MPC-friendly proof of custody protocol as well as the new sharding construction \"Danksharding\" bearing his name.","eventId":"ethconomics","twitter":"@dankrad","photo":"https://drive.google.com/uc?id=1QTRrSnxEULVuKIQ6RF0uQgBZAiAxdQ82"},{"id":"brett_palatiello","name":"Brett Palatiello","bio":"Brett was previously a general partner and head of blockchain at Interplay managing early stage crypto investments. Prior to that, Brett was a partner and portfolio manager at two quantitative trading firms.","eventId":"ethconomics","twitter":"@brettpalatiello","photo":"https://drive.google.com/uc?id=1a_4OytDBlhbE0xvN3LzqGuEGtSHPuosV"},{"id":"barnab_monnot","name":"Barnabé Monnot","bio":"Barnabé is a research scientist at the Robust Incentives Group. He has published many fundamental pieces on Proposer-Builder Separation and Principal-Agent problems in the Ethereum protocol.","eventId":"ethconomics","twitter":"@barnabemonnot","photo":"https://barnabemonnot.com/assets/images/2020.jpg"}],"playbackId":"","eventId":"ethconomics","coverImage":"/sessions/ethconomics/staking_economics_panel.jpg"}
+{
+  "id": "staking_economics_panel",
+  "name": "Staking Economics Panel",
+  "description": "The Staking Economics panel will feature our two speakers, Brett and Barnabe, joined by Dankrad and moderated by Davide. We will start with a brief introduction to the main topics in Staking Economics. Then we will hear from the panelists, going deeper in their respective areas of expertise, and discuss the current state of research and important open problems. We will conclude with a Q&A from the audience.",
+  "start": 1700055300000,
+  "end": 1700057100000,
+  "stageId": "uskudar_3",
+  "speakers": [
+    {
+      "id": "davide_crapis",
+      "name": "Davide Crapis",
+      "bio": "Davide is a Research Scientist at the Robust Incentives Group within the Ethereum Foundation. Before this, he obtained his Ph.D. from Columbia Business School and spent time at Lyft as a researcher. His current focus is on transaction fee mechanisms, L2 economics and MEV.",
+      "eventId": "ethconomics",
+      "twitter": "@DavideCrapis",
+      "photo": "https://drive.google.com/uc?id=132qc0b6OssIfRV-ZYyy1-WGn8iOiXowg"
+    },
+    {
+      "id": "dankrad_feist",
+      "name": "Dankrad Feist",
+      "bio": "After finishing his PhD in Theoretical Physics from the University of Cambridge, Dankrad Feist worked in Technology since 2013 and co-founded the e-health startup Cara Care in 2016. Starting with more casual contacts with crypto since 2013 he joined the Ethereum Foundation full time in 2019 as a Core Researcher. He has made contributions to Ethereum statelessness, sharding, and especially data availability, with the development of an MPC-friendly proof of custody protocol as well as the new sharding construction \"Danksharding\" bearing his name.",
+      "eventId": "ethconomics",
+      "twitter": "@dankrad",
+      "photo": "https://drive.google.com/uc?id=1QTRrSnxEULVuKIQ6RF0uQgBZAiAxdQ82"
+    },
+    {
+      "id": "brett_palatiello",
+      "name": "Brett Palatiello",
+      "bio": "Brett was previously a general partner and head of blockchain at Interplay managing early stage crypto investments. Prior to that, Brett was a partner and portfolio manager at two quantitative trading firms.",
+      "eventId": "ethconomics",
+      "twitter": "@brettpalatiello",
+      "photo": "https://drive.google.com/uc?id=1a_4OytDBlhbE0xvN3LzqGuEGtSHPuosV"
+    },
+    {
+      "id": "barnab_monnot",
+      "name": "Barnabé Monnot",
+      "bio": "Barnabé is a research scientist at the Robust Incentives Group. He has published many fundamental pieces on Proposer-Builder Separation and Principal-Agent problems in the Ethereum protocol.",
+      "eventId": "ethconomics",
+      "twitter": "@barnabemonnot",
+      "photo": "https://barnabemonnot.com/assets/images/2020.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/492706eldkolobgc/index.m3u8",
+  "playbackId": "492706eldkolobgc",
+  "eventId": "ethconomics",
+  "coverImage": "/sessions/ethconomics/staking_economics_panel.jpg",
+  "assetId": "492782b7-554a-4436-ab8f-49e224b130e3",
+  "sourceId": "f7a9cb54-e5bb-4267-948c-68f85d519184",
+  "videoType": "clip"
+}
