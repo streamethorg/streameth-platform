@@ -1,1 +1,30 @@
-{"id":"zk_telegram_and_beyond","name":"ZK Telegram and Beyond","description":"Description: This session will showcase present and future social applications built with Zupass, with a focus on Telegram","start":1700221800000,"end":1700222700000,"stageId":"dolmabahce_b__c","speakers":[{"id":"david","name":"David","bio":"David Huang is a game developer and contributor at http://emergence.land","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1uWNjPQTKCPIJa0opHYir1JpmWH_O5EwL/view"},{"id":"tony","name":"Tony","bio":"Tony builds stuff for humans and is a contributor at http://emergence.land","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1TDjxWFbQad7eYAA_hmvnDDLxsXtOnDvi/view"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/zk_telegram_and_beyond.jpg","track":"Identity, Attestations, and PCDs"}
+{
+  "id": "zk_telegram_and_beyond",
+  "name": "ZK Telegram and Beyond",
+  "description": "Description: This session will showcase present and future social applications built with Zupass, with a focus on Telegram",
+  "start": 1700221800000,
+  "end": 1700222700000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "david",
+      "name": "David",
+      "bio": "David Huang is a game developer and contributor at http://emergence.land",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1uWNjPQTKCPIJa0opHYir1JpmWH_O5EwL/view"
+    },
+    {
+      "id": "tony",
+      "name": "Tony",
+      "bio": "Tony builds stuff for humans and is a contributor at http://emergence.land",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1TDjxWFbQad7eYAA_hmvnDDLxsXtOnDvi/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Identity, Attestations, and PCDs",
+  "coverImage": "/sessions/progcrypto/zk_telegram_and_beyond_thumbnail.png"
+}

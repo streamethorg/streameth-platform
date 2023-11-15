@@ -14,7 +14,14 @@ import {
   UploadDrive,
   UploadOrUpdate,
 } from 'services/slides'
-import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from 'fs'
 import { validImageUrl } from 'utils/avatars'
 
 const updateSessionThumbnails = true
@@ -41,10 +48,13 @@ async function start(args: string[]) {
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
 
-  let eventsToRender = [{ id: 'autonomous_worlds_assembly' }] // { id: 'progcrypto' },
+  let eventsToRender = [{ id: 'progcrypto' }] //[{ id: 'autonomous_worlds_assembly' }]
   const res = await fetch(`${apiBaseUri}/events`)
-  let events = (await res.json()).filter((i: any) => i.archiveMode === false)
-    .filter((event: any) => eventsToRender.some(i => i.id === event.id))
+  let events = (await res.json())
+    .filter((i: any) => i.archiveMode === false)
+    .filter((event: any) =>
+      eventsToRender.some((i) => i.id === event.id)
+    )
 
   if (args.length > 0) {
     const event = args[0]
@@ -103,8 +113,16 @@ async function generateEventAssets(event: any) {
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
-  const dataSessionFolder = join(process.cwd(), '../../data/sessions', event.id)
-  const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
+  const dataSessionFolder = join(
+    process.cwd(),
+    '../../data/sessions',
+    event.id
+  )
+  const publicEventFolder = join(
+    process.cwd(),
+    '../../public/sessions',
+    event.id
+  )
   mkdirSync(eventFolder, { recursive: true })
   mkdirSync(publicEventFolder, { recursive: true })
 
@@ -117,6 +135,7 @@ async function generateEventAssets(event: any) {
       id: session.id,
       name: session.name,
       start: session.start,
+      stageId: session.stageId,
       speakers: Array<any>(),
     }
 
@@ -178,27 +197,52 @@ async function generateEventAssets(event: any) {
 
         // Only render compositions that have frames
         if (composition.durationInFrames > 1) {
-          const id = `${session.id}_intro.mp4`
-          const type = 'video/mp4'
-          const introFilePath = `${eventFolder}/${id}`
-
           if (folderId) {
-            const fileExported =
-              (await FileExists(id, type, folderId)) ?? false
-            if (!fileExported || force) {
-              const exists = fileExists(introFilePath)
-              if (!exists || force) {
-                await renderMedia({
-                  codec: 'h264',
-                  composition: inputComposition,
-                  serveUrl: bundled,
-                  outputLocation: introFilePath,
-                  inputProps,
-                  // onProgress,
-                })
-              }
+            if (composition.id.includes('wide') && session.stageId === 'auditorium') {
+              const id = `${session.id}_intro-wide.mov`
+              const type = 'video/mov'
+              const introFilePath = `${eventFolder}/${id}`
 
-              upload(id, introFilePath, type, folderId)
+              const fileExported =
+                (await FileExists(id, type, folderId)) ?? false
+              if (!fileExported || force) {
+                const exists = fileExists(introFilePath)
+                if (!exists || force) {
+                  await renderMedia({
+                    codec: 'prores',
+                    proResProfile: '4444',
+                    composition: inputComposition,
+                    serveUrl: bundled,
+                    outputLocation: introFilePath,
+                    inputProps,
+                    // onProgress,
+                  })
+                }
+
+                upload(id, introFilePath, type, folderId)
+              }
+            } else {
+              const id = `${session.id}_intro.mp4`
+              const type = 'video/mp4'
+              const introFilePath = `${eventFolder}/${id}`
+
+              const fileExported =
+                (await FileExists(id, type, folderId)) ?? false
+              if (!fileExported || force) {
+                const exists = fileExists(introFilePath)
+                if (!exists || force) {
+                  await renderMedia({
+                    codec: 'h264',
+                    composition: inputComposition,
+                    serveUrl: bundled,
+                    outputLocation: introFilePath,
+                    inputProps,
+                    // onProgress,
+                  })
+                }
+
+                upload(id, introFilePath, type, folderId)
+              }
             }
 
             // Generate a still from the same composition's last frame
@@ -213,13 +257,15 @@ async function generateEventAssets(event: any) {
               )) ?? false
 
             if (!thumbnailExported || force) {
-              const frameNr = composition.id.includes('autonomous') ? 132 : composition.durationInFrames - 1
+              const frameNr = composition.id.includes('progcrypto')
+                ? 132
+                : composition.durationInFrames - 1
               const exists = fileExists(thumbnailFilePath)
               if (!exists || force) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
-                  frame: frameNr, // Fixed frame for AWA 
+                  frame: frameNr, // Fixed frame for AWA
                   output: thumbnailFilePath,
                   inputProps: inputProps,
                 })
@@ -233,18 +279,33 @@ async function generateEventAssets(event: any) {
               )
             }
 
-            if (updateSessionThumbnails && fileExists(thumbnailFilePath)) {
+            if (
+              updateSessionThumbnails &&
+              fileExists(thumbnailFilePath)
+            ) {
               const copyPath = join(publicEventFolder, thumbnailId)
               copyFileSync(thumbnailFilePath, copyPath)
 
-              // update session file 
-              const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
+              // update session file
+              const sessionFilePath = join(
+                dataSessionFolder,
+                `${session.id}.json`
+              )
               if (existsSync(sessionFilePath)) {
-                const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
-                writeFileSync(sessionFilePath, JSON.stringify({
-                  ...sessionFile,
-                  coverImage: `/sessions/${event.id}/${thumbnailId}`
-                }, null, 2))
+                const sessionFile = JSON.parse(
+                  readFileSync(sessionFilePath, 'utf8')
+                )
+                writeFileSync(
+                  sessionFilePath,
+                  JSON.stringify(
+                    {
+                      ...sessionFile,
+                      coverImage: `/sessions/${event.id}/${thumbnailId}`,
+                    },
+                    null,
+                    2
+                  )
+                )
               }
             }
           }

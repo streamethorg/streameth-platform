@@ -1,1 +1,22 @@
-{"id":"a_deep_dive_in_proof_continuation__chunking_scheme","name":"A Deep Dive in Proof Continuation & Chunking Scheme","description":"A deep dive into continuation design from cryptographic scheme and engineering design. Comparison and summary on the chunking scheme of ZkEvm, ZkWasm, and Rics0 ZkVM.","start":1700217000000,"end":1700218800000,"stageId":"dolmabahce_b__c","speakers":[{"id":"cecilia_zhang","name":"Cecilia Zhang","bio":"As a ZK Engineer and Product Manager at Taiko Labs, my primary responsibilities revolve around the development, research, and planning of ZkEVM/ZkVMs. In terms of development, I address issues proposed by the PSE, complete pending modules in zkevm-circuits, implement Taiko-specific logic for L2 block proving, and automate testing and benchmarking processes. My research responsibilities include participating in the design and implementation of the chunk prover with PSE, exploring backward-compatible folding options, and considering alternatives to Halo2's lookup. Planning-wise, I work on integrating our strategies with a multi-proofs architecture for L2 proving and managing engineering resources to meet our objectives.\n\nFor my talk, I'll address the chunk prover design by the PSE and our implementation details & challenges. Also some thoughts on how to retrofit latest research results to the existing complex codebase.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/11-VMlbalnHM4KWWuprsIRjTCev4tuUhe/view"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/a_deep_dive_in_proof_continuation__chunking_scheme.jpg","track":"Libraries and Infrastructure"}
+{
+  "id": "a_deep_dive_in_proof_continuation__chunking_scheme",
+  "name": "A Deep Dive in Proof Continuation & Chunking Scheme",
+  "description": "A deep dive into continuation design from cryptographic scheme and engineering design. Comparison and summary on the chunking scheme of ZkEvm, ZkWasm, and Rics0 ZkVM.",
+  "start": 1700217000000,
+  "end": 1700218800000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "cecilia_zhang",
+      "name": "Cecilia Zhang",
+      "bio": "As a ZK Engineer and Product Manager at Taiko Labs, my primary responsibilities revolve around the development, research, and planning of ZkEVM/ZkVMs. In terms of development, I address issues proposed by the PSE, complete pending modules in zkevm-circuits, implement Taiko-specific logic for L2 block proving, and automate testing and benchmarking processes. My research responsibilities include participating in the design and implementation of the chunk prover with PSE, exploring backward-compatible folding options, and considering alternatives to Halo2's lookup. Planning-wise, I work on integrating our strategies with a multi-proofs architecture for L2 proving and managing engineering resources to meet our objectives.\n\nFor my talk, I'll address the chunk prover design by the PSE and our implementation details & challenges. Also some thoughts on how to retrofit latest research results to the existing complex codebase.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/11-VMlbalnHM4KWWuprsIRjTCev4tuUhe/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Libraries and Infrastructure",
+  "coverImage": "/sessions/progcrypto/a_deep_dive_in_proof_continuation__chunking_scheme_thumbnail.png"
+}

@@ -40,7 +40,7 @@ export default async function Home() {
     })
   const stageController = new StageController()
   const stage = await stageController.getStage(
-    'beyazit',
+    'emirgan_1',
     'autonomous_worlds_assembly'
   )
 

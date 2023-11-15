@@ -60,7 +60,7 @@ export default async function Stage({ params }: Params) {
       <StageContextProvider
         stage={stage.toJson()}
         sessions={sessions.map((session) => session.toJson())}>
-        <StageLayout />
+        <StageLayout event={event.toJson()} />
       </StageContextProvider>
     )
   } catch (e) {

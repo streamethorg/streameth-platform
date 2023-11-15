@@ -1,1 +1,22 @@
-{"id":"zk_proofs_a_case_study_integrating_taiwans_official_identity_apis","name":"ZK Proofs: A Case Study Integrating Taiwan's Official Identity APIs","description":"Identity verification is a common application in daily life, but digital identity systems that prioritize privacy through cryptography are less common. In this talk, I will share a real-world identity verification project that integrates with an official APIs from the Taiwanese government. The project uses the Semaphore framework for zero-knowledge proofs to protect private data, and it also complies with the standards set by W3C for Decentralized Identifiers (DIDs).","start":1700132820000,"end":1700133720000,"stageId":"marmara","speakers":[{"id":"yuren_ju","name":"Yuren Ju","bio":"As a passionate software developer, exploring new advancements in the field has always been a focus. Previous work includes projects related to Wallet as a Service and Decentralized Finance (DeFi). The most recent project focuses on developing a system compliant with W3C DIDs (Decentralized Identifiers) and Semaphore protocols, while also integrating the official identity verification API from the Taiwanese government.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/19RLXoBAE-R2kdKBxM46nFO64kqs9Gmid/view"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/zk_proofs_a_case_study_integrating_taiwans_official_identity_apis.jpg","track":"Cryptography in the Wild"}
+{
+  "id": "zk_proofs_a_case_study_integrating_taiwans_official_identity_apis",
+  "name": "ZK Proofs: A Case Study Integrating Taiwan's Official Identity APIs",
+  "description": "Identity verification is a common application in daily life, but digital identity systems that prioritize privacy through cryptography are less common. In this talk, I will share a real-world identity verification project that integrates with an official APIs from the Taiwanese government. The project uses the Semaphore framework for zero-knowledge proofs to protect private data, and it also complies with the standards set by W3C for Decentralized Identifiers (DIDs).",
+  "start": 1700132820000,
+  "end": 1700133720000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "yuren_ju",
+      "name": "Yuren Ju",
+      "bio": "As a passionate software developer, exploring new advancements in the field has always been a focus. Previous work includes projects related to Wallet as a Service and Decentralized Finance (DeFi). The most recent project focuses on developing a system compliant with W3C DIDs (Decentralized Identifiers) and Semaphore protocols, while also integrating the official identity verification API from the Taiwanese government.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/19RLXoBAE-R2kdKBxM46nFO64kqs9Gmid/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Cryptography in the Wild",
+  "coverImage": "/sessions/progcrypto/zk_proofs_a_case_study_integrating_taiwans_official_identity_apis_thumbnail.png"
+}

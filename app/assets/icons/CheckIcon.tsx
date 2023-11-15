@@ -1,7 +1,7 @@
 import colors from '@/app/constants/colors'
 import React from 'react'
 
-const CheckIcon = ({ pathFill = colors.accent }) => {
+const CheckIcon = ({ pathFill = colors.blue }) => {
   return (
     <svg
       width="18"

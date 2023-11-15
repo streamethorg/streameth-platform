@@ -1,0 +1,22 @@
+{
+  "id": "seeing_like_a_voting",
+  "name": "Seeing like a voting",
+  "description": "This talk aims to challenge a common notion in cryptographic voting observed by the speaker: that building a voting application with Semaphore is sufficiently secure. I'll demonstrate the limitations of Semaphore in ensuring comprehensive vote integrity. While it effectively confirms voter group membership, it falls short in preventing vote manipulation or ensuring the accuracy of the final tally. In contrast, I'll discuss how MACI's approach is critical for constructing more trustworthy voting systems. MACI secures the vote itself against tampering, maintaining integrity throughout the voting process. The goal is for the audience to leave with a clear understanding of the shortcomings of Semaphore-based voting applications and how MACI solves it. I would briefly cover the soundness of its cryptographic proofs in maintaining tally integrity, if time permits.",
+  "start": 1700133720000,
+  "end": 1700134140000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "daehyun",
+      "name": "daehyun",
+      "bio": "res publica",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1CwwF1ZadCO1Xv9sL68lk_N8wvXm0x_JL/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Cryptography in the Wild",
+  "coverImage": "/sessions/progcrypto/seeing_like_a_voting_thumbnail.png"
+}

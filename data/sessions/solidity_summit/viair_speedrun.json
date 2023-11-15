@@ -1,1 +1,21 @@
-{"id":"viair_speedrun","name":"`via-IR` speedrun","description":"A short overview of via-ir - what it is, where it's at, and where it's going.","start":1700121300000,"end":1700122200000,"stageId":"uskudar_2","speakers":[{"id":"nikola_mati","name":"Nikola Matić","bio":"Nikola is a software developer in the Solidity compiler team.","eventId":"solidity_summit","twitter":"","photo":"https://drive.google.com/file/d/1RYYCYPsjR0T79J5zMAVcd8LCEIV3tTFO/view?usp=drive_link"}],"playbackId":"","eventId":"solidity_summit","coverImage":"/sessions/solidity_summit/viair_speedrun.jpg"}
+{
+  "id": "viair_speedrun",
+  "name": "`via-IR` speedrun",
+  "description": "A short overview of via-ir - what it is, where it's at, and where it's going.",
+  "start": 1700121300000,
+  "end": 1700122200000,
+  "stageId": "uskudar_2",
+  "speakers": [
+    {
+      "id": "nikola_mati",
+      "name": "Nikola Matić",
+      "bio": "Nikola is a software developer in the Solidity compiler team.",
+      "eventId": "solidity_summit",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1RYYCYPsjR0T79J5zMAVcd8LCEIV3tTFO/view?usp=drive_link"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/viair_speedrun_thumbnail.png"
+}

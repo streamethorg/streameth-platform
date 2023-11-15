@@ -1,1 +1,20 @@
-{"id":"closing_note","name":"Closing Note","description":"Closing note by the team for thanks and appreciation.","start":1700148000000,"end":1700148600000,"stageId":"uskudar_2","speakers":[{"id":"vishwa_mehta","name":"Vishwa Mehta","bio":"No description","eventId":"solidity_summit","twitter":"@VishwaMehta30"}],"playbackId":"","eventId":"solidity_summit","coverImage":"/sessions/solidity_summit/closing_note.jpg"}
+{
+  "id": "closing_note",
+  "name": "Closing Note",
+  "description": "Closing note by the team for thanks and appreciation.",
+  "start": 1700148000000,
+  "end": 1700148600000,
+  "stageId": "uskudar_2",
+  "speakers": [
+    {
+      "id": "vishwa_mehta",
+      "name": "Vishwa Mehta",
+      "bio": "No description",
+      "eventId": "solidity_summit",
+      "twitter": "@VishwaMehta30"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/closing_note_thumbnail.png"
+}

@@ -140,7 +140,7 @@ export default class Importer extends BaseImporter {
               this.event.timezone
             )
             .valueOf(),
-          //  track: row[13], // hack for progcrypto
+          // track: row[13], // hack for progcrypto
           // moderator: row[12],
         }
 
