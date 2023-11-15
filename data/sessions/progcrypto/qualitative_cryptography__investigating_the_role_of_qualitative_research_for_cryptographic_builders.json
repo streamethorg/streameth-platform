@@ -1,1 +1,22 @@
-{"id":"qualitative_cryptography__investigating_the_role_of_qualitative_research_for_cryptographic_builders","name":"Qualitative Cryptography : Investigating the role of qualitative research for cryptographic builders","description":"Rachel Aux delves into the vital role of qualitative research for cryptographic builders, addressing challenges in open-source development and quantitative data collection. Discover why qualitative research is crucial for programmable cryptography and learn effective collection strategies.","start":1700127900000,"end":1700128800000,"stageId":"marmara","speakers":[{"id":"rachel","name":"Rachel","bio":"Rachel leads design strategy for Privacy & Scaling Explorations.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1j7DfoM756svdso3qCOZtePeZjexaQjyd/view"}],"playbackId":"","eventId":"progcrypto","track":"Cryptography in the Wild","coverImage":"/sessions/progcrypto/qualitative_cryptography__investigating_the_role_of_qualitative_research_for_cryptographic_builders.jpg"}
+{
+  "id": "qualitative_cryptography__investigating_the_role_of_qualitative_research_for_cryptographic_builders",
+  "name": "Qualitative Cryptography : Investigating the role of qualitative research for cryptographic builders",
+  "description": "Rachel Aux delves into the vital role of qualitative research for cryptographic builders, addressing challenges in open-source development and quantitative data collection. Discover why qualitative research is crucial for programmable cryptography and learn effective collection strategies.",
+  "start": 1700127900000,
+  "end": 1700128800000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "rachel",
+      "name": "Rachel",
+      "bio": "Rachel leads design strategy for Privacy & Scaling Explorations.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1j7DfoM756svdso3qCOZtePeZjexaQjyd/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Cryptography in the Wild",
+  "coverImage": "/sessions/progcrypto/qualitative_cryptography__investigating_the_role_of_qualitative_research_for_cryptographic_builders_thumbnail.png"
+}

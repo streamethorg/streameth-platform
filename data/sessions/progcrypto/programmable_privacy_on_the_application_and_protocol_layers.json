@@ -1,1 +1,22 @@
-{"id":"programmable_privacy_on_the_application_and_protocol_layers","name":"Programmable Privacy on the Application and Protocol Layers","description":"Programmable privacy has recently come into focus as a way to empower users in the context of MEV. Privacy-centric projects, such as Penumbra and Aztec, have been exploring programmable privacy from a different lens. What classes of applications need programmable privacy, and what are the best practices in designing them? What are the minimal cryptographic features that a protocol must have to support a private application?","start":1700204400000,"end":1700206200000,"stageId":"auditorium","speakers":[{"id":"ying_tong","name":"Ying Tong","bio":"Ying Tong is an applied cryptographer at Geometry Research and a maintainer of the halo2 library. She is interested in building privacy-enhancing applications. She also contributes to the Zcash and Ethereum projects.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1lJc5kiLJTEt3H3ceLU9lwRHG51AQxOTr/view"}],"playbackId":"","eventId":"progcrypto","track":"Cryptography in the Wild","coverImage":"/sessions/progcrypto/programmable_privacy_on_the_application_and_protocol_layers.jpg"}
+{
+  "id": "programmable_privacy_on_the_application_and_protocol_layers",
+  "name": "Programmable Privacy on the Application and Protocol Layers",
+  "description": "Programmable privacy has recently come into focus as a way to empower users in the context of MEV. Privacy-centric projects, such as Penumbra and Aztec, have been exploring programmable privacy from a different lens. What classes of applications need programmable privacy, and what are the best practices in designing them? What are the minimal cryptographic features that a protocol must have to support a private application?",
+  "start": 1700204400000,
+  "end": 1700206200000,
+  "stageId": "auditorium",
+  "speakers": [
+    {
+      "id": "ying_tong",
+      "name": "Ying Tong",
+      "bio": "Ying Tong is an applied cryptographer at Geometry Research and a maintainer of the halo2 library. She is interested in building privacy-enhancing applications. She also contributes to the Zcash and Ethereum projects.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1lJc5kiLJTEt3H3ceLU9lwRHG51AQxOTr/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Cryptography in the Wild",
+  "coverImage": "/sessions/progcrypto/programmable_privacy_on_the_application_and_protocol_layers_thumbnail.png"
+}
