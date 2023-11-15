@@ -231,7 +231,7 @@ async function generateEventAssets(event: any) {
               )) ?? false
 
             if (!thumbnailExported || force) {
-              const frameNr = composition.id.includes('autonomous')
+              const frameNr = composition.id.includes('progcrypto')
                 ? 132
                 : composition.durationInFrames - 1
               const exists = fileExists(thumbnailFilePath)
