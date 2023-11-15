@@ -1,5 +1,8 @@
 import {
-  Composition, Folder, Still, continueRender,
+  Composition,
+  Folder,
+  Still,
+  continueRender,
   delayRender,
   staticFile,
 } from 'remotion'
@@ -13,7 +16,7 @@ import {
 } from './devconnect'
 import { DevconnectISTProps, Intro } from './devconnect/intro'
 import { Social } from './devconnect/social'
-import { Intro as ProgCryptoIntro } from './progcrypto/intro'
+import { Intro as ProgCryptoIntro, ProgCryptoProps } from './progcrypto/intro'
 import { WideIntro as ProgCryptoWideIntro } from './progcrypto/intro_wide'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
@@ -170,9 +173,9 @@ export function Compositions() {
           height={1080}
           durationInFrames={219}
           fps={DevconnectFrameRate}
-          schema={SessionSchema as any}
+          schema={ProgCryptoProps}
           defaultProps={{
-            session: MOCK_SESSION[0],
+            session: MOCK_SESSION[4],
           }}
         />
 
@@ -182,6 +185,7 @@ export function Compositions() {
           width={4032}
           height={1344}
           durationInFrames={219}
+          schema={ProgCryptoProps}
           fps={DevconnectFrameRate}
           defaultProps={{ session: MOCK_SESSION[3] }}
         />
@@ -191,6 +195,7 @@ export function Compositions() {
           component={ProgCryptoSocial}
           width={1200}
           height={630}
+          schema={ProgCryptoProps}
           defaultProps={{
             session: MOCK_SESSION[4],
           }}

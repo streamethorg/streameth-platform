@@ -20,23 +20,23 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               muted
             />
             <p className="font-ubuntu font-medium text-2xl mt-4 text-blue">
-              🔴 Live: Autonomous Worlds Assembly - EMIRGAN 1
+              🔴 Live: PROGCRYPTO - AUDITORIUM
             </p>
           </div>
           <div
             className={`w-full lg:w-[45%] lg:mr-4 flex flex-col gap-4 lg:mb-6`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
-              DevConnect - Autonomous Worlds Assembly
+              DevConnect - PROGCRYPTO
             </p>
             <Image
               className="hidden lg:block"
-              src={'/events/AWA_cover.png'}
-              alt="Autonomous Worlds Assembly"
+              src={'/events/PROGCRYPTO_Cover.png'}
+              alt="PROGCRYPTO"
               width={700}
               height={700}
             />
             <Link
-              href="/devconnect/autonomous_worlds_assembly"
+              href="/devconnect/progcrypto"
               className=" bg-blue rounded-xl p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
             </Link>

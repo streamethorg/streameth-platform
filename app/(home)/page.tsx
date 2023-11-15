@@ -40,8 +40,8 @@ export default async function Home() {
     })
   const stageController = new StageController()
   const stage = await stageController.getStage(
-    'emirgan_1',
-    'autonomous_worlds_assembly'
+    'auditorium',
+    'progcrypto'
   )
 
   return (
