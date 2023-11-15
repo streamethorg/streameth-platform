@@ -23,7 +23,11 @@
       "photo": "https://pbs.twimg.com/profile_images/1576119954599985154/S4Cw74e__400x400.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/c91a38vb2oe1vafg/index.m3u8",
+  "playbackId": "c91a38vb2oe1vafg",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/closing_ceremony_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/closing_ceremony_thumbnail.png",
+  "assetId": "c91ac285-8fa7-4d4d-a0e9-9f8070859b54",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }
