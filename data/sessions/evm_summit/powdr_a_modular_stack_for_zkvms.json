@@ -15,7 +15,11 @@
       "photo": "https://pbs.twimg.com/profile_images/1458195165819060238/4H4wKJto_400x400.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/809bsociagpvc7t3/index.m3u8",
+  "playbackId": "809bsociagpvc7t3",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/powdr_a_modular_stack_for_zkvms_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/powdr_a_modular_stack_for_zkvms_thumbnail.png",
+  "assetId": "809bd8bd-0147-4b14-8f78-79d24b71def2",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }
