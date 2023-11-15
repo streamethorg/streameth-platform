@@ -1,1 +1,22 @@
-{"id":"remixs_new_circom_integration","name":"Remix's new Circom integration","description":"Remix now has Circom integration (setup and proof generation).  We will give a quick demo and show you how to use it.  Start playing with Circom on Remix.","start":1700209800000,"end":1700210220000,"stageId":"dolmabahce_a","speakers":[{"id":"yann_levreau","name":"Yann Levreau","bio":"Yann Levreau started working on the initial C++ client and its tooling stack. At present team lead at Remix and focusing on improving Web3 accessibility.","eventId":"progcrypto","twitter":"yann300","photo":"https://drive.google.com/file/d/1mV76Cz7ucVEHgFd4UMwSNmRbKTyzh8ux/view"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/remixs_new_circom_integration.jpg"}
+{
+  "id": "remixs_new_circom_integration",
+  "name": "Remix's new Circom integration",
+  "description": "Remix now has Circom integration (setup and proof generation).  We will give a quick demo and show you how to use it.  Start playing with Circom on Remix.",
+  "start": 1700209800000,
+  "end": 1700210220000,
+  "stageId": "dolmabahce_a",
+  "speakers": [
+    {
+      "id": "yann_levreau",
+      "name": "Yann Levreau",
+      "bio": "Yann Levreau started working on the initial C++ client and its tooling stack. At present team lead at Remix and focusing on improving Web3 accessibility.",
+      "eventId": "progcrypto",
+      "twitter": "yann300",
+      "photo": "https://drive.google.com/file/d/1mV76Cz7ucVEHgFd4UMwSNmRbKTyzh8ux/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Developer Tools",
+  "coverImage": "/sessions/progcrypto/remixs_new_circom_integration_thumbnail.png"
+}

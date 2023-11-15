@@ -1,1 +1,21 @@
-{"id":"introducing_edr_an_ethereum_runtime_for_developer_tooling","name":"Introducing EDR: an Ethereum Runtime for developer tooling","description":"EDR—or Ethereum Development Runtime in full— is a runtime library for developer tools targeting the EVM, written in Rust. Think of it as a toolbox of gadgets that can simulate transactions in a blockchain, while exposing helpful information for testing, debugging, and analysing smart contracts. In this presentation we'll go over the goals of EDR, the current state, how it was integrated into Hardhat, and future work.","start":1699964400000,"end":1699965300000,"stageId":"emirgan_2","speakers":[{"id":"remco","name":"Remco","bio":"Remco is the tech lead on Nomic Foundation's EDR team, where he works on the open-source building blocks that empower developers to create new dev tools for the Ethereum ecosystem.","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/remco.jpg"}],"videoUrl":"EVM tooling","eventId":"evm_summit","coverImage":"/sessions/evm_summit/introducing_edr_an_ethereum_runtime_for_developer_tooling.jpg"}
+{
+  "id": "introducing_edr_an_ethereum_runtime_for_developer_tooling",
+  "name": "Introducing EDR: an Ethereum Runtime for developer tooling",
+  "description": "EDR—or Ethereum Development Runtime in full— is a runtime library for developer tools targeting the EVM, written in Rust. Think of it as a toolbox of gadgets that can simulate transactions in a blockchain, while exposing helpful information for testing, debugging, and analysing smart contracts. In this presentation we'll go over the goals of EDR, the current state, how it was integrated into Hardhat, and future work.",
+  "start": 1699964400000,
+  "end": 1699965300000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "remco",
+      "name": "Remco",
+      "bio": "Remco is the tech lead on Nomic Foundation's EDR team, where he works on the open-source building blocks that empower developers to create new dev tools for the Ethereum ecosystem.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/remco.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/introducing_edr_an_ethereum_runtime_for_developer_tooling_thumbnail.png"
+}

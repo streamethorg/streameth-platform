@@ -6,7 +6,9 @@ import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive, UploadOrUpdate } from 'services/slides'
 import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
 import { DevconnectEvents } from 'compositions/devconnect'
+import { validImageUrl } from 'utils/avatars'
 
+const uploadGoogledrive = true
 const updateSessionThumbnails = true
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
@@ -27,9 +29,9 @@ async function start(args: string[]) {
   console.log(`Run Remotion renderer in ${CONFIG.NODE_ENV} mode..`)
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
-  console.log(' - update session thumbnails', updateSessionThumbnails)
+  console.log('- update session thumbnails', updateSessionThumbnails)
 
-  const res = await fetch(`${apiBaseUri}/events`)
+  const res = await fetch(`${apiBaseUri}/events?inclUnlisted=true`)
   let events = (await res.json()).filter((i: any) => i.archiveMode === false)
     // filter for Devconnect events
     .filter((event: any) => devconnectEvents.some(i => i.id === event.id)) // event.organizationId === 'devconnect'
@@ -196,20 +198,21 @@ async function generateEventAssets(event: any) {
               }
 
               upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
+            }
 
-              if (updateSessionThumbnails) {
-                const copyPath = join(publicEventFolder, thumbnailId)
-                copyFileSync(thumbnailFilePath, copyPath)
 
-                // update session file 
-                const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
-                if (existsSync(sessionFilePath)) {
-                  const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
-                  writeFileSync(sessionFilePath, JSON.stringify({
-                    ...sessionFile,
-                    coverImage: `sessions/${event.id}/${thumbnailId}`
-                  }, null, 2))
-                }
+            if (updateSessionThumbnails && fileExists(thumbnailFilePath)) {
+              const copyPath = join(publicEventFolder, thumbnailId)
+              copyFileSync(thumbnailFilePath, copyPath)
+
+              // update session file 
+              const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
+              if (existsSync(sessionFilePath)) {
+                const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
+                writeFileSync(sessionFilePath, JSON.stringify({
+                  ...sessionFile,
+                  coverImage: `/sessions/${event.id}/${thumbnailId}`
+                }, null, 2))
               }
             }
           }
@@ -235,7 +238,7 @@ function fileExists(path: string, fileSize = 100000) {
 
 async function upload(id: string, path: string, type: string, folderId: string) {
   // - CONFIG.GOOGLE_DRIVE_ID is main, root drive. Files are upload to their respective sub folder Ids
-  if (CONFIG.GOOGLE_DRIVE_ID) {
+  if (CONFIG.GOOGLE_DRIVE_ID && uploadGoogledrive) {
     if (force) {
       await UploadOrUpdate(id, path, type, folderId)
       return
@@ -247,22 +250,3 @@ async function upload(id: string, path: string, type: string, folderId: string) 
     }
   }
 }
-
-async function validImageUrl(url?: string) {
-  if (!url) return false
-
-  const res = await fetch(url)
-  const buff = await res.blob()
-
-  return buff.type.startsWith('image/')
-}
-
-// let lastProgressPrinted = -1
-// const onProgress: RenderMediaOnProgress = ({ progress }) => {
-//   const progressPercent = Math.floor(progress * 100)
-
-//   if (progressPercent > lastProgressPrinted) {
-//     console.log(`Rendering is ${progressPercent}% complete`)
-//     lastProgressPrinted = progressPercent
-//   }
-// }

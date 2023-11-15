@@ -1,1 +1,19 @@
-{"id":"solidity_in_2023","name":"Solidity in 2023","description":"Keynote by Daniel Kirchner, Team Lead at Solidity.","start":1700118600000,"end":1700119500000,"stageId":"uskudar_2","speakers":[{"id":"daniel_kirchner","name":"Daniel Kirchner","bio":"No description","eventId":"solidity_summit"}],"videoUrl":"Solidity","eventId":"solidity_summit","coverImage":"/sessions/solidity_summit/solidity_in_2023.jpg"}
+{
+  "id": "solidity_in_2023",
+  "name": "Solidity in 2023",
+  "description": "Keynote by Daniel Kirchner, Team Lead at Solidity.",
+  "start": 1700118600000,
+  "end": 1700119500000,
+  "stageId": "uskudar_2",
+  "speakers": [
+    {
+      "id": "daniel_kirchner",
+      "name": "Daniel Kirchner",
+      "bio": "Team lead of the Solidity team.",
+      "eventId": "solidity_summit"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/solidity_in_2023_thumbnail.png"
+}

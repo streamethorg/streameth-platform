@@ -26,11 +26,14 @@
     {
       "type": "gdrive",
       "config": {
-        "driveId": "1DnaE_pyqRCf5mAjCdsFnraFs_FlMm-8O",
+        "driveId": "1_NAjuSuEIf4YLY8VqhiWTHuOVhy27m52",
         "driveApiKey": ""
       }
     }
   ],
   "startTime": "10:00",
-  "endTime": "18:00"
+  "endTime": "18:00",
+  "plugins": {
+    "disableChat": true
+  }
 }

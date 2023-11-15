@@ -1,1 +1,30 @@
-{"id":"zero_knowledge_cryptography__zk_coprocessors_the_future_of_decentralized_computing","name":"Zero Knowledge Cryptography & ZK Co-processors: the Future of Decentralized Computing","description":"Join us for a dynamic and informative talk featuring two prominent voices from o1Labs. Florian Kluge, Software Engineer will delve into the realm of zero knowledge cryptography. Discover the power of zk co-processors and explore o1js, the Typescript toolkit for zero knowledge-powered applications. Nathan Holland, Protocol Architect, will add an overview of the Mina protocol, incubated by o1Labs. Come learn about its decentralized proof system and its zkApps model.","start":1700140500000,"end":1700143200000,"stageId":"dolmabahce_a","speakers":[{"id":"florian_kluge","name":"\nFlorian Kluge","bio":"Florian Kluge is a Software Engineer at O(1) Labs, specializing in zero-knowledge programming using the TypeScript framework, o1js. With expertise in TypeScript, Cryptography, Blockchains and more, he has contributed significantly to the fields of zkSNARKs and zkApp development. Florian is also an experienced speaker, having participated in panels and seminars covering various zero-knowledge topics.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1YvpZwuQaTMhshvb3LtwHJiWNRSWovBkP/view"},{"id":"nathan_holland","name":"Nathan Holland","bio":"Nathan Holland is the Protocol Architect at O(1) Labs, where he actively contributes to cutting-edge protocols in decentralized computing and the development of the Mina protocol. He has a diverse skill set spanning various programming disciplines. With a passion for programming languages, compilers, parallelism, and 3D graphics, Nathan has also cultivated a wealth of experience in full-stack web development, and DevOps tools and best practices.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1zFuhS9STMiJ2BuILujMh14r5-HuUA-_5/view"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/zero_knowledge_cryptography__zk_coprocessors_the_future_of_decentralized_computing.jpg"}
+{
+  "id": "zero_knowledge_cryptography__zk_coprocessors_the_future_of_decentralized_computing",
+  "name": "Zero Knowledge Cryptography & ZK Co-processors: the Future of Decentralized Computing",
+  "description": "Join us for a dynamic and informative talk featuring two prominent voices from o1Labs. Florian Kluge, Software Engineer will delve into the realm of zero knowledge cryptography. Discover the power of zk co-processors and explore o1js, the Typescript toolkit for zero knowledge-powered applications. Nathan Holland, Protocol Architect, will add an overview of the Mina protocol, incubated by o1Labs. Come learn about its decentralized proof system and its zkApps model.",
+  "start": 1700140500000,
+  "end": 1700143200000,
+  "stageId": "dolmabahce_a",
+  "speakers": [
+    {
+      "id": "florian_kluge",
+      "name": "\nFlorian Kluge",
+      "bio": "Florian Kluge is a Software Engineer at O(1) Labs, specializing in zero-knowledge programming using the TypeScript framework, o1js. With expertise in TypeScript, Cryptography, Blockchains and more, he has contributed significantly to the fields of zkSNARKs and zkApp development. Florian is also an experienced speaker, having participated in panels and seminars covering various zero-knowledge topics.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1YvpZwuQaTMhshvb3LtwHJiWNRSWovBkP/view"
+    },
+    {
+      "id": "nathan_holland",
+      "name": "Nathan Holland",
+      "bio": "Nathan Holland is the Protocol Architect at O(1) Labs, where he actively contributes to cutting-edge protocols in decentralized computing and the development of the Mina protocol. He has a diverse skill set spanning various programming disciplines. With a passion for programming languages, compilers, parallelism, and 3D graphics, Nathan has also cultivated a wealth of experience in full-stack web development, and DevOps tools and best practices.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1zFuhS9STMiJ2BuILujMh14r5-HuUA-_5/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "ZK and Blockchains / zkEVMs",
+  "coverImage": "/sessions/progcrypto/zero_knowledge_cryptography__zk_coprocessors_the_future_of_decentralized_computing_thumbnail.png"
+}

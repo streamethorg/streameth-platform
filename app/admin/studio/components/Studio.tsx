@@ -114,14 +114,15 @@ export default function Studio(props: Props) {
   }, [streamSessions, selectStreamCallback])
 
   function filterStreamSession(streamSessions: any[]) {
-    // Only show streams that have been recorded and are either active or longer than 1 hour
+    // Only show streams that have been recorded and are longer than 10 mins
     // 5 day limit is how long 'clippable' streams are kept on Livepeer
-    return streamSessions?.filter(
-      (i) =>
+    return streamSessions?.filter((i) => {
+      return (
         i.record &&
         dayjs(i.createdAt).isAfter(dayjs().subtract(5, 'days')) &&
-        (i.isActive || i.sourceSegmentsDuration > 3600)
-    )
+        i.sourceSegmentsDuration > 600
+      )
+    })
   }
 
   if (!event) return <>No events found.</>

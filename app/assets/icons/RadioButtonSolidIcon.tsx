@@ -10,7 +10,7 @@ interface Props {
 }
 
 const RadioButtonSolidIcon = ({
-  pathFill = colors.accent,
+  pathFill = colors.blue,
   height = '35',
   width = '35',
   className = '',

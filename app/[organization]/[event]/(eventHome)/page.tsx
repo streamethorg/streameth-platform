@@ -6,11 +6,15 @@ import StageController from '@/server/controller/stage'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'
 import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
+import { ResolvingMetadata, Metadata } from 'next'
 import Player from '@/components/misc/Player'
+
 interface Params {
-  event: string
-  organization: string
-  speaker: string
+  params: {
+    event: string
+    organization: string
+    speaker: string
+  }
 }
 
 const Button = ({
@@ -29,7 +33,7 @@ const Button = ({
   </div>
 )
 
-const EventHome = async ({ params }: { params: Params }) => {
+export default async function EventHome({ params }: Params) {
   const eventController = new EventController()
 
   const event = (
@@ -77,4 +81,32 @@ const EventHome = async ({ params }: { params: Params }) => {
   )
 }
 
-export default EventHome
+export async function generateMetadata(
+  { params }: Params,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { organization, event } = params
+  const eventController = new EventController()
+  const eventInfo = await eventController.getEvent(
+    event,
+    organization
+  )
+
+  const imageUrl = eventInfo.banner
+  try {
+    return {
+      title: eventInfo.name,
+      description: eventInfo.description,
+      openGraph: {
+        title: eventInfo.name,
+        description: eventInfo.description,
+        images: [`/events/${imageUrl!}`],
+      },
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      title: 'StreamETH Event',
+    }
+  }
+}

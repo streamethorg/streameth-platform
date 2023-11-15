@@ -6,8 +6,41 @@ import { MobileContextProvider } from '@/components/context/MobileContext'
 import { LoadingContextProvider } from '@/components/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
 import { FilterContextProvider } from '../components/context/FilterContext'
-import { Metadata } from 'next'
 import Initializer from './Initializer'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'StreamETH',
+  description:
+    'The complete solution to host your hybrid or virtual event.',
+  metadataBase: new URL('https://app.streameth.org'),
+  openGraph: {
+    title: 'StreamETH',
+    siteName: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
+    },
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
+}
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
@@ -46,18 +79,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-}
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://app.streameth.org'),
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en-US',
-      'de-DE': '/de-DE',
-    },
-  },
-  openGraph: {
-    images: '/og-image.png',
-  },
 }

@@ -6,8 +6,8 @@ import {
   getDefaultConfig,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
-import { WagmiConfig, createConfig, Chain } from 'wagmi'
 import { usePathname } from 'next/navigation'
+import { WagmiConfig, createConfig } from 'wagmi'
 
 const authApi = '/api/auth'
 

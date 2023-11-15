@@ -1,1 +1,22 @@
-{"id":"cryptkeeper","name":"CryptKeeper: ","description":"In this presentation, we'll explore CryptKeeper, a published browser extension that offers secure, decentralized and private identity management and authentication solutions based on the Semaphore zero-knowledge proofs protocol. \n\nDuring the talk, we'll showcase CryptKeeper's seamless integration into applications using the `@cryptkeeperzk/providers` package. Whether you're a tech enthusiast or simply curious about online security regarding building with Semaphore Protocol. \n\nJoin us for an engaging demo where we'll explore the main features of CryptKeeper and how developers building ZKP applications using it. ","start":1700134560000,"end":1700134980000,"stageId":"marmara","speakers":[{"id":"anton_valov","name":"Anton Valov","bio":"Software engineer with experience in blockchain, cryptography, finance, insurance. Strong hands-on skills with micro frontend, distributes applications, automation.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1BDHKTrv8mDMibFpDiWOWRv5f1GeAXJyN/view"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/cryptkeeper.jpg"}
+{
+  "id": "cryptkeeper",
+  "name": "CryptKeeper",
+  "description": "In this presentation, we'll explore CryptKeeper, a published browser extension that offers secure, decentralized and private identity management and authentication solutions based on the Semaphore zero-knowledge proofs protocol. \n\nDuring the talk, we'll showcase CryptKeeper's seamless integration into applications using the `@cryptkeeperzk/providers` package. Whether you're a tech enthusiast or simply curious about online security regarding building with Semaphore Protocol. \n\nJoin us for an engaging demo where we'll explore the main features of CryptKeeper and how developers building ZKP applications using it. ",
+  "start": 1700134560000,
+  "end": 1700134980000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "anton_valov",
+      "name": "Anton Valov",
+      "bio": "Software engineer with experience in blockchain, cryptography, finance, insurance. Strong hands-on skills with micro frontend, distributes applications, automation.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1BDHKTrv8mDMibFpDiWOWRv5f1GeAXJyN/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Developer Tools",
+  "coverImage": "/sessions/progcrypto/cryptkeeper_thumbnail.png"
+}

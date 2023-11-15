@@ -41,4 +41,7 @@ google_client_secret.json
 google_sa_secret.json
 
 # Generated assets
-assets
+/assets
+
+# Sentry Config File
+.sentryclirc

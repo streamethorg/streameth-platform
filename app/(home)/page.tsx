@@ -4,6 +4,7 @@ import FilterBar from './components/FilterBar'
 import Image from 'next/image'
 import StageController from '@/server/controller/stage'
 import UpcomingEvents from './components/UpcomingEvents'
+import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 import LiveEvent from './components/LiveEvent'
@@ -15,7 +16,7 @@ export default async function Home() {
       return event.toJson()
     })
     .filter((event) => {
-      const startDate = new Date(event?.start)
+      const startDate = new Date(event?.end)
       const currDate = new Date()
       startDate.setUTCHours(0, 0, 0, 0)
       currDate.setUTCHours(0, 0, 0, 0)
@@ -38,7 +39,10 @@ export default async function Home() {
       return event.toJson()
     })
   const stageController = new StageController()
-  const stage = await stageController.getStage('harbiye', 'ethgunu')
+  const stage = await stageController.getStage(
+    'emirgan_1',
+    'autonomous_worlds_assembly'
+  )
 
   return (
     <main className="w-screen mx-auto">
@@ -59,12 +63,18 @@ export default async function Home() {
         />
         <div className="flex flex-row ml-auto space-x-2 items-center justify-center">
           <Link href="https://streameth.org/contact-us">
-            <div className="bg-blue border-blue text-white p-2 rounded-xl border">
+            <div className="bg-blue capitalize border-blue text-white p-3 rounded-xl border">
               Add your event
             </div>
           </Link>
-          <SocialIcon url="https://x.com/streameth" />
-          <SocialIcon url="https://github.com/streamethorg/streameth-platform" />
+          <SocialIcon
+            style={{ width: '45px', height: '45px' }}
+            url="https://x.com/streameth"
+          />
+          <SocialIcon
+            style={{ width: '45px', height: '45px' }}
+            url="https://github.com/streamethorg/streameth-platform"
+          />
         </div>
       </div>
       <div className="flex flex-col lg:overflow-hidden">
@@ -78,4 +88,37 @@ export default async function Home() {
       </div>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'StreamETH',
+  description:
+    'The complete solution to host your hybrid or virtual event.',
+  metadataBase: new URL('https://app.streameth.org'),
+  openGraph: {
+    title: 'StreamETH',
+    siteName: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
+    },
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
 }

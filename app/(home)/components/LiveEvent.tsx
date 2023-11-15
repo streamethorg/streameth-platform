@@ -17,25 +17,26 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
             <Player
               streamId={stage.streamSettings.streamId}
               playerName={stage.name}
+              muted
             />
             <p className="font-ubuntu font-medium text-2xl mt-4 text-blue">
-              🔴 Live: ETHGünü
+              🔴 Live: Autonomous Worlds Assembly - EMIRGAN 1
             </p>
           </div>
           <div
             className={`w-full lg:w-[45%] lg:mr-4 flex flex-col gap-4 lg:mb-6`}>
             <p className="hidden lg:block font-ubuntu font-medium text-lg text-blue">
-              ETHGünü
+              DevConnect - Autonomous Worlds Assembly
             </p>
             <Image
               className="hidden lg:block"
-              src={'/events/ETHGunu_cover.jpeg'}
-              alt="ETHGunu 2023"
+              src={'/events/AWA_cover.png'}
+              alt="Autonomous Worlds Assembly"
               width={700}
               height={700}
             />
             <Link
-              href="/devconnect/ethgunu"
+              href="/devconnect/autonomous_worlds_assembly"
               className=" bg-blue rounded-xl p-4 mx-4 lg:mx-0 text-white text-center">
               Go to Event
             </Link>
