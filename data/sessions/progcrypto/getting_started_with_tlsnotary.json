@@ -1,1 +1,34 @@
-{"id":"getting_started_with_tlsnotary","name":"Getting started with TLSNotary","description":"In this interactive workshop, you will learn how to use TLSNotary. Together, we will delve into the world of TLS-notarization and learn how to prove and verify the authenticity of online, private data using a self-hosted notary server.\n\nWe will begin with a brief overview of the notarization process and then move on to its practical implementation. First we will check out and compile the code. Make sure that you have the Rust toolchain installed for a smooth experience.\n\nNext, we will guide you through the process of obtaining and configuring the necessary access tokens. Once everything is set up, we will run the notarization process and examine the resulting transcript in detail. Furthermore, we will demonstrate how to redact specific information and verify the proof of authenticity.\n\nBy the end of this workshop, you'll have a solid foundation to explore TLSNotary's potential for your unique use cases. This new knowledge will enable you to reclaim control over your data, ensuring its integrity and privacy. \n\nApart from speakers there are also going to be dan, Th4s, Chris, Kevin and Tyler helping with the interactive part.","start":1700225100000,"end":1700228700000,"stageId":"dolmabahce_a","speakers":[{"id":"hendrik_eeckhaut","name":"Hendrik Eeckhaut","bio":"Hendrik holds a PhD in computer science and is the founder of Sigasi, a software company that develops tools for chip designers, focusing on VHDL and SystemVerilog. He supports the TLSNotary team at the Ethereum Foundation's Privacy and Scaling Explorations research lab, working on software for privacy-preserving data provenance. In his free time, he enjoys running, climbing, and exploring the world.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1Z_iHNkby1P9m3m8YK-T1jirPpti-04xA/view"},{"id":"tsukino","name":"Tsukino","bio":"Hendrik's co-worker","eventId":"progcrypto"},{"id":"sinu","name":"Sinu","bio":"Hendrik's co-worker","eventId":"progcrypto"}],"playbackId":"","eventId":"progcrypto","track":"Libraries and Infrastructure","coverImage":"/sessions/progcrypto/getting_started_with_tlsnotary.jpg"}
+{
+  "id": "getting_started_with_tlsnotary",
+  "name": "Getting started with TLSNotary",
+  "description": "In this interactive workshop, you will learn how to use TLSNotary. Together, we will delve into the world of TLS-notarization and learn how to prove and verify the authenticity of online, private data using a self-hosted notary server.\n\nWe will begin with a brief overview of the notarization process and then move on to its practical implementation. First we will check out and compile the code. Make sure that you have the Rust toolchain installed for a smooth experience.\n\nNext, we will guide you through the process of obtaining and configuring the necessary access tokens. Once everything is set up, we will run the notarization process and examine the resulting transcript in detail. Furthermore, we will demonstrate how to redact specific information and verify the proof of authenticity.\n\nBy the end of this workshop, you'll have a solid foundation to explore TLSNotary's potential for your unique use cases. This new knowledge will enable you to reclaim control over your data, ensuring its integrity and privacy. \n\nApart from speakers there are also going to be dan, Th4s, Chris, Kevin and Tyler helping with the interactive part.",
+  "start": 1700225100000,
+  "end": 1700228700000,
+  "stageId": "dolmabahce_a",
+  "speakers": [
+    {
+      "id": "hendrik_eeckhaut",
+      "name": "Hendrik Eeckhaut",
+      "bio": "Hendrik holds a PhD in computer science and is the founder of Sigasi, a software company that develops tools for chip designers, focusing on VHDL and SystemVerilog. He supports the TLSNotary team at the Ethereum Foundation's Privacy and Scaling Explorations research lab, working on software for privacy-preserving data provenance. In his free time, he enjoys running, climbing, and exploring the world.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1Z_iHNkby1P9m3m8YK-T1jirPpti-04xA/view"
+    },
+    {
+      "id": "tsukino",
+      "name": "Tsukino",
+      "bio": "Hendrik's co-worker",
+      "eventId": "progcrypto"
+    },
+    {
+      "id": "sinu",
+      "name": "Sinu",
+      "bio": "Hendrik's co-worker",
+      "eventId": "progcrypto"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Libraries and Infrastructure",
+  "coverImage": "/sessions/progcrypto/getting_started_with_tlsnotary_thumbnail.png"
+}
