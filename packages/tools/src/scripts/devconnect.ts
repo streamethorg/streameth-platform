@@ -8,7 +8,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileS
 import { DevconnectEvents } from 'compositions/devconnect'
 import { validImageUrl } from 'utils/avatars'
 
-const uploadGoogledrive = false
+const uploadGoogledrive = true
 const updateSessionThumbnails = true
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
@@ -198,20 +198,21 @@ async function generateEventAssets(event: any) {
               }
 
               upload(thumbnailId, thumbnailFilePath, thumbnailType, folderId)
+            }
 
-              if (updateSessionThumbnails) {
-                const copyPath = join(publicEventFolder, thumbnailId)
-                copyFileSync(thumbnailFilePath, copyPath)
 
-                // update session file 
-                const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
-                if (existsSync(sessionFilePath)) {
-                  const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
-                  writeFileSync(sessionFilePath, JSON.stringify({
-                    ...sessionFile,
-                    coverImage: `/sessions/${event.id}/${thumbnailId}`
-                  }, null, 2))
-                }
+            if (updateSessionThumbnails && fileExists(thumbnailFilePath)) {
+              const copyPath = join(publicEventFolder, thumbnailId)
+              copyFileSync(thumbnailFilePath, copyPath)
+
+              // update session file 
+              const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
+              if (existsSync(sessionFilePath)) {
+                const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
+                writeFileSync(sessionFilePath, JSON.stringify({
+                  ...sessionFile,
+                  coverImage: `/sessions/${event.id}/${thumbnailId}`
+                }, null, 2))
               }
             }
           }

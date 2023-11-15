@@ -1,5 +1,7 @@
+const shouldAnalyzeBundles = process.env.ANALYZE === true
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+let nextConfig = {
   redirects: async () => [
     {
       source: '/',
@@ -67,6 +69,14 @@ const nextConfig = {
     ],
   },
   staticPageGenerationTimeout: 1000,
+}
+
+if (shouldAnalyzeBundles) {
+  console.log('Analyzing bundles..')
+  const withNextBundleAnalyzer = require('next-bundle-analyzer')({
+    enabled: true,
+  })
+  nextConfig = withNextBundleAnalyzer(nextConfig)
 }
 
 module.exports = nextConfig
