@@ -5,14 +5,14 @@ import AddEventButton from './components/AddEventButton'
 import EventEntry from './components/EventEntry'
 import EventController from '@/server/controller/event'
 import OrganizationController from '@/server/controller/organization'
-export async function generateStaticParams() {
-  const data = await (await fetch(`${apiUrl()}/organizations`)).json()
-  return data.map((org: { id: string }) => ({
-    params: {
-      organization: org.id,
-    },
-  }))
-}
+// export async function generateStaticParams() {
+//   const data = await (await fetch(`${apiUrl()}/organizations`)).json()
+//   return data.map((org: { id: string }) => ({
+//     params: {
+//       organization: org.id,
+//     },
+//   }))
+// }
 
 const EventsPage = async ({
   params,

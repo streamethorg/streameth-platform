@@ -17,6 +17,7 @@ import {
 import { DevconnectISTProps, Intro } from './devconnect/intro'
 import { Social } from './devconnect/social'
 import { Intro as ProgCryptoIntro } from './progcrypto/intro'
+import { WideIntro as ProgCryptoWideIntro } from './progcrypto/intro_wide'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
 import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
@@ -93,7 +94,7 @@ export function Compositions() {
 
   return (
     <>
-      {/* <Folder name="Devconnect">
+      <Folder name="Devconnect">
         <Composition
           id="custom-render"
           component={Intro}
@@ -137,7 +138,7 @@ export function Compositions() {
               }}
             />
           </Fragment>
-        ))} */}
+        ))}
 
       {/* <Composition
           id={'join-devconnect-ist'}
@@ -161,7 +162,7 @@ export function Compositions() {
             session: MOCK_SESSION[0],
           }}
         /> */}
-      {/* </Folder> */}
+      </Folder>
 
       <Folder name="0xParc">
         <Composition
@@ -174,6 +175,16 @@ export function Compositions() {
           defaultProps={{
             session: MOCK_SESSION[0],
           }}
+        />
+
+        <Composition
+          id={'progcrypto-wide'}
+          component={ProgCryptoWideIntro}
+          width={4032}
+          height={1344}
+          durationInFrames={219}
+          fps={DevconnectFrameRate}
+          defaultProps={{ session: MOCK_SESSION[1] }}
         />
 
         <Still
