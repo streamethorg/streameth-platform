@@ -1,7 +1,7 @@
-const { withSentryConfig } = require('@sentry/nextjs')
+const shouldAnalyzeBundles = process.env.ANALYZE === true
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+let nextConfig = {
   redirects: async () => [
     {
       source: '/',
@@ -71,34 +71,12 @@ const nextConfig = {
   staticPageGenerationTimeout: 1000,
 }
 
-module.exports = withSentryConfig(
-  nextConfig,
-  {
-    // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options
+if (shouldAnalyzeBundles) {
+  console.log('Analyzing bundles..')
+  const withNextBundleAnalyzer = require('next-bundle-analyzer')({
+    enabled: true,
+  })
+  nextConfig = withNextBundleAnalyzer(nextConfig)
+}
 
-    // Suppresses source map uploading logs during build
-    silent: true,
-    org: 'ethereum-foundation',
-    project: 'streameth-platform',
-  },
-  {
-    // For all available options, see:
-    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
-
-    // Upload a larger set of source maps for prettier stack traces (increases build time)
-    widenClientFileUpload: true,
-
-    // Transpiles SDK to be compatible with IE11 (increases bundle size)
-    transpileClientSDK: true,
-
-    // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
-    tunnelRoute: '/monitoring',
-
-    // Hides source maps from generated client bundles
-    hideSourceMaps: true,
-
-    // Automatically tree-shake Sentry logger statements to reduce bundle size
-    disableLogger: true,
-  }
-)
+module.exports = nextConfig

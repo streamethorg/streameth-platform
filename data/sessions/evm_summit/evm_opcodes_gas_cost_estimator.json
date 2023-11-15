@@ -1,1 +1,25 @@
-{"id":"evm_opcodes_gas_cost_estimator","name":"EVM Opcodes Gas Cost Estimator","description":"Sponsored by the Ethereum Fundation, the Gas Cost Estimator project aims to evaluate the actual cost of executing OPCODEs in EVM machines. We benchmark different clients and normalize results to elimate external influence.\nIn this talk we share our findings and propose new gas cost for each instruction. We show our methodology, tools used, and future developments.","start":1699964400000,"end":1699965300000,"stageId":"emirgan_1","speakers":[{"id":"jacek_glen","name":"Jacek Glen","bio":"Jacek has almost 20 years of experience in developing and designing systems in industries spanning from banking to finance to big data to insurance. In recent years, he has focused on all aspects of blockchain technologies. He is involved in developing Ethereum clients, smart contracts and web3 apps.","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/jacek_glen.jpg"}],"playbackId":"","eventId":"evm_summit","coverImage":"/sessions/evm_summit/evm_opcodes_gas_cost_estimator.jpg"}
+{
+  "id": "evm_opcodes_gas_cost_estimator",
+  "name": "EVM Opcodes Gas Cost Estimator",
+  "description": "Sponsored by the Ethereum Fundation, the Gas Cost Estimator project aims to evaluate the actual cost of executing OPCODEs in EVM machines. We benchmark different clients and normalize results to elimate external influence.\nIn this talk we share our findings and propose new gas cost for each instruction. We show our methodology, tools used, and future developments.",
+  "start": 1699964400000,
+  "end": 1699965300000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "jacek_glen",
+      "name": "Jacek Glen",
+      "bio": "Jacek has almost 20 years of experience in developing and designing systems in industries spanning from banking to finance to big data to insurance. In recent years, he has focused on all aspects of blockchain technologies. He is involved in developing Ethereum clients, smart contracts and web3 apps.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/jacek_glen.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/1620m29bfutvh6we/index.m3u8",
+  "playbackId": "1620m29bfutvh6we",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/evm_opcodes_gas_cost_estimator_thumbnail.png",
+  "assetId": "162028df-8d00-4d3c-914b-5433d93047a9",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
+}

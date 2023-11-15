@@ -1,1 +1,25 @@
-{"id":"evmmax__advanced_elliptic_curve_cryptography_in_evm","name":"EVMMAX - advanced Elliptic Curve Cryptography in EVM ","description":"The EVM instruction set extension for permissionless, safe, and reasonably fast Elliptic Curve Cryptography.","start":1699966800000,"end":1699967700000,"stageId":"emirgan_1","speakers":[{"id":"radosaw_zagrowicz","name":"Radosław Zagórowicz","bio":"Programmer, researcher, mathematician. In Ethereum space since 2015.","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/radoslaw_zagorowicz.jpg"}],"playbackId":"","eventId":"evm_summit","coverImage":"/sessions/evm_summit/evmmax__advanced_elliptic_curve_cryptography_in_evm.jpg"}
+{
+  "id": "evmmax__advanced_elliptic_curve_cryptography_in_evm",
+  "name": "EVMMAX - advanced Elliptic Curve Cryptography in EVM ",
+  "description": "The EVM instruction set extension for permissionless, safe, and reasonably fast Elliptic Curve Cryptography.",
+  "start": 1699966800000,
+  "end": 1699967700000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "radosaw_zagrowicz",
+      "name": "Radosław Zagórowicz",
+      "bio": "Programmer, researcher, mathematician. In Ethereum space since 2015.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/radoslaw_zagorowicz.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/baf96ibk5j639rer/index.m3u8",
+  "playbackId": "baf96ibk5j639rer",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/evmmax__advanced_elliptic_curve_cryptography_in_evm_thumbnail.png",
+  "assetId": "baf9f9df-0d46-4eb6-8b6f-d7db32718179",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
+}

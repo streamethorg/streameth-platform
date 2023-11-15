@@ -4,14 +4,20 @@ import {
   Still,
   continueRender,
   delayRender,
-  staticFile
+  staticFile,
 } from 'remotion'
 import { MOCK_SESSION } from '../utils/mocks'
 import { Fragment } from 'react'
-import { DevconnectEvents, DevconnectFrameRate, DevconnectIntroDuration, DevconnectOutroDuration } from './devconnect'
+import {
+  DevconnectEvents,
+  DevconnectFrameRate,
+  DevconnectIntroDuration,
+  DevconnectOutroDuration,
+} from './devconnect'
 import { DevconnectISTProps, Intro } from './devconnect/intro'
 import { Social } from './devconnect/social'
 import { Intro as ProgCryptoIntro } from './progcrypto/intro'
+import { WideIntro as ProgCryptoWideIntro } from './progcrypto/intro_wide'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
 import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
@@ -21,7 +27,9 @@ export function Compositions() {
   const waitForFont = delayRender()
   const devconnectFont = new FontFace(
     `Sofia Sans Extra Condensed`,
-    `url('${staticFile('devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf')}') format('truetype')`,
+    `url('${staticFile(
+      'devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf'
+    )}') format('truetype')`
   )
   const progCryptoFont_Med = new FontFace(
     `Grotesk Trial Medium`,
@@ -36,26 +44,59 @@ export function Compositions() {
     )}') format('opentype')`
   )
 
-  devconnectFont.load().then(() => {
-    document.fonts.add(devconnectFont)
-    continueRender(waitForFont)
-  }).catch((err) => console.log('Error loading Devconnect font', err))
+  const autonomousWorldsAssemblyFont = new FontFace(
+    `FK Raster Grotesk`,
+    `url('${staticFile(
+      '0xparc/fonts/FKRasterGroteskCompact-Smooth.ttf'
+    )}') format('truetype')`
+  )
 
-  progCryptoFont_Med.load().then(() => {
-    document.fonts.add(progCryptoFont_Med)
-    continueRender(waitForFont)
-  }).catch((err) => console.log('Error loading progCryptoFont_Med font', err))
+  devconnectFont
+    .load()
+    .then(() => {
+      document.fonts.add(devconnectFont)
+      continueRender(waitForFont)
+    })
+    .catch((err) => console.log('Error loading Devconnect font', err))
 
-  progCryptoFont_Reg.load().then(() => {
-    document.fonts.add(progCryptoFont_Reg)
-    continueRender(waitForFont)
-  }).catch((err) => console.log('Error loading progCryptoFont_Reg font', err))
+  progCryptoFont_Med
+    .load()
+    .then(() => {
+      document.fonts.add(progCryptoFont_Med)
+      continueRender(waitForFont)
+    })
+    .catch((err) =>
+      console.log('Error loading progCryptoFont_Med font', err)
+    )
+
+  progCryptoFont_Reg
+    .load()
+    .then(() => {
+      document.fonts.add(progCryptoFont_Reg)
+      continueRender(waitForFont)
+    })
+    .catch((err) =>
+      console.log('Error loading progCryptoFont_Reg font', err)
+    )
+
+  autonomousWorldsAssemblyFont
+    .load()
+    .then(() => {
+      document.fonts.add(autonomousWorldsAssemblyFont)
+      continueRender(waitForFont)
+    })
+    .catch((err) =>
+      console.log(
+        'Error loading autonomousWorldsAssemblyFont font',
+        err
+      )
+    )
 
   return (
     <>
       <Folder name="Devconnect">
         <Composition
-          id='custom-render'
+          id="custom-render"
           component={Intro}
           width={1920}
           height={1080}
@@ -129,11 +170,21 @@ export function Compositions() {
           component={ProgCryptoIntro}
           width={1920}
           height={1080}
-          durationInFrames={DevconnectIntroDuration}
+          durationInFrames={219}
           fps={DevconnectFrameRate}
           defaultProps={{
-            session: MOCK_SESSION[0],
+            session: MOCK_SESSION[3],
           }}
+        />
+
+        <Composition
+          id={'progcrypto-wide'}
+          component={ProgCryptoWideIntro}
+          width={4032}
+          height={1344}
+          durationInFrames={219}
+          fps={DevconnectFrameRate}
+          defaultProps={{ session: MOCK_SESSION[3] }}
         />
 
         <Still
@@ -142,19 +193,19 @@ export function Compositions() {
           width={1200}
           height={630}
           defaultProps={{
-            session: MOCK_SESSION[1],
+            session: MOCK_SESSION[3],
           }}
         />
 
-        <Composition
+        {/* <Composition
           id={'autonomous-worlds-assembly'}
           component={AwaIntro}
           width={1920}
           height={1080}
-          durationInFrames={DevconnectIntroDuration}
+          durationInFrames={250}
           fps={DevconnectFrameRate}
           defaultProps={{
-            session: MOCK_SESSION[0],
+            session: MOCK_SESSION[2],
           }}
         />
 
@@ -166,7 +217,7 @@ export function Compositions() {
           defaultProps={{
             session: MOCK_SESSION[1],
           }}
-        />
+        /> */}
       </Folder>
 
       <Composition
