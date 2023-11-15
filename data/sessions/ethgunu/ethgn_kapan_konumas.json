@@ -15,7 +15,11 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/doruk.jpg?raw=true"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/4b32vht0i2cgptwy/index.m3u8",
+  "playbackId": "4b32vht0i2cgptwy",
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/ethgn_kapan_konumas_thumbnail.png"
+  "coverImage": "/sessions/ethgunu/ethgn_kapan_konumas_thumbnail.png",
+  "assetId": "4b32239d-d834-495f-bc08-900369ce0c5f",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
 }
