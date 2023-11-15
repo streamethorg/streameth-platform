@@ -90,37 +90,35 @@ export default async function Home() {
   )
 }
 
-export const generateMetadata = async () => {
-  return {
+export const metadata: Metadata = {
+  title: 'StreamETH',
+  description:
+    'The complete solution to host your hybrid or virtual event.',
+  metadataBase: new URL('https://app.streameth.org'),
+  openGraph: {
+    title: 'StreamETH',
+    siteName: 'StreamETH',
+    description:
+      'The complete solution to host your hybrid or virtual event.',
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
     title: 'StreamETH',
     description:
       'The complete solution to host your hybrid or virtual event.',
-    metadataBase: new URL('https://app.streameth.org'),
-    openGraph: {
-      title: 'StreamETH',
-      siteName: 'StreamETH',
-      description:
-        'The complete solution to host your hybrid or virtual event.',
-      images: {
-        url: 'https://app.streameth.org/banner.png',
-        alt: 'StreamETH Logo',
-      },
+    images: {
+      url: 'https://app.streameth.org/banner.png',
+      alt: 'StreamETH Logo',
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'StreamETH',
-      description:
-        'The complete solution to host your hybrid or virtual event.',
-      images: {
-        url: 'https://app.streameth.org/banner.png',
-        alt: 'StreamETH Logo',
-      },
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
     },
-    alternates: {
-      canonical: '/',
-      languages: {
-        'en-US': '/en-US',
-      },
-    },
-  }
+  },
 }
