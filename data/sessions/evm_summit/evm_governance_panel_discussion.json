@@ -47,7 +47,11 @@
       "photo": "https://evmsummit.org/images/speakers/alex_gluchowski.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/e5desiblyi2ua988/index.m3u8",
+  "playbackId": "e5desiblyi2ua988",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/evm_governance_panel_discussion_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/evm_governance_panel_discussion_thumbnail.png",
+  "assetId": "e5dec7c8-011b-4892-bdd4-cc5330402ad6",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }
