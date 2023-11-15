@@ -1,1 +1,8 @@
-{"id":"cem_dadelen","name":"Cem Dağdelen","bio":"Cem bir mekanizma tasarımcısı ve arastirmaci olarak web3 teknolojilerinde çalışan dijital organizasyonların ve protokollerin tasarlanması ve uygulanmasına odaklanıyor. Aynı zamanda \n@gizatechxyz 've @curvelabs in kurucu ortağı.","eventId":"ethgunu","twitter":"@CemFDagdelen","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/cem.jpg?raw=true"}
+{
+  "id": "cem_dadelen",
+  "name": "Cem Dağdelen",
+  "bio": "Cem bir mekanizma tasarımcısı ve arastirmaci olarak web3 teknolojilerinde çalışan dijital organizasyonların ve protokollerin tasarlanması ve uygulanmasına odaklanıyor. Aynı zamanda \n@gizatechxyz 've @curvelabs in kurucu ortağı.",
+  "eventId": "ethgunu",
+  "twitter": "@CemFDagdelen",
+  "photo": "https://raw.githubusercontent.com/ethgunu/ethgunu.com/main/src/components/main/Speakers/photos/cemD.jpeg"
+}
