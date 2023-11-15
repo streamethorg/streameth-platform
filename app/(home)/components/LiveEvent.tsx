@@ -20,7 +20,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
               muted
             />
             <p className="font-ubuntu font-medium text-2xl mt-4 text-blue">
-              🔴 Live: Autonomous Worlds Assembly
+              🔴 Live: Autonomous Worlds Assembly - EMIRGAN 1
             </p>
           </div>
           <div
