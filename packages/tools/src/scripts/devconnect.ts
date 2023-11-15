@@ -209,7 +209,7 @@ async function generateEventAssets(event: any) {
                   const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
                   writeFileSync(sessionFilePath, JSON.stringify({
                     ...sessionFile,
-                    coverImage: `sessions/${event.id}/${thumbnailId}`
+                    coverImage: `/sessions/${event.id}/${thumbnailId}`
                   }, null, 2))
                 }
               }

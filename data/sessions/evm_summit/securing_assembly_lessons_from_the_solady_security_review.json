@@ -1,1 +1,21 @@
-{"id":"securing_assembly_lessons_from_the_solady_security_review","name":"Securing Assembly: Lessons from the Solady Security Review","description":"A Dive into the Public Goods Security Review of Solady. In this presentation, our team explores the challenges of auditing Solady, a well-known library famous for its complex yet efficient code. We'll explain what Solady is and its importance in the field. Our main focus will be on our approach to auditing this complex code and the interesting discoveries we made. This talk is ideal for anyone interested in blockchain security and code analysis.","start":1699972500000,"end":1699973400000,"stageId":"emirgan_2","speakers":[{"id":"philogy","name":"Philogy","bio":"Security researcher at Spearbit","eventId":"evm_summit","twitter":"","photo":"https://pbs.twimg.com/profile_images/1639232112287969280/pIBVpcfW_400x400.png"}],"playbackId":"","eventId":"evm_summit","coverImage":"/sessions/evm_summit/securing_assembly_lessons_from_the_solady_security_review.jpg"}
+{
+  "id": "securing_assembly_lessons_from_the_solady_security_review",
+  "name": "Securing Assembly: Lessons from the Solady Security Review",
+  "description": "A Dive into the Public Goods Security Review of Solady. In this presentation, our team explores the challenges of auditing Solady, a well-known library famous for its complex yet efficient code. We'll explain what Solady is and its importance in the field. Our main focus will be on our approach to auditing this complex code and the interesting discoveries we made. This talk is ideal for anyone interested in blockchain security and code analysis.",
+  "start": 1699972500000,
+  "end": 1699973400000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "philogy",
+      "name": "Philogy",
+      "bio": "Security researcher at Spearbit",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://pbs.twimg.com/profile_images/1639232112287969280/pIBVpcfW_400x400.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "evm_summit",
+  "coverImage": "sessions/evm_summit/securing_assembly_lessons_from_the_solady_security_review_thumbnail.png"
+}
