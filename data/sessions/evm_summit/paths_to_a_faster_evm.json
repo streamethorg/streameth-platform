@@ -15,7 +15,11 @@
       "photo": "https://evmsummit.org/images/speakers/dragan_rakita.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/5ac6i77jppm1czrh/index.m3u8",
+  "playbackId": "5ac6i77jppm1czrh",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/paths_to_a_faster_evm_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/paths_to_a_faster_evm_thumbnail.png",
+  "assetId": "5ac6eb2c-4a63-4a64-ad7a-72508418442f",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }
