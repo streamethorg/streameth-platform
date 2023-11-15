@@ -10,6 +10,8 @@ import {
   OffthreadVideo,
 } from 'remotion'
 import { CreateAvatar } from '../../utils/avatars'
+import { SessionSchema } from 'utils/mocks'
+import { z } from 'zod'
 
 export interface SpeakerProps {
   id: string
@@ -24,8 +26,8 @@ export interface SessionProps {
   speakers: SpeakerProps[]
 }
 
-export type Props = {
-  session: SessionProps
+type Props = {
+  session: z.infer<typeof SessionSchema>
 }
 
 export const Intro: React.FC<Props> = ({ session }) => {

@@ -1,8 +1,5 @@
 import {
-  Composition,
-  Folder,
-  Still,
-  continueRender,
+  Composition, Folder, Still, continueRender,
   delayRender,
   staticFile,
 } from 'remotion'
@@ -22,6 +19,7 @@ import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
 import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
 import { JoinVideos } from './join'
+import { SessionSchema } from '../utils/mocks'
 
 export function Compositions() {
   const waitForFont = delayRender()
@@ -172,8 +170,9 @@ export function Compositions() {
           height={1080}
           durationInFrames={219}
           fps={DevconnectFrameRate}
+          schema={SessionSchema as any}
           defaultProps={{
-            session: MOCK_SESSION[4],
+            session: MOCK_SESSION[0],
           }}
         />
 
