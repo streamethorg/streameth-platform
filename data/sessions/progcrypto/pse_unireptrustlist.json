@@ -1,1 +1,19 @@
-{"id":"pse_unireptrustlist","name":"PSE: Unirep/Trustlist","description":"11:00 - 14:00; Trustlist (https://trustlist.xyz/) is a peer-to-peer marketplace using zkp to improve upon an established marketplace model. Experience community trading while preserving member privacy, whether IRL or online.","start":1700208000000,"end":1700218800000,"stageId":"community_activations_hub","speakers":[{"id":"unirep_team","name":"Unirep Team","bio":"Team responsible for Unirep","eventId":"progcrypto"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/pse_unireptrustlist.jpg"}
+{
+  "id": "pse_unireptrustlist",
+  "name": "PSE: Unirep/Trustlist",
+  "description": "11:00 - 14:00; Trustlist (https://trustlist.xyz/) is a peer-to-peer marketplace using zkp to improve upon an established marketplace model. Experience community trading while preserving member privacy, whether IRL or online.",
+  "start": 1700208000000,
+  "end": 1700218800000,
+  "stageId": "community_activations_hub",
+  "speakers": [
+    {
+      "id": "unirep_team",
+      "name": "Unirep Team",
+      "bio": "Team responsible for Unirep",
+      "eventId": "progcrypto"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "coverImage": "/sessions/progcrypto/pse_unireptrustlist_thumbnail.png"
+}

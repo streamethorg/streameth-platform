@@ -1,1 +1,22 @@
-{"id":"intentcentric_information_flow_control_in_anoma","name":"Intent-centric Information Flow Control in Anoma","description":"In this workshop, we will discuss various approaches Anoma applies to provide information flow control in the counterparty discovery and settlement phases. These approaches include topics such as the resource model, Taiga, and private solving.","start":1700130600000,"end":1700132400000,"stageId":"dolmabahce_b__c","speakers":[{"id":"yulia_khalniyazova","name":"Yulia Khalniyazova","bio":"Yulia is a cryptography researcher working on Anoma","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1ttHddPkLVpnUYKZFWh_o62HOwDYJnkDg/view"}],"playbackId":"","eventId":"progcrypto","track":"ZK and Blockchains / zkEVMs","coverImage":"/sessions/progcrypto/intentcentric_information_flow_control_in_anoma.jpg"}
+{
+  "id": "intentcentric_information_flow_control_in_anoma",
+  "name": "Intent-centric Information Flow Control in Anoma",
+  "description": "In this workshop, we will discuss various approaches Anoma applies to provide information flow control in the counterparty discovery and settlement phases. These approaches include topics such as the resource model, Taiga, and private solving.",
+  "start": 1700130600000,
+  "end": 1700132400000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "yulia_khalniyazova",
+      "name": "Yulia Khalniyazova",
+      "bio": "Yulia is a cryptography researcher working on Anoma",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1ttHddPkLVpnUYKZFWh_o62HOwDYJnkDg/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "ZK and Blockchains / zkEVMs",
+  "coverImage": "/sessions/progcrypto/intentcentric_information_flow_control_in_anoma_thumbnail.png"
+}

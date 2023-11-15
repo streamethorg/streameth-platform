@@ -1,1 +1,22 @@
-{"id":"how_to_make_zkml_real","name":"How to make ZKML real","description":"ZKML (Zero-Knowledge Machine Learning) is not real... yet, according to this article (https://medium.com/@ModulusLabs/chapter-8-make-zkml-real-a3a355b2b756) by Modulus Labs. In this talk, we'll explore the current state of ZKML and the challenges hindering its realization. We will delve into the potential solutions to make ZKML a reality, drawing insights from Fully Homomorphic Encryption (FHE) and optimistic systems, among other approaches.","start":1700138700000,"end":1700140500000,"stageId":"auditorium","speakers":[{"id":"drcathiesoeth","name":"drCathieSo.eth","bio":"Cathie is a ZKML researcher at Privacy & Scaling Explorations (PSE), exploring the potential of verifiable computation with privacy in the blockchain. A serial hackathon winner, she believes ZKML is key to transitioning from Web2 to Web3.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1MV2ImCkMrqJhPfiuLF1u3vyX1KzqeO-W/view"}],"playbackId":"","eventId":"progcrypto","track":"Cryptography in the Wild","coverImage":"/sessions/progcrypto/how_to_make_zkml_real.jpg"}
+{
+  "id": "how_to_make_zkml_real",
+  "name": "How to make ZKML real",
+  "description": "ZKML (Zero-Knowledge Machine Learning) is not real... yet, according to this article (https://medium.com/@ModulusLabs/chapter-8-make-zkml-real-a3a355b2b756) by Modulus Labs. In this talk, we'll explore the current state of ZKML and the challenges hindering its realization. We will delve into the potential solutions to make ZKML a reality, drawing insights from Fully Homomorphic Encryption (FHE) and optimistic systems, among other approaches.",
+  "start": 1700138700000,
+  "end": 1700140500000,
+  "stageId": "auditorium",
+  "speakers": [
+    {
+      "id": "drcathiesoeth",
+      "name": "drCathieSo.eth",
+      "bio": "Cathie is a ZKML researcher at Privacy & Scaling Explorations (PSE), exploring the potential of verifiable computation with privacy in the blockchain. A serial hackathon winner, she believes ZKML is key to transitioning from Web2 to Web3.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1MV2ImCkMrqJhPfiuLF1u3vyX1KzqeO-W/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Cryptography in the Wild",
+  "coverImage": "/sessions/progcrypto/how_to_make_zkml_real_thumbnail.png"
+}

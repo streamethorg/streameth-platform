@@ -1,1 +1,21 @@
-{"id":"beyond_fuzzing_symbolic_testing_in_practice","name":"Beyond Fuzzing: Symbolic Testing in Practice","description":"Do you feel nervous when you’re about to deploy a new version of your protocol? Even if you follow all the best practices, it’s hard to be confident that your tests cover everything. This is where symbolic testing comes in, it is a powerful technique that can run tests on all possible inputs. Yet, getting started and writing effective symbolic tests can be very challenging. In this talk, we will build an intuition for how symbolic testing works, with no prior knowledge and no formal jargon. We will use this understanding to show how to write effective symbolic tests, drawing examples from real-world protocols.","start":1700136600000,"end":1700138400000,"stageId":"uskudar_2","speakers":[{"id":"daniel_karmacoma_reynaud","name":"Daniel \"karmacoma\" Reynaud","bio":"karma is a research engineering partner at a16z crypto, where he supports portfolio companies with protocol engineering. He is one of the authors of halmos, a smart contract symbolic execution testing tool.","eventId":"solidity_summit","twitter":"@0xkarmacoma","photo":"https://gcdnb.pbrd.co/images/CGRjWRguUEJb.png"}],"playbackId":"","eventId":"solidity_summit","coverImage":"/sessions/solidity_summit/beyond_fuzzing_symbolic_testing_in_practice.jpg"}
+{
+  "id": "beyond_fuzzing_symbolic_testing_in_practice",
+  "name": "Beyond Fuzzing: Symbolic Testing in Practice",
+  "description": "Do you feel nervous when you’re about to deploy a new version of your protocol? Even if you follow all the best practices, it’s hard to be confident that your tests cover everything. This is where symbolic testing comes in, it is a powerful technique that can run tests on all possible inputs. Yet, getting started and writing effective symbolic tests can be very challenging. In this talk, we will build an intuition for how symbolic testing works, with no prior knowledge and no formal jargon. We will use this understanding to show how to write effective symbolic tests, drawing examples from real-world protocols.",
+  "start": 1700136600000,
+  "end": 1700138400000,
+  "stageId": "uskudar_2",
+  "speakers": [
+    {
+      "id": "daniel_karmacoma_reynaud",
+      "name": "Daniel \"karmacoma\" Reynaud",
+      "bio": "karma is a research engineering partner at a16z crypto, where he supports portfolio companies with protocol engineering. He is one of the authors of halmos, a smart contract symbolic execution testing tool.",
+      "eventId": "solidity_summit",
+      "twitter": "@0xkarmacoma",
+      "photo": "https://gcdnb.pbrd.co/images/CGRjWRguUEJb.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/beyond_fuzzing_symbolic_testing_in_practice_thumbnail.png"
+}
