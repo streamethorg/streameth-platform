@@ -23,6 +23,7 @@
 }
 
 .dm3-billboard-widget {
+  position: relative;
   overflow: scroll !important;
 }
 .header {
@@ -30,6 +31,7 @@
 }
 .message-create-area {
   background-color: var(--messageBg25);
+  flex: 1;
 }
 .dm3-send-message-btn {
   background-color: var(--colors-accent) !important;
@@ -59,7 +61,9 @@
 
 .create-header {
   overflow: hidden !important;
-  /* width: 200px !important; */
+  flex-shrink: 1;
+  text-overflow: ellipsis;
+  width: 240px;
 }
 .message {
   color: #000 !important;
@@ -91,6 +95,18 @@
   padding: 12px 8px !important;
 }
 .scroll-to-bottom-button {
-  opacity: 1 !important;
+  opacity: 0.2 !important;
   margin-right: 2px !important;
+}
+.create-message {
+  position: sticky !important;
+  bottom: 0;
+  background-color: var(--colors-accent);
+  padding: 0px;
+  width: 100% !important;
+  padding-bottom: 5px;
+  z-index: 50;
+}
+.create-message .container {
+  gap: 10px;
 }
