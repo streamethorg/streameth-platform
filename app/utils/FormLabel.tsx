@@ -22,7 +22,7 @@ const FormLabel = ({
 }: FormLabelProps) => {
   return (
     <label
-      className={`relative text-lg text-accent flex items-center justify-between gap-1 mb-2 ${labelClassName} ${
+      className={`relative text-lg text-blue flex items-center justify-between gap-1 mb-2 ${labelClassName} ${
         toolTip && toolTipHTML
           ? 'before:content-[attr(data-hover)] before:w-[250px] before:invisible before:absolute before:left-[90px] before:-top-[30px] before:rounded-md before:bg-white before:transition-opacity before:z-40 before:px-4 before:py-1 before:text-sm before:border-1 before:text-center before:text-medGrey before:shadow-md before:opacity-0 hover:before:opacity-100 hover:before:visible'
           : ''

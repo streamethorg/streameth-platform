@@ -6,6 +6,7 @@ const colors = {
   'main-text': '#2b2b2b',
   'secondary-text': '#b1b0b4',
   'accent-text': '#3d5afe',
+  blue: '#351B71',
 }
 
 export default colors
