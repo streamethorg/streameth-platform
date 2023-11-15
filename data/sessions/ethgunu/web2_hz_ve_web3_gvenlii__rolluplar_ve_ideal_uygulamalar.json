@@ -15,7 +15,11 @@
       "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/cem.jpg?raw=true"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/6fd8o3gy5g2gn61h/index.m3u8",
+  "playbackId": "6fd8o3gy5g2gn61h",
   "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/web2_hz_ve_web3_gvenlii__rolluplar_ve_ideal_uygulamalar_thumbnail.png"
+  "coverImage": "/sessions/ethgunu/web2_hz_ve_web3_gvenlii__rolluplar_ve_ideal_uygulamalar_thumbnail.png",
+  "assetId": "6fd8408b-ce79-4b7e-9ef2-f5c16e824ccd",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
 }

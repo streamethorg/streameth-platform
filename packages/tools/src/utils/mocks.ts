@@ -58,7 +58,7 @@ export const MOCK_SPEAKERS = [
   },
 ]
 
-export const MOCK_SESSION = [
+export const MOCK_SESSION: z.infer<typeof SessionSchema>[] = [
   {
     id: 'buidl-the-buidlers_0',
     name: 'Buidl the Buidlers',
