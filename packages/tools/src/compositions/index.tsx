@@ -140,7 +140,7 @@ export function Compositions() {
           </Fragment>
         ))}
 
-      {/* <Composition
+        {/* <Composition
           id={'join-devconnect-ist'}
           component={Join}
           width={1920}
@@ -173,7 +173,7 @@ export function Compositions() {
           durationInFrames={219}
           fps={DevconnectFrameRate}
           defaultProps={{
-            session: MOCK_SESSION[0],
+            session: MOCK_SESSION[3],
           }}
         />
 
@@ -184,7 +184,7 @@ export function Compositions() {
           height={1344}
           durationInFrames={219}
           fps={DevconnectFrameRate}
-          defaultProps={{ session: MOCK_SESSION[1] }}
+          defaultProps={{ session: MOCK_SESSION[3] }}
         />
 
         <Still
@@ -193,11 +193,11 @@ export function Compositions() {
           width={1200}
           height={630}
           defaultProps={{
-            session: MOCK_SESSION[1],
+            session: MOCK_SESSION[3],
           }}
         />
 
-        <Composition
+        {/* <Composition
           id={'autonomous-worlds-assembly'}
           component={AwaIntro}
           width={1920}
@@ -217,7 +217,7 @@ export function Compositions() {
           defaultProps={{
             session: MOCK_SESSION[1],
           }}
-        />
+        /> */}
       </Folder>
 
       <Composition
