@@ -10,6 +10,7 @@ import {
   OffthreadVideo,
 } from 'remotion'
 import { CreateAvatar } from '../../utils/avatars'
+import { ProgCryptoProps } from './intro'
 
 export interface SpeakerProps {
   id: string
@@ -28,7 +29,9 @@ export type Props = {
   session: SessionProps
 }
 
-export const WideIntro: React.FC<Props> = ({ session }) => {
+export const WideIntro: React.FC<
+  Zod.infer<typeof ProgCryptoProps>
+> = ({ session }) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 

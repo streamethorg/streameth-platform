@@ -1,8 +1,10 @@
 import { AbsoluteFill, staticFile, Img } from 'remotion'
-import { Props } from './intro'
 import { CreateAvatar } from '../../utils/avatars'
+import { ProgCryptoProps } from './intro'
 
-export const Social: React.FC<Props> = ({ session }) => {
+export const Social: React.FC<Zod.infer<typeof ProgCryptoProps>> = ({
+  session,
+}) => {
   const bgFile = staticFile(`0xparc/images/Progcrypto_still.png`)
   const bgLogoFile = ''
   const logoFile = ''
