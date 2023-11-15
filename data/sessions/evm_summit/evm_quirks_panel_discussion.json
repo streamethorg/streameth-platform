@@ -47,7 +47,11 @@
       "photo": "https://evmsummit.org/images/speakers/ansgar_dietrichs.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/842be8wwo86cyri3/index.m3u8",
+  "playbackId": "842be8wwo86cyri3",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/evm_quirks_panel_discussion_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/evm_quirks_panel_discussion_thumbnail.png",
+  "assetId": "842b2cc5-7b61-46a9-aee4-21b93a7c7d88",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }

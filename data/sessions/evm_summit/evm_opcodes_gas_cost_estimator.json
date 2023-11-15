@@ -15,7 +15,11 @@
       "photo": "https://evmsummit.org/images/speakers/jacek_glen.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/1620m29bfutvh6we/index.m3u8",
+  "playbackId": "1620m29bfutvh6we",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/evm_opcodes_gas_cost_estimator_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/evm_opcodes_gas_cost_estimator_thumbnail.png",
+  "assetId": "162028df-8d00-4d3c-914b-5433d93047a9",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }

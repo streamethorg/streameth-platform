@@ -47,7 +47,11 @@
       "photo": "https://evmsummit.org/images/speakers/pawel_bylica.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/a234rkpcw87hpjce/index.m3u8",
+  "playbackId": "a234rkpcw87hpjce",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/evm_future_panel_discussion_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/evm_future_panel_discussion_thumbnail.png",
+  "assetId": "a234172a-bf35-487c-8e2d-bedfceea4a99",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }
