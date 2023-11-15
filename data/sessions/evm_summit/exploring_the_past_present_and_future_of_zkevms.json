@@ -1,1 +1,53 @@
-{"id":"exploring_the_past_present_and_future_of_zkevms","name":"Exploring the past, present, and future of zkEVMs","description":"The past two years have witnessed significant progress in zkEVMs, with several of them being launched. In this panel, we will delve into the challenges encountered and the approaches and solutions used to overcome them. Additionally, we aim to gain insight into the upcoming challenges and the goals to be achieved.","start":1699947000000,"end":1699950000000,"stageId":"emirgan_1","speakers":[{"id":"ben_livshitz","name":"Ben Livshitz","bio":"Ben is the VP of Research at Matter Labs and an associate professor at Imperial College London. Ben is a computer scientist with a Ph.D. in computer science from Stanford University, with an h-index of 57 and over 10,000 citations to his papers. He is an inventor skilled at translating academic research into industrial practice, a research manager leading high-performance applied research teams, and a professor. Most of his work has direct industrial applications. Currently, he serves as the VP of Research at Matter Labs. Previously, he led teams as the CEO of Zilliqa Research, a layer-1 blockchain, and as the Chief Scientist at Brave Software, leading innovative development across cryptography, machine learning, performance, security, privacy, and other domains. For many years, he worked as a researcher at Microsoft Research in Seattle. He has also taught at UW, MIT, and Imperial College London. He has also filed dozens of patents based on his inventions.","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/ben_livshitz.jpg"},{"id":"jordi_baylina","name":"Jordi Baylina","bio":"Jordi is an early adopter of Web3 technologies. He co-founded and became an active member of the White Hat Group, which played a major role in rescuing funds from TheDAO and Parity Multisig hacks. Jordi has also co-founded several Web3 startups including Giveth.io, the first donation tracking platform on Ethereum. He has also co-founded DAppNode, Iden3, and Polygon Hermez. Currently, Jordi serves as the Technical Lead at Polygon Hermez zkRollup and is working on implementing the first complete zkEVM proving system.","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/jordi_baylina.jpg"},{"id":"eduard_sanou","name":"Eduard Sanou","bio":"Learned zk in iden3 (now Polygon Hermez) while developing a decentralized identity protocol, and later a zkRollup.  Now working on the zkEVM CE project in PSE (EF) for nearly 2 years","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/eduard_sanou.jpg"},{"id":"rami_khalil","name":"Rami Khalil","bio":"Rami is part of the zeth team at RISC Zero. He received his PhD from Imperial College London, where he researched layer-one and layer-two blockchain mechanisms.","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/rami_khalil.jpg"},{"id":"haichen_shen","name":"Haichen Shen","bio":"Co-founder at Scroll","eventId":"evm_summit","twitter":"","photo":"https://media.licdn.com/dms/image/C5603AQEK-WctjqOe7g/profile-displayphoto-shrink_800_800/0/1650219596205?e=1704931200&v=beta&t=VQ--g8RSL0uuHDqpjgoJGQaEB2_wA48XdZoLarIWOjU"}],"playbackId":"","eventId":"evm_summit","coverImage":"/sessions/evm_summit/exploring_the_past_present_and_future_of_zkevms.jpg"}
+{
+  "id": "exploring_the_past_present_and_future_of_zkevms",
+  "name": "Exploring the past, present, and future of zkEVMs",
+  "description": "The past two years have witnessed significant progress in zkEVMs, with several of them being launched. In this panel, we will delve into the challenges encountered and the approaches and solutions used to overcome them. Additionally, we aim to gain insight into the upcoming challenges and the goals to be achieved.",
+  "start": 1699947000000,
+  "end": 1699950000000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "ben_livshitz",
+      "name": "Ben Livshitz",
+      "bio": "Ben is the VP of Research at Matter Labs and an associate professor at Imperial College London. Ben is a computer scientist with a Ph.D. in computer science from Stanford University, with an h-index of 57 and over 10,000 citations to his papers. He is an inventor skilled at translating academic research into industrial practice, a research manager leading high-performance applied research teams, and a professor. Most of his work has direct industrial applications. Currently, he serves as the VP of Research at Matter Labs. Previously, he led teams as the CEO of Zilliqa Research, a layer-1 blockchain, and as the Chief Scientist at Brave Software, leading innovative development across cryptography, machine learning, performance, security, privacy, and other domains. For many years, he worked as a researcher at Microsoft Research in Seattle. He has also taught at UW, MIT, and Imperial College London. He has also filed dozens of patents based on his inventions.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/ben_livshitz.jpg"
+    },
+    {
+      "id": "jordi_baylina",
+      "name": "Jordi Baylina",
+      "bio": "Jordi is an early adopter of Web3 technologies. He co-founded and became an active member of the White Hat Group, which played a major role in rescuing funds from TheDAO and Parity Multisig hacks. Jordi has also co-founded several Web3 startups including Giveth.io, the first donation tracking platform on Ethereum. He has also co-founded DAppNode, Iden3, and Polygon Hermez. Currently, Jordi serves as the Technical Lead at Polygon Hermez zkRollup and is working on implementing the first complete zkEVM proving system.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/jordi_baylina.jpg"
+    },
+    {
+      "id": "eduard_sanou",
+      "name": "Eduard Sanou",
+      "bio": "Learned zk in iden3 (now Polygon Hermez) while developing a decentralized identity protocol, and later a zkRollup.  Now working on the zkEVM CE project in PSE (EF) for nearly 2 years",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/eduard_sanou.jpg"
+    },
+    {
+      "id": "rami_khalil",
+      "name": "Rami Khalil",
+      "bio": "Rami is part of the zeth team at RISC Zero. He received his PhD from Imperial College London, where he researched layer-one and layer-two blockchain mechanisms.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/rami_khalil.jpg"
+    },
+    {
+      "id": "haichen_shen",
+      "name": "Haichen Shen",
+      "bio": "Co-founder at Scroll",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://media.licdn.com/dms/image/C5603AQEK-WctjqOe7g/profile-displayphoto-shrink_800_800/0/1650219596205?e=1704931200&v=beta&t=VQ--g8RSL0uuHDqpjgoJGQaEB2_wA48XdZoLarIWOjU"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/exploring_the_past_present_and_future_of_zkevms_thumbnail.png"
+}

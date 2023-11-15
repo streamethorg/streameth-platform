@@ -11,8 +11,8 @@ export const Social: React.FC<Props> = ({ type, session, id }) => {
     function titleClassName() {
         let className = 'w-full text-center'
         if (session.name.length >= 140) className += ' text-6xl leading-none'
-        if (session.name.length > 60 && session.name.length < 140) className += ' text-7xl leading-tight'
-        if (session.name.length > 40 && session.name.length < 60) className += ' text-7xl leading-tight'
+        if (session.name.length >= 60 && session.name.length < 140) className += ' text-7xl leading-tight'
+        if (session.name.length >= 40 && session.name.length < 60) className += ' text-7xl leading-tight'
         if (session.name.length < 40) className += ' text-8xl'
 
         return className

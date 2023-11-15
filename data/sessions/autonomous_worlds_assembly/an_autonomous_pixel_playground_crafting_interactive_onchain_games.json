@@ -1,1 +1,37 @@
-{"id":"an_autonomous_pixel_playground_crafting_interactive_onchain_games","name":"An Autonomous Pixel Playground: Crafting Interactive Onchain Games","description":"In this workshop, we'll cover the process of permissionlessly creating pixel-based onchain games, using PixeLAW as our case study. Conversations on this topic are frequently theoretical; our workshop aims to shift that narrative by discussing the different stages of designing and building interactive and interoperable games. Namely,\n1. Initiation and building.\n2. Evolution through cooperation of different game creators and players.\n3. Emergence of new, unexpected gaming experiences.","start":1700118000000,"end":1700121600000,"stageId":"beylerbeyi_1","speakers":[{"id":"john_k","name":"John K","bio":"John K is a product-centered entrepreneur with five years of experience in crafting consumer software products. He is now working with PixeLAW to create a fully functional and interoperable pixel-based Autonomous World.","eventId":"autonomous_worlds_assembly","twitter":"@OwnerOfJK","photo":"https://drive.google.com/uc?id=1mjn2ZpJA6WJxd9MCY5tnzonWd-9Apnkn"},{"id":"syora","name":"Syora","bio":"Syora is a developer working on PixeLAW. Previously, he was the CTO of an AI company.","eventId":"autonomous_worlds_assembly","twitter":"@0xsyora","photo":"https://drive.google.com/uc?id=15WASxUGcWg9N6g-iiMNeeSy1gsvPN12f"},{"id":"caspar","name":"Caspar","bio":"Caspar, a seasoned tech executive, is the current CTO of Oost&Voort Inc. He has been a significant figure in the Filipino blockchain community since 2017 and co-founded Blockdevs Asia. Currently, he's delving into Autonomous Worlds and zero knowledge proofs with PixeLAW.","eventId":"autonomous_worlds_assembly","twitter":"@coostendorp_tw","photo":"https://drive.google.com/uc?id=1RYRzwG3jWBteN4KABRcFejxXRJZhIybg"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/an_autonomous_pixel_playground_crafting_interactive_onchain_games.jpg"}
+{
+  "id": "an_autonomous_pixel_playground_crafting_interactive_onchain_games",
+  "name": "An Autonomous Pixel Playground: Crafting Interactive Onchain Games",
+  "description": "In this workshop, we'll cover the process of permissionlessly creating pixel-based onchain games, using PixeLAW as our case study. Conversations on this topic are frequently theoretical; our workshop aims to shift that narrative by discussing the different stages of designing and building interactive and interoperable games. Namely,\n1. Initiation and building.\n2. Evolution through cooperation of different game creators and players.\n3. Emergence of new, unexpected gaming experiences.",
+  "start": 1700118000000,
+  "end": 1700121600000,
+  "stageId": "beylerbeyi_1",
+  "speakers": [
+    {
+      "id": "john_k",
+      "name": "John K",
+      "bio": "John K is a product-centered entrepreneur with five years of experience in crafting consumer software products. He is now working with PixeLAW to create a fully functional and interoperable pixel-based Autonomous World.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@OwnerOfJK",
+      "photo": "https://drive.google.com/uc?id=1mjn2ZpJA6WJxd9MCY5tnzonWd-9Apnkn"
+    },
+    {
+      "id": "syora",
+      "name": "Syora",
+      "bio": "Syora is a developer working on PixeLAW. Previously, he was the CTO of an AI company.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@0xsyora",
+      "photo": "https://drive.google.com/uc?id=15WASxUGcWg9N6g-iiMNeeSy1gsvPN12f"
+    },
+    {
+      "id": "caspar",
+      "name": "Caspar",
+      "bio": "Caspar, a seasoned tech executive, is the current CTO of Oost&Voort Inc. He has been a significant figure in the Filipino blockchain community since 2017 and co-founded Blockdevs Asia. Currently, he's delving into Autonomous Worlds and zero knowledge proofs with PixeLAW.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@coostendorp_tw",
+      "photo": "https://drive.google.com/uc?id=1RYRzwG3jWBteN4KABRcFejxXRJZhIybg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/an_autonomous_pixel_playground_crafting_interactive_onchain_games_thumbnail.png"
+}
