@@ -9,6 +9,7 @@ import {
   Img,
   OffthreadVideo,
 } from 'remotion'
+import { CreateAvatar } from '../../utils/avatars'
 
 export interface SpeakerProps {
   id: string
@@ -75,11 +76,11 @@ export const Intro: React.FC<Props> = ({ session }) => {
   function titleClassName() {
     let className = 'w-full text-center'
     if (session.name.length >= 140)
-      className += ' text-8xl leading-none'
+      className += ' text-5xl leading-none'
     if (session.name.length >= 60 && session.name.length < 140)
-      className += ' text-8xl leading-tight'
+      className += ' text-6xl leading-tight'
     if (session.name.length >= 40 && session.name.length < 60)
-      className += ' text-9xl leading-tight'
+      className += ' text-6xl leading-tight'
     if (session.name.length < 40)
       className += ' text-9xl leading-tight'
 
@@ -155,7 +156,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                 frame < durationInFrames - 100
                   ? delayedOpacity
                   : endingOpactity,
-              transform: `translateY(${translateYValue - 100}px)`,
+              transform: `translateY(${translateYValue - 50}px)`,
             }}>
             <Sequence
               name="Speakers"
@@ -171,6 +172,10 @@ export const Intro: React.FC<Props> = ({ session }) => {
                       <div
                         key={i.id}
                         className="flex flex-col items-center gap-4">
+                        <Img
+                          className="w-20 object-cover rounded-full border-black shadow-md"
+                          src={i.photo ?? CreateAvatar(i.name)}
+                        />
                         <span className="text-3xl w-48 text-center leading-normal">
                           {i.name}
                         </span>

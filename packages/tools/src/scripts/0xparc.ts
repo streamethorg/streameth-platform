@@ -14,7 +14,14 @@ import {
   UploadDrive,
   UploadOrUpdate,
 } from 'services/slides'
-import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from 'fs'
 import { validImageUrl } from 'utils/avatars'
 
 const updateSessionThumbnails = true
@@ -41,10 +48,13 @@ async function start(args: string[]) {
   console.log('- API base uri', apiBaseUri)
   console.log('- force rendering', force)
 
-  let eventsToRender = [{ id: 'autonomous_worlds_assembly' }] // { id: 'progcrypto' },
+  let eventsToRender = [{ id: 'progcrypto' }] //[{ id: 'autonomous_worlds_assembly' }]
   const res = await fetch(`${apiBaseUri}/events`)
-  let events = (await res.json()).filter((i: any) => i.archiveMode === false)
-    .filter((event: any) => eventsToRender.some(i => i.id === event.id))
+  let events = (await res.json())
+    .filter((i: any) => i.archiveMode === false)
+    .filter((event: any) =>
+      eventsToRender.some((i) => i.id === event.id)
+    )
 
   if (args.length > 0) {
     const event = args[0]
@@ -103,8 +113,16 @@ async function generateEventAssets(event: any) {
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
-  const dataSessionFolder = join(process.cwd(), '../../data/sessions', event.id)
-  const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
+  const dataSessionFolder = join(
+    process.cwd(),
+    '../../data/sessions',
+    event.id
+  )
+  const publicEventFolder = join(
+    process.cwd(),
+    '../../public/sessions',
+    event.id
+  )
   mkdirSync(eventFolder, { recursive: true })
   mkdirSync(publicEventFolder, { recursive: true })
 
@@ -213,13 +231,15 @@ async function generateEventAssets(event: any) {
               )) ?? false
 
             if (!thumbnailExported || force) {
-              const frameNr = composition.id.includes('autonomous') ? 132 : composition.durationInFrames - 1
+              const frameNr = composition.id.includes('autonomous')
+                ? 132
+                : composition.durationInFrames - 1
               const exists = fileExists(thumbnailFilePath)
               if (!exists || force) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
-                  frame: frameNr, // Fixed frame for AWA 
+                  frame: frameNr, // Fixed frame for AWA
                   output: thumbnailFilePath,
                   inputProps: inputProps,
                 })
@@ -233,18 +253,33 @@ async function generateEventAssets(event: any) {
               )
             }
 
-            if (updateSessionThumbnails && fileExists(thumbnailFilePath)) {
+            if (
+              updateSessionThumbnails &&
+              fileExists(thumbnailFilePath)
+            ) {
               const copyPath = join(publicEventFolder, thumbnailId)
               copyFileSync(thumbnailFilePath, copyPath)
 
-              // update session file 
-              const sessionFilePath = join(dataSessionFolder, `${session.id}.json`)
+              // update session file
+              const sessionFilePath = join(
+                dataSessionFolder,
+                `${session.id}.json`
+              )
               if (existsSync(sessionFilePath)) {
-                const sessionFile = JSON.parse(readFileSync(sessionFilePath, 'utf8'))
-                writeFileSync(sessionFilePath, JSON.stringify({
-                  ...sessionFile,
-                  coverImage: `/sessions/${event.id}/${thumbnailId}`
-                }, null, 2))
+                const sessionFile = JSON.parse(
+                  readFileSync(sessionFilePath, 'utf8')
+                )
+                writeFileSync(
+                  sessionFilePath,
+                  JSON.stringify(
+                    {
+                      ...sessionFile,
+                      coverImage: `/sessions/${event.id}/${thumbnailId}`,
+                    },
+                    null,
+                    2
+                  )
+                )
               }
             }
           }

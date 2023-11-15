@@ -9,7 +9,7 @@ import {
   Img,
   OffthreadVideo,
 } from 'remotion'
-// import AlphaVideo from './0xparc/intro/IST_Progcrypto_Intro.mov'
+import { CreateAvatar } from '../../utils/avatars'
 
 export interface SpeakerProps {
   id: string
@@ -69,18 +69,18 @@ export const WideIntro: React.FC<Props> = ({ session }) => {
       ? interpolate(
           frame,
           [durationInFrames - 25, durationInFrames],
-          [350, 220]
+          [280, 350]
         )
-      : 350
+      : 280
 
   function titleClassName() {
     let className = 'w-full text-center'
     if (session.name.length >= 140)
-      className += ' text-8xl leading-none'
+      className += ' text-7xl leading-none'
     if (session.name.length > 60 && session.name.length < 140)
-      className += ' text-8xl leading-tight'
+      className += ' text-7xl leading-tight'
     if (session.name.length > 40 && session.name.length < 60)
-      className += ' text-9xl leading-tight'
+      className += ' text-8xl leading-tight'
     if (session.name.length < 40)
       className += ' text-9xl leading-tight'
 
@@ -156,7 +156,7 @@ export const WideIntro: React.FC<Props> = ({ session }) => {
                 frame < durationInFrames - 100
                   ? delayedOpacity
                   : endingOpactity,
-              transform: `translateY(${translateYValue - 100}px)`,
+              transform: `translateY(${translateYValue - 70}px)`,
             }}>
             <Sequence
               name="Speakers"
@@ -172,7 +172,11 @@ export const WideIntro: React.FC<Props> = ({ session }) => {
                       <div
                         key={i.id}
                         className="flex flex-col items-center gap-4">
-                        <span className="text-3xl w-48 text-center leading-normal">
+                        <Img
+                          className="w-40 object-cover rounded-full border-black shadow-md"
+                          src={i.photo ?? CreateAvatar(i.name)}
+                        />
+                        <span className="text-4xl w-48 text-center leading-normal border-black">
                           {i.name}
                         </span>
                       </div>
