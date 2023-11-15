@@ -13,9 +13,9 @@ export const Social: React.FC<Props> = ({ session }) => {
       className += ' text-xl leading-none'
     if (session.name.length >= 60 && session.name.length < 140)
       className += ' text-2xl leading-tight'
-    if (session.name.length >= 40 && session.name.length < 60)
+    if (session.name.length >= 30 && session.name.length < 60)
       className += ' text-3xl leading-tight'
-    if (session.name.length < 40) className += ' text-5xl'
+    if (session.name.length < 30) className += ' text-5xl'
 
     return className
   }

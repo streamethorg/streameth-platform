@@ -196,24 +196,49 @@ async function generateEventAssets(event: any) {
 
         // Only render compositions that have frames
         if (composition.durationInFrames > 1) {
-          const id = `${session.id}_intro.mp4`
-          const type = 'video/mp4'
-          const introFilePath = `${eventFolder}/${id}`
+          if (composition.id.includes('wide')) {
+            const id = `${session.id}_intro-wide.mov`
+            const type = 'video/mov'
+            const introFilePath = `${eventFolder}/${id}`
 
-          if (folderId) {
-            const fileExported =
-              (await FileExists(id, type, folderId)) ?? false
-            if (!fileExported || force) {
-              const exists = fileExists(introFilePath)
-              if (!exists || force) {
-                await renderMedia({
-                  codec: 'h264',
-                  composition: inputComposition,
-                  serveUrl: bundled,
-                  outputLocation: introFilePath,
-                  inputProps,
-                  // onProgress,
-                })
+            if (folderId) {
+              const fileExported =
+                (await FileExists(id, type, folderId)) ?? false
+              if (!fileExported || force) {
+                const exists = fileExists(introFilePath)
+                if (!exists || force) {
+                  await renderMedia({
+                    codec: 'prores',
+                    proResProfile: '4444', // Support Alpha Channel
+                    composition: inputComposition,
+                    serveUrl: bundled,
+                    outputLocation: introFilePath,
+                    inputProps,
+                    // onProgress,
+                  })
+                }
+              } else {
+                const id = `${session.id}_intro.mp4`
+                const type = 'video/mp4'
+                const introFilePath = `${eventFolder}/${id}`
+
+                if (folderId) {
+                  const fileExported =
+                    (await FileExists(id, type, folderId)) ?? false
+                  if (!fileExported || force) {
+                    const exists = fileExists(introFilePath)
+                    if (!exists || force) {
+                      await renderMedia({
+                        codec: 'h264',
+                        composition: inputComposition,
+                        serveUrl: bundled,
+                        outputLocation: introFilePath,
+                        inputProps,
+                        // onProgress,
+                      })
+                    }
+                  }
+                }
               }
 
               upload(id, introFilePath, type, folderId)
@@ -239,7 +264,7 @@ async function generateEventAssets(event: any) {
                 await renderStill({
                   composition: inputComposition,
                   serveUrl: bundled,
-                  frame: frameNr, // Fixed frame for AWA
+                  frame: frameNr, // Fixed frame for progcrypto
                   output: thumbnailFilePath,
                   inputProps: inputProps,
                 })

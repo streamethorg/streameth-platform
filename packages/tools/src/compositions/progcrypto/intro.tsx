@@ -79,9 +79,9 @@ export const Intro: React.FC<Props> = ({ session }) => {
       className += ' text-5xl leading-none'
     if (session.name.length >= 60 && session.name.length < 140)
       className += ' text-6xl leading-tight'
-    if (session.name.length >= 40 && session.name.length < 60)
+    if (session.name.length >= 30 && session.name.length < 60)
       className += ' text-6xl leading-tight'
-    if (session.name.length < 40)
+    if (session.name.length < 20)
       className += ' text-9xl leading-tight'
 
     return className
