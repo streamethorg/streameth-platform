@@ -40,8 +40,8 @@ export default async function Home() {
     })
   const stageController = new StageController()
   const stage = await stageController.getStage(
-    'emirgan_1',
-    'evm_summit'
+    'beyazit',
+    'autonomous_worlds_assembly'
   )
 
   return (
@@ -90,35 +90,37 @@ export default async function Home() {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'StreamETH',
-  description:
-    'The complete solution to host your hybrid or virtual event.',
-  metadataBase: new URL('https://app.streameth.org'),
-  openGraph: {
-    title: 'StreamETH',
-    siteName: 'StreamETH',
-    description:
-      'The complete solution to host your hybrid or virtual event.',
-    images: {
-      url: 'https://app.streameth.org/banner.png',
-      alt: 'StreamETH Logo',
-    },
-  },
-  twitter: {
-    card: 'summary_large_image',
+export const generateMetadata = async () => {
+  return {
     title: 'StreamETH',
     description:
       'The complete solution to host your hybrid or virtual event.',
-    images: {
-      url: 'https://app.streameth.org/banner.png',
-      alt: 'StreamETH Logo',
+    metadataBase: new URL('https://app.streameth.org'),
+    openGraph: {
+      title: 'StreamETH',
+      siteName: 'StreamETH',
+      description:
+        'The complete solution to host your hybrid or virtual event.',
+      images: {
+        url: 'https://app.streameth.org/banner.png',
+        alt: 'StreamETH Logo',
+      },
     },
-  },
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en-US',
+    twitter: {
+      card: 'summary_large_image',
+      title: 'StreamETH',
+      description:
+        'The complete solution to host your hybrid or virtual event.',
+      images: {
+        url: 'https://app.streameth.org/banner.png',
+        alt: 'StreamETH Logo',
+      },
     },
-  },
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en-US': '/en-US',
+      },
+    },
+  }
 }
