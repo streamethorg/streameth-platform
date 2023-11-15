@@ -15,7 +15,11 @@
       "photo": "https://evmsummit.org/images/speakers/danno_ferrin.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/0af6gf966ho9jo27/index.m3u8",
+  "playbackId": "0af6gf966ho9jo27",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/issues_in_evm_equivalence_thumbnail.png"
+  "coverImage": "/sessions/evm_summit/issues_in_evm_equivalence_thumbnail.png",
+  "assetId": "0af65835-1f4b-4351-bb1e-2357fc82738e",
+  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+  "videoType": "clip"
 }
