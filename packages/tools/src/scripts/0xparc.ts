@@ -196,27 +196,52 @@ async function generateEventAssets(event: any) {
 
         // Only render compositions that have frames
         if (composition.durationInFrames > 1) {
-          const id = `${session.id}_intro.mp4`
-          const type = 'video/mp4'
-          const introFilePath = `${eventFolder}/${id}`
-
           if (folderId) {
-            const fileExported =
-              (await FileExists(id, type, folderId)) ?? false
-            if (!fileExported || force) {
-              const exists = fileExists(introFilePath)
-              if (!exists || force) {
-                await renderMedia({
-                  codec: 'h264',
-                  composition: inputComposition,
-                  serveUrl: bundled,
-                  outputLocation: introFilePath,
-                  inputProps,
-                  // onProgress,
-                })
-              }
+            if (composition.id.includes('wide')) {
+              const id = `${session.id}_intro-wide.mov`
+              const type = 'video/mov'
+              const introFilePath = `${eventFolder}/${id}`
 
-              upload(id, introFilePath, type, folderId)
+              const fileExported =
+                (await FileExists(id, type, folderId)) ?? false
+              if (!fileExported || force) {
+                const exists = fileExists(introFilePath)
+                if (!exists || force) {
+                  await renderMedia({
+                    codec: 'prores',
+                    proResProfile: '4444',
+                    composition: inputComposition,
+                    serveUrl: bundled,
+                    outputLocation: introFilePath,
+                    inputProps,
+                    // onProgress,
+                  })
+                }
+
+                upload(id, introFilePath, type, folderId)
+              }
+            } else {
+              const id = `${session.id}_intro.mp4`
+              const type = 'video/mp4'
+              const introFilePath = `${eventFolder}/${id}`
+
+              const fileExported =
+                (await FileExists(id, type, folderId)) ?? false
+              if (!fileExported || force) {
+                const exists = fileExists(introFilePath)
+                if (!exists || force) {
+                  await renderMedia({
+                    codec: 'h264',
+                    composition: inputComposition,
+                    serveUrl: bundled,
+                    outputLocation: introFilePath,
+                    inputProps,
+                    // onProgress,
+                  })
+                }
+
+                upload(id, introFilePath, type, folderId)
+              }
             }
 
             // Generate a still from the same composition's last frame

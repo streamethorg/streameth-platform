@@ -16,8 +16,9 @@ import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
 import LivepeerIcon from '@/app/assets/icons/LivepeerIcon'
 import Chat from '@/plugins/Chat'
+import { IEvent } from '@/server/model/event'
 
-export default function StageLayout() {
+export default function StageLayout({ event }: { event: IEvent }) {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
   const [playerHeight, setPlayerHeight] = useState(0)
@@ -48,12 +49,15 @@ export default function StageLayout() {
         content: <SessionList sessions={sessions} />,
       })
     }
-    tabs.push({
-      id: 'chat',
-      header: <ChatBubbleBottomCenterIcon />,
-      // content: <Dm3 />,
-      content: <Chat conversationId={stage.id} />,
-    })
+    {
+      !event?.plugins?.disableChat &&
+        tabs.push({
+          id: 'chat',
+          header: <ChatBubbleBottomCenterIcon />,
+          // content: <Dm3 />,
+          content: <Chat conversationId={stage.id} />,
+        })
+    }
 
     return tabs
   }

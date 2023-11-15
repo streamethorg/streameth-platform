@@ -32,5 +32,8 @@
     }
   ],
   "startTime": "10:00",
-  "endTime": "18:00"
+  "endTime": "18:00",
+  "plugins": {
+    "disableChat": true
+  }
 }
