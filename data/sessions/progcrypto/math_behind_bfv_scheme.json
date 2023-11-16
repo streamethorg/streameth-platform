@@ -1,7 +1,7 @@
 {
   "id": "math_behind_bfv_scheme",
   "name": "Math behind BFV scheme",
-  "description": "",
+  "description": "I will go over a RLWE problem to construct a public key BFV scheme of FHE. This talk is going to be a TLDR of whiteboard math session of FHE workshop at 13:30 on Friday.",
   "start": 1700210700000,
   "end": 1700211600000,
   "stageId": "dolmabahce_b__c",
