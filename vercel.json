@@ -1,8 +1,7 @@
 {
-    "functions": {
-      "**": {
-        "excludeFiles": "{.next,*.cache,node_modules,public,app}/**"
-      }
+  "functions": {
+    "api/**": {
+      "excludeFiles": "/public/**"
     }
   }
-  
+}
