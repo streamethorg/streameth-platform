@@ -21,6 +21,7 @@ const ArchivedSession = ({
           quality={60}
           src={session.coverImage!}
           fill
+          unoptimized
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           style={{
             objectFit: 'cover',
