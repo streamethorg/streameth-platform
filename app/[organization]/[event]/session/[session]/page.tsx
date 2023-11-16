@@ -30,10 +30,10 @@ interface Params {
 
 export default async function Page({ params }: Params) {
   const eController = new EventController()
-  const event = await eController.getEvent(
-    params.event,
-    params.organization
-  )
+  // const event = await eController.getEvent(
+  //   params.event,
+  //   params.organization
+  // )
 
   const sController = new SessionController()
   const session = await sController.getSession(
@@ -57,7 +57,7 @@ export default async function Page({ params }: Params) {
       params={params.organization}
       nextSession={nextSession}
       session={session}
-      event={event.toJson()}
+      // event={event.toJson()}
     />
   )
 }

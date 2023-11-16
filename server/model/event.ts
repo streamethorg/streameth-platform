@@ -135,7 +135,7 @@ export default class Event implements IEvent {
     this.dataExporter = dataExporter
     this.startTime = startTime
     this.endTime = endTime
-    this.enableVideoDownloader = enableVideoDownloader ?? true
+    // this.enableVideoDownloader = enableVideoDownloader ?? true
     this.unlisted = unlisted ?? false
     this.plugins = plugins
     // this.validateThis();
