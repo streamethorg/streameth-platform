@@ -17,7 +17,7 @@
   ],
   "eventCover": "EVM_summit_cover.jpeg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "EVM_Summit_logo.png",
   "banner": "EVM_Summit_Banner.jpeg",

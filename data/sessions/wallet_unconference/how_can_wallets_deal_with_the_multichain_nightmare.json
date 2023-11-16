@@ -1,1 +1,21 @@
-{"id":"how_can_wallets_deal_with_the_multichain_nightmare","name":"How can wallets deal with the multichain nightmare?","description":"Multichain token transfers are broken. Keystore contracts are one way of solving the identity problem of token transfers in a multichain environment.  We at Peanute have proposed an alternative solution that relies on offchain messages; it is more user-friendly and does not require the middleware stack or wallets to be rebuilt. Let's talk through pro's and con's of multiple approaches.","start":1700227800000,"end":1700229600000,"stageId":"beyazit","speakers":[{"id":"konrad_urban","name":"Konrad Urban","bio":"Konrad is the co-founder of Peanut Protocol. He is interested in intents, identity, and real-life use cases for decentralisation. He likes collaborating and wants to build things with you.","eventId":"wallet_unconference","twitter":"@PeanutProtocol","photo":"https://speak.ticketh.xyz/media/avatars/kkonrad-no-bg_1_8WP5vgS.png"}],"playbackId":"","eventId":"wallet_unconference","coverImage":"/sessions/wallet_unconference/how_can_wallets_deal_with_the_multichain_nightmare.jpg"}
+{
+  "id": "how_can_wallets_deal_with_the_multichain_nightmare",
+  "name": "How can wallets deal with the multichain nightmare?",
+  "description": "Multichain token transfers are broken. Keystore contracts are one way of solving the identity problem of token transfers in a multichain environment.  We at Peanute have proposed an alternative solution that relies on offchain messages; it is more user-friendly and does not require the middleware stack or wallets to be rebuilt. Let's talk through pro's and con's of multiple approaches.",
+  "start": 1700227800000,
+  "end": 1700229600000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "konrad_urban",
+      "name": "Konrad Urban",
+      "bio": "Konrad is the co-founder of Peanut Protocol. He is interested in intents, identity, and real-life use cases for decentralisation. He likes collaborating and wants to build things with you.",
+      "eventId": "wallet_unconference",
+      "twitter": "@PeanutProtocol",
+      "photo": "https://speak.ticketh.xyz/media/avatars/kkonrad-no-bg_1_8WP5vgS.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/how_can_wallets_deal_with_the_multichain_nightmare_thumbnail.png"
+}

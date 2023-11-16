@@ -1,1 +1,21 @@
-{"id":"revolutionizing_crypto_wallet_ux_a_glimpse_into_the_future","name":"Revolutionizing Crypto Wallet UX: A Glimpse into the Future","description":"The talk will explore the role of crypto wallet UX in driving mass adoption. We will cover advancements in Passkeys, the transformative potential of Interchain Accounts for cross-chain asset management, and the concept of cross-chain composability. Attendees will also gain insights into the latest UX-related Ethereum Improvement Proposals (EIPs).","start":1700212500000,"end":1700213400000,"stageId":"beyazit","speakers":[{"id":"federico_kunze_kllmer","name":"Federico Kunze Küllmer","bio":"Founder at Evmos, CEO at Altiplanic. Previously Federico built the reference implementation of Ethermint, the IBC Protocol and Cosmos SDK as a Core Protocol Engineer at Interchain, Tendermint, and Ethermint.","eventId":"wallet_unconference","twitter":"@fekunze","photo":"https://speak.ticketh.xyz/media/avatars/IMG_0280_0Bw0jIf.jpeg"}],"playbackId":"","eventId":"wallet_unconference","coverImage":"/sessions/wallet_unconference/revolutionizing_crypto_wallet_ux_a_glimpse_into_the_future.jpg"}
+{
+  "id": "revolutionizing_crypto_wallet_ux_a_glimpse_into_the_future",
+  "name": "Revolutionizing Crypto Wallet UX: A Glimpse into the Future",
+  "description": "The talk will explore the role of crypto wallet UX in driving mass adoption. We will cover advancements in Passkeys, the transformative potential of Interchain Accounts for cross-chain asset management, and the concept of cross-chain composability. Attendees will also gain insights into the latest UX-related Ethereum Improvement Proposals (EIPs).",
+  "start": 1700212500000,
+  "end": 1700213400000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "federico_kunze_kllmer",
+      "name": "Federico Kunze Küllmer",
+      "bio": "Founder at Evmos, CEO at Altiplanic. Previously Federico built the reference implementation of Ethermint, the IBC Protocol and Cosmos SDK as a Core Protocol Engineer at Interchain, Tendermint, and Ethermint.",
+      "eventId": "wallet_unconference",
+      "twitter": "@fekunze",
+      "photo": "https://speak.ticketh.xyz/media/avatars/IMG_0280_0Bw0jIf.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/revolutionizing_crypto_wallet_ux_a_glimpse_into_the_future_thumbnail.png"
+}
