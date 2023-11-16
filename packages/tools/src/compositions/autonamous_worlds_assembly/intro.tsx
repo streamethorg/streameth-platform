@@ -1,9 +1,7 @@
 import {
   Sequence,
   AbsoluteFill,
-  staticFile,
-  Audio,
-  useVideoConfig,
+  staticFile, Audio, useVideoConfig,
   useCurrentFrame,
   interpolate,
   Img,
@@ -33,7 +31,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 
-  const audioFile = staticFile('0xparc/audio/IST_material-sound.mp3')
+  const audioFile = staticFile('0xparc/audio/going-deeper_faded.mp4')
   const introFile = staticFile(`0xparc/intro/IST_AWA_Intro.mp4`)
   const bgFile = staticFile(`0xparc/images/AWA_still.png`)
   const logoFile = ''
@@ -61,28 +59,28 @@ export const Intro: React.FC<Props> = ({ session }) => {
   )
   const endingOpactity = interpolate(
     frame,
-    [durationInFrames - 50, durationInFrames - 20],
+    [durationInFrames - 38, durationInFrames - 20],
     [1, 0]
   )
   const translateYValue =
-    frame >= durationInFrames - 40
+    frame >= durationInFrames - 38
       ? interpolate(
-        frame,
-        [durationInFrames - 40, durationInFrames],
-        [150, 350]
-      )
+          frame,
+          [durationInFrames - 38, durationInFrames],
+          [150, 350]
+        )
       : 150
 
   function titleClassName() {
     let className = 'w-full text-center'
     if (session.name.length >= 140)
-      className += ' text-8xl leading-none'
-    if (session.name.length > 60 && session.name.length < 140)
-      className += ' text-8xl leading-tight'
-    if (session.name.length > 40 && session.name.length < 60)
-      className += ' text-9xl leading-tight'
+      className += ' text-5xl leading-none'
+    if (session.name.length >= 60 && session.name.length < 140)
+      className += ' text-5xl leading-tight'
+    if (session.name.length >= 40 && session.name.length < 60)
+      className += ' text-6xl leading-tight'
     if (session.name.length < 40)
-      className += ' text-9xl leading-tight'
+      className += ' text-6xl leading-tight'
 
     return className
   }
@@ -114,7 +112,9 @@ export const Intro: React.FC<Props> = ({ session }) => {
       </AbsoluteFill>
 
       <AbsoluteFill>
-        <div className="flex py-12 px-24 flex-col w-full space-between justify-between text-white">
+        <div className="flex py-12 px-24 flex-col w-full space-between justify-between text-white" style={{
+          fontFamily: 'FK Raster Grotesk',
+        }}>
           <div
             className="flex relative h-32"
             style={{ opacity: initialOpacity }}>
@@ -139,7 +139,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                 frame < durationInFrames - 100
                   ? delayedOpacity
                   : endingOpactity,
-              transform: `translateY(${translateYValue}px)`,
+              transform: `translateY(${translateYValue + 20}px)`,
             }}>
             <Sequence
               name="Title"
@@ -148,7 +148,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
               layout="none">
               <h1
                 className={titleClassName()}
-                style={{ fontFamily: 'Grotesk Compact Smooth' }}>
+                style={{ fontFamily: 'FK Raster Grotesk' }}>
                 {session.name}
               </h1>
             </Sequence>
@@ -160,7 +160,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                 frame < durationInFrames - 100
                   ? delayedOpacity
                   : endingOpactity,
-              transform: `translateY(${translateYValue - 100}px)`,
+              transform: `translateY(${translateYValue - 60}px)`,
             }}>
             <Sequence
               name="Speakers"
@@ -175,9 +175,13 @@ export const Intro: React.FC<Props> = ({ session }) => {
                         key={i.id}
                         className="flex flex-col items-center gap-4"
                         style={{
-                          fontFamily: 'Grotesk Compact Smooth',
+                          fontFamily: 'FK Raster Grotesk',
                         }}>
-                        <span className="text-3xl w-48 text-center leading-normal">
+                        <Img
+                          className="w-40 object-cover rounded-full border-black shadow-md"
+                          src={i.photo ?? CreateAvatar(i.name)}
+                        />
+                        <span className="text-3xl w-30 text-center leading-normal">
                           {i.name}
                         </span>
                       </div>
@@ -189,6 +193,8 @@ export const Intro: React.FC<Props> = ({ session }) => {
           </div>
         </div>
       </AbsoluteFill>
+
+      <Audio src={audioFile} />
     </AbsoluteFill>
   )
 }

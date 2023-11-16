@@ -19,6 +19,9 @@ export type IDataImporter =
   | { type: 'pretalx'; config: PretalxConfig }
 export type IDataExporter = { type: 'gdrive'; config: GSheetConfig }
 
+export interface IPlugins {
+  disableChat: boolean
+}
 export interface IEvent {
   id: string
   name: string
@@ -40,6 +43,7 @@ export interface IEvent {
   unlisted?: boolean
   dataExporter?: IDataExporter[]
   enableVideoDownloader?: boolean
+  plugins?: IPlugins
 }
 
 export default class Event implements IEvent {
@@ -89,6 +93,7 @@ export default class Event implements IEvent {
   endTime?: string
 
   enableVideoDownloader?: boolean
+  plugins?: IPlugins
   constructor({
     id,
     name,
@@ -110,6 +115,7 @@ export default class Event implements IEvent {
     endTime,
     enableVideoDownloader = false,
     unlisted,
+    plugins,
   }: Omit<IEvent, 'id'> & { id?: string }) {
     this.id = id ?? generateId(name)
     this.name = name
@@ -131,6 +137,7 @@ export default class Event implements IEvent {
     this.endTime = endTime
     this.enableVideoDownloader = enableVideoDownloader ?? true
     this.unlisted = unlisted ?? false
+    this.plugins = plugins
     // this.validateThis();
   }
 

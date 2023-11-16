@@ -1,0 +1,25 @@
+{
+  "id": "dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling",
+  "name": "Docker-based Auditor’s Toolbox: Enhancing Web3 Security Through Integrated Tooling",
+  "description": "",
+  "start": 1699947000000,
+  "end": 1699947960000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "deivitto",
+      "name": "Deivitto",
+      "bio": "Junior Security Researcher\nSpearbit",
+      "eventId": "secureum_trustx",
+      "twitter": "@Deivitto",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Deivitto.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/bc4e2ecuiqg3ncfd/index.m3u8",
+  "playbackId": "bc4e2ecuiqg3ncfd",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling.jpg",
+  "assetId": "bc4e17c9-c30b-4120-ae9f-b61e7c86b94b",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}

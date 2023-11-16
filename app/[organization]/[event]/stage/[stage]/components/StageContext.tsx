@@ -23,21 +23,6 @@ export const StageContextProvider = (props: props) => {
   )
   const [sessions, setSessions] = useState<ISession[]>(props.sessions)
 
-  useEffect(() => {
-    return
-    const updateSessions = () => {
-      const currentTimestamp = new Date().getTime()
-      const filteredSessions = props.sessions.filter((session) => {
-        return new Date(session.end).getTime() > currentTimestamp
-      })
-      setSessions(filteredSessions)
-      setCurrentSession(filteredSessions[0])
-    }
-    updateSessions()
-    const interval = setInterval(() => updateSessions(), 1000 * 60)
-    return () => clearInterval(interval)
-  }, [props.sessions])
-
   const value = {
     stage: props.stage,
     sessions,

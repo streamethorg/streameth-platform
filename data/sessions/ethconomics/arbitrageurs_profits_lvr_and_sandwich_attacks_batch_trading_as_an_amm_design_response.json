@@ -1,1 +1,25 @@
-{"id":"arbitrageurs_profits_lvr_and_sandwich_attacks_batch_trading_as_an_amm_design_response","name":"Arbitrageurs' profits, LVR, and sandwich attacks: batch trading as an AMM design response","description":"In the first part of the presentation, I'll discuss how AMM design relates to sandwich attacks and LVR/Arbitrage profits/Impermanent loss. I will then present a recent research paper in which we show that batching trades (and designing an AMM around it) can eliminate both sandwich attacks and LVR/Arbitrage profits.","start":1700058900000,"end":1700060400000,"stageId":"uskudar_3","speakers":[{"id":"andrea_canidio","name":"Andrea Canidio","bio":"Andrea is a specialist in game theory and mechanism design, applied. He is currently Senior Research Economist at CoW Protocol. Before that, he was faculty member at INSEAD, Central European University, IMT School for advanced studies. He is the author of several papers related to incentives in crypto.","eventId":"ethconomics","twitter":"@AndreaCanidio","photo":"https://drive.google.com/uc?id=1b4A-gGCNIaL8ghUNZU85qMghJQ0gdfTc"}],"playbackId":"","eventId":"ethconomics","coverImage":"/sessions/ethconomics/arbitrageurs_profits_lvr_and_sandwich_attacks_batch_trading_as_an_amm_design_response.jpg"}
+{
+  "id": "arbitrageurs_profits_lvr_and_sandwich_attacks_batch_trading_as_an_amm_design_response",
+  "name": "Arbitrageurs' profits, LVR, and sandwich attacks: batch trading as an AMM design response",
+  "description": "In the first part of the presentation, I'll discuss how AMM design relates to sandwich attacks and LVR/Arbitrage profits/Impermanent loss. I will then present a recent research paper in which we show that batching trades (and designing an AMM around it) can eliminate both sandwich attacks and LVR/Arbitrage profits.",
+  "start": 1700058900000,
+  "end": 1700060400000,
+  "stageId": "uskudar_3",
+  "speakers": [
+    {
+      "id": "andrea_canidio",
+      "name": "Andrea Canidio",
+      "bio": "Andrea is a specialist in game theory and mechanism design, applied. He is currently Senior Research Economist at CoW Protocol. Before that, he was faculty member at INSEAD, Central European University, IMT School for advanced studies. He is the author of several papers related to incentives in crypto.",
+      "eventId": "ethconomics",
+      "twitter": "@AndreaCanidio",
+      "photo": "https://drive.google.com/uc?id=1b4A-gGCNIaL8ghUNZU85qMghJQ0gdfTc"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/8bb0bh7hjeoaj7vs/index.m3u8",
+  "playbackId": "8bb0bh7hjeoaj7vs",
+  "eventId": "ethconomics",
+  "coverImage": "/sessions/ethconomics/arbitrageurs_profits_lvr_and_sandwich_attacks_batch_trading_as_an_amm_design_response_thumbnail.png",
+  "assetId": "8bb0dbdb-8735-41ea-b6d2-9c112d47c064",
+  "sourceId": "f7a9cb54-e5bb-4267-948c-68f85d519184",
+  "videoType": "clip"
+}

@@ -1,1 +1,25 @@
-{"id":"panel","name":"Panel","description":"Panel discussion with mentors and core devs","start":1700229600000,"end":1700233200000,"stageId":"3b36","speakers":[{"id":"ignacio_hagiopan","name":"Ignacio Hagiopan","bio":"EF researcher ","eventId":"epf_day"},{"id":"light_client","name":"Light Client","bio":"Geth core developer","eventId":"epf_day"}],"playbackId":"","eventId":"epf_day","coverImage":"/sessions/epf_day/panel.jpg"}
+{
+  "id": "panel",
+  "name": "Panel",
+  "description": "Panel discussion with mentors and core devs",
+  "start": 1700229600000,
+  "end": 1700233200000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "ignacio_hagiopan",
+      "name": "Ignacio Hagiopan",
+      "bio": "EF researcher ",
+      "eventId": "epf_day"
+    },
+    {
+      "id": "light_client",
+      "name": "Light Client",
+      "bio": "Geth core developer",
+      "eventId": "epf_day"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/panel_thumbnail.png"
+}

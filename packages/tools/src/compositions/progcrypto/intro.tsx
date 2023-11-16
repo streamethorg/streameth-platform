@@ -9,6 +9,9 @@ import {
   Img,
   OffthreadVideo,
 } from 'remotion'
+import { CreateAvatar } from '../../utils/avatars'
+import { SessionSchema } from '../../utils/mocks'
+import { z } from 'zod'
 
 export interface SpeakerProps {
   id: string
@@ -23,19 +26,18 @@ export interface SessionProps {
   speakers: SpeakerProps[]
 }
 
-export type Props = {
-  session: SessionProps
-}
+export const ProgCryptoProps = z.object({
+    session: SessionSchema,
+})
 
-export const Intro: React.FC<Props> = ({ session }) => {
+export const Intro: React.FC<Zod.infer<typeof ProgCryptoProps>> = ({ session }) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 
-  const audioFile = staticFile('0xparc/audio/IST_material-sound.mp3')
+  const audioFile = staticFile('0xparc/audio/tails-of-love_faded.mp3')
   const introFile = staticFile(
-    `0xparc/intro/IST_Progcrypto_Intro.mp4`
+    `0xparc/intro/IST_Progcrypto_Intro.webm`
   )
-  const bgFile = staticFile(`0xparc/images/AWA_still.png`)
   const logoFile = ''
 
   const frameRate = 25
@@ -67,22 +69,22 @@ export const Intro: React.FC<Props> = ({ session }) => {
   const translateYValue =
     frame >= durationInFrames - 25
       ? interpolate(
-        frame,
-        [durationInFrames - 25, durationInFrames],
-        [150, 220]
-      )
+          frame,
+          [durationInFrames - 25, durationInFrames],
+          [150, 220]
+        )
       : 150
 
   function titleClassName() {
     let className = 'w-full text-center'
     if (session.name.length >= 140)
-      className += ' text-8xl leading-none'
-    if (session.name.length > 60 && session.name.length < 140)
+      className += ' text-5xl leading-none'
+    if (session.name.length >= 60 && session.name.length < 140)
+      className += ' text-5xl leading-tight'
+    if (session.name.length >= 30 && session.name.length < 60)
+      className += ' text-6xl leading-tight'
+    if (session.name.length < 30)
       className += ' text-8xl leading-tight'
-    if (session.name.length > 40 && session.name.length < 60)
-      className += ' text-9xl leading-tight'
-    if (session.name.length < 40)
-      className += ' text-9xl leading-tight'
 
     return className
   }
@@ -99,10 +101,6 @@ export const Intro: React.FC<Props> = ({ session }) => {
 
   return (
     <AbsoluteFill>
-      <AbsoluteFill>
-        <Img style={{ width: '100%' }} src={bgFile} />
-      </AbsoluteFill>
-
       <AbsoluteFill>
         <Sequence
           name="Intro video"
@@ -160,7 +158,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
                 frame < durationInFrames - 100
                   ? delayedOpacity
                   : endingOpactity,
-              transform: `translateY(${translateYValue - 100}px)`,
+              transform: `translateY(${translateYValue - 50}px)`,
             }}>
             <Sequence
               name="Speakers"
@@ -176,6 +174,10 @@ export const Intro: React.FC<Props> = ({ session }) => {
                       <div
                         key={i.id}
                         className="flex flex-col items-center gap-4">
+                        <Img
+                          className="w-20 object-cover rounded-full border-black shadow-md"
+                          src={i.photo ?? CreateAvatar(i.name)}
+                        />
                         <span className="text-3xl w-48 text-center leading-normal">
                           {i.name}
                         </span>
@@ -188,6 +190,7 @@ export const Intro: React.FC<Props> = ({ session }) => {
           </div>
         </div>
       </AbsoluteFill>
+      <Audio src={audioFile} />
     </AbsoluteFill>
   )
 }

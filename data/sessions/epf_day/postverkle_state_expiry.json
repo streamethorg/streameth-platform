@@ -1,1 +1,21 @@
-{"id":"postverkle_state_expiry","name":"Post-Verkle State Expiry","description":"Fellow project presentation by Han","start":1700223300000,"end":1700223900000,"stageId":"3b36","speakers":[{"id":"han","name":"Han","bio":"EPF Fellow","eventId":"epf_day","twitter":"@ngweihan_eth","photo":"https://drive.google.com/file/d/17ceRmz5xky20nSbyXAq2o2tOrB6pRmFY/view?usp=sharing"}],"playbackId":"","eventId":"epf_day","coverImage":"/sessions/epf_day/postverkle_state_expiry.jpg"}
+{
+  "id": "postverkle_state_expiry",
+  "name": "Post-Verkle State Expiry",
+  "description": "Fellow project presentation by Han",
+  "start": 1700223300000,
+  "end": 1700223900000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "han",
+      "name": "Han",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@ngweihan_eth",
+      "photo": "https://drive.google.com/file/d/17ceRmz5xky20nSbyXAq2o2tOrB6pRmFY/view?usp=sharing"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/postverkle_state_expiry_thumbnail.png"
+}

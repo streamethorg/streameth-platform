@@ -1,1 +1,38 @@
-{"id":"safe_circuit_programming_with_circom_21","name":"Safe circuit programming with circom 2.1","description":"In this workshop we will learn how to use the new features of circom 2.1 to enhance safety and security. These features include the --inspect flag that will become the default option in the near future, and the signal tags that will be included in the forthcoming circomlib2.\nLearning how to use these features is of paramount importance for new developers, which can use these tools to learn and fix the typical beginners problems; but also for experts, which can integrate these features into their projects to improve the security of the circuits.\nOn one hand, the ‘--inspect’ flag identifies common underconstrained circuit scenarios, offering insights into potential signal-related bugs. We believe that this flag will help beginners that usually do not understand the difference between witness-generation code and R1CS system to find missing constraints. On the other hand, the signal tags allow programmers to specify relationships among the signals within the circuits. This is a first step towards a formal circuit specification, which can help developers of all skill levels to make their circuits more secure.\nWe will show some bugs in real-world projects and how they can be avoided by using the new compiler’s features in the future. Finally, we conclude the workshop by showing our latest automatic verification tool called CIVER, which will be also incorporated within circom and it has been recently used to expose some real-world bugs. \n","start":1700206200000,"end":1700209800000,"stageId":"dolmabahce_a","speakers":[{"id":"albert_rubio","name":"Albert Rubio","bio":"Over the last four years I have been leading the development of the circom compiler. Circom is one of the leading languages for defining ZK protocols and its open source compiler is fully written in Rust. Additionally, I have also extensively worked on developing tools and techniques for the security, safety and gas consumption analysis of smart contracts and on EVM bytecode optimization and I am currently working on verifying safety and security properties of circom programs.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/uc?id=1eAOjj2TMIYHo_otZGKszhoXNPHQV-tNX"},{"id":"miguel_isabel","name":"Miguel Isabel","bio":"Miguel Isabel is an assistant professor on computer science at Complutense University of Madrid since 2020.His area of expertise is the verification and formal methods, applied to concurrent programming and the ZK circuits.He is one the main developers of the circom compiler. ","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1z9BKJLLu4asEgYI0S115pHGq54OA0Iqw/view"},{"id":"clara_rodrigueznuez","name":"Clara Rodriguez-Nuñez","bio":"Clara Rodríguez-Núñez is currently working\ntoward the PhD degree in computer science with\nthe Complutense University of Madrid under the\nsupervision of prof. Elvira Albert and prof. Albert\nRubio. She is working on verification and optimization\nof ZK circuits and static analysis of smart-\ncontracts, including techniques for ensuring \nmodularity in the presence of callbacks. She is one\nof the main developers of the CIRCOM compiler.","eventId":"progcrypto","twitter":"","photo":"https://drive.google.com/file/d/1lEYTZ_aSNv7MKe4QPhYvLk_JejTpixWV/view"}],"playbackId":"","eventId":"progcrypto","coverImage":"/sessions/progcrypto/safe_circuit_programming_with_circom_21.jpg"}
+{
+  "id": "safe_circuit_programming_with_circom_21",
+  "name": "Safe circuit programming with circom 2.1",
+  "description": "In this workshop we will learn how to use the new features of circom 2.1 to enhance safety and security. These features include the --inspect flag that will become the default option in the near future, and the signal tags that will be included in the forthcoming circomlib2.\nLearning how to use these features is of paramount importance for new developers, which can use these tools to learn and fix the typical beginners problems; but also for experts, which can integrate these features into their projects to improve the security of the circuits.\nOn one hand, the ‘--inspect’ flag identifies common underconstrained circuit scenarios, offering insights into potential signal-related bugs. We believe that this flag will help beginners that usually do not understand the difference between witness-generation code and R1CS system to find missing constraints. On the other hand, the signal tags allow programmers to specify relationships among the signals within the circuits. This is a first step towards a formal circuit specification, which can help developers of all skill levels to make their circuits more secure.\nWe will show some bugs in real-world projects and how they can be avoided by using the new compiler’s features in the future. Finally, we conclude the workshop by showing our latest automatic verification tool called CIVER, which will be also incorporated within circom and it has been recently used to expose some real-world bugs. \n",
+  "start": 1700206200000,
+  "end": 1700209800000,
+  "stageId": "dolmabahce_a",
+  "speakers": [
+    {
+      "id": "albert_rubio",
+      "name": "Albert Rubio",
+      "bio": "Over the last four years I have been leading the development of the circom compiler. Circom is one of the leading languages for defining ZK protocols and its open source compiler is fully written in Rust. Additionally, I have also extensively worked on developing tools and techniques for the security, safety and gas consumption analysis of smart contracts and on EVM bytecode optimization and I am currently working on verifying safety and security properties of circom programs.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/uc?id=1eAOjj2TMIYHo_otZGKszhoXNPHQV-tNX"
+    },
+    {
+      "id": "miguel_isabel",
+      "name": "Miguel Isabel",
+      "bio": "Miguel Isabel is an assistant professor on computer science at Complutense University of Madrid since 2020.His area of expertise is the verification and formal methods, applied to concurrent programming and the ZK circuits.He is one the main developers of the circom compiler. ",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1z9BKJLLu4asEgYI0S115pHGq54OA0Iqw/view"
+    },
+    {
+      "id": "clara_rodrigueznuez",
+      "name": "Clara Rodriguez-Nuñez",
+      "bio": "Clara Rodríguez-Núñez is currently working\ntoward the PhD degree in computer science with\nthe Complutense University of Madrid under the\nsupervision of prof. Elvira Albert and prof. Albert\nRubio. She is working on verification and optimization\nof ZK circuits and static analysis of smart-\ncontracts, including techniques for ensuring \nmodularity in the presence of callbacks. She is one\nof the main developers of the CIRCOM compiler.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1lEYTZ_aSNv7MKe4QPhYvLk_JejTpixWV/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Developer Tools",
+  "coverImage": "/sessions/progcrypto/safe_circuit_programming_with_circom_21_thumbnail.png"
+}

@@ -1,7 +1,10 @@
 import { AbsoluteFill, staticFile, Img } from 'remotion'
-import { Props } from './intro'
+import { CreateAvatar } from '../../utils/avatars'
+import { ProgCryptoProps } from './intro'
 
-export const Social: React.FC<Props> = ({ session }) => {
+export const Social: React.FC<Zod.infer<typeof ProgCryptoProps>> = ({
+  session,
+}) => {
   const bgFile = staticFile(`0xparc/images/Progcrypto_still.png`)
   const bgLogoFile = ''
   const logoFile = ''
@@ -10,11 +13,11 @@ export const Social: React.FC<Props> = ({ session }) => {
     let className = 'w-full text-center'
     if (session.name.length >= 140)
       className += ' text-xl leading-none'
-    if (session.name.length > 60 && session.name.length < 140)
+    if (session.name.length >= 60 && session.name.length < 140)
       className += ' text-2xl leading-tight'
-    if (session.name.length > 40 && session.name.length < 60)
+    if (session.name.length >= 30 && session.name.length < 60)
       className += ' text-3xl leading-tight'
-    if (session.name.length < 40) className += 'text-3xl'
+    if (session.name.length < 30) className += ' text-5xl'
 
     return className
   }
@@ -62,7 +65,11 @@ export const Social: React.FC<Props> = ({ session }) => {
                     <div
                       key={i.id}
                       className="flex flex-col items-center gap-4"
-                      style={{ transform: `translateY(55px)` }}>
+                      style={{ transform: `translateY(45px)` }}>
+                      <Img
+                        className="w-20 object-cover rounded-full border-black shadow-md"
+                        src={i.photo ?? CreateAvatar(i.name)}
+                      />
                       <span className="text-xl font-medium w-32 text-center leading-normal">
                         {i.name}
                       </span>

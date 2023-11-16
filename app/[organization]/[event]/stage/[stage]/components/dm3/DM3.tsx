@@ -12,7 +12,7 @@ import { ethers } from 'ethersv5'
 import { StageContext } from '../StageContext'
 import { useDm3Siwe } from './useDm3Siwe'
 import { ConnectKitButton } from 'connectkit'
-
+import { InjectedConnector } from 'wagmi/connectors/injected'
 export const defaultOptions: BillboardWidgetProps['options'] = {
   avatarSrc: (hash) => {
     return `https://robohash.org/${hash}?size=38x38`
@@ -30,12 +30,16 @@ const getBillboardId = (eventId: string, stageId: string) => {
 
 export const Dm3 = () => {
   const { address, isConnected } = useAccount()
-  const { connect } = useConnect()
+  const { connect: connectWallet } = useConnect({
+    connector: new InjectedConnector(),
+  })
   const publicClient = usePublicClient()
   const context = useContext(StageContext)
+  const { connect } = useConnect()
   const { signInWithEthereum, siweMessage, siweSig } = useDm3Siwe(
     address!
   )
+
   const web3Provider = new ethers.providers.StaticJsonRpcProvider(
     publicClient.chain.rpcUrls.default.http[0],
     {
@@ -51,9 +55,10 @@ export const Dm3 = () => {
         context?.stage.eventId!,
         context?.stage.id!
       ),
-      billboardClientUrl: 'http://164.90.224.89/bb-client',
+      billboardClientUrl: ' https://devconnect.dm3.network/bb-client',
       deliveryServiceEnsName: 'bb-ds.devconnect.dm3.eth',
-      offchainResolverUrl: 'http://164.90.224.89/resolver-handler',
+      offchainResolverUrl:
+        ' https://devconnect.dm3.network/resolver-handler',
       userCCIPDomain: 'user.devconnect.dm3.eth',
       siweAddress: address?.toString() ?? '',
       siweMessage: JSON.stringify(siweMessage),
@@ -96,14 +101,14 @@ export const Dm3 = () => {
                 // height: '1000px',
               }}>
               {!isConnected ? (
-                <p className="text-white p-4 m-auto w-full text-center flex flex-col justify-center items-center">
+                <p className="text-white cursor-pointer m-auto text-center flex flex-col justify-center items-center">
                   Connect your wallet to chat
                   <ConnectKitButton />
                 </p>
               ) : (
                 <div
                   style={{ maxHeight: '40px' }}
-                  className="text-white rounded-xl bg-black p-4 m-auto text-center flex flex-col justify-center items-center">
+                  className="text-white rounded-xl bg-gray-800 p-4 m-auto text-center flex flex-col justify-center items-center">
                   <button onClick={signInWithEthereum}>
                     Sign in with Ethereum
                   </button>

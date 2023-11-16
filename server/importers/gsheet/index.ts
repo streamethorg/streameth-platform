@@ -9,7 +9,7 @@ const SPEAKER_DATA_RANGE = 'A3:E'
 const STAGE_SHEET = 'Stages (FOR INTERNAL MANAGEMENT, DO NOT EDIT)'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
-const SESSION_DATA_RANGE = 'A3:M'
+const SESSION_DATA_RANGE = 'A3:N'
 
 export default class Importer extends BaseImporter {
   googleSheetService: GoogleSheetService
@@ -140,6 +140,7 @@ export default class Importer extends BaseImporter {
               this.event.timezone
             )
             .valueOf(),
+          // track: row[13], // hack for progcrypto
           // moderator: row[12],
         }
 

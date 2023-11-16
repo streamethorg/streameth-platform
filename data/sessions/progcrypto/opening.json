@@ -1,0 +1,25 @@
+{
+  "id": "opening",
+  "name": "Opening",
+  "description": "Opening remarks: what to expect, resources, fun with cryptography and how to make the most of your time at Progcrypto",
+  "start": 1700118000000,
+  "end": 1700119800000,
+  "stageId": "auditorium",
+  "speakers": [
+    {
+      "id": "althea",
+      "name": "Althea",
+      "bio": "Althea works as a coordinator for the communications, design and ecodev teams within Privacy and Scaling Explorations.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/13YNwkBhJL950cWjvsa8oDchyKVXpPFdV/view"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/72d6u0tmsx37gwum/index.m3u8",
+  "playbackId": "72d6u0tmsx37gwum",
+  "eventId": "progcrypto",
+  "coverImage": "/sessions/progcrypto/opening_thumbnail.png",
+  "assetId": "72d6693c-d993-46fb-991f-c0ed2691d921",
+  "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
+  "videoType": "clip"
+}

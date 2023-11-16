@@ -1,0 +1,19 @@
+{
+  "id": "proof_of_email__friday",
+  "name": "Proof of Email - Friday",
+  "description": "Coding, Puzzles, Swag, and Discussion;\n\n14:00 - Tutorial;\n15:00 - Office hours",
+  "start": 1700208000000,
+  "end": 1700229600000,
+  "stageId": "community_activations_hub",
+  "speakers": [
+    {
+      "id": "zk_email_team",
+      "name": "ZK Email Team",
+      "bio": "Team responsible for ZK Email",
+      "eventId": "progcrypto"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "coverImage": "/sessions/progcrypto/proof_of_email__friday_thumbnail.png"
+}
