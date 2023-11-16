@@ -1,1 +1,33 @@
-{"id":"cantina_competitions_a_new_era_for_web3_security","name":"Cantina Competitions: A new era for web3 security","description":"","start":1699866000000,"end":1699869600000,"stageId":"main_stage","speakers":[{"id":"hari","name":"Hari","bio":"Co-founder\nSpearbit","eventId":"secureum_trustx","twitter":"","photo":"https://www.secureum.xyz/wp-content/uploads/2023/10/Hari.png"},{"id":"alex_the_entreprenerd","name":"Alex\nThe Entreprenerd","bio":"Independent Security Researcher","eventId":"secureum_trustx","twitter":"@GalloDaSballo","photo":"https://www.secureum.xyz/wp-content/uploads/2023/10/Alex.png"}],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/cantina_competitions_a_new_era_for_web3_security.jpg"}
+{
+  "id": "cantina_competitions_a_new_era_for_web3_security",
+  "name": "Cantina Competitions: A new era for web3 security",
+  "description": "",
+  "start": 1699866000000,
+  "end": 1699869600000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "hari",
+      "name": "Hari",
+      "bio": "Co-founder\nSpearbit",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hari.png"
+    },
+    {
+      "id": "alex_the_entreprenerd",
+      "name": "Alex\nThe Entreprenerd",
+      "bio": "Independent Security Researcher",
+      "eventId": "secureum_trustx",
+      "twitter": "@GalloDaSballo",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Alex.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/d5ecy473hgcuqd7t/index.m3u8",
+  "playbackId": "d5ecy473hgcuqd7t",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/cantina_competitions_a_new_era_for_web3_security.jpg",
+  "assetId": "d5ec3a94-574c-4447-99a6-18e83b86284c",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}
