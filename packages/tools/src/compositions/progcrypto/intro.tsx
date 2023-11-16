@@ -10,7 +10,7 @@ import {
   OffthreadVideo,
 } from 'remotion'
 import { CreateAvatar } from '../../utils/avatars'
-import { SessionSchema } from 'utils/mocks'
+import { SessionSchema } from '../../utils/mocks'
 import { z } from 'zod'
 
 export interface SpeakerProps {
@@ -26,11 +26,11 @@ export interface SessionProps {
   speakers: SpeakerProps[]
 }
 
-type Props = {
-  session: z.infer<typeof SessionSchema>
-}
+export const ProgCryptoProps = z.object({
+    session: SessionSchema,
+})
 
-export const Intro: React.FC<Props> = ({ session }) => {
+export const Intro: React.FC<Zod.infer<typeof ProgCryptoProps>> = ({ session }) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 
@@ -80,11 +80,11 @@ export const Intro: React.FC<Props> = ({ session }) => {
     if (session.name.length >= 140)
       className += ' text-5xl leading-none'
     if (session.name.length >= 60 && session.name.length < 140)
-      className += ' text-6xl leading-tight'
+      className += ' text-5xl leading-tight'
     if (session.name.length >= 30 && session.name.length < 60)
       className += ' text-6xl leading-tight'
-    if (session.name.length < 20)
-      className += ' text-9xl leading-tight'
+    if (session.name.length < 30)
+      className += ' text-8xl leading-tight'
 
     return className
   }
