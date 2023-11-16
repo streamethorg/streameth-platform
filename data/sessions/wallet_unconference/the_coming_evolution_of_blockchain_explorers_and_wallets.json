@@ -1,1 +1,21 @@
-{"id":"the_coming_evolution_of_blockchain_explorers_and_wallets","name":"The Coming Evolution of Blockchain Explorers and Wallets","description":"The crypto world is rapidly evolving, and with it, the tools that users rely on to interact with blockchain data. As blockchain explorers have evolved to meet the demands of web3 users, so too have crypto wallets. This talk will explore the evolution of UX in both crypto wallets and blockchain explorers, emphasizing the importance of intuitive design, the role of emerging technologies, and the future of user-centric interfaces in the crypto space.","start":1700207100000,"end":1700208000000,"stageId":"beyazit","speakers":[{"id":"uliana_skladchikova","name":"Uliana Skladchikova","bio":"Product lead @ Blockscout, Uliana is focused on user experience and design, user-centred approach to software. She brings 8 years' experience leading consumer and b2b desktop, mobile, web and VR products and 15+ years in various roles at software companies, as well as a classical engineering background","eventId":"wallet_unconference","twitter":"n/a","photo":"https://cdn.discordapp.com/attachments/1116475786266955887/1170034399652348014/Z.png"}],"playbackId":"","eventId":"wallet_unconference","coverImage":"/sessions/wallet_unconference/the_coming_evolution_of_blockchain_explorers_and_wallets.jpg"}
+{
+  "id": "the_coming_evolution_of_blockchain_explorers_and_wallets",
+  "name": "The Coming Evolution of Blockchain Explorers and Wallets",
+  "description": "The crypto world is rapidly evolving, and with it, the tools that users rely on to interact with blockchain data. As blockchain explorers have evolved to meet the demands of web3 users, so too have crypto wallets. This talk will explore the evolution of UX in both crypto wallets and blockchain explorers, emphasizing the importance of intuitive design, the role of emerging technologies, and the future of user-centric interfaces in the crypto space.",
+  "start": 1700207100000,
+  "end": 1700208000000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "uliana_skladchikova",
+      "name": "Uliana Skladchikova",
+      "bio": "Product lead @ Blockscout, Uliana is focused on user experience and design, user-centred approach to software. She brings 8 years' experience leading consumer and b2b desktop, mobile, web and VR products and 15+ years in various roles at software companies, as well as a classical engineering background",
+      "eventId": "wallet_unconference",
+      "twitter": "n/a",
+      "photo": "https://cdn.discordapp.com/attachments/1116475786266955887/1170034399652348014/Z.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/the_coming_evolution_of_blockchain_explorers_and_wallets_thumbnail.png"
+}
