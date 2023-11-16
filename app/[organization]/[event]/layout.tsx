@@ -5,6 +5,8 @@ import SessionController from '@/server/controller/session'
 import speakerController from '@/server/controller/speaker'
 import ColorComponent from '../../utils/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
+import { ArchiveContext } from '@/components/context/ArchiveContext'
+
 export async function generateStaticParams() {
   const eventController = new EventController()
   const allEvents = await eventController.getAllEvents({})
@@ -45,19 +47,21 @@ const Layout = async ({
   }
 
   return (
-    <div className="h-full flex flex-col  z-1 bg-accent min-h-screen ">
-      <Navbar />
+    <ArchiveContext event={event.toJson()}>
+      <div className="h-full flex flex-col  z-1 bg-accent min-h-screen ">
+        <Navbar />
 
-      <main className={` flex w-full ml-auto md:h-full flex-grow`}>
-        <ColorComponent
-          event={event.toJson()}
-          stages={stages.map((stage) => stage.toJson())}
-          speakers={speakers.map((speaker) => speaker.toJson())}
-          sessions={sessions.map((session) => session.toJson())}>
-          {children}
-        </ColorComponent>
-      </main>
-    </div>
+        <main className={` flex w-full ml-auto md:h-full flex-grow`}>
+          <ColorComponent
+            event={event.toJson()}
+            stages={stages.map((stage) => stage.toJson())}
+            speakers={speakers.map((speaker) => speaker.toJson())}
+            sessions={sessions.map((session) => session.toJson())}>
+            {children}
+          </ColorComponent>
+        </main>
+      </div>
+    </ArchiveContext>
   )
 }
 
