@@ -53,7 +53,9 @@ export default async function OrganizationHome({ params }: Params) {
           src={organization.logo}
           width={50}
           height={50}
-          objectFit="cover"
+          style={{
+            objectFit: 'cover',
+          }}
           alt={`${organization.name} logo`}
         />
         <FilterBar events={events} />

@@ -6,9 +6,11 @@ import {
   getDefaultConfig,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
+import { usePathname } from 'next/navigation'
 import { WagmiConfig, createConfig } from 'wagmi'
 
 const authApi = '/api/auth'
+
 const siweConfig = {
   createMessage: ({ nonce, address, chainId }) => {
     return new SiweMessage({
@@ -62,11 +64,17 @@ const config = createConfig(
 )
 
 const SiweContext = (props: PropsWithChildren) => {
+  const pathname = usePathname()
+  const isAdminRoute = pathname.startsWith('/admin')
   return (
     <WagmiConfig config={config}>
-      <SIWEProvider {...siweConfig}>
+      {isAdminRoute ? (
+        <SIWEProvider {...siweConfig}>
+          <ConnectKitProvider>{props.children}</ConnectKitProvider>
+        </SIWEProvider>
+      ) : (
         <ConnectKitProvider>{props.children}</ConnectKitProvider>
-      </SIWEProvider>
+      )}
     </WagmiConfig>
   )
 }
