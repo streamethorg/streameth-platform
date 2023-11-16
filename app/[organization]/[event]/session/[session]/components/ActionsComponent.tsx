@@ -10,9 +10,8 @@ const ActionsComponent = ({
   title,
   goBackButton = false,
   children,
-  session,
-} // event,
-: {
+  session, // event,
+}: {
   session?: Session
   title?: string
   goBackButton?: boolean

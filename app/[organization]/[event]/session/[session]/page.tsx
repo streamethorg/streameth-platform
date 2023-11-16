@@ -3,22 +3,22 @@ import SessionComponent from './components/SessionComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EventController from '@/server/controller/event'
 
-// export async function generateStaticParams({
-//   params,
-// }: {
-//   params: { organization: string; event: string }
-// }) {
-//   const sessionController = new SessionController()
-//   const eventSessions = await sessionController.getAllSessions({
-//     eventId: params.event,
-//   })
+export async function generateStaticParams({
+  params,
+}: {
+  params: { organization: string; event: string }
+}) {
+  const sessionController = new SessionController()
+  const eventSessions = await sessionController.getAllSessions({
+    eventId: params.event,
+  })
 
-//   return eventSessions.map((session) => ({
-//     organization: params.organization,
-//     event: params.event,
-//     session: session.id,
-//   }))
-// }
+  return eventSessions.map((session) => ({
+    organization: params.organization,
+    event: params.event,
+    session: session.id,
+  }))
+}
 
 interface Params {
   params: {
@@ -29,7 +29,7 @@ interface Params {
 }
 
 export default async function Page({ params }: Params) {
-  const eController = new EventController()
+  // const eController = new EventController()
   // const event = await eController.getEvent(
   //   params.event,
   //   params.organization
