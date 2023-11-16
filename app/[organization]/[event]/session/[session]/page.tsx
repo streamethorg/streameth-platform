@@ -1,7 +1,7 @@
 import SessionController from '@/server/controller/session'
 import SessionComponent from './components/SessionComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
-import Session from '@/utils/session'
+import EventController from '@/server/controller/event'
 
 // export async function generateStaticParams({
 //   params,
@@ -29,6 +29,12 @@ interface Params {
 }
 
 export default async function Page({ params }: Params) {
+  const eController = new EventController()
+  const event = await eController.getEvent(
+    params.event,
+    params.organization
+  )
+
   const sController = new SessionController()
   const session = await sController.getSession(
     params.session,
@@ -51,6 +57,7 @@ export default async function Page({ params }: Params) {
       params={params.organization}
       nextSession={nextSession}
       session={session}
+      event={event.toJson()}
     />
   )
 }
