@@ -15,7 +15,11 @@
       "photo": "https://drive.google.com/file/d/1JtlOxnVGY0NJxvtF6_h-ZS6kRQlDrHau/view?usp=drive_link"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/2de4lrduiowtcx7l/index.m3u8",
+  "playbackId": "2de4lrduiowtcx7l",
   "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/the_art_of_huff_thumbnail.png"
+  "coverImage": "/sessions/solidity_summit/the_art_of_huff_thumbnail.png",
+  "assetId": "2de4d06a-664e-4666-b443-e7a0275d8195",
+  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+  "videoType": "clip"
 }
