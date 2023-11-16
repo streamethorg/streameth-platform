@@ -29,7 +29,11 @@
       "eventId": "solidity_summit"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/4b74ccayd4otiuzc/index.m3u8",
+  "playbackId": "4b74ccayd4otiuzc",
   "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/the_state_of_evm_languages_thumbnail.png"
+  "coverImage": "/sessions/solidity_summit/the_state_of_evm_languages_thumbnail.png",
+  "assetId": "4b74f79d-27aa-4958-9480-5513c963d045",
+  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+  "videoType": "clip"
 }
