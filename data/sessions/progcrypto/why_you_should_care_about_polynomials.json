@@ -1,7 +1,7 @@
 {
   "id": "why_you_should_care_about_polynomials",
   "name": "Why you should care about polynomials",
-  "description": "TBD",
+  "description": "Because of succinctness. In this talk, we will see how polynomials allow us to prove statements about (potentially) huge pieces of data. This make them especially suitable for building succinct arguments, and actually at the core of modern succinct arguments, we have polynomials. I will try to convince you that few techniques suffice to understand, at least at a high level, most of them.",
   "start": 1700132400000,
   "end": 1700134200000,
   "stageId": "auditorium",
