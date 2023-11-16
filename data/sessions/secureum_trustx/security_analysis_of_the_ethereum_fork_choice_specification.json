@@ -1,1 +1,25 @@
-{"id":"security_analysis_of_the_ethereum_fork_choice_specification","name":"Security Analysis of the Ethereum Fork Choice specification","description":"","start":1699857120000,"end":1699858320000,"stageId":"main_stage","speakers":[{"id":"roberto_saltini","name":"Roberto\nSaltini","bio":"Lead Researcher \nConsenSys","eventId":"secureum_trustx","twitter":"@robsaltini","photo":"https://www.secureum.xyz/wp-content/uploads/2023/10/Roberto.png"}],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/security_analysis_of_the_ethereum_fork_choice_specification.jpg"}
+{
+  "id": "security_analysis_of_the_ethereum_fork_choice_specification",
+  "name": "Security Analysis of the Ethereum Fork Choice specification",
+  "description": "",
+  "start": 1699857120000,
+  "end": 1699858320000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "roberto_saltini",
+      "name": "Roberto\nSaltini",
+      "bio": "Lead Researcher \nConsenSys",
+      "eventId": "secureum_trustx",
+      "twitter": "@robsaltini",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Roberto.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/3d62mdxaiz9u5y6w/index.m3u8",
+  "playbackId": "3d62mdxaiz9u5y6w",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/security_analysis_of_the_ethereum_fork_choice_specification.jpg",
+  "assetId": "3d62d47f-02a0-403a-9dc5-0e28d42985a7",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}
