@@ -8,6 +8,7 @@ import EmbedButton from '@/components/misc/EmbedButton'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
+import { IEvent } from '@/server/model/event'
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (
@@ -20,15 +21,22 @@ export default async function SessionComponent({
   session,
   nextSession,
   params,
+  event,
 }: {
   session: Session
   nextSession: Session | null
   params: string
+  event?: IEvent
 }) {
+  console.log(event, event?.enableVideoDownloader)
+
   return (
-    <div className="flex flex-col w-full max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 gap-4">
+    <div className="flex flex-col w-full m-4 md:m-0 max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 gap-4">
       <div className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
-        <ActionsComponent goBackButton>
+        <ActionsComponent
+          event={event}
+          session={session}
+          goBackButton>
           <EmbedButton
             playbackId={session.playbackId}
             playerName={session.name}
@@ -40,12 +48,12 @@ export default async function SessionComponent({
           coverImage={session.coverImage}
         />
       </div>
-      <div className="flex space-y-4 flex-col w-full p-2 lg:w-[30%]  overflow-y-scroll lg:p-0">
+      <div className="flex space-y-4 flex-col w-full lg:p-2 lg:w-[30%]  overflow-y-scroll">
         <SessionInfoBox session={session.toJson()} showDate />
         <SpeakerComponent session={session} />
         {nextSession?.videoUrl && (
           <div className=" bg-base text-white p-2 rounded-xl mb-4">
-            <p className="font-medium text-xl  ">Next Talk</p>
+            <p className="font-medium text-xl">Next Talk</p>
             <Link
               href={
                 `/${params}/${nextSession?.eventId}/session/` +
@@ -62,7 +70,6 @@ export default async function SessionComponent({
                       : ''
                   }
                   fill
-                  // sizes="20vw"
                   style={{
                     objectFit: 'cover',
                   }}
