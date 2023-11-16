@@ -28,8 +28,6 @@ export default async function SessionComponent({
   params: string
   event?: IEvent
 }) {
-  console.log(event, event?.enableVideoDownloader)
-
   return (
     <div className="flex flex-col w-full m-4 md:m-0 max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 gap-4">
       <div className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
@@ -73,6 +71,11 @@ export default async function SessionComponent({
                   style={{
                     objectFit: 'cover',
                   }}
+                />
+                <img
+                  src={session.coverImage!}
+                  className="rounded-xl object-cover w-full h-full"
+                  alt={session.name}
                 />
               </div>
               <p className=" p-2 py-4 text-md">{nextSession?.name}</p>

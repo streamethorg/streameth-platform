@@ -1,5 +1,3 @@
-'use client'
-
 import SpeakerPhoto from '../components/SpeakerPhoto'
 import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 import { ISession } from '@/server/model/session'

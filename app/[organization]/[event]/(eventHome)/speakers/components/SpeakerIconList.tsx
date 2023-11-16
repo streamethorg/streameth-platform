@@ -1,5 +1,4 @@
-'use client'
-import Speaker, { ISpeaker } from '@/server/model/speaker'
+import { ISpeaker } from '@/server/model/speaker'
 import SpeakerIcon from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerIcon'
 
 export default function SpeakerIconList({
