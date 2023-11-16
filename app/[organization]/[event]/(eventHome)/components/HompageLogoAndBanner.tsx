@@ -19,7 +19,9 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
         alt="Event Cover"
         width={1500}
         height={500}
-        objectFit="cover"
+        style={{
+          objectFit: 'cover',
+        }}
       />
       <div id="home" className="flex flex-col p-4">
         <div className=" flex-col flex space-y-2 md:flex-col">

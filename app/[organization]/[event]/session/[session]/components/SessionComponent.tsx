@@ -52,21 +52,7 @@ export default async function SessionComponent({
                 nextSession?.id
               }>
               <div className="aspect-video cursor-pointer relative  w-full">
-                <Image
-                  className="rounded-xl"
-                  alt="Session image"
-                  quality={60}
-                  src={
-                    nextSession.coverImage
-                      ? nextSession?.coverImage
-                      : ''
-                  }
-                  fill
-                  // sizes="20vw"
-                  style={{
-                    objectFit: 'cover',
-                  }}
-                />
+                <img src={session.coverImage!} className="rounded-xl object-cover w-full h-full" alt={session.name} />
               </div>
               <p className=" p-2 py-4 text-md">{nextSession?.name}</p>
             </Link>
