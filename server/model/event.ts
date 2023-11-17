@@ -42,7 +42,7 @@ export interface IEvent {
   accentColor?: string
   unlisted?: boolean
   dataExporter?: IDataExporter[]
-  enableVideoDownloader?: boolean
+  // enableVideoDownloader?: boolean
   plugins?: IPlugins
 }
 
@@ -92,7 +92,7 @@ export default class Event implements IEvent {
 
   endTime?: string
 
-  enableVideoDownloader?: boolean
+  // enableVideoDownloader?: boolean
   plugins?: IPlugins
   constructor({
     id,
@@ -113,7 +113,7 @@ export default class Event implements IEvent {
     dataExporter,
     startTime,
     endTime,
-    enableVideoDownloader = false,
+    // enableVideoDownloader = false,
     unlisted,
     plugins,
   }: Omit<IEvent, 'id'> & { id?: string }) {
