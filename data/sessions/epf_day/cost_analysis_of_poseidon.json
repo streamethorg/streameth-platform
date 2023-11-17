@@ -15,7 +15,11 @@
       "photo": "http://www.sherv.net/cm/emoticons/sleep/sleeping-in-class.gif"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/6f49ksbebkxfghd7/index.m3u8",
+  "playbackId": "6f49ksbebkxfghd7",
   "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/cost_analysis_of_poseidon_thumbnail.png"
+  "coverImage": "/sessions/epf_day/cost_analysis_of_poseidon_thumbnail.png",
+  "assetId": "6f49f839-d3aa-4700-b20c-bf9cb1a26cf4",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }
