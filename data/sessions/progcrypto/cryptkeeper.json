@@ -15,12 +15,12 @@
       "photo": "https://drive.google.com/file/d/1BDHKTrv8mDMibFpDiWOWRv5f1GeAXJyN/view"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/4ff9d3vbmf9m9cdj/index.m3u8",
-  "playbackId": "4ff9d3vbmf9m9cdj",
+  "videoUrl": "https://lp-playback.com/hls/0158v01v8fw2nv9w/index.m3u8",
+  "playbackId": "0158v01v8fw2nv9w",
   "eventId": "progcrypto",
   "track": "Developer Tools",
   "coverImage": "/sessions/progcrypto/cryptkeeper_thumbnail.png",
-  "assetId": "4ff90c5c-f41c-4a50-9a73-f8149da5b12f",
+  "assetId": "0158fd4f-a4bd-402e-87d3-a1a8468a0510",
   "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
   "videoType": "clip"
 }
