@@ -1,1 +1,23 @@
-{"id":"making_ethereum_terminology_more_accessible","name":"Making Ethereum terminology more accessible","description":"","start":1700120400000,"end":1700121000000,"stageId":"camlica","speakers":[{"id":"luka_kropec","name":"Luka Kropec","bio":"No description","eventId":"conflux__web3_ux_unconference"}],"playbackId":"","eventId":"conflux__web3_ux_unconference","coverImage":"/sessions/conflux__web3_ux_unconference/making_ethereum_terminology_more_accessible.jpg"}
+{
+  "id": "making_ethereum_terminology_more_accessible",
+  "name": "Making Ethereum terminology more accessible",
+  "description": "",
+  "start": 1700120400000,
+  "end": 1700121000000,
+  "stageId": "camlica",
+  "speakers": [
+    {
+      "id": "luka_kropec",
+      "name": "Luka Kropec",
+      "bio": "No description",
+      "eventId": "conflux__web3_ux_unconference"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/9a15ikgcp4zatxk2/index.m3u8",
+  "playbackId": "9a15ikgcp4zatxk2",
+  "eventId": "conflux__web3_ux_unconference",
+  "coverImage": "/sessions/conflux__web3_ux_unconference/making_ethereum_terminology_more_accessible.jpg",
+  "assetId": "9a15ba12-cb3c-4c30-8182-d76c10593ddc",
+  "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
+  "videoType": "clip"
+}
