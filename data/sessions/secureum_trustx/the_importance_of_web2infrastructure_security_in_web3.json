@@ -1,1 +1,25 @@
-{"id":"the_importance_of_web2infrastructure_security_in_web3","name":"The importance of Web2/Infrastructure security in Web3","description":"","start":1699976100000,"end":1699976700000,"stageId":"main_stage","speakers":[{"id":"frdric_adam","name":"Frédéric\nADAM","bio":"Senior Web2 Pentester\nBug Bounty Hunter","eventId":"secureum_trustx","twitter":"","photo":"https://www.secureum.xyz/wp-content/uploads/2023/10/Frederic.png"}],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/the_importance_of_web2infrastructure_security_in_web3.jpg"}
+{
+  "id": "the_importance_of_web2infrastructure_security_in_web3",
+  "name": "The importance of Web2/Infrastructure security in Web3",
+  "description": "",
+  "start": 1699976100000,
+  "end": 1699976700000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "frdric_adam",
+      "name": "Frédéric\nADAM",
+      "bio": "Senior Web2 Pentester\nBug Bounty Hunter",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Frederic.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/e3a37h5zbkbc74lr/index.m3u8",
+  "playbackId": "e3a37h5zbkbc74lr",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/the_importance_of_web2infrastructure_security_in_web3.jpg",
+  "assetId": "e3a37dc4-e059-4f69-ba82-897da56874ad",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}
