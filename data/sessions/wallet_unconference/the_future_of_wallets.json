@@ -15,7 +15,11 @@
       "photo": "https://speak.ticketh.xyz/media/avatars/Screen_Shot_2023-01-07_at_12.29.48_PM_JdBeYOR.png"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/c29ds5075ixws317/index.m3u8",
+  "playbackId": "c29ds5075ixws317",
   "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/the_future_of_wallets_thumbnail.png"
+  "coverImage": "/sessions/wallet_unconference/the_future_of_wallets_thumbnail.png",
+  "assetId": "c29d4332-c8b6-40ec-bafb-5b22fd7a0ad5",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
 }
