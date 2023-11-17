@@ -15,7 +15,11 @@
       "photo": "https://drive.google.com/file/d/1Ztb7RRW64xrr5J3uWLkf01XyYbt5pqko/view?usp=sharing"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/e8d7e4eoy7eja4nz/index.m3u8",
+  "playbackId": "e8d7e4eoy7eja4nz",
   "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/efficient_light_client_for_stateless_verification_thumbnail.png"
+  "coverImage": "/sessions/epf_day/efficient_light_client_for_stateless_verification_thumbnail.png",
+  "assetId": "e8d767bd-29c4-4900-b05a-34a62667902e",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }
