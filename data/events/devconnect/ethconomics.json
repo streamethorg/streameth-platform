@@ -31,5 +31,6 @@
       }
     }
   ],
-  "startTime": "14:00"
+  "startTime": "14:00",
+  "enableVideoDownloader": true
 }

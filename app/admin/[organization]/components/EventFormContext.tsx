@@ -74,7 +74,7 @@ const EventFormProvider: React.FC<EventFormProviderProps> = ({
       },
       dataExporter: [],
       dataImporter: [],
-      // enableVideoDownloader: false,
+      enableVideoDownloader: false,
     }
   )
 

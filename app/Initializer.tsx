@@ -7,8 +7,9 @@ const Initializer = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname()
 
   const isOrganization =
-    pathname === '/' || pathname.match(/^\/[a-zA-Z0-9]+$/)
-  // pathname.includes('admin')
+    pathname === '/' ||
+    pathname.match(/^\/[a-zA-Z0-9]+$/) ||
+    pathname.includes('admin')
   useEffect(() => {
     if (isOrganization) {
       document.documentElement.style.setProperty(

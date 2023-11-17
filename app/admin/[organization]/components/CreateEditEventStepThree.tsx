@@ -31,7 +31,7 @@ const CreateEditEventStepThree = () => {
             handleChange(e)
           }
         />
-        {/* <div className="flex flex-col mb-6">
+        <div className="flex flex-col mb-6">
           <FormLabel label="Enable Video Downloader" toolTip />
           <div className="flex gap-5">
             <FormRadio
@@ -56,8 +56,8 @@ const CreateEditEventStepThree = () => {
                 })
               }
             />
-          </div> */}
-        {/* </div> */}
+          </div>
+        </div>
         <FormTextInput
           label="Chose your custom domain for the event page (Optional)"
           name="website"

@@ -6,16 +6,16 @@ import { MobileContext } from '@/components/context/MobileContext'
 const DateSelect = ({ dates }: { dates: number[] }) => {
   const { setDate, date } = useContext(ScheduleContext)
 
-  // useEffect(() => {
-  //   const currentDate = new Date().toLocaleDateString()
+  useEffect(() => {
+    const currentDate = new Date().toLocaleDateString()
 
-  //   dates?.forEach((timestamp) => {
-  //     const dateToCompare = new Date(timestamp).toLocaleDateString()
-  //     if (dateToCompare == currentDate) {
-  //       setDate(Number(timestamp))
-  //     }
-  //   })
-  // }, [])
+    dates?.forEach((timestamp) => {
+      const dateToCompare = new Date(timestamp).toLocaleDateString()
+      if (dateToCompare == currentDate) {
+        setDate(Number(timestamp))
+      }
+    })
+  }, [])
 
   const handleDateChange = (date: string) => {
     const numericValue = Number(date)
