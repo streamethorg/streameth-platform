@@ -15,7 +15,11 @@
       "photo": "https://drive.google.com/file/d/1QqxlL0hcHUPBs1ZGvooUtHRbXkplJ1MT/view?usp=sharing"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/059fr0yxnwche9ix/index.m3u8",
+  "playbackId": "059fr0yxnwche9ix",
   "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/portal_network_validator_thumbnail.png"
+  "coverImage": "/sessions/epf_day/portal_network_validator_thumbnail.png",
+  "assetId": "059f9608-a792-4edc-9d94-0282d8fec412",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }
