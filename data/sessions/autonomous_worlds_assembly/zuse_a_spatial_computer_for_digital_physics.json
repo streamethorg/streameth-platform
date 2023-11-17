@@ -1,1 +1,21 @@
-{"id":"zuse_a_spatial_computer_for_digital_physics","name":"Zuse: A Spatial Computer for Digital Physics","description":"This workshop will introduce Zuse, a shared computer protocol for digital physics that uses spatial rather than Turing-complete computing. Using Zuse, one can deploy multiple coexisting worlds, each with its own unique physics. Within these worlds, players can create new content and host a variety of apps, each with distinct goals.","start":1700128800000,"end":1700132400000,"stageId":"beylerbeyi_1","speakers":[{"id":"dhvani_patel","name":"Dhvani Patel","bio":"Dhvani Patel is co-founder of Tenet, where he is building a shared computer protocol for digital physics.","eventId":"autonomous_worlds_assembly","twitter":"@dhvanipa","photo":"https://drive.google.com/uc?id=1QA0g4RTcCg4N6Fiu2dPBDQ_BerVUe-Vg"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/zuse_a_spatial_computer_for_digital_physics.jpg"}
+{
+  "id": "zuse_a_spatial_computer_for_digital_physics",
+  "name": "Zuse: A Spatial Computer for Digital Physics",
+  "description": "This workshop will introduce Zuse, a shared computer protocol for digital physics that uses spatial rather than Turing-complete computing. Using Zuse, one can deploy multiple coexisting worlds, each with its own unique physics. Within these worlds, players can create new content and host a variety of apps, each with distinct goals.",
+  "start": 1700128800000,
+  "end": 1700132400000,
+  "stageId": "beylerbeyi_1",
+  "speakers": [
+    {
+      "id": "dhvani_patel",
+      "name": "Dhvani Patel",
+      "bio": "Dhvani Patel is co-founder of Tenet, where he is building a shared computer protocol for digital physics.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@dhvanipa",
+      "photo": "https://drive.google.com/uc?id=1QA0g4RTcCg4N6Fiu2dPBDQ_BerVUe-Vg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/zuse_a_spatial_computer_for_digital_physics_thumbnail.png"
+}

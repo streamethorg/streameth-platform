@@ -1,1 +1,21 @@
-{"id":"enter_the_dojo","name":"Enter the Dojo","description":"Dive into Dojo, a provable game engine and toolchain for building onchain games and Autonomous Worlds with Cairo. Join us for an in-depth walk through of the toolchain: its architecture, features, and limitations.","start":1700056800000,"end":1700058600000,"stageId":"emirgan_2","speakers":[{"id":"tarrence","name":"Tarrence","bio":"Tarrence is the founder of Cartridge and leads the development of Dojo, an engine for onchain games and Autonomous Worlds.","eventId":"autonomous_worlds_assembly","twitter":"@tarrenceva","photo":"https://drive.google.com/uc?id=1e0-iDFaIVtKJltLGrAcE7tBU_VQBWYOq"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/enter_the_dojo.jpg"}
+{
+  "id": "enter_the_dojo",
+  "name": "Enter the Dojo",
+  "description": "Dive into Dojo, a provable game engine and toolchain for building onchain games and Autonomous Worlds with Cairo. Join us for an in-depth walk through of the toolchain: its architecture, features, and limitations.",
+  "start": 1700056800000,
+  "end": 1700058600000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "tarrence",
+      "name": "Tarrence",
+      "bio": "Tarrence is the founder of Cartridge and leads the development of Dojo, an engine for onchain games and Autonomous Worlds.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@tarrenceva",
+      "photo": "https://drive.google.com/uc?id=1e0-iDFaIVtKJltLGrAcE7tBU_VQBWYOq"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/enter_the_dojo_thumbnail.png"
+}

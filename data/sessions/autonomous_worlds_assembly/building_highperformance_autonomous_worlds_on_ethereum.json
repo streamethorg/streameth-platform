@@ -1,1 +1,21 @@
-{"id":"building_highperformance_autonomous_worlds_on_ethereum","name":"Building High-Performance Autonomous Worlds on Ethereum","description":"In this talk, Bytes will unpack a year of hands-on experience building infrastructure for Autonomous Worlds. You'll learn essential Ethereum concepts vital for AW development, discover the specifics that make it hard to use blockchains for high-performance worlds, and explore the trade-offs builders can make to navigate these challenges.","start":1700051400000,"end":1700052300000,"stageId":"emirgan_2","speakers":[{"id":"paco_bytes","name":"Paco Bytes","bio":"Paco Bytes is the core developer of Concrete, an open-source framework for building application-specific rollups. He is known for his numerous hacks on the OP Stack—such as Mudtendo and Shadow Rollup.","eventId":"autonomous_worlds_assembly","twitter":"@therealbytes","photo":"https://drive.google.com/uc?id=1qM4Uji4kIpfylQKPsx-XKYjbh7JWw3vs"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/building_highperformance_autonomous_worlds_on_ethereum.jpg"}
+{
+  "id": "building_highperformance_autonomous_worlds_on_ethereum",
+  "name": "Building High-Performance Autonomous Worlds on Ethereum",
+  "description": "In this talk, Bytes will unpack a year of hands-on experience building infrastructure for Autonomous Worlds. You'll learn essential Ethereum concepts vital for AW development, discover the specifics that make it hard to use blockchains for high-performance worlds, and explore the trade-offs builders can make to navigate these challenges.",
+  "start": 1700051400000,
+  "end": 1700052300000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "paco_bytes",
+      "name": "Paco Bytes",
+      "bio": "Paco Bytes is the core developer of Concrete, an open-source framework for building application-specific rollups. He is known for his numerous hacks on the OP Stack—such as Mudtendo and Shadow Rollup.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@therealbytes",
+      "photo": "https://drive.google.com/uc?id=1qM4Uji4kIpfylQKPsx-XKYjbh7JWw3vs"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/building_highperformance_autonomous_worlds_on_ethereum_thumbnail.png"
+}
