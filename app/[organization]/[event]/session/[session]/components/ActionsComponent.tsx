@@ -18,7 +18,7 @@ const ActionsComponent = ({
   goBackButton?: boolean
   children: React.ReactNode
   event?: IEvent
-  session: ISession
+  session?: ISession
 }) => {
   const router = useRouter()
 
