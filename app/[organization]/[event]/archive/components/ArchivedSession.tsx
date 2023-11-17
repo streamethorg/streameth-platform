@@ -1,6 +1,9 @@
 import { ISession } from '@/server/model/session'
 import Link from 'next/link'
 import Card from '@/components/misc/Card'
+import Image from 'next/image'
+import { getImageUrl } from '@/server/utils'
+import coverImage from '@/public/cover.png'
 
 const ArchivedSession = ({
   session,
@@ -14,8 +17,14 @@ const ArchivedSession = ({
   const component = (
     <Card>
       <div className="aspect-video relative w-full">
-        <img
-          src={session.coverImage!}
+        <Image
+          width={200}
+          height={200}
+          src={
+            session.coverImage
+              ? getImageUrl(session.coverImage)
+              : coverImage
+          }
           className="rounded object-cover w-full h-full"
           alt={session.name}
         />
