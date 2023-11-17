@@ -1,17 +1,24 @@
 'use client'
+import DownloaderIcon from '@/app/assets/icons/DownloaderIcon'
+import { IEvent } from '@/server/model/event'
+import { ISession } from '@/server/model/session'
+
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const ActionsComponent = ({
   title,
   goBackButton = false,
   children,
-} // event,
-: {
+  event,
+  session,
+}: {
   title?: string
   goBackButton?: boolean
   children: React.ReactNode
-  // event?: IEvent
+  event?: IEvent
+  session: ISession
 }) => {
   const router = useRouter()
 
@@ -32,13 +39,13 @@ const ActionsComponent = ({
         </h1>
       )}
       {children}
-      {/* {event?.enableVideoDownloader && (
+      {event?.enableVideoDownloader && (
         <Link
           href={session?.videoUrl as string}
           className="cursor-pointer ml-3 text-white font-bold hover:bg-base">
           <DownloaderIcon />
         </Link>
-      )} */}
+      )}
     </div>
   )
 }
