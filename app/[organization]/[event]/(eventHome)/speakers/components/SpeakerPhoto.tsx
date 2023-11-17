@@ -34,15 +34,9 @@ const SpeakerPhoto = ({
 
   return (
     <div className={` relative ${sizeString}`}>
-      <img
-        src={
-          speaker.photo
-            ? getFileIdFromUrl(speaker.photo)
-            : CreateBlockie(speaker.name)
-        }
-        className="rounded-xl object-cover w-full h-full"
-        alt={speaker.name}
-      />
+      <img src={speaker.photo
+        ? getFileIdFromUrl(speaker.photo)
+        : CreateBlockie(speaker.name)} className="rounded-xl object-cover w-full h-full" alt={speaker.name} />
     </div>
   )
 }

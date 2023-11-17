@@ -31,33 +31,6 @@ const CreateEditEventStepThree = () => {
             handleChange(e)
           }
         />
-        <div className="flex flex-col mb-6">
-          <FormLabel label="Enable Video Downloader" toolTip />
-          <div className="flex gap-5">
-            <FormRadio
-              label="true"
-              buttonHeight="35"
-              checked={formData?.enableVideoDownloader}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  enableVideoDownloader: true,
-                })
-              }
-            />
-            <FormRadio
-              label="false"
-              buttonHeight="35"
-              checked={!formData?.enableVideoDownloader}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  enableVideoDownloader: false,
-                })
-              }
-            />
-          </div>
-        </div>
         <FormTextInput
           label="Chose your custom domain for the event page (Optional)"
           name="website"
