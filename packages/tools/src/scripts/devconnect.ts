@@ -84,7 +84,7 @@ async function generateEventAssets(event: any) {
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
   const dataSessionFolder = join(process.cwd(), '../../data/sessions', event.id)
-  const publicEventFolder = join(process.cwd(), '../../public/sessions', event.id)
+  const publicEventFolder = join(process.cwd(), '../../images/sessions', event.id)
   mkdirSync(eventFolder, { recursive: true })
   mkdirSync(publicEventFolder, { recursive: true })
 
