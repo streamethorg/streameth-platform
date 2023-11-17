@@ -54,11 +54,11 @@ export default function NavbarTop() {
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
           <Image
-            className="rounded-full h-full w-full"
+            className=" h-full w-full p-2 pr-4"
             src={logo}
             alt="Logo"
-            width={50}
-            height={50}
+            width={40}
+            height={40}
             onError={(e) => {
               e.currentTarget.src = '/logo.png'
             }}
