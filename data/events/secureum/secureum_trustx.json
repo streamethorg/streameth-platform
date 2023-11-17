@@ -19,7 +19,7 @@
   "logo": "SecureumLogo.png",
   "banner": "secureum_banner.jpeg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "accentColor": "#000000",
   "startTime": "08:30"
