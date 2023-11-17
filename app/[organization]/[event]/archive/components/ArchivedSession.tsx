@@ -14,7 +14,11 @@ const ArchivedSession = ({
   const component = (
     <Card>
       <div className="aspect-video relative w-full">
-        <img src={session.coverImage!} className="rounded object-cover w-full h-full" alt={session.name} />
+        <img
+          src={session.coverImage!}
+          className="rounded object-cover w-full h-full"
+          alt={session.name}
+        />
       </div>
       <p className=" p-2 py-4 flex flex-grow text-md ">
         {session.name}

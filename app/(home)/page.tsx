@@ -8,36 +8,45 @@ import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 import LiveEvent from './components/LiveEvent'
+import LiveEvents from './components/LiveEvents'
 
 export default async function Home() {
   const eventController = new EventController()
-  const upComing = (await eventController.getAllEvents({}))
-    .map((event) => {
-      return event.toJson()
-    })
+  const allEvents = await eventController.getAllEvents({})
+  const currentDate = new Date()
+  currentDate.setUTCHours(0, 0, 0, 0)
+
+  const liveEvents = allEvents
     .filter((event) => {
       const startDate = new Date(event?.end)
-      const currDate = new Date()
       startDate.setUTCHours(0, 0, 0, 0)
-      currDate.setUTCHours(0, 0, 0, 0)
-
-      return startDate.getTime() >= currDate.getTime()
+      return startDate.getTime() === currentDate.getTime()
     })
-    .sort((a, b) => {
-      return new Date(a.start).getTime() - new Date(b.start).getTime()
-    })
+    .map((event) => event.toJson())
+    .sort(
+      (a, b) =>
+        new Date(a.start).getTime() - new Date(b.start).getTime()
+    )
 
-  const pastEvents = (await eventController.getAllEvents({}))
+  const upComing = allEvents
+    .filter((event) => {
+      const startDate = new Date(event?.end)
+      startDate.setUTCHours(0, 0, 0, 0)
+      return startDate.getTime() > currentDate.getTime()
+    })
+    .map((event) => event.toJson())
+    .sort(
+      (a, b) =>
+        new Date(a.start).getTime() - new Date(b.start).getTime()
+    )
+
+  const pastEvents = allEvents
     .filter((event) => {
       const endDate = new Date(event?.end)
-      const currDate = new Date()
       endDate.setUTCHours(0, 0, 0, 0)
-      currDate.setUTCHours(0, 0, 0, 0)
-      return endDate.getTime() < currDate.getTime()
+      return endDate.getTime() < currentDate.getTime()
     })
-    .map((event) => {
-      return event.toJson()
-    })
+    .map((event) => event.toJson())
   const stageController = new StageController()
   const stage = await stageController.getStage(
     'auditorium',
@@ -79,6 +88,10 @@ export default async function Home() {
       </div>
       <div className="flex flex-col lg:overflow-hidden">
         <LiveEvent stage={stage.toJson()} />
+        <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
+          Live Events
+        </p>
+        <LiveEvents events={liveEvents} />
         <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
           Upcoming Events
         </p>

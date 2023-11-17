@@ -8,6 +8,7 @@ import EmbedButton from '@/components/misc/EmbedButton'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
+import { IEvent } from '@/server/model/event'
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (
@@ -20,15 +21,20 @@ export default async function SessionComponent({
   session,
   nextSession,
   params,
+  event,
 }: {
   session: Session
-  nextSession: Session | null
+  nextSession?: Session | null
   params: string
+  event: IEvent
 }) {
   return (
     <div className="flex flex-col w-full max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 gap-4">
       <div className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
-        <ActionsComponent goBackButton>
+        <ActionsComponent
+          session={session.toJson()}
+          event={event}
+          goBackButton>
           <EmbedButton
             playbackId={session.playbackId}
             playerName={session.name}
@@ -52,7 +58,11 @@ export default async function SessionComponent({
                 nextSession?.id
               }>
               <div className="aspect-video cursor-pointer relative  w-full">
-                <img src={session.coverImage!} className="rounded-xl object-cover w-full h-full" alt={session.name} />
+                <img
+                  src={nextSession.coverImage!}
+                  className="rounded-xl object-cover w-full h-full"
+                  alt={session.name}
+                />
               </div>
               <p className=" p-2 py-4 text-md">{nextSession?.name}</p>
             </Link>
