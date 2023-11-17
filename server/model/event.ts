@@ -93,6 +93,7 @@ export default class Event implements IEvent {
   endTime?: string
 
   // enableVideoDownloader?: boolean
+
   plugins?: IPlugins
   constructor({
     id,
@@ -113,7 +114,7 @@ export default class Event implements IEvent {
     dataExporter,
     startTime,
     endTime,
-    // enableVideoDownloader = false,
+    // enableVideoDownloader,
     unlisted,
     plugins,
   }: Omit<IEvent, 'id'> & { id?: string }) {

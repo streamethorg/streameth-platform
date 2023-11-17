@@ -29,7 +29,7 @@ const RadioButtonSolidIcon = ({
         cy="17.5"
         r="17"
         fill={checked ? pathFill : ''}
-        stroke={!checked ? colors.blue : ''}
+        stroke={!checked ? colors.accent : ''}
       />
     </svg>
   )

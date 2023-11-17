@@ -1,1 +1,35 @@
-{"id":"epbs","name":"ePBS","description":"Fellow project presentation by Ella, Anshal, and Manav","start":1700218800000,"end":1700219400000,"stageId":"3b36","speakers":[{"id":"anshal_shukla","name":"Anshal Shukla","bio":"EPF Fellow","eventId":"epf_day","twitter":"@anshalshukla"},{"id":"ella","name":"Ella","bio":"EPF Fellow","eventId":"epf_day","twitter":"@0x3114","photo":"https://pbs.twimg.com/profile_images/1576093049008054272/NkiRnurn_400x400.jpg"},{"id":"manav_darji","name":"Manav Darji","bio":"EPF Fellow","eventId":"epf_day","twitter":"@manav24_"}],"playbackId":"","eventId":"epf_day","coverImage":"/sessions/epf_day/epbs.jpg"}
+{
+  "id": "epbs",
+  "name": "ePBS",
+  "description": "Fellow project presentation by Ella, Anshal, and Manav",
+  "start": 1700218800000,
+  "end": 1700219400000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "anshal_shukla",
+      "name": "Anshal Shukla",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@anshalshukla"
+    },
+    {
+      "id": "ella",
+      "name": "Ella",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@0x3114",
+      "photo": "https://pbs.twimg.com/profile_images/1576093049008054272/NkiRnurn_400x400.jpg"
+    },
+    {
+      "id": "manav_darji",
+      "name": "Manav Darji",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@manav24_"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/epbs_thumbnail.png"
+}
