@@ -29,7 +29,11 @@
       "twitter": "@manav24_"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/c96fosf8z5vv043d/index.m3u8",
+  "playbackId": "c96fosf8z5vv043d",
   "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/epbs_thumbnail.png"
+  "coverImage": "/sessions/epf_day/epbs_thumbnail.png",
+  "assetId": "c96f7f52-11fa-4625-92eb-5ef86346f670",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }

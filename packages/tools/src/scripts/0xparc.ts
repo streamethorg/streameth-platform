@@ -198,7 +198,10 @@ async function generateEventAssets(event: any) {
         // Only render compositions that have frames
         if (composition.durationInFrames > 1) {
           if (folderId) {
-            if (composition.id.includes('wide') && session.stageId === 'auditorium') {
+            if (
+              composition.id.includes('wide') &&
+              session.stageId === 'auditorium'
+            ) {
               const id = `${session.id}_intro-wide.mov`
               const type = 'video/mov'
               const introFilePath = `${eventFolder}/${id}`
