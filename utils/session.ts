@@ -26,6 +26,7 @@ export const WHITELISTED_ADDRESSES = [
   '0xCa2ea165feDC31bCc290153e2b3000979695e018', // filipo
   '0x9268d03EfF4A9A595ef619764AFCB9976c0375df', // Samuel
   '0x98a8F0E12E509aEFfb52eb30a60784593d7927ae', // carlota
+  '0x03C11db6d6eeeBF49A0803096B8D4121869477dc', // Render machine / Wesley 
 ]
 
 export type ISession = {

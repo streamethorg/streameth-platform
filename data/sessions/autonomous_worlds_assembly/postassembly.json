@@ -1,1 +1,21 @@
-{"id":"postassembly","name":"Post-Assembly","description":"The Assembly will culminate in the Post-Assembly, where contributors and attendees alike are invited to engage in dynamic, unconference-style conversations. Everyone is encouraged to propose topics for discussion. The themes that garner the most interest by the close of the first day will be selected as the focal points for small group dialogues.","start":1700132400000,"end":1700143200000,"stageId":"beyazit","speakers":[{"id":"arb","name":"ARB","bio":"ARB is the co-founder of Moving Castles, a game design studio researching and developing Autonomous Worlds. He is working on the games This Cursed Machine and Network States.","eventId":"autonomous_worlds_assembly","twitter":"@ArthurRoingBaer","photo":"https://drive.google.com/uc?id=10yZ7Ize15kSEe7Fxy5SC-SMWLDyYiXgd"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/postassembly.jpg"}
+{
+  "id": "postassembly",
+  "name": "Post-Assembly",
+  "description": "The Assembly will culminate in the Post-Assembly, where contributors and attendees alike are invited to engage in dynamic, unconference-style conversations. Everyone is encouraged to propose topics for discussion. The themes that garner the most interest by the close of the first day will be selected as the focal points for small group dialogues.",
+  "start": 1700132400000,
+  "end": 1700143200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "arb",
+      "name": "ARB",
+      "bio": "ARB is the co-founder of Moving Castles, a game design studio researching and developing Autonomous Worlds. He is working on the games This Cursed Machine and Network States.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@ArthurRoingBaer",
+      "photo": "https://drive.google.com/uc?id=10yZ7Ize15kSEe7Fxy5SC-SMWLDyYiXgd"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/postassembly_thumbnail.png"
+}

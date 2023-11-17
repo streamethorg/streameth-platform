@@ -1,11 +1,13 @@
 const GITHUB_ORG = 'streamethorg'
 const GITHUB_REPO = 'streameth-platform'
 const DEFAULT_FOLDER = 'data'
+const DEFAULT_BRANCH = 'main'
 
 export async function AddOrUpdateFile(
   filename: string,
   data: string,
-  folder: string = DEFAULT_FOLDER
+  folder: string = DEFAULT_FOLDER,
+  branch: string = DEFAULT_BRANCH
 ) {
   console.log('Add or Update file', filename, folder)
   if (!process.env.GITHUB_API_TOKEN) {
@@ -29,6 +31,7 @@ export async function AddOrUpdateFile(
         },
         body: JSON.stringify({
           message: `[av] ${filename}`,
+          branch: branch,
           committer: {
             name: 'github_actions',
             email: 'github-actions[bot]@users.noreply.github.com',

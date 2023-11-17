@@ -1,1 +1,21 @@
-{"id":"building_games_with_dojo","name":"Building Games with Dojo","description":"Build your first Dojo game. We'll guide participants through the setup, framework, and steps to building a fully onchain game with the Dojo engine. By the end of the session, you'll have your own game deployed to a live Katana instance for play-testing.","start":1700046000000,"end":1700049600000,"stageId":"beylerbeyi_1","speakers":[{"id":"tarrence","name":"Tarrence","bio":"Tarrence is the founder of Cartridge and leads the development of Dojo, an engine for onchain games and Autonomous Worlds.","eventId":"autonomous_worlds_assembly","twitter":"@tarrenceva","photo":"https://drive.google.com/uc?id=1e0-iDFaIVtKJltLGrAcE7tBU_VQBWYOq"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/building_games_with_dojo.jpg"}
+{
+  "id": "building_games_with_dojo",
+  "name": "Building Games with Dojo",
+  "description": "Build your first Dojo game. We'll guide participants through the setup, framework, and steps to building a fully onchain game with the Dojo engine. By the end of the session, you'll have your own game deployed to a live Katana instance for play-testing.",
+  "start": 1700046000000,
+  "end": 1700049600000,
+  "stageId": "beylerbeyi_1",
+  "speakers": [
+    {
+      "id": "tarrence",
+      "name": "Tarrence",
+      "bio": "Tarrence is the founder of Cartridge and leads the development of Dojo, an engine for onchain games and Autonomous Worlds.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@tarrenceva",
+      "photo": "https://drive.google.com/uc?id=1e0-iDFaIVtKJltLGrAcE7tBU_VQBWYOq"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/building_games_with_dojo_thumbnail.png"
+}
