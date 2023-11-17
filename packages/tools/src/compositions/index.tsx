@@ -201,7 +201,7 @@ export function Compositions() {
           }}
         />
 
-        {/* <Composition
+        <Composition
           id={'autonomous-worlds-assembly'}
           component={AwaIntro}
           width={1920}
@@ -221,7 +221,7 @@ export function Compositions() {
           defaultProps={{
             session: MOCK_SESSION[1],
           }}
-        /> */}
+        />
       </Folder>
 
       <Composition

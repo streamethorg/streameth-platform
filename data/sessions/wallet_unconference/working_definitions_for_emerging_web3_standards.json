@@ -15,7 +15,11 @@
       "photo": "https://speak.ticketh.xyz/media/avatars/headshot_pollack_ffZc36E.jpeg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/3f23x6xbxmmklu79/index.m3u8",
+  "playbackId": "3f23x6xbxmmklu79",
   "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/working_definitions_for_emerging_web3_standards_thumbnail.png"
+  "coverImage": "/sessions/wallet_unconference/working_definitions_for_emerging_web3_standards_thumbnail.png",
+  "assetId": "3f238399-ea75-4213-92d7-c933d6d32fd4",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
 }

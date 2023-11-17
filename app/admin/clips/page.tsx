@@ -6,7 +6,7 @@ export default async function Page() {
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`, // ONLY use on Server actions - NOT client side
       },
     }
   )

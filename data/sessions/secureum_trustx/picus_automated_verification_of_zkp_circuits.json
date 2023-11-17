@@ -1,1 +1,25 @@
-{"id":"picus_automated_verification_of_zkp_circuits","name":"Picus: Automated Verification of ZKP Circuits","description":"","start":1699974000000,"end":1699974900000,"stageId":"main_stage","speakers":[{"id":"andreea_buterchi","name":"Andreea\nButerchi","bio":"VP of Engineering\nVeridise","eventId":"secureum_trustx","twitter":"@AndreeaButerchi","photo":"https://www.secureum.xyz/wp-content/uploads/2023/10/Andreea.png"}],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/picus_automated_verification_of_zkp_circuits.jpg"}
+{
+  "id": "picus_automated_verification_of_zkp_circuits",
+  "name": "Picus: Automated Verification of ZKP Circuits",
+  "description": "",
+  "start": 1699974000000,
+  "end": 1699974900000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "andreea_buterchi",
+      "name": "Andreea\nButerchi",
+      "bio": "VP of Engineering\nVeridise",
+      "eventId": "secureum_trustx",
+      "twitter": "@AndreeaButerchi",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Andreea.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/40b6kha6cmb7lo25/index.m3u8",
+  "playbackId": "40b6kha6cmb7lo25",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/picus_automated_verification_of_zkp_circuits.jpg",
+  "assetId": "40b60119-0a23-409f-991b-ede407613b70",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}

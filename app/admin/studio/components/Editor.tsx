@@ -124,7 +124,7 @@ export function Editor(props: Props) {
     const clipRes = await fetch('https://livepeer.studio/api/clip', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`, // ONLY use on Server actions - NOT client side
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(clip),

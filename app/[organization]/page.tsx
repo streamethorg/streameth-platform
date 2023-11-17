@@ -6,7 +6,7 @@ import OrganizationController from '@/server/controller/organization'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Metadata, ResolvingMetadata } from 'next'
-
+import { getImageUrl } from '@/server/utils'
 interface Params {
   params: {
     organization: string
@@ -25,10 +25,10 @@ export default async function OrganizationHome({ params }: Params) {
   )
   const getCover = () => {
     if (organization?.id == 'zuzalu') {
-      return '/events/zuzalu-cover.png'
+      return getImageUrl('/events/zuzalu-cover.png')
     }
     if (organization?.id == 'devconnect') {
-      return '/events/devconnect_cover.png'
+      return getImageUrl('/events/devconnect_cover.png')
     }
     return ''
   }
@@ -50,7 +50,7 @@ export default async function OrganizationHome({ params }: Params) {
         style={beforeStyle}></div>
       <div className="sticky bg-white top-0 z-50 flex p-4 px-9 gap-4">
         <Image
-          src={organization.logo}
+          src={getImageUrl(organization.logo)}
           width={50}
           height={50}
           style={{

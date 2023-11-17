@@ -15,7 +15,11 @@
       "photo": "https://speak.ticketh.xyz/media/avatars/Baki_Er_RgO4Z3r.png"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/a2a9ojnrmulwbukv/index.m3u8",
+  "playbackId": "a2a9ojnrmulwbukv",
   "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/bringing_web2_habits_to_web3_with_battletested_security_thumbnail.png"
+  "coverImage": "/sessions/wallet_unconference/bringing_web2_habits_to_web3_with_battletested_security_thumbnail.png",
+  "assetId": "a2a988d9-202a-480c-b8b5-d55db8e905d9",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
 }

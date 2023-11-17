@@ -1,1 +1,21 @@
-{"id":"mythmaking_mechanisms_in_autonomous_worlds","name":"Myth-Making Mechanisms in Autonomous Worlds","description":"This talk explores where narratives comes from inside of systems, and how these narratives differ from more familiar forms of storytelling—including those of traditional games.\n","start":1700119800000,"end":1700121600000,"stageId":"emirgan_1","speakers":[{"id":"jay_springett","name":"Jay Springett","bio":"Jay Springett strategises new worlds. With a background in corporate consulting and philosophy of arts, he specialises in fostering cohesive worlds through the integration of people, place, and technologies. His essay collection on running worlds can be found at worldrunning.guide, and his weekly 301 second long podcast at permanentlymoved.online. He is currently writing a book about the past, present, and future of worlds titled The Web Was a Side Quest. ","eventId":"autonomous_worlds_assembly","twitter":"@thejaymo","photo":"https://drive.google.com/uc?id=1y8MNPjV-ZLtZYEvpGi8fsvAeYvXfbdYM"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/mythmaking_mechanisms_in_autonomous_worlds.jpg"}
+{
+  "id": "mythmaking_mechanisms_in_autonomous_worlds",
+  "name": "Myth-Making Mechanisms in Autonomous Worlds",
+  "description": "This talk explores where narratives comes from inside of systems, and how these narratives differ from more familiar forms of storytelling—including those of traditional games.\n",
+  "start": 1700119800000,
+  "end": 1700121600000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "jay_springett",
+      "name": "Jay Springett",
+      "bio": "Jay Springett strategises new worlds. With a background in corporate consulting and philosophy of arts, he specialises in fostering cohesive worlds through the integration of people, place, and technologies. His essay collection on running worlds can be found at worldrunning.guide, and his weekly 301 second long podcast at permanentlymoved.online. He is currently writing a book about the past, present, and future of worlds titled The Web Was a Side Quest. ",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@thejaymo",
+      "photo": "https://drive.google.com/uc?id=1y8MNPjV-ZLtZYEvpGi8fsvAeYvXfbdYM"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/mythmaking_mechanisms_in_autonomous_worlds_thumbnail.png"
+}

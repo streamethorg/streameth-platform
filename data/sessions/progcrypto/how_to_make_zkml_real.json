@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1MV2ImCkMrqJhPfiuLF1u3vyX1KzqeO-W/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/67f32rai2gl175hq/index.m3u8",
+  "playbackId": "67f32rai2gl175hq",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/how_to_make_zkml_real_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/how_to_make_zkml_real_thumbnail.png",
+  "assetId": "67f3ee27-e8f7-4ba0-91fa-3312c17227c0",
+  "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
+  "videoType": "clip"
 }

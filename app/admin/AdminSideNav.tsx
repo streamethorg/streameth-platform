@@ -13,6 +13,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   PaperClipIcon,
+  VideoCameraIcon
 } from '@heroicons/react/24/outline'
 
 const ADMIN_MENU = [
@@ -25,6 +26,11 @@ const ADMIN_MENU = [
     id: '/admin',
     name: 'My organizations',
     Icon: EventIcon,
+  },
+  {
+    id: '/admin/monitor',
+    name: 'Monitor',
+    Icon: VideoCameraIcon,
   },
   {
     id: '/admin/clips',

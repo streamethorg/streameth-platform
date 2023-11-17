@@ -23,8 +23,12 @@
       "photo": "https://drive.google.com/file/d/1EdKL10RwP0lBSnopJ1b-qocSbuDJSR4W/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/2c57ku6ozr0tlb6o/index.m3u8",
+  "playbackId": "2c57ku6ozr0tlb6o",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/zk_email_email_wallet_and_provenant_identity_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/zk_email_email_wallet_and_provenant_identity_thumbnail.png",
+  "assetId": "2c573a37-b3d0-4cbc-b46a-c8b9335edcf8",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
 }
