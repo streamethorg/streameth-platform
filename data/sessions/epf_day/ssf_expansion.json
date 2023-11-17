@@ -14,7 +14,11 @@
       "twitter": "@murrlincoln"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/73883hwc70gzf7r3/index.m3u8",
+  "playbackId": "73883hwc70gzf7r3",
   "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/ssf_expansion_thumbnail.png"
+  "coverImage": "/sessions/epf_day/ssf_expansion_thumbnail.png",
+  "assetId": "7388653e-e123-4d5c-b8fc-2ba08e7443e6",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }
