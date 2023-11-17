@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1lJc5kiLJTEt3H3ceLU9lwRHG51AQxOTr/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/262adiuqe5mfqqjz/index.m3u8",
+  "playbackId": "262adiuqe5mfqqjz",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/programmable_privacy_on_the_application_and_protocol_layers_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/programmable_privacy_on_the_application_and_protocol_layers_thumbnail.png",
+  "assetId": "262a95fc-d6e6-49c9-86e9-8f1624cb8ba0",
+  "sourceId": "34b4cf87-6a3c-4a74-b600-881835ed4313",
+  "videoType": "clip"
 }

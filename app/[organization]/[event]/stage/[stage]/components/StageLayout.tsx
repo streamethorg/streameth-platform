@@ -54,8 +54,8 @@ export default function StageLayout({ event }: { event: IEvent }) {
         tabs.push({
           id: 'chat',
           header: <ChatBubbleBottomCenterIcon />,
-          // content: <Dm3 />,
-          content: <Chat conversationId={stage.id} />,
+          content: <Dm3 />,
+          // content: <Chat conversationId={stage.id} />,
         })
     }
 

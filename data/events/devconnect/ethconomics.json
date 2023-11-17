@@ -17,7 +17,7 @@
   ],
   "eventCover": "ethconomics_cover.jpeg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "ethconomics_logo.png",
   "banner": "ethconomics_banner.jpeg",
@@ -31,5 +31,6 @@
       }
     }
   ],
-  "startTime": "14:00"
+  "startTime": "14:00",
+  "enableVideoDownloader": true
 }

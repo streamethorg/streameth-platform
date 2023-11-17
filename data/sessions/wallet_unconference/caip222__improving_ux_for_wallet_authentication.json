@@ -1,1 +1,21 @@
-{"id":"caip222__improving_ux_for_wallet_authentication","name":"CAIP-222 - Improving UX for Wallet authentication","description":"The new CAIP-222 standard provides a simpler user experience by bundling two wallet requests (\"connect wallet\" and \"sign in with ethereum/solana/etc\") into a single method. This one-click flow can thus provide wallet authentication and even Authorization via ReCaps or UCANs when exposing blockchain accounts and returning a cryptographic signature. Cali will give a brief overview of the interface and then workshop use-cases with attendees.","start":1700233200000,"end":1700235000000,"stageId":"beyazit","speakers":[{"id":"cali_armut","name":"Cali Armut","bio":"Cali is a Software Engineer at WalletConnect, originally from Belgium, specializing in authentication and authorization. He is passionate about DIDs, SIWE and SIWx. Before moving into the web3 tooling space, he specialized in web2 identity standards such as OAuth, SAML and OpenID Connect.","eventId":"wallet_unconference","twitter":"","photo":"https://speak.ticketh.xyz/media/avatars/z88_ccgOSgT.jpg"}],"playbackId":"","eventId":"wallet_unconference","coverImage":"/sessions/wallet_unconference/caip222__improving_ux_for_wallet_authentication.jpg"}
+{
+  "id": "caip222__improving_ux_for_wallet_authentication",
+  "name": "CAIP-222 - Improving UX for Wallet authentication",
+  "description": "The new CAIP-222 standard provides a simpler user experience by bundling two wallet requests (\"connect wallet\" and \"sign in with ethereum/solana/etc\") into a single method. This one-click flow can thus provide wallet authentication and even Authorization via ReCaps or UCANs when exposing blockchain accounts and returning a cryptographic signature. Cali will give a brief overview of the interface and then workshop use-cases with attendees.",
+  "start": 1700233200000,
+  "end": 1700235000000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "cali_armut",
+      "name": "Cali Armut",
+      "bio": "Cali is a Software Engineer at WalletConnect, originally from Belgium, specializing in authentication and authorization. He is passionate about DIDs, SIWE and SIWx. Before moving into the web3 tooling space, he specialized in web2 identity standards such as OAuth, SAML and OpenID Connect.",
+      "eventId": "wallet_unconference",
+      "twitter": "",
+      "photo": "https://speak.ticketh.xyz/media/avatars/z88_ccgOSgT.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/caip222__improving_ux_for_wallet_authentication_thumbnail.png"
+}

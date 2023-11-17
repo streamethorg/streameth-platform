@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1i3AB5RKTNCU9y0h7HLUZ27m-I8yWc8BU/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/05eftf2ovcwgs4z2/index.m3u8",
+  "playbackId": "05eftf2ovcwgs4z2",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/did_use_cases_in_taiwan_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/did_use_cases_in_taiwan_thumbnail.png",
+  "assetId": "05ef334e-b21d-4102-8c09-5df3280e0ed9",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
 }

@@ -1,0 +1,25 @@
+{
+  "id": "ethtrust_security_levels__building_trust_with_standards",
+  "name": "EthTrust Security Levels – building trust with standards",
+  "description": "",
+  "start": 1699890420000,
+  "end": 1699891380000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "chaals_nevile",
+      "name": "Chaals\nNevile",
+      "bio": "Technical Programs Director EEA",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Chaals.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/bca9g32tdec32mk8/index.m3u8",
+  "playbackId": "bca9g32tdec32mk8",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/ethtrust_security_levels__building_trust_with_standards.jpg",
+  "assetId": "bca9a5c4-2107-410a-9496-ee68bb59b913",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}

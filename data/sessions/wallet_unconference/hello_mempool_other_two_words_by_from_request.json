@@ -1,1 +1,25 @@
-{"id":"hello_mempool_other_two_words_by_from_request","name":"hello Mempool; other_two_words_by_from request","description":"In the rapidly evolving world of blockchain technology, the mempool often remains an underexplored territory. With my projects, \"Roll a Mate\" and \"Acid Chains\", I've delved deep into this realm, seeking to harness its expansive capabilities to push the boundaries of the Ethereum Mainnet and other EVM-based chains.","start":1700211600000,"end":1700212500000,"stageId":"beyazit","speakers":[{"id":"ariutokintumi","name":"ariutokintumi","bio":"I am an inventor, life hacker, and an ardent web3 builder. Over the past eight months, I have made significant contributions to the blockchain space through various projects. I have extensive experience in cryptography, software architecture, and have been a developer since 1996.","eventId":"wallet_unconference","twitter":"@ariutokintumi ","photo":"https://speak.ticketh.xyz/media/avatars/pablos-ngmi_yqJf0oT.jpg"}],"playbackId":"","eventId":"wallet_unconference","coverImage":"/sessions/wallet_unconference/hello_mempool_other_two_words_by_from_request.jpg"}
+{
+  "id": "hello_mempool_other_two_words_by_from_request",
+  "name": "hello Mempool; other_two_words_by_from request",
+  "description": "In the rapidly evolving world of blockchain technology, the mempool often remains an underexplored territory. With my projects, \"Roll a Mate\" and \"Acid Chains\", I've delved deep into this realm, seeking to harness its expansive capabilities to push the boundaries of the Ethereum Mainnet and other EVM-based chains.",
+  "start": 1700211600000,
+  "end": 1700212500000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "ariutokintumi",
+      "name": "ariutokintumi",
+      "bio": "I am an inventor, life hacker, and an ardent web3 builder. Over the past eight months, I have made significant contributions to the blockchain space through various projects. I have extensive experience in cryptography, software architecture, and have been a developer since 1996.",
+      "eventId": "wallet_unconference",
+      "twitter": "@ariutokintumi ",
+      "photo": "https://speak.ticketh.xyz/media/avatars/pablos-ngmi_yqJf0oT.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c7adkjyo7jo7n4wk/index.m3u8",
+  "playbackId": "c7adkjyo7jo7n4wk",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/hello_mempool_other_two_words_by_from_request_thumbnail.png",
+  "assetId": "c7ad6fb3-c424-4e39-ba3d-c88988d761f5",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
+}

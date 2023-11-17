@@ -57,7 +57,6 @@ let nextConfig = {
 
     return config
   },
-
   images: {
     remotePatterns: [
       {

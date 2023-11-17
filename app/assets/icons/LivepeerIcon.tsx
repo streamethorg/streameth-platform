@@ -64,11 +64,11 @@ const LivepeerIcon = () => {
           x2="33.6519"
           y2="17.0848"
           gradientUnits="userSpaceOnUse">
-          <stop className="w-color-1" stop-color="#131418"></stop>
+          <stop className="w-color-1" stopColor="#131418"></stop>
           <stop
             className="w-color-2"
             offset="1"
-            stop-color="#131418"></stop>
+            stopColor="#131418"></stop>
         </linearGradient>
       </defs>
     </svg>

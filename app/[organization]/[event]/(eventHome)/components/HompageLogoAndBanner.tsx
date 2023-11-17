@@ -6,6 +6,7 @@ import ComponentWrapper from './ComponentWrapper'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { getEventPeriod } from '@/utils/time'
+import { getImageUrl } from '@/server/utils'
 const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   const { logo, banner } = event
 
@@ -15,11 +16,13 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
     <ComponentWrapper sectionId="home">
       <Image
         className="rounded-lg max-h-[500px]"
-        src={'/events/' + banner}
+        src={getImageUrl('/events/' + banner)}
         alt="Event Cover"
         width={1500}
         height={500}
-        objectFit="cover"
+        style={{
+          objectFit: 'cover',
+        }}
       />
       <div id="home" className="flex flex-col p-4">
         <div className=" flex-col flex space-y-2 md:flex-col">

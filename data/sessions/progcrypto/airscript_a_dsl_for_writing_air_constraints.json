@@ -1,7 +1,7 @@
 {
   "id": "airscript_a_dsl_for_writing_air_constraints",
   "name": "AirScript: a DSL for writing AIR constraints",
-  "description": "Account abstraction has opened the door to gasless transactions, alternative authentication methods, social recovery, app accounts, and other innovations. However, it imposes in additional strain in the protocol, as validation is no longer a straightforward process. \n\nIn this talk, we'll explore how working on a private-first network such as Aztec expands what's possible to do with account abstraction, as well as some new challenges that arise from it.",
+  "description": "In this talk, we will go over different ways of writing constraints for STARK-based systems and present AirScript - a new DSL for writing AIR constraints. We will describe AirScript's design goals and capabilities, go over its syntax, and give one or two simple examples of how to use it.",
   "start": 1700227800000,
   "end": 1700229600000,
   "stageId": "auditorium",

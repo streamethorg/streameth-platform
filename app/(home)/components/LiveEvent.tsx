@@ -4,6 +4,7 @@ import Player from '@/components/misc/Player'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IStage } from '@/server/model/stage'
+import { getImageUrl } from '@/server/utils'
 
 const LiveEvent = ({ stage }: { stage: IStage }) => {
   return (
@@ -30,7 +31,7 @@ const LiveEvent = ({ stage }: { stage: IStage }) => {
             </p>
             <Image
               className="hidden lg:block"
-              src={'/events/PROGCRYPTO_Cover.png'}
+              src={getImageUrl("/events/PROGCRYPTO_Cover.png")}
               alt="PROGCRYPTO"
               width={700}
               height={700}

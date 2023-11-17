@@ -1,7 +1,7 @@
 {
   "id": "closing",
   "name": "Closing",
-  "description": "TBD",
+  "description": "Don't leave early! We won't tell you exactly what's going to happen, but there will be frogs, jubmojis, prizes and possibly chaos.",
   "start": 1700229600000,
   "end": 1700231400000,
   "stageId": "auditorium",
@@ -17,5 +17,5 @@
   ],
   "playbackId": "",
   "eventId": "progcrypto",
-  "coverImage": "/sessions/progcrypto/closing_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/closing_thumbnails.png"
 }

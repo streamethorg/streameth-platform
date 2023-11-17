@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/19RLXoBAE-R2kdKBxM46nFO64kqs9Gmid/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/f4a4vcgmv17vr5r9/index.m3u8",
+  "playbackId": "f4a4vcgmv17vr5r9",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/zk_proofs_a_case_study_integrating_taiwans_official_identity_apis_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/zk_proofs_a_case_study_integrating_taiwans_official_identity_apis_thumbnail.png",
+  "assetId": "f4a47160-d04e-4db5-b271-caf331391b04",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
 }

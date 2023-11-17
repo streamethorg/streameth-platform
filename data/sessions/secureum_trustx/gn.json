@@ -1,0 +1,16 @@
+{
+  "id": "gn",
+  "name": "GN",
+  "description": "",
+  "start": 1699980300000,
+  "end": 1699981200000,
+  "stageId": "main_stage",
+  "speakers": [],
+  "videoUrl": "https://lp-playback.com/hls/dd3bymsc116751dx/index.m3u8",
+  "playbackId": "dd3bymsc116751dx",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/gn.jpg",
+  "assetId": "dd3bee98-066b-4bfd-85e1-16b5d109ffe7",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}

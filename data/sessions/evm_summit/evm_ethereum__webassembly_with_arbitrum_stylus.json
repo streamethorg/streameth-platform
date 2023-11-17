@@ -15,11 +15,7 @@
       "photo": "https://evmsummit.org/images/speakers/raul_jordan.jpg"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/219egz0pw291k15k/index.m3u8",
-  "playbackId": "219egz0pw291k15k",
+  "playbackId": "",
   "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/evm_ethereum__webassembly_with_arbitrum_stylus_thumbnail.png",
-  "assetId": "219e3796-d5b8-4e08-ac86-25a544313515",
-  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
-  "videoType": "clip"
+  "coverImage": "/sessions/evm_summit/evm_ethereum__webassembly_with_arbitrum_stylus_thumbnail.png"
 }

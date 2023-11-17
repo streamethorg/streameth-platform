@@ -1,0 +1,25 @@
+{
+  "id": "proactive_security",
+  "name": "Proactive Security",
+  "description": "",
+  "start": 1699883160000,
+  "end": 1699884120000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "chandrakana_nandi",
+      "name": "Chandrakana\nNandi",
+      "bio": "Principal Research Scientist\nCertora",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/11/Chandra.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/a213jsxgdicn7izu/index.m3u8",
+  "playbackId": "a213jsxgdicn7izu",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/proactive_security.jpg",
+  "assetId": "a213083b-bd1a-4f45-97c3-f438c97ab999",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}

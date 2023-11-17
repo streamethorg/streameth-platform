@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1RknPIHh7w60H5whqMkPrNIY8W3WMRCk6/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/cd25ma0u324t1gtw/index.m3u8",
+  "playbackId": "cd25ma0u324t1gtw",
   "eventId": "progcrypto",
   "track": "Identity, Attestations, and PCDs",
-  "coverImage": "/sessions/progcrypto/programmable_identity_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/programmable_identity_thumbnail.png",
+  "assetId": "cd257195-d1c8-48de-803b-0fe75609b101",
+  "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
+  "videoType": "clip"
 }

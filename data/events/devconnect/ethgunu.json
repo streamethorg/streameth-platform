@@ -17,7 +17,7 @@
   ],
   "eventCover": "ETHGunu_cover.jpeg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "ETHGunu_logo.png",
   "banner": "ETHGunu_Banner.png",

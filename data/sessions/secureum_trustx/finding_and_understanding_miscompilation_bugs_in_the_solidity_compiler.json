@@ -1,0 +1,25 @@
+{
+  "id": "finding_and_understanding_miscompilation_bugs_in_the_solidity_compiler",
+  "name": "Finding and Understanding Miscompilation Bugs in the Solidity Compiler",
+  "description": "",
+  "start": 1699874160000,
+  "end": 1699875120000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "bhargava_shastry",
+      "name": "Bhargava\nShastry",
+      "bio": "Security Engineer\nEthereum Foundation",
+      "eventId": "secureum_trustx",
+      "twitter": "@ibags",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Bhargava.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ece9kpb88yc1dpf6/index.m3u8",
+  "playbackId": "ece9kpb88yc1dpf6",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/finding_and_understanding_miscompilation_bugs_in_the_solidity_compiler.jpg",
+  "assetId": "ece9fffc-1e83-4cef-9ac4-955fcf728fbb",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}

@@ -23,9 +23,6 @@ const SpeakerPhoto = ({
   speaker: ISpeaker
   size?: 'sm' | 'md' | 'lg'
 }) => {
-  const avatar = speaker.photo
-    ? speaker.photo
-    : CreateBlockie(speaker.name)
   let sizeString
   if (size === 'sm') {
     sizeString = 'h-8 w-8 '
@@ -38,7 +35,6 @@ const SpeakerPhoto = ({
   return (
     <div className={` relative ${sizeString}`}>
       <Image
-        unoptimized={true}
         className="rounded-xl"
         src={
           speaker.photo

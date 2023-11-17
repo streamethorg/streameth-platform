@@ -13,7 +13,11 @@
       "eventId": "solidity_summit"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/fb81rck4k5lg8gii/index.m3u8",
+  "playbackId": "fb81rck4k5lg8gii",
   "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/solidity_in_2023_thumbnail.png"
+  "coverImage": "/sessions/solidity_summit/solidity_in_2023_thumbnail.png",
+  "assetId": "fb81c1ab-bfbd-4687-8d67-e7b355bc4d80",
+  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+  "videoType": "clip"
 }

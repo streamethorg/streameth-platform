@@ -1,8 +1,9 @@
 import { ISession } from '@/server/model/session'
-import Image from 'next/image'
-import { useState } from 'react'
 import Link from 'next/link'
 import Card from '@/components/misc/Card'
+import Image from 'next/image'
+import { getImageUrl } from '@/server/utils'
+import coverImage from '@/public/cover.png'
 
 const ArchivedSession = ({
   session,
@@ -13,33 +14,19 @@ const ArchivedSession = ({
   learnMore?: boolean
   goToStage?: boolean
 }) => {
-  const [image, setImage] = useState(session.coverImage)
-  const [fallback, setFallback] = useState(false)
-  const alt = '/events/' + session.eventId + '.png'
-
-  const handleError = () => {
-    // if (!fallback) {
-    //   setImage(alt)
-    //   setFallback(true)
-    // } else {
-    //   setImage('/cover.png')
-    // }
-  }
-
   const component = (
     <Card>
       <div className="aspect-video relative w-full">
         <Image
-          className="rounded"
-          alt="Session image"
-          quality={60}
-          src={image!}
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          style={{
-            objectFit: 'cover',
-          }}
-          onError={handleError}
+          width={200}
+          height={200}
+          src={
+            session.coverImage
+              ? getImageUrl(session.coverImage)
+              : coverImage
+          }
+          className="rounded object-cover w-full h-full"
+          alt={session.name}
         />
       </div>
       <p className=" p-2 py-4 flex flex-grow text-md ">

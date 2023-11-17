@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1K7emNnX7aHPgHbKkrltusSAdBJmkYbMn/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/7353iij1uc6tkf4o/index.m3u8",
+  "playbackId": "7353iij1uc6tkf4o",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/implementing_blocklists_on_permissionless_blockchains_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/implementing_blocklists_on_permissionless_blockchains_thumbnail.png",
+  "assetId": "7353a19e-ff01-43e5-862b-11a4469b7141",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
 }
