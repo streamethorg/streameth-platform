@@ -12,7 +12,11 @@ export function ArchiveContext(props: Props) {
   const pathname = usePathname()
 
   useEffect(() => {
-    if (props.event.archiveMode && !pathname.includes('/archive') && !pathname.includes('/session')) {
+    if (
+      props.event.archiveMode &&
+      !pathname.includes('/archive') &&
+      !pathname.includes('/session')
+    ) {
       router.push(`${pathname}/archive`)
     }
   }, [props, router, pathname])
