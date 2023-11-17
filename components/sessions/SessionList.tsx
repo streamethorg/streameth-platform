@@ -30,11 +30,11 @@ export default function SessionList({
     return sessions.filter(
       (session) =>
         new Date(session.start).toLocaleDateString() ==
-          new Date().toLocaleDateString() ?? null
+        new Date().toLocaleDateString()
     )
   }
 
-  const sortedSessions = getCurrDaySessions()
+  const sortedSessions = getCurrDaySessions().length
     ? getCurrDaySessions().sort((a, b) => {
         if (a.start < b.start) {
           return -1
