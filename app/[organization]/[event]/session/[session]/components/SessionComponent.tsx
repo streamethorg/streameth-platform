@@ -49,7 +49,7 @@ export default async function SessionComponent({
       <div className="flex space-y-4 flex-col w-full lg:p-2 lg:w-[30%]  overflow-y-scroll">
         <SessionInfoBox session={session.toJson()} showDate />
         <SpeakerComponent session={session} />
-        {/* {nextSession?.videoUrl && (
+        {nextSession?.videoUrl && (
           <div className=" bg-base text-white p-2 rounded-xl mb-4">
             <p className="font-medium text-xl">Next Talk</p>
             <Link
@@ -58,7 +58,7 @@ export default async function SessionComponent({
                 nextSession?.id
               }>
               <div className="aspect-video cursor-pointer relative  w-full">
-                <Image
+                {/* <Image
                   className="rounded-xl"
                   alt="Session image"
                   quality={60}
@@ -71,17 +71,17 @@ export default async function SessionComponent({
                   style={{
                     objectFit: 'cover',
                   }}
-                />
+                /> */}
                 <img
-                  src={session.coverImage!}
+                  src={nextSession.coverImage!}
                   className="rounded-xl object-cover w-full h-full"
-                  alt={session.name}
+                  alt={nextSession.name}
                 />
               </div>
               <p className=" p-2 py-4 text-md">{nextSession?.name}</p>
             </Link>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   )

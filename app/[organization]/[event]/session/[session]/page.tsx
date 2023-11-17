@@ -55,7 +55,7 @@ export default async function Page({ params }: Params) {
   return (
     <SessionComponent
       params={params.organization}
-      // nextSession={nextSession}
+      nextSession={nextSession}
       session={session}
       // event={event.toJson()}
     />

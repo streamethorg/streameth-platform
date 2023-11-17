@@ -18,6 +18,8 @@ export default async function Home() {
     .filter((event) => {
       const startDate = new Date(event?.end)
       const currDate = new Date()
+      startDate.setUTCHours(0, 0, 0, 0)
+      currDate.setUTCHours(0, 0, 0, 0)
 
       return startDate.getTime() >= currDate.getTime()
     })
@@ -29,7 +31,8 @@ export default async function Home() {
     .filter((event) => {
       const endDate = new Date(event?.end)
       const currDate = new Date()
-
+      endDate.setUTCHours(0, 0, 0, 0)
+      currDate.setUTCHours(0, 0, 0, 0)
       return endDate.getTime() < currDate.getTime()
     })
     .map((event) => {
