@@ -1,1 +1,25 @@
-{"id":"predicting_the_impact_of_ethereum_upgrades_on_all_deployed_contracts","name":"Predicting the impact of Ethereum upgrades on all deployed contracts","description":"","start":1699875120000,"end":1699876080000,"stageId":"main_stage","speakers":[{"id":"neville_grech","name":"Neville\nGrech","bio":"Director \nDedaub","eventId":"secureum_trustx","twitter":"@neville_grech","photo":"https://www.secureum.xyz/wp-content/uploads/2023/10/Neville.png"}],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/predicting_the_impact_of_ethereum_upgrades_on_all_deployed_contracts.jpg"}
+{
+  "id": "predicting_the_impact_of_ethereum_upgrades_on_all_deployed_contracts",
+  "name": "Predicting the impact of Ethereum upgrades on all deployed contracts",
+  "description": "",
+  "start": 1699875120000,
+  "end": 1699876080000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "neville_grech",
+      "name": "Neville\nGrech",
+      "bio": "Director \nDedaub",
+      "eventId": "secureum_trustx",
+      "twitter": "@neville_grech",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Neville.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/41bblibtuhjccf8h/index.m3u8",
+  "playbackId": "41bblibtuhjccf8h",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/predicting_the_impact_of_ethereum_upgrades_on_all_deployed_contracts.jpg",
+  "assetId": "41bb841e-8b85-4b6e-960d-37379c36468b",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}
