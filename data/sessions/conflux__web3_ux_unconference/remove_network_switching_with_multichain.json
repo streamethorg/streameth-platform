@@ -1,1 +1,23 @@
-{"id":"remove_network_switching_with_multichain","name":"Remove network switching with Multichain","description":"","start":1700122800000,"end":1700123400000,"stageId":"camlica","speakers":[{"id":"gregory_markou","name":"Gregory Markou","bio":"No description","eventId":"conflux__web3_ux_unconference"}],"playbackId":"","eventId":"conflux__web3_ux_unconference","coverImage":"/sessions/conflux__web3_ux_unconference/remove_network_switching_with_multichain.jpg"}
+{
+  "id": "remove_network_switching_with_multichain",
+  "name": "Remove network switching with Multichain",
+  "description": "",
+  "start": 1700122800000,
+  "end": 1700123400000,
+  "stageId": "camlica",
+  "speakers": [
+    {
+      "id": "gregory_markou",
+      "name": "Gregory Markou",
+      "bio": "No description",
+      "eventId": "conflux__web3_ux_unconference"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/4e69jo6fgx6o6a07/index.m3u8",
+  "playbackId": "4e69jo6fgx6o6a07",
+  "eventId": "conflux__web3_ux_unconference",
+  "coverImage": "/sessions/conflux__web3_ux_unconference/remove_network_switching_with_multichain.jpg",
+  "assetId": "4e692379-e638-4b36-bedf-1a14f326051c",
+  "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
+  "videoType": "clip"
+}
