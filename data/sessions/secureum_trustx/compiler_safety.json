@@ -1,1 +1,25 @@
-{"id":"compiler_safety","name":"Compiler Safety","description":"","start":1699873200000,"end":1699874160000,"stageId":"main_stage","speakers":[{"id":"hari","name":"Hari","bio":"Co-founder\nSpearbit","eventId":"secureum_trustx","twitter":"","photo":"https://www.secureum.xyz/wp-content/uploads/2023/10/Hari.png"}],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/compiler_safety.jpg"}
+{
+  "id": "compiler_safety",
+  "name": "Compiler Safety",
+  "description": "",
+  "start": 1699873200000,
+  "end": 1699874160000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "hari",
+      "name": "Hari",
+      "bio": "Co-founder\nSpearbit",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hari.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/a471vju164hkd86f/index.m3u8",
+  "playbackId": "a471vju164hkd86f",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/compiler_safety.jpg",
+  "assetId": "a4711c2c-51fe-439e-aa1e-28fd53f04233",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}
