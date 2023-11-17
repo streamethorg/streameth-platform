@@ -15,7 +15,11 @@
       "photo": "https://speak.ticketh.xyz/media/avatars/z88_ccgOSgT.jpg"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/7af99quewm2z5dv6/index.m3u8",
+  "playbackId": "7af99quewm2z5dv6",
   "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/caip222__improving_ux_for_wallet_authentication_thumbnail.png"
+  "coverImage": "/sessions/wallet_unconference/caip222__improving_ux_for_wallet_authentication_thumbnail.png",
+  "assetId": "7af9ceaf-f6bc-499d-ad05-42ebdda1c7db",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
 }
