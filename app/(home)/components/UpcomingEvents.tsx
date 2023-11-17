@@ -3,7 +3,7 @@ import { IEvent } from '@/server/model/event'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-
+import { getImageUrl } from '@/server/utils'
 const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
   return (
     <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll">
@@ -28,7 +28,7 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
                     className="rounded"
                     alt="Session image"
                     quality={80}
-                    src={`/events/${eventCover}`}
+                    src={getImageUrl(`/events/${eventCover}`)}
                     fill
                     style={{
                       objectFit: 'cover',

@@ -1,4 +1,5 @@
 import Card from '@/components/misc/Card'
+import { getImageUrl } from '@/server/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -50,7 +51,7 @@ const HotTalks = () => {
                     className="rounded"
                     alt="Session image"
                     quality={80}
-                    src={`${image}`}
+                    src={getImageUrl(image)}
                     fill
                     style={{
                       objectFit: 'cover',

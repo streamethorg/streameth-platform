@@ -15,7 +15,11 @@
       "photo": "https://drive.google.com/uc?id=1GpHjGZmy2-NyzZ7EFdbx44Oj6HdX98D9"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/2599i8pxgo3hv0lt/index.m3u8",
+  "playbackId": "2599i8pxgo3hv0lt",
   "eventId": "autonomous_worlds_assembly",
-  "coverImage": "/sessions/autonomous_worlds_assembly/the_forgotten_gods_event_game_design_and_technical_decisionmaking_in_live_and_onchain_competitions_thumbnail.png"
+  "coverImage": "/sessions/autonomous_worlds_assembly/the_forgotten_gods_event_game_design_and_technical_decisionmaking_in_live_and_onchain_competitions_thumbnail.png",
+  "assetId": "2599de52-3e99-43ba-81f5-0eff87ae6b2a",
+  "sourceId": "4955fcec-2ee9-4fc9-aa9e-16ab5baa551f",
+  "videoType": "clip"
 }
