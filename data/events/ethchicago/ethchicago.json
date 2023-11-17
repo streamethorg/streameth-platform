@@ -1,1 +1,26 @@
-{"id":"ethchicago","name":"ETHChicago","description":"ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.","start":"2023-09-15T00:00:00.000Z","end":"2023-09-17T00:00:00.000Z","location":"Chicago, USA","organizationId":"ethchicago","dataImporter":[{"type":"pretalx","config":{"url":"https://pretalx.com/api/events/ethchi-2023","apiToken":"k"}}],"eventCover":"ethchicago.png","website":"","archiveMode":false,"timezone":"America/Chicago","logo":"ethchicago_logo.jpeg","banner":"ethchicago_banner.jpeg","accentColor":"#0C354B","link":"/events/ethchicago"}
+{
+  "id": "ethchicago",
+  "name": "ETHChicago",
+  "description": "ETHChicago is a community-run hackathon and conference focused on decentralized technology, particularly within the Ethereum ecosystem. Our aim is to catalyze innovation, foster collaboration, and promote education through real-world impact in blockchain technology.",
+  "start": "2023-09-15T00:00:00.000Z",
+  "end": "2023-09-17T00:00:00.000Z",
+  "location": "Chicago, USA",
+  "organizationId": "ethchicago",
+  "dataImporter": [
+    {
+      "type": "pretalx",
+      "config": {
+        "url": "https://pretalx.com/api/events/ethchi-2023",
+        "apiToken": "k"
+      }
+    }
+  ],
+  "eventCover": "ethchicago.png",
+  "website": "",
+  "archiveMode": true,
+  "timezone": "America/Chicago",
+  "logo": "ethchicago_logo.jpeg",
+  "banner": "ethchicago_banner.jpeg",
+  "accentColor": "#0C354B",
+  "link": "/events/ethchicago"
+}
