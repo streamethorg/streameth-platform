@@ -1,23 +1,9 @@
 'use client'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { ScheduleContext } from './ScheduleContext'
-import { MobileContext } from '@/components/context/MobileContext'
 
 const DateSelect = ({ dates }: { dates: number[] }) => {
   const { setDate, date } = useContext(ScheduleContext)
-
-  useEffect(() => {
-    const currentDate = new Date().toLocaleDateString()
-
-    dates?.forEach((timestamp) => {
-      const dateToCompare = new Date(timestamp).toLocaleDateString()
-      if (dateToCompare === currentDate) {
-        setDate(Number(timestamp))
-      } else {
-        return
-      }
-    })
-  }, [])
 
   const handleDateChange = (date: string) => {
     const numericValue = Number(date)
