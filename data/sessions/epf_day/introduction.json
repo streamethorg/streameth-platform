@@ -6,7 +6,11 @@
   "end": 1700202300000,
   "stageId": "3b36",
   "speakers": [],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/e3ef2hmo7d7qrql0/index.m3u8",
+  "playbackId": "e3ef2hmo7d7qrql0",
   "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/introduction_thumbnail.png"
+  "coverImage": "/sessions/epf_day/introduction_thumbnail.png",
+  "assetId": "e3efc2e5-26e6-4236-af8e-84dfe382c998",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }
