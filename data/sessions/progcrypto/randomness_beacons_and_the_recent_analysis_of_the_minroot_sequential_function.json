@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1XFEGODa2LIzKyKRh19BgH2hgP2LWPVdp/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/465enyrwnkje4m3o/index.m3u8",
+  "playbackId": "465enyrwnkje4m3o",
   "eventId": "progcrypto",
   "track": "Libraries and Infrastructure",
-  "coverImage": "/sessions/progcrypto/randomness_beacons_and_the_recent_analysis_of_the_minroot_sequential_function_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/randomness_beacons_and_the_recent_analysis_of_the_minroot_sequential_function_thumbnail.png",
+  "assetId": "465e409a-7d7d-42a3-b050-fe9183de0490",
+  "sourceId": "34b4cf87-6a3c-4a74-b600-881835ed4313",
+  "videoType": "clip"
 }
