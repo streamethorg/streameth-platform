@@ -26,15 +26,33 @@ export default function SessionList({
   sessions,
   currentSession,
 }: Props) {
-  const sortedSessions = sessions.sort((a, b) => {
-    if (a.start < b.start) {
-      return -1
-    } else if (a.start > b.start) {
-      return 1
-    } else {
-      return 0
-    }
-  })
+  const getCurrDaySessions = () => {
+    return sessions.filter(
+      (session) =>
+        new Date(session.start).toLocaleDateString() ==
+          new Date().toLocaleDateString() ?? null
+    )
+  }
+
+  const sortedSessions = getCurrDaySessions()
+    ? getCurrDaySessions().sort((a, b) => {
+        if (a.start < b.start) {
+          return -1
+        } else if (a.start > b.start) {
+          return 1
+        } else {
+          return 0
+        }
+      })
+    : sessions.slice().sort((a, b) => {
+        if (a.start < b.start) {
+          return -1
+        } else if (a.start > b.start) {
+          return 1
+        } else {
+          return 0
+        }
+      })
 
   useEffect(() => {
     if (currentSession) {
