@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/uc?id=1K1FRea5BVe2mHGqFWQjSB-OlyLueKz5O"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/010832li1msptw21/index.m3u8",
+  "playbackId": "010832li1msptw21",
   "eventId": "progcrypto",
   "track": "ZK and Blockchains / zkEVMs",
-  "coverImage": "/sessions/progcrypto/scaling_data_and_compute_on_ethereum_with_the_axiom_zk_coprocessor_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/scaling_data_and_compute_on_ethereum_with_the_axiom_zk_coprocessor_thumbnail.png",
+  "assetId": "0108c45f-53db-4b39-9e5a-8c6077d4eee5",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
 }
