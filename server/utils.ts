@@ -26,7 +26,6 @@ export const apiUrl = () => {
   return 'https://app.streameth.org/api'
 }
 
-
 export const getImageUrl = (image: string) => {
   return `https://raw.githubusercontent.com/streamethorg/streameth-platform/develop/images${image}`
 }

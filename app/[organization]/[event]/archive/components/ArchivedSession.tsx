@@ -18,8 +18,8 @@ const ArchivedSession = ({
     <Card>
       <div className="aspect-video relative w-full">
         <Image
-        width={200}
-        height={200}
+          width={200}
+          height={200}
           src={
             session.coverImage
               ? getImageUrl(session.coverImage)
