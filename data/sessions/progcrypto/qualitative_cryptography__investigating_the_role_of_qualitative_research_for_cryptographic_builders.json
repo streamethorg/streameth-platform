@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1j7DfoM756svdso3qCOZtePeZjexaQjyd/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/07f7kogi81hcdbhn/index.m3u8",
+  "playbackId": "07f7kogi81hcdbhn",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/qualitative_cryptography__investigating_the_role_of_qualitative_research_for_cryptographic_builders_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/qualitative_cryptography__investigating_the_role_of_qualitative_research_for_cryptographic_builders_thumbnail.png",
+  "assetId": "07f7116b-4833-49b8-83f7-f91dd4cd2ee2",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
 }

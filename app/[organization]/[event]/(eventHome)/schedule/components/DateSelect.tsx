@@ -11,8 +11,10 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
 
     dates?.forEach((timestamp) => {
       const dateToCompare = new Date(timestamp).toLocaleDateString()
-      if (dateToCompare == currentDate) {
+      if (dateToCompare === currentDate) {
         setDate(Number(timestamp))
+      } else {
+        return
       }
     })
   }, [])
