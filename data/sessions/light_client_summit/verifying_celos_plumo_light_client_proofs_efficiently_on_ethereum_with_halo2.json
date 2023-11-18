@@ -15,7 +15,11 @@
       "photo": "https://drive.google.com/uc?id=19mXSMwhIwtxFZ3bjtIXfujJXR_bhiYza"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/9c56teq8j62idpxa/index.m3u8",
+  "playbackId": "9c56teq8j62idpxa",
   "eventId": "light_client_summit",
-  "coverImage": "/sessions/light_client_summit/verifying_celos_plumo_light_client_proofs_efficiently_on_ethereum_with_halo2_thumbnail.png"
+  "coverImage": "/sessions/light_client_summit/verifying_celos_plumo_light_client_proofs_efficiently_on_ethereum_with_halo2_thumbnail.png",
+  "assetId": "9c56ba33-a0f3-4792-92e5-08f693a01b01",
+  "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
+  "videoType": "clip"
 }
