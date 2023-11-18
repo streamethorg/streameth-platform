@@ -15,7 +15,11 @@
       "photo": "https://drive.google.com/uc?id=1DOIVxmzRVu5BtstX8C1xN_tuQT3p3y8E"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/6f62yov4reuxjc0l/index.m3u8",
+  "playbackId": "6f62yov4reuxjc0l",
   "eventId": "light_client_summit",
-  "coverImage": "/sessions/light_client_summit/presenting_zkbeacon_zkproving_full_ethereum_consensus_and_enabling_layer2_light_clients_thumbnail.png"
+  "coverImage": "/sessions/light_client_summit/presenting_zkbeacon_zkproving_full_ethereum_consensus_and_enabling_layer2_light_clients_thumbnail.png",
+  "assetId": "6f62f33d-9937-4bbd-8037-0f8015726865",
+  "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
+  "videoType": "clip"
 }
