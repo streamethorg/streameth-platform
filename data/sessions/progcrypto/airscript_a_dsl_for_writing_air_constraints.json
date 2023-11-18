@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1s_APSXkQqWKR7KQHJsjeDI1S6uUv17hm/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/15ba0kcio35qf4r1/index.m3u8",
+  "playbackId": "15ba0kcio35qf4r1",
   "eventId": "progcrypto",
   "track": "Developer Tools",
-  "coverImage": "/sessions/progcrypto/airscript_a_dsl_for_writing_air_constraints_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/airscript_a_dsl_for_writing_air_constraints_thumbnail.png",
+  "assetId": "15ba335c-c10d-4bd1-acac-58d5427f3386",
+  "sourceId": "17264d1b-22cb-4510-a583-837293741512",
+  "videoType": "clip"
 }
