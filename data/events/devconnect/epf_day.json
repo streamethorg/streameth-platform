@@ -17,7 +17,7 @@
   ],
   "eventCover": "EPF_Cover.jpg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "epf-logo.jpg",
   "banner": "EPF_Banner.jpg",

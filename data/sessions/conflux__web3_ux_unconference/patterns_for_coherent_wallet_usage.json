@@ -1,1 +1,23 @@
-{"id":"patterns_for_coherent_wallet_usage","name":"Patterns for coherent wallet usage","description":"","start":1700125200000,"end":1700125800000,"stageId":"camlica","speakers":[{"id":"dan_finlay","name":"Dan Finlay","bio":"No description","eventId":"conflux__web3_ux_unconference"}],"playbackId":"","eventId":"conflux__web3_ux_unconference","coverImage":"/sessions/conflux__web3_ux_unconference/patterns_for_coherent_wallet_usage.jpg"}
+{
+  "id": "patterns_for_coherent_wallet_usage",
+  "name": "Patterns for coherent wallet usage",
+  "description": "",
+  "start": 1700125200000,
+  "end": 1700125800000,
+  "stageId": "camlica",
+  "speakers": [
+    {
+      "id": "dan_finlay",
+      "name": "Dan Finlay",
+      "bio": "No description",
+      "eventId": "conflux__web3_ux_unconference"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/4eb83vbx9i9v65w5/index.m3u8",
+  "playbackId": "4eb83vbx9i9v65w5",
+  "eventId": "conflux__web3_ux_unconference",
+  "coverImage": "/sessions/conflux__web3_ux_unconference/patterns_for_coherent_wallet_usage_thumbnail.png",
+  "assetId": "4eb8f26a-403f-4a9d-b094-b29ec63e1cf8",
+  "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
+  "videoType": "clip"
+}

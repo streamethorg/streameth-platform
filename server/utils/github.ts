@@ -31,7 +31,6 @@ export async function AddOrUpdateFile(
         },
         body: JSON.stringify({
           message: `[av] ${filename}`,
-          branch: branch,
           committer: {
             name: 'github_actions',
             email: 'github-actions[bot]@users.noreply.github.com',
