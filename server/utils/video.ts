@@ -6,6 +6,7 @@ export async function extractFirstFrame(
   filePath: string
 ) {
   // Check if the file already exists
+  console.log(filePath)
   if (fs.existsSync(filePath)) {
     console.log('File already exists, skipping frame extraction.')
     return

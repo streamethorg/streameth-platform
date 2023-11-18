@@ -65,6 +65,13 @@ let nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: '*',
+        port: '',
+        pathname: '/**',
+      
+      }
     ],
   },
   staticPageGenerationTimeout: 1000,
