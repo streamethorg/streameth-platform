@@ -13,7 +13,11 @@
       "eventId": "conflux__web3_ux_unconference"
     }
   ],
+  "videoUrl": "https://lp-playback.com/hls/11442bbenf3akzlb/index.m3u8",
+  "playbackId": "11442bbenf3akzlb",
   "eventId": "conflux__web3_ux_unconference",
   "coverImage": "/sessions/conflux__web3_ux_unconference/how_to_scale_effective_ux_thumbnail.png",
-  "playbackId": ""
+  "assetId": "1144f170-73be-40ec-9387-c6c9cd568ee5",
+  "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
+  "videoType": "clip"
 }
