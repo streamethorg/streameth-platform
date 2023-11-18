@@ -1,1 +1,16 @@
-{"id":"roundme_rounding_analysis_made_simpler","name":"RoundMe: rounding analysis made simpler","description":"","start":1699965000000,"end":1699968600000,"stageId":"main_stage","speakers":[],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/roundme_rounding_analysis_made_simpler.jpg"}
+{
+  "id": "roundme_rounding_analysis_made_simpler",
+  "name": "RoundMe: rounding analysis made simpler",
+  "description": "",
+  "start": 1699965000000,
+  "end": 1699968600000,
+  "stageId": "main_stage",
+  "speakers": [],
+  "videoUrl": "https://lp-playback.com/hls/aa43kdf2l65yk4dd/index.m3u8",
+  "playbackId": "aa43kdf2l65yk4dd",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/roundme_rounding_analysis_made_simpler.jpg",
+  "assetId": "aa4332c7-7a9f-4215-a5cf-0d186519b153",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}
