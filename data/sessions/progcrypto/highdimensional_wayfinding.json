@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/file/d/1CEPTM4O8-7ZA6cg2TN5bMwf7bAloGjNB/view"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/a779u7ut9hu7b2dw/index.m3u8",
+  "playbackId": "a779u7ut9hu7b2dw",
   "eventId": "progcrypto",
   "track": "Cryptography and Society",
-  "coverImage": "/sessions/progcrypto/highdimensional_wayfinding_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/highdimensional_wayfinding_thumbnail.png",
+  "assetId": "a77922e6-e7bd-4f3f-ae85-d940c66a6c8c",
+  "sourceId": "17264d1b-22cb-4510-a583-837293741512",
+  "videoType": "clip"
 }

@@ -15,8 +15,12 @@
       "photo": "https://drive.google.com/uc?id=11WQkL_2_BW7l0MzRBZrGnzJxQo9AUfHS"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/4d30dym5kchhinwf/index.m3u8",
+  "playbackId": "4d30dym5kchhinwf",
   "eventId": "progcrypto",
   "track": "Next Gen Applied Crypto",
-  "coverImage": "/sessions/progcrypto/oneshot_signatures_thumbnail.png"
+  "coverImage": "/sessions/progcrypto/oneshot_signatures_thumbnail.png",
+  "assetId": "4d305439-087c-40c2-b089-74ff22ed7a73",
+  "sourceId": "17264d1b-22cb-4510-a583-837293741512",
+  "videoType": "clip"
 }
