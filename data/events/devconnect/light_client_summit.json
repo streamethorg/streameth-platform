@@ -17,7 +17,7 @@
   ],
   "eventCover": "LightClient_Cover.jpg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "ethlightclients_logo.png",
   "banner": "LightClient _Banner.jpg",
