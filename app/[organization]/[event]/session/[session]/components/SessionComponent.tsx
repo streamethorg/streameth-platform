@@ -9,6 +9,7 @@ import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IEvent } from '@/server/model/event'
+import { getImageUrl } from '@/server/utils'
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (
@@ -60,7 +61,7 @@ export default async function SessionComponent({
               <div className="aspect-video cursor-pointer relative  w-full">
                 <Image
                   className="rounded-xl"
-                  alt={nextSession?.name}
+                  alt={getImageUrl(nextSession?.name)}
                   quality={60}
                   src={
                     nextSession.coverImage
