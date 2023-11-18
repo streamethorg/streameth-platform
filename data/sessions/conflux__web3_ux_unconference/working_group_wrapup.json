@@ -1,1 +1,23 @@
-{"id":"working_group_wrapup","name":"Working Group Wrapup","description":"","start":1700143200000,"end":1700145000000,"stageId":"camlica","speakers":[{"id":"community_followup","name":"Community Followup","bio":"No description","eventId":"conflux__web3_ux_unconference"}],"playbackId":"","eventId":"conflux__web3_ux_unconference","coverImage":"/sessions/conflux__web3_ux_unconference/working_group_wrapup.jpg"}
+{
+  "id": "working_group_wrapup",
+  "name": "Working Group Wrapup",
+  "description": "",
+  "start": 1700143200000,
+  "end": 1700145000000,
+  "stageId": "camlica",
+  "speakers": [
+    {
+      "id": "community_followup",
+      "name": "Community Followup",
+      "bio": "No description",
+      "eventId": "conflux__web3_ux_unconference"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/b2bb6aigkjshdhgu/index.m3u8",
+  "playbackId": "b2bb6aigkjshdhgu",
+  "eventId": "conflux__web3_ux_unconference",
+  "coverImage": "/sessions/conflux__web3_ux_unconference/working_group_wrapup_thumbnail.png",
+  "assetId": "b2bbed9f-ea43-4a33-b704-810cd3b9296d",
+  "sourceId": "66913dc6-3eb1-4d6a-b602-1adb870166ed",
+  "videoType": "clip"
+}

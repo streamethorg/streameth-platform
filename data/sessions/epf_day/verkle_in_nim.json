@@ -31,7 +31,11 @@
       "photo": "https://drive.google.com/file/d/1jmmY59iFYiRDs5q83q-KYMYBTqn3bP7F/view?usp=sharing"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/295dh8cne3qk2pmq/index.m3u8",
+  "playbackId": "295dh8cne3qk2pmq",
   "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/verkle_in_nim_thumbnail.png"
+  "coverImage": "/sessions/epf_day/verkle_in_nim_thumbnail.png",
+  "assetId": "295d3707-ec1b-4fdf-ae52-311589321b32",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }

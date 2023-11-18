@@ -15,7 +15,11 @@
       "photo": "https://i.seadn.io/gcs/files/e1c8613b8409aed75ac38469ac19bde0.png?auto=format&dpr=1&w=1000"
     }
   ],
-  "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/b245u7mqd71ky10z/index.m3u8",
+  "playbackId": "b245u7mqd71ky10z",
   "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/wrap_up_and_reportout_thumbnail.png"
+  "coverImage": "/sessions/wallet_unconference/wrap_up_and_reportout_thumbnail.png",
+  "assetId": "b245d1fb-d6bd-4bba-9329-fb52a7ea1662",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
 }
