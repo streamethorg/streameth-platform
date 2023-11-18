@@ -49,8 +49,8 @@ export default async function Home() {
     .map((event) => event.toJson())
   const stageController = new StageController()
   const stage = await stageController.getStage(
-    'auditorium',
-    'progcrypto'
+    '3b36',
+    'light_client_summit'
   )
 
   return (
@@ -88,10 +88,10 @@ export default async function Home() {
       </div>
       <div className="flex flex-col lg:overflow-hidden">
         <LiveEvent stage={stage.toJson()} />
-        <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
+        {/* <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
           Live Events
         </p>
-        <LiveEvents events={liveEvents} />
+        <LiveEvents events={liveEvents} /> */}
         <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
           Upcoming Events
         </p>

@@ -6,6 +6,8 @@ import { TopNavbarContext } from '../context/TopNavbarContext'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { MobileContext } from '../context/MobileContext'
 import Navbar from './Navbar'
+import { getImageUrl } from '@/server/utils'
+
 export interface Page {
   name: string
   href: string
@@ -55,13 +57,10 @@ export default function NavbarTop() {
           <span className="sr-only">Logo</span>
           <Image
             className=" h-full w-full p-2 pr-4"
-            src={logo}
+            src={getImageUrl(logo)}
             alt="Logo"
             width={40}
             height={40}
-            onError={(e) => {
-              e.currentTarget.src = '/logo.png'
-            }}
           />
         </Link>
       </div>

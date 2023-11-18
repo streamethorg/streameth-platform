@@ -12,7 +12,6 @@ export default function StreamOverview(props: Props) {
   if (!props.streams) return <>No active streams found.</>
 
   return (
-
     <div className="p-8">
       <h2 className="text-xl">Stream Overview</h2>
 
