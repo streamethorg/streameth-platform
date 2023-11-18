@@ -1,5 +1,5 @@
-import { Stream } from "@livepeer/react";
-import StreamOverview from "./components/StreamOverview";
+import { Stream } from '@livepeer/react'
+import StreamOverview from './components/StreamOverview'
 
 export default async function Page() {
   const res = await fetch(
