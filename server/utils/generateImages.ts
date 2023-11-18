@@ -10,6 +10,7 @@ async function main() {
   const sessions = await sessionController.getAllSessions({
     eventId,
   })
+  console.log('sessions', sessions.length)
 
   for (const session of sessions) {
     try {
