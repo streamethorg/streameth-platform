@@ -87,7 +87,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="flex flex-col lg:overflow-hidden">
-        <LiveEvent stage={stage.toJson()} />
+        {/* <LiveEvent stage={stage.toJson()} /> */}
         {/* <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
           Live Events
         </p>
