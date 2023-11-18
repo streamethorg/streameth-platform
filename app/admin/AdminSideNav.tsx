@@ -13,7 +13,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   PaperClipIcon,
-  VideoCameraIcon
+  VideoCameraIcon,
 } from '@heroicons/react/24/outline'
 
 const ADMIN_MENU = [
