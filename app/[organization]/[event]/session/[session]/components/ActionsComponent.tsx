@@ -6,6 +6,9 @@ import { ISession } from '@/server/model/session'
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import VideoDownload from './VideoDownload'
+import { useContext } from 'react'
+import { ModalContext } from '@/components/context/ModalContext'
 
 const ActionsComponent = ({
   title,
@@ -20,6 +23,7 @@ const ActionsComponent = ({
   event?: IEvent
   session?: ISession
 }) => {
+  const { openModal, closeModal } = useContext(ModalContext)
   const router = useRouter()
 
   const onBackClick = () => {
@@ -40,11 +44,19 @@ const ActionsComponent = ({
       )}
       {children}
       {event?.enableVideoDownloader && (
-        <Link
-          href={session?.videoUrl as string}
+        <button
+          onClick={() => {
+            openModal(
+              <VideoDownload
+                closeModal={closeModal}
+                title={session?.name}
+                playbackId={session?.playbackId}
+              />
+            )
+          }}
           className="cursor-pointer ml-3 text-white font-bold hover:bg-base">
           <DownloaderIcon />
-        </Link>
+        </button>
       )}
     </div>
   )
