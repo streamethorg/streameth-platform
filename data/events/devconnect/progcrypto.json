@@ -35,5 +35,6 @@
   "endTime": "18:00",
   "plugins": {
     "disableChat": true
-  }
+  },
+  "enableVideoDownloader": true
 }
