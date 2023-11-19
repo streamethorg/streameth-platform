@@ -61,11 +61,11 @@ export default async function SessionComponent({
               <div className="aspect-video cursor-pointer relative  w-full">
                 <Image
                   className="rounded-xl"
-                  alt={getImageUrl(nextSession?.name)}
+                  alt={nextSession?.name ?? 'Next Talk'}
                   quality={60}
                   src={
                     nextSession.coverImage
-                      ? nextSession?.coverImage
+                      ? getImageUrl(nextSession.coverImage)
                       : ''
                   }
                   fill
