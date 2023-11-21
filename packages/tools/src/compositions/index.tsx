@@ -235,20 +235,22 @@ export function Compositions() {
       </Folder>
 
       <Folder name="join-videos">
-        {sessions.map((session) => (
-          <Composition
-            id={session.id.replaceAll('_', '-')}
-            component={JoinVideos}
-            width={1920}
-            height={1080}
-            fps={25}
-            durationInFrames={125} // Total of all video durations minus 25 frames (1 sec) per transition
-            defaultProps={{
-              id: session.id,
-              coverImage: session.coverImage,
-            }}
-          />
-        ))}
+        {sessions
+          .filter((session) => session.frameCount !== undefined)
+          .map((session) => (
+            <Composition
+              id={`secureum-${session.id.replaceAll('_', '-')}`}
+              component={JoinVideos}
+              width={1920}
+              height={1080}
+              fps={25}
+              durationInFrames={session.frameCount + 125}
+              defaultProps={{
+                id: session.id,
+                coverImage: session.coverImage,
+              }}
+            />
+          ))}
       </Folder>
     </>
   )

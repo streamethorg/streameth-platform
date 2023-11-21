@@ -15,8 +15,9 @@ const updateJsonWithFrames = async (
       if (session.playbackId) {
         const videoPath = path.join(
           videoFolderPath,
-          `${session.playbackId}.mp4`
+          `${session.id}.mp4`
         )
+        console.log(videoPath)
         if (fs.existsSync(videoPath)) {
           const frameCount = await calculateFrames(videoPath)
           session['frameCount'] = frameCount
