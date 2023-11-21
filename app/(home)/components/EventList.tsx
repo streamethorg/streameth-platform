@@ -5,7 +5,7 @@ import EventCard from './EventCard'
 import { IEvent } from '@/server/model/event'
 
 const EventList = ({ events }: { events: IEvent[] }) => {
-  const { items, setItems } = useContext(FilterContext)
+  const { filteredItems, setItems } = useContext(FilterContext)
   const [filterValue, setFilterValue] = useState('')
 
   useEffect(() => {
@@ -19,9 +19,10 @@ const EventList = ({ events }: { events: IEvent[] }) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events, filterValue])
+
   return (
     <>
-      <div className="px-4 items-center flex flex-col md:flex-row mt-4 gap-5">
+      <div className="px-4 mx-4 items-center flex flex-col md:flex-row mt-4 gap-5">
         <p className="font-ubuntu font-bold text-blue text-2xl md:text-4xl">
           Past Events
         </p>
@@ -32,17 +33,17 @@ const EventList = ({ events }: { events: IEvent[] }) => {
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className={`p-2 italic  w-full bg-base ${
-            filterValue && items.length === 0
+            filterValue && filteredItems.length === 0
               ? 'rounded-t-xl'
               : 'rounded-xl'
           }  text-main-text w-full md:w-[50%] placeholder:text-main-text placeholder:text-sm`}
         />
       </div>
       <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll ">
-        {items.length === 0 ? (
+        {filteredItems.length === 0 ? (
           <div className=" p-4 text-blue m-4">No events found</div>
         ) : (
-          items
+          filteredItems
             .sort((a: IEvent, b: IEvent) => {
               return b.start.getTime?.() - a.start.getTime?.()
             })

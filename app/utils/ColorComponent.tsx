@@ -96,7 +96,7 @@ const ColorComponent = ({
         setComponents([
           <FilterBar
             key="1"
-            sessions={sessions}
+            sessions={sessionWithVideo}
             speakers={speakers}
             stages={stages}
           />,

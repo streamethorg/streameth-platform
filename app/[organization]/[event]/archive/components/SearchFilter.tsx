@@ -5,11 +5,12 @@ import {
   FilterOption,
 } from '../../../../../components/context/FilterContext'
 import { ISession } from '@/server/model/session'
+import { IEvent } from '@/server/model/event'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
   filterName: string
-  items: ISession[]
+  items: ISession[] | IEvent[]
 }
 
 const SearchFilter = <T extends object>({
@@ -53,6 +54,7 @@ const SearchFilter = <T extends object>({
     return () => {
       setItems([])
       performFilter()
+      clearSelectedOption()
     }
   }, [items])
 
