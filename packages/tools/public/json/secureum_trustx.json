@@ -1,0 +1,1525 @@
+[
+  {
+    "id": "codeclash_contest_announcement",
+    "name": "CodeClash Contest Announcement",
+    "description": "No Description",
+    "start": 1699854300000,
+    "end": 1699855200000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "hickuphh3",
+        "name": "HickupHH3",
+        "bio": "Security\nresearcher",
+        "eventId": "secureum_trustx",
+        "twitter": "@Hickuph",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/11/HickupHH3-1.png"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/codeclash_contest_announcement.jpg"
+  },
+  {
+    "id": "wtf_is_l1_security_and_how_to_think_about_it",
+    "name": "WTF is L1 security and how to think about it",
+    "description": "",
+    "start": 1699855200000,
+    "end": 1699856160000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "danny_ryan",
+        "name": "Danny\nRyan",
+        "bio": "Researcher\nEthereum Foundation",
+        "eventId": "secureum_trustx",
+        "twitter": "@dannyryan",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Danny.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/e672so6btugw9eap/index.m3u8",
+    "playbackId": "e672so6btugw9eap",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/wtf_is_l1_security_and_how_to_think_about_it.jpg"
+  },
+  {
+    "id": "introducing_attacknet",
+    "name": "Introducing Attacknet",
+    "description": "A new tool for finding bugs in consensus protocols and blockchain nodes using chaos testing",
+    "start": 1699856160000,
+    "end": 1699857120000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "benjamin_samuels",
+        "name": "Benjamin\nSamuels",
+        "bio": "ecurity Engineer \nTrail of Bits",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Benjamin-1.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/914dpguwp64tfh09/index.m3u8",
+    "playbackId": "914dpguwp64tfh09",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/introducing_attacknet.jpg"
+  },
+  {
+    "id": "security_analysis_of_the_ethereum_fork_choice_specification",
+    "name": "Security Analysis of the Ethereum Fork Choice specification",
+    "description": "",
+    "start": 1699857120000,
+    "end": 1699858320000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "roberto_saltini",
+        "name": "Roberto\nSaltini",
+        "bio": "Lead Researcher \nConsenSys",
+        "eventId": "secureum_trustx",
+        "twitter": "@robsaltini",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Roberto.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/3d62mdxaiz9u5y6w/index.m3u8",
+    "playbackId": "3d62mdxaiz9u5y6w",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/security_analysis_of_the_ethereum_fork_choice_specification.jpg"
+  },
+  {
+    "id": "formal_verification_of_eip_4844",
+    "name": "Formal verification of EIP 4844",
+    "description": "",
+    "start": 1699858320000,
+    "end": 1699859280000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "thanh_hai_tran",
+        "name": "Thanh\nHai Tran",
+        "bio": "Applied Researcher ConsenSys",
+        "eventId": "secureum_trustx",
+        "twitter": "@thanh_hai_tran",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Thanh.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d2880tkhgqco3qa0/index.m3u8",
+    "playbackId": "d2880tkhgqco3qa0",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/formal_verification_of_eip_4844.jpg"
+  },
+  {
+    "id": "introduction_to_zk_security_research",
+    "name": "Introduction to ZK Security Research",
+    "description": "",
+    "start": 1699860600000,
+    "end": 1699861560000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "david_theodore",
+        "name": "David\nTheodore",
+        "bio": "Security Researcher\nEthereum Foundation",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/David.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/55ccnv8ipkhkvb57/index.m3u8",
+    "playbackId": "55ccnv8ipkhkvb57",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/introduction_to_zk_security_research.jpg"
+  },
+  {
+    "id": "auditing_zk_dispatches_from_the_frontline",
+    "name": "Auditing ZK: Dispatches from The Frontline",
+    "description": "",
+    "start": 1699861560000,
+    "end": 1699862520000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "ali_atiia",
+        "name": "Ali\nAtiia",
+        "bio": "Founder\nyAcademy | yAudit",
+        "eventId": "secureum_trustx",
+        "twitter": "@aliatiia_",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Ali.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/990aaq79yj00o0ru/index.m3u8",
+    "playbackId": "990aaq79yj00o0ru",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/auditing_zk_dispatches_from_the_frontline.jpg"
+  },
+  {
+    "id": "automated_detection_of_vulnerabilities_in_zkp_circuits",
+    "name": "Automated detection of vulnerabilities in ZKP circuits",
+    "description": "",
+    "start": 1699862520000,
+    "end": 1699863480000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "alp_bassa",
+        "name": "Alp\nBassa",
+        "bio": "Research Scientist\nVeridise",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Alp.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a89dvrp8nq1x2wsp/index.m3u8",
+    "playbackId": "a89dvrp8nq1x2wsp",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/automated_detection_of_vulnerabilities_in_zkp_circuits.jpg"
+  },
+  {
+    "id": "hardware_pixie_dust_or_why_your_secure_hardware_implementation_may_not_actually_be_secure",
+    "name": "Hardware pixie dust, or why your secure hardware implementation may not actually be secure",
+    "description": "",
+    "start": 1699863480000,
+    "end": 1699864440000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "deian_stefan",
+        "name": "Deian\nStefan",
+        "bio": "Co-founder, Cubist\nSecurity Professor, UCSD",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Deian.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d016s12dg9ww0nra/index.m3u8",
+    "playbackId": "d016s12dg9ww0nra",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/hardware_pixie_dust_or_why_your_secure_hardware_implementation_may_not_actually_be_secure.jpg"
+  },
+  {
+    "id": "locating_implementation_flaws_of_blockchain_vms_with_differential_fuzzing",
+    "name": "Locating Implementation Flaws of Blockchain VMs with Differential Fuzzing",
+    "description": "",
+    "start": 1699864440000,
+    "end": 1699865400000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "andy_zhou",
+        "name": "Andy\nZhou",
+        "bio": "CEO\nBlockSec",
+        "eventId": "secureum_trustx",
+        "twitter": "@yajinzhou",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Andy.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/2db1sfptz1mm24uw/index.m3u8",
+    "playbackId": "2db1sfptz1mm24uw",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/locating_implementation_flaws_of_blockchain_vms_with_differential_fuzzing.jpg"
+  },
+  {
+    "id": "cantina_competitions_a_new_era_for_web3_security",
+    "name": "Cantina Competitions: A new era for web3 security",
+    "description": "",
+    "start": 1699866000000,
+    "end": 1699869600000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "hari",
+        "name": "Hari",
+        "bio": "Co-founder\nSpearbit",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hari.png"
+      },
+      {
+        "id": "alex_the_entreprenerd",
+        "name": "Alex\nThe Entreprenerd",
+        "bio": "Independent Security Researcher",
+        "eventId": "secureum_trustx",
+        "twitter": "@GalloDaSballo",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Alex.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/8a53dqv27ehmc0g3/index.m3u8",
+    "playbackId": "8a53dqv27ehmc0g3",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/cantina_competitions_a_new_era_for_web3_security.jpg"
+  },
+  {
+    "id": "nextgen_static_analysis_for_solidity_contracts",
+    "name": "Next-Gen Static Analysis for Solidity Contracts",
+    "description": "",
+    "start": 1699869600000,
+    "end": 1699871400000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "anton_permenev",
+        "name": "Anton Permenev",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/nextgen_static_analysis_for_solidity_contracts.jpg"
+  },
+  {
+    "id": "compiler_safety",
+    "name": "Compiler Safety",
+    "description": "",
+    "start": 1699873200000,
+    "end": 1699874160000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "hari",
+        "name": "Hari",
+        "bio": "Co-founder\nSpearbit",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hari.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/7d76647x1t1zqo60/index.m3u8",
+    "playbackId": "7d76647x1t1zqo60",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/compiler_safety.jpg"
+  },
+  {
+    "id": "finding_and_understanding_miscompilation_bugs_in_the_solidity_compiler",
+    "name": "Finding and Understanding Miscompilation Bugs in the Solidity Compiler",
+    "description": "",
+    "start": 1699874160000,
+    "end": 1699875120000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "bhargava_shastry",
+        "name": "Bhargava\nShastry",
+        "bio": "Security Engineer\nEthereum Foundation",
+        "eventId": "secureum_trustx",
+        "twitter": "@ibags",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Bhargava.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/ece9kpb88yc1dpf6/index.m3u8",
+    "playbackId": "ece9kpb88yc1dpf6",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/finding_and_understanding_miscompilation_bugs_in_the_solidity_compiler.jpg"
+  },
+  {
+    "id": "predicting_the_impact_of_ethereum_upgrades_on_all_deployed_contracts",
+    "name": "Predicting the impact of Ethereum upgrades on all deployed contracts",
+    "description": "",
+    "start": 1699875120000,
+    "end": 1699876080000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "neville_grech",
+        "name": "Neville\nGrech",
+        "bio": "Director \nDedaub",
+        "eventId": "secureum_trustx",
+        "twitter": "@neville_grech",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Neville.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/41bblibtuhjccf8h/index.m3u8",
+    "playbackId": "41bblibtuhjccf8h",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/predicting_the_impact_of_ethereum_upgrades_on_all_deployed_contracts.jpg"
+  },
+  {
+    "id": "building_evm_radar",
+    "name": "Building EVM Radar",
+    "description": "",
+    "start": 1699876080000,
+    "end": 1699877040000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "hossam_mohamed",
+        "name": "Hossam\nMohamed",
+        "bio": "Senior Security Engineer Halborn",
+        "eventId": "secureum_trustx",
+        "twitter": "@safe_buffer",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hossam.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/2e99efuvnu4lrsqb/index.m3u8",
+    "playbackId": "2e99efuvnu4lrsqb",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/building_evm_radar.jpg"
+  },
+  {
+    "id": "ethereum_protocol_vulnerabilities_unveiled",
+    "name": "Ethereum Protocol Vulnerabilities Unveiled",
+    "description": "",
+    "start": 1699877040000,
+    "end": 1699878000000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "frdric_adam",
+        "name": "Frédéric\nADAM",
+        "bio": "Senior Web2 Pentester\nBug Bounty Hunter",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Frederic.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/0a26923957xkczkh/index.m3u8",
+    "playbackId": "0a26923957xkczkh",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/ethereum_protocol_vulnerabilities_unveiled.jpg"
+  },
+  {
+    "id": "the_importance_of_postmortem",
+    "name": "The Importance of Post-Mortem",
+    "description": "",
+    "start": 1699878600000,
+    "end": 1699880400000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "michal_twardzick",
+        "name": "Michal Twardzick",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_importance_of_postmortem.jpg"
+  },
+  {
+    "id": "code440hzrena",
+    "name": "Code440hzrena",
+    "description": "",
+    "start": 1699880400000,
+    "end": 1699881300000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "code440hzrena",
+        "name": "Code440hzrena",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/code440hzrena.jpg"
+  },
+  {
+    "id": "web25_security_pentesting_blockchain_infrastructure_wallets_and_custodial_apps",
+    "name": "Web2.5 Security: pentesting blockchain infrastructure, wallets, and custodial apps",
+    "description": "",
+    "start": 1699881300000,
+    "end": 1699882200000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "omar_ganiev",
+        "name": "Omar Ganiev",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/web25_security_pentesting_blockchain_infrastructure_wallets_and_custodial_apps.jpg"
+  },
+  {
+    "id": "test_your_tests_the_dos_and_donts_of_testing",
+    "name": "Test your tests: The do’s and don’ts of testing",
+    "description": "",
+    "start": 1699882200000,
+    "end": 1699883160000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "kurt_willis",
+        "name": "Kurt\nWillis",
+        "bio": "Security Engineer\nTrail of Bits",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Kurt.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f9281zch0petwbnh/index.m3u8",
+    "playbackId": "f9281zch0petwbnh",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/test_your_tests_the_dos_and_donts_of_testing.jpg"
+  },
+  {
+    "id": "proactive_security",
+    "name": "Proactive Security",
+    "description": "",
+    "start": 1699883160000,
+    "end": 1699884120000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "chandrakana_nandi",
+        "name": "Chandrakana\nNandi",
+        "bio": "Principal Research Scientist\nCertora",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/11/Chandra.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a213jsxgdicn7izu/index.m3u8",
+    "playbackId": "a213jsxgdicn7izu",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/proactive_security.jpg"
+  },
+  {
+    "id": "a_unified_framework_for_formal_verification_of_vyper_bytecode_using_halmos",
+    "name": "A Unified Framework for Formal Verification of Vyper Bytecode using Halmos",
+    "description": "",
+    "start": 1699884120000,
+    "end": 1699885080000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "lucas_goiriz",
+        "name": "Lucas\nGoiriz ",
+        "bio": "Scientific Researcher, CSIC JSR, Spearbit",
+        "eventId": "secureum_trustx",
+        "twitter": "@Cryptonicle1",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Lucas.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/7cd9n116kh9r6wih/index.m3u8",
+    "playbackId": "7cd9n116kh9r6wih",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/a_unified_framework_for_formal_verification_of_vyper_bytecode_using_halmos.jpg"
+  },
+  {
+    "id": "the_spectrum_of_correctness",
+    "name": "The spectrum of correctness",
+    "description": "",
+    "start": 1699885080000,
+    "end": 1699886040000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "fraser_brown",
+        "name": "Fraser\nBrown",
+        "bio": "CTO, Cubist\nAssistant Professor, CMU",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Fraser.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d366rfq0w59c2mms/index.m3u8",
+    "playbackId": "d366rfq0w59c2mms",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_spectrum_of_correctness.jpg"
+  },
+  {
+    "id": "what_did_i_learn_by_testing_erc20_tokens_at_large",
+    "name": "What did I Learn by Testing ERC-20 Tokens at Large?",
+    "description": "",
+    "start": 1699886040000,
+    "end": 1699887000000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "ylis_falcone",
+        "name": "Yliès\nFalcone",
+        "bio": "Senior Tech Lead\nRuntime Verification",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Ylies.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f425ebkozfv7ua2n/index.m3u8",
+    "playbackId": "f425ebkozfv7ua2n",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/what_did_i_learn_by_testing_erc20_tokens_at_large.jpg"
+  },
+  {
+    "id": "eliminating_smart_contract_testing_uncertainty_with_mainnet_data",
+    "name": "Eliminating Smart Contract Testing Uncertainty with Mainnet data",
+    "description": "",
+    "start": 1699887600000,
+    "end": 1699888500000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "nebojsa_urosevic",
+        "name": "Nebojsa Urosevic",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/eliminating_smart_contract_testing_uncertainty_with_mainnet_data.jpg"
+  },
+  {
+    "id": "scared_security_dont_make_no_security",
+    "name": "Scared Security Don’t Make No Security",
+    "description": "",
+    "start": 1699888500000,
+    "end": 1699889460000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "george_kobakhidze",
+        "name": "George\nKobakhidze",
+        "bio": "Security Auditor\nConsenSys Diligence",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/George.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5a75b6m7cg2efdmk/index.m3u8",
+    "playbackId": "5a75b6m7cg2efdmk",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/scared_security_dont_make_no_security.jpg"
+  },
+  {
+    "id": "run_account_abstractionpowered_devsecops_pipelines_to_build_more_secure_contracts",
+    "name": "Run Account Abstraction-powered DevSecOps pipelines to build more secure contracts",
+    "description": "",
+    "start": 1699889460000,
+    "end": 1699890420000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "emile_baizel",
+        "name": "Emile\nBaizel",
+        "bio": "Blockchain Architect, AWS \nJSR, Spearbit",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Emile.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/2e8bwttkk8irjrz8/index.m3u8",
+    "playbackId": "2e8bwttkk8irjrz8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/run_account_abstractionpowered_devsecops_pipelines_to_build_more_secure_contracts.jpg"
+  },
+  {
+    "id": "ethtrust_security_levels__building_trust_with_standards",
+    "name": "EthTrust Security Levels – building trust with standards",
+    "description": "",
+    "start": 1699890420000,
+    "end": 1699891380000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "chaals_nevile",
+        "name": "Chaals\nNevile",
+        "bio": "Technical Programs Director EEA",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Chaals.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/bca9g32tdec32mk8/index.m3u8",
+    "playbackId": "bca9g32tdec32mk8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/ethtrust_security_levels__building_trust_with_standards.jpg"
+  },
+  {
+    "id": "the_next_black_swan_event_for_ethereum",
+    "name": "The Next Black Swan Event for Ethereum",
+    "description": "",
+    "start": 1699891380000,
+    "end": 1699892400000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "galen_marchetti",
+        "name": "Galen\nMarchetti",
+        "bio": "Co-Founder & CEO\nKurtosis",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Galen.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a041knxgasougspr/index.m3u8",
+    "playbackId": "a041knxgasougspr",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_next_black_swan_event_for_ethereum.jpg"
+  },
+  {
+    "id": "venue_open",
+    "name": "Venue Open",
+    "description": "",
+    "start": 1699939800000,
+    "end": 1699940700000,
+    "stageId": "main_stage",
+    "speakers": [],
+    "videoUrl": "https://lp-playback.com/hls/cf74d545lrzckjkr/index.m3u8",
+    "playbackId": "cf74d545lrzckjkr",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/venue_open.jpg"
+  },
+  {
+    "id": "secureum_content_announcement",
+    "name": "Secureum Content Announcement",
+    "description": "",
+    "start": 1699940700000,
+    "end": 1699941600000,
+    "stageId": "main_stage",
+    "speakers": [],
+    "videoUrl": "https://lp-playback.com/hls/7a30orlbyeoktf0v/index.m3u8",
+    "playbackId": "7a30orlbyeoktf0v",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/secureum_content_announcement.jpg"
+  },
+  {
+    "id": "slither_a_static_analysis_tool_for_vyper_and_soliditya",
+    "name": "Slither: a static analysis tool for Vyper and Soliditya",
+    "description": "",
+    "start": 1699941600000,
+    "end": 1699942560000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "troy_sargent",
+        "name": "Troy\nSargent",
+        "bio": "Security Engineer\nTrail of Bits",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Troy.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/9c1barf3narwp60s/index.m3u8",
+    "playbackId": "9c1barf3narwp60s",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/slither_a_static_analysis_tool_for_vyper_and_soliditya.jpg"
+  },
+  {
+    "id": "the_symbolic_solidity_debugger",
+    "name": "The Symbolic Solidity Debugger",
+    "description": "",
+    "start": 1699943520000,
+    "end": 1699944720000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "raoul_schaffranek",
+        "name": "Raoul\nSchaffranek",
+        "bio": "FV Engineer\nRuntime Verification",
+        "eventId": "secureum_trustx",
+        "twitter": "@RaoulSaffron",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Raoul.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/c768mv09hy4j61sd/index.m3u8",
+    "playbackId": "c768mv09hy4j61sd",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_symbolic_solidity_debugger.jpg"
+  },
+  {
+    "id": "assist_smart_contract_auditing_with_large_language_model",
+    "name": "Assist Smart Contract Auditing with Large Language Model",
+    "description": "",
+    "start": 1699944720000,
+    "end": 1699945680000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "connie_lam",
+        "name": "Connie\nLam",
+        "bio": "Head of Solution Architect\nCertik",
+        "eventId": "secureum_trustx",
+        "twitter": "@CertiKCommunity",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Connie.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d086v50fbnw7w98d/index.m3u8",
+    "playbackId": "d086v50fbnw7w98d",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/assist_smart_contract_auditing_with_large_language_model.jpg"
+  },
+  {
+    "id": "dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling",
+    "name": "Docker-based Auditor’s Toolbox: Enhancing Web3 Security Through Integrated Tooling",
+    "description": "",
+    "start": 1699947000000,
+    "end": 1699947960000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "deivitto",
+        "name": "Deivitto",
+        "bio": "Junior Security Researcher\nSpearbit",
+        "eventId": "secureum_trustx",
+        "twitter": "@Deivitto",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Deivitto.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/7bedrp54t54lf3gv/index.m3u8",
+    "playbackId": "7bedrp54t54lf3gv",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling.jpg"
+  },
+  {
+    "id": "tips_to_master_fuzzing",
+    "name": "Tips to master fuzzing",
+    "description": "",
+    "start": 1699947960000,
+    "end": 1699948920000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "vctor_martnez",
+        "name": "Víctor\nMartínez",
+        "bio": "EVM & Security Researcher\nOak Security",
+        "eventId": "secureum_trustx",
+        "twitter": "@vn_martinez_",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Victor.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a4b7nm119hy6calp/index.m3u8",
+    "playbackId": "a4b7nm119hy6calp",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/tips_to_master_fuzzing.jpg"
+  },
+  {
+    "id": "ethereum_smart_contract_auditors_2023_rewind",
+    "name": "Ethereum Smart Contract Auditor’s 2023 Rewind",
+    "description": "",
+    "start": 1699948800000,
+    "end": 1699951800000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "patrickd",
+        "name": "Patrickd",
+        "bio": "Mentor, Secureum Researcher, Spearbit",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Patrick.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/b3a16pakyq7t4iu5/index.m3u8",
+    "playbackId": "b3a16pakyq7t4iu5",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/ethereum_smart_contract_auditors_2023_rewind.jpg"
+  },
+  {
+    "id": "indepth_exploration_of_frontrunning_protection",
+    "name": "In-Depth Exploration of Front-Running Protection",
+    "description": "",
+    "start": 1699948800000,
+    "end": 1699952400000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "tony_ke",
+        "name": "Tony\nKe",
+        "bio": "Security Engineer\nFuzzLand",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Tony.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/e0886m0suz01i34r/index.m3u8",
+    "playbackId": "e0886m0suz01i34r",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/indepth_exploration_of_frontrunning_protection.jpg"
+  },
+  {
+    "id": "stories_from_the_auditing_trenches_including_lessons_for_devs_lessons_from_top_defi_protocols",
+    "name": "Stories from the Auditing Trenches (including lessons for devs, lessons from top DeFi protocols)",
+    "description": "",
+    "start": 1699948920000,
+    "end": 1699949880000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "yannis_smaragdakis",
+        "name": "Yannis\nSmaragdakis",
+        "bio": "Co-founder\nDedaub ",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Yannis.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f9f4brwb5cmdeddt/index.m3u8",
+    "playbackId": "f9f4brwb5cmdeddt",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/stories_from_the_auditing_trenches_including_lessons_for_devs_lessons_from_top_defi_protocols.jpg"
+  },
+  {
+    "id": "security__common_pitfalls_of_merkle_trees",
+    "name": "Security & Common Pitfalls Of Merkle Trees",
+    "description": "",
+    "start": 1699949880000,
+    "end": 1699950600000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "kirk_baird",
+        "name": "Kirk\nBaird",
+        "bio": "Security Manager\nSigma Prime",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Kirk.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/050cwqmoxd19439d/index.m3u8",
+    "playbackId": "050cwqmoxd19439d",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/security__common_pitfalls_of_merkle_trees.jpg"
+  },
+  {
+    "id": "nontrivial_cases_of_the_inflation_attack",
+    "name": "Non-trivial cases of the Inflation Attack",
+    "description": "",
+    "start": 1699950600000,
+    "end": 1699951200000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "konstantin_nekrasov",
+        "name": "Konstantin\nNekrasov",
+        "bio": "Security Researcher MixBytes",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Konstantin.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/8f726safxgwaxi4g/index.m3u8",
+    "playbackId": "8f726safxgwaxi4g",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/nontrivial_cases_of_the_inflation_attack.jpg"
+  },
+  {
+    "id": "beyond_testing_the_power_of_proof",
+    "name": "Beyond Testing: The Power of Proof",
+    "description": "",
+    "start": 1699952400000,
+    "end": 1699956000000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "chandrakana_nandi",
+        "name": "Chandrakana\nNandi",
+        "bio": "Principal Research Scientist\nCertora",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/11/Chandra.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/bcce8ini94vvakvt/index.m3u8",
+    "playbackId": "bcce8ini94vvakvt",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/beyond_testing_the_power_of_proof.jpg"
+  },
+  {
+    "id": "remedy__unified_security_platform_by_hexens",
+    "name": "Remedy – unified security platform by Hexens",
+    "description": "",
+    "start": 1699956000000,
+    "end": 1699957800000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "konstantin_nekrasov",
+        "name": "Konstantin\nNekrasov",
+        "bio": "Security Researcher MixBytes",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Konstantin.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5107q19elh5zl88c/index.m3u8",
+    "playbackId": "5107q19elh5zl88c",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/remedy__unified_security_platform_by_hexens.jpg"
+  },
+  {
+    "id": "creation2chaos_under_the_hood_of_contract_creation_transactions",
+    "name": "Creation2Chaos: Under the hood of contract creation transactions",
+    "description": "",
+    "start": 1699957800000,
+    "end": 1699959600000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "dimitri_kamenski",
+        "name": "Dimitri Kamenski",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/07d5xhsv3qytdwdq/index.m3u8",
+    "playbackId": "07d5xhsv3qytdwdq",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/creation2chaos_under_the_hood_of_contract_creation_transactions.jpg"
+  },
+  {
+    "id": "security_of_stablecoins_stabilization_algorithms",
+    "name": "Security of Stablecoins Stabilization Algorithms",
+    "description": "",
+    "start": 1699959600000,
+    "end": 1699960560000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "dmitry_zakharov",
+        "name": "Dmitry\nZakharov",
+        "bio": "CTO\nMixBytes",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Dmitry.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/6c52yv2nijpn504l/index.m3u8",
+    "playbackId": "6c52yv2nijpn504l",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/security_of_stablecoins_stabilization_algorithms.jpg"
+  },
+  {
+    "id": "formal_reasoning_about_fairness_of_liquid_staking_protocols",
+    "name": "Formal Reasoning about Fairness of Liquid Staking Protocols",
+    "description": "",
+    "start": 1699960560000,
+    "end": 1699961520000,
+    "stageId": "main_stage",
+    "speakers": [],
+    "videoUrl": "https://lp-playback.com/hls/95308vzjs50o9bwh/index.m3u8",
+    "playbackId": "95308vzjs50o9bwh",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/formal_reasoning_about_fairness_of_liquid_staking_protocols.jpg"
+  },
+  {
+    "id": "a_framework_for_evaluating_audit_effectiveness",
+    "name": "A Framework for Evaluating Audit Effectiveness",
+    "description": "",
+    "start": 1699961520000,
+    "end": 1699962480000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "jack_sanford",
+        "name": "Jack\nSanford",
+        "bio": "Co-founder\nSherlock",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Jack.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/12b8n4et2f4rx8rp/index.m3u8",
+    "playbackId": "12b8n4et2f4rx8rp",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/a_framework_for_evaluating_audit_effectiveness.jpg"
+  },
+  {
+    "id": "the_wardens_journey",
+    "name": "The Wardens Journey",
+    "description": "",
+    "start": 1699962480000,
+    "end": 1699963440000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "alex_the_entreprenerd",
+        "name": "Alex\nThe Entreprenerd",
+        "bio": "Independent Security Researcher",
+        "eventId": "secureum_trustx",
+        "twitter": "@GalloDaSballo",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Alex.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/b59dpsbjwcj9rlma/index.m3u8",
+    "playbackId": "b59dpsbjwcj9rlma",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_wardens_journey.jpg"
+  },
+  {
+    "id": "judge__jury__executionooor_behind_the_scenes_of_an_audit_contest_judging_process",
+    "name": "Judge – Jury – Executionooor, Behind the scenes of an audit contest judging process",
+    "description": "",
+    "start": 1699963440000,
+    "end": 1699964400000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "hrishikesh_bhat",
+        "name": "Hrishikesh\nBhat",
+        "bio": "Independent Security Researcher",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hrishi.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/30b12k2g2ktebdkd/index.m3u8",
+    "playbackId": "30b12k2g2ktebdkd",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/judge__jury__executionooor_behind_the_scenes_of_an_audit_contest_judging_process.jpg"
+  },
+  {
+    "id": "roundme_rounding_analysis_made_simpler",
+    "name": "RoundMe: rounding analysis made simpler",
+    "description": "",
+    "start": 1699965000000,
+    "end": 1699968600000,
+    "stageId": "main_stage",
+    "speakers": [],
+    "videoUrl": "https://lp-playback.com/hls/aa43kdf2l65yk4dd/index.m3u8",
+    "playbackId": "aa43kdf2l65yk4dd",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/roundme_rounding_analysis_made_simpler.jpg"
+  },
+  {
+    "id": "stack_ranking_the_best_audit_firms",
+    "name": "Stack Ranking the Best Audit Firms",
+    "description": "",
+    "start": 1699966800000,
+    "end": 1699967700000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "jack_sanford",
+        "name": "Jack\nSanford",
+        "bio": "Co-founder\nSherlock",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Jack.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/200dw9jbgf5eyj1o/index.m3u8",
+    "playbackId": "200dw9jbgf5eyj1o",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/stack_ranking_the_best_audit_firms.jpg"
+  },
+  {
+    "id": "the_last_challenge_attack_exploiting_fiatshamir_to_attack_a_plonk_verifier",
+    "name": "The Last Challenge Attack: Exploiting Fiat-Shamir to Attack a Plonk Verifier",
+    "description": "",
+    "start": 1699967700000,
+    "end": 1699968600000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "vesselin_velichkov",
+        "name": "Vesselin Velichkov",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/1e92g27ngnsqm26d/index.m3u8",
+    "playbackId": "1e92g27ngnsqm26d",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_last_challenge_attack_exploiting_fiatshamir_to_attack_a_plonk_verifier.jpg"
+  },
+  {
+    "id": "the_hacker_mentality_what_makes_one_succeed_in_the_bug_bounty_world",
+    "name": "The Hacker Mentality: What makes one Succeed in the Bug Bounty World",
+    "description": "",
+    "start": 1699968600000,
+    "end": 1699969560000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "gonalo__gmhacker",
+        "name": "Gonçalo /\ngmhacker",
+        "bio": "Smart Contract Lead\nImmunefi",
+        "eventId": "secureum_trustx",
+        "twitter": "@realgmhacker",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Goncalo.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/13ad936z4w112sp2/index.m3u8",
+    "playbackId": "13ad936z4w112sp2",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_hacker_mentality_what_makes_one_succeed_in_the_bug_bounty_world.jpg"
+  },
+  {
+    "id": "incident_response_for_web3_monitoring_automation_and_circuitbreakers_in_protocol_secops",
+    "name": "Incident Response for Web3: Monitoring, Automation, and Circuitbreakers in Protocol SecOps",
+    "description": "",
+    "start": 1699969560000,
+    "end": 1699970520000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "morgan_weaver",
+        "name": "Morgan\nWeaver",
+        "bio": "Security Engineer\nOpenZeppelin",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Morgan.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/8436y8vwdry68czo/index.m3u8",
+    "playbackId": "8436y8vwdry68czo",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/incident_response_for_web3_monitoring_automation_and_circuitbreakers_in_protocol_secops.jpg"
+  },
+  {
+    "id": "circuit_breakers_the_magic_pill_to_defis_security_problem",
+    "name": "Circuit Breakers: The Magic Pill to DeFi’s Security Problem?",
+    "description": "",
+    "start": 1699970520000,
+    "end": 1699971480000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "philippe_dumonet",
+        "name": "Philippe\nDumonet ",
+        "bio": "CEO & Co-founder\nDeReg",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Philippe.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5e3bhbaa9pgucfre/index.m3u8",
+    "playbackId": "5e3bhbaa9pgucfre",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/circuit_breakers_the_magic_pill_to_defis_security_problem.jpg"
+  },
+  {
+    "id": "building_scalable_monitoring_infrastructure_from_scratch",
+    "name": "Building scalable monitoring infrastructure from scratch",
+    "description": "",
+    "start": 1699971480000,
+    "end": 1699972440000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "arseniy_reutov",
+        "name": "Arseniy\nReutov",
+        "bio": "CTO\nDecurity",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Arseniy.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5dc7qy5j8me14ucx/index.m3u8",
+    "playbackId": "5dc7qy5j8me14ucx",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/building_scalable_monitoring_infrastructure_from_scratch.jpg"
+  },
+  {
+    "id": "picus_automated_verification_of_zkp_circuits",
+    "name": "Picus: Automated Verification of ZKP Circuits",
+    "description": "",
+    "start": 1699974000000,
+    "end": 1699974900000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "andreea_buterchi",
+        "name": "Andreea\nButerchi",
+        "bio": "VP of Engineering\nVeridise",
+        "eventId": "secureum_trustx",
+        "twitter": "@AndreeaButerchi",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Andreea.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/40b6kha6cmb7lo25/index.m3u8",
+    "playbackId": "40b6kha6cmb7lo25",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/picus_automated_verification_of_zkp_circuits.jpg"
+  },
+  {
+    "id": "a_curious_bug_fuzzing_for_consensusissues",
+    "name": "A curious bug: Fuzzing for consensus-issues",
+    "description": "",
+    "start": 1699974900000,
+    "end": 1699975500000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "martin_holst_swende",
+        "name": "Martin Holst Swende",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/cad12lcpps57azpe/index.m3u8",
+    "playbackId": "cad12lcpps57azpe",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/a_curious_bug_fuzzing_for_consensusissues.jpg"
+  },
+  {
+    "id": "0__0_in_defi",
+    "name": "0 != 0 (in DeFi)",
+    "description": "",
+    "start": 1699975500000,
+    "end": 1699976100000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "ernesto_boado",
+        "name": "Ernesto Boado",
+        "bio": "TBD",
+        "eventId": "secureum_trustx"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/466bvpp4b6nmhb33/index.m3u8",
+    "playbackId": "466bvpp4b6nmhb33",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/0__0_in_defi.jpg"
+  },
+  {
+    "id": "the_importance_of_web2infrastructure_security_in_web3",
+    "name": "The importance of Web2/Infrastructure security in Web3",
+    "description": "",
+    "start": 1699976100000,
+    "end": 1699976700000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "frdric_adam",
+        "name": "Frédéric\nADAM",
+        "bio": "Senior Web2 Pentester\nBug Bounty Hunter",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Frederic.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/e3a37h5zbkbc74lr/index.m3u8",
+    "playbackId": "e3a37h5zbkbc74lr",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_importance_of_web2infrastructure_security_in_web3.jpg"
+  },
+  {
+    "id": "readonly_reentrancy_101_and_how_to_protect_yourself",
+    "name": "Read-Only Reentrancy: 101 and How to Protect Yourself”",
+    "description": "",
+    "start": 1699976700000,
+    "end": 1699977300000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "ionutviorel_gingu",
+        "name": "Ionut-Viorel\nGingu",
+        "bio": "Security Researcher\nOpenZeppelin",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Ionut-Viorel.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/40d0biy43vrdpw4b/index.m3u8",
+    "playbackId": "40d0biy43vrdpw4b",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/readonly_reentrancy_101_and_how_to_protect_yourself.jpg"
+  },
+  {
+    "id": "towards_secure_trustminimized_optimistic_rollups_on_ethereum",
+    "name": "Towards Secure, Trust-minimized Optimistic Rollups on Ethereum",
+    "description": "",
+    "start": 1699977300000,
+    "end": 1699977900000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "riad_wahby",
+        "name": "Riad\nWahby",
+        "bio": "Co-founder and CEO, Cubist  Assistant Professor, CMU",
+        "eventId": "secureum_trustx",
+        "twitter": "@kwantam",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Riad.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/7aadw4yx8elasuao/index.m3u8",
+    "playbackId": "7aadw4yx8elasuao",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/towards_secure_trustminimized_optimistic_rollups_on_ethereum.jpg"
+  },
+  {
+    "id": "what_me_worry_preventing_slashing_by_design",
+    "name": "What, Me Worry? Preventing Slashing by Design",
+    "description": "",
+    "start": 1699977900000,
+    "end": 1699978500000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "yuguang_ipsen",
+        "name": "Yuguang\nIpsen",
+        "bio": "Security Researcher OpenZeppelin",
+        "eventId": "secureum_trustx",
+        "twitter": "@mvlfyg",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Yuguang.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f49fkxv1j3vpd024/index.m3u8",
+    "playbackId": "f49fkxv1j3vpd024",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/what_me_worry_preventing_slashing_by_design.jpg"
+  },
+  {
+    "id": "locations_of_price_manipulation_vulnerabilities",
+    "name": "Locations Of Price Manipulation Vulnerabilities",
+    "description": "",
+    "start": 1699978500000,
+    "end": 1699978800000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "niklas_kunkel",
+        "name": "Niklas\nKunkel",
+        "bio": "Founder\nChronicle Protocol",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Niklas.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/3b5fjoecowrg5a3a/index.m3u8",
+    "playbackId": "3b5fjoecowrg5a3a",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/locations_of_price_manipulation_vulnerabilities.jpg"
+  },
+  {
+    "id": "delivering_the_verifiability_that_onchain_data_deserves",
+    "name": "Delivering the Verifiability that on-chain data deserves",
+    "description": "",
+    "start": 1699978800000,
+    "end": 1699979700000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "andreea_buterchi",
+        "name": "Andreea\nButerchi",
+        "bio": "VP of Engineering\nVeridise",
+        "eventId": "secureum_trustx",
+        "twitter": "@AndreeaButerchi",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Andreea.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/482bzxoi375u864c/index.m3u8",
+    "playbackId": "482bzxoi375u864c",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/delivering_the_verifiability_that_onchain_data_deserves.jpg"
+  },
+  {
+    "id": "oneclick_security_for_zkp_circuits",
+    "name": "One-click security for ZKP circuits",
+    "description": "",
+    "start": 1699979100000,
+    "end": 1699979400000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "zheng_leong_chua",
+        "name": "Zheng\nLeong Chua",
+        "bio": "Co-founder\nAutomata Network",
+        "eventId": "secureum_trustx",
+        "twitter": "@melynx",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Zheng.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/b081pnt0nr3y9jsj/index.m3u8",
+    "playbackId": "b081pnt0nr3y9jsj",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/oneclick_security_for_zkp_circuits.jpg"
+  },
+  {
+    "id": "unpacking_the_debate_trusted_execution_environments_tees_in_web3",
+    "name": "Unpacking the Debate: Trusted Execution Environments (TEEs) in Web3",
+    "description": "",
+    "start": 1699979400000,
+    "end": 1699979700000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "christoph_michel",
+        "name": "Christoph\nMichel",
+        "bio": "Independent Security Researcher",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Christoph.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/1630lui2of5iu9i3/index.m3u8",
+    "playbackId": "1630lui2of5iu9i3",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/unpacking_the_debate_trusted_execution_environments_tees_in_web3.jpg"
+  },
+  {
+    "id": "how_many_audits_do_you_need",
+    "name": "How many audits do you need?",
+    "description": "",
+    "start": 1699979700000,
+    "end": 1699980000000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "christoph_michel",
+        "name": "Christoph Michel",
+        "bio": "",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": ""
+      }
+    ],
+    "videoUrl": "",
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/how_many_audits_do_you_need.jpg"
+  },
+  {
+    "id": "my_tools_dont_work_here_penetration_testing_browserbased_crypto_wallets",
+    "name": "My Tools Don’t Work Here: Penetration Testing Browser-based Crypto Wallets",
+    "description": "",
+    "start": 1699979800000,
+    "end": 1699990000000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "justin_regele",
+        "name": "Justin\nRegele",
+        "bio": "Penetration\nTester",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Justin.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/0f37pvv74e5no892/index.m3u8",
+    "playbackId": "0f37pvv74e5no892",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/my_tools_dont_work_here_penetration_testing_browserbased_crypto_wallets.jpg"
+  },
+  {
+    "id": "security_issues_in_a_world_of_thousand_rollups",
+    "name": "Security Issues in a World of Thousand Rollups",
+    "description": "",
+    "start": 1699980000000,
+    "end": 1699980300000,
+    "stageId": "main_stage",
+    "speakers": [
+      {
+        "id": "amrit_kumar",
+        "name": "Amrit\nKumar",
+        "bio": "COO \nAltLayer",
+        "eventId": "secureum_trustx",
+        "twitter": "",
+        "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Amrit.png"
+      }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/935a2qk00wkigzm5/index.m3u8",
+    "playbackId": "935a2qk00wkigzm5",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/security_issues_in_a_world_of_thousand_rollups.jpg"
+  },
+  {
+    "id": "gn",
+    "name": "GN",
+    "description": "",
+    "start": 1699980300000,
+    "end": 1699981200000,
+    "stageId": "main_stage",
+    "speakers": [],
+    "videoUrl": "https://lp-playback.com/hls/dd3bymsc116751dx/index.m3u8",
+    "playbackId": "dd3bymsc116751dx",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/gn.jpg"
+  }
+]

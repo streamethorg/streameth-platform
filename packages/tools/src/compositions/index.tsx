@@ -16,13 +16,23 @@ import {
 } from './devconnect'
 import { DevconnectISTProps, Intro } from './devconnect/intro'
 import { Social } from './devconnect/social'
-import { Intro as ProgCryptoIntro, ProgCryptoProps } from './progcrypto/intro'
+import {
+  Intro as ProgCryptoIntro,
+  ProgCryptoProps,
+} from './progcrypto/intro'
 import { WideIntro as ProgCryptoWideIntro } from './progcrypto/intro_wide'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
 import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
 import { JoinVideos } from './join'
+import calculateSessionMetadata from 'utils/getVideoFrames'
 import { SessionSchema } from '../utils/mocks'
+import { ISession as SessionType } from 'utils/types'
+
+import SESSIONS from '../../public/json/secureum_trustx.json'
+import { calculateFrames } from '../utils/calculateFrames'
+
+const sessions: any[] = SESSIONS
 
 export function Compositions() {
   const waitForFont = delayRender()
@@ -224,33 +234,22 @@ export function Compositions() {
         />
       </Folder>
 
-      <Composition
-        id={'join-videos'}
-        component={JoinVideos}
-        width={1920}
-        height={1080}
-        fps={25}
-        durationInFrames={525} // Total of all video durations minus 25 frames (1 sec) per transition
-        defaultProps={{
-          videos: [
-            {
-              pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              duration: 150,
-            },
-            {
-              pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              duration: 300,
-            },
-            {
-              pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              duration: 150,
-            },
-          ],
-        }}
-      />
+      <Folder name="join-videos">
+        {sessions.map((session) => (
+          <Composition
+            id={session.id.replaceAll('_', '-')}
+            component={JoinVideos}
+            width={1920}
+            height={1080}
+            fps={25}
+            durationInFrames={125} // Total of all video durations minus 25 frames (1 sec) per transition
+            defaultProps={{
+              id: session.id,
+              coverImage: session.coverImage,
+            }}
+          />
+        ))}
+      </Folder>
     </>
   )
 }
