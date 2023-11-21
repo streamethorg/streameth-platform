@@ -8,6 +8,9 @@ node_modules
 # testing
 /coverage
 
+# Assets
+/public/secureum/videos
+
 # production
 /build
 /dist
