@@ -4,18 +4,24 @@ import {
   FilterContext,
   FilterOption,
 } from '../../../../../components/context/FilterContext'
+import { ISession } from '@/server/model/session'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
   filterName: string
+  items: ISession[]
 }
 
 const SearchFilter = <T extends object>({
+  items,
   filterOptions,
   filterName,
 }: FilterProps<T>) => {
-  const { setFilterOptions, filterOptions: currentFilterOptions } =
-    useContext(FilterContext)
+  const {
+    setFilterOptions,
+    setItems,
+    filterOptions: currentFilterOptions,
+  } = useContext(FilterContext)
   const [selectedItems, setSelectedItems] = useState<
     FilterOption<T>[]
   >([])
@@ -39,7 +45,16 @@ const SearchFilter = <T extends object>({
         setSelectedItems((prevItems) => [...prevItems, option])
       }
     })
-  }, [])
+
+    if (items.length > 0) {
+      setItems(items)
+    }
+
+    return () => {
+      setItems([])
+      performFilter()
+    }
+  }, [items])
 
   const handleOptionSelect = (option: FilterOption<T>) => {
     setSelectedItems([option])
