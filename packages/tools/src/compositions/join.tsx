@@ -47,7 +47,7 @@ export const JoinVideos: React.FC<Props> = ({
           <OffthreadVideo src={videoFile} />
         </TransitionSeries.Sequence>
       </TransitionSeries>
-      <Audio src={music} endAt={130} />
+      <Audio src={music} />
     </AbsoluteFill>
   )
 }
