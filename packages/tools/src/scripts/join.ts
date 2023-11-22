@@ -8,6 +8,7 @@ import path from 'path'
 import { webpackOverride } from '../webpack-override'
 
 let lastProgressPrinted = -1
+let event = 'secureum'
 
 const onProgress: RenderMediaOnProgress = ({ progress }) => {
   const progressPercent = Math.floor(progress * 100)
