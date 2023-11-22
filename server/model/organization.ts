@@ -8,6 +8,7 @@ export interface IOrganization {
   url: string
   logo: string
   location: string
+  accentColor: string
 }
 
 export default class Organization {
@@ -31,12 +32,16 @@ export default class Organization {
   @IsNotEmpty()
   location: string
 
+  @IsNotEmpty()
+  accentColor: string
+
   constructor({
     name,
     description,
     url,
     logo,
     location,
+    accentColor = '#FFF',
   }: Omit<IOrganization, 'id'> & { id?: string }) {
     this.id = generateId(name)
     this.name = name
@@ -44,6 +49,7 @@ export default class Organization {
     this.url = url
     this.logo = logo
     this.location = location
+    this.accentColor = accentColor
     this.validateThis()
   }
 
@@ -54,8 +60,8 @@ export default class Organization {
     }
   }
 
-  async toJson(): Promise<string> {
-    return JSON.stringify(this)
+  public toJson(): IOrganization {
+    return { ...this }
   }
 
   static async fromJson(jsonData: string): Promise<Organization> {
