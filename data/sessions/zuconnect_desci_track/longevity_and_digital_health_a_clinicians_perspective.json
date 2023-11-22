@@ -1,1 +1,19 @@
-{"id":"longevity_and_digital_health_a_clinicians_perspective","name":"Longevity and Digital Health: A Clinicians Perspective","description":"Digital longevity from clinician’s perspective based on 5 years \nexperience and more than 2000 patients in the longevity center.","start":1699011600000,"end":1699013400000,"stageId":"theater","speakers":[{"id":"alicja_dudek","name":"Alicja Dudek","bio":"No Desciption","eventId":"zuconnect_desci_track"}],"playbackId":"","eventId":"zuconnect_desci_track","coverImage":"/sessions/zuconnect_desci_track/longevity_and_digital_health_a_clinicians_perspective.jpg"}
+{
+  "id": "longevity_and_digital_health_a_clinicians_perspective",
+  "name": "Longevity and Digital Health: A Clinicians Perspective",
+  "description": "Digital longevity from clinician’s perspective based on 5 years \nexperience and more than 2000 patients in the longevity center.",
+  "start": 1699011600000,
+  "end": 1699013400000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "alicja_dudek",
+      "name": "Alicja Dudek",
+      "bio": "No Desciption",
+      "eventId": "zuconnect_desci_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_desci_track",
+  "coverImage": "/sessions/zuconnect_desci_track/longevity_and_digital_health_a_clinicians_perspective.jpg"
+}
