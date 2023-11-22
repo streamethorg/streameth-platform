@@ -3,7 +3,7 @@ import { bundle } from '@remotion/bundler'
 import { getCompositions, renderMedia } from '@remotion/renderer'
 import { RenderMediaOnProgress } from '@remotion/renderer'
 import { createClient, studioProvider } from '@livepeer/react'
-import { createReadStream } from 'fs'
+import { createReadStream, existsSync } from 'fs'
 import path from 'path'
 import { webpackOverride } from '../webpack-override'
 
@@ -41,7 +41,10 @@ const start = async () => {
 
   if (compositions) {
     for (const composition of compositions) {
-      if (!composition.id.includes('secureum')) {
+      if (
+        !composition.id.includes(event) &&
+        existsSync(`/out/sessions/${composition.id}.mp4`)
+      ) {
         continue
       }
       console.log(`Started rendering ${composition.id}`)
@@ -56,7 +59,7 @@ const start = async () => {
       })
 
       lastProgressPrinted = -1
-      await uploadAsset(`out/sessions/${composition.id}.mp4`)
+      // await uploadAsset(`out/sessions/${composition.id}.mp4`)
     }
   }
 }
