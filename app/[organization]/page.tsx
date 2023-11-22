@@ -8,6 +8,8 @@ import remarkGfm from 'remark-gfm'
 import { Metadata, ResolvingMetadata } from 'next'
 import { getImageUrl } from '@/server/utils'
 import ColorComponent from '../utils/ColorComponent'
+import { notFound } from 'next/navigation'
+import { IOrganization } from '@/server/model/organization'
 
 interface Params {
   params: {
@@ -16,41 +18,23 @@ interface Params {
 }
 
 export default async function OrganizationHome({ params }: Params) {
-  const eventController = new EventController()
-  const events = await eventController.getAllEventsForOrganization(
-    params.organization
-  )
-
-  const organizationController = new OrganizationController()
-  const organization = await organizationController.getOrganization(
-    params.organization
-  )
-  const getCover = () => {
-    if (organization?.id == 'zuzalu') {
-      return getImageUrl('/events/zuzalu-cover.png')
-    }
-    if (organization?.id == 'devconnect') {
-      return getImageUrl('/events/devconnect_cover.png')
-    }
-    return ''
+  if (!params.organization) {
+    return notFound()
   }
 
-  const beforeStyle = {
-    content: '""',
-    backgroundImage: `url(${getCover()})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    opacity: 0.15,
-    zIndex: -1,
-  }
+  const events =
+    await new EventController().getAllEventsForOrganization(
+      params.organization
+    )
+
+  const organization =
+    await new OrganizationController().getOrganization(
+      params.organization
+    )
 
   return (
     <main className="w-screen mx-auto fixed overflow-auto h-screen">
-      <ColorComponent organization={organization}>
-        <div
-          className="absolute top-0 left-0 w-full h-full"
-          style={beforeStyle}></div>
+      <ColorComponent organization={organization.toJson()}>
         <div className="sticky bg-white top-0 z-50 flex p-4 px-9 gap-4">
           <Image
             src={getImageUrl(organization.logo)}
@@ -61,7 +45,7 @@ export default async function OrganizationHome({ params }: Params) {
             }}
             alt={`${organization.name} logo`}
           />
-          <FilterBar events={events} />
+          <FilterBar events={events.map((event) => event.toJson())} />
         </div>
         <div className="bg-base rounded-xl mx-9 my-3">
           <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
@@ -76,7 +60,9 @@ export default async function OrganizationHome({ params }: Params) {
         <hr className="h-px mx-9  bg-base" />
         <div className="overflow-auto h-screen">
           <div className="px-4">
-            <EventList events={events} />
+            <EventList
+              events={events.map((event) => event.toJson())}
+            />
           </div>
         </div>
       </ColorComponent>

@@ -60,8 +60,8 @@ export default class Organization {
     }
   }
 
-  async toJson(): Promise<string> {
-    return JSON.stringify(this)
+  public toJson(): IOrganization {
+    return { ...this }
   }
 
   static async fromJson(jsonData: string): Promise<Organization> {
