@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 interface Props {
+  organizationId: string
   eventId: string
   playbackId: string
   sessionId?: string
@@ -123,7 +124,7 @@ export function Editor(props: Props) {
     const clipRes = await fetch('https://livepeer.studio/api/clip', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STUDIO_API_KEY}`, // ONLY use on Server actions - NOT client side
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(clip),
@@ -133,8 +134,10 @@ export function Editor(props: Props) {
     console.log('Clip data', clipData.asset)
 
     const video = {
+      organizationId: props.organizationId,
       eventId: props.eventId,
       sessionId: id,
+      sourceId: props.sessionId,
       assetId: clipData.asset.id,
       playbackId: clipData.asset.playbackId,
       videoUrl: `https://lp-playback.com/hls/${clipData.asset.playbackId}/index.m3u8`,
@@ -147,13 +150,13 @@ export function Editor(props: Props) {
       },
       body: JSON.stringify(video),
     })
-    await videoRes.json()
 
     setScheduleInfo((value: any) => ({
       ...value,
       [id]: {
         ...value[id],
         clipId: clipData.asset.id,
+        status: videoRes.status,
       },
     }))
   }
@@ -399,8 +402,15 @@ export function Editor(props: Props) {
                     </button>
 
                     {scheduleInfo[i.id]?.clipId && (
-                      <p className="w-32 truncate overflow-hidden text-sm">
-                        {scheduleInfo[i.id]?.clipId}
+                      <p className="w-auto flex-shrink truncate overflow-hidden text-sm">
+                        Processing..
+                      </p>
+                    )}
+                    {i.videoUrl && (
+                      <p className="w-auto flex-shrink truncate overflow-hidden text-sm">
+                        <Link href={i.videoUrl}>
+                          Already processed
+                        </Link>
                       </p>
                     )}
                   </div>

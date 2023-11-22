@@ -1,1 +1,21 @@
-{"id":"mod_an_onchain_game_in_one_hour","name":"Mod an Onchain Game in One Hour","description":"Coming Soon","start":1700046000000,"end":1700049600000,"stageId":"beylerbeyi_1","speakers":[{"id":"kooshaba","name":"kooshaba","bio":"kooshaba previously worked on Dark Forest as a game developer/designer and now works at Lattice pushing the limits of onchain games. Currently lead developer of Sky Strife.","eventId":"autonomous_worlds_assembly","twitter":"@Kooshaba","photo":"https://drive.google.com/uc?id=1zY_l5RTV-jVo-XKe2A0oDNkeoFgQ5zHY"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/mod_an_onchain_game_in_one_hour.jpg"}
+{
+  "id": "mod_an_onchain_game_in_one_hour",
+  "name": "Mod an Onchain Game in One Hour",
+  "description": "This session will guide participants through the process of:\n\n1. Making their own custom client for a MUD game (Sky Strife).\n2. Deploying their own contracts on an existing Sky Strife world to start building their own game on top of it.\n\nThe finished product will serve as their own starting point for modifying any existing MUD application.",
+  "start": 1700053200000,
+  "end": 1700056800000,
+  "stageId": "beylerbeyi_1",
+  "speakers": [
+    {
+      "id": "kooshaba",
+      "name": "kooshaba",
+      "bio": "kooshaba works at Lattice and is currently lead developer of Sky Strife. Previously, he worked on Dark Forest as a developer and game designer.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@Kooshaba",
+      "photo": "https://drive.google.com/uc?id=1zY_l5RTV-jVo-XKe2A0oDNkeoFgQ5zHY"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/mod_an_onchain_game_in_one_hour_thumbnail.png"
+}

@@ -3,11 +3,13 @@ import { Button } from '@/app/utils/Button'
 import FormLabel from '@/app/utils/FormLabel'
 import { FormTextInput } from '@/app/utils/FormTextInput'
 import { EventFormContext } from './EventFormContext'
+import FormRadio from '@/app/utils/FormRadio'
 
 const CreateEditEventStepThree = () => {
   const context = useContext(EventFormContext)
   if (!context) return null
-  const { formData, handleSubmit, handleChange } = context
+  const { formData, handleSubmit, setFormData, handleChange } =
+    context
   return (
     <div>
       <p className="font-ubuntu text-lg pt-3 text-grey">
@@ -29,6 +31,33 @@ const CreateEditEventStepThree = () => {
             handleChange(e)
           }
         />
+        <div className="flex flex-col mb-6">
+          <FormLabel label="Enable Video Downloader" toolTip />
+          <div className="flex gap-5">
+            <FormRadio
+              label="true"
+              buttonHeight="35"
+              checked={formData?.enableVideoDownloader}
+              onChange={() =>
+                setFormData({
+                  ...formData,
+                  enableVideoDownloader: true,
+                })
+              }
+            />
+            <FormRadio
+              label="false"
+              buttonHeight="35"
+              checked={!formData?.enableVideoDownloader}
+              onChange={() =>
+                setFormData({
+                  ...formData,
+                  enableVideoDownloader: false,
+                })
+              }
+            />
+          </div>
+        </div>
         <FormTextInput
           label="Chose your custom domain for the event page (Optional)"
           name="website"
@@ -39,6 +68,33 @@ const CreateEditEventStepThree = () => {
             handleChange(e)
           }
         />
+        <div className="flex flex-col mb-6">
+          <FormLabel label="Archive Mode" toolTip />
+          <div className="flex gap-5">
+            <FormRadio
+              label="true"
+              buttonHeight="35"
+              checked={formData?.archiveMode}
+              onChange={() =>
+                setFormData({
+                  ...formData,
+                  archiveMode: true,
+                })
+              }
+            />
+            <FormRadio
+              label="false"
+              buttonHeight="35"
+              checked={!formData?.archiveMode}
+              onChange={() =>
+                setFormData({
+                  ...formData,
+                  archiveMode: false,
+                })
+              }
+            />
+          </div>
+        </div>
       </div>
 
       <div className="mb-6">
@@ -48,7 +104,7 @@ const CreateEditEventStepThree = () => {
           toolTip
           toolTipHTML="Click Publish to create event"
         />
-        <p className="text-sm opacity-60 text-accent mb-2">
+        <p className="text-sm opacity-70 text-blue mb-2">
           Your event page can be edited at anytime from your admin
           page
         </p>

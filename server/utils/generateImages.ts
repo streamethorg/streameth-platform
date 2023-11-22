@@ -3,13 +3,14 @@ import SessionController from '../controller/session'
 import Session from '../model/session'
 import fs from 'fs'
 
-const eventId = 'zuconnect_istanbul__new_governance'
+const eventId = 'secureum_trustx'
 
 async function main() {
   const sessionController = new SessionController()
   const sessions = await sessionController.getAllSessions({
     eventId,
   })
+  console.log('sessions', sessions.length)
 
   for (const session of sessions) {
     try {

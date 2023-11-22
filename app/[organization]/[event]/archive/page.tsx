@@ -4,6 +4,7 @@ import SessionController from '@/server/controller/session'
 import StageController from '@/server/controller/stage'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EventController from '@/server/controller/event'
+
 interface Params {
   params: {
     event: string
@@ -32,20 +33,6 @@ export default async function ArchivePage({ params }: Params) {
       </div>
     )
   }
-
-  const speakerController = new SpeakerController()
-  const speakers = (
-    await speakerController.getAllSpeakersForEvent(params.event)
-  ).map((speaker) => {
-    return speaker.toJson()
-  })
-
-  const stageController = new StageController()
-  const stages = (
-    await stageController.getAllStagesForEvent(params.event)
-  ).map((stage) => {
-    return stage.toJson()
-  })
 
   return (
     <div className="flex flex-col-reverse justify-end lg:flex-row w-full lg:h-full lg:overflow-hidden">

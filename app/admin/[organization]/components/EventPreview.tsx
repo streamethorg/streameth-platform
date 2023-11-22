@@ -1,5 +1,4 @@
 'use client'
-import { IEvent } from '@/server/model/event'
 import React, { useEffect, useContext } from 'react'
 import Image from 'next/image'
 import {
@@ -14,6 +13,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { ModalContext } from '@/components/context/ModalContext'
 import useAdminContext from '@/app/hooks/useAdminContext'
+import { getImageUrl } from '@/server/utils'
 
 const ItemButton = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-row justify-center">
@@ -67,7 +67,7 @@ const EventPreview = () => {
         <div className="w-20 items-center flex">
           <span className="sr-only">Logo</span>
           <Image
-            src={'/events/' + formData?.logo}
+            src={getImageUrl('/events/' + formData?.logo)}
             className=""
             alt="logo"
             width={50}
@@ -109,14 +109,14 @@ const EventPreview = () => {
             <div className="relative w-full">
               <div className="relative">
                 <Image
-                  src={'/events/' + formData?.banner}
+                  src={getImageUrl('/events/' + formData?.banner)}
                   alt="Event Cover"
                   width={1500}
                   height={500}
                   className="w-full object-cover h-36 md:h-52 lg:h-96"
                 />
                 <Image
-                  src={'/events/' + formData?.logo}
+                  src={getImageUrl('/events/' + formData?.logo)}
                   alt="Event Logo"
                   width={128}
                   height={128}

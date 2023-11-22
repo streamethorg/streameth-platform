@@ -9,7 +9,7 @@ const SPEAKER_DATA_RANGE = 'A3:E'
 const STAGE_SHEET = 'Stages (FOR INTERNAL MANAGEMENT, DO NOT EDIT)'
 const STAGE_DATA_RANGE = 'A3:D'
 const SESSION_SHEET = 'Sessions'
-const SESSION_DATA_RANGE = 'A3:M'
+const SESSION_DATA_RANGE = 'A3:N'
 
 export default class Importer extends BaseImporter {
   googleSheetService: GoogleSheetService
@@ -126,9 +126,22 @@ export default class Importer extends BaseImporter {
           eventId: this.event.id,
           organizationId: this.event.organizationId,
           speakers: speakers,
-          start: moment(`${newDate()} ${Start}:00`).valueOf(),
-          end: moment(`${newDate()} ${End}:00`).valueOf(),
-          videoUrl: row[12],
+          start: moment
+            .tz(
+              `${newDate()} ${Start}:00`,
+              'YYYY-MM-DD HH:mm:ss',
+              this.event.timezone
+            )
+            .valueOf(),
+          end: moment
+            .tz(
+              `${newDate()} ${End}:00`,
+              'YYYY-MM-DD HH:mm:ss',
+              this.event.timezone
+            )
+            .valueOf(),
+          // track: row[13], // hack for progcrypto
+          // moderator: row[12],
         }
 
         await this.sessionController.createSession(session)

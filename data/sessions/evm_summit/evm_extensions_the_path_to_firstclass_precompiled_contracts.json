@@ -1,1 +1,25 @@
-{"id":"evm_extensions_the_path_to_firstclass_precompiled_contracts","name":"EVM Extensions: The Path to First-Class Precompiled Contracts","description":"The talk will present about how to expand the capabilities of the EVM by giving precompiled contracts the status of first-class contracts to execute complex logic natively (eg. in Golang). We will present a deep dive into what precompiles contracts are, how do they compare with traditional contracts, the possibilities that stateful precompiles enable, how different EVM L1s and L2s currently integrate them and how to look for potential security vulnerabilities during their implementation. We will end the talk with a concrete demo of how statateful precompiles can help solve UX issues between ERC20 and native token formats (eg WETH vs ETH).","start":1699944600000,"end":1699945500000,"stageId":"emirgan_1","speakers":[{"id":"federico_kunze_kllmer","name":"Federico Kunze Küllmer","bio":"Founder of Evmos, CEO at Altiplanic. Previously IBC & Cosmos Core Engineer","eventId":"evm_summit","twitter":"","photo":"https://evmsummit.org/images/speakers/federico_kunze_kullmer.jpg"}],"videoUrl":"EVM Future","eventId":"evm_summit","coverImage":"/sessions/evm_summit/evm_extensions_the_path_to_firstclass_precompiled_contracts.jpg"}
+{
+  "id": "evm_extensions_the_path_to_firstclass_precompiled_contracts",
+  "name": "EVM Extensions: The Path to First-Class Precompiled Contracts",
+  "description": "The talk will present about how to expand the capabilities of the EVM by giving precompiled contracts the status of first-class contracts to execute complex logic natively (eg. in Golang). We will present a deep dive into what precompiles contracts are, how do they compare with traditional contracts, the possibilities that stateful precompiles enable, how different EVM L1s and L2s currently integrate them and how to look for potential security vulnerabilities during their implementation. We will end the talk with a concrete demo of how statateful precompiles can help solve UX issues between ERC20 and native token formats (eg WETH vs ETH).",
+  "start": 1699944600000,
+  "end": 1699945500000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "federico_kunze_kllmer",
+      "name": "Federico Kunze Küllmer",
+      "bio": "Founder of Evmos, CEO at Altiplanic. Previously IBC & Cosmos Core Engineer",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/federico_kunze_kullmer.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/7b178w9oklc562uj/index.m3u8",
+  "playbackId": "7b178w9oklc562uj",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/evm_extensions_the_path_to_firstclass_precompiled_contracts_thumbnail.png",
+  "assetId": "7b17b70b-d547-4b2b-9088-e3979a8d9661",
+  "sourceId": "1f82b9ab-c330-470f-abb4-352939e198f2",
+  "videoType": "clip"
+}

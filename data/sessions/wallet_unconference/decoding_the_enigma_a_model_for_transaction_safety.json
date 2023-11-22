@@ -1,0 +1,25 @@
+{
+  "id": "decoding_the_enigma_a_model_for_transaction_safety",
+  "name": "Decoding the Enigma: A Model for Transaction Safety",
+  "description": "This talk will explore the critical security issues in the Ethereum ecosystem, specifically the vulnerability of users to phishing attacks due to the lack of transparency in transaction confirmations. We'll look at modern strategies and see how they fail, and I'll share a model for reasoning concretely about confirmation safety with a holistic trust model that requires ecosystem wide collaboration to implement.",
+  "start": 1700210700000,
+  "end": 1700211600000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "dan_finlay",
+      "name": "Dan Finlay",
+      "bio": "Dan Finlay has been facilitating MetaMask development since 2016. During that time he's developed a passion and vision for the future of secure distributed permissionless computing, and is bringing that vision to life through MetaMask.",
+      "eventId": "wallet_unconference",
+      "twitter": "@DanFinlay3",
+      "photo": "https://speak.ticketh.xyz/media/avatars/6c7f891f517b95fac7f1fec19620d8e0_8SgSk3i.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/7b11dcsr1x2kc4h6/index.m3u8",
+  "playbackId": "7b11dcsr1x2kc4h6",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/decoding_the_enigma_a_model_for_transaction_safety_thumbnail.png",
+  "assetId": "7b114158-1ebf-48c2-bd1f-0c329959e2c8",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "the_symbolic_solidity_debugger",
+  "name": "The Symbolic Solidity Debugger",
+  "description": "",
+  "start": 1699943520000,
+  "end": 1699944720000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "raoul_schaffranek",
+      "name": "Raoul\nSchaffranek",
+      "bio": "FV Engineer\nRuntime Verification",
+      "eventId": "secureum_trustx",
+      "twitter": "@RaoulSaffron",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Raoul.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c768mv09hy4j61sd/index.m3u8",
+  "playbackId": "c768mv09hy4j61sd",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/the_symbolic_solidity_debugger.jpg",
+  "assetId": "c7686597-52fb-4545-9558-4ac28717936a",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}

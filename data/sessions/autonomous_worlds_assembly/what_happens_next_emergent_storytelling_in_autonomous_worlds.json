@@ -1,1 +1,21 @@
-{"id":"what_happens_next_emergent_storytelling_in_autonomous_worlds","name":"What Happens Next? Emergent Storytelling in Autonomous Worlds","description":"The more autonomous a world becomes, the more its inhabitants can transform the underlying structures and narrative logics that compose it. How does this impact the relation between storyteller and audience, as well as the narrative techniques used to move a story forward? From the MMORPG Ultima Online to the onchain game Dark Forest, we will depart from classic narrative structures based on beginning, development, and end, to explore an endless and collaborative storytelling based on the concept of a \"narrative engine\".","start":1700121600000,"end":1700123400000,"stageId":"emirgan_1","speakers":[{"id":"gvn","name":"GVN","bio":"GVN is the co-founder of Moving Castles, a game design studio researching and developing Autonomous Worlds. ","eventId":"autonomous_worlds_assembly","twitter":"@Gvn908","photo":"https://drive.google.com/uc?id=1Px5ijVyAGTyO8F4TEIydBnbbjpQ7IWyK"}],"playbackId":"","eventId":"autonomous_worlds_assembly","coverImage":"/sessions/autonomous_worlds_assembly/what_happens_next_emergent_storytelling_in_autonomous_worlds.jpg"}
+{
+  "id": "what_happens_next_emergent_storytelling_in_autonomous_worlds",
+  "name": "What Happens Next? Emergent Storytelling in Autonomous Worlds",
+  "description": "The more autonomous a world becomes, the more its inhabitants can transform the underlying structures and narrative logics that compose it. How does this impact the relation between storyteller and audience, as well as the narrative techniques used to move a story forward? From the MMORPG Ultima Online to the onchain game Dark Forest, we will depart from classic narrative structures based on beginning, development, and end, to explore an endless and collaborative storytelling based on the concept of a \"narrative engine\".",
+  "start": 1700121600000,
+  "end": 1700123400000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "gvn",
+      "name": "GVN",
+      "bio": "GVN is co-founder of Moving Castles, a game design studio researching and developing Autonomous Worlds. ",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@Gvn908",
+      "photo": "https://drive.google.com/uc?id=1Px5ijVyAGTyO8F4TEIydBnbbjpQ7IWyK"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/what_happens_next_emergent_storytelling_in_autonomous_worlds_thumbnail.png"
+}

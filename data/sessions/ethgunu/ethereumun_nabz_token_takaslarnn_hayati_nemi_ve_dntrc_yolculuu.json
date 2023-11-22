@@ -1,1 +1,25 @@
-{"id":"ethereumun_nabz_token_takaslarnn_hayati_nemi_ve_dntrc_yolculuu","name":"Ethereum'un Nabzı: Token Takaslarının Hayati Önemi ve Dönüştürücü Yolculuğu","description":"Merkezsiz ekonominin yolu, token takaslarına artan bir bağlılık öneriyor. Bir geliştirici, yatırımcı veya Ethereum meraklısı olarak, token takaslarının karmaşıklıklarını anlamak, bu büyüyen alanda ustaca hareket etmek için temel bir öneme sahiptir.\n","start":1699878600000,"end":1699880400000,"stageId":"harbiye","speakers":[{"id":"ahmet_ozcan","name":"Ahmet Ozcan","bio":"Ahmet, Odos'un Kurucu Ortağı ve CEO'sudur. Odos'u kurmadan önce, 2020'de Semiotic AI'ı kurdu ve iki yıl içinde The Graph için ana geliştirici ekibi olmak üzere önemli bir hibe aldı. Kariyerinin erken dönemlerinde Ahmet, Kaliforniya'da IBM Araştırma'nın Machine Intelligence grubunu yönetti ve burada AI algoritma geliştirmenin ve donanım hızlandırmanın ön saflarında yer aldı. Ahmet, Boston Üniversitesi'nde fizik dalında doktora yapmış olup aynı zamanda Boğaziçi Üniversitesi Fizik bölümü mezunudur. Aynı zamanda bir IBM Master Inventor olarak da tanınan Ahmet, 100'den fazla patent portföyüne sahiptir ve 50'den fazla hakemli yayına katkıda bulunmuştur.","eventId":"ethgunu","twitter":"@Ahmet_S_Ozcan","photo":"https://speak.ticketh.xyz/media/avatars/IMG_8010_4kwJiBJ.jpeg"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/ethereumun_nabz_token_takaslarnn_hayati_nemi_ve_dntrc_yolculuu.jpg"}
+{
+  "id": "ethereumun_nabz_token_takaslarnn_hayati_nemi_ve_dntrc_yolculuu",
+  "name": "Ethereum'un Nabzı: Token Takaslarının Hayati Önemi ve Dönüştürücü Yolculuğu",
+  "description": "Merkezsiz ekonominin yolu, token takaslarına artan bir bağlılık öneriyor. Bir geliştirici, yatırımcı veya Ethereum meraklısı olarak, token takaslarının karmaşıklıklarını anlamak, bu büyüyen alanda ustaca hareket etmek için temel bir öneme sahiptir.\n",
+  "start": 1699878600000,
+  "end": 1699880400000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "ahmet_ozcan",
+      "name": "Ahmet Ozcan",
+      "bio": "Ahmet, Odos'un Kurucu Ortağı ve CEO'sudur. Odos'u kurmadan önce, 2020'de Semiotic AI'ı kurdu ve iki yıl içinde The Graph için ana geliştirici ekibi olmak üzere önemli bir hibe aldı. Kariyerinin erken dönemlerinde Ahmet, Kaliforniya'da IBM Araştırma'nın Machine Intelligence grubunu yönetti ve burada AI algoritma geliştirmenin ve donanım hızlandırmanın ön saflarında yer aldı. Ahmet, Boston Üniversitesi'nde fizik dalında doktora yapmış olup aynı zamanda Boğaziçi Üniversitesi Fizik bölümü mezunudur. Aynı zamanda bir IBM Master Inventor olarak da tanınan Ahmet, 100'den fazla patent portföyüne sahiptir ve 50'den fazla hakemli yayına katkıda bulunmuştur.",
+      "eventId": "ethgunu",
+      "twitter": "@Ahmet_S_Ozcan",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/ahmet.jpeg?raw=true"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c8e6am3v1r3s6oq6/index.m3u8",
+  "playbackId": "c8e6am3v1r3s6oq6",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/ethereumun_nabz_token_takaslarnn_hayati_nemi_ve_dntrc_yolculuu_thumbnail.png",
+  "assetId": "c8e60776-bfa2-46d9-8533-5d418a6091ad",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
+}

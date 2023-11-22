@@ -15,12 +15,12 @@
       }
     }
   ],
-  "eventCover": "devconnect_cover.png",
+  "eventCover": "conflux_banner.png",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "web3-ux-logo.png",
-  "banner": "devconnect_banner.png",
+  "banner": "conflux_banner.png",
   "accentColor": "black",
   "dataExporter": [
     {

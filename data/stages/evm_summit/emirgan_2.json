@@ -1,1 +1,6 @@
-{"id":"emirgan_2","name":"EMIRGAN 2","eventId":"evm_summit","streamSettings":{"streamId":"e57e238f-7914-416b-a809-fba0774cd4d4"}}
+{
+  "id": "emirgan_2",
+  "name": "EMIRGAN 2",
+  "eventId": "evm_summit",
+  "streamSettings": { "streamId": "" }
+}

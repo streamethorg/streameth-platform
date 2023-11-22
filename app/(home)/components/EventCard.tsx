@@ -7,6 +7,7 @@ import Card from '@/components/misc/Card'
 import { ModalContext } from '@/components/context/ModalContext'
 import { useRouter } from 'next/navigation'
 import { hasData } from '@/server/utils'
+import { getImageUrl } from '@/server/utils'
 
 const EventCard = ({ event }: { event: IEvent }) => {
   const imageUrl = event.eventCover
@@ -37,13 +38,13 @@ const EventCard = ({ event }: { event: IEvent }) => {
 
   return (
     <div onClick={onCardClick} className="cursor-pointer">
-      <Card isAvailable={isAvailable}>
+      <Card isAvailable={isAvailable} bgColor="white">
         <div className="aspect-video relative">
           <Image
             className="rounded"
             alt="Session image"
             quality={80}
-            src={image}
+            src={getImageUrl(image)}
             fill
             style={{
               objectFit: 'cover',

@@ -1,1 +1,25 @@
-{"id":"daolar_ve_deiim_teorisi","name":"DAOlar ve Değişim Teorisi","description":"DAO'lar, yani programlanabilir organizasyonlar, politik ekonomiyi dönüştürme potansiyeline sahip evrimsel bir güç olarak önemli bir fırsat sunmasına rağmen, bu teknolojinin varlığının ilk on yılına yaklaştığımızda, yapısal bir yavaşlama ile karşı karşıyadır. Bu konuşma, programlanabilir organizasyonların politik ekonomi bağlamında değişim teorisinin analizine odaklanırken aynı zamanda bu paradigmanın dönüştürücü yeteneğini nasıl artırıp sürdürebileceğimizin yollarını sorgulamaktadır.","start":1699875000000,"end":1699876800000,"stageId":"harbiye","speakers":[{"id":"cem_dadelen","name":"Cem Dağdelen","bio":"Cem bir mekanizma tasarımcısı ve arastirmaci olarak web3 teknolojilerinde çalışan dijital organizasyonların ve protokollerin tasarlanması ve uygulanmasına odaklanıyor. Aynı zamanda \n@gizatechxyz 've @curvelabs in kurucu ortağı.","eventId":"ethgunu","twitter":"@CemFDagdelen","photo":"https://speak.ticketh.xyz/media/avatars/Cemo_6UjYE4t.jpg"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/daolar_ve_deiim_teorisi.jpg"}
+{
+  "id": "daolar_ve_deiim_teorisi",
+  "name": "DAOlar ve Değişim Teorisi",
+  "description": "DAO'lar, yani programlanabilir organizasyonlar, politik ekonomiyi dönüştürme potansiyeline sahip evrimsel bir güç olarak önemli bir fırsat sunmasına rağmen, bu teknolojinin varlığının ilk on yılına yaklaştığımızda, yapısal bir yavaşlama ile karşı karşıyadır. Bu konuşma, programlanabilir organizasyonların politik ekonomi bağlamında değişim teorisinin analizine odaklanırken aynı zamanda bu paradigmanın dönüştürücü yeteneğini nasıl artırıp sürdürebileceğimizin yollarını sorgulamaktadır.",
+  "start": 1699875000000,
+  "end": 1699876800000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "cem_dadelen",
+      "name": "Cem Dağdelen",
+      "bio": "Cem bir mekanizma tasarımcısı ve arastirmaci olarak web3 teknolojilerinde çalışan dijital organizasyonların ve protokollerin tasarlanması ve uygulanmasına odaklanıyor. Aynı zamanda \n@gizatechxyz 've @curvelabs in kurucu ortağı.",
+      "eventId": "ethgunu",
+      "twitter": "@CemFDagdelen",
+      "photo": "https://raw.githubusercontent.com/ethgunu/ethgunu.com/main/src/components/main/Speakers/photos/cemD.jpeg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/139efg675e4ndzfy/index.m3u8",
+  "playbackId": "139efg675e4ndzfy",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/daolar_ve_deiim_teorisi_thumbnail.png",
+  "assetId": "139eabc8-36de-4f44-b416-6893d55f7d7f",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
+}

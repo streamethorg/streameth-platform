@@ -1,1 +1,25 @@
-{"id":"stablecoin_101","name":"Stablecoin 101","description":"Günümüzün finansal dünyasında, kripto para birimleri giderek daha fazla yer edinmekte ve geleneksel finans sistemleriyle daha fazla etkileşimde bulunmaktadır. Bu etkileşimin temel aracılığını ise stablecoinler üstlenmiş durumda. Bu konuşmada, stablecoinlerin, bu hızla değişen ortamda bir güven noktası olarak nasıl rol oynadığını ve neden önemli olduklarını ele alacağız.","start":1699875000000,"end":1699876800000,"stageId":"beyazit","speakers":[{"id":"furkan_akal","name":"Furkan Akal","bio":"PROFESYONEL TECRÜBE\n\nMayıs 2023 - Günümüz | Detable adı altında eş-kurucu ekip arkadaşlarımla birlikte bir stablecoin dashboard ürünü ile başlayarak on-chain data hub geliştiriyoruz.\n\nEylül 2022 - Eylül 2023 | MERLIN (https://mymerlin.io) adlı Londra bazlı bir DeFi portfolio tracker şirketinde blockchain developer olarak çalıştım.\n\n\nEĞİTİM\n\nEylül 2018 - Haziran 2024 | Orta Doğu Teknik Üniversitesi'nde Fizik ve Matematik Bölümlerinde eğitimimi devam ettirmekteyim.","eventId":"ethgunu","twitter":"@furkanakalcom","photo":"https://speak.ticketh.xyz/media/avatars/0021_XeMkkBE.JPG"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/stablecoin_101.jpg"}
+{
+  "id": "stablecoin_101",
+  "name": "Stablecoin 101",
+  "description": "Günümüzün finansal dünyasında, kripto para birimleri giderek daha fazla yer edinmekte ve geleneksel finans sistemleriyle daha fazla etkileşimde bulunmaktadır. Bu etkileşimin temel aracılığını ise stablecoinler üstlenmiş durumda. Bu konuşmada, stablecoinlerin, bu hızla değişen ortamda bir güven noktası olarak nasıl rol oynadığını ve neden önemli olduklarını ele alacağız.",
+  "start": 1699875000000,
+  "end": 1699876800000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "furkan_akal",
+      "name": "Furkan Akal",
+      "bio": "PROFESYONEL TECRÜBE\n\nMayıs 2023 - Günümüz | Detable adı altında eş-kurucu ekip arkadaşlarımla birlikte bir stablecoin dashboard ürünü ile başlayarak on-chain data hub geliştiriyoruz.\n\nEylül 2022 - Eylül 2023 | MERLIN (https://mymerlin.io) adlı Londra bazlı bir DeFi portfolio tracker şirketinde blockchain developer olarak çalıştım.\n\n\nEĞİTİM\n\nEylül 2018 - Haziran 2024 | Orta Doğu Teknik Üniversitesi'nde Fizik ve Matematik Bölümlerinde eğitimimi devam ettirmekteyim.",
+      "eventId": "ethgunu",
+      "twitter": "@furkanakalcom",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/furkan.jpg?raw=true"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/903etk1us84bvx07/index.m3u8",
+  "playbackId": "903etk1us84bvx07",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/stablecoin_101_thumbnail.png",
+  "assetId": "903e9c91-b409-4aff-8b5e-4e769af14987",
+  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+  "videoType": "clip"
+}

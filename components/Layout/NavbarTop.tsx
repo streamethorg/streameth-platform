@@ -6,6 +6,8 @@ import { TopNavbarContext } from '../context/TopNavbarContext'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { MobileContext } from '../context/MobileContext'
 import Navbar from './Navbar'
+import { getImageUrl } from '@/server/utils'
+
 export interface Page {
   name: string
   href: string
@@ -21,7 +23,7 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="md:hidden z-50 ">
+    className="md:hidden z-50 ml-2">
     {!isNavVisible ? (
       <Bars3Icon className="w-7 h-7 bg-base  rounded text-white mx-auto" />
     ) : (
@@ -49,24 +51,36 @@ export default function NavbarTop() {
   }
 
   return (
-    <header className="sticky z-[9099029] flex flex-row bg-accent border-b border-primary w-full ml-auto p-4 py-2 top-0 h-16 lg:h-20">
+    <header className="sticky z-[99999] flex flex-row items-center bg-accent border-b border-primary w-full ml-auto p-2 md:p-4 py-2 top-0 h-16 lg:h-20">
       <div className=" flex items-center w-20">
         <Link href={homePath ? homePath : '/'} className="">
           <span className="sr-only">Logo</span>
           <Image
-            className="rounded-full"
-            src={`/events/${logo}`}
+            className=" h-full w-full p-2 pr-4"
+            src={getImageUrl(logo)}
             alt="Logo"
-            width={50}
-            height={50}
-            onError={(e) => {
-              e.currentTarget.src = '/logo.png'
-            }}
+            width={40}
+            height={40}
           />
         </Link>
       </div>
-      <div className="flex flex-row items-center justify-between w-full">
-        {menuVisible && <Navbar pages={pages} />}
+      <div className="flex flex-row items-center justify-end md:justify-between w-full">
+        {menuVisible && (
+          <Navbar
+            pages={
+              isMobile
+                ? [
+                    ...pages,
+                    {
+                      name: 'Back to overview',
+                      href: '/',
+                      icon: <></>,
+                    },
+                  ]
+                : pages
+            }
+          />
+        )}
         {components.length > 0 &&
           components.map((component, index) => {
             return (
@@ -75,22 +89,7 @@ export default function NavbarTop() {
               </div>
             )
           })}
-        {/* <div className="flex">
-          <SocialIcon
-            url={`https://twitter.com/streameth`}
-            target="_blank"
-            bgColor="#fff"
-            fgColor="#1DA1F2"
-            className={` "h-8 w-8"`}
-          />
-          <SocialIcon
-            url={`https://github.com/streamethorg/streameth-platform`}
-            target="_blank"
-            bgColor="#fff"
-            fgColor="#000"
-            className={`"h-8 w-8"`}
-          />
-          */}
+
         {pages.length > 1 && (
           <NavBarButton
             isNavVisible={menuVisible}
@@ -99,7 +98,7 @@ export default function NavbarTop() {
         )}
         <Link
           href="/"
-          className="font-ubuntu p-2 rounded-xl bg-base uppercase text-sm text-white ml-5">
+          className="hidden  font-ubuntu p-2 min-w-fit md:flex items-center rounded-xl text-sm bg-base uppercase text-white ml-5">
           Back to overview
         </Link>
       </div>

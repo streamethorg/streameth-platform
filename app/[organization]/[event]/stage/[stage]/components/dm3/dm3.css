@@ -1,0 +1,112 @@
+.common-styles {
+  --mainBg: var(--bg-base);
+  --messageBg: #e4e6eb;
+  --messageBgOwn: #e4e6eb;
+  --messageBg25: var(--bg-base);
+  --borderInputColor: #e0e0e0;
+  --inputBg: #e4e6eb;
+  --textColorPrimary: #000;
+  --textColorSecondary: #000;
+  --borderRadiusS: 12px;
+  --borderRadiusM: 12px;
+  --borderRadiusL: 12px;
+  --scrollbar-background: var(--colors-accent);
+}
+
+.avatar {
+  padding-right: 0px !important;
+}
+
+.styled-scrollbars {
+  --scrollbar-foreground: var(--colors-accent);
+  --scrollbar-background: #f8f8f8;
+}
+
+.dm3-billboard-widget {
+  position: relative;
+  overflow: scroll !important;
+}
+.header {
+  padding: 0px !important;
+}
+.message-create-area {
+  background-color: var(--messageBg25);
+  flex: 1;
+}
+.dm3-send-message-btn {
+  background-color: var(--colors-accent) !important;
+  padding: 10px !important;
+  margin-left: 20px !important;
+  border-radius: 12px !important;
+}
+.dm3-send-message-btn:disabled {
+  background-color: lightgray !important;
+}
+
+.empty-view {
+  min-height: auto !important;
+  margin-bottom: 20px;
+}
+.empty-info {
+  color: lightgray;
+}
+.empty-view img {
+  width: 20%;
+}
+.text-area-input {
+  border-radius: 12px !important;
+  width: calc(100% - 40px) !important;
+  padding: 10px !important;
+}
+
+.create-header {
+  overflow: hidden !important;
+  flex-shrink: 1;
+  text-overflow: ellipsis;
+  width: 240px;
+}
+.message {
+  color: #000 !important;
+  /* min-width: fit-content; */
+  /* width: 50%; */
+  /* position: fixed !important; */
+  /* background-color: var(--inputBg); */
+}
+.text-area-wrapper {
+  width: 100% !important;
+}
+
+.text-area-input {
+  height: 50px !important;
+}
+
+.message-list {
+  padding: px !important;
+}
+
+.sender,
+.time,
+.info {
+  color: #8a8d91 !important;
+  font-size: 10px !important;
+}
+
+.content {
+  padding: 12px 8px !important;
+}
+.scroll-to-bottom-button {
+  opacity: 0.2 !important;
+  margin-right: 2px !important;
+}
+.create-message {
+  position: sticky !important;
+  bottom: 0;
+  background-color: var(--colors-accent);
+  padding: 0px;
+  width: 100% !important;
+  padding-bottom: 5px;
+  z-index: 50;
+}
+.create-message .container {
+  gap: 10px;
+}

@@ -1,0 +1,25 @@
+{
+  "id": "formal_verification_of_eip_4844",
+  "name": "Formal verification of EIP 4844",
+  "description": "",
+  "start": 1699858320000,
+  "end": 1699859280000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "thanh_hai_tran",
+      "name": "Thanh\nHai Tran",
+      "bio": "Applied Researcher ConsenSys",
+      "eventId": "secureum_trustx",
+      "twitter": "@thanh_hai_tran",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Thanh.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/d2880tkhgqco3qa0/index.m3u8",
+  "playbackId": "d2880tkhgqco3qa0",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/formal_verification_of_eip_4844.jpg",
+  "assetId": "d288df57-2470-40bc-a45b-39d1a4f0f5fa",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}

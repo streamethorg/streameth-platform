@@ -11,7 +11,7 @@
   ],
   "eventCover": "solidity-submit-cover.jpg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "solidity-summit-logo.jpg",
   "banner": "solidity-submit-banner.jpg",

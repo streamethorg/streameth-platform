@@ -1,0 +1,22 @@
+{
+  "id": "size_matters",
+  "name": "Size Matters",
+  "description": "My chain analyst’s POV has helped me clearly articulate where data can be leaked, how privacy tech can go wrong, and what to prioritize while we build Namada as a product that brings the best practical privacy to users today. I hope this helps you too, if you’re also building privacy-preserving protocols and dApps",
+  "start": 1700208300000,
+  "end": 1700210100000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "awa",
+      "name": "awa",
+      "bio": "Awa joined Chainalysis as the first female data scientist and software engineer in 2017, after working on papers on using on-chain data to de-anonymise Bitcoin. Awa joined Tendermint/Cosmos as a researcher, where she met Adrian and Christopher, and helped out with the Ethereum Community Fund initiative in 2018-2019. Ever since, Awa has co-founded and built several ventures with Adrian and Christopher.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1pBhGtwRZ4NIDlTnzVLVpA9S-JwltYf6S/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "ZK and Blockchains / zkEVMs",
+  "coverImage": "/sessions/progcrypto/size_matters_thumbnail.png"
+}

@@ -1,1 +1,41 @@
-{"id":"web3te_kariyer_paneli","name":"Web3'te Kariyer Paneli","description":"Coming Soon","start":1699880400000,"end":1699884000000,"stageId":"harbiye","speakers":[{"id":"emre_tekialp","name":"Emre Tekişalp","bio":"Coming soon","eventId":"ethgunu","twitter":"","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/emre.jpeg?raw=true"},{"id":"glcan_yayla","name":"Gülcan Yayla","bio":"Coming soon","eventId":"ethgunu","twitter":"","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/gulcan.jpg?raw=true"},{"id":"emre_tekialp","name":"Emre Tekişalp","bio":"Coming soon","eventId":"ethgunu","twitter":"","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/emre.jpeg?raw=true"},{"id":"efe_bulduk","name":"Efe Bulduk","bio":"Coming soon","eventId":"ethgunu","twitter":"","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/efe.jpg?raw=true"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/web3te_kariyer_paneli.jpg"}
+{
+  "id": "web3te_kariyer_paneli",
+  "name": "Web3'te Kariyer Paneli",
+  "description": "Coming Soon",
+  "start": 1699880400000,
+  "end": 1699884000000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "emre_tekialp",
+      "name": "Emre Tekişalp",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@etekis",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/emre.jpeg?raw=true"
+    },
+    {
+      "id": "glcan_yayla",
+      "name": "Gülcan Yayla",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@gulcan_yayla",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/gulcan.jpg?raw=true"
+    },
+    {
+      "id": "efe_bulduk",
+      "name": "Efe Bulduk",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@TheBullduck",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/efe.jpg?raw=true"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/8506087mql3fi9kw/index.m3u8",
+  "playbackId": "8506087mql3fi9kw",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/web3te_kariyer_paneli_thumbnail.png",
+  "assetId": "850628c9-3a6c-4782-87bd-30a4041e2927",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
+}

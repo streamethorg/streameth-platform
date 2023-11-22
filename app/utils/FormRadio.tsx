@@ -31,11 +31,13 @@ const FormRadio = ({
       className={`flex items-center cursor-pointer ${
         disabled ? 'pointer-events-none' : ''
       }`}>
-      <RadioButtonSolidIcon
-        height={buttonHeight}
-        width={buttonWidth}
-        checked={checked}
-      />
+      <div className="border border-medGrey rounded-full px-2">
+        <RadioButtonSolidIcon
+          height={buttonHeight}
+          width={buttonWidth}
+          checked={checked}
+        />
+      </div>
 
       {label && (
         <div className={`ml-[10px] ${labelClassName}`}>{label}</div>

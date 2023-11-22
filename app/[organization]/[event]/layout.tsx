@@ -5,6 +5,7 @@ import SessionController from '@/server/controller/session'
 import speakerController from '@/server/controller/speaker'
 import ColorComponent from '@/app/utils/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
+import { ArchiveContext } from '@/components/context/ArchiveContext'
 
 export async function generateStaticParams() {
   const eventController = new EventController()
@@ -46,16 +47,21 @@ const Layout = async ({
     await new speakerController().getAllSpeakersForEvent(params.event)
 
   return (
-    <div className="w-full">
-      <Navbar />
-      <ColorComponent
+    <ArchiveContext event={event.toJson()}>
+      <div className="h-full flex flex-col  z-1 bg-accent min-h-screen ">
+        <Navbar />
+
+        <main className={` flex w-full ml-auto md:h-full flex-grow`}>
+        <ColorComponent
         event={event}
         stages={stages}
         speakers={speakers}
         sessions={sessions}>
         {children}
       </ColorComponent>
-    </div>
+        </main>
+      </div>
+    </ArchiveContext>
   )
 }
 export default Layout

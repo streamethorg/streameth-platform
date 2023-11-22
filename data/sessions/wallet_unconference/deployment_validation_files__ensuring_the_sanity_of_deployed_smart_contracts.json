@@ -1,0 +1,25 @@
+{
+  "id": "deployment_validation_files__ensuring_the_sanity_of_deployed_smart_contracts",
+  "name": "Deployment Validation Files : Ensuring the Sanity of Deployed Smart Contracts",
+  "description": "One of the problems any user willing to interact with a deployed smart contract faces is whether a smart contract is audited and whether the deployed version is the same version that was audited. Auditors of the smart contracts mainly focus on the source code. This tool helps auditors as well as end-users to make sure that the deployed version works as expected.",
+  "start": 1700222400000,
+  "end": 1700224200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "shahriar_javidi",
+      "name": "Shahriar Javidi",
+      "bio": "Shahriar is a junior blockchain security engineer @ Chainsecurity,  an auditor of High-TVL projects, and has participated in the development of multiple tools for the ETH ecosystem. He joined Chainsecurity in August 2022. ",
+      "eventId": "wallet_unconference",
+      "twitter": "n/a",
+      "photo": "https://speak.ticketh.xyz/media/avatars/DSC_9197_O65HfF3.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/893chfjzufsgz6sy/index.m3u8",
+  "playbackId": "893chfjzufsgz6sy",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/deployment_validation_files__ensuring_the_sanity_of_deployed_smart_contracts_thumbnail.png",
+  "assetId": "893c1506-2536-4d29-a5cf-c98078ec0a68",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
+}

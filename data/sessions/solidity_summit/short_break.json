@@ -1,0 +1,12 @@
+{
+  "id": "short_break",
+  "name": "Short Break",
+  "description": "",
+  "start": 1700138400000,
+  "end": 1700139300000,
+  "stageId": "uskudar_2",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/short_break_thumbnail.png"
+}

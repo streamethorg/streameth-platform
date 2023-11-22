@@ -4,7 +4,7 @@ import { IEvent } from './model/event'
 export const generateId = (key: string) => {
   // all lowercase, no spaces, no special characters
   return key
-    .trim()
+    ?.trim()
     .replace(/\s/g, '_')
     .replace(/[^\w\s]/g, '')
     .toLowerCase()
@@ -24,4 +24,8 @@ export const apiUrl = () => {
     return 'http://127.0.0.1:3000/api'
   }
   return 'https://app.streameth.org/api'
+}
+
+export const getImageUrl = (image: string) => {
+  return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
 }

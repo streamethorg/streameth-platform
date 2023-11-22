@@ -1,1 +1,24 @@
-{"id":"fuzzing","name":"Fuzzing","description":"Fellow project presentation by Mohas","start":1700312400000,"end":1700313000000,"stageId":"3b36","speakers":[{"id":"mohas","name":"Mohas","bio":"EPF Fellow","eventId":"epf_day","twitter":"@mohasdev"}],"playbackId":"","eventId":"epf_day","coverImage":"/sessions/epf_day/fuzzing.jpg"}
+{
+  "id": "fuzzing",
+  "name": "Fuzzing",
+  "description": "Fellow project presentation by Mohas",
+  "start": 1700226000000,
+  "end": 1700226600000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "mohas",
+      "name": "Mohas",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@mohasdev"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/cb89yre0pdjow769/index.m3u8",
+  "playbackId": "cb89yre0pdjow769",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/fuzzing_thumbnail.png",
+  "assetId": "cb899d0a-d9e4-47ce-a821-2856bbdbeaf6",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "ethereum_protocol_vulnerabilities_unveiled",
+  "name": "Ethereum Protocol Vulnerabilities Unveiled",
+  "description": "",
+  "start": 1699877040000,
+  "end": 1699878000000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "frdric_adam",
+      "name": "Frédéric\nADAM",
+      "bio": "Senior Web2 Pentester\nBug Bounty Hunter",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Frederic.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/0a26923957xkczkh/index.m3u8",
+  "playbackId": "0a26923957xkczkh",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/ethereum_protocol_vulnerabilities_unveiled.jpg",
+  "assetId": "0a269d50-7cfa-4a49-bc2e-614e4b38b2c2",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}

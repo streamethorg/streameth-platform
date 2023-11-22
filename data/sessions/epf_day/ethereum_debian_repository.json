@@ -1,1 +1,25 @@
-{"id":"ethereum_debian_repository","name":"Ethereum Debian Repository","description":"Project presentation by Eniko","start":1700289000000,"end":1700289600000,"stageId":"3b36","speakers":[{"id":"eniko","name":"Eniko","bio":"EPF Fellow","eventId":"epf_day","twitter":"@eenagy","photo":"https://twitter.com/eenagy/photo"}],"playbackId":"","eventId":"epf_day","coverImage":"/sessions/epf_day/ethereum_debian_repository.jpg"}
+{
+  "id": "ethereum_debian_repository",
+  "name": "Ethereum Debian Repository",
+  "description": "Project presentation by Eniko",
+  "start": 1700202600000,
+  "end": 1700203200000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "eniko",
+      "name": "Eniko",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@eenagy",
+      "photo": "https://pbs.twimg.com/profile_images/1386213121648254979/17G-AAQx_400x400.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/9f9brnwdxylq2kri/index.m3u8",
+  "playbackId": "9f9brnwdxylq2kri",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/ethereum_debian_repository_thumbnail.png",
+  "assetId": "9f9bbb16-4489-4eae-a66c-e3f5b5cfb9a4",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
+}

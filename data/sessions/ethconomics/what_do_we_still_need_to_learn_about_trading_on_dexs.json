@@ -1,0 +1,25 @@
+{
+  "id": "what_do_we_still_need_to_learn_about_trading_on_dexs",
+  "name": "What do we still need to learn about trading on DEXs?",
+  "description": "Over the past few years, significant progress has been made in understanding the economics of DEXs. Yet many important questions remain. In this talk, I discuss some of these questions and speculate on the answers.",
+  "start": 1700057400000,
+  "end": 1700058900000,
+  "stageId": "uskudar_3",
+  "speakers": [
+    {
+      "id": "alex_nezlobin",
+      "name": "Alex Nezlobin",
+      "bio": "Formerly a professor at the London School of Economics, now building a LVR mitigation solution",
+      "eventId": "ethconomics",
+      "twitter": "@0x94305",
+      "photo": "https://pbs.twimg.com/profile_images/1579693157997891585/PhJiwVAr_400x400.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/613blpt2zmx6cgji/index.m3u8",
+  "playbackId": "613blpt2zmx6cgji",
+  "eventId": "ethconomics",
+  "coverImage": "/sessions/ethconomics/what_do_we_still_need_to_learn_about_trading_on_dexs_thumbnail.png",
+  "assetId": "613b61ec-8ddd-47f3-9e0a-8f5abcfc58c6",
+  "sourceId": "f7a9cb54-e5bb-4267-948c-68f85d519184",
+  "videoType": "clip"
+}

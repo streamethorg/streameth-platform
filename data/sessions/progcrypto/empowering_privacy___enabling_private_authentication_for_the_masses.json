@@ -1,0 +1,22 @@
+{
+  "id": "empowering_privacy___enabling_private_authentication_for_the_masses",
+  "name": "Empowering Privacy - \nEnabling Private Authentication for the Masses",
+  "description": "Description:\nDiscover the next evolution in identity authentication at our Anon Aadhaar Workshop. Join us to learn about zero-knowledge proofs that enable private yet verifiable identity verification by leveraging government documents like Indian's Aadhaar ID card program.\n\nHighlights:\n\n- Understand Anon Aadhaar's role in privacy-focused authentication.\n- Dive into zero-knowledge proofs for secure data verification.\n- Hands-on: Integrate proofs using the Anon Aadhaar SDK.\n- Watch a live app demo showcasing private authentication.\n- Hear about future plans and possibilities of expanding this scheme to future countries.\n\nWho Should Attend:\nDevelopers, privacy advocates, and anyone curious about advanced identity protection.\n\nFormat:\nInteractive session with theory, hands-on SDK experience, live demo, and Q&A.\n\nKey Takeaway:\nYou'll grasp how Anon Aadhaar reshapes identity verification and can implement private authentication in your projects.",
+  "start": 1700204400000,
+  "end": 1700206200000,
+  "stageId": "dolmabahce_a",
+  "speakers": [
+    {
+      "id": "yanis_meziane",
+      "name": "Yanis Meziane",
+      "bio": "Full-stack engineer, Anon Aadhaar",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1rGupiM77KFWqVJqQ7HKC1gZ1ukGrmSm_/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Identity, Attestations, and PCDs",
+  "coverImage": "/sessions/progcrypto/empowering_privacy___enabling_private_authentication_for_the_masses_thumbnail.png"
+}

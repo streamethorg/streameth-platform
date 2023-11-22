@@ -1,0 +1,25 @@
+{
+  "id": "a_framework_for_evaluating_audit_effectiveness",
+  "name": "A Framework for Evaluating Audit Effectiveness",
+  "description": "",
+  "start": 1699961520000,
+  "end": 1699962480000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "jack_sanford",
+      "name": "Jack\nSanford",
+      "bio": "Co-founder\nSherlock",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Jack.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/12b8n4et2f4rx8rp/index.m3u8",
+  "playbackId": "12b8n4et2f4rx8rp",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/a_framework_for_evaluating_audit_effectiveness.jpg",
+  "assetId": "12b8b2fb-0862-4c9b-af67-17bd5d5b26bd",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}

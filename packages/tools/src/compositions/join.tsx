@@ -20,7 +20,7 @@ export const JoinVideos: React.FC<Props> = ({ videos, transitionDuration }) => {
     <AbsoluteFill color='black'>
       <TransitionSeries>
         {videos.map((video, index) => (
-          <Fragment key="index">
+          <Fragment key={index}>
             <TransitionSeries.Sequence durationInFrames={video.duration}>
               <OffthreadVideo src={video.pathOrUrl} />
             </TransitionSeries.Sequence>

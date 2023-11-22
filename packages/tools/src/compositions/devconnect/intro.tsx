@@ -1,6 +1,8 @@
 import { Sequence, AbsoluteFill, staticFile, Audio, useVideoConfig, useCurrentFrame, interpolate, Img, OffthreadVideo } from 'remotion'
 import { CreateAvatar } from '../../utils/avatars'
 import dayjs from 'dayjs'
+import { SessionSchema } from '../../utils/mocks'
+import { z } from 'zod'
 
 export interface SpeakerProps {
     id: string
@@ -20,8 +22,13 @@ export type Props = {
     session: SessionProps
     id: string,
 }
+export const DevconnectISTProps = z.object({
+    type: z.string(),
+    id: z.string(),
+    session: SessionSchema,
+})
 
-export const Intro: React.FC<Props> = ({ type, session, id }) => {
+export const Intro: React.FC<Zod.infer<typeof DevconnectISTProps>> = ({ type, session, id }) => {
     const { durationInFrames } = useVideoConfig()
     const frame = useCurrentFrame()
 
@@ -42,8 +49,8 @@ export const Intro: React.FC<Props> = ({ type, session, id }) => {
     function titleClassName() {
         let className = 'w-full text-center'
         if (session.name.length >= 140) className += ' text-8xl leading-none'
-        if (session.name.length > 60 && session.name.length < 140) className += ' text-8xl leading-tight'
-        if (session.name.length > 40 && session.name.length < 60) className += ' text-9xl leading-tight'
+        if (session.name.length >= 60 && session.name.length < 140) className += ' text-8xl leading-tight'
+        if (session.name.length >= 40 && session.name.length < 60) className += ' text-9xl leading-tight'
         if (session.name.length < 40) className += ' text-9xl leading-tight'
 
         return className

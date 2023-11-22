@@ -1,1 +1,25 @@
-{"id":"verkle_tries_in_circuit","name":"Verkle Tries in Circuit","description":"Fellow project presentation by Dragan","start":1700310600000,"end":1700311200000,"stageId":"3b36","speakers":[{"id":"dragan_pilipovic","name":"Dragan Pilipovic","bio":"EPF Fellow","eventId":"epf_day","twitter":"@gagadrupal","photo":"https://i.ibb.co/8Y2V8Fr/IMG-7819.jpg"}],"playbackId":"","eventId":"epf_day","coverImage":"/sessions/epf_day/verkle_tries_in_circuit.jpg"}
+{
+  "id": "verkle_tries_in_circuit",
+  "name": "Verkle Tries in Circuit",
+  "description": "Fellow project presentation by Dragan",
+  "start": 1700224200000,
+  "end": 1700224800000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "dragan_pilipovic",
+      "name": "Dragan Pilipovic",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@gagadrupal",
+      "photo": "https://i.ibb.co/8Y2V8Fr/IMG-7819.jpg"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/a645r47hw3m8aagv/index.m3u8",
+  "playbackId": "a645r47hw3m8aagv",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/verkle_tries_in_circuit_thumbnail.png",
+  "assetId": "a645911c-9ef2-4936-a2c9-9bafc1f2bd22",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "agenda_creation_and_refinement",
+  "name": "Agenda Creation and Refinement",
+  "description": "Many more people proposed great sessions than we have time for-- here is where the horse-trading, session merging, and schedule-fine-tuning happen, COLLECTIVELY and HORIZONTALLY.",
+  "start": 1700213400000,
+  "end": 1700215200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "bumblefudge",
+      "name": "Bumblefudge",
+      "bio": "Janitor @ Chain Agnostic Standards Alliance, Standards Coordinator for Protocol Labs, Advisor @Wallet Connect, and a little freelancing as a treat.  Passionate about non-monetary coordination, public goods, and worker-owned cooperatives, whether those are called DAOs or not.",
+      "eventId": "wallet_unconference",
+      "twitter": "@chainstandards",
+      "photo": "https://i.seadn.io/gcs/files/e1c8613b8409aed75ac38469ac19bde0.png?auto=format&dpr=1&w=1000"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/66a4n9yx2vvqnaub/index.m3u8",
+  "playbackId": "66a4n9yx2vvqnaub",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/agenda_creation_and_refinement_thumbnail.png",
+  "assetId": "66a48b07-62a6-48ce-8bcb-8fbd1cc746c8",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
+}

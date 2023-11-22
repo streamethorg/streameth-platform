@@ -1,1 +1,33 @@
-{"id":"nteraktif_dapp_workshopu","name":"İnteraktif dApp Workshop'u","description":"Birbirimizin sözleşmeleri ile etkileşime geçerek \"dünya bilgisayarını\" deneyimleyeceğiz. Katılımcılar yardım eşliğinde zincire bir sözleşme örneği yükleyecek, sözleşmelerini bir indexer dApp'e ekleyecek ve diğer katılımcıların sözleşmeleri ile etkileşime geçecek.\n","start":1699871400000,"end":1699875000000,"stageId":"emirgan_1","speakers":[{"id":"han_tzn","name":"Han Tüzün","bio":"Coming soon","eventId":"ethgunu","twitter":"","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/han.jpeg?raw=true"},{"id":"an_dnmez","name":"Çağın Dönmez","bio":"Coming soon","eventId":"ethgunu","twitter":"","photo":"https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/cagin.jpeg?raw=true"}],"playbackId":"","eventId":"ethgunu","coverImage":"/sessions/ethgunu/nteraktif_dapp_workshopu.jpg"}
+{
+  "id": "nteraktif_dapp_workshopu",
+  "name": "İnteraktif dApp Workshop'u",
+  "description": "Birbirimizin sözleşmeleri ile etkileşime geçerek \"dünya bilgisayarını\" deneyimleyeceğiz. Katılımcılar yardım eşliğinde zincire bir sözleşme örneği yükleyecek, sözleşmelerini bir indexer dApp'e ekleyecek ve diğer katılımcıların sözleşmeleri ile etkileşime geçecek.\n",
+  "start": 1699871400000,
+  "end": 1699875000000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "han_tzn",
+      "name": "Han Tüzün",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@0xTuzun",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/han.jpeg?raw=true"
+    },
+    {
+      "id": "an_dnmez",
+      "name": "Çağın Dönmez",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@0xCagin",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/cagin.jpeg?raw=true"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/a02e7hepic96d388/index.m3u8",
+  "playbackId": "a02e7hepic96d388",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/nteraktif_dapp_workshopu_thumbnail.png",
+  "assetId": "a02edc97-59f4-496c-aa0e-7287cb125c8f",
+  "sourceId": "7e5c7287-5c52-486c-befe-78c652f009dc",
+  "videoType": "clip"
+}

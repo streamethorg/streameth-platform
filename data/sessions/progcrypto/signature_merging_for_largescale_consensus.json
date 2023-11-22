@@ -1,0 +1,25 @@
+{
+  "id": "signature_merging_for_largescale_consensus",
+  "name": "Signature Merging for Large-Scale Consensus",
+  "description": "Proof Of Stake consensus requires signatures. If your blockchain has many validators you better aggregate those signatures. But if you have too many validators, simple aggregation is not enough. Can we do better using techniques from recursive SNARKs and Proof-Carrying Data?",
+  "start": 1700142300000,
+  "end": 1700143200000,
+  "stageId": "auditorium",
+  "speakers": [
+    {
+      "id": "george_kadianakis",
+      "name": "George Kadianakis",
+      "bio": "Cryptography Research!",
+      "eventId": "progcrypto",
+      "twitter": ""
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/951f5tyb3ksq9xek/index.m3u8",
+  "playbackId": "951f5tyb3ksq9xek",
+  "eventId": "progcrypto",
+  "track": "ZK and Blockchains / zkEVMs",
+  "coverImage": "/sessions/progcrypto/signature_merging_for_largescale_consensus_thumbnail.png",
+  "assetId": "951f0809-0d8a-41e9-b0e5-4ff21a2d7eec",
+  "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
+  "videoType": "clip"
+}

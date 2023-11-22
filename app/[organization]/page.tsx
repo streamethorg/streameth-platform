@@ -7,6 +7,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Metadata, ResolvingMetadata } from 'next'
 import ColorComponent from '../utils/ColorComponent'
+import { getImageUrl } from '@/server/utils'
 
 interface Params {
   params: {
@@ -24,6 +25,25 @@ export default async function OrganizationHome({ params }: Params) {
   const organization = await organizationController.getOrganization(
     params.organization
   )
+  const getCover = () => {
+    if (organization?.id == 'zuzalu') {
+      return getImageUrl('/events/zuzalu-cover.png')
+    }
+    if (organization?.id == 'devconnect') {
+      return getImageUrl('/events/devconnect_cover.png')
+    }
+    return ''
+  }
+
+  const beforeStyle = {
+    content: '""',
+    backgroundImage: `url(${getCover()})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    opacity: 0.15,
+    zIndex: -1,
+  }
 
   return (
     <main className="w-screen mx-auto fixed overflow-auto h-screen">

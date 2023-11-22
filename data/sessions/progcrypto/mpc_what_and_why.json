@@ -1,0 +1,22 @@
+{
+  "id": "mpc_what_and_why",
+  "name": "MPC, what and why?",
+  "description": "This is an introductory talk about secure multiparty \ncomputation(MPC). You will understand the basic concept of MPC and why \nis it important by comparing MPC with ZKP.No prerequisites are required.",
+  "start": 1700205300000,
+  "end": 1700206200000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "nam_ngo",
+      "name": "Nam Ngo",
+      "bio": "MPC Research at PSE/EF",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1lfOl-U3r3IfJttvS4z44gqDR755vgyAm/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Next Gen Applied Crypto",
+  "coverImage": "/sessions/progcrypto/mpc_what_and_why_thumbnail.png"
+}

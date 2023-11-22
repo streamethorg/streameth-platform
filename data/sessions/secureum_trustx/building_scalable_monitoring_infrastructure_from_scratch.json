@@ -1,0 +1,25 @@
+{
+  "id": "building_scalable_monitoring_infrastructure_from_scratch",
+  "name": "Building scalable monitoring infrastructure from scratch",
+  "description": "",
+  "start": 1699971480000,
+  "end": 1699972440000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "arseniy_reutov",
+      "name": "Arseniy\nReutov",
+      "bio": "CTO\nDecurity",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Arseniy.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/5dc7qy5j8me14ucx/index.m3u8",
+  "playbackId": "5dc7qy5j8me14ucx",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/building_scalable_monitoring_infrastructure_from_scratch.jpg",
+  "assetId": "5dc7f88f-11e1-4701-8b9b-ec7edb0e50cc",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
+}

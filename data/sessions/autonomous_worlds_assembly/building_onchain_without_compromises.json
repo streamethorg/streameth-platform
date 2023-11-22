@@ -1,0 +1,21 @@
+{
+  "id": "building_onchain_without_compromises",
+  "name": "Building Onchain Without Compromises",
+  "description": "This session will share the story behind the creation of Sky Strife and present a glimpse into our future endeavours. We'll take you through the developmental history, the hurdles we faced, and the player-centric approach that drove every decision we made. We will finish with an exciting announcement about what we’ve been up to the past few months and what players can expect next.",
+  "start": 1700046000000,
+  "end": 1700046900000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "kooshaba",
+      "name": "kooshaba",
+      "bio": "kooshaba works at Lattice and is currently lead developer of Sky Strife. Previously, he worked on Dark Forest as a developer and game designer.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@Kooshaba",
+      "photo": "https://drive.google.com/uc?id=1zY_l5RTV-jVo-XKe2A0oDNkeoFgQ5zHY"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/building_onchain_without_compromises_thumbnail.png"
+}

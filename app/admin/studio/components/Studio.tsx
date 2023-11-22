@@ -20,9 +20,7 @@ interface StreamParams {
 
 export default function Studio(props: Props) {
   const [event, setEvent] = useState<any>(props.events[0])
-  const [stage, setStage] = useState<any>(
-    FilterValidStages(props.events[0].stages)[0]
-  )
+  const [stage, setStage] = useState<any>()
   const [stream, setStream] = useState<StreamParams>({
     playbackId: '',
   })
@@ -65,7 +63,7 @@ export default function Studio(props: Props) {
   const selectStreamCallback = useCallback(selectStream, [
     event.id,
     event.organizationId,
-    stage.id,
+    stage,
     streamSessions,
   ])
 
@@ -116,15 +114,18 @@ export default function Studio(props: Props) {
   }, [streamSessions, selectStreamCallback])
 
   function filterStreamSession(streamSessions: any[]) {
-    // Only show streams that have been recorded and are either active or longer than 1 hour
+    // Only show streams that have been recorded and are longer than 10 mins
     // 5 day limit is how long 'clippable' streams are kept on Livepeer
-    return streamSessions?.filter(
-      (i) =>
+    return streamSessions?.filter((i) => {
+      return (
         i.record &&
         dayjs(i.createdAt).isAfter(dayjs().subtract(5, 'days')) &&
-        (i.isActive || i.sourceSegmentsDuration > 3600)
-    )
+        i.sourceSegmentsDuration > 600
+      )
+    })
   }
+
+  if (!event) return <>No events found.</>
 
   return (
     <div className="p-8 container mx-auto">
@@ -137,7 +138,7 @@ export default function Studio(props: Props) {
               key={index}
               className="cursor-pointer py-1"
               value={event.id}
-              selected={event.id === event.id}>
+              defaultValue={event.id}>
               {event.name}
             </option>
           ))}
@@ -191,6 +192,7 @@ export default function Studio(props: Props) {
 
       {stream.playbackId && (
         <Editor
+          organizationId={event.organizationId}
           eventId={event.id}
           playbackId={stream.playbackId}
           sessionId={stream.sessionId}

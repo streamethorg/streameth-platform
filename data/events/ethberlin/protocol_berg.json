@@ -19,5 +19,6 @@
   "eventCover": "protocol_berg.png",
   "website": "",
   "archiveMode": true,
-  "accentColor": "white"
+  "accentColor": "white",
+  "enableVideoDownloader": true
 }

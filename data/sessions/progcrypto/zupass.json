@@ -1,0 +1,26 @@
+{
+  "id": "zupass",
+  "name": "ZuPass",
+  "description": "TBD",
+  "start": 1700141400000,
+  "end": 1700143200000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "gubsheep",
+      "name": "gubsheep",
+      "bio": "gubsheep is co-founder of 0xPARC Foundation. He works on applications of cryptography, particularly zero-knowledge. Previously, he supported zero-knowledge R&D efforts at Ethereum Foundation and built Dark Forest, the first on-chain strategy game.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1gxXaqv0QiVKaY6DId560JUH4hWSXy8wH/view"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/128493wtihcnt0hx/index.m3u8",
+  "playbackId": "128493wtihcnt0hx",
+  "eventId": "progcrypto",
+  "track": "Identity, Attestations, and PCDs",
+  "coverImage": "/sessions/progcrypto/zupass_thumbnail.png",
+  "assetId": "1284907b-01ed-4805-aac6-a7b110aa119a",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
+}

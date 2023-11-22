@@ -1,1 +1,23 @@
-{"id":"keynote","name":"Keynote","description":"Keynote speech by Danny Ryan","start":1700301600000,"end":1700304300000,"stageId":"3b36","speakers":[{"id":"danny_ryan","name":"Danny Ryan","bio":"No description","eventId":"epf_day"}],"playbackId":"","eventId":"epf_day","coverImage":"/sessions/epf_day/keynote.jpg"}
+{
+  "id": "keynote",
+  "name": "Keynote",
+  "description": "Keynote speech by Danny Ryan",
+  "start": 1700215200000,
+  "end": 1700217900000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "danny_ryan",
+      "name": "Danny Ryan",
+      "bio": "No description",
+      "eventId": "epf_day"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/aa13y28dk2xckptr/index.m3u8",
+  "playbackId": "aa13y28dk2xckptr",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/keynote_thumbnail.png",
+  "assetId": "aa13e1a2-4195-465a-ae41-b133715ef248",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
+}

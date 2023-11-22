@@ -1,0 +1,29 @@
+{
+  "id": "panel_technical_feasibility",
+  "name": "Panel: Technical Feasibility",
+  "description": "A beautiful concept means nothing if it cannot be built. How can we reconcile our ambitions for Autonomous Worlds with the practical challenges of building onchain?",
+  "start": 1700055000000,
+  "end": 1700057700000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "small_brain",
+      "name": "Small Brain",
+      "bio": "Small Brain is the creator of onchain crossword game Words3 and co-creator of Network States, an onchain strategy game with GPT lore. ",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@0xsmallbrain",
+      "photo": "https://drive.google.com/uc?id=1TzVkEuh3XpgqcDykpw1KuYakUuk7BAWr"
+    },
+    {
+      "id": "gubsheep",
+      "name": "Gubsheep",
+      "bio": "Gubsheep is the cofounder of 0xPARC.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@gupsheep",
+      "photo": "https://drive.google.com/uc?id=1hCQ9FQavkeHGC0MIEfsKj65QqOriMw-6"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/panel_technical_feasibility_thumbnail.png"
+}

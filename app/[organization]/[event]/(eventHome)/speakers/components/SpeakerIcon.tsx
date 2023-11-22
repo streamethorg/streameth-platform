@@ -33,9 +33,8 @@ export default function SpeakerIcon({
           target="_blank"
           bgColor="#000"
           fgColor="#fff"
-          className={`ml-2 ${
-            size === 'md' ? 'h-8 w-h-8' : 'h-8 w-8'
-          }`}
+          style={{ width: '30px', height: '30px' }}
+          className="ml-2 "
         />
       )}
     </div>

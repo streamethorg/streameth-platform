@@ -1,0 +1,19 @@
+{
+  "id": "store_now_break_it_later",
+  "name": "Store now, break it later?",
+  "description": "",
+  "start": 1699949700000,
+  "end": 1699951500000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "jeanphilippe_aumasson",
+      "name": "Jean-Philippe Aumasson",
+      "bio": "Cryptographer, co-founder & chief security officer at Taurus SA",
+      "eventId": "cryptographic_resilience"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "cryptographic_resilience",
+  "coverImage": "sessions/cryptographic_resilience/store_now_break_it_later_thumbnail.png"
+}

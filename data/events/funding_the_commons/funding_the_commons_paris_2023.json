@@ -16,5 +16,6 @@
     }
   ],
   "website": "https://fundingthecommons.io/",
-  "archiveMode": true
+  "archiveMode": true,
+  "accentColor": "#00898a"
 }

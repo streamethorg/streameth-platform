@@ -1,0 +1,25 @@
+{
+  "id": "introduction_to_zk_security_research",
+  "name": "Introduction to ZK Security Research",
+  "description": "",
+  "start": 1699860600000,
+  "end": 1699861560000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "david_theodore",
+      "name": "David\nTheodore",
+      "bio": "Security Researcher\nEthereum Foundation",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/David.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/55ccnv8ipkhkvb57/index.m3u8",
+  "playbackId": "55ccnv8ipkhkvb57",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/introduction_to_zk_security_research.jpg",
+  "assetId": "55cc2706-9bd2-4b11-9970-1f7ac645c095",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}

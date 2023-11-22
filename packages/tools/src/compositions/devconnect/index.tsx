@@ -1,17 +1,6 @@
-import { staticFile } from "remotion"
-
-export { Intro } from './intro'
-export { Join } from './join'
-export { Social } from './social'
-
 export const DevconnectFrameRate = 25
 export const DevconnectIntroDuration = 12 * DevconnectFrameRate
 export const DevconnectOutroDuration = 9 * DevconnectFrameRate
-
-export const DevconnectISTFont = new FontFace(
-    `Sofia Sans Extra Condensed`,
-    `url('${staticFile('devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf')}') format('truetype')`,
-)
 
 // 1 = blue/teal
 // 2 = teal/orange
@@ -30,5 +19,9 @@ export const DevconnectEvents = [
     { id: 'fe-lang-hackathon', type: '1' },
     { id: 'conflux--web3-ux-unconference', type: '7' },
     { id: 'wallet-unconference', type: '2' },
-    // { id: 'cryptographic-resilience-within-ethereum', type: '4' },
+    { id: 'cryptographic-resilience', type: '4' },
+    { id: 'formal-verification', type: '5' },
+    { id: 'protocol-guild', type: '3' },
+    { id: 'scholars', type: '6' },
+    { id: 'women-in-protocol', type: '2' },
 ]

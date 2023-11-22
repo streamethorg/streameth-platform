@@ -1,0 +1,26 @@
+{
+  "id": "validating_erc4337_userops_using_zkps",
+  "name": "Validating ERC-4337 UserOps using ZKPs",
+  "description": "Smart contract accounts (account abstraction) and the growing adoption of the ERC-4337 specification has opened up a world of new authentication possibilities beyond the standard asymmetric key based accounts widely used in the Ethereum ecosystem today. In this talk, we will go over how Zero Knowledge Proofs (ZKPs) can be used within the limitations of ERC-4337 to enable novel authentication methods from simple circuits using private inputs to more complex examples using email.",
+  "start": 1700131500000,
+  "end": 1700132400000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "jake_ct",
+      "name": "Jake C-T",
+      "bio": "Developer focused on building better wallet/account experiences so the maximum number of people can enjoy the benefits of Ethereum across the globe. In my spare time I game, mountain bike, and journey across our little blue marble.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1fi-c7Mzs-AJzkWN5ZOVL7Zw0Jhasaml5/view"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/ab37tysfsy020z7y/index.m3u8",
+  "playbackId": "ab37tysfsy020z7y",
+  "eventId": "progcrypto",
+  "track": "Cryptography in the Wild",
+  "coverImage": "/sessions/progcrypto/validating_erc4337_userops_using_zkps_thumbnail.png",
+  "assetId": "ab37200d-ac2a-4fe6-a091-9daad6ed438d",
+  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+  "videoType": "clip"
+}

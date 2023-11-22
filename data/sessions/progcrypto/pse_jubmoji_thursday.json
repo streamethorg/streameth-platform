@@ -1,0 +1,19 @@
+{
+  "id": "pse_jubmoji_thursday",
+  "name": "PSE: Jubmoji- Thursday",
+  "description": "Jubmoji.Quest: Hang out with a team building zk enabled NFC cards to learn about the fun ways we can collect and prove private data.",
+  "start": 1700136000000,
+  "end": 1700146800000,
+  "stageId": "community_activations_hub",
+  "speakers": [
+    {
+      "id": "jubmoji_team",
+      "name": "Jubmoji Team",
+      "bio": "Team responsible forJubmoji",
+      "eventId": "progcrypto"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "coverImage": "/sessions/progcrypto/pse_jubmoji_thursday_thumbnail.png"
+}

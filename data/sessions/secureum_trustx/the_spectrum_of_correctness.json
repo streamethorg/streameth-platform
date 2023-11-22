@@ -1,0 +1,25 @@
+{
+  "id": "the_spectrum_of_correctness",
+  "name": "The spectrum of correctness",
+  "description": "",
+  "start": 1699885080000,
+  "end": 1699886040000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "fraser_brown",
+      "name": "Fraser\nBrown",
+      "bio": "CTO, Cubist\nAssistant Professor, CMU",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Fraser.png"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/d366rfq0w59c2mms/index.m3u8",
+  "playbackId": "d366rfq0w59c2mms",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/the_spectrum_of_correctness.jpg",
+  "assetId": "d3669358-9a04-46f1-b536-f18b0886d8d0",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
+}

@@ -1,21 +1,24 @@
 'use client'
-import { useContext, useLayoutEffect, useRef, useState } from 'react'
-import {
-  ChatBubbleBottomCenterIcon,
-  CalendarIcon,
-  InformationCircleIcon,
-} from '@heroicons/react/24/outline'
-import SessionList from '@/components/sessions/SessionList'
-import Chat from '@/plugins/Chat'
-import Player from '@/components/misc/Player'
-import PluginBar from '@/components/Layout/PluginBar'
 import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
-import { StageContext } from './StageContext'
-import EmbedButton from '@/components/misc/EmbedButton'
-import ShareButton from '@/components/misc/ShareButton'
+import PluginBar from '@/components/Layout/PluginBar'
 import { LoadingContext } from '@/components/context/LoadingContext'
 import { MobileContext } from '@/components/context/MobileContext'
-export default function StageLayout() {
+import EmbedButton from '@/components/misc/EmbedButton'
+import Player from '@/components/misc/Player'
+import ShareButton from '@/components/misc/ShareButton'
+import SessionList from '@/components/sessions/SessionList'
+import {
+  CalendarIcon,
+  ChatBubbleBottomCenterIcon,
+} from '@heroicons/react/24/outline'
+import { useContext, useLayoutEffect, useRef, useState } from 'react'
+import { Dm3 } from './dm3/DM3'
+import { StageContext } from './StageContext'
+import LivepeerIcon from '@/app/assets/icons/LivepeerIcon'
+import Chat from '@/plugins/Chat'
+import { IEvent } from '@/server/model/event'
+
+export default function StageLayout({ event }: { event: IEvent }) {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
   const [playerHeight, setPlayerHeight] = useState(0)
@@ -46,40 +49,50 @@ export default function StageLayout() {
         content: <SessionList sessions={sessions} />,
       })
     }
-    tabs.push({
-      id: 'chat',
-      header: <ChatBubbleBottomCenterIcon />,
-      content: <Chat conversationId={stage.id} />,
-    })
+    {
+      !event?.plugins?.disableChat &&
+        tabs.push({
+          id: 'chat',
+          header: <ChatBubbleBottomCenterIcon />,
+          content: <Dm3 />,
+          // content: <Chat conversationId={stage.id} />,
+        })
+    }
 
     return tabs
   }
   return (
-    <div className="h-full flex flex-col w-full lg:flex-row relative lg:p-4 lg:max-h-screen">
-      <div className="h-full flex flex-col w-full lg:flex-row relative p-2 lg:gap-4">
-        <div
-          ref={stickyRef}
-          className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky top-[65px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
-          <ActionsComponent title={stage.name}>
-            <EmbedButton
+    <div className="h-full flex flex-col w-full lg:flex-row relative p-4 lg:max-h-screen lg:gap-4">
+      <div className="flex flex-col w-full h-full lg:w-[70%] gap-4">
+        <div className="flex flex-col lg:flex-row relative  ">
+          <div
+            ref={stickyRef}
+            className="bg-black mb-2 lg:mb-0 sticky p-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
+            <ActionsComponent title={stage.name}>
+              <EmbedButton
+                streamId={stage.streamSettings.streamId}
+                playerName={stage.name}
+              />
+              <ShareButton />
+            </ActionsComponent>
+            <Player
               streamId={stage.streamSettings.streamId}
               playerName={stage.name}
             />
-            <ShareButton />
-          </ActionsComponent>
-          <Player
-            streamId={stage.streamSettings.streamId}
-            playerName={stage.name}
-          />
+          </div>
         </div>
-        <div
-          style={{ height: isMobile ? '100%' : playerHeight }}
-          className={`w-full lg:w-[25%]`}>
-          <PluginBar
-            bottomOffset={bottomOffset}
-            tabs={getPluginTabs()}
-          />
+        <div className="bg-base font-ubuntu flex items-center gap-2 px-4 mb-4 rounded-xl w-fit">
+          <p className="text-white">Powered by</p>
+          <LivepeerIcon />
         </div>
+      </div>
+      <div
+        style={{ height: isMobile ? '100%' : playerHeight }}
+        className={`w-full lg:w-[30%]`}>
+        <PluginBar
+          bottomOffset={bottomOffset}
+          tabs={getPluginTabs()}
+        />
       </div>
     </div>
   )
