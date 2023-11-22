@@ -40,6 +40,10 @@ export default async function EventHome({ params }: Params) {
     await eventController.getEvent(params.event, params.organization)
   ).toJson()
 
+  const stages = (
+    await new StageController().getAllStagesForEvent(params.event)
+  ).map((stage) => stage.toJson())
+
   if (!hasData({ event })) return notFound()
 
   return (
