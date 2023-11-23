@@ -27,13 +27,11 @@ const Layout = async ({
     event: string
   }
 }) => {
-  const stageController = new StageController()
-  const eventController = new EventController()
-  const event = await eventController.getEvent(
+  const event = await new EventController().getEvent(
     params.event,
     params.organization
   )
-  const stages = await stageController.getAllStagesForEvent(
+  const stages = await new StageController().getAllStagesForEvent(
     params.event
   )
   const sessions = await new SessionController().getAllSessions({

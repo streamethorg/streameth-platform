@@ -1,0 +1,26 @@
+{
+  "id": "interactive_game_theory",
+  "name": "Interactive game theory",
+  "description": "Public goods lab experiments run by an experimental economist turned crypto researcher – grounding discussion and interactive, live on-chain gameplay experience.",
+  "start": 1699108200000,
+  "end": 1699111800000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "matthew_stephenson",
+      "name": "Matthew Stephenson",
+      "bio": "Pantera",
+      "eventId": "zuconnect__public_goods_track"
+    },
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "Funding The Commons",
+      "eventId": "zuconnect__public_goods_track"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/3198gbmonft81rft/index.m3u8",
+  "playbackId": "",
+  "eventId": "zuconnect__public_goods_track",
+  "coverImage": "/sessions/zuconnect__public_goods_track/interactive_game_theory.jpg"
+}

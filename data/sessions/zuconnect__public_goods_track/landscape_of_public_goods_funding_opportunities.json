@@ -1,0 +1,20 @@
+{
+  "id": "landscape_of_public_goods_funding_opportunities",
+  "name": "Landscape of public goods funding opportunities",
+  "description": "No description",
+  "start": 1699079400000,
+  "end": 1699081200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "Funding The Commons",
+      "eventId": "zuconnect__public_goods_track"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c63f0hosqw47bwt2/index.m3u8",
+  "playbackId": "",
+  "eventId": "zuconnect__public_goods_track",
+  "coverImage": "/sessions/zuconnect__public_goods_track/landscape_of_public_goods_funding_opportunities.jpg"
+}
