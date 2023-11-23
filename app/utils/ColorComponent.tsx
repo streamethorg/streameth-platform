@@ -40,6 +40,7 @@ const ColorComponent = ({
   const pathname = usePathname()
   const { setLogo, setHomePath, setPages, setComponents } =
     useContext(TopNavbarContext)
+
   const { accentColor, logo, organizationId, id } = event
   const isNotOrganization =
     pathname === '/' || pathname.match(/^\/[a-zA-Z0-9]+$/)
