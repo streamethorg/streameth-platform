@@ -18,7 +18,9 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: yarn
+        run: |
+          yarn
+          yarn --cwd ./packages/tools install
 
       - name: Check code formatting
         run: |
