@@ -23,5 +23,14 @@
   "timezone": "Europe/Istanbul",
   "accentColor": "#0C0404",
   "startTime": "08:30",
-  "enableVideoDownloader": true
+  "enableVideoDownloader": true,
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1IWGy0aDQAf0XOPVXU8moFmxvLapiB7Wn",
+        "driveApiKey": ""
+      }
+    }
+  ],
 }

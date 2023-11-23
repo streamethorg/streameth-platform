@@ -8,11 +8,7 @@ import {
   renderStill,
 } from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
-import {
-  FileExists,
-  UploadDrive,
-  UploadOrUpdate,
-} from 'services/slides'
+import { FileExists } from 'services/slides'
 import {
   copyFileSync,
   existsSync,
@@ -23,6 +19,7 @@ import {
 } from 'fs'
 import { DevconnectEvents } from 'compositions/devconnect'
 import { validImageUrl } from 'utils/avatars'
+import uploadAsset from 'utils/uploadAsset'
 
 const uploadGoogledrive = true
 const updateSessionThumbnails = true
@@ -206,7 +203,9 @@ async function generateEventAssets(event: any) {
                 })
               }
 
-              upload(id, socialFilePath, type, folderId)
+              if (uploadGoogledrive) {
+                uploadAsset(id, socialFilePath, type, folderId, force)
+              }
             }
           }
         }
@@ -233,7 +232,9 @@ async function generateEventAssets(event: any) {
                 })
               }
 
-              upload(id, introFilePath, type, folderId)
+              if (uploadGoogledrive) {
+                uploadAsset(id, introFilePath, type, folderId, force)
+              }
             }
 
             // Generate a still from the same composition's last frame
@@ -259,12 +260,15 @@ async function generateEventAssets(event: any) {
                 })
               }
 
-              upload(
-                thumbnailId,
-                thumbnailFilePath,
-                thumbnailType,
-                folderId
-              )
+              if (uploadGoogledrive) {
+                uploadAsset(
+                  thumbnailId,
+                  thumbnailFilePath,
+                  thumbnailType,
+                  folderId,
+                  force
+                )
+              }
             }
 
             if (
@@ -315,24 +319,4 @@ function fileExists(path: string, fileSize = 100000) {
   }
 
   return false
-}
-
-async function upload(
-  id: string,
-  path: string,
-  type: string,
-  folderId: string
-) {
-  // - CONFIG.GOOGLE_DRIVE_ID is main, root drive. Files are upload to their respective sub folder Ids
-  if (CONFIG.GOOGLE_DRIVE_ID && uploadGoogledrive) {
-    if (force) {
-      await UploadOrUpdate(id, path, type, folderId)
-      return
-    }
-
-    const exists = await FileExists(id, type, folderId)
-    if (!exists) {
-      await UploadDrive(id, path, type, folderId)
-    }
-  }
 }

@@ -16,8 +16,11 @@ import { CONFIG } from '../utils/config'
 import { IEvent, ISession } from 'utils/types'
 import { VideoProps } from 'compositions/join'
 import { VideoConfig } from 'remotion'
+import uploadAsset from 'utils/uploadAsset'
 
 let lastProgressPrinted = -1
+
+const uploadGoogledrive = true
 const updateSessionThumbnails = true
 const force = process.argv.slice(2).includes('--force')
 const local = process.argv.slice(2).includes('--local')
@@ -135,12 +138,12 @@ async function generateEventAssets(
     console.log('- Google Drive data exporter', folderId)
   }
 
-  // if (!folderId) {
-  //   console.error(
-  //     'No Google Drive data exporter found. Skip rendering'
-  //   )
-  //   return
-  // }
+  if (!folderId) {
+    console.error(
+      'No Google Drive data exporter found. Skip rendering'
+    )
+    return
+  }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
   const videoFolder = join(
@@ -188,51 +191,68 @@ async function generateEventAssets(
   const { durationInSeconds, fps } = await getVideoMetadata(videoFile)
 
   inputComposition.durationInFrames =
-    Math.floor(durationInSeconds) * 30
-  inputComposition.fps = 30
+    Math.floor(durationInSeconds) * 25
+  inputComposition.fps = 25
 
   console.log(`Started rendering ${composition.id}`)
+  const videoFilePath = `out/${event.id}/videos/${composition.id}.mp4`
   await renderMedia({
     codec: 'h264',
     composition: inputComposition,
     serveUrl: bundled,
-    outputLocation: `out/sessions/${composition.id}.mp4`,
+    outputLocation: videoFilePath,
     videoBitrate: '5M',
     onProgress,
   })
+  lastProgressPrinted = -1
 
+  if (uploadGoogledrive) {
+    const id = `${session.id}_thumbnail.jpg`
+    const type = 'video/mp4'
+
+    uploadAsset(id, videoFilePath, type, folderId, force)
+  }
+
+  const thumbnailFilePath = `out/${event.id}/images/${composition.id}.jpg`
   await renderStill({
     composition: inputComposition,
     serveUrl: bundled,
     frame: fps, // First second
-    output: `out/${event.id}/images/${composition.id}.jpg`,
+    output: thumbnailFilePath,
     inputProps,
   })
-  lastProgressPrinted = -1
+
+  if (uploadGoogledrive) {
+    const id = `${session.id}_thumbnail.jpg`
+    const type = 'image/png'
+
+    uploadAsset(id, thumbnailFilePath, type, folderId, force)
+  }
+
   // await uploadAsset(`out/sessions/${composition.id}.mp4`)
 }
 
-async function uploadAsset(filePath: string) {
-  console.log('Uploading asset..')
-  const videoName = path.basename(filePath, '.mp4')
-  const stream = createReadStream(filePath)
-  await provider.createAsset({
-    sources: [
-      {
-        name: `${event}-${videoName}`,
-        file: stream,
-        storage: {
-          ipfs: true,
-          metadata: {
-            name: `${event}-${videoName}`,
-          },
-        },
-      },
-    ],
-  })
-
-  console.log(`Uploaded asset ${videoName}`)
-}
+// async function uploadAsset(filePath: string) {
+//   console.log('Uploading asset..')
+//   const videoName = path.basename(filePath, '.mp4')
+//   const stream = createReadStream(filePath)
+//   await provider.createAsset({
+//     sources: [
+//       {
+//         name: `${event}-${videoName}`,
+//         file: stream,
+//         storage: {
+//           ipfs: true,
+//           metadata: {
+//             name: `${event}-${videoName}`,
+//           },
+//         },
+//       },
+//     ],
+//   })
+//
+//   console.log(`Uploaded asset ${videoName}`)
+// }
 
 start(processArgs)
   .then(() => {
