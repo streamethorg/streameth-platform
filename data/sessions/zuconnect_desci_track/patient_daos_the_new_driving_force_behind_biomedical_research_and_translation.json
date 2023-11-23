@@ -1,1 +1,19 @@
-{"id":"patient_daos_the_new_driving_force_behind_biomedical_research_and_translation","name":"Patient DAOs: The New Driving Force Behind Biomedical Research and Translation","description":"Patient DAOs and decentralised funding can empower patient \ncommunities to drive biomedical innovation and accelerate progress \nin a more democratic and user-friendly way.","start":1699009800000,"end":1699011600000,"stageId":"theater","speakers":[{"id":"andr_chagwedera","name":"André Chagwedera","bio":"No Desciption","eventId":"zuconnect_desci_track"}],"playbackId":"","eventId":"zuconnect_desci_track","coverImage":"/sessions/zuconnect_desci_track/patient_daos_the_new_driving_force_behind_biomedical_research_and_translation.jpg"}
+{
+  "id": "patient_daos_the_new_driving_force_behind_biomedical_research_and_translation",
+  "name": "Patient DAOs: The New Driving Force Behind Biomedical Research and Translation",
+  "description": "Patient DAOs and decentralised funding can empower patient \ncommunities to drive biomedical innovation and accelerate progress \nin a more democratic and user-friendly way.",
+  "start": 1699009800000,
+  "end": 1699011600000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "andr_chagwedera",
+      "name": "André Chagwedera",
+      "bio": "No Desciption",
+      "eventId": "zuconnect_desci_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_desci_track",
+  "coverImage": "/sessions/zuconnect_desci_track/patient_daos_the_new_driving_force_behind_biomedical_research_and_translation.jpg"
+}

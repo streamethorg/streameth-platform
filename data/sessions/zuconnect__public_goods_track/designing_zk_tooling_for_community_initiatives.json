@@ -1,0 +1,32 @@
+{
+  "id": "designing_zk_tooling_for_community_initiatives",
+  "name": "Designing ZK Tooling for Community Initiatives",
+  "description": "The Jubmojis team delves into their design process and practice behind creating ZuPass, with an interactive ideation exercise.",
+  "start": 1699084800000,
+  "end": 1699086600000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "rachel_aux",
+      "name": "Rachel Aux",
+      "bio": "Ethereum Foundation Privacy and Scaling Explorations",
+      "eventId": "zuconnect__public_goods_track"
+    },
+    {
+      "id": "althea_allen",
+      "name": "Althea Allen ",
+      "bio": "Ethereum Foundation Privacy and Scaling Explorations",
+      "eventId": "zuconnect__public_goods_track"
+    },
+    {
+      "id": "vivek_bhupatiraju",
+      "name": "Vivek Bhupatiraju \n",
+      "bio": "Jubmojis",
+      "eventId": "zuconnect__public_goods_track"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/bac6y5pjiiilsrna/index.m3u8",
+  "playbackId": "",
+  "eventId": "zuconnect__public_goods_track",
+  "coverImage": "/sessions/zuconnect__public_goods_track/designing_zk_tooling_for_community_initiatives.jpg"
+}

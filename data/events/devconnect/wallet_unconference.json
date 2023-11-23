@@ -27,6 +27,7 @@
   "eventCover": "wallet_unconference_cover.jpg",
   "website": "",
   "archiveMode": true,
+  "enableVideoDownloader": true,
   "timezone": "Europe/Istanbul",
   "logo": "wallet_unconference_logo.jpeg",
   "banner": "wallet_unconference_banner.jpeg",

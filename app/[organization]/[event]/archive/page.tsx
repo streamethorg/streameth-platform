@@ -36,7 +36,7 @@ export default async function ArchivePage({ params }: Params) {
 
   return (
     <div className="flex flex-col-reverse justify-end lg:flex-row w-full lg:h-full lg:overflow-hidden">
-      <FilteredItems sessions={sessions} />
+      <FilteredItems sessions={videoSessions} />
     </div>
   )
 }

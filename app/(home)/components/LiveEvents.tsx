@@ -6,7 +6,7 @@ import React from 'react'
 import { getImageUrl } from '@/server/utils'
 const LiveEvents = ({ events }: { events: IEvent[] }) => {
   return (
-    <div className="h-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll">
+    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:overflow-scroll">
       {events.map(
         (
           {
@@ -22,7 +22,7 @@ const LiveEvents = ({ events }: { events: IEvent[] }) => {
         ) => (
           <Card key={index} bgColor={accentColor}>
             <Link href={`/${organizationId}/${id}`}>
-              <div className="h-full bg-base rounded-xl text-white uppercase">
+              <div className="bg-base rounded-xl text-white uppercase">
                 <div className="aspect-video relative">
                   <Image
                     className="rounded"
