@@ -47,16 +47,28 @@ const SearchFilter = <T extends object>({
       }
     })
 
-    if (items.length > 0) {
-      setItems(items)
-    }
-
     return () => {
       setItems([])
       performFilter()
       clearSelectedOption()
     }
-  }, [items])
+  }, [])
+
+  useEffect(() => {
+    const filteredEvents = items.filter((event) => {
+      return event.name
+        .toLowerCase()
+        .includes(filterInput.toLowerCase())
+    })
+
+    if (filterInput === '') {
+      clearSelectedOption()
+    }
+
+    setItems(filteredEvents)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, filterInput])
 
   const handleOptionSelect = (option: FilterOption<T>) => {
     setSelectedItems([option])
