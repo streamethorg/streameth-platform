@@ -100,7 +100,7 @@ const SearchFilter = <T extends object>({
 
   return (
     <div className="flex flex-col justify-between font-light w-full h-full">
-      <div className="lg:relative">
+      <div className="relative">
         <div className="relative">
           <input
             type="text"
