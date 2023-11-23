@@ -34,38 +34,34 @@ export default async function OrganizationHome({ params }: Params) {
 
   return (
     <main className="w-screen mx-auto fixed overflow-auto h-screen">
-      <ColorComponent organization={organization.toJson()}>
-        <div className="sticky bg-white top-0 z-50 flex p-4 px-9 gap-4">
-          <Image
-            src={getImageUrl(organization.logo)}
-            width={50}
-            height={50}
-            style={{
-              objectFit: 'cover',
-            }}
-            alt={`${organization.name} logo`}
-          />
-          <FilterBar events={events.map((event) => event.toJson())} />
+      <div className="sticky bg-white top-0 z-50 flex p-4 px-9 gap-4">
+        <Image
+          src={getImageUrl(organization.logo)}
+          width={50}
+          height={50}
+          style={{
+            objectFit: 'cover',
+          }}
+          alt={`${organization.name} logo`}
+        />
+        {/* <FilterBar events={events.map((event) => event.toJson())} /> */}
+      </div>
+      <div className="bg-base rounded-xl mx-9 my-3">
+        <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
+          {organization.name}
+        </p>
+        <article className="prose max-w-full text-center prose-invert p-4">
+          <Markdown remarkPlugins={[remarkGfm]}>
+            {organization.description}
+          </Markdown>
+        </article>
+      </div>
+      <hr className="h-px mx-9  bg-base" />
+      <div className="overflow-auto h-screen">
+        <div className="px-4">
+          <EventList events={events.map((event) => event.toJson())} />
         </div>
-        <div className="bg-base rounded-xl mx-9 my-3">
-          <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
-            {organization.name}
-          </p>
-          <article className="prose max-w-full text-center prose-invert p-4">
-            <Markdown remarkPlugins={[remarkGfm]}>
-              {organization.description}
-            </Markdown>
-          </article>
-        </div>
-        <hr className="h-px mx-9  bg-base" />
-        <div className="overflow-auto h-screen">
-          <div className="px-4">
-            <EventList
-              events={events.map((event) => event.toJson())}
-            />
-          </div>
-        </div>
-      </ColorComponent>
+      </div>
     </main>
   )
 }

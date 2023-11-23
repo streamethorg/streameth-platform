@@ -84,6 +84,7 @@ function FilterBar({
           <SearchFilter
             filterOptions={sessionFilters}
             filterName="session name"
+            items={sessions}
           />
 
           {isOpen && (
@@ -107,6 +108,7 @@ function FilterBar({
                 filterName="Date"
               />
               <SearchFilter
+                items={sessions}
                 filterOptions={speakerFilters}
                 filterName="speaker"
               />
