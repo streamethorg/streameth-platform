@@ -20,7 +20,9 @@ function Text({
   fontFamily?: string
   opacity?: number
 }) {
-  const lines = text.split('\n').map((line, i) => <div key={i}>{line}</div>)
+  const lines = text
+    .split('\n')
+    .map((line, i) => <div key={i}>{line}</div>)
   return (
     <div
       style={{

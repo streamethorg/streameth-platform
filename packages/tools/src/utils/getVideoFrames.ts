@@ -63,7 +63,7 @@ const calculateSessionMetadata: CalculateMetadataFunction<
     console.log('No sessions found. Skip rendering')
     return {
       durationInFrames: 250,
-      fps: 25
+      fps: 25,
     }
   }
   sessions.map((session: ISession) => {
@@ -73,27 +73,31 @@ const calculateSessionMetadata: CalculateMetadataFunction<
     )
   })
 
-  const framePromises = sessions.map((session: ISession) => 
-    getVideoFrames(`tmp/videos/${session.id}`));
+  const framePromises = sessions.map((session: ISession) =>
+    getVideoFrames(`tmp/videos/${session.id}`)
+  )
 
   try {
-    const frameCounts = await Promise.all(framePromises);
-    const totalFrames = frameCounts.reduce((acc, frames) => acc + frames, 0);
+    const frameCounts = await Promise.all(framePromises)
+    const totalFrames = frameCounts.reduce(
+      (acc, frames) => acc + frames,
+      0
+    )
 
-    const durationInSeconds = totalFrames / 25;
-    props.durationInSeconds = durationInSeconds;
+    const durationInSeconds = totalFrames / 25
+    props.durationInSeconds = durationInSeconds
 
     return {
       durationInFrames: totalFrames,
       fps: 25,
-    };
+    }
   } catch (error) {
-    console.error('Error calculating total frames:', error);
+    console.error('Error calculating total frames:', error)
     return {
       durationInFrames: 250,
-      fps: 25
+      fps: 25,
     }
   }
-};
+}
 
-export default calculateSessionMetadata;
+export default calculateSessionMetadata

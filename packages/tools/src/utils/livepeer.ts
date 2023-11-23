@@ -52,7 +52,12 @@ export async function uploadAsset(session: any, path: string) {
   const asset = response[0]
 
   if (session.id && session.eventId) {
-    const sessionFilePath = join(CONFIG.DATA_FOLDER, 'sessions', session.eventId, `${session.id}.json`)
+    const sessionFilePath = join(
+      CONFIG.DATA_FOLDER,
+      'sessions',
+      session.eventId,
+      `${session.id}.json`
+    )
     if (existsSync(sessionFilePath) && asset) {
       console.log('Write session file', sessionFilePath)
 

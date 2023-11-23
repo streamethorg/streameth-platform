@@ -27,10 +27,12 @@ export interface SessionProps {
 }
 
 export const ProgCryptoProps = z.object({
-    session: SessionSchema,
+  session: SessionSchema,
 })
 
-export const Intro: React.FC<Zod.infer<typeof ProgCryptoProps>> = ({ session }) => {
+export const Intro: React.FC<Zod.infer<typeof ProgCryptoProps>> = ({
+  session,
+}) => {
   const { durationInFrames } = useVideoConfig()
   const frame = useCurrentFrame()
 

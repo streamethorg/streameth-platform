@@ -2,7 +2,11 @@ import { join } from 'path'
 import { bundle } from '@remotion/bundler'
 import { getCompositions } from '@remotion/renderer'
 import { webpackOverride } from '../webpack-override'
-import { RenderMediaOnProgress, renderMedia, renderStill } from '@remotion/renderer'
+import {
+  RenderMediaOnProgress,
+  renderMedia,
+  renderStill,
+} from '@remotion/renderer'
 import { CONFIG } from 'utils/config'
 import { FileExists, UploadDrive } from 'services/slides'
 import { existsSync, statSync } from 'fs'
@@ -34,7 +38,9 @@ const start = async () => {
 
   // TODO: Create folder structure for assets/compositions
 
-  for (const composition of compositions.filter((c) => c.id.includes('devconnect'))) {
+  for (const composition of compositions.filter((c) =>
+    c.id.includes('devconnect')
+  )) {
     console.log(`Rendering ${composition.id}...`)
 
     const introFilePath = `assets/intros/${composition.id}.mp4`
@@ -50,7 +56,10 @@ const start = async () => {
     upload(composition.id, introFilePath, 'video/mp4')
 
     const stillFilePath = `assets/stills/${composition.id}.png`
-    if (!fileExists(stillFilePath) && composition.durationInFrames >= 299) {
+    if (
+      !fileExists(stillFilePath) &&
+      composition.durationInFrames >= 299
+    ) {
       await renderStill({
         composition,
         serveUrl: bundled,
@@ -87,7 +96,7 @@ function fileExists(path: string, fileSize = 100000) {
 async function upload(id: string, path: string, type: string) {
   // TODO: Need to properly fetch a Google Drive/Folder ID from Events Data
   // - CONFIG.GOOGLE_DRIVE_ID is the root shared Drive
-  // - TEST_UPLOAD_DRIVE_ID is a (sub) folder within the root drive 
+  // - TEST_UPLOAD_DRIVE_ID is a (sub) folder within the root drive
   if (CONFIG.GOOGLE_DRIVE_ID) {
     const exists = await FileExists(id, type, TEST_UPLOAD_DRIVE_ID)
     if (!exists) {
