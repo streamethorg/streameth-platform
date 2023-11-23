@@ -12,7 +12,7 @@ export const generateId = (key: string) => {
 
 export const formatId = (id: string): string => {
   const formattedStageId = id
-    .replace(/_/g, ' ') // Replace underscores with spaces
+    ?.replace(/_/g, ' ') // Replace underscores with spaces
     .replace(/(?:^|\s)\S/g, (match) => match.toUpperCase()) // Capitalize the first letter of each word
 
   return formattedStageId
