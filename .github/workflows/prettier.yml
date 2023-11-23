@@ -18,9 +18,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: |
-          yarn
-          yarn --cwd ./packages/tools install
+        run: yarn global add prettier
 
       - name: Check code formatting
         run: |
