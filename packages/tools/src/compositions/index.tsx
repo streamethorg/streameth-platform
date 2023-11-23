@@ -24,15 +24,7 @@ import { WideIntro as ProgCryptoWideIntro } from './progcrypto/intro_wide'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
 import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
-import { JoinVideos } from './join'
-import calculateSessionMetadata from 'utils/getVideoFrames'
-import { SessionSchema } from '../utils/mocks'
-import { ISession as SessionType } from 'utils/types'
-
-import SESSIONS from '../../public/json/secureum_trustx.json'
-import { calculateFrames } from '../utils/calculateFrames'
-
-const sessions: any[] = SESSIONS
+import { JoinVideos, VideoProps } from './join'
 
 export function Compositions() {
   const waitForFont = delayRender()
@@ -79,7 +71,6 @@ export function Compositions() {
     .catch((err) =>
       console.log('Error loading progCryptoFont_Med font', err)
     )
-
   progCryptoFont_Reg
     .load()
     .then(() => {
@@ -235,22 +226,18 @@ export function Compositions() {
       </Folder>
 
       <Folder name="join-videos">
-        {sessions
-          .filter((session) => session.frameCount !== undefined)
-          .map((session) => (
-            <Composition
-              id={`secureum-${session.id.replaceAll('_', '-')}`}
-              component={JoinVideos}
-              width={1920}
-              height={1080}
-              fps={25}
-              durationInFrames={session.frameCount + 125}
-              defaultProps={{
-                id: session.id,
-                coverImage: session.coverImage,
-              }}
-            />
-          ))}
+        <Composition
+          id={`secureum-trustx-wtf-is-l1-security-and-how-to-think-about-it`}
+          component={JoinVideos}
+          width={1920}
+          height={1080}
+          fps={25}
+          durationInFrames={28771 + 125} // Video + animation
+          defaultProps={{
+            id: 'wtf_is_l1_security_and_how_to_think_about_it',
+            eventName: 'secureum_trustx',
+          }}
+        />
       </Folder>
     </>
   )

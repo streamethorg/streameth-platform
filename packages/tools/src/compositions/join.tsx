@@ -6,30 +6,27 @@ import {
   OffthreadVideo,
   staticFile,
   useVideoConfig,
+  Video,
 } from 'remotion'
 import { linearTiming, TransitionSeries } from '@remotion/transitions'
 import { fade } from '@remotion/transitions/fade'
 
-interface Video {
-  durationInFrames: number
-}
-
-export type Props = {
+export type VideoProps = {
   id: string
-  coverImage: string
+  eventName: string
   transitionDuration?: number
 }
 
-export const JoinVideos: React.FC<Props> = ({
+export const JoinVideos: React.FC<VideoProps> = ({
   id,
-  coverImage,
+  eventName,
   transitionDuration,
 }) => {
   const duration = transitionDuration || 25 // 1 sec
   const { durationInFrames } = useVideoConfig()
-  const introFile = staticFile(`secureum${coverImage}`)
-  const videoFile = staticFile(`secureum/videos/${id}.mp4`)
-  const music = staticFile('secureum/disco.mp3')
+  const introFile = staticFile(`${eventName}/images/${id}.jpg`)
+  const videoFile = staticFile(`${eventName}/videos/${id}.mp4`)
+  const music = staticFile(`${eventName}/disco.mp3`)
 
   return (
     <AbsoluteFill color="black">
@@ -44,7 +41,7 @@ export const JoinVideos: React.FC<Props> = ({
         />
         <TransitionSeries.Sequence
           durationInFrames={durationInFrames}>
-          <OffthreadVideo src={videoFile} />
+          <Video src={videoFile} />
         </TransitionSeries.Sequence>
       </TransitionSeries>
       <Audio src={music} />
