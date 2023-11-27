@@ -8,15 +8,15 @@ import {
   getVideoMetadata,
 } from '@remotion/renderer'
 import { RenderMediaOnProgress } from '@remotion/renderer'
-import { createClient, studioProvider } from '@livepeer/react'
-import { createReadStream, existsSync, mkdirSync } from 'fs'
-import path from 'path'
+import { existsSync, mkdirSync } from 'fs'
 import { webpackOverride } from '../webpack-override'
 import { CONFIG } from '../utils/config'
 import { IEvent, ISession } from 'utils/types'
 import { VideoProps } from 'compositions/join'
 import { VideoConfig } from 'remotion'
-import uploadAsset from 'utils/uploadAsset'
+import { uploadAssetToLivepeer } from '../services/livepeer'
+import uploadAssetToGoogle from '../utils/uploadAsset'
+import { downloadVideoFromLivepeer } from 'services/livepeer'
 
 let lastProgressPrinted = -1
 
@@ -31,15 +31,10 @@ const processArgs = process.argv
   .slice(2)
   .filter((i) => !i.startsWith('--'))
 
-if (!process.env.LIVEPEER_APIKEY) {
-  console.error('process.env.LIVEPEER_APIKEY is not defined')
+if (!process.env.LIVEPEER_API_KEY) {
+  console.error('process.env.LIVEPEER_API_KEY is not defined')
   process.exit(1)
 }
-const { provider } = createClient({
-  provider: studioProvider({
-    apiKey: process.env.LIVEPEER_APIKEY ?? '',
-  }),
-})
 
 const onProgress: RenderMediaOnProgress = ({ progress }) => {
   const progressPercent = Math.floor(progress * 100)
@@ -75,7 +70,7 @@ async function start(args: string[]) {
     const res = await fetch(
       `${apiBaseUri}/organizations/${event.organizationId}/events/${event.id}/sessions`
     )
-    const sessions = await res.json()
+    const sessions: ISession[] = await res.json()
     if (sessions.length === 0) {
       console.log('No sessions found. Skip rendering')
       continue
@@ -103,17 +98,36 @@ async function start(args: string[]) {
       )
       if (composition.length !== 1) {
         console.error(
-          'Something went wrong filtering the compositions. Iterating to the next session'
+          'Something went wrong filtering through the compositions. Iterating to the next session'
         )
         continue
       }
 
-      await generateEventAssets(
-        session,
-        composition[0],
-        event,
-        bundled
-      )
+      if (!session.playbackId) {
+        console.error(
+          'videoUrl does not exist. Iterating to the next session'
+        )
+        continue
+      }
+
+      try {
+        await downloadVideoFromLivepeer(
+          session.name,
+          event.id,
+          session.playbackId
+        )
+        await generateEventAssets(
+          session,
+          composition[0],
+          event,
+          bundled
+        )
+      } catch (e) {
+        console.log(
+          `Error downloading video for ${session.name}: ${e}`
+        )
+        continue
+      }
     }
   }
 }
@@ -210,7 +224,10 @@ async function generateEventAssets(
     const id = `${session.id}_thumbnail.jpg`
     const type = 'video/mp4'
 
-    uploadAsset(id, videoFilePath, type, folderId, force)
+    uploadAssetToGoogle(id, videoFilePath, type, folderId, force)
+    await uploadAssetToLivepeer(session, videoFilePath).catch((e) => {
+      console.error('An error while uploading to Livepeer: ', e)
+    })
   }
 
   const thumbnailFilePath = `out/${event.id}/images/${composition.id}.jpg`
@@ -226,33 +243,9 @@ async function generateEventAssets(
     const id = `${session.id}_thumbnail.jpg`
     const type = 'image/png'
 
-    uploadAsset(id, thumbnailFilePath, type, folderId, force)
+    uploadAssetToGoogle(id, thumbnailFilePath, type, folderId, force)
   }
-
-  // await uploadAsset(`out/sessions/${composition.id}.mp4`)
 }
-
-// async function uploadAsset(filePath: string) {
-//   console.log('Uploading asset..')
-//   const videoName = path.basename(filePath, '.mp4')
-//   const stream = createReadStream(filePath)
-//   await provider.createAsset({
-//     sources: [
-//       {
-//         name: `${event}-${videoName}`,
-//         file: stream,
-//         storage: {
-//           ipfs: true,
-//           metadata: {
-//             name: `${event}-${videoName}`,
-//           },
-//         },
-//       },
-//     ],
-//   })
-//
-//   console.log(`Uploaded asset ${videoName}`)
-// }
 
 start(processArgs)
   .then(() => {

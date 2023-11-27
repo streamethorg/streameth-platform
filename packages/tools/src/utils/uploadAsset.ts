@@ -5,7 +5,7 @@ import {
   UploadOrUpdate,
 } from 'services/slides'
 
-export default async function uploadAsset(
+export default async function uploadAssetToGoogle(
   id: string,
   path: string,
   type: string,
