@@ -118,9 +118,17 @@ async function start(args: string[]) {
           session.playbackId
         )
 
-        const thumbnailFilePath = join(process.cwd(), 'public', event.id, 'animations', session.id)
+        const thumbnailFilePath = join(
+          process.cwd(),
+          'public',
+          event.id,
+          'animations',
+          session.id
+        )
         if (!existsSync(thumbnailFilePath)) {
-          console.error(`Animation at ${thumbnailFilePath} does not exist`)
+          console.error(
+            `Animation at ${thumbnailFilePath} does not exist`
+          )
           console.log('Please render the animations first')
           continue
         }
@@ -162,9 +170,7 @@ async function generateEventAssets(
   }
 
   if (!folderId) {
-    console.warn(
-      'No Google Drive data exporter found.'
-    )
+    console.warn('No Google Drive data exporter found.')
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
