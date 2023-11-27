@@ -17,6 +17,7 @@ import { VideoConfig } from 'remotion'
 import { uploadAssetToLivepeer } from '../services/livepeer'
 import uploadAssetToGoogle from '../utils/uploadAsset'
 import { downloadVideoFromLivepeer } from 'services/livepeer'
+import getThumbnail from 'utils/getThumbnail'
 
 let lastProgressPrinted = -1
 
@@ -116,6 +117,14 @@ async function start(args: string[]) {
           event.id,
           session.playbackId
         )
+
+        const thumbnailFilePath = join(process.cwd(), 'public', event.id, 'animations', session.id)
+        if (!existsSync(thumbnailFilePath)) {
+          console.error(`Animation at ${thumbnailFilePath} does not exist`)
+          console.log('Please render the animations first')
+          continue
+        }
+
         await generateEventAssets(
           session,
           composition[0],
@@ -124,7 +133,7 @@ async function start(args: string[]) {
         )
       } catch (e) {
         console.log(
-          `Error downloading video for ${session.name}: ${e}`
+          `An error occured for video ${session.name}: ${e}`
         )
         continue
       }
@@ -153,10 +162,9 @@ async function generateEventAssets(
   }
 
   if (!folderId) {
-    console.error(
-      'No Google Drive data exporter found. Skip rendering'
+    console.warn(
+      'No Google Drive data exporter found.'
     )
-    return
   }
 
   const eventFolder = join(CONFIG.ASSET_FOLDER, event.id)
@@ -220,14 +228,14 @@ async function generateEventAssets(
   })
   lastProgressPrinted = -1
 
+  await uploadAssetToLivepeer(session, videoFilePath).catch((e) => {
+    console.error('An error while uploading to Livepeer: ', e)
+  })
   if (uploadGoogledrive) {
     const id = `${session.id}_thumbnail.jpg`
     const type = 'video/mp4'
 
     uploadAssetToGoogle(id, videoFilePath, type, folderId, force)
-    await uploadAssetToLivepeer(session, videoFilePath).catch((e) => {
-      console.error('An error while uploading to Livepeer: ', e)
-    })
   }
 
   const thumbnailFilePath = `out/${event.id}/images/${composition.id}.jpg`
