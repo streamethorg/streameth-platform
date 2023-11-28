@@ -17,7 +17,7 @@
   ],
   "eventCover": "staking_cover.jpeg",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "staking_logo.png",
   "banner": "staking_cover.jpeg",
