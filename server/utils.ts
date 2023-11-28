@@ -35,5 +35,5 @@ export const apiUrl = () => {
 }
 
 export const getImageUrl = (image: string) => {
-  return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
+  return `https://raw.githubusercontent.com/streamethorg/streameth-platform/develop/images${image}`
 }
