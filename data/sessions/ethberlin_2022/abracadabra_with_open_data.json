@@ -15,5 +15,6 @@
   ],
   "videoUrl": "https://livepeercdn.com/recordings/24eaef0e-ce34-4b04-a90f-08aa64aa91f3/index.m3u8",
   "playbackId": "24eaef0e-ce34-4b04-a90f-08aa64aa91f3",
-  "eventId": "ethberlin_2022"
+  "eventId": "ethberlin_2022",
+  "coverImage": "/sessions/ethberlin_2022/abracadabra_with_open_data.jpg"
 }
