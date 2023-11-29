@@ -1,7 +1,9 @@
 import {
   Sequence,
   AbsoluteFill,
-  staticFile, Audio, useVideoConfig,
+  staticFile,
+  Audio,
+  useVideoConfig,
   useCurrentFrame,
   interpolate,
   Img,
@@ -112,9 +114,11 @@ export const Intro: React.FC<Props> = ({ session }) => {
       </AbsoluteFill>
 
       <AbsoluteFill>
-        <div className="flex py-12 px-24 flex-col w-full space-between justify-between text-white" style={{
-          fontFamily: 'FK Raster Grotesk',
-        }}>
+        <div
+          className="flex py-12 px-24 flex-col w-full space-between justify-between text-white"
+          style={{
+            fontFamily: 'FK Raster Grotesk',
+          }}>
           <div
             className="flex relative h-32"
             style={{ opacity: initialOpacity }}>

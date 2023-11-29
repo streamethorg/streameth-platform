@@ -10,7 +10,7 @@ export const DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive']
 // MAKE SURE NOT TO COMMIT THE SECRET FILES
 const google = AuthenticateServiceAccount([
   ...PRESENTATION_SCOPES,
-  ...DRIVE_SCOPES
+  ...DRIVE_SCOPES,
 ])
 
 export async function CreateFolders(
@@ -23,7 +23,9 @@ export async function CreateFolders(
 
   for (const folder of folders) {
     const exists = await client.files.list({
-      q: `name='${folder}' and trashed=false and mimeType='application/vnd.google-apps.folder' and ${parentId ? `'${parentId}' in parents` : ''}`,
+      q: `name='${folder}' and trashed=false and mimeType='application/vnd.google-apps.folder' and ${
+        parentId ? `'${parentId}' in parents` : ''
+      }`,
       corpora: 'drive',
       spaces: 'drive',
       driveId: '0AMKHrdGKMYAeUk9PVA',
@@ -52,7 +54,8 @@ export async function CreateFolders(
 export async function CreateSlide(title: string, parentId?: string) {
   console.log('CreateSlide', title)
 
-  const presentation = await google.slides('v1')
+  const presentation = await google
+    .slides('v1')
     .presentations.create({
       requestBody: {
         title: title,
@@ -164,7 +167,8 @@ export async function UploadOrUpdate(
   name: any,
   path: string,
   type: string = 'video/mp4',
-  parentId: string) {
+  parentId: string
+) {
   try {
     const fileExists = await FileExists(name, type, parentId)
     if (!fileExists) {
@@ -175,19 +179,24 @@ export async function UploadOrUpdate(
     if (fileId) {
       return UpdateDrive(name, path, type, fileId, parentId)
     }
-
   } catch (ex) {
     console.log('Unable to upload to Google Drive', name)
     console.error(ex)
   }
 }
 
-export async function GetFileId(name: string, type: string, parentId: string) {
+export async function GetFileId(
+  name: string,
+  type: string,
+  parentId: string
+) {
   try {
     const client = google.drive('v3')
 
     const files = await client.files.list({
-      q: `name='${name}' and mimeType = '${type}' and trashed=false and ${parentId ? `'${parentId}' in parents` : ''}`,
+      q: `name='${name}' and mimeType = '${type}' and trashed=false and ${
+        parentId ? `'${parentId}' in parents` : ''
+      }`,
       corpora: 'drive',
       spaces: 'drive',
       driveId: CONFIG.GOOGLE_DRIVE_ID,
@@ -204,7 +213,11 @@ export async function GetFileId(name: string, type: string, parentId: string) {
   }
 }
 
-export async function FileExists(name: string, type: string, parentId: string) {
+export async function FileExists(
+  name: string,
+  type: string,
+  parentId: string
+) {
   const id = await GetFileId(name, type, parentId)
   return id !== undefined
 }

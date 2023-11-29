@@ -28,7 +28,12 @@
     "end": 1694275800000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "david_casey", "name": "David Casey", "bio": "Protocol Labs/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "david_casey",
+        "name": "David Casey",
+        "bio": "Protocol Labs/Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -74,7 +79,14 @@
     "start": 1694269200000,
     "end": 1694270400000,
     "stageId": "mainstage",
-    "speakers": [{ "id": "tony_lai", "name": "Tony Lai", "bio": "CodeX Stanford Blockchain Group", "eventId": "funding_the_commons_berlin_2023" }],
+    "speakers": [
+      {
+        "id": "tony_lai",
+        "name": "Tony Lai",
+        "bio": "CodeX Stanford Blockchain Group",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
+    ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/ecoweaving_collective_action_for_the_ecocommons.jpg"
@@ -87,7 +99,12 @@
     "end": 1694275200000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "holke_brammer", "name": "Holke Brammer", "bio": "Protocol Labs/ Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "holke_brammer",
+        "name": "Holke Brammer",
+        "bio": "Protocol Labs/ Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -121,7 +138,12 @@
     "end": 1694247000000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "sara_johnstone", "name": "Sara Johnstone", "bio": "Numundo/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "sara_johnstone",
+        "name": "Sara Johnstone",
+        "bio": "Numundo/Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -135,7 +157,12 @@
     "end": 1694245800000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "vivian_chen", "name": "Vivian Chen", "bio": "Funding the Commons", "eventId": "funding_the_commons_berlin_2023" },
+      {
+        "id": "vivian_chen",
+        "name": "Vivian Chen",
+        "bio": "Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      },
       {
         "id": "noah_yeh",
         "name": "Noah Yeh",
@@ -239,7 +266,14 @@
     "start": 1694271600000,
     "end": 1694272800000,
     "stageId": "mainstage",
-    "speakers": [{ "id": "nadiem_sissouno", "name": "Nadiem Sissouno", "bio": "No description", "eventId": "funding_the_commons_berlin_2023" }],
+    "speakers": [
+      {
+        "id": "nadiem_sissouno",
+        "name": "Nadiem Sissouno",
+        "bio": "No description",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
+    ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/making_or_breaking_the_stablecoin_market.jpg"
@@ -272,7 +306,14 @@
     "start": 1694272800000,
     "end": 1694274000000,
     "stageId": "mainstage",
-    "speakers": [{ "id": "julian_zawistowski", "name": "Julian Zawistowski", "bio": "Golem", "eventId": "funding_the_commons_berlin_2023" }],
+    "speakers": [
+      {
+        "id": "julian_zawistowski",
+        "name": "Julian Zawistowski",
+        "bio": "Golem",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
+    ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/octant_and_beyond_ideas_for_regenerative_web3_selffunding.jpg"
@@ -306,7 +347,12 @@
     "end": 1694245200000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "david_casey", "name": "David Casey", "bio": "Protocol Labs/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "david_casey",
+        "name": "David Casey",
+        "bio": "Protocol Labs/Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -320,7 +366,12 @@
     "end": 1694262600000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "angela_kreitenweis", "name": "Angela Kreitenweis", "bio": "TE Academy, Founder", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "angela_kreitenweis",
+        "name": "Angela Kreitenweis",
+        "bio": "TE Academy, Founder",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -334,7 +385,12 @@
     "end": 1694261400000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "david_casey", "name": "David Casey", "bio": "Protocol Labs/Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "david_casey",
+        "name": "David Casey",
+        "bio": "Protocol Labs/Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -377,7 +433,12 @@
         "twitter": "@WassimAlsindi",
         "photo": "https://pbs.twimg.com/profile_images/1678510714594394116/i7Jpe1EC_400x400.jpg"
       },
-      { "id": "beth_mccarthy", "name": "Beth McCarthy", "bio": "Curve Labs, Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "beth_mccarthy",
+        "name": "Beth McCarthy",
+        "bio": "Curve Labs, Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -412,7 +473,12 @@
     "end": 1694267400000,
     "stageId": "mainstage",
     "speakers": [
-      { "id": "eleftherios_diakomichalis", "name": "Eleftherios Diakomichalis", "bio": "Drips", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "eleftherios_diakomichalis",
+        "name": "Eleftherios Diakomichalis",
+        "bio": "Drips",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",
@@ -434,7 +500,12 @@
         "twitter": "@mptherealmvp",
         "photo": "https://pbs.twimg.com/profile_images/1691792912885948416/DCDgdfND_400x400.jpg"
       },
-      { "id": "beth_mccarthy", "name": "Beth McCarthy", "bio": "Curve Labs, Funding the Commons", "eventId": "funding_the_commons_berlin_2023" }
+      {
+        "id": "beth_mccarthy",
+        "name": "Beth McCarthy",
+        "bio": "Curve Labs, Funding the Commons",
+        "eventId": "funding_the_commons_berlin_2023"
+      }
     ],
     "playbackId": "",
     "eventId": "funding_the_commons_berlin_2023",

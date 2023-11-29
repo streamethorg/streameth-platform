@@ -12,8 +12,7 @@ export async function validImageUrl(url?: string) {
     const buff = await res.blob()
 
     return buff.type.startsWith('image/')
-  }
-  catch (e) {
+  } catch (e) {
     return false
   }
 }

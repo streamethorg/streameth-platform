@@ -16,13 +16,15 @@ import {
 } from './devconnect'
 import { DevconnectISTProps, Intro } from './devconnect/intro'
 import { Social } from './devconnect/social'
-import { Intro as ProgCryptoIntro, ProgCryptoProps } from './progcrypto/intro'
+import {
+  Intro as ProgCryptoIntro,
+  ProgCryptoProps,
+} from './progcrypto/intro'
 import { WideIntro as ProgCryptoWideIntro } from './progcrypto/intro_wide'
 import { Social as ProgCryptoSocial } from './progcrypto/social'
 import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
 import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
-import { JoinVideos } from './join'
-import { SessionSchema } from '../utils/mocks'
+import { JoinVideos, VideoProps } from './join'
 
 export function Compositions() {
   const waitForFont = delayRender()
@@ -69,7 +71,6 @@ export function Compositions() {
     .catch((err) =>
       console.log('Error loading progCryptoFont_Med font', err)
     )
-
   progCryptoFont_Reg
     .load()
     .then(() => {
@@ -224,33 +225,20 @@ export function Compositions() {
         />
       </Folder>
 
-      <Composition
-        id={'join-videos'}
-        component={JoinVideos}
-        width={1920}
-        height={1080}
-        fps={25}
-        durationInFrames={525} // Total of all video durations minus 25 frames (1 sec) per transition
-        defaultProps={{
-          videos: [
-            {
-              pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              duration: 150,
-            },
-            {
-              pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              duration: 300,
-            },
-            {
-              pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              duration: 150,
-            },
-          ],
-        }}
-      />
+      <Folder name="join-videos">
+        <Composition
+          id={`secureum-trustx-wtf-is-l1-security-and-how-to-think-about-it`}
+          component={JoinVideos}
+          width={1920}
+          height={1080}
+          fps={25}
+          durationInFrames={28771 + 125} // Video + animation
+          defaultProps={{
+            id: 'wtf_is_l1_security_and_how_to_think_about_it',
+            eventName: 'secureum_trustx',
+          }}
+        />
+      </Folder>
     </>
   )
 }

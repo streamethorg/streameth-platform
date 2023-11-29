@@ -7,7 +7,11 @@ export const AUTH_SCOPES = [
   'https://www.googleapis.com/auth/youtube.upload',
 ]
 
-export async function updateAsset(id: string, title: string, description: string) {
+export async function updateAsset(
+  id: string,
+  title: string,
+  description: string
+) {
   console.log('Update asset', id, title, description)
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES
@@ -30,7 +34,10 @@ export async function updateAsset(id: string, title: string, description: string
   }
 }
 
-export async function addThumbnail(id: string, thumbnailPath: string) {
+export async function addThumbnail(
+  id: string,
+  thumbnailPath: string
+) {
   console.log('Add thumbnail', id, thumbnailPath)
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES

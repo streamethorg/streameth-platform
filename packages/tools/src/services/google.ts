@@ -7,7 +7,11 @@ export async function Authenticate(scopes: string[]) {
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES
   const auth = await authenticate({
-    keyfilePath: path.join(__dirname, '../../', 'google_client_secret.json'),
+    keyfilePath: path.join(
+      __dirname,
+      '../../',
+      'google_client_secret.json'
+    ),
     scopes,
   })
   google.options({ auth })

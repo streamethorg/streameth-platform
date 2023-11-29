@@ -13,9 +13,13 @@ app.get('/', async (req: Request, res: Response) => {
 })
 
 app.get('/process', async (req: Request, res: Response) => {
-  const resp = await fetch('https://app.streameth.org/api/organizations/streameth/events/test_summit_2023/sessions')
+  const resp = await fetch(
+    'https://app.streameth.org/api/organizations/streameth/events/test_summit_2023/sessions'
+  )
   const sessions = await resp.json()
-  const toProcess = sessions.filter((i: any) => i.source && !i.videoUrl)
+  const toProcess = sessions.filter(
+    (i: any) => i.source && !i.videoUrl
+  )
 
   console.log('SESSIONS TO PROCESS', toProcess.length)
 
@@ -36,5 +40,7 @@ app.get('/process', async (req: Request, res: Response) => {
 })
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`)
+  console.log(
+    `[server]: Server is running at http://localhost:${port}`
+  )
 })

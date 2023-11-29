@@ -7,7 +7,10 @@ export function GetData(folderPath: string, fileExtension = '.json') {
 
   for (const i of items) {
     if (i.isDirectory()) {
-      const subFiles = GetData(join(folderPath, i.name), fileExtension)
+      const subFiles = GetData(
+        join(folderPath, i.name),
+        fileExtension
+      )
       files.push(...subFiles)
     }
 

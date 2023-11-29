@@ -1,4 +1,7 @@
-export function splitTextIntoArray(text: string, maxLen: number): string[] {
+export function splitTextIntoArray(
+  text: string,
+  maxLen: number
+): string[] {
   const words = text.split(' ')
   const lines: string[] = ['']
   let lineIndex = 0
@@ -15,7 +18,10 @@ export function splitTextIntoArray(text: string, maxLen: number): string[] {
   return lines
 }
 
-export function splitTextIntoString(text: string, maxLen: number): string {
+export function splitTextIntoString(
+  text: string,
+  maxLen: number
+): string {
   const words = text.split(' ')
   const lines: string[] = ['']
   let lineIndex = 0
