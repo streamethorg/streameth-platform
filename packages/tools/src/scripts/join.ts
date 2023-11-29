@@ -17,7 +17,6 @@ import { VideoConfig } from 'remotion'
 import { uploadAssetToLivepeer } from '../services/livepeer'
 import uploadAssetToGoogle from '../utils/uploadAsset'
 import { downloadVideoFromLivepeer } from 'services/livepeer'
-import getThumbnail from 'utils/getThumbnail'
 
 let lastProgressPrinted = -1
 
