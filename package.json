@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "yarn workspace @streameth/streameth-app build",
-    "start": "yarn workspace @streameth/streameth-app dev",
+    "dev": "yarn workspace @streameth/streameth-app dev",
+    "start": "yarn workspace @streameth/streameth-app start",
     "next:lint": "yarn workspace @streameth/streameth-app lint",
     "prettier:fix": "yarn workspace @streameth/streameth-app  prettier",
     "prettier:check": "yarn workspace @streameth/streameth-app prettier",
@@ -19,7 +20,7 @@
     "split": "yarn workspace @streameth/av-tools run:split",
     "join": "yarn workspace @streameth/av-tools run:join",
     "upload": "yarn workspace @streameth/av-tools run:upload",
-    "install:all": "yarn --cwd packages/tools && yarn --cwd server/ && yarn"
+    "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn"
   }
 
 }
