@@ -14,7 +14,7 @@
     "start": "yarn workspace @streameth/streameth-app dev",
     "next:lint": "yarn workspace @streameth/streameth-app lint",
     "prettier:fix": "yarn workspace @streameth/streameth-app  prettier",
-    "prettier:check": "yarn workspace @streameth/streameth-app prettier --check",
+    "prettier:check": "yarn workspace @streameth/streameth-app prettier",
     "tools": "yarn workspace @streameth/av-tools tools",
     "split": "yarn workspace @streameth/av-tools run:split",
     "join": "yarn workspace @streameth/av-tools run:join",
