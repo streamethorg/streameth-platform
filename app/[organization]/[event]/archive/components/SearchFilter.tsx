@@ -4,18 +4,25 @@ import {
   FilterContext,
   FilterOption,
 } from '../../../../../components/context/FilterContext'
+import { ISession } from '@/server/model/session'
+import { IEvent } from '@/server/model/event'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
   filterName: string
+  items: ISession[] | IEvent[]
 }
 
 const SearchFilter = <T extends object>({
+  items,
   filterOptions,
   filterName,
 }: FilterProps<T>) => {
-  const { setFilterOptions, filterOptions: currentFilterOptions } =
-    useContext(FilterContext)
+  const {
+    setFilterOptions,
+    setItems,
+    filterOptions: currentFilterOptions,
+  } = useContext(FilterContext)
   const [selectedItems, setSelectedItems] = useState<
     FilterOption<T>[]
   >([])
@@ -39,7 +46,29 @@ const SearchFilter = <T extends object>({
         setSelectedItems((prevItems) => [...prevItems, option])
       }
     })
+
+    return () => {
+      setItems([])
+      performFilter()
+      clearSelectedOption()
+    }
   }, [])
+
+  useEffect(() => {
+    const filteredEvents = items.filter((event) => {
+      return event.name
+        .toLowerCase()
+        .includes(filterInput.toLowerCase())
+    })
+
+    if (filterInput === '') {
+      clearSelectedOption()
+    }
+
+    setItems(filteredEvents)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, filterInput])
 
   const handleOptionSelect = (option: FilterOption<T>) => {
     setSelectedItems([option])
@@ -71,7 +100,7 @@ const SearchFilter = <T extends object>({
 
   return (
     <div className="flex flex-col justify-between font-light w-full h-full">
-      <div className="lg:relative">
+      <div className="relative">
         <div className="relative">
           <input
             type="text"

@@ -1,24 +1,21 @@
 'use client'
 import { useRef } from 'react'
 import SearchFilter from '@/app/[organization]/[event]/archive/components/SearchFilter'
-import { ISession } from '@/server/model/session'
 import { IEvent } from '@/server/model/event'
 
-function FilterBar({ events }: { events?: IEvent[] }) {
+function FilterBar({ events }: { events: IEvent[] }) {
   const inputBarRef = useRef<HTMLDivElement>(null)
 
-  const eventFilters = events
-    ? events.map((event) => {
-        return {
-          name: event.name,
-          value: event.id,
-          type: 'event',
-          filterFunc: async (item: ISession) => {
-            return item.eventId === event.id
-          },
-        }
-      })
-    : []
+  const eventFilters = events.map((event) => {
+    return {
+      name: event.name,
+      value: event.name,
+      type: 'name',
+      filterFunc: async (item: IEvent) => {
+        return item.name === event.name
+      },
+    }
+  })
 
   return (
     <div
@@ -28,6 +25,7 @@ function FilterBar({ events }: { events?: IEvent[] }) {
       <div className="flex flex-col justify-top items-start  w-full h-full">
         <div className="flex flex-row w-full h-full items-center justify-center">
           <SearchFilter
+            items={events}
             filterOptions={eventFilters}
             filterName="Event name"
           />
