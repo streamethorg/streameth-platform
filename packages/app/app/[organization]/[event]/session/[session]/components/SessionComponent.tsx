@@ -7,8 +7,8 @@ import EmbedButton from '@/components/misc/EmbedButton'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
-import Session from '../../../../../../../server/model/session'
-import { IEvent } from '../../../../../../../server/model/event'
+import Session from 'streameth-server/model/session'
+import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/utils'
 
 const SpeakerComponent = ({ session }: { session: Session }) => {

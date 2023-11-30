@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
-import { IOrganization } from '../../../../server/model/organization'
+import { IOrganization } from 'streameth-server/model/organization'
 
 interface OrganizationFormProps {
   onSuccess?: () => void
@@ -69,7 +69,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({
   }
 
   return (
-    <>
+    <div className="p-4 ">
       <h1 className="font-bold text-center mb-3">
         Add an organization. All inputs are required
       </h1>
@@ -136,12 +136,12 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({
         </label>
         <button
           type="submit"
-          className="p-2 bg-blue-500 text-white rounded"
+          className="p-2 bg-blue rounded-xl text-white w-full"
           disabled={submitting}>
           {submitting ? 'Submitting...' : 'Submit'}
         </button>
       </form>
-    </>
+    </div>
   )
 }
 

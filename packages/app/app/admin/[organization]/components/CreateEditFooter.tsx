@@ -8,7 +8,7 @@ import { EventFormContext } from './EventFormContext'
 import UseAdminContext from '@/app/hooks/useAdminContext'
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
-import { IEvent } from '../../../../../server/model/event'
+import { IEvent } from 'streameth-server/model/event'
 const CreateEditFooter = () => {
   const { currentStep, setCurrentStep, event } = UseAdminContext()
 

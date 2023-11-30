@@ -1,5 +1,5 @@
-import { writeFile } from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
+import S3Service from 'streameth-server/services/s3'
 export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -16,7 +16,13 @@ export async function POST(
 
   // With the file data in the buffer, you can do whatever you want with it.
   // For this, we'll just write it to the filesystem in a new location
-  await writeFile(`./public/events/${file.name}`, buffer)
+  const s3 = new S3Service()
+  const result = await s3.uploadFile(
+    'streamethapp',
+    `events/${params.id}/${file.name}`,
+    buffer,
+    file.type
+  )
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true, result })
 }

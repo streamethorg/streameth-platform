@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
 import { Button } from '@/app/utils/Button'
 import EditOrganizationForm from './EditOranizationForm'
-import { IOrganization } from '../../../../server/model/organization'
+import { IOrganization } from 'streameth-server/model/organization'
 
 const EditOrganizationButton = ({
   organization,

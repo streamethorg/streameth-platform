@@ -16,7 +16,7 @@ import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
 import LivepeerIcon from '@/app/assets/icons/LivepeerIcon'
 import Chat from '@/plugins/Chat'
-import { IEvent } from '../../../../../../../server/model/event'
+import { IEvent } from 'streameth-server/model/event'
 
 export default function StageLayout({ event }: { event: IEvent }) {
   const stickyRef = useRef<HTMLDivElement>(null)

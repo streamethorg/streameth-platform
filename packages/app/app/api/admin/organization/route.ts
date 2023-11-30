@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Session from '@/utils/session'
-import EventController from '../../../../../server/controller/event'
-import OrganizationController from '../../../../../server/controller/organization'
-import { IOrganization } from '../../../../../server/model/organization'
-import { generateId } from '../../../../../server/utils'
+import EventController from 'streameth-server/controller/event'
+import OrganizationController from 'streameth-server/controller/organization'
+import { IOrganization } from 'streameth-server/model/organization'
+import { generateId } from 'streameth-server/utils'
 
 /*
  * The events of the organization will also be deleted

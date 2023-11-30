@@ -1,9 +1,10 @@
 {
-  "name": "streameth-cli",
+  "name": "streameth-server",
   "version": "1.0.0",
   "main": "index.tsx",
   "license": "MIT",
   "module": "CommonJS",
+  "private": true,
   "scripts": {
     "cli": "ts-node cli.ts",
     "local-test": "ts-node test.ts",
@@ -11,6 +12,8 @@
     "change-image": "ts-node ./utils/change_thumbnail.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.462.0",
+    "aws-sdk": "^2.1508.0",
     "class-validator": "^0.14.0",
     "fluent-ffmpeg": "^2.1.2",
     "googleapis": "^118.0.0",

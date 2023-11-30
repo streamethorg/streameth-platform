@@ -1,0 +1,41 @@
+{
+  "id": "base_event",
+  "name": "Base event",
+  "description": "This is the description of the base event for ",
+  "start": "2023-12-08T00:00:00.000Z",
+  "end": "2023-12-12T00:00:00.000Z",
+  "location": "Miami",
+  "organizationId": "base",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "",
+        "apiKey": "1qQ9aFLIVo60jWi5Thtel67EvxMRi2af-nev_vBP-3wg"
+      }
+    }
+  ],
+  "eventCover": "undefined.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "(UTC-05:00) Eastern Time (US & Canada)",
+  "logo": "base_logo.png",
+  "banner": "base_banner.png",
+  "accentColor": "#0052ff",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "s",
+        "driveApiKey": "s"
+      }
+    }
+  ],
+  "startTime": "19:46",
+  "endTime": "22:52",
+  "enableVideoDownloader": true,
+  "unlisted": false,
+  "plugins": {
+    "disableChat": false
+  }
+}

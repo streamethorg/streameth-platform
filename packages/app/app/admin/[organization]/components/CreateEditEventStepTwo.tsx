@@ -8,7 +8,7 @@ import FormLabel from '@/app/utils/FormLabel'
 import {
   GSheetConfig,
   PretalxConfig,
-} from '../../../../../server/model/event'
+} from 'streameth-server/model/event'
 
 const initialImporterConfig: GSheetConfig & PretalxConfig = {
   sheetId: '',

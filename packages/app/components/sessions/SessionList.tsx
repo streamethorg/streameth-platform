@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from 'react'
 import Scroll, { Element } from 'react-scroll'
-import { ISession } from '../../../server/model/session'
+import { ISession } from 'streameth-server/model/session'
 import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 
 interface Props {

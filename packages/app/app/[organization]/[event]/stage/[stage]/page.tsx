@@ -3,9 +3,9 @@ import { getEventDays, isSameDay } from '@/utils/time'
 import StageLayout from './components/StageLayout'
 import { StageContextProvider } from './components/StageContext'
 import type { Metadata, ResolvingMetadata } from 'next'
-import EventController from '../../../../../../server/controller/event'
-import StageController from '../../../../../../server/controller/stage'
-import SessionController from '../../../../../../server/controller/session'
+import EventController from 'streameth-server/controller/event'
+import StageController from 'streameth-server/controller/stage'
+import SessionController from 'streameth-server/controller/session'
 interface Params {
   params: {
     organization: string

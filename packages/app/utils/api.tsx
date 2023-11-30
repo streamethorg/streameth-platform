@@ -1,8 +1,10 @@
-import { IEvent } from "../../server/model/event"
-import { ISession } from "../../server/model/session"
+import { IEvent } from 'streameth-server/model/event'
+import { ISession } from 'streameth-server/model/session'
 
-
-export function extractSearchParams<T extends Record<string, any>>(searchParams: URLSearchParams, keys: (keyof T)[]): T {
+export function extractSearchParams<T extends Record<string, any>>(
+  searchParams: URLSearchParams,
+  keys: (keyof T)[]
+): T {
   const params: Partial<T> = {}
   for (const key of keys) {
     const value = searchParams.get(key as string)
@@ -15,7 +17,17 @@ export function extractSearchParams<T extends Record<string, any>>(searchParams:
   return params as T
 }
 
-export const getSessions = async ({ event, timestamp, stage, date }: { event: IEvent; timestamp?: number; stage?: string; date?: number }) => {
+export const getSessions = async ({
+  event,
+  timestamp,
+  stage,
+  date,
+}: {
+  event: IEvent
+  timestamp?: number
+  stage?: string
+  date?: number
+}) => {
   const baseUrl = `/api/organizations/${event.organizationId}/events/${event.id}/sessions`
   const params = new URLSearchParams()
 

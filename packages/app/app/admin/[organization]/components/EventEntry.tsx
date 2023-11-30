@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 import AdminItemCard from '../../components/utils/AdminItemCard'
 import { ModalContext } from '@/components/context/ModalContext'
-import { IEvent } from '../../../../../server/model/event'
+import { IEvent } from 'streameth-server/model/event'
 
 interface EventEntryProps {
   event: IEvent
