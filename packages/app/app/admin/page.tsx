@@ -1,4 +1,3 @@
-
 import OrganizationController from '../../../server/controller/organization'
 import AddOrganizationButton from './components/AddOrganization'
 import OrganizationEntry from './components/OrganizationEntry'
@@ -15,7 +14,10 @@ const OrganizationList = async () => {
       </div>
       <ul className="space-y-4 p-4">
         {organizations.map((org) => (
-          <OrganizationEntry key={org.id} organization={org} />
+          <OrganizationEntry
+            key={org.id}
+            organization={org.toJson()}
+          />
         ))}
       </ul>
     </div>

@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 import EditOrganizationButton from './EditOrganizationButton'
 import Link from 'next/link'
-import { Button } from '@/components/utils/Button'
+import { Button } from '@/app/utils/Button'
 import { ModalContext } from '@/components/context/ModalContext'
 import { IOrganization } from '../../../../server/model/organization'
 

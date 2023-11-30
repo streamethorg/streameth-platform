@@ -1,7 +1,6 @@
-
 import { notFound } from 'next/navigation'
 
-import ColorComponent from '../../../components/utils/ColorComponent'
+import ColorComponent from '../../utils/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
 import { ArchiveContext } from '@/components/context/ArchiveContext'
 import EventController from '../../../../server/controller/event'

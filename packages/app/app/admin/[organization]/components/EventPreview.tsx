@@ -8,13 +8,12 @@ import {
   CameraIcon,
 } from '@heroicons/react/24/outline'
 import colors from '@/app/constants/colors'
-import { Button } from '@/components/utils/Button'
+import { Button } from '@/app/utils/Button'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { ModalContext } from '@/components/context/ModalContext'
 import useAdminContext from '@/app/hooks/useAdminContext'
 import { getImageUrl } from '@/utils'
-
 
 const ItemButton = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-row justify-center">

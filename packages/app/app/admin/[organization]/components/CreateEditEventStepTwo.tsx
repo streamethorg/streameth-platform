@@ -1,11 +1,14 @@
-import { FormTextInput } from '@/components/utils/FormTextInput'
+import { FormTextInput } from '@/app/utils/FormTextInput'
 import React, { useEffect, useState } from 'react'
-import FormRadio from '@/components/utils/FormRadio'
-import FormRadioBox from '@/components/utils/FormRadioBox'
+import FormRadio from '@/app/utils/FormRadio'
+import FormRadioBox from '@/app/utils/FormRadioBox'
 import UseAdminContext from '@/app/hooks/useAdminContext'
-import FormCheckbox from '@/components/utils/FormCheckbox'
-import FormLabel from '@/components/utils/FormLabel'
-import { GSheetConfig, PretalxConfig } from '../../../../../server/model/event'
+import FormCheckbox from '@/app/utils/FormCheckbox'
+import FormLabel from '@/app/utils/FormLabel'
+import {
+  GSheetConfig,
+  PretalxConfig,
+} from '../../../../../server/model/event'
 
 const initialImporterConfig: GSheetConfig & PretalxConfig = {
   sheetId: '',

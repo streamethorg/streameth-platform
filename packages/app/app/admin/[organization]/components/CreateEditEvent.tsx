@@ -7,7 +7,7 @@ import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
 import CreateEditFooter from './CreateEditFooter'
 import { EventFormContext } from './EventFormContext'
-import { Button } from '@/components/utils/Button'
+import { Button } from '@/app/utils/Button'
 
 const CreateEditEvent = () => {
   const { openModal } = useContext(ModalContext)
