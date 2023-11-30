@@ -8,7 +8,9 @@
     "lint": "next lint",
     "check-types": "tsc --noEmit --incremental",
     "prettier:fix": "prettier --write './app' './components' ./server/",
-    "prettier:check": "prettier --check './app' './components' ./server/"
+    "prettier:check": "prettier --check './app' './components' ./server/",
+    "vercel": "vercel",
+    "vercel:yolo": "vercel --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -61,6 +63,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@types/react-scroll": "^1.8.7",
     "next-bundle-analyzer": "^0.6.8",
-    "prettier": "3.0.1"
+    "prettier": "3.0.1",
+    "vercel": "^28.15.1"
   }
 }
