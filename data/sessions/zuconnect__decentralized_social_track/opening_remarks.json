@@ -1,1 +1,20 @@
-{"id":"opening_remarks","name":"Opening Remarks","description":"No description","start":1699341300000,"end":1699342200000,"stageId":"theater","speakers":[{"id":"guo_liu","name":"Guo Liu","bio":"No Description","eventId":"zuconnect__decentralized_social_track"},{"id":"guo_liu","name":"Guo Liu","bio":"No Description","eventId":"zuconnect__decentralized_social_track"}],"playbackId":"","eventId":"zuconnect__decentralized_social_track","coverImage":"/sessions/zuconnect__decentralized_social_track/opening_remarks.jpg"}
+{
+  "id": "opening_remarks",
+  "name": "Opening Remarks",
+  "description": "No description",
+  "start": 1699341300000,
+  "end": 1699342200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "guo_liu",
+      "name": "Guo Liu",
+      "bio": "No Description",
+      "eventId": "zuconnect__decentralized_social_track"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/395fk4tnutejsu7e/index.m3u8",
+  "playbackId": "",
+  "eventId": "zuconnect__decentralized_social_track",
+  "coverImage": "/sessions/zuconnect__decentralized_social_track/opening_remarks.jpg"
+}

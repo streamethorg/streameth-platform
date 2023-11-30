@@ -1,1 +1,38 @@
-{"id":"decentralzied_social_protocols","name":"Decentralzied Social Protocols","description":"","start":1699359300000,"end":1699361100000,"stageId":"theater","speakers":[{"id":"jakub_rusiecki","name":"Jakub Rusiecki","bio":"No description","eventId":"zuconnect__decentralized_social_track"},{"id":"david_furlong","name":"David Furlong","bio":"No description","eventId":"zuconnect__decentralized_social_track"},{"id":"kailai_wang","name":"Kailai Wang","bio":"No description","eventId":"zuconnect__decentralized_social_track"},{"id":"luke_wang","name":"Luke Wang","bio":"No description","eventId":"zuconnect__decentralized_social_track"}],"playbackId":"","eventId":"zuconnect__decentralized_social_track","coverImage":"/sessions/zuconnect__decentralized_social_track/decentralzied_social_protocols.jpg"}
+{
+  "id": "decentralzied_social_protocols",
+  "name": "Decentralzied Social Protocols",
+  "description": "",
+  "start": 1699359300000,
+  "end": 1699361100000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "jakub_rusiecki",
+      "name": "Jakub Rusiecki",
+      "bio": "No description",
+      "eventId": "zuconnect__decentralized_social_track"
+    },
+    {
+      "id": "david_furlong",
+      "name": "David Furlong",
+      "bio": "No description",
+      "eventId": "zuconnect__decentralized_social_track"
+    },
+    {
+      "id": "kailai_wang",
+      "name": "Kailai Wang",
+      "bio": "No description",
+      "eventId": "zuconnect__decentralized_social_track"
+    },
+    {
+      "id": "luke_wang",
+      "name": "Luke Wang",
+      "bio": "No description",
+      "eventId": "zuconnect__decentralized_social_track"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/c1cdxppdyupsp44b/index.m3u8",
+  "playbackId": "",
+  "eventId": "zuconnect__decentralized_social_track",
+  "coverImage": "/sessions/zuconnect__decentralized_social_track/decentralzied_social_protocols.jpg"
+}

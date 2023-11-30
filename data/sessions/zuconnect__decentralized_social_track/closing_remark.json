@@ -1,1 +1,19 @@
-{"id":"closing_remark","name":"Closing Remark","description":"","start":1699368300000,"end":1699369200000,"stageId":"theater","speakers":[{"id":"afra_wang","name":"Afra Wang","bio":"No Description","eventId":"zuconnect__decentralized_social_track"}],"playbackId":"","eventId":"zuconnect__decentralized_social_track","coverImage":"/sessions/zuconnect__decentralized_social_track/closing_remark.jpg"}
+{
+  "id": "closing_remark",
+  "name": "Closing Remark",
+  "description": "",
+  "start": 1699368300000,
+  "end": 1699369200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "afra_wang",
+      "name": "Afra Wang",
+      "bio": "No Description",
+      "eventId": "zuconnect__decentralized_social_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect__decentralized_social_track",
+  "coverImage": "/sessions/zuconnect__decentralized_social_track/closing_remark.jpg"
+}
