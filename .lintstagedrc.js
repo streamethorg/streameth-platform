@@ -8,8 +8,5 @@ const buildNextEslintCommand = (filenames) =>
 const checkTypesNextCommand = () => "yarn next:check-types";
 
 module.exports = {
-  "packages/nextjs/**/*.{ts,tsx}": [
-    buildNextEslintCommand,
-    checkTypesNextCommand,
-  ],
+  "packages/app/**/*.{ts,tsx}": [buildNextEslintCommand, checkTypesNextCommand],
 };

@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
+    "check-types": "tsc --noEmit --incremental",
     "prettier:fix": "prettier --write './app' './components' ./server/",
     "prettier:check": "prettier --check './app' './components' ./server/"
   },
