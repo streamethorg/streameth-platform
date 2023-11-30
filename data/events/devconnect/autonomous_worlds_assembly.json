@@ -17,7 +17,7 @@
   ],
   "eventCover": "AWA_cover.png",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "AWA_Logo.png",
   "banner": "AWA_Banner.png",

@@ -1,15 +1,15 @@
-
 import Image from 'next/image'
 import FilterBar from '../(home)/components/FilterBar'
-import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { Metadata, ResolvingMetadata } from 'next'
 import ColorComponent from '../../components/utils/ColorComponent'
 import { notFound } from 'next/navigation'
 import EventController from '../../../server/controller/event'
 import OrganizationController from '../../../server/controller/organization'
 import { getImageUrl } from '@/utils'
 import EventList from '../(home)/components/EventList'
+import Markdown from 'react-markdown'
+import { Metadata, ResolvingMetadata } from 'next'
+import UpcomingEvents from '../(home)/components/UpcomingEvents'
 
 interface Params {
   params: {
@@ -27,6 +27,25 @@ export default async function OrganizationHome({ params }: Params) {
       params.organization
     )
 
+  const pastEvents = events
+    .filter((event) => {
+      const endDate = new Date(event?.end)
+      endDate.setUTCHours(0, 0, 0, 0)
+      return endDate.getTime() < new Date().getTime()
+    })
+    .map((event) => event.toJson())
+  const upComing = events
+    .filter((event) => {
+      const startDate = new Date(event?.end)
+      startDate.setUTCHours(0, 0, 0, 0)
+      return startDate.getTime() > new Date().getTime()
+    })
+    .map((event) => event.toJson())
+    .sort(
+      (a, b) =>
+        new Date(a.start).getTime() - new Date(b.start).getTime()
+    )
+
   const organization =
     await new OrganizationController().getOrganization(
       params.organization
@@ -36,7 +55,7 @@ export default async function OrganizationHome({ params }: Params) {
     <main className="w-screen mx-auto fixed overflow-auto h-screen">
       <div className="sticky bg-white top-0 z-50 flex p-4 px-9 gap-4">
         <Image
-          src={getImageUrl(organization.logo)}
+          src={organization.logo}
           width={50}
           height={50}
           style={{
@@ -46,20 +65,36 @@ export default async function OrganizationHome({ params }: Params) {
         />
         {/* <FilterBar events={events.map((event) => event.toJson())} /> */}
       </div>
-      <div className="bg-base rounded-xl mx-9 my-3">
-        <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
-          {organization.name}
-        </p>
-        <article className="prose max-w-full text-center prose-invert p-4">
-          <Markdown remarkPlugins={[remarkGfm]}>
-            {organization.description}
-          </Markdown>
-        </article>
+      <div
+        className="mx-8 rounded-xl"
+        style={{
+          backgroundColor: organization.accentColor
+            ? organization.accentColor
+            : '#fff',
+        }}>
+        <div className="bg-base py-4 rounded-xl my-3">
+          <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
+            {organization.name}
+          </p>
+          <article className="prose max-w-full text-center prose-invert p-4">
+            <Markdown remarkPlugins={[remarkGfm]}>
+              {organization.description}
+            </Markdown>
+          </article>
+        </div>
       </div>
       <hr className="h-px mx-9  bg-base" />
       <div className="overflow-auto h-screen">
         <div className="px-4">
-          <EventList events={events.map((event) => event.toJson())} />
+          {upComing.length > 0 && (
+            <>
+              <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
+                Upcoming Events
+              </p>
+              <UpcomingEvents events={upComing} />
+            </>
+          )}
+          <EventList events={pastEvents.map((event) => event)} />
         </div>
       </div>
     </main>

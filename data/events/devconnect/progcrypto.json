@@ -17,7 +17,7 @@
   ],
   "eventCover": "PROGCRYPTO_Cover.png",
   "website": "",
-  "archiveMode": false,
+  "archiveMode": true,
   "timezone": "Europe/Istanbul",
   "logo": "PROGCRYPTO_Logo.png",
   "banner": "PROGCRYPTO_Banner.png",
