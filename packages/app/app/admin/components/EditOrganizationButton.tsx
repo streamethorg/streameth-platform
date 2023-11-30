@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
-import { Button } from '@/components/utils/Button'
+import { Button } from '@/app/utils/Button'
 import EditOrganizationForm from './EditOranizationForm'
 import { IOrganization } from '../../../../server/model/organization'
 

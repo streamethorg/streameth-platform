@@ -1,6 +1,6 @@
 import LoadingIcon from '@/app/assets/icons/LoadingIcon'
 import PlusCircleIcon from '@/app/assets/icons/PlusCircleIcon'
-import FormLabel from '@/components/utils/FormLabel'
+import FormLabel from '@/app/utils/FormLabel'
 import React, { SetStateAction, useRef, useState } from 'react'
 
 interface ImageFileUploaderProps {

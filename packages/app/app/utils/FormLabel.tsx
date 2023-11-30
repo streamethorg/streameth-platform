@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import ToolTipIcon from '../../app/assets/icons/ToolTipIcon'
+import ToolTipIcon from '../assets/icons/ToolTipIcon'
 
 interface FormLabelProps {
   id?: string

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/utils/Button'
+import { Button } from '@/app/utils/Button'
 const AddOrganizationButton = ({
   organization,
 }: {

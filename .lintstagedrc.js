@@ -6,6 +6,7 @@ const buildNextEslintCommand = (filenames) =>
     .join(" --file ")}`;
 
 const checkTypesNextCommand = () => "yarn next:check-types";
+const checkPrettierCommand = () => "yarn prettier:check";
 
 module.exports = {
   "packages/app/**/*.{ts,tsx}": [buildNextEslintCommand, checkTypesNextCommand],

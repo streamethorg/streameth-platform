@@ -1,15 +1,15 @@
 'use client'
 
 import React, { SetStateAction, useContext } from 'react'
-import { FormTextArea } from '@/components/utils/FormTextArea'
-import { FormTextInput } from '@/components/utils/FormTextInput'
+import { FormTextArea } from '@/app/utils/FormTextArea'
+import { FormTextInput } from '@/app/utils/FormTextInput'
 import ImageFileUploader from './ImageFileUploader'
 import EventPreview from './EventPreview'
 import { ModalContext } from '@/components/context/ModalContext'
 import { EventFormContext } from './EventFormContext'
-import { FormSelect } from '@/components/utils/FormSelect'
+import { FormSelect } from '@/app/utils/FormSelect'
 import { TIMEZONES } from '@/app/constants/timezones'
-import { Button } from '@/components/utils/Button'
+import { Button } from '@/app/utils/Button'
 import { apiUrl } from '../../../../../server/utils'
 
 const CreateEditEventStepOne = () => {

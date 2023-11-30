@@ -1,7 +1,7 @@
 import { handleKeyPress } from '@/utils'
 import React from 'react'
-import colors from '../../app/constants/colors'
-import CheckIcon from '../../app/assets/icons/CheckIcon'
+import colors from '../constants/colors'
+import CheckIcon from '../assets/icons/CheckIcon'
 
 interface FormRadioBoxProps {
   checked?: boolean
