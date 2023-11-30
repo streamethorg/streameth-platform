@@ -1,6 +1,7 @@
 {
   "version": 2,
   "outputDirectory": "packages/app/build",
+  "buildCommand": "next build",
   "builds": [{ "src": "packages/app/build", "use": "@vercel/node" }],
   "routes": [
     { "src": "/.*", "dest": "packages/app" },
