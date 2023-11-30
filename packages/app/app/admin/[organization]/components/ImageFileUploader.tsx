@@ -1,6 +1,7 @@
 import LoadingIcon from '@/app/assets/icons/LoadingIcon'
 import PlusCircleIcon from '@/app/assets/icons/PlusCircleIcon'
 import FormLabel from '@/app/utils/FormLabel'
+import { getImageUrl } from '@/utils'
 import React, { SetStateAction, useRef, useState } from 'react'
 
 interface ImageFileUploaderProps {
@@ -81,7 +82,7 @@ const ImageFileUploader = ({
           isCircleImage ? 'rounded-full' : ''
         } ${className}`}>
         <img
-          src={loading ? '' : `/events/${image}` ?? ''}
+          src={loading ? '' : getImageUrl(`/events/${image}`) ?? ''}
           className={`${
             isCircleImage ? 'rounded-full' : ''
           } w-full h-full`}

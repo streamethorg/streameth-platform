@@ -10,6 +10,7 @@ const Initializer = ({ children }: { children: ReactNode }) => {
     pathname === '/' ||
     pathname.match(/^\/[a-zA-Z0-9]+$/) ||
     pathname.includes('admin')
+
   useEffect(() => {
     if (isOrganization) {
       document.documentElement.style.setProperty(

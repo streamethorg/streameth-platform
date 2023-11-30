@@ -5,93 +5,86 @@ import {
   continueRender,
   delayRender,
   staticFile,
-} from 'remotion'
-import { MOCK_SESSION } from '../utils/mocks'
-import { Fragment } from 'react'
+} from "remotion";
+import { MOCK_SESSION } from "../utils/mocks";
+import React, { Fragment } from "react";
 import {
   DevconnectEvents,
   DevconnectFrameRate,
   DevconnectIntroDuration,
   DevconnectOutroDuration,
-} from './devconnect'
-import { DevconnectISTProps, Intro } from './devconnect/intro'
-import { Social } from './devconnect/social'
-import { Intro as ProgCryptoIntro, ProgCryptoProps } from './progcrypto/intro'
-import { WideIntro as ProgCryptoWideIntro } from './progcrypto/intro_wide'
-import { Social as ProgCryptoSocial } from './progcrypto/social'
-import { Intro as AwaIntro } from './autonamous_worlds_assembly/intro'
-import { Social as AwaSocial } from './autonamous_worlds_assembly/social'
-import { JoinVideos } from './join'
-import { SessionSchema } from '../utils/mocks'
+} from "./devconnect";
+import { DevconnectISTProps, Intro } from "./devconnect/intro";
+import { Social } from "./devconnect/social";
+import { Intro as ProgCryptoIntro, ProgCryptoProps } from "./progcrypto/intro";
+import { WideIntro as ProgCryptoWideIntro } from "./progcrypto/intro_wide";
+import { Social as ProgCryptoSocial } from "./progcrypto/social";
+import { Intro as AwaIntro } from "./autonamous_worlds_assembly/intro";
+import { Social as AwaSocial } from "./autonamous_worlds_assembly/social";
+import { JoinVideos } from "./join";
+import { SessionSchema } from "../utils/mocks";
 
 export function Compositions() {
-  const waitForFont = delayRender()
+  const waitForFont = delayRender();
   const devconnectFont = new FontFace(
     `Sofia Sans Extra Condensed`,
     `url('${staticFile(
-      'devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf'
+      "devconnect/fonts/SofiaSansExtraCondensed-Medium.ttf"
     )}') format('truetype')`
-  )
+  );
   const progCryptoFont_Med = new FontFace(
     `Grotesk Trial Medium`,
     `url('${staticFile(
-      '0xparc/fonts/FKGroteskTrial-Medium.otf'
+      "0xparc/fonts/FKGroteskTrial-Medium.otf"
     )}') format('opentype')`
-  )
+  );
   const progCryptoFont_Reg = new FontFace(
     `Grotesk Trial Regular`,
     `url('${staticFile(
-      '0xparc/fonts/FKGroteskTrial-Regular.otf'
+      "0xparc/fonts/FKGroteskTrial-Regular.otf"
     )}') format('opentype')`
-  )
+  );
 
   const autonomousWorldsAssemblyFont = new FontFace(
     `FK Raster Grotesk`,
     `url('${staticFile(
-      '0xparc/fonts/FKRasterGroteskCompact-Smooth.ttf'
+      "0xparc/fonts/FKRasterGroteskCompact-Smooth.ttf"
     )}') format('truetype')`
-  )
+  );
 
   devconnectFont
     .load()
     .then(() => {
-      document.fonts.add(devconnectFont)
-      continueRender(waitForFont)
+      document.fonts.add(devconnectFont);
+      continueRender(waitForFont);
     })
-    .catch((err) => console.log('Error loading Devconnect font', err))
+    .catch((err) => console.log("Error loading Devconnect font", err));
 
   progCryptoFont_Med
     .load()
     .then(() => {
-      document.fonts.add(progCryptoFont_Med)
-      continueRender(waitForFont)
+      document.fonts.add(progCryptoFont_Med);
+      continueRender(waitForFont);
     })
-    .catch((err) =>
-      console.log('Error loading progCryptoFont_Med font', err)
-    )
+    .catch((err) => console.log("Error loading progCryptoFont_Med font", err));
 
   progCryptoFont_Reg
     .load()
     .then(() => {
-      document.fonts.add(progCryptoFont_Reg)
-      continueRender(waitForFont)
+      document.fonts.add(progCryptoFont_Reg);
+      continueRender(waitForFont);
     })
-    .catch((err) =>
-      console.log('Error loading progCryptoFont_Reg font', err)
-    )
+    .catch((err) => console.log("Error loading progCryptoFont_Reg font", err));
 
   autonomousWorldsAssemblyFont
     .load()
     .then(() => {
-      document.fonts.add(autonomousWorldsAssemblyFont)
-      continueRender(waitForFont)
+      document.fonts.add(autonomousWorldsAssemblyFont);
+      continueRender(waitForFont);
     })
     .catch((err) =>
-      console.log(
-        'Error loading autonomousWorldsAssemblyFont font',
-        err
-      )
-    )
+      console.log("Error loading autonomousWorldsAssemblyFont font", err)
+    );
 
   return (
     <>
@@ -105,8 +98,8 @@ export function Compositions() {
           fps={DevconnectFrameRate}
           schema={DevconnectISTProps}
           defaultProps={{
-            type: '1',
-            id: 'ethgunu',
+            type: "1",
+            id: "ethgunu",
             session: MOCK_SESSION[0],
           }}
         />
@@ -167,7 +160,7 @@ export function Compositions() {
 
       <Folder name="0xParc">
         <Composition
-          id={'progcrypto'}
+          id={"progcrypto"}
           component={ProgCryptoIntro}
           width={1920}
           height={1080}
@@ -180,7 +173,7 @@ export function Compositions() {
         />
 
         <Composition
-          id={'progcrypto-wide'}
+          id={"progcrypto-wide"}
           component={ProgCryptoWideIntro}
           width={4032}
           height={1344}
@@ -202,7 +195,7 @@ export function Compositions() {
         />
 
         <Composition
-          id={'autonomous-worlds-assembly'}
+          id={"autonomous-worlds-assembly"}
           component={AwaIntro}
           width={1920}
           height={1080}
@@ -225,7 +218,7 @@ export function Compositions() {
       </Folder>
 
       <Composition
-        id={'join-videos'}
+        id={"join-videos"}
         component={JoinVideos}
         width={1920}
         height={1080}
@@ -235,22 +228,22 @@ export function Compositions() {
           videos: [
             {
               pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
               duration: 150,
             },
             {
               pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
               duration: 300,
             },
             {
               pathOrUrl:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
               duration: 150,
             },
           ],
         }}
       />
     </>
-  )
+  );
 }
