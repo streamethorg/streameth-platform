@@ -60,18 +60,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
-      <body className={`${heebo.variable} font-sans`}>
+      <body
+        className={`${heebo.variable} font-sans flex flex-col w-screen min-h-screen bg-accent`}>
         <GeneralContext>
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <div className=" flex flex-col w-screen min-h-screen bg-accent">
-                  <FilterContextProvider>
-                    <TopNavbarContextProvider>
-                      <Initializer>{children}</Initializer>
-                    </TopNavbarContextProvider>
-                  </FilterContextProvider>
-                </div>
+                <FilterContextProvider>
+                  <TopNavbarContextProvider>
+                    <Initializer>{children}</Initializer>
+                  </TopNavbarContextProvider>
+                </FilterContextProvider>
               </ModalContextProvider>
             </MobileContextProvider>
           </LoadingContextProvider>
