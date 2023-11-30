@@ -16,6 +16,7 @@
     "next:lint": "yarn workspace @streameth/streameth-app lint",
     "prettier:fix": "yarn workspace @streameth/streameth-app  prettier",
     "prettier:check": "yarn workspace @streameth/streameth-app prettier",
+    "postinstall": "husky install",
     "precommit": "lint-staged",
     "tools": "yarn workspace @streameth/av-tools tools",
     "split": "yarn workspace @streameth/av-tools run:split",
@@ -23,8 +24,6 @@
     "upload": "yarn workspace @streameth/av-tools run:upload",
     "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn"
   },
-  "devDependencies": {
-    "husky": "^8.0.3",
-    "lint-staged": "^15.1.0"
-  }
+  "postinstall": "husky install",
+  "precommit": "lint-staged"
 }
