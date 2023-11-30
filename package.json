@@ -24,7 +24,7 @@
     "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn"
   },
   "devDependencies": {
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3"
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0"
   }
 }
