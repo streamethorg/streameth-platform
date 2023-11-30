@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "outputDirectory": "packages/app/build",
+  "builds": [{ "src": "packages/app/build", "use": "@vercel/node" }],
+  "routes": [
+    { "src": "/.*", "dest": "packages/app" },
+    { "handle": "filesystem" },
+    { "src": "/.*", "status": 404, "dest": "/404.html" }
+  ]
+}
