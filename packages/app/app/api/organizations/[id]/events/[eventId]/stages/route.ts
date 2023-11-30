@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import StageController from '../../../../../../../../server/controller/stage';
+import StageController from '../../../../../../../../server/controller/stage'
 export async function GET(
   request: Request,
   {

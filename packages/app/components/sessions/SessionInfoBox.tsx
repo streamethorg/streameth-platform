@@ -1,6 +1,6 @@
 'use client'
 
-import { ISession } from "../../../server/model/session"
+import { ISession } from '../../../server/model/session'
 
 const SessionInfoBox = ({
   session,

@@ -1,4 +1,3 @@
-
 import EventList from '@/app/(home)/components/EventList'
 import EventController from '../../../server/controller/event'
 

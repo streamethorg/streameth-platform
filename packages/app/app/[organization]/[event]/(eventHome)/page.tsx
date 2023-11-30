@@ -1,4 +1,3 @@
-
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import SpeakerPageComponent from './speakers/components/SpeakerPageComponent'

@@ -1,4 +1,3 @@
-
 import SessionsOnSchedule from './SessionsOnGrid'
 import { ScheduleContextProvider } from './ScheduleContext'
 import StageSelect from './StageSelect'

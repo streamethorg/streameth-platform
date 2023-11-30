@@ -4,7 +4,6 @@ import ArchivedSession from './ArchivedSession'
 import { FilterContext } from '@/components/context/FilterContext'
 import { ISession } from '../../../../../../server/model/session'
 
-
 const FilteredItems = ({ sessions }: { sessions: ISession[] }) => {
   const { filteredItems } = useContext(FilterContext)
 

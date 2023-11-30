@@ -1,10 +1,8 @@
-
 import SessionComponent from './components/SessionComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import Session from '@/utils/session'
 import EventController from '../../../../../../server/controller/event'
 import SessionController from '../../../../../../server/controller/session'
-
 
 // export async function generateStaticParams({
 //   params,

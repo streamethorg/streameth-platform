@@ -1,4 +1,3 @@
-
 import { notFound } from 'next/navigation'
 import { getEventDays, isSameDay } from '@/utils/time'
 import StageLayout from './components/StageLayout'

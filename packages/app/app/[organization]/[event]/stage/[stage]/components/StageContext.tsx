@@ -3,7 +3,6 @@ import { useState, createContext, useEffect } from 'react'
 import { ISession } from '../../../../../../../server/model/session'
 import { IStage } from '../../../../../../../server/model/stage'
 
-
 export interface StageData {
   stage: IStage
   sessions: ISession[]

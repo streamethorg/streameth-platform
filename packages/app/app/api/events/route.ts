@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import EventController from '../../../../server/controller/event'
 import StageController from '../../../../server/controller/stage'
 
-
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const inclStages = Boolean(

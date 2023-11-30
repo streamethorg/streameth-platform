@@ -30,7 +30,7 @@ const EventsPage = async ({
     await new OrganizationController().getOrganization(
       params.organization
     )
-
+  const stringifyEvents = JSON.parse(JSON.stringify(events))
   return (
     <>
       <div className="flex flex-row sticky top-0 p-4 shadow bg-white items-center justify-between">
@@ -41,7 +41,7 @@ const EventsPage = async ({
         <div className="w-full p-4">
           <p className="my-2">Your events</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {events?.map((event) => (
+            {stringifyEvents?.map((event: IEvent) => (
               <EventEntry key={event?.id} event={event} />
             ))}
           </div>

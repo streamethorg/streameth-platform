@@ -3,7 +3,6 @@ import { useRef } from 'react'
 import SearchFilter from '@/app/[organization]/[event]/archive/components/SearchFilter'
 import { IEvent } from '../../../../server/model/event'
 
-
 function FilterBar({ events }: { events: IEvent[] }) {
   const inputBarRef = useRef<HTMLDivElement>(null)
 

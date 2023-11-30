@@ -7,12 +7,12 @@
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "check-types": "tsc --noEmit --incremental",
-    "prettier:fix": "prettier --write './app' './components' ./server/",
-    "prettier:check": "prettier --check './app' './components' ./server/"
+    "prettier:fix": "prettier --write './app' './components'",
+    "prettier:check": "prettier --check './app' './components'"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
-    "@livepeer/react": "^3.0.5",
+    "@livepeer/react": "^3.0.8",
     "@types/fluent-ffmpeg": "^2.1.21",
     "@types/node": "20.3.0",
     "@types/react": "^18.2.13",

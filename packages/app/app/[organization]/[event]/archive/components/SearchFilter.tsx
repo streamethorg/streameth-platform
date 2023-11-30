@@ -7,7 +7,6 @@ import {
 import { ISession } from '../../../../../../server/model/session'
 import { IEvent } from '../../../../../../server/model/event'
 
-
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]
   filterName: string

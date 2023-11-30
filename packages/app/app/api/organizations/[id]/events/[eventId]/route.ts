@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Session from '@/utils/session'
-import EventController from '../../../../../../../server/controller/event';
-import { IEvent } from '../../../../../../../server/model/event';
-import { generateId } from '../../../../../../../server/utils';
-
+import EventController from '../../../../../../../server/controller/event'
+import { IEvent } from '../../../../../../../server/model/event'
+import { generateId } from '../../../../../../../server/utils'
 
 export async function GET(
   request: Request,

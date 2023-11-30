@@ -1,4 +1,3 @@
-
 import CreateEditEvent from '../components/CreateEditEvent'
 import { notFound } from 'next/navigation'
 import { EventFormProvider } from '../components/EventFormContext'
@@ -20,7 +19,7 @@ const EventPage = async ({ params }: { params: Params }) => {
   return (
     <EventFormProvider
       organizationId={params.organization}
-      event={event}>
+      event={event.toJson()}>
       <CreateEditEvent />
     </EventFormProvider>
   )

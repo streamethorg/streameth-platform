@@ -1,4 +1,3 @@
-
 import Player from '@/components/misc/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import ComponentCard from '@/components/misc/ComponentCard'
@@ -11,7 +10,6 @@ import Link from 'next/link'
 import Session from '../../../../../../../server/model/session'
 import { IEvent } from '../../../../../../../server/model/event'
 import { getImageUrl } from '@/utils'
-
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
   return (

@@ -1,4 +1,3 @@
-
 import SpeakerIcon from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerIcon'
 import { ISpeaker } from '../../../../../../../server/model/speaker'
 

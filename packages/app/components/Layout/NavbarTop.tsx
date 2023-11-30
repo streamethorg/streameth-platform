@@ -8,7 +8,6 @@ import { MobileContext } from '../context/MobileContext'
 import Navbar from './Navbar'
 import { getImageUrl } from '@/utils'
 
-
 export interface Page {
   name: string
   href: string

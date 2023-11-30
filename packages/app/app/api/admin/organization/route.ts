@@ -5,7 +5,6 @@ import OrganizationController from '../../../../../server/controller/organizatio
 import { IOrganization } from '../../../../../server/model/organization'
 import { generateId } from '../../../../../server/utils'
 
-
 /*
  * The events of the organization will also be deleted
  */
