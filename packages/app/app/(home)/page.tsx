@@ -93,7 +93,6 @@ export default async function Home() {
           Upcoming Events
         </p>
         <UpcomingEvents events={upComing} />
-
         <EventList events={pastEvents} />
       </div>
     </main>

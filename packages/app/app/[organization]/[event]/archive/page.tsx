@@ -2,7 +2,7 @@ import EventController from 'streameth-server/controller/event'
 import SessionController from 'streameth-server/controller/session'
 import FilteredItems from './components/FilteredItems'
 import type { Metadata, ResolvingMetadata } from 'next'
-
+import coverImage from '@/public/cover.png'
 interface Params {
   params: {
     event: string
@@ -11,12 +11,21 @@ interface Params {
 }
 
 export default async function ArchivePage({ params }: Params) {
+  const eventController = new EventController()
   const sessionController = new SessionController()
   const sessions = (
     await sessionController.getAllSessions({ eventId: params.event })
   ).map((session) => {
     return session.toJson()
   })
+
+  const coverImage2 =
+    (
+      await eventController.getEvent(
+        params.event,
+        params.organization
+      )
+    ).eventCover ?? ''
 
   const videoSessions = sessions.filter((session) => {
     return session.videoUrl != undefined
@@ -33,8 +42,11 @@ export default async function ArchivePage({ params }: Params) {
   }
 
   return (
-    <div className="flex flex-col-reverse justify-start lg:flex-row w-full lg:h-full lg:overflow-hidden">
-      <FilteredItems sessions={videoSessions} />
+    <div className="flex justify-start lg:flex-row w-full lg:h-full lg:overflow-hidden">
+      <FilteredItems
+        sessions={videoSessions}
+        coverImage={coverImage2}
+      />
     </div>
   )
 }

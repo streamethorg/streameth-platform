@@ -2,17 +2,18 @@ import { ISession } from 'streameth-server/model/session'
 import Link from 'next/link'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'
-import coverImage from '@/public/cover.png'
 import { getImageUrl } from '@/utils'
 
 const ArchivedSession = ({
   session,
   learnMore = false,
   goToStage = false,
+  coverImage,
 }: {
   session: ISession
   learnMore?: boolean
   goToStage?: boolean
+  coverImage: string
 }) => {
   const component = (
     <Card>
@@ -24,10 +25,13 @@ const ArchivedSession = ({
           src={
             session.coverImage
               ? getImageUrl(session.coverImage)
-              : coverImage
+              : getImageUrl(coverImage)
           }
           className="rounded object-cover w-full h-full"
           alt={session.name}
+          onError={(e) => {
+            e.currentTarget.src = getImageUrl('/events/' + coverImage)
+          }}
         />
       </div>
       <p className=" p-2 py-4 flex flex-grow text-md ">

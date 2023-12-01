@@ -4,7 +4,13 @@ import ArchivedSession from './ArchivedSession'
 import { FilterContext } from '@/components/context/FilterContext'
 import { ISession } from 'streameth-server/model/session'
 
-const FilteredItems = ({ sessions }: { sessions: ISession[] }) => {
+const FilteredItems = ({
+  sessions,
+  coverImage,
+}: {
+  sessions: ISession[]
+  coverImage: string
+}) => {
   const { filteredItems } = useContext(FilterContext)
 
   // filter items are sessions for the archive page while sessions prop are for the event page archive
@@ -21,6 +27,7 @@ const FilteredItems = ({ sessions }: { sessions: ISession[] }) => {
               session={session}
               key={session.id}
               learnMore
+              coverImage={coverImage}
             />
           )
         })}

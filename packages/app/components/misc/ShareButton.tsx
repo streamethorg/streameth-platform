@@ -20,7 +20,7 @@ import {
 const ShareModalContent = () => {
   const text = `Check out this event on @streameth!`
   return (
-    <div>
+    <div className="bg-base">
       <h1 className="font-bold uppercase mb-4 text-white text-center mx-auto pt-4">
         Share this event
       </h1>
