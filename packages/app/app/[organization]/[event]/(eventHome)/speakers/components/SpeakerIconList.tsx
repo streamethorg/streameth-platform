@@ -1,5 +1,5 @@
 import SpeakerIcon from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerIcon'
-import { ISpeaker } from '@server/model/speaker'
+import { ISpeaker } from 'streameth-server/model/speaker'
 
 export default function SpeakerIconList({
   speakers,

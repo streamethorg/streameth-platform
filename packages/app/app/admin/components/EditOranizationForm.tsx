@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react'
 
 import { ModalContext } from '@/components/context/ModalContext'
 import { revalidatePath } from 'next/cache'
-import { IOrganization } from '@server/model/organization'
+import { IOrganization } from 'streameth-server/model/organization'
 
 interface OrganizationFormProps {
   onSuccess?: () => void

@@ -1,8 +1,8 @@
 import SpeakerCard from './SpeakerCard'
 
 import ComponentWrapper from '../../components/ComponentWrapper'
-import SessionController from '@server/controller/session'
-import SpeakerController from '@server/controller/speaker'
+import SessionController from 'streameth-server/controller/session'
+import SpeakerController from 'streameth-server/controller/speaker'
 interface Params {
   params: {
     organization: string

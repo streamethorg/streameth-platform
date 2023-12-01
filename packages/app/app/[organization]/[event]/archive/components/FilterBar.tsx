@@ -3,9 +3,9 @@ import { useState, useRef } from 'react'
 import SearchFilter from './SearchFilter'
 import SelectFilter from './SelectFilter'
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
-import { ISession } from '@server/model/session'
-import { ISpeaker } from '@server/model/speaker'
-import { IStage } from '@server/model/stage'
+import { ISession } from 'streameth-server/model/session'
+import { ISpeaker } from 'streameth-server/model/speaker'
+import { IStage } from 'streameth-server/model/stage'
 
 function FilterBar({
   sessions,

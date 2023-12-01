@@ -1,6 +1,6 @@
-import GoogleSheetService from '@server/services/googleSheet'
+import GoogleSheetService from 'streameth-server/services/googleSheet'
 import { NextResponse } from 'next/server'
-import EventController from '@server/controller/event'
+import EventController from 'streameth-server/controller/event'
 export async function POST(
   request: Request,
   {

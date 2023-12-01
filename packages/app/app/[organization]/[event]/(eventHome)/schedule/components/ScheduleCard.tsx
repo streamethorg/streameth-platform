@@ -4,7 +4,7 @@ import { ModalContext } from '@/components/context/ModalContext'
 import { useContext } from 'react'
 import ScheduleCardModal from './ScheduleCardModal'
 import moment from 'moment-timezone'
-import { ISession } from '@server/model/session'
+import { ISession } from 'streameth-server/model/session'
 
 const ScheduleCard = ({
   session,

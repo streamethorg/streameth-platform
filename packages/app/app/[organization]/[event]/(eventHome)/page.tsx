@@ -5,8 +5,8 @@ import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import { ResolvingMetadata, Metadata } from 'next'
 import Player from '@/components/misc/Player'
-import EventController from '@server/controller/event'
-import StageController from '@server/controller/stage'
+import EventController from 'streameth-server/controller/event'
+import StageController from 'streameth-server/controller/stage'
 import { hasData } from '@/utils'
 
 interface Params {

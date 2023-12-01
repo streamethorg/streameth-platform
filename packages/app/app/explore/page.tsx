@@ -1,5 +1,5 @@
 import EventList from '@/app/(home)/components/EventList'
-import EventController from '@server/controller/event'
+import EventController from 'streameth-server/controller/event'
 
 export default async function Home() {
   const eventController = new EventController()

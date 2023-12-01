@@ -1,5 +1,5 @@
-import EventController from '@server/controller/event'
-import SessionController from '@server/controller/session'
+import EventController from 'streameth-server/controller/event'
+import SessionController from 'streameth-server/controller/session'
 import FilteredItems from './components/FilteredItems'
 import type { Metadata, ResolvingMetadata } from 'next'
 import coverImage from '@/public/cover.png'

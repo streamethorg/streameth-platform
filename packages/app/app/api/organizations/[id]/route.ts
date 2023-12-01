@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import OrganizationController from '@server/controller/organization'
+import OrganizationController from 'streameth-server/controller/organization'
 
 export async function GET(
   request: Request,

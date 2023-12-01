@@ -5,7 +5,7 @@ import { ModalContext } from '@/components/context/ModalContext'
 import { useRouter } from 'next/navigation'
 import { LoadingContext } from '@/components/context/LoadingContext'
 import { ViewColumnsIcon } from '@heroicons/react/24/outline'
-import { IStage } from '@server/model/stage'
+import { IStage } from 'streameth-server/model/stage'
 
 const StageModalButton = ({ stages }: { stages: IStage[] }) => {
   const { openModal, closeModal } = useContext(ModalContext)

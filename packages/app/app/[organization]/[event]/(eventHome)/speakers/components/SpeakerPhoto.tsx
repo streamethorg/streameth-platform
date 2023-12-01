@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import makeBlockie from 'ethereum-blockies-base64'
-import { ISpeaker } from '@server/model/speaker'
+import { ISpeaker } from 'streameth-server/model/speaker'
 
 function getFileIdFromUrl(url: string) {
   const regex = /\/file\/d\/([^\/]+)\//

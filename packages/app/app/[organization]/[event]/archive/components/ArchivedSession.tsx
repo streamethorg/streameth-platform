@@ -1,4 +1,4 @@
-import { ISession } from '@server/model/session'
+import { ISession } from 'streameth-server/model/session'
 import Link from 'next/link'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'

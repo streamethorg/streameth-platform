@@ -2,8 +2,8 @@ import SpeakerPhoto from './SpeakerPhoto'
 import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 
 import { SocialIcon } from 'react-social-icons'
-import { ISpeaker } from '@server/model/speaker'
-import { ISession } from '@server/model/session'
+import { ISpeaker } from 'streameth-server/model/speaker'
+import { ISession } from 'streameth-server/model/session'
 
 interface Params {
   speaker: ISpeaker

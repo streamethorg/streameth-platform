@@ -2,7 +2,7 @@ import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { IEvent } from '@server/model/event'
+import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/utils'
 const LiveEvents = ({ events }: { events: IEvent[] }) => {
   return (
@@ -22,7 +22,7 @@ const LiveEvents = ({ events }: { events: IEvent[] }) => {
         ) => (
           <Card key={index} bgColor={accentColor}>
             <Link href={`/${organizationId}/${id}`}>
-              <div className="bg-base rounded-xl text-white uppercase">
+              <div className="bg-base min-h-full rounded-xl text-white uppercase">
                 <div className="aspect-video relative">
                   <Image
                     className="rounded"

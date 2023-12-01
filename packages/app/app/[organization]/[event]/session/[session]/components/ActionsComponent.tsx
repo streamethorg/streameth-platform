@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation'
 import VideoDownload from './VideoDownload'
 import { useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
-import { ISession } from '@server/model/session'
-import { IEvent } from '@server/model/event'
+import { ISession } from 'streameth-server/model/session'
+import { IEvent } from 'streameth-server/model/event'
 
 const ActionsComponent = ({
   title,

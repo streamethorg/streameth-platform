@@ -6,7 +6,7 @@ import Card from '@/components/misc/Card'
 import { ModalContext } from '@/components/context/ModalContext'
 import { useRouter } from 'next/navigation'
 import { getImageUrl, hasData } from '@/utils'
-import { IEvent } from '@server/model/event'
+import { IEvent } from 'streameth-server/model/event'
 
 const EventCard = ({ event }: { event: IEvent }) => {
   const imageUrl = event.eventCover

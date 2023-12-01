@@ -9,7 +9,7 @@ import {
   IDataExporter,
   IDataImporter,
   IEvent,
-} from '@server/model/event'
+} from 'streameth-server/model/event'
 import { ModalContext } from '@/components/context/ModalContext'
 import SuccessErrorModal from './SuccessErrorModal'
 import useValidateForm from '@/app/hooks/useValidateForm'
