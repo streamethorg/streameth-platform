@@ -50,7 +50,7 @@ export default async function EventHome({ params }: Params) {
     <div className="flex flex-col w-full h-full bg-accent px-2">
       <div className=" relative my-1 md:my-4 max-w-full md:max-w-4xl mx-auto z-50">
         <HomePageLogoAndBanner event={event} />
-        <div className="bg-base text-white p-4 rounded-xl">
+        <div className="bg-base  text-white p-4 rounded-xl">
           <span className=" w-full text-xl uppercase md:text-4xl flex ">
             Livestreams
           </span>

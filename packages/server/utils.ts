@@ -1,5 +1,4 @@
 import path from 'path'
-import { IEvent } from './model/event'
 
 export const generateId = (key: string) => {
   // all lowercase, no spaces, no special characters

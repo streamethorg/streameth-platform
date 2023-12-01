@@ -55,7 +55,7 @@ const ColorComponent = ({
   if (sessionWithVideo.length > 0)
     pages.push({
       href: `/${organizationId}/${id}/archive`,
-      name: 'Archive',
+      name: 'Clips',
       icon: <ViewColumnsIcon />,
     })
 

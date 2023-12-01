@@ -33,8 +33,8 @@ export default function PluginBar({
             <div
               className={`${
                 selectedId === tab.id
-                  ? 'bg-accent text-white  font-bold'
-                  : 'hover:bg-accent hover:text-white cursor-pointer text-main-text font-bold'
+                  ? 'border border-accent text-white  font-bold'
+                  : 'hover:border-accent hover:text-white cursor-pointer text-main-text font-bold'
               } p-2 uppercase w-full rounded text-center text-sm `}>
               {tab.id}
             </div>

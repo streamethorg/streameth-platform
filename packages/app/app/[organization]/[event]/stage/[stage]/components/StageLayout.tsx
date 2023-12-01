@@ -67,7 +67,7 @@ export default function StageLayout({ event }: { event: IEvent }) {
         <div className="flex flex-col lg:flex-row relative  ">
           <div
             ref={stickyRef}
-            className="bg-black mb-2 lg:mb-0 sticky p-4 rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
+            className="bg-black mb-2 lg:mb-0 sticky rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
             <ActionsComponent title={stage.name}>
               <EmbedButton
                 streamId={stage.streamSettings.streamId}

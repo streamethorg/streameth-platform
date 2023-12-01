@@ -52,7 +52,7 @@ export default function Navbar({
   return (
     <nav
       aria-label="Global"
-      className="absolute bg-accent top-[60px] left-0 z-[999999999999999999] w-full md:bg-base drop-shadow-lg md:w-[unset] items-center text-center md:relative md:top-[unset] md:drop-shadow-nonetext-white  p-2 md:rounded-xl text-white flex flex-col md:items-center md:flex-row md:space-x-4 md:h-full md:mr-auto">
+      className="absolute bg-accent top-[60px] left-0 w-full md:bg-base drop-shadow-lg md:w-[unset] items-center text-center md:relative md:top-[unset] md:drop-shadow-nonetext-white  p-2 md:rounded-xl text-white flex flex-col md:items-center md:flex-row md:space-x-4 md:h-full md:mr-auto">
       {pages.map((item) => (
         <NavBarItem
           key={item.name}
