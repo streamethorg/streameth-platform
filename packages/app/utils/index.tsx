@@ -1,4 +1,4 @@
-import { IEvent } from "../../server/model/event"
+import { IEvent } from 'streameth-server/model/event'
 
 export const selectOptionFocusHandle = (
   event: React.KeyboardEvent<HTMLDivElement>,
@@ -58,5 +58,5 @@ export const hasData = ({ event }: { event: IEvent }) => {
 }
 
 export const getImageUrl = (image: string) => {
-  return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
+  return `https://streamethapp.ams3.cdn.digitaloceanspaces.com${image}`
 }

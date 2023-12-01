@@ -4,9 +4,9 @@ import StageSelect from './StageSelect'
 import DateSelect from './DateSelect'
 import { getEventDays } from '@/utils/time'
 import ComponentWrapper from '../../components/ComponentWrapper'
-import StageController from '../../../../../../../server/controller/stage'
-import EventController from '../../../../../../../server/controller/event'
-import SessionController from '../../../../../../../server/controller/session'
+import StageController from 'streameth-server/controller/stage'
+import EventController from 'streameth-server/controller/event'
+import SessionController from 'streameth-server/controller/session'
 interface Params {
   params: {
     event: string

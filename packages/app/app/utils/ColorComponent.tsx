@@ -19,10 +19,10 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/24/outline'
 import FilterBar from '@/app/[organization]/[event]/archive/components/FilterBar'
-import { IEvent } from '../../../server/model/event'
-import { IStage } from '../../../server/model/stage'
-import { ISpeaker } from '../../../server/model/speaker'
-import { ISession } from '../../../server/model/session'
+import { IEvent } from 'streameth-server/model/event'
+import { IStage } from 'streameth-server/model/stage'
+import { ISpeaker } from 'streameth-server/model/speaker'
+import { ISession } from 'streameth-server/model/session'
 interface Props {
   children: ReactNode
   event: IEvent
@@ -55,7 +55,7 @@ const ColorComponent = ({
   if (sessionWithVideo.length > 0)
     pages.push({
       href: `/${organizationId}/${id}/archive`,
-      name: 'Archive',
+      name: 'Clips',
       icon: <ViewColumnsIcon />,
     })
 

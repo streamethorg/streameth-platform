@@ -1,13 +1,11 @@
-import EventController from '../../..//server/controller/event'
+import EventController from 'streameth-server/controller/event'
 import EventList from '@/app/(home)/components/EventList'
 import Image from 'next/image'
-import StageController from '../../../server/controller/stage'
+import StageController from 'streameth-server/controller/stage'
 import UpcomingEvents from './components/UpcomingEvents'
 import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
-import LiveEvent from './components/LiveEvent'
-import LiveEvents from './components/LiveEvents'
 
 export default async function Home() {
   const eventController = new EventController()
@@ -95,7 +93,6 @@ export default async function Home() {
           Upcoming Events
         </p>
         <UpcomingEvents events={upComing} />
-
         <EventList events={pastEvents} />
       </div>
     </main>

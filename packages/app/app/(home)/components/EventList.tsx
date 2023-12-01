@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { FilterContext } from '@/components/context/FilterContext'
 import EventCard from './EventCard'
 import FilterBar from './FilterBar'
-import { IEvent } from '../../../../server/model/event'
+import { IEvent } from 'streameth-server/model/event'
 
 const EventList = ({ events }: { events: IEvent[] }) => {
   const { filteredItems } = useContext(FilterContext)

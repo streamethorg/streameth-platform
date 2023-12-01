@@ -2,7 +2,7 @@ import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { IEvent } from '../../../../server/model/event'
+import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/utils'
 const LiveEvents = ({ events }: { events: IEvent[] }) => {
   return (

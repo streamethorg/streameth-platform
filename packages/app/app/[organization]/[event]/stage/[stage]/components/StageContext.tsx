@@ -1,7 +1,7 @@
 'use client'
 import { useState, createContext, useEffect } from 'react'
-import { ISession } from '../../../../../../../server/model/session'
-import { IStage } from '../../../../../../../server/model/stage'
+import { ISession } from 'streameth-server/model/session'
+import { IStage } from 'streameth-server/model/stage'
 
 export interface StageData {
   stage: IStage

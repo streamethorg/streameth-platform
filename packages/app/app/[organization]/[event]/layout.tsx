@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation'
 import ColorComponent from '../../utils/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
 import { ArchiveContext } from '@/components/context/ArchiveContext'
-import EventController from '../../../../server/controller/event'
-import StageController from '../../../../server/controller/stage'
-import SessionController from '../../../../server/controller/session'
-import SpeakerController from '../../../../server/controller/speaker'
+import EventController from 'streameth-server/controller/event'
+import StageController from 'streameth-server/controller/stage'
+import SessionController from 'streameth-server/controller/session'
+import SpeakerController from 'streameth-server/controller/speaker'
 
 export async function generateStaticParams() {
   const eventController = new EventController()

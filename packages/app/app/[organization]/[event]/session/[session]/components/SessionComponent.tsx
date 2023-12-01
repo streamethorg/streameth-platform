@@ -7,8 +7,8 @@ import EmbedButton from '@/components/misc/EmbedButton'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
-import Session from '../../../../../../../server/model/session'
-import { IEvent } from '../../../../../../../server/model/event'
+import Session from 'streameth-server/model/session'
+import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/utils'
 
 const SpeakerComponent = ({ session }: { session: Session }) => {
@@ -30,8 +30,8 @@ export default async function SessionComponent({
   event: IEvent
 }) {
   return (
-    <div className="flex flex-col w-full max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 gap-4">
-      <div className="bg-black mb-2 lg:mb-0  p-2 md:p-4 rounded-xl sticky z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
+    <div className="flex flex-col w-full max-h-[calc(100vh-5rem)] h-full lg:flex-row relative overflow-hidden md:p-4 md:gap-4">
+      <div className="bg-black mb-2 lg:mb-0  p-2 md:p-4 md:rounded-xl sticky z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll lg:w-[75%]">
         <ActionsComponent
           session={session.toJson()}
           event={event}

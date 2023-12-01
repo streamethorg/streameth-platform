@@ -3,7 +3,7 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { useEffect, useState } from 'react'
-import { ISession } from '../../../../../server/model/session'
+import { ISession } from 'streameth-server/model/session'
 
 dayjs.extend(duration)
 

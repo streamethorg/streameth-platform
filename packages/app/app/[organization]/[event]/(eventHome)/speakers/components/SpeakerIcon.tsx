@@ -4,7 +4,7 @@ import SpeakerPhoto from './SpeakerPhoto'
 import SpeakerModal from './SpeakerModal'
 import { useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
-import { ISpeaker } from '../../../../../../../server/model/speaker'
+import { ISpeaker } from 'streameth-server/model/speaker'
 
 export default function SpeakerIcon({
   speaker,

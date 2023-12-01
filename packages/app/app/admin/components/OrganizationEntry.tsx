@@ -5,7 +5,7 @@ import EditOrganizationButton from './EditOrganizationButton'
 import Link from 'next/link'
 import { Button } from '@/app/utils/Button'
 import { ModalContext } from '@/components/context/ModalContext'
-import { IOrganization } from '../../../../server/model/organization'
+import { IOrganization } from 'streameth-server/model/organization'
 
 interface OrganizationEntryProps {
   organization: IOrganization
