@@ -5,7 +5,7 @@ import { ModalContext } from '@/components/context/ModalContext'
 import { LoadingContext } from '@/components/context/LoadingContext'
 import { usePathname, useRouter } from 'next/navigation'
 import moment from 'moment-timezone'
-import { ISession } from 'streameth-server/model/session'
+import { ISession } from '@server/model/session'
 
 const ScheduleCardModal = ({ session }: { session: ISession }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)

@@ -1,4 +1,4 @@
-import { IEvent } from 'streameth-server/model/event'
+import { IEvent } from '@server/model/event'
 
 export const selectOptionFocusHandle = (
   event: React.KeyboardEvent<HTMLDivElement>,

@@ -3,7 +3,7 @@ import React from 'react'
 import Player from '@/components/misc/Player'
 import Image from 'next/image'
 import Link from 'next/link'
-import { IStage } from 'streameth-server/model/stage'
+import { IStage } from '@server/model/stage'
 import { getImageUrl } from '@/utils'
 
 const LiveEvent = ({ stage }: { stage: IStage }) => {

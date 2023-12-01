@@ -10,7 +10,7 @@ import { EventFormContext } from './EventFormContext'
 import { FormSelect } from '@/app/utils/FormSelect'
 import { TIMEZONES } from '@/app/constants/timezones'
 import { Button } from '@/app/utils/Button'
-import { apiUrl } from 'streameth-server/utils'
+import { apiUrl } from '@server/utils'
 
 const CreateEditEventStepOne = () => {
   const { openModal } = useContext(ModalContext)

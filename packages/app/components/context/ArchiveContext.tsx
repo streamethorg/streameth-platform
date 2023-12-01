@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { IEvent } from 'streameth-server/model/event'
+import { IEvent } from '@server/model/event'
 
 interface Props extends PropsWithChildren {
   event: IEvent

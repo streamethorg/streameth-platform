@@ -1,5 +1,5 @@
-import { IEvent } from 'streameth-server/model/event'
-import { ISession } from 'streameth-server/model/session'
+import { IEvent } from '@server/model/event'
+import { ISession } from '@server/model/session'
 
 export function extractSearchParams<T extends Record<string, any>>(
   searchParams: URLSearchParams,

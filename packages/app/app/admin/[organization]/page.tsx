@@ -1,8 +1,8 @@
 export const revalidate = 0
-import EventController from 'streameth-server/controller/event'
-import OrganizationController from 'streameth-server/controller/organization'
-import { IEvent } from 'streameth-server/model/event'
-import { apiUrl } from 'streameth-server/utils'
+import EventController from '@server/controller/event'
+import OrganizationController from '@server/controller/organization'
+import { IEvent } from '@server/model/event'
+import { apiUrl } from '@server/utils'
 import AddEventButton from './components/AddEventButton'
 import EventEntry from './components/EventEntry'
 

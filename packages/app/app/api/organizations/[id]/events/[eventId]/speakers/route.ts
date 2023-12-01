@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import SpeakerController from 'streameth-server/controller/speaker'
+import SpeakerController from '@server/controller/speaker'
 export async function GET(
   request: Request,
   {

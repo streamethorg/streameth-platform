@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from 'react'
 import { ModalContext } from '@/components/context/ModalContext'
-import { IOrganization } from 'streameth-server/model/organization'
+import { IOrganization } from '@server/model/organization'
 
 interface OrganizationFormProps {
   onSuccess?: () => void

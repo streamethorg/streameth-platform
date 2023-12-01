@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import EventController from 'streameth-server/controller/event'
+import EventController from '@server/controller/event'
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }

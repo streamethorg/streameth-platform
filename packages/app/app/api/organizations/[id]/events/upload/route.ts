@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import S3Service from 'streameth-server/services/s3'
+import S3Service from '@server/services/s3'
 export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }

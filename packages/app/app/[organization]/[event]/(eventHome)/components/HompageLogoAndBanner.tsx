@@ -6,7 +6,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { getEventPeriod } from '@/utils/time'
 import { getImageUrl } from '@/utils'
-import { IEvent } from 'streameth-server/model/event'
+import { IEvent } from '@server/model/event'
 
 const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   const { logo, banner } = event

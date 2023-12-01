@@ -3,8 +3,8 @@ import SpeakerModal from './SpeakerModal'
 import { ModalContext } from '@/components/context/ModalContext'
 import { useContext } from 'react'
 import SpeakerPhoto from './SpeakerPhoto'
-import { ISpeaker } from 'streameth-server/model/speaker'
-import { ISession } from 'streameth-server/model/session'
+import { ISpeaker } from '@server/model/speaker'
+import { ISession } from '@server/model/session'
 
 const SpeakerCard = ({
   speaker,

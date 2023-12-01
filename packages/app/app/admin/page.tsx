@@ -1,4 +1,4 @@
-import OrganizationController from 'streameth-server/controller/organization'
+import OrganizationController from '@server/controller/organization'
 import AddOrganizationButton from './components/AddOrganization'
 import OrganizationEntry from './components/OrganizationEntry'
 

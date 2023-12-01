@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react'
 import { MobileContext } from '@/components/context/MobileContext'
 import { ScheduleContext } from './ScheduleContext'
-import { IStage } from 'streameth-server/model/stage'
+import { IStage } from '@server/model/stage'
 
 const StageSelect = ({ stages }: { stages: IStage[] }) => {
   const { setStage } = useContext(ScheduleContext)

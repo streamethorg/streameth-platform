@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import EventController from 'streameth-server/controller/event'
-import StageController from 'streameth-server/controller/stage'
+import EventController from '@server/controller/event'
+import StageController from '@server/controller/stage'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams

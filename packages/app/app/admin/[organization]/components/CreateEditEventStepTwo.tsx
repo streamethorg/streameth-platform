@@ -5,10 +5,7 @@ import FormRadioBox from '@/app/utils/FormRadioBox'
 import UseAdminContext from '@/app/hooks/useAdminContext'
 import FormCheckbox from '@/app/utils/FormCheckbox'
 import FormLabel from '@/app/utils/FormLabel'
-import {
-  GSheetConfig,
-  PretalxConfig,
-} from 'streameth-server/model/event'
+import { GSheetConfig, PretalxConfig } from '@server/model/event'
 
 const initialImporterConfig: GSheetConfig & PretalxConfig = {
   sheetId: '',

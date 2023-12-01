@@ -7,9 +7,9 @@ import React, {
 } from 'react'
 
 import { isSameDay } from '@/utils/time'
-import { IStage } from 'streameth-server/model/stage'
-import { IEvent } from 'streameth-server/model/event'
-import { ISession } from 'streameth-server/model/session'
+import { IStage } from '@server/model/stage'
+import { IEvent } from '@server/model/event'
+import { ISession } from '@server/model/session'
 interface ScheduleContextProps {
   setDate: React.Dispatch<React.SetStateAction<number>>
   date: number

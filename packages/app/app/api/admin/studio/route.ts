@@ -1,8 +1,8 @@
 import Session from '@/utils/session'
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import SessionController from 'streameth-server/controller/session'
-import { AddOrUpdateFile } from 'streameth-server/utils/github'
+import SessionController from '@server/controller/session'
+import { AddOrUpdateFile } from '@server/utils/github'
 
 export const POST = async (req: NextRequest) => {
   const session = await Session.fromRequest(req)
