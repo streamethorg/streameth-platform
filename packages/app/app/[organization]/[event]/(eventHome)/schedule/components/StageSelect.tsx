@@ -1,6 +1,6 @@
 'use client'
 import { useContext, useState } from 'react'
-import { MobileContext } from '@/components/context/MobileContext'
+import { MobileContext } from '@/context/MobileContext'
 import { ScheduleContext } from './ScheduleContext'
 import { IStage } from 'streameth-server/model/stage'
 

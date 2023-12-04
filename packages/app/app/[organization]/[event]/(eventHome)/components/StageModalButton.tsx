@@ -1,9 +1,9 @@
 'use client'
 import StageModal from '@/app/[organization]/[event]/stage/[stage]/components/StageModal'
 import { useContext } from 'react'
-import { ModalContext } from '@/components/context/ModalContext'
+import { ModalContext } from '@/context/ModalContext'
 import { useRouter } from 'next/navigation'
-import { LoadingContext } from '@/components/context/LoadingContext'
+import { LoadingContext } from '@/context/LoadingContext'
 import { ViewColumnsIcon } from '@heroicons/react/24/outline'
 import { IStage } from 'streameth-server/model/stage'
 

@@ -1,6 +1,6 @@
 import { a11yEnterKeyPress } from '@/utils'
 import React from 'react'
-import RadioButtonSolidIcon from '../assets/icons/RadioButtonSolidIcon'
+import RadioButtonSolidIcon from '../icons/RadioButtonSolidIcon'
 
 interface FormRadioProps {
   checked?: boolean

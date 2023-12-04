@@ -1,5 +1,5 @@
-import colors from '@/app/constants/colors'
-import { IconProps } from '@/app/types'
+import colors from '@/constants/colors'
+import { IconProps } from '@/types'
 import React from 'react'
 
 const MediaIcon = ({

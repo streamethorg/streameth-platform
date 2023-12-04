@@ -1,7 +1,7 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import { ModalContext } from '@/components/context/ModalContext'
-import useLocalStorage from '@/components/hooks/useLocalStorage'
+import { ModalContext } from '@/context/ModalContext'
+import useLocalStorage from '@/hooks/useLocalStorage'
 import { IEvent } from 'streameth-server/model/event'
 
 interface props {

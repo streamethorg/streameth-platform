@@ -1,6 +1,6 @@
-import LoadingIcon from '@/app/assets/icons/LoadingIcon'
-import PlusCircleIcon from '@/app/assets/icons/PlusCircleIcon'
-import FormLabel from '@/app/utils/FormLabel'
+import LoadingIcon from '@/components/icons/LoadingIcon'
+import PlusCircleIcon from '@/components/icons/PlusCircleIcon'
+import FormLabel from '@/components/Form/FormLabel'
 import { getImageUrl } from '@/utils'
 import React, { SetStateAction, useRef, useState } from 'react'
 

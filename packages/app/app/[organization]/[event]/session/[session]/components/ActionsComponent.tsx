@@ -1,12 +1,12 @@
 'use client'
-import DownloaderIcon from '@/app/assets/icons/DownloaderIcon'
+import DownloaderIcon from '@/components/icons/DownloaderIcon'
 
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import VideoDownload from './VideoDownload'
 import { useContext } from 'react'
-import { ModalContext } from '@/components/context/ModalContext'
+import { ModalContext } from '@/context/ModalContext'
 import { ISession } from 'streameth-server/model/session'
 import { IEvent } from 'streameth-server/model/event'
 
