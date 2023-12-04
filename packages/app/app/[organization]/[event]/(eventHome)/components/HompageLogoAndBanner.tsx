@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import ReserveSpotButton from './ReserveSpotModal'
+import MintButton from '@/components/misc/MintButton'
 import ComponentWrapper from './ComponentWrapper'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -29,6 +30,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
         <div className=" flex-col flex space-y-2 md:flex-col">
           <h1 className="text-4xl text-left font-bold">
             {event.name}
+            <MintButton address="0xD628D7cE49f0796D3e23C5dD1e1C20eDAA224132" />
           </h1>
           <div className=" flex flex-col space-y-4 text-left">
             <p>
