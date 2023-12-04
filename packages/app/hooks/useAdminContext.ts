@@ -1,5 +1,5 @@
 import React from 'react'
-import { EventFormContext } from '../admin/[organization]/components/EventFormContext'
+import { EventFormContext } from '../app/admin/[organization]/components/EventFormContext'
 
 const UseAdminContext = () => {
   const context = React.useContext(EventFormContext)

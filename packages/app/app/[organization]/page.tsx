@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import FilterBar from '../(home)/components/FilterBar'
 import remarkGfm from 'remark-gfm'
-import ColorComponent from '../utils/ColorComponent'
+import ColorComponent from '../../components/Form/ColorComponent'
 import { notFound } from 'next/navigation'
 import EventController from 'streameth-server/controller/event'
 import OrganizationController from 'streameth-server/controller/organization'

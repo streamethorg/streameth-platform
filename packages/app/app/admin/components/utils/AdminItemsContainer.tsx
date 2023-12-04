@@ -1,5 +1,5 @@
 'use client'
-import ArrowRightIcon from '@/app/assets/icons/ArrowRightIcon'
+import ArrowRightIcon from '@/components/icons/ArrowRightIcon'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 
 interface ItemsContainerProps {

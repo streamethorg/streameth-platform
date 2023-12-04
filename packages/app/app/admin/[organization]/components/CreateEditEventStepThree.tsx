@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { Button } from '@/app/utils/Button'
-import FormLabel from '@/app/utils/FormLabel'
-import { FormTextInput } from '@/app/utils/FormTextInput'
+import { Button } from '@/components/Form/Button'
+import FormLabel from '@/components/Form/FormLabel'
+import { FormTextInput } from '@/components/Form/FormTextInput'
 import { EventFormContext } from './EventFormContext'
-import FormRadio from '@/app/utils/FormRadio'
+import FormRadio from '@/components/Form/FormRadio'
 
 const CreateEditEventStepThree = () => {
   const context = useContext(EventFormContext)
