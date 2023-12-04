@@ -1,0 +1,9 @@
+{
+  "id": "base",
+  "name": "Base",
+  "description": "Base ",
+  "url": "https://test.com",
+  "logo": "https://test.com",
+  "location": "Londo ",
+  "accentColor": "#FFF"
+}

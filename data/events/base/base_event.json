@@ -1,0 +1,41 @@
+{
+  "id": "base_event",
+  "name": "Base event",
+  "description": "BASE, an exclusive side event during Art Basel, offers an immersive experience in contemporary creativity. This event, set amidst the buzz of Art Basel, showcases an eclectic mix of up-and-coming artists and innovative installations. BASE is a hub for contemporary art enthusiasts to discover new talents and engage in dynamic discussions. ",
+  "start": "2023-12-08T00:00:00.000Z",
+  "end": "2023-12-09T00:00:00.000Z",
+  "location": "Miami",
+  "organizationId": "base",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1qQ9aFLIVo60jWi5Thtel67EvxMRi2af-nev_vBP-3wg",
+        "apiKey": ""
+      }
+    }
+  ],
+  "eventCover": "base_cover.png",
+  "website": "",
+  "archiveMode": false,
+  "timezone": "America/New_York",
+  "logo": "base_logo.png",
+  "banner": "base_banner.png",
+  "accentColor": "#ffffff",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "s",
+        "driveApiKey": "s"
+      }
+    }
+  ],
+  "startTime": "19:46",
+  "endTime": "22:52",
+  "enableVideoDownloader": true,
+  "unlisted": false,
+  "plugins": {
+    "disableChat": false
+  }
+}
