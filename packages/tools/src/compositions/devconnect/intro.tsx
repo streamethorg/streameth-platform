@@ -107,7 +107,7 @@ export const Intro: React.FC<Zod.infer<typeof DevconnectISTProps>> = ({ type, se
                                     {session.speakers.map((i) => {
                                         return (
                                             <div key={i.id} className='flex flex-col items-center gap-4'>
-                                                <Img className='w-48 h-48 object-cover rounded-full' src={i.photo ?? CreateAvatar(i.name)} />
+                                                <Img className='w-48 h-48 object-cover rounded-full' src={i.photo || CreateAvatar(i.name)} />
                                                 <span className='text-3xl font-medium w-48 text-center leading-normal'>{i.name}</span>
                                             </div>)
                                     })}

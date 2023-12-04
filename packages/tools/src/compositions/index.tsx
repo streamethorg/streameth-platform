@@ -107,7 +107,7 @@ export function Compositions() {
           defaultProps={{
             type: '1',
             id: 'ethgunu',
-            session: MOCK_SESSION[0],
+            session: MOCK_SESSION[3],
           }}
         />
 
