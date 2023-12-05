@@ -8,6 +8,7 @@ import {
 import { PropsWithChildren } from 'react'
 import { usePathname } from 'next/navigation'
 import { WagmiConfig, createConfig } from 'wagmi'
+import { base, mainnet } from 'viem/chains'
 
 const authApi = '/api/auth'
 
@@ -57,7 +58,8 @@ const config = createConfig(
   getDefaultConfig({
     autoConnect: true,
     appName: 'StreamETH',
-    infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+    chains: [mainnet, base],
+    // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   })
