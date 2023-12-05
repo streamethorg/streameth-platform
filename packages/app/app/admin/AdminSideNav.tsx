@@ -1,13 +1,13 @@
 'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import HomeIcon from '../assets/icons/HomeIcon'
-import EventIcon from '../assets/icons/EventIcon'
+import HomeIcon from '../../components/icons/HomeIcon'
+import EventIcon from '../../components/icons/EventIcon'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAccount, useEnsName } from 'wagmi'
 import { truncateAddr } from '@/utils'
-import MediaIcon from '../assets/icons/MediaIcon'
+import MediaIcon from '../../components/icons/MediaIcon'
 import makeBlockie from 'ethereum-blockies-base64'
 import {
   ArrowLeftIcon,

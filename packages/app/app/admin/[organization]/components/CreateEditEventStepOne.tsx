@@ -1,15 +1,15 @@
 'use client'
 
 import React, { SetStateAction, useContext } from 'react'
-import { FormTextArea } from '@/app/utils/FormTextArea'
-import { FormTextInput } from '@/app/utils/FormTextInput'
+import { FormTextArea } from '@/components/Form/FormTextArea'
+import { FormTextInput } from '@/components/Form/FormTextInput'
 import ImageFileUploader from './ImageFileUploader'
 import EventPreview from './EventPreview'
-import { ModalContext } from '@/components/context/ModalContext'
+import { ModalContext } from '@/context/ModalContext'
 import { EventFormContext } from './EventFormContext'
-import { FormSelect } from '@/app/utils/FormSelect'
-import { TIMEZONES } from '@/app/constants/timezones'
-import { Button } from '@/app/utils/Button'
+import { FormSelect } from '@/components/Form/FormSelect'
+import { TIMEZONES } from '@/constants/timezones'
+import { Button } from '@/components/Form/Button'
 import { apiUrl } from 'streameth-server/utils'
 
 const CreateEditEventStepOne = () => {

@@ -7,11 +7,8 @@ import {
 } from 'react'
 
 import { usePathname } from 'next/navigation'
-import colors from '@/app/constants/colors'
-import {
-  Page,
-  TopNavbarContext,
-} from '@/components/context/TopNavbarContext'
+import colors from '@/constants/colors'
+import { Page, TopNavbarContext } from '@/context/TopNavbarContext'
 import {
   HomeIcon,
   ViewColumnsIcon,

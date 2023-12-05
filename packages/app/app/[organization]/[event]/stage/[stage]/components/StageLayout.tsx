@@ -1,8 +1,8 @@
 'use client'
 import ActionsComponent from '@/app/[organization]/[event]/session/[session]/components/ActionsComponent'
 import PluginBar from '@/components/Layout/PluginBar'
-import { LoadingContext } from '@/components/context/LoadingContext'
-import { MobileContext } from '@/components/context/MobileContext'
+import { LoadingContext } from '@/context/LoadingContext'
+import { MobileContext } from '@/context/MobileContext'
 import EmbedButton from '@/components/misc/EmbedButton'
 import Player from '@/components/misc/Player'
 import ShareButton from '@/components/misc/ShareButton'
@@ -14,8 +14,8 @@ import {
 import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { Dm3 } from './dm3/DM3'
 import { StageContext } from './StageContext'
-import LivepeerIcon from '@/app/assets/icons/LivepeerIcon'
-import Chat from '@/plugins/Chat'
+import LivepeerIcon from '@/components/icons/LivepeerIcon'
+import Chat from '@/components/plugins/Chat'
 import { IEvent } from 'streameth-server/model/event'
 
 export default function StageLayout({ event }: { event: IEvent }) {

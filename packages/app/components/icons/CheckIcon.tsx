@@ -1,4 +1,4 @@
-import colors from '@/app/constants/colors'
+import colors from '@/constants/colors'
 import React from 'react'
 
 const CheckIcon = ({ pathFill = colors.blue }) => {

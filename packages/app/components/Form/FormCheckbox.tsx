@@ -1,6 +1,6 @@
 import { listenPressOnElement } from '@/utils'
 import React from 'react'
-import CheckBoxSolid from '../assets/icons/CheckBoxIcon'
+import CheckBoxSolid from '../icons/CheckBoxIcon'
 
 interface FormCheckboxProps {
   checked?: boolean

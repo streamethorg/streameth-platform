@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState, useContext } from 'react'
-import { ModalContext } from '../context/ModalContext'
+import { ModalContext } from '../../context/ModalContext'
 import { CodeBracketIcon } from '@heroicons/react/24/outline'
 
 const ModalContent: React.FC<{

@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 
-import ColorComponent from '../../utils/ColorComponent'
+import ColorComponent from '../../../components/Form/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
-import { ArchiveContext } from '@/components/context/ArchiveContext'
+import { ArchiveContext } from '@/context/ArchiveContext'
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'

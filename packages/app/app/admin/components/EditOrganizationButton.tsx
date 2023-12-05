@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useContext } from 'react'
-import { ModalContext } from '@/components/context/ModalContext'
-import { Button } from '@/app/utils/Button'
+import { ModalContext } from '@/context/ModalContext'
+import { Button } from '@/components/Form/Button'
 import EditOrganizationForm from './EditOranizationForm'
 import { IOrganization } from 'streameth-server/model/organization'
 

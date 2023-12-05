@@ -3,8 +3,8 @@
 import React, { useContext } from 'react'
 import EditOrganizationButton from './EditOrganizationButton'
 import Link from 'next/link'
-import { Button } from '@/app/utils/Button'
-import { ModalContext } from '@/components/context/ModalContext'
+import { Button } from '@/components/Form/Button'
+import { ModalContext } from '@/context/ModalContext'
 import { IOrganization } from 'streameth-server/model/organization'
 
 interface OrganizationEntryProps {
