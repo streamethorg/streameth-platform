@@ -51,7 +51,7 @@ export default async function EventHome({ params }: Params) {
       <div className=" relative my-1 md:my-4 max-w-full md:max-w-4xl mx-auto z-50">
         <HomePageLogoAndBanner event={event} />
         <div className="bg-base  text-white p-4 rounded-xl">
-          <span className=" w-full text-xl uppercase md:text-4xl flex ">
+          <span className=" w-full text-xl uppercase md:text-4xl flex">
             Livestreams
           </span>
           <div className="grid py-4 md:grid-cols-2 gap-4">

@@ -2,12 +2,12 @@ import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
 const buttonVariants = cva(
-  'inline-flex items-center border rounded-[8px] disabled:opacity-50  disabled:pointer-events-none',
+  'inline-flex items-center border disabled:opacity-50  disabled:pointer-events-none',
   {
     variants: {
       variant: {
         default:
-          'text-white bg-blue hover:bg-transparent hover:text-blue hover:border-blue',
+          'text-white bg-base rounded-xl hover:bg-white hover:text-base hover:border-base',
         danger: 'bg-danger text-white',
         base: 'bg-base text-white hover:text-black',
         outline:
@@ -16,7 +16,7 @@ const buttonVariants = cva(
         yellow: 'bg-yellow-500 text-white',
       },
       size: {
-        default: 'h-9 py-1 px-4',
+        default: 'm-2 p-2',
         sm: 'h-7 px-2 text-sm',
         xs: 'h-6 px-1.5 text-[12px]',
         lg: 'w-full h-9',
@@ -46,7 +46,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={isLoading}
         {...props}>
-        {children}
+        {isLoading ? (
+          <div className="animate-pulse">Loading...</div>
+        ) : (
+          children
+        )}
       </button>
     )
   }
