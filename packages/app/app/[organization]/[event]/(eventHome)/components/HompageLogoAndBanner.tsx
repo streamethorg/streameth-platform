@@ -28,7 +28,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
       />
       <div id="home" className="flex flex-col p-4">
         <div className=" flex-col flex space-y-2 md:flex-col">
-          <div className="flex flex-row w-full justfy-center items-center my-1">
+          <div className="flex flex-col md:flex-row w-full justfy-center items-center my-1">
             <h1 className="text-4xl text-left font-bold mr-2">
               {event.name}
             </h1>
