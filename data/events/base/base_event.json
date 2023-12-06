@@ -1,9 +1,10 @@
 {
   "id": "base_event",
-  "name": "Base event",
-  "description": "BASE, an exclusive side event during Art Basel, offers an immersive experience in contemporary creativity. This event, set amidst the buzz of Art Basel, showcases an eclectic mix of up-and-coming artists and innovative installations. BASE is a hub for contemporary art enthusiasts to discover new talents and engage in dynamic discussions. ",
+  "name": "Base House",
+  "description": "Base is celebrating creativity and onchain art at Art Basel. Join us at Base House, our home base in Miami featuring an onchain gallery, creator panels, interactive demos, and more. Explore what it means to bring art onchain, connect with creators, and learn about Base’s vision for a more open future internet. Not in Miami? Tune in to the livestream right here or on Base X. Or, mint the broadcast channel to watch the livestream from any NFT marketplace such as OpenSea or Coinbase NFT, and receive commemorative drops after the event.",
+  
   "start": "2023-12-08T00:00:00.000Z",
-  "end": "2023-12-09T00:00:00.000Z",
+  "end": "2023-12-10T00:00:00.000Z",
   "location": "Miami",
   "organizationId": "base",
   "dataImporter": [
@@ -18,7 +19,7 @@
   "eventCover": "base_cover.png",
   "website": "",
   "archiveMode": false,
-  "timezone": "America/New_York",
+  "timezone": "America/New_york",
   "logo": "base_logo.png",
   "banner": "base_banner.png",
   "accentColor": "#ffffff",
@@ -31,8 +32,8 @@
       }
     }
   ],
-  "startTime": "19:46",
-  "endTime": "22:52",
+  "startTime": "11:00",
+  "endTime": "19:00",
   "enableVideoDownloader": true,
   "unlisted": false,
   "plugins": {
