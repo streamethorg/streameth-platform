@@ -27,7 +27,7 @@ const NFTMintComponent = () => {
         </div>
         <div className="flex flex-col w-full md:w-[40%] p-2 bg-base shadow rounded-lg justify-center items-center">
           <Image alt="nft image" src={nft}></Image>
-          <MintButton address="0xD628D7cE49f0796D3e23C5dD1e1C20eDAA224132" />
+          <MintButton address="0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b" />
         </div>
       </div>
     </ComponentWrapper>
