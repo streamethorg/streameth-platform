@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
 const buttonVariants = cva(
-  'inline-flex items-center border disabled:opacity-50  disabled:pointer-events-none',
+  'inline-flex items-center disabled:opacity-50  disabled:pointer-events-none',
   {
     variants: {
       variant: {

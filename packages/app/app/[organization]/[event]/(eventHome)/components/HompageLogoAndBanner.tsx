@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm'
 import { getEventPeriod } from '@/utils/time'
 import { getImageUrl } from '@/utils'
 import { IEvent } from 'streameth-server/model/event'
+import SectionTitle from './SectionTitle'
 
 const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
   const { logo, banner } = event
@@ -26,13 +27,10 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
           objectFit: 'cover',
         }}
       />
-      <div id="home" className="flex flex-col p-4">
+      <div id="home" className="flex flex-col p-2">
         <div className=" flex-col flex space-y-2 md:flex-col">
           <div className="flex flex-col md:flex-row w-full justfy-center items-center my-1">
-            <h1 className="text-4xl text-left font-bold mr-2">
-              {event.name}
-            </h1>
-            <MintButton address="0xD628D7cE49f0796D3e23C5dD1e1C20eDAA224132" />
+            <SectionTitle title={event.name} />
           </div>
           <div className=" flex flex-col space-y-4 text-left">
             <p>
@@ -56,7 +54,7 @@ const HomePageLogoAndBanner = ({ event }: { event: IEvent }) => {
               {event.location}
             </p>
             {/* <ReserveSpotButton event={event} /> */}
-            <article className="prose max-w-full prose-a:text-white prose-gray text-white">
+            <article className="prose max-w-full prose-a:text-white prose-gray text-white text-xl">
               <Markdown remarkPlugins={[remarkGfm]}>
                 {event.description}
               </Markdown>
