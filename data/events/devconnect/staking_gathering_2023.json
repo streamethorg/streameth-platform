@@ -22,6 +22,6 @@
   "logo": "staking_logo.png",
   "banner": "staking_cover.jpeg",
   "accentColor": "#3C4043",
-
+  "unlisted": true,
   "startTime": "10:00"
 }
