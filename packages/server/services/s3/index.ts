@@ -1,6 +1,14 @@
 import { S3 } from "aws-sdk";
 import { Readable } from "stream";
 
+
+// class abstract ImageService {
+//   abstract uploadFile()
+//   abstract getFile()
+
+
+// class GithubStorage
+
 class S3Service {
   private s3Client: S3;
 

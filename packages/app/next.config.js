@@ -8,6 +8,17 @@ let nextConfig = {
       has: [
         {
           type: 'host',
+          value: 'basemiami.xyz',
+        },
+      ],
+      destination: 'https://basemiami.xyz/base/base_event',
+      permanent: true,
+    },
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
           value: 'watch.protocol.berlin',
         },
       ],
