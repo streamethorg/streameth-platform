@@ -14,7 +14,7 @@ export const ConnectWalletButton = ({
           <div className="rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
             <button
               onClick={show}
-              className="text-accent text-sm font-ubuntu font-bold rounded-xl h-full w-full bg-white py-1 px-3">
+              className="text-blue text-sm font-ubuntu font-bold rounded-xl h-full w-full bg-white py-1 px-3">
               {isConnected ? ensName ?? truncatedAddress : btnText}
             </button>
           </div>
