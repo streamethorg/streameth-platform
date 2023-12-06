@@ -1,6 +1,6 @@
 'use client'
 import { useState, useContext } from 'react'
-import { MobileContext } from '../context/MobileContext'
+import { MobileContext } from '../../context/MobileContext'
 export default function PluginBar({
   bottomOffset,
   tabs,

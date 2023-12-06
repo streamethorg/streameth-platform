@@ -5,7 +5,7 @@ import React, {
   useContext,
   useEffect,
 } from 'react'
-import { LoadingContext } from '@/components/context/LoadingContext'
+import { LoadingContext } from '@/context/LoadingContext'
 export interface FilterOption<T> {
   name: string
   value: string | number

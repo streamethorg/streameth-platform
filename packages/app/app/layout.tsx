@@ -1,13 +1,13 @@
 import './globals.css'
 import { Ubuntu, Heebo } from 'next/font/google'
-import GeneralContext from '@/components/context/GeneralContext'
-import { ModalContextProvider } from '@/components/context/ModalContext'
-import { MobileContextProvider } from '@/components/context/MobileContext'
-import { LoadingContextProvider } from '@/components/context/LoadingContext'
-import { TopNavbarContextProvider } from '@/components/context/TopNavbarContext'
+import GeneralContext from '@/context/GeneralContext'
+import { ModalContextProvider } from '@/context/ModalContext'
+import { MobileContextProvider } from '@/context/MobileContext'
+import { LoadingContextProvider } from '@/context/LoadingContext'
+import { TopNavbarContextProvider } from '@/context/TopNavbarContext'
 import Initializer from './Initializer'
 import { Metadata } from 'next'
-import { FilterContextProvider } from '../components/context/FilterContext'
+import { FilterContextProvider } from '../context/FilterContext'
 
 export const metadata: Metadata = {
   title: 'StreamETH',

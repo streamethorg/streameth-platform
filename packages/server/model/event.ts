@@ -1,100 +1,100 @@
-import { IsNotEmpty, IsDate, validate } from 'class-validator'
-import { IOrganization } from './organization'
-import { generateId, BASE_PATH } from '../utils'
-import path from 'path'
+import { IsNotEmpty, IsDate, validate } from "class-validator";
+import { IOrganization } from "./organization";
+import { generateId, BASE_PATH } from "../utils";
+import path from "path";
 export interface GSheetConfig {
-  sheetId?: string
-  apiKey?: string
-  driveId?: string
-  driveApiKey?: string
+  sheetId?: string;
+  apiKey?: string;
+  driveId?: string;
+  driveApiKey?: string;
 }
 
 export interface PretalxConfig {
-  url: string
-  apiToken: string
+  url: string;
+  apiToken: string;
 }
 
 export type IDataImporter =
-  | { type: 'gsheet'; config: GSheetConfig }
-  | { type: 'pretalx'; config: PretalxConfig }
-export type IDataExporter = { type: 'gdrive'; config: GSheetConfig }
+  | { type: "gsheet"; config: GSheetConfig }
+  | { type: "pretalx"; config: PretalxConfig };
+export type IDataExporter = { type: "gdrive"; config: GSheetConfig };
 
 export interface IPlugins {
-  disableChat: boolean
+  disableChat: boolean;
 }
 export interface IEvent {
-  id: string
-  name: string
-  description: string
-  start: Date
-  end: Date
-  location: string
-  logo?: string
-  banner?: string
-  startTime?: string
-  endTime?: string
-  organizationId: IOrganization['id']
-  dataImporter?: IDataImporter[]
-  eventCover?: string
-  archiveMode?: boolean
-  website?: string
-  timezone: string
-  accentColor?: string
-  unlisted?: boolean
-  dataExporter?: IDataExporter[]
-  enableVideoDownloader?: boolean
-  plugins?: IPlugins
+  id: string;
+  name: string;
+  description: string;
+  start: Date;
+  end: Date;
+  location: string;
+  logo?: string;
+  banner?: string;
+  startTime?: string;
+  endTime?: string;
+  organizationId: IOrganization["id"];
+  dataImporter?: IDataImporter[];
+  eventCover?: string;
+  archiveMode?: boolean;
+  website?: string;
+  timezone: string;
+  accentColor?: string;
+  unlisted?: boolean;
+  dataExporter?: IDataExporter[];
+  enableVideoDownloader?: boolean;
+  plugins?: IPlugins;
 }
 
 export default class Event implements IEvent {
   @IsNotEmpty()
-  id: string
+  id: string;
 
   @IsNotEmpty()
-  name: string
+  name: string;
 
   @IsNotEmpty()
-  description: string
+  description: string;
 
   // @IsDate()
-  start: Date
+  start: Date;
 
   // @IsDate()
-  end: Date
+  end: Date;
 
-  logo?: string
-
-  @IsNotEmpty()
-  location: string
+  logo?: string;
 
   @IsNotEmpty()
-  organizationId: string
+  location: string;
 
-  dataImporter: IDataImporter[] | undefined
+  @IsNotEmpty()
+  organizationId: string;
 
-  dataExporter: IDataExporter[] | undefined
+  dataImporter: IDataImporter[] | undefined;
 
-  eventCover?: string
+  dataExporter: IDataExporter[] | undefined;
 
-  archiveMode?: boolean
+  eventCover?: string;
 
-  website?: string
+  archiveMode?: boolean;
 
-  banner?: string
+  website?: string;
 
-  timezone: string
+  banner?: string;
 
-  accentColor: string
+  timezone: string;
 
-  startTime?: string
+  accentColor: string;
 
-  unlisted?: boolean
+  startTime?: string;
 
-  endTime?: string
+  unlisted?: boolean;
 
-  enableVideoDownloader?: boolean
+  endTime?: string;
 
-  plugins?: IPlugins
+  enableVideoDownloader?: boolean;
+
+  plugins?: IPlugins;
   constructor({
     id,
     name,
@@ -117,46 +117,46 @@ export default class Event implements IEvent {
     enableVideoDownloader,
     unlisted,
     plugins,
-  }: Omit<IEvent, 'id'> & { id?: string }) {
-    this.id = id ?? generateId(name)
-    this.name = name
-    this.description = description
-    this.start = new Date(start)
-    this.end = new Date(end)
-    this.location = location
-    this.organizationId = organizationId
-    this.dataImporter = dataImporter
-    this.eventCover = eventCover ? eventCover : id + '.png'
-    this.website = website
-    this.archiveMode = archiveMode ?? true
-    this.timezone = timezone ?? 'utc'
-    this.logo = logo
-    this.banner = banner
-    this.accentColor = accentColor ?? '#F5F5F5'
-    this.dataExporter = dataExporter
-    this.startTime = startTime
-    this.endTime = endTime
-    this.enableVideoDownloader = enableVideoDownloader ?? false
-    this.unlisted = unlisted ?? false
-    this.plugins = plugins
+  }: Omit<IEvent, "id"> & { id?: string }) {
+    this.id = id ?? generateId(name);
+    this.name = name;
+    this.description = description;
+    this.start = new Date(start);
+    this.end = new Date(end);
+    this.location = location;
+    this.organizationId = organizationId;
+    this.dataImporter = dataImporter;
+    this.eventCover = eventCover ? eventCover : id + ".png";
+    this.website = website;
+    this.archiveMode = archiveMode ?? true;
+    this.timezone = timezone ?? "utc";
+    this.logo = logo;
+    this.banner = banner;
+    this.accentColor = accentColor ?? "#F5F5F5";
+    this.dataExporter = dataExporter;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.enableVideoDownloader = enableVideoDownloader ?? true;
+    this.unlisted = unlisted ?? false;
+    this.plugins = plugins;
     // this.validateThis();
   }
 
   async validateThis() {
-    const errors = await validate(this)
+    const errors = await validate(this);
     if (errors.length > 0) {
-      throw new Error(`Validation failed! ${errors}`)
+      throw new Error(`Validation failed! ${errors}`);
     }
   }
 
   public toJson(): IEvent {
-    return { ...this }
+    return { ...this };
   }
 
   public static async fromJson(json: string): Promise<Event> {
-    const data = typeof json === 'string' ? JSON.parse(json) : json
-    const evt = new Event({ ...data })
-    return evt
+    const data = typeof json === "string" ? JSON.parse(json) : json;
+    const evt = new Event({ ...data });
+    return evt;
   }
 
   public static async getEventPath(
@@ -164,13 +164,8 @@ export default class Event implements IEvent {
     eventId?: string
   ): Promise<string> {
     if (eventId) {
-      return path.join(
-        BASE_PATH,
-        'events',
-        organizationId,
-        `${eventId}.json`
-      )
+      return path.join(BASE_PATH, "events", organizationId, `${eventId}.json`);
     }
-    return path.join(BASE_PATH, 'events', organizationId)
+    return path.join(BASE_PATH, "events", organizationId);
   }
 }

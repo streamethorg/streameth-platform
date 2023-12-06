@@ -1,4 +1,4 @@
-import ClientOnly from '@/app/utils/ClientOnly'
+import ClientOnly from '@/components/Form/ClientOnly'
 import { useSIWE } from 'connectkit'
 import { PropsWithChildren } from 'react'
 import { ConnectWalletButton } from '@/components/ConnectWalletButton'

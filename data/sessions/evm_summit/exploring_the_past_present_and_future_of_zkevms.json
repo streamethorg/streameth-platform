@@ -55,11 +55,11 @@
       "photo": "https://evmsummit.org/images/speakers/mamy_andre_ratsimbazafy.jpg"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/de66ad0t4ikgy1pg/index.m3u8",
-  "playbackId": "de66ad0t4ikgy1pg",
+  "videoUrl": "https://lp-playback.com/hls/f5663fjzoe6ntsuo/index.m3u8",
+  "playbackId": "f5663fjzoe6ntsuo",
   "eventId": "evm_summit",
   "coverImage": "/sessions/evm_summit/exploring_the_past_present_and_future_of_zkevms_thumbnail.png",
-  "assetId": "de66f402-2ca0-4b6c-bac2-dc6dad06382e",
-  "sourceId": "1f82b9ab-c330-470f-abb4-352939e198f2",
-  "videoType": "clip"
+  "assetId": "f56682dc-ce59-4478-a906-6f2dd4870ed9",
+  "sourceId": "",
+  "videoType": "raw"
 }

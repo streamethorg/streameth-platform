@@ -58,5 +58,7 @@ export const hasData = ({ event }: { event: IEvent }) => {
 }
 
 export const getImageUrl = (image: string) => {
-  return `https://streamethapp.ams3.cdn.digitaloceanspaces.com${image}`
+  return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
+  // temp revert to github
+  // return `https://streamethapp.ams3.cdn.digitaloceanspaces.com${image}`
 }

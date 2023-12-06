@@ -1,6 +1,6 @@
 'use client'
 import SpeakerModal from './SpeakerModal'
-import { ModalContext } from '@/components/context/ModalContext'
+import { ModalContext } from '@/context/ModalContext'
 import { useContext } from 'react'
 import SpeakerPhoto from './SpeakerPhoto'
 import { ISpeaker } from 'streameth-server/model/speaker'

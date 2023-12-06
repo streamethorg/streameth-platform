@@ -1,6 +1,6 @@
 'use client'
 
-import { ModalContext } from '@/components/context/ModalContext'
+import { ModalContext } from '@/context/ModalContext'
 import { useContext } from 'react'
 import ScheduleCardModal from './ScheduleCardModal'
 import moment from 'moment-timezone'
