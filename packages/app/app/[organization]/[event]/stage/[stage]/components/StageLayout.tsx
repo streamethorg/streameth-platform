@@ -63,7 +63,7 @@ export default function StageLayout({ event }: { event: IEvent }) {
   }
   return (
     <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-screen lg:gap-4 md:p-4">
-      <div className="flex flex-col w-full h-full lg:w-[70%] lg:gap-4">
+      <div className="flex flex-col w-full h-full lg:w-[75%] lg:gap-4">
         <div className="flex flex-col lg:flex-row relative  ">
           <div
             ref={stickyRef}
@@ -81,17 +81,17 @@ export default function StageLayout({ event }: { event: IEvent }) {
             />
           </div>
         </div>
-        <div className="flex flex-row relative  ">
+        {/* <div className="flex flex-row relative  ">
           <div className="bg-base  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 gap-2">
             <p className="text-white">Powered by</p>
             <LivepeerIcon />
           </div>
           <MintButton address="0xD628D7cE49f0796D3e23C5dD1e1C20eDAA224132" />
-        </div>
+        </div> */}
       </div>
       <div
         style={{ height: isMobile ? '100%' : playerHeight }}
-        className={`w-full lg:w-[30%] px-2 md:px-0`}>
+        className={`w-full lg:w-[25%] px-2 md:px-0`}>
         <PluginBar
           bottomOffset={bottomOffset}
           tabs={getPluginTabs()}
