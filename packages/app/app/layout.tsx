@@ -9,38 +9,38 @@ import Initializer from './Initializer'
 import { Metadata } from 'next'
 import { FilterContextProvider } from '../context/FilterContext'
 
-export const metadata: Metadata = {
-  title: 'StreamETH',
-  description:
-    'The complete solution to host your hybrid or virtual event.',
-  metadataBase: new URL('https://app.streameth.org'),
-  openGraph: {
-    title: 'StreamETH',
-    siteName: 'StreamETH',
-    description:
-      'The complete solution to host your hybrid or virtual event.',
-    images: {
-      url: 'https://app.streameth.org/banner.png',
-      alt: 'StreamETH Logo',
-    },
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'StreamETH',
-    description:
-      'The complete solution to host your hybrid or virtual event.',
-    images: {
-      url: 'https://app.streameth.org/banner.png',
-      alt: 'StreamETH Logo',
-    },
-  },
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en-US',
-    },
-  },
-}
+// export const metadata: Metadata = {
+//   title: 'StreamETH',
+//   description:
+//     'The complete solution to host your hybrid or virtual event.',
+//   metadataBase: new URL('https://app.streameth.org'),
+//   openGraph: {
+//     title: 'StreamETH',
+//     siteName: 'StreamETH',
+//     description:
+//       'The complete solution to host your hybrid or virtual event.',
+//     images: {
+//       url: 'https://app.streameth.org/banner.png',
+//       alt: 'StreamETH Logo',
+//     },
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     title: 'StreamETH',
+//     description:
+//       'The complete solution to host your hybrid or virtual event.',
+//     images: {
+//       url: 'https://app.streameth.org/banner.png',
+//       alt: 'StreamETH Logo',
+//     },
+//   },
+//   alternates: {
+//     canonical: '/',
+//     languages: {
+//       'en-US': '/en-US',
+//     },
+//   },
+// }
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
