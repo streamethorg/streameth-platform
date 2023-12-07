@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import MintButton from '@/components/misc/MintButton'
-import nft from '@/public/Base-house.jpg'
+import nft from '@/public/Basehouse-Livepeer.png'
 import ComponentWrapper from './ComponentWrapper'
 import SectionTitle from './SectionTitle'
 
