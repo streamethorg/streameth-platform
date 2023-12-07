@@ -98,7 +98,9 @@ const MintButton = ({
             }
             className={`hover:text-base uppercase text-xl hover:text-xl p-2 ${className}`}>
             {!isConnected
-              ? 'Login to Mint '
+              ? mintText
+                ? mintText
+                : 'Login to Mint '
               : chain?.id !== base?.id && 'Click and switch to Base'}
           </Button>
         )
