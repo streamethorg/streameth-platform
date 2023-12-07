@@ -56,7 +56,7 @@ const siweConfig = {
 
 const config = createConfig(
   getDefaultConfig({
-    autoConnect: true,
+    autoConnect: false,
     appName: 'StreamETH',
     chains: [mainnet, base],
     // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,

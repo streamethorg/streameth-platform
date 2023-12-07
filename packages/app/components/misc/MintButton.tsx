@@ -38,7 +38,15 @@ export const MintSuccess = ({ hash }: { hash: string }) => {
   )
 }
 
-const MintButton = ({ address }: { address: string }) => {
+const MintButton = ({
+  address,
+  className = '',
+  mintText = 'MINT',
+}: {
+  address: string
+  className?: string
+  mintText?: string
+}) => {
   const { address: userAddress, isConnected } = useAccount()
   const { chain } = useNetwork()
   const { switchNetwork } = useSwitchNetwork()
@@ -88,9 +96,9 @@ const MintButton = ({ address }: { address: string }) => {
                 ? onSwitchNetwork
                 : show
             }
-            className="hover:text-base uppercase text-xl hover:text-xl p-2">
+            className={`hover:text-base uppercase text-xl hover:text-xl p-2 ${className}`}>
             {!isConnected
-              ? 'Login to collect'
+              ? 'Login to Mint '
               : chain?.id !== base?.id && 'Click and switch to Base'}
           </Button>
         )
@@ -102,8 +110,8 @@ const MintButton = ({ address }: { address: string }) => {
         variant={'default'}
         onClick={() => mint()}
         isLoading={isLoading}
-        className="hover:text-base uppercase text-xl hover:text-xl p-2 border">
-        Click to collect
+        className={`hover:text-base uppercase text-xl hover:text-xl p-2 border ${className}`}>
+        {mintText ? mintText : 'MINT'}
       </Button>
     </div>
   )

@@ -9,7 +9,7 @@ const NFTMintComponent = () => {
     <ComponentWrapper sectionId="nft">
       <div className="flex flex-col md:flex-row justify-center">
         <div className="w-full md:w-[60%] p-2">
-          <SectionTitle title="Mint the NFT" />
+          <SectionTitle title="LIVESTREAM NFT" />
           <p className="text-xl">
             Base is celebrating creativity and onchain art at Art
             Basel with the first ever livestream video NFT, built on
