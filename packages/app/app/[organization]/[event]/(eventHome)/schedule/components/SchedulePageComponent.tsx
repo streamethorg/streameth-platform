@@ -7,6 +7,7 @@ import ComponentWrapper from '../../components/ComponentWrapper'
 import StageController from 'streameth-server/controller/stage'
 import EventController from 'streameth-server/controller/event'
 import SessionController from 'streameth-server/controller/session'
+import SectionTitle from '../../components/SectionTitle'
 interface Params {
   params: {
     event: string
@@ -37,9 +38,7 @@ const SchedulePageComponent = async ({ params }: Params) => {
         stage={stages[0]?.id}
         sessions={sessions.map((session) => session.toJson())}>
         <div className=" flex flex-col md:flex-row w-full rounded-lg z-50 space-y-2 md:space-y-0 md:space-x-2 mb-4 justify-center">
-          <span className=" w-full text-xl uppercase md:text-4xl flex ">
-            Schedule
-          </span>
+          <SectionTitle title="Schedule" />
           <DateSelect dates={dates} />
           <StageSelect stages={stages} />
         </div>

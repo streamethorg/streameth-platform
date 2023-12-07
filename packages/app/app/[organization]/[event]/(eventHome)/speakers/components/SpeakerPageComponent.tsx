@@ -3,6 +3,7 @@ import SpeakerCard from './SpeakerCard'
 import ComponentWrapper from '../../components/ComponentWrapper'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
+import SectionTitle from '../../components/SectionTitle'
 interface Params {
   params: {
     organization: string
@@ -25,9 +26,7 @@ const SpeakerPageComponent = async ({ params }: Params) => {
 
   return (
     <ComponentWrapper sectionId="speakers">
-      <span className=" w-full text-xl uppercase md:text-4xl">
-        Speakers
-      </span>
+      <SectionTitle title="Speakers" />
       <div className="my-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 w-full">
         {speakers.map((speaker) => (
           <div
