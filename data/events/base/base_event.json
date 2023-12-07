@@ -19,7 +19,7 @@
   "eventCover": "base_cover.png",
   "website": "",
   "archiveMode": false,
-  "timezone": "America/New_york",
+  "timezone": "EST",
   "logo": "base_logo.png",
   "banner": "base_banner.png",
   "accentColor": "#ffffff",
