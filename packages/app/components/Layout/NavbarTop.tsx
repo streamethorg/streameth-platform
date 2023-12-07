@@ -100,19 +100,29 @@ export default function NavbarTop() {
           />
         )}
         <div className="px-5 hidden lg:flex items-center gap-6">
-          <Image
-            width={35}
-            height={35}
-            src="/logo.png"
-            alt="streameth logo"
-          />
+          <Link
+            href="https://twitter.com/streameth"
+            target="_blank"
+            rel="noreferrer">
+            <Image
+              width={35}
+              height={35}
+              src="/logo.png"
+              alt="streameth logo"
+            />
+          </Link>
 
-          <Image
-            width={25}
-            height={25}
-            src="/livepeer_black.png"
-            alt="streameth logo"
-          />
+          <Link
+            href="https://twitter.com/Livepeer"
+            target="_blank"
+            rel="noreferrer">
+            <Image
+              width={25}
+              height={25}
+              src="/livepeer_black.png"
+              alt="livepeer logo"
+            />
+          </Link>
         </div>
         {pathname.includes('base') ? (
           <MintButton
