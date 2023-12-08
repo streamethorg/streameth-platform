@@ -9,6 +9,7 @@ import { PropsWithChildren } from 'react'
 import { usePathname } from 'next/navigation'
 import { WagmiConfig, createConfig } from 'wagmi'
 import { base, mainnet } from 'viem/chains'
+import { createPublicClient, http } from 'viem'
 
 const authApi = '/api/auth'
 
@@ -59,18 +60,11 @@ const config = createConfig(
     autoConnect: true,
     appName: 'StreamETH',
     chains: [base, mainnet],
+    publicClient: createPublicClient({
+      chain: base,
+      transport: http(),
+    }),
     // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
-    walletConnectProjectId:
-      process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
-  })
-)
-
-const adminConfig = createConfig(
-  getDefaultConfig({
-    autoConnect: true,
-    appName: 'StreamETH',
-    chains: [mainnet],
-    infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   })
@@ -78,10 +72,10 @@ const adminConfig = createConfig(
 
 const SiweContext = (props: PropsWithChildren) => {
   const pathname = usePathname()
-  const isAdminRoute = pathname.includes('/admin')
-  const wagmiConfig = isAdminRoute ? adminConfig : config
+  const isAdminRoute = pathname.startsWith('/admin')
+
   return (
-    <WagmiConfig config={wagmiConfig}>
+    <WagmiConfig config={config}>
       {isAdminRoute ? (
         <SIWEProvider {...siweConfig}>
           <ConnectKitProvider>{props.children}</ConnectKitProvider>
