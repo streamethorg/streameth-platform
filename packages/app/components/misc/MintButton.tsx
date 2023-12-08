@@ -112,8 +112,8 @@ const MintButton = ({
         variant={'default'}
         onClick={() => mint()}
         isLoading={isLoading}
-        className={`hover:text-base uppercase text-xl hover:text-xl p-2 border ${className}`}>
-        {mintText ? mintText : 'MINT'}
+        className={`w-full uppercase p-2 border ${className}`}>
+        {mintText ? mintText : 'MINT LIVESTREAM'}
       </Button>
     </div>
   )
