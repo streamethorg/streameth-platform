@@ -6,6 +6,7 @@ import UpcomingEvents from './components/UpcomingEvents'
 import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
+import LiveEvent from './components/LiveEvent'
 
 export default async function Home() {
   const eventController = new EventController()
@@ -46,8 +47,8 @@ export default async function Home() {
     .map((event) => event.toJson())
   const stageController = new StageController()
   const stage = await stageController.getStage(
-    '3b36',
-    'light_client_summit'
+    'base_house',
+    'base_event'
   )
 
   return (
@@ -84,11 +85,11 @@ export default async function Home() {
         </div>
       </div>
       <div className="flex flex-col lg:overflow-hidden">
-        {/* <LiveEvent stage={stage.toJson()} /> */}
+        <LiveEvent stage={stage.toJson()} />
         {/* <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
           Live Events
-        </p>
-        <LiveEvents events={liveEvents} /> */}
+        </p> */}
+        {/* <LiveEvents events={liveEvents} /> */}
         <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
           Upcoming Events
         </p>
