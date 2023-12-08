@@ -65,11 +65,23 @@ const config = createConfig(
   })
 )
 
+const adminConfig = createConfig(
+  getDefaultConfig({
+    autoConnect: true,
+    appName: 'StreamETH',
+    chains: [mainnet],
+    infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+    walletConnectProjectId:
+      process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+  })
+)
+
 const SiweContext = (props: PropsWithChildren) => {
   const pathname = usePathname()
-  const isAdminRoute = pathname.startsWith('/admin')
+  const isAdminRoute = pathname.includes('/admin')
+  const wagmiConfig = isAdminRoute ? adminConfig : config
   return (
-    <WagmiConfig config={config}>
+    <WagmiConfig config={wagmiConfig}>
       {isAdminRoute ? (
         <SIWEProvider {...siweConfig}>
           <ConnectKitProvider>{props.children}</ConnectKitProvider>
