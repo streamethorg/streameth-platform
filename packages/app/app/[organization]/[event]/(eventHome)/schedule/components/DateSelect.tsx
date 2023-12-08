@@ -1,15 +1,18 @@
 'use client'
 import { useContext, useEffect } from 'react'
 import { ScheduleContext } from './ScheduleContext'
+import moment from 'moment-timezone'
 
-const DateSelect = ({ dates }: { dates: number[] }) => {
+const DateSelect = ({ dates }: { dates: any[] }) => {
   const { setDate, date } = useContext(ScheduleContext)
 
   useEffect(() => {
     const currentDate = new Date().toLocaleDateString()
 
     dates?.forEach((timestamp) => {
-      const dateToCompare = new Date(timestamp).toLocaleDateString()
+      const dateToCompare = new Date(
+        moment(timestamp).tz('UTC').format('L')
+      ).toLocaleDateString()
       if (dateToCompare === currentDate) {
         setDate(Number(timestamp))
       } else {
@@ -30,7 +33,9 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
       onChange={(e) => handleDateChange(e.target.value)}>
       {dates.map((dateNum) => (
         <option key={dateNum} value={dateNum}>
-          {new Date(dateNum).toLocaleDateString()}
+          {new Date(
+            moment(dateNum).tz('UTC').format('L')
+          ).toLocaleDateString()}
         </option>
       ))}
     </select>
