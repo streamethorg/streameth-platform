@@ -42,11 +42,11 @@ export function Editor(props: Props) {
   const [scheduleInfo, setScheduleInfo] = useState<any>({})
 
   const playerProps = useMemo(() => {
-    if (props.sessionId) {
-      return {
-        src: `${process.env.NEXT_PUBLIC_RECORDINGS_BASE_URL}${props.playbackId}/${props.sessionId}/output.m3u8`,
-      }
-    }
+    // if (props.sessionId) {
+    //   return {
+    //     src: `${process.env.NEXT_PUBLIC_RECORDINGS_BASE_URL}${props.playbackId}/${props.sessionId}/output.m3u8`,
+    //   }
+    // }
 
     return { playbackId: props.playbackId }
   }, [props])
