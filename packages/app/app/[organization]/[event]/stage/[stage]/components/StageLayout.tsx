@@ -5,7 +5,9 @@ import { LoadingContext } from '@/context/LoadingContext'
 import { MobileContext } from '@/context/MobileContext'
 import EmbedButton from '@/components/misc/EmbedButton'
 import Player from '@/components/misc/Player'
-import ShareButton from '@/components/misc/ShareButton'
+import ShareButton, {
+  ShareWithText,
+} from '@/components/misc/ShareButton'
 import SessionList from '@/components/sessions/SessionList'
 import {
   CalendarIcon,
@@ -13,11 +15,12 @@ import {
 } from '@heroicons/react/24/outline'
 import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { StageContext } from './StageContext'
-import LivepeerIcon from '@/components/icons/LivepeerIcon'
+import LogoDark from '@/public/logo_dark.png'
 import Chat from '@/components/plugins/Chat'
 import { IEvent } from 'streameth-server/model/event'
-import MintButton from '@/components/misc/MintButton'
-
+import Link from 'next/link'
+import Image from 'next/image'
+import NFT from '@/components/plugins/NFT'
 export default function StageLayout({ event }: { event: IEvent }) {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
@@ -58,7 +61,11 @@ export default function StageLayout({ event }: { event: IEvent }) {
           content: <Chat conversationId={stage.id} />,
         })
     }
-
+    tabs.push({
+      id: 'NFT',
+      header: <ChatBubbleBottomCenterIcon />,
+      content: <NFT />,
+    })
     return tabs
   }
   return (
@@ -81,13 +88,18 @@ export default function StageLayout({ event }: { event: IEvent }) {
             />
           </div>
         </div>
-        {/* <div className="flex flex-row relative  ">
-          <div className="bg-base  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 gap-2">
-            <p className="text-white">Powered by</p>
-            <LivepeerIcon />
+        <div className="flex flex-col md:flex-row relative justify-center items-center mb-2  ">
+          <div className="  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 text-center gap-4">
+            <p className="text-black font-bold text-xl">Built by </p>
+            <Image
+              src={LogoDark}
+              alt="logo"
+              width={200}
+              height={60}
+            />
           </div>
-          <MintButton address="0xD628D7cE49f0796D3e23C5dD1e1C20eDAA224132" />
-        </div> */}
+          <ShareWithText text="Share this event" />
+        </div>
       </div>
       <div
         style={{ height: isMobile ? '100%' : playerHeight }}
