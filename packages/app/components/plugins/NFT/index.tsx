@@ -22,7 +22,10 @@ const NFTMintComponent = () => {
         <div className="flex flex-row">
           <MintButton address="0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b" />
           <Button>
-            <Link href="https://opensea.io/assets/base/0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b/1">
+            <Link
+              href="https://opensea.io/assets/base/0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b/1"
+              target="blank"
+              rel="noreferrer">
               Watch on Opensea
             </Link>
           </Button>

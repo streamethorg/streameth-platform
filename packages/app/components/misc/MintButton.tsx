@@ -52,6 +52,15 @@ const MintButton = ({
   const { switchNetwork } = useSwitchNetwork()
   const { openModal } = useContext(ModalContext)
 
+  const { data: mintUserBalance } = useContractRead({
+    address: address as Address,
+    abi: CastrABI,
+    functionName: 'balanceOf',
+    args: [userAddress],
+  })
+
+  const hasMinted = Number(mintUserBalance) > 0
+
   const {
     data: transaction,
     writeAsync: mint,
@@ -110,10 +119,14 @@ const MintButton = ({
     <div className="flex flex-row justify-center">
       <Button
         variant={'default'}
-        onClick={() => mint()}
+        onClick={() => !hasMinted && mint()}
         isLoading={isLoading}
         className={`w-full uppercase p-2 border ${className}`}>
-        {mintText ? mintText : 'MINT LIVESTREAM'}
+        {hasMinted
+          ? 'Successfully Minted'
+          : mintText
+          ? mintText
+          : 'MINT LIVESTREAM'}
       </Button>
     </div>
   )
