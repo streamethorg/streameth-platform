@@ -88,15 +88,30 @@ export default function StageLayout({ event }: { event: IEvent }) {
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row relative justify-center items-center mb-2  ">
-          <div className="  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 text-center gap-4">
-            <p className="text-black font-bold text-xl">Built by </p>
-            <Image
-              src={LogoDark}
-              alt="logo"
-              width={200}
-              height={60}
-            />
+        <div className="flex flex-col md:flex-row relative justify-center items-start mb-2  ">
+          <div className="flex flex-col">
+            <div className="  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 text-center gap-4">
+              <p className="text-black font-bold text-xl">
+                Built by{' '}
+              </p>
+              <Image
+                src={LogoDark}
+                alt="logo"
+                width={200}
+                height={60}
+              />
+            </div>
+            <div className="  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 text-center gap-4">
+              <p className="text-black font-bold text-xl">
+                Powered by{' '}
+              </p>
+              <Image
+                src="/livepeer-logo.png"
+                alt="logo"
+                width={120}
+                height={60}
+              />
+            </div>
           </div>
           <ShareWithText text="Share this event" />
         </div>
