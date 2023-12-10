@@ -1,1 +1,51 @@
-{"id":"collaborative_spirit_in_nfts_building_communities","name":"\nCollaborative Spirit in NFTs: Building Communities","description":"Panel with artists SenorPantsNFT, Sabet, Wondermundo and and Nima Beheshtian, Founder and CEO of Layerr. Will explore the importance of collaboration and community in the NFT ecosystem.","start":1702159200000,"end":1702161000000,"stageId":"base_house","speakers":[{"id":"eric_spivak","name":"Eric Spivak","bio":"Eric “Motivate” Spivak is an Educator,\nTrusted Advisor & Key Opinion Leader\nin the Blockchain Space\nEmerging Tech & Web3 World.","eventId":"base_event","twitter":"@EricSpivak"},{"id":"senorpantsnft","name":"SenorPantsNFT","bio":"As an emerging digital artist, Senor Pants\nemploys art as a catalyst for meaningful\nconversations. Having served as a business\nconsultant and advisor for NFT projects and\ndigital artists, Senor Pants has extended his lifelong\nadvocacy for the arts to the digital art space.","eventId":"base_event","twitter":"@SenorPantsNFT"},{"id":"sabet","name":"Sabet","bio":"Ali Sabet is an Iranian-American artist and designer. His work shines with vibrant optimism, love and beauty in the face of it all.","eventId":"base_event","twitter":"@sabet\n"},{"id":"wondermundo","name":"Wondermundo ","bio":"Hi. I’m a first generation Mexican-American multimedia artist with over 20 years experience in content, learning, and collaboration design. I entered the NFT space last April after rediscovering my own art.\n\nNow, I’m all in web3 selling my art as NFTs and helping projects scale.\n\nI joined the NFT space in April of 2021 as an artist and have a collection of 300 NFTs.\n\nMy artistic work is minted on my own $wonder contract by Manifold and platforms such as Makersplace, Foundation, OpenSea, Objkt.com, Versum, FxHash, Paras, and Exchange.art.\n\nI am also a community builder and helped build a couple early NFT communities like #famjam and #smolgang in 2021. Currently, I am working to build 0xTHULU.\n\nI aim to educate, empower, and uplift others through my platform and experience.","eventId":"base_event","twitter":"@wondermundo"},{"id":"nima_beheshtian","name":"Nima Beheshtian\n ","bio":"Founder and CEO of Layerr","eventId":"base_event"}],"playbackId":"","eventId":"base_event","coverImage":"/sessions/base_event/collaborative_spirit_in_nfts_building_communities.jpg"}
+{
+  "id": "collaborative_spirit_in_nfts_building_communities",
+  "name": "\nCollaborative Spirit in NFTs: Building Communities",
+  "description": "Panel with artists SenorPantsNFT, Sabet, Wondermundo and and Nima Beheshtian, Founder and CEO of Layerr. Will explore the importance of collaboration and community in the NFT ecosystem.",
+  "start": 1702159200000,
+  "end": 1702161000000,
+  "stageId": "base_house",
+  "speakers": [
+    {
+      "id": "eric_spivak",
+      "name": "Eric Spivak",
+      "bio": "Eric “Motivate” Spivak is an Educator,\nTrusted Advisor & Key Opinion Leader\nin the Blockchain Space\nEmerging Tech & Web3 World.",
+      "eventId": "base_event",
+      "twitter": "@EricSpivak"
+    },
+    {
+      "id": "senorpantsnft",
+      "name": "SenorPantsNFT",
+      "bio": "As an emerging digital artist, Senor Pants\nemploys art as a catalyst for meaningful\nconversations. Having served as a business\nconsultant and advisor for NFT projects and\ndigital artists, Senor Pants has extended his lifelong\nadvocacy for the arts to the digital art space.",
+      "eventId": "base_event",
+      "twitter": "@SenorPantsNFT"
+    },
+    {
+      "id": "sabet",
+      "name": "Sabet",
+      "bio": "Ali Sabet is an Iranian-American artist and designer. His work shines with vibrant optimism, love and beauty in the face of it all.",
+      "eventId": "base_event",
+      "twitter": "@sabet\n"
+    },
+    {
+      "id": "wondermundo",
+      "name": "Wondermundo ",
+      "bio": "Hi. I’m a first generation Mexican-American multimedia artist with over 20 years experience in content, learning, and collaboration design. I entered the NFT space last April after rediscovering my own art.\n\nNow, I’m all in web3 selling my art as NFTs and helping projects scale.\n\nI joined the NFT space in April of 2021 as an artist and have a collection of 300 NFTs.\n\nMy artistic work is minted on my own $wonder contract by Manifold and platforms such as Makersplace, Foundation, OpenSea, Objkt.com, Versum, FxHash, Paras, and Exchange.art.\n\nI am also a community builder and helped build a couple early NFT communities like #famjam and #smolgang in 2021. Currently, I am working to build 0xTHULU.\n\nI aim to educate, empower, and uplift others through my platform and experience.",
+      "eventId": "base_event",
+      "twitter": "@wondermundo"
+    },
+    {
+      "id": "nima_beheshtian",
+      "name": "Nima Beheshtian\n ",
+      "bio": "Nima Beheshtian is an esteemed professional in the blockchain and cryptocurrency sector, with over 12 years of experience, and a strong educational foundation in Technology from George Mason University. His career includes roles such as Sales Director at BitGo, where he played a key role in growing the AUC to over $4 billion, and Head of Sales at Ankr, enhancing the company's leadership in blockchain infrastructure.\nNima is currently the Founder and CEO of Layerr, an innovative publishing platform dedicated to empowering artists in expanding their art brands. Additionally, he has successfully launched various NFT projects, generating over $10 million in sales revenue. Nima is keen to bring his extensive knowledge, entrepreneurial experience, and a proven track record to contribute to the evolving landscape of art and technology.",
+      "eventId": "base_event"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/7a79s673l4wzff6n/index.m3u8",
+  "playbackId": "7a79s673l4wzff6n",
+  "eventId": "base_event",
+  "coverImage": "/sessions/base_event/collaborative_spirit_in_nfts_building_communities.jpg",
+  "assetId": "7a79da4e-19d4-44e1-9600-e4f927c47af9",
+  "sourceId": "bbb47859-f5a3-4406-a53d-60c1e539646e",
+  "videoType": "clip"
+}

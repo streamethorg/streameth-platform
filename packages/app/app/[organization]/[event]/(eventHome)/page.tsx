@@ -4,7 +4,7 @@ import SchedulePageComponent from './schedule/components/SchedulePageComponent'
 import HomePageLogoAndBanner from './components/HompageLogoAndBanner'
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
-import { hasData } from '@/utils'
+import { getImageUrl, hasData } from '@/utils'
 import { ResolvingMetadata, Metadata } from 'next'
 import LivestreamsSection from './components/LivestreamsSection'
 import NFTMintComponent from './components/NFTMintComponent'
@@ -35,7 +35,7 @@ export default async function EventHome({ params }: Params) {
       <div className=" relative my-1 md:my-4 max-w-full md:max-w-4xl mx-auto z-50">
         <HomePageLogoAndBanner event={event} />
         <NFTMintComponent />
-        {/* <LivestreamsSection stages={stages} params={params} /> */}
+        <LivestreamsSection stages={stages} params={params} />
         <SchedulePageComponent params={params} />
         <SpeakerPageComponent params={params} />
       </div>
@@ -54,7 +54,7 @@ export async function generateMetadata(
     organization
   )
 
-  const imageUrl = eventInfo.banner
+  const imageUrl = eventInfo.eventCover
   try {
     return {
       title: eventInfo.name,
@@ -62,7 +62,7 @@ export async function generateMetadata(
       openGraph: {
         title: eventInfo.name,
         description: eventInfo.description,
-        images: [`/events/${imageUrl!}`],
+        images: [getImageUrl(`/events/${imageUrl!}`)],
       },
     }
   } catch (e) {

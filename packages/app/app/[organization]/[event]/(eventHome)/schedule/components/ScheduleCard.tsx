@@ -30,13 +30,11 @@ const ScheduleCard = ({
         {showTime && (
           <p className="text-main-text text-sm uppercase py-1">
             {moment(session.start)
-              .tz('Europe/Istanbul')
+              .tz('America/Havana')
               .format('HH:mm')}{' '}
             -{' '}
-            {moment(session.end)
-              .tz('Europe/Istanbul')
-              .format('HH:mm')}{' '}
-            (GMT +3)
+            {moment(session.end).tz('America/Havana').format('HH:mm')}{' '}
+            (EST)
           </p>
         )}
         <p className="flex text-ellipsis text-main-text text-sm lg:text-md">

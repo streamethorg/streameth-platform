@@ -7,6 +7,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { MobileContext } from '../../context/MobileContext'
 import Navbar from './Navbar'
 import { getImageUrl } from '@/utils'
+import { usePathname } from 'next/navigation'
+import MintButton from '../misc/MintButton'
 
 export interface Page {
   name: string
@@ -37,6 +39,7 @@ export default function NavbarTop() {
     useContext(TopNavbarContext)
   const { isMobile } = useContext(MobileContext)
   const [menuVisible, setMenuVisible] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     if (!isMobile) {
@@ -96,11 +99,44 @@ export default function NavbarTop() {
             setIsNavVisible={setMenuVisible}
           />
         )}
-        <Link
-          href="/"
-          className="hidden  font-ubuntu p-2 min-w-fit md:flex items-center rounded-xl text-sm bg-base uppercase text-white ml-5">
-          Back to overview
-        </Link>
+        <div className="px-5 hidden lg:flex items-center gap-6">
+          <Link
+            href="https://twitter.com/streameth"
+            target="_blank"
+            rel="noreferrer">
+            <Image
+              width={35}
+              height={35}
+              src="/logo.png"
+              alt="streameth logo"
+            />
+          </Link>
+
+          <Link
+            href="https://twitter.com/Livepeer"
+            target="_blank"
+            rel="noreferrer">
+            <Image
+              width={25}
+              height={25}
+              src="/livepeer_black.png"
+              alt="livepeer logo"
+            />
+          </Link>
+        </div>
+        {pathname.includes('base') ? (
+          <MintButton
+            className="!text-[12px] font-medium !md:text-[16px]"
+            address="0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b"
+            mintText="MINT LIVESTREAM NFT"
+          />
+        ) : (
+          <Link
+            href="/"
+            className="hidden font-ubuntu p-2 min-w-fit md:flex items-center rounded-xl text-sm bg-base uppercase text-white ml-5">
+            Back to overview
+          </Link>
+        )}
       </div>
     </header>
   )

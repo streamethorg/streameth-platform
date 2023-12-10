@@ -128,7 +128,7 @@ export default function Studio(props: Props) {
   if (!event) return <>No events found.</>
 
   return (
-    <div className="p-8 container mx-auto">
+    <div className="p-8 container mx-auto overflow-auto">
       <div className="flex gap-4 text-sm">
         <select
           onChange={(e) => selectEvent(e.target.value)}

@@ -36,12 +36,9 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
         <h1 className="text-lg  font-bold ">{session.name}</h1>
         <span className=" flex flex-row text-white">
           {new Date(session.start).toDateString()}{' '}
-          {moment(session.start)
-            .tz('Europe/Istanbul')
-            .format('HH:mm')}{' '}
-          -{' '}
-          {moment(session.end).tz('Europe/Istanbul').format('HH:mm')}{' '}
-          (GMT +3)
+          {moment(session.start).tz('America/Havana').format('HH:mm')}{' '}
+          - {moment(session.end).tz('America/Havana').format('HH:mm')}{' '}
+          (EST)
         </span>
       </div>
       {session.description && (
