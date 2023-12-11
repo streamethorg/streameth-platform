@@ -1,6 +1,11 @@
 import { IsNotEmpty, IsDate, validate } from "class-validator";
 import { IOrganization } from "./organization";
-import { generateId, BASE_PATH } from "../utils";
+import {
+  generateId,
+  BASE_PATH,
+  isCurrentDateInUTC,
+  getDateInUTC,
+} from "../utils";
 import path from "path";
 export interface GSheetConfig {
   sheetId?: string;
@@ -128,7 +133,8 @@ export default class Event implements IEvent {
     this.dataImporter = dataImporter;
     this.eventCover = eventCover ? eventCover : id + ".png";
     this.website = website;
-    this.archiveMode = archiveMode ?? true;
+    this.archiveMode =
+      archiveMode ?? isCurrentDateInUTC() > getDateInUTC(this?.end);
     this.timezone = timezone ?? "utc";
     this.logo = logo;
     this.banner = banner;
