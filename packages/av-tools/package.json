@@ -2,7 +2,6 @@
   "name": "av-tools",
   "description": "Tools to manage Web3 events media, streaming, recording and archiving",
   "license": "MIT",
-  "version": "0.2.0",
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion render",
@@ -73,8 +72,6 @@
     "@tsconfig/recommended": "^1.0.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
-    "@types/ffmpeg-concat": "^1.1.2",
-    "@types/ffmpeg-static": "^3.0.1",
     "@types/fluent-ffmpeg": "^2.1.21",
     "@types/node": "^20.5.9",
     "@types/react": "^18.0.26",
