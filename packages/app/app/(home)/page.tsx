@@ -7,18 +7,15 @@ import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 import LiveEvent from './components/LiveEvent'
+import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
 
 export default async function Home() {
   const eventController = new EventController()
   const allEvents = await eventController.getAllEvents({})
-  const currentDate = new Date()
-  currentDate.setUTCHours(0, 0, 0, 0)
 
   const liveEvents = allEvents
     .filter((event) => {
-      const startDate = new Date(event?.end)
-      startDate.setUTCHours(0, 0, 0, 0)
-      return startDate.getTime() === currentDate.getTime()
+      return getDateInUTC(event?.end) === isCurrentDateInUTC()
     })
     .map((event) => event.toJson())
     .sort(
@@ -28,9 +25,7 @@ export default async function Home() {
 
   const upComing = allEvents
     .filter((event) => {
-      const startDate = new Date(event?.end)
-      startDate.setUTCHours(0, 0, 0, 0)
-      return startDate.getTime() > currentDate.getTime()
+      return getDateInUTC(event?.end) > isCurrentDateInUTC()
     })
     .map((event) => event.toJson())
     .sort(
@@ -40,9 +35,7 @@ export default async function Home() {
 
   const pastEvents = allEvents
     .filter((event) => {
-      const endDate = new Date(event?.end)
-      endDate.setUTCHours(0, 0, 0, 0)
-      return endDate.getTime() < currentDate.getTime()
+      return getDateInUTC(event?.end) < isCurrentDateInUTC()
     })
     .map((event) => event.toJson())
   const stageController = new StageController()

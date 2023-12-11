@@ -36,9 +36,7 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
                     }}
                   />
                 </div>
-                <div
-                  className="flex  flex-col py-2 gap-2"
-                  title="Zuzalu">
+                <div className="flex  flex-col py-2 gap-2">
                   <p className="px-2 font-bold truncate">{name}</p>
                   <p className="px-2 text-md font-medium">
                     {start.toDateString()}

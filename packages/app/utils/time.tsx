@@ -109,3 +109,16 @@ export const getEventLocalTime = (
 
   return `${getEventPeriod(newTime)} ${getLocalTimezone()} `
 }
+
+export const isCurrentDateInUTC = () => {
+  const currentDate = new Date()
+  currentDate.setUTCHours(0, 0, 0, 0)
+  return currentDate.getTime()
+}
+
+export const getDateInUTC = (date: Date) => {
+  const startDate = new Date(date)
+  startDate.setUTCHours(0, 0, 0, 0)
+
+  return startDate.getTime()
+}

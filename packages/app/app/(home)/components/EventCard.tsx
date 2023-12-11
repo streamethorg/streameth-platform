@@ -7,6 +7,7 @@ import { ModalContext } from '@/context/ModalContext'
 import { useRouter } from 'next/navigation'
 import { getImageUrl, hasData } from '@/utils'
 import { IEvent } from 'streameth-server/model/event'
+import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
 
 const EventCard = ({ event }: { event: IEvent }) => {
   const imageUrl = event.eventCover
@@ -17,9 +18,16 @@ const EventCard = ({ event }: { event: IEvent }) => {
   const router = useRouter()
   const isAvailable = hasData({ event })
 
+  const isPastEventDay =
+    isCurrentDateInUTC() > getDateInUTC(event?.end)
+
   const onCardClick = () => {
     if (isAvailable) {
-      router.push(`${event.organizationId}/${event.id}`)
+      if (isPastEventDay || event?.archiveMode) {
+        router.push(`${event.organizationId}/${event.id}/archive`)
+      } else {
+        router.push(`${event.organizationId}/${event.id}`)
+      }
     } else {
       openModal(
         <div className="flex flex-col  items-center">
