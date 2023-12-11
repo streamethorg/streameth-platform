@@ -20,7 +20,7 @@ import Chat from '@/components/plugins/Chat'
 import { IEvent } from 'streameth-server/model/event'
 import Link from 'next/link'
 import Image from 'next/image'
-import NFT from '@/components/plugins/NFT'
+
 export default function StageLayout({ event }: { event: IEvent }) {
   const stickyRef = useRef<HTMLDivElement>(null)
   const [bottomOffset, setBottomOffset] = useState(0)
@@ -61,11 +61,7 @@ export default function StageLayout({ event }: { event: IEvent }) {
           content: <Chat conversationId={stage.id} />,
         })
     }
-    tabs.push({
-      id: 'NFT',
-      header: <ChatBubbleBottomCenterIcon />,
-      content: <NFT />,
-    })
+
     return tabs
   }
   return (
