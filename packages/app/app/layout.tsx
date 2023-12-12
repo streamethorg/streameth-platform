@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       'The complete solution to host your hybrid or virtual event.',
     images: {
-      url: 'https://app.streameth.org/Base-house.jpg',
+      url: 'https://app.streameth.org/banner.png',
       alt: 'StreamETH Logo',
     },
   },
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description:
       'The complete solution to host your hybrid or virtual event.',
     images: {
-      url: 'https://app.streameth.org/Base-house.jpg',
+      url: 'https://app.streameth.org/banner.png',
       alt: 'StreamETH Logo',
     },
   },
