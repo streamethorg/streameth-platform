@@ -1,39 +1,37 @@
-import { extractFirstFrame } from './video'
-import SessionController from '../controller/session'
-import Session from '../model/session'
-import fs from 'fs'
+import { extractFirstFrame } from "./video";
+import SessionController from "../controller/session";
+import Session from "../model/session";
+import fs from "fs";
+import path from "path";
 
-const eventId = 'secureum_trustx'
+const eventId = "base_event";
 
 async function main() {
-  const sessionController = new SessionController()
+  const sessionController = new SessionController();
   const sessions = await sessionController.getAllSessions({
     eventId,
-  })
-  console.log('sessions', sessions.length)
+  });
+  console.log("sessions", sessions.length);
 
+  const dirPath = await Session.getSessionImageDirectory(eventId);
+  if (!fs.existsSync(dirPath)) {
+    console.log("Dir does not exists, creating it now.");
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
   for (const session of sessions) {
     try {
-      const dirPath = await Session.getSessionImageDirectory(eventId)
-      const filePath = await Session.getSessionImagePath(
-        eventId,
-        session.id
-      )
+      const filePath = await Session.getSessionImagePath(eventId, session.id);
 
-      if (!fs.existsSync(dirPath)) {
-        console.log('Dir does not exists, creating it now.')
-        fs.mkdirSync(dirPath, { recursive: true })
-      }
       if (!session.videoUrl) {
-        console.error('No video url found for session ' + session.id)
-        continue
+        console.error("No video url found for session " + session.id);
+        continue;
       }
 
-      await extractFirstFrame(session.videoUrl, filePath)
+      await extractFirstFrame(session.videoUrl, path.join(`../../images/sessions/${eventId}`, filePath));
     } catch (error) {
-      console.log('error', session.videoUrl, error)
+      console.log("error", session.videoUrl, error);
     }
   }
 }
 
-main()
+main();

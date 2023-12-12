@@ -1,7 +1,7 @@
 import { IsNotEmpty, validate } from 'class-validator'
 import { IStage } from './stage'
 import Speaker from './speaker'
-import { generateId, BASE_PATH, PUBLIC_PATH } from '../utils'
+import { generateId, BASE_PATH, PUBLIC_PATH, IMAGE_BASE_PATH } from '../utils'
 import { IEvent } from './event'
 import path from 'path'
 
@@ -171,9 +171,6 @@ export default class Session implements ISession {
     sessionId: ISession['id']
   ): Promise<string> {
     return path.join(
-      PUBLIC_PATH,
-      'sessions',
-      eventId,
       `${sessionId}.jpg`
     )
   }
@@ -181,6 +178,6 @@ export default class Session implements ISession {
   static async getSessionImageDirectory(
     eventId: ISession['eventId']
   ) {
-    return path.join(PUBLIC_PATH, 'sessions', eventId)
+    return path.join(IMAGE_BASE_PATH, 'sessions', eventId)
   }
 }

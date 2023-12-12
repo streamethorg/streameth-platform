@@ -20,7 +20,7 @@ export const formatId = (id: string): string => {
 export const BASE_PATH = path.join(process.cwd(), "../../data");
 export const PUBLIC_PATH = "../../../public";
 
-export const IMAGE_BASE_PATH = path.join(process.cwd(), "public");
+export const IMAGE_BASE_PATH = path.join(process.cwd(), "../../images");
 
 export const apiUrl = () => {
   if (process.env.NODE_ENV === "development") {
