@@ -5,7 +5,7 @@
   "start": "2023-12-20T00:00:00.000Z",
   "end": "2023-12-20T00:00:00.000Z",
   "location": "Virtual",
-  "organizationId": "siher",
+  "organizationId": "si_her",
   "dataImporter": [
     {
       "type": "gsheet",
@@ -15,12 +15,11 @@
       }
     }
   ],
-  "unlisted": false,
   "eventCover": "SiHerDeFicoverImage.png",
   "logo": "SiHerLogo.png",
   "banner": "SiHerBanner.png",
   "timezone": "EST",
-  "accentColor": "#84586D",
-  "startTime": "11:00",
+  "accentColor": "#5E1A6F",
+  "startTime": "16:00",
   "enableVideoDownloader": true
 }
