@@ -1,0 +1,26 @@
+{
+  "id": "siher_defi_africa",
+  "name": "Si Her DeFi: Africa",
+  "description": "Hear from GenZ web3 innovators streaming live from Nigeria, Africa’s emerging tech hub. Discover how Africa’s youth market is rapidly adopting crypto & blockchain technologies.",
+  "start": "2023-12-20T00:00:00.000Z",
+  "end": "2023-12-20T00:00:00.000Z",
+  "location": "Virtual",
+  "organizationId": "siher",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "10j5yAbKvB9GsO1wWk-XijtUTcDeitefEBjKklslN3Cw",
+        "apiKey": "s"
+      }
+    }
+  ],
+  "unlisted": false,
+  "eventCover": "SiHerDeFicoverImage.png",
+  "logo": "SiHerLogo.png",
+  "banner": "SiHerBanner.png",
+  "timezone": "EST",
+  "accentColor": "#84586D",
+  "startTime": "11:00",
+  "enableVideoDownloader": true
+}
