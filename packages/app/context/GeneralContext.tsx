@@ -1,4 +1,6 @@
 'use client'
+
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { useMemo } from 'react'
 import {
   LivepeerConfig,
@@ -27,6 +29,7 @@ const GeneralContext = ({
     <SiweContext>
       <LivepeerConfig client={livepeerClient}>
         <Analytics />
+        <SpeedInsights />
         {children}
       </LivepeerConfig>
     </SiweContext>
