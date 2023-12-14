@@ -2,6 +2,7 @@ import SchedulePageComponent from './components/SchedulePageComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import EventController from 'streameth-server/controller/event'
+import { getImageUrl } from '@/utils'
 interface Params {
   params: {
     event: string
@@ -25,10 +26,8 @@ export async function generateMetadata(
     params.event,
     params.organization
   )
-  const imageName = event.eventCover
-    ? event.eventCover
-    : event.id + '.png'
-  const imageUrl = 'https://app.streameth.org/public/' + imageName
+
+  const imageUrl = getImageUrl('/events/' + event.eventCover)
 
   return {
     title: `${event.name} - Home`,

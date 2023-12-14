@@ -622,7 +622,7 @@ export const TIMEZONES = [
     abbr: 'WCAST',
     offset: 1,
     isdst: false,
-    text: '(UTC+01:00) West Central Africa',
+    text: '(UTC+01:00)',
     utc: [
       'Africa/Algiers',
       'Africa/Bangui',

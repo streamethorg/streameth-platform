@@ -6,8 +6,16 @@ import { LoadingContext } from '@/context/LoadingContext'
 import { usePathname, useRouter } from 'next/navigation'
 import moment from 'moment-timezone'
 import { ISession } from 'streameth-server/model/session'
+import { IEvent } from 'streameth-server/model/event'
+import { getEventTimezoneText } from '@/utils/time'
 
-const ScheduleCardModal = ({ session }: { session: ISession }) => {
+const ScheduleCardModal = ({
+  event,
+  session,
+}: {
+  event: IEvent
+  session: ISession
+}) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
   const { closeModal } = useContext(ModalContext)
   const { setIsLoading } = useContext(LoadingContext)
@@ -36,9 +44,14 @@ const ScheduleCardModal = ({ session }: { session: ISession }) => {
         <h1 className="text-lg  font-bold ">{session.name}</h1>
         <span className=" flex flex-row text-white">
           {new Date(session.start).toDateString()}{' '}
-          {moment(session.start).tz('America/Havana').format('HH:mm')}{' '}
-          - {moment(session.end).tz('America/Havana').format('HH:mm')}{' '}
-          (EST)
+          {moment(session.start)
+            .tz(event?.timezone)
+            .format('HH:mm')}{' '}
+          -{' '}
+          {moment(session.end)
+            .tz(event?.timezone)
+            .format('HH:mm')}{' '}
+          {getEventTimezoneText(event?.timezone)}
         </span>
       </div>
       {session.description && (

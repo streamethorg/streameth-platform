@@ -42,7 +42,7 @@ const SchedulePageComponent = async ({ params }: Params) => {
           <DateSelect dates={dates} />
           <StageSelect stages={stages} />
         </div>
-        <SessionsOnSchedule />
+        <SessionsOnSchedule event={event.toJson()} />
       </ScheduleContextProvider>
     </ComponentWrapper>
   )
