@@ -61,7 +61,7 @@ const ScheduleCardModal = ({
       )}
 
       <p className="flex flex-row flex-wrap">
-        <SpeakerIconList speakers={session.speakers} />
+        <SpeakerIconList event={event} speakers={session.speakers} />
       </p>
       {showGoToStage && (
         <div

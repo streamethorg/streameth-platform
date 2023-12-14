@@ -11,10 +11,16 @@ import Session from 'streameth-server/model/session'
 import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/utils'
 
-const SpeakerComponent = ({ session }: { session: Session }) => {
+const SpeakerComponent = ({
+  event,
+  session,
+}: {
+  event: IEvent
+  session: Session
+}) => {
   return (
     <ComponentCard>
-      <SpeakerIconList speakers={session.speakers} />
+      <SpeakerIconList event={event} speakers={session.speakers} />
     </ComponentCard>
   )
 }
@@ -49,7 +55,7 @@ export default async function SessionComponent({
       </div>
       <div className="flex space-y-4 flex-col w-full p-2 lg:w-[30%]  overflow-y-scroll lg:p-0">
         <SessionInfoBox session={session.toJson()} showDate />
-        <SpeakerComponent session={session} />
+        <SpeakerComponent event={event} session={session} />
         {nextSession?.videoUrl && (
           <div className=" bg-base text-white p-2 rounded-xl mb-4">
             <p className="font-medium text-xl  ">Next Talk</p>

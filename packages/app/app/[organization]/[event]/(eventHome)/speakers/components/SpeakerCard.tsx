@@ -5,11 +5,14 @@ import { useContext } from 'react'
 import SpeakerPhoto from './SpeakerPhoto'
 import { ISpeaker } from 'streameth-server/model/speaker'
 import { ISession } from 'streameth-server/model/session'
+import { IEvent } from 'streameth-server/model/event'
 
 const SpeakerCard = ({
+  event,
   speaker,
   sessions,
 }: {
+  event: IEvent
   speaker: ISpeaker
   sessions: ISession[]
 }) => {
@@ -25,6 +28,7 @@ const SpeakerCard = ({
       onClick={() =>
         openModal(
           <SpeakerModal
+            event={event}
             speaker={speaker}
             sessions={speakerSessions}
           />
