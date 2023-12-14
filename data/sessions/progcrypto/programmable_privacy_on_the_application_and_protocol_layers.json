@@ -15,8 +15,8 @@
       "photo": "https://drive.google.com/file/d/1lJc5kiLJTEt3H3ceLU9lwRHG51AQxOTr/view"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/262adiuqe5mfqqjz/index.m3u8",
-  "playbackId": "262adiuqe5mfqqjz",
+  "videoUrl": "https://lp-playback.com/hls/aefc6tvuscss1qop/index.m3u8",
+  "playbackId": "aefc6tvuscss1qop",
   "eventId": "progcrypto",
   "track": "Cryptography in the Wild",
   "coverImage": "/sessions/progcrypto/programmable_privacy_on_the_application_and_protocol_layers_thumbnail.png",
