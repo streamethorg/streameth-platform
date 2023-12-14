@@ -15,8 +15,8 @@
       "photo": "https://drive.google.com/uc?id=1jLrW54QNuyqdF2waaScfRhLN9rQacN7t"
     }
   ],
-  "videoUrl": "https://lp-playback.com/hls/8f26cy8hhtgj2hgc/index.m3u8",
-  "playbackId": "8f26cy8hhtgj2hgc",
+  "videoUrl": "https://lp-playback.com/hls/5d64ig8hveig6b9m/index.m3u8",
+  "playbackId": "5d64ig8hveig6b9m",
   "eventId": "progcrypto",
   "track": "Libraries and Infrastructure",
   "coverImage": "/sessions/progcrypto/how_to_build_a_modern_snark_thumbnail.png",

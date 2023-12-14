@@ -15,9 +15,9 @@
       }
     }
   ],
-  "eventCover": "SiHerDeFicoverImage.png",
-  "logo": "SiHerLogo.png",
-  "banner": "SiHerBanner.png",
+  "eventCover": "siherCover.jpg",
+  "logo": "siher_logo.jpg",
+  "banner": "siherBanner.jpg",
   "timezone": "Africa/Lagos",
   "accentColor": "#5E1A6F",
   "startTime": "16:00",
