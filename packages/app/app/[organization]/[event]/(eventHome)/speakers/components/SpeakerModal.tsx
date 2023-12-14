@@ -4,13 +4,15 @@ import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/comp
 import { SocialIcon } from 'react-social-icons'
 import { ISpeaker } from 'streameth-server/model/speaker'
 import { ISession } from 'streameth-server/model/session'
+import { IEvent } from 'streameth-server/model/event'
 
 interface Params {
+  event: IEvent
   speaker: ISpeaker
   sessions?: ISession[]
 }
 
-const SpeakerModal = ({ sessions, speaker }: Params) => {
+const SpeakerModal = ({ event, sessions, speaker }: Params) => {
   return (
     <div className="flex bg-base text-white flex-col p-4 justify-center w-full items-center space-y-4 md:w-[500px] md:max-w-4xl">
       <div className="flex justify-center items-center w-48 p-2">
@@ -41,6 +43,7 @@ const SpeakerModal = ({ sessions, speaker }: Params) => {
             {sessions?.map((session, index) => (
               <ScheduleCard
                 key={session?.id}
+                event={event}
                 session={session}
                 showTime
               />

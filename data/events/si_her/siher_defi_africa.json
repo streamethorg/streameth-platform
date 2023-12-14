@@ -18,7 +18,7 @@
   "eventCover": "SiHerDeFicoverImage.png",
   "logo": "SiHerLogo.png",
   "banner": "SiHerBanner.png",
-  "timezone": "EST",
+  "timezone": "Africa/Lagos",
   "accentColor": "#5E1A6F",
   "startTime": "16:00",
   "enableVideoDownloader": true

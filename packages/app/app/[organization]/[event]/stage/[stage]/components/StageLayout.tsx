@@ -49,7 +49,7 @@ export default function StageLayout({ event }: { event: IEvent }) {
       tabs.push({
         id: 'schedule',
         header: <CalendarIcon />,
-        content: <SessionList sessions={sessions} />,
+        content: <SessionList event={event} sessions={sessions} />,
       })
     }
     {

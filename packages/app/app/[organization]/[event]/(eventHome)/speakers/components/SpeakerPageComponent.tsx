@@ -4,6 +4,7 @@ import ComponentWrapper from '../../components/ComponentWrapper'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
 import SectionTitle from '../../components/SectionTitle'
+import EventController from 'streameth-server/controller/event'
 interface Params {
   params: {
     organization: string
@@ -13,6 +14,11 @@ interface Params {
 }
 
 const SpeakerPageComponent = async ({ params }: Params) => {
+  const eventController = new EventController()
+  const event = await eventController.getEvent(
+    params.event,
+    params.organization
+  )
   const speakerController = new SpeakerController()
   const speakers = await speakerController.getAllSpeakersForEvent(
     params.event
@@ -33,6 +39,7 @@ const SpeakerPageComponent = async ({ params }: Params) => {
             key={speaker.id}
             className="rounded-lg cursor-pointer transition-colors">
             <SpeakerCard
+              event={event.toJson()}
               speaker={speaker.toJson()}
               sessions={sessions.map((session) => session.toJson())}
             />

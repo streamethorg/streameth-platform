@@ -5,12 +5,15 @@ import SpeakerModal from './SpeakerModal'
 import { useContext } from 'react'
 import { ModalContext } from '@/context/ModalContext'
 import { ISpeaker } from 'streameth-server/model/speaker'
+import { IEvent } from 'streameth-server/model/event'
 
 export default function SpeakerIcon({
+  event,
   speaker,
   size = 'sm',
   onlyImage = false,
 }: {
+  event: IEvent
   speaker: ISpeaker
   size?: 'sm' | 'md' | 'lg'
   onlyImage?: boolean
@@ -19,7 +22,9 @@ export default function SpeakerIcon({
   return (
     <div
       className={`flex flex-row items-center text-sm rounded-xl cursor-pointer border p-1 `}
-      onClick={() => openModal(<SpeakerModal speaker={speaker} />)}>
+      onClick={() =>
+        openModal(<SpeakerModal event={event} speaker={speaker} />)
+      }>
       <div
         className={`rounded m-2 ${size === 'md' ? 'h-12' : 'h-8'}`}>
         <SpeakerPhoto speaker={speaker} size={'md'} />
