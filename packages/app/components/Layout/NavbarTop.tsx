@@ -67,7 +67,7 @@ export default function NavbarTop() {
           />
         </Link>
       </div>
-      <div className="flex flex-row items-center justify-end md:justify-between w-full">
+      <div className="flex flex-row items-center justify-end md:justify-between  w-full">
         {menuVisible && (
           <Navbar
             pages={
@@ -87,7 +87,7 @@ export default function NavbarTop() {
         {components.length > 0 &&
           components.map((component, index) => {
             return (
-              <div className="flex-1 px-2" key={index}>
+              <div className="flex-1 px-2 " key={index}>
                 {component}
               </div>
             )
