@@ -1,7 +1,7 @@
 {
   "id": "swarm_winter_solstice",
   "name": "Swarm 2.0 - The Winter Solstice Event",
-  "description": "Swarm's creation was an act of defiance. Born from the visionaries who dared to imagine a world beyond the monolithic data empires, Swarm stands as a testament to the indomitable spirit of progress. Join Swarm Foundation team members and community, on a virtual event to commemorate the beginning of Swarm 2.0.",
+  "description": "Swarm Foundation is proud to announce the launch of Swarm 2.0; the network that is ready to serve as a foundation for a self-sovereign digital society.\n\nJoin us on 21 December, 17.00 CET, aligning with the winter solstice, as we usher in the rebirth of the Sun and the dawn of Swarm's enhanced capabilities.\n\nWhat to expect?\n\nSwarm Foundation team members will provide an overview of Swarm 2.0 features and capabilities. They will explore the exponential network growth and the ongoing Great Data Upload, discuss the future, community engagement, and decentralised AI. Additionally, the event will showcase some of the projects within Swarm’s Ecosystem and reveal partnerships and collaborations that align with a shared vision of the digital future. \n\n #generatefreedom",
   "start": "2023-12-21T00:00:00.000Z",
   "end": "2023-12-21T00:00:00.000Z",
   "location": "Virtual",
@@ -10,7 +10,7 @@
     {
       "type": "gsheet",
       "config": {
-        "sheetId": "1-MIyFvZMjHMfa5UhoesA4hB5s9YHisBWoUyrtG0l_fg",
+        "sheetId": "12Gxkcy7PEXEkxA5QuQQVTjbu0fFXn5sakdLzZ4vru8E",
         "apiKey": "s"
       }
     }
@@ -21,5 +21,8 @@
   "website": "",
   "timezone": "CET",
   "accentColor": "#F6F7F9",
-  "startTime": "17:00"
+  "startTime": "17:00",
+  "plugins": {
+    "hideSchedule": true
+  }
 }

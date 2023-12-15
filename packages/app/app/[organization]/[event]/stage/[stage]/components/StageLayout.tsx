@@ -45,7 +45,7 @@ export default function StageLayout({ event }: { event: IEvent }) {
   const getPluginTabs = () => {
     const tabs = []
 
-    if (sessions.length > 0) {
+    if (sessions.length > 0 && !event?.plugins?.hideSchedule) {
       tabs.push({
         id: 'schedule',
         header: <CalendarIcon />,

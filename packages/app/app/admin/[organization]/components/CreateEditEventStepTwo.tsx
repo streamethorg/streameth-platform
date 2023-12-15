@@ -204,6 +204,8 @@ const CreateEditEventStepTwo = () => {
                 ...formData,
                 plugins: {
                   disableChat: !formData?.plugins?.disableChat,
+                  hideSchedule: formData?.plugins?.hideSchedule,
+                  hideSpeaker: formData?.plugins?.hideSpeaker,
                 },
               })
             }

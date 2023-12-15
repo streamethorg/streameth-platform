@@ -30,7 +30,7 @@ const SchedulePageComponent = async ({ params }: Params) => {
     eventId: params.event,
   })
 
-  if (!sessions.length) return null
+  if (!sessions.length || event?.plugins?.hideSchedule) return null
   return (
     <ComponentWrapper sectionId="schedule">
       <ScheduleContextProvider
