@@ -71,6 +71,8 @@ const EventFormProvider: React.FC<EventFormProviderProps> = ({
       accentColor: '',
       plugins: {
         disableChat: false,
+        hideSchedule: false,
+        hideSpeaker: false,
       },
       dataExporter: [],
       dataImporter: [],
