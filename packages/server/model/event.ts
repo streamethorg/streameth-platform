@@ -26,6 +26,8 @@ export type IDataExporter = { type: "gdrive"; config: GSheetConfig };
 
 export interface IPlugins {
   disableChat: boolean;
+  hideSchedule: boolean;
+  hideSpeaker: boolean;
 }
 export interface IEvent {
   id: string;
