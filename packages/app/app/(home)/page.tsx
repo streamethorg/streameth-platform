@@ -8,6 +8,7 @@ import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 import LiveEvent from './components/LiveEvent'
 import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
+import LiveEvents from './components/LiveEvents'
 
 export default async function Home() {
   const eventController = new EventController()
@@ -15,7 +16,18 @@ export default async function Home() {
 
   const liveEvents = allEvents
     .filter((event) => {
-      return getDateInUTC(event?.end) === isCurrentDateInUTC()
+      const startUTC = getDateInUTC(event?.start)
+      const endUTC = getDateInUTC(event?.end)
+      const currentDateUTC = isCurrentDateInUTC()
+
+      // Check if the event is ongoing (current date is between start and end dates)
+      const isOngoing =
+        startUTC <= currentDateUTC && currentDateUTC <= endUTC
+
+      // Check if the event has not ended (end date is after the current date)
+      const isNotPastEvent = currentDateUTC <= endUTC
+
+      return isOngoing && isNotPastEvent
     })
     .map((event) => event.toJson())
     .sort(
@@ -25,7 +37,7 @@ export default async function Home() {
 
   const upComing = allEvents
     .filter((event) => {
-      return getDateInUTC(event?.end) > isCurrentDateInUTC()
+      return getDateInUTC(event?.start) > isCurrentDateInUTC()
     })
     .map((event) => event.toJson())
     .sort(
@@ -79,10 +91,14 @@ export default async function Home() {
       </div>
       <div className="flex flex-col lg:overflow-hidden">
         {/* <LiveEvent stage={stage.toJson()} /> */}
-        {/* <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
-          Live Events
-        </p> */}
-        {/* <LiveEvents events={liveEvents} /> */}
+        {liveEvents.length > 0 && (
+          <>
+            <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
+              Live Events
+            </p>
+            <LiveEvents events={liveEvents} />
+          </>
+        )}
         <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
           Upcoming Events
         </p>

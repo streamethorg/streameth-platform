@@ -19,7 +19,7 @@ const LivestreamsSection = ({
   const isEventDay =
     isCurrentDateInUTC() >= getDateInUTC(event?.start)
 
-  return isEventDay ? (
+  return isEventDay && stages[0]?.streamSettings?.streamId ? (
     <div className="bg-base text-white p-4 rounded-xl">
       <span className=" w-full text-xl uppercase md:text-4xl flex">
         Livestreams
