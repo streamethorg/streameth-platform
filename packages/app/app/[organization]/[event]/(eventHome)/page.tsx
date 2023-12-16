@@ -68,6 +68,15 @@ export async function generateMetadata(
         description: eventInfo.description,
         images: [getImageUrl(`/events/${imageUrl!}`)],
       },
+      twitter: {
+        card: 'summary_large_image',
+        title: eventInfo.name,
+        description: eventInfo.description,
+        images: {
+          url: getImageUrl(`/events/${imageUrl!}`),
+          alt: eventInfo.name + ' Logo',
+        },
+      },
     }
   } catch (e) {
     console.log(e)
