@@ -1,0 +1,5 @@
+dist
+debug
+node_modules
+.env
+src/error
