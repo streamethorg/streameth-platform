@@ -1,7 +1,7 @@
-import { DB_HOST, DB_PORT, DB_DATABASE } from '@config';
-
+import { config } from '@config';
+const { host, port } = config.db;
 export const dbConnection = {
-  url: `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
+  url: `mongodb://${host}:${port}/${'streameth'}`,
   options: {
     useNewUrlParser: true,
     useUnifiedTopology: true,
