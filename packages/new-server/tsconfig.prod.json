@@ -1,0 +1,12 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"sourceMap": false
+	},
+	"exclude": [
+		"src/tests/*",
+		"spec",
+		"src/**/*.mock.ts",
+		"src/public/",
+	]
+}
