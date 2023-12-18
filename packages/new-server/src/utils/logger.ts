@@ -1,18 +1,20 @@
+import { config } from '@config';
 import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
-import { LOG_DIR } from '@config';
 
 // logs dir
-const logDir: string = join(__dirname, LOG_DIR);
+const logDir: string = join(__dirname, config.logger.dir);
 
 if (!existsSync(logDir)) {
   mkdirSync(logDir);
 }
 
 // Define log format
-const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
+const logFormat = winston.format.printf(
+  ({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`,
+);
 
 /*
  * Log Level
@@ -52,7 +54,10 @@ const logger = winston.createLogger({
 
 logger.add(
   new winston.transports.Console({
-    format: winston.format.combine(winston.format.splat(), winston.format.colorize()),
+    format: winston.format.combine(
+      winston.format.splat(),
+      winston.format.colorize(),
+    ),
   }),
 );
 

@@ -8,21 +8,21 @@ import morgan from 'morgan';
 import { connect, set, disconnect } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
-import { dbConnection } from '@databases';
-import { Routes } from '@interfaces/routes.interface';
-import errorMiddleware from '@middlewares/error.middleware';
-import { logger, stream } from '@utils/logger';
+import { config } from './config';
+import { Routes } from './interfaces/routes.interface';
+import errorMiddleware from './middlewares/error.middleware';
+import { logger } from './utils/logger';
+import { dbConnection } from './databases';
 
 class App {
   public app: express.Application;
-  public env: string;
-  public port: string | number;
+  private env: string;
+  private port: string | number;
 
   constructor(routes: Routes[]) {
     this.app = express();
-    this.env = NODE_ENV || 'development';
-    this.port = PORT || 3000;
+    this.env = config.appEnv || 'development';
+    this.port = config.port || 3400;
 
     this.connectToDatabase();
     this.initializeMiddlewares();
@@ -31,7 +31,7 @@ class App {
     this.initializeErrorHandling();
   }
 
-  public listen() {
+  listen() {
     this.app.listen(this.port, () => {
       logger.info(`=================================`);
       logger.info(`======= ENV: ${this.env} =======`);
@@ -40,7 +40,7 @@ class App {
     });
   }
 
-  public async closeDatabaseConnection(): Promise<void> {
+  async closeDatabaseConnection(): Promise<void> {
     try {
       await disconnect();
       console.log('Disconnected from MongoDB');
@@ -49,7 +49,7 @@ class App {
     }
   }
 
-  public getServer() {
+  getServer() {
     return this.app;
   }
 
@@ -62,8 +62,13 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(LOG_FORMAT, { stream }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(morgan('dev'));
+    this.app.use(
+      cors({
+        origin: config.cors.origin,
+        credentials: config.cors.credentials,
+      }),
+    );
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
@@ -73,7 +78,7 @@ class App {
   }
 
   private initializeRoutes(routes: Routes[]) {
-    routes.forEach(route => {
+    routes.forEach((route) => {
       this.app.use('/', route.router);
     });
   }
