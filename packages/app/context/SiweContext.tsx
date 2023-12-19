@@ -57,7 +57,7 @@ const siweConfig = {
 
 const config = createConfig(
   getDefaultConfig({
-    autoConnect: true,
+    autoConnect: false,
     appName: 'StreamETH',
     chains: [base, mainnet],
     publicClient: createPublicClient({
