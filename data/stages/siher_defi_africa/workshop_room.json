@@ -1,1 +1,6 @@
-{"id":"workshop_room","name":"Workshop Room","eventId":"siher_defi_africa","streamSettings":{"streamId":"TBD"}}
+{
+  "id": "workshop_room",
+  "name": "Workshop Room",
+  "eventId": "siher_defi_africa",
+  "streamSettings": { "streamId": "79b505b9-190d-4167-9252-430b173bbabc" }
+}
