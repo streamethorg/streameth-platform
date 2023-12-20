@@ -124,10 +124,10 @@ export default function NavbarTop() {
             />
           </Link>
         </div>
-        {pathname.includes('base') ? (
+        {pathname.includes('swarm') ? (
           <MintButton
             className="!text-[12px] font-medium !md:text-[16px]"
-            address="0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b"
+            address="0xcA41A03CD3017aA4B19530816261A989593312a4"
             mintText="MINT LIVESTREAM NFT"
           />
         ) : (
