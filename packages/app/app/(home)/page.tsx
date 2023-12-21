@@ -99,10 +99,14 @@ export default async function Home() {
             <LiveEvents events={liveEvents} />
           </>
         )}
-        <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
-          Upcoming Events
-        </p>
-        <UpcomingEvents events={upComing} />
+        {upComing?.length > 0 && (
+          <>
+            <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
+              Upcoming Events
+            </p>
+            <UpcomingEvents events={upComing} />
+          </>
+        )}
         <EventList events={pastEvents} />
       </div>
     </main>
