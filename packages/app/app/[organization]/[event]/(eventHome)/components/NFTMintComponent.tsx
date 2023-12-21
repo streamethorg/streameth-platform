@@ -82,46 +82,7 @@ const NFTMintComponent = () => {
     }
   }
 
-  return pathname.includes('si_her') ? (
-    <ComponentWrapper sectionId="nft">
-      <div className="  flex-col md:flex-row justify-center">
-        <div className="w-full p-2">
-          <SectionTitle title="Attention Event Attendees!" />
-          <p className="text-xl">
-            We&apos;re thrilled you joined us for the SI HER DEFI:
-            AFRICA. As a token of our gratitude, we&apos;re conducting
-            an exclusive airdrop for participants. To ensure you
-            don&apos;t miss out, kindly click on the Whitelist address
-            button to submit your wallet address. Your submitted
-            wallet address will be used solely for the purpose of the
-            airdrop. Thank you for being a part of our community!
-          </p>
-          {isWhitelisted || isAddressFound(address) ? (
-            <p className="py-4 w-fit px-2 bg-base text-xl">
-              Address already whitelisted
-            </p>
-          ) : (
-            <ConnectKitButton.Custom>
-              {({ show }) => {
-                return (
-                  <Button
-                    onClick={
-                      !isConnected ? show : addWhitelistAddress
-                    }
-                    className={`hover:text-base text-xl hover:text-xl p-2`}>
-                    {' '}
-                    {!isConnected
-                      ? 'Connect wallet to add address to whitelist'
-                      : 'Whitelist Address'}
-                  </Button>
-                )
-              }}
-            </ConnectKitButton.Custom>
-          )}
-        </div>
-      </div>
-    </ComponentWrapper>
-  ) : pathname.includes('swarm') ? (
+  return pathname.includes('swarm') ? (
     <ComponentWrapper sectionId="nft">
       <div className="flex flex-col md:flex-row justify-center">
         <div className="w-full md:w-[60%] p-2">
@@ -133,19 +94,9 @@ const NFTMintComponent = () => {
             of Swarm.
             <br />
             <br />
-            Mint the Swarm 2.0 Livestream NFT to gain access to
-            exclusive content and witness live discussions with key
-            figures in the Swarm community. Immerse yourself in the
-            unveiling of Swarm&apos;s enhanced capabilities and join
-            us in celebrating the dawn of a new era in the digital
-            realm.
+            Mint the Swarm 2.0 Livestream NFT and join us in
+            celebrating the dawn of a new era in the digital realm.
             <br />
-            <br />
-            Owning the Swarm 2.0 Livestream NFT also grants you
-            eligibility for special commemorative drops after the
-            event—an opportunity to own a piece of Swarm&apos;s
-            digital history. Don&apos;t miss out on this chance to be
-            a part of the Swarm revolution!
           </p>
         </div>
         <div className="flex flex-col w-full md:w-[40%] p-2 bg-base shadow rounded-lg justify-center items-center">
