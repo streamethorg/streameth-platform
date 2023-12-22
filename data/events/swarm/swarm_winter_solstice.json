@@ -22,6 +22,7 @@
   "timezone": "CET",
   "accentColor": "#F6F7F9",
   "startTime": "17:00",
+  "archiveMode": true,
   "plugins": {
     "hideSchedule": true
   }
