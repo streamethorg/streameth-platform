@@ -1,1 +1,29 @@
-{"id":"the_future_vision","name":"The future vision","description":"Antonio and Viktor on stage.","start":1703178180000,"end":1703178480000,"stageId":"mainstage","speakers":[{"id":"antonio_gonzalo_moderator","name":"Antonio Gonzalo (Moderator)","bio":"\n","eventId":"swarm_winter_solstice"},{"id":"viktor_tron","name":"Viktor Tron","bio":"No description","eventId":"swarm_winter_solstice"}],"playbackId":"","eventId":"swarm_winter_solstice","coverImage":"/sessions/swarm_winter_solstice/the_future_vision.jpg"}
+{
+  "id": "the_future_vision",
+  "name": "The future vision",
+  "description": "Antonio and Viktor on stage.",
+  "start": 1703178180000,
+  "end": 1703178480000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "antonio_gonzalo_moderator",
+      "name": "Antonio Gonzalo (Moderator)",
+      "bio": "\n",
+      "eventId": "swarm_winter_solstice"
+    },
+    {
+      "id": "viktor_tron",
+      "name": "Viktor Tron",
+      "bio": "No description",
+      "eventId": "swarm_winter_solstice"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/3a3d21n8wtoc8h6b/index.m3u8",
+  "playbackId": "3a3d21n8wtoc8h6b",
+  "eventId": "swarm_winter_solstice",
+  "coverImage": "/sessions/swarm_winter_solstice/the_future_vision.jpg",
+  "assetId": "3a3d8626-a92e-4925-8675-ae6bc13f6cb1",
+  "sourceId": "78c780ec-a420-416a-9ffd-fcd8e65c2ad1",
+  "videoType": "clip"
+}
