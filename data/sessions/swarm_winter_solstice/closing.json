@@ -1,1 +1,19 @@
-{"id":"closing","name":"Closing","description":"Antonio on stage for final thoughts. ","start":1703178480000,"end":1703178720000,"stageId":"mainstage","speakers":[{"id":"antonio_gonzalo_moderator","name":"Antonio Gonzalo (Moderator)","bio":"\n","eventId":"swarm_winter_solstice"}],"playbackId":"","eventId":"swarm_winter_solstice","coverImage":"/sessions/swarm_winter_solstice/closing.jpg"}
+{
+  "id": "closing",
+  "name": "Closing",
+  "description": "Antonio on stage for final thoughts. ",
+  "start": 1703178480000,
+  "end": 1703178720000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "antonio_gonzalo_moderator",
+      "name": "Antonio Gonzalo (Moderator)",
+      "bio": "\n",
+      "eventId": "swarm_winter_solstice"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "swarm_winter_solstice",
+  "coverImage": "/sessions/swarm_winter_solstice/closing.jpg"
+}
