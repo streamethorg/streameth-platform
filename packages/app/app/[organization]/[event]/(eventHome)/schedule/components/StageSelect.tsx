@@ -1,22 +1,30 @@
 'use client'
-import { useContext, useState } from 'react'
-import { MobileContext } from '@/context/MobileContext'
-import { ScheduleContext } from './ScheduleContext'
 import { IStage } from 'streameth-server/model/stage'
+import {
+  useSearchParams,
+  usePathname,
+  useRouter,
+} from 'next/navigation'
 
 const StageSelect = ({ stages }: { stages: IStage[] }) => {
-  const { setStage } = useContext(ScheduleContext)
-  const [selectedStage, setSelectedStage] = useState<string>('')
+  const pathname = usePathname()
+  const { replace } = useRouter()
+  const searchParams = useSearchParams()
 
-  const handleStageChange = (stageId: string) => {
-    setStage(stageId)
-    setSelectedStage(stageId)
+  function handleStageChange(term: string) {
+    const params = new URLSearchParams(searchParams)
+    if (term) {
+      params.set('stage', term)
+    } else {
+      params.delete('stage')
+    }
+    replace(`${pathname}?${params.toString()}`)
   }
 
   return (
     <select
       className="px-3 py-2 border border-accent shadow rounded-lg bg-inherit text-lg cursor-pointer box-border w-full "
-      value={selectedStage}
+      defaultValue={searchParams.get('stage') || stages[0].id}
       onChange={(e) => handleStageChange(e.target.value)}>
       {stages.map((stage) => (
         <option key={stage.name} value={stage.id}>

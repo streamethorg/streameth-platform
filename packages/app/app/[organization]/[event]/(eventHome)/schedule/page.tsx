@@ -3,16 +3,44 @@ import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import EventController from 'streameth-server/controller/event'
 import { getImageUrl } from '@/utils'
+import { fetchEvent, fetchEventStages } from '@/lib/data'
+import { getEventDays } from '@/utils/time'
 interface Params {
   params: {
     event: string
     organization: string
   }
+  searchParams: {
+    stage?: string
+    date?: string
+  }
 }
-export default function SchedulePage({ params }: Params) {
+export default async function SchedulePage({
+  params,
+  searchParams,
+}: Params) {
+  const event = await fetchEvent({
+    event: params.event,
+    organization: params.organization,
+  })
+
+  const stages = await fetchEventStages({
+    event: params.event,
+  })
+
+  if (!event) return null
+
+  const eventDates = getEventDays(event.start, event.end)
+
   return (
     <EmbedLayout>
-      <SchedulePageComponent params={params} />
+      <SchedulePageComponent
+        dates={eventDates}
+        stages={stages}
+        event={event}
+        stage={searchParams.stage}
+        date={searchParams.date}
+      />
     </EmbedLayout>
   )
 }

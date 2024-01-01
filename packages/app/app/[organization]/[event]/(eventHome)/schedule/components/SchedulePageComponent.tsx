@@ -1,49 +1,44 @@
-import SessionsOnSchedule from './SessionsOnGrid'
-import { ScheduleContextProvider } from './ScheduleContext'
 import StageSelect from './StageSelect'
 import DateSelect from './DateSelect'
-import { getEventDays } from '@/utils/time'
 import ComponentWrapper from '../../components/ComponentWrapper'
-import StageController from 'streameth-server/controller/stage'
-import EventController from 'streameth-server/controller/event'
-import SessionController from 'streameth-server/controller/session'
 import SectionTitle from '../../components/SectionTitle'
-interface Params {
-  params: {
-    event: string
-    organization: string
-  }
-}
+import SessionList from '@/components/sessions/SessionList'
 
-const SchedulePageComponent = async ({ params }: Params) => {
-  const eventController = new EventController()
+import { fetchEventSessions } from '@/lib/data'
+import { IStage } from 'streameth-server/model/stage'
+import { IEvent } from 'streameth-server/model/event'
 
-  const event = await eventController.getEvent(
-    params.event,
-    params.organization
-  )
-  const stages = (
-    await new StageController().getAllStagesForEvent(params.event)
-  ).map((stage) => stage.toJson())
-  const dates = getEventDays(event.start, event.end)
-  const sessions = await new SessionController().getAllSessions({
-    eventId: params.event,
+const SchedulePageComponent = async ({
+  dates,
+  stages,
+  event,
+  stage,
+  date,
+}: {
+  dates: number[]
+  stages: IStage[]
+  event: IEvent
+  stage?: string
+  date?: string
+}) => {
+  const sessions = await fetchEventSessions({
+    event: event.id,
+    stage: stage,
+    date: date ? parseInt(date) : undefined,
   })
 
-  if (!sessions.length || event?.plugins?.hideSchedule) return null
   return (
     <ComponentWrapper sectionId="schedule">
-      <ScheduleContextProvider
-        event={event.toJson()}
-        stage={stages[0]?.id}
-        sessions={sessions.map((session) => session.toJson())}>
-        <div className=" flex flex-col md:flex-row w-full rounded-lg z-50 space-y-2 md:space-y-0 md:space-x-2 mb-4 justify-center">
-          <SectionTitle title="Schedule" />
-          <DateSelect dates={dates} />
-          <StageSelect stages={stages} />
+      <div className=" flex flex-col md:flex-row w-full rounded-lg z-50 space-y-2 md:space-y-0 md:space-x-2 mb-4 justify-center">
+        <SectionTitle title="Schedule" />
+        <DateSelect dates={dates} />
+        <StageSelect stages={stages} />
+      </div>
+      <div className="flex flex-row h-full w-full">
+        <div className="w-full flex flex-col relative">
+          <SessionList event={event} sessions={sessions} />
         </div>
-        <SessionsOnSchedule event={event.toJson()} />
-      </ScheduleContextProvider>
+      </div>
     </ComponentWrapper>
   )
 }

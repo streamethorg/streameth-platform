@@ -18,7 +18,7 @@
   ],
   "eventCover": "base_cover.png",
   "website": "",
-  "archiveMode": true,
+  "archiveMode": false,
   "timezone": "EST",
   "logo": "base_logo.png",
   "banner": "base_banner.png",
