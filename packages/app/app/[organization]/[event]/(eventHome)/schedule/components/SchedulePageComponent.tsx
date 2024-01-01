@@ -9,6 +9,13 @@ import { IStage } from 'streameth-server/model/stage'
 import { IEvent } from 'streameth-server/model/event'
 import { getEventDays } from '@/utils/time'
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+
 const SchedulePageComponent = async ({
   stages,
   event,
@@ -29,18 +36,20 @@ const SchedulePageComponent = async ({
   })
 
   return (
-    <ComponentWrapper sectionId="schedule">
-      <div className=" flex flex-col md:flex-row w-full rounded-lg z-50 space-y-2 md:space-y-0 md:space-x-2 mb-4 justify-center">
-        <SectionTitle title="Schedule" />
+    <Card id="schedule" className="border-none">
+      <CardHeader className="p-3 md:p-6 flex flex-col md:flex-row w-full space-y-2 md:space-y-0 md:space-x-4 justify-center">
+        <CardTitle className="text-4xl uppercase md:mr-4">
+          Schedule
+        </CardTitle>
         <DateSelect dates={dates} />
         <StageSelect stages={stages} />
-      </div>
-      <div className="flex flex-row h-full w-full">
+      </CardHeader>
+      <CardContent className="p-3 md:p-6">
         <div className="w-full flex flex-col relative">
           <SessionList event={event} sessions={sessions} />
         </div>
-      </div>
-    </ComponentWrapper>
+      </CardContent>
+    </Card>
   )
 }
 
