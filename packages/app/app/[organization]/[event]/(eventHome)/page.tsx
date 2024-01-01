@@ -35,7 +35,7 @@ export default async function EventHome({
   if (!event) return notFound()
 
   return (
-    <div className="flex flex-col w-full h-full bg-background px-2">
+    <div className="flex flex-col w-full h-full bg-accent px-2">
       <div className=" relative my-1 md:my-4 max-w-full md:max-w-4xl mx-auto z-50">
         <HomePageLogoAndBanner event={event} />
         <NFTMintComponent />

@@ -40,7 +40,7 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--colors-accent))",
+          DEFAULT: "var(--colors-accent)",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
@@ -48,8 +48,8 @@ module.exports = {
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "rgba(19,21,23,0.88)",
+          foreground: "hsl(var(--primary-foreground))",
         },
       },
       borderRadius: {

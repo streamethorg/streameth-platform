@@ -8,6 +8,16 @@ import { ISession } from 'streameth-server/model/session'
 import { IEvent } from 'streameth-server/model/event'
 import { getEventTimezoneText } from '@/utils/time'
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+
+import { Badge } from '@/components/ui/badge'
+
 const ScheduleCard = ({
   event,
   session,
@@ -25,37 +35,40 @@ const ScheduleCard = ({
     new Date(session.end).getTime() > Date.now()
 
   return (
-    <div
-      className="bg-black/20 flex space-y-3 flex-col w-full h-full   rounded p-2 md:p-2 text-white cursor-pointer transition-colors"
+    <Card
+      className="border-none"
       onClick={() => {
         openModal(
           <ScheduleCardModal event={event} session={session} />
         )
       }}>
-      <div className="border-l border-white  hover:border-l-2 flex flex-col px-2 rounded-tr rounded-br w-full h-full">
-        {showTime && (
-          <p className="text-main-text text-sm py-1">
-            {moment(session.start)
-              .tz(event?.timezone)
-              .format('HH:mm')}{' '}
-            -{' '}
-            {moment(session.end)
-              .tz(event?.timezone)
-              .format('HH:mm')}{' '}
-            {getEventTimezoneText(event?.timezone)}
-          </p>
-        )}
-        <p className="flex text-ellipsis text-main-text text-sm lg:text-md">
-          {session.name}
-        </p>
+      <CardHeader>
+        <CardTitle>{session.name}</CardTitle>
+        <CardDescription>
+          {showTime && (
+            <>
+              {moment(session.start)
+                .tz(event?.timezone)
+                .format('HH:mm')}{' '}
+              -{' '}
+              {moment(session.end)
+                .tz(event?.timezone)
+                .format('HH:mm')}{' '}
+              {getEventTimezoneText(event?.timezone)}
+            </>
+          )}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
         {speakers && (
           <div className="flex py-1 items-center flex-row space-x-2 overflow-x-scroll mt-auto">
             {session.speakers.map((speaker) => (
-              <p
+              <Badge
                 key={speaker.id}
-                className="text-sm text-main-text border p-1 px-2 rounded-full whitespace-nowrap ">
+                variant={'outline'}
+                className="text-white">
                 {speaker.name}
-              </p>
+              </Badge>
             ))}
           </div>
         )}
@@ -64,8 +77,8 @@ const ScheduleCard = ({
             Live
           </p>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 
