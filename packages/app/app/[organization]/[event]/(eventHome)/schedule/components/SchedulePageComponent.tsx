@@ -7,20 +7,21 @@ import SessionList from '@/components/sessions/SessionList'
 import { fetchEventSessions } from '@/lib/data'
 import { IStage } from 'streameth-server/model/stage'
 import { IEvent } from 'streameth-server/model/event'
+import { getEventDays } from '@/utils/time'
 
 const SchedulePageComponent = async ({
-  dates,
   stages,
   event,
   stage,
   date,
 }: {
-  dates: number[]
   stages: IStage[]
   event: IEvent
   stage?: string
   date?: string
 }) => {
+  const dates = getEventDays(event.start, event.end)
+
   const sessions = await fetchEventSessions({
     event: event.id,
     stage: stage,

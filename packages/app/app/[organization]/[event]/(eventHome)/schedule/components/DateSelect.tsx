@@ -5,6 +5,14 @@ import {
   useRouter,
 } from 'next/navigation'
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+
 const DateSelect = ({ dates }: { dates: number[] }) => {
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -21,16 +29,20 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
   }
 
   return (
-    <select
-      className="px-3 py-2 border border-accent shadow rounded-lg bg-inherit text-lg cursor-pointer w-full box-border "
-      defaultValue={searchParams.get('date') || dates[0]}
-      onChange={(e) => handleDateChange(e.target.value)}>
-      {dates.map((dateNum) => (
-        <option key={dateNum} value={dateNum}>
-          {new Date(dateNum).toDateString()}
-        </option>
-      ))}
-    </select>
+    <Select
+      defaultValue={searchParams.get('date') || dates[0].toString()}
+      onValueChange={(value) => handleDateChange(value)}>
+      <SelectTrigger>
+        <SelectValue placeholder="Date select" />
+      </SelectTrigger>
+      <SelectContent>
+        {dates.map((dateNum) => (
+          <SelectItem key={dateNum} value={dateNum.toString()}>
+            {new Date(dateNum).toDateString()}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   )
 }
 

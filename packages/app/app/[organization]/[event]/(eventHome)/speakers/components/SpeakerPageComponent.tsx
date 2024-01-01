@@ -9,7 +9,6 @@ interface Params {
   params: {
     organization: string
     event: string
-    speaker: string
   }
 }
 

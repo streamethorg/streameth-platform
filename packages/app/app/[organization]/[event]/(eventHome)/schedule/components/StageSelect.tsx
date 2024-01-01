@@ -6,6 +6,14 @@ import {
   useRouter,
 } from 'next/navigation'
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+
 const StageSelect = ({ stages }: { stages: IStage[] }) => {
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -22,16 +30,20 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
   }
 
   return (
-    <select
-      className="px-3 py-2 border border-accent shadow rounded-lg bg-inherit text-lg cursor-pointer box-border w-full "
+    <Select
       defaultValue={searchParams.get('stage') || stages[0].id}
-      onChange={(e) => handleStageChange(e.target.value)}>
-      {stages.map((stage) => (
-        <option key={stage.name} value={stage.id}>
-          {stage.name}
-        </option>
-      ))}
-    </select>
+      onValueChange={(value) => handleStageChange(value)}>
+      <SelectTrigger>
+        <SelectValue placeholder="Stage select" />
+      </SelectTrigger>
+      <SelectContent>
+        {stages.map((stage) => (
+          <SelectItem key={stage.id} value={stage.id}>
+            {stage.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   )
 }
 
