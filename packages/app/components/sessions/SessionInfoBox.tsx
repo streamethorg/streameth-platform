@@ -1,29 +1,51 @@
 'use client'
 
-import { ISession } from 'streameth-server/model/session'
+import {
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@/components/ui/card'
+
+import ShareButton from '@/components/misc/ShareButton'
+import EmbedButton from '@/components/misc/EmbedButton'
 
 const SessionInfoBox = ({
-  session,
-  showDate,
+  title,
+  cardDescription,
+  description,
+  playbackId,
+  streamId,
+  playerName,
 }: {
-  session: ISession
-  showDate?: boolean
+  title: string
+  cardDescription?: string
+  description?: string
+  playbackId?: string | undefined
+  streamId?: string | undefined
+  playerName: string
 }) => {
-  if (!session) return null
-  const { name: title, description } = session
   return (
-    <div
-      className={`p-2 px-4 rounded-xl w-full shadow bg-base ${
-        !description && ''
-      }`}>
-      <div className="flex flex-col">
-        <div className="w-full text-left text-md lg:text-xl mb-2 font-medium text-main-text ">
-          {title}
+    <div className="bg-accent">
+      <CardHeader className="flex flex-col md:flex-row p-4">
+        <div className="flex flex-col">
+          <CardTitle className="text-background">{title}</CardTitle>
+          <CardDescription>{cardDescription}</CardDescription>
         </div>
-        {description && (
-          <p className="text-main-text">{description}</p>
-        )}
-      </div>
+        <div className="flex flex-row md:ml-auto space-x-1">
+          <ShareButton />
+          <EmbedButton
+            streamId={streamId}
+            playbackId={playbackId}
+            playerName={playerName}
+          />
+        </div>
+      </CardHeader>
+      {description && (
+        <CardContent>
+          <p>{description}</p>
+        </CardContent>
+      )}
     </div>
   )
 }

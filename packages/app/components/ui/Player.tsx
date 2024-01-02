@@ -74,7 +74,7 @@ export const Player = ({
   // if (!playbackId && !stream?.isActive) return <OfflinePlayer />
   return useMemo(
     () => (
-      <div className="relative w-full aspect-video">
+      <div className="relative w-full aspect-video p-2 bg-black rounded">
         <LivepeerPlayer
           mediaElementRef={mediaElementRef}
           playbackId={playbackId ?? stream?.playbackId}

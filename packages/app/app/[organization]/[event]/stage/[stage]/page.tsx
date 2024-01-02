@@ -1,9 +1,5 @@
-import ActionsComponent from '@/app/[organization]/session/components/ActionsComponent'
-import EmbedButton from '@/components/misc/EmbedButton'
 import Player from '@/components/ui/Player'
-import ShareButton, {
-  ShareWithText,
-} from '@/components/misc/ShareButton'
+import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/components/plugins/Chat'
 import { EventPageProps } from '@/lib/types'
@@ -50,26 +46,21 @@ export default async function Stage({ params }: EventPageProps) {
 
   return (
     <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
-      <div className="flex flex-col w-full h-full lg:w-[70%] sticky top-[54px] md:p-4 md:pr-2">
-        <div className="flex flex-col lg:flex-row relative  ">
-          <div className="bg-black mb-2 lg:mb-0 sticky md:rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
-            <ActionsComponent title={stage.name}>
-              <EmbedButton
-                streamId={stage.streamSettings.streamId}
-                playerName={stage.name}
-              />
-              <ShareButton />
-            </ActionsComponent>
-            <Player
-              streamId={stage.streamSettings.streamId}
-              playerName={stage.name}
-            />
-          </div>
-        </div>
+      <div className="flex flex-col w-full h-full z-40 lg:w-[70%] sticky top-[54px] md:p-4 md:pr-2">
+        <Player
+          streamId={stage.streamSettings.streamId}
+          playerName={stage.name}
+        />
+        <SessionInfoBox
+          title={'Watching: ' + stage.name + ' stage'}
+          cardDescription={event.name}
+          playerName={stage.name}
+          streamId={stage.streamSettings.streamId}
+        />
       </div>
       <Tabs
         defaultValue={tabs[0].value}
-        className="md:w-[30%] w-full max-h-[100%] p-4 md:pl-2">
+        className="md:w-[30%] w-full max-h-[100%] md:m-4 md:ml-2 bg-background p-2 rounded-lg ">
         <TabsList className="w-full">
           {tabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value}>
@@ -89,32 +80,3 @@ export default async function Stage({ params }: EventPageProps) {
     </div>
   )
 }
-
-/* <div className="flex flex-col md:flex-row relative justify-center items-start mb-2  ">
-          <div className="flex flex-col">
-            <div className="  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 text-center gap-4">
-              <p className="text-black font-bold text-xl">
-                Built by{' '}
-              </p>
-              <Image
-                src={LogoDark}
-                alt="logo"
-                width={200}
-                height={60}
-              />
-            </div>
-            <div className="  font-ubuntu flex items-center rounded-xl w-fit px-2 m-2 text-center gap-4">
-              <p className="text-black font-bold text-xl">
-                Powered by{' '}
-              </p>
-              <Image
-                src="/livepeer-logo.png"
-                alt="logo"
-                width={120}
-                height={60}
-              />
-            </div>
-          </div>
-          <ShareWithText text="Share this event" />
-        </div>
-        */
