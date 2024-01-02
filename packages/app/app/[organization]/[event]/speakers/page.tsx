@@ -1,4 +1,4 @@
-import SpeakerPageComponent from './components/SpeakerPageComponent'
+import SpeakerPageComponent from './components/SpeakerComponent'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import { fetchEvent } from '@/lib/data'
 import { notFound } from 'next/navigation'

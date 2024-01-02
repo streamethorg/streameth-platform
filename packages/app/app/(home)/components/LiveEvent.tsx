@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Player from '@/components/misc/Player'
+import Player from '@/components/ui/Player'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IStage } from 'streameth-server/model/stage'

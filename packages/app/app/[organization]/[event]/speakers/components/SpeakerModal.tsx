@@ -1,4 +1,4 @@
-import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
+import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
 
 import { ISpeaker } from 'streameth-server/model/speaker'
 import { ISession } from 'streameth-server/model/session'
@@ -9,7 +9,6 @@ import {
   CredenzaDescription,
   CredenzaTitle,
   CredenzaHeader,
-  CredenzaFooter,
   CredenzaBody,
 } from '@/components/ui/crezenda'
 

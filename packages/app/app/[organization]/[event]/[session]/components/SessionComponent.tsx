@@ -1,7 +1,6 @@
-import Player from '@/components/misc/Player'
+import Player from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import ComponentCard from '@/components/misc/ComponentCard'
-import SpeakerIconList from '@/app/[organization]/[event]/(eventHome)/speakers/components/SpeakerIconList'
 import ActionsComponent from './ActionsComponent'
 import EmbedButton from '@/components/misc/EmbedButton'
 import Card from '@/components/misc/Card'
@@ -20,7 +19,7 @@ const SpeakerComponent = ({
 }) => {
   return (
     <ComponentCard>
-      <SpeakerIconList event={event} speakers={session.speakers} />
+      {/* <SpeakerIconList event={event} speakers={session.speakers} /> */}
     </ComponentCard>
   )
 }

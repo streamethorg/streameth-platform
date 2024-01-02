@@ -2,9 +2,8 @@
 import React, { useEffect } from 'react'
 import Scroll, { Element } from 'react-scroll'
 import { ISession } from 'streameth-server/model/session'
-import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
 import { IEvent } from 'streameth-server/model/event'
-
+import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
 interface Props {
   event: IEvent
   sessions: ISession[]

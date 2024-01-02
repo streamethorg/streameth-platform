@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-const SchedulePageComponent = async ({
+const ScheduleComponent = async ({
   stages,
   event,
   stage,
@@ -51,4 +51,4 @@ const SchedulePageComponent = async ({
   )
 }
 
-export default SchedulePageComponent
+export default ScheduleComponent

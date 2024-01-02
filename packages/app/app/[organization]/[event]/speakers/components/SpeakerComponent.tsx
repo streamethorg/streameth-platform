@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-const SpeakerPageComponent = async ({ event }: { event: IEvent }) => {
+const SpeakerComponent = async ({ event }: { event: IEvent }) => {
   const speakers = await fetchEventSpeakers({
     event: event.id,
   })
@@ -39,4 +39,4 @@ const SpeakerPageComponent = async ({ event }: { event: IEvent }) => {
   )
 }
 
-export default SpeakerPageComponent
+export default SpeakerComponent

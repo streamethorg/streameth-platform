@@ -1,4 +1,4 @@
-import SchedulePageComponent from './components/SchedulePageComponent'
+import SchedulePageComponent from './components/ScheduleComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import EventController from 'streameth-server/controller/event'
