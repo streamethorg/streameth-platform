@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-import StagePreview from './[stage]/components/StagePreview'
+import StagePreview from './stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Suspense } from 'react'
 

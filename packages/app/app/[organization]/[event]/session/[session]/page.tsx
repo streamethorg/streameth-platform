@@ -1,4 +1,4 @@
-import SessionComponent from './components/SessionComponent'
+import SessionComponent from '../components/SessionComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import Session from '@/utils/session'
 import EventController from 'streameth-server/controller/event'

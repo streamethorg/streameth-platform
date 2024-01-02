@@ -9,7 +9,7 @@ import {
   Dm3Widget,
 } from 'dm3-billboard-widget'
 import { ethers } from 'ethersv5'
-import { StageContext } from '../../../app/[organization]/[event]/[stage]/components/StageContext'
+import { StageContext } from '../../../app/[organization]/[event]/stage/components/StageContext'
 import { useDm3Siwe } from './useDm3Siwe'
 import { ConnectKitButton } from 'connectkit'
 import { InjectedConnector } from 'wagmi/connectors/injected'
