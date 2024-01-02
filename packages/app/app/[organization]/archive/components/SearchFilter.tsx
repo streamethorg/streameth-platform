@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react'
 import {
   FilterContext,
   FilterOption,
-} from '../../../../../context/FilterContext'
+} from '../../../../context/FilterContext'
 import { ISession } from 'streameth-server/model/session'
 import { IEvent } from 'streameth-server/model/event'
 

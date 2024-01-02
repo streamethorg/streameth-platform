@@ -15,7 +15,7 @@ import {
   CalendarIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline'
-import FilterBar from '@/app/[organization]/[event]/archive/components/FilterBar'
+import FilterBar from '@/app/[organization]/archive/components/FilterBar'
 import { IEvent } from 'streameth-server/model/event'
 import { IStage } from 'streameth-server/model/stage'
 import { ISpeaker } from 'streameth-server/model/speaker'

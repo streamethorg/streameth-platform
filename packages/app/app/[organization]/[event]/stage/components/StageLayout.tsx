@@ -1,5 +1,5 @@
 'use client'
-import ActionsComponent from '@/app/[organization]/[event]/session/components/ActionsComponent'
+import ActionsComponent from '@/app/[organization]/session/components/ActionsComponent'
 import PluginBar from '@/components/Layout/PluginBar'
 import { LoadingContext } from '@/context/LoadingContext'
 import { MobileContext } from '@/context/MobileContext'

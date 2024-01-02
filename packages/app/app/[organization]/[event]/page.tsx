@@ -52,7 +52,7 @@ export default async function EventHome({
         <Card className="border-none">
           <AspectRatio ratio={3 / 1}>
             <Image
-              className="rounded-lg max-h-[500px]"
+              className="rounded-lg max-h-[500px] p-2"
               src={getImageUrl('/events/' + event.banner)}
               alt="Event Cover"
               width={1500}

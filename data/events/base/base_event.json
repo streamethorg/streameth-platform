@@ -22,7 +22,7 @@
   "timezone": "EST",
   "logo": "base_logo.png",
   "banner": "base_banner.png",
-  "accentColor": "#1B4DFE",
+  "accentColor": "#FFF",
   "dataExporter": [
     {
       "type": "gdrive",

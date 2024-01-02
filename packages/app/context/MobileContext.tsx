@@ -5,6 +5,7 @@ import {
   useContext,
   createContext,
 } from 'react'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { LoadingContext } from './LoadingContext'
 const MobileContext = createContext<{
   isMobile: boolean
@@ -17,18 +18,8 @@ const MobileContextProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [isMobile, setIsMobile] = useState(false)
-  const { setIsLoading } = useContext(LoadingContext)
-  useLayoutEffect(() => {
-    setIsLoading(true)
-    function updateSize() {
-      setIsMobile(window.innerWidth <= 768)
-      setIsLoading(false)
-    }
-    window.addEventListener('resize', updateSize)
-    updateSize()
-    return () => window.removeEventListener('resize', updateSize)
-  }, [])
+  const desktop = '(min-width: 768px)'
+  const [isMobile, setIsMobile] = useState(!useMediaQuery(desktop))
 
   return (
     <MobileContext.Provider value={{ isMobile }}>
