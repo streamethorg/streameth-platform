@@ -2,7 +2,7 @@
 import { ReactNode, useEffect } from 'react'
 
 import { usePathname } from 'next/navigation'
-import colors from '@/constants/colors'
+import colors from '@/lib/constants/colors'
 
 interface Props {
   children: ReactNode

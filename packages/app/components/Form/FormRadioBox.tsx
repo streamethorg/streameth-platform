@@ -1,6 +1,6 @@
 import { handleKeyPress } from '@/lib/utils'
 import React from 'react'
-import colors from '../../constants/colors'
+import colors from '../../lib/constants/colors'
 import CheckIcon from '../icons/CheckIcon'
 
 interface FormRadioBoxProps {

@@ -1,5 +1,5 @@
 'use client'
-import { ModalContext } from '../../context/ModalContext'
+import { ModalContext } from '../../lib/context/ModalContext'
 import { useContext } from 'react'
 import {
   FacebookShareButton,

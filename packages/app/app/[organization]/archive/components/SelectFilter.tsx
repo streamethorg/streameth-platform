@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import {
   FilterContext,
   FilterOption,
-} from '../../../../context/FilterContext'
+} from '../../../../lib/context/FilterContext'
 
 interface FilterProps<T> {
   filterOptions: FilterOption<T>[]

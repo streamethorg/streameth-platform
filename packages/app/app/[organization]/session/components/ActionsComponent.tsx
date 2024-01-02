@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import VideoDownload from './VideoDownload'
 import { useContext } from 'react'
-import { ModalContext } from '@/context/ModalContext'
+import { ModalContext } from '@/lib/context/ModalContext'
 import { ISession } from 'streameth-server/model/session'
 import { IEvent } from 'streameth-server/model/event'
 

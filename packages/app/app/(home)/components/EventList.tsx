@@ -1,6 +1,6 @@
 'use client'
 import { useContext, useEffect, useState } from 'react'
-import { FilterContext } from '@/context/FilterContext'
+import { FilterContext } from '@/lib/context/FilterContext'
 import EventCard from './EventCard'
 import FilterBar from './FilterBar'
 import { IEvent } from 'streameth-server/model/event'

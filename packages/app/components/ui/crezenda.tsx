@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
+import { useMediaQuery } from '../../lib/hooks/useMediaQuery'
 
 import { cn } from '@/lib/utils'
 import {

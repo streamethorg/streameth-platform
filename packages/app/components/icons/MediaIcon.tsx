@@ -1,4 +1,4 @@
-import colors from '@/constants/colors'
+import colors from '@/lib/constants/colors'
 import { IconProps } from '@/types'
 import React from 'react'
 

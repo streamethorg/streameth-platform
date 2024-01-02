@@ -9,10 +9,10 @@ import {
   useSwitchNetwork,
   useNetwork,
 } from 'wagmi'
-import CastrABI from '@/contracts/Castr-abi'
+import CastrABI from '@/lib/contracts/Castr-abi'
 import { Button } from '@/components/Form/Button'
 import { ConnectKitButton } from 'connectkit'
-import { ModalContext } from '@/context/ModalContext'
+import { ModalContext } from '@/lib/context/ModalContext'
 import { base } from 'viem/chains'
 import Image from 'next/image'
 import Link from 'next/link'

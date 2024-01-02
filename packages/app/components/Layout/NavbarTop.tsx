@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
 import { getImageUrl } from '@/lib/utils'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { NavBarProps } from '@/lib/types'
 

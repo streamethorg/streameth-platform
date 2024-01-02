@@ -5,7 +5,7 @@ import {
   useContext,
   createContext,
 } from 'react'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import { LoadingContext } from './LoadingContext'
 const MobileContext = createContext<{
   isMobile: boolean

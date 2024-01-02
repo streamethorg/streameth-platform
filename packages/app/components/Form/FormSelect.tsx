@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import SelectOptions from './SelectOptions'
 import FormLabel from './FormLabel'
 import ArrowDownIcon from '../icons/ArrowDownIcon'
-import useClickOutside from '../../hooks/useClickOutside'
+import useClickOutside from '../../lib/hooks/useClickOutside'
 
 interface Option {
   [key: string]: any

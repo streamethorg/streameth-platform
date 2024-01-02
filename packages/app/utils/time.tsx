@@ -1,4 +1,4 @@
-import { TIMEZONES } from '@/constants/timezones'
+import { TIMEZONES } from '@/lib/constants/timezones'
 
 export const getTime = (date: Date): number => date.getTime()
 

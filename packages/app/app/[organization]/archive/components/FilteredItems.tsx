@@ -1,7 +1,7 @@
 'use client'
 import { useContext } from 'react'
 import ArchivedSession from './ArchivedSession'
-import { FilterContext } from '@/context/FilterContext'
+import { FilterContext } from '@/lib/context/FilterContext'
 import { ISession } from 'streameth-server/model/session'
 
 const FilteredItems = ({

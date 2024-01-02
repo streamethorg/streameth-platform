@@ -53,6 +53,26 @@ export async function fetchEventStages({
   }
 }
 
+export async function fetchEventStage({
+  event,
+  stage,
+}: {
+  event: string
+  stage: string
+}): Promise<IStage> {
+  try {
+    const stageController = new StageController()
+    const data = await stageController.getStage(stage, event)
+    if (!data) {
+      throw 'Stage not found'
+    }
+    return data.toJson()
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event'
+  }
+}
+
 export async function fetchEventSessions({
   event,
   stage,

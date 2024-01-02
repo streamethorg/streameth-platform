@@ -1,7 +1,7 @@
 'use client'
 import React, { useContext } from 'react'
 import CreateOrganizationModal from './CreateOrganizationForm' // Assuming you have this component
-import { ModalContext } from '@/context/ModalContext'
+import { ModalContext } from '@/lib/context/ModalContext'
 import { Button } from '@/components/Form/Button'
 
 const AddOrganizationButton: React.FC = () => {

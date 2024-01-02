@@ -1,5 +1,5 @@
 import { IconProps } from '@/types'
-import colors from '@/constants/colors'
+import colors from '@/lib/constants/colors'
 import React from 'react'
 
 const HomeIcon = ({
