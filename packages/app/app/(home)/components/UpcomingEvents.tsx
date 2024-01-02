@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { IEvent } from 'streameth-server/model/event'
-import { getImageUrl } from '@/utils'
+import { getImageUrl } from '@/lib/utils'
 
 const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
   return (

@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Session from 'streameth-server/model/session'
 import { IEvent } from 'streameth-server/model/event'
-import { getImageUrl } from '@/utils'
+import { getImageUrl } from '@/lib/utils'
 
 const SpeakerComponent = ({
   event,

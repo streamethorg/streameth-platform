@@ -2,7 +2,7 @@ import { ISession } from 'streameth-server/model/session'
 import Link from 'next/link'
 import Card from '@/components/misc/Card'
 import Image from 'next/image'
-import { getImageUrl } from '@/utils'
+import { getImageUrl } from '@/lib/utils'
 
 const ArchivedSession = ({
   session,

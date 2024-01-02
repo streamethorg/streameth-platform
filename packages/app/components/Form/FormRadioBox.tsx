@@ -1,4 +1,4 @@
-import { handleKeyPress } from '@/utils'
+import { handleKeyPress } from '@/lib/utils'
 import React from 'react'
 import colors from '../../constants/colors'
 import CheckIcon from '../icons/CheckIcon'

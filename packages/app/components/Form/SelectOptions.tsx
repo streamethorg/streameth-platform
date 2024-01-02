@@ -1,4 +1,4 @@
-import { selectOptionFocusHandle } from '@/utils'
+import { selectOptionFocusHandle } from '@/lib/utils'
 import { forwardRef } from 'react'
 
 interface Option {

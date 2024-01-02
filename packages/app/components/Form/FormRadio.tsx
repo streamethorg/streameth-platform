@@ -1,4 +1,4 @@
-import { a11yEnterKeyPress } from '@/utils'
+import { a11yEnterKeyPress } from '@/lib/utils'
 import React from 'react'
 import RadioButtonSolidIcon from '../icons/RadioButtonSolidIcon'
 

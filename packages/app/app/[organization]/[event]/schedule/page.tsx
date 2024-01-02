@@ -2,22 +2,14 @@ import SchedulePageComponent from './components/ScheduleComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import EventController from 'streameth-server/controller/event'
-import { getImageUrl } from '@/utils'
+import { getImageUrl } from '@/lib/utils'
 import { fetchEvent, fetchEventStages } from '@/lib/data'
-interface Params {
-  params: {
-    event: string
-    organization: string
-  }
-  searchParams: {
-    stage?: string
-    date?: string
-  }
-}
+import { EventPageProps } from '@/lib/types'
+
 export default async function SchedulePage({
   params,
   searchParams,
-}: Params) {
+}: EventPageProps) {
   const event = await fetchEvent({
     event: params.event,
     organization: params.organization,
@@ -26,8 +18,6 @@ export default async function SchedulePage({
   const stages = await fetchEventStages({
     event: params.event,
   })
-
-  if (!event) return null
 
   return (
     <EmbedLayout>
@@ -42,7 +32,7 @@ export default async function SchedulePage({
 }
 
 export async function generateMetadata(
-  { params }: Params,
+  { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const eventController = new EventController()

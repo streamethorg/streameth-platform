@@ -1,4 +1,4 @@
-import { listenPressOnElement } from '@/utils'
+import { listenPressOnElement } from '@/lib/utils'
 import React from 'react'
 import CheckBoxSolid from '../icons/CheckBoxIcon'
 

@@ -13,7 +13,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { ModalContext } from '@/context/ModalContext'
 import useAdminContext from '@/hooks/useAdminContext'
-import { getImageUrl } from '@/utils'
+import { getImageUrl } from '@/lib/utils'
 
 const ItemButton = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-row justify-center">

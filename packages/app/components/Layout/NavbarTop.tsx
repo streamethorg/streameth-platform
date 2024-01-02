@@ -1,20 +1,13 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useContext, useEffect, useState } from 'react'
-import { TopNavbarContext } from '../../context/TopNavbarContext'
+import { useEffect, useState } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
-import { getImageUrl } from '@/utils'
+import { getImageUrl } from '@/lib/utils'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-
 import { NavigationMenu } from '@/components/ui/navigation-menu'
-import { AspectRatio } from '../ui/aspect-ratio'
-export interface Page {
-  name: string
-  href: string
-  icon: JSX.Element
-}
+import { NavBarProps } from '@/lib/types'
 
 const NavBarButton = ({
   isNavVisible,
@@ -34,10 +27,12 @@ const NavBarButton = ({
   </button>
 )
 
-export default function NavbarTop() {
-  const { logo, pages, homePath, showNav, components } =
-    useContext(TopNavbarContext)
-
+export default function NavbarTop({
+  pages,
+  logo,
+  homePath,
+  showNav,
+}: NavBarProps) {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const [menuVisible, setMenuVisible] = useState(false)
 
@@ -45,12 +40,10 @@ export default function NavbarTop() {
     setMenuVisible(!isMobile)
   }, [isMobile])
 
-  console.log(isMobile)
-
   if (!showNav) {
     return null
   }
-
+  console.log(getImageUrl(logo))
   return (
     <NavigationMenu className="z-[99999999] bg-accent sticky top-0">
       <div className="flex p-2 px-2 md:px-4 w-full">
@@ -76,21 +69,20 @@ export default function NavbarTop() {
                       {
                         name: 'Back to overview',
                         href: '/',
-                        icon: <></>,
                       },
                     ]
                   : pages
               }
             />
           )}
-          {components.length > 0 &&
+          {/* {components.length > 0 &&
             components.map((component, index) => {
               return (
                 <div className="flex-1 px-2 " key={index}>
                   {component}
                 </div>
               )
-            })}
+            })} */}
 
           {pages.length > 1 && (
             <NavBarButton

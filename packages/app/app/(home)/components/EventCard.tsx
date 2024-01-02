@@ -5,7 +5,7 @@ import Cover from '@/public/cover.png'
 import Card from '@/components/misc/Card'
 import { ModalContext } from '@/context/ModalContext'
 import { useRouter } from 'next/navigation'
-import { getImageUrl, hasData } from '@/utils'
+import { getImageUrl, hasData } from '@/lib/utils'
 import { IEvent } from 'streameth-server/model/event'
 import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
 

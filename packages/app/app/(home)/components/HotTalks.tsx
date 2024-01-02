@@ -1,5 +1,5 @@
 import Card from '@/components/misc/Card'
-import { getImageUrl } from '@/utils'
+import { getImageUrl } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'

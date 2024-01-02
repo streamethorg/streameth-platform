@@ -5,8 +5,8 @@ import Image from 'next/image'
 import { getEventPeriod } from '@/utils/time'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { fetchEvent, fetchEventStages } from '@/lib/data'
-import { getImageUrl } from '@/utils'
+import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
+import { getImageUrl } from '@/lib/utils'
 import { ResolvingMetadata, Metadata } from 'next'
 import {
   Card,
@@ -19,6 +19,15 @@ import {
 import StagePreview from './stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Suspense } from 'react'
+
+export async function generateStaticParams() {
+  const allEvents = await fetchEvents()
+  const paths = allEvents.map((event) => ({
+    organization: event.organizationId,
+    event: event.id,
+  }))
+  return paths
+}
 
 interface Params {
   params: {

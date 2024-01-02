@@ -6,18 +6,30 @@ import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
+import { NavBarProps } from './types'
+export async function fetchEvents(): Promise<IEvent[]> {
+  try {
+    const eventController = new EventController()
+    const data = await eventController.getAllEvents({})
+    return data.map((event) => event.toJson())
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching events'
+  }
+}
+
 export async function fetchEvent({
   event,
   organization,
 }: {
   event: string
   organization: string
-}): Promise<IEvent | null> {
+}): Promise<IEvent> {
   try {
     const eventController = new EventController()
     const data = await eventController.getEvent(event, organization)
     if (!data) {
-      return null
+      throw 'Event not found'
     }
     return data.toJson()
   } catch (e) {
@@ -82,5 +94,55 @@ export async function fetchEventSpeakers({
   } catch (e) {
     console.log(e)
     throw 'Error fetching event'
+  }
+}
+
+export async function fetchNavBarRoutes({
+  event,
+  organization,
+}: {
+  event: string
+  organization: string
+}): Promise<NavBarProps> {
+  const [eventData, sessionData, speakerData, stageData] =
+    await Promise.all([
+      fetchEvent({ event, organization }),
+      fetchEventSessions({ event }),
+      fetchEventSpeakers({ event }),
+      fetchEventStages({ event }),
+    ])
+
+  if (!eventData) {
+    throw 'Event not found'
+  }
+
+  const pages = []
+
+  if (sessionData.length > 0 && !eventData?.plugins?.hideSchedule)
+    pages.push({
+      href: `/${organization}/${event}#schedule`,
+      name: 'Schedule',
+    })
+
+  if (speakerData.length > 0)
+    pages.push({
+      href: `/${organization}/${event}#speakers`,
+      name: 'Speakers',
+    })
+
+  for (const stage of stageData) {
+    if (stage.streamSettings.streamId) {
+      pages.push({
+        href: `/${organization}/${event}/stage/${stage.id}`,
+        name: stage.name,
+      })
+    }
+  }
+
+  return {
+    pages,
+    logo: '/events/' + eventData?.logo ?? '',
+    homePath: `/${organization}/${event}`,
+    showNav: true,
   }
 }

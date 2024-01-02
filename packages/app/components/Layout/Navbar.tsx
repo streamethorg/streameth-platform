@@ -5,15 +5,11 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-
+import { NavBarProps } from '@/lib/types'
 export default function Navbar({
   pages,
 }: {
-  pages: {
-    name: string
-    href: string
-    icon: JSX.Element
-  }[]
+  pages: NavBarProps['pages']
 }) {
   if (pages.length === 0) {
     return null

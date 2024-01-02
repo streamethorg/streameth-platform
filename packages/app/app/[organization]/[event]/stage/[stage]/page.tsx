@@ -6,33 +6,9 @@ import type { Metadata, ResolvingMetadata } from 'next'
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
-interface Params {
-  params: {
-    organization: string
-    event: string
-    stage: string
-  }
-}
+import { EventPageProps } from '@/lib/types'
 
-export async function generateStaticParams({
-  params: { organization, event },
-}: {
-  params: { organization: string; event: string }
-}) {
-  const stageController = new StageController()
-  const stages = (
-    await stageController.getAllStagesForEvent(event)
-  ).map((stage) => {
-    return {
-      organization: organization,
-      event: event,
-      stage: stage.id,
-    }
-  })
-  return stages
-}
-
-export default async function Stage({ params }: Params) {
+export default async function Stage({ params }: EventPageProps) {
   const eventController = new EventController()
   const stageController = new StageController()
   const sessionController = new SessionController()
@@ -70,7 +46,7 @@ export default async function Stage({ params }: Params) {
 }
 
 export async function generateMetadata(
-  { params }: Params,
+  { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const eventController = new EventController()

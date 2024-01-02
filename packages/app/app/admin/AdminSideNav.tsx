@@ -6,7 +6,7 @@ import EventIcon from '../../components/icons/EventIcon'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAccount, useEnsName } from 'wagmi'
-import { truncateAddr } from '@/utils'
+import { truncateAddr } from '@/lib/utils'
 import MediaIcon from '../../components/icons/MediaIcon'
 import makeBlockie from 'ethereum-blockies-base64'
 import {
