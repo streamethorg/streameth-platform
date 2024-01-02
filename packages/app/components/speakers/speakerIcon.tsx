@@ -39,10 +39,10 @@ export default function SpeakerIcon({
   }
   return (
     <Badge
-    // onClick={() =>
-    //   openModal(<SpeakerModal event={event} speaker={speaker} />)
-    // }>
-    >
+      // onClick={() =>
+      //   openModal(<SpeakerModal event={event} speaker={speaker} />)
+      // }>
+      className="m-1">
       <Avatar className="my-2">
         <AvatarImage
           src={

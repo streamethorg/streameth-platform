@@ -1,10 +1,11 @@
 import { IEvent } from 'streameth-server/model/event'
 import { IStage } from 'streameth-server/model/stage'
 import { ISession } from 'streameth-server/model/session'
+import { ISpeaker } from 'streameth-server/model/speaker'
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
-
+import SpeakerController from 'streameth-server/controller/speaker'
 export async function fetchEvent({
   event,
   organization,
@@ -63,6 +64,21 @@ export async function fetchEventSessions({
       speakerIds,
     })
     return data.map((session) => session.toJson())
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event'
+  }
+}
+
+export async function fetchEventSpeakers({
+  event,
+}: {
+  event: string
+}): Promise<ISpeaker[]> {
+  try {
+    const speakerController = new SpeakerController()
+    const data = await speakerController.getAllSpeakersForEvent(event)
+    return data.map((speaker) => speaker.toJson())
   } catch (e) {
     console.log(e)
     throw 'Error fetching event'

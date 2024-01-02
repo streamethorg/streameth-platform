@@ -1,7 +1,5 @@
 import StageSelect from './StageSelect'
 import DateSelect from './DateSelect'
-import ComponentWrapper from '../../components/ComponentWrapper'
-import SectionTitle from '../../components/SectionTitle'
 import SessionList from '@/components/sessions/SessionList'
 
 import { fetchEventSessions } from '@/lib/data'

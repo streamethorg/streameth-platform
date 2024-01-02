@@ -1,5 +1,8 @@
 import SpeakerPageComponent from './components/SpeakerPageComponent'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
+import { fetchEvent } from '@/lib/data'
+import { notFound } from 'next/navigation'
+
 interface Params {
   params: {
     organization: string
@@ -9,9 +12,16 @@ interface Params {
 }
 
 const SpeakerPage = async ({ params }: Params) => {
+  const event = await fetchEvent({
+    event: params.event,
+    organization: params.organization,
+  })
+
+  if (!event) return notFound()
+
   return (
     <EmbedLayout>
-      <SpeakerPageComponent params={params} />
+      <SpeakerPageComponent event={event} />
     </EmbedLayout>
   )
 }

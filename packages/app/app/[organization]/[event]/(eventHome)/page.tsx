@@ -50,7 +50,7 @@ export default async function EventHome({
           stage={searchParams.stage}
           date={searchParams.date}
         />
-        <SpeakerPageComponent params={params} />
+        <SpeakerPageComponent event={event} />
       </div>
     </div>
   )
