@@ -1,7 +1,7 @@
 import ClientOnly from '@/components/Form/ClientOnly'
 import { useSIWE } from 'connectkit'
 import { PropsWithChildren } from 'react'
-import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
+import { ConnectWalletButton } from '@/components/ConnectWalletButton'
 export function AdminWrapper(props: PropsWithChildren) {
   const { data, isSignedIn } = useSIWE()
 

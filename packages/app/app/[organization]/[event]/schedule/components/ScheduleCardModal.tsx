@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import moment from 'moment-timezone'
 import { ISession } from 'streameth-server/model/session'
 import { IEvent } from 'streameth-server/model/event'
-import { getEventTimezoneText } from '@/utils/time'
+import { getEventTimezoneText } from '@/lib/utils/time'
 import {
   CredenzaContent,
   CredenzaDescription,

@@ -1,6 +1,6 @@
 import SessionComponent from '../components/SessionComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
-import Session from '@/utils/session'
+import Session from '@/lib/utils/session'
 import EventController from 'streameth-server/controller/event'
 import SessionController from 'streameth-server/controller/session'
 

@@ -5,7 +5,7 @@ import SessionList from '@/components/sessions/SessionList'
 import { fetchEventSessions } from '@/lib/data'
 import { IStage } from 'streameth-server/model/stage'
 import { IEvent } from 'streameth-server/model/event'
-import { getEventDays } from '@/utils/time'
+import { getEventDays } from '@/lib/utils/time'
 
 import {
   Card,

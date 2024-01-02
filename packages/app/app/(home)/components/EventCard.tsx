@@ -7,7 +7,7 @@ import { ModalContext } from '@/lib/context/ModalContext'
 import { useRouter } from 'next/navigation'
 import { getImageUrl, hasData } from '@/lib/utils'
 import { IEvent } from 'streameth-server/model/event'
-import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
+import { getDateInUTC, isCurrentDateInUTC } from '@/lib/utils/time'
 
 const EventCard = ({ event }: { event: IEvent }) => {
   const imageUrl = event.eventCover

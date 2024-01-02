@@ -1,6 +1,4 @@
 import ActionsComponent from '@/app/[organization]/session/components/ActionsComponent'
-import { LoadingContext } from '@/lib/context/LoadingContext'
-import { MobileContext } from '@/lib/context/MobileContext'
 import EmbedButton from '@/components/misc/EmbedButton'
 import Player from '@/components/ui/Player'
 import ShareButton, {
