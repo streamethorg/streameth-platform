@@ -52,9 +52,7 @@ export default async function Stage({ params }: EventPageProps) {
     <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
       <div className="flex flex-col w-full h-full lg:w-[70%] sticky top-[54px] md:p-4 md:pr-2">
         <div className="flex flex-col lg:flex-row relative  ">
-          <div
-            // ref={stickyRef}
-            className="bg-black mb-2 lg:mb-0 sticky md:rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
+          <div className="bg-black mb-2 lg:mb-0 sticky md:rounded-xl top-[64px] z-40 flex flex-col lg:h-full w-full box-border lg:overflow-scroll ">
             <ActionsComponent title={stage.name}>
               <EmbedButton
                 streamId={stage.streamSettings.streamId}

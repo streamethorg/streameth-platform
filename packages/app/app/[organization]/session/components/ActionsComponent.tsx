@@ -1,7 +1,9 @@
 'use client'
-import DownloaderIcon from '@/components/icons/DownloaderIcon'
 
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowUturnLeftIcon,
+  ArrowDownIcon,
+} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import VideoDownload from './VideoDownload'
@@ -55,7 +57,7 @@ const ActionsComponent = ({
             )
           }}
           className="cursor-pointer ml-3 text-white font-bold hover:bg-base">
-          <DownloaderIcon />
+          <ArrowDownIcon />
         </button>
       )}
     </div>
