@@ -1,5 +1,5 @@
 import { IStorageController } from '@interfaces/storage.interface';
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 export default class DB<T extends mongoose.Document>
   implements IStorageController<T>
@@ -31,11 +31,11 @@ export default class DB<T extends mongoose.Document>
     return await this.model.findOne(query);
   }
 
-  async findAll(): Promise<Array<T>> {
-    return await this.model.find();
+  async findAll(query: {}): Promise<Array<T>> {
+    return await this.model.find(query);
   }
 
   async delete(id: string): Promise<void> {
-    return await this.model.findByIdAndDelete(id);
+    await this.model.deleteOne(new Types.ObjectId(id));
   }
 }

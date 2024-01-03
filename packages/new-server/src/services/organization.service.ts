@@ -39,10 +39,11 @@ export default class OrganizationService {
   }
 
   async getAll(): Promise<Array<IOrganization>> {
-    return await this.controller.store.findAll(this.path);
+    return await this.controller.store.findAll({}, this.path);
   }
 
   async deleteOne(organizationId: string): Promise<void> {
+    await this.get(organizationId);
     return await this.controller.store.delete(organizationId, this.path);
   }
 }
