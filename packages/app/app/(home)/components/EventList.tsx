@@ -11,7 +11,7 @@ const EventList = ({ events }: { events: IEvent[] }) => {
   return (
     <>
       <div className=" mx-4 items-center flex flex-col md:flex-row mt-8 gap-5">
-        <p className="font-ubuntu font-bold text-blue text-2xl md:text-4xl">
+        <p className="font-ubuntu font-bold text-primary text-2xl md:text-4xl">
           Past Events
         </p>
         <FilterBar events={events} />

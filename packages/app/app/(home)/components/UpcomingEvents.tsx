@@ -1,9 +1,9 @@
-import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/lib/utils'
+import { Card } from '@/components/ui/card'
 
 const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
   return (
@@ -21,7 +21,7 @@ const UpcomingEvents = ({ events }: { events: IEvent[] }) => {
           },
           index
         ) => (
-          <Card key={index} bgColor={accentColor}>
+          <Card key={index}>
             <Link href={`/${organizationId}/${id}`}>
               <div className="bg-base min-h-full rounded-xl text-white uppercase">
                 <div className="aspect-video relative">

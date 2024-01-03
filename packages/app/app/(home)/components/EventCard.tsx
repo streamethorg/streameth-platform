@@ -2,12 +2,12 @@
 import { useState, useContext } from 'react'
 import Image from 'next/image'
 import Cover from '@/public/cover.png'
-import Card from '@/components/misc/Card'
 import { ModalContext } from '@/lib/context/ModalContext'
 import { useRouter } from 'next/navigation'
 import { getImageUrl, hasData } from '@/lib/utils'
 import { IEvent } from 'streameth-server/model/event'
 import { getDateInUTC, isCurrentDateInUTC } from '@/lib/utils/time'
+import { Card } from '@/components/ui/card'
 
 const EventCard = ({ event }: { event: IEvent }) => {
   const imageUrl = event.eventCover
@@ -45,7 +45,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
 
   return (
     <div onClick={onCardClick} className="cursor-pointer">
-      <Card isAvailable={isAvailable} bgColor="white">
+      <Card>
         <div className="aspect-video relative">
           <Image
             className="rounded"
