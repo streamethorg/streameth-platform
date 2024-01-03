@@ -26,10 +26,10 @@ const SessionInfoBox = ({
   playerName: string
 }) => {
   return (
-    <div className="bg-accent">
+    <div className="bg-background rounded mt-1">
       <CardHeader className="flex flex-col md:flex-row p-4">
         <div className="flex flex-col">
-          <CardTitle className="text-background">{title}</CardTitle>
+          <CardTitle className="">{title}</CardTitle>
           <CardDescription>{cardDescription}</CardDescription>
         </div>
         <div className="flex flex-row md:ml-auto space-x-1">

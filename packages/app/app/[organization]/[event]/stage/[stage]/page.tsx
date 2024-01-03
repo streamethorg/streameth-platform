@@ -23,6 +23,8 @@ export default async function Stage({ params }: EventPageProps) {
 
   const sessions = await fetchEventSessions({
     event: params.event,
+    stage: params.stage,
+    date: new Date(),
   })
 
   const stage = await fetchEventStage({
@@ -59,7 +61,7 @@ export default async function Stage({ params }: EventPageProps) {
         />
       </div>
       <Tabs
-        defaultValue={tabs[0].value}
+        defaultValue={tabs[0]?.value ?? ''}
         className="md:w-[30%] w-full max-h-[100%] md:m-4 md:ml-2 bg-background p-2 rounded-lg ">
         <TabsList className="w-full">
           {tabs.map((tab) => (

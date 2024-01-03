@@ -7,10 +7,23 @@ import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
 import { NavBarProps } from './types'
-export async function fetchEvents(): Promise<IEvent[]> {
+export async function fetchEvents({
+  organizationId,
+  date
+}: {
+  organizationId?: string
+  date?: Date
+}): Promise<IEvent[]> {
   try {
     const eventController = new EventController()
-    const data = await eventController.getAllEvents({})
+    let data = await eventController.getAllEvents({})
+    if (organizationId) {
+      data = data.filter((event) => event.organizationId === organizationId)
+    }
+    // upcoming events
+    if (date) {
+      data = data.filter((event) => event.start > date)
+    }
     return data.map((event) => event.toJson())
   } catch (e) {
     console.log(e)
@@ -83,7 +96,7 @@ export async function fetchEventSessions({
   event: string
   stage?: string
   timestamp?: number
-  date?: number
+  date?: Date
   speakerIds?: string[]
 }): Promise<ISession[]> {
   try {

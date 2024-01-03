@@ -21,7 +21,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Suspense } from 'react'
 
 export async function generateStaticParams() {
-  const allEvents = await fetchEvents()
+  const allEvents = await fetchEvents({})
   const paths = allEvents.map((event) => ({
     organization: event.organizationId,
     event: event.id,

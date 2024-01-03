@@ -43,7 +43,7 @@ export default class SessionController {
     eventId: ISession['eventId']
     stage?: ISession['stageId']
     timestamp?: number
-    date?: number
+    date?: Date
     speakerIds?: string[]
   }): Promise<Session[]> {
     const sessions: Session[] = []
