@@ -12,9 +12,8 @@ export default class OrganizationController {
   ) => {
     try {
       const org = await this.organizationService.create(req.body);
-      return SendApiResponse(res, 201, 'created organization', org);
+      return SendApiResponse(res, 201, 'organization created', org);
     } catch (e) {
-      console.log('errrorrr', e);
       next(e);
     }
   };
@@ -29,7 +28,7 @@ export default class OrganizationController {
         req.params.id,
         req.body,
       );
-      return SendApiResponse(res, 200, 'updated organization', org);
+      return SendApiResponse(res, 200, 'organization updated', org);
     } catch (e) {
       next(e);
     }
@@ -42,7 +41,7 @@ export default class OrganizationController {
   ) => {
     try {
       const org = await this.organizationService.get(req.params.id);
-      return SendApiResponse(res, 200, 'fetched organization', org);
+      return SendApiResponse(res, 200, 'organization fetched', org);
     } catch (e) {
       next(e);
     }
@@ -55,7 +54,7 @@ export default class OrganizationController {
   ) => {
     try {
       const orgs = await this.organizationService.getAll();
-      return SendApiResponse(res, 200, 'fetched organizations', orgs);
+      return SendApiResponse(res, 200, 'organizations fetched', orgs);
     } catch (e) {
       next(e);
     }
@@ -67,8 +66,8 @@ export default class OrganizationController {
     next: NextFunction,
   ) => {
     try {
-      const orgs = await this.organizationService.deleteOne(req.params.id);
-      return SendApiResponse(res, 200, 'deleted', orgs);
+      const org = await this.organizationService.deleteOne(req.params.id);
+      return SendApiResponse(res, 200, 'deleted', org);
     } catch (e) {
       next(e);
     }
