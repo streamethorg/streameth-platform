@@ -1,5 +1,20 @@
-import { config } from 'dotenv';
-config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
+import validateEnv from '@utils/validateEnv';
 
-export const CREDENTIALS = process.env.CREDENTIALS === 'true';
-export const { NODE_ENV, PORT, DB_HOST, DB_PORT, DB_DATABASE, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN } = process.env;
+const validatedEnv = validateEnv();
+export const config = {
+  appEnv: validatedEnv.NODE_ENV,
+  port: validatedEnv.PORT,
+  db: {
+    host: validatedEnv.DB_HOST,
+    port: validatedEnv.DB_PORT,
+  },
+  logger: {
+    format: validatedEnv.LOG_FORMAT,
+    dir: validatedEnv.LOG_DIR,
+  },
+  cors: {
+    origin: validatedEnv.ORIGIN,
+    credentials: validatedEnv.CREDENTIALS,
+  },
+  secretKey: validatedEnv.SECRET_KEY,
+};

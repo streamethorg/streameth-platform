@@ -9,7 +9,7 @@ beforeAll(async () => {
   jest.setTimeout(10000);
 });
 afterAll(async () => {
-  await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
+  await new Promise<void>((resolve) => setTimeout(() => resolve(), 500));
 });
 
 describe('Testing Auth', () => {
@@ -32,7 +32,9 @@ describe('Testing Auth', () => {
 
       (mongoose as any).connect = jest.fn();
       const app = new App([authRoute]);
-      return request(app.getServer()).post(`${authRoute.path}signup`).send(userData);
+      return request(app.getServer())
+        .post(`${authRoute.path}signup`)
+        .send(userData);
     });
   });
 

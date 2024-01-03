@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services:
   proxy:
@@ -18,19 +18,18 @@ services:
       dockerfile: Dockerfile
     container_name: server
     ports:
-      - '3000:3000'
-    volumes:
-      - ./:/app
-      - /app/node_modules
+      - '3400:3400'
     restart: 'unless-stopped'
     networks:
       - backend
     links:
-      - mongo
+      - mongodb
     depends_on:
-      - mongo
-  mongo:
-    image: mvertes/alpine-mongo
+      - mongodb
+
+  mongodb:
+    image: mongo:5.0.6
+    restart: unless-stopped
     container_name: mongo
     ports:
       - '27017:27017'
@@ -42,5 +41,6 @@ networks:
     driver: bridge
 
 volumes:
+  mongodb:
   data:
     driver: local
