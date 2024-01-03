@@ -9,7 +9,7 @@ import SpeakerController from 'streameth-server/controller/speaker'
 import { NavBarProps } from './types'
 export async function fetchEvents({
   organizationId,
-  date
+  date,
 }: {
   organizationId?: string
   date?: Date
@@ -18,7 +18,9 @@ export async function fetchEvents({
     const eventController = new EventController()
     let data = await eventController.getAllEvents({})
     if (organizationId) {
-      data = data.filter((event) => event.organizationId === organizationId)
+      data = data.filter(
+        (event) => event.organizationId === organizationId
+      )
     }
     // upcoming events
     if (date) {
@@ -80,6 +82,33 @@ export async function fetchEventStage({
       throw 'Stage not found'
     }
     return data.toJson()
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event'
+  }
+}
+
+export async function fetchAllSessions({
+  organization,
+  date,
+  speakerIds,
+}: {
+  organization?: string
+  date?: Date
+  speakerIds?: string[]
+}): Promise<ISession[]> {
+  try {
+    const events = await fetchEvents({})
+    const data = []
+    for (const event of events) {
+      const sessions = await fetchEventSessions({
+        event: event.id,
+        date,
+        speakerIds,
+      })
+      data.push(...sessions.filter((session) => !session.videoUrl))
+    }
+    return data
   } catch (e) {
     console.log(e)
     throw 'Error fetching event'

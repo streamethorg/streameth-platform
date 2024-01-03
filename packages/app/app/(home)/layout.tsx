@@ -5,7 +5,7 @@ const Layout = async ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="w-screen h-screen bg-orange-200 ">
+    <div className="w-screen h-screen bg-zinc-900 ">
       <div className="z-[99999999] bg-accent sticky top-0 p-4 shadow-md">
         <div>
           <Image
@@ -24,7 +24,7 @@ const Layout = async ({
           />
         </div>
       </div>
-      <div className="h-[calc(100%-54px)] flex flex-col p-4">
+      <div className="h-[calc(100%-54px)] flex flex-col p-4 overflow-scroll">
         {children}
       </div>
     </div>

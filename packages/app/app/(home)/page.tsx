@@ -1,11 +1,17 @@
 import { Metadata } from 'next'
 import UpcomingEvents from './components/UpcomingEvents'
+import Videos from './components/Videos'
 import { Suspense } from 'react'
 export default async function Home() {
   return (
-    <Suspense>
-      <UpcomingEvents />
-    </Suspense>
+    <>
+      <Suspense>
+        <UpcomingEvents />
+      </Suspense>
+      <Suspense>
+        <Videos />
+      </Suspense>
+    </>
   )
 }
 
