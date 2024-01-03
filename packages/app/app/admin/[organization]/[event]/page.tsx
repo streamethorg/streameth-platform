@@ -1,7 +1,7 @@
 import CreateEditEvent from '../components/CreateEditEvent'
 import { notFound } from 'next/navigation'
 import { EventFormProvider } from '../components/EventFormContext'
-import { hasData } from '@/utils'
+import { hasData } from '@/lib/utils'
 import EventController from 'streameth-server/controller/event'
 interface Params {
   event: string

@@ -1,6 +1,6 @@
 'use client'
 import { useRef } from 'react'
-import SearchFilter from '@/app/[organization]/[event]/archive/components/SearchFilter'
+import SearchFilter from '@/app/[organization]/archive/components/SearchFilter'
 import { IEvent } from 'streameth-server/model/event'
 
 function FilterBar({ events }: { events: IEvent[] }) {

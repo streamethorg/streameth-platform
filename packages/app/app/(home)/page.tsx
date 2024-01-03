@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 import LiveEvent from './components/LiveEvent'
-import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
+import { getDateInUTC, isCurrentDateInUTC } from '@/lib/utils/time'
 import LiveEvents from './components/LiveEvents'
 
 export default async function Home() {

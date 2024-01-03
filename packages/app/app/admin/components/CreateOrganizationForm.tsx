@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useContext } from 'react'
-import { ModalContext } from '@/context/ModalContext'
+import { ModalContext } from '@/lib/context/ModalContext'
 import { IOrganization } from 'streameth-server/model/organization'
 
 interface OrganizationFormProps {

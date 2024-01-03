@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { extractSearchParams } from '@/utils/api'
+import { extractSearchParams } from '@/lib/utils/api'
 import SessionController from 'streameth-server/controller/session'
 
 export interface SessionsSearchParams {

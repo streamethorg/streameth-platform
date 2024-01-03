@@ -1,6 +1,6 @@
 'use client'
 import React, { ReactNode, useEffect } from 'react'
-import colors from '../constants/colors'
+import colors from '../lib/constants/colors'
 import { usePathname } from 'next/navigation'
 
 const Initializer = ({ children }: { children: ReactNode }) => {
