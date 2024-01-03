@@ -16,20 +16,6 @@ export default class FS<T> implements IStorageController<T> {
     this.deleteFileAsync = promisify(fs.unlink);
   }
 
-  async findOne(query: { name: string }, path: string): Promise<any> {
-    try {
-      const filePath = await this.getFilePath(path, query.name);
-      return await this.readFileAsync(filePath, { encoding: 'utf8' });
-    } catch (e) {
-      return false;
-    }
-  }
-
-  async update(query: string, data: T, path: string): Promise<T> {
-    await this.delete(query, path);
-    return await this.create(query, data, path);
-  }
-
   async create(query: string, data: T, path: string): Promise<T> {
     let existingData: T | null = null;
 
@@ -50,6 +36,20 @@ export default class FS<T> implements IStorageController<T> {
     );
     await this.write(filePath, JSON.stringify(updatedData, null, 2));
     return updatedData;
+  }
+
+  async update(query: string, data: T, path: string): Promise<T> {
+    await this.delete(query, path);
+    return await this.create(query, data, path);
+  }
+
+  async findOne(query: { name: string }, path: string): Promise<any> {
+    try {
+      const filePath = await this.getFilePath(path, query.name.toLowerCase());
+      return await this.readFileAsync(filePath, { encoding: 'utf8' });
+    } catch (e) {
+      return false;
+    }
   }
 
   async findById(query: string, path: string): Promise<T> {
@@ -78,12 +78,39 @@ export default class FS<T> implements IStorageController<T> {
     }
   }
 
-  async findAll(path: string): Promise<Array<T>> {
+  async findAllSubFolders(path: string): Promise<Array<T>> {
+    try {
+      const folderPath = await this.getFilePath(path);
+      const subfolders = await this.readdirAsync(folderPath);
+      const allFiles = [];
+      for (const folder of subfolders) {
+        let filePath = await this.getFilePath(`${path}/${folder}`);
+        let files = await this.readdirAsync(filePath);
+        for (const file of files) {
+          const data = await this.read(`${filePath}/${file}`);
+          try {
+            allFiles.push(JSON.parse(data));
+          } catch (e) {
+            console.error(`Error parsing JSON from ${folderPath}/${file}`);
+            throw e;
+          }
+        }
+      }
+      return allFiles;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async findAll(query: string, path: string): Promise<Array<T>> {
     try {
       const filePath = await this.getFilePath(path);
       const files = await this.readdirAsync(filePath);
       if (files == undefined) {
         return [];
+      }
+      if (files.length > 1 && !files[0].endsWith('.json')) {
+        return await this.findAllSubFolders(path);
       }
       const dataPromises = files.map(async (file) => {
         const data = await this.read(`${filePath}/${file}`);
