@@ -1,0 +1,25 @@
+{
+  "id": "bio_francis_my_impact_journey",
+  "name": "Bio Francis: My Impact Journey ",
+  "description": "In this presentation, we'll talk about how Web3 is changing things, especially its profound impact on financial inclusion for women in Africa. It's not just a story; it's about going from depending on others for money to finding success in Web3. We'll talk about how everyone, no matter where they're from, can be part of this amazing, decentralized world.  Imagine a world where everyone is treated fairly and has the chance to do well. I'll share my own experiences to show you how Web3 is making this possible, especially for women. It's not just talking about it; it's living it!",
+  "start": 1703085300000,
+  "end": 1703085900000,
+  "stageId": "workshop_room",
+  "speakers": [
+    {
+      "id": "bio_francis",
+      "name": "Bio Francis",
+      "bio": "Biobelemoye Francis is a result-driven Web3 content and product marketer with a focus on crafting captivating communications and content that easily connects to the target audience and builds a sense of community among users.",
+      "eventId": "siher_defi_africa",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1BHiVammUfPJJQfH5W5UbeB_4WNg7kis2/view"
+    }
+  ],
+  "playbackId": "28675hq8dmo0r5bs",
+  "eventId": "siher_defi_africa",
+  "coverImage": "/sessions/siher_defi_africa/bio_francis_my_impact_journey.jpg",
+  "assetId": "28673b93-5f7b-4df4-858b-e59b8249dcc8",
+  "sourceId": "211094da-091a-48b1-862f-3882a7db20c2",
+  "videoUrl": "https://lp-playback.com/hls/28675hq8dmo0r5bs/index.m3u8",
+  "videoType": "clip"
+}

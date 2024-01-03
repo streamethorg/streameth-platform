@@ -7,18 +7,27 @@ import { Metadata } from 'next'
 import { SocialIcon } from 'react-social-icons'
 import Link from 'next/link'
 import LiveEvent from './components/LiveEvent'
+import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
+import LiveEvents from './components/LiveEvents'
 
 export default async function Home() {
   const eventController = new EventController()
   const allEvents = await eventController.getAllEvents({})
-  const currentDate = new Date()
-  currentDate.setUTCHours(0, 0, 0, 0)
 
   const liveEvents = allEvents
     .filter((event) => {
-      const startDate = new Date(event?.end)
-      startDate.setUTCHours(0, 0, 0, 0)
-      return startDate.getTime() === currentDate.getTime()
+      const startUTC = getDateInUTC(event?.start)
+      const endUTC = getDateInUTC(event?.end)
+      const currentDateUTC = isCurrentDateInUTC()
+
+      // Check if the event is ongoing (current date is between start and end dates)
+      const isOngoing =
+        startUTC <= currentDateUTC && currentDateUTC <= endUTC
+
+      // Check if the event has not ended (end date is after the current date)
+      const isNotPastEvent = currentDateUTC <= endUTC
+
+      return isOngoing && isNotPastEvent
     })
     .map((event) => event.toJson())
     .sort(
@@ -28,9 +37,7 @@ export default async function Home() {
 
   const upComing = allEvents
     .filter((event) => {
-      const startDate = new Date(event?.end)
-      startDate.setUTCHours(0, 0, 0, 0)
-      return startDate.getTime() > currentDate.getTime()
+      return getDateInUTC(event?.start) > isCurrentDateInUTC()
     })
     .map((event) => event.toJson())
     .sort(
@@ -40,9 +47,7 @@ export default async function Home() {
 
   const pastEvents = allEvents
     .filter((event) => {
-      const endDate = new Date(event?.end)
-      endDate.setUTCHours(0, 0, 0, 0)
-      return endDate.getTime() < currentDate.getTime()
+      return getDateInUTC(event?.end) < isCurrentDateInUTC()
     })
     .map((event) => event.toJson())
   const stageController = new StageController()
@@ -85,15 +90,23 @@ export default async function Home() {
         </div>
       </div>
       <div className="flex flex-col lg:overflow-hidden">
-        <LiveEvent stage={stage.toJson()} />
-        {/* <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
-          Live Events
-        </p> */}
-        {/* <LiveEvents events={liveEvents} /> */}
-        <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
-          Upcoming Events
-        </p>
-        <UpcomingEvents events={upComing} />
+        {/* <LiveEvent stage={stage.toJson()} /> */}
+        {liveEvents.length > 0 && (
+          <>
+            <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
+              Live Events
+            </p>
+            <LiveEvents events={liveEvents} />
+          </>
+        )}
+        {upComing?.length > 0 && (
+          <>
+            <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
+              Upcoming Events
+            </p>
+            <UpcomingEvents events={upComing} />
+          </>
+        )}
         <EventList events={pastEvents} />
       </div>
     </main>
@@ -111,7 +124,7 @@ export const metadata: Metadata = {
     description:
       'The complete solution to host your hybrid or virtual event.',
     images: {
-      url: 'https://app.streameth.org/Base-house.jpg',
+      url: 'https://app.streameth.org/streameth_banner.png',
       alt: 'StreamETH Logo',
     },
   },
@@ -121,7 +134,7 @@ export const metadata: Metadata = {
     description:
       'The complete solution to host your hybrid or virtual event.',
     images: {
-      url: 'https://app.streameth.org/Base-house.jpg',
+      url: 'https://app.streameth.org/streameth_banner.png',
       alt: 'StreamETH Logo',
     },
   },

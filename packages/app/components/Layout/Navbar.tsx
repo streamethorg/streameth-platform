@@ -21,7 +21,7 @@ const NavBarItem = ({
     <Link
       onClick={() => setActivePage(item.name)}
       href={item.href}
-      className={`uppercase text-center flex flex-col py-1 h-full items-center justify-center cursor-pointer hover:text-gray-300 ${
+      className={`uppercase rounded-xl text-sm bg-base text-white text-center flex flex-col p-2 h-full items-center justify-center cursor-pointer hover:text-gray-300 ${
         isActive && 'underline lg:text-gray-300'
       }`}>
       {item.name}

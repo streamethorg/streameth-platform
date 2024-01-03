@@ -1,19 +1,26 @@
 import { IStage } from 'streameth-server/model/stage'
 import Link from 'next/link'
 import Player from '@/components/misc/Player'
+import { IEvent } from 'streameth-server/model/event'
+import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
 
 const LivestreamsSection = ({
   stages,
   params,
+  event,
 }: {
+  event: IEvent
   stages: IStage[]
   params: {
     event: string
     organization: string
   }
 }) => {
-  return (
-    <div className="bg-base  text-white p-4 rounded-xl">
+  const isEventDay =
+    isCurrentDateInUTC() >= getDateInUTC(event?.start)
+
+  return isEventDay && stages[0]?.streamSettings?.streamId ? (
+    <div className="bg-base text-white p-4 rounded-xl">
       <span className=" w-full text-xl uppercase md:text-4xl flex">
         Livestreams
       </span>
@@ -37,7 +44,7 @@ const LivestreamsSection = ({
           ))}
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default LivestreamsSection

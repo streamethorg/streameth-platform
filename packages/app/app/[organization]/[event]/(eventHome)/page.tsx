@@ -35,7 +35,11 @@ export default async function EventHome({ params }: Params) {
       <div className=" relative my-1 md:my-4 max-w-full md:max-w-4xl mx-auto z-50">
         <HomePageLogoAndBanner event={event} />
         <NFTMintComponent />
-        <LivestreamsSection stages={stages} params={params} />
+        <LivestreamsSection
+          stages={stages}
+          params={params}
+          event={event}
+        />
         <SchedulePageComponent params={params} />
         <SpeakerPageComponent params={params} />
       </div>
@@ -63,6 +67,15 @@ export async function generateMetadata(
         title: eventInfo.name,
         description: eventInfo.description,
         images: [getImageUrl(`/events/${imageUrl!}`)],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: eventInfo.name,
+        description: eventInfo.description,
+        images: {
+          url: getImageUrl(`/events/${imageUrl!}`),
+          alt: eventInfo.name + ' Logo',
+        },
       },
     }
   } catch (e) {

@@ -1,37 +1,38 @@
+'use client'
 import Image from 'next/image'
 import MintButton from '@/components/misc/MintButton'
-import nft from '@/public/Base-house.jpg'
+import nft from '@/public/swarmNFT.jpeg'
 import ComponentWrapper from './ComponentWrapper'
 import SectionTitle from './SectionTitle'
+import { usePathname } from 'next/navigation'
 
 const NFTMintComponent = () => {
-  return (
+  const pathname = usePathname()
+
+  return pathname.includes('swarm') ? (
     <ComponentWrapper sectionId="nft">
       <div className="flex flex-col md:flex-row justify-center">
         <div className="w-full md:w-[60%] p-2">
-          <SectionTitle title="LIVESTREAM NFT" />
+          <SectionTitle title="SWARM 2.0 LIVESTREAM NFT" />
           <p className="text-xl">
-            Base is celebrating creativity and onchain art at Art
-            Basel with the first ever livestream video NFT, built on
-            Base by Streameth and powered by Livepeer. By minting the
-            Base Miami Broadcast NFT, you can experience Base House
-            and tune in to the programming LIVE from any NFT
-            marketplace. Listen to artist, creators, and founders who
-            are redefining art and music onchain, and explore Base’s
-            vision for the new open internet.
+            Embrace the Swarm! In conjunction with the Swarm 2.0
+            launch, we&apos;re introducing the Swarm 2.0 Livestream
+            NFT—a unique digital experience powered by the innovation
+            of Swarm.
             <br />
             <br />
-            With the Base Miami Broadcast NFT, you will also be
-            eligible for commemorative drops after the event.
+            Mint the Swarm 2.0 Livestream NFT and join us in
+            celebrating the dawn of a new era in the digital realm.
+            <br />
           </p>
         </div>
         <div className="flex flex-col w-full md:w-[40%] p-2 bg-base shadow rounded-lg justify-center items-center">
           <Image alt="nft image" src={nft}></Image>
-          <MintButton address="0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b" />
+          <MintButton address="0xcA41A03CD3017aA4B19530816261A989593312a4" />
         </div>
       </div>
     </ComponentWrapper>
-  )
+  ) : null
 }
 
 export default NFTMintComponent

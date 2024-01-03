@@ -622,7 +622,7 @@ export const TIMEZONES = [
     abbr: 'WCAST',
     offset: 1,
     isdst: false,
-    text: '(UTC+01:00) West Central Africa',
+    text: '(UTC+01:00)',
     utc: [
       'Africa/Algiers',
       'Africa/Bangui',
@@ -1007,7 +1007,7 @@ export const TIMEZONES = [
     abbr: 'SAST',
     offset: 7,
     isdst: false,
-    text: '(UTC+07:00) Bangkok, Hanoi, Jakarta',
+    text: '(UTC+07:00)',
     utc: [
       'Antarctica/Davis',
       'Asia/Bangkok',

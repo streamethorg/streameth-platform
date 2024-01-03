@@ -56,7 +56,7 @@ const ColorComponent = ({
       icon: <ViewColumnsIcon />,
     })
 
-  if (sessions.length > 0)
+  if (sessions.length > 0 && !event?.plugins?.hideSchedule)
     pages.push({
       href: `/${organizationId}/${id}#schedule`,
       name: 'Schedule',

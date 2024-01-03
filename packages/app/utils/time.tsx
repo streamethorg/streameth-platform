@@ -66,46 +66,20 @@ export const getEventPeriod = (eventTime: string) => {
   return formattedTime
 }
 
-export const getLocalTimezone = () => {
-  const date = new Date()
-  const offset = -date.getTimezoneOffset()
-  const hours = Math.floor(offset / 60)
-  const gmtString = 'GMT' + (offset >= 0 ? '+' : '') + hours
-  return gmtString
+export const getEventTimezoneText = (utcValue: string) => {
+  const timezone = TIMEZONES.find((tz) => tz.utc.includes(utcValue))
+
+  return timezone ? timezone.text : utcValue
 }
 
-export const getEventLocalTime = (
-  eventTime: string,
-  eventTimezone: string
-) => {
-  const getTimezone = TIMEZONES.find(
-    (timeZone) => timeZone.text === eventTimezone
-  )
-  const targetOffset = getTimezone?.offset ?? 1
-  const originalOffset = parseInt(
-    getLocalTimezone().replace('GMT', ''),
-    10
-  )
-  const [hours, minutes] = eventTime
-    .split(':')
-    .map((part) => parseInt(part, 10))
+export const isCurrentDateInUTC = () => {
+  const currentDate = new Date()
+  currentDate.setUTCHours(0, 0, 0, 0)
+  return currentDate.getTime()
+}
 
-  const timeDiff = (originalOffset - targetOffset) * 60
-  let newHours = hours + Math.floor(timeDiff / 60)
-  let newMinutes = minutes + (timeDiff % 60)
-
-  if (newMinutes < 0) {
-    newMinutes += 60
-    newHours--
-  } else if (newMinutes >= 60) {
-    newMinutes -= 60
-    newHours++
-  }
-
-  newHours = (newHours + 24) % 24
-  const newTime = `${newHours
-    .toString()
-    .padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`
-
-  return `${getEventPeriod(newTime)} ${getLocalTimezone()} `
+export const getDateInUTC = (date: Date) => {
+  const startDate = new Date(date)
+  startDate.setUTCHours(0, 0, 0, 0)
+  return startDate.getTime()
 }
