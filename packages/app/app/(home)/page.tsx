@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import UpcomingEvents from './components/UpcomingEvents'
-import Videos from './components/Videos'
+import Videos from '../../components/misc/Videos'
 import { Suspense } from 'react'
 import { fetchOrganizations } from '@/lib/data'
 import OrganizationStrip from './components/OrganiationStrip'

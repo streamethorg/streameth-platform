@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Image from 'next/image'
-import VideoGrid from './Videos'
+import VideoGrid from '../../../components/misc/Videos'
 import { fetchAllSessions } from '@/lib/data'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -17,10 +17,15 @@ export default async function OrganizationStrip({
 }: {
   organization: any
 }) {
-  const videos = await fetchAllSessions({
-    organization: organization.id,
-  })
+  const videos = (
+    await fetchAllSessions({
+      organization: organization.id,
+      onlyVideos: true,
+    })
+  ).sessions
 
+  if (videos.length === 0) return false
+  console.log(organization.name, videos.length, videos === null)
   return (
     <div key="organization.id" className="bg-white">
       <div className="flex flex-row overflow-y-scroll gap-4 h-full">

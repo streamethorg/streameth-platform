@@ -102,33 +102,80 @@ export async function fetchEventStage({
   }
 }
 
+interface IPagination {
+  currentPage: number
+  totalPages: number
+  totalItems: number
+  limit: number
+}
 export async function fetchAllSessions({
   organization,
+  event,
   date,
   speakerIds,
+  onlyVideos,
+  page = 1,
+  limit = 10,
 }: {
+  event?: string
   organization?: string
   date?: Date
   speakerIds?: string[]
-}): Promise<ISession[]> {
-  try {
-    const events = await fetchEvents({
-      organizationId: organization,
-    })
-    const data = []
-    for (const event of events) {
-      const sessions = await fetchEventSessions({
-        event: event.id,
-        date,
-        speakerIds,
-      })
-      data.push(...sessions.filter((session) => !session.videoUrl))
+  onlyVideos?: boolean
+  page?: number
+  limit?: number
+}): Promise<{ sessions: ISession[], pagination: IPagination }> {
+
+  let allSessions: ISession[] = [];
+  
+  // Fetch all data
+  if (event) {
+    // existing logic to fetch all sessions for a specific event
+    allSessions = await fetchEventSessions({
+      event,
+      date,
+      speakerIds,
+      onlyVideos,
+    });
+  } else {
+    // existing logic to fetch all sessions across all organizations
+    const organizations = organization
+      ? [organization]
+      : (await fetchOrganizations()).map((org) => org.id);
+
+    for (const org of organizations) {
+      const events = await fetchEvents({ organizationId: org, date });
+      for (const ev of events) {
+        const sessions = await fetchEventSessions({
+          event: ev.id,
+          date,
+          speakerIds,
+          onlyVideos,
+        });
+        allSessions = allSessions.concat(sessions);
+      }
     }
-    return data
-  } catch (e) {
-    console.log(e)
-    throw 'Error fetching event'
   }
+
+  // Calculate total items and total pages
+  const totalItems = allSessions.length;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  // Implement manual pagination
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedSessions = allSessions.slice(startIndex, endIndex);
+
+  // Return paginated data and pagination metadata
+  return {
+    sessions: paginatedSessions,
+    pagination: {
+      currentPage: page,
+      totalPages,
+      totalItems,
+      limit,
+    },
+  };
 }
 
 export async function fetchEventSessions({
@@ -137,22 +184,29 @@ export async function fetchEventSessions({
   timestamp,
   date,
   speakerIds,
+  onlyVideos,
 }: {
   event: string
   stage?: string
   timestamp?: number
   date?: Date
   speakerIds?: string[]
+  onlyVideos?: boolean
 }): Promise<ISession[]> {
   try {
     const sessionController = new SessionController()
-    const data = await sessionController.getAllSessions({
+    let data = await sessionController.getAllSessions({
       eventId: event,
       stage,
       timestamp,
       date,
       speakerIds,
     })
+    if (onlyVideos) {
+      data.filter((session) => {
+        session.playbackId
+      })
+    }
     return data.map((session) => session.toJson())
   } catch (e) {
     console.log(e)

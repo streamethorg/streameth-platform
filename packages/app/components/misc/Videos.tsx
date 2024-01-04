@@ -1,7 +1,4 @@
-import { fetchAllSessions } from '@/lib/data'
 import {
-  Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,

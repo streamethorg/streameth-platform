@@ -14,10 +14,10 @@ import { fetchEvents } from '@/lib/data'
 
 const UpcomingEvents = async () => {
   const events = await fetchEvents({
-    // date: new Date(),
+    date: new Date(),
   })
 
-  if (!events) return null
+  if (events.length === 0) return null
 
   return (
     <Card className="max-w-screen border-none bg-white">

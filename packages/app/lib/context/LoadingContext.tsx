@@ -18,7 +18,7 @@ export const LoadingContextProvider = ({
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
-      <LoadingModal isLoading={isLoading} />
+      <LoadingModal isLoading={false} />
       {children}
     </LoadingContext.Provider>
   )
