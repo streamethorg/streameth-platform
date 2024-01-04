@@ -28,13 +28,17 @@ export default async function Home() {
   return (
     <>
       <Suspense>
-        <UpcomingEvents />
+        <UpcomingEvents date={new Date()} />
       </Suspense>
       <Card className="bg-white border-none">
         <CardHeader>
           <CardTitle className="text-background text-4xl">
-            Past events
+            Organizations
           </CardTitle>
+          <CardDescription>
+            Organizations that are using StreamETH to host their
+            events
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-8">
           {organizations.map((organization) => (

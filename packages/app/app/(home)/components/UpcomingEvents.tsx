@@ -8,13 +8,20 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/lib/utils'
 import { fetchEvents } from '@/lib/data'
+import { IOrganization } from 'streameth-server/model/organization'
 
-const UpcomingEvents = async () => {
+const UpcomingEvents = async ({
+  date,
+  organization,
+}: {
+  date?: Date
+  organization?: IOrganization['id']
+}) => {
   const events = await fetchEvents({
-    date: new Date(),
+    date,
+    organizationId: organization,
   })
 
   if (events.length === 0) return null
@@ -22,9 +29,10 @@ const UpcomingEvents = async () => {
   return (
     <Card className="max-w-screen border-none bg-white">
       <CardHeader>
-        <CardTitle className="text-background text-4xl">
-          Upcoming events
-        </CardTitle>
+        <CardTitle className="text-background ">Events</CardTitle>
+        <CardDescription>
+          Explore current and past events
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-row overflow-x-scroll space-x-4 ">
         {events.map(

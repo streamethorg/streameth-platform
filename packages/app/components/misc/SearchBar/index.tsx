@@ -4,11 +4,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import useDebounce from '@/lib/hooks/useDebounce'
-
 export default function SearchBar(): JSX.Element {
-  const { searchParams, handleTermChange } = useSearchParams({
-    key: 'searchQuery',
-  })
+  const { searchParams, handleTermChange: handleTermChangeOverload } =
+    useSearchParams({
+      key: 'searchQuery',
+    })
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>(
     searchParams.get('searchQuery') || ''
@@ -49,8 +49,13 @@ export default function SearchBar(): JSX.Element {
     }
   }, [])
 
+  const handleTermChange = (term: string) => {
+    window.location.href = '/archive?searchQuery=' + term
+    //  handleTermChangeOverload(term)
+  }
+
   return (
-    <div className="flex max-w-[500px] flex-col items-center justify-center relative">
+    <div className="flex max-w-[500px] flex-col items-center justify-center relative w-full md:ml-[-230px] ">
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -60,7 +65,7 @@ export default function SearchBar(): JSX.Element {
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="max-w-[500px]"
+        className="max-w-[500px] bg-white border-background text-background"
         placeholder="Search"
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

@@ -86,7 +86,6 @@ export async function generateMetadata(
       },
     }
   } catch (e) {
-    console.log(e)
     return {
       title: 'StreamETH Session',
       openGraph: {

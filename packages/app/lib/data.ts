@@ -159,14 +159,11 @@ export async function fetchAllSessions({
     }
   }
 
-  console.log("searching for", searchQuery)
   if (searchQuery) {
     const normalizedQuery = searchQuery.toLowerCase();
     const fuzzySearch = new FuzzySearch(allSessions, ['event', 'name', 'speakers.name'], {
       caseSensitive: false,
     });
-    console.log('searching for', normalizedQuery);
-    console.log('all sessions', fuzzySearch.search(normalizedQuery));
     
     allSessions = fuzzySearch.search(normalizedQuery);
   }

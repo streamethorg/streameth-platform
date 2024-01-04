@@ -1,6 +1,15 @@
 import { fetchAllSessions } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { SearchPageProps } from '@/lib/types'
+import UpcomingEvents from '@/app/(home)/components/UpcomingEvents'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
@@ -14,7 +23,21 @@ export default async function ArchivePage({
 
   return (
     <div className="bg-white">
-      <Videos videos={videos.sessions} />
+      <UpcomingEvents
+        organization={
+          searchParams.organization
+            ? searchParams.organization
+            : 'invalid'
+        }
+      />
+      <Card className="bg-white border-none">
+        <CardHeader>
+          <CardTitle className="text-background">Results</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Videos videos={videos.sessions} />
+        </CardContent>
+      </Card>
     </div>
   )
 }

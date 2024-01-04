@@ -11,11 +11,12 @@ import VideoGrid from '../../../components/misc/Videos'
 import { fetchAllSessions } from '@/lib/data'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { IOrganization } from 'streameth-server/model/organization'
 
 export default async function OrganizationStrip({
   organization,
 }: {
-  organization: any
+  organization: IOrganization
 }) {
   const videos = (
     await fetchAllSessions({
@@ -25,11 +26,20 @@ export default async function OrganizationStrip({
   ).sessions
 
   if (videos.length === 0) return false
-  console.log(organization.name, videos.length, videos === null)
   return (
-    <div key="organization.id" className="bg-white">
+    <div key="organization.id" className="bg-white flex flex-col">
+      <div className="flex flex-row md:hidden my-2">
+        <CardTitle className="text-background text-2xl">
+          {organization.name}
+        </CardTitle>
+        <Link
+          href={'/archive?organization=' + organization.id}
+          className=" ml-auto">
+          <Button className="">all videos</Button>
+        </Link>
+      </div>
       <div className="flex flex-row overflow-y-scroll gap-4 h-full">
-        <Card className="w-72 md:w-[20%] flex flex-col bg-white border-background">
+        <Card className="hidden w-72 md:w-[20%] md:flex flex-col bg-white border-background">
           <CardHeader>
             <Image
               className="rounded m-auto"
@@ -47,7 +57,9 @@ export default async function OrganizationStrip({
             {organization.description}
           </CardContent>
           <CardFooter className=" mt-auto justify-self-end">
-            <Link href="" className="w-full ">
+            <Link
+              href={'/archive?organization=' + organization.id}
+              className="w-full ">
               <Button className="w-full ">Watch all videos</Button>
             </Link>
           </CardFooter>

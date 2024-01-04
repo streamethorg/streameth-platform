@@ -47,7 +47,6 @@ const VideoDownload = ({
     if (playbackId) getVideoUrl()
   }, [])
 
-  console.log('Video Download', url)
   return (
     <div className="w-[380px] p-5 text-white bg-base mx-auto">
       <div className="flex justify-center text-center flex-col gap-10">
