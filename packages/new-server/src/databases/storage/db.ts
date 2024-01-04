@@ -15,12 +15,14 @@ export default class DB<T extends mongoose.Document>
   }
 
   async update(id: string, data: T): Promise<T> {
-    const document = await this.model.findByIdAndUpdate(
-      id,
-      { data },
+    const update = await this.model.findById(id);
+    await update.updateOne(
+      {
+        ...data,
+      },
       { upsert: true },
     );
-    return document;
+    return await this.model.findById(id);
   }
 
   async findById(id: string): Promise<T> {
