@@ -8,7 +8,7 @@ export default class EventService {
   private controller: BaseController<IEvent>;
   constructor() {
     this.path = 'events';
-    this.controller = new BaseController<IEvent>('fs', Events);
+    this.controller = new BaseController<IEvent>('db', Events);
   }
 
   async create(data: IEvent): Promise<IEvent> {
@@ -25,11 +25,11 @@ export default class EventService {
   }
 
   async update(eventId: string, event: IEvent): Promise<IEvent> {
-    return await this.controller.store.update(eventId, event, this.path);
+    return await this.controller.store.update(eventId, event);
   }
 
   async get(eventId: string): Promise<IEvent> {
-    const findEvent = await this.controller.store.findById(eventId, this.path);
+    const findEvent = await this.controller.store.findById(eventId);
     if (!findEvent) throw new HttpException(404, 'Event not found');
     return findEvent;
   }
@@ -46,6 +46,6 @@ export default class EventService {
   }
   async deleteOne(eventId: string): Promise<void> {
     await this.get(eventId);
-    return await this.controller.store.delete(eventId, this.path);
+    return await this.controller.store.delete(eventId);
   }
 }
