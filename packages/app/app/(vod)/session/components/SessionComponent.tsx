@@ -1,9 +1,8 @@
 import Player from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
-import ComponentCard from '@/components/misc/ComponentCard'
+import { Card } from '@/components/ui/card'
 import ActionsComponent from './ActionsComponent'
 import EmbedButton from '@/components/misc/EmbedButton'
-import Card from '@/components/misc/Card'
 import Image from 'next/image'
 import Link from 'next/link'
 import Session from 'streameth-server/model/session'
@@ -18,9 +17,9 @@ const SpeakerComponent = ({
   session: Session
 }) => {
   return (
-    <ComponentCard>
+    <Card>
       {/* <SpeakerIconList event={event} speakers={session.speakers} /> */}
-    </ComponentCard>
+    </Card>
   )
 }
 export default async function SessionComponent({
@@ -53,7 +52,7 @@ export default async function SessionComponent({
         />
       </div>
       <div className="flex space-y-4 flex-col w-full p-2 lg:w-[30%]  overflow-y-scroll lg:p-0">
-        <SessionInfoBox session={session.toJson()} showDate />
+        {/* <SessionInfoBox session={session.toJson()} showDate /> */}
         <SpeakerComponent event={event} session={session} />
         {nextSession?.videoUrl && (
           <div className=" bg-base text-white p-2 rounded-xl mb-4">

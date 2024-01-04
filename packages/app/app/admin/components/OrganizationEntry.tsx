@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 import EditOrganizationButton from './EditOrganizationButton'
 import Link from 'next/link'
-import { Button } from '@/components/Form/Button'
+import { Button } from '@/components/ui/button'
 import { ModalContext } from '@/lib/context/ModalContext'
 import { IOrganization } from 'streameth-server/model/organization'
 
@@ -72,9 +72,7 @@ const OrganizationEntry: React.FC<OrganizationEntryProps> = ({
         </Link>
         <div className=" flex flex-row gap-2">
           <EditOrganizationButton organization={organization} />
-          <Button
-            variant="danger"
-            onClick={() => handleModalOpen(organization)}>
+          <Button onClick={() => handleModalOpen(organization)}>
             Delete
           </Button>
         </div>
