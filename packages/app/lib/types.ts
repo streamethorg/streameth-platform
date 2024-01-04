@@ -19,3 +19,10 @@ export interface EventPageProps {
     date?: string
   }
 }
+export interface SearchPageProps {
+  searchParams: {
+    organization?: string
+    event?: string
+    searchQuery?: string
+  }
+}

@@ -9,7 +9,7 @@ import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
 import OrganizationController from 'streameth-server/controller/organization'
 import { NavBarProps } from './types'
-
+import FuzzySearch from 'fuzzy-search';
 export async function fetchOrganizations(): Promise<IOrganization[]> {
   try {
     const organizationController = new OrganizationController()
@@ -116,6 +116,7 @@ export async function fetchAllSessions({
   onlyVideos,
   page = 1,
   limit = 10,
+  searchQuery = ''
 }: {
   event?: string
   organization?: string
@@ -124,6 +125,7 @@ export async function fetchAllSessions({
   onlyVideos?: boolean
   page?: number
   limit?: number
+  searchQuery?: string
 }): Promise<{ sessions: ISession[], pagination: IPagination }> {
 
   let allSessions: ISession[] = [];
@@ -155,6 +157,18 @@ export async function fetchAllSessions({
         allSessions = allSessions.concat(sessions);
       }
     }
+  }
+
+  console.log("searching for", searchQuery)
+  if (searchQuery) {
+    const normalizedQuery = searchQuery.toLowerCase();
+    const fuzzySearch = new FuzzySearch(allSessions, ['event', 'name', 'speakers.name'], {
+      caseSensitive: false,
+    });
+    console.log('searching for', normalizedQuery);
+    console.log('all sessions', fuzzySearch.search(normalizedQuery));
+    
+    allSessions = fuzzySearch.search(normalizedQuery);
   }
 
   // Calculate total items and total pages

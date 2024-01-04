@@ -1,11 +1,6 @@
 'use client'
 import { IStage } from 'streameth-server/model/stage'
-import {
-  useSearchParams,
-  usePathname,
-  useRouter,
-} from 'next/navigation'
-
+import useSearchParams from '@/lib/hooks/useSearchParams'
 import {
   Select,
   SelectContent,
@@ -15,24 +10,14 @@ import {
 } from '@/components/ui/select'
 
 const StageSelect = ({ stages }: { stages: IStage[] }) => {
-  const pathname = usePathname()
-  const { replace } = useRouter()
-  const searchParams = useSearchParams()
-
-  function handleStageChange(term: string) {
-    const params = new URLSearchParams(searchParams)
-    if (term) {
-      params.set('stage', term)
-    } else {
-      params.delete('stage')
-    }
-    replace(`${pathname}?${params.toString()}`)
-  }
+  const { searchParams, handleTermChange } = useSearchParams({
+    key: 'stage',
+  })
 
   return (
     <Select
       defaultValue={searchParams.get('stage') || stages[0].id}
-      onValueChange={(value) => handleStageChange(value)}>
+      onValueChange={(value) => handleTermChange(value)}>
       <SelectTrigger>
         <SelectValue placeholder="Stage select" />
       </SelectTrigger>

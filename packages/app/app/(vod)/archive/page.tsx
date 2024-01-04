@@ -1,23 +1,15 @@
 import { fetchAllSessions } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
-
-interface Params {
-  searchParams: {
-    organization?: string
-    event?: string
-    speaker?: string
-    session?: string
-  }
-}
-
-export default async function ArchivePage({ searchParams }: Params) {
+import { SearchPageProps } from '@/lib/types'
+export default async function ArchivePage({
+  searchParams,
+}: SearchPageProps) {
   const videos = await fetchAllSessions({
     organization: searchParams.organization,
     event: searchParams.event,
-    // speakerIds: [searchParams.speaker],
-    // session: searchParams.session,
+    limit: 12,
     onlyVideos: true,
-    limit: 10,
+    searchQuery: searchParams.searchQuery,
   })
 
   return (
