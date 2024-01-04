@@ -2,15 +2,48 @@ import { Metadata } from 'next'
 import UpcomingEvents from './components/UpcomingEvents'
 import Videos from './components/Videos'
 import { Suspense } from 'react'
+import { fetchOrganizations } from '@/lib/data'
+import OrganizationStrip from './components/OrganiationStrip'
+import {
+  CardDescription,
+  CardTitle,
+  Card,
+  CardHeader,
+  CardContent,
+} from '@/components/ui/card'
+
+const Loading = () => {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-2xl font-bold text-main-text">
+        Loading...
+      </h1>
+    </div>
+  )
+}
+
 export default async function Home() {
+  const organizations = await fetchOrganizations()
+
   return (
     <>
       <Suspense>
         <UpcomingEvents />
       </Suspense>
-      <Suspense>
-        <Videos />
-      </Suspense>
+      <Card className="bg-white border-none">
+        <CardHeader>
+          <CardTitle className="text-background text-4xl">
+            Past events
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-8">
+          {organizations.map((organization) => (
+            <Suspense key={organization.id} fallback={<Loading />}>
+              <OrganizationStrip organization={organization} />
+            </Suspense>
+          ))}
+        </CardContent>
+      </Card>
     </>
   )
 }

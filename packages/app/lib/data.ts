@@ -2,11 +2,25 @@ import { IEvent } from 'streameth-server/model/event'
 import { IStage } from 'streameth-server/model/stage'
 import { ISession } from 'streameth-server/model/session'
 import { ISpeaker } from 'streameth-server/model/speaker'
+import { IOrganization } from 'streameth-server/model/organization'
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
+import OrganizationController from 'streameth-server/controller/organization'
 import { NavBarProps } from './types'
+
+export async function fetchOrganizations(): Promise<IOrganization[]> {
+  try {
+    const organizationController = new OrganizationController()
+    const data = await organizationController.getAllOrganizations()
+    return data.map((organization) => organization.toJson())
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching organizations'
+  }
+}
+
 export async function fetchEvents({
   organizationId,
   date,
@@ -98,7 +112,9 @@ export async function fetchAllSessions({
   speakerIds?: string[]
 }): Promise<ISession[]> {
   try {
-    const events = await fetchEvents({})
+    const events = await fetchEvents({
+      organizationId: organization,
+    })
     const data = []
     for (const event of events) {
       const sessions = await fetchEventSessions({

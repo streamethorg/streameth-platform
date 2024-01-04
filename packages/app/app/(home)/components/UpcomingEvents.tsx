@@ -14,20 +14,19 @@ import { fetchEvents } from '@/lib/data'
 
 const UpcomingEvents = async () => {
   const events = await fetchEvents({
-    date: new Date(),
+    // date: new Date(),
   })
 
   if (!events) return null
 
   return (
-    <Card className="max-w-screen ">
+    <Card className="max-w-screen border-none bg-white">
       <CardHeader>
-        <CardTitle>Upcoming Events</CardTitle>
-        <CardDescription>
-          Check out the upcoming events on Streameth!
-        </CardDescription>
+        <CardTitle className="text-background text-4xl">
+          Upcoming events
+        </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-row overflow-x-scroll space-x-4">
+      <CardContent className="flex flex-row overflow-x-scroll space-x-4 ">
         {events.map(
           (
             {
@@ -43,7 +42,7 @@ const UpcomingEvents = async () => {
           ) => (
             <Link key={index} href={`/${organizationId}/${id}`}>
               <Card
-                className="p-2 w-96 h-full border-none"
+                className="p-2 w-72 h-full border-none"
                 style={{
                   backgroundColor: accentColor,
                 }}>
@@ -61,15 +60,15 @@ const UpcomingEvents = async () => {
                     />
                   </div>
                   <CardHeader className="bg-background rounded mt-1">
-                    <CardTitle className="truncate text-xl">
+                    <CardTitle className="truncate text-sm">
                       {name}
                     </CardTitle>
                     <CardDescription>
                       {start.toDateString()}
-                      {new Date(start).toDateString() !==
+                      {/* {new Date(start).toDateString() !==
                       new Date(end).toDateString()
                         ? ` - ${new Date(end).toDateString()}`
-                        : ''}
+                        : ''} */}
                     </CardDescription>
                   </CardHeader>
                 </div>
