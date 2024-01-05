@@ -65,7 +65,7 @@ export default async function OrganizationStrip({
           </CardFooter>
         </Card>
         <div className="w-[80%]">
-          <VideoGrid videos={videos} maxVideos={7} />
+          <VideoGrid scroll videos={videos} maxVideos={7} />
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ export default function SpeakerIcon({
 }) {
   if (onlyImage) {
     return (
-      <Avatar className="my-2">
+      <Avatar className="my-2 ">
         <AvatarImage
           src={
             speaker.photo
@@ -42,8 +42,8 @@ export default function SpeakerIcon({
       // onClick={() =>
       //   openModal(<SpeakerModal event={event} speaker={speaker} />)
       // }>
-      className="m-1">
-      <Avatar className="my-2">
+      className="bg-background text-white">
+      <Avatar className="my-1">
         <AvatarImage
           src={
             speaker.photo

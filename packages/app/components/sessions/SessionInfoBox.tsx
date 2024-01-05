@@ -9,7 +9,9 @@ import {
 
 import ShareButton from '@/components/misc/ShareButton'
 import EmbedButton from '@/components/misc/EmbedButton'
-
+import SpeakerIcon from '../speakers/speakerIcon'
+import { ISpeaker } from 'streameth-server/model/speaker'
+import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 const SessionInfoBox = ({
   title,
   cardDescription,
@@ -17,6 +19,8 @@ const SessionInfoBox = ({
   playbackId,
   streamId,
   playerName,
+  speakers,
+  videoDownload,
 }: {
   title: string
   cardDescription?: string
@@ -24,13 +28,17 @@ const SessionInfoBox = ({
   playbackId?: string | undefined
   streamId?: string | undefined
   playerName: string
+  speakers?: ISpeaker[]
+  videoDownload?: boolean
 }) => {
   return (
-    <div className="bg-background rounded mt-1">
-      <CardHeader className="flex flex-col md:flex-row p-4">
-        <div className="flex flex-col">
-          <CardTitle className="">{title}</CardTitle>
-          <CardDescription>{cardDescription}</CardDescription>
+    <div className=" rounded mt-1">
+      <div className="flex flex-col md:flex-row justify-center py-4">
+        <div className="flex flex-col justify-center">
+          <CardTitle className="text-background">{title}</CardTitle>
+          <CardDescription>
+            {/* <div className="flex flex-row">{cardDescription}</div> */}
+          </CardDescription>
         </div>
         <div className="flex flex-row md:ml-auto space-x-1">
           <ShareButton />
@@ -39,11 +47,23 @@ const SessionInfoBox = ({
             playbackId={playbackId}
             playerName={playerName}
           />
+          {/* { videoDownload && <VideoDownload
+            playbackId={playbackId}
+            title={playerName}
+          /> } */}
         </div>
-      </CardHeader>
+      </div>
       {description && (
-        <CardContent>
-          <p>{description}</p>
+        <CardContent className="md:p-0 flex flex-col">
+          <p className="bg-background rounded-md p-4">
+            {description}
+          </p>
+          <div className="flex flex-row mt-2">
+            {speakers &&
+              speakers.map((speaker) => (
+                <SpeakerIcon key={speaker.id} speaker={speaker} />
+              ))}
+          </div>
         </CardContent>
       )}
     </div>

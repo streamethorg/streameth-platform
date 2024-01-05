@@ -26,3 +26,10 @@ export interface SearchPageProps {
     searchQuery?: string
   }
 }
+
+export interface WatchPageProps {
+  searchParams: {
+    event: string
+    session: string
+  }
+}

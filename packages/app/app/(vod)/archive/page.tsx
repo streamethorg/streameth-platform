@@ -5,11 +5,11 @@ import UpcomingEvents from '@/app/(home)/components/UpcomingEvents'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 
+// TODO: pagination
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
