@@ -6,4 +6,5 @@ export interface IOrganization extends Document {
   logo: string;
   location: string;
   accentColor: string;
+  slug: string;
 }
