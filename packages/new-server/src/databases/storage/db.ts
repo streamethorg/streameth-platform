@@ -11,6 +11,9 @@ export default class DB<T extends mongoose.Document>
   }
   async create(query: string, data: T): Promise<T> {
     const create = await this.model.create({ ...data });
+    await this.model.findByIdAndUpdate(create._id, {
+      slug: create._id,
+    });
     return create;
   }
 
