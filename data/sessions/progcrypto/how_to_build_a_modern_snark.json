@@ -1,26 +1,26 @@
 {
-  "id": "how_to_build_a_modern_snark",
-  "name": "How to build a modern SNARK",
-  "description": "The rise of accumulation schemes, folding schemes and lookup tables has meant that modern zkSNARK protocols are now composed from ideas across several papers. This presentation describes how to assemble the latest research to build a practical foldable Plonk-ish SNARK with a linear-time Prover, fully succinct Verifier. At each fold the Prover only commits to structured witness statements, without the grand product polynomials associated with Plonk",
-  "start": 1700206200000,
-  "end": 1700208000000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "zac",
-      "name": "Zac",
-      "bio": "CEO Aztec. Creator of AZTEC Protocol, co-inventor of PLONK. Inventor of Huff.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/uc?id=1jLrW54QNuyqdF2waaScfRhLN9rQacN7t"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/5d64ig8hveig6b9m/index.m3u8",
-  "playbackId": "5d64ig8hveig6b9m",
-  "eventId": "progcrypto",
-  "track": "Libraries and Infrastructure",
-  "coverImage": "/sessions/progcrypto/how_to_build_a_modern_snark_thumbnail.png",
-  "assetId": "8f269279-55c4-4d39-b4de-19fc5fccb95c",
-  "sourceId": "34b4cf87-6a3c-4a74-b600-881835ed4313",
-  "videoType": "clip"
+    "id": "how_to_build_a_modern_snark",
+    "name": "How to build a modern SNARK",
+    "description": "The rise of accumulation schemes, folding schemes and lookup tables has meant that modern zkSNARK protocols are now composed from ideas across several papers. This presentation describes how to assemble the latest research to build a practical foldable Plonk-ish SNARK with a linear-time Prover, fully succinct Verifier. At each fold the Prover only commits to structured witness statements, without the grand product polynomials associated with Plonk",
+    "start": 1700206200000,
+    "end": 1700208000000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "zac",
+            "name": "Zac",
+            "bio": "CEO Aztec. Creator of AZTEC Protocol, co-inventor of PLONK. Inventor of Huff.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/uc?id=1jLrW54QNuyqdF2waaScfRhLN9rQacN7t"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5d64ig8hveig6b9m/index.m3u8",
+    "playbackId": "5d64ig8hveig6b9m",
+    "eventId": "progcrypto",
+    "track": "Libraries and Infrastructure",
+    "coverImage": "/sessions/progcrypto/how_to_build_a_modern_snark_thumbnail.png",
+    "assetId": "5d64b4b2-d6be-4555-aa63-2ace6127df35",
+    "sourceId": "34b4cf87-6a3c-4a74-b600-881835ed4313",
+    "videoType": "clip"
 }

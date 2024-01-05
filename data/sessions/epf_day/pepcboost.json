@@ -1,25 +1,25 @@
 {
-  "id": "pepcboost",
-  "name": "PEPC-Boost",
-  "description": "Fellow project presentation by Bharat",
-  "start": 1700211600000,
-  "end": 1700212200000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "bharath_vedartham",
-      "name": "Bharath Vedartham",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@BharathVedarth1",
-      "photo": "https://drive.google.com/file/d/1msDQ3NRQi3h5eISIzERNoUpbKkoZ3ELV/view?usp=drive_link"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/4f7d2cs0ysc3azqs/index.m3u8",
-  "playbackId": "4f7d2cs0ysc3azqs",
-  "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/pepcboost_thumbnail.png",
-  "assetId": "4f7dcd0e-36c7-436d-94bd-afafe1c2e09c",
-  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-  "videoType": "clip"
+    "id": "pepcboost",
+    "name": "PEPC-Boost",
+    "description": "Fellow project presentation by Bharat",
+    "start": 1700211600000,
+    "end": 1700212200000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "bharath_vedartham",
+            "name": "Bharath Vedartham",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@BharathVedarth1",
+            "photo": "https://drive.google.com/file/d/1msDQ3NRQi3h5eISIzERNoUpbKkoZ3ELV/view?usp=drive_link"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/4f7d2cs0ysc3azqs/index.m3u8",
+    "playbackId": "4f7d2cs0ysc3azqs",
+    "eventId": "epf_day",
+    "coverImage": "/sessions/epf_day/pepcboost_thumbnail.png",
+    "assetId": "4f7dcd0e-36c7-436d-94bd-afafe1c2e09c",
+    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+    "videoType": "clip"
 }

@@ -1,34 +1,34 @@
 {
-  "id": "zk_email_email_wallet_and_provenant_identity",
-  "name": "ZK Email: Email Wallet and provenant identity",
-  "description": "We announce an email-based account abstraction wallet, allowing users to\n send tokens simply by sending emails, without any actions from \nrecipients. By trusting only the original email server (i.e. gmail) and \nnot a centralized attester, users can ensure the assets in their wallet \nare secure and available. We describe a simple extension framework that \nlets any developer add arbitrary smart contract calls via emails. In \naddition to the wallet, we describe a more generic proof of email sdk \nthat lets anyone verify identities directly from web2 without \ncentralized attesters, via proofs of user's emails.",
-  "start": 1700129700000,
-  "end": 1700131500000,
-  "stageId": "marmara",
-  "speakers": [
-    {
-      "id": "aayush_gupta",
-      "name": "Aayush Gupta",
-      "bio": "I am working on proof of email and the email wallet application right now (more info at https://prove.email)! We are using zk proofs of emails to do things like verify social credentials and send money via emails (https://sendeth.org). I am also helping to support work on plume (https://plume.run), an anonymous unique nullifier for ethereum addresses.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1p5R79Wmj4KhrCmWRVPblOLfq5C66s3_o/view"
-    },
-    {
-      "id": "sora_suegami",
-      "name": "Sora Suegami",
-      "bio": "I have been researching how to improve the ability of smart contracts \nwith high-functional cryptography, e.g., ZKP, witness encryption, and \ncryptographic obfuscation. I am currently working on proof of email and \nEmail Wallet, a contract wallet using emails. They allow smart contracts\n to securely import more kinds of off-chain data that users usually send\n and receive. I also research privacy-preserving smart contracts, \nespecially smart contract obfuscation (https://doi.org/10.1016/j.bcra.2022.100118).",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1EdKL10RwP0lBSnopJ1b-qocSbuDJSR4W/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/2c57ku6ozr0tlb6o/index.m3u8",
-  "playbackId": "2c57ku6ozr0tlb6o",
-  "eventId": "progcrypto",
-  "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/zk_email_email_wallet_and_provenant_identity_thumbnail.png",
-  "assetId": "2c573a37-b3d0-4cbc-b46a-c8b9335edcf8",
-  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
-  "videoType": "clip"
+    "id": "zk_email_email_wallet_and_provenant_identity",
+    "name": "ZK Email: Email Wallet and provenant identity",
+    "description": "We announce an email-based account abstraction wallet, allowing users to\n send tokens simply by sending emails, without any actions from \nrecipients. By trusting only the original email server (i.e. gmail) and \nnot a centralized attester, users can ensure the assets in their wallet \nare secure and available. We describe a simple extension framework that \nlets any developer add arbitrary smart contract calls via emails. In \naddition to the wallet, we describe a more generic proof of email sdk \nthat lets anyone verify identities directly from web2 without \ncentralized attesters, via proofs of user's emails.",
+    "start": 1700129700000,
+    "end": 1700131500000,
+    "stageId": "marmara",
+    "speakers": [
+        {
+            "id": "aayush_gupta",
+            "name": "Aayush Gupta",
+            "bio": "I am working on proof of email and the email wallet application right now (more info at https://prove.email)! We are using zk proofs of emails to do things like verify social credentials and send money via emails (https://sendeth.org). I am also helping to support work on plume (https://plume.run), an anonymous unique nullifier for ethereum addresses.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1p5R79Wmj4KhrCmWRVPblOLfq5C66s3_o/view"
+        },
+        {
+            "id": "sora_suegami",
+            "name": "Sora Suegami",
+            "bio": "I have been researching how to improve the ability of smart contracts \nwith high-functional cryptography, e.g., ZKP, witness encryption, and \ncryptographic obfuscation. I am currently working on proof of email and \nEmail Wallet, a contract wallet using emails. They allow smart contracts\n to securely import more kinds of off-chain data that users usually send\n and receive. I also research privacy-preserving smart contracts, \nespecially smart contract obfuscation (https://doi.org/10.1016/j.bcra.2022.100118).",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1EdKL10RwP0lBSnopJ1b-qocSbuDJSR4W/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/2c57ku6ozr0tlb6o/index.m3u8",
+    "playbackId": "2c57ku6ozr0tlb6o",
+    "eventId": "progcrypto",
+    "track": "Cryptography in the Wild",
+    "coverImage": "/sessions/progcrypto/zk_email_email_wallet_and_provenant_identity_thumbnail.png",
+    "assetId": "2c573a37-b3d0-4cbc-b46a-c8b9335edcf8",
+    "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+    "videoType": "clip"
 }

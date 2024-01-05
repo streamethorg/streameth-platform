@@ -1,24 +1,25 @@
 {
-  "id": "funding_the_commons_builder_residency_update",
-  "name": "Funding the Commons Builder Residency Update",
-  "description": "Berlin Residency Announcement",
-  "start": 1694245800000,
-  "end": 1694247000000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "sara_johnstone",
-      "name": "Sara Johnstone",
-      "bio": "Numundo/Funding the Commons",
-      "eventId": "funding_the_commons_berlin_2023"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-    "start": 2215,
-    "end": 3498
-  },
-  "videoUrl": "https://lp-playback.com/hls/e0des3bjrskndo6j/index.m3u8",
-  "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/funding_the_commons_builder_residency_update.jpg"
+    "id": "funding_the_commons_builder_residency_update",
+    "name": "Funding the Commons Builder Residency Update",
+    "description": "Berlin Residency Announcement",
+    "start": 1694245800000,
+    "end": 1694247000000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "sara_johnstone",
+            "name": "Sara Johnstone",
+            "bio": "Numundo/Funding the Commons",
+            "eventId": "funding_the_commons_berlin_2023"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+        "start": 2215,
+        "end": 3498
+    },
+    "videoUrl": "https://lp-playback.com/hls/e0des3bjrskndo6j/index.m3u8",
+    "eventId": "funding_the_commons_berlin_2023",
+    "coverImage": "/sessions/funding_the_commons_berlin_2023/funding_the_commons_builder_residency_update.jpg",
+    "assetId": "e0def6c3-d048-4fb5-8cad-ecf23a6d86c3"
 }

@@ -1,21 +1,22 @@
 {
-  "id": "linux__ethereum_commoning_vs_commodifiying",
-  "name": "Linux & Ethereum: Commoning vs Commodifiying",
-  "description": "The Protocol Guild aims to secure the future of Ethereum, by enabling a highly efficient way for its ecosystem and community to sustainably fund core protocol development, while rebalancing incentives for core protocol contributors.",
-  "start": 1694768400000,
-  "end": 1694769900000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "trent_van_epps",
-      "name": "Trent Van Epps",
-      "bio": "Works at the Ethereum Foundation on protocol coordination. Member of the Protocol Guild",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/profile_triangle_p6CZOyc.JPG"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/9bafrvwvo0yuoqpn/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/linux__ethereum_commoning_vs_commodifiying.jpg"
+    "id": "linux__ethereum_commoning_vs_commodifiying",
+    "name": "Linux & Ethereum: Commoning vs Commodifiying",
+    "description": "The Protocol Guild aims to secure the future of Ethereum, by enabling a highly efficient way for its ecosystem and community to sustainably fund core protocol development, while rebalancing incentives for core protocol contributors.",
+    "start": 1694768400000,
+    "end": 1694769900000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "trent_van_epps",
+            "name": "Trent Van Epps",
+            "bio": "Works at the Ethereum Foundation on protocol coordination. Member of the Protocol Guild",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/profile_triangle_p6CZOyc.JPG"
+        }
+    ],
+    "playbackId": "",
+    "videoUrl": "https://lp-playback.com/hls/9bafrvwvo0yuoqpn/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/linux__ethereum_commoning_vs_commodifiying.jpg",
+    "assetId": "9bafe326-af0d-4b40-ae12-f4a77d85c2f7"
 }

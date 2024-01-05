@@ -1,23 +1,23 @@
 {
-  "id": "opening_remarks",
-  "name": "Opening Remarks",
-  "description": "",
-  "start": 1699262100000,
-  "end": 1699263900000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "althea_allen",
-      "name": "Althea Allen \n",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/ccdfuhxc39atfge5/index.m3u8",
-  "playbackId": "d194v6tw64y0r8u0",
-  "eventId": "zuconnect__zk_track",
-  "coverImage": "/sessions/zuconnect__zk_track/opening_remarks.jpg",
-  "assetId": "d194539c-b1a5-47b7-9d89-f22c94b119f3",
-  "sourceId": "642c56f4-3bbf-42b6-bd4d-b38a58528adf",
-  "videoType": "clip"
+    "id": "opening_remarks",
+    "name": "Opening Remarks",
+    "description": "",
+    "start": 1699262100000,
+    "end": 1699263900000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "althea_allen",
+            "name": "Althea Allen \n",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/ccdfuhxc39atfge5/index.m3u8",
+    "playbackId": "d194v6tw64y0r8u0",
+    "eventId": "zuconnect__zk_track",
+    "coverImage": "/sessions/zuconnect__zk_track/opening_remarks.jpg",
+    "assetId": "d194539c-b1a5-47b7-9d89-f22c94b119f3",
+    "sourceId": "642c56f4-3bbf-42b6-bd4d-b38a58528adf",
+    "videoType": "clip"
 }

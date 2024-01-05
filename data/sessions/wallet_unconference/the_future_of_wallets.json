@@ -1,25 +1,25 @@
 {
-  "id": "the_future_of_wallets",
-  "name": "The Future of Wallets",
-  "description": "In a brief \"fireside\" followed by fishbowl-style Q&A, Stani Kulechov, founder and CEO of Aave Companies, will discuss the future of on-chain wallets, namely: portals to web3, identity, etc, versus purely financial, as well as pure EOA wallets versus account abstraction/MPC and the pros and cons of mobile wallets versus web based wallets/extensions. and risks.",
-  "start": 1700224200000,
-  "end": 1700226000000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "stani_kulechov",
-      "name": "Stani Kulechov ",
-      "bio": "Stani Kulechov is the founder and CEO of Aave Companies. He is a recognized pioneer in decentralized finance, web3 social and blockchain technologies. An avid software programmer in his youth, he was driven by a passion to expand access to financial tools. While studying law and smart contracts, he built the Aave Protocol – an open-source, non-custodial liquidity protocol. With over $7B in total value locked, Aave is now one of the world’s largest and most successful decentralized markets. Under Stani’s leadership, the Company has continued to spearhead innovation in DeFi, including state-of-the-art upgrades to the protocol, and building the Aave-native, overcollateralized stablecoin GHO. ",
-      "eventId": "wallet_unconference",
-      "twitter": "@StaniKulechov",
-      "photo": "https://speak.ticketh.xyz/media/avatars/Screen_Shot_2023-01-07_at_12.29.48_PM_JdBeYOR.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/c29ds5075ixws317/index.m3u8",
-  "playbackId": "c29ds5075ixws317",
-  "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/the_future_of_wallets_thumbnail.png",
-  "assetId": "c29d4332-c8b6-40ec-bafb-5b22fd7a0ad5",
-  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
-  "videoType": "clip"
+    "id": "the_future_of_wallets",
+    "name": "The Future of Wallets",
+    "description": "In a brief \"fireside\" followed by fishbowl-style Q&A, Stani Kulechov, founder and CEO of Aave Companies, will discuss the future of on-chain wallets, namely: portals to web3, identity, etc, versus purely financial, as well as pure EOA wallets versus account abstraction/MPC and the pros and cons of mobile wallets versus web based wallets/extensions. and risks.",
+    "start": 1700224200000,
+    "end": 1700226000000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "stani_kulechov",
+            "name": "Stani Kulechov ",
+            "bio": "Stani Kulechov is the founder and CEO of Aave Companies. He is a recognized pioneer in decentralized finance, web3 social and blockchain technologies. An avid software programmer in his youth, he was driven by a passion to expand access to financial tools. While studying law and smart contracts, he built the Aave Protocol \u2013 an open-source, non-custodial liquidity protocol. With over $7B in total value locked, Aave is now one of the world\u2019s largest and most successful decentralized markets. Under Stani\u2019s leadership, the Company has continued to spearhead innovation in DeFi, including state-of-the-art upgrades to the protocol, and building the Aave-native, overcollateralized stablecoin GHO. ",
+            "eventId": "wallet_unconference",
+            "twitter": "@StaniKulechov",
+            "photo": "https://speak.ticketh.xyz/media/avatars/Screen_Shot_2023-01-07_at_12.29.48_PM_JdBeYOR.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/c29ds5075ixws317/index.m3u8",
+    "playbackId": "c29ds5075ixws317",
+    "eventId": "wallet_unconference",
+    "coverImage": "/sessions/wallet_unconference/the_future_of_wallets_thumbnail.png",
+    "assetId": "c29d4332-c8b6-40ec-bafb-5b22fd7a0ad5",
+    "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+    "videoType": "clip"
 }

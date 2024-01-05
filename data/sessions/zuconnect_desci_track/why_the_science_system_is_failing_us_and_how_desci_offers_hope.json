@@ -1,20 +1,21 @@
 {
-  "id": "why_the_science_system_is_failing_us_and_how_desci_offers_hope",
-  "name": "Why the Science System is Failing Us and How DeSci Offers Hope",
-  "description": "Science is Broken. There are a multitude of issues with the current \nsystem ranging from replication crisis to funding to metrics obsessed\npublication culture. This talk give an overview of the system of science,\nhow we got here and where it went wrong. It will then covers decentralised \nscience from its first principles and gives an overview of how this grassroots\nmovement is aiming to Fix Science. ",
-  "start": 1699006200000,
-  "end": 1699008000000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "bharat_harbham",
-      "name": "Bharat Harbham",
-      "bio": "No Desciption",
-      "eventId": "zuconnect_desci_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/13059x46g0m021vq/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect_desci_track",
-  "coverImage": "/sessions/zuconnect_desci_track/why_the_science_system_is_failing_us_and_how_desci_offers_hope.jpg"
+    "id": "why_the_science_system_is_failing_us_and_how_desci_offers_hope",
+    "name": "Why the Science System is Failing Us and How DeSci Offers Hope",
+    "description": "Science is Broken. There are a multitude of issues with the current \nsystem ranging from replication crisis to funding to metrics obsessed\npublication culture. This talk give an overview of the system of science,\nhow we got here and where it went wrong. It will then covers decentralised \nscience from its first principles and gives an overview of how this grassroots\nmovement is aiming to Fix Science. ",
+    "start": 1699006200000,
+    "end": 1699008000000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "bharat_harbham",
+            "name": "Bharat Harbham",
+            "bio": "No Desciption",
+            "eventId": "zuconnect_desci_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/13059x46g0m021vq/index.m3u8",
+    "playbackId": "",
+    "eventId": "zuconnect_desci_track",
+    "coverImage": "/sessions/zuconnect_desci_track/why_the_science_system_is_failing_us_and_how_desci_offers_hope.jpg",
+    "assetId": "1305f287-9f76-4f13-8be3-ac30dd32964a"
 }

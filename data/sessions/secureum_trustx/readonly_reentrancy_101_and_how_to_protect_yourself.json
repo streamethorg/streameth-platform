@@ -1,25 +1,25 @@
 {
-  "id": "readonly_reentrancy_101_and_how_to_protect_yourself",
-  "name": "Read-Only Reentrancy: 101 and How to Protect Yourself”",
-  "description": "",
-  "start": 1699976700000,
-  "end": 1699977300000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "ionutviorel_gingu",
-      "name": "Ionut-Viorel\nGingu",
-      "bio": "Security Researcher\nOpenZeppelin",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Ionut-Viorel.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/40d0biy43vrdpw4b/index.m3u8",
-  "playbackId": "40d0biy43vrdpw4b",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/readonly_reentrancy_101_and_how_to_protect_yourself.jpg",
-  "assetId": "40d0c331-b9d9-47f1-8d79-3f94e7ca64ca",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "readonly_reentrancy_101_and_how_to_protect_yourself",
+    "name": "Read-Only Reentrancy: 101 and How to Protect Yourself\u201d",
+    "description": "",
+    "start": 1699976700000,
+    "end": 1699977300000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "ionutviorel_gingu",
+            "name": "Ionut-Viorel\nGingu",
+            "bio": "Security Researcher\nOpenZeppelin",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Ionut-Viorel.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/40d0biy43vrdpw4b/index.m3u8",
+    "playbackId": "40d0biy43vrdpw4b",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/readonly_reentrancy_101_and_how_to_protect_yourself.jpg",
+    "assetId": "40d0c331-b9d9-47f1-8d79-3f94e7ca64ca",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }
