@@ -23,11 +23,6 @@ export default async function Watch({
     return session.id === searchParams.session
   })[0]
 
-  // TODO: enable to query just by event id
-  // const event = await fetchEvent({
-  //   event: searchParams.event,
-  // })
-
   if (!video) return null
 
   const tabs = []

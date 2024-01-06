@@ -58,12 +58,13 @@ export default async function Stage({ params }: EventPageProps) {
           cardDescription={event.name}
           playerName={stage.name}
           streamId={stage.streamSettings.streamId}
+          description={event.description}
         />
       </div>
       <Tabs
         defaultValue={tabs[0]?.value ?? ''}
-        className="md:w-[30%] w-full max-h-[100%] md:m-4 md:ml-2 bg-background p-2 rounded-lg ">
-        <TabsList className="w-full">
+        className="lg:w-[30%] w-full max-h-[100vh] lg:ml-2 lg:m-4 bg-background p-2 rounded-lg ">
+        <TabsList className="w-full bg-background">
           {tabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value}>
               {tab.value}

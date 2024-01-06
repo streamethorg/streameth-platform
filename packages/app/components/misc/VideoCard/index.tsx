@@ -10,15 +10,22 @@ import { fetchEvent } from '@/lib/data'
 import Image from 'next/image'
 import { getImageUrl } from '@/lib/utils'
 
-const VideoCard = async ({ session }: { session: ISession }) => {
+// TODO: inverted colors
+const VideoCard = async ({
+  session,
+  invertedColors,
+}: {
+  session: ISession
+  invertedColors?: boolean
+}) => {
   const event = await fetchEvent({
     event: session.eventId,
   })
   return (
     <div className=" min-h-full rounded-xl text-white uppercase">
       <Thumbnail session={session} />
-      <CardHeader className="bg-background rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none">
-        <CardTitle className="  text-sm truncate">
+      <CardHeader className=" rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none">
+        <CardTitle className="text-background  text-sm truncate">
           {session.name}
         </CardTitle>
         <CardDescription className="lowercase text-sm truncate ">

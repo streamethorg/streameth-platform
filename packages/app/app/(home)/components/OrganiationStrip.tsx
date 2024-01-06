@@ -1,15 +1,7 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
 import VideoGrid from '../../../components/misc/Videos'
 import { fetchAllSessions } from '@/lib/data'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { IOrganization } from 'streameth-server/model/organization'
 
@@ -28,18 +20,24 @@ export default async function OrganizationStrip({
   if (videos.length === 0) return false
   return (
     <div key="organization.id" className="bg-white flex flex-col">
-      <div className="flex flex-row md:hidden my-2">
-        <CardTitle className="text-background text-2xl">
-          {organization.name}
-        </CardTitle>
-        <Link
-          href={'/archive?organization=' + organization.id}
-          className=" ml-auto">
-          <Button className="">all videos</Button>
+      <div className="flex flex-row my-2">
+        <Image
+          className="rounded"
+          alt="Session image"
+          quality={80}
+          src={organization.logo}
+          height={34}
+          width={34}
+        />
+
+        <Link href={'/archive?organization=' + organization.id}>
+          <CardTitle className="text-background text-2xl mr-auto hover:underline">
+            {organization.name}
+          </CardTitle>
         </Link>
       </div>
       <div className="flex flex-row overflow-y-scroll gap-4 h-full">
-        <Card className="hidden w-72 md:w-[20%] md:flex flex-col bg-white border-background">
+        {/* <Card className="hidden w-72 md:w-[20%] md:flex flex-col bg-white border-background">
           <CardHeader>
             <Image
               className="rounded m-auto"
@@ -63,10 +61,8 @@ export default async function OrganizationStrip({
               <Button className="w-full ">Watch all videos</Button>
             </Link>
           </CardFooter>
-        </Card>
-        <div className="w-[80%]">
-          <VideoGrid scroll videos={videos} maxVideos={7} />
-        </div>
+        </Card> */}
+        <VideoGrid scroll videos={videos} maxVideos={3} />
       </div>
     </div>
   )

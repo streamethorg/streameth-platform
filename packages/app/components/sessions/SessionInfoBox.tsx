@@ -37,7 +37,7 @@ const SessionInfoBox = ({
   return (
     <div className=" rounded mt-1">
       <div className="flex flex-col md:flex-row justify-center py-4">
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center px-2">
           <CardTitle className="text-background">{title}</CardTitle>
           <CardDescription>
             {viewCount && assetId && <ViewCounts assetId={assetId} />}
@@ -53,11 +53,6 @@ const SessionInfoBox = ({
             playerName={playerName}
           />
           {assetId && <VideoDownload assetId={assetId} />}
-
-          {/* { videoDownload && <VideoDownload
-            playbackId={playbackId}
-            title={playerName}
-          /> } */}
         </div>
       </div>
       {description && (

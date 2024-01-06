@@ -1,11 +1,3 @@
-import {
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import Link from 'next/link'
-import Image from 'next/image'
-import { getImageUrl } from '@/lib/utils'
 import { fetchAllSessions } from '@/lib/data'
 import VideoCard from '@/components/misc/VideoCard'
 export default async function RelatedVideos({
