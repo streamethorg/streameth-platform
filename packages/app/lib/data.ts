@@ -212,12 +212,9 @@ export async function fetchEventSessions({
       timestamp,
       date,
       speakerIds,
+      onlyVideos
     })
-    if (onlyVideos) {
-      data.filter((session) => {
-        session.playbackId
-      })
-    }
+
     return data.map((session) => session.toJson())
   } catch (e) {
     console.log(e)

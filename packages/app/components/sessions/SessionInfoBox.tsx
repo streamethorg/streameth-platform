@@ -12,6 +12,7 @@ import EmbedButton from '@/components/misc/EmbedButton'
 import SpeakerIcon from '../speakers/speakerIcon'
 import { ISpeaker } from 'streameth-server/model/speaker'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
+import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
 const SessionInfoBox = ({
   title,
   cardDescription,
@@ -20,7 +21,8 @@ const SessionInfoBox = ({
   streamId,
   playerName,
   speakers,
-  videoDownload,
+  assetId,
+  viewCount,
 }: {
   title: string
   cardDescription?: string
@@ -29,7 +31,8 @@ const SessionInfoBox = ({
   streamId?: string | undefined
   playerName: string
   speakers?: ISpeaker[]
-  videoDownload?: boolean
+  assetId?: string
+  viewCount?: boolean
 }) => {
   return (
     <div className=" rounded mt-1">
@@ -37,16 +40,20 @@ const SessionInfoBox = ({
         <div className="flex flex-col justify-center">
           <CardTitle className="text-background">{title}</CardTitle>
           <CardDescription>
-            {/* <div className="flex flex-row">{cardDescription}</div> */}
+            {viewCount && assetId && <ViewCounts assetId={assetId} />}
+
+            <div className="flex flex-row ">{cardDescription}</div>
           </CardDescription>
         </div>
-        <div className="flex flex-row md:ml-auto space-x-1">
+        <div className="flex flex-row md:ml-auto space-x-1 mt-2 lg:my-0">
           <ShareButton />
           <EmbedButton
             streamId={streamId}
             playbackId={playbackId}
             playerName={playerName}
           />
+          {assetId && <VideoDownload assetId={assetId} />}
+
           {/* { videoDownload && <VideoDownload
             playbackId={playbackId}
             title={playerName}
@@ -54,7 +61,7 @@ const SessionInfoBox = ({
         </div>
       </div>
       {description && (
-        <CardContent className="md:p-0 flex flex-col">
+        <CardContent className="p-0 md:p-0 flex flex-col">
           <p className="bg-background rounded-md p-4">
             {description}
           </p>

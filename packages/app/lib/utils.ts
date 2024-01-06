@@ -69,3 +69,12 @@ export const getImageUrl = (image: string) => {
   // temp revert to github
   // return `https://streamethapp.ams3.cdn.digitaloceanspaces.com${image}`
 }
+
+
+export const loadEnv = () => {
+  const key = process.env.LIVEPEER_API_KEY || null
+  if (!key) {
+    throw new Error('No API key found')
+  }
+  return key
+}

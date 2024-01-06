@@ -38,25 +38,26 @@ export default async function Watch({
 
   return (
     <ColorComponent accentColor={''}>
-      <div className="h-full flex flex-col w-full lg:flex-row relative ">
-        <div className="flex flex-col w-full h-full z-40 lg:w-[70%] sticky md:relative top-[72px] md:top-0  md:pr-2 ">
+      <div className="h-full flex flex-col w-full gap-4 lg:flex-row relative ">
+        <div className="flex flex-col w-full h-full z-40 lg:w-[70%] sticky lg:relative lg:top-0  lg:pr-2 ">
           <Player
+            assetId={video.assetId}
             playbackId={video.playbackId}
             playerName={video.name}
           />
           <SessionInfoBox
             title={video.name}
-            cardDescription={new Date(video.start).toLocaleString()}
             description={video.description}
             playerName={video.name}
             playbackId={video.playbackId}
             speakers={video.speakers}
-            videoDownload
+            assetId={video.assetId}
+            viewCount
           />
         </div>
         <Tabs
           defaultValue={tabs[0]?.value ?? ''}
-          className="md:w-[30%] w-full max-h-[100%] md:ml-2 bg-background p-2 rounded-md ">
+          className="lg:w-[30%] w-full max-h-[100%] lg:ml-2 bg-background p-2 rounded-lg ">
           <TabsList className="w-full bg-background">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value}>

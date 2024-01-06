@@ -1,64 +1,26 @@
-import React, { useEffect, useState } from 'react'
+'use client'
+import React, { useState } from 'react'
+import { useAsset } from '@livepeer/react'
+import { Badge } from '@/components/ui/badge'
+import Link from 'next/link'
 
-const VideoDownload = ({
-  title,
-  playbackId,
-  closeModal,
-}: {
-  closeModal: () => void
-  title?: string
-  playbackId?: string
-}) => {
+import { ArrowDownIcon } from '@heroicons/react/24/outline'
+const VideoDownload = ({ assetId }: { assetId: string }) => {
   const [url, setUrl] = useState('')
   const [loading, setIsLoading] = useState(false)
+  const { data: asset, isLoading } = useAsset({ assetId })
 
-  const getVideoUrl = () => {
-    setIsLoading(true)
-    fetch(`/api/video-download?playbackId=${playbackId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUrl(data.meta.source[0].url)
-        const downloadLink = document.createElement('a')
-        downloadLink.href = data.meta.source[0].url
-        downloadLink.download = title
-          ? title + '.mp4'
-          : 'Download.mp4'
-        downloadLink.target = '_blank'
-        downloadLink.rel = 'noopener noreferrer'
-
-        // Append the link to the document
-        document.body.appendChild(downloadLink)
-
-        // Simulate a click event on the link
-        downloadLink.click()
-
-        // Remove the link from the document
-        document.body.removeChild(downloadLink)
-        setIsLoading(false)
-        closeModal()
-      })
-      .catch((error) => {
-        console.error(error)
-        setIsLoading(false)
-      })
-  }
-
-  useEffect(() => {
-    if (playbackId) getVideoUrl()
-  }, [])
+  console.log(assetId)
+  if (isLoading) return null
+  if (!asset?.downloadUrl) return null
 
   return (
-    <div className="w-[380px] p-5 text-white bg-base mx-auto">
-      <div className="flex justify-center text-center flex-col gap-10">
-        <p className="text-2xl">
-          {loading
-            ? 'Fetching download link...'
-            : !url
-            ? 'Fetch Failed'
-            : 'Downloading...'}
-        </p>
-      </div>
-    </div>
+    <a href={asset.downloadUrl} download={asset.name} target="_blank">
+      <Badge className="bg-background">
+        <ArrowDownIcon className="p-1 h-6 w-6 md:h-8 md:w-8 cursor-pointer text-white" />
+        Download
+      </Badge>
+    </a>
   )
 }
 

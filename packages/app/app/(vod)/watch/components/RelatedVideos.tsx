@@ -43,7 +43,7 @@ export default async function RelatedVideos({
                       }}
                     />
                   </div>
-                  <CardHeader className=" p-2 md:p-2 shadow-none md:shadow-none">
+                  <CardHeader className=" p-4 md:p-2 shadow-none md:shadow-none">
                     <CardTitle className=" text-sm truncate">
                       {name}
                     </CardTitle>

@@ -1,6 +1,10 @@
 'use client'
 
-import { Player as LivepeerPlayer, useStream } from '@livepeer/react'
+import {
+  Player as LivepeerPlayer,
+  useStream,
+  useAsset,
+} from '@livepeer/react'
 import { useCallback, useMemo } from 'react'
 import { useAccount } from 'wagmi'
 // @ts-ignore
@@ -41,17 +45,23 @@ export const Player = ({
   playerName,
   coverImage,
   muted = false,
+  assetId,
 }: {
   playbackId?: string
   streamId?: string
   playerName: string
   coverImage?: string
   muted?: boolean
+  assetId?: string
 }) => {
   const { address } = useAccount()
   const { data: stream } = useStream({
     streamId,
     refetchInterval: (s) => (s?.isActive ? false : 5000),
+  })
+
+  const { data: asset } = useAsset({
+    assetId,
   })
 
   const mediaElementRef = useCallback(
@@ -71,29 +81,33 @@ export const Player = ({
     [playerName]
   )
 
+  let playbackIdParsed =
+    playbackId ?? stream?.playbackId ?? asset?.playbackId
   // if (!playbackId && !stream?.isActive) return <OfflinePlayer />
   return useMemo(
     () => (
       <div className="relative w-full aspect-video p-2 bg-background rounded-md">
         <LivepeerPlayer
           mediaElementRef={mediaElementRef}
-          playbackId={playbackId ?? stream?.playbackId}
+          playbackId={playbackIdParsed}
           showTitle={false}
           showPipButton={false}
           showLoadingSpinner={true}
           autoPlay
           muted={muted}
-          playRecording
+          // playRecording
           controls={{
             autohide: 0,
             hotkeys: false,
             defaultVolume: 0.6,
           }}
           viewerId={address}
-        />
+          // autoUrlUpload
+          // showUploadingIndicator
+        ></LivepeerPlayer>
       </div>
     ),
-    [playbackId, stream?.playbackId, mediaElementRef, address]
+    [playbackIdParsed, mediaElementRef, address, muted]
   )
 }
 

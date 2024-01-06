@@ -39,12 +39,14 @@ export default class SessionController {
     timestamp,
     date,
     speakerIds,
+    onlyVideos
   }: {
     eventId: ISession['eventId']
     stage?: ISession['stageId']
     timestamp?: number
     date?: Date
     speakerIds?: string[]
+    onlyVideos?: boolean
   }): Promise<Session[]> {
     const sessions: Session[] = []
     const sessionQuery = await Session.getSessionPath(eventId)
@@ -75,6 +77,11 @@ export default class SessionController {
           speakerIds.includes(speaker.id)
         )
       })
+    }
+
+    if (onlyVideos) {
+      data = data.filter((session) => session.playbackId !== "")
+      console.log(data)
     }
 
     // sort by start date

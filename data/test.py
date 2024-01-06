@@ -50,7 +50,7 @@ for event_name in os.listdir(SESSIONS_DIR):
                 with open(session_path, 'r') as file:
                     session = json.load(file)
                     playbackId = session.get('playbackId')
-
+                    print(session.get("assetId"))
                     # If playbackId is not found, try extracting from PlaybackUrl
                     if not playbackId:
                         playbackUrl = session.get('videoUrl')

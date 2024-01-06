@@ -31,5 +31,6 @@ export interface WatchPageProps {
   searchParams: {
     event: string
     session: string
+    assetId: string
   }
 }
