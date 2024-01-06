@@ -14,7 +14,7 @@ const StageSchema = new Schema<IStage>(
       },
     ],
     order: { type: Number, default: 0 },
-    slug: { type: String, default: '', required:true },
+    slug: { type: String, default: '' },
   },
   {
     timestamps: true,
