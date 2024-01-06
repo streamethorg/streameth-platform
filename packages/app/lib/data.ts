@@ -52,7 +52,7 @@ export async function fetchEvent({
   organization,
 }: {
   event: string
-  organization: string
+  organization?: string
 }): Promise<IEvent> {
   try {
     const eventController = new EventController()
