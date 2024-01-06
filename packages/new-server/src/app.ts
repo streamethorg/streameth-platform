@@ -76,9 +76,7 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
-    this.app.use((req,res,next) => {
-      next(createError(404))
-    })
+
   }
 
   private initializeRoutes(routes: Routes[]) {
@@ -89,14 +87,15 @@ class App {
 
   private initializeSwagger() {
     const options = {
+      openapi: '3.0.0',
       swaggerDefinition: {
         info: {
           title: 'REST API',
           version: '1.0.0',
-          description: 'Example docs',
+          description: 'Streameth Backend',
         },
       },
-      apis: ['swagger.yaml'],
+      apis: ['./routes/*.ts'],
     };
 
     const specs = swaggerJSDoc(options);
@@ -104,7 +103,11 @@ class App {
   }
 
   private initializeErrorHandling() {
+    this.app.use((req, res, next) => {
+      next(createError(404));
+    });
     this.app.use(errorMiddleware);
+ 
   }
 }
 
