@@ -34,13 +34,26 @@ export default class FS<T> implements IStorageController<T> {
       path,
       updatedData.name.toLowerCase(),
     );
-    await this.write(filePath, JSON.stringify(updatedData, null, 2));
+
+    let slugPath = path.replace('/', '-');
+    await this.write(
+      filePath,
+      JSON.stringify(
+        {
+          ...updatedData,
+          slug: `${slugPath}-${updatedData.name.toLowerCase()}`,
+        },
+        null,
+        2,
+      ),
+    );
     return updatedData;
   }
 
-  async update(query: string, data: T, path: string): Promise<T> {
-    await this.delete(query, path);
-    return await this.create(query, data, path);
+  async update(query: string, data: T): Promise<T> {
+    const path = this.getPathAndId(query);
+    await this.delete(query);
+    return await this.create(query, data, path.path);
   }
 
   async findOne(query: { name: string }, path: string): Promise<any> {
@@ -52,8 +65,9 @@ export default class FS<T> implements IStorageController<T> {
     }
   }
 
-  async findById(query: string, path: string): Promise<T> {
-    const filePath = await this.getFilePath(path, query);
+  async findById(query: string): Promise<T> {
+    const path = this.getPathAndId(query);
+    const filePath = await this.getFilePath(path.path, path.id);
     try {
       if (fs.lstatSync(filePath).isDirectory()) {
         console.error(`${filePath} is a directory, not a file.`);
@@ -127,12 +141,13 @@ export default class FS<T> implements IStorageController<T> {
     }
   }
 
-  async delete(id: string, path: string) {
+  async delete(id: string) {
+    const path = this.getPathAndId(id);
     try {
-      const filePath = await this.getFilePath(path, id);
+      const filePath = await this.getFilePath(path.path, path.id);
       await this.deleteFileAsync(filePath);
     } catch (e) {
-      console.error(`Failed to delete file at ${path}:`, e);
+      console.error(`Failed to delete file at ${path.path}:`, e);
     }
   }
 
@@ -164,6 +179,16 @@ export default class FS<T> implements IStorageController<T> {
       }
     });
     return target; // Return the modified target object
+  }
+
+  private getPathAndId(query: string): { id: string; path: string } {
+    const data = query.split('-');
+    const id = data.pop();
+    const queryPath = data.join('/');
+    return {
+      id: id,
+      path: `${queryPath}`,
+    };
   }
   private readFileAsync: (
     path: string,

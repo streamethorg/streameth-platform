@@ -8,7 +8,7 @@ export default class OrganizationService {
   private controller: BaseController<IOrganization>;
   constructor() {
     this.path = 'organizations';
-    this.controller = new BaseController<IOrganization>('fs', Organization);
+    this.controller = new BaseController<IOrganization>('db', Organization);
   }
   async create(data: IOrganization): Promise<IOrganization> {
     const findOrg = await this.controller.store.findOne(
@@ -22,18 +22,11 @@ export default class OrganizationService {
     organizationId: string,
     organization: IOrganization,
   ): Promise<IOrganization> {
-    return await this.controller.store.update(
-      organizationId,
-      organization,
-      this.path,
-    );
+    return await this.controller.store.update(organizationId, organization);
   }
 
   async get(organizationId: string): Promise<IOrganization> {
-    const findOrg = await this.controller.store.findById(
-      organizationId,
-      this.path,
-    );
+    const findOrg = await this.controller.store.findById(organizationId);
     if (!findOrg) throw new HttpException(404, 'Organization not found');
     return findOrg;
   }
@@ -44,6 +37,6 @@ export default class OrganizationService {
 
   async deleteOne(organizationId: string): Promise<void> {
     await this.get(organizationId);
-    return await this.controller.store.delete(organizationId, this.path);
+    return await this.controller.store.delete(organizationId);
   }
 }

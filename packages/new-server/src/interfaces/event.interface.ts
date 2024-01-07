@@ -41,4 +41,5 @@ export interface IEvent extends Document {
   dataExporter?: IDataExporter[];
   enableVideoDownloader?: boolean;
   plugins?: IPlugins;
+  slug: string;
 }
