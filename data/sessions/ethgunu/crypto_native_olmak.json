@@ -1,25 +1,25 @@
 {
-  "id": "crypto_native_olmak",
-  "name": "Crypto Native Olmak",
-  "description": "Coming Soon",
-  "start": 1699863300000,
-  "end": 1699865100000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "eril_gn_ezerel",
-      "name": "Eril Gün Ezerel",
-      "bio": "No description",
-      "eventId": "ethgunu",
-      "twitter": "",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/eril.jpeg?raw=true"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/96d7xsbo2uwysjap/index.m3u8",
-  "playbackId": "96d7xsbo2uwysjap",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/crypto_native_olmak_thumbnail.png",
-  "assetId": "96d7d5bc-1b4d-4f1a-805c-2b857d723fa7",
-  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-  "videoType": "clip"
+    "id": "crypto_native_olmak",
+    "name": "Crypto Native Olmak",
+    "description": "Coming Soon",
+    "start": 1699863300000,
+    "end": 1699865100000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "eril_gn_ezerel",
+            "name": "Eril G\u00fcn Ezerel",
+            "bio": "No description",
+            "eventId": "ethgunu",
+            "twitter": "",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/eril.jpeg?raw=true"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/96d7xsbo2uwysjap/index.m3u8",
+    "playbackId": "96d7xsbo2uwysjap",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/crypto_native_olmak_thumbnail.png",
+    "assetId": "96d7d5bc-1b4d-4f1a-805c-2b857d723fa7",
+    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+    "videoType": "clip"
 }

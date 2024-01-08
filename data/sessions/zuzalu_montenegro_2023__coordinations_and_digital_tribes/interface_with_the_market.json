@@ -1,1 +1,27 @@
-{"id":"interface_with_the_market","name":"Interface with the Market","description":"","start":1684224900000,"end":1684225800000,"stageId":"dome","speakers":[{"id":"rob_knight","name":"Rob Knight","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"},{"id":"holke_brammer","name":"Holke Brammer","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/ce3f6n7ukzrjrvsj/index.m3u8","playbackId":"ce3f6n7ukzrjrvsj","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/interface_with_the_market.jpg"}
+{
+    "id": "interface_with_the_market",
+    "name": "Interface with the Market",
+    "description": "",
+    "start": 1684224900000,
+    "end": 1684225800000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "rob_knight",
+            "name": "Rob Knight",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "holke_brammer",
+            "name": "Holke Brammer",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/ce3f6n7ukzrjrvsj/index.m3u8",
+    "playbackId": "ce3f6n7ukzrjrvsj",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/interface_with_the_market.jpg",
+    "assetId": "ce3f5f8a-42c3-4e67-a0eb-d2079ea90a53"
+}

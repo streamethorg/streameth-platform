@@ -1,29 +1,29 @@
 {
-  "id": "discreetly",
-  "name": "Discreetly",
-  "description": "",
-  "start": 1699265700000,
-  "end": 1699266600000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "althea_allen",
-      "name": "Althea Allen \n",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    },
-    {
-      "id": "atheartengineer",
-      "name": "AtHeartEngineer",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/ab5fwrdgkm8wsinc/index.m3u8",
-  "playbackId": "7ffarpuppbhs0y0h",
-  "eventId": "zuconnect__zk_track",
-  "coverImage": "/sessions/zuconnect__zk_track/discreetly.jpg",
-  "assetId": "7ffac9a0-3e25-4a6d-95c5-33496cf87308",
-  "sourceId": "642c56f4-3bbf-42b6-bd4d-b38a58528adf",
-  "videoType": "clip"
+    "id": "discreetly",
+    "name": "Discreetly",
+    "description": "",
+    "start": 1699265700000,
+    "end": 1699266600000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "althea_allen",
+            "name": "Althea Allen \n",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        },
+        {
+            "id": "atheartengineer",
+            "name": "AtHeartEngineer",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/ab5fwrdgkm8wsinc/index.m3u8",
+    "playbackId": "7ffarpuppbhs0y0h",
+    "eventId": "zuconnect__zk_track",
+    "coverImage": "/sessions/zuconnect__zk_track/discreetly.jpg",
+    "assetId": "7ffac9a0-3e25-4a6d-95c5-33496cf87308",
+    "sourceId": "642c56f4-3bbf-42b6-bd4d-b38a58528adf",
+    "videoType": "clip"
 }

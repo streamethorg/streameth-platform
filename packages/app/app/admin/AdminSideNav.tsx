@@ -1,13 +1,10 @@
 'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import HomeIcon from '../../components/icons/HomeIcon'
-import EventIcon from '../../components/icons/EventIcon'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAccount, useEnsName } from 'wagmi'
 import { truncateAddr } from '@/lib/utils'
-import MediaIcon from '../../components/icons/MediaIcon'
 import makeBlockie from 'ethereum-blockies-base64'
 import {
   ArrowLeftIcon,
@@ -20,12 +17,10 @@ const ADMIN_MENU = [
   {
     id: '/',
     name: 'Home',
-    Icon: HomeIcon,
   },
   {
     id: '/admin',
     name: 'My organizations',
-    Icon: EventIcon,
   },
   {
     id: '/admin/monitor',
@@ -40,7 +35,6 @@ const ADMIN_MENU = [
   {
     id: '/admin/studio',
     name: 'Studio',
-    Icon: MediaIcon,
   },
 ]
 
@@ -91,10 +85,10 @@ const AdminSideNav = () => {
               } hover:bg-white hover:outline-1 hover:drop-shadow-card  ${
                 isCollapsed ? 'hover:w-fit' : 'hover:w-[190px]'
               }`}>
-              <Icon
+              {/* <Icon
                 width={isCollapsed ? '24' : '19'}
                 height={isCollapsed ? '24' : '19'}
-              />
+              /> */}
               {!isCollapsed && <p>{name}</p>}
             </Link>
           ))}

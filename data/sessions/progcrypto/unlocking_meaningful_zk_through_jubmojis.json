@@ -1,26 +1,26 @@
 {
-  "id": "unlocking_meaningful_zk_through_jubmojis",
-  "name": "Unlocking meaningful ZK through Jubmojis",
-  "description": "This talk will be a consumer-app focused overview of ZK technologies, carefully analyzing its affordances in the real world and how we can unlock its full potential. We will then look at these affordances through the lens of Jubmojis, a project that uses NFC cards to give people ZK-friendly data related to in-person interactions.",
-  "start": 1700128800000,
-  "end": 1700129700000,
-  "stageId": "marmara",
-  "speakers": [
-    {
-      "id": "vivek",
-      "name": "Vivek",
-      "bio": "Vivek is a cryptography researcher and designer building cryptographic applications that can be used by anyone, regardless of background.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1VHGisViHJGW0-J9aPTavaOgzUauc29R_/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/5477f4q3rbuyuqqr/index.m3u8",
-  "playbackId": "5477f4q3rbuyuqqr",
-  "eventId": "progcrypto",
-  "track": "Cryptography in the Wild",
-  "coverImage": "/sessions/progcrypto/unlocking_meaningful_zk_through_jubmojis_thumbnail.png",
-  "assetId": "5477c9aa-b488-4b2e-8062-8b852484da7b",
-  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
-  "videoType": "clip"
+    "id": "unlocking_meaningful_zk_through_jubmojis",
+    "name": "Unlocking meaningful ZK through Jubmojis",
+    "description": "This talk will be a consumer-app focused overview of ZK technologies, carefully analyzing its affordances in the real world and how we can unlock its full potential. We will then look at these affordances through the lens of Jubmojis, a project that uses NFC cards to give people ZK-friendly data related to in-person interactions.",
+    "start": 1700128800000,
+    "end": 1700129700000,
+    "stageId": "marmara",
+    "speakers": [
+        {
+            "id": "vivek",
+            "name": "Vivek",
+            "bio": "Vivek is a cryptography researcher and designer building cryptographic applications that can be used by anyone, regardless of background.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1VHGisViHJGW0-J9aPTavaOgzUauc29R_/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5477f4q3rbuyuqqr/index.m3u8",
+    "playbackId": "5477f4q3rbuyuqqr",
+    "eventId": "progcrypto",
+    "track": "Cryptography in the Wild",
+    "coverImage": "/sessions/progcrypto/unlocking_meaningful_zk_through_jubmojis_thumbnail.png",
+    "assetId": "5477c9aa-b488-4b2e-8062-8b852484da7b",
+    "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+    "videoType": "clip"
 }

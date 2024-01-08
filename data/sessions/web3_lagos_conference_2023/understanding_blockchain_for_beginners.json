@@ -1,1 +1,19 @@
-{"id":"understanding_blockchain_for_beginners","name":"Understanding Blockchain for Beginners","description":"","start":1693474200000,"end":1693476900000,"stageId":"workshop_room_1","speakers":[{"id":"hezekiah_suleman","name":"Hezekiah Suleman","bio":"Business Developer & DeFi expert","eventId":"web3_lagos_conference_2023"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/understanding_blockchain_for_beginners.jpg"}
+{
+  "id": "understanding_blockchain_for_beginners",
+  "name": "Understanding Blockchain for Beginners",
+  "description": "",
+  "start": 1693474200000,
+  "end": 1693476900000,
+  "stageId": "workshop_room_1",
+  "speakers": [
+    {
+      "id": "hezekiah_suleman",
+      "name": "Hezekiah Suleman",
+      "bio": "Business Developer & DeFi expert",
+      "eventId": "web3_lagos_conference_2023"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/understanding_blockchain_for_beginners.jpg"
+}

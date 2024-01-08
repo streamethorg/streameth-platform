@@ -1,20 +1,21 @@
 {
-  "id": "opening_remarks",
-  "name": "Opening Remarks",
-  "description": "",
-  "start": 1698686100000,
-  "end": 1698687300000,
-  "stageId": "3rd_floor",
-  "speakers": [
-    {
-      "id": "janine",
-      "name": "Janine",
-      "bio": "No description",
-      "eventId": "zuconnect_istanbul"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/0294w9be36fgox9l/index.m3u8",
-  "eventId": "zuconnect_istanbul",
-  "coverImage": "/sessions/zuconnect_istanbul/opening_remarks.jpg"
+    "id": "opening_remarks",
+    "name": "Opening Remarks",
+    "description": "",
+    "start": 1698686100000,
+    "end": 1698687300000,
+    "stageId": "3rd_floor",
+    "speakers": [
+        {
+            "id": "janine",
+            "name": "Janine",
+            "bio": "No description",
+            "eventId": "zuconnect_istanbul"
+        }
+    ],
+    "playbackId": "",
+    "videoUrl": "https://lp-playback.com/hls/0294w9be36fgox9l/index.m3u8",
+    "eventId": "zuconnect_istanbul",
+    "coverImage": "/sessions/zuconnect_istanbul/opening_remarks.jpg",
+    "assetId": "029442f6-1411-432e-a926-2b76f25a9d8e"
 }

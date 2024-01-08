@@ -20,9 +20,9 @@ interface Params {
   sessions?: ISession[]
 }
 
-const SpeakerModal = ({ event, sessions, speaker }: Params) => {
+const SpeakerModal = ({ speaker }: Params) => {
   return (
-    <CredenzaContent className="max-h-[70vh]">
+    <CredenzaContent>
       <CredenzaHeader>
         <CredenzaTitle>{speaker.name}</CredenzaTitle>
         <CredenzaDescription>
@@ -33,22 +33,7 @@ const SpeakerModal = ({ event, sessions, speaker }: Params) => {
           )}
         </CredenzaDescription>
       </CredenzaHeader>
-      <CredenzaBody>
-        {speaker.bio}
-        {sessions && (
-          <div className="flex flex-col text-lg bg-base p-4 rounded-xl space-y-4">
-            <p className="font-bold text-lg">Sessions</p>
-            {sessions?.map((session, index) => (
-              <ScheduleCard
-                key={session?.id}
-                event={event}
-                session={session}
-                showTime
-              />
-            ))}
-          </div>
-        )}
-      </CredenzaBody>
+      <CredenzaBody className="p-4">{speaker.bio}</CredenzaBody>
     </CredenzaContent>
   )
 }

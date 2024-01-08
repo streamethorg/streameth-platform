@@ -1,25 +1,25 @@
 {
-  "id": "rethinking_the_wallet_dapp_connection",
-  "name": "Rethinking the Wallet Dapp connection",
-  "description": "",
-  "start": 1700226000000,
-  "end": 1700226000000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "dan_finlay",
-      "name": "Dan Finlay",
-      "bio": "Dan Finlay has been facilitating MetaMask development since 2016. During that time he's developed a passion and vision for the future of secure distributed permissionless computing, and is bringing that vision to life through MetaMask.",
-      "eventId": "wallet_unconference",
-      "twitter": "@DanFinlay3",
-      "photo": "https://speak.ticketh.xyz/media/avatars/6c7f891f517b95fac7f1fec19620d8e0_8SgSk3i.jpg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/97defynepx328r4a/index.m3u8",
-  "playbackId": "97defynepx328r4a",
-  "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/rethinking_the_wallet_dapp_connection_thumbnail.png",
-  "assetId": "97decab5-9349-4098-beab-e25d2f0408f0",
-  "sourceId": "",
-  "videoType": "raw"
+    "id": "rethinking_the_wallet_dapp_connection",
+    "name": "Rethinking the Wallet Dapp connection",
+    "description": "",
+    "start": 1700226000000,
+    "end": 1700226000000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "dan_finlay",
+            "name": "Dan Finlay",
+            "bio": "Dan Finlay has been facilitating MetaMask development since 2016. During that time he's developed a passion and vision for the future of secure distributed permissionless computing, and is bringing that vision to life through MetaMask.",
+            "eventId": "wallet_unconference",
+            "twitter": "@DanFinlay3",
+            "photo": "https://speak.ticketh.xyz/media/avatars/6c7f891f517b95fac7f1fec19620d8e0_8SgSk3i.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/97defynepx328r4a/index.m3u8",
+    "playbackId": "97defynepx328r4a",
+    "eventId": "wallet_unconference",
+    "coverImage": "/sessions/wallet_unconference/rethinking_the_wallet_dapp_connection_thumbnail.png",
+    "assetId": "97decab5-9349-4098-beab-e25d2f0408f0",
+    "sourceId": "",
+    "videoType": "raw"
 }

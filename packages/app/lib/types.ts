@@ -19,3 +19,26 @@ export interface EventPageProps {
     date?: string
   }
 }
+export interface SearchPageProps {
+  searchParams: {
+    organization?: string
+    event?: string
+    searchQuery?: string
+    page?: string
+  }
+}
+
+export interface WatchPageProps {
+  searchParams: {
+    event: string
+    session: string
+    assetId: string
+  }
+}
+
+export interface IPagination {
+  currentPage: number
+  totalPages: number
+  totalItems: number
+  limit: number
+}

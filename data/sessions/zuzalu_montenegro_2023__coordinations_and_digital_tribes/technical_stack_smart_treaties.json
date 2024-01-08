@@ -1,1 +1,21 @@
-{"id":"technical_stack_smart_treaties","name":"Technical Stack: Smart Treaties","description":"","start":1684310400000,"end":1684312200000,"stageId":"dome","speakers":[{"id":"ori_shimony","name":"Ori Shimony","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/4836axllolvr63nb/index.m3u8","playbackId":"4836axllolvr63nb","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/technical_stack_smart_treaties.jpg"}
+{
+    "id": "technical_stack_smart_treaties",
+    "name": "Technical Stack: Smart Treaties",
+    "description": "",
+    "start": 1684310400000,
+    "end": 1684312200000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "ori_shimony",
+            "name": "Ori Shimony",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/4836axllolvr63nb/index.m3u8",
+    "playbackId": "4836axllolvr63nb",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/technical_stack_smart_treaties.jpg",
+    "assetId": "4836eb01-1b53-4c32-a91e-f65a0b5088f4"
+}

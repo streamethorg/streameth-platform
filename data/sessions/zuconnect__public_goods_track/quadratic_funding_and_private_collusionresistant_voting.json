@@ -1,20 +1,21 @@
 {
-  "id": "quadratic_funding_and_private_collusionresistant_voting",
-  "name": "Quadratic Funding and Private, Collusion-Resistant Voting",
-  "description": "TBD",
-  "start": 1699102800000,
-  "end": 1699104600000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "sam_richards",
-      "name": "Sam Richards",
-      "bio": "Ethereum Foundation ",
-      "eventId": "zuconnect__public_goods_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/aa70jlcqvb91mwtn/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect__public_goods_track",
-  "coverImage": "/sessions/zuconnect__public_goods_track/quadratic_funding_and_private_collusionresistant_voting.jpg"
+    "id": "quadratic_funding_and_private_collusionresistant_voting",
+    "name": "Quadratic Funding and Private, Collusion-Resistant Voting",
+    "description": "TBD",
+    "start": 1699102800000,
+    "end": 1699104600000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "sam_richards",
+            "name": "Sam Richards",
+            "bio": "Ethereum Foundation ",
+            "eventId": "zuconnect__public_goods_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/aa70jlcqvb91mwtn/index.m3u8",
+    "playbackId": "",
+    "eventId": "zuconnect__public_goods_track",
+    "coverImage": "/sessions/zuconnect__public_goods_track/quadratic_funding_and_private_collusionresistant_voting.jpg",
+    "assetId": "aa702f1d-9bc1-4f94-83d2-eb6a4935eaad"
 }

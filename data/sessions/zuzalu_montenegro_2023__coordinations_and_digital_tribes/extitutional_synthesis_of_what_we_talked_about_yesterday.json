@@ -1,1 +1,21 @@
-{"id":"extitutional_synthesis_of_what_we_talked_about_yesterday","name":"(Extitutional) Synthesis of what we talked about yesterday","description":"","start":1684290600000,"end":1684292400000,"stageId":"dome","speakers":[{"id":"primavera_de_filippi","name":"Primavera de Filippi","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/f2c23emqnh4e3ckn/index.m3u8","playbackId":"f2c23emqnh4e3ckn","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/extitutional_synthesis_of_what_we_talked_about_yesterday.jpg"}
+{
+    "id": "extitutional_synthesis_of_what_we_talked_about_yesterday",
+    "name": "(Extitutional) Synthesis of what we talked about yesterday",
+    "description": "",
+    "start": 1684290600000,
+    "end": 1684292400000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "primavera_de_filippi",
+            "name": "Primavera de Filippi",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f2c23emqnh4e3ckn/index.m3u8",
+    "playbackId": "f2c23emqnh4e3ckn",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/extitutional_synthesis_of_what_we_talked_about_yesterday.jpg",
+    "assetId": "f2c27d9e-b8f0-4628-bf5f-1fc53c5759f7"
+}

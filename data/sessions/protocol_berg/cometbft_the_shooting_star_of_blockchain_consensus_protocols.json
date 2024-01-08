@@ -1,21 +1,22 @@
 {
-  "id": "cometbft_the_shooting_star_of_blockchain_consensus_protocols",
-  "name": "CometBFT: The Shooting Star of Blockchain Consensus Protocols",
-  "description": "Ali will introduce CometBFT and discuss the unique features that set it apart from other blockchain protocols. You will find out why CometBFT is quickly becoming the preferred choice for decentralized applications and how it is addressing the scalability challenges in blockchain technology.\r\n\r\nDuring the presentation, Ali will take a deep dive into the technical details of CometBFT. You will learn about its code and architecture, and explore the cryptographic primitives that keep it secure. This part of the presentation will be especially interesting for developers and blockchain enthusiasts who want to understand the inner workings of CometBFT.\r\n\r\nFurthermore, Ali will discuss how CometBFT is contributing to the realization of decentralization in the blockchain industry. You will find out how CometBFT is enabling decentralized applications to thrive and empowering individuals to take control of their data and assets.\r\n\r\nFinally, Ali will also introduce ABCI++, its features, and its potential impact on the blockchain industry. This presentation is a must-attend for anyone interested in the latest advancements in blockchain technology.",
-  "start": 1694764800000,
-  "end": 1694767200000,
-  "stageId": "loft__workshop_0",
-  "speakers": [
-    {
-      "id": "aliasgar_merchant",
-      "name": "Aliasgar Merchant",
-      "bio": "Aliasgar a Blockchain aficionado, has over five years of experience in the field of web3. He first dipped his toes into the blockchain world in 2017 with Ethereum smart contract development, before moving to the cosmos ecosystem in 2019.\r\n\r\nCurrently, Aliasgar's serving as a Developer Relations Engineer at Informal Systems, where he works on CometBFT, a fork of the Tendermint consensus algorithm that powers Cosmos SDK and other Cosmos Blockchain networks.\r\n\r\nAs a developer who's worked with leading blockchain projects like Sifchain, Tendermint Inc, and Akash, Aliasgar has proven himself to be a true Cosmos cowboy. \r\n\r\nIn his current role, Aliasgar focuses on building relationships with fellow developers, community leaders, and businesses to help drive the adoption of CometBFT and the Cosmos ecosystem. With his passion for emerging technologies and deep understanding of the blockchain landscape, he's constantly pushing the limits of what's possible in this exciting field.\r\n\r\nIn short, if you're looking to explore the blockchain universe and boldly go where no developer has gone before, Aliasgar is your guy. Connect with him today and join forces to create innovative solutions that will shape the future of the blockchain galaxy.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/aliasgar_oRuVBDf.jpeg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/3f07x2eirkibzaq6/index.m3u8",
-  "playbackId": "",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/cometbft_the_shooting_star_of_blockchain_consensus_protocols.jpg"
+    "id": "cometbft_the_shooting_star_of_blockchain_consensus_protocols",
+    "name": "CometBFT: The Shooting Star of Blockchain Consensus Protocols",
+    "description": "Ali will introduce CometBFT and discuss the unique features that set it apart from other blockchain protocols. You will find out why CometBFT is quickly becoming the preferred choice for decentralized applications and how it is addressing the scalability challenges in blockchain technology.\r\n\r\nDuring the presentation, Ali will take a deep dive into the technical details of CometBFT. You will learn about its code and architecture, and explore the cryptographic primitives that keep it secure. This part of the presentation will be especially interesting for developers and blockchain enthusiasts who want to understand the inner workings of CometBFT.\r\n\r\nFurthermore, Ali will discuss how CometBFT is contributing to the realization of decentralization in the blockchain industry. You will find out how CometBFT is enabling decentralized applications to thrive and empowering individuals to take control of their data and assets.\r\n\r\nFinally, Ali will also introduce ABCI++, its features, and its potential impact on the blockchain industry. This presentation is a must-attend for anyone interested in the latest advancements in blockchain technology.",
+    "start": 1694764800000,
+    "end": 1694767200000,
+    "stageId": "loft__workshop_0",
+    "speakers": [
+        {
+            "id": "aliasgar_merchant",
+            "name": "Aliasgar Merchant",
+            "bio": "Aliasgar a Blockchain aficionado, has over five years of experience in the field of web3. He first dipped his toes into the blockchain world in 2017 with Ethereum smart contract development, before moving to the cosmos ecosystem in 2019.\r\n\r\nCurrently, Aliasgar's serving as a Developer Relations Engineer at Informal Systems, where he works on CometBFT, a fork of the Tendermint consensus algorithm that powers Cosmos SDK and other Cosmos Blockchain networks.\r\n\r\nAs a developer who's worked with leading blockchain projects like Sifchain, Tendermint Inc, and Akash, Aliasgar has proven himself to be a true Cosmos cowboy. \r\n\r\nIn his current role, Aliasgar focuses on building relationships with fellow developers, community leaders, and businesses to help drive the adoption of CometBFT and the Cosmos ecosystem. With his passion for emerging technologies and deep understanding of the blockchain landscape, he's constantly pushing the limits of what's possible in this exciting field.\r\n\r\nIn short, if you're looking to explore the blockchain universe and boldly go where no developer has gone before, Aliasgar is your guy. Connect with him today and join forces to create innovative solutions that will shape the future of the blockchain galaxy.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/aliasgar_oRuVBDf.jpeg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/3f07x2eirkibzaq6/index.m3u8",
+    "playbackId": "",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/cometbft_the_shooting_star_of_blockchain_consensus_protocols.jpg",
+    "assetId": "3f07c1a9-2819-493f-abf5-c47f4bccb208"
 }

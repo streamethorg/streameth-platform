@@ -8,26 +8,33 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { IEvent } from 'streameth-server/model/event'
 import { getImageUrl } from '@/lib/utils'
 import { fetchEvents } from '@/lib/data'
+import { IOrganization } from 'streameth-server/model/organization'
 
-const UpcomingEvents = async () => {
+const UpcomingEvents = async ({
+  date,
+  organization,
+}: {
+  date?: Date
+  organization?: IOrganization['id']
+}) => {
   const events = await fetchEvents({
-    date: new Date(),
+    date,
+    organizationId: organization,
   })
 
-  if (!events) return null
+  if (events.length === 0) return null
 
   return (
-    <Card className="max-w-screen ">
+    <Card className="max-w-screen border-none bg-white">
       <CardHeader>
-        <CardTitle>Upcoming Events</CardTitle>
+        <CardTitle className="text-background ">Events</CardTitle>
         <CardDescription>
-          Check out the upcoming events on Streameth!
+          Explore current and past events
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-row overflow-x-scroll space-x-4">
+      <CardContent className="flex flex-row overflow-x-scroll space-x-4 ">
         {events.map(
           (
             {
@@ -43,7 +50,7 @@ const UpcomingEvents = async () => {
           ) => (
             <Link key={index} href={`/${organizationId}/${id}`}>
               <Card
-                className="p-2 w-96 h-full border-none"
+                className="p-2 w-72 h-full border-none"
                 style={{
                   backgroundColor: accentColor,
                 }}>
@@ -61,15 +68,15 @@ const UpcomingEvents = async () => {
                     />
                   </div>
                   <CardHeader className="bg-background rounded mt-1">
-                    <CardTitle className="truncate text-xl">
+                    <CardTitle className="truncate text-sm">
                       {name}
                     </CardTitle>
                     <CardDescription>
                       {start.toDateString()}
-                      {new Date(start).toDateString() !==
+                      {/* {new Date(start).toDateString() !==
                       new Date(end).toDateString()
                         ? ` - ${new Date(end).toDateString()}`
-                        : ''}
+                        : ''} */}
                     </CardDescription>
                   </CardHeader>
                 </div>

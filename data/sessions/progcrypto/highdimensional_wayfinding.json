@@ -1,26 +1,26 @@
 {
-  "id": "highdimensional_wayfinding",
-  "name": "Thinking as Receiving",
-  "description": "TBD",
-  "start": 1700218800000,
-  "end": 1700220600000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "nicholas_paul_brysiewicz",
-      "name": "Nicholas Paul Brysiewicz",
-      "bio": "Nicholas has a background in systems engineering and philosophy and has spent most of the last decade helping direct The Long Now Foundation, a nonprofit that fosters long-term thinking in the framework of 10,000 years. His untitled new project focuses on the 'thinking' part of 'long-term thinking'.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1CEPTM4O8-7ZA6cg2TN5bMwf7bAloGjNB/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/c05e3gevmslnqbpq/index.m3u8",
-  "playbackId": "c05e3gevmslnqbpq",
-  "eventId": "progcrypto",
-  "track": "Cryptography and Society",
-  "coverImage": "/sessions/progcrypto/highdimensional_wayfinding_thumbnail.png",
-  "assetId": "a77922e6-e7bd-4f3f-ae85-d940c66a6c8c",
-  "sourceId": "17264d1b-22cb-4510-a583-837293741512",
-  "videoType": "clip"
+    "id": "highdimensional_wayfinding",
+    "name": "Thinking as Receiving",
+    "description": "TBD",
+    "start": 1700218800000,
+    "end": 1700220600000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "nicholas_paul_brysiewicz",
+            "name": "Nicholas Paul Brysiewicz",
+            "bio": "Nicholas has a background in systems engineering and philosophy and has spent most of the last decade helping direct The Long Now Foundation, a nonprofit that fosters long-term thinking in the framework of 10,000 years. His untitled new project focuses on the 'thinking' part of 'long-term thinking'.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1CEPTM4O8-7ZA6cg2TN5bMwf7bAloGjNB/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/c05e3gevmslnqbpq/index.m3u8",
+    "playbackId": "c05e3gevmslnqbpq",
+    "eventId": "progcrypto",
+    "track": "Cryptography and Society",
+    "coverImage": "/sessions/progcrypto/highdimensional_wayfinding_thumbnail.png",
+    "assetId": "c05ee575-80b0-427f-b5da-8f91aae66a0c",
+    "sourceId": "17264d1b-22cb-4510-a583-837293741512",
+    "videoType": "clip"
 }

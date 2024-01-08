@@ -1,32 +1,33 @@
 {
-  "id": "zupass",
-  "name": "Zupass ",
-  "description": "We'll discuss Zupass, a tool developed at Zuzalu for managing cryptographic data with ZKPs.",
-  "start": 1699267500000,
-  "end": 1699268400000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "althea_allen",
-      "name": "Althea Allen \n",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    },
-    {
-      "id": "brian_gu",
-      "name": "Brian Gu",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    },
-    {
-      "id": "ivan_chub",
-      "name": "Ivan Chub",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/12ef9fxkbc8tplr1/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect__zk_track",
-  "coverImage": "/sessions/zuconnect__zk_track/zupass.jpg"
+    "id": "zupass",
+    "name": "Zupass ",
+    "description": "We'll discuss Zupass, a tool developed at Zuzalu for managing cryptographic data with ZKPs.",
+    "start": 1699267500000,
+    "end": 1699268400000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "althea_allen",
+            "name": "Althea Allen \n",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        },
+        {
+            "id": "brian_gu",
+            "name": "Brian Gu",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        },
+        {
+            "id": "ivan_chub",
+            "name": "Ivan Chub",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/12ef9fxkbc8tplr1/index.m3u8",
+    "playbackId": "",
+    "eventId": "zuconnect__zk_track",
+    "coverImage": "/sessions/zuconnect__zk_track/zupass.jpg",
+    "assetId": "12ef2445-89e2-437a-9b65-bcd5bcd05207"
 }

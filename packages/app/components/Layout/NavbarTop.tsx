@@ -43,7 +43,6 @@ export default function NavbarTop({
   if (!showNav) {
     return null
   }
-  console.log(getImageUrl(logo))
   return (
     <NavigationMenu className="z-[99999999] bg-accent sticky top-0">
       <div className="flex p-2 px-2 md:px-4 w-full">

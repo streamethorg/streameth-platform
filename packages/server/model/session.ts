@@ -31,6 +31,7 @@ export interface ISession {
   playback?: IPlayback;
   videoUrl?: string;
   playbackId?: string;
+  assetId?: string;
   eventId: IEvent["id"];
   track?: string[];
   coverImage?: string;
@@ -63,7 +64,7 @@ export default class Session implements ISession {
   videoUrl?: string;
 
   playbackId?: string;
-
+  assetId?: string;
   @IsNotEmpty()
   eventId: IEvent["id"];
 
@@ -82,6 +83,7 @@ export default class Session implements ISession {
     videoUrl,
     eventId,
     track,
+    assetId,
     coverImage,
   }: Omit<ISession, "id"> & { id?: string }) {
     this.id = generateId(name);
@@ -96,6 +98,7 @@ export default class Session implements ISession {
     this.playbackId = this.getPlaybackId();
     this.eventId = eventId;
     this.track = track;
+    this.assetId = assetId;
     this.coverImage =
       coverImage ?? "/sessions/" + this.eventId + "/" + this.id + ".jpg";
     this.validateThis();

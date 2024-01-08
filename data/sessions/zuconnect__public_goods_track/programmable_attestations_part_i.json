@@ -1,38 +1,39 @@
 {
-  "id": "programmable_attestations_part_i",
-  "name": "Programmable Attestations Part I",
-  "description": "Present perspectives and context on the following elements of programmable attestation\n\n• Web of trust\n\n• Privacy preserving attestations in social network\n\n• Conservation/philanthropic engagement\n\n• Decentralisation of knowledge base\n\n• Proof of presence/participation",
-  "start": 1699087500000,
-  "end": 1699091100000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "beth_mccarthy",
-      "name": "Beth McCarthy",
-      "bio": "Funding The Commons",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "jesse_katz",
-      "name": "\nJesse Katz",
-      "bio": "Maitri Network",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "cait_chizmar",
-      "name": "Cait Chizmar",
-      "bio": "Maitri Network",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "manu_alzuru",
-      "name": "Manu Alzuru",
-      "bio": "DoinGud, Blockravers",
-      "eventId": "zuconnect__public_goods_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/70c57201ibwh4o02/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect__public_goods_track",
-  "coverImage": "/sessions/zuconnect__public_goods_track/programmable_attestations_part_i.jpg"
+    "id": "programmable_attestations_part_i",
+    "name": "Programmable Attestations Part I",
+    "description": "Present perspectives and context on the following elements of programmable attestation\n\n\u2022 Web of trust\n\n\u2022 Privacy preserving attestations in social network\n\n\u2022 Conservation/philanthropic engagement\n\n\u2022 Decentralisation of knowledge base\n\n\u2022 Proof of presence/participation",
+    "start": 1699087500000,
+    "end": 1699091100000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "beth_mccarthy",
+            "name": "Beth McCarthy",
+            "bio": "Funding The Commons",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "jesse_katz",
+            "name": "\nJesse Katz",
+            "bio": "Maitri Network",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "cait_chizmar",
+            "name": "Cait Chizmar",
+            "bio": "Maitri Network",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "manu_alzuru",
+            "name": "Manu Alzuru",
+            "bio": "DoinGud, Blockravers",
+            "eventId": "zuconnect__public_goods_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/70c57201ibwh4o02/index.m3u8",
+    "playbackId": "",
+    "eventId": "zuconnect__public_goods_track",
+    "coverImage": "/sessions/zuconnect__public_goods_track/programmable_attestations_part_i.jpg",
+    "assetId": "70c5a0c5-5b2b-478b-bd95-9d9db95edf92"
 }

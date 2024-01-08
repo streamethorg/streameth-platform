@@ -13,7 +13,7 @@ import SiweContext from './SiweContext'
 const GeneralContext = ({
   children,
 }: {
-  children: React.ReactNode
+  children: any
 }) => {
   const livepeerClient = useMemo(
     () =>

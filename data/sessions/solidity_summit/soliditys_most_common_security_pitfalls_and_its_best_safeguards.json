@@ -1,25 +1,25 @@
 {
-  "id": "soliditys_most_common_security_pitfalls_and_its_best_safeguards",
-  "name": "Solidity's most common security pitfalls (and its best safeguards)",
-  "description": "There are many common smart contract vulnerabilities that are found in audits or in hacks in the wild. The purpose of this talk is to showcase the most common vulnerabilities that are due to specificities and pitfalls of the actual Solidity language. This would be generally the results of a research study made on the language vulnerabilities found in audits (Solodit-based) and post audits (hacks and Immunefi report database). Some great language design decisions from a security perspective could also be presented.",
-  "start": 1700130300000,
-  "end": 1700132100000,
-  "stageId": "uskudar_2",
-  "speakers": [
-    {
-      "id": "gmhacker",
-      "name": "gmhacker",
-      "bio": "GMHacker is an aerospace engineer who worked on IoT and embedded systems, finances on a large European bank, and in the digital TV industry. He turned into smart contract development and education, and he's now working at Immunefi, Web3's largest bug bounty program, where he served as a smart contract vulnerabilities triager and is now leading the smart contract work.",
-      "eventId": "solidity_summit",
-      "twitter": "@realgmhacker",
-      "photo": "https://pbs.twimg.com/profile_images/1620698826519597057/_7pkNI7J_400x400.jpg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/18d9iyow4ozzhrcy/index.m3u8",
-  "playbackId": "18d9iyow4ozzhrcy",
-  "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/soliditys_most_common_security_pitfalls_and_its_best_safeguards_thumbnail.png",
-  "assetId": "18d9dfee-f56f-4a66-bacc-54fc735864dd",
-  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-  "videoType": "clip"
+    "id": "soliditys_most_common_security_pitfalls_and_its_best_safeguards",
+    "name": "Solidity's most common security pitfalls (and its best safeguards)",
+    "description": "There are many common smart contract vulnerabilities that are found in audits or in hacks in the wild. The purpose of this talk is to showcase the most common vulnerabilities that are due to specificities and pitfalls of the actual Solidity language. This would be generally the results of a research study made on the language vulnerabilities found in audits (Solodit-based) and post audits (hacks and Immunefi report database). Some great language design decisions from a security perspective could also be presented.",
+    "start": 1700130300000,
+    "end": 1700132100000,
+    "stageId": "uskudar_2",
+    "speakers": [
+        {
+            "id": "gmhacker",
+            "name": "gmhacker",
+            "bio": "GMHacker is an aerospace engineer who worked on IoT and embedded systems, finances on a large European bank, and in the digital TV industry. He turned into smart contract development and education, and he's now working at Immunefi, Web3's largest bug bounty program, where he served as a smart contract vulnerabilities triager and is now leading the smart contract work.",
+            "eventId": "solidity_summit",
+            "twitter": "@realgmhacker",
+            "photo": "https://pbs.twimg.com/profile_images/1620698826519597057/_7pkNI7J_400x400.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/18d9iyow4ozzhrcy/index.m3u8",
+    "playbackId": "18d9iyow4ozzhrcy",
+    "eventId": "solidity_summit",
+    "coverImage": "/sessions/solidity_summit/soliditys_most_common_security_pitfalls_and_its_best_safeguards_thumbnail.png",
+    "assetId": "18d9dfee-f56f-4a66-bacc-54fc735864dd",
+    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+    "videoType": "clip"
 }

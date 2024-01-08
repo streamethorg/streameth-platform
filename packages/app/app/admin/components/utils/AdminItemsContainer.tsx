@@ -1,5 +1,4 @@
 'use client'
-import ArrowRightIcon from '@/components/icons/ArrowRightIcon'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 
 interface ItemsContainerProps {
@@ -63,16 +62,12 @@ const AdminItemsContainer = ({ children }: ItemsContainerProps) => {
       {isScrolledToRight && (
         <div
           onClick={handleScrollLeft}
-          className="absolute bg-gradient-to-l from-white cursor-pointer translate-y-[-50%] top-1/2 left-0 rotate-180 flex items-center justify-end w-[185px] h-[185px] p-2">
-          <ArrowRightIcon />
-        </div>
+          className="absolute bg-gradient-to-l from-white cursor-pointer translate-y-[-50%] top-1/2 left-0 rotate-180 flex items-center justify-end w-[185px] h-[185px] p-2"></div>
       )}
 
       <div
         onClick={handleScrollRight}
-        className="absolute bg-gradient-to-l from-white cursor-pointer translate-y-[-50%] top-1/2 right-0 w-[185px] h-[185px] flex items-center justify-end p-2">
-        <ArrowRightIcon />
-      </div>
+        className="absolute bg-gradient-to-l from-white cursor-pointer translate-y-[-50%] top-1/2 right-0 w-[185px] h-[185px] flex items-center justify-end p-2"></div>
     </div>
   )
 }

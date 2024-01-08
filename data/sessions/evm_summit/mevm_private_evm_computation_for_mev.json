@@ -1,25 +1,25 @@
 {
-  "id": "mevm_private_evm_computation_for_mev",
-  "name": "MEVM: Private EVM Computation for MEV",
-  "description": "In this talk we go over SUAVE's use of a modified EVM, the MEVM, to perform private computation on a network of SGX nodes using modified precompiles. These MEV specific precompiles use WASM and can trigger computation on other domains as well as route information on the SUAVE network.",
-  "start": 1699957800000,
-  "end": 1699958700000,
-  "stageId": "emirgan_1",
-  "speakers": [
-    {
-      "id": "daniel_marzec_dmarz",
-      "name": "Daniel Marzec (dmarz)",
-      "bio": "SUAVE Protocol R&D",
-      "eventId": "evm_summit",
-      "twitter": "",
-      "photo": "https://evmsummit.org/images/speakers/daniel_marzec.jpg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/342ev3i2p3q9eyqy/index.m3u8",
-  "playbackId": "342ev3i2p3q9eyqy",
-  "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/mevm_private_evm_computation_for_mev_thumbnail.png",
-  "assetId": "342ecdd4-234c-4d1a-83ff-431a7c22ea2e",
-  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
-  "videoType": "clip"
+    "id": "mevm_private_evm_computation_for_mev",
+    "name": "MEVM: Private EVM Computation for MEV",
+    "description": "In this talk we go over SUAVE's use of a modified EVM, the MEVM, to perform private computation on a network of SGX nodes using modified precompiles. These MEV specific precompiles use WASM and can trigger computation on other domains as well as route information on the SUAVE network.",
+    "start": 1699957800000,
+    "end": 1699958700000,
+    "stageId": "emirgan_1",
+    "speakers": [
+        {
+            "id": "daniel_marzec_dmarz",
+            "name": "Daniel Marzec (dmarz)",
+            "bio": "SUAVE Protocol R&D",
+            "eventId": "evm_summit",
+            "twitter": "",
+            "photo": "https://evmsummit.org/images/speakers/daniel_marzec.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/342ev3i2p3q9eyqy/index.m3u8",
+    "playbackId": "342ev3i2p3q9eyqy",
+    "eventId": "evm_summit",
+    "coverImage": "/sessions/evm_summit/mevm_private_evm_computation_for_mev_thumbnail.png",
+    "assetId": "342ecdd4-234c-4d1a-83ff-431a7c22ea2e",
+    "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+    "videoType": "clip"
 }

@@ -1,25 +1,25 @@
 {
-  "id": "a_unified_framework_for_formal_verification_of_vyper_bytecode_using_halmos",
-  "name": "A Unified Framework for Formal Verification of Vyper Bytecode using Halmos",
-  "description": "",
-  "start": 1699884120000,
-  "end": 1699885080000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "lucas_goiriz",
-      "name": "Lucas\nGoiriz ",
-      "bio": "Scientific Researcher, CSIC JSR, Spearbit",
-      "eventId": "secureum_trustx",
-      "twitter": "@Cryptonicle1",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Lucas.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/7cd9n116kh9r6wih/index.m3u8",
-  "playbackId": "7cd9n116kh9r6wih",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/a_unified_framework_for_formal_verification_of_vyper_bytecode_using_halmos.jpg",
-  "assetId": "7cd958e2-a81b-45b6-a6a2-99e05d57c62f",
-  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-  "videoType": "clip"
+    "id": "a_unified_framework_for_formal_verification_of_vyper_bytecode_using_halmos",
+    "name": "A Unified Framework for Formal Verification of Vyper Bytecode using Halmos",
+    "description": "",
+    "start": 1699884120000,
+    "end": 1699885080000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "lucas_goiriz",
+            "name": "Lucas\nGoiriz ",
+            "bio": "Scientific Researcher, CSIC JSR, Spearbit",
+            "eventId": "secureum_trustx",
+            "twitter": "@Cryptonicle1",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Lucas.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/7cd9n116kh9r6wih/index.m3u8",
+    "playbackId": "7cd9n116kh9r6wih",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/a_unified_framework_for_formal_verification_of_vyper_bytecode_using_halmos.jpg",
+    "assetId": "7cd958e2-a81b-45b6-a6a2-99e05d57c62f",
+    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+    "videoType": "clip"
 }

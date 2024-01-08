@@ -9,7 +9,6 @@ import {
   Dm3Widget,
 } from 'dm3-billboard-widget'
 import { ethers } from 'ethersv5'
-import { StageContext } from '../../../app/[organization]/[event]/stage/components/StageContext'
 import { useDm3Siwe } from './useDm3Siwe'
 import { ConnectKitButton } from 'connectkit'
 import { InjectedConnector } from 'wagmi/connectors/injected'
@@ -34,7 +33,6 @@ export const Dm3 = () => {
     connector: new InjectedConnector(),
   })
   const publicClient = usePublicClient()
-  const context = useContext(StageContext)
   const { connect } = useConnect()
   const { signInWithEthereum, siweMessage, siweSig } = useDm3Siwe(
     address!
@@ -52,8 +50,8 @@ export const Dm3 = () => {
     return {
       mockedApi: false,
       billboardId: getBillboardId(
-        context?.stage.eventId!,
-        context?.stage.id!
+        'context?.stage.eventId!,',
+        'context?.stage.id'!
       ),
       billboardClientUrl: ' https://devconnect.dm3.network/bb-client',
       deliveryServiceEnsName: 'bb-ds.devconnect.dm3.eth',
@@ -65,8 +63,8 @@ export const Dm3 = () => {
       siweSig: siweSig ?? '',
     }
   }, [
-    context?.stage.eventId,
-    context?.stage.id,
+    'context?.stage.eventId',
+    'context?.stage.id',
     address,
     siweMessage,
     siweSig,

@@ -1,25 +1,25 @@
 {
-  "id": "scared_security_dont_make_no_security",
-  "name": "Scared Security Don’t Make No Security",
-  "description": "",
-  "start": 1699888500000,
-  "end": 1699889460000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "george_kobakhidze",
-      "name": "George\nKobakhidze",
-      "bio": "Security Auditor\nConsenSys Diligence",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/George.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/5a75b6m7cg2efdmk/index.m3u8",
-  "playbackId": "5a75b6m7cg2efdmk",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/scared_security_dont_make_no_security.jpg",
-  "assetId": "5a75da7c-a171-4ffd-a32a-ef1e5253fb1a",
-  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-  "videoType": "clip"
+    "id": "scared_security_dont_make_no_security",
+    "name": "Scared Security Don\u2019t Make No Security",
+    "description": "",
+    "start": 1699888500000,
+    "end": 1699889460000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "george_kobakhidze",
+            "name": "George\nKobakhidze",
+            "bio": "Security Auditor\nConsenSys Diligence",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/George.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5a75b6m7cg2efdmk/index.m3u8",
+    "playbackId": "5a75b6m7cg2efdmk",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/scared_security_dont_make_no_security.jpg",
+    "assetId": "5a75da7c-a171-4ffd-a32a-ef1e5253fb1a",
+    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+    "videoType": "clip"
 }

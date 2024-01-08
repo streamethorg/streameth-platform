@@ -1,25 +1,25 @@
 {
-  "id": "etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir",
-  "name": "Etki Ölçümü Işığında Refi: Nedir, Ne Değildir ve Neden Önemlidir?\n",
-  "description": "Regenerative Finans (ReFi), finansal sistemleri sürdürülebilirlik, yenilenebilirlik ve toplumsal adalet ekseninde yeniden yapılandırmayı hedefleyen bir yaklaşımdır. ReFi, ekonomik büyüme ve toplumsal refahın bir arada sürdürülebilir bir şekilde ilerlemesi için finansal araçları ve stratejileri kullanmayı amaçlar. Etki ölçümü, ReFi'nin bu hedeflere ne ölçüde ulaştığını değerlendirmek için kritik bir araçtır. Bu etkinlikte, ReFi'nin temel prensiplerini, etki ölçümüyle olan ilişkisini ve neden bu kadar önemli olduğunu inceleyeceğiz. Sürdürülebilir bir ekonomik sistem için ReFi'nin nasıl bir rol oynadığını ve etki ölçümünün bu süreçte nasıl bir kılavuz görevi gördüğünü keşfedeceksiniz.",
-  "start": 1699884000000,
-  "end": 1699885800000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "grkem_bereket",
-      "name": "Görkem Bereket",
-      "bio": "No description",
-      "eventId": "ethgunu",
-      "twitter": "@goerrk",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/gorkem.jpeg?raw=true"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/d45d8x782pfr52dg/index.m3u8",
-  "playbackId": "d45d8x782pfr52dg",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir_thumbnail.png",
-  "assetId": "d45d76a5-febf-4bdf-9fa8-5c65dd24fa31",
-  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-  "videoType": "clip"
+    "id": "etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir",
+    "name": "Etki \u00d6l\u00e7\u00fcm\u00fc I\u015f\u0131\u011f\u0131nda Refi: Nedir, Ne De\u011fildir ve Neden \u00d6nemlidir?\n",
+    "description": "Regenerative Finans (ReFi), finansal sistemleri s\u00fcrd\u00fcr\u00fclebilirlik, yenilenebilirlik ve toplumsal adalet ekseninde yeniden yap\u0131land\u0131rmay\u0131 hedefleyen bir yakla\u015f\u0131md\u0131r. ReFi, ekonomik b\u00fcy\u00fcme ve toplumsal refah\u0131n bir arada s\u00fcrd\u00fcr\u00fclebilir bir \u015fekilde ilerlemesi i\u00e7in finansal ara\u00e7lar\u0131 ve stratejileri kullanmay\u0131 ama\u00e7lar. Etki \u00f6l\u00e7\u00fcm\u00fc, ReFi'nin bu hedeflere ne \u00f6l\u00e7\u00fcde ula\u015ft\u0131\u011f\u0131n\u0131 de\u011ferlendirmek i\u00e7in kritik bir ara\u00e7t\u0131r. Bu etkinlikte, ReFi'nin temel prensiplerini, etki \u00f6l\u00e7\u00fcm\u00fcyle olan ili\u015fkisini ve neden bu kadar \u00f6nemli oldu\u011funu inceleyece\u011fiz. S\u00fcrd\u00fcr\u00fclebilir bir ekonomik sistem i\u00e7in ReFi'nin nas\u0131l bir rol oynad\u0131\u011f\u0131n\u0131 ve etki \u00f6l\u00e7\u00fcm\u00fcn\u00fcn bu s\u00fcre\u00e7te nas\u0131l bir k\u0131lavuz g\u00f6revi g\u00f6rd\u00fc\u011f\u00fcn\u00fc ke\u015ffedeceksiniz.",
+    "start": 1699884000000,
+    "end": 1699885800000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "grkem_bereket",
+            "name": "G\u00f6rkem Bereket",
+            "bio": "No description",
+            "eventId": "ethgunu",
+            "twitter": "@goerrk",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/gorkem.jpeg?raw=true"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d45d8x782pfr52dg/index.m3u8",
+    "playbackId": "d45d8x782pfr52dg",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/etki_lm_inda_refi_nedir_ne_deildir_ve_neden_nemlidir_thumbnail.png",
+    "assetId": "d45d76a5-febf-4bdf-9fa8-5c65dd24fa31",
+    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+    "videoType": "clip"
 }

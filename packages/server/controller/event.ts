@@ -11,13 +11,16 @@ export default class EventController {
 
   public async getEvent(
     eventId: IEvent["id"],
-    organizationId: IEvent["organizationId"]
+    organizationId?: IEvent["organizationId"]
   ): Promise<Event> {
-    const eventQuery = await Event.getEventPath(organizationId, eventId);
-    const data = await this.controller.get(eventQuery);
-    const evt = new Event({ ...data });
-    // !evt.archiveMode && this.importEventData(evt);
-    return evt;
+    if(organizationId){
+      const eventQuery = await Event.getEventPath(organizationId, eventId);
+      const data = await this.controller.get(eventQuery);
+      return new Event({ ...data });
+    }
+    const allEvents = await this.getAllEvents({})
+    const data = allEvents.filter((event) =>event.id === eventId)
+    return new Event({ ...data[0] });
   }
 
   public async createEvent(event: Omit<IEvent, "id">): Promise<Event> {

@@ -1,21 +1,22 @@
 {
-  "id": "retroactive_public_goods_funding_2_rounds_in",
-  "name": "Retroactive Public Goods Funding: 2 Rounds in",
-  "description": "In this talk I want to share about Retroactive Public Goods Funding, what we learned in running 2 rounds of RetroPGF at Optimism, and what's next on our journey to summon Ether's Phoenix 🕊️",
-  "start": 1694766600000,
-  "end": 1694768100000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "jonas_seiferth",
-      "name": "Jonas Seiferth",
-      "bio": "RetroPGF lead @ Optimism Foundation\r\nOn a journey to summon Ether's Phoenix with a bunch of Optimists.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/OP_PFP_edited_MMtDaup.png"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/d6dbxlm2fqbk3ns9/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/retroactive_public_goods_funding_2_rounds_in.jpg"
+    "id": "retroactive_public_goods_funding_2_rounds_in",
+    "name": "Retroactive Public Goods Funding: 2 Rounds in",
+    "description": "In this talk I want to share about Retroactive Public Goods Funding, what we learned in running 2 rounds of RetroPGF at Optimism, and what's next on our journey to summon Ether's Phoenix \ud83d\udd4a\ufe0f",
+    "start": 1694766600000,
+    "end": 1694768100000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "jonas_seiferth",
+            "name": "Jonas Seiferth",
+            "bio": "RetroPGF lead @ Optimism Foundation\r\nOn a journey to summon Ether's Phoenix with a bunch of Optimists.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/OP_PFP_edited_MMtDaup.png"
+        }
+    ],
+    "playbackId": "",
+    "videoUrl": "https://lp-playback.com/hls/d6dbxlm2fqbk3ns9/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/retroactive_public_goods_funding_2_rounds_in.jpg",
+    "assetId": "d6dbad59-6a72-41c8-be3f-cfc2e02097e0"
 }

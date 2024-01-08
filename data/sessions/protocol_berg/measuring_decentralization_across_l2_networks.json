@@ -1,21 +1,22 @@
 {
-  "id": "measuring_decentralization_across_l2_networks",
-  "name": "Measuring Decentralization Across L2 Networks",
-  "description": "Many studies and analyses have been performed on Layer-1 protocols that measure decentralization to the point where we have an accepted set of standards. Such standards include, but are not limited to, nakamoto coefficient, validator distribution, and full node counts. This talk explores the challenges in measuring decentralization across layer-2s on Ethereum, Polkadot and Cosmos where the technology varies and creates new avenues of centralization more obscured from the view of users.",
-  "start": 1694763000000,
-  "end": 1694764500000,
-  "stageId": "magazin__main_stage",
-  "speakers": [
-    {
-      "id": "asynchronous_phil",
-      "name": "Asynchronous Phil",
-      "bio": "A Berlin professional since 2013, focused on Bitcoin, Ethereum and Polkadot. Communications for Parity Technologies 2017-2022, now an independent contributor to Ethereum and Polkadot communications.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/IMG_7765_zk3s0vl.jpeg"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/4410dgmovupyfrph/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/measuring_decentralization_across_l2_networks.jpg"
+    "id": "measuring_decentralization_across_l2_networks",
+    "name": "Measuring Decentralization Across L2 Networks",
+    "description": "Many studies and analyses have been performed on Layer-1 protocols that measure decentralization to the point where we have an accepted set of standards. Such standards include, but are not limited to, nakamoto coefficient, validator distribution, and full node counts. This talk explores the challenges in measuring decentralization across layer-2s on Ethereum, Polkadot and Cosmos where the technology varies and creates new avenues of centralization more obscured from the view of users.",
+    "start": 1694763000000,
+    "end": 1694764500000,
+    "stageId": "magazin__main_stage",
+    "speakers": [
+        {
+            "id": "asynchronous_phil",
+            "name": "Asynchronous Phil",
+            "bio": "A Berlin professional since 2013, focused on Bitcoin, Ethereum and Polkadot. Communications for Parity Technologies 2017-2022, now an independent contributor to Ethereum and Polkadot communications.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/IMG_7765_zk3s0vl.jpeg"
+        }
+    ],
+    "playbackId": "",
+    "videoUrl": "https://lp-playback.com/hls/4410dgmovupyfrph/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/measuring_decentralization_across_l2_networks.jpg",
+    "assetId": "4410dbb1-9410-4bde-bf08-210dd5bed2d8"
 }
