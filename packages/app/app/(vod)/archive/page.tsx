@@ -20,7 +20,7 @@ export default async function ArchivePage({
     limit: 12,
     onlyVideos: true,
     searchQuery: searchParams.searchQuery,
-    page: Number(searchParams.page),
+    page: Number(searchParams.page || 1),
   })
 
   return (

@@ -32,30 +32,33 @@ const VideoCard = async ({
       <Link
         href={`/watch?event=${session.eventId}&session=${session.id}`}>
         <Thumbnail session={session} fallBack={event.eventCover} />
-        <CardHeader
-          className={`rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none ${headerClass}`}>
+      </Link>
+      <CardHeader
+        className={`rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none ${headerClass}`}>
+        <Link
+          href={`/watch?event=${session.eventId}&session=${session.id}`}>
           <CardTitle
             className={`text-sm truncate ${descriptionClass}`}>
             {session.name}
           </CardTitle>
-          <Link href={`/archive?event=${event.id}`}>
-            <div className="flex flex-row items-center justify-start">
-              <Image
-                className="rounded-md mr-2"
-                alt="logo"
-                quality={80}
-                src={getImageUrl('/events/' + event.logo)}
-                height={24}
-                width={24}
-              />
-              <CardDescription
-                className={`text-xs truncate ${descriptionClass}`}>
-                {event.name}
-              </CardDescription>
-            </div>
-          </Link>
-        </CardHeader>
-      </Link>
+        </Link>
+        <Link href={`/archive?event=${event.id}`}>
+          <div className="flex flex-row items-center justify-start">
+            <Image
+              className="rounded-md mr-2"
+              alt="logo"
+              quality={80}
+              src={getImageUrl('/events/' + event.logo)}
+              height={24}
+              width={24}
+            />
+            <CardDescription
+              className={`text-xs truncate ${descriptionClass}`}>
+              {event.name}
+            </CardDescription>
+          </div>
+        </Link>
+      </CardHeader>
     </div>
   )
 }

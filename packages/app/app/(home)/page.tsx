@@ -38,7 +38,7 @@ export default async function Home() {
             events
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-8">
+        <CardContent className="space-y-8 border-0">
           {organizations.map((organization) => (
             <Suspense key={organization.id} fallback={<Loading />}>
               <OrganizationStrip organization={organization} />
