@@ -15,11 +15,19 @@ const fetchImage = async (url: string): Promise<boolean> => {
 // TODO
 export default function Thumbnail({
   session,
+  fallBack,
 }: {
   session: ISession
+  fallBack?: string
 }) {
-  const livepeerThumbnail = `https://vod-cdn.lp-playback.studio/catalyst-vod-com/hls/${session.playbackId}/thumbnails/keyframes_0.jpg`
   const streamethThumbnail = getImageUrl(`${session.coverImage}`)
+
+  const [error, setError] = useState(false)
+  const [fallbackImage, setFallbackImage] = useState('/cover.png')
+  useEffect(() => {
+    setError(false)
+    fallBack && setFallbackImage(getImageUrl('/events/' + fallBack))
+  }, [session.coverImage])
 
   return (
     <div className="aspect-video relative">
@@ -27,14 +35,13 @@ export default function Thumbnail({
         className="rounded"
         alt="Session image"
         quality={80}
-        src={streamethThumbnail}
+        src={error ? fallbackImage : streamethThumbnail}
         fill
         style={{
           objectFit: 'cover',
         }}
         onError={(e) => {
-          console.log(e.currentTarget.src)
-
+          setError(true)
           //e.currentTarget.src = "/cover.png"
           // fetchImage(livepeerThumbnail)
           //   .then(() => {

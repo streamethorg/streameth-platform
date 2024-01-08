@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/tabs'
 import RelatedVideos from './components/RelatedVideos'
 import ColorComponent from '@/components/Layout/ColorComponent'
+import { Metadata } from 'next'
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
@@ -74,36 +75,37 @@ export default async function Watch({
   )
 }
 
-// export async function generateMetadata(
-//   { params }: Params,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   const sController = new SessionController()
-//   const session = await sController.getSession(
-//     params.session,
-//     params.event
-//   )
-//   const imageUrl = session.coverImage
-//     ? session.coverImage
-//     : session.id + '.png'
-//   try {
-//     return {
-//       title: session.name,
-//       description: session.description,
-//       openGraph: {
-//         title: session.name,
-//         description: session.description,
-//         images: [imageUrl],
-//       },
-//     }
-//   } catch (e) {
-//     return {
-//       title: 'StreamETH Session',
-//       openGraph: {
-//         title: 'StreamETH Session',
-//         description:
-//           'The complete solution to host your hybrid or virtual event.',
-//       },
-//     }
-//   }
-// }
+export async function generateMetadata({
+  searchParams,
+}: WatchPageProps): Promise<Metadata> {
+  const session = (
+    await fetchEventSessions({
+      event: searchParams.event,
+    })
+  ).filter((session) => {
+    return session.id === searchParams.session
+  })[0]
+  const imageUrl = session.coverImage
+    ? session.coverImage
+    : session.id + '.png'
+  try {
+    return {
+      title: session.name,
+      description: session.description,
+      openGraph: {
+        title: session.name,
+        description: session.description,
+        images: [imageUrl],
+      },
+    }
+  } catch (e) {
+    return {
+      title: 'StreamETH Session',
+      openGraph: {
+        title: 'StreamETH Session',
+        description:
+          'The complete solution to host your hybrid or virtual event.',
+      },
+    }
+  }
+}

@@ -10,7 +10,6 @@ const VideoDownload = ({ assetId }: { assetId: string }) => {
   const [loading, setIsLoading] = useState(false)
   const { data: asset, isLoading } = useAsset({ assetId })
 
-  console.log(assetId)
   if (isLoading) return null
   if (!asset?.downloadUrl) return null
 

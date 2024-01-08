@@ -1,5 +1,5 @@
 'use client'
-
+import { useState } from 'react'
 import {
   CardDescription,
   CardHeader,
@@ -34,8 +34,9 @@ const SessionInfoBox = ({
   assetId?: string
   viewCount?: boolean
 }) => {
+  const [isOpened, setIsOpened] = useState(false)
   return (
-    <div className=" rounded mt-1">
+    <div className=" rounded my-2">
       <div className="flex flex-col md:flex-row justify-center py-4">
         <div className="flex flex-col justify-center px-2">
           <CardTitle className="text-background">{title}</CardTitle>
@@ -55,19 +56,27 @@ const SessionInfoBox = ({
           {assetId && <VideoDownload assetId={assetId} />}
         </div>
       </div>
-      {description && (
-        <CardContent className="p-0 md:p-0 flex flex-col">
-          <p className="bg-background rounded-md p-4">
-            {description}
-          </p>
-          <div className="flex flex-row mt-2">
-            {speakers &&
-              speakers.map((speaker) => (
-                <SpeakerIcon key={speaker.id} speaker={speaker} />
-              ))}
+      <CardContent className="bg-background rounded-md p-4">
+        {description && (
+          <div
+            className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
+              isOpened ? 'max-h-96' : 'max-h-10'
+            }`}>
+            <div className="">{description}</div>
+            <div className="flex flex-row mt-2">
+              {speakers &&
+                speakers.map((speaker) => (
+                  <SpeakerIcon key={speaker.id} speaker={speaker} />
+                ))}
+            </div>
           </div>
-        </CardContent>
-      )}
+        )}
+        <button
+          onClick={() => setIsOpened(!isOpened)}
+          className="mt-2 ml-auto w-full text-right text-white">
+          {isOpened ? 'Less' : 'More'}
+        </button>
+      </CardContent>
     </div>
   )
 }

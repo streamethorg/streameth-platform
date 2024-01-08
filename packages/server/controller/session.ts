@@ -81,7 +81,6 @@ export default class SessionController {
 
     if (onlyVideos) {
       data = data.filter((session) => session.playbackId !== "")
-      console.log(data)
     }
 
     // sort by start date

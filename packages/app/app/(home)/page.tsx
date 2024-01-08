@@ -14,10 +14,8 @@ import {
 
 const Loading = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold text-main-text">
-        Loading...
-      </h1>
+    <div className="flex flex-col items-center justify-center h-full bg-black">
+      <h1 className="text-2xl font-bold  text-white">Loading...</h1>
     </div>
   )
 }

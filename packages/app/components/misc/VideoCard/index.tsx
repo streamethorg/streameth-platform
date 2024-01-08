@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   CardDescription,
   CardHeader,
@@ -9,8 +8,8 @@ import Thumbnail from './thumbnail'
 import { fetchEvent } from '@/lib/data'
 import Image from 'next/image'
 import { getImageUrl } from '@/lib/utils'
+import Link from 'next/link'
 
-// TODO: inverted colors
 const VideoCard = async ({
   session,
   invertedColors,
@@ -21,33 +20,43 @@ const VideoCard = async ({
   const event = await fetchEvent({
     event: session.eventId,
   })
+
+  // Determine the classes based on invertedColors prop
+  const headerClass = invertedColors ? 'bg-background text-white' : ''
+  const descriptionClass = invertedColors
+    ? 'text-white'
+    : 'text-background'
+
   return (
-    <div className=" min-h-full rounded-xl text-white uppercase">
-      <Thumbnail session={session} />
-      <CardHeader className=" rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none">
-        <CardTitle className="text-background  text-sm truncate">
-          {session.name}
-        </CardTitle>
-        <CardDescription className="lowercase text-sm truncate ">
-          <Link href={`/archive?event=${event.id}`}>
-            <div className="flex flex-row hover:underline hover:text-wite">
-              {event?.logo ? (
-                <Image
-                  className="rounded m-auto"
-                  alt={event.name.slice(0, 2).toUpperCase()}
-                  quality={80}
-                  src={getImageUrl(event.logo)}
-                  height={24}
-                  width={24}
-                />
-              ) : (
-                <p>{event.name.slice(0, 2).toUpperCase()}</p>
-              )}
-              <p className="flex flex-grow px-2">{event.name}</p>
+    <div className="min-h-full w-full rounded-xl text-white uppercase">
+      <Link
+        href={`/watch?event=${session.eventId}&session=${session.id}`}>
+        <Thumbnail session={session} fallBack={event.eventCover} />
+        <CardHeader
+          className={`rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none ${headerClass}`}>
+          <CardTitle
+            className={`text-sm truncate ${descriptionClass}`}>
+            {session.name}
+          </CardTitle>
+          <Link
+            href={`/archive?organization=${event.organizationId}`}>
+            <div className="flex flex-row items-center justify-start">
+              <Image
+                className="rounded-md mr-2"
+                alt="logo"
+                quality={80}
+                src={getImageUrl('/events/' + event.logo)}
+                height={24}
+                width={24}
+              />
+              <CardDescription
+                className={`text-xs truncate ${descriptionClass}`}>
+                {event.name}
+              </CardDescription>
             </div>
           </Link>
-        </CardDescription>
-      </CardHeader>
+        </CardHeader>
+      </Link>
     </div>
   )
 }
