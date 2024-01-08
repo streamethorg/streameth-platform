@@ -13,7 +13,7 @@ export default async function VideoGrid({
   if (!videos) return null
 
   return (
-    <div className="max-w-screen w-full bg-transparent border-none ">
+    <div className="max-w-screen lg:w-full bg-transparent border-none ">
       <div
         className={`${
           scroll ? 'flex flex-row' : 'grid grid-cols-1'
@@ -24,7 +24,7 @@ export default async function VideoGrid({
               key={video.id}
               className={`${
                 scroll && 'w-[300px]'
-              } md:w-full h-full border-none bg-white`}>
+              } md:w-full h-full border-none bg-white flex-initial`}>
               <VideoCard session={video} />
             </div>
           )

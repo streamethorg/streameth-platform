@@ -4,11 +4,7 @@ import {
   useRouter,
 } from 'next/navigation'
 
-const useSearchParams = ({
-  key,
-}: {
-  key: string
-}) => {
+const useSearchParams = ({ key }: { key: string }) => {
   const pathname = usePathname()
   const { replace } = useRouter()
   const searchParams = useNextSearchParams()
@@ -20,7 +16,7 @@ const useSearchParams = ({
     } else {
       params.delete(key)
     }
-    replace(`${pathname}?${params.toString()}`)
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
   return {
@@ -28,6 +24,5 @@ const useSearchParams = ({
     handleTermChange,
   }
 }
-
 
 export default useSearchParams

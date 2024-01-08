@@ -8,7 +8,7 @@ import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
 import OrganizationController from 'streameth-server/controller/organization'
-import { NavBarProps } from './types'
+import { NavBarProps, IPagination } from './types'
 import FuzzySearch from 'fuzzy-search';
 export async function fetchOrganizations(): Promise<IOrganization[]> {
   try {
@@ -102,12 +102,7 @@ export async function fetchEventStage({
   }
 }
 
-interface IPagination {
-  currentPage: number
-  totalPages: number
-  totalItems: number
-  limit: number
-}
+
 export async function fetchAllSessions({
   organization,
   event,

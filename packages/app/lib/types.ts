@@ -24,6 +24,7 @@ export interface SearchPageProps {
     organization?: string
     event?: string
     searchQuery?: string
+    page?: string
   }
 }
 
@@ -33,4 +34,11 @@ export interface WatchPageProps {
     session: string
     assetId: string
   }
+}
+
+export interface IPagination {
+  currentPage: number
+  totalPages: number
+  totalItems: number
+  limit: number
 }

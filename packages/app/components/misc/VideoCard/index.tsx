@@ -38,8 +38,7 @@ const VideoCard = async ({
             className={`text-sm truncate ${descriptionClass}`}>
             {session.name}
           </CardTitle>
-          <Link
-            href={`/archive?organization=${event.organizationId}`}>
+          <Link href={`/archive?event=${event.id}`}>
             <div className="flex flex-row items-center justify-start">
               <Image
                 className="rounded-md mr-2"

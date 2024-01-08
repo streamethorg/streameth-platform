@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import Pagination from '../components/pagination'
 
 // TODO: pagination
 export default async function ArchivePage({
@@ -19,6 +20,7 @@ export default async function ArchivePage({
     limit: 12,
     onlyVideos: true,
     searchQuery: searchParams.searchQuery,
+    page: Number(searchParams.page),
   })
 
   return (
@@ -31,8 +33,9 @@ export default async function ArchivePage({
         }
       />
       <Card className="bg-white border-none">
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-background">Results</CardTitle>
+          <Pagination {...videos.pagination} />
         </CardHeader>
         <CardContent>
           <Videos videos={videos.sessions} />
