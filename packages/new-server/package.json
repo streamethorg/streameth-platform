@@ -10,7 +10,8 @@
     "test": "jest --forceExit --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\"",
     "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
-    "deploy:dev": "pm2 start ecosystem.config.js --only dev"
+    "deploy:dev": "pm2 start ecosystem.config.js --only dev",
+    "build:digitalocean": "yarn install --include=dev --production=false && yarn start"
   },
   "_moduleAliases": {
     "@config": "dist/config",
