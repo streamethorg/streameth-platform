@@ -10,8 +10,7 @@
     "test": "jest --forceExit --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\"",
     "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
-    "deploy:dev": "pm2 start ecosystem.config.js --only dev",
-    "build:digitalocean": "yarn install --include=dev --production=false && yarn start"
+    "deploy:dev": "pm2 start ecosystem.config.js --only dev"
   },
   "_moduleAliases": {
     "@config": "dist/config",
@@ -45,6 +44,7 @@
     "morgan": "^1.10.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
+    "typescript": "^5.3.3",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -78,8 +78,7 @@
     "supertest": "^6.2.4",
     "ts-jest": "^28.0.7",
     "tsc-alias": "^1.7.0",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.3.3"
+    "tsconfig-paths": "^4.2.0"
   },
   "husky": {
     "hooks": {
