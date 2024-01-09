@@ -1,9 +1,4 @@
 'use client'
-import {
-  useSearchParams,
-  usePathname,
-  useRouter,
-} from 'next/navigation'
 
 import {
   Select,
@@ -12,26 +7,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import useSearchParams from '@/lib/hooks/useSearchParams'
 
 const DateSelect = ({ dates }: { dates: number[] }) => {
-  const pathname = usePathname()
-  const { replace } = useRouter()
-  const searchParams = useSearchParams()
-
-  function handleDateChange(term: string) {
-    const params = new URLSearchParams(searchParams)
-    if (term) {
-      params.set('date', term)
-    } else {
-      params.delete('date')
-    }
-    replace(`${pathname}?${params.toString()}`)
-  }
+  const { searchParams, handleTermChange } = useSearchParams({
+    key: 'date',
+  })
 
   return (
     <Select
       defaultValue={searchParams.get('date') || dates[0].toString()}
-      onValueChange={(value) => handleDateChange(value)}>
+      onValueChange={(value) => handleTermChange(value)}>
       <SelectTrigger>
         <SelectValue placeholder="Date select" />
       </SelectTrigger>

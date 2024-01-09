@@ -1,21 +1,22 @@
 {
-  "id": "the_anoma_protocol_and_its_design_process",
-  "name": "The Anoma Protocol and its Design Process",
-  "description": "This talk will give an introduction to the Anoma protocol architecture and its design process, to share what we learned and elicit feedback on how we could improve both.\r\n\r\nAnoma is a distributed operating system for intent-centric counterparty discovery and privacy-preserving computation on linear and non-linear resources with heterogenous trust assumptions.\r\n\r\nThe protocol architecture has the following (non-exhaustive) goals and design process behind it:\r\n\r\nGoal: Identify good component boundaries, to unbundle features and improve modularity.\r\n\r\nProcess: \r\n- Analyze the outcomes of protocols that came before us, learn from their successes and problems.\r\n- Example components: Consensus Algorithms, Network Transport, Programming Environment, State Machines\r\n\r\nGoal: Maximize composability of components.\r\n\r\nProcess: \r\n- Try to bridge the gap between real world systems and models from Programming Language Theory, Automata Theory and Category Theory.\r\n- Come up with implementation agnostic interfaces using above theory.\r\n\r\nGoal: Maximize flexibility of the protocol stack, since changes in a deployed system are costly, proportional to the significance of the change.\r\n\r\nProcess: \r\n- Decouple dimensions of choice as much as possible, to enable choices to be made independently of each other. \r\n- Minimize the amount of design decisions and make them at the least-significant place. \r\n- Wherever possible, try to push decisions from \"design-time\" to \"runtime\", so users can make them as circumstances change. \r\n\r\nWe will give a high level overview of the architecture and explain, using examples from it, how they are motivated by the process and how they move us closer to the above goals.",
-  "start": 1694782800000,
-  "end": 1694784300000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "d",
-      "name": "D.",
-      "bio": "D. is a research engineer interested in distributed systems,  trust aware and privacy preserving computing, as well as applied mechanism design.\r\n\r\nThey are currently working on the anoma protocol specification and its prototypes.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/network_sketch_qBtEL3l.png"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/da7941j0r11llvk1/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/the_anoma_protocol_and_its_design_process.jpg"
+    "id": "the_anoma_protocol_and_its_design_process",
+    "name": "The Anoma Protocol and its Design Process",
+    "description": "This talk will give an introduction to the Anoma protocol architecture and its design process, to share what we learned and elicit feedback on how we could improve both.\r\n\r\nAnoma is a distributed operating system for intent-centric counterparty discovery and privacy-preserving computation on linear and non-linear resources with heterogenous trust assumptions.\r\n\r\nThe protocol architecture has the following (non-exhaustive) goals and design process behind it:\r\n\r\nGoal: Identify good component boundaries, to unbundle features and improve modularity.\r\n\r\nProcess: \r\n- Analyze the outcomes of protocols that came before us, learn from their successes and problems.\r\n- Example components: Consensus Algorithms, Network Transport, Programming Environment, State Machines\r\n\r\nGoal: Maximize composability of components.\r\n\r\nProcess: \r\n- Try to bridge the gap between real world systems and models from Programming Language Theory, Automata Theory and Category Theory.\r\n- Come up with implementation agnostic interfaces using above theory.\r\n\r\nGoal: Maximize flexibility of the protocol stack, since changes in a deployed system are costly, proportional to the significance of the change.\r\n\r\nProcess: \r\n- Decouple dimensions of choice as much as possible, to enable choices to be made independently of each other. \r\n- Minimize the amount of design decisions and make them at the least-significant place. \r\n- Wherever possible, try to push decisions from \"design-time\" to \"runtime\", so users can make them as circumstances change. \r\n\r\nWe will give a high level overview of the architecture and explain, using examples from it, how they are motivated by the process and how they move us closer to the above goals.",
+    "start": 1694782800000,
+    "end": 1694784300000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "d",
+            "name": "D.",
+            "bio": "D. is a research engineer interested in distributed systems,  trust aware and privacy preserving computing, as well as applied mechanism design.\r\n\r\nThey are currently working on the anoma protocol specification and its prototypes.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/network_sketch_qBtEL3l.png"
+        }
+    ],
+    "playbackId": "",
+    "videoUrl": "https://lp-playback.com/hls/da7941j0r11llvk1/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/the_anoma_protocol_and_its_design_process.jpg",
+    "assetId": "da797b03-ae07-4683-aeac-dc3049da62e7"
 }

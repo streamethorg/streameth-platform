@@ -30,7 +30,6 @@ const ScheduleCard = ({
   showTime?: boolean
   speakers?: boolean
 }) => {
-  const { openModal } = useContext(ModalContext)
   const isActive =
     new Date(session.start).getTime() < Date.now() &&
     new Date(session.end).getTime() > Date.now()

@@ -23,7 +23,7 @@ export default function SpeakerIcon({
 }) {
   if (onlyImage) {
     return (
-      <Avatar className="my-2">
+      <Avatar className="my-2 ">
         <AvatarImage
           src={
             speaker.photo
@@ -38,20 +38,10 @@ export default function SpeakerIcon({
     )
   }
   return (
-    <Badge
-      // onClick={() =>
-      //   openModal(<SpeakerModal event={event} speaker={speaker} />)
-      // }>
-      className="m-1">
-      <Avatar className="my-2">
-        <AvatarImage
-          src={
-            speaker.photo
-              ? speaker.photo
-              : CreateBlockie(speaker.name)
-          }
-        />
-        <AvatarFallback>
+    <Badge className="bg-background text-white">
+      <Avatar className="my-1">
+        <AvatarImage src={speaker.photo} />
+        <AvatarFallback className="text-background">
           {speaker.name.slice(0, 1).toUpperCase()}
         </AvatarFallback>
       </Avatar>

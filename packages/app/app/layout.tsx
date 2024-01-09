@@ -7,7 +7,6 @@ import { LoadingContextProvider } from '@/lib/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/lib/context/TopNavbarContext'
 import Initializer from './Initializer'
 import { Metadata } from 'next'
-import { FilterContextProvider } from '../lib/context/FilterContext'
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
@@ -33,11 +32,9 @@ export default function RootLayout({
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
-                <FilterContextProvider>
-                  <TopNavbarContextProvider>
-                    <Initializer>{children}</Initializer>
-                  </TopNavbarContextProvider>
-                </FilterContextProvider>
+                <TopNavbarContextProvider>
+                  <Initializer>{children}</Initializer>
+                </TopNavbarContextProvider>
               </ModalContextProvider>
             </MobileContextProvider>
           </LoadingContextProvider>

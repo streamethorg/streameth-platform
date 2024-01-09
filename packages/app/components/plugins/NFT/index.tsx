@@ -2,7 +2,7 @@ import Image from 'next/image'
 import MintButton from '@/components/misc/MintButton'
 import nft from '@/public/Base-house.jpg'
 import Link from 'next/link'
-import { Button } from '@/components/Form/Button'
+import { Button } from '@/components/ui/button'
 const NFTMintComponent = () => {
   return (
     <div className="flex flex-col justify-center">

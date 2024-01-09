@@ -84,7 +84,7 @@ function EmbedButton({
     <Dialog>
       <DialogTrigger>
         <Badge className="bg-background">
-          <CodeBracketIcon className="font-bold hover:bg-accent hover:text-white p-1 rounded cursor-pointer h-6 w-6  md:h-8 md:w-8 text-white" />
+          <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  md:h-8 md:w-8 text-white" />
           Embed
         </Badge>
       </DialogTrigger>
