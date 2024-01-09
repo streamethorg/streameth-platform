@@ -27,7 +27,7 @@ export default function Thumbnail({
   useEffect(() => {
     setError(false)
     fallBack && setFallbackImage(getImageUrl('/events/' + fallBack))
-  }, [session.coverImage])
+  }, [session.coverImage, fallBack])
 
   return (
     <div className="aspect-video relative">
