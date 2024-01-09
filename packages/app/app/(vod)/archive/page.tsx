@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
 
-// TODO: pagination
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {

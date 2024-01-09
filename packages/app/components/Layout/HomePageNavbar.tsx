@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const HomePageNavbar = () => {
   return (
-    <div className="z-[99999999] bg-accent sticky top-0 p-4 shadow-md flex flex-row items-center">
+    <div className="z-[99999999] sticky top-0 p-4 shadow-md flex flex-row items-center">
       <div className=" md:flex-initial">
         {/* Logo for larger screens */}
         <Link href="/">

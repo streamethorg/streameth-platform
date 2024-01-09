@@ -15,7 +15,7 @@ const ColorComponent = ({ children, accentColor }: Props) => {
   useEffect(() => {
     if (accentColor) {
       document.documentElement.style.setProperty(
-        '--colors-accent',
+        '--background',
         accentColor
       )
     } else {

@@ -27,13 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
       <body
-        className={`${heebo.variable} font-sans flex flex-col w-screen min-h-screen bg-accent`}>
+        className={`${heebo.variable} font-sans flex flex-col w-screen min-h-screen`}>
         <GeneralContext>
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
                 <TopNavbarContextProvider>
-                  <Initializer>{children}</Initializer>
+                  {children}
                 </TopNavbarContextProvider>
               </ModalContextProvider>
             </MobileContextProvider>
