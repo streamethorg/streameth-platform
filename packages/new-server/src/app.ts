@@ -76,7 +76,6 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
-
   }
 
   private initializeRoutes(routes: Routes[]) {
@@ -107,7 +106,6 @@ class App {
       next(createError(404));
     });
     this.app.use(errorMiddleware);
- 
   }
 }
 
