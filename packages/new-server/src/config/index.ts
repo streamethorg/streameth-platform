@@ -3,7 +3,7 @@ import validateEnv from '@utils/validateEnv';
 const validatedEnv = validateEnv();
 export const config = {
   appEnv: validatedEnv.NODE_ENV,
-  port: validatedEnv.PORT,
+  port: validatedEnv.APP_PORT,
   db: {
     host: validatedEnv.DB_HOST,
     port: validatedEnv.DB_PORT,
