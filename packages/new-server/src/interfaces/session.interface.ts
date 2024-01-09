@@ -1,20 +1,10 @@
 import { Document, Types } from 'mongoose';
+import { ISpeaker } from './speaker.interface';
 
 export interface ISource {
   streamUrl: string;
   start: number;
   end: number;
-}
-
-export interface ISpeaker {
-  name: string;
-  bio: string;
-  eventId: Types.ObjectId | string;
-  twitter?: string;
-  github?: string;
-  website?: string;
-  photo?: string;
-  company?: string;
 }
 
 export interface IPlayback {
