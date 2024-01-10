@@ -1,1 +1,51 @@
-{"id":"digital_marketing_mastery_for_artists_utilizing_layer_2_platforms","name":"\nDigital Marketing Mastery for Artists: Utilizing Layer 2 Platforms","description":"Panel with artists Sabet, Gabe Weiss, and EmpressTrash and Nima Beheshtian, Founder and CEO of Layerr. Provide marketing tips and strategies, focusing on how Layer 2 platforms can aid in online promotion and community building.","start":1702065600000,"end":1702067400000,"stageId":"base_house","speakers":[{"id":"sabet","name":"Sabet","bio":"Ali Sabet is an Iranian-American artist and designer. His work shines with vibrant optimism, love and beauty in the face of it all.","eventId":"base_event","twitter":"@sabet\n"},{"id":"gabe_weiss","name":"Gabe Weiss","bio":"Gabe Weis is a mixed-media and NFT artist living in the Bay Area. The self-taught artist is inspired by street art and stoic philosophy and uses a stream-of-consciousness approach to his work to explore perceptions of reality. \nHis physical and digital works are shown internationally. This past year, his work has been shown at the Venice Biennale, Picasso Museum, Seattle Art Fair, and various galleries throughout Asia and the United States. \nGabe recently launched The Stoics, a 5,000-piece NFT collection that sold out in minutes and represents his personal philosophy of resilience through stoicism. \nGabe is committed to sustainability in his craft.  By reusing older materials found around the house such as cereal boxes, maps, and old dictionaries to create timeless works, he hopes his work inspires others to reuse materials as part of their art practice. ","eventId":"base_event","twitter":"@GabrielJWeis"},{"id":"empress_trash","name":"Empress Trash ","bio":"Empress Trash is a multi-versatile visual artist currently residing in Mexico City with her rottweiler Glitch. A lifelong artist, she earned her BFA in Painting, Drawing, and Animation/Design from the University of Iowa in 2014. Shortly after, she moved to the Bay Area which she assisted and worked alongside a multitude of local and international artists and shows including Ai Wei Wei’s show on Alcatraz, being a member of the Firehouse Art Collective run by Tom Franco, and running her own underground shows from her house. She started in crypto art in 2021 and since has been exhibited internationally including Tokyo, Seoul, NYC, Paris, Palm Springs, Miami, Rome, LA, SXSW, Mexico City, Melbourne with Sotheby's, SuperChief, Nox Gallery, Aeon Studioverse, Oshi Gallery, Unit London, Flux Collective, imnotArt and Ted Talks Conference in Vancouver. ​","eventId":"base_event","twitter":"@EmpressTrash"},{"id":"nima_beheshtian","name":"Nima Beheshtian\n ","bio":"Founder and CEO of Layerr","eventId":"base_event"},{"id":"eric_spivak","name":"Eric Spivak","bio":"Eric “Motivate” Spivak is an Educator,\nTrusted Advisor & Key Opinion Leader\nin the Blockchain Space\nEmerging Tech & Web3 World.","eventId":"base_event","twitter":"@EricSpivak"}],"playbackId":"","eventId":"base_event","coverImage":"/sessions/base_event/digital_marketing_mastery_for_artists_utilizing_layer_2_platforms.jpg"}
+{
+    "id": "digital_marketing_mastery_for_artists_utilizing_layer_2_platforms",
+    "name": "\nDigital Marketing Mastery for Artists: Utilizing Layer 2 Platforms",
+    "description": "Panel with artists Sabet, Gabe Weiss, and EmpressTrash and Nima Beheshtian, Founder and CEO of Layerr. Provide marketing tips and strategies, focusing on how Layer 2 platforms can aid in online promotion and community building.",
+    "start": 1702065600000,
+    "end": 1702067400000,
+    "stageId": "base_house",
+    "speakers": [
+        {
+            "id": "sabet",
+            "name": "Sabet",
+            "bio": "Ali Sabet is an Iranian-American artist and designer. His work shines with vibrant optimism, love and beauty in the face of it all.",
+            "eventId": "base_event",
+            "twitter": "@sabet\n"
+        },
+        {
+            "id": "gabe_weiss",
+            "name": "Gabe Weiss",
+            "bio": "Gabe Weis is a mixed-media and NFT artist living in the Bay Area. The self-taught artist is inspired by street art and stoic philosophy and uses a stream-of-consciousness approach to his work to explore perceptions of reality. \nHis physical and digital works are shown internationally. This past year, his work has been shown at the Venice Biennale, Picasso Museum, Seattle Art Fair, and various galleries throughout Asia and the United States. \nGabe recently launched The Stoics, a 5,000-piece NFT collection that sold out in minutes and represents his personal philosophy of resilience through stoicism. \nGabe is committed to sustainability in his craft.  By reusing older materials found around the house such as cereal boxes, maps, and old dictionaries to create timeless works, he hopes his work inspires others to reuse materials as part of their art practice. ",
+            "eventId": "base_event",
+            "twitter": "@GabrielJWeis"
+        },
+        {
+            "id": "empress_trash",
+            "name": "Empress Trash ",
+            "bio": "Empress Trash is a multi-versatile visual artist currently residing in Mexico City with her rottweiler Glitch. A lifelong artist, she earned her BFA in Painting, Drawing, and Animation/Design from the University of Iowa in 2014. Shortly after, she moved to the Bay Area which she assisted and worked alongside a multitude of local and international artists and shows including Ai Wei Wei\u2019s show on Alcatraz, being a member of the Firehouse Art Collective run by Tom Franco, and running her own underground shows from her house. She started in crypto art in 2021 and since has been exhibited internationally including Tokyo, Seoul, NYC, Paris, Palm Springs, Miami, Rome, LA, SXSW, Mexico City, Melbourne with Sotheby's, SuperChief, Nox Gallery, Aeon Studioverse, Oshi Gallery, Unit London, Flux Collective, imnotArt and Ted Talks Conference in Vancouver. \u200b",
+            "eventId": "base_event",
+            "twitter": "@EmpressTrash"
+        },
+        {
+            "id": "nima_beheshtian",
+            "name": "Nima Beheshtian\n ",
+            "bio": "Nima Beheshtian is an esteemed professional in the blockchain and cryptocurrency sector, with over 12 years of experience, and a strong educational foundation in Technology from George Mason University. His career includes roles such as Sales Director at BitGo, where he played a key role in growing the AUC to over $4 billion, and Head of Sales at Ankr, enhancing the company's leadership in blockchain infrastructure.\nNima is currently the Founder and CEO of Layerr, an innovative publishing platform dedicated to empowering artists in expanding their art brands. Additionally, he has successfully launched various NFT projects, generating over $10 million in sales revenue. Nima is keen to bring his extensive knowledge, entrepreneurial experience, and a proven track record to contribute to the evolving landscape of art and technology.",
+            "eventId": "base_event"
+        },
+        {
+            "id": "eric_spivak",
+            "name": "Eric Spivak",
+            "bio": "Eric \u201cMotivate\u201d Spivak is an Educator,\nTrusted Advisor & Key Opinion Leader\nin the Blockchain Space\nEmerging Tech & Web3 World.",
+            "eventId": "base_event",
+            "twitter": "@EricSpivak"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f78d8b7xt596rsqc/index.m3u8",
+    "playbackId": "f78d8b7xt596rsqc",
+    "eventId": "base_event",
+    "coverImage": "/sessions/base_event/digital_marketing_mastery_for_artists_utilizing_layer_2_platforms.jpg",
+    "assetId": "f78dd324-7db6-48ad-91d4-09cbc2bba37f",
+    "sourceId": "1179590f-51c1-4672-b037-25e1fe8ef31f",
+    "videoType": "clip"
+}

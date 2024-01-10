@@ -1,23 +1,23 @@
 {
-  "id": "community_panel",
-  "name": "Community Panel",
-  "description": "",
-  "start": 1700119800000,
-  "end": 1700120400000,
-  "stageId": "camlica",
-  "speakers": [
-    {
-      "id": "aqeel_mohammad",
-      "name": "Aqeel Mohammad",
-      "bio": "No description",
-      "eventId": "conflux__web3_ux_unconference"
-    }
-  ],
-  "eventId": "conflux__web3_ux_unconference",
-  "videoUrl": "https://lp-playback.com/hls/f25do9jspebmgta6/index.m3u8",
-  "playbackId": "f25do9jspebmgta6",
-  "coverImage": "/sessions/conflux__web3_ux_unconference/community_panel_thumbnail.png",
-  "assetId": "f25d4e40-f5d0-4e46-b416-eec6773074d3",
-  "sourceId": "",
-  "videoType": "raw"
+    "id": "community_panel",
+    "name": "Community Panel",
+    "description": "",
+    "start": 1700119800000,
+    "end": 1700120400000,
+    "stageId": "camlica",
+    "speakers": [
+        {
+            "id": "aqeel_mohammad",
+            "name": "Aqeel Mohammad",
+            "bio": "No description",
+            "eventId": "conflux__web3_ux_unconference"
+        }
+    ],
+    "eventId": "conflux__web3_ux_unconference",
+    "videoUrl": "https://lp-playback.com/hls/f25do9jspebmgta6/index.m3u8",
+    "playbackId": "f25do9jspebmgta6",
+    "coverImage": "/sessions/conflux__web3_ux_unconference/community_panel_thumbnail.png",
+    "assetId": "f25d4e40-f5d0-4e46-b416-eec6773074d3",
+    "sourceId": "",
+    "videoType": "raw"
 }

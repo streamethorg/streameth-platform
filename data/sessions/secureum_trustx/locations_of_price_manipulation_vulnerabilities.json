@@ -1,25 +1,25 @@
 {
-  "id": "locations_of_price_manipulation_vulnerabilities",
-  "name": "Locations Of Price Manipulation Vulnerabilities",
-  "description": "",
-  "start": 1699978500000,
-  "end": 1699978800000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "niklas_kunkel",
-      "name": "Niklas\nKunkel",
-      "bio": "Founder\nChronicle Protocol",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Niklas.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/3b5fjoecowrg5a3a/index.m3u8",
-  "playbackId": "3b5fjoecowrg5a3a",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/locations_of_price_manipulation_vulnerabilities.jpg",
-  "assetId": "3b5f19ac-77d3-417d-b0c1-dd833b691452",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "locations_of_price_manipulation_vulnerabilities",
+    "name": "Locations Of Price Manipulation Vulnerabilities",
+    "description": "",
+    "start": 1699978500000,
+    "end": 1699978800000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "niklas_kunkel",
+            "name": "Niklas\nKunkel",
+            "bio": "Founder\nChronicle Protocol",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Niklas.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/3b5fjoecowrg5a3a/index.m3u8",
+    "playbackId": "3b5fjoecowrg5a3a",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/locations_of_price_manipulation_vulnerabilities.jpg",
+    "assetId": "3b5f19ac-77d3-417d-b0c1-dd833b691452",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

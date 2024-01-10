@@ -1,25 +1,25 @@
 {
-  "id": "dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling",
-  "name": "Docker-based Auditor’s Toolbox: Enhancing Web3 Security Through Integrated Tooling",
-  "description": "",
-  "start": 1699947000000,
-  "end": 1699947960000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "deivitto",
-      "name": "Deivitto",
-      "bio": "Junior Security Researcher\nSpearbit",
-      "eventId": "secureum_trustx",
-      "twitter": "@Deivitto",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Deivitto.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/7bedrp54t54lf3gv/index.m3u8",
-  "playbackId": "7bedrp54t54lf3gv",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling.jpg",
-  "assetId": "7bed16e1-5dc0-440c-8739-e04f05586c47",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling",
+    "name": "Docker-based Auditor\u2019s Toolbox: Enhancing Web3 Security Through Integrated Tooling",
+    "description": "",
+    "start": 1699947000000,
+    "end": 1699947960000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "deivitto",
+            "name": "Deivitto",
+            "bio": "Junior Security Researcher\nSpearbit",
+            "eventId": "secureum_trustx",
+            "twitter": "@Deivitto",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Deivitto.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/7bedrp54t54lf3gv/index.m3u8",
+    "playbackId": "7bedrp54t54lf3gv",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/dockerbased_auditors_toolbox_enhancing_web3_security_through_integrated_tooling.jpg",
+    "assetId": "7bed16e1-5dc0-440c-8739-e04f05586c47",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

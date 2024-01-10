@@ -1,1 +1,38 @@
-{"id":"onchain_music_featuring_the_jackson_five","name":"\nOnchain Music featuring THE JACKSON FIVE ","description":"Fireside chat with Jesse focusing on the origins of the projects, the benefits for the music industry, why building onchain, \"digital vinyls\" and drops.","start":1702058400000,"end":1702060200000,"stageId":"base_house","speakers":[{"id":"oscar_moerke","name":"Oscar Moerke","bio":"Head of Product and Founding Team Member at anotherblock, a Stockholm-based music tech platform launched in August 2022 with the aim of empowering the emotional and financial connection between creators and consumers. anotherblock provides a seamless and user-friendly platform for buying music rights and unique music collectibles.","eventId":"base_event"},{"id":"michel_dahlberg_traore","name":"Michel Dahlberg Traore","bio":"CEO and Co-Founder of anotherblock, a Stockholm-based music tech platform launched in August 2022 with the aim of empowering the emotional and financial connection between creators and consumers. anotherblock provides a seamless and user-friendly platform for buying music rights and unique music collectibles.","eventId":"base_event"},{"id":"jesse_pollak","name":"Jesse Pollak","bio":"Jesse Pollak is Creator of Base. Prior to Base, Jesse led all of Coinbase’s consumer-facing engineering from early 2017 to middle 2021, including building Coinbase, Coinbase Pro, and Coinbase Wallet. Jesse joined Coinbase through the acquisition of Clef, a company he founded and ran for five years that built passwordless identity solutions for crypto companies.\n","eventId":"base_event","twitter":"@jessepollak\n"}],"playbackId":"","eventId":"base_event","coverImage":"/sessions/base_event/onchain_music_featuring_the_jackson_five.jpg"}
+{
+    "id": "onchain_music_featuring_the_jackson_five",
+    "name": "\nOnchain Music featuring THE JACKSON FIVE ",
+    "description": "Fireside chat with Jesse focusing on the origins of the projects, the benefits for the music industry, why building onchain, \"digital vinyls\" and drops.",
+    "start": 1702058400000,
+    "end": 1702060200000,
+    "stageId": "base_house",
+    "speakers": [
+        {
+            "id": "oscar_moerke",
+            "name": "Oscar Moerke",
+            "bio": "Head of Product and Founding Team Member at anotherblock, a Stockholm-based music tech platform launched in August 2022 with the aim of empowering the emotional and financial connection between creators and consumers. anotherblock provides a seamless and user-friendly platform for buying music rights and unique music collectibles.",
+            "eventId": "base_event",
+            "twitter": "@morkeeth\n\n\n\n\n\n"
+        },
+        {
+            "id": "michel_dahlberg_traore",
+            "name": "Michel Dahlberg Traore",
+            "bio": "CEO and Co-Founder of anotherblock, a Stockholm-based music tech platform launched in August 2022 with the aim of empowering the emotional and financial connection between creators and consumers. anotherblock provides a seamless and user-friendly platform for buying music rights and unique music collectibles.",
+            "eventId": "base_event",
+            "twitter": "@bigggmich"
+        },
+        {
+            "id": "jesse_pollak",
+            "name": "Jesse Pollak",
+            "bio": "Jesse Pollak is Creator of Base. Prior to Base, Jesse led all of Coinbase\u2019s consumer-facing engineering from early 2017 to middle 2021, including building Coinbase, Coinbase Pro, and Coinbase Wallet. Jesse joined Coinbase through the acquisition of Clef, a company he founded and ran for five years that built passwordless identity solutions for crypto companies.\n",
+            "eventId": "base_event",
+            "twitter": "@jessepollak\n"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/c9b79x695vtsbyqh/index.m3u8",
+    "playbackId": "c9b79x695vtsbyqh",
+    "eventId": "base_event",
+    "coverImage": "/sessions/base_event/onchain_music_featuring_the_jackson_five.jpg",
+    "assetId": "c9b79120-bf2b-4b32-9260-e50cd6f1cc57",
+    "sourceId": "1179590f-51c1-4672-b037-25e1fe8ef31f",
+    "videoType": "clip"
+}

@@ -16,6 +16,7 @@
     }
   ],
   "playbackId": "",
+  "videoUrl": "https://lp-playback.com/hls/8efcdtmd24o5qqvc/index.m3u8",
   "eventId": "progcrypto",
   "track": "Developer Tools",
   "coverImage": "/sessions/progcrypto/bandada_a_tool_to_manage_groups_thumbnail.png"

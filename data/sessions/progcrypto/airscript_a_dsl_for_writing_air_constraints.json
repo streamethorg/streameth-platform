@@ -1,26 +1,26 @@
 {
-  "id": "airscript_a_dsl_for_writing_air_constraints",
-  "name": "AirScript: a DSL for writing AIR constraints",
-  "description": "In this talk, we will go over different ways of writing constraints for STARK-based systems and present AirScript - a new DSL for writing AIR constraints. We will describe AirScript's design goals and capabilities, go over its syntax, and give one or two simple examples of how to use it.",
-  "start": 1700227800000,
-  "end": 1700229600000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "bobbin_threadbare",
-      "name": "Bobbin Threadbare",
-      "bio": "Bobbin Threadbare is a co-founder of Polygon and leads the Polygon Miden team. Prior to his time at Polygon, Bobbin worked as a research scientist at Meta, where he led the development of Winterfell, a highly performant general-purpose STARK prover. Bobbin has been active in Web3 since 2018. His focus and passion have always been building of open-source components fundamental to zero-knowledge tech to ensure a decentralized, private future of the web.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1s_APSXkQqWKR7KQHJsjeDI1S6uUv17hm/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/15ba0kcio35qf4r1/index.m3u8",
-  "playbackId": "15ba0kcio35qf4r1",
-  "eventId": "progcrypto",
-  "track": "Developer Tools",
-  "coverImage": "/sessions/progcrypto/airscript_a_dsl_for_writing_air_constraints_thumbnail.png",
-  "assetId": "15ba335c-c10d-4bd1-acac-58d5427f3386",
-  "sourceId": "17264d1b-22cb-4510-a583-837293741512",
-  "videoType": "clip"
+    "id": "airscript_a_dsl_for_writing_air_constraints",
+    "name": "AirScript: a DSL for writing AIR constraints",
+    "description": "In this talk, we will go over different ways of writing constraints for STARK-based systems and present AirScript - a new DSL for writing AIR constraints. We will describe AirScript's design goals and capabilities, go over its syntax, and give one or two simple examples of how to use it.",
+    "start": 1700227800000,
+    "end": 1700229600000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "bobbin_threadbare",
+            "name": "Bobbin Threadbare",
+            "bio": "Bobbin Threadbare is a co-founder of Polygon and leads the Polygon Miden team. Prior to his time at Polygon, Bobbin worked as a research scientist at Meta, where he led the development of Winterfell, a highly performant general-purpose STARK prover. Bobbin has been active in Web3 since 2018. His focus and passion have always been building of open-source components fundamental to zero-knowledge tech to ensure a decentralized, private future of the web.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1s_APSXkQqWKR7KQHJsjeDI1S6uUv17hm/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/1624wmqscg7d3bk9/index.m3u8",
+    "playbackId": "1624wmqscg7d3bk9",
+    "eventId": "progcrypto",
+    "track": "Developer Tools",
+    "coverImage": "/sessions/progcrypto/airscript_a_dsl_for_writing_air_constraints_thumbnail.png",
+    "assetId": "1624ec41-2a36-41e6-a1f7-3c9e33ff3ef2",
+    "sourceId": "17264d1b-22cb-4510-a583-837293741512",
+    "videoType": "clip"
 }

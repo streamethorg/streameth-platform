@@ -9,10 +9,10 @@ import {
   useSwitchNetwork,
   useNetwork,
 } from 'wagmi'
-import CastrABI from '@/contracts/Castr-abi'
-import { Button } from '@/components/Form/Button'
+import CastrABI from '@/lib/contracts/Castr-abi'
+import { Button } from '@/components/ui/button'
 import { ConnectKitButton } from 'connectkit'
-import { ModalContext } from '@/context/ModalContext'
+import { ModalContext } from '@/lib/context/ModalContext'
 import { base } from 'viem/chains'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -38,11 +38,28 @@ export const MintSuccess = ({ hash }: { hash: string }) => {
   )
 }
 
-const MintButton = ({ address }: { address: string }) => {
+const MintButton = ({
+  address,
+  className = '',
+  mintText = 'MINT',
+}: {
+  address: string
+  className?: string
+  mintText?: string
+}) => {
   const { address: userAddress, isConnected } = useAccount()
   const { chain } = useNetwork()
   const { switchNetwork } = useSwitchNetwork()
   const { openModal } = useContext(ModalContext)
+
+  const { data: mintUserBalance } = useContractRead({
+    address: address as Address,
+    abi: CastrABI,
+    functionName: 'balanceOf',
+    args: [userAddress],
+  })
+
+  const hasMinted = Number(mintUserBalance) > 0
 
   const {
     data: transaction,
@@ -88,9 +105,11 @@ const MintButton = ({ address }: { address: string }) => {
                 ? onSwitchNetwork
                 : show
             }
-            className="hover:text-base uppercase text-xl hover:text-xl p-2">
+            className={`hover:text-base uppercase text-xl hover:text-xl p-2 ${className}`}>
             {!isConnected
-              ? 'Login to collect'
+              ? mintText
+                ? mintText
+                : 'Login to Mint '
               : chain?.id !== base?.id && 'Click and switch to Base'}
           </Button>
         )
@@ -100,10 +119,14 @@ const MintButton = ({ address }: { address: string }) => {
     <div className="flex flex-row justify-center">
       <Button
         variant={'default'}
-        onClick={() => mint()}
-        isLoading={isLoading}
-        className="hover:text-base uppercase text-xl hover:text-xl p-2 border">
-        Click to collect
+        onClick={() => !hasMinted && mint()}
+        // isLoading={isLoading}
+        className={`w-full uppercase p-2 border ${className}`}>
+        {hasMinted
+          ? 'Successfully Minted'
+          : mintText
+          ? mintText
+          : 'MINT LIVESTREAM'}
       </Button>
     </div>
   )

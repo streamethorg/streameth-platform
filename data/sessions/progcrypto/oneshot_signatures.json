@@ -1,26 +1,26 @@
 {
-  "id": "oneshot_signatures",
-  "name": "One-shot signatures",
-  "description": "One-shot signatures are a surprising outcome from mixing cryptography with quantum physics. We'll discuss the crazy cryptography behind one-shot signatures as well as how they radically change the endgame for the blockchain industry.\n\nThe talk is for futurists—this is the new moon math.",
-  "start": 1700220600000,
-  "end": 1700222400000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "justin_drake",
-      "name": "Justin Drake",
-      "bio": "Ethereum researcher",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/uc?id=11WQkL_2_BW7l0MzRBZrGnzJxQo9AUfHS"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/4d30dym5kchhinwf/index.m3u8",
-  "playbackId": "4d30dym5kchhinwf",
-  "eventId": "progcrypto",
-  "track": "Next Gen Applied Crypto",
-  "coverImage": "/sessions/progcrypto/oneshot_signatures_thumbnail.png",
-  "assetId": "4d305439-087c-40c2-b089-74ff22ed7a73",
-  "sourceId": "17264d1b-22cb-4510-a583-837293741512",
-  "videoType": "clip"
+    "id": "oneshot_signatures",
+    "name": "One-shot signatures",
+    "description": "One-shot signatures are a surprising outcome from mixing cryptography with quantum physics. We'll discuss the crazy cryptography behind one-shot signatures as well as how they radically change the endgame for the blockchain industry.\n\nThe talk is for futurists\u2014this is the new moon math.",
+    "start": 1700220600000,
+    "end": 1700222400000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "justin_drake",
+            "name": "Justin Drake",
+            "bio": "Ethereum researcher",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/uc?id=11WQkL_2_BW7l0MzRBZrGnzJxQo9AUfHS"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/1160z3oaghelxdto/index.m3u8",
+    "playbackId": "1160z3oaghelxdto",
+    "eventId": "progcrypto",
+    "track": "Next Gen Applied Crypto",
+    "coverImage": "/sessions/progcrypto/oneshot_signatures_thumbnail.png",
+    "assetId": "1160bd1e-85e3-4955-8dba-b4a1b6602b9b",
+    "sourceId": "17264d1b-22cb-4510-a583-837293741512",
+    "videoType": "clip"
 }
