@@ -8,7 +8,7 @@ const Layout = async ({
   return (
     <div className="w-screen h-screen ">
       <HomePageNavbar />
-      <div className="top-[74px] flex flex-col p-2 md:p-4 overflow-scroll">
+      <div className="top-[74px] flex flex-col overflow-scroll">
         {children}
       </div>
     </div>

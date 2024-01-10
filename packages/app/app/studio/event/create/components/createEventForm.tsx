@@ -245,7 +245,7 @@ export default function CreateEventForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Create event</Button>
       </form>
     </Form>
   )
