@@ -1,25 +1,25 @@
 {
-  "id": "wtf_is_l1_security_and_how_to_think_about_it",
-  "name": "WTF is L1 security and how to think about it",
-  "description": "",
-  "start": 1699855200000,
-  "end": 1699856160000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "danny_ryan",
-      "name": "Danny\nRyan",
-      "bio": "Researcher\nEthereum Foundation",
-      "eventId": "secureum_trustx",
-      "twitter": "@dannyryan",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Danny.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/e672so6btugw9eap/index.m3u8",
-  "playbackId": "e672so6btugw9eap",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/wtf_is_l1_security_and_how_to_think_about_it.jpg",
-  "assetId": "e67248a8-3287-4569-8c1d-d5aa33a0876a",
-  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-  "videoType": "clip"
+    "id": "wtf_is_l1_security_and_how_to_think_about_it",
+    "name": "WTF is L1 security and how to think about it",
+    "description": "",
+    "start": 1699855200000,
+    "end": 1699856160000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "danny_ryan",
+            "name": "Danny\nRyan",
+            "bio": "Researcher\nEthereum Foundation",
+            "eventId": "secureum_trustx",
+            "twitter": "@dannyryan",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Danny.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/e672so6btugw9eap/index.m3u8",
+    "playbackId": "e672so6btugw9eap",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/wtf_is_l1_security_and_how_to_think_about_it.jpg",
+    "assetId": "e67248a8-3287-4569-8c1d-d5aa33a0876a",
+    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+    "videoType": "clip"
 }

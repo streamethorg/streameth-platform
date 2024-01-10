@@ -10,7 +10,7 @@ import {
   useNetwork,
 } from 'wagmi'
 import CastrABI from '@/lib/contracts/Castr-abi'
-import { Button } from '@/components/Form/Button'
+import { Button } from '@/components/ui/button'
 import { ConnectKitButton } from 'connectkit'
 import { ModalContext } from '@/lib/context/ModalContext'
 import { base } from 'viem/chains'
@@ -120,7 +120,7 @@ const MintButton = ({
       <Button
         variant={'default'}
         onClick={() => !hasMinted && mint()}
-        isLoading={isLoading}
+        // isLoading={isLoading}
         className={`w-full uppercase p-2 border ${className}`}>
         {hasMinted
           ? 'Successfully Minted'

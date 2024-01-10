@@ -54,7 +54,7 @@ const ShareButton = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge>
+        <Badge className="bg-background">
           <ShareIcon className=" p-1 h-6 w-6  md:h-8 md:w-8 cursor-pointer text-white " />
           Share
         </Badge>

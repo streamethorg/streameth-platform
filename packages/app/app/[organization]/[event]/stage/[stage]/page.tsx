@@ -23,6 +23,8 @@ export default async function Stage({ params }: EventPageProps) {
 
   const sessions = await fetchEventSessions({
     event: params.event,
+    stage: params.stage,
+    date: new Date(),
   })
 
   const stage = await fetchEventStage({
@@ -45,7 +47,7 @@ export default async function Stage({ params }: EventPageProps) {
   }
 
   return (
-    <div className="h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
+    <div className="p-2 h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
       <div className="flex flex-col w-full h-full z-40 lg:w-[70%] sticky top-[54px] md:p-4 md:pr-2">
         <Player
           streamId={stage.streamSettings.streamId}
@@ -56,12 +58,13 @@ export default async function Stage({ params }: EventPageProps) {
           cardDescription={event.name}
           playerName={stage.name}
           streamId={stage.streamSettings.streamId}
+          description={event.description}
         />
       </div>
       <Tabs
-        defaultValue={tabs[0].value}
-        className="md:w-[30%] w-full max-h-[100%] md:m-4 md:ml-2 bg-background p-2 rounded-lg ">
-        <TabsList className="w-full">
+        defaultValue={tabs[0]?.value ?? ''}
+        className="lg:w-[30%] w-full max-h-[100vh] lg:ml-2 lg:m-4 bg-background p-2 rounded-lg ">
+        <TabsList className="w-full bg-background">
           {tabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value}>
               {tab.value}

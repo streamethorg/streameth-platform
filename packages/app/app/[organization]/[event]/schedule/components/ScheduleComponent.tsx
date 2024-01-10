@@ -30,7 +30,7 @@ const ScheduleComponent = async ({
   const sessions = await fetchEventSessions({
     event: event.id,
     stage: stage,
-    date: date ? parseInt(date) : undefined,
+    date: date ? new Date(parseInt(date)) : undefined,
   })
 
   return (

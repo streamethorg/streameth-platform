@@ -2,15 +2,44 @@ import { IEvent } from 'streameth-server/model/event'
 import { IStage } from 'streameth-server/model/stage'
 import { ISession } from 'streameth-server/model/session'
 import { ISpeaker } from 'streameth-server/model/speaker'
+import { IOrganization } from 'streameth-server/model/organization'
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
-import { NavBarProps } from './types'
-export async function fetchEvents(): Promise<IEvent[]> {
+import OrganizationController from 'streameth-server/controller/organization'
+import { NavBarProps, IPagination } from './types'
+import FuzzySearch from 'fuzzy-search';
+export async function fetchOrganizations(): Promise<IOrganization[]> {
+  try {
+    const organizationController = new OrganizationController()
+    const data = await organizationController.getAllOrganizations()
+    return data.map((organization) => organization.toJson())
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching organizations'
+  }
+}
+
+export async function fetchEvents({
+  organizationId,
+  date,
+}: {
+  organizationId?: string
+  date?: Date
+}): Promise<IEvent[]> {
   try {
     const eventController = new EventController()
-    const data = await eventController.getAllEvents({})
+    let data = await eventController.getAllEvents({})
+    if (organizationId) {
+      data = data.filter(
+        (event) => event.organizationId === organizationId
+      )
+    }
+    // upcoming events
+    if (date) {
+      data = data.filter((event) => event.start > date)
+    }
     return data.map((event) => event.toJson())
   } catch (e) {
     console.log(e)
@@ -23,7 +52,7 @@ export async function fetchEvent({
   organization,
 }: {
   event: string
-  organization: string
+  organization?: string
 }): Promise<IEvent> {
   try {
     const eventController = new EventController()
@@ -73,28 +102,114 @@ export async function fetchEventStage({
   }
 }
 
+
+export async function fetchAllSessions({
+  organization,
+  event,
+  date,
+  speakerIds,
+  onlyVideos,
+  page = 1,
+  limit = 10,
+  searchQuery = ''
+}: {
+  event?: string
+  organization?: string
+  date?: Date
+  speakerIds?: string[]
+  onlyVideos?: boolean
+  page?: number
+  limit?: number
+  searchQuery?: string
+}): Promise<{ sessions: ISession[], pagination: IPagination }> {
+
+  let allSessions: ISession[] = [];
+  
+  // Fetch all data
+  if (event) {
+    // existing logic to fetch all sessions for a specific event
+    allSessions = await fetchEventSessions({
+      event,
+      date,
+      speakerIds,
+      onlyVideos,
+    });
+  } else {
+    // existing logic to fetch all sessions across all organizations
+    const organizations = organization
+      ? [organization]
+      : (await fetchOrganizations()).map((org) => org.id);
+
+    for (const org of organizations) {
+      const events = await fetchEvents({ organizationId: org, date });
+      for (const ev of events) {
+        const sessions = await fetchEventSessions({
+          event: ev.id,
+          date,
+          speakerIds,
+          onlyVideos,
+        });
+        allSessions = allSessions.concat(sessions);
+      }
+    }
+  }
+
+  if (searchQuery) {
+    const normalizedQuery = searchQuery.toLowerCase();
+    const fuzzySearch = new FuzzySearch(allSessions, ['event', 'name', 'speakers.name'], {
+      caseSensitive: false,
+    });
+    
+    allSessions = fuzzySearch.search(normalizedQuery);
+  }
+
+  // Calculate total items and total pages
+  const totalItems = allSessions.length;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  // Implement manual pagination
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedSessions = allSessions.slice(startIndex, endIndex);
+
+  // Return paginated data and pagination metadata
+  return {
+    sessions: paginatedSessions,
+    pagination: {
+      currentPage: page,
+      totalPages,
+      totalItems,
+      limit,
+    },
+  };
+}
+
 export async function fetchEventSessions({
   event,
   stage,
   timestamp,
   date,
   speakerIds,
+  onlyVideos,
 }: {
   event: string
   stage?: string
   timestamp?: number
-  date?: number
+  date?: Date
   speakerIds?: string[]
+  onlyVideos?: boolean
 }): Promise<ISession[]> {
   try {
     const sessionController = new SessionController()
-    const data = await sessionController.getAllSessions({
+    let data = await sessionController.getAllSessions({
       eventId: event,
       stage,
       timestamp,
       date,
       speakerIds,
+      onlyVideos
     })
+
     return data.map((session) => session.toJson())
   } catch (e) {
     console.log(e)

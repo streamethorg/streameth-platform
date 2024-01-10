@@ -7,7 +7,7 @@ const EmbedLayout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     setShowNav(false)
-  }, [])
+  }, [setShowNav])
 
   return children
 }

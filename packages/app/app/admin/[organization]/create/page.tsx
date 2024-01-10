@@ -1,4 +1,4 @@
-import CreateEditEvent from '../components/CreateEditEvent'
+// import CreateEditEvent from '../components/CreateEditEvent'
 import { EventFormProvider } from '../components/EventFormContext'
 interface Params {
   organization: string
@@ -7,7 +7,8 @@ interface Params {
 const CreateEvent = async ({ params }: { params: Params }) => {
   return (
     <EventFormProvider organizationId={params.organization}>
-      <CreateEditEvent />
+      {/* <CreateEditEvent /> */}
+      <></>
     </EventFormProvider>
   )
 }

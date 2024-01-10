@@ -18,7 +18,7 @@ const Initializer = ({ children }: { children: ReactNode }) => {
         colors.accent
       )
     }
-  }, [])
+  }, [isOrganization])
   return children
 }
 

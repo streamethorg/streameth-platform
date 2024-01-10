@@ -86,7 +86,7 @@ const ReserveSpotButton = ({ event }: props) => {
         setUser(JSON.parse(item))
       }
     }
-  }, [])
+  }, [event.id])
   if (user && user.isSignedUp) {
     return (
       <div className="text-center p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">

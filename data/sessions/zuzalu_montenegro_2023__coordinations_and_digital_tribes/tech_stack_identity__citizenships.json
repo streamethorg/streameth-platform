@@ -1,1 +1,33 @@
-{"id":"tech_stack_identity__citizenships","name":"Tech stack: Identity & Citizenships","description":"","start":1684312200000,"end":1684314000000,"stageId":"dome","speakers":[{"id":"scott_moore","name":"Scott Moore","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"},{"id":"manu_alzuru","name":"Manu Alzuru","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"},{"id":"sofia_cossar","name":"Sofia Cossar","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/0fb1wv9v0fabxrap/index.m3u8","playbackId":"0fb1wv9v0fabxrap","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/tech_stack_identity__citizenships.jpg"}
+{
+    "id": "tech_stack_identity__citizenships",
+    "name": "Tech stack: Identity & Citizenships",
+    "description": "",
+    "start": 1684312200000,
+    "end": 1684314000000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "scott_moore",
+            "name": "Scott Moore",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "manu_alzuru",
+            "name": "Manu Alzuru",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "sofia_cossar",
+            "name": "Sofia Cossar",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/0fb1wv9v0fabxrap/index.m3u8",
+    "playbackId": "0fb1wv9v0fabxrap",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/tech_stack_identity__citizenships.jpg",
+    "assetId": "0fb141e2-6f56-4cd0-83a7-f596ae0f5a72"
+}

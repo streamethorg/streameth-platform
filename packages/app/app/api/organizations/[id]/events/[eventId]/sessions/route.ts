@@ -27,7 +27,9 @@ export async function GET(
       eventId: params.eventId,
       stage: searchParams.stage,
       timestamp: Number(searchParams.timestamp),
-      date: Number(searchParams.date),
+      date: searchParams.date
+        ? new Date(searchParams.date)
+        : undefined,
     })
     return NextResponse.json(data)
   } catch (e) {

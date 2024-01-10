@@ -8,7 +8,7 @@ import {
   CameraIcon,
 } from '@heroicons/react/24/outline'
 import colors from '@/lib/constants/colors'
-import { Button } from '@/components/Form/Button'
+import { Button } from '@/components/ui/button'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { ModalContext } from '@/lib/context/ModalContext'
