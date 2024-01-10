@@ -6,9 +6,27 @@ import { CONFIG, resetTmpFolder } from './config'
 import { createReadStream, existsSync, ReadStream } from 'fs'
 import * as child from 'child_process'
 import { join } from 'path'
+import https from 'https';
 
 export function ToStream(filepath: string) {
   return createReadStream(filepath, { encoding: 'utf8' })
+}
+
+export function downloadFile(fileUrl: string, outputLocation: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(outputLocation);
+
+    https.get(fileUrl, response => {
+      response.pipe(file);
+      file.on('finish', () => {
+        file.close();
+        resolve();
+      });
+    }).on('error', err => {
+      fs.unlink(outputLocation, () => {});
+      reject(err);
+    });
+  });
 }
 
 export async function ToMp3(id: string, stream: ReadStream, bitrate = CONFIG.BITRATE) {
@@ -31,39 +49,39 @@ export async function ToMp4(id: string, stream: ReadStream) {
   }
 }
 
-export async function JoinSessions(sessions: string[]) {
-  console.log('Join', sessions.length, 'sessions')
-
-  for (let i = 0; i < sessions.length; i++) {
-    const id = sessions[i]
-    const introId = id.replace(/["_"]/g, '-')
-    const inputs = []
-
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${introId}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${introId}.mp4`)
-    }
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)
-    }
-    if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/outros/${id}.mp4`)) {
-      inputs.push(`${CONFIG.ASSET_FOLDER}/outros/${id}.mp4`)
-    }
-
-    if (inputs.length === 0) {
-      console.log('No inputs found', id)
-      continue
-    }
-
-    // if split is found, but no in-/outro move to session folder
-    if (inputs.length === 1 && fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
-      console.log('Not enough inputs to join. Moving split video')
-      fs.copyFileSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
-      continue
-    }
-
-    await Join(inputs, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
-  }
-}
+// export async function JoinSessions(sessions: string[]) {
+//   console.log('Join', sessions.length, 'sessions')
+//
+//   for (let i = 0; i < sessions.length; i++) {
+//     const id = sessions[i]
+//     const introId = id.replace(/["_"]/g, '-')
+//     const inputs = []
+//
+//     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/intros/${introId}.mp4`)) {
+//       inputs.push(`${CONFIG.ASSET_FOLDER}/intros/${introId}.mp4`)
+//     }
+//     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
+//       inputs.push(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)
+//     }
+//     if (fs.existsSync(`${CONFIG.ASSET_FOLDER}/outros/${id}.mp4`)) {
+//       inputs.push(`${CONFIG.ASSET_FOLDER}/outros/${id}.mp4`)
+//     }
+//
+//     if (inputs.length === 0) {
+//       console.log('No inputs found', id)
+//       continue
+//     }
+//
+//     // if split is found, but no in-/outro move to session folder
+//     if (inputs.length === 1 && fs.existsSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`)) {
+//       console.log('Not enough inputs to join. Moving split video')
+//       fs.copyFileSync(`${CONFIG.ASSET_FOLDER}/splits/${id}.mp4`, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
+//       continue
+//     }
+//
+//     await Join(inputs, `${CONFIG.ASSET_FOLDER}/sessions/${id}.mp4`)
+//   }
+// }
 
 export async function Join(inputs: string[], output: string) {
   console.log('Joining videos to', output)
