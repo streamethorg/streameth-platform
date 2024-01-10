@@ -1,7 +1,6 @@
 'use client'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { formSchema } from '../create/lib/schema'
 import * as z from 'zod'
 
 import {
@@ -26,10 +25,15 @@ import { Button } from '@/components/ui/button'
 import ImageUpload from '../create/components/imageUpload'
 import ColorPicker from '../create/components/colorPicker'
 import TimePicker from '../create/components/timePicker'
+import { eventSchema } from '@/lib/schema'
+import DataConfigElement from './AccordeonElements/dataConfigElement'
+import DatePicker from '../create/components/datePicker'
+import Combobox from '@/components/ui/combo-box'
+import moment from 'moment-timezone'
 
 const SettingsNavigation = ({ event }: { event: IEvent }) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof eventSchema>>({
+    resolver: zodResolver(eventSchema),
     defaultValues: {
       eventName: event.name,
       eventDescription: event.description,
@@ -41,11 +45,12 @@ const SettingsNavigation = ({ event }: { event: IEvent }) => {
       eventLogo: event.logo,
       eventBanner: event.banner,
       eventColor: event.accentColor,
+      dataImporter: event.dataImporter,
     },
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof eventSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
@@ -57,7 +62,7 @@ const SettingsNavigation = ({ event }: { event: IEvent }) => {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1" className="px-2">
             <AccordionTrigger>Basics</AccordionTrigger>
-            <AccordionContent className="p-2 space-y-4">
+            <AccordionContent className="p-2 space-y-8">
               <FormField
                 control={form.control}
                 name="eventName"
@@ -87,9 +92,104 @@ const SettingsNavigation = ({ event }: { event: IEvent }) => {
                   </FormItem>
                 )}
               />
+
               <Button type="submit" className="ml-auto">
                 Save
               </Button>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="time" className="px-2">
+            <AccordionTrigger>Time</AccordionTrigger>
+            <AccordionContent className="p-2 space-y-8">
+              <div className="flex flex-col space-y-8">
+                <div className="flex flex-row w-full space-x-1">
+                  <FormField
+                    control={form.control}
+                    name="startDate"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel className="">Start Date</FormLabel>
+                        <FormControl>
+                          <DatePicker
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="startTime"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel className="">Start Time</FormLabel>
+                        <FormControl>
+                          <TimePicker
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="flex flex-row w-full space-x-1">
+                  <FormField
+                    control={form.control}
+                    name="endDate"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel className="">End Date</FormLabel>
+                        <FormControl>
+                          <DatePicker
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="endTime"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel className="">End Time</FormLabel>
+                        <FormControl>
+                          <TimePicker
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+              <FormField
+                control={form.control}
+                name="eventLocation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="">
+                      Select the event timezone
+                    </FormLabel>
+                    <FormControl>
+                      <Combobox
+                        items={generateTimezones()}
+                        value={field.value}
+                        setValue={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2" className="px-2">
@@ -177,6 +277,34 @@ const SettingsNavigation = ({ event }: { event: IEvent }) => {
               </Button>
             </AccordionContent>
           </AccordionItem>
+          <AccordionItem value="item-3" className="px-2">
+            <AccordionTrigger>Event CMS</AccordionTrigger>
+            <AccordionContent className="p-2 space-y-8">
+              <span>
+                Import you speaker data and your schedule from one of
+                our supported data providers.
+              </span>
+              <FormField
+                control={form.control}
+                name="dataImporter"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="">Data provider</FormLabel>
+                    <FormControl>
+                      <DataConfigElement
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="ml-auto">
+                Save
+              </Button>
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </form>
     </Form>
@@ -184,3 +312,11 @@ const SettingsNavigation = ({ event }: { event: IEvent }) => {
 }
 
 export default SettingsNavigation
+
+function generateTimezones() {
+  const timezones = moment.tz.names()
+  return timezones.map((timezone) => ({
+    label: timezone,
+    value: timezone,
+  }))
+}

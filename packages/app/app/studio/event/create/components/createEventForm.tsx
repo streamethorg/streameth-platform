@@ -1,7 +1,7 @@
 'use client'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { formSchema } from '../lib/schema'
+import { formSchema } from '../../../../../lib/schema'
 import * as z from 'zod'
 
 import { Textarea } from '@/components/ui/textarea'

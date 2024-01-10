@@ -44,3 +44,36 @@ export const formSchema = z.object({
       message: 'Event color must be no more than 50 characters long.',
     }),
 })
+
+
+const GSheetConfigSchema = z.object({
+  sheetId: z.string().optional(),
+  apiKey: z.string().optional(),
+  driveId: z.string().optional(),
+  driveApiKey: z.string().optional(),
+});
+
+const PretalxConfigSchema = z.object({
+  url: z.string(),
+  apiToken: z.string(),
+});
+
+const IDataImporterSchema = z.union([
+  z.object({ type: z.literal("gsheet"), config: GSheetConfigSchema }),
+  z.object({ type: z.literal("pretalx"), config: PretalxConfigSchema }),
+]);
+
+const IPluginsSchema = z.object({
+  disableChat: z.boolean(),
+  hideSchedule: z.boolean().optional(),
+  hideSpeaker: z.boolean().optional(),
+});
+
+
+export const eventSchema = z.object({
+  ...formSchema.shape,
+  dataImporter: z.array(IDataImporterSchema).optional(),
+  plugins: IPluginsSchema.optional(),
+  unlisted: z.boolean().optional(),
+  archiveMode: z.boolean().optional(),
+});

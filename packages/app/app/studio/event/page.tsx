@@ -19,9 +19,9 @@ export default async function EventPage({
 
   return (
     <TooltipProvider>
-      <div className="flex flex-row overflow-hidden w-full">
+      <div className="flex flex-row h-full overflow-hidden w-full">
         <Nav isCollapsed={true} />
-        <div className="w-1/2">
+        <div className="w-2/6 h-full border-r">
           <SettingsNavigation event={event} />
         </div>
       </div>
