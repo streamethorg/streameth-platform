@@ -1,7 +1,7 @@
 'use client'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { formSchema } from '../../../../../lib/schema'
+import { formSchema } from '@/lib/schema'
 import * as z from 'zod'
 
 import { Textarea } from '@/components/ui/textarea'
@@ -15,13 +15,13 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import DatePicker from './datePicker'
+import DatePicker from '@/components/misc/form/datePicker'
 
 import moment from 'moment-timezone'
 import Combobox from '@/components/ui/combo-box'
-import ImageUpload from './imageUpload'
-import ColorPicker from './colorPicker'
-import TimePicker from './timePicker'
+import ImageUpload from '@/components/misc/form/imageUpload'
+import ColorPicker from '@/components/misc/form/colorPicker'
+import TimePicker from '@/components/misc/form/timePicker'
 
 export default function CreateEventForm() {
   const form = useForm<z.infer<typeof formSchema>>({

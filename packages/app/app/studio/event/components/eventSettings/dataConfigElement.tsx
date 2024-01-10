@@ -79,7 +79,7 @@ const DataConfigElement = ({
   }
 
   return (
-    <div>
+    <div className="space-y-4">
       <Select
         defaultValue={initialProvider}
         onValueChange={handleProviderChange}>
@@ -114,7 +114,7 @@ const DataConfigElement = ({
       )}
 
       {selectedProvider === 'pretalx' && (
-        <div>
+        <div className="space-y-4">
           <Input
             name="url"
             value={(config as PretalxConfig).url || ''}
