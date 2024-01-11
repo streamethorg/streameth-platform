@@ -60,6 +60,7 @@ class App {
     }
 
     await connect(dbConnection.url);
+    logger.info("Db connected")
   }
 
   private initializeMiddlewares() {

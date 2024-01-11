@@ -5,8 +5,7 @@ export const config = {
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
   db: {
-    host: validatedEnv.DB_HOST,
-    port: validatedEnv.DB_PORT,
+    host: validatedEnv.DB_HOST
   },
   logger: {
     format: validatedEnv.LOG_FORMAT,
