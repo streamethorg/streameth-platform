@@ -3,20 +3,33 @@ import * as React from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
 import { Nav } from './components/eventNavigation'
-import SettingsNavigation from './components/eventSettings/settingsNavigation'
-import { fetchEvent } from '@/lib/data'
+import SettingsNavigation from './components/eventSettings/settingsAccordion'
+import StageAccordion from './components/stageSettings/stageAccordion'
+import StageSettings from './components/stageSettings/stageSettings'
+import { fetchEvent, fetchEventStages } from '@/lib/data'
 import Iframe from './components/eventSettings/iframe'
+
 export default async function EventPage({
   searchParams,
 }: {
   searchParams: {
     eventId: string
     settings: string
+    stage: string
   }
 }) {
-  const event = await fetchEvent({
-    event: searchParams.eventId,
-  })
+  const [event, stages] = await Promise.all([
+    fetchEvent({
+      event: searchParams.eventId,
+    }),
+    fetchEventStages({
+      event: searchParams.eventId,
+    }),
+  ])
+
+  const [stage] = stages.filter(
+    (stage) => stage.id === searchParams.stage
+  )
 
   // get #setting from url
   return (
@@ -37,7 +50,14 @@ export default async function EventPage({
           </>
         )}
         {searchParams.settings === 'Livestream' && (
-          <div className="w-full h-full">stage</div>
+          <>
+            <div className="w-2/6 min-w-[400px] h-full border-r">
+              <StageAccordion stages={stages} />
+            </div>
+            <div className="w-full h-full">
+              {stage && <StageSettings stage={stage} />}
+            </div>
+          </>
         )}
       </div>
     </TooltipProvider>

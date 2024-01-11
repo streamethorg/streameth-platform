@@ -77,3 +77,22 @@ export const eventSchema = z.object({
   unlisted: z.boolean().optional(),
   archiveMode: z.boolean().optional(),
 });
+
+
+
+const IStreamSettingsSchema = z.object({
+  streamId: z.string(),
+});
+
+const IPluginSchema = z.object({
+  name: z.string(),
+});
+
+export const StageSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  eventId: z.string(), // Replace with the actual schema if IEvent['id'] is different
+  streamSettings: IStreamSettingsSchema,
+  plugins: z.array(IPluginSchema).optional(),
+  order: z.number().optional(),
+});
