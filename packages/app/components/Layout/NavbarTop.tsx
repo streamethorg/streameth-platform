@@ -18,7 +18,7 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="md:hidden z-50">
+    className="lg:hidden z-50">
     {!isNavVisible ? (
       <Bars3Icon className="w-[40px] h-[40px] bg-background  rounded text-white mx-auto" />
     ) : (
@@ -45,7 +45,7 @@ export default function NavbarTop({
   }
   return (
     <NavigationMenu className="z-[99999999] bg-accent sticky top-0">
-      <div className="flex p-2 px-2 md:px-4 w-full">
+      <div className="flex p-2 px-2 lg:px-4 w-full">
         <div className="flex items-center">
           <Link href={homePath ? homePath : '/'} className="">
             <span className="sr-only">Logo</span>
@@ -58,7 +58,7 @@ export default function NavbarTop({
             />
           </Link>
         </div>
-        <div className=" flex flex-row items-center justify-end md:justify-between h-full w-full">
+        <div className=" flex flex-row items-center justify-end lg:justify-between h-full w-full">
           {menuVisible && (
             <Navbar
               pages={
@@ -74,15 +74,6 @@ export default function NavbarTop({
               }
             />
           )}
-          {/* {components.length > 0 &&
-            components.map((component, index) => {
-              return (
-                <div className="flex-1 px-2 " key={index}>
-                  {component}
-                </div>
-              )
-            })} */}
-
           {pages.length > 1 && (
             <NavBarButton
               isNavVisible={menuVisible}

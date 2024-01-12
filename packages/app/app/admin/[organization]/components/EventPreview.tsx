@@ -113,7 +113,7 @@ const EventPreview = () => {
                   alt="Event Cover"
                   width={1500}
                   height={500}
-                  className="w-full object-cover h-36 md:h-52 lg:h-96"
+                  className="w-full object-cover h-36 lg:h-52 lg:h-96"
                 />
                 <Image
                   src={getImageUrl('/events/' + formData?.logo)}

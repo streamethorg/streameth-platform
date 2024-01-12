@@ -2,6 +2,7 @@ export interface NavBarProps {
   pages: {
     name: string
     href: string
+    bgColor?: string
   }[]
   logo: string
   homePath: string

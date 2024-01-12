@@ -37,7 +37,7 @@ const SessionInfoBox = ({
   const [isOpened, setIsOpened] = useState(false)
   return (
     <div className=" rounded my-2">
-      <div className="flex flex-col md:flex-row justify-center py-4">
+      <div className="flex flex-col lg:flex-row justify-center py-4">
         <div className="flex flex-col justify-center px-2">
           <CardTitle className="text-background">{title}</CardTitle>
           <CardDescription>
@@ -46,7 +46,7 @@ const SessionInfoBox = ({
             <div className="flex flex-row ">{cardDescription}</div>
           </CardDescription>
         </div>
-        <div className="flex flex-row md:ml-auto space-x-1 mt-2 lg:my-0">
+        <div className="flex flex-row lg:ml-auto space-x-1 mt-2 lg:my-0">
           <ShareButton />
           <EmbedButton
             streamId={streamId}

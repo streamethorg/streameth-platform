@@ -83,7 +83,7 @@ export default async function OrganizationHome({ params }: Params) {
         <div className="px-4">
           {upComing.length > 0 && (
             <>
-              <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
+              <p className="px-4 mt-3 font-ubuntu font-bold lg:py-2 text-blue text-2xl lg:text-4xl">
                 Upcoming Events
               </p>
             </>

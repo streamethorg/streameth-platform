@@ -55,7 +55,7 @@ export default function SearchBar(): JSX.Element {
   }
 
   return (
-    <div className="flex max-w-[500px] flex-col items-center justify-center relative w-full md:ml-[-230px] ">
+    <div className="flex max-w-[500px] flex-col items-center justify-center relative w-full">
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {

@@ -24,7 +24,7 @@ const Layout = async ({
     <div className="h-full flex flex-col  z-1 bg-accent min-h-screen ">
       <Navbar {...navbarRoutes} />
 
-      <main className={` flex w-full ml-auto md:h-full flex-grow`}>
+      <main className={` flex w-full ml-auto lg:h-full flex-grow`}>
         <ColorComponent accentColor={event.accentColor}>
           {children}
         </ColorComponent>
