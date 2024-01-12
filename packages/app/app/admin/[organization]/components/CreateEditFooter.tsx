@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import StatusBarOneIcon from '@/components/icons/StatusBarOneIcon'
-import StatusBarTwoIcon from '@/components/icons/StatusBarTwoIcon'
-import StatusBarFullIcon from '@/components/icons/StatusBarFullIcon'
-import { Button } from '@/components/Form/Button'
-import { ModalContext } from '@/context/ModalContext'
+// import StatusBarOneIcon from '@/components/icons/StatusBarOneIcon'
+// import StatusBarTwoIcon from '@/components/icons/StatusBarTwoIcon'
+// import StatusBarFullIcon from '@/components/icons/StatusBarFullIcon'
+import { Button } from '@/components/ui/button'
+import { ModalContext } from '@/lib/context/ModalContext'
 import { EventFormContext } from './EventFormContext'
-import UseAdminContext from '@/hooks/useAdminContext'
+import UseAdminContext from '@/lib/hooks/useAdminContext'
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { IEvent } from 'streameth-server/model/event'
@@ -73,9 +73,7 @@ const CreateEditFooter = () => {
     <div className="flex flex-row sticky w-full bottom-0 p-4 shadow bg-white items-center justify-between">
       <div>
         {event && (
-          <Button
-            variant="danger"
-            onClick={() => handleModalOpen(event)}>
+          <Button onClick={() => handleModalOpen(event)}>
             Delete Event
           </Button>
         )}
@@ -85,13 +83,13 @@ const CreateEditFooter = () => {
           <p className="text-accent text-sm">
             {currentStep}/{totalPages}
           </p>
-          {currentStep == 1 ? (
+          {/* {currentStep == 1 ? (
             <StatusBarOneIcon />
           ) : currentStep == 2 ? (
             <StatusBarTwoIcon />
           ) : (
             <StatusBarFullIcon />
-          )}
+          )} */}
         </div>
         {currentStep > 1 && (
           <Button variant="outline" onClick={handlePreviousStep}>

@@ -1,94 +1,87 @@
-import { notFound } from 'next/navigation'
-import { getEventDays, isSameDay } from '@/utils/time'
-import StageLayout from './components/StageLayout'
-import { StageContextProvider } from './components/StageContext'
-import type { Metadata, ResolvingMetadata } from 'next'
-import EventController from 'streameth-server/controller/event'
-import StageController from 'streameth-server/controller/stage'
-import SessionController from 'streameth-server/controller/session'
-interface Params {
-  params: {
-    organization: string
-    event: string
-    stage: string
-  }
-}
+import Player from '@/components/ui/Player'
+import SessionInfoBox from '@/components/sessions/SessionInfoBox'
+import SessionList from '@/components/sessions/SessionList'
+import Chat from '@/components/plugins/Chat'
+import { EventPageProps } from '@/lib/types'
+import {
+  fetchEvent,
+  fetchEventSessions,
+  fetchEventStage,
+} from '@/lib/data'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/tabs'
 
-export async function generateStaticParams({
-  params: { organization, event },
-}: {
-  params: { organization: string; event: string }
-}) {
-  const stageController = new StageController()
-  const stages = (
-    await stageController.getAllStagesForEvent(event)
-  ).map((stage) => {
-    return {
-      organization: organization,
-      event: event,
-      stage: stage.id,
-    }
+export default async function Stage({ params }: EventPageProps) {
+  const event = await fetchEvent({
+    event: params.event,
+    organization: params.organization,
   })
-  return stages
-}
 
-export default async function Stage({ params }: Params) {
-  const eventController = new EventController()
-  const stageController = new StageController()
-  const sessionController = new SessionController()
-  try {
-    const event = await eventController.getEvent(
-      params.event,
-      params.organization
-    )
-    const stage = await stageController.getStage(
-      params.stage,
-      params.event
-    )
-    const days = getEventDays(event.start, event.end)
-    const currentDay = days.find((day) =>
-      isSameDay(day, new Date().getTime())
-    )
+  const sessions = await fetchEventSessions({
+    event: params.event,
+    stage: params.stage,
+    date: new Date(),
+  })
 
-    const sessions = await sessionController.getAllSessions({
-      eventId: event.id,
-      stage: params.stage,
-      // timestamp: new Date().getTime()
+  const stage = await fetchEventStage({
+    event: params.event,
+    stage: params.stage,
+  })
+
+  const tabs = []
+  if (sessions.length > 0 && !event?.plugins?.hideSchedule) {
+    tabs.push({
+      value: 'schedule',
+      content: <SessionList event={event} sessions={sessions} />,
     })
-
-    return (
-      <StageContextProvider
-        stage={stage.toJson()}
-        sessions={sessions.map((session) => session.toJson())}>
-        <StageLayout event={event.toJson()} />
-      </StageContextProvider>
-    )
-  } catch (e) {
-    console.log('stage failed to load', e)
-    return notFound()
   }
-}
+  if (!event?.plugins?.disableChat) {
+    tabs.push({
+      value: 'chat',
+      content: <Chat conversationId={stage.id} />,
+    })
+  }
 
-export async function generateMetadata(
-  { params }: Params,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const eventController = new EventController()
-  const event = await eventController.getEvent(
-    params.event,
-    params.organization
+  return (
+    <div className="p-2 h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
+      <div className="flex flex-col w-full h-full z-40 lg:w-[70%] top-[54px] lg:p-4 lg:pr-2">
+        <Player
+          streamId={stage.streamSettings.streamId}
+          playerName={stage.name}
+        />
+        <SessionInfoBox
+          title={'Watching: ' + stage.name + ' stage'}
+          cardDescription={event.name}
+          playerName={stage.name}
+          streamId={stage.streamSettings.streamId}
+          description={event.description}
+        />
+      </div>
+      {tabs.length > 0 && (
+        <Tabs
+          defaultValue={tabs[0]?.value ?? ''}
+          className="lg:w-[30%] w-full max-h-[100vh] lg:ml-2 lg:m-4 bg-background p-2 rounded-lg ">
+          <TabsList className="w-full bg-background">
+            {tabs.map((tab) => (
+              <TabsTrigger key={tab.value} value={tab.value}>
+                {tab.value}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {tabs.map((tab) => (
+            <TabsContent
+              className="h-[calc(100%-50px)] overflow-y-scroll"
+              key={tab.value}
+              value={tab.value}>
+              {tab.content}
+            </TabsContent>
+          ))}
+        </Tabs>
+      )}
+    </div>
   )
-  const imageName = event.eventCover
-    ? event.eventCover
-    : event.id + '.png'
-
-  return {
-    title: `${event.name} - ${params.stage}`,
-    description: `Attend ${event.name} virtually powered by StreamETH here`,
-    openGraph: {
-      title: `${event.name} - ${params.stage}`,
-      description: `Attend ${event.name} virtually powered by StreamETH here`,
-      images: [`https://app.streameth.org/events/${imageName}`],
-    },
-  }
 }

@@ -1,1 +1,33 @@
-{"id":"protonetwork_state_coordinations_intentional_communities","name":"Proto-Network State Coordi-Nations: Intentional Communities","description":"","start":1684294200000,"end":1684296000000,"stageId":"dome","speakers":[{"id":"genevieve_renoir","name":"Genevieve Renoir","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"},{"id":"oliver_sauter","name":"Oliver Sauter","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"},{"id":"jessy_kate_schingler","name":"Jessy Kate Schingler","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/332ahtnorojydpcc/index.m3u8","playbackId":"332ahtnorojydpcc","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/protonetwork_state_coordinations_intentional_communities.jpg"}
+{
+    "id": "protonetwork_state_coordinations_intentional_communities",
+    "name": "Proto-Network State Coordi-Nations: Intentional Communities",
+    "description": "",
+    "start": 1684294200000,
+    "end": 1684296000000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "genevieve_renoir",
+            "name": "Genevieve Renoir",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "oliver_sauter",
+            "name": "Oliver Sauter",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "jessy_kate_schingler",
+            "name": "Jessy Kate Schingler",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/332ahtnorojydpcc/index.m3u8",
+    "playbackId": "332ahtnorojydpcc",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/protonetwork_state_coordinations_intentional_communities.jpg",
+    "assetId": "332acbbd-d1fa-468c-bd2b-a75effa75404"
+}

@@ -1,115 +1,47 @@
-import EventController from 'streameth-server/controller/event'
-import EventList from '@/app/(home)/components/EventList'
-import Image from 'next/image'
-import StageController from 'streameth-server/controller/stage'
-import UpcomingEvents from './components/UpcomingEvents'
 import { Metadata } from 'next'
-import { SocialIcon } from 'react-social-icons'
-import Link from 'next/link'
-import LiveEvent from './components/LiveEvent'
-import { getDateInUTC, isCurrentDateInUTC } from '@/utils/time'
-import LiveEvents from './components/LiveEvents'
+import UpcomingEvents from './components/UpcomingEvents'
+import Videos from '../../components/misc/Videos'
+import { Suspense } from 'react'
+import { fetchOrganizations } from '@/lib/data'
+import OrganizationStrip from './components/OrganiationStrip'
+import {
+  CardDescription,
+  CardTitle,
+  Card,
+  CardHeader,
+  CardContent,
+} from '@/components/ui/card'
+import HeroHeader from './components/HeroHeader'
+import { Skeleton } from '@/components/ui/skeleton'
+
+const Loading = () => {
+  return <Skeleton className=" h-96 w-full bg-muted" />
+}
 
 export default async function Home() {
-  const eventController = new EventController()
-  const allEvents = await eventController.getAllEvents({})
-
-  const liveEvents = allEvents
-    .filter((event) => {
-      const startUTC = getDateInUTC(event?.start)
-      const endUTC = getDateInUTC(event?.end)
-      const currentDateUTC = isCurrentDateInUTC()
-
-      // Check if the event is ongoing (current date is between start and end dates)
-      const isOngoing =
-        startUTC <= currentDateUTC && currentDateUTC <= endUTC
-
-      // Check if the event has not ended (end date is after the current date)
-      const isNotPastEvent = currentDateUTC <= endUTC
-
-      return isOngoing && isNotPastEvent
-    })
-    .map((event) => event.toJson())
-    .sort(
-      (a, b) =>
-        new Date(a.start).getTime() - new Date(b.start).getTime()
-    )
-
-  const upComing = allEvents
-    .filter((event) => {
-      return getDateInUTC(event?.start) > isCurrentDateInUTC()
-    })
-    .map((event) => event.toJson())
-    .sort(
-      (a, b) =>
-        new Date(a.start).getTime() - new Date(b.start).getTime()
-    )
-
-  const pastEvents = allEvents
-    .filter((event) => {
-      return getDateInUTC(event?.end) < isCurrentDateInUTC()
-    })
-    .map((event) => event.toJson())
-  const stageController = new StageController()
-  const stage = await stageController.getStage(
-    'base_house',
-    'base_event'
-  )
+  const organizations = await fetchOrganizations()
 
   return (
-    <main className="w-screen mx-auto">
-      <div className="drop-shadow-sm sticky top-0 z-[9999] h-20 bg-accent flex p-2 md::px-8 md:p-4 gap-4">
-        <Image
-          className="hidden md:block"
-          src="/logo_dark.png"
-          alt="Streameth logo"
-          width={276}
-          height={46}
-        />
-        <Image
-          className="block md:hidden aspect-square h-full p-1"
-          src="/logo.png"
-          alt="Streameth logo"
-          height={64}
-          width={64}
-        />
-        <div className="flex flex-row ml-auto space-x-2 items-center justify-center">
-          <Link href="https://streameth.org/contact-us">
-            <div className="bg-blue capitalize border-blue text-white p-3 rounded-xl border">
-              Add your event
-            </div>
-          </Link>
-          <SocialIcon
-            style={{ width: '45px', height: '45px' }}
-            url="https://x.com/streameth"
-          />
-          <SocialIcon
-            style={{ width: '45px', height: '45px' }}
-            url="https://github.com/streamethorg/streameth-platform"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col lg:overflow-hidden">
-        {/* <LiveEvent stage={stage.toJson()} /> */}
-        {liveEvents.length > 0 && (
-          <>
-            <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-4xl">
-              Live Events
-            </p>
-            <LiveEvents events={liveEvents} />
-          </>
-        )}
-        {upComing?.length > 0 && (
-          <>
-            <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
-              Upcoming Events
-            </p>
-            <UpcomingEvents events={upComing} />
-          </>
-        )}
-        <EventList events={pastEvents} />
-      </div>
-    </main>
+    <>
+      <HeroHeader />
+      <Suspense>
+        <UpcomingEvents date={new Date()} />
+      </Suspense>
+      <Card className="bg-white border-none shadow-none">
+        <CardHeader>
+          <CardTitle className="text-background text-2xl lg:text-4xl">
+            Explore organizations that are using StreamETH
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-8 border-0">
+          {organizations.map((organization) => (
+            <Suspense key={organization.id} fallback={<Loading />}>
+              <OrganizationStrip organization={organization} />
+            </Suspense>
+          ))}
+        </CardContent>
+      </Card>
+    </>
   )
 }
 
