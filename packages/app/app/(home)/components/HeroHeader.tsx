@@ -1,5 +1,5 @@
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 const HeroHeader = () => {
   return (
@@ -14,8 +14,12 @@ const HeroHeader = () => {
           training in minutes with StreamETH.
         </p>
         <div className="flex flex-row space-x-4">
-          <Button>Host your event</Button>
-          <Button variant="secondary">Learn More</Button>
+          <Link href="https://info.streameth.org/contact-us">
+            <Button>Host your event</Button>
+          </Link>
+          <Link href="https://info.streameth.org/contact-us">
+            <Button variant="secondary">Learn More</Button>
+          </Link>
         </div>
       </div>
       <div className="flex flex-col w-full lg:w-1/2">

@@ -26,6 +26,7 @@ export default async function ArchivePage({
   return (
     <div className="bg-white">
       <UpcomingEvents
+        archive
         organization={
           searchParams.organization
             ? searchParams.organization

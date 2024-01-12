@@ -38,7 +38,7 @@ const HomePageNavbar = () => {
   const pages = [
     {
       name: 'Videography services',
-      href: '/docs',
+      href: 'https://info.streameth.org/stream-eth-studio',
       bgColor: 'bg-muted text-background',
     },
 
@@ -49,7 +49,7 @@ const HomePageNavbar = () => {
     },
     {
       name: 'Host your event',
-      href: '/',
+      href: 'https://info.streameth.org/contact-us',
       bgColor: 'bg-primary text-primary-foreground',
     },
   ]
