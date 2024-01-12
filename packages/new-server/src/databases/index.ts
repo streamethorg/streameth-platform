@@ -1,10 +1,7 @@
 import { config } from '@config';
-const { host, port } = config.db;
+const { host } = config.db;
 export const dbConnection = {
-  url:
-    config.appEnv === 'production'
-      ? host
-      : `mongodb://${host}:${port}/${'streameth'}`,
+  url: host,
   options: {
     useNewUrlParser: true,
     useUnifiedTopology: true,

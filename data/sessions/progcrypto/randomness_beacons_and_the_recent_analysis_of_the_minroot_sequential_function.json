@@ -1,26 +1,26 @@
 {
-  "id": "randomness_beacons_and_the_recent_analysis_of_the_minroot_sequential_function",
-  "name": "Randomness beacons and the recent analysis of the Minroot sequential function",
-  "description": "TBD",
-  "start": 1700208000000,
-  "end": 1700209800000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "mary_maller",
-      "name": "Mary Maller",
-      "bio": "I am a cryptography researcher at the Ethereum Foundation and PQShield. I am generally interested in public key cryptography with a heavy focus on zero-knowledge proofs. I believe that one day ZKPs will change the world. I am also interested in threshold cryptography.\n\nI am currently an editor in the ZKProof Standardization effort. I am part of the working group for standardising the Plonkish arithmetisation system and IOP.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1XFEGODa2LIzKyKRh19BgH2hgP2LWPVdp/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/465enyrwnkje4m3o/index.m3u8",
-  "playbackId": "465enyrwnkje4m3o",
-  "eventId": "progcrypto",
-  "track": "Libraries and Infrastructure",
-  "coverImage": "/sessions/progcrypto/randomness_beacons_and_the_recent_analysis_of_the_minroot_sequential_function_thumbnail.png",
-  "assetId": "465e409a-7d7d-42a3-b050-fe9183de0490",
-  "sourceId": "34b4cf87-6a3c-4a74-b600-881835ed4313",
-  "videoType": "clip"
+    "id": "randomness_beacons_and_the_recent_analysis_of_the_minroot_sequential_function",
+    "name": "Randomness beacons and the recent analysis of the Minroot sequential function",
+    "description": "TBD",
+    "start": 1700208000000,
+    "end": 1700209800000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "mary_maller",
+            "name": "Mary Maller",
+            "bio": "I am a cryptography researcher at the Ethereum Foundation and PQShield. I am generally interested in public key cryptography with a heavy focus on zero-knowledge proofs. I believe that one day ZKPs will change the world. I am also interested in threshold cryptography.\n\nI am currently an editor in the ZKProof Standardization effort. I am part of the working group for standardising the Plonkish arithmetisation system and IOP.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1XFEGODa2LIzKyKRh19BgH2hgP2LWPVdp/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/1b8f39pedfjuz3xk/index.m3u8",
+    "playbackId": "1b8f39pedfjuz3xk",
+    "eventId": "progcrypto",
+    "track": "Libraries and Infrastructure",
+    "coverImage": "/sessions/progcrypto/randomness_beacons_and_the_recent_analysis_of_the_minroot_sequential_function_thumbnail.png",
+    "assetId": "1b8f6beb-9cbc-4041-9067-40c2c3aa5b5b",
+    "sourceId": "34b4cf87-6a3c-4a74-b600-881835ed4313",
+    "videoType": "clip"
 }

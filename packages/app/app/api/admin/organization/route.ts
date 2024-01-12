@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Session from '@/utils/session'
+import Session from '@/lib/utils/session'
 import EventController from 'streameth-server/controller/event'
 import OrganizationController from 'streameth-server/controller/organization'
 import { IOrganization } from 'streameth-server/model/organization'

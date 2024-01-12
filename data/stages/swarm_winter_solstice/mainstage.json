@@ -1,1 +1,6 @@
-{"id":"mainstage","name":"Mainstage","eventId":"swarm_winter_solstice","streamSettings":{"streamId":"1"}}
+{
+  "id": "mainstage",
+  "name": "Mainstage",
+  "eventId": "swarm_winter_solstice",
+  "streamSettings": { "streamId": "6ea1f9c3-c371-4982-992b-109d5b2d167b" }
+}

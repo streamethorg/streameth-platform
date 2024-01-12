@@ -1,15 +1,10 @@
 import Image from 'next/image'
-import FilterBar from '../(home)/components/FilterBar'
 import remarkGfm from 'remark-gfm'
-import ColorComponent from '../../components/Form/ColorComponent'
 import { notFound } from 'next/navigation'
 import EventController from 'streameth-server/controller/event'
 import OrganizationController from 'streameth-server/controller/organization'
-import { getImageUrl } from '@/utils'
-import EventList from '../(home)/components/EventList'
 import Markdown from 'react-markdown'
 import { Metadata, ResolvingMetadata } from 'next'
-import UpcomingEvents from '../(home)/components/UpcomingEvents'
 
 interface Params {
   params: {
@@ -91,10 +86,8 @@ export default async function OrganizationHome({ params }: Params) {
               <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
                 Upcoming Events
               </p>
-              <UpcomingEvents events={upComing} />
             </>
           )}
-          <EventList events={pastEvents.map((event) => event)} />
         </div>
       </div>
     </main>

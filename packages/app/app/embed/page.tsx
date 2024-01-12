@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import Player from '@/components/misc/Player'
+import Player from '@/components/ui/Player'
 
 const EmbedPage = () => {
   const [playbackId, setPlaybackId] = useState<string | undefined>(

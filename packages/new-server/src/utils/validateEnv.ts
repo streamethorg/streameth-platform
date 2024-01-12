@@ -8,7 +8,6 @@ const validateEnv = () => {
     NODE_ENV: str(),
     APP_PORT: port(),
     DB_HOST: str(),
-    DB_PORT: str(),
     LOG_FORMAT: str(),
     LOG_DIR: str(),
     ORIGIN: str(),

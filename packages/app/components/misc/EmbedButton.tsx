@@ -1,7 +1,12 @@
 'use client'
 import { useEffect, useState, useContext } from 'react'
-import { ModalContext } from '../../context/ModalContext'
 import { CodeBracketIcon } from '@heroicons/react/24/outline'
+import { Badge } from '@/components/ui/badge'
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 const ModalContent: React.FC<{
   playbackId?: string
@@ -45,23 +50,24 @@ const ModalContent: React.FC<{
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full px-3 py-7 bg-base max-w-3xl">
-      <div className="flex flex-col items-center justify-center w-full h-full">
+    <DialogContent className="max-w-[450px]">
+      <div className="flex flex-col items-center justify-center w-full h-full ">
         <span className="text-xl mb-4 text-white">
           Easily embed this stream into your website by adding the
           iframe code below
         </span>
-        <div
-          className="relative bg-base text-white rounded-xl px-2 py-1 border border-gray-200 w-full max-w-full overflow-hidden whitespace-nowrap cursor-pointer"
+
+        <span
+          className="relative max-w-[350px] bg-background text-white rounded-xl px-2 py-1 overflow-clip whitespace-nowrap cursor-pointer"
           onClick={copyToClipboard}>
           {generatedEmbedCode}
-        </div>
+        </span>
         <span
           className={`absolute bottom-3 left-0 right-0 flex items-center justify-center text-accent transition-opacity duration-200 ${copiedClass}`}>
           Copied to clipboard!
         </span>
       </div>
-    </div>
+    </DialogContent>
   )
 }
 
@@ -74,23 +80,20 @@ function EmbedButton({
   streamId?: string
   playerName: string
 }) {
-  const { openModal } = useContext(ModalContext)
-
-  const handleModalOpen = () => {
-    openModal(
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <Badge className="bg-background">
+          <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  md:h-8 md:w-8 text-white" />
+          Embed
+        </Badge>
+      </DialogTrigger>
       <ModalContent
         playbackId={playbackId}
         streamId={streamId}
         playerName={playerName}
       />
-    )
-  }
-
-  return (
-    <CodeBracketIcon
-      className="border-2 font-bold border-white hover:bg-accent hover:text-white rounded p-1 cursor-pointer ml-auto h-6 w-6  md:h-8 md:w-8 text-white"
-      onClick={handleModalOpen}
-    />
+    </Dialog>
   )
 }
 

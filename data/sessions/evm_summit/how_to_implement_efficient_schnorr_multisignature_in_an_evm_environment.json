@@ -1,25 +1,25 @@
 {
-  "id": "how_to_implement_efficient_schnorr_multisignature_in_an_evm_environment",
-  "name": "How to implement efficient Schnorr multi-signature in an EVM environment",
-  "description": "On-chain Oracles are limited by their ability to scale. Developing an innovative approach utilising Schnorr cryptography and secp256k1 public key aggregation, Chronicle Labs has vastly alleviated the gas fee burden that has limited on-chain Oracle scalability. This innovation unlocks the cost-effective implementation of Schnoor multi-signature in an EVM environment.",
-  "start": 1699960200000,
-  "end": 1699961100000,
-  "stageId": "emirgan_2",
-  "speakers": [
-    {
-      "id": "niklas_kunkel",
-      "name": "Niklas Kunkel",
-      "bio": "Founder of Chronicle Labs, the developers of Chronicle Protocol, Nik began his crypto journey at IBM Research, where he worked on the Hyperledger blockchain and early supply chain finance applications. In 2017 he joined MakerDAO to create Dai, the first decentralized stablecoin on Ethereum. Nik is responsible for creating DSProxy. An industry-standard account abstraction primitive, OasisDEX, the first decentralized exchange on Ethereum with an order matching engine, as well as Chronicle Oracle Protocol, which secures over $10B of assets locked in MakerDAO.",
-      "eventId": "evm_summit",
-      "twitter": "",
-      "photo": "https://media.licdn.com/dms/image/D4E03AQFRbgvcfLLJAQ/profile-displayphoto-shrink_800_800/0/1692038773606?e=1704326400&v=beta&t=vMFY72dfXWqFclAd9yH8fJre-Jheog1inrojUbObv3g"
-    }
-  ],
-  "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/how_to_implement_efficient_schnorr_multisignature_in_an_evm_environment_thumbnail.png",
-  "videoUrl": "https://lp-playback.com/hls/219egz0pw291k15k/index.m3u8",
-  "playbackId": "219egz0pw291k15k",
-  "assetId": "219e3796-d5b8-4e08-ac86-25a544313515",
-  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
-  "videoType": "clip"
+    "id": "how_to_implement_efficient_schnorr_multisignature_in_an_evm_environment",
+    "name": "How to implement efficient Schnorr multi-signature in an EVM environment",
+    "description": "On-chain Oracles are limited by their ability to scale. Developing an innovative approach utilising Schnorr cryptography and secp256k1 public key aggregation, Chronicle Labs has vastly alleviated the gas fee burden that has limited on-chain Oracle scalability. This innovation unlocks the cost-effective implementation of Schnoor multi-signature in an EVM environment.",
+    "start": 1699960200000,
+    "end": 1699961100000,
+    "stageId": "emirgan_2",
+    "speakers": [
+        {
+            "id": "niklas_kunkel",
+            "name": "Niklas Kunkel",
+            "bio": "Founder of Chronicle Labs, the developers of Chronicle Protocol, Nik began his crypto journey at IBM Research, where he worked on the Hyperledger blockchain and early supply chain finance applications. In 2017 he joined MakerDAO to create Dai, the first decentralized stablecoin on Ethereum. Nik is responsible for creating DSProxy. An industry-standard account abstraction primitive, OasisDEX, the first decentralized exchange on Ethereum with an order matching engine, as well as Chronicle Oracle Protocol, which secures over $10B of assets locked in MakerDAO.",
+            "eventId": "evm_summit",
+            "twitter": "",
+            "photo": "https://media.licdn.com/dms/image/D4E03AQFRbgvcfLLJAQ/profile-displayphoto-shrink_800_800/0/1692038773606?e=1704326400&v=beta&t=vMFY72dfXWqFclAd9yH8fJre-Jheog1inrojUbObv3g"
+        }
+    ],
+    "eventId": "evm_summit",
+    "coverImage": "/sessions/evm_summit/how_to_implement_efficient_schnorr_multisignature_in_an_evm_environment_thumbnail.png",
+    "videoUrl": "https://lp-playback.com/hls/219egz0pw291k15k/index.m3u8",
+    "playbackId": "219egz0pw291k15k",
+    "assetId": "219e3796-d5b8-4e08-ac86-25a544313515",
+    "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+    "videoType": "clip"
 }

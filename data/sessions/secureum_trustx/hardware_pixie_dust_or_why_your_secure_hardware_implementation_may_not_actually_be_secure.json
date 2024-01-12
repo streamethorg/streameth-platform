@@ -1,25 +1,25 @@
 {
-  "id": "hardware_pixie_dust_or_why_your_secure_hardware_implementation_may_not_actually_be_secure",
-  "name": "Hardware pixie dust, or why your secure hardware implementation may not actually be secure",
-  "description": "",
-  "start": 1699863480000,
-  "end": 1699864440000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "deian_stefan",
-      "name": "Deian\nStefan",
-      "bio": "Co-founder, Cubist\nSecurity Professor, UCSD",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Deian.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/d016s12dg9ww0nra/index.m3u8",
-  "playbackId": "d016s12dg9ww0nra",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/hardware_pixie_dust_or_why_your_secure_hardware_implementation_may_not_actually_be_secure.jpg",
-  "assetId": "d016ad96-9dc4-48dc-8f6a-84ee7a57e61c",
-  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-  "videoType": "clip"
+    "id": "hardware_pixie_dust_or_why_your_secure_hardware_implementation_may_not_actually_be_secure",
+    "name": "Hardware pixie dust, or why your secure hardware implementation may not actually be secure",
+    "description": "",
+    "start": 1699863480000,
+    "end": 1699864440000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "deian_stefan",
+            "name": "Deian\nStefan",
+            "bio": "Co-founder, Cubist\nSecurity Professor, UCSD",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Deian.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d016s12dg9ww0nra/index.m3u8",
+    "playbackId": "d016s12dg9ww0nra",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/hardware_pixie_dust_or_why_your_secure_hardware_implementation_may_not_actually_be_secure.jpg",
+    "assetId": "d016ad96-9dc4-48dc-8f6a-84ee7a57e61c",
+    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+    "videoType": "clip"
 }

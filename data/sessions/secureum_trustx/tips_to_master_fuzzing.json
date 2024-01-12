@@ -1,25 +1,25 @@
 {
-  "id": "tips_to_master_fuzzing",
-  "name": "Tips to master fuzzing",
-  "description": "",
-  "start": 1699947960000,
-  "end": 1699948920000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "vctor_martnez",
-      "name": "Víctor\nMartínez",
-      "bio": "EVM & Security Researcher\nOak Security",
-      "eventId": "secureum_trustx",
-      "twitter": "@vn_martinez_",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Victor.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/a4b7nm119hy6calp/index.m3u8",
-  "playbackId": "a4b7nm119hy6calp",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/tips_to_master_fuzzing.jpg",
-  "assetId": "a4b778c3-e0b6-49a9-8b47-6b392e2b532e",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "tips_to_master_fuzzing",
+    "name": "Tips to master fuzzing",
+    "description": "",
+    "start": 1699947960000,
+    "end": 1699948920000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "vctor_martnez",
+            "name": "V\u00edctor\nMart\u00ednez",
+            "bio": "EVM & Security Researcher\nOak Security",
+            "eventId": "secureum_trustx",
+            "twitter": "@vn_martinez_",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Victor.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a4b7nm119hy6calp/index.m3u8",
+    "playbackId": "a4b7nm119hy6calp",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/tips_to_master_fuzzing.jpg",
+    "assetId": "a4b778c3-e0b6-49a9-8b47-6b392e2b532e",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

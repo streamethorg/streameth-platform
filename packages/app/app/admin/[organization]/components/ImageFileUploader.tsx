@@ -1,7 +1,7 @@
-import LoadingIcon from '@/components/icons/LoadingIcon'
-import PlusCircleIcon from '@/components/icons/PlusCircleIcon'
-import FormLabel from '@/components/Form/FormLabel'
-import { getImageUrl } from '@/utils'
+// import LoadingIcon from '@/components/icons/LoadingIcon'
+// import PlusCircleIcon from '@/components/icons/PlusCircleIcon'
+// import FormLabel from '@/components/Form/FormLabel'
+import { getImageUrl } from '@/lib/utils'
 import React, { SetStateAction, useRef, useState } from 'react'
 
 interface ImageFileUploaderProps {
@@ -67,50 +67,51 @@ const ImageFileUploader = ({
   }
 
   return (
-    <div>
-      {label && (
-        <FormLabel
-          label={label}
-          required={required}
-          toolTip
-          toolTipHTML={`Click to edit image. ${toolTipHTML}`}
-        />
-      )}
-      <div
-        onClick={handleClick}
-        className={`relative hover:opacity-75 cursor-pointer ${
-          isCircleImage ? 'rounded-full' : ''
-        } ${className}`}>
-        <img
-          src={loading ? '' : getImageUrl(`/events/${image}`) ?? ''}
-          className={`${
-            isCircleImage ? 'rounded-full' : ''
-          } w-full h-full`}
-        />
-        <div
-          className={`absolute ${iconClassName} top-[40%] left-[40%] rounded-full bg-gray-300 opacity-75`}>
-          {loading ? <LoadingIcon /> : <PlusCircleIcon />}
-        </div>
-        {loading && (
-          <p className="text-medGrey text-center my-1 text-[10px]">
-            50% - Loading image..
-          </p>
-        )}
-        <input
-          className="hidden"
-          ref={fileInputRef}
-          type="file"
-          onChange={handleFileUpload}
-          accept="image/*"
-        />
-      </div>
-      {validationErrors && typeof validationErrors === 'string' && (
-        <div className="text-danger mb-4 mt-2">
-          {validationErrors}
-        </div>
-      )}
-      {error && <p className="text-danger text-sm my-2">{error}</p>}
-    </div>
+    <></>
+    // <div>
+    //   {label && (
+    //     <FormLabel
+    //       label={label}
+    //       required={required}
+    //       toolTip
+    //       toolTipHTML={`Click to edit image. ${toolTipHTML}`}
+    //     />
+    //   )}
+    //   <div
+    //     onClick={handleClick}
+    //     className={`relative hover:opacity-75 cursor-pointer ${
+    //       isCircleImage ? 'rounded-full' : ''
+    //     } ${className}`}>
+    //     <img
+    //       src={loading ? '' : getImageUrl(`/events/${image}`) ?? ''}
+    //       className={`${
+    //         isCircleImage ? 'rounded-full' : ''
+    //       } w-full h-full`}
+    //     />
+    //     <div
+    //       className={`absolute ${iconClassName} top-[40%] left-[40%] rounded-full bg-gray-300 opacity-75`}>
+    //       {loading ? <LoadingIcon /> : <PlusCircleIcon />}
+    //     </div>
+    //     {loading && (
+    //       <p className="text-medGrey text-center my-1 text-[10px]">
+    //         50% - Loading image..
+    //       </p>
+    //     )}
+    //     <input
+    //       className="hidden"
+    //       ref={fileInputRef}
+    //       type="file"
+    //       onChange={handleFileUpload}
+    //       accept="image/*"
+    //     />
+    //   </div>
+    //   {validationErrors && typeof validationErrors === 'string' && (
+    //     <div className="text-danger mb-4 mt-2">
+    //       {validationErrors}
+    //     </div>
+    //   )}
+    //   {error && <p className="text-danger text-sm my-2">{error}</p>}
+    // </div>
   )
 }
 

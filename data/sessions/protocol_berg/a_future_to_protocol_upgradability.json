@@ -1,21 +1,22 @@
 {
-  "id": "a_future_to_protocol_upgradability",
-  "name": "A Future to Protocol Upgradability",
-  "description": "Discussing our current protocol upgradability governance practices (pausability, timelocks, emergency operational procedures) and how we can move towards more sustainable on-chain consensus-driven governance as a path to decentralized protocol governance.",
-  "start": 1694781000000,
-  "end": 1694782500000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "tina",
-      "name": "tina",
-      "bio": "product at eigenlayer, previously fuel network and element finance (now delv tech).",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/IMG_2476_9D26BPo.jpg"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/c4barquyfwukxhul/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/a_future_to_protocol_upgradability.jpg"
+    "id": "a_future_to_protocol_upgradability",
+    "name": "A Future to Protocol Upgradability",
+    "description": "Discussing our current protocol upgradability governance practices (pausability, timelocks, emergency operational procedures) and how we can move towards more sustainable on-chain consensus-driven governance as a path to decentralized protocol governance.",
+    "start": 1694781000000,
+    "end": 1694782500000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "tina",
+            "name": "tina",
+            "bio": "product at eigenlayer, previously fuel network and element finance (now delv tech).",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/IMG_2476_9D26BPo.jpg"
+        }
+    ],
+    "playbackId": "",
+    "videoUrl": "https://lp-playback.com/hls/c4barquyfwukxhul/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/a_future_to_protocol_upgradability.jpg",
+    "assetId": "c4ba7cff-435a-4fae-b1ed-3e4a58639bdb"
 }

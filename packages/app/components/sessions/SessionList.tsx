@@ -2,9 +2,10 @@
 import React, { useEffect } from 'react'
 import Scroll, { Element } from 'react-scroll'
 import { ISession } from 'streameth-server/model/session'
-import ScheduleCard from '@/app/[organization]/[event]/(eventHome)/schedule/components/ScheduleCard'
-
+import { IEvent } from 'streameth-server/model/event'
+import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
 interface Props {
+  event: IEvent
   sessions: ISession[]
   currentSession?: ISession
 }
@@ -22,6 +23,7 @@ function NoSessionComponent() {
 }
 
 export default function SessionList({
+  event,
   sessions,
   currentSession,
 }: Props) {
@@ -77,7 +79,12 @@ export default function SessionList({
         return (
           <Element key={i.id} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
-              <ScheduleCard session={i} showTime speakers />
+              <ScheduleCard
+                event={event}
+                session={i}
+                showTime
+                speakers
+              />
             </li>
           </Element>
         )

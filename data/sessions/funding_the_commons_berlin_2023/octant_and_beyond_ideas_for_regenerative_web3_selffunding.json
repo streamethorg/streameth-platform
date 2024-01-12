@@ -1,24 +1,25 @@
 {
-  "id": "octant_and_beyond_ideas_for_regenerative_web3_selffunding",
-  "name": "Octant and beyond: ideas for regenerative web3 self-funding",
-  "description": "After a brief presentation of Octant I will discuss ideas how we can mobilize more regenerative funding for public goods with Octant-like designs.",
-  "start": 1694272800000,
-  "end": 1694274000000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "julian_zawistowski",
-      "name": "Julian Zawistowski",
-      "bio": "Golem",
-      "eventId": "funding_the_commons_berlin_2023"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-    "end": 30933,
-    "start": 29808
-  },
-  "videoUrl": "https://lp-playback.com/hls/625cawquqb6lkz93/index.m3u8",
-  "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/octant_and_beyond_ideas_for_regenerative_web3_selffunding.jpg"
+    "id": "octant_and_beyond_ideas_for_regenerative_web3_selffunding",
+    "name": "Octant and beyond: ideas for regenerative web3 self-funding",
+    "description": "After a brief presentation of Octant I will discuss ideas how we can mobilize more regenerative funding for public goods with Octant-like designs.",
+    "start": 1694272800000,
+    "end": 1694274000000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "julian_zawistowski",
+            "name": "Julian Zawistowski",
+            "bio": "Golem",
+            "eventId": "funding_the_commons_berlin_2023"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+        "end": 30933,
+        "start": 29808
+    },
+    "videoUrl": "https://lp-playback.com/hls/625cawquqb6lkz93/index.m3u8",
+    "eventId": "funding_the_commons_berlin_2023",
+    "coverImage": "/sessions/funding_the_commons_berlin_2023/octant_and_beyond_ideas_for_regenerative_web3_selffunding.jpg",
+    "assetId": "625c3a77-313c-483d-be80-92e4192268b1"
 }
