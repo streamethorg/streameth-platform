@@ -29,7 +29,7 @@ const HeroHeader = () => {
           muted
           loop
           id="myVideo"
-          src="https://streameth.org/lib_wsURRdlMczHRgWBe/flg97ceotxfdu8qb.mp4"
+          src="https://info.streameth.org/lib_wsURRdlMczHRgWBe/flg97ceotxfdu8qb.mp4"
         />
       </div>
     </div>
