@@ -4,5 +4,8 @@
   "private": true,
   "scripts": {
     "ai:summary": "ts-node ./ai/src/"
+  },
+  "dependencies": {
+    "openai": "^4.24.4"
   }
 }
