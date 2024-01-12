@@ -5,12 +5,11 @@
   "scripts": {
     "start": "yarn run build && node -r module-alias/register ./dist/server.js",
     "dev": "nodemon --config nodemon.json",
-    "build": "rm -rf ./dist && tsc --build tsconfig.prod.json",
+    "build": "rm -rf ./dist && yarn run generate:routes && tsc --build tsconfig.prod.json",
     "build:tsc": "tsc && tsc-alias",
     "test": "jest --forceExit --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\"",
-    "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
-    "deploy:dev": "pm2 start ecosystem.config.js --only dev"
+    "generate:routes": "tsoa spec-and-routes"
   },
   "_moduleAliases": {
     "@config": "dist/config",
@@ -42,8 +41,8 @@
     "module-alias": "^2.2.3",
     "mongoose": "7.6.2",
     "morgan": "^1.10.0",
-    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
+    "tsoa": "^6.0.0",
     "typescript": "^5.3.3",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"

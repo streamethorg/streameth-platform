@@ -1,6 +1,5 @@
 import App from './app';
-import Routes from './routes';
 
-const app = new App(Routes);
+const app = new App();
 
 app.listen();
