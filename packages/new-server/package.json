@@ -27,7 +27,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0",
+    "class-validator": "^0.14.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -41,8 +41,9 @@
     "module-alias": "^2.2.3",
     "mongoose": "7.6.2",
     "morgan": "^1.10.0",
+    "reflect-metadata": "^0.2.1",
     "swagger-ui-express": "^5.0.0",
-    "tsoa": "^6.0.0",
+    "tsoa": "^6.0.1",
     "typescript": "^5.3.3",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
