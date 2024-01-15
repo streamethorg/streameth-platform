@@ -1,21 +1,21 @@
 {
-  "id": "a_mechanism_for_decentralized_maintenance_of_lidos_operator_set_with_a_focus_on_whitelabeling_detection",
-  "name": "A mechanism for decentralized maintenance of Lido's operator set, with a focus on white-labeling detection",
-  "description": "-",
-  "start": 1699971300000,
-  "end": 1699973100000,
-  "stageId": "connie",
-  "speakers": [
-    {
-      "id": "jorge_arce",
-      "name": "Jorge Arce",
-      "bio": "Nethermind\nBlockchain Researcher",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/d/2c/19282703/avatar.jpg?e5f"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/a_mechanism_for_decentralized_maintenance_of_lidos_operator_set_with_a_focus_on_whitelabeling_detection.jpg"
+    "id": "a_mechanism_for_decentralized_maintenance_of_lidos_operator_set_with_a_focus_on_whitelabeling_detection",
+    "name": "A mechanism for decentralized maintenance of Lido's operator set, with a focus on white-labeling detection",
+    "description": "-",
+    "start": 1699971300000,
+    "end": 1699973100000,
+    "stageId": "connie",
+    "speakers": [
+        {
+            "id": "jorge_arce",
+            "name": "Jorge Arce",
+            "bio": "Nethermind\nBlockchain Researcher",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/d/2c/19282703/avatar.jpg?e5f"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/a_mechanism_for_decentralized_maintenance_of_lidos_operator_set_with_a_focus_on_whitelabeling_detection.jpg"
 }

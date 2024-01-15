@@ -1,25 +1,25 @@
 {
-  "id": "the_resiliency_of_the_web3_ecosystem_and_signs_of_a_crypto_spring",
-  "name": "The Resiliency of the Web3 Ecosystem and Signs of a Crypto Spring",
-  "description": "We believe we\u2019re at the beginning of a once-in-a generation opportunity to partner with category defining companies that will make profound changes to the digital world. Join our session to learn more about why we remain so convicted on the space and where we see current opportunities for investment.",
-  "start": 1694811600000,
-  "end": 1694813400000,
-  "stageId": "east_room__main_",
-  "speakers": [
-    {
-      "id": "sam_hallene",
-      "name": "Sam Hallene",
-      "bio": "Sam Hallene is an Investment Partner at CMT Digital. Sam joined the CMT Digital venture group at its inception in 2017 and focuses on thesis formation, deal sourcing, and ongoing portfolio relations. He graduated from the University of Michigan with a double major in Economics and Spanish.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/CMT_9499-LG_lEgQdLq.jpg"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/9a80ifytdx65lkh6/index.m3u8",
-    "start": 0,
-    "end": 0
-  },
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/the_resiliency_of_the_web3_ecosystem_and_signs_of_a_crypto_spring.jpg"
+    "id": "the_resiliency_of_the_web3_ecosystem_and_signs_of_a_crypto_spring",
+    "name": "The Resiliency of the Web3 Ecosystem and Signs of a Crypto Spring",
+    "description": "We believe we\u2019re at the beginning of a once-in-a generation opportunity to partner with category defining companies that will make profound changes to the digital world. Join our session to learn more about why we remain so convicted on the space and where we see current opportunities for investment.",
+    "start": 1694811600000,
+    "end": 1694813400000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "sam_hallene",
+            "name": "Sam Hallene",
+            "bio": "Sam Hallene is an Investment Partner at CMT Digital. Sam joined the CMT Digital venture group at its inception in 2017 and focuses on thesis formation, deal sourcing, and ongoing portfolio relations. He graduated from the University of Michigan with a double major in Economics and Spanish.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/CMT_9499-LG_lEgQdLq.jpg"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/9a80ifytdx65lkh6/index.m3u8",
+        "start": 0,
+        "end": 0
+    },
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_resiliency_of_the_web3_ecosystem_and_signs_of_a_crypto_spring.jpg"
 }

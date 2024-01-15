@@ -1,25 +1,25 @@
 {
-  "id": "a_case_study_network_goods_in_protocol_labs",
-  "name": "A case study: Network Goods in Protocol Labs",
-  "description": "The video explores the funding and development of network goods in the crypto field. The speakers emphasize the importance of grants and quadratic funding rounds for infrastructure development. They discuss the need for decentralized methods of resource allocation and highlight the value of public goods. Various projects and initiatives aimed at addressing funding, distribution, impact assessment, and project identification within the crypto ecosystem are mentioned. Topics such as mechanism selection, quantitative versus qualitative assessment, user perspectives, and scalability versus efficiency are also discussed. The video encourages building new coordination systems to tackle challenges and promoting regenerative sources of public goods funding.",
-  "start": "2023-07-15T08:00:00.000Z",
-  "end": "2023-07-15T08:15:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "evan_miyazono",
-      "name": "Evan Miyazono",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "matt_frehlich",
-      "name": "Matt Frehlich",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "playbackId": "2569dtwn55wnr1kl",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/a_case_study_network_goods_in_protocol_labs.jpg"
+    "id": "a_case_study_network_goods_in_protocol_labs",
+    "name": "A case study: Network Goods in Protocol Labs",
+    "description": "The video explores the funding and development of network goods in the crypto field. The speakers emphasize the importance of grants and quadratic funding rounds for infrastructure development. They discuss the need for decentralized methods of resource allocation and highlight the value of public goods. Various projects and initiatives aimed at addressing funding, distribution, impact assessment, and project identification within the crypto ecosystem are mentioned. Topics such as mechanism selection, quantitative versus qualitative assessment, user perspectives, and scalability versus efficiency are also discussed. The video encourages building new coordination systems to tackle challenges and promoting regenerative sources of public goods funding.",
+    "start": "2023-07-15T08:00:00.000Z",
+    "end": "2023-07-15T08:15:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "evan_miyazono",
+            "name": "Evan Miyazono",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        },
+        {
+            "id": "matt_frehlich",
+            "name": "Matt Frehlich",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "2569dtwn55wnr1kl",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/a_case_study_network_goods_in_protocol_labs.jpg"
 }

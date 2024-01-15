@@ -1,20 +1,20 @@
 {
-  "id": "embracing_the_bears",
-  "name": "Embracing the bears",
-  "description": "",
-  "start": 1693560900000,
-  "end": 1693562700000,
-  "stageId": "workshop_room_1",
-  "speakers": [
-    {
-      "id": "chidubem_emelumadu",
-      "name": "Chidubem Emelumadu",
-      "bio": "Blockchaain Content Operator",
-      "eventId": "web3_lagos_conference_2023",
-      "twitter": "@Official_NODO"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/embracing_the_bears.jpg"
+    "id": "embracing_the_bears",
+    "name": "Embracing the bears",
+    "description": "",
+    "start": 1693560900000,
+    "end": 1693562700000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "chidubem_emelumadu",
+            "name": "Chidubem Emelumadu",
+            "bio": "Blockchaain Content Operator",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@Official_NODO"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/embracing_the_bears.jpg"
 }

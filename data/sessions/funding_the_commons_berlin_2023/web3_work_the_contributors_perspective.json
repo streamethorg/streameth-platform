@@ -1,43 +1,43 @@
 {
-  "id": "web3_work_the_contributors_perspective",
-  "name": "Web3 Work: The Contributor\u2019s Perspective ",
-  "description": "In this talk we\u2019ll present the findings from our 6-month long research project of labor conditions in Web3 and DAOs, including insights from 38 DAO contributors representing >50 DAOs. We\u2019ll discuss the present and futures of work through DAOs as they emerged from our ethnography and reflect on key challenges that organizations need to face to improve working conditions for contributors at the ecosystem-level.",
-  "start": 1694251200000,
-  "end": 1694252400000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "laura_lotti",
-      "name": "Laura Lotti\n",
-      "bio": "Other Internet",
-      "eventId": "funding_the_commons_berlin_2023",
-      "twitter": "lottiland",
-      "photo": "https://pbs.twimg.com/profile_images/540370794375680000/7j_egt4I_400x400.jpeg"
+    "id": "web3_work_the_contributors_perspective",
+    "name": "Web3 Work: The Contributor\u2019s Perspective ",
+    "description": "In this talk we\u2019ll present the findings from our 6-month long research project of labor conditions in Web3 and DAOs, including insights from 38 DAO contributors representing >50 DAOs. We\u2019ll discuss the present and futures of work through DAOs as they emerged from our ethnography and reflect on key challenges that organizations need to face to improve working conditions for contributors at the ecosystem-level.",
+    "start": 1694251200000,
+    "end": 1694252400000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "laura_lotti",
+            "name": "Laura Lotti\n",
+            "bio": "Other Internet",
+            "eventId": "funding_the_commons_berlin_2023",
+            "twitter": "lottiland",
+            "photo": "https://pbs.twimg.com/profile_images/540370794375680000/7j_egt4I_400x400.jpeg"
+        },
+        {
+            "id": "nick_houde",
+            "name": "Nick Houde",
+            "bio": "Other Internet",
+            "eventId": "funding_the_commons_berlin_2023",
+            "twitter": "@nckhde",
+            "photo": "https://pbs.twimg.com/profile_images/1599420931016908803/YWN-Nx5c_400x400.jpg"
+        },
+        {
+            "id": "tara_merk",
+            "name": "Tara Merk",
+            "bio": "Other Internet",
+            "eventId": "funding_the_commons_berlin_2023",
+            "twitter": "mpg_dd",
+            "photo": "https://pbs.twimg.com/profile_images/1454390153666043905/sgEGWhlJ_400x400.jpg"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+        "start": 7538,
+        "end": 8781
     },
-    {
-      "id": "nick_houde",
-      "name": "Nick Houde",
-      "bio": "Other Internet",
-      "eventId": "funding_the_commons_berlin_2023",
-      "twitter": "@nckhde",
-      "photo": "https://pbs.twimg.com/profile_images/1599420931016908803/YWN-Nx5c_400x400.jpg"
-    },
-    {
-      "id": "tara_merk",
-      "name": "Tara Merk",
-      "bio": "Other Internet",
-      "eventId": "funding_the_commons_berlin_2023",
-      "twitter": "mpg_dd",
-      "photo": "https://pbs.twimg.com/profile_images/1454390153666043905/sgEGWhlJ_400x400.jpg"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-    "start": 7538,
-    "end": 8781
-  },
-  "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/web3_work_the_contributors_perspective.jpg",
-  "assetId": "d85db598-30d7-4705-ab5d-43ab61d9ebf3",
-  "playbackId": "d85dgwe6efws09x7"
+    "eventId": "funding_the_commons_berlin_2023",
+    "coverImage": "/sessions/funding_the_commons_berlin_2023/web3_work_the_contributors_perspective.jpg",
+    "assetId": "d85db598-30d7-4705-ab5d-43ab61d9ebf3",
+    "playbackId": "d85dgwe6efws09x7"
 }

@@ -1,19 +1,19 @@
 {
-  "id": "consciousness_physicalism_idealism_and_ai_risk_with_hareesh",
-  "name": "Consciousness, Physicalism, Idealism, and AI risk with Hareesh ",
-  "description": "Special closing talk of day 0\nThis event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
-  "start": "2023-05-05T12:15:00.000Z",
-  "end": "2023-05-05T13:15:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "ai_x_crypto_summit",
-      "name": "AI x Crypto Summit",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__cryptoxai"
-    }
-  ],
-  "playbackId": "3ce6qr4xm33tl08e",
-  "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "consciousness_physicalism_idealism_and_ai_risk_with_hareesh",
+    "name": "Consciousness, Physicalism, Idealism, and AI risk with Hareesh ",
+    "description": "Special closing talk of day 0\nThis event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
+    "start": "2023-05-05T12:15:00.000Z",
+    "end": "2023-05-05T13:15:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "ai_x_crypto_summit",
+            "name": "AI x Crypto Summit",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__cryptoxai"
+        }
+    ],
+    "playbackId": "3ce6qr4xm33tl08e",
+    "eventId": "zuzalu_montenegro_2023__cryptoxai",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

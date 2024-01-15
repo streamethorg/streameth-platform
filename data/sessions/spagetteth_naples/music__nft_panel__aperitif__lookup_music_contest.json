@@ -1,11 +1,11 @@
 {
-  "id": "music__nft_panel__aperitif__lookup_music_contest",
-  "name": "\"Music & NFT panel\" + Aperitif + LookUP! Music Contest",
-  "description": "",
-  "start": "2023-05-25T15:30:00.000Z",
-  "end": "2023-05-25T21:30:00.000Z",
-  "stageId": "gulf_stage",
-  "speakers": [],
-  "playbackId": "86edcn8ta9de87i3",
-  "eventId": "spagetteth_naples"
+    "id": "music__nft_panel__aperitif__lookup_music_contest",
+    "name": "\"Music & NFT panel\" + Aperitif + LookUP! Music Contest",
+    "description": "",
+    "start": "2023-05-25T15:30:00.000Z",
+    "end": "2023-05-25T21:30:00.000Z",
+    "stageId": "gulf_stage",
+    "speakers": [],
+    "playbackId": "86edcn8ta9de87i3",
+    "eventId": "spagetteth_naples"
 }

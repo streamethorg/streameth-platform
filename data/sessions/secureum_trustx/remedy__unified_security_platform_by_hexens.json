@@ -1,24 +1,24 @@
 {
-  "id": "remedy__unified_security_platform_by_hexens",
-  "name": "Remedy \u2013 unified security platform by Hexens",
-  "description": "",
-  "start": 1699956000000,
-  "end": 1699957800000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "konstantin_nekrasov",
-      "name": "Konstantin\nNekrasov",
-      "bio": "Security Researcher MixBytes",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Konstantin.png"
-    }
-  ],
-  "playbackId": "5107q19elh5zl88c",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/remedy__unified_security_platform_by_hexens.jpg",
-  "assetId": "5107ba37-7796-4247-9683-449c12a6a7d7",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "remedy__unified_security_platform_by_hexens",
+    "name": "Remedy \u2013 unified security platform by Hexens",
+    "description": "",
+    "start": 1699956000000,
+    "end": 1699957800000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "konstantin_nekrasov",
+            "name": "Konstantin\nNekrasov",
+            "bio": "Security Researcher MixBytes",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Konstantin.png"
+        }
+    ],
+    "playbackId": "5107q19elh5zl88c",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/remedy__unified_security_platform_by_hexens.jpg",
+    "assetId": "5107ba37-7796-4247-9683-449c12a6a7d7",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

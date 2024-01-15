@@ -1,19 +1,19 @@
 {
-  "id": "free_world_dialup_or_the_history_of_the_future",
-  "name": "Free World Dialup or The History of the Future",
-  "description": "",
-  "start": "2023-07-16T08:10:00.000Z",
-  "end": "2023-07-16T08:30:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "jeff_pulver",
-      "name": "Jeff Pulver",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "playbackId": "bf52x85tfjra7t0n",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/free_world_dialup_or_the_history_of_the_future.jpg"
+    "id": "free_world_dialup_or_the_history_of_the_future",
+    "name": "Free World Dialup or The History of the Future",
+    "description": "",
+    "start": "2023-07-16T08:10:00.000Z",
+    "end": "2023-07-16T08:30:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "jeff_pulver",
+            "name": "Jeff Pulver",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "bf52x85tfjra7t0n",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/free_world_dialup_or_the_history_of_the_future.jpg"
 }

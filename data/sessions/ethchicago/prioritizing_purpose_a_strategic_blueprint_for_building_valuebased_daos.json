@@ -1,20 +1,20 @@
 {
-  "id": "prioritizing_purpose_a_strategic_blueprint_for_building_valuebased_daos",
-  "name": "Prioritizing Purpose: A Strategic Blueprint for Building Value-Based DAOs",
-  "description": "A deep dive into the philosophy, process, and tech stack behind building value-based community DAOs.",
-  "start": 1694811600000,
-  "end": 1694813400000,
-  "stageId": "michigan_stage__creatives__trad_business_",
-  "speakers": [
-    {
-      "id": "ron_rivers",
-      "name": "Ron Rivers",
-      "bio": "I speak about binding system and spirit in alignment with the single truth and relational universe.\r\n\r\nMy efforts coalesce at the intersection of Spirituality, Web3, AI, Political Economy, Philanthropy, and Systemic Reformation.\r\n\r\nPast: web2 founder w/ exit, civic tech 501c3 executive director, community organizer, state senate candidate, spent past 2.5 years having 150+ conversations with place-based foundations. \r\n\r\nAuthor of Self-Actualization in the Age of Crisis. \r\n\r\nCo-founding member of SpiritDAO.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/rriversheadshot_9aTg3id.jpg"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/prioritizing_purpose_a_strategic_blueprint_for_building_valuebased_daos.jpg"
+    "id": "prioritizing_purpose_a_strategic_blueprint_for_building_valuebased_daos",
+    "name": "Prioritizing Purpose: A Strategic Blueprint for Building Value-Based DAOs",
+    "description": "A deep dive into the philosophy, process, and tech stack behind building value-based community DAOs.",
+    "start": 1694811600000,
+    "end": 1694813400000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "ron_rivers",
+            "name": "Ron Rivers",
+            "bio": "I speak about binding system and spirit in alignment with the single truth and relational universe.\r\n\r\nMy efforts coalesce at the intersection of Spirituality, Web3, AI, Political Economy, Philanthropy, and Systemic Reformation.\r\n\r\nPast: web2 founder w/ exit, civic tech 501c3 executive director, community organizer, state senate candidate, spent past 2.5 years having 150+ conversations with place-based foundations. \r\n\r\nAuthor of Self-Actualization in the Age of Crisis. \r\n\r\nCo-founding member of SpiritDAO.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/rriversheadshot_9aTg3id.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/prioritizing_purpose_a_strategic_blueprint_for_building_valuebased_daos.jpg"
 }

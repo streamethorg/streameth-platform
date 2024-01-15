@@ -1,19 +1,19 @@
 {
-  "id": "web3_community__protocol",
-  "name": "Web3: community & protocol",
-  "description": "",
-  "start": 1693479600000,
-  "end": 1693480800000,
-  "stageId": "workshop_room_1",
-  "speakers": [
-    {
-      "id": "ayodele_aransiola",
-      "name": "Ayodele Aransiola",
-      "bio": "Community Manager",
-      "eventId": "web3_lagos_conference_2023"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/web3_community__protocol.jpg"
+    "id": "web3_community__protocol",
+    "name": "Web3: community & protocol",
+    "description": "",
+    "start": 1693479600000,
+    "end": 1693480800000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "ayodele_aransiola",
+            "name": "Ayodele Aransiola",
+            "bio": "Community Manager",
+            "eventId": "web3_lagos_conference_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/web3_community__protocol.jpg"
 }

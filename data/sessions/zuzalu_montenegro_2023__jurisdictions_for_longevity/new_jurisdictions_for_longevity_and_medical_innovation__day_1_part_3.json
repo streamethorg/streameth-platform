@@ -1,19 +1,19 @@
 {
-  "id": "new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_3",
-  "name": "New Jurisdictions for Longevity and Medical Innovation - Day 1, part 3",
-  "description": "",
-  "start": "2023-04-09T10:30:00.000Z",
-  "end": "2023-04-09T11:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "robin_hasnon",
-      "name": "Robin Hasnon",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity"
-    }
-  ],
-  "playbackId": "3ca6jx8ogzdid9pq",
-  "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "new_jurisdictions_for_longevity_and_medical_innovation__day_1_part_3",
+    "name": "New Jurisdictions for Longevity and Medical Innovation - Day 1, part 3",
+    "description": "",
+    "start": "2023-04-09T10:30:00.000Z",
+    "end": "2023-04-09T11:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "robin_hasnon",
+            "name": "Robin Hasnon",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity"
+        }
+    ],
+    "playbackId": "3ca6jx8ogzdid9pq",
+    "eventId": "zuzalu_montenegro_2023__jurisdictions_for_longevity",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -1,20 +1,20 @@
 {
-  "id": "leveraging_validity_rollups_building_on_starknet_today",
-  "name": "Leveraging Validity Rollups: Building on Starknet Today",
-  "description": "-",
-  "start": 1699614000000,
-  "end": 1699617600000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "omar_espejel",
-      "name": "Omar Espejel",
-      "bio": "Starknet Foundation",
-      "eventId": "zuconnect_hackathon"
-    }
-  ],
-  "playbackId": "2c67rbvn6wwg22ep",
-  "eventId": "zuconnect_hackathon",
-  "coverImage": "/sessions/zuconnect_hackathon/leveraging_validity_rollups_building_on_starknet_today.jpg",
-  "assetId": "2c67be1c-3e5b-45bf-894d-38b727bf366f"
+    "id": "leveraging_validity_rollups_building_on_starknet_today",
+    "name": "Leveraging Validity Rollups: Building on Starknet Today",
+    "description": "-",
+    "start": 1699614000000,
+    "end": 1699617600000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "omar_espejel",
+            "name": "Omar Espejel",
+            "bio": "Starknet Foundation",
+            "eventId": "zuconnect_hackathon"
+        }
+    ],
+    "playbackId": "2c67rbvn6wwg22ep",
+    "eventId": "zuconnect_hackathon",
+    "coverImage": "/sessions/zuconnect_hackathon/leveraging_validity_rollups_building_on_starknet_today.jpg",
+    "assetId": "2c67be1c-3e5b-45bf-894d-38b727bf366f"
 }

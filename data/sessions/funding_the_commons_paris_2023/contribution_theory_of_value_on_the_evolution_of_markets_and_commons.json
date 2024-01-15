@@ -1,19 +1,19 @@
 {
-  "id": "contribution_theory_of_value_on_the_evolution_of_markets_and_commons",
-  "name": "\"Contribution theory of value: on the evolution of markets and commons\"",
-  "description": "In this video, Jason Potts discusses the concept of building new economies for the future. He emphasizes the need for better markets and better commons to solve big social problems. Potts suggests combining the properties of both markets and commons to create a new type of mechanism, which he refers to as an \"object-oriented economy.\" He explains that markets are efficient mechanisms for computing local information into prices, while commons provide better governance. Potts argues that by combining these two mechanisms, we can build next-generation economies that are more computationally complex and better equipped to address social and environmental challenges. He acknowledges that this idea is still experimental but believes that recent advancements in technology have made it possible to explore and implement these new types of mechanisms.",
-  "start": "2023-07-15T13:30:00.000Z",
-  "end": "2023-07-15T13:50:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "jason_potts",
-      "name": "Jason Potts",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "playbackId": "9e864c2zfzu21dfx",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/contribution_theory_of_value_on_the_evolution_of_markets_and_commons.jpg"
+    "id": "contribution_theory_of_value_on_the_evolution_of_markets_and_commons",
+    "name": "\"Contribution theory of value: on the evolution of markets and commons\"",
+    "description": "In this video, Jason Potts discusses the concept of building new economies for the future. He emphasizes the need for better markets and better commons to solve big social problems. Potts suggests combining the properties of both markets and commons to create a new type of mechanism, which he refers to as an \"object-oriented economy.\" He explains that markets are efficient mechanisms for computing local information into prices, while commons provide better governance. Potts argues that by combining these two mechanisms, we can build next-generation economies that are more computationally complex and better equipped to address social and environmental challenges. He acknowledges that this idea is still experimental but believes that recent advancements in technology have made it possible to explore and implement these new types of mechanisms.",
+    "start": "2023-07-15T13:30:00.000Z",
+    "end": "2023-07-15T13:50:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "jason_potts",
+            "name": "Jason Potts",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "9e864c2zfzu21dfx",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/contribution_theory_of_value_on_the_evolution_of_markets_and_commons.jpg"
 }

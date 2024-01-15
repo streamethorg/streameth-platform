@@ -1,26 +1,26 @@
 {
-  "id": "the_economics_of_network_state_coordinations_mutualism_and_solidarity",
-  "name": "The Economics of Network State Coordi-Nations: Mutualism and Solidarity",
-  "description": "",
-  "start": 1684227600000,
-  "end": 1684228500000,
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "josh_davila",
-      "name": "Josh Davila",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    },
-    {
-      "id": "oliver_sauter",
-      "name": "Oliver Sauter",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    }
-  ],
-  "playbackId": "232cuqykqot0360h",
-  "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/the_economics_of_network_state_coordinations_mutualism_and_solidarity.jpg",
-  "assetId": "232c7a19-3055-4711-bfb0-856ec9c04061"
+    "id": "the_economics_of_network_state_coordinations_mutualism_and_solidarity",
+    "name": "The Economics of Network State Coordi-Nations: Mutualism and Solidarity",
+    "description": "",
+    "start": 1684227600000,
+    "end": 1684228500000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "josh_davila",
+            "name": "Josh Davila",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "oliver_sauter",
+            "name": "Oliver Sauter",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "playbackId": "232cuqykqot0360h",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/the_economics_of_network_state_coordinations_mutualism_and_solidarity.jpg",
+    "assetId": "232c7a19-3055-4711-bfb0-856ec9c04061"
 }

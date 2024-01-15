@@ -1,27 +1,27 @@
 {
-  "id": "putting_the_design_in_mechanism_design_tracing_the_evolution_of_economics_as_a_design_language",
-  "name": "Putting the \"design\" in mechanism design: tracing the evolution of economics as a design language. ",
-  "description": "The digital world increasingly requires us to design \"economic engines\": computational abstractions that find optimal ways allocate resources. This talk traces the origins of \"economic engineering\" and delineates the directions in which economics has to evolve to become a design language, and conversely, how engineers can adopt economic concepts in their design work.",
-  "start": 1694254800000,
-  "end": 1694256000000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "oliver_beige",
-      "name": "Oliver Beige",
-      "bio": "Polycentric",
-      "eventId": "funding_the_commons_berlin_2023",
-      "twitter": "@oliverbeige",
-      "photo": "https://pbs.twimg.com/profile_images/1698304016155856896/c7iW_vUb_400x400.jpg"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-    "start": 11266,
-    "end": 12197
-  },
-  "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/putting_the_design_in_mechanism_design_tracing_the_evolution_of_economics_as_a_design_language.jpg",
-  "assetId": "995eaa19-bd5e-4e28-b364-ce93e016539a",
-  "playbackId": "995eoufkigojspeo"
+    "id": "putting_the_design_in_mechanism_design_tracing_the_evolution_of_economics_as_a_design_language",
+    "name": "Putting the \"design\" in mechanism design: tracing the evolution of economics as a design language. ",
+    "description": "The digital world increasingly requires us to design \"economic engines\": computational abstractions that find optimal ways allocate resources. This talk traces the origins of \"economic engineering\" and delineates the directions in which economics has to evolve to become a design language, and conversely, how engineers can adopt economic concepts in their design work.",
+    "start": 1694254800000,
+    "end": 1694256000000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "oliver_beige",
+            "name": "Oliver Beige",
+            "bio": "Polycentric",
+            "eventId": "funding_the_commons_berlin_2023",
+            "twitter": "@oliverbeige",
+            "photo": "https://pbs.twimg.com/profile_images/1698304016155856896/c7iW_vUb_400x400.jpg"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+        "start": 11266,
+        "end": 12197
+    },
+    "eventId": "funding_the_commons_berlin_2023",
+    "coverImage": "/sessions/funding_the_commons_berlin_2023/putting_the_design_in_mechanism_design_tracing_the_evolution_of_economics_as_a_design_language.jpg",
+    "assetId": "995eaa19-bd5e-4e28-b364-ce93e016539a",
+    "playbackId": "995eoufkigojspeo"
 }

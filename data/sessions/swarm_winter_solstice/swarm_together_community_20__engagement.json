@@ -1,28 +1,28 @@
 {
-  "id": "swarm_together_community_20__engagement",
-  "name": "Swarm Together: Community 2.0 & Engagement",
-  "description": "Antonio welcomes Niki back to the stage; Niki to speak, then Antonio to speak and lead to the next chapter",
-  "start": 1703176200000,
-  "end": 1703176500000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "antonio_gonzalo_moderator",
-      "name": "Antonio Gonzalo (Moderator)",
-      "bio": "\n",
-      "eventId": "swarm_winter_solstice"
-    },
-    {
-      "id": "niki_papadatou",
-      "name": "Niki Papadatou",
-      "bio": "\n\n\n\n",
-      "eventId": "swarm_winter_solstice"
-    }
-  ],
-  "playbackId": "570evj4nwvzlf6k5",
-  "eventId": "swarm_winter_solstice",
-  "coverImage": "/sessions/swarm_winter_solstice/swarm_together_community_20__engagement.jpg",
-  "assetId": "570efd03-7dca-444e-9b9e-8a1e22d7cc24",
-  "sourceId": "78c780ec-a420-416a-9ffd-fcd8e65c2ad1",
-  "videoType": "clip"
+    "id": "swarm_together_community_20__engagement",
+    "name": "Swarm Together: Community 2.0 & Engagement",
+    "description": "Antonio welcomes Niki back to the stage; Niki to speak, then Antonio to speak and lead to the next chapter",
+    "start": 1703176200000,
+    "end": 1703176500000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "antonio_gonzalo_moderator",
+            "name": "Antonio Gonzalo (Moderator)",
+            "bio": "\n",
+            "eventId": "swarm_winter_solstice"
+        },
+        {
+            "id": "niki_papadatou",
+            "name": "Niki Papadatou",
+            "bio": "\n\n\n\n",
+            "eventId": "swarm_winter_solstice"
+        }
+    ],
+    "playbackId": "570evj4nwvzlf6k5",
+    "eventId": "swarm_winter_solstice",
+    "coverImage": "/sessions/swarm_winter_solstice/swarm_together_community_20__engagement.jpg",
+    "assetId": "570efd03-7dca-444e-9b9e-8a1e22d7cc24",
+    "sourceId": "78c780ec-a420-416a-9ffd-fcd8e65c2ad1",
+    "videoType": "clip"
 }

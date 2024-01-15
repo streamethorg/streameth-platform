@@ -1,21 +1,21 @@
 {
-  "id": "danny_ryan",
-  "name": "Danny Ryan",
-  "description": "-",
-  "start": 1699959600000,
-  "end": 1699961400000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "danny_ryan",
-      "name": "Danny Ryan",
-      "bio": "Ethereum Foundation\nResearcher",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/e/db/19160259/avatar.jpg?8be"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/danny_ryan.jpg"
+    "id": "danny_ryan",
+    "name": "Danny Ryan",
+    "description": "-",
+    "start": 1699959600000,
+    "end": 1699961400000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "danny_ryan",
+            "name": "Danny Ryan",
+            "bio": "Ethereum Foundation\nResearcher",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/e/db/19160259/avatar.jpg?8be"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/danny_ryan.jpg"
 }

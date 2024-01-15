@@ -1,19 +1,19 @@
 {
-  "id": "scaling_ethereum_with_zero_knowledge_proofs",
-  "name": "Scaling Ethereum with Zero Knowledge Proofs",
-  "description": "Introduction to rollups and the zkEVM. Beginner session for getting people of all backgrounds into rollups and how zero-knowledge is used in some of the use cases.",
-  "start": "2023-04-21T13:00:00.000Z",
-  "end": "2023-04-21T13:30:00.000Z",
-  "stageId": "ballroom",
-  "speakers": [
-    {
-      "id": "filip_pajic",
-      "name": "Filip Pajic",
-      "bio": "Scroll",
-      "eventId": "zuzalu_montenegro_2023__zksync"
-    }
-  ],
-  "playbackId": "3be7i1ebwih72dds",
-  "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "scaling_ethereum_with_zero_knowledge_proofs",
+    "name": "Scaling Ethereum with Zero Knowledge Proofs",
+    "description": "Introduction to rollups and the zkEVM. Beginner session for getting people of all backgrounds into rollups and how zero-knowledge is used in some of the use cases.",
+    "start": "2023-04-21T13:00:00.000Z",
+    "end": "2023-04-21T13:30:00.000Z",
+    "stageId": "ballroom",
+    "speakers": [
+        {
+            "id": "filip_pajic",
+            "name": "Filip Pajic",
+            "bio": "Scroll",
+            "eventId": "zuzalu_montenegro_2023__zksync"
+        }
+    ],
+    "playbackId": "3be7i1ebwih72dds",
+    "eventId": "zuzalu_montenegro_2023__zksync",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -1,28 +1,28 @@
 {
-  "id": "running_rollups_on_light_nodes",
-  "name": "Running rollups on light nodes",
-  "description": "Learn how to run rollup software on a data availability sampling light node.",
-  "start": 1694788200000,
-  "end": 1694790600000,
-  "stageId": "loft__workshop_0",
-  "speakers": [
-    {
-      "id": "rene",
-      "name": "rene",
-      "bio": "data availability @ celestia",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/rene_SUpKCIJ.jpg"
-    },
-    {
-      "id": "nashq",
-      "name": "NashQ",
-      "bio": "Research Engineer at Celestia and Team Lead at Rollkit",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/twitter_inyQF5a.jpg"
-    }
-  ],
-  "playbackId": "0954i5p627c4i2em",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/running_rollups_on_light_nodes.jpg",
-  "assetId": "0954830d-17bf-443d-8602-5d70c30949de"
+    "id": "running_rollups_on_light_nodes",
+    "name": "Running rollups on light nodes",
+    "description": "Learn how to run rollup software on a data availability sampling light node.",
+    "start": 1694788200000,
+    "end": 1694790600000,
+    "stageId": "loft__workshop_0",
+    "speakers": [
+        {
+            "id": "rene",
+            "name": "rene",
+            "bio": "data availability @ celestia",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/rene_SUpKCIJ.jpg"
+        },
+        {
+            "id": "nashq",
+            "name": "NashQ",
+            "bio": "Research Engineer at Celestia and Team Lead at Rollkit",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/twitter_inyQF5a.jpg"
+        }
+    ],
+    "playbackId": "0954i5p627c4i2em",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/running_rollups_on_light_nodes.jpg",
+    "assetId": "0954830d-17bf-443d-8602-5d70c30949de"
 }

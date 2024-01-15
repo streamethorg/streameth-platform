@@ -1,51 +1,51 @@
 {
-  "id": "swarm_winter_solstice_full",
-  "name": "Swarm winter solstice Full",
-  "description": "Swarm 2.0 - The Winter Solstice Event Full Video. Seek to 20:20 to skip intro",
-  "start": 1703178480000,
-  "end": 1703178720000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "antonio_gonzalo_moderator",
-      "name": "Antonio Gonzalo (Moderator)",
-      "bio": "\n",
-      "eventId": "swarm_winter_solstice"
-    },
-    {
-      "id": "gregor_avcer",
-      "name": "Gregor \u017davcer",
-      "bio": "No description",
-      "eventId": "swarm_winter_solstice"
-    },
-    {
-      "id": "rt_ahlin",
-      "name": "\u010crt Ahlin",
-      "bio": "No description",
-      "eventId": "swarm_winter_solstice"
-    },
-    {
-      "id": "viktor_tron",
-      "name": "Viktor Tron",
-      "bio": "No description",
-      "eventId": "swarm_winter_solstice"
-    },
-    {
-      "id": "callum_toner",
-      "name": "Callum Toner",
-      "bio": "No description",
-      "eventId": "swarm_winter_solstice"
-    },
-    {
-      "id": "niki_papadatou",
-      "name": "Niki Papadatou",
-      "bio": "\n\n\n\n",
-      "eventId": "swarm_winter_solstice"
-    }
-  ],
-  "playbackId": "6ea1l6tknbrl1ygi",
-  "eventId": "swarm_winter_solstice",
-  "coverImage": "/sessions/swarm_winter_solstice/the_call_of_swarm.jpg",
-  "assetId": "c623542f-e27c-416c-826b-251c5a26cf57",
-  "sourceId": "78c780ec-a420-416a-9ffd-fcd8e65c2ad1"
+    "id": "swarm_winter_solstice_full",
+    "name": "Swarm winter solstice Full",
+    "description": "Swarm 2.0 - The Winter Solstice Event Full Video. Seek to 20:20 to skip intro",
+    "start": 1703178480000,
+    "end": 1703178720000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "antonio_gonzalo_moderator",
+            "name": "Antonio Gonzalo (Moderator)",
+            "bio": "\n",
+            "eventId": "swarm_winter_solstice"
+        },
+        {
+            "id": "gregor_avcer",
+            "name": "Gregor \u017davcer",
+            "bio": "No description",
+            "eventId": "swarm_winter_solstice"
+        },
+        {
+            "id": "rt_ahlin",
+            "name": "\u010crt Ahlin",
+            "bio": "No description",
+            "eventId": "swarm_winter_solstice"
+        },
+        {
+            "id": "viktor_tron",
+            "name": "Viktor Tron",
+            "bio": "No description",
+            "eventId": "swarm_winter_solstice"
+        },
+        {
+            "id": "callum_toner",
+            "name": "Callum Toner",
+            "bio": "No description",
+            "eventId": "swarm_winter_solstice"
+        },
+        {
+            "id": "niki_papadatou",
+            "name": "Niki Papadatou",
+            "bio": "\n\n\n\n",
+            "eventId": "swarm_winter_solstice"
+        }
+    ],
+    "playbackId": "6ea1l6tknbrl1ygi",
+    "eventId": "swarm_winter_solstice",
+    "coverImage": "/sessions/swarm_winter_solstice/the_call_of_swarm.jpg",
+    "assetId": "c623542f-e27c-416c-826b-251c5a26cf57",
+    "sourceId": "78c780ec-a420-416a-9ffd-fcd8e65c2ad1"
 }

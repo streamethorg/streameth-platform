@@ -1,20 +1,20 @@
 {
-  "id": "understanding_the_value_of_governance_contracts",
-  "name": "Understanding the Value of Governance Contracts",
-  "description": "",
-  "start": 1693568700000,
-  "end": 1693569600000,
-  "stageId": "workshop_room_1",
-  "speakers": [
-    {
-      "id": "kenechukwu_eze",
-      "name": "Kenechukwu Eze",
-      "bio": "Governance Analyst",
-      "eventId": "web3_lagos_conference_2023",
-      "twitter": "@StableLab"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/understanding_the_value_of_governance_contracts.jpg"
+    "id": "understanding_the_value_of_governance_contracts",
+    "name": "Understanding the Value of Governance Contracts",
+    "description": "",
+    "start": 1693568700000,
+    "end": 1693569600000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "kenechukwu_eze",
+            "name": "Kenechukwu Eze",
+            "bio": "Governance Analyst",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@StableLab"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/understanding_the_value_of_governance_contracts.jpg"
 }

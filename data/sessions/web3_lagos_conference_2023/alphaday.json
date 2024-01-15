@@ -1,20 +1,20 @@
 {
-  "id": "alphaday",
-  "name": "Alphaday",
-  "description": "",
-  "start": 1693656900000,
-  "end": 1693657800000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "alphaday",
-      "name": "ALPHADAY",
-      "bio": "",
-      "eventId": "web3_lagos_conference_2023",
-      "twitter": "@AlphadayHQ"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/alphaday.jpg"
+    "id": "alphaday",
+    "name": "Alphaday",
+    "description": "",
+    "start": 1693656900000,
+    "end": 1693657800000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "alphaday",
+            "name": "ALPHADAY",
+            "bio": "",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@AlphadayHQ"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/alphaday.jpg"
 }

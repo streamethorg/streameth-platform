@@ -1,21 +1,21 @@
 {
-  "id": "bringing_core_staking_innovations_and_l2s_to_institutions",
-  "name": "Bringing core staking innovations and L2s to institutions",
-  "description": "-",
-  "start": 1699946100000,
-  "end": 1699947900000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "tomasz_k_staczak",
-      "name": "Tomasz K. Sta\u0144czak",
-      "bio": "Nethermind\nFounder",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/f/7a/19282643/avatar.jpg?de5"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/bringing_core_staking_innovations_and_l2s_to_institutions.jpg"
+    "id": "bringing_core_staking_innovations_and_l2s_to_institutions",
+    "name": "Bringing core staking innovations and L2s to institutions",
+    "description": "-",
+    "start": 1699946100000,
+    "end": 1699947900000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "tomasz_k_staczak",
+            "name": "Tomasz K. Sta\u0144czak",
+            "bio": "Nethermind\nFounder",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/f/7a/19282643/avatar.jpg?de5"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/bringing_core_staking_innovations_and_l2s_to_institutions.jpg"
 }

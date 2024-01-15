@@ -1,20 +1,20 @@
 {
-  "id": "blockops",
-  "name": "Blockops",
-  "description": "",
-  "start": 1693661400000,
-  "end": 1693662300000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "blockops_rep",
-      "name": "BLOCKOPS REP",
-      "bio": "",
-      "eventId": "web3_lagos_conference_2023",
-      "twitter": "@blockopsnetwork"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/blockops.jpg"
+    "id": "blockops",
+    "name": "Blockops",
+    "description": "",
+    "start": 1693661400000,
+    "end": 1693662300000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "blockops_rep",
+            "name": "BLOCKOPS REP",
+            "bio": "",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@blockopsnetwork"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/blockops.jpg"
 }

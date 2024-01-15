@@ -1,25 +1,25 @@
 {
-  "id": "the_inevitability_of_a_decentralized_world",
-  "name": "The Inevitability of a Decentralized World",
-  "description": "We believe we\u2019re at the beginning of a once-in-a generation opportunity to partner with category defining companies that will make profound changes to the digital world. Join our session to learn why investors and builders should remain as bullish on the ecosystem as we are, and discuss the benefits of a truly decentralized world.",
-  "start": 1694811600000,
-  "end": 1694813400000,
-  "stageId": "east_room__main_",
-  "speakers": [
-    {
-      "id": "sam_hallene",
-      "name": "Sam Hallene",
-      "bio": "Sam Hallene is an Investment Partner at CMT Digital. Sam joined the CMT Digital venture group at its inception in 2017 and focuses on thesis formation, deal sourcing, and ongoing portfolio relations. He graduated from the University of Michigan with a double major in Economics and Spanish.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/CMT_9499-LG_lEgQdLq.jpg"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/9a80ifytdx65lkh6/index.m3u8",
-    "start": 15430,
-    "end": 16560
-  },
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/the_inevitability_of_a_decentralized_world.jpg"
+    "id": "the_inevitability_of_a_decentralized_world",
+    "name": "The Inevitability of a Decentralized World",
+    "description": "We believe we\u2019re at the beginning of a once-in-a generation opportunity to partner with category defining companies that will make profound changes to the digital world. Join our session to learn why investors and builders should remain as bullish on the ecosystem as we are, and discuss the benefits of a truly decentralized world.",
+    "start": 1694811600000,
+    "end": 1694813400000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "sam_hallene",
+            "name": "Sam Hallene",
+            "bio": "Sam Hallene is an Investment Partner at CMT Digital. Sam joined the CMT Digital venture group at its inception in 2017 and focuses on thesis formation, deal sourcing, and ongoing portfolio relations. He graduated from the University of Michigan with a double major in Economics and Spanish.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/CMT_9499-LG_lEgQdLq.jpg"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/9a80ifytdx65lkh6/index.m3u8",
+        "start": 15430,
+        "end": 16560
+    },
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_inevitability_of_a_decentralized_world.jpg"
 }

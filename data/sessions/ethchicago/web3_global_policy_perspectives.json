@@ -1,34 +1,34 @@
 {
-  "id": "web3_global_policy_perspectives",
-  "name": "Web3 Global Policy Perspectives",
-  "description": "What is the meaning of being \u2018global\u2019? How important is localization? How do countries approach fintech and Web3 more broadly? How do Web3 companies respond? What are challenges and where lie opportunities for both countries and companies?\r\n\r\nWe will explore all of these questions, and more, with Anthony Howell, Director & Overseas Representative of the Washington D.C. Office for the Government of Bermuda, and Serra Wei, the founder and CEO of Aegis Custody & Trust, the only custody provider with licenses to operate in both the United States and Hong Kong.",
-  "start": 1694966400000,
-  "end": 1694970000000,
-  "stageId": "lincoln_stage__builder__legal",
-  "speakers": [
-    {
-      "id": "serra_wei",
-      "name": "Serra Wei",
-      "bio": "Serra Angel Wei is a cryptocurrency finance executive, investor and entrepreneur with a blend of experience in both legacy & blockchain-based finance and cryptocurrencies. Ms. Wei has worked with Goldman Sachs, Passport Capital on building investment strategies, structuring M&A deals, cryptocurrency trading and custody solutions.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-09-12_at_6.44.07_PM_TNIHpBj.png"
-    },
-    {
-      "id": "katia_kobylinski",
-      "name": "Katia Kobylinski",
-      "bio": "Katia Kobylinski is a Strategy & Partnerships Fellow at the Global Digital Asset & Cryptocurrency Association, a global voluntary self-regulatory association for Web3, where she focuses on helping traditional and Web3 companies harness opportunities brought about by emerging technologies such as blockchain. Katia is excited about the potential of Web3 to reinvent business models, improve transparency, build trust, and reach the next billion. She has experience working with Big Tech, fintech, DeFi/ReFi start-ups and DAOs as well as non-profit organizations and the public sector. \r\n\r\nKatia holds an MBA from the Kellogg School of Management, Northwestern University, Masters in Economics from the University of Warsaw, Poland, and a Bachelor\u2019s degree in International Economic Relations & Diplomacy from the University of Economics in Prague, Czech Republic. Katia is fluent in English, Czech/Slovakian, Polish, and is working hard on her French.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-09-12_at_4.58.08_PM_QYmsNsh.png"
-    },
-    {
-      "id": "anthony_howell",
-      "name": "Anthony Howell",
-      "bio": "Anthony Howell stands as a prominent figure in international relations, currently holding the esteemed position as the Overseas Representative for the Government of Bermuda and the Director of the Washington DC office. \r\n\r\nWith a primary focus on promoting Bermuda in the global discourse, Anthony has been influential in spearheading and supporting business development initiatives, particularly those in the burgeoning fintech and digital asset sector. His success in stimulating economic growth is backed by a strategic approach to engaging with US political thought leaders and business magnates, fostering stronger ties and collaborations that propel Bermuda's standing on the international stage, especially regarding its internationally recognized role as the most prominent insurance and re-insurance capital in the world.  \r\nFurther, Anthony is also a Research Associate, for the Political Economy Policy Lab at the Africa Center for Strategy and Policy, where he contributes to publications addressing the growing emergence of Digital Assets in West Africa.\r\n\r\nA testament to Anthony\u2019s profound understanding of global affairs and legal intricacies is a solid academic foundation, as he holds advanced degrees in Law, History, and Political Science, which have been pivotal in navigating the intricate web of international business, diplomacy, and policy-making. As Anthony addresses this esteemed audience, one can anticipate a discussion enriched with insights from a rich academic background, hands-on experience in international business development, and a vision for Bermuda's eminent future.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/DSCF8379_copy_fEfVGIM.jpg"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/web3_global_policy_perspectives.jpg"
+    "id": "web3_global_policy_perspectives",
+    "name": "Web3 Global Policy Perspectives",
+    "description": "What is the meaning of being \u2018global\u2019? How important is localization? How do countries approach fintech and Web3 more broadly? How do Web3 companies respond? What are challenges and where lie opportunities for both countries and companies?\r\n\r\nWe will explore all of these questions, and more, with Anthony Howell, Director & Overseas Representative of the Washington D.C. Office for the Government of Bermuda, and Serra Wei, the founder and CEO of Aegis Custody & Trust, the only custody provider with licenses to operate in both the United States and Hong Kong.",
+    "start": 1694966400000,
+    "end": 1694970000000,
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+        {
+            "id": "serra_wei",
+            "name": "Serra Wei",
+            "bio": "Serra Angel Wei is a cryptocurrency finance executive, investor and entrepreneur with a blend of experience in both legacy & blockchain-based finance and cryptocurrencies. Ms. Wei has worked with Goldman Sachs, Passport Capital on building investment strategies, structuring M&A deals, cryptocurrency trading and custody solutions.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-09-12_at_6.44.07_PM_TNIHpBj.png"
+        },
+        {
+            "id": "katia_kobylinski",
+            "name": "Katia Kobylinski",
+            "bio": "Katia Kobylinski is a Strategy & Partnerships Fellow at the Global Digital Asset & Cryptocurrency Association, a global voluntary self-regulatory association for Web3, where she focuses on helping traditional and Web3 companies harness opportunities brought about by emerging technologies such as blockchain. Katia is excited about the potential of Web3 to reinvent business models, improve transparency, build trust, and reach the next billion. She has experience working with Big Tech, fintech, DeFi/ReFi start-ups and DAOs as well as non-profit organizations and the public sector. \r\n\r\nKatia holds an MBA from the Kellogg School of Management, Northwestern University, Masters in Economics from the University of Warsaw, Poland, and a Bachelor\u2019s degree in International Economic Relations & Diplomacy from the University of Economics in Prague, Czech Republic. Katia is fluent in English, Czech/Slovakian, Polish, and is working hard on her French.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-09-12_at_4.58.08_PM_QYmsNsh.png"
+        },
+        {
+            "id": "anthony_howell",
+            "name": "Anthony Howell",
+            "bio": "Anthony Howell stands as a prominent figure in international relations, currently holding the esteemed position as the Overseas Representative for the Government of Bermuda and the Director of the Washington DC office. \r\n\r\nWith a primary focus on promoting Bermuda in the global discourse, Anthony has been influential in spearheading and supporting business development initiatives, particularly those in the burgeoning fintech and digital asset sector. His success in stimulating economic growth is backed by a strategic approach to engaging with US political thought leaders and business magnates, fostering stronger ties and collaborations that propel Bermuda's standing on the international stage, especially regarding its internationally recognized role as the most prominent insurance and re-insurance capital in the world.  \r\nFurther, Anthony is also a Research Associate, for the Political Economy Policy Lab at the Africa Center for Strategy and Policy, where he contributes to publications addressing the growing emergence of Digital Assets in West Africa.\r\n\r\nA testament to Anthony\u2019s profound understanding of global affairs and legal intricacies is a solid academic foundation, as he holds advanced degrees in Law, History, and Political Science, which have been pivotal in navigating the intricate web of international business, diplomacy, and policy-making. As Anthony addresses this esteemed audience, one can anticipate a discussion enriched with insights from a rich academic background, hands-on experience in international business development, and a vision for Bermuda's eminent future.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/DSCF8379_copy_fEfVGIM.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/web3_global_policy_perspectives.jpg"
 }

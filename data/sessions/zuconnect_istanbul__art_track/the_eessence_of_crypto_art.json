@@ -1,20 +1,20 @@
 {
-  "id": "the_eessence_of_crypto_art",
-  "name": "The Essence of Crypto Art' ",
-  "description": "Historic Context of Digital Art and the Crypto Art Moement (Q&A)\n",
-  "start": 1698916200000,
-  "end": 1698918600000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "martin_lukas_ostachowski",
-      "name": "Martin Lukas Ostachowski",
-      "bio": "No description",
-      "eventId": "zuconnect_istanbul__art_track"
-    }
-  ],
-  "playbackId": "6b5bhb6yy55rbm9i",
-  "eventId": "zuconnect_istanbul__art_track",
-  "coverImage": "/sessions/zuconnect_istanbul__art_track/the_eessence_of_crypto_art.jpg",
-  "assetId": "6b5b500d-e080-40f7-92e1-bd4cee6df407"
+    "id": "the_eessence_of_crypto_art",
+    "name": "The Essence of Crypto Art' ",
+    "description": "Historic Context of Digital Art and the Crypto Art Moement (Q&A)\n",
+    "start": 1698916200000,
+    "end": 1698918600000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "martin_lukas_ostachowski",
+            "name": "Martin Lukas Ostachowski",
+            "bio": "No description",
+            "eventId": "zuconnect_istanbul__art_track"
+        }
+    ],
+    "playbackId": "6b5bhb6yy55rbm9i",
+    "eventId": "zuconnect_istanbul__art_track",
+    "coverImage": "/sessions/zuconnect_istanbul__art_track/the_eessence_of_crypto_art.jpg",
+    "assetId": "6b5b500d-e080-40f7-92e1-bd4cee6df407"
 }

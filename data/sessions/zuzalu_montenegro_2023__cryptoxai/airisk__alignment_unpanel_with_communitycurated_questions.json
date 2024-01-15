@@ -1,25 +1,25 @@
 {
-  "id": "airisk__alignment_unpanel_with_communitycurated_questions",
-  "name": "AI-Risk & Alignment [unpanel with community-curated questions]",
-  "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
-  "start": "2023-05-06T10:00:00.000Z",
-  "end": "2023-05-06T11:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "ai_x_crypto_summit",
-      "name": "AI x Crypto Summit",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__cryptoxai"
-    },
-    {
-      "id": "nima_asghari",
-      "name": "NiMA Asghari",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__cryptoxai"
-    }
-  ],
-  "playbackId": "3c6c62lv2iab8x5j",
-  "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "airisk__alignment_unpanel_with_communitycurated_questions",
+    "name": "AI-Risk & Alignment [unpanel with community-curated questions]",
+    "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
+    "start": "2023-05-06T10:00:00.000Z",
+    "end": "2023-05-06T11:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "ai_x_crypto_summit",
+            "name": "AI x Crypto Summit",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__cryptoxai"
+        },
+        {
+            "id": "nima_asghari",
+            "name": "NiMA Asghari",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__cryptoxai"
+        }
+    ],
+    "playbackId": "3c6c62lv2iab8x5j",
+    "eventId": "zuzalu_montenegro_2023__cryptoxai",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

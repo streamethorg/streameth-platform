@@ -1,20 +1,20 @@
 {
-  "id": "every_artwork_has_a_story_nfts_memoirs_and_beyond",
-  "name": "Every Artwork Has a Story: NFTs, Memoirs, and Beyond",
-  "description": "Description of the event: NFTs have been a part of the Ethereum ecosystem since 2017 when punks and kitties began to populate the blockchain. Since then, we have built a digital art market that spans style, genre, geography, language, and more. Not only has the NFT ecosystem proven the value of digital art, it has also challenged the traditional art market, and in doing so found a place for digital art within the upper echelons of the art world.\r\n\r\n\r\nBut in a world where there are millions (and one day trillions) of NFTs, how do we capture the history, the cultural significance, the very story of each piece of digital art?\r\n\r\n\r\nMint Gold Dust has always cared about the stories behind NFTs, which is why we pioneered the memoir feature, which is a piece of text that accompanies an artwork. But in our recently launched v2, we take it one step further. We preserve that memoir on the blockchain and tie it to the NFT artwork. For the archeologists of the future, NFTs minted on our platform will not only tell the visual story of our times, but also have a written counterpart onchain. \r\n\r\n\r\nWe believe that this technology will help creators to preserve history and document the digital renaissance that we are witnessing before us today.",
-  "start": 1694903400000,
-  "end": 1694905200000,
-  "stageId": "michigan_stage__creatives__trad_business_",
-  "speakers": [
-    {
-      "id": "virginia_valenzuela",
-      "name": "Virginia Valenzuela",
-      "bio": "An award-winning arts writer with expertise in crypto journalism, web3 marketing, and community development, Virginia Valenzuela boasts over 6 years of experience managing editorial teams and contributors. With a keen eye for refining content strategies, she has successfully developed and executed storytelling and thought leadership. Her work consistently encourages curiosity and engagement across various platforms. A sought-after speaker at numerous NFT conferences, Virginia regularly delivers lectures on the topics of crypto art history and the applications of NFTs in web3 for prestigious institutions like Sotheby's and the Berlin Art Institute. She has worked with SuperRare, Verse, and is currently the Head of Communications at Mint Gold Dust.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/9652B58F-7920-4199-B462-AE70A4E3D388_jYLIM8E.JPG"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/every_artwork_has_a_story_nfts_memoirs_and_beyond.jpg"
+    "id": "every_artwork_has_a_story_nfts_memoirs_and_beyond",
+    "name": "Every Artwork Has a Story: NFTs, Memoirs, and Beyond",
+    "description": "Description of the event: NFTs have been a part of the Ethereum ecosystem since 2017 when punks and kitties began to populate the blockchain. Since then, we have built a digital art market that spans style, genre, geography, language, and more. Not only has the NFT ecosystem proven the value of digital art, it has also challenged the traditional art market, and in doing so found a place for digital art within the upper echelons of the art world.\r\n\r\n\r\nBut in a world where there are millions (and one day trillions) of NFTs, how do we capture the history, the cultural significance, the very story of each piece of digital art?\r\n\r\n\r\nMint Gold Dust has always cared about the stories behind NFTs, which is why we pioneered the memoir feature, which is a piece of text that accompanies an artwork. But in our recently launched v2, we take it one step further. We preserve that memoir on the blockchain and tie it to the NFT artwork. For the archeologists of the future, NFTs minted on our platform will not only tell the visual story of our times, but also have a written counterpart onchain. \r\n\r\n\r\nWe believe that this technology will help creators to preserve history and document the digital renaissance that we are witnessing before us today.",
+    "start": 1694903400000,
+    "end": 1694905200000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "virginia_valenzuela",
+            "name": "Virginia Valenzuela",
+            "bio": "An award-winning arts writer with expertise in crypto journalism, web3 marketing, and community development, Virginia Valenzuela boasts over 6 years of experience managing editorial teams and contributors. With a keen eye for refining content strategies, she has successfully developed and executed storytelling and thought leadership. Her work consistently encourages curiosity and engagement across various platforms. A sought-after speaker at numerous NFT conferences, Virginia regularly delivers lectures on the topics of crypto art history and the applications of NFTs in web3 for prestigious institutions like Sotheby's and the Berlin Art Institute. She has worked with SuperRare, Verse, and is currently the Head of Communications at Mint Gold Dust.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/9652B58F-7920-4199-B462-AE70A4E3D388_jYLIM8E.JPG"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/every_artwork_has_a_story_nfts_memoirs_and_beyond.jpg"
 }

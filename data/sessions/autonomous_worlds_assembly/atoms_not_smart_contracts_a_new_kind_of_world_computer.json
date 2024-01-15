@@ -1,24 +1,24 @@
 {
-  "id": "atoms_not_smart_contracts_a_new_kind_of_world_computer",
-  "name": "Atoms Not Smart Contracts: A New Kind of World Computer",
-  "description": "The internet is a protocol for sharing files. The EVM serves as a protocol for a shared computer that. Much like our personal computers, this shared computer is governed by account-centric permissions, thus leading to ownership-centric apps. The \"shared computer protocol\" of our universe, on the other hand, is governed by physics, not accounts\u2014leading to the most emergent world we know of. Is it feasible to replicate such a system?",
-  "start": 1700046000000,
-  "end": 1700046900000,
-  "stageId": "emirgan_2",
-  "speakers": [
-    {
-      "id": "wand",
-      "name": "Wand",
-      "bio": "Wand is co-founder of Tenet, where he is building a protocol for digital physics.",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@wandcrafting",
-      "photo": "https://drive.google.com/uc?id=1XCDm_f8IfOZ-Ebx0M-Mo421L0IHuX-RR"
-    }
-  ],
-  "playbackId": "4691v0uikjw9nj1j",
-  "eventId": "autonomous_worlds_assembly",
-  "coverImage": "/sessions/autonomous_worlds_assembly/atoms_not_smart_contracts_a_new_kind_of_world_computer_thumbnail.png",
-  "assetId": "46913216-0ddc-42ea-93ae-0b745f85ee68",
-  "sourceId": "4955fcec-2ee9-4fc9-aa9e-16ab5baa551f",
-  "videoType": "clip"
+    "id": "atoms_not_smart_contracts_a_new_kind_of_world_computer",
+    "name": "Atoms Not Smart Contracts: A New Kind of World Computer",
+    "description": "The internet is a protocol for sharing files. The EVM serves as a protocol for a shared computer that. Much like our personal computers, this shared computer is governed by account-centric permissions, thus leading to ownership-centric apps. The \"shared computer protocol\" of our universe, on the other hand, is governed by physics, not accounts\u2014leading to the most emergent world we know of. Is it feasible to replicate such a system?",
+    "start": 1700046000000,
+    "end": 1700046900000,
+    "stageId": "emirgan_2",
+    "speakers": [
+        {
+            "id": "wand",
+            "name": "Wand",
+            "bio": "Wand is co-founder of Tenet, where he is building a protocol for digital physics.",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@wandcrafting",
+            "photo": "https://drive.google.com/uc?id=1XCDm_f8IfOZ-Ebx0M-Mo421L0IHuX-RR"
+        }
+    ],
+    "playbackId": "4691v0uikjw9nj1j",
+    "eventId": "autonomous_worlds_assembly",
+    "coverImage": "/sessions/autonomous_worlds_assembly/atoms_not_smart_contracts_a_new_kind_of_world_computer_thumbnail.png",
+    "assetId": "46913216-0ddc-42ea-93ae-0b745f85ee68",
+    "sourceId": "4955fcec-2ee9-4fc9-aa9e-16ab5baa551f",
+    "videoType": "clip"
 }

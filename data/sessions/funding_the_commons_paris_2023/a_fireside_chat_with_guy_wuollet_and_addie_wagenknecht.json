@@ -1,25 +1,25 @@
 {
-  "id": "a_fireside_chat_with_guy_wuollet_and_addie_wagenknecht",
-  "name": "A Fireside Chat with Guy Wuollet and Addie Wagenknecht",
-  "description": "In this video, two individuals discuss their experiences and perspectives on public goods funding and decentralized finance in the crypto field. They touch on topics such as decentralized physical infrastructure projects, redundancies in current infrastructure, sustainable revenue models for projects like Filecoin and MEVs, proactive funding models, coordination issues in decentralized organizations, and the role of venture capital in funding public goods. The conversation explores the challenges and potential solutions for funding mechanisms in the crypto space.\n\nThe video features an interview with Guy Oulay, a partner at A16 Zine Crypto, who has conducted independent research in partnership with Protocol Labs. The conversation focuses on various topics within the crypto field, including public goods funding, decentralized finance, and decentralized physical infrastructure projects. They discuss the challenges and potential solutions in funding mechanisms for developers and projects, as well as the role of VCs in supporting public goods funding. The interview highlights the importance of coordination, pragmatism, and tangible outcomes in driving progress in the crypto space.\n\nThe conversation also delves into the challenges of funding public goods compared to more tangible and high-return projects. They explore the potential of permissionless contribution and the need for better coordination mechanisms.",
-  "start": "2023-07-15T08:15:00.000Z",
-  "end": "2023-07-15T08:35:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "addie_wagenknecht",
-      "name": "Addie Wagenknecht",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "guy_wuollet",
-      "name": "Guy Wuollet",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "playbackId": "041863qigce1g8fy",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/a_fireside_chat_with_guy_wuollet_and_addie_wagenknecht.jpg"
+    "id": "a_fireside_chat_with_guy_wuollet_and_addie_wagenknecht",
+    "name": "A Fireside Chat with Guy Wuollet and Addie Wagenknecht",
+    "description": "In this video, two individuals discuss their experiences and perspectives on public goods funding and decentralized finance in the crypto field. They touch on topics such as decentralized physical infrastructure projects, redundancies in current infrastructure, sustainable revenue models for projects like Filecoin and MEVs, proactive funding models, coordination issues in decentralized organizations, and the role of venture capital in funding public goods. The conversation explores the challenges and potential solutions for funding mechanisms in the crypto space.\n\nThe video features an interview with Guy Oulay, a partner at A16 Zine Crypto, who has conducted independent research in partnership with Protocol Labs. The conversation focuses on various topics within the crypto field, including public goods funding, decentralized finance, and decentralized physical infrastructure projects. They discuss the challenges and potential solutions in funding mechanisms for developers and projects, as well as the role of VCs in supporting public goods funding. The interview highlights the importance of coordination, pragmatism, and tangible outcomes in driving progress in the crypto space.\n\nThe conversation also delves into the challenges of funding public goods compared to more tangible and high-return projects. They explore the potential of permissionless contribution and the need for better coordination mechanisms.",
+    "start": "2023-07-15T08:15:00.000Z",
+    "end": "2023-07-15T08:35:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "addie_wagenknecht",
+            "name": "Addie Wagenknecht",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        },
+        {
+            "id": "guy_wuollet",
+            "name": "Guy Wuollet",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "041863qigce1g8fy",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/a_fireside_chat_with_guy_wuollet_and_addie_wagenknecht.jpg"
 }

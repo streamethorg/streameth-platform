@@ -1,25 +1,25 @@
 {
-  "id": "the_state_of_private_voting__report",
-  "name": "The state of Private Voting - Report",
-  "description": "What is the latest on private voting, on Ethereum and Beyond. A walkthrough of the protocols that exist, their attributes, and their maturity. This report is being compiled for MolochDAO.\n\nTakeaways:\n- What are the latest protocols for privacy voting\n- What are their tradeoffs/characteristics (e.g what is private, how mature they are)\n- How can users hit the ground running to integrate them for apps",
-  "start": 1700137500000,
-  "end": 1700138700000,
-  "stageId": "marmara",
-  "speakers": [
-    {
-      "id": "odysseaseth",
-      "name": "Odysseas.eth",
-      "bio": "Protocol Engineer passionate about cross-chain and privacy. ",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1VpaYr65yyDaeyoN22vnP3wltz4LZQAz4/view"
-    }
-  ],
-  "playbackId": "20e5bgjyehae0k19",
-  "eventId": "progcrypto",
-  "track": "ZK and Blockchains / zkEVMs",
-  "coverImage": "/sessions/progcrypto/the_state_of_private_voting__report_thumbnail.png",
-  "assetId": "20e55a61-5690-4a71-a526-d49144591de3",
-  "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
-  "videoType": "clip"
+    "id": "the_state_of_private_voting__report",
+    "name": "The state of Private Voting - Report",
+    "description": "What is the latest on private voting, on Ethereum and Beyond. A walkthrough of the protocols that exist, their attributes, and their maturity. This report is being compiled for MolochDAO.\n\nTakeaways:\n- What are the latest protocols for privacy voting\n- What are their tradeoffs/characteristics (e.g what is private, how mature they are)\n- How can users hit the ground running to integrate them for apps",
+    "start": 1700137500000,
+    "end": 1700138700000,
+    "stageId": "marmara",
+    "speakers": [
+        {
+            "id": "odysseaseth",
+            "name": "Odysseas.eth",
+            "bio": "Protocol Engineer passionate about cross-chain and privacy. ",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1VpaYr65yyDaeyoN22vnP3wltz4LZQAz4/view"
+        }
+    ],
+    "playbackId": "20e5bgjyehae0k19",
+    "eventId": "progcrypto",
+    "track": "ZK and Blockchains / zkEVMs",
+    "coverImage": "/sessions/progcrypto/the_state_of_private_voting__report_thumbnail.png",
+    "assetId": "20e55a61-5690-4a71-a526-d49144591de3",
+    "sourceId": "9c6efd0b-fe15-4c42-b629-3437829afa41",
+    "videoType": "clip"
 }

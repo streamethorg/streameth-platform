@@ -1,31 +1,31 @@
 {
-  "id": "the_journey_to_zuzalu_the_next_steps_to_unlock_talents_in_africa",
-  "name": "The Journey to Zuzalu- The Next Steps to Unlock Talents in Africa",
-  "description": "",
-  "start": 1684229400000,
-  "end": 1684231200000,
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "eric_annan",
-      "name": "Eric Annan",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    },
-    {
-      "id": "chika_uwazie",
-      "name": "Chika Uwazie",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    },
-    {
-      "id": "elliott_bayev",
-      "name": "Elliott Bayev",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/the_journey_to_zuzalu_the_next_steps_to_unlock_talents_in_africa.jpg"
+    "id": "the_journey_to_zuzalu_the_next_steps_to_unlock_talents_in_africa",
+    "name": "The Journey to Zuzalu- The Next Steps to Unlock Talents in Africa",
+    "description": "",
+    "start": 1684229400000,
+    "end": 1684231200000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "eric_annan",
+            "name": "Eric Annan",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "chika_uwazie",
+            "name": "Chika Uwazie",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "elliott_bayev",
+            "name": "Elliott Bayev",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/the_journey_to_zuzalu_the_next_steps_to_unlock_talents_in_africa.jpg"
 }

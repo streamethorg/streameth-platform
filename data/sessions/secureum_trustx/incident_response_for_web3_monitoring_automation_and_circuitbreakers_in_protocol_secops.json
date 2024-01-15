@@ -1,24 +1,24 @@
 {
-  "id": "incident_response_for_web3_monitoring_automation_and_circuitbreakers_in_protocol_secops",
-  "name": "Incident Response for Web3: Monitoring, Automation, and Circuitbreakers in Protocol SecOps",
-  "description": "",
-  "start": 1699969560000,
-  "end": 1699970520000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "morgan_weaver",
-      "name": "Morgan\nWeaver",
-      "bio": "Security Engineer\nOpenZeppelin",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Morgan.png"
-    }
-  ],
-  "playbackId": "8436y8vwdry68czo",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/incident_response_for_web3_monitoring_automation_and_circuitbreakers_in_protocol_secops.jpg",
-  "assetId": "84363eb1-fcff-4dad-b3c4-e7adf0b55827",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "incident_response_for_web3_monitoring_automation_and_circuitbreakers_in_protocol_secops",
+    "name": "Incident Response for Web3: Monitoring, Automation, and Circuitbreakers in Protocol SecOps",
+    "description": "",
+    "start": 1699969560000,
+    "end": 1699970520000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "morgan_weaver",
+            "name": "Morgan\nWeaver",
+            "bio": "Security Engineer\nOpenZeppelin",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Morgan.png"
+        }
+    ],
+    "playbackId": "8436y8vwdry68czo",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/incident_response_for_web3_monitoring_automation_and_circuitbreakers_in_protocol_secops.jpg",
+    "assetId": "84363eb1-fcff-4dad-b3c4-e7adf0b55827",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

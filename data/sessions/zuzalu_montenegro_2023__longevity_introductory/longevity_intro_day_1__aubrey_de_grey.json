@@ -1,19 +1,19 @@
 {
-  "id": "longevity_intro_day_1__aubrey_de_grey",
-  "name": "Longevity intro Day 1 - Aubrey de Grey",
-  "description": "The speaker discusses the history of the crusade against aging and the future of the field, focusing on the damage repair approach and the concept of longevity escape velocity. He introduces his organization, the LEAF Foundation, and discusses their advocacy and education efforts, as well as their flagship project to combine interventions that do damage repair. The speaker also mentions upcoming events and the illustrious speaking roster for the next Longevity Summit.",
-  "start": "2023-03-28T14:00:00.000Z",
-  "end": "2023-03-28T14:15:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "aubrey_de_grey",
-      "name": "Aubrey de Grey",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
-    }
-  ],
-  "playbackId": "d4a2rvkxtdcrou77",
-  "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "longevity_intro_day_1__aubrey_de_grey",
+    "name": "Longevity intro Day 1 - Aubrey de Grey",
+    "description": "The speaker discusses the history of the crusade against aging and the future of the field, focusing on the damage repair approach and the concept of longevity escape velocity. He introduces his organization, the LEAF Foundation, and discusses their advocacy and education efforts, as well as their flagship project to combine interventions that do damage repair. The speaker also mentions upcoming events and the illustrious speaking roster for the next Longevity Summit.",
+    "start": "2023-03-28T14:00:00.000Z",
+    "end": "2023-03-28T14:15:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "aubrey_de_grey",
+            "name": "Aubrey de Grey",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+        }
+    ],
+    "playbackId": "d4a2rvkxtdcrou77",
+    "eventId": "zuzalu_montenegro_2023__longevity_introductory",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

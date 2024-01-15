@@ -1,25 +1,25 @@
 {
-  "id": "death_is_a_business_preserving_spirituality_in_web3__music_experience",
-  "name": "Death Is A Business Preserving Spirituality in Web3 ( Music Experience)",
-  "description": "How are you connected to spirit? As we enter this web3 dimension ETH Chicago attendees  are invited to engage with a spiritual musical experience.",
-  "start": 1694971800000,
-  "end": 1694975400000,
-  "stageId": "michigan_stage__creatives__trad_business_",
-  "speakers": [
-    {
-      "id": "sonia_erika",
-      "name": "Sonia Erika",
-      "bio": null,
-      "eventId": "ethchicago",
-      "photo": ""
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a74dmy8t0vvqjvdt/index.m3u8",
-    "start": 0,
-    "end": 0
-  },
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/death_is_a_business_preserving_spirituality_in_web3__music_experience.jpg"
+    "id": "death_is_a_business_preserving_spirituality_in_web3__music_experience",
+    "name": "Death Is A Business Preserving Spirituality in Web3 ( Music Experience)",
+    "description": "How are you connected to spirit? As we enter this web3 dimension ETH Chicago attendees  are invited to engage with a spiritual musical experience.",
+    "start": 1694971800000,
+    "end": 1694975400000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "sonia_erika",
+            "name": "Sonia Erika",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/a74dmy8t0vvqjvdt/index.m3u8",
+        "start": 0,
+        "end": 0
+    },
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/death_is_a_business_preserving_spirituality_in_web3__music_experience.jpg"
 }

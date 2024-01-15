@@ -1,24 +1,24 @@
 {
-  "id": "welcome_note",
-  "name": "Welcome Note",
-  "description": "Welcome note by the Solidity Summit host, addressing the audience and setting up the stage for the speakers.",
-  "start": 1700118000000,
-  "end": 1700118600000,
-  "stageId": "uskudar_2",
-  "speakers": [
-    {
-      "id": "franziska_heintel",
-      "name": "Franziska Heintel",
-      "bio": "No description",
-      "eventId": "solidity_summit",
-      "twitter": "@_franzihei",
-      "photo": "https://storage.googleapis.com/ethereum-hackmd/upload_62313ef7a5a1788f3a613b3b276e4470.png"
-    }
-  ],
-  "playbackId": "00f2964dt9k9aq4a",
-  "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/welcome_note_thumbnail.png",
-  "assetId": "00f243a6-4c1b-495d-aaeb-d9d570c2633a",
-  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-  "videoType": "clip"
+    "id": "welcome_note",
+    "name": "Welcome Note",
+    "description": "Welcome note by the Solidity Summit host, addressing the audience and setting up the stage for the speakers.",
+    "start": 1700118000000,
+    "end": 1700118600000,
+    "stageId": "uskudar_2",
+    "speakers": [
+        {
+            "id": "franziska_heintel",
+            "name": "Franziska Heintel",
+            "bio": "No description",
+            "eventId": "solidity_summit",
+            "twitter": "@_franzihei",
+            "photo": "https://storage.googleapis.com/ethereum-hackmd/upload_62313ef7a5a1788f3a613b3b276e4470.png"
+        }
+    ],
+    "playbackId": "00f2964dt9k9aq4a",
+    "eventId": "solidity_summit",
+    "coverImage": "/sessions/solidity_summit/welcome_note_thumbnail.png",
+    "assetId": "00f243a6-4c1b-495d-aaeb-d9d570c2633a",
+    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+    "videoType": "clip"
 }

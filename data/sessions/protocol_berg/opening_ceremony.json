@@ -1,28 +1,28 @@
 {
-  "id": "opening_ceremony",
-  "name": "Opening Ceremony",
-  "description": "The Department of Decentralization welcomes you to Protocol Berg!\r\n\r\nWe briefly run you through the concept of the event and the program highlights of the day. Furthermore, we share logistical and operational tips on how to navigate the venue, information on food and drinks, and more.",
-  "start": 1694761200000,
-  "end": 1694762700000,
-  "stageId": "magazin__main_stage",
-  "speakers": [
-    {
-      "id": "afri_schoedon",
-      "name": "Afri Schoedon",
-      "bio": "Head of Protocol Engineering at ChainSafe Systems. Core-Organizer ETHBerlin, Protocol Berg, and GoerliCon. Running testnets on the side.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/afri-2023_6nkQtZ4.png"
-    },
-    {
-      "id": "franziska_heintel",
-      "name": "Franziska Heintel",
-      "bio": "-",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/franziska_heintel_acZXRr3.png"
-    }
-  ],
-  "playbackId": "09bbo3pjfh3r9wej",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/opening_ceremony.jpg",
-  "assetId": "09bbf455-f85a-4a91-ad05-25ae45a1a2f4"
+    "id": "opening_ceremony",
+    "name": "Opening Ceremony",
+    "description": "The Department of Decentralization welcomes you to Protocol Berg!\r\n\r\nWe briefly run you through the concept of the event and the program highlights of the day. Furthermore, we share logistical and operational tips on how to navigate the venue, information on food and drinks, and more.",
+    "start": 1694761200000,
+    "end": 1694762700000,
+    "stageId": "magazin__main_stage",
+    "speakers": [
+        {
+            "id": "afri_schoedon",
+            "name": "Afri Schoedon",
+            "bio": "Head of Protocol Engineering at ChainSafe Systems. Core-Organizer ETHBerlin, Protocol Berg, and GoerliCon. Running testnets on the side.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/afri-2023_6nkQtZ4.png"
+        },
+        {
+            "id": "franziska_heintel",
+            "name": "Franziska Heintel",
+            "bio": "-",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/franziska_heintel_acZXRr3.png"
+        }
+    ],
+    "playbackId": "09bbo3pjfh3r9wej",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/opening_ceremony.jpg",
+    "assetId": "09bbf455-f85a-4a91-ad05-25ae45a1a2f4"
 }

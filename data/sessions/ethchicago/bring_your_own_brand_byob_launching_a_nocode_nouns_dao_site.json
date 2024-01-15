@@ -1,27 +1,27 @@
 {
-  "id": "bring_your_own_brand_byob_launching_a_nocode_nouns_dao_site",
-  "name": "Bring Your Own Brand (BYOB): Launching a No-Code Nouns DAO Site",
-  "description": "Learn how to design, build, and ship your very own Nouns DAO auction and site with ZERO code.",
-  "start": 1694811600000,
-  "end": 1694815200000,
-  "stageId": "lincoln_stage__builder__legal",
-  "speakers": [
-    {
-      "id": "boop",
-      "name": "boop",
-      "bio": "\u2310\u25e8-\u25e8 \u2022 designing the next web with @TheNoundation and @ratlabs_",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/soondooboop_f7oPFa3.png"
-    },
-    {
-      "id": "metamonk",
-      "name": "metamonk",
-      "bio": "building the next web @ratlabs_",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/metamonk_mEXZmqI.png"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/bring_your_own_brand_byob_launching_a_nocode_nouns_dao_site.jpg"
+    "id": "bring_your_own_brand_byob_launching_a_nocode_nouns_dao_site",
+    "name": "Bring Your Own Brand (BYOB): Launching a No-Code Nouns DAO Site",
+    "description": "Learn how to design, build, and ship your very own Nouns DAO auction and site with ZERO code.",
+    "start": 1694811600000,
+    "end": 1694815200000,
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+        {
+            "id": "boop",
+            "name": "boop",
+            "bio": "\u2310\u25e8-\u25e8 \u2022 designing the next web with @TheNoundation and @ratlabs_",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/soondooboop_f7oPFa3.png"
+        },
+        {
+            "id": "metamonk",
+            "name": "metamonk",
+            "bio": "building the next web @ratlabs_",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/metamonk_mEXZmqI.png"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/bring_your_own_brand_byob_launching_a_nocode_nouns_dao_site.jpg"
 }

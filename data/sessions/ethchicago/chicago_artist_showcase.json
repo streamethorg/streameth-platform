@@ -1,12 +1,12 @@
 {
-  "id": "chicago_artist_showcase",
-  "name": "Chicago Artist Showcase",
-  "description": "Chicago artist showcase curated by Goldie and ImnotArt",
-  "start": 1694811600000,
-  "end": 1694833200000,
-  "stageId": "gallery",
-  "speakers": [],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/chicago_artist_showcase.jpg"
+    "id": "chicago_artist_showcase",
+    "name": "Chicago Artist Showcase",
+    "description": "Chicago artist showcase curated by Goldie and ImnotArt",
+    "start": 1694811600000,
+    "end": 1694833200000,
+    "stageId": "gallery",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/chicago_artist_showcase.jpg"
 }

@@ -1,24 +1,24 @@
 {
-  "id": "fhedksap",
-  "name": "FHE-DKSAP",
-  "description": "Fellow project presentation by Mason",
-  "start": 1700217900000,
-  "end": 1700218500000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "encmason",
-      "name": "Enc(Mason)",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@mason_173",
-      "photo": "https://bafybeies3odi24wyk3e22rnautr57tiuk3b56nxrd53fxgtvr37abmz5j4.ipfs.dweb.link/6747.png"
-    }
-  ],
-  "playbackId": "6addajj0zlb08ckp",
-  "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/fhedksap_thumbnail.png",
-  "assetId": "6adde486-f778-467d-a3ea-fd738cab095c",
-  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-  "videoType": "clip"
+    "id": "fhedksap",
+    "name": "FHE-DKSAP",
+    "description": "Fellow project presentation by Mason",
+    "start": 1700217900000,
+    "end": 1700218500000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "encmason",
+            "name": "Enc(Mason)",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@mason_173",
+            "photo": "https://bafybeies3odi24wyk3e22rnautr57tiuk3b56nxrd53fxgtvr37abmz5j4.ipfs.dweb.link/6747.png"
+        }
+    ],
+    "playbackId": "6addajj0zlb08ckp",
+    "eventId": "epf_day",
+    "coverImage": "/sessions/epf_day/fhedksap_thumbnail.png",
+    "assetId": "6adde486-f778-467d-a3ea-fd738cab095c",
+    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+    "videoType": "clip"
 }

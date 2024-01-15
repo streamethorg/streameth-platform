@@ -1,24 +1,24 @@
 {
-  "id": "ethereum_smart_contract_auditors_2023_rewind",
-  "name": "Ethereum Smart Contract Auditor\u2019s 2023 Rewind",
-  "description": "",
-  "start": 1699948800000,
-  "end": 1699951800000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "patrickd",
-      "name": "Patrickd",
-      "bio": "Mentor, Secureum Researcher, Spearbit",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Patrick.png"
-    }
-  ],
-  "playbackId": "b3a16pakyq7t4iu5",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/ethereum_smart_contract_auditors_2023_rewind.jpg",
-  "assetId": "b3a1928d-a4ce-4580-b06a-29497299b52b",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "ethereum_smart_contract_auditors_2023_rewind",
+    "name": "Ethereum Smart Contract Auditor\u2019s 2023 Rewind",
+    "description": "",
+    "start": 1699948800000,
+    "end": 1699951800000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "patrickd",
+            "name": "Patrickd",
+            "bio": "Mentor, Secureum Researcher, Spearbit",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Patrick.png"
+        }
+    ],
+    "playbackId": "b3a16pakyq7t4iu5",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/ethereum_smart_contract_auditors_2023_rewind.jpg",
+    "assetId": "b3a1928d-a4ce-4580-b06a-29497299b52b",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

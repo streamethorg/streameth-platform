@@ -1,20 +1,20 @@
 {
-  "id": "openux_office",
-  "name": "OpenUX Office",
-  "description": "OpenUX is available to answer any of your UX questions for the upcoming hackathon or your project.",
-  "start": 1694820600000,
-  "end": 1694824200000,
-  "stageId": "oak_room_hacker_room",
-  "speakers": [
-    {
-      "id": "openux",
-      "name": "OpenUX",
-      "bio": "Henry is a co-founder of OpenUX, a collective of experienced UX researchers empowering teams across the entire Web3 space to increase their impact. We equip builders with context, meaning, and insight by contributing expertise and promoting an ecosystem of open source user research. We aim to overcome the siloed use of UX best practices by building in the open and encouraging collaboration and sharing of insights.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/Group_23_0NHWMTX.png"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/openux_office.jpg"
+    "id": "openux_office",
+    "name": "OpenUX Office",
+    "description": "OpenUX is available to answer any of your UX questions for the upcoming hackathon or your project.",
+    "start": 1694820600000,
+    "end": 1694824200000,
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+        {
+            "id": "openux",
+            "name": "OpenUX",
+            "bio": "Henry is a co-founder of OpenUX, a collective of experienced UX researchers empowering teams across the entire Web3 space to increase their impact. We equip builders with context, meaning, and insight by contributing expertise and promoting an ecosystem of open source user research. We aim to overcome the siloed use of UX best practices by building in the open and encouraging collaboration and sharing of insights.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Group_23_0NHWMTX.png"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/openux_office.jpg"
 }

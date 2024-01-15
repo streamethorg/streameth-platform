@@ -1,20 +1,20 @@
 {
-  "id": "cover_your_crypto_assets",
-  "name": "Cover Your (Crypto) Assets",
-  "description": "Cover Your Assets: How the CryptoCurrency Security Standard (CCSS) Protects Your Crypto",
-  "start": 1694809800000,
-  "end": 1694811600000,
-  "stageId": "lincoln_stage__builder__legal",
-  "speakers": [
-    {
-      "id": "jessica_levesque",
-      "name": "Jessica Levesque",
-      "bio": "Jessica Levesque is the Executive Director at C4. She has worked in the Bitcoin, Ethereum, open blockchains, and web3 space since 2017. She previously held positions as the CEO for Andreas M. Antonopoulos, VP of Education for Empowered Law, and as an Associate Dean with the City Colleges of Chicago.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/CCSS_2_IaEciSo.png"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/cover_your_crypto_assets.jpg"
+    "id": "cover_your_crypto_assets",
+    "name": "Cover Your (Crypto) Assets",
+    "description": "Cover Your Assets: How the CryptoCurrency Security Standard (CCSS) Protects Your Crypto",
+    "start": 1694809800000,
+    "end": 1694811600000,
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+        {
+            "id": "jessica_levesque",
+            "name": "Jessica Levesque",
+            "bio": "Jessica Levesque is the Executive Director at C4. She has worked in the Bitcoin, Ethereum, open blockchains, and web3 space since 2017. She previously held positions as the CEO for Andreas M. Antonopoulos, VP of Education for Empowered Law, and as an Associate Dean with the City Colleges of Chicago.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/CCSS_2_IaEciSo.png"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/cover_your_crypto_assets.jpg"
 }

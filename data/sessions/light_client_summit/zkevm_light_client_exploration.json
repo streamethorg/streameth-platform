@@ -1,23 +1,23 @@
 {
-  "id": "zkevm_light_client_exploration",
-  "name": "zkEVM light client exploration",
-  "description": "We will explain some PoC we are doing using the current zkEVM circuits",
-  "start": 1700298600000,
-  "end": 1700299800000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "adri_massanet",
-      "name": "Adri\u00e0 Massanet",
-      "bio": "Previously in Giveth, Openethereum, Iden3, now working PSE zkEVM ",
-      "eventId": "light_client_summit",
-      "twitter": "@adria0\n"
-    }
-  ],
-  "playbackId": "210dnhd464vpio35",
-  "eventId": "light_client_summit",
-  "coverImage": "/sessions/light_client_summit/zkevm_light_client_exploration_thumbnail.png",
-  "assetId": "210de0f6-f7e1-43c4-ab11-b960718763d2",
-  "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
-  "videoType": "clip"
+    "id": "zkevm_light_client_exploration",
+    "name": "zkEVM light client exploration",
+    "description": "We will explain some PoC we are doing using the current zkEVM circuits",
+    "start": 1700298600000,
+    "end": 1700299800000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "adri_massanet",
+            "name": "Adri\u00e0 Massanet",
+            "bio": "Previously in Giveth, Openethereum, Iden3, now working PSE zkEVM ",
+            "eventId": "light_client_summit",
+            "twitter": "@adria0\n"
+        }
+    ],
+    "playbackId": "210dnhd464vpio35",
+    "eventId": "light_client_summit",
+    "coverImage": "/sessions/light_client_summit/zkevm_light_client_exploration_thumbnail.png",
+    "assetId": "210de0f6-f7e1-43c4-ab11-b960718763d2",
+    "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
+    "videoType": "clip"
 }

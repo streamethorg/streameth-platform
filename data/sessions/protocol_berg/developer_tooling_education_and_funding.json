@@ -1,21 +1,21 @@
 {
-  "id": "developer_tooling_education_and_funding",
-  "name": "Developer Tooling, Education, and Funding",
-  "description": "Modern decentralized app stack, ethereum dev eduction, and streaming developer UBI.",
-  "start": 1694772900000,
-  "end": 1694775300000,
-  "stageId": "loft__workshop_0",
-  "speakers": [
-    {
-      "id": "austingriffith",
-      "name": "austingriffith",
-      "bio": "\ud83d\udd25\ud83e\udee1\ud83d\udd25 builder on Ethereum \ud83d\udee0",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/bmhym86N_400x400-3_WmEc96n.jpg"
-    }
-  ],
-  "playbackId": "da21859v4ivrwtvq",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/developer_tooling_education_and_funding.jpg",
-  "assetId": "da216044-e4de-4237-9752-b068b8cfffa8"
+    "id": "developer_tooling_education_and_funding",
+    "name": "Developer Tooling, Education, and Funding",
+    "description": "Modern decentralized app stack, ethereum dev eduction, and streaming developer UBI.",
+    "start": 1694772900000,
+    "end": 1694775300000,
+    "stageId": "loft__workshop_0",
+    "speakers": [
+        {
+            "id": "austingriffith",
+            "name": "austingriffith",
+            "bio": "\ud83d\udd25\ud83e\udee1\ud83d\udd25 builder on Ethereum \ud83d\udee0",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/bmhym86N_400x400-3_WmEc96n.jpg"
+        }
+    ],
+    "playbackId": "da21859v4ivrwtvq",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/developer_tooling_education_and_funding.jpg",
+    "assetId": "da216044-e4de-4237-9752-b068b8cfffa8"
 }

@@ -1,25 +1,25 @@
 {
-  "id": "enhancing_safety_and_security_with_circom_21",
-  "name": "Enhancing safety and security with circom 2.1",
-  "description": "The new features introduced in the circom programming language from version 2.1.0  aim at increasing productivity of developers and safety and security of the designed protocols. This presentation will focus on the latter objective by showing examples of bugs introduced in ZK protocols programmed in circom and how the new features can help to prevent them. Learning how to use these features is of paramount importance to increase the security of any ZK application built using circom.",
-  "start": 1700140500000,
-  "end": 1700142300000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "albert_rubio",
-      "name": "Albert Rubio",
-      "bio": "Over the last four years I have been leading the development of the circom compiler. Circom is one of the leading languages for defining ZK protocols and its open source compiler is fully written in Rust. Additionally, I have also extensively worked on developing tools and techniques for the security, safety and gas consumption analysis of smart contracts and on EVM bytecode optimization and I am currently working on verifying safety and security properties of circom programs.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/uc?id=1eAOjj2TMIYHo_otZGKszhoXNPHQV-tNX"
-    }
-  ],
-  "playbackId": "361d7cbr1hbunm1e",
-  "eventId": "progcrypto",
-  "track": "Developer Tools",
-  "coverImage": "/sessions/progcrypto/enhancing_safety_and_security_with_circom_21_thumbnail.png",
-  "assetId": "361d2bd0-df40-4d03-bffa-3211d8f81bc1",
-  "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
-  "videoType": "clip"
+    "id": "enhancing_safety_and_security_with_circom_21",
+    "name": "Enhancing safety and security with circom 2.1",
+    "description": "The new features introduced in the circom programming language from version 2.1.0  aim at increasing productivity of developers and safety and security of the designed protocols. This presentation will focus on the latter objective by showing examples of bugs introduced in ZK protocols programmed in circom and how the new features can help to prevent them. Learning how to use these features is of paramount importance to increase the security of any ZK application built using circom.",
+    "start": 1700140500000,
+    "end": 1700142300000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "albert_rubio",
+            "name": "Albert Rubio",
+            "bio": "Over the last four years I have been leading the development of the circom compiler. Circom is one of the leading languages for defining ZK protocols and its open source compiler is fully written in Rust. Additionally, I have also extensively worked on developing tools and techniques for the security, safety and gas consumption analysis of smart contracts and on EVM bytecode optimization and I am currently working on verifying safety and security properties of circom programs.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/uc?id=1eAOjj2TMIYHo_otZGKszhoXNPHQV-tNX"
+        }
+    ],
+    "playbackId": "361d7cbr1hbunm1e",
+    "eventId": "progcrypto",
+    "track": "Developer Tools",
+    "coverImage": "/sessions/progcrypto/enhancing_safety_and_security_with_circom_21_thumbnail.png",
+    "assetId": "361d2bd0-df40-4d03-bffa-3211d8f81bc1",
+    "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
+    "videoType": "clip"
 }

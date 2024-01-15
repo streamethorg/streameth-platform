@@ -1,48 +1,48 @@
 {
-  "id": "exploring_the_intersection_of_fashion_innovation_and_technology",
-  "name": "Exploring the Intersection of Fashion, Innovation, and Technology",
-  "description": "In this engaging panel discussion, we will delve into the exciting synergy between fashion, innovation, and technology. Our aim is to showcase the latest trends and innovations in the fashion tech industry, emphasizing its potential for transformation. Additionally, we plan to feature fashion tech partners and conduct live demos of cutting-edge fashion tech startups, providing attendees with a firsthand look at the future of fashion and tech.\r\n\r\nJoin us at Eth.Chicago for this thought-provoking discussion, where fashion meets innovation and technology to shape the future of the industry.",
-  "start": 1694881800000,
-  "end": 1694883600000,
-  "stageId": "east_room__main_",
-  "speakers": [
-    {
-      "id": "megan_trogs_troglio",
-      "name": "Megan @trogs Troglio",
-      "bio": "internet.Artist",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/trogsheadshot_mMyg33G.jpg"
-    },
-    {
-      "id": "marquan_jones",
-      "name": "Marquan Jones",
-      "bio": "My name is Marquan Jones, I am a brand strategist and technology innovation consultant, as well as the president of the Chicago Fashion Coalition. With my background in sociology and community development, I bring a unique perspective on the intersection of fashion and technology.\r\n\r\nMy work focuses on the transformative potential of emerging technologies in various industries. I strive to leverage technology to create positive change and empower individuals and communities within the fashion space.\r\n\r\nAs someone deeply interested in technology and its potential impact, I naturally gravitated toward exploring the emerging trends in the digital space. NFTs and Web3 caught my attention because they represent a paradigm shift in the way we think about ownership, creativity, and value exchange. The idea of digital assets and decentralized systems fascinated me. I saw an opportunity to explore how these concepts could reshape the fashion industry and open up new possibilities for designers, creators, and consumers.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/IMG_7764_Jsvce2Q.JPG"
-    },
-    {
-      "id": "tuan_jones",
-      "name": "Tuan Jones",
-      "bio": "Tuan Jones",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/f05172857966da9b443f13464cc47e88_pxDaf5M.jpg"
-    },
-    {
-      "id": "piper_zy",
-      "name": "Piper ZY",
-      "bio": null,
-      "eventId": "ethchicago",
-      "photo": ""
-    },
-    {
-      "id": "giivens",
-      "name": "Giivens",
-      "bio": "GIVENS (they/he) is a Chicago based experiential\r\ndesigner, creative director, professional musician, DJ, and software developer armed with a BA in Fine Arts\r\nfrom St. Mary's College, and a graduate of Northwestern University's coding progam. They create interactive and immersive experiences that consist of\r\nexperimental light, architectural, and furniture design, audio visual art, 3D/2D animation, and full stack + augmented reality software development, in addition to music compositionand artistic direction. Their work\r\nhas been shown in various capacities, including a permanent art Installation at Pier Park in South Bend Indiana. Their work has also notably been shown for Redbull at the Dance your style US National Championship, Summer Smash Music Festival, SXSW,\r\nThe LINE Hotel Austin, TX, Expo Chicago, Public Works Gallery inChicago, and Bishop Arts Gallery in\r\nBrooklyn, NY.\r\n\r\nOutside of their solo ventures they are the founder of GIVENS Studio, a chairman and executive board member at the South Bend Museum of Art, a board member of the the artist residency program for the ATX based non-profit Brown State of Mind, and the creative director of the Chicago fashion Coalition, and is apart of the DJ duo Black Club.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/image_6487327_TVpaXUS.jpg"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/exploring_the_intersection_of_fashion_innovation_and_technology.jpg"
+    "id": "exploring_the_intersection_of_fashion_innovation_and_technology",
+    "name": "Exploring the Intersection of Fashion, Innovation, and Technology",
+    "description": "In this engaging panel discussion, we will delve into the exciting synergy between fashion, innovation, and technology. Our aim is to showcase the latest trends and innovations in the fashion tech industry, emphasizing its potential for transformation. Additionally, we plan to feature fashion tech partners and conduct live demos of cutting-edge fashion tech startups, providing attendees with a firsthand look at the future of fashion and tech.\r\n\r\nJoin us at Eth.Chicago for this thought-provoking discussion, where fashion meets innovation and technology to shape the future of the industry.",
+    "start": 1694881800000,
+    "end": 1694883600000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "megan_trogs_troglio",
+            "name": "Megan @trogs Troglio",
+            "bio": "internet.Artist",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/trogsheadshot_mMyg33G.jpg"
+        },
+        {
+            "id": "marquan_jones",
+            "name": "Marquan Jones",
+            "bio": "My name is Marquan Jones, I am a brand strategist and technology innovation consultant, as well as the president of the Chicago Fashion Coalition. With my background in sociology and community development, I bring a unique perspective on the intersection of fashion and technology.\r\n\r\nMy work focuses on the transformative potential of emerging technologies in various industries. I strive to leverage technology to create positive change and empower individuals and communities within the fashion space.\r\n\r\nAs someone deeply interested in technology and its potential impact, I naturally gravitated toward exploring the emerging trends in the digital space. NFTs and Web3 caught my attention because they represent a paradigm shift in the way we think about ownership, creativity, and value exchange. The idea of digital assets and decentralized systems fascinated me. I saw an opportunity to explore how these concepts could reshape the fashion industry and open up new possibilities for designers, creators, and consumers.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/IMG_7764_Jsvce2Q.JPG"
+        },
+        {
+            "id": "tuan_jones",
+            "name": "Tuan Jones",
+            "bio": "Tuan Jones",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/f05172857966da9b443f13464cc47e88_pxDaf5M.jpg"
+        },
+        {
+            "id": "piper_zy",
+            "name": "Piper ZY",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "giivens",
+            "name": "Giivens",
+            "bio": "GIVENS (they/he) is a Chicago based experiential\r\ndesigner, creative director, professional musician, DJ, and software developer armed with a BA in Fine Arts\r\nfrom St. Mary's College, and a graduate of Northwestern University's coding progam. They create interactive and immersive experiences that consist of\r\nexperimental light, architectural, and furniture design, audio visual art, 3D/2D animation, and full stack + augmented reality software development, in addition to music compositionand artistic direction. Their work\r\nhas been shown in various capacities, including a permanent art Installation at Pier Park in South Bend Indiana. Their work has also notably been shown for Redbull at the Dance your style US National Championship, Summer Smash Music Festival, SXSW,\r\nThe LINE Hotel Austin, TX, Expo Chicago, Public Works Gallery inChicago, and Bishop Arts Gallery in\r\nBrooklyn, NY.\r\n\r\nOutside of their solo ventures they are the founder of GIVENS Studio, a chairman and executive board member at the South Bend Museum of Art, a board member of the the artist residency program for the ATX based non-profit Brown State of Mind, and the creative director of the Chicago fashion Coalition, and is apart of the DJ duo Black Club.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/image_6487327_TVpaXUS.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/exploring_the_intersection_of_fashion_innovation_and_technology.jpg"
 }

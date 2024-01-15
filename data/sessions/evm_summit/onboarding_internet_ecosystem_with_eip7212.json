@@ -1,21 +1,21 @@
 {
-  "id": "onboarding_internet_ecosystem_with_eip7212",
-  "name": "Onboarding Internet Ecosystem with EIP-7212",
-  "description": "EIP-7212 proposes a new precompiled contract that allows secp256r1 elliptic curve signature verification operations. The curve is one of the most mass-adapted elliptic curves in the internet ecosystem and is being used by mobile devices' secure elements, some protocols like SSL, TLS, DNSSEC. Allowing efficient use of this curve is a way to bring these web2 solutions to web3 and onboard new users.",
-  "start": 1699965600000,
-  "end": 1699966500000,
-  "stageId": "emirgan_2",
-  "speakers": [
-    {
-      "id": "ula_erdoan",
-      "name": "Ula\u015f Erdo\u011fan",
-      "bio": "I am a blockchain developer based in Istanbul. Currently, I am a member of the Clave team which is building an AA-based wallet solution utilizing secure elements for signature abstraction in the mobile devices. I am also Head of Development in the Ethylene Studio and ex-president of ITU Blockchain, which is the first and biggest university blockchain society in Turkey.",
-      "eventId": "evm_summit",
-      "twitter": "",
-      "photo": "https://media.licdn.com/dms/image/C4D03AQHsYAmRDINmFg/profile-displayphoto-shrink_800_800/0/1661512421876?e=1704326400&v=beta&t=ZS7WPR9R5TVsITDd74pMf_o_80fbLAKaAUHY6L9GP1M"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/onboarding_internet_ecosystem_with_eip7212_thumbnail.png"
+    "id": "onboarding_internet_ecosystem_with_eip7212",
+    "name": "Onboarding Internet Ecosystem with EIP-7212",
+    "description": "EIP-7212 proposes a new precompiled contract that allows secp256r1 elliptic curve signature verification operations. The curve is one of the most mass-adapted elliptic curves in the internet ecosystem and is being used by mobile devices' secure elements, some protocols like SSL, TLS, DNSSEC. Allowing efficient use of this curve is a way to bring these web2 solutions to web3 and onboard new users.",
+    "start": 1699965600000,
+    "end": 1699966500000,
+    "stageId": "emirgan_2",
+    "speakers": [
+        {
+            "id": "ula_erdoan",
+            "name": "Ula\u015f Erdo\u011fan",
+            "bio": "I am a blockchain developer based in Istanbul. Currently, I am a member of the Clave team which is building an AA-based wallet solution utilizing secure elements for signature abstraction in the mobile devices. I am also Head of Development in the Ethylene Studio and ex-president of ITU Blockchain, which is the first and biggest university blockchain society in Turkey.",
+            "eventId": "evm_summit",
+            "twitter": "",
+            "photo": "https://media.licdn.com/dms/image/C4D03AQHsYAmRDINmFg/profile-displayphoto-shrink_800_800/0/1661512421876?e=1704326400&v=beta&t=ZS7WPR9R5TVsITDd74pMf_o_80fbLAKaAUHY6L9GP1M"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "evm_summit",
+    "coverImage": "/sessions/evm_summit/onboarding_internet_ecosystem_with_eip7212_thumbnail.png"
 }

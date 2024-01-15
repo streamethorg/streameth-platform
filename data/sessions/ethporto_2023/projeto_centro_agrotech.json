@@ -1,19 +1,19 @@
 {
-  "id": "projeto_centro_agrotech",
-  "name": "Projeto Centro Agrotech",
-  "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
-  "start": "2023-03-16T09:25:00.000Z",
-  "end": "2023-03-16T09:40:00.000Z",
-  "stageId": "conference_main_hall",
-  "speakers": [
-    {
-      "id": "vereador_pedro_neto",
-      "name": "Vereador Pedro Neto",
-      "bio": "C\u00e2mara Municipal do Fund\u00e3o",
-      "eventId": "ethporto_2023",
-      "photo": "https://ethporto.org/assets/speakers/Pedro.jpg"
-    }
-  ],
-  "playbackId": "e6988ln484p3ov45",
-  "eventId": "ethporto_2023"
+    "id": "projeto_centro_agrotech",
+    "name": "Projeto Centro Agrotech",
+    "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
+    "start": "2023-03-16T09:25:00.000Z",
+    "end": "2023-03-16T09:40:00.000Z",
+    "stageId": "conference_main_hall",
+    "speakers": [
+        {
+            "id": "vereador_pedro_neto",
+            "name": "Vereador Pedro Neto",
+            "bio": "C\u00e2mara Municipal do Fund\u00e3o",
+            "eventId": "ethporto_2023",
+            "photo": "https://ethporto.org/assets/speakers/Pedro.jpg"
+        }
+    ],
+    "playbackId": "e6988ln484p3ov45",
+    "eventId": "ethporto_2023"
 }

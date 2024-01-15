@@ -1,53 +1,53 @@
 {
-  "id": "dvt_panel",
-  "name": "DVT Panel",
-  "description": "A panel discussing the current and future state of DVT in the Ethereum ecosystem with the leading DVT protocols.",
-  "start": 1699884000000,
-  "end": 1699886700000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "eridian",
-      "name": "Eridian",
-      "bio": "DVStakers",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/1/99/19282631/avatar.jpg?39f"
-    },
-    {
-      "id": "matthias_ang",
-      "name": "Matthias Ang",
-      "bio": "SSV\nCore Team",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/a/a3/19686813/avatar.jpg?ea0"
-    },
-    {
-      "id": "marco_chen",
-      "name": "Marco Chen",
-      "bio": "SafeStake\nProject lead",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/7/be/19282691/avatar.jpg?71b"
-    },
-    {
-      "id": "anuj_shankar",
-      "name": "Anuj Shankar",
-      "bio": "Luganodes\nCEO",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/8/16/19420733/avatar.jpg?5d7"
-    },
-    {
-      "id": "pablo_villalba",
-      "name": "Pablo Villalba",
-      "bio": "DivaStaking\nFounder",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/7/8d/19282646/avatar.jpg?04d"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/dvt_panel.jpg"
+    "id": "dvt_panel",
+    "name": "DVT Panel",
+    "description": "A panel discussing the current and future state of DVT in the Ethereum ecosystem with the leading DVT protocols.",
+    "start": 1699884000000,
+    "end": 1699886700000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "eridian",
+            "name": "Eridian",
+            "bio": "DVStakers",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/1/99/19282631/avatar.jpg?39f"
+        },
+        {
+            "id": "matthias_ang",
+            "name": "Matthias Ang",
+            "bio": "SSV\nCore Team",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/a/a3/19686813/avatar.jpg?ea0"
+        },
+        {
+            "id": "marco_chen",
+            "name": "Marco Chen",
+            "bio": "SafeStake\nProject lead",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/7/be/19282691/avatar.jpg?71b"
+        },
+        {
+            "id": "anuj_shankar",
+            "name": "Anuj Shankar",
+            "bio": "Luganodes\nCEO",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/8/16/19420733/avatar.jpg?5d7"
+        },
+        {
+            "id": "pablo_villalba",
+            "name": "Pablo Villalba",
+            "bio": "DivaStaking\nFounder",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/7/8d/19282646/avatar.jpg?04d"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/dvt_panel.jpg"
 }

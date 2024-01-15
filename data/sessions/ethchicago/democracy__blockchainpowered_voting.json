@@ -1,20 +1,20 @@
 {
-  "id": "democracy__blockchainpowered_voting",
-  "name": "Democracy & Blockchain-Powered Voting",
-  "description": "NEED",
-  "start": 1694971800000,
-  "end": 1694973600000,
-  "stageId": "lincoln_stage__builder__legal",
-  "speakers": [
-    {
-      "id": "koushik_subramanian",
-      "name": "Koushik Subramanian",
-      "bio": "Mission:\r\n\r\nI believe that we can make the world more productive, trustworthy, and safe by accelerating the adoption of automation, blockchain, and cybersecurity tools. I believe these are the tools to help drive much needed change to make the world more equitable for everyone.\r\n\r\nI think this decade will introduce a new generation of market forces that will wreak havoc on conventional models which are already in decline. Society has gotten this far by valuing profits over people, lets imagine how much further we can go by valuing people over profits. \r\n\r\nExperience:\r\n\r\nKoushik graduated from Rose-Hulman in 2006 with a bachelors degree in Computer Engineering. He started his career in cybersecurity through performing penetration tests on banks to identify vulnerabilities and provide remediation guidance. Koushik is also an accomplished speaker and advisor on information security and risk management. His career spans multiple industries including crypto, finance, risk, compliance, healthcare, energy, data science, and government. \r\n\r\nKoushik currently spends his time in the digital asset and blockchain space with projects that help grow awareness around powerful tools like cryptocurrency, NFTs, and smart contracts. He loves challenges and puzzles. \r\n\r\n\u201cblockchain is truth, everything else is a game of telephone\u201d - Koushik",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/Koushik-Headshot_IKtq7CG.png"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/democracy__blockchainpowered_voting.jpg"
+    "id": "democracy__blockchainpowered_voting",
+    "name": "Democracy & Blockchain-Powered Voting",
+    "description": "NEED",
+    "start": 1694971800000,
+    "end": 1694973600000,
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+        {
+            "id": "koushik_subramanian",
+            "name": "Koushik Subramanian",
+            "bio": "Mission:\r\n\r\nI believe that we can make the world more productive, trustworthy, and safe by accelerating the adoption of automation, blockchain, and cybersecurity tools. I believe these are the tools to help drive much needed change to make the world more equitable for everyone.\r\n\r\nI think this decade will introduce a new generation of market forces that will wreak havoc on conventional models which are already in decline. Society has gotten this far by valuing profits over people, lets imagine how much further we can go by valuing people over profits. \r\n\r\nExperience:\r\n\r\nKoushik graduated from Rose-Hulman in 2006 with a bachelors degree in Computer Engineering. He started his career in cybersecurity through performing penetration tests on banks to identify vulnerabilities and provide remediation guidance. Koushik is also an accomplished speaker and advisor on information security and risk management. His career spans multiple industries including crypto, finance, risk, compliance, healthcare, energy, data science, and government. \r\n\r\nKoushik currently spends his time in the digital asset and blockchain space with projects that help grow awareness around powerful tools like cryptocurrency, NFTs, and smart contracts. He loves challenges and puzzles. \r\n\r\n\u201cblockchain is truth, everything else is a game of telephone\u201d - Koushik",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Koushik-Headshot_IKtq7CG.png"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/democracy__blockchainpowered_voting.jpg"
 }

@@ -1,21 +1,21 @@
 {
-  "id": "preassembly_towards_a_metaphysics_of_worlds",
-  "name": "Pre-Assembly: Towards a Metaphysics of Worlds",
-  "description": "What do we actually mean by the word \"world\" in its varied usages across common language (such as \"in the real world\" or \"save the world\"), fiction (as in \"worldbuilding\"), simulation, immersive technologies like VR, generative AI, and technologies of trust, coordination, and commitment like blockchains (with and without zero-knowledge mechanisms)? This session will argue that the common factor is the presence of \"protocol narratives,\" which can be understood as never-ending stories.",
-  "start": 1700035200000,
-  "end": 1700037000000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "venkatesh_rao",
-      "name": "Venkatesh Rao",
-      "bio": "Venkatesh Rao led the Summer of Protocols research program earlier this year and has been blogging at Ribbonfarm since 2007.",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@vgr",
-      "photo": "https://drive.google.com/uc?id=1V-xwVpKaZkfVg2bDgwB4bA035R5-5mR9"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "autonomous_worlds_assembly",
-  "coverImage": "/sessions/autonomous_worlds_assembly/preassembly_towards_a_metaphysics_of_worlds_thumbnail.png"
+    "id": "preassembly_towards_a_metaphysics_of_worlds",
+    "name": "Pre-Assembly: Towards a Metaphysics of Worlds",
+    "description": "What do we actually mean by the word \"world\" in its varied usages across common language (such as \"in the real world\" or \"save the world\"), fiction (as in \"worldbuilding\"), simulation, immersive technologies like VR, generative AI, and technologies of trust, coordination, and commitment like blockchains (with and without zero-knowledge mechanisms)? This session will argue that the common factor is the presence of \"protocol narratives,\" which can be understood as never-ending stories.",
+    "start": 1700035200000,
+    "end": 1700037000000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "venkatesh_rao",
+            "name": "Venkatesh Rao",
+            "bio": "Venkatesh Rao led the Summer of Protocols research program earlier this year and has been blogging at Ribbonfarm since 2007.",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@vgr",
+            "photo": "https://drive.google.com/uc?id=1V-xwVpKaZkfVg2bDgwB4bA035R5-5mR9"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "autonomous_worlds_assembly",
+    "coverImage": "/sessions/autonomous_worlds_assembly/preassembly_towards_a_metaphysics_of_worlds_thumbnail.png"
 }

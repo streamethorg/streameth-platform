@@ -1,29 +1,29 @@
 {
-  "id": "replacing_execution_clients_in_staking_setups",
-  "name": "Replacing execution clients in staking setups",
-  "description": "-",
-  "start": 1699947900000,
-  "end": 1699949400000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "jason_carver",
-      "name": "Jason Carver",
-      "bio": "Ethereum Foundation Rusty Coder\n",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/5/8e/19284408/avatar.jpg?420"
-    },
-    {
-      "id": "daniel_ramirez",
-      "name": "Daniel Ramirez",
-      "bio": "Ethereum Protocol Fellowship\nFellow",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/6/50/19666145/avatar.jpg?025"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/replacing_execution_clients_in_staking_setups.jpg"
+    "id": "replacing_execution_clients_in_staking_setups",
+    "name": "Replacing execution clients in staking setups",
+    "description": "-",
+    "start": 1699947900000,
+    "end": 1699949400000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "jason_carver",
+            "name": "Jason Carver",
+            "bio": "Ethereum Foundation Rusty Coder\n",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/5/8e/19284408/avatar.jpg?420"
+        },
+        {
+            "id": "daniel_ramirez",
+            "name": "Daniel Ramirez",
+            "bio": "Ethereum Protocol Fellowship\nFellow",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/6/50/19666145/avatar.jpg?025"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/replacing_execution_clients_in_staking_setups.jpg"
 }

@@ -1,19 +1,19 @@
 {
-  "id": "intermediate_circom_circuit_writing",
-  "name": "Intermediate Circom Circuit Writing",
-  "description": "The description for this video is simply a repetition of the word \"you\" multiple times. There is no further information or context provided.",
-  "start": "2023-04-19T13:00:00.000Z",
-  "end": "2023-04-19T14:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "roger",
-      "name": "Roger",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__zksync"
-    }
-  ],
-  "playbackId": "bd9ch2lqrnvt6cwg",
-  "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "intermediate_circom_circuit_writing",
+    "name": "Intermediate Circom Circuit Writing",
+    "description": "The description for this video is simply a repetition of the word \"you\" multiple times. There is no further information or context provided.",
+    "start": "2023-04-19T13:00:00.000Z",
+    "end": "2023-04-19T14:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "roger",
+            "name": "Roger",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__zksync"
+        }
+    ],
+    "playbackId": "bd9ch2lqrnvt6cwg",
+    "eventId": "zuzalu_montenegro_2023__zksync",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

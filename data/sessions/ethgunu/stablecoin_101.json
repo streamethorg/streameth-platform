@@ -1,24 +1,24 @@
 {
-  "id": "stablecoin_101",
-  "name": "Stablecoin 101",
-  "description": "G\u00fcn\u00fcm\u00fcz\u00fcn finansal d\u00fcnyas\u0131nda, kripto para birimleri giderek daha fazla yer edinmekte ve geleneksel finans sistemleriyle daha fazla etkile\u015fimde bulunmaktad\u0131r. Bu etkile\u015fimin temel arac\u0131l\u0131\u011f\u0131n\u0131 ise stablecoinler \u00fcstlenmi\u015f durumda. Bu konu\u015fmada, stablecoinlerin, bu h\u0131zla de\u011fi\u015fen ortamda bir g\u00fcven noktas\u0131 olarak nas\u0131l rol oynad\u0131\u011f\u0131n\u0131 ve neden \u00f6nemli olduklar\u0131n\u0131 ele alaca\u011f\u0131z.",
-  "start": 1699875000000,
-  "end": 1699876800000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "furkan_akal",
-      "name": "Furkan Akal",
-      "bio": "PROFESYONEL TECR\u00dcBE\n\nMay\u0131s 2023 - G\u00fcn\u00fcm\u00fcz | Detable ad\u0131 alt\u0131nda e\u015f-kurucu ekip arkada\u015flar\u0131mla birlikte bir stablecoin dashboard \u00fcr\u00fcn\u00fc ile ba\u015flayarak on-chain data hub geli\u015ftiriyoruz.\n\nEyl\u00fcl 2022 - Eyl\u00fcl 2023 | MERLIN (https://mymerlin.io) adl\u0131 Londra bazl\u0131 bir DeFi portfolio tracker \u015firketinde blockchain developer olarak \u00e7al\u0131\u015ft\u0131m.\n\n\nE\u011e\u0130T\u0130M\n\nEyl\u00fcl 2018 - Haziran 2024 | Orta Do\u011fu Teknik \u00dcniversitesi'nde Fizik ve Matematik B\u00f6l\u00fcmlerinde e\u011fitimimi devam ettirmekteyim.",
-      "eventId": "ethgunu",
-      "twitter": "@furkanakalcom",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/furkan.jpg?raw=true"
-    }
-  ],
-  "playbackId": "903etk1us84bvx07",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/stablecoin_101_thumbnail.png",
-  "assetId": "903e9c91-b409-4aff-8b5e-4e769af14987",
-  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-  "videoType": "clip"
+    "id": "stablecoin_101",
+    "name": "Stablecoin 101",
+    "description": "G\u00fcn\u00fcm\u00fcz\u00fcn finansal d\u00fcnyas\u0131nda, kripto para birimleri giderek daha fazla yer edinmekte ve geleneksel finans sistemleriyle daha fazla etkile\u015fimde bulunmaktad\u0131r. Bu etkile\u015fimin temel arac\u0131l\u0131\u011f\u0131n\u0131 ise stablecoinler \u00fcstlenmi\u015f durumda. Bu konu\u015fmada, stablecoinlerin, bu h\u0131zla de\u011fi\u015fen ortamda bir g\u00fcven noktas\u0131 olarak nas\u0131l rol oynad\u0131\u011f\u0131n\u0131 ve neden \u00f6nemli olduklar\u0131n\u0131 ele alaca\u011f\u0131z.",
+    "start": 1699875000000,
+    "end": 1699876800000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "furkan_akal",
+            "name": "Furkan Akal",
+            "bio": "PROFESYONEL TECR\u00dcBE\n\nMay\u0131s 2023 - G\u00fcn\u00fcm\u00fcz | Detable ad\u0131 alt\u0131nda e\u015f-kurucu ekip arkada\u015flar\u0131mla birlikte bir stablecoin dashboard \u00fcr\u00fcn\u00fc ile ba\u015flayarak on-chain data hub geli\u015ftiriyoruz.\n\nEyl\u00fcl 2022 - Eyl\u00fcl 2023 | MERLIN (https://mymerlin.io) adl\u0131 Londra bazl\u0131 bir DeFi portfolio tracker \u015firketinde blockchain developer olarak \u00e7al\u0131\u015ft\u0131m.\n\n\nE\u011e\u0130T\u0130M\n\nEyl\u00fcl 2018 - Haziran 2024 | Orta Do\u011fu Teknik \u00dcniversitesi'nde Fizik ve Matematik B\u00f6l\u00fcmlerinde e\u011fitimimi devam ettirmekteyim.",
+            "eventId": "ethgunu",
+            "twitter": "@furkanakalcom",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/furkan.jpg?raw=true"
+        }
+    ],
+    "playbackId": "903etk1us84bvx07",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/stablecoin_101_thumbnail.png",
+    "assetId": "903e9c91-b409-4aff-8b5e-4e769af14987",
+    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+    "videoType": "clip"
 }

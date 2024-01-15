@@ -1,19 +1,19 @@
 {
-  "id": "sergio_ruiz_reprogramming",
-  "name": "Sergio Ruiz: Reprogramming",
-  "description": "In this video, the speaker discusses the problem of people living longer but not healthier, and the current unsustainable model of medicine. He introduces the concept of epigenetic reprogramming, which involves allowing cells to read DNA in the best way possible, and explains the complex science behind it. The goal is to rejuvenate cells just enough to bring them back to their peak performance, and the epigenome is seen as the hierarchically dominant hallmark of aging. The speaker also discusses the need for more people to work on this problem, including executives, operators, critical thinkers, tactical people, and scientists.",
-  "start": "2023-03-29T14:00:00.000Z",
-  "end": "2023-03-29T14:45:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "sergio_ruiz",
-      "name": "Sergio Ruiz",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
-    }
-  ],
-  "playbackId": "0c97w6i72htj4dgf",
-  "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "sergio_ruiz_reprogramming",
+    "name": "Sergio Ruiz: Reprogramming",
+    "description": "In this video, the speaker discusses the problem of people living longer but not healthier, and the current unsustainable model of medicine. He introduces the concept of epigenetic reprogramming, which involves allowing cells to read DNA in the best way possible, and explains the complex science behind it. The goal is to rejuvenate cells just enough to bring them back to their peak performance, and the epigenome is seen as the hierarchically dominant hallmark of aging. The speaker also discusses the need for more people to work on this problem, including executives, operators, critical thinkers, tactical people, and scientists.",
+    "start": "2023-03-29T14:00:00.000Z",
+    "end": "2023-03-29T14:45:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "sergio_ruiz",
+            "name": "Sergio Ruiz",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+        }
+    ],
+    "playbackId": "0c97w6i72htj4dgf",
+    "eventId": "zuzalu_montenegro_2023__longevity_introductory",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

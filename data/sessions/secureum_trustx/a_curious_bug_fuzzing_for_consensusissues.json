@@ -1,22 +1,22 @@
 {
-  "id": "a_curious_bug_fuzzing_for_consensusissues",
-  "name": "A curious bug: Fuzzing for consensus-issues",
-  "description": "",
-  "start": 1699974900000,
-  "end": 1699975500000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "martin_holst_swende",
-      "name": "Martin Holst Swende",
-      "bio": "TBD",
-      "eventId": "secureum_trustx"
-    }
-  ],
-  "playbackId": "cad12lcpps57azpe",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/a_curious_bug_fuzzing_for_consensusissues.jpg",
-  "assetId": "cad13a3f-93b6-44bb-beaa-99ed3e8abc81",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "a_curious_bug_fuzzing_for_consensusissues",
+    "name": "A curious bug: Fuzzing for consensus-issues",
+    "description": "",
+    "start": 1699974900000,
+    "end": 1699975500000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "martin_holst_swende",
+            "name": "Martin Holst Swende",
+            "bio": "TBD",
+            "eventId": "secureum_trustx"
+        }
+    ],
+    "playbackId": "cad12lcpps57azpe",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/a_curious_bug_fuzzing_for_consensusissues.jpg",
+    "assetId": "cad13a3f-93b6-44bb-beaa-99ed3e8abc81",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

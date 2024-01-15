@@ -1,21 +1,21 @@
 {
-  "id": "scaling_dvt",
-  "name": "Scaling DVT ",
-  "description": "(remote talk)",
-  "start": 1699864500000,
-  "end": 1699866600000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "alon_muroch",
-      "name": "Alon Muroch",
-      "bio": "SSV\nFounder",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/2/26/19160274/avatar.jpg?cd8"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/scaling_dvt.jpg"
+    "id": "scaling_dvt",
+    "name": "Scaling DVT ",
+    "description": "(remote talk)",
+    "start": 1699864500000,
+    "end": 1699866600000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "alon_muroch",
+            "name": "Alon Muroch",
+            "bio": "SSV\nFounder",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/2/26/19160274/avatar.jpg?cd8"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/scaling_dvt.jpg"
 }

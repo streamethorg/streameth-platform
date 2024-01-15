@@ -1,20 +1,20 @@
 {
-  "id": "understanding_base_ecosystem",
-  "name": "Understanding Base ecosystem",
-  "description": "",
-  "start": 1693494000000,
-  "end": 1693495800000,
-  "stageId": "workshop_room_1",
-  "speakers": [
-    {
-      "id": "jesse_pollak",
-      "name": "Jesse Pollak",
-      "bio": "Co-Founder Base",
-      "eventId": "web3_lagos_conference_2023",
-      "twitter": "@BuildOnBase"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/understanding_base_ecosystem.jpg"
+    "id": "understanding_base_ecosystem",
+    "name": "Understanding Base ecosystem",
+    "description": "",
+    "start": 1693494000000,
+    "end": 1693495800000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "jesse_pollak",
+            "name": "Jesse Pollak",
+            "bio": "Co-Founder Base",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@BuildOnBase"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/understanding_base_ecosystem.jpg"
 }

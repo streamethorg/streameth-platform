@@ -1,21 +1,21 @@
 {
-  "id": "creating_a_browserembedded_light_client_a_postmortem",
-  "name": "Creating a browser-embedded light client: a post-mortem",
-  "description": "Smoldot is a JavaScript package containing a light client for the Polkadot network, that can run from within a web page. Its development, which started nearly 4 years ago, was no easy feat. This talk is a post-modern that will go over the challenges that have been encountered and how we solved them.",
-  "start": 1694773800000,
-  "end": 1694775300000,
-  "stageId": "magazin__main_stage",
-  "speakers": [
-    {
-      "id": "tomaka",
-      "name": "tomaka",
-      "bio": "Pierre Krieger has been in the Rust ecosystem since 2014. After leading several popular open source repositories such as glutin, glium, vulkano, or redshirt, he joined Parity Technologies in 2017 where he led the networking team of Substrate (the framework Polkadot uses). He left Parity at the end of 2022 in order to focus on its work on a Substrate/Polkadot light client as a freelance.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/gh_avatar_ZgwtPV5.png"
-    }
-  ],
-  "playbackId": "b235wh9546y2mygm",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/creating_a_browserembedded_light_client_a_postmortem.jpg",
-  "assetId": "b235f2b4-d61f-4300-bee1-56b195d6e455"
+    "id": "creating_a_browserembedded_light_client_a_postmortem",
+    "name": "Creating a browser-embedded light client: a post-mortem",
+    "description": "Smoldot is a JavaScript package containing a light client for the Polkadot network, that can run from within a web page. Its development, which started nearly 4 years ago, was no easy feat. This talk is a post-modern that will go over the challenges that have been encountered and how we solved them.",
+    "start": 1694773800000,
+    "end": 1694775300000,
+    "stageId": "magazin__main_stage",
+    "speakers": [
+        {
+            "id": "tomaka",
+            "name": "tomaka",
+            "bio": "Pierre Krieger has been in the Rust ecosystem since 2014. After leading several popular open source repositories such as glutin, glium, vulkano, or redshirt, he joined Parity Technologies in 2017 where he led the networking team of Substrate (the framework Polkadot uses). He left Parity at the end of 2022 in order to focus on its work on a Substrate/Polkadot light client as a freelance.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/gh_avatar_ZgwtPV5.png"
+        }
+    ],
+    "playbackId": "b235wh9546y2mygm",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/creating_a_browserembedded_light_client_a_postmortem.jpg",
+    "assetId": "b235f2b4-d61f-4300-bee1-56b195d6e455"
 }

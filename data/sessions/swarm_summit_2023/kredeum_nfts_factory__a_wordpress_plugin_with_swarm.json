@@ -1,26 +1,26 @@
 {
-  "id": "kredeum_nfts_factory__a_wordpress_plugin_with_swarm",
-  "name": "Kredeum NFTs Factory - A WordPress plugin with Swarm",
-  "description": "Alain Papazoglou and Philippe P\u00e9rou from Kredeum will be talking about the WordPress plug-in",
-  "start": "2023-06-23T13:45:00.000Z",
-  "end": "2023-06-23T14:00:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "alain_papazoglou",
-      "name": "Alain Papazoglou",
-      "bio": "No description",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
-    },
-    {
-      "id": "philippe_prou",
-      "name": "Philippe P\u00e9rou",
-      "bio": "No description",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
-    }
-  ],
-  "playbackId": "6e9b7eylgqqoad5z",
-  "eventId": "swarm_summit_2023"
+    "id": "kredeum_nfts_factory__a_wordpress_plugin_with_swarm",
+    "name": "Kredeum NFTs Factory - A WordPress plugin with Swarm",
+    "description": "Alain Papazoglou and Philippe P\u00e9rou from Kredeum will be talking about the WordPress plug-in",
+    "start": "2023-06-23T13:45:00.000Z",
+    "end": "2023-06-23T14:00:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "alain_papazoglou",
+            "name": "Alain Papazoglou",
+            "bio": "No description",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
+        },
+        {
+            "id": "philippe_prou",
+            "name": "Philippe P\u00e9rou",
+            "bio": "No description",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
+        }
+    ],
+    "playbackId": "6e9b7eylgqqoad5z",
+    "eventId": "swarm_summit_2023"
 }

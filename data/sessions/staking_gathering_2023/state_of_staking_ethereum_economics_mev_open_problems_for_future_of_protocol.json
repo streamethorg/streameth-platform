@@ -1,21 +1,21 @@
 {
-  "id": "state_of_staking_ethereum_economics_mev_open_problems_for_future_of_protocol",
-  "name": "State of staking, ethereum economics, MEV, open problems for future of protocol",
-  "description": "-",
-  "start": 1699965900000,
-  "end": 1699967400000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "alex_stokes",
-      "name": "Alex Stokes",
-      "bio": "Ethereum Foundation\nResearcher",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/9/7a/19170204/avatar.jpg?a33"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/state_of_staking_ethereum_economics_mev_open_problems_for_future_of_protocol.jpg"
+    "id": "state_of_staking_ethereum_economics_mev_open_problems_for_future_of_protocol",
+    "name": "State of staking, ethereum economics, MEV, open problems for future of protocol",
+    "description": "-",
+    "start": 1699965900000,
+    "end": 1699967400000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "alex_stokes",
+            "name": "Alex Stokes",
+            "bio": "Ethereum Foundation\nResearcher",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/9/7a/19170204/avatar.jpg?a33"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/state_of_staking_ethereum_economics_mev_open_problems_for_future_of_protocol.jpg"
 }

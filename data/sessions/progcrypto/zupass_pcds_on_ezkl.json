@@ -1,21 +1,21 @@
 {
-  "id": "zupass_pcds_on_ezkl",
-  "name": "Zupass PCDs on EZKL",
-  "description": "Creating PCDs in Zupass with the EZKL engine. Create set memebership circuit in Python script. Enable AI equipt PCDs.",
-  "start": 1700223600000,
-  "end": 1700224500000,
-  "stageId": "dolmabahce_b__c",
-  "speakers": [
-    {
-      "id": "casey_siebel",
-      "name": "Casey Siebel",
-      "bio": "Casey Siebel is an engineer deeply interested in optimizing the user experience for both consumers and developers. His educational journey, which includes a degree in Physics from UC Berkeley and a Master of Music in Music Production from Berklee College of Music, equips him with a rare blend of technical and creative insights.\nCurrently, at EZKL, Casey is actively engaged in expanding the reach of ZK applications, demonstrating his commitment to bringing advanced cryptographic solutions to a wider audience. His career trajectory has seen impactful roles at notable companies like Reddit and Docker, where his innovative approach to technology has been a consistent theme.\nCasey\u2019s ability to meld his passion for live music with his technical skills is exemplified by his work in developing bespoke solutions for top-tier touring artists, including Bassnectar. This unique fusion of interests highlights his multifaceted talents and creative approach to problem-solving.\nBeyond his professional life, Casey is an aerobatic pilot and music producer, pursuits that reflect his love for exploration and challenge. His dedication to continuous learning and collaborative innovation is at the heart of his efforts to use ZK technology for promoting societal change and individual digital empowerment.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1wXbWKIkHLTrKNMQehqKCfr5HNovdCfcT/view"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "progcrypto",
-  "coverImage": "/sessions/progcrypto/zupass_pcds_on_ezkl.jpg"
+    "id": "zupass_pcds_on_ezkl",
+    "name": "Zupass PCDs on EZKL",
+    "description": "Creating PCDs in Zupass with the EZKL engine. Create set memebership circuit in Python script. Enable AI equipt PCDs.",
+    "start": 1700223600000,
+    "end": 1700224500000,
+    "stageId": "dolmabahce_b__c",
+    "speakers": [
+        {
+            "id": "casey_siebel",
+            "name": "Casey Siebel",
+            "bio": "Casey Siebel is an engineer deeply interested in optimizing the user experience for both consumers and developers. His educational journey, which includes a degree in Physics from UC Berkeley and a Master of Music in Music Production from Berklee College of Music, equips him with a rare blend of technical and creative insights.\nCurrently, at EZKL, Casey is actively engaged in expanding the reach of ZK applications, demonstrating his commitment to bringing advanced cryptographic solutions to a wider audience. His career trajectory has seen impactful roles at notable companies like Reddit and Docker, where his innovative approach to technology has been a consistent theme.\nCasey\u2019s ability to meld his passion for live music with his technical skills is exemplified by his work in developing bespoke solutions for top-tier touring artists, including Bassnectar. This unique fusion of interests highlights his multifaceted talents and creative approach to problem-solving.\nBeyond his professional life, Casey is an aerobatic pilot and music producer, pursuits that reflect his love for exploration and challenge. His dedication to continuous learning and collaborative innovation is at the heart of his efforts to use ZK technology for promoting societal change and individual digital empowerment.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1wXbWKIkHLTrKNMQehqKCfr5HNovdCfcT/view"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "progcrypto",
+    "coverImage": "/sessions/progcrypto/zupass_pcds_on_ezkl.jpg"
 }

@@ -1,22 +1,22 @@
 {
-  "id": "regulations_and_compliance_for_developers",
-  "name": "Regulations and compliance for developers",
-  "description": "",
-  "start": 1700127000000,
-  "end": 1700127600000,
-  "stageId": "camlica",
-  "speakers": [
-    {
-      "id": "rob_stupay",
-      "name": "Rob Stupay",
-      "bio": "No description",
-      "eventId": "conflux__web3_ux_unconference"
-    }
-  ],
-  "playbackId": "45dbpb2m5lbm7gc3",
-  "eventId": "conflux__web3_ux_unconference",
-  "coverImage": "/sessions/conflux__web3_ux_unconference/regulations_and_compliance_for_developers_thumbnail.png",
-  "assetId": "45db6f86-91e9-4526-82f7-535a7e8b520d",
-  "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
-  "videoType": "clip"
+    "id": "regulations_and_compliance_for_developers",
+    "name": "Regulations and compliance for developers",
+    "description": "",
+    "start": 1700127000000,
+    "end": 1700127600000,
+    "stageId": "camlica",
+    "speakers": [
+        {
+            "id": "rob_stupay",
+            "name": "Rob Stupay",
+            "bio": "No description",
+            "eventId": "conflux__web3_ux_unconference"
+        }
+    ],
+    "playbackId": "45dbpb2m5lbm7gc3",
+    "eventId": "conflux__web3_ux_unconference",
+    "coverImage": "/sessions/conflux__web3_ux_unconference/regulations_and_compliance_for_developers_thumbnail.png",
+    "assetId": "45db6f86-91e9-4526-82f7-535a7e8b520d",
+    "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
+    "videoType": "clip"
 }

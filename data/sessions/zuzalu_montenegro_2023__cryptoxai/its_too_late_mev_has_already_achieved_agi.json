@@ -1,19 +1,19 @@
 {
-  "id": "its_too_late_mev_has_already_achieved_agi",
-  "name": "It\u2019s Too Late\u2026 MEV has Already Achieved AGI",
-  "description": "cryptoxai.wtf",
-  "start": "2023-05-07T05:30:00.000Z",
-  "end": "2023-05-07T06:30:00.000Z",
-  "stageId": "lighthouse",
-  "speakers": [
-    {
-      "id": "phil_daian",
-      "name": "Phil Daian",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__cryptoxai"
-    }
-  ],
-  "playbackId": "d507akyh73c5cktw",
-  "eventId": "zuzalu_montenegro_2023__cryptoxai",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "its_too_late_mev_has_already_achieved_agi",
+    "name": "It\u2019s Too Late\u2026 MEV has Already Achieved AGI",
+    "description": "cryptoxai.wtf",
+    "start": "2023-05-07T05:30:00.000Z",
+    "end": "2023-05-07T06:30:00.000Z",
+    "stageId": "lighthouse",
+    "speakers": [
+        {
+            "id": "phil_daian",
+            "name": "Phil Daian",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__cryptoxai"
+        }
+    ],
+    "playbackId": "d507akyh73c5cktw",
+    "eventId": "zuzalu_montenegro_2023__cryptoxai",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

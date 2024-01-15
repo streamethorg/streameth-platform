@@ -1,22 +1,22 @@
 {
-  "id": "provingasaservice_servifying",
-  "name": "Proving-as-a-Service: servifying ",
-  "description": "Zero-knowledge (zk) domain-specific languages (DSLs) such as ZoKrates, Circom, Noir... have many advantages over popular zk SNARKs libraries such as Ark, Bellman or Gnark. DSLs provide a program-like interface familiar to developers, they allow modularisation and reuse of components, they facilitate the composition of large and complex proofs and it's later debugging and optimisation... and so on.  \n\nHowever, once the prototyping and optimisation phases are complete, developers face an additional and unexpected problem: deploying these proofs in production systems. The command line interfaces (CLI) provided by zk-DSL are not suitable for communicating with other services, and Javascript libraries quickly run into memory problems when reading larger circuits. \n \nDrawing on current software practices and microservice architecture, I present an approach that greatly simplifies the integration, deployment, management and monitoring of such proofs in live production. By wrapping an application program interface (API) around the interpreter of a given DSL language, in short \"servifying\" the DSL interpreter, proofs can then be generated programmatically on-demand by any other service in our architecture. If the proving service is further containerised, this service can be easily added to any Kubernetes cluster, with the corresponding benefits.",
-  "start": 1700145000000,
-  "end": 1700145900000,
-  "stageId": "dolmabahce_b__c",
-  "speakers": [
-    {
-      "id": "alvaro_alonso",
-      "name": "Alvaro Alonso",
-      "bio": "I am a software-engineer who recently started his Ph.D  at ISE, TU Berlin. My research interest lay in the intersection between recursive SNARKs and cloud computing. Previously, he spent several years juggling between software-development jobs and studies during the day and playing with Dapps and ZoKrates at night.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1mV_4O0JqXYClD5ExlGeB9Ay8DJhRVq9U/view"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "progcrypto",
-  "track": "Developer Tools",
-  "coverImage": "/sessions/progcrypto/provingasaservice_servifying_thumbnail.png"
+    "id": "provingasaservice_servifying",
+    "name": "Proving-as-a-Service: servifying ",
+    "description": "Zero-knowledge (zk) domain-specific languages (DSLs) such as ZoKrates, Circom, Noir... have many advantages over popular zk SNARKs libraries such as Ark, Bellman or Gnark. DSLs provide a program-like interface familiar to developers, they allow modularisation and reuse of components, they facilitate the composition of large and complex proofs and it's later debugging and optimisation... and so on.  \n\nHowever, once the prototyping and optimisation phases are complete, developers face an additional and unexpected problem: deploying these proofs in production systems. The command line interfaces (CLI) provided by zk-DSL are not suitable for communicating with other services, and Javascript libraries quickly run into memory problems when reading larger circuits. \n \nDrawing on current software practices and microservice architecture, I present an approach that greatly simplifies the integration, deployment, management and monitoring of such proofs in live production. By wrapping an application program interface (API) around the interpreter of a given DSL language, in short \"servifying\" the DSL interpreter, proofs can then be generated programmatically on-demand by any other service in our architecture. If the proving service is further containerised, this service can be easily added to any Kubernetes cluster, with the corresponding benefits.",
+    "start": 1700145000000,
+    "end": 1700145900000,
+    "stageId": "dolmabahce_b__c",
+    "speakers": [
+        {
+            "id": "alvaro_alonso",
+            "name": "Alvaro Alonso",
+            "bio": "I am a software-engineer who recently started his Ph.D  at ISE, TU Berlin. My research interest lay in the intersection between recursive SNARKs and cloud computing. Previously, he spent several years juggling between software-development jobs and studies during the day and playing with Dapps and ZoKrates at night.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1mV_4O0JqXYClD5ExlGeB9Ay8DJhRVq9U/view"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "progcrypto",
+    "track": "Developer Tools",
+    "coverImage": "/sessions/progcrypto/provingasaservice_servifying_thumbnail.png"
 }

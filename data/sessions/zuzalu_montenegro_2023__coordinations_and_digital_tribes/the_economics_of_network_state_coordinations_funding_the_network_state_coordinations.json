@@ -1,26 +1,26 @@
 {
-  "id": "the_economics_of_network_state_coordinations_funding_the_network_state_coordinations",
-  "name": "The Economics of Network State Coordi-nations: Funding the Network State Coordi-Nations",
-  "description": "",
-  "start": 1684228500000,
-  "end": 1684229400000,
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "holke_brammer",
-      "name": "Holke Brammer",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    },
-    {
-      "id": "scott_moore",
-      "name": "Scott Moore",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    }
-  ],
-  "playbackId": "6308v944uspyrtcb",
-  "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/the_economics_of_network_state_coordinations_funding_the_network_state_coordinations.jpg",
-  "assetId": "6308a273-fd87-4630-9787-fc4264ce4a6e"
+    "id": "the_economics_of_network_state_coordinations_funding_the_network_state_coordinations",
+    "name": "The Economics of Network State Coordi-nations: Funding the Network State Coordi-Nations",
+    "description": "",
+    "start": 1684228500000,
+    "end": 1684229400000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "holke_brammer",
+            "name": "Holke Brammer",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "scott_moore",
+            "name": "Scott Moore",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "playbackId": "6308v944uspyrtcb",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/the_economics_of_network_state_coordinations_funding_the_network_state_coordinations.jpg",
+    "assetId": "6308a273-fd87-4630-9787-fc4264ce4a6e"
 }

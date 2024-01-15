@@ -1,21 +1,21 @@
 {
-  "id": "decentralized_and_shared_sequencer_architecture",
-  "name": "Decentralized and Shared Sequencer Architecture",
-  "description": "In this presentation, I'll go over the state of decentralized and shared sequencers for rollups, as well as existing and potential architectures for them. Decentralizing sequencers is needed for rollups to have true decentralization and censorship resistance, and sharing sequencers between rollups opens up the possibility of cross-rollup composability.",
-  "start": 1694770200000,
-  "end": 1694771700000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "elizabeth",
-      "name": "elizabeth",
-      "bio": "Elizabeth is a software engineer specializing in protocol-level development. Her interests include privacy, networking, and cryptography.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/elizabeth_j3u2Vqg.jpeg"
-    }
-  ],
-  "playbackId": "87b32i78wsr36zpa",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/decentralized_and_shared_sequencer_architecture.jpg",
-  "assetId": "87b3d051-218d-4ea9-9014-02e8679ca5a8"
+    "id": "decentralized_and_shared_sequencer_architecture",
+    "name": "Decentralized and Shared Sequencer Architecture",
+    "description": "In this presentation, I'll go over the state of decentralized and shared sequencers for rollups, as well as existing and potential architectures for them. Decentralizing sequencers is needed for rollups to have true decentralization and censorship resistance, and sharing sequencers between rollups opens up the possibility of cross-rollup composability.",
+    "start": 1694770200000,
+    "end": 1694771700000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "elizabeth",
+            "name": "elizabeth",
+            "bio": "Elizabeth is a software engineer specializing in protocol-level development. Her interests include privacy, networking, and cryptography.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/elizabeth_j3u2Vqg.jpeg"
+        }
+    ],
+    "playbackId": "87b32i78wsr36zpa",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/decentralized_and_shared_sequencer_architecture.jpg",
+    "assetId": "87b3d051-218d-4ea9-9014-02e8679ca5a8"
 }

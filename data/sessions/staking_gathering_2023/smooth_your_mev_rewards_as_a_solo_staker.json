@@ -1,21 +1,21 @@
 {
-  "id": "smooth_your_mev_rewards_as_a_solo_staker",
-  "name": "Smooth your MEV Rewards as a Solo Staker",
-  "description": "-",
-  "start": 1699868100000,
-  "end": 1699871700000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "alvaro_r",
-      "name": "Alvaro R",
-      "bio": "status.im\nResearch Engineer",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/a/08/19753515/avatar.jpg?e31"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/smooth_your_mev_rewards_as_a_solo_staker.jpg"
+    "id": "smooth_your_mev_rewards_as_a_solo_staker",
+    "name": "Smooth your MEV Rewards as a Solo Staker",
+    "description": "-",
+    "start": 1699868100000,
+    "end": 1699871700000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "alvaro_r",
+            "name": "Alvaro R",
+            "bio": "status.im\nResearch Engineer",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/a/08/19753515/avatar.jpg?e31"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/smooth_your_mev_rewards_as_a_solo_staker.jpg"
 }

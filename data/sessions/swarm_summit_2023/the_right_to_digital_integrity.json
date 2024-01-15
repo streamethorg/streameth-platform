@@ -1,19 +1,19 @@
 {
-  "id": "the_right_to_digital_integrity",
-  "name": "The right to Digital integrity",
-  "description": "If each human person already has a right to physical and mental integrity (Swiss Constitution article 10 al.2), shouldn't it have a right to digital integrity?\n\nGeneva canton is voting on the 18th of June to add the right to digital integrity in its constitution. Canton of VS, JU, NE, VD have similar initiatives. The question is also debated in the federal chambers.\n\nThis talk will introduce this legal concept, its possible implications for data protection and how this concept could be introduced in the current legal framework, but also the subrights that are derived such as the right to an off-line life or the right not to be surveilled.",
-  "start": "2023-06-22T13:50:00.000Z",
-  "end": "2023-06-22T14:10:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "alexis_roussel",
-      "name": "Alexis Roussel",
-      "bio": "Alexis Roussel is Chief Operating Officer of Nym Technologies, the start-up solving the internet's privacy crisis. Alexis is also the Co-Founder of Bity.com , a crypto-finance service provider in Switzerland. He holds a Masters in Technology Public Law and has served as an E-Governance Specialist for the United Nations, and was the President of the Pirate Party of Switzerland - aimed at promoting a human-centric and distributed approach of a technological society. He is frequently in the Swiss media discussing privacy and digital rights issues. He is the co-author of the book \"Our precious digital integrity\" promoting a novel fundamental right to the digital integrity of the human being.",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://summit.ethswarm.org/media/avatars/alexis_PMHXwB2.jpeg"
-    }
-  ],
-  "playbackId": "0ea7pw3tusjfdwgu",
-  "eventId": "swarm_summit_2023"
+    "id": "the_right_to_digital_integrity",
+    "name": "The right to Digital integrity",
+    "description": "If each human person already has a right to physical and mental integrity (Swiss Constitution article 10 al.2), shouldn't it have a right to digital integrity?\n\nGeneva canton is voting on the 18th of June to add the right to digital integrity in its constitution. Canton of VS, JU, NE, VD have similar initiatives. The question is also debated in the federal chambers.\n\nThis talk will introduce this legal concept, its possible implications for data protection and how this concept could be introduced in the current legal framework, but also the subrights that are derived such as the right to an off-line life or the right not to be surveilled.",
+    "start": "2023-06-22T13:50:00.000Z",
+    "end": "2023-06-22T14:10:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "alexis_roussel",
+            "name": "Alexis Roussel",
+            "bio": "Alexis Roussel is Chief Operating Officer of Nym Technologies, the start-up solving the internet's privacy crisis. Alexis is also the Co-Founder of Bity.com , a crypto-finance service provider in Switzerland. He holds a Masters in Technology Public Law and has served as an E-Governance Specialist for the United Nations, and was the President of the Pirate Party of Switzerland - aimed at promoting a human-centric and distributed approach of a technological society. He is frequently in the Swiss media discussing privacy and digital rights issues. He is the co-author of the book \"Our precious digital integrity\" promoting a novel fundamental right to the digital integrity of the human being.",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/alexis_PMHXwB2.jpeg"
+        }
+    ],
+    "playbackId": "0ea7pw3tusjfdwgu",
+    "eventId": "swarm_summit_2023"
 }

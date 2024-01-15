@@ -1,19 +1,19 @@
 {
-  "id": "funding_the_commons_or_funding_the_youth",
-  "name": "\"Funding the Commons or Funding the Youth?\"",
-  "description": "In this video, the speaker discusses the challenges and complexities of working in international development, including structural inequalities, historical injustices, capitalism, globalization, and racism. They introduce UNICEF and their Office of Innovation, which focuses on using technology to support program goals. They mention UNICEF's venture fund and acceptance of cryptocurrency. The speaker explains the concept of digital public goods (DPGs) and emphasizes UNICEF's commitment to funding them. They highlight the importance of funding young people and promoting a more equitable digital future. The video concludes with a call to include young people in projects and a discussion on the challenges of funding DPGs.",
-  "start": "2023-07-15T13:00:00.000Z",
-  "end": "2023-07-15T13:20:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "christopher_szymczak",
-      "name": "Christopher Szymczak",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/funding_the_commons_or_funding_the_youth.jpg"
+    "id": "funding_the_commons_or_funding_the_youth",
+    "name": "\"Funding the Commons or Funding the Youth?\"",
+    "description": "In this video, the speaker discusses the challenges and complexities of working in international development, including structural inequalities, historical injustices, capitalism, globalization, and racism. They introduce UNICEF and their Office of Innovation, which focuses on using technology to support program goals. They mention UNICEF's venture fund and acceptance of cryptocurrency. The speaker explains the concept of digital public goods (DPGs) and emphasizes UNICEF's commitment to funding them. They highlight the importance of funding young people and promoting a more equitable digital future. The video concludes with a call to include young people in projects and a discussion on the challenges of funding DPGs.",
+    "start": "2023-07-15T13:00:00.000Z",
+    "end": "2023-07-15T13:20:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "christopher_szymczak",
+            "name": "Christopher Szymczak",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/funding_the_commons_or_funding_the_youth.jpg"
 }

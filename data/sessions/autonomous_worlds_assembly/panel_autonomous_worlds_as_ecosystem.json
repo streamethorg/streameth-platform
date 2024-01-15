@@ -1,37 +1,37 @@
 {
-  "id": "panel_autonomous_worlds_as_ecosystem",
-  "name": "Panel: Autonomous Worlds as Ecosystem",
-  "description": "What is the state of the Autonomous Worlds ecosystem today? And what lessons can be learned from hype cycles past as the plot of this ecosystem evolves and expands?",
-  "start": 1700128800000,
-  "end": 1700132400000,
-  "stageId": "emirgan_1",
-  "speakers": [
-    {
-      "id": "david_amor",
-      "name": "David Amor",
-      "bio": "David Amor is the co-founder of onchain game studio Playmint and has worked on over 100 titles over the course of his 30-year career.",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@damor_eth",
-      "photo": "https://drive.google.com/uc?id=1uLx4gngEuGEiVLE49Msf28N1baPpkcmW"
-    },
-    {
-      "id": "hilmar_veigar_ptursson",
-      "name": "Hilmar Veigar P\u00e9tursson",
-      "bio": "Hilmar Veigar P\u00e9tursson is CEO of CCP Games, the studio behind the pioneering MMORPG EVE Online.",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@HilmarVeigar",
-      "photo": "https://drive.google.com/uc?id=1ezUvZ3UyyiUoIzorK5gp1-O7804fUp68"
-    },
-    {
-      "id": "rafael_morado",
-      "name": "Rafael Morado",
-      "bio": "Rafael Morado heads product strategy at Lattice. Previously, he has built games at Dapper Labs, CCP Games, and Ubisoft.",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@nagual_ape",
-      "photo": "https://drive.google.com/uc?id=13zqyW83sS6Qu-MsXQWOrmzwvqwlYhqg4"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "autonomous_worlds_assembly",
-  "coverImage": "/sessions/autonomous_worlds_assembly/panel_autonomous_worlds_as_ecosystem_thumbnail.png"
+    "id": "panel_autonomous_worlds_as_ecosystem",
+    "name": "Panel: Autonomous Worlds as Ecosystem",
+    "description": "What is the state of the Autonomous Worlds ecosystem today? And what lessons can be learned from hype cycles past as the plot of this ecosystem evolves and expands?",
+    "start": 1700128800000,
+    "end": 1700132400000,
+    "stageId": "emirgan_1",
+    "speakers": [
+        {
+            "id": "david_amor",
+            "name": "David Amor",
+            "bio": "David Amor is the co-founder of onchain game studio Playmint and has worked on over 100 titles over the course of his 30-year career.",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@damor_eth",
+            "photo": "https://drive.google.com/uc?id=1uLx4gngEuGEiVLE49Msf28N1baPpkcmW"
+        },
+        {
+            "id": "hilmar_veigar_ptursson",
+            "name": "Hilmar Veigar P\u00e9tursson",
+            "bio": "Hilmar Veigar P\u00e9tursson is CEO of CCP Games, the studio behind the pioneering MMORPG EVE Online.",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@HilmarVeigar",
+            "photo": "https://drive.google.com/uc?id=1ezUvZ3UyyiUoIzorK5gp1-O7804fUp68"
+        },
+        {
+            "id": "rafael_morado",
+            "name": "Rafael Morado",
+            "bio": "Rafael Morado heads product strategy at Lattice. Previously, he has built games at Dapper Labs, CCP Games, and Ubisoft.",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@nagual_ape",
+            "photo": "https://drive.google.com/uc?id=13zqyW83sS6Qu-MsXQWOrmzwvqwlYhqg4"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "autonomous_worlds_assembly",
+    "coverImage": "/sessions/autonomous_worlds_assembly/panel_autonomous_worlds_as_ecosystem_thumbnail.png"
 }

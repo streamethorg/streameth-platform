@@ -1,19 +1,19 @@
 {
-  "id": "invariant_testing",
-  "name": "Invariant testing",
-  "description": "",
-  "start": 1693569600000,
-  "end": 1693570500000,
-  "stageId": "workshop_room_2",
-  "speakers": [
-    {
-      "id": "abimbola_adebayo",
-      "name": "Abimbola Adebayo",
-      "bio": "Smart Contract Developer",
-      "eventId": "web3_lagos_conference_2023"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/invariant_testing.jpg"
+    "id": "invariant_testing",
+    "name": "Invariant testing",
+    "description": "",
+    "start": 1693569600000,
+    "end": 1693570500000,
+    "stageId": "workshop_room_2",
+    "speakers": [
+        {
+            "id": "abimbola_adebayo",
+            "name": "Abimbola Adebayo",
+            "bio": "Smart Contract Developer",
+            "eventId": "web3_lagos_conference_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/invariant_testing.jpg"
 }

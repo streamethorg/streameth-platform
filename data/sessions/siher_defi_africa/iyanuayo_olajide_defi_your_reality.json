@@ -1,24 +1,24 @@
 {
-  "id": "iyanuayo_olajide_defi_your_reality",
-  "name": "Iyanuayo Olajide: DeFi Your Reality",
-  "description": "The three DeFi immersion keys to building the financial ecosystem in Nigeria and Africa",
-  "start": 1703086500000,
-  "end": 1703087100000,
-  "stageId": "workshop_room",
-  "speakers": [
-    {
-      "id": "iyanuayo_olajide",
-      "name": "Iyanuayo Olajide ",
-      "bio": "Web 3 P.M. | Strategist | Spiritreneur\ud83c\udf31| Polymath",
-      "eventId": "siher_defi_africa",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1LDCl4seYGQO0MoFwWy1bRQwcZZparqVL/view"
-    }
-  ],
-  "playbackId": "d379a5rqy0qqspgm",
-  "eventId": "siher_defi_africa",
-  "coverImage": "/sessions/siher_defi_africa/iyanuayo_olajide_defi_your_reality.jpg",
-  "assetId": "d379337e-6432-46e7-a8c8-9ad72762cacb",
-  "sourceId": "211094da-091a-48b1-862f-3882a7db20c2",
-  "videoType": "clip"
+    "id": "iyanuayo_olajide_defi_your_reality",
+    "name": "Iyanuayo Olajide: DeFi Your Reality",
+    "description": "The three DeFi immersion keys to building the financial ecosystem in Nigeria and Africa",
+    "start": 1703086500000,
+    "end": 1703087100000,
+    "stageId": "workshop_room",
+    "speakers": [
+        {
+            "id": "iyanuayo_olajide",
+            "name": "Iyanuayo Olajide ",
+            "bio": "Web 3 P.M. | Strategist | Spiritreneur\ud83c\udf31| Polymath",
+            "eventId": "siher_defi_africa",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1LDCl4seYGQO0MoFwWy1bRQwcZZparqVL/view"
+        }
+    ],
+    "playbackId": "d379a5rqy0qqspgm",
+    "eventId": "siher_defi_africa",
+    "coverImage": "/sessions/siher_defi_africa/iyanuayo_olajide_defi_your_reality.jpg",
+    "assetId": "d379337e-6432-46e7-a8c8-9ad72762cacb",
+    "sourceId": "211094da-091a-48b1-862f-3882a7db20c2",
+    "videoType": "clip"
 }

@@ -1,25 +1,25 @@
 {
-  "id": "public_goods_that_will_onboard_the_next_billion",
-  "name": "Public Goods That Will Onboard the Next Billion",
-  "description": "The video focuses on how to bring the next billion people into the world of cryptocurrency and the public goods that can help achieve this goal. It highlights the Celo blockchain as an EVM-compatible layer one that is carbon negative and mobile-first. The video mentions Valora, a wallet, and C-Labs, a company working on public goods for the Celo ecosystem. Two specific public goods are discussed: Social Connect, which enables payments using phone numbers as identifiers, and Fiat Connect, which aims to create a hub-and-spoke model for on-and-off ramps in different countries. The video also mentions a proposal to make Celo an L2 solution using EigenDA for data availability, providing cheaper transactions and a decentralized sequencer. The speaker encourages collaboration and support for these public goods to drive crypto adoption.",
-  "start": "2023-07-16T13:40:00.000Z",
-  "end": "2023-07-16T14:00:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "ren_reinsberg",
-      "name": "Ren\u00e9 Reinsberg",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    },
-    {
-      "id": "marek_olszewski",
-      "name": "Marek Olszewski",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "playbackId": "7055uxxo6c23ebdu",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/public_goods_that_will_onboard_the_next_billion.jpg"
+    "id": "public_goods_that_will_onboard_the_next_billion",
+    "name": "Public Goods That Will Onboard the Next Billion",
+    "description": "The video focuses on how to bring the next billion people into the world of cryptocurrency and the public goods that can help achieve this goal. It highlights the Celo blockchain as an EVM-compatible layer one that is carbon negative and mobile-first. The video mentions Valora, a wallet, and C-Labs, a company working on public goods for the Celo ecosystem. Two specific public goods are discussed: Social Connect, which enables payments using phone numbers as identifiers, and Fiat Connect, which aims to create a hub-and-spoke model for on-and-off ramps in different countries. The video also mentions a proposal to make Celo an L2 solution using EigenDA for data availability, providing cheaper transactions and a decentralized sequencer. The speaker encourages collaboration and support for these public goods to drive crypto adoption.",
+    "start": "2023-07-16T13:40:00.000Z",
+    "end": "2023-07-16T14:00:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "ren_reinsberg",
+            "name": "Ren\u00e9 Reinsberg",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        },
+        {
+            "id": "marek_olszewski",
+            "name": "Marek Olszewski",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "7055uxxo6c23ebdu",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/public_goods_that_will_onboard_the_next_billion.jpg"
 }

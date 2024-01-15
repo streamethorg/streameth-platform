@@ -1,24 +1,24 @@
 {
-  "id": "paths_to_a_faster_evm",
-  "name": "Paths to a faster EVM",
-  "description": "Lets explore paths that would make EVM faster. We we talk about parallelism, access list, ahead of time compilation, parallel claim and more.",
-  "start": 1699960200000,
-  "end": 1699961100000,
-  "stageId": "emirgan_1",
-  "speakers": [
-    {
-      "id": "dragan_rakita",
-      "name": "Dragan Rakita",
-      "bio": "Reth core dev, revm author",
-      "eventId": "evm_summit",
-      "twitter": "",
-      "photo": "https://evmsummit.org/images/speakers/dragan_rakita.jpg"
-    }
-  ],
-  "playbackId": "5ac6i77jppm1czrh",
-  "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/paths_to_a_faster_evm_thumbnail.png",
-  "assetId": "5ac6eb2c-4a63-4a64-ad7a-72508418442f",
-  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
-  "videoType": "clip"
+    "id": "paths_to_a_faster_evm",
+    "name": "Paths to a faster EVM",
+    "description": "Lets explore paths that would make EVM faster. We we talk about parallelism, access list, ahead of time compilation, parallel claim and more.",
+    "start": 1699960200000,
+    "end": 1699961100000,
+    "stageId": "emirgan_1",
+    "speakers": [
+        {
+            "id": "dragan_rakita",
+            "name": "Dragan Rakita",
+            "bio": "Reth core dev, revm author",
+            "eventId": "evm_summit",
+            "twitter": "",
+            "photo": "https://evmsummit.org/images/speakers/dragan_rakita.jpg"
+        }
+    ],
+    "playbackId": "5ac6i77jppm1czrh",
+    "eventId": "evm_summit",
+    "coverImage": "/sessions/evm_summit/paths_to_a_faster_evm_thumbnail.png",
+    "assetId": "5ac6eb2c-4a63-4a64-ad7a-72508418442f",
+    "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+    "videoType": "clip"
 }

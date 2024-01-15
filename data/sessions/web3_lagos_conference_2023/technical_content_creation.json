@@ -1,20 +1,20 @@
 {
-  "id": "technical_content_creation",
-  "name": "Technical Content Creation",
-  "description": "",
-  "start": 1693486200000,
-  "end": 1693487700000,
-  "stageId": "workshop_room_1",
-  "speakers": [
-    {
-      "id": "john_olmd",
-      "name": "John Ol\u00e1m\u00ec\u00edd\u00e9",
-      "bio": "Technical Content Manager",
-      "eventId": "web3_lagos_conference_2023",
-      "twitter": "@blockchainalph"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/technical_content_creation.jpg"
+    "id": "technical_content_creation",
+    "name": "Technical Content Creation",
+    "description": "",
+    "start": 1693486200000,
+    "end": 1693487700000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "john_olmd",
+            "name": "John Ol\u00e1m\u00ec\u00edd\u00e9",
+            "bio": "Technical Content Manager",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@blockchainalph"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/technical_content_creation.jpg"
 }

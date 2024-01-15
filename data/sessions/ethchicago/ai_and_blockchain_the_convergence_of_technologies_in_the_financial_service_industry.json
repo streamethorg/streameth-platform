@@ -1,25 +1,25 @@
 {
-  "id": "ai_and_blockchain_the_convergence_of_technologies_in_the_financial_service_industry",
-  "name": "AI and Blockchain: The Convergence of Technologies in the Financial Service Industry",
-  "description": "Witness how decentralized finance (DeFi), tokenized assets and deposits, central bank digital currency (CBDC), and other novel financial offerings are taking shape as a result of harnessing the collective potential of emerging technologies such as AI, Web3, digital identity, and metaverse.",
-  "start": 1694889000000,
-  "end": 1694890800000,
-  "stageId": "michigan_stage__creatives__trad_business_",
-  "speakers": [
-    {
-      "id": "xiaochen_zhang",
-      "name": "Xiaochen Zhang",
-      "bio": "Xiaochen is the CEO of FinTech4Good, a venture building firm to empower financial services through emerging technologies. He is also the Founder of AI 2030, an initiative aimed at harnessing the transformative power of AI to benefit humanity while minimizing its potential negative impact. He is also the former Global Head of Innovation & Go-To-Market with AWS. In this role, he led a team of both technical and operational staff in shaping AWS emerging technology and Web 3.0 related innovation offerings in the areas of digital assets, central bank digital currency, green finance and regulatory and supervisory technologies in supporting public sector financial institutions to achieve their missions in monetary policy, financial stability, economic growth, climate change and sustainable development. In the past 20 years, he worked with many portfolio companies in launching new offers, entering into new markets and building transformative collaborative initiatives with the most reputable organizations from all over the world to reshape the future of finance with emerging technologies.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/XIAOCHEN_BW_Yw0Dl74.png"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
-    "start": 8800,
-    "end": 10370
-  },
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/ai_and_blockchain_the_convergence_of_technologies_in_the_financial_service_industry.jpg"
+    "id": "ai_and_blockchain_the_convergence_of_technologies_in_the_financial_service_industry",
+    "name": "AI and Blockchain: The Convergence of Technologies in the Financial Service Industry",
+    "description": "Witness how decentralized finance (DeFi), tokenized assets and deposits, central bank digital currency (CBDC), and other novel financial offerings are taking shape as a result of harnessing the collective potential of emerging technologies such as AI, Web3, digital identity, and metaverse.",
+    "start": 1694889000000,
+    "end": 1694890800000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "xiaochen_zhang",
+            "name": "Xiaochen Zhang",
+            "bio": "Xiaochen is the CEO of FinTech4Good, a venture building firm to empower financial services through emerging technologies. He is also the Founder of AI 2030, an initiative aimed at harnessing the transformative power of AI to benefit humanity while minimizing its potential negative impact. He is also the former Global Head of Innovation & Go-To-Market with AWS. In this role, he led a team of both technical and operational staff in shaping AWS emerging technology and Web 3.0 related innovation offerings in the areas of digital assets, central bank digital currency, green finance and regulatory and supervisory technologies in supporting public sector financial institutions to achieve their missions in monetary policy, financial stability, economic growth, climate change and sustainable development. In the past 20 years, he worked with many portfolio companies in launching new offers, entering into new markets and building transformative collaborative initiatives with the most reputable organizations from all over the world to reshape the future of finance with emerging technologies.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/XIAOCHEN_BW_Yw0Dl74.png"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
+        "start": 8800,
+        "end": 10370
+    },
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/ai_and_blockchain_the_convergence_of_technologies_in_the_financial_service_industry.jpg"
 }

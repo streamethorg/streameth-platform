@@ -1,24 +1,24 @@
 {
-  "id": "zkcasper_a_snarkbased_protocol_for_verifying_casper_ffg_finality_proofs",
-  "name": "zkCasper: A SNARK-based protocol for verifying Casper FFG Finality Proofs.",
-  "description": "I'll be discussing a light client protocol that provides much higher crypto-economic security gurantees than the widely used sync-committee. By leveraging SNARKs and homomorphic polynomial commitments in order to direcly verify Ethereum's Casper FFG finality proofs.",
-  "start": 1700306400000,
-  "end": 1700307600000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "seun_lanlege",
-      "name": "Seun Lanlege",
-      "bio": " I used to be a core dev at Parity GmbH and contributed to the Parity-ethereum, Substrate & Polkadot Projects. Currently the founder of Polytope Labs where we're tackling industry problems such as scalability, interoperability & privacy.",
-      "eventId": "light_client_summit",
-      "twitter": "@seunlanlege",
-      "photo": "https://pbs.twimg.com/profile_images/1590312320777048065/DxETcRnS_400x400.jpg"
-    }
-  ],
-  "playbackId": "b2b3ntqddogfyo6a",
-  "eventId": "light_client_summit",
-  "coverImage": "/sessions/light_client_summit/zkcasper_a_snarkbased_protocol_for_verifying_casper_ffg_finality_proofs_thumbnail.png",
-  "assetId": "b2b312ed-2c9c-4679-bf19-d1d62388bb3c",
-  "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
-  "videoType": "clip"
+    "id": "zkcasper_a_snarkbased_protocol_for_verifying_casper_ffg_finality_proofs",
+    "name": "zkCasper: A SNARK-based protocol for verifying Casper FFG Finality Proofs.",
+    "description": "I'll be discussing a light client protocol that provides much higher crypto-economic security gurantees than the widely used sync-committee. By leveraging SNARKs and homomorphic polynomial commitments in order to direcly verify Ethereum's Casper FFG finality proofs.",
+    "start": 1700306400000,
+    "end": 1700307600000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "seun_lanlege",
+            "name": "Seun Lanlege",
+            "bio": " I used to be a core dev at Parity GmbH and contributed to the Parity-ethereum, Substrate & Polkadot Projects. Currently the founder of Polytope Labs where we're tackling industry problems such as scalability, interoperability & privacy.",
+            "eventId": "light_client_summit",
+            "twitter": "@seunlanlege",
+            "photo": "https://pbs.twimg.com/profile_images/1590312320777048065/DxETcRnS_400x400.jpg"
+        }
+    ],
+    "playbackId": "b2b3ntqddogfyo6a",
+    "eventId": "light_client_summit",
+    "coverImage": "/sessions/light_client_summit/zkcasper_a_snarkbased_protocol_for_verifying_casper_ffg_finality_proofs_thumbnail.png",
+    "assetId": "b2b312ed-2c9c-4679-bf19-d1d62388bb3c",
+    "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
+    "videoType": "clip"
 }

@@ -1,12 +1,12 @@
 {
-  "id": "understanding_ethereum_foundation_next_billion_agenda",
-  "name": "Understanding Ethereum Foundation Next Billion Agenda",
-  "description": "",
-  "start": 1693659900000,
-  "end": 1693661400000,
-  "stageId": "mainstage",
-  "speakers": [],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/understanding_ethereum_foundation_next_billion_agenda.jpg"
+    "id": "understanding_ethereum_foundation_next_billion_agenda",
+    "name": "Understanding Ethereum Foundation Next Billion Agenda",
+    "description": "",
+    "start": 1693659900000,
+    "end": 1693661400000,
+    "stageId": "mainstage",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/understanding_ethereum_foundation_next_billion_agenda.jpg"
 }

@@ -1,25 +1,25 @@
 {
-  "id": "why_you_should_care_about_polynomials",
-  "name": "Why you should care about polynomials",
-  "description": "Because of succinctness. In this talk, we will see how polynomials allow us to prove statements about (potentially) huge pieces of data. This make them especially suitable for building succinct arguments, and actually at the core of modern succinct arguments, we have polynomials. I will try to convince you that few techniques suffice to understand, at least at a high level, most of them.",
-  "start": 1700132400000,
-  "end": 1700134200000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "arantxa_zapico",
-      "name": "Arantxa Zapico",
-      "bio": "Arantxa is a Cryptography Researcher at the Ethereum Foundation. She received her PhD from UPF Barcelona in 2022. Her work covers theoretical and practical aspects of succinct arguments, such as SNARKs, vector commitments and lookup tables, including the design of Caulk, Basilisk, and Baloo.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/uc?id=1ilIlAqnk0TFhJzTuNNePP3B6lfsFQQYS"
-    }
-  ],
-  "playbackId": "1191i6th1l3ivc6v",
-  "eventId": "progcrypto",
-  "track": "Libraries and Infrastructure",
-  "coverImage": "/sessions/progcrypto/why_you_should_care_about_polynomials_thumbnail.png",
-  "assetId": "1191dc76-f55d-4080-8223-812f0dd39f2b",
-  "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
-  "videoType": "clip"
+    "id": "why_you_should_care_about_polynomials",
+    "name": "Why you should care about polynomials",
+    "description": "Because of succinctness. In this talk, we will see how polynomials allow us to prove statements about (potentially) huge pieces of data. This make them especially suitable for building succinct arguments, and actually at the core of modern succinct arguments, we have polynomials. I will try to convince you that few techniques suffice to understand, at least at a high level, most of them.",
+    "start": 1700132400000,
+    "end": 1700134200000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "arantxa_zapico",
+            "name": "Arantxa Zapico",
+            "bio": "Arantxa is a Cryptography Researcher at the Ethereum Foundation. She received her PhD from UPF Barcelona in 2022. Her work covers theoretical and practical aspects of succinct arguments, such as SNARKs, vector commitments and lookup tables, including the design of Caulk, Basilisk, and Baloo.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/uc?id=1ilIlAqnk0TFhJzTuNNePP3B6lfsFQQYS"
+        }
+    ],
+    "playbackId": "1191i6th1l3ivc6v",
+    "eventId": "progcrypto",
+    "track": "Libraries and Infrastructure",
+    "coverImage": "/sessions/progcrypto/why_you_should_care_about_polynomials_thumbnail.png",
+    "assetId": "1191dc76-f55d-4080-8223-812f0dd39f2b",
+    "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
+    "videoType": "clip"
 }

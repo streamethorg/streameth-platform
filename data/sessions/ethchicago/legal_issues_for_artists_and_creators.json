@@ -1,27 +1,27 @@
 {
-  "id": "legal_issues_for_artists_and_creators",
-  "name": "Legal Issues for Artists and Creators",
-  "description": "1",
-  "start": 1694813400000,
-  "end": 1694815200000,
-  "stageId": "michigan_stage__creatives__trad_business_",
-  "speakers": [
-    {
-      "id": "daniel_rosenbaum",
-      "name": "Daniel Rosenbaum",
-      "bio": null,
-      "eventId": "ethchicago",
-      "photo": ""
-    },
-    {
-      "id": "shannon_orr",
-      "name": "Shannon Orr",
-      "bio": null,
-      "eventId": "ethchicago",
-      "photo": ""
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/legal_issues_for_artists_and_creators.jpg"
+    "id": "legal_issues_for_artists_and_creators",
+    "name": "Legal Issues for Artists and Creators",
+    "description": "1",
+    "start": 1694813400000,
+    "end": 1694815200000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "daniel_rosenbaum",
+            "name": "Daniel Rosenbaum",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "shannon_orr",
+            "name": "Shannon Orr",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/legal_issues_for_artists_and_creators.jpg"
 }

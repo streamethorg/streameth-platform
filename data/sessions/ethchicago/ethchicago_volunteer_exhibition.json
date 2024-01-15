@@ -1,20 +1,20 @@
 {
-  "id": "ethchicago_volunteer_exhibition",
-  "name": "ETHChicago Volunteer Exhibition",
-  "description": "Work from the ETHChicago Volunteers",
-  "start": 1694966400000,
-  "end": 1694977200000,
-  "stageId": "gallery",
-  "speakers": [
-    {
-      "id": "andrew",
-      "name": "Andrew",
-      "bio": null,
-      "eventId": "ethchicago",
-      "photo": ""
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/ethchicago_volunteer_exhibition.jpg"
+    "id": "ethchicago_volunteer_exhibition",
+    "name": "ETHChicago Volunteer Exhibition",
+    "description": "Work from the ETHChicago Volunteers",
+    "start": 1694966400000,
+    "end": 1694977200000,
+    "stageId": "gallery",
+    "speakers": [
+        {
+            "id": "andrew",
+            "name": "Andrew",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/ethchicago_volunteer_exhibition.jpg"
 }

@@ -1,21 +1,21 @@
 {
-  "id": "client_diversity__a_nethermind_core_dev_perspective",
-  "name": "Client Diversity - A Nethermind Core Dev Perspective",
-  "description": "-",
-  "start": 1699880400000,
-  "end": 1699881900000,
-  "stageId": "connie",
-  "speakers": [
-    {
-      "id": "marek_moraczyski",
-      "name": "Marek Moraczy\u0144ski",
-      "bio": "Nethermind\nEthereum Core Developer",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/3/f6/19282658/avatar.jpg?90a"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/client_diversity__a_nethermind_core_dev_perspective.jpg"
+    "id": "client_diversity__a_nethermind_core_dev_perspective",
+    "name": "Client Diversity - A Nethermind Core Dev Perspective",
+    "description": "-",
+    "start": 1699880400000,
+    "end": 1699881900000,
+    "stageId": "connie",
+    "speakers": [
+        {
+            "id": "marek_moraczyski",
+            "name": "Marek Moraczy\u0144ski",
+            "bio": "Nethermind\nEthereum Core Developer",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/3/f6/19282658/avatar.jpg?90a"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/client_diversity__a_nethermind_core_dev_perspective.jpg"
 }

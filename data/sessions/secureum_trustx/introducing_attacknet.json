@@ -1,24 +1,24 @@
 {
-  "id": "introducing_attacknet",
-  "name": "Introducing Attacknet",
-  "description": "A new tool for finding bugs in consensus protocols and blockchain nodes using chaos testing",
-  "start": 1699856160000,
-  "end": 1699857120000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "benjamin_samuels",
-      "name": "Benjamin\nSamuels",
-      "bio": "ecurity Engineer \nTrail of Bits",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Benjamin-1.png"
-    }
-  ],
-  "playbackId": "914dpguwp64tfh09",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/introducing_attacknet.jpg",
-  "assetId": "914d1c1f-f64f-46c5-be4f-f166d8e38202",
-  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-  "videoType": "clip"
+    "id": "introducing_attacknet",
+    "name": "Introducing Attacknet",
+    "description": "A new tool for finding bugs in consensus protocols and blockchain nodes using chaos testing",
+    "start": 1699856160000,
+    "end": 1699857120000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "benjamin_samuels",
+            "name": "Benjamin\nSamuels",
+            "bio": "ecurity Engineer \nTrail of Bits",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Benjamin-1.png"
+        }
+    ],
+    "playbackId": "914dpguwp64tfh09",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/introducing_attacknet.jpg",
+    "assetId": "914d1c1f-f64f-46c5-be4f-f166d8e38202",
+    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+    "videoType": "clip"
 }

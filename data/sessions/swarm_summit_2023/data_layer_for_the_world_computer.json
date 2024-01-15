@@ -1,19 +1,19 @@
 {
-  "id": "data_layer_for_the_world_computer",
-  "name": "\ndata layer for the world computer",
-  "description": "This talk will explore some requirements for a comprehensive data layer for the world computer focusing on data structures, persistance guarantees and privacy.\nThe takeaway message is that despite major similarities to sister projects in the web3 space, Swarm is different. You will learn that low-level architectural choices matter. They determine the ease with\nwhich the network can be engineered or incentivised to behave in alignment with user needs.",
-  "start": "2023-06-22T13:00:00.000Z",
-  "end": "2023-06-22T13:30:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "viktor_tron",
-      "name": "Viktor Tron",
-      "bio": "Founder and team lead of the Ethereum Swarm project. Author of the Book of Swarm. President of the Swarm Foundation. \n\nI believe in technology and innovation as the conduit for peaceful social change and I am committed to the ideals of voluntarism, self-sovereign digital society and permissionless open markets. \n\nI am currently working on the web 3.0 vision, in particular futue-proof serverless base-layer infrastructure for the redecentralised web and to provide the technological underpinning to my ideals. This is Swarm.\n\nA long-time open-source contributor I advocate free software, open source, open resource, open collaboration models and am against copyright and patent laws. \n\nI have a keen interest in privacy, decentralisation, cryptography, emergent intelligence and distributed systems.\n\nI have designed and implemented complex systems in the fields of blockchain and peer to peer, language and speech technology, machine learning and AI.",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://summit.ethswarm.org/media/avatars/viktor_tron_xxHvYuA.jpg"
-    }
-  ],
-  "playbackId": "0d9f28a73xhu21ne",
-  "eventId": "swarm_summit_2023"
+    "id": "data_layer_for_the_world_computer",
+    "name": "\ndata layer for the world computer",
+    "description": "This talk will explore some requirements for a comprehensive data layer for the world computer focusing on data structures, persistance guarantees and privacy.\nThe takeaway message is that despite major similarities to sister projects in the web3 space, Swarm is different. You will learn that low-level architectural choices matter. They determine the ease with\nwhich the network can be engineered or incentivised to behave in alignment with user needs.",
+    "start": "2023-06-22T13:00:00.000Z",
+    "end": "2023-06-22T13:30:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "viktor_tron",
+            "name": "Viktor Tron",
+            "bio": "Founder and team lead of the Ethereum Swarm project. Author of the Book of Swarm. President of the Swarm Foundation. \n\nI believe in technology and innovation as the conduit for peaceful social change and I am committed to the ideals of voluntarism, self-sovereign digital society and permissionless open markets. \n\nI am currently working on the web 3.0 vision, in particular futue-proof serverless base-layer infrastructure for the redecentralised web and to provide the technological underpinning to my ideals. This is Swarm.\n\nA long-time open-source contributor I advocate free software, open source, open resource, open collaboration models and am against copyright and patent laws. \n\nI have a keen interest in privacy, decentralisation, cryptography, emergent intelligence and distributed systems.\n\nI have designed and implemented complex systems in the fields of blockchain and peer to peer, language and speech technology, machine learning and AI.",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/viktor_tron_xxHvYuA.jpg"
+        }
+    ],
+    "playbackId": "0d9f28a73xhu21ne",
+    "eventId": "swarm_summit_2023"
 }

@@ -1,18 +1,18 @@
 {
-  "id": "170_anos_de_selos_at_chegarmos_ao_selo_nft",
-  "name": "170 anos de selos at\u00e9 chegarmos ao Selo NFT",
-  "description": "This session will be held in Portuguese. There will be no translation to English. Esta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
-  "start": "2023-03-16T11:30:00.000Z",
-  "end": "2023-03-16T11:45:00.000Z",
-  "stageId": "conference_main_hall",
-  "speakers": [
-    {
-      "id": "raul_moreira",
-      "name": "Raul Moreira",
-      "bio": "CTT",
-      "eventId": "ethporto_2023"
-    }
-  ],
-  "playbackId": "dc4f5iai9wk8zdgx",
-  "eventId": "ethporto_2023"
+    "id": "170_anos_de_selos_at_chegarmos_ao_selo_nft",
+    "name": "170 anos de selos at\u00e9 chegarmos ao Selo NFT",
+    "description": "This session will be held in Portuguese. There will be no translation to English. Esta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
+    "start": "2023-03-16T11:30:00.000Z",
+    "end": "2023-03-16T11:45:00.000Z",
+    "stageId": "conference_main_hall",
+    "speakers": [
+        {
+            "id": "raul_moreira",
+            "name": "Raul Moreira",
+            "bio": "CTT",
+            "eventId": "ethporto_2023"
+        }
+    ],
+    "playbackId": "dc4f5iai9wk8zdgx",
+    "eventId": "ethporto_2023"
 }

@@ -1,24 +1,24 @@
 {
-  "id": "my_tools_dont_work_here_penetration_testing_browserbased_crypto_wallets",
-  "name": "My Tools Don\u2019t Work Here: Penetration Testing Browser-based Crypto Wallets",
-  "description": "",
-  "start": 1699979800000,
-  "end": 1699990000000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "justin_regele",
-      "name": "Justin\nRegele",
-      "bio": "Penetration\nTester",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Justin.png"
-    }
-  ],
-  "playbackId": "0f37pvv74e5no892",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/my_tools_dont_work_here_penetration_testing_browserbased_crypto_wallets.jpg",
-  "assetId": "0f37d9a7-c49f-4928-a321-e3f464a972cd",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "my_tools_dont_work_here_penetration_testing_browserbased_crypto_wallets",
+    "name": "My Tools Don\u2019t Work Here: Penetration Testing Browser-based Crypto Wallets",
+    "description": "",
+    "start": 1699979800000,
+    "end": 1699990000000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "justin_regele",
+            "name": "Justin\nRegele",
+            "bio": "Penetration\nTester",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Justin.png"
+        }
+    ],
+    "playbackId": "0f37pvv74e5no892",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/my_tools_dont_work_here_penetration_testing_browserbased_crypto_wallets.jpg",
+    "assetId": "0f37d9a7-c49f-4928-a321-e3f464a972cd",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

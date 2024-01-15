@@ -1,19 +1,19 @@
 {
-  "id": "legal_innovation_for_new_cities",
-  "name": "Legal Innovation for new cities",
-  "description": "In this video, Tom W Bell, a professor at Chapman University Fowler School of Law, discusses Ulex, a legal system he developed for decentralized projects. Ulex collects common law-based and other rules from private flag-free sources and curates them into a collection of rules for civil needs. Ulex comprises procedural rules, substantive rules, and meta-rules, and is a kernel in some legal systems, including Prospera and the Kataba Digital Economic Zone. Bell shares his screen to show examples of Ulex and other legal systems using it, including the common law zones, and discusses the differences between common law and civil law systems.",
-  "start": "2023-04-30T10:00:00.000Z",
-  "end": "2023-04-30T11:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "mark_lutter",
-      "name": "Mark Lutter",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__network_states"
-    }
-  ],
-  "playbackId": "c501aers4rvagyfd",
-  "eventId": "zuzalu_montenegro_2023__network_states",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "legal_innovation_for_new_cities",
+    "name": "Legal Innovation for new cities",
+    "description": "In this video, Tom W Bell, a professor at Chapman University Fowler School of Law, discusses Ulex, a legal system he developed for decentralized projects. Ulex collects common law-based and other rules from private flag-free sources and curates them into a collection of rules for civil needs. Ulex comprises procedural rules, substantive rules, and meta-rules, and is a kernel in some legal systems, including Prospera and the Kataba Digital Economic Zone. Bell shares his screen to show examples of Ulex and other legal systems using it, including the common law zones, and discusses the differences between common law and civil law systems.",
+    "start": "2023-04-30T10:00:00.000Z",
+    "end": "2023-04-30T11:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "mark_lutter",
+            "name": "Mark Lutter",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__network_states"
+        }
+    ],
+    "playbackId": "c501aers4rvagyfd",
+    "eventId": "zuzalu_montenegro_2023__network_states",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

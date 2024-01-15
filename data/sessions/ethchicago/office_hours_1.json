@@ -1,12 +1,12 @@
 {
-  "id": "office_hours_1",
-  "name": "Office Hours 1",
-  "description": "Genius Bar Office Hours",
-  "start": 1694826000000,
-  "end": 1694829600000,
-  "stageId": "oak_room_hacker_room",
-  "speakers": [],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/office_hours_1.jpg"
+    "id": "office_hours_1",
+    "name": "Office Hours 1",
+    "description": "Genius Bar Office Hours",
+    "start": 1694826000000,
+    "end": 1694829600000,
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/office_hours_1.jpg"
 }

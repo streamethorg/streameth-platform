@@ -1,22 +1,22 @@
 {
-  "id": "taco_web3s_day_one_decentralized_access_control_layer",
-  "name": "TACo: Web3's Day One Decentralized Access Control Layer ",
-  "description": "Part 1 | Integrating Decentralized Access Control into your Web3 application\n| Hands-on Coding Session | 30 mins\n\nThe first part will introduce attendees to TACo, a plug-in access control layer & network relevant to virtually every Web3 app/stack/project that handles private data. Early adopters are building  in domains where compromising on trust minimization simply doesn\u2019t work for the core value proposition; recovering seed phrases, passing on crypto assets as inheritance, enforcing decryption rights for tokenized legacy media libraries, transferring sensitive model I/O to remote machines, & concealing in-game assets.\n\nWe will walk through TACo's TypeScript & Python APIs, public key generation via DKG rituals, specifying/combining/embedding access conditions, node cohort creation and sponsorship, plus other key concepts \u2013 all in an interactive session using the hacker-friendly Tapir testnet. \n\nPart 2 | Day One Decentralization & Trust Burden Transparency | Whiteboarding & Discussion | 30 mins \n\nWeb3's reputation is in a fragile state \u2013 there's never been a worse time for decentralization cosplay. Using the Threshold network and our just-released programmable access control service (TACo) as a case study, this part will explain why i. Day One Decentralization and ii. Trust Burden Transparency are such vital principles for Web3 going forward. \n\nWe will discuss a list of mission-critical questions to ask Web3 providers \u2013 that among other things, pertain to the independence of the node array running their software, the disproportionate power of the DAO and other entities, how open source the user/node-facing clients are, and SPOFs in the undergirding infrastructure (e.g. what could a malicious Infura do?). ",
-  "start": 1700220900000,
-  "end": 1700224500000,
-  "stageId": "dolmabahce_a",
-  "speakers": [
-    {
-      "id": "arjun_hassard",
-      "name": "Arjun Hassard",
-      "bio": "Arjun heads up product & protocol development at NuCypher/Threshold; the multi-app, day-one-decentralized network that hosts the tBTC bridge and critical Web3 infrastructure, and leads development of the TACo e2ee access control layer. He designed Threshold's Stable Yield mechanism for small staker welfare, and previously coauthored NuCypher's economic papers alongside Curve's Michael Egorov. Arjun has built NLP products to combat misinformation at Factmata, founded a diversity-tech startup, and built an e2ee whistleblower channel for reporting monopolistic corporate behavior to the FTC. Arjun published policy research while at Kyoto University and has a degree in physics from Imperial College London.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1_7iYaJEoRO_GcaE7PXOkGPW5WB2VkSnP/view"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "progcrypto",
-  "track": "ZK and Blockchains / zkEVMs",
-  "coverImage": "/sessions/progcrypto/taco_web3s_day_one_decentralized_access_control_layer_thumbnail.png"
+    "id": "taco_web3s_day_one_decentralized_access_control_layer",
+    "name": "TACo: Web3's Day One Decentralized Access Control Layer ",
+    "description": "Part 1 | Integrating Decentralized Access Control into your Web3 application\n| Hands-on Coding Session | 30 mins\n\nThe first part will introduce attendees to TACo, a plug-in access control layer & network relevant to virtually every Web3 app/stack/project that handles private data. Early adopters are building  in domains where compromising on trust minimization simply doesn\u2019t work for the core value proposition; recovering seed phrases, passing on crypto assets as inheritance, enforcing decryption rights for tokenized legacy media libraries, transferring sensitive model I/O to remote machines, & concealing in-game assets.\n\nWe will walk through TACo's TypeScript & Python APIs, public key generation via DKG rituals, specifying/combining/embedding access conditions, node cohort creation and sponsorship, plus other key concepts \u2013 all in an interactive session using the hacker-friendly Tapir testnet. \n\nPart 2 | Day One Decentralization & Trust Burden Transparency | Whiteboarding & Discussion | 30 mins \n\nWeb3's reputation is in a fragile state \u2013 there's never been a worse time for decentralization cosplay. Using the Threshold network and our just-released programmable access control service (TACo) as a case study, this part will explain why i. Day One Decentralization and ii. Trust Burden Transparency are such vital principles for Web3 going forward. \n\nWe will discuss a list of mission-critical questions to ask Web3 providers \u2013 that among other things, pertain to the independence of the node array running their software, the disproportionate power of the DAO and other entities, how open source the user/node-facing clients are, and SPOFs in the undergirding infrastructure (e.g. what could a malicious Infura do?). ",
+    "start": 1700220900000,
+    "end": 1700224500000,
+    "stageId": "dolmabahce_a",
+    "speakers": [
+        {
+            "id": "arjun_hassard",
+            "name": "Arjun Hassard",
+            "bio": "Arjun heads up product & protocol development at NuCypher/Threshold; the multi-app, day-one-decentralized network that hosts the tBTC bridge and critical Web3 infrastructure, and leads development of the TACo e2ee access control layer. He designed Threshold's Stable Yield mechanism for small staker welfare, and previously coauthored NuCypher's economic papers alongside Curve's Michael Egorov. Arjun has built NLP products to combat misinformation at Factmata, founded a diversity-tech startup, and built an e2ee whistleblower channel for reporting monopolistic corporate behavior to the FTC. Arjun published policy research while at Kyoto University and has a degree in physics from Imperial College London.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1_7iYaJEoRO_GcaE7PXOkGPW5WB2VkSnP/view"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "progcrypto",
+    "track": "ZK and Blockchains / zkEVMs",
+    "coverImage": "/sessions/progcrypto/taco_web3s_day_one_decentralized_access_control_layer_thumbnail.png"
 }

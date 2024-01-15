@@ -1,35 +1,35 @@
 {
-  "id": "the_holeky_testnet_launch_hangout",
-  "name": "The Hole\u0161ky Testnet Launch Hangout",
-  "description": "Coincidentally, the Hole\u0161ky testnet is scheduled to launch during the Protocol Berg conference. Let's put it on screen and chat about testnet infrastructure.",
-  "start": 1694785500000,
-  "end": 1694787900000,
-  "stageId": "loft__workshop_0",
-  "speakers": [
-    {
-      "id": "afri_schoedon",
-      "name": "Afri Schoedon",
-      "bio": "Head of Protocol Engineering at ChainSafe Systems. Core-Organizer ETHBerlin, Protocol Berg, and GoerliCon. Running testnets on the side.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/afri-2023_6nkQtZ4.png"
-    },
-    {
-      "id": "parithosh",
-      "name": "Parithosh",
-      "bio": "I am an Ethereum enthusiast with a deep love for all things servers. I incorporated Ethereum into my Master\u2019s thesis and loved the experience so much as to make it my full time job. I currently work in the DevOps team of the Ethereum Foundation and I mainly focus on the Ethereum protocol upgrades. I\u2019m also an avid photographer with a specific interest in Landscape and Travel photography.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/x5MkzrAf_400x400_410A3ST.jpg"
-    },
-    {
-      "id": "barnabas_busa",
-      "name": "Barnabas Busa",
-      "bio": "Devops at Ethereum Foundation",
-      "eventId": "protocol_berg",
-      "photo": ""
-    }
-  ],
-  "playbackId": "c77e4lsc6w83eita",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/the_holeky_testnet_launch_hangout.jpg",
-  "assetId": "c77e393e-5791-436a-a78a-6d85bbe19531"
+    "id": "the_holeky_testnet_launch_hangout",
+    "name": "The Hole\u0161ky Testnet Launch Hangout",
+    "description": "Coincidentally, the Hole\u0161ky testnet is scheduled to launch during the Protocol Berg conference. Let's put it on screen and chat about testnet infrastructure.",
+    "start": 1694785500000,
+    "end": 1694787900000,
+    "stageId": "loft__workshop_0",
+    "speakers": [
+        {
+            "id": "afri_schoedon",
+            "name": "Afri Schoedon",
+            "bio": "Head of Protocol Engineering at ChainSafe Systems. Core-Organizer ETHBerlin, Protocol Berg, and GoerliCon. Running testnets on the side.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/afri-2023_6nkQtZ4.png"
+        },
+        {
+            "id": "parithosh",
+            "name": "Parithosh",
+            "bio": "I am an Ethereum enthusiast with a deep love for all things servers. I incorporated Ethereum into my Master\u2019s thesis and loved the experience so much as to make it my full time job. I currently work in the DevOps team of the Ethereum Foundation and I mainly focus on the Ethereum protocol upgrades. I\u2019m also an avid photographer with a specific interest in Landscape and Travel photography.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/x5MkzrAf_400x400_410A3ST.jpg"
+        },
+        {
+            "id": "barnabas_busa",
+            "name": "Barnabas Busa",
+            "bio": "Devops at Ethereum Foundation",
+            "eventId": "protocol_berg",
+            "photo": ""
+        }
+    ],
+    "playbackId": "c77e4lsc6w83eita",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/the_holeky_testnet_launch_hangout.jpg",
+    "assetId": "c77e393e-5791-436a-a78a-6d85bbe19531"
 }

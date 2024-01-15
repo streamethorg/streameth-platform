@@ -1,19 +1,19 @@
 {
-  "id": "targeting_aging_directly",
-  "name": "Targeting aging directly",
-  "description": "Speaker: Prof. Brian Kennedy",
-  "start": "2023-05-14T13:00:00.000Z",
-  "end": "2023-05-14T14:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "brian_kennedy",
-      "name": "Brian Kennedy",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    }
-  ],
-  "playbackId": "b21d86iyb0emnnzj",
-  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "targeting_aging_directly",
+    "name": "Targeting aging directly",
+    "description": "Speaker: Prof. Brian Kennedy",
+    "start": "2023-05-14T13:00:00.000Z",
+    "end": "2023-05-14T14:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "brian_kennedy",
+            "name": "Brian Kennedy",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        }
+    ],
+    "playbackId": "b21d86iyb0emnnzj",
+    "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

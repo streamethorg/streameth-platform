@@ -1,20 +1,20 @@
 {
-  "id": "agentbased_simulations_for_protocol_design_tokenomics_and_risk_analysis_hackathon_workshop",
-  "name": "Agent-based simulations for protocol design, tokenomics, and risk analysis (hackathon workshop)",
-  "description": "This workshop is a technical tutorial aimed at upskilling developers and protocol stakeholders on how to build an agent-based simulation model for their protocol or Dapp, which can greatly improve their efficiency, security, and scalability. I will give a detailed walk-through on building a data-driven ABM using real world examples, and optionally a live coding demo. The session is designed to involve high output/engagement from the participants, where by the end everyone will have built a rudimentary agent-based model for a web3 protocol / Dapp of their choice.\r\n\r\nSome basic knowledge about smart contracts, DeFi concepts, and object-oriented programming would be helpful. No prior knowledge about quantitative modeling or data science required.",
-  "start": 1694872800000,
-  "end": 1694876400000,
-  "stageId": "lincoln_stage__builder__legal",
-  "speakers": [
-    {
-      "id": "mingxuan_he",
-      "name": "Mingxuan He",
-      "bio": null,
-      "eventId": "ethchicago",
-      "photo": ""
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/agentbased_simulations_for_protocol_design_tokenomics_and_risk_analysis_hackathon_workshop.jpg"
+    "id": "agentbased_simulations_for_protocol_design_tokenomics_and_risk_analysis_hackathon_workshop",
+    "name": "Agent-based simulations for protocol design, tokenomics, and risk analysis (hackathon workshop)",
+    "description": "This workshop is a technical tutorial aimed at upskilling developers and protocol stakeholders on how to build an agent-based simulation model for their protocol or Dapp, which can greatly improve their efficiency, security, and scalability. I will give a detailed walk-through on building a data-driven ABM using real world examples, and optionally a live coding demo. The session is designed to involve high output/engagement from the participants, where by the end everyone will have built a rudimentary agent-based model for a web3 protocol / Dapp of their choice.\r\n\r\nSome basic knowledge about smart contracts, DeFi concepts, and object-oriented programming would be helpful. No prior knowledge about quantitative modeling or data science required.",
+    "start": 1694872800000,
+    "end": 1694876400000,
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+        {
+            "id": "mingxuan_he",
+            "name": "Mingxuan He",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/agentbased_simulations_for_protocol_design_tokenomics_and_risk_analysis_hackathon_workshop.jpg"
 }

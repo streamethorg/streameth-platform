@@ -1,19 +1,19 @@
 {
-  "id": "growing_a_career_in_blockchain",
-  "name": "Growing a career in Blockchain",
-  "description": "",
-  "start": 1693476900000,
-  "end": 1693479600000,
-  "stageId": "workshop_room_1",
-  "speakers": [
-    {
-      "id": "michael_jerry",
-      "name": "Michael Jerry",
-      "bio": "Product Marketing Manager",
-      "eventId": "web3_lagos_conference_2023"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/growing_a_career_in_blockchain.jpg"
+    "id": "growing_a_career_in_blockchain",
+    "name": "Growing a career in Blockchain",
+    "description": "",
+    "start": 1693476900000,
+    "end": 1693479600000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "michael_jerry",
+            "name": "Michael Jerry",
+            "bio": "Product Marketing Manager",
+            "eventId": "web3_lagos_conference_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/growing_a_career_in_blockchain.jpg"
 }

@@ -1,20 +1,20 @@
 {
-  "id": "keynote_the_rise_of_network_state_coordinations",
-  "name": "Keynote: \u201cThe Rise of Network State Coordi-Nations\u201d",
-  "description": "",
-  "start": 1684209600000,
-  "end": 1684212300000,
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "primavera_de_filippi",
-      "name": "Primavera de Filippi",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-    }
-  ],
-  "playbackId": "8fa4b2t6ly07x1zp",
-  "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
-  "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/keynote_the_rise_of_network_state_coordinations.jpg",
-  "assetId": "8fa41994-2e14-44ac-9c9b-9272fa55aee4"
+    "id": "keynote_the_rise_of_network_state_coordinations",
+    "name": "Keynote: \u201cThe Rise of Network State Coordi-Nations\u201d",
+    "description": "",
+    "start": 1684209600000,
+    "end": 1684212300000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "primavera_de_filippi",
+            "name": "Primavera de Filippi",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "playbackId": "8fa4b2t6ly07x1zp",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/keynote_the_rise_of_network_state_coordinations.jpg",
+    "assetId": "8fa41994-2e14-44ac-9c9b-9272fa55aee4"
 }

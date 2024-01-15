@@ -1,34 +1,34 @@
 {
-  "id": "the_multidisciplinary_web3_creativity__collaboration_panel",
-  "name": "The Multidisciplinary Web3: Creativity & Collaboration panel",
-  "description": "In this session we\u2019ll discuss why blockchain technology has the powerful potential of furthering creativity in multidisciplinary digital art and beyond. Tokenization has equipped artists with the ability to create, authenticate, and distribute work using any digital or digitized medium. This fuel is the perfect catalyst for all artists, musicians, dancers, poets, actors, galleries, museums, curators, platforms, and even literary novel writers \u2013 to work together, without the overarching dominance of industries.\r\n\r\nYou will hear artists and innovators offer their personal insights on how the collaborative landscape of blockchain technology has led them to where they are now and what could be the possibilities of the future.",
-  "start": 1694970000000,
-  "end": 1694971800000,
-  "stageId": "east_room__main_",
-  "speakers": [
-    {
-      "id": "willea_zwey",
-      "name": "Willea Zwey",
-      "bio": "Willea Zwey is a multidisciplinary artist and musician based in Chicago. \r\nDrawing from her background in architecture, Willea\u2019s artwork depicts otherworldly scenes with unconventional perspectives, surreal elements, and deep storytelling.\r\nSince her 2021 debut in the digital art world, Willea's distinctive styles have gained global recognition, with her artwork auctioned on platforms including Sotheby's and exhibited worldwide, including Times Square, New York, Tokyo, London, Dubai, and Hong Kong.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-07-04_at_7.01.57_PM_qXtWIzP.png"
-    },
-    {
-      "id": "noxis",
-      "name": "Noxis",
-      "bio": null,
-      "eventId": "ethchicago",
-      "photo": ""
-    },
-    {
-      "id": "shojoung_kimwechsler",
-      "name": "Sho-Joung Kim-Wechsler",
-      "bio": "Sho is the CEO and founder of XVERSO.IO - a community platform for art and artists on Ethereum. XVERSO is envisioning a world where top contemporary art is accessible to everybody and are emphasizing curation, networking and building a community through XVERSO social media and live events. The team got world famous when they sold a neon sculpture depicting a blockchain hash called \"Yellow Lambo\" by conceptual artist Kevin Abosch within the first 10 minutes of their VIP opening for the art fair \"If So, What?\" at the Palace of Fine Arts in San Francisco. Sho is also the former Head of Finance of Artsy, one of the leading platforms for contemporary art. By living in Silicon Valley (pre-NFT), she realized that the contemporary art world is at the cusp of a major revolution initiated through blockchain and new ways on how people want to experience, discover and invest in art.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/Sho_XV_SS35c5q.png"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/the_multidisciplinary_web3_creativity__collaboration_panel.jpg"
+    "id": "the_multidisciplinary_web3_creativity__collaboration_panel",
+    "name": "The Multidisciplinary Web3: Creativity & Collaboration panel",
+    "description": "In this session we\u2019ll discuss why blockchain technology has the powerful potential of furthering creativity in multidisciplinary digital art and beyond. Tokenization has equipped artists with the ability to create, authenticate, and distribute work using any digital or digitized medium. This fuel is the perfect catalyst for all artists, musicians, dancers, poets, actors, galleries, museums, curators, platforms, and even literary novel writers \u2013 to work together, without the overarching dominance of industries.\r\n\r\nYou will hear artists and innovators offer their personal insights on how the collaborative landscape of blockchain technology has led them to where they are now and what could be the possibilities of the future.",
+    "start": 1694970000000,
+    "end": 1694971800000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "willea_zwey",
+            "name": "Willea Zwey",
+            "bio": "Willea Zwey is a multidisciplinary artist and musician based in Chicago. \r\nDrawing from her background in architecture, Willea\u2019s artwork depicts otherworldly scenes with unconventional perspectives, surreal elements, and deep storytelling.\r\nSince her 2021 debut in the digital art world, Willea's distinctive styles have gained global recognition, with her artwork auctioned on platforms including Sotheby's and exhibited worldwide, including Times Square, New York, Tokyo, London, Dubai, and Hong Kong.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-07-04_at_7.01.57_PM_qXtWIzP.png"
+        },
+        {
+            "id": "noxis",
+            "name": "Noxis",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "shojoung_kimwechsler",
+            "name": "Sho-Joung Kim-Wechsler",
+            "bio": "Sho is the CEO and founder of XVERSO.IO - a community platform for art and artists on Ethereum. XVERSO is envisioning a world where top contemporary art is accessible to everybody and are emphasizing curation, networking and building a community through XVERSO social media and live events. The team got world famous when they sold a neon sculpture depicting a blockchain hash called \"Yellow Lambo\" by conceptual artist Kevin Abosch within the first 10 minutes of their VIP opening for the art fair \"If So, What?\" at the Palace of Fine Arts in San Francisco. Sho is also the former Head of Finance of Artsy, one of the leading platforms for contemporary art. By living in Silicon Valley (pre-NFT), she realized that the contemporary art world is at the cusp of a major revolution initiated through blockchain and new ways on how people want to experience, discover and invest in art.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Sho_XV_SS35c5q.png"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_multidisciplinary_web3_creativity__collaboration_panel.jpg"
 }

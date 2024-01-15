@@ -33,7 +33,7 @@ def get_livepeer_videos():
 
 def update_session_file(file_path, updated_session):
     with open(file_path, 'w') as file:
-        json.dump(updated_session, file, indent=2)
+        json.dump(updated_session, file, indent=4)
 
 # Function to extract playbackId from PlaybackUrl
 

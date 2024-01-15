@@ -1,19 +1,19 @@
 {
-  "id": "understanding_web3_frontend",
-  "name": "Understanding web3 frontend",
-  "description": "",
-  "start": 1693572300000,
-  "end": 1693573500000,
-  "stageId": "workshop_room_2",
-  "speakers": [
-    {
-      "id": "blessing_samuel",
-      "name": "Blessing Samuel",
-      "bio": "Web3 Frontend Engineer",
-      "eventId": "web3_lagos_conference_2023"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/understanding_web3_frontend.jpg"
+    "id": "understanding_web3_frontend",
+    "name": "Understanding web3 frontend",
+    "description": "",
+    "start": 1693572300000,
+    "end": 1693573500000,
+    "stageId": "workshop_room_2",
+    "speakers": [
+        {
+            "id": "blessing_samuel",
+            "name": "Blessing Samuel",
+            "bio": "Web3 Frontend Engineer",
+            "eventId": "web3_lagos_conference_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/understanding_web3_frontend.jpg"
 }

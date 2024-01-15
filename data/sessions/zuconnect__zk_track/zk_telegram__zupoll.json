@@ -1,31 +1,31 @@
 {
-  "id": "zk_telegram__zupoll",
-  "name": "ZK Telegram & Zupoll",
-  "description": "This session will cover how developers can use Zupass and the PCD framework to create unique social experiences for Telegram and beyond. ",
-  "start": 1699268400000,
-  "end": 1699269300000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "althea_allen",
-      "name": "Althea Allen \n",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    },
-    {
-      "id": "david_huang",
-      "name": "David Huang",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    },
-    {
-      "id": "tony_goss",
-      "name": "Tony Goss",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "zuconnect__zk_track",
-  "coverImage": "/sessions/zuconnect__zk_track/zk_telegram__zupoll.jpg"
+    "id": "zk_telegram__zupoll",
+    "name": "ZK Telegram & Zupoll",
+    "description": "This session will cover how developers can use Zupass and the PCD framework to create unique social experiences for Telegram and beyond. ",
+    "start": 1699268400000,
+    "end": 1699269300000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "althea_allen",
+            "name": "Althea Allen \n",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        },
+        {
+            "id": "david_huang",
+            "name": "David Huang",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        },
+        {
+            "id": "tony_goss",
+            "name": "Tony Goss",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "zuconnect__zk_track",
+    "coverImage": "/sessions/zuconnect__zk_track/zk_telegram__zupoll.jpg"
 }

@@ -1,19 +1,19 @@
 {
-  "id": "artizen_fund_x_funding_the_commons_a_mechanism_design_experiment_in_participatory_capital_allocation_for_public_goods",
-  "name": "Artizen Fund x Funding the Commons: A Mechanism Design Experiment in Participatory Capital Allocation for Public Goods",
-  "description": "Dov Eichemer, co-founder of Artisan Funds, discusses their venture into the Web3 space. Artisan Funds is a funding platform that has been operating since 2013 and has recently developed a model similar to Kickstarter for funding creators. They curate artists with a large Web3 following and aim to connect them with curators and industry professionals. The platform allows creators to showcase their work every season, and the funding process involves an application that demonstrates the project's impact and the creator's qualifications. The community, consisting of previous artifact owners, votes on projects based on these criteria. Artisan Funds has a track record of providing funding to creators and has partnerships with companies like Facebook, Adobe, and Unity. The video features presentations from artists funded by Artisan, discussing projects such as haptasonic VR exploring memory, using VR to tell stories of trans women sex workers, storing digital data in plant DNA, and an interactive digital kinetic artwork evoking meditation.",
-  "start": "2023-07-16T15:30:00.000Z",
-  "end": "2023-07-16T15:45:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    {
-      "id": "artizen_fund",
-      "name": "Artizen Fund",
-      "bio": "No description",
-      "eventId": "funding_the_commons_paris_2023"
-    }
-  ],
-  "playbackId": "b74611ldytpm6f7k",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/artizen_fund_x_funding_the_commons_a_mechanism_design_experiment_in_participatory_capital_allocation_for_public_goods.jpg"
+    "id": "artizen_fund_x_funding_the_commons_a_mechanism_design_experiment_in_participatory_capital_allocation_for_public_goods",
+    "name": "Artizen Fund x Funding the Commons: A Mechanism Design Experiment in Participatory Capital Allocation for Public Goods",
+    "description": "Dov Eichemer, co-founder of Artisan Funds, discusses their venture into the Web3 space. Artisan Funds is a funding platform that has been operating since 2013 and has recently developed a model similar to Kickstarter for funding creators. They curate artists with a large Web3 following and aim to connect them with curators and industry professionals. The platform allows creators to showcase their work every season, and the funding process involves an application that demonstrates the project's impact and the creator's qualifications. The community, consisting of previous artifact owners, votes on projects based on these criteria. Artisan Funds has a track record of providing funding to creators and has partnerships with companies like Facebook, Adobe, and Unity. The video features presentations from artists funded by Artisan, discussing projects such as haptasonic VR exploring memory, using VR to tell stories of trans women sex workers, storing digital data in plant DNA, and an interactive digital kinetic artwork evoking meditation.",
+    "start": "2023-07-16T15:30:00.000Z",
+    "end": "2023-07-16T15:45:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "artizen_fund",
+            "name": "Artizen Fund",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "b74611ldytpm6f7k",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/artizen_fund_x_funding_the_commons_a_mechanism_design_experiment_in_participatory_capital_allocation_for_public_goods.jpg"
 }

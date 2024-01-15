@@ -1,24 +1,24 @@
 {
-  "id": "namespace_storage_for_now_and_for_a_verkle_evm",
-  "name": "Namespace storage (for now and for a verkle EVM)",
-  "description": "ERC-7201 defines a standard derivation path for namespace storage. This talk will present the motivation and rational behind this construction, and go into the consequence of the upcoming verge on storage layouts.",
-  "start": 1700133900000,
-  "end": 1700134800000,
-  "stageId": "uskudar_2",
-  "speakers": [
-    {
-      "id": "hadrien_croubois",
-      "name": "Hadrien Croubois",
-      "bio": "Reseach Engineer @ OpenZeppelin\n",
-      "eventId": "solidity_summit",
-      "twitter": "@amxx",
-      "photo": "https://pbs.twimg.com/profile_images/1128648389749563393/i11-DPwB_400x400.png"
-    }
-  ],
-  "playbackId": "be49fqrnbso7tg7x",
-  "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/namespace_storage_for_now_and_for_a_verkle_evm_thumbnail.png",
-  "assetId": "be499a06-29d7-4fed-810c-0aa532e8924a",
-  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-  "videoType": "clip"
+    "id": "namespace_storage_for_now_and_for_a_verkle_evm",
+    "name": "Namespace storage (for now and for a verkle EVM)",
+    "description": "ERC-7201 defines a standard derivation path for namespace storage. This talk will present the motivation and rational behind this construction, and go into the consequence of the upcoming verge on storage layouts.",
+    "start": 1700133900000,
+    "end": 1700134800000,
+    "stageId": "uskudar_2",
+    "speakers": [
+        {
+            "id": "hadrien_croubois",
+            "name": "Hadrien Croubois",
+            "bio": "Reseach Engineer @ OpenZeppelin\n",
+            "eventId": "solidity_summit",
+            "twitter": "@amxx",
+            "photo": "https://pbs.twimg.com/profile_images/1128648389749563393/i11-DPwB_400x400.png"
+        }
+    ],
+    "playbackId": "be49fqrnbso7tg7x",
+    "eventId": "solidity_summit",
+    "coverImage": "/sessions/solidity_summit/namespace_storage_for_now_and_for_a_verkle_evm_thumbnail.png",
+    "assetId": "be499a06-29d7-4fed-810c-0aa532e8924a",
+    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+    "videoType": "clip"
 }

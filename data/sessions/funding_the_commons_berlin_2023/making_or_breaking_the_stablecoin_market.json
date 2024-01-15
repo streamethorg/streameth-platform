@@ -1,25 +1,25 @@
 {
-  "id": "making_or_breaking_the_stablecoin_market",
-  "name": "Making or Breaking the Stablecoin Market",
-  "description": "The rise of stablecoins has presented a unique set of opportunities and challenges. Nadiem\u2019s discussion will explore the important, yet often overlooked, role of intermediaries in the decentralized systems of stablecoin distribution, focusing on their impact on network architecture, market efficiency, and overall adoption.",
-  "start": 1694271600000,
-  "end": 1694272800000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "nadiem_sissouno",
-      "name": "Nadiem Sissouno",
-      "bio": "No description",
-      "eventId": "funding_the_commons_berlin_2023"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-    "start": 28386,
-    "end": 29759
-  },
-  "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/making_or_breaking_the_stablecoin_market.jpg",
-  "assetId": "58bfec3c-2c0d-40f3-85d3-28ec42993379",
-  "playbackId": "58bftg92t20khznw"
+    "id": "making_or_breaking_the_stablecoin_market",
+    "name": "Making or Breaking the Stablecoin Market",
+    "description": "The rise of stablecoins has presented a unique set of opportunities and challenges. Nadiem\u2019s discussion will explore the important, yet often overlooked, role of intermediaries in the decentralized systems of stablecoin distribution, focusing on their impact on network architecture, market efficiency, and overall adoption.",
+    "start": 1694271600000,
+    "end": 1694272800000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "nadiem_sissouno",
+            "name": "Nadiem Sissouno",
+            "bio": "No description",
+            "eventId": "funding_the_commons_berlin_2023"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+        "start": 28386,
+        "end": 29759
+    },
+    "eventId": "funding_the_commons_berlin_2023",
+    "coverImage": "/sessions/funding_the_commons_berlin_2023/making_or_breaking_the_stablecoin_market.jpg",
+    "assetId": "58bfec3c-2c0d-40f3-85d3-28ec42993379",
+    "playbackId": "58bftg92t20khznw"
 }

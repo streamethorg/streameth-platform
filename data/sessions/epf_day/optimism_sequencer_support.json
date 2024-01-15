@@ -1,24 +1,24 @@
 {
-  "id": "optimism_sequencer_support",
-  "name": "Optimism Sequencer Support",
-  "description": "Fellow project presentation by John",
-  "start": 1700227800000,
-  "end": 1700228400000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "john_chase",
-      "name": "John Chase",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@JoohhnnnChase",
-      "photo": "https://avatars.githubusercontent.com/u/68833933?s=400&u=3378be159a8b43fca7b3ba90872b6e37e060448f&v=4"
-    }
-  ],
-  "playbackId": "7540g1kh4c4ewrat",
-  "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/optimism_sequencer_support_thumbnail.png",
-  "assetId": "75409d97-82cf-46ee-933c-fab9663559b4",
-  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-  "videoType": "clip"
+    "id": "optimism_sequencer_support",
+    "name": "Optimism Sequencer Support",
+    "description": "Fellow project presentation by John",
+    "start": 1700227800000,
+    "end": 1700228400000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "john_chase",
+            "name": "John Chase",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@JoohhnnnChase",
+            "photo": "https://avatars.githubusercontent.com/u/68833933?s=400&u=3378be159a8b43fca7b3ba90872b6e37e060448f&v=4"
+        }
+    ],
+    "playbackId": "7540g1kh4c4ewrat",
+    "eventId": "epf_day",
+    "coverImage": "/sessions/epf_day/optimism_sequencer_support_thumbnail.png",
+    "assetId": "75409d97-82cf-46ee-933c-fab9663559b4",
+    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+    "videoType": "clip"
 }

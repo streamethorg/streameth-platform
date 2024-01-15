@@ -1,25 +1,25 @@
 {
-  "id": "ecoweaving_collective_action_for_the_ecocommons",
-  "name": "Ecoweaving: Collective Action for the Eco-Commons",
-  "description": "Ecoweaving is an initiative weaving people, projects, places, and worldviews in an emerging ecosystem of indigenous wisdom and innovation from intersections in finance, ecology, computational law, and beyond, with the goal of collective action and coordination around the crises in climate and ecological collapse. Join us to learn more about this extitution, gathering as individuals to attune our capacity to create change in consciousness and systems in resonance with our collective will.",
-  "start": 1694269200000,
-  "end": 1694270400000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "tony_lai",
-      "name": "Tony Lai",
-      "bio": "CodeX Stanford Blockchain Group",
-      "eventId": "funding_the_commons_berlin_2023"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-    "start": 26084,
-    "end": 27425
-  },
-  "eventId": "funding_the_commons_berlin_2023",
-  "coverImage": "/sessions/funding_the_commons_berlin_2023/ecoweaving_collective_action_for_the_ecocommons.jpg",
-  "assetId": "0fb1fe04-47a2-49ab-a09a-627154086163",
-  "playbackId": "0fb12vcwoybl377i"
+    "id": "ecoweaving_collective_action_for_the_ecocommons",
+    "name": "Ecoweaving: Collective Action for the Eco-Commons",
+    "description": "Ecoweaving is an initiative weaving people, projects, places, and worldviews in an emerging ecosystem of indigenous wisdom and innovation from intersections in finance, ecology, computational law, and beyond, with the goal of collective action and coordination around the crises in climate and ecological collapse. Join us to learn more about this extitution, gathering as individuals to attune our capacity to create change in consciousness and systems in resonance with our collective will.",
+    "start": 1694269200000,
+    "end": 1694270400000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "tony_lai",
+            "name": "Tony Lai",
+            "bio": "CodeX Stanford Blockchain Group",
+            "eventId": "funding_the_commons_berlin_2023"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+        "start": 26084,
+        "end": 27425
+    },
+    "eventId": "funding_the_commons_berlin_2023",
+    "coverImage": "/sessions/funding_the_commons_berlin_2023/ecoweaving_collective_action_for_the_ecocommons.jpg",
+    "assetId": "0fb1fe04-47a2-49ab-a09a-627154086163",
+    "playbackId": "0fb12vcwoybl377i"
 }

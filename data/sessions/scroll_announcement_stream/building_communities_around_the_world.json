@@ -1,54 +1,54 @@
 {
-  "id": "building_communities_around_the_world",
-  "name": "Building Communities Around the World",
-  "description": "What do we define as community and its success? Hear from community builders all around the world on how we build decentralized community in the Ethereum ecosystem.",
-  "start": 1697810700000,
-  "end": 1697812500000,
-  "stageId": "virtual_stage",
-  "speakers": [
-    {
-      "id": "helena_flack",
-      "name": "Helena Flack",
-      "bio": "Brand + PR, Scroll",
-      "eventId": "scroll_announcement_stream",
-      "twitter": "@helsfoftroy",
-      "photo": "https://pbs.twimg.com/profile_images/1577924655419121666/xD6SQyWC_400x400.jpg"
-    },
-    {
-      "id": "simona_pop",
-      "name": "Simona Pop",
-      "bio": "Public Goods, ENS",
-      "eventId": "scroll_announcement_stream",
-      "twitter": "@Sim_Pop",
-      "photo": "https://pbs.twimg.com/profile_images/1494871363034750980/WbDNU90b_400x400.jpg"
-    },
-    {
-      "id": "yoseph_ayele",
-      "name": "Yoseph Ayele",
-      "bio": "Founder, Borderless Africa",
-      "eventId": "scroll_announcement_stream",
-      "twitter": "@yosephayele",
-      "photo": "https://pbs.twimg.com/profile_images/1582561111546765313/L-M_M_S__400x400.jpg"
-    },
-    {
-      "id": "juan_molina",
-      "name": "Juan Molina",
-      "bio": "Community Manager, Scroll",
-      "eventId": "scroll_announcement_stream",
-      "twitter": "@juansit0xv2",
-      "photo": "https://pbs.twimg.com/profile_images/1669760313128878082/4k0wp28H_400x400.jpg"
-    },
-    {
-      "id": "erica_kang",
-      "name": "Erica Kang",
-      "bio": "Founder, KryptoSeoul",
-      "eventId": "scroll_announcement_stream",
-      "twitter": "@ekang426",
-      "photo": "https://pbs.twimg.com/profile_images/1668783769770409985/6e4ybzqL_400x400.jpg"
-    }
-  ],
-  "playbackId": "994d2hi5azigeifb",
-  "eventId": "scroll_announcement_stream",
-  "coverImage": "/sessions/scroll_announcement_stream/building_communities_around_the_world.jpg",
-  "assetId": "994d9b4d-e278-443e-8184-8988da29cb01"
+    "id": "building_communities_around_the_world",
+    "name": "Building Communities Around the World",
+    "description": "What do we define as community and its success? Hear from community builders all around the world on how we build decentralized community in the Ethereum ecosystem.",
+    "start": 1697810700000,
+    "end": 1697812500000,
+    "stageId": "virtual_stage",
+    "speakers": [
+        {
+            "id": "helena_flack",
+            "name": "Helena Flack",
+            "bio": "Brand + PR, Scroll",
+            "eventId": "scroll_announcement_stream",
+            "twitter": "@helsfoftroy",
+            "photo": "https://pbs.twimg.com/profile_images/1577924655419121666/xD6SQyWC_400x400.jpg"
+        },
+        {
+            "id": "simona_pop",
+            "name": "Simona Pop",
+            "bio": "Public Goods, ENS",
+            "eventId": "scroll_announcement_stream",
+            "twitter": "@Sim_Pop",
+            "photo": "https://pbs.twimg.com/profile_images/1494871363034750980/WbDNU90b_400x400.jpg"
+        },
+        {
+            "id": "yoseph_ayele",
+            "name": "Yoseph Ayele",
+            "bio": "Founder, Borderless Africa",
+            "eventId": "scroll_announcement_stream",
+            "twitter": "@yosephayele",
+            "photo": "https://pbs.twimg.com/profile_images/1582561111546765313/L-M_M_S__400x400.jpg"
+        },
+        {
+            "id": "juan_molina",
+            "name": "Juan Molina",
+            "bio": "Community Manager, Scroll",
+            "eventId": "scroll_announcement_stream",
+            "twitter": "@juansit0xv2",
+            "photo": "https://pbs.twimg.com/profile_images/1669760313128878082/4k0wp28H_400x400.jpg"
+        },
+        {
+            "id": "erica_kang",
+            "name": "Erica Kang",
+            "bio": "Founder, KryptoSeoul",
+            "eventId": "scroll_announcement_stream",
+            "twitter": "@ekang426",
+            "photo": "https://pbs.twimg.com/profile_images/1668783769770409985/6e4ybzqL_400x400.jpg"
+        }
+    ],
+    "playbackId": "994d2hi5azigeifb",
+    "eventId": "scroll_announcement_stream",
+    "coverImage": "/sessions/scroll_announcement_stream/building_communities_around_the_world.jpg",
+    "assetId": "994d9b4d-e278-443e-8184-8988da29cb01"
 }

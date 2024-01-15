@@ -1,19 +1,19 @@
 {
-  "id": "art_creation_session_part_1__guided_drawing",
-  "name": "Art Creation Session (Part 1) - Guided Drawing ",
-  "description": "Art Creation Session & Process Refletion",
-  "start": 1698909000000,
-  "end": 1698910800000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "gordon_berger",
-      "name": "Gordon Berger",
-      "bio": "No description",
-      "eventId": "zuconnect_istanbul__art_track"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "zuconnect_istanbul__art_track",
-  "coverImage": "/sessions/zuconnect_istanbul__art_track/art_creation_session_part_1__guided_drawing.jpg"
+    "id": "art_creation_session_part_1__guided_drawing",
+    "name": "Art Creation Session (Part 1) - Guided Drawing ",
+    "description": "Art Creation Session & Process Refletion",
+    "start": 1698909000000,
+    "end": 1698910800000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "gordon_berger",
+            "name": "Gordon Berger",
+            "bio": "No description",
+            "eventId": "zuconnect_istanbul__art_track"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "zuconnect_istanbul__art_track",
+    "coverImage": "/sessions/zuconnect_istanbul__art_track/art_creation_session_part_1__guided_drawing.jpg"
 }

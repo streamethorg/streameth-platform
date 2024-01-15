@@ -1,19 +1,19 @@
 {
-  "id": "the_hivemakers_code_a_toolkit_for_building_valuedriven_decentralized_digital_ecosystems",
-  "name": "The Hivemaker's Code: A toolkit for building value-driven, decentralized digital ecosystems.",
-  "description": "When you can\u2019t control what your system is used for, your options for maximizing its positive impact are limited. You have to start by creating the right set of values and working to align the ecosystem\u2019s participants around them. You must enable its positive uses and engage people to develop an intrinsic motivation to do good. By releasing this document, we want to start a movement. One that will attract those of you who want to build decentralized ecosystems consciously and gradually change how the scene looks. So that purposeful technology will soon help people regain sovereignty over their data, identities, and lives.",
-  "start": "2023-06-21T14:40:00.000Z",
-  "end": "2023-06-21T15:10:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "michal_matlon",
-      "name": "Michal Matlon",
-      "bio": "Michal is an architecture and organizational psychologist with more than 10 years of multidisciplinary experience in technology, media, and marketing. He helps to create both physical and virtual places of flourishing and meaningful work, from offices to urban quarters. In the past, Michal worked at one of the largest and most innovative office real-estate developers in Europe, where he developed the user experience strategy for the company\u00b4s buildings and established an internal education program. He is also the co-founder of Venetian Letter, a newsletter about human-oriented, science-based architecture and urbanism.",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://summit.ethswarm.org/media/avatars/1604574411697_PyBljLR.jpeg"
-    }
-  ],
-  "playbackId": "a2bd1582adraca1n",
-  "eventId": "swarm_summit_2023"
+    "id": "the_hivemakers_code_a_toolkit_for_building_valuedriven_decentralized_digital_ecosystems",
+    "name": "The Hivemaker's Code: A toolkit for building value-driven, decentralized digital ecosystems.",
+    "description": "When you can\u2019t control what your system is used for, your options for maximizing its positive impact are limited. You have to start by creating the right set of values and working to align the ecosystem\u2019s participants around them. You must enable its positive uses and engage people to develop an intrinsic motivation to do good. By releasing this document, we want to start a movement. One that will attract those of you who want to build decentralized ecosystems consciously and gradually change how the scene looks. So that purposeful technology will soon help people regain sovereignty over their data, identities, and lives.",
+    "start": "2023-06-21T14:40:00.000Z",
+    "end": "2023-06-21T15:10:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "michal_matlon",
+            "name": "Michal Matlon",
+            "bio": "Michal is an architecture and organizational psychologist with more than 10 years of multidisciplinary experience in technology, media, and marketing. He helps to create both physical and virtual places of flourishing and meaningful work, from offices to urban quarters. In the past, Michal worked at one of the largest and most innovative office real-estate developers in Europe, where he developed the user experience strategy for the company\u00b4s buildings and established an internal education program. He is also the co-founder of Venetian Letter, a newsletter about human-oriented, science-based architecture and urbanism.",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/1604574411697_PyBljLR.jpeg"
+        }
+    ],
+    "playbackId": "a2bd1582adraca1n",
+    "eventId": "swarm_summit_2023"
 }

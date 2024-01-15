@@ -1,30 +1,30 @@
 {
-  "id": "the_creative_code_revolution",
-  "name": "\nThe Creative Code Revolution",
-  "description": "As art creation shifts from brushes to algorithms, a vanguard movement leveraging computation as creative material is disrupting the art world. This talk traces generative art\u2019s evolution from fringe curiosity to ascendant artform uniquely enhanced by blockchain technology, alongside stunning artworks being released on Base from today\u2019s leading generative artists.",
-  "start": 1702152000000,
-  "end": 1702153800000,
-  "stageId": "base_house",
-  "speakers": [
-    {
-      "id": "nat_emodi",
-      "name": "Nat Emodi",
-      "bio": "Nat Emodi is founder and CEO at Highlight, a toolkit for creating art and culture on the blockchain and the first open-access generative art platform on Ethereum. Prior to Highlight, Nat held various leadership roles at Block (formerly known as Square), DoorDash, and elsewhere. Originally from Canada, he lives in California with his wife and two children.",
-      "eventId": "base_event",
-      "twitter": "@natemodi"
-    },
-    {
-      "id": "jesse_pollak",
-      "name": "Jesse Pollak",
-      "bio": "Jesse Pollak is Creator of Base. Prior to Base, Jesse led all of Coinbase\u2019s consumer-facing engineering from early 2017 to middle 2021, including building Coinbase, Coinbase Pro, and Coinbase Wallet. Jesse joined Coinbase through the acquisition of Clef, a company he founded and ran for five years that built passwordless identity solutions for crypto companies.\n",
-      "eventId": "base_event",
-      "twitter": "@jessepollak\n"
-    }
-  ],
-  "playbackId": "3f9ft5yzyp78hqi9",
-  "eventId": "base_event",
-  "coverImage": "/sessions/base_event/the_creative_code_revolution.jpg",
-  "assetId": "3f9f986e-c4cb-4a59-bd9f-b6492e4f8953",
-  "sourceId": "bbb47859-f5a3-4406-a53d-60c1e539646e",
-  "videoType": "clip"
+    "id": "the_creative_code_revolution",
+    "name": "\nThe Creative Code Revolution",
+    "description": "As art creation shifts from brushes to algorithms, a vanguard movement leveraging computation as creative material is disrupting the art world. This talk traces generative art\u2019s evolution from fringe curiosity to ascendant artform uniquely enhanced by blockchain technology, alongside stunning artworks being released on Base from today\u2019s leading generative artists.",
+    "start": 1702152000000,
+    "end": 1702153800000,
+    "stageId": "base_house",
+    "speakers": [
+        {
+            "id": "nat_emodi",
+            "name": "Nat Emodi",
+            "bio": "Nat Emodi is founder and CEO at Highlight, a toolkit for creating art and culture on the blockchain and the first open-access generative art platform on Ethereum. Prior to Highlight, Nat held various leadership roles at Block (formerly known as Square), DoorDash, and elsewhere. Originally from Canada, he lives in California with his wife and two children.",
+            "eventId": "base_event",
+            "twitter": "@natemodi"
+        },
+        {
+            "id": "jesse_pollak",
+            "name": "Jesse Pollak",
+            "bio": "Jesse Pollak is Creator of Base. Prior to Base, Jesse led all of Coinbase\u2019s consumer-facing engineering from early 2017 to middle 2021, including building Coinbase, Coinbase Pro, and Coinbase Wallet. Jesse joined Coinbase through the acquisition of Clef, a company he founded and ran for five years that built passwordless identity solutions for crypto companies.\n",
+            "eventId": "base_event",
+            "twitter": "@jessepollak\n"
+        }
+    ],
+    "playbackId": "3f9ft5yzyp78hqi9",
+    "eventId": "base_event",
+    "coverImage": "/sessions/base_event/the_creative_code_revolution.jpg",
+    "assetId": "3f9f986e-c4cb-4a59-bd9f-b6492e4f8953",
+    "sourceId": "bbb47859-f5a3-4406-a53d-60c1e539646e",
+    "videoType": "clip"
 }

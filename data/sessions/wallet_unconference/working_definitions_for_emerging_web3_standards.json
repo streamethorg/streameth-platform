@@ -1,24 +1,24 @@
 {
-  "id": "working_definitions_for_emerging_web3_standards",
-  "name": "Working definitions for emerging web3 standards.",
-  "description": "Proposals for standard definitions of concepts such as: account abstraction, intents, wallet as a service.  In order for us to do good work creating standards it helps to be on the same page about the things we're discussing.",
-  "start": 1700206200000,
-  "end": 1700207100000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "jenny_pollack",
-      "name": "Jenny Pollack",
-      "bio": "Jenny is the co-founder of exonumia, a product strategy firm focused on early stage decentralized networks. Jenny has previously worked at Microsoft, Metamask, Dapphub, and Aave and enjoys coordination tools and the communities that form around them.\n\n\n",
-      "eventId": "wallet_unconference",
-      "twitter": "@Jenny_Pollack",
-      "photo": "https://speak.ticketh.xyz/media/avatars/headshot_pollack_ffZc36E.jpeg"
-    }
-  ],
-  "playbackId": "3f23x6xbxmmklu79",
-  "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/working_definitions_for_emerging_web3_standards_thumbnail.png",
-  "assetId": "3f238399-ea75-4213-92d7-c933d6d32fd4",
-  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
-  "videoType": "clip"
+    "id": "working_definitions_for_emerging_web3_standards",
+    "name": "Working definitions for emerging web3 standards.",
+    "description": "Proposals for standard definitions of concepts such as: account abstraction, intents, wallet as a service.  In order for us to do good work creating standards it helps to be on the same page about the things we're discussing.",
+    "start": 1700206200000,
+    "end": 1700207100000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "jenny_pollack",
+            "name": "Jenny Pollack",
+            "bio": "Jenny is the co-founder of exonumia, a product strategy firm focused on early stage decentralized networks. Jenny has previously worked at Microsoft, Metamask, Dapphub, and Aave and enjoys coordination tools and the communities that form around them.\n\n\n",
+            "eventId": "wallet_unconference",
+            "twitter": "@Jenny_Pollack",
+            "photo": "https://speak.ticketh.xyz/media/avatars/headshot_pollack_ffZc36E.jpeg"
+        }
+    ],
+    "playbackId": "3f23x6xbxmmklu79",
+    "eventId": "wallet_unconference",
+    "coverImage": "/sessions/wallet_unconference/working_definitions_for_emerging_web3_standards_thumbnail.png",
+    "assetId": "3f238399-ea75-4213-92d7-c933d6d32fd4",
+    "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+    "videoType": "clip"
 }

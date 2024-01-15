@@ -1,21 +1,21 @@
 {
-  "id": "native_liquid_restaking",
-  "name": "Native Liquid Restaking",
-  "description": "Increasing nodes\u2019 capital effiency (lower bond requirements), increasing economic opportunities (via restaking services), and increasing hardware efficiency (via SGX and other TEEs).",
-  "start": 1699863000000,
-  "end": 1699864500000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "jason_vranek",
-      "name": "Jason Vranek",
-      "bio": "Puffer Finance\nCofounder, CTO",
-      "eventId": "staking_gathering_2023",
-      "twitter": "",
-      "photo": "https://avatars.sched.co/3/44/19282700/avatar.jpg?4f9"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "staking_gathering_2023",
-  "coverImage": "/sessions/staking_gathering_2023/native_liquid_restaking.jpg"
+    "id": "native_liquid_restaking",
+    "name": "Native Liquid Restaking",
+    "description": "Increasing nodes\u2019 capital effiency (lower bond requirements), increasing economic opportunities (via restaking services), and increasing hardware efficiency (via SGX and other TEEs).",
+    "start": 1699863000000,
+    "end": 1699864500000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "jason_vranek",
+            "name": "Jason Vranek",
+            "bio": "Puffer Finance\nCofounder, CTO",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/3/44/19282700/avatar.jpg?4f9"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/native_liquid_restaking.jpg"
 }

@@ -1,22 +1,22 @@
 {
-  "id": "deciphering_fhe",
-  "name": "Deciphering FHE",
-  "description": "FHE on blockchains\" and walks you through the stack required to build interesting on-chain hidden information games that keep user states private with an added ability to compute over private states from multiple users. Throughout the talk FHE is used in abstract sense, so no in-depth knowledge of FHE, other than its definition, is required!",
-  "start": 1700208900000,
-  "end": 1700209800000,
-  "stageId": "dolmabahce_b__c",
-  "speakers": [
-    {
-      "id": "janmajaya_mall",
-      "name": "Janmajaya Mall",
-      "bio": "I am currently very excited about new type of applications FHE can enable for blockchains. For ex, using FHE we can develop applications like Oblivious message retrieval, Private Information retrieval / set intersection to immensely improve user experience of  privacy preserving protocols. Moreover, with threshold FHE we can have encrypted shared state on-chain, allowing us to build private applications that simply were not possible before.  \n\nBefore jumping to FHE, I worked on writing aggregation circuits, dev tools for zk and coco (crypto based social media moderation tool) at PSE. ",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1k_KjQ7KYHjUkqUtTzatF6tDtVWRUduTG/view"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "progcrypto",
-  "track": "Next Gen Applied Crypto",
-  "coverImage": "/sessions/progcrypto/deciphering_fhe_thumbnail.png"
+    "id": "deciphering_fhe",
+    "name": "Deciphering FHE",
+    "description": "FHE on blockchains\" and walks you through the stack required to build interesting on-chain hidden information games that keep user states private with an added ability to compute over private states from multiple users. Throughout the talk FHE is used in abstract sense, so no in-depth knowledge of FHE, other than its definition, is required!",
+    "start": 1700208900000,
+    "end": 1700209800000,
+    "stageId": "dolmabahce_b__c",
+    "speakers": [
+        {
+            "id": "janmajaya_mall",
+            "name": "Janmajaya Mall",
+            "bio": "I am currently very excited about new type of applications FHE can enable for blockchains. For ex, using FHE we can develop applications like Oblivious message retrieval, Private Information retrieval / set intersection to immensely improve user experience of  privacy preserving protocols. Moreover, with threshold FHE we can have encrypted shared state on-chain, allowing us to build private applications that simply were not possible before.  \n\nBefore jumping to FHE, I worked on writing aggregation circuits, dev tools for zk and coco (crypto based social media moderation tool) at PSE. ",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1k_KjQ7KYHjUkqUtTzatF6tDtVWRUduTG/view"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "progcrypto",
+    "track": "Next Gen Applied Crypto",
+    "coverImage": "/sessions/progcrypto/deciphering_fhe_thumbnail.png"
 }

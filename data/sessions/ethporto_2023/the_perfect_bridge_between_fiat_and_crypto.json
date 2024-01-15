@@ -1,19 +1,19 @@
 {
-  "id": "the_perfect_bridge_between_fiat_and_crypto",
-  "name": "The perfect bridge between fiat and crypto",
-  "description": "This session will be held in English. There will be no translation to Portuguese.",
-  "start": "2023-03-17T15:25:00.000Z",
-  "end": "2023-03-17T15:40:00.000Z",
-  "stageId": "conference_main_hall",
-  "speakers": [
-    {
-      "id": "diogo_brs",
-      "name": "Diogo Br\u00e1s",
-      "bio": "Bison Digital Assets",
-      "eventId": "ethporto_2023",
-      "photo": "https://ethporto.org/assets/speakers/diogo_bras.jpg"
-    }
-  ],
-  "playbackId": "2908zjqycr70q375",
-  "eventId": "ethporto_2023"
+    "id": "the_perfect_bridge_between_fiat_and_crypto",
+    "name": "The perfect bridge between fiat and crypto",
+    "description": "This session will be held in English. There will be no translation to Portuguese.",
+    "start": "2023-03-17T15:25:00.000Z",
+    "end": "2023-03-17T15:40:00.000Z",
+    "stageId": "conference_main_hall",
+    "speakers": [
+        {
+            "id": "diogo_brs",
+            "name": "Diogo Br\u00e1s",
+            "bio": "Bison Digital Assets",
+            "eventId": "ethporto_2023",
+            "photo": "https://ethporto.org/assets/speakers/diogo_bras.jpg"
+        }
+    ],
+    "playbackId": "2908zjqycr70q375",
+    "eventId": "ethporto_2023"
 }

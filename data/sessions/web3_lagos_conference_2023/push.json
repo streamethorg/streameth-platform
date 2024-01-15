@@ -1,20 +1,20 @@
 {
-  "id": "push",
-  "name": "PUSH",
-  "description": "",
-  "start": 1693663800000,
-  "end": 1693664400000,
-  "stageId": "mainstage",
-  "speakers": [
-    {
-      "id": "richa_josi",
-      "name": "Richa Josi",
-      "bio": "Co-Founder/Marketing Lead",
-      "eventId": "web3_lagos_conference_2023",
-      "twitter": "@pushprotocol"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "web3_lagos_conference_2023",
-  "coverImage": "/sessions/web3_lagos_conference_2023/push.jpg"
+    "id": "push",
+    "name": "PUSH",
+    "description": "",
+    "start": 1693663800000,
+    "end": 1693664400000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "richa_josi",
+            "name": "Richa Josi",
+            "bio": "Co-Founder/Marketing Lead",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@pushprotocol"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/push.jpg"
 }

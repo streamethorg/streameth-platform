@@ -1,24 +1,24 @@
 {
-  "id": "dude_wheres_my_data_data_wallets_to_the_rescue",
-  "name": "Dude, Where's My Data? Data Wallets to the Rescue",
-  "description": "A number of decentralised storage networks exist for you to store data that is managed via blockchains such as Filecoin. But how do you keep track of the data you have stored? OK, I've uploaded my previous photos, but how do I find them again in amongst the rest of the 1,000 Petabytes of data on the network? How many replicas of the data are there? Are they healthy?",
-  "start": 1700218800000,
-  "end": 1700220600000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "matt_hamilton",
-      "name": "Matt Hamilton",
-      "bio": "Matt is a Principal Developer Advocate with Protocol Labs. He is currently working on helping developers better understand IPFS, Filecoin and the Filecoin Ethereum Virtual Machine (FEVM). Matt works by the motto \u201clift as you climb\u201d and is often found live-coding projects on Twitch. Before joining Protocol Labs, Matt worked as a Developer Advocate at IBM working on machine learning and AI, and was the Director of Developer Advocacy at Ripple. He has been developing on the XRP Ledger for the past five years, and is a vocal advocate in the XRP Ledger community. Matt lives with his family in Barbados and is often found paddleboarding in the Caribbean Sea with his dogs.",
-      "eventId": "wallet_unconference",
-      "twitter": "n/a",
-      "photo": "https://speak.ticketh.xyz/media/avatars/matt_beach_headshot_GAMHBNO.jpg"
-    }
-  ],
-  "playbackId": "0cb5gqr60jh5ey3m",
-  "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/dude_wheres_my_data_data_wallets_to_the_rescue_thumbnail.png",
-  "assetId": "0cb5d18f-fa9d-472f-93b0-74eb9273e911",
-  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
-  "videoType": "clip"
+    "id": "dude_wheres_my_data_data_wallets_to_the_rescue",
+    "name": "Dude, Where's My Data? Data Wallets to the Rescue",
+    "description": "A number of decentralised storage networks exist for you to store data that is managed via blockchains such as Filecoin. But how do you keep track of the data you have stored? OK, I've uploaded my previous photos, but how do I find them again in amongst the rest of the 1,000 Petabytes of data on the network? How many replicas of the data are there? Are they healthy?",
+    "start": 1700218800000,
+    "end": 1700220600000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "matt_hamilton",
+            "name": "Matt Hamilton",
+            "bio": "Matt is a Principal Developer Advocate with Protocol Labs. He is currently working on helping developers better understand IPFS, Filecoin and the Filecoin Ethereum Virtual Machine (FEVM). Matt works by the motto \u201clift as you climb\u201d and is often found live-coding projects on Twitch. Before joining Protocol Labs, Matt worked as a Developer Advocate at IBM working on machine learning and AI, and was the Director of Developer Advocacy at Ripple. He has been developing on the XRP Ledger for the past five years, and is a vocal advocate in the XRP Ledger community. Matt lives with his family in Barbados and is often found paddleboarding in the Caribbean Sea with his dogs.",
+            "eventId": "wallet_unconference",
+            "twitter": "n/a",
+            "photo": "https://speak.ticketh.xyz/media/avatars/matt_beach_headshot_GAMHBNO.jpg"
+        }
+    ],
+    "playbackId": "0cb5gqr60jh5ey3m",
+    "eventId": "wallet_unconference",
+    "coverImage": "/sessions/wallet_unconference/dude_wheres_my_data_data_wallets_to_the_rescue_thumbnail.png",
+    "assetId": "0cb5d18f-fa9d-472f-93b0-74eb9273e911",
+    "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+    "videoType": "clip"
 }

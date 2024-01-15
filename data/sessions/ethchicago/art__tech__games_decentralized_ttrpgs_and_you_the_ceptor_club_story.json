@@ -1,20 +1,20 @@
 {
-  "id": "art__tech__games_decentralized_ttrpgs_and_you_the_ceptor_club_story",
-  "name": "Art + Tech + Games: Decentralized TTRPGs and You! (the Ceptor Club story)",
-  "description": "Ultimately, Ceptor Club is building at the intersection of Art, Tech and Games.  We are beginning with making Tabletop Role Playing Games more fun, faster, and  accessible for everyone.  Developers, Artists, and Game Masters can play in our Workshop and do a mini-mission that will demonstrate the pain points that we are solving, in a fun way (we promise!)!",
-  "start": 1694826000000,
-  "end": 1694828520000,
-  "stageId": "east_room__main_",
-  "speakers": [
-    {
-      "id": "tippi_fifestarr",
-      "name": "Tippi Fifestarr",
-      "bio": "Creative  founder with high developer empathy, communicative teammate and enthusiastic  DevRel professional. I have a strong background in the Ethereum, Polygon, Filecoin & Chainlink ecosystems. Experience in mentoring and contributing to decentralized projects, passionate about fostering community engagement, and skilled in organizing events and workshops. Adept at building and maintaining complex systems, as well as real relationships with developers and key community members, globally. I want to help the next generation of developers succeed in building transformative decentralized applications.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/Pachad__co_conflict_copy_3_GRDsWKj.jpg"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/art__tech__games_decentralized_ttrpgs_and_you_the_ceptor_club_story.jpg"
+    "id": "art__tech__games_decentralized_ttrpgs_and_you_the_ceptor_club_story",
+    "name": "Art + Tech + Games: Decentralized TTRPGs and You! (the Ceptor Club story)",
+    "description": "Ultimately, Ceptor Club is building at the intersection of Art, Tech and Games.  We are beginning with making Tabletop Role Playing Games more fun, faster, and  accessible for everyone.  Developers, Artists, and Game Masters can play in our Workshop and do a mini-mission that will demonstrate the pain points that we are solving, in a fun way (we promise!)!",
+    "start": 1694826000000,
+    "end": 1694828520000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "tippi_fifestarr",
+            "name": "Tippi Fifestarr",
+            "bio": "Creative  founder with high developer empathy, communicative teammate and enthusiastic  DevRel professional. I have a strong background in the Ethereum, Polygon, Filecoin & Chainlink ecosystems. Experience in mentoring and contributing to decentralized projects, passionate about fostering community engagement, and skilled in organizing events and workshops. Adept at building and maintaining complex systems, as well as real relationships with developers and key community members, globally. I want to help the next generation of developers succeed in building transformative decentralized applications.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Pachad__co_conflict_copy_3_GRDsWKj.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/art__tech__games_decentralized_ttrpgs_and_you_the_ceptor_club_story.jpg"
 }

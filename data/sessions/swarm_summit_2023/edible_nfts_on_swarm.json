@@ -1,19 +1,19 @@
 {
-  "id": "edible_nfts_on_swarm",
-  "name": "Edible NFTs on Swarm",
-  "description": "Edible NFTs on Swarm",
-  "start": "2023-06-22T15:10:00.000Z",
-  "end": "2023-06-22T15:30:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "marcio_barradas",
-      "name": "Marcio Barradas",
-      "bio": "Marcio Barradas, CEO and founder of 3D Essence Food and Moodbytes, a company dedicated to bringing cutting edge food technologies to the market. As founder of FoodInk, the company behind the world\u02bcs first 3D printed food events and restaurants, he has demonstrated a novel approach to food design, where innovative technologies enable cheap provision of top quality nutrition, while reducing the carbon and water footprint and keeping trace of the whole food supply chain.",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
-    }
-  ],
-  "playbackId": "974ay6w8k2niz0g2",
-  "eventId": "swarm_summit_2023"
+    "id": "edible_nfts_on_swarm",
+    "name": "Edible NFTs on Swarm",
+    "description": "Edible NFTs on Swarm",
+    "start": "2023-06-22T15:10:00.000Z",
+    "end": "2023-06-22T15:30:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "marcio_barradas",
+            "name": "Marcio Barradas",
+            "bio": "Marcio Barradas, CEO and founder of 3D Essence Food and Moodbytes, a company dedicated to bringing cutting edge food technologies to the market. As founder of FoodInk, the company behind the world\u02bcs first 3D printed food events and restaurants, he has demonstrated a novel approach to food design, where innovative technologies enable cheap provision of top quality nutrition, while reducing the carbon and water footprint and keeping trace of the whole food supply chain.",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
+        }
+    ],
+    "playbackId": "974ay6w8k2niz0g2",
+    "eventId": "swarm_summit_2023"
 }

@@ -1,27 +1,27 @@
 {
-  "id": "tokenizing_creativity",
-  "name": "Tokenizing Creativity",
-  "description": "I've been to multiple conferences in the pass 3 years from ETH Denver, NFT NYC, Metaverse Miami, and NFT LA. I have also hosted a handful of events with artist showcasing and educational presentations. I look forward to bringing a unique perspective as a creator and entrepreneur. As well as being open about the space, along side what it needs. I also lead a community of artist with different mediums and help integrate Blockchain technology within their projects.",
-  "start": 1694903400000,
-  "end": 1694905200000,
-  "stageId": "east_room__main_",
-  "speakers": [
-    {
-      "id": "mrsazn",
-      "name": "Mr.Saz\u00f3n",
-      "bio": "Mr. Saz\u00f3n, also known as Saz\u00f3n, is a leading voice in the world of Web3 technology, with a focus on Web3 community and gaming/art. As a skilled artist and creative entrepreneur, he brings a unique perspective to his content, blending his knowledge of Web3 with his passion for gaming, art, and music!",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/748E522E-6992-44F8-A3E7-41C0E8837CB2_H1fX28Q.jpeg"
-    },
-    {
-      "id": "katrina_gamuedasmith",
-      "name": "Katrina Gamueda-Smith",
-      "bio": "Katrina is a co-founder of PizzaDAO and has been working in the Web3 space for several years as a builder and advisor onboarding individuals and Fortune500 brands.",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/085C1992-C306-4B90-A3C9-7692475BFCD5_g7xZfaS.jpeg"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/tokenizing_creativity.jpg"
+    "id": "tokenizing_creativity",
+    "name": "Tokenizing Creativity",
+    "description": "I've been to multiple conferences in the pass 3 years from ETH Denver, NFT NYC, Metaverse Miami, and NFT LA. I have also hosted a handful of events with artist showcasing and educational presentations. I look forward to bringing a unique perspective as a creator and entrepreneur. As well as being open about the space, along side what it needs. I also lead a community of artist with different mediums and help integrate Blockchain technology within their projects.",
+    "start": 1694903400000,
+    "end": 1694905200000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "mrsazn",
+            "name": "Mr.Saz\u00f3n",
+            "bio": "Mr. Saz\u00f3n, also known as Saz\u00f3n, is a leading voice in the world of Web3 technology, with a focus on Web3 community and gaming/art. As a skilled artist and creative entrepreneur, he brings a unique perspective to his content, blending his knowledge of Web3 with his passion for gaming, art, and music!",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/748E522E-6992-44F8-A3E7-41C0E8837CB2_H1fX28Q.jpeg"
+        },
+        {
+            "id": "katrina_gamuedasmith",
+            "name": "Katrina Gamueda-Smith",
+            "bio": "Katrina is a co-founder of PizzaDAO and has been working in the Web3 space for several years as a builder and advisor onboarding individuals and Fortune500 brands.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/085C1992-C306-4B90-A3C9-7692475BFCD5_g7xZfaS.jpeg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/tokenizing_creativity.jpg"
 }

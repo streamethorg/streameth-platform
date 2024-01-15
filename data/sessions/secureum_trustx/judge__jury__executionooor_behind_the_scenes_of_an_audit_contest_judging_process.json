@@ -1,24 +1,24 @@
 {
-  "id": "judge__jury__executionooor_behind_the_scenes_of_an_audit_contest_judging_process",
-  "name": "Judge \u2013 Jury \u2013 Executionooor, Behind the scenes of an audit contest judging process",
-  "description": "",
-  "start": 1699963440000,
-  "end": 1699964400000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "hrishikesh_bhat",
-      "name": "Hrishikesh\nBhat",
-      "bio": "Independent Security Researcher",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hrishi.png"
-    }
-  ],
-  "playbackId": "30b12k2g2ktebdkd",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/judge__jury__executionooor_behind_the_scenes_of_an_audit_contest_judging_process.jpg",
-  "assetId": "30b17feb-78f5-4e44-aa2f-f983561f9f4d",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "judge__jury__executionooor_behind_the_scenes_of_an_audit_contest_judging_process",
+    "name": "Judge \u2013 Jury \u2013 Executionooor, Behind the scenes of an audit contest judging process",
+    "description": "",
+    "start": 1699963440000,
+    "end": 1699964400000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "hrishikesh_bhat",
+            "name": "Hrishikesh\nBhat",
+            "bio": "Independent Security Researcher",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Hrishi.png"
+        }
+    ],
+    "playbackId": "30b12k2g2ktebdkd",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/judge__jury__executionooor_behind_the_scenes_of_an_audit_contest_judging_process.jpg",
+    "assetId": "30b17feb-78f5-4e44-aa2f-f983561f9f4d",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }
