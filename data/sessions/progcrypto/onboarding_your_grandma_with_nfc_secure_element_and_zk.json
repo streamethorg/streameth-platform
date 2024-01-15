@@ -24,7 +24,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/93a6xojayq8k5go5/index.m3u8",
-    "playbackId": "93a6xojayq8k5go5",
     "eventId": "progcrypto",
     "track": "Cryptography in the Wild",
     "coverImage": "/sessions/progcrypto/onboarding_your_grandma_with_nfc_secure_element_and_zk_thumbnail.png",

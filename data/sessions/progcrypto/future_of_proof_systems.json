@@ -48,7 +48,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/59d0x1nl4yzdh4wu/index.m3u8",
-    "playbackId": "59d0x1nl4yzdh4wu",
     "eventId": "progcrypto",
     "track": "Libraries and Infrastructure",
     "coverImage": "/sessions/progcrypto/future_of_proof_systems_thumbnail.png",

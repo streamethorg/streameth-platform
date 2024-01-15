@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/361d7cbr1hbunm1e/index.m3u8",
-    "playbackId": "361d7cbr1hbunm1e",
     "eventId": "progcrypto",
     "track": "Developer Tools",
     "coverImage": "/sessions/progcrypto/enhancing_safety_and_security_with_circom_21_thumbnail.png",

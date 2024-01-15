@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/1624wmqscg7d3bk9/index.m3u8",
-    "playbackId": "1624wmqscg7d3bk9",
     "eventId": "progcrypto",
     "track": "Developer Tools",
     "coverImage": "/sessions/progcrypto/airscript_a_dsl_for_writing_air_constraints_thumbnail.png",

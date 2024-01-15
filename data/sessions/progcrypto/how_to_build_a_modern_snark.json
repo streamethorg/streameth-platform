@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/5d64ig8hveig6b9m/index.m3u8",
-    "playbackId": "5d64ig8hveig6b9m",
     "eventId": "progcrypto",
     "track": "Libraries and Infrastructure",
     "coverImage": "/sessions/progcrypto/how_to_build_a_modern_snark_thumbnail.png",

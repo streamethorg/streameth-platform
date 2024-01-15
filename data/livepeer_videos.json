@@ -1,5 +1,121 @@
 [
     {
+        "id": "556d52ff-6ddf-486e-9b0d-18720c81cee8",
+        "hash": null,
+        "name": "live-2024-01-08T16:43Z",
+        "size": 2723,
+        "source": {
+            "type": "recording",
+            "sessionId": "556d52ff-6ddf-486e-9b0d-18720c81cee8"
+        },
+        "status": {
+            "phase": "ready",
+            "updatedAt": 1704732943981
+        },
+        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
+        "createdAt": 1704732224776,
+        "videoSpec": {
+            "format": "hls",
+            "bitrate": 4000000,
+            "duration": 540.119
+        },
+        "playbackId": "556dsycyd55h3muq",
+        "downloadUrl": "https://lp-playback.com/hls/556dsycyd55h3muq/1080p0.mp4",
+        "playbackUrl": "https://lp-playback.com/hls/556dsycyd55h3muq/index.m3u8"
+    },
+    {
+        "id": "5dc63cd1-39e4-4868-ac79-eb678980f5b4",
+        "hash": null,
+        "name": "3_DolmaA_Bandana_Vivian Plasencia copy.mp4",
+        "size": 5154349219,
+        "source": {
+            "type": "directUpload"
+        },
+        "status": {
+            "phase": "ready",
+            "updatedAt": 1704711416774
+        },
+        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
+        "createdAt": 1704707294490,
+        "videoSpec": {
+            "format": "mp4",
+            "bitrate": 17578658,
+            "duration": 2345.16
+        },
+        "playbackId": "5dc6byu0ck0o9b2o",
+        "downloadUrl": "https://lp-playback.com/hls/5dc6byu0ck0o9b2o/video",
+        "playbackUrl": "https://lp-playback.com/hls/5dc6byu0ck0o9b2o/index.m3u8"
+    },
+    {
+        "id": "80d84582-500e-465a-954d-9b83ad8e82b2",
+        "hash": null,
+        "name": "4_DolmaA_Zero Knowledge Cryptography & ZK Co-processors_Florian Kluge.mp4",
+        "size": 1509962579,
+        "source": {
+            "type": "directUpload"
+        },
+        "status": {
+            "phase": "ready",
+            "updatedAt": 1704709007486
+        },
+        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
+        "createdAt": 1704707294680,
+        "videoSpec": {
+            "format": "mp4",
+            "bitrate": 3563104,
+            "duration": 3386.28
+        },
+        "playbackId": "80d84i0ho7cyqven",
+        "downloadUrl": "https://lp-playback.com/hls/80d84i0ho7cyqven/video",
+        "playbackUrl": "https://lp-playback.com/hls/80d84i0ho7cyqven/index.m3u8"
+    },
+    {
+        "id": "ddadda7f-c2c6-43c3-89e6-53015aa9caf5",
+        "hash": null,
+        "name": "5_Semaphore in a nutshell_Cedoor.mp4",
+        "size": 1338424606,
+        "source": {
+            "type": "directUpload"
+        },
+        "status": {
+            "phase": "ready",
+            "updatedAt": 1704708862484
+        },
+        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
+        "createdAt": 1704707295005,
+        "videoSpec": {
+            "format": "mp4",
+            "bitrate": 3294538,
+            "duration": 3245.96
+        },
+        "playbackId": "ddadbrydy05g7ym3",
+        "downloadUrl": "https://lp-playback.com/hls/ddadbrydy05g7ym3/video",
+        "playbackUrl": "https://lp-playback.com/hls/ddadbrydy05g7ym3/index.m3u8"
+    },
+    {
+        "id": "8efc0f72-6277-49b8-b649-b0a8fa9eeffd",
+        "hash": null,
+        "name": "2_DolmaA_Bandana_Vivian.mp4",
+        "size": 721074155,
+        "source": {
+            "type": "directUpload"
+        },
+        "status": {
+            "phase": "ready",
+            "updatedAt": 1704708255800
+        },
+        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
+        "createdAt": 1704707294187,
+        "videoSpec": {
+            "format": "mp4",
+            "bitrate": 2486219,
+            "duration": 2316.36
+        },
+        "playbackId": "8efcdtmd24o5qqvc",
+        "downloadUrl": "https://lp-playback.com/hls/8efcdtmd24o5qqvc/video",
+        "playbackUrl": "https://lp-playback.com/hls/8efcdtmd24o5qqvc/index.m3u8"
+    },
+    {
         "id": "a4ccb19c-78cc-4e91-8fab-7ac74fd2862f",
         "hash": null,
         "name": "swarm_winter_solstice||opening_speech_welcome_by_antonio",
@@ -24991,160 +25107,5 @@
         "playbackId": "bcb6wo1il275de6y",
         "downloadUrl": "https://lp-playback.com/hls/bcb6wo1il275de6y/video",
         "playbackUrl": "https://lp-playback.com/hls/bcb6wo1il275de6y/index.m3u8"
-    },
-    {
-        "id": "d09a552f-c16e-4aa6-8c34-7da3d32cf67b",
-        "hash": [
-            {
-                "hash": "2992e6c26672b404a82fed526b92ac63",
-                "algorithm": "md5"
-            },
-            {
-                "hash": "5d56a9c237ddd7251c8fd4d38eb851c26c7320936b0a9680eaceffd303f9f87e",
-                "algorithm": "sha256"
-            }
-        ],
-        "name": "TrustX_22-04_Ijzaal_6.mp4",
-        "size": 213376045,
-        "source": {
-            "type": "directUpload"
-        },
-        "status": {
-            "phase": "ready",
-            "updatedAt": 1692176472613
-        },
-        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
-        "createdAt": 1692176275050,
-        "videoSpec": {
-            "format": "mp4",
-            "duration": 289.4
-        },
-        "playbackId": "d09asyv52awqtpsc",
-        "downloadUrl": "https://lp-playback.com/hls/d09asyv52awqtpsc/video",
-        "playbackUrl": "https://lp-playback.com/hls/d09asyv52awqtpsc/index.m3u8"
-    },
-    {
-        "id": "c5ceba25-ddf2-410a-98f5-a07c4082f57a",
-        "hash": [
-            {
-                "hash": "767e278701574bee6fba62c607d59c09",
-                "algorithm": "md5"
-            },
-            {
-                "hash": "334f00d6ea54c951cc8ff010cb96e573aa42d910a9bc3c110a4e1720c9e3592c",
-                "algorithm": "sha256"
-            }
-        ],
-        "name": "TrustX_22-04_Ijzaal_10.mp4",
-        "size": 1089286386,
-        "source": {
-            "type": "directUpload"
-        },
-        "status": {
-            "phase": "ready",
-            "updatedAt": 1692176116482
-        },
-        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
-        "createdAt": 1692175300303,
-        "videoSpec": {
-            "format": "mp4",
-            "duration": 1549.08
-        },
-        "playbackId": "c5ce4nl2d0tybpxw",
-        "downloadUrl": "https://lp-playback.com/hls/c5ce4nl2d0tybpxw/video",
-        "playbackUrl": "https://lp-playback.com/hls/c5ce4nl2d0tybpxw/index.m3u8"
-    },
-    {
-        "id": "8a731a4d-26d9-4d2a-8191-3f21f714065f",
-        "hash": [
-            {
-                "hash": "df858b54d3a2768cf5d79a5295ad3e73",
-                "algorithm": "md5"
-            },
-            {
-                "hash": "1be93418fda1c9ec2c7e03c026689135fea7769d1fbf78858b81989b7df24b2a",
-                "algorithm": "sha256"
-            }
-        ],
-        "name": "TrustX_21-04_GroteZaal_1.mp4",
-        "size": 877857875,
-        "source": {
-            "type": "directUpload"
-        },
-        "status": {
-            "phase": "ready",
-            "updatedAt": 1692175727162
-        },
-        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
-        "createdAt": 1692175020116,
-        "videoSpec": {
-            "format": "mp4",
-            "duration": 1226.2
-        },
-        "playbackId": "8a7387az9jwgdejl",
-        "downloadUrl": "https://lp-playback.com/hls/8a7387az9jwgdejl/video",
-        "playbackUrl": "https://lp-playback.com/hls/8a7387az9jwgdejl/index.m3u8"
-    },
-    {
-        "id": "4bfbf55c-6ef9-41d2-ae33-dc52d5717a75",
-        "hash": [
-            {
-                "hash": "40468af628d6ba78bb6baff091f6e3f3",
-                "algorithm": "md5"
-            },
-            {
-                "hash": "dff7527449463c17e2fb526a1e2bb09c4a5b8403e4b5b453d7838146af137256",
-                "algorithm": "sha256"
-            }
-        ],
-        "name": "TrustX_21-04_GroteZaal_5.mp4",
-        "size": 956508253,
-        "source": {
-            "type": "directUpload"
-        },
-        "status": {
-            "phase": "ready",
-            "updatedAt": 1692174638991
-        },
-        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
-        "createdAt": 1692173805119,
-        "videoSpec": {
-            "format": "mp4",
-            "duration": 1169.32
-        },
-        "playbackId": "4bfb0go1pela278t",
-        "downloadUrl": "https://lp-playback.com/hls/4bfb0go1pela278t/video",
-        "playbackUrl": "https://lp-playback.com/hls/4bfb0go1pela278t/index.m3u8"
-    },
-    {
-        "id": "30220289-0344-4d65-b2fa-38bba4733ec2",
-        "hash": [
-            {
-                "hash": "f58f74335a3b63f9f72884a7ca235dc7",
-                "algorithm": "md5"
-            },
-            {
-                "hash": "3f4fed00cfc4f64af40d7d11affd53614b6914d82f27bca20a17faa56e455916",
-                "algorithm": "sha256"
-            }
-        ],
-        "name": "TrustX_21-04_GroteZaal_6.mp4",
-        "size": 1090399742,
-        "source": {
-            "type": "directUpload"
-        },
-        "status": {
-            "phase": "ready",
-            "updatedAt": 1692174414940
-        },
-        "userId": "05f04681-b600-4a9b-81ea-1f56e7871f04",
-        "createdAt": 1692173503109,
-        "videoSpec": {
-            "format": "mp4",
-            "duration": 1281.6
-        },
-        "playbackId": "30223z1xpp8ku6jj",
-        "downloadUrl": "https://lp-playback.com/hls/30223z1xpp8ku6jj/video",
-        "playbackUrl": "https://lp-playback.com/hls/30223z1xpp8ku6jj/index.m3u8"
     }
 ]

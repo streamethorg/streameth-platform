@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/010832li1msptw21/index.m3u8",
-    "playbackId": "010832li1msptw21",
     "eventId": "progcrypto",
     "track": "ZK and Blockchains / zkEVMs",
     "coverImage": "/sessions/progcrypto/scaling_data_and_compute_on_ethereum_with_the_axiom_zk_coprocessor_thumbnail.png",

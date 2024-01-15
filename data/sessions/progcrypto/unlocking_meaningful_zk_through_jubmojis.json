@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/5477f4q3rbuyuqqr/index.m3u8",
-    "playbackId": "5477f4q3rbuyuqqr",
     "eventId": "progcrypto",
     "track": "Cryptography in the Wild",
     "coverImage": "/sessions/progcrypto/unlocking_meaningful_zk_through_jubmojis_thumbnail.png",
