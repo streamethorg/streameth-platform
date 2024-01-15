@@ -1,7 +1,7 @@
-import { ISpeaker } from '@interfaces/speaker.interface';
+import { ISpeakerModel } from '@interfaces/speaker.interface';
 import { Schema, model } from 'mongoose';
 
-const SpeakerSchema = new Schema<ISpeaker>(
+const SpeakerSchema = new Schema<ISpeakerModel>(
   {
     name: { type: String, default: '', required: true },
     bio: { type: String, default: '', required: true },
@@ -17,5 +17,5 @@ const SpeakerSchema = new Schema<ISpeaker>(
     timestamps: true,
   },
 );
-const Speaker = model<ISpeaker>('Speaker', SpeakerSchema);
+const Speaker = model<ISpeakerModel>('Speaker', SpeakerSchema);
 export default Speaker;
