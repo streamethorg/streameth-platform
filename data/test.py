@@ -50,21 +50,22 @@ for event_name in os.listdir(SESSIONS_DIR):
                 with open(session_path, 'r') as file:
                     session = json.load(file)
                     playbackId = session.get('playbackId')
-                    print(session.get("assetId"))
-                    # If playbackId is not found, try extracting from PlaybackUrl
+                    # If playbackId is not found, try extracting from videoUrl
                     if not playbackId:
                         playbackUrl = session.get('videoUrl')
                         if playbackUrl:
                             playbackId = extract_playbackId(playbackUrl)
-                            print(playbackId)
-                    # Find corresponding video information
-                    if playbackId:
-                        matched_video = next((v for v in videos if v['playbackId'] == playbackId), None)
-                        if matched_video:
-                            session['assetId'] = matched_video['id']
-                            update_session_file(session_path, session)
-                    else:
-                        sessions_without_playbackId.append(session_file)
+                            if playbackId:
+                                session['playbackId'] = playbackId
+                                # Replace videoUrl with playbackId
+                                if 'videoUrl' in session:
+                                    del session['videoUrl']
+                                print("Session updated:",
+                                      session['id'], playbackId)
+                                update_session_file(session_path, session)
+                            else:
+                                sessions_without_playbackId.append(
+                                    session_file)
 
 # Log sessions without playbackId to a CSV file
 with open('sessions_without_playbackId.csv', 'w', newline='') as file:

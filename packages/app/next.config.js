@@ -22,7 +22,8 @@ let nextConfig = {
           value: 'watch.protocol.berlin',
         },
       ],
-      destination: 'https://watch.protocol.berlin/ethberlin/protocol_berg',
+      destination:
+        'https://watch.protocol.berlin/ethberlin/protocol_berg',
       permanent: true,
     },
     {
@@ -33,7 +34,8 @@ let nextConfig = {
           value: 'launch.scroll.io',
         },
       ],
-      destination: 'https://launch.scroll.io/scroll/scroll_announcement_stream',
+      destination:
+        'https://launch.scroll.io/scroll/scroll_announcement_stream',
       permanent: true,
     },
   ],
@@ -57,9 +59,28 @@ let nextConfig = {
           },
         ],
       },
+      {
+        source: '/',
+        headers: [
+          { key: 'Access-Control-Allow-Credentials', value: 'true' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value:
+              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+          },
+        ],
+      },
     ]
   },
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (
+    config,
+    { buildId, dev, isServer, defaultLoaders, webpack }
+  ) => {
     config.plugins.push(
       new webpack.DefinePlugin({
         'process.env.FLUENTFFMPEG_COV': false,
@@ -81,8 +102,7 @@ let nextConfig = {
         hostname: '*',
         port: '',
         pathname: '/**',
-      
-      }
+      },
     ],
   },
   staticPageGenerationTimeout: 1000,
