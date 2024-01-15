@@ -67,6 +67,8 @@ for event_name in os.listdir(SESSIONS_DIR):
                                 session['playbackId'] = playbackId
                                 update_session_file(session_path, session)
 
+                    # Remove videoUrl
+                    session.pop('playbackId', None)
                     # Find corresponding video information and update assetId
                     if playbackId:
                         matched_video = next(
@@ -75,9 +77,9 @@ for event_name in os.listdir(SESSIONS_DIR):
                             session['assetId'] = matched_video['id']
                             # Update the session file with changes
                             update_session_file(session_path, session)
+                        else:
+                            sessions_without_playbackId.append(session_file)
 
-                    if not playbackId:
-                        sessions_without_playbackId.append(session_file)
 
 # Log sessions without playbackId to a CSV file
 with open('sessions_without_playbackId.csv', 'w', newline='') as file:
