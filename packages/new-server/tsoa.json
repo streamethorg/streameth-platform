@@ -1,8 +1,9 @@
 {
     "entryFile": "src/app.ts",
     "noImplicitAdditionalProperties": "throw-on-extras",
-    "controllerPathGlobs": ["src/controllers/**/*.controller.ts"],
+    "controllerPathGlobs": ["src/controllers/**/*.controller.ts", "src/controllers/index.ts"],
     "spec": {
+      "name": "streameth-api",
       "outputDirectory": "src/swagger",
       "specVersion": 3
     },
