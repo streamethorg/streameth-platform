@@ -18,6 +18,7 @@ export interface EventPageProps {
   searchParams: {
     stage?: string
     date?: string
+    page?: number
   }
 }
 export interface SearchPageProps {

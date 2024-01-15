@@ -4,6 +4,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import useDebounce from '@/lib/hooks/useDebounce'
+
+interface IEventSearchResult {
+  id: string
+  name: string
+}
 export default function SearchBar(): JSX.Element {
   const { searchParams, handleTermChange: handleTermChangeOverload } =
     useSearchParams({
@@ -15,6 +20,9 @@ export default function SearchBar(): JSX.Element {
   )
   const [isOpened, setIsOpened] = useState<boolean>(false)
   const [searchResults, setSearchResults] = useState<string[]>([])
+  const [eventResults, setEventResults] = useState<
+    IEventSearchResult[]
+  >([])
   const debouncedSearchQuery = useDebounce(searchQuery, 500)
 
   const dropdownRef = useRef<HTMLDivElement>(null) // ref for the dropdown
@@ -25,10 +33,16 @@ export default function SearchBar(): JSX.Element {
       setIsLoading(true)
       fetch('/api/search?searchQuery=' + debouncedSearchQuery)
         .then((res) => res.json())
-        .then((data: string[]) => {
-          setSearchResults(data)
-          setIsLoading(false)
-        })
+        .then(
+          (data: {
+            sessions: string[]
+            events: IEventSearchResult[]
+          }) => {
+            setSearchResults(data.sessions)
+            setEventResults(data.events)
+            setIsLoading(false)
+          }
+        )
     }
   }, [debouncedSearchQuery])
 
@@ -52,6 +66,10 @@ export default function SearchBar(): JSX.Element {
   const handleTermChange = (term: string) => {
     window.location.href = '/archive?searchQuery=' + term
     //  handleTermChangeOverload(term)
+  }
+
+  const handleEventChange = (term: string) => {
+    window.location.href = '/archive?event=' + term
   }
 
   return (
@@ -80,20 +98,37 @@ export default function SearchBar(): JSX.Element {
             <div>Loading...</div>
           ) : (
             <div className="flex flex-col p-2">
-              {searchResults.length > 0 ? (
-                searchResults.map((result: string) => (
-                  <div
-                    onClick={() => {
-                      handleTermChange(result)
-                      setIsOpened(false)
-                    }}
-                    className="p-1 hover:bg-white hover:text-background"
-                    key={result}>
-                    {result}
-                  </div>
-                ))
-              ) : (
-                <div>No results</div>
+              {searchResults.length > 0 && (
+                <div className="mt-2">
+                  <div className="text font-bold">Videos</div>
+                  {searchResults.map((result: string) => (
+                    <div
+                      onClick={() => {
+                        handleTermChange(result)
+                        setIsOpened(false)
+                      }}
+                      className="p-1 hover:bg-white hover:text-background"
+                      key={result}>
+                      {result}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {eventResults.length > 0 && (
+                <div className="mt-2">
+                  <div className="text font-bold">Events</div>
+                  {eventResults.map((result: IEventSearchResult) => (
+                    <div
+                      onClick={() => {
+                        handleEventChange(result.id)
+                        setIsOpened(false)
+                      }}
+                      className="p-1 hover:bg-white hover:text-background"
+                      key={result.name}>
+                      {result.name}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           )}

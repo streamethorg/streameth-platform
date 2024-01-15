@@ -156,7 +156,8 @@ export async function fetchAllSessions({
 
   if (searchQuery) {
     const normalizedQuery = searchQuery.toLowerCase();
-    const fuzzySearch = new FuzzySearch(allSessions, ['event', 'name', 'speakers.name'], {
+    console.log(allSessions[0])
+    const fuzzySearch = new FuzzySearch(allSessions, ['eventId'], {
       caseSensitive: false,
     });
     

@@ -21,7 +21,7 @@ const Layout = async ({
     organization: params.organization,
   })
   return (
-    <div className="h-full flex flex-col  z-1 bg-accent min-h-screen ">
+    <div className="h-full flex flex-col  z-1 min-h-screen ">
       <Navbar {...navbarRoutes} />
 
       <main className={` flex w-full ml-auto lg:h-full flex-grow`}>
