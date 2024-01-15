@@ -15,6 +15,8 @@ LIVEPEER_RESPONSE_FILE = "livepeer_videos.json"  # File to store the API respons
 sessions_without_playbackId = []
 
 # Function to get video information from Livepeer API and save it
+
+
 def get_livepeer_videos():
     headers = {"Authorization": f"Bearer {API_KEY}"}
     response = requests.get(API_URL, headers=headers)
@@ -28,14 +30,19 @@ def get_livepeer_videos():
         return []
 
 # Function to update session file with assetId
+
+
 def update_session_file(file_path, updated_session):
     with open(file_path, 'w') as file:
         json.dump(updated_session, file, indent=4)
 
 # Function to extract playbackId from PlaybackUrl
+
+
 def extract_playbackId(url):
     match = re.search(r'/hls/(.*?)/index.m3u8', url)
     return match.group(1) if match else None
+
 
 # Load video information from Livepeer
 videos = get_livepeer_videos()
@@ -58,8 +65,6 @@ for event_name in os.listdir(SESSIONS_DIR):
                             if playbackId:
                                 session['playbackId'] = playbackId
                                 # Replace videoUrl with playbackId
-                                if 'videoUrl' in session:
-                                    del session['videoUrl']
                                 print("Session updated:",
                                       session['id'], playbackId)
                                 update_session_file(session_path, session)
