@@ -1,66 +1,72 @@
+import { StageDto } from '@dtos/stage.dto';
+import { IStage } from '@interfaces/stage.interface';
 import StageService from '@services/stage.service';
-import { SendApiResponse } from '@utils/api.response';
-import { Request, Response, NextFunction } from 'express';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Path,
+  Post,
+  Put,
+  Route,
+  SuccessResponse,
+  Tags,
+} from 'tsoa';
 
-export default class StageController {
+@Tags('Stage')
+@Route('stages')
+export class StageController extends Controller {
   private stageService = new StageService();
-  createStage = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const stage = await this.stageService.create(req.body);
-      return SendApiResponse(res, 201, 'stage created', stage);
-    } catch (e) {
-      next(e);
-    }
-  };
 
-  editStage = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const stage = await this.stageService.update(req.params.id, req.body);
-      return SendApiResponse(res, 200, 'stage updated', stage);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @Post()
+  async createStage(
+    @Body() body: StageDto,
+  ): Promise<IStandardResponse<IStage>> {
+    const stage = await this.stageService.create(body);
+    return SendApiResponse('stage created', stage);
+  }
 
-  getStageById = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const stage = await this.stageService.get(req.params.id);
-      return SendApiResponse(res, 200, 'stage fetched', stage);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Put('{stageId}')
+  async editStage(
+    @Path() stageId: string,
+    @Body() body: StageDto,
+  ): Promise<IStandardResponse<IStage>> {
+    const stage = await this.stageService.update(stageId, body);
+    return SendApiResponse('stage updated', stage);
+  }
 
-  getAllStages = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const stages = await this.stageService.getAll();
-      return SendApiResponse(res, 200, 'stages fetched', stages);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get('{stageId}')
+  async getStageById(
+    @Path() stageId: string,
+  ): Promise<IStandardResponse<IStage>> {
+    const stage = await this.stageService.get(stageId);
+    return SendApiResponse('stage fetched', stage);
+  }
 
-  getAllStagesForEvent = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const stages = await this.stageService.findAllStagesForEvent(
-        req.params.id,
-      );
-      return SendApiResponse(res, 200, 'stages fetched', stages);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get()
+  async getAllStages(): Promise<IStandardResponse<Array<IStage>>> {
+    const stages = await this.stageService.getAll();
+    return SendApiResponse('stages fetched', stages);
+  }
 
-  deleteStage = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const stage = await this.stageService.deleteOne(req.params.id);
-      return SendApiResponse(res, 200, 'deleted', stage);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get('/event/{eventId}')
+  async getAllStagesForEvent(
+    eventId: string,
+  ): Promise<IStandardResponse<Array<IStage>>> {
+    const stages = await this.stageService.findAllStagesForEvent(eventId);
+    return SendApiResponse('stages fetched', stages);
+  }
+
+  @SuccessResponse('200')
+  @Delete('{stageId}')
+  async deleteStage(@Path() stageId: string): Promise<IStandardResponse<void>> {
+    const stage = await this.stageService.deleteOne(stageId);
+    return SendApiResponse('deleted', stage);
+  }
 }
