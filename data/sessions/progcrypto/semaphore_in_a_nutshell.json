@@ -19,5 +19,6 @@
     "videoUrl": "https://lp-playback.com/hls/ddadbrydy05g7ym3/index.m3u8",
     "eventId": "progcrypto",
     "track": "Developer Tools",
-    "coverImage": "/sessions/progcrypto/semaphore_in_a_nutshell_thumbnail.png"
+    "coverImage": "/sessions/progcrypto/semaphore_in_a_nutshell_thumbnail.png",
+    "assetId": "ddadda7f-c2c6-43c3-89e6-53015aa9caf5"
 }

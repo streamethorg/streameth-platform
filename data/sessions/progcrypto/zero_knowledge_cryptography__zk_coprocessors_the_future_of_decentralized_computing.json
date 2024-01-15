@@ -27,5 +27,6 @@
     "videoUrl": "https://lp-playback.com/hls/80d84i0ho7cyqven/index.m3u8",
     "eventId": "progcrypto",
     "track": "ZK and Blockchains / zkEVMs",
-    "coverImage": "/sessions/progcrypto/zero_knowledge_cryptography__zk_coprocessors_the_future_of_decentralized_computing_thumbnail.png"
+    "coverImage": "/sessions/progcrypto/zero_knowledge_cryptography__zk_coprocessors_the_future_of_decentralized_computing_thumbnail.png",
+    "assetId": "80d84582-500e-465a-954d-9b83ad8e82b2"
 }
