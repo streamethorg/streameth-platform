@@ -23,5 +23,6 @@
     "videoUrl": "https://lp-playback.com/hls/a6f249dx5mf8gzan/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/retroactive_public_goods_funding_2_years_in.jpg",
-    "assetId": "a6f22cc7-b416-45c4-baae-00eea4414df9"
+    "assetId": "a6f22cc7-b416-45c4-baae-00eea4414df9",
+    "playbackId": "a6f249dx5mf8gzan"
 }

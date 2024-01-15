@@ -22,5 +22,6 @@
     "videoUrl": "https://lp-playback.com/hls/61aaqs01039w7dy1/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/funding_ethereums_core_protocol_work.jpg",
-    "assetId": "61aa123e-8e97-45b4-a3b5-2a51520002fa"
+    "assetId": "61aa123e-8e97-45b4-a3b5-2a51520002fa",
+    "playbackId": "61aaqs01039w7dy1"
 }

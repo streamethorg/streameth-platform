@@ -23,5 +23,6 @@
     "videoUrl": "https://lp-playback.com/hls/09ba7gilhz0mntdc/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/dialing_into_the_future_sustainable_funding__value_synergy_in_open_source.jpg",
-    "assetId": "09ba21fe-5dfb-489c-bac9-d5d2a2cfa29d"
+    "assetId": "09ba21fe-5dfb-489c-bac9-d5d2a2cfa29d",
+    "playbackId": "09ba7gilhz0mntdc"
 }

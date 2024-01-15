@@ -21,5 +21,6 @@
     "videoUrl": "https://lp-playback.com/hls/58bftg92t20khznw/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/making_or_breaking_the_stablecoin_market.jpg",
-    "assetId": "58bfec3c-2c0d-40f3-85d3-28ec42993379"
+    "assetId": "58bfec3c-2c0d-40f3-85d3-28ec42993379",
+    "playbackId": "58bftg92t20khznw"
 }

@@ -39,5 +39,6 @@
     "videoUrl": "https://lp-playback.com/hls/d85dgwe6efws09x7/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/web3_work_the_contributors_perspective.jpg",
-    "assetId": "d85db598-30d7-4705-ab5d-43ab61d9ebf3"
+    "assetId": "d85db598-30d7-4705-ab5d-43ab61d9ebf3",
+    "playbackId": "d85dgwe6efws09x7"
 }

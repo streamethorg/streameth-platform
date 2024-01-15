@@ -23,5 +23,6 @@
     "videoUrl": "https://lp-playback.com/hls/5c706vlmsyaofrvn/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/gitcoins_allo_protocol_empowering_communities_to_invest_in_their_future.jpg",
-    "assetId": "5c70bdf0-c787-4b74-873c-a87fdeaac764"
+    "assetId": "5c70bdf0-c787-4b74-873c-a87fdeaac764",
+    "playbackId": "5c706vlmsyaofrvn"
 }
