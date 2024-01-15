@@ -1,19 +1,19 @@
 {
-    "id": "nova__ivc_repl",
-    "name": "Nova / IVC REPL",
-    "description": "",
-    "start": "2023-04-21T14:30:00.000Z",
-    "end": "2023-04-21T15:00:00.000Z",
-    "stageId": "ballroom",
-    "speakers": [
-        {
-            "id": "ivan_chub",
-            "name": "Ivan Chub",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__zksync"
-        }
-    ],
-    "playbackId": "419cklna51b1ef5u",
-    "eventId": "zuzalu_montenegro_2023__zksync",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "nova__ivc_repl",
+  "name": "Nova / IVC REPL",
+  "description": "",
+  "start": "2023-04-21T14:30:00.000Z",
+  "end": "2023-04-21T15:00:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "ivan_chub",
+      "name": "Ivan Chub",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
+  "playbackId": "419cklna51b1ef5u",
+  "eventId": "zuzalu_montenegro_2023__zksync",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

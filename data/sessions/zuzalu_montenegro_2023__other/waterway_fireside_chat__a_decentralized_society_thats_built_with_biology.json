@@ -1,25 +1,25 @@
 {
-    "id": "waterway_fireside_chat__a_decentralized_society_thats_built_with_biology",
-    "name": "Waterway Fireside Chat - A Decentralized Society That\u2019s Built with Biology",
-    "description": "The video features a speaker discussing the potential of a \"bionet\" - a networked biotechnology that enables people to grow solutions where they are. The speaker reflects on the idea that all atoms are local in biology, and how this could be a strategic alliance between biology and democracy. The speaker also discusses examples of bioengineering, such as using yeast cells to produce essential medical ingredients, and highlights the need for a networked biotechnology that is not currently being developed. The video ends with a reference to the Black Panther Party's public health clinics and their use of genomic diagnostic testing.",
-    "start": "2023-04-01T14:00:00.000Z",
-    "end": "2023-04-01T15:00:00.000Z",
-    "stageId": "ballroom",
-    "speakers": [
-        {
-            "id": "vitalik_buterin",
-            "name": "Vitalik Buterin",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__other"
-        },
-        {
-            "id": "drew_endy",
-            "name": "Drew Endy",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__other"
-        }
-    ],
-    "playbackId": "96daut16x6qr2iu7",
-    "eventId": "zuzalu_montenegro_2023__other",
-    "coverImage": "/sessions/zuzalu_montenegro_2023__other/waterway_fireside_chat__a_decentralized_society_thats_built_with_biology.jpg"
+  "id": "waterway_fireside_chat__a_decentralized_society_thats_built_with_biology",
+  "name": "Waterway Fireside Chat - A Decentralized Society That\u2019s Built with Biology",
+  "description": "The video features a speaker discussing the potential of a \"bionet\" - a networked biotechnology that enables people to grow solutions where they are. The speaker reflects on the idea that all atoms are local in biology, and how this could be a strategic alliance between biology and democracy. The speaker also discusses examples of bioengineering, such as using yeast cells to produce essential medical ingredients, and highlights the need for a networked biotechnology that is not currently being developed. The video ends with a reference to the Black Panther Party's public health clinics and their use of genomic diagnostic testing.",
+  "start": "2023-04-01T14:00:00.000Z",
+  "end": "2023-04-01T15:00:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    },
+    {
+      "id": "drew_endy",
+      "name": "Drew Endy",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    }
+  ],
+  "playbackId": "96daut16x6qr2iu7",
+  "eventId": "zuzalu_montenegro_2023__other",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__other/waterway_fireside_chat__a_decentralized_society_thats_built_with_biology.jpg"
 }

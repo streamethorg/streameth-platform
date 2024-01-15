@@ -1,20 +1,20 @@
 {
-    "id": "unlocking_prosperity_in_africa_business_model_considerations_for_building_innovative_web3_solutions",
-    "name": "Unlocking prosperity in Africa; Business model considerations for building innovative web3 solutions",
-    "description": "",
-    "start": 1693562700000,
-    "end": 1693566000000,
-    "stageId": "workshop_room_1",
-    "speakers": [
-        {
-            "id": "toyin_bamidele",
-            "name": "Toyin Bamidele",
-            "bio": "Operations Lead/Partner",
-            "eventId": "web3_lagos_conference_2023",
-            "twitter": "@ConsonanceClub"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "web3_lagos_conference_2023",
-    "coverImage": "/sessions/web3_lagos_conference_2023/unlocking_prosperity_in_africa_business_model_considerations_for_building_innovative_web3_solutions.jpg"
+  "id": "unlocking_prosperity_in_africa_business_model_considerations_for_building_innovative_web3_solutions",
+  "name": "Unlocking prosperity in Africa; Business model considerations for building innovative web3 solutions",
+  "description": "",
+  "start": 1693562700000,
+  "end": 1693566000000,
+  "stageId": "workshop_room_1",
+  "speakers": [
+    {
+      "id": "toyin_bamidele",
+      "name": "Toyin Bamidele",
+      "bio": "Operations Lead/Partner",
+      "eventId": "web3_lagos_conference_2023",
+      "twitter": "@ConsonanceClub"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/unlocking_prosperity_in_africa_business_model_considerations_for_building_innovative_web3_solutions.jpg"
 }

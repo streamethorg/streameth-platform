@@ -1,19 +1,19 @@
 {
-    "id": "soulbound_reputation_tokens_to_the_rescue",
-    "name": "\"Soulbound Reputation Tokens to the Rescue\"",
-    "description": "In this video, the speaker discusses the challenges faced by decentralized communities and the need for transparent and sustainable funding. They explain that while decentralized autonomous organizations (DAOs) offer a solution to funding decentralized communities, there are still several problems to overcome. The first challenge is finding the balance between coordination and decentralization within DAOs. The speaker also highlights the difficulties of maintaining participation and building a community within DAOs. Additionally, they emphasize the lack of legacy infrastructure in DAOs, which makes it challenging for individuals to connect with the traditional financial system. The speaker argues that in order to create a viable future, technology needs to be built in collaboration with those who are currently excluded from the legacy system. They introduce Open Collective as a platform that provides transparent management of funds for decentralized fiat communities, offering tax deductibility for donors and employment opportunities for community members. The speaker concludes by emphasizing the importance of co-creating and co-designing collective technology with grassroots culture and ensuring shared and participatory governance.",
-    "start": "2023-07-15T12:20:00.000Z",
-    "end": "2023-07-15T12:40:00.000Z",
-    "stageId": "farabeuf_amphitheater",
-    "speakers": [
-        {
-            "id": "omoju_miller",
-            "name": "Omoju Miller",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        }
-    ],
-    "playbackId": "ae2280vhazwf3t8y",
-    "eventId": "funding_the_commons_paris_2023",
-    "coverImage": "/sessions/funding_the_commons_paris_2023/soulbound_reputation_tokens_to_the_rescue.jpg"
+  "id": "soulbound_reputation_tokens_to_the_rescue",
+  "name": "\"Soulbound Reputation Tokens to the Rescue\"",
+  "description": "In this video, the speaker discusses the challenges faced by decentralized communities and the need for transparent and sustainable funding. They explain that while decentralized autonomous organizations (DAOs) offer a solution to funding decentralized communities, there are still several problems to overcome. The first challenge is finding the balance between coordination and decentralization within DAOs. The speaker also highlights the difficulties of maintaining participation and building a community within DAOs. Additionally, they emphasize the lack of legacy infrastructure in DAOs, which makes it challenging for individuals to connect with the traditional financial system. The speaker argues that in order to create a viable future, technology needs to be built in collaboration with those who are currently excluded from the legacy system. They introduce Open Collective as a platform that provides transparent management of funds for decentralized fiat communities, offering tax deductibility for donors and employment opportunities for community members. The speaker concludes by emphasizing the importance of co-creating and co-designing collective technology with grassroots culture and ensuring shared and participatory governance.",
+  "start": "2023-07-15T12:20:00.000Z",
+  "end": "2023-07-15T12:40:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "omoju_miller",
+      "name": "Omoju Miller",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "playbackId": "ae2280vhazwf3t8y",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/soulbound_reputation_tokens_to_the_rescue.jpg"
 }

@@ -1,24 +1,24 @@
 {
-    "id": "security_of_stablecoins_stabilization_algorithms",
-    "name": "Security of Stablecoins Stabilization Algorithms",
-    "description": "",
-    "start": 1699959600000,
-    "end": 1699960560000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "dmitry_zakharov",
-            "name": "Dmitry\nZakharov",
-            "bio": "CTO\nMixBytes",
-            "eventId": "secureum_trustx",
-            "twitter": "",
-            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Dmitry.png"
-        }
-    ],
-    "playbackId": "6c52yv2nijpn504l",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/security_of_stablecoins_stabilization_algorithms.jpg",
-    "assetId": "6c52af99-1252-4a11-9039-441f8130aa09",
-    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-    "videoType": "clip"
+  "id": "security_of_stablecoins_stabilization_algorithms",
+  "name": "Security of Stablecoins Stabilization Algorithms",
+  "description": "",
+  "start": 1699959600000,
+  "end": 1699960560000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "dmitry_zakharov",
+      "name": "Dmitry\nZakharov",
+      "bio": "CTO\nMixBytes",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Dmitry.png"
+    }
+  ],
+  "playbackId": "6c52yv2nijpn504l",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/security_of_stablecoins_stabilization_algorithms.jpg",
+  "assetId": "6c52af99-1252-4a11-9039-441f8130aa09",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
 }

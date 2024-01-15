@@ -1,12 +1,12 @@
 {
-    "id": "lunch_break",
-    "name": "Lunch Break",
-    "description": "",
-    "start": 1700127600000,
-    "end": 1700130300000,
-    "stageId": "uskudar_2",
-    "speakers": [],
-    "playbackId": "",
-    "eventId": "solidity_summit",
-    "coverImage": "/sessions/solidity_summit/lunch_break_thumbnail.png"
+  "id": "lunch_break",
+  "name": "Lunch Break",
+  "description": "",
+  "start": 1700127600000,
+  "end": 1700130300000,
+  "stageId": "uskudar_2",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/lunch_break_thumbnail.png"
 }

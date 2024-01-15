@@ -1,31 +1,31 @@
 {
-    "id": "funding_the_commons_an_incubation_ecosystem_for_public_goods_funding_infrastructure",
-    "name": "Funding the Commons, an Incubation Ecosystem for Public Goods Funding Infrastructure",
-    "description": "This video is a summary of the Funding the Commons Paris event. The event aims to build a community focused on funding public goods and creating sustainable models for support. It includes workshops, an art gallery, and a parallel conference hosted by the Forsyte Institute. The video introduces David Casey as the new leader of Funding the Commons and mentions future plans for hackathons, residencies, and conferences in Berlin and Taipei. Partnerships with organizations like Gitcoin and the Gollem Foundation are highlighted. The event is taking place at Sorbonne University and there are plans for a quadratic funding round with Artisan Funds.",
-    "start": "2023-07-15T07:45:00.000Z",
-    "end": "2023-07-15T08:00:00.000Z",
-    "stageId": "farabeuf_amphitheater",
-    "speakers": [
-        {
-            "id": "evan_miyazono",
-            "name": "Evan Miyazono",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        },
-        {
-            "id": "david_casey",
-            "name": "David Casey",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        },
-        {
-            "id": "matt_frehlich",
-            "name": "Matt Frehlich",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        }
-    ],
-    "playbackId": "c11eq8h3yerdrtd1",
-    "eventId": "funding_the_commons_paris_2023",
-    "coverImage": "/sessions/funding_the_commons_paris_2023/funding_the_commons_an_incubation_ecosystem_for_public_goods_funding_infrastructure.jpg"
+  "id": "funding_the_commons_an_incubation_ecosystem_for_public_goods_funding_infrastructure",
+  "name": "Funding the Commons, an Incubation Ecosystem for Public Goods Funding Infrastructure",
+  "description": "This video is a summary of the Funding the Commons Paris event. The event aims to build a community focused on funding public goods and creating sustainable models for support. It includes workshops, an art gallery, and a parallel conference hosted by the Forsyte Institute. The video introduces David Casey as the new leader of Funding the Commons and mentions future plans for hackathons, residencies, and conferences in Berlin and Taipei. Partnerships with organizations like Gitcoin and the Gollem Foundation are highlighted. The event is taking place at Sorbonne University and there are plans for a quadratic funding round with Artisan Funds.",
+  "start": "2023-07-15T07:45:00.000Z",
+  "end": "2023-07-15T08:00:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "evan_miyazono",
+      "name": "Evan Miyazono",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    },
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    },
+    {
+      "id": "matt_frehlich",
+      "name": "Matt Frehlich",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "playbackId": "c11eq8h3yerdrtd1",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/funding_the_commons_an_incubation_ecosystem_for_public_goods_funding_infrastructure.jpg"
 }

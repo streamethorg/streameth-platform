@@ -1,19 +1,19 @@
 {
-    "id": "we_can_build_more_than_just_protocols",
-    "name": "We can build more than just protocols!",
-    "description": "-",
-    "start": 1699875000000,
-    "end": 1699876800000,
-    "stageId": "connie",
-    "speakers": [
-        {
-            "id": "ice_bear",
-            "name": "Ice Bear",
-            "bio": "Geode\nFounder",
-            "eventId": "staking_gathering_2023"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/we_can_build_more_than_just_protocols.jpg"
+  "id": "we_can_build_more_than_just_protocols",
+  "name": "We can build more than just protocols!",
+  "description": "-",
+  "start": 1699875000000,
+  "end": 1699876800000,
+  "stageId": "connie",
+  "speakers": [
+    {
+      "id": "ice_bear",
+      "name": "Ice Bear",
+      "bio": "Geode\nFounder",
+      "eventId": "staking_gathering_2023"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/we_can_build_more_than_just_protocols.jpg"
 }

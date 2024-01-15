@@ -1,21 +1,21 @@
 {
-    "id": "enabling_emergent_behavior_in_fully_onchain_games",
-    "name": "Enabling Emergent Behavior in Fully Onchain Games",
-    "description": "From Warcraft III to Skyrim to Minecraft, engaged creator communities have proven to be a powerful catalyst for embeliishing game worlds with emergent behavior. However, as games shift towards running entirely onchain, active participation in worldbuilding becomes more technical and challenging. What then is necessary to enable emergent behavior in fully onchain games?",
-    "start": 1700050500000,
-    "end": 1700051400000,
-    "stageId": "emirgan_1",
-    "speakers": [
-        {
-            "id": "gabe_rudich",
-            "name": "Gabe Rudich",
-            "bio": "Gabe Rudich heads ops and product at Cartridge, a New York-based company building gaming infrastructure on Starknet and onchain games with Dojo.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@gabe_rudich",
-            "photo": "https://drive.google.com/uc?id=1Yg8Jb6rNxxThclo-nnKg3UYf9zeBqg3r"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/enabling_emergent_behavior_in_fully_onchain_games_thumbnail.png"
+  "id": "enabling_emergent_behavior_in_fully_onchain_games",
+  "name": "Enabling Emergent Behavior in Fully Onchain Games",
+  "description": "From Warcraft III to Skyrim to Minecraft, engaged creator communities have proven to be a powerful catalyst for embeliishing game worlds with emergent behavior. However, as games shift towards running entirely onchain, active participation in worldbuilding becomes more technical and challenging. What then is necessary to enable emergent behavior in fully onchain games?",
+  "start": 1700050500000,
+  "end": 1700051400000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "gabe_rudich",
+      "name": "Gabe Rudich",
+      "bio": "Gabe Rudich heads ops and product at Cartridge, a New York-based company building gaming infrastructure on Starknet and onchain games with Dojo.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@gabe_rudich",
+      "photo": "https://drive.google.com/uc?id=1Yg8Jb6rNxxThclo-nnKg3UYf9zeBqg3r"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/enabling_emergent_behavior_in_fully_onchain_games_thumbnail.png"
 }

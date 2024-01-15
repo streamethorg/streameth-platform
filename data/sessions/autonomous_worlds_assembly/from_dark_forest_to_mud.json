@@ -1,24 +1,24 @@
 {
-    "id": "from_dark_forest_to_mud",
-    "name": "From Dark Forest to MUD",
-    "description": "We will take a brief look at the development process of Dark Forest, the first fully onchain strategy game, through the lens of today's toolchains and infrastructure: MUD, the rollup stack, modern development environments, indexers, and more. During the process of developing games on EVM \u201cbare metal\u201d over four years ago, we compiled a wishlist of developer tools and infrastructure. In this session, we explore which of these needs have been realised since then and consider what this process might reveal about the future of tooling for onchain and cryptography-based applications. ",
-    "start": 1700044200000,
-    "end": 1700045100000,
-    "stageId": "emirgan_2",
-    "speakers": [
-        {
-            "id": "gubsheep",
-            "name": "Gubsheep",
-            "bio": "Gubsheep is the cofounder of 0xPARC.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@gupsheep",
-            "photo": "https://drive.google.com/uc?id=1hCQ9FQavkeHGC0MIEfsKj65QqOriMw-6"
-        }
-    ],
-    "playbackId": "fb06uzz9knfm6wlp",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/from_dark_forest_to_mud_thumbnail.png",
-    "assetId": "fb060a00-c43d-4ed9-a687-d5e5bb7f57fb",
-    "sourceId": "4955fcec-2ee9-4fc9-aa9e-16ab5baa551f",
-    "videoType": "clip"
+  "id": "from_dark_forest_to_mud",
+  "name": "From Dark Forest to MUD",
+  "description": "We will take a brief look at the development process of Dark Forest, the first fully onchain strategy game, through the lens of today's toolchains and infrastructure: MUD, the rollup stack, modern development environments, indexers, and more. During the process of developing games on EVM \u201cbare metal\u201d over four years ago, we compiled a wishlist of developer tools and infrastructure. In this session, we explore which of these needs have been realised since then and consider what this process might reveal about the future of tooling for onchain and cryptography-based applications. ",
+  "start": 1700044200000,
+  "end": 1700045100000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "gubsheep",
+      "name": "Gubsheep",
+      "bio": "Gubsheep is the cofounder of 0xPARC.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@gupsheep",
+      "photo": "https://drive.google.com/uc?id=1hCQ9FQavkeHGC0MIEfsKj65QqOriMw-6"
+    }
+  ],
+  "playbackId": "fb06uzz9knfm6wlp",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/from_dark_forest_to_mud_thumbnail.png",
+  "assetId": "fb060a00-c43d-4ed9-a687-d5e5bb7f57fb",
+  "sourceId": "4955fcec-2ee9-4fc9-aa9e-16ab5baa551f",
+  "videoType": "clip"
 }

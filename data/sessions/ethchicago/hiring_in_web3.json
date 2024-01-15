@@ -1,27 +1,27 @@
 {
-    "id": "hiring_in_web3",
-    "name": "Hiring in Web3",
-    "description": "Hiring in Web3.0",
-    "start": 1694971800000,
-    "end": 1694973600000,
-    "stageId": "east_room__main_",
-    "speakers": [
-        {
-            "id": "lea_thompson_girl_gone_crypto",
-            "name": "Lea Thompson (Girl Gone Crypto)",
-            "bio": "Influencer and content creator in the cryptocurrency industry, Lea helps people go from confused to confident when learning about Bitcoin, cryptocurrency, blockchain technology, web3, and NFT\u2019s. She\u2019s been featured in Bloomberg, The Times, Vice, Time Magazine, NY Post, ELLE, Vogue Business, a Super Bowl 2020 commercial and more. She\u2019s best known for her weekly news recap video called The Crypto Minute.",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/new_headshot_g0rLmUZ.jpg"
-        },
-        {
-            "id": "emily_landon_the_crypto_recruiter",
-            "name": "Emily Landon The Crypto Recruiter",
-            "bio": "Emily Landon, better known as 'The Crypto Recruiter' has an intense passion for the blockchain, gaming, AI, compliance, and crypto world and helping people get jobs in the space. With 7 years of recruitment experience under her belt, including 4 years in the thrilling web3 ecosystem, She\u2019s orchestrated the perfect matches for over 275 talented individuals in crypto jobs.\r\n\r\nShe\u2019s not your average recruiter; She\u2019s on a mission to shape and grow cultures, not just teams and help people find the RIGHT fit, not just any old job. Her style? Think positive, bubbly, and refreshingly honest. You'll always get the unfiltered truth and transparent direction.\r\n\r\nWhy did she dive into the world of crypto recruiting? It was a New Year's resolution that transformed into a 20 person team, 36k followers and over a 120k candidates reach. She firmly believes that recruiting can be an enjoyable journey when paired with the right recruiter. Quality over quantity she\u2019s here to help you discover remarkable opportunities, not just any old job.\r\n\r\nReady to explore new opportunities? Connect with her on LinkedIn: http://linkedin.com/in/thecryptorecruiter",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/IMG_2344_TuEd305.jpeg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/hiring_in_web3.jpg"
+  "id": "hiring_in_web3",
+  "name": "Hiring in Web3",
+  "description": "Hiring in Web3.0",
+  "start": 1694971800000,
+  "end": 1694973600000,
+  "stageId": "east_room__main_",
+  "speakers": [
+    {
+      "id": "lea_thompson_girl_gone_crypto",
+      "name": "Lea Thompson (Girl Gone Crypto)",
+      "bio": "Influencer and content creator in the cryptocurrency industry, Lea helps people go from confused to confident when learning about Bitcoin, cryptocurrency, blockchain technology, web3, and NFT\u2019s. She\u2019s been featured in Bloomberg, The Times, Vice, Time Magazine, NY Post, ELLE, Vogue Business, a Super Bowl 2020 commercial and more. She\u2019s best known for her weekly news recap video called The Crypto Minute.",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/new_headshot_g0rLmUZ.jpg"
+    },
+    {
+      "id": "emily_landon_the_crypto_recruiter",
+      "name": "Emily Landon The Crypto Recruiter",
+      "bio": "Emily Landon, better known as 'The Crypto Recruiter' has an intense passion for the blockchain, gaming, AI, compliance, and crypto world and helping people get jobs in the space. With 7 years of recruitment experience under her belt, including 4 years in the thrilling web3 ecosystem, She\u2019s orchestrated the perfect matches for over 275 talented individuals in crypto jobs.\r\n\r\nShe\u2019s not your average recruiter; She\u2019s on a mission to shape and grow cultures, not just teams and help people find the RIGHT fit, not just any old job. Her style? Think positive, bubbly, and refreshingly honest. You'll always get the unfiltered truth and transparent direction.\r\n\r\nWhy did she dive into the world of crypto recruiting? It was a New Year's resolution that transformed into a 20 person team, 36k followers and over a 120k candidates reach. She firmly believes that recruiting can be an enjoyable journey when paired with the right recruiter. Quality over quantity she\u2019s here to help you discover remarkable opportunities, not just any old job.\r\n\r\nReady to explore new opportunities? Connect with her on LinkedIn: http://linkedin.com/in/thecryptorecruiter",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/IMG_2344_TuEd305.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/hiring_in_web3.jpg"
 }

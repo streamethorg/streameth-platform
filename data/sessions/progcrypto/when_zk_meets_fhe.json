@@ -1,22 +1,22 @@
 {
-    "id": "when_zk_meets_fhe",
-    "name": "When ZK meets FHE",
-    "description": "A gentle introduction to why applied FHE requires ZK and a library to do that",
-    "start": 1700209800000,
-    "end": 1700210700000,
-    "stageId": "dolmabahce_b__c",
-    "speakers": [
-        {
-            "id": "enricoeth",
-            "name": "enrico.eth",
-            "bio": "Technical Lead at Summa @PSE - Proof of Solvency for Centralized Exchanges \n\nPreviously @PolygonID",
-            "eventId": "progcrypto",
-            "twitter": "",
-            "photo": "https://drive.google.com/file/d/1Z-bwXMF15UvUmD8VQGRlvL0h3FpgxUiR/view"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "progcrypto",
-    "track": "Next Gen Applied Crypto",
-    "coverImage": "/sessions/progcrypto/when_zk_meets_fhe_thumbnail.png"
+  "id": "when_zk_meets_fhe",
+  "name": "When ZK meets FHE",
+  "description": "A gentle introduction to why applied FHE requires ZK and a library to do that",
+  "start": 1700209800000,
+  "end": 1700210700000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "enricoeth",
+      "name": "enrico.eth",
+      "bio": "Technical Lead at Summa @PSE - Proof of Solvency for Centralized Exchanges \n\nPreviously @PolygonID",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1Z-bwXMF15UvUmD8VQGRlvL0h3FpgxUiR/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Next Gen Applied Crypto",
+  "coverImage": "/sessions/progcrypto/when_zk_meets_fhe_thumbnail.png"
 }

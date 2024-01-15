@@ -1,20 +1,20 @@
 {
-    "id": "christina_sciotto__introduction_to_the_day",
-    "name": "Christina Sciotto | Introduction to the Day",
-    "description": "NEED",
-    "start": 1694959200000,
-    "end": 1694960100000,
-    "stageId": "lincoln_stage__builder__legal",
-    "speakers": [
-        {
-            "id": "christina_sciotto",
-            "name": "Christina Sciotto",
-            "bio": "Christina Sciotto currently serves as interim Executive Director of the Global DCA, a self-regulatory association for the digital asset and cryptocurrency industry established to help guide the evolution of the digital asset marketplace. \r\n\r\nChristina is an expert in market structure and trading technologies. She is cited as a contributor to Trading and Exchanges: Market Microstructure for Practitioners by Larry Harris as well as an inventor on two patents relating to software trading platforms. She has more than 20 years of experience in financial services focusing on matching engines, trading platforms, and more recently, blockchain technologies. She has held senior Product Management and Business Development positions at BofA/Merrill Lynch, Lehman Brothers, Hehmeyer, Celsius, and Floating Point Group. She was also a member of FIA's Principal Trading Group, and a board member of the Commodity Market Council, and the Chicago Children's Choir.  \r\n\r\nChristina holds a B.A. in Economics from Cleveland State University and resides in Chicago with her husband and daughter.",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/IMG_8843_WCDEil9.jpg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/christina_sciotto__introduction_to_the_day.jpg"
+  "id": "christina_sciotto__introduction_to_the_day",
+  "name": "Christina Sciotto | Introduction to the Day",
+  "description": "NEED",
+  "start": 1694959200000,
+  "end": 1694960100000,
+  "stageId": "lincoln_stage__builder__legal",
+  "speakers": [
+    {
+      "id": "christina_sciotto",
+      "name": "Christina Sciotto",
+      "bio": "Christina Sciotto currently serves as interim Executive Director of the Global DCA, a self-regulatory association for the digital asset and cryptocurrency industry established to help guide the evolution of the digital asset marketplace. \r\n\r\nChristina is an expert in market structure and trading technologies. She is cited as a contributor to Trading and Exchanges: Market Microstructure for Practitioners by Larry Harris as well as an inventor on two patents relating to software trading platforms. She has more than 20 years of experience in financial services focusing on matching engines, trading platforms, and more recently, blockchain technologies. She has held senior Product Management and Business Development positions at BofA/Merrill Lynch, Lehman Brothers, Hehmeyer, Celsius, and Floating Point Group. She was also a member of FIA's Principal Trading Group, and a board member of the Commodity Market Council, and the Chicago Children's Choir.  \r\n\r\nChristina holds a B.A. in Economics from Cleveland State University and resides in Chicago with her husband and daughter.",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/IMG_8843_WCDEil9.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/christina_sciotto__introduction_to_the_day.jpg"
 }

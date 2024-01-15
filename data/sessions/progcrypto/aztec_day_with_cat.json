@@ -1,19 +1,19 @@
 {
-    "id": "aztec_day_with_cat",
-    "name": "Aztec: Day with Cat",
-    "description": "Cat's activation:\n\nI\u2019ll be running Pick a Topic presentations -\n(a) What is Aztec & how does it work\n(b) The anatomy of a transaction\n(c) Code a private voting contract with Aztec.nr from scratch\n(d) The return of ZK money (not really) (but the code exists)\n(e) Aztec\u2019s circuits\nThey will run anywhere from 3 to 20 minutes depending on the topic, and will go over high level concepts as well as coding workshops. People can also play with a local version of private uniswap transactions for that ZK money nostalgia feel.",
-    "start": 1700121600000,
-    "end": 1700143200000,
-    "stageId": "community_activations_hub",
-    "speakers": [
-        {
-            "id": "aztec_labs",
-            "name": "Aztec Labs",
-            "bio": "Team responsible for Aztec Labs",
-            "eventId": "progcrypto"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "progcrypto",
-    "coverImage": "/sessions/progcrypto/aztec_day_with_cat.jpg"
+  "id": "aztec_day_with_cat",
+  "name": "Aztec: Day with Cat",
+  "description": "Cat's activation:\n\nI\u2019ll be running Pick a Topic presentations -\n(a) What is Aztec & how does it work\n(b) The anatomy of a transaction\n(c) Code a private voting contract with Aztec.nr from scratch\n(d) The return of ZK money (not really) (but the code exists)\n(e) Aztec\u2019s circuits\nThey will run anywhere from 3 to 20 minutes depending on the topic, and will go over high level concepts as well as coding workshops. People can also play with a local version of private uniswap transactions for that ZK money nostalgia feel.",
+  "start": 1700121600000,
+  "end": 1700143200000,
+  "stageId": "community_activations_hub",
+  "speakers": [
+    {
+      "id": "aztec_labs",
+      "name": "Aztec Labs",
+      "bio": "Team responsible for Aztec Labs",
+      "eventId": "progcrypto"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "coverImage": "/sessions/progcrypto/aztec_day_with_cat.jpg"
 }

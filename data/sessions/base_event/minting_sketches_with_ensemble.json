@@ -1,23 +1,23 @@
 {
-    "id": "minting_sketches_with_ensemble",
-    "name": "\nMinting Sketches with Ensemble",
-    "description": "Many of the greatest artworks began with a sketch. Sharing sketches and other artifacts from the creative process can provide necessary context to an artist\u2019s work and bring value in their own right. See how artists are telling stories of their process across mediums, and how a sketchbook can be your ticket to do the same.",
-    "start": 1702155600000,
-    "end": 1702157400000,
-    "stageId": "base_house",
-    "speakers": [
-        {
-            "id": "mackenzie_davenport",
-            "name": "Mackenzie Davenport",
-            "bio": "Mackenzie Davenport is a theatre director and the founder of Ensemble, a platform for artists to sell artifacts from their creative process.\n\n",
-            "eventId": "base_event",
-            "twitter": "@mackxdav"
-        }
-    ],
-    "playbackId": "1032kti6are847z9",
-    "eventId": "base_event",
-    "coverImage": "/sessions/base_event/minting_sketches_with_ensemble.jpg",
-    "assetId": "103265a4-90db-4743-bd8a-1abd32fcb354",
-    "sourceId": "bbb47859-f5a3-4406-a53d-60c1e539646e",
-    "videoType": "clip"
+  "id": "minting_sketches_with_ensemble",
+  "name": "\nMinting Sketches with Ensemble",
+  "description": "Many of the greatest artworks began with a sketch. Sharing sketches and other artifacts from the creative process can provide necessary context to an artist\u2019s work and bring value in their own right. See how artists are telling stories of their process across mediums, and how a sketchbook can be your ticket to do the same.",
+  "start": 1702155600000,
+  "end": 1702157400000,
+  "stageId": "base_house",
+  "speakers": [
+    {
+      "id": "mackenzie_davenport",
+      "name": "Mackenzie Davenport",
+      "bio": "Mackenzie Davenport is a theatre director and the founder of Ensemble, a platform for artists to sell artifacts from their creative process.\n\n",
+      "eventId": "base_event",
+      "twitter": "@mackxdav"
+    }
+  ],
+  "playbackId": "1032kti6are847z9",
+  "eventId": "base_event",
+  "coverImage": "/sessions/base_event/minting_sketches_with_ensemble.jpg",
+  "assetId": "103265a4-90db-4743-bd8a-1abd32fcb354",
+  "sourceId": "bbb47859-f5a3-4406-a53d-60c1e539646e",
+  "videoType": "clip"
 }

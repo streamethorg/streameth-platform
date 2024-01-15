@@ -1,20 +1,20 @@
 {
-    "id": "smart_contract_audit",
-    "name": "Smart contract Audit",
-    "description": "",
-    "start": 1693482300000,
-    "end": 1693484100000,
-    "stageId": "workshop_room_2",
-    "speakers": [
-        {
-            "id": "david_uzochuckwu",
-            "name": "David Uzochuckwu",
-            "bio": "Smart Contract Auditor",
-            "eventId": "web3_lagos_conference_2023",
-            "twitter": "@GuildAudits"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "web3_lagos_conference_2023",
-    "coverImage": "/sessions/web3_lagos_conference_2023/smart_contract_audit.jpg"
+  "id": "smart_contract_audit",
+  "name": "Smart contract Audit",
+  "description": "",
+  "start": 1693482300000,
+  "end": 1693484100000,
+  "stageId": "workshop_room_2",
+  "speakers": [
+    {
+      "id": "david_uzochuckwu",
+      "name": "David Uzochuckwu",
+      "bio": "Smart Contract Auditor",
+      "eventId": "web3_lagos_conference_2023",
+      "twitter": "@GuildAudits"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/smart_contract_audit.jpg"
 }

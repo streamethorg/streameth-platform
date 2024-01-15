@@ -1,20 +1,20 @@
 {
-    "id": "new_forms_of_venture_mutualism",
-    "name": "New Forms of Venture Mutualism",
-    "description": "TBD",
-    "start": 1699101000000,
-    "end": 1699102800000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "scott_moore",
-            "name": " \n \t\nScott Moore",
-            "bio": "Gitcoin, Public Works",
-            "eventId": "zuconnect__public_goods_track"
-        }
-    ],
-    "playbackId": "3d481usgq1j61x39",
-    "eventId": "zuconnect__public_goods_track",
-    "coverImage": "/sessions/zuconnect__public_goods_track/new_forms_of_venture_mutualism.jpg",
-    "assetId": "3d48ddfb-38bd-4b29-a8f4-f4b0b73b55d7"
+  "id": "new_forms_of_venture_mutualism",
+  "name": "New Forms of Venture Mutualism",
+  "description": "TBD",
+  "start": 1699101000000,
+  "end": 1699102800000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "scott_moore",
+      "name": " \n \t\nScott Moore",
+      "bio": "Gitcoin, Public Works",
+      "eventId": "zuconnect__public_goods_track"
+    }
+  ],
+  "playbackId": "3d481usgq1j61x39",
+  "eventId": "zuconnect__public_goods_track",
+  "coverImage": "/sessions/zuconnect__public_goods_track/new_forms_of_venture_mutualism.jpg",
+  "assetId": "3d48ddfb-38bd-4b29-a8f4-f4b0b73b55d7"
 }

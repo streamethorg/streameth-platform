@@ -1,19 +1,19 @@
 {
-    "id": "ethichub_building_a_communitydriven_protocol",
-    "name": "EthicHub: Building a community-driven protocol",
-    "description": "This session will be held in English. There will be no translation to Portuguese.",
-    "start": "2023-03-17T14:00:00.000Z",
-    "end": "2023-03-17T14:25:00.000Z",
-    "stageId": "conference_main_hall",
-    "speakers": [
-        {
-            "id": "joan_de_ramn_brunet",
-            "name": "Joan de Ram\u00f3n Brunet",
-            "bio": "EthicHub",
-            "eventId": "ethporto_2023",
-            "photo": "https://ethporto.org/assets/speakers/Joan.jpg"
-        }
-    ],
-    "playbackId": "3400vh3v7ae4pp7g",
-    "eventId": "ethporto_2023"
+  "id": "ethichub_building_a_communitydriven_protocol",
+  "name": "EthicHub: Building a community-driven protocol",
+  "description": "This session will be held in English. There will be no translation to Portuguese.",
+  "start": "2023-03-17T14:00:00.000Z",
+  "end": "2023-03-17T14:25:00.000Z",
+  "stageId": "conference_main_hall",
+  "speakers": [
+    {
+      "id": "joan_de_ramn_brunet",
+      "name": "Joan de Ram\u00f3n Brunet",
+      "bio": "EthicHub",
+      "eventId": "ethporto_2023",
+      "photo": "https://ethporto.org/assets/speakers/Joan.jpg"
+    }
+  ],
+  "playbackId": "3400vh3v7ae4pp7g",
+  "eventId": "ethporto_2023"
 }

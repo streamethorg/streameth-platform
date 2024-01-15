@@ -1,25 +1,25 @@
 {
-    "id": "welcome_and_introductions",
-    "name": "Welcome and Introductions",
-    "description": "Introducing the New City and Network State event",
-    "start": "2023-04-30T05:00:00.000Z",
-    "end": "2023-04-30T05:30:00.000Z",
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "mark_lutter",
-            "name": "Mark Lutter",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__network_states"
-        },
-        {
-            "id": "vitalik_buterin",
-            "name": "Vitalik Buterin",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__network_states"
-        }
-    ],
-    "playbackId": "0378cwthf184nwvn",
-    "eventId": "zuzalu_montenegro_2023__network_states",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "welcome_and_introductions",
+  "name": "Welcome and Introductions",
+  "description": "Introducing the New City and Network State event",
+  "start": "2023-04-30T05:00:00.000Z",
+  "end": "2023-04-30T05:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "mark_lutter",
+      "name": "Mark Lutter",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    },
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    }
+  ],
+  "playbackId": "0378cwthf184nwvn",
+  "eventId": "zuzalu_montenegro_2023__network_states",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

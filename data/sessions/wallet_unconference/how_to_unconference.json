@@ -1,24 +1,24 @@
 {
-    "id": "how_to_unconference",
-    "name": "How to Unconference",
-    "description": "1. EF/Devconnect context and intro (Ligi, 5min)\n2. How to unconference, agenda-create, scribe, convene, ideate, and listen deeply (Bumble, 15min)\n3. Next steps if your sessions goes well (Bumble+Kyle, 10min)",
-    "start": 1700204400000,
-    "end": 1700206200000,
-    "stageId": "beyazit",
-    "speakers": [
-        {
-            "id": "bumblefudge",
-            "name": "Bumblefudge",
-            "bio": "Janitor @ Chain Agnostic Standards Alliance, Standards Coordinator for Protocol Labs, Advisor @Wallet Connect, and a little freelancing as a treat.  Passionate about non-monetary coordination, public goods, and worker-owned cooperatives, whether those are called DAOs or not.",
-            "eventId": "wallet_unconference",
-            "twitter": "@chainstandards",
-            "photo": "https://i.seadn.io/gcs/files/e1c8613b8409aed75ac38469ac19bde0.png?auto=format&dpr=1&w=1000"
-        }
-    ],
-    "playbackId": "2da0x67jmu1r1igf",
-    "eventId": "wallet_unconference",
-    "coverImage": "/sessions/wallet_unconference/how_to_unconference_thumbnail.png",
-    "assetId": "2da00183-560a-4ec6-846d-f17c8f5d17ea",
-    "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
-    "videoType": "clip"
+  "id": "how_to_unconference",
+  "name": "How to Unconference",
+  "description": "1. EF/Devconnect context and intro (Ligi, 5min)\n2. How to unconference, agenda-create, scribe, convene, ideate, and listen deeply (Bumble, 15min)\n3. Next steps if your sessions goes well (Bumble+Kyle, 10min)",
+  "start": 1700204400000,
+  "end": 1700206200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "bumblefudge",
+      "name": "Bumblefudge",
+      "bio": "Janitor @ Chain Agnostic Standards Alliance, Standards Coordinator for Protocol Labs, Advisor @Wallet Connect, and a little freelancing as a treat.  Passionate about non-monetary coordination, public goods, and worker-owned cooperatives, whether those are called DAOs or not.",
+      "eventId": "wallet_unconference",
+      "twitter": "@chainstandards",
+      "photo": "https://i.seadn.io/gcs/files/e1c8613b8409aed75ac38469ac19bde0.png?auto=format&dpr=1&w=1000"
+    }
+  ],
+  "playbackId": "2da0x67jmu1r1igf",
+  "eventId": "wallet_unconference",
+  "coverImage": "/sessions/wallet_unconference/how_to_unconference_thumbnail.png",
+  "assetId": "2da00183-560a-4ec6-846d-f17c8f5d17ea",
+  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+  "videoType": "clip"
 }

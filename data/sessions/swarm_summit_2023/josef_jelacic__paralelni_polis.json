@@ -1,19 +1,19 @@
 {
-    "id": "josef_jelacic__paralelni_polis",
-    "name": "Josef Jelacic - Paralelni Polis",
-    "description": "Cryptonatives and Parallel Polis",
-    "start": "2023-06-21T15:10:00.000Z",
-    "end": "2023-06-21T15:25:00.000Z",
-    "stageId": "main",
-    "speakers": [
-        {
-            "id": "josef_j",
-            "name": "Josef J.",
-            "bio": "Josef J. is founder of PWNDAO, organizer of ETHPrague and member of Parallel Polis",
-            "eventId": "swarm_summit_2023",
-            "photo": "https://summit.ethswarm.org/media/avatars/joje_raxUwTA.jpg"
-        }
-    ],
-    "playbackId": "1ceezlj2pqgunpez",
-    "eventId": "swarm_summit_2023"
+  "id": "josef_jelacic__paralelni_polis",
+  "name": "Josef Jelacic - Paralelni Polis",
+  "description": "Cryptonatives and Parallel Polis",
+  "start": "2023-06-21T15:10:00.000Z",
+  "end": "2023-06-21T15:25:00.000Z",
+  "stageId": "main",
+  "speakers": [
+    {
+      "id": "josef_j",
+      "name": "Josef J.",
+      "bio": "Josef J. is founder of PWNDAO, organizer of ETHPrague and member of Parallel Polis",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://summit.ethswarm.org/media/avatars/joje_raxUwTA.jpg"
+    }
+  ],
+  "playbackId": "1ceezlj2pqgunpez",
+  "eventId": "swarm_summit_2023"
 }

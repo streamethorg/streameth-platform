@@ -1,32 +1,32 @@
 {
-    "id": "critique_of_the_network_state_as_delineated_by_balaji_srinivasen",
-    "name": "Critique of the Network State, as delineated by Balaji Srinivasen",
-    "description": "",
-    "start": 1684207800000,
-    "end": 1684209600000,
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "primavera_de_filippi",
-            "name": "Primavera de Filippi",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-        },
-        {
-            "id": "ori_shimony",
-            "name": "Ori Shimony",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-        },
-        {
-            "id": "josh_davila",
-            "name": "Josh Davila",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-        }
-    ],
-    "playbackId": "37ddekkhsy6tjhzr",
-    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
-    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/critique_of_the_network_state_as_delineated_by_balaji_srinivasen.jpg",
-    "assetId": "37dd60e2-7fb9-4075-82b9-b8c6148699e8"
+  "id": "critique_of_the_network_state_as_delineated_by_balaji_srinivasen",
+  "name": "Critique of the Network State, as delineated by Balaji Srinivasen",
+  "description": "",
+  "start": 1684207800000,
+  "end": 1684209600000,
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "primavera_de_filippi",
+      "name": "Primavera de Filippi",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+    },
+    {
+      "id": "ori_shimony",
+      "name": "Ori Shimony",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+    },
+    {
+      "id": "josh_davila",
+      "name": "Josh Davila",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+    }
+  ],
+  "playbackId": "37ddekkhsy6tjhzr",
+  "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/critique_of_the_network_state_as_delineated_by_balaji_srinivasen.jpg",
+  "assetId": "37dd60e2-7fb9-4075-82b9-b8c6148699e8"
 }

@@ -1,21 +1,21 @@
 {
-    "id": "eip4788_beacon_block_root_in_the_evm_about",
-    "name": "EIP-4788: Beacon block root in the EVM\nAbout",
-    "description": "About the incoming EIP (Dencun) and its relevance to staking protocols.",
-    "start": 1699968900000,
-    "end": 1699971000000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "darren_langley",
-            "name": "Darren Langley",
-            "bio": "Rocket Pool\nGeneral Manager",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/d/aa/19282640/avatar.jpg?cbb"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/eip4788_beacon_block_root_in_the_evm_about.jpg"
+  "id": "eip4788_beacon_block_root_in_the_evm_about",
+  "name": "EIP-4788: Beacon block root in the EVM\nAbout",
+  "description": "About the incoming EIP (Dencun) and its relevance to staking protocols.",
+  "start": 1699968900000,
+  "end": 1699971000000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "darren_langley",
+      "name": "Darren Langley",
+      "bio": "Rocket Pool\nGeneral Manager",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/d/aa/19282640/avatar.jpg?cbb"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/eip4788_beacon_block_root_in_the_evm_about.jpg"
 }

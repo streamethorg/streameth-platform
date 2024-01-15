@@ -1,29 +1,29 @@
 {
-    "id": "zeroknowledge_machine_learning_for_autonomous_worlds_workshop",
-    "name": "Zero-Knowledge Machine Learning for Autonomous Worlds Workshop",
-    "description": "Explore the world of Zero-Knowledge Machine Learning (ZKML) in this hands-on workshop. Discover how to use ZKML to create immersive game worlds, craft narratives, and define onchain physics for richer Autonomous Worlds.",
-    "start": 1700121600000,
-    "end": 1700125200000,
-    "stageId": "beylerbeyi_1",
-    "speakers": [
-        {
-            "id": "dante",
-            "name": "Dante",
-            "bio": "Dante is CTO at ZKonduit, where he is building a library for zero-knowledge computation. He holds a DPhil in computer science from the University of Oxford and was previously a visiting researcher at the Alan Turing Institute, London.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@CamutoDante",
-            "photo": "https://drive.google.com/uc?id=1je-0lqr9NAtWiTuNJc33D8EoRbtufMzR"
-        },
-        {
-            "id": "jseam",
-            "name": "JSeam",
-            "bio": "JSeam is one of the core contributors to ezkl. Prior to this, he developed the monetization infrastructure for web3 payments in XR and was one of the early pioneers of NFT auctions and royalty mechanisms.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@henlojseam",
-            "photo": "https://drive.google.com/uc?id=100fQEr6_Dqb8GjUSTGcReA7iomLByDd_"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/zeroknowledge_machine_learning_for_autonomous_worlds_workshop_thumbnail.png"
+  "id": "zeroknowledge_machine_learning_for_autonomous_worlds_workshop",
+  "name": "Zero-Knowledge Machine Learning for Autonomous Worlds Workshop",
+  "description": "Explore the world of Zero-Knowledge Machine Learning (ZKML) in this hands-on workshop. Discover how to use ZKML to create immersive game worlds, craft narratives, and define onchain physics for richer Autonomous Worlds.",
+  "start": 1700121600000,
+  "end": 1700125200000,
+  "stageId": "beylerbeyi_1",
+  "speakers": [
+    {
+      "id": "dante",
+      "name": "Dante",
+      "bio": "Dante is CTO at ZKonduit, where he is building a library for zero-knowledge computation. He holds a DPhil in computer science from the University of Oxford and was previously a visiting researcher at the Alan Turing Institute, London.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@CamutoDante",
+      "photo": "https://drive.google.com/uc?id=1je-0lqr9NAtWiTuNJc33D8EoRbtufMzR"
+    },
+    {
+      "id": "jseam",
+      "name": "JSeam",
+      "bio": "JSeam is one of the core contributors to ezkl. Prior to this, he developed the monetization infrastructure for web3 payments in XR and was one of the early pioneers of NFT auctions and royalty mechanisms.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@henlojseam",
+      "photo": "https://drive.google.com/uc?id=100fQEr6_Dqb8GjUSTGcReA7iomLByDd_"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/zeroknowledge_machine_learning_for_autonomous_worlds_workshop_thumbnail.png"
 }

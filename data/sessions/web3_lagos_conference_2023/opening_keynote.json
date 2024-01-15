@@ -1,12 +1,12 @@
 {
-    "id": "opening_keynote",
-    "name": "Opening Keynote",
-    "description": "Welcome Address",
-    "start": 1693558800000,
-    "end": 1693559700000,
-    "stageId": "workshop_room_1",
-    "speakers": [],
-    "playbackId": "",
-    "eventId": "web3_lagos_conference_2023",
-    "coverImage": "/sessions/web3_lagos_conference_2023/opening_keynote.jpg"
+  "id": "opening_keynote",
+  "name": "Opening Keynote",
+  "description": "Welcome Address",
+  "start": 1693558800000,
+  "end": 1693559700000,
+  "stageId": "workshop_room_1",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/opening_keynote.jpg"
 }

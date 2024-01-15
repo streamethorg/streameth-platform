@@ -1,19 +1,19 @@
 {
-    "id": "ethereum_hungary_meetup__livestream_from_budapest",
-    "name": "Ethereum Hungary Meetup - Livestream from Budapest",
-    "description": "",
-    "start": "2023-06-22T16:30:00.000Z",
-    "end": "2023-06-22T18:30:00.000Z",
-    "stageId": "main",
-    "speakers": [
-        {
-            "id": "ethereum_hungary_meetup",
-            "name": "Ethereum Hungary Meetup",
-            "bio": "No description",
-            "eventId": "swarm_summit_2023",
-            "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "swarm_summit_2023"
+  "id": "ethereum_hungary_meetup__livestream_from_budapest",
+  "name": "Ethereum Hungary Meetup - Livestream from Budapest",
+  "description": "",
+  "start": "2023-06-22T16:30:00.000Z",
+  "end": "2023-06-22T18:30:00.000Z",
+  "stageId": "main",
+  "speakers": [
+    {
+      "id": "ethereum_hungary_meetup",
+      "name": "Ethereum Hungary Meetup",
+      "bio": "No description",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "swarm_summit_2023"
 }

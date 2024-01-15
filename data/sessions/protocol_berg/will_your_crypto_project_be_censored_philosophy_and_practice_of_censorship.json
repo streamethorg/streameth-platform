@@ -1,21 +1,21 @@
 {
-    "id": "will_your_crypto_project_be_censored_philosophy_and_practice_of_censorship",
-    "name": "Will your crypto project be censored? Philosophy and practice of censorship",
-    "description": "Will your crypto project be censored? Censorship is spreading, from Infura blocking IP addresses, to Github taking the Tornado Cash repo down. This talk will provide a legal anthropological analysis of the elements that might put a project at risk, so that you can take the necessary steps to protect your efforts",
-    "start": 1694770200000,
-    "end": 1694771700000,
-    "stageId": "magazin__main_stage",
-    "speakers": [
-        {
-            "id": "costanza_gallo",
-            "name": "Costanza Gallo",
-            "bio": "I work for the Swarm Foundation where I recently led the project Wikipedia on Swarm, to make a web3 censorship resistant copy of Wikipedia. Prior to that, I was community manager with the Golem Network. I have a MSc in Law, Anthropology and Society from the London School of Economics, where I focused on the interplay between State Secrecy and Democratic Governance. But my passion for freedom of speech goes way back: my father was a satirical cartoonist and a political journalist, he was often the target of censorship attempts so it\u2019s a family affair.",
-            "eventId": "protocol_berg",
-            "photo": "https://speak.protocol.berlin/media/avatars/costanza_I2pVX5J.png"
-        }
-    ],
-    "playbackId": "34b4d4jxr9gd1f6n",
-    "eventId": "protocol_berg",
-    "coverImage": "/sessions/protocol_berg/will_your_crypto_project_be_censored_philosophy_and_practice_of_censorship.jpg",
-    "assetId": "34b4fa67-757b-4dbc-b3d5-d85e0795af76"
+  "id": "will_your_crypto_project_be_censored_philosophy_and_practice_of_censorship",
+  "name": "Will your crypto project be censored? Philosophy and practice of censorship",
+  "description": "Will your crypto project be censored? Censorship is spreading, from Infura blocking IP addresses, to Github taking the Tornado Cash repo down. This talk will provide a legal anthropological analysis of the elements that might put a project at risk, so that you can take the necessary steps to protect your efforts",
+  "start": 1694770200000,
+  "end": 1694771700000,
+  "stageId": "magazin__main_stage",
+  "speakers": [
+    {
+      "id": "costanza_gallo",
+      "name": "Costanza Gallo",
+      "bio": "I work for the Swarm Foundation where I recently led the project Wikipedia on Swarm, to make a web3 censorship resistant copy of Wikipedia. Prior to that, I was community manager with the Golem Network. I have a MSc in Law, Anthropology and Society from the London School of Economics, where I focused on the interplay between State Secrecy and Democratic Governance. But my passion for freedom of speech goes way back: my father was a satirical cartoonist and a political journalist, he was often the target of censorship attempts so it\u2019s a family affair.",
+      "eventId": "protocol_berg",
+      "photo": "https://speak.protocol.berlin/media/avatars/costanza_I2pVX5J.png"
+    }
+  ],
+  "playbackId": "34b4d4jxr9gd1f6n",
+  "eventId": "protocol_berg",
+  "coverImage": "/sessions/protocol_berg/will_your_crypto_project_be_censored_philosophy_and_practice_of_censorship.jpg",
+  "assetId": "34b4fa67-757b-4dbc-b3d5-d85e0795af76"
 }

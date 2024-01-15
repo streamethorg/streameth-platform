@@ -1,20 +1,20 @@
 {
-    "id": "hackathon_submission_support",
-    "name": "Hackathon Submission support",
-    "description": "Table for helping with submissions",
-    "start": 1694959200000,
-    "end": 1694962800000,
-    "stageId": "oak_room_hacker_room",
-    "speakers": [
-        {
-            "id": "james_he",
-            "name": "James He",
-            "bio": "Testing this https://twitter.com/jameshe_eth",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/hackathon_submission_support.jpg"
+  "id": "hackathon_submission_support",
+  "name": "Hackathon Submission support",
+  "description": "Table for helping with submissions",
+  "start": 1694959200000,
+  "end": 1694962800000,
+  "stageId": "oak_room_hacker_room",
+  "speakers": [
+    {
+      "id": "james_he",
+      "name": "James He",
+      "bio": "Testing this https://twitter.com/jameshe_eth",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/hackathon_submission_support.jpg"
 }

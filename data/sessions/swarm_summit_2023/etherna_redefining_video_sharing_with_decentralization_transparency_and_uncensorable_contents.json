@@ -1,19 +1,19 @@
 {
-    "id": "etherna_redefining_video_sharing_with_decentralization_transparency_and_uncensorable_contents",
-    "name": "Etherna: Redefining Video Sharing with Decentralization, Transparency, and Uncensorable Contents",
-    "description": "Sergio Marchese will present Etherna's solution to video sharing",
-    "start": "2023-06-23T14:30:00.000Z",
-    "end": "2023-06-23T14:45:00.000Z",
-    "stageId": "main",
-    "speakers": [
-        {
-            "id": "sergio_marchese",
-            "name": "Sergio Marchese",
-            "bio": "No description",
-            "eventId": "swarm_summit_2023",
-            "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
-        }
-    ],
-    "playbackId": "dcf5jhr06k6josng",
-    "eventId": "swarm_summit_2023"
+  "id": "etherna_redefining_video_sharing_with_decentralization_transparency_and_uncensorable_contents",
+  "name": "Etherna: Redefining Video Sharing with Decentralization, Transparency, and Uncensorable Contents",
+  "description": "Sergio Marchese will present Etherna's solution to video sharing",
+  "start": "2023-06-23T14:30:00.000Z",
+  "end": "2023-06-23T14:45:00.000Z",
+  "stageId": "main",
+  "speakers": [
+    {
+      "id": "sergio_marchese",
+      "name": "Sergio Marchese",
+      "bio": "No description",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
+    }
+  ],
+  "playbackId": "dcf5jhr06k6josng",
+  "eventId": "swarm_summit_2023"
 }

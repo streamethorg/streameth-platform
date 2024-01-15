@@ -1,24 +1,24 @@
 {
-    "id": "ethgn_kapan_konumas",
-    "name": "ETHG\u00fcn\u00fc Kapan\u0131\u015f Konu\u015fmas\u0131",
-    "description": "Coming Soon",
-    "start": 1699885800000,
-    "end": 1699887600000,
-    "stageId": "harbiye",
-    "speakers": [
-        {
-            "id": "doruk_men",
-            "name": "Doruk \u0130\u015fmen",
-            "bio": "No description",
-            "eventId": "ethgunu",
-            "twitter": "",
-            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/doruk.jpg?raw=true"
-        }
-    ],
-    "playbackId": "4b32vht0i2cgptwy",
-    "eventId": "ethgunu",
-    "coverImage": "/sessions/ethgunu/ethgn_kapan_konumas_thumbnail.png",
-    "assetId": "4b32239d-d834-495f-bc08-900369ce0c5f",
-    "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
-    "videoType": "clip"
+  "id": "ethgn_kapan_konumas",
+  "name": "ETHG\u00fcn\u00fc Kapan\u0131\u015f Konu\u015fmas\u0131",
+  "description": "Coming Soon",
+  "start": 1699885800000,
+  "end": 1699887600000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "doruk_men",
+      "name": "Doruk \u0130\u015fmen",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/doruk.jpg?raw=true"
+    }
+  ],
+  "playbackId": "4b32vht0i2cgptwy",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/ethgn_kapan_konumas_thumbnail.png",
+  "assetId": "4b32239d-d834-495f-bc08-900369ce0c5f",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
 }

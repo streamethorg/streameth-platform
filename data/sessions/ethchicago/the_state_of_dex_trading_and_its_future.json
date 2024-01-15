@@ -1,20 +1,20 @@
 {
-    "id": "the_state_of_dex_trading_and_its_future",
-    "name": "The State of DEX Trading And Its Future",
-    "description": "DEX trades account for the majority of onchain activity. This talk will cover the current state of DEX Trading, how Uniswap v4 and X will change the trading experience, and the future of RWA trading.",
-    "start": 1694878200000,
-    "end": 1694880000000,
-    "stageId": "east_room__main_",
-    "speakers": [
-        {
-            "id": "getty_hill",
-            "name": "Getty Hill",
-            "bio": "Getty Hill is the co-founder of GFX Labs, a software development and research company based in Chicago. GFX Labs launched Oku, the advanced trading interface for Uniswap v3, and has been heavily involved in the governance of Uniswap and other leading protocols.",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/GettyProfilePic_3d6oeYF.jpg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/the_state_of_dex_trading_and_its_future.jpg"
+  "id": "the_state_of_dex_trading_and_its_future",
+  "name": "The State of DEX Trading And Its Future",
+  "description": "DEX trades account for the majority of onchain activity. This talk will cover the current state of DEX Trading, how Uniswap v4 and X will change the trading experience, and the future of RWA trading.",
+  "start": 1694878200000,
+  "end": 1694880000000,
+  "stageId": "east_room__main_",
+  "speakers": [
+    {
+      "id": "getty_hill",
+      "name": "Getty Hill",
+      "bio": "Getty Hill is the co-founder of GFX Labs, a software development and research company based in Chicago. GFX Labs launched Oku, the advanced trading interface for Uniswap v3, and has been heavily involved in the governance of Uniswap and other leading protocols.",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/GettyProfilePic_3d6oeYF.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/the_state_of_dex_trading_and_its_future.jpg"
 }

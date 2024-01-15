@@ -1,19 +1,19 @@
 {
-    "id": "aging_clocks_entropy_and_the_limits_of_agereversal",
-    "name": "Aging clocks, entropy, and the limits of age-reversal",
-    "description": "Speaker: Peter Fedichev",
-    "start": "2023-05-14T12:30:00.000Z",
-    "end": "2023-05-14T13:30:00.000Z",
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "peter_fedichev",
-            "name": "Peter Fedichev",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-        }
-    ],
-    "playbackId": "c9f06ug2xjhv9pft",
-    "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "aging_clocks_entropy_and_the_limits_of_agereversal",
+  "name": "Aging clocks, entropy, and the limits of age-reversal",
+  "description": "Speaker: Peter Fedichev",
+  "start": "2023-05-14T12:30:00.000Z",
+  "end": "2023-05-14T13:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "peter_fedichev",
+      "name": "Peter Fedichev",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+    }
+  ],
+  "playbackId": "c9f06ug2xjhv9pft",
+  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

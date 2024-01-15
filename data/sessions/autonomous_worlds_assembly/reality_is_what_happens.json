@@ -1,21 +1,21 @@
 {
-    "id": "reality_is_what_happens",
-    "name": "Reality is What Happens",
-    "description": "This session will explore how verified behavior emerges within community-based games and discuss the implications of blockchain technology in catalyzing such behavior.",
-    "start": 1700118000000,
-    "end": 1700119800000,
-    "stageId": "emirgan_2",
-    "speakers": [
-        {
-            "id": "rafael_morado",
-            "name": "Rafael Morado",
-            "bio": "Rafael Morado heads product strategy at Lattice. Previously, he has built games at Dapper Labs, CCP Games, and Ubisoft.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@nagual_ape",
-            "photo": "https://drive.google.com/uc?id=13zqyW83sS6Qu-MsXQWOrmzwvqwlYhqg4"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/reality_is_what_happens_thumbnail.png"
+  "id": "reality_is_what_happens",
+  "name": "Reality is What Happens",
+  "description": "This session will explore how verified behavior emerges within community-based games and discuss the implications of blockchain technology in catalyzing such behavior.",
+  "start": 1700118000000,
+  "end": 1700119800000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "rafael_morado",
+      "name": "Rafael Morado",
+      "bio": "Rafael Morado heads product strategy at Lattice. Previously, he has built games at Dapper Labs, CCP Games, and Ubisoft.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@nagual_ape",
+      "photo": "https://drive.google.com/uc?id=13zqyW83sS6Qu-MsXQWOrmzwvqwlYhqg4"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/reality_is_what_happens_thumbnail.png"
 }

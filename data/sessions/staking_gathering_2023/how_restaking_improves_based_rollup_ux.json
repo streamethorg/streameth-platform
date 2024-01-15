@@ -1,21 +1,21 @@
 {
-    "id": "how_restaking_improves_based_rollup_ux",
-    "name": "How restaking improves based rollup UX\n",
-    "description": "-",
-    "start": 1699873500000,
-    "end": 1699875000000,
-    "stageId": "connie",
-    "speakers": [
-        {
-            "id": "mamy_ratsimbazafy",
-            "name": "Mamy Ratsimbazafy",
-            "bio": "Taiko",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/e/ff/19561836/avatar.jpg?659"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/how_restaking_improves_based_rollup_ux.jpg"
+  "id": "how_restaking_improves_based_rollup_ux",
+  "name": "How restaking improves based rollup UX\n",
+  "description": "-",
+  "start": 1699873500000,
+  "end": 1699875000000,
+  "stageId": "connie",
+  "speakers": [
+    {
+      "id": "mamy_ratsimbazafy",
+      "name": "Mamy Ratsimbazafy",
+      "bio": "Taiko",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/e/ff/19561836/avatar.jpg?659"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/how_restaking_improves_based_rollup_ux.jpg"
 }

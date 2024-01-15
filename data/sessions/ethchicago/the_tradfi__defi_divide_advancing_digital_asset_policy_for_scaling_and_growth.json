@@ -1,20 +1,20 @@
 {
-    "id": "the_tradfi__defi_divide_advancing_digital_asset_policy_for_scaling_and_growth",
-    "name": "The TradFi / DeFi Divide: Advancing Digital Asset Policy for Scaling and Growth",
-    "description": "Placeholder",
-    "start": 1694974200000,
-    "end": 1694976000000,
-    "stageId": "lincoln_stage__builder__legal",
-    "speakers": [
-        {
-            "id": "sean_ristau",
-            "name": "Sean Ristau",
-            "bio": "With over 23 years of experience in the capital markets industry, I have a proven track record of delivering innovative and effective solutions for clients across various sectors and segments. I have extensive knowledge and expertise in wealth management, electronic trading, digital assets, and blockchain technologies, and I have been an early adopter and advocate of these emerging trends.\r\n\r\nAs the Executive Vice President of Business Development for Digital Wealth and Alternatives, I am responsible for creating and executing the strategy for growing and expanding the FusionIQ platform and offering. \r\n\r\nWe provide an end-to-end asset-agnostic solution for RIAs, TAMPs, Digital Advice, Self-Directed, and Model Marketplaces. I work closely with our clients, partners, and regulators to ensure we provide our customers with best-in-class service and value. I am also a leader and frequent speaker in the industry. I chair the FIX Protocol Digital Currency & Blockchain Working Group, serve as an Advisory Board Member for the Security Traders Association of Chicago, and contribute to various publications and events. \r\n\r\nMy mission is to drive innovation and growth in the digital services sector and to leverage my experience and network to support and empower the adoption and integration of digital experiences, blockchain, and alternative assets in capital markets.",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-09-12_at_8.00.16_PM_u64HbZh.png"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/the_tradfi__defi_divide_advancing_digital_asset_policy_for_scaling_and_growth.jpg"
+  "id": "the_tradfi__defi_divide_advancing_digital_asset_policy_for_scaling_and_growth",
+  "name": "The TradFi / DeFi Divide: Advancing Digital Asset Policy for Scaling and Growth",
+  "description": "Placeholder",
+  "start": 1694974200000,
+  "end": 1694976000000,
+  "stageId": "lincoln_stage__builder__legal",
+  "speakers": [
+    {
+      "id": "sean_ristau",
+      "name": "Sean Ristau",
+      "bio": "With over 23 years of experience in the capital markets industry, I have a proven track record of delivering innovative and effective solutions for clients across various sectors and segments. I have extensive knowledge and expertise in wealth management, electronic trading, digital assets, and blockchain technologies, and I have been an early adopter and advocate of these emerging trends.\r\n\r\nAs the Executive Vice President of Business Development for Digital Wealth and Alternatives, I am responsible for creating and executing the strategy for growing and expanding the FusionIQ platform and offering. \r\n\r\nWe provide an end-to-end asset-agnostic solution for RIAs, TAMPs, Digital Advice, Self-Directed, and Model Marketplaces. I work closely with our clients, partners, and regulators to ensure we provide our customers with best-in-class service and value. I am also a leader and frequent speaker in the industry. I chair the FIX Protocol Digital Currency & Blockchain Working Group, serve as an Advisory Board Member for the Security Traders Association of Chicago, and contribute to various publications and events. \r\n\r\nMy mission is to drive innovation and growth in the digital services sector and to leverage my experience and network to support and empower the adoption and integration of digital experiences, blockchain, and alternative assets in capital markets.",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/Screen_Shot_2023-09-12_at_8.00.16_PM_u64HbZh.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/the_tradfi__defi_divide_advancing_digital_asset_policy_for_scaling_and_growth.jpg"
 }

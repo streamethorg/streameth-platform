@@ -1,19 +1,19 @@
 {
-    "id": "cryptoxaiwtf__daniel_kang",
-    "name": "CryptoXai.wtf - Daniel Kang",
-    "description": "cryptoxai.wtf",
-    "start": "2023-05-07T05:30:00.000Z",
-    "end": "2023-05-07T06:30:00.000Z",
-    "stageId": "lighthouse",
-    "speakers": [
-        {
-            "id": "daniel_kang",
-            "name": "Daniel Kang",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__cryptoxai"
-        }
-    ],
-    "playbackId": "0735b090w67ohvr3",
-    "eventId": "zuzalu_montenegro_2023__cryptoxai",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "cryptoxaiwtf__daniel_kang",
+  "name": "CryptoXai.wtf - Daniel Kang",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "daniel_kang",
+      "name": "Daniel Kang",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
+  "playbackId": "0735b090w67ohvr3",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

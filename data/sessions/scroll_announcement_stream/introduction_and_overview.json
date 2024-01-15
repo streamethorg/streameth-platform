@@ -1,29 +1,29 @@
 {
-    "id": "introduction_and_overview",
-    "name": "Introduction and Overview",
-    "description": "Meet our MCs for the night!",
-    "start": 1697806800000,
-    "end": 1697807400000,
-    "stageId": "virtual_stage",
-    "speakers": [
-        {
-            "id": "toghrul",
-            "name": "Toghrul",
-            "bio": "Rollup Sorcerer, Scroll",
-            "eventId": "scroll_announcement_stream",
-            "twitter": "@toghrulmaharram",
-            "photo": "https://pbs.twimg.com/profile_images/1560594557263380480/ihJOVitM_400x400.jpg"
-        },
-        {
-            "id": "helena_flack",
-            "name": "Helena Flack",
-            "bio": "Brand + PR, Scroll",
-            "eventId": "scroll_announcement_stream",
-            "twitter": "@helsfoftroy",
-            "photo": "https://pbs.twimg.com/profile_images/1577924655419121666/xD6SQyWC_400x400.jpg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "scroll_announcement_stream",
-    "coverImage": "/sessions/scroll_announcement_stream/introduction_and_overview.jpg"
+  "id": "introduction_and_overview",
+  "name": "Introduction and Overview",
+  "description": "Meet our MCs for the night!",
+  "start": 1697806800000,
+  "end": 1697807400000,
+  "stageId": "virtual_stage",
+  "speakers": [
+    {
+      "id": "toghrul",
+      "name": "Toghrul",
+      "bio": "Rollup Sorcerer, Scroll",
+      "eventId": "scroll_announcement_stream",
+      "twitter": "@toghrulmaharram",
+      "photo": "https://pbs.twimg.com/profile_images/1560594557263380480/ihJOVitM_400x400.jpg"
+    },
+    {
+      "id": "helena_flack",
+      "name": "Helena Flack",
+      "bio": "Brand + PR, Scroll",
+      "eventId": "scroll_announcement_stream",
+      "twitter": "@helsfoftroy",
+      "photo": "https://pbs.twimg.com/profile_images/1577924655419121666/xD6SQyWC_400x400.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "scroll_announcement_stream",
+  "coverImage": "/sessions/scroll_announcement_stream/introduction_and_overview.jpg"
 }

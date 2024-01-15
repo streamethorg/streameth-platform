@@ -1,20 +1,20 @@
 {
-    "id": "vision_setting_guided_meditation_for_hackathon_attendees",
-    "name": "Vision Setting Guided Meditation for Hackathon Attendees",
-    "description": "Kickstart your hackathon journey with intention. This powerful meditation, designed specifically for innovators, will strengthen your vision and connect you to the potential impact of your creations. Begin with clarity, refine your approach, and gain momentum to effectively transition from ideation to execution.",
-    "start": 1694811600000,
-    "end": 1694813400000,
-    "stageId": "oak_room_hacker_room",
-    "speakers": [
-        {
-            "id": "david_prorok",
-            "name": "David Prorok",
-            "bio": "Meditation & Creativity Coach for Software Engineers, Builders, and Creators. \r\n\r\nFueled by boundless curiosity and a passion for human mastery, my journey has been anything but linear. I love learning and trying new things, constantly exploring new avenues and expanding my mind in different dimensions. \r\n\r\nWith a Computer Science degree from UIUC, I've delved deep into the tech world, working as a software engineer at Facebook and as the Head of Product at small startups. Now, I'm sharing my technical expertise as a coach at Interview Kickstart, helping software engineers prepare for frontend engineering interviews at top tech companies.\r\n\r\nBut that's just one side of me.\r\n\r\nI have been a rapper since I was 14, releasing albums and even pushed my limits by freestyle rapping for 38 minutes straight, which laid the foundation for my mixtape \"Better Than Before.\" I've hosted a podcast and built online communities. I've performed live as an improviser, a rapper, and a stand up comedian. I've uploaded almost 800 videos to my YouTube channel and created thousands of ai-generated art. \r\n\r\nThrough it all, my breath has been my anchor, with a daily meditation practice complemented by 10-day intensive courses. With a sense of peace, purpose, and renewed clarity, I've transitioned into a career as a meditation and creativity coach. In a world that's constantly redefining itself, I\u2019m here to guide leaders, especially from the tech and creative worlds, to stay centered and maximize the opportunities this era offers.\r\n\r\nIf you're a software engineer, builder, or creator looking for a bridge between logic and imagination, between code and artistry, let's connect. I'm here to be a bridge between dreams and reality.\r\n\r\nDM me on Telegram: @DavidProrok or Instagram @david.prorok!",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/grateful_vQXDQ7H.jpeg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/vision_setting_guided_meditation_for_hackathon_attendees.jpg"
+  "id": "vision_setting_guided_meditation_for_hackathon_attendees",
+  "name": "Vision Setting Guided Meditation for Hackathon Attendees",
+  "description": "Kickstart your hackathon journey with intention. This powerful meditation, designed specifically for innovators, will strengthen your vision and connect you to the potential impact of your creations. Begin with clarity, refine your approach, and gain momentum to effectively transition from ideation to execution.",
+  "start": 1694811600000,
+  "end": 1694813400000,
+  "stageId": "oak_room_hacker_room",
+  "speakers": [
+    {
+      "id": "david_prorok",
+      "name": "David Prorok",
+      "bio": "Meditation & Creativity Coach for Software Engineers, Builders, and Creators. \r\n\r\nFueled by boundless curiosity and a passion for human mastery, my journey has been anything but linear. I love learning and trying new things, constantly exploring new avenues and expanding my mind in different dimensions. \r\n\r\nWith a Computer Science degree from UIUC, I've delved deep into the tech world, working as a software engineer at Facebook and as the Head of Product at small startups. Now, I'm sharing my technical expertise as a coach at Interview Kickstart, helping software engineers prepare for frontend engineering interviews at top tech companies.\r\n\r\nBut that's just one side of me.\r\n\r\nI have been a rapper since I was 14, releasing albums and even pushed my limits by freestyle rapping for 38 minutes straight, which laid the foundation for my mixtape \"Better Than Before.\" I've hosted a podcast and built online communities. I've performed live as an improviser, a rapper, and a stand up comedian. I've uploaded almost 800 videos to my YouTube channel and created thousands of ai-generated art. \r\n\r\nThrough it all, my breath has been my anchor, with a daily meditation practice complemented by 10-day intensive courses. With a sense of peace, purpose, and renewed clarity, I've transitioned into a career as a meditation and creativity coach. In a world that's constantly redefining itself, I\u2019m here to guide leaders, especially from the tech and creative worlds, to stay centered and maximize the opportunities this era offers.\r\n\r\nIf you're a software engineer, builder, or creator looking for a bridge between logic and imagination, between code and artistry, let's connect. I'm here to be a bridge between dreams and reality.\r\n\r\nDM me on Telegram: @DavidProrok or Instagram @david.prorok!",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/grateful_vQXDQ7H.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/vision_setting_guided_meditation_for_hackathon_attendees.jpg"
 }

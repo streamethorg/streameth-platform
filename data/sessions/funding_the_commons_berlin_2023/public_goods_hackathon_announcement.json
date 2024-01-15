@@ -1,25 +1,25 @@
 {
-    "id": "public_goods_hackathon_announcement",
-    "name": "Public Goods Hackathon Announcement",
-    "description": "",
-    "start": 1694260800000,
-    "end": 1694261400000,
-    "stageId": "mainstage",
-    "speakers": [
-        {
-            "id": "david_casey",
-            "name": "David Casey",
-            "bio": "Protocol Labs/Funding the Commons",
-            "eventId": "funding_the_commons_berlin_2023"
-        }
-    ],
-    "source": {
-        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-        "start": 17063,
-        "end": 17566
-    },
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/public_goods_hackathon_announcement.jpg",
-    "assetId": "e150d736-a98f-4d8f-9b59-0b1c3792f0af",
-    "playbackId": "e1506mrxr7apbvux"
+  "id": "public_goods_hackathon_announcement",
+  "name": "Public Goods Hackathon Announcement",
+  "description": "",
+  "start": 1694260800000,
+  "end": 1694261400000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "Protocol Labs/Funding the Commons",
+      "eventId": "funding_the_commons_berlin_2023"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 17063,
+    "end": 17566
+  },
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/public_goods_hackathon_announcement.jpg",
+  "assetId": "e150d736-a98f-4d8f-9b59-0b1c3792f0af",
+  "playbackId": "e1506mrxr7apbvux"
 }

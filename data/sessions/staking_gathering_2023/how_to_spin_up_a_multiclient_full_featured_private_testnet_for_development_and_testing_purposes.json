@@ -1,21 +1,21 @@
 {
-    "id": "how_to_spin_up_a_multiclient_full_featured_private_testnet_for_development_and_testing_purposes",
-    "name": "How to spin up a multi-client, full featured private testnet for development and testing purposes",
-    "description": "To make the most of our time, please ensure you have Docker and Homebrew pre-installed!",
-    "start": 1699956000000,
-    "end": 1699959900000,
-    "stageId": "connie",
-    "speakers": [
-        {
-            "id": "galen_marchetti",
-            "name": "Galen Marchetti",
-            "bio": "Kurtosis\nCEO",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/6/c2/19282715/avatar.jpg?6ba"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/how_to_spin_up_a_multiclient_full_featured_private_testnet_for_development_and_testing_purposes.jpg"
+  "id": "how_to_spin_up_a_multiclient_full_featured_private_testnet_for_development_and_testing_purposes",
+  "name": "How to spin up a multi-client, full featured private testnet for development and testing purposes",
+  "description": "To make the most of our time, please ensure you have Docker and Homebrew pre-installed!",
+  "start": 1699956000000,
+  "end": 1699959900000,
+  "stageId": "connie",
+  "speakers": [
+    {
+      "id": "galen_marchetti",
+      "name": "Galen Marchetti",
+      "bio": "Kurtosis\nCEO",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/6/c2/19282715/avatar.jpg?6ba"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/how_to_spin_up_a_multiclient_full_featured_private_testnet_for_development_and_testing_purposes.jpg"
 }

@@ -1,18 +1,18 @@
 {
-    "id": "the_sorvereign_creator",
-    "name": "The Sorvereign Creator",
-    "description": "Alec Empire\u2019s talk about being an artist in web3, how to understand music and hacker culture in cyberspace and why Ethereum will give rise to the Sovereign Creator.",
-    "start": "2022-09-18T12:30:00.000Z",
-    "end": "2022-09-18T13:15:00.000Z",
-    "stageId": "lexis",
-    "speakers": [
-        {
-            "id": "alec_empire",
-            "name": "Alec Empire",
-            "bio": "No description",
-            "eventId": "ethberlin_2022"
-        }
-    ],
-    "playbackId": "40a517ea-cc42-4979-b2f8-7a589ffb94c3",
-    "eventId": "ethberlin_2022"
+  "id": "the_sorvereign_creator",
+  "name": "The Sorvereign Creator",
+  "description": "Alec Empire\u2019s talk about being an artist in web3, how to understand music and hacker culture in cyberspace and why Ethereum will give rise to the Sovereign Creator.",
+  "start": "2022-09-18T12:30:00.000Z",
+  "end": "2022-09-18T13:15:00.000Z",
+  "stageId": "lexis",
+  "speakers": [
+    {
+      "id": "alec_empire",
+      "name": "Alec Empire",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    }
+  ],
+  "playbackId": "40a517ea-cc42-4979-b2f8-7a589ffb94c3",
+  "eventId": "ethberlin_2022"
 }

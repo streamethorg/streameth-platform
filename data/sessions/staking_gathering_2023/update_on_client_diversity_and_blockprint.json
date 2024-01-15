@@ -1,21 +1,21 @@
 {
-    "id": "update_on_client_diversity_and_blockprint",
-    "name": "Update on client diversity and blockprint",
-    "description": "The blockprint project uses machine-learning to track the consensus clients used by validators on the network. It started life as an Excel spreadsheet (!) two years ago, but has since matured into a vital part of Ethereum's monitoring infrastructure. Blockprint data is used by clientdiversity.org to measure the resilience of Ethereum to client bugs, and by several other projects producing insights into the consensus layer (reorg.pics, rated.network).\n\nI'll give an update on recent improvements to blockprint, particularly accuracy and validation, and provide a short history of client diversity on the beacon chain. I'll also announce some exciting new projects in the blockprint ecosystem!",
-    "start": 1699950900000,
-    "end": 1699953900000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "michael_sproul",
-            "name": "Michael Sproul",
-            "bio": "Sigma Prime\nDeveloper",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/5/f1/19160265/avatar.jpg?6a0"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/update_on_client_diversity_and_blockprint.jpg"
+  "id": "update_on_client_diversity_and_blockprint",
+  "name": "Update on client diversity and blockprint",
+  "description": "The blockprint project uses machine-learning to track the consensus clients used by validators on the network. It started life as an Excel spreadsheet (!) two years ago, but has since matured into a vital part of Ethereum's monitoring infrastructure. Blockprint data is used by clientdiversity.org to measure the resilience of Ethereum to client bugs, and by several other projects producing insights into the consensus layer (reorg.pics, rated.network).\n\nI'll give an update on recent improvements to blockprint, particularly accuracy and validation, and provide a short history of client diversity on the beacon chain. I'll also announce some exciting new projects in the blockprint ecosystem!",
+  "start": 1699950900000,
+  "end": 1699953900000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "michael_sproul",
+      "name": "Michael Sproul",
+      "bio": "Sigma Prime\nDeveloper",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/5/f1/19160265/avatar.jpg?6a0"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/update_on_client_diversity_and_blockprint.jpg"
 }

@@ -1,20 +1,20 @@
 {
-    "id": "prepare_and_ideate_on_hackzuzalu_projects",
-    "name": "Prepare and Ideate on HackZuzalu projects",
-    "description": "A quick overview of HackZuzalu next week and brainstorm session for anyone who wants to hack on something New Governance-related in the hackathon.",
-    "start": 1698841800000,
-    "end": 1698843600000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "nicole",
-            "name": "Nicole",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__new_governance"
-        }
-    ],
-    "playbackId": "5100x4rts3qdhmcj",
-    "eventId": "zuconnect_istanbul__new_governance",
-    "coverImage": "/sessions/zuconnect_istanbul__new_governance/prepare_and_ideate_on_hackzuzalu_projects.jpg",
-    "assetId": "51006dc6-7d94-4d44-98ab-9d587fd85a5b"
+  "id": "prepare_and_ideate_on_hackzuzalu_projects",
+  "name": "Prepare and Ideate on HackZuzalu projects",
+  "description": "A quick overview of HackZuzalu next week and brainstorm session for anyone who wants to hack on something New Governance-related in the hackathon.",
+  "start": 1698841800000,
+  "end": 1698843600000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "nicole",
+      "name": "Nicole",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    }
+  ],
+  "playbackId": "5100x4rts3qdhmcj",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "coverImage": "/sessions/zuconnect_istanbul__new_governance/prepare_and_ideate_on_hackzuzalu_projects.jpg",
+  "assetId": "51006dc6-7d94-4d44-98ab-9d587fd85a5b"
 }

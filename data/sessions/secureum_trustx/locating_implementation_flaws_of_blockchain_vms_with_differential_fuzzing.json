@@ -1,24 +1,24 @@
 {
-    "id": "locating_implementation_flaws_of_blockchain_vms_with_differential_fuzzing",
-    "name": "Locating Implementation Flaws of Blockchain VMs with Differential Fuzzing",
-    "description": "",
-    "start": 1699864440000,
-    "end": 1699865400000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "andy_zhou",
-            "name": "Andy\nZhou",
-            "bio": "CEO\nBlockSec",
-            "eventId": "secureum_trustx",
-            "twitter": "@yajinzhou",
-            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Andy.png"
-        }
-    ],
-    "playbackId": "2db1sfptz1mm24uw",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/locating_implementation_flaws_of_blockchain_vms_with_differential_fuzzing.jpg",
-    "assetId": "2db134ad-e027-4a5f-8320-a01bfd47be0f",
-    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-    "videoType": "clip"
+  "id": "locating_implementation_flaws_of_blockchain_vms_with_differential_fuzzing",
+  "name": "Locating Implementation Flaws of Blockchain VMs with Differential Fuzzing",
+  "description": "",
+  "start": 1699864440000,
+  "end": 1699865400000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "andy_zhou",
+      "name": "Andy\nZhou",
+      "bio": "CEO\nBlockSec",
+      "eventId": "secureum_trustx",
+      "twitter": "@yajinzhou",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Andy.png"
+    }
+  ],
+  "playbackId": "2db1sfptz1mm24uw",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/locating_implementation_flaws_of_blockchain_vms_with_differential_fuzzing.jpg",
+  "assetId": "2db134ad-e027-4a5f-8320-a01bfd47be0f",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
 }

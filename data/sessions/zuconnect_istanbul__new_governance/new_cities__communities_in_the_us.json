@@ -1,32 +1,32 @@
 {
-    "id": "new_cities__communities_in_the_us",
-    "name": "New Cities / Communities in the US",
-    "description": "A discussion of people building new communities and new cities",
-    "start": 1698826500000,
-    "end": 1698829200000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "mark",
-            "name": "Mark",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__new_governance"
-        },
-        {
-            "id": "brooke",
-            "name": "Brooke",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__new_governance"
-        },
-        {
-            "id": "lala_deheinzelin",
-            "name": "Lala Deheinzelin",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__new_governance"
-        }
-    ],
-    "playbackId": "a2bdemy80oqzgymr",
-    "eventId": "zuconnect_istanbul__new_governance",
-    "coverImage": "/sessions/zuconnect_istanbul__new_governance/new_cities__communities_in_the_us.jpg",
-    "assetId": "a2bd9cc8-b611-499d-9bf3-ea81b6922349"
+  "id": "new_cities__communities_in_the_us",
+  "name": "New Cities / Communities in the US",
+  "description": "A discussion of people building new communities and new cities",
+  "start": 1698826500000,
+  "end": 1698829200000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "mark",
+      "name": "Mark",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "brooke",
+      "name": "Brooke",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "lala_deheinzelin",
+      "name": "Lala Deheinzelin",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    }
+  ],
+  "playbackId": "a2bdemy80oqzgymr",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "coverImage": "/sessions/zuconnect_istanbul__new_governance/new_cities__communities_in_the_us.jpg",
+  "assetId": "a2bd9cc8-b611-499d-9bf3-ea81b6922349"
 }

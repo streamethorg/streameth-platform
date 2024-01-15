@@ -1,32 +1,32 @@
 {
-    "id": "kripto_yasal_dzenlemeler",
-    "name": "Kripto Yasal D\u00fczenlemeler",
-    "description": "Bu konu\u015fmada T\u00fcrkiye\u2019de kriptopara yasal d\u00fczenlemelerini tarihsel bir geli\u015fim ve uygulama \u00f6rnekleri ile aktarmay\u0131 ama\u00e7l\u0131yoruz. Bu k\u0131sa konu\u015fma ile bu alanda \u00e7al\u0131\u015fan ki\u015filerin T\u00fcrkiye\u2019deki genel mevzuata hakim olmas\u0131n\u0131 bekliyoruz.",
-    "start": 1699871400000,
-    "end": 1699875000000,
-    "stageId": "beyazit",
-    "speakers": [
-        {
-            "id": "elin_karatay",
-            "name": "El\u00e7in Karatay",
-            "bio": "El\u00e7in, teknoloji alan\u0131nda s\u00f6zle\u015fme m\u00fczakereleri konusunda \u00e7al\u0131\u015fmakta ve teknoloji \u015firketlerinin s\u00f6zle\u015fmelerini ak\u0131lc\u0131 \u015fekilde kurgulamalar\u0131 konusunda hukuki destek sa\u011flamaktad\u0131r. Teknoloji \u015firketlerinin her t\u00fcrl\u00fc stratejik ve ticari s\u00fcrecine dahil olan El\u00e7in; yaz\u0131l\u0131m geli\u015ftirme, lisans, bak\u0131m ve destek s\u00f6zle\u015fmeleri, stratejik i\u015f birli\u011fi, yat\u0131r\u0131m s\u00f6zle\u015fmeleri ile Birle\u015fme ve Devralma s\u00fcre\u00e7leri gibi konularda yerli ve yabanc\u0131 m\u00fcvekkiller ile \u00e7al\u0131\u015fmaktad\u0131r. Bunun yan\u0131nda high-tech alan\u0131nda \u00e7al\u0131\u015fan El\u00e7in; blokzincir, kriptoparalar, yapay zeka gibi alanlarda T\u00fcrkiye'de \u00f6nc\u00fc \u015firketleri temsil etmektedir. \n\nYak\u0131n Zamanda Neler Yapt\u0131?\n- Son bir y\u0131lda toplam de\u011feri 100 milyon USD'ye yakla\u015fan teknoloji ve yaz\u0131l\u0131m s\u00f6zle\u015fmelerinin m\u00fczakeresi\n- 20'den fazla Birle\u015fme ve Devralma s\u00fcrecini tamamlama\n- T\u00fcrkiye'nin en b\u00fcy\u00fck kripto varl\u0131k ihra\u00e7lar\u0131ndan 3 tanesinde hukuki dan\u0131\u015fmanl\u0131k\n- Blokzincir ve kripto varl\u0131klar ile ilgili \u00e7al\u0131\u015fan 30'dan fazla proje ve \u015firkete hukuki dan\u0131\u015fmanl\u0131k\n- Bir\u00e7ok devlet kurumu ve bakanl\u0131k, T\u00dcB\u0130TAK, BTK, FinTR gibi kurum ve kurulu\u015flar nezdinde e\u011fitimler\n- Global Blockchain Business Council \u00fcyeli\u011fi ve International Journal of Blockchain Law\u2019da co-editor g\u00f6revi\n\nE\u011fitim\n- Galatasaray \u00dcniversitesi, Sosyal Bilimler Enstit\u00fcs\u00fc, \u00d6zel Hukuk Doktora \u2013 Devam Etmekte\n- Galatasaray \u00dcniversitesi, Sosyal Bilimler Enstit\u00fcs\u00fc, \u00d6zel Hukuk Tezli Y\u00fcksek Lisans \u2013 Tez: ABD Hukuku kaynakl\u0131 SAFE'lerin T\u00fcrk Hukuku kapsam\u0131nda \u0130ncelenmesi (Giri\u015fim Sermayesi Yat\u0131r\u0131mlar\u0131)\n- Ko\u00e7 \u00dcniversitesi, Hukuk Fak\u00fcltesi, Hukuk Lisans\u0131\n\n\u00c7al\u0131\u015fma Alanlar\u0131\n- Teknoloji S\u00f6zle\u015fmeleri\n- Blokzincir ve Kripto Paralar\n- Yaz\u0131l\u0131m ve Lisans S\u00f6zle\u015fmeleri\n- Birle\u015fme ve Devralmalar\n- \u0130\u015f birli\u011fi S\u00f6zle\u015fmeleri\n\n\u00dcyelikler\n- \u0130stanbul Barosu\n- Global Blockchain Business Council\n- FinTR Y\u00f6netim Kurulu \u00dcyesi\n- IR Global\n- International Bar Assocation\n- \u0130T\u00dc \u00c7ekirdek, BAU Blockchain Center gibi kurumlarda mentor",
-            "eventId": "ethgunu",
-            "twitter": "@elcin_karatay",
-            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/elcin.jpeg?raw=true"
-        },
-        {
-            "id": "erdem_mmtaz_hacpaaolu",
-            "name": "Erdem M\u00fcmtaz Hac\u0131pa\u015fao\u011flu",
-            "bio": "No description",
-            "eventId": "ethgunu",
-            "twitter": "@MumtazHcpsglu",
-            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/mumtaz.jpeg?raw=true"
-        }
-    ],
-    "playbackId": "6c11drxfj89abf9c",
-    "eventId": "ethgunu",
-    "coverImage": "/sessions/ethgunu/kripto_yasal_dzenlemeler_thumbnail.png",
-    "assetId": "6c111796-f917-401c-9f0d-67817f29526a",
-    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-    "videoType": "clip"
+  "id": "kripto_yasal_dzenlemeler",
+  "name": "Kripto Yasal D\u00fczenlemeler",
+  "description": "Bu konu\u015fmada T\u00fcrkiye\u2019de kriptopara yasal d\u00fczenlemelerini tarihsel bir geli\u015fim ve uygulama \u00f6rnekleri ile aktarmay\u0131 ama\u00e7l\u0131yoruz. Bu k\u0131sa konu\u015fma ile bu alanda \u00e7al\u0131\u015fan ki\u015filerin T\u00fcrkiye\u2019deki genel mevzuata hakim olmas\u0131n\u0131 bekliyoruz.",
+  "start": 1699871400000,
+  "end": 1699875000000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "elin_karatay",
+      "name": "El\u00e7in Karatay",
+      "bio": "El\u00e7in, teknoloji alan\u0131nda s\u00f6zle\u015fme m\u00fczakereleri konusunda \u00e7al\u0131\u015fmakta ve teknoloji \u015firketlerinin s\u00f6zle\u015fmelerini ak\u0131lc\u0131 \u015fekilde kurgulamalar\u0131 konusunda hukuki destek sa\u011flamaktad\u0131r. Teknoloji \u015firketlerinin her t\u00fcrl\u00fc stratejik ve ticari s\u00fcrecine dahil olan El\u00e7in; yaz\u0131l\u0131m geli\u015ftirme, lisans, bak\u0131m ve destek s\u00f6zle\u015fmeleri, stratejik i\u015f birli\u011fi, yat\u0131r\u0131m s\u00f6zle\u015fmeleri ile Birle\u015fme ve Devralma s\u00fcre\u00e7leri gibi konularda yerli ve yabanc\u0131 m\u00fcvekkiller ile \u00e7al\u0131\u015fmaktad\u0131r. Bunun yan\u0131nda high-tech alan\u0131nda \u00e7al\u0131\u015fan El\u00e7in; blokzincir, kriptoparalar, yapay zeka gibi alanlarda T\u00fcrkiye'de \u00f6nc\u00fc \u015firketleri temsil etmektedir. \n\nYak\u0131n Zamanda Neler Yapt\u0131?\n- Son bir y\u0131lda toplam de\u011feri 100 milyon USD'ye yakla\u015fan teknoloji ve yaz\u0131l\u0131m s\u00f6zle\u015fmelerinin m\u00fczakeresi\n- 20'den fazla Birle\u015fme ve Devralma s\u00fcrecini tamamlama\n- T\u00fcrkiye'nin en b\u00fcy\u00fck kripto varl\u0131k ihra\u00e7lar\u0131ndan 3 tanesinde hukuki dan\u0131\u015fmanl\u0131k\n- Blokzincir ve kripto varl\u0131klar ile ilgili \u00e7al\u0131\u015fan 30'dan fazla proje ve \u015firkete hukuki dan\u0131\u015fmanl\u0131k\n- Bir\u00e7ok devlet kurumu ve bakanl\u0131k, T\u00dcB\u0130TAK, BTK, FinTR gibi kurum ve kurulu\u015flar nezdinde e\u011fitimler\n- Global Blockchain Business Council \u00fcyeli\u011fi ve International Journal of Blockchain Law\u2019da co-editor g\u00f6revi\n\nE\u011fitim\n- Galatasaray \u00dcniversitesi, Sosyal Bilimler Enstit\u00fcs\u00fc, \u00d6zel Hukuk Doktora \u2013 Devam Etmekte\n- Galatasaray \u00dcniversitesi, Sosyal Bilimler Enstit\u00fcs\u00fc, \u00d6zel Hukuk Tezli Y\u00fcksek Lisans \u2013 Tez: ABD Hukuku kaynakl\u0131 SAFE'lerin T\u00fcrk Hukuku kapsam\u0131nda \u0130ncelenmesi (Giri\u015fim Sermayesi Yat\u0131r\u0131mlar\u0131)\n- Ko\u00e7 \u00dcniversitesi, Hukuk Fak\u00fcltesi, Hukuk Lisans\u0131\n\n\u00c7al\u0131\u015fma Alanlar\u0131\n- Teknoloji S\u00f6zle\u015fmeleri\n- Blokzincir ve Kripto Paralar\n- Yaz\u0131l\u0131m ve Lisans S\u00f6zle\u015fmeleri\n- Birle\u015fme ve Devralmalar\n- \u0130\u015f birli\u011fi S\u00f6zle\u015fmeleri\n\n\u00dcyelikler\n- \u0130stanbul Barosu\n- Global Blockchain Business Council\n- FinTR Y\u00f6netim Kurulu \u00dcyesi\n- IR Global\n- International Bar Assocation\n- \u0130T\u00dc \u00c7ekirdek, BAU Blockchain Center gibi kurumlarda mentor",
+      "eventId": "ethgunu",
+      "twitter": "@elcin_karatay",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/elcin.jpeg?raw=true"
+    },
+    {
+      "id": "erdem_mmtaz_hacpaaolu",
+      "name": "Erdem M\u00fcmtaz Hac\u0131pa\u015fao\u011flu",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@MumtazHcpsglu",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/mumtaz.jpeg?raw=true"
+    }
+  ],
+  "playbackId": "6c11drxfj89abf9c",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/kripto_yasal_dzenlemeler_thumbnail.png",
+  "assetId": "6c111796-f917-401c-9f0d-67817f29526a",
+  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+  "videoType": "clip"
 }

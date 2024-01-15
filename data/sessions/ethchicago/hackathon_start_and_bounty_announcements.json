@@ -1,20 +1,20 @@
 {
-    "id": "hackathon_start_and_bounty_announcements",
-    "name": "Hackathon Start and Bounty Announcements",
-    "description": "Announce the start of the hackathon, TAIKAI registration, and Bounties",
-    "start": 1694808000000,
-    "end": 1694809800000,
-    "stageId": "oak_room_hacker_room",
-    "speakers": [
-        {
-            "id": "james_he",
-            "name": "James He",
-            "bio": "Testing this https://twitter.com/jameshe_eth",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/hackathon_start_and_bounty_announcements.jpg"
+  "id": "hackathon_start_and_bounty_announcements",
+  "name": "Hackathon Start and Bounty Announcements",
+  "description": "Announce the start of the hackathon, TAIKAI registration, and Bounties",
+  "start": 1694808000000,
+  "end": 1694809800000,
+  "stageId": "oak_room_hacker_room",
+  "speakers": [
+    {
+      "id": "james_he",
+      "name": "James He",
+      "bio": "Testing this https://twitter.com/jameshe_eth",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/hackathon_start_and_bounty_announcements.jpg"
 }

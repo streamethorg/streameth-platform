@@ -1,19 +1,19 @@
 {
-    "id": "web3__a_chave__a_web2",
-    "name": "Web3 - a chave \u00e9 a Web2",
-    "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
-    "start": "2023-03-16T10:50:00.000Z",
-    "end": "2023-03-16T11:05:00.000Z",
-    "stageId": "conference_main_hall",
-    "speakers": [
-        {
-            "id": "gonalo_perdigo",
-            "name": "Gon\u00e7alo Perdig\u00e3o",
-            "bio": "Algorithm G",
-            "eventId": "ethporto_2023",
-            "photo": "https://ethporto.org/assets/speakers/goncalopredigao.jpg"
-        }
-    ],
-    "playbackId": "a709n3vi4hvw72zv",
-    "eventId": "ethporto_2023"
+  "id": "web3__a_chave__a_web2",
+  "name": "Web3 - a chave \u00e9 a Web2",
+  "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
+  "start": "2023-03-16T10:50:00.000Z",
+  "end": "2023-03-16T11:05:00.000Z",
+  "stageId": "conference_main_hall",
+  "speakers": [
+    {
+      "id": "gonalo_perdigo",
+      "name": "Gon\u00e7alo Perdig\u00e3o",
+      "bio": "Algorithm G",
+      "eventId": "ethporto_2023",
+      "photo": "https://ethporto.org/assets/speakers/goncalopredigao.jpg"
+    }
+  ],
+  "playbackId": "a709n3vi4hvw72zv",
+  "eventId": "ethporto_2023"
 }

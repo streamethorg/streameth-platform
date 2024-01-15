@@ -1,20 +1,20 @@
 {
-    "id": "how_to_be_radically_social",
-    "name": "How to be Radically social?",
-    "description": "No description",
-    "start": 1699356900000,
-    "end": 1699357500000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "joshua_dvila",
-            "name": "Joshua D\u00e1vila",
-            "bio": "No Description",
-            "eventId": "zuconnect__decentralized_social_track"
-        }
-    ],
-    "playbackId": "bf20opblf2qscq82",
-    "eventId": "zuconnect__decentralized_social_track",
-    "coverImage": "/sessions/zuconnect__decentralized_social_track/how_to_be_radically_social.jpg",
-    "assetId": "bf20e1df-3328-4373-b5f0-2cf1f3f40fbd"
+  "id": "how_to_be_radically_social",
+  "name": "How to be Radically social?",
+  "description": "No description",
+  "start": 1699356900000,
+  "end": 1699357500000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "joshua_dvila",
+      "name": "Joshua D\u00e1vila",
+      "bio": "No Description",
+      "eventId": "zuconnect__decentralized_social_track"
+    }
+  ],
+  "playbackId": "bf20opblf2qscq82",
+  "eventId": "zuconnect__decentralized_social_track",
+  "coverImage": "/sessions/zuconnect__decentralized_social_track/how_to_be_radically_social.jpg",
+  "assetId": "bf20e1df-3328-4373-b5f0-2cf1f3f40fbd"
 }

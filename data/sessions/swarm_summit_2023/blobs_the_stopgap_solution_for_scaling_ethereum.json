@@ -1,19 +1,19 @@
 {
-    "id": "blobs_the_stopgap_solution_for_scaling_ethereum",
-    "name": "Blobs: the stopgap solution for scaling Ethereum",
-    "description": "Gabi, developer of Blobscan, the pioneering EIP4844 Blob Transaction explorer, will present Blobs: the stopgap solution for scaling Ethereum",
-    "start": "2023-06-23T14:15:00.000Z",
-    "end": "2023-06-23T14:30:00.000Z",
-    "stageId": "main",
-    "speakers": [
-        {
-            "id": "gabi",
-            "name": "Gabi",
-            "bio": "No description",
-            "eventId": "swarm_summit_2023",
-            "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
-        }
-    ],
-    "playbackId": "c311znu6t578htig",
-    "eventId": "swarm_summit_2023"
+  "id": "blobs_the_stopgap_solution_for_scaling_ethereum",
+  "name": "Blobs: the stopgap solution for scaling Ethereum",
+  "description": "Gabi, developer of Blobscan, the pioneering EIP4844 Blob Transaction explorer, will present Blobs: the stopgap solution for scaling Ethereum",
+  "start": "2023-06-23T14:15:00.000Z",
+  "end": "2023-06-23T14:30:00.000Z",
+  "stageId": "main",
+  "speakers": [
+    {
+      "id": "gabi",
+      "name": "Gabi",
+      "bio": "No description",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://drive.google.com/uc?id=1mgx7EUb3gQqeYmesnBeljZVRhAE0cMsa"
+    }
+  ],
+  "playbackId": "c311znu6t578htig",
+  "eventId": "swarm_summit_2023"
 }

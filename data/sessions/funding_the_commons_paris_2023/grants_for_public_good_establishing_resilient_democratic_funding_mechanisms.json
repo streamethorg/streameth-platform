@@ -1,19 +1,19 @@
 {
-    "id": "grants_for_public_good_establishing_resilient_democratic_funding_mechanisms",
-    "name": "Grants for (Public) Good: Establishing Resilient, Democratic Funding Mechanisms",
-    "description": "",
-    "start": "2023-07-16T10:10:00.000Z",
-    "end": "2023-07-16T10:40:00.000Z",
-    "stageId": "farabeuf_amphitheater",
-    "speakers": [
-        {
-            "id": "megan_lister",
-            "name": "Megan Lister",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        }
-    ],
-    "playbackId": "867e0y0en4fi2gw0",
-    "eventId": "funding_the_commons_paris_2023",
-    "coverImage": "/sessions/funding_the_commons_paris_2023/grants_for_public_good_establishing_resilient_democratic_funding_mechanisms.jpg"
+  "id": "grants_for_public_good_establishing_resilient_democratic_funding_mechanisms",
+  "name": "Grants for (Public) Good: Establishing Resilient, Democratic Funding Mechanisms",
+  "description": "",
+  "start": "2023-07-16T10:10:00.000Z",
+  "end": "2023-07-16T10:40:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "megan_lister",
+      "name": "Megan Lister",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "playbackId": "867e0y0en4fi2gw0",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/grants_for_public_good_establishing_resilient_democratic_funding_mechanisms.jpg"
 }

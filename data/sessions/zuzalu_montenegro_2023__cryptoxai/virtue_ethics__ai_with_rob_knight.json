@@ -1,19 +1,19 @@
 {
-    "id": "virtue_ethics__ai_with_rob_knight",
-    "name": "Virtue Ethics & AI with Rob Knight",
-    "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
-    "start": "2023-05-06T06:15:00.000Z",
-    "end": "2023-05-06T07:15:00.000Z",
-    "stageId": "ballroom",
-    "speakers": [
-        {
-            "id": "robert_knight",
-            "name": "Robert Knight",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__cryptoxai"
-        }
-    ],
-    "playbackId": "8c2cdmtqy3m3267c",
-    "eventId": "zuzalu_montenegro_2023__cryptoxai",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "virtue_ethics__ai_with_rob_knight",
+  "name": "Virtue Ethics & AI with Rob Knight",
+  "description": "This event is part of the AI x Crypto Summit @ Zuzalu! Please see =\"http://ai.zuzalu.ai/\" title=\"ai.zuzalu.ai\"><u>ai.zuzalu.ai</u></a> for full details.",
+  "start": "2023-05-06T06:15:00.000Z",
+  "end": "2023-05-06T07:15:00.000Z",
+  "stageId": "ballroom",
+  "speakers": [
+    {
+      "id": "robert_knight",
+      "name": "Robert Knight",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
+  "playbackId": "8c2cdmtqy3m3267c",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -1,24 +1,24 @@
 {
-    "id": "kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama",
-    "name": "Kripto C\u00fczdanlar\u0131n\u0131 Sonraki 1 Milyar Kullan\u0131c\u0131ya Haz\u0131r Hale Getirmek: Hesap Soyutlama",
-    "description": "Ben Do\u011fan, Clave \u015firketinde ara\u015ft\u0131rmac\u0131 olarak \u00e7al\u0131\u015fmaktay\u0131m. \u015eu anda ana ara\u015ft\u0131rma konum, c\u00fczdanlar\u0131n nas\u0131l daha g\u00fcvenli hale getirilebilece\u011fi ve bu konudaki son \u00e7al\u0131\u015fmalar. Buna y\u00f6nelik olacak \u015fekilde, bir geli\u015ftirici yada kullan\u0131c\u0131 olarak buradaki geli\u015fmeleri \u00f6\u011frenmek isteyenler i\u00e7in bir konu\u015fma yapaca\u011f\u0131m. Bu konu\u015fman\u0131n hedef kitlesi, bu konuyu merak eden herkes.\n",
-    "start": 1699878600000,
-    "end": 1699880400000,
-    "stageId": "beyazit",
-    "speakers": [
-        {
-            "id": "doan_alpaslan",
-            "name": "Do\u011fan Alpaslan",
-            "bio": "My name is Dogan, and I'm a 20-year-old researcher and analyst who specializes in blockchain infrastructure. My adventure began with my Twitter account (@doganeth). I started writing what I posted there since I think writing is the best method to learn.\n\nI began writing articles about blockchain about 1.5 years ago. I began my work as a columnist, and thousands of people have read my articles. I then became a researcher analyst for the Lytera team.\n\nI am now focusing on blockchain infrastructure, modular blockchains, and other things.\n",
-            "eventId": "ethgunu",
-            "twitter": "@DoganEth",
-            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/dogan.jpg?raw=true"
-        }
-    ],
-    "playbackId": "ebb884i825539i50",
-    "eventId": "ethgunu",
-    "coverImage": "/sessions/ethgunu/kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama_thumbnail.png",
-    "assetId": "ebb81be8-d767-4b85-802d-c583ad8d71a4",
-    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-    "videoType": "clip"
+  "id": "kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama",
+  "name": "Kripto C\u00fczdanlar\u0131n\u0131 Sonraki 1 Milyar Kullan\u0131c\u0131ya Haz\u0131r Hale Getirmek: Hesap Soyutlama",
+  "description": "Ben Do\u011fan, Clave \u015firketinde ara\u015ft\u0131rmac\u0131 olarak \u00e7al\u0131\u015fmaktay\u0131m. \u015eu anda ana ara\u015ft\u0131rma konum, c\u00fczdanlar\u0131n nas\u0131l daha g\u00fcvenli hale getirilebilece\u011fi ve bu konudaki son \u00e7al\u0131\u015fmalar. Buna y\u00f6nelik olacak \u015fekilde, bir geli\u015ftirici yada kullan\u0131c\u0131 olarak buradaki geli\u015fmeleri \u00f6\u011frenmek isteyenler i\u00e7in bir konu\u015fma yapaca\u011f\u0131m. Bu konu\u015fman\u0131n hedef kitlesi, bu konuyu merak eden herkes.\n",
+  "start": 1699878600000,
+  "end": 1699880400000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "doan_alpaslan",
+      "name": "Do\u011fan Alpaslan",
+      "bio": "My name is Dogan, and I'm a 20-year-old researcher and analyst who specializes in blockchain infrastructure. My adventure began with my Twitter account (@doganeth). I started writing what I posted there since I think writing is the best method to learn.\n\nI began writing articles about blockchain about 1.5 years ago. I began my work as a columnist, and thousands of people have read my articles. I then became a researcher analyst for the Lytera team.\n\nI am now focusing on blockchain infrastructure, modular blockchains, and other things.\n",
+      "eventId": "ethgunu",
+      "twitter": "@DoganEth",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/dogan.jpg?raw=true"
+    }
+  ],
+  "playbackId": "ebb884i825539i50",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/kripto_czdanlarn_sonraki_1_milyar_kullancya_hazr_hale_getirmek_hesap_soyutlama_thumbnail.png",
+  "assetId": "ebb81be8-d767-4b85-802d-c583ad8d71a4",
+  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+  "videoType": "clip"
 }

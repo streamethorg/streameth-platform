@@ -1,24 +1,24 @@
 {
-    "id": "sfr_bilgi_ispatlar_ve_zksnark_nedir",
-    "name": "S\u0131f\u0131r bilgi ispatlar\u0131 ve zkSNARK nedir?",
-    "description": "S\u0131f\u0131r bilgi ispatlar\u0131 nedir? zkSNARK ve zkSTARK nedir? Nerede kullan\u0131maktad\u0131rlar? Faydalar\u0131 nelerdir? Performans problemleri ve \u00e7\u00f6z\u00fcmleri nas\u0131ld\u0131r? Gelecekte bu teknoloji i\u00e7in neler beklenmektedir? G\u00fcvenlik a\u00e7\u0131kl\u0131klar\u0131 var m\u0131d\u0131r?\n",
-    "start": 1699880400000,
-    "end": 1699882200000,
-    "stageId": "beyazit",
-    "speakers": [
-        {
-            "id": "znur_mut_sadolu",
-            "name": "\u00d6znur Mut Sa\u011fd\u0131\u00e7o\u011flu",
-            "bio": "T\u00fcbitak Bilgem Blok Zincir Lab.",
-            "eventId": "ethgunu",
-            "twitter": "",
-            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/oznur.jpg?raw=true"
-        }
-    ],
-    "playbackId": "70aevjvg67n710qi",
-    "eventId": "ethgunu",
-    "coverImage": "/sessions/ethgunu/sfr_bilgi_ispatlar_ve_zksnark_nedir_thumbnail.png",
-    "assetId": "70ae079c-0144-4905-8310-659263a69709",
-    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-    "videoType": "clip"
+  "id": "sfr_bilgi_ispatlar_ve_zksnark_nedir",
+  "name": "S\u0131f\u0131r bilgi ispatlar\u0131 ve zkSNARK nedir?",
+  "description": "S\u0131f\u0131r bilgi ispatlar\u0131 nedir? zkSNARK ve zkSTARK nedir? Nerede kullan\u0131maktad\u0131rlar? Faydalar\u0131 nelerdir? Performans problemleri ve \u00e7\u00f6z\u00fcmleri nas\u0131ld\u0131r? Gelecekte bu teknoloji i\u00e7in neler beklenmektedir? G\u00fcvenlik a\u00e7\u0131kl\u0131klar\u0131 var m\u0131d\u0131r?\n",
+  "start": 1699880400000,
+  "end": 1699882200000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "znur_mut_sadolu",
+      "name": "\u00d6znur Mut Sa\u011fd\u0131\u00e7o\u011flu",
+      "bio": "T\u00fcbitak Bilgem Blok Zincir Lab.",
+      "eventId": "ethgunu",
+      "twitter": "",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/oznur.jpg?raw=true"
+    }
+  ],
+  "playbackId": "70aevjvg67n710qi",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/sfr_bilgi_ispatlar_ve_zksnark_nedir_thumbnail.png",
+  "assetId": "70ae079c-0144-4905-8310-659263a69709",
+  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+  "videoType": "clip"
 }

@@ -1,32 +1,32 @@
 {
-    "id": "lattice_keynote",
-    "name": "Lattice Keynote",
-    "description": "In this session, Lattice will introduce new products for Autonomous Worlds.",
-    "start": 1700042400000,
-    "end": 1700044200000,
-    "stageId": "emirgan_2",
-    "speakers": [
-        {
-            "id": "justin_glibert",
-            "name": "Justin Glibert",
-            "bio": "Justin Glibert is the co-founder of 0xPARC, a research institution that funds development in cryptography, Autonomous Worlds, and other decentralised technologies. He operates as the CEO of Lattice, the company behind MUD, the most popular onchain game framework and infrastructure today. ",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@justinglibert",
-            "photo": "https://drive.google.com/uc?id=1ZU_k69H705Ez24ZtSfk1DtSVgQu-Gj_Y"
-        },
-        {
-            "id": "alvarius",
-            "name": "Alvarius",
-            "bio": "Alvarius is co-founder and CTO of Lattice, where he is currently working on MUD, among other projects. Previously, he helped build the onchain Minecraft clone OPCraft.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@_alvarius",
-            "photo": "https://drive.google.com/uc?id=1H4Zyn1gxE6HXSUsyGoeMD8yLtW5pm2L2"
-        }
-    ],
-    "playbackId": "c73f4nyzixij1i5k",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/lattice_keynote_thumbnail.png",
-    "assetId": "c73fd484-2b2d-4ce2-a953-5e714cb1e010",
-    "sourceId": "4955fcec-2ee9-4fc9-aa9e-16ab5baa551f",
-    "videoType": "clip"
+  "id": "lattice_keynote",
+  "name": "Lattice Keynote",
+  "description": "In this session, Lattice will introduce new products for Autonomous Worlds.",
+  "start": 1700042400000,
+  "end": 1700044200000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "justin_glibert",
+      "name": "Justin Glibert",
+      "bio": "Justin Glibert is the co-founder of 0xPARC, a research institution that funds development in cryptography, Autonomous Worlds, and other decentralised technologies. He operates as the CEO of Lattice, the company behind MUD, the most popular onchain game framework and infrastructure today. ",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@justinglibert",
+      "photo": "https://drive.google.com/uc?id=1ZU_k69H705Ez24ZtSfk1DtSVgQu-Gj_Y"
+    },
+    {
+      "id": "alvarius",
+      "name": "Alvarius",
+      "bio": "Alvarius is co-founder and CTO of Lattice, where he is currently working on MUD, among other projects. Previously, he helped build the onchain Minecraft clone OPCraft.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@_alvarius",
+      "photo": "https://drive.google.com/uc?id=1H4Zyn1gxE6HXSUsyGoeMD8yLtW5pm2L2"
+    }
+  ],
+  "playbackId": "c73f4nyzixij1i5k",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/lattice_keynote_thumbnail.png",
+  "assetId": "c73fd484-2b2d-4ce2-a953-5e714cb1e010",
+  "sourceId": "4955fcec-2ee9-4fc9-aa9e-16ab5baa551f",
+  "videoType": "clip"
 }

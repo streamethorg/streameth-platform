@@ -1,27 +1,27 @@
 {
-    "id": "open_source_all_things",
-    "name": "Open source all things",
-    "description": "Open-source is a foundational aspect of public goods, and should not be an afterthought. In this talk, I'll share our experience of building Brave Wallet as a free and open-source project, and explore how open-source isn't just a buzzword but a key ingredient in making public goods fair and resilient.",
-    "start": 1694263800000,
-    "end": 1694265000000,
-    "stageId": "mainstage",
-    "speakers": [
-        {
-            "id": "anirudha_bose",
-            "name": "Anirudha Bose",
-            "bio": "Brave",
-            "eventId": "funding_the_commons_berlin_2023",
-            "twitter": "@onybose",
-            "photo": "https://pbs.twimg.com/profile_images/1602308924686094336/IMrRX2ac_400x400.jpg"
-        }
-    ],
-    "source": {
-        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-        "start": 20253,
-        "end": 21208
-    },
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/open_source_all_things.jpg",
-    "assetId": "9b1c58db-5585-406e-9443-ae38b21fc7a6",
-    "playbackId": "9b1cufwj5bup6ccj"
+  "id": "open_source_all_things",
+  "name": "Open source all things",
+  "description": "Open-source is a foundational aspect of public goods, and should not be an afterthought. In this talk, I'll share our experience of building Brave Wallet as a free and open-source project, and explore how open-source isn't just a buzzword but a key ingredient in making public goods fair and resilient.",
+  "start": 1694263800000,
+  "end": 1694265000000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "anirudha_bose",
+      "name": "Anirudha Bose",
+      "bio": "Brave",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "@onybose",
+      "photo": "https://pbs.twimg.com/profile_images/1602308924686094336/IMrRX2ac_400x400.jpg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 20253,
+    "end": 21208
+  },
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/open_source_all_things.jpg",
+  "assetId": "9b1c58db-5585-406e-9443-ae38b21fc7a6",
+  "playbackId": "9b1cufwj5bup6ccj"
 }

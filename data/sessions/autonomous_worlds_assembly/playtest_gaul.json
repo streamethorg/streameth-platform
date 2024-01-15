@@ -1,21 +1,21 @@
 {
-    "id": "playtest_gaul",
-    "name": "Playtest: Gaul",
-    "description": "Gaul is a fully onchain roadbuilding game. Mine, slash, and pave mile after mile of treacherous terrain as you build an eternal road into the wild lands of Gaul. Collect items and equipment and become the ultimate roadpilled NPC.",
-    "start": 1700118000000,
-    "end": 1700121600000,
-    "stageId": "gaming_corner",
-    "speakers": [
-        {
-            "id": "enginestudy",
-            "name": "engine.study",
-            "bio": "engine.study is a video game company.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@engine_study",
-            "photo": "https://pbs.twimg.com/profile_images/1723089145772507136/XXcf1BlJ_400x400.jpg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/playtest_gaul_thumbnail.png"
+  "id": "playtest_gaul",
+  "name": "Playtest: Gaul",
+  "description": "Gaul is a fully onchain roadbuilding game. Mine, slash, and pave mile after mile of treacherous terrain as you build an eternal road into the wild lands of Gaul. Collect items and equipment and become the ultimate roadpilled NPC.",
+  "start": 1700118000000,
+  "end": 1700121600000,
+  "stageId": "gaming_corner",
+  "speakers": [
+    {
+      "id": "enginestudy",
+      "name": "engine.study",
+      "bio": "engine.study is a video game company.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@engine_study",
+      "photo": "https://pbs.twimg.com/profile_images/1723089145772507136/XXcf1BlJ_400x400.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/playtest_gaul_thumbnail.png"
 }

@@ -1,19 +1,19 @@
 {
-    "id": "intro_to_nova",
-    "name": "Intro to Nova",
-    "description": "The video promotes America Furniture and encourages viewers to get involved by visiting their website, which is repeated numerous times throughout the description.",
-    "start": "2023-04-18T14:30:00.000Z",
-    "end": "2023-04-18T16:00:00.000Z",
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "justin_drake",
-            "name": "Justin Drake",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__zksync"
-        }
-    ],
-    "playbackId": "52b86mbusyx3xkky",
-    "eventId": "zuzalu_montenegro_2023__zksync",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "intro_to_nova",
+  "name": "Intro to Nova",
+  "description": "The video promotes America Furniture and encourages viewers to get involved by visiting their website, which is repeated numerous times throughout the description.",
+  "start": "2023-04-18T14:30:00.000Z",
+  "end": "2023-04-18T16:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "justin_drake",
+      "name": "Justin Drake",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__zksync"
+    }
+  ],
+  "playbackId": "52b86mbusyx3xkky",
+  "eventId": "zuzalu_montenegro_2023__zksync",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -1,20 +1,20 @@
 {
-    "id": "decentralizing_more_than_finance_with_attestations",
-    "name": "Decentralizing more than finance with attestations",
-    "description": "This talk explores the concept of digital attestations and how they can be used to unlock so many non-financial use cases.",
-    "start": 1694973600000,
-    "end": 1694975400000,
-    "stageId": "east_room__main_",
-    "speakers": [
-        {
-            "id": "bruce_patrick",
-            "name": "Bruce Patrick",
-            "bio": "Core team and product person with some salty dev skills. Building the Ethereum Attestation Service.",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/bryce_RDHijPV.png"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/decentralizing_more_than_finance_with_attestations.jpg"
+  "id": "decentralizing_more_than_finance_with_attestations",
+  "name": "Decentralizing more than finance with attestations",
+  "description": "This talk explores the concept of digital attestations and how they can be used to unlock so many non-financial use cases.",
+  "start": 1694973600000,
+  "end": 1694975400000,
+  "stageId": "east_room__main_",
+  "speakers": [
+    {
+      "id": "bruce_patrick",
+      "name": "Bruce Patrick",
+      "bio": "Core team and product person with some salty dev skills. Building the Ethereum Attestation Service.",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/bryce_RDHijPV.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/decentralizing_more_than_finance_with_attestations.jpg"
 }

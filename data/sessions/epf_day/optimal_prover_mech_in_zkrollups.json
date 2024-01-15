@@ -1,38 +1,38 @@
 {
-    "id": "optimal_prover_mech_in_zkrollups",
-    "name": "Optimal Prover Mech in ZK-Rollups",
-    "description": "Fellow project presentation by Nilufer, Rachit, and Norbert",
-    "start": 1700225100000,
-    "end": 1700225700000,
-    "stageId": "3b36",
-    "speakers": [
-        {
-            "id": "nilufer_okay",
-            "name": "Nilufer Okay",
-            "bio": "EPF Fellow",
-            "eventId": "epf_day",
-            "twitter": "@niluokay"
-        },
-        {
-            "id": "rachit_sonthalia",
-            "name": "Rachit Sonthalia",
-            "bio": "EPF Fellow",
-            "eventId": "epf_day",
-            "twitter": "@rachit__s",
-            "photo": "https://drive.google.com/file/d/167ORDqbAF3Z_W0DIE_ncEbVTf8qwjiC6/view?usp=sharing"
-        },
-        {
-            "id": "norbert",
-            "name": "Norbert",
-            "bio": "EPF Fellow",
-            "eventId": "epf_day",
-            "twitter": ""
-        }
-    ],
-    "playbackId": "165718jve7y9ga1s",
-    "eventId": "epf_day",
-    "coverImage": "/sessions/epf_day/optimal_prover_mech_in_zkrollups_thumbnail.png",
-    "assetId": "1657eee1-6066-41b2-ac34-b93804d0785c",
-    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-    "videoType": "clip"
+  "id": "optimal_prover_mech_in_zkrollups",
+  "name": "Optimal Prover Mech in ZK-Rollups",
+  "description": "Fellow project presentation by Nilufer, Rachit, and Norbert",
+  "start": 1700225100000,
+  "end": 1700225700000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "nilufer_okay",
+      "name": "Nilufer Okay",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@niluokay"
+    },
+    {
+      "id": "rachit_sonthalia",
+      "name": "Rachit Sonthalia",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@rachit__s",
+      "photo": "https://drive.google.com/file/d/167ORDqbAF3Z_W0DIE_ncEbVTf8qwjiC6/view?usp=sharing"
+    },
+    {
+      "id": "norbert",
+      "name": "Norbert",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": ""
+    }
+  ],
+  "playbackId": "165718jve7y9ga1s",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/optimal_prover_mech_in_zkrollups_thumbnail.png",
+  "assetId": "1657eee1-6066-41b2-ac34-b93804d0785c",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }

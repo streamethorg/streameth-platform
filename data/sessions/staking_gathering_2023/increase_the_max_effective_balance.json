@@ -1,21 +1,21 @@
 {
-    "id": "increase_the_max_effective_balance",
-    "name": "Increase the MAX_EFFECTIVE_BALANCE",
-    "description": "-",
-    "start": 1699859400000,
-    "end": 1699860900000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "mike_neuder",
-            "name": "Mike Neuder",
-            "bio": "Ethereum Foundation\nResearch & Software",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/5/07/19160277/avatar.jpg?ed9"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/increase_the_max_effective_balance.jpg"
+  "id": "increase_the_max_effective_balance",
+  "name": "Increase the MAX_EFFECTIVE_BALANCE",
+  "description": "-",
+  "start": 1699859400000,
+  "end": 1699860900000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "mike_neuder",
+      "name": "Mike Neuder",
+      "bio": "Ethereum Foundation\nResearch & Software",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/5/07/19160277/avatar.jpg?ed9"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/increase_the_max_effective_balance.jpg"
 }

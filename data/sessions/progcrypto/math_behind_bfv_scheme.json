@@ -1,22 +1,22 @@
 {
-    "id": "math_behind_bfv_scheme",
-    "name": "Math behind BFV scheme",
-    "description": "I will go over a RLWE problem to construct a public key BFV scheme of FHE. This talk is going to be a TLDR of whiteboard math session of FHE workshop at 13:30 on Friday.",
-    "start": 1700210700000,
-    "end": 1700211600000,
-    "stageId": "dolmabahce_b__c",
-    "speakers": [
-        {
-            "id": "yuriko",
-            "name": "Yuriko",
-            "bio": "We're doing a research on the intersection of FHE and ZK, how we can combine those two to build cool applications/components to help the ecosystem. ",
-            "eventId": "progcrypto",
-            "twitter": "",
-            "photo": "https://drive.google.com/file/d/13mJFcS8MxrAzdmOtQ8Vdidbfyt6wAZBf/view"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "progcrypto",
-    "track": "Next Gen Applied Crypto",
-    "coverImage": "/sessions/progcrypto/math_behind_bfv_scheme_thumbnail.png"
+  "id": "math_behind_bfv_scheme",
+  "name": "Math behind BFV scheme",
+  "description": "I will go over a RLWE problem to construct a public key BFV scheme of FHE. This talk is going to be a TLDR of whiteboard math session of FHE workshop at 13:30 on Friday.",
+  "start": 1700210700000,
+  "end": 1700211600000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "yuriko",
+      "name": "Yuriko",
+      "bio": "We're doing a research on the intersection of FHE and ZK, how we can combine those two to build cool applications/components to help the ecosystem. ",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/13mJFcS8MxrAzdmOtQ8Vdidbfyt6wAZBf/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Next Gen Applied Crypto",
+  "coverImage": "/sessions/progcrypto/math_behind_bfv_scheme_thumbnail.png"
 }

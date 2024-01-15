@@ -1,24 +1,24 @@
 {
-    "id": "sfr_bilgi_kantlar_ile_web3te_yeni_a",
-    "name": "S\u0131f\u0131r Bilgi Kan\u0131tlar\u0131 ile Web3'te Yeni \u00c7a\u011f",
-    "description": "Son zamanlar\u0131n en \u00f6nemli kriptografi geli\u015fmelerinden biri olarak adledilen s\u0131f\u0131r bilgi kan\u0131tlar\u0131 (zero knowledge proofs), blokzincirleri ile kritik bir kullan\u0131m alan\u0131 buldu. Sihir gibi duyulan ve son zamanlarda ad\u0131 rolluplar ile \u00e7ok ge\u00e7en bu teknolojinin nas\u0131l \u00e7al\u0131\u015ft\u0131\u011f\u0131n\u0131 ve daha ne gibi \u00fcr\u00fcnleri m\u00fcmk\u00fcn k\u0131labilece\u011fini gelin beraber konu\u015fal\u0131m.\n",
-    "start": 1699871400000,
-    "end": 1699873200000,
-    "stageId": "harbiye",
-    "speakers": [
-        {
-            "id": "emre_tekialp",
-            "name": "Emre Teki\u015falp",
-            "bio": "No description",
-            "eventId": "ethgunu",
-            "twitter": "@etekis",
-            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/emre.jpeg?raw=true"
-        }
-    ],
-    "playbackId": "ca064xdwbwph8oea",
-    "eventId": "ethgunu",
-    "coverImage": "/sessions/ethgunu/sfr_bilgi_kantlar_ile_web3te_yeni_a_thumbnail.png",
-    "assetId": "ca06530d-0eb5-4535-903d-56177d688462",
-    "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
-    "videoType": "clip"
+  "id": "sfr_bilgi_kantlar_ile_web3te_yeni_a",
+  "name": "S\u0131f\u0131r Bilgi Kan\u0131tlar\u0131 ile Web3'te Yeni \u00c7a\u011f",
+  "description": "Son zamanlar\u0131n en \u00f6nemli kriptografi geli\u015fmelerinden biri olarak adledilen s\u0131f\u0131r bilgi kan\u0131tlar\u0131 (zero knowledge proofs), blokzincirleri ile kritik bir kullan\u0131m alan\u0131 buldu. Sihir gibi duyulan ve son zamanlarda ad\u0131 rolluplar ile \u00e7ok ge\u00e7en bu teknolojinin nas\u0131l \u00e7al\u0131\u015ft\u0131\u011f\u0131n\u0131 ve daha ne gibi \u00fcr\u00fcnleri m\u00fcmk\u00fcn k\u0131labilece\u011fini gelin beraber konu\u015fal\u0131m.\n",
+  "start": 1699871400000,
+  "end": 1699873200000,
+  "stageId": "harbiye",
+  "speakers": [
+    {
+      "id": "emre_tekialp",
+      "name": "Emre Teki\u015falp",
+      "bio": "No description",
+      "eventId": "ethgunu",
+      "twitter": "@etekis",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/emre.jpeg?raw=true"
+    }
+  ],
+  "playbackId": "ca064xdwbwph8oea",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/sfr_bilgi_kantlar_ile_web3te_yeni_a_thumbnail.png",
+  "assetId": "ca06530d-0eb5-4535-903d-56177d688462",
+  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+  "videoType": "clip"
 }

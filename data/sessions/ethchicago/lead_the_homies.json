@@ -1,20 +1,20 @@
 {
-    "id": "lead_the_homies",
-    "name": "Lead the Homies",
-    "description": "Michael Hollingsworth, Tuan Jones, and William Ojeda will discuss what it takes to make it as an artist in web3. We will recap past events along with highlighting upcoming events we have scheduled. Discussing the growth process of \u201cLead the Homies\u201d and how it came to be.",
-    "start": 1694901600000,
-    "end": 1694903400000,
-    "stageId": "michigan_stage__creatives__trad_business_",
-    "speakers": [
-        {
-            "id": "goldiesnftart",
-            "name": "GoldiesNFTart",
-            "bio": "Creative Director / Web3 artist",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/Frame_13_53_cFc76DX.png"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/lead_the_homies.jpg"
+  "id": "lead_the_homies",
+  "name": "Lead the Homies",
+  "description": "Michael Hollingsworth, Tuan Jones, and William Ojeda will discuss what it takes to make it as an artist in web3. We will recap past events along with highlighting upcoming events we have scheduled. Discussing the growth process of \u201cLead the Homies\u201d and how it came to be.",
+  "start": 1694901600000,
+  "end": 1694903400000,
+  "stageId": "michigan_stage__creatives__trad_business_",
+  "speakers": [
+    {
+      "id": "goldiesnftart",
+      "name": "GoldiesNFTart",
+      "bio": "Creative Director / Web3 artist",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/Frame_13_53_cFc76DX.png"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/lead_the_homies.jpg"
 }

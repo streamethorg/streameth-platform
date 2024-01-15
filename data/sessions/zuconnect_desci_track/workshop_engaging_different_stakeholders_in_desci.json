@@ -1,19 +1,19 @@
 {
-    "id": "workshop_engaging_different_stakeholders_in_desci",
-    "name": "Workshop: Engaging Different Stakeholders in DeSci",
-    "description": "DeSci stakeholders include scientists, developers, investors, patients \nand a large number of non scientists (eg comms, marketing), how can \nDeSci DAOS onboard and engage all these different stakeholders, adding value to them.",
-    "start": 1699024200000,
-    "end": 1699027800000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "ines_silva",
-            "name": "Ines Silva",
-            "bio": "No Desciption",
-            "eventId": "zuconnect_desci_track"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "zuconnect_desci_track",
-    "coverImage": "/sessions/zuconnect_desci_track/workshop_engaging_different_stakeholders_in_desci.jpg"
+  "id": "workshop_engaging_different_stakeholders_in_desci",
+  "name": "Workshop: Engaging Different Stakeholders in DeSci",
+  "description": "DeSci stakeholders include scientists, developers, investors, patients \nand a large number of non scientists (eg comms, marketing), how can \nDeSci DAOS onboard and engage all these different stakeholders, adding value to them.",
+  "start": 1699024200000,
+  "end": 1699027800000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "ines_silva",
+      "name": "Ines Silva",
+      "bio": "No Desciption",
+      "eventId": "zuconnect_desci_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_desci_track",
+  "coverImage": "/sessions/zuconnect_desci_track/workshop_engaging_different_stakeholders_in_desci.jpg"
 }

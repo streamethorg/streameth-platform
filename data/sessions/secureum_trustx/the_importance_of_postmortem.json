@@ -1,19 +1,19 @@
 {
-    "id": "the_importance_of_postmortem",
-    "name": "The Importance of Post-Mortem",
-    "description": "",
-    "start": 1699878600000,
-    "end": 1699880400000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "michal_twardzick",
-            "name": "Michal Twardzick",
-            "bio": "TBD",
-            "eventId": "secureum_trustx"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/the_importance_of_postmortem.jpg"
+  "id": "the_importance_of_postmortem",
+  "name": "The Importance of Post-Mortem",
+  "description": "",
+  "start": 1699878600000,
+  "end": 1699880400000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "michal_twardzick",
+      "name": "Michal Twardzick",
+      "bio": "TBD",
+      "eventId": "secureum_trustx"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/the_importance_of_postmortem.jpg"
 }

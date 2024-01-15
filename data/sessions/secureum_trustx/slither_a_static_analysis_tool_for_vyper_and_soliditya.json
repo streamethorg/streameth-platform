@@ -1,24 +1,24 @@
 {
-    "id": "slither_a_static_analysis_tool_for_vyper_and_soliditya",
-    "name": "Slither: a static analysis tool for Vyper and Soliditya",
-    "description": "",
-    "start": 1699941600000,
-    "end": 1699942560000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "troy_sargent",
-            "name": "Troy\nSargent",
-            "bio": "Security Engineer\nTrail of Bits",
-            "eventId": "secureum_trustx",
-            "twitter": "",
-            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Troy.png"
-        }
-    ],
-    "playbackId": "9c1barf3narwp60s",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/slither_a_static_analysis_tool_for_vyper_and_soliditya.jpg",
-    "assetId": "9c1b6ab8-23df-42d5-9724-d1a2c271e404",
-    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-    "videoType": "clip"
+  "id": "slither_a_static_analysis_tool_for_vyper_and_soliditya",
+  "name": "Slither: a static analysis tool for Vyper and Soliditya",
+  "description": "",
+  "start": 1699941600000,
+  "end": 1699942560000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "troy_sargent",
+      "name": "Troy\nSargent",
+      "bio": "Security Engineer\nTrail of Bits",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Troy.png"
+    }
+  ],
+  "playbackId": "9c1barf3narwp60s",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/slither_a_static_analysis_tool_for_vyper_and_soliditya.jpg",
+  "assetId": "9c1b6ab8-23df-42d5-9724-d1a2c271e404",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
 }

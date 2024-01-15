@@ -1,22 +1,22 @@
 {
-    "id": "behind_frogcrypto",
-    "name": "Behind FROGCRYPTO",
-    "description": "Hop along on a journey for a behind the scenes look of FrogCrypto. We'll decode the secrets of these unique digital frogs, each minted with cryptographic authenticity. Discover the diverse biomes, frog temperaments, and how zero-knowledge proofs make these digital amphibians not just collectibles but testbeds for programmable cryptography.",
-    "start": 1700222700000,
-    "end": 1700223600000,
-    "stageId": "dolmabahce_b__c",
-    "speakers": [
-        {
-            "id": "forest_fang",
-            "name": "Forest Fang",
-            "bio": "Forest is a software engineer on the Crypto team at Stripe. He is a 0xparc community developer and recently has been working with the PCD team on Zupass.",
-            "eventId": "progcrypto",
-            "twitter": "",
-            "photo": "https://drive.google.com/file/d/1-vAfzLx6co9kxeH301t-m96-y7b0Zuhw/view"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "progcrypto",
-    "track": "Identity, Attestations, and PCDs",
-    "coverImage": "/sessions/progcrypto/behind_frogcrypto_thumbnail.png"
+  "id": "behind_frogcrypto",
+  "name": "Behind FROGCRYPTO",
+  "description": "Hop along on a journey for a behind the scenes look of FrogCrypto. We'll decode the secrets of these unique digital frogs, each minted with cryptographic authenticity. Discover the diverse biomes, frog temperaments, and how zero-knowledge proofs make these digital amphibians not just collectibles but testbeds for programmable cryptography.",
+  "start": 1700222700000,
+  "end": 1700223600000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "forest_fang",
+      "name": "Forest Fang",
+      "bio": "Forest is a software engineer on the Crypto team at Stripe. He is a 0xparc community developer and recently has been working with the PCD team on Zupass.",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1-vAfzLx6co9kxeH301t-m96-y7b0Zuhw/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Identity, Attestations, and PCDs",
+  "coverImage": "/sessions/progcrypto/behind_frogcrypto_thumbnail.png"
 }

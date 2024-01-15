@@ -1,22 +1,22 @@
 {
-    "id": "nescience__a_zkvm_leveraging_hiding_properties",
-    "name": "Nescience - A zkVM leveraging hiding properties",
-    "description": "In this talk, I will be presenting Nescience, a privacy-first blockchain project that aims to enable private transactions and provide a general-purpose execution environment for classical applications. This talk serves as a detailed exploration of the multifaceted challenges, potential solutions, and alternatives that lay ahead. Audience will be aware of the challenges they might meet when building a zkVM. Moreover, I will point out some approaches used to reinforce  the project and ensure its scalability and robustness in the landscape of blockchain technology.",
-    "start": 1700205300000,
-    "end": 1700206500000,
-    "stageId": "marmara",
-    "speakers": [
-        {
-            "id": "moudy",
-            "name": "Moudy",
-            "bio": "Hello, I'm Moudy. I serve as a Research Engineer with the Vac team at Status. My work revolves around exploring intriguing aspects of the blockchain realm. At present, I'm focused on developing a zkVM that aims to offer a user experience akin to today's public blockchains, yet enhanced with strong privacy functionalities",
-            "eventId": "progcrypto",
-            "twitter": "",
-            "photo": "https://drive.google.com/file/d/1L9lIKAVjdsgEMNrBgpcJ1SlhwE2QI0xe/view"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "progcrypto",
-    "track": "ZK and Blockchains / zkEVMs",
-    "coverImage": "/sessions/progcrypto/nescience__a_zkvm_leveraging_hiding_properties_thumbnail.png"
+  "id": "nescience__a_zkvm_leveraging_hiding_properties",
+  "name": "Nescience - A zkVM leveraging hiding properties",
+  "description": "In this talk, I will be presenting Nescience, a privacy-first blockchain project that aims to enable private transactions and provide a general-purpose execution environment for classical applications. This talk serves as a detailed exploration of the multifaceted challenges, potential solutions, and alternatives that lay ahead. Audience will be aware of the challenges they might meet when building a zkVM. Moreover, I will point out some approaches used to reinforce  the project and ensure its scalability and robustness in the landscape of blockchain technology.",
+  "start": 1700205300000,
+  "end": 1700206500000,
+  "stageId": "marmara",
+  "speakers": [
+    {
+      "id": "moudy",
+      "name": "Moudy",
+      "bio": "Hello, I'm Moudy. I serve as a Research Engineer with the Vac team at Status. My work revolves around exploring intriguing aspects of the blockchain realm. At present, I'm focused on developing a zkVM that aims to offer a user experience akin to today's public blockchains, yet enhanced with strong privacy functionalities",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1L9lIKAVjdsgEMNrBgpcJ1SlhwE2QI0xe/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "ZK and Blockchains / zkEVMs",
+  "coverImage": "/sessions/progcrypto/nescience__a_zkvm_leveraging_hiding_properties_thumbnail.png"
 }

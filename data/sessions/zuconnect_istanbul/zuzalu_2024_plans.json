@@ -1,20 +1,20 @@
 {
-    "id": "zuzalu_2024_plans",
-    "name": "Zuzalu 2024 plans",
-    "description": "Preview of 2024 Zuzalu",
-    "start": 1698687300000,
-    "end": 1698687600000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "streameth",
-            "name": "StreamETH",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul"
-        }
-    ],
-    "playbackId": "5b87r8sid0m5klfk",
-    "eventId": "zuconnect_istanbul",
-    "coverImage": "/sessions/zuconnect_istanbul/zuzalu_2024_plans.jpg",
-    "assetId": "5b8703bd-c03a-4105-aeb2-e04271d72240"
+  "id": "zuzalu_2024_plans",
+  "name": "Zuzalu 2024 plans",
+  "description": "Preview of 2024 Zuzalu",
+  "start": 1698687300000,
+  "end": 1698687600000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "streameth",
+      "name": "StreamETH",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul"
+    }
+  ],
+  "playbackId": "5b87r8sid0m5klfk",
+  "eventId": "zuconnect_istanbul",
+  "coverImage": "/sessions/zuconnect_istanbul/zuzalu_2024_plans.jpg",
+  "assetId": "5b8703bd-c03a-4105-aeb2-e04271d72240"
 }

@@ -1,18 +1,18 @@
 {
-    "id": "stories_from_ethberlin",
-    "name": "Stories from ETHBerlin",
-    "description": "The story of how two Norwegians made their way to Berlin in 2018 with a crypto data startup idea and how ETHBerlin shaped their journey.",
-    "start": "2022-09-16T14:30:00.000Z",
-    "end": "2022-09-16T15:00:00.000Z",
-    "stageId": "lexis",
-    "speakers": [
-        {
-            "id": "fredik_haga",
-            "name": "Fredik Haga",
-            "bio": "No description",
-            "eventId": "ethberlin_2022"
-        }
-    ],
-    "playbackId": "e694934f-201e-4bc4-a95b-2acd8cf6a019",
-    "eventId": "ethberlin_2022"
+  "id": "stories_from_ethberlin",
+  "name": "Stories from ETHBerlin",
+  "description": "The story of how two Norwegians made their way to Berlin in 2018 with a crypto data startup idea and how ETHBerlin shaped their journey.",
+  "start": "2022-09-16T14:30:00.000Z",
+  "end": "2022-09-16T15:00:00.000Z",
+  "stageId": "lexis",
+  "speakers": [
+    {
+      "id": "fredik_haga",
+      "name": "Fredik Haga",
+      "bio": "No description",
+      "eventId": "ethberlin_2022"
+    }
+  ],
+  "playbackId": "e694934f-201e-4bc4-a95b-2acd8cf6a019",
+  "eventId": "ethberlin_2022"
 }

@@ -1,31 +1,31 @@
 {
-    "id": "invisible_hands_tangible_solutions_is_capitalism_really_the_problem",
-    "name": "Invisible Hands, Tangible Solutions: Is Capitalism Really the Problem?",
-    "description": "",
-    "start": "2023-07-16T12:00:00.000Z",
-    "end": "2023-07-16T12:40:00.000Z",
-    "stageId": "farabeuf_amphitheater",
-    "speakers": [
-        {
-            "id": "jesse_pollak",
-            "name": "\u200bJesse Pollak",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        },
-        {
-            "id": "cassidy_daly",
-            "name": "\u200bCassidy Daly",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        },
-        {
-            "id": "lucas_vogelsang",
-            "name": "\u200bLucas Vogelsang",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        }
-    ],
-    "playbackId": "09fdb5d2bpvnaec7",
-    "eventId": "funding_the_commons_paris_2023",
-    "coverImage": "/sessions/funding_the_commons_paris_2023/invisible_hands_tangible_solutions_is_capitalism_really_the_problem.jpg"
+  "id": "invisible_hands_tangible_solutions_is_capitalism_really_the_problem",
+  "name": "Invisible Hands, Tangible Solutions: Is Capitalism Really the Problem?",
+  "description": "",
+  "start": "2023-07-16T12:00:00.000Z",
+  "end": "2023-07-16T12:40:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "jesse_pollak",
+      "name": "\u200bJesse Pollak",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    },
+    {
+      "id": "cassidy_daly",
+      "name": "\u200bCassidy Daly",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    },
+    {
+      "id": "lucas_vogelsang",
+      "name": "\u200bLucas Vogelsang",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "playbackId": "09fdb5d2bpvnaec7",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/invisible_hands_tangible_solutions_is_capitalism_really_the_problem.jpg"
 }

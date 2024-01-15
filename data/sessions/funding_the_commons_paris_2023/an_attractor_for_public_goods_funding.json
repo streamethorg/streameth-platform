@@ -1,19 +1,19 @@
 {
-    "id": "an_attractor_for_public_goods_funding",
-    "name": "An Attractor For Public Goods Funding",
-    "description": "In this video, Kevin Owocki, co-founder of Gitcoin, discusses the concept of attractors in the context of public goods funding in the crypto field. He explains that an attractor is a set of states through which a system tends to evolve, and in public goods funding, it refers to designing psychological incentive mechanisms to encourage contributions. Wachey describes different types of attractors and emphasizes the importance of building multiple strong and stable attractors. He shares his vision for creating a hyper structure on top of EVM-based blockchains to fund public goods and reward contributors. Wachey also discusses challenges in interfacing with government funding and suggests starting with quadratic funding tools for fiat ecosystems before transitioning to blockchain-based solutions. He encourages builders to explore coordination mechanisms and leverage existing protocols like Gitcoin's Alo Protocol for effective public goods funding.",
-    "start": "2023-07-15T09:35:00.000Z",
-    "end": "2023-07-15T09:55:00.000Z",
-    "stageId": "farabeuf_amphitheater",
-    "speakers": [
-        {
-            "id": "kevin_owocki",
-            "name": "Kevin Owocki",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        }
-    ],
-    "playbackId": "4300ywn9rz0iluka",
-    "eventId": "funding_the_commons_paris_2023",
-    "coverImage": "/sessions/funding_the_commons_paris_2023/an_attractor_for_public_goods_funding.jpg"
+  "id": "an_attractor_for_public_goods_funding",
+  "name": "An Attractor For Public Goods Funding",
+  "description": "In this video, Kevin Owocki, co-founder of Gitcoin, discusses the concept of attractors in the context of public goods funding in the crypto field. He explains that an attractor is a set of states through which a system tends to evolve, and in public goods funding, it refers to designing psychological incentive mechanisms to encourage contributions. Wachey describes different types of attractors and emphasizes the importance of building multiple strong and stable attractors. He shares his vision for creating a hyper structure on top of EVM-based blockchains to fund public goods and reward contributors. Wachey also discusses challenges in interfacing with government funding and suggests starting with quadratic funding tools for fiat ecosystems before transitioning to blockchain-based solutions. He encourages builders to explore coordination mechanisms and leverage existing protocols like Gitcoin's Alo Protocol for effective public goods funding.",
+  "start": "2023-07-15T09:35:00.000Z",
+  "end": "2023-07-15T09:55:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "kevin_owocki",
+      "name": "Kevin Owocki",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "playbackId": "4300ywn9rz0iluka",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/an_attractor_for_public_goods_funding.jpg"
 }

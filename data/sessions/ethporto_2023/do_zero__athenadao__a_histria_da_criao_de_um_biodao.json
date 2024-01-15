@@ -1,19 +1,19 @@
 {
-    "id": "do_zero__athenadao__a_histria_da_criao_de_um_biodao",
-    "name": "Do zero \u00e0 AthenaDAO - a hist\u00f3ria da cria\u00e7\u00e3o de um BIODAO",
-    "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
-    "start": "2023-03-16T11:05:00.000Z",
-    "end": "2023-03-16T11:15:00.000Z",
-    "stageId": "conference_main_hall",
-    "speakers": [
-        {
-            "id": "ins_santos_silva",
-            "name": "In\u00eas Santos Silva",
-            "bio": "AthenaDAO",
-            "eventId": "ethporto_2023",
-            "photo": "https://ethporto.org/assets/speakers/ines.jpg"
-        }
-    ],
-    "playbackId": "2b21kwkfbupvzkpa",
-    "eventId": "ethporto_2023"
+  "id": "do_zero__athenadao__a_histria_da_criao_de_um_biodao",
+  "name": "Do zero \u00e0 AthenaDAO - a hist\u00f3ria da cria\u00e7\u00e3o de um BIODAO",
+  "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
+  "start": "2023-03-16T11:05:00.000Z",
+  "end": "2023-03-16T11:15:00.000Z",
+  "stageId": "conference_main_hall",
+  "speakers": [
+    {
+      "id": "ins_santos_silva",
+      "name": "In\u00eas Santos Silva",
+      "bio": "AthenaDAO",
+      "eventId": "ethporto_2023",
+      "photo": "https://ethporto.org/assets/speakers/ines.jpg"
+    }
+  ],
+  "playbackId": "2b21kwkfbupvzkpa",
+  "eventId": "ethporto_2023"
 }

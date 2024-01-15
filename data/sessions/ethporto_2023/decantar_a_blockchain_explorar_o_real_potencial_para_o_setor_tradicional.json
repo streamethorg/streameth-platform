@@ -1,19 +1,19 @@
 {
-    "id": "decantar_a_blockchain_explorar_o_real_potencial_para_o_setor_tradicional",
-    "name": "Decantar a blockchain: explorar o real potencial para o setor tradicional",
-    "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
-    "start": "2023-03-16T10:15:00.000Z",
-    "end": "2023-03-16T10:30:00.000Z",
-    "stageId": "conference_main_hall",
-    "speakers": [
-        {
-            "id": "andr_soares_campos",
-            "name": "Andr\u00e9 Soares Campos",
-            "bio": "Sogrape",
-            "eventId": "ethporto_2023",
-            "photo": "https://ethporto.org/assets/speakers/andre.jpg"
-        }
-    ],
-    "playbackId": "d74b45l9bavvl26a",
-    "eventId": "ethporto_2023"
+  "id": "decantar_a_blockchain_explorar_o_real_potencial_para_o_setor_tradicional",
+  "name": "Decantar a blockchain: explorar o real potencial para o setor tradicional",
+  "description": "This session will be held in Portuguese. There will be no translation to English.\nEsta sess\u00e3o ter\u00e1 lugar em Portugu\u00eas. N\u00e3o haver\u00e1 tradu\u00e7\u00e3o para Ingl\u00eas.",
+  "start": "2023-03-16T10:15:00.000Z",
+  "end": "2023-03-16T10:30:00.000Z",
+  "stageId": "conference_main_hall",
+  "speakers": [
+    {
+      "id": "andr_soares_campos",
+      "name": "Andr\u00e9 Soares Campos",
+      "bio": "Sogrape",
+      "eventId": "ethporto_2023",
+      "photo": "https://ethporto.org/assets/speakers/andre.jpg"
+    }
+  ],
+  "playbackId": "d74b45l9bavvl26a",
+  "eventId": "ethporto_2023"
 }

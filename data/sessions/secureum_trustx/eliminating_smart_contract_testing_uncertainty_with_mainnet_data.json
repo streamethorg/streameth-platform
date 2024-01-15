@@ -1,19 +1,19 @@
 {
-    "id": "eliminating_smart_contract_testing_uncertainty_with_mainnet_data",
-    "name": "Eliminating Smart Contract Testing Uncertainty with Mainnet data",
-    "description": "",
-    "start": 1699887600000,
-    "end": 1699888500000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "nebojsa_urosevic",
-            "name": "Nebojsa Urosevic",
-            "bio": "TBD",
-            "eventId": "secureum_trustx"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/eliminating_smart_contract_testing_uncertainty_with_mainnet_data.jpg"
+  "id": "eliminating_smart_contract_testing_uncertainty_with_mainnet_data",
+  "name": "Eliminating Smart Contract Testing Uncertainty with Mainnet data",
+  "description": "",
+  "start": 1699887600000,
+  "end": 1699888500000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "nebojsa_urosevic",
+      "name": "Nebojsa Urosevic",
+      "bio": "TBD",
+      "eventId": "secureum_trustx"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/eliminating_smart_contract_testing_uncertainty_with_mainnet_data.jpg"
 }

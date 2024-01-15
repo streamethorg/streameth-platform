@@ -1,24 +1,24 @@
 {
-    "id": "opening_keynote",
-    "fileSize": 624,
-    "name": "Opening keynote",
-    "description": "",
-    "start": 1694244600000,
-    "end": 1694245200000,
-    "stageId": "mainstage",
-    "speakers": [
-        {
-            "id": "david_casey",
-            "name": "David Casey",
-            "bio": "Protocol Labs/Funding the Commons",
-            "eventId": "funding_the_commons_berlin_2023"
-        }
-    ],
-    "source": {
-        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-        "start": 1075,
-        "end": 1477
-    },
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/opening_keynote.jpg"
+  "id": "opening_keynote",
+  "fileSize": 624,
+  "name": "Opening keynote",
+  "description": "",
+  "start": 1694244600000,
+  "end": 1694245200000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "Protocol Labs/Funding the Commons",
+      "eventId": "funding_the_commons_berlin_2023"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 1075,
+    "end": 1477
+  },
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/opening_keynote.jpg"
 }

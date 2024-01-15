@@ -1,20 +1,20 @@
 {
-    "id": "why_we_need_zeroknowledge_machine_learning",
-    "name": "Why We Need Zero-Knowledge Machine Learning ",
-    "description": "API-based AI is not enough; why we need verifiable and optionally private AI capabilities.",
-    "start": 1698936000000,
-    "end": 1698948000000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "jason_morton",
-            "name": "Jason Morton",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__ai_track"
-        }
-    ],
-    "playbackId": "1e7al5zqkfr5zyeg",
-    "eventId": "zuconnect_istanbul__ai_track",
-    "coverImage": "/sessions/zuconnect_istanbul__ai_track/why_we_need_zeroknowledge_machine_learning.jpg",
-    "assetId": "1e7aa70a-b9b3-4aa9-8cc5-f318e5ba0534"
+  "id": "why_we_need_zeroknowledge_machine_learning",
+  "name": "Why We Need Zero-Knowledge Machine Learning ",
+  "description": "API-based AI is not enough; why we need verifiable and optionally private AI capabilities.",
+  "start": 1698936000000,
+  "end": 1698948000000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "jason_morton",
+      "name": "Jason Morton",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__ai_track"
+    }
+  ],
+  "playbackId": "1e7al5zqkfr5zyeg",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "coverImage": "/sessions/zuconnect_istanbul__ai_track/why_we_need_zeroknowledge_machine_learning.jpg",
+  "assetId": "1e7aa70a-b9b3-4aa9-8cc5-f318e5ba0534"
 }

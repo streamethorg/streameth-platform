@@ -1,19 +1,19 @@
 {
-    "id": "cryptoxaiwtf__vitalik",
-    "name": "CryptoXai.wtf - Vitalik",
-    "description": "cryptoxai.wtf",
-    "start": "2023-05-07T05:30:00.000Z",
-    "end": "2023-05-07T06:30:00.000Z",
-    "stageId": "lighthouse",
-    "speakers": [
-        {
-            "id": "vitalik_buterin",
-            "name": "Vitalik Buterin",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__cryptoxai"
-        }
-    ],
-    "playbackId": "3b8ayqywwdqznzlf",
-    "eventId": "zuzalu_montenegro_2023__cryptoxai",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "cryptoxaiwtf__vitalik",
+  "name": "CryptoXai.wtf - Vitalik",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
+  "playbackId": "3b8ayqywwdqznzlf",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -1,27 +1,27 @@
 {
-    "id": "new_types_of_partnerships_between_civil_society_and_governments_through_open_social_innovation",
-    "name": "New types of partnerships between civil society and governments through Open Social Innovation",
-    "description": "Current societal challenges require new types of partnerships between politics, civil society and business. But effective collaboration is often hard to achieve. This talk will be about how multi- and cross-sectoral stakeholder collaboration can be orchestrated by sharing learnings from recent Open Social Innovation processes",
-    "start": 1694250000000,
-    "end": 1694251200000,
-    "stageId": "mainstage",
-    "speakers": [
-        {
-            "id": "philipp_von_der_wippel",
-            "name": "Philipp von der Wippel\n",
-            "bio": "Project Together",
-            "eventId": "funding_the_commons_berlin_2023",
-            "twitter": "vonderwippel",
-            "photo": "https://pbs.twimg.com/profile_images/1324410972606468097/Be2DfahN_400x400.jpg"
-        }
-    ],
-    "source": {
-        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-        "start": 6303,
-        "end": 7466
-    },
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/new_types_of_partnerships_between_civil_society_and_governments_through_open_social_innovation.jpg",
-    "assetId": "eb903699-cd30-4614-9da9-9d41ce61116a",
-    "playbackId": "eb9052jcv9w6q4w7"
+  "id": "new_types_of_partnerships_between_civil_society_and_governments_through_open_social_innovation",
+  "name": "New types of partnerships between civil society and governments through Open Social Innovation",
+  "description": "Current societal challenges require new types of partnerships between politics, civil society and business. But effective collaboration is often hard to achieve. This talk will be about how multi- and cross-sectoral stakeholder collaboration can be orchestrated by sharing learnings from recent Open Social Innovation processes",
+  "start": 1694250000000,
+  "end": 1694251200000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "philipp_von_der_wippel",
+      "name": "Philipp von der Wippel\n",
+      "bio": "Project Together",
+      "eventId": "funding_the_commons_berlin_2023",
+      "twitter": "vonderwippel",
+      "photo": "https://pbs.twimg.com/profile_images/1324410972606468097/Be2DfahN_400x400.jpg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 6303,
+    "end": 7466
+  },
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/new_types_of_partnerships_between_civil_society_and_governments_through_open_social_innovation.jpg",
+  "assetId": "eb903699-cd30-4614-9da9-9d41ce61116a",
+  "playbackId": "eb9052jcv9w6q4w7"
 }

@@ -1,21 +1,21 @@
 {
-    "id": "mach_a_fast_finality_layer_for_rollups_leveraging_restaking",
-    "name": "MACH: A Fast Finality Layer for Rollups Leveraging Restaking",
-    "description": "In this talk, we present the design and implementation of a fast finality layer for Ethereum-based rollups called Mach. This joint work by AltLayer and EigenLayer aims to provide instant and secure finality for rollups, improve cross-domain interactions and boost liquidity and go beyond some of the limitations of ZK proof verification.",
-    "start": 1699860900000,
-    "end": 1699863000000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "yaoqi_jia_yq",
-            "name": "Yaoqi Jia (YQ)",
-            "bio": "AltLayer Network\nFounder",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/9/ad/19282661/avatar.jpg?a37"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/mach_a_fast_finality_layer_for_rollups_leveraging_restaking.jpg"
+  "id": "mach_a_fast_finality_layer_for_rollups_leveraging_restaking",
+  "name": "MACH: A Fast Finality Layer for Rollups Leveraging Restaking",
+  "description": "In this talk, we present the design and implementation of a fast finality layer for Ethereum-based rollups called Mach. This joint work by AltLayer and EigenLayer aims to provide instant and secure finality for rollups, improve cross-domain interactions and boost liquidity and go beyond some of the limitations of ZK proof verification.",
+  "start": 1699860900000,
+  "end": 1699863000000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "yaoqi_jia_yq",
+      "name": "Yaoqi Jia (YQ)",
+      "bio": "AltLayer Network\nFounder",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/9/ad/19282661/avatar.jpg?a37"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/mach_a_fast_finality_layer_for_rollups_leveraging_restaking.jpg"
 }

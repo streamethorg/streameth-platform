@@ -1,22 +1,22 @@
 {
-    "id": "wallet_dapp_dilemma",
-    "name": "Wallet Dapp Dilemma ",
-    "description": "",
-    "start": 1700127600000,
-    "end": 1700128200000,
-    "stageId": "camlica",
-    "speakers": [
-        {
-            "id": "tim_daubenschuetz",
-            "name": "Tim Daubenschuetz",
-            "bio": "No description",
-            "eventId": "conflux__web3_ux_unconference"
-        }
-    ],
-    "playbackId": "8c102vrkmjcbsllb",
-    "eventId": "conflux__web3_ux_unconference",
-    "coverImage": "/sessions/conflux__web3_ux_unconference/wallet_dapp_dilemma_thumbnail.png",
-    "assetId": "8c10c8c9-7c60-4a9c-bfc3-c065915c62be",
-    "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
-    "videoType": "clip"
+  "id": "wallet_dapp_dilemma",
+  "name": "Wallet Dapp Dilemma ",
+  "description": "",
+  "start": 1700127600000,
+  "end": 1700128200000,
+  "stageId": "camlica",
+  "speakers": [
+    {
+      "id": "tim_daubenschuetz",
+      "name": "Tim Daubenschuetz",
+      "bio": "No description",
+      "eventId": "conflux__web3_ux_unconference"
+    }
+  ],
+  "playbackId": "8c102vrkmjcbsllb",
+  "eventId": "conflux__web3_ux_unconference",
+  "coverImage": "/sessions/conflux__web3_ux_unconference/wallet_dapp_dilemma_thumbnail.png",
+  "assetId": "8c10c8c9-7c60-4a9c-bfc3-c065915c62be",
+  "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
+  "videoType": "clip"
 }

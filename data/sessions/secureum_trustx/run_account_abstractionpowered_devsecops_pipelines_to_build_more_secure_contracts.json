@@ -1,24 +1,24 @@
 {
-    "id": "run_account_abstractionpowered_devsecops_pipelines_to_build_more_secure_contracts",
-    "name": "Run Account Abstraction-powered DevSecOps pipelines to build more secure contracts",
-    "description": "",
-    "start": 1699889460000,
-    "end": 1699890420000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "emile_baizel",
-            "name": "Emile\nBaizel",
-            "bio": "Blockchain Architect, AWS \nJSR, Spearbit",
-            "eventId": "secureum_trustx",
-            "twitter": "",
-            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Emile.png"
-        }
-    ],
-    "playbackId": "2e8bwttkk8irjrz8",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/run_account_abstractionpowered_devsecops_pipelines_to_build_more_secure_contracts.jpg",
-    "assetId": "2e8b9dae-bfed-4492-8ae3-6c37d9c2c9ea",
-    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-    "videoType": "clip"
+  "id": "run_account_abstractionpowered_devsecops_pipelines_to_build_more_secure_contracts",
+  "name": "Run Account Abstraction-powered DevSecOps pipelines to build more secure contracts",
+  "description": "",
+  "start": 1699889460000,
+  "end": 1699890420000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "emile_baizel",
+      "name": "Emile\nBaizel",
+      "bio": "Blockchain Architect, AWS \nJSR, Spearbit",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Emile.png"
+    }
+  ],
+  "playbackId": "2e8bwttkk8irjrz8",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/run_account_abstractionpowered_devsecops_pipelines_to_build_more_secure_contracts.jpg",
+  "assetId": "2e8b9dae-bfed-4492-8ae3-6c37d9c2c9ea",
+  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+  "videoType": "clip"
 }

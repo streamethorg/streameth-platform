@@ -1,19 +1,19 @@
 {
-    "id": "philosophy_part_1",
-    "name": "Philosophy Part 1",
-    "description": "The video discusses people's attitudes towards aging and death, and how many are stuck in a box of accepting it as inevitable. The speaker challenges this ideology and presents new possibilities for extending lifespan through medical treatments that slow aging. Surveys show that while many people want to live longer, they are still limited by traditional thinking and are not fully aware of the potential for new technologies. The speaker argues that discussing these possibilities openly and promoting research in this area is important for changing attitudes towards aging and death.",
-    "start": "2023-03-29T14:45:00.000Z",
-    "end": "2023-03-29T16:00:00.000Z",
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "patrick_linden",
-            "name": "Patrick Linden",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__longevity_introductory"
-        }
-    ],
-    "playbackId": "7b0fw4qm0todu389",
-    "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "philosophy_part_1",
+  "name": "Philosophy Part 1",
+  "description": "The video discusses people's attitudes towards aging and death, and how many are stuck in a box of accepting it as inevitable. The speaker challenges this ideology and presents new possibilities for extending lifespan through medical treatments that slow aging. Surveys show that while many people want to live longer, they are still limited by traditional thinking and are not fully aware of the potential for new technologies. The speaker argues that discussing these possibilities openly and promoting research in this area is important for changing attitudes towards aging and death.",
+  "start": "2023-03-29T14:45:00.000Z",
+  "end": "2023-03-29T16:00:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "patrick_linden",
+      "name": "Patrick Linden",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+    }
+  ],
+  "playbackId": "7b0fw4qm0todu389",
+  "eventId": "zuzalu_montenegro_2023__longevity_introductory",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

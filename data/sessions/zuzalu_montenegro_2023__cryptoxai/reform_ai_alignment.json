@@ -1,19 +1,19 @@
 {
-    "id": "reform_ai_alignment",
-    "name": "Reform AI Alignment",
-    "description": "cryptoxai.wtf",
-    "start": "2023-05-07T05:30:00.000Z",
-    "end": "2023-05-07T06:30:00.000Z",
-    "stageId": "lighthouse",
-    "speakers": [
-        {
-            "id": "scott_aaronson",
-            "name": "Scott Aaronson",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__cryptoxai"
-        }
-    ],
-    "playbackId": "34b6z9efadyd6274",
-    "eventId": "zuzalu_montenegro_2023__cryptoxai",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "reform_ai_alignment",
+  "name": "Reform AI Alignment",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "scott_aaronson",
+      "name": "Scott Aaronson",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
+  "playbackId": "34b6z9efadyd6274",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

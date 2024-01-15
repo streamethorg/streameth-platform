@@ -1,19 +1,19 @@
 {
-    "id": "10_years_in_funding_open_source_protocols",
-    "name": "10 years in funding open source protocols",
-    "description": "In this video, Galia Benartzi, the founder of decentralized exchange Appcoin and Bancor, explores the relationship between money and water. She compares the different states of water to the different states of money, highlighting their adaptability and potential harm. Benartzi introduces the concept of a potential fourth phase of water that is highly structured and carries a negative charge, which she likens to a more sustainable form of money. She discusses the role of blockchains as hydrophilic surfaces that enable the structuring of monetary liquidity into decentralized applications (dApps). Benartzi emphasizes that blockchains and economic systems are shaped by our mind states and suggests injecting fresh liquidity into the system through blockchain technology. The video concludes with recommended authors and gratitude towards various foundations and organizations.",
-    "start": "2023-07-16T09:20:00.000Z",
-    "end": "2023-07-16T09:40:00.000Z",
-    "stageId": "farabeuf_amphitheater",
-    "speakers": [
-        {
-            "id": "galia_benartzi",
-            "name": "Galia Benartzi",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        }
-    ],
-    "playbackId": "6ba2fmh1qa75zqqd",
-    "eventId": "funding_the_commons_paris_2023",
-    "coverImage": "/sessions/funding_the_commons_paris_2023/10_years_in_funding_open_source_protocols.jpg"
+  "id": "10_years_in_funding_open_source_protocols",
+  "name": "10 years in funding open source protocols",
+  "description": "In this video, Galia Benartzi, the founder of decentralized exchange Appcoin and Bancor, explores the relationship between money and water. She compares the different states of water to the different states of money, highlighting their adaptability and potential harm. Benartzi introduces the concept of a potential fourth phase of water that is highly structured and carries a negative charge, which she likens to a more sustainable form of money. She discusses the role of blockchains as hydrophilic surfaces that enable the structuring of monetary liquidity into decentralized applications (dApps). Benartzi emphasizes that blockchains and economic systems are shaped by our mind states and suggests injecting fresh liquidity into the system through blockchain technology. The video concludes with recommended authors and gratitude towards various foundations and organizations.",
+  "start": "2023-07-16T09:20:00.000Z",
+  "end": "2023-07-16T09:40:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "galia_benartzi",
+      "name": "Galia Benartzi",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "playbackId": "6ba2fmh1qa75zqqd",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/10_years_in_funding_open_source_protocols.jpg"
 }

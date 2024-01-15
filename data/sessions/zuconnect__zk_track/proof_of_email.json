@@ -1,26 +1,26 @@
 {
-    "id": "proof_of_email",
-    "name": " Proof of Email",
-    "description": "",
-    "start": 1699263900000,
-    "end": 1699264800000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "althea_allen",
-            "name": "Althea Allen \n",
-            "bio": "No description",
-            "eventId": "zuconnect__zk_track"
-        },
-        {
-            "id": "aayush_gupta",
-            "name": "Aayush Gupta",
-            "bio": "No description",
-            "eventId": "zuconnect__zk_track"
-        }
-    ],
-    "playbackId": "b14a4jbb7qgaj2kf",
-    "eventId": "zuconnect__zk_track",
-    "coverImage": "/sessions/zuconnect__zk_track/proof_of_email.jpg",
-    "assetId": "b14ac476-2876-4fa1-b885-1f3eb68b6237"
+  "id": "proof_of_email",
+  "name": " Proof of Email",
+  "description": "",
+  "start": 1699263900000,
+  "end": 1699264800000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "althea_allen",
+      "name": "Althea Allen \n",
+      "bio": "No description",
+      "eventId": "zuconnect__zk_track"
+    },
+    {
+      "id": "aayush_gupta",
+      "name": "Aayush Gupta",
+      "bio": "No description",
+      "eventId": "zuconnect__zk_track"
+    }
+  ],
+  "playbackId": "b14a4jbb7qgaj2kf",
+  "eventId": "zuconnect__zk_track",
+  "coverImage": "/sessions/zuconnect__zk_track/proof_of_email.jpg",
+  "assetId": "b14ac476-2876-4fa1-b885-1f3eb68b6237"
 }

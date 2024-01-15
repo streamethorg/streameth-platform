@@ -1,22 +1,22 @@
 {
-    "id": "ratelimiting_nullifier_an_effective_spam_protection_solution_for_anonymous_environments",
-    "name": "Rate-Limiting Nullifier: an effective spam protection solution for anonymous environments",
-    "description": "We'll talk on how to fight spam in anonymous environments with RLN and some cool improvements of the protocol",
-    "start": 1700139600000,
-    "end": 1700140500000,
-    "stageId": "dolmabahce_b__c",
-    "speakers": [
-        {
-            "id": "rasul_ibragimov",
-            "name": "Rasul Ibragimov",
-            "bio": "\u201cSoftware & zk-circuits engineer at PSE. Work on RLN and Email-Wallet. CS grad, rustacean and classical music lover",
-            "eventId": "progcrypto",
-            "twitter": "",
-            "photo": "https://drive.google.com/file/d/1fnbgXfHamWFbp6If9YSlYbUJbs5_Jh3t/view"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "progcrypto",
-    "track": "Libraries and Infrastructure",
-    "coverImage": "/sessions/progcrypto/ratelimiting_nullifier_an_effective_spam_protection_solution_for_anonymous_environments_thumbnail.png"
+  "id": "ratelimiting_nullifier_an_effective_spam_protection_solution_for_anonymous_environments",
+  "name": "Rate-Limiting Nullifier: an effective spam protection solution for anonymous environments",
+  "description": "We'll talk on how to fight spam in anonymous environments with RLN and some cool improvements of the protocol",
+  "start": 1700139600000,
+  "end": 1700140500000,
+  "stageId": "dolmabahce_b__c",
+  "speakers": [
+    {
+      "id": "rasul_ibragimov",
+      "name": "Rasul Ibragimov",
+      "bio": "\u201cSoftware & zk-circuits engineer at PSE. Work on RLN and Email-Wallet. CS grad, rustacean and classical music lover",
+      "eventId": "progcrypto",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1fnbgXfHamWFbp6If9YSlYbUJbs5_Jh3t/view"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "progcrypto",
+  "track": "Libraries and Infrastructure",
+  "coverImage": "/sessions/progcrypto/ratelimiting_nullifier_an_effective_spam_protection_solution_for_anonymous_environments_thumbnail.png"
 }

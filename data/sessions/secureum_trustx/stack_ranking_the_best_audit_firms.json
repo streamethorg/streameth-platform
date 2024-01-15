@@ -1,24 +1,24 @@
 {
-    "id": "stack_ranking_the_best_audit_firms",
-    "name": "Stack Ranking the Best Audit Firms",
-    "description": "",
-    "start": 1699966800000,
-    "end": 1699967700000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "jack_sanford",
-            "name": "Jack\nSanford",
-            "bio": "Co-founder\nSherlock",
-            "eventId": "secureum_trustx",
-            "twitter": "",
-            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Jack.png"
-        }
-    ],
-    "playbackId": "200dw9jbgf5eyj1o",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/stack_ranking_the_best_audit_firms.jpg",
-    "assetId": "200daa45-d223-43a6-8a65-5d154470b789",
-    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-    "videoType": "clip"
+  "id": "stack_ranking_the_best_audit_firms",
+  "name": "Stack Ranking the Best Audit Firms",
+  "description": "",
+  "start": 1699966800000,
+  "end": 1699967700000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "jack_sanford",
+      "name": "Jack\nSanford",
+      "bio": "Co-founder\nSherlock",
+      "eventId": "secureum_trustx",
+      "twitter": "",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Jack.png"
+    }
+  ],
+  "playbackId": "200dw9jbgf5eyj1o",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/stack_ranking_the_best_audit_firms.jpg",
+  "assetId": "200daa45-d223-43a6-8a65-5d154470b789",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
 }

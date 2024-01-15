@@ -1,24 +1,24 @@
 {
-    "id": "slang_building_solidity_compiler_apis_from_a_declarative_language_specification",
-    "name": "Slang: Building Solidity Compiler APIs from a Declarative Language Specification",
-    "description": "Slang is a declarative language specification that is used to build modular compiler APIs for Solidity that will empower the next generation of Solidity developer tools. This talk will go into what Slang is and the future plans of enriching the specification.",
-    "start": 1700142600000,
-    "end": 1700144400000,
-    "stageId": "uskudar_2",
-    "speakers": [
-        {
-            "id": "omar_tawfik",
-            "name": "Omar Tawfik",
-            "bio": "Omar Tawfik recently joined the Nomic foundation to help build Slang; A set of modular compiler APIs empowering the next generation of Ethereum developer tooling.\nOmar is passionate about beautiful tools that solve real world problems. He spent the last decade working on programming languages, compilers, and IDEs, including Roslyn (C#), F#, and VS Code.",
-            "eventId": "solidity_summit",
-            "twitter": "",
-            "photo": "https://drive.google.com/file/d/1rDSMo_VKCLCw3EWwlG_V2e0LCidubLkX/view?usp=sharing"
-        }
-    ],
-    "playbackId": "e24ficchpsz22sjm",
-    "eventId": "solidity_summit",
-    "coverImage": "/sessions/solidity_summit/slang_building_solidity_compiler_apis_from_a_declarative_language_specification_thumbnail.png",
-    "assetId": "e24ff46b-5eda-40d9-a053-6fea60862146",
-    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-    "videoType": "clip"
+  "id": "slang_building_solidity_compiler_apis_from_a_declarative_language_specification",
+  "name": "Slang: Building Solidity Compiler APIs from a Declarative Language Specification",
+  "description": "Slang is a declarative language specification that is used to build modular compiler APIs for Solidity that will empower the next generation of Solidity developer tools. This talk will go into what Slang is and the future plans of enriching the specification.",
+  "start": 1700142600000,
+  "end": 1700144400000,
+  "stageId": "uskudar_2",
+  "speakers": [
+    {
+      "id": "omar_tawfik",
+      "name": "Omar Tawfik",
+      "bio": "Omar Tawfik recently joined the Nomic foundation to help build Slang; A set of modular compiler APIs empowering the next generation of Ethereum developer tooling.\nOmar is passionate about beautiful tools that solve real world problems. He spent the last decade working on programming languages, compilers, and IDEs, including Roslyn (C#), F#, and VS Code.",
+      "eventId": "solidity_summit",
+      "twitter": "",
+      "photo": "https://drive.google.com/file/d/1rDSMo_VKCLCw3EWwlG_V2e0LCidubLkX/view?usp=sharing"
+    }
+  ],
+  "playbackId": "e24ficchpsz22sjm",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/slang_building_solidity_compiler_apis_from_a_declarative_language_specification_thumbnail.png",
+  "assetId": "e24ff46b-5eda-40d9-a053-6fea60862146",
+  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+  "videoType": "clip"
 }

@@ -1,24 +1,24 @@
 {
-    "id": "custom_datacompression_in_polygon_zkevm",
-    "name": "Custom data-compression in Polygon zkEVM",
-    "description": "L2 data transaction cost is basically the cost of the  data-availability in L1. Therefore, reducing the data posted on-chain is key to decrease L2 transaction cost.\nWe introduce a very simple and custom function data set to compress data. ",
-    "start": 1699945800000,
-    "end": 1699946700000,
-    "stageId": "emirgan_1",
-    "speakers": [
-        {
-            "id": "carlos_matallana",
-            "name": "Carlos Matallana",
-            "bio": "Protocol blockchain engineer focused on L2 solutions.\nStarted working on Iden3 and then switch to develop the PoC of a rollup back in 2019.\nThen, I started on Hermez network as a protocol engineer which became polygon zkEVM ",
-            "eventId": "evm_summit",
-            "twitter": "",
-            "photo": "https://pbs.twimg.com/profile_images/1700176052813787136/3YMba1OT_400x400.jpg"
-        }
-    ],
-    "playbackId": "f343o20h75o3dk3f",
-    "eventId": "evm_summit",
-    "coverImage": "/sessions/evm_summit/custom_datacompression_in_polygon_zkevm_thumbnail.png",
-    "assetId": "f3431e06-69d0-4933-8a18-5c3eb4eefa3b",
-    "sourceId": "1f82b9ab-c330-470f-abb4-352939e198f2",
-    "videoType": "clip"
+  "id": "custom_datacompression_in_polygon_zkevm",
+  "name": "Custom data-compression in Polygon zkEVM",
+  "description": "L2 data transaction cost is basically the cost of the  data-availability in L1. Therefore, reducing the data posted on-chain is key to decrease L2 transaction cost.\nWe introduce a very simple and custom function data set to compress data. ",
+  "start": 1699945800000,
+  "end": 1699946700000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "carlos_matallana",
+      "name": "Carlos Matallana",
+      "bio": "Protocol blockchain engineer focused on L2 solutions.\nStarted working on Iden3 and then switch to develop the PoC of a rollup back in 2019.\nThen, I started on Hermez network as a protocol engineer which became polygon zkEVM ",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://pbs.twimg.com/profile_images/1700176052813787136/3YMba1OT_400x400.jpg"
+    }
+  ],
+  "playbackId": "f343o20h75o3dk3f",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/custom_datacompression_in_polygon_zkevm_thumbnail.png",
+  "assetId": "f3431e06-69d0-4933-8a18-5c3eb4eefa3b",
+  "sourceId": "1f82b9ab-c330-470f-abb4-352939e198f2",
+  "videoType": "clip"
 }

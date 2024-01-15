@@ -1,20 +1,20 @@
 {
-    "id": "crypto_payments_state_of_the_global_payment_industry",
-    "name": "Crypto Payments- State of the global payment industry",
-    "description": "Learn about the current and future state of crypto payments from a leader in the space, Brent Traidman, head of software sales at Coinbase. Coinbase is a leading provider of global payments for businesses, non profits, and Web3 organizations. Coinbase Pay and Coinbase Commerce allow businesses and organizations to seemlessly accept crypto for donations, invoices, eCommerce, and more! Learn about the future of payments, as well as industry trends and real life utility.",
-    "start": 1694804400000,
-    "end": 1694806200000,
-    "stageId": "lincoln_stage__builder__legal",
-    "speakers": [
-        {
-            "id": "brent_traidman",
-            "name": "Brent Traidman",
-            "bio": "Coinbase Enterprise Software Solutions",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/EFaaxDh0_400x400_jF7D3qd.jpg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/crypto_payments_state_of_the_global_payment_industry.jpg"
+  "id": "crypto_payments_state_of_the_global_payment_industry",
+  "name": "Crypto Payments- State of the global payment industry",
+  "description": "Learn about the current and future state of crypto payments from a leader in the space, Brent Traidman, head of software sales at Coinbase. Coinbase is a leading provider of global payments for businesses, non profits, and Web3 organizations. Coinbase Pay and Coinbase Commerce allow businesses and organizations to seemlessly accept crypto for donations, invoices, eCommerce, and more! Learn about the future of payments, as well as industry trends and real life utility.",
+  "start": 1694804400000,
+  "end": 1694806200000,
+  "stageId": "lincoln_stage__builder__legal",
+  "speakers": [
+    {
+      "id": "brent_traidman",
+      "name": "Brent Traidman",
+      "bio": "Coinbase Enterprise Software Solutions",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/EFaaxDh0_400x400_jF7D3qd.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/crypto_payments_state_of_the_global_payment_industry.jpg"
 }

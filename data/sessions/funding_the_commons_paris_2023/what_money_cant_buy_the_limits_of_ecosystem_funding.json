@@ -1,19 +1,19 @@
 {
-    "id": "what_money_cant_buy_the_limits_of_ecosystem_funding",
-    "name": "What Money Can't Buy: The Limits of Ecosystem Funding",
-    "description": "In this video, Ori, a lead at Nier Dev Hub, discusses the limits of ecosystem funding in the decentralized space. He shares his experience working with developers and explores the challenges of using financial incentives to attract and retain them. Ori identifies three types of developers commonly attracted by financial incentives: opportunity seekers, mercenaries, and classic open-source developers. He explains the pros and cons of each type and emphasizes the importance of nurturing developers' fundamental needs for engagement and long-term commitment. Ori introduces the Camps framework, which focuses on certainty, autonomy, meaning, progress, and social inclusion as key factors in motivating developers. He highlights the initiatives taken by Nier Dev Hub to address these needs and build a sustainable ecosystem beyond just transactions. Ori invites viewers to join their journey and explore the NierDev Hub platform for more information and resources.\n\nIn summary, Ori discusses the challenges of ecosystem funding in a decentralized environment and categorizes developers into three types based on their motivations. He introduces the Camps framework that addresses developers' fundamental needs and explains how Nier Dev Hub is implementing strategies to meet these needs. The goal is to build a sustainable ecosystem that goes beyond transactions. Viewers are invited to join their journey and explore the NierDev Hub platform for more information.",
-    "start": "2023-07-16T09:50:00.000Z",
-    "end": "2023-07-16T10:10:00.000Z",
-    "stageId": "farabeuf_amphitheater",
-    "speakers": [
-        {
-            "id": "ori_applebaum",
-            "name": "Ori Applebaum",
-            "bio": "No description",
-            "eventId": "funding_the_commons_paris_2023"
-        }
-    ],
-    "playbackId": "092fv7vgb2eypio2",
-    "eventId": "funding_the_commons_paris_2023",
-    "coverImage": "/sessions/funding_the_commons_paris_2023/what_money_cant_buy_the_limits_of_ecosystem_funding.jpg"
+  "id": "what_money_cant_buy_the_limits_of_ecosystem_funding",
+  "name": "What Money Can't Buy: The Limits of Ecosystem Funding",
+  "description": "In this video, Ori, a lead at Nier Dev Hub, discusses the limits of ecosystem funding in the decentralized space. He shares his experience working with developers and explores the challenges of using financial incentives to attract and retain them. Ori identifies three types of developers commonly attracted by financial incentives: opportunity seekers, mercenaries, and classic open-source developers. He explains the pros and cons of each type and emphasizes the importance of nurturing developers' fundamental needs for engagement and long-term commitment. Ori introduces the Camps framework, which focuses on certainty, autonomy, meaning, progress, and social inclusion as key factors in motivating developers. He highlights the initiatives taken by Nier Dev Hub to address these needs and build a sustainable ecosystem beyond just transactions. Ori invites viewers to join their journey and explore the NierDev Hub platform for more information and resources.\n\nIn summary, Ori discusses the challenges of ecosystem funding in a decentralized environment and categorizes developers into three types based on their motivations. He introduces the Camps framework that addresses developers' fundamental needs and explains how Nier Dev Hub is implementing strategies to meet these needs. The goal is to build a sustainable ecosystem that goes beyond transactions. Viewers are invited to join their journey and explore the NierDev Hub platform for more information.",
+  "start": "2023-07-16T09:50:00.000Z",
+  "end": "2023-07-16T10:10:00.000Z",
+  "stageId": "farabeuf_amphitheater",
+  "speakers": [
+    {
+      "id": "ori_applebaum",
+      "name": "Ori Applebaum",
+      "bio": "No description",
+      "eventId": "funding_the_commons_paris_2023"
+    }
+  ],
+  "playbackId": "092fv7vgb2eypio2",
+  "eventId": "funding_the_commons_paris_2023",
+  "coverImage": "/sessions/funding_the_commons_paris_2023/what_money_cant_buy_the_limits_of_ecosystem_funding.jpg"
 }

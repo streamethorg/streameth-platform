@@ -1,25 +1,25 @@
 {
-    "id": "interdependence_onchain_graphs__public_goods",
-    "name": "Interdependence, On-chain Graphs & Public Goods ",
-    "description": "",
-    "start": 1694266200000,
-    "end": 1694267400000,
-    "stageId": "mainstage",
-    "speakers": [
-        {
-            "id": "eleftherios_diakomichalis",
-            "name": "Eleftherios Diakomichalis",
-            "bio": "Drips",
-            "eventId": "funding_the_commons_berlin_2023"
-        }
-    ],
-    "source": {
-        "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
-        "start": 22676,
-        "end": 23774
-    },
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/interdependence_onchain_graphs__public_goods.jpg",
-    "assetId": "1275f562-e230-434d-97e8-d37948f50001",
-    "playbackId": "1275xa1lov9rucj6"
+  "id": "interdependence_onchain_graphs__public_goods",
+  "name": "Interdependence, On-chain Graphs & Public Goods ",
+  "description": "",
+  "start": 1694266200000,
+  "end": 1694267400000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "eleftherios_diakomichalis",
+      "name": "Eleftherios Diakomichalis",
+      "bio": "Drips",
+      "eventId": "funding_the_commons_berlin_2023"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/a2ae5cylmxs38npg/index.m3u8",
+    "start": 22676,
+    "end": 23774
+  },
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/interdependence_onchain_graphs__public_goods.jpg",
+  "assetId": "1275f562-e230-434d-97e8-d37948f50001",
+  "playbackId": "1275xa1lov9rucj6"
 }

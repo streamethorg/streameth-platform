@@ -1,19 +1,19 @@
 {
-    "id": "biology_in_the_built_environment_bio_based_concrete",
-    "name": "Biology in the Built Environment: Bio Based Concrete",
-    "description": "In this video, the speaker discusses the problem with traditional Portland cement, which is responsible for 8% of global CO2 emissions. They propose a solution using biosimic technology, which involves growing cement using microorganisms and carbon instead of mining and burning limestone. The process is simple and can be integrated into existing infrastructure. They have a plant opening in Denmark and plan to expand into the ready mix market. The technology can be used for various applications, including precast and infrastructure site work.",
-    "start": "2023-04-02T06:00:00.000Z",
-    "end": "2023-04-02T06:30:00.000Z",
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "ginger_dosier",
-            "name": "Ginger Dosier",
-            "bio": "CEO & Founder, BioMason",
-            "eventId": "zuzalu_montenegro_2023__synthetic_biology"
-        }
-    ],
-    "playbackId": "6511ifcdl84bae5i",
-    "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "biology_in_the_built_environment_bio_based_concrete",
+  "name": "Biology in the Built Environment: Bio Based Concrete",
+  "description": "In this video, the speaker discusses the problem with traditional Portland cement, which is responsible for 8% of global CO2 emissions. They propose a solution using biosimic technology, which involves growing cement using microorganisms and carbon instead of mining and burning limestone. The process is simple and can be integrated into existing infrastructure. They have a plant opening in Denmark and plan to expand into the ready mix market. The technology can be used for various applications, including precast and infrastructure site work.",
+  "start": "2023-04-02T06:00:00.000Z",
+  "end": "2023-04-02T06:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "ginger_dosier",
+      "name": "Ginger Dosier",
+      "bio": "CEO & Founder, BioMason",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
+  "playbackId": "6511ifcdl84bae5i",
+  "eventId": "zuzalu_montenegro_2023__synthetic_biology",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

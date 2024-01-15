@@ -1,23 +1,23 @@
 {
-    "id": "ssf_expansion",
-    "name": "SSF Expansion",
-    "description": "Fellow project presentation by Lincoln",
-    "start": 1700219700000,
-    "end": 1700220300000,
-    "stageId": "3b36",
-    "speakers": [
-        {
-            "id": "lincoln_murr",
-            "name": "Lincoln Murr",
-            "bio": "EPF Fellow",
-            "eventId": "epf_day",
-            "twitter": "@murrlincoln"
-        }
-    ],
-    "playbackId": "73883hwc70gzf7r3",
-    "eventId": "epf_day",
-    "coverImage": "/sessions/epf_day/ssf_expansion_thumbnail.png",
-    "assetId": "7388653e-e123-4d5c-b8fc-2ba08e7443e6",
-    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-    "videoType": "clip"
+  "id": "ssf_expansion",
+  "name": "SSF Expansion",
+  "description": "Fellow project presentation by Lincoln",
+  "start": 1700219700000,
+  "end": 1700220300000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "lincoln_murr",
+      "name": "Lincoln Murr",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@murrlincoln"
+    }
+  ],
+  "playbackId": "73883hwc70gzf7r3",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/ssf_expansion_thumbnail.png",
+  "assetId": "7388653e-e123-4d5c-b8fc-2ba08e7443e6",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }

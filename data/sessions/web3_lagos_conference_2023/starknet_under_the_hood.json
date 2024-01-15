@@ -1,19 +1,19 @@
 {
-    "id": "starknet_under_the_hood",
-    "name": "Starknet under the hood",
-    "description": "",
-    "start": 1693573500000,
-    "end": 1693574700000,
-    "stageId": "workshop_room_2",
-    "speakers": [
-        {
-            "id": "godspower_eze",
-            "name": "God'spower Eze",
-            "bio": "Software Engineer",
-            "eventId": "web3_lagos_conference_2023"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "web3_lagos_conference_2023",
-    "coverImage": "/sessions/web3_lagos_conference_2023/starknet_under_the_hood.jpg"
+  "id": "starknet_under_the_hood",
+  "name": "Starknet under the hood",
+  "description": "",
+  "start": 1693573500000,
+  "end": 1693574700000,
+  "stageId": "workshop_room_2",
+  "speakers": [
+    {
+      "id": "godspower_eze",
+      "name": "God'spower Eze",
+      "bio": "Software Engineer",
+      "eventId": "web3_lagos_conference_2023"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/starknet_under_the_hood.jpg"
 }

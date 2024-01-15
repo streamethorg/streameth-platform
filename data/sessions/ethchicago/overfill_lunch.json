@@ -1,20 +1,20 @@
 {
-    "id": "overfill_lunch",
-    "name": "Overfill/ Lunch",
-    "description": "NEED",
-    "start": 1694970000000,
-    "end": 1694971800000,
-    "stageId": "lincoln_stage__builder__legal",
-    "speakers": [
-        {
-            "id": "kaitlyn_majoy",
-            "name": "Kaitlyn Majoy",
-            "bio": null,
-            "eventId": "ethchicago",
-            "photo": ""
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/overfill_lunch.jpg"
+  "id": "overfill_lunch",
+  "name": "Overfill/ Lunch",
+  "description": "NEED",
+  "start": 1694970000000,
+  "end": 1694971800000,
+  "stageId": "lincoln_stage__builder__legal",
+  "speakers": [
+    {
+      "id": "kaitlyn_majoy",
+      "name": "Kaitlyn Majoy",
+      "bio": null,
+      "eventId": "ethchicago",
+      "photo": ""
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/overfill_lunch.jpg"
 }

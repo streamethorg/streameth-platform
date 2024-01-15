@@ -1,19 +1,19 @@
 {
-    "id": "opening_remarks",
-    "name": "Opening Remarks ",
-    "description": "Opening Remarks ",
-    "start": null,
-    "end": 1698923100000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "timour_kosters",
-            "name": "Timour Kosters",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__ai_track"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "zuconnect_istanbul__ai_track",
-    "coverImage": "/sessions/zuconnect_istanbul__ai_track/opening_remarks.jpg"
+  "id": "opening_remarks",
+  "name": "Opening Remarks ",
+  "description": "Opening Remarks ",
+  "start": null,
+  "end": 1698923100000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "timour_kosters",
+      "name": "Timour Kosters",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__ai_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "coverImage": "/sessions/zuconnect_istanbul__ai_track/opening_remarks.jpg"
 }

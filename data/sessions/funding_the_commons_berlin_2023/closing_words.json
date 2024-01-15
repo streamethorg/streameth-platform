@@ -1,18 +1,18 @@
 {
-    "id": "closing_words",
-    "name": "Closing words ",
-    "description": "",
-    "start": 1694275200000,
-    "end": 1694275800000,
-    "stageId": "mainstage",
-    "speakers": [
-        {
-            "id": "david_casey",
-            "name": "David Casey",
-            "bio": "Protocol Labs/Funding the Commons",
-            "eventId": "funding_the_commons_berlin_2023"
-        }
-    ],
-    "eventId": "funding_the_commons_berlin_2023",
-    "coverImage": "/sessions/funding_the_commons_berlin_2023/closing_words.jpg"
+  "id": "closing_words",
+  "name": "Closing words ",
+  "description": "",
+  "start": 1694275200000,
+  "end": 1694275800000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "david_casey",
+      "name": "David Casey",
+      "bio": "Protocol Labs/Funding the Commons",
+      "eventId": "funding_the_commons_berlin_2023"
+    }
+  ],
+  "eventId": "funding_the_commons_berlin_2023",
+  "coverImage": "/sessions/funding_the_commons_berlin_2023/closing_words.jpg"
 }

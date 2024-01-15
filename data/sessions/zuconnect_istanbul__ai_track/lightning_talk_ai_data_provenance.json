@@ -1,25 +1,25 @@
 {
-    "id": "lightning_talk_ai_data_provenance",
-    "name": "Lightning Talk:\u00a0AI Data Provenance",
-    "description": "Lightning Talk \u2013 AI Data Provenance",
-    "start": null,
-    "end": 1698945300000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "aayush_g",
-            "name": "Aayush G",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__ai_track"
-        },
-        {
-            "id": "daniel_bessonov",
-            "name": "Daniel Bessonov",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__ai_track"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "zuconnect_istanbul__ai_track",
-    "coverImage": "/sessions/zuconnect_istanbul__ai_track/lightning_talk_ai_data_provenance.jpg"
+  "id": "lightning_talk_ai_data_provenance",
+  "name": "Lightning Talk:\u00a0AI Data Provenance",
+  "description": "Lightning Talk \u2013 AI Data Provenance",
+  "start": null,
+  "end": 1698945300000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "aayush_g",
+      "name": "Aayush G",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__ai_track"
+    },
+    {
+      "id": "daniel_bessonov",
+      "name": "Daniel Bessonov",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__ai_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "coverImage": "/sessions/zuconnect_istanbul__ai_track/lightning_talk_ai_data_provenance.jpg"
 }

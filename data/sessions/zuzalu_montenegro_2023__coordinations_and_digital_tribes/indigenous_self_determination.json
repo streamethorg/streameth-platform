@@ -1,32 +1,32 @@
 {
-    "id": "indigenous_self_determination",
-    "name": "Indigenous Self- Determination",
-    "description": "",
-    "start": 1684297800000,
-    "end": 1684299600000,
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "primavera_de_filippi",
-            "name": "Primavera de Filippi",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-        },
-        {
-            "id": "chika_uwazie",
-            "name": "Chika Uwazie",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-        },
-        {
-            "id": "josh_davila",
-            "name": "Josh Davila",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
-        }
-    ],
-    "playbackId": "2918yapqtn5p20b3",
-    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
-    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/indigenous_self_determination.jpg",
-    "assetId": "29186eb4-51fa-4692-b906-d60b3bcd2fa5"
+  "id": "indigenous_self_determination",
+  "name": "Indigenous Self- Determination",
+  "description": "",
+  "start": 1684297800000,
+  "end": 1684299600000,
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "primavera_de_filippi",
+      "name": "Primavera de Filippi",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+    },
+    {
+      "id": "chika_uwazie",
+      "name": "Chika Uwazie",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+    },
+    {
+      "id": "josh_davila",
+      "name": "Josh Davila",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+    }
+  ],
+  "playbackId": "2918yapqtn5p20b3",
+  "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/indigenous_self_determination.jpg",
+  "assetId": "29186eb4-51fa-4692-b906-d60b3bcd2fa5"
 }

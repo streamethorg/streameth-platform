@@ -1,24 +1,24 @@
 {
-    "id": "what_me_worry_preventing_slashing_by_design",
-    "name": "What, Me Worry? Preventing Slashing by Design",
-    "description": "",
-    "start": 1699977900000,
-    "end": 1699978500000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "yuguang_ipsen",
-            "name": "Yuguang\nIpsen",
-            "bio": "Security Researcher OpenZeppelin",
-            "eventId": "secureum_trustx",
-            "twitter": "@mvlfyg",
-            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Yuguang.png"
-        }
-    ],
-    "playbackId": "f49fkxv1j3vpd024",
-    "eventId": "secureum_trustx",
-    "coverImage": "/sessions/secureum_trustx/what_me_worry_preventing_slashing_by_design.jpg",
-    "assetId": "f49fc810-a093-4146-848a-6a1d5496626e",
-    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-    "videoType": "clip"
+  "id": "what_me_worry_preventing_slashing_by_design",
+  "name": "What, Me Worry? Preventing Slashing by Design",
+  "description": "",
+  "start": 1699977900000,
+  "end": 1699978500000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "yuguang_ipsen",
+      "name": "Yuguang\nIpsen",
+      "bio": "Security Researcher OpenZeppelin",
+      "eventId": "secureum_trustx",
+      "twitter": "@mvlfyg",
+      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Yuguang.png"
+    }
+  ],
+  "playbackId": "f49fkxv1j3vpd024",
+  "eventId": "secureum_trustx",
+  "coverImage": "/sessions/secureum_trustx/what_me_worry_preventing_slashing_by_design.jpg",
+  "assetId": "f49fc810-a093-4146-848a-6a1d5496626e",
+  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+  "videoType": "clip"
 }

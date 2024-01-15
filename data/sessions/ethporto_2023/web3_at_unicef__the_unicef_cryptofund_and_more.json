@@ -1,19 +1,19 @@
 {
-    "id": "web3_at_unicef__the_unicef_cryptofund_and_more",
-    "name": "Web3 at UNICEF \u2013 The UNICEF Cryptofund and more",
-    "description": "This session will be held in English. There will be no translation to Portuguese.",
-    "start": "2023-03-16T13:55:00.000Z",
-    "end": "2023-03-16T14:25:00.000Z",
-    "stageId": "conference_main_hall",
-    "speakers": [
-        {
-            "id": "arun_maharajan",
-            "name": "Arun Maharajan",
-            "bio": "UNICEF Crypto Fund",
-            "eventId": "ethporto_2023",
-            "photo": "https://ethporto.org/assets/speakers/Arun.jpg"
-        }
-    ],
-    "playbackId": "62ebtw84iig7qmlt",
-    "eventId": "ethporto_2023"
+  "id": "web3_at_unicef__the_unicef_cryptofund_and_more",
+  "name": "Web3 at UNICEF \u2013 The UNICEF Cryptofund and more",
+  "description": "This session will be held in English. There will be no translation to Portuguese.",
+  "start": "2023-03-16T13:55:00.000Z",
+  "end": "2023-03-16T14:25:00.000Z",
+  "stageId": "conference_main_hall",
+  "speakers": [
+    {
+      "id": "arun_maharajan",
+      "name": "Arun Maharajan",
+      "bio": "UNICEF Crypto Fund",
+      "eventId": "ethporto_2023",
+      "photo": "https://ethporto.org/assets/speakers/Arun.jpg"
+    }
+  ],
+  "playbackId": "62ebtw84iig7qmlt",
+  "eventId": "ethporto_2023"
 }

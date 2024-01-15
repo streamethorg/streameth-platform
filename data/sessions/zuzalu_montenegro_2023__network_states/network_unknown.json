@@ -1,19 +1,19 @@
 {
-    "id": "network_unknown",
-    "name": "Network unknown",
-    "description": "",
-    "start": "2023-04-30T07:00:00.000Z",
-    "end": "2023-04-30T07:30:00.000Z",
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "mark_lutter",
-            "name": "Mark Lutter",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__network_states"
-        }
-    ],
-    "playbackId": "a916ugxeegitichh",
-    "eventId": "zuzalu_montenegro_2023__network_states",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "network_unknown",
+  "name": "Network unknown",
+  "description": "",
+  "start": "2023-04-30T07:00:00.000Z",
+  "end": "2023-04-30T07:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "mark_lutter",
+      "name": "Mark Lutter",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__network_states"
+    }
+  ],
+  "playbackId": "a916ugxeegitichh",
+  "eventId": "zuzalu_montenegro_2023__network_states",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

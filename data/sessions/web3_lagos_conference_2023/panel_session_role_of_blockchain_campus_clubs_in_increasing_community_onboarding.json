@@ -1,12 +1,12 @@
 {
-    "id": "panel_session_role_of_blockchain_campus_clubs_in_increasing_community_onboarding",
-    "name": "Panel Session: Role of blockchain campus clubs in increasing community onboarding",
-    "description": "",
-    "start": 1693657800000,
-    "end": 1693659000000,
-    "stageId": "mainstage",
-    "speakers": [],
-    "playbackId": "",
-    "eventId": "web3_lagos_conference_2023",
-    "coverImage": "/sessions/web3_lagos_conference_2023/panel_session_role_of_blockchain_campus_clubs_in_increasing_community_onboarding.jpg"
+  "id": "panel_session_role_of_blockchain_campus_clubs_in_increasing_community_onboarding",
+  "name": "Panel Session: Role of blockchain campus clubs in increasing community onboarding",
+  "description": "",
+  "start": 1693657800000,
+  "end": 1693659000000,
+  "stageId": "mainstage",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/panel_session_role_of_blockchain_campus_clubs_in_increasing_community_onboarding.jpg"
 }

@@ -1,19 +1,19 @@
 {
-    "id": "altmeat_design_and_longevity_",
-    "name": "Alt-Meat Design and Longevity \ud83d\udc1f",
-    "description": "This presentation will focus on the flavor and texture design challenges and opportunities for alternative meat and seafood. We will briefly look at how these engineering constraints butt heads with psychological and societal preferences and how these next-gen products may play into the future of food.&nbsp;\n\nBob Schultz is the Director of R&amp;D for Aqua Cultured Foods, which has developed a novel new tech that creates an alternative seafood option through the use of fermentation. Bob also has an MSc in Gastronomic Sciences and was a former Product Lead at SIMULATE.",
-    "start": "2023-05-11T11:45:00.000Z",
-    "end": "2023-05-11T12:45:00.000Z",
-    "stageId": "dome",
-    "speakers": [
-        {
-            "id": "bob_schultz",
-            "name": "Bob Schultz",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__other"
-        }
-    ],
-    "playbackId": "0466y63m0mv6xqbs",
-    "eventId": "zuzalu_montenegro_2023__other",
-    "coverImage": "/sessions/zuzalu_montenegro_2023__other/altmeat_design_and_longevity_.jpg"
+  "id": "altmeat_design_and_longevity_",
+  "name": "Alt-Meat Design and Longevity \ud83d\udc1f",
+  "description": "This presentation will focus on the flavor and texture design challenges and opportunities for alternative meat and seafood. We will briefly look at how these engineering constraints butt heads with psychological and societal preferences and how these next-gen products may play into the future of food.&nbsp;\n\nBob Schultz is the Director of R&amp;D for Aqua Cultured Foods, which has developed a novel new tech that creates an alternative seafood option through the use of fermentation. Bob also has an MSc in Gastronomic Sciences and was a former Product Lead at SIMULATE.",
+  "start": "2023-05-11T11:45:00.000Z",
+  "end": "2023-05-11T12:45:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "bob_schultz",
+      "name": "Bob Schultz",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__other"
+    }
+  ],
+  "playbackId": "0466y63m0mv6xqbs",
+  "eventId": "zuzalu_montenegro_2023__other",
+  "coverImage": "/sessions/zuzalu_montenegro_2023__other/altmeat_design_and_longevity_.jpg"
 }

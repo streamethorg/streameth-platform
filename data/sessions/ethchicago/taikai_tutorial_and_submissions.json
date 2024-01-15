@@ -1,20 +1,20 @@
 {
-    "id": "taikai_tutorial_and_submissions",
-    "name": "TAIKAI tutorial and submissions",
-    "description": "how to use the taikai platform for submissions",
-    "start": 1694894400000,
-    "end": 1694898000000,
-    "stageId": "oak_room_hacker_room",
-    "speakers": [
-        {
-            "id": "james_he",
-            "name": "James He",
-            "bio": "Testing this https://twitter.com/jameshe_eth",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/taikai_tutorial_and_submissions.jpg"
+  "id": "taikai_tutorial_and_submissions",
+  "name": "TAIKAI tutorial and submissions",
+  "description": "how to use the taikai platform for submissions",
+  "start": 1694894400000,
+  "end": 1694898000000,
+  "stageId": "oak_room_hacker_room",
+  "speakers": [
+    {
+      "id": "james_he",
+      "name": "James He",
+      "bio": "Testing this https://twitter.com/jameshe_eth",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/1629511483409_0bCQUpC.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/taikai_tutorial_and_submissions.jpg"
 }

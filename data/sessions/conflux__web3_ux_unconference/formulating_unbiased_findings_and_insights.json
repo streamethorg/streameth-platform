@@ -1,22 +1,22 @@
 {
-    "id": "formulating_unbiased_findings_and_insights",
-    "name": "Formulating unbiased findings and insights",
-    "description": "",
-    "start": 1700122200000,
-    "end": 1700122800000,
-    "stageId": "camlica",
-    "speakers": [
-        {
-            "id": "boyana_mecheva",
-            "name": "Boyana Mecheva",
-            "bio": "No description",
-            "eventId": "conflux__web3_ux_unconference"
-        }
-    ],
-    "playbackId": "7aa7lcxl88wltc8g",
-    "eventId": "conflux__web3_ux_unconference",
-    "coverImage": "/sessions/conflux__web3_ux_unconference/formulating_unbiased_findings_and_insights_thumbnail.png",
-    "assetId": "7aa7111f-0dfb-437a-8b06-830f20910c94",
-    "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
-    "videoType": "clip"
+  "id": "formulating_unbiased_findings_and_insights",
+  "name": "Formulating unbiased findings and insights",
+  "description": "",
+  "start": 1700122200000,
+  "end": 1700122800000,
+  "stageId": "camlica",
+  "speakers": [
+    {
+      "id": "boyana_mecheva",
+      "name": "Boyana Mecheva",
+      "bio": "No description",
+      "eventId": "conflux__web3_ux_unconference"
+    }
+  ],
+  "playbackId": "7aa7lcxl88wltc8g",
+  "eventId": "conflux__web3_ux_unconference",
+  "coverImage": "/sessions/conflux__web3_ux_unconference/formulating_unbiased_findings_and_insights_thumbnail.png",
+  "assetId": "7aa7111f-0dfb-437a-8b06-830f20910c94",
+  "sourceId": "674aa9e8-3de8-4293-9b48-ced2d76cabb3",
+  "videoType": "clip"
 }

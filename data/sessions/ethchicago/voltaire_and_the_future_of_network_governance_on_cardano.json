@@ -1,34 +1,34 @@
 {
-    "id": "voltaire_and_the_future_of_network_governance_on_cardano",
-    "name": "Voltaire and The Future of Network Governance on Cardano",
-    "description": "When both a voting and treasury system are in place, blockchain can be truly decentralized. Our future will be in the hands of the community, who will have everything they need to grow and evolve an advanced socio-economic operating system to advance humanity.",
-    "start": 1694876400000,
-    "end": 1694878200000,
-    "stageId": "east_room__main_",
-    "speakers": [
-        {
-            "id": "cullah",
-            "name": "Cullah",
-            "bio": "Cullah is the Founder of NFTMKE, the Milwaukee Web3 Community and Firebird Media, a Web3 Creator Protocol providing next generation tools and infrastructure for creators and their communities using disruptive technologies like blockchain and artificial intelligence\r\n\r\nCullah is an open-source musician, engineer, and entrepreneur who has released hundreds of original songs and compositions placed in productions for The Expendables 4, The North Face, The Modern Rogue, and Channel 4. As well as video games like D.R.O.N.E the Game, Those Who Remain, Stickman Rope Hero, and Car Mechanic Simulator 2018. \r\n\r\nhttps://cullah.com/epk",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/84138847_10158056861966663_1087440755334578176_n_UO854H5.jpg"
-        },
-        {
-            "id": "mike_mcnulty",
-            "name": "Mike McNulty",
-            "bio": "Product managers with Project Catalyst, a revolutionary Web3 innovation engine and one of the world's most significant decentralized grant funds\r\nhttps://www.linkedin.com/in/michaelpmcnulty/",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/headshot_BCC9AN5.jpg"
-        },
-        {
-            "id": "adam_rusch",
-            "name": "Adam Rusch",
-            "bio": "Prof. Adam Rusch\r\nTeaching Assistant Professor in the School of Information Sciences at the University of Illinois, as well as core contributor at Summon Platform, which offers DAO tooling. He was also the organizer / host for a CIP-1694 workshop exploring network-wide governance on Cardano, where we explored topics like delegative / liquid democracy and trusted off-chain data sources.\r\nhttps://www.linkedin.com/in/adamruschtech/",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/adam_headshot_22_UDj1C9r.jpeg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/voltaire_and_the_future_of_network_governance_on_cardano.jpg"
+  "id": "voltaire_and_the_future_of_network_governance_on_cardano",
+  "name": "Voltaire and The Future of Network Governance on Cardano",
+  "description": "When both a voting and treasury system are in place, blockchain can be truly decentralized. Our future will be in the hands of the community, who will have everything they need to grow and evolve an advanced socio-economic operating system to advance humanity.",
+  "start": 1694876400000,
+  "end": 1694878200000,
+  "stageId": "east_room__main_",
+  "speakers": [
+    {
+      "id": "cullah",
+      "name": "Cullah",
+      "bio": "Cullah is the Founder of NFTMKE, the Milwaukee Web3 Community and Firebird Media, a Web3 Creator Protocol providing next generation tools and infrastructure for creators and their communities using disruptive technologies like blockchain and artificial intelligence\r\n\r\nCullah is an open-source musician, engineer, and entrepreneur who has released hundreds of original songs and compositions placed in productions for The Expendables 4, The North Face, The Modern Rogue, and Channel 4. As well as video games like D.R.O.N.E the Game, Those Who Remain, Stickman Rope Hero, and Car Mechanic Simulator 2018. \r\n\r\nhttps://cullah.com/epk",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/84138847_10158056861966663_1087440755334578176_n_UO854H5.jpg"
+    },
+    {
+      "id": "mike_mcnulty",
+      "name": "Mike McNulty",
+      "bio": "Product managers with Project Catalyst, a revolutionary Web3 innovation engine and one of the world's most significant decentralized grant funds\r\nhttps://www.linkedin.com/in/michaelpmcnulty/",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/headshot_BCC9AN5.jpg"
+    },
+    {
+      "id": "adam_rusch",
+      "name": "Adam Rusch",
+      "bio": "Prof. Adam Rusch\r\nTeaching Assistant Professor in the School of Information Sciences at the University of Illinois, as well as core contributor at Summon Platform, which offers DAO tooling. He was also the organizer / host for a CIP-1694 workshop exploring network-wide governance on Cardano, where we explored topics like delegative / liquid democracy and trusted off-chain data sources.\r\nhttps://www.linkedin.com/in/adamruschtech/",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/adam_headshot_22_UDj1C9r.jpeg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/voltaire_and_the_future_of_network_governance_on_cardano.jpg"
 }

@@ -1,21 +1,21 @@
 {
-    "id": "transforming_the_eth_staking_landscape",
-    "name": "Transforming the ETH Staking Landscape",
-    "description": "-",
-    "start": 1699877700000,
-    "end": 1699879500000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "jordan_sutcliffe",
-            "name": "Jordan Sutcliffe",
-            "bio": "StakeWise\nBizdev Lead",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/d/03/19282613/avatar.jpg?7e5"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/transforming_the_eth_staking_landscape.jpg"
+  "id": "transforming_the_eth_staking_landscape",
+  "name": "Transforming the ETH Staking Landscape",
+  "description": "-",
+  "start": 1699877700000,
+  "end": 1699879500000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "jordan_sutcliffe",
+      "name": "Jordan Sutcliffe",
+      "bio": "StakeWise\nBizdev Lead",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/d/03/19282613/avatar.jpg?7e5"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/transforming_the_eth_staking_landscape.jpg"
 }

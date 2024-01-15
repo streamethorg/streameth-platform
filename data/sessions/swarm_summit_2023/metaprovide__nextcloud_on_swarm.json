@@ -1,26 +1,26 @@
 {
-    "id": "metaprovide__nextcloud_on_swarm",
-    "name": "Metaprovide - Nextcloud on Swarm",
-    "description": "MetaProvide is building collaboration platforms like 'Adminly' - tailor-made for the wellbeing market, currently used by psychologists, coaches and spiritual teachers etc. However, through 'Platformly' we instead build platforms for any organisation in need of one. The central emphasis being on integrating Swarm with Nextcloud. This is the topic we wish to cover today. We are extremely interested in how many of the 400 000 already existing Nextcloud-servers could be used with Swarm for decentralized data-storage usage, blockchain interaction, and bee-node hosting. Also Nextcloud wallet-login is currently being worked on.",
-    "start": "2023-06-21T14:25:00.000Z",
-    "end": "2023-06-21T14:40:00.000Z",
-    "stageId": "main",
-    "speakers": [
-        {
-            "id": "bjrn_magalhes",
-            "name": "Bj\u00f6rn Magalh\u00e3es",
-            "bio": "Founder & Chairman of MetaProvide Holding EKF",
-            "eventId": "swarm_summit_2023",
-            "photo": "https://summit.ethswarm.org/media/avatars/bjorn_0eQWZlS.png"
-        },
-        {
-            "id": "ron_trevor",
-            "name": "Ron Trevor",
-            "bio": "Main programmer of Swarm Integration within Nextcloud",
-            "eventId": "swarm_summit_2023",
-            "photo": "https://summit.ethswarm.org/media/avatars/ron_j8nX0Wy.jpg"
-        }
-    ],
-    "playbackId": "a1baoy6c6lq9xmbf",
-    "eventId": "swarm_summit_2023"
+  "id": "metaprovide__nextcloud_on_swarm",
+  "name": "Metaprovide - Nextcloud on Swarm",
+  "description": "MetaProvide is building collaboration platforms like 'Adminly' - tailor-made for the wellbeing market, currently used by psychologists, coaches and spiritual teachers etc. However, through 'Platformly' we instead build platforms for any organisation in need of one. The central emphasis being on integrating Swarm with Nextcloud. This is the topic we wish to cover today. We are extremely interested in how many of the 400 000 already existing Nextcloud-servers could be used with Swarm for decentralized data-storage usage, blockchain interaction, and bee-node hosting. Also Nextcloud wallet-login is currently being worked on.",
+  "start": "2023-06-21T14:25:00.000Z",
+  "end": "2023-06-21T14:40:00.000Z",
+  "stageId": "main",
+  "speakers": [
+    {
+      "id": "bjrn_magalhes",
+      "name": "Bj\u00f6rn Magalh\u00e3es",
+      "bio": "Founder & Chairman of MetaProvide Holding EKF",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://summit.ethswarm.org/media/avatars/bjorn_0eQWZlS.png"
+    },
+    {
+      "id": "ron_trevor",
+      "name": "Ron Trevor",
+      "bio": "Main programmer of Swarm Integration within Nextcloud",
+      "eventId": "swarm_summit_2023",
+      "photo": "https://summit.ethswarm.org/media/avatars/ron_j8nX0Wy.jpg"
+    }
+  ],
+  "playbackId": "a1baoy6c6lq9xmbf",
+  "eventId": "swarm_summit_2023"
 }

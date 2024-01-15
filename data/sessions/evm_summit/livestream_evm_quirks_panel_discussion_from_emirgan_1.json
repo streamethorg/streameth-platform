@@ -1,53 +1,53 @@
 {
-    "id": "livestream_evm_quirks_panel_discussion_from_emirgan_1",
-    "name": "Live-stream: EVM Quirks Panel Discussion (from Emirgan 1)",
-    "description": "Have you ever implemented or tried the EVM? Have you written a smart contract? You may be familiar with some unusual or weird quirks it has. This panel will explore some interesting ones and likely share personal stories and challenges faced by clients and language developers.",
-    "start": 1699961400000,
-    "end": 1699964100000,
-    "stageId": "emirgan_2",
-    "speakers": [
-        {
-            "id": "daniel_kirchner",
-            "name": "Daniel Kirchner",
-            "bio": "Member of the Solidity Team since 2018; Lead of the Solidity Team since the end of 2022.",
-            "eventId": "evm_summit",
-            "twitter": "",
-            "photo": "https://avatars.githubusercontent.com/u/1347491?v=4"
-        },
-        {
-            "id": "lightclient",
-            "name": "lightclient",
-            "bio": "Member of the go-ethereum team. Maintains several specifications, including `ethereum/execution-apis`. Co-author of EIP-3074.",
-            "eventId": "evm_summit",
-            "twitter": "",
-            "photo": "https://evmsummit.org/images/speakers/lightclient.jpg"
-        },
-        {
-            "id": "ayman_bouchareb",
-            "name": "Ayman Bouchareb",
-            "bio": "Ayman is a 24 years old software engineer from Morocco, joined Nethermind last year as part of the core team, and mostly focus on EVM related topics (since Ayman likes VMs), and now Ayman works on small EIPs that touchs the EVM for Shanghai and Cancun forks as well as working on the full EOF update for the EVM.",
-            "eventId": "evm_summit",
-            "twitter": "",
-            "photo": "https://evmsummit.org/images/speakers/ayman_bouchareb.jpg"
-        },
-        {
-            "id": "dragan_rakita",
-            "name": "Dragan Rakita",
-            "bio": "Reth core dev, revm author",
-            "eventId": "evm_summit",
-            "twitter": "",
-            "photo": "https://evmsummit.org/images/speakers/dragan_rakita.jpg"
-        },
-        {
-            "id": "ansgar_dietrichs",
-            "name": "Ansgar Dietrichs",
-            "bio": "Researcher at the Ethereum Foundation",
-            "eventId": "evm_summit",
-            "twitter": "",
-            "photo": "https://evmsummit.org/images/speakers/ansgar_dietrichs.jpg"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "evm_summit",
-    "coverImage": "/sessions/evm_summit/livestream_evm_quirks_panel_discussion_from_emirgan_1_thumbnail.png"
+  "id": "livestream_evm_quirks_panel_discussion_from_emirgan_1",
+  "name": "Live-stream: EVM Quirks Panel Discussion (from Emirgan 1)",
+  "description": "Have you ever implemented or tried the EVM? Have you written a smart contract? You may be familiar with some unusual or weird quirks it has. This panel will explore some interesting ones and likely share personal stories and challenges faced by clients and language developers.",
+  "start": 1699961400000,
+  "end": 1699964100000,
+  "stageId": "emirgan_2",
+  "speakers": [
+    {
+      "id": "daniel_kirchner",
+      "name": "Daniel Kirchner",
+      "bio": "Member of the Solidity Team since 2018; Lead of the Solidity Team since the end of 2022.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://avatars.githubusercontent.com/u/1347491?v=4"
+    },
+    {
+      "id": "lightclient",
+      "name": "lightclient",
+      "bio": "Member of the go-ethereum team. Maintains several specifications, including `ethereum/execution-apis`. Co-author of EIP-3074.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/lightclient.jpg"
+    },
+    {
+      "id": "ayman_bouchareb",
+      "name": "Ayman Bouchareb",
+      "bio": "Ayman is a 24 years old software engineer from Morocco, joined Nethermind last year as part of the core team, and mostly focus on EVM related topics (since Ayman likes VMs), and now Ayman works on small EIPs that touchs the EVM for Shanghai and Cancun forks as well as working on the full EOF update for the EVM.",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/ayman_bouchareb.jpg"
+    },
+    {
+      "id": "dragan_rakita",
+      "name": "Dragan Rakita",
+      "bio": "Reth core dev, revm author",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/dragan_rakita.jpg"
+    },
+    {
+      "id": "ansgar_dietrichs",
+      "name": "Ansgar Dietrichs",
+      "bio": "Researcher at the Ethereum Foundation",
+      "eventId": "evm_summit",
+      "twitter": "",
+      "photo": "https://evmsummit.org/images/speakers/ansgar_dietrichs.jpg"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "evm_summit",
+  "coverImage": "/sessions/evm_summit/livestream_evm_quirks_panel_discussion_from_emirgan_1_thumbnail.png"
 }

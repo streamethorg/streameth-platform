@@ -1,24 +1,24 @@
 {
-    "id": "node_crawler",
-    "name": "Node Crawler",
-    "description": "Fellow project presentation by Angus",
-    "start": 1700205300000,
-    "end": 1700205900000,
-    "stageId": "3b36",
-    "speakers": [
-        {
-            "id": "angus",
-            "name": "Angus",
-            "bio": "EPF Fellow",
-            "eventId": "epf_day",
-            "twitter": "@angusdippenaar",
-            "photo": "https://ipfs.io/ipfs/bafkreibye4uh5kat23ptxe3bfnwhww3cjr4vinw62cxb7xuazmlpg4awt4"
-        }
-    ],
-    "playbackId": "9778lft2xf2kyaft",
-    "eventId": "epf_day",
-    "coverImage": "/sessions/epf_day/node_crawler_thumbnail.png",
-    "assetId": "97787711-c100-4962-afdd-2f544f5c7bdc",
-    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-    "videoType": "clip"
+  "id": "node_crawler",
+  "name": "Node Crawler",
+  "description": "Fellow project presentation by Angus",
+  "start": 1700205300000,
+  "end": 1700205900000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "angus",
+      "name": "Angus",
+      "bio": "EPF Fellow",
+      "eventId": "epf_day",
+      "twitter": "@angusdippenaar",
+      "photo": "https://ipfs.io/ipfs/bafkreibye4uh5kat23ptxe3bfnwhww3cjr4vinw62cxb7xuazmlpg4awt4"
+    }
+  ],
+  "playbackId": "9778lft2xf2kyaft",
+  "eventId": "epf_day",
+  "coverImage": "/sessions/epf_day/node_crawler_thumbnail.png",
+  "assetId": "97787711-c100-4962-afdd-2f544f5c7bdc",
+  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+  "videoType": "clip"
 }

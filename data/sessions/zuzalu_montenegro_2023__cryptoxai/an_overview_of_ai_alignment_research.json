@@ -1,19 +1,19 @@
 {
-    "id": "an_overview_of_ai_alignment_research",
-    "name": "An Overview of AI Alignment Research",
-    "description": "cryptoxai.wtf",
-    "start": "2023-05-07T05:30:00.000Z",
-    "end": "2023-05-07T06:30:00.000Z",
-    "stageId": "lighthouse",
-    "speakers": [
-        {
-            "id": "jessica_taylor",
-            "name": "Jessica Taylor",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__cryptoxai"
-        }
-    ],
-    "playbackId": "42a9xlf5fv4wotf8",
-    "eventId": "zuzalu_montenegro_2023__cryptoxai",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "an_overview_of_ai_alignment_research",
+  "name": "An Overview of AI Alignment Research",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "jessica_taylor",
+      "name": "Jessica Taylor",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
+  "playbackId": "42a9xlf5fv4wotf8",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

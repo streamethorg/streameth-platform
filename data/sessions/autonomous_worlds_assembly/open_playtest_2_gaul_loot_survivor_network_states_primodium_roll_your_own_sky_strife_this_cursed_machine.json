@@ -1,19 +1,19 @@
 {
-    "id": "open_playtest_2_gaul_loot_survivor_network_states_primodium_roll_your_own_sky_strife_this_cursed_machine",
-    "name": "Open Playtest 2: Gaul, Loot Survivor, Network States, Primodium, Roll Your Own, Sky Strife, This Cursed Machine",
-    "description": "Open playtest featuring the games Gaul, Loot Survivor, Network States, Primodium, Roll Your Own, Sky Strife, and This Cursed Machine. ",
-    "start": 1700114400000,
-    "end": 1700118000000,
-    "stageId": "gaming_corner",
-    "speakers": [
-        {
-            "id": "open_playtest",
-            "name": "Open playtest",
-            "bio": "Refer to the individual playtest sessions for more information on the games and their creators. ",
-            "eventId": "autonomous_worlds_assembly"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/open_playtest_2_gaul_loot_survivor_network_states_primodium_roll_your_own_sky_strife_this_cursed_machine_thumbnail.png"
+  "id": "open_playtest_2_gaul_loot_survivor_network_states_primodium_roll_your_own_sky_strife_this_cursed_machine",
+  "name": "Open Playtest 2: Gaul, Loot Survivor, Network States, Primodium, Roll Your Own, Sky Strife, This Cursed Machine",
+  "description": "Open playtest featuring the games Gaul, Loot Survivor, Network States, Primodium, Roll Your Own, Sky Strife, and This Cursed Machine. ",
+  "start": 1700114400000,
+  "end": 1700118000000,
+  "stageId": "gaming_corner",
+  "speakers": [
+    {
+      "id": "open_playtest",
+      "name": "Open playtest",
+      "bio": "Refer to the individual playtest sessions for more information on the games and their creators. ",
+      "eventId": "autonomous_worlds_assembly"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/open_playtest_2_gaul_loot_survivor_network_states_primodium_roll_your_own_sky_strife_this_cursed_machine_thumbnail.png"
 }

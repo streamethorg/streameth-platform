@@ -1,20 +1,20 @@
 {
-    "id": "building_fullstack_interchain_dapp",
-    "name": "Building fullstack interchain dApp",
-    "description": "",
-    "start": 1693568400000,
-    "end": 1693569600000,
-    "stageId": "workshop_room_2",
-    "speakers": [
-        {
-            "id": "idris_olubi",
-            "name": "Idris Olubi",
-            "bio": "Developer Advocate",
-            "eventId": "web3_lagos_conference_2023",
-            "twitter": "@axelarcore"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "web3_lagos_conference_2023",
-    "coverImage": "/sessions/web3_lagos_conference_2023/building_fullstack_interchain_dapp.jpg"
+  "id": "building_fullstack_interchain_dapp",
+  "name": "Building fullstack interchain dApp",
+  "description": "",
+  "start": 1693568400000,
+  "end": 1693569600000,
+  "stageId": "workshop_room_2",
+  "speakers": [
+    {
+      "id": "idris_olubi",
+      "name": "Idris Olubi",
+      "bio": "Developer Advocate",
+      "eventId": "web3_lagos_conference_2023",
+      "twitter": "@axelarcore"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "web3_lagos_conference_2023",
+  "coverImage": "/sessions/web3_lagos_conference_2023/building_fullstack_interchain_dapp.jpg"
 }

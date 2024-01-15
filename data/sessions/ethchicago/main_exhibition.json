@@ -1,12 +1,12 @@
 {
-    "id": "main_exhibition",
-    "name": "Main Exhibition",
-    "description": "Main Exhibition",
-    "start": 1694872800000,
-    "end": 1694887200000,
-    "stageId": "gallery",
-    "speakers": [],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/main_exhibition.jpg"
+  "id": "main_exhibition",
+  "name": "Main Exhibition",
+  "description": "Main Exhibition",
+  "start": 1694872800000,
+  "end": 1694887200000,
+  "stageId": "gallery",
+  "speakers": [],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/main_exhibition.jpg"
 }

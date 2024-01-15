@@ -1,38 +1,38 @@
 {
-    "id": "reputation_and_trust_in_open_networks",
-    "name": "Reputation and Trust in Open Networks",
-    "description": "No description",
-    "start": 1699353900000,
-    "end": 1699356300000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "gloria_wu",
-            "name": "Gloria Wu",
-            "bio": "No description",
-            "eventId": "zuconnect__decentralized_social_track"
-        },
-        {
-            "id": "qj",
-            "name": "QJ",
-            "bio": "No Description",
-            "eventId": "zuconnect__decentralized_social_track"
-        },
-        {
-            "id": "gary_sheng",
-            "name": "Gary Sheng",
-            "bio": "No description",
-            "eventId": "zuconnect__decentralized_social_track"
-        },
-        {
-            "id": "basak_taraktas",
-            "name": "Basak Taraktas",
-            "bio": "No description",
-            "eventId": "zuconnect__decentralized_social_track"
-        }
-    ],
-    "playbackId": "4672arnpvxa8fjjq",
-    "eventId": "zuconnect__decentralized_social_track",
-    "coverImage": "/sessions/zuconnect__decentralized_social_track/reputation_and_trust_in_open_networks.jpg",
-    "assetId": "46728738-4199-468c-8f59-005a1d98caa7"
+  "id": "reputation_and_trust_in_open_networks",
+  "name": "Reputation and Trust in Open Networks",
+  "description": "No description",
+  "start": 1699353900000,
+  "end": 1699356300000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "gloria_wu",
+      "name": "Gloria Wu",
+      "bio": "No description",
+      "eventId": "zuconnect__decentralized_social_track"
+    },
+    {
+      "id": "qj",
+      "name": "QJ",
+      "bio": "No Description",
+      "eventId": "zuconnect__decentralized_social_track"
+    },
+    {
+      "id": "gary_sheng",
+      "name": "Gary Sheng",
+      "bio": "No description",
+      "eventId": "zuconnect__decentralized_social_track"
+    },
+    {
+      "id": "basak_taraktas",
+      "name": "Basak Taraktas",
+      "bio": "No description",
+      "eventId": "zuconnect__decentralized_social_track"
+    }
+  ],
+  "playbackId": "4672arnpvxa8fjjq",
+  "eventId": "zuconnect__decentralized_social_track",
+  "coverImage": "/sessions/zuconnect__decentralized_social_track/reputation_and_trust_in_open_networks.jpg",
+  "assetId": "46728738-4199-468c-8f59-005a1d98caa7"
 }

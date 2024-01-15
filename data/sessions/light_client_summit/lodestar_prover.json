@@ -1,24 +1,24 @@
 {
-    "id": "lodestar_prover",
-    "name": "Lodestar Prover",
-    "description": "Lodestar has been working on some infrastructure trying to enable trustless RPC providers for interacting with Ethereum. We believe that you cannot inherently trust the data you're given by a (likely centralized) provider such as Infura, Alchemy, etc. and think every client (e.g. wallet, browser, etc.) should be able to \"prove\" the integrity of the data received from your provider of choice. Introducing the Lodestar Prover, which further builds upon ideas from Helios, Kevlar, Patronum.",
-    "start": 1700290800000,
-    "end": 1700292000000,
-    "stageId": "3b36",
-    "speakers": [
-        {
-            "id": "nazar_hussain",
-            "name": "Nazar Hussain",
-            "bio": "ChainSafe / Lodestar: Experienced programmer, technical designer and technology enthusiast. Exploring the blockchain industry for a few years.",
-            "eventId": "light_client_summit",
-            "twitter": "@nazarhussain",
-            "photo": "https://drive.google.com/file/d/1lXA9BJBtq7uZkWUswC4g-h_G1VZQPnYi/view"
-        }
-    ],
-    "playbackId": "88f0q2hy353twbb9",
-    "eventId": "light_client_summit",
-    "coverImage": "/sessions/light_client_summit/lodestar_prover_thumbnail.png",
-    "assetId": "88f0aec9-6b67-43ec-b12c-403cd970218c",
-    "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
-    "videoType": "clip"
+  "id": "lodestar_prover",
+  "name": "Lodestar Prover",
+  "description": "Lodestar has been working on some infrastructure trying to enable trustless RPC providers for interacting with Ethereum. We believe that you cannot inherently trust the data you're given by a (likely centralized) provider such as Infura, Alchemy, etc. and think every client (e.g. wallet, browser, etc.) should be able to \"prove\" the integrity of the data received from your provider of choice. Introducing the Lodestar Prover, which further builds upon ideas from Helios, Kevlar, Patronum.",
+  "start": 1700290800000,
+  "end": 1700292000000,
+  "stageId": "3b36",
+  "speakers": [
+    {
+      "id": "nazar_hussain",
+      "name": "Nazar Hussain",
+      "bio": "ChainSafe / Lodestar: Experienced programmer, technical designer and technology enthusiast. Exploring the blockchain industry for a few years.",
+      "eventId": "light_client_summit",
+      "twitter": "@nazarhussain",
+      "photo": "https://drive.google.com/file/d/1lXA9BJBtq7uZkWUswC4g-h_G1VZQPnYi/view"
+    }
+  ],
+  "playbackId": "88f0q2hy353twbb9",
+  "eventId": "light_client_summit",
+  "coverImage": "/sessions/light_client_summit/lodestar_prover_thumbnail.png",
+  "assetId": "88f0aec9-6b67-43ec-b12c-403cd970218c",
+  "sourceId": "90b1dfdc-8ccd-4233-9130-5459a58e31a4",
+  "videoType": "clip"
 }

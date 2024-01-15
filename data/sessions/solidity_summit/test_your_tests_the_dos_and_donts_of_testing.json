@@ -1,24 +1,24 @@
 {
-    "id": "test_your_tests_the_dos_and_donts_of_testing",
-    "name": "Test your tests: The dos and don'ts of testing",
-    "description": "Testing is a fundamental part of the software development process. But not all testing is equal. Testing trivial properties or applying excessive filtering to fuzz tests can yield meaningless results. Likewise, focusing solely on positive cases doesn't offer a comprehensive understanding of a system's overall behavior. Achieving effective and insightful testing is a challenge, and this talk aims to delve deep into the pitfalls that developers often encounter. Moreover, it will provide guidelines to ensure that your testing is robust and valuable.",
-    "start": 1700124000000,
-    "end": 1700125800000,
-    "stageId": "uskudar_2",
-    "speakers": [
-        {
-            "id": "kurt_willis",
-            "name": "Kurt Willis",
-            "bio": "No description",
-            "eventId": "solidity_summit",
-            "twitter": "@lovethewired ",
-            "photo": "https://lh3.googleusercontent.com/drive-viewer/AITFw-yj7rV6ehSppqsRlN4JAUD3cBT9oHMnES1kzIw_7MQFc8ezzdFL-BeEpCBTxLlh03doaUwWXzoNbyok8SLwhMK5wks5=w2000-h1528"
-        }
-    ],
-    "playbackId": "876brdywvzwyjt79",
-    "eventId": "solidity_summit",
-    "coverImage": "/sessions/solidity_summit/test_your_tests_the_dos_and_donts_of_testing_thumbnail.png",
-    "assetId": "876bba7b-cf8b-4182-b1c1-eddc50774c34",
-    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-    "videoType": "clip"
+  "id": "test_your_tests_the_dos_and_donts_of_testing",
+  "name": "Test your tests: The dos and don'ts of testing",
+  "description": "Testing is a fundamental part of the software development process. But not all testing is equal. Testing trivial properties or applying excessive filtering to fuzz tests can yield meaningless results. Likewise, focusing solely on positive cases doesn't offer a comprehensive understanding of a system's overall behavior. Achieving effective and insightful testing is a challenge, and this talk aims to delve deep into the pitfalls that developers often encounter. Moreover, it will provide guidelines to ensure that your testing is robust and valuable.",
+  "start": 1700124000000,
+  "end": 1700125800000,
+  "stageId": "uskudar_2",
+  "speakers": [
+    {
+      "id": "kurt_willis",
+      "name": "Kurt Willis",
+      "bio": "No description",
+      "eventId": "solidity_summit",
+      "twitter": "@lovethewired ",
+      "photo": "https://lh3.googleusercontent.com/drive-viewer/AITFw-yj7rV6ehSppqsRlN4JAUD3cBT9oHMnES1kzIw_7MQFc8ezzdFL-BeEpCBTxLlh03doaUwWXzoNbyok8SLwhMK5wks5=w2000-h1528"
+    }
+  ],
+  "playbackId": "876brdywvzwyjt79",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/test_your_tests_the_dos_and_donts_of_testing_thumbnail.png",
+  "assetId": "876bba7b-cf8b-4182-b1c1-eddc50774c34",
+  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+  "videoType": "clip"
 }

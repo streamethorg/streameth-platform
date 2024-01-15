@@ -1,19 +1,19 @@
 {
-    "id": "workshop_token_utility_in_desci",
-    "name": "Workshop: Token Utility in DeSci",
-    "description": "Workshop discussing usecase of tokens in DeSci DAOs, discussing\nhow utility can extend beyond just governance.",
-    "start": 1699020000000,
-    "end": 1699023600000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "ines_silva",
-            "name": "Ines Silva",
-            "bio": "No Desciption",
-            "eventId": "zuconnect_desci_track"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "zuconnect_desci_track",
-    "coverImage": "/sessions/zuconnect_desci_track/workshop_token_utility_in_desci.jpg"
+  "id": "workshop_token_utility_in_desci",
+  "name": "Workshop: Token Utility in DeSci",
+  "description": "Workshop discussing usecase of tokens in DeSci DAOs, discussing\nhow utility can extend beyond just governance.",
+  "start": 1699020000000,
+  "end": 1699023600000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "ines_silva",
+      "name": "Ines Silva",
+      "bio": "No Desciption",
+      "eventId": "zuconnect_desci_track"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "zuconnect_desci_track",
+  "coverImage": "/sessions/zuconnect_desci_track/workshop_token_utility_in_desci.jpg"
 }

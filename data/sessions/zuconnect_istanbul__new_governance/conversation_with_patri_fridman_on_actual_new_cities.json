@@ -1,26 +1,26 @@
 {
-    "id": "conversation_with_patri_fridman_on_actual_new_cities",
-    "name": "Conversation with Patri Fridman on actual new cities",
-    "description": "Beginning with a short video, this dialogue will focus on new cities with a physical component, not network states ",
-    "start": 1698822900000,
-    "end": 1698826500000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "elaine",
-            "name": "Elaine",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__new_governance"
-        },
-        {
-            "id": "patri_friedman",
-            "name": "Patri Friedman",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__new_governance"
-        }
-    ],
-    "playbackId": "a2bdemy80oqzgymr",
-    "eventId": "zuconnect_istanbul__new_governance",
-    "coverImage": "/sessions/zuconnect_istanbul__new_governance/conversation_with_patri_fridman_on_actual_new_cities.jpg",
-    "assetId": "a2bd9cc8-b611-499d-9bf3-ea81b6922349"
+  "id": "conversation_with_patri_fridman_on_actual_new_cities",
+  "name": "Conversation with Patri Fridman on actual new cities",
+  "description": "Beginning with a short video, this dialogue will focus on new cities with a physical component, not network states ",
+  "start": 1698822900000,
+  "end": 1698826500000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "elaine",
+      "name": "Elaine",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    },
+    {
+      "id": "patri_friedman",
+      "name": "Patri Friedman",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__new_governance"
+    }
+  ],
+  "playbackId": "a2bdemy80oqzgymr",
+  "eventId": "zuconnect_istanbul__new_governance",
+  "coverImage": "/sessions/zuconnect_istanbul__new_governance/conversation_with_patri_fridman_on_actual_new_cities.jpg",
+  "assetId": "a2bd9cc8-b611-499d-9bf3-ea81b6922349"
 }

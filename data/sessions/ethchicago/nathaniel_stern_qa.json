@@ -1,32 +1,32 @@
 {
-    "id": "nathaniel_stern_qa",
-    "name": "Nathaniel Stern Q&A",
-    "description": "QA session with Nathaniel Stern hosted by Mad Pinney",
-    "start": 1694905200000,
-    "end": 1694907000000,
-    "stageId": "michigan_stage__creatives__trad_business_",
-    "speakers": [
-        {
-            "id": "nathaniel_stern",
-            "name": "Nathaniel Stern",
-            "bio": "Nathaniel Stern is a Professor, Researcher, Director of UWM Startup Challenge + Autism Brilliance Lab. \r\n\r\nHe has produced and collaborated on projects ranging from ecological, participatory, and online interventions, interactive, immersive, and mixed reality environments, to prints, sculptures, videos, performances. and hybrid forms. His first book, Interactive Art and Embodiment: The Implicit Body as Performance (Gylphi 2013), takes a close look at the stakes for interactive and digital art, and Ecological Aesthetics: artful tactics for humans, nature, and politics (Dartmouth 2018) is a creative and scholarly collection of stories about art, artists, and their materials, which argues that ecology, aesthetics, and ethics are inherently interconnected, and together act as the cornerstone for all contemporary arts practices. \r\n\r\nHe has been featured in the likes of the Wall Street Journal, Guardian UK, Huffington Post, Daily Mail, Washington Post, Daily News, BBC\u2019s Today show, WIRED, Boing Boing, Gizmodo, PetaPixel, M Magazine, Time, Forbes, Fast Company, Scientific American, the Milwaukee Journal Sentinel, Leonardo Journal of Art, Science and Technology, Rhizome, Furtherfield, Turbulence, and more.",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/download_ci5BmHs.jpeg"
-        },
-        {
-            "id": "mad_pinney",
-            "name": "Mad Pinney",
-            "bio": "Artblocks",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/766ad81d2a814fa907a80ededa863ca0_obgQvUm.jpg"
-        }
-    ],
-    "source": {
-        "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
-        "start": 25500,
-        "end": 27545
+  "id": "nathaniel_stern_qa",
+  "name": "Nathaniel Stern Q&A",
+  "description": "QA session with Nathaniel Stern hosted by Mad Pinney",
+  "start": 1694905200000,
+  "end": 1694907000000,
+  "stageId": "michigan_stage__creatives__trad_business_",
+  "speakers": [
+    {
+      "id": "nathaniel_stern",
+      "name": "Nathaniel Stern",
+      "bio": "Nathaniel Stern is a Professor, Researcher, Director of UWM Startup Challenge + Autism Brilliance Lab. \r\n\r\nHe has produced and collaborated on projects ranging from ecological, participatory, and online interventions, interactive, immersive, and mixed reality environments, to prints, sculptures, videos, performances. and hybrid forms. His first book, Interactive Art and Embodiment: The Implicit Body as Performance (Gylphi 2013), takes a close look at the stakes for interactive and digital art, and Ecological Aesthetics: artful tactics for humans, nature, and politics (Dartmouth 2018) is a creative and scholarly collection of stories about art, artists, and their materials, which argues that ecology, aesthetics, and ethics are inherently interconnected, and together act as the cornerstone for all contemporary arts practices. \r\n\r\nHe has been featured in the likes of the Wall Street Journal, Guardian UK, Huffington Post, Daily Mail, Washington Post, Daily News, BBC\u2019s Today show, WIRED, Boing Boing, Gizmodo, PetaPixel, M Magazine, Time, Forbes, Fast Company, Scientific American, the Milwaukee Journal Sentinel, Leonardo Journal of Art, Science and Technology, Rhizome, Furtherfield, Turbulence, and more.",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/download_ci5BmHs.jpeg"
     },
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/nathaniel_stern_qa.jpg"
+    {
+      "id": "mad_pinney",
+      "name": "Mad Pinney",
+      "bio": "Artblocks",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/766ad81d2a814fa907a80ededa863ca0_obgQvUm.jpg"
+    }
+  ],
+  "source": {
+    "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
+    "start": 25500,
+    "end": 27545
+  },
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/nathaniel_stern_qa.jpg"
 }

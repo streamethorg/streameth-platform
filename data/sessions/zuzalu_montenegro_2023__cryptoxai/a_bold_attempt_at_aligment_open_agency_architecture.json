@@ -1,19 +1,19 @@
 {
-    "id": "a_bold_attempt_at_aligment_open_agency_architecture",
-    "name": "A Bold Attempt At Aligment: Open Agency Architecture",
-    "description": "cryptoxai.wtf",
-    "start": "2023-05-07T05:30:00.000Z",
-    "end": "2023-05-07T06:30:00.000Z",
-    "stageId": "lighthouse",
-    "speakers": [
-        {
-            "id": "deger_turan",
-            "name": "Deger Turan",
-            "bio": "No description",
-            "eventId": "zuzalu_montenegro_2023__cryptoxai"
-        }
-    ],
-    "playbackId": "530ev67okv5iqubk",
-    "eventId": "zuzalu_montenegro_2023__cryptoxai",
-    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+  "id": "a_bold_attempt_at_aligment_open_agency_architecture",
+  "name": "A Bold Attempt At Aligment: Open Agency Architecture",
+  "description": "cryptoxai.wtf",
+  "start": "2023-05-07T05:30:00.000Z",
+  "end": "2023-05-07T06:30:00.000Z",
+  "stageId": "lighthouse",
+  "speakers": [
+    {
+      "id": "deger_turan",
+      "name": "Deger Turan",
+      "bio": "No description",
+      "eventId": "zuzalu_montenegro_2023__cryptoxai"
+    }
+  ],
+  "playbackId": "530ev67okv5iqubk",
+  "eventId": "zuzalu_montenegro_2023__cryptoxai",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

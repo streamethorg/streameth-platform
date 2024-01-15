@@ -1,21 +1,21 @@
 {
-    "id": "trials_and_tribulations_of_solo_staking_hardware_software_security_connectivity_ease_of_use_best_practices",
-    "name": "Trials and tribulations of solo staking: hardware, software, security, connectivity, ease of use, best practices",
-    "description": "-",
-    "start": 1699881900000,
-    "end": 1699883400000,
-    "stageId": "connie",
-    "speakers": [
-        {
-            "id": "radek_sienkiewicz",
-            "name": "Radek Sienkiewicz",
-            "bio": "3Box Labs\nSenior Developer Advocate",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/2/8e/19282709/avatar.jpg?923"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/trials_and_tribulations_of_solo_staking_hardware_software_security_connectivity_ease_of_use_best_practices.jpg"
+  "id": "trials_and_tribulations_of_solo_staking_hardware_software_security_connectivity_ease_of_use_best_practices",
+  "name": "Trials and tribulations of solo staking: hardware, software, security, connectivity, ease of use, best practices",
+  "description": "-",
+  "start": 1699881900000,
+  "end": 1699883400000,
+  "stageId": "connie",
+  "speakers": [
+    {
+      "id": "radek_sienkiewicz",
+      "name": "Radek Sienkiewicz",
+      "bio": "3Box Labs\nSenior Developer Advocate",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/2/8e/19282709/avatar.jpg?923"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/trials_and_tribulations_of_solo_staking_hardware_software_security_connectivity_ease_of_use_best_practices.jpg"
 }

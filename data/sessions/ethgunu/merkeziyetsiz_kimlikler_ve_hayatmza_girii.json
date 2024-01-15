@@ -1,24 +1,24 @@
 {
-    "id": "merkeziyetsiz_kimlikler_ve_hayatmza_girii",
-    "name": "Merkeziyetsiz Kimlikler ve Hayat\u0131m\u0131za Giri\u015fi",
-    "description": "Web3, m\u00fclkiyet haklar\u0131n\u0131n arac\u0131lar ve servis sa\u011flay\u0131c\u0131lardan do\u011frudan kullan\u0131c\u0131lara ge\u00e7mesini simgeliyor. Merkeziyetsiz kimlikler sayesinde kulland\u0131\u011f\u0131m\u0131z hizmetlerdeki hesaplar\u0131m\u0131z tamamen kendi kontrol\u00fcm\u00fcze ge\u00e7ebilecek. Hem akademiden hem de pratik uygulamalardan ortaya \u00e7\u0131kan merkeziyetsiz kimlik standartlar\u0131n\u0131 ve kavramlar\u0131n\u0131 inceleyecek ve bu kimliklerin hayat\u0131m\u0131zdaki yerini tart\u0131\u015faca\u011f\u0131z.",
-    "start": 1699863300000,
-    "end": 1699865100000,
-    "stageId": "emirgan_1",
-    "speakers": [
-        {
-            "id": "mert_salam",
-            "name": "Mert Sa\u011flam",
-            "bio": "2019 y\u0131l\u0131nda Va\u015fington \u00dcniversitesi'nde Jeff Dean & Heidi Hopper bursuyla okudu\u011fum teorik bilgisayar b\u00f6l\u00fcm\u00fcnde doktoram\u0131 tamamlad\u0131m. Doktora tezim i\u00e7in \u00fcnl\u00fc matematik\u00e7iler Erd\u0151s ve Simonovits'in 1982'de sordu\u011fu ve o g\u00fcnden beri cevaplanamayan sorusunu \u00e7\u00f6zd\u00fcm. Doktoram\u0131n \u00f6ncesi ve sonras\u0131nda Google'da yapay \u00f6\u011frenme ve algoritmalar alanlar\u0131nda \u00e7al\u0131\u015f\u0131p Google Assistant ve YouTube Ads gibi \u00fcr\u00fcnlere katk\u0131da bulundum. 2011 y\u0131l\u0131nda tamamlad\u0131\u011f\u0131m MSc. tezim i\u00e7in yazd\u0131\u011f\u0131m makale 2021 y\u0131l\u0131nda ACM PODS Alberto O. Mendelzon Test-of-Time \u00f6d\u00fcl\u00fcne lay\u0131k g\u00f6r\u00fcld\u00fc.\n\n2021'den bu yana KimlikDAO'nun temel geli\u015ftiricisi olarak g\u00f6rev yapmaktay\u0131m.",
-            "eventId": "ethgunu",
-            "twitter": "@szaglam",
-            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/mert.jpeg?raw=true"
-        }
-    ],
-    "playbackId": "63e6t5p4h7p6h09n",
-    "eventId": "ethgunu",
-    "coverImage": "/sessions/ethgunu/merkeziyetsiz_kimlikler_ve_hayatmza_girii_thumbnail.png",
-    "assetId": "63e6ea93-ae95-4d04-8d94-371fa623cb7d",
-    "sourceId": "7e5c7287-5c52-486c-befe-78c652f009dc",
-    "videoType": "clip"
+  "id": "merkeziyetsiz_kimlikler_ve_hayatmza_girii",
+  "name": "Merkeziyetsiz Kimlikler ve Hayat\u0131m\u0131za Giri\u015fi",
+  "description": "Web3, m\u00fclkiyet haklar\u0131n\u0131n arac\u0131lar ve servis sa\u011flay\u0131c\u0131lardan do\u011frudan kullan\u0131c\u0131lara ge\u00e7mesini simgeliyor. Merkeziyetsiz kimlikler sayesinde kulland\u0131\u011f\u0131m\u0131z hizmetlerdeki hesaplar\u0131m\u0131z tamamen kendi kontrol\u00fcm\u00fcze ge\u00e7ebilecek. Hem akademiden hem de pratik uygulamalardan ortaya \u00e7\u0131kan merkeziyetsiz kimlik standartlar\u0131n\u0131 ve kavramlar\u0131n\u0131 inceleyecek ve bu kimliklerin hayat\u0131m\u0131zdaki yerini tart\u0131\u015faca\u011f\u0131z.",
+  "start": 1699863300000,
+  "end": 1699865100000,
+  "stageId": "emirgan_1",
+  "speakers": [
+    {
+      "id": "mert_salam",
+      "name": "Mert Sa\u011flam",
+      "bio": "2019 y\u0131l\u0131nda Va\u015fington \u00dcniversitesi'nde Jeff Dean & Heidi Hopper bursuyla okudu\u011fum teorik bilgisayar b\u00f6l\u00fcm\u00fcnde doktoram\u0131 tamamlad\u0131m. Doktora tezim i\u00e7in \u00fcnl\u00fc matematik\u00e7iler Erd\u0151s ve Simonovits'in 1982'de sordu\u011fu ve o g\u00fcnden beri cevaplanamayan sorusunu \u00e7\u00f6zd\u00fcm. Doktoram\u0131n \u00f6ncesi ve sonras\u0131nda Google'da yapay \u00f6\u011frenme ve algoritmalar alanlar\u0131nda \u00e7al\u0131\u015f\u0131p Google Assistant ve YouTube Ads gibi \u00fcr\u00fcnlere katk\u0131da bulundum. 2011 y\u0131l\u0131nda tamamlad\u0131\u011f\u0131m MSc. tezim i\u00e7in yazd\u0131\u011f\u0131m makale 2021 y\u0131l\u0131nda ACM PODS Alberto O. Mendelzon Test-of-Time \u00f6d\u00fcl\u00fcne lay\u0131k g\u00f6r\u00fcld\u00fc.\n\n2021'den bu yana KimlikDAO'nun temel geli\u015ftiricisi olarak g\u00f6rev yapmaktay\u0131m.",
+      "eventId": "ethgunu",
+      "twitter": "@szaglam",
+      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/mert.jpeg?raw=true"
+    }
+  ],
+  "playbackId": "63e6t5p4h7p6h09n",
+  "eventId": "ethgunu",
+  "coverImage": "/sessions/ethgunu/merkeziyetsiz_kimlikler_ve_hayatmza_girii_thumbnail.png",
+  "assetId": "63e6ea93-ae95-4d04-8d94-371fa623cb7d",
+  "sourceId": "7e5c7287-5c52-486c-befe-78c652f009dc",
+  "videoType": "clip"
 }

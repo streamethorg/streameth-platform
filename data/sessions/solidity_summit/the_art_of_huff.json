@@ -1,24 +1,24 @@
 {
-    "id": "the_art_of_huff",
-    "name": "The Art of Huff",
-    "description": "Huff is a low-level programming language designed for developing smart contracts that run on the EVM. This talk will introduce the basics of Huff lang and talk about the benefits of using Huff as a smart contract developer.",
-    "start": 1700125800000,
-    "end": 1700127600000,
-    "stageId": "uskudar_2",
-    "speakers": [
-        {
-            "id": "jtriley",
-            "name": "jtriley",
-            "bio": "jtriley is a smart contract engineer, a Huff contributor, and a compiler engineer.",
-            "eventId": "solidity_summit",
-            "twitter": "@jtriley_eth",
-            "photo": "https://drive.google.com/file/d/1JtlOxnVGY0NJxvtF6_h-ZS6kRQlDrHau/view?usp=drive_link"
-        }
-    ],
-    "playbackId": "2de4lrduiowtcx7l",
-    "eventId": "solidity_summit",
-    "coverImage": "/sessions/solidity_summit/the_art_of_huff_thumbnail.png",
-    "assetId": "2de4d06a-664e-4666-b443-e7a0275d8195",
-    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-    "videoType": "clip"
+  "id": "the_art_of_huff",
+  "name": "The Art of Huff",
+  "description": "Huff is a low-level programming language designed for developing smart contracts that run on the EVM. This talk will introduce the basics of Huff lang and talk about the benefits of using Huff as a smart contract developer.",
+  "start": 1700125800000,
+  "end": 1700127600000,
+  "stageId": "uskudar_2",
+  "speakers": [
+    {
+      "id": "jtriley",
+      "name": "jtriley",
+      "bio": "jtriley is a smart contract engineer, a Huff contributor, and a compiler engineer.",
+      "eventId": "solidity_summit",
+      "twitter": "@jtriley_eth",
+      "photo": "https://drive.google.com/file/d/1JtlOxnVGY0NJxvtF6_h-ZS6kRQlDrHau/view?usp=drive_link"
+    }
+  ],
+  "playbackId": "2de4lrduiowtcx7l",
+  "eventId": "solidity_summit",
+  "coverImage": "/sessions/solidity_summit/the_art_of_huff_thumbnail.png",
+  "assetId": "2de4d06a-664e-4666-b443-e7a0275d8195",
+  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+  "videoType": "clip"
 }

@@ -1,21 +1,21 @@
 {
-    "id": "the_impact_of_distributed_validators_on_solo_staking",
-    "name": "The Impact of Distributed Validators on Solo Staking",
-    "description": "-",
-    "start": 1699871700000,
-    "end": 1699874100000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "sreeram_kannan",
-            "name": "Sreeram Kannan",
-            "bio": "Eigenlayer\nCEO",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/1/bc/19160256/avatar.jpg?2f2"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/the_impact_of_distributed_validators_on_solo_staking.jpg"
+  "id": "the_impact_of_distributed_validators_on_solo_staking",
+  "name": "The Impact of Distributed Validators on Solo Staking",
+  "description": "-",
+  "start": 1699871700000,
+  "end": 1699874100000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "sreeram_kannan",
+      "name": "Sreeram Kannan",
+      "bio": "Eigenlayer\nCEO",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/1/bc/19160256/avatar.jpg?2f2"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/the_impact_of_distributed_validators_on_solo_staking.jpg"
 }

@@ -1,21 +1,21 @@
 {
-    "id": "preassembly_atoms_institutions_blockchains",
-    "name": "Pre-Assembly: Atoms, Institutions, Blockchains",
-    "description": "The talk will introduce a framework to compare and contrast the different systems humans use to create certainty and trust in our affairs: atoms, institutions, and now blockchains. This helps us more squarely answer the root question: what are blockchains for?",
-    "start": 1700037000000,
-    "end": 1700038800000,
-    "stageId": "beyazit",
-    "speakers": [
-        {
-            "id": "josh_stark",
-            "name": "Josh Stark",
-            "bio": "Josh Stark works for Ethereum at the Ethereum Foundation, where he serves as part of the leadership team. Previously, he co-founded ETHGlobal and L4.",
-            "eventId": "autonomous_worlds_assembly",
-            "twitter": "@0xstark",
-            "photo": "https://drive.google.com/uc?id=12oIsNcxJ_5t4ZmMdCds2A0RVdE8wWvH6"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "autonomous_worlds_assembly",
-    "coverImage": "/sessions/autonomous_worlds_assembly/preassembly_atoms_institutions_blockchains_thumbnail.png"
+  "id": "preassembly_atoms_institutions_blockchains",
+  "name": "Pre-Assembly: Atoms, Institutions, Blockchains",
+  "description": "The talk will introduce a framework to compare and contrast the different systems humans use to create certainty and trust in our affairs: atoms, institutions, and now blockchains. This helps us more squarely answer the root question: what are blockchains for?",
+  "start": 1700037000000,
+  "end": 1700038800000,
+  "stageId": "beyazit",
+  "speakers": [
+    {
+      "id": "josh_stark",
+      "name": "Josh Stark",
+      "bio": "Josh Stark works for Ethereum at the Ethereum Foundation, where he serves as part of the leadership team. Previously, he co-founded ETHGlobal and L4.",
+      "eventId": "autonomous_worlds_assembly",
+      "twitter": "@0xstark",
+      "photo": "https://drive.google.com/uc?id=12oIsNcxJ_5t4ZmMdCds2A0RVdE8wWvH6"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "autonomous_worlds_assembly",
+  "coverImage": "/sessions/autonomous_worlds_assembly/preassembly_atoms_institutions_blockchains_thumbnail.png"
 }

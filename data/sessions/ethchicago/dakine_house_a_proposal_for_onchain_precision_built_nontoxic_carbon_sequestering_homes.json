@@ -1,20 +1,20 @@
 {
-    "id": "dakine_house_a_proposal_for_onchain_precision_built_nontoxic_carbon_sequestering_homes",
-    "name": "DaKine House: a proposal for on-chain, precision built, non-toxic, carbon sequestering homes",
-    "description": "NEED",
-    "start": 1694876400000,
-    "end": 1694878200000,
-    "stageId": "lincoln_stage__builder__legal",
-    "speakers": [
-        {
-            "id": "kent_olsen",
-            "name": "Kent Olsen",
-            "bio": "aa",
-            "eventId": "ethchicago",
-            "photo": "https://pretalx.com/media/avatars/Kent_Olsen_GAdfIfb.PNG"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "ethchicago",
-    "coverImage": "/sessions/ethchicago/dakine_house_a_proposal_for_onchain_precision_built_nontoxic_carbon_sequestering_homes.jpg"
+  "id": "dakine_house_a_proposal_for_onchain_precision_built_nontoxic_carbon_sequestering_homes",
+  "name": "DaKine House: a proposal for on-chain, precision built, non-toxic, carbon sequestering homes",
+  "description": "NEED",
+  "start": 1694876400000,
+  "end": 1694878200000,
+  "stageId": "lincoln_stage__builder__legal",
+  "speakers": [
+    {
+      "id": "kent_olsen",
+      "name": "Kent Olsen",
+      "bio": "aa",
+      "eventId": "ethchicago",
+      "photo": "https://pretalx.com/media/avatars/Kent_Olsen_GAdfIfb.PNG"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "ethchicago",
+  "coverImage": "/sessions/ethchicago/dakine_house_a_proposal_for_onchain_precision_built_nontoxic_carbon_sequestering_homes.jpg"
 }

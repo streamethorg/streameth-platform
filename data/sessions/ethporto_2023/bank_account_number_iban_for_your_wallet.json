@@ -1,19 +1,19 @@
 {
-    "id": "bank_account_number_iban_for_your_wallet",
-    "name": "Bank account number (IBAN) for your wallet",
-    "description": "This session will be held in English. There will be no translation to Portuguese.",
-    "start": "2023-03-16T16:15:00.000Z",
-    "end": "2023-03-16T16:35:00.000Z",
-    "stageId": "conference_main_hall",
-    "speakers": [
-        {
-            "id": "gsli_kristjnsson",
-            "name": "G\u00edsli Kristj\u00e1nsson",
-            "bio": "Monerium",
-            "eventId": "ethporto_2023",
-            "photo": "https://ethporto.org/assets/speakers/Gisli.jpg"
-        }
-    ],
-    "playbackId": "687b76mxux57tjpu",
-    "eventId": "ethporto_2023"
+  "id": "bank_account_number_iban_for_your_wallet",
+  "name": "Bank account number (IBAN) for your wallet",
+  "description": "This session will be held in English. There will be no translation to Portuguese.",
+  "start": "2023-03-16T16:15:00.000Z",
+  "end": "2023-03-16T16:35:00.000Z",
+  "stageId": "conference_main_hall",
+  "speakers": [
+    {
+      "id": "gsli_kristjnsson",
+      "name": "G\u00edsli Kristj\u00e1nsson",
+      "bio": "Monerium",
+      "eventId": "ethporto_2023",
+      "photo": "https://ethporto.org/assets/speakers/Gisli.jpg"
+    }
+  ],
+  "playbackId": "687b76mxux57tjpu",
+  "eventId": "ethporto_2023"
 }

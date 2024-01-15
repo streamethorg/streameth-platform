@@ -1,22 +1,22 @@
 {
-    "id": "opening_speech_welcome_by_antonio",
-    "name": "Opening speech (welcome) by Antonio",
-    "description": "place Antonio (moderator) into the program after Video1 finishes; he will introduce Nugaon (short)",
-    "start": 1703174700000,
-    "end": 1703174880000,
-    "stageId": "mainstage",
-    "speakers": [
-        {
-            "id": "antonio_gonzalo_moderator",
-            "name": "Antonio Gonzalo (Moderator)",
-            "bio": "\n",
-            "eventId": "swarm_winter_solstice"
-        }
-    ],
-    "playbackId": "a4cck2aapqc0qcne",
-    "eventId": "swarm_winter_solstice",
-    "coverImage": "/sessions/swarm_winter_solstice/opening_speech_welcome_by_antonio.jpg",
-    "assetId": "a4ccb19c-78cc-4e91-8fab-7ac74fd2862f",
-    "sourceId": "78c780ec-a420-416a-9ffd-fcd8e65c2ad1",
-    "videoType": "clip"
+  "id": "opening_speech_welcome_by_antonio",
+  "name": "Opening speech (welcome) by Antonio",
+  "description": "place Antonio (moderator) into the program after Video1 finishes; he will introduce Nugaon (short)",
+  "start": 1703174700000,
+  "end": 1703174880000,
+  "stageId": "mainstage",
+  "speakers": [
+    {
+      "id": "antonio_gonzalo_moderator",
+      "name": "Antonio Gonzalo (Moderator)",
+      "bio": "\n",
+      "eventId": "swarm_winter_solstice"
+    }
+  ],
+  "playbackId": "a4cck2aapqc0qcne",
+  "eventId": "swarm_winter_solstice",
+  "coverImage": "/sessions/swarm_winter_solstice/opening_speech_welcome_by_antonio.jpg",
+  "assetId": "a4ccb19c-78cc-4e91-8fab-7ac74fd2862f",
+  "sourceId": "78c780ec-a420-416a-9ffd-fcd8e65c2ad1",
+  "videoType": "clip"
 }

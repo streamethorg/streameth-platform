@@ -1,26 +1,26 @@
 {
-    "id": "ai_fireside_chat_with_vitalik__juan_benet",
-    "name": "AI Fireside Chat with Vitalik & Juan Benet",
-    "description": "AI Fireside Chat with Vitalik & Juan Benet",
-    "start": null,
-    "end": 1698925800000,
-    "stageId": "theater",
-    "speakers": [
-        {
-            "id": "vitalik_buterin",
-            "name": "Vitalik Buterin",
-            "bio": "No description",
-            "eventId": "zuconnect_istanbul__ai_track"
-        },
-        {
-            "id": "juan_benet",
-            "name": "Juan Benet",
-            "bio": "Protcol Labs",
-            "eventId": "zuconnect_istanbul__ai_track"
-        }
-    ],
-    "playbackId": "4e0bbw6vd4az0a3l",
-    "eventId": "zuconnect_istanbul__ai_track",
-    "coverImage": "/sessions/zuconnect_istanbul__ai_track/ai_fireside_chat_with_vitalik__juan_benet.jpg",
-    "assetId": "4e0b7772-5fb1-4aee-a382-f09c16efa61d"
+  "id": "ai_fireside_chat_with_vitalik__juan_benet",
+  "name": "AI Fireside Chat with Vitalik & Juan Benet",
+  "description": "AI Fireside Chat with Vitalik & Juan Benet",
+  "start": null,
+  "end": 1698925800000,
+  "stageId": "theater",
+  "speakers": [
+    {
+      "id": "vitalik_buterin",
+      "name": "Vitalik Buterin",
+      "bio": "No description",
+      "eventId": "zuconnect_istanbul__ai_track"
+    },
+    {
+      "id": "juan_benet",
+      "name": "Juan Benet",
+      "bio": "Protcol Labs",
+      "eventId": "zuconnect_istanbul__ai_track"
+    }
+  ],
+  "playbackId": "4e0bbw6vd4az0a3l",
+  "eventId": "zuconnect_istanbul__ai_track",
+  "coverImage": "/sessions/zuconnect_istanbul__ai_track/ai_fireside_chat_with_vitalik__juan_benet.jpg",
+  "assetId": "4e0b7772-5fb1-4aee-a382-f09c16efa61d"
 }

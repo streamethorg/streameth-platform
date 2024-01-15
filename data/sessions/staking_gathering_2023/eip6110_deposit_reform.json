@@ -1,21 +1,21 @@
 {
-    "id": "eip6110_deposit_reform",
-    "name": "EIP-6110. Deposit reform",
-    "description": "During this talk we will go over UX and security improvements that EIP-6110 offers to stakers and to the protocol. We will also cover current status of this EIP and a bit speculate about wen on the Mainnet.",
-    "start": 1699953900000,
-    "end": 1699958100000,
-    "stageId": "main_stage",
-    "speakers": [
-        {
-            "id": "mikhail_kalinin",
-            "name": "Mikhail Kalinin",
-            "bio": "Consensys\nResearch Engineer",
-            "eventId": "staking_gathering_2023",
-            "twitter": "",
-            "photo": "https://avatars.sched.co/b/3a/19170207/avatar.jpg?a1a"
-        }
-    ],
-    "playbackId": "",
-    "eventId": "staking_gathering_2023",
-    "coverImage": "/sessions/staking_gathering_2023/eip6110_deposit_reform.jpg"
+  "id": "eip6110_deposit_reform",
+  "name": "EIP-6110. Deposit reform",
+  "description": "During this talk we will go over UX and security improvements that EIP-6110 offers to stakers and to the protocol. We will also cover current status of this EIP and a bit speculate about wen on the Mainnet.",
+  "start": 1699953900000,
+  "end": 1699958100000,
+  "stageId": "main_stage",
+  "speakers": [
+    {
+      "id": "mikhail_kalinin",
+      "name": "Mikhail Kalinin",
+      "bio": "Consensys\nResearch Engineer",
+      "eventId": "staking_gathering_2023",
+      "twitter": "",
+      "photo": "https://avatars.sched.co/b/3a/19170207/avatar.jpg?a1a"
+    }
+  ],
+  "playbackId": "",
+  "eventId": "staking_gathering_2023",
+  "coverImage": "/sessions/staking_gathering_2023/eip6110_deposit_reform.jpg"
 }
