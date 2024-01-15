@@ -1,1 +1,27 @@
-{"id":"sign_track_and_execute_your_contract","name":"Sign, track, and execute your contract","description":"the talk addresses the challenges posed by opaque and inaccessible contract templates and tokenomics in various projects and proposed a viable solution with EthSign TokenTable, a token ownership management platform that helps users execute, track and enforce distribution. This work is proven to be valuable, especially for early-staged founder thinking about future fundraising from renown investors.","start":1694898000000,"end":1694899800000,"stageId":"lincoln_stage__builder__legal","speakers":[{"id":"lj_huang","name":"LJ Huang","bio":"Research and Operations Lead at EthSign","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/pfp_1jlWY8K.jpg"},{"id":"jack_xu","name":"Jack Xu","bio":"Cofounder & CTO @ EthSign\r\nAdjunct Blockchain Lecturer @ USC","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/DSCF2341-2_DyBT2Xj.jpg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/sign_track_and_execute_your_contract.jpg"}
+{
+    "id": "sign_track_and_execute_your_contract",
+    "name": "Sign, track, and execute your contract",
+    "description": "the talk addresses the challenges posed by opaque and inaccessible contract templates and tokenomics in various projects and proposed a viable solution with EthSign TokenTable, a token ownership management platform that helps users execute, track and enforce distribution. This work is proven to be valuable, especially for early-staged founder thinking about future fundraising from renown investors.",
+    "start": 1694898000000,
+    "end": 1694899800000,
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+        {
+            "id": "lj_huang",
+            "name": "LJ Huang",
+            "bio": "Research and Operations Lead at EthSign",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/pfp_1jlWY8K.jpg"
+        },
+        {
+            "id": "jack_xu",
+            "name": "Jack Xu",
+            "bio": "Cofounder & CTO @ EthSign\r\nAdjunct Blockchain Lecturer @ USC",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/DSCF2341-2_DyBT2Xj.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/sign_track_and_execute_your_contract.jpg"
+}

@@ -1,25 +1,24 @@
 {
-  "id": "create_a_distributed_validator_with_your_friends_and_fellow_ethberlin_hackers_real_time_dv_creation_workshop__ceremony",
-  "name": "Create a Distributed Validator with your friends and fellow EthBerlin hackers (real time DV creation workshop & ceremony)",
-  "description": "Learn how to create a Distributed Validator Cluster with fellow EthBerlin hackers! Learn about Distributed Validator Technology (DVT) by creating a validator with a group of peers to mitigate the problem of single-point of failure in Ethereum Staking.\nTechnical requirements: Users should feel comfortable using a terminal & Docker locally on their Macbook or Linux machine. If on Windows, the ability to spin up a linux VM will be needed. ",
-  "start": "2022-09-16T18:45:00.000Z",
-  "end": "2022-09-16T19:30:00.000Z",
-  "stageId": "creators_lab",
-  "speakers": [
-    {
-      "id": "chris_battenfield",
-      "name": "Chris Battenfield",
-      "bio": "No description",
-      "eventId": "ethberlin_2022"
-    },
-    {
-      "id": "oisin_kyne",
-      "name": "Oisin Kyne",
-      "bio": "No description",
-      "eventId": "ethberlin_2022"
-    }
-  ],
-  "videoUrl": "https://livepeercdn.com/recordings/8683112f-9c51-4f52-9501-f0901790dc61/index.m3u8",
-  "playbackId": "8683112f-9c51-4f52-9501-f0901790dc61",
-  "eventId": "ethberlin_2022"
+    "id": "create_a_distributed_validator_with_your_friends_and_fellow_ethberlin_hackers_real_time_dv_creation_workshop__ceremony",
+    "name": "Create a Distributed Validator with your friends and fellow EthBerlin hackers (real time DV creation workshop & ceremony)",
+    "description": "Learn how to create a Distributed Validator Cluster with fellow EthBerlin hackers! Learn about Distributed Validator Technology (DVT) by creating a validator with a group of peers to mitigate the problem of single-point of failure in Ethereum Staking.\nTechnical requirements: Users should feel comfortable using a terminal & Docker locally on their Macbook or Linux machine. If on Windows, the ability to spin up a linux VM will be needed.\u00a0",
+    "start": "2022-09-16T18:45:00.000Z",
+    "end": "2022-09-16T19:30:00.000Z",
+    "stageId": "creators_lab",
+    "speakers": [
+        {
+            "id": "chris_battenfield",
+            "name": "Chris Battenfield",
+            "bio": "No description",
+            "eventId": "ethberlin_2022"
+        },
+        {
+            "id": "oisin_kyne",
+            "name": "Oisin Kyne",
+            "bio": "No description",
+            "eventId": "ethberlin_2022"
+        }
+    ],
+    "playbackId": "8683112f-9c51-4f52-9501-f0901790dc61",
+    "eventId": "ethberlin_2022"
 }

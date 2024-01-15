@@ -15,7 +15,6 @@
             "photo": "https://drive.google.com/file/d/1rDSMo_VKCLCw3EWwlG_V2e0LCidubLkX/view?usp=sharing"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/e24ficchpsz22sjm/index.m3u8",
     "playbackId": "e24ficchpsz22sjm",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/slang_building_solidity_compiler_apis_from_a_declarative_language_specification_thumbnail.png",

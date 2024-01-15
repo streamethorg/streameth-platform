@@ -1,43 +1,43 @@
 {
-  "id": "programmable_attestations_part_ii",
-  "name": "Programmable Attestations Part II\n",
-  "description": "Expanding on practical applications and experiments for topics explored session in 2A, that can iterated on at FTC Taipei, ETH Denver, in hacker houses and hackathons etc. over the upcoming season. ",
-  "start": 1699091100000,
-  "end": 1699094700000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "beth_mccarthy",
-      "name": "Beth McCarthy",
-      "bio": "Funding The Commons",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "david_casey",
-      "name": "David Casey",
-      "bio": "Funding The Commons",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "jesse_katz",
-      "name": "\nJesse Katz",
-      "bio": "Maitri Network",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "cait_chizmar",
-      "name": "Cait Chizmar",
-      "bio": "Maitri Network",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "manu_alzuru",
-      "name": "Manu Alzuru",
-      "bio": "DoinGud, Blockravers",
-      "eventId": "zuconnect__public_goods_track"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "zuconnect__public_goods_track",
-  "coverImage": "/sessions/zuconnect__public_goods_track/programmable_attestations_part_ii.jpg"
+    "id": "programmable_attestations_part_ii",
+    "name": "Programmable Attestations Part II\n",
+    "description": "Expanding on practical applications and experiments for topics explored session in 2A, that can iterated on at FTC Taipei, ETH Denver, in hacker houses and hackathons etc. over the upcoming season. ",
+    "start": 1699091100000,
+    "end": 1699094700000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "beth_mccarthy",
+            "name": "Beth McCarthy",
+            "bio": "Funding The Commons",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "david_casey",
+            "name": "David Casey",
+            "bio": "Funding The Commons",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "jesse_katz",
+            "name": "\nJesse Katz",
+            "bio": "Maitri Network",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "cait_chizmar",
+            "name": "Cait Chizmar",
+            "bio": "Maitri Network",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "manu_alzuru",
+            "name": "Manu Alzuru",
+            "bio": "DoinGud, Blockravers",
+            "eventId": "zuconnect__public_goods_track"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "zuconnect__public_goods_track",
+    "coverImage": "/sessions/zuconnect__public_goods_track/programmable_attestations_part_ii.jpg"
 }

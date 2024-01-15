@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/profile_znqIAz5.jpg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/8b52pr4hr0xxuf0s/index.m3u8",
+    "playbackId": "8b52pr4hr0xxuf0s",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/metadataprivate_data_transfer.jpg",
     "assetId": "8b528b02-8789-493c-a8a9-923bcd4d1fce"

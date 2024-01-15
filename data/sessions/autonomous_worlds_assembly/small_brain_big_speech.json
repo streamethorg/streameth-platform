@@ -1,21 +1,21 @@
 {
-  "id": "small_brain_big_speech",
-  "name": "Small Brain, Big Speech",
-  "description": "This session will present an approach to designing and rapidly launching onchain games. We'll cover the early ideation period and playtests before moving into security/safety considerations and deployment processes for launching an onchain game on mainnet.",
-  "start": 1700121600000,
-  "end": 1700123400000,
-  "stageId": "emirgan_2",
-  "speakers": [
-    {
-      "id": "small_brain",
-      "name": "Small Brain",
-      "bio": "Small Brain is the creator of onchain crossword game Words3 and co-creator of Network States, an onchain strategy game with GPT lore. ",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@0xsmallbrain",
-      "photo": "https://drive.google.com/uc?id=1TzVkEuh3XpgqcDykpw1KuYakUuk7BAWr"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "autonomous_worlds_assembly",
-  "coverImage": "/sessions/autonomous_worlds_assembly/small_brain_big_speech_thumbnail.png"
+    "id": "small_brain_big_speech",
+    "name": "Small Brain, Big Speech",
+    "description": "This session will present an approach to designing and rapidly launching onchain games. We'll cover the early ideation period and playtests before moving into security/safety considerations and deployment processes for launching an onchain game on mainnet.",
+    "start": 1700121600000,
+    "end": 1700123400000,
+    "stageId": "emirgan_2",
+    "speakers": [
+        {
+            "id": "small_brain",
+            "name": "Small Brain",
+            "bio": "Small Brain is the creator of onchain crossword game Words3 and co-creator of Network States, an onchain strategy game with GPT lore. ",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@0xsmallbrain",
+            "photo": "https://drive.google.com/uc?id=1TzVkEuh3XpgqcDykpw1KuYakUuk7BAWr"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "autonomous_worlds_assembly",
+    "coverImage": "/sessions/autonomous_worlds_assembly/small_brain_big_speech_thumbnail.png"
 }

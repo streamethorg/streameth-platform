@@ -1,19 +1,19 @@
 {
-  "id": "zk_based_signatures_and_potential_applications_to_ssf",
-  "name": "Zk based signatures and (potential) applications to SSF",
-  "description": "",
-  "start": 1699963200000,
-  "end": 1699965000000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "tiancheng_xie",
-      "name": "Tiancheng Xie",
-      "bio": "Co-founder and CTO at Polyhedra",
-      "eventId": "cryptographic_resilience"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "cryptographic_resilience",
-  "coverImage": "sessions/cryptographic_resilience/zk_based_signatures_and_potential_applications_to_ssf_thumbnail.png"
+    "id": "zk_based_signatures_and_potential_applications_to_ssf",
+    "name": "Zk based signatures and (potential) applications to SSF",
+    "description": "",
+    "start": 1699963200000,
+    "end": 1699965000000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "tiancheng_xie",
+            "name": "Tiancheng Xie",
+            "bio": "Co-founder and CTO at Polyhedra",
+            "eventId": "cryptographic_resilience"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "cryptographic_resilience",
+    "coverImage": "sessions/cryptographic_resilience/zk_based_signatures_and_potential_applications_to_ssf_thumbnail.png"
 }

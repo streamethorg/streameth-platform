@@ -1,13 +1,19 @@
 {
-  "id": "why_depin_matters",
-  "name": "Why DePIN Matters",
-  "description": "The text explores the concept of deep-in protocols in the crypto field, which aim to decentralize and democratize access to essential services like telecommunications, energy, transportation, and computational hardware. It emphasizes the importance of deep-in protocols in upgrading existing solutions and providing real-world use cases that are easily understood by non-crypto users. The challenges faced in building decentralized networks for physical services include justifying decentralization, interfacing with existing infrastructure networks, navigating regulatory landscapes, and verifying service provision. The text also discusses the reasons for building decentralized networks, such as reducing capital expenditure, aggregating latent capacity, and enabling permissionless innovation. It addresses the challenges of designing interfaces with existing infrastructure, go-to-market strategies, regulatory considerations, and service verification. The text concludes by acknowledging that many challenges in this field remain unsolved and encourages further exploration and research.",
-  "start": "2023-07-16T08:30:00.000Z",
-  "end": "2023-07-16T08:50:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [{ "id": "guy_wuollet", "name": "Guy Wuollet", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
-  "videoUrl": "https://lp-playback.com/hls/1ea7j2yz9ft8kliy/index.m3u8",
-  "playbackId": "1ea7j2yz9ft8kliy",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/why_depin_matters.jpg"
+    "id": "why_depin_matters",
+    "name": "Why DePIN Matters",
+    "description": "The text explores the concept of deep-in protocols in the crypto field, which aim to decentralize and democratize access to essential services like telecommunications, energy, transportation, and computational hardware. It emphasizes the importance of deep-in protocols in upgrading existing solutions and providing real-world use cases that are easily understood by non-crypto users. The challenges faced in building decentralized networks for physical services include justifying decentralization, interfacing with existing infrastructure networks, navigating regulatory landscapes, and verifying service provision. The text also discusses the reasons for building decentralized networks, such as reducing capital expenditure, aggregating latent capacity, and enabling permissionless innovation. It addresses the challenges of designing interfaces with existing infrastructure, go-to-market strategies, regulatory considerations, and service verification. The text concludes by acknowledging that many challenges in this field remain unsolved and encourages further exploration and research.",
+    "start": "2023-07-16T08:30:00.000Z",
+    "end": "2023-07-16T08:50:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "guy_wuollet",
+            "name": "Guy Wuollet",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "1ea7j2yz9ft8kliy",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/why_depin_matters.jpg"
 }

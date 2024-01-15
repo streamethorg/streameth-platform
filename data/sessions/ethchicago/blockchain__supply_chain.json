@@ -42,8 +42,8 @@
             "photo": ""
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/0378b7wne4eedush/index.m3u8",
     "eventId": "ethchicago",
     "coverImage": "/sessions/ethchicago/blockchain__supply_chain.jpg",
-    "assetId": "03784db0-bf81-48b1-bc72-648f1b6a8d40"
+    "assetId": "03784db0-bf81-48b1-bc72-648f1b6a8d40",
+    "playbackId": "0378b7wne4eedush"
 }

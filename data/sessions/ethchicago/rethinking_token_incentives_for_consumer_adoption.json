@@ -1,24 +1,24 @@
 {
-  "id": "rethinking_token_incentives_for_consumer_adoption",
-  "name": "Rethinking token incentives for consumer adoption",
-  "description": "The current incentive systems for many applications and ecosystems in crypto are naive and will not extend to mainstream consumer adoption.\r\n\r\nWe will talk through a new framework to help projects think about how to appeal to mainstream users and share some examples for how we are using it at Icebreaker (eg getting people to run without monetary incentives). \r\n\r\nWe might even do a live demonstration :)\r\n\r\nhttps://mirror.xyz/icebreakerlabs.eth/xDKxKWdxiBn7waxTq9o-LaQi2UhkSO1g3xrqJRtft3Y",
-  "start": 1694890800000,
-  "end": 1694892600000,
-  "stageId": "michigan_stage__creatives__trad_business_",
-  "speakers": [
-    {
-      "id": "web3pmeth",
-      "name": "Web3pm.eth",
-      "bio": "co-founder and CEO of Icebreaker. Previously led product for consumer trading at Coinbase (advanced, pro, simple, dex) and before that led product for Google Analytics (built out a few businesses spanning identity and ads that contribute ~5% of revenues). Background in AI, privacy, and marketing at startups before that. \r\n\r\nhttps://icbk.me/ens/web3pm.eth",
-      "eventId": "ethchicago",
-      "photo": "https://pretalx.com/media/avatars/web3pm_X7ZNJgj.png"
-    }
-  ],
-  "source": {
-    "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
-    "start": 0
-  },
-  "playbackId": "",
-  "eventId": "ethchicago",
-  "coverImage": "/sessions/ethchicago/rethinking_token_incentives_for_consumer_adoption.jpg"
+    "id": "rethinking_token_incentives_for_consumer_adoption",
+    "name": "Rethinking token incentives for consumer adoption",
+    "description": "The current incentive systems for many applications and ecosystems in crypto are naive and will not extend to mainstream consumer adoption.\r\n\r\nWe will talk through a new framework to help projects think about how to appeal to mainstream users and share some examples for how we are using it at Icebreaker (eg getting people to run without monetary incentives). \r\n\r\nWe might even do a live demonstration :)\r\n\r\nhttps://mirror.xyz/icebreakerlabs.eth/xDKxKWdxiBn7waxTq9o-LaQi2UhkSO1g3xrqJRtft3Y",
+    "start": 1694890800000,
+    "end": 1694892600000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "web3pmeth",
+            "name": "Web3pm.eth",
+            "bio": "co-founder and CEO of Icebreaker. Previously led product for consumer trading at Coinbase (advanced, pro, simple, dex) and before that led product for Google Analytics (built out a few businesses spanning identity and ads that contribute ~5% of revenues). Background in AI, privacy, and marketing at startups before that. \r\n\r\nhttps://icbk.me/ens/web3pm.eth",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/web3pm_X7ZNJgj.png"
+        }
+    ],
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/06e9grxj7jcmpi4x/index.m3u8",
+        "start": 0
+    },
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/rethinking_token_incentives_for_consumer_adoption.jpg"
 }

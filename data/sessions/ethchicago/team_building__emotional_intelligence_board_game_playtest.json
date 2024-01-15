@@ -1,1 +1,20 @@
-{"id":"team_building__emotional_intelligence_board_game_playtest","name":"Team Building - Emotional Intelligence Board Game Playtest","description":"Get to know each other through an emotional intelligence board game! We designed a bunch of cool ice-breaker games for you to play with one another :)","start":1694804400000,"end":1694806200000,"stageId":"oak_room_hacker_room","speakers":[{"id":"lucy_qiu","name":"Lucy Qiu","bio":"Full-stack engineer with previous experience at Goldman Sachs and Manta Network. Winner of multiple hackathon prizes. Background in computer science and UI/UX design. Expertise in community building.","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/aec7ff29947ad444e23b9c9c768284da_b1mBTsb.jpg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/team_building__emotional_intelligence_board_game_playtest.jpg"}
+{
+    "id": "team_building__emotional_intelligence_board_game_playtest",
+    "name": "Team Building - Emotional Intelligence Board Game Playtest",
+    "description": "Get to know each other through an emotional intelligence board game! We designed a bunch of cool ice-breaker games for you to play with one another :)",
+    "start": 1694804400000,
+    "end": 1694806200000,
+    "stageId": "oak_room_hacker_room",
+    "speakers": [
+        {
+            "id": "lucy_qiu",
+            "name": "Lucy Qiu",
+            "bio": "Full-stack engineer with previous experience at Goldman Sachs and Manta Network. Winner of multiple hackathon prizes. Background in computer science and UI/UX design. Expertise in community building.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/aec7ff29947ad444e23b9c9c768284da_b1mBTsb.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/team_building__emotional_intelligence_board_game_playtest.jpg"
+}

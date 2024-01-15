@@ -1,19 +1,19 @@
 {
-  "id": "the_problem_of_private_matching_of_realworld_biometric_data_at_scale",
-  "name": "The Problem of Private Matching of Real-World Biometric Data, at Scale",
-  "description": "REMOTE",
-  "start": 1699951500000,
-  "end": 1699953300000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "daniel_benarroch",
-      "name": "Daniel Benarroch",
-      "bio": "Founder at Inversed Technologies",
-      "eventId": "cryptographic_resilience"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "cryptographic_resilience",
-  "coverImage": "sessions/cryptographic_resilience/the_problem_of_private_matching_of_realworld_biometric_data_at_scale_thumbnail.png"
+    "id": "the_problem_of_private_matching_of_realworld_biometric_data_at_scale",
+    "name": "The Problem of Private Matching of Real-World Biometric Data, at Scale",
+    "description": "REMOTE",
+    "start": 1699951500000,
+    "end": 1699953300000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "daniel_benarroch",
+            "name": "Daniel Benarroch",
+            "bio": "Founder at Inversed Technologies",
+            "eventId": "cryptographic_resilience"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "cryptographic_resilience",
+    "coverImage": "sessions/cryptographic_resilience/the_problem_of_private_matching_of_realworld_biometric_data_at_scale_thumbnail.png"
 }

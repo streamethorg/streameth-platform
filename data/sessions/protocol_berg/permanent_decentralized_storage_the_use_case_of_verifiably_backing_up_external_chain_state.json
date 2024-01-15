@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/orDj-SqG_400x400_39reGze.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/caacc1xgu60mjc9e/index.m3u8",
+    "playbackId": "caacc1xgu60mjc9e",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/permanent_decentralized_storage_the_use_case_of_verifiably_backing_up_external_chain_state.jpg",
     "assetId": "caaceea8-ee8c-4888-bd00-6ed1026c093b"

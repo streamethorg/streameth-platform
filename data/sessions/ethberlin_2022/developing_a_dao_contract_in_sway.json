@@ -1,19 +1,18 @@
 {
-  "id": "developing_a_dao_contract_in_sway",
-  "name": "Developing a DAO Contract in Sway",
-  "description": "Learn how to develop a performant and safe DAO contract in Sway, the next-generation smart contract language from Fuel Labs. Feel free to bring a laptop, this will be interactive! Install dependencies using this tool: https://github.com/FuelLabs/fuelup",
-  "start": "2022-09-16T19:30:00.000Z",
-  "end": "2022-09-16T20:15:00.000Z",
-  "stageId": "creators_lab",
-  "speakers": [
-    {
-      "id": "alex_hansen",
-      "name": "Alex Hansen",
-      "bio": "No description",
-      "eventId": "ethberlin_2022"
-    }
-  ],
-  "videoUrl": "https://livepeercdn.com/recordings/26b7ab35-f5d8-4c2b-be45-4d002937fda1/index.m3u8",
-  "playbackId": "26b7ab35-f5d8-4c2b-be45-4d002937fda1",
-  "eventId": "ethberlin_2022"
+    "id": "developing_a_dao_contract_in_sway",
+    "name": "Developing a DAO Contract in Sway",
+    "description": "Learn how to develop a performant and safe DAO contract in Sway, the next-generation smart contract language from Fuel Labs. Feel free to bring a laptop, this will be interactive! Install dependencies using this tool: https://github.com/FuelLabs/fuelup",
+    "start": "2022-09-16T19:30:00.000Z",
+    "end": "2022-09-16T20:15:00.000Z",
+    "stageId": "creators_lab",
+    "speakers": [
+        {
+            "id": "alex_hansen",
+            "name": "Alex Hansen",
+            "bio": "No description",
+            "eventId": "ethberlin_2022"
+        }
+    ],
+    "playbackId": "26b7ab35-f5d8-4c2b-be45-4d002937fda1",
+    "eventId": "ethberlin_2022"
 }

@@ -1,1 +1,34 @@
-{"id":"the_future_of_web3_music_industry","name":"The Future of Web3 Music Industry","description":"The music industry is broken and corrupted. Let's Learn from industry leaders about the current state of the music industry and get a glimpse into its future. This panel will explore opportunities and challenges presented by decentralization and how it will disrupt the global music ecosystem.","start":1694815200000,"end":1694817000000,"stageId":"michigan_stage__creatives__trad_business_","speakers":[{"id":"xtinct","name":"XTincT","bio":"On-Chain Recording artist and creative director","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/1ed46c9c2a0b56b9a2d7ae306a835467_K5xFhkk.jpg"},{"id":"cullah","name":"Cullah","bio":"Cullah is the Founder of NFTMKE, the Milwaukee Web3 Community and Firebird Media, a Web3 Creator Protocol providing next generation tools and infrastructure for creators and their communities using disruptive technologies like blockchain and artificial intelligence\r\n\r\nCullah is an open-source musician, engineer, and entrepreneur who has released hundreds of original songs and compositions placed in productions for The Expendables 4, The North Face, The Modern Rogue, and Channel 4. As well as video games like D.R.O.N.E the Game, Those Who Remain, Stickman Rope Hero, and Car Mechanic Simulator 2018. \r\n\r\nhttps://cullah.com/epk","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/84138847_10158056861966663_1087440755334578176_n_UO854H5.jpg"},{"id":"baiee","name":"Bai-ee","bio":"Founder of EditTrax NFT & Housepit CHI Records. Chicago House Dj, Producer and Creative Technologist","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/fd5e3bc8a9ee16ba27f1bf9e8c098971_OCVaBw8.jpg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/the_future_of_web3_music_industry.jpg"}
+{
+    "id": "the_future_of_web3_music_industry",
+    "name": "The Future of Web3 Music Industry",
+    "description": "The music industry is broken and corrupted. Let's Learn from industry leaders about the current state of the music industry and get a glimpse into its future. This panel will explore opportunities and challenges presented by decentralization and how it will disrupt the global music ecosystem.",
+    "start": 1694815200000,
+    "end": 1694817000000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "xtinct",
+            "name": "XTincT",
+            "bio": "On-Chain Recording artist and creative director",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/1ed46c9c2a0b56b9a2d7ae306a835467_K5xFhkk.jpg"
+        },
+        {
+            "id": "cullah",
+            "name": "Cullah",
+            "bio": "Cullah is the Founder of NFTMKE, the Milwaukee Web3 Community and Firebird Media, a Web3 Creator Protocol providing next generation tools and infrastructure for creators and their communities using disruptive technologies like blockchain and artificial intelligence\r\n\r\nCullah is an open-source musician, engineer, and entrepreneur who has released hundreds of original songs and compositions placed in productions for The Expendables 4, The North Face, The Modern Rogue, and Channel 4. As well as video games like D.R.O.N.E the Game, Those Who Remain, Stickman Rope Hero, and Car Mechanic Simulator 2018. \r\n\r\nhttps://cullah.com/epk",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/84138847_10158056861966663_1087440755334578176_n_UO854H5.jpg"
+        },
+        {
+            "id": "baiee",
+            "name": "Bai-ee",
+            "bio": "Founder of EditTrax NFT & Housepit CHI Records. Chicago House Dj, Producer and Creative Technologist",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/fd5e3bc8a9ee16ba27f1bf9e8c098971_OCVaBw8.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_future_of_web3_music_industry.jpg"
+}

@@ -15,7 +15,6 @@
             "photo": "https://evmsummit.org/images/speakers/daniel_marzec.jpg"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/342ev3i2p3q9eyqy/index.m3u8",
     "playbackId": "342ev3i2p3q9eyqy",
     "eventId": "evm_summit",
     "coverImage": "/sessions/evm_summit/mevm_private_evm_computation_for_mev_thumbnail.png",

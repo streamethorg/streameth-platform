@@ -26,8 +26,8 @@
         "start": 21271,
         "end": 22620
     },
-    "videoUrl": "https://lp-playback.com/hls/61968g2iszuq02s9/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/unpaid_position_building_a_better_and_more_sustainable_future_for_cultural_public_goods.jpg",
-    "assetId": "6196d3a6-b519-47d7-98ec-4b52b7e10fde"
+    "assetId": "6196d3a6-b519-47d7-98ec-4b52b7e10fde",
+    "playbackId": "61968g2iszuq02s9"
 }

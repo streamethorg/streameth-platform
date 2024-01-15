@@ -1,1 +1,20 @@
-{"id":"building_an_enduring_team_and_community_with_no_funding","name":"Building an Enduring Team and Community With No Funding","description":"Many people believe you need to be an industry veteran or raised capital to build an ambitious startup team. However, in this workshop, you'll discover the third way without any funding or experience. We will provide clear, actionable, and memorable steps for you to build your dream team and startup that will endure even the worst bear markets.","start":1694815200000,"end":1694817000000,"stageId":"east_room__main_","speakers":[{"id":"yash_jain","name":"Yash Jain","bio":"Founder, CEO, & Game Director of Hero Trainer | Digital Health Ecosystem for Gamers","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/Profile_Pic_pvNUJQR.png"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/building_an_enduring_team_and_community_with_no_funding.jpg"}
+{
+    "id": "building_an_enduring_team_and_community_with_no_funding",
+    "name": "Building an Enduring Team and Community With No Funding",
+    "description": "Many people believe you need to be an industry veteran or raised capital to build an ambitious startup team. However, in this workshop, you'll discover the third way without any funding or experience. We will provide clear, actionable, and memorable steps for you to build your dream team and startup that will endure even the worst bear markets.",
+    "start": 1694815200000,
+    "end": 1694817000000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "yash_jain",
+            "name": "Yash Jain",
+            "bio": "Founder, CEO, & Game Director of Hero Trainer | Digital Health Ecosystem for Gamers",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/Profile_Pic_pvNUJQR.png"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/building_an_enduring_team_and_community_with_no_funding.jpg"
+}

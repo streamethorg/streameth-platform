@@ -21,8 +21,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/Profilowe_rgCru5p.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/9724a6rgnwkw3mm0/index.m3u8",
+    "playbackId": "9724a6rgnwkw3mm0",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/indexing_ethereum_mainnet_for_nearzero_cost.jpg",
     "assetId": "9724e39d-a010-403a-af1a-405614aca985"

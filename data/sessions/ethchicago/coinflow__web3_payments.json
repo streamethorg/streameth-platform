@@ -1,1 +1,20 @@
-{"id":"coinflow__web3_payments","name":"Coinflow - Web3 Payments","description":"Daniel Lev will discuss how Web3 and decentralized finance are revolutionizing payments and financial services. Using insights from CoinFlow's journey, Lev will highlight the current benefits such as low-cost transactions and financial inclusion, while also considering the challenges and future potential of this emerging landscape. Ideal for anyone interested in the intersection of technology and finance, this talk offers a glimpse into the transformative power of Web3.","start":1694966400000,"end":1694968200000,"stageId":"east_room__main_","speakers":[{"id":"daniel_lev","name":"Daniel Lev","bio":"Daniel Lev began his professional journey as a software engineer before transitioning into management consulting, where he assisted Fortune 500 companies in navigating digital transformations in financial technology. He later joined a fintech company as a Product Manager, being with the firm from its growth stage to unicorn status. For the past few years, Daniel has been actively involved in developing projects on the Solana blockchain. Currently, he leads Coinflow, a company that facilitates payments and user payouts for numerous web3 companies.","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/qBjyKyG0_400x400_mHEX0xP.jpg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/coinflow__web3_payments.jpg"}
+{
+    "id": "coinflow__web3_payments",
+    "name": "Coinflow - Web3 Payments",
+    "description": "Daniel Lev will discuss how Web3 and decentralized finance are revolutionizing payments and financial services. Using insights from CoinFlow's journey, Lev will highlight the current benefits such as low-cost transactions and financial inclusion, while also considering the challenges and future potential of this emerging landscape. Ideal for anyone interested in the intersection of technology and finance, this talk offers a glimpse into the transformative power of Web3.",
+    "start": 1694966400000,
+    "end": 1694968200000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "daniel_lev",
+            "name": "Daniel Lev",
+            "bio": "Daniel Lev began his professional journey as a software engineer before transitioning into management consulting, where he assisted Fortune 500 companies in navigating digital transformations in financial technology. He later joined a fintech company as a Product Manager, being with the firm from its growth stage to unicorn status. For the past few years, Daniel has been actively involved in developing projects on the Solana blockchain. Currently, he leads Coinflow, a company that facilitates payments and user payouts for numerous web3 companies.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/qBjyKyG0_400x400_mHEX0xP.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/coinflow__web3_payments.jpg"
+}

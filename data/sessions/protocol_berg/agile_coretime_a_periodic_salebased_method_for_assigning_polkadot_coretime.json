@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/gavin_aT6VA0l.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/2191c2a7xt0pz6tv/index.m3u8",
+    "playbackId": "2191c2a7xt0pz6tv",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/agile_coretime_a_periodic_salebased_method_for_assigning_polkadot_coretime.jpg",
     "assetId": "219185ea-a5c5-4b1c-b7db-e91caaacb542"

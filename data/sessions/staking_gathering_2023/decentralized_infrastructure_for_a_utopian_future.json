@@ -1,1 +1,29 @@
-{"id":"decentralized_infrastructure_for_a_utopian_future","name":"Decentralized Infrastructure for a Utopian Future\n","description":"Today, the infrastructure powering the web of value is centralized and fragile -- not the utopian decentralized future originally envisioned. For blockchain technology to take on the world's financial needs, we must distribute infrastructure so that anyone can participate and everyone can benefit. \nJoin us for a discusison on the effort to truly decentralize the critical infrastructure we all rely upon.","start":1699952700000,"end":1699953900000,"stageId":"connie","speakers":[{"id":"nick_steinhilber","name":"Nick Steinhilber","bio":"NodeSet\nCo-Founder & CEO","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/6/12/19708233/avatar.jpg?286"},{"id":"mike_leach_wander","name":"Mike Leach (Wander)","bio":"NodeSet\nCo-Founder & CTO","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/2/c4/19282712/avatar.jpg?97b"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/decentralized_infrastructure_for_a_utopian_future.jpg"}
+{
+    "id": "decentralized_infrastructure_for_a_utopian_future",
+    "name": "Decentralized Infrastructure for a Utopian Future\n",
+    "description": "Today, the infrastructure powering the web of value is centralized and fragile -- not the utopian decentralized future originally envisioned. For blockchain technology to take on the world's financial needs, we must distribute infrastructure so that anyone can participate and everyone can benefit. \nJoin us for a discusison on the effort to truly decentralize the critical infrastructure we all rely upon.",
+    "start": 1699952700000,
+    "end": 1699953900000,
+    "stageId": "connie",
+    "speakers": [
+        {
+            "id": "nick_steinhilber",
+            "name": "Nick Steinhilber",
+            "bio": "NodeSet\nCo-Founder & CEO",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/6/12/19708233/avatar.jpg?286"
+        },
+        {
+            "id": "mike_leach_wander",
+            "name": "Mike Leach (Wander)",
+            "bio": "NodeSet\nCo-Founder & CTO",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/2/c4/19282712/avatar.jpg?97b"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/decentralized_infrastructure_for_a_utopian_future.jpg"
+}

@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/sk_profile_pic_bTb5DPX.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/8a6a7hm7aa1wybja/index.m3u8",
+    "playbackId": "8a6a7hm7aa1wybja",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/real_web3_messaging_must_be_encrypted_decentralized_and_interoperable_utilizing_dm3_protocol_as_layer_0_of_messaging.jpg",
     "assetId": "8a6a0cee-5cac-4757-9fe3-8b48e3536255"

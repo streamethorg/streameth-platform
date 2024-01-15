@@ -1,22 +1,22 @@
 {
-  "id": "intro_to_garbled_circuit__how_to_use_it",
-  "name": "Intro to Garbled Circuit - How to use it?",
-  "description": "In the first half, we present a basic idea of how garbled circuit (GC) works and also present how arithmetic circuit works together with GC.  In the second half, we'll give a hands-on coding to show how to use general-purpose garbled circuit framework called mpz by building a simple MPC circuit and demonstrating it.",
-  "start": 1700211600000,
-  "end": 1700215200000,
-  "stageId": "dolmabahce_a",
-  "speakers": [
-    {
-      "id": "nam_ngo",
-      "name": "Nam Ngo",
-      "bio": "MPC Research at PSE/EF",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1lfOl-U3r3IfJttvS4z44gqDR755vgyAm/view"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "progcrypto",
-  "track": "Next Gen Applied Crypto",
-  "coverImage": "/sessions/progcrypto/intro_to_garbled_circuit__how_to_use_it_thumbnail.png"
+    "id": "intro_to_garbled_circuit__how_to_use_it",
+    "name": "Intro to Garbled Circuit - How to use it?",
+    "description": "In the first half, we present a basic idea of how garbled circuit (GC) works and also present how arithmetic circuit works together with GC.  In the second half, we'll give a hands-on coding to show how to use general-purpose garbled circuit framework called mpz by building a simple MPC circuit and demonstrating it.",
+    "start": 1700211600000,
+    "end": 1700215200000,
+    "stageId": "dolmabahce_a",
+    "speakers": [
+        {
+            "id": "nam_ngo",
+            "name": "Nam Ngo",
+            "bio": "MPC Research at PSE/EF",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1lfOl-U3r3IfJttvS4z44gqDR755vgyAm/view"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "progcrypto",
+    "track": "Next Gen Applied Crypto",
+    "coverImage": "/sessions/progcrypto/intro_to_garbled_circuit__how_to_use_it_thumbnail.png"
 }

@@ -15,7 +15,6 @@
             "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/eda.jpeg?raw=true"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/3de12hurf3sh327h/index.m3u8",
     "playbackId": "3de12hurf3sh327h",
     "eventId": "ethgunu",
     "coverImage": "/sessions/ethgunu/speedrunethereum_web3_dapp_oluturun_thumbnail.png",

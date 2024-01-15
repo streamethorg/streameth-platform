@@ -13,8 +13,7 @@
             "eventId": "zuconnect_desci_track"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/13059x46g0m021vq/index.m3u8",
-    "playbackId": "",
+    "playbackId": "13059x46g0m021vq",
     "eventId": "zuconnect_desci_track",
     "coverImage": "/sessions/zuconnect_desci_track/why_the_science_system_is_failing_us_and_how_desci_offers_hope.jpg",
     "assetId": "1305f287-9f76-4f13-8be3-ac30dd32964a"

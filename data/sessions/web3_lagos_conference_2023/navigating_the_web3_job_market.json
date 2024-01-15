@@ -1,1 +1,20 @@
-{"id":"navigating_the_web3_job_market","name":"Navigating The Web3 Job Market","description":"","start":1693662300000,"end":1693662900000,"stageId":"mainstage","speakers":[{"id":"olumide_aderinwale","name":"Olumide Aderinwale","bio":"Program Manager and Community Builder","eventId":"web3_lagos_conference_2023","twitter":"@Stack_Shift"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/navigating_the_web3_job_market.jpg"}
+{
+    "id": "navigating_the_web3_job_market",
+    "name": "Navigating The Web3 Job Market",
+    "description": "",
+    "start": 1693662300000,
+    "end": 1693662900000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "olumide_aderinwale",
+            "name": "Olumide Aderinwale",
+            "bio": "Program Manager and Community Builder",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@Stack_Shift"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/navigating_the_web3_job_market.jpg"
+}

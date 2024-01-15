@@ -14,8 +14,7 @@
             "photo": ""
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/9c03t1pvb65d3v92/index.m3u8",
+    "playbackId": "9c03t1pvb65d3v92",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/roll_your_own_crypto.jpg",
     "assetId": "9c0365a6-70f0-4b42-b171-0ae7d859789b"

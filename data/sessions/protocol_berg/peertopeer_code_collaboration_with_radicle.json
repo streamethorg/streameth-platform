@@ -21,8 +21,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/4_Original_bjmGedC.jpg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/a5f65eeoiep6qmpp/index.m3u8",
+    "playbackId": "a5f65eeoiep6qmpp",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/peertopeer_code_collaboration_with_radicle.jpg",
     "assetId": "a5f6648c-b24c-4560-83ad-13df646f24a6"

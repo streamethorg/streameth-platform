@@ -1,13 +1,19 @@
 {
-  "id": "the_case_for_the_network_state_for_the_african_diaspora",
-  "name": "\"The case for the network state for the African diaspora\"",
-  "description": "",
-  "start": "2023-07-15T12:00:00.000Z",
-  "end": "2023-07-15T12:20:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [{ "id": "chika_uwazie", "name": "Chika Uwazie", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
-  "videoUrl": "https://lp-playback.com/hls/06b7uiqw66a15l1a/index.m3u8",
-  "playbackId": "06b7uiqw66a15l1a",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/the_case_for_the_network_state_for_the_african_diaspora.jpg"
+    "id": "the_case_for_the_network_state_for_the_african_diaspora",
+    "name": "\"The case for the network state for the African diaspora\"",
+    "description": "",
+    "start": "2023-07-15T12:00:00.000Z",
+    "end": "2023-07-15T12:20:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "chika_uwazie",
+            "name": "Chika Uwazie",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "06b7uiqw66a15l1a",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/the_case_for_the_network_state_for_the_african_diaspora.jpg"
 }

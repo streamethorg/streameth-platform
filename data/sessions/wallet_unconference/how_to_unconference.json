@@ -15,7 +15,6 @@
             "photo": "https://i.seadn.io/gcs/files/e1c8613b8409aed75ac38469ac19bde0.png?auto=format&dpr=1&w=1000"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/2da0x67jmu1r1igf/index.m3u8",
     "playbackId": "2da0x67jmu1r1igf",
     "eventId": "wallet_unconference",
     "coverImage": "/sessions/wallet_unconference/how_to_unconference_thumbnail.png",

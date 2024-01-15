@@ -1,1 +1,21 @@
-{"id":"introduction_to_ephemery_testnet","name":"Introduction to Ephemery testnet","description":"-","start":1699967400000,"end":1699968900000,"stageId":"main_stage","speakers":[{"id":"mario_havel","name":"Mario Havel","bio":"Ethereum Foundation\nDeveloper","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/f/9c/19160292/avatar.jpg?eb0"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/introduction_to_ephemery_testnet.jpg"}
+{
+    "id": "introduction_to_ephemery_testnet",
+    "name": "Introduction to Ephemery testnet",
+    "description": "-",
+    "start": 1699967400000,
+    "end": 1699968900000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "mario_havel",
+            "name": "Mario Havel",
+            "bio": "Ethereum Foundation\nDeveloper",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/f/9c/19160292/avatar.jpg?eb0"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/introduction_to_ephemery_testnet.jpg"
+}

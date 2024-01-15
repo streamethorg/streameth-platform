@@ -13,8 +13,7 @@
             "eventId": "zuconnect_istanbul__art_track"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/ef82cscqhzj8oxuv/index.m3u8",
-    "playbackId": "",
+    "playbackId": "ef82cscqhzj8oxuv",
     "eventId": "zuconnect_istanbul__art_track",
     "coverImage": "/sessions/zuconnect_istanbul__art_track/artist_talks_and_presentations.jpg",
     "assetId": "ef822e8b-9277-4664-9162-bf8ec9a28dea"

@@ -1,1 +1,12 @@
-{"id":"photography_showcase","name":"Photography showcase","description":"Photogary showcase curated by Goldie and ImnotArt","start":1694800800000,"end":1694811600000,"stageId":"gallery","speakers":[],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/photography_showcase.jpg"}
+{
+    "id": "photography_showcase",
+    "name": "Photography showcase",
+    "description": "Photogary showcase curated by Goldie and ImnotArt",
+    "start": 1694800800000,
+    "end": 1694811600000,
+    "stageId": "gallery",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/photography_showcase.jpg"
+}

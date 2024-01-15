@@ -21,8 +21,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/charly_zYfKdpD.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/9114wsdtjq3fjnpj/index.m3u8",
+    "playbackId": "9114wsdtjq3fjnpj",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/modular_interoperability_lets_get_to_1_standard_before_there_are_15.jpg",
     "assetId": "9114ddb4-3070-4187-a14b-b141b75325ba"

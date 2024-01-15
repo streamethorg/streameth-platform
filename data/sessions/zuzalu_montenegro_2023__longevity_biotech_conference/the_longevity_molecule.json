@@ -1,20 +1,19 @@
 {
-  "id": "the_longevity_molecule",
-  "name": "The Longevity Molecule",
-  "description": "Speaker: Prof. Morten Scheibye-Knudsen&nbsp;",
-  "start": "2023-05-13T07:15:00.000Z",
-  "end": "2023-05-13T08:15:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "prof_morten_scheibyeknudsen",
-      "name": "Prof. Morten Scheibye-Knudsen",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/0711b0p9wmf7zlfx/index.m3u8",
-  "playbackId": "0711b0p9wmf7zlfx",
-  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "the_longevity_molecule",
+    "name": "The Longevity Molecule",
+    "description": "Speaker: Prof. Morten Scheibye-Knudsen&nbsp;",
+    "start": "2023-05-13T07:15:00.000Z",
+    "end": "2023-05-13T08:15:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "prof_morten_scheibyeknudsen",
+            "name": "Prof. Morten Scheibye-Knudsen",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        }
+    ],
+    "playbackId": "0711b0p9wmf7zlfx",
+    "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

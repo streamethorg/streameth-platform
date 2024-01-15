@@ -1,20 +1,19 @@
 {
-  "id": "genome_stability_in_aging_and_disease_new_insights_and_therapeutic_avenues",
-  "name": "Genome Stability in Aging and Disease: New insights and therapeutic avenues",
-  "description": "Speaker: Prof. Björn Schumacher",
-  "start": "2023-05-14T11:15:00.000Z",
-  "end": "2023-05-14T12:15:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "prof_bjrn_schumacher",
-      "name": "Prof. Björn Schumacher",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/044bp2dvz5b1xhqr/index.m3u8",
-  "playbackId": "044bp2dvz5b1xhqr",
-  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "genome_stability_in_aging_and_disease_new_insights_and_therapeutic_avenues",
+    "name": "Genome Stability in Aging and Disease: New insights and therapeutic avenues",
+    "description": "Speaker: Prof. Bj\u00f6rn Schumacher",
+    "start": "2023-05-14T11:15:00.000Z",
+    "end": "2023-05-14T12:15:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "prof_bjrn_schumacher",
+            "name": "Prof. Bj\u00f6rn Schumacher",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        }
+    ],
+    "playbackId": "044bp2dvz5b1xhqr",
+    "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

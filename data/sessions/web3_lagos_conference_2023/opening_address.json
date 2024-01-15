@@ -1,1 +1,20 @@
-{"id":"opening_address","name":"Opening Address","description":"","start":1693643400000,"end":1693644300000,"stageId":"mainstage","speakers":[{"id":"eric_anaan","name":"Eric Anaan","bio":"Founder/CEO","eventId":"web3_lagos_conference_2023","twitter":"@ayahq_"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/opening_address.jpg"}
+{
+    "id": "opening_address",
+    "name": "Opening Address",
+    "description": "",
+    "start": 1693643400000,
+    "end": 1693644300000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "eric_anaan",
+            "name": "Eric Anaan",
+            "bio": "Founder/CEO",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@ayahq_"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/opening_address.jpg"
+}

@@ -1,29 +1,29 @@
 {
-  "id": "happy_little_accidents_lessons_from_three_games_and_two_mud_versions",
-  "name": "Happy Little Accidents: Lessons From Three Games and Two MUD Versions",
-  "description": "In this session, we will explore the history of Lattice's MUD onchain game engine, discussing previous iterations, games we built with it, and the valuable lessons we learned along the way.",
-  "start": 1700119800000,
-  "end": 1700121600000,
-  "stageId": "emirgan_2",
-  "speakers": [
-    {
-      "id": "alvarius",
-      "name": "Alvarius",
-      "bio": "Alvarius is co-founder and CTO of Lattice, where he is currently working on MUD, among other projects. Previously, he helped build the onchain Minecraft clone OPCraft.",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@_alvarius",
-      "photo": "https://drive.google.com/uc?id=1H4Zyn1gxE6HXSUsyGoeMD8yLtW5pm2L2"
-    },
-    {
-      "id": "biscaryn",
-      "name": "Biscaryn ",
-      "bio": "Biscaryn heads strategy and operations at Lattice and helped organise the first Autonomous Worlds Residency in 2022. Outside of his main role, he also composed the soundtrack for the unreleased Ember (Lattice's first game) and oversaw the art, music, and sounds for OPCraft.",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "@biscaryn",
-      "photo": "https://drive.google.com/uc?id=17472TSCM8RGqUY5Yh9H_ggzS3lb00bxE"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "autonomous_worlds_assembly",
-  "coverImage": "/sessions/autonomous_worlds_assembly/happy_little_accidents_lessons_from_three_games_and_two_mud_versions_thumbnail.png"
+    "id": "happy_little_accidents_lessons_from_three_games_and_two_mud_versions",
+    "name": "Happy Little Accidents: Lessons From Three Games and Two MUD Versions",
+    "description": "In this session, we will explore the history of Lattice's MUD onchain game engine, discussing previous iterations, games we built with it, and the valuable lessons we learned along the way.",
+    "start": 1700119800000,
+    "end": 1700121600000,
+    "stageId": "emirgan_2",
+    "speakers": [
+        {
+            "id": "alvarius",
+            "name": "Alvarius",
+            "bio": "Alvarius is co-founder and CTO of Lattice, where he is currently working on MUD, among other projects. Previously, he helped build the onchain Minecraft clone OPCraft.",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@_alvarius",
+            "photo": "https://drive.google.com/uc?id=1H4Zyn1gxE6HXSUsyGoeMD8yLtW5pm2L2"
+        },
+        {
+            "id": "biscaryn",
+            "name": "Biscaryn ",
+            "bio": "Biscaryn heads strategy and operations at Lattice and helped organise the first Autonomous Worlds Residency in 2022. Outside of his main role, he also composed the soundtrack for the unreleased Ember (Lattice's first game) and oversaw the art, music, and sounds for OPCraft.",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "@biscaryn",
+            "photo": "https://drive.google.com/uc?id=17472TSCM8RGqUY5Yh9H_ggzS3lb00bxE"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "autonomous_worlds_assembly",
+    "coverImage": "/sessions/autonomous_worlds_assembly/happy_little_accidents_lessons_from_three_games_and_two_mud_versions_thumbnail.png"
 }

@@ -1,1 +1,20 @@
-{"id":"resourceoriented_programming_the_future_of_smart_contracts","name":"Resource-Oriented Programming: The Future of Smart Contracts","description":"Join Josh Hannan, a senior smart contract programmer on the Flow core team as he discusses a programming paradigm that gives smart contracts developers the best tools for building complex, secure, and powerful decentralized applications","start":1694901600000,"end":1694903400000,"stageId":"lincoln_stage__builder__legal","speakers":[{"id":"joshua_hannan","name":"Joshua Hannan","bio":"Josh joined the Flow team in 2019 to help design the Cadence programming language and leads development on Cadence Smart Contracts development standards. Josh developed and maintains many important smart contracts in the Flow ecosystem such as the original NBA Top Shot contracts, the flow epoch smart contracts, and the FlowToken smart contract.\r\n\r\nJosh completed his B.Sc from Purdue University in Electrical and Computer Engineering in 2015.  Post-graduation, Josh worked in verification engineering for the Apple Mac performance team and for IBM server hardware.  In 2017, he co-founded Modular Inc.  At Modular, he helped write a standard library of Smart Contracts for Ethereum Development, including the first implementation of the Interactive ICO protocol.","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/joshheadshot_fVtC7Xo.png"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/resourceoriented_programming_the_future_of_smart_contracts.jpg"}
+{
+    "id": "resourceoriented_programming_the_future_of_smart_contracts",
+    "name": "Resource-Oriented Programming: The Future of Smart Contracts",
+    "description": "Join Josh Hannan, a senior smart contract programmer on the Flow core team as he discusses a programming paradigm that gives smart contracts developers the best tools for building complex, secure, and powerful decentralized applications",
+    "start": 1694901600000,
+    "end": 1694903400000,
+    "stageId": "lincoln_stage__builder__legal",
+    "speakers": [
+        {
+            "id": "joshua_hannan",
+            "name": "Joshua Hannan",
+            "bio": "Josh joined the Flow team in 2019 to help design the Cadence programming language and leads development on Cadence Smart Contracts development standards. Josh developed and maintains many important smart contracts in the Flow ecosystem such as the original NBA Top Shot contracts, the flow epoch smart contracts, and the FlowToken smart contract.\r\n\r\nJosh completed his B.Sc from Purdue University in Electrical and Computer Engineering in 2015.\u00a0\u00a0Post-graduation, Josh worked in verification engineering for the Apple Mac performance team and for IBM server hardware.\u00a0\u00a0In 2017, he co-founded Modular Inc.\u00a0\u00a0At Modular, he helped write a standard library of Smart Contracts for Ethereum Development, including the first implementation of the Interactive ICO protocol.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/joshheadshot_fVtC7Xo.png"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/resourceoriented_programming_the_future_of_smart_contracts.jpg"
+}

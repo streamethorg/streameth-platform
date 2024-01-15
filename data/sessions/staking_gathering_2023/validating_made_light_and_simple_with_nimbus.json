@@ -1,1 +1,19 @@
-{"id":"validating_made_light_and_simple_with_nimbus","name":"Validating made light and simple with Nimbus","description":"-","start":1699879500000,"end":1699881000000,"stageId":"main_stage","speakers":[{"id":"kaushal","name":"Kaushal","bio":"Nimbus\nEcosystem Development","eventId":"staking_gathering_2023"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/validating_made_light_and_simple_with_nimbus.jpg"}
+{
+    "id": "validating_made_light_and_simple_with_nimbus",
+    "name": "Validating made light and simple with Nimbus",
+    "description": "-",
+    "start": 1699879500000,
+    "end": 1699881000000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "kaushal",
+            "name": "Kaushal",
+            "bio": "Nimbus\nEcosystem Development",
+            "eventId": "staking_gathering_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/validating_made_light_and_simple_with_nimbus.jpg"
+}

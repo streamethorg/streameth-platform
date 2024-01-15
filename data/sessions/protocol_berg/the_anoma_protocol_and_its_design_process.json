@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/network_sketch_qBtEL3l.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/da7941j0r11llvk1/index.m3u8",
+    "playbackId": "da7941j0r11llvk1",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/the_anoma_protocol_and_its_design_process.jpg",
     "assetId": "da797b03-ae07-4683-aeac-dc3049da62e7"

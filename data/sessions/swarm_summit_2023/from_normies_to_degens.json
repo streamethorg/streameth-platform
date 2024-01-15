@@ -1,1 +1,24 @@
-{"id":"from_normies_to_degens","name":"From normies to degens","description":"Solarpunk guidelines and contemplations","start":"2023-06-23T13:35:00.000Z","end":"2023-06-23T13:45:00.000Z","stageId":"main","speakers":[{"id":"barbara_r_lrincz","name":"Barbara R. Lőrincz","bio":"With 7 years of web 3.0 expertise, she co-founded the groundbreaking project solarpunk.buzz, fueled by the belief that the self-sovereign future is just a step away. This passionate gamer-turned-activist immerses herself in the metaverse, harnessing its power to ignite the solarpunk revolution and shape a greener tomorrow. Join her on this extraordinary quest to build a sustainable future; feel free to reach out to her and share your ideas on how to embrace the solarpunk utopia!","eventId":"swarm_summit_2023","photo":"https://summit.ethswarm.org/media/avatars/barbi_JzPDOpI.jpg"}],"videoUrl":"https://lp-playback.com/hls/af2f3wiq72s3504t/index.m3u8","playbackId":"af2f3wiq72s3504t","eventId":"swarm_summit_2023","source":{"streamUrl":"https://lp-playback.com/hls/ad74hf1mn6pt92x4/index.m3u8","start":"0","end":"0"}}
+{
+    "id": "from_normies_to_degens",
+    "name": "From normies to degens",
+    "description": "Solarpunk guidelines and contemplations",
+    "start": "2023-06-23T13:35:00.000Z",
+    "end": "2023-06-23T13:45:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "barbara_r_lrincz",
+            "name": "Barbara R. L\u0151rincz",
+            "bio": "With 7 years of web 3.0 expertise, she co-founded the groundbreaking project solarpunk.buzz, fueled by the belief that the self-sovereign future is just a step away. This passionate gamer-turned-activist immerses herself in the metaverse, harnessing its power to ignite the solarpunk revolution and shape a greener tomorrow. Join her on this extraordinary quest to build a sustainable future; feel free to reach out to her and share your ideas on how to embrace the solarpunk utopia!",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/barbi_JzPDOpI.jpg"
+        }
+    ],
+    "playbackId": "af2f3wiq72s3504t",
+    "eventId": "swarm_summit_2023",
+    "source": {
+        "streamUrl": "https://lp-playback.com/hls/ad74hf1mn6pt92x4/index.m3u8",
+        "start": "0",
+        "end": "0"
+    }
+}

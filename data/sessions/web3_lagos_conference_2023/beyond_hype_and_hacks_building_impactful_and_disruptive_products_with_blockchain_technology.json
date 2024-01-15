@@ -1,1 +1,20 @@
-{"id":"beyond_hype_and_hacks_building_impactful_and_disruptive_products_with_blockchain_technology","name":"Beyond Hype and Hacks: Building Impactful and Disruptive Products with Blockchain Technology","description":"","start":1693651800000,"end":1693652400000,"stageId":"mainstage","speakers":[{"id":"jolade_okunlade","name":"Jolade Okunlade","bio":"Software Engineer","eventId":"web3_lagos_conference_2023","twitter":"@Web3Bridge"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/beyond_hype_and_hacks_building_impactful_and_disruptive_products_with_blockchain_technology.jpg"}
+{
+    "id": "beyond_hype_and_hacks_building_impactful_and_disruptive_products_with_blockchain_technology",
+    "name": "Beyond Hype and Hacks: Building Impactful and Disruptive Products with Blockchain Technology",
+    "description": "",
+    "start": 1693651800000,
+    "end": 1693652400000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "jolade_okunlade",
+            "name": "Jolade Okunlade",
+            "bio": "Software Engineer",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@Web3Bridge"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/beyond_hype_and_hacks_building_impactful_and_disruptive_products_with_blockchain_technology.jpg"
+}

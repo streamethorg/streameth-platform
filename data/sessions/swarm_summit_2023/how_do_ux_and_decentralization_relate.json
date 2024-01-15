@@ -1,20 +1,19 @@
 {
-  "id": "how_do_ux_and_decentralization_relate",
-  "name": "How do UX and decentralization relate",
-  "description": "In this talk DappNode's Pol Lanski will explore the power of decentralized UX",
-  "start": "2023-06-23T15:00:00.000Z",
-  "end": "2023-06-23T15:15:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "pol_lanski",
-      "name": "Pol Lanski",
-      "bio": "DappNode",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://summit.ethswarm.org/media/avatars/pol_RuDojWI.jpg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/89c5rucz51yigwur/index.m3u8",
-  "playbackId": "89c5rucz51yigwur",
-  "eventId": "swarm_summit_2023"
+    "id": "how_do_ux_and_decentralization_relate",
+    "name": "How do UX and decentralization relate",
+    "description": "In this talk DappNode's Pol Lanski will explore the power of decentralized UX",
+    "start": "2023-06-23T15:00:00.000Z",
+    "end": "2023-06-23T15:15:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "pol_lanski",
+            "name": "Pol Lanski",
+            "bio": "DappNode",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/pol_RuDojWI.jpg"
+        }
+    ],
+    "playbackId": "89c5rucz51yigwur",
+    "eventId": "swarm_summit_2023"
 }

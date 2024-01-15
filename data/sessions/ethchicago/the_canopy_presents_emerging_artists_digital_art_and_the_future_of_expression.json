@@ -1,1 +1,90 @@
-{"id":"the_canopy_presents_emerging_artists_digital_art_and_the_future_of_expression","name":"The Canopy presents: Emerging Artists, Digital art, and the future of expression","description":"Abstract:\r\nIn this discussion, we invite participating artists to talk about their experience of displaying\r\ntheir work in large scale and immersive ways and their perspectives on how their art\r\npractice might evolve as technology continues to change the world around us.\r\nArtists:\r\n- Will Creates Art\r\n- Myra Rivera\r\n- Michael Mcafee\r\n- Willea Zwey\r\n- Rafa Rivas\r\n- Mike B\r\n- Bianca Pastel\r\nHost: Adrian Stein\r\nSponsors:\r\n\r\nTo learn more about The Canopy, please visit: https://thecanopyat900.com/\r\nThe Canopy, a permanent, immersive art installation in the atrium of 900 N Michigan\r\nAvenue showcases artists and creatives that are making strides in the field of art,\r\nanimation, and technology.","start":1694883600000,"end":1694887200000,"stageId":"east_room__main_","speakers":[{"id":"william_ojeda","name":"William Ojeda","bio":null,"eventId":"ethchicago","photo":""},{"id":"adrian_stein","name":"Adrian Stein","bio":"Chicago-based new media artist Adrian Stein seeks to understand how humans view themselves through the many mirrors viewed in everyday life which reveal the borders, glass walls, and masks we have built between ourselves and each other in the process.\r\n\r\n \r\n\r\nBy representing the human form as a prismatic lens in constant shift, dynamically morphed, shifted, and affected by the medium it is inhabiting, Stein’s work engages the concept that different states of consciousness may give rise to different views of the self, and how perceived identities can create a hybrid person, existing virtually and physically.\r\nHaving been raised in Guatemala to attend school in America, Stein has inhabited the space between political and cultural borders, living in a state of transition. This life of transmutation and bodily migration was punctuated by growing up in an age where the border between countries was bridged by the internet, thus marking the importance of such borders and their digital crossings as not only institutional, but as a deeply formative concept in his work. Through the use of colloquial digital languages and visual commonalities, he seeks to create an aesthetic medium to reveal how his own duality as a Guatemalan and an American has given rise to a hybrid identity, forcing him to exist in both places and in none, at the same time.","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/1dc3a13eedae81a087c3e96dc97a189c_8RqQNFN.jpg"},{"id":"rafa_rivas","name":"Rafa Rivas","bio":null,"eventId":"ethchicago","photo":""},{"id":"michael_bussey","name":"Michael Bussey","bio":null,"eventId":"ethchicago","photo":""},{"id":"luke_jenner","name":"Luke Jenner","bio":null,"eventId":"ethchicago","photo":""},{"id":"michael_mcafee","name":"Michael Mcafee","bio":null,"eventId":"ethchicago","photo":""},{"id":"myra_rivera","name":"Myra Rivera","bio":null,"eventId":"ethchicago","photo":""},{"id":"saul_palos","name":"Saul Palos","bio":null,"eventId":"ethchicago","photo":""},{"id":"jorge_h","name":"Jorge H","bio":null,"eventId":"ethchicago","photo":""},{"id":"bianca_pastel","name":"Bianca Pastel","bio":null,"eventId":"ethchicago","photo":""},{"id":"zach_hall","name":"Zach Hall","bio":null,"eventId":"ethchicago","photo":""}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/the_canopy_presents_emerging_artists_digital_art_and_the_future_of_expression.jpg"}
+{
+    "id": "the_canopy_presents_emerging_artists_digital_art_and_the_future_of_expression",
+    "name": "The Canopy presents: Emerging Artists, Digital art, and the future of expression",
+    "description": "Abstract:\r\nIn this discussion, we invite participating artists to talk about their experience of displaying\r\ntheir work in large scale and immersive ways and their perspectives on how their art\r\npractice might evolve as technology continues to change the world around us.\r\nArtists:\r\n- Will Creates Art\r\n- Myra Rivera\r\n- Michael Mcafee\r\n- Willea Zwey\r\n- Rafa Rivas\r\n- Mike B\r\n- Bianca Pastel\r\nHost: Adrian Stein\r\nSponsors:\r\n\r\nTo learn more about The Canopy, please visit: https://thecanopyat900.com/\r\nThe Canopy, a permanent, immersive art installation in the atrium of 900 N Michigan\r\nAvenue showcases artists and creatives that are making strides in the field of art,\r\nanimation, and technology.",
+    "start": 1694883600000,
+    "end": 1694887200000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "william_ojeda",
+            "name": "William Ojeda",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "adrian_stein",
+            "name": "Adrian Stein",
+            "bio": "Chicago-based new media artist Adrian Stein seeks to understand how humans view themselves through the many mirrors viewed in everyday life which reveal the borders, glass walls, and masks we have built between ourselves and each other in the process.\r\n\r\n \r\n\r\nBy representing the human form as a prismatic lens in constant shift, dynamically morphed, shifted, and affected by the medium it is inhabiting, Stein\u2019s work engages the concept that different states of consciousness may give rise to different views of the self, and how perceived identities can create a hybrid person, existing virtually and physically.\r\nHaving been raised in Guatemala to attend school in America, Stein has inhabited the space between political and cultural borders, living in a state of transition. This life of transmutation and bodily migration was punctuated by growing up in an age where the border between countries was bridged by the internet, thus marking the importance of such borders and their digital crossings as not only institutional, but as a deeply formative concept in his work. Through the use of colloquial digital languages and visual commonalities, he seeks to create an aesthetic medium to reveal how his own duality as a Guatemalan and an American has given rise to a hybrid identity, forcing him to exist in both places and in none, at the same time.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/1dc3a13eedae81a087c3e96dc97a189c_8RqQNFN.jpg"
+        },
+        {
+            "id": "rafa_rivas",
+            "name": "Rafa Rivas",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "michael_bussey",
+            "name": "Michael Bussey",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "luke_jenner",
+            "name": "Luke Jenner",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "michael_mcafee",
+            "name": "Michael Mcafee",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "myra_rivera",
+            "name": "Myra Rivera",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "saul_palos",
+            "name": "Saul Palos",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "jorge_h",
+            "name": "Jorge H",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "bianca_pastel",
+            "name": "Bianca Pastel",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        },
+        {
+            "id": "zach_hall",
+            "name": "Zach Hall",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/the_canopy_presents_emerging_artists_digital_art_and_the_future_of_expression.jpg"
+}

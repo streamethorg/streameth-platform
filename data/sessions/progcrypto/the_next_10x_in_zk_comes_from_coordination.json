@@ -1,22 +1,22 @@
 {
-  "id": "the_next_10x_in_zk_comes_from_coordination",
-  "name": "The next 10x in ZK comes from coordination",
-  "description": "Today, the limits of the EVM result in fundamentally worse and less secure onchain apps. Fortunately, zkSNARKs and related technologies have become increasingly powerful, allowing for blockchains to tap into limitless compute and privacy.\n\nThe ZK landscape is characterized by fast-moving research and open-source implementations. We believe that a critical missing piece in the ZK ecosystem is a coordination layer to allow for all actors in the ZK supply chain to coordinate and increase adoption of ZK across blockchain ecosystems.",
-  "start": 1700210100000,
-  "end": 1700211900000,
-  "stageId": "marmara",
-  "speakers": [
-    {
-      "id": "uma_roy",
-      "name": "Uma Roy",
-      "bio": "Uma is a cofounder of Succinct, which is focused on empowering developers to use zero-knowledge proofs in making the next-generation of blockchain applications.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/uc?id=1mNW7vm76yDsA3f-Qk5YiVQTa5nKgp6Or"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "progcrypto",
-  "track": "ZK and Blockchains / zkEVMs",
-  "coverImage": "/sessions/progcrypto/the_next_10x_in_zk_comes_from_coordination_thumbnail.png"
+    "id": "the_next_10x_in_zk_comes_from_coordination",
+    "name": "The next 10x in ZK comes from coordination",
+    "description": "Today, the limits of the EVM result in fundamentally worse and less secure onchain apps. Fortunately, zkSNARKs and related technologies have become increasingly powerful, allowing for blockchains to tap into limitless compute and privacy.\n\nThe ZK landscape is characterized by fast-moving research and open-source implementations. We believe that a critical missing piece in the ZK ecosystem is a coordination layer to allow for all actors in the ZK supply chain to coordinate and increase adoption of ZK across blockchain ecosystems.",
+    "start": 1700210100000,
+    "end": 1700211900000,
+    "stageId": "marmara",
+    "speakers": [
+        {
+            "id": "uma_roy",
+            "name": "Uma Roy",
+            "bio": "Uma is a cofounder of Succinct, which is focused on empowering developers to use zero-knowledge proofs in making the next-generation of blockchain applications.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/uc?id=1mNW7vm76yDsA3f-Qk5YiVQTa5nKgp6Or"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "progcrypto",
+    "track": "ZK and Blockchains / zkEVMs",
+    "coverImage": "/sessions/progcrypto/the_next_10x_in_zk_comes_from_coordination_thumbnail.png"
 }

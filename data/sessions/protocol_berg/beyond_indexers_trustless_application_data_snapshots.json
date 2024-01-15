@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/HOPR_Sebastian_Burgel_LinkedIn__NOC97Bk.jpg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/6f21wxowrn24wo8b/index.m3u8",
+    "playbackId": "6f21wxowrn24wo8b",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/beyond_indexers_trustless_application_data_snapshots.jpg",
     "assetId": "6f212799-0977-4a70-81be-eac054a485ae"

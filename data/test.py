@@ -1,13 +1,12 @@
-
-
 import os
 import json
 import requests
 import csv
 import re
+
 # Constants
 SESSIONS_DIR = "./sessions"
-API_URL = "https://livepeer.studio/api/asset?limit=3000"
+API_URL = "https://livepeer.studio/api/asset?limit=7000"
 API_KEY = "38f92096-8475-42d7-96a0-35e561400edd"
 LIVEPEER_RESPONSE_FILE = "livepeer_videos.json"  # File to store the API response
 
@@ -15,6 +14,8 @@ LIVEPEER_RESPONSE_FILE = "livepeer_videos.json"  # File to store the API respons
 sessions_without_playbackId = []
 
 # Function to get video information from Livepeer API and save it
+
+
 def get_livepeer_videos():
     headers = {"Authorization": f"Bearer {API_KEY}"}
     response = requests.get(API_URL, headers=headers)
@@ -28,14 +29,19 @@ def get_livepeer_videos():
         return []
 
 # Function to update session file with assetId
+
+
 def update_session_file(file_path, updated_session):
     with open(file_path, 'w') as file:
         json.dump(updated_session, file, indent=4)
 
 # Function to extract playbackId from PlaybackUrl
+
+
 def extract_playbackId(url):
     match = re.search(r'/hls/(.*?)/index.m3u8', url)
     return match.group(1) if match else None
+
 
 # Load video information from Livepeer
 videos = get_livepeer_videos()
@@ -49,21 +55,21 @@ for event_name in os.listdir(SESSIONS_DIR):
                 session_path = os.path.join(event_path, session_file)
                 with open(session_path, 'r') as file:
                     session = json.load(file)
+
+                    # Remove videoUrl as it is considered tech debt
+                    videoUrl = session.pop('videoUrl', None)
+
+                    # Extract playbackId from videoUrl if it is not already present
                     playbackId = session.get('playbackId')
-                    print(session.get("assetId"))
-                    # If playbackId is not found, try extracting from PlaybackUrl
+                    if not playbackId and videoUrl:
+                        playbackId = extract_playbackId(videoUrl)
+                        if playbackId:
+                            session['playbackId'] = playbackId
+
+                    # Update the session file with changes
+                    update_session_file(session_path, session)
+
                     if not playbackId:
-                        playbackUrl = session.get('videoUrl')
-                        if playbackUrl:
-                            playbackId = extract_playbackId(playbackUrl)
-                            print(playbackId)
-                    # Find corresponding video information
-                    if playbackId:
-                        matched_video = next((v for v in videos if v['playbackId'] == playbackId), None)
-                        if matched_video:
-                            session['assetId'] = matched_video['id']
-                            update_session_file(session_path, session)
-                    else:
                         sessions_without_playbackId.append(session_file)
 
 # Log sessions without playbackId to a CSV file

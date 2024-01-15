@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/022999a2c6f4fd58a76724c9abf2ae3f_R1lPTbE.jpg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/3719nqilp00xp8ot/index.m3u8",
+    "playbackId": "3719nqilp00xp8ot",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/p2p_set_reconciliation_as_storageheavy_dapp_infrastructure_20.jpg",
     "assetId": "371938fe-1785-4a85-94cc-0c360d7539af"

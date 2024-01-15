@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/pineapple_profile_G0mWdZk.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/e358zaa0naimkplu/index.m3u8",
+    "playbackId": "e358zaa0naimkplu",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/evolution_of_optimistic_rollup_proofs.jpg",
     "assetId": "e35806eb-af00-4bd7-96c6-ccfb84897527"

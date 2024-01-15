@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/image-removebg-preview_A5KDzRH.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/99369naq1yj3ojqn/index.m3u8",
+    "playbackId": "99369naq1yj3ojqn",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/how_to_unleash_the_power_of_account_abstraction.jpg",
     "assetId": "9936a926-d1da-4018-90ba-986e0591a56f"

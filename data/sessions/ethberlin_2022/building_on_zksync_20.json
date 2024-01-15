@@ -1,19 +1,18 @@
 {
-  "id": "building_on_zksync_20",
-  "name": "Building on zkSync 2.0",
-  "description": "Are you a builder interested in learning more about zkSync 2.0? Join us for this workshop where we will discuss zkSync's user and developer UX, detail what migration from existing protocols generally looks like, what can be implemented on zkSync that can't be on Ethereum, and answer any questions you may have! Dev Docs: https://v2-docs.zksync.io/dev/",
-  "start": "2022-09-16T20:15:00.000Z",
-  "end": "2022-09-16T20:45:00.000Z",
-  "stageId": "creators_lab",
-  "speakers": [
-    {
-      "id": "vladyslav_bochok",
-      "name": "Vladyslav Bochok",
-      "bio": "No description",
-      "eventId": "ethberlin_2022"
-    }
-  ],
-  "videoUrl": "https://livepeercdn.com/recordings/5aa9fe89-637d-4f3e-8e69-b680bbe0a7bf/index.m3u8",
-  "playbackId": "5aa9fe89-637d-4f3e-8e69-b680bbe0a7bf",
-  "eventId": "ethberlin_2022"
+    "id": "building_on_zksync_20",
+    "name": "Building on zkSync 2.0",
+    "description": "Are you a builder interested in learning more about zkSync 2.0? Join us for this workshop where we will discuss zkSync's user and developer UX, detail what migration from existing protocols generally looks like, what can be implemented on zkSync that can't be on Ethereum, and answer any questions you may have! Dev Docs: https://v2-docs.zksync.io/dev/",
+    "start": "2022-09-16T20:15:00.000Z",
+    "end": "2022-09-16T20:45:00.000Z",
+    "stageId": "creators_lab",
+    "speakers": [
+        {
+            "id": "vladyslav_bochok",
+            "name": "Vladyslav Bochok",
+            "bio": "No description",
+            "eventId": "ethberlin_2022"
+        }
+    ],
+    "playbackId": "5aa9fe89-637d-4f3e-8e69-b680bbe0a7bf",
+    "eventId": "ethberlin_2022"
 }

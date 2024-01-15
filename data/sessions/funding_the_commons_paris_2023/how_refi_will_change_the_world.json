@@ -1,13 +1,19 @@
 {
-  "id": "how_refi_will_change_the_world",
-  "name": "How ReFi Will Change the World",
-  "description": "This video features a speaker discussing the urgent need for action on climate change and global poverty. They introduce the concept of regenerative finance, which prioritizes long-term sustainability and social justice. The speaker explores the potential of blockchain technology, specifically on the Celo platform, to democratize ownership and reallocate resources. They highlight several projects on Celo that address environmental, social, and economic issues, such as reforestation, under-collateralized lending, and universal basic income initiatives. The speaker emphasizes Celo's mission to build a regenerative economy and challenges the industry's current measure of success. They propose a new approach based on meeting basic needs, personal and professional growth, community support, and environmental impact. The video concludes by emphasizing the importance of collaboration and collective action to drive change and create awareness.",
-  "start": "2023-07-15T08:35:00.000Z",
-  "end": "2023-07-15T08:55:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [{ "id": "xochitl_cazador", "name": "Xochitl Cazador", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }],
-  "videoUrl": "https://lp-playback.com/hls/815dp5oglc7f7nde/index.m3u8",
-  "playbackId": "815dp5oglc7f7nde",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/how_refi_will_change_the_world.jpg"
+    "id": "how_refi_will_change_the_world",
+    "name": "How ReFi Will Change the World",
+    "description": "This video features a speaker discussing the urgent need for action on climate change and global poverty. They introduce the concept of regenerative finance, which prioritizes long-term sustainability and social justice. The speaker explores the potential of blockchain technology, specifically on the Celo platform, to democratize ownership and reallocate resources. They highlight several projects on Celo that address environmental, social, and economic issues, such as reforestation, under-collateralized lending, and universal basic income initiatives. The speaker emphasizes Celo's mission to build a regenerative economy and challenges the industry's current measure of success. They propose a new approach based on meeting basic needs, personal and professional growth, community support, and environmental impact. The video concludes by emphasizing the importance of collaboration and collective action to drive change and create awareness.",
+    "start": "2023-07-15T08:35:00.000Z",
+    "end": "2023-07-15T08:55:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "xochitl_cazador",
+            "name": "Xochitl Cazador",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "815dp5oglc7f7nde",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/how_refi_will_change_the_world.jpg"
 }

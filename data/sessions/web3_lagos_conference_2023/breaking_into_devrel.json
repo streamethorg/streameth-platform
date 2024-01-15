@@ -1,1 +1,20 @@
-{"id":"breaking_into_devrel","name":"Breaking into Devrel","description":"","start":1693664400000,"end":1693665000000,"stageId":"mainstage","speakers":[{"id":"idris_olubi","name":"Idris Olubi","bio":"Developer Advocate","eventId":"web3_lagos_conference_2023","twitter":"@axelarcore"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/breaking_into_devrel.jpg"}
+{
+    "id": "breaking_into_devrel",
+    "name": "Breaking into Devrel",
+    "description": "",
+    "start": 1693664400000,
+    "end": 1693665000000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "idris_olubi",
+            "name": "Idris Olubi",
+            "bio": "Developer Advocate",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@axelarcore"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/breaking_into_devrel.jpg"
+}

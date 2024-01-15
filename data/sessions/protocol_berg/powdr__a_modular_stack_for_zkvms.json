@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/chris_iUL5pKP.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/aeb7qbnqwl7jr1aa/index.m3u8",
+    "playbackId": "aeb7qbnqwl7jr1aa",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/powdr__a_modular_stack_for_zkvms.jpg",
     "assetId": "aeb7c050-5e9d-4a93-ba91-1b0e0e552e26"

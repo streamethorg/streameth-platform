@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/OP_PFP_edited_MMtDaup.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/d6dbxlm2fqbk3ns9/index.m3u8",
+    "playbackId": "d6dbxlm2fqbk3ns9",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/retroactive_public_goods_funding_2_rounds_in.jpg",
     "assetId": "d6dbad59-6a72-41c8-be3f-cfc2e02097e0"

@@ -1,1 +1,19 @@
-{"id":"scaling_ethereum_with_starknet","name":"Scaling Ethereum with Starknet","description":"","start":1693659000000,"end":1693659900000,"stageId":"mainstage","speakers":[{"id":"paul_emmanuel","name":"Paul Emmanuel","bio":"Growth Marketer","eventId":"web3_lagos_conference_2023"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/scaling_ethereum_with_starknet.jpg"}
+{
+    "id": "scaling_ethereum_with_starknet",
+    "name": "Scaling Ethereum with Starknet",
+    "description": "",
+    "start": 1693659000000,
+    "end": 1693659900000,
+    "stageId": "mainstage",
+    "speakers": [
+        {
+            "id": "paul_emmanuel",
+            "name": "Paul Emmanuel",
+            "bio": "Growth Marketer",
+            "eventId": "web3_lagos_conference_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/scaling_ethereum_with_starknet.jpg"
+}

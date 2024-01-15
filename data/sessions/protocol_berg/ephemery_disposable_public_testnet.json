@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/3FeDe54c_400x400_wcCEQjp.jpg"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/d767zzg1yab6ezjp/index.m3u8",
-    "playbackId": "",
+    "playbackId": "d767zzg1yab6ezjp",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/ephemery_disposable_public_testnet.jpg",
     "assetId": "d767d887-663e-451e-bef2-9b90c01027ac"

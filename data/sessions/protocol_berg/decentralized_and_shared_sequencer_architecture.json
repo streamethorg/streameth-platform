@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/elizabeth_j3u2Vqg.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/87b32i78wsr36zpa/index.m3u8",
+    "playbackId": "87b32i78wsr36zpa",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/decentralized_and_shared_sequencer_architecture.jpg",
     "assetId": "87b3d051-218d-4ea9-9014-02e8679ca5a8"

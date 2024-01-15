@@ -14,8 +14,8 @@
             "photo": "https://pretalx.com/media/avatars/trogsheadshot_mMyg33G.jpg"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/7d50j2vbci58zhi0/index.m3u8",
     "eventId": "ethchicago",
     "coverImage": "/sessions/ethchicago/how_to_be_an_internetartist.jpg",
-    "assetId": "7d502611-1f19-4320-9338-c4f691a0946c"
+    "assetId": "7d502611-1f19-4320-9338-c4f691a0946c",
+    "playbackId": "7d50j2vbci58zhi0"
 }

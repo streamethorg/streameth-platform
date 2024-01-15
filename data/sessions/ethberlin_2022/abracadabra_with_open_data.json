@@ -1,20 +1,19 @@
 {
-  "id": "abracadabra_with_open_data",
-  "name": "Abracadabra with Open Data",
-  "description": "🪄 Would you like to wave your wand and speak order into the data chaos as a Dune Wizard?\n\n🤝 Dune is a crypto data analytics platform, where we are on a mission to make crypto data accessible for all.\n\n📊 In this workshop, we will walk through how to do crypto data analysis on Dune in an open-source style!\n\n🧙 Come join us and start your Dune Wizard journey!",
-  "start": "2022-09-16T18:00:00.000Z",
-  "end": "2022-09-16T18:45:00.000Z",
-  "stageId": "lexis",
-  "speakers": [
-    {
-      "id": "jackie_zhang",
-      "name": "Jackie Zhang",
-      "bio": "No description",
-      "eventId": "ethberlin_2022"
-    }
-  ],
-  "videoUrl": "https://livepeercdn.com/recordings/24eaef0e-ce34-4b04-a90f-08aa64aa91f3/index.m3u8",
-  "playbackId": "24eaef0e-ce34-4b04-a90f-08aa64aa91f3",
-  "eventId": "ethberlin_2022",
-  "coverImage": "/sessions/ethberlin_2022/abracadabra_with_open_data.jpg"
+    "id": "abracadabra_with_open_data",
+    "name": "Abracadabra with Open Data",
+    "description": "\ud83e\ude84 Would you like to wave your wand and speak order into the data chaos as a Dune Wizard?\n\n\ud83e\udd1d Dune is a crypto data analytics platform, where we are on a mission to make crypto data accessible for all.\n\n\ud83d\udcca In this workshop, we will walk through how to do crypto data analysis on Dune in an open-source style!\n\n\ud83e\uddd9 Come join us and start your Dune Wizard journey!",
+    "start": "2022-09-16T18:00:00.000Z",
+    "end": "2022-09-16T18:45:00.000Z",
+    "stageId": "lexis",
+    "speakers": [
+        {
+            "id": "jackie_zhang",
+            "name": "Jackie Zhang",
+            "bio": "No description",
+            "eventId": "ethberlin_2022"
+        }
+    ],
+    "playbackId": "24eaef0e-ce34-4b04-a90f-08aa64aa91f3",
+    "eventId": "ethberlin_2022",
+    "coverImage": "/sessions/ethberlin_2022/abracadabra_with_open_data.jpg"
 }

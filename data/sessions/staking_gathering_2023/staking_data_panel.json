@@ -1,1 +1,37 @@
-{"id":"staking_data_panel","name":"Staking data panel","description":"-","start":1699961400000,"end":1699963800000,"stageId":"main_stage","speakers":[{"id":"michael_sproul","name":"Michael Sproul","bio":"Sigma Prime\nDeveloper","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/5/f1/19160265/avatar.jpg?6a0"},{"id":"hildebert_mouli","name":"Hildebert Moulié","bio":"Dragonfly","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/6/a9/19741650/avatar.jpg?790"},{"id":"toni_wahrsttter","name":"Toni Wahrstätter","bio":"Ethereum Foundation\nResearch & Data","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/e/1e/19741655/avatar.jpg?398"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/staking_data_panel.jpg"}
+{
+    "id": "staking_data_panel",
+    "name": "Staking data panel",
+    "description": "-",
+    "start": 1699961400000,
+    "end": 1699963800000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "michael_sproul",
+            "name": "Michael Sproul",
+            "bio": "Sigma Prime\nDeveloper",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/5/f1/19160265/avatar.jpg?6a0"
+        },
+        {
+            "id": "hildebert_mouli",
+            "name": "Hildebert Mouli\u00e9",
+            "bio": "Dragonfly",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/6/a9/19741650/avatar.jpg?790"
+        },
+        {
+            "id": "toni_wahrsttter",
+            "name": "Toni Wahrst\u00e4tter",
+            "bio": "Ethereum Foundation\nResearch & Data",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/e/1e/19741655/avatar.jpg?398"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/staking_data_panel.jpg"
+}

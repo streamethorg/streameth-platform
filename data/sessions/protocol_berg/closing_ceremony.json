@@ -21,8 +21,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/franziska_heintel_acZXRr3.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/bdef1j1mhkgl6t1k/index.m3u8",
+    "playbackId": "bdef1j1mhkgl6t1k",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/closing_ceremony.jpg",
     "assetId": "bdefdea0-2a65-41e2-9c42-4bd566488b35"

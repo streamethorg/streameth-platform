@@ -1,1 +1,12 @@
-{"id":"bounty_presentations_to_judges","name":"Bounty Presentations to Judges","description":"participants present to each bounty for judge tables","start":1694962800000,"end":1694970000000,"stageId":"oak_room_hacker_room","speakers":[],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/bounty_presentations_to_judges.jpg"}
+{
+    "id": "bounty_presentations_to_judges",
+    "name": "Bounty Presentations to Judges",
+    "description": "participants present to each bounty for judge tables",
+    "start": 1694962800000,
+    "end": 1694970000000,
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/bounty_presentations_to_judges.jpg"
+}

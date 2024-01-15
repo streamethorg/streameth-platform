@@ -1,20 +1,19 @@
 {
-  "id": "antibodies_for_longevity_leveraging_industry_rd_investments",
-  "name": "Antibodies for Longevity: Leveraging Industry R&D Investments",
-  "description": "Speaker: Iosif Gershteyn",
-  "start": "2023-05-14T11:45:00.000Z",
-  "end": "2023-05-14T12:45:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "iosif_gershteyn",
-      "name": "Iosif Gershteyn",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/ede0ozv827gnfkgn/index.m3u8",
-  "playbackId": "ede0ozv827gnfkgn",
-  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "antibodies_for_longevity_leveraging_industry_rd_investments",
+    "name": "Antibodies for Longevity: Leveraging Industry R&D Investments",
+    "description": "Speaker: Iosif Gershteyn",
+    "start": "2023-05-14T11:45:00.000Z",
+    "end": "2023-05-14T12:45:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "iosif_gershteyn",
+            "name": "Iosif Gershteyn",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        }
+    ],
+    "playbackId": "ede0ozv827gnfkgn",
+    "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

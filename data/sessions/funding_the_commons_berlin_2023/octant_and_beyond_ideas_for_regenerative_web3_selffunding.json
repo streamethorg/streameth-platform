@@ -18,8 +18,8 @@
         "end": 30933,
         "start": 29808
     },
-    "videoUrl": "https://lp-playback.com/hls/625cawquqb6lkz93/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/octant_and_beyond_ideas_for_regenerative_web3_selffunding.jpg",
-    "assetId": "625c3a77-313c-483d-be80-92e4192268b1"
+    "assetId": "625c3a77-313c-483d-be80-92e4192268b1",
+    "playbackId": "625cawquqb6lkz93"
 }

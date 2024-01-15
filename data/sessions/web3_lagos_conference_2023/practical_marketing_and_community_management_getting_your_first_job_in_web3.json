@@ -1,1 +1,20 @@
-{"id":"practical_marketing_and_community_management_getting_your_first_job_in_web3","name":"Practical marketing and community management: Getting your first job in Web3","description":"","start":1693570800000,"end":1693572600000,"stageId":"workshop_room_1","speakers":[{"id":"rasheed_ahmed_ademuyiwa","name":"Rasheed Ahmed Ademuyiwa","bio":"Marketing Lead & Head of Community","eventId":"web3_lagos_conference_2023","twitter":"@X8COfficial"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/practical_marketing_and_community_management_getting_your_first_job_in_web3.jpg"}
+{
+    "id": "practical_marketing_and_community_management_getting_your_first_job_in_web3",
+    "name": "Practical marketing and community management: Getting your first job in Web3",
+    "description": "",
+    "start": 1693570800000,
+    "end": 1693572600000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "rasheed_ahmed_ademuyiwa",
+            "name": "Rasheed Ahmed Ademuyiwa",
+            "bio": "Marketing Lead & Head of Community",
+            "eventId": "web3_lagos_conference_2023",
+            "twitter": "@X8COfficial"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/practical_marketing_and_community_management_getting_your_first_job_in_web3.jpg"
+}

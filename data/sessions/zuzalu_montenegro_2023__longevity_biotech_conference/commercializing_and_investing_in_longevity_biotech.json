@@ -1,44 +1,43 @@
 {
-  "id": "commercializing_and_investing_in_longevity_biotech",
-  "name": "Commercializing and Investing in Longevity Biotech",
-  "description": "Marc Bernegger\nPierre-Antoine Mudry\nLaurence Ion\nAlexandra Bause\n\nModerator: Sebastian Brunemeier",
-  "start": "2023-05-14T08:45:00.000Z",
-  "end": "2023-05-14T09:45:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "marc_bernegger",
-      "name": "Marc Bernegger",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    },
-    {
-      "id": "pierreantoine_mudry",
-      "name": "Pierre-Antoine Mudry",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    },
-    {
-      "id": "laurence_ion",
-      "name": "Laurence Ion",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    },
-    {
-      "id": "alexandra_bause",
-      "name": "Alexandra Bause",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    },
-    {
-      "id": "sebastian_brunemeier",
-      "name": "Sebastian Brunemeier",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/33e2etxz3bhkxhdr/index.m3u8",
-  "playbackId": "33e2etxz3bhkxhdr",
-  "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "commercializing_and_investing_in_longevity_biotech",
+    "name": "Commercializing and Investing in Longevity Biotech",
+    "description": "Marc Bernegger\nPierre-Antoine Mudry\nLaurence Ion\nAlexandra Bause\n\nModerator: Sebastian Brunemeier",
+    "start": "2023-05-14T08:45:00.000Z",
+    "end": "2023-05-14T09:45:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "marc_bernegger",
+            "name": "Marc Bernegger",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        },
+        {
+            "id": "pierreantoine_mudry",
+            "name": "Pierre-Antoine Mudry",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        },
+        {
+            "id": "laurence_ion",
+            "name": "Laurence Ion",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        },
+        {
+            "id": "alexandra_bause",
+            "name": "Alexandra Bause",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        },
+        {
+            "id": "sebastian_brunemeier",
+            "name": "Sebastian Brunemeier",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference"
+        }
+    ],
+    "playbackId": "33e2etxz3bhkxhdr",
+    "eventId": "zuzalu_montenegro_2023__longevity_biotech_conference",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

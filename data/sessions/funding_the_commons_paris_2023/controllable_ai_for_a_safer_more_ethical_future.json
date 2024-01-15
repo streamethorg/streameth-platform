@@ -1,17 +1,31 @@
 {
-  "id": "controllable_ai_for_a_safer_more_ethical_future",
-  "name": "Controllable AI for a Safer, More Ethical Future",
-  "description": "The text discusses the emergence of generative AIs and the risks associated with them, such as misinformation and value locking. It highlights the need for AI alignment, which aims to steer AI systems towards intended goals and ethical principles. The text also mentions OpenAI's plan for alignment and the challenges associated with it. It introduces the concept of controllable AI as an alternative to perfectly aligned AI, emphasizing the importance of being able to stop AI systems if needed. The text then delves into the open agency architecture, which aims to achieve controllability through a specification step and han evaluation. The challenges of building such a system are discussed, including the need for a new language for specifications and the complexity of designing a full world model. The text concludes by highlighting the urgency of addressing AI risks and the need for more time and safer design architectures.",
-  "start": "2023-07-16T15:00:00.000Z",
-  "end": "2023-07-16T15:30:00.000Z",
-  "stageId": "farabeuf_amphitheater",
-  "speakers": [
-    { "id": "evan_miyazono", "name": "Evan Miyazono", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
-    { "id": "simeon_campos", "name": "Simeon Campos", "bio": "No description", "eventId": "funding_the_commons_paris_2023" },
-    { "id": "charbelraphael_sergerie", "name": "Charbel-Raphael Sergerie", "bio": "No description", "eventId": "funding_the_commons_paris_2023" }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/1e2dcrt3g7ibuun2/index.m3u8",
-  "playbackId": "1e2dcrt3g7ibuun2",
-  "eventId": "funding_the_commons_paris_2023",
-  "coverImage": "/sessions/funding_the_commons_paris_2023/controllable_ai_for_a_safer_more_ethical_future.jpg"
+    "id": "controllable_ai_for_a_safer_more_ethical_future",
+    "name": "Controllable AI for a Safer, More Ethical Future",
+    "description": "The text discusses the emergence of generative AIs and the risks associated with them, such as misinformation and value locking. It highlights the need for AI alignment, which aims to steer AI systems towards intended goals and ethical principles. The text also mentions OpenAI's plan for alignment and the challenges associated with it. It introduces the concept of controllable AI as an alternative to perfectly aligned AI, emphasizing the importance of being able to stop AI systems if needed. The text then delves into the open agency architecture, which aims to achieve controllability through a specification step and han evaluation. The challenges of building such a system are discussed, including the need for a new language for specifications and the complexity of designing a full world model. The text concludes by highlighting the urgency of addressing AI risks and the need for more time and safer design architectures.",
+    "start": "2023-07-16T15:00:00.000Z",
+    "end": "2023-07-16T15:30:00.000Z",
+    "stageId": "farabeuf_amphitheater",
+    "speakers": [
+        {
+            "id": "evan_miyazono",
+            "name": "Evan Miyazono",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        },
+        {
+            "id": "simeon_campos",
+            "name": "Simeon Campos",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        },
+        {
+            "id": "charbelraphael_sergerie",
+            "name": "Charbel-Raphael Sergerie",
+            "bio": "No description",
+            "eventId": "funding_the_commons_paris_2023"
+        }
+    ],
+    "playbackId": "1e2dcrt3g7ibuun2",
+    "eventId": "funding_the_commons_paris_2023",
+    "coverImage": "/sessions/funding_the_commons_paris_2023/controllable_ai_for_a_safer_more_ethical_future.jpg"
 }

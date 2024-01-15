@@ -1,20 +1,19 @@
 {
-  "id": "unstoppable_nfts",
-  "name": "Unstoppable NFTs",
-  "description": "Creation of new NFTs capable to pay for pin (storage) of their metadata on SWARM. Problems: Firstly, in SWARM, there is actually no public pinning service for any entities: pinning occurs at the local node level. Secondly, there is an unclear, although possibly transparent (open), mechanism for the exchange rate of tokens that are involved in the pinning process. Motivation: Thus, the motivation boils down to developing a comprehensible methodology for a paid semi-public pinning (anyone can request payable pinning from node operators) with a clear mechanism for the sale and exchange of tokens that is understandable to end users and node owners.",
-  "start": "2023-06-23T14:00:00.000Z",
-  "end": "2023-06-23T14:15:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "alexander_shedogubov",
-      "name": "Alexander Shedogubov",
-      "bio": "Envelop DAO co-founder, entrepreneur in the field of  IoT, Blockchain and Logistic (Founder Pax Plus)\nOther: 34 y.o., 7 years of management experience, 4 years in Web3.0",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://summit.ethswarm.org/media/avatars/photo_2023-05-24_20.40.13_WcgtY0p.jpeg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/01f7l4l9ef9x3igl/index.m3u8",
-  "playbackId": "01f7l4l9ef9x3igl",
-  "eventId": "swarm_summit_2023"
+    "id": "unstoppable_nfts",
+    "name": "Unstoppable NFTs",
+    "description": "Creation of new NFTs capable to pay for pin (storage) of their metadata on SWARM. Problems: Firstly, in SWARM, there is actually no public pinning service for any entities: pinning occurs at the local node level. Secondly, there is an unclear, although possibly transparent (open), mechanism for the exchange rate of tokens that are involved in the pinning process. Motivation: Thus, the motivation boils down to developing a comprehensible methodology for a paid semi-public pinning (anyone can request payable pinning from node operators) with a clear mechanism for the sale and exchange of tokens that is understandable to end users and node owners.",
+    "start": "2023-06-23T14:00:00.000Z",
+    "end": "2023-06-23T14:15:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "alexander_shedogubov",
+            "name": "Alexander Shedogubov",
+            "bio": "Envelop DAO co-founder, entrepreneur in the field of  IoT, Blockchain and Logistic (Founder Pax Plus)\nOther: 34 y.o., 7 years of management experience, 4 years in Web3.0",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/photo_2023-05-24_20.40.13_WcgtY0p.jpeg"
+        }
+    ],
+    "playbackId": "01f7l4l9ef9x3igl",
+    "eventId": "swarm_summit_2023"
 }

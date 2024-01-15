@@ -1,20 +1,19 @@
 {
-  "id": "the_gateway_to_decentralized_object_storage",
-  "name": "The gateway to decentralized object storage",
-  "description": "There are currently over 800,000 users of Amazon’s S3 enterprise object storage solution. This represents roughly a 93% market share in a $4.83 billion dollar market, with a compound annual growth of 13.6%. Cloud storage is a core service enabling almost every technology we utilize today in our personal and business lives. It may be the gateway for the masses to the Web 3.0 ecosystem. Decentralized storage has already been praised in the U.S. Congress by Sen. Pat Toomey for protecting the free press in China. In order to encourage more users to adopt decentralized storage, we need to eliminate key friction points from the onboarding and migration process.",
-  "start": "2023-06-23T14:45:00.000Z",
-  "end": "2023-06-23T15:00:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "samuel_lauridsen",
-      "name": "Samuel Lauridsen",
-      "bio": "The firm’s founder draws upon over 15 years of prior experience designing, deploying, and managing mission-critical infrastructure for Silicon Valley’s leading tech companies including Apple, Intel, Facebook, Equinix, and Tesla. In addition to his work in Northern California, he has 6+ years of experience working at one of the largest media conglomerates in the world, including one of the “big five” motion picture studios. Currently based in Los Angeles this connection to the art world brings unique opportunities for collaboration to the project team.",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://summit.ethswarm.org/media/avatars/DSC_00892_R3VMIo3.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/b7464cp959qjxfw4/index.m3u8",
-  "playbackId": "b7464cp959qjxfw4",
-  "eventId": "swarm_summit_2023"
+    "id": "the_gateway_to_decentralized_object_storage",
+    "name": "The gateway to decentralized object storage",
+    "description": "There are currently over 800,000 users of Amazon\u2019s S3 enterprise object storage solution. This represents roughly a 93% market share in a $4.83 billion dollar market, with a compound annual growth of 13.6%. Cloud storage is a core service enabling almost every technology we utilize today in our personal and business lives. It may be the gateway for the masses to the Web 3.0 ecosystem. Decentralized storage has already been praised in the U.S. Congress by Sen. Pat Toomey for protecting the free press in China. In order to encourage more users to adopt decentralized storage, we need to eliminate key friction points from the onboarding and migration process.",
+    "start": "2023-06-23T14:45:00.000Z",
+    "end": "2023-06-23T15:00:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "samuel_lauridsen",
+            "name": "Samuel Lauridsen",
+            "bio": "The firm\u2019s founder draws upon over 15 years of prior experience designing, deploying, and managing mission-critical infrastructure for Silicon Valley\u2019s leading tech companies including Apple, Intel, Facebook, Equinix, and Tesla. In addition to his work in Northern California, he has 6+ years of experience working at one of the largest media conglomerates in the world, including one of the \u201cbig five\u201d motion picture studios. Currently based in Los Angeles this connection to the art world brings unique opportunities for collaboration to the project team.",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/DSC_00892_R3VMIo3.png"
+        }
+    ],
+    "playbackId": "b7464cp959qjxfw4",
+    "eventId": "swarm_summit_2023"
 }

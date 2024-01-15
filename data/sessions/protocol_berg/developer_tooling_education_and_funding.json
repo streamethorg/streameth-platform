@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/bmhym86N_400x400-3_WmEc96n.jpg"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/da21859v4ivrwtvq/index.m3u8",
-    "playbackId": "",
+    "playbackId": "da21859v4ivrwtvq",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/developer_tooling_education_and_funding.jpg",
     "assetId": "da216044-e4de-4237-9752-b068b8cfffa8"

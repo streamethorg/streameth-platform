@@ -1,1 +1,20 @@
-{"id":"fund_solo_ethereum_validator_node_with_ira","name":"Fund Solo Ethereum Validator Node with IRA","description":"Fund Solo Ethereum Validator Node with IRA","start":1694961000000,"end":1694962800000,"stageId":"east_room__main_","speakers":[{"id":"simon_dorfman","name":"Simon Dorfman","bio":null,"eventId":"ethchicago","photo":""}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/fund_solo_ethereum_validator_node_with_ira.jpg"}
+{
+    "id": "fund_solo_ethereum_validator_node_with_ira",
+    "name": "Fund Solo Ethereum Validator Node with IRA",
+    "description": "Fund Solo Ethereum Validator Node with IRA",
+    "start": 1694961000000,
+    "end": 1694962800000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "simon_dorfman",
+            "name": "Simon Dorfman",
+            "bio": null,
+            "eventId": "ethchicago",
+            "photo": ""
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/fund_solo_ethereum_validator_node_with_ira.jpg"
+}

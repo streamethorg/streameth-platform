@@ -21,8 +21,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/tanishq_stBCsRC.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/f8544cppzj06y3ji/index.m3u8",
+    "playbackId": "f8544cppzj06y3ji",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/verkle_sync__bring_a_node_up_in_minutes.jpg",
     "assetId": "f8541aff-5084-48fd-b961-8f87783c0d4e"

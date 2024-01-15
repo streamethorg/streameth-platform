@@ -1,20 +1,19 @@
 {
-  "id": "all_atoms_are_local_building_biotic_futures",
-  "name": "All Atoms are local: building biotic futures",
-  "description": "The video features a talk by Drew Endy, founder of IJM and the Bibericks Foundation, and a professor at Stanford. He discusses the potential of biology and the idea of a bionet, where people can grow solutions where they are needed. Endy also talks about the importance of optionality around access to the means of production and how it can lead to mutual satisfaction and lower conservative interest in law and order. He gives examples of how the internet and DNA reading and writing can be used to create a networked biotechnology.",
-  "start": "2023-04-01T06:00:00.000Z",
-  "end": "2023-04-01T06:30:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "drew_endy",
-      "name": "Drew Endy",
-      "bio": "Martin Family Fellow in Undergraduate Education, Stanford University",
-      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/96daut16x6qr2iu7/index.m3u8",
-  "playbackId": "96daut16x6qr2iu7",
-  "eventId": "zuzalu_montenegro_2023__synthetic_biology",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "all_atoms_are_local_building_biotic_futures",
+    "name": "All Atoms are local: building biotic futures",
+    "description": "The video features a talk by Drew Endy, founder of IJM and the Bibericks Foundation, and a professor at Stanford. He discusses the potential of biology and the idea of a bionet, where people can grow solutions where they are needed. Endy also talks about the importance of optionality around access to the means of production and how it can lead to mutual satisfaction and lower conservative interest in law and order. He gives examples of how the internet and DNA reading and writing can be used to create a networked biotechnology.",
+    "start": "2023-04-01T06:00:00.000Z",
+    "end": "2023-04-01T06:30:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "drew_endy",
+            "name": "Drew Endy",
+            "bio": "Martin Family Fellow in Undergraduate Education, Stanford University",
+            "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+        }
+    ],
+    "playbackId": "96daut16x6qr2iu7",
+    "eventId": "zuzalu_montenegro_2023__synthetic_biology",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

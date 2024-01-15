@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/IMG_3165_yxGbxVE.jpg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/a03fczqqu4epa59k/index.m3u8",
+    "playbackId": "a03fczqqu4epa59k",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/recursive_snarks_for_efficiency_scalability_and_privacy.jpg",
     "assetId": "a03ffac5-223f-4a12-9319-6eb5951fd56a"

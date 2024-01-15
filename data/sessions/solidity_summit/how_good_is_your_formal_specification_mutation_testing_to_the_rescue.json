@@ -15,7 +15,6 @@
             "photo": "https://cnandi.com/photos/cnandi.png"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/8bc7kkpi148ny63j/index.m3u8",
     "playbackId": "8bc7kkpi148ny63j",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/how_good_is_your_formal_specification_mutation_testing_to_the_rescue_thumbnail.png",

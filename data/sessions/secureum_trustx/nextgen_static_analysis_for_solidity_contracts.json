@@ -1,1 +1,19 @@
-{"id":"nextgen_static_analysis_for_solidity_contracts","name":"Next-Gen Static Analysis for Solidity Contracts","description":"","start":1699869600000,"end":1699871400000,"stageId":"main_stage","speakers":[{"id":"anton_permenev","name":"Anton Permenev","bio":"TBD","eventId":"secureum_trustx"}],"playbackId":"","eventId":"secureum_trustx","coverImage":"/sessions/secureum_trustx/nextgen_static_analysis_for_solidity_contracts.jpg"}
+{
+    "id": "nextgen_static_analysis_for_solidity_contracts",
+    "name": "Next-Gen Static Analysis for Solidity Contracts",
+    "description": "",
+    "start": 1699869600000,
+    "end": 1699871400000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "anton_permenev",
+            "name": "Anton Permenev",
+            "bio": "TBD",
+            "eventId": "secureum_trustx"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/nextgen_static_analysis_for_solidity_contracts.jpg"
+}

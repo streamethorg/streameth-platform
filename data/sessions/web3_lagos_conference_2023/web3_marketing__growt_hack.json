@@ -1,1 +1,19 @@
-{"id":"web3_marketing__growt_hack","name":"Web3 Marketing & Growt Hack","description":"","start":1693486800000,"end":1693488600000,"stageId":"workshop_room_1","speakers":[{"id":"olatinwo_barakat","name":"Olatinwo Barakat","bio":"Product Marketing Consultant ","eventId":"web3_lagos_conference_2023"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/web3_marketing__growt_hack.jpg"}
+{
+    "id": "web3_marketing__growt_hack",
+    "name": "Web3 Marketing & Growt Hack",
+    "description": "",
+    "start": 1693486800000,
+    "end": 1693488600000,
+    "stageId": "workshop_room_1",
+    "speakers": [
+        {
+            "id": "olatinwo_barakat",
+            "name": "Olatinwo Barakat",
+            "bio": "Product Marketing Consultant ",
+            "eventId": "web3_lagos_conference_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/web3_marketing__growt_hack.jpg"
+}

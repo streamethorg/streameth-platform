@@ -15,7 +15,6 @@
             "photo": "https://evmsummit.org/images/speakers/radoslaw_zagorowicz.jpg"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/baf96ibk5j639rer/index.m3u8",
     "playbackId": "baf96ibk5j639rer",
     "eventId": "evm_summit",
     "coverImage": "/sessions/evm_summit/evmmax__advanced_elliptic_curve_cryptography_in_evm_thumbnail.png",

@@ -13,8 +13,7 @@
             "eventId": "zuconnect__public_goods_track"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/93eaiq2rhporiwyr/index.m3u8",
-    "playbackId": "",
+    "playbackId": "93eaiq2rhporiwyr",
     "eventId": "zuconnect__public_goods_track",
     "coverImage": "/sessions/zuconnect__public_goods_track/trust_matching__decentralised_social_consensus_mechanism_for_knowledge_base_by_ethereum_community_fund.jpg",
     "assetId": "93ead01c-5d65-4d92-a4d7-423e684d91f7"

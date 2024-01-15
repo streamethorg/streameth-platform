@@ -21,8 +21,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/daniel_8x0ocYg.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/6fd51jy2oc8z9g42/index.m3u8",
+    "playbackId": "6fd51jy2oc8z9g42",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/crossing_the_interoperability_bridge_a_deep_dive_into_building_interoperable_dapps_with_ibc.jpg",
     "assetId": "6fd5ff6d-ab82-4e69-8df9-e5a7ff82689a"

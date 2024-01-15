@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/eskimor_U4xtWaX.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/39dflhl6g0gypsjl/index.m3u8",
+    "playbackId": "39dflhl6g0gypsjl",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/parachain_consensus_from_the_ground_up.jpg",
     "assetId": "39dfd595-f74d-4555-99c2-7cbb4a65eda2"

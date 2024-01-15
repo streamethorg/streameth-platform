@@ -1,1 +1,21 @@
-{"id":"what_merge_testing_is_evolving_insert_pokemon_evolving_logo_here","name":"What?... Merge testing is evolving (Insert pokemon evolving logo here)","description":"-","start":1699958100000,"end":1699959600000,"stageId":"main_stage","speakers":[{"id":"parithosh","name":"Parithosh","bio":"Ethereum Foundation\nDevOps","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/7/f0/19160283/avatar.jpg?d82"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/what_merge_testing_is_evolving_insert_pokemon_evolving_logo_here.jpg"}
+{
+    "id": "what_merge_testing_is_evolving_insert_pokemon_evolving_logo_here",
+    "name": "What?... Merge testing is evolving (Insert pokemon evolving logo here)",
+    "description": "-",
+    "start": 1699958100000,
+    "end": 1699959600000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "parithosh",
+            "name": "Parithosh",
+            "bio": "Ethereum Foundation\nDevOps",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/7/f0/19160283/avatar.jpg?d82"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/what_merge_testing_is_evolving_insert_pokemon_evolving_logo_here.jpg"
+}

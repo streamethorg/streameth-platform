@@ -1,1 +1,20 @@
-{"id":"defi_mev_auctions_and_what_we_need_to_do_for_defi_to_compete_with_cefi","name":"DeFi, MEV auctions, and what we need to do for DeFi to *compete* with CeFi","description":"DeFi, MEV auctions, and what we need to do for DeFi to *compete* with CeFi","start":1694808000000,"end":1694809800000,"stageId":"michigan_stage__creatives__trad_business_","speakers":[{"id":"uri_klarman","name":"Uri Klarman","bio":"Uri Klarman, the Co-Founder and CEO of bloXroute, received his Ph.D. from Northwestern University for his pioneering research on the blockchain network layer. bloXroute - the “crown jewel” of his Ph.D. thesis, allows DeFi traders and market actors to see trading opportunities and execute them faster to make better trades.","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/KzGE2G_5_400x400_XYbJRmJ.jpg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/defi_mev_auctions_and_what_we_need_to_do_for_defi_to_compete_with_cefi.jpg"}
+{
+    "id": "defi_mev_auctions_and_what_we_need_to_do_for_defi_to_compete_with_cefi",
+    "name": "DeFi, MEV auctions, and what we need to do for DeFi to *compete* with CeFi",
+    "description": "DeFi, MEV auctions, and what we need to do for DeFi to *compete* with CeFi",
+    "start": 1694808000000,
+    "end": 1694809800000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "uri_klarman",
+            "name": "Uri Klarman",
+            "bio": "Uri Klarman, the Co-Founder and CEO of bloXroute, received his Ph.D. from Northwestern University for his pioneering research on the blockchain network layer. bloXroute - the \u201ccrown jewel\u201d of his Ph.D. thesis, allows DeFi traders and market actors to see trading opportunities and execute them faster to make better trades.",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/KzGE2G_5_400x400_XYbJRmJ.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/defi_mev_auctions_and_what_we_need_to_do_for_defi_to_compete_with_cefi.jpg"
+}

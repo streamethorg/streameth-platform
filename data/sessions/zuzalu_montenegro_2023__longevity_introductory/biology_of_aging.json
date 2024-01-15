@@ -1,20 +1,19 @@
 {
-  "id": "biology_of_aging",
-  "name": "Biology of aging",
-  "description": "",
-  "start": "2023-03-31T13:30:00.000Z",
-  "end": "2023-03-31T14:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "micheal",
-      "name": "Micheal",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_introductory"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/37711xffjvgxz7jg/index.m3u8",
-  "playbackId": "37711xffjvgxz7jg",
-  "eventId": "zuzalu_montenegro_2023__longevity_introductory",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "biology_of_aging",
+    "name": "Biology of aging",
+    "description": "",
+    "start": "2023-03-31T13:30:00.000Z",
+    "end": "2023-03-31T14:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "micheal",
+            "name": "Micheal",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_introductory"
+        }
+    ],
+    "playbackId": "37711xffjvgxz7jg",
+    "eventId": "zuzalu_montenegro_2023__longevity_introductory",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

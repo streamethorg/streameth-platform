@@ -1,1 +1,20 @@
-{"id":"liquidity_unleashed_a_researchdriven_analysis_of_postshanghai_liquid_staking_derivatives","name":"Liquidity unleashed: A research-driven analysis of post-Shanghai liquid staking derivatives","description":"LSDs are the #1 most popular DeFi narrative in 2023. This interactive presentation aims to give the participants an in-depth yet intuitive understanding about the LSD space, and equip them with practical tools for their own research analysis of LSD tokens.","start":1694962800000,"end":1694964600000,"stageId":"east_room__main_","speakers":[{"id":"mingxuan_he","name":"Mingxuan He","bio":"Ming is a quantitative researcher with specialization in DeFi and tokenomics. He is currently a graduate student at University of Chicago studying computational economics.\r\n\r\nPreviously Ming has worked as a researcher at Nethermind and Polygon.\r\n\r\nhttps://www.mingxuanhe.xyz/","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/headshot_aRpMfYh.jpg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/liquidity_unleashed_a_researchdriven_analysis_of_postshanghai_liquid_staking_derivatives.jpg"}
+{
+    "id": "liquidity_unleashed_a_researchdriven_analysis_of_postshanghai_liquid_staking_derivatives",
+    "name": "Liquidity unleashed: A research-driven analysis of post-Shanghai liquid staking derivatives",
+    "description": "LSDs are the #1 most popular DeFi narrative in 2023. This interactive presentation aims to give the participants an in-depth yet intuitive understanding about the LSD space, and equip them with practical tools for their own research analysis of LSD tokens.",
+    "start": 1694962800000,
+    "end": 1694964600000,
+    "stageId": "east_room__main_",
+    "speakers": [
+        {
+            "id": "mingxuan_he",
+            "name": "Mingxuan He",
+            "bio": "Ming is a quantitative researcher with specialization in DeFi and tokenomics. He is currently a graduate student at University of Chicago studying computational economics.\r\n\r\nPreviously Ming has worked as a researcher at Nethermind and Polygon.\r\n\r\nhttps://www.mingxuanhe.xyz/",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/headshot_aRpMfYh.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/liquidity_unleashed_a_researchdriven_analysis_of_postshanghai_liquid_staking_derivatives.jpg"
+}

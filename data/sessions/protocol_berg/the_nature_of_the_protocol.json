@@ -28,8 +28,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/headshot_square_jSlIGp9.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/b58akjrz8343cmgk/index.m3u8",
+    "playbackId": "b58akjrz8343cmgk",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/the_nature_of_the_protocol.jpg",
     "assetId": "b58a0bf3-4924-4dbc-acaa-a2a04a6b409c"

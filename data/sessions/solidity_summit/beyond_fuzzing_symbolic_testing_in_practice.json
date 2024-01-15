@@ -15,7 +15,6 @@
             "photo": "https://gcdnb.pbrd.co/images/CGRjWRguUEJb.png"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/c8bdu7xr42izz3gq/index.m3u8",
     "playbackId": "c8bdu7xr42izz3gq",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/beyond_fuzzing_symbolic_testing_in_practice_thumbnail.png",

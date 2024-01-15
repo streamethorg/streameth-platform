@@ -1,21 +1,21 @@
 {
-  "id": "al_konumas",
-  "name": "Açılış Konuşması",
-  "description": "ETHGünü açılış konuşması",
-  "start": 1699857000000,
-  "end": 1699858800000,
-  "stageId": "harbiye",
-  "speakers": [
-    {
-      "id": "kaan_uzdoan",
-      "name": "Kaan Uzdoğan",
-      "bio": "Kaan Uzdoğan Ethereum Vakfı'nda sourcify.dev projesinin liderliğini yapmakta. ",
-      "eventId": "ethgunu",
-      "twitter": "@kaanuzdogan",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/kaan.jpeg?raw=true"
-    }
-  ],
-  "eventId": "ethgunu",
-  "playbackId": "",
-  "coverImage": "/sessions/ethgunu/al_konumas_thumbnail.png"
+    "id": "al_konumas",
+    "name": "A\u00e7\u0131l\u0131\u015f Konu\u015fmas\u0131",
+    "description": "ETHG\u00fcn\u00fc a\u00e7\u0131l\u0131\u015f konu\u015fmas\u0131",
+    "start": 1699857000000,
+    "end": 1699858800000,
+    "stageId": "harbiye",
+    "speakers": [
+        {
+            "id": "kaan_uzdoan",
+            "name": "Kaan Uzdo\u011fan",
+            "bio": "Kaan Uzdo\u011fan Ethereum Vakf\u0131'nda sourcify.dev projesinin liderli\u011fini yapmakta. ",
+            "eventId": "ethgunu",
+            "twitter": "@kaanuzdogan",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/kaan.jpeg?raw=true"
+        }
+    ],
+    "eventId": "ethgunu",
+    "playbackId": "",
+    "coverImage": "/sessions/ethgunu/al_konumas_thumbnail.png"
 }

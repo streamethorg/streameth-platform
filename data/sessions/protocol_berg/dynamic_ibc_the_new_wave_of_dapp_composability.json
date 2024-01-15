@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/fede_eEnXITT.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/062e9ze3b5zxna4r/index.m3u8",
+    "playbackId": "062e9ze3b5zxna4r",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/dynamic_ibc_the_new_wave_of_dapp_composability.jpg",
     "assetId": "062ee4c2-a873-4d55-9709-d98f2f0716fc"

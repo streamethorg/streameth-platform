@@ -1,1 +1,12 @@
-{"id":"hackathon_team_building","name":"Hackathon Team Building","description":"networking event to find teams, connect with teams","start":1694813400000,"end":1694815200000,"stageId":"oak_room_hacker_room","speakers":[],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/hackathon_team_building.jpg"}
+{
+    "id": "hackathon_team_building",
+    "name": "Hackathon Team Building",
+    "description": "networking event to find teams, connect with teams",
+    "start": 1694813400000,
+    "end": 1694815200000,
+    "stageId": "oak_room_hacker_room",
+    "speakers": [],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/hackathon_team_building.jpg"
+}

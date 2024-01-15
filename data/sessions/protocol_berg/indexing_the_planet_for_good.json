@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/i3_6xFXZDN.jpg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/b32d91r9aeqeia9e/index.m3u8",
+    "playbackId": "b32d91r9aeqeia9e",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/indexing_the_planet_for_good.jpg",
     "assetId": "b32d6e31-a9b6-4d4c-aaa8-d068f6bdfe2d"

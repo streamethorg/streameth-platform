@@ -18,8 +18,8 @@
         "start": 26084,
         "end": 27425
     },
-    "videoUrl": "https://lp-playback.com/hls/0fb12vcwoybl377i/index.m3u8",
     "eventId": "funding_the_commons_berlin_2023",
     "coverImage": "/sessions/funding_the_commons_berlin_2023/ecoweaving_collective_action_for_the_ecocommons.jpg",
-    "assetId": "0fb1fe04-47a2-49ab-a09a-627154086163"
+    "assetId": "0fb1fe04-47a2-49ab-a09a-627154086163",
+    "playbackId": "0fb12vcwoybl377i"
 }

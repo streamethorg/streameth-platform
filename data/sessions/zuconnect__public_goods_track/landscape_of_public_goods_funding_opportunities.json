@@ -13,8 +13,7 @@
             "eventId": "zuconnect__public_goods_track"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/c63f0hosqw47bwt2/index.m3u8",
-    "playbackId": "",
+    "playbackId": "c63f0hosqw47bwt2",
     "eventId": "zuconnect__public_goods_track",
     "coverImage": "/sessions/zuconnect__public_goods_track/landscape_of_public_goods_funding_opportunities.jpg",
     "assetId": "c63fa869-109e-4da7-98ac-2bc1fa4bada6"

@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/remco_h0ItXM4.jpeg"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/0b4308f1zwtwiz5u/index.m3u8",
+    "playbackId": "0b4308f1zwtwiz5u",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/worldcoin_maximally_private_digital_identity.jpg",
     "assetId": "0b438107-bf2a-4281-bc0d-702683d08551"

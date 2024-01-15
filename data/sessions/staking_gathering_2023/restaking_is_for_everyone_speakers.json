@@ -1,1 +1,21 @@
-{"id":"restaking_is_for_everyone_speakers","name":"Restaking is for Everyone\nSpeakers","description":"-","start":1699949100000,"end":1699950900000,"stageId":"connie","speakers":[{"id":"derek_rickert","name":"Derek Rickert","bio":"Blockswap","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/7/8d/14333841/avatar.jpg?d9e"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/restaking_is_for_everyone_speakers.jpg"}
+{
+    "id": "restaking_is_for_everyone_speakers",
+    "name": "Restaking is for Everyone\nSpeakers",
+    "description": "-",
+    "start": 1699949100000,
+    "end": 1699950900000,
+    "stageId": "connie",
+    "speakers": [
+        {
+            "id": "derek_rickert",
+            "name": "Derek Rickert",
+            "bio": "Blockswap",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/7/8d/14333841/avatar.jpg?d9e"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/restaking_is_for_everyone_speakers.jpg"
+}

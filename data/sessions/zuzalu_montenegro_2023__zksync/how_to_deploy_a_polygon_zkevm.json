@@ -1,20 +1,19 @@
 {
-  "id": "how_to_deploy_a_polygon_zkevm",
-  "name": "How to deploy a polygon zkEVM",
-  "description": "I'm sorry, but \"shore yeah\" is not a sufficient description for a video. Can you please provide more information or context?",
-  "start": "2023-04-19T14:30:00.000Z",
-  "end": "2023-04-19T16:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "eduardo",
-      "name": "Eduardo",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__zksync"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/9bcex86c0i4n1a79/index.m3u8",
-  "playbackId": "9bcex86c0i4n1a79",
-  "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "how_to_deploy_a_polygon_zkevm",
+    "name": "How to deploy a polygon zkEVM",
+    "description": "I'm sorry, but \"shore yeah\" is not a sufficient description for a video. Can you please provide more information or context?",
+    "start": "2023-04-19T14:30:00.000Z",
+    "end": "2023-04-19T16:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "eduardo",
+            "name": "Eduardo",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__zksync"
+        }
+    ],
+    "playbackId": "9bcex86c0i4n1a79",
+    "eventId": "zuzalu_montenegro_2023__zksync",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

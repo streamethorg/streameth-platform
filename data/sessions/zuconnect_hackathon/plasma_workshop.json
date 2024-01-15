@@ -13,8 +13,7 @@
             "eventId": "zuconnect_hackathon"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/3ad9an6213h01psz/index.m3u8",
-    "playbackId": "",
+    "playbackId": "3ad9an6213h01psz",
     "eventId": "zuconnect_hackathon",
     "coverImage": "/sessions/zuconnect_hackathon/plasma_workshop.jpg",
     "assetId": "3ad99613-ace2-40ca-9740-72f1cfb46aae"

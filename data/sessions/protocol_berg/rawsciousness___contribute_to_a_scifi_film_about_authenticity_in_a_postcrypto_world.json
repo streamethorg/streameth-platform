@@ -1,1 +1,27 @@
-{"id":"rawsciousness___contribute_to_a_scifi_film_about_authenticity_in_a_postcrypto_world","name":"Rawsciousness -  contribute to a sci-fi film about Authenticity in a Post-Crypto World","description":"Contribute to a sci-fi film exploring the meaning of Authenticity in a Post-Crypto World","start":1694793600000,"end":1694796000000,"stageId":"loft__workshop_0","speakers":[{"id":"grigoris","name":"Grigoris","bio":"Autonomously Interdependent\r\nBorn in 1973\r\nGrigoris","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/kkk_C5VKYvw.jpg"},{"id":"salim_virani","name":"Salim Virani","bio":"Buidling things that help people learn from each other.  salimvirani.com","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/Salim_acxdmul.jpeg"}],"playbackId":"","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/rawsciousness___contribute_to_a_scifi_film_about_authenticity_in_a_postcrypto_world.jpg"}
+{
+    "id": "rawsciousness___contribute_to_a_scifi_film_about_authenticity_in_a_postcrypto_world",
+    "name": "Rawsciousness -  contribute to a sci-fi film about Authenticity in a Post-Crypto World",
+    "description": "Contribute to a sci-fi film exploring the meaning of Authenticity in a Post-Crypto World",
+    "start": 1694793600000,
+    "end": 1694796000000,
+    "stageId": "loft__workshop_0",
+    "speakers": [
+        {
+            "id": "grigoris",
+            "name": "Grigoris",
+            "bio": "Autonomously Interdependent\r\nBorn in 1973\r\nGrigoris",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/kkk_C5VKYvw.jpg"
+        },
+        {
+            "id": "salim_virani",
+            "name": "Salim Virani",
+            "bio": "Buidling things that help people learn from each other.  salimvirani.com",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/Salim_acxdmul.jpeg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/rawsciousness___contribute_to_a_scifi_film_about_authenticity_in_a_postcrypto_world.jpg"
+}

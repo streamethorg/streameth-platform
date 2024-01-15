@@ -15,7 +15,6 @@
             "photo": "https://pbs.twimg.com/profile_images/1128648389749563393/i11-DPwB_400x400.png"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/be49fqrnbso7tg7x/index.m3u8",
     "playbackId": "be49fqrnbso7tg7x",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/namespace_storage_for_now_and_for_a_verkle_evm_thumbnail.png",

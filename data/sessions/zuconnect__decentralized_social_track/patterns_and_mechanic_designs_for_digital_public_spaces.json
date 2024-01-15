@@ -31,8 +31,7 @@
             "eventId": "zuconnect__decentralized_social_track"
         }
     ],
-    "videoUrl": "https://lp-playback.com/hls/eb1aycnktsjdse2z/index.m3u8",
-    "playbackId": "",
+    "playbackId": "eb1aycnktsjdse2z",
     "eventId": "zuconnect__decentralized_social_track",
     "coverImage": "/sessions/zuconnect__decentralized_social_track/patterns_and_mechanic_designs_for_digital_public_spaces.jpg",
     "assetId": "eb1aa228-108d-4483-bb2d-44f62ef8ddac"

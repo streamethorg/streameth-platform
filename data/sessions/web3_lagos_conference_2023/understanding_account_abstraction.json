@@ -1,1 +1,19 @@
-{"id":"understanding_account_abstraction","name":"Understanding Account Abstraction","description":"","start":1693487700000,"end":1693490400000,"stageId":"workshop_room_2","speakers":[{"id":"nonse_odion","name":"Nonse Odion","bio":"Smart Contract Security Researcher","eventId":"web3_lagos_conference_2023"}],"playbackId":"","eventId":"web3_lagos_conference_2023","coverImage":"/sessions/web3_lagos_conference_2023/understanding_account_abstraction.jpg"}
+{
+    "id": "understanding_account_abstraction",
+    "name": "Understanding Account Abstraction",
+    "description": "",
+    "start": 1693487700000,
+    "end": 1693490400000,
+    "stageId": "workshop_room_2",
+    "speakers": [
+        {
+            "id": "nonse_odion",
+            "name": "Nonse Odion",
+            "bio": "Smart Contract Security Researcher",
+            "eventId": "web3_lagos_conference_2023"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "web3_lagos_conference_2023",
+    "coverImage": "/sessions/web3_lagos_conference_2023/understanding_account_abstraction.jpg"
+}

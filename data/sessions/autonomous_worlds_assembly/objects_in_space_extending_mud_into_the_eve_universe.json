@@ -1,21 +1,21 @@
 {
-  "id": "objects_in_space_extending_mud_into_the_eve_universe",
-  "name": "Objects in Space: Extending MUD Into the EVE Universe",
-  "description": "In this session, we will discuss CCP Games's forthcoming Smart Object Framework—a MUD-based development framework and abstraction layer designed for defining and interfacing with the digital physics of the EVE Universe. We'll explore the advantages and trade-offs associated with constructing a maximally extensible and composable system while ensuring a secure environment and well-defined set of supported behaviors for interactions within the EVE Universe.",
-  "start": 1700055000000,
-  "end": 1700056800000,
-  "stageId": "emirgan_2",
-  "speakers": [
-    {
-      "id": "terry_wilkinson",
-      "name": "Terry Wilkinson",
-      "bio": "Terry Wilkinson is principal blockchain engineer at CCP Games, where he is working on the research, development, and design of components for its upcoming AAA blockchain game, Project Awakening. ",
-      "eventId": "autonomous_worlds_assembly",
-      "twitter": "",
-      "photo": "https://drive.google.com/uc?id=1tNdcHQllsQhFyjrGgM9io_xuaMC1MnL_"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "autonomous_worlds_assembly",
-  "coverImage": "/sessions/autonomous_worlds_assembly/objects_in_space_extending_mud_into_the_eve_universe_thumbnail.png"
+    "id": "objects_in_space_extending_mud_into_the_eve_universe",
+    "name": "Objects in Space: Extending MUD Into the EVE Universe",
+    "description": "In this session, we will discuss CCP Games's forthcoming Smart Object Framework\u2014a MUD-based development framework and abstraction layer designed for defining and interfacing with the digital physics of the EVE Universe. We'll explore the advantages and trade-offs associated with constructing a maximally extensible and composable system while ensuring a secure environment and well-defined set of supported behaviors for interactions within the EVE Universe.",
+    "start": 1700055000000,
+    "end": 1700056800000,
+    "stageId": "emirgan_2",
+    "speakers": [
+        {
+            "id": "terry_wilkinson",
+            "name": "Terry Wilkinson",
+            "bio": "Terry Wilkinson is principal blockchain engineer at CCP Games, where he is working on the research, development, and design of components for its upcoming AAA blockchain game, Project Awakening. ",
+            "eventId": "autonomous_worlds_assembly",
+            "twitter": "",
+            "photo": "https://drive.google.com/uc?id=1tNdcHQllsQhFyjrGgM9io_xuaMC1MnL_"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "autonomous_worlds_assembly",
+    "coverImage": "/sessions/autonomous_worlds_assembly/objects_in_space_extending_mud_into_the_eve_universe_thumbnail.png"
 }

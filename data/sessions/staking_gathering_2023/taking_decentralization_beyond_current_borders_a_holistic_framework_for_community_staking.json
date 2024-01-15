@@ -1,1 +1,21 @@
-{"id":"taking_decentralization_beyond_current_borders_a_holistic_framework_for_community_staking","name":"Taking decentralization beyond current borders: A holistic framework for community staking","description":"-","start":1699965600000,"end":1699967700000,"stageId":"connie","speakers":[{"id":"lanski","name":"Lanski","bio":"DAppNode\nCOO","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/7/c3/14329499/avatar.jpg?8f7"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/taking_decentralization_beyond_current_borders_a_holistic_framework_for_community_staking.jpg"}
+{
+    "id": "taking_decentralization_beyond_current_borders_a_holistic_framework_for_community_staking",
+    "name": "Taking decentralization beyond current borders: A holistic framework for community staking",
+    "description": "-",
+    "start": 1699965600000,
+    "end": 1699967700000,
+    "stageId": "connie",
+    "speakers": [
+        {
+            "id": "lanski",
+            "name": "Lanski",
+            "bio": "DAppNode\nCOO",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/7/c3/14329499/avatar.jpg?8f7"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/taking_decentralization_beyond_current_borders_a_holistic_framework_for_community_staking.jpg"
+}

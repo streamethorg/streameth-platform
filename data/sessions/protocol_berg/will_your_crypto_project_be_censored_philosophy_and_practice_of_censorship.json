@@ -14,8 +14,7 @@
             "photo": "https://speak.protocol.berlin/media/avatars/costanza_I2pVX5J.png"
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/34b4d4jxr9gd1f6n/index.m3u8",
+    "playbackId": "34b4d4jxr9gd1f6n",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/will_your_crypto_project_be_censored_philosophy_and_practice_of_censorship.jpg",
     "assetId": "34b4fa67-757b-4dbc-b3d5-d85e0795af76"

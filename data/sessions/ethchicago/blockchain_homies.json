@@ -1,1 +1,20 @@
-{"id":"blockchain_homies","name":"Blockchain Homies","description":"The music showcase will feature a variety of artists from the crypto music community. The music will be a mixture of genres and soundscapes, With live performance sets and streaming from the voxels metaverse.","start":1694908800000,"end":1694916000000,"stageId":"michigan_stage__creatives__trad_business_","speakers":[{"id":"xtinct","name":"XTincT","bio":"On-Chain Recording artist and creative director","eventId":"ethchicago","photo":"https://pretalx.com/media/avatars/1ed46c9c2a0b56b9a2d7ae306a835467_K5xFhkk.jpg"}],"playbackId":"","eventId":"ethchicago","coverImage":"/sessions/ethchicago/blockchain_homies.jpg"}
+{
+    "id": "blockchain_homies",
+    "name": "Blockchain Homies",
+    "description": "The music showcase will feature a variety of artists from the crypto music community. The music will be a mixture of genres and soundscapes, With live performance sets and streaming from the voxels metaverse.",
+    "start": 1694908800000,
+    "end": 1694916000000,
+    "stageId": "michigan_stage__creatives__trad_business_",
+    "speakers": [
+        {
+            "id": "xtinct",
+            "name": "XTincT",
+            "bio": "On-Chain Recording artist and creative director",
+            "eventId": "ethchicago",
+            "photo": "https://pretalx.com/media/avatars/1ed46c9c2a0b56b9a2d7ae306a835467_K5xFhkk.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "ethchicago",
+    "coverImage": "/sessions/ethchicago/blockchain_homies.jpg"
+}

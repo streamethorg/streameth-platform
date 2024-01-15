@@ -1,1 +1,21 @@
-{"id":"stereum_become_a_node_runner__decentralize_with_determination__take_action_in_the_networks_most_crucial_role","name":"Stereum, become a Node Runner & decentralize with determination - take action in the networks most crucial role","description":"Learn how you can play a crucial role in the ever-evolving landscape of blockchain technology and run your own Ethereum Node. Stereum, the Ethereum Node Setup & Manager, stands at the forefront of this revolution.\nThis talk will provide an in-depth look into the in development process behind Stereum, showcase its current feature set, shedding light on its significance in fortifying the Ethereum network's resilience and promoting decentralization.\nAs we delve into its current contributions, we'll also cast a vision for the future, outlining the ambitious plans in store for Stereum's continued growth and enhancement.","start":1699883400000,"end":1699884900000,"stageId":"connie","speakers":[{"id":"stefan_kobrc","name":"Stefan Kobrc","bio":"Stereum\nFounder","eventId":"staking_gathering_2023","twitter":"","photo":"https://avatars.sched.co/1/e2/19282694/avatar.jpg?9a6"}],"playbackId":"","eventId":"staking_gathering_2023","coverImage":"/sessions/staking_gathering_2023/stereum_become_a_node_runner__decentralize_with_determination__take_action_in_the_networks_most_crucial_role.jpg"}
+{
+    "id": "stereum_become_a_node_runner__decentralize_with_determination__take_action_in_the_networks_most_crucial_role",
+    "name": "Stereum, become a Node Runner & decentralize with determination - take action in the networks most crucial role",
+    "description": "Learn how you can play a crucial role in the ever-evolving landscape of blockchain technology and run your own Ethereum Node. Stereum, the Ethereum Node Setup & Manager, stands at the forefront of this revolution.\nThis talk will provide an in-depth look into the in development process behind Stereum, showcase its current feature set, shedding light on its significance in fortifying the Ethereum network's resilience and promoting decentralization.\nAs we delve into its current contributions, we'll also cast a vision for the future, outlining the ambitious plans in store for Stereum's continued growth and enhancement.",
+    "start": 1699883400000,
+    "end": 1699884900000,
+    "stageId": "connie",
+    "speakers": [
+        {
+            "id": "stefan_kobrc",
+            "name": "Stefan Kobrc",
+            "bio": "Stereum\nFounder",
+            "eventId": "staking_gathering_2023",
+            "twitter": "",
+            "photo": "https://avatars.sched.co/1/e2/19282694/avatar.jpg?9a6"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "staking_gathering_2023",
+    "coverImage": "/sessions/staking_gathering_2023/stereum_become_a_node_runner__decentralize_with_determination__take_action_in_the_networks_most_crucial_role.jpg"
+}

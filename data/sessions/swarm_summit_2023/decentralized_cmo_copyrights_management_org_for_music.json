@@ -1,20 +1,19 @@
 {
-  "id": "decentralized_cmo_copyrights_management_org_for_music",
-  "name": "Decentralized CMO (Copyrights Management Org) for Music",
-  "description": "Since 2014, the management of copyright in the EU has been formally freed from state monopolies. How can we design a distributed registry and payout system that harness web3 tech?",
-  "start": "2023-06-22T14:10:00.000Z",
-  "end": "2023-06-22T14:25:00.000Z",
-  "stageId": "main",
-  "speakers": [
-    {
-      "id": "matteo_alessio_tambussi",
-      "name": "Matteo Alessio Tambussi",
-      "bio": "Musician, Linguistic Passionate, Web3 educator and Project Dev.",
-      "eventId": "swarm_summit_2023",
-      "photo": "https://summit.ethswarm.org/media/avatars/gY1XlUk-_400x400_yuVCSiq.jpeg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/66277n8e539l7g5m/index.m3u8",
-  "playbackId": "66277n8e539l7g5m",
-  "eventId": "swarm_summit_2023"
+    "id": "decentralized_cmo_copyrights_management_org_for_music",
+    "name": "Decentralized CMO (Copyrights Management Org) for Music",
+    "description": "Since 2014, the management of copyright in the EU has been formally freed from state monopolies. How can we design a distributed registry and payout system that harness web3 tech?",
+    "start": "2023-06-22T14:10:00.000Z",
+    "end": "2023-06-22T14:25:00.000Z",
+    "stageId": "main",
+    "speakers": [
+        {
+            "id": "matteo_alessio_tambussi",
+            "name": "Matteo Alessio Tambussi",
+            "bio": "Musician, Linguistic Passionate, Web3 educator and Project Dev.",
+            "eventId": "swarm_summit_2023",
+            "photo": "https://summit.ethswarm.org/media/avatars/gY1XlUk-_400x400_yuVCSiq.jpeg"
+        }
+    ],
+    "playbackId": "66277n8e539l7g5m",
+    "eventId": "swarm_summit_2023"
 }

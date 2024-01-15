@@ -1,21 +1,21 @@
 {
-  "id": "evm_ethereum__webassembly_with_arbitrum_stylus",
-  "name": "EVM+: Ethereum + WebAssembly With Arbitrum Stylus",
-  "description": "Arbitrum Stylus is a new technology that enables WebAssembly smart contracts on Arbitrum chains, making them fully interoperable with EVM. Developers can now write smart contracts in programming languages such as Rust and C++, and be fully equivalent with EVM Solidity code. Stylus slashes fees and enables use cases previously impossible on EVM chains. Instead of picking an EVM runtime vs. alternatives, Stylus makes both of them possible on the same chain. EVM+\n\nThe talk goes into detail as to how we made Stylus happen, exploring some of its internals and how we fraud prove over WASMs",
-  "start": 1699959000000,
-  "end": 1699959900000,
-  "stageId": "emirgan_1",
-  "speakers": [
-    {
-      "id": "raul_jordan",
-      "name": "Raul Jordan",
-      "bio": "Raul Jordan is a senior software engineer at Offchain Labs and a maintainer of the Prysm Ethereum consensus client. He's an avid fan of programming languages and onboarding a lot more developers outside of blockchain into the exciting world of Ethereum technology.",
-      "eventId": "evm_summit",
-      "twitter": "",
-      "photo": "https://evmsummit.org/images/speakers/raul_jordan.jpg"
-    }
-  ],
-  "playbackId": "",
-  "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/evm_ethereum__webassembly_with_arbitrum_stylus_thumbnail.png"
+    "id": "evm_ethereum__webassembly_with_arbitrum_stylus",
+    "name": "EVM+: Ethereum + WebAssembly With Arbitrum Stylus",
+    "description": "Arbitrum Stylus is a new technology that enables WebAssembly smart contracts on Arbitrum chains, making them fully interoperable with EVM. Developers can now write smart contracts in programming languages such as Rust and C++, and be fully equivalent with EVM Solidity code. Stylus slashes fees and enables use cases previously impossible on EVM chains. Instead of picking an EVM runtime vs. alternatives, Stylus makes both of them possible on the same chain. EVM+\n\nThe talk goes into detail as to how we made Stylus happen, exploring some of its internals and how we fraud prove over WASMs",
+    "start": 1699959000000,
+    "end": 1699959900000,
+    "stageId": "emirgan_1",
+    "speakers": [
+        {
+            "id": "raul_jordan",
+            "name": "Raul Jordan",
+            "bio": "Raul Jordan is a senior software engineer at Offchain Labs and a maintainer of the Prysm Ethereum consensus client. He's an avid fan of programming languages and onboarding a lot more developers outside of blockchain into the exciting world of Ethereum technology.",
+            "eventId": "evm_summit",
+            "twitter": "",
+            "photo": "https://evmsummit.org/images/speakers/raul_jordan.jpg"
+        }
+    ],
+    "playbackId": "",
+    "eventId": "evm_summit",
+    "coverImage": "/sessions/evm_summit/evm_ethereum__webassembly_with_arbitrum_stylus_thumbnail.png"
 }

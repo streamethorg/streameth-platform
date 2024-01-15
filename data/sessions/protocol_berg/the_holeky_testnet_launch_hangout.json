@@ -28,8 +28,7 @@
             "photo": ""
         }
     ],
-    "playbackId": "",
-    "videoUrl": "https://lp-playback.com/hls/c77e4lsc6w83eita/index.m3u8",
+    "playbackId": "c77e4lsc6w83eita",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/the_holeky_testnet_launch_hangout.jpg",
     "assetId": "c77e393e-5791-436a-a78a-6d85bbe19531"

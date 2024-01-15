@@ -1,32 +1,31 @@
 {
-  "id": "longevity_zero_to_one_longevity_landscape__industry",
-  "name": "Longevity Zero to One: Longevity Landscape / Industry",
-  "description": "Session 3: Longevity Landscape / Industry\n\nThis session provides an overview of different players in longevity, the roles they play, how they help and how they fall short.\n\nTopics:\n- Academia\n- NGOs\n- Governments\n- Pharma\n- Startups\n- Funding\n\nAbout the course\n\nLongevity Zero to One is a course designed to get you from zero biology to a general understanding of the intervention landscape and bottlenecks to progress. We on helping participants apply their existing skillsets to high-impact areas in longevity.\n\nAttending all sessions is highly recommended.\n\nIf you don’t have a biology background, we highly recommend attending the 1st session (General Biology) and 2nd session (Aging Biology). If you do have a background in biology, feel free to skip the 1st session!",
-  "start": "2023-05-07T13:00:00.000Z",
-  "end": "2023-05-07T14:00:00.000Z",
-  "stageId": "dome",
-  "speakers": [
-    {
-      "id": "cat_thu",
-      "name": "Cat Thu",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_01"
-    },
-    {
-      "id": "ksenia_winslow",
-      "name": "Ksenia Winslow",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_01"
-    },
-    {
-      "id": "sergio_ruiz",
-      "name": "Sergio Ruiz",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__longevity_01"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/7376d7x6ao9bu0zl/index.m3u8",
-  "playbackId": "7376d7x6ao9bu0zl",
-  "eventId": "zuzalu_montenegro_2023__longevity_01",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "longevity_zero_to_one_longevity_landscape__industry",
+    "name": "Longevity Zero to One: Longevity Landscape / Industry",
+    "description": "Session 3: Longevity Landscape / Industry\n\nThis session provides an overview of different players in longevity, the roles they play, how they help and how they fall short.\n\nTopics:\n- Academia\n- NGOs\n- Governments\n- Pharma\n- Startups\n- Funding\n\nAbout the course\n\nLongevity Zero to One is a course designed to get you from zero biology to a general understanding of the intervention landscape and bottlenecks to progress. We on helping participants apply their existing skillsets to high-impact areas in longevity.\n\nAttending all sessions is highly recommended.\n\nIf you don\u2019t have a biology background, we highly recommend attending the 1st session (General Biology) and 2nd session (Aging Biology). If you do have a background in biology, feel free to skip the 1st session!",
+    "start": "2023-05-07T13:00:00.000Z",
+    "end": "2023-05-07T14:00:00.000Z",
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "cat_thu",
+            "name": "Cat Thu",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_01"
+        },
+        {
+            "id": "ksenia_winslow",
+            "name": "Ksenia Winslow",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_01"
+        },
+        {
+            "id": "sergio_ruiz",
+            "name": "Sergio Ruiz",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__longevity_01"
+        }
+    ],
+    "playbackId": "7376d7x6ao9bu0zl",
+    "eventId": "zuzalu_montenegro_2023__longevity_01",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }

@@ -1,20 +1,19 @@
 {
-  "id": "deploy_your_own_onchain_zkml_models_with_ezkl",
-  "name": "Deploy your own on-chain zkml models with ezkl",
-  "description": "of like a pipeline for running machine learning models on the blockchain using zero-knowledge proofs. The goal is to make it possible for smart contracts to exercise judgments and recognize individuals, among other applications. Currently, off-chain ML AI models are centralized and require trust in the person running the model, while smart contracts are decentralized but too slow and not scalable for running large ML models. The solution is to use ZK techniques to preserve trustlessness, decentralization, and scalability. The tool is being built to make it easy to run familiar Python tooling and access existing ML models, making it possible to transition from off-chain to on-chain organizations. The video includes a demonstration of a Python model being exported and turned into a specific circuit that can be run on the blockchain.",
-  "start": "2023-04-17T13:00:00.000Z",
-  "end": "2023-04-17T14:30:00.000Z",
-  "stageId": "ballroom",
-  "speakers": [
-    {
-      "id": "jason_morton",
-      "name": "Jason Morton",
-      "bio": "No description",
-      "eventId": "zuzalu_montenegro_2023__zksync"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/44123b1yqgs6e33l/index.m3u8",
-  "playbackId": "44123b1yqgs6e33l",
-  "eventId": "zuzalu_montenegro_2023__zksync",
-  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
+    "id": "deploy_your_own_onchain_zkml_models_with_ezkl",
+    "name": "Deploy your own on-chain zkml models with ezkl",
+    "description": "of like a pipeline for running machine learning models on the blockchain using zero-knowledge proofs. The goal is to make it possible for smart contracts to exercise judgments and recognize individuals, among other applications. Currently, off-chain ML AI models are centralized and require trust in the person running the model, while smart contracts are decentralized but too slow and not scalable for running large ML models. The solution is to use ZK techniques to preserve trustlessness, decentralization, and scalability. The tool is being built to make it easy to run familiar Python tooling and access existing ML models, making it possible to transition from off-chain to on-chain organizations. The video includes a demonstration of a Python model being exported and turned into a specific circuit that can be run on the blockchain.",
+    "start": "2023-04-17T13:00:00.000Z",
+    "end": "2023-04-17T14:30:00.000Z",
+    "stageId": "ballroom",
+    "speakers": [
+        {
+            "id": "jason_morton",
+            "name": "Jason Morton",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__zksync"
+        }
+    ],
+    "playbackId": "44123b1yqgs6e33l",
+    "eventId": "zuzalu_montenegro_2023__zksync",
+    "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg"
 }
