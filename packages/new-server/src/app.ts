@@ -81,7 +81,11 @@ class App {
   }
 
   private initializeSwagger() {
-    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    this.app.use(
+      '/docs',
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocument),
+    );
   }
 
   private initializeErrorHandling() {

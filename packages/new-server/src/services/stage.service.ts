@@ -13,11 +13,6 @@ export default class StageService {
   }
 
   async create(data: IStage): Promise<IStage> {
-    const findStage = await this.controller.store.findOne(
-      { name: data.name },
-      `${this.path}/${data.eventId}`,
-    );
-    if (findStage) throw new HttpException(409, 'Stage name already exists');
     return this.controller.store.create(
       data.name,
       { ...data, entity: generateId(data.name) },
