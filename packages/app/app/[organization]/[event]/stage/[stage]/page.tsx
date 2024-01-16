@@ -47,7 +47,7 @@ export default async function Stage({ params }: EventPageProps) {
   }
 
   return (
-    <div className="p-2 h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
+    <div className="bg-accent   p-2 h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
       <div className="flex flex-col w-full h-full z-40 lg:w-[70%] top-[54px] lg:p-4 lg:pr-2">
         <Player
           streamId={stage.streamSettings.streamId}

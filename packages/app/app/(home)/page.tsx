@@ -3,7 +3,7 @@ import UpcomingEvents from './components/UpcomingEvents'
 import Videos from '../../components/misc/Videos'
 import { Suspense } from 'react'
 import { fetchOrganizations } from '@/lib/data'
-import OrganizationStrip from './components/OrganiationStrip'
+import OrganizationStrip from './components/OrganizationStrip'
 import {
   CardDescription,
   CardTitle,
