@@ -10,7 +10,10 @@ import SpeakerController from 'streameth-server/controller/speaker'
 import OrganizationController from 'streameth-server/controller/organization'
 import { NavBarProps, IPagination } from './types'
 import FuzzySearch from 'fuzzy-search';
+import { unstable_noStore as noStore } from 'next/cache';
+
 export async function fetchOrganizations(): Promise<IOrganization[]> {
+  noStore();
   try {
     const organizationController = new OrganizationController()
     const data = await organizationController.getAllOrganizations()
