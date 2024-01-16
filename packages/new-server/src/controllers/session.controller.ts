@@ -63,6 +63,7 @@ export class SessionController extends Controller {
    * @Summary Get all sessions
    */
   @SuccessResponse('200')
+  @Get()
   async getAllSessions(): Promise<IStandardResponse<Array<ISession>>> {
     const sessions = await this.sessionService.getAll();
     return SendApiResponse('sessions fetched', sessions);
