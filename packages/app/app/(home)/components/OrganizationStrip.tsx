@@ -17,7 +17,6 @@ export default async function OrganizationStrip({
       limit: 4,
     })
   ).sessions
-
   if (videos.length === 0) return false
   return (
     <div key="organization.id" className="bg-white flex flex-col">

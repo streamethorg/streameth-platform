@@ -32,7 +32,6 @@ export async function fetchOrganization ({
 }
 
 export async function fetchOrganizations(): Promise<IOrganization[]> {
-  noStore();
   try {
     const organizationController = new OrganizationController()
     const data = await organizationController.getAllOrganizations()
