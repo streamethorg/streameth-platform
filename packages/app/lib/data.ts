@@ -43,7 +43,7 @@ export async function fetchEvents({
     return data.map((event) => event.toJson())
   } catch (e) {
     console.log(e)
-    throw 'Error fetching events'
+    throw 'Error fetching events' + e
   }
 }
 
