@@ -57,7 +57,7 @@ const SessionInfoBox = ({
         </div>
       </div>
       <CardContent className="bg-background rounded-md p-4">
-        {description && (
+        {description !== '' && (
           <div
             className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
               isOpened ? 'max-h-96' : 'max-h-10'

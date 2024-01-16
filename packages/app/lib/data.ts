@@ -12,6 +12,25 @@ import { NavBarProps, IPagination } from './types'
 import FuzzySearch from 'fuzzy-search';
 import { unstable_noStore as noStore } from 'next/cache';
 
+
+export async function fetchOrganization ({
+  organization
+}: {
+  organization: string
+}): Promise<IOrganization | null > {
+  try {
+    const organizationController = new OrganizationController()
+    const data = await organizationController.getOrganization(organization)
+    if (!data) {
+      throw 'Organization not found'
+    }
+    return data.toJson()
+  } catch (e) {
+    console.log(e)
+    return null
+  }
+}
+
 export async function fetchOrganizations(): Promise<IOrganization[]> {
   noStore();
   try {
