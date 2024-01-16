@@ -30,7 +30,19 @@ export default class EventService {
   }
 
   async get(eventId: string): Promise<IEvent> {
-    const findEvent = await this.controller.store.findById(eventId);
+    let id = '';
+    const isObjectId = /[0-9a-f]{24}/i.test(eventId);
+    const isPathId = /events-[a-zA-Z0-9\-_]+/.test(eventId);
+    if (isObjectId) {
+      id = eventId;
+    }
+    if (isPathId) {
+      id = eventId.replace('-', '/');
+    }
+    if (!isObjectId && !isPathId) {
+      return await this.controller.store.findOne({ entity: eventId });
+    }
+    const findEvent = await this.controller.store.findById(id);
     if (!findEvent) throw new HttpException(404, 'Event not found');
     return findEvent;
   }
