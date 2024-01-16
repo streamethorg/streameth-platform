@@ -20,7 +20,7 @@ export interface IPlugins {
   disableChat: boolean;
 }
 
-export interface IEvent extends Document {
+export interface IEvent {
   name: string;
   description: string;
   start: Date;
@@ -35,11 +35,13 @@ export interface IEvent extends Document {
   eventCover?: string;
   archiveMode?: boolean;
   website?: string;
-  timezone: string;
+  timezone?: string;
   accentColor?: string;
   unlisted?: boolean;
   dataExporter?: IDataExporter[];
   enableVideoDownloader?: boolean;
   plugins?: IPlugins;
-  slug: string;
+  slug?: string;
+  entity?: string;
 }
+export interface IEventModel extends IEvent, Document {}

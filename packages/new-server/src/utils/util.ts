@@ -22,6 +22,14 @@ export const isEmpty = (value: string | number | object): boolean => {
     return false;
   }
 };
+export const generateId = (key: string) => {
+  // all lowercase, no spaces, no special characters
+  return key
+    ?.trim()
+    .replace(/\s/g, '_')
+    .replace(/[^\w\s]/g, '')
+    .toLowerCase();
+};
 
 export const PUBLIC_PATH = '../../../public';
 export const IMAGE_BASE_PATH = path.join(process.cwd(), 'public');

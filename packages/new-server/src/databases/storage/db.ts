@@ -1,9 +1,7 @@
 import { IStorageController } from '@interfaces/storage.interface';
 import mongoose, { Types } from 'mongoose';
 
-export default class DB<T extends mongoose.Document>
-  implements IStorageController<T>
-{
+export default class DB<T> implements IStorageController<T> {
   private model: mongoose.Model<T>;
 
   constructor(model: mongoose.Model<T>) {

@@ -6,9 +6,11 @@
     "ext": "js,ts,json",
     "ignore": [
         "src/logs/*",
+        "src/swagger/*",
+        "src/routes/*",
         "src/**/*.{spec,test}.ts"
     ],
-    "exec": "node -r esbuild-runner/register ./src/server.ts --env=development",
+    "exec": "yarn generate:routes && node -r esbuild-runner/register ./src/server.ts --env=development",
     "env": {
         "NODE_ENV": "development"
     }

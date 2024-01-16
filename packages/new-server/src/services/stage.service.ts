@@ -2,6 +2,7 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
+import { generateId } from '@utils/util';
 
 export default class StageService {
   private path: string;
@@ -19,7 +20,7 @@ export default class StageService {
     if (findStage) throw new HttpException(409, 'Stage name already exists');
     return this.controller.store.create(
       data.name,
-      data,
+      { ...data, entity: generateId(data.name) },
       `${this.path}/${data.eventId}`,
     );
   }

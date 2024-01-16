@@ -15,11 +15,11 @@ export interface IPlayback {
   duration: number;
 }
 
-export class ISession extends Document {
+export interface ISession {
   name: string;
   description: string;
-  start: number;
-  end: number;
+  start: string;
+  end: string;
   stageId: Types.ObjectId | string;
   speakers: ISpeaker[];
   source?: ISource;
@@ -29,5 +29,7 @@ export class ISession extends Document {
   eventId: Types.ObjectId | string;
   track?: string[];
   coverImage?: string;
-  slug: string;
+  slug?: string;
 }
+
+export interface ISessionModel extends ISession, Document {}

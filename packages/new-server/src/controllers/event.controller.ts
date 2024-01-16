@@ -1,64 +1,78 @@
+import { IEvent } from '../interfaces/event.interface';
 import EventService from '@services/event.service';
-import { SendApiResponse } from '@utils/api.response';
-import { Request, Response, NextFunction } from 'express';
-
-export default class EventController {
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import {
+  Route,
+  Get,
+  Controller,
+  Post,
+  Put,
+  Body,
+  SuccessResponse,
+  Path,
+  Delete,
+  Tags,
+} from 'tsoa';
+import { EventDto } from '@dtos/event.dto';
+@Tags('Event')
+@Route('events')
+export class EventController extends Controller {
   private eventService = new EventService();
-  createEvent = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const event = await this.eventService.create(req.body);
-      return SendApiResponse(res, 201, 'event created', event);
-    } catch (e) {
-      next(e);
-    }
-  };
 
-  editEvent = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const event = await this.eventService.update(req.params.id, req.body);
-      return SendApiResponse(res, 200, 'event updated', event);
-    } catch (e) {
-      next(e);
-    }
-  };
+  /**
+   * @summary Creates Event
+   */
+  @SuccessResponse('201')
+  @Post('')
+  async createEvent(
+    @Body() body: EventDto,
+  ): Promise<IStandardResponse<IEvent>> {
+    const event = await this.eventService.create(body);
+    return SendApiResponse('event created', event);
+  }
 
-  getEventById = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const event = await this.eventService.get(req.params.id);
-      return SendApiResponse(res, 200, 'event fetched', event);
-    } catch (e) {
-      next(e);
-    }
-  };
+  /**
+   * @summary Update Event
+   */
+  @SuccessResponse('200')
+  @Put('{eventId}')
+  async editEvent(
+    @Path() eventId: string,
+    @Body() body: EventDto,
+  ): Promise<IStandardResponse<IEvent>> {
+    const event = await this.eventService.update(eventId, body);
+    return SendApiResponse('event udpated', event);
+  }
 
-  getAllEvents = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const events = await this.eventService.getAll();
-      return SendApiResponse(res, 200, 'events fetched', events);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get('{eventId}')
+  async getEventById(
+    @Path() eventId: string,
+  ): Promise<IStandardResponse<IEvent>> {
+    const event = await this.eventService.get(eventId);
+    return SendApiResponse('event fetched', event);
+  }
 
-  getAllEventsForOrganization = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const events = await this.eventService.findAllOwnedEvents(req.params.id);
-      return SendApiResponse(res, 200, 'events fetched', events);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get()
+  async getAllEvents(): Promise<IStandardResponse<Array<IEvent>>> {
+    const events = await this.eventService.getAll();
+    return SendApiResponse('events fetched', events);
+  }
 
-  deleteEvent = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const event = await this.eventService.deleteOne(req.params.id);
-      return SendApiResponse(res, 200, 'deleted', event);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get('organization/{organizationId}')
+  async getAllEventsForOrganization(
+    @Path() organizationId: string,
+  ): Promise<IStandardResponse<Array<IEvent>>> {
+    const events = await this.eventService.findAllOwnedEvents(organizationId);
+    return SendApiResponse('events fetched', events);
+  }
+
+  @SuccessResponse('200')
+  @Delete('{eventId}')
+  async deleteEvent(@Path() eventId: string): Promise<IStandardResponse<void>> {
+    await this.eventService.deleteOne(eventId);
+    return SendApiResponse('deleted');
+  }
 }

@@ -4,9 +4,7 @@ import mongoose from 'mongoose';
 import { IStorageController } from '@interfaces/storage.interface';
 
 export type StoreType = 'fs' | 'db';
-export default class BaseController<
-  T extends mongoose.Document<any, any, any>,
-> {
+export default class BaseController<T> {
   private storage: IStorageController<T>;
 
   constructor(storeType: StoreType, model?: mongoose.Model<T>) {
