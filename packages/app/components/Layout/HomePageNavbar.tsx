@@ -43,8 +43,8 @@ const HomePageNavbar = () => {
     },
 
     {
-      name: 'Case studies',
-      href: '/pricing',
+      name: 'StreamETH Studio',
+      href: 'https://info.streameth.org/services',
       bgColor: 'bg-muted text-background',
     },
     {

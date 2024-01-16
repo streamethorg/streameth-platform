@@ -18,6 +18,8 @@ const Loading = () => {
   return <Skeleton className=" h-96 w-full bg-muted" />
 }
 
+export const revalidate = 3600 // 1 day
+
 export default async function Home() {
   const organizations = await fetchOrganizations()
 
