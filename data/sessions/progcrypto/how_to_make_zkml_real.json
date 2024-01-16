@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/67f32rai2gl175hq/index.m3u8",
-    "playbackId": "67f32rai2gl175hq",
     "eventId": "progcrypto",
     "track": "Cryptography in the Wild",
     "coverImage": "/sessions/progcrypto/how_to_make_zkml_real_thumbnail.png",

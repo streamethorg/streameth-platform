@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/c05e3gevmslnqbpq/index.m3u8",
-    "playbackId": "c05e3gevmslnqbpq",
     "eventId": "progcrypto",
     "track": "Cryptography and Society",
     "coverImage": "/sessions/progcrypto/highdimensional_wayfinding_thumbnail.png",

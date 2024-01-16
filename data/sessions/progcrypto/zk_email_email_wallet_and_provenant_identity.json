@@ -24,7 +24,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/2c57ku6ozr0tlb6o/index.m3u8",
-    "playbackId": "2c57ku6ozr0tlb6o",
     "eventId": "progcrypto",
     "track": "Cryptography in the Wild",
     "coverImage": "/sessions/progcrypto/zk_email_email_wallet_and_provenant_identity_thumbnail.png",
