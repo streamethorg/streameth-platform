@@ -3,7 +3,7 @@ import UpcomingEvents from './components/UpcomingEvents'
 import Videos from '../../components/misc/Videos'
 import { Suspense } from 'react'
 import { fetchOrganizations } from '@/lib/data'
-import OrganizationStrip from './components/OrganiationStrip'
+import OrganizationStrip from './components/OrganizationStrip'
 import {
   CardDescription,
   CardTitle,
@@ -17,6 +17,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 const Loading = () => {
   return <Skeleton className=" h-96 w-full bg-muted" />
 }
+
+export const revalidate = 3600 // 1 day
 
 export default async function Home() {
   const organizations = await fetchOrganizations()

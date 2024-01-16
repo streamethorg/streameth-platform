@@ -36,6 +36,7 @@ export default class Organization {
   accentColor: string
 
   constructor({
+    id,
     name,
     description,
     url,
@@ -43,7 +44,7 @@ export default class Organization {
     location,
     accentColor = '#FFF',
   }: Omit<IOrganization, 'id'> & { id?: string }) {
-    this.id = generateId(name)
+    this.id = id ?? generateId(name)
     this.name = name
     this.description = description
     this.url = url

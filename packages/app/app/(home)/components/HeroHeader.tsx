@@ -17,7 +17,7 @@ const HeroHeader = () => {
           <Link href="https://info.streameth.org/contact-us">
             <Button>Host your event</Button>
           </Link>
-          <Link href="https://info.streameth.org/contact-us">
+          <Link href="https://info.streameth.org/services">
             <Button variant="secondary">Learn More</Button>
           </Link>
         </div>
