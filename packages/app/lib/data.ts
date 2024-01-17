@@ -10,7 +10,6 @@ import SpeakerController from 'streameth-server/controller/speaker'
 import OrganizationController from 'streameth-server/controller/organization'
 import { NavBarProps, IPagination } from './types'
 import FuzzySearch from 'fuzzy-search';
-import { unstable_noStore as noStore } from 'next/cache';
 
 
 export async function fetchOrganization ({
@@ -301,5 +300,26 @@ export async function fetchNavBarRoutes({
     logo: '/events/' + eventData?.logo ?? '',
     homePath: `/${organization}/${event}`,
     showNav: true,
+  }
+}
+
+
+export const fetchEventSession = async ({
+  event,
+  session,
+}: {
+  event: string
+  session: string
+}): Promise<ISession | null> => {
+  try {
+    const sessionController = new SessionController()
+    const data = await sessionController.getSession(session, event)
+    if (!data) {
+      return null
+    }
+    return data.toJson()
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event'
   }
 }
