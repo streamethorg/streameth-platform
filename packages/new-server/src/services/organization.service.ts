@@ -31,7 +31,19 @@ export default class OrganizationService {
   }
 
   async get(organizationId: string): Promise<IOrganization> {
-    const findOrg = await this.controller.store.findById(organizationId);
+    let id = '';
+    const isObjectId = /[0-9a-f]{24}/i.test(organizationId);
+    const isPathId = /organizations-[a-zA-Z0-9\-_]+/.test(organizationId);
+    if (isObjectId) {
+      id = organizationId;
+    }
+    if (isPathId) {
+      id = organizationId.replace('-', '/');
+    }
+    if (!isObjectId && !isPathId) {
+      return await this.controller.store.findOne({ entity: organizationId });
+    }
+    const findOrg = await this.controller.store.findById(id);
     if (!findOrg) throw new HttpException(404, 'Organization not found');
     return findOrg;
   }
