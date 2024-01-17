@@ -14,7 +14,6 @@
             "photo": "https://speak.protocol.berlin/media/avatars/gh_avatar_ZgwtPV5.png"
         }
     ],
-    "playbackId": "",
     "videoUrl": "https://lp-playback.com/hls/b235wh9546y2mygm/index.m3u8",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/creating_a_browserembedded_light_client_a_postmortem.jpg",

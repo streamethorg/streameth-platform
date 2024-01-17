@@ -19,7 +19,7 @@ import Link from 'next/link'
 
 export const MintSuccess = ({ hash }: { hash: string }) => {
   return (
-    <div className="p-10 w-[400px] md:w-[600px] flex flex-col items-center justify-center">
+    <div className="p-10 w-[400px] lg:w-[600px] flex flex-col items-center justify-center">
       <Image
         width={150}
         height={150}
@@ -79,7 +79,7 @@ const MintButton = ({
   useEffect(() => {
     if (mintError) {
       openModal(
-        <div className="p-10 w-[400px] md:w-[600px] text-center">
+        <div className="p-10 w-[400px] lg:w-[600px] text-center">
           {mintError.message}
         </div>
       )

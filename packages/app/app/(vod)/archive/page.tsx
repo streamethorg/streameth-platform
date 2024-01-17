@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
 
-// TODO: pagination
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
@@ -26,6 +25,7 @@ export default async function ArchivePage({
   return (
     <div className="bg-white">
       <UpcomingEvents
+        archive
         organization={
           searchParams.organization
             ? searchParams.organization

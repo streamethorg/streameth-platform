@@ -10,6 +10,27 @@ import SpeakerController from 'streameth-server/controller/speaker'
 import OrganizationController from 'streameth-server/controller/organization'
 import { NavBarProps, IPagination } from './types'
 import FuzzySearch from 'fuzzy-search';
+import { unstable_noStore as noStore } from 'next/cache';
+
+
+export async function fetchOrganization ({
+  organization
+}: {
+  organization: string
+}): Promise<IOrganization | null > {
+  try {
+    const organizationController = new OrganizationController()
+    const data = await organizationController.getOrganization(organization)
+    if (!data) {
+      throw 'Organization not found'
+    }
+    return data.toJson()
+  } catch (e) {
+    console.log(e)
+    return null
+  }
+}
+
 export async function fetchOrganizations(): Promise<IOrganization[]> {
   try {
     const organizationController = new OrganizationController()
@@ -43,7 +64,7 @@ export async function fetchEvents({
     return data.map((event) => event.toJson())
   } catch (e) {
     console.log(e)
-    throw 'Error fetching events'
+    throw 'Error fetching events' + e
   }
 }
 
@@ -156,7 +177,8 @@ export async function fetchAllSessions({
 
   if (searchQuery) {
     const normalizedQuery = searchQuery.toLowerCase();
-    const fuzzySearch = new FuzzySearch(allSessions, ['event', 'name', 'speakers.name'], {
+    console.log(allSessions[0])
+    const fuzzySearch = new FuzzySearch(allSessions, ['eventId'], {
       caseSensitive: false,
     });
     

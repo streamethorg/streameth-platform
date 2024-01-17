@@ -6,6 +6,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { NavBarProps } from '@/lib/types'
+
 export default function Navbar({
   pages,
 }: {
@@ -18,15 +19,17 @@ export default function Navbar({
   return (
     <div
       className="flex z-50 absolute w-screen top-[56px] right-0  
-    md:w-[unset] items-center text-center md:relative md:top-[unset] 
-     md:items-center md:h-full md:mr-auto">
-      <ul className="flex flex-col md:flex-row w-full md:space-x-2 md:px-2">
+    lg:w-[unset] items-center text-center lg:relative lg:top-[unset] 
+    lg:items-center lg:h-full">
+      <ul className="flex flex-col lg:flex-row w-full lg:space-x-2 lg:px-2">
         {pages.map((item) => (
           <>
             <NavigationMenuItem key={item.name}>
               <Link href={item.href} legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={navigationMenuTriggerStyle()}>
+                  className={
+                    navigationMenuTriggerStyle() + ' ' + item.bgColor
+                  }>
                   {item.name}
                 </NavigationMenuLink>
               </Link>
