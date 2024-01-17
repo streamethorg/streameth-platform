@@ -1,7 +1,9 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { ISession } from '@interfaces/session.interface';
+import Organization from '@models/organization.model';
 import Session from '@models/session.model';
+import Event from '@models/event.model';
 
 export default class SessionServcie {
   private path: string;
@@ -34,8 +36,43 @@ export default class SessionServcie {
     return findSession;
   }
 
-  async getAll(): Promise<Array<ISession>> {
-    return await this.controller.store.findAll({}, this.path);
+  async getAll(d: {
+    event: string;
+    organization: string;
+    speaker: string;
+    size: number;
+    page: number;
+  }): Promise<{
+    sessions: Array<ISession>;
+    totalDocuments: number;
+    pageable: { page: number; size: number };
+  }> {
+    let filter = {};
+    if (d.event != undefined) {
+      let event = await Event.findOne({ entity: d.event });
+      filter = { ...filter, eventId: event?._id };
+    }
+    if (d.organization != undefined) {
+      let org = await Organization.findOne({ entity: d.organization });
+      filter = { ...filter, organizationId: org?._id };
+    }
+    const pageSize = Number(d.size) || 0; //total documents to be fetched
+    const pageNumber = Number(d.page) || 0;
+    const skip = pageSize * pageNumber - pageSize;
+    const sessions = await this.controller.store.findAll(
+      filter,
+      this.path,
+      skip,
+      pageSize,
+    );
+    return {
+      sessions: sessions,
+      totalDocuments: sessions.length,
+      pageable: {
+        page: pageNumber,
+        size: pageSize,
+      },
+    };
   }
 
   async deleteOne(sessionId: string): Promise<void> {

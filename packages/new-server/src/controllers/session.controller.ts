@@ -9,6 +9,7 @@ import {
   Path,
   Post,
   Put,
+  Query,
   Route,
   SuccessResponse,
   Tags,
@@ -64,8 +65,29 @@ export class SessionController extends Controller {
    */
   @SuccessResponse('200')
   @Get()
-  async getAllSessions(): Promise<IStandardResponse<Array<ISession>>> {
-    const sessions = await this.sessionService.getAll();
+  async getAllSessions(
+    @Query() event?: string,
+    @Query() organization?: string,
+    @Query() speaker?: string,
+    @Query() page?: number,
+    @Query() size?: number,
+    @Query() timestamp?: number,
+  ): Promise<
+    IStandardResponse<{
+      sessions: Array<ISession>;
+      totalDocuments: number;
+      pageable: { page: number; size: number };
+    }>
+  > {
+    const queryParams = {
+      event: event,
+      organization: organization,
+      speaker: speaker,
+      page: page,
+      size: size,
+      timestamp: timestamp,
+    };
+    const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);
   }
 }
