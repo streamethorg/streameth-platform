@@ -5,7 +5,8 @@
     "spec": {
       "name": "streameth-api",
       "outputDirectory": "src/swagger",
-      "specVersion": 3
+      "specVersion": 3,
+      "basePath": "/streameth-platform-packages-new2"
     },
     "routes": {
       "routesDir": "src/routes"
