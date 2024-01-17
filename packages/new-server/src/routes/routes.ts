@@ -186,6 +186,7 @@ const models: TsoaRoute.Models = {
             "videoUrl": {"dataType":"string"},
             "playbackId": {"dataType":"string"},
             "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
             "track": {"dataType":"array","array":{"dataType":"string"}},
             "coverImage": {"dataType":"string"},
             "slug": {"dataType":"string"},
@@ -217,9 +218,20 @@ const models: TsoaRoute.Models = {
             "videoUrl": {"dataType":"string"},
             "playbackId": {"dataType":"string"},
             "eventId": {"dataType":"string","required":true},
+            "organizationId": {"dataType":"string","required":true},
             "track": {"dataType":"array","array":{"dataType":"string"}},
             "coverImage": {"dataType":"string"},
             "slug": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"pageable":{"dataType":"nestedObjectLiteral","nestedProperties":{"size":{"dataType":"double","required":true},"page":{"dataType":"double","required":true}},"required":true},"totalDocuments":{"dataType":"double","required":true},"sessions":{"dataType":"array","array":{"dataType":"refObject","ref":"ISession"},"required":true}}},
         },
         "additionalProperties": false,
     },
@@ -291,6 +303,7 @@ const models: TsoaRoute.Models = {
             "apiKey": {"dataType":"string"},
             "driveId": {"dataType":"string"},
             "driveApiKey": {"dataType":"string"},
+            "url": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -299,7 +312,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "url": {"dataType":"string","required":true},
-            "apiToken": {"dataType":"string","required":true},
+            "apiToken": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -705,6 +718,36 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.getSessionById.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/sessions',
+            ...(fetchMiddlewares<RequestHandler>(SessionController)),
+            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getAllSessions)),
+
+            function SessionController_getAllSessions(request: any, response: any, next: any) {
+            const args = {
+                    event: {"in":"query","name":"event","dataType":"string"},
+                    organization: {"in":"query","name":"organization","dataType":"string"},
+                    speaker: {"in":"query","name":"speaker","dataType":"string"},
+                    page: {"in":"query","name":"page","dataType":"double"},
+                    size: {"in":"query","name":"size","dataType":"double"},
+                    timestamp: {"in":"query","name":"timestamp","dataType":"double"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new SessionController();
+
+
+              const promise = controller.getAllSessions.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 200, next);
             } catch (err) {
                 return next(err);
