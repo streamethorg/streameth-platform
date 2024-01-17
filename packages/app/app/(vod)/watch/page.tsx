@@ -77,7 +77,8 @@ export default async function Watch({
 export async function generateMetadata({
   searchParams,
 }: WatchPageProps): Promise<Metadata> {
-  if (!searchParams.event) return generalMetadata
+  if (!searchParams.event || !searchParams.session)
+    return generalMetadata
   const video = await fetchEventSession({
     event: searchParams.event,
     session: searchParams.session,

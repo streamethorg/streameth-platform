@@ -48,13 +48,13 @@ export const archiveMetadata = ({
     : BASE_IMAGE
 
   return {
-    title: `${event} | StreamETH`,
+    title: `${event.name} | StreamETH`,
     description: `${event.description}`,
     metadataBase: new URL('https://streameth.org'),
     openGraph: {
-      title: `${event} | StreamETH`,
+      title: `${event.name} | StreamETH`,
       siteName: 'StreamETH',
-      description: `Archive of ${event}`,
+      description: `Archive of ${event.description}`,
       images: {
         url: imageUrl,
         alt: 'StreamETH Logo',
