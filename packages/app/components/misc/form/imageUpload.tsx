@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from 'react'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Image from 'next/image'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   // FileList is immutable, so we need to create a new one
   const dataTransfer = new DataTransfer()
