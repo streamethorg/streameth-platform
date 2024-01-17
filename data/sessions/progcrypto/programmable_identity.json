@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/cd25ma0u324t1gtw/index.m3u8",
-    "playbackId": "cd25ma0u324t1gtw",
     "eventId": "progcrypto",
     "track": "Identity, Attestations, and PCDs",
     "coverImage": "/sessions/progcrypto/programmable_identity_thumbnail.png",

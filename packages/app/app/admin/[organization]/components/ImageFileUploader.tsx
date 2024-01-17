@@ -1,7 +1,7 @@
 // import LoadingIcon from '@/components/icons/LoadingIcon'
 // import PlusCircleIcon from '@/components/icons/PlusCircleIcon'
 // import FormLabel from '@/components/Form/FormLabel'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import React, { SetStateAction, useRef, useState } from 'react'
 
 interface ImageFileUploaderProps {

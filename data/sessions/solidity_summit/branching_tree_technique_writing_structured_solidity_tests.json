@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/65611su2uzmvyvcc/index.m3u8",
-    "playbackId": "65611su2uzmvyvcc",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/branching_tree_technique_writing_structured_solidity_tests_thumbnail.png",
     "assetId": "6561503a-591b-4a1a-8635-3e1c54ba10ca",

@@ -35,14 +35,14 @@ const ScheduleComponent = async ({
 
   return (
     <Card id="schedule" className="border-none">
-      <CardHeader className="p-3 md:p-6 flex flex-col md:flex-row w-full space-y-2 md:space-y-0 md:space-x-4 justify-center">
-        <CardTitle className="text-4xl uppercase md:mr-4">
+      <CardHeader className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
+        <CardTitle className="text-4xl uppercase lg:mr-4">
           Schedule
         </CardTitle>
         <DateSelect dates={dates} />
         <StageSelect stages={stages} />
       </CardHeader>
-      <CardContent className="p-3 md:p-6">
+      <CardContent className="p-3 lg:p-6">
         <div className="w-full flex flex-col relative">
           <SessionList event={event} sessions={sessions} />
         </div>

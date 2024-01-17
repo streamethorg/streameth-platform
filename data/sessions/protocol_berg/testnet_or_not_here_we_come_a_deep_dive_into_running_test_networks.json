@@ -21,7 +21,6 @@
             "photo": ""
         }
     ],
-    "playbackId": "",
     "videoUrl": "https://lp-playback.com/hls/70a6nax8ntwhf147/index.m3u8",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/testnet_or_not_here_we_come_a_deep_dive_into_running_test_networks.jpg",

@@ -1,4 +1,4 @@
-import { fetchAllSessions } from '@/lib/data'
+import { fetchAllSessions, fetchEvent } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { SearchPageProps } from '@/lib/types'
 import UpcomingEvents from '@/app/(home)/components/UpcomingEvents'
@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
+import { generalMetadata, archiveMetadata } from '@/lib/metadata'
+import { Metadata } from 'next'
 
 export default async function ArchivePage({
   searchParams,
@@ -25,6 +27,7 @@ export default async function ArchivePage({
   return (
     <div className="bg-white">
       <UpcomingEvents
+        archive
         organization={
           searchParams.organization
             ? searchParams.organization
@@ -44,25 +47,14 @@ export default async function ArchivePage({
   )
 }
 
-// TODO
-// export async function generateMetadata(
-//   { params }: Params,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   const eventController = new EventController()
-//   const event = await eventController.getEvent(
-//     params.event,
-//     params.organization
-//   )
-//   const imageUrl = event.eventCover
-//     ? event.eventCover
-//     : event.id + '.png'
-
-//   return {
-//     title: `${event.name} - Archive`,
-//     description: `Watch all the Streameth videos from ${event.name} here`,
-//     openGraph: {
-//       images: [imageUrl],
-//     },
-//   }
-// }
+export async function generateMetadata({
+  searchParams,
+}: SearchPageProps): Promise<Metadata> {
+  if (!searchParams.event) return generalMetadata
+  const event = await fetchEvent({
+    event: searchParams.event,
+    organization: searchParams.organization,
+  })
+  if (!event) return generalMetadata
+  return archiveMetadata({ event })
+}

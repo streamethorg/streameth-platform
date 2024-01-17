@@ -6,9 +6,9 @@ const Layout = async ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="w-screen h-screen">
+    <div className="w-full ">
       <HomePageNavbar />
-      <div className="top-[74px] flex flex-col p-2 md:p-4 overflow-scroll">
+      <div className="top-[74px] flex flex-col p-2 lg:p-4 overflow-scroll">
         {children}
       </div>
     </div>

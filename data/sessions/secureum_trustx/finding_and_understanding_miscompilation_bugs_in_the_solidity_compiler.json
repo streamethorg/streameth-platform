@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/ece9kpb88yc1dpf6/index.m3u8",
-    "playbackId": "ece9kpb88yc1dpf6",
     "eventId": "secureum_trustx",
     "coverImage": "/sessions/secureum_trustx/finding_and_understanding_miscompilation_bugs_in_the_solidity_compiler.jpg",
     "assetId": "ece9fffc-1e83-4cef-9ac4-955fcf728fbb",

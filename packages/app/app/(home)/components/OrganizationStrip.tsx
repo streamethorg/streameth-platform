@@ -17,7 +17,6 @@ export default async function OrganizationStrip({
       limit: 4,
     })
   ).sessions
-
   if (videos.length === 0) return false
   return (
     <div key="organization.id" className="bg-white flex flex-col">
@@ -33,7 +32,7 @@ export default async function OrganizationStrip({
 
         <Link href={'/archive?organization=' + organization.id}>
           <CardTitle className="text-background text-2xl ml-2 mr-auto hover:underline">
-            {organization.name}
+            {organization.name} {' >'}
           </CardTitle>
         </Link>
       </div>

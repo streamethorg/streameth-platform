@@ -13,18 +13,18 @@ export default async function VideoGrid({
   if (!videos) return null
 
   return (
-    <div className="max-w-screen md:w-full bg-transparent border-none ">
+    <div className="max-w-screen lg:w-full bg-transparent border-none ">
       <div
         className={`${
           scroll ? 'flex flex-row' : 'grid grid-cols-1'
-        }  md:grid md:grid-cols-2 lg:grid-cols-4 gap-4`}>
+        }  lg:grid md:grid-cols-2 lg:grid-cols-4 gap-4`}>
         {videos.map((video, index) =>
           ({ maxVideos }) && maxVideos && index > maxVideos ? null : (
             <div
               key={video.id}
               className={`${
                 scroll && 'w-[300px]'
-              } md:w-full h-full border-none bg-white flex-initial`}>
+              } lg:w-full h-full border-none bg-white flex-initial`}>
               <VideoCard session={video} />
             </div>
           )

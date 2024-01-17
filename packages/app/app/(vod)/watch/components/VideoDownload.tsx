@@ -14,9 +14,13 @@ const VideoDownload = ({ assetId }: { assetId: string }) => {
   if (!asset?.downloadUrl) return null
 
   return (
-    <a href={asset.downloadUrl} download={asset.name} target="_blank">
-      <Badge className="bg-background">
-        <ArrowDownIcon className="p-1 h-6 w-6 md:h-8 md:w-8 cursor-pointer text-white" />
+    <a
+      href={asset.downloadUrl}
+      download={asset.name}
+      target="_blank"
+      className="flex justify-center items-center">
+      <Badge className="bg-background my-auto">
+        <ArrowDownIcon className="p-1 h-6 w-6 lg:h-8 lg:w-8 cursor-pointer text-white" />
         Download
       </Badge>
     </a>

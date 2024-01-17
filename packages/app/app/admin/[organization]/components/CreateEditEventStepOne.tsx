@@ -61,7 +61,7 @@ const CreateEditEventStepOne = () => {
     //     foundation for a visually engaging event page that will
     //     captivate your audience.
     //   </p>
-    //   <div className="mt-5 mb-10 gap-5 xl:gap-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+    //   <div className="mt-5 mb-10 gap-5 xl:gap-2 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
     //     <ImageFileUploader
     //       label="Event's Logo"
     //       image={formData?.logo}

@@ -7,7 +7,7 @@ import { ISession } from 'streameth-server/model/session'
 import Thumbnail from './thumbnail'
 import { fetchEvent } from '@/lib/data'
 import Image from 'next/image'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import Link from 'next/link'
 
 const VideoCard = async ({
@@ -34,7 +34,7 @@ const VideoCard = async ({
         <Thumbnail session={session} fallBack={event.eventCover} />
       </Link>
       <CardHeader
-        className={`rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none ${headerClass}`}>
+        className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none ${headerClass}`}>
         <Link
           href={`/watch?event=${session.eventId}&session=${session.id}`}>
           <CardTitle

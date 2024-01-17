@@ -8,16 +8,18 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import { fetchEvents } from '@/lib/data'
 import { IOrganization } from 'streameth-server/model/organization'
 
 const UpcomingEvents = async ({
   date,
   organization,
+  archive,
 }: {
   date?: Date
   organization?: IOrganization['id']
+  archive?: boolean
 }) => {
   const events = await fetchEvents({
     date,
@@ -48,7 +50,13 @@ const UpcomingEvents = async ({
             },
             index
           ) => (
-            <Link key={index} href={`/${organizationId}/${id}`}>
+            <Link
+              key={index}
+              href={
+                archive
+                  ? `/archive?event=` + id
+                  : `/${organizationId}/${id}`
+              }>
               <Card
                 className="p-2 w-72 h-full border-none"
                 style={{
