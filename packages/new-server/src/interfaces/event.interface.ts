@@ -5,10 +5,11 @@ export interface GSheetConfig {
   apiKey?: string;
   driveId?: string;
   driveApiKey?: string;
+  url?: string;
 }
 export interface PretalxConfig {
   url: string;
-  apiToken: string;
+  apiToken?: string;
 }
 
 export type IDataImporter =
