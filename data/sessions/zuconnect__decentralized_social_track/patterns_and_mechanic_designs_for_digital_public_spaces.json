@@ -1,38 +1,38 @@
 {
-  "id": "patterns_and_mechanic_designs_for_digital_public_spaces",
-  "name": "Patterns and Mechanic Designs for Digital Public Spaces",
-  "description": "No description",
-  "start": 1699345800000,
-  "end": 1699348500000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "beth_mccarthy",
-      "name": "Beth McCarthy",
-      "bio": "No Description",
-      "eventId": "zuconnect__decentralized_social_track"
-    },
-    {
-      "id": "matt_prewitt",
-      "name": "Matt Prewitt",
-      "bio": "No Description",
-      "eventId": "zuconnect__decentralized_social_track"
-    },
-    {
-      "id": "cem_dagdelen",
-      "name": "Cem Dagdelen ",
-      "bio": "No Description",
-      "eventId": "zuconnect__decentralized_social_track"
-    },
-    {
-      "id": "raymond_cheng",
-      "name": "Raymond Cheng",
-      "bio": "No Description",
-      "eventId": "zuconnect__decentralized_social_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/eb1aycnktsjdse2z/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect__decentralized_social_track",
-  "coverImage": "/sessions/zuconnect__decentralized_social_track/patterns_and_mechanic_designs_for_digital_public_spaces.jpg"
+    "id": "patterns_and_mechanic_designs_for_digital_public_spaces",
+    "name": "Patterns and Mechanic Designs for Digital Public Spaces",
+    "description": "No description",
+    "start": 1699345800000,
+    "end": 1699348500000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "beth_mccarthy",
+            "name": "Beth McCarthy",
+            "bio": "No Description",
+            "eventId": "zuconnect__decentralized_social_track"
+        },
+        {
+            "id": "matt_prewitt",
+            "name": "Matt Prewitt",
+            "bio": "No Description",
+            "eventId": "zuconnect__decentralized_social_track"
+        },
+        {
+            "id": "cem_dagdelen",
+            "name": "Cem Dagdelen ",
+            "bio": "No Description",
+            "eventId": "zuconnect__decentralized_social_track"
+        },
+        {
+            "id": "raymond_cheng",
+            "name": "Raymond Cheng",
+            "bio": "No Description",
+            "eventId": "zuconnect__decentralized_social_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/eb1aycnktsjdse2z/index.m3u8",
+    "eventId": "zuconnect__decentralized_social_track",
+    "coverImage": "/sessions/zuconnect__decentralized_social_track/patterns_and_mechanic_designs_for_digital_public_spaces.jpg",
+    "assetId": "eb1aa228-108d-4483-bb2d-44f62ef8ddac"
 }

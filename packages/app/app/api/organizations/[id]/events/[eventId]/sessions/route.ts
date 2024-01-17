@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { extractSearchParams } from '@/utils/api'
+import { extractSearchParams } from '@/lib/utils/api'
 import SessionController from 'streameth-server/controller/session'
 
 export interface SessionsSearchParams {
@@ -27,7 +27,9 @@ export async function GET(
       eventId: params.eventId,
       stage: searchParams.stage,
       timestamp: Number(searchParams.timestamp),
-      date: Number(searchParams.date),
+      date: searchParams.date
+        ? new Date(searchParams.date)
+        : undefined,
     })
     return NextResponse.json(data)
   } catch (e) {

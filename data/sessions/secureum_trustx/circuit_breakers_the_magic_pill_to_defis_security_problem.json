@@ -1,25 +1,24 @@
 {
-  "id": "circuit_breakers_the_magic_pill_to_defis_security_problem",
-  "name": "Circuit Breakers: The Magic Pill to DeFi’s Security Problem?",
-  "description": "",
-  "start": 1699970520000,
-  "end": 1699971480000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "philippe_dumonet",
-      "name": "Philippe\nDumonet ",
-      "bio": "CEO & Co-founder\nDeReg",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Philippe.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/5e3bhbaa9pgucfre/index.m3u8",
-  "playbackId": "5e3bhbaa9pgucfre",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/circuit_breakers_the_magic_pill_to_defis_security_problem.jpg",
-  "assetId": "5e3bfd4e-d40b-464c-bb75-e935ca508949",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "circuit_breakers_the_magic_pill_to_defis_security_problem",
+    "name": "Circuit Breakers: The Magic Pill to DeFi\u2019s Security Problem?",
+    "description": "",
+    "start": 1699970520000,
+    "end": 1699971480000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "philippe_dumonet",
+            "name": "Philippe\nDumonet ",
+            "bio": "CEO & Co-founder\nDeReg",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Philippe.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/5e3bhbaa9pgucfre/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/circuit_breakers_the_magic_pill_to_defis_security_problem.jpg",
+    "assetId": "5e3bfd4e-d40b-464c-bb75-e935ca508949",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

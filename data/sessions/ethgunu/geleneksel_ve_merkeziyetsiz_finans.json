@@ -1,25 +1,24 @@
 {
-  "id": "geleneksel_ve_merkeziyetsiz_finans",
-  "name": "Geleneksel ve Merkeziyetsiz Finans",
-  "description": "Coming Soon",
-  "start": 1699876800000,
-  "end": 1699878600000,
-  "stageId": "harbiye",
-  "speakers": [
-    {
-      "id": "ant_manukyan",
-      "name": "Şant Manukyan",
-      "bio": "Coming soon",
-      "eventId": "ethgunu",
-      "twitter": "@SantManukyan",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/sant.jpg?raw=true"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/d2170czo1d2op039/index.m3u8",
-  "playbackId": "d2170czo1d2op039",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/geleneksel_ve_merkeziyetsiz_finans_thumbnail.png",
-  "assetId": "d2176f39-aee8-4737-b738-b2098edf2b67",
-  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
-  "videoType": "clip"
+    "id": "geleneksel_ve_merkeziyetsiz_finans",
+    "name": "Geleneksel ve Merkeziyetsiz Finans",
+    "description": "Coming Soon",
+    "start": 1699876800000,
+    "end": 1699878600000,
+    "stageId": "harbiye",
+    "speakers": [
+        {
+            "id": "ant_manukyan",
+            "name": "\u015eant Manukyan",
+            "bio": "Coming soon",
+            "eventId": "ethgunu",
+            "twitter": "@SantManukyan",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/sant.jpg?raw=true"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d2170czo1d2op039/index.m3u8",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/geleneksel_ve_merkeziyetsiz_finans_thumbnail.png",
+    "assetId": "d2176f39-aee8-4737-b738-b2098edf2b67",
+    "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+    "videoType": "clip"
 }

@@ -1,15 +1,10 @@
 import Image from 'next/image'
-import FilterBar from '../(home)/components/FilterBar'
 import remarkGfm from 'remark-gfm'
-import ColorComponent from '../../components/Form/ColorComponent'
 import { notFound } from 'next/navigation'
-import EventController from 'streameth-server/controller/event'
 import OrganizationController from 'streameth-server/controller/organization'
-import { getImageUrl } from '@/utils'
-import EventList from '../(home)/components/EventList'
 import Markdown from 'react-markdown'
 import { Metadata, ResolvingMetadata } from 'next'
-import UpcomingEvents from '../(home)/components/UpcomingEvents'
+import { fetchOrganization } from '@/lib/data'
 
 interface Params {
   params: {
@@ -22,34 +17,13 @@ export default async function OrganizationHome({ params }: Params) {
     return notFound()
   }
 
-  const events =
-    await new EventController().getAllEventsForOrganization(
-      params.organization
-    )
+  const organization = await fetchOrganization({
+    organization: params.organization,
+  })
 
-  const pastEvents = events
-    .filter((event) => {
-      const endDate = new Date(event?.end)
-      endDate.setUTCHours(0, 0, 0, 0)
-      return endDate.getTime() < new Date().getTime()
-    })
-    .map((event) => event.toJson())
-  const upComing = events
-    .filter((event) => {
-      const startDate = new Date(event?.end)
-      startDate.setUTCHours(0, 0, 0, 0)
-      return startDate.getTime() > new Date().getTime()
-    })
-    .map((event) => event.toJson())
-    .sort(
-      (a, b) =>
-        new Date(a.start).getTime() - new Date(b.start).getTime()
-    )
-
-  const organization =
-    await new OrganizationController().getOrganization(
-      params.organization
-    )
+  if (!organization) {
+    return notFound()
+  }
 
   return (
     <main className="w-screen mx-auto fixed overflow-auto h-screen">
@@ -86,15 +60,13 @@ export default async function OrganizationHome({ params }: Params) {
       <hr className="h-px mx-9  bg-base" />
       <div className="overflow-auto h-screen">
         <div className="px-4">
-          {upComing.length > 0 && (
+          {/* {upComing.length > 0 && (
             <>
-              <p className="px-4 mt-3 font-ubuntu font-bold md:py-2 text-blue text-2xl md:text-4xl">
+              <p className="px-4 mt-3 font-ubuntu font-bold lg:py-2 text-blue text-2xl lg:text-4xl">
                 Upcoming Events
               </p>
-              <UpcomingEvents events={upComing} />
             </>
-          )}
-          <EventList events={pastEvents.map((event) => event)} />
+          )} */}
         </div>
       </div>
     </main>
@@ -105,9 +77,16 @@ export async function generateMetadata(
   { params }: Params,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const organizationController = new OrganizationController()
-  const organizationInfo =
-    await organizationController.getOrganization(params.organization)
+  const organizationInfo = await fetchOrganization({
+    organization: params.organization,
+  })
+
+  if (!organizationInfo) {
+    return {
+      title: 'Organization not found',
+      description: 'Organization not found',
+    }
+  }
 
   const imageUrl = organizationInfo.logo
   try {

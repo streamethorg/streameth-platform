@@ -1,25 +1,24 @@
 {
-  "id": "differential_testing_with_foundry",
-  "name": "Differential Testing with Foundry",
-  "description": "Differential testing using the Foundry fuzzer can be utilized to ensure identical behavior between two implementations of the same contract. Developers can leverage differential fuzzing in their development workflow to transpile idiomatic Solidity into highly gas optimized contracts. We will outline the steps to replicate this development workflow, discuss common “gotchas” and workarounds, and circulate a template repo with example tests in order to empower devs to leverage this process. [detail] During the design process, developers can begin by writing their contract implementation in idiomatic Solidity, enabling quicker development and more intuitive understanding of contract functionality. Next, developers can transpile the reference implementation into a highly optimized version utilizing Yul / Assembly by leveraging `forge inspect ir` and other tools. Finally, developers can use differential fuzzing with Foundry to ensure the equality of the two implementations. The most notable example of this development process is OpenSea’s Seaport contracts.",
-  "start": 1700134800000,
-  "end": 1700136600000,
-  "stageId": "uskudar_2",
-  "speakers": [
-    {
-      "id": "anna_carroll",
-      "name": "Anna Carroll",
-      "bio": "Anna Carroll is a protocol engineer with years of experience architecting smart contracts for the EVM. Her areas of expertise include Solidity, cross-chain protocols, DAOs and governance. Throughout her time in the crypto space, Anna has worked on a range of co-created PartyBid and Nomad, and worked on Celo and Dharma. Anna graduated from Stanford with a degree in Computer Science and is now based in Berlin where she enjoys a vibrant crypto community.\n",
-      "eventId": "solidity_summit",
-      "twitter": "@annascarroll",
-      "photo": "https://drive.google.com/file/d/1x9rPoj_0eVK6xMhQ6kc7OBv4sQ9cATDX/view?usp=sharing"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/85bc03wysgj6upad/index.m3u8",
-  "playbackId": "85bc03wysgj6upad",
-  "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/differential_testing_with_foundry_thumbnail.png",
-  "assetId": "85bc8b86-9912-42b6-8922-3767eeccf850",
-  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-  "videoType": "clip"
+    "id": "differential_testing_with_foundry",
+    "name": "Differential Testing with Foundry",
+    "description": "Differential testing using the Foundry fuzzer can be utilized to ensure identical behavior between two implementations of the same contract. Developers can leverage differential fuzzing in their development workflow to transpile idiomatic Solidity into highly gas optimized contracts. We will outline the steps to replicate this development workflow, discuss common \u201cgotchas\u201d and workarounds, and circulate a template repo with example tests in order to empower devs to leverage this process. [detail] During the design process, developers can begin by writing their contract implementation in idiomatic Solidity, enabling quicker development and more intuitive understanding of contract functionality. Next, developers can transpile the reference implementation into a highly optimized version utilizing Yul / Assembly by leveraging `forge inspect ir` and other tools. Finally, developers can use differential fuzzing with Foundry to ensure the equality of the two implementations. The most notable example of this development process is OpenSea\u2019s Seaport contracts.",
+    "start": 1700134800000,
+    "end": 1700136600000,
+    "stageId": "uskudar_2",
+    "speakers": [
+        {
+            "id": "anna_carroll",
+            "name": "Anna Carroll",
+            "bio": "Anna Carroll is a protocol engineer with years of experience architecting smart contracts for the EVM. Her areas of expertise include Solidity, cross-chain protocols, DAOs and governance. Throughout her time in the crypto space, Anna has worked on a range of co-created PartyBid and Nomad, and worked on Celo and Dharma. Anna graduated from Stanford with a degree in Computer Science and is now based in Berlin where she enjoys a vibrant crypto community.\n",
+            "eventId": "solidity_summit",
+            "twitter": "@annascarroll",
+            "photo": "https://drive.google.com/file/d/1x9rPoj_0eVK6xMhQ6kc7OBv4sQ9cATDX/view?usp=sharing"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/85bc03wysgj6upad/index.m3u8",
+    "eventId": "solidity_summit",
+    "coverImage": "/sessions/solidity_summit/differential_testing_with_foundry_thumbnail.png",
+    "assetId": "85bc8b86-9912-42b6-8922-3767eeccf850",
+    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+    "videoType": "clip"
 }

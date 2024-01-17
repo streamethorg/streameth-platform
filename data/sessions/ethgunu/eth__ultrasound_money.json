@@ -1,25 +1,24 @@
 {
-  "id": "eth__ultrasound_money",
-  "name": "ETH - Ultrasound Money",
-  "description": "- Ethereum ekonomisinin geçmişi ve bugünü (Başlangıç, POS staking, EIP-1559, POS’a geçiş)\n- Önümüzdeki dönem nasıl şekillenecek? (neden ultrasound money deniyor?)\n",
-  "start": 1699863300000,
-  "end": 1699865100000,
-  "stageId": "harbiye",
-  "speakers": [
-    {
-      "id": "turan_sert",
-      "name": "Turan Sert",
-      "bio": "Finans ve teknoloji ağırlıklı bir geçmişe sahip olan Turan Sert, kariyerine Arthur Andersen’da denetim ve Garanti Bankası’nda yatırım bankacılığı ile başladı. Booz Allen New York ofisinde üç yıl süren yönetim danışmanlığı sonrası 2005 yılında Türkiye’ye döndü. Çeşitli Fiba Grubu iştiraklerinde murahhas azalık ya da yönetim kurulu üyelikleri ve 2014-16 yılları arasında Özyeğin Üniversitesi’nde CBO’luk görevinde bulundu. Önce kuruluşundan itibaren içinde yer aldığı Girişim Fabrikası, sonrasında da 2016 yılında kurduğu teknoloji girişimi ile Türkiye’deki ekosistemin büyümesine katkı sağladı. Halen BlockchainIST Center danışmanlık ve Paribu Danışma Kurulu üyeliği görevlerini sürdürmekte. 2019 yılında “Sorularla Blockchain” ve 2022 yılında “Sorularla DeFi - Merkeziyetsiz Finans” isimleriyle yayınlanan iki kitabı bulunmakta. Turan Sert, Boğaziçi Üniversitesi İşletme (BA, 1995) ve Harvard Business School (MBA, 2001) mezunudur.",
-      "eventId": "ethgunu",
-      "twitter": "@turansert",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/turan.png?raw=true"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/7b65cks3e3geruge/index.m3u8",
-  "playbackId": "7b65cks3e3geruge",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/eth__ultrasound_money_thumbnail.png",
-  "assetId": "7b658157-5595-4f56-b5f3-cdb27b86e3ca",
-  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
-  "videoType": "clip"
+    "id": "eth__ultrasound_money",
+    "name": "ETH - Ultrasound Money",
+    "description": "- Ethereum ekonomisinin ge\u00e7mi\u015fi ve bug\u00fcn\u00fc (Ba\u015flang\u0131\u00e7, POS staking, EIP-1559, POS\u2019a ge\u00e7i\u015f)\n- \u00d6n\u00fcm\u00fczdeki d\u00f6nem nas\u0131l \u015fekillenecek? (neden ultrasound money deniyor?)\n",
+    "start": 1699863300000,
+    "end": 1699865100000,
+    "stageId": "harbiye",
+    "speakers": [
+        {
+            "id": "turan_sert",
+            "name": "Turan Sert",
+            "bio": "Finans ve teknoloji a\u011f\u0131rl\u0131kl\u0131 bir ge\u00e7mi\u015fe sahip olan Turan Sert, kariyerine Arthur Andersen\u2019da denetim ve Garanti Bankas\u0131\u2019nda yat\u0131r\u0131m bankac\u0131l\u0131\u011f\u0131 ile ba\u015flad\u0131. Booz Allen New York ofisinde \u00fc\u00e7 y\u0131l s\u00fcren y\u00f6netim dan\u0131\u015fmanl\u0131\u011f\u0131 sonras\u0131 2005 y\u0131l\u0131nda T\u00fcrkiye\u2019ye d\u00f6nd\u00fc. \u00c7e\u015fitli Fiba Grubu i\u015ftiraklerinde murahhas azal\u0131k ya da y\u00f6netim kurulu \u00fcyelikleri ve 2014-16 y\u0131llar\u0131 aras\u0131nda \u00d6zye\u011fin \u00dcniversitesi\u2019nde CBO\u2019luk g\u00f6revinde bulundu. \u00d6nce kurulu\u015fundan itibaren i\u00e7inde yer ald\u0131\u011f\u0131 Giri\u015fim Fabrikas\u0131, sonras\u0131nda da 2016 y\u0131l\u0131nda kurdu\u011fu teknoloji giri\u015fimi ile T\u00fcrkiye\u2019deki ekosistemin b\u00fcy\u00fcmesine katk\u0131 sa\u011flad\u0131. Halen BlockchainIST Center dan\u0131\u015fmanl\u0131k ve Paribu Dan\u0131\u015fma Kurulu \u00fcyeli\u011fi g\u00f6revlerini s\u00fcrd\u00fcrmekte. 2019 y\u0131l\u0131nda \u201cSorularla Blockchain\u201d ve 2022 y\u0131l\u0131nda \u201cSorularla DeFi - Merkeziyetsiz Finans\u201d isimleriyle yay\u0131nlanan iki kitab\u0131 bulunmakta. Turan Sert, Bo\u011fazi\u00e7i \u00dcniversitesi \u0130\u015fletme (BA, 1995) ve Harvard Business School (MBA, 2001) mezunudur.",
+            "eventId": "ethgunu",
+            "twitter": "@turansert",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/turan.png?raw=true"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/7b65cks3e3geruge/index.m3u8",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/eth__ultrasound_money_thumbnail.png",
+    "assetId": "7b658157-5595-4f56-b5f3-cdb27b86e3ca",
+    "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+    "videoType": "clip"
 }

@@ -1,22 +1,6 @@
-import { notFound } from 'next/navigation'
-
-import ColorComponent from '../../../components/Form/ColorComponent'
+import ColorComponent from '@/components/Layout/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
-import { ArchiveContext } from '@/context/ArchiveContext'
-import EventController from 'streameth-server/controller/event'
-import StageController from 'streameth-server/controller/stage'
-import SessionController from 'streameth-server/controller/session'
-import SpeakerController from 'streameth-server/controller/speaker'
-
-export async function generateStaticParams() {
-  const eventController = new EventController()
-  const allEvents = await eventController.getAllEvents({})
-  const paths = allEvents.map((event) => ({
-    organization: event.organizationId,
-    event: event.id,
-  }))
-  return paths
-}
+import { fetchNavBarRoutes, fetchEvent } from '@/lib/data'
 
 const Layout = async ({
   children,
@@ -28,39 +12,24 @@ const Layout = async ({
     event: string
   }
 }) => {
-  const event = await new EventController().getEvent(
-    params.event,
-    params.organization
-  )
-  const stages = await new StageController().getAllStagesForEvent(
-    params.event
-  )
-  const sessions = await new SessionController().getAllSessions({
-    eventId: params.event,
+  const navbarRoutes = await fetchNavBarRoutes({
+    event: params.event,
+    organization: params.organization,
   })
-  const speakers =
-    await new SpeakerController().getAllSpeakersForEvent(params.event)
-
-  if (!event) {
-    return notFound()
-  }
-
+  const event = await fetchEvent({
+    event: params.event,
+    organization: params.organization,
+  })
   return (
-    <ArchiveContext event={event.toJson()}>
-      <div className="h-full flex flex-col  z-1 bg-accent min-h-screen ">
-        <Navbar />
+    <div className="h-full flex flex-col  z-1 min-h-screen ">
+      <Navbar {...navbarRoutes} />
 
-        <main className={` flex w-full ml-auto md:h-full flex-grow`}>
-          <ColorComponent
-            event={event.toJson()}
-            stages={stages.map((stage) => stage.toJson())}
-            speakers={speakers.map((speaker) => speaker.toJson())}
-            sessions={sessions.map((session) => session.toJson())}>
-            {children}
-          </ColorComponent>
-        </main>
-      </div>
-    </ArchiveContext>
+      <main className={` flex w-full ml-auto lg:h-full flex-grow`}>
+        <ColorComponent accentColor={event.accentColor}>
+          {children}
+        </ColorComponent>
+      </main>
+    </div>
   )
 }
 

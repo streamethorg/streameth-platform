@@ -1,1 +1,26 @@
-{"id":"interface_with_the_commons","name":"Interface with the Commons","description":"","start":1684225800000,"end":1684226700000,"stageId":"dome","speakers":[{"id":"david_casey","name":"David Casey","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"},{"id":"michel_bauwens","name":"Michel Bauwens","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/6308v944uspyrtcb/index.m3u8","playbackId":"6308v944uspyrtcb","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/interface_with_the_commons.jpg"}
+{
+    "id": "interface_with_the_commons",
+    "name": "Interface with the Commons",
+    "description": "",
+    "start": 1684225800000,
+    "end": 1684226700000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "david_casey",
+            "name": "David Casey",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "michel_bauwens",
+            "name": "Michel Bauwens",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/6308v944uspyrtcb/index.m3u8",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/interface_with_the_commons.jpg",
+    "assetId": "6308a273-fd87-4630-9787-fc4264ce4a6e"
+}

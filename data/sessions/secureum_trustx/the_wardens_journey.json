@@ -1,25 +1,24 @@
 {
-  "id": "the_wardens_journey",
-  "name": "The Wardens Journey",
-  "description": "",
-  "start": 1699962480000,
-  "end": 1699963440000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "alex_the_entreprenerd",
-      "name": "Alex\nThe Entreprenerd",
-      "bio": "Independent Security Researcher",
-      "eventId": "secureum_trustx",
-      "twitter": "@GalloDaSballo",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Alex.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/b59dpsbjwcj9rlma/index.m3u8",
-  "playbackId": "b59dpsbjwcj9rlma",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/the_wardens_journey.jpg",
-  "assetId": "b59d61c6-d580-464f-a72e-7b3d0a97ceec",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "the_wardens_journey",
+    "name": "The Wardens Journey",
+    "description": "",
+    "start": 1699962480000,
+    "end": 1699963440000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "alex_the_entreprenerd",
+            "name": "Alex\nThe Entreprenerd",
+            "bio": "Independent Security Researcher",
+            "eventId": "secureum_trustx",
+            "twitter": "@GalloDaSballo",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Alex.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/b59dpsbjwcj9rlma/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_wardens_journey.jpg",
+    "assetId": "b59d61c6-d580-464f-a72e-7b3d0a97ceec",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

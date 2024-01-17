@@ -9,17 +9,17 @@ import {
   useSwitchNetwork,
   useNetwork,
 } from 'wagmi'
-import CastrABI from '@/contracts/Castr-abi'
-import { Button } from '@/components/Form/Button'
+import CastrABI from '@/lib/contracts/Castr-abi'
+import { Button } from '@/components/ui/button'
 import { ConnectKitButton } from 'connectkit'
-import { ModalContext } from '@/context/ModalContext'
+import { ModalContext } from '@/lib/context/ModalContext'
 import { base } from 'viem/chains'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const MintSuccess = ({ hash }: { hash: string }) => {
   return (
-    <div className="p-10 w-[400px] md:w-[600px] flex flex-col items-center justify-center">
+    <div className="p-10 w-[400px] lg:w-[600px] flex flex-col items-center justify-center">
       <Image
         width={150}
         height={150}
@@ -79,7 +79,7 @@ const MintButton = ({
   useEffect(() => {
     if (mintError) {
       openModal(
-        <div className="p-10 w-[400px] md:w-[600px] text-center">
+        <div className="p-10 w-[400px] lg:w-[600px] text-center">
           {mintError.message}
         </div>
       )
@@ -120,7 +120,7 @@ const MintButton = ({
       <Button
         variant={'default'}
         onClick={() => !hasMinted && mint()}
-        isLoading={isLoading}
+        // isLoading={isLoading}
         className={`w-full uppercase p-2 border ${className}`}>
         {hasMinted
           ? 'Successfully Minted'

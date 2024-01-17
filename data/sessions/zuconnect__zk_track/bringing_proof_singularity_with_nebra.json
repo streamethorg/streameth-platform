@@ -1,26 +1,26 @@
 {
-  "id": "bringing_proof_singularity_with_nebra",
-  "name": "Bringing Proof Singularity with NEBRA",
-  "description": "In this talk, I will introduce how NEBRA, a recently formed project, can bring Vitalik's vision of \"proof singularity\" to reality. A critical problem today preventing zero-knowledge proof based applications from massive adoption is the expensive onchain verification cost. It is really hard to imagine how we can achieve proof singularity where a private payment to buy a coffee costs 20 US dollar gas fees. NEBRA aims to solve this problem by building a onchain + offchain infrastructure that can trustless scales zero-knowledge proof verification on Ethereum so that verification cost can be dramatically reduced. This is made possible by NEBRA's universal proof aggregation schemes. One significant strength of NEBRA is that it can be deployed to Ethereum L1 and EVM compatible L2s without requiring any protocol change.",
-  "start": 1699279200000,
-  "end": 1699281000000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "althea_allen",
-      "name": "Althea Allen \n",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    },
-    {
-      "id": "shumo_chu",
-      "name": "Shumo Chu",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/d53fhpj1zpvcoh4m/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect__zk_track",
-  "coverImage": "/sessions/zuconnect__zk_track/bringing_proof_singularity_with_nebra.jpg"
+    "id": "bringing_proof_singularity_with_nebra",
+    "name": "Bringing Proof Singularity with NEBRA",
+    "description": "In this talk, I will introduce how NEBRA, a recently formed project, can bring Vitalik's vision of \"proof singularity\" to reality. A critical problem today preventing zero-knowledge proof based applications from massive adoption is the expensive onchain verification cost. It is really hard to imagine how we can achieve proof singularity where a private payment to buy a coffee costs 20 US dollar gas fees. NEBRA aims to solve this problem by building a onchain + offchain infrastructure that can trustless scales zero-knowledge proof verification on Ethereum so that verification cost can be dramatically reduced. This is made possible by NEBRA's universal proof aggregation schemes. One significant strength of NEBRA is that it can be deployed to Ethereum L1 and EVM compatible L2s without requiring any protocol change.",
+    "start": 1699279200000,
+    "end": 1699281000000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "althea_allen",
+            "name": "Althea Allen \n",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        },
+        {
+            "id": "shumo_chu",
+            "name": "Shumo Chu",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/d53fhpj1zpvcoh4m/index.m3u8",
+    "eventId": "zuconnect__zk_track",
+    "coverImage": "/sessions/zuconnect__zk_track/bringing_proof_singularity_with_nebra.jpg",
+    "assetId": "d53fed81-d353-4887-89b7-9d40db462cbe"
 }

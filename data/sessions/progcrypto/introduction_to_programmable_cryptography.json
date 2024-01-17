@@ -1,26 +1,25 @@
 {
-  "id": "introduction_to_programmable_cryptography",
-  "name": "Introduction to Programmable Cryptography",
-  "description": "TBD",
-  "start": 1700121600000,
-  "end": 1700123400000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "gubsheep",
-      "name": "gubsheep",
-      "bio": "gubsheep is co-founder of 0xPARC Foundation. He works on applications of cryptography, particularly zero-knowledge. Previously, he supported zero-knowledge R&D efforts at Ethereum Foundation and built Dark Forest, the first on-chain strategy game.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1gxXaqv0QiVKaY6DId560JUH4hWSXy8wH/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/705e460p6prwvkrh/index.m3u8",
-  "playbackId": "705e460p6prwvkrh",
-  "eventId": "progcrypto",
-  "track": "Identity, Attestations, and PCDs",
-  "coverImage": "/sessions/progcrypto/introduction_to_programmable_cryptography_thumbnail.png",
-  "assetId": "705e6e9d-69cb-46c5-87e5-fc1804b41d6b",
-  "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
-  "videoType": "clip"
+    "id": "introduction_to_programmable_cryptography",
+    "name": "Introduction to Programmable Cryptography",
+    "description": "TBD",
+    "start": 1700121600000,
+    "end": 1700123400000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "gubsheep",
+            "name": "gubsheep",
+            "bio": "gubsheep is co-founder of 0xPARC Foundation. He works on applications of cryptography, particularly zero-knowledge. Previously, he supported zero-knowledge R&D efforts at Ethereum Foundation and built Dark Forest, the first on-chain strategy game.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1gxXaqv0QiVKaY6DId560JUH4hWSXy8wH/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/705e460p6prwvkrh/index.m3u8",
+    "eventId": "progcrypto",
+    "track": "Identity, Attestations, and PCDs",
+    "coverImage": "/sessions/progcrypto/introduction_to_programmable_cryptography_thumbnail.png",
+    "assetId": "705e6e9d-69cb-46c5-87e5-fc1804b41d6b",
+    "sourceId": "43e7148c-4133-4130-aed3-3b88ed3c8b43",
+    "videoType": "clip"
 }

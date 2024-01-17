@@ -1,25 +1,24 @@
 {
-  "id": "glgeleri_aa_karmak_ethereum_ve_web3te_mahremiyet_labirentinde_yol_almak",
-  "name": "Gölgeleri Açığa Çıkarmak: Ethereum ve Web3'te Mahremiyet Labirentinde Yol Almak",
-  "description": "Ethereum tabanli Web3 ekosistemi içindeki mahremiyet endişeleri, farkındalığı ve çözümlerinin karmaşık ağına derinlemesine bir bakış sunar. İşlem ve işlevsel mahremiyet arasındaki ikilemi, Katman 1 ve ara yazılım mahremiyet çözümlerini inceler ve işlevsel mahremiyet içinde niyet tabanlı protokollerin alanına yolculuk yapar. Merkezi olmayan dijital gelecekte mahremiyet çerçevelerini, yasal uyumluluk çözümlerini dikkate sunmayı amaçlamaktadır.\n",
-  "start": 1699869600000,
-  "end": 1699871400000,
-  "stageId": "harbiye",
-  "speakers": [
-    {
-      "id": "isa_sertkaya",
-      "name": "Isa Sertkaya",
-      "bio": "İsa Sertkaya, Silent Protocol'de CTO olarak görev yapmakta ve mahremiyeti artıran protokoller, teknik özellikler, ürün vizyonları ve yol haritalarını şekillendirerek uluslararası kriptograflar, yazılım mühendisleri ve blockchain uzmanlarından oluşan bir ekibi yönetmektedir.\n\nSilent Protocol'a katılmadan önce, İsa TÜBİTAK BİLGEM Blokzincir Araştırma Laboratuvarı'nda Başuzman Araştırmacı olarak 20 yılı aşkın süreyle kriptografik protokol tasarımı ve analizi, kirptoparalar ve blokzincir teknolojileri konularında araştırmalar yaptı ve projeler yönetti. Görev süresi boyunca, 2013'te Matematiksel ve Hesaplamalı Laboratuvarı ve 2017'de Blockzincir Araştırma Laboratuvarı'nın kurulumunda bulundu.\n\nSilent Protocol'daki tam zamanlı görevlerinin yanı sıra, aynı zamanda misafir öğretim üyesidir, Koç Üniversitesi ve Orta Doğu Teknik Üniversitesi'nde kripto paralar ve blockchainler üzerine lisansüstü dersler verir ve kripto paralar ve blockchain teknolojileri üzerine mahremiyeti artıran ve sıfır bilgi protokollerini konu alan lisansüstü öğrencilerin tezlerini yönetmektedir.\n\nİsa lisans derecesini Matematik, yüksek lisans ve doktorasını Kriptografi alanında Türkiye, Ankara'daki Orta Doğu Teknik Üniversitesi'nden almıştır.",
-      "eventId": "ethgunu",
-      "twitter": "@isa_sertkaya",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/isa.jpeg?raw=true"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/62ef125mnddbokxt/index.m3u8",
-  "playbackId": "62ef125mnddbokxt",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/glgeleri_aa_karmak_ethereum_ve_web3te_mahremiyet_labirentinde_yol_almak_thumbnail.png",
-  "assetId": "62ef5790-0ce6-41d1-9265-f937b27c2450",
-  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
-  "videoType": "clip"
+    "id": "glgeleri_aa_karmak_ethereum_ve_web3te_mahremiyet_labirentinde_yol_almak",
+    "name": "G\u00f6lgeleri A\u00e7\u0131\u011fa \u00c7\u0131karmak: Ethereum ve Web3'te Mahremiyet Labirentinde Yol Almak",
+    "description": "Ethereum tabanli Web3 ekosistemi i\u00e7indeki mahremiyet endi\u015feleri, fark\u0131ndal\u0131\u011f\u0131 ve \u00e7\u00f6z\u00fcmlerinin karma\u015f\u0131k a\u011f\u0131na derinlemesine bir bak\u0131\u015f sunar. \u0130\u015flem ve i\u015flevsel mahremiyet aras\u0131ndaki ikilemi, Katman 1 ve ara yaz\u0131l\u0131m mahremiyet \u00e7\u00f6z\u00fcmlerini inceler ve i\u015flevsel mahremiyet i\u00e7inde niyet tabanl\u0131 protokollerin alan\u0131na yolculuk yapar. Merkezi olmayan dijital gelecekte mahremiyet \u00e7er\u00e7evelerini, yasal uyumluluk \u00e7\u00f6z\u00fcmlerini dikkate sunmay\u0131 ama\u00e7lamaktad\u0131r.\n",
+    "start": 1699869600000,
+    "end": 1699871400000,
+    "stageId": "harbiye",
+    "speakers": [
+        {
+            "id": "isa_sertkaya",
+            "name": "Isa Sertkaya",
+            "bio": "\u0130sa Sertkaya, Silent Protocol'de CTO olarak g\u00f6rev yapmakta ve mahremiyeti art\u0131ran protokoller, teknik \u00f6zellikler, \u00fcr\u00fcn vizyonlar\u0131 ve yol haritalar\u0131n\u0131 \u015fekillendirerek uluslararas\u0131 kriptograflar, yaz\u0131l\u0131m m\u00fchendisleri ve blockchain uzmanlar\u0131ndan olu\u015fan bir ekibi y\u00f6netmektedir.\n\nSilent Protocol'a kat\u0131lmadan \u00f6nce, \u0130sa T\u00dcB\u0130TAK B\u0130LGEM Blokzincir Ara\u015ft\u0131rma Laboratuvar\u0131'nda Ba\u015fuzman Ara\u015ft\u0131rmac\u0131 olarak 20 y\u0131l\u0131 a\u015fk\u0131n s\u00fcreyle kriptografik protokol tasar\u0131m\u0131 ve analizi, kirptoparalar ve blokzincir teknolojileri konular\u0131nda ara\u015ft\u0131rmalar yapt\u0131 ve projeler y\u00f6netti. G\u00f6rev s\u00fcresi boyunca, 2013'te Matematiksel ve Hesaplamal\u0131 Laboratuvar\u0131 ve 2017'de Blockzincir Ara\u015ft\u0131rma Laboratuvar\u0131'n\u0131n kurulumunda bulundu.\n\nSilent Protocol'daki tam zamanl\u0131 g\u00f6revlerinin yan\u0131 s\u0131ra, ayn\u0131 zamanda misafir \u00f6\u011fretim \u00fcyesidir, Ko\u00e7 \u00dcniversitesi ve Orta Do\u011fu Teknik \u00dcniversitesi'nde kripto paralar ve blockchainler \u00fczerine lisans\u00fcst\u00fc dersler verir ve kripto paralar ve blockchain teknolojileri \u00fczerine mahremiyeti art\u0131ran ve s\u0131f\u0131r bilgi protokollerini konu alan lisans\u00fcst\u00fc \u00f6\u011frencilerin tezlerini y\u00f6netmektedir.\n\n\u0130sa lisans derecesini Matematik, y\u00fcksek lisans ve doktoras\u0131n\u0131 Kriptografi alan\u0131nda T\u00fcrkiye, Ankara'daki Orta Do\u011fu Teknik \u00dcniversitesi'nden alm\u0131\u015ft\u0131r.",
+            "eventId": "ethgunu",
+            "twitter": "@isa_sertkaya",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/isa.jpeg?raw=true"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/62ef125mnddbokxt/index.m3u8",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/glgeleri_aa_karmak_ethereum_ve_web3te_mahremiyet_labirentinde_yol_almak_thumbnail.png",
+    "assetId": "62ef5790-0ce6-41d1-9265-f937b27c2450",
+    "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+    "videoType": "clip"
 }

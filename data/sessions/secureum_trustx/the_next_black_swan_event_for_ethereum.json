@@ -1,25 +1,24 @@
 {
-  "id": "the_next_black_swan_event_for_ethereum",
-  "name": "The Next Black Swan Event for Ethereum",
-  "description": "",
-  "start": 1699891380000,
-  "end": 1699892400000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "galen_marchetti",
-      "name": "Galen\nMarchetti",
-      "bio": "Co-Founder & CEO\nKurtosis",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Galen.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/a041knxgasougspr/index.m3u8",
-  "playbackId": "a041knxgasougspr",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/the_next_black_swan_event_for_ethereum.jpg",
-  "assetId": "a041b8d4-f9a0-4687-ae33-c7c82a26ed27",
-  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-  "videoType": "clip"
+    "id": "the_next_black_swan_event_for_ethereum",
+    "name": "The Next Black Swan Event for Ethereum",
+    "description": "",
+    "start": 1699891380000,
+    "end": 1699892400000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "galen_marchetti",
+            "name": "Galen\nMarchetti",
+            "bio": "Co-Founder & CEO\nKurtosis",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Galen.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a041knxgasougspr/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_next_black_swan_event_for_ethereum.jpg",
+    "assetId": "a041b8d4-f9a0-4687-ae33-c7c82a26ed27",
+    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+    "videoType": "clip"
 }

@@ -1,4 +1,7 @@
-import Session, { WHITELISTED_ADDRESSES, tap } from '@/utils/session'
+import Session, {
+  WHITELISTED_ADDRESSES,
+  tap,
+} from '@/lib/utils/session'
 import { NextRequest, NextResponse } from 'next/server'
 import { SiweErrorType, SiweMessage, generateNonce } from 'siwe'
 

@@ -1,32 +1,32 @@
 {
-  "id": "how_new_zk_app_ideas_can_aid_the_commons",
-  "name": "\nHow New ZK App Ideas can Aid the Commons\n",
-  "description": "Discussion of how cryptographic data provenance, zk data guilds, zk nfc proofs, and provenant proofs of identity work, and how they enable new forms of commons-oriented coordination.",
-  "start": 1699083000000,
-  "end": 1699084800000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "aayush_g",
-      "name": "Aayush G ",
-      "bio": "Proof of Email",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "lily_jordan",
-      "name": "Lily Jordan ",
-      "bio": "Researcher",
-      "eventId": "zuconnect__public_goods_track"
-    },
-    {
-      "id": "vivek_bhupatiraju",
-      "name": "Vivek Bhupatiraju \n",
-      "bio": "Jubmojis",
-      "eventId": "zuconnect__public_goods_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/03a5ym9j52f1yg6w/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect__public_goods_track",
-  "coverImage": "/sessions/zuconnect__public_goods_track/how_new_zk_app_ideas_can_aid_the_commons.jpg"
+    "id": "how_new_zk_app_ideas_can_aid_the_commons",
+    "name": "\nHow New ZK App Ideas can Aid the Commons\n",
+    "description": "Discussion of how cryptographic data provenance, zk data guilds, zk nfc proofs, and provenant proofs of identity work, and how they enable new forms of commons-oriented coordination.",
+    "start": 1699083000000,
+    "end": 1699084800000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "aayush_g",
+            "name": "Aayush G ",
+            "bio": "Proof of Email",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "lily_jordan",
+            "name": "Lily Jordan ",
+            "bio": "Researcher",
+            "eventId": "zuconnect__public_goods_track"
+        },
+        {
+            "id": "vivek_bhupatiraju",
+            "name": "Vivek Bhupatiraju \n",
+            "bio": "Jubmojis",
+            "eventId": "zuconnect__public_goods_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/03a5ym9j52f1yg6w/index.m3u8",
+    "eventId": "zuconnect__public_goods_track",
+    "coverImage": "/sessions/zuconnect__public_goods_track/how_new_zk_app_ideas_can_aid_the_commons.jpg",
+    "assetId": "03a5ad96-a413-48fe-b47e-51374d913ed4"
 }

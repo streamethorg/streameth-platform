@@ -1,25 +1,24 @@
 {
-  "id": "lighthouse_slasher",
-  "name": "Lighthouse Slasher",
-  "description": "Fellow project presentation Eitan",
-  "start": 1700210700000,
-  "end": 1700211300000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "eitan_serilevi",
-      "name": "Eitan Seri-Levi",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@0xUncleBill",
-      "photo": "https://avatars.githubusercontent.com/u/7217615?s=400&u=07e425f1cd7d5929b0bd4568ee8825c3446db188&v=4"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/f5c9sl7i7f8odno4/index.m3u8",
-  "playbackId": "f5c9sl7i7f8odno4",
-  "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/lighthouse_slasher_thumbnail.png",
-  "assetId": "f5c90530-b86a-47c8-873a-986fbe4e30c4",
-  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-  "videoType": "clip"
+    "id": "lighthouse_slasher",
+    "name": "Lighthouse Slasher",
+    "description": "Fellow project presentation Eitan",
+    "start": 1700210700000,
+    "end": 1700211300000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "eitan_serilevi",
+            "name": "Eitan Seri-Levi",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@0xUncleBill",
+            "photo": "https://avatars.githubusercontent.com/u/7217615?s=400&u=07e425f1cd7d5929b0bd4568ee8825c3446db188&v=4"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f5c9sl7i7f8odno4/index.m3u8",
+    "eventId": "epf_day",
+    "coverImage": "/sessions/epf_day/lighthouse_slasher_thumbnail.png",
+    "assetId": "f5c90530-b86a-47c8-873a-986fbe4e30c4",
+    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+    "videoType": "clip"
 }

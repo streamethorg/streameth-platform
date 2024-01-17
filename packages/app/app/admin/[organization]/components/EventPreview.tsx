@@ -7,13 +7,13 @@ import {
   UserGroupIcon,
   CameraIcon,
 } from '@heroicons/react/24/outline'
-import colors from '@/constants/colors'
-import { Button } from '@/components/Form/Button'
+import colors from '@/lib/constants/colors'
+import { Button } from '@/components/ui/button'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { ModalContext } from '@/context/ModalContext'
-import useAdminContext from '@/hooks/useAdminContext'
-import { getImageUrl } from '@/utils'
+import { ModalContext } from '@/lib/context/ModalContext'
+import useAdminContext from '@/lib/hooks/useAdminContext'
+import { getImageUrl } from '@/lib/utils'
 
 const ItemButton = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-row justify-center">
@@ -113,7 +113,7 @@ const EventPreview = () => {
                   alt="Event Cover"
                   width={1500}
                   height={500}
-                  className="w-full object-cover h-36 md:h-52 lg:h-96"
+                  className="w-full object-cover h-36 lg:h-52 lg:h-96"
                 />
                 <Image
                   src={getImageUrl('/events/' + formData?.logo)}

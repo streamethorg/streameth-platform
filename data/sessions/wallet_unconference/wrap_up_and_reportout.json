@@ -1,25 +1,24 @@
 {
-  "id": "wrap_up_and_reportout",
-  "name": "Wrap Up and Report-Out",
-  "description": "There are eight timeslots, each with 3 or 4 workshops, meaning that if you attended the entire event, you could not possibly have seem more than one-third of this excellent top-shelf content, ideation, and conversation. Hopefully most of the sessions not recorded produced a page or three of notes.  Reporting out on the sessions helps everyone absorb more data, make mental notes about whom to talk to later, and state next steps into a microphone and youtube recording if they need an accountability anchor.",
-  "start": 1700235000000,
-  "end": 1700236800000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "bumblefudge",
-      "name": "Bumblefudge",
-      "bio": "Janitor @ Chain Agnostic Standards Alliance, Standards Coordinator for Protocol Labs, Advisor @Wallet Connect, and a little freelancing as a treat.  Passionate about non-monetary coordination, public goods, and worker-owned cooperatives, whether those are called DAOs or not.",
-      "eventId": "wallet_unconference",
-      "twitter": "@chainstandards",
-      "photo": "https://i.seadn.io/gcs/files/e1c8613b8409aed75ac38469ac19bde0.png?auto=format&dpr=1&w=1000"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/b245u7mqd71ky10z/index.m3u8",
-  "playbackId": "b245u7mqd71ky10z",
-  "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/wrap_up_and_reportout_thumbnail.png",
-  "assetId": "b245d1fb-d6bd-4bba-9329-fb52a7ea1662",
-  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
-  "videoType": "clip"
+    "id": "wrap_up_and_reportout",
+    "name": "Wrap Up and Report-Out",
+    "description": "There are eight timeslots, each with 3 or 4 workshops, meaning that if you attended the entire event, you could not possibly have seem more than one-third of this excellent top-shelf content, ideation, and conversation. Hopefully most of the sessions not recorded produced a page or three of notes.  Reporting out on the sessions helps everyone absorb more data, make mental notes about whom to talk to later, and state next steps into a microphone and youtube recording if they need an accountability anchor.",
+    "start": 1700235000000,
+    "end": 1700236800000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "bumblefudge",
+            "name": "Bumblefudge",
+            "bio": "Janitor @ Chain Agnostic Standards Alliance, Standards Coordinator for Protocol Labs, Advisor @Wallet Connect, and a little freelancing as a treat.  Passionate about non-monetary coordination, public goods, and worker-owned cooperatives, whether those are called DAOs or not.",
+            "eventId": "wallet_unconference",
+            "twitter": "@chainstandards",
+            "photo": "https://i.seadn.io/gcs/files/e1c8613b8409aed75ac38469ac19bde0.png?auto=format&dpr=1&w=1000"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/b245u7mqd71ky10z/index.m3u8",
+    "eventId": "wallet_unconference",
+    "coverImage": "/sessions/wallet_unconference/wrap_up_and_reportout_thumbnail.png",
+    "assetId": "b245d1fb-d6bd-4bba-9329-fb52a7ea1662",
+    "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+    "videoType": "clip"
 }

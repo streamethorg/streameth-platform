@@ -1,25 +1,24 @@
 {
-  "id": "optimal_dynamic_fees_for_blockchain_resources",
-  "name": "Optimal Dynamic Fees for Blockchain Resources ",
-  "description": "The talk will present the problem of optimal fee market design. We will start with a broad introduction, then discuss a practical framework to derive optimal dynamic fees with multiple resources. I will present theoretical and empirical results derived using this framework and practical case studies of EIP-1559-style policies and multidimensional extensions such as EIP-4844.",
-  "start": 1700047500000,
-  "end": 1700049000000,
-  "stageId": "uskudar_3",
-  "speakers": [
-    {
-      "id": "davide_crapis",
-      "name": "Davide Crapis",
-      "bio": "Davide is a Research Scientist at the Robust Incentives Group within the Ethereum Foundation. Before this, he obtained his Ph.D. from Columbia Business School and spent time at Lyft as a researcher. His current focus is on transaction fee mechanisms, L2 economics and MEV.",
-      "eventId": "ethconomics",
-      "twitter": "@DavideCrapis",
-      "photo": "https://drive.google.com/uc?id=132qc0b6OssIfRV-ZYyy1-WGn8iOiXowg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/282fr8jhhub5a7kw/index.m3u8",
-  "playbackId": "282fr8jhhub5a7kw",
-  "eventId": "ethconomics",
-  "coverImage": "/sessions/ethconomics/optimal_dynamic_fees_for_blockchain_resources_thumbnail.png",
-  "assetId": "282f75c1-4619-437d-84aa-a4fa76963e76",
-  "sourceId": "f7a9cb54-e5bb-4267-948c-68f85d519184",
-  "videoType": "clip"
+    "id": "optimal_dynamic_fees_for_blockchain_resources",
+    "name": "Optimal Dynamic Fees for Blockchain Resources ",
+    "description": "The talk will present the problem of optimal fee market design. We will start with a broad introduction, then discuss a practical framework to derive optimal dynamic fees with multiple resources. I will present theoretical and empirical results derived using this framework and practical case studies of EIP-1559-style policies and multidimensional extensions such as EIP-4844.",
+    "start": 1700047500000,
+    "end": 1700049000000,
+    "stageId": "uskudar_3",
+    "speakers": [
+        {
+            "id": "davide_crapis",
+            "name": "Davide Crapis",
+            "bio": "Davide is a Research Scientist at the Robust Incentives Group within the Ethereum Foundation. Before this, he obtained his Ph.D. from Columbia Business School and spent time at Lyft as a researcher. His current focus is on transaction fee mechanisms, L2 economics and MEV.",
+            "eventId": "ethconomics",
+            "twitter": "@DavideCrapis",
+            "photo": "https://drive.google.com/uc?id=132qc0b6OssIfRV-ZYyy1-WGn8iOiXowg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/282fr8jhhub5a7kw/index.m3u8",
+    "eventId": "ethconomics",
+    "coverImage": "/sessions/ethconomics/optimal_dynamic_fees_for_blockchain_resources_thumbnail.png",
+    "assetId": "282f75c1-4619-437d-84aa-a4fa76963e76",
+    "sourceId": "f7a9cb54-e5bb-4267-948c-68f85d519184",
+    "videoType": "clip"
 }

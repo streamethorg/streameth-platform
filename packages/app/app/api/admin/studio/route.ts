@@ -1,4 +1,4 @@
-import Session from '@/utils/session'
+import Session from '@/lib/utils/session'
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import SessionController from 'streameth-server/controller/session'

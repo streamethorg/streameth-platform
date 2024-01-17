@@ -1,25 +1,24 @@
 {
-  "id": "the_hacker_mentality_what_makes_one_succeed_in_the_bug_bounty_world",
-  "name": "The Hacker Mentality: What makes one Succeed in the Bug Bounty World",
-  "description": "",
-  "start": 1699968600000,
-  "end": 1699969560000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "gonalo__gmhacker",
-      "name": "Gonçalo /\ngmhacker",
-      "bio": "Smart Contract Lead\nImmunefi",
-      "eventId": "secureum_trustx",
-      "twitter": "@realgmhacker",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Goncalo.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/13ad936z4w112sp2/index.m3u8",
-  "playbackId": "13ad936z4w112sp2",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/the_hacker_mentality_what_makes_one_succeed_in_the_bug_bounty_world.jpg",
-  "assetId": "13ad1f27-dd1e-47a8-b3c9-8b162db40a94",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "the_hacker_mentality_what_makes_one_succeed_in_the_bug_bounty_world",
+    "name": "The Hacker Mentality: What makes one Succeed in the Bug Bounty World",
+    "description": "",
+    "start": 1699968600000,
+    "end": 1699969560000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "gonalo__gmhacker",
+            "name": "Gon\u00e7alo /\ngmhacker",
+            "bio": "Smart Contract Lead\nImmunefi",
+            "eventId": "secureum_trustx",
+            "twitter": "@realgmhacker",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Goncalo.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/13ad936z4w112sp2/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/the_hacker_mentality_what_makes_one_succeed_in_the_bug_bounty_world.jpg",
+    "assetId": "13ad1f27-dd1e-47a8-b3c9-8b162db40a94",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

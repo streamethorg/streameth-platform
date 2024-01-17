@@ -1,25 +1,24 @@
 {
-  "id": "speculative_design_for_reverseengineering_your_wallets_reputation",
-  "name": "Speculative design for reverse-engineering your wallet’s reputation",
-  "description": "In today's crowded digital wallet landscape, potential adopters face an arduous choice of what wallet to take a look at, then, download or sign up, and hopefully, keep using again and again. As tech features and user experience define user retention, this is a product reputation that facilitates the “test drive”, or even a decision to stay on the product website longer or close the tab right away. \r\nAs with any other complex system, reputation can be reverse-engineered. When combined with speculative design techniques, these reverse-engineering results can give momentum to any new digital wallet — big or small, well-developed or buggy-alpha one— a chance to be considered along with widely used wallets. The only question: how fair is such reverse engineering?",
-  "start": 1700220600000,
-  "end": 1700222400000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "ira_nezhynska",
-      "name": "Ira Nezhynska",
-      "bio": "Ira is a visual communication designer and a Creative Director based in Berlin. These days she leads visual&brand design at Protocol Labs, helping Web3 founders win hearts and minds of early adopters through the power of aesthetics and emotion-driven design.",
-      "eventId": "wallet_unconference",
-      "twitter": "n/a",
-      "photo": "https://speak.ticketh.xyz/media/avatars/IraNezhynska-headshot_W107tza.jpg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/1927w3flqkayaelx/index.m3u8",
-  "playbackId": "1927w3flqkayaelx",
-  "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/speculative_design_for_reverseengineering_your_wallets_reputation_thumbnail.png",
-  "assetId": "192794db-79b5-4d01-a89b-fdd69488ebca",
-  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
-  "videoType": "clip"
+    "id": "speculative_design_for_reverseengineering_your_wallets_reputation",
+    "name": "Speculative design for reverse-engineering your wallet\u2019s reputation",
+    "description": "In today's crowded digital wallet landscape, potential adopters face an arduous choice of what wallet to take a look at, then, download or sign up, and hopefully, keep using again and again. As tech features and user experience define user retention, this is a product reputation that facilitates the \u201ctest drive\u201d, or even a decision to stay on the product website longer or close the tab right away. \r\nAs with any other complex system, reputation can be reverse-engineered. When combined with speculative design techniques, these reverse-engineering results can give momentum to any new digital wallet \u2014 big or small, well-developed or buggy-alpha one\u2014 a chance to be considered along with widely used wallets. The only question: how fair is such reverse engineering?",
+    "start": 1700220600000,
+    "end": 1700222400000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "ira_nezhynska",
+            "name": "Ira Nezhynska",
+            "bio": "Ira is a visual communication designer and a Creative Director based in Berlin. These days she leads visual&brand design at Protocol Labs, helping Web3 founders win hearts and minds of early adopters through the power of aesthetics and emotion-driven design.",
+            "eventId": "wallet_unconference",
+            "twitter": "n/a",
+            "photo": "https://speak.ticketh.xyz/media/avatars/IraNezhynska-headshot_W107tza.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/1927w3flqkayaelx/index.m3u8",
+    "eventId": "wallet_unconference",
+    "coverImage": "/sessions/wallet_unconference/speculative_design_for_reverseengineering_your_wallets_reputation_thumbnail.png",
+    "assetId": "192794db-79b5-4d01-a89b-fdd69488ebca",
+    "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+    "videoType": "clip"
 }

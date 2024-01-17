@@ -1,26 +1,26 @@
 {
-  "id": "thor_basic_zero_to_this_is_a_circuit_and_why_work",
-  "name": "Thor: basic zero to \"this is a circuit\" and why work",
-  "description": "In this talk we'll unpack what a zero knowledge circuit is, and why it \nworks, at a mathematically accessible level. No prior mathematical \nexperience required!",
-  "start": 1699275600000,
-  "end": 1699277400000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "althea_allen",
-      "name": "Althea Allen \n",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    },
-    {
-      "id": "thor_kamphefner",
-      "name": "Thor Kamphefner",
-      "bio": "No description",
-      "eventId": "zuconnect__zk_track"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/506btrijjt1s8xxj/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect__zk_track",
-  "coverImage": "/sessions/zuconnect__zk_track/thor_basic_zero_to_this_is_a_circuit_and_why_work.jpg"
+    "id": "thor_basic_zero_to_this_is_a_circuit_and_why_work",
+    "name": "Thor: basic zero to \"this is a circuit\" and why work",
+    "description": "In this talk we'll unpack what a zero knowledge circuit is, and why it \nworks, at a mathematically accessible level. No prior mathematical \nexperience required!",
+    "start": 1699275600000,
+    "end": 1699277400000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "althea_allen",
+            "name": "Althea Allen \n",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        },
+        {
+            "id": "thor_kamphefner",
+            "name": "Thor Kamphefner",
+            "bio": "No description",
+            "eventId": "zuconnect__zk_track"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/506btrijjt1s8xxj/index.m3u8",
+    "eventId": "zuconnect__zk_track",
+    "coverImage": "/sessions/zuconnect__zk_track/thor_basic_zero_to_this_is_a_circuit_and_why_work.jpg",
+    "assetId": "506b5635-f203-4f80-a5d0-36550d190ad3"
 }

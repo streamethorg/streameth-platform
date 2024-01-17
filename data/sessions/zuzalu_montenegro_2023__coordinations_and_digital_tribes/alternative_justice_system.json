@@ -1,1 +1,26 @@
-{"id":"alternative_justice_system","name":"Alternative Justice system","description":"","start":1684314000000,"end":1684319400000,"stageId":"dome","speakers":[{"id":"primavera_de_filippi","name":"Primavera de Filippi","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"},{"id":"silke_elrifai","name":"Silke Elrifai","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/bf17kopdr6lkm544/index.m3u8","playbackId":"bf17kopdr6lkm544","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/alternative_justice_system.jpg"}
+{
+    "id": "alternative_justice_system",
+    "name": "Alternative Justice system",
+    "description": "",
+    "start": 1684314000000,
+    "end": 1684319400000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "primavera_de_filippi",
+            "name": "Primavera de Filippi",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        },
+        {
+            "id": "silke_elrifai",
+            "name": "Silke Elrifai",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/bf17kopdr6lkm544/index.m3u8",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/alternative_justice_system.jpg",
+    "assetId": "bf171a9f-2720-4e12-8ca4-7f2d5a320c90"
+}

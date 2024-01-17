@@ -1,41 +1,40 @@
 {
-  "id": "verkle_in_nim",
-  "name": "Verkle in Nim",
-  "description": "Fellow project presentation by Advaita, Agnish, and Naman",
-  "start": 1700222400000,
-  "end": 1700223000000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "advaita_saha",
-      "name": "Advaita Saha",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@0xadvaita",
-      "photo": "https://drive.google.com/file/d/14Kl4yc5WZI_2obDKqtpfgeufoi6XjVTa/view?usp=sharing"
-    },
-    {
-      "id": "agnish_ghosh",
-      "name": "Agnish Ghosh",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@0xagnish",
-      "photo": "https://drive.google.com/file/d/1H4SnEDu3iHmpKwJkXNLMcb8meGEtD07t/view?usp=sharing"
-    },
-    {
-      "id": "naman_garg",
-      "name": "Naman Garg",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@namn_grg",
-      "photo": "https://drive.google.com/file/d/1jmmY59iFYiRDs5q83q-KYMYBTqn3bP7F/view?usp=sharing"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/295dh8cne3qk2pmq/index.m3u8",
-  "playbackId": "295dh8cne3qk2pmq",
-  "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/verkle_in_nim_thumbnail.png",
-  "assetId": "295d3707-ec1b-4fdf-ae52-311589321b32",
-  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-  "videoType": "clip"
+    "id": "verkle_in_nim",
+    "name": "Verkle in Nim",
+    "description": "Fellow project presentation by Advaita, Agnish, and Naman",
+    "start": 1700222400000,
+    "end": 1700223000000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "advaita_saha",
+            "name": "Advaita Saha",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@0xadvaita",
+            "photo": "https://drive.google.com/file/d/14Kl4yc5WZI_2obDKqtpfgeufoi6XjVTa/view?usp=sharing"
+        },
+        {
+            "id": "agnish_ghosh",
+            "name": "Agnish Ghosh",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@0xagnish",
+            "photo": "https://drive.google.com/file/d/1H4SnEDu3iHmpKwJkXNLMcb8meGEtD07t/view?usp=sharing"
+        },
+        {
+            "id": "naman_garg",
+            "name": "Naman Garg",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@namn_grg",
+            "photo": "https://drive.google.com/file/d/1jmmY59iFYiRDs5q83q-KYMYBTqn3bP7F/view?usp=sharing"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/295dh8cne3qk2pmq/index.m3u8",
+    "eventId": "epf_day",
+    "coverImage": "/sessions/epf_day/verkle_in_nim_thumbnail.png",
+    "assetId": "295d3707-ec1b-4fdf-ae52-311589321b32",
+    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+    "videoType": "clip"
 }

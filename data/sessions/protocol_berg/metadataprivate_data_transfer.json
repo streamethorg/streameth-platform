@@ -1,21 +1,21 @@
 {
-  "id": "metadataprivate_data_transfer",
-  "name": "Metadata-private data transfer",
-  "description": "Metadata privacy is critical for personal and private data access. Today, mixnet-like systems are still the only privacy option for low latency data transfer that have been proven at scale. Other techniques are not far behind though, and can allow us to get similar or stronger privacy guarantees without sacrificing latency. I've advised a [funding program](https://research.protocol.ai/blog/2022/announcing-rfp-014-the-one-with-private-retrieval/) over the last year aimed at supporting the transition to practice of private retrieval. This talk will survey currently available systems, and our current guesses for what methods can scale to widespread adoption.",
-  "start": 1694772000000,
-  "end": 1694773500000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "will_scott",
-      "name": "Will Scott",
-      "bio": "My work centers on how to make a more resilient web. To that end, I've worked on projects ranging from internet-wide measurement to privacy-protecting messaging systems. My current work at Protocol Labs is building a robust decentralized storage primitive.\r\n\r\nI've been a ski instructor, speak some chinese, and enjoy playing with fire. I taught computer science in pyongyang.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/profile_znqIAz5.jpg"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/8b52pr4hr0xxuf0s/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/metadataprivate_data_transfer.jpg"
+    "id": "metadataprivate_data_transfer",
+    "name": "Metadata-private data transfer",
+    "description": "Metadata privacy is critical for personal and private data access. Today, mixnet-like systems are still the only privacy option for low latency data transfer that have been proven at scale. Other techniques are not far behind though, and can allow us to get similar or stronger privacy guarantees without sacrificing latency. I've advised a [funding program](https://research.protocol.ai/blog/2022/announcing-rfp-014-the-one-with-private-retrieval/) over the last year aimed at supporting the transition to practice of private retrieval. This talk will survey currently available systems, and our current guesses for what methods can scale to widespread adoption.",
+    "start": 1694772000000,
+    "end": 1694773500000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "will_scott",
+            "name": "Will Scott",
+            "bio": "My work centers on how to make a more resilient web. To that end, I've worked on projects ranging from internet-wide measurement to privacy-protecting messaging systems. My current work at Protocol Labs is building a robust decentralized storage primitive.\r\n\r\nI've been a ski instructor, speak some chinese, and enjoy playing with fire. I taught computer science in pyongyang.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/profile_znqIAz5.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/8b52pr4hr0xxuf0s/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/metadataprivate_data_transfer.jpg",
+    "assetId": "8b528b02-8789-493c-a8a9-923bcd4d1fce"
 }

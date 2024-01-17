@@ -1,25 +1,24 @@
 {
-  "id": "stories_from_the_auditing_trenches_including_lessons_for_devs_lessons_from_top_defi_protocols",
-  "name": "Stories from the Auditing Trenches (including lessons for devs, lessons from top DeFi protocols)",
-  "description": "",
-  "start": 1699948920000,
-  "end": 1699949880000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "yannis_smaragdakis",
-      "name": "Yannis\nSmaragdakis",
-      "bio": "Co-founder\nDedaub ",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Yannis.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/f9f4brwb5cmdeddt/index.m3u8",
-  "playbackId": "f9f4brwb5cmdeddt",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/stories_from_the_auditing_trenches_including_lessons_for_devs_lessons_from_top_defi_protocols.jpg",
-  "assetId": "f9f4db7a-5339-42e8-9b7d-2150e34333e0",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "stories_from_the_auditing_trenches_including_lessons_for_devs_lessons_from_top_defi_protocols",
+    "name": "Stories from the Auditing Trenches (including lessons for devs, lessons from top DeFi protocols)",
+    "description": "",
+    "start": 1699948920000,
+    "end": 1699949880000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "yannis_smaragdakis",
+            "name": "Yannis\nSmaragdakis",
+            "bio": "Co-founder\nDedaub ",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Yannis.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f9f4brwb5cmdeddt/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/stories_from_the_auditing_trenches_including_lessons_for_devs_lessons_from_top_defi_protocols.jpg",
+    "assetId": "f9f4db7a-5339-42e8-9b7d-2150e34333e0",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

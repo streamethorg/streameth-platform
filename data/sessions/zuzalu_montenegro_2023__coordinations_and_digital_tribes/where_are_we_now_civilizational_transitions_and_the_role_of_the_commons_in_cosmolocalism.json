@@ -1,1 +1,20 @@
-{"id":"where_are_we_now_civilizational_transitions_and_the_role_of_the_commons_in_cosmolocalism","name":"Where are we now? Civilizational transitions and the role of the commons in cosmolocalism","description":"","start":1684221300000,"end":1684224000000,"stageId":"dome","speakers":[{"id":"michel_bauwens","name":"Michel Bauwens","bio":"No description","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes"}],"videoUrl":"https://lp-playback.com/hls/61f11ljzk643n8g6/index.m3u8","playbackId":"61f11ljzk643n8g6","eventId":"zuzalu_montenegro_2023__coordinations_and_digital_tribes","coverImage":"/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/where_are_we_now_civilizational_transitions_and_the_role_of_the_commons_in_cosmolocalism.jpg"}
+{
+    "id": "where_are_we_now_civilizational_transitions_and_the_role_of_the_commons_in_cosmolocalism",
+    "name": "Where are we now? Civilizational transitions and the role of the commons in cosmolocalism",
+    "description": "",
+    "start": 1684221300000,
+    "end": 1684224000000,
+    "stageId": "dome",
+    "speakers": [
+        {
+            "id": "michel_bauwens",
+            "name": "Michel Bauwens",
+            "bio": "No description",
+            "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/61f11ljzk643n8g6/index.m3u8",
+    "eventId": "zuzalu_montenegro_2023__coordinations_and_digital_tribes",
+    "coverImage": "/sessions/zuzalu_montenegro_2023__coordinations_and_digital_tribes/where_are_we_now_civilizational_transitions_and_the_role_of_the_commons_in_cosmolocalism.jpg",
+    "assetId": "61f1e546-9417-464f-b07d-c8b3809bdbab"
+}

@@ -1,25 +1,24 @@
 {
-  "id": "decoding_the_evm_a_new_debugging_format_for_smart_contracts",
-  "name": "Decoding the EVM: A New Debugging Format for Smart Contracts",
-  "description": "This talk will introduce Ethdebug—a debugging format for smart contracts.",
-  "start": 1700119500000,
-  "end": 1700121300000,
-  "stageId": "uskudar_2",
-  "speakers": [
-    {
-      "id": "gnidan",
-      "name": "gnidan",
-      "bio": "Ethdebug working group lead // Solidity + EF. author of ≥1 useful dev tool (abi-to-sol). formerly lead of the Truffle suite through its rise and fall",
-      "eventId": "solidity_summit",
-      "twitter": "@gnidan",
-      "photo": "https://drive.google.com/file/d/1SjfTEYayTmgX3FN8juyiJEYOoVOyMLUi/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/c7b2wdllspbg2mqw/index.m3u8",
-  "playbackId": "c7b2wdllspbg2mqw",
-  "eventId": "solidity_summit",
-  "coverImage": "/sessions/solidity_summit/decoding_the_evm_a_new_debugging_format_for_smart_contracts_thumbnail.png",
-  "assetId": "c7b2eb42-7b7c-4229-8b5d-cdf73ac554d5",
-  "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
-  "videoType": "clip"
+    "id": "decoding_the_evm_a_new_debugging_format_for_smart_contracts",
+    "name": "Decoding the EVM: A New Debugging Format for Smart Contracts",
+    "description": "This talk will introduce Ethdebug\u2014a debugging format for smart contracts.",
+    "start": 1700119500000,
+    "end": 1700121300000,
+    "stageId": "uskudar_2",
+    "speakers": [
+        {
+            "id": "gnidan",
+            "name": "gnidan",
+            "bio": "Ethdebug working group lead // Solidity + EF. author of \u22651 useful dev tool (abi-to-sol). formerly lead of the Truffle suite through its rise and fall",
+            "eventId": "solidity_summit",
+            "twitter": "@gnidan",
+            "photo": "https://drive.google.com/file/d/1SjfTEYayTmgX3FN8juyiJEYOoVOyMLUi/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/c7b2wdllspbg2mqw/index.m3u8",
+    "eventId": "solidity_summit",
+    "coverImage": "/sessions/solidity_summit/decoding_the_evm_a_new_debugging_format_for_smart_contracts_thumbnail.png",
+    "assetId": "c7b2eb42-7b7c-4229-8b5d-cdf73ac554d5",
+    "sourceId": "3dec1306-74b6-4d78-821a-54956ced03ea",
+    "videoType": "clip"
 }

@@ -1,25 +1,24 @@
 {
-  "id": "beyond_testing_the_power_of_proof",
-  "name": "Beyond Testing: The Power of Proof",
-  "description": "",
-  "start": 1699952400000,
-  "end": 1699956000000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "chandrakana_nandi",
-      "name": "Chandrakana\nNandi",
-      "bio": "Principal Research Scientist\nCertora",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/11/Chandra.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/bcce8ini94vvakvt/index.m3u8",
-  "playbackId": "bcce8ini94vvakvt",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/beyond_testing_the_power_of_proof.jpg",
-  "assetId": "bcce7873-8654-4cf4-ae4e-ef4760180c07",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "beyond_testing_the_power_of_proof",
+    "name": "Beyond Testing: The Power of Proof",
+    "description": "",
+    "start": 1699952400000,
+    "end": 1699956000000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "chandrakana_nandi",
+            "name": "Chandrakana\nNandi",
+            "bio": "Principal Research Scientist\nCertora",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/11/Chandra.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/bcce8ini94vvakvt/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/beyond_testing_the_power_of_proof.jpg",
+    "assetId": "bcce7873-8654-4cf4-ae4e-ef4760180c07",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

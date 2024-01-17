@@ -1,25 +1,24 @@
 {
-  "id": "bolarinwa_odupe_blockchain_and_payments_in_africa",
-  "name": "Bolarinwa Odupe: Blockchain and Payments in Africa.",
-  "description": "The revolution of decentralization and how it's promoting financial inclusion in Africa. ",
-  "start": 1703085900000,
-  "end": 1703086500000,
-  "stageId": "workshop_room",
-  "speakers": [
-    {
-      "id": "bolarinwa_odupe",
-      "name": "Bolarinwa Odupe",
-      "bio": "Bolarinwa Odupe is an experienced software developer and blockchain consultant and as well leading the team at Centiiv.",
-      "eventId": "siher_defi_africa",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/1pcDns49qVjMGwYyBYF9P5UxRiamtaxUj/view"
-    }
-  ],
-  "playbackId": "044fwbdfns463dsj",
-  "eventId": "siher_defi_africa",
-  "coverImage": "/sessions/siher_defi_africa/bolarinwa_odupe_blockchain_and_payments_in_africa.jpg",
-  "assetId": "044f8266-413f-474b-9a26-400c7646c797",
-  "sourceId": "211094da-091a-48b1-862f-3882a7db20c2",
-  "videoUrl": "https://lp-playback.com/hls/044fwbdfns463dsj/index.m3u8",
-  "videoType": "clip"
+    "id": "bolarinwa_odupe_blockchain_and_payments_in_africa",
+    "name": "Bolarinwa Odupe: Blockchain and Payments in Africa.",
+    "description": "The revolution of decentralization and how it's promoting financial inclusion in Africa. ",
+    "start": 1703085900000,
+    "end": 1703086500000,
+    "stageId": "workshop_room",
+    "speakers": [
+        {
+            "id": "bolarinwa_odupe",
+            "name": "Bolarinwa Odupe",
+            "bio": "Bolarinwa Odupe is an experienced software developer and blockchain consultant and as well leading the team at Centiiv.",
+            "eventId": "siher_defi_africa",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/1pcDns49qVjMGwYyBYF9P5UxRiamtaxUj/view"
+        }
+    ],
+    "eventId": "siher_defi_africa",
+    "coverImage": "/sessions/siher_defi_africa/bolarinwa_odupe_blockchain_and_payments_in_africa.jpg",
+    "assetId": "044f8266-413f-474b-9a26-400c7646c797",
+    "sourceId": "211094da-091a-48b1-862f-3882a7db20c2",
+    "videoUrl": "https://lp-playback.com/hls/044fwbdfns463dsj/index.m3u8",
+    "videoType": "clip"
 }

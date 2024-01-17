@@ -1,41 +1,40 @@
 {
-  "id": "merkeziyetsiz_sosyal_gelecek",
-  "name": "Merkeziyetsiz Sosyal Gelecek",
-  "description": "Merkeziyetsiz sosyal gelecek konusunun, alanında profesyonel Kaira'nın kurucusu & CEO'su Mesut, Moseiki'nin kurucusu & CEO'su Erkan ve Phaver'dan ürün uzmanı Ali ile birlikte tartışılması planlanmaktadır. Bu bağlamda geçmişten geleceğe sosyal medyanın nasıl ele alındığına ve merkeziyetsiz sosyal medya ve social-graph yaklaşımının günümüzde örnekleriyle nasıl ele alınabileceğine dair birçok konuya değinilecektir.",
-  "start": 1699865100000,
-  "end": 1699868700000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "mesut_glecen",
-      "name": "Mesut Gülecen",
-      "bio": "Co-founder of Kaira",
-      "eventId": "ethgunu",
-      "twitter": "@mesutgulecen",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/mesut.jpeg?raw=true"
-    },
-    {
-      "id": "ali_tiknazolu",
-      "name": "Ali Tiknazoğlu",
-      "bio": "Mimar ve tasarımcı olarak kariyerine başlayan Ali Tıknazoğlu, 4 yıl öncesinde başlayan kripto hayatı, farklı trade grupları ve DAO'larla devam etmiştir. 2022 Mart ayından günümüze merkeziyetsiz sosyal medya uygulaması Phaver'da ürün uzmanı olarak çalışmaktadır. Ayrıca farklı projelere topluluk ve pazarlama bağlamında danışmanlık da vermektedir.",
-      "eventId": "ethgunu",
-      "twitter": "@alitiknazoglu",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/ali.jpg?raw=true"
-    },
-    {
-      "id": "erkan_gl",
-      "name": "Erkan Gül",
-      "bio": "Temel Analist, VC, danışman gibi pek çok rol üstlenen ErkanG, 2023 yılında bir Web3 Social Networking uygulaması olan Moseiki' yi kurmuştur.",
-      "eventId": "ethgunu",
-      "twitter": "@_ErkanG",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/erkan.jpg?raw=true"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/9edfy7b2caozk7om/index.m3u8",
-  "playbackId": "9edfy7b2caozk7om",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/merkeziyetsiz_sosyal_gelecek_thumbnail.png",
-  "assetId": "9edf3bb9-9481-4a61-a7e2-2e7f30ffa9ac",
-  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-  "videoType": "clip"
+    "id": "merkeziyetsiz_sosyal_gelecek",
+    "name": "Merkeziyetsiz Sosyal Gelecek",
+    "description": "Merkeziyetsiz sosyal gelecek konusunun, alan\u0131nda profesyonel Kaira'n\u0131n kurucusu & CEO'su Mesut, Moseiki'nin kurucusu & CEO'su Erkan ve Phaver'dan \u00fcr\u00fcn uzman\u0131 Ali ile birlikte tart\u0131\u015f\u0131lmas\u0131 planlanmaktad\u0131r. Bu ba\u011flamda ge\u00e7mi\u015ften gelece\u011fe sosyal medyan\u0131n nas\u0131l ele al\u0131nd\u0131\u011f\u0131na ve merkeziyetsiz sosyal medya ve social-graph yakla\u015f\u0131m\u0131n\u0131n g\u00fcn\u00fcm\u00fczde \u00f6rnekleriyle nas\u0131l ele al\u0131nabilece\u011fine dair bir\u00e7ok konuya de\u011finilecektir.",
+    "start": 1699865100000,
+    "end": 1699868700000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "mesut_glecen",
+            "name": "Mesut G\u00fclecen",
+            "bio": "Co-founder of Kaira",
+            "eventId": "ethgunu",
+            "twitter": "@mesutgulecen",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/mesut.jpeg?raw=true"
+        },
+        {
+            "id": "ali_tiknazolu",
+            "name": "Ali Tiknazo\u011flu",
+            "bio": "Mimar ve tasar\u0131mc\u0131 olarak kariyerine ba\u015flayan Ali T\u0131knazo\u011flu, 4 y\u0131l \u00f6ncesinde ba\u015flayan kripto hayat\u0131, farkl\u0131 trade gruplar\u0131 ve DAO'larla devam etmi\u015ftir. 2022 Mart ay\u0131ndan g\u00fcn\u00fcm\u00fcze merkeziyetsiz sosyal medya uygulamas\u0131 Phaver'da \u00fcr\u00fcn uzman\u0131 olarak \u00e7al\u0131\u015fmaktad\u0131r. Ayr\u0131ca farkl\u0131 projelere topluluk ve pazarlama ba\u011flam\u0131nda dan\u0131\u015fmanl\u0131k da vermektedir.",
+            "eventId": "ethgunu",
+            "twitter": "@alitiknazoglu",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/ali.jpg?raw=true"
+        },
+        {
+            "id": "erkan_gl",
+            "name": "Erkan G\u00fcl",
+            "bio": "Temel Analist, VC, dan\u0131\u015fman gibi pek \u00e7ok rol \u00fcstlenen ErkanG, 2023 y\u0131l\u0131nda bir Web3 Social Networking uygulamas\u0131 olan Moseiki' yi kurmu\u015ftur.",
+            "eventId": "ethgunu",
+            "twitter": "@_ErkanG",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/erkan.jpg?raw=true"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/9edfy7b2caozk7om/index.m3u8",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/merkeziyetsiz_sosyal_gelecek_thumbnail.png",
+    "assetId": "9edf3bb9-9481-4a61-a7e2-2e7f30ffa9ac",
+    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+    "videoType": "clip"
 }

@@ -1,25 +1,24 @@
 {
-  "id": "daolar_ve_deiim_teorisi",
-  "name": "DAOlar ve Değişim Teorisi",
-  "description": "DAO'lar, yani programlanabilir organizasyonlar, politik ekonomiyi dönüştürme potansiyeline sahip evrimsel bir güç olarak önemli bir fırsat sunmasına rağmen, bu teknolojinin varlığının ilk on yılına yaklaştığımızda, yapısal bir yavaşlama ile karşı karşıyadır. Bu konuşma, programlanabilir organizasyonların politik ekonomi bağlamında değişim teorisinin analizine odaklanırken aynı zamanda bu paradigmanın dönüştürücü yeteneğini nasıl artırıp sürdürebileceğimizin yollarını sorgulamaktadır.",
-  "start": 1699875000000,
-  "end": 1699876800000,
-  "stageId": "harbiye",
-  "speakers": [
-    {
-      "id": "cem_dadelen",
-      "name": "Cem Dağdelen",
-      "bio": "Cem bir mekanizma tasarımcısı ve arastirmaci olarak web3 teknolojilerinde çalışan dijital organizasyonların ve protokollerin tasarlanması ve uygulanmasına odaklanıyor. Aynı zamanda \n@gizatechxyz 've @curvelabs in kurucu ortağı.",
-      "eventId": "ethgunu",
-      "twitter": "@CemFDagdelen",
-      "photo": "https://raw.githubusercontent.com/ethgunu/ethgunu.com/main/src/components/main/Speakers/photos/cemD.jpeg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/139efg675e4ndzfy/index.m3u8",
-  "playbackId": "139efg675e4ndzfy",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/daolar_ve_deiim_teorisi_thumbnail.png",
-  "assetId": "139eabc8-36de-4f44-b416-6893d55f7d7f",
-  "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
-  "videoType": "clip"
+    "id": "daolar_ve_deiim_teorisi",
+    "name": "DAOlar ve De\u011fi\u015fim Teorisi",
+    "description": "DAO'lar, yani programlanabilir organizasyonlar, politik ekonomiyi d\u00f6n\u00fc\u015ft\u00fcrme potansiyeline sahip evrimsel bir g\u00fc\u00e7 olarak \u00f6nemli bir f\u0131rsat sunmas\u0131na ra\u011fmen, bu teknolojinin varl\u0131\u011f\u0131n\u0131n ilk on y\u0131l\u0131na yakla\u015ft\u0131\u011f\u0131m\u0131zda, yap\u0131sal bir yava\u015flama ile kar\u015f\u0131 kar\u015f\u0131yad\u0131r. Bu konu\u015fma, programlanabilir organizasyonlar\u0131n politik ekonomi ba\u011flam\u0131nda de\u011fi\u015fim teorisinin analizine odaklan\u0131rken ayn\u0131 zamanda bu paradigman\u0131n d\u00f6n\u00fc\u015ft\u00fcr\u00fcc\u00fc yetene\u011fini nas\u0131l art\u0131r\u0131p s\u00fcrd\u00fcrebilece\u011fimizin yollar\u0131n\u0131 sorgulamaktad\u0131r.",
+    "start": 1699875000000,
+    "end": 1699876800000,
+    "stageId": "harbiye",
+    "speakers": [
+        {
+            "id": "cem_dadelen",
+            "name": "Cem Da\u011fdelen",
+            "bio": "Cem bir mekanizma tasar\u0131mc\u0131s\u0131 ve arastirmaci olarak web3 teknolojilerinde \u00e7al\u0131\u015fan dijital organizasyonlar\u0131n ve protokollerin tasarlanmas\u0131 ve uygulanmas\u0131na odaklan\u0131yor. Ayn\u0131 zamanda \n@gizatechxyz 've @curvelabs in kurucu orta\u011f\u0131.",
+            "eventId": "ethgunu",
+            "twitter": "@CemFDagdelen",
+            "photo": "https://raw.githubusercontent.com/ethgunu/ethgunu.com/main/src/components/main/Speakers/photos/cemD.jpeg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/139efg675e4ndzfy/index.m3u8",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/daolar_ve_deiim_teorisi_thumbnail.png",
+    "assetId": "139eabc8-36de-4f44-b416-6893d55f7d7f",
+    "sourceId": "627f0c12-cdbd-4337-a50a-3f27b82cd2c3",
+    "videoType": "clip"
 }

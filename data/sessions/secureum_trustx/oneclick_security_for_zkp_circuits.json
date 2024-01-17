@@ -1,25 +1,24 @@
 {
-  "id": "oneclick_security_for_zkp_circuits",
-  "name": "One-click security for ZKP circuits",
-  "description": "",
-  "start": 1699979100000,
-  "end": 1699979400000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "zheng_leong_chua",
-      "name": "Zheng\nLeong Chua",
-      "bio": "Co-founder\nAutomata Network",
-      "eventId": "secureum_trustx",
-      "twitter": "@melynx",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Zheng.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/b081pnt0nr3y9jsj/index.m3u8",
-  "playbackId": "b081pnt0nr3y9jsj",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/oneclick_security_for_zkp_circuits.jpg",
-  "assetId": "b081323f-3eee-4813-988f-91dd718fdba1",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "oneclick_security_for_zkp_circuits",
+    "name": "One-click security for ZKP circuits",
+    "description": "",
+    "start": 1699979100000,
+    "end": 1699979400000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "zheng_leong_chua",
+            "name": "Zheng\nLeong Chua",
+            "bio": "Co-founder\nAutomata Network",
+            "eventId": "secureum_trustx",
+            "twitter": "@melynx",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Zheng.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/b081pnt0nr3y9jsj/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/oneclick_security_for_zkp_circuits.jpg",
+    "assetId": "b081323f-3eee-4813-988f-91dd718fdba1",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

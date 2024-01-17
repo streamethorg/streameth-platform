@@ -1,25 +1,24 @@
 {
-  "id": "eips_that_sound_zkevmscary_the_rough_path_towards_evm_proof_of_validity",
-  "name": "EIPs that sound ZKEVM-scary. The rough path towards EVM Proof of Validity. ",
-  "description": "The idea of this talk is to expose some of the EIP proposals that we've seen out there and how challenging would be towards getting, at some point, close to a Proof Of Validity of the Ethereum Chain.\n\nThis will also go through possible solutions and expected hard problems.",
-  "start": 1699951200000,
-  "end": 1699952100000,
-  "stageId": "emirgan_1",
-  "speakers": [
-    {
-      "id": "cperezz",
-      "name": "CPerezz",
-      "bio": "Working at PSE for 3+years. One of the main contributors of the ZKEVM and Halo2-PSE & halo2curves mantainer (among others).\n\nCurrently working on folding among any other random things that pickup my interest.",
-      "eventId": "evm_summit",
-      "twitter": "",
-      "photo": "https://evmsummit.org/images/speakers/cperezz.jpg"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/e902w1njdvzl89g4/index.m3u8",
-  "playbackId": "e902w1njdvzl89g4",
-  "eventId": "evm_summit",
-  "coverImage": "/sessions/evm_summit/eips_that_sound_zkevmscary_the_rough_path_towards_evm_proof_of_validity_thumbnail.png",
-  "assetId": "e9029092-2925-4f51-8a77-e869cf0a03ae",
-  "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
-  "videoType": "clip"
+    "id": "eips_that_sound_zkevmscary_the_rough_path_towards_evm_proof_of_validity",
+    "name": "EIPs that sound ZKEVM-scary. The rough path towards EVM Proof of Validity. ",
+    "description": "The idea of this talk is to expose some of the EIP proposals that we've seen out there and how challenging would be towards getting, at some point, close to a Proof Of Validity of the Ethereum Chain.\n\nThis will also go through possible solutions and expected hard problems.",
+    "start": 1699951200000,
+    "end": 1699952100000,
+    "stageId": "emirgan_1",
+    "speakers": [
+        {
+            "id": "cperezz",
+            "name": "CPerezz",
+            "bio": "Working at PSE for 3+years. One of the main contributors of the ZKEVM and Halo2-PSE & halo2curves mantainer (among others).\n\nCurrently working on folding among any other random things that pickup my interest.",
+            "eventId": "evm_summit",
+            "twitter": "",
+            "photo": "https://evmsummit.org/images/speakers/cperezz.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/e902w1njdvzl89g4/index.m3u8",
+    "eventId": "evm_summit",
+    "coverImage": "/sessions/evm_summit/eips_that_sound_zkevmscary_the_rough_path_towards_evm_proof_of_validity_thumbnail.png",
+    "assetId": "e9029092-2925-4f51-8a77-e869cf0a03ae",
+    "sourceId": "2e4afe2c-b93d-4a95-bf46-1b588653d645",
+    "videoType": "clip"
 }

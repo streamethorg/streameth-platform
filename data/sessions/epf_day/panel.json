@@ -1,29 +1,28 @@
 {
-  "id": "panel",
-  "name": "Panel",
-  "description": "Panel discussion with mentors and core devs",
-  "start": 1700229600000,
-  "end": 1700233200000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "ignacio_hagiopan",
-      "name": "Ignacio Hagiopan",
-      "bio": "EF researcher ",
-      "eventId": "epf_day"
-    },
-    {
-      "id": "light_client",
-      "name": "Light Client",
-      "bio": "Geth core developer",
-      "eventId": "epf_day"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/315fiuzwp1fjh3rr/index.m3u8",
-  "playbackId": "315fiuzwp1fjh3rr",
-  "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/panel_thumbnail.png",
-  "assetId": "315ffd74-a841-4890-a06e-eeae936d543e",
-  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-  "videoType": "clip"
+    "id": "panel",
+    "name": "Panel",
+    "description": "Panel discussion with mentors and core devs",
+    "start": 1700229600000,
+    "end": 1700233200000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "ignacio_hagiopan",
+            "name": "Ignacio Hagiopan",
+            "bio": "EF researcher ",
+            "eventId": "epf_day"
+        },
+        {
+            "id": "light_client",
+            "name": "Light Client",
+            "bio": "Geth core developer",
+            "eventId": "epf_day"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/315fiuzwp1fjh3rr/index.m3u8",
+    "eventId": "epf_day",
+    "coverImage": "/sessions/epf_day/panel_thumbnail.png",
+    "assetId": "315ffd74-a841-4890-a06e-eeae936d543e",
+    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+    "videoType": "clip"
 }

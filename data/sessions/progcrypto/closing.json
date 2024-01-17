@@ -1,25 +1,24 @@
 {
-  "id": "closing",
-  "name": "Closing",
-  "description": "Don't leave early! We won't tell you exactly what's going to happen, but there will be frogs, jubmojis, prizes and possibly chaos.",
-  "start": 1700229600000,
-  "end": 1700231400000,
-  "stageId": "auditorium",
-  "speakers": [
-    {
-      "id": "althea",
-      "name": "Althea",
-      "bio": "Althea works as a coordinator for the communications, design and ecodev teams within Privacy and Scaling Explorations.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/13YNwkBhJL950cWjvsa8oDchyKVXpPFdV/view"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/c36djoge8jb2zbwl/index.m3u8",
-  "playbackId": "c36djoge8jb2zbwl",
-  "eventId": "progcrypto",
-  "coverImage": "/sessions/progcrypto/closing_thumbnail.png",
-  "assetId": "c36de761-9b27-4087-818a-6e40a8a1d495",
-  "sourceId": "17264d1b-22cb-4510-a583-837293741512",
-  "videoType": "clip"
+    "id": "closing",
+    "name": "Closing",
+    "description": "Don't leave early! We won't tell you exactly what's going to happen, but there will be frogs, jubmojis, prizes and possibly chaos.",
+    "start": 1700229600000,
+    "end": 1700231400000,
+    "stageId": "auditorium",
+    "speakers": [
+        {
+            "id": "althea",
+            "name": "Althea",
+            "bio": "Althea works as a coordinator for the communications, design and ecodev teams within Privacy and Scaling Explorations.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/13YNwkBhJL950cWjvsa8oDchyKVXpPFdV/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/c36djoge8jb2zbwl/index.m3u8",
+    "eventId": "progcrypto",
+    "coverImage": "/sessions/progcrypto/closing_thumbnail.png",
+    "assetId": "c36de761-9b27-4087-818a-6e40a8a1d495",
+    "sourceId": "17264d1b-22cb-4510-a583-837293741512",
+    "videoType": "clip"
 }

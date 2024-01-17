@@ -1,0 +1,40 @@
+{
+  "id": "progcrypto",
+  "name": "PROGCRYPTO",
+  "description": "The Programmable Cryptography Conference is a 2-day event, organized by 0xPARC and PSE, which brings together researchers, developers, and community members focused on next-generation cryptography and its applications.\n\nhttps://progcrypto.org",
+  "start": "2023-11-16T00:00:00.000Z",
+  "end": "2023-11-17T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "oxparc",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1ThTxkA2yS70G2VIhofPjDtqowTzhKBDR8OZw-xTYJhs",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "PROGCRYPTO_Cover.png",
+  "website": "",
+  "archiveMode": true,
+  "timezone": "Europe/Istanbul",
+  "logo": "PROGCRYPTO_Logo.png",
+  "banner": "PROGCRYPTO_Banner.png",
+  "accentColor": "#4A6E5E",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1_NAjuSuEIf4YLY8VqhiWTHuOVhy27m52",
+        "driveApiKey": ""
+      }
+    }
+  ],
+  "startTime": "10:00",
+  "endTime": "18:00",
+  "plugins": {
+    "disableChat": true
+  },
+  "enableVideoDownloader": true
+}

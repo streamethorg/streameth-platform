@@ -1,0 +1,36 @@
+{
+  "id": "autonomous_worlds_assembly",
+  "name": "Autonomous Worlds Assembly",
+  "description": "We will run talks, game demos, workshops, and panels to advance the plot on Autonomous Worlds. Tracks include World Technology, Digital Physics, and Decentralised Worldbuilding.\n\nhttps://aw.network/2023",
+  "start": "2023-11-15T00:00:00.000Z",
+  "end": "2023-11-16T00:00:00.000Z",
+  "location": "Istanbul, Türkiye",
+  "organizationId": "oxparc",
+  "dataImporter": [
+    {
+      "type": "gsheet",
+      "config": {
+        "sheetId": "1vELhQQFYvrYZguutufi1hHdo00p-lCbN4MaJOrA_XzE",
+        "apiKey": "k"
+      }
+    }
+  ],
+  "eventCover": "AWA_cover.png",
+  "website": "",
+  "archiveMode": true,
+  "timezone": "Europe/Istanbul",
+  "logo": "AWA_Logo.png",
+  "banner": "AWA_Banner.png",
+  "accentColor": "#7d4c2c",
+  "dataExporter": [
+    {
+      "type": "gdrive",
+      "config": {
+        "driveId": "1MPl5Wm3YHmvs-CzoFg5-ofLPtA9WSCbw",
+        "driveApiKey": ""
+      }
+    }
+  ],
+  "startTime": "10:00",
+  "endTime": "18:00"
+}

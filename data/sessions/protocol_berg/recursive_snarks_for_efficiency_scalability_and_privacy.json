@@ -1,21 +1,21 @@
 {
-  "id": "recursive_snarks_for_efficiency_scalability_and_privacy",
-  "name": "Recursive SNARKs for Efficiency, Scalability, and Privacy",
-  "description": "Blockchains, with their primary focus on decentralization, open participation, and resilience, inherently lack efficiency, scalability, and privacy. Similar to parallel computing algorithms, the scalability of a blockchain-based system depends on the extent to which computational tasks can be moved off-chain. Zero knowledge techniques, such as recursive SNARKs, offer an effective means of shifting computation off-chain, requiring only proof verification as part of the consensus process. Mina demonstrates the use of these techniques in its consensus algorithm Ouroboros Samasika and zkApps. Privacy poses a challenge in blockchain systems due to their open public ledgers. However, zero knowledge proofs enable reduced data exposure on the public ledger and allow fine-tuning of the level of disclosure. Etonec's payment system serves as an exemplary application showcasing enhanced privacy in blockchains.",
-  "start": 1694784600000,
-  "end": 1694786100000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "philipp_kant",
-      "name": "Philipp Kant",
-      "bio": "Philipp Kant is the Engineering Manager at Mina Foundation, the public benefit corporation serving the Mina Protocol. Previously, he worked at IOHK as the Head of Engineering for five years where he studied theoretical physics and software engineering. Philipp brings a passion for building high-quality, decentralized software to his role at Mina Foundation.",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/IMG_3165_yxGbxVE.jpg"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/a03fczqqu4epa59k/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/recursive_snarks_for_efficiency_scalability_and_privacy.jpg"
+    "id": "recursive_snarks_for_efficiency_scalability_and_privacy",
+    "name": "Recursive SNARKs for Efficiency, Scalability, and Privacy",
+    "description": "Blockchains, with their primary focus on decentralization, open participation, and resilience, inherently lack efficiency, scalability, and privacy. Similar to parallel computing algorithms, the scalability of a blockchain-based system depends on the extent to which computational tasks can be moved off-chain. Zero knowledge techniques, such as recursive SNARKs, offer an effective means of shifting computation off-chain, requiring only proof verification as part of the consensus process. Mina demonstrates the use of these techniques in its consensus algorithm Ouroboros Samasika and zkApps. Privacy poses a challenge in blockchain systems due to their open public ledgers. However, zero knowledge proofs enable reduced data exposure on the public ledger and allow fine-tuning of the level of disclosure. Etonec's payment system serves as an exemplary application showcasing enhanced privacy in blockchains.",
+    "start": 1694784600000,
+    "end": 1694786100000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "philipp_kant",
+            "name": "Philipp Kant",
+            "bio": "Philipp Kant is the Engineering Manager at Mina Foundation, the public benefit corporation serving the Mina Protocol. Previously, he worked at IOHK as the Head of Engineering for five years where he studied theoretical physics and software engineering. Philipp brings a passion for building high-quality, decentralized software to his role at Mina Foundation.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/IMG_3165_yxGbxVE.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a03fczqqu4epa59k/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/recursive_snarks_for_efficiency_scalability_and_privacy.jpg",
+    "assetId": "a03ffac5-223f-4a12-9319-6eb5951fd56a"
 }

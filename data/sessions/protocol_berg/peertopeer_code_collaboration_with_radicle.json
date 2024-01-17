@@ -1,1 +1,28 @@
-{"id":"peertopeer_code_collaboration_with_radicle","name":"Peer-to-peer code collaboration with Radicle","description":"In this hands-on workshop, we’ll learn how to use the Radicle stack to collaborate on a code project. We’ll run our own nodes, connect to peers, and grow a virtual garden together.","start":1694767500000,"end":1694769900000,"stageId":"loft__workshop_0","speakers":[{"id":"erik_kundt","name":"Erik Kundt","bio":"Erik (he/they) works as a freelance artist and developer with a focus on audio / visual coding and decentralized technologies.\r\n\r\nHe has worked in the area of professional music production for Native Instruments, and later on the Solidity programming language for the Ethereum Foundation. Besides these occupations, he has directed several dance, performance and documentary theater projects in their own technical fields, such as video production and mapping, VR / AR and AI.\r\n\r\nAt the moment he is mainly contributing to the Radicle stack and building tools for generative artists.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/ich_klein_quad_RgICawD.png"},{"id":"sebastian_martinez","name":"Sebastian Martinez","bio":"Sebastian Martinez, a mechanical engineer turned to the web, is currently contributing to the future of code collaboration at Radicle. Drawing on his unique experience implementing proof-of-existence solutions in the nuclear industry.\r\n\r\nFrom his roots in Switzerland and a personal discovery in Argentina, Sebastian's journey has shaped him into a passionate tech professional and dedicated father of two, poised to make a significant impact in the technology sphere.","eventId":"protocol_berg","photo":"https://speak.protocol.berlin/media/avatars/4_Original_bjmGedC.jpg"}],"playbackId":"", "videoUrl": "https://lp-playback.com/hls/a5f65eeoiep6qmpp/index.m3u8","eventId":"protocol_berg","coverImage":"/sessions/protocol_berg/peertopeer_code_collaboration_with_radicle.jpg"}
+{
+    "id": "peertopeer_code_collaboration_with_radicle",
+    "name": "Peer-to-peer code collaboration with Radicle",
+    "description": "In this hands-on workshop, we\u2019ll learn how to use the Radicle stack to collaborate on a code project. We\u2019ll run our own nodes, connect to peers, and grow a virtual garden together.",
+    "start": 1694767500000,
+    "end": 1694769900000,
+    "stageId": "loft__workshop_0",
+    "speakers": [
+        {
+            "id": "erik_kundt",
+            "name": "Erik Kundt",
+            "bio": "Erik (he/they) works as a freelance artist and developer with a focus on audio / visual coding and decentralized technologies.\r\n\r\nHe has worked in the area of professional music production for Native Instruments, and later on the Solidity programming language for the Ethereum Foundation. Besides these occupations, he has directed several dance, performance and documentary theater projects in their own technical fields, such as video production and mapping, VR / AR and AI.\r\n\r\nAt the moment he is mainly contributing to the Radicle stack and building tools for generative artists.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/ich_klein_quad_RgICawD.png"
+        },
+        {
+            "id": "sebastian_martinez",
+            "name": "Sebastian Martinez",
+            "bio": "Sebastian Martinez, a mechanical engineer turned to the web, is currently contributing to the future of code collaboration at Radicle. Drawing on his unique experience implementing proof-of-existence solutions in the nuclear industry.\r\n\r\nFrom his roots in Switzerland and a personal discovery in Argentina, Sebastian's journey has shaped him into a passionate tech professional and dedicated father of two, poised to make a significant impact in the technology sphere.",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/4_Original_bjmGedC.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a5f65eeoiep6qmpp/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/peertopeer_code_collaboration_with_radicle.jpg",
+    "assetId": "a5f6648c-b24c-4560-83ad-13df646f24a6"
+}

@@ -10,11 +10,11 @@ import {
   IDataImporter,
   IEvent,
 } from 'streameth-server/model/event'
-import { ModalContext } from '@/context/ModalContext'
+import { ModalContext } from '@/lib/context/ModalContext'
 import SuccessErrorModal from './SuccessErrorModal'
-import useValidateForm from '@/hooks/useValidateForm'
-import { EventFormSchema } from '@/constants/event'
-import useLocalStorage from '@/hooks/useLocalStorage'
+import useValidateForm from '@/lib/hooks/useValidateForm'
+import { EventFormSchema } from '@/lib/constants/event'
+import useLocalStorage from '@/lib/hooks/useLocalStorage'
 // Define the shape of the context
 interface IEventFormContext {
   currentStep: number

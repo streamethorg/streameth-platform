@@ -1,25 +1,24 @@
 {
-  "id": "security__common_pitfalls_of_merkle_trees",
-  "name": "Security & Common Pitfalls Of Merkle Trees",
-  "description": "",
-  "start": 1699949880000,
-  "end": 1699950600000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "kirk_baird",
-      "name": "Kirk\nBaird",
-      "bio": "Security Manager\nSigma Prime",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Kirk.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/050cwqmoxd19439d/index.m3u8",
-  "playbackId": "050cwqmoxd19439d",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/security__common_pitfalls_of_merkle_trees.jpg",
-  "assetId": "050ce0b3-0dce-488e-ae26-6257a4856e76",
-  "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
-  "videoType": "clip"
+    "id": "security__common_pitfalls_of_merkle_trees",
+    "name": "Security & Common Pitfalls Of Merkle Trees",
+    "description": "",
+    "start": 1699949880000,
+    "end": 1699950600000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "kirk_baird",
+            "name": "Kirk\nBaird",
+            "bio": "Security Manager\nSigma Prime",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Kirk.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/050cwqmoxd19439d/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/security__common_pitfalls_of_merkle_trees.jpg",
+    "assetId": "050ce0b3-0dce-488e-ae26-6257a4856e76",
+    "sourceId": "117cdf8c-2a79-4654-9f97-27d484b4f7f5",
+    "videoType": "clip"
 }

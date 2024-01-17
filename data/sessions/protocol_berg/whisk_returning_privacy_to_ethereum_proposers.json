@@ -1,21 +1,21 @@
 {
-  "id": "whisk_returning_privacy_to_ethereum_proposers",
-  "name": "Whisk: returning privacy to Ethereum proposers",
-  "description": "Proposal for Whisk: a privacy-preserving protocol for electing block proposers on the Ethereum beacon chain designed by George Kadianakis",
-  "start": 1694786400000,
-  "end": 1694787900000,
-  "stageId": "atelier__side_stage",
-  "speakers": [
-    {
-      "id": "dapplion",
-      "name": "dapplion",
-      "bio": "Eth2.0 core dev at Lodestar @chainsafeth | merge coordinator @gnosischain | og dev at @dappnode",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/hq-my-edit-light-small-MAIN-SMALLER_PxQk1aI.jpg"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/b455h4d761r9t104/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/whisk_returning_privacy_to_ethereum_proposers.jpg"
+    "id": "whisk_returning_privacy_to_ethereum_proposers",
+    "name": "Whisk: returning privacy to Ethereum proposers",
+    "description": "Proposal for Whisk: a privacy-preserving protocol for electing block proposers on the Ethereum beacon chain designed by George Kadianakis",
+    "start": 1694786400000,
+    "end": 1694787900000,
+    "stageId": "atelier__side_stage",
+    "speakers": [
+        {
+            "id": "dapplion",
+            "name": "dapplion",
+            "bio": "Eth2.0 core dev at Lodestar @chainsafeth | merge coordinator @gnosischain | og dev at @dappnode",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/hq-my-edit-light-small-MAIN-SMALLER_PxQk1aI.jpg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/b455h4d761r9t104/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/whisk_returning_privacy_to_ethereum_proposers.jpg",
+    "assetId": "b4551444-0578-4d03-8c25-a67750f15055"
 }

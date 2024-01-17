@@ -1,25 +1,24 @@
 {
-  "id": "bringing_web2_habits_to_web3_with_battletested_security",
-  "name": "Bringing Web2 Habits to Web3 with Battle-Tested Security",
-  "description": "Using secure elements and biometric authentication to onboard users into the web3 ecosystem will be a game changer for the next incoming wave. Enabling the secp256r1 curve through precompilers (i.e. EIP-7212) or verifiers provides the user with seamless and completely non-custodial wallet ownership based on biometric identity. Combining this with account abstraction (sponsored tx, spending accounts, recovery alternatives and more) allows wallets to mimic user habits on web2 and in this way the blockchain can be a truly invisible backend service to the user.",
-  "start": 1700208900000,
-  "end": 1700209800000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "baki_er",
-      "name": "Baki Er",
-      "bio": "Co-Founder & Head of Product at Clave. 10+ years in product development and management, 5 years in blockchain ecosystem. MSc in Robotics. Founder of DeFi Library. DeFi Advocate & Researcher.",
-      "eventId": "wallet_unconference",
-      "twitter": "@LibraryDefi",
-      "photo": "https://speak.ticketh.xyz/media/avatars/Baki_Er_RgO4Z3r.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/a2a9ojnrmulwbukv/index.m3u8",
-  "playbackId": "a2a9ojnrmulwbukv",
-  "eventId": "wallet_unconference",
-  "coverImage": "/sessions/wallet_unconference/bringing_web2_habits_to_web3_with_battletested_security_thumbnail.png",
-  "assetId": "a2a988d9-202a-480c-b8b5-d55db8e905d9",
-  "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
-  "videoType": "clip"
+    "id": "bringing_web2_habits_to_web3_with_battletested_security",
+    "name": "Bringing Web2 Habits to Web3 with Battle-Tested Security",
+    "description": "Using secure elements and biometric authentication to onboard users into the web3 ecosystem will be a game changer for the next incoming wave. Enabling the secp256r1 curve through precompilers (i.e. EIP-7212) or verifiers provides the user with seamless and completely non-custodial wallet ownership based on biometric identity. Combining this with account abstraction (sponsored tx, spending accounts, recovery alternatives and more) allows wallets to mimic user habits on web2 and in this way the blockchain can be a truly invisible backend service to the user.",
+    "start": 1700208900000,
+    "end": 1700209800000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "baki_er",
+            "name": "Baki Er",
+            "bio": "Co-Founder & Head of Product at Clave. 10+ years in product development and management, 5 years in blockchain ecosystem. MSc in Robotics. Founder of DeFi Library. DeFi Advocate & Researcher.",
+            "eventId": "wallet_unconference",
+            "twitter": "@LibraryDefi",
+            "photo": "https://speak.ticketh.xyz/media/avatars/Baki_Er_RgO4Z3r.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/a2a9ojnrmulwbukv/index.m3u8",
+    "eventId": "wallet_unconference",
+    "coverImage": "/sessions/wallet_unconference/bringing_web2_habits_to_web3_with_battletested_security_thumbnail.png",
+    "assetId": "a2a988d9-202a-480c-b8b5-d55db8e905d9",
+    "sourceId": "771e3e00-18cf-4527-bf12-ac736ccddbba",
+    "videoType": "clip"
 }

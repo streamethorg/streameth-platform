@@ -1,26 +1,26 @@
 {
-  "id": "sensemaking_sessions",
-  "name": "Sense-making Sessions",
-  "description": "An introduction and excercise in understanding the cognitive mechanisms of sensemaking and rationality, in order to fortify and protect the intellectual autonomy of individuals.",
-  "start": 1698836400000,
-  "end": 1698840900000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "burns",
-      "name": "Burns",
-      "bio": "No description",
-      "eventId": "zuconnect_istanbul__new_governance"
-    },
-    {
-      "id": "anna_redl",
-      "name": "Anna Redl",
-      "bio": "No description",
-      "eventId": "zuconnect_istanbul__new_governance"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/67fb8z0hzjm6a326/index.m3u8",
-  "eventId": "zuconnect_istanbul__new_governance",
-  "coverImage": "/sessions/zuconnect_istanbul__new_governance/sensemaking_sessions.jpg"
+    "id": "sensemaking_sessions",
+    "name": "Sense-making Sessions",
+    "description": "An introduction and excercise in understanding the cognitive mechanisms of sensemaking and rationality, in order to fortify and protect the intellectual autonomy of individuals.",
+    "start": 1698836400000,
+    "end": 1698840900000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "burns",
+            "name": "Burns",
+            "bio": "No description",
+            "eventId": "zuconnect_istanbul__new_governance"
+        },
+        {
+            "id": "anna_redl",
+            "name": "Anna Redl",
+            "bio": "No description",
+            "eventId": "zuconnect_istanbul__new_governance"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/67fb8z0hzjm6a326/index.m3u8",
+    "eventId": "zuconnect_istanbul__new_governance",
+    "coverImage": "/sessions/zuconnect_istanbul__new_governance/sensemaking_sessions.jpg",
+    "assetId": "67fbf1f2-e76a-4628-be03-6c33f32cd01a"
 }

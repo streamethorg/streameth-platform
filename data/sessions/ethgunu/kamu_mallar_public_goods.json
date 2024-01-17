@@ -1,33 +1,32 @@
 {
-  "id": "kamu_mallar_public_goods",
-  "name": "Kamu Malları (Public Goods)",
-  "description": "Web3 ekosisteminde oldukça yaygın görülen Kamu Malları'nın (Public Goods) neler olduğunu, bir şeyin Public Good sayılabilmesi için nelerin gerektiğini ve bu malların Web3 ekosisteminde nasıl fonlandığını öğreneceksiniz.",
-  "start": 1699882200000,
-  "end": 1699884000000,
-  "stageId": "beyazit",
-  "speakers": [
-    {
-      "id": "taylan_nal",
-      "name": "Taylan Ünal",
-      "bio": "İTÜ Elektronik ve Haberleşme Bölümü'nden mezun olan Taylan Ünal, blockchain teknolojisiyle tanışana dek yapay zeka ve büyük veri alanlarında görevler üstlendi.\n\nAynı zamanda, ulusal ve uluslararası düzeyde sosyal sorumluluk projelerine katılarak, eğitimde fırsat eşitsizliği gibi toplumsal meselelere çözüm sunma konusunda çalışmalar yürüttü.\n\nTürkiye'nin ilk blokzincir kulübü olan İTÜ Blockchain Kulübü'nde genel sekreterlik ve başkanlık görevlerini üstlenerek blokzincir teknolojisinin yaygınlaştırılması ve bilinirliğinin artırılması için çeşitli etkinlikler düzenledi, hackathonlara katılarak bu alandaki bilgi ve becerilerini geliştirdi.\n\nŞu an geliştirilmekte olan bir kripto cüzdan projesinin güvenlik tarafında görev almaktadır.",
-      "eventId": "ethgunu",
-      "twitter": "@unalf_Taylan",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/taylan.jpg?raw=true"
-    },
-    {
-      "id": "smeyra_bostanc",
-      "name": "Sümeyra Bostancı",
-      "bio": "No description",
-      "eventId": "ethgunu",
-      "twitter": "@0xsumeyraa",
-      "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/sumeyra.jpeg?raw=true"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/58d2bld7an1quske/index.m3u8",
-  "playbackId": "58d2bld7an1quske",
-  "eventId": "ethgunu",
-  "coverImage": "/sessions/ethgunu/kamu_mallar_public_goods_thumbnail.png",
-  "assetId": "58d26d69-9412-4962-8a57-1a63a7bce70b",
-  "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
-  "videoType": "clip"
+    "id": "kamu_mallar_public_goods",
+    "name": "Kamu Mallar\u0131 (Public Goods)",
+    "description": "Web3 ekosisteminde olduk\u00e7a yayg\u0131n g\u00f6r\u00fclen Kamu Mallar\u0131'n\u0131n (Public Goods) neler oldu\u011funu, bir \u015feyin Public Good say\u0131labilmesi i\u00e7in nelerin gerekti\u011fini ve bu mallar\u0131n Web3 ekosisteminde nas\u0131l fonland\u0131\u011f\u0131n\u0131 \u00f6\u011freneceksiniz.",
+    "start": 1699882200000,
+    "end": 1699884000000,
+    "stageId": "beyazit",
+    "speakers": [
+        {
+            "id": "taylan_nal",
+            "name": "Taylan \u00dcnal",
+            "bio": "\u0130T\u00dc Elektronik ve Haberle\u015fme B\u00f6l\u00fcm\u00fc'nden mezun olan Taylan \u00dcnal, blockchain teknolojisiyle tan\u0131\u015fana dek yapay zeka ve b\u00fcy\u00fck veri alanlar\u0131nda g\u00f6revler \u00fcstlendi.\n\nAyn\u0131 zamanda, ulusal ve uluslararas\u0131 d\u00fczeyde sosyal sorumluluk projelerine kat\u0131larak, e\u011fitimde f\u0131rsat e\u015fitsizli\u011fi gibi toplumsal meselelere \u00e7\u00f6z\u00fcm sunma konusunda \u00e7al\u0131\u015fmalar y\u00fcr\u00fctt\u00fc.\n\nT\u00fcrkiye'nin ilk blokzincir kul\u00fcb\u00fc olan \u0130T\u00dc Blockchain Kul\u00fcb\u00fc'nde genel sekreterlik ve ba\u015fkanl\u0131k g\u00f6revlerini \u00fcstlenerek blokzincir teknolojisinin yayg\u0131nla\u015ft\u0131r\u0131lmas\u0131 ve bilinirli\u011finin art\u0131r\u0131lmas\u0131 i\u00e7in \u00e7e\u015fitli etkinlikler d\u00fczenledi, hackathonlara kat\u0131larak bu alandaki bilgi ve becerilerini geli\u015ftirdi.\n\n\u015eu an geli\u015ftirilmekte olan bir kripto c\u00fczdan projesinin g\u00fcvenlik taraf\u0131nda g\u00f6rev almaktad\u0131r.",
+            "eventId": "ethgunu",
+            "twitter": "@unalf_Taylan",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/taylan.jpg?raw=true"
+        },
+        {
+            "id": "smeyra_bostanc",
+            "name": "S\u00fcmeyra Bostanc\u0131",
+            "bio": "No description",
+            "eventId": "ethgunu",
+            "twitter": "@0xsumeyraa",
+            "photo": "https://github.com/ethgunu/ethgunu.com/blob/main/src/components/main/Speakers/photos/sumeyra.jpeg?raw=true"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/58d2bld7an1quske/index.m3u8",
+    "eventId": "ethgunu",
+    "coverImage": "/sessions/ethgunu/kamu_mallar_public_goods_thumbnail.png",
+    "assetId": "58d26d69-9412-4962-8a57-1a63a7bce70b",
+    "sourceId": "5df00cb3-5321-4a04-aaf5-e37db723f73e",
+    "videoType": "clip"
 }

@@ -1,20 +1,20 @@
 {
-  "id": "plasma_workshop",
-  "name": "Plasma Workshop",
-  "description": "Plasma Workshop",
-  "start": 1699596000000,
-  "end": 1699599600000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "vitalik_buterin",
-      "name": "Vitalik Buterin",
-      "bio": "Zuzalu | Ethereum Foundation",
-      "eventId": "zuconnect_hackathon"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/3ad9an6213h01psz/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect_hackathon",
-  "coverImage": "/sessions/zuconnect_hackathon/plasma_workshop.jpg"
+    "id": "plasma_workshop",
+    "name": "Plasma Workshop",
+    "description": "Plasma Workshop",
+    "start": 1699596000000,
+    "end": 1699599600000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "vitalik_buterin",
+            "name": "Vitalik Buterin",
+            "bio": "Zuzalu | Ethereum Foundation",
+            "eventId": "zuconnect_hackathon"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/3ad9an6213h01psz/index.m3u8",
+    "eventId": "zuconnect_hackathon",
+    "coverImage": "/sessions/zuconnect_hackathon/plasma_workshop.jpg",
+    "assetId": "3ad99613-ace2-40ca-9740-72f1cfb46aae"
 }

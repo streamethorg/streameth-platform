@@ -1,38 +1,38 @@
 {
-  "id": "ethereum_alignment_and_landscape_panel",
-  "name": "Ethereum Alignment and Landscape panel",
-  "description": "Ethereum Alignment and Landscape panel",
-  "start": 1699599600000,
-  "end": 1699603200000,
-  "stageId": "theater",
-  "speakers": [
-    {
-      "id": "jessy",
-      "name": "Jessy",
-      "bio": "-",
-      "eventId": "zuconnect_hackathon"
-    },
-    {
-      "id": "vitalik_buterin",
-      "name": "Vitalik Buterin",
-      "bio": "Zuzalu | Ethereum Foundation",
-      "eventId": "zuconnect_hackathon"
-    },
-    {
-      "id": "justin_drake",
-      "name": "Justin Drake",
-      "bio": "-",
-      "eventId": "zuconnect_hackathon"
-    },
-    {
-      "id": "mark_tynway",
-      "name": "Mark Tynway",
-      "bio": "-",
-      "eventId": "zuconnect_hackathon"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/cf0f2aii62goasd7/index.m3u8",
-  "playbackId": "",
-  "eventId": "zuconnect_hackathon",
-  "coverImage": "/sessions/zuconnect_hackathon/ethereum_alignment_and_landscape_panel.jpg"
+    "id": "ethereum_alignment_and_landscape_panel",
+    "name": "Ethereum Alignment and Landscape panel",
+    "description": "Ethereum Alignment and Landscape panel",
+    "start": 1699599600000,
+    "end": 1699603200000,
+    "stageId": "theater",
+    "speakers": [
+        {
+            "id": "jessy",
+            "name": "Jessy",
+            "bio": "-",
+            "eventId": "zuconnect_hackathon"
+        },
+        {
+            "id": "vitalik_buterin",
+            "name": "Vitalik Buterin",
+            "bio": "Zuzalu | Ethereum Foundation",
+            "eventId": "zuconnect_hackathon"
+        },
+        {
+            "id": "justin_drake",
+            "name": "Justin Drake",
+            "bio": "-",
+            "eventId": "zuconnect_hackathon"
+        },
+        {
+            "id": "mark_tynway",
+            "name": "Mark Tynway",
+            "bio": "-",
+            "eventId": "zuconnect_hackathon"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/cf0f2aii62goasd7/index.m3u8",
+    "eventId": "zuconnect_hackathon",
+    "coverImage": "/sessions/zuconnect_hackathon/ethereum_alignment_and_landscape_panel.jpg",
+    "assetId": "cf0f95e7-ff1a-42e8-913d-12c39677ce31"
 }

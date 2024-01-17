@@ -1,25 +1,24 @@
 {
-  "id": "efficient_light_client_for_stateless_verification",
-  "name": "Efficient Light Client for Stateless Verification",
-  "description": "Fellow project presentation by Sogol",
-  "start": 1700226900000,
-  "end": 1700227500000,
-  "stageId": "3b36",
-  "speakers": [
-    {
-      "id": "sogol_malek",
-      "name": "Sogol Malek",
-      "bio": "EPF Fellow",
-      "eventId": "epf_day",
-      "twitter": "@sogol_malek",
-      "photo": "https://drive.google.com/file/d/1Ztb7RRW64xrr5J3uWLkf01XyYbt5pqko/view?usp=sharing"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/9614w22spm9kw3nl/index.m3u8",
-  "playbackId": "9614w22spm9kw3nl",
-  "eventId": "epf_day",
-  "coverImage": "/sessions/epf_day/efficient_light_client_for_stateless_verification_thumbnail.png",
-  "assetId": "9614730e-63e1-46f2-880d-fd2f76ec1f2b",
-  "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
-  "videoType": "clip"
+    "id": "efficient_light_client_for_stateless_verification",
+    "name": "Efficient Light Client for Stateless Verification",
+    "description": "Fellow project presentation by Sogol",
+    "start": 1700226900000,
+    "end": 1700227500000,
+    "stageId": "3b36",
+    "speakers": [
+        {
+            "id": "sogol_malek",
+            "name": "Sogol Malek",
+            "bio": "EPF Fellow",
+            "eventId": "epf_day",
+            "twitter": "@sogol_malek",
+            "photo": "https://drive.google.com/file/d/1Ztb7RRW64xrr5J3uWLkf01XyYbt5pqko/view?usp=sharing"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/9614w22spm9kw3nl/index.m3u8",
+    "eventId": "epf_day",
+    "coverImage": "/sessions/epf_day/efficient_light_client_for_stateless_verification_thumbnail.png",
+    "assetId": "9614730e-63e1-46f2-880d-fd2f76ec1f2b",
+    "sourceId": "e21cdf8d-a4fa-4653-b5eb-aa2af7385f86",
+    "videoType": "clip"
 }

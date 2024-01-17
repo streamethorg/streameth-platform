@@ -1,21 +1,21 @@
 {
-  "id": "agile_coretime_a_periodic_salebased_method_for_assigning_polkadot_coretime",
-  "name": "Agile Coretime: A Periodic, Sale-based Method for Assigning Polkadot Coretime",
-  "description": "The \"Polkadot Ubiquitous Computer\" (or just Polkadot UC), represents the public service provided by the Polkadot Network: it is a trust-free, WebAssembly-based, multicore, internet-native omnipresent virtual machine which is highly resilient to interference and corruption. The present system of allocating resources of the Polkadot Ubiquitous Computer (parachain slot auctions) is based on a model of one-core-per-parachain: this is a legacy interpretation of the Polkadot platform and is not a reflection of its present capabilities. With Polkadot's capability to adapt to its users'need, a new paradign for allocating coretime is being implemented by ecosystem teams. Coretime on the Polkadot UC is envisioned to be sold by the Polkadot System in two separate formats: Bulk Coretime and Instantaneous Coretime. When a Polkadot Core is utilized, we say it is dedicated to a \"Task\" rather than a \"parachain\". The Task to which a Core is dedicated may change at every Relay-chain block and while one predominant type of Task is to secure a Cumulus-based blockchain (i.e. a parachain), other types of Tasks are envisioned. Bulk Coretime is sold periodically on a specialised system chain known as the \"Coretime-chain\" and allocated in advance of its usage, whereas Instantaneous Coretime is sold on the Relay-chain immediately prior to usage on a block-by-block basis.\r\n\r\nThis talk aims to explain this paradigm change within the Polkadot community to adapt to end-user needs, provide more agility and reduce long-term design flows.",
-  "start": 1694781000000,
-  "end": 1694784000000,
-  "stageId": "magazin__main_stage",
-  "speakers": [
-    {
-      "id": "gavin_wood",
-      "name": "Gavin Wood",
-      "bio": "-",
-      "eventId": "protocol_berg",
-      "photo": "https://speak.protocol.berlin/media/avatars/gavin_aT6VA0l.jpeg"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/2191c2a7xt0pz6tv/index.m3u8",
-  "eventId": "protocol_berg",
-  "coverImage": "/sessions/protocol_berg/agile_coretime_a_periodic_salebased_method_for_assigning_polkadot_coretime.jpg"
+    "id": "agile_coretime_a_periodic_salebased_method_for_assigning_polkadot_coretime",
+    "name": "Agile Coretime: A Periodic, Sale-based Method for Assigning Polkadot Coretime",
+    "description": "The \"Polkadot Ubiquitous Computer\" (or just Polkadot UC), represents the public service provided by the Polkadot Network: it is a trust-free, WebAssembly-based, multicore, internet-native omnipresent virtual machine which is highly resilient to interference and corruption. The present system of allocating resources of the Polkadot Ubiquitous Computer (parachain slot auctions) is based on a model of one-core-per-parachain: this is a legacy interpretation of the Polkadot platform and is not a reflection of its present capabilities. With Polkadot's capability to adapt to its users'need, a new paradign for allocating coretime is being implemented by ecosystem teams. Coretime on the Polkadot UC is envisioned to be sold by the Polkadot System in two separate formats: Bulk Coretime and Instantaneous Coretime. When a Polkadot Core is utilized, we say it is dedicated to a \"Task\" rather than a \"parachain\". The Task to which a Core is dedicated may change at every Relay-chain block and while one predominant type of Task is to secure a Cumulus-based blockchain (i.e. a parachain), other types of Tasks are envisioned. Bulk Coretime is sold periodically on a specialised system chain known as the \"Coretime-chain\" and allocated in advance of its usage, whereas Instantaneous Coretime is sold on the Relay-chain immediately prior to usage on a block-by-block basis.\r\n\r\nThis talk aims to explain this paradigm change within the Polkadot community to adapt to end-user needs, provide more agility and reduce long-term design flows.",
+    "start": 1694781000000,
+    "end": 1694784000000,
+    "stageId": "magazin__main_stage",
+    "speakers": [
+        {
+            "id": "gavin_wood",
+            "name": "Gavin Wood",
+            "bio": "-",
+            "eventId": "protocol_berg",
+            "photo": "https://speak.protocol.berlin/media/avatars/gavin_aT6VA0l.jpeg"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/2191c2a7xt0pz6tv/index.m3u8",
+    "eventId": "protocol_berg",
+    "coverImage": "/sessions/protocol_berg/agile_coretime_a_periodic_salebased_method_for_assigning_polkadot_coretime.jpg",
+    "assetId": "219185ea-a5c5-4b1c-b7db-e91caaacb542"
 }

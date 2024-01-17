@@ -1,25 +1,24 @@
 {
-  "id": "what_did_i_learn_by_testing_erc20_tokens_at_large",
-  "name": "What did I Learn by Testing ERC-20 Tokens at Large?",
-  "description": "",
-  "start": 1699886040000,
-  "end": 1699887000000,
-  "stageId": "main_stage",
-  "speakers": [
-    {
-      "id": "ylis_falcone",
-      "name": "Yliès\nFalcone",
-      "bio": "Senior Tech Lead\nRuntime Verification",
-      "eventId": "secureum_trustx",
-      "twitter": "",
-      "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Ylies.png"
-    }
-  ],
-  "videoUrl": "https://lp-playback.com/hls/f425ebkozfv7ua2n/index.m3u8",
-  "playbackId": "f425ebkozfv7ua2n",
-  "eventId": "secureum_trustx",
-  "coverImage": "/sessions/secureum_trustx/what_did_i_learn_by_testing_erc20_tokens_at_large.jpg",
-  "assetId": "f425f38e-8558-4533-9ec6-4f2665d65ccc",
-  "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
-  "videoType": "clip"
+    "id": "what_did_i_learn_by_testing_erc20_tokens_at_large",
+    "name": "What did I Learn by Testing ERC-20 Tokens at Large?",
+    "description": "",
+    "start": 1699886040000,
+    "end": 1699887000000,
+    "stageId": "main_stage",
+    "speakers": [
+        {
+            "id": "ylis_falcone",
+            "name": "Yli\u00e8s\nFalcone",
+            "bio": "Senior Tech Lead\nRuntime Verification",
+            "eventId": "secureum_trustx",
+            "twitter": "",
+            "photo": "https://www.secureum.xyz/wp-content/uploads/2023/10/Ylies.png"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/f425ebkozfv7ua2n/index.m3u8",
+    "eventId": "secureum_trustx",
+    "coverImage": "/sessions/secureum_trustx/what_did_i_learn_by_testing_erc20_tokens_at_large.jpg",
+    "assetId": "f425f38e-8558-4533-9ec6-4f2665d65ccc",
+    "sourceId": "92221a40-c692-44f9-b1ab-e1a67c31d233",
+    "videoType": "clip"
 }
