@@ -50,8 +50,7 @@ export default async function ArchivePage({
 export async function generateMetadata({
   searchParams,
 }: SearchPageProps): Promise<Metadata> {
-  if (!searchParams.event || !searchParams.organization)
-    return generalMetadata
+  if (!searchParams.event) return generalMetadata
   const event = await fetchEvent({
     event: searchParams.event,
     organization: searchParams.organization,
