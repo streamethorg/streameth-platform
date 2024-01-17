@@ -1,7 +1,7 @@
 import Player from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { WatchPageProps } from '@/lib/types'
-import { fetchEventSessions } from '@/lib/data'
+import { fetchEventSession } from '@/lib/data'
 import {
   Tabs,
   TabsContent,
@@ -11,20 +11,19 @@ import {
 import RelatedVideos from './components/RelatedVideos'
 import ColorComponent from '@/components/Layout/ColorComponent'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { generalMetadata, watchMetadata } from '@/lib/metadata'
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
-  if (!searchParams.event || !searchParams.session) return null
+  if (!searchParams.event || !searchParams.session) return notFound()
 
-  const video = (
-    await fetchEventSessions({
-      event: searchParams.event,
-    })
-  ).filter((session) => {
-    return session.id === searchParams.session
-  })[0]
+  const video = await fetchEventSession({
+    event: searchParams.event,
+    session: searchParams.session,
+  })
 
-  if (!video) return null
+  if (!video) return notFound()
 
   const tabs = []
   tabs.push({
@@ -78,34 +77,11 @@ export default async function Watch({
 export async function generateMetadata({
   searchParams,
 }: WatchPageProps): Promise<Metadata> {
-  const session = (
-    await fetchEventSessions({
-      event: searchParams.event,
-    })
-  ).filter((session) => {
-    return session.id === searchParams.session
-  })[0]
-  const imageUrl = session.coverImage
-    ? session.coverImage
-    : session.id + '.png'
-  try {
-    return {
-      title: session.name,
-      description: session.description,
-      openGraph: {
-        title: session.name,
-        description: session.description,
-        images: [imageUrl],
-      },
-    }
-  } catch (e) {
-    return {
-      title: 'StreamETH Session',
-      openGraph: {
-        title: 'StreamETH Session',
-        description:
-          'The complete solution to host your hybrid or virtual event.',
-      },
-    }
-  }
+  if (!searchParams.event) return generalMetadata
+  const video = await fetchEventSession({
+    event: searchParams.event,
+    session: searchParams.session,
+  })
+  if (!video) return generalMetadata
+  return watchMetadata({ session: video })
 }

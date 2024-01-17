@@ -8,7 +8,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import { fetchEvents } from '@/lib/data'
 import { IOrganization } from 'streameth-server/model/organization'
 

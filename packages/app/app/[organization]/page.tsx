@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import remarkGfm from 'remark-gfm'
 import { notFound } from 'next/navigation'
-import OrganizationController from 'streameth-server/controller/organization'
 import Markdown from 'react-markdown'
 import { Metadata, ResolvingMetadata } from 'next'
 import { fetchOrganization } from '@/lib/data'
