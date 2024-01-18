@@ -54,7 +54,7 @@ const AdminSideNav = () => {
     <div
       className={`${
         isCollapsed ? 'w-[80px]' : 'w-[250px]'
-      } top-20 flex flex-col justify-between bg-background  h-full p-4 border-r`}>
+      } top-20 flex flex-col justify-between   h-full p-4 border-r`}>
       <div>
         <div className="flex items-center gap-5 border-">
           <Image

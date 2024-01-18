@@ -20,9 +20,9 @@ const NavBarButton = ({
     onClick={() => setIsNavVisible(!isNavVisible)}
     className="lg:hidden z-50">
     {!isNavVisible ? (
-      <Bars3Icon className="w-[40px] h-[40px] bg-background  rounded text-white mx-auto" />
+      <Bars3Icon className="w-[40px] h-[40px]   rounded  mx-auto" />
     ) : (
-      <XMarkIcon className="w-[40px] h-[40px] bg-background  rounded  text-white mx-auto" />
+      <XMarkIcon className="w-[40px] h-[40px]   rounded   mx-auto" />
     )}
   </button>
 )

@@ -19,8 +19,8 @@ const VideoDownload = ({ assetId }: { assetId: string }) => {
       download={asset.name}
       target="_blank"
       className="flex justify-center items-center">
-      <Badge className="bg-background my-auto">
-        <ArrowDownIcon className="p-1 h-6 w-6 lg:h-8 lg:w-8 cursor-pointer text-white" />
+      <Badge className=" my-auto">
+        <ArrowDownIcon className="p-1 h-6 w-6 lg:h-8 lg:w-8 cursor-pointer " />
         Download
       </Badge>
     </a>

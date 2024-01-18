@@ -136,7 +136,7 @@ const CreateOrganizationForm: React.FC<OrganizationFormProps> = ({
         </label>
         <button
           type="submit"
-          className="p-2 bg-blue rounded-xl text-white w-full"
+          className="p-2 bg-blue rounded-xl  w-full"
           disabled={submitting}>
           {submitting ? 'Submitting...' : 'Submit'}
         </button>

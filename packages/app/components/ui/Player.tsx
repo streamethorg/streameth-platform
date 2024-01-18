@@ -16,10 +16,10 @@ const OfflinePlayer = () => {
   return (
     <div className="min-h-[300px] lg:min-h-[500px] lg:aspect-video bg-black flex items-center justify-center flex-col h-full">
       <div className="flex flex-col items-center justify-center space-y-2 transform -translate-y-6">
-        <span className="text-2xl font-bold text-white text-center">
+        <span className="text-2xl font-bold  text-center">
           Stream is offline
         </span>
-        <span className="text-white dark:text-gray-300 text-xs hidden lg:block text-center">
+        <span className=" dark:text-gray-300 text-xs hidden lg:block text-center">
           Powered by
         </span>
         <a
@@ -86,7 +86,7 @@ export const Player = ({
   // if (!playbackId && !stream?.isActive) return <OfflinePlayer />
   return useMemo(
     () => (
-      <div className="relative w-full aspect-video p-2 bg-background rounded-md">
+      <div className="relative w-full aspect-video">
         <LivepeerPlayer
           mediaElementRef={mediaElementRef}
           playbackId={playbackIdParsed}

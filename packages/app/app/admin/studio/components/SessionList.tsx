@@ -120,7 +120,7 @@ export function SessionList(props: Props) {
 
       <div className="mt-4">
         <button
-          className="p-2 bg-blue-500 text-white rounded"
+          className="p-2 bg-blue-500  rounded"
           onClick={processVideos}>
           Process
         </button>

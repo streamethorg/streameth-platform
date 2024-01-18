@@ -44,7 +44,7 @@ const OrganizationEntry: React.FC<OrganizationEntryProps> = ({
         <div>
           <button
             onClick={() => handleDelete(organization)}
-            className="bg-blue-500 hover:bg-blue-800 transition-colors text-white p-2 rounded m-2">
+            className="bg-blue-500 hover:bg-blue-800 transition-colors  p-2 rounded m-2">
             Yes
           </button>
           <button
@@ -58,7 +58,7 @@ const OrganizationEntry: React.FC<OrganizationEntryProps> = ({
   }
 
   return (
-    <li className="border p-4 flex flex-col rounded bg-background">
+    <li className="border p-4 flex flex-col rounded ">
       <div className="flex justify-between">
         <Link
           href={`admin/${organization.id}`}

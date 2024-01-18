@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react'
 import {
+  Card,
   CardDescription,
   CardTitle,
   CardContent,
+  CardFooter,
 } from '@/components/ui/card'
 
 import ShareButton from '@/components/misc/ShareButton'
@@ -38,7 +40,7 @@ const SessionInfoBox = ({
     <div className=" rounded my-2">
       <div className="flex flex-col lg:flex-row justify-center py-4">
         <div className="flex flex-col justify-center px-2">
-          <CardTitle className="text-background">{title}</CardTitle>
+          <CardTitle className="">{title}</CardTitle>
           <CardDescription>
             {viewCount && assetId && <ViewCounts assetId={assetId} />}
 
@@ -55,27 +57,29 @@ const SessionInfoBox = ({
           {assetId && <VideoDownload assetId={assetId} />}
         </div>
       </div>
-      <CardContent className="bg-background rounded-md p-4">
-        {description !== '' && (
-          <div
+      {description !== '' && (
+        <Card>
+          <CardContent
             className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
               isOpened ? 'max-h-96' : 'max-h-10'
             }`}>
             <div className="">{description}</div>
-            <div className="flex flex-row mt-2">
+            <div className="flex flex-row mt-2 space-x-2">
               {speakers &&
                 speakers.map((speaker) => (
                   <SpeakerIcon key={speaker.id} speaker={speaker} />
                 ))}
             </div>
-          </div>
-        )}
-        <button
-          onClick={() => setIsOpened(!isOpened)}
-          className="mt-2 ml-auto w-full text-right text-white">
-          {isOpened ? 'Less' : 'More'}
-        </button>
-      </CardContent>
+          </CardContent>
+          <CardFooter>
+            <button
+              onClick={() => setIsOpened(!isOpened)}
+              className="mt-2 ml-auto w-full text-right ">
+              {isOpened ? 'Less' : 'More'}
+            </button>
+          </CardFooter>
+        </Card>
+      )}
     </div>
   )
 }

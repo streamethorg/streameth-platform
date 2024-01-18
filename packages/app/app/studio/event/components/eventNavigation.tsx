@@ -58,7 +58,7 @@ export function Nav({ links = linksData, isCollapsed }: NavProps) {
                     }),
                     'h-12 w-12',
                     link.variant === 'default' &&
-                      'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white'
+                      'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:'
                   )}>
                   <link.icon className="h-4 w-4" />
                   <span className="sr-only">{link.title}</span>
@@ -82,7 +82,7 @@ export function Nav({ links = linksData, isCollapsed }: NavProps) {
               className={cn(
                 buttonVariants({ variant: link.variant, size: 'sm' }),
                 link.variant === 'default' &&
-                  'dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white',
+                  'dark:bg-muted dark: dark:hover:bg-muted dark:hover:',
                 'justify-start'
               )}>
               <link.icon className="mr-2 h-4 w-4" />
@@ -91,8 +91,7 @@ export function Nav({ links = linksData, isCollapsed }: NavProps) {
                 <span
                   className={cn(
                     'ml-auto',
-                    link.variant === 'default' &&
-                      'text-background dark:text-white'
+                    link.variant === 'default' && ' dark:'
                   )}>
                   {link.label}
                 </span>

@@ -104,7 +104,7 @@ const EventPreview = () => {
             formData?.archiveMode
               ? ' lg:w-full'
               : 'lg:w-[calc(100%-5rem)]'
-          } ml-auto bg-background`}>
+          } ml-auto `}>
           <div className="flex flex-col w-full h-full gap-4">
             <div className="relative w-full">
               <div className="relative">

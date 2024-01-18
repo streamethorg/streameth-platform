@@ -52,13 +52,13 @@ const ModalContent: React.FC<{
   return (
     <DialogContent className="max-w-[450px]">
       <div className="flex flex-col items-center justify-center w-full h-full ">
-        <span className="text-xl mb-4 text-white">
+        <span className="text-xl mb-4 ">
           Easily embed this stream into your website by adding the
           iframe code below
         </span>
 
         <span
-          className="relative max-w-[350px] bg-background text-white rounded-xl px-2 py-1 overflow-clip whitespace-nowrap cursor-pointer"
+          className="relative max-w-[350px]   rounded-xl px-2 py-1 overflow-clip whitespace-nowrap cursor-pointer"
           onClick={copyToClipboard}>
           {generatedEmbedCode}
         </span>
@@ -83,8 +83,8 @@ function EmbedButton({
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge className="bg-background">
-          <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  lg:h-8 lg:w-8 text-white" />
+        <Badge className="">
+          <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  lg:h-8 lg:w-8 " />
           Embed
         </Badge>
       </DialogTrigger>

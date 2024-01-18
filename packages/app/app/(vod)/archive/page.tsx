@@ -36,7 +36,7 @@ export default async function ArchivePage({
       />
       <Card className="bg-white border-none">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-background">Results</CardTitle>
+          <CardTitle className="">Results</CardTitle>
           <Pagination {...videos.pagination} />
         </CardHeader>
         <CardContent>

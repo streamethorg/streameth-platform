@@ -31,7 +31,7 @@ const UpcomingEvents = async ({
   return (
     <Card className="max-w-screen border-none bg-white">
       <CardHeader>
-        <CardTitle className="text-background ">Events</CardTitle>
+        <CardTitle className=" ">Events</CardTitle>
         <CardDescription>
           Explore current and past events
         </CardDescription>
@@ -62,7 +62,7 @@ const UpcomingEvents = async ({
                 style={{
                   backgroundColor: accentColor,
                 }}>
-                <div className=" min-h-full rounded-xl text-white uppercase">
+                <div className=" min-h-full rounded-xl  uppercase">
                   <div className="aspect-video relative">
                     <Image
                       className="rounded"
@@ -75,7 +75,7 @@ const UpcomingEvents = async ({
                       }}
                     />
                   </div>
-                  <CardHeader className="bg-background rounded mt-1">
+                  <CardHeader className=" rounded mt-1">
                     <CardTitle className="truncate text-sm">
                       {name}
                     </CardTitle>

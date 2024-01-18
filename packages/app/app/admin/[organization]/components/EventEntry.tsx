@@ -42,7 +42,7 @@ const EventEntry: React.FC<EventEntryProps> = ({ event }) => {
         <div>
           <button
             onClick={() => handleDelete()}
-            className="bg-blue-500 hover:bg-blue-800 transition-colors text-white p-2 rounded m-2">
+            className="bg-blue-500 hover:bg-blue-800 transition-colors  p-2 rounded m-2">
             Yes
           </button>
           <button

@@ -31,7 +31,7 @@ export default async function OrganizationStrip({
         />
 
         <Link href={'/archive?organization=' + organization.id}>
-          <CardTitle className="text-background text-2xl ml-2 mr-auto hover:underline">
+          <CardTitle className=" text-2xl ml-2 mr-auto hover:underline">
             {organization.name} {' >'}
           </CardTitle>
         </Link>

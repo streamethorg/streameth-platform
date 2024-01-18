@@ -26,7 +26,7 @@ export default async function Home() {
       </Suspense>
       <Card className="bg-white border-none shadow-none">
         <CardHeader>
-          <CardTitle className="text-background text-2xl lg:text-4xl">
+          <CardTitle className=" text-2xl lg:text-4xl">
             Explore organizations that are using StreamETH
           </CardTitle>
         </CardHeader>

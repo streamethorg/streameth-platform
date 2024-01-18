@@ -22,13 +22,11 @@ const VideoCard = async ({
   })
 
   // Determine the classes based on invertedColors prop
-  const headerClass = invertedColors ? 'bg-background text-white' : ''
-  const descriptionClass = invertedColors
-    ? 'text-white'
-    : 'text-background'
+  const headerClass = invertedColors ? ' ' : ''
+  const descriptionClass = invertedColors ? '' : ''
 
   return (
-    <div className="min-h-full w-full rounded-xl text-white uppercase">
+    <div className="min-h-full w-full rounded-xl  uppercase">
       <Link
         href={`/watch?event=${session.eventId}&session=${session.id}`}>
         <Thumbnail session={session} fallBack={event.eventCover} />

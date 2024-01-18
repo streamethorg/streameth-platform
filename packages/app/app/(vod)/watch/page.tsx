@@ -33,7 +33,7 @@ export default async function Watch({
 
   return (
     <ColorComponent accentColor={''}>
-      <div className="h-full flex flex-col w-full gap-4 lg:flex-row relative ">
+      <div className="h-full flex flex-col w-full lg:flex-row relative ">
         <div className="flex flex-col w-full h-full z-40 lg:w-[70%] sticky lg:relative lg:top-0  lg:pr-2 ">
           <Player
             assetId={video.assetId}
@@ -52,8 +52,8 @@ export default async function Watch({
         </div>
         <Tabs
           defaultValue={tabs[0]?.value ?? ''}
-          className="lg:w-[30%] w-full max-h-[100%] lg:ml-2 bg-background p-2 rounded-lg ">
-          <TabsList className="w-full bg-background">
+          className="lg:w-[30%] w-full max-h-[100%] lg:ml-2  p-2 border  rounded">
+          <TabsList className="w-full ">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value}>
                 {tab.value}

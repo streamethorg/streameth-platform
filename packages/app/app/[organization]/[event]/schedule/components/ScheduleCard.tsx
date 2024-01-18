@@ -62,7 +62,7 @@ const ScheduleCard = ({
                   <Badge
                     key={speaker.id}
                     variant={'outline'}
-                    className="text-white">
+                    className="">
                     {speaker.name}
                   </Badge>
                 ))}

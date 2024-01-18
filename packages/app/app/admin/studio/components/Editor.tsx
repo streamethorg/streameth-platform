@@ -247,7 +247,7 @@ export function Editor(props: Props) {
 
             <button
               type="button"
-              className="px-4 py-2 border bg-zinc-600 text-white focus:outline-none"
+              className="px-4 py-2 border bg-zinc-600  focus:outline-none"
               onClick={() => {
                 setStartTime(null)
                 setEndTime(null)
@@ -385,7 +385,7 @@ export function Editor(props: Props) {
 
                     <button
                       type="button"
-                      className="px-4 py-2 border bg-zinc-600 text-white focus:outline-none"
+                      className="px-4 py-2 border bg-zinc-600  focus:outline-none"
                       onClick={() => createScheduleSession(i.id)}>
                       Create clip
                     </button>

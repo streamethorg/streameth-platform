@@ -64,8 +64,8 @@ export default async function Stage({ params }: EventPageProps) {
       {tabs.length > 0 && (
         <Tabs
           defaultValue={tabs[0]?.value ?? ''}
-          className="lg:w-[30%] w-full max-h-[100vh] lg:ml-2 lg:m-4 bg-background p-2 rounded-lg ">
-          <TabsList className="w-full bg-background">
+          className="lg:w-[30%] w-full max-h-[100vh] lg:ml-2 lg:m-4  p-2 rounded-lg ">
+          <TabsList className="w-full ">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value}>
                 {tab.value}

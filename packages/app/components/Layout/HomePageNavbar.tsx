@@ -20,9 +20,9 @@ const NavBarButton = ({
     onClick={() => setIsNavVisible(!isNavVisible)}
     className="lg:hidden z-50">
     {!isNavVisible ? (
-      <Bars3Icon className="w-[36px] h-[36px] bg-primary  rounded text-white mx-auto" />
+      <Bars3Icon className="w-[36px] h-[36px] bg-primary  rounded  mx-auto" />
     ) : (
-      <XMarkIcon className="w-[36px] h-[36px] bg-primary  rounded  text-white mx-auto" />
+      <XMarkIcon className="w-[36px] h-[36px] bg-primary  rounded   mx-auto" />
     )}
   </button>
 )
@@ -39,12 +39,12 @@ const HomePageNavbar = () => {
     {
       name: 'Videography',
       href: 'https://info.streameth.org/stream-eth-studio',
-      bgColor: 'bg-muted text-background',
+      bgColor: 'bg-muted ',
     },
     {
       name: 'Product',
       href: 'https://info.streameth.org/services',
-      bgColor: 'bg-muted text-background',
+      bgColor: 'bg-muted ',
     },
     {
       name: 'Host your event',

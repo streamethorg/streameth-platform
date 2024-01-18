@@ -46,7 +46,7 @@ const ReserveSpotModal = ({ event }: { event: IEvent }) => {
       })
   }
   return (
-    <div className="text-white bg-base px-10 py-4 flex flex-col max-w-lg">
+    <div className=" bg-base px-10 py-4 flex flex-col max-w-lg">
       <h2 className="text-2xl font-bold">Sign up to {event.name}</h2>
       <p className="mt-4">Enter your email</p>
       <div className="flex flex-row w-full space-x-2 mt-4">
@@ -63,7 +63,7 @@ const ReserveSpotModal = ({ event }: { event: IEvent }) => {
         ) : (
           <button
             type="submit"
-            className=" w-10 mx-auto p-2 border bg-accent text-white rounded text-lg hoover:text-accent"
+            className=" w-10 mx-auto p-2 border bg-accent  rounded text-lg hoover:text-accent"
             onClick={() => {
               submitEmail()
             }}>
@@ -89,7 +89,7 @@ const ReserveSpotButton = ({ event }: props) => {
   }, [event.id])
   if (user && user.isSignedUp) {
     return (
-      <div className="text-center p-2  border bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
+      <div className="text-center p-2  border bg-accent  rounded text-lg hoover:text-accent w-[200px]">
         {"you're"} signed up!
       </div>
     )
@@ -102,7 +102,7 @@ const ReserveSpotButton = ({ event }: props) => {
   return (
     <button
       onClick={handleClick}
-      className="p-2 bg-accent text-white rounded text-lg hoover:text-accent w-[200px]">
+      className="p-2 bg-accent  rounded text-lg hoover:text-accent w-[200px]">
       Get notified
     </button>
   )

@@ -83,7 +83,7 @@ export default function SearchBar(): JSX.Element {
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="max-w-[500px] bg-white border-background text-background"
+        className="max-w-[500px] bg-white border-background "
         placeholder="Search"
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +93,7 @@ export default function SearchBar(): JSX.Element {
       {isOpened && debouncedSearchQuery && (
         <div
           ref={dropdownRef}
-          className="rounded bg-background mt-1 w-full absolute top-[41px] max-w-[500px]">
+          className="rounded  mt-1 w-full absolute top-[41px] max-w-[500px]">
           {isLoading ? (
             <div>Loading...</div>
           ) : (
@@ -107,7 +107,7 @@ export default function SearchBar(): JSX.Element {
                         handleTermChange(result)
                         setIsOpened(false)
                       }}
-                      className="p-1 hover:bg-white hover:text-background"
+                      className="p-1 hover:bg-white hover:"
                       key={result}>
                       {result}
                     </div>
@@ -123,7 +123,7 @@ export default function SearchBar(): JSX.Element {
                         handleEventChange(result.id)
                         setIsOpened(false)
                       }}
-                      className="p-1 hover:bg-white hover:text-background"
+                      className="p-1 hover:bg-white hover:"
                       key={result.name}>
                       {result.name}
                     </div>
