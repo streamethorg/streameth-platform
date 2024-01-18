@@ -16,7 +16,7 @@ export function downloadM3U8ToMP4(
 ): Promise<void> {
   if (!fs.existsSync(outputFilePath)) {
     console.log("Creating tmp");
-    fs.mkdirSync(outputFilePath);
+    fs.mkdirSync(outputFilePath, { recursive: true });
   }
 
   console.log(`Downloading ${m3u8Url}...`);
@@ -39,15 +39,20 @@ export function downloadM3U8ToMP4(
 export async function ToMp3(
   id: string,
   stream: ReadStream,
+  outputFilePath = CONFIG.ASSET_FOLDER,
   bitrate = CONFIG.BITRATE
 ) {
   console.log("Convert to mp3", id);
+
+  if (!fs.existsSync(outputFilePath)) {
+    fs.mkdirSync(outputFilePath, { recursive: true });
+  }
 
   try {
     ffmpeg(stream)
       .audioBitrate(bitrate)
       .format("mp3")
-      .save(`${CONFIG.ASSET_FOLDER}/mp3/${id}.mp3`)
+      .save(`${outputFilePath}/${id}.mp3`)
       .on("error", console.error);
   } catch (error) {
     console.log("Unable to convert to mp3", id, error);
