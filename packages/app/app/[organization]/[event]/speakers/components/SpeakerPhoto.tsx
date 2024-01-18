@@ -29,7 +29,7 @@ const SpeakerPhoto = ({
   } else if (size === 'md') {
     sizeString = 'h-12 w-12'
   } else {
-    sizeString = 'w-full aspect-square rounded max-w-[200px]'
+    sizeString = 'w-full aspect-square rounded'
   }
 
   return (

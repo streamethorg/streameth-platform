@@ -32,7 +32,7 @@ const ModalContent: React.FC<{
   }
 
   const generateEmbedCode = () => {
-    const url = window.location.origin
+    const url = window && window.location.origin
     return `<iframe src="${url}/embed/?${generateParams()}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
   }
 
@@ -84,7 +84,7 @@ function EmbedButton({
     <Dialog>
       <DialogTrigger>
         <Badge className="bg-background">
-          <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  md:h-8 md:w-8 text-white" />
+          <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  lg:h-8 lg:w-8 text-white" />
           Embed
         </Badge>
       </DialogTrigger>

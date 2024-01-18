@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/a27e35hafflnbym7/index.m3u8",
-    "playbackId": "a27e35hafflnbym7",
     "eventId": "progcrypto",
     "track": "Cryptography and Society",
     "coverImage": "/sessions/progcrypto/dacc_thumbnail.png",

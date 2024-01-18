@@ -14,7 +14,6 @@
             "photo": "https://speak.protocol.berlin/media/avatars/ava_xlDf6Q3.jpeg"
         }
     ],
-    "playbackId": "",
     "videoUrl": "https://lp-playback.com/hls/320fb3bqtlr3qe5n/index.m3u8",
     "eventId": "protocol_berg",
     "coverImage": "/sessions/protocol_berg/testing_large_scale_networks_with_testground.jpg",

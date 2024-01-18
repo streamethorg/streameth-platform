@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/85bc03wysgj6upad/index.m3u8",
-    "playbackId": "85bc03wysgj6upad",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/differential_testing_with_foundry_thumbnail.png",
     "assetId": "85bc8b86-9912-42b6-8922-3767eeccf850",

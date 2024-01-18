@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import {
   CardDescription,
-  CardHeader,
   CardTitle,
   CardContent,
 } from '@/components/ui/card'
@@ -37,7 +36,7 @@ const SessionInfoBox = ({
   const [isOpened, setIsOpened] = useState(false)
   return (
     <div className=" rounded my-2">
-      <div className="flex flex-col md:flex-row justify-center py-4">
+      <div className="flex flex-col lg:flex-row justify-center py-4">
         <div className="flex flex-col justify-center px-2">
           <CardTitle className="text-background">{title}</CardTitle>
           <CardDescription>
@@ -46,7 +45,7 @@ const SessionInfoBox = ({
             <div className="flex flex-row ">{cardDescription}</div>
           </CardDescription>
         </div>
-        <div className="flex flex-row md:ml-auto space-x-1 mt-2 lg:my-0">
+        <div className="flex flex-row lg:ml-auto space-x-1 mt-2 lg:my-0">
           <ShareButton />
           <EmbedButton
             streamId={streamId}
@@ -57,7 +56,7 @@ const SessionInfoBox = ({
         </div>
       </div>
       <CardContent className="bg-background rounded-md p-4">
-        {description && (
+        {description !== '' && (
           <div
             className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
               isOpened ? 'max-h-96' : 'max-h-10'

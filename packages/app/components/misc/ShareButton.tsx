@@ -1,3 +1,5 @@
+'use client'
+import React, { useState, useEffect } from 'react'
 import {
   FacebookShareButton,
   RedditShareButton,
@@ -24,25 +26,32 @@ import {
 
 const ShareModalContent = () => {
   const text = `Check out this event on @streameth!`
+  const [currentUrl, setCurrentUrl] = useState('')
+  useEffect(() => {
+    // This code will only run on the client side
+    if (typeof window === 'undefined') return
+    setCurrentUrl(window.location.href)
+  }, [])
+
   return (
     <DialogContent>
       <DialogTitle className="text-center">
         Share this event
       </DialogTitle>
       <div className="flex flex-row items-center justify-center space-x-4 px-4 pb-4">
-        <FacebookShareButton url={window.location.href} quote={text}>
+        <FacebookShareButton url={currentUrl} quote={text}>
           <FacebookIcon size={42} round />
         </FacebookShareButton>
-        <TwitterShareButton url={window.location.href} title={text}>
+        <TwitterShareButton url={currentUrl} title={text}>
           <TwitterIcon size={42} round />
         </TwitterShareButton>
-        <RedditShareButton url={window.location.href} title={text}>
+        <RedditShareButton url={currentUrl} title={text}>
           <RedditIcon size={42} round />
         </RedditShareButton>
-        <TelegramShareButton url={window.location.href} title={text}>
+        <TelegramShareButton url={currentUrl} title={text}>
           <TelegramIcon size={42} round />
         </TelegramShareButton>
-        <WhatsappShareButton url={window.location.href} title={text}>
+        <WhatsappShareButton url={currentUrl} title={text}>
           <WhatsappIcon size={42} round />
         </WhatsappShareButton>
       </div>
@@ -55,7 +64,7 @@ const ShareButton = () => {
     <Dialog>
       <DialogTrigger>
         <Badge className="bg-background">
-          <ShareIcon className=" p-1 h-6 w-6  md:h-8 md:w-8 cursor-pointer text-white " />
+          <ShareIcon className=" p-1 h-6 w-6  lg:h-8 lg:w-8 cursor-pointer text-white " />
           Share
         </Badge>
       </DialogTrigger>

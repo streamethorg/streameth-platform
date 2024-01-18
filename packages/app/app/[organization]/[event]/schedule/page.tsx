@@ -2,7 +2,7 @@ import SchedulePageComponent from './components/ScheduleComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import EventController from 'streameth-server/controller/event'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import { fetchEvent, fetchEventStages } from '@/lib/data'
 import { EventPageProps } from '@/lib/types'
 
