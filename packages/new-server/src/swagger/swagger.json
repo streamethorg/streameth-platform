@@ -64,9 +64,6 @@
 					},
 					"slug": {
 						"type": "string"
-					},
-					"entity": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -118,9 +115,6 @@
 						"format": "double"
 					},
 					"slug": {
-						"type": "string"
-					},
-					"entity": {
 						"type": "string"
 					}
 				},
@@ -595,9 +589,6 @@
 					},
 					"slug": {
 						"type": "string"
-					},
-					"entity": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -650,9 +641,6 @@
 						"type": "string"
 					},
 					"slug": {
-						"type": "string"
-					},
-					"entity": {
 						"type": "string"
 					}
 				},
@@ -895,9 +883,6 @@
 					},
 					"slug": {
 						"type": "string"
-					},
-					"entity": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -1001,9 +986,6 @@
 						"$ref": "#/components/schemas/IPlugins"
 					},
 					"slug": {
-						"type": "string"
-					},
-					"entity": {
 						"type": "string"
 					}
 				},
@@ -1397,6 +1379,14 @@
 						"required": false,
 						"schema": {
 							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "onlyVideos",
+						"required": false,
+						"schema": {
+							"type": "boolean"
 						}
 					},
 					{

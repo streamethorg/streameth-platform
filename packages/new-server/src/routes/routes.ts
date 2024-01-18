@@ -1,7 +1,16 @@
 /* tslint:disable */
 /* eslint-disable */
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
+import {
+  Controller,
+  ValidationService,
+  FieldErrors,
+  ValidateError,
+  TsoaRoute,
+  HttpStatusCodeLiteral,
+  TsoaResponse,
+  fetchMiddlewares,
+} from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { StageController } from './../controllers/stage.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -19,1135 +28,1635 @@ import type { RequestHandler, Router } from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "mongoose.Types.ObjectId": {
-        "dataType": "refAlias",
-        "type": {"dataType":"string","validators":{}},
+  'mongoose.Types.ObjectId': {
+    dataType: 'refAlias',
+    type: { dataType: 'string', validators: {} },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStreamSettings: {
+    dataType: 'refObject',
+    properties: {
+      streamId: { dataType: 'string', required: true },
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStreamSettings": {
-        "dataType": "refObject",
-        "properties": {
-            "streamId": {"dataType":"string","required":true},
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IPlugin: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStage: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      eventId: {
+        dataType: 'union',
+        subSchemas: [
+          { ref: 'mongoose.Types.ObjectId' },
+          { dataType: 'string' },
+        ],
+        required: true,
+      },
+      streamSettings: { ref: 'IStreamSettings', required: true },
+      plugins: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'IPlugin' },
+      },
+      order: { dataType: 'double' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_IStage_: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: { ref: 'IStage' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  StageDto: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      eventId: { dataType: 'string', required: true },
+      streamSettings: { ref: 'IStreamSettings', required: true },
+      plugins: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'IPlugin' },
+      },
+      order: { dataType: 'double' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_Array_IStage__: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'IStage' },
+      },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_void_: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: { dataType: 'void' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  ISpeaker: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      bio: { dataType: 'string', required: true },
+      eventId: {
+        dataType: 'union',
+        subSchemas: [
+          { ref: 'mongoose.Types.ObjectId' },
+          { dataType: 'string' },
+        ],
+        required: true,
+      },
+      twitter: { dataType: 'string' },
+      github: { dataType: 'string' },
+      website: { dataType: 'string' },
+      photo: { dataType: 'string' },
+      company: { dataType: 'string' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_ISpeaker_: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: { ref: 'ISpeaker' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  SpeakerDto: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      bio: { dataType: 'string', required: true },
+      eventId: { dataType: 'string', required: true },
+      twitter: { dataType: 'string' },
+      github: { dataType: 'string' },
+      website: { dataType: 'string' },
+      photo: { dataType: 'string' },
+      company: { dataType: 'string' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_Array_ISpeaker__: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'ISpeaker' },
+      },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  ISource: {
+    dataType: 'refObject',
+    properties: {
+      streamUrl: { dataType: 'string', required: true },
+      start: { dataType: 'double', required: true },
+      end: { dataType: 'double', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IPlayback: {
+    dataType: 'refObject',
+    properties: {
+      livepeerId: { dataType: 'string', required: true },
+      videoUrl: { dataType: 'string', required: true },
+      ipfsHash: { dataType: 'string', required: true },
+      format: { dataType: 'string', required: true },
+      duration: { dataType: 'double', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  ISession: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      description: { dataType: 'string', required: true },
+      start: { dataType: 'string', required: true },
+      end: { dataType: 'string', required: true },
+      stageId: {
+        dataType: 'union',
+        subSchemas: [
+          { ref: 'mongoose.Types.ObjectId' },
+          { dataType: 'string' },
+        ],
+        required: true,
+      },
+      speakers: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'ISpeaker' },
+        required: true,
+      },
+      source: { ref: 'ISource' },
+      playback: { ref: 'IPlayback' },
+      videoUrl: { dataType: 'string' },
+      playbackId: { dataType: 'string' },
+      eventId: {
+        dataType: 'union',
+        subSchemas: [
+          { ref: 'mongoose.Types.ObjectId' },
+          { dataType: 'string' },
+        ],
+        required: true,
+      },
+      organizationId: {
+        dataType: 'union',
+        subSchemas: [
+          { ref: 'mongoose.Types.ObjectId' },
+          { dataType: 'string' },
+        ],
+        required: true,
+      },
+      track: { dataType: 'array', array: { dataType: 'string' } },
+      coverImage: { dataType: 'string' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_ISession_: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: { ref: 'ISession' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  SessionDto: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      description: { dataType: 'string', required: true },
+      start: { dataType: 'string', required: true },
+      end: { dataType: 'string', required: true },
+      stageId: { dataType: 'string', required: true },
+      speakers: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'ISpeaker' },
+        required: true,
+      },
+      source: { ref: 'ISource' },
+      playback: { ref: 'IPlayback' },
+      videoUrl: { dataType: 'string' },
+      playbackId: { dataType: 'string' },
+      eventId: { dataType: 'string', required: true },
+      organizationId: { dataType: 'string', required: true },
+      track: { dataType: 'array', array: { dataType: 'string' } },
+      coverImage: { dataType: 'string' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___':
+    {
+      dataType: 'refObject',
+      properties: {
+        status: { dataType: 'string', required: true },
+        message: { dataType: 'string', required: true },
+        data: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            pageable: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                size: { dataType: 'double', required: true },
+                page: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            totalDocuments: { dataType: 'double', required: true },
+            sessions: {
+              dataType: 'array',
+              array: { dataType: 'refObject', ref: 'ISession' },
+              required: true,
+            },
+          },
         },
-        "additionalProperties": false,
+      },
+      additionalProperties: false,
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IPlugin": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IOrganization: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      description: { dataType: 'string', required: true },
+      url: { dataType: 'string', required: true },
+      logo: { dataType: 'string', required: true },
+      location: { dataType: 'string', required: true },
+      accentColor: { dataType: 'string' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_IOrganization_: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: { ref: 'IOrganization' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  OrganizationDto: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      description: { dataType: 'string', required: true },
+      url: { dataType: 'string', required: true },
+      logo: { dataType: 'string', required: true },
+      location: { dataType: 'string', required: true },
+      accentColor: { dataType: 'string' },
+      slug: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_Array_IOrganization__: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'IOrganization' },
+      },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_string_: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  GSheetConfig: {
+    dataType: 'refObject',
+    properties: {
+      sheetId: { dataType: 'string' },
+      apiKey: { dataType: 'string' },
+      driveId: { dataType: 'string' },
+      driveApiKey: { dataType: 'string' },
+      url: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  PretalxConfig: {
+    dataType: 'refObject',
+    properties: {
+      url: { dataType: 'string', required: true },
+      apiToken: { dataType: 'string' },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IDataImporter: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'union',
+      subSchemas: [
+        {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            config: { ref: 'GSheetConfig', required: true },
+            type: { dataType: 'enum', enums: ['gsheet'], required: true },
+          },
         },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStage": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "streamSettings": {"ref":"IStreamSettings","required":true},
-            "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
-            "order": {"dataType":"double"},
-            "slug": {"dataType":"string"},
-            "entity": {"dataType":"string"},
+        {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            config: { ref: 'PretalxConfig', required: true },
+            type: { dataType: 'enum', enums: ['pretalx'], required: true },
+          },
         },
-        "additionalProperties": false,
+      ],
+      validators: {},
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_IStage_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"IStage"},
-        },
-        "additionalProperties": false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IDataExporter: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        config: { ref: 'GSheetConfig', required: true },
+        type: { dataType: 'enum', enums: ['gdrive'], required: true },
+      },
+      validators: {},
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "StageDto": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "eventId": {"dataType":"string","required":true},
-            "streamSettings": {"ref":"IStreamSettings","required":true},
-            "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
-            "order": {"dataType":"double"},
-            "slug": {"dataType":"string"},
-            "entity": {"dataType":"string"},
-        },
-        "additionalProperties": false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IPlugins: {
+    dataType: 'refObject',
+    properties: {
+      disableChat: { dataType: 'boolean', required: true },
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_Array_IStage__": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IStage"}},
-        },
-        "additionalProperties": false,
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IEvent: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      description: { dataType: 'string', required: true },
+      start: { dataType: 'datetime', required: true },
+      end: { dataType: 'datetime', required: true },
+      location: { dataType: 'string', required: true },
+      logo: { dataType: 'string' },
+      banner: { dataType: 'string' },
+      startTime: { dataType: 'string' },
+      endTime: { dataType: 'string' },
+      organizationId: {
+        dataType: 'union',
+        subSchemas: [
+          { ref: 'mongoose.Types.ObjectId' },
+          { dataType: 'string' },
+        ],
+        required: true,
+      },
+      dataImporter: {
+        dataType: 'array',
+        array: { dataType: 'refAlias', ref: 'IDataImporter' },
+      },
+      eventCover: { dataType: 'string' },
+      archiveMode: { dataType: 'boolean' },
+      website: { dataType: 'string' },
+      timezone: { dataType: 'string' },
+      accentColor: { dataType: 'string' },
+      unlisted: { dataType: 'boolean' },
+      dataExporter: {
+        dataType: 'array',
+        array: { dataType: 'refAlias', ref: 'IDataExporter' },
+      },
+      enableVideoDownloader: { dataType: 'boolean' },
+      plugins: { ref: 'IPlugins' },
+      slug: { dataType: 'string' },
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_void_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"void"},
-        },
-        "additionalProperties": false,
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_IEvent_: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: { ref: 'IEvent' },
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ISpeaker": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "bio": {"dataType":"string","required":true},
-            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "twitter": {"dataType":"string"},
-            "github": {"dataType":"string"},
-            "website": {"dataType":"string"},
-            "photo": {"dataType":"string"},
-            "company": {"dataType":"string"},
-            "slug": {"dataType":"string"},
-        },
-        "additionalProperties": false,
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  EventDto: {
+    dataType: 'refObject',
+    properties: {
+      name: { dataType: 'string', required: true },
+      description: { dataType: 'string', required: true },
+      start: { dataType: 'datetime', required: true },
+      end: { dataType: 'datetime', required: true },
+      location: { dataType: 'string', required: true },
+      logo: { dataType: 'string' },
+      banner: { dataType: 'string' },
+      startTime: { dataType: 'string' },
+      endTime: { dataType: 'string' },
+      organizationId: { dataType: 'string', required: true },
+      dataImporter: {
+        dataType: 'array',
+        array: { dataType: 'refAlias', ref: 'IDataImporter' },
+      },
+      eventCover: { dataType: 'string' },
+      archiveMode: { dataType: 'boolean' },
+      website: { dataType: 'string' },
+      timezone: { dataType: 'string' },
+      accentColor: { dataType: 'string' },
+      unlisted: { dataType: 'boolean' },
+      dataExporter: {
+        dataType: 'array',
+        array: { dataType: 'refAlias', ref: 'IDataExporter' },
+      },
+      enableVideoDownloader: { dataType: 'boolean' },
+      plugins: { ref: 'IPlugins' },
+      slug: { dataType: 'string' },
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_ISpeaker_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"ISpeaker"},
-        },
-        "additionalProperties": false,
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  IStandardResponse_Array_IEvent__: {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'IEvent' },
+      },
     },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "SpeakerDto": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "bio": {"dataType":"string","required":true},
-            "eventId": {"dataType":"string","required":true},
-            "twitter": {"dataType":"string"},
-            "github": {"dataType":"string"},
-            "website": {"dataType":"string"},
-            "photo": {"dataType":"string"},
-            "company": {"dataType":"string"},
-            "slug": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_Array_ISpeaker__": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"}},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ISource": {
-        "dataType": "refObject",
-        "properties": {
-            "streamUrl": {"dataType":"string","required":true},
-            "start": {"dataType":"double","required":true},
-            "end": {"dataType":"double","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IPlayback": {
-        "dataType": "refObject",
-        "properties": {
-            "livepeerId": {"dataType":"string","required":true},
-            "videoUrl": {"dataType":"string","required":true},
-            "ipfsHash": {"dataType":"string","required":true},
-            "format": {"dataType":"string","required":true},
-            "duration": {"dataType":"double","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ISession": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "start": {"dataType":"string","required":true},
-            "end": {"dataType":"string","required":true},
-            "stageId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "speakers": {"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"},"required":true},
-            "source": {"ref":"ISource"},
-            "playback": {"ref":"IPlayback"},
-            "videoUrl": {"dataType":"string"},
-            "playbackId": {"dataType":"string"},
-            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "track": {"dataType":"array","array":{"dataType":"string"}},
-            "coverImage": {"dataType":"string"},
-            "slug": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_ISession_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"ISession"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "SessionDto": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "start": {"dataType":"string","required":true},
-            "end": {"dataType":"string","required":true},
-            "stageId": {"dataType":"string","required":true},
-            "speakers": {"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"},"required":true},
-            "source": {"ref":"ISource"},
-            "playback": {"ref":"IPlayback"},
-            "videoUrl": {"dataType":"string"},
-            "playbackId": {"dataType":"string"},
-            "eventId": {"dataType":"string","required":true},
-            "organizationId": {"dataType":"string","required":true},
-            "track": {"dataType":"array","array":{"dataType":"string"}},
-            "coverImage": {"dataType":"string"},
-            "slug": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"pageable":{"dataType":"nestedObjectLiteral","nestedProperties":{"size":{"dataType":"double","required":true},"page":{"dataType":"double","required":true}},"required":true},"totalDocuments":{"dataType":"double","required":true},"sessions":{"dataType":"array","array":{"dataType":"refObject","ref":"ISession"},"required":true}}},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IOrganization": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "url": {"dataType":"string","required":true},
-            "logo": {"dataType":"string","required":true},
-            "location": {"dataType":"string","required":true},
-            "accentColor": {"dataType":"string"},
-            "slug": {"dataType":"string"},
-            "entity": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_IOrganization_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"IOrganization"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "OrganizationDto": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "url": {"dataType":"string","required":true},
-            "logo": {"dataType":"string","required":true},
-            "location": {"dataType":"string","required":true},
-            "accentColor": {"dataType":"string"},
-            "slug": {"dataType":"string"},
-            "entity": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_Array_IOrganization__": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IOrganization"}},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_string_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "GSheetConfig": {
-        "dataType": "refObject",
-        "properties": {
-            "sheetId": {"dataType":"string"},
-            "apiKey": {"dataType":"string"},
-            "driveId": {"dataType":"string"},
-            "driveApiKey": {"dataType":"string"},
-            "url": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "PretalxConfig": {
-        "dataType": "refObject",
-        "properties": {
-            "url": {"dataType":"string","required":true},
-            "apiToken": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IDataImporter": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"config":{"ref":"GSheetConfig","required":true},"type":{"dataType":"enum","enums":["gsheet"],"required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"config":{"ref":"PretalxConfig","required":true},"type":{"dataType":"enum","enums":["pretalx"],"required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IDataExporter": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"config":{"ref":"GSheetConfig","required":true},"type":{"dataType":"enum","enums":["gdrive"],"required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IPlugins": {
-        "dataType": "refObject",
-        "properties": {
-            "disableChat": {"dataType":"boolean","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IEvent": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "start": {"dataType":"datetime","required":true},
-            "end": {"dataType":"datetime","required":true},
-            "location": {"dataType":"string","required":true},
-            "logo": {"dataType":"string"},
-            "banner": {"dataType":"string"},
-            "startTime": {"dataType":"string"},
-            "endTime": {"dataType":"string"},
-            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "dataImporter": {"dataType":"array","array":{"dataType":"refAlias","ref":"IDataImporter"}},
-            "eventCover": {"dataType":"string"},
-            "archiveMode": {"dataType":"boolean"},
-            "website": {"dataType":"string"},
-            "timezone": {"dataType":"string"},
-            "accentColor": {"dataType":"string"},
-            "unlisted": {"dataType":"boolean"},
-            "dataExporter": {"dataType":"array","array":{"dataType":"refAlias","ref":"IDataExporter"}},
-            "enableVideoDownloader": {"dataType":"boolean"},
-            "plugins": {"ref":"IPlugins"},
-            "slug": {"dataType":"string"},
-            "entity": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_IEvent_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"IEvent"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "EventDto": {
-        "dataType": "refObject",
-        "properties": {
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "start": {"dataType":"datetime","required":true},
-            "end": {"dataType":"datetime","required":true},
-            "location": {"dataType":"string","required":true},
-            "logo": {"dataType":"string"},
-            "banner": {"dataType":"string"},
-            "startTime": {"dataType":"string"},
-            "endTime": {"dataType":"string"},
-            "organizationId": {"dataType":"string","required":true},
-            "dataImporter": {"dataType":"array","array":{"dataType":"refAlias","ref":"IDataImporter"}},
-            "eventCover": {"dataType":"string"},
-            "archiveMode": {"dataType":"boolean"},
-            "website": {"dataType":"string"},
-            "timezone": {"dataType":"string"},
-            "accentColor": {"dataType":"string"},
-            "unlisted": {"dataType":"boolean"},
-            "dataExporter": {"dataType":"array","array":{"dataType":"refAlias","ref":"IDataExporter"}},
-            "enableVideoDownloader": {"dataType":"boolean"},
-            "plugins": {"ref":"IPlugins"},
-            "slug": {"dataType":"string"},
-            "entity": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_Array_IEvent__": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IEvent"}},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new ValidationService(models);
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 export function RegisterRoutes(app: Router) {
-    // ###########################################################################################################
-    //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
-    //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
-    // ###########################################################################################################
-        app.post('/stages',
-            ...(fetchMiddlewares<RequestHandler>(StageController)),
-            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.createStage)),
-
-            function StageController_createStage(request: any, response: any, next: any) {
-            const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"StageDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new StageController();
-
-
-              const promise = controller.createStage.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/stages/:stageId',
-            ...(fetchMiddlewares<RequestHandler>(StageController)),
-            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.editStage)),
-
-            function StageController_editStage(request: any, response: any, next: any) {
-            const args = {
-                    stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"ref":"StageDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new StageController();
-
-
-              const promise = controller.editStage.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/stages/:stageId',
-            ...(fetchMiddlewares<RequestHandler>(StageController)),
-            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getStageById)),
-
-            function StageController_getStageById(request: any, response: any, next: any) {
-            const args = {
-                    stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new StageController();
-
-
-              const promise = controller.getStageById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/stages',
-            ...(fetchMiddlewares<RequestHandler>(StageController)),
-            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStages)),
-
-            function StageController_getAllStages(request: any, response: any, next: any) {
-            const args = {
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new StageController();
-
-
-              const promise = controller.getAllStages.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/stages/event/:eventId',
-            ...(fetchMiddlewares<RequestHandler>(StageController)),
-            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStagesForEvent)),
-
-            function StageController_getAllStagesForEvent(request: any, response: any, next: any) {
-            const args = {
-                    eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new StageController();
-
-
-              const promise = controller.getAllStagesForEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/stages/:stageId',
-            ...(fetchMiddlewares<RequestHandler>(StageController)),
-            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.deleteStage)),
-
-            function StageController_deleteStage(request: any, response: any, next: any) {
-            const args = {
-                    stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new StageController();
-
-
-              const promise = controller.deleteStage.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/speakers',
-            ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
-            ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.createSpeaker)),
-
-            function SpeakerController_createSpeaker(request: any, response: any, next: any) {
-            const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"SpeakerDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new SpeakerController();
-
-
-              const promise = controller.createSpeaker.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/speakers/:speakerId',
-            ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
-            ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.getSpeaker)),
-
-            function SpeakerController_getSpeaker(request: any, response: any, next: any) {
-            const args = {
-                    speakerId: {"in":"path","name":"speakerId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new SpeakerController();
-
-
-              const promise = controller.getSpeaker.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/speakers/event/:eventId',
-            ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
-            ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.getAllSpeakersForEvent)),
-
-            function SpeakerController_getAllSpeakersForEvent(request: any, response: any, next: any) {
-            const args = {
-                    eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new SpeakerController();
-
-
-              const promise = controller.getAllSpeakersForEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/sessions',
-            ...(fetchMiddlewares<RequestHandler>(SessionController)),
-            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.createSession)),
-
-            function SessionController_createSession(request: any, response: any, next: any) {
-            const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"SessionDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new SessionController();
-
-
-              const promise = controller.createSession.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/sessions/:sessionId',
-            ...(fetchMiddlewares<RequestHandler>(SessionController)),
-            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.editSession)),
-
-            function SessionController_editSession(request: any, response: any, next: any) {
-            const args = {
-                    sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"ref":"SessionDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new SessionController();
-
-
-              const promise = controller.editSession.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/sessions/:sessionId',
-            ...(fetchMiddlewares<RequestHandler>(SessionController)),
-            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getSessionById)),
-
-            function SessionController_getSessionById(request: any, response: any, next: any) {
-            const args = {
-                    sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new SessionController();
-
-
-              const promise = controller.getSessionById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/sessions',
-            ...(fetchMiddlewares<RequestHandler>(SessionController)),
-            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getAllSessions)),
-
-            function SessionController_getAllSessions(request: any, response: any, next: any) {
-            const args = {
-                    event: {"in":"query","name":"event","dataType":"string"},
-                    organization: {"in":"query","name":"organization","dataType":"string"},
-                    speaker: {"in":"query","name":"speaker","dataType":"string"},
-                    page: {"in":"query","name":"page","dataType":"double"},
-                    size: {"in":"query","name":"size","dataType":"double"},
-                    timestamp: {"in":"query","name":"timestamp","dataType":"double"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new SessionController();
-
-
-              const promise = controller.getAllSessions.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/organizations',
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.createOrganization)),
-
-            function OrganizationController_createOrganization(request: any, response: any, next: any) {
-            const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"OrganizationDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new OrganizationController();
-
-
-              const promise = controller.createOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/organizations/:organizationId',
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.editOrganization)),
-
-            function OrganizationController_editOrganization(request: any, response: any, next: any) {
-            const args = {
-                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"ref":"OrganizationDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new OrganizationController();
-
-
-              const promise = controller.editOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/organizations/:organizationId',
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getOrganizationById)),
-
-            function OrganizationController_getOrganizationById(request: any, response: any, next: any) {
-            const args = {
-                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new OrganizationController();
-
-
-              const promise = controller.getOrganizationById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/organizations',
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getAllOrganizations)),
-
-            function OrganizationController_getAllOrganizations(request: any, response: any, next: any) {
-            const args = {
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new OrganizationController();
-
-
-              const promise = controller.getAllOrganizations.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/organizations/:organizationId',
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
-            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.deleteOrganization)),
-
-            function OrganizationController_deleteOrganization(request: any, response: any, next: any) {
-            const args = {
-                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new OrganizationController();
-
-
-              const promise = controller.deleteOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/',
-            ...(fetchMiddlewares<RequestHandler>(IndexController)),
-            ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.index)),
-
-            function IndexController_index(request: any, response: any, next: any) {
-            const args = {
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new IndexController();
-
-
-              const promise = controller.index.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/events',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.createEvent)),
-
-            function EventController_createEvent(request: any, response: any, next: any) {
-            const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"EventDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.createEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/events/:eventId',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.editEvent)),
-
-            function EventController_editEvent(request: any, response: any, next: any) {
-            const args = {
-                    eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"ref":"EventDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.editEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/events/:eventId',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getEventById)),
-
-            function EventController_getEventById(request: any, response: any, next: any) {
-            const args = {
-                    eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.getEventById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/events',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getAllEvents)),
-
-            function EventController_getAllEvents(request: any, response: any, next: any) {
-            const args = {
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.getAllEvents.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/events/organization/:organizationId',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getAllEventsForOrganization)),
-
-            function EventController_getAllEventsForOrganization(request: any, response: any, next: any) {
-            const args = {
-                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.getAllEventsForOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/events/:eventId',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.deleteEvent)),
-
-            function EventController_deleteEvent(request: any, response: any, next: any) {
-            const args = {
-                    eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.deleteEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function isController(object: any): object is Controller {
-        return 'getHeaders' in object && 'getStatus' in object && 'setStatus' in object;
-    }
-
-    function promiseHandler(controllerObj: any, promise: any, response: any, successStatus: any, next: any) {
-        return Promise.resolve(promise)
-            .then((data: any) => {
-                let statusCode = successStatus;
-                let headers;
-                if (isController(controllerObj)) {
-                    headers = controllerObj.getHeaders();
-                    statusCode = controllerObj.getStatus() || statusCode;
-                }
-
-                // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-                returnHandler(response, statusCode, data, headers)
-            })
-            .catch((error: any) => next(error));
-    }
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function returnHandler(response: any, statusCode?: number, data?: any, headers: any = {}) {
-        if (response.headersSent) {
-            return;
+  // ###########################################################################################################
+  //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
+  //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
+  // ###########################################################################################################
+  app.post(
+    '/stages',
+    ...fetchMiddlewares<RequestHandler>(StageController),
+    ...fetchMiddlewares<RequestHandler>(StageController.prototype.createStage),
+
+    function StageController_createStage(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        body: { in: 'body', name: 'body', required: true, ref: 'StageDto' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new StageController();
+
+        const promise = controller.createStage.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.put(
+    '/stages/:stageId',
+    ...fetchMiddlewares<RequestHandler>(StageController),
+    ...fetchMiddlewares<RequestHandler>(StageController.prototype.editStage),
+
+    function StageController_editStage(request: any, response: any, next: any) {
+      const args = {
+        stageId: {
+          in: 'path',
+          name: 'stageId',
+          required: true,
+          dataType: 'string',
+        },
+        body: { in: 'body', name: 'body', required: true, ref: 'StageDto' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new StageController();
+
+        const promise = controller.editStage.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/stages/:stageId',
+    ...fetchMiddlewares<RequestHandler>(StageController),
+    ...fetchMiddlewares<RequestHandler>(StageController.prototype.getStageById),
+
+    function StageController_getStageById(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        stageId: {
+          in: 'path',
+          name: 'stageId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new StageController();
+
+        const promise = controller.getStageById.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/stages',
+    ...fetchMiddlewares<RequestHandler>(StageController),
+    ...fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStages),
+
+    function StageController_getAllStages(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new StageController();
+
+        const promise = controller.getAllStages.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/stages/event/:eventId',
+    ...fetchMiddlewares<RequestHandler>(StageController),
+    ...fetchMiddlewares<RequestHandler>(
+      StageController.prototype.getAllStagesForEvent,
+    ),
+
+    function StageController_getAllStagesForEvent(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        eventId: {
+          in: 'path',
+          name: 'eventId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new StageController();
+
+        const promise = controller.getAllStagesForEvent.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.delete(
+    '/stages/:stageId',
+    ...fetchMiddlewares<RequestHandler>(StageController),
+    ...fetchMiddlewares<RequestHandler>(StageController.prototype.deleteStage),
+
+    function StageController_deleteStage(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        stageId: {
+          in: 'path',
+          name: 'stageId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new StageController();
+
+        const promise = controller.deleteStage.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/speakers',
+    ...fetchMiddlewares<RequestHandler>(SpeakerController),
+    ...fetchMiddlewares<RequestHandler>(
+      SpeakerController.prototype.createSpeaker,
+    ),
+
+    function SpeakerController_createSpeaker(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        body: { in: 'body', name: 'body', required: true, ref: 'SpeakerDto' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new SpeakerController();
+
+        const promise = controller.createSpeaker.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 201, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/speakers/:speakerId',
+    ...fetchMiddlewares<RequestHandler>(SpeakerController),
+    ...fetchMiddlewares<RequestHandler>(SpeakerController.prototype.getSpeaker),
+
+    function SpeakerController_getSpeaker(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        speakerId: {
+          in: 'path',
+          name: 'speakerId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new SpeakerController();
+
+        const promise = controller.getSpeaker.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/speakers/event/:eventId',
+    ...fetchMiddlewares<RequestHandler>(SpeakerController),
+    ...fetchMiddlewares<RequestHandler>(
+      SpeakerController.prototype.getAllSpeakersForEvent,
+    ),
+
+    function SpeakerController_getAllSpeakersForEvent(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        eventId: {
+          in: 'path',
+          name: 'eventId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new SpeakerController();
+
+        const promise = controller.getAllSpeakersForEvent.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/sessions',
+    ...fetchMiddlewares<RequestHandler>(SessionController),
+    ...fetchMiddlewares<RequestHandler>(
+      SessionController.prototype.createSession,
+    ),
+
+    function SessionController_createSession(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        body: { in: 'body', name: 'body', required: true, ref: 'SessionDto' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new SessionController();
+
+        const promise = controller.createSession.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 201, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.put(
+    '/sessions/:sessionId',
+    ...fetchMiddlewares<RequestHandler>(SessionController),
+    ...fetchMiddlewares<RequestHandler>(
+      SessionController.prototype.editSession,
+    ),
+
+    function SessionController_editSession(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        sessionId: {
+          in: 'path',
+          name: 'sessionId',
+          required: true,
+          dataType: 'string',
+        },
+        body: { in: 'body', name: 'body', required: true, ref: 'SessionDto' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new SessionController();
+
+        const promise = controller.editSession.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/sessions/:sessionId',
+    ...fetchMiddlewares<RequestHandler>(SessionController),
+    ...fetchMiddlewares<RequestHandler>(
+      SessionController.prototype.getSessionById,
+    ),
+
+    function SessionController_getSessionById(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        sessionId: {
+          in: 'path',
+          name: 'sessionId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new SessionController();
+
+        const promise = controller.getSessionById.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/sessions',
+    ...fetchMiddlewares<RequestHandler>(SessionController),
+    ...fetchMiddlewares<RequestHandler>(
+      SessionController.prototype.getAllSessions,
+    ),
+
+    function SessionController_getAllSessions(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        event: { in: 'query', name: 'event', dataType: 'string' },
+        organization: { in: 'query', name: 'organization', dataType: 'string' },
+        speaker: { in: 'query', name: 'speaker', dataType: 'string' },
+        onlyVideos: { in: 'query', name: 'onlyVideos', dataType: 'boolean' },
+        page: { in: 'query', name: 'page', dataType: 'double' },
+        size: { in: 'query', name: 'size', dataType: 'double' },
+        timestamp: { in: 'query', name: 'timestamp', dataType: 'double' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new SessionController();
+
+        const promise = controller.getAllSessions.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/organizations',
+    ...fetchMiddlewares<RequestHandler>(OrganizationController),
+    ...fetchMiddlewares<RequestHandler>(
+      OrganizationController.prototype.createOrganization,
+    ),
+
+    function OrganizationController_createOrganization(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        body: {
+          in: 'body',
+          name: 'body',
+          required: true,
+          ref: 'OrganizationDto',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new OrganizationController();
+
+        const promise = controller.createOrganization.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 201, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.put(
+    '/organizations/:organizationId',
+    ...fetchMiddlewares<RequestHandler>(OrganizationController),
+    ...fetchMiddlewares<RequestHandler>(
+      OrganizationController.prototype.editOrganization,
+    ),
+
+    function OrganizationController_editOrganization(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        organizationId: {
+          in: 'path',
+          name: 'organizationId',
+          required: true,
+          dataType: 'string',
+        },
+        body: {
+          in: 'body',
+          name: 'body',
+          required: true,
+          ref: 'OrganizationDto',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new OrganizationController();
+
+        const promise = controller.editOrganization.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/organizations/:organizationId',
+    ...fetchMiddlewares<RequestHandler>(OrganizationController),
+    ...fetchMiddlewares<RequestHandler>(
+      OrganizationController.prototype.getOrganizationById,
+    ),
+
+    function OrganizationController_getOrganizationById(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        organizationId: {
+          in: 'path',
+          name: 'organizationId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new OrganizationController();
+
+        const promise = controller.getOrganizationById.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/organizations',
+    ...fetchMiddlewares<RequestHandler>(OrganizationController),
+    ...fetchMiddlewares<RequestHandler>(
+      OrganizationController.prototype.getAllOrganizations,
+    ),
+
+    function OrganizationController_getAllOrganizations(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new OrganizationController();
+
+        const promise = controller.getAllOrganizations.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.delete(
+    '/organizations/:organizationId',
+    ...fetchMiddlewares<RequestHandler>(OrganizationController),
+    ...fetchMiddlewares<RequestHandler>(
+      OrganizationController.prototype.deleteOrganization,
+    ),
+
+    function OrganizationController_deleteOrganization(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        organizationId: {
+          in: 'path',
+          name: 'organizationId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new OrganizationController();
+
+        const promise = controller.deleteOrganization.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/',
+    ...fetchMiddlewares<RequestHandler>(IndexController),
+    ...fetchMiddlewares<RequestHandler>(IndexController.prototype.index),
+
+    function IndexController_index(request: any, response: any, next: any) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new IndexController();
+
+        const promise = controller.index.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/events',
+    ...fetchMiddlewares<RequestHandler>(EventController),
+    ...fetchMiddlewares<RequestHandler>(EventController.prototype.createEvent),
+
+    function EventController_createEvent(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        body: { in: 'body', name: 'body', required: true, ref: 'EventDto' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new EventController();
+
+        const promise = controller.createEvent.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 201, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.put(
+    '/events/:eventId',
+    ...fetchMiddlewares<RequestHandler>(EventController),
+    ...fetchMiddlewares<RequestHandler>(EventController.prototype.editEvent),
+
+    function EventController_editEvent(request: any, response: any, next: any) {
+      const args = {
+        eventId: {
+          in: 'path',
+          name: 'eventId',
+          required: true,
+          dataType: 'string',
+        },
+        body: { in: 'body', name: 'body', required: true, ref: 'EventDto' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new EventController();
+
+        const promise = controller.editEvent.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/events/:eventId',
+    ...fetchMiddlewares<RequestHandler>(EventController),
+    ...fetchMiddlewares<RequestHandler>(EventController.prototype.getEventById),
+
+    function EventController_getEventById(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        eventId: {
+          in: 'path',
+          name: 'eventId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new EventController();
+
+        const promise = controller.getEventById.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/events',
+    ...fetchMiddlewares<RequestHandler>(EventController),
+    ...fetchMiddlewares<RequestHandler>(EventController.prototype.getAllEvents),
+
+    function EventController_getAllEvents(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new EventController();
+
+        const promise = controller.getAllEvents.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/events/organization/:organizationId',
+    ...fetchMiddlewares<RequestHandler>(EventController),
+    ...fetchMiddlewares<RequestHandler>(
+      EventController.prototype.getAllEventsForOrganization,
+    ),
+
+    function EventController_getAllEventsForOrganization(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        organizationId: {
+          in: 'path',
+          name: 'organizationId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new EventController();
+
+        const promise = controller.getAllEventsForOrganization.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.delete(
+    '/events/:eventId',
+    ...fetchMiddlewares<RequestHandler>(EventController),
+    ...fetchMiddlewares<RequestHandler>(EventController.prototype.deleteEvent),
+
+    function EventController_deleteEvent(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        eventId: {
+          in: 'path',
+          name: 'eventId',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new EventController();
+
+        const promise = controller.deleteEvent.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+  function isController(object: any): object is Controller {
+    return (
+      'getHeaders' in object && 'getStatus' in object && 'setStatus' in object
+    );
+  }
+
+  function promiseHandler(
+    controllerObj: any,
+    promise: any,
+    response: any,
+    successStatus: any,
+    next: any,
+  ) {
+    return Promise.resolve(promise)
+      .then((data: any) => {
+        let statusCode = successStatus;
+        let headers;
+        if (isController(controllerObj)) {
+          headers = controllerObj.getHeaders();
+          statusCode = controllerObj.getStatus() || statusCode;
         }
-        Object.keys(headers).forEach((name: string) => {
-            response.set(name, headers[name]);
-        });
-        if (data && typeof data.pipe === 'function' && data.readable && typeof data._read === 'function') {
-            response.status(statusCode || 200)
-            data.pipe(response);
-        } else if (data !== null && data !== undefined) {
-            response.status(statusCode || 200).json(data);
-        } else {
-            response.status(statusCode || 204).end();
-        }
+
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+        returnHandler(response, statusCode, data, headers);
+      })
+      .catch((error: any) => next(error));
+  }
+
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+  function returnHandler(
+    response: any,
+    statusCode?: number,
+    data?: any,
+    headers: any = {},
+  ) {
+    if (response.headersSent) {
+      return;
     }
+    Object.keys(headers).forEach((name: string) => {
+      response.set(name, headers[name]);
+    });
+    if (
+      data &&
+      typeof data.pipe === 'function' &&
+      data.readable &&
+      typeof data._read === 'function'
+    ) {
+      response.status(statusCode || 200);
+      data.pipe(response);
+    } else if (data !== null && data !== undefined) {
+      response.status(statusCode || 200).json(data);
+    } else {
+      response.status(statusCode || 204).end();
+    }
+  }
 
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-    function responder(response: any): TsoaResponse<HttpStatusCodeLiteral, unknown>  {
-        return function(status, data, headers) {
-            returnHandler(response, status, data, headers);
-        };
+  function responder(
+    response: any,
+  ): TsoaResponse<HttpStatusCodeLiteral, unknown> {
+    return function (status, data, headers) {
+      returnHandler(response, status, data, headers);
     };
+  }
 
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-    function getValidatedArgs(args: any, request: any, response: any): any[] {
-        const fieldErrors: FieldErrors  = {};
-        const values = Object.keys(args).map((key) => {
-            const name = args[key].name;
-            switch (args[key].in) {
-                case 'request':
-                    return request;
-                case 'query':
-                    return validationService.ValidateParam(args[key], request.query[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'queries':
-                    return validationService.ValidateParam(args[key], request.query, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'path':
-                    return validationService.ValidateParam(args[key], request.params[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'header':
-                    return validationService.ValidateParam(args[key], request.header(name), name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'body':
-                    return validationService.ValidateParam(args[key], request.body, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'body-prop':
-                    return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, 'body.', {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'formData':
-                    if (args[key].dataType === 'file') {
-                        return validationService.ValidateParam(args[key], request.file, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    } else if (args[key].dataType === 'array' && args[key].array.dataType === 'file') {
-                        return validationService.ValidateParam(args[key], request.files, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    } else {
-                        return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    }
-                case 'res':
-                    return responder(response);
-            }
-        });
+  function getValidatedArgs(args: any, request: any, response: any): any[] {
+    const fieldErrors: FieldErrors = {};
+    const values = Object.keys(args).map((key) => {
+      const name = args[key].name;
+      switch (args[key].in) {
+        case 'request':
+          return request;
+        case 'query':
+          return validationService.ValidateParam(
+            args[key],
+            request.query[name],
+            name,
+            fieldErrors,
+            undefined,
+            { noImplicitAdditionalProperties: 'throw-on-extras' },
+          );
+        case 'queries':
+          return validationService.ValidateParam(
+            args[key],
+            request.query,
+            name,
+            fieldErrors,
+            undefined,
+            { noImplicitAdditionalProperties: 'throw-on-extras' },
+          );
+        case 'path':
+          return validationService.ValidateParam(
+            args[key],
+            request.params[name],
+            name,
+            fieldErrors,
+            undefined,
+            { noImplicitAdditionalProperties: 'throw-on-extras' },
+          );
+        case 'header':
+          return validationService.ValidateParam(
+            args[key],
+            request.header(name),
+            name,
+            fieldErrors,
+            undefined,
+            { noImplicitAdditionalProperties: 'throw-on-extras' },
+          );
+        case 'body':
+          return validationService.ValidateParam(
+            args[key],
+            request.body,
+            name,
+            fieldErrors,
+            undefined,
+            { noImplicitAdditionalProperties: 'throw-on-extras' },
+          );
+        case 'body-prop':
+          return validationService.ValidateParam(
+            args[key],
+            request.body[name],
+            name,
+            fieldErrors,
+            'body.',
+            { noImplicitAdditionalProperties: 'throw-on-extras' },
+          );
+        case 'formData':
+          if (args[key].dataType === 'file') {
+            return validationService.ValidateParam(
+              args[key],
+              request.file,
+              name,
+              fieldErrors,
+              undefined,
+              { noImplicitAdditionalProperties: 'throw-on-extras' },
+            );
+          } else if (
+            args[key].dataType === 'array' &&
+            args[key].array.dataType === 'file'
+          ) {
+            return validationService.ValidateParam(
+              args[key],
+              request.files,
+              name,
+              fieldErrors,
+              undefined,
+              { noImplicitAdditionalProperties: 'throw-on-extras' },
+            );
+          } else {
+            return validationService.ValidateParam(
+              args[key],
+              request.body[name],
+              name,
+              fieldErrors,
+              undefined,
+              { noImplicitAdditionalProperties: 'throw-on-extras' },
+            );
+          }
+        case 'res':
+          return responder(response);
+      }
+    });
 
-        if (Object.keys(fieldErrors).length > 0) {
-            throw new ValidateError(fieldErrors, '');
-        }
-        return values;
+    if (Object.keys(fieldErrors).length > 0) {
+      throw new ValidateError(fieldErrors, '');
     }
+    return values;
+  }
 
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 }
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
