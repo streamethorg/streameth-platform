@@ -1,33 +1,38 @@
-import fs from "fs";
 import { CONFIG, resetTmpFolder } from "./config";
 import { createReadStream, existsSync, ReadStream } from "fs";
 import * as child from "child_process";
 import { join } from "path";
-import https from "https";
+import * as fs from "fs";
+import ffmpeg from "fluent-ffmpeg";
 
 export function ToStream(filepath: string) {
   return createReadStream(filepath, { encoding: "utf8" });
 }
 
-export function downloadFile(
-  fileUrl: string,
-  outputLocation: string
+export function downloadM3U8ToMP4(
+  m3u8Url: string,
+  fileName: string,
+  outputFilePath: string
 ): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(outputLocation);
+  if (!fs.existsSync(outputFilePath)) {
+    console.log("Creating tmp");
+    fs.mkdirSync(outputFilePath);
+  }
 
-    https
-      .get(fileUrl, (response) => {
-        response.pipe(file);
-        file.on("finish", () => {
-          file.close();
-          resolve();
-        });
+  console.log(`Downloading ${m3u8Url}...`);
+
+  return new Promise((resolve, reject) => {
+    ffmpeg(m3u8Url)
+      .output(join(outputFilePath, `${fileName}.mp4`))
+      .on("end", () => {
+        console.log("Download and conversion completed");
+        resolve();
       })
-      .on("error", (err) => {
-        fs.unlink(outputLocation, () => {});
+      .on("error", (err: any) => {
+        console.error("Error:", err);
         reject(err);
-      });
+      })
+      .run();
   });
 }
 
