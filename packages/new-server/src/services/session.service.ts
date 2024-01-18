@@ -40,6 +40,7 @@ export default class SessionServcie {
     event: string;
     organization: string;
     speaker: string;
+    onlyVideos: boolean;
     size: number;
     page: number;
   }): Promise<{
@@ -49,12 +50,15 @@ export default class SessionServcie {
   }> {
     let filter = {};
     if (d.event != undefined) {
-      let event = await Event.findOne({ entity: d.event });
+      let event = await Event.findOne({ slug: d.event });
       filter = { ...filter, eventId: event?._id };
     }
     if (d.organization != undefined) {
-      let org = await Organization.findOne({ entity: d.organization });
+      let org = await Organization.findOne({ slug: d.organization });
       filter = { ...filter, organizationId: org?._id };
+    }
+    if (d.onlyVideos) {
+      filter = { ...filter, playbackId: { $ne: '' } };
     }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
     const pageNumber = Number(d.page) || 0;
