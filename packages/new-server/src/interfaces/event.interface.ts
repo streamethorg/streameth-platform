@@ -43,6 +43,5 @@ export interface IEvent {
   enableVideoDownloader?: boolean;
   plugins?: IPlugins;
   slug?: string;
-  entity?: string;
 }
 export interface IEventModel extends IEvent, Document {}

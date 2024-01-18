@@ -38,7 +38,6 @@ const EventSchema = new Schema<IEventModel>(
       disableChat: { type: Boolean, default: false },
     },
     slug: { type: String, default: '' },
-    entity: { type: String, default: '' },
   },
   {
     timestamps: true,

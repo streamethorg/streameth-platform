@@ -7,6 +7,5 @@ export interface IOrganization {
   location: string;
   accentColor?: string;
   slug?: string;
-  entity?: string;
 }
 export interface IOrganizationModel extends IOrganization, Document {}

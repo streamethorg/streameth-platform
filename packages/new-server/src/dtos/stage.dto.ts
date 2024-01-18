@@ -30,5 +30,4 @@ export class StageDto implements IStage {
   order?: number;
 
   slug?: string;
-  entity?: string;
 }

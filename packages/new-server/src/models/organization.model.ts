@@ -10,7 +10,6 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     location: { type: String, default: '', required: true },
     accentColor: { type: String, default: '' },
     slug: { type: String, default: '' },
-    entity: { type: String, default: '' },
   },
   {
     timestamps: true,

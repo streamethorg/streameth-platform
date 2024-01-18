@@ -2,7 +2,6 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IEvent } from '@interfaces/event.interface';
 import Events from '@models/event.model';
-import { generateId } from '@utils/util';
 
 export default class EventService {
   private path: string;
@@ -20,7 +19,7 @@ export default class EventService {
     if (findEvent) throw new HttpException(409, 'Event already exists');
     return this.controller.store.create(
       data.name,
-      { ...data, entity: generateId(data.name) },
+      data,
       `${this.path}/${data.organizationId}`,
     );
   }
@@ -40,7 +39,7 @@ export default class EventService {
       id = eventId.replace('-', '/');
     }
     if (!isObjectId && !isPathId) {
-      return await this.controller.store.findOne({ entity: eventId });
+      return await this.controller.store.findOne({ slug: eventId });
     }
     const findEvent = await this.controller.store.findById(id);
     if (!findEvent) throw new HttpException(404, 'Event not found');

@@ -15,7 +15,6 @@ export class IStage {
   plugins?: IPlugin[];
   order?: number;
   slug?: string;
-  entity?: string;
 }
 
 export interface IStageModel extends IStage, Document {}
