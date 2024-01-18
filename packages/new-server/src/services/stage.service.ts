@@ -2,7 +2,6 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
-import { generateId } from '@utils/util';
 
 export default class StageService {
   private path: string;
@@ -15,7 +14,7 @@ export default class StageService {
   async create(data: IStage): Promise<IStage> {
     return this.controller.store.create(
       data.name,
-      { ...data, entity: generateId(data.name) },
+      data,
       `${this.path}/${data.eventId}`,
     );
   }

@@ -27,6 +27,7 @@ export interface ISession {
   videoUrl?: string;
   playbackId?: string;
   eventId: Types.ObjectId | string;
+  organizationId: Types.ObjectId | string;
   track?: string[];
   coverImage?: string;
   slug?: string;

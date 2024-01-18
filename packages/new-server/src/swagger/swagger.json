@@ -64,9 +64,6 @@
 					},
 					"slug": {
 						"type": "string"
-					},
-					"entity": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -118,9 +115,6 @@
 						"format": "double"
 					},
 					"slug": {
-						"type": "string"
-					},
-					"entity": {
 						"type": "string"
 					}
 				},
@@ -398,6 +392,16 @@
 							}
 						]
 					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
 					"track": {
 						"items": {
 							"type": "string"
@@ -418,7 +422,8 @@
 					"end",
 					"stageId",
 					"speakers",
-					"eventId"
+					"eventId",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -480,6 +485,9 @@
 					"eventId": {
 						"type": "string"
 					},
+					"organizationId": {
+						"type": "string"
+					},
 					"track": {
 						"items": {
 							"type": "string"
@@ -500,7 +508,61 @@
 					"end",
 					"stageId",
 					"speakers",
-					"eventId"
+					"eventId",
+					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"pageable": {
+								"properties": {
+									"size": {
+										"type": "number",
+										"format": "double"
+									},
+									"page": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"size",
+									"page"
+								],
+								"type": "object"
+							},
+							"totalDocuments": {
+								"type": "number",
+								"format": "double"
+							},
+							"sessions": {
+								"items": {
+									"$ref": "#/components/schemas/ISession"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"pageable",
+							"totalDocuments",
+							"sessions"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -526,9 +588,6 @@
 						"type": "string"
 					},
 					"slug": {
-						"type": "string"
-					},
-					"entity": {
 						"type": "string"
 					}
 				},
@@ -582,9 +641,6 @@
 						"type": "string"
 					},
 					"slug": {
-						"type": "string"
-					},
-					"entity": {
 						"type": "string"
 					}
 				},
@@ -652,6 +708,9 @@
 					},
 					"driveApiKey": {
 						"type": "string"
+					},
+					"url": {
+						"type": "string"
 					}
 				},
 				"type": "object",
@@ -667,8 +726,7 @@
 					}
 				},
 				"required": [
-					"url",
-					"apiToken"
+					"url"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -825,9 +883,6 @@
 					},
 					"slug": {
 						"type": "string"
-					},
-					"entity": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -931,9 +986,6 @@
 						"$ref": "#/components/schemas/IPlugins"
 					},
 					"slug": {
-						"type": "string"
-					},
-					"entity": {
 						"type": "string"
 					}
 				},
@@ -1285,6 +1337,86 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetAllSessions",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "event",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "organization",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "speaker",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "onlyVideos",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "size",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "timestamp",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		},
 		"/sessions/{sessionId}": {
@@ -1717,7 +1849,7 @@
 	},
 	"servers": [
 		{
-			"url": "/"
+			"url": "/streameth-platform-packages-new2"
 		}
 	]
 }

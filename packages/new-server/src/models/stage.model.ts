@@ -15,7 +15,6 @@ const StageSchema = new Schema<IStageModel>(
     ],
     order: { type: Number, default: 0 },
     slug: { type: String, default: '' },
-    entity: { type: String, default: '' },
   },
   {
     timestamps: true,

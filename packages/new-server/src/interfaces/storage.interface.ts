@@ -3,6 +3,11 @@ export interface IStorageController<T> {
   update?: (id: string, data: T) => Promise<T>;
   findById: (id: string) => Promise<T>;
   findOne?: (query: {}, path?: string) => Promise<T>;
-  findAll: (query?: {}, path?: string) => Promise<Array<T>>;
+  findAll: (
+    query?: {},
+    path?: string,
+    skip?: number,
+    pageSize?: number,
+  ) => Promise<Array<T>>;
   delete: (id: string) => Promise<void>;
 }

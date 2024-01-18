@@ -2,7 +2,6 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IOrganization } from '@interfaces/organization.interface';
 import Organization from '@models/organization.model';
-import { generateId } from '@utils/util';
 
 export default class OrganizationService {
   private path: string;
@@ -17,11 +16,7 @@ export default class OrganizationService {
       this.path,
     );
     if (findOrg) throw new HttpException(409, 'Organization already exists');
-    return this.controller.store.create(
-      data.name,
-      { ...data, entity: generateId(data.name) },
-      this.path,
-    );
+    return this.controller.store.create(data.name, data, this.path);
   }
   async update(
     organizationId: string,
@@ -41,7 +36,7 @@ export default class OrganizationService {
       id = organizationId.replace('-', '/');
     }
     if (!isObjectId && !isPathId) {
-      return await this.controller.store.findOne({ entity: organizationId });
+      return await this.controller.store.findOne({ slug: organizationId });
     }
     const findOrg = await this.controller.store.findById(id);
     if (!findOrg) throw new HttpException(404, 'Organization not found');

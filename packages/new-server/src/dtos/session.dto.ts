@@ -3,7 +3,6 @@ import { ISpeaker } from '@interfaces/speaker.interface';
 import {
   IsArray,
   IsNotEmpty,
-  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -53,6 +52,10 @@ export class SessionDto implements ISession {
   @IsNotEmpty()
   @IsString()
   eventId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string;
 
   @IsOptional()
   @IsArray()

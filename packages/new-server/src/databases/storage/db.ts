@@ -1,5 +1,6 @@
 import { IStorageController } from '@interfaces/storage.interface';
 import mongoose, { Types } from 'mongoose';
+import { generateId } from '@utils/util';
 
 export default class DB<T> implements IStorageController<T> {
   private model: mongoose.Model<T>;
@@ -8,11 +9,7 @@ export default class DB<T> implements IStorageController<T> {
     this.model = model;
   }
   async create(query: string, data: T): Promise<T> {
-    const create = await this.model.create({ ...data });
-    await this.model.findByIdAndUpdate(create._id, {
-      slug: create._id,
-    });
-    return create;
+    return await this.model.create({ ...data, slug: generateId(query) });
   }
 
   async update(id: string, data: T): Promise<T> {
@@ -34,8 +31,13 @@ export default class DB<T> implements IStorageController<T> {
     return await this.model.findOne(query);
   }
 
-  async findAll(query: {}): Promise<Array<T>> {
-    return await this.model.find(query);
+  async findAll(
+    query: {},
+    path: string,
+    skip: number,
+    pageSize: number,
+  ): Promise<Array<T>> {
+    return await this.model.find(query).skip(skip).limit(pageSize);
   }
 
   async delete(id: string): Promise<void> {

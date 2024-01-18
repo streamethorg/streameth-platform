@@ -94,9 +94,5 @@ export class EventDto implements IEvent {
   @IsObject()
   plugins?: IPlugins;
 
-  @IsOptional()
-  @IsString()
   slug?: string;
-
-  entity?: string;
 }
