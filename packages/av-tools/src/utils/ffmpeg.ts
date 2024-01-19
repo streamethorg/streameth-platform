@@ -1,7 +1,7 @@
 import { CONFIG, resetTmpFolder } from "./config";
 import { createReadStream, existsSync, ReadStream } from "fs";
 import * as child from "child_process";
-import { join } from "path";
+import { join, resolve } from "path";
 import * as fs from "fs";
 import ffmpeg from "fluent-ffmpeg";
 
@@ -15,13 +15,18 @@ export function downloadM3U8ToMP4(
   outputFilePath: string
 ): Promise<void> {
   if (!fs.existsSync(outputFilePath)) {
-    console.log("Creating tmp");
+    console.log("Creating tmp folder...");
     fs.mkdirSync(outputFilePath, { recursive: true });
   }
 
-  console.log(`Downloading ${m3u8Url}...`);
-
   return new Promise((resolve, reject) => {
+    if (fs.existsSync(join(outputFilePath, `${fileName}.mp4`))) {
+      console.log(`File ${fileName}.mp4 already exists...`);
+      resolve();
+      return;
+    }
+    console.log(`Downloading ${m3u8Url}...`);
+
     ffmpeg(m3u8Url)
       .output(join(outputFilePath, `${fileName}.mp4`))
       .on("end", () => {
@@ -37,39 +42,38 @@ export function downloadM3U8ToMP4(
 }
 
 export async function ToMp3(
-  id: string,
-  stream: ReadStream,
-  outputFilePath = CONFIG.ASSET_FOLDER,
+  fileName: string,
+  inputFilePath: string,
+  outputFilePath: string,
   bitrate = CONFIG.BITRATE
-) {
-  console.log("Convert to mp3", id);
+): Promise<void> {
+  const filePath = join(inputFilePath, `${fileName}.mp4`);
+  const mp3FilePath = join(outputFilePath, `${fileName}.mp3`);
+
+  if (fs.existsSync(mp3FilePath)) {
+    console.log(`File ${mp3FilePath} already exists...`);
+    return;
+  }
+
+  console.log("Convert to mp3", fileName);
 
   if (!fs.existsSync(outputFilePath)) {
     fs.mkdirSync(outputFilePath, { recursive: true });
   }
 
-  try {
-    ffmpeg(stream)
-      .audioBitrate(bitrate)
+  return new Promise((resolve, reject) => {
+    ffmpeg(filePath)
+      .save(mp3FilePath)
       .format("mp3")
-      .save(`${outputFilePath}/${id}.mp3`)
-      .on("error", console.error);
-  } catch (error) {
-    console.log("Unable to convert to mp3", id, error);
-  }
-}
-
-export async function ToMp4(id: string, stream: ReadStream) {
-  console.log("Convert to mp4", id);
-
-  try {
-    ffmpeg(stream)
-      .format("mp4")
-      .save(`${CONFIG.ASSET_FOLDER}/mp4/${id}.mp4`)
-      .on("error", console.error);
-  } catch (error) {
-    console.log("Unable to convert to mp3", id, error);
-  }
+      .on("end", () => {
+        console.log(`Conversion to mp3 completed: ${mp3FilePath}`);
+        resolve();
+      })
+      .on("error", (err) => {
+        console.error(`Error converting to mp3: ${fileName}`, err);
+        reject(err);
+      });
+  });
 }
 
 // export async function JoinSessions(sessions: string[]) {

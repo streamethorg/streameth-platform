@@ -3,6 +3,8 @@ import { getAssetInfo } from "../../../av-tools/src/utils/livepeer";
 import { ToMp3, downloadM3U8ToMP4 } from "../../../av-tools/src/utils/ffmpeg";
 import * as fs from "fs";
 
+async function isUploadedOnDigitalOcean(fileName: string) {}
+
 async function startCreatingSummary(assetId: string) {
   const assetInfo = await getAssetInfo(assetId);
   if (!assetInfo || !assetId) {
@@ -14,20 +16,22 @@ async function startCreatingSummary(assetId: string) {
   const downloadUrl = assetInfo.playbackUrl || "";
 
   await downloadM3U8ToMP4(downloadUrl, assetInfo.id, "./tmp/video/");
-
-  // TODO: Stream mp3, instead of mp4 to reduce bandwidth
-  // const readStream = fs.createReadStream(`./tmp/video/${assetInfo.id}.mp4`);
-  // await ToMp3(assetInfo.id, readStream, "./tmp/mp3/");
+  await ToMp3(assetInfo.id, "./tmp/video/", "./tmp/mp3/", 3);
 
   await createTranscription(
-    `./tmp/video/${assetInfo.id}.mp4`,
+    `./tmp/mp3/${assetInfo.id}.mp3`,
     `./tmp/transcriptions/`,
     `${assetInfo.id}.txt`
   );
-  await createSummary("./tmp/summary/", `summary-${assetInfo.id}.txt`);
+  await createSummary(
+    `./tmp/transcriptions/${assetInfo.id}.txt`,
+    "./tmp/summary/",
+    `summary-${assetInfo.id}.txt`
+  );
 }
 
-startCreatingSummary("df8b7ce1-0d00-4bd0-abd9-234a6e286236")
+// Use this to test AI Script
+startCreatingSummary("67243415-8c98-4adf-b2ff-383a44bcddc7")
   .then(() => {
     console.log("Ran succesfully...");
   })
