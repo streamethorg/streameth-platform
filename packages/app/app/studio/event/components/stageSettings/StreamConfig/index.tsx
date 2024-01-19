@@ -1,5 +1,3 @@
-'use client'
-import { useStream } from '@livepeer/react'
 import { IStage } from 'streameth-server/model/stage'
 import {
   Card,
@@ -9,11 +7,11 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Player from '@/components/ui/Player'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-
-const StreamConfig = ({ stage }: { stage: IStage }) => {
-  const { data } = useStream(stage.streamSettings.streamId)
+import { livepeer } from '@/lib/services/livepeer'
+const StreamConfig = async ({ stage }: { stage: IStage }) => {
+  const stream = (
+    await livepeer.stream.get(stage.streamSettings.streamId)
+  ).stream
   return (
     <Card className="border-none shadow-none">
       <CardHeader>
@@ -23,13 +21,13 @@ const StreamConfig = ({ stage }: { stage: IStage }) => {
         <div className="flex flex-col w-1/2 gap-4">
           <Player
             playerName={stage.name}
-            playbackId={data?.playbackId}
+            playbackId={stream?.playbackId}
           />
           <Card>
             <CardHeader>
               <CardTitle>Stream Details</CardTitle>
               <CardDescription>
-                id: {data?.playbackId}
+                {/* id: {isLoading ? stream?.playbackId : 'loading...'} */}
               </CardDescription>
             </CardHeader>
             <CardContent className="lg:pt-0 flex flex-col space-y-2">
@@ -42,7 +40,7 @@ const StreamConfig = ({ stage }: { stage: IStage }) => {
               <p className="font-bold">RTMP Ingest:</p>
               <p>rtmp://rtmp.livepeer.com/live</p>
               <p className="font-bold">Stream key:</p>
-              <p>{data?.streamKey}</p>
+              <p>{stream?.streamKey}</p>
             </CardContent>
           </Card>
         </div>

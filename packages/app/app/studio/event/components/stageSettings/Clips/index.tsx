@@ -3,13 +3,15 @@ import { useState } from 'react'
 
 import {
   Card,
-  CardDescription,
+  CardContent,
+  CardFooter,
   CardHeader,
-  CardTitle,
 } from '@/components/ui/card'
-import { ISession } from 'streameth-server/model/session'
+import ISession from 'streameth-server/model/session'
 import IStage from 'streameth-server/model/stage'
 import CreateClipCard from './CreateClipCard'
+import SessionCard from './SessionCard'
+
 const Clips = ({
   stage,
   sessions,
@@ -24,40 +26,19 @@ const Clips = ({
   return (
     <div className="flex flex-row h-full">
       <Card className="flex flex-col w-1/3 border-none rounded-none overflow-scroll h-full gap-2 p-2">
-        {sessions.length > 0 &&
-          sessions.map((session) => (
-            <Card
-              onClick={() => {
-                setSelectedSession(session)
-              }}
-              key={session.id}
-              className={`${
-                selectedSession && selectedSession.id === session.id
-                  ? 'border-primary'
-                  : 'hover:bg-accent'
-              } cursor-pointer border-b text-sm  flex flex-col
-              `}>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  {session.name}
-                </CardTitle>
-                <CardDescription className="text-xs">
-                  <p>{new Date(session.start).toLocaleString()}</p>
-                  {!session.assetId ? (
-                    <div className="flex flex-row space-x-1">
-                      <p className="bg-red-600 rounded-full w-3 h-3" />
-                      No video
-                    </div>
-                  ) : (
-                    <div className="flex flex-row space-x-1">
-                      <p className=" bg-green-600 rounded-full w-3 h-3" />
-                      has video
-                    </div>
-                  )}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
+        <div className="text-2xl">Stage sessions</div>
+        <div className="w-full h-full overflow-scroll">
+          {sessions.length > 0 &&
+            sessions.map((session) => (
+              <SessionCard
+                key={session.id}
+                session={session}
+                selectedSession={selectedSession}
+                setSelectedSession={setSelectedSession}
+              />
+            ))}
+        </div>
+        <CardFooter>Create new Clip</CardFooter>
       </Card>
       <div className="flex flex-col w-2/3 p-2">
         {selectedSession ? (

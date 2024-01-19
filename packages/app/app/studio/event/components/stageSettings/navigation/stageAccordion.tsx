@@ -5,9 +5,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { fetchEventStages } from '@/lib/data'
 import CreateStageForm from '../createStageForm'
 import { IStage } from 'streameth-server/model/stage'
 import useSearchParams from '@/lib/hooks/useSearchParams'
@@ -39,26 +36,28 @@ const StageAccordion = ({
             }}>
             <AccordionTrigger>{stage.name}</AccordionTrigger>
             <AccordionContent
-              className={
-                selectedSetting === 'settings'
-                  ? 'bg-accent'
-                  : '' + 'p-2 space-y-8'
-              }
               onClick={() => {
                 setSelectedSetting('settings')
               }}>
-              {stage.name}
+              <p
+                className={`${
+                  selectedSetting === 'settings' &&
+                  'border-l border-primary'
+                } px-2`}>
+                Livestream settings
+              </p>
             </AccordionContent>
             <AccordionContent
-              className={
-                selectedSetting === 'clip'
-                  ? 'bg-accent'
-                  : '' + 'p-2 space-y-8'
-              }
               onClick={() => {
                 setSelectedSetting('clip')
               }}>
-              CLips
+              <p
+                className={`${
+                  selectedSetting === 'clip' &&
+                  'border-l border-primary'
+                } px-2`}>
+                Clips
+              </p>
             </AccordionContent>
           </AccordionItem>
         )

@@ -57,6 +57,7 @@
     "googleapis": "^126.0.1",
     "iron-session": "^6.3.1",
     "js-base64": "^3.7.5",
+    "livepeer": "^3.0.1",
     "lokijs": "^1.5.12",
     "lucide-react": "^0.308.0",
     "moment-timezone": "^0.5.43",

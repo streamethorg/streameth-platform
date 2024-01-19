@@ -36,10 +36,21 @@ const linksData: link[] = [
   },
 ]
 
-export function Nav({ links = linksData, isCollapsed }: NavProps) {
+export function Nav({ isCollapsed }: NavProps) {
   const { searchParams, handleTermChange } = useSearchParams({
     key: 'settings',
   })
+
+  const links = linksData.map((link) => {
+    return {
+      ...link,
+      variant:
+        link.title === searchParams.get('settings')
+          ? ('default' as link['variant'])
+          : ('ghost' as link['variant']),
+    }
+  })
+
   return (
     <div
       data-collapsed={isCollapsed}

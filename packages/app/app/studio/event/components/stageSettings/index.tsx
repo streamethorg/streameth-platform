@@ -16,11 +16,6 @@ const StageSettings = ({
 }) => {
   const [stage] = stages.filter((stage) => stage.id === selectedStage)
   const [selectedSetting, setSelectedSetting] = useState('settings')
-  const [activeAccordion, setActiveAccordion] = useState(null)
-
-  const toggleAccordion = (section) => {
-    setActiveAccordion(activeAccordion === section ? null : section)
-  }
 
   return (
     <>
@@ -32,9 +27,9 @@ const StageSettings = ({
         />
       </div>
       <div className="w-full h-full">
-        {/* {stage && selectedSetting === 'settings' && (
+        {stage && selectedSetting === 'settings' && (
           <StreamConfig stage={stage} />
-        )} */}
+        )}
         {stage && selectedSetting === 'clip' && (
           <Clips
             stage={stage}
