@@ -1,7 +1,7 @@
 import { fetchAllSessions } from '@/lib/data'
 import VideoCard from '@/components/misc/VideoCard'
 import { ISession } from 'streameth-server/model/session'
-import { apiUrl } from '@/lib/utils'
+import { apiUrl } from '@/lib/utils/utils'
 export default async function RelatedVideos({
   event,
 }: {
