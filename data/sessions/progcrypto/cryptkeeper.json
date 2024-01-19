@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/ccfc99dofxx6mdzq/index.m3u8",
-    "playbackId": "ccfc99dofxx6mdzq",
     "eventId": "progcrypto",
     "track": "Developer Tools",
     "coverImage": "/sessions/progcrypto/cryptkeeper_thumbnail.png",

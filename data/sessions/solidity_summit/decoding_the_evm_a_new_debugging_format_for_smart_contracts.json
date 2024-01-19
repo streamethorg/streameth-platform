@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/c7b2wdllspbg2mqw/index.m3u8",
-    "playbackId": "c7b2wdllspbg2mqw",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/decoding_the_evm_a_new_debugging_format_for_smart_contracts_thumbnail.png",
     "assetId": "c7b2eb42-7b7c-4229-8b5d-cdf73ac554d5",

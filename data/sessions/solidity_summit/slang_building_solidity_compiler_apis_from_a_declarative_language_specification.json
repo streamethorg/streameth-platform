@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/e24ficchpsz22sjm/index.m3u8",
-    "playbackId": "e24ficchpsz22sjm",
     "eventId": "solidity_summit",
     "coverImage": "/sessions/solidity_summit/slang_building_solidity_compiler_apis_from_a_declarative_language_specification_thumbnail.png",
     "assetId": "e24ff46b-5eda-40d9-a053-6fea60862146",

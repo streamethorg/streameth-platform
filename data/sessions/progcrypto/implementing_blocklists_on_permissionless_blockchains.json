@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/7353iij1uc6tkf4o/index.m3u8",
-    "playbackId": "7353iij1uc6tkf4o",
     "eventId": "progcrypto",
     "track": "Cryptography in the Wild",
     "coverImage": "/sessions/progcrypto/implementing_blocklists_on_permissionless_blockchains_thumbnail.png",

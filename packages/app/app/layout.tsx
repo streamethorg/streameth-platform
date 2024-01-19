@@ -6,7 +6,7 @@ import { MobileContextProvider } from '@/lib/context/MobileContext'
 import { LoadingContextProvider } from '@/lib/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/lib/context/TopNavbarContext'
 import Initializer from './Initializer'
-import { Metadata } from 'next'
+import { generalMetadata } from '@/lib/metadata'
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
       <body
-        className={`${heebo.variable} font-sans flex flex-col w-screen min-h-screen bg-accent`}>
+        className={`${heebo.variable} font-sans flex flex-col w-full min-h-screen  mx-auto bg-white `}>
         <GeneralContext>
           <LoadingContextProvider>
             <MobileContextProvider>
@@ -43,3 +43,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+export const metadata = generalMetadata
