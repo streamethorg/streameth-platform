@@ -21,14 +21,21 @@ const UpcomingEvents = async ({
   organization?: IOrganization['_id']
   archive?: boolean
 }) => {
+  const allOrgs = await fetch(`${apiUrl()}/organizations`)
+  const allOrgsData = await allOrgs.json()
+  const orgId = allOrgsData.data.find(
+    (org: IOrganization) => org.slug === organization
+  )?._id
+
   const response = await fetch(
-    `${apiUrl()}/events/organization/${organization}`
+    `${apiUrl()}/events/organization/${orgId}`
   )
+
   const data = await response.json()
   const events: IEvent[] = data.data ?? []
 
   if (events.length === 0) return null
-  console.log('events', events, organization)
+
   return (
     <Card className="max-w-screen border-none bg-white">
       <CardHeader>
