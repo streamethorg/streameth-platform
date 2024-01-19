@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import {
   CardDescription,
-  CardHeader,
   CardTitle,
   CardContent,
 } from '@/components/ui/card'
@@ -35,18 +34,20 @@ const SessionInfoBox = ({
   viewCount?: boolean
 }) => {
   const [isOpened, setIsOpened] = useState(false)
+
+  console.log(description)
   return (
-    <div className=" rounded my-2">
-      <div className="flex flex-col lg:flex-row justify-center py-4">
+    <div className="my-2 rounded">
+      <div className="flex flex-col justify-center py-4 lg:flex-row">
         <div className="flex flex-col justify-center px-2">
           <CardTitle className="text-background">{title}</CardTitle>
           <CardDescription>
             {viewCount && assetId && <ViewCounts assetId={assetId} />}
 
-            <div className="flex flex-row ">{cardDescription}</div>
+            <div className="flex flex-row">{cardDescription}</div>
           </CardDescription>
         </div>
-        <div className="flex flex-row lg:ml-auto space-x-1 mt-2 lg:my-0">
+        <div className="flex flex-row mt-2 space-x-1 lg:my-0 lg:ml-auto">
           <ShareButton />
           <EmbedButton
             streamId={streamId}
@@ -56,8 +57,8 @@ const SessionInfoBox = ({
           {assetId && <VideoDownload assetId={assetId} />}
         </div>
       </div>
-      <CardContent className="bg-background rounded-md p-4">
-        {description !== '' && (
+      {description !== '' && (
+        <CardContent className="p-4 rounded-md bg-background">
           <div
             className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
               isOpened ? 'max-h-96' : 'max-h-10'
@@ -70,13 +71,13 @@ const SessionInfoBox = ({
                 ))}
             </div>
           </div>
-        )}
-        <button
-          onClick={() => setIsOpened(!isOpened)}
-          className="mt-2 ml-auto w-full text-right text-white">
-          {isOpened ? 'Less' : 'More'}
-        </button>
-      </CardContent>
+          <button
+            onClick={() => setIsOpened(!isOpened)}
+            className="mt-2 ml-auto w-full text-right text-white">
+            {isOpened ? 'Less' : 'More'}
+          </button>
+        </CardContent>
+      )}
     </div>
   )
 }

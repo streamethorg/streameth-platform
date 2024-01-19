@@ -32,7 +32,7 @@ const ModalContent: React.FC<{
   }
 
   const generateEmbedCode = () => {
-    const url = window.location.origin
+    const url = window && window.location.origin
     return `<iframe src="${url}/embed/?${generateParams()}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
   }
 

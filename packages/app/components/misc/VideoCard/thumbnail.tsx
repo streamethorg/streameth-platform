@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import { ISession } from 'streameth-server/model/session'
 import { useEffect, useState } from 'react'
 const fetchImage = async (url: string): Promise<boolean> => {

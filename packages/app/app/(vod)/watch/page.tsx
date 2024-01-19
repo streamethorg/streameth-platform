@@ -1,7 +1,6 @@
 import Player from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { WatchPageProps } from '@/lib/types'
-import { fetchEventSessions } from '@/lib/data'
 import {
   Tabs,
   TabsContent,
@@ -11,18 +10,21 @@ import {
 import RelatedVideos from './components/RelatedVideos'
 import ColorComponent from '@/components/Layout/ColorComponent'
 import { Metadata } from 'next'
-import { apiUrl, getImageUrl } from '@/lib/utils'
+import { apiUrl, getImageUrl } from '@/lib/utils/utils'
+import { notFound } from 'next/navigation'
+import { generalMetadata, watchMetadata } from '@/lib/metadata'
+
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
-  if (!searchParams.session) return null
-
+  if (!searchParams.session) return notFound()
   const response = await fetch(
     `${apiUrl()}/sessions/${searchParams.session}`
   )
   const data = await response.json()
   const video = data.data
-  if (!video) return null
+
+  if (!video) return notFound()
 
   const tabs = []
   tabs.push({
@@ -80,29 +82,10 @@ export async function generateMetadata({
     `${apiUrl()}/sessions/${searchParams.session}`
   )
   const responseData = await response.json()
-  const session = responseData.data
+  const video = responseData.data
 
-  const imageUrl = session.coverImage
-    ? session.coverImage
-    : getImageUrl(`/events/${session.eventSlug}.png`)
-  try {
-    return {
-      title: session.name,
-      description: session.description,
-      openGraph: {
-        title: session.name,
-        description: session.description,
-        images: [imageUrl],
-      },
-    }
-  } catch (e) {
-    return {
-      title: 'StreamETH Session',
-      openGraph: {
-        title: 'StreamETH Session',
-        description:
-          'The complete solution to host your hybrid or virtual event.',
-      },
-    }
-  }
+  if (!searchParams.session) return generalMetadata
+
+  if (!video) return generalMetadata
+  return watchMetadata({ session: video })
 }

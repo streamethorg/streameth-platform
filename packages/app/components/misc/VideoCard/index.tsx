@@ -6,7 +6,7 @@ import {
 import { ISession } from 'streameth-server/model/session'
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
-import { apiUrl, getImageUrl } from '@/lib/utils'
+import { apiUrl } from '@/lib/utils/utils'
 import Link from 'next/link'
 
 const VideoCard = async ({

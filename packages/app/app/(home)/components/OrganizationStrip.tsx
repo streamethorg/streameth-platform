@@ -3,7 +3,7 @@ import Image from 'next/image'
 import VideoGrid from '../../../components/misc/Videos'
 import Link from 'next/link'
 import { IOrganization } from 'streameth-server/model/organization'
-import { apiUrl } from '@/lib/utils'
+import { apiUrl } from '@/lib/utils/utils'
 
 export default async function OrganizationStrip({
   organization,

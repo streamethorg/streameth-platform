@@ -9,18 +9,19 @@ import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
 import OrganizationController from 'streameth-server/controller/organization'
 import { NavBarProps, IPagination } from './types'
-import FuzzySearch from 'fuzzy-search';
-import { unstable_noStore as noStore } from 'next/cache';
+import FuzzySearch from 'fuzzy-search'
+import { unstable_noStore as noStore } from 'next/cache'
 
-
-export async function fetchOrganization ({
-  organization
+export async function fetchOrganization({
+  organization,
 }: {
   organization: string
-}): Promise<IOrganization | null > {
+}): Promise<IOrganization | null> {
   try {
     const organizationController = new OrganizationController()
-    const data = await organizationController.getOrganization(organization)
+    const data = await organizationController.getOrganization(
+      organization
+    )
     if (!data) {
       throw 'Organization not found'
     }
@@ -123,7 +124,6 @@ export async function fetchEventStage({
   }
 }
 
-
 export async function fetchAllSessions({
   organization,
   event,
@@ -132,7 +132,7 @@ export async function fetchAllSessions({
   onlyVideos,
   page = 1,
   limit = 10,
-  searchQuery = ''
+  searchQuery = '',
 }: {
   event?: string
   organization?: string
@@ -142,10 +142,9 @@ export async function fetchAllSessions({
   page?: number
   limit?: number
   searchQuery?: string
-}): Promise<{ sessions: ISession[], pagination: IPagination }> {
+}): Promise<{ sessions: ISession[]; pagination: IPagination }> {
+  let allSessions: ISession[] = []
 
-  let allSessions: ISession[] = [];
-  
   // Fetch all data
   if (event) {
     // existing logic to fetch all sessions for a specific event
@@ -154,45 +153,45 @@ export async function fetchAllSessions({
       date,
       speakerIds,
       onlyVideos,
-    });
+    })
   } else {
     // existing logic to fetch all sessions across all organizations
     const organizations = organization
       ? [organization]
-      : (await fetchOrganizations()).map((org) => org.id);
+      : (await fetchOrganizations()).map((org) => org.id)
 
     for (const org of organizations) {
-      const events = await fetchEvents({ organizationId: org, date });
+      const events = await fetchEvents({ organizationId: org, date })
       for (const ev of events) {
         const sessions = await fetchEventSessions({
           event: ev.id,
           date,
           speakerIds,
           onlyVideos,
-        });
-        allSessions = allSessions.concat(sessions);
+        })
+        allSessions = allSessions.concat(sessions)
       }
     }
   }
 
   if (searchQuery) {
-    const normalizedQuery = searchQuery.toLowerCase();
+    const normalizedQuery = searchQuery.toLowerCase()
     console.log(allSessions[0])
     const fuzzySearch = new FuzzySearch(allSessions, ['eventId'], {
       caseSensitive: false,
-    });
-    
-    allSessions = fuzzySearch.search(normalizedQuery);
+    })
+
+    allSessions = fuzzySearch.search(normalizedQuery)
   }
 
   // Calculate total items and total pages
-  const totalItems = allSessions.length;
-  const totalPages = Math.ceil(totalItems / limit);
+  const totalItems = allSessions.length
+  const totalPages = Math.ceil(totalItems / limit)
 
   // Implement manual pagination
-  const startIndex = (page - 1) * limit;
-  const endIndex = startIndex + limit;
-  const paginatedSessions = allSessions.slice(startIndex, endIndex);
+  const startIndex = (page - 1) * limit
+  const endIndex = startIndex + limit
+  const paginatedSessions = allSessions.slice(startIndex, endIndex)
 
   // Return paginated data and pagination metadata
   return {
@@ -203,7 +202,7 @@ export async function fetchAllSessions({
       totalItems,
       limit,
     },
-  };
+  }
 }
 
 export async function fetchEventSessions({
@@ -229,7 +228,7 @@ export async function fetchEventSessions({
       timestamp,
       date,
       speakerIds,
-      onlyVideos
+      onlyVideos,
     })
 
     return data.map((session) => session.toJson())
@@ -301,5 +300,25 @@ export async function fetchNavBarRoutes({
     logo: '/events/' + eventData?.logo ?? '',
     homePath: `/${organization}/${event}`,
     showNav: true,
+  }
+}
+
+export const fetchEventSession = async ({
+  event,
+  session,
+}: {
+  event: string
+  session: string
+}): Promise<ISession | null> => {
+  try {
+    const sessionController = new SessionController()
+    const data = await sessionController.getSession(session, event)
+    if (!data) {
+      return null
+    }
+    return data.toJson()
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event'
   }
 }

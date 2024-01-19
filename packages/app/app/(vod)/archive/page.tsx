@@ -8,7 +8,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
-import { apiUrl } from '@/lib/utils'
+import { apiUrl } from '@/lib/utils/utils'
+import { generalMetadata, archiveMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
 
 export default async function ArchivePage({
@@ -59,21 +60,15 @@ export default async function ArchivePage({
   )
 }
 
-// TODO
 export async function generateMetadata({
   searchParams,
 }: SearchPageProps): Promise<Metadata> {
+  if (!searchParams.event) return generalMetadata
   const response = await fetch(
     `${apiUrl()}/events/?${searchParams.event}`
   )
   const responseData = await response.json()
   const event = responseData.data
-
-  return {
-    title: `${event.name} - Archive`,
-    description: `Watch all the Streameth videos from ${event.name} here`,
-    openGraph: {
-      images: [event.eventCover],
-    },
-  }
+  if (!event) return generalMetadata
+  return archiveMetadata({ event })
 }

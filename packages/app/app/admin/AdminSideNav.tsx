@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAccount, useEnsName } from 'wagmi'
-import { truncateAddr } from '@/lib/utils'
+import { truncateAddr } from '@/lib/utils/utils'
 import makeBlockie from 'ethereum-blockies-base64'
 import {
   ArrowLeftIcon,
