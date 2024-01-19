@@ -62,7 +62,7 @@
     "moment-timezone": "^0.5.43",
     "momentjs": "^2.0.0",
     "mux-embed": "^4.25.1",
-    "next": "^14.0.2",
+    "next": "^14.0.1",
     "pino-pretty": "^10.0.0",
     "postcss": "8.4.31",
     "react": "^18.2.0",

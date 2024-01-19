@@ -11,10 +11,9 @@ import {
 import Player from '@/components/ui/Player'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import MultistreamCard from './multistreamCard'
-const StageSettings = ({ stage }: { stage: IStage }) => {
+
+const StreamConfig = ({ stage }: { stage: IStage }) => {
   const { data } = useStream(stage.streamSettings.streamId)
-  console.log(data?.multistream)
   return (
     <Card className="border-none shadow-none">
       <CardHeader>
@@ -48,11 +47,11 @@ const StageSettings = ({ stage }: { stage: IStage }) => {
           </Card>
         </div>
         <div className="flex flex-col w-1/2">
-          <MultistreamCard streamId={stage.streamSettings.streamId} />
+          {/* <MultistreamCard streamId={stage.streamSettings.streamId} /> */}
         </div>
       </CardContent>
     </Card>
   )
 }
 
-export default StageSettings
+export default StreamConfig

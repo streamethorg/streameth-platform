@@ -25,6 +25,8 @@ const GeneralContext = ({
     []
   )
 
+  console.log(process.env.NEXT_PUBLIC_STUDIO_API_KEY)
+
   return (
     <SiweContext>
       <LivepeerConfig client={livepeerClient}>

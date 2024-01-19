@@ -36,10 +36,10 @@ const MultistreamCard = ({ streamId }: { streamId: string }) => {
       ...multistreamTargets,
       { id: Date.now().toString(), url: newTargetUrl },
     ]
-    await mutate({
-      ...data,
-      multistream: { targets: updatedTargets },
-    })
+    // await mutate({
+    //   ...data,
+    //   multistream: { targets: updatedTargets },
+    // })
     setNewTargetUrl('')
   }
 
@@ -47,10 +47,10 @@ const MultistreamCard = ({ streamId }: { streamId: string }) => {
     const updatedTargets = multistreamTargets.filter(
       (target) => target.id !== targetId
     )
-    await mutate({
-      ...data,
-      multistream: { targets: updatedTargets },
-    })
+    // await mutate({
+    //   ...data,
+    //   multistream: { targets: updatedTargets },
+    // })
   }
 
   if (isLoading) {

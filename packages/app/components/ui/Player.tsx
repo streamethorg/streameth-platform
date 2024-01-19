@@ -40,6 +40,7 @@ const OfflinePlayer = () => {
 }
 
 export const Player = ({
+  src,
   playbackId,
   streamId,
   playerName,
@@ -47,6 +48,7 @@ export const Player = ({
   muted = false,
   assetId,
 }: {
+  src?: string
   playbackId?: string
   streamId?: string
   playerName: string
@@ -88,6 +90,7 @@ export const Player = ({
     () => (
       <div className="relative w-full aspect-video">
         <LivepeerPlayer
+          src={src}
           mediaElementRef={mediaElementRef}
           playbackId={playbackIdParsed}
           showTitle={false}
@@ -107,7 +110,7 @@ export const Player = ({
         ></LivepeerPlayer>
       </div>
     ),
-    [playbackIdParsed, mediaElementRef, address, muted]
+    [playbackIdParsed, mediaElementRef, address, muted, src]
   )
 }
 

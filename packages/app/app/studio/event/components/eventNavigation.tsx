@@ -25,7 +25,7 @@ interface link {
 
 const linksData: link[] = [
   {
-    title: 'Inbox',
+    title: 'Home',
     icon: Inbox,
     variant: 'default',
   },
