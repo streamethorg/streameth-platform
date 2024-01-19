@@ -3,8 +3,8 @@ import { ISpeaker } from './speaker.interface';
 
 export interface ISource {
   streamUrl: string;
-  start: number;
-  end: number;
+  start?: number;
+  end?: number;
 }
 
 export interface IPlayback {
@@ -18,11 +18,12 @@ export interface IPlayback {
 export interface ISession {
   name: string;
   description: string;
-  start: string;
-  end: string;
+  start: number;
+  end: number;
   stageId: Types.ObjectId | string;
   speakers: ISpeaker[];
   source?: ISource;
+  assetId?: string;
   playback?: IPlayback;
   videoUrl?: string;
   playbackId?: string;
@@ -31,6 +32,7 @@ export interface ISession {
   track?: string[];
   coverImage?: string;
   slug?: string;
+  eventSlug?: string;
 }
 
 export interface ISessionModel extends ISession, Document {}

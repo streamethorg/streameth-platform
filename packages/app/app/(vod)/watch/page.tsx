@@ -11,19 +11,17 @@ import {
 import RelatedVideos from './components/RelatedVideos'
 import ColorComponent from '@/components/Layout/ColorComponent'
 import { Metadata } from 'next'
+import { apiUrl, getImageUrl } from '@/lib/utils'
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
-  if (!searchParams.event || !searchParams.session) return null
+  if (!searchParams.session) return null
 
-  const video = (
-    await fetchEventSessions({
-      event: searchParams.event,
-    })
-  ).filter((session) => {
-    return session.id === searchParams.session
-  })[0]
-
+  const response = await fetch(
+    `${apiUrl()}/sessions/${searchParams.session}`
+  )
+  const data = await response.json()
+  const video = data.data
   if (!video) return null
 
   const tabs = []
@@ -78,16 +76,15 @@ export default async function Watch({
 export async function generateMetadata({
   searchParams,
 }: WatchPageProps): Promise<Metadata> {
-  const session = (
-    await fetchEventSessions({
-      event: searchParams.event,
-    })
-  ).filter((session) => {
-    return session.id === searchParams.session
-  })[0]
+  const response = await fetch(
+    `${apiUrl()}/sessions/${searchParams.session}`
+  )
+  const responseData = await response.json()
+  const session = responseData.data
+
   const imageUrl = session.coverImage
     ? session.coverImage
-    : session.id + '.png'
+    : getImageUrl(`/events/${session.eventSlug}.png`)
   try {
     return {
       title: session.name,

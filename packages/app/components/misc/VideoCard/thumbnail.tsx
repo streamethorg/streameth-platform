@@ -20,7 +20,7 @@ export default function Thumbnail({
   session: ISession
   fallBack?: string
 }) {
-  const streamethThumbnail = getImageUrl(`${session.coverImage}`)
+  const streamethThumbnail = session.coverImage ?? ''
 
   const [error, setError] = useState(false)
   const [fallbackImage, setFallbackImage] = useState('/cover.png')

@@ -19,11 +19,11 @@ export class SessionDto implements ISession {
 
   @IsNotEmpty()
   @IsString()
-  start: string;
+  start: number;
 
   @IsNotEmpty()
   @IsString()
-  end: string;
+  end: number;
 
   @IsNotEmpty()
   @IsString()
@@ -64,4 +64,8 @@ export class SessionDto implements ISession {
   @IsOptional()
   @IsString()
   coverImage?: string;
+
+  @IsOptional()
+  @IsString()
+  eventSlug?: string;
 }

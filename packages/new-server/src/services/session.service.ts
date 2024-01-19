@@ -18,7 +18,7 @@ export default class SessionServcie {
       { name: data.name },
       `${this.path}/${data.eventId}`,
     );
-    if (findSession) throw new HttpException(409, 'Session already exists');
+    // if (findSession) throw new HttpException(409, 'Session already exists');
     return this.controller.store.create(
       data.name,
       data,

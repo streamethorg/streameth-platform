@@ -1,8 +1,6 @@
 import { Metadata } from 'next'
 import UpcomingEvents from './components/UpcomingEvents'
-import Videos from '../../components/misc/Videos'
 import { Suspense } from 'react'
-import { fetchOrganizations } from '@/lib/data'
 import OrganizationStrip from './components/OrganizationStrip'
 import {
   CardDescription,
@@ -13,6 +11,8 @@ import {
 } from '@/components/ui/card'
 import HeroHeader from './components/HeroHeader'
 import { Skeleton } from '@/components/ui/skeleton'
+import { IOrganization } from 'streameth-server/model/organization'
+import { apiUrl } from '@/lib/utils'
 
 const Loading = () => {
   return <Skeleton className=" h-96 w-full bg-muted" />
@@ -21,7 +21,9 @@ const Loading = () => {
 export const revalidate = 3600 // 1 day
 
 export default async function Home() {
-  const organizations = await fetchOrganizations()
+  const response = await fetch(`${apiUrl()}/organizations`)
+  const data = await response.json()
+  const organizations: IOrganization[] = data.data ?? []
 
   return (
     <>
@@ -36,8 +38,8 @@ export default async function Home() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-8 border-0">
-          {organizations.map((organization) => (
-            <Suspense key={organization.id} fallback={<Loading />}>
+          {organizations?.map((organization) => (
+            <Suspense key={organization._id} fallback={<Loading />}>
               <OrganizationStrip organization={organization} />
             </Suspense>
           ))}

@@ -21,6 +21,7 @@ export interface IPlayback {
 
 export interface ISession {
   id: string;
+  _id?: string;
   name: string;
   description: string;
   start: number;
@@ -35,6 +36,7 @@ export interface ISession {
   eventId: IEvent["id"];
   track?: string[];
   coverImage?: string;
+  eventSlug?: string;
 }
 
 export default class Session implements ISession {
