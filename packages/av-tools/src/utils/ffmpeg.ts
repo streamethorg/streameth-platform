@@ -41,6 +41,41 @@ export function downloadM3U8ToMP4(
   });
 }
 
+export function downloadM3U8ToMP3(
+  m3u8Url: string,
+  fileName: string,
+  outputFilePath: string,
+  audioQuality: number = 5
+): Promise<void> {
+  if (!fs.existsSync(outputFilePath)) {
+    console.log("Creating tmp folder...");
+    fs.mkdirSync(outputFilePath, { recursive: true });
+  }
+
+  return new Promise((resolve, reject) => {
+    if (fs.existsSync(join(outputFilePath, `${fileName}.mp3`))) {
+      console.log(`File ${fileName}.mp3 already exists...`);
+      resolve();
+      return;
+    }
+    console.log(`Downloading ${m3u8Url}...`);
+
+    ffmpeg(m3u8Url)
+      .audioQuality(audioQuality)
+      .output(join(outputFilePath, `${fileName}.mp3`))
+      .format("mp3")
+      .on("end", () => {
+        console.log("Download and conversion completed");
+        resolve();
+      })
+      .on("error", (err: any) => {
+        console.error("Error:", err);
+        reject(err);
+      })
+      .run();
+  });
+}
+
 export async function ToMp3(
   fileName: string,
   inputFilePath: string,

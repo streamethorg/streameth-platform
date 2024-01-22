@@ -1,28 +1,66 @@
 import { createSummary, createTranscription } from "./ai";
 import { getAssetInfo } from "../../../av-tools/src/utils/livepeer";
-import { ToMp3, downloadM3U8ToMP4 } from "../../../av-tools/src/utils/ffmpeg";
+import { downloadM3U8ToMP3 } from "../../../av-tools/src/utils/ffmpeg";
+import S3Client from "../../../server/services/s3/index.ts";
 import * as fs from "fs";
 
-async function isUploadedOnDigitalOcean(fileName: string) {}
+async function getFileSize(filePath: string): Promise<number> {
+  return new Promise((resolve, reject) => {
+    fs.stat(filePath, (err, stats) => {
+      if (err) {
+        reject();
+      }
+      resolve(stats.size);
+    });
+  });
+}
 
-async function startCreatingSummary(assetId: string) {
+async function startCreatingSummary(assetId: string, overwriteFiles = false) {
   const assetInfo = await getAssetInfo(assetId);
   if (!assetInfo || !assetId) {
     console.log("Asset does not exist");
     return;
   }
 
-  console.log(assetInfo);
-  const downloadUrl = assetInfo.playbackUrl || "";
+  const s3 = new S3Client();
+  const data = await s3.getBucket(
+    "streamethapp",
+    `transcriptions/${assetInfo.id}.txt`
+  );
 
-  await downloadM3U8ToMP4(downloadUrl, assetInfo.id, "./tmp/video/");
-  await ToMp3(assetInfo.id, "./tmp/video/", "./tmp/mp3/", 3);
+  if (Object.keys(data).length !== 0 && overwriteFiles === false) {
+    console.log("File does already exist");
+    return;
+  }
+
+  const downloadUrl = assetInfo.playbackUrl || "";
+  await downloadM3U8ToMP3(downloadUrl, assetInfo.id, "./tmp/mp3/", 9);
+
+  const size = await getFileSize(`./tmp/mp3/${assetInfo.id}.mp3`);
+  if (size >= 25000000) {
+    console.log("Audio file too big... Cancelling...");
+    return;
+  }
 
   await createTranscription(
     `./tmp/mp3/${assetInfo.id}.mp3`,
     `./tmp/transcriptions/`,
     `${assetInfo.id}.txt`
   );
+
+  if (!fs.existsSync(`./tmp/transcriptions/${assetInfo.id}.txt`)) {
+    console.log(`./tmp/transcriptions/${assetInfo.id}.txt does not exist...`);
+    return;
+  }
+
+  const file = fs.createReadStream(`./tmp/transcriptions/${assetInfo.id}.txt`);
+  await s3.uploadFile(
+    "streamethapp",
+    `transcriptions/${assetInfo.id}.txt`,
+    file,
+    "text"
+  );
+
   await createSummary(
     `./tmp/transcriptions/${assetInfo.id}.txt`,
     "./tmp/summary/",
