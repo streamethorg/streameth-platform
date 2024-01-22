@@ -16,9 +16,6 @@
 						"type": "string"
 					}
 				},
-				"required": [
-					"streamId"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -304,9 +301,7 @@
 					}
 				},
 				"required": [
-					"streamUrl",
-					"start",
-					"end"
+					"streamUrl"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -349,10 +344,12 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string"
+						"type": "number",
+						"format": "double"
 					},
 					"end": {
-						"type": "string"
+						"type": "number",
+						"format": "double"
 					},
 					"stageId": {
 						"anyOf": [
@@ -372,6 +369,9 @@
 					},
 					"source": {
 						"$ref": "#/components/schemas/ISource"
+					},
+					"assetId": {
+						"type": "string"
 					},
 					"playback": {
 						"$ref": "#/components/schemas/IPlayback"
@@ -412,6 +412,9 @@
 						"type": "string"
 					},
 					"slug": {
+						"type": "string"
+					},
+					"eventSlug": {
 						"type": "string"
 					}
 				},
@@ -456,10 +459,12 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string"
+						"type": "number",
+						"format": "double"
 					},
 					"end": {
-						"type": "string"
+						"type": "number",
+						"format": "double"
 					},
 					"stageId": {
 						"type": "string"
@@ -472,6 +477,9 @@
 					},
 					"source": {
 						"$ref": "#/components/schemas/ISource"
+					},
+					"assetId": {
+						"type": "string"
 					},
 					"playback": {
 						"$ref": "#/components/schemas/IPlayback"
@@ -498,6 +506,9 @@
 						"type": "string"
 					},
 					"slug": {
+						"type": "string"
+					},
+					"eventSlug": {
 						"type": "string"
 					}
 				},

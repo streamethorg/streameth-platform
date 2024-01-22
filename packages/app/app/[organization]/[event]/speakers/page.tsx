@@ -1,6 +1,6 @@
 import SpeakerPageComponent from './components/SpeakerComponent'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
-import { fetchEvent } from '@/lib/data'
+import { fetchEvent } from '@/lib/data-back'
 import { notFound } from 'next/navigation'
 
 interface Params {

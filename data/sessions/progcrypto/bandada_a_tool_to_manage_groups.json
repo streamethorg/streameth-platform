@@ -1,23 +1,23 @@
 {
-  "id": "bandada_a_tool_to_manage_groups",
-  "name": "Bandada: A tool to manage groups",
-  "description": "This workshop will cover how to use Bandada to manage groups. There will be a live coding session to build an application using the Bandada infrastructure. After this workshop, you will know what Bandada is and how you can use it and build with it. ",
-  "start": 1700137800000,
-  "end": 1700140200000,
-  "stageId": "dolmabahce_a",
-  "speakers": [
-    {
-      "id": "vivian_plasencia",
-      "name": "Vivian Plasencia",
-      "bio": "I'm working as a Software Engineer on Semaphore and Bandada in the Privacy and Scaling Explorations team at the Ethereum Foundation.",
-      "eventId": "progcrypto",
-      "twitter": "",
-      "photo": "https://drive.google.com/file/d/18wQ9dL9LAjXZpoaaZRMXSLZAGpDO2AhM/view"
-    }
-  ],
-  "playbackId": "",
-  "videoUrl": "https://lp-playback.com/hls/8efcdtmd24o5qqvc/index.m3u8",
-  "eventId": "progcrypto",
-  "track": "Developer Tools",
-  "coverImage": "/sessions/progcrypto/bandada_a_tool_to_manage_groups_thumbnail.png"
+    "id": "bandada_a_tool_to_manage_groups",
+    "name": "Bandada: A tool to manage groups",
+    "description": "This workshop will cover how to use Bandada to manage groups. There will be a live coding session to build an application using the Bandada infrastructure. After this workshop, you will know what Bandada is and how you can use it and build with it. ",
+    "start": 1700137800000,
+    "end": 1700140200000,
+    "stageId": "dolmabahce_a",
+    "speakers": [
+        {
+            "id": "vivian_plasencia",
+            "name": "Vivian Plasencia",
+            "bio": "I'm working as a Software Engineer on Semaphore and Bandada in the Privacy and Scaling Explorations team at the Ethereum Foundation.",
+            "eventId": "progcrypto",
+            "twitter": "",
+            "photo": "https://drive.google.com/file/d/18wQ9dL9LAjXZpoaaZRMXSLZAGpDO2AhM/view"
+        }
+    ],
+    "videoUrl": "https://lp-playback.com/hls/8efcdtmd24o5qqvc/index.m3u8",
+    "eventId": "progcrypto",
+    "track": "Developer Tools",
+    "coverImage": "/sessions/progcrypto/bandada_a_tool_to_manage_groups_thumbnail.png",
+    "assetId": "8efc0f72-6277-49b8-b649-b0a8fa9eeffd"
 }

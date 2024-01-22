@@ -5,8 +5,8 @@ const SessionSchema = new Schema<ISessionModel>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
     description: { type: String, default: '', required: true },
-    start: { type: String, default: '' },
-    end: { type: String, default: '' },
+    start: { type: Number },
+    end: { type: Number },
     stageId: { type: Schema.Types.ObjectId, ref: 'Stage' },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     speakers: [
@@ -35,10 +35,13 @@ const SessionSchema = new Schema<ISessionModel>(
     },
     videoUrl: { type: String, default: '' },
     playbackId: { type: String, default: '' },
+    assetId: { type: String, default: '' },
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
     track: [{ type: String }],
     coverImage: { type: String, default: '' },
     slug: { type: String, default: '' },
+    organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
+    eventSlug: { type: String, default: '' },
   },
   {
     timestamps: true,

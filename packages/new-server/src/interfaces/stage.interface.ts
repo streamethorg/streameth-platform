@@ -1,7 +1,7 @@
 import { Document, Types } from 'mongoose';
 
 export interface IStreamSettings {
-  streamId: string;
+  streamId?: string;
 }
 
 export interface IPlugin {

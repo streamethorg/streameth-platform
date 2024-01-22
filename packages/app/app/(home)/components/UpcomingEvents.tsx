@@ -8,16 +8,17 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { getImageUrl } from '@/lib/utils'
-import { fetchEvents } from '@/lib/data'
+import { getImageUrl } from '@/lib/utils/utils'
 import { IOrganization } from 'streameth-server/model/organization'
-
+import { fetchEvents } from '@/lib/data'
 const UpcomingEvents = async ({
   date,
   organization,
+  archive,
 }: {
   date?: Date
-  organization?: IOrganization['id']
+  organization?: IOrganization['_id']
+  archive?: boolean
 }) => {
   const events = await fetchEvents({
     date,
@@ -45,10 +46,17 @@ const UpcomingEvents = async ({
               id,
               accentColor,
               end,
+              slug,
             },
             index
           ) => (
-            <Link key={index} href={`/${organizationId}/${id}`}>
+            <Link
+              key={index}
+              href={
+                archive
+                  ? `/archive?event=` + event.slug
+                  : `/${organizationId}/${id}`
+              }>
               <Card
                 className="p-2 w-72 h-full border-none"
                 style={{
@@ -72,7 +80,7 @@ const UpcomingEvents = async ({
                       {name}
                     </CardTitle>
                     <CardDescription>
-                      {start.toDateString()}
+                      {new Date(start).toDateString()}
                       {/* {new Date(start).toDateString() !==
                       new Date(end).toDateString()
                         ? ` - ${new Date(end).toDateString()}`

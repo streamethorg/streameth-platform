@@ -28,6 +28,7 @@ export class SessionController extends Controller {
   async createSession(
     @Body() body: SessionDto,
   ): Promise<IStandardResponse<ISession>> {
+    console.log(body);
     const session = await this.sessionService.create(body);
     return SendApiResponse('session created', session);
   }

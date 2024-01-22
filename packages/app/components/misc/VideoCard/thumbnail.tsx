@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import { ISession } from 'streameth-server/model/session'
 import { useEffect, useState } from 'react'
 const fetchImage = async (url: string): Promise<boolean> => {
@@ -20,7 +20,7 @@ export default function Thumbnail({
   session: ISession
   fallBack?: string
 }) {
-  const streamethThumbnail = getImageUrl(`${session.coverImage}`)
+  const streamethThumbnail = session.coverImage ?? ''
 
   const [error, setError] = useState(false)
   const [fallbackImage, setFallbackImage] = useState('/cover.png')

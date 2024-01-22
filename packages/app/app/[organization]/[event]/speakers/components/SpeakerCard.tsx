@@ -32,11 +32,9 @@ const SpeakerCard = ({
     <Credenza>
       <CredenzaTrigger asChild>
         <Card className="border-none">
-          <CardHeader>
+          <CardHeader className="space-y-4">
             <SpeakerPhoto speaker={speaker} size="lg" />
-            <CardTitle className="mx-auto my-2">
-              {speaker.name}
-            </CardTitle>
+            <CardTitle className="mx-auto">{speaker.name}</CardTitle>
           </CardHeader>
           <CardDescription className=" overflow-clip">
             {speaker.company}

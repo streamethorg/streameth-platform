@@ -16,7 +16,6 @@
         }
     ],
     "videoUrl": "https://lp-playback.com/hls/ab37tysfsy020z7y/index.m3u8",
-    "playbackId": "ab37tysfsy020z7y",
     "eventId": "progcrypto",
     "track": "Cryptography in the Wild",
     "coverImage": "/sessions/progcrypto/validating_erc4337_userops_using_zkps_thumbnail.png",

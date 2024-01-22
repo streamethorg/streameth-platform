@@ -2,6 +2,7 @@ export interface NavBarProps {
   pages: {
     name: string
     href: string
+    bgColor?: string
   }[]
   logo: string
   homePath: string
@@ -17,6 +18,7 @@ export interface EventPageProps {
   searchParams: {
     stage?: string
     date?: string
+    page?: number
   }
 }
 export interface SearchPageProps {
@@ -37,7 +39,7 @@ export interface WatchPageProps {
 }
 
 export interface IPagination {
-  currentPage: number
+  currentPage?: number
   totalPages: number
   totalItems: number
   limit: number

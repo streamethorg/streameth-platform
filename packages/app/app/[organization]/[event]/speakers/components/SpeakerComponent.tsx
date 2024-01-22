@@ -1,6 +1,9 @@
 import SpeakerCard from './SpeakerCard'
 
-import { fetchEventSpeakers, fetchEventSessions } from '@/lib/data'
+import {
+  fetchEventSpeakers,
+  fetchEventSessions,
+} from '@/lib/data-back'
 import { IEvent } from 'streameth-server/model/event'
 import {
   Card,

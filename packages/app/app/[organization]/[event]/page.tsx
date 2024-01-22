@@ -5,8 +5,12 @@ import Image from 'next/image'
 import { getEventPeriod } from '@/lib/utils/time'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
-import { getImageUrl } from '@/lib/utils'
+import {
+  fetchEvent,
+  fetchEventStages,
+  fetchEvents,
+} from '@/lib/data-back'
+import { getImageUrl } from '@/lib/utils/utils'
 import { ResolvingMetadata, Metadata } from 'next'
 import {
   Card,
@@ -57,7 +61,7 @@ export default async function EventHome({
 
   return (
     <div className="flex flex-col w-full h-full bg-accent px-2">
-      <div className=" relative space-y-4 md:my-4 max-w-full md:max-w-4xl mx-auto z-50">
+      <div className=" relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
         <Card className="border-none">
           <AspectRatio ratio={3 / 1}>
             <Image
@@ -113,7 +117,7 @@ export default async function EventHome({
                 Livestreams
               </CardTitle>
             </CardHeader>
-            <CardContent className="grid md:grid-cols-2 gap-4">
+            <CardContent className="grid lg:grid-cols-2 gap-4">
               {stages.map((stage) => (
                 <StagePreview
                   key={stage.id}

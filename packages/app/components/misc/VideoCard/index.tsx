@@ -5,9 +5,8 @@ import {
 } from '@/components/ui/card'
 import { ISession } from 'streameth-server/model/session'
 import Thumbnail from './thumbnail'
-import { fetchEvent } from '@/lib/data'
 import Image from 'next/image'
-import { getImageUrl } from '@/lib/utils'
+import { apiUrl } from '@/lib/utils/utils'
 import Link from 'next/link'
 
 const VideoCard = async ({
@@ -17,9 +16,11 @@ const VideoCard = async ({
   session: ISession
   invertedColors?: boolean
 }) => {
-  const event = await fetchEvent({
-    event: session.eventId,
-  })
+  const response = await fetch(
+    `${apiUrl()}/events/${session.eventId}`
+  )
+  const data = await response.json()
+  const event = data.data ?? []
 
   // Determine the classes based on invertedColors prop
   const headerClass = invertedColors ? 'bg-background text-white' : ''
@@ -30,13 +31,13 @@ const VideoCard = async ({
   return (
     <div className="min-h-full w-full rounded-xl text-white uppercase">
       <Link
-        href={`/watch?event=${session.eventId}&session=${session.id}`}>
+        href={`/watch?event=${session.eventSlug}&session=${session._id}`}>
         <Thumbnail session={session} fallBack={event.eventCover} />
       </Link>
       <CardHeader
-        className={`rounded p-1 mt-1 md:p-2 shadow-none md:shadow-none ${headerClass}`}>
+        className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none ${headerClass}`}>
         <Link
-          href={`/watch?event=${session.eventId}&session=${session.id}`}>
+          href={`/watch?event=${session.eventSlug}&session=${session._id}`}>
           <CardTitle
             className={`text-sm truncate ${descriptionClass}`}>
             {session.name}
@@ -48,7 +49,7 @@ const VideoCard = async ({
               className="rounded-md mr-2"
               alt="logo"
               quality={80}
-              src={getImageUrl('/events/' + event.logo)}
+              src={event?.logo}
               height={24}
               width={24}
             />

@@ -1,7 +1,6 @@
 import Player from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { WatchPageProps } from '@/lib/types'
-import { fetchEventSessions } from '@/lib/data'
 import {
   Tabs,
   TabsContent,
@@ -11,20 +10,21 @@ import {
 import RelatedVideos from './components/RelatedVideos'
 import ColorComponent from '@/components/Layout/ColorComponent'
 import { Metadata } from 'next'
+import { apiUrl, getImageUrl } from '@/lib/utils/utils'
+import { notFound } from 'next/navigation'
+import { generalMetadata, watchMetadata } from '@/lib/metadata'
+
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
-  if (!searchParams.event || !searchParams.session) return null
+  if (!searchParams.session) return notFound()
+  const response = await fetch(
+    `${apiUrl()}/sessions/${searchParams.session}`
+  )
+  const data = await response.json()
+  const video = data.data
 
-  const video = (
-    await fetchEventSessions({
-      event: searchParams.event,
-    })
-  ).filter((session) => {
-    return session.id === searchParams.session
-  })[0]
-
-  if (!video) return null
+  if (!video) return notFound()
 
   const tabs = []
   tabs.push({
@@ -78,34 +78,14 @@ export default async function Watch({
 export async function generateMetadata({
   searchParams,
 }: WatchPageProps): Promise<Metadata> {
-  const session = (
-    await fetchEventSessions({
-      event: searchParams.event,
-    })
-  ).filter((session) => {
-    return session.id === searchParams.session
-  })[0]
-  const imageUrl = session.coverImage
-    ? session.coverImage
-    : session.id + '.png'
-  try {
-    return {
-      title: session.name,
-      description: session.description,
-      openGraph: {
-        title: session.name,
-        description: session.description,
-        images: [imageUrl],
-      },
-    }
-  } catch (e) {
-    return {
-      title: 'StreamETH Session',
-      openGraph: {
-        title: 'StreamETH Session',
-        description:
-          'The complete solution to host your hybrid or virtual event.',
-      },
-    }
-  }
+  const response = await fetch(
+    `${apiUrl()}/sessions/${searchParams.session}`
+  )
+  const responseData = await response.json()
+  const video = responseData.data
+
+  if (!searchParams.session) return generalMetadata
+
+  if (!video) return generalMetadata
+  return watchMetadata({ session: video })
 }

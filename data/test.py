@@ -15,6 +15,8 @@ LIVEPEER_RESPONSE_FILE = "livepeer_videos.json"  # File to store the API respons
 sessions_without_playbackId = []
 
 # Function to get video information from Livepeer API and save it
+
+
 def get_livepeer_videos():
     headers = {"Authorization": f"Bearer {API_KEY}"}
     response = requests.get(API_URL, headers=headers)
@@ -28,11 +30,15 @@ def get_livepeer_videos():
         return []
 
 # Function to update session file with assetId
+
+
 def update_session_file(file_path, updated_session):
     with open(file_path, 'w') as file:
         json.dump(updated_session, file, indent=4)
 
 # Function to extract playbackId from PlaybackUrl
+
+
 def extract_playbackId(url):
     match = re.search(r'/hls/(.*?)/index.m3u8', url)
     return match.group(1) if match else None
@@ -49,22 +55,30 @@ for event_name in os.listdir(SESSIONS_DIR):
                 session_path = os.path.join(event_path, session_file)
                 with open(session_path, 'r') as file:
                     session = json.load(file)
+
+                    # Check or extract playbackId
                     playbackId = session.get('playbackId')
-                    print(session.get("assetId"))
-                    # If playbackId is not found, try extracting from PlaybackUrl
                     if not playbackId:
                         playbackUrl = session.get('videoUrl')
                         if playbackUrl:
                             playbackId = extract_playbackId(playbackUrl)
-                            print(playbackId)
-                    # Find corresponding video information
+                            if playbackId:
+                                session['playbackId'] = playbackId
+                                update_session_file(session_path, session)
+
+                    # Remove videoUrl
+                    session.pop('playbackId', None)
+                    # Find corresponding video information and update assetId
                     if playbackId:
-                        matched_video = next((v for v in videos if v['playbackId'] == playbackId), None)
+                        matched_video = next(
+                            (v for v in videos if v['playbackId'] == playbackId), None)
                         if matched_video:
                             session['assetId'] = matched_video['id']
+                            # Update the session file with changes
                             update_session_file(session_path, session)
-                    else:
-                        sessions_without_playbackId.append(session_file)
+                        else:
+                            sessions_without_playbackId.append(session_file)
+
 
 # Log sessions without playbackId to a CSV file
 with open('sessions_without_playbackId.csv', 'w', newline='') as file:
