@@ -33,6 +33,12 @@ async function startCreatingSummary(assetId: string, overwriteFiles = false) {
     return;
   }
 
+  // TODO: Check name of video and find it in DB
+  // if (assetInfo.name !== db.name) {
+  // console.log('Session of video does not exist does not exist')
+  // return;
+  // }
+
   const s3 = new S3Client();
   const data = await s3.getBucket(
     BUCKET_NAME,
@@ -74,13 +80,13 @@ async function startCreatingSummary(assetId: string, overwriteFiles = false) {
     "text/plain"
   );
 
-  // TODO: Add labels
-
   await createSummary(
     transcriptionFilePath,
     TMP_SUMMARY_PATH,
     `summary-${assetInfo.id}.txt`
   );
+
+  // TODO: Add labels
 
   // TODO: Put summary on MongoDB & delete tmp
 }
