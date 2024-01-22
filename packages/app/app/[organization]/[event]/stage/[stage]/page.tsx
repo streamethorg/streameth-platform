@@ -7,7 +7,7 @@ import {
   fetchEvent,
   fetchEventSessions,
   fetchEventStage,
-} from '@/lib/data'
+} from '@/lib/data-back'
 import {
   Tabs,
   TabsContent,

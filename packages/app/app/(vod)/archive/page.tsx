@@ -37,6 +37,7 @@ export default async function ArchivePage({
     limit: 12,
     totalItems: totalItems,
   }
+
   return (
     <div className="bg-white">
       <UpcomingEvents

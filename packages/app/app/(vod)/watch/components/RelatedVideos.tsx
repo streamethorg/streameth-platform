@@ -1,4 +1,4 @@
-import { fetchAllSessions } from '@/lib/data'
+import { fetchAllSessions } from '@/lib/data-back'
 import VideoCard from '@/components/misc/VideoCard'
 import { ISession } from 'streameth-server/model/session'
 import { apiUrl } from '@/lib/utils/utils'

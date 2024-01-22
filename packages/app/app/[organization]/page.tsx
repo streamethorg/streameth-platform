@@ -3,9 +3,7 @@ import remarkGfm from 'remark-gfm'
 import { notFound } from 'next/navigation'
 import Markdown from 'react-markdown'
 import { Metadata, ResolvingMetadata } from 'next'
-import { fetchOrganization } from '@/lib/data'
-import { IOrganization } from 'streameth-server/model/organization'
-import { apiUrl } from '@/lib/utils/utils'
+import { fetchOrganization } from '@/lib/data-back'
 
 interface Params {
   params: {
@@ -17,12 +15,9 @@ export default async function OrganizationHome({ params }: Params) {
   if (!params.organization) {
     return notFound()
   }
-  const response = await fetch(
-    `${apiUrl()}/organizations/${params.organization}`
-  )
-  const data = await response.json()
-  const organization: IOrganization = data.data
-
+  const organization = await fetchOrganization({
+    organization: params.organization,
+  })
   if (!organization) {
     return notFound()
   }
@@ -79,11 +74,9 @@ export async function generateMetadata(
   { params }: Params,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const response = await fetch(
-    `${apiUrl()}/organizations/${params.organization}`
-  )
-  const data = await response.json()
-  const organizationInfo: IOrganization = data.data
+  const organizationInfo = await fetchOrganization({
+    organization: params.organization,
+  })
 
   if (!organizationInfo) {
     return {

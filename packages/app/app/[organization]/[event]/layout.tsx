@@ -1,6 +1,6 @@
 import ColorComponent from '@/components/Layout/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
-import { fetchNavBarRoutes, fetchEvent } from '@/lib/data'
+import { fetchNavBarRoutes, fetchEvent } from '@/lib/data-back'
 
 const Layout = async ({
   children,

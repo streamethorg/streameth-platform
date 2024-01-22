@@ -8,10 +8,9 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { apiUrl, getImageUrl } from '@/lib/utils/utils'
+import { getImageUrl } from '@/lib/utils/utils'
 import { IOrganization } from 'streameth-server/model/organization'
-import { IEvent } from 'streameth-server/model/event'
-
+import { fetchEvents } from '@/lib/data'
 const UpcomingEvents = async ({
   date,
   organization,
@@ -21,18 +20,10 @@ const UpcomingEvents = async ({
   organization?: IOrganization['_id']
   archive?: boolean
 }) => {
-  const allOrgs = await fetch(`${apiUrl()}/organizations`)
-  const allOrgsData = await allOrgs.json()
-  const orgId = allOrgsData.data.find(
-    (org: IOrganization) => org.slug === organization
-  )?._id
-
-  const response = await fetch(
-    `${apiUrl()}/events/organization/${orgId}`
-  )
-
-  const data = await response.json()
-  const events: IEvent[] = data.data ?? []
+  const events = await fetchEvents({
+    date,
+    organizationId: organization,
+  })
 
   if (events.length === 0) return null
 
@@ -55,6 +46,7 @@ const UpcomingEvents = async ({
               id,
               accentColor,
               end,
+              slug,
             },
             index
           ) => (
@@ -62,7 +54,7 @@ const UpcomingEvents = async ({
               key={index}
               href={
                 archive
-                  ? `/archive?event=` + id
+                  ? `/archive?event=` + event.slug
                   : `/${organizationId}/${id}`
               }>
               <Card

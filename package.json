@@ -6,7 +6,8 @@
     "packages": [
       "packages/app",
       "packages/server",
-      "packages/av-tools"
+      "packages/av-tools",
+      "packages/new-server"
     ]
   },
   "scripts": {
