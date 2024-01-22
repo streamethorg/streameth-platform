@@ -1,32 +1,31 @@
-import { IOrganization } from 'streameth-server/model/organization'
-import { IEvent } from 'new-server/model/event'
-import { ISession } from 'streameth-server/model/session'
+import { IEvent } from 'streameth-server/model/event'
 import { IStage } from 'streameth-server/model/stage'
+import { ISession } from 'streameth-server/model/session'
 import { ISpeaker } from 'streameth-server/model/speaker'
-
+import { IOrganization } from 'streameth-server/model/organization'
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
 import SessionController from 'streameth-server/controller/session'
 import SpeakerController from 'streameth-server/controller/speaker'
+import OrganizationController from 'streameth-server/controller/organization'
 import { NavBarProps, IPagination } from './types'
 import FuzzySearch from 'fuzzy-search'
-import { apiUrl } from '@/lib/utils/utils'
+import { unstable_noStore as noStore } from 'next/cache'
 
 export async function fetchOrganization({
-  organizationSlug,
-  organizationId,
+  organization,
 }: {
-  organizationSlug?: string
-  organizationId?: string
+  organization: string
 }): Promise<IOrganization | null> {
   try {
-    if (!organizationSlug && !organizationId) {
-      return null
-    }
-    const response = await fetch(
-      `${apiUrl()}/organizations/${organizationId ? organizationId : organizationSlug}`
+    const organizationController = new OrganizationController()
+    const data = await organizationController.getOrganization(
+      organization
     )
-    return (await response.json()).data
+    if (!data) {
+      throw 'Organization not found'
+    }
+    return data.toJson()
   } catch (e) {
     console.log(e)
     return null
@@ -35,8 +34,9 @@ export async function fetchOrganization({
 
 export async function fetchOrganizations(): Promise<IOrganization[]> {
   try {
-    const response = await fetch(`${apiUrl()}/organizations`)
-    return (await response.json()).data ?? []
+    const organizationController = new OrganizationController()
+    const data = await organizationController.getAllOrganizations()
+    return data.map((organization) => organization.toJson())
   } catch (e) {
     console.log(e)
     throw 'Error fetching organizations'
@@ -51,25 +51,18 @@ export async function fetchEvents({
   date?: Date
 }): Promise<IEvent[]> {
   try {
-    const response = await fetch(`${apiUrl()}/events`)
-    const data: IEvent[] = (await response.json()).data ?? []
+    const eventController = new EventController()
+    let data = await eventController.getAllEvents({})
     if (organizationId) {
-      return data.filter((event) => {
-        if (event.organizationId === organizationId) {
-          if (date) {
-            return (
-              // TODO: Fix this
-              // event.start >= date.getTime()
-              false
-            )
-          } else {
-            return true
-          }
-        }
-      })
+      data = data.filter(
+        (event) => event.organizationId === organizationId
+      )
     }
-
-    return data
+    // upcoming events
+    if (date) {
+      data = data.filter((event) => event.start > date)
+    }
+    return data.map((event) => event.toJson())
   } catch (e) {
     console.log(e)
     throw 'Error fetching events' + e
@@ -131,8 +124,6 @@ export async function fetchEventStage({
   }
 }
 
-
-// samuel
 export async function fetchAllSessions({
   organization,
   event,
@@ -154,14 +145,7 @@ export async function fetchAllSessions({
 }): Promise<{ sessions: ISession[]; pagination: IPagination }> {
   let allSessions: ISession[] = []
 
-    // const response = await fetch(
-  //   `${apiUrl()}/sessions?organization=${organization?.slug}&onlyVideos=true&page=1&size=4`
-  // )
-  // const data = await response.json()
-  // const videos = data.data.sessions ?? []
   // Fetch all data
-
-
   if (event) {
     // existing logic to fetch all sessions for a specific event
     allSessions = await fetchEventSessions({
@@ -221,7 +205,6 @@ export async function fetchAllSessions({
   }
 }
 
-// samuel
 export async function fetchEventSessions({
   event,
   stage,
@@ -255,7 +238,6 @@ export async function fetchEventSessions({
   }
 }
 
-// samuel
 export async function fetchEventSpeakers({
   event,
 }: {
@@ -321,7 +303,6 @@ export async function fetchNavBarRoutes({
   }
 }
 
-// samuel
 export const fetchEventSession = async ({
   event,
   session,

@@ -9,20 +9,14 @@ import {
 } from '@/components/ui/card'
 import HeroHeader from './components/HeroHeader'
 import { Skeleton } from '@/components/ui/skeleton'
-import { IOrganization } from 'streameth-server/model/organization'
-import { apiUrl } from '@/lib/utils/utils'
+import { fetchOrganizations } from '@/lib/data'
 
 const Loading = () => {
   return <Skeleton className=" h-96 w-full bg-muted" />
 }
 
-export const revalidate = 3600 // 1 day
-
 export default async function Home() {
-  const response = await fetch(`${apiUrl()}/organizations`)
-  const data = await response.json()
-  const organizations: IOrganization[] = data.data ?? []
-
+  const organizations = await fetchOrganizations()
   return (
     <>
       <HeroHeader />

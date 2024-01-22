@@ -2,7 +2,7 @@ import StageSelect from './StageSelect'
 import DateSelect from './DateSelect'
 import SessionList from '@/components/sessions/SessionList'
 
-import { fetchEventSessions } from '@/lib/data'
+import { fetchEventSessions } from '@/lib/data-back'
 import { IStage } from 'streameth-server/model/stage'
 import { IEvent } from 'streameth-server/model/event'
 import { getEventDays } from '@/lib/utils/time'

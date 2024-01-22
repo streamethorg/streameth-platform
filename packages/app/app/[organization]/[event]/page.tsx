@@ -5,7 +5,11 @@ import Image from 'next/image'
 import { getEventPeriod } from '@/lib/utils/time'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
+import {
+  fetchEvent,
+  fetchEventStages,
+  fetchEvents,
+} from '@/lib/data-back'
 import { getImageUrl } from '@/lib/utils/utils'
 import { ResolvingMetadata, Metadata } from 'next'
 import {
