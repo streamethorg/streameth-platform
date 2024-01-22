@@ -1011,6 +1011,7 @@ export function RegisterRoutes(app: Router) {
         event: { in: 'query', name: 'event', dataType: 'string' },
         organization: { in: 'query', name: 'organization', dataType: 'string' },
         speaker: { in: 'query', name: 'speaker', dataType: 'string' },
+        stageId: { in: 'query', name: 'stageId', dataType: 'string' },
         onlyVideos: { in: 'query', name: 'onlyVideos', dataType: 'boolean' },
         page: { in: 'query', name: 'page', dataType: 'double' },
         size: { in: 'query', name: 'size', dataType: 'double' },
