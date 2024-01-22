@@ -8,6 +8,7 @@ const SessionSchema = new Schema<ISessionModel>(
     start: { type: String, default: '' },
     end: { type: String, default: '' },
     stageId: { type: Schema.Types.ObjectId, ref: 'Stage' },
+    organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     speakers: [
       {
         name: { type: String },
