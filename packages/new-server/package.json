@@ -2,6 +2,7 @@
   "name": "streameth-new-server",
   "version": "3.0.0",
   "private": true,
+  
   "scripts": {
     "start": "yarn run build && node -r module-alias/register ./dist/server.js",
     "dev": "nodemon --config nodemon.json",

@@ -1,8 +1,9 @@
 import { IOrganization } from 'streameth-server/model/organization'
-import { IEvent } from 'new-server/model/event'
-import { ISession } from 'streameth-server/model/session'
-import { IStage } from 'streameth-server/model/stage'
-import { ISpeaker } from 'streameth-server/model/speaker'
+import Event from 'streameth-new-server/src/models/event.model'
+import Session  from 'streameth-new-server/src/models/session.model'
+import Speaker  from 'streameth-new-server/src/models/speaker.model'
+import Stage  from 'streameth-new-server/src/models/stage.model'
+import Organization  from 'streameth-new-server/src/models/organization.model'
 
 import EventController from 'streameth-server/controller/event'
 import StageController from 'streameth-server/controller/stage'
@@ -49,10 +50,10 @@ export async function fetchEvents({
 }: {
   organizationId?: string
   date?: Date
-}): Promise<IEvent[]> {
+}): Promise<Event[]> {
   try {
     const response = await fetch(`${apiUrl()}/events`)
-    const data: IEvent[] = (await response.json()).data ?? []
+    const data: Event[] = (await response.json()).data ?? []
     if (organizationId) {
       return data.filter((event) => {
         if (event.organizationId === organizationId) {
