@@ -41,6 +41,8 @@ const SessionSchema = new Schema<ISessionModel>(
     slug: { type: String, default: '' },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     eventSlug: { type: String, default: '' },
+    aiDescription: { type: String, default: '' },
+    autoLabels: [{ type: String }],
   },
   {
     timestamps: true,

@@ -416,6 +416,15 @@
 					},
 					"eventSlug": {
 						"type": "string"
+					},
+					"aiDescription": {
+						"type": "string"
+					},
+					"autoLabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -426,7 +435,8 @@
 					"stageId",
 					"speakers",
 					"eventId",
-					"organizationId"
+					"organizationId",
+					"aiDescription"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -510,6 +520,21 @@
 					},
 					"eventSlug": {
 						"type": "string"
+					},
+					"aiDescription": {
+						"type": "string"
+					},
+					"autoLabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"autolabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -520,7 +545,8 @@
 					"stageId",
 					"speakers",
 					"eventId",
-					"organizationId"
+					"organizationId",
+					"aiDescription"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -807,6 +833,9 @@
 				"properties": {
 					"disableChat": {
 						"type": "boolean"
+					},
+					"hideSchedule": {
+						"type": "boolean"
 					}
 				},
 				"required": [
@@ -902,7 +931,10 @@
 					"start",
 					"end",
 					"location",
-					"organizationId"
+					"logo",
+					"banner",
+					"organizationId",
+					"timezone"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1006,7 +1038,10 @@
 					"start",
 					"end",
 					"location",
-					"organizationId"
+					"logo",
+					"banner",
+					"organizationId",
+					"timezone"
 				],
 				"type": "object",
 				"additionalProperties": false

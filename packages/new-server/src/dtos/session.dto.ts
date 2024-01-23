@@ -68,4 +68,12 @@ export class SessionDto implements ISession {
   @IsOptional()
   @IsString()
   eventSlug?: string;
+
+  @IsOptional()
+  @IsString()
+  aiDescription?: string;
+
+  @IsOptional()
+  @IsArray()
+  autolabels?: string[];
 }
