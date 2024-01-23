@@ -118,12 +118,15 @@ export async function fetchEvent({
 export async function fetchEventStages({
   eventId,
 }: {
-  event: string
+  eventId?: string
 }): Promise<IStageModel[]> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/event/${event}`)
+    const response = await fetch(
+      `${apiUrl()}/stages/event/${eventId}`
+    )
 
     const data = (await response.json()).data
+
     return data.map((stage: IStageModel) => stage)
   } catch (e) {
     console.log(e)
@@ -134,7 +137,7 @@ export async function fetchEventStages({
 export async function fetchEventStage({
   stage,
 }: {
-  stage: string
+  stage?: string
 }): Promise<IStageModel> {
   try {
     const response = await fetch(`${apiUrl()}/stages/${stage}`)
@@ -226,7 +229,7 @@ export async function fetchEventSessions({
   event,
   stage,
   date,
-  onlyVideos,
+  onlyVideos = false,
   page = 0,
   limit = 0,
 }: {
@@ -291,10 +294,10 @@ export async function fetchNavBarRoutes({
 }): Promise<NavBarProps> {
   const [eventData, sessionData, speakerData, stageData] =
     await Promise.all([
-      fetchEvent({ event }),
+      fetchEvent({ eventSlug: event }),
       fetchEventSessions({ event }),
       fetchEventSpeakers({ event }),
-      fetchEventStages({ event }),
+      fetchEventStages({ eventId: event }),
     ])
 
   if (!eventData) {

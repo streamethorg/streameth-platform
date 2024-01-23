@@ -41,7 +41,7 @@ export default async function EventHome({
   if (!event) return notFound()
 
   const stages = await fetchEventStages({
-    eventId: event.id,
+    eventId: event.slug,
   })
 
   return (
@@ -107,7 +107,7 @@ export default async function EventHome({
                 <StagePreview
                   key={stage.id}
                   event={event.id}
-                  organization={params.organizationSlug}
+                  organization={params.organization}
                   stage={stage}
                 />
               ))}
@@ -134,9 +134,9 @@ export async function generateMetadata(
   { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { eventSlug } = params
+  const { event } = params
   const eventInfo = await fetchEvent({
-    eventSlug,
+    eventSlug: event,
   })
 
   if (!eventInfo) {
