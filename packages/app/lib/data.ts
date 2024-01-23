@@ -116,7 +116,7 @@ export async function fetchEvent({
 }
 
 export async function fetchEventStages({
-  eventId,
+  event,
 }: {
   event: string
 }): Promise<IStageModel[]> {
@@ -291,7 +291,7 @@ export async function fetchNavBarRoutes({
 }): Promise<NavBarProps> {
   const [eventData, sessionData, speakerData, stageData] =
     await Promise.all([
-      fetchEvent({ event }),
+      fetchEvent({ eventSlug: event }),
       fetchEventSessions({ event }),
       fetchEventSpeakers({ event }),
       fetchEventStages({ event }),
