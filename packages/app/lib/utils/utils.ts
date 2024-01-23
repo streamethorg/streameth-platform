@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-import { IEvent } from 'streameth-server/model/event'
+import { IEvent } from '@/lib/types'
 
 export const selectOptionFocusHandle = (
   event: React.KeyboardEvent<HTMLDivElement>,

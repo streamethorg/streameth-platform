@@ -1,4 +1,4 @@
-import { IEvent } from 'streameth-server/model/event'
+import { IEvent } from '@/lib/types'
 import { IStage } from 'streameth-server/model/stage'
 import { ISession } from 'streameth-server/model/session'
 import { ISpeaker } from 'streameth-server/model/speaker'

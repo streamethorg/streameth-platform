@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import useDebounce from '@/lib/hooks/useDebounce'
+import { archivePath } from '@/lib/utils/path'
 
 interface IEventSearchResult {
   id: string
@@ -64,12 +65,12 @@ export default function SearchBar(): JSX.Element {
   }, [])
 
   const handleTermChange = (term: string) => {
-    window.location.href = '/archive?searchQuery=' + term
+    window.location.href = archivePath({ searchQuery: term })
     //  handleTermChangeOverload(term)
   }
 
   const handleEventChange = (term: string) => {
-    window.location.href = '/archive?event=' + term
+    window.location.href = archivePath({ event: term })
   }
 
   return (

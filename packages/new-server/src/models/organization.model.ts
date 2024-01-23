@@ -1,4 +1,4 @@
-import { IOrganizationModel } from '@interfaces/organization.interface';
+  import { IOrganizationModel } from '@interfaces/organization.interface';
 import { Schema, model } from 'mongoose';
 
 const OrganizationSchema = new Schema<IOrganizationModel>(
@@ -20,5 +20,6 @@ const Organization = model<IOrganizationModel>(
   'Organization',
   OrganizationSchema,
 );
+
 
 export default Organization;

@@ -1,7 +1,4 @@
 'use client'
-
-import { ModalContext } from '@/lib/context/ModalContext'
-import { useContext } from 'react'
 import ScheduleCardModal from './ScheduleCardModal'
 import moment from 'moment-timezone'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
@@ -44,13 +41,13 @@ const ScheduleCard = ({
               {showTime && (
                 <>
                   {moment(session.start)
-                    .tz(event.timezone)
+                    .tz(event.timezone || 'UTC')
                     .format('HH:mm')}{' '}
                   -{' '}
                   {moment(session.end)
-                    .tz(event.timezone)
+                    .tz(event?.timezone || 'UTC')
                     .format('HH:mm')}{' '}
-                  {getEventTimezoneText(event.timezone)}
+                  {getEventTimezoneText(event?.timezone || 'UTC')}
                 </>
               )}
             </CardDescription>

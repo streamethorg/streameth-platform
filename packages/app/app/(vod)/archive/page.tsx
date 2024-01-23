@@ -51,8 +51,9 @@ export async function generateMetadata({
   searchParams,
 }: SearchPageProps): Promise<Metadata> {
   if (!searchParams.event) return generalMetadata
-
-  const event = await fetchEvent({ event: searchParams.event })
+  const event = await fetchEvent({
+    eventSlug: searchParams.event,
+  })
 
   if (!event) return generalMetadata
   return archiveMetadata({ event })
