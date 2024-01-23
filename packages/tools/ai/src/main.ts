@@ -4,6 +4,7 @@ import { downloadM3U8ToMP3 } from "../../../av-tools/src/utils/ffmpeg";
 import S3Client from "../../../server/services/s3/index.ts";
 import SessionService from "../../../new-server/src/services/session.service";
 import * as fs from "fs";
+import { join } from "path";
 
 const BUCKET_NAME = "streamethapp";
 const TRANSCRIPTIONS_PATH = "transcriptions/";
@@ -22,82 +23,80 @@ async function getFileSize(filePath: string): Promise<number> {
   });
 }
 
-async function startCreatingSummary(assetId: string, overwriteFiles = false) {
+async function startCreatingSummary(
+  assetId: string,
+  overwriteFiles = false,
+  keepTmp = false
+) {
   if (!assetId) {
-    console.log("Invalid asset ID");
-    return;
+    throw new Error("Invalid asset ID");
   }
 
   const assetInfo = await getAssetInfo(assetId);
   if (!assetInfo) {
-    console.log("Asset does not exist");
-    return;
+    throw new Error("Asset does not exist");
   }
 
-  // TODO: Check name of video and find it in DB
-  // if (assetInfo.name !== db.name) {
-  // console.log('Session of video does not exist does not exist')
-  // return;
-  // }
+  const sessionService = new SessionService();
+  const { sessions } = await sessionService.getAll({ assetId: assetInfo.id });
+  if (sessions.length !== 1) {
+    throw new Error("Something went wrong when fetching the correct session");
+  }
+  const session = sessions[0];
+
+  const mp3FilePath = join(TMP_MP3_PATH, `${session.id}.mp3`);
+  const transcriptionFilePath = join(
+    TMP_TRANSCRIPTIONS_PATH,
+    `${session.id}.txt`
+  );
+  const digitalOceanPath = join(TRANSCRIPTIONS_PATH, `${session.id}.txt`);
 
   const s3 = new S3Client();
-  const data = await s3.getBucket(
-    BUCKET_NAME,
-    `${TRANSCRIPTIONS_PATH}${assetInfo.id}.txt`
-  );
-
+  const data = await s3.getBucket(BUCKET_NAME, digitalOceanPath);
   if (Object.keys(data).length !== 0 && !overwriteFiles) {
-    console.log("File already exists");
-    return;
+    throw new Error("File already exists on Digital Ocean");
   }
 
   const downloadUrl = assetInfo.playbackUrl || "";
-  await downloadM3U8ToMP3(downloadUrl, assetInfo.id, TMP_MP3_PATH, 9);
+  await downloadM3U8ToMP3(downloadUrl, session.id, TMP_MP3_PATH, 9);
 
-  const mp3FilePath = `${TMP_MP3_PATH}${assetInfo.id}.mp3`;
   const size = await getFileSize(mp3FilePath);
   if (size >= 25000000) {
-    console.log("Audio file too big... Cancelling...");
-    return;
+    throw new Error("Audio file too big");
   }
 
   await createTranscription(
     mp3FilePath,
     TMP_TRANSCRIPTIONS_PATH,
-    `${assetInfo.id}.txt`
+    `${session.id}.txt`
   );
 
-  const transcriptionFilePath = `${TMP_TRANSCRIPTIONS_PATH}${assetInfo.id}.txt`;
   if (!fs.existsSync(transcriptionFilePath)) {
-    console.log(`${transcriptionFilePath} does not exist...`);
-    return;
+    throw new Error(`${transcriptionFilePath} does not exist...`);
   }
 
   const fileStream = fs.createReadStream(transcriptionFilePath);
-  await s3.uploadFile(
-    BUCKET_NAME,
-    `${TRANSCRIPTIONS_PATH}${assetInfo.id}.txt`,
-    fileStream,
-    "text/plain"
-  );
+  await s3.uploadFile(BUCKET_NAME, digitalOceanPath, fileStream, "text/plain");
 
-  await createSummary(
+  const summary = await createSummary(
     transcriptionFilePath,
     TMP_SUMMARY_PATH,
-    `summary-${assetInfo.id}.txt`
+    `summary-${session.id}.txt`
   );
-
-  const sessionService = new SessionService();
-  await sessionService.update("65a9ef91973b4408412261a6", {
-    aiDescription: "hello world",
-  });
 
   // TODO: Add labels
 
-  // TODO: Put summary on MongoDB & delete tmp
+  await sessionService.update(session.id, {
+    videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${session.id}.txt`,
+    aiDescription: summary,
+  });
+
+  if (keepTmp === false) {
+    fs.rmSync("./tmp", { recursive: true, force: true });
+  }
 }
 
-startCreatingSummary("67243415-8c98-4adf-b2ff-383a44bcddc7")
+startCreatingSummary("7a79da4e-19d4-44e1-9600-e4f927c47af9")
   .then(() => console.log("Ran successfully..."))
   .catch((err) => console.error("Error:", err));
 

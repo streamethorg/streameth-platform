@@ -42,6 +42,7 @@ export default class SessionServcie {
     speaker: string;
     stageId: string;
     onlyVideos: boolean;
+    assetId: string;
     size: number;
     page: number;
   }): Promise<{
@@ -60,6 +61,9 @@ export default class SessionServcie {
     }
     if (d.onlyVideos) {
       filter = { ...filter, playbackId: { $ne: '' } };
+    }
+    if (d.assetId != undefined) {
+      filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
       filter = { ...filter, stageId: d.stageId };

@@ -42,7 +42,7 @@ export async function createSummary(
   transcriptedFilePath: string,
   textFilePath: string,
   fileName: string
-): Promise<void> {
+): Promise<string> {
   if (!fs.existsSync(textFilePath)) {
     fs.mkdirSync(textFilePath, { recursive: true });
   }
@@ -84,4 +84,6 @@ export async function createSummary(
     String(response.choices[0].message.content)
   );
   console.log(`Transcription saved to ${textFilePath}`);
+
+  return response.choices[0].message.content;
 }
