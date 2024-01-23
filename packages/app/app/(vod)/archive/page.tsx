@@ -8,10 +8,9 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
-import { apiUrl } from '@/lib/utils/utils'
 import { generalMetadata, archiveMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
-import { fetchAllSessions } from '@/lib/data'
+import { fetchAllSessions, fetchEvent } from '@/lib/data'
 
 export default async function ArchivePage({
   searchParams,
@@ -52,11 +51,9 @@ export async function generateMetadata({
   searchParams,
 }: SearchPageProps): Promise<Metadata> {
   if (!searchParams.event) return generalMetadata
-  const response = await fetch(
-    `${apiUrl()}/events/?${searchParams.event}`
-  )
-  const responseData = await response.json()
-  const event = responseData.data
+
+  const event = await fetchEvent({ event: searchParams.event })
+
   if (!event) return generalMetadata
   return archiveMetadata({ event })
 }

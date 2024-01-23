@@ -208,9 +208,7 @@ export async function fetchAllSessions({
 export async function fetchEventSessions({
   event,
   stage,
-  timestamp,
   date,
-  speakerIds,
   onlyVideos,
   page = 0,
   limit = 0,
@@ -226,12 +224,10 @@ export async function fetchEventSessions({
 }): Promise<{ sessions: ISessionModel[]; pagination: IPagination }> {
   try {
     const response = await fetch(
-      `${apiUrl()}/sessions?event=${event}&page=${page}&size=${limit}`
+      `${apiUrl()}/sessions?event=${event}&page=${page}&size=${limit}&onlyVideos=${onlyVideos}&stage=${stage}&date=${date}`
     )
 
     let eventSessions = (await response.json()).data
-
-    console.log(stage, 'limit:', limit, date, speakerIds, onlyVideos)
 
     return {
       sessions: eventSessions.sessions.map(
