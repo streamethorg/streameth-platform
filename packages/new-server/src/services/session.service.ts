@@ -40,6 +40,7 @@ export default class SessionServcie {
     event: string;
     organization: string;
     speaker: string;
+    stageId: string;
     onlyVideos: boolean;
     size: number;
     page: number;
@@ -60,6 +61,9 @@ export default class SessionServcie {
     if (d.onlyVideos) {
       filter = { ...filter, playbackId: { $ne: '' } };
     }
+    if (d.stageId != undefined) {
+      filter = { ...filter, stageId: d.stageId };
+    }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
     const pageNumber = Number(d.page) || 0;
     const skip = pageSize * pageNumber - pageSize;
@@ -69,9 +73,15 @@ export default class SessionServcie {
       skip,
       pageSize,
     );
+    const totalDocuments = await this.controller.store.findAll(
+      filter,
+      this.path,
+      0,
+      0,
+    );
     return {
       sessions: sessions,
-      totalDocuments: sessions.length,
+      totalDocuments: totalDocuments.length,
       pageable: {
         page: pageNumber,
         size: pageSize,

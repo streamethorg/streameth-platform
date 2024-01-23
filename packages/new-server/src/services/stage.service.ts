@@ -2,6 +2,7 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
+import Events from '@models/event.model';
 
 export default class StageService {
   private path: string;
@@ -34,8 +35,9 @@ export default class StageService {
   }
 
   async findAllStagesForEvent(eventId: string): Promise<Array<IStage>> {
+    const event = await Events.findOne({ slug: eventId });
     return await this.controller.store.findAll(
-      { eventId: eventId },
+      { eventId: event?._id },
       `${this.path}/${eventId}`,
     );
     // stages.sort((a, b) => {

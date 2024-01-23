@@ -1394,6 +1394,14 @@
 					},
 					{
 						"in": "query",
+						"name": "stageId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
 						"name": "onlyVideos",
 						"required": false,
 						"schema": {
