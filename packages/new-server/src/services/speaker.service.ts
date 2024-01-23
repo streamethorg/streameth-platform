@@ -2,6 +2,7 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { ISpeaker } from '@interfaces/speaker.interface';
 import Speaker from '@models/speaker.model';
+import Events from '@models/event.model';
 
 export default class SpeakerService {
   private path: string;
@@ -26,8 +27,9 @@ export default class SpeakerService {
   }
 
   async findAllSpeakersForEvent(eventId: string): Promise<Array<ISpeaker>> {
+    const event = await Events.findOne({ slug: eventId });
     return await this.controller.store.findAll(
-      { eventId: eventId },
+      { eventId: event._id.toString() },
       `${this.path}/${eventId}`,
     );
   }
