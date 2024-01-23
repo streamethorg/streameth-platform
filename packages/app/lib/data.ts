@@ -116,7 +116,7 @@ export async function fetchEvent({
 }
 
 export async function fetchEventStages({
-  event,
+  eventId,
 }: {
   eventId?: string
 }): Promise<IStageModel[]> {
