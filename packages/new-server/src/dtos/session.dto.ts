@@ -71,6 +71,10 @@ export class SessionDto implements ISession {
 
   @IsOptional()
   @IsString()
+  videoTranscription?: string;
+
+  @IsOptional()
+  @IsString()
   aiDescription?: string;
 
   @IsOptional()

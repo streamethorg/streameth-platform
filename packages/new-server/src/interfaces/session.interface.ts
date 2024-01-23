@@ -33,7 +33,8 @@ export interface ISession {
   coverImage?: string;
   slug?: string;
   eventSlug?: string;
-  aiDescription: string;
+  videoTranscription?: string;
+  aiDescription?: string;
   autoLabels?: string[];
 }
 
