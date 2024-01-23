@@ -37,7 +37,7 @@ export default class StageService {
   async findAllStagesForEvent(eventId: string): Promise<Array<IStage>> {
     const event = await Events.findOne({ slug: eventId });
     return await this.controller.store.findAll(
-      { eventId: event._id },
+      { eventId: event?._id },
       `${this.path}/${eventId}`,
     );
     // stages.sort((a, b) => {

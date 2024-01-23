@@ -73,10 +73,15 @@ export default class SessionServcie {
       skip,
       pageSize,
     );
-    const totalDocuments = await Session.find().countDocuments();
+    const totalDocuments = await this.controller.store.findAll(
+      filter,
+      this.path,
+      0,
+      0,
+    );
     return {
       sessions: sessions,
-      totalDocuments: totalDocuments,
+      totalDocuments: totalDocuments.length,
       pageable: {
         page: pageNumber,
         size: pageSize,
