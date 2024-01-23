@@ -68,7 +68,6 @@ export async function fetchEvents({
         organizationId,
         organizationSlug,
       })
-      console.log(organization)
       if (!organization) {
         return []
       }
@@ -109,9 +108,6 @@ export async function fetchEvent({
     const data = await fetch(
       `${apiUrl()}/events/${eventId ?? eventSlug}`
     )
-    console.log(await data.json())
-
-    console.log("event data", eventSlug, (await data.json()).data)
     return (await data.json()).data
   } catch (e) {
     console.log(e)
