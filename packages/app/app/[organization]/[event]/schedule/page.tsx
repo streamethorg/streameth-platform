@@ -1,15 +1,17 @@
 import SchedulePageComponent from './components/ScheduleComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
-import { fetchEvent, fetchEventStages } from '@/lib/data'
+import { fetchEvent } from '@/lib/data'
 import { EventPageProps } from '@/lib/types'
+import { archiveMetadata, generalMetadata } from '@/lib/metadata'
 
+import { fetchEventStages } from '@/lib/data-back'
 export default async function SchedulePage({
   params,
   searchParams,
 }: EventPageProps) {
   const event = await fetchEvent({
-    event: params.event,
+    eventSlug: params.event,
   })
 
   const stages = await fetchEventStages({
@@ -32,16 +34,16 @@ export async function generateMetadata(
   { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const event = await fetchEvent({
-    event: params.event,
+  const { event } = params
+  const eventInfo = await fetchEvent({
+    eventSlug: event,
   })
-  const imageUrl = event.eventCover
 
-  return {
-    title: `${event.name} - Home`,
-    description: `Attend ${event.name} virtually powered by Streameth here`,
-    openGraph: {
-      images: [imageUrl!],
-    },
+  if (!eventInfo) {
+    return generalMetadata
   }
+
+  return archiveMetadata({
+    event: eventInfo,
+  })
 }

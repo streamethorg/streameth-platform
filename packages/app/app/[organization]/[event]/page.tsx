@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import SpeakerComponent from './speakers/components/SpeakerComponent'
 import ScheduleComponent from './schedule/components/ScheduleComponent'
@@ -5,8 +6,8 @@ import Image from 'next/image'
 import { getEventPeriod } from '@/lib/utils/time'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { fetchEventStages, fetchEvents } from '@/lib/data'
-import { getImageUrl } from '@/lib/utils/utils'
+import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
+import { EventPageProps } from '@/lib/types'
 import { ResolvingMetadata, Metadata } from 'next'
 import {
   Card,
@@ -18,8 +19,6 @@ import {
 
 import StagePreview from './stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Suspense } from 'react'
-import { fetchEvent } from '@/lib/data'
 
 export async function generateStaticParams() {
   const allEvents = await fetchEvents({})
@@ -30,30 +29,20 @@ export async function generateStaticParams() {
   return paths
 }
 
-interface Params {
-  params: {
-    event: string
-    organization: string
-  }
-  searchParams: {
-    stage?: string
-    date?: string
-  }
-}
-
 export default async function EventHome({
   params,
   searchParams,
-}: Params) {
+}: EventPageProps) {
+  console.log('params', params.event)
   const event = await fetchEvent({
-    event: params.event,
-  })
-
-  const stages = await fetchEventStages({
-    event: params.event,
+    eventSlug: params.event,
   })
 
   if (!event) return notFound()
+
+  const stages = await fetchEventStages({
+    eventId: event.id,
+  })
 
   return (
     <div className="flex flex-col w-full h-full bg-accent px-2">
@@ -116,9 +105,9 @@ export default async function EventHome({
             <CardContent className="grid lg:grid-cols-2 gap-4">
               {stages?.map((stage) => (
                 <StagePreview
-                  key={stage._id}
-                  event={event._id}
-                  organization={params.organization}
+                  key={stage.id}
+                  event={event.id}
+                  organization={params.organizationSlug}
                   stage={stage}
                 />
               ))}
@@ -142,12 +131,12 @@ export default async function EventHome({
 }
 
 export async function generateMetadata(
-  { params }: Params,
+  { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { organization, event } = params
+  const { eventSlug } = params
   const eventInfo = await fetchEvent({
-    event,
+    eventSlug,
   })
 
   if (!eventInfo) {

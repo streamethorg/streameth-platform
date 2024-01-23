@@ -1,8 +1,6 @@
 'use client'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
-
 import makeBlockie from 'ethereum-blockies-base64'
-
 import { Badge } from '@/components/ui/badge'
 import {
   Avatar,

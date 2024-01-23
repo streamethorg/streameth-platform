@@ -52,27 +52,40 @@ export async function fetchOrganizations(): Promise<
 
 export async function fetchEvents({
   organizationId,
+  organizationSlug,
   date,
 }: {
   organizationId?: string
+  organizationSlug?: string
   date?: Date
 }): Promise<IEventModel[]> {
   try {
-    const response = await fetch(`${apiUrl()}/events`)
-    const data: IEventModel[] = (await response.json()).data ?? []
+    let data: IEventModel[] = []
 
-    if (organizationId) {
-      return data.filter(
-        (event) => event.organizationId === organizationId
+    if (organizationId || organizationSlug) {
+      console.log('fetching events for organization')
+      const organization = await fetchOrganization({
+        organizationId,
+        organizationSlug,
+      })
+      if (!organization) {
+        return []
+      }
+      const response = await fetch(
+        `${apiUrl()}/events/organization/${organization._id}`
       )
+      data = (await response.json()).data ?? []
+    } else {
+      const response = await fetch(`${apiUrl()}/events`)
+      data = (await response.json()).data ?? []
     }
 
     if (date) {
-      return data.filter((event) => {
-        const startDate = new Date(event.start)
-        const endDate = new Date(event.end)
-        return startDate < date && endDate > date
-      })
+      data = data.filter(
+        (event) =>
+          new Date(event.start).getTime() <= date.getTime() &&
+          new Date(event.end).getTime() >= date.getTime()
+      )
     }
 
     return data
@@ -83,15 +96,19 @@ export async function fetchEvents({
 }
 
 export async function fetchEvent({
-  event,
+  eventId,
+  eventSlug,
+  organization,
 }: {
-  event: string
+  eventId?: string
+  eventSlug?: string
+  organization?: string
 }): Promise<IEventModel> {
   try {
-    const response = await fetch(`${apiUrl()}/events/${event}`)
-    const data = (await response.json()).data
-
-    return data
+    const data = await fetch(
+      `${apiUrl()}/events/${eventId ?? eventSlug}`
+    )
+    return (await data.json()).data
   } catch (e) {
     console.log(e)
     throw 'Error fetching event'
@@ -99,7 +116,7 @@ export async function fetchEvent({
 }
 
 export async function fetchEventStages({
-  event,
+  eventId,
 }: {
   event: string
 }): Promise<IStageModel[]> {

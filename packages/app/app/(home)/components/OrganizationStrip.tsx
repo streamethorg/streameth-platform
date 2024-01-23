@@ -1,15 +1,14 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import VideoGrid from '@/components/misc/Videos'
 import { CardTitle } from '@/components/ui/card'
-
-import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
 import { fetchAllSessions } from '@/lib/data'
-
+import Image from 'next/image'
+import VideoGrid from '@/components/misc/Videos'
+import Link from 'next/link'
+import { archivePath } from '@/lib/utils/path'
+import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 export default async function OrganizationStrip({
   organization,
 }: {
-  organization: IOrganization
+  organization: IOrganizationModel
 }) {
   const videos = (
     await fetchAllSessions({
@@ -32,7 +31,7 @@ export default async function OrganizationStrip({
           width={34}
         />
 
-        <Link href={'/archive?organization=' + organization?.slug}>
+        <Link href={archivePath({ organization: organization.slug })}>
           <CardTitle className="text-background text-2xl ml-2 mr-auto hover:underline">
             {organization.name} {' >'}
           </CardTitle>
