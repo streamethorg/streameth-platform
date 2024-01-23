@@ -2,6 +2,7 @@ import { createSummary, createTranscription } from "./ai";
 import { getAssetInfo } from "../../../av-tools/src/utils/livepeer";
 import { downloadM3U8ToMP3 } from "../../../av-tools/src/utils/ffmpeg";
 import S3Client from "../../../server/services/s3/index.ts";
+import SessionService from "../../../new-server/src/services/session.service";
 import * as fs from "fs";
 
 const BUCKET_NAME = "streamethapp";
@@ -85,6 +86,11 @@ async function startCreatingSummary(assetId: string, overwriteFiles = false) {
     TMP_SUMMARY_PATH,
     `summary-${assetInfo.id}.txt`
   );
+
+  const sessionService = new SessionService();
+  await sessionService.update("65a9ef91973b4408412261a6", {
+    aiDescription: "hello world",
+  });
 
   // TODO: Add labels
 

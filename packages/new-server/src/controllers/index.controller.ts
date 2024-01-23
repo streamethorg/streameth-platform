@@ -1,10 +1,17 @@
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import { Controller, Get, Route, Tags } from 'tsoa';
+import { Controller, Get, Route, Tags, Body, Post } from 'tsoa';
+import startCreatingSummary from '../../../tools/ai/src/main';
+
 @Tags('Index')
 @Route('')
 export class IndexController extends Controller {
   @Get()
   async index(): Promise<IStandardResponse<string>> {
+    return SendApiResponse('OK');
+  }
+  @Post('/webhook')
+  async webhook(@Body() payload: any): Promise<IStandardResponse<string>> {
+    startCreatingSummary(payload.payload.id);
     return SendApiResponse('OK');
   }
 }
