@@ -9,6 +9,8 @@ export const getDateAsString = (date: Date) =>
   new Date(date).toISOString().split('T')[0]
 
 export const getEventDays = (start: Date, end: Date): number[] => {
+  start = new Date(start)
+  end = new Date(end)
   // Calculate the difference in days between the two dates
   const days =
     Math.floor(

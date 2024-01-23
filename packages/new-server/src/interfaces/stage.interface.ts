@@ -1,18 +1,20 @@
 import { Document, Types } from 'mongoose';
 
 export interface IStreamSettings {
-  streamId: string;
+  streamId?: string;
 }
 
 export interface IPlugin {
   name: string;
 }
 
-export class IStage extends Document {
+export class IStage {
   name: string;
-  eventId: Types.ObjectId;
+  eventId: Types.ObjectId | string;
   streamSettings: IStreamSettings;
   plugins?: IPlugin[];
   order?: number;
-  slug: string;
+  slug?: string;
 }
+
+export interface IStageModel extends IStage, Document {}

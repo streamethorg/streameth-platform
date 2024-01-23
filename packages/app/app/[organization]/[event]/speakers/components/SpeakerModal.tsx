@@ -1,8 +1,8 @@
 import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
 
-import { ISpeaker } from 'streameth-server/model/speaker'
-import { ISession } from 'streameth-server/model/session'
-import { IEvent } from 'streameth-server/model/event'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 
 import {
   CredenzaContent,
@@ -15,9 +15,9 @@ import {
 import Link from 'next/link'
 
 interface Params {
-  event: IEvent
-  speaker: ISpeaker
-  sessions?: ISession[]
+  event: IEventModel
+  speaker: ISpeakerModel
+  sessions?: ISessionModel[]
 }
 
 const SpeakerModal = ({ speaker }: Params) => {

@@ -18,7 +18,6 @@ const Layout = async ({
   })
   const event = await fetchEvent({
     event: params.event,
-    organization: params.organization,
   })
   return (
     <div className="h-full flex flex-col  z-1 min-h-screen ">

@@ -18,31 +18,34 @@ import {
 export default async function Stage({ params }: EventPageProps) {
   const event = await fetchEvent({
     event: params.event,
-    organization: params.organization,
   })
 
-  const sessions = await fetchEventSessions({
+  const sessionsData = await fetchEventSessions({
     event: params.event,
     stage: params.stage,
     date: new Date(),
   })
 
   const stage = await fetchEventStage({
-    event: params.event,
     stage: params.stage,
   })
 
   const tabs = []
-  if (sessions.length > 0 && !event?.plugins?.hideSchedule) {
+  if (
+    sessionsData.sessions.length > 0 &&
+    !event?.plugins?.hideSchedule
+  ) {
     tabs.push({
       value: 'schedule',
-      content: <SessionList event={event} sessions={sessions} />,
+      content: (
+        <SessionList event={event} sessions={sessionsData.sessions} />
+      ),
     })
   }
   if (!event?.plugins?.disableChat) {
     tabs.push({
       value: 'chat',
-      content: <Chat conversationId={stage.id} />,
+      content: <Chat conversationId={stage._id} />,
     })
   }
 
@@ -50,14 +53,14 @@ export default async function Stage({ params }: EventPageProps) {
     <div className="bg-accent   p-2 h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
       <div className="flex flex-col w-full h-full z-40 lg:w-[70%] top-[54px] lg:p-4 lg:pr-2">
         <Player
-          streamId={stage.streamSettings.streamId}
+          streamId={stage.streamSettings?.streamId}
           playerName={stage.name}
         />
         <SessionInfoBox
           title={'Watching: ' + stage.name + ' stage'}
           cardDescription={event.name}
           playerName={stage.name}
-          streamId={stage.streamSettings.streamId}
+          streamId={stage.streamSettings?.streamId}
           description={event.description}
         />
       </div>

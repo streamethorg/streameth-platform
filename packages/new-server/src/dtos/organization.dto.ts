@@ -1,6 +1,7 @@
+import { IOrganization } from '@interfaces/organization.interface';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class CreateOrganizationDto {
+export class OrganizationDto implements IOrganization {
   @IsNotEmpty()
   @IsString()
   name!: string;

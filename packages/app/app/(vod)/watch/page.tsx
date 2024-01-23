@@ -1,7 +1,6 @@
 import Player from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { WatchPageProps } from '@/lib/types'
-import { fetchEventSession } from '@/lib/data'
 import {
   Tabs,
   TabsContent,
@@ -11,17 +10,19 @@ import {
 import RelatedVideos from './components/RelatedVideos'
 import ColorComponent from '@/components/Layout/ColorComponent'
 import { Metadata } from 'next'
+import { apiUrl, getImageUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import { generalMetadata, watchMetadata } from '@/lib/metadata'
+
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
-  if (!searchParams.event || !searchParams.session) return notFound()
-
-  const video = await fetchEventSession({
-    event: searchParams.event,
-    session: searchParams.session,
-  })
+  if (!searchParams.session) return notFound()
+  const response = await fetch(
+    `${apiUrl()}/sessions/${searchParams.session}`
+  )
+  const data = await response.json()
+  const video = data.data
 
   if (!video) return notFound()
 
@@ -77,12 +78,14 @@ export default async function Watch({
 export async function generateMetadata({
   searchParams,
 }: WatchPageProps): Promise<Metadata> {
-  if (!searchParams.event || !searchParams.session)
-    return generalMetadata
-  const video = await fetchEventSession({
-    event: searchParams.event,
-    session: searchParams.session,
-  })
+  const response = await fetch(
+    `${apiUrl()}/sessions/${searchParams.session}`
+  )
+  const responseData = await response.json()
+  const video = responseData.data
+
+  if (!searchParams.session) return generalMetadata
+
   if (!video) return generalMetadata
   return watchMetadata({ session: video })
 }

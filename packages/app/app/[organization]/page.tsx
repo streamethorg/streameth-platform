@@ -15,11 +15,9 @@ export default async function OrganizationHome({ params }: Params) {
   if (!params.organization) {
     return notFound()
   }
-
   const organization = await fetchOrganization({
-    organization: params.organization,
+    organizationSlug: params.organization,
   })
-
   if (!organization) {
     return notFound()
   }
@@ -77,7 +75,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const organizationInfo = await fetchOrganization({
-    organization: params.organization,
+    organizationSlug: params.organization,
   })
 
   if (!organizationInfo) {

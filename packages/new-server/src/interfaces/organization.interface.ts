@@ -1,10 +1,11 @@
 import { Document } from 'mongoose';
-export interface IOrganization extends Document {
+export interface IOrganization {
   name: string;
   description: string;
   url: string;
   logo: string;
   location: string;
-  accentColor: string;
-  slug: string;
+  accentColor?: string;
+  slug?: string;
 }
+export interface IOrganizationModel extends IOrganization, Document {}

@@ -1,75 +1,68 @@
+import { OrganizationDto } from '@dtos/organization.dto';
+import { IOrganization } from '@interfaces/organization.interface';
 import OrganizationService from '@services/organization.service';
-import { SendApiResponse } from '@utils/api.response';
-import { Request, Response, NextFunction } from 'express';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Path,
+  Post,
+  Put,
+  Route,
+  SuccessResponse,
+  Tags,
+} from 'tsoa';
 
-export default class OrganizationController {
+@Tags('Organization')
+@Route('organizations')
+export class OrganizationController extends Controller {
   private organizationService = new OrganizationService();
 
-  createOrganization = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const org = await this.organizationService.create(req.body);
-      return SendApiResponse(res, 201, 'organization created', org);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('201')
+  @Post()
+  async createOrganization(
+    @Body() body: OrganizationDto,
+  ): Promise<IStandardResponse<IOrganization>> {
+    const org = await this.organizationService.create(body);
+    return SendApiResponse('organization created', org);
+  }
 
-  editOrganization = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const org = await this.organizationService.update(
-        req.params.id,
-        req.body,
-      );
-      return SendApiResponse(res, 200, 'organization updated', org);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Put('{organizationId}')
+  async editOrganization(
+    @Path() organizationId: string,
+    @Body() body: OrganizationDto,
+  ): Promise<IStandardResponse<IOrganization>> {
+    const org = await this.organizationService.update(organizationId, body);
+    return SendApiResponse('event updated', org);
+  }
 
-  getOrganizationById = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const org = await this.organizationService.get(req.params.id);
-      return SendApiResponse(res, 200, 'organization fetched', org);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get('{organizationId}')
+  async getOrganizationById(
+    @Path() organizationId: string,
+  ): Promise<IStandardResponse<IOrganization>> {
+    const org = await this.organizationService.get(organizationId);
+    return SendApiResponse('organization fetched', org);
+  }
 
-  getAllOrganizations = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const orgs = await this.organizationService.getAll();
-      return SendApiResponse(res, 200, 'organizations fetched', orgs);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get()
+  async getAllOrganizations(): Promise<
+    IStandardResponse<Array<IOrganization>>
+  > {
+    const orgs = await this.organizationService.getAll();
+    return SendApiResponse('organizations fetched', orgs);
+  }
 
-  deleteOrganization = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const org = await this.organizationService.deleteOne(req.params.id);
-      return SendApiResponse(res, 200, 'deleted', org);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Delete('{organizationId}')
+  async deleteOrganization(
+    @Path() organizationId: string,
+  ): Promise<IStandardResponse<void>> {
+    await this.organizationService.deleteOne(organizationId);
+    return SendApiResponse('deleted');
+  }
 }

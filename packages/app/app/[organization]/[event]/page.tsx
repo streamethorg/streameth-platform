@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { getEventPeriod } from '@/lib/utils/time'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
+import { fetchEventStages, fetchEvents } from '@/lib/data'
 import { getImageUrl } from '@/lib/utils/utils'
 import { ResolvingMetadata, Metadata } from 'next'
 import {
@@ -19,12 +19,13 @@ import {
 import StagePreview from './stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Suspense } from 'react'
+import { fetchEvent } from '@/lib/data'
 
 export async function generateStaticParams() {
   const allEvents = await fetchEvents({})
   const paths = allEvents.map((event) => ({
     organization: event.organizationId,
-    event: event.id,
+    event: event._id,
   }))
   return paths
 }
@@ -46,7 +47,6 @@ export default async function EventHome({
 }: Params) {
   const event = await fetchEvent({
     event: params.event,
-    organization: params.organization,
   })
 
   const stages = await fetchEventStages({
@@ -62,7 +62,7 @@ export default async function EventHome({
           <AspectRatio ratio={3 / 1}>
             <Image
               className="rounded-lg max-h-[500px] p-2"
-              src={getImageUrl('/events/' + event.banner)}
+              src={event.banner}
               alt="Event Cover"
               width={1500}
               height={500}
@@ -114,10 +114,10 @@ export default async function EventHome({
               </CardTitle>
             </CardHeader>
             <CardContent className="grid lg:grid-cols-2 gap-4">
-              {stages.map((stage) => (
+              {stages?.map((stage) => (
                 <StagePreview
-                  key={stage.id}
-                  event={event.id}
+                  key={stage._id}
+                  event={event._id}
                   organization={params.organization}
                   stage={stage}
                 />
@@ -148,7 +148,6 @@ export async function generateMetadata(
   const { organization, event } = params
   const eventInfo = await fetchEvent({
     event,
-    organization,
   })
 
   if (!eventInfo) {
@@ -165,14 +164,14 @@ export async function generateMetadata(
       openGraph: {
         title: eventInfo.name,
         description: eventInfo.description,
-        images: [getImageUrl(`/events/${imageUrl!}`)],
+        images: [imageUrl!],
       },
       twitter: {
         card: 'summary_large_image',
         title: eventInfo.name,
         description: eventInfo.description,
         images: {
-          url: getImageUrl(`/events/${imageUrl!}`),
+          url: imageUrl!,
           alt: eventInfo.name + ' Logo',
         },
       },

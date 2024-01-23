@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect } from 'react'
 import Scroll, { Element } from 'react-scroll'
-import { ISession } from 'streameth-server/model/session'
-import { IEvent } from 'streameth-server/model/event'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
 interface Props {
-  event: IEvent
-  sessions: ISession[]
-  currentSession?: ISession
+  event: IEventModel
+  sessions: ISessionModel[]
+  currentSession?: ISessionModel
 }
 
 const scroll = Scroll.scroller

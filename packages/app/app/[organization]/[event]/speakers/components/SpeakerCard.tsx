@@ -1,8 +1,8 @@
 import SpeakerModal from './SpeakerModal'
 import SpeakerPhoto from './SpeakerPhoto'
-import { ISpeaker } from 'streameth-server/model/speaker'
-import { ISession } from 'streameth-server/model/session'
-import { IEvent } from 'streameth-server/model/event'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 
 import {
   Card,
@@ -18,11 +18,11 @@ const SpeakerCard = ({
   speaker,
   sessions,
 }: {
-  event: IEvent
-  speaker: ISpeaker
-  sessions: ISession[]
+  event: IEventModel
+  speaker: ISpeakerModel
+  sessions: ISessionModel[]
 }) => {
-  const speakerSessions = sessions.filter((session) =>
+  const speakerSessions = sessions?.filter((session) =>
     session.speakers.some(
       (sessionSpeaker) => sessionSpeaker.id === speaker.id
     )

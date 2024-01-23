@@ -1,12 +1,12 @@
-import { ISession } from '@interfaces/session.interface';
+import { ISessionModel } from '@interfaces/session.interface';
 import { Schema, model } from 'mongoose';
 
-const SessionSchema = new Schema<ISession>(
+const SessionSchema = new Schema<ISessionModel>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
     description: { type: String, default: '', required: true },
-    start: { type: Number, default: 0 },
-    end: { type: Number, default: 0 },
+    start: { type: Number },
+    end: { type: Number },
     stageId: { type: Schema.Types.ObjectId, ref: 'Stage' },
     speakers: [
       {
@@ -34,15 +34,18 @@ const SessionSchema = new Schema<ISession>(
     },
     videoUrl: { type: String, default: '' },
     playbackId: { type: String, default: '' },
+    assetId: { type: String, default: '' },
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
     track: [{ type: String }],
     coverImage: { type: String, default: '' },
     slug: { type: String, default: '' },
+    organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
+    eventSlug: { type: String, default: '' },
   },
   {
     timestamps: true,
   },
 );
 
-const Session = model<ISession>('Session', SessionSchema);
+const Session = model<ISessionModel>('Session', SessionSchema);
 export default Session;

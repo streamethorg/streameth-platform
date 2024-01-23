@@ -1,8 +1,6 @@
 import SchedulePageComponent from './components/ScheduleComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
-import EventController from 'streameth-server/controller/event'
-import { getImageUrl } from '@/lib/utils/utils'
 import { fetchEvent, fetchEventStages } from '@/lib/data'
 import { EventPageProps } from '@/lib/types'
 
@@ -12,7 +10,6 @@ export default async function SchedulePage({
 }: EventPageProps) {
   const event = await fetchEvent({
     event: params.event,
-    organization: params.organization,
   })
 
   const stages = await fetchEventStages({
@@ -35,19 +32,16 @@ export async function generateMetadata(
   { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const eventController = new EventController()
-  const event = await eventController.getEvent(
-    params.event,
-    params.organization
-  )
-
-  const imageUrl = getImageUrl('/events/' + event.eventCover)
+  const event = await fetchEvent({
+    event: params.event,
+  })
+  const imageUrl = event.eventCover
 
   return {
     title: `${event.name} - Home`,
     description: `Attend ${event.name} virtually powered by Streameth here`,
     openGraph: {
-      images: [imageUrl],
+      images: [imageUrl!],
     },
   }
 }

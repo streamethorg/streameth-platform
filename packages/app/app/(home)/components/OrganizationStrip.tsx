@@ -1,9 +1,10 @@
-import { CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
-import VideoGrid from '../../../components/misc/Videos'
-import { fetchAllSessions } from '@/lib/data'
 import Link from 'next/link'
-import { IOrganization } from 'streameth-server/model/organization'
+import VideoGrid from '@/components/misc/Videos'
+import { CardTitle } from '@/components/ui/card'
+
+import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
+import { fetchAllSessions } from '@/lib/data'
 
 export default async function OrganizationStrip({
   organization,
@@ -12,14 +13,15 @@ export default async function OrganizationStrip({
 }) {
   const videos = (
     await fetchAllSessions({
-      organization: organization.id,
+      organizationSlug: organization.slug,
       onlyVideos: true,
       limit: 4,
     })
   ).sessions
+
   if (videos.length === 0) return false
   return (
-    <div key="organization.id" className="bg-white flex flex-col">
+    <div key={organization.slug} className="bg-white flex flex-col">
       <div className="flex flex-row my-2">
         <Image
           className="rounded"
@@ -30,7 +32,7 @@ export default async function OrganizationStrip({
           width={34}
         />
 
-        <Link href={'/archive?organization=' + organization.id}>
+        <Link href={'/archive?organization=' + organization?.slug}>
           <CardTitle className="text-background text-2xl ml-2 mr-auto hover:underline">
             {organization.name} {' >'}
           </CardTitle>
@@ -41,4 +43,7 @@ export default async function OrganizationStrip({
       </div>
     </div>
   )
+}
+
+{
 }

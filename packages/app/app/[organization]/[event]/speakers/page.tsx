@@ -14,7 +14,6 @@ interface Params {
 const SpeakerPage = async ({ params }: Params) => {
   const event = await fetchEvent({
     event: params.event,
-    organization: params.organization,
   })
 
   if (!event) return notFound()

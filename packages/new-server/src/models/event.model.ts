@@ -1,7 +1,7 @@
-import { IEvent, IPlugins } from '@interfaces/event.interface';
+import { IEventModel } from '@interfaces/event.interface';
 import { Schema, model } from 'mongoose';
 
-const EventSchema = new Schema<IEvent>(
+const EventSchema = new Schema<IEventModel>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
     description: { type: String, default: '', required: true },
@@ -44,5 +44,5 @@ const EventSchema = new Schema<IEvent>(
   },
 );
 
-const Event = model<IEvent>('Event', EventSchema);
+const Event = model<IEventModel>('Event', EventSchema);
 export default Event;

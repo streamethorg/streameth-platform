@@ -43,9 +43,7 @@ export const archiveMetadata = ({
 }: {
   event: IEvent
 }): Metadata => {
-  const imageUrl = event.eventCover
-    ? getImageUrl(event.eventCover)
-    : BASE_IMAGE
+  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
 
   return {
     title: `${event.name} | StreamETH`,
@@ -84,7 +82,7 @@ export const watchMetadata = ({
   session: ISession
 }): Metadata => {
   const imageUrl = session.coverImage
-    ? getImageUrl(session.coverImage)
+    ? session.coverImage
     : BASE_IMAGE
 
   return {

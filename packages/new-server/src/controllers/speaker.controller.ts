@@ -1,40 +1,47 @@
+import { SpeakerDto } from '@dtos/speaker.dto';
+import { ISpeaker } from '@interfaces/speaker.interface';
 import SpeakerService from '@services/speaker.service';
-import { SendApiResponse } from '@utils/api.response';
-import { Response, Request, NextFunction } from 'express';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Route,
+  SuccessResponse,
+  Tags,
+} from 'tsoa';
 
-export default class SpeakerController {
+@Tags('Speaker')
+@Route('speakers')
+export class SpeakerController extends Controller {
   private speakerService = new SpeakerService();
 
-  createSpeaker = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const createSpeaker = await this.speakerService.create(req.body);
-      return SendApiResponse(res, 201, 'speaker created', createSpeaker);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('201')
+  @Post()
+  async createSpeaker(
+    @Body() body: SpeakerDto,
+  ): Promise<IStandardResponse<ISpeaker>> {
+    const createSpeaker = await this.speakerService.create(body);
+    return SendApiResponse('speaker created', createSpeaker);
+  }
 
-  getSpeaker = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const speaker = await this.speakerService.get(req.params.id);
-      return SendApiResponse(res, 200, 'speaker fetched', speaker);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get('{speakerId}')
+  async getSpeaker(
+    @Path() speakerId: string,
+  ): Promise<IStandardResponse<ISpeaker>> {
+    const speaker = await this.speakerService.get(speakerId);
+    return SendApiResponse('speaker fetched', speaker);
+  }
 
-  getAllSpeakersForEvent = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const speakers = await this.speakerService.findAllSpeakersForEvent(
-        req.params.id,
-      );
-      return SendApiResponse(res, 200, 'speakers fetched', speakers);
-    } catch (e) {
-      next(e);
-    }
-  };
+  @SuccessResponse('200')
+  @Get('event/{eventId}')
+  async getAllSpeakersForEvent(
+    eventId: string,
+  ): Promise<IStandardResponse<Array<ISpeaker>>> {
+    const speakers = await this.speakerService.findAllSpeakersForEvent(eventId);
+    return SendApiResponse('speakers fetched', speakers);
+  }
 }

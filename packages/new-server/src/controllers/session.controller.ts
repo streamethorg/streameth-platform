@@ -1,43 +1,98 @@
+import { SessionDto } from '@dtos/session.dto';
+import { ISession } from '@interfaces/session.interface';
 import SessionServcie from '@services/session.service';
-import { SendApiResponse } from '@utils/api.response';
-import { Request, Response, NextFunction } from 'express';
-
-export default class SessionController {
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Put,
+  Query,
+  Route,
+  SuccessResponse,
+  Tags,
+} from 'tsoa';
+@Tags('Session')
+@Route('sessions')
+export class SessionController extends Controller {
   private sessionService = new SessionServcie();
 
-  createSession = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const session = await this.sessionService.create(req.body);
-      return SendApiResponse(res, 201, 'session created', session);
-    } catch (e) {
-      next(e);
-    }
-  };
+  /**
+   *
+   * @Summary Create session
+   */
+  @SuccessResponse('201')
+  @Post()
+  async createSession(
+    @Body() body: SessionDto,
+  ): Promise<IStandardResponse<ISession>> {
+    console.log(body);
+    const session = await this.sessionService.create(body);
+    return SendApiResponse('session created', session);
+  }
 
-  editSession = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const session = await this.sessionService.update(req.params.id, req.body);
-      return SendApiResponse(res, 200, 'session updated', session);
-    } catch (e) {
-      next(e);
-    }
-  };
+  /**
+   *
+   * @Summary Update session
+   */
+  @SuccessResponse('200')
+  @Put('{sessionId}')
+  async editSession(
+    @Path() sessionId: string,
+    @Body() body: SessionDto,
+  ): Promise<IStandardResponse<ISession>> {
+    const session = await this.sessionService.update(sessionId, body);
+    return SendApiResponse('session updated', session);
+  }
 
-  getSessionById = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const session = await this.sessionService.get(req.params.id);
-      return SendApiResponse(res, 200, 'session fetched', session);
-    } catch (e) {
-      next(e);
-    }
-  };
+  /**
+   *
+   * @Summary Fetch session by id
+   */
+  @SuccessResponse('200')
+  @Get('{sessionId}')
+  async getSessionById(
+    @Path() sessionId: string,
+  ): Promise<IStandardResponse<ISession>> {
+    const session = await this.sessionService.get(sessionId);
+    return SendApiResponse('session fetched', session);
+  }
 
-  getAllSessions = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const sessions = await this.sessionService.getAll();
-      return SendApiResponse(res, 200, 'sessions fetched', sessions);
-    } catch (e) {
-      next(e);
-    }
-  };
+  /**
+   *
+   * @Summary Get all sessions
+   */
+  @SuccessResponse('200')
+  @Get()
+  async getAllSessions(
+    @Query() event?: string,
+    @Query() organization?: string,
+    @Query() speaker?: string,
+    @Query() stageId?: string,
+    @Query() onlyVideos?: boolean,
+    @Query() page?: number,
+    @Query() size?: number,
+    @Query() timestamp?: number,
+  ): Promise<
+    IStandardResponse<{
+      sessions: Array<ISession>;
+      totalDocuments: number;
+      pageable: { page: number; size: number };
+    }>
+  > {
+    const queryParams = {
+      event: event,
+      organization: organization,
+      speaker: speaker,
+      stageId: stageId,
+      onlyVideos: onlyVideos,
+      page: page,
+      size: size,
+      timestamp: timestamp,
+    };
+    const sessions = await this.sessionService.getAll(queryParams);
+    return SendApiResponse('sessions fetched', sessions);
+  }
 }

@@ -5,10 +5,11 @@ export interface GSheetConfig {
   apiKey?: string;
   driveId?: string;
   driveApiKey?: string;
+  url?: string;
 }
 export interface PretalxConfig {
   url: string;
-  apiToken: string;
+  apiToken?: string;
 }
 
 export type IDataImporter =
@@ -18,16 +19,17 @@ export type IDataExporter = { type: 'gdrive'; config: GSheetConfig };
 
 export interface IPlugins {
   disableChat: boolean;
+  hideSchedule?: boolean;
 }
 
-export interface IEvent extends Document {
+export interface IEvent {
   name: string;
   description: string;
   start: Date;
   end: Date;
   location: string;
-  logo?: string;
-  banner?: string;
+  logo: string;
+  banner: string;
   startTime?: string;
   endTime?: string;
   organizationId: Types.ObjectId | string;
@@ -41,5 +43,6 @@ export interface IEvent extends Document {
   dataExporter?: IDataExporter[];
   enableVideoDownloader?: boolean;
   plugins?: IPlugins;
-  slug: string;
+  slug?: string;
 }
+export interface IEventModel extends IEvent, Document {}

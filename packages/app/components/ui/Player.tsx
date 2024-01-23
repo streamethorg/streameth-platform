@@ -49,7 +49,7 @@ export const Player = ({
 }: {
   playbackId?: string
   streamId?: string
-  playerName: string
+  playerName?: string
   coverImage?: string
   muted?: boolean
   assetId?: string

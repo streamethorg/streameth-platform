@@ -1,4 +1,3 @@
-import { fetchAllSessions, fetchEvent } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { SearchPageProps } from '@/lib/types'
 import UpcomingEvents from '@/app/(home)/components/UpcomingEvents'
@@ -9,14 +8,16 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
+import { apiUrl } from '@/lib/utils/utils'
 import { generalMetadata, archiveMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
+import { fetchAllSessions } from '@/lib/data'
 
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
   const videos = await fetchAllSessions({
-    organization: searchParams.organization,
+    organizationSlug: searchParams.organization,
     event: searchParams.event,
     limit: 12,
     onlyVideos: true,
@@ -51,10 +52,11 @@ export async function generateMetadata({
   searchParams,
 }: SearchPageProps): Promise<Metadata> {
   if (!searchParams.event) return generalMetadata
-  const event = await fetchEvent({
-    event: searchParams.event,
-    organization: searchParams.organization,
-  })
+  const response = await fetch(
+    `${apiUrl()}/events/?${searchParams.event}`
+  )
+  const responseData = await response.json()
+  const event = responseData.data
   if (!event) return generalMetadata
   return archiveMetadata({ event })
 }

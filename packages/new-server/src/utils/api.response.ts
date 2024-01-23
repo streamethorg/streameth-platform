@@ -1,13 +1,17 @@
-import { Response } from 'express';
-export const SendApiResponse = (
-  res: Response,
-  statusCode: number,
+export interface IStandardResponse<T> {
+  status: string;
+  message: string;
+  data?: T;
+}
+
+export const SendApiResponse = <T>(
   message: string,
-  data: any,
-) => {
-  res.status(statusCode).json({
-    status: 'success',
+  data?: T,
+  status: string = 'success',
+): IStandardResponse<T> => {
+  return {
+    status,
     message,
     data,
-  });
+  };
 };
