@@ -1,4 +1,4 @@
-import { createSummary, createTranscription } from "./ai";
+import { createLabels, createSummary, createTranscription } from "./ai";
 import { getAssetInfo } from "../../../av-tools/src/utils/livepeer";
 import { downloadM3U8ToMP3 } from "../../../av-tools/src/utils/ffmpeg";
 import S3Client from "../../../server/services/s3/index.ts";
@@ -84,11 +84,12 @@ async function startCreatingSummary(
     `summary-${session.id}.txt`
   );
 
-  // TODO: Add labels
+  const labels = await createLabels(transcriptionFilePath);
 
   await sessionService.update(session.id, {
     videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${session.id}.txt`,
     aiDescription: summary,
+    autoLabels: labels,
   });
 
   if (keepTmp === false) {
