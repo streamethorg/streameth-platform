@@ -1,6 +1,6 @@
 import SpeakerPageComponent from './components/SpeakerComponent'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
-import { fetchEvent } from '@/lib/data-back'
+import { fetchEvent } from '@/lib/data'
 import { notFound } from 'next/navigation'
 
 interface Params {
@@ -14,7 +14,6 @@ interface Params {
 const SpeakerPage = async ({ params }: Params) => {
   const event = await fetchEvent({
     event: params.event,
-    organization: params.organization,
   })
 
   if (!event) return notFound()

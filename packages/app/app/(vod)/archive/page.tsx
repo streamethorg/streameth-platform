@@ -11,32 +11,19 @@ import Pagination from '../components/pagination'
 import { apiUrl } from '@/lib/utils/utils'
 import { generalMetadata, archiveMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
+import { fetchAllSessions } from '@/lib/data'
 
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
-  const response = await fetch(
-    `${apiUrl()}/sessions?organization=${
-      searchParams.organization
-    }&onlyVideos=true&page=${searchParams.page || 1}&size=12`
-  )
-  const data = await response.json()
-  const videos = data.data.sessions ?? []
-
-  //TODO: remove when total session count is returned from the server
-  const responseForCount = await fetch(
-    `${apiUrl()}/sessions?organization=${
-      searchParams.organization
-    }&onlyVideos=true`
-  )
-  const responseForCountData = await responseForCount.json()
-  const totalItems = responseForCountData.data.totalDocuments
-
-  const pagination = {
-    totalPages: Math.ceil(totalItems / 12),
+  const videos = await fetchAllSessions({
+    organizationSlug: searchParams.organization,
+    event: searchParams.event,
     limit: 12,
-    totalItems: totalItems,
-  }
+    onlyVideos: true,
+    searchQuery: searchParams.searchQuery,
+    page: Number(searchParams.page || 1),
+  })
 
   return (
     <div className="bg-white">
@@ -51,10 +38,10 @@ export default async function ArchivePage({
       <Card className="bg-white border-none">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-background">Results</CardTitle>
-          <Pagination {...pagination} />
+          <Pagination {...videos.pagination} />
         </CardHeader>
         <CardContent>
-          <Videos videos={videos} />
+          <Videos videos={videos.sessions} />
         </CardContent>
       </Card>
     </div>

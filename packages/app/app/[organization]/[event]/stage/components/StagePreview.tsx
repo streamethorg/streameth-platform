@@ -5,7 +5,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Player from '@/components/ui/Player'
-import { IStage } from 'streameth-server/model/stage'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import Link from 'next/link'
 
 export default function StagePreview({
@@ -13,7 +13,7 @@ export default function StagePreview({
   organization,
   event,
 }: {
-  stage: IStage
+  stage: IStageModel
   organization: string
   event: string
 }) {
@@ -22,11 +22,11 @@ export default function StagePreview({
   return (
     <Link
       key={stage.id}
-      href={`/${organization}/${event}/stage/${stage.id}`}>
+      href={`/${organization}/${event}/stage/${stage._id}`}>
       <Card className="border-none">
         <Player
           streamId={stage.streamSettings.streamId}
-          playerName={stage.id}
+          playerName={stage?.slug}
           muted={true}
         />
         <CardHeader>

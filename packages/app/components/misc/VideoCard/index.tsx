@@ -3,24 +3,23 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { ISession } from 'streameth-server/model/session'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
-import { apiUrl } from '@/lib/utils/utils'
 import Link from 'next/link'
+import { fetchEvent } from '@/lib/data'
 
 const VideoCard = async ({
   session,
   invertedColors,
 }: {
-  session: ISession
+  session: ISessionModel
   invertedColors?: boolean
 }) => {
-  const response = await fetch(
-    `${apiUrl()}/events/${session.eventId}`
-  )
-  const data = await response.json()
-  const event = data.data ?? []
+  const event = await fetchEvent({
+    event: `${session.eventId}`,
+  })
 
   // Determine the classes based on invertedColors prop
   const headerClass = invertedColors ? 'bg-background text-white' : ''
@@ -32,7 +31,7 @@ const VideoCard = async ({
     <div className="min-h-full w-full rounded-xl text-white uppercase">
       <Link
         href={`/watch?event=${session.eventSlug}&session=${session._id}`}>
-        <Thumbnail session={session} fallBack={event.eventCover} />
+        <Thumbnail session={session} fallBack={event?.eventCover} />
       </Link>
       <CardHeader
         className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none ${headerClass}`}>
@@ -43,7 +42,7 @@ const VideoCard = async ({
             {session.name}
           </CardTitle>
         </Link>
-        <Link href={`/archive?event=${event.id}`}>
+        <Link href={`/archive?event=${event?.slug}`}>
           <div className="flex flex-row items-center justify-start">
             <Image
               className="rounded-md mr-2"
@@ -55,7 +54,7 @@ const VideoCard = async ({
             />
             <CardDescription
               className={`text-xs truncate ${descriptionClass}`}>
-              {event.name}
+              {event?.name}
             </CardDescription>
           </div>
         </Link>

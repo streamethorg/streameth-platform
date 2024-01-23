@@ -19,6 +19,7 @@ export type IDataExporter = { type: 'gdrive'; config: GSheetConfig };
 
 export interface IPlugins {
   disableChat: boolean;
+  hideSchedule?: boolean;
 }
 
 export interface IEvent {
@@ -27,8 +28,8 @@ export interface IEvent {
   start: Date;
   end: Date;
   location: string;
-  logo?: string;
-  banner?: string;
+  logo: string;
+  banner: string;
   startTime?: string;
   endTime?: string;
   organizationId: Types.ObjectId | string;
@@ -36,7 +37,7 @@ export interface IEvent {
   eventCover?: string;
   archiveMode?: boolean;
   website?: string;
-  timezone?: string;
+  timezone: string;
   accentColor?: string;
   unlisted?: boolean;
   dataExporter?: IDataExporter[];

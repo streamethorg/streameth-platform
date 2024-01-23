@@ -2,9 +2,9 @@ import StageSelect from './StageSelect'
 import DateSelect from './DateSelect'
 import SessionList from '@/components/sessions/SessionList'
 
-import { fetchEventSessions } from '@/lib/data-back'
-import { IStage } from 'streameth-server/model/stage'
-import { IEvent } from 'streameth-server/model/event'
+import { fetchEventSessions } from '@/lib/data'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { getEventDays } from '@/lib/utils/time'
 
 import {
@@ -20,19 +20,20 @@ const ScheduleComponent = async ({
   stage,
   date,
 }: {
-  stages: IStage[]
-  event: IEvent
+  stages: IStageModel[]
+  event: IEventModel
   stage?: string
   date?: string
 }) => {
   const dates = getEventDays(event.start, event.end)
 
-  const sessions = await fetchEventSessions({
-    event: event.id,
+  const sessionsData = await fetchEventSessions({
+    event: event.slug,
     stage: stage,
     date: date ? new Date(parseInt(date)) : undefined,
   })
 
+  if (!sessionsData.sessions) return null
   return (
     <Card id="schedule" className="border-none">
       <CardHeader className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
@@ -44,7 +45,10 @@ const ScheduleComponent = async ({
       </CardHeader>
       <CardContent className="p-3 lg:p-6">
         <div className="w-full flex flex-col relative">
-          <SessionList event={event} sessions={sessions} />
+          <SessionList
+            event={event}
+            sessions={sessionsData.sessions}
+          />
         </div>
       </CardContent>
     </Card>

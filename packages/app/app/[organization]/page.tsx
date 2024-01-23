@@ -3,7 +3,7 @@ import remarkGfm from 'remark-gfm'
 import { notFound } from 'next/navigation'
 import Markdown from 'react-markdown'
 import { Metadata, ResolvingMetadata } from 'next'
-import { fetchOrganization } from '@/lib/data-back'
+import { fetchOrganization } from '@/lib/data'
 
 interface Params {
   params: {
@@ -16,7 +16,7 @@ export default async function OrganizationHome({ params }: Params) {
     return notFound()
   }
   const organization = await fetchOrganization({
-    organization: params.organization,
+    organizationSlug: params.organization,
   })
   if (!organization) {
     return notFound()
@@ -75,7 +75,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const organizationInfo = await fetchOrganization({
-    organization: params.organization,
+    organizationSlug: params.organization,
   })
 
   if (!organizationInfo) {

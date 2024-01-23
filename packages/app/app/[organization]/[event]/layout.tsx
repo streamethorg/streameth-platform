@@ -1,6 +1,6 @@
 import ColorComponent from '@/components/Layout/ColorComponent'
 import Navbar from '@/components/Layout/NavbarTop'
-import { fetchNavBarRoutes, fetchEvent } from '@/lib/data-back'
+import { fetchNavBarRoutes, fetchEvent } from '@/lib/data'
 
 const Layout = async ({
   children,
@@ -18,7 +18,6 @@ const Layout = async ({
   })
   const event = await fetchEvent({
     event: params.event,
-    organization: params.organization,
   })
   return (
     <div className="h-full flex flex-col  z-1 min-h-screen ">
