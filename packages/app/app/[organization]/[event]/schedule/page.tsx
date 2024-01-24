@@ -5,7 +5,7 @@ import { fetchEvent } from '@/lib/data'
 import { EventPageProps } from '@/lib/types'
 import { archiveMetadata, generalMetadata } from '@/lib/metadata'
 
-import { fetchEventStages } from '@/lib/data-back'
+import { fetchEventStages } from '@/lib/data'
 export default async function SchedulePage({
   params,
   searchParams,
@@ -15,7 +15,7 @@ export default async function SchedulePage({
   })
 
   const stages = await fetchEventStages({
-    event: params.event,
+    eventId: params.event,
   })
 
   return (

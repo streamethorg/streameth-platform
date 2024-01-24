@@ -13,7 +13,7 @@ interface Params {
 
 const SpeakerPage = async ({ params }: Params) => {
   const event = await fetchEvent({
-    event: params.event,
+    eventId: params.event,
   })
 
   if (!event) return notFound()
