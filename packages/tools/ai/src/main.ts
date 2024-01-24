@@ -78,13 +78,12 @@ async function startCreatingSummary(
   const fileStream = fs.createReadStream(transcriptionFilePath);
   await s3.uploadFile(BUCKET_NAME, digitalOceanPath, fileStream, "text/plain");
 
+  const labels = await createLabels(transcriptionFilePath);
   const summary = await createSummary(
     transcriptionFilePath,
     TMP_SUMMARY_PATH,
     `summary-${session.id}.txt`
   );
-
-  const labels = await createLabels(transcriptionFilePath);
 
   await sessionService.update(session.id, {
     videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${session.id}.txt`,
