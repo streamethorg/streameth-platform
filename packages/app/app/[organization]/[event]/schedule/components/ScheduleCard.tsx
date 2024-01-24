@@ -31,7 +31,6 @@ const ScheduleCard = ({
     new Date(session.start).getTime() < Date.now() &&
     new Date(session.end).getTime() > Date.now()
 
-  console.log('session', session)
   return (
     <Credenza>
       <CredenzaTrigger asChild>

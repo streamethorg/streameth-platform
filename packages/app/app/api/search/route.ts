@@ -6,7 +6,6 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
 
   const events = await fetchEvents({})
-
   const sessions = (
     await fetchAllSessions({
       event: searchParams.get('event') || undefined,
