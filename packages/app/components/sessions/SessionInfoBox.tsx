@@ -35,7 +35,6 @@ const SessionInfoBox = ({
 }) => {
   const [isOpened, setIsOpened] = useState(false)
 
-  console.log(description)
   return (
     <div className="my-2 rounded">
       <div className="flex flex-col justify-center py-4 lg:flex-row">
