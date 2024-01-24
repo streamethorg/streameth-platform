@@ -43,22 +43,24 @@ const VideoCard = async ({
             {session.name}
           </CardTitle>
         </Link>
-        <Link href={archivePath({ event: session.eventSlug })}>
-          <div className="flex flex-row items-center justify-start">
-            <Image
-              className="rounded-md mr-2"
-              alt="logo"
-              quality={80}
-              src={event?.logo}
-              height={24}
-              width={24}
-            />
-            <CardDescription
-              className={`text-xs truncate ${descriptionClass}`}>
-              {event?.name}
-            </CardDescription>
-          </div>
-        </Link>
+        {event && (
+          <Link href={archivePath({ event: session.eventSlug })}>
+            <div className="flex flex-row items-center justify-start">
+              <Image
+                className="rounded-md mr-2"
+                alt="logo"
+                quality={80}
+                src={event.logo}
+                height={24}
+                width={24}
+              />
+              <CardDescription
+                className={`text-xs truncate ${descriptionClass}`}>
+                {event?.name}
+              </CardDescription>
+            </div>
+          </Link>
+        )}
       </CardHeader>
     </div>
   )

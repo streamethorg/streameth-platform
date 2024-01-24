@@ -31,6 +31,7 @@ const ScheduleCard = ({
     new Date(session.start).getTime() < Date.now() &&
     new Date(session.end).getTime() > Date.now()
 
+  console.log('session', session)
   return (
     <Credenza>
       <CredenzaTrigger asChild>
@@ -57,7 +58,7 @@ const ScheduleCard = ({
               <div className="flex py-1 items-center flex-row space-x-2 overflow-x-scroll mt-auto">
                 {session.speakers.map((speaker) => (
                   <Badge
-                    key={speaker._id}
+                    key={speaker.name}
                     variant={'outline'}
                     className="text-white">
                     {speaker.name}

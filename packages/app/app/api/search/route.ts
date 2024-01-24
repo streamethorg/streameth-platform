@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchAllSessions, fetchEvents } from '@/lib/data-back'
+import { fetchAllSessions, fetchEvents } from '@/lib/data'
 import { diceCoefficient } from 'dice-coefficient'
 
 export async function GET(request: NextRequest) {
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const sessions = (
     await fetchAllSessions({
       event: searchParams.get('event') || undefined,
-      organization: searchParams.get('organization') || undefined,
+      organizationSlug: searchParams.get('organization') || undefined,
       searchQuery: searchParams.get('searchQuery') || undefined,
     })
   ).sessions

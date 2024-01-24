@@ -1,5 +1,5 @@
 import { Document, Types } from 'mongoose';
-import { ISpeaker } from './speaker.interface';
+import { ISpeaker, ISpeakerModel } from './speaker.interface';
 
 export interface ISource {
   streamUrl: string;
@@ -21,7 +21,7 @@ export interface ISession {
   start: number;
   end: number;
   stageId: Types.ObjectId | string;
-  speakers: ISpeaker[];
+  speakers: ISpeakerModel[];
   source?: ISource;
   assetId?: string;
   playback?: IPlayback;
