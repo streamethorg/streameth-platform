@@ -14,6 +14,9 @@ export default async function SchedulePage({
     eventSlug: params.event,
   })
 
+  if (!event) {
+    return null
+  }
   const stages = await fetchEventStages({
     eventId: params.event,
   })

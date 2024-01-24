@@ -2,16 +2,9 @@ import SpeakerPageComponent from './components/SpeakerComponent'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import { fetchEvent } from '@/lib/data'
 import { notFound } from 'next/navigation'
+import { EventPageProps } from '@/lib/types'
 
-interface Params {
-  params: {
-    organization: string
-    event: string
-    speaker: string
-  }
-}
-
-const SpeakerPage = async ({ params }: Params) => {
+const SpeakerPage = async ({ params }: EventPageProps) => {
   const event = await fetchEvent({
     eventId: params.event,
   })

@@ -63,7 +63,6 @@ export async function fetchEvents({
     let data: IEventModel[] = []
 
     if (organizationId || organizationSlug) {
-      console.log('fetching events for organization')
       const organization = await fetchOrganization({
         organizationId,
         organizationSlug,
@@ -98,20 +97,31 @@ export async function fetchEvents({
 export async function fetchEvent({
   eventId,
   eventSlug,
-  organization,
 }: {
   eventId?: string
   eventSlug?: string
   organization?: string
-}): Promise<IEventModel> {
+}): Promise<IEventModel | null> {
   try {
+
+    if (!eventId && !eventSlug) {
+      return null
+    }
+
     const data = await fetch(
-      `${apiUrl()}/events/${eventId ?? eventSlug}`
+      `${apiUrl()}/events/${eventId ?? eventSlug}`,
+      {
+        cache: 'no-store',
+      }
     )
+
+    if (!data.ok) {
+      return null
+    }
     return (await data.json()).data
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching event'
+    console.log("error in fetchEvent", e)
+    throw e
   }
 }
 
@@ -299,10 +309,6 @@ export async function fetchNavBarRoutes({
       fetchEventSpeakers({ event }),
       fetchEventStages({ eventId: event }),
     ])
-
-  if (!eventData) {
-    throw 'Event not found'
-  }
 
   const pages = []
 

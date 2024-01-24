@@ -3,7 +3,11 @@ import { notFound } from 'next/navigation'
 import SpeakerComponent from './speakers/components/SpeakerComponent'
 import ScheduleComponent from './schedule/components/ScheduleComponent'
 import Image from 'next/image'
-import { getEventPeriod } from '@/lib/utils/time'
+import {
+  getEventPeriod,
+  extractDate,
+  isSameDate,
+} from '@/lib/utils/time'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
@@ -33,7 +37,6 @@ export default async function EventHome({
   params,
   searchParams,
 }: EventPageProps) {
-  console.log('params', params.event)
   const event = await fetchEvent({
     eventSlug: params.event,
   })
@@ -41,7 +44,7 @@ export default async function EventHome({
   if (!event) return notFound()
 
   const stages = await fetchEventStages({
-    eventId: event.slug,
+    eventId: event._id,
   })
 
   return (
@@ -64,13 +67,12 @@ export default async function EventHome({
             <CardTitle className="text-4xl uppercase">
               {event.name}
             </CardTitle>
-            <CardDescription>
+            <div className="text-sm text-muted-foreground">
               <p>
                 <span className="mr-2">&#128197;</span>
-                {new Date(event.start).toDateString()}
-                {new Date(event?.start).toDateString() !==
-                new Date(event?.end).toDateString()
-                  ? ` - ${new Date(event.end).toDateString()}`
+                {extractDate(event.start)}
+                {!isSameDate(event.start, event.end)
+                  ? ` - ${extractDate(event.end)}`
                   : ''}
               </p>
               <p>
@@ -83,11 +85,12 @@ export default async function EventHome({
                     } ${event.timezone}`
                   : 'TBD'}
               </p>
+
               <p>
                 <span className="mr-2">&#127759;</span>
                 {event.location}
               </p>
-            </CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <Markdown remarkPlugins={[remarkGfm]}>
