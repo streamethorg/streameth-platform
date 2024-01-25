@@ -1,5 +1,5 @@
 'use client'
-import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
+import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import makeBlockie from 'ethereum-blockies-base64'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -16,7 +16,7 @@ export default function SpeakerIcon({
   speaker,
   onlyImage = false,
 }: {
-  speaker: ISpeakerModel
+  speaker: ISpeaker
   onlyImage?: boolean
 }) {
   if (onlyImage) {

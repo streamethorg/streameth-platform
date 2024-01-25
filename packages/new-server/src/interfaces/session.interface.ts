@@ -35,4 +35,4 @@ export interface ISession {
   eventSlug?: string;
 }
 
-export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
+export interface ISessionModel extends ISession, Document {}

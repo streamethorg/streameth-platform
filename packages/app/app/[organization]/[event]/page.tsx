@@ -44,7 +44,7 @@ export default async function EventHome({
   if (!event) return notFound()
 
   const stages = await fetchEventStages({
-    eventId: event._id,
+    eventId: event.slug,
   })
 
   return (
