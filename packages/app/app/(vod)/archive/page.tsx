@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
-import { apiUrl } from '@/lib/utils/utils'
 import { generalMetadata, archiveMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
 import { fetchAllSessions, fetchEvent } from '@/lib/data'
@@ -38,7 +37,7 @@ export default async function ArchivePage({
           }
         />
         <Card className="bg-white border-none">
-          <CardHeader className="flex flex-row items-center justify-between">
+          <CardHeader className="flex flex-row justify-between items-center">
             <CardTitle className="text-background">Results</CardTitle>
 
             <Pagination {...videos.pagination} />
