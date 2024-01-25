@@ -103,7 +103,6 @@ export async function fetchEvent({
   organization?: string
 }): Promise<IEventModel | null> {
   try {
-
     if (!eventId && !eventSlug) {
       return null
     }
@@ -120,7 +119,7 @@ export async function fetchEvent({
     }
     return (await data.json()).data
   } catch (e) {
-    console.log("error in fetchEvent", e)
+    console.log('error in fetchEvent', e)
     throw e
   }
 }
@@ -162,24 +161,28 @@ export async function fetchEventStage({
   }
 }
 interface ApiParams {
-  event?: string;
-  organization?: string;
-  page?: number;
-  size?: number;
-  onlyVideos?: boolean;
-  speakerIds?: string[]; // Assuming speakerIds is an array of strings
-  date?: Date;
+  event?: string
+  organization?: string
+  page?: number
+  size?: number
+  onlyVideos?: boolean
+  speakerIds?: string[] // Assuming speakerIds is an array of strings
+  date?: Date
 }
 
 function constructApiUrl(baseUrl: string, params: ApiParams): string {
   const queryParams = Object.entries(params)
     .filter(([_, value]) => value !== undefined && value !== null)
     .map(([key, value]) => {
-      const formattedValue = Array.isArray(value) ? value.join(',') : value;
-      return `${encodeURIComponent(key)}=${encodeURIComponent(formattedValue)}`;
+      const formattedValue = Array.isArray(value)
+        ? value.join(',')
+        : value
+      return `${encodeURIComponent(key)}=${encodeURIComponent(
+        formattedValue
+      )}`
     })
-    .join('&');
-  return `${baseUrl}?${queryParams}`;
+    .join('&')
+  return `${baseUrl}?${queryParams}`
 }
 
 // samuel
@@ -202,27 +205,29 @@ export async function fetchAllSessions({
   limit?: number
   searchQuery?: string
 }): Promise<{ sessions: ISessionModel[]; pagination: IPagination }> {
-
   const params: ApiParams = {
     event,
     organization: organizationSlug,
     page,
-    size: limit,
+    size: searchQuery ? 0 : limit,
     onlyVideos,
     speakerIds,
-    date
-  };
-  const response = await (fetch(constructApiUrl(`${apiUrl()}/sessions`, params)))
+    date,
+  }
+  const response = await fetch(
+    constructApiUrl(`${apiUrl()}/sessions`, params)
+  )
   const allSessions = (await response.json()).data
-  
 
   if (searchQuery) {
     const normalizedQuery = searchQuery.toLowerCase()
+
     const fuzzySearch = new FuzzySearch(
       allSessions?.sessions,
-      ['event', 'name', 'description', 'speakers.name'],
+      ['name', 'description', 'speakers.name'],
       {
         caseSensitive: false,
+        sort: true,
       }
     )
 
@@ -230,12 +235,22 @@ export async function fetchAllSessions({
   }
 
   // Calculate total items and total pages
-  const totalItems = allSessions.totalDocuments
+  const totalItems = searchQuery
+    ? allSessions.sessions.length
+    : allSessions.totalDocuments
   const totalPages = limit ? Math.ceil(totalItems / limit) : 1
+
+  // Implement manual pagination for fuzzy search
+  const startIndex = (page - 1) * limit!
+  const endIndex = startIndex + limit!
+  const paginatedSessions = allSessions.sessions.slice(
+    startIndex,
+    endIndex
+  )
 
   // Return paginated data and pagination metadata
   return {
-    sessions: allSessions.sessions,
+    sessions: searchQuery ? paginatedSessions : allSessions.sessions,
     pagination: allSessions?.pagination
       ? allSessions.pagination
       : {

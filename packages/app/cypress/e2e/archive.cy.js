@@ -9,11 +9,9 @@ describe('archive page', () => {
   it('search for organization name', () => {
     cy.visit('http://localhost:3000/archive?organization=ethberlin')
     cy.get(
-      '[href="/watch?event=ethberlin_2022&session=65a9ef94973b440841226273"] > .font-semibold'
+      '[href="/watch?event=ethberlin_2022&session=65a9ef93973b44084122620f"] > .font-semibold'
     )
-    cy.get(
-      '[href="http://localhost:3000/ethberlin/protocol_berg"] > .rounded-lg'
-    )
+    cy.get('[href="/archive?event=protocol_berg"] > .rounded-lg')
   })
 
   it('search for query', () => {
@@ -59,7 +57,7 @@ describe('archive page', () => {
     )
   })
 
-  it('can input search query and keep organizaton name', () => {
+  it('can input search query and keep organization name', () => {
     cy.visit(
       'http://localhost:3000/archive?event=funding_the_commons_berlin_2023'
     )
@@ -74,13 +72,14 @@ describe('archive page', () => {
     cy.visit('http://localhost:3000/archive')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '1 of 59'
+      '1 of 67'
     )
+    cy.viewport(1200, 800)
     cy.get(':nth-child(2) > .flex > :nth-child(3)').click()
     cy.url().should('include', 'page=2')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '2 of 59'
+      '2 of 67'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)')
   })

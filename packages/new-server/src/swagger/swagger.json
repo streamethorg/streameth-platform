@@ -164,6 +164,9 @@
 			},
 			"ISpeaker": {
 				"properties": {
+					"_id": {
+						"type": "string"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -228,6 +231,9 @@
 			},
 			"SpeakerDto": {
 				"properties": {
+					"_id": {
+						"type": "string"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -807,6 +813,9 @@
 				"properties": {
 					"disableChat": {
 						"type": "boolean"
+					},
+					"hideSchedule": {
+						"type": "boolean"
 					}
 				},
 				"required": [
@@ -902,7 +911,10 @@
 					"start",
 					"end",
 					"location",
-					"organizationId"
+					"logo",
+					"banner",
+					"organizationId",
+					"timezone"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1006,7 +1018,10 @@
 					"start",
 					"end",
 					"location",
-					"organizationId"
+					"logo",
+					"banner",
+					"organizationId",
+					"timezone"
 				],
 				"type": "object",
 				"additionalProperties": false

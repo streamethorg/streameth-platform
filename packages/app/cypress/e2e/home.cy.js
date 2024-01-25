@@ -8,27 +8,35 @@ describe('example to-do app', () => {
     cy.scrollTo('bottom')
   })
 
-  it("displays list of organizations", () => {
-    cy.get(':nth-child(3) > .my-2 > a > .font-semibold').should('contain', 'ETHBerlin')
+  it('displays list of organizations', () => {
+    cy.get(':nth-child(3) > .my-2 > a > .font-semibold').should(
+      'contain',
+      'ETHBerlin'
+    )
 
     // cy.get(':nth-child(3) > .my-2 > a > .font-semibold').invoke('css', 'width').should('match', /300.*px/)
-    
   })
 
-  it("can search", () => {
+  it('can search', () => {
     cy.get('.flex-grow > .flex-col > .flex').type('jonas')
     cy.get('.flex-grow > .flex-col > .flex').type('{enter}')
-  }) 
-
-  it("can click image", () => {
-    cy.get(':nth-child(2) > .overflow-y-scroll > .max-w-screen > .md\\\:grid > :nth-child(3) > .min-h-full > :nth-child(1) > .aspect-video > .rounded').click()
   })
 
-  it("can click description", () => {
-    cy.get(':nth-child(2) > .min-h-full > .flex-col > [href="/archive?event=ethporto_2023"] > .flex > .text-xs').click()
+  it('can click image', () => {
+    cy.get(
+      ':nth-child(2) > .overflow-y-scroll > .max-w-screen > .lg\\:grid > :nth-child(1) > .min-h-full'
+    ).click()
   })
 
-  it("can click organization name", () => {
+  it('can click description', () => {
+    cy.viewport(1200, 800)
+    cy.get(
+      ':nth-child(2) > .min-h-full > .flex-col > [href="/archive?event=ethporto_2023"] > .flex > .text-xs'
+    ).click()
+  })
+
+  it('can click organization name', () => {
+    cy.viewport(1200, 800)
     cy.get(':nth-child(1) > .my-2 > a > .font-semibold').click()
   })
 })

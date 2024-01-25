@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
       event: searchParams.get('event') || undefined,
       organizationSlug: searchParams.get('organization') || undefined,
       searchQuery: searchParams.get('searchQuery') || undefined,
+      onlyVideos: true,
     })
   ).sessions
 
@@ -47,6 +48,7 @@ export async function GET(request: NextRequest) {
     events: eventResults.map((event) => ({
       id: event.id,
       name: event.name,
+      slug: event.slug,
     })),
   }
 

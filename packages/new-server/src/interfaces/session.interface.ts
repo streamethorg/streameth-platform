@@ -21,7 +21,7 @@ export interface ISession {
   start: number;
   end: number;
   stageId: Types.ObjectId | string;
-  speakers: ISpeakerModel[];
+  speakers: ISpeaker[];
   source?: ISource;
   assetId?: string;
   playback?: IPlayback;
@@ -35,4 +35,4 @@ export interface ISession {
   eventSlug?: string;
 }
 
-export interface ISessionModel extends ISession, Document {}
+export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

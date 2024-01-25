@@ -99,6 +99,7 @@ const models: TsoaRoute.Models = {
     "ISpeaker": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"string"},
             "name": {"dataType":"string","required":true},
             "bio": {"dataType":"string","required":true},
             "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
@@ -125,6 +126,7 @@ const models: TsoaRoute.Models = {
     "SpeakerDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"string"},
             "name": {"dataType":"string","required":true},
             "bio": {"dataType":"string","required":true},
             "eventId": {"dataType":"string","required":true},
@@ -331,6 +333,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "disableChat": {"dataType":"boolean","required":true},
+            "hideSchedule": {"dataType":"boolean"},
         },
         "additionalProperties": false,
     },
@@ -343,8 +346,8 @@ const models: TsoaRoute.Models = {
             "start": {"dataType":"datetime","required":true},
             "end": {"dataType":"datetime","required":true},
             "location": {"dataType":"string","required":true},
-            "logo": {"dataType":"string"},
-            "banner": {"dataType":"string"},
+            "logo": {"dataType":"string","required":true},
+            "banner": {"dataType":"string","required":true},
             "startTime": {"dataType":"string"},
             "endTime": {"dataType":"string"},
             "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
@@ -352,7 +355,7 @@ const models: TsoaRoute.Models = {
             "eventCover": {"dataType":"string"},
             "archiveMode": {"dataType":"boolean"},
             "website": {"dataType":"string"},
-            "timezone": {"dataType":"string"},
+            "timezone": {"dataType":"string","required":true},
             "accentColor": {"dataType":"string"},
             "unlisted": {"dataType":"boolean"},
             "dataExporter": {"dataType":"array","array":{"dataType":"refAlias","ref":"IDataExporter"}},
