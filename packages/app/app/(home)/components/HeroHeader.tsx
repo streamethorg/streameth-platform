@@ -11,7 +11,7 @@ const HeroHeader = () => {
         <p className=" text-background max-w-[600px] lg:text-lg">
           Create fully customized video experiences your audience will
           show up for. Host your next all hands, AMA, webinar, or
-          training in minutes with StreamETH.
+          training in minutes with StreamETH .
         </p>
         <div className="flex flex-row space-x-4">
           <Link href="https://info.streameth.org/contact-us">

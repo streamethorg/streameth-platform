@@ -1,7 +1,7 @@
 import SpeakerCard from './SpeakerCard'
 
 import { fetchEventSpeakers, fetchEventSessions } from '@/lib/data'
-import { IEvent } from 'streameth-server/model/event'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import {
   Card,
   CardContent,
@@ -9,13 +9,17 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-const SpeakerComponent = async ({ event }: { event: IEvent }) => {
+const SpeakerComponent = async ({
+  event,
+}: {
+  event: IEventModel
+}) => {
   const speakers = await fetchEventSpeakers({
-    event: event.id,
+    event: event.slug,
   })
 
-  const sessions = await fetchEventSessions({
-    event: event.id,
+  const sessionsData = await fetchEventSessions({
+    event: event.slug,
   })
 
   if (!speakers.length) return null
@@ -28,10 +32,10 @@ const SpeakerComponent = async ({ event }: { event: IEvent }) => {
       <CardContent className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
         {speakers.map((speaker) => (
           <SpeakerCard
-            key={speaker.id}
+            key={speaker._id}
             event={event}
             speaker={speaker}
-            sessions={sessions}
+            sessions={sessionsData.sessions}
           />
         ))}
       </CardContent>

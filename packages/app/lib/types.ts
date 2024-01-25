@@ -1,3 +1,9 @@
+import { IOrganizationModel } from "streameth-new-server/src/interfaces/organization.interface"
+import { IEventModel } from "streameth-new-server/src/interfaces/event.interface"
+import { ISessionModel } from "streameth-new-server/src/interfaces/session.interface"
+import { IStageModel } from "streameth-new-server/src/interfaces/stage.interface"
+import { ISpeakerModel } from "streameth-new-server/src/interfaces/speaker.interface"
+
 export interface NavBarProps {
   pages: {
     name: string
@@ -13,7 +19,7 @@ export interface EventPageProps {
   params: {
     event: string
     organization: string
-    stage: string
+    stageId?: string
   }
   searchParams: {
     stage?: string
@@ -23,7 +29,7 @@ export interface EventPageProps {
 }
 export interface SearchPageProps {
   searchParams: {
-    organization?: string
+    organization?: IOrganizationModel["slug"]
     event?: string
     searchQuery?: string
     page?: string
@@ -39,8 +45,15 @@ export interface WatchPageProps {
 }
 
 export interface IPagination {
-  currentPage: number
+  currentPage?: number
   totalPages: number
   totalItems: number
   limit: number
 }
+
+export interface IEvent extends IEventModel {}
+export interface IOrganization extends IOrganizationModel {}
+export interface ISession extends ISessionModel {}
+export interface IStage extends IStageModel {}
+export interface ISpeaker extends ISpeakerModel {}
+

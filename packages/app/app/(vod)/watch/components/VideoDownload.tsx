@@ -6,8 +6,6 @@ import Link from 'next/link'
 
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
 const VideoDownload = ({ assetId }: { assetId: string }) => {
-  const [url, setUrl] = useState('')
-  const [loading, setIsLoading] = useState(false)
   const { data: asset, isLoading } = useAsset({ assetId })
 
   if (isLoading) return null

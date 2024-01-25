@@ -1,4 +1,5 @@
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
+import { Suspense } from 'react'
 const Layout = async ({
   children,
 }: {
@@ -8,7 +9,7 @@ const Layout = async ({
     <div className="w-screen h-screen max-w-screen-2xl mx-auto">
       <HomePageNavbar />
       <div className=" flex flex-col p-2 lg:p-4 overflow-scroll">
-        {children}
+        <Suspense>{children}</Suspense>
       </div>
     </div>
   )

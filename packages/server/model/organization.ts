@@ -1,39 +1,41 @@
-import { IsNotEmpty, IsUrl, validate } from 'class-validator'
-import { generateId, BASE_PATH } from '../utils'
-import path from 'path'
+import { IsNotEmpty, IsUrl, validate } from "class-validator";
+import { generateId, BASE_PATH } from "../utils";
+import path from "path";
 export interface IOrganization {
-  id: string
-  name: string
-  description: string
-  url: string
-  logo: string
-  location: string
-  accentColor: string
+  id: string;
+  _id?: string;
+  name: string;
+  description: string;
+  url: string;
+  logo: string;
+  location: string;
+  accentColor: string;
+  slug?: string;
 }
 
 export default class Organization {
   @IsNotEmpty()
-  id: string
+  id: string;
 
   @IsNotEmpty()
-  name: string
+  name: string;
 
   @IsNotEmpty()
-  description: string
-
-  @IsUrl()
-  @IsNotEmpty()
-  url: string
+  description: string;
 
   @IsUrl()
   @IsNotEmpty()
-  logo: string
+  url: string;
+
+  @IsUrl()
+  @IsNotEmpty()
+  logo: string;
 
   @IsNotEmpty()
-  location: string
+  location: string;
 
   @IsNotEmpty()
-  accentColor: string
+  accentColor: string;
 
   constructor({
     id,
@@ -42,36 +44,36 @@ export default class Organization {
     url,
     logo,
     location,
-    accentColor = '#FFF',
-  }: Omit<IOrganization, 'id'> & { id?: string }) {
-    this.id = id ?? generateId(name)
-    this.name = name
-    this.description = description
-    this.url = url
-    this.logo = logo
-    this.location = location
-    this.accentColor = accentColor
-    this.validateThis()
+    accentColor = "#FFF",
+  }: Omit<IOrganization, "id"> & { id?: string }) {
+    this.id = id ?? generateId(name);
+    this.name = name;
+    this.description = description;
+    this.url = url;
+    this.logo = logo;
+    this.location = location;
+    this.accentColor = accentColor;
+    this.validateThis();
   }
 
   async validateThis() {
-    const errors = await validate(this)
+    const errors = await validate(this);
     if (errors.length > 0) {
-      throw new Error(`Validation failed! ${errors}`)
+      throw new Error(`Validation failed! ${errors}`);
     }
   }
 
   public toJson(): IOrganization {
-    return { ...this }
+    return { ...this };
   }
 
   static async fromJson(jsonData: string): Promise<Organization> {
-    const data = JSON.parse(jsonData) as IOrganization
-    return new Organization({ ...data })
+    const data = JSON.parse(jsonData) as IOrganization;
+    return new Organization({ ...data });
   }
 
   static async getOrganizationPath(id?: string): Promise<string> {
-    if (!id) return path.join(BASE_PATH, 'organizations')
-    return path.join(BASE_PATH, 'organizations', `${id}.json`)
+    if (!id) return path.join(BASE_PATH, "organizations");
+    return path.join(BASE_PATH, "organizations", `${id}.json`);
   }
 }

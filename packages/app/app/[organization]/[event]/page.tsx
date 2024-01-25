@@ -1,12 +1,17 @@
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import SpeakerComponent from './speakers/components/SpeakerComponent'
 import ScheduleComponent from './schedule/components/ScheduleComponent'
 import Image from 'next/image'
-import { getEventPeriod } from '@/lib/utils/time'
+import {
+  getEventPeriod,
+  extractDate,
+  isSameDate,
+} from '@/lib/utils/time'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
-import { getImageUrl } from '@/lib/utils/utils'
+import { EventPageProps } from '@/lib/types'
 import { ResolvingMetadata, Metadata } from 'next'
 import {
   Card,
@@ -18,42 +23,29 @@ import {
 
 import StagePreview from './stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Suspense } from 'react'
 
 export async function generateStaticParams() {
   const allEvents = await fetchEvents({})
   const paths = allEvents.map((event) => ({
     organization: event.organizationId,
-    event: event.id,
+    event: event._id,
   }))
   return paths
-}
-
-interface Params {
-  params: {
-    event: string
-    organization: string
-  }
-  searchParams: {
-    stage?: string
-    date?: string
-  }
 }
 
 export default async function EventHome({
   params,
   searchParams,
-}: Params) {
+}: EventPageProps) {
   const event = await fetchEvent({
-    event: params.event,
-    organization: params.organization,
-  })
-
-  const stages = await fetchEventStages({
-    event: params.event,
+    eventSlug: params.event,
   })
 
   if (!event) return notFound()
+
+  const stages = await fetchEventStages({
+    eventId: event.slug,
+  })
 
   return (
     <div className="flex flex-col w-full h-full bg-accent px-2">
@@ -62,7 +54,7 @@ export default async function EventHome({
           <AspectRatio ratio={3 / 1}>
             <Image
               className="rounded-lg max-h-[500px] p-2"
-              src={getImageUrl('/events/' + event.banner)}
+              src={event.banner}
               alt="Event Cover"
               width={1500}
               height={500}
@@ -75,13 +67,12 @@ export default async function EventHome({
             <CardTitle className="text-4xl uppercase">
               {event.name}
             </CardTitle>
-            <CardDescription>
+            <div className="text-sm text-muted-foreground">
               <p>
                 <span className="mr-2">&#128197;</span>
-                {new Date(event.start).toDateString()}
-                {new Date(event?.start).toDateString() !==
-                new Date(event?.end).toDateString()
-                  ? ` - ${new Date(event.end).toDateString()}`
+                {extractDate(event.start)}
+                {!isSameDate(event.start, event.end)
+                  ? ` - ${extractDate(event.end)}`
                   : ''}
               </p>
               <p>
@@ -94,11 +85,12 @@ export default async function EventHome({
                     } ${event.timezone}`
                   : 'TBD'}
               </p>
+
               <p>
                 <span className="mr-2">&#127759;</span>
                 {event.location}
               </p>
-            </CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <Markdown remarkPlugins={[remarkGfm]}>
@@ -114,7 +106,7 @@ export default async function EventHome({
               </CardTitle>
             </CardHeader>
             <CardContent className="grid lg:grid-cols-2 gap-4">
-              {stages.map((stage) => (
+              {stages?.map((stage) => (
                 <StagePreview
                   key={stage.id}
                   event={event.id}
@@ -142,13 +134,12 @@ export default async function EventHome({
 }
 
 export async function generateMetadata(
-  { params }: Params,
+  { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { organization, event } = params
+  const { event } = params
   const eventInfo = await fetchEvent({
-    event,
-    organization,
+    eventSlug: event,
   })
 
   if (!eventInfo) {
@@ -165,14 +156,14 @@ export async function generateMetadata(
       openGraph: {
         title: eventInfo.name,
         description: eventInfo.description,
-        images: [getImageUrl(`/events/${imageUrl!}`)],
+        images: [imageUrl!],
       },
       twitter: {
         card: 'summary_large_image',
         title: eventInfo.name,
         description: eventInfo.description,
         images: {
-          url: getImageUrl(`/events/${imageUrl!}`),
+          url: imageUrl!,
           alt: eventInfo.name + ' Logo',
         },
       },

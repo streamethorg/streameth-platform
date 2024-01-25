@@ -1,4 +1,3 @@
-import { fetchAllSessions, fetchEvent } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { SearchPageProps } from '@/lib/types'
 import UpcomingEvents from '@/app/(home)/components/UpcomingEvents'
@@ -11,12 +10,14 @@ import {
 import Pagination from '../components/pagination'
 import { generalMetadata, archiveMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
+import { fetchAllSessions, fetchEvent } from '@/lib/data'
+import { Suspense } from 'react'
 
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
   const videos = await fetchAllSessions({
-    organization: searchParams.organization,
+    organizationSlug: searchParams.organization,
     event: searchParams.event,
     limit: 12,
     onlyVideos: true,
@@ -25,25 +26,28 @@ export default async function ArchivePage({
   })
 
   return (
-    <div className="bg-white">
-      <UpcomingEvents
-        archive
-        organization={
-          searchParams.organization
-            ? searchParams.organization
-            : 'invalid'
-        }
-      />
-      <Card className="bg-white border-none">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-background">Results</CardTitle>
-          <Pagination {...videos.pagination} />
-        </CardHeader>
-        <CardContent>
-          <Videos videos={videos.sessions} />
-        </CardContent>
-      </Card>
-    </div>
+    <Suspense>
+      <div className="bg-white">
+        <UpcomingEvents
+          archive
+          organization={
+            searchParams.organization
+              ? searchParams.organization
+              : 'invalid'
+          }
+        />
+        <Card className="bg-white border-none">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-background">Results</CardTitle>
+
+            <Pagination {...videos.pagination} />
+          </CardHeader>
+          <CardContent>
+            <Videos videos={videos.sessions} />
+          </CardContent>
+        </Card>
+      </div>
+    </Suspense>
   )
 }
 
@@ -52,9 +56,9 @@ export async function generateMetadata({
 }: SearchPageProps): Promise<Metadata> {
   if (!searchParams.event) return generalMetadata
   const event = await fetchEvent({
-    event: searchParams.event,
-    organization: searchParams.organization,
+    eventSlug: searchParams.event,
   })
+
   if (!event) return generalMetadata
   return archiveMetadata({ event })
 }
