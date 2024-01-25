@@ -12,6 +12,11 @@ import React from 'react'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 
 import { fetchEvents } from '@/lib/data'
+import { archivePath } from '@/lib/utils/path'
+
+import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
+
+import { fetchEvents } from '@/lib/data'
 const UpcomingEvents = async ({
   date,
   organization,
@@ -23,7 +28,7 @@ const UpcomingEvents = async ({
 }) => {
   const events = await fetchEvents({
     date,
-    organizationId: organization,
+    organizationSlug: organization,
   })
 
   if (events.length === 0) return null
@@ -55,7 +60,7 @@ const UpcomingEvents = async ({
               key={index}
               href={
                 archive
-                  ? `/archive?event=` + slug
+                  ? archivePath({ event: slug })
                   : `/${organizationId}/${id}`
               }>
               <Card

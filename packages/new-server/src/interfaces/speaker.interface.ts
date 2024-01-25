@@ -1,6 +1,7 @@
 import { Document, Types } from 'mongoose';
 
 export interface ISpeaker {
+  _id?: string;
   name: string;
   bio: string;
   eventId: Types.ObjectId | string;
@@ -12,4 +13,4 @@ export interface ISpeaker {
   slug?: string;
 }
 
-export interface ISpeakerModel extends ISpeaker, Document {}
+export interface ISpeakerModel extends Omit<ISpeaker, '_id'>, Document {}

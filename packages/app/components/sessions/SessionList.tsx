@@ -74,10 +74,10 @@ export default function SessionList({
     <ul
       id="sessionList"
       className="h-full relative lg:overflow-scroll">
-      {sortedSessions.map((i) => {
+      {sortedSessions.map((i, index) => {
         if (i.name === 'Blank') return null
         return (
-          <Element key={i.id} name={i.id}>
+          <Element key={index} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
               <ScheduleCard
                 event={event}

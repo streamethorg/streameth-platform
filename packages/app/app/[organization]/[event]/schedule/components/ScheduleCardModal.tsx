@@ -60,7 +60,7 @@ const ScheduleCardModal = ({
         {session.description && <p>{session.description}</p>}
         <p className="flex flex-row flex-wrap mt-3">
           {session.speakers.map((speaker) => (
-            <SpeakerIcon key={speaker.id} speaker={speaker} />
+            <SpeakerIcon key={speaker._id} speaker={speaker} />
           ))}
         </p>
       </CredenzaBody>

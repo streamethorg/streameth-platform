@@ -41,8 +41,8 @@ export default class SessionServcie {
     organization: string;
     speaker: string;
     stageId: string;
-    onlyVideos: boolean;
     assetId: string;
+    onlyVideos: boolean;
     size: number;
     page: number;
   }): Promise<{

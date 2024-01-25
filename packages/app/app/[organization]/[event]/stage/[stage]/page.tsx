@@ -14,20 +14,24 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs'
+import { notFound } from 'next/navigation'
 
 export default async function Stage({ params }: EventPageProps) {
   const event = await fetchEvent({
-    event: params.event,
+    eventId: params.event,
   })
 
+  if (!event) {
+    return notFound()
+  }
   const sessionsData = await fetchEventSessions({
     event: params.event,
-    stage: params.stage,
+    stage: params.stageId,
     date: new Date(),
   })
 
   const stage = await fetchEventStage({
-    stage: params.stage,
+    stage: params.stageId,
   })
 
   const tabs = []

@@ -164,6 +164,9 @@
 			},
 			"ISpeaker": {
 				"properties": {
+					"_id": {
+						"type": "string"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -228,6 +231,9 @@
 			},
 			"SpeakerDto": {
 				"properties": {
+					"_id": {
+						"type": "string"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -416,15 +422,6 @@
 					},
 					"eventSlug": {
 						"type": "string"
-					},
-					"aiDescription": {
-						"type": "string"
-					},
-					"autoLabels": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
 					}
 				},
 				"required": [
@@ -435,8 +432,7 @@
 					"stageId",
 					"speakers",
 					"eventId",
-					"organizationId",
-					"aiDescription"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -520,21 +516,6 @@
 					},
 					"eventSlug": {
 						"type": "string"
-					},
-					"aiDescription": {
-						"type": "string"
-					},
-					"autoLabels": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"autolabels": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
 					}
 				},
 				"required": [
@@ -545,8 +526,7 @@
 					"stageId",
 					"speakers",
 					"eventId",
-					"organizationId",
-					"aiDescription"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false

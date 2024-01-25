@@ -9,6 +9,7 @@ import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import Link from 'next/link'
 import { fetchEvent } from '@/lib/data'
+import { archivePath } from '@/lib/utils/path'
 
 const VideoCard = async ({
   session,
@@ -18,7 +19,7 @@ const VideoCard = async ({
   invertedColors?: boolean
 }) => {
   const event = await fetchEvent({
-    event: `${session.eventId}`,
+    eventId: `${session.eventId}`,
   })
 
   // Determine the classes based on invertedColors prop
@@ -42,22 +43,24 @@ const VideoCard = async ({
             {session.name}
           </CardTitle>
         </Link>
-        <Link href={`/archive?event=${event?.slug}`}>
-          <div className="flex flex-row items-center justify-start">
-            <Image
-              className="rounded-md mr-2"
-              alt="logo"
-              quality={80}
-              src={event?.logo}
-              height={24}
-              width={24}
-            />
-            <CardDescription
-              className={`text-xs truncate ${descriptionClass}`}>
-              {event?.name}
-            </CardDescription>
-          </div>
-        </Link>
+        {event && (
+          <Link href={archivePath({ event: session.eventSlug })}>
+            <div className="flex flex-row items-center justify-start">
+              <Image
+                className="rounded-md mr-2"
+                alt="logo"
+                quality={80}
+                src={event.logo}
+                height={24}
+                width={24}
+              />
+              <CardDescription
+                className={`text-xs truncate ${descriptionClass}`}>
+                {event?.name}
+              </CardDescription>
+            </div>
+          </Link>
+        )}
       </CardHeader>
     </div>
   )

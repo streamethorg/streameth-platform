@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { IEvent } from 'streameth-server/model/event'
-import { ISession } from 'streameth-server/model/session'
-import { getImageUrl } from './utils/utils'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 
 const BASE_IMAGE = 'https://streameth.org/streameth_banner.png'
 
@@ -41,7 +40,7 @@ export const generalMetadata: Metadata = {
 export const archiveMetadata = ({
   event,
 }: {
-  event: IEvent
+  event: IEventModel
 }): Metadata => {
   const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
 
@@ -79,7 +78,7 @@ export const archiveMetadata = ({
 export const watchMetadata = ({
   session,
 }: {
-  session: ISession
+  session: ISessionModel
 }): Metadata => {
   const imageUrl = session.coverImage
     ? session.coverImage

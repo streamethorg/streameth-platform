@@ -16,6 +16,7 @@
     "incremental": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
     "plugins": [
       {
         "name": "next"
@@ -31,6 +32,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "packages/app/admin/[organization]/components"
-  ],
+, "cypress.config.js"  ],
   "exclude": ["node_modules", "packages"]
 }

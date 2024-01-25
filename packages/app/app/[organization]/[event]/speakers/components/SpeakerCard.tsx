@@ -24,7 +24,7 @@ const SpeakerCard = ({
 }) => {
   const speakerSessions = sessions?.filter((session) =>
     session.speakers.some(
-      (sessionSpeaker) => sessionSpeaker.id === speaker.id
+      (sessionSpeaker) => sessionSpeaker._id === speaker._id
     )
   )
 

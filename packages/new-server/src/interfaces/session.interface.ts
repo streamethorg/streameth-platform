@@ -1,5 +1,5 @@
 import { Document, Types } from 'mongoose';
-import { ISpeaker } from './speaker.interface';
+import { ISpeaker, ISpeakerModel } from './speaker.interface';
 
 export interface ISource {
   streamUrl: string;

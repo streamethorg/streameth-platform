@@ -7,16 +7,16 @@ import { fetchOrganization } from '@/lib/data'
 
 interface Params {
   params: {
-    organization: string
+    organizationSlug: string
   }
 }
 
 export default async function OrganizationHome({ params }: Params) {
-  if (!params.organization) {
+  if (!params.organizationSlug) {
     return notFound()
   }
   const organization = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationSlug: params.organizationSlug,
   })
   if (!organization) {
     return notFound()
@@ -75,7 +75,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const organizationInfo = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationSlug: params.organizationSlug,
   })
 
   if (!organizationInfo) {
