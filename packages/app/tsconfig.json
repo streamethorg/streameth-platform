@@ -17,6 +17,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
+    "downlevelIteration": true,
     "plugins": [
       {
         "name": "next"
