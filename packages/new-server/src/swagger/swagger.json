@@ -1,0 +1,1889 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"mongoose.Types.ObjectId": {
+				"type": "string"
+			},
+			"IStreamSettings": {
+				"properties": {
+					"streamId": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IPlugin": {
+				"properties": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStage": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"streamSettings": {
+						"$ref": "#/components/schemas/IStreamSettings"
+					},
+					"plugins": {
+						"items": {
+							"$ref": "#/components/schemas/IPlugin"
+						},
+						"type": "array"
+					},
+					"order": {
+						"type": "number",
+						"format": "double"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"eventId",
+					"streamSettings"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IStage_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IStage"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"StageDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"eventId": {
+						"type": "string"
+					},
+					"streamSettings": {
+						"$ref": "#/components/schemas/IStreamSettings"
+					},
+					"plugins": {
+						"items": {
+							"$ref": "#/components/schemas/IPlugin"
+						},
+						"type": "array"
+					},
+					"order": {
+						"type": "number",
+						"format": "double"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"eventId",
+					"streamSettings"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IStage__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IStage"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_void_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ISpeaker": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"bio": {
+						"type": "string"
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"twitter": {
+						"type": "string"
+					},
+					"github": {
+						"type": "string"
+					},
+					"website": {
+						"type": "string"
+					},
+					"photo": {
+						"type": "string"
+					},
+					"company": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"bio",
+					"eventId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_ISpeaker_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/ISpeaker"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SpeakerDto": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"bio": {
+						"type": "string"
+					},
+					"eventId": {
+						"type": "string"
+					},
+					"twitter": {
+						"type": "string"
+					},
+					"github": {
+						"type": "string"
+					},
+					"website": {
+						"type": "string"
+					},
+					"photo": {
+						"type": "string"
+					},
+					"company": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"bio",
+					"eventId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_ISpeaker__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ISource": {
+				"properties": {
+					"streamUrl": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"streamUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IPlayback": {
+				"properties": {
+					"livepeerId": {
+						"type": "string"
+					},
+					"videoUrl": {
+						"type": "string"
+					},
+					"ipfsHash": {
+						"type": "string"
+					},
+					"format": {
+						"type": "string"
+					},
+					"duration": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"livepeerId",
+					"videoUrl",
+					"ipfsHash",
+					"format",
+					"duration"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ISession": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"stageId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"source": {
+						"$ref": "#/components/schemas/ISource"
+					},
+					"assetId": {
+						"type": "string"
+					},
+					"playback": {
+						"$ref": "#/components/schemas/IPlayback"
+					},
+					"videoUrl": {
+						"type": "string"
+					},
+					"playbackId": {
+						"type": "string"
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"track": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"coverImage": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"eventSlug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"start",
+					"end",
+					"stageId",
+					"speakers",
+					"eventId",
+					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_ISession_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/ISession"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SessionDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"stageId": {
+						"type": "string"
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"source": {
+						"$ref": "#/components/schemas/ISource"
+					},
+					"assetId": {
+						"type": "string"
+					},
+					"playback": {
+						"$ref": "#/components/schemas/IPlayback"
+					},
+					"videoUrl": {
+						"type": "string"
+					},
+					"playbackId": {
+						"type": "string"
+					},
+					"eventId": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"track": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"coverImage": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"eventSlug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"start",
+					"end",
+					"stageId",
+					"speakers",
+					"eventId",
+					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"pageable": {
+								"properties": {
+									"size": {
+										"type": "number",
+										"format": "double"
+									},
+									"page": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"size",
+									"page"
+								],
+								"type": "object"
+							},
+							"totalDocuments": {
+								"type": "number",
+								"format": "double"
+							},
+							"sessions": {
+								"items": {
+									"$ref": "#/components/schemas/ISession"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"pageable",
+							"totalDocuments",
+							"sessions"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IOrganization": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"url",
+					"logo",
+					"location"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IOrganization_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IOrganization"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OrganizationDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"url",
+					"logo",
+					"location"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IOrganization__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IOrganization"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_string_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GSheetConfig": {
+				"properties": {
+					"sheetId": {
+						"type": "string"
+					},
+					"apiKey": {
+						"type": "string"
+					},
+					"driveId": {
+						"type": "string"
+					},
+					"driveApiKey": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PretalxConfig": {
+				"properties": {
+					"url": {
+						"type": "string"
+					},
+					"apiToken": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"url"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IDataImporter": {
+				"anyOf": [
+					{
+						"properties": {
+							"config": {
+								"$ref": "#/components/schemas/GSheetConfig"
+							},
+							"type": {
+								"type": "string",
+								"enum": [
+									"gsheet"
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"config",
+							"type"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"config": {
+								"$ref": "#/components/schemas/PretalxConfig"
+							},
+							"type": {
+								"type": "string",
+								"enum": [
+									"pretalx"
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"config",
+							"type"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"IDataExporter": {
+				"properties": {
+					"config": {
+						"$ref": "#/components/schemas/GSheetConfig"
+					},
+					"type": {
+						"type": "string",
+						"enum": [
+							"gdrive"
+						],
+						"nullable": false
+					}
+				},
+				"required": [
+					"config",
+					"type"
+				],
+				"type": "object"
+			},
+			"IPlugins": {
+				"properties": {
+					"disableChat": {
+						"type": "boolean"
+					},
+					"hideSchedule": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"disableChat"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IEvent": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"start": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"end": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"location": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"endTime": {
+						"type": "string"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"dataImporter": {
+						"items": {
+							"$ref": "#/components/schemas/IDataImporter"
+						},
+						"type": "array"
+					},
+					"eventCover": {
+						"type": "string"
+					},
+					"archiveMode": {
+						"type": "boolean"
+					},
+					"website": {
+						"type": "string"
+					},
+					"timezone": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"unlisted": {
+						"type": "boolean"
+					},
+					"dataExporter": {
+						"items": {
+							"$ref": "#/components/schemas/IDataExporter"
+						},
+						"type": "array"
+					},
+					"enableVideoDownloader": {
+						"type": "boolean"
+					},
+					"plugins": {
+						"$ref": "#/components/schemas/IPlugins"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"start",
+					"end",
+					"location",
+					"logo",
+					"banner",
+					"organizationId",
+					"timezone"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IEvent_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IEvent"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EventDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"start": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"end": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"location": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"endTime": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"dataImporter": {
+						"items": {
+							"$ref": "#/components/schemas/IDataImporter"
+						},
+						"type": "array"
+					},
+					"eventCover": {
+						"type": "string"
+					},
+					"archiveMode": {
+						"type": "boolean"
+					},
+					"website": {
+						"type": "string"
+					},
+					"timezone": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"unlisted": {
+						"type": "boolean"
+					},
+					"dataExporter": {
+						"items": {
+							"$ref": "#/components/schemas/IDataExporter"
+						},
+						"type": "array"
+					},
+					"enableVideoDownloader": {
+						"type": "boolean"
+					},
+					"plugins": {
+						"$ref": "#/components/schemas/IPlugins"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"start",
+					"end",
+					"location",
+					"logo",
+					"banner",
+					"organizationId",
+					"timezone"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IEvent__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IEvent"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "streameth-api",
+		"version": "3.0.0",
+		"contact": {}
+	},
+	"paths": {
+		"/stages": {
+			"post": {
+				"operationId": "CreateStage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IStage_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/StageDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllStages",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IStage__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/stages/{stageId}": {
+			"put": {
+				"operationId": "EditStage",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IStage_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "stageId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/StageDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetStageById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IStage_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "stageId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteStage",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "stageId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/stages/event/{eventId}": {
+			"get": {
+				"operationId": "GetAllStagesForEvent",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IStage__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/speakers": {
+			"post": {
+				"operationId": "CreateSpeaker",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISpeaker_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Speaker"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SpeakerDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/speakers/{speakerId}": {
+			"get": {
+				"operationId": "GetSpeaker",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISpeaker_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Speaker"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "speakerId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/speakers/event/{eventId}": {
+			"get": {
+				"operationId": "GetAllSpeakersForEvent",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_ISpeaker__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Speaker"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/sessions": {
+			"post": {
+				"operationId": "CreateSession",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISession_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SessionDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllSessions",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "event",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "organization",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "speaker",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "stageId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "onlyVideos",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "size",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "timestamp",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/sessions/{sessionId}": {
+			"put": {
+				"operationId": "EditSession",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISession_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "sessionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SessionDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetSessionById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISession_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "sessionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/organizations": {
+			"post": {
+				"operationId": "CreateOrganization",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IOrganization_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Organization"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OrganizationDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllOrganizations",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IOrganization__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Organization"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/organizations/{organizationId}": {
+			"put": {
+				"operationId": "EditOrganization",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IOrganization_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Organization"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OrganizationDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetOrganizationById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IOrganization_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Organization"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteOrganization",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Organization"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/": {
+			"get": {
+				"operationId": "Index",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Index"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/events": {
+			"post": {
+				"operationId": "CreateEvent",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IEvent_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Creates Event",
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EventDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllEvents",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IEvent__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/events/{eventId}": {
+			"put": {
+				"operationId": "EditEvent",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IEvent_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Update Event",
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EventDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetEventById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IEvent_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteEvent",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/events/organization/{organizationId}": {
+			"get": {
+				"operationId": "GetAllEventsForOrganization",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IEvent__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/streameth-platform-packages-new2"
+		}
+	]
+}

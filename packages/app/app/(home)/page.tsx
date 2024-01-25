@@ -1,6 +1,5 @@
 import UpcomingEvents from './components/UpcomingEvents'
 import { Suspense } from 'react'
-import { fetchOrganizations } from '@/lib/data'
 import OrganizationStrip from './components/OrganizationStrip'
 import {
   CardTitle,
@@ -10,6 +9,7 @@ import {
 } from '@/components/ui/card'
 import HeroHeader from './components/HeroHeader'
 import { Skeleton } from '@/components/ui/skeleton'
+import { fetchOrganizations } from '@/lib/data'
 
 const Loading = () => {
   return <Skeleton className=" h-96 w-full bg-muted" />
@@ -17,7 +17,6 @@ const Loading = () => {
 
 export default async function Home() {
   const organizations = await fetchOrganizations()
-
   return (
     <>
       <HeroHeader />
@@ -31,8 +30,8 @@ export default async function Home() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-8 border-0">
-          {organizations.map((organization) => (
-            <Suspense key={organization.id} fallback={<Loading />}>
+          {organizations?.map((organization) => (
+            <Suspense key={organization._id} fallback={<Loading />}>
               <OrganizationStrip organization={organization} />
             </Suspense>
           ))}

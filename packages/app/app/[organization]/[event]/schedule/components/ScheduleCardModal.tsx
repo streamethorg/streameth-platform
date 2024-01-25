@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import moment from 'moment-timezone'
-import { ISession } from 'streameth-server/model/session'
-import { IEvent } from 'streameth-server/model/event'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { getEventTimezoneText } from '@/lib/utils/time'
 import {
   CredenzaContent,
@@ -20,8 +20,8 @@ const ScheduleCardModal = ({
   event,
   session,
 }: {
-  event: IEvent
-  session: ISession
+  event: IEventModel
+  session: ISessionModel
 }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
   const router = useRouter()
@@ -60,7 +60,7 @@ const ScheduleCardModal = ({
         {session.description && <p>{session.description}</p>}
         <p className="flex flex-row flex-wrap mt-3">
           {session.speakers.map((speaker) => (
-            <SpeakerIcon key={speaker.id} speaker={speaker} />
+            <SpeakerIcon key={speaker._id} speaker={speaker} />
           ))}
         </p>
       </CredenzaBody>

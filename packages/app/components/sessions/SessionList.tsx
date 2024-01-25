@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect } from 'react'
 import Scroll, { Element } from 'react-scroll'
-import { ISession } from 'streameth-server/model/session'
-import { IEvent } from 'streameth-server/model/event'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
 interface Props {
-  event: IEvent
-  sessions: ISession[]
-  currentSession?: ISession
+  event: IEventModel
+  sessions: ISessionModel[]
+  currentSession?: ISessionModel
 }
 
 const scroll = Scroll.scroller
@@ -74,10 +74,10 @@ export default function SessionList({
     <ul
       id="sessionList"
       className="h-full relative lg:overflow-scroll">
-      {sortedSessions.map((i) => {
+      {sortedSessions.map((i, index) => {
         if (i.name === 'Blank') return null
         return (
-          <Element key={i.id} name={i.id}>
+          <Element key={index} name={i.id}>
             <li id={i.id} className="mb-3 text-lg">
               <ScheduleCard
                 event={event}

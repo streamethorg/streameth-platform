@@ -1,85 +1,59 @@
-import { TIMEZONES } from '@/lib/constants/timezones'
+import moment from 'moment';
+import { TIMEZONES } from '@/lib/constants/timezones';
 
-export const getTime = (date: Date): number => date.getTime()
+export const getTime = (date: Date): number => moment(date).valueOf();
 
-export const extractDate = (date: Date) =>
-  date.toISOString().split('T')[0]
+export const extractDate = (date: Date): string => moment(date).format('YYYY-MM-DD');
 
-export const getDateAsString = (date: Date) =>
-  new Date(date).toISOString().split('T')[0]
+export const getDateAsString = (date: Date): string => moment(date).format('YYYY-MM-DD');
 
 export const getEventDays = (start: Date, end: Date): number[] => {
-  // Calculate the difference in days between the two dates
-  const days =
-    Math.floor(
-      (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
-    ) + 1
+  const startDate = moment(start);
+  const endDate = moment(end);
+  const days = endDate.diff(startDate, 'days') + 1;
+  const dates: number[] = [];
 
-  // Generate the date options
-  const dates = []
   for (let i = 0; i < days; i++) {
-    const date = start.getTime() + i * 24 * 60 * 60 * 1000
-    dates.push(date)
+    dates.push(startDate.clone().add(i, 'days').valueOf());
   }
 
-  return dates
+  return dates;
 }
 
-export const isSameDay = (timestamp1: number, timestamp2: number) => {
-  return (
-    getDateAsString(new Date(timestamp1)) ===
-    getDateAsString(new Date(timestamp2))
-  )
+export const isSameDay = (timestamp1: number, timestamp2: number): boolean => {
+  return moment(timestamp1).isSame(moment(timestamp2), 'day');
 }
 
-export const secondsSinceMidnight = (date: Date) => {
-  return (
-    date.getSeconds() +
-    60 * date.getMinutes() +
-    60 * 60 * date.getHours()
-  )
+export const isSameDate = (date1: Date, date2: Date): boolean => {
+  return moment(date1).isSame(date2, 'day');
 }
 
-export const secondsToHHMM = (seconds: number) => {
-  const hours = Math.floor(seconds / 3600)
-  const minutes = Math.floor((seconds % 3600) / 60)
 
-  const hoursStr = hours.toString().padStart(2, '0')
-  const minutesStr = minutes.toString().padStart(2, '0')
-  const ampm = hours >= 12 ? 'pm' : 'am'
-  return `${hoursStr}:${minutesStr} ${ampm}`
+export const secondsSinceMidnight = (date: Date): number => {
+  const momentDate = moment(date);
+  return momentDate.seconds() + 60 * momentDate.minutes() + 3600 * momentDate.hours();
 }
 
-export const getEventPeriod = (eventTime: string) => {
-  const timeArray = eventTime.split(':')
-  const date = new Date()
-  date.setHours(parseInt(timeArray[0], 10))
-  date.setMinutes(parseInt(timeArray[1], 10))
-
-  const options: Intl.DateTimeFormatOptions = {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-  }
-  const formattedTime = date.toLocaleTimeString(undefined, options)
-
-  return formattedTime
+export const secondsToHHMM = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  return moment().startOf('day').seconds(seconds).format('hh:mm A');
 }
 
-export const getEventTimezoneText = (utcValue: string) => {
-  const timezone = TIMEZONES.find((tz) => tz.utc.includes(utcValue))
-
-  return timezone ? timezone.text : utcValue
+export const getEventPeriod = (eventTime: string): string => {
+  const [hours, minutes] = eventTime.split(':').map(Number);
+  return moment().hours(hours).minutes(minutes).format('h:mm A');
 }
 
-export const isCurrentDateInUTC = () => {
-  const currentDate = new Date()
-  currentDate.setUTCHours(0, 0, 0, 0)
-  return currentDate.getTime()
+export const getEventTimezoneText = (utcValue: string): string => {
+  const timezone = TIMEZONES.find((tz) => tz.utc.includes(utcValue));
+  return timezone ? timezone.text : utcValue;
 }
 
-export const getDateInUTC = (date: Date) => {
-  const startDate = new Date(date)
-  startDate.setUTCHours(0, 0, 0, 0)
-  return startDate.getTime()
+export const isCurrentDateInUTC = (): number => {
+  return moment().utc().startOf('day').valueOf();
+}
+
+export const getDateInUTC = (date: Date): number => {
+  return moment(date).utc().startOf('day').valueOf();
 }
