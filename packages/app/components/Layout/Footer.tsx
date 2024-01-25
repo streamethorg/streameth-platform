@@ -28,15 +28,19 @@ const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="flex justify-center items-center mb-5 z-[99999999]">
+    <footer className="flex flex-wrap justify-center items-center mb-3 md:mb-5 z-[99999999]">
       <Image
-        className="hidden lg:block"
+        className="hidden mr-2 md:block"
         src="/logo.png"
         alt="Streameth logo"
         width={30}
         height={30}
       />
-      <div className="mx-2 text-sm text-black">
+      {/* Visible only on small screens */}
+      <div className="flex justify-center pb-1 w-full text-sm text-black md:hidden">
+        © {year} StreamETH International B.V.
+      </div>
+      <div className="hidden text-sm text-black md:block">
         © {year} StreamETH International B.V.
       </div>
       {Object.entries(items).map(([key, { item, href }]) => (
