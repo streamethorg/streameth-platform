@@ -6,12 +6,12 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
 
   const events = await fetchEvents({})
-
   const sessions = (
     await fetchAllSessions({
       event: searchParams.get('event') || undefined,
-      organization: searchParams.get('organization') || undefined,
+      organizationSlug: searchParams.get('organization') || undefined,
       searchQuery: searchParams.get('searchQuery') || undefined,
+      onlyVideos: true,
     })
   ).sessions
 
@@ -48,6 +48,7 @@ export async function GET(request: NextRequest) {
     events: eventResults.map((event) => ({
       id: event.id,
       name: event.name,
+      slug: event.slug,
     })),
   }
 

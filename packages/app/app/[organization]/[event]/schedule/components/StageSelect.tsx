@@ -1,5 +1,5 @@
 'use client'
-import { IStage } from 'streameth-server/model/stage'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import {
   Select,
@@ -9,14 +9,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const StageSelect = ({ stages }: { stages: IStage[] }) => {
+const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
   const { searchParams, handleTermChange } = useSearchParams({
     key: 'stage',
   })
 
   return (
     <Select
-      defaultValue={searchParams.get('stage') || stages[0].id}
+      defaultValue={searchParams.get('stage') || stages[0]?._id}
       onValueChange={(value) => handleTermChange(value)}>
       <SelectTrigger>
         <SelectValue placeholder="Stage select" />

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
-import { getImageUrl } from '@/lib/utils/utils'
+
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { NavBarProps } from '@/lib/types'
@@ -51,7 +51,7 @@ export default function NavbarTop({
             <span className="sr-only">Logo</span>
             <Image
               className="rounded max-w-[40px]"
-              src={getImageUrl(logo)}
+              src={logo}
               alt="Logo"
               width={40}
               height={40}

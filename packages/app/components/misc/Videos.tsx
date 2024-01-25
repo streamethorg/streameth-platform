@@ -1,12 +1,13 @@
 import Link from 'next/link'
-import { ISession } from 'streameth-server/model/session'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+
 import VideoCard from '@/components/misc/VideoCard'
 export default async function VideoGrid({
   videos,
   maxVideos,
   scroll,
 }: {
-  videos: ISession[]
+  videos: ISessionModel[]
   maxVideos?: number
   scroll?: boolean
 }) {
@@ -21,7 +22,7 @@ export default async function VideoGrid({
         {videos.map((video, index) =>
           ({ maxVideos }) && maxVideos && index > maxVideos ? null : (
             <div
-              key={video.id}
+              key={video._id}
               className={`${
                 scroll && 'w-[300px]'
               } lg:w-full h-full border-none bg-white flex-initial`}>

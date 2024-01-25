@@ -9,7 +9,7 @@ import {
 import ShareButton from '@/components/misc/ShareButton'
 import EmbedButton from '@/components/misc/EmbedButton'
 import SpeakerIcon from '../speakers/speakerIcon'
-import { ISpeaker } from 'streameth-server/model/speaker'
+import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
 const SessionInfoBox = ({
@@ -29,13 +29,12 @@ const SessionInfoBox = ({
   playbackId?: string | undefined
   streamId?: string | undefined
   playerName: string
-  speakers?: ISpeaker[]
+  speakers?: ISpeakerModel[]
   assetId?: string
   viewCount?: boolean
 }) => {
   const [isOpened, setIsOpened] = useState(false)
 
-  console.log(description)
   return (
     <div className="my-2 rounded">
       <div className="flex flex-col justify-center py-4 lg:flex-row">
