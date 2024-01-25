@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchAllSessions, fetchEvents } from '@/lib/data-back'
+import { fetchAllSessions, fetchEvents } from '@/lib/data'
 import { diceCoefficient } from 'dice-coefficient'
 
 export async function GET(request: NextRequest) {

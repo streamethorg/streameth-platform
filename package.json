@@ -25,7 +25,6 @@
     "split": "yarn workspace @streameth/av-tools run:split",
     "join": "yarn workspace @streameth/av-tools run:join",
     "upload": "yarn workspace @streameth/av-tools run:upload",
-    "ai:summary": "yarn workspace @streameth/tools ai:summary",
     "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn"
   },
   "devDependencies": {
