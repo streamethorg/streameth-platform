@@ -96,8 +96,8 @@ async function startCreatingSummary(
   }
 }
 
-startCreatingSummary("7a79da4e-19d4-44e1-9600-e4f927c47af9")
-  .then(() => console.log("Ran successfully..."))
-  .catch((err) => console.error("Error:", err));
+// startCreatingSummary("7a79da4e-19d4-44e1-9600-e4f927c47af9")
+//   .then(() => console.log("Ran successfully..."))
+//   .catch((err) => console.error("Error:", err));
 
 export default startCreatingSummary;
