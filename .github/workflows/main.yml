@@ -10,7 +10,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./packages/app
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,3 +24,4 @@ jobs:
         with:
           build: yarn build
           start: yarn start
+          working-directory: ./packages/app
