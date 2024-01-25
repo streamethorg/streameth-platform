@@ -11,6 +11,7 @@ export const archivePath = ({
   searchQuery?: string
 }) => {
   const params = new URLSearchParams()
+  let newSearchQueryPath
 
   if (organization) {
     params.append('organization', organization)
@@ -21,8 +22,28 @@ export const archivePath = ({
   }
 
   if (searchQuery) {
-    params.append('searchQuery', searchQuery)
+    const url = new URL(window.location.href)
+    if (
+      url.searchParams.has('event') ||
+      url.searchParams.has('organization')
+    ) {
+      url.searchParams.set('searchQuery', searchQuery)
+      newSearchQueryPath =
+        // Iterate through existing parameters and include only 'event' and 'searchQuery'
+        newSearchQueryPath = `${url.pathname}?${[
+          ...url.searchParams.entries(),
+        ]
+          .filter(([key]) =>
+            ['organization', 'event', 'searchQuery'].includes(key)
+          )
+          .map(([key, value]) => `${key}=${value}`)
+          .join('&')}`
+    } else {
+      params.append('searchQuery', searchQuery)
+    }
   }
 
-  return `/archive?${params.toString()}`
+  return newSearchQueryPath
+    ? newSearchQueryPath
+    : `/archive?${params.toString()}`
 }

@@ -46,7 +46,7 @@ const SessionInfoBox = ({
             <div className="flex flex-row">{cardDescription}</div>
           </CardDescription>
         </div>
-        <div className="flex flex-row mt-2 space-x-1 lg:my-0 lg:ml-auto">
+        <div className="flex flex-row mt-2 space-x-1 items-center lg:my-0 lg:ml-auto">
           <ShareButton />
           <EmbedButton
             streamId={streamId}
