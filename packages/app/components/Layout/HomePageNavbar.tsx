@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import Image from 'next/image'
 import SearchBar from '@/components/misc/SearchBar'
@@ -74,7 +74,10 @@ const HomePageNavbar = () => {
         </Link>
       </div>
       <div className="flex-grow mx-2 flex justify-center">
-        <SearchBar />
+        <Suspense>
+          {' '}
+          <SearchBar />
+        </Suspense>
       </div>
       <div className="ml-auto flex flex-row items-center justify-end h-full">
         {menuVisible && (

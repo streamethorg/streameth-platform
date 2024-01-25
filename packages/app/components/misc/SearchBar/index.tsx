@@ -4,10 +4,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import useDebounce from '@/lib/hooks/useDebounce'
+import { archivePath } from '@/lib/utils/path'
+import useClickOutside from '@/lib/hooks/useClickOutside'
 
 interface IEventSearchResult {
   id: string
   name: string
+  slug: string
 }
 export default function SearchBar(): JSX.Element {
   const { searchParams, handleTermChange: handleTermChangeOverload } =
@@ -46,30 +49,26 @@ export default function SearchBar(): JSX.Element {
     }
   }, [debouncedSearchQuery])
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node) &&
-        inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
-      ) {
-        setIsOpened(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+  useClickOutside(dropdownRef, () => setIsOpened(false))
 
   const handleTermChange = (term: string) => {
-    window.location.href = '/archive?searchQuery=' + term
-    //  handleTermChangeOverload(term)
+    // window.location.href = archivePath({ searchQuery: term })
+    // Parse current URL
+    const url = new URL(window.location.href)
+    // Get existing parameters
+    const params = new URLSearchParams(url.search)
+    // Update or add the 'searchQuery' parameter
+    params.set('searchQuery', term)
+
+    // Construct the new URL with both parameters
+    const newUrl = `${url.origin}${url.pathname}?${params.toString()}`
+    // Update the page URL
+    window.location.href = newUrl
   }
+  //  handleTermChangeOverload(term)
 
   const handleEventChange = (term: string) => {
-    window.location.href = '/archive?event=' + term
+    window.location.href = archivePath({ event: term })
   }
 
   return (
@@ -120,7 +119,7 @@ export default function SearchBar(): JSX.Element {
                   {eventResults.map((result: IEventSearchResult) => (
                     <div
                       onClick={() => {
-                        handleEventChange(result.id)
+                        handleEventChange(result.slug)
                         setIsOpened(false)
                       }}
                       className="p-1 hover:bg-white hover:"

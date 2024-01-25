@@ -43,7 +43,6 @@ def extract_playbackId(url):
     match = re.search(r'/hls/(.*?)/index.m3u8', url)
     return match.group(1) if match else None
 
-
 # Load video information from Livepeer
 videos = get_livepeer_videos()
 

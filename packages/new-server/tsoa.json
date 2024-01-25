@@ -1,0 +1,29 @@
+{
+    "entryFile": "src/app.ts",
+    "noImplicitAdditionalProperties": "throw-on-extras",
+    "controllerPathGlobs": ["src/controllers/**/*.controller.ts"],
+    "spec": {
+      "name": "streameth-api",
+      "outputDirectory": "src/swagger",
+      "specVersion": 3,
+      "basePath": "/streameth-platform-packages-new2"
+    },
+    "routes": {
+      "routesDir": "src/routes"
+    },
+    "compilerOptions": {
+      "paths": {
+        "@config": ["src/config"],
+        "@controllers/*": ["src/controllers/*"],
+        "@databases/*": ["src/databases/*"],
+        "@dtos/*": ["src/dtos/*"],
+        "@exceptions/*": ["src/exceptions/*"],
+        "@interfaces/*": ["src/interfaces/*"],
+        "@middlewares/*": ["src/middlewares/*"],
+        "@models/*": ["src/models/*"],
+        "@routes/*": ["src/routes/*"],
+        "@services/*": ["src/services/*"],
+        "@utils/*": ["src/utils/*"]
+      }
+    }
+  }

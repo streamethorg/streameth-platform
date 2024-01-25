@@ -1,11 +1,11 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-import { IEvent } from 'streameth-server/model/event'
+import { IEvent } from '@/lib/types'
 
 export const selectOptionFocusHandle = (
   event: React.KeyboardEvent<HTMLDivElement>,
@@ -70,11 +70,18 @@ export const getImageUrl = (image: string) => {
   return `https://streamethapp.ams3.cdn.digitaloceanspaces.com${image}`
 }
 
-
 export const loadEnv = () => {
   const key = process.env.LIVEPEER_API_KEY || null
   if (!key) {
     throw new Error('No API key found')
   }
   return key
+}
+
+export const apiUrl = () => {
+  const api = process.env.NEXT_PUBLIC_API_URL || null
+  if (!api) {
+    throw new Error('No API URL key found')
+  }
+  return api
 }

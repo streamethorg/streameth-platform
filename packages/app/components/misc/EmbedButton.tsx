@@ -15,10 +15,13 @@ const ModalContent: React.FC<{
 }> = ({ playbackId, streamId, playerName }) => {
   const [copied, setCopied] = useState(false)
   const copiedClass = copied ? 'opacity-100' : 'opacity-0'
-
+  const [url, setUrl] = useState('')
   useEffect(() => {
     if (copied) {
       setTimeout(() => setCopied(false), 2000)
+    }
+    if (typeof window !== 'undefined') {
+      setUrl(window.location.origin)
     }
   }, [copied])
 
@@ -32,7 +35,6 @@ const ModalContent: React.FC<{
   }
 
   const generateEmbedCode = () => {
-    const url = window && window.location.origin
     return `<iframe src="${url}/embed/?${generateParams()}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
   }
 

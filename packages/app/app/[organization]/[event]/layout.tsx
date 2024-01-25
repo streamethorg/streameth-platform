@@ -1,4 +1,4 @@
-import ColorComponent from '@/components/Layout/ColorComponent'
+import { notFound } from 'next/navigation'
 import Navbar from '@/components/Layout/NavbarTop'
 import { fetchNavBarRoutes, fetchEvent } from '@/lib/data'
 
@@ -17,17 +17,23 @@ const Layout = async ({
     organization: params.organization,
   })
   const event = await fetchEvent({
-    event: params.event,
-    organization: params.organization,
+    eventSlug: params.event,
   })
-  return (
-    <div className="h-full flex flex-col  z-1 min-h-screen ">
-      <Navbar {...navbarRoutes} />
 
+  if (!event) {
+    return notFound()
+  }
+  const style = {
+    '--colors-accent': event.accentColor,
+  } as React.CSSProperties
+
+  return (
+    <div
+      className="h-full flex flex-col  z-1 min-h-screen "
+      style={style}>
+      <Navbar {...navbarRoutes} />
       <main className={` flex w-full ml-auto lg:h-full flex-grow`}>
-        <ColorComponent accentColor={event.accentColor}>
-          {children}
-        </ColorComponent>
+        {children}
       </main>
     </div>
   )

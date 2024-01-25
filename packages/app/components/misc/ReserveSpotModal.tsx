@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ModalContext } from '@/lib/context/ModalContext'
 import useLocalStorage from '@/lib/hooks/useLocalStorage'
-import { IEvent } from 'streameth-server/model/event'
+import { IEvent } from '@/lib/types'
 
 interface props {
   event: IEvent

@@ -1,9 +1,8 @@
 'use client'
-
 import ScheduleCardModal from './ScheduleCardModal'
 import moment from 'moment-timezone'
-import { ISession } from 'streameth-server/model/session'
-import { IEvent } from 'streameth-server/model/event'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { getEventTimezoneText } from '@/lib/utils/time'
 
 import {
@@ -23,8 +22,8 @@ const ScheduleCard = ({
   showTime = false,
   speakers = false,
 }: {
-  event: IEvent
-  session: ISession
+  event: IEventModel
+  session: ISessionModel
   showTime?: boolean
   speakers?: boolean
 }) => {
@@ -42,13 +41,13 @@ const ScheduleCard = ({
               {showTime && (
                 <>
                   {moment(session.start)
-                    .tz(event?.timezone)
+                    .tz(event.timezone || 'UTC')
                     .format('HH:mm')}{' '}
                   -{' '}
                   {moment(session.end)
-                    .tz(event?.timezone)
+                    .tz(event?.timezone || 'UTC')
                     .format('HH:mm')}{' '}
-                  {getEventTimezoneText(event?.timezone)}
+                  {getEventTimezoneText(event?.timezone || 'UTC')}
                 </>
               )}
             </CardDescription>
@@ -58,7 +57,7 @@ const ScheduleCard = ({
               <div className="flex py-1 items-center flex-row space-x-2 overflow-x-scroll mt-auto">
                 {session.speakers.map((speaker) => (
                   <Badge
-                    key={speaker.id}
+                    key={speaker.name}
                     variant={'outline'}
                     className="">
                     {speaker.name}

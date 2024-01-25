@@ -8,9 +8,11 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { getImageUrl } from '@/lib/utils/utils'
+
+import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
+
 import { fetchEvents } from '@/lib/data'
-import { IOrganization } from 'streameth-server/model/organization'
+import { archivePath } from '@/lib/utils/path'
 
 const UpcomingEvents = async ({
   date,
@@ -18,12 +20,12 @@ const UpcomingEvents = async ({
   archive,
 }: {
   date?: Date
-  organization?: IOrganization['id']
+  organization?: IOrganizationModel['_id']
   archive?: boolean
 }) => {
   const events = await fetchEvents({
     date,
-    organizationId: organization,
+    organizationSlug: organization,
   })
 
   if (events.length === 0) return null
@@ -47,6 +49,7 @@ const UpcomingEvents = async ({
               id,
               accentColor,
               end,
+              slug,
             },
             index
           ) => (
@@ -54,7 +57,7 @@ const UpcomingEvents = async ({
               key={index}
               href={
                 archive
-                  ? `/archive?event=` + id
+                  ? archivePath({ event: slug })
                   : `/${organizationId}/${id}`
               }>
               <Card
@@ -68,7 +71,7 @@ const UpcomingEvents = async ({
                       className="rounded"
                       alt="Session image"
                       quality={80}
-                      src={getImageUrl(`/events/${eventCover}`)}
+                      src={`${eventCover}`}
                       fill
                       style={{
                         objectFit: 'cover',
@@ -80,7 +83,7 @@ const UpcomingEvents = async ({
                       {name}
                     </CardTitle>
                     <CardDescription>
-                      {start.toDateString()}
+                      {new Date(start).toDateString()}
                       {/* {new Date(start).toDateString() !==
                       new Date(end).toDateString()
                         ? ` - ${new Date(end).toDateString()}`

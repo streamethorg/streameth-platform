@@ -80,6 +80,7 @@
     "sharp": "^0.32.6",
     "siwe": "^2.1.4",
     "streameth-server": "1.0.0",
+    "streameth-new-server": "3.0.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss": "3.3.2",
     "tailwindcss-animate": "^1.0.7",

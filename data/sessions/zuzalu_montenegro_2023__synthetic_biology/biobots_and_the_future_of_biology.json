@@ -1,0 +1,20 @@
+{
+  "id": "biobots_and_the_future_of_biology",
+  "name": "Biobots and the Future of Biology",
+  "description": "",
+  "start": "2023-04-02T11:00:00.000Z",
+  "end": "2023-04-02T11:30:00.000Z",
+  "stageId": "dome",
+  "speakers": [
+    {
+      "id": "michael_levin",
+      "name": "Michael Levin",
+      "bio": "Tufts University",
+      "eventId": "zuzalu_montenegro_2023__synthetic_biology"
+    }
+  ],
+  "videoUrl": "https://lp-playback.com/hls/6724bqgi64j81qg9/index.m3u8",
+  "eventId": "zuzalu_montenegro_2023__synthetic_biology",
+  "coverImage": "/sessions/zuzalu_montenegro_2023/zuzalu_thumbnail.jpg",
+  "assetId": "67243415-8c98-4adf-b2ff-383a44bcddc7"
+}

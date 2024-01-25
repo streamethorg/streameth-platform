@@ -11,7 +11,7 @@ import {
 import ShareButton from '@/components/misc/ShareButton'
 import EmbedButton from '@/components/misc/EmbedButton'
 import SpeakerIcon from '../speakers/speakerIcon'
-import { ISpeaker } from 'streameth-server/model/speaker'
+import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
 const SessionInfoBox = ({
@@ -31,23 +31,24 @@ const SessionInfoBox = ({
   playbackId?: string | undefined
   streamId?: string | undefined
   playerName: string
-  speakers?: ISpeaker[]
+  speakers?: ISpeakerModel[]
   assetId?: string
   viewCount?: boolean
 }) => {
   const [isOpened, setIsOpened] = useState(false)
+
   return (
-    <div className=" rounded my-2">
-      <div className="flex flex-col lg:flex-row justify-center py-4">
+    <div className="my-2 rounded">
+      <div className="flex flex-col justify-center py-4 lg:flex-row">
         <div className="flex flex-col justify-center px-2">
           <CardTitle className="">{title}</CardTitle>
           <CardDescription>
             {viewCount && assetId && <ViewCounts assetId={assetId} />}
 
-            <div className="flex flex-row ">{cardDescription}</div>
+            <div className="flex flex-row">{cardDescription}</div>
           </CardDescription>
         </div>
-        <div className="flex flex-row lg:ml-auto space-x-1 mt-2 lg:my-0">
+        <div className="flex flex-row mt-2 space-x-1 lg:my-0 lg:ml-auto">
           <ShareButton />
           <EmbedButton
             streamId={streamId}
@@ -58,8 +59,8 @@ const SessionInfoBox = ({
         </div>
       </div>
       {description !== '' && (
-        <Card>
-          <CardContent
+        <CardContent className="p-4 rounded-md bg-background">
+          <div
             className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
               isOpened ? 'max-h-96' : 'max-h-10'
             }`}>
@@ -70,15 +71,13 @@ const SessionInfoBox = ({
                   <SpeakerIcon key={speaker.id} speaker={speaker} />
                 ))}
             </div>
-          </CardContent>
-          <CardFooter>
-            <button
-              onClick={() => setIsOpened(!isOpened)}
-              className="mt-2 ml-auto w-full text-right ">
-              {isOpened ? 'Less' : 'More'}
-            </button>
-          </CardFooter>
-        </Card>
+          </div>
+          <button
+            onClick={() => setIsOpened(!isOpened)}
+            className="mt-2 ml-auto w-full text-right text-white">
+            {isOpened ? 'Less' : 'More'}
+          </button>
+        </CardContent>
       )}
     </div>
   )
