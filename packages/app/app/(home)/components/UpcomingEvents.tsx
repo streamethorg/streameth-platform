@@ -14,9 +14,6 @@ import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organiza
 import { fetchEvents } from '@/lib/data'
 import { archivePath } from '@/lib/utils/path'
 
-import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
-
-import { fetchEvents } from '@/lib/data'
 const UpcomingEvents = async ({
   date,
   organization,
@@ -34,14 +31,14 @@ const UpcomingEvents = async ({
   if (events.length === 0) return null
 
   return (
-    <Card className="max-w-screen border-none bg-white">
+    <Card className="bg-white border-none max-w-screen">
       <CardHeader>
-        <CardTitle className="text-background ">Events</CardTitle>
+        <CardTitle className="text-background">Events</CardTitle>
         <CardDescription>
           Explore current and past events
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-row overflow-x-scroll space-x-4 ">
+      <CardContent className="flex overflow-x-scroll flex-row space-x-4">
         {events.map(
           (
             {
@@ -68,8 +65,8 @@ const UpcomingEvents = async ({
                 style={{
                   backgroundColor: accentColor,
                 }}>
-                <div className=" min-h-full rounded-xl text-white uppercase">
-                  <div className="aspect-video relative">
+                <div className="min-h-full text-white uppercase rounded-xl">
+                  <div className="relative aspect-video">
                     <Image
                       className="rounded"
                       alt="Session image"
@@ -81,8 +78,8 @@ const UpcomingEvents = async ({
                       }}
                     />
                   </div>
-                  <CardHeader className="bg-background rounded mt-1">
-                    <CardTitle className="truncate text-sm">
+                  <CardHeader className="mt-1 rounded bg-background">
+                    <CardTitle className="text-sm truncate">
                       {name}
                     </CardTitle>
                     <CardDescription>
