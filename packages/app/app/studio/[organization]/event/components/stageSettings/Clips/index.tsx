@@ -1,17 +1,12 @@
 'use client'
 import { useState } from 'react'
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from '@/components/ui/card'
-import ISession from 'streameth-server/model/session'
-import IStage from 'streameth-server/model/stage'
+import { Card, CardFooter } from '@/components/ui/card'
+import { ISession } from 'streameth-server/model/session'
+import { IStage } from 'streameth-server/model/stage'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
-
+import { useNavigation } from '../navigation/navigationContext'
 const Clips = ({
   stage,
   sessions,
@@ -22,6 +17,12 @@ const Clips = ({
   const [selectedSession, setSelectedSession] = useState<
     ISession | undefined
   >()
+
+  const { selectedSetting } = useNavigation()
+
+  if (selectedSetting !== 'clip') {
+    return null
+  }
 
   return (
     <div className="flex flex-row h-full">

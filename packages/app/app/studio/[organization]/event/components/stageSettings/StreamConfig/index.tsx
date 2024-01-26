@@ -1,3 +1,4 @@
+'use client'
 import { IStage } from 'streameth-server/model/stage'
 import {
   Card,
@@ -7,11 +8,22 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Player from '@/components/ui/Player'
-import { livepeer } from '@/lib/services/livepeer'
-const StreamConfig = async ({ stage }: { stage: IStage }) => {
-  const stream = (
-    await livepeer.stream.get(stage.streamSettings.streamId)
-  ).stream
+import { useNavigation } from '../navigation/navigationContext'
+import { useStream } from '@livepeer/react'
+const StreamConfig = ({ stage }: { stage: IStage }) => {
+  const { selectedSetting } = useNavigation()
+  const { data: stream, isLoading } = useStream(
+    stage.streamSettings.streamId
+  )
+
+  if (selectedSetting !== 'settings') {
+    return null
+  }
+
+  if (isLoading) {
+    return null
+  }
+
   return (
     <Card className="border-none shadow-none">
       <CardHeader>

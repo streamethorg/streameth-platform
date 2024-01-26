@@ -1,13 +1,6 @@
 import * as React from 'react'
 
 import { TooltipProvider } from '@/components/ui/tooltip'
-
-import { Nav } from './components/eventNavigation'
-import {
-  fetchEvent,
-  fetchEventSessions,
-  fetchEventStages,
-} from '@/lib/data'
 import EventSettings from './components/eventSettings'
 import StageSettings from './components/stageSettings'
 export default async function EventPage({
@@ -19,31 +12,31 @@ export default async function EventPage({
     stage: string
   }
 }) {
-  const [event, stages, sessions] = await Promise.all([
-    fetchEvent({
-      event: searchParams.eventId,
-    }),
-    fetchEventStages({
-      event: searchParams.eventId,
-    }),
-    fetchEventSessions({
-      event: searchParams.eventId,
-    }),
-  ])
+  // const linksData: link[] = [
+  //   {
+  //     title: 'Home',
+  //     icon: Inbox,
+  //     variant: 'default',
+  //   },
+  //   {
+  //     title: 'Livestream',
+  //     icon: File,
+  //     variant: 'ghost',
+  //   },
+  // ]
 
   // get #setting from url
   return (
     <TooltipProvider>
       <div className="flex flex-row h-full overflow-hidden w-full">
-        <Nav isCollapsed={true} />
+        {/* <Nav isCollapsed={true} /> */}
         {!searchParams.settings ||
           (searchParams.settings === 'Home' && (
-            <EventSettings event={event} />
+            <EventSettings eventId={searchParams.eventId} />
           ))}
         {searchParams.settings === 'Livestream' && (
           <StageSettings
-            sessions={sessions}
-            stages={stages}
+            eventId={searchParams.eventId}
             selectedStage={searchParams.stage}
           />
         )}

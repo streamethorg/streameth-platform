@@ -8,19 +8,13 @@ import {
 import CreateStageForm from '../createStageForm'
 import { IStage } from 'streameth-server/model/stage'
 import useSearchParams from '@/lib/hooks/useSearchParams'
-const StageAccordion = ({
-  stages,
-  selectedSetting,
-  setSelectedSetting,
-}: {
-  stages: IStage[]
-  selectedSetting: string
-  setSelectedSetting: React.Dispatch<React.SetStateAction<string>>
-}) => {
+import { useNavigation } from './navigationContext'
+
+const StageAccordion = ({ stages }: { stages: IStage[] }) => {
   const { handleTermChange, searchParams } = useSearchParams({
     key: 'stage',
   })
-
+  const { selectedSetting, setSelectedSetting } = useNavigation()
   const currentStage = searchParams.get('stage') || ''
 
   return (

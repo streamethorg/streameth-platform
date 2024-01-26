@@ -14,7 +14,7 @@ import { File, Inbox } from 'lucide-react'
 
 interface NavProps {
   isCollapsed: boolean
-  links?: link[]
+  links: link[]
 }
 interface link {
   title: string
@@ -23,33 +23,20 @@ interface link {
   variant: 'default' | 'ghost'
 }
 
-const linksData: link[] = [
-  {
-    title: 'Home',
-    icon: Inbox,
-    variant: 'default',
-  },
-  {
-    title: 'Livestream',
-    icon: File,
-    variant: 'ghost',
-  },
-]
+export function Nav({ isCollapsed, links }: NavProps) {
+  // const { searchParams, handleTermChange } = useSearchParams({
+  //   key: 'settings',
+  // })
 
-export function Nav({ isCollapsed }: NavProps) {
-  const { searchParams, handleTermChange } = useSearchParams({
-    key: 'settings',
-  })
-
-  const links = linksData.map((link) => {
-    return {
-      ...link,
-      variant:
-        link.title === searchParams.get('settings')
-          ? ('default' as link['variant'])
-          : ('ghost' as link['variant']),
-    }
-  })
+  // const links = linksData.map((link) => {
+  //   return {
+  //     ...link,
+  //     variant:
+  //       link.title === searchParams.get('settings')
+  //         ? ('default' as link['variant'])
+  //         : ('ghost' as link['variant']),
+  //   }
+  // })
 
   return (
     <div
@@ -61,7 +48,7 @@ export function Nav({ isCollapsed }: NavProps) {
             <Tooltip key={index} delayDuration={0}>
               <TooltipTrigger asChild>
                 <div
-                  onClick={() => handleTermChange(link.title)}
+                  // onClick={() => handleTermChange(link.title)}
                   className={cn(
                     buttonVariants({
                       variant: link.variant,
@@ -89,7 +76,7 @@ export function Nav({ isCollapsed }: NavProps) {
           ) : (
             <div
               key={index}
-              onClick={() => handleTermChange(link.title)}
+              // onClick={() => handleTermChange(link.title)}
               className={cn(
                 buttonVariants({ variant: link.variant, size: 'sm' }),
                 link.variant === 'default' &&
