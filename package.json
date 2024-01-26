@@ -6,7 +6,7 @@
     "packages": [
       "packages/app",
       "packages/server",
-      "packages/av-tools",
+      "packages/tools/av-tools",
       "packages/tools",
       "packages/new-server"
     ]

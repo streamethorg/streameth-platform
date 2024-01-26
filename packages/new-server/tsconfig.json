@@ -32,8 +32,8 @@
       "@routes/*": ["src/routes/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
-      "@aitools/*": ["../tools/ai/src/*"],
-      "@avtools/*": ["../av-tools/src/*"]
+      "@aitools/*": ["../tools/ai-tools/src/*"],
+      "@avtools/*": ["../tools/av-tools/src/*"]
     }
   },
   "include": ["src/**/*"],

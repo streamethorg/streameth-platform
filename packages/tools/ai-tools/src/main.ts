@@ -1,6 +1,6 @@
 import { createLabels, createSummary, createTranscription } from "./ai";
-import { getAssetInfo } from "../../../av-tools/src/utils/livepeer";
-import { downloadM3U8ToMP3 } from "../../../av-tools/src/utils/ffmpeg";
+import { getAssetInfo } from "../../av-tools/src/utils/livepeer";
+import { downloadM3U8ToMP3 } from "../../av-tools/src/utils/ffmpeg";
 import S3Client from "../../../server/services/s3/index.ts";
 import SessionService from "../../../new-server/src/services/session.service";
 import * as fs from "fs";
@@ -23,7 +23,7 @@ async function getFileSize(filePath: string): Promise<number> {
   });
 }
 
-async function startCreatingSummary(
+async function startAITools(
   assetId: string,
   overwriteFiles = false,
   keepTmp = false
@@ -96,8 +96,8 @@ async function startCreatingSummary(
   }
 }
 
-// startCreatingSummary("7a79da4e-19d4-44e1-9600-e4f927c47af9")
+// startAITools("7a79da4e-19d4-44e1-9600-e4f927c47af9")
 //   .then(() => console.log("Ran successfully..."))
 //   .catch((err) => console.error("Error:", err));
 
-export default startCreatingSummary;
+export default startAITools;

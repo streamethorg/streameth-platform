@@ -1,5 +1,5 @@
 {
-  "name": "av-tools",
+  "name": "@streameth/av-tools",
   "description": "Tools to manage Web3 events media, streaming, recording and archiving",
   "license": "MIT",
   "version": "0.2.0",
