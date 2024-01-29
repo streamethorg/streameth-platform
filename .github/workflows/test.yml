@@ -19,13 +19,16 @@ jobs:
           node-version: "20"
 
       - name: Install yarn...
-        run: npm install -g yarn
-
-      - name: Yarn intsall...
-        run: yarn
+        run: |
+          npm install -g yarn
+          yarn
 
       - name: Cypress install
         uses: cypress-io/github-action@v6
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         with:
           runTests: false
           build: yarn build
