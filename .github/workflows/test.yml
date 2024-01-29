@@ -18,27 +18,20 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install yarn...
+      - name: Install yarn and dependencies
         run: |
           npm install -g yarn
-          yarn
+          yarn install
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v6
-        env:
-          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
-        with:
-          runTests: false
-          build: yarn build
+      - name: Build project
+        run: yarn build
 
-      - name: Save build folder
+      - name: Save .next directory
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: next-artifact
           if-no-files-found: error
-          path: build
+          path: .next
 
   cypress-run:
     runs-on: ubuntu-22.04
@@ -47,11 +40,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download the build folder
+      - name: Download the .next directory
         uses: actions/download-artifact@v4
         with:
-          name: build
-          path: build
+          name: next-artifact
+          path: .next
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
 
       - name: Cypress run
         env:
