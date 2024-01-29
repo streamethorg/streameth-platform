@@ -20,7 +20,7 @@ jobs:
 
       - name: Install yarn and dependencies
         run: |
-          npm install -g yarn
+          npm install -g yarn next
 
       - name: Build project
         env:
