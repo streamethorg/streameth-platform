@@ -35,7 +35,7 @@ jobs:
         with:
           name: next-artifact
           if-no-files-found: error
-          path: .next
+          path: packages/app/.next
 
   cypress-run:
     runs-on: ubuntu-22.04
@@ -48,7 +48,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: next-artifact
-          path: .next
+          path: packages/app/.next
 
       - name: Install dependencies
         run: |
