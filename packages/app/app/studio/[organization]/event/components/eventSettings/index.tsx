@@ -1,31 +1,34 @@
-import SettingsNavigation from './settingsAccordion'
-import { fetchEvent, fetchEventStages } from '@/lib/data'
-import { EventHomeComponent } from '@/app/[organization]/[event]/page'
+'use client'
+import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { useNavigation } from '../navigation/navigationContext'
 
-const EventSettings = async ({ eventId }: { eventId: string }) => {
-  const event = await fetchEvent({ eventId: eventId })
-  const stages = await fetchEventStages({ eventId: eventId })
-  if (!event) return null
+const EventSettings = ({
+  event,
+  stages,
+}: {
+  event: IEventModel
+  stages: IStageModel[]
+}) => {
+  const { selectedSetting } = useNavigation()
+
+  if (selectedSetting === 'stages') return null
 
   return (
-    <>
-      <div className="w-2/6 min-w-[400px] h-full border-r">
-        <SettingsNavigation event={event} />
-      </div>
-      <div className="w-full h-full">
-        <EventHomeComponent
-          event={event}
-          stages={stages}
-          params={{
-            organization: event.organizationId.toString(),
-          }}
-          searchParams={{
-            stage: undefined,
-            date: undefined,
-          }}
-        />
-      </div>
-    </>
+    <div className="w-full h-full">
+      <EventHomeComponent
+        event={event}
+        stages={stages}
+        params={{
+          organization: event.organizationId.toString(),
+        }}
+        searchParams={{
+          stage: undefined,
+          date: undefined,
+        }}
+      />
+    </div>
   )
 }
 

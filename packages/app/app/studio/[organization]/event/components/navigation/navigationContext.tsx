@@ -10,15 +10,19 @@ import React, {
 interface NavigationContextType {
   selectedStage: string
   setSelectedStage: (stage: string) => void
-  selectedSetting: string
+  selectedSetting: 'stages' | 'event'
   setSelectedSetting: (setting: string) => void
+  selectedStageSetting: 'settings' | 'clip'
+  setSelectedStageSetting: (setting: string) => void
 }
 
 const initialContext: NavigationContextType = {
   selectedStage: '',
   setSelectedStage: () => {},
-  selectedSetting: '',
+  selectedSetting: 'event',
   setSelectedSetting: () => {},
+  selectedStageSetting: 'settings',
+  setSelectedStageSetting: () => {},
 }
 
 const NavigationContext =
@@ -35,8 +39,12 @@ export const NavigationProvider: React.FC<
 > = ({ children }) => {
   const [selectedStage, setSelectedStage] = useState<string>('')
   const [selectedSetting, setSelectedSetting] =
-    useState<string>('settings')
-
+    useState<NavigationContextType['selectedSetting']>('event')
+  const [selectedStageSetting, setSelectedStageSetting] =
+    useState<NavigationContextType['selectedStageSetting']>(
+      'settings'
+    )
+  console.log(selectedSetting)
   return (
     <NavigationContext.Provider
       value={{
@@ -44,6 +52,8 @@ export const NavigationProvider: React.FC<
         setSelectedStage,
         selectedSetting,
         setSelectedSetting,
+        selectedStageSetting,
+        setSelectedStageSetting,
       }}>
       {children}
     </NavigationContext.Provider>

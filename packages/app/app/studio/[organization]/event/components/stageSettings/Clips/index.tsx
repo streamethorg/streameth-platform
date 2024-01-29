@@ -1,12 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react'
-
-import { Card, CardFooter } from '@/components/ui/card'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
-import { useNavigation } from '../navigation/navigationContext'
+import { useNavigation } from '../../navigation/navigationContext'
 import { Button } from '@/components/ui/button'
 
 const Clips = ({
@@ -28,9 +26,9 @@ const Clips = ({
     }
   }, [stage, sessions])
 
-  const { selectedSetting } = useNavigation()
+  const { selectedStageSetting } = useNavigation()
 
-  if (selectedSetting !== 'clip') {
+  if (selectedStageSetting !== 'clip') {
     return null
   }
 

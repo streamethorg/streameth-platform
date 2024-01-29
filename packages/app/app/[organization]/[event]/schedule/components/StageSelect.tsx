@@ -23,7 +23,7 @@ const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
       </SelectTrigger>
       <SelectContent>
         {stages.map((stage) => (
-          <SelectItem key={stage.id} value={stage.id}>
+          <SelectItem key={stage._id} value={stage._id}>
             {stage.name}
           </SelectItem>
         ))}

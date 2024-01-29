@@ -34,18 +34,23 @@ const Layout = ({
     },
   ]
   const headersList = headers()
-  const pathname = headersList.get('next-url') || ''
-  console.log('pathname', pathname)
+  const pathname = headersList.get('next-url')
+
+  const isEventPath =
+    pathname === `/studio/${[params.organization]}/event`
+  console.log('isEventPath', isEventPath, pathname)
   return (
     <div className="w-screen h-screen ">
       <StudioPageNavbar organization={params.organization} />
       <div className="top-[74px] flex flex-col h-[calc(100vh-74px)]">
         <div className="flex flex-row h-full">
-          <SideNavigation
-            isCollapsed={false}
-            links={links}
-            currentPath={pathname}
-          />
+          {!isEventPath && (
+            <SideNavigation
+              isCollapsed={false}
+              links={links}
+              currentPath={pathname}
+            />
+          )}
           <div className="flex flex-col flex-grow h-full overflow-hidden">
             {children}
           </div>

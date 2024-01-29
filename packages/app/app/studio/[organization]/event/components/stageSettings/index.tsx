@@ -1,55 +1,36 @@
-import StageAccordion from './navigation/stageAccordion'
+'use client'
 import StreamConfig from './StreamConfig'
 import Clips from './Clips'
-import { fetchEventStages, fetchEventSessions } from '@/lib/data'
-import { NavigationProvider } from './navigation/navigationContext'
-const StageSettings = async ({
-  eventId,
-  selectedStage,
+import { useNavigation } from '../navigation/navigationContext'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+const StageSettings = ({
+  stages,
+  sessions,
 }: {
-  eventId: string
-  selectedStage: string
+  stages: IStageModel[]
+  sessions: ISessionModel[]
 }) => {
-  const [stages, sessions] = await Promise.all([
-    fetchEventStages({
-      eventId,
-    }),
-    fetchEventSessions({
-      event: eventId,
-    }),
-  ])
+  const { selectedStage, selectedSetting } = useNavigation()
+
+  if (selectedSetting !== 'stages') return null
 
   const stage =
     stages.filter((stage) => stage._id === selectedStage)[0] ||
     stages[0]
 
-  console.log(
-    'sessions',
-    sessions.sessions.filter(
-      (session) => session.stageId === stage._id
-    )
-  )
   return (
-    <NavigationProvider>
-      <div className="w-1/6 min-w-[300px] h-full border-r">
-        <StageAccordion stages={stages} />
+    <div className="w-full h-full">
+      <div className="p-2 bg-secondary h-full">
+        <StreamConfig stage={stage} />
+        <Clips
+          stage={stage}
+          sessions={sessions.filter(
+            (session) => session.stageId === stage._id
+          )}
+        />
       </div>
-      <div className="w-full h-full">
-        {!stage ? (
-          <div>create a stage</div>
-        ) : (
-          <div className="p-2 bg-gray-100 h-full">
-            <StreamConfig stage={stage} />
-            <Clips
-              stage={stage}
-              sessions={sessions.sessions.filter(
-                (session) => session.stageId === stage._id
-              )}
-            />
-          </div>
-        )}
-      </div>
-    </NavigationProvider>
+    </div>
   )
 }
 

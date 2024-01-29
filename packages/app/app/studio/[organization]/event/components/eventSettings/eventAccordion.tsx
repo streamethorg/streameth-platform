@@ -23,15 +23,14 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import Combobox from '@/components/ui/combo-box'
 import ImageUpload from '../../../../../../components/misc/form/imageUpload'
 import ColorPicker from '../../../../../../components/misc/form/colorPicker'
 import TimePicker from '../../../../../../components/misc/form/timePicker'
-
 import DatePicker from '../../../../../../components/misc/form/datePicker'
-import Combobox from '@/components/ui/combo-box'
 import moment from 'moment-timezone'
-
-const SettingsNavigation = ({ event }: { event: IEventModel }) => {
+import { useNavigation } from '../navigation/navigationContext'
+const EventAccordion = ({ event }: { event: IEventModel }) => {
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
@@ -56,10 +55,15 @@ const SettingsNavigation = ({ event }: { event: IEventModel }) => {
     console.log(values)
   }
 
+  const { selectedSetting, setSelectedSetting } = useNavigation()
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
-        <Accordion type="single" collapsible>
+        <Accordion
+          type="single"
+          collapsible
+          onValueChange={() => setSelectedSetting('events')}>
           <AccordionItem value="item-1" className="px-2">
             <AccordionTrigger>Basics</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8">
@@ -311,7 +315,7 @@ const SettingsNavigation = ({ event }: { event: IEventModel }) => {
   )
 }
 
-export default SettingsNavigation
+export default EventAccordion
 
 function generateTimezones() {
   const timezones = moment.tz.names()

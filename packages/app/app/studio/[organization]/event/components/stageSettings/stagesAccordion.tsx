@@ -5,20 +5,25 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import CreateStageForm from '../createStageForm'
+import CreateStageForm from './createStageForm'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { useNavigation } from './navigationContext'
+import { useNavigation } from '../navigation/navigationContext'
 
 const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
-  const { handleTermChange, searchParams } = useSearchParams({
-    key: 'stage',
-  })
-  const { selectedSetting, setSelectedSetting } = useNavigation()
-  const currentStage = searchParams.get('stage') || ''
+  const {
+    selectedStage,
+    setSelectedStage,
+    selectedStageSetting,
+    setSelectedStageSetting,
+    setSelectedSetting,
+  } = useNavigation()
 
   return (
-    <Accordion type="single" collapsible defaultValue={currentStage}>
+    <Accordion
+      type="single"
+      collapsible
+      defaultValue={selectedStage}
+      onValueChange={() => setSelectedSetting('stages')}>
       {stages.map((stage) => {
         return (
           <AccordionItem
@@ -26,16 +31,16 @@ const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
             key={stage._id}
             value={stage.name}
             onClick={() => {
-              handleTermChange(stage._id)
+              setSelectedStage(stage._id)
             }}>
             <AccordionTrigger>{stage.name}</AccordionTrigger>
             <AccordionContent
               onClick={() => {
-                setSelectedSetting('settings')
+                setSelectedStageSetting('settings')
               }}>
               <p
                 className={`${
-                  selectedSetting === 'settings' &&
+                  selectedStageSetting === 'settings' &&
                   'border-l border-primary'
                 } px-2`}>
                 Livestream settings
@@ -43,11 +48,11 @@ const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
             </AccordionContent>
             <AccordionContent
               onClick={() => {
-                setSelectedSetting('clip')
+                setSelectedStageSetting('clip')
               }}>
               <p
                 className={`${
-                  selectedSetting === 'clip' &&
+                  selectedStageSetting === 'clip' &&
                   'border-l border-primary'
                 } px-2`}>
                 Clips

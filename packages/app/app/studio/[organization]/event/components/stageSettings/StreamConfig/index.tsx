@@ -7,17 +7,17 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Player from '@/components/ui/Player'
-import { useNavigation } from '../navigation/navigationContext'
+import { useNavigation } from '../../navigation/navigationContext'
 import { useStream } from '@livepeer/react'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 
 const StreamConfig = ({ stage }: { stage: IStageModel }) => {
-  const { selectedSetting } = useNavigation()
+  const { selectedStageSetting } = useNavigation()
   const { data: stream, isLoading } = useStream(
     stage.streamSettings.streamId
   )
 
-  if (selectedSetting !== 'settings') {
+  if (selectedStageSetting !== 'settings') {
     return null
   }
 
