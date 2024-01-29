@@ -24,6 +24,10 @@ jobs:
           yarn install
 
       - name: Build project
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         run: yarn build
 
       - name: Save .next directory
