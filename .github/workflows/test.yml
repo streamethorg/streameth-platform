@@ -1,15 +1,13 @@
-name: Cypress Tests 2
+name: Cypress Tests with Dependency and Artifact Caching
 
 on:
   push:
-    branches: [main]
   pull_request:
     branches: [develop, main]
 
 jobs:
-  cypress-test:
-    runs-on: ubuntu-latest
-
+  install:
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,35 +17,34 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install Yarn ...
+      - name: Install yarn...
         run: npm install -g yarn
 
-      - name: Get Yarn cache directory path
-        run: |
-          echo "YARN_CACHE_DIR=$(yarn cache dir)" >> $GITHUB_ENV
-          echo $GITHUB_ENV
-
-      - name: Cache Dependencies ...
-        uses: actions/cache@v4
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
         with:
-          path: |
-            ${{ env.YARN_CACHE_DIR }}
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
-            ${{ runner.os }}-nextjs-
+          runTests: false
+          build: yarn build
 
-      - name: Fail if cache not found
-        run: |
-          if [ "${{ steps.cache-dependencies.outputs.cache-hit }}" != "true" ]; then
-            echo "Cache not found, failing the workflow"
-            exit 1
-          fi
-        id: check-cache
-        env:
-          CACHE_HIT: ${{ steps.cache-dependencies.outputs.cache-hit }}
+      - name: Save build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+
+  cypress-run:
+    runs-on: ubuntu-22.04
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folder
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build
 
       - name: Cypress run
         env:
@@ -56,6 +53,6 @@ jobs:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         uses: cypress-io/github-action@v6
         with:
-          build: yarn build
           start: yarn start
+          browser: chrome
           working-directory: ./packages/app
