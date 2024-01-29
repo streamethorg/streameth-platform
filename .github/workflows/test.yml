@@ -21,7 +21,6 @@ jobs:
       - name: Install yarn and dependencies
         run: |
           npm install -g yarn
-          yarn install
 
       - name: Build project
         env:
@@ -53,7 +52,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm install -g yarn
-          yarn install
 
       - name: Cypress run
         env:
