@@ -1,44 +1,59 @@
-name: Cypress Tests 2
+name: Cypress Tests with Dependency and Artifact Caching
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [develop, main]
 
 jobs:
-  cypress-test:
-    runs-on: ubuntu-latest
-
+  install:
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        defaults:
-          run:
-            shell: bash
 
-      - name: Setup Node 14 ...
+      - name: Setup Node 20 ...
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install Yarn
-        run: npm install -g yarn
-
-      - name: Get Yarn cache directory path
+      - name: Install yarn and dependencies
         run: |
-          echo "YARN_CACHE_DIR=$(yarn cache dir)" >> $GITHUB_ENV
-          echo $GITHUB_ENV
+          npm install -g yarn
+          yarn install
 
-      - name: Cache Dependencies ...
-        uses: actions/cache@v4
+      - name: Build project
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+        run: yarn build
+
+      - name: Save .next directory
+        uses: actions/upload-artifact@v4
         with:
-          path: |
-            ${{ env.YARN_CACHE_DIR }}  # Use the new variable name here
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
-            ${{ runner.os }}-nextjs-
+          name: next-artifact
+          if-no-files-found: error
+          path: packages/app/.next
+
+  cypress-run:
+    runs-on: ubuntu-22.04
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the .next directory
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
 
       - name: Cypress run
         env:
@@ -47,6 +62,6 @@ jobs:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         uses: cypress-io/github-action@v6
         with:
-          build: yarn build
           start: yarn start
+          browser: chrome
           working-directory: ./packages/app
