@@ -3,15 +3,10 @@ import * as React from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import EventSettings from './components/eventSettings'
 import StageSettings from './components/stageSettings'
+import { studioPageParams } from '@/lib/types'
 export default async function EventPage({
   searchParams,
-}: {
-  searchParams: {
-    eventId: string
-    settings: string
-    stage: string
-  }
-}) {
+}: studioPageParams) {
   // const linksData: link[] = [
   //   {
   //     title: 'Home',
@@ -30,10 +25,10 @@ export default async function EventPage({
     <TooltipProvider>
       <div className="flex flex-row h-full overflow-hidden w-full">
         {/* <Nav isCollapsed={true} /> */}
-        {!searchParams.settings ||
-          (searchParams.settings === 'Home' && (
-            <EventSettings eventId={searchParams.eventId} />
-          ))}
+        {(!searchParams.settings ||
+          searchParams.settings === 'Home') && (
+          <EventSettings eventId={searchParams.eventId} />
+        )}
         {searchParams.settings === 'Livestream' && (
           <StageSettings
             eventId={searchParams.eventId}

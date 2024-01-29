@@ -1,18 +1,18 @@
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import CreateEventForm from './components/createEventForm'
+import { studioPageParams } from '@/lib/types'
+import { notFound } from 'next/navigation'
 
-const CreateEventPage = ({
-  searchParams: { step },
-}: {
-  searchParams: {
-    step: string
+const CreateEventPage = ({ params }: studioPageParams) => {
+  if (!params.organization) {
+    return notFound()
   }
-}) => {
+
   return (
-    <div>
-      <Card className="max-w-4xl mx-auto">
+    <div className="w-full h-full overflow-scroll bg-secondary flex justify-center items-center">
+      <Card className="p-4">
         <CardContent>
-          <CreateEventForm />
+          <CreateEventForm organizationId={params.organization} />
         </CardContent>
       </Card>
     </div>

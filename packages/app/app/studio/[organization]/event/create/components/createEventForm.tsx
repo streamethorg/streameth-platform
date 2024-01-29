@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { formSchema } from '@/lib/schema'
@@ -16,18 +17,26 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import DatePicker from '@/components/misc/form/datePicker'
-
+import { apiUrl } from '@/lib/utils/utils'
 import moment from 'moment-timezone'
 import Combobox from '@/components/ui/combo-box'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import ColorPicker from '@/components/misc/form/colorPicker'
 import TimePicker from '@/components/misc/form/timePicker'
+import Link from 'next/link'
 
-export default function CreateEventForm() {
+export default function CreateEventForm({
+  organizationId,
+}: {
+  organizationId: string
+}) {
+  const [isCreatingEvent, setIsCreatingEvent] =
+    useState<boolean>(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       eventName: '',
+      organizationId: organizationId,
       eventDescription: '',
       startDate: '',
       startTime: '',
@@ -41,10 +50,19 @@ export default function CreateEventForm() {
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    const response = await fetch(`${apiUrl()}/events`, {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+
+    const data = await response.json()
   }
 
   return (
@@ -245,7 +263,16 @@ export default function CreateEventForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Create event</Button>
+        <div className="flex flex-row">
+          <Button variant={'destructive'}>
+            <Link href={`/studio/${organizationId}`} passHref>
+              Cancel
+            </Link>
+          </Button>
+          <Button className="ml-auto" type="submit">
+            Create
+          </Button>
+        </div>
       </form>
     </Form>
   )

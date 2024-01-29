@@ -1,20 +1,21 @@
 import React from 'react'
-import ISession from 'streameth-server/model/session'
+import { Card } from '@/components/ui/card'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 function SessionCard({
   session,
   selectedSession,
   setSelectedSession,
 }: {
-  session: ISession
-  selectedSession: ISession | undefined
-  setSelectedSession: (session: ISession) => void
+  session: ISessionModel
+  selectedSession: ISessionModel | undefined
+  setSelectedSession: (session: ISessionModel) => void
 }) {
   return (
-    <div
+    <Card
       onClick={() => setSelectedSession(session)}
-      key={session.id}
+      key={session._id}
       className={`${
-        selectedSession && selectedSession.id === session.id
+        selectedSession && selectedSession._id === session._id
           ? 'shadow-lg'
           : 'hover:shadow-lg'
       } cursor-pointer border  p-4 rounded-lg transition duration-200 ease-in-out`}>
@@ -36,7 +37,7 @@ function SessionCard({
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
 

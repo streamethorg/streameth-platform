@@ -16,13 +16,14 @@ import { ResolvingMetadata, Metadata } from 'next'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 
 import StagePreview from './stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 
 export async function generateStaticParams() {
   const allEvents = await fetchEvents({})
@@ -33,20 +34,22 @@ export async function generateStaticParams() {
   return paths
 }
 
-export default async function EventHome({
+export function EventHomeComponent({
+  event,
+  stages,
   params,
   searchParams,
-}: EventPageProps) {
-  const event = await fetchEvent({
-    eventSlug: params.event,
-  })
-
-  if (!event) return notFound()
-
-  const stages = await fetchEventStages({
-    eventId: event.slug,
-  })
-
+}: {
+  event: IEventModel
+  stages: IStageModel[]
+  params: {
+    organization: string
+  }
+  searchParams: {
+    stage?: string
+    date?: string
+  }
+}) {
   return (
     <div className="flex flex-col w-full h-full bg-accent px-2">
       <div className=" relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
@@ -130,6 +133,29 @@ export default async function EventHome({
         </Suspense>
       </div>
     </div>
+  )
+}
+export default async function EventHome({
+  params,
+  searchParams,
+}: EventPageProps) {
+  const event = await fetchEvent({
+    eventSlug: params.event,
+  })
+
+  if (!event) return notFound()
+
+  const stages = await fetchEventStages({
+    eventId: event.slug,
+  })
+
+  return (
+    <EventHomeComponent
+      event={event}
+      stages={stages}
+      params={params}
+      searchParams={searchParams}
+    />
   )
 }
 

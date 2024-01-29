@@ -6,11 +6,11 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import CreateStageForm from '../createStageForm'
-import { IStage } from 'streameth-server/model/stage'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import { useNavigation } from './navigationContext'
 
-const StageAccordion = ({ stages }: { stages: IStage[] }) => {
+const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
   const { handleTermChange, searchParams } = useSearchParams({
     key: 'stage',
   })
@@ -23,10 +23,10 @@ const StageAccordion = ({ stages }: { stages: IStage[] }) => {
         return (
           <AccordionItem
             className="px-2"
-            key={stage.id}
-            value={stage.id}
+            key={stage._id}
+            value={stage.name}
             onClick={() => {
-              handleTermChange(stage.id)
+              handleTermChange(stage._id)
             }}>
             <AccordionTrigger>{stage.name}</AccordionTrigger>
             <AccordionContent

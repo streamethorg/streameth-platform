@@ -1,5 +1,4 @@
 'use client'
-import { IStage } from 'streameth-server/model/stage'
 import {
   Card,
   CardHeader,
@@ -10,7 +9,9 @@ import {
 import Player from '@/components/ui/Player'
 import { useNavigation } from '../navigation/navigationContext'
 import { useStream } from '@livepeer/react'
-const StreamConfig = ({ stage }: { stage: IStage }) => {
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+
+const StreamConfig = ({ stage }: { stage: IStageModel }) => {
   const { selectedSetting } = useNavigation()
   const { data: stream, isLoading } = useStream(
     stage.streamSettings.streamId

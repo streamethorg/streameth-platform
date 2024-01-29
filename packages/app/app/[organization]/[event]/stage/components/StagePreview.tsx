@@ -21,7 +21,7 @@ export default function StagePreview({
 
   return (
     <Link
-      key={stage.id}
+      key={stage._id}
       href={`/${organization}/${event}/stage/${stage._id}`}>
       <Card className="border-none">
         <Player

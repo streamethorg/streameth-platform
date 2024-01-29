@@ -34,7 +34,8 @@ export const NavigationProvider: React.FC<
   NavigationProviderProps
 > = ({ children }) => {
   const [selectedStage, setSelectedStage] = useState<string>('')
-  const [selectedSetting, setSelectedSetting] = useState<string>('')
+  const [selectedSetting, setSelectedSetting] =
+    useState<string>('settings')
 
   return (
     <NavigationContext.Provider

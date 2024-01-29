@@ -1,10 +1,11 @@
 import SettingsNavigation from './settingsAccordion'
-import Iframe from './iframe'
-import { IEvent } from 'streameth-server/model/event'
-import { fetchEvent } from '@/lib/data'
+import { fetchEvent, fetchEventStages } from '@/lib/data'
+import { EventHomeComponent } from '@/app/[organization]/[event]/page'
 
 const EventSettings = async ({ eventId }: { eventId: string }) => {
-  const event = await fetchEvent({ event: eventId })
+  const event = await fetchEvent({ eventId: eventId })
+  const stages = await fetchEventStages({ eventId: eventId })
+  if (!event) return null
 
   return (
     <>
@@ -12,9 +13,16 @@ const EventSettings = async ({ eventId }: { eventId: string }) => {
         <SettingsNavigation event={event} />
       </div>
       <div className="w-full h-full">
-        <Iframe
-          organizationId={event.organizationId}
-          eventId={event.id}
+        <EventHomeComponent
+          event={event}
+          stages={stages}
+          params={{
+            organization: event.organizationId.toString(),
+          }}
+          searchParams={{
+            stage: undefined,
+            date: undefined,
+          }}
         />
       </div>
     </>

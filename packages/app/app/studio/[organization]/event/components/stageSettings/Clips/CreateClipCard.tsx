@@ -1,9 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
-
 import { useAsset } from '@livepeer/react'
 import StudioPlayer from './Player'
-
 import {
   CardContent,
   CardFooter,
@@ -11,20 +9,21 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import IStage from 'streameth-server/model/stage'
 import { Button } from '@/components/ui/button'
-import { ISession } from 'streameth-server/model/session'
 import SessionSelect from './SessionSelect'
 import CreateClipButton from './CreateClipButton'
 import TimeSetter from './TimeSetter'
 import { ClipProvider } from './ClipContext'
 import Player from '@/components/ui/Player'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+
 const CreateClipCard = ({
   stage,
   session,
 }: {
-  stage: IStage
-  session: ISession
+  stage: IStageModel
+  session: ISessionModel
 }) => {
   const { data: currentClip } = useAsset({
     assetId: session.assetId,
@@ -75,7 +74,9 @@ const CreateClipCard = ({
                   <p>Error: {currentClip?.status?.errorMessage}</p>
                 )}
               </div>
-              <Button onClick={() => setIsCreatingClip(true)}>
+              <Button
+                variant={'secondary'}
+                onClick={() => setIsCreatingClip(true)}>
                 Replace Clip
               </Button>
             </div>

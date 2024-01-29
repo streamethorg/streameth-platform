@@ -70,7 +70,6 @@ export async function fetchEvents({
       if (!organization) {
         return []
       }
-      console.log( `${apiUrl()}/events/organization/${organization._id}`  )
       const response = await fetch(
         `${apiUrl()}/events/organization/${organization._id}`
       )

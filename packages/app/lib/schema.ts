@@ -4,6 +4,15 @@ import * as z from 'zod'
 const imageUrlRegex = /\.(jpeg|jpg|gif|png)$/
 
 export const formSchema = z.object({
+  organizationId: z
+    .string()
+    .min(2, {
+      message: 'Organization name must be at least 2 characters long.',
+    })
+    .max(50, {
+      message:
+        'Organization name must be no more than 50 characters long.',
+    }),
   eventName: z
     .string()
     .min(2, {

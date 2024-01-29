@@ -1,22 +1,32 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Card, CardFooter } from '@/components/ui/card'
-import { ISession } from 'streameth-server/model/session'
-import { IStage } from 'streameth-server/model/stage'
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
 import { useNavigation } from '../navigation/navigationContext'
+import { Button } from '@/components/ui/button'
+
 const Clips = ({
   stage,
   sessions,
 }: {
-  stage: IStage
-  sessions: ISession[]
+  stage: IStageModel
+  sessions: ISessionModel[]
 }) => {
   const [selectedSession, setSelectedSession] = useState<
-    ISession | undefined
+    ISessionModel | undefined
   >()
+
+  useEffect(() => {
+    setSelectedSession(undefined)
+
+    return () => {
+      setSelectedSession(undefined)
+    }
+  }, [stage, sessions])
 
   const { selectedSetting } = useNavigation()
 
@@ -25,10 +35,9 @@ const Clips = ({
   }
 
   return (
-    <div className="flex flex-row h-full">
-      <Card className="flex flex-col w-1/3 border-none rounded-none overflow-scroll h-full gap-2 p-2">
-        <div className="text-2xl">Stage sessions</div>
-        <div className="w-full h-full overflow-scroll">
+    <div className="flex flex-row h-full gap-2">
+      <div className="flex flex-col w-1/3 border-none rounded-none overflow-scroll h-full gap-2">
+        <div className="w-full h-full overflow-scroll space-y-2">
           {sessions.length > 0 &&
             sessions.map((session) => (
               <SessionCard
@@ -39,9 +48,11 @@ const Clips = ({
               />
             ))}
         </div>
-        <CardFooter>Create new Clip</CardFooter>
-      </Card>
-      <div className="flex flex-col w-2/3 p-2">
+        <Button variant={'default'} className="w-full">
+          Create new Clip
+        </Button>
+      </div>
+      <div className="flex flex-col w-2/3">
         {selectedSession ? (
           <CreateClipCard stage={stage} session={selectedSession} />
         ) : (

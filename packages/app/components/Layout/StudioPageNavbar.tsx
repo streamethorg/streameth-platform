@@ -3,7 +3,6 @@
 import React, { useState, useEffect, Suspense } from 'react'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import Image from 'next/image'
-import SearchBar from '@/components/misc/SearchBar'
 import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -27,7 +26,11 @@ const NavBarButton = ({
   </button>
 )
 
-const HomePageNavbar = () => {
+const StudioPageNavbar = ({
+  organization,
+}: {
+  organization: string
+}) => {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const [menuVisible, setMenuVisible] = useState(false)
 
@@ -37,23 +40,14 @@ const HomePageNavbar = () => {
 
   const pages = [
     {
-      name: 'Videography',
+      name: 'Upload video',
       href: 'https://info.streameth.org/stream-eth-studio',
       bgColor: 'bg-muted ',
     },
+
     {
-      name: 'Product',
-      href: 'https://info.streameth.org/services',
-      bgColor: 'bg-muted ',
-    },
-    {
-      name: 'Host your event',
-      href: 'https://info.streameth.org/contact-us',
-      bgColor: 'bg-primary text-primary-foreground',
-    },
-    {
-      name: 'studio',
-      href: '/studio/base',
+      name: 'Create event',
+      href: `/studio/${organization}/event/create`,
       bgColor: 'bg-primary text-primary-foreground',
     },
   ]
@@ -79,9 +73,9 @@ const HomePageNavbar = () => {
         </Link>
       </div>
       <div className="flex-grow mx-2 flex justify-center">
-        <Suspense>
+        {/* <Suspense>
           <SearchBar />
-        </Suspense>
+        </Suspense> */}
       </div>
       <div className="ml-auto flex flex-row items-center justify-end h-full">
         {menuVisible && (
@@ -98,4 +92,4 @@ const HomePageNavbar = () => {
   )
 }
 
-export default HomePageNavbar
+export default StudioPageNavbar

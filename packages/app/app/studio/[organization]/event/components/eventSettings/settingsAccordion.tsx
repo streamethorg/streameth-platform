@@ -2,14 +2,15 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-
+import { eventSchema } from '@/lib/schema'
+import DataConfigElement from './dataConfigElement'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { IEvent } from 'streameth-server/model/event'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 
 import {
   Form,
@@ -25,13 +26,12 @@ import { Button } from '@/components/ui/button'
 import ImageUpload from '../../../../../../components/misc/form/imageUpload'
 import ColorPicker from '../../../../../../components/misc/form/colorPicker'
 import TimePicker from '../../../../../../components/misc/form/timePicker'
-import { eventSchema } from '@/lib/schema'
-import DataConfigElement from './dataConfigElement'
+
 import DatePicker from '../../../../../../components/misc/form/datePicker'
 import Combobox from '@/components/ui/combo-box'
 import moment from 'moment-timezone'
 
-const SettingsNavigation = ({ event }: { event: IEvent }) => {
+const SettingsNavigation = ({ event }: { event: IEventModel }) => {
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {

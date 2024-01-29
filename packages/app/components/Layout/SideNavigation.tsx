@@ -1,6 +1,4 @@
-'use client'
 import { LucideIcon } from 'lucide-react'
-
 import { cn } from '@/lib/utils/utils'
 import { buttonVariants } from '@/components/ui/button'
 import {
@@ -8,35 +6,39 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import Link from 'next/link'
 
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { File, Inbox } from 'lucide-react'
-
-interface NavProps {
-  isCollapsed: boolean
-  links: link[]
-}
+type variant =
+  | 'default'
+  | 'destructive'
+  | 'outline'
+  | 'secondary'
+  | 'ghost'
+  | 'link'
 interface link {
   title: string
   label?: string
   icon: LucideIcon
-  variant: 'default' | 'ghost'
+  variant: variant
+  href: string
 }
 
-export function Nav({ isCollapsed, links }: NavProps) {
-  // const { searchParams, handleTermChange } = useSearchParams({
-  //   key: 'settings',
-  // })
-
-  // const links = linksData.map((link) => {
-  //   return {
-  //     ...link,
-  //     variant:
-  //       link.title === searchParams.get('settings')
-  //         ? ('default' as link['variant'])
-  //         : ('ghost' as link['variant']),
-  //   }
-  // })
+export default function SideNavigation({
+  isCollapsed,
+  links: linksData,
+  currentPath,
+}: {
+  isCollapsed: boolean
+  links: link[]
+  currentPath: string
+}) {
+  const links = linksData.map((link) => ({
+    ...link,
+    variant:
+      link.href === currentPath
+        ? ('secondary' as variant)
+        : ('ghost' as variant),
+  }))
 
   return (
     <div
@@ -47,8 +49,8 @@ export function Nav({ isCollapsed, links }: NavProps) {
           isCollapsed ? (
             <Tooltip key={index} delayDuration={0}>
               <TooltipTrigger asChild>
-                <div
-                  // onClick={() => handleTermChange(link.title)}
+                <Link
+                  href={link.href}
                   className={cn(
                     buttonVariants({
                       variant: link.variant,
@@ -60,7 +62,7 @@ export function Nav({ isCollapsed, links }: NavProps) {
                   )}>
                   <link.icon className="h-4 w-4" />
                   <span className="sr-only">{link.title}</span>
-                </div>
+                </Link>
               </TooltipTrigger>
               <TooltipContent
                 side="right"
@@ -74,9 +76,9 @@ export function Nav({ isCollapsed, links }: NavProps) {
               </TooltipContent>
             </Tooltip>
           ) : (
-            <div
+            <Link
               key={index}
-              // onClick={() => handleTermChange(link.title)}
+              href={link.href}
               className={cn(
                 buttonVariants({ variant: link.variant, size: 'sm' }),
                 link.variant === 'default' &&
@@ -94,7 +96,7 @@ export function Nav({ isCollapsed, links }: NavProps) {
                   {link.label}
                 </span>
               )}
-            </div>
+            </Link>
           )
         )}
       </nav>
