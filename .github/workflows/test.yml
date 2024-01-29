@@ -40,11 +40,6 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
             ${{ runner.os }}-nextjs-
 
-      - name: Build ...
-        run: |
-          yarn install
-          yarn build
-
       - name: Cypress run
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
