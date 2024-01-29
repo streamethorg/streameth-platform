@@ -52,20 +52,9 @@ export default function SearchBar(): JSX.Element {
   useClickOutside(dropdownRef, () => setIsOpened(false))
 
   const handleTermChange = (term: string) => {
-    // window.location.href = archivePath({ searchQuery: term })
-    // Parse current URL
-    const url = new URL(window.location.href)
-    // Get existing parameters
-    const params = new URLSearchParams(url.search)
-    // Update or add the 'searchQuery' parameter
-    params.set('searchQuery', term)
-
-    // Construct the new URL with both parameters
-    const newUrl = `${url.origin}${url.pathname}?${params.toString()}`
-    // Update the page URL
-    window.location.href = newUrl
+    window.location.href = archivePath({ searchQuery: term })
+    //  handleTermChangeOverload(term)
   }
-  //  handleTermChangeOverload(term)
 
   const handleEventChange = (term: string) => {
     window.location.href = archivePath({ event: term })
