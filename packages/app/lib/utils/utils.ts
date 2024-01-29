@@ -64,10 +64,15 @@ export const hasData = ({ event }: { event: IEvent }) => {
   return event.dataImporter !== undefined
 }
 
+// temp revert to github
+//return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
 export const getImageUrl = (image: string) => {
-  //return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
-  // temp revert to github
-  return `https://streamethapp.ams3.cdn.digitaloceanspaces.com${image}`
+  if (process.env.NODE_ENV === 'development') {
+    return `https://streameth-develop.ams3.digitaloceanspaces.com${image}`
+  } else if (process.env.NODE_ENV === 'production') {
+    return `https://streameth-production.ams3.digitaloceanspaces.com${image}`
+  }
+  return ''
 }
 
 export const loadEnv = () => {
