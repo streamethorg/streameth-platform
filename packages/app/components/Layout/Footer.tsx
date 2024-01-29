@@ -28,7 +28,7 @@ const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="flex flex-wrap justify-center items-center mb-3 md:mb-5 z-[99999999]">
+    <footer className="flex flex-wrap justify-center items-center mt-5 mb-3 md:mb-5 z-[99999999]">
       <Image
         className="hidden mr-2 md:block"
         src="/logo.png"
