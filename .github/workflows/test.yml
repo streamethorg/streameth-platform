@@ -2,6 +2,7 @@ name: Cypress Tests with Dependency and Artifact Caching
 
 on:
   push:
+    branches: [main]
   pull_request:
     branches: [develop, main]
 
@@ -19,6 +20,9 @@ jobs:
 
       - name: Install yarn...
         run: npm install -g yarn
+
+      - name: Yarn intsall...
+        run: yarn
 
       - name: Cypress install
         uses: cypress-io/github-action@v6
