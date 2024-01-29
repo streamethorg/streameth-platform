@@ -1,0 +1,13 @@
+- name: Get Yarn cache directory path
+  id: yarn-cache-dir-path
+  run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
+
+- uses: actions/cache@v3
+  with:
+    path: |
+      ${{ env.dir }}
+      ${{ github.workspace }}/.next/cache
+    key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+    restore-keys: |
+      ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+      ${{ runner.os }}-nextjs-
