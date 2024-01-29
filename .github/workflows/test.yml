@@ -20,14 +20,17 @@ jobs:
 
       - name: Install yarn and dependencies
         run: |
-          npm install -g yarn next
+          npm install -g yarn
 
-      - name: Build project
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
-        run: yarn build
+        with:
+          runTests: false
+          build: yarn build
 
       - name: Save .next directory
         uses: actions/upload-artifact@v4
