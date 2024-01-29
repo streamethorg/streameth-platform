@@ -13,9 +13,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        defaults:
-          run:
-            shell: bash
 
       - name: Setup Node 14 ...
         uses: actions/setup-node@v4
