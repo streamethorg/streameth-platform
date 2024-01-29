@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install Yarn
+      - name: Install Yarn ...
         run: npm install -g yarn
 
       - name: Get Yarn cache directory path
@@ -38,6 +38,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
             ${{ runner.os }}-nextjs-
+
+      - name: Fail if cache not found
+        run: |
+          if [ "${{ steps.cache-dependencies.outputs.cache-hit }}" != "true" ]; then
+            echo "Cache not found, failing the workflow"
+            exit 1
+          fi
+        id: check-cache
+        env:
+          CACHE_HIT: ${{ steps.cache-dependencies.outputs.cache-hit }}
 
       - name: Cypress run
         env:
