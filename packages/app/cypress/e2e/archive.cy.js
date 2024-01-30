@@ -69,12 +69,13 @@ describe('archive page', () => {
   })
 
   it('show pagination and can click next page', () => {
+    cy.intercept() // Waiting to finish all API Calls
+    cy.viewport(1200, 800)
     cy.visit('http://localhost:3000/archive')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
       '1 of 67'
     )
-    cy.viewport(1200, 800)
     cy.get(':nth-child(2) > .flex > :nth-child(3)').click()
     cy.url().should('include', 'page=2')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
