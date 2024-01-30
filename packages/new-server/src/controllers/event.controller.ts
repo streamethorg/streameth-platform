@@ -12,6 +12,7 @@ import {
   Path,
   Delete,
   Tags,
+  Security,
 } from 'tsoa';
 import { EventDto } from '@dtos/event.dto';
 @Tags('Event')
@@ -22,6 +23,7 @@ export class EventController extends Controller {
   /**
    * @summary Creates Event
    */
+  @Security('jwt')
   @SuccessResponse('201')
   @Post('')
   async createEvent(
@@ -34,6 +36,7 @@ export class EventController extends Controller {
   /**
    * @summary Update Event
    */
+  @Security('jwt')
   @SuccessResponse('200')
   @Put('{eventId}')
   async editEvent(
@@ -69,6 +72,7 @@ export class EventController extends Controller {
     return SendApiResponse('events fetched', events);
   }
 
+  @Security('jwt')
   @SuccessResponse('200')
   @Delete('{eventId}')
   async deleteEvent(@Path() eventId: string): Promise<IStandardResponse<void>> {

@@ -11,6 +11,7 @@ import {
   Route,
   SuccessResponse,
   Tags,
+  Security,
 } from 'tsoa';
 
 @Tags('Speaker')
@@ -18,6 +19,7 @@ import {
 export class SpeakerController extends Controller {
   private speakerService = new SpeakerService();
 
+  @Security('jwt')
   @SuccessResponse('201')
   @Post()
   async createSpeaker(

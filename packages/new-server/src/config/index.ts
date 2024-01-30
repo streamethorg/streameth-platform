@@ -16,4 +16,8 @@ export const config = {
     credentials: validatedEnv.CREDENTIALS,
   },
   secretKey: validatedEnv.SECRET_KEY,
+  jwt: {
+    secret: validatedEnv.JWT_SECRET,
+    expiry: validatedEnv.JWT_EXPIRY
+  },
 };
