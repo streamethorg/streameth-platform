@@ -57,7 +57,7 @@ describe('archive page', () => {
     )
   })
 
-  it('can input search query and keep organization name', () => {
+  it('Can input search query and keep organization name', () => {
     cy.visit(
       'http://localhost:3000/archive?event=funding_the_commons_berlin_2023'
     )
@@ -68,15 +68,17 @@ describe('archive page', () => {
       .should('include', 'event=funding_the_commons_berlin_2023')
   })
 
-  it('show pagination and can click next page', () => {
-    cy.intercept() // Waiting to finish all API Calls
-    cy.viewport(1200, 800)
+  it('Show pagination and can click next page', () => {
+    cy.intercept('GET', '/archive?searchQuery=jonas').as(
+      'searchForJonas'
+    )
     cy.visit('http://localhost:3000/archive')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
       '1 of 67'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)').click()
+
     cy.url().should('include', 'page=2')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
