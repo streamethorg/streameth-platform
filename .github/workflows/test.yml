@@ -68,7 +68,7 @@ jobs:
           record: true
           parallel: true
           group: "UI - Chrome"
-          project: packages/app/
+          working-directory: packages/app
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
