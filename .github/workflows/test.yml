@@ -68,7 +68,7 @@ jobs:
           record: true
           parallel: true
           group: "UI - Chrome"
-          spec: packages/app/cypress/tests/e2e/*
+          spec: packages/app/cypress/e2e/*
           config-file: packages/app/cypress.config.js
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
