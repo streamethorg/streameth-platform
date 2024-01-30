@@ -6,6 +6,7 @@ import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
 import { useNavigation } from '../../navigation/navigationContext'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 
 const Clips = ({
   stage,
@@ -26,10 +27,38 @@ const Clips = ({
     }
   }, [stage, sessions])
 
-  const { selectedStageSetting } = useNavigation()
+  const { selectedStageSetting, setSelectedStageSetting } =
+    useNavigation()
 
   if (selectedStageSetting !== 'clip') {
     return null
+  }
+
+  if (sessions.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full">
+        <Card>
+          <CardContent>
+            <div className="text-2xl mb-4 text-center w-full">
+              No sessions yet
+            </div>
+            <div className="flex flex-row space-x-2">
+              <Button
+                variant={'secondary'}
+                className=""
+                onClick={() => {
+                  setSelectedStageSetting('settings')
+                }}>
+                Cancel
+              </Button>
+              <Button variant={'default'} className="w-full">
+                Create new session
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   return (
@@ -46,9 +75,19 @@ const Clips = ({
               />
             ))}
         </div>
-        <Button variant={'default'} className="w-full">
-          Create new Clip
-        </Button>
+        <div className="flex flex-row space-x-2">
+          <Button
+            variant={'outline'}
+            className=""
+            onClick={() => {
+              setSelectedStageSetting('settings')
+            }}>
+            Back to settings
+          </Button>
+          <Button variant={'default'} className="w-full">
+            Create new session
+          </Button>
+        </div>
       </div>
       <div className="flex flex-col w-2/3">
         {selectedSession ? (

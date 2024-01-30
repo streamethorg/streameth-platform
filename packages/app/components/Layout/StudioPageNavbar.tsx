@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -28,8 +28,10 @@ const NavBarButton = ({
 
 const StudioPageNavbar = ({
   organization,
+  children,
 }: {
   organization: string
+  children?: React.ReactNode
 }) => {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const [menuVisible, setMenuVisible] = useState(false)
@@ -73,9 +75,7 @@ const StudioPageNavbar = ({
         </Link>
       </div>
       <div className="flex-grow mx-2 flex justify-center">
-        {/* <Suspense>
-          <SearchBar />
-        </Suspense> */}
+        {children}
       </div>
       <div className="ml-auto flex flex-row items-center justify-end h-full">
         {menuVisible && (

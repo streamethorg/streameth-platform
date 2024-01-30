@@ -5,7 +5,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import CreateStageForm from './createStageForm'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { useNavigation } from '../navigation/navigationContext'
 
@@ -61,12 +60,6 @@ const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
           </AccordionItem>
         )
       })}
-      <AccordionItem className="px-2 bg-accent " value="create">
-        <AccordionTrigger>Add stage</AccordionTrigger>
-        <AccordionContent className="p-2 space-y-8">
-          <CreateStageForm />
-        </AccordionContent>
-      </AccordionItem>
     </Accordion>
   )
 }
