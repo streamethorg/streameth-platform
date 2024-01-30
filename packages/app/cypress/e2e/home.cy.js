@@ -32,14 +32,12 @@ describe('Tests for homepage', () => {
   })
 
   it('can click description', () => {
-    cy.viewport(1200, 800)
     cy.get(
       ':nth-child(2) > .min-h-full > .flex-col > [href="/archive?event=ethporto_2023"] > .flex > .text-xs'
     ).click()
   })
 
   it('can click organization name', () => {
-    cy.viewport(1200, 800)
     cy.get(':nth-child(1) > .my-2 > a > .font-semibold').click()
   })
 })
