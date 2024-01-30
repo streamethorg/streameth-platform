@@ -1,7 +1,5 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress'
 
 export default defineConfig({
-  e2e: {
-    supportFile: false,
-  }
-});
+  e2e: {},
+})

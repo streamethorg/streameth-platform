@@ -60,8 +60,8 @@ jobs:
       - name: "E2e tests - Chrome"
         uses: cypress-io/github-action@v6
         with:
-          build: yarn cypress info
-          start: yarn start
+          build: yarn --cwd packages/app cypress info
+          start: yarn --cwd packages/app start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
