@@ -39,7 +39,7 @@ jobs:
           if-no-files-found: error
           path: packages/app/.next
 
-  ui-chrome-tests:
+  chrome-tests:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     needs: install
@@ -73,7 +73,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: "cypress:server:args"
 
-  ui-chrome-mobile-tests:
+  chrome-mobile-tests:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     needs: install
@@ -91,7 +91,7 @@ jobs:
           name: next-artifact
           path: packages/app/.next
 
-      - name: "E2e tests - Chrome"
+      - name: "E2e tests - Chrome Mobile"
         uses: cypress-io/github-action@v6
         with:
           build: yarn --cwd packages/app cypress info
@@ -102,10 +102,85 @@ jobs:
           working-directory: packages/app
           config: |
             {
-              "e2e": {
-                "viewportWidth": 375,
-                "viewportHeight": 667
-              }
+            "e2e": {
+            "viewportWidth": 390,
+            "viewportHeight": 844
+            }
+            }
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "cypress:server:args"
+
+  firefox-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: "E2e tests - Firefox"
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn --cwd packages/app cypress info
+          start: yarn --cwd packages/app start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: firefox
+          working-directory: packages/app
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "cypress:server:args"
+
+  firefox-mobile-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: "E2e tests - Firefox mobile"
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn --cwd packages/app cypress info
+          start: yarn --cwd packages/app start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          working-directory: packages/app
+          config: |
+            {
+            "e2e": {
+            "viewportWidth": 375,
+            "viewportHeight": 667
+            }
             }
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
