@@ -34,13 +34,13 @@ export class EventDto implements IEvent {
   @IsString()
   location!: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  logo?: string;
+  logo: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  banner?: string;
+  banner: string;
 
   @IsOptional()
   @IsString()
@@ -70,9 +70,9 @@ export class EventDto implements IEvent {
   @IsString()
   website?: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  timezone?: string;
+  timezone: string;
 
   @IsOptional()
   @IsString()

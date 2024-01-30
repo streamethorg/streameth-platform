@@ -11,6 +11,7 @@ import {
   Post,
   Put,
   Route,
+  Security,
   SuccessResponse,
   Tags,
 } from 'tsoa';
@@ -20,6 +21,7 @@ import {
 export class OrganizationController extends Controller {
   private organizationService = new OrganizationService();
 
+  @Security('jwt')
   @SuccessResponse('201')
   @Post()
   async createOrganization(
@@ -29,6 +31,7 @@ export class OrganizationController extends Controller {
     return SendApiResponse('organization created', org);
   }
 
+  @Security('jwt')
   @SuccessResponse('200')
   @Put('{organizationId}')
   async editOrganization(
@@ -57,6 +60,7 @@ export class OrganizationController extends Controller {
     return SendApiResponse('organizations fetched', orgs);
   }
 
+  @Security('jwt')
   @SuccessResponse('200')
   @Delete('{organizationId}')
   async deleteOrganization(

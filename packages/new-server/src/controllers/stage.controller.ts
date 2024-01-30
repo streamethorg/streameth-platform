@@ -13,6 +13,7 @@ import {
   Route,
   SuccessResponse,
   Tags,
+  Security,
 } from 'tsoa';
 
 @Tags('Stage')
@@ -20,6 +21,8 @@ import {
 export class StageController extends Controller {
   private stageService = new StageService();
 
+  @Security('jwt')
+  @SuccessResponse('201')
   @Post()
   async createStage(
     @Body() body: StageDto,
@@ -28,6 +31,7 @@ export class StageController extends Controller {
     return SendApiResponse('stage created', stage);
   }
 
+  @Security('jwt')
   @SuccessResponse('200')
   @Put('{stageId}')
   async editStage(
@@ -63,6 +67,7 @@ export class StageController extends Controller {
     return SendApiResponse('stages fetched', stages);
   }
 
+  @Security('jwt')
   @SuccessResponse('200')
   @Delete('{stageId}')
   async deleteStage(@Path() stageId: string): Promise<IStandardResponse<void>> {

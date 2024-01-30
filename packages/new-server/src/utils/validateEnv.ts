@@ -13,6 +13,8 @@ const validateEnv = () => {
     ORIGIN: str(),
     CREDENTIALS: bool(),
     SECRET_KEY: str(),
+    JWT_SECRET: str(),
+    JWT_EXPIRY: str()
   });
 };
 
