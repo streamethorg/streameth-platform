@@ -37,9 +37,13 @@ const CreateClipCard = ({
     setIsCreatingClip(session.assetId ? false : true)
   }, [session])
 
+  if (!stage.streamSettings.streamId) {
+    return <div>this stage has no stream</div>
+  }
+
   return (
     <ClipProvider>
-      <Card>
+      <Card className="">
         <CardHeader className="pb-0 lg:pb-0">
           <CardTitle>{session.name}</CardTitle>
         </CardHeader>

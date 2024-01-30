@@ -14,7 +14,7 @@ const EventSettings = ({
   const { selectedSetting } = useNavigation()
 
   if (selectedSetting === 'stages') return null
-
+  return null
   return (
     <div className="w-full h-full">
       <EventHomeComponent

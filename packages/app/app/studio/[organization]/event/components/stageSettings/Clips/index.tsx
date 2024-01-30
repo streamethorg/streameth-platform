@@ -63,7 +63,7 @@ const Clips = ({
 
   return (
     <div className="flex flex-row h-full gap-2">
-      <div className="flex flex-col w-1/3 border-none rounded-none overflow-scroll h-full gap-2">
+      <div className="flex flex-col w-2/6 border-none rounded-none overflow-scroll h-full gap-2">
         <div className="w-full h-full overflow-scroll space-y-2">
           {sessions.length > 0 &&
             sessions.map((session) => (
@@ -89,7 +89,7 @@ const Clips = ({
           </Button>
         </div>
       </div>
-      <div className="flex flex-col w-2/3">
+      <div className="flex flex-col w-full h-full overflow-scroll">
         {selectedSession ? (
           <CreateClipCard stage={stage} session={selectedSession} />
         ) : (
