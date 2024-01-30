@@ -49,10 +49,10 @@ jobs:
         containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download the build folders
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: next-artifact
           path: packages/app/.next
