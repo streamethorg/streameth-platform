@@ -147,10 +147,10 @@ export async function fetchEventStages({
   }
 }
 
-export async function fetchEventStage({
-  stage,
+export async function fetchStage({
+  stage
 }: {
-  stage?: string
+  stage: string
 }): Promise<IStageModel> {
   try {
     const response = await fetch(`${apiUrl()}/stages/${stage}`)

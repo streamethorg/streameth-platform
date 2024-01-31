@@ -19,7 +19,7 @@ export interface EventPageProps {
   params: {
     event: string
     organization: string
-    stageId?: string
+    stage?: string
   }
   searchParams: {
     stage?: string

@@ -25,9 +25,7 @@ export default function Navbar({
           <NavigationMenuItem key={index}>
             <Link href={item.href} legacyBehavior passHref>
               <NavigationMenuLink
-                className={
-                  navigationMenuTriggerStyle() + ' ' + item.bgColor
-                }>
+                className={navigationMenuTriggerStyle()}>
                 {item.name}
               </NavigationMenuLink>
             </Link>

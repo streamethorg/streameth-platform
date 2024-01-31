@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   Card,
   CardDescription,
@@ -12,12 +12,13 @@ import {
 import ShareButton from '@/components/misc/ShareButton'
 import EmbedButton from '@/components/misc/EmbedButton'
 import SpeakerIcon from '../speakers/speakerIcon'
-import {
-  ISpeakerModel,
-  ISpeaker,
-} from 'streameth-new-server/src/interfaces/speaker.interface'
+import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
+import DropdownMenuWithActionButtons from './DropdownMenuWithActionButtons'
+import { ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react'
+
+// TODO LOADING STAT
 const SessionInfoBox = ({
   title,
   cardDescription,
@@ -28,6 +29,7 @@ const SessionInfoBox = ({
   speakers,
   assetId,
   viewCount,
+  inverted,
 }: {
   title: string
   cardDescription?: string
@@ -38,21 +40,49 @@ const SessionInfoBox = ({
   speakers?: ISpeaker[]
   assetId?: string
   viewCount?: boolean
+  inverted?: boolean
 }) => {
   const [isOpened, setIsOpened] = useState(false)
+  const [isExpandable, setIsExpandable] = useState(false)
+  const descriptionRef = useRef(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (descriptionRef.current) {
+        const isMobile = window.innerWidth <= 768 // Adjust mobile breakpoint as needed
+        const descriptionHeight = cardDescription?.length || 0
+        setIsExpandable(isMobile && descriptionHeight < 100)
+      }
+    }
+
+    // Check on mount and window resize
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
-    <div className="">
-      <CardHeader className="flex flex-col justify-center py-4 lg:flex-row">
-        <div className="flex flex-col">
+    <div
+      className={`${
+        inverted
+          ? 'text-white rounded-lg border bg-card text-card-foreground shadow bg-opacity-10 bg-white border-white border-opacity-10'
+          : ''
+      }`}>
+      <CardHeader className=" p-2 lg:p-2 flex w-full items-center justify-between flex-row">
+        <div className="md:flex flex-col">
           <CardTitle className="">{title}</CardTitle>
           <CardDescription>
             {viewCount && assetId && <ViewCounts assetId={assetId} />}
-
-            <div className="flex flex-row">{cardDescription}</div>
+            <div
+              className={`inverted && ${'text-white'} flex flex-row`}>
+              {cardDescription}
+            </div>
           </CardDescription>
         </div>
-        <div className="flex flex-row mt-2 space-x-1 lg:my-0 lg:ml-auto">
+        <div className="md:flex hidden flex-row mt-2 space-x-1 lg:my-0 lg:ml-auto">
           <ShareButton />
           <EmbedButton
             streamId={streamId}
@@ -61,14 +91,21 @@ const SessionInfoBox = ({
           />
           {assetId && <VideoDownload assetId={assetId} />}
         </div>
+        <DropdownMenuWithActionButtons
+          streamId={streamId}
+          playbackId={playbackId}
+          playerName={playerName}
+          assetId={assetId}
+        />
       </CardHeader>
       {description !== '' && (
-        <CardContent className="relative pt-0 lg:pt-0 rounded-md">
+        <CardContent className="relative p-2 lg:p-2  border-t">
           <div
+            ref={descriptionRef}
             className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
-              isOpened ? 'max-h-96' : 'max-h-32'
+              isExpandable && !isOpened && 'max-h-10'
             }`}>
-            <div className="">{description}</div>
+            {description}
             <div className="flex flex-row mt-2 space-x-2">
               {speakers &&
                 speakers.map((speaker) => (
@@ -76,11 +113,17 @@ const SessionInfoBox = ({
                 ))}
             </div>
           </div>
-          <button
-            onClick={() => setIsOpened(!isOpened)}
-            className="absolute mt-2 ml-auto w-full text-right text-secondary-foreground">
-            {isOpened ? 'Less' : 'More'}
-          </button>
+          {isExpandable && (
+            <button
+              onClick={() => setIsOpened(!isOpened)}
+              className="absolute ml-auto bottom-0 right-0 mr-2 text-primary">
+              {isOpened ? (
+                <ArrowUpWideNarrow />
+              ) : (
+                <ArrowDownWideNarrow />
+              )}
+            </button>
+          )}
         </CardContent>
       )}
     </div>

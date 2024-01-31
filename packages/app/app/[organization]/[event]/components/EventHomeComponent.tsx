@@ -45,7 +45,7 @@ export default function EventHomeComponent({
         <Card className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
           <AspectRatio ratio={3 / 1}>
             <Image
-              className="rounded-lg max-h-[500px] p-2"
+              className="rounded-lg  p-2"
               src={event.banner}
               alt="Event Cover"
               width={1500}
@@ -56,7 +56,7 @@ export default function EventHomeComponent({
             />
           </AspectRatio>
           <CardHeader>
-            <CardTitle className="text-4xl uppercase text-white">
+            <CardTitle className="py-2 text-4xl uppercase text-white">
               {event.name}
             </CardTitle>
             <div className="text-sm text-white">
@@ -95,7 +95,7 @@ export default function EventHomeComponent({
               {stages?.map((stage) => (
                 <StagePreview
                   key={stage._id}
-                  event={event.id}
+                  event={event._id}
                   organization={params.organization}
                   stage={stage}
                   eventCover={event?.eventCover}

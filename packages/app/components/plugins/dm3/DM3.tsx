@@ -1,3 +1,4 @@
+'use client'
 import 'dm3-billboard-widget/dist/style.css'
 import { useContext, useMemo } from 'react'
 import { useAccount, useConnect, usePublicClient } from 'wagmi'

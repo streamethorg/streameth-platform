@@ -27,7 +27,6 @@ const Layout = async ({
     '--colors-accent': event.accentColor,
   } as React.CSSProperties
 
-  console.log('ACCENT COLOR', event.accentColor)
   return (
     <div
       className="h-full flex flex-col  z-1 min-h-screen "

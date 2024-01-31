@@ -3,11 +3,7 @@ import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/components/plugins/Chat'
 import { EventPageProps } from '@/lib/types'
-import {
-  fetchEvent,
-  fetchSessions,
-  fetchEventStage,
-} from '@/lib/data'
+import { fetchEvent, fetchSessions, fetchStage } from '@/lib/data'
 import {
   Tabs,
   TabsContent,
@@ -15,8 +11,10 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs'
 import { notFound } from 'next/navigation'
-
 export default async function Stage({ params }: EventPageProps) {
+  if (!params.event || !params.stage) {
+    return notFound()
+  }
   const event = await fetchEvent({
     eventId: params.event,
   })
@@ -26,15 +24,22 @@ export default async function Stage({ params }: EventPageProps) {
   }
   const sessionsData = await fetchSessions({
     event: params.event,
-    stage: params.stageId,
+    stage: params.stage,
     date: new Date(),
   })
 
-  const stage = await fetchEventStage({
-    stage: params.stageId,
+  const stage = await fetchStage({
+    stage: params.stage,
   })
 
   const tabs = []
+  if (!event?.plugins?.disableChat) {
+    tabs.push({
+      value: 'chat',
+      content: <Chat conversationId="d" />,
+    })
+  }
+
   if (
     sessionsData.sessions.length > 0 &&
     !event?.plugins?.hideSchedule
@@ -46,21 +51,16 @@ export default async function Stage({ params }: EventPageProps) {
       ),
     })
   }
-  if (!event?.plugins?.disableChat) {
-    tabs.push({
-      value: 'chat',
-      content: <Chat conversationId={stage._id} />,
-    })
-  }
 
   return (
-    <div className="bg-accent   p-2 h-full flex flex-col w-full lg:flex-row relative lg:max-h-[calc(100vh-54px)]">
-      <div className="flex flex-col w-full h-full z-40 lg:w-[70%] top-[54px] lg:p-4 lg:pr-2">
+    <div className="bg-event flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] p-2 gap-2">
+      <div className="flex flex-col w-full md:h-full z-40 md:w-full top-[54px] gap-2">
         <Player
           streamId={stage.streamSettings?.streamId}
           playerName={stage.name}
         />
         <SessionInfoBox
+          inverted
           title={'Watching: ' + stage.name + ' stage'}
           cardDescription={event.name}
           playerName={stage.name}
@@ -68,10 +68,11 @@ export default async function Stage({ params }: EventPageProps) {
           description={event.description}
         />
       </div>
-      {tabs.length > 0 && (
+      <Chat conversationId="d" />
+      {/* {tabs.length > 0 && (
         <Tabs
           defaultValue={tabs[0]?.value ?? ''}
-          className="lg:w-[30%] w-full max-h-[100vh] lg:ml-2 lg:m-4  p-2 rounded-lg ">
+          className="md:w-[25%] w-full max-h-[100vh] rounded-md ">
           <TabsList className="w-full ">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value}>
@@ -88,7 +89,7 @@ export default async function Stage({ params }: EventPageProps) {
             </TabsContent>
           ))}
         </Tabs>
-      )}
+      )} */}
     </div>
   )
 }
