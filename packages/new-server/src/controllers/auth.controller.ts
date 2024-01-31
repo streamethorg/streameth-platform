@@ -1,27 +1,38 @@
-// import { Controller, Get, Route, Tags, SuccessResponse, Request, Body, Post } from 'tsoa';
-// import * as express from 'express';
-// import { AuthService } from '@services/auth.service';
-// import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-// @Tags('Auth')
-// @Route('auth')
-// class AuthController extends Controller {
-//   private authService = new AuthService();
-//   @SuccessResponse('200')
-//   @Get()
-//   async generateNonce(
-//     @Request() req: express.Request,
-//   ): Promise<IStandardResponse<string>> {
-//     const nonce = await this.authService.generate();
-//     req.session.nonce = nonce;
-//     return SendApiResponse('nonce generated', nonce);
-//   }
+import {
+  Controller,
+  Get,
+  Route,
+  Tags,
+  SuccessResponse,
+  Request,
+  Body,
+  Post,
+} from 'tsoa';
+import * as express from 'express';
+import AuthService from '@services/auth.service';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import { UserDto } from '@dtos/user.dto';
+import { IUser } from '@interfaces/user.interface';
+@Tags('Auth')
+@Route('auth')
+export class AuthController extends Controller {
+  private authService = new AuthService();
 
-//   @SuccessResponse('201')
-//   @Post()
-//   async verifySignature(@Body() message:string, @Body() nonce:string, @Request() req:express.Request){
-//     const signature = await this.authService.verify(message, nonce)
-//     req.session.siwe =signature.messages
-//     req.session.cookie.expires = signature.expiryTime
-//     return SendApiResponse('siganture verified', signature)
-//   }
-// }
+  @SuccessResponse('201')
+  @Post('login')
+  async login(
+    @Body() body: UserDto,
+  ): Promise<IStandardResponse<{ user: IUser; token: string }>> {
+    const user = await this.authService.login(body);
+    return SendApiResponse('logged in', user);
+  }
+
+  @SuccessResponse('200')
+  @Get('nonce/generate')
+  async generateNonce(
+    @Request() req: express.Request,
+  ): Promise<IStandardResponse<string>> {
+    const nonce = await this.authService.generateNonce();
+    return SendApiResponse('nonce generated', nonce.nonce);
+  }
+}

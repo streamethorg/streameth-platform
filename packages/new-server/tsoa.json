@@ -6,9 +6,19 @@
       "name": "streameth-api",
       "outputDirectory": "src/swagger",
       "specVersion": 3,
-      "basePath": "/streameth-platform-packages-new2"
+      "basePath": "/streameth-platform-packages-new2",
+      "securityDefinitions":{
+        "jwt":{
+          "name": "Authorization",
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT",
+          "in": "header"
+        }
+      }
     },
     "routes": {
+      "authenticationModule":"./src/middlewares/auth.middleware.ts",
       "routesDir": "src/routes"
     },
     "compilerOptions": {
