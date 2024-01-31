@@ -5,7 +5,7 @@
   "scripts": {
     "start": "yarn run build && node ./dist/server.js",
     "dev": "nodemon --config nodemon.json",
-    "build": "rm -rf && yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
+    "build": "rm -rf && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "test": "jest --forceExit --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\"",
     "generate:routes": "tsoa spec-and-routes"

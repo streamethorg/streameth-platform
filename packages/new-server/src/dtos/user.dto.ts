@@ -1,7 +1,7 @@
 import { IUser } from '@interfaces/user.interface';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class UserDto implements Pick<IUser, "walletAddress"|"signature"> {
+export class UserDto implements Pick<IUser, "walletAddress"|"signature"|"nonce"> {
   @IsNotEmpty()
   @IsString()
   walletAddress!: string;
@@ -9,4 +9,8 @@ export class UserDto implements Pick<IUser, "walletAddress"|"signature"> {
   @IsNotEmpty()
   @IsString()
   signature!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  nonce!: string;
 }

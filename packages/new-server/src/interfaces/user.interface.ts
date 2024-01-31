@@ -9,5 +9,6 @@ export interface IUser {
   organizations?: Types.ObjectId[];
   role?: UserRole;
   signature: string;
+  nonce:string
 }
 export interface IUserModel extends IUser, Document {}
