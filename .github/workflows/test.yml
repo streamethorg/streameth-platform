@@ -1,52 +1,190 @@
-name: Cypress Tests 2
+name: Cypress Tests with Dependency and Artifact Caching
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [develop, main]
 
 jobs:
-  cypress-test:
+  install:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        defaults:
-          run:
-            shell: bash
 
-      - name: Setup Node 14 ...
+      - name: Setup Node 20 ...
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install Yarn
-        run: npm install -g yarn
-
-      - name: Get Yarn cache directory path
+      - name: Install yarn and dependencies
         run: |
-          echo "YARN_CACHE_DIR=$(yarn cache dir)" >> $GITHUB_ENV
-          echo $GITHUB_ENV
+          npm install -g yarn
 
-      - name: Cache Dependencies ...
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.YARN_CACHE_DIR }}  # Use the new variable name here
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
-            ${{ runner.os }}-nextjs-
-
-      - name: Cypress run
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+        with:
+          runTests: false
+          build: yarn build
+
+      - name: Save .next directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-artifact
+          if-no-files-found: error
+          path: packages/app/.next
+
+  chrome-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: "E2e tests - Chrome"
         uses: cypress-io/github-action@v6
         with:
-          build: yarn build
-          start: yarn start
-          working-directory: ./packages/app
+          build: yarn --cwd packages/app cypress info
+          start: yarn --cwd packages/app start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          working-directory: packages/app
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "cypress:server:args"
+
+  chrome-mobile-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: "E2e tests - Chrome Mobile"
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn --cwd packages/app cypress info
+          start: yarn --cwd packages/app start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          working-directory: packages/app
+          config: |
+            {
+            "e2e": {
+            "viewportWidth": 390,
+            "viewportHeight": 844
+            }
+            }
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "cypress:server:args"
+
+  firefox-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: "E2e tests - Firefox"
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn --cwd packages/app cypress info
+          start: yarn --cwd packages/app start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: firefox
+          working-directory: packages/app
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "cypress:server:args"
+
+  firefox-mobile-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: "E2e tests - Firefox mobile"
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn --cwd packages/app cypress info
+          start: yarn --cwd packages/app start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          working-directory: packages/app
+          config: |
+            {
+            "e2e": {
+            "viewportWidth": 375,
+            "viewportHeight": 667
+            }
+            }
+        env:
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "cypress:server:args"

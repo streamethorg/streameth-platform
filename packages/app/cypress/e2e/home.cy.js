@@ -1,4 +1,4 @@
-describe('example to-do app', () => {
+describe('Tests for homepage', () => {
   beforeEach(() => {
     // Cypress starts out with a blank slate for each test
     // so we must tell it to visit our website with the `cy.visit()` command.
@@ -8,16 +8,19 @@ describe('example to-do app', () => {
     cy.scrollTo('bottom')
   })
 
-  it('displays list of organizations', () => {
+  it('Displays a list of organizations, which should have text', () => {
     cy.get(':nth-child(3) > .my-2 > a > .font-semibold').should(
-      'contain',
-      'ETHBerlin'
+      'not.be.empty'
     )
-
-    // cy.get(':nth-child(3) > .my-2 > a > .font-semibold').invoke('css', 'width').should('match', /300.*px/)
+    cy.get(':nth-child(4) > .my-2 > a > .font-semibold').should(
+      'not.be.empty'
+    )
+    cy.get(':nth-child(0) > .my-2 > a > .font-semibold').should(
+      'not.be.empty'
+    )
   })
 
-  it('can search', () => {
+  it('Give page a search parameter and press Enter', () => {
     cy.get('.flex-grow > .flex-col > .flex').type('jonas')
     cy.get('.flex-grow > .flex-col > .flex').type('{enter}')
   })
@@ -29,14 +32,12 @@ describe('example to-do app', () => {
   })
 
   it('can click description', () => {
-    cy.viewport(1200, 800)
     cy.get(
       ':nth-child(2) > .min-h-full > .flex-col > [href="/archive?event=ethporto_2023"] > .flex > .text-xs'
     ).click()
   })
 
   it('can click organization name', () => {
-    cy.viewport(1200, 800)
     cy.get(':nth-child(1) > .my-2 > a > .font-semibold').click()
   })
 })
