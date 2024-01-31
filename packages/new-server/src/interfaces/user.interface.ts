@@ -8,8 +8,6 @@ export interface IUser {
   walletAddress: string;
   organizations?: Types.ObjectId[];
   role?: UserRole;
-  message?: string;
-  nonce?: string;
-  token?: string;
+  signature: string;
 }
 export interface IUserModel extends IUser, Document {}
