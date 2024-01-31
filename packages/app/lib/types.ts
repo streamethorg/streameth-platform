@@ -53,6 +53,7 @@ export interface IPagination {
 export interface studioPageParams {
   params: {
     organization: string
+    session: string
   }
   searchParams: {
     eventId: string

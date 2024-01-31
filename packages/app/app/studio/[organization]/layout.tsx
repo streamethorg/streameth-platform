@@ -3,33 +3,38 @@ import SideNavigation from '@/components/Layout/SideNavigation'
 import { File, Inbox } from 'lucide-react'
 import { studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
+export type variant =
+  | 'default'
+  | 'destructive'
+  | 'outline'
+  | 'secondary'
+  | 'ghost'
+  | 'link'
 
 const Layout = ({
   children,
   params,
-  searchParams,
 }: {
   children: React.ReactNode
   params: studioPageParams['params']
-  searchParams: studioPageParams['searchParams']
 }) => {
   const links = [
     {
       title: 'Home',
       icon: Inbox,
-      variant: 'default',
+      variant: 'ghost' as variant,
       href: '/studio/base',
     },
     {
       title: 'Library',
       icon: File,
-      variant: 'ghost',
+      variant: 'ghost' as variant,
       href: '/studio/base/library',
     },
     {
       title: 'Settings',
       icon: File,
-      variant: 'ghost',
+      variant: 'ghost' as variant,
       href: '/studio/base/settings',
     },
   ]

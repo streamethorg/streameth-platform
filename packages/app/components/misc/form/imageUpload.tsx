@@ -28,7 +28,7 @@ export default function ImageUpload({
 }: {
   aspectRatio: number
   onChange: (files: string | null) => void
-  value: string | null
+  value: string | null | undefined
 }) {
   const [preview, setPreview] = useState(
     value ? getImageUrl('/events/' + value) : ''

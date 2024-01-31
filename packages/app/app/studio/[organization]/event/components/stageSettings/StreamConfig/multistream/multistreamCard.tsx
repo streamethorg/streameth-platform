@@ -25,7 +25,7 @@ const MultistreamCard = ({ streamId }: { streamId: string }) => {
   }
 
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="shadow-none border-border h-full flex flex-col">
       <CardHeader>
         <CardTitle className="flex flex-row items-center justify-between">
           Multistream Targets

@@ -1,14 +1,10 @@
 import { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils/utils'
 import { buttonVariants } from '@/components/ui/button'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
+
 import Link from 'next/link'
 
-type variant =
+export type variant =
   | 'default'
   | 'destructive'
   | 'outline'

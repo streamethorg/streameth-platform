@@ -5,7 +5,7 @@ import Chat from '@/components/plugins/Chat'
 import { EventPageProps } from '@/lib/types'
 import {
   fetchEvent,
-  fetchEventSessions,
+  fetchSessions,
   fetchEventStage,
 } from '@/lib/data'
 import {
@@ -24,7 +24,7 @@ export default async function Stage({ params }: EventPageProps) {
   if (!event) {
     return notFound()
   }
-  const sessionsData = await fetchEventSessions({
+  const sessionsData = await fetchSessions({
     event: params.event,
     stage: params.stageId,
     date: new Date(),

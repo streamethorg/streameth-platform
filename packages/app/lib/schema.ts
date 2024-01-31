@@ -98,12 +98,56 @@ const IPluginSchema = z.object({
 });
 
 
-
-
 export const StageSchema = z.object({
   name: z.string().min(1, {"message": "Required"}),
   eventId: z.string(),
   streamSettings: IStreamSettingsSchema,
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
+});
+
+
+// Sessions
+
+// Define a schema for the speaker
+const speakerSchema = z.object({
+  name: z.string().optional(),
+  bio: z.string().optional(),
+  eventId: z.string(),
+  twitter: z.string().optional(),
+  github: z.string().optional(),
+  website: z.string().optional(),
+  photo: z.string().optional(),
+  company: z.string().optional(),
+});
+
+// Define the Zod schema for session validation
+export const sessionSchema = z.object({
+  name: z.string().max(255),
+  description: z.string(),
+  start: z.number().optional(),
+  end: z.number().optional(),
+  stageId: z.string().optional(),
+  speakers: z.array(speakerSchema).optional(),
+  source: z.object({
+    streamUrl: z.string().optional(),
+    start: z.number().optional(),
+    end: z.number().optional(),
+  }).optional(),
+  playback: z.object({
+    livepeerId: z.string().optional(),
+    videoUrl: z.string().optional(),
+    ipfsHash: z.string().optional(),
+    format: z.string().optional(),
+    duration: z.number().optional(),
+  }).optional(),
+  videoUrl: z.string().optional(),
+  playbackId: z.string().optional(),
+  assetId: z.string().optional(),
+  eventId: z.string().optional(),
+  track: z.array(z.string()).optional(),
+  coverImage: z.string().optional(),
+  slug: z.string().optional(),
+  organizationId: z.string().optional(),
+  eventSlug: z.string().optional(),
 });

@@ -43,11 +43,8 @@ const CreateClipCard = ({
 
   return (
     <ClipProvider>
-      <Card className="">
-        <CardHeader className="pb-0 lg:pb-0">
-          <CardTitle>{session.name}</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="px-2 space-y-2">
+        <div>
           {!isCreatingClip && currentClip ? (
             <Player
               playerName="studio"
@@ -56,10 +53,10 @@ const CreateClipCard = ({
           ) : (
             <StudioPlayer />
           )}
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-2">
+        </div>
+        <Card className="flex flex-col space-y-2 shadow-none border-border">
           {isCreatingClip ? (
-            <>
+            <CardContent>
               <SessionSelect
                 streamId={stage.streamSettings.streamId}
               />
@@ -68,9 +65,9 @@ const CreateClipCard = ({
                 <TimeSetter label="Clip end" type="end" />
                 <CreateClipButton />
               </div>
-            </>
+            </CardContent>
           ) : (
-            <div className="flex flex-row justify-between w-full">
+            <CardContent className="flex flex-row justify-between w-full">
               <div className="flex flex-col mr-auto">
                 <p>Clip processing: {currentClip?.status?.phase}</p>
                 <p>Progress: {currentClip?.status?.progress}</p>
@@ -83,10 +80,10 @@ const CreateClipCard = ({
                 onClick={() => setIsCreatingClip(true)}>
                 Replace Clip
               </Button>
-            </div>
+            </CardContent>
           )}
-        </CardFooter>
-      </Card>
+        </Card>
+      </div>
     </ClipProvider>
   )
 }

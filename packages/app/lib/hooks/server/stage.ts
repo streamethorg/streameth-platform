@@ -20,7 +20,11 @@ export const useCreateStage = () => {
         },
         body: JSON.stringify(stage),
       })
+      if (!res.ok) {
+        throw new Error('Network response was not ok')
+      }
       const data = await res.json()
+      console.log(data)
       setData(data)
       setIsSuccess(true)
     } catch (error) {

@@ -8,7 +8,7 @@ import { studioPageParams } from '@/lib/types'
 import {
   fetchEvent,
   fetchEventStages,
-  fetchEventSessions,
+  fetchSessions,
 } from '@/lib/data'
 import { NavigationProvider } from './components/navigation/navigationContext'
 export default async function EventPage({
@@ -19,7 +19,7 @@ export default async function EventPage({
     eventId: searchParams.eventId,
   })
 
-  const sessions = await fetchEventSessions({
+  const sessions = await fetchSessions({
     event: searchParams.eventId,
   })
 

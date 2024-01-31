@@ -16,9 +16,9 @@ function SessionCard({
       key={session._id}
       className={`${
         selectedSession && selectedSession._id === session._id
-          ? 'shadow-lg'
+          ? 'shadow-lg border-primary border-2 '
           : 'hover:shadow-lg'
-      } cursor-pointer border  p-4 rounded-lg transition duration-200 ease-in-out`}>
+      } cursor-pointer border  p-4 rounded-lg transition duration-200 ease-in-out shadow-none border-border`}>
       <div>
         <h2 className="text-lg font-semibold text-gray-800">
           {session.name}

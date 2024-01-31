@@ -12,14 +12,13 @@ import { Metadata } from 'next'
 import { apiUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import { generalMetadata, watchMetadata } from '@/lib/metadata'
-import { fetchEventSession } from '@/lib/data'
+import { fetchSession } from '@/lib/data'
 
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
   if (!searchParams.session) return notFound()
-  const video = await fetchEventSession({
-    event: searchParams.event,
+  const video = await fetchSession({
     session: searchParams.session,
   })
   if (!video) return notFound()

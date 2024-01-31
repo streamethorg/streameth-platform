@@ -37,7 +37,7 @@ const Clips = ({
   if (sessions.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <Card>
+        <Card className="">
           <CardContent>
             <div className="text-2xl mb-4 text-center w-full">
               No sessions yet

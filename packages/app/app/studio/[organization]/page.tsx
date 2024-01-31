@@ -19,9 +19,9 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
   })
 
   return (
-    <Card className="border-none">
+    <div className="border-none">
       <CardHeader>
-        <CardTitle>{organization?.name}</CardTitle>
+        <CardTitle>Your events</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-3 gap-4">
@@ -60,7 +60,7 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
           })}
         </div>
       </CardContent>
-    </Card>
+    </div>
   )
 }
 

@@ -37,7 +37,7 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
             playerName={stage.name}
             playbackId={stream?.playbackId}
           />
-          <Card>
+          <Card className="shadow-none border-border">
             <CardHeader>
               <CardTitle>Stream Details</CardTitle>
               <CardDescription>
@@ -72,7 +72,7 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
             />
           </div>
           <div className="h-1/2">
-            <Card>
+            <Card className="shadow-none border-border">
               <CardHeader>
                 <CardTitle>Embed Codes</CardTitle>
                 <CardDescription>

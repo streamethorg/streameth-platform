@@ -13,10 +13,16 @@ const EventSettings = ({
 }) => {
   const { selectedSetting } = useNavigation()
 
+  const style = {
+    '--colors-accent': event.accentColor,
+  } as React.CSSProperties
+
   if (selectedSetting === 'stages') return null
   return null
   return (
-    <div className="w-full h-full">
+    <div
+      className="w-full h-full overflow-scroll"
+      style={{ ...style }}>
       <EventHomeComponent
         event={event}
         stages={stages}
