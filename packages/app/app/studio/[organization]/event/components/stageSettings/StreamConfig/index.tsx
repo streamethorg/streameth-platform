@@ -27,7 +27,7 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
   }
 
   return (
-    <Card className="border-none shadow-none h-full">
+    <div className="border-none shadow-none h-full text-foreground">
       <CardHeader>
         <CardTitle>{stage.name} stage</CardTitle>
       </CardHeader>
@@ -84,7 +84,7 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </div>
   )
 }
 

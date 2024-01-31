@@ -36,7 +36,7 @@ export default function SpeakerIcon({
     )
   }
   return (
-    <Badge className=" ">
+    <Badge className="bg-background text-primary border border-secondary">
       <Avatar className="my-1">
         <AvatarImage src={speaker.photo} />
         <AvatarFallback className="">

@@ -25,7 +25,7 @@ export default async function VideoGrid({
               key={video._id}
               className={`${
                 scroll && 'w-[300px]'
-              } lg:w-full h-full border-none bg-white flex-initial`}>
+              } lg:w-full h-full border-none  flex-initial`}>
               <VideoCard session={video} />
             </div>
           )

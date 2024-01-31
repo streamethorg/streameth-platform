@@ -55,7 +55,7 @@ const StudioPageNavbar = ({
   ]
 
   return (
-    <NavigationMenu className="z-[99999999] bg-white sticky top-0 p-2 lg:p-4 border-b flex flex-row items-center">
+    <NavigationMenu className="z-[99999999] sticky top-0 p-2 lg:p-4 border-b flex flex-row items-center">
       <div className=" lg:flex-initial">
         <Link href="/">
           <Image

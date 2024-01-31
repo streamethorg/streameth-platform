@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
       <body
-        className={`${heebo.variable} font-sans flex flex-col w-full min-h-screen  mx-auto bg-white `}>
+        className={`${heebo.variable} font-sans flex flex-col w-full min-h-screen  mx-auto bg-background `}>
         <GeneralContext>
           <Toaster />
           <LoadingContextProvider>

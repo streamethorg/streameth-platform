@@ -25,7 +25,9 @@ const SpeakerComponent = async ({
   if (!speakers.length) return null
 
   return (
-    <Card id="speakers" className="border-none">
+    <Card
+      id="speakers"
+      className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
       <CardHeader>
         <CardTitle className="text-4xl uppercase">Speakers</CardTitle>
       </CardHeader>

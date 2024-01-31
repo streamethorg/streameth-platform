@@ -14,7 +14,7 @@ export default async function RelatedVideos({
   ).sessions
 
   return (
-    <div className="max-w-screen bg-transparent border-none ">
+    <div className="max-w-screen bg-transparent border-none">
       <div className="grid grid-cols-1 gap-4">
         {videos.map((session, index) => (
           <VideoCard session={session} key={index} invertedColors />

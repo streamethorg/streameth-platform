@@ -31,7 +31,7 @@ const UpcomingEvents = async ({
   if (events.length === 0) return null
 
   return (
-    <Card className="max-w-screen border-none bg-white">
+    <Card className="max-w-screen border-none">
       <CardHeader>
         <CardTitle className=" ">Events</CardTitle>
         <CardDescription>
@@ -46,7 +46,7 @@ const UpcomingEvents = async ({
               start,
               eventCover,
               organizationId,
-              id,
+              _id,
               accentColor,
               end,
               slug,
@@ -58,7 +58,7 @@ const UpcomingEvents = async ({
               href={
                 archive
                   ? archivePath({ event: slug })
-                  : `/${organizationId}/${id}`
+                  : `/${organization}/${slug}`
               }>
               <Card
                 className="p-2 w-72 h-full border-none"

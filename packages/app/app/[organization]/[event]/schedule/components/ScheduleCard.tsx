@@ -34,10 +34,10 @@ const ScheduleCard = ({
   return (
     <Credenza>
       <CredenzaTrigger asChild>
-        <Card className="border-none">
-          <CardHeader>
+        <Card className="p-3 lg:p-3 bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
+          <CardHeader className="text-white pb-0 lg:pb-0 p-2 lg:p-2">
             <CardTitle>{session.name}</CardTitle>
-            <CardDescription>
+            <CardDescription className="text-secondary">
               {showTime && (
                 <>
                   {moment(session.start)
@@ -52,14 +52,14 @@ const ScheduleCard = ({
               )}
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-2 lg:p-2">
             {speakers && (
               <div className="flex py-1 items-center flex-row space-x-2 overflow-x-scroll mt-auto">
                 {session.speakers.map((speaker) => (
                   <Badge
                     key={speaker.name}
                     variant={'outline'}
-                    className="">
+                    className="text-white">
                     {speaker.name}
                   </Badge>
                 ))}

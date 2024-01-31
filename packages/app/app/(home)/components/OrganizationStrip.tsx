@@ -20,7 +20,7 @@ export default async function OrganizationStrip({
 
   if (videos.length === 0) return false
   return (
-    <div key={organization.slug} className="bg-white flex flex-col">
+    <div key={organization.slug} className="flex flex-col">
       <div className="flex flex-row my-2">
         <Image
           className="rounded"
@@ -32,7 +32,7 @@ export default async function OrganizationStrip({
         />
 
         <Link href={archivePath({ organization: organization.slug })}>
-          <CardTitle className="text-background text-2xl ml-2 mr-auto hover:underline">
+          <CardTitle className=" text-2xl ml-2 mr-auto hover:underline">
             {organization.name} {' >'}
           </CardTitle>
         </Link>

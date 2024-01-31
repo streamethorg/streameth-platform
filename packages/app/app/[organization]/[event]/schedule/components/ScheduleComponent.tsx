@@ -35,7 +35,9 @@ const ScheduleComponent = async ({
 
   if (!sessionsData.sessions) return null
   return (
-    <Card id="schedule" className="border-none">
+    <Card
+      id="schedule"
+      className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
       <CardHeader className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
         <CardTitle className="text-4xl uppercase lg:mr-4">
           Schedule

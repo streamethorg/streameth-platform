@@ -6,12 +6,16 @@ import {
   CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
 } from '@/components/ui/card'
 
 import ShareButton from '@/components/misc/ShareButton'
 import EmbedButton from '@/components/misc/EmbedButton'
 import SpeakerIcon from '../speakers/speakerIcon'
-import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
+import {
+  ISpeakerModel,
+  ISpeaker,
+} from 'streameth-new-server/src/interfaces/speaker.interface'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
 const SessionInfoBox = ({
@@ -31,16 +35,16 @@ const SessionInfoBox = ({
   playbackId?: string | undefined
   streamId?: string | undefined
   playerName: string
-  speakers?: ISpeakerModel[]
+  speakers?: ISpeaker[]
   assetId?: string
   viewCount?: boolean
 }) => {
   const [isOpened, setIsOpened] = useState(false)
 
   return (
-    <div className="my-2 rounded">
-      <div className="flex flex-col justify-center py-4 lg:flex-row">
-        <div className="flex flex-col justify-center px-2">
+    <div className="">
+      <CardHeader className="flex flex-col justify-center py-4 lg:flex-row">
+        <div className="flex flex-col">
           <CardTitle className="">{title}</CardTitle>
           <CardDescription>
             {viewCount && assetId && <ViewCounts assetId={assetId} />}
@@ -57,24 +61,24 @@ const SessionInfoBox = ({
           />
           {assetId && <VideoDownload assetId={assetId} />}
         </div>
-      </div>
+      </CardHeader>
       {description !== '' && (
-        <CardContent className="p-4 rounded-md bg-background">
+        <CardContent className="relative pt-0 lg:pt-0 rounded-md">
           <div
             className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
-              isOpened ? 'max-h-96' : 'max-h-10'
+              isOpened ? 'max-h-96' : 'max-h-32'
             }`}>
             <div className="">{description}</div>
             <div className="flex flex-row mt-2 space-x-2">
               {speakers &&
                 speakers.map((speaker) => (
-                  <SpeakerIcon key={speaker.id} speaker={speaker} />
+                  <SpeakerIcon key={speaker._id} speaker={speaker} />
                 ))}
             </div>
           </div>
           <button
             onClick={() => setIsOpened(!isOpened)}
-            className="mt-2 ml-auto w-full text-right text-white">
+            className="absolute mt-2 ml-auto w-full text-right text-secondary-foreground">
             {isOpened ? 'Less' : 'More'}
           </button>
         </CardContent>

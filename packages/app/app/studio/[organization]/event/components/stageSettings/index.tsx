@@ -21,7 +21,7 @@ const StageSettings = ({
 
   return (
     <div className="w-full h-full">
-      <div className="p-2 bg-secondary h-full">
+      <div className="p-2 h-full">
         <StreamConfig stage={stage} />
         <Clips
           stage={stage}

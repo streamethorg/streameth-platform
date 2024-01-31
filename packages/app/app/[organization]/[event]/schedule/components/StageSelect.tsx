@@ -18,10 +18,10 @@ const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
     <Select
       defaultValue={searchParams.get('stage') || stages[0]?._id}
       onValueChange={(value) => handleTermChange(value)}>
-      <SelectTrigger>
+      <SelectTrigger className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
         <SelectValue placeholder="Stage select" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
         {stages.map((stage) => (
           <SelectItem key={stage._id} value={stage._id}>
             {stage.name}

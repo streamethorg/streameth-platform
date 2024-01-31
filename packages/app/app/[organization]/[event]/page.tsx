@@ -17,6 +17,7 @@ export default async function EventHome({
   searchParams,
 }: EventPageProps) {
   const event = await fetchEvent({
+    organization: params.organization,
     eventSlug: params.event,
   })
 

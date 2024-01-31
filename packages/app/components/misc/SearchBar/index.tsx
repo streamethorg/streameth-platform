@@ -82,7 +82,7 @@ export default function SearchBar(): JSX.Element {
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="max-w-[500px] bg-white border-background "
+        className="max-w-[500px]"
         placeholder="Search"
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,7 +106,7 @@ export default function SearchBar(): JSX.Element {
                         handleTermChange(result)
                         setIsOpened(false)
                       }}
-                      className="p-1 hover:bg-white hover:"
+                      className="p-1"
                       key={result}>
                       {result}
                     </div>
@@ -122,7 +122,7 @@ export default function SearchBar(): JSX.Element {
                         handleEventChange(result.slug)
                         setIsOpened(false)
                       }}
-                      className="p-1 hover:bg-white hover:"
+                      className="p-1 "
                       key={result.name}>
                       {result.name}
                     </div>

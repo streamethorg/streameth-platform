@@ -59,7 +59,7 @@ const HomePageNavbar = () => {
   ]
 
   return (
-    <NavigationMenu className="z-[99999999] bg-white sticky top-0 p-2 lg:p-4 border-b flex flex-row items-center">
+    <NavigationMenu className="z-[99] backdrop-blur-sm bg-background bg-opacity-90 sticky top-0 p-2 lg:p-2 flex flex-row items-center">
       <div className=" lg:flex-initial">
         <Link href="/">
           <Image
@@ -67,7 +67,7 @@ const HomePageNavbar = () => {
             src="/logo_dark.png"
             alt="Streameth logo"
             width={230}
-            height={40}
+            height={30}
           />
           <Image
             className="block lg:hidden aspect-square h-full"

@@ -19,24 +19,24 @@ const Navigation = ({
   return (
     <div
       className={cn(
-        'w-2/6 min-w-[400px] h-full border-r flex flex-col',
+        'w-2/6 min-w-[400px] h-full border-r border-border flex flex-col text-foreground',
         selectedStageSetting === 'clip' && 'hidden'
       )}>
-      <div className="flex flex-row p-2 justify-between items-center border-b">
-        <h3 className="text-2xl font-bold mt-4 mb-2">
+      <div className="flex flex-row p-2 justify-between items-center border-b border-border">
+        <h3 className="text-2xl font-bold mt-4 mb-2 ">
           Event settings
         </h3>
       </div>
       <EventAccordion event={event} />
-      <div className="flex flex-row p-2 justify-between items-center border-b">
+      <div className="flex flex-row p-2 justify-between items-center border-b border-border">
         <h3 className="text-2xl font-bold mt-4 mb-2">Livestreams</h3>
         {stages.length > 0 && <CreateStageForm eventId={event._id} />}
       </div>
       {stages.length > 0 ? (
         <StagesAccordion stages={stages} />
       ) : (
-        <div className="flex flex-row p-2 justify-between items-center border-b">
-          <div className="text-sm text-gray-500">
+        <div className="flex flex-row p-2 justify-between items-center border-b border-border">
+          <div className="text-sm ">
             No livestreams yet. Create one to get started.
           </div>
           <Button className="" variant={'secondary'}>

@@ -1,6 +1,7 @@
 import {
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
@@ -39,9 +40,9 @@ export default function EventHomeComponent({
   }
 }) {
   return (
-    <div className="flex flex-col w-full h-full bg-accent px-2">
+    <div className="flex flex-col w-full h-full bg-event px-2">
       <div className=" relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
-        <Card className="border-none">
+        <Card className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
           <AspectRatio ratio={3 / 1}>
             <Image
               className="rounded-lg max-h-[500px] p-2"
@@ -55,10 +56,10 @@ export default function EventHomeComponent({
             />
           </AspectRatio>
           <CardHeader>
-            <CardTitle className="text-4xl uppercase">
+            <CardTitle className="text-4xl uppercase text-white">
               {event.name}
             </CardTitle>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-white">
               <p>
                 <span className="mr-2">&#128197;</span>
                 {extractDate(event.start)}
@@ -83,31 +84,26 @@ export default function EventHomeComponent({
               </p>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-0 lg:pt-0 text-white">
             <Markdown remarkPlugins={[remarkGfm]}>
               {event.description}
             </Markdown>
           </CardContent>
-        </Card>
-        <Suspense>
-          <Card className="border-none ">
-            <CardHeader>
-              <CardTitle className="text-4xl uppercase">
-                Livestreams
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid lg:grid-cols-2 gap-4">
+          <CardFooter className="flex flex-col p-4 space-y-2 w-full items-start">
+            <CardTitle className=" text-white">Livestreams</CardTitle>
+            <div className="grid lg:grid-cols-2 gap-4 pt-0 lg:pt-0">
               {stages?.map((stage) => (
                 <StagePreview
                   key={stage._id}
                   event={event.id}
                   organization={params.organization}
                   stage={stage}
+                  eventCover={event?.eventCover}
                 />
               ))}
-            </CardContent>
-          </Card>
-        </Suspense>
+            </div>
+          </CardFooter>
+        </Card>
         <Suspense>
           <ScheduleComponent
             stages={stages}

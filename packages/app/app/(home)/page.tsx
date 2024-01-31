@@ -23,7 +23,7 @@ export default async function Home() {
       <Suspense>
         <UpcomingEvents date={new Date()} />
       </Suspense>
-      <Card className="bg-white border-none shadow-none">
+      <div className="">
         <CardHeader>
           <CardTitle className=" text-2xl lg:text-4xl">
             Explore organizations that are using StreamETH
@@ -36,7 +36,7 @@ export default async function Home() {
             </Suspense>
           ))}
         </CardContent>
-      </Card>
+      </div>
     </>
   )
 }
