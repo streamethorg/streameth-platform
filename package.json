@@ -24,7 +24,9 @@
     "split": "yarn workspace @streameth/av-tools run:split",
     "join": "yarn workspace @streameth/av-tools run:join",
     "upload": "yarn workspace @streameth/av-tools run:upload",
-    "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn"
+    "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn",
+    "build:server": "yarn workspace streameth-new-server build",
+    "start:server": "yarn workspace streameth-new-server start"
   },
   "devDependencies": {
     "husky": "^8.0.3",
