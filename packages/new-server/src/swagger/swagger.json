@@ -1074,12 +1074,16 @@
 					},
 					"nonce": {
 						"type": "string"
+					},
+					"message": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"walletAddress",
 					"signature",
-					"nonce"
+					"nonce",
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1125,12 +1129,16 @@
 					},
 					"nonce": {
 						"type": "string"
+					},
+					"message": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"walletAddress",
 					"signature",
-					"nonce"
+					"nonce",
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false

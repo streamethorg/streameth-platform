@@ -10,5 +10,6 @@ export interface IUser {
   role?: UserRole;
   signature: string;
   nonce: string;
+  message: string;
 }
 export interface IUserModel extends IUser, Document {}

@@ -13,16 +13,20 @@ import { createPublicClient, http } from 'viem'
 import { publicProvider } from 'wagmi/providers/public'
 
 import { apiUrl } from '../utils/utils'
+
 let nonce: string
+let walletAddress: string
+let chainId: string
 const siweConfig = {
   createMessage: ({ nonce, address, chainId }) => {
+    walletAddress = address
     return new SiweMessage({
       nonce,
       chainId,
       address,
       version: '1',
-      uri: `http://localhost:3400/auth/login`,
-      domain: 'http://localhost:3400',
+      domain: 'localhost',
+      uri: 'http://localhost:3400',
       statement: 'Sign in with Ethereum to the app.',
     }).prepareMessage()
   },
@@ -30,26 +34,29 @@ const siweConfig = {
     const res = await fetch(`${apiUrl()}/auth/login`, {
       method: 'POST',
       body: JSON.stringify({
-        walletAddress: '0x9268d03EfF4A9A595ef619764AFCB9976c0375df',
+        message,
         signature,
         nonce,
+        walletAddress,
       }),
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     })
-    console.log('res', res)
     // if (!res.ok) throw new Error('Failed to Verify')
     const data = (await res.json()).data
+    console.log('resssssss', data)
     // localStorage.setItem('token', data.token)
     // store token to cookies
 
     return data
   },
   getSession: async () => {
-    const res = await fetch(`${apiUrl()}/auth/login`)
     // if (!res.ok) throw new Error('Failed to fetch SIWE session')
 
-    const { address, chainId } = await res.json()
-    return address && chainId ? { address, chainId } : null
+    return {
+      address: '0x9268d03EfF4A9A595ef619764AFCB9976c0375df',
+      chainId: 1,
+    }
   },
   getNonce: async () => {
     const res = await fetch(`${apiUrl()}/auth/nonce/generate`)
