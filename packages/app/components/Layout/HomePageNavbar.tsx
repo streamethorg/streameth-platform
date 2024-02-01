@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
+import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 
 const NavBarButton = ({
   isNavVisible,
@@ -90,6 +91,7 @@ const HomePageNavbar = () => {
           />
         )}
       </div>
+      <ConnectWalletButton />
     </NavigationMenu>
   )
 }
