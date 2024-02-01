@@ -13,6 +13,7 @@ import {
   Route,
   SuccessResponse,
   Tags,
+  Security,
 } from 'tsoa';
 @Tags('Session')
 @Route('sessions')
@@ -23,6 +24,7 @@ export class SessionController extends Controller {
    *
    * @Summary Create session
    */
+  @Security('jwt')
   @SuccessResponse('201')
   @Post()
   async createSession(
@@ -37,6 +39,7 @@ export class SessionController extends Controller {
    *
    * @Summary Update session
    */
+  @Security('jwt')
   @SuccessResponse('200')
   @Put('{sessionId}')
   async editSession(

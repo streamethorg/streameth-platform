@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
+import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 
 const NavBarButton = ({
   isNavVisible,
@@ -28,7 +29,7 @@ const NavBarButton = ({
 )
 
 const HomePageNavbar = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useMediaQuery('(max-width: 1025px)')
   const [menuVisible, setMenuVisible] = useState(false)
 
   useEffect(() => {
@@ -94,6 +95,7 @@ const HomePageNavbar = () => {
           />
         )}
       </div>
+      <ConnectWalletButton />
     </NavigationMenu>
   )
 }
