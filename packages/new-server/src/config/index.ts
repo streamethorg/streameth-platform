@@ -18,6 +18,6 @@ export const config = {
   secretKey: validatedEnv.SECRET_KEY,
   jwt: {
     secret: validatedEnv.JWT_SECRET,
-    expiry: validatedEnv.JWT_EXPIRY
+    expiry: validatedEnv.JWT_EXPIRY,
   },
 };
