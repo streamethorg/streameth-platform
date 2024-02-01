@@ -1,7 +1,7 @@
 'use client'
 import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { useNavigation } from '../navigation/navigationContext'
 
 const EventSettings = ({
@@ -9,7 +9,7 @@ const EventSettings = ({
   stages,
 }: {
   event: IEventModel
-  stages: IStageModel[]
+  stages: IStage[]
 }) => {
   const { selectedSetting } = useNavigation()
 
@@ -18,7 +18,6 @@ const EventSettings = ({
   } as React.CSSProperties
 
   if (selectedSetting === 'stages') return null
-  return null
   return (
     <div
       className="w-full h-full overflow-scroll"

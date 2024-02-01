@@ -13,7 +13,7 @@ export default function DatePicker({
   value,
   onChange,
 }: {
-  value: string
+  value: Date
   onChange: (value: string) => void
 }) {
   return (

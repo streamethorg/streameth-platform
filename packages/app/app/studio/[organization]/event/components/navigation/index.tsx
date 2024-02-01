@@ -1,6 +1,6 @@
 'use client'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import EventAccordion from '../eventSettings/eventAccordion'
 import StagesAccordion from '../stageSettings/stagesAccordion'
 import { useNavigation } from './navigationContext'
@@ -13,7 +13,7 @@ const Navigation = ({
   stages,
 }: {
   event: IEventModel
-  stages: IStageModel[]
+  stages: IStage[]
 }) => {
   const { selectedStageSetting } = useNavigation()
   return (
@@ -39,9 +39,7 @@ const Navigation = ({
           <div className="text-sm ">
             No livestreams yet. Create one to get started.
           </div>
-          <Button className="" variant={'secondary'}>
-            Create
-          </Button>
+          <CreateStageForm eventId={event._id} />
         </div>
       )}
       <div className=" flex flex-row justify-between mt-auto p-2">

@@ -1,5 +1,5 @@
 import { Card, CardHeader } from '@/components/ui/card'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import Link from 'next/link'
 import Image from 'next/image'
 

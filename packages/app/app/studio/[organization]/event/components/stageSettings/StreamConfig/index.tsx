@@ -10,7 +10,7 @@ import {
 import Player from '@/components/ui/Player'
 import { useNavigation } from '../../navigation/navigationContext'
 import { useStream } from '@livepeer/react'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import MultistreamCard from './multistream/multistreamCard'
 const StreamConfig = ({ stage }: { stage: IStageModel }) => {
   const { selectedStageSetting } = useNavigation()

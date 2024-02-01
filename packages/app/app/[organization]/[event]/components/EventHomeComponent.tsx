@@ -9,7 +9,7 @@ import {
 import StagePreview from '../stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 
 import SpeakerComponent from '../speakers/components/SpeakerComponent'
 import ScheduleComponent from '../schedule/components/ScheduleComponent'
@@ -30,7 +30,8 @@ export default function EventHomeComponent({
   searchParams,
 }: {
   event: IEventModel
-  stages: IStageModel[]
+  stages: IStage[]
+
   params: {
     organization: string
   }

@@ -4,55 +4,26 @@ import * as z from 'zod'
 const imageUrlRegex = /\.(jpeg|jpg|gif|png)$/
 
 export const formSchema = z.object({
-  organizationId: z
-    .string()
-    .min(2, {
-      message: 'Organization name must be at least 2 characters long.',
-    })
-    .max(50, {
-      message:
-        'Organization name must be no more than 50 characters long.',
-    }),
-  eventName: z
-    .string()
-    .min(2, {
-      message: 'Event name must be at least 2 characters long.',
-    })
-    .max(50, {
-      message: 'Event name must be no more than 50 characters long.',
-    }),
-  eventDescription: z.string().min(2, {
-    message: 'Event description must be at least 2 characters long.',
-  }),
-  startDate: z.string(),
-  startTime: z.string(),
-  endDate: z.string(),
-  endTime: z.string(),
-  eventLocation: z
-    .string()
-    .min(2, {
-      message: 'Event location must be at least 2 characters long.',
-    })
-    .max(50, {
-      message:
-        'Event location must be no more than 50 characters long.',
-    }),
-  eventLogo: z.string().regex(imageUrlRegex, { message: 'Required' }),
-  eventBanner: z
-    .string()
-    .regex(imageUrlRegex, { message: 'Required' }),
-  eventCover: z
-    .string()
-    .regex(imageUrlRegex, { message: 'Required' }),
-  eventColor: z
-    .string()
-    .min(2, {
-      message: 'Event color must be at least 2 characters long.',
-    })
-    .max(50, {
-      message: 'Event color must be no more than 50 characters long.',
-    }),
-})
+  name: z.string(),
+  description: z.string(),
+  start: z.date(),
+  end: z.date(),
+  location: z.string(),
+  logo: z.string(),
+  banner: z.string(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+  organizationId: z.string(), // You need to import Types from 'mongoose' if using MongoDB
+  eventCover: z.string().optional(),
+  archiveMode: z.boolean().optional(),
+  website: z.string().optional(),
+  timezone: z.string(),
+  accentColor: z.string().optional(),
+  unlisted: z.boolean().optional(),
+  enableVideoDownloader: z.boolean().optional(),
+  slug: z.string().optional(),
+});
+
 
 
 const GSheetConfigSchema = z.object({

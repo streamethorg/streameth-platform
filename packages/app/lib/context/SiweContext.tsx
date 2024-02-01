@@ -22,7 +22,6 @@ const siweConfig = {
     const res = await fetch(`${apiUrl()}/auth/nonce/generate`)
     if (!res.ok) throw new Error('Failed to fetch SIWE nonce')
     const data = (await res.json()).data
-    console.log('nonce data' + data)
     nonce = data
     return data
   },

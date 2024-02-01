@@ -5,11 +5,10 @@ import EventSettings from './components/eventSettings'
 import StageSettings from './components/stageSettings'
 import Navigation from './components/navigation'
 import { studioPageParams } from '@/lib/types'
-import {
-  fetchEvent,
-  fetchEventStages,
-  fetchAllSessions,
-} from '@/lib/data'
+
+import { fetchEvent } from '@/lib/services/eventService'
+import { fetchEventStages } from '@/lib/services/stageService'
+import { fetchAllSessions } from '@/lib/data'
 import { NavigationProvider } from './components/navigation/navigationContext'
 export default async function EventPage({
   searchParams,

@@ -17,13 +17,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import DatePicker from '@/components/misc/form/datePicker'
-import { apiUrl } from '@/lib/utils/utils'
-import moment from 'moment-timezone'
 import Combobox from '@/components/ui/combo-box'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import ColorPicker from '@/components/misc/form/colorPicker'
 import TimePicker from '@/components/misc/form/timePicker'
 import Link from 'next/link'
+import { createEventAction } from '@/lib/actions/events'
+import { toast } from 'sonner'
+import { generateTimezones } from '@/lib/utils/time'
+import { Loader2 } from 'lucide-react'
 
 export default function CreateEventForm({
   organizationId,
@@ -32,37 +34,45 @@ export default function CreateEventForm({
 }) {
   const [isCreatingEvent, setIsCreatingEvent] =
     useState<boolean>(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      eventName: '',
+      name: '',
+      description: '',
+      start: new Date(), // Adjust according to your UI component's expected format
+      end: new Date(), // Adjust according to your UI component's expected format
+      location: '',
+      eventCover: '',
+      logo: '',
+      banner: '',
       organizationId: organizationId,
-      eventDescription: '',
-      startDate: '',
+      timezone: '',
       startTime: '',
-      endDate: '',
       endTime: '',
-      eventLocation: '',
-      eventLogo: '',
-      eventBanner: '',
-      eventColor: '',
+      accentColor: '',
     },
   })
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    const response = await fetch(`${apiUrl()}/events`, {
-      method: 'POST',
-      body: JSON.stringify(values),
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+    setIsCreatingEvent(true)
+    const response = createEventAction({
+      event: values,
     })
-
-    const data = await response.json()
+      .then((response) => {
+        if (response) {
+          toast.success('Event created')
+        } else {
+          toast.error('Error creating event')
+        }
+      })
+      .catch(() => {
+        toast.error('Error creating event')
+      })
+      .finally(() => {
+        setIsCreatingEvent(false)
+      })
   }
 
   return (
@@ -72,7 +82,7 @@ export default function CreateEventForm({
         className="space-y-8">
         <FormField
           control={form.control}
-          name="eventName"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="">Title</FormLabel>
@@ -85,7 +95,7 @@ export default function CreateEventForm({
         />
         <FormField
           control={form.control}
-          name="eventDescription"
+          name="description"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="">Description</FormLabel>
@@ -99,11 +109,27 @@ export default function CreateEventForm({
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="location"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="">Location</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="enter the event location"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="flex flex-row space-x-4">
           <div className="flex flex-row w-1/2 space-x-1">
             <FormField
               control={form.control}
-              name="startDate"
+              name="start"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel className="">Start Date</FormLabel>
@@ -137,7 +163,7 @@ export default function CreateEventForm({
           <div className="flex flex-row w-1/2 space-x-1">
             <FormField
               control={form.control}
-              name="endDate"
+              name="end"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel className="">End Date</FormLabel>
@@ -171,7 +197,7 @@ export default function CreateEventForm({
         </div>
         <FormField
           control={form.control}
-          name="eventLocation"
+          name="timezone"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="">
@@ -192,7 +218,7 @@ export default function CreateEventForm({
           <div className="flex w-1/6">
             <FormField
               control={form.control}
-              name="eventLogo"
+              name="logo"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Event Logo</FormLabel>
@@ -230,7 +256,7 @@ export default function CreateEventForm({
           <div className="flex w-3/6">
             <FormField
               control={form.control}
-              name="eventBanner"
+              name="banner"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Event Banner</FormLabel>
@@ -249,7 +275,7 @@ export default function CreateEventForm({
         </div>
         <FormField
           control={form.control}
-          name="eventColor"
+          name="accentColor"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Event Color</FormLabel>
@@ -269,19 +295,18 @@ export default function CreateEventForm({
               Cancel
             </Link>
           </Button>
-          <Button className="ml-auto" type="submit">
-            Create
-          </Button>
+          {isCreatingEvent ? (
+            <Button disabled>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </Button>
+          ) : (
+            <Button className="ml-2" type="submit">
+              Create Event
+            </Button>
+          )}
         </div>
       </form>
     </Form>
   )
-}
-
-function generateTimezones() {
-  const timezones = moment.tz.names()
-  return timezones.map((timezone) => ({
-    label: timezone,
-    value: timezone,
-  }))
 }

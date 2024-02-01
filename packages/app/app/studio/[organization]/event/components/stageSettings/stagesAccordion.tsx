@@ -5,11 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { useNavigation } from '../navigation/navigationContext'
 import { deleteStageAction } from '@/lib/actions/stages'
 
-const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
+const StageAccordion = ({ stages }: { stages: IStage[] }) => {
   const {
     selectedStage,
     setSelectedStage,

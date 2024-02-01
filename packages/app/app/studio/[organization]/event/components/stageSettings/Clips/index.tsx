@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
 import { useNavigation } from '../../navigation/navigationContext'

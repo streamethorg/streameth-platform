@@ -21,7 +21,6 @@ const Layout = ({
   params: studioPageParams['params']
 }) => {
   const userSession = cookies().get('user-session')
-  console.log(userSession)
   if (!userSession?.value) {
     return <>Unauthroised</>
   }

@@ -118,7 +118,7 @@ export default function CreateStageForm({
               </Button>
             ) : (
               <Button type="submit">Create stage</Button>
-            )}{' '}
+            )}
           </form>
         </Form>
       </DialogContent>

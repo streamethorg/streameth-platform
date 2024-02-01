@@ -12,7 +12,7 @@ const ColorPicker = ({
   color,
   onChange,
 }: {
-  color: string
+  color: string | undefined
   onChange: (color: string) => void
 }) => {
   const [isOpen, setIsOpen] = useState(true)

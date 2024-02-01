@@ -3,7 +3,9 @@ import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/components/plugins/Chat'
 import { EventPageProps } from '@/lib/types'
-import { fetchEvent, fetchAllSessions, fetchStage } from '@/lib/data'
+import { fetchAllSessions } from '@/lib/data'
+import { fetchEvent } from '@/lib/services/eventService'
+import { fetchStage } from '@/lib/services/stageService'
 import {
   Tabs,
   TabsContent,
@@ -15,13 +17,11 @@ export default async function Stage({ params }: EventPageProps) {
   if (!params.event || !params.stage) {
     return notFound()
   }
+
   const event = await fetchEvent({
     eventId: params.event,
   })
 
-  if (!event) {
-    return notFound()
-  }
   const sessionsData = await fetchAllSessions({
     event: params.event,
     stage: params.stage,
@@ -31,6 +31,10 @@ export default async function Stage({ params }: EventPageProps) {
   const stage = await fetchStage({
     stage: params.stage,
   })
+
+  if (!event || !stage) {
+    return notFound()
+  }
 
   const tabs = []
   if (!event?.plugins?.disableChat) {

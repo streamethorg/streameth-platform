@@ -10,7 +10,7 @@ const TimePicker = ({
   value,
   onChange,
 }: {
-  value: string
+  value: string | undefined
   onChange: (value: string) => void
 }) => {
   return (
