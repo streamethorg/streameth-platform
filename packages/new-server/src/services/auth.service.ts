@@ -19,7 +19,7 @@ export default class AuthService {
       walletAddress: data.walletAddress,
     });
     if (existingUser) {
-      await this.verifyMessage(data.message, data.signature, data.nonce);
+      await this.verifyMessage(data.signature, data.message, data.nonce);
     }
     if (!existingUser) {
       existingUser = await this.controller.store.create('', data, this.path);
