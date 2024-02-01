@@ -28,8 +28,9 @@ import ImageUpload from '@/components/misc/form/imageUpload'
 import ColorPicker from '@/components/misc/form/colorPicker'
 import TimePicker from '@/components/misc/form/timePicker'
 import DatePicker from '@/components/misc/form/datePicker'
-import moment from 'moment-timezone'
+import { generateTimezones } from '@/lib/utils/time'
 import { useNavigation } from '../navigation/navigationContext'
+
 const EventAccordion = ({ event }: { event: IEventModel }) => {
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
@@ -316,11 +317,3 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
 }
 
 export default EventAccordion
-
-function generateTimezones() {
-  const timezones = moment.tz.names()
-  return timezones.map((timezone) => ({
-    label: timezone,
-    value: timezone,
-  }))
-}

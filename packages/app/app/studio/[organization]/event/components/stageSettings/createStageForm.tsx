@@ -17,14 +17,12 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  DialogTrigger,
   DialogHeader,
 } from '@/components/ui/dialog'
 import { StageSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import { useCreateStream } from '@livepeer/react'
-import { useEffect } from 'react'
-import { useCreateStage } from '@/lib/hooks/server/stage'
+import { createStageAction } from '@/lib/actions/stages'
+import { Loader2 } from 'lucide-react'
 
 export default function CreateStageForm({
   eventId,
@@ -32,56 +30,34 @@ export default function CreateStageForm({
   eventId: string
 }) {
   const [isOpen, setIsOpen] = useState(false)
-  const { mutateAsync: createStream } = useCreateStream({
-    name: eventId,
-    record: true,
-  })
-
-  const {
-    createStage,
-    isLoading: isStageLoading,
-    isSuccess: isStageSuccess,
-    isError: isStageError,
-  } = useCreateStage()
-
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
     defaultValues: {
       name: '',
       eventId: eventId,
       streamSettings: {
-        streamId: '992ac347-7cb5-4f51-87fb-1608e9b034b2',
+        streamId: '',
       },
     },
   })
 
   function onSubmit(values: z.infer<typeof StageSchema>) {
-    // temp
-    createStage({
+    setIsLoading(true)
+    createStageAction({
       stage: values,
     })
-    return
-    createStream?.()?.then((res) => {
-      if (res) {
-        values.streamSettings.streamId = res.id
-        createStage({
-          stage: values,
-        })
-      } else {
-        toast.error('Error creating stage, contact support')
-      }
-    })
+      .then(() => {
+        setIsOpen(false)
+        toast.success('Stage created')
+      })
+      .catch(() => {
+        toast.error('Error creating stage')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
-
-  useEffect(() => {
-    if (isStageSuccess) {
-      toast.success('Stage created')
-      setIsOpen(false)
-    }
-    if (isStageError) {
-      toast.error('Error creating stage, contact support')
-    }
-  }, [isStageSuccess, isStageError])
 
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
@@ -135,7 +111,14 @@ export default function CreateStageForm({
                 </FormItem>
               )}
             />
-            <Button type="submit">Create stage</Button>
+            {isLoading ? (
+              <Button disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </Button>
+            ) : (
+              <Button type="submit">Create stage</Button>
+            )}{' '}
           </form>
         </Form>
       </DialogContent>

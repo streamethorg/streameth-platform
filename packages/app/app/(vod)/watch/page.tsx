@@ -11,7 +11,7 @@ import RelatedVideos from './components/RelatedVideos'
 import { Metadata } from 'next'
 import { apiUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
-import { generalMetadata, watchMetadata } from '@/lib/metadata'
+import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
 import { fetchSession } from '@/lib/data'
 
 export default async function Watch({

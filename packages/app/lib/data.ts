@@ -147,26 +147,10 @@ export async function fetchEventStages({
   }
 }
 
-export async function fetchStage({
-  stage
-}: {
-  stage: string
-}): Promise<IStageModel> {
-  try {
-    const response = await fetch(`${apiUrl()}/stages/${stage}`)
-    const data = (await response.json()).data
-    if (!data) {
-      throw 'Stage not found'
-    }
-    return data
-  } catch (e) {
-    console.log(e)
-    throw 'Error fetching stage'
-  }
-}
 interface ApiParams {
   event?: string
   organization?: string
+  stage?: string
   page?: number
   size?: number
   onlyVideos?: boolean
@@ -189,10 +173,10 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
   return `${baseUrl}?${queryParams}`
 }
 
-// samuel
 export async function fetchAllSessions({
   event,
   organizationSlug,
+  stage,
   date,
   speakerIds,
   onlyVideos,
@@ -202,6 +186,7 @@ export async function fetchAllSessions({
 }: {
   event?: string
   organizationSlug?: string
+  stage?: string
   date?: Date
   speakerIds?: string[]
   onlyVideos?: boolean
@@ -211,6 +196,7 @@ export async function fetchAllSessions({
 }): Promise<{ sessions: ISessionModel[]; pagination: IPagination }> {
   const params: ApiParams = {
     event,
+    stage,
     organization: organizationSlug,
     page,
     size: searchQuery ? 0 : limit,
@@ -266,49 +252,23 @@ export async function fetchAllSessions({
   }
 }
 
-// samuel
-export async function fetchSessions({
-  event,
-  stage,
-  date,
-  onlyVideos = false,
-  page = 0,
-  limit = 0,
+export const fetchSession = async ({
+  session,
 }: {
-  event?: string
-  stage?: string
-  timestamp?: number
-  date?: Date
-  speakerIds?: string[]
-  onlyVideos?: boolean
-  page?: number
-  limit?: number
-}): Promise<{ sessions: ISessionModel[]; pagination: IPagination }> {
+  session: string
+}): Promise<ISessionModel | null> => {
   try {
-    const response = await fetch(
-      `${apiUrl()}/sessions?event=${event}&page=${page}&size=${limit}&onlyVideos=${onlyVideos}&stage=${stage}&date=${date}`
-    )
-
-    let eventSessions = (await response.json()).data
-
-    return {
-      sessions: eventSessions.sessions.map(
-        (session: ISessionModel) => session
-      ),
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(eventSessions.totalDocuments / limit),
-        totalItems: eventSessions.totalDocuments,
-        limit,
-      },
+    const response = await fetch(`${apiUrl()}/sessions/${session}`)
+    if (!response.ok) {
+      return null
     }
+    return (await response.json()).data
   } catch (e) {
     console.log(e)
-    throw 'Error fetching event sessions'
+    throw 'Error fetching event session'
   }
 }
 
-// samuel
 export async function fetchEventSpeakers({
   event,
 }: {
@@ -337,7 +297,7 @@ export async function fetchNavBarRoutes({
   const [eventData, sessionData, speakerData, stageData] =
     await Promise.all([
       fetchEvent({ eventSlug: event }),
-      fetchSessions({ event }),
+      fetchAllSessions({ event }),
       fetchEventSpeakers({ event }),
       fetchEventStages({ eventId: event }),
     ])
@@ -376,20 +336,4 @@ export async function fetchNavBarRoutes({
   }
 }
 
-// samuel
-export const fetchSession = async ({
-  session,
-}: {
-  session: string
-}): Promise<ISessionModel | null> => {
-  try {
-    const response = await fetch(`${apiUrl()}/sessions/${session}`)
-    if (!response.ok) {
-      return null
-    }
-    return (await response.json()).data
-  } catch (e) {
-    console.log(e)
-    throw 'Error fetching event session'
-  }
-}
+

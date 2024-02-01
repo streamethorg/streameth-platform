@@ -3,7 +3,7 @@ import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/components/plugins/Chat'
 import { EventPageProps } from '@/lib/types'
-import { fetchEvent, fetchSessions, fetchStage } from '@/lib/data'
+import { fetchEvent, fetchAllSessions, fetchStage } from '@/lib/data'
 import {
   Tabs,
   TabsContent,
@@ -22,7 +22,7 @@ export default async function Stage({ params }: EventPageProps) {
   if (!event) {
     return notFound()
   }
-  const sessionsData = await fetchSessions({
+  const sessionsData = await fetchAllSessions({
     event: params.event,
     stage: params.stage,
     date: new Date(),

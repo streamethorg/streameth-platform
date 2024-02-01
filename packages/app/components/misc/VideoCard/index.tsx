@@ -9,7 +9,7 @@ import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import Link from 'next/link'
 import { fetchEvent } from '@/lib/data'
-import { archivePath } from '@/lib/utils/path'
+import { archivePath } from '@/lib/utils/utils'
 
 const VideoCard = async ({
   session,

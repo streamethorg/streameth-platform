@@ -8,7 +8,10 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
-import { generalMetadata, archiveMetadata } from '@/lib/metadata'
+import {
+  generalMetadata,
+  archiveMetadata,
+} from '@/lib/utils/metadata'
 import { Metadata } from 'next'
 import { fetchAllSessions, fetchEvent } from '@/lib/data'
 import { Suspense } from 'react'
