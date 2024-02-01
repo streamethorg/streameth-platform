@@ -19,7 +19,6 @@
     "next:check-types": "yarn workspace @streameth/streameth-app check-types",
     "prettier:fix": "yarn workspace @streameth/streameth-app prettier:write",
     "prettier:check": "yarn workspace @streameth/streameth-app prettier:check",
-    "postinstall": "husky install",
     "precommit": "lint-staged",
     "tools": "yarn workspace @streameth/av-tools tools",
     "split": "yarn workspace @streameth/av-tools run:split",
