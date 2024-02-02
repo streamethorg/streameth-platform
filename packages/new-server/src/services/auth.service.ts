@@ -4,7 +4,7 @@ import User from '@models/user.model';
 import { HttpException } from '@exceptions/HttpException';
 import jwt from 'jsonwebtoken';
 import { config } from '@config';
-const {SiweMessage, generateNonce } = require('siwe')
+const { SiweMessage, generateNonce } = require('siwe');
 
 export default class AuthService {
   private path: string;
@@ -19,7 +19,7 @@ export default class AuthService {
       walletAddress: data.walletAddress,
     });
     if (existingUser) {
-      await this.verifyMessage(data.walletAddress, data.signature, '');
+      await this.verifyMessage(data.signature, data.message, data.nonce);
     }
     if (!existingUser) {
       existingUser = await this.controller.store.create('', data, this.path);

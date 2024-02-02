@@ -1,3 +1,4 @@
+'use client'
 import 'dm3-billboard-widget/dist/style.css'
 import { useContext, useMemo } from 'react'
 import { useAccount, useConnect, usePublicClient } from 'wagmi'
@@ -16,7 +17,7 @@ export const defaultOptions: BillboardWidgetProps['options'] = {
   avatarSrc: (hash) => {
     return `https://robohash.org/${hash}?size=38x38`
   },
-  className: 'dm3-billboard-widget overflow-auto !text-white',
+  className: 'dm3-billboard-widget overflow-auto !',
   timeout: 10000,
 }
 
@@ -99,14 +100,14 @@ export const Dm3 = () => {
                 // height: '1000px',
               }}>
               {!isConnected ? (
-                <p className="text-white cursor-pointer m-auto text-center flex flex-col justify-center items-center">
+                <p className=" cursor-pointer m-auto text-center flex flex-col justify-center items-center">
                   Connect your wallet to chat
                   <ConnectKitButton />
                 </p>
               ) : (
                 <div
                   style={{ maxHeight: '40px' }}
-                  className="text-white rounded-xl bg-gray-800 p-4 m-auto text-center flex flex-col justify-center items-center">
+                  className=" rounded-xl bg-gray-800 p-4 m-auto text-center flex flex-col justify-center items-center">
                   <button onClick={signInWithEthereum}>
                     Sign in with Ethereum
                   </button>

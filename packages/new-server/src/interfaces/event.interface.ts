@@ -9,7 +9,7 @@ export interface GSheetConfig {
 }
 export interface PretalxConfig {
   url: string;
-  apiToken?: string;
+  apiToken: string;
 }
 
 export type IDataImporter =

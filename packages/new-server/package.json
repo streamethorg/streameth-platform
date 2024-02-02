@@ -5,7 +5,7 @@
   "scripts": {
     "start": "yarn run build && node ./dist/server.js",
     "dev": "nodemon --config nodemon.json",
-    "build": "rm -rf && yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
+    "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "test": "jest --forceExit --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\"",
     "generate:routes": "tsoa spec-and-routes"
@@ -32,7 +32,7 @@
     "siwe": "^2.1.4",
     "swagger-ui-express": "^5.0.0",
     "tsc-alias": "^1.8.8",
-    "tsoa": "^6.0.1",
+    "tsoa": "6.0.1",
     "typescript": "^5.3.3",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"

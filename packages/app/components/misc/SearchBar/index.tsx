@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import useDebounce from '@/lib/hooks/useDebounce'
-import { archivePath } from '@/lib/utils/path'
+import { archivePath } from '@/lib/utils/utils'
 import useClickOutside from '@/lib/hooks/useClickOutside'
 
 interface IEventSearchResult {
@@ -71,7 +71,7 @@ export default function SearchBar(): JSX.Element {
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="max-w-[500px] bg-white border-background text-background"
+        className="max-w-[500px]"
         placeholder="Search"
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +81,7 @@ export default function SearchBar(): JSX.Element {
       {isOpened && debouncedSearchQuery && (
         <div
           ref={dropdownRef}
-          className="rounded bg-background mt-1 w-full absolute top-[41px] max-w-[500px]">
+          className="rounded  mt-1 w-full absolute top-[41px] max-w-[500px]">
           {isLoading ? (
             <div>Loading...</div>
           ) : (
@@ -95,7 +95,7 @@ export default function SearchBar(): JSX.Element {
                         handleTermChange(result)
                         setIsOpened(false)
                       }}
-                      className="p-1 hover:bg-white hover:text-background"
+                      className="p-1"
                       key={result}>
                       {result}
                     </div>
@@ -111,7 +111,7 @@ export default function SearchBar(): JSX.Element {
                         handleEventChange(result.slug)
                         setIsOpened(false)
                       }}
-                      className="p-1 hover:bg-white hover:text-background"
+                      className="p-1 "
                       key={result.name}>
                       {result.name}
                     </div>

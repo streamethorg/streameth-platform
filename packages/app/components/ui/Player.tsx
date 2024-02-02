@@ -16,10 +16,10 @@ const OfflinePlayer = () => {
   return (
     <div className="min-h-[300px] lg:min-h-[500px] lg:aspect-video bg-black flex items-center justify-center flex-col h-full">
       <div className="flex flex-col items-center justify-center space-y-2 transform -translate-y-6">
-        <span className="text-2xl font-bold text-white text-center">
+        <span className="text-2xl font-bold  text-center">
           Stream is offline
         </span>
-        <span className="text-white dark:text-gray-300 text-xs hidden lg:block text-center">
+        <span className=" dark:text-gray-300 text-xs hidden lg:block text-center">
           Powered by
         </span>
         <a
@@ -40,6 +40,7 @@ const OfflinePlayer = () => {
 }
 
 export const Player = ({
+  src,
   playbackId,
   streamId,
   playerName,
@@ -47,6 +48,7 @@ export const Player = ({
   muted = false,
   assetId,
 }: {
+  src?: string
   playbackId?: string
   streamId?: string
   playerName?: string
@@ -86,8 +88,10 @@ export const Player = ({
   // if (!playbackId && !stream?.isActive) return <OfflinePlayer />
   return useMemo(
     () => (
-      <div className="relative w-full aspect-video p-2 bg-background rounded-md">
+      <div className="relative w-full aspect-video ">
+        <div className="absolute top-0 left-0 w-full h-full bg-black animate-pulse rounded-lg p-1" />
         <LivepeerPlayer
+          src={src}
           mediaElementRef={mediaElementRef}
           playbackId={playbackIdParsed}
           showTitle={false}
@@ -95,6 +99,19 @@ export const Player = ({
           showLoadingSpinner={true}
           autoPlay
           muted={muted}
+          theme={{
+            borderStyles: {
+              containerBorderStyle: 'dashed',
+            },
+            colors: {
+              accent: '#00a55f',
+              background: '#000000',
+            },
+
+            radii: {
+              containerBorderRadius: '5px',
+            },
+          }}
           // playRecording
           controls={{
             autohide: 0,
@@ -107,7 +124,7 @@ export const Player = ({
         ></LivepeerPlayer>
       </div>
     ),
-    [playbackIdParsed, mediaElementRef, address, muted]
+    [playbackIdParsed, mediaElementRef, address, muted, src]
   )
 }
 

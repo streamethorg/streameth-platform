@@ -12,12 +12,12 @@ const Initializer = ({ children }: { children: ReactNode }) => {
     pathname.includes('admin')
 
   useEffect(() => {
-    if (isOrganization) {
-      document.documentElement.style.setProperty(
-        '--colors-accent',
-        colors.accent
-      )
-    }
+    // if (isOrganization) {
+    document.documentElement.style.setProperty(
+      '--colors-accent',
+      colors.accent
+    )
+    //}
   }, [isOrganization])
   return children
 }

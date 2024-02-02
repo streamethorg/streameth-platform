@@ -36,10 +36,10 @@ export default function SpeakerIcon({
     )
   }
   return (
-    <Badge className="bg-background text-white">
+    <Badge className="bg-background text-primary border border-secondary">
       <Avatar className="my-1">
         <AvatarImage src={speaker.photo} />
-        <AvatarFallback className="text-background">
+        <AvatarFallback className="">
           {speaker.name.slice(0, 1).toUpperCase()}
         </AvatarFallback>
       </Avatar>

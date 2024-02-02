@@ -7,7 +7,7 @@ const NFTMintComponent = () => {
   return (
     <div className="flex flex-col justify-center">
       <div className="w-full p-2">
-        <p className=" text-white">
+        <p className=" ">
           By minting the Base Miami Broadcast NFT, you can experience
           Base House and tune in to the programming LIVE from any NFT
           marketplace.

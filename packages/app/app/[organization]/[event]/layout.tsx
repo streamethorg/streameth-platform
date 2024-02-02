@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Layout/NavbarTop'
-import { fetchNavBarRoutes, fetchEvent } from '@/lib/data'
+import { fetchNavBarRoutes } from '@/lib/data'
+import { fetchEvent } from '@/lib/services/eventService'
 
 const Layout = async ({
   children,

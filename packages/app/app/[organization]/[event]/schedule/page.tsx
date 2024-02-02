@@ -3,7 +3,10 @@ import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
 import { fetchEvent } from '@/lib/data'
 import { EventPageProps } from '@/lib/types'
-import { archiveMetadata, generalMetadata } from '@/lib/metadata'
+import {
+  archiveMetadata,
+  generalMetadata,
+} from '@/lib/utils/metadata'
 
 import { fetchEventStages } from '@/lib/data'
 export default async function SchedulePage({

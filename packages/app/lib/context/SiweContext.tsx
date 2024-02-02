@@ -1,3 +1,4 @@
+'use client'
 import { SiweMessage } from 'siwe'
 import {
   ConnectKitProvider,
@@ -6,64 +7,94 @@ import {
   getDefaultConfig,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
-import { usePathname } from 'next/navigation'
-import { WagmiConfig, createConfig } from 'wagmi'
-import { base, mainnet } from 'viem/chains'
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { mainnet } from 'viem/chains'
 import { createPublicClient, http } from 'viem'
+import { publicProvider } from 'wagmi/providers/public'
+import { apiUrl } from '../utils/utils'
+import { storeSession } from '@/lib/actions/auth'
 
-const authApi = '/api/auth'
+let nonce: string
+let walletAddress: string
+let chainId: string
 
 const siweConfig = {
+  getNonce: async () => {
+    const res = await fetch(`${apiUrl()}/auth/nonce/generate`)
+    if (!res.ok) throw new Error('Failed to fetch SIWE nonce')
+    const data = (await res.json()).data
+    nonce = data
+    return data
+  },
   createMessage: ({ nonce, address, chainId }) => {
+    walletAddress = address
     return new SiweMessage({
       nonce,
       chainId,
       address,
       version: '1',
-      uri: window.location.origin,
       domain: window.location.host,
-      statement:
-        'Sign In With Ethereum to prove you control this wallet.',
+      uri: window.location.origin,
+      statement: 'Sign in with Ethereum to the app.',
     }).prepareMessage()
   },
   verifyMessage: async ({ message, signature }) => {
-    const res = await fetch(authApi, {
+    const res = await fetch(`${apiUrl()}/auth/login`, {
       method: 'POST',
-      body: JSON.stringify({ message, signature }),
+      body: JSON.stringify({
+        message,
+        signature,
+        nonce,
+        walletAddress,
+      }),
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     })
-    return res.ok
+    if (!res.ok) throw new Error('Failed to Verify')
+    const data = (await res.json()).data
+    localStorage.setItem('SWIEToken', data.token)
+    // save to user-session cookie
+    storeSession({
+      token: data.token,
+    })
+    return data
   },
   getSession: async () => {
-    const res = await fetch(authApi)
-    if (!res.ok) throw new Error('Failed to fetch SIWE session')
-
-    const { address, chainId } = await res.json()
-    return address && chainId ? { address, chainId } : null
+    if (localStorage.getItem('SWIEToken')) {
+      return {
+        address: '0xA93950A195877F4eBC8A4aF3F6Ce2a109404b575',
+        chainId: 1,
+      }
+    }
+    return null
   },
-  getNonce: async () => {
-    const res = await fetch(authApi, { method: 'PUT' })
-    if (!res.ok) throw new Error('Failed to fetch SIWE nonce')
 
-    return res.text()
-  },
   signOut: async () => {
-    const res = await fetch(authApi, { method: 'DELETE' })
-    if (!res.ok) throw new Error('Failed to sign out')
-
-    return res.ok
+    // delete user-session cookie
+    storeSession({
+      token: '',
+    })
+    // delete token
+    localStorage.removeItem('SWIEToken')
+    return true
   },
 } satisfies SIWEConfig
+
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [publicProvider()]
+)
 
 const config = createConfig(
   getDefaultConfig({
     autoConnect: false,
     appName: 'StreamETH',
-    chains: [base, mainnet],
+    chains: [mainnet],
     publicClient: createPublicClient({
-      chain: base,
+      chain: mainnet,
       transport: http(),
     }),
+
     // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
@@ -71,18 +102,11 @@ const config = createConfig(
 )
 
 const SiweContext = (props: PropsWithChildren) => {
-  const pathname = usePathname()
-  const isAdminRoute = pathname.startsWith('/admin')
-
   return (
     <WagmiConfig config={config}>
-      {isAdminRoute ? (
-        <SIWEProvider {...siweConfig}>
-          <ConnectKitProvider>{props.children}</ConnectKitProvider>
-        </SIWEProvider>
-      ) : (
+      <SIWEProvider {...siweConfig}>
         <ConnectKitProvider>{props.children}</ConnectKitProvider>
-      )}
+      </SIWEProvider>
     </WagmiConfig>
   )
 }
