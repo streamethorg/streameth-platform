@@ -25,6 +25,7 @@
     "join": "yarn workspace @streameth/av-tools run:join",
     "upload": "yarn workspace @streameth/av-tools run:upload",
     "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn",
+    "install:server": "yarn workspace @streameth/av-tools install && yarn workspace @streameth/tools install",
     "build:server": "yarn workspace streameth-new-server build",
     "start:server": "yarn workspace streameth-new-server start"
   },
