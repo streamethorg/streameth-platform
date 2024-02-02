@@ -11,7 +11,7 @@ import React from 'react'
 
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 
-import { fetchEvents } from '@/lib/data'
+import { fetchEvents } from '@/lib/services/eventService'
 import { archivePath } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'

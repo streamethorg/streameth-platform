@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
-import { fetchEvent, fetchEventStages, fetchEvents } from '@/lib/data'
+import { fetchEvent, fetchEvents } from '@/lib/services/eventService'
+import { fetchEventStages } from '@/lib/services/stageService'
 import { EventPageProps } from '@/lib/types'
 import { ResolvingMetadata, Metadata } from 'next'
 import EventHomeComponent from './components/EventHomeComponent'

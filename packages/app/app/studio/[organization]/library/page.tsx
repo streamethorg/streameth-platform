@@ -1,6 +1,5 @@
 import { fetchAllSessions } from '@/lib/data'
 import { studioPageParams } from '@/lib/types'
-import VideoCard from '@/components/misc/VideoCard'
 import Link from 'next/link'
 
 const Library = async ({

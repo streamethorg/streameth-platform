@@ -17,6 +17,7 @@ import { storeSession } from '@/lib/actions/auth'
 let nonce: string
 let walletAddress: string
 let chainId: string
+
 const siweConfig = {
   getNonce: async () => {
     const res = await fetch(`${apiUrl()}/auth/nonce/generate`)

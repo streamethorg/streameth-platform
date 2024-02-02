@@ -9,7 +9,7 @@ import {
 import StagePreview from '../stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 
 import SpeakerComponent from '../speakers/components/SpeakerComponent'
 import ScheduleComponent from '../schedule/components/ScheduleComponent'
@@ -22,7 +22,7 @@ import {
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Suspense } from 'react'
-
+import banner from '@/public/streameth_twitter_banner.jpeg'
 export default function EventHomeComponent({
   event,
   stages,
@@ -30,7 +30,7 @@ export default function EventHomeComponent({
   searchParams,
 }: {
   event: IEventModel
-  stages: IStage[]
+  stages: IStageModel[]
 
   params: {
     organization: string
@@ -40,6 +40,7 @@ export default function EventHomeComponent({
     date?: string
   }
 }) {
+  const bannerImg = event.banner !== '' ? event.banner : banner
   return (
     <div className="flex flex-col w-full h-full bg-event px-2">
       <div className=" relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
@@ -47,7 +48,7 @@ export default function EventHomeComponent({
           <AspectRatio ratio={3 / 1}>
             <Image
               className="rounded-lg  p-2"
-              src={event.banner}
+              src={bannerImg}
               alt="Event Cover"
               width={1500}
               height={500}

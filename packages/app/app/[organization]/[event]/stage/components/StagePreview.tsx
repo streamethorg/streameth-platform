@@ -1,8 +1,8 @@
 import { Card, CardHeader } from '@/components/ui/card'
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import Link from 'next/link'
 import Image from 'next/image'
-
+import banner from '@/public/streameth_banner.png'
 export default function StagePreview({
   stage,
   organization,
@@ -12,7 +12,7 @@ export default function StagePreview({
   stage: IStageModel
   organization: string
   event: string
-  eventCover: string
+  eventCover: string | undefined
 }) {
   if (!stage?.streamSettings?.streamId) return null
 
@@ -23,7 +23,7 @@ export default function StagePreview({
       <Card>
         <Image
           className="p-1"
-          src={eventCover}
+          src={eventCover || banner}
           alt="Event Cover"
           width={1500}
           height={500}

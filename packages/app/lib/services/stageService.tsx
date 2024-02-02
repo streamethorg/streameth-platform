@@ -1,11 +1,11 @@
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel, IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 
 export async function fetchStage({
   stage,
 }: {
   stage: string
-}): Promise<IStage | null> {
+}): Promise<IStageModel | null> {
   try {
     const response = await fetch(`${apiUrl()}/stages/${stage}`)
     const data = (await response.json()).data
@@ -64,7 +64,7 @@ export async function fetchEventStages({
   eventId,
 }: {
   eventId?: string
-}): Promise<IStage[]> {
+}): Promise<IStageModel[]> {
   try {
     console.log(`${apiUrl()}/stages/event/${eventId}`)
     const response = await fetch(

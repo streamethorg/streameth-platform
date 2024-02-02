@@ -6,6 +6,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Image from 'next/image'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { getImageUrl } from '@/lib/utils/utils'
+import { uploadFile } from '@/lib/actions/fileUpload'
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   // FileList is immutable, so we need to create a new one
   const dataTransfer = new DataTransfer()
@@ -61,6 +62,7 @@ export default function ImageUpload({
             const { files, displayUrl } = getImageData(event)
             setPreview(displayUrl)
             onChange(files[0].name)
+            // uploadFile(files[0], displayUrl)
           }}
         />
       )}

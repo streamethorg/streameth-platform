@@ -9,13 +9,15 @@ export const createEventAction = async ({
 }: {
   event: IEvent
 }) => {
-  console.log('event', event)
+
+  // create scheduelling sheet, and create folder strucutre in drive
+
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
     throw new Error('No user session found')
   }
   const response = await createEvent({
-    event,
+    event: {...event, unlisted:true },
     authToken,
   })
 

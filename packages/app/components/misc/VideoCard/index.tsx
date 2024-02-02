@@ -8,7 +8,7 @@ import { ISessionModel } from 'streameth-new-server/src/interfaces/session.inter
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import Link from 'next/link'
-import { fetchEvent } from '@/lib/data'
+import { fetchEvent } from '@/lib/services/eventService'
 import { archivePath } from '@/lib/utils/utils'
 
 const VideoCard = async ({

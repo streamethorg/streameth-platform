@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card'
 import HeroHeader from './components/HeroHeader'
 import { Skeleton } from '@/components/ui/skeleton'
-import { fetchOrganizations } from '@/lib/data'
+import { fetchOrganizations } from '@/lib/services/organizationService'
 
 const Loading = () => {
   return <Skeleton className=" h-96 w-full bg-muted" />

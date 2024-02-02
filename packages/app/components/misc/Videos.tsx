@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 
 import VideoCard from '@/components/misc/VideoCard'
