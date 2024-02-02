@@ -1,5 +1,13 @@
-import moment from 'moment';
-import { TIMEZONES } from '@/lib/constants/timezones';
+import moment from 'moment-timezone';
+
+
+export function generateTimezones() {
+  const timezones = moment.tz.names()
+  return timezones.map((timezone) => ({
+    label: timezone,
+    value: timezone,
+  }))
+}
 
 export const getTime = (date: Date): number => moment(date).valueOf();
 
@@ -46,8 +54,8 @@ export const getEventPeriod = (eventTime: string): string => {
 }
 
 export const getEventTimezoneText = (utcValue: string): string => {
-  const timezone = TIMEZONES.find((tz) => tz.utc.includes(utcValue));
-  return timezone ? timezone.text : utcValue;
+  const timezone = generateTimezones().find((tz) => tz.value === utcValue);
+  return timezone ? timezone.label : '';
 }
 
 export const isCurrentDateInUTC = (): number => {

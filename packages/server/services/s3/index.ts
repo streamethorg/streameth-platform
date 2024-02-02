@@ -1,11 +1,15 @@
-import { S3 } from "aws-sdk";
+import {
+  S3,
+  GetObjectCommand,
+  PutObjectCommand,
+  ListBucketsCommand,
+  ListObjectsCommand,
+} from "@aws-sdk/client-s3";
 import { Readable } from "stream";
-
 
 // class abstract ImageService {
 //   abstract uploadFile()
 //   abstract getFile()
-
 
 // class GithubStorage
 
@@ -14,7 +18,6 @@ class S3Service {
 
   constructor() {
     this.s3Client = new S3({
-      s3ForcePathStyle: false,
       endpoint: "https://ams3.digitaloceanspaces.com",
       region: "us-east-1",
       credentials: {
@@ -29,7 +32,7 @@ class S3Service {
     key: string,
     file: Buffer | Readable,
     contentType: string
-  ): Promise<S3.ManagedUpload.SendData> {
+  ): Promise<void> {
     const params = {
       Bucket: bucketName,
       Key: key,
@@ -37,17 +40,46 @@ class S3Service {
       ContentType: contentType,
     };
 
-    return this.s3Client.upload(params).promise();
+    const command = new PutObjectCommand(params);
+    await this.s3Client.send(command);
+    console.log("Uploaded file...");
   }
 
-  async getFile(bucketName: string, key: string): Promise<Buffer> {
+  async listBuckets() {
+    const command = new ListBucketsCommand({});
+    const { Buckets } = await this.s3Client.send(command);
+
+    return Buckets;
+  }
+
+  async getBucket(bucketName: string, path?: string) {
+    const params = {
+      Bucket: bucketName,
+    };
+
+    const command = new ListObjectsCommand(params);
+    const data = await this.s3Client.send(command);
+
+    if (path) {
+      const objectsWithPath = data.Contents.filter((object) =>
+        object.Key.includes(path)
+      );
+      return objectsWithPath;
+    }
+
+    return data;
+  }
+
+  async getObject(bucketName: string, key: string): Promise<string> {
     const params = {
       Bucket: bucketName,
       Key: key,
     };
 
-    const data = await this.s3Client.getObject(params).promise();
-    return data.Body as Buffer;
+    const getObjectCommand = new GetObjectCommand(params);
+    const response = await this.s3Client.send(getObjectCommand);
+
+    return response.Body.transformToString();
   }
 }
 

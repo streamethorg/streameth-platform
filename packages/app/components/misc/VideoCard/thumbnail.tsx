@@ -14,20 +14,20 @@ const fetchImage = async (url: string): Promise<boolean> => {
 }
 // TODO
 export default function Thumbnail({
-  session,
+  imageUrl,
   fallBack,
 }: {
-  session: ISessionModel
+  imageUrl?: string
   fallBack?: string
 }) {
-  const streamethThumbnail = session.coverImage ?? ''
+  const streamethThumbnail = imageUrl ?? ''
 
   const [error, setError] = useState(false)
   const [fallbackImage, setFallbackImage] = useState('/cover.png')
   useEffect(() => {
     setError(false)
     fallBack && setFallbackImage(getImageUrl('/events/' + fallBack))
-  }, [session.coverImage, fallBack])
+  }, [imageUrl, fallBack])
 
   return (
     <div className="aspect-video relative">

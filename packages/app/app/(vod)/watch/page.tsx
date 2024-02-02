@@ -11,29 +11,27 @@ import RelatedVideos from './components/RelatedVideos'
 import { Metadata } from 'next'
 import { apiUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
-import { generalMetadata, watchMetadata } from '@/lib/metadata'
+import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
+import { fetchSession } from '@/lib/data'
 
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
   if (!searchParams.session) return notFound()
-  const response = await fetch(
-    `${apiUrl()}/sessions/${searchParams.session}`
-  )
-  const data = await response.json()
-  const video = data.data
-
+  const video = await fetchSession({
+    session: searchParams.session,
+  })
   if (!video) return notFound()
 
   const tabs = []
   tabs.push({
-    value: 'related',
+    value: 'Related videos',
     content: <RelatedVideos event={searchParams.event} />,
   })
 
   return (
-    <div className="h-full flex flex-col w-full gap-4 lg:flex-row relative ">
-      <div className="flex flex-col w-full h-full z-40 lg:w-[70%] sticky lg:relative lg:top-0  lg:pr-2 ">
+    <div className="h-full flex flex-col w-full gap-4 lg:flex-row relative">
+      <div className="flex flex-col w-full h-full z-40 lg:w-[75%] sticky lg:relative lg:top-0 gap-2 ">
         <Player
           assetId={video.assetId}
           playbackId={video.playbackId}
@@ -51,8 +49,8 @@ export default async function Watch({
       </div>
       <Tabs
         defaultValue={tabs[0]?.value ?? ''}
-        className="lg:w-[30%] w-full max-h-[100%] lg:ml-2 bg-background p-2 rounded-lg ">
-        <TabsList className="w-full bg-background">
+        className="lg:w-[25%] w-full max-h-[100%] ">
+        <TabsList className="w-full bg-secondary">
           {tabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value}>
               {tab.value}

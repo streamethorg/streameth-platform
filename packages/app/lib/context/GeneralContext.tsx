@@ -25,6 +25,7 @@ const GeneralContext = ({
     []
   )
 
+
   return (
     <SiweContext>
       <LivepeerConfig client={livepeerClient}>

@@ -2,8 +2,8 @@ import StageSelect from './StageSelect'
 import DateSelect from './DateSelect'
 import SessionList from '@/components/sessions/SessionList'
 
-import { fetchEventSessions } from '@/lib/data'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { fetchAllSessions } from '@/lib/data'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { getEventDays } from '@/lib/utils/time'
 
@@ -20,14 +20,15 @@ const ScheduleComponent = async ({
   stage,
   date,
 }: {
-  stages: IStageModel[]
+  stages: IStage[]
+
   event: IEventModel
   stage?: string
   date?: string
 }) => {
   const dates = getEventDays(event.start, event.end)
 
-  const sessionsData = await fetchEventSessions({
+  const sessionsData = await fetchAllSessions({
     event: event.slug,
     stage: stage,
     date: date ? new Date(parseInt(date)) : undefined,
@@ -35,7 +36,9 @@ const ScheduleComponent = async ({
 
   if (!sessionsData.sessions) return null
   return (
-    <Card id="schedule" className="border-none">
+    <Card
+      id="schedule"
+      className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
       <CardHeader className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
         <CardTitle className="text-4xl uppercase lg:mr-4">
           Schedule

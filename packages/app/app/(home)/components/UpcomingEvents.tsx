@@ -11,9 +11,10 @@ import React from 'react'
 
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 
-import { fetchEvents } from '@/lib/data'
-import { archivePath } from '@/lib/utils/path'
-
+import { fetchEvents } from '@/lib/services/eventService'
+import { archivePath } from '@/lib/utils/utils'
+import { Button } from '@/components/ui/button'
+import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 const UpcomingEvents = async ({
   date,
   organization,
@@ -31,72 +32,52 @@ const UpcomingEvents = async ({
   if (events.length === 0) return null
 
   return (
-    <Card className="max-w-screen border-none bg-white">
-      <CardHeader>
-        <CardTitle className="text-background ">Events</CardTitle>
+    <div className="max-w-screen border-none">
+      <CardHeader className="px-0 lg:px-0">
+        <CardTitle className=" ">Events</CardTitle>
         <CardDescription>
           Explore current and past events
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-row overflow-x-scroll space-x-4 ">
+      <CardContent className="px-0 lg:px-0 flex flex-row overflow-x-scroll space-x-4 ">
         {events.map(
-          (
-            {
-              name,
-              start,
-              eventCover,
-              organizationId,
-              id,
-              accentColor,
-              end,
-              slug,
-            },
-            index
-          ) => (
-            <Link
-              key={index}
-              href={
-                archive
-                  ? archivePath({ event: slug })
-                  : `/${organizationId}/${id}`
-              }>
+          ({ name, eventCover, accentColor, slug }, index) => (
+            <div key={index}>
               <Card
-                className="p-2 w-72 h-full border-none"
+                className="p-2 w-[350px] h-full border-none text-foreground"
                 style={{
                   backgroundColor: accentColor,
                 }}>
-                <div className=" min-h-full rounded-xl text-white uppercase">
-                  <div className="aspect-video relative">
-                    <Image
-                      className="rounded"
-                      alt="Session image"
-                      quality={80}
-                      src={`${eventCover}`}
-                      fill
-                      style={{
-                        objectFit: 'cover',
-                      }}
-                    />
+                <div className=" min-h-full rounded-xl  uppercase">
+                  <div className=" relative">
+                    <Thumbnail imageUrl={eventCover} />
                   </div>
-                  <CardHeader className="bg-background rounded mt-1">
-                    <CardTitle className="truncate text-sm">
+                  <CardHeader className=" px-2 lg:px-2 lg:py-2  rounded mt-1 bg-white bg-opacity-10 space-y-4">
+                    <CardTitle className="truncate text-body text-white text-xl">
                       {name}
                     </CardTitle>
-                    <CardDescription>
-                      {new Date(start).toDateString()}
-                      {/* {new Date(start).toDateString() !==
-                      new Date(end).toDateString()
-                        ? ` - ${new Date(end).toDateString()}`
-                        : ''} */}
+                    <CardDescription className="text-white flex flex-row space-x-2 ">
+                      <Link href={archivePath({ event: slug })}>
+                        <Button variant="outline" className="w-full">
+                          Archive
+                        </Button>
+                      </Link>
+                      <Link href={`/${organization}/${slug}`}>
+                        <Button
+                          variant="secondary"
+                          className="w-full">
+                          Event page
+                        </Button>
+                      </Link>
                     </CardDescription>
                   </CardHeader>
                 </div>
               </Card>
-            </Link>
+            </div>
           )
         )}
       </CardContent>
-    </Card>
+    </div>
   )
 }
 

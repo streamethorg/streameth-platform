@@ -19,7 +19,7 @@ export interface EventPageProps {
   params: {
     event: string
     organization: string
-    stageId?: string
+    stage?: string
   }
   searchParams: {
     stage?: string
@@ -50,7 +50,17 @@ export interface IPagination {
   totalItems: number
   limit: number
 }
-
+export interface studioPageParams {
+  params: {
+    organization: string
+    session: string
+  }
+  searchParams: {
+    eventId: string
+    settings: string
+    stage: string
+  }
+}
 export interface IEvent extends IEventModel {}
 export interface IOrganization extends IOrganizationModel {}
 export interface ISession extends ISessionModel {}

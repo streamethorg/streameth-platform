@@ -33,6 +33,9 @@ export interface ISession {
   coverImage?: string;
   slug?: string;
   eventSlug?: string;
+  videoTranscription?: string;
+  aiDescription?: string;
+  autoLabels?: string[];
 }
 
 export interface ISessionModel extends ISession, Document {}

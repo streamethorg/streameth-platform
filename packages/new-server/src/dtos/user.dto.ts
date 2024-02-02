@@ -1,17 +1,22 @@
-import { IUser, UserRole } from '@interfaces/user.interface';
+import { IUser } from '@interfaces/user.interface';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { Types } from 'mongoose';
 
-export class UserDto implements IUser {
+export class UserDto
+  implements Pick<IUser, 'walletAddress' | 'signature' | 'nonce' | 'message'>
+{
   @IsNotEmpty()
   @IsString()
   walletAddress!: string;
 
   @IsNotEmpty()
   @IsString()
-  message!: string;
+  nonce!: string;
 
-  organizations?: Types.ObjectId[];
-  role?: UserRole;
-  token?: string;
+  @IsNotEmpty()
+  @IsString()
+  signature!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  message!: string;
 }

@@ -31,8 +31,8 @@ const SpeakerCard = ({
   return (
     <Credenza>
       <CredenzaTrigger asChild>
-        <Card className="border-none">
-          <CardHeader className="space-y-4">
+        <Card className="text-white">
+          <CardHeader className="space-y-4 p-2 lg:p-2">
             <SpeakerPhoto speaker={speaker} size="lg" />
             <CardTitle className="mx-auto">{speaker.name}</CardTitle>
           </CardHeader>
