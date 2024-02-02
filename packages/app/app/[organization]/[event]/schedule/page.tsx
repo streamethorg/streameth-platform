@@ -1,14 +1,15 @@
 import SchedulePageComponent from './components/ScheduleComponent'
 import type { Metadata, ResolvingMetadata } from 'next'
 import EmbedLayout from '@/components/Layout/EmbedLayout'
-import { fetchEvent } from '@/lib/data'
+import { fetchEvent } from '@/lib/services/eventService'
 import { EventPageProps } from '@/lib/types'
 import {
   archiveMetadata,
   generalMetadata,
 } from '@/lib/utils/metadata'
 
-import { fetchEventStages } from '@/lib/data'
+import { fetchEventStages } from '@/lib/services/stageService'
+
 export default async function SchedulePage({
   params,
   searchParams,

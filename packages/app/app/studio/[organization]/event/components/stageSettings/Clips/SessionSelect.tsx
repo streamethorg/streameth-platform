@@ -35,7 +35,7 @@ const SessionSelect = ({ streamId }: { streamId: string }) => {
         <SelectGroup>
           {streamSessions.map((session) => (
             <SelectItem key={session.id} value={session.id}>
-              {new Date(session.lastSeen).toUTCString()}
+              {new Date(session.lastSeen as number).toUTCString()}
             </SelectItem>
           ))}
         </SelectGroup>

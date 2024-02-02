@@ -65,7 +65,6 @@ export const deleteStageAction = async ({
   if (streamId) {
     try {
       await livepeer.stream.delete(streamId)
-      console.log(`Stream ${streamId} deleted successfully`)
     } catch (error) {
       console.error('Error deleting stream:', error)
     }

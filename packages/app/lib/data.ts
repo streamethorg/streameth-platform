@@ -121,7 +121,6 @@ export const fetchSession = async ({
   session: string
 }): Promise<ISessionModel | null> => {
   try {
-    console.log(`${apiUrl()}/sessions/${session}`)
     const response = await fetch(`${apiUrl()}/sessions/${session}`)
     if (!response.ok) {
       return null

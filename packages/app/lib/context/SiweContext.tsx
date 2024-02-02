@@ -4,15 +4,17 @@ import {
   ConnectKitProvider,
   SIWEConfig,
   SIWEProvider,
-  getDefaultConfig,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
-import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import { mainnet } from 'viem/chains'
-import { createPublicClient, http } from 'viem'
-import { publicProvider } from 'wagmi/providers/public'
+import { http, createConfig, WagmiProvider } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
+
 import { apiUrl } from '../utils/utils'
 import { storeSession } from '@/lib/actions/auth'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 let nonce: string
 let walletAddress: string
@@ -80,34 +82,37 @@ const siweConfig = {
   },
 } satisfies SIWEConfig
 
-const { chains, publicClient } = configureChains(
-  [mainnet],
-  [publicProvider()]
-)
+export const config = createConfig({
+  chains: [mainnet],
+  transports: {
+    [mainnet.id]: http(),
+  },
+})
 
-const config = createConfig(
-  getDefaultConfig({
-    autoConnect: false,
-    appName: 'StreamETH',
-    chains: [mainnet],
-    publicClient: createPublicClient({
-      chain: mainnet,
-      transport: http(),
-    }),
+// const config = createConfig(
+//   getDefaultConfig({
+//     appName: 'StreamETH',
+//     publicClient: createPublicClient({
+//       chain: mainnet,
+//       transport: http(),
+//     }),
 
-    // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
-    walletConnectProjectId:
-      process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
-  })
-)
+//     // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+//     walletConnectProjectId:
+//       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+//   })
+// )
+const queryClient = new QueryClient() 
 
 const SiweContext = (props: PropsWithChildren) => {
   return (
-    <WagmiConfig config={config}>
-      <SIWEProvider {...siweConfig}>
-        <ConnectKitProvider>{props.children}</ConnectKitProvider>
-      </SIWEProvider>
-    </WagmiConfig>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <SIWEProvider {...siweConfig}>
+          <ConnectKitProvider>{props.children}</ConnectKitProvider>
+        </SIWEProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   )
 }
 

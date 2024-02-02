@@ -13,7 +13,8 @@ import {
   archiveMetadata,
 } from '@/lib/utils/metadata'
 import { Metadata } from 'next'
-import { fetchAllSessions, fetchEvent } from '@/lib/data'
+import { fetchAllSessions } from '@/lib/data'
+import { fetchEvent } from '@/lib/services/eventService'
 import { Suspense } from 'react'
 
 export default async function ArchivePage({

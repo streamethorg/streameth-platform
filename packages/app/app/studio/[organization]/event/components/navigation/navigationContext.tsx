@@ -1,5 +1,4 @@
 'use client'
-// NavigationContext.tsx
 import React, {
   createContext,
   useContext,
@@ -11,18 +10,18 @@ interface NavigationContextType {
   selectedStage: string
   setSelectedStage: (stage: string) => void
   selectedSetting: 'stages' | 'event'
-  setSelectedSetting: (setting: string) => void
+  setSelectedSetting: (setting: 'stages' | 'event') => void // Specify exact string literals
   selectedStageSetting: 'settings' | 'clip'
-  setSelectedStageSetting: (setting: string) => void
+  setSelectedStageSetting: (setting: 'settings' | 'clip') => void // Specify exact string literals
 }
 
 const initialContext: NavigationContextType = {
   selectedStage: '',
   setSelectedStage: () => {},
   selectedSetting: 'event',
-  setSelectedSetting: () => {},
+  setSelectedSetting: () => {}, // This will be overridden with a more specific function in the provider
   selectedStageSetting: 'settings',
-  setSelectedStageSetting: () => {},
+  setSelectedStageSetting: () => {}, // This will be overridden with a more specific function in the provider
 }
 
 const NavigationContext =
@@ -38,13 +37,13 @@ export const NavigationProvider: React.FC<
   NavigationProviderProps
 > = ({ children }) => {
   const [selectedStage, setSelectedStage] = useState<string>('')
-  const [selectedSetting, setSelectedSetting] =
-    useState<NavigationContextType['selectedSetting']>('event')
-  const [selectedStageSetting, setSelectedStageSetting] =
-    useState<NavigationContextType['selectedStageSetting']>(
-      'settings'
-    )
-  console.log(selectedSetting)
+  const [selectedSetting, setSelectedSetting] = useState<
+    'stages' | 'event'
+  >('event')
+  const [selectedStageSetting, setSelectedStageSetting] = useState<
+    'settings' | 'clip'
+  >('settings')
+
   return (
     <NavigationContext.Provider
       value={{

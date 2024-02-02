@@ -2,20 +2,14 @@
 import { useEffect, useState } from 'react'
 import { useAsset } from '@livepeer/react'
 import StudioPlayer from './Player'
-import {
-  CardContent,
-  CardFooter,
-  Card,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { CardContent, Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import SessionSelect from './SessionSelect'
 import CreateClipButton from './CreateClipButton'
 import TimeSetter from './TimeSetter'
 import { ClipProvider } from './ClipContext'
 import Player from '@/components/ui/Player'
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 
 const CreateClipCard = ({

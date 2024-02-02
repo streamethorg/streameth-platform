@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { eventSchema } from '@/lib/schema'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+
 import DataConfigElement from './dataConfigElement'
 import {
   Accordion,
@@ -10,7 +12,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 
 import {
   Form,
@@ -35,16 +36,16 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
-      eventName: event.name,
-      eventDescription: event.description,
-      startDate: event.start.toString(),
+      name: event.name,
+      description: event.description,
+      start: event.start,
       startTime: event.startTime,
-      endDate: event.end.toString(),
+      end: event.end,
       endTime: event.endTime,
-      eventLocation: event.location,
-      eventLogo: event.logo,
-      eventBanner: event.banner,
-      eventColor: event.accentColor,
+      location: event.location,
+      logo: event.logo,
+      banner: event.banner,
+      accentColor: event.accentColor,
       dataImporter: event.dataImporter,
     },
   })
@@ -64,13 +65,13 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
         <Accordion
           type="single"
           collapsible
-          onValueChange={() => setSelectedSetting('events')}>
+          onValueChange={() => setSelectedSetting('event')}>
           <AccordionItem value="item-1" className="px-2">
             <AccordionTrigger>Basics</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8">
               <FormField
                 control={form.control}
-                name="eventName"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="">Title</FormLabel>
@@ -83,7 +84,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
               />
               <FormField
                 control={form.control}
-                name="eventDescription"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="">Description</FormLabel>
@@ -110,7 +111,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                 <div className="flex flex-row w-full space-x-1">
                   <FormField
                     control={form.control}
-                    name="startDate"
+                    name="start"
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel className="">Start Date</FormLabel>
@@ -144,7 +145,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                 <div className="flex flex-row w-full space-x-1">
                   <FormField
                     control={form.control}
-                    name="endDate"
+                    name="end"
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel className="">End Date</FormLabel>
@@ -178,7 +179,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
               </div>
               <FormField
                 control={form.control}
-                name="eventLocation"
+                name="location"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="">
@@ -204,7 +205,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                 <div className="flex w-1/6">
                   <FormField
                     control={form.control}
-                    name="eventLogo"
+                    name="logo"
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel>Event Logo</FormLabel>
@@ -242,7 +243,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                 <div className="flex w-3/6">
                   <FormField
                     control={form.control}
-                    name="eventBanner"
+                    name="banner"
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel>Event Banner</FormLabel>
@@ -262,7 +263,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
 
               <FormField
                 control={form.control}
-                name="eventColor"
+                name="accentColor"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="">Accent Color</FormLabel>
