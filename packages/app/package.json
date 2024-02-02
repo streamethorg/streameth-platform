@@ -47,7 +47,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.0",
-    "connectkit": "^1.5.2",
+    "connectkit": "1.7.0-demo",
     "cypress": "^13.6.2",
     "date-fns": "^3.2.0",
     "dice-coefficient": "^2.1.1",

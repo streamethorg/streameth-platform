@@ -3,12 +3,12 @@ import { SiweMessage } from 'siwe'
 import {
   ConnectKitProvider,
   SIWEConfig,
+  getDefaultConfig,
   SIWEProvider,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
 import { http, createConfig, WagmiProvider } from 'wagmi'
-import { mainnet } from 'wagmi/chains'
-
+import { optimism, mainnet, base } from 'wagmi/chains'
 import { apiUrl } from '../utils/utils'
 import { storeSession } from '@/lib/actions/auth'
 import {
@@ -18,7 +18,6 @@ import {
 
 let nonce: string
 let walletAddress: string
-let chainId: string
 
 const siweConfig = {
   getNonce: async () => {
@@ -82,27 +81,31 @@ const siweConfig = {
   },
 } satisfies SIWEConfig
 
-export const config = createConfig({
-  chains: [mainnet],
-  transports: {
-    [mainnet.id]: http(),
-  },
-})
+const config = createConfig(
+  getDefaultConfig({
+    // Your dApps chains
+    chains: [mainnet, base],
+    transports: {
+      // RPC URL for each chain
+      [mainnet.id]: http(),
+      [base.id]: http(),
+    },
 
-// const config = createConfig(
-//   getDefaultConfig({
-//     appName: 'StreamETH',
-//     publicClient: createPublicClient({
-//       chain: mainnet,
-//       transport: http(),
-//     }),
+    // Required API Keys
+    walletConnectProjectId:
+      process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
 
-//     // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
-//     walletConnectProjectId:
-//       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
-//   })
-// )
-const queryClient = new QueryClient() 
+    // Required App Info
+    appName: 'Your App Name',
+
+    // Optional App Info
+    appDescription: 'Your App Description',
+    appUrl: 'https://family.co', // your app's url
+    appIcon: 'https://family.co/logo.png', // your app's icon, no bigger than 1024x1024px (max. 1MB)
+  })
+)
+
+const queryClient = new QueryClient()
 
 const SiweContext = (props: PropsWithChildren) => {
   return (
