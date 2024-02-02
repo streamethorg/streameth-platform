@@ -5320,7 +5320,7 @@ __metadata:
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.0"
     cmdk: "npm:^0.2.0"
-    connectkit: "npm:^1.5.2"
+    connectkit: "npm:1.7.0-demo"
     cypress: "npm:^13.6.2"
     date-fns: "npm:^3.2.0"
     dice-coefficient: "npm:^2.1.1"
@@ -9319,9 +9319,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"connectkit@npm:^1.5.2":
-  version: 1.7.0
-  resolution: "connectkit@npm:1.7.0"
+"connectkit@npm:1.7.0-demo":
+  version: 1.7.0-demo
+  resolution: "connectkit@npm:1.7.0-demo"
   dependencies:
     buffer: "npm:^6.0.3"
     detect-browser: "npm:^5.3.0"
@@ -9337,7 +9337,7 @@ __metadata:
     react-dom: 17.x || 18.x
     viem: 2.x
     wagmi: 2.x
-  checksum: 10c0/3c7d8881be4f7e904d49d06e6b2d9a29526b03afc04039ad5ca521e1f23f1b79817ca2e1723c792f5c7209a8c9d3e5abeb9f1dc2f2cb36a4ad8f8e619d12d89a
+  checksum: 10c0/7589a22229b29a96798533d897cb861328c19ee0b87c70f83203519a701d4ae15262746846ae6e8f120bf056ceb18f2b6cc2202d26b5d05bf3a3a06a6df587bb
   languageName: node
   linkType: hard
 
