@@ -1,7 +1,6 @@
-import { CONFIG, resetTmpFolder } from "./config";
-import { createReadStream, existsSync, ReadStream } from "fs";
-import * as child from "child_process";
-import { join, resolve } from "path";
+import { CONFIG } from "./config";
+import { createReadStream } from "fs";
+import { join } from "path";
 import * as fs from "fs";
 import ffmpeg from "fluent-ffmpeg";
 
@@ -145,61 +144,61 @@ export async function ToMp3(
 //   }
 // }
 
-export async function Join(inputs: string[], output: string) {
-  console.log("Joining videos to", output);
-  console.log("Inputs:", inputs);
-
-  if (fs.existsSync(output)) {
-    console.log("File already exists", output);
-    return;
-  }
-
-  await concat({
-    output: output,
-    videos: inputs,
-    frameFormat: "raw",
-    tempDir: join(CONFIG.ASSET_FOLDER, "tmp"),
-    transition: {
-      name: "fade", // Options: fade, directionalwipe, circleopen, squareswire
-      duration: 750,
-    },
-  });
-
-  resetTmpFolder();
-}
-
-export async function Split(
-  sessions: {
-    id: string;
-    streamUrl: string;
-    start: number;
-    end: number;
-  }[]
-) {
-  console.log("Splitting to", sessions.length, "videos");
-
-  for (const session of sessions) {
-    const file = `${CONFIG.ASSET_FOLDER}/splits/${session.id}.mp4`;
-    console.log("Split to", session.id, session.start, session.end);
-
-    if (existsSync(file)) {
-      console.log("File already exists", file);
-      continue;
-    }
-
-    // To fix Segmentation fault (core dumped), install nscd
-    // `sudo apt install nscd`
-    child.execSync(
-      `${ffmpegPath ?? "ffmpeg"} -i ${session.streamUrl} -ss ${
-        session.start
-      } -to ${session.end} -c:v libx264 -c:a copy -y ${file}`,
-      {
-        stdio: "inherit",
-      }
-    );
-
-    if (existsSync(file)) {
-      console.log("Successfully split", session.id, "at", file);
-    }
-  }
-}
+// export async function Join(inputs: string[], output: string) {
+//   console.log("Joining videos to", output);
+//   console.log("Inputs:", inputs);
+//
+//   if (fs.existsSync(output)) {
+//     console.log("File already exists", output);
+//     return;
+//   }
+//
+//   await concat({
+//     output: output,
+//     videos: inputs,
+//     frameFormat: "raw",
+//     tempDir: join(CONFIG.ASSET_FOLDER, "tmp"),
+//     transition: {
+//       name: "fade", // Options: fade, directionalwipe, circleopen, squareswire
+//       duration: 750,
+//     },
+//   });
+//
+//   resetTmpFolder();
+// }
+//
+// export async function Split(
+//   sessions: {
+//     id: string;
+//     streamUrl: string;
+//     start: number;
+//     end: number;
+//   }[]
+// ) {
+//   console.log("Splitting to", sessions.length, "videos");
+//
+//   for (const session of sessions) {
+//     const file = `${CONFIG.ASSET_FOLDER}/splits/${session.id}.mp4`;
+//     console.log("Split to", session.id, session.start, session.end);
+//
+//     if (existsSync(file)) {
+//       console.log("File already exists", file);
+//       continue;
+//     }
+//
+//     // To fix Segmentation fault (core dumped), install nscd
+//     // `sudo apt install nscd`
+//     child.execSync(
+//       `${ffmpegPath ?? "ffmpeg"} -i ${session.streamUrl} -ss ${
+//         session.start
+//       } -to ${session.end} -c:v libx264 -c:a copy -y ${file}`,
+//       {
+//         stdio: "inherit",
+//       }
+//     );
+//
+//     if (existsSync(file)) {
+//       console.log("Successfully split", session.id, "at", file);
+//     }
+//   }
+// }
