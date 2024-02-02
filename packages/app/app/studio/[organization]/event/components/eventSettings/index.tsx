@@ -1,7 +1,7 @@
 'use client'
 import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { useNavigation } from '../navigation/navigationContext'
 
 const EventSettings = ({
@@ -9,7 +9,7 @@ const EventSettings = ({
   stages,
 }: {
   event: IEventModel
-  stages: IStage[]
+  stages: IStageModel[]
 }) => {
   const { selectedSetting } = useNavigation()
 

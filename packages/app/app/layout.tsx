@@ -5,7 +5,6 @@ import { ModalContextProvider } from '@/lib/context/ModalContext'
 import { MobileContextProvider } from '@/lib/context/MobileContext'
 import { LoadingContextProvider } from '@/lib/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/lib/context/TopNavbarContext'
-import Initializer from './Initializer'
 import { generalMetadata } from '@/lib/utils/metadata'
 import { Toaster } from '@/components/ui/sonner'
 

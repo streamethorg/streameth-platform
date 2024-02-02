@@ -23,7 +23,6 @@ const AddSpeakersInput = ({
   speakers: ISpeaker[]
   eventId: string
 }) => {
-  console.log(speakers)
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
   const [allSpeakers, setAllSpeakers] = useState<ISpeaker[]>([])

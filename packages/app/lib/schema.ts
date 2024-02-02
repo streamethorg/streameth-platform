@@ -1,8 +1,5 @@
 import * as z from 'zod'
 
-// Image URL validation
-const imageUrlRegex = /\.(jpeg|jpg|gif|png)$/
-
 export const formSchema = z.object({
   name: z.string(),
   description: z.string(),
@@ -92,7 +89,6 @@ const speakerSchema = z.object({
   company: z.string().optional(),
 });
 
-// Define the Zod schema for session validation
 export const sessionSchema = z.object({
   name: z.string().max(255),
   description: z.string(),

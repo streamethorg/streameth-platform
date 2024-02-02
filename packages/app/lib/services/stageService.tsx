@@ -66,7 +66,6 @@ export async function fetchEventStages({
   eventId?: string
 }): Promise<IStageModel[]> {
   try {
-    console.log(`${apiUrl()}/stages/event/${eventId}`)
     const response = await fetch(
       `${apiUrl()}/stages/event/${eventId}`,
       {

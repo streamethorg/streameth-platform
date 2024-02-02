@@ -16,7 +16,6 @@ const ColorPicker = ({
   onChange: (color: string) => void
 }) => {
   const [isOpen, setIsOpen] = useState(true)
-  console.log(color)
   return (
     <Popover>
       <PopoverTrigger>
@@ -32,7 +31,6 @@ const ColorPicker = ({
           <SketchPicker
             color={color}
             onChange={(color) => {
-              console.log('selected', color)
               onChange(color.hex)
             }}
           />

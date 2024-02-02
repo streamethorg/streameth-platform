@@ -1,6 +1,6 @@
 'use client'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import EventAccordion from '../eventSettings/eventAccordion'
 import StagesAccordion from '../stageSettings/stagesAccordion'
 import { useNavigation } from './navigationContext'
@@ -13,7 +13,7 @@ const Navigation = ({
   stages,
 }: {
   event: IEventModel
-  stages: IStage[]
+  stages: IStageModel[]
 }) => {
   const { selectedStageSetting } = useNavigation()
   return (
