@@ -422,6 +422,18 @@
 					},
 					"eventSlug": {
 						"type": "string"
+					},
+					"videoTranscription": {
+						"type": "string"
+					},
+					"aiDescription": {
+						"type": "string"
+					},
+					"autoLabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -516,6 +528,24 @@
 					},
 					"eventSlug": {
 						"type": "string"
+					},
+					"videoTranscription": {
+						"type": "string"
+					},
+					"aiDescription": {
+						"type": "string"
+					},
+					"autoLabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"autolabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -1833,6 +1863,36 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/webhook": {
+			"post": {
+				"operationId": "Webhook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Index"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
 			}
 		},
 		"/events": {

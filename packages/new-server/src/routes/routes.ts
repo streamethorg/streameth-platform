@@ -196,6 +196,9 @@ const models: TsoaRoute.Models = {
             "coverImage": {"dataType":"string"},
             "slug": {"dataType":"string"},
             "eventSlug": {"dataType":"string"},
+            "videoTranscription": {"dataType":"string"},
+            "aiDescription": {"dataType":"string"},
+            "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
         },
         "additionalProperties": false,
     },
@@ -230,6 +233,10 @@ const models: TsoaRoute.Models = {
             "coverImage": {"dataType":"string"},
             "slug": {"dataType":"string"},
             "eventSlug": {"dataType":"string"},
+            "videoTranscription": {"dataType":"string"},
+            "aiDescription": {"dataType":"string"},
+            "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
+            "autolabels": {"dataType":"array","array":{"dataType":"string"}},
         },
         "additionalProperties": false,
     },
@@ -952,6 +959,31 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.index.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/webhook',
+            ...(fetchMiddlewares<RequestHandler>(IndexController)),
+            ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.webhook)),
+
+            function IndexController_webhook(request: any, response: any, next: any) {
+            const args = {
+                    payload: {"in":"body","name":"payload","required":true,"dataType":"any"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new IndexController();
+
+
+              const promise = controller.webhook.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
