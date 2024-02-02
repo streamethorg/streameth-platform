@@ -3,7 +3,7 @@ import DateSelect from './DateSelect'
 import SessionList from '@/components/sessions/SessionList'
 
 import { fetchAllSessions } from '@/lib/data'
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { getEventDays } from '@/lib/utils/time'
 
@@ -20,7 +20,7 @@ const ScheduleComponent = async ({
   stage,
   date,
 }: {
-  stages: IStage[]
+  stages: IStageModel[]
 
   event: IEventModel
   stage?: string

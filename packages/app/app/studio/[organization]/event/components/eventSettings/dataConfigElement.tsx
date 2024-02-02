@@ -9,7 +9,7 @@ import {
   IDataImporter,
   GSheetConfig,
   PretalxConfig,
-} from 'streameth-server/model/event'
+} from 'streameth-new-server/src/interfaces/event.interface'
 import { Input } from '@/components/ui/input'
 
 interface Provider {

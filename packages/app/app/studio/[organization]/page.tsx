@@ -11,10 +11,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const OrganizationPage = async ({ params }: studioPageParams) => {
-  console.log('organization', params.organization)
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  })
   const events = await fetchEvents({
     organizationSlug: params.organization,
   })

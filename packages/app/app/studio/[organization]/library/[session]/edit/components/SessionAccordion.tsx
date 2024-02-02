@@ -1,8 +1,7 @@
 'use client'
-import React from 'react'
-import { useForm, useFieldArray } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { sessionSchema } from '@/lib/schema' // Your schema import path
+import * as z from 'zod'
 import {
   Form,
   FormControl,
@@ -15,9 +14,8 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import ImageUpload from '@/components/misc/form/imageUpload'
+import { sessionSchema } from '@/lib/schema'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-import AddSpeakersInput from './AddSpeakersInput'
-import * as z from 'zod'
 
 const SessionAccordion = ({
   session,
@@ -30,23 +28,16 @@ const SessionAccordion = ({
       name: session.name,
       description: session.description,
       coverImage: session.coverImage,
-      speakers: session.speakers,
       assetId: session.assetId,
       videoUrl: session.videoUrl,
       playbackId: session.playbackId,
     },
   })
 
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name: 'speakers',
-  })
-
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof sessionSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
   }
 
   return (
@@ -97,7 +88,7 @@ const SessionAccordion = ({
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name={`speakers`}
           render={({ field }) => (
@@ -111,7 +102,7 @@ const SessionAccordion = ({
               </FormControl>
             </FormItem>
           )}
-        />
+        /> */}
         <FormField
           control={form.control}
           name="assetId"

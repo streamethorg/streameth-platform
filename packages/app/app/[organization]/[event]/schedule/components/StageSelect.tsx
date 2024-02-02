@@ -17,7 +17,7 @@ const StageSelect = ({ stages }: { stages: IStage[] }) => {
   return (
     <Select
       defaultValue={searchParams.get('stage') || stages[0]?._id}
-      onValueChange={(value) => handleTermChange(value)}>
+      onValueChange={(value: string) => handleTermChange(value)}>
       <SelectTrigger className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
         <SelectValue placeholder="Stage select" />
       </SelectTrigger>

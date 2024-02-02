@@ -22,7 +22,6 @@ export const createEventAction = async ({
   })
 
   if (!response) {
-    console.log(response)
     throw new Error('Error creating event')
   }
 
