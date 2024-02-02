@@ -12,6 +12,7 @@ import * as express from 'express';
 import AuthService from '@services/auth.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { UserDto } from '@dtos/user.dto';
+import { AuthDto } from '@dtos/auth.dto';
 import { IUser } from '@interfaces/user.interface';
 @Tags('Auth')
 @Route('auth')
@@ -34,5 +35,14 @@ export class AuthController extends Controller {
   ): Promise<IStandardResponse<string>> {
     const nonce = await this.authService.generateNonce();
     return SendApiResponse('nonce generated', nonce.nonce);
+  }
+
+  @SuccessResponse('201')
+  @Post('/verify-token')
+  async verifyToken(
+    @Body() token: AuthDto,
+  ): Promise<IStandardResponse<boolean>> {
+    const status = await this.authService.verifyToken(token);
+    return SendApiResponse('success', status);
   }
 }

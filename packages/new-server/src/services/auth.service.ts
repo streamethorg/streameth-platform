@@ -1,5 +1,6 @@
 import BaseController from '@databases/storage';
 import { IUser } from '@interfaces/user.interface';
+import { IAuth } from '@interfaces/auth.interface';
 import User from '@models/user.model';
 import { HttpException } from '@exceptions/HttpException';
 import jwt from 'jsonwebtoken';
@@ -36,6 +37,21 @@ export default class AuthService {
 
   generateNonce(): { nonce: string } {
     return { nonce: generateNonce() };
+  }
+
+  async verifyToken(data: IAuth): Promise<boolean> {
+    try {
+      jwt.verify(data.token, config.jwt.secret);
+      return true;
+    } catch (e) {
+      if (
+        e instanceof jwt.TokenExpiredError ||
+        e instanceof jwt.JsonWebTokenError
+      ) {
+        return false;
+      }
+      return false;
+    }
   }
 
   async verifyMessage(
