@@ -112,9 +112,7 @@ const SiweContext = (props: PropsWithChildren) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <SIWEProvider {...siweConfig}>
           <ConnectKitProvider>{props.children}</ConnectKitProvider>
-        </SIWEProvider>
       </QueryClientProvider>
     </WagmiProvider>
   )
