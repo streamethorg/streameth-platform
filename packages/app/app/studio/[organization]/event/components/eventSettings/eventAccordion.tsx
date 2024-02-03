@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { eventSchema } from '@/lib/schema'
-import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 
 import DataConfigElement from './dataConfigElement'
 import {
@@ -31,8 +30,14 @@ import TimePicker from '@/components/misc/form/timePicker'
 import DatePicker from '@/components/misc/form/datePicker'
 import { generateTimezones } from '@/lib/utils/time'
 import { useNavigation } from '../navigation/navigationContext'
+import { toast } from 'sonner'
+import { useState } from 'react'
+import { updateEventAction } from '@/lib/actions/events'
+import { IExtendedEvent } from '@/lib/types'
 
-const EventAccordion = ({ event }: { event: IEventModel }) => {
+const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
+  const [isUpdatingEvent, setIsUpdatingEvent] =
+    useState<boolean>(false)
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
@@ -47,14 +52,33 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
       banner: event.banner,
       accentColor: event.accentColor,
       dataImporter: event.dataImporter,
+      timezone: event.timezone,
     },
   })
-
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof eventSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+    setIsUpdatingEvent(true)
+    const response = updateEventAction({
+      event: {
+        ...values,
+        _id: event._id,
+        slug: event.slug,
+        organizationId: event.organizationId,
+      },
+    })
+      .then((response) => {
+        if (response) {
+          toast.success('Event updated')
+        } else {
+          toast.error('Error updating event')
+        }
+      })
+      .catch(() => {
+        toast.error('Error updating event')
+      })
+      .finally(() => {
+        setIsUpdatingEvent(false)
+      })
   }
 
   const { selectedSetting, setSelectedSetting } = useNavigation()
@@ -99,7 +123,10 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                 )}
               />
 
-              <Button type="submit" className="ml-auto">
+              <Button
+                disabled={isUpdatingEvent}
+                type="submit"
+                className="ml-auto">
                 Save
               </Button>
             </AccordionContent>
@@ -117,7 +144,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                         <FormLabel className="">Start Date</FormLabel>
                         <FormControl>
                           <DatePicker
-                            value={field.value}
+                            value={new Date(field.value)}
                             onChange={field.onChange}
                           />
                         </FormControl>
@@ -151,7 +178,7 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                         <FormLabel className="">End Date</FormLabel>
                         <FormControl>
                           <DatePicker
-                            value={field.value}
+                            value={new Date(field.value)}
                             onChange={field.onChange}
                           />
                         </FormControl>
@@ -182,6 +209,22 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                 name="location"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel className="">Location</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="e.g Denver, US"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="timezone"
+                render={({ field }) => (
+                  <FormItem>
                     <FormLabel className="">
                       Select the event timezone
                     </FormLabel>
@@ -196,6 +239,12 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                   </FormItem>
                 )}
               />
+              <Button
+                disabled={isUpdatingEvent}
+                type="submit"
+                className="ml-auto">
+                Save
+              </Button>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2" className="px-2">
@@ -281,7 +330,10 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                 )}
               />
 
-              <Button type="submit" className="ml-auto">
+              <Button
+                disabled={isUpdatingEvent}
+                type="submit"
+                className="ml-auto">
                 Save
               </Button>
             </AccordionContent>
@@ -309,7 +361,10 @@ const EventAccordion = ({ event }: { event: IEventModel }) => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="ml-auto">
+              <Button
+                disabled={isUpdatingEvent}
+                type="submit"
+                className="ml-auto">
                 Save
               </Button>
             </AccordionContent>

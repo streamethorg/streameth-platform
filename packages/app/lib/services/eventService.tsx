@@ -1,10 +1,11 @@
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 import {
-  IEventModel,
   IEvent,
+  IEventModel,
 } from 'streameth-new-server/src/interfaces/event.interface'
 import { fetchOrganization } from './organizationService'
+import { IExtendedEvent } from '../types'
 
 export async function fetchEvents({
   organizationId,
@@ -106,6 +107,32 @@ export const createEvent = async ({
   }
 }
 
+export const updateEvent = async ({
+  event,
+  authToken,
+}: {
+  event: IExtendedEvent
+  authToken: string
+}): Promise<IEventModel> => {
+  const modifiedObject = (({ _id, ...rest }) => rest)(event)
+  try {
+    const response = await fetch(`${apiUrl()}/events/${event._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(modifiedObject),
+    })
+    if (!response.ok) {
+      throw 'Error updating event'
+    }
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateEvent', e)
+    throw e
+  }
+}
 export const deleteEvent = async ({
   eventId,
   authToken,

@@ -1,6 +1,11 @@
 'use server'
-import { createEvent, deleteEvent } from '@/lib/services/eventService'
+import {
+  createEvent,
+  updateEvent,
+  deleteEvent,
+} from '@/lib/services/eventService'
 import { cookies } from 'next/headers'
+import { IExtendedEvent } from '../types'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 
 export const createEventAction = async ({
@@ -23,6 +28,26 @@ export const createEventAction = async ({
     throw new Error('Error creating event')
   }
 
+  return response
+}
+
+export const updateEventAction = async ({
+  event,
+}: {
+  event: IExtendedEvent
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+  const response = await updateEvent({
+    event: { ...event },
+    authToken,
+  })
+
+  if (!response) {
+    throw new Error('Error updating event')
+  }
   return response
 }
 
