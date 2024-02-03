@@ -107,14 +107,14 @@ export const createEvent = async ({
 }
 
 export const deleteEvent = async ({
-  eventSlug,
+  eventId,
   authToken,
 }: {
-  eventSlug: string
+  eventId: string
   authToken: string
 }): Promise<IEventModel> => {
   try {
-    const response = await fetch(`${apiUrl()}/events/${eventSlug}`, {
+    const response = await fetch(`${apiUrl()}/events/${eventId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -124,8 +124,8 @@ export const deleteEvent = async ({
     if (!response.ok) {
       throw 'Error deleting event'
     }
-    console.log(response)
-    return (await response.json()).data
+
+    return await response.json()
   } catch (e) {
     console.log('error in deleteEvent', e)
     throw e

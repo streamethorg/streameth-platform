@@ -27,9 +27,9 @@ export const createEventAction = async ({
 }
 
 export const deleteEventAction = async ({
-  eventSlug,
+  eventId,
 }: {
-  eventSlug: string
+  eventId: string
 }) => {
   const authToken = cookies().get('user-session')?.value
 
@@ -37,7 +37,7 @@ export const deleteEventAction = async ({
     throw new Error('No user session found')
   }
 
-  const response = await deleteEvent({ eventSlug, authToken })
+  const response = await deleteEvent({ eventId, authToken })
   if (!response) {
     throw new Error('Error deleting event')
   }

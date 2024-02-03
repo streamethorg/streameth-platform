@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/button'
 import CreateStageForm from '../stageSettings/createStageForm'
 import Link from 'next/link'
 import { deleteEventAction } from '@/lib/actions/events'
+import { toast } from 'sonner'
+import { useRouter, usePathname } from 'next/navigation'
 const Navigation = ({
   event,
   stages,
@@ -17,12 +19,33 @@ const Navigation = ({
   stages: IStageModel[]
 }) => {
   const { selectedStageSetting } = useNavigation()
+  const router = useRouter()
+  const pathname = usePathname()
 
-  const handleDeleteEvent = (eventSlug: string) => {
+  const findOrg = pathname.split('/')
+  const orgId = findOrg[2]
+
+  const handleDeleteEvent = (eventId: string) => {
     if (
       window.confirm('Are you sure you want to delete this event?')
     ) {
-      deleteEventAction({ eventSlug })
+      const response = deleteEventAction({
+        eventId,
+      })
+        .then((response) => {
+          if (response) {
+            toast.success('Event deleted')
+          } else {
+            toast.error('Error deleting event')
+          }
+        })
+        .catch(() => {
+          toast.error('Error deleting event')
+        })
+        .finally(() => {
+          router.push(`/studio/${orgId}`)
+          router.refresh()
+        })
     }
   }
   return (
@@ -56,7 +79,7 @@ const Navigation = ({
           <Link href={`/studio/${event.organizationId}`}>Cancel</Link>
         </Button>
         <Button
-          onClick={() => handleDeleteEvent(event.slug!)}
+          onClick={() => handleDeleteEvent(event._id!)}
           variant={'destructive'}>
           Delete
         </Button>
