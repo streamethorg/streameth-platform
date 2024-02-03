@@ -26,14 +26,16 @@ export default function ImageUpload({
   onChange,
   aspectRatio,
   value,
+  path,
   ...rest
 }: {
   aspectRatio: number
   onChange: (files: string | null) => void
   value: string | null | undefined
+  path: string
 }) {
   const [preview, setPreview] = useState(
-    value ? getImageUrl('/events/' + value) : ''
+    value ? getImageUrl('/' + path + '/' + value) : ''
   )
 
   const onSubmit = async (file: File) => {
@@ -42,7 +44,7 @@ export default function ImageUpload({
     try {
       const data = new FormData()
       data.set('file', file)
-
+      data.set('path', path)
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: data,
@@ -82,7 +84,7 @@ export default function ImageUpload({
           onChange={(event) => {
             const { files, displayUrl } = getImageData(event)
             setPreview(displayUrl)
-            onChange(files[0].name)
+            onChange(getImageUrl('/' + path + '/' + files[0].name))
             onSubmit(files[0])
           }}
         />

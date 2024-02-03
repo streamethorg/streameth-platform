@@ -34,7 +34,7 @@ const ScheduleComponent = async ({
     date: date ? new Date(parseInt(date)) : undefined,
   })
 
-  if (!sessionsData.sessions) return null
+  if (!sessionsData.sessions.length) return null
   return (
     <Card
       id="schedule"

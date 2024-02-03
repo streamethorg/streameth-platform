@@ -23,6 +23,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Suspense } from 'react'
 import banner from '@/public/streameth_twitter_banner.jpeg'
+
 export default function EventHomeComponent({
   event,
   stages,

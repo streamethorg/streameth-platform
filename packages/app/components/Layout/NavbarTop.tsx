@@ -8,6 +8,7 @@ import Navbar from './Navbar'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { NavBarProps } from '@/lib/types'
+import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 
 const NavBarButton = ({
   isNavVisible,
@@ -45,7 +46,7 @@ export default function NavbarTop({
   }
   return (
     <NavigationMenu className="z-[69] bg-event sticky top-0">
-      <div className="flex p-2 px-2 lg:px-4 w-full">
+      <div className="flex p-2 px-2 lg:px-4 w-full justify-between">
         <div className="flex items-center">
           <Link href={homePath ? homePath : '/'} className="">
             <span className="sr-only">Logo</span>
@@ -58,7 +59,7 @@ export default function NavbarTop({
             />
           </Link>
         </div>
-        <div className=" flex flex-row items-center justify-end lg:justify-between h-full w-full">
+        <div className=" flex flex-row items-center justify-end h-full w-full">
           {menuVisible && (
             <Navbar
               pages={
@@ -80,6 +81,7 @@ export default function NavbarTop({
               setIsNavVisible={setMenuVisible}
             />
           )}
+          <ConnectWalletButton />
         </div>
       </div>
     </NavigationMenu>

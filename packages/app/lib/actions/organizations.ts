@@ -1,3 +1,4 @@
+"use server"
 import { createOrganization } from '@/lib/services/organizationService'
 import { cookies } from 'next/headers'
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'

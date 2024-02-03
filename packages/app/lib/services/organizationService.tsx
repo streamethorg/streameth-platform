@@ -63,9 +63,10 @@ export async function createOrganization({
       },
       body: JSON.stringify(organization),
     })
+    console.log(await response.json())
     return (await response.json()).data
   } catch (e) {
     console.log(e)
-    throw 'Error creating organization'
+    throw e
   }
 }

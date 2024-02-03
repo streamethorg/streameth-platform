@@ -4,7 +4,7 @@ import S3Service from '@/lib/services/spacesService'
 export async function POST(request: NextRequest) {
   const data = await request.formData()
   const file: File | null = data.get('file') as unknown as File
-
+  const path = data.get('path') as string
   if (!file) {
     return NextResponse.json({ success: false })
   }
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   const s3 = new S3Service()
   const result = await s3.uploadFile(
     'streameth-production',
-    file.name,
+    path + '/' + file.name,
     buffer,
     file.type
   )

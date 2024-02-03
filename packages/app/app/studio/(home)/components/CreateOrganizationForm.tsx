@@ -25,11 +25,7 @@ import { createOrganizationAction } from '@/lib/actions/organizations'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
 
-export default function CreateStageForm({
-  eventId,
-}: {
-  eventId: string
-}) {
+export default function CreateOrganization() {
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof organizationSchema>>({
@@ -78,7 +74,9 @@ export default function CreateStageForm({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="">Stage name</FormLabel>
+                  <FormLabel className="">
+                    Organization name
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="name" {...field} />
                   </FormControl>
@@ -90,7 +88,7 @@ export default function CreateStageForm({
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem className="hidden">
+                <FormItem className="">
                   <FormLabel className="">Description</FormLabel>
                   <FormControl>
                     <Input placeholder="description" {...field} />
@@ -101,9 +99,22 @@ export default function CreateStageForm({
             />
             <FormField
               control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel className="">Location</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Location" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="url"
               render={({ field }) => (
-                <FormItem className="hidden">
+                <FormItem className="">
                   <FormLabel className="">Website</FormLabel>
                   <FormControl>
                     <Input placeholder="streamId" {...field} />
@@ -116,10 +127,14 @@ export default function CreateStageForm({
               control={form.control}
               name="logo"
               render={({ field }) => (
-                <FormItem className="hidden">
+                <FormItem className=" max-w-[50px]">
                   <FormLabel className="">Logo</FormLabel>
                   <FormControl>
-                    <ImageUpload aspectRatio={1} {...field} />
+                    <ImageUpload
+                      aspectRatio={1}
+                      path="organizations"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -131,7 +146,7 @@ export default function CreateStageForm({
                 Please wait
               </Button>
             ) : (
-              <Button type="submit">Create stage</Button>
+              <Button type="submit">Create</Button>
             )}
           </form>
         </Form>

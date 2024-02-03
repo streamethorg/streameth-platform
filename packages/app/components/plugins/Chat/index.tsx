@@ -19,6 +19,7 @@ import Logo from '@/public/logo_dark.png'
 import Livepeer from '@/public/livepeer-logo.png'
 import Image from 'next/image'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useAccount, useEnsName } from 'wagmi'
 interface Props {
   participantName: string
 }
@@ -28,9 +29,20 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
   const serverUrl = 'wss://streameth-fjjg03ki.livekit.cloud'
   const [viewerToken, setViewerToken] = useState('')
   const [viewerName, setViewerName] = useState('')
-  const slug = 'testing'
-  const fakeName = 'test'
+
+  const account = useAccount()
+  const { data, isLoading: loadingEns } = useEnsName({
+    address: account?.address,
+    chainId: 1,
+  })
+
+  const fakeName = data ? data : account.address
+  const slug = conversationId
+
   useEffect(() => {
+    if (!account || loadingEns) {
+      return
+    }
     const getOrCreateViewerToken = async () => {
       const SESSION_VIEWER_TOKEN_KEY = `${slug}-viewer-token`
       const sessionToken = sessionStorage.getItem(
@@ -44,7 +56,10 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
           const expiry = new Date(payload.exp * 1000)
           if (expiry < new Date()) {
             sessionStorage.removeItem(SESSION_VIEWER_TOKEN_KEY)
-            const token = await createViewerToken(slug, fakeName)
+            const token = await createViewerToken(
+              slug,
+              fakeName ?? 'anonymous'
+            )
             setViewerToken(token)
             const jti = jwtDecode(token)?.jti
             jti && setViewerName(jti)
@@ -59,7 +74,10 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
 
         setViewerToken(sessionToken)
       } else {
-        const token = await createViewerToken(slug, fakeName)
+        const token = await createViewerToken(
+          slug,
+          fakeName ?? 'anonymous'
+        )
         setViewerToken(token)
         const jti = jwtDecode(token)?.jti
         jti && setViewerName(jti)
@@ -67,7 +85,7 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
       }
     }
     void getOrCreateViewerToken()
-  }, [fakeName, slug])
+  }, [fakeName, slug, data, account, loadingEns])
 
   if (!viewerToken || !viewerName) {
     return (
@@ -110,6 +128,7 @@ function Chat({ participantName }: Props) {
     () => messages.sort((a, b) => b.timestamp - a.timestamp),
     [messages]
   )
+  const account = useAccount()
 
   const [message, setMessage] = useState('')
 
@@ -173,24 +192,30 @@ function Chat({ participantName }: Props) {
           </div>
         ))}
       </div>
-      <div className="flex flex-col  gap-2">
-        <Textarea
-          value={message}
-          className="min-h-[50px] w-full border-box h-1 bg-white dark:bg-zinc-900"
-          onChange={(e) => {
-            setMessage(e.target.value)
-          }}
-          onKeyDown={onEnter}
-          placeholder="Type a message..."
-        />
-        <Button
-          disabled={message.trim().length === 0}
-          onClick={onSend}>
-          <div className="flex items-center gap-2">
-            <p>send</p>
-          </div>
-        </Button>
-      </div>
+      {account.isConnected ? (
+        <div className="flex flex-col  gap-2">
+          <Textarea
+            value={message}
+            className="min-h-[50px] w-full border-box h-1 bg-white dark:bg-zinc-900"
+            onChange={(e) => {
+              setMessage(e.target.value)
+            }}
+            onKeyDown={onEnter}
+            placeholder="Type a message..."
+          />
+          <Button
+            disabled={message.trim().length === 0}
+            onClick={onSend}>
+            <div className="flex items-center gap-2">
+              <p>send</p>
+            </div>
+          </Button>
+        </div>
+      ) : (
+        <div className="flex flex-col  gap-2">
+          <p>connect your wallet to chat</p>
+        </div>
+      )}
     </>
   )
 }
