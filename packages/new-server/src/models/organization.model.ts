@@ -9,7 +9,7 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     logo: { type: String, default: '', required: true },
     location: { type: String, default: '', required: true },
     accentColor: { type: String, default: '' },
-    slug: { type: String, default: '' },
+    slug: { type: String, default: '', index:true},
   },
   {
     timestamps: true,

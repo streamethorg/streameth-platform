@@ -37,7 +37,7 @@ const EventSchema = new Schema<IEventModel>(
     plugins: {
       disableChat: { type: Boolean, default: false },
     },
-    slug: { type: String, default: '' },
+    slug: { type: String, default: '', index:true},
   },
   {
     timestamps: true,

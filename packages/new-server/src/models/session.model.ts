@@ -38,7 +38,7 @@ const SessionSchema = new Schema<ISessionModel>(
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
     track: [{ type: String }],
     coverImage: { type: String, default: '' },
-    slug: { type: String, default: '' },
+    slug: { type: String, default: '', index:true},
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     eventSlug: { type: String, default: '' },
   },
