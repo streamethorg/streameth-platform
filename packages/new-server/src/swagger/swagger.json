@@ -773,7 +773,8 @@
 					}
 				},
 				"required": [
-					"url"
+					"url",
+					"apiToken"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -863,12 +864,10 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string",
-						"format": "date-time"
+						"type": "string"
 					},
 					"end": {
-						"type": "string",
-						"format": "date-time"
+						"type": "string"
 					},
 					"location": {
 						"type": "string"
@@ -941,8 +940,6 @@
 					"start",
 					"end",
 					"location",
-					"logo",
-					"banner",
 					"organizationId",
 					"timezone"
 				],
@@ -1048,10 +1045,10 @@
 					"start",
 					"end",
 					"location",
-					"logo",
-					"banner",
 					"organizationId",
-					"timezone"
+					"timezone",
+					"logo",
+					"banner"
 				],
 				"type": "object",
 				"additionalProperties": false

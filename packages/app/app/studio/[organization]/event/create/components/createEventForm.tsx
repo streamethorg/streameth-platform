@@ -40,13 +40,12 @@ export default function CreateEventForm({
     defaultValues: {
       name: '',
       description: '',
-      start: new Date(), // Adjust according to your UI component's expected format
-      end: new Date(), // Adjust according to your UI component's expected format
+      start: '', // Adjust according to your UI component's expected format
+      end: '', // Adjust according to your UI component's expected format
       location: '',
       eventCover: '',
       logo: '',
       banner: '',
-      organizationId: organizationId,
       timezone: '',
       startTime: '',
       endTime: '',
@@ -58,7 +57,7 @@ export default function CreateEventForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsCreatingEvent(true)
     const response = createEventAction({
-      event: values,
+      event: { ...values, organizationId: organizationId },
     })
       .then((response) => {
         if (response) {
@@ -135,7 +134,7 @@ export default function CreateEventForm({
                   <FormLabel className="">Start Date</FormLabel>
                   <FormControl>
                     <DatePicker
-                      value={field.value}
+                      value={new Date(field.value)}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -169,7 +168,7 @@ export default function CreateEventForm({
                   <FormLabel className="">End Date</FormLabel>
                   <FormControl>
                     <DatePicker
-                      value={field.value}
+                      value={new Date(field.value)}
                       onChange={field.onChange}
                     />
                   </FormControl>

@@ -8,8 +8,6 @@ import { apiUrl } from '@/lib/utils/utils'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
 
-
-
 interface ApiParams {
   event?: string
   organization?: string
@@ -198,5 +196,3 @@ export async function fetchNavBarRoutes({
     showNav: true,
   }
 }
-
-
