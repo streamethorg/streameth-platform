@@ -8,8 +8,6 @@ import { apiUrl } from '@/lib/utils/utils'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
 
-
-
 interface ApiParams {
   event?: string
   organization?: string
@@ -70,11 +68,10 @@ export async function fetchAllSessions({
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params)
   )
-  const allSessions = (await response.json()).data
-
+  const a = await response.json()
+  const allSessions = a.data
   if (searchQuery) {
     const normalizedQuery = searchQuery.toLowerCase()
-
     const fuzzySearch = new FuzzySearch(
       allSessions?.sessions,
       ['name', 'description', 'speakers.name'],
@@ -198,5 +195,3 @@ export async function fetchNavBarRoutes({
     showNav: true,
   }
 }
-
-

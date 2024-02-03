@@ -52,11 +52,11 @@ const HomePageNavbar = () => {
       href: 'https://info.streameth.org/contact-us',
       bgColor: 'bg-primary text-primary-foreground',
     },
-    {
-      name: 'studio',
-      href: '/studio/base',
-      bgColor: 'bg-primary text-primary-foreground',
-    },
+    // {
+    //   name: 'studio',
+    //   href: '/studio/base',
+    //   bgColor: 'bg-primary text-primary-foreground',
+    // },
   ]
 
   return (

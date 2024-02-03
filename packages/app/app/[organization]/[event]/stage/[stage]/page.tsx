@@ -65,7 +65,7 @@ export default async function Stage({ params }: EventPageProps) {
         />
         <SessionInfoBox
           inverted
-          title={'Watching: ' + stage.name + ' stage'}
+          title={'Watching: ' + stage.name}
           cardDescription={event.name}
           playerName={stage.name}
           streamId={stage.streamSettings?.streamId}
