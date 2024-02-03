@@ -1,29 +1,27 @@
-import BaseController from '@databases/storage';
 import { IUser } from '@interfaces/user.interface';
 import { IAuth } from '@interfaces/auth.interface';
-import User from '@models/user.model';
 import { HttpException } from '@exceptions/HttpException';
 import jwt from 'jsonwebtoken';
 import { config } from '@config';
+import UserService from './user.service';
 const { SiweMessage, generateNonce } = require('siwe');
 
 export default class AuthService {
+  private userService = new UserService();
   private path: string;
-  private controller: BaseController<IUser>;
   constructor() {
-    this.path = 'users';
-    this.controller = new BaseController<IUser>('db', User);
+    this.path = 'auth';
   }
 
   async login(data: IUser): Promise<{ user: IUser; token: string }> {
-    let existingUser = await this.controller.store.findOne({
+    let existingUser = await this.userService.findOne({
       walletAddress: data.walletAddress,
     });
     if (existingUser) {
       await this.verifyMessage(data.signature, data.message, data.nonce);
     }
     if (!existingUser) {
-      existingUser = await this.controller.store.create('', data, this.path);
+      existingUser = await this.userService.create(data);
     }
     let token = jwt.sign(
       { id: existingUser.walletAddress },
