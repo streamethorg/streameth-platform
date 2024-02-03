@@ -325,7 +325,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "url": {"dataType":"string","required":true},
-            "apiToken": {"dataType":"string"},
+            "apiToken": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
