@@ -1,7 +1,7 @@
 import { IStageModel } from '@interfaces/stage.interface';
 import { Schema, model } from 'mongoose';
 
-const StageSchema = new Schema<IStageModel>(
+export const StageSchema = new Schema<IStageModel>(
   {
     name: { type: String, default: '', required: true },
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },

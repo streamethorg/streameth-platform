@@ -8,9 +8,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Pagination from '../components/pagination'
-import { generalMetadata, archiveMetadata } from '@/lib/metadata'
+import {
+  generalMetadata,
+  archiveMetadata,
+} from '@/lib/utils/metadata'
 import { Metadata } from 'next'
-import { fetchAllSessions, fetchEvent } from '@/lib/data'
+import { fetchAllSessions } from '@/lib/data'
+import { fetchEvent } from '@/lib/services/eventService'
 import { Suspense } from 'react'
 
 export default async function ArchivePage({
@@ -27,25 +31,22 @@ export default async function ArchivePage({
 
   return (
     <Suspense>
-      <div className="bg-white">
+      <div className="">
         <UpcomingEvents
-          archive
+          archive={false}
           organization={
             searchParams.organization
               ? searchParams.organization
               : 'invalid'
           }
         />
-        <Card className="bg-white border-none">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-background">Results</CardTitle>
-
+        <div>
+          <div className="flex flex-row items-center justify-between mb-4">
+            <CardTitle className="">Results</CardTitle>
             <Pagination {...videos.pagination} />
-          </CardHeader>
-          <CardContent>
-            <Videos videos={videos.sessions} />
-          </CardContent>
-        </Card>
+          </div>
+          <Videos videos={videos.sessions} />
+        </div>
       </div>
     </Suspense>
   )

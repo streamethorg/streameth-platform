@@ -1,89 +1,122 @@
+'use client'
 import { SiweMessage } from 'siwe'
 import {
   ConnectKitProvider,
   SIWEConfig,
-  SIWEProvider,
   getDefaultConfig,
+  SIWEProvider,
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
-import { usePathname } from 'next/navigation'
-import { WagmiConfig, createConfig } from 'wagmi'
-import { base, mainnet } from 'viem/chains'
-import { createPublicClient, http } from 'viem'
+import { http, createConfig, WagmiProvider } from 'wagmi'
+import { optimism, mainnet, base } from 'wagmi/chains'
+import { apiUrl } from '../utils/utils'
+import { storeSession } from '@/lib/actions/auth'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { createPublicClient } from 'viem'
 
-const authApi = '/api/auth'
+let nonce: string
+let walletAddress: string
 
 const siweConfig = {
+  getNonce: async () => {
+    const res = await fetch(`${apiUrl()}/auth/nonce/generate`)
+    if (!res.ok) throw new Error('Failed to fetch SIWE nonce')
+    const data = (await res.json()).data
+    nonce = data
+    return data
+  },
   createMessage: ({ nonce, address, chainId }) => {
+    walletAddress = address
     return new SiweMessage({
       nonce,
       chainId,
       address,
       version: '1',
-      uri: window.location.origin,
       domain: window.location.host,
-      statement:
-        'Sign In With Ethereum to prove you control this wallet.',
+      uri: window.location.origin,
+      statement: 'Sign in with Ethereum to the app.',
     }).prepareMessage()
   },
   verifyMessage: async ({ message, signature }) => {
-    const res = await fetch(authApi, {
+    const res = await fetch(`${apiUrl()}/auth/login`, {
       method: 'POST',
-      body: JSON.stringify({ message, signature }),
+      body: JSON.stringify({
+        message,
+        signature,
+        nonce,
+        walletAddress,
+      }),
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     })
-    return res.ok
+    if (!res.ok) throw new Error('Failed to Verify')
+    const data = (await res.json()).data
+    localStorage.setItem('SWIEToken', data.token)
+    // save to user-session cookie
+    storeSession({
+      token: data.token,
+    })
+    return data
   },
   getSession: async () => {
-    const res = await fetch(authApi)
-    if (!res.ok) throw new Error('Failed to fetch SIWE session')
-
-    const { address, chainId } = await res.json()
-    return address && chainId ? { address, chainId } : null
+    if (localStorage.getItem('SWIEToken')) {
+      return {
+        address: '0x9268d03EfF4A9A595ef619764AFCB9976c0375df',
+        chainId: 1,
+      }
+    }
+    return null
   },
-  getNonce: async () => {
-    const res = await fetch(authApi, { method: 'PUT' })
-    if (!res.ok) throw new Error('Failed to fetch SIWE nonce')
 
-    return res.text()
-  },
   signOut: async () => {
-    const res = await fetch(authApi, { method: 'DELETE' })
-    if (!res.ok) throw new Error('Failed to sign out')
-
-    return res.ok
+    // delete user-session cookie
+    storeSession({
+      token: '',
+    })
+    // delete token
+    localStorage.removeItem('SWIEToken')
+    return true
   },
 } satisfies SIWEConfig
 
 const config = createConfig(
   getDefaultConfig({
-    autoConnect: false,
-    appName: 'StreamETH',
-    chains: [base, mainnet],
-    publicClient: createPublicClient({
-      chain: base,
-      transport: http(),
-    }),
-    // infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+    // Your dApps chains
+    chains: [mainnet, base],
+    transports: {
+      // RPC URL for each chain
+      [mainnet.id]: http(),
+      [base.id]: http(),
+    },
+ssr: true,
+    // Required API Keys
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+
+    // Required App Info
+    appName: 'Your App Name',
+
+    // Optional App Info
+    appDescription: 'Your App Description',
+    appUrl: 'https://family.co', // your app's url
+    appIcon: 'https://family.co/logo.png', // your app's icon, no bigger than 1024x1024px (max. 1MB)
   })
 )
 
-const SiweContext = (props: PropsWithChildren) => {
-  const pathname = usePathname()
-  const isAdminRoute = pathname.startsWith('/admin')
+const queryClient = new QueryClient()
 
+const SiweContext = (props: PropsWithChildren) => {
   return (
-    <WagmiConfig config={config}>
-      {isAdminRoute ? (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
         <SIWEProvider {...siweConfig}>
           <ConnectKitProvider>{props.children}</ConnectKitProvider>
         </SIWEProvider>
-      ) : (
-        <ConnectKitProvider>{props.children}</ConnectKitProvider>
-      )}
-    </WagmiConfig>
+      </QueryClientProvider>
+    </WagmiProvider>
   )
 }
 

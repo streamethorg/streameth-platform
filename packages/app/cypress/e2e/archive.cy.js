@@ -11,7 +11,7 @@ describe('archive page', () => {
     cy.get(
       '[href="/watch?event=ethberlin_2022&session=65a9ef93973b44084122620f"] > .font-semibold'
     )
-    cy.get('[href="/archive?event=protocol_berg"] > .rounded-lg')
+    cy.get('[href="/archive?event=protocol_berg"] > .inline-flex')
   })
 
   it('search for query', () => {

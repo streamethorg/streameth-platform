@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchAllSessions, fetchEvents } from '@/lib/data'
+import { fetchAllSessions } from '@/lib/data'
 import { diceCoefficient } from 'dice-coefficient'
+import { fetchEvents } from '@/lib/services/eventService'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams

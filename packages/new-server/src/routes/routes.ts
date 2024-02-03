@@ -196,6 +196,9 @@ const models: TsoaRoute.Models = {
             "coverImage": {"dataType":"string"},
             "slug": {"dataType":"string"},
             "eventSlug": {"dataType":"string"},
+            "videoTranscription": {"dataType":"string"},
+            "aiDescription": {"dataType":"string"},
+            "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
         },
         "additionalProperties": false,
     },
@@ -230,6 +233,10 @@ const models: TsoaRoute.Models = {
             "coverImage": {"dataType":"string"},
             "slug": {"dataType":"string"},
             "eventSlug": {"dataType":"string"},
+            "videoTranscription": {"dataType":"string"},
+            "aiDescription": {"dataType":"string"},
+            "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
+            "autolabels": {"dataType":"array","array":{"dataType":"string"}},
         },
         "additionalProperties": false,
     },
@@ -318,7 +325,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "url": {"dataType":"string","required":true},
-            "apiToken": {"dataType":"string"},
+            "apiToken": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -347,11 +354,11 @@ const models: TsoaRoute.Models = {
         "properties": {
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
-            "start": {"dataType":"datetime","required":true},
-            "end": {"dataType":"datetime","required":true},
+            "start": {"dataType":"string","required":true},
+            "end": {"dataType":"string","required":true},
             "location": {"dataType":"string","required":true},
-            "logo": {"dataType":"string","required":true},
-            "banner": {"dataType":"string","required":true},
+            "logo": {"dataType":"string"},
+            "banner": {"dataType":"string"},
             "startTime": {"dataType":"string"},
             "endTime": {"dataType":"string"},
             "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
@@ -431,6 +438,7 @@ const models: TsoaRoute.Models = {
             "role": {"ref":"UserRole"},
             "signature": {"dataType":"string","required":true},
             "nonce": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -451,6 +459,7 @@ const models: TsoaRoute.Models = {
             "walletAddress": {"dataType":"string","required":true},
             "signature": {"dataType":"string","required":true},
             "nonce": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -950,6 +959,31 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.index.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/webhook',
+            ...(fetchMiddlewares<RequestHandler>(IndexController)),
+            ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.webhook)),
+
+            function IndexController_webhook(request: any, response: any, next: any) {
+            const args = {
+                    payload: {"in":"body","name":"payload","required":true,"dataType":"any"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new IndexController();
+
+
+              const promise = controller.webhook.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

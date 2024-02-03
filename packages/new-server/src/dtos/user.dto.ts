@@ -10,11 +10,11 @@ export class UserDto
 
   @IsNotEmpty()
   @IsString()
-  signature!: string;
+  nonce!: string;
 
   @IsNotEmpty()
   @IsString()
-  nonce!: string;
+  signature!: string;
 
   @IsNotEmpty()
   @IsString()
