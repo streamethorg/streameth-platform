@@ -39,6 +39,7 @@
     "@types/react": "^18.2.13",
     "@types/react-color": "^3.0.11",
     "@types/react-dom": "18.2.4",
+    "@uiw/react-md-editor": "^4.0.3",
     "@vercel/analytics": "^1.0.2",
     "@vercel/speed-insights": "^1.0.2",
     "autoprefixer": "10.4.14",

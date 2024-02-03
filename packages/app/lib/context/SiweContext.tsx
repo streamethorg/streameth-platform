@@ -15,6 +15,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { createPublicClient } from 'viem'
 
 let nonce: string
 let walletAddress: string
@@ -90,7 +91,7 @@ const config = createConfig(
       [mainnet.id]: http(),
       [base.id]: http(),
     },
-
+ssr: true,
     // Required API Keys
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
