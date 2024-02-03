@@ -26,6 +26,7 @@ import { createEventAction } from '@/lib/actions/events'
 import { toast } from 'sonner'
 import { generateTimezones } from '@/lib/utils/time'
 import { Loader2 } from 'lucide-react'
+import MDEditor from '@uiw/react-md-editor'
 
 export default function CreateEventForm({
   organizationId,
@@ -99,10 +100,20 @@ export default function CreateEventForm({
             <FormItem>
               <FormLabel className="">Description</FormLabel>
               <FormControl>
-                <Textarea
+                {/* <Textarea
                   placeholder="enter your event description"
                   {...field}
-                />
+                /> */}
+                <div className="container">
+                  <MDEditor
+                    value={field.value}
+                    onChange={(a) => field.onChange(a)}
+                  />
+                  {/* <MDEditor.Markdown
+                    source={field.value}
+                    style={{ whiteSpace: 'pre-wrap' }}
+                  /> */}
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -224,6 +235,7 @@ export default function CreateEventForm({
                   <FormControl>
                     <ImageUpload
                       {...field}
+                      path="events"
                       onChange={field.onChange}
                       aspectRatio={1}
                     />
@@ -242,6 +254,7 @@ export default function CreateEventForm({
                   <FormLabel>Event Cover</FormLabel>
                   <FormControl>
                     <ImageUpload
+                      path="events"
                       {...field}
                       onChange={field.onChange}
                       aspectRatio={16 / 9}
@@ -261,6 +274,7 @@ export default function CreateEventForm({
                   <FormLabel>Event Banner</FormLabel>
                   <FormControl>
                     <ImageUpload
+                      path="events"
                       {...field}
                       onChange={field.onChange}
                       aspectRatio={3 / 1}

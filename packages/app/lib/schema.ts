@@ -116,3 +116,13 @@ export const sessionSchema = z.object({
   organizationId: z.string().optional(),
   eventSlug: z.string().optional(),
 })
+
+export const organizationSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  url: z.string(),
+  logo: z.string(),
+  location: z.string(),
+  accentColor: z.string().optional(),
+  slug: z.string().optional(),
+})

@@ -30,7 +30,7 @@ export default function StagePreview({
         />
         <CardHeader className="bg-transparent">
           <p className="lowercase text-lg text-white font-normal">
-            {stage.name} stage
+            {stage.name}
           </p>
         </CardHeader>
       </Card>

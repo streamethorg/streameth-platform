@@ -79,6 +79,7 @@ const SessionAccordion = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageUpload
+                  path={`sessions`}
                   {...field}
                   onChange={field.onChange}
                   aspectRatio={16 / 9}

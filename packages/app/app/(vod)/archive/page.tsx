@@ -42,7 +42,7 @@ export default async function ArchivePage({
         />
         <div>
           <div className="flex flex-row items-center justify-between mb-4">
-            <CardTitle className=" text-primary">Results</CardTitle>
+            <CardTitle className="">Results</CardTitle>
             <Pagination {...videos.pagination} />
           </div>
           <Videos videos={videos.sessions} />

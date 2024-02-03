@@ -260,6 +260,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                         <FormLabel>Event Logo</FormLabel>
                         <FormControl>
                           <ImageUpload
+                            path="events"
                             {...field}
                             onChange={field.onChange}
                             aspectRatio={1}
@@ -279,6 +280,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                         <FormLabel>Event Cover</FormLabel>
                         <FormControl>
                           <ImageUpload
+                            path="events"
                             {...field}
                             onChange={field.onChange}
                             aspectRatio={16 / 9}
@@ -298,6 +300,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                         <FormLabel>Event Banner</FormLabel>
                         <FormControl>
                           <ImageUpload
+                            path="events"
                             {...field}
                             onChange={field.onChange}
                             aspectRatio={3 / 1}

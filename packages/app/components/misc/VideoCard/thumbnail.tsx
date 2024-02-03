@@ -25,14 +25,14 @@ export default function Thumbnail({
   const [fallbackImage, setFallbackImage] = useState('/cover.png')
   useEffect(() => {
     setError(false)
-    fallBack && setFallbackImage(getImageUrl('/events/' + fallBack))
+    fallBack && setFallbackImage(fallBack)
   }, [imageUrl, fallBack])
 
   return (
     <div className="aspect-video relative">
       <Image
         placeholder="blur"
-        blurDataURL={getImageUrl('/events/' + fallBack)}
+        blurDataURL={fallbackImage}
         loading="lazy"
         className="rounded"
         alt="Session image"

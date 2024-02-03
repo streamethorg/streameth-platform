@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import CreateStageForm from '../stageSettings/createStageForm'
 import Link from 'next/link'
 import { IExtendedEvent } from '@/lib/types'
+import { deleteEventAction } from '@/lib/actions/events'
 const Navigation = ({
   event,
   stages,
@@ -16,6 +17,14 @@ const Navigation = ({
   stages: IStageModel[]
 }) => {
   const { selectedStageSetting } = useNavigation()
+
+  const handleDeleteEvent = (eventSlug: string) => {
+    if (
+      window.confirm('Are you sure you want to delete this event?')
+    ) {
+      deleteEventAction({ eventSlug })
+    }
+  }
   return (
     <div
       className={cn(
@@ -42,9 +51,14 @@ const Navigation = ({
           <CreateStageForm eventId={event._id} />
         </div>
       )}
-      <div className=" flex flex-row justify-between mt-auto p-2">
+      <div className=" flex flex-row justify-between items-center mt-auto p-2">
         <Button className="" variant={'outline'}>
           <Link href={`/studio/${event.organizationId}`}>Cancel</Link>
+        </Button>
+        <Button
+          onClick={() => handleDeleteEvent(event.slug!)}
+          variant={'destructive'}>
+          Delete
         </Button>
         {/* <Button className="" variant={'outline'}>
           Publish

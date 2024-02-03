@@ -85,7 +85,7 @@ export default function SearchBar(): JSX.Element {
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col p-2 bg-white">
               {searchResults.length > 0 && (
                 <div className="mt-2">
                   <div className="text font-bold">Videos</div>

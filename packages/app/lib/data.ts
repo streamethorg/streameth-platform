@@ -68,11 +68,10 @@ export async function fetchAllSessions({
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params)
   )
-  const allSessions = (await response.json()).data
-
+  const a = await response.json()
+  const allSessions = a.data
   if (searchQuery) {
     const normalizedQuery = searchQuery.toLowerCase()
-
     const fuzzySearch = new FuzzySearch(
       allSessions?.sessions,
       ['name', 'description', 'speakers.name'],

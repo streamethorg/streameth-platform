@@ -14,7 +14,7 @@ export default function DatePicker({
   onChange,
 }: {
   value: Date
-  onChange: (value: string) => void
+  onChange: (value: Date) => void
 }) {
   return (
     <Popover>
@@ -34,13 +34,14 @@ export default function DatePicker({
           mode="single"
           selected={new Date(value)}
           onSelect={(date) => {
-            onChange(
-              date ? date.toDateString() : new Date().toDateString()
-            )
+            onChange(date ?? new Date())
           }}
           disabled={(date) =>
             date <= new Date() || date < new Date('1900-01-01')
           }
+          // disabled={(date) =>
+          //   date > new Date() || date < new Date('1900-01-01')
+          // }
           initialFocus
         />
       </PopoverContent>

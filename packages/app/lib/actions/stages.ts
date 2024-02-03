@@ -29,6 +29,7 @@ export const createStageAction = async ({
         },
         body: JSON.stringify({
           name: stage.name,
+          record: true
         }),
       }
     )
