@@ -1,12 +1,17 @@
 import { createLabels, createSummary, createTranscription } from "./ai";
 import { getAssetInfo } from "../../av-tools/src/utils/livepeer";
 import { downloadM3U8ToMP3 } from "../../av-tools/src/utils/ffmpeg";
-import S3Client from "../../../server/services/s3/index.ts";
+import S3Client from "../../../server/services/s3/index";
 import SessionService from "../../../new-server/src/services/session.service";
 import * as fs from "fs";
 import { join } from "path";
 
-const BUCKET_NAME = "streamethapp";
+let BUCKET_NAME: string | null = null;
+if (process.env.NODE_ENV === "production") {
+  BUCKET_NAME = "streameth-production";
+} else if (process.env.NODE_ENV === "development") {
+  BUCKET_NAME = "streameth-develop";
+}
 const TRANSCRIPTIONS_PATH = "transcriptions/";
 const TMP_MP3_PATH = "./tmp/mp3/";
 const TMP_TRANSCRIPTIONS_PATH = "./tmp/transcriptions/";
@@ -28,6 +33,12 @@ async function startAITools(
   overwriteFiles = false,
   keepTmp = false
 ) {
+  if (!BUCKET_NAME) {
+    throw new Error(
+      `BUCKET_NAME does not exist. What NODE_ENV are you running? NODE_ENV: ${process.env.NODE_ENV}`
+    );
+  }
+
   if (!assetId) {
     throw new Error("Invalid asset ID");
   }
@@ -38,18 +49,21 @@ async function startAITools(
   }
 
   const sessionService = new SessionService();
-  const { sessions } = await sessionService.getAll({ assetId: assetInfo.id });
+  const { sessions } = await sessionService.getAll({
+    assetId: assetInfo.id,
+  } as any);
   if (sessions.length !== 1) {
     throw new Error("Something went wrong when fetching the correct session");
   }
   const session = sessions[0];
 
-  const mp3FilePath = join(TMP_MP3_PATH, `${session.id}.mp3`);
+  console.log(session._id);
+  const mp3FilePath = join(TMP_MP3_PATH, `${session._id}.mp3`);
   const transcriptionFilePath = join(
     TMP_TRANSCRIPTIONS_PATH,
-    `${session.id}.txt`
+    `${session._id}.txt`
   );
-  const digitalOceanPath = join(TRANSCRIPTIONS_PATH, `${session.id}.txt`);
+  const digitalOceanPath = join(TRANSCRIPTIONS_PATH, `${session._id}.txt`);
 
   const s3 = new S3Client();
   const data = await s3.getBucket(BUCKET_NAME, digitalOceanPath);
@@ -58,7 +72,7 @@ async function startAITools(
   }
 
   const downloadUrl = assetInfo.playbackUrl || "";
-  await downloadM3U8ToMP3(downloadUrl, session.id, TMP_MP3_PATH, 9);
+  await downloadM3U8ToMP3(downloadUrl, session._id, TMP_MP3_PATH, 9);
 
   const size = await getFileSize(mp3FilePath);
   if (size >= 25000000) {
@@ -68,7 +82,7 @@ async function startAITools(
   await createTranscription(
     mp3FilePath,
     TMP_TRANSCRIPTIONS_PATH,
-    `${session.id}.txt`
+    `${session._id}.txt`
   );
 
   if (!fs.existsSync(transcriptionFilePath)) {
@@ -82,11 +96,11 @@ async function startAITools(
   const summary = await createSummary(
     transcriptionFilePath,
     TMP_SUMMARY_PATH,
-    `summary-${session.id}.txt`
+    `summary-${session._id}.txt`
   );
 
-  await sessionService.update(session.id, {
-    videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${session.id}.txt`,
+  await sessionService.update(session._id, {
+    videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${session._id}.txt`,
     aiDescription: summary,
     autoLabels: labels,
   });
