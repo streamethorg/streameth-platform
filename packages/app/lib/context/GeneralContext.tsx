@@ -9,7 +9,6 @@ import {
 } from '@livepeer/react'
 import { Analytics } from '@vercel/analytics/react'
 import SiweContext from './SiweContext'
-import {Web3Provider} from './testContext'
 
 const GeneralContext = ({
   children,

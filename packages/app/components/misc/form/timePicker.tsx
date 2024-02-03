@@ -16,7 +16,6 @@ const TimePicker = ({
   return (
     <Select
       onValueChange={(value) => {
-        console.log(value)
         onChange(value)
       }}
       defaultValue={value}>

@@ -773,7 +773,8 @@
 					}
 				},
 				"required": [
-					"url"
+					"url",
+					"apiToken"
 				],
 				"type": "object",
 				"additionalProperties": false
