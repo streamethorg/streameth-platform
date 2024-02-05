@@ -11,7 +11,7 @@ const SpeakerSchema = new Schema<ISpeakerModel>(
     website: { type: String, default: '' },
     photo: { type: String, default: '' },
     company: { type: String, default: '' },
-    slug: { type: String, default: '', index:true},
+    slug: { type: String, default: '', index: true },
   },
   {
     timestamps: true,

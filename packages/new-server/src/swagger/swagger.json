@@ -7,6 +7,99 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"IOrganization": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"url",
+					"logo",
+					"location"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserRole": {
+				"enum": [
+					"user",
+					"admin"
+				],
+				"type": "string"
+			},
+			"IUser": {
+				"properties": {
+					"walletAddress": {
+						"type": "string"
+					},
+					"organizations": {
+						"items": {
+							"$ref": "#/components/schemas/IOrganization"
+						},
+						"type": "array"
+					},
+					"role": {
+						"$ref": "#/components/schemas/UserRole"
+					},
+					"signature": {
+						"type": "string"
+					},
+					"nonce": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"walletAddress",
+					"signature",
+					"nonce",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IUser_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IUser"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"mongoose.Types.ObjectId": {
 				"type": "string"
 			},
@@ -343,6 +436,9 @@
 			},
 			"ISession": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -470,6 +566,9 @@
 			},
 			"SessionDto": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -610,40 +709,6 @@
 				"required": [
 					"status",
 					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IOrganization": {
-				"properties": {
-					"name": {
-						"type": "string"
-					},
-					"description": {
-						"type": "string"
-					},
-					"url": {
-						"type": "string"
-					},
-					"logo": {
-						"type": "string"
-					},
-					"location": {
-						"type": "string"
-					},
-					"accentColor": {
-						"type": "string"
-					},
-					"slug": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"name",
-					"description",
-					"url",
-					"logo",
-					"location"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -974,12 +1039,10 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string",
-						"format": "date-time"
+						"type": "string"
 					},
 					"end": {
-						"type": "string",
-						"format": "date-time"
+						"type": "string"
 					},
 					"location": {
 						"type": "string"
@@ -1075,46 +1138,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UserRole": {
-				"enum": [
-					"user",
-					"admin"
-				],
-				"type": "string"
-			},
-			"IUser": {
-				"properties": {
-					"walletAddress": {
-						"type": "string"
-					},
-					"organizations": {
-						"items": {
-							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-						},
-						"type": "array"
-					},
-					"role": {
-						"$ref": "#/components/schemas/UserRole"
-					},
-					"signature": {
-						"type": "string"
-					},
-					"nonce": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"walletAddress",
-					"signature",
-					"nonce",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"IStandardResponse__user-IUser--token-string__": {
 				"properties": {
 					"status": {
@@ -1169,6 +1192,37 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"IStandardResponse_boolean_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AuthDto": {
+				"properties": {
+					"token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {
@@ -1187,6 +1241,41 @@
 		"contact": {}
 	},
 	"paths": {
+		"/users/{userId}": {
+			"get": {
+				"operationId": "GetUserById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IUser_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/stages": {
 			"post": {
 				"operationId": "CreateStage",
@@ -1862,36 +1951,6 @@
 				"parameters": []
 			}
 		},
-		"/webhook": {
-			"post": {
-				"operationId": "Webhook",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_string_"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Index"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {}
-						}
-					}
-				}
-			}
-		},
 		"/events": {
 			"post": {
 				"operationId": "CreateEvent",
@@ -2140,6 +2199,38 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/auth/verify-token": {
+			"post": {
+				"operationId": "VerifyToken",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_boolean_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AuthDto"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

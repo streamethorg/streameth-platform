@@ -5,8 +5,8 @@ const EventSchema = new Schema<IEventModel>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
     description: { type: String, default: '', required: true },
-    start: { type: Date },
-    end: { type: Date },
+    start: { type: String, default: '' },
+    end: { type: String, default: '' },
     location: { type: String, default: '', required: true },
     logo: { type: String, default: '' },
     banner: { type: String, default: '' },
@@ -37,7 +37,7 @@ const EventSchema = new Schema<IEventModel>(
     plugins: {
       disableChat: { type: Boolean, default: false },
     },
-    slug: { type: String, default: '', index:true},
+    slug: { type: String, default: '', index: true },
   },
   {
     timestamps: true,
