@@ -1,5 +1,5 @@
 import { Document, Types } from 'mongoose';
-import { ISpeaker, ISpeakerModel } from './speaker.interface';
+import { ISpeaker } from './speaker.interface';
 
 export interface ISource {
   streamUrl: string;
@@ -16,6 +16,7 @@ export interface IPlayback {
 }
 
 export interface ISession {
+  _id?: Types.ObjectId;
   name: string;
   description: string;
   start: number;
@@ -38,4 +39,4 @@ export interface ISession {
   autoLabels?: string[];
 }
 
-export interface ISessionModel extends ISession, Document {}
+export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
