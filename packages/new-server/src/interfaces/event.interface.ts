@@ -25,11 +25,11 @@ export interface IPlugins {
 export interface IEvent {
   name: string;
   description: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   location: string;
-  logo: string;
-  banner: string;
+  logo?: string;
+  banner?: string;
   startTime?: string;
   endTime?: string;
   organizationId: Types.ObjectId | string;

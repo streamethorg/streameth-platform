@@ -1,51 +1,49 @@
 import * as z from 'zod'
 
 export const formSchema = z.object({
-  name: z.string(),
+  name: z.string().min(1, 'name is required'),
   description: z.string(),
-  start: z.date(),
-  end: z.date(),
+  start: z.string(),
+  end: z.string(),
   location: z.string(),
-  logo: z.string(),
-  banner: z.string(),
+  logo: z.string().optional(),
+  banner: z.string().optional(),
   startTime: z.string().optional(),
   endTime: z.string().optional(),
-  organizationId: z.string(), // You need to import Types from 'mongoose' if using MongoDB
   eventCover: z.string().optional(),
   archiveMode: z.boolean().optional(),
   website: z.string().optional(),
-  timezone: z.string(),
+  timezone: z.string().min(1, 'timezone is required'),
   accentColor: z.string().optional(),
   unlisted: z.boolean().optional(),
   enableVideoDownloader: z.boolean().optional(),
-  slug: z.string().optional(),
-});
-
-
+})
 
 const GSheetConfigSchema = z.object({
   sheetId: z.string().optional(),
   apiKey: z.string().optional(),
   driveId: z.string().optional(),
   driveApiKey: z.string().optional(),
-});
+})
 
 const PretalxConfigSchema = z.object({
   url: z.string(),
   apiToken: z.string(),
-});
+})
 
 const IDataImporterSchema = z.union([
-  z.object({ type: z.literal("gsheet"), config: GSheetConfigSchema }),
-  z.object({ type: z.literal("pretalx"), config: PretalxConfigSchema }),
-]);
+  z.object({ type: z.literal('gsheet'), config: GSheetConfigSchema }),
+  z.object({
+    type: z.literal('pretalx'),
+    config: PretalxConfigSchema,
+  }),
+])
 
 const IPluginsSchema = z.object({
   disableChat: z.boolean(),
   hideSchedule: z.boolean().optional(),
   hideSpeaker: z.boolean().optional(),
-});
-
+})
 
 export const eventSchema = z.object({
   ...formSchema.shape,
@@ -53,27 +51,23 @@ export const eventSchema = z.object({
   plugins: IPluginsSchema.optional(),
   unlisted: z.boolean().optional(),
   archiveMode: z.boolean().optional(),
-});
-
-
+})
 
 const IStreamSettingsSchema = z.object({
   streamId: z.string(),
-});
+})
 
 const IPluginSchema = z.object({
   name: z.string(),
-});
-
+})
 
 export const StageSchema = z.object({
-  name: z.string().min(1, {"message": "Required"}),
+  name: z.string().min(1, { message: 'Required' }),
   eventId: z.string(),
   streamSettings: IStreamSettingsSchema,
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
-});
-
+})
 
 // Sessions
 
@@ -87,7 +81,7 @@ const speakerSchema = z.object({
   website: z.string().optional(),
   photo: z.string().optional(),
   company: z.string().optional(),
-});
+})
 
 export const sessionSchema = z.object({
   name: z.string().max(255),
@@ -96,18 +90,22 @@ export const sessionSchema = z.object({
   end: z.number().optional(),
   stageId: z.string().optional(),
   speakers: z.array(speakerSchema).optional(),
-  source: z.object({
-    streamUrl: z.string().optional(),
-    start: z.number().optional(),
-    end: z.number().optional(),
-  }).optional(),
-  playback: z.object({
-    livepeerId: z.string().optional(),
-    videoUrl: z.string().optional(),
-    ipfsHash: z.string().optional(),
-    format: z.string().optional(),
-    duration: z.number().optional(),
-  }).optional(),
+  source: z
+    .object({
+      streamUrl: z.string().optional(),
+      start: z.number().optional(),
+      end: z.number().optional(),
+    })
+    .optional(),
+  playback: z
+    .object({
+      livepeerId: z.string().optional(),
+      videoUrl: z.string().optional(),
+      ipfsHash: z.string().optional(),
+      format: z.string().optional(),
+      duration: z.number().optional(),
+    })
+    .optional(),
   videoUrl: z.string().optional(),
   playbackId: z.string().optional(),
   assetId: z.string().optional(),
@@ -117,8 +115,7 @@ export const sessionSchema = z.object({
   slug: z.string().optional(),
   organizationId: z.string().optional(),
   eventSlug: z.string().optional(),
-});
-
+})
 
 export const organizationSchema = z.object({
   name: z.string(),
@@ -128,4 +125,4 @@ export const organizationSchema = z.object({
   location: z.string(),
   accentColor: z.string().optional(),
   slug: z.string().optional(),
-});
+})

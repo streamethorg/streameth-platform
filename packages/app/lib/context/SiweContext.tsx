@@ -64,7 +64,7 @@ const siweConfig = {
   getSession: async () => {
     if (localStorage.getItem('SWIEToken')) {
       return {
-        address: '0xA93950A195877F4eBC8A4aF3F6Ce2a109404b575',
+        address: '0x9268d03EfF4A9A595ef619764AFCB9976c0375df',
         chainId: 1,
       }
     }
