@@ -10,14 +10,14 @@ import TimeSetter from './TimeSetter'
 import { ClipProvider } from './ClipContext'
 import Player from '@/components/ui/Player'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { IExtendedSession } from '@/lib/types'
 
 const CreateClipCard = ({
   stage,
   session,
 }: {
   stage: IStageModel
-  session: ISessionModel
+  session: IExtendedSession
 }) => {
   const { data: currentClip } = useAsset({
     assetId: session.assetId,

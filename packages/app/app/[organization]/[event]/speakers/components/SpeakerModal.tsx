@@ -1,6 +1,5 @@
 import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
 
-import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 
@@ -13,11 +12,12 @@ import {
 } from '@/components/ui/crezenda'
 
 import Link from 'next/link'
+import { IExtendedEvent, IExtendedSession } from '@/lib/types'
 
 interface Params {
-  event: IEventModel
+  event: IExtendedEvent
   speaker: ISpeakerModel
-  sessions?: ISessionModel[]
+  sessions?: IExtendedSession[]
 }
 
 const SpeakerModal = ({ speaker }: Params) => {

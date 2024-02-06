@@ -94,6 +94,7 @@ export class SessionController extends Controller {
       page: page,
       size: size,
       timestamp: timestamp,
+      assetId: '',
     };
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);

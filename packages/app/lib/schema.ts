@@ -88,33 +88,33 @@ export const sessionSchema = z.object({
   description: z.string(),
   start: z.number().optional(),
   end: z.number().optional(),
-  stageId: z.string().optional(),
-  speakers: z.array(speakerSchema).optional(),
-  source: z
-    .object({
-      streamUrl: z.string().optional(),
-      start: z.number().optional(),
-      end: z.number().optional(),
-    })
-    .optional(),
-  playback: z
-    .object({
-      livepeerId: z.string().optional(),
-      videoUrl: z.string().optional(),
-      ipfsHash: z.string().optional(),
-      format: z.string().optional(),
-      duration: z.number().optional(),
-    })
-    .optional(),
+  // stageId: z.string(),
+  // speakers: z.array(speakerSchema).optional(),
+  // source: z
+  //   .object({
+  //     streamUrl: z.string().optional(),
+  //     start: z.number().optional(),
+  //     end: z.number().optional(),
+  //   })
+  //   .optional(),
+  // playback: z
+  //   .object({
+  //     livepeerId: z.string().optional(),
+  //     videoUrl: z.string().optional(),
+  //     ipfsHash: z.string().optional(),
+  //     format: z.string().optional(),
+  //     duration: z.number().optional(),
+  //   })
+  //   .optional(),
   videoUrl: z.string().optional(),
   playbackId: z.string().optional(),
   assetId: z.string().optional(),
-  eventId: z.string().optional(),
-  track: z.array(z.string()).optional(),
+  // eventId: z.string(),
+  // track: z.array(z.string()).optional(),
   coverImage: z.string().optional(),
-  slug: z.string().optional(),
-  organizationId: z.string().optional(),
-  eventSlug: z.string().optional(),
+  // slug: z.string().optional(),
+  // organizationId: z.string().optional(),
+  // eventSlug: z.string().optional(),
 })
 
 export const organizationSchema = z.object({
