@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === "production") {
 } else if (process.env.NODE_ENV === "development") {
   BUCKET_NAME = "streameth-develop";
 }
+
 const TRANSCRIPTIONS_PATH = "transcriptions/";
 const TMP_MP3_PATH = "./tmp/mp3/";
 const TMP_TRANSCRIPTIONS_PATH = "./tmp/transcriptions/";
@@ -43,27 +44,27 @@ async function startAITools(
     throw new Error("Invalid asset ID");
   }
 
-  const assetInfo =await getAssetInfo(assetId); //{id:"", playbackUrl:""}
-  if (!assetInfo) {
+  const assetInfo = await getAssetInfo(assetId); //{id:"", playbackUrl:""}
+  if (!assetInfo || assetInfo.statusCode !== 200) {
     throw new Error("Asset does not exist");
   }
 
   const sessionService = new SessionService();
   const { sessions } = await sessionService.getAll({
-    assetId: assetInfo.id,
+    assetId: assetInfo.asset!.id!,
     event: "",
     organization: "",
     speaker: "",
     stageId: "",
     onlyVideos: false,
     size: 0,
-    page: 0
+    page: 0,
   });
   if (sessions.length !== 1) {
     throw new Error("Something went wrong when fetching the correct session");
   }
   const session = sessions[0];
-  const sessionId = session._id.toString()
+  const sessionId = session._id.toString();
 
   const mp3FilePath = join(TMP_MP3_PATH, `${sessionId}.mp3`);
   const transcriptionFilePath = join(
@@ -78,8 +79,8 @@ async function startAITools(
     throw new Error("File already exists on Digital Ocean");
   }
 
-  const downloadUrl = assetInfo.playbackUrl || "";
-  await downloadM3U8ToMP3(downloadUrl, sessionId, TMP_MP3_PATH, 9);
+  const downloadUrl = assetInfo.asset?.playbackUrl;
+  await downloadM3U8ToMP3(downloadUrl!, sessionId, TMP_MP3_PATH, 9);
 
   const size = await getFileSize(mp3FilePath);
   if (size >= 25000000) {
@@ -117,8 +118,8 @@ async function startAITools(
   }
 }
 
-// startAITools("7a79da4e-19d4-44e1-9600-e4f927c47af9")
-//   .then(() => console.log("Ran successfully..."))
-//   .catch((err) => console.error("Error:", err));
+startAITools("7a79da4e-19d4-44e1-9600-e4f927c47af9")
+  .then(() => console.log("Ran successfully..."))
+  .catch((err) => console.error("Error:", err));
 
 export default startAITools;
