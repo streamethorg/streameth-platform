@@ -71,8 +71,6 @@
     "zod": "^3.22.3"
   },
   "devDependencies": {
-    "@remotion/eslint-config": "4.0.72",
-    "@remotion/tailwind": "4.0.72",
     "@tsconfig/recommended": "^1.0.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
