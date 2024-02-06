@@ -33,7 +33,7 @@ const StudioPageNavbar = ({
   organization: string
   children?: React.ReactNode
 }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useMediaQuery('(max-width: 1025px)')
   const [menuVisible, setMenuVisible] = useState(false)
 
   useEffect(() => {

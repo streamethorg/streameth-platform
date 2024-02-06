@@ -2,8 +2,6 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import moment from 'moment-timezone'
-import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { getEventTimezoneText } from '@/lib/utils/time'
 import {
   CredenzaContent,
@@ -15,13 +13,14 @@ import {
 } from '@/components/ui/crezenda'
 import SpeakerIcon from '@/components/speakers/speakerIcon'
 import { Button } from '@/components/ui/button'
+import { IExtendedEvent, IExtendedSession } from '@/lib/types'
 
 const ScheduleCardModal = ({
   event,
   session,
 }: {
-  event: IEventModel
-  session: ISessionModel
+  event: IExtendedEvent
+  session: IExtendedSession
 }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
   const router = useRouter()

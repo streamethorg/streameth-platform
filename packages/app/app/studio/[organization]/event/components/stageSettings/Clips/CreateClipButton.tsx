@@ -32,9 +32,9 @@ const CreateClipButton = () => {
       className="mt-auto"
       variant={'secondary'}
       onClick={() => {
+        mutateAsync()
         setStartTime(null)
         setEndTime(null)
-        mutateAsync()
       }}
       disabled={!startTime || !endTime || isLoading}>
       Create Clip

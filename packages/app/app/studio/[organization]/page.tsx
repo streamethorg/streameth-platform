@@ -34,7 +34,7 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
                   }}>
                   <div className=" min-h-full rounded-xl  uppercase">
                     <div className="aspect-video relative">
-                      {/* <Image
+                      <Image
                         className="rounded"
                         alt="Session image"
                         quality={80}
@@ -43,7 +43,7 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
                         style={{
                           objectFit: 'cover',
                         }}
-                      /> */}
+                      />
                     </div>
                     <CardHeader className=" rounded mt-1">
                       <CardTitle className="truncate text-sm">

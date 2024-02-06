@@ -15,9 +15,9 @@ export async function fetchEvents({
   organizationId?: string
   organizationSlug?: string
   date?: Date
-}): Promise<IEventModel[]> {
+}): Promise<IExtendedEvent[]> {
   try {
-    let data: IEventModel[] = []
+    let data: IExtendedEvent[] = []
 
     if (organizationId || organizationSlug) {
       const organization = await fetchOrganization({
@@ -58,7 +58,7 @@ export async function fetchEvent({
   eventId?: string
   eventSlug?: string
   organization?: string
-}): Promise<IEventModel | null> {
+}): Promise<IExtendedEvent | null> {
   try {
     if (!eventId && !eventSlug) {
       return null
