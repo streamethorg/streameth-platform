@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UpdateOrganizationDto {
   @IsOptional()
@@ -28,4 +28,8 @@ export class UpdateOrganizationDto {
   @IsOptional()
   @IsString()
   walletAddress: string;
+
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string
 }

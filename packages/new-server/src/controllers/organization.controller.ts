@@ -1,4 +1,6 @@
-import { OrganizationDto } from '@dtos/organization.dto';
+import { CreateOrganizationDto } from '@dtos/organization/create-organization.dto';
+import { OrgIdDto } from '@dtos/organization/orgid.dto';
+import { UpdateOrganizationDto } from '@dtos/organization/update-organization.dto';
 import { IOrganization } from '@interfaces/organization.interface';
 import OrganizationService from '@services/organization.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -25,18 +27,18 @@ export class OrganizationController extends Controller {
   @SuccessResponse('201')
   @Post()
   async createOrganization(
-    @Body() body: OrganizationDto,
+    @Body() body: CreateOrganizationDto,
   ): Promise<IStandardResponse<IOrganization>> {
     const org = await this.organizationService.create(body);
     return SendApiResponse('organization created', org);
   }
 
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{organizationId}')
   async editOrganization(
     @Path() organizationId: string,
-    @Body() body: OrganizationDto,
+    @Body() body: UpdateOrganizationDto,
   ): Promise<IStandardResponse<IOrganization>> {
     const org = await this.organizationService.update(organizationId, body);
     return SendApiResponse('event updated', org);
@@ -60,13 +62,14 @@ export class OrganizationController extends Controller {
     return SendApiResponse('organizations fetched', orgs);
   }
 
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{organizationId}')
   async deleteOrganization(
-    @Path() organizationId: string,
+    @Path() id: string,
+    @Body() organizationId: OrgIdDto
   ): Promise<IStandardResponse<void>> {
-    await this.organizationService.deleteOne(organizationId);
+    await this.organizationService.deleteOne(id);
     return SendApiResponse('deleted');
   }
 }

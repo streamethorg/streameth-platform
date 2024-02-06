@@ -79,7 +79,7 @@ export class EventController extends Controller {
   @Delete('{eventId}')
   async deleteEvent(
     @Path() eventId: string,
-    @Body() orgId: OrgIdDto,
+    @Body() organizationId: OrgIdDto,
   ): Promise<IStandardResponse<void>> {
     await this.eventService.deleteOne(eventId);
     return SendApiResponse('deleted');
