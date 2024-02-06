@@ -1,14 +1,14 @@
 import React from 'react'
 import { Card } from '@/components/ui/card'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { IExtendedSession } from '@/lib/types'
 function SessionCard({
   session,
   selectedSession,
   setSelectedSession,
 }: {
-  session: ISessionModel
-  selectedSession: ISessionModel | undefined
-  setSelectedSession: (session: ISessionModel) => void
+  session: IExtendedSession
+  selectedSession: IExtendedSession | undefined
+  setSelectedSession: (session: IExtendedSession) => void
 }) {
   return (
     <Card

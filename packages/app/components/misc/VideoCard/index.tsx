@@ -3,19 +3,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import Link from 'next/link'
 import { fetchEvent } from '@/lib/services/eventService'
 import { archivePath } from '@/lib/utils/utils'
+import { IExtendedSession } from '@/lib/types'
 
 const VideoCard = async ({
   session,
   invertedColors,
 }: {
-  session: ISessionModel
+  session: IExtendedSession
   invertedColors?: boolean
 }) => {
   const event = await fetchEvent({
@@ -50,7 +49,7 @@ const VideoCard = async ({
                 className="rounded-md mr-2"
                 alt="logo"
                 quality={80}
-                src={event.logo}
+                src={event.logo!}
                 height={24}
                 width={24}
               />

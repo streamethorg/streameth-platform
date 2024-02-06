@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
   const returnData = {
     sessions: searchResults.map((session) => session.name),
     events: eventResults.map((event) => ({
-      id: event.id,
+      id: event._id,
       name: event.name,
       slug: event.slug,
     })),

@@ -1,8 +1,6 @@
 'use client'
 import ScheduleCardModal from './ScheduleCardModal'
 import moment from 'moment-timezone'
-import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { getEventTimezoneText } from '@/lib/utils/time'
 
 import {
@@ -15,6 +13,7 @@ import {
 
 import { Badge } from '@/components/ui/badge'
 import { CredenzaTrigger, Credenza } from '@/components/ui/crezenda'
+import { IExtendedEvent, IExtendedSession } from '@/lib/types'
 
 const ScheduleCard = ({
   event,
@@ -22,8 +21,8 @@ const ScheduleCard = ({
   showTime = false,
   speakers = false,
 }: {
-  event: IEventModel
-  session: ISessionModel
+  event: IExtendedEvent
+  session: IExtendedSession
   showTime?: boolean
   speakers?: boolean
 }) => {

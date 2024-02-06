@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { IEvent } from '@/lib/types'
-import {IOrganizationModel} from 'streameth-new-server/src/interfaces/organization.interface'
-import {IEventModel} from 'streameth-new-server/src/interfaces/event.interface'
+import { IExtendedEvent } from '@/lib/types'
+import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
+import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -61,7 +61,7 @@ export const truncateAddr = (
   return `${truncatedStart}...${truncatedEnd}`
 }
 
-export const hasData = ({ event }: { event: IEvent }) => {
+export const hasData = ({ event }: { event: IExtendedEvent }) => {
   return event.dataImporter !== undefined
 }
 

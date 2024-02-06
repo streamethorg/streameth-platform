@@ -1,4 +1,3 @@
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 
 import { NavBarProps, IPagination, IExtendedSession } from './types'
@@ -54,7 +53,10 @@ export async function fetchAllSessions({
   page?: number
   limit?: number
   searchQuery?: string
-}): Promise<{ sessions: ISessionModel[]; pagination: IPagination }> {
+}): Promise<{
+  sessions: IExtendedSession[]
+  pagination: IPagination
+}> {
   const params: ApiParams = {
     event,
     stage,
