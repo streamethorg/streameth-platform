@@ -17,7 +17,7 @@ const validateEnv = () => {
     JWT_EXPIRY: str(),
     GOOGLE_API_KEY: str(),
     NEXT_PUBLIC_STUDIO_API_KEY: str(),
-    GITHUB_API_TOKEN: str()
+    GITHUB_API_TOKEN: str(),
   });
 };
 
