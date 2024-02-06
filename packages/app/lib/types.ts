@@ -1,6 +1,6 @@
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 
@@ -65,6 +65,8 @@ export interface IExtendedEvent extends IEvent {
   _id: string
 }
 export interface IOrganization extends IOrganizationModel {}
-export interface ISession extends ISessionModel {}
+export interface IExtendedSession extends Omit<ISession, '_id'> {
+  _id: string
+}
 export interface IStage extends IStageModel {}
 export interface ISpeaker extends ISpeakerModel {}

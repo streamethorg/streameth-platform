@@ -8,7 +8,6 @@ import {
 
 import StagePreview from '../stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 
 import SpeakerComponent from '../speakers/components/SpeakerComponent'
@@ -23,6 +22,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Suspense } from 'react'
 import banner from '@/public/streameth_twitter_banner.jpeg'
+import { IExtendedEvent } from '@/lib/types'
 
 export default function EventHomeComponent({
   event,
@@ -30,7 +30,7 @@ export default function EventHomeComponent({
   params,
   searchParams,
 }: {
-  event: IEventModel
+  event: IExtendedEvent
   stages: IStageModel[]
 
   params: {
@@ -49,7 +49,7 @@ export default function EventHomeComponent({
           <AspectRatio ratio={3 / 1}>
             <Image
               className="rounded-lg  p-2"
-              src={bannerImg}
+              src={bannerImg!}
               alt="Event Cover"
               width={1500}
               height={500}
@@ -65,9 +65,12 @@ export default function EventHomeComponent({
             <div className="text-sm text-white">
               <p>
                 <span className="mr-2">&#128197;</span>
-                {extractDate(event.start)}
-                {!isSameDate(event.start, event.end)
-                  ? ` - ${extractDate(event.end)}`
+                {extractDate(new Date(event.start))}
+                {!isSameDate(
+                  new Date(event.start),
+                  new Date(event.end)
+                )
+                  ? ` - ${extractDate(new Date(event.end))}`
                   : ''}
               </p>
               <p>

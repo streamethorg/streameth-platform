@@ -1,4 +1,5 @@
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
+import { IOrganization } from './organization.interface';
 
 export enum UserRole {
   user = 'user',
@@ -6,7 +7,7 @@ export enum UserRole {
 }
 export interface IUser {
   walletAddress: string;
-  organizations?: Types.ObjectId[];
+  organizations?: IOrganization[];
   role?: UserRole;
   signature: string;
   nonce: string;

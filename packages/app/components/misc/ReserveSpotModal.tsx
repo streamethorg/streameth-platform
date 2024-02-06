@@ -2,10 +2,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ModalContext } from '@/lib/context/ModalContext'
 import useLocalStorage from '@/lib/hooks/useLocalStorage'
-import { IEvent } from '@/lib/types'
+import { IExtendedSession } from '@/lib/types'
 
 interface props {
-  event: IEvent
+  event: IExtendedSession
 }
 
 interface SignUp {
@@ -13,10 +13,10 @@ interface SignUp {
   isSignedUp?: boolean
 }
 
-const ReserveSpotModal = ({ event }: { event: IEvent }) => {
+const ReserveSpotModal = ({ event }: { event: IExtendedSession }) => {
   const { closeModal } = useContext(ModalContext)
   const [localIsLoading, setLocalIsLoading] = useState(false)
-  const [user, setUser] = useLocalStorage<SignUp>(event.id, {
+  const [user, setUser] = useLocalStorage<SignUp>(event._id, {
     email: '',
     isSignedUp: false,
   })
@@ -24,12 +24,12 @@ const ReserveSpotModal = ({ event }: { event: IEvent }) => {
   const submitEmail = () => {
     setLocalIsLoading(true)
     fetch(
-      `/api/organizations/${event.organizationId}/events/${event.id}/signup`,
+      `/api/organizations/${event.organizationId}/events/${event._id}/signup`,
       {
         method: 'POST',
         body: JSON.stringify({
           email: user.email,
-          eventId: event.id,
+          eventId: event._id,
         }),
       }
     )
@@ -81,12 +81,12 @@ const ReserveSpotButton = ({ event }: props) => {
 
   useEffect(() => {
     if (window !== undefined) {
-      const item = window.localStorage.getItem(event.id)
+      const item = window.localStorage.getItem(event._id)
       if (item !== null) {
         setUser(JSON.parse(item))
       }
     }
-  }, [event.id])
+  }, [event._id])
   if (user && user.isSignedUp) {
     return (
       <div className="text-center p-2  border bg-accent  rounded text-lg hoover:text-accent w-[200px]">

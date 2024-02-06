@@ -1,12 +1,11 @@
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-
 import VideoCard from '@/components/misc/VideoCard'
+import { IExtendedSession } from '@/lib/types'
 export default async function VideoGrid({
   videos,
   maxVideos,
   scroll,
 }: {
-  videos: ISessionModel[]
+  videos: IExtendedSession[]
   maxVideos?: number
   scroll?: boolean
 }) {

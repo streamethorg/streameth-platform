@@ -67,7 +67,7 @@ class App {
     this.app.use(morgan('dev'));
     this.app.use(
       cors({
-        origin: config.cors.origin,
+        origin: config.cors.origin.trim().split(','),
         credentials: config.cors.credentials,
       }),
     );

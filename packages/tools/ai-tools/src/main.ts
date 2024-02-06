@@ -43,7 +43,7 @@ async function startAITools(
     throw new Error("Invalid asset ID");
   }
 
-  const assetInfo = await getAssetInfo(assetId);
+  const assetInfo =await getAssetInfo(assetId); //{id:"", playbackUrl:""}
   if (!assetInfo) {
     throw new Error("Asset does not exist");
   }
@@ -51,28 +51,35 @@ async function startAITools(
   const sessionService = new SessionService();
   const { sessions } = await sessionService.getAll({
     assetId: assetInfo.id,
-  } as any);
+    event: "",
+    organization: "",
+    speaker: "",
+    stageId: "",
+    onlyVideos: false,
+    size: 0,
+    page: 0
+  });
   if (sessions.length !== 1) {
     throw new Error("Something went wrong when fetching the correct session");
   }
   const session = sessions[0];
+  const sessionId = session._id.toString()
 
-  console.log(session._id);
-  const mp3FilePath = join(TMP_MP3_PATH, `${session._id}.mp3`);
+  const mp3FilePath = join(TMP_MP3_PATH, `${sessionId}.mp3`);
   const transcriptionFilePath = join(
     TMP_TRANSCRIPTIONS_PATH,
-    `${session._id}.txt`
+    `${sessionId}.txt`
   );
-  const digitalOceanPath = join(TRANSCRIPTIONS_PATH, `${session._id}.txt`);
+  const digitalOceanPath = join(TRANSCRIPTIONS_PATH, `${sessionId}.txt`);
 
   const s3 = new S3Client();
-  const data = await s3.getBucket(BUCKET_NAME, digitalOceanPath);
+  const data = await s3.getFile(BUCKET_NAME, digitalOceanPath);
   if (Object.keys(data).length !== 0 && !overwriteFiles) {
     throw new Error("File already exists on Digital Ocean");
   }
 
   const downloadUrl = assetInfo.playbackUrl || "";
-  await downloadM3U8ToMP3(downloadUrl, session._id, TMP_MP3_PATH, 9);
+  await downloadM3U8ToMP3(downloadUrl, sessionId, TMP_MP3_PATH, 9);
 
   const size = await getFileSize(mp3FilePath);
   if (size >= 25000000) {
@@ -82,7 +89,7 @@ async function startAITools(
   await createTranscription(
     mp3FilePath,
     TMP_TRANSCRIPTIONS_PATH,
-    `${session._id}.txt`
+    `${sessionId}.txt`
   );
 
   if (!fs.existsSync(transcriptionFilePath)) {
@@ -96,14 +103,14 @@ async function startAITools(
   const summary = await createSummary(
     transcriptionFilePath,
     TMP_SUMMARY_PATH,
-    `summary-${session._id}.txt`
+    `summary-${sessionId}.txt`
   );
 
-  await sessionService.update(session._id, {
-    videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${session._id}.txt`,
+  await sessionService.update(sessionId, {
+    videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${sessionId}.txt`,
     aiDescription: summary,
     autoLabels: labels,
-  });
+  } as any);
 
   if (keepTmp === false) {
     fs.rmSync("./tmp", { recursive: true, force: true });
