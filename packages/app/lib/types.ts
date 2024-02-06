@@ -65,7 +65,7 @@ export interface IExtendedEvent extends IEvent {
   _id: string
 }
 export interface IOrganization extends IOrganizationModel {}
-export interface IExtendedSession extends ISession {
+export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
 }
 export interface IStage extends IStageModel {}
