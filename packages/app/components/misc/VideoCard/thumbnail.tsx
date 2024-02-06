@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import { getImageUrl } from '@/lib/utils/utils'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { useEffect, useState } from 'react'
 const fetchImage = async (url: string): Promise<boolean> => {
   try {
@@ -12,44 +11,40 @@ const fetchImage = async (url: string): Promise<boolean> => {
     return false
   }
 }
-// TODO
 export default function Thumbnail({
-  session,
+  imageUrl,
   fallBack,
 }: {
-  session: ISessionModel
+  imageUrl?: string
   fallBack?: string
 }) {
-  const streamethThumbnail = session.coverImage ?? ''
+  const streamethThumbnail = imageUrl ?? ''
+  const [image, setImage] = useState('')
 
   const [error, setError] = useState(false)
   const [fallbackImage, setFallbackImage] = useState('/cover.png')
   useEffect(() => {
     setError(false)
-    fallBack && setFallbackImage(getImageUrl('/events/' + fallBack))
-  }, [session.coverImage, fallBack])
+    fallBack && setFallbackImage(fallBack)
+  }, [imageUrl, fallBack])
 
   return (
     <div className="aspect-video relative">
       <Image
+        placeholder="blur"
+        blurDataURL={fallbackImage}
+        loading="lazy"
         className="rounded"
         alt="Session image"
         quality={80}
         src={error ? fallbackImage : streamethThumbnail}
         fill
+        sizes="(max-width: 768px) 100%, (max-width: 1200px) 50%, 33%"
         style={{
           objectFit: 'cover',
         }}
         onError={(e) => {
           setError(true)
-          //e.currentTarget.src = "/cover.png"
-          // fetchImage(livepeerThumbnail)
-          //   .then(() => {
-          //     e.currentTarget.src = livepeerThumbnail
-          //   })
-          //   .catch(() => {
-          //     e.currentTarget.src = 'cover.png'
-          //   })
         }}
       />
     </div>

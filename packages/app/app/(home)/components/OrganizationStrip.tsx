@@ -3,7 +3,7 @@ import { fetchAllSessions } from '@/lib/data'
 import Image from 'next/image'
 import VideoGrid from '@/components/misc/Videos'
 import Link from 'next/link'
-import { archivePath } from '@/lib/utils/path'
+import { archivePath } from '@/lib/utils/utils'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 export default async function OrganizationStrip({
   organization,
@@ -14,13 +14,13 @@ export default async function OrganizationStrip({
     await fetchAllSessions({
       organizationSlug: organization.slug,
       onlyVideos: true,
-      limit: 4,
+      limit: 8,
     })
   ).sessions
 
   if (videos.length === 0) return false
   return (
-    <div key={organization.slug} className="bg-white flex flex-col">
+    <div key={organization.slug} className="flex flex-col">
       <div className="flex flex-row my-2">
         <Image
           className="rounded"
@@ -32,13 +32,13 @@ export default async function OrganizationStrip({
         />
 
         <Link href={archivePath({ organization: organization.slug })}>
-          <CardTitle className="text-background text-2xl ml-2 mr-auto hover:underline">
+          <CardTitle className=" text-2xl ml-2 mr-auto hover:underline">
             {organization.name} {' >'}
           </CardTitle>
         </Link>
       </div>
       <div className="flex flex-row overflow-y-scroll gap-4 h-full">
-        <VideoGrid scroll videos={videos} maxVideos={3} />
+        <VideoGrid scroll videos={videos} maxVideos={7} />
       </div>
     </div>
   )

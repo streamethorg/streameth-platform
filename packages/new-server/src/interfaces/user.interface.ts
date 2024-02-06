@@ -9,5 +9,7 @@ export interface IUser {
   organizations?: Types.ObjectId[];
   role?: UserRole;
   signature: string;
+  nonce: string;
+  message: string;
 }
 export interface IUserModel extends IUser, Document {}

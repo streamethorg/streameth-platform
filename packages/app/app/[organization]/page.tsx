@@ -3,7 +3,7 @@ import remarkGfm from 'remark-gfm'
 import { notFound } from 'next/navigation'
 import Markdown from 'react-markdown'
 import { Metadata, ResolvingMetadata } from 'next'
-import { fetchOrganization } from '@/lib/data'
+import { fetchOrganization } from '@/lib/services/organizationService'
 
 interface Params {
   params: {
@@ -24,7 +24,7 @@ export default async function OrganizationHome({ params }: Params) {
 
   return (
     <main className="w-screen mx-auto fixed overflow-auto h-screen">
-      <div className="sticky bg-white top-0 z-50 flex p-4 px-9 gap-4">
+      <div className="sticky  top-0 z-50 flex p-4 px-9 gap-4">
         <Image
           src={organization.logo}
           width={50}

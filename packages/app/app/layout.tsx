@@ -5,8 +5,8 @@ import { ModalContextProvider } from '@/lib/context/ModalContext'
 import { MobileContextProvider } from '@/lib/context/MobileContext'
 import { LoadingContextProvider } from '@/lib/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/lib/context/TopNavbarContext'
-import Initializer from './Initializer'
-import { generalMetadata } from '@/lib/metadata'
+import { generalMetadata } from '@/lib/utils/metadata'
+import { Toaster } from '@/components/ui/sonner'
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
@@ -27,13 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
       <body
-        className={`${heebo.variable} font-sans flex flex-col w-full min-h-screen  mx-auto bg-white `}>
+        className={`${heebo.variable} font-sans flex flex-col w-full min-h-screen  mx-auto bg-background `}>
         <GeneralContext>
+          <Toaster />
           <LoadingContextProvider>
             <MobileContextProvider>
               <ModalContextProvider>
                 <TopNavbarContextProvider>
-                  <Initializer>{children}</Initializer>
+                  {children}
                 </TopNavbarContextProvider>
               </ModalContextProvider>
             </MobileContextProvider>

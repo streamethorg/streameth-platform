@@ -1,7 +1,7 @@
 import { createLabels, createSummary, createTranscription } from "./ai";
 import { getAssetInfo } from "../../av-tools/src/utils/livepeer";
 import { downloadM3U8ToMP3 } from "../../av-tools/src/utils/ffmpeg";
-import S3Client from "../../../server/services/s3/index";
+import S3Client from "../../../app/lib/services/spacesService";
 import SessionService from "../../../new-server/src/services/session.service";
 import * as fs from "fs";
 import { join } from "path";

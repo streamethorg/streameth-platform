@@ -5,9 +5,8 @@
   "workspaces": {
     "packages": [
       "packages/app",
-      "packages/server",
       "packages/tools/av-tools",
-      "packages/tools",
+      "packages/tools/ai-tools",
       "packages/new-server"
     ]
   },

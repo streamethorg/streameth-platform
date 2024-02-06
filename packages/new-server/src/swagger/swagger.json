@@ -773,7 +773,8 @@
 					}
 				},
 				"required": [
-					"url"
+					"url",
+					"apiToken"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -863,12 +864,10 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string",
-						"format": "date-time"
+						"type": "string"
 					},
 					"end": {
-						"type": "string",
-						"format": "date-time"
+						"type": "string"
 					},
 					"location": {
 						"type": "string"
@@ -941,8 +940,6 @@
 					"start",
 					"end",
 					"location",
-					"logo",
-					"banner",
 					"organizationId",
 					"timezone"
 				],
@@ -1048,10 +1045,10 @@
 					"start",
 					"end",
 					"location",
-					"logo",
-					"banner",
 					"organizationId",
-					"timezone"
+					"timezone",
+					"logo",
+					"banner"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1077,9 +1074,112 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"UserRole": {
+				"enum": [
+					"user",
+					"admin"
+				],
+				"type": "string"
+			},
+			"IUser": {
+				"properties": {
+					"walletAddress": {
+						"type": "string"
+					},
+					"organizations": {
+						"items": {
+							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+						},
+						"type": "array"
+					},
+					"role": {
+						"$ref": "#/components/schemas/UserRole"
+					},
+					"signature": {
+						"type": "string"
+					},
+					"nonce": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"walletAddress",
+					"signature",
+					"nonce",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__user-IUser--token-string__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"token": {
+								"type": "string"
+							},
+							"user": {
+								"$ref": "#/components/schemas/IUser"
+							}
+						},
+						"required": [
+							"token",
+							"user"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserDto": {
+				"properties": {
+					"walletAddress": {
+						"type": "string"
+					},
+					"signature": {
+						"type": "string"
+					},
+					"nonce": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"walletAddress",
+					"signature",
+					"nonce",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"jwt": {
+				"name": "Authorization",
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT",
+				"in": "header"
+			}
+		}
 	},
 	"info": {
 		"title": "streameth-api",
@@ -1091,8 +1191,8 @@
 			"post": {
 				"operationId": "CreateStage",
 				"responses": {
-					"200": {
-						"description": "Ok",
+					"201": {
+						"description": "",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1105,7 +1205,11 @@
 				"tags": [
 					"Stage"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -1157,7 +1261,11 @@
 				"tags": [
 					"Stage"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -1225,7 +1333,11 @@
 				"tags": [
 					"Stage"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -1287,7 +1399,11 @@
 				"tags": [
 					"Speaker"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -1381,7 +1497,11 @@
 				"tags": [
 					"Session"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -1501,7 +1621,11 @@
 				"tags": [
 					"Session"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -1571,7 +1695,11 @@
 				"tags": [
 					"Organization"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -1623,7 +1751,11 @@
 				"tags": [
 					"Organization"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -1691,7 +1823,11 @@
 				"tags": [
 					"Organization"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -1775,7 +1911,11 @@
 				"tags": [
 					"Event"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -1828,7 +1968,11 @@
 				"tags": [
 					"Event"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -1896,7 +2040,11 @@
 				"tags": [
 					"Event"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -1938,6 +2086,60 @@
 						}
 					}
 				]
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__user-IUser--token-string__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/nonce/generate": {
+			"get": {
+				"operationId": "GenerateNonce",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": []
 			}
 		}
 	},
