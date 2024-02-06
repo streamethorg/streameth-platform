@@ -3244,146 +3244,183 @@
   dependencies:
     merge-options "^3.0.4"
 
-"@remotion/bundler@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/bundler/-/bundler-4.0.77.tgz#5b669473e07579ed78319d74f8eb9d54d1e2bbc9"
-  integrity sha512-nnh/hZQqNlekcnTWtNzSFCGL3MODY4QmfCOjTYAfiifdXggqK00UJEFiMOhCJ+H8rkPYiUU+2IRqiKRilIsmQQ==
+"@remotion/bundler@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/bundler/-/bundler-4.0.107.tgz#03b8f0c1073d9187c46b7660efc95652d42559fd"
+  integrity sha512-RgUUspe6Oeh8b0lRd51yyn9Uc1uE4ph1wrWDQ7RCBv9cFh/V+rQAqB6xkq4pAldACfZ6I87v5zYbb/6EuGniqA==
   dependencies:
+    "@remotion/studio" "4.0.107"
+    "@remotion/studio-shared" "4.0.107"
     css-loader "5.2.7"
     esbuild "0.18.6"
     react-refresh "0.9.0"
-    remotion "4.0.77"
+    remotion "4.0.107"
+    source-map "0.7.3"
     style-loader "2.0.0"
     webpack "5.83.1"
 
-"@remotion/cli@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/cli/-/cli-4.0.77.tgz#56df6e247fb3c170ef628ef3d67eb15468713a04"
-  integrity sha512-AwbUuHNs6oY/NefsFl5wwwTr6BdxqbqnXyuZxM+MU6uKjaBq08rwDxhEJCeD71pa2itevqhJYUzdqod7wOmQpQ==
+"@remotion/cli@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/cli/-/cli-4.0.107.tgz#30855e631fcc78b594e43e3ef7645c3343e1b05a"
+  integrity sha512-VM+hSWnScMwAPouJ1r0NjIG3gp1AKCjG5D4pT35Wucx8RecSxmJQa98zWMdZd5CQQuQwpEa+wqhOEfQBWFzSfQ==
   dependencies:
-    "@remotion/bundler" "4.0.77"
-    "@remotion/media-utils" "4.0.77"
-    "@remotion/player" "4.0.77"
-    "@remotion/renderer" "4.0.77"
+    "@remotion/bundler" "4.0.107"
+    "@remotion/media-utils" "4.0.107"
+    "@remotion/player" "4.0.107"
+    "@remotion/renderer" "4.0.107"
+    "@remotion/studio" "4.0.107"
+    "@remotion/studio-server" "4.0.107"
     dotenv "9.0.2"
-    memfs "3.4.3"
     minimist "1.2.6"
-    open "^8.4.2"
-    prompts "2.4.1"
-    remotion "4.0.77"
-    semver "7.5.3"
-    source-map "0.6.1"
+    prompts "2.4.2"
+    remotion "4.0.107"
 
-"@remotion/compositor-darwin-arm64@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/compositor-darwin-arm64/-/compositor-darwin-arm64-4.0.77.tgz#2d4f7b23d43c55e759adb7d6eecd312f108300d2"
-  integrity sha512-KVcXDCqvya9CEEnYiCYFOa8m3OoqYcKqXS+22BtG2/nBnxbJMH4ODFqNe18iBjDKld7exzH2HFncwD1dh+Ic+w==
+"@remotion/compositor-darwin-arm64@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/compositor-darwin-arm64/-/compositor-darwin-arm64-4.0.107.tgz#b8a18d26dcd5c41b937a8b13a2ec6804a345b2db"
+  integrity sha512-nqIcvWxxsAli/z0opcUnEy1SVEHBC7R9RI6Bk2/klJW2P9FgWYFnIxVXcBDwGqsbJ8XN8OoTWJsr2OabUe6APQ==
 
-"@remotion/compositor-darwin-x64@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/compositor-darwin-x64/-/compositor-darwin-x64-4.0.77.tgz#9624d0c8d2e0bdb38b36dc6f0bcfd99ff1e67985"
-  integrity sha512-+y3RSx7SozvqBfwzUI9Z0tSXofQ+M3e+Mtl+OIGH4MFun969O7x8iDGaluB8ZTSjfBFG/3FL2dN1MSG4gL9R1Q==
+"@remotion/compositor-darwin-x64@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/compositor-darwin-x64/-/compositor-darwin-x64-4.0.107.tgz#895b1d1622c26578e77bc0ff5eeef38528961514"
+  integrity sha512-E7G/in139NIm7QrFybTHefqMe1+J6T3PbjYVMlQ79kIqfQDsb49Bj8GTevgxHqemjy4e+dB8mFPfnZS61BvqfQ==
 
-"@remotion/compositor-linux-arm64-gnu@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-arm64-gnu/-/compositor-linux-arm64-gnu-4.0.77.tgz#039b2a87fe224f4f6427292728c9c407499e0c27"
-  integrity sha512-5L+vKhTn3MfeTzXY8eYrNy7IcFGlvfcMNPMYIhLZcsH0Ed4RFNDBlt3AmLcFX0upojp1WRHweMbbyrV5FOr4WA==
+"@remotion/compositor-linux-arm64-gnu@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-arm64-gnu/-/compositor-linux-arm64-gnu-4.0.107.tgz#80b5c21415c41b7ac3c99ceb6ebcd22981c58d8d"
+  integrity sha512-3MCa7QgQRM0LnXgJTNotCdI+e9t8/xUpX3yreANIFfiCQH3uw6JfZ8Q1+5kTSWjwMr+cOwC4zVEfLFVGMnjP+A==
 
-"@remotion/compositor-linux-arm64-musl@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-arm64-musl/-/compositor-linux-arm64-musl-4.0.77.tgz#060e7fcc82bb5158ffc1da796c7ba65375c94d70"
-  integrity sha512-n2dU1rnJtPEURrGsVb4xpvqqOOr50TUSLO+XJs9ssjl2q13YzRSicGiIQHl5gI18oj+BeT5y8oA7d7Mk6UD6xA==
+"@remotion/compositor-linux-arm64-musl@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-arm64-musl/-/compositor-linux-arm64-musl-4.0.107.tgz#bb6fd579d2871c3573fa4ecb3b9f5c7a189f5747"
+  integrity sha512-WPoe8raU7nXzIAook38+7fWCAUqlH+aM9kgKRBKeGyrX9cepAhddI26JjeK8GEIdJarz5OqlIM2afzhlT9zf7Q==
 
-"@remotion/compositor-linux-x64-gnu@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-x64-gnu/-/compositor-linux-x64-gnu-4.0.77.tgz#0a04d2b63c64f9e8de9b792716c89eb361238341"
-  integrity sha512-+Z0EKnYv08Q/s9o5bchWbd6uoRWXMQLo9Ssxzx2w1PeHogmzYGmXcWugTsem3zx0GbOCQyVUkqeEPExPOiJXCw==
+"@remotion/compositor-linux-x64-gnu@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-x64-gnu/-/compositor-linux-x64-gnu-4.0.107.tgz#e7076a3ca84f8e6bbc845208b9fda0f8feb4f55e"
+  integrity sha512-QVu3LpOfFLn9/19dvwTv/viSSFHVA8uT3ah1rXOJVHPRvZE90/YzqBCV6UXg5C2QvoZHRAJZw3Q7eGOAswTdtw==
 
-"@remotion/compositor-linux-x64-musl@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-x64-musl/-/compositor-linux-x64-musl-4.0.77.tgz#57858cb73837f1ae3a11afe39d50a9b6afffff29"
-  integrity sha512-PCTLNyrg6fsF2thjpNioHvZLH0HxX6hVpSEg+O8YdJgF5PScT77bNhUQycKqQVp6nBchzMOWUiN1LmNpH0vMUA==
+"@remotion/compositor-linux-x64-musl@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/compositor-linux-x64-musl/-/compositor-linux-x64-musl-4.0.107.tgz#9d7b0e09568f077e6bfff2d93befb0e2268d980e"
+  integrity sha512-CKNtDm7Lbk1OZhZbMCK7MuVRQiiRTlueUCuhzi0RO6Mx6NCzXb4DLaoLtX9XtWrpqKEI6V9gCOfZ0nmiC1acsw==
 
-"@remotion/compositor-win32-x64-msvc@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/compositor-win32-x64-msvc/-/compositor-win32-x64-msvc-4.0.77.tgz#9fe1cc0057c818737794a57bf9d4e83142eebd2b"
-  integrity sha512-BftotZg4mXELQRTTjjDbRooSmIgrFF/EEbWEZu2JZiBmZk2UzHVZI0uaji+N/d/lR44J2kY3xEnpJEMqY49WkQ==
+"@remotion/compositor-win32-x64-msvc@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/compositor-win32-x64-msvc/-/compositor-win32-x64-msvc-4.0.107.tgz#8e16271547070c8948259f5da1139571c5cf0907"
+  integrity sha512-IrBR40TEnPPs5j+xzrRrrsdrpLiNdL+WhFf3TD37pjvjJ9AT/NIp8LQHK1vujP5CtI5S/1/SKGDC7Y7SZArMTg==
 
-"@remotion/eslint-config@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/eslint-config/-/eslint-config-4.0.77.tgz#c6775e88903c9b8d7756513c56f7456a83424c0e"
-  integrity sha512-dGPepN8XP3/nLx7fotzV4+fGNNoADZTqagiXK8YNwO496mEtClgBLvPaat2gqg9XNLh2udtOuGH85QJ0N6DK2w==
+"@remotion/eslint-config@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/eslint-config/-/eslint-config-4.0.107.tgz#5b92eff6ab74304c7134fbed99096642a2c73657"
+  integrity sha512-SFQR/51MIgI16KCHLGMPZVhXA3gTZl6gTTfsu6vdHXpnNjHO+aKmK1tvgUr7N4Kl+M4qWHevpUZDUWpPrvwWaw==
   dependencies:
-    "@remotion/eslint-plugin" "4.0.77"
+    "@remotion/eslint-plugin" "4.0.107"
     "@typescript-eslint/eslint-plugin" "6.7.4"
     "@typescript-eslint/parser" "6.7.4"
     eslint-plugin-10x "1.5.2"
     eslint-plugin-react "7.32.2"
     eslint-plugin-react-hooks "4.6.0"
 
-"@remotion/eslint-plugin@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/eslint-plugin/-/eslint-plugin-4.0.77.tgz#e39528ff86a1888b75992f5f829998f24d8df8c5"
-  integrity sha512-ul8Cvm6u5+i7P91la0cPaNa2uwgyUoESf5xQrF0gCjBXvW93SwK4GaKsqtqS+dDTFgEdRAi+8uWVSt3u8Re4ZA==
+"@remotion/eslint-plugin@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/eslint-plugin/-/eslint-plugin-4.0.107.tgz#eb785b1e404526c67d80ffb901db151e8f72331a"
+  integrity sha512-3l/Pw1XYlEEqk5oh2vRVsWI8+eusbU+q8RszwQwHhV/McJSftoA3dUK9NhqibEkLblMKOqZrIyOeXJGWi389Fg==
   dependencies:
     "@typescript-eslint/utils" "5.19.0"
 
-"@remotion/google-fonts@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/google-fonts/-/google-fonts-4.0.77.tgz#daabca5a16eb267c8af9dfc8ea683088b9548303"
-  integrity sha512-G6bh8UFJ2/jHBi/GlDtuN00sCqzB4la8wDkJ2OqXSUrjMQhTa7mgeGbKADGc3Yio3rPw/4g+ySTuFqLjEMktQA==
+"@remotion/google-fonts@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/google-fonts/-/google-fonts-4.0.107.tgz#39f9110f2075defbdf2ece92af0570f446cb9161"
+  integrity sha512-LQjEFH2CbTppnCTYV/BjXANB6SvPllO+FtWzbBI0WRZkTE0NixQbnMqgh8oTtWZpqOQT/UbglG4/rcKecy3AyQ==
   dependencies:
-    remotion "4.0.77"
+    remotion "4.0.107"
 
-"@remotion/media-utils@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/media-utils/-/media-utils-4.0.77.tgz#7dae6c370ddd77f0748913dd43d676e755f5d895"
-  integrity sha512-PcZpLr3DLNerb7r/9AV+Bk1kxJnvq/dzhLItGuSolZW0SV1ru7kSrtqbpBBY3sPRKpjm0AkROytVzHtasq5SpQ==
+"@remotion/media-utils@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/media-utils/-/media-utils-4.0.107.tgz#3e829c68879ff6141f0b6e3fdf2b582fd09ecf79"
+  integrity sha512-LG25cpYG96s74k8VGbML6wjBOTzuLw/4Icw4geh7/wRg9W0efBtSyRwMJ/OUv1sGBSZClfN5v4JPY7/haGbAoA==
   dependencies:
-    remotion "4.0.77"
+    remotion "4.0.107"
 
-"@remotion/paths@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/paths/-/paths-4.0.77.tgz#1fea541064304e3fa5f1344ac60fdfde9153fa57"
-  integrity sha512-EZVLI0n2xTDjPdy504mBFcD2tejruR1fFzCaThIs9IcMAMtaSRtAdkPTsZg7UTmtwm6SJjJjTBtDUkCWUmYSFg==
+"@remotion/paths@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/paths/-/paths-4.0.107.tgz#4abaaf5db453b18074d4a5d5b53ac3866da283cb"
+  integrity sha512-0PgJwcicbKcCFDLl81IhRN1dqE8j5r5M2GHG0c8qlZZUw5dHYbeXdDPKmrls1OXZuKhgtGX718O6Urn4ruMu4Q==
 
-"@remotion/player@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/player/-/player-4.0.77.tgz#f11978e60a249fbd612c75b8eb92458a2a64ec7f"
-  integrity sha512-KZI55vhNUKnVDm/CmAn//dP660CR8rFNkoDCYXXP0bBKfPBUWfU8AFEgofJqlIw1J4oS4YFHrPE9s9qunHVRZQ==
+"@remotion/player@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/player/-/player-4.0.107.tgz#f799ffa34820cf965abeb59c8955a73133779031"
+  integrity sha512-IbYybDboNJUjWKDhGAGHi+QahavaNudDbXvlYfXP46FelQPU3UQRnow4FGxaoNgDJ26gKIETCRGGfdq1Ys/hbA==
   dependencies:
-    remotion "4.0.77"
+    remotion "4.0.107"
 
-"@remotion/renderer@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/renderer/-/renderer-4.0.77.tgz#651208ed12a31673f34abb41d1a47ccfd8a28421"
-  integrity sha512-6+o8sWfp6d0vyxLXZb1H4SImOIXqu1Iv/cfmiAMn31G+TVRMU/4PjW3vzeqOzESkrTrpc3uw66kEqgo9AN1LXQ==
+"@remotion/renderer@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/renderer/-/renderer-4.0.107.tgz#186bc84f7ef074ce9e1db83b069f18a493d8ec49"
+  integrity sha512-sJPLY8SFNVX3HVdyfRVeUZUSkUggGpR4Y0BD2Y6NeNM0m0dMwxEbLo1L6n3YsV+ADkTvFczlhkdGm6awvS4qqg==
   dependencies:
     execa "5.1.1"
     extract-zip "2.0.1"
-    remotion "4.0.77"
+    remotion "4.0.107"
     source-map "^0.8.0-beta.0"
     ws "8.7.0"
   optionalDependencies:
-    "@remotion/compositor-darwin-arm64" "4.0.77"
-    "@remotion/compositor-darwin-x64" "4.0.77"
-    "@remotion/compositor-linux-arm64-gnu" "4.0.77"
-    "@remotion/compositor-linux-arm64-musl" "4.0.77"
-    "@remotion/compositor-linux-x64-gnu" "4.0.77"
-    "@remotion/compositor-linux-x64-musl" "4.0.77"
-    "@remotion/compositor-win32-x64-msvc" "4.0.77"
+    "@remotion/compositor-darwin-arm64" "4.0.107"
+    "@remotion/compositor-darwin-x64" "4.0.107"
+    "@remotion/compositor-linux-arm64-gnu" "4.0.107"
+    "@remotion/compositor-linux-arm64-musl" "4.0.107"
+    "@remotion/compositor-linux-x64-gnu" "4.0.107"
+    "@remotion/compositor-linux-x64-musl" "4.0.107"
+    "@remotion/compositor-win32-x64-msvc" "4.0.107"
 
-"@remotion/shapes@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/shapes/-/shapes-4.0.77.tgz#b00a263e35509e44fb8009cde8fde404065a0db8"
-  integrity sha512-ACZRSop09lcrbXB0FL7+2frIiRp+FG4iN7uLWZb1IA44fWaGZ1M7fODZDkncfV3PTLFBk+dui9oIwrjt8NSTlA==
+"@remotion/shapes@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/shapes/-/shapes-4.0.107.tgz#120e4ed7f8526e64bde9cb2a099400d202444b4d"
+  integrity sha512-CLXWLjWNITAZXDhOStC+3sRW2SyMPLaL7mL3W2LvIKRCDV6h6kce5Juvuo/vOF18ggDOempr7UwjU0n3XdFdNQ==
   dependencies:
-    "@remotion/paths" "4.0.77"
+    "@remotion/paths" "4.0.107"
 
-"@remotion/tailwind@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/tailwind/-/tailwind-4.0.77.tgz#8942d05c13cb6adf49ac3842fec8b44d81ef2251"
-  integrity sha512-C5RPpCCLA1WqjscDJmafcoWUGxaB2Rp+VqIPBjCnfn/QF2RUKK5rgBhyTdDQhzWQXNnq0QtKpDIWWGAnng06GQ==
+"@remotion/studio-server@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/studio-server/-/studio-server-4.0.107.tgz#65682347ea3e2f6bff8d9d510b95d06d39d5a3c8"
+  integrity sha512-DknF5JOAHMdEgeEK02BWLMgi3mLh26gMQTG+Wdtg4E+aHhRg7duoyF2m8ZGhOEBtLSVrkn8kFYLeROQ4Ff79WA==
+  dependencies:
+    "@remotion/bundler" "4.0.107"
+    "@remotion/renderer" "4.0.107"
+    "@remotion/studio-shared" "4.0.107"
+    memfs "3.4.3"
+    open "^8.4.2"
+    remotion "4.0.107"
+    semver "7.5.3"
+    source-map "0.7.3"
+
+"@remotion/studio-shared@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/studio-shared/-/studio-shared-4.0.107.tgz#de854663f272300fde495b887c7b098e3b32a7ce"
+  integrity sha512-Xe5/rER2qKH/XMP8F5apUq4AtNBmrVeEWxz/CmaPalVN3SUwNcWh1SARFxY5sPnQU8xcSaOomX9A5BXuEGL57g==
+  dependencies:
+    remotion "4.0.107"
+
+"@remotion/studio@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/studio/-/studio-4.0.107.tgz#6d6927232d3e8e8dfcd311407fe96072f728d5db"
+  integrity sha512-BCtrzytE/tR5MMj0B3o4FFnsIBeLp2vCTkN2JxztGF0q4ZZZFYuoHZ0eUzAdKTF2sJjtUORXa/vm08nWHIw/Xg==
+  dependencies:
+    "@remotion/media-utils" "4.0.107"
+    "@remotion/player" "4.0.107"
+    "@remotion/renderer" "4.0.107"
+    "@remotion/studio-shared" "4.0.107"
+    memfs "3.4.3"
+    open "^8.4.2"
+    remotion "4.0.107"
+    semver "7.5.3"
+    source-map "0.7.3"
+
+"@remotion/tailwind@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/tailwind/-/tailwind-4.0.107.tgz#c041cd3c0e29c4bc70b88be1d39d74d87e17cec6"
+  integrity sha512-XZ/HH0GkX85z9nESlc3fzBmsh9SKsEEhu9zm7s1pQbxwNB2H+OeSB4dgvI4qUMrR8apCYDXc0ZIZ07Qnuv7Hvw==
   dependencies:
     autoprefixer "^10.4.14"
     css-loader "5.2.7"
@@ -3393,21 +3430,21 @@
     style-loader "2.0.0"
     tailwindcss "^3.3.2"
 
-"@remotion/transitions@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/transitions/-/transitions-4.0.77.tgz#bd9e3e07877f04e6b5760ebb3d61f774e229e279"
-  integrity sha512-ZYpGM3kh9UCiy0819EGdT1AbeQxb35AoOGYAENcabY56MeHzUGd8LbyPyJga9f7FAgz13SiU299JTA54rO1P3w==
+"@remotion/transitions@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/transitions/-/transitions-4.0.107.tgz#e8d5fd10f2f53bb8f3c6b32416be6d1f8ed159a3"
+  integrity sha512-D7vfMi7fFAJLhYpiUKC7hSCIYfw7XVO8Amecu8zfo/T0zNeCV15rwHM6bYn3rnW0bCpqWbCGX/gG3N/ytE0bWA==
   dependencies:
-    "@remotion/paths" "4.0.77"
-    "@remotion/shapes" "4.0.77"
-    remotion "4.0.77"
+    "@remotion/paths" "4.0.107"
+    "@remotion/shapes" "4.0.107"
+    remotion "4.0.107"
 
-"@remotion/zod-types@4.0.77":
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/@remotion/zod-types/-/zod-types-4.0.77.tgz#4c3a9ca97a8cded4b2bc6bc6f11bfe484d0ac4ed"
-  integrity sha512-vc2+SNHWCOdespXACYpmu6e7MP+XiHv546tK7bLMEDE+QGz1RH81DNNjtIjQ+hIO3AGCJHNMrXNTcDBzxHYw9w==
+"@remotion/zod-types@4.0.107":
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/@remotion/zod-types/-/zod-types-4.0.107.tgz#68f569201d78907965741460e96aad57c1b22f53"
+  integrity sha512-CmXxlPf3JSCzHkE5kzOZva1zorKvs3pLGfaoZtOf8orZ/RTXa1qKYn0sTs+0CbRWzbQJsIOZjbNRDxiXj4eZXw==
   dependencies:
-    remotion "4.0.77"
+    remotion "4.0.107"
 
 "@rushstack/eslint-patch@^1.3.3":
   version "1.7.2"
@@ -13844,15 +13881,7 @@ promptly@^2:
   dependencies:
     read "^1.0.4"
 
-prompts@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.4.1.tgz#befd3b1195ba052f9fd2fde8a486c4e82ee77f61"
-  integrity sha512-EQyfIuO2hPDsX1L/blblV+H7I0knhgAd82cVneCwcdND9B8AuCDuRcBH6yIcG4dFzlOUqbazQqwGjx5xmsNLuQ==
-  dependencies:
-    kleur "^3.0.3"
-    sisteransi "^1.0.5"
-
-prompts@^2.0.1:
+prompts@2.4.2, prompts@^2.0.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.4.2.tgz#7b57e73b3a48029ad10ebd44f74b01722a4cb069"
   integrity sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==
@@ -14542,10 +14571,10 @@ remark-stringify@^11.0.0:
     mdast-util-to-markdown "^2.0.0"
     unified "^11.0.0"
 
-remotion@4.0.77:
-  version "4.0.77"
-  resolved "https://registry.yarnpkg.com/remotion/-/remotion-4.0.77.tgz#6be758eb48822e59e0291e9bd537da129c305a69"
-  integrity sha512-uHy4k+PM8qpjffQz0biM7S9t6RxmT/j/MkOcn76iH72M/FWmjIv/RhEcfBtfhKktUlXIuzvHyGhEpJ4iWXFb0Q==
+remotion@4.0.107:
+  version "4.0.107"
+  resolved "https://registry.yarnpkg.com/remotion/-/remotion-4.0.107.tgz#67583eb04ec75a56f8ffdf8982c4ad7966327bea"
+  integrity sha512-Ki7VfFaN8YHawYzNpOoOgcyltk5BbPOUSFbOjpe+RpyRnvknSIRK0ElFr9xMR/+jWkXsY51nhFTeIdEnamTr8Q==
 
 request-progress@^3.0.0:
   version "3.0.0"
@@ -15192,15 +15221,20 @@ source-map-support@0.5.21, source-map-support@~0.5.20:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
 
-source-map@0.6.1, source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
-  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+source-map@0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
+  integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
 source-map@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==
+
+source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 source-map@^0.7.3, source-map@^0.7.4:
   version "0.7.4"
