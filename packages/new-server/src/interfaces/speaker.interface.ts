@@ -11,6 +11,7 @@ export interface ISpeaker {
   photo?: string;
   company?: string;
   slug?: string;
+  organizationId: Types.ObjectId | string;
 }
 
 export interface ISpeakerModel extends Omit<ISpeaker, '_id'>, Document {}

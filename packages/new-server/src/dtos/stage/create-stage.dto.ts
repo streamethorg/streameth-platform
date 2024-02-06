@@ -8,7 +8,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class StageDto implements IStage {
+export class CreateStageDto implements IStage {
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -28,6 +28,10 @@ export class StageDto implements IStage {
   @IsOptional()
   @IsNumber()
   order?: number;
+
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string;
 
   slug?: string;
 }

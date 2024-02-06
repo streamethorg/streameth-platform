@@ -1,7 +1,7 @@
 import { IOrganization } from '@interfaces/organization.interface';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class OrganizationDto implements IOrganization {
+export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
   @IsNotEmpty()
   @IsString()
   name!: string;
@@ -25,4 +25,8 @@ export class OrganizationDto implements IOrganization {
   @IsOptional()
   @IsString()
   accentColor?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  walletAddress: string;
 }
