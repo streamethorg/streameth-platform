@@ -72,7 +72,10 @@ export class StageController extends Controller {
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{stageId}')
-  async deleteStage(@Path() stageId: string, organizationId:OrgIdDto): Promise<IStandardResponse<void>> {
+  async deleteStage(
+    @Path() stageId: string,
+    @Body() organizationId: OrgIdDto,
+  ): Promise<IStandardResponse<void>> {
     const stage = await this.stageService.deleteOne(stageId);
     return SendApiResponse('deleted', stage);
   }

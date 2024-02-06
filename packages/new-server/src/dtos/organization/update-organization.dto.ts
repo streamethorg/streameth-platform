@@ -31,5 +31,5 @@ export class UpdateOrganizationDto {
 
   @IsNotEmpty()
   @IsString()
-  organizationId: string
+  organizationId: string;
 }
