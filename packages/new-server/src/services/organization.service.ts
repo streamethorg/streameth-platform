@@ -2,6 +2,7 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IOrganization } from '@interfaces/organization.interface';
 import Organization from '@models/organization.model';
+import User from '@models/user.model';
 
 export default class OrganizationService {
   private path: string;
@@ -16,7 +17,16 @@ export default class OrganizationService {
       this.path,
     );
     if (findOrg) throw new HttpException(409, 'Organization already exists');
-    return this.controller.store.create(data.name, data, this.path);
+    const createOrg = await this.controller.store.create(
+      data.name,
+      data,
+      this.path,
+    );
+    await User.findOneAndUpdate(
+      { walletAddress: data.walletAddress },
+      { $addToSet: { organizations: createOrg._id } },
+    );
+    return createOrg;
   }
   async update(
     organizationId: string,
