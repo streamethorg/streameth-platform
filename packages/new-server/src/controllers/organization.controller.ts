@@ -44,6 +44,17 @@ export class OrganizationController extends Controller {
     return SendApiResponse('event updated', org);
   }
 
+  // @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Put('/members/{organizationId}')
+  async updateOrganizationMember(
+    @Path() organizationId: string,
+    @Body() body: Pick<CreateOrganizationDto, "walletAddress">,
+  ): Promise<IStandardResponse<void>> {
+    const org = await this.organizationService.updateOrganizationMembers(organizationId, body.walletAddress);
+    return SendApiResponse('member added', org);
+  }
+
   @SuccessResponse('200')
   @Get('{organizationId}')
   async getOrganizationById(

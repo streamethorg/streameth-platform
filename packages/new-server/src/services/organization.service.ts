@@ -61,4 +61,15 @@ export default class OrganizationService {
     await this.get(organizationId);
     return await this.controller.store.delete(organizationId);
   }
+
+  async updateOrganizationMembers(
+    organizationId: string,
+    walletAddress: string
+  ) {
+    await this.get(organizationId);
+    let x = await User.findOneAndUpdate(
+      { walletAddress: walletAddress },
+      { $addToSet: { organizations: organizationId } },
+    )
+  }
 }

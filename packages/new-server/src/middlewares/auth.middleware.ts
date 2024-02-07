@@ -29,7 +29,9 @@ export const expressAuthentication = async (
       }
       if (
         scopes.length > 0 &&
-        !user.organizations.includes(req.body.organizationId ?? req.body.orgId)
+        !user.organizations.includes(
+          req.body.organizationId ?? req.params.organizationId,
+        )
       ) {
         throw new Error('Insufficient permissions to execute action');
       }
