@@ -17,7 +17,7 @@ import ImageUpload from '@/components/misc/form/imageUpload'
 import { sessionSchema } from '@/lib/schema'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { updateSessionAction } from '@/lib/actions/session'
+import { updateSessionAction } from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
 
 const SessionAccordion = ({

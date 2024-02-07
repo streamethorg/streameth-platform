@@ -20,6 +20,11 @@ const Layout = ({
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
+  const userSession = cookies().get('user-session')
+  if (!userSession?.value) {
+    return <>Unauthroised</>
+  }
+
   const links = [
     {
       title: 'Home',
