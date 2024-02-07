@@ -14,9 +14,9 @@ import { getImageUrl } from '@/lib/utils/utils'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 const Studio = async () => {
   const userSession = cookies().get('user-session')
-  if (!userSession?.value) {
-    return <>Unauthroised</>
-  }
+  // if (!userSession?.value) {
+  //   return <>Unauthroised</>
+  // }
   const organizations = await fetchOrganizations()
   const logo = (organization: IOrganizationModel) => {
     if (organization.logo === 'lima.jpeg') {

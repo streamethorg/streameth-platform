@@ -68,7 +68,10 @@ export async function fetchAllSessions({
     date,
   }
   const response = await fetch(
-    constructApiUrl(`${apiUrl()}/sessions`, params)
+    constructApiUrl(`${apiUrl()}/sessions`, params), 
+    {
+      cache: 'no-store',
+    }
   )
   const a = await response.json()
   const allSessions = a.data

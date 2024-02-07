@@ -20,8 +20,6 @@ const Layout = ({
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
-  return <>Unauthroised</>
-
   const links = [
     {
       title: 'Home',

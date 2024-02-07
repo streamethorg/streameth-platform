@@ -1,11 +1,19 @@
 'use client'
 import React from 'react'
-
-import { useCreateClip, Player } from '@livepeer/react'
+import { createClip } from '@/lib/actions/sessions'
 import { Button } from '@/components/ui/button'
 import { useClipContext } from './ClipContext'
+import { IExtendedSession } from '@/lib/types'
 
-const CreateClipButton = () => {
+const CreateClipButton = ({
+  playbackId,
+  session,
+}: {
+  playbackId: string
+  session: IExtendedSession
+}) => {
+  const [isLoading, setIsLoading] = React.useState(false)
+
   const {
     selectedStreamSession,
     startTime,
@@ -14,29 +22,32 @@ const CreateClipButton = () => {
     setEndTime,
   } = useClipContext()
 
-  const {
-    data: clipAsset,
-    mutateAsync,
-    isLoading,
-  } = useCreateClip({
-    playbackId: selectedStreamSession
-      ? //@ts-ignore wrong type provide by sdk
-        selectedStreamSession.playbackId
-      : '',
-    startTime: startTime?.unix ?? 0,
-    endTime: endTime?.unix ?? 0,
-  })
+  const handleCreateClip = () => {
+    if (selectedStreamSession && startTime && endTime) {
+      setIsLoading(true)
+      createClip({
+        playbackId,
+        sessionId: selectedStreamSession.id,
+        start: startTime.unix,
+        end: endTime.unix,
+        session,
+      })
+        .then(() => {
+          setIsLoading(false)
+          setStartTime(null)
+          setEndTime(null)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+  }
 
   return (
     <Button
       className="mt-auto"
       variant={'secondary'}
-      onClick={() => {
-        mutateAsync()
-        setStartTime(null)
-        setEndTime(null)
-      }}
-      disabled={!startTime || !endTime || isLoading}>
+      onClick={handleCreateClip}>
       Create Clip
     </Button>
   )
