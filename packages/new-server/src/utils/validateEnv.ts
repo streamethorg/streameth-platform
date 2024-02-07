@@ -18,6 +18,9 @@ const validateEnv = () => {
     GOOGLE_API_KEY: str(),
     LIVEPEER_API_KEY: str(),
     GITHUB_API_TOKEN: str(),
+    BUCKET_NAME: str(),
+    BUCKET_URL: str(),
+    OPENAI_API_KEY: str(),
   });
 };
 
