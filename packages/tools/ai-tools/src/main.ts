@@ -1,17 +1,10 @@
 import { createLabels, createSummary, createTranscription } from "./ai";
-import { getAssetInfo } from "../../av-tools/src/utils/livepeer";
-import { downloadM3U8ToMP3 } from "../../av-tools/src/utils/ffmpeg";
-import S3Client from "../../../app/lib/services/spacesService";
-import SessionService from "../../../new-server/src/services/session.service";
+import { getAssetInfo } from "@avtools/utils/livepeer";
+import { downloadM3U8ToMP3 } from "@avtools/utils/ffmpeg";
+import S3Service from "@app/lib/services/spacesService";
+import SessionService from "@server/services/session.service";
 import * as fs from "fs";
 import { join } from "path";
-
-let BUCKET_NAME: string | null = null;
-if (process.env.NODE_ENV === "production") {
-  BUCKET_NAME = "streameth-production";
-} else if (process.env.NODE_ENV === "development") {
-  BUCKET_NAME = "streameth-develop";
-}
 
 const TRANSCRIPTIONS_PATH = "transcriptions/";
 const TMP_MP3_PATH = "./tmp/mp3/";
@@ -34,7 +27,7 @@ async function startAITools(
   overwriteFiles = false,
   keepTmp = false
 ) {
-  if (!BUCKET_NAME) {
+  if (!process.env.BUCKET_NAME) {
     throw new Error(
       `BUCKET_NAME does not exist. What NODE_ENV are you running? NODE_ENV: ${process.env.NODE_ENV}`
     );
@@ -52,14 +45,7 @@ async function startAITools(
   const sessionService = new SessionService();
   const { sessions } = await sessionService.getAll({
     assetId: assetInfo.asset!.id!,
-    event: "",
-    organization: "",
-    speaker: "",
-    stageId: "",
-    onlyVideos: false,
-    size: 0,
-    page: 0,
-  });
+  } as any);
   if (sessions.length !== 1) {
     throw new Error("Something went wrong when fetching the correct session");
   }
@@ -73,8 +59,8 @@ async function startAITools(
   );
   const digitalOceanPath = join(TRANSCRIPTIONS_PATH, `${sessionId}.txt`);
 
-  const s3 = new S3Client();
-  const data = await s3.getFile(BUCKET_NAME, digitalOceanPath);
+  const s3 = new S3Service();
+  const data = await s3.getFile(process.env.BUCKET_NAME, digitalOceanPath);
   if (Object.keys(data).length !== 0 && !overwriteFiles) {
     throw new Error("File already exists on Digital Ocean");
   }
@@ -98,7 +84,12 @@ async function startAITools(
   }
 
   const fileStream = fs.createReadStream(transcriptionFilePath);
-  await s3.uploadFile(BUCKET_NAME, digitalOceanPath, fileStream, "text/plain");
+  await s3.uploadFile(
+    process.env.BUCKET_NAME,
+    digitalOceanPath,
+    fileStream,
+    "text/plain"
+  );
 
   const labels = await createLabels(transcriptionFilePath);
   const summary = await createSummary(
@@ -108,7 +99,7 @@ async function startAITools(
   );
 
   await sessionService.update(sessionId, {
-    videoTranscription: `https://streamethapp.ams3.cdn.digitaloceanspaces.com/transcriptions/${sessionId}.txt`,
+    videoTranscription: `${process.env.BUCKET_URL}/transcriptions/${sessionId}.txt`,
     aiDescription: summary,
     autoLabels: labels,
   } as any);
@@ -118,8 +109,8 @@ async function startAITools(
   }
 }
 
-// startAITools("7a79da4e-19d4-44e1-9600-e4f927c47af9")
-//   .then(() => console.log("Ran successfully..."))
-//   .catch((err) => console.error("Error:", err));
+startAITools("7a79da4e-19d4-44e1-9600-e4f927c47af9", true)
+  .then(() => console.log("Ran successfully..."))
+  .catch((err) => console.error("Error:", err));
 
 export default startAITools;
