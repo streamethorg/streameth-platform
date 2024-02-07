@@ -1,10 +1,11 @@
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 import {
-  IEventModel,
   IEvent,
+  IEventModel,
 } from 'streameth-new-server/src/interfaces/event.interface'
 import { fetchOrganization } from './organizationService'
+import { IExtendedEvent } from '../types'
 
 export async function fetchEvents({
   organizationId,
@@ -14,9 +15,9 @@ export async function fetchEvents({
   organizationId?: string
   organizationSlug?: string
   date?: Date
-}): Promise<IEventModel[]> {
+}): Promise<IExtendedEvent[]> {
   try {
-    let data: IEventModel[] = []
+    let data: IExtendedEvent[] = []
 
     if (organizationId || organizationSlug) {
       const organization = await fetchOrganization({
@@ -57,7 +58,7 @@ export async function fetchEvent({
   eventId?: string
   eventSlug?: string
   organization?: string
-}): Promise<IEventModel | null> {
+}): Promise<IExtendedEvent | null> {
   try {
     if (!eventId && !eventSlug) {
       return null
@@ -106,15 +107,41 @@ export const createEvent = async ({
   }
 }
 
-export const deleteEvent = async ({
-  eventSlug,
+export const updateEvent = async ({
+  event,
   authToken,
 }: {
-  eventSlug: string
+  event: IExtendedEvent
+  authToken: string
+}): Promise<IEventModel> => {
+  const modifiedObject = (({ _id, ...rest }) => rest)(event)
+  try {
+    const response = await fetch(`${apiUrl()}/events/${event._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(modifiedObject),
+    })
+    if (!response.ok) {
+      throw 'Error updating event'
+    }
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateEvent', e)
+    throw e
+  }
+}
+export const deleteEvent = async ({
+  eventId,
+  authToken,
+}: {
+  eventId: string
   authToken: string
 }): Promise<IEventModel> => {
   try {
-    const response = await fetch(`${apiUrl()}/events/${eventSlug}`, {
+    const response = await fetch(`${apiUrl()}/events/${eventId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -124,8 +151,8 @@ export const deleteEvent = async ({
     if (!response.ok) {
       throw 'Error deleting event'
     }
-    console.log(response)
-    return (await response.json()).data
+
+    return await response.json()
   } catch (e) {
     console.log('error in deleteEvent', e)
     throw e

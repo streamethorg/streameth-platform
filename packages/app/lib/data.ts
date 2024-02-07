@@ -1,7 +1,6 @@
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 
-import { NavBarProps, IPagination } from './types'
+import { NavBarProps, IPagination, IExtendedSession } from './types'
 import FuzzySearch from 'fuzzy-search'
 import { apiUrl } from '@/lib/utils/utils'
 
@@ -54,7 +53,10 @@ export async function fetchAllSessions({
   page?: number
   limit?: number
   searchQuery?: string
-}): Promise<{ sessions: ISessionModel[]; pagination: IPagination }> {
+}): Promise<{
+  sessions: IExtendedSession[]
+  pagination: IPagination
+}> {
   const params: ApiParams = {
     event,
     stage,
@@ -66,7 +68,10 @@ export async function fetchAllSessions({
     date,
   }
   const response = await fetch(
-    constructApiUrl(`${apiUrl()}/sessions`, params)
+    constructApiUrl(`${apiUrl()}/sessions`, params), 
+    {
+      cache: 'no-store',
+    }
   )
   const a = await response.json()
   const allSessions = a.data
@@ -116,7 +121,7 @@ export const fetchSession = async ({
   session,
 }: {
   session: string
-}): Promise<ISessionModel | null> => {
+}): Promise<IExtendedSession | null> => {
   try {
     const response = await fetch(`${apiUrl()}/sessions/${session}`)
     if (!response.ok) {

@@ -4,9 +4,9 @@ import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { createStage, deleteStage } from '../services/stageService'
 import { cookies } from 'next/headers'
 
-const livepeer = new Livepeer({
-  apiKey: process.env.LIVEPEER_API_KEY,
-})
+  const livepeer = new Livepeer({
+    apiKey: process.env.LIVEPEER_API_KEY,
+  })
 
 export const createStageAction = async ({
   stage,
@@ -29,6 +29,7 @@ export const createStageAction = async ({
         },
         body: JSON.stringify({
           name: stage.name,
+          record: true
         }),
       }
     )

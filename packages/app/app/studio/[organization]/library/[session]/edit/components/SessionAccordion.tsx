@@ -15,13 +15,18 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { sessionSchema } from '@/lib/schema'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { useState } from 'react'
+import { toast } from 'sonner'
+import { updateSessionAction } from '@/lib/actions/sessions'
+import { IExtendedSession } from '@/lib/types'
 
 const SessionAccordion = ({
   session,
 }: {
-  session: ISessionModel
+  session: IExtendedSession
 }) => {
+  const [isUpdatingSession, setIsUpdatingSession] =
+    useState<boolean>(false)
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
     defaultValues: {
@@ -36,8 +41,32 @@ const SessionAccordion = ({
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof sessionSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    setIsUpdatingSession(true)
+    const response = updateSessionAction({
+      session: {
+        ...values,
+        _id: session._id,
+        speakers: session.speakers,
+        organizationId: session.organizationId,
+        eventId: session.eventId,
+        stageId: session.stageId,
+        start: session.start,
+        end: session.end,
+      },
+    })
+      .then((response) => {
+        if (response) {
+          toast.success('Session updated')
+        } else {
+          toast.error('Error updating session')
+        }
+      })
+      .catch(() => {
+        toast.error('Error updating session')
+      })
+      .finally(() => {
+        setIsUpdatingSession(false)
+      })
   }
 
   return (
@@ -140,7 +169,10 @@ const SessionAccordion = ({
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
+        <Button
+          disabled={isUpdatingSession}
+          className="w-full"
+          type="submit">
           Save changes
         </Button>
       </form>

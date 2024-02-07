@@ -20,26 +20,29 @@ const Layout = ({
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
-  return <>Unauthroised</>
+  const userSession = cookies().get('user-session')
+  if (!userSession?.value) {
+    return <>Unauthroised</>
+  }
 
   const links = [
     {
       title: 'Home',
       icon: Inbox,
       variant: 'ghost' as variant,
-      href: '/studio/base',
+      href: `/studio/${params.organization}`,
     },
     {
       title: 'Library',
       icon: File,
       variant: 'ghost' as variant,
-      href: '/studio/base/library',
+      href: `/studio/${params.organization}/library`,
     },
     {
       title: 'Settings',
       icon: File,
       variant: 'ghost' as variant,
-      href: '/studio/base/settings',
+      href: `/studio/${params.organization}/settings`,
     },
   ]
   const headersList = headers()

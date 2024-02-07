@@ -1,18 +1,18 @@
 import SpeakerCard from './SpeakerCard'
 
 import { fetchEventSpeakers, fetchAllSessions } from '@/lib/data'
-import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { IExtendedEvent } from '@/lib/types'
 
 const SpeakerComponent = async ({
   event,
 }: {
-  event: IEventModel
+  event: IExtendedEvent
 }) => {
   const speakers = await fetchEventSpeakers({
     event: event.slug,

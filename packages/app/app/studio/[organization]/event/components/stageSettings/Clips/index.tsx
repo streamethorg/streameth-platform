@@ -1,22 +1,22 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
 import { useNavigation } from '../../navigation/navigationContext'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { IExtendedSession } from '@/lib/types'
 
 const Clips = ({
   stage,
   sessions,
 }: {
   stage: IStageModel
-  sessions: ISessionModel[]
+  sessions: IExtendedSession[]
 }) => {
   const [selectedSession, setSelectedSession] = useState<
-    ISessionModel | undefined
+    IExtendedSession | undefined
   >()
 
   useEffect(() => {
@@ -45,7 +45,6 @@ const Clips = ({
             <div className="flex flex-row space-x-2">
               <Button
                 variant={'secondary'}
-                className=""
                 onClick={() => {
                   setSelectedStageSetting('settings')
                 }}>
@@ -68,7 +67,7 @@ const Clips = ({
           {sessions.length > 0 &&
             sessions.map((session) => (
               <SessionCard
-                key={session.id}
+                key={session._id}
                 session={session}
                 selectedSession={selectedSession}
                 setSelectedSession={setSelectedSession}

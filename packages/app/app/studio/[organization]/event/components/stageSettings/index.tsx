@@ -3,14 +3,14 @@ import StreamConfig from './StreamConfig'
 import Clips from './Clips'
 import { useNavigation } from '../navigation/navigationContext'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
+import { IExtendedSession } from '@/lib/types'
 const StageSettings = ({
   stages,
   sessions,
 }: {
   stages: IStageModel[]
 
-  sessions: ISessionModel[]
+  sessions: IExtendedSession[]
 }) => {
   const { selectedStage, selectedSetting } = useNavigation()
 

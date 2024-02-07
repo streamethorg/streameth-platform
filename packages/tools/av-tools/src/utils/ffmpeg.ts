@@ -180,6 +180,7 @@ export async function Split(
 
   for (const session of sessions) {
     const file = `${CONFIG.ASSET_FOLDER}/splits/${session.id}.mp4`;
+    const ffmpegPath = ""
     console.log("Split to", session.id, session.start, session.end);
 
     if (existsSync(file)) {
@@ -203,3 +204,12 @@ export async function Split(
     }
   }
 }
+function concat(arg0: {
+  output: string; videos: string[]; frameFormat: string; tempDir: string; transition: {
+    name: string; // Options: fade, directionalwipe, circleopen, squareswire
+    duration: number;
+  };
+}) {
+  throw new Error("Function not implemented.");
+}
+

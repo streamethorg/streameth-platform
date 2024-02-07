@@ -46,7 +46,6 @@
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
     "@google-cloud/local-auth": "^2.1.1",
-    "@livepeer/react": "^2.5.8",
     "@remotion/bundler": "4.0.77",
     "@remotion/cli": "4.0.77",
     "@remotion/eslint-config": "4.0.77",
