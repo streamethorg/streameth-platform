@@ -34,17 +34,11 @@
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
       "@aitools/*": ["../tools/ai-tools/src/*"],
-      "@avtools/*": ["../tools/av-tools/src/*"],
+      "@avtools/*": ["../tools/av-tools/utils/src/*"],
       "@app/*": ["../app/*"],
-      "@server/*": ["./src/*"],
-    },
+      "@server/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*"],
-  "exclude": [
-    "node_modules",
-    "src/http",
-    "src/logs",
-    "src/tests",
-    "src/routes",
-  ],
+  "exclude": ["node_modules", "src/http", "src/logs", "src/tests", "src/routes"]
 }

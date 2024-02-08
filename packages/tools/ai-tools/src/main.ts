@@ -1,6 +1,6 @@
 import { createLabels, createSummary, createTranscription } from "./ai";
-import { getAssetInfo } from "@avtools/utils/livepeer";
-import { downloadM3U8ToMP3 } from "@avtools/utils/ffmpeg";
+import { getAssetInfo } from "@avtools/livepeer";
+import { downloadM3U8ToMP3 } from "@avtools/ffmpeg";
 import S3Service from "@app/lib/services/spacesService";
 import SessionService from "@server/services/session.service";
 import * as fs from "fs";

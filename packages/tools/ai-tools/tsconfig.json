@@ -22,7 +22,7 @@
     "paths": {
       "@server/*": ["../../new-server/src/*"],
       "@app/*": ["../../app/*"],
-      "@avtools/*": ["../av-tools/src/*"]
+      "@avtools/*": ["../av-tools/utils/src/*"]
     }
   },
   "include": ["src/**/*"],
