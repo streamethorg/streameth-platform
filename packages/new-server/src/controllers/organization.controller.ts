@@ -23,6 +23,9 @@ import {
 export class OrganizationController extends Controller {
   private organizationService = new OrganizationService();
 
+  /**
+   * @summary Create organization
+   */
   @Security('jwt')
   @SuccessResponse('201')
   @Post()
@@ -33,6 +36,9 @@ export class OrganizationController extends Controller {
     return SendApiResponse('organization created', org);
   }
 
+  /**
+   * @summary Update organization
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{organizationId}')
@@ -44,17 +50,26 @@ export class OrganizationController extends Controller {
     return SendApiResponse('event updated', org);
   }
 
-  // @Security('jwt', ['org'])
+  /**
+   * @summary Add members to organization
+   */
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('/members/{organizationId}')
-  async updateOrganizationMember(
+  async updateOrgMembers(
     @Path() organizationId: string,
-    @Body() body: Pick<CreateOrganizationDto, "walletAddress">,
+    @Body() body: Pick<CreateOrganizationDto, 'walletAddress'>,
   ): Promise<IStandardResponse<void>> {
-    const org = await this.organizationService.updateOrganizationMembers(organizationId, body.walletAddress);
+    const org = await this.organizationService.updateOrgMembers(
+      organizationId,
+      body.walletAddress,
+    );
     return SendApiResponse('member added', org);
   }
 
+  /**
+   * @summary Get organization by
+   */
   @SuccessResponse('200')
   @Get('{organizationId}')
   async getOrganizationById(
@@ -64,6 +79,9 @@ export class OrganizationController extends Controller {
     return SendApiResponse('organization fetched', org);
   }
 
+  /**
+   * @summary Get all organizations
+   */
   @SuccessResponse('200')
   @Get()
   async getAllOrganizations(): Promise<
@@ -73,6 +91,9 @@ export class OrganizationController extends Controller {
     return SendApiResponse('organizations fetched', orgs);
   }
 
+  /**
+   * @summary Delete organization
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{organizationId}')

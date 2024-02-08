@@ -19,7 +19,9 @@ export class UserController extends Controller {
   @Security('jwt')
   @SuccessResponse('200')
   @Get('{walletAddress}')
-  async getUserById(@Path() walletAddress: string): Promise<IStandardResponse<IUser>> {
+  async getUserById(
+    @Path() walletAddress: string,
+  ): Promise<IStandardResponse<IUser>> {
     const user = await this.userService.get(walletAddress);
     return SendApiResponse('user fetched', user);
   }

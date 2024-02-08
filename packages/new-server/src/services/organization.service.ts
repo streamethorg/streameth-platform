@@ -62,14 +62,11 @@ export default class OrganizationService {
     return await this.controller.store.delete(organizationId);
   }
 
-  async updateOrganizationMembers(
-    organizationId: string,
-    walletAddress: string
-  ) {
+  async updateOrgMembers(organizationId: string, walletAddress: string) {
     await this.get(organizationId);
-    let x = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { walletAddress: walletAddress },
       { $addToSet: { organizations: organizationId } },
-    )
+    );
   }
 }
