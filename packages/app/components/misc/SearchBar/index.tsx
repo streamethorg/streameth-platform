@@ -61,7 +61,7 @@ export default function SearchBar(): JSX.Element {
   }
 
   return (
-    <div className="flex max-w-[500px] flex-col items-center justify-center relative w-full">
+    <div className="flex max-w-[500px] flex-col items-center justify-center relative w-full p-2">
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -81,11 +81,11 @@ export default function SearchBar(): JSX.Element {
       {isOpened && debouncedSearchQuery && (
         <div
           ref={dropdownRef}
-          className="rounded  mt-1 w-full absolute top-[41px] max-w-[500px]">
+          className="w-full absolute top-[55px] p-2 max-w-[500px] bg-secondary">
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <div className="flex flex-col p-2 bg-white">
+            <div className="flex flex-col bg-white">
               {searchResults.length > 0 && (
                 <div className="mt-2">
                   <div className="text font-bold">Videos</div>
@@ -103,7 +103,7 @@ export default function SearchBar(): JSX.Element {
                 </div>
               )}
               {eventResults.length > 0 && (
-                <div className="mt-2">
+                <div className="mt-2 mx-2 p-2">
                   <div className="text font-bold">Events</div>
                   {eventResults.map((result: IEventSearchResult) => (
                     <div
