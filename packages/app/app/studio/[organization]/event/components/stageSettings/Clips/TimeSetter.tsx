@@ -21,6 +21,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
 
   const handleSetTime = () => {
     if (playbackStatus) {
+      console.log('playbackStatus', playbackStatus)
       const timeSetting = {
         unix: Date.now() - playbackStatus.offset,
         displayTime: playbackStatus.progress.toFixed(0).toString(),

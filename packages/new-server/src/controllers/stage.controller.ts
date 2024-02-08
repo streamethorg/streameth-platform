@@ -1,4 +1,6 @@
-import { StageDto } from '@dtos/stage.dto';
+import { OrgIdDto } from '@dtos/organization/orgid.dto';
+import { CreateStageDto } from '@dtos/stage/create-stage.dto';
+import { UpdateStageDto } from '@dtos/stage/update-stage.dto';
 import { IStage } from '@interfaces/stage.interface';
 import StageService from '@services/stage.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -21,22 +23,22 @@ import {
 export class StageController extends Controller {
   private stageService = new StageService();
 
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post()
   async createStage(
-    @Body() body: StageDto,
+    @Body() body: CreateStageDto,
   ): Promise<IStandardResponse<IStage>> {
     const stage = await this.stageService.create(body);
     return SendApiResponse('stage created', stage);
   }
 
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{stageId}')
   async editStage(
     @Path() stageId: string,
-    @Body() body: StageDto,
+    @Body() body: UpdateStageDto,
   ): Promise<IStandardResponse<IStage>> {
     const stage = await this.stageService.update(stageId, body);
     return SendApiResponse('stage updated', stage);
@@ -67,10 +69,13 @@ export class StageController extends Controller {
     return SendApiResponse('stages fetched', stages);
   }
 
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{stageId}')
-  async deleteStage(@Path() stageId: string): Promise<IStandardResponse<void>> {
+  async deleteStage(
+    @Path() stageId: string,
+    @Body() organizationId: OrgIdDto,
+  ): Promise<IStandardResponse<void>> {
     const stage = await this.stageService.deleteOne(stageId);
     return SendApiResponse('deleted', stage);
   }

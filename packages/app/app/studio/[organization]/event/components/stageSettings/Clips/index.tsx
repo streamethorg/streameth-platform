@@ -45,7 +45,6 @@ const Clips = ({
             <div className="flex flex-row space-x-2">
               <Button
                 variant={'secondary'}
-                className=""
                 onClick={() => {
                   setSelectedStageSetting('settings')
                 }}>

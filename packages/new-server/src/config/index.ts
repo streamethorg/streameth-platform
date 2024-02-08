@@ -19,5 +19,5 @@ export const config = {
   jwt: {
     secret: validatedEnv.JWT_SECRET,
     expiry: validatedEnv.JWT_EXPIRY,
-  }
+  },
 };

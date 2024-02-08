@@ -11,17 +11,9 @@ import {
 } from '@livepeer/react'
 import { useClipContext } from './ClipContext'
 
-const StudioPlayer = () => {
-  const {
-    selectedStreamSession,
-    setSelectedStreamSession,
-    playbackStatus,
-    setPlaybackStatus,
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
-  } = useClipContext()
+const StudioPlayer = ({ playbackId }: { playbackId: string }) => {
+  const { selectedStreamSession, setPlaybackStatus } =
+    useClipContext()
 
   const playbackStatusSelector = useCallback(
     (
@@ -41,16 +33,12 @@ const StudioPlayer = () => {
     },
     []
   )
+  const src = `${'https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/'}${playbackId}/${selectedStreamSession?.id}/output.m3u8`
 
   return (
     <Player
-      // src={
-      //   isCreatingClip
-      //     ?
-      //     : undefined
-      // }
-      src={selectedStreamSession?.recordingUrl}
-      // playbackId={selectedStreamSession?.playbackId}
+      playRecording
+      src={src}
       autoPlay
       muted
       playbackStatusSelector={playbackStatusSelector}
