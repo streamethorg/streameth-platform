@@ -71,7 +71,7 @@ const SessionInfoBox = ({
           ? 'text-white rounded-lg border bg-card text-card-foreground shadow bg-opacity-10 bg-white border-white border-opacity-10'
           : ''
       }`}>
-      <CardHeader className=" p-2 lg:p-2 flex w-full items-center justify-between flex-row">
+      <CardHeader className=" p-2 lg:p-2 flex w-full items-center justify-between flex-col lg:flex-row">
         <div className="md:flex flex-col">
           <CardTitle className="">{title}</CardTitle>
           <CardDescription>
@@ -82,7 +82,7 @@ const SessionInfoBox = ({
             </div>
           </CardDescription>
         </div>
-        <div className="md:flex hidden flex-row mt-2 space-x-1 lg:my-0 lg:ml-auto">
+        <div className="flex flex-row space-x-1 my-0 ml-auto">
           <ShareButton />
           <EmbedButton
             streamId={streamId}
@@ -91,12 +91,12 @@ const SessionInfoBox = ({
           />
           {assetId && <VideoDownload assetId={assetId} />}
         </div>
-        <DropdownMenuWithActionButtons
+        {/* <DropdownMenuWithActionButtons
           streamId={streamId}
           playbackId={playbackId}
           playerName={playerName}
           assetId={assetId}
-        />
+        /> */}
       </CardHeader>
       {description !== '' && (
         <CardContent className="relative p-2 lg:p-2  border-t">
