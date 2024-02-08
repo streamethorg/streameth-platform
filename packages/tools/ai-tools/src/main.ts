@@ -37,7 +37,7 @@ async function startAITools(
     throw new Error("Invalid asset ID");
   }
 
-  const assetInfo = await getAssetInfo(assetId); //{id:"", playbackUrl:""}
+  const assetInfo = await getAssetInfo(assetId);
   if (!assetInfo || assetInfo.statusCode !== 200) {
     throw new Error("Asset does not exist");
   }
