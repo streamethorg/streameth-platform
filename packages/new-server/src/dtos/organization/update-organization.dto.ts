@@ -1,28 +1,35 @@
-import { IOrganization } from '@interfaces/organization.interface';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class OrganizationDto implements IOrganization {
-  @IsNotEmpty()
+export class UpdateOrganizationDto {
+  @IsOptional()
   @IsString()
   name!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   description!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   url!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   logo!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   location!: string;
 
   @IsOptional()
   @IsString()
   accentColor?: string;
+
+  @IsOptional()
+  @IsString()
+  walletAddress: string;
+
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string;
 }

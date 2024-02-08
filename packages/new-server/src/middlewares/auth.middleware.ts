@@ -27,11 +27,20 @@ export const expressAuthentication = async (
       if (!user) {
         throw new Error('Authentication Failed/Invalid Token');
       }
+      if (
+        scopes.length > 0 &&
+        !user.organizations.includes(
+          req.body.organizationId ?? req.params.organizationId,
+        )
+      ) {
+        throw new Error('Insufficient permissions to execute action');
+      }
       return user;
     } catch (e) {
-      throw new Error('Authentication Failed/Invalid Token');
+      if (e instanceof jwt.JsonWebTokenError) {
+        throw new Error('Authentication Failed/Invalid Token');
+      }
+      throw e;
     }
-  } else {
-    throw new Error('Authentication failed');
   }
 };

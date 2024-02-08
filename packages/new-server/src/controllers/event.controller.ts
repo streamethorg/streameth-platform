@@ -14,7 +14,9 @@ import {
   Tags,
   Security,
 } from 'tsoa';
-import { EventDto } from '@dtos/event.dto';
+import { CreateEventDto } from '@dtos/event/create-event.dto';
+import { UpdateEventDto } from '@dtos/event/update-event.dto';
+import { OrgIdDto } from '@dtos/organization/orgid.dto';
 @Tags('Event')
 @Route('events')
 export class EventController extends Controller {
@@ -23,11 +25,11 @@ export class EventController extends Controller {
   /**
    * @summary Creates Event
    */
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('')
   async createEvent(
-    @Body() body: EventDto,
+    @Body() body: CreateEventDto,
   ): Promise<IStandardResponse<IEvent>> {
     const event = await this.eventService.create(body);
     return SendApiResponse('event created', event);
@@ -36,12 +38,12 @@ export class EventController extends Controller {
   /**
    * @summary Update Event
    */
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{eventId}')
   async editEvent(
     @Path() eventId: string,
-    @Body() body: EventDto,
+    @Body() body: UpdateEventDto,
   ): Promise<IStandardResponse<IEvent>> {
     const event = await this.eventService.update(eventId, body);
     return SendApiResponse('event udpated', event);
@@ -72,10 +74,13 @@ export class EventController extends Controller {
     return SendApiResponse('events fetched', events);
   }
 
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{eventId}')
-  async deleteEvent(@Path() eventId: string): Promise<IStandardResponse<void>> {
+  async deleteEvent(
+    @Path() eventId: string,
+    @Body() organizationId: OrgIdDto,
+  ): Promise<IStandardResponse<void>> {
     await this.eventService.deleteOne(eventId);
     return SendApiResponse('deleted');
   }
