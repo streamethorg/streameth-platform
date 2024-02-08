@@ -47,7 +47,7 @@ export default class EventService {
   }
 
   async getAll(): Promise<Array<IEvent>> {
-    return await this.controller.store.findAll({}, this.path);
+    return await this.controller.store.findAll({ unlisted: false }, this.path);
   }
 
   async findAllOwnedEvents(organizationId: string): Promise<Array<IEvent>> {

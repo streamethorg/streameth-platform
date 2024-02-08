@@ -14,10 +14,10 @@ export default class UserService {
   async create(data: IUser): Promise<IUser> {
     return this.controller.store.create('', data, this.path);
   }
-  async get(id: string): Promise<IUser> {
-    const findUser = await User.findOne({ walletAddress: id }).populate(
-      'organizations',
-    );
+  async get(walletAddress: string): Promise<IUser> {
+    const findUser = await User.findOne({
+      walletAddress: walletAddress,
+    }).populate('organizations');
     if (!findUser) throw new HttpException(404, 'User not found');
     return findUser;
   }

@@ -15,6 +15,7 @@ export class IStage {
   plugins?: IPlugin[];
   order?: number;
   slug?: string;
+  organizationId: Types.ObjectId | string;
 }
 
 export interface IStageModel extends IStage, Document {}
