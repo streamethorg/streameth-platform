@@ -41,8 +41,8 @@ export default function CreateEventForm({
     defaultValues: {
       name: '',
       description: '',
-      start: '', // Adjust according to your UI component's expected format
-      end: '', // Adjust according to your UI component's expected format
+      start: new Date(), // Adjust according to your UI component's expected format
+      end: new Date(), // Adjust according to your UI component's expected format
       location: '',
       eventCover: '',
       logo: '',
@@ -145,7 +145,7 @@ export default function CreateEventForm({
                   <FormLabel className="">Start Date</FormLabel>
                   <FormControl>
                     <DatePicker
-                      value={new Date(field.value)}
+                      value={field.value}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -179,7 +179,7 @@ export default function CreateEventForm({
                   <FormLabel className="">End Date</FormLabel>
                   <FormControl>
                     <DatePicker
-                      value={new Date(field.value)}
+                      value={field.value}
                       onChange={field.onChange}
                     />
                   </FormControl>

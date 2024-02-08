@@ -15,7 +15,9 @@ export default class UserService {
     return this.controller.store.create('', data, this.path);
   }
   async get(id: string): Promise<IUser> {
-    const findUser = await User.findById(id).populate('organizations');
+    const findUser = await User.findOne({ walletAddress: id }).populate(
+      'organizations',
+    );
     if (!findUser) throw new HttpException(404, 'User not found');
     return findUser;
   }

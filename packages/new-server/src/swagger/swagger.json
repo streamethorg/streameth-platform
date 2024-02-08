@@ -399,9 +399,6 @@
 						"format": "double"
 					}
 				},
-				"required": [
-					"streamUrl"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -424,13 +421,6 @@
 						"format": "double"
 					}
 				},
-				"required": [
-					"livepeerId",
-					"videoUrl",
-					"ipfsHash",
-					"format",
-					"duration"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -929,10 +919,12 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					},
 					"end": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					},
 					"location": {
 						"type": "string"

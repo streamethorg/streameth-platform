@@ -64,7 +64,7 @@ const siweConfig = {
   getSession: async () => {
     if (localStorage.getItem('SWIEToken')) {
       return {
-        address: '0xA93950A195877F4eBC8A4aF3F6Ce2a109404b575',
+        address: '0xcf2aE5CE38f2bceFb55601dF50856573CC5b7bc2',
         chainId: 1,
       }
     }
@@ -91,7 +91,7 @@ const config = createConfig(
       [mainnet.id]: http(),
       [base.id]: http(),
     },
-ssr: true,
+    ssr: true,
     // Required API Keys
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
@@ -112,9 +112,9 @@ const SiweContext = (props: PropsWithChildren) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        {/* <SIWEProvider {...siweConfig}> */}
+        <SIWEProvider {...siweConfig}>
           <ConnectKitProvider>{props.children}</ConnectKitProvider>
-        {/* </SIWEProvider> */}
+        </SIWEProvider>
       </QueryClientProvider>
     </WagmiProvider>
   )

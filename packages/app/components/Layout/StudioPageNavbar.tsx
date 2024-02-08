@@ -1,12 +1,15 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
+import { UserContext } from '@/lib/context/UserContext'
+import Combobox from '../ui/combo-box'
+import { useRouter } from 'next/navigation'
 
 const NavBarButton = ({
   isNavVisible,
@@ -35,6 +38,8 @@ const StudioPageNavbar = ({
 }) => {
   const isMobile = useMediaQuery('(max-width: 1025px)')
   const [menuVisible, setMenuVisible] = useState(false)
+  const { userOrganizations } = useContext(UserContext)
+  const router = useRouter()
 
   useEffect(() => {
     setMenuVisible(!isMobile)
@@ -76,6 +81,17 @@ const StudioPageNavbar = ({
       </div>
       <div className="flex-grow mx-2 flex justify-center">
         {children}
+      </div>
+      <div>
+        <Combobox
+          items={userOrganizations as any[]}
+          valueKey="slug"
+          labelKey="name"
+          value="Switch Organization"
+          setValue={(org) => {
+            router.push(`/studio/${org}`)
+          }}
+        />
       </div>
       <div className="ml-auto flex flex-row items-center justify-end h-full">
         {menuVisible && (

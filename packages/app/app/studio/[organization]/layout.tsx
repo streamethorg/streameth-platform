@@ -4,6 +4,7 @@ import { File, Inbox } from 'lucide-react'
 import { studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
 import { cookies } from 'next/headers'
+import React from 'react'
 
 export type variant =
   | 'default'
@@ -20,10 +21,7 @@ const Layout = ({
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
-  const userSession = cookies().get('user-session')
-  if (!userSession?.value) {
-    return <>Unauthroised</>
-  }
+  // return <>Unauthroised</>
 
   const links = [
     {

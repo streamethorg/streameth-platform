@@ -201,7 +201,7 @@ const models: TsoaRoute.Models = {
     "ISource": {
         "dataType": "refObject",
         "properties": {
-            "streamUrl": {"dataType":"string","required":true},
+            "streamUrl": {"dataType":"string"},
             "start": {"dataType":"double"},
             "end": {"dataType":"double"},
         },
@@ -211,11 +211,11 @@ const models: TsoaRoute.Models = {
     "IPlayback": {
         "dataType": "refObject",
         "properties": {
-            "livepeerId": {"dataType":"string","required":true},
-            "videoUrl": {"dataType":"string","required":true},
-            "ipfsHash": {"dataType":"string","required":true},
-            "format": {"dataType":"string","required":true},
-            "duration": {"dataType":"double","required":true},
+            "livepeerId": {"dataType":"string"},
+            "videoUrl": {"dataType":"string"},
+            "ipfsHash": {"dataType":"string"},
+            "format": {"dataType":"string"},
+            "duration": {"dataType":"double"},
         },
         "additionalProperties": false,
     },
@@ -386,8 +386,8 @@ const models: TsoaRoute.Models = {
         "properties": {
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
-            "start": {"dataType":"string","required":true},
-            "end": {"dataType":"string","required":true},
+            "start": {"dataType":"datetime","required":true},
+            "end": {"dataType":"datetime","required":true},
             "location": {"dataType":"string","required":true},
             "logo": {"dataType":"string"},
             "banner": {"dataType":"string"},
