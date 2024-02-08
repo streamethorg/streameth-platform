@@ -71,7 +71,7 @@ const SessionInfoBox = ({
           ? 'text-white rounded-lg border bg-card text-card-foreground shadow bg-opacity-10 bg-white border-white border-opacity-10'
           : ''
       }`}>
-      <CardHeader className=" p-2 lg:p-2 flex w-full items-center justify-between flex-col lg:flex-row">
+      <CardHeader className=" p-2 lg:p-2 flex w-full lg:items-center justify-between flex-col lg:flex-row">
         <div className="md:flex flex-col">
           <CardTitle className="">{title}</CardTitle>
           <CardDescription>
