@@ -1,4 +1,4 @@
-import { SpeakerDto } from '@dtos/speaker.dto';
+import { CreateSpeakerDto } from '@dtos/speaker/create-speaker.dto';
 import { ISpeaker } from '@interfaces/speaker.interface';
 import SpeakerService from '@services/speaker.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -19,11 +19,11 @@ import {
 export class SpeakerController extends Controller {
   private speakerService = new SpeakerService();
 
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post()
   async createSpeaker(
-    @Body() body: SpeakerDto,
+    @Body() body: CreateSpeakerDto,
   ): Promise<IStandardResponse<ISpeaker>> {
     const createSpeaker = await this.speakerService.create(body);
     return SendApiResponse('speaker created', createSpeaker);

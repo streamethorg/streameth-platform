@@ -11,8 +11,8 @@ import {
 import * as express from 'express';
 import AuthService from '@services/auth.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import { UserDto } from '@dtos/user.dto';
-import { AuthDto } from '@dtos/auth.dto';
+import { UserDto } from '@dtos/user/user.dto';
+import { AuthDto } from '@dtos/auth/auth.dto';
 import { IUser } from '@interfaces/user.interface';
 @Tags('Auth')
 @Route('auth')
