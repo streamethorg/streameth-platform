@@ -21,6 +21,9 @@ const validateEnv = () => {
     BUCKET_NAME: str(),
     BUCKET_URL: str(),
     OPENAI_API_KEY: str(),
+    SPACES_KEY: str(),
+    SPACES_SECRET: str(),
+    LIVEPEER_WEBHOOK_SECRET: str(),
   });
 };
 
