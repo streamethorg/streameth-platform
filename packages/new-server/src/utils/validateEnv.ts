@@ -16,8 +16,14 @@ const validateEnv = () => {
     JWT_SECRET: str(),
     JWT_EXPIRY: str(),
     GOOGLE_API_KEY: str(),
-    NEXT_PUBLIC_STUDIO_API_KEY: str(),
+    LIVEPEER_API_KEY: str(),
     GITHUB_API_TOKEN: str(),
+    BUCKET_NAME: str(),
+    BUCKET_URL: str(),
+    OPENAI_API_KEY: str(),
+    SPACES_KEY: str(),
+    SPACES_SECRET: str(),
+    LIVEPEER_WEBHOOK_SECRET: str(),
   });
 };
 
