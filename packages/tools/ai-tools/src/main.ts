@@ -1,7 +1,7 @@
 import { createLabels, createSummary, createTranscription } from "./ai";
 import { getAssetInfo } from "@avtools/livepeer";
 import { downloadM3U8ToMP3 } from "@avtools/ffmpeg";
-import S3Service from "@app/lib/services/spacesService";
+//import S3Service from "@app/lib/services/spacesService";
 import SessionService from "@server/services/session.service";
 import * as fs from "fs";
 import { join } from "path";
@@ -59,11 +59,11 @@ async function startAITools(
   );
   const digitalOceanPath = join(TRANSCRIPTIONS_PATH, `${sessionId}.txt`);
 
-  const s3 = new S3Service();
-  const data = await s3.getFile(process.env.BUCKET_NAME, digitalOceanPath);
-  if (Object.keys(data).length !== 0 && !overwriteFiles) {
-    throw new Error("File already exists on Digital Ocean");
-  }
+  //const s3 = new S3Service();
+  // const data = await s3.getFile(process.env.BUCKET_NAME, digitalOceanPath);
+  // if (Object.keys(data).length !== 0 && !overwriteFiles) {
+  //   throw new Error("File already exists on Digital Ocean");
+  // }
 
   const downloadUrl = assetInfo.asset?.playbackUrl;
   await downloadM3U8ToMP3(downloadUrl!, sessionId, TMP_MP3_PATH, 9);
@@ -84,12 +84,12 @@ async function startAITools(
   }
 
   const fileStream = fs.createReadStream(transcriptionFilePath);
-  await s3.uploadFile(
-    process.env.BUCKET_NAME,
-    digitalOceanPath,
-    fileStream,
-    "text/plain"
-  );
+  // await s3.uploadFile(
+  //   process.env.BUCKET_NAME,
+  //   digitalOceanPath,
+  //   fileStream,
+  //   "text/plain"
+  // );
 
   const labels = await createLabels(transcriptionFilePath);
   const summary = await createSummary(
