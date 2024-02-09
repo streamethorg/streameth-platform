@@ -1284,12 +1284,26 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string",
-						"format": "date-time"
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"end": {
-						"type": "string",
-						"format": "date-time"
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"location": {
 						"type": "string"
@@ -1396,10 +1410,12 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					},
 					"end": {
-						"type": "string"
+						"type": "string",
+						"format": "date-time"
 					},
 					"location": {
 						"type": "string"

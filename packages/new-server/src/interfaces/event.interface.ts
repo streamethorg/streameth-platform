@@ -25,8 +25,8 @@ export interface IPlugins {
 export interface IEvent {
   name: string;
   description: string;
-  start: Date;
-  end: Date;
+  start: Date | string;
+  end: Date | string;
   location: string;
   logo?: string;
   banner?: string;

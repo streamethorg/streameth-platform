@@ -469,8 +469,8 @@ const models: TsoaRoute.Models = {
         "properties": {
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
-            "start": {"dataType":"datetime","required":true},
-            "end": {"dataType":"datetime","required":true},
+            "start": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}],"required":true},
+            "end": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}],"required":true},
             "location": {"dataType":"string","required":true},
             "logo": {"dataType":"string"},
             "banner": {"dataType":"string"},
@@ -507,8 +507,8 @@ const models: TsoaRoute.Models = {
         "properties": {
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
-            "start": {"dataType":"string","required":true},
-            "end": {"dataType":"string","required":true},
+            "start": {"dataType":"datetime","required":true},
+            "end": {"dataType":"datetime","required":true},
             "location": {"dataType":"string","required":true},
             "logo": {"dataType":"string","required":true},
             "banner": {"dataType":"string","required":true},
