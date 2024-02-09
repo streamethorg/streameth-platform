@@ -15,7 +15,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { createPublicClient } from 'viem'
 
 let nonce: string
 let walletAddress: string
@@ -55,18 +54,32 @@ const siweConfig = {
     if (!res.ok) throw new Error('Failed to Verify')
     const data = (await res.json()).data
     localStorage.setItem('SWIEToken', data.token)
+    localStorage.setItem('address', walletAddress)
     // save to user-session cookie
     storeSession({
       token: data.token,
+      address: walletAddress,
     })
     return data
   },
   getSession: async () => {
     if (localStorage.getItem('SWIEToken')) {
-      return {
-        address: '0xcf2aE5CE38f2bceFb55601dF50856573CC5b7bc2',
-        chainId: 1,
-      }
+      const res = await fetch(`${apiUrl()}/auth/verify-token`, {
+        method: 'POST',
+        body: JSON.stringify({
+          token: localStorage.getItem('SWIEToken'),
+        }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      const resData = (await res.json()).data
+      const address = localStorage.getItem('address')
+      if (resData && address) {
+        return {
+          address: address as string,
+          chainId: 1,
+        }
+      } else return null
     }
     return null
   },
@@ -75,9 +88,11 @@ const siweConfig = {
     // delete user-session cookie
     storeSession({
       token: '',
+      address: '',
     })
     // delete token
     localStorage.removeItem('SWIEToken')
+    localStorage.removeItem('address')
     return true
   },
 } satisfies SIWEConfig

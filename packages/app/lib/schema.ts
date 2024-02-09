@@ -67,6 +67,7 @@ export const StageSchema = z.object({
   streamSettings: IStreamSettingsSchema,
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
+  organizationId: z.string(),
 })
 
 // Sessions
@@ -125,4 +126,5 @@ export const organizationSchema = z.object({
   location: z.string(),
   accentColor: z.string().optional(),
   slug: z.string().optional(),
+  walletAddress: z.string(),
 })

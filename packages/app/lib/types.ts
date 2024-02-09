@@ -65,7 +65,8 @@ export interface studioPageParams {
 export interface IExtendedEvent extends IEvent {
   _id: string
 }
-export interface IExtendedOrganization extends IOrganization {
+export interface IExtendedOrganization
+  extends Omit<IOrganization, '_id'> {
   _id: string
 }
 export interface IExtendedSession extends Omit<ISession, '_id'> {

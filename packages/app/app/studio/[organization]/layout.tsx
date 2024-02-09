@@ -5,6 +5,10 @@ import { studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
 import { cookies } from 'next/headers'
 import React from 'react'
+import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
+import { fetchUserAction } from '@/lib/actions/users'
+import CreateOrganization from '../(home)/components/CreateOrganizationForm'
+import SwitchOrganization from './components/SwitchOrganization'
 
 export type variant =
   | 'default'
@@ -14,14 +18,44 @@ export type variant =
   | 'ghost'
   | 'link'
 
-const Layout = ({
+const Layout = async ({
   children,
   params,
 }: {
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
-  // return <>Unauthroised</>
+  const userSession = cookies().get('user-session')
+  if (!userSession?.value) {
+    return (
+      <div className="flex flex-col items-center h-screen justify-center">
+        <h3>
+          You do not have access to this page, Sign in to continue
+        </h3>
+        <ConnectWalletButton />
+      </div>
+    )
+  }
+  const userData = userSession?.value
+    ? await fetchUserAction({})
+    : null
+  const isOrganizationAllowed = userData?.organizations?.some(
+    (organization) => organization.slug === params.organization
+  )
+  if (!isOrganizationAllowed) {
+    return (
+      <div className="flex flex-col items-center h-screen justify-center">
+        You do not belong to this organization, switch organization or
+        create a new one
+        <div className="flex gap-5 mt-5">
+          <SwitchOrganization
+            organizations={userData?.organizations}
+          />{' '}
+          <CreateOrganization />
+        </div>
+      </div>
+    )
+  }
 
   const links = [
     {

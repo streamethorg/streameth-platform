@@ -24,10 +24,12 @@ import { toast } from 'sonner'
 import { createOrganizationAction } from '@/lib/actions/organizations'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
+import { useAccount } from 'wagmi'
 
 export default function CreateOrganization() {
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { address } = useAccount()
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
     defaultValues: {
@@ -36,6 +38,7 @@ export default function CreateOrganization() {
       url: '',
       logo: '',
       location: '',
+      walletAddress: address,
     },
   })
 
@@ -46,7 +49,7 @@ export default function CreateOrganization() {
     })
       .then(() => {
         setIsOpen(false)
-        toast.success('Orgaiaztion created')
+        toast.success('Organization created')
       })
       .catch(() => {
         toast.error('Error creating stage')
@@ -59,7 +62,7 @@ export default function CreateOrganization() {
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <Button variant={'secondary'} onClick={() => setIsOpen(true)}>
-        Create
+        Create an Organization
       </Button>
       <DialogContent className="bg-background">
         <DialogHeader>
