@@ -38,7 +38,7 @@ export default function CreateOrganization() {
       url: '',
       logo: '',
       location: '',
-      walletAddress: address,
+      walletAddress: address as string,
     },
   })
 
