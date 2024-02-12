@@ -12,27 +12,40 @@ import { fetchUserAction } from '@/lib/actions/users'
 import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
 import { IExtendedUser } from '@/lib/types'
+import { Youtube } from 'lucide-react'
+import { apiUrl } from '@/lib/utils/utils'
 
 const Studio = async () => {
   const isAuthorized = CheckAuthorization()
+
   if (!isAuthorized) {
     return <AuthorizationMessage />
   }
   const userData: IExtendedUser = await fetchUserAction({})
+  const response = await fetch(`${apiUrl()}/auth/oauth2`, {
+    method: 'POST',
+  })
+  const another_response = await response.json()
+  const url = another_response.data || 'streameth.org'
 
   return (
-    <div className="flex flex-col p-4 h-full w-full">
+    <div className="flex flex-col p-4 w-full h-full">
       <div className="flex justify-between items-center mb-20">
         <h1>Studio</h1>
+        <div>
+          <Link href={url}>
+            <Youtube />
+          </Link>
+        </div>
         <CreateOrganization />
       </div>
       {userData?.organizations?.length > 0 ? (
-        <div className="grid grid-cols-3  gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {userData?.organizations?.map((organization) => (
             <Link
               key={organization._id}
               href={`/studio/${organization.slug}`}>
-              <Card className="flex h-[200px] overflow-hidden flex-row-reverse">
+              <Card className="flex overflow-hidden flex-row-reverse h-[200px]">
                 <CardHeader>
                   <CardTitle>{organization.name}</CardTitle>
                   <CardDescription>
@@ -52,7 +65,7 @@ const Studio = async () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col font-bold text-xl items-center justify-center">
+        <div className="flex flex-col justify-center items-center text-xl font-bold">
           No event found
         </div>
       )}
