@@ -14,6 +14,8 @@ import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { UserDto } from '@dtos/user/user.dto';
 import { AuthDto } from '@dtos/auth/auth.dto';
 import { IUser } from '@interfaces/user.interface';
+import validateOAuth from '@utils/validateOAuth';
+
 @Tags('Auth')
 @Route('auth')
 export class AuthController extends Controller {
@@ -44,5 +46,13 @@ export class AuthController extends Controller {
   ): Promise<IStandardResponse<boolean>> {
     const status = await this.authService.verifyToken(token);
     return SendApiResponse('success', status);
+  }
+
+  @SuccessResponse('200')
+  @Post('oauth2')
+  async loginYoutube(@Body() req: any): Promise<IStandardResponse<string>> {
+    const url = await validateOAuth();
+
+    return SendApiResponse('success', url);
   }
 }
