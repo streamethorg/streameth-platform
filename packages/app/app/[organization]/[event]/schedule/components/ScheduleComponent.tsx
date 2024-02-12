@@ -4,7 +4,7 @@ import SessionList from '@/components/sessions/SessionList'
 import { fetchAllSessions } from '@/lib/data'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { getEventDays } from '@/lib/utils/time'
-
+import { isSameDay } from '@/lib/utils/time'
 import {
   Card,
   CardContent,
@@ -20,7 +20,6 @@ const ScheduleComponent = async ({
   date,
 }: {
   stages: IStageModel[]
-
   event: IExtendedEvent
   stage?: string
   date?: string
@@ -30,10 +29,17 @@ const ScheduleComponent = async ({
     new Date(event.end)
   )
 
+  console.log(stage, date)
   const sessionsData = await fetchAllSessions({
     event: event.slug,
-    stage: stage,
-    date: date ? new Date(parseInt(date)) : undefined,
+    stageId: stage,
+  })
+
+  const sessions = sessionsData.sessions.filter((session) => {
+    if (date) {
+      return isSameDay(session.start, Number(date))
+    }
+    return true
   })
 
   if (!sessionsData.sessions.length) return null
@@ -50,10 +56,7 @@ const ScheduleComponent = async ({
       </CardHeader>
       <CardContent className="p-3 lg:p-6">
         <div className="w-full flex flex-col relative">
-          <SessionList
-            event={event}
-            sessions={sessionsData.sessions}
-          />
+          <SessionList event={event} sessions={sessions} />
         </div>
       </CardContent>
     </Card>

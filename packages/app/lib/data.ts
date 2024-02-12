@@ -10,7 +10,7 @@ import { fetchEventStages } from '@/lib/services/stageService'
 interface ApiParams {
   event?: string
   organization?: string
-  stage?: string
+  stageId?: string
   page?: number
   size?: number
   onlyVideos?: boolean
@@ -36,8 +36,7 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
 export async function fetchAllSessions({
   event,
   organizationSlug,
-  stage,
-  date,
+  stageId,
   speakerIds,
   onlyVideos,
   page = 1,
@@ -46,8 +45,7 @@ export async function fetchAllSessions({
 }: {
   event?: string
   organizationSlug?: string
-  stage?: string
-  date?: Date
+  stageId?: string
   speakerIds?: string[]
   onlyVideos?: boolean
   page?: number
@@ -59,13 +57,12 @@ export async function fetchAllSessions({
 }> {
   const params: ApiParams = {
     event,
-    stage,
+    stageId,
     organization: organizationSlug,
     page,
     size: searchQuery ? 0 : limit,
     onlyVideos,
     speakerIds,
-    date,
   }
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params), 
@@ -73,6 +70,7 @@ export async function fetchAllSessions({
       cache: 'no-store',
     }
   )
+  console.log(constructApiUrl(`${apiUrl()}/sessions`, params))
   const a = await response.json()
   const allSessions = a.data
   if (searchQuery) {

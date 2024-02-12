@@ -24,7 +24,7 @@ const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
       <SelectTrigger className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
         <SelectValue placeholder="Stage select" />
       </SelectTrigger>
-      <SelectContent className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
+      <SelectContent className="bg-white rounded-lg border-white border-opacity-10">
         {stages.map((stage) => (
           <SelectItem key={stage._id} value={stage._id}>
             {stage.name}

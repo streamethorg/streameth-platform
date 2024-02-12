@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Navbar from '@/components/Layout/NavbarTop'
 import { fetchNavBarRoutes } from '@/lib/data'
 import { fetchEvent } from '@/lib/services/eventService'
-
+import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 const Layout = async ({
   children,
   params,
@@ -26,14 +26,21 @@ const Layout = async ({
   }
   const style = {
     '--colors-accent': event.accentColor,
+    backgroundColor: event.accentColor,
   } as React.CSSProperties
+
+  console.log(navbarRoutes)
 
   return (
     <div
-      className="h-full flex flex-col  z-1 min-h-screen "
+      className="w-full h-full flex flex-col  z-1 min-h-screen"
       style={style}>
-      <Navbar {...navbarRoutes} />
-      <main className={` flex w-full ml-auto lg:h-full flex-grow`}>
+      <HomePageNavbar
+        pages={navbarRoutes.pages}
+        showSearchBar={false}
+      />
+      <main
+        className={` top-[74px] flex w-full ml-auto lg:h-full flex-grow`}>
         {children}
       </main>
     </div>
