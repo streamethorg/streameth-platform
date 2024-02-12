@@ -34,7 +34,9 @@
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
       "@aitools/*": ["../tools/ai-tools/src/*"],
-      "@avtools/*": ["../tools/av-tools/src/*"]
+      "@avtools/*": ["../tools/av-tools/utils/src/*"],
+      "@app/*": ["../app/*"],
+      "@server/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],

@@ -7,38 +7,38 @@ import {
 import {
   IsArray,
   IsBoolean,
-  IsNotEmpty,
   IsObject,
   IsOptional,
   IsString,
+  IsNotEmpty,
 } from 'class-validator';
 
-export class EventDto implements IEvent {
-  @IsNotEmpty()
+export class UpdateEventDto implements IEvent {
+  @IsOptional()
   @IsString()
   name!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   description!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   start!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   end!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   location!: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   logo: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   banner: string;
 
@@ -50,7 +50,7 @@ export class EventDto implements IEvent {
   @IsString()
   endTime?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   organizationId: string;
 
@@ -70,7 +70,7 @@ export class EventDto implements IEvent {
   @IsString()
   website?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   timezone: string;
 

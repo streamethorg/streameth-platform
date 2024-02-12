@@ -1,8 +1,9 @@
-import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
+import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
+import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 
 export interface Page {
   name: string
@@ -30,7 +31,7 @@ export interface EventPageProps {
 }
 export interface SearchPageProps {
   searchParams: {
-    organization?: IOrganizationModel['slug']
+    organization?: IOrganization['slug']
     event?: string
     searchQuery?: string
     page?: string
@@ -65,9 +66,15 @@ export interface studioPageParams {
 export interface IExtendedEvent extends IEvent {
   _id: string
 }
-export interface IOrganization extends IOrganizationModel {}
+export interface IExtendedOrganization
+  extends Omit<IOrganization, '_id'> {
+  _id: string
+}
 export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
 }
 export interface IStage extends IStageModel {}
 export interface ISpeaker extends ISpeakerModel {}
+export interface IExtendedUser extends Omit<IUser, 'organizations'> {
+  organizations: IExtendedOrganization[]
+}

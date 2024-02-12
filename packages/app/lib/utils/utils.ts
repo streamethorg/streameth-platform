@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { IExtendedEvent } from '@/lib/types'
+import { IExtendedEvent, IExtendedOrganization } from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 
@@ -66,9 +66,11 @@ export const hasData = ({ event }: { event: IExtendedEvent }) => {
 }
 
 export const getImageUrl = (image: string) => {
-  //return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
-  // temp revert to github
-  return `https://streameth-production.ams3.digitaloceanspaces.com${image}`
+  const spaceStorage = process.env.SPACE_STORAGE_URL || null
+  if (!spaceStorage) {
+    throw new Error('No SPACE STORAGE URL key found')
+  }
+  return process.env.NEXT_PUBLIC_SPACE_STORAGE + '/' + image
 }
 
 export const loadEnv = () => {
@@ -132,4 +134,14 @@ export const archivePath = ({
   return newSearchQueryPath
     ? newSearchQueryPath
     : `/archive?${params.toString()}`
+}
+
+export const hasOrganization = (
+  userOrganizations?: IExtendedOrganization[],
+  searchParams?: string
+) => {
+  const hasOrganization = userOrganizations?.some(
+    (organization) => organization.slug === searchParams
+  )
+  return hasOrganization
 }

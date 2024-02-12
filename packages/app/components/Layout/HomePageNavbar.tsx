@@ -9,6 +9,25 @@ import Navbar from './Navbar'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 import { Search } from 'lucide-react'
 import { Page } from '@/lib/types'
+import { useSIWE } from 'connectkit'
+import useUserData from '@/lib/hooks/useUserData'
+
+const getPages = (
+  pages: Page[],
+  isSignedIn: boolean,
+  studioOrg?: string
+) => {
+  if (isSignedIn) {
+    return [
+      ...pages,
+      {
+        name: 'studio',
+        href: studioOrg ? `/studio/${studioOrg}` : '/studio',
+        bgColor: 'bg-primary text-primary-foreground',
+      },
+    ]
+  } else return pages
+}
 
 const HomePageNavbar = ({
   pages,
@@ -34,9 +53,10 @@ const MobileNavBar = ({
 }) => {
   const [menuVisible, setMenuVisible] = useState(false)
   const [searchVisible, setSearchVisible] = useState(false)
-
   const toggleSearch = () => setSearchVisible(!searchVisible)
   const toggleMenu = () => setMenuVisible(!menuVisible)
+  const { isSignedIn } = useSIWE()
+  const { userData } = useUserData()
 
   useLayoutEffect(() => {
     if (menuVisible || searchVisible) {
@@ -84,7 +104,15 @@ const MobileNavBar = ({
             </button>
           )}
         </div>
-        {menuVisible && <Navbar pages={pages} />}
+        {menuVisible && (
+          <Navbar
+            pages={getPages(
+              pages,
+              isSignedIn,
+              userData?.organizations?.[0]?.slug
+            )}
+          />
+        )}
         <ConnectWalletButton />
       </div>
     </NavigationMenu>
@@ -98,6 +126,8 @@ const PCNavBar = ({
   pages: Page[]
   showSearchBar: boolean
 }) => {
+  const { isSignedIn } = useSIWE()
+  const { userData } = useUserData()
   return (
     <NavigationMenu className="max-w-[100vw] p-2 hidden md:hidden z-[99] backdrop-blur-sm bg-opacity-90 sticky top-0 lg:flex flex-row items-center justify-between">
       <Link href="/">
@@ -112,7 +142,13 @@ const PCNavBar = ({
       <div className="flex-grow  items-center flex justify-center">
         {showSearchBar && <SearchBar />}
       </div>
-      <Navbar pages={pages} />
+      <Navbar
+        pages={getPages(
+          pages,
+          isSignedIn,
+          userData?.organizations?.[0]?.slug
+        )}
+      />
       <ConnectWalletButton />
     </NavigationMenu>
   )
