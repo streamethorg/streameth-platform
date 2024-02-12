@@ -5,7 +5,7 @@
   "workspaces": {
     "packages": [
       "packages/app",
-      "packages/tools/av-tools",
+      "packages/tools/av-tools/utils",
       "packages/tools/ai-tools",
       "packages/new-server"
     ]
@@ -24,6 +24,7 @@
     "join": "yarn workspace @streameth/av-tools run:join",
     "upload": "yarn workspace @streameth/av-tools run:upload",
     "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn",
+    "install:server": "yarn workspace @streameth/av-utils install && yarn workspace @streameth/ai-tools install",
     "build:server": "yarn workspace streameth-new-server build",
     "start:server": "yarn workspace streameth-new-server start"
   },

@@ -1,18 +1,18 @@
-import { authenticate } from '@google-cloud/local-auth'
-import { google } from 'googleapis'
-import path from 'path'
+import { authenticate } from "@google-cloud/local-auth";
+import { google } from "googleapis";
+import path from "path";
 
 export async function Authenticate(scopes: string[]) {
   // console.log('Authenticating with Google', scopes)
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES
   const auth = await authenticate({
-    keyfilePath: path.join(__dirname, '../../', 'google_client_secret.json'),
+    keyfilePath: path.join(__dirname, "../../", "google_client_secret.json"),
     scopes,
-  })
-  google.options({ auth })
+  });
+  google.options({ auth });
 
-  return google
+  return google;
 }
 
 export function AuthenticateServiceAccount(scopes: string[]) {
@@ -20,10 +20,10 @@ export function AuthenticateServiceAccount(scopes: string[]) {
 
   // MAKE SURE NOT TO COMMIT THE SECRET FILES
   const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(__dirname, '../../', 'google_sa_secret.json'),
+    keyFile: path.join(__dirname, "../../", "google_sa_secret.json"),
     scopes,
-  })
-  google.options({ auth })
+  });
+  google.options({ auth });
 
-  return google
+  return google;
 }

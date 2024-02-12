@@ -22,9 +22,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Install dependencies...
-        run: yarn install
-        working-directory: packages/new-server
+        run: yarn install:server
 
       - name: Build server
-        run: yarn build
-        working-directory: packages/new-server
+        run: yarn build:server
