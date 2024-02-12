@@ -7,9 +7,8 @@ import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
-import { UserContext } from '@/lib/context/UserContext'
-import Combobox from '../ui/combo-box'
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
+import useUserData from '@/lib/hooks/useUserData'
 
 const NavBarButton = ({
   isNavVisible,
@@ -38,7 +37,7 @@ const StudioPageNavbar = ({
 }) => {
   const isMobile = useMediaQuery('(max-width: 1025px)')
   const [menuVisible, setMenuVisible] = useState(false)
-  const { userOrganizations } = useContext(UserContext)
+  const { userData } = useUserData()
 
   useEffect(() => {
     setMenuVisible(!isMobile)
@@ -81,7 +80,7 @@ const StudioPageNavbar = ({
       <div className="flex-grow mx-2 flex justify-center">
         {children}
       </div>
-      <SwitchOrganization organizations={userOrganizations} />
+      <SwitchOrganization organizations={userData?.organizations} />
       <div className="ml-auto flex flex-row items-center justify-end h-full">
         {menuVisible && (
           <Navbar pages={isMobile ? [...pages] : pages} />

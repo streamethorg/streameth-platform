@@ -3,12 +3,14 @@ import SideNavigation from '@/components/Layout/SideNavigation'
 import { File, Inbox } from 'lucide-react'
 import { studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
-import { cookies } from 'next/headers'
 import React from 'react'
-import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
+
 import { fetchUserAction } from '@/lib/actions/users'
 import CreateOrganization from '../(home)/components/CreateOrganizationForm'
 import SwitchOrganization from './components/SwitchOrganization'
+import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
+import CheckAuthorization from '@/components/authorization/CheckAuthorization'
+import { hasOrganization } from '@/lib/utils/utils'
 
 export type variant =
   | 'default'
@@ -25,24 +27,15 @@ const Layout = async ({
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
-  const userSession = cookies().get('user-session')
-  if (!userSession?.value) {
-    return (
-      <div className="flex flex-col items-center h-screen justify-center">
-        <h3>
-          You do not have access to this page, Sign in to continue
-        </h3>
-        <ConnectWalletButton />
-      </div>
-    )
+  const isAuthorized = CheckAuthorization()
+  if (!isAuthorized) {
+    return <AuthorizationMessage />
   }
-  const userData = userSession?.value
-    ? await fetchUserAction({})
-    : null
-  const isOrganizationAllowed = userData?.organizations?.some(
-    (organization) => organization.slug === params.organization
-  )
-  if (!isOrganizationAllowed) {
+  const userData = await fetchUserAction({})
+
+  if (
+    !hasOrganization(userData?.organizations, params.organization)
+  ) {
     return (
       <div className="flex flex-col items-center h-screen justify-center">
         You do not belong to this organization, switch organization or
@@ -50,7 +43,7 @@ const Layout = async ({
         <div className="flex gap-5 mt-5">
           <SwitchOrganization
             organizations={userData?.organizations}
-          />{' '}
+          />
           <CreateOrganization />
         </div>
       </div>

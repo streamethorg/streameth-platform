@@ -7,7 +7,6 @@ import { LoadingContextProvider } from '@/lib/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/lib/context/TopNavbarContext'
 import { generalMetadata } from '@/lib/utils/metadata'
 import { Toaster } from '@/components/ui/sonner'
-import { UserContextProvider } from '@/lib/context/UserContext'
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
@@ -31,17 +30,15 @@ export default function RootLayout({
         className={`${heebo.variable} font-sans flex flex-col w-full min-h-screen  mx-auto bg-background `}>
         <GeneralContext>
           <Toaster />
-          <UserContextProvider>
-            <LoadingContextProvider>
-              <MobileContextProvider>
-                <ModalContextProvider>
-                  <TopNavbarContextProvider>
-                    {children}
-                  </TopNavbarContextProvider>
-                </ModalContextProvider>
-              </MobileContextProvider>
-            </LoadingContextProvider>
-          </UserContextProvider>
+          <LoadingContextProvider>
+            <MobileContextProvider>
+              <ModalContextProvider>
+                <TopNavbarContextProvider>
+                  {children}
+                </TopNavbarContextProvider>
+              </ModalContextProvider>
+            </MobileContextProvider>
+          </LoadingContextProvider>
         </GeneralContext>
       </body>
     </html>

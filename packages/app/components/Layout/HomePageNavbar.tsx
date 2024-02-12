@@ -2,12 +2,10 @@
 
 import React, {
   useState,
-  useEffect,
   Suspense,
   useLayoutEffect,
-  useContext,
+  useEffect,
 } from 'react'
-import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import Image from 'next/image'
 import SearchBar from '@/components/misc/SearchBar'
 import Link from 'next/link'
@@ -21,8 +19,11 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { Search } from 'lucide-react'
-import { UserContext } from '@/lib/context/UserContext'
 import { useSIWE } from 'connectkit'
+import { useAccount } from 'wagmi'
+import { IExtendedUser } from '@/lib/types'
+import { fetchUserAction } from '@/lib/actions/users'
+import useUserData from '@/lib/hooks/useUserData'
 
 const pages = [
   {
@@ -67,10 +68,10 @@ const HomePageNavbar = () => {
 const MobileNavBar = () => {
   const [menuVisible, setMenuVisible] = useState(false)
   const [searchVisible, setSearchVisible] = useState(false)
-  const { selectedOrganization } = useContext(UserContext)
   const toggleSearch = () => setSearchVisible(!searchVisible)
   const toggleMenu = () => setMenuVisible(!menuVisible)
   const { isSignedIn } = useSIWE()
+  const { userData } = useUserData()
 
   useLayoutEffect(() => {
     if (menuVisible || searchVisible) {
@@ -79,6 +80,7 @@ const MobileNavBar = () => {
       document.body.style.overflow = 'auto'
     }
   }, [menuVisible, searchVisible])
+
   return (
     <NavigationMenu className="lg:hidden z-[999999] backdrop-blur-sm bg-background bg-opacity-90 sticky top-0 flex flex-row items-center">
       {(searchVisible || menuVisible) && (
@@ -123,7 +125,10 @@ const MobileNavBar = () => {
         </div>
         {menuVisible && (
           <Navbar
-            pages={getPages(isSignedIn, selectedOrganization?.slug)}
+            pages={getPages(
+              isSignedIn,
+              userData?.organizations?.[0]?.slug
+            )}
           />
         )}
 
@@ -134,8 +139,8 @@ const MobileNavBar = () => {
 }
 
 const PCNavBar = () => {
-  const { selectedOrganization } = useContext(UserContext)
   const { isSignedIn } = useSIWE()
+  const { userData } = useUserData()
   return (
     <NavigationMenu className="hidden md:hidden z-[99] backdrop-blur-sm bg-background bg-opacity-90 sticky top-0 p-4 lg:flex flex-row items-center justify-between">
       <Link href="/">
@@ -151,7 +156,10 @@ const PCNavBar = () => {
         <SearchBar />
       </div>
       <Navbar
-        pages={getPages(isSignedIn, selectedOrganization?.slug)}
+        pages={getPages(
+          isSignedIn,
+          userData?.organizations?.[0]?.slug
+        )}
       />
       <ConnectWalletButton />
     </NavigationMenu>
