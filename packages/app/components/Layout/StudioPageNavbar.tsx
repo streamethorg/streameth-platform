@@ -1,12 +1,14 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
+import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
+import useUserData from '@/lib/hooks/useUserData'
 
 const NavBarButton = ({
   isNavVisible,
@@ -35,6 +37,7 @@ const StudioPageNavbar = ({
 }) => {
   const isMobile = useMediaQuery('(max-width: 1025px)')
   const [menuVisible, setMenuVisible] = useState(false)
+  const { userData } = useUserData()
 
   useEffect(() => {
     setMenuVisible(!isMobile)
@@ -77,6 +80,7 @@ const StudioPageNavbar = ({
       <div className="flex-grow mx-2 flex justify-center">
         {children}
       </div>
+      <SwitchOrganization organizations={userData?.organizations} />
       <div className="ml-auto flex flex-row items-center justify-end h-full">
         {menuVisible && (
           <Navbar pages={isMobile ? [...pages] : pages} />

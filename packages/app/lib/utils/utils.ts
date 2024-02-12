@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { IExtendedEvent } from '@/lib/types'
+import { IExtendedEvent, IExtendedOrganization } from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 
@@ -132,4 +132,14 @@ export const archivePath = ({
   return newSearchQueryPath
     ? newSearchQueryPath
     : `/archive?${params.toString()}`
+}
+
+export const hasOrganization = (
+  userOrganizations?: IExtendedOrganization[],
+  searchParams?: string
+) => {
+  const hasOrganization = userOrganizations?.some(
+    (organization) => organization.slug === searchParams
+  )
+  return hasOrganization
 }

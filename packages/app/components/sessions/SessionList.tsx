@@ -70,9 +70,7 @@ export default function SessionList({
   }
 
   return (
-    <ul
-      id="sessionList"
-      className="h-full relative lg:overflow-scroll">
+    <ul id="sessionList" className="h-full relative lg:overflow-auto">
       {sortedSessions.map((i, index) => {
         if (i.name === 'Blank') return null
         return (
