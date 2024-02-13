@@ -12,8 +12,8 @@ export default function Navbar({
   isMobile,
   pages,
 }: {
-  isMobile: boolean
-  setIsNavVisible: React.Dispatch<React.SetStateAction<boolean>>
+  isMobile?: boolean
+  setIsNavVisible?: React.Dispatch<React.SetStateAction<boolean>>
   pages: NavBarProps['pages']
 }) {
   if (pages.length === 0) {
@@ -26,7 +26,7 @@ export default function Navbar({
     lg:w-[unset] items-center text-center lg:relative lg:top-[unset] 
     lg:items-center lg:h-full">
       <ul
-        onClick={() => isMobile && setIsNavVisible(false)}
+        onClick={() => isMobile && setIsNavVisible?.(false)}
         className="flex flex-col lg:flex-row w-full lg:space-x-2 lg:px-2">
         {pages.map((item) => (
           <NavigationMenuItem key={item.name}>
