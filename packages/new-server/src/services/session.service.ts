@@ -71,18 +71,10 @@ export default class SessionServcie {
     const pageSize = Number(d.size) || 0; //total documents to be fetched
     const pageNumber = Number(d.page) || 0;
     const skip = pageSize * pageNumber - pageSize;
-    const sessions = await this.controller.store.findAll(
-      filter,
-      this.path,
-      skip,
-      pageSize,
-    );
-    const totalDocuments = await this.controller.store.findAll(
-      filter,
-      this.path,
-      0,
-      0,
-    );
+    const [sessions, totalDocuments] = await Promise.all([
+      await this.controller.store.findAll(filter, this.path, skip, pageSize),
+      await this.controller.store.findAll(filter, this.path, 0, 0),
+    ]);
     return {
       sessions: sessions,
       totalDocuments: totalDocuments.length,
