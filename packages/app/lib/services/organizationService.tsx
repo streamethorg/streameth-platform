@@ -1,5 +1,8 @@
 import { apiUrl } from '@/lib/utils/utils'
-import { IOrganization, IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
+import {
+  IOrganization,
+  IOrganizationModel,
+} from 'streameth-new-server/src/interfaces/organization.interface'
 
 export async function fetchOrganization({
   organizationSlug,
@@ -63,8 +66,9 @@ export async function createOrganization({
       },
       body: JSON.stringify(organization),
     })
-    console.log(await response.json())
-    return (await response.json()).data
+    const a = (await response.json())
+    console.log(a)
+    return a.data
   } catch (e) {
     console.log(e)
     throw e

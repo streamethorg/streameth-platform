@@ -124,7 +124,4 @@ export const organizationSchema = z.object({
   url: z.string(),
   logo: z.string(),
   location: z.string(),
-  accentColor: z.string().optional(),
-  slug: z.string().optional(),
-  walletAddress: z.string(),
 })

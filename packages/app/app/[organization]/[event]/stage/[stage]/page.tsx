@@ -86,7 +86,7 @@ export default async function Stage({ params }: EventPageProps) {
           </TabsList>
           {tabs.map((tab) => (
             <TabsContent
-              className="h-[calc(100%-50px)] overflow-y-scroll"
+              className="h-[calc(100%-50px)] overflow-y-auto"
               key={tab.value}
               value={tab.value}>
               {tab.content}

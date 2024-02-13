@@ -53,7 +53,7 @@ const ScheduleCard = ({
           </CardHeader>
           <CardContent className="p-2 lg:p-2">
             {speakers && (
-              <div className="flex py-1 items-center flex-row space-x-2 overflow-x-scroll mt-auto">
+              <div className="flex py-1 items-center flex-row space-x-2 overflow-auto mt-auto">
                 {session.speakers.map((speaker) => (
                   <Badge
                     key={speaker.name}

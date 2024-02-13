@@ -50,6 +50,8 @@ export default function ImageUpload({
         body: data,
       })
       // handle the error
+      onChange(getImageUrl('/' + path + '/' + file.name))
+
       if (!res.ok) throw new Error(await res.text())
     } catch (e: any) {
       // Handle errors here
@@ -84,7 +86,6 @@ export default function ImageUpload({
           onChange={(event) => {
             const { files, displayUrl } = getImageData(event)
             setPreview(displayUrl)
-            onChange(getImageUrl('/' + path + '/' + files[0].name))
             onSubmit(files[0])
           }}
         />

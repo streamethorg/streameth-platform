@@ -32,7 +32,6 @@ export const createClip = async ({
     assetId: clip.object?.asset.id,
     playbackId: clip.object?.asset.playbackId,
   }
-  console.log('updatedSession', updatedSession)
 
   // TODO
   // @ts-ignore
@@ -49,8 +48,8 @@ export const updateSessionAction = async ({
 }: {
   session: IExtendedSession
 }) => {
-  const authToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjB4QTkzOTUwQTE5NTg3N0Y0ZUJDOEE0YUYzRjZDZTJhMTA5NDA0YjU3NSIsImlhdCI6MTcwNjkyMjI3MiwiZXhwIjoxNzA3MzU0MjcyfQ.7V__e21sgf-X0GBxIZDVVhTQYjqHerAu1GiTXmY8bts'
+
+  const authToken = cookies().get('user-session')?.value
   if (!authToken) {
     throw new Error('No user session found')
   }

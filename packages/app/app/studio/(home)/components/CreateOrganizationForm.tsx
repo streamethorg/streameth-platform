@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -38,14 +38,17 @@ export default function CreateOrganization() {
       url: '',
       logo: '',
       location: '',
-      walletAddress: address as string,
     },
   })
 
   function onSubmit(values: z.infer<typeof organizationSchema>) {
     setIsLoading(true)
+    if (!address) {
+      toast.error('No wallet address found')
+      return
+    }
     createOrganizationAction({
-      organization: values,
+      organization: { ...values, walletAddress: address },
     })
       .then(() => {
         setIsOpen(false)
@@ -61,7 +64,7 @@ export default function CreateOrganization() {
 
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
-      <Button variant={'secondary'} onClick={() => setIsOpen(true)}>
+      <Button onClick={() => setIsOpen(true)}>
         Create an Organization
       </Button>
       <DialogContent className="bg-background">
@@ -70,6 +73,9 @@ export default function CreateOrganization() {
         </DialogHeader>
         <Form {...form}>
           <form
+            onError={(errors) => {
+              alert(errors)
+            }}
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8">
             <FormField
@@ -143,6 +149,7 @@ export default function CreateOrganization() {
                 </FormItem>
               )}
             />
+
             {isLoading ? (
               <Button disabled>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

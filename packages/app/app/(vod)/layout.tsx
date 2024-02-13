@@ -31,9 +31,9 @@ const Layout = async ({
   ]
 
   return (
-    <div className="mx-auto w-screen max-w-screen-2xl h-screen">
+    <div className="mx-auto max-w-screen-2xl h-screen">
       <HomePageNavbar pages={pages} />
-      <div className=" flex flex-col overflow-scroll p-2 lg:p-4">
+      <div className=" flex flex-col overflow-auto p-2 lg:p-4">
         <Suspense>{children}</Suspense>
       </div>
       <div className="sticky mb-5 top-[100vh]">
