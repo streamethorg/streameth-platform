@@ -1,5 +1,6 @@
 import { apiUrl } from '@/lib/utils/utils'
-import { IOrganization, IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
+import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
+import { IExtendedOrganization } from '../types'
 
 export async function fetchOrganization({
   organizationSlug,
@@ -7,7 +8,7 @@ export async function fetchOrganization({
 }: {
   organizationSlug?: string
   organizationId?: string
-}): Promise<IOrganizationModel | null> {
+}): Promise<IExtendedOrganization | null> {
   try {
     if (!organizationSlug && !organizationId) {
       return null
@@ -30,7 +31,7 @@ export async function fetchOrganization({
 }
 
 export async function fetchOrganizations(): Promise<
-  IOrganizationModel[]
+  IExtendedOrganization[]
 > {
   try {
     const response = await fetch(`${apiUrl()}/organizations`, {
@@ -63,10 +64,14 @@ export async function createOrganization({
       },
       body: JSON.stringify(organization),
     })
-    console.log(await response.json())
-    return (await response.json()).data
+
+    if (response.ok) {
+      return (await response.json()).data
+    } else {
+      throw await response.json()
+    }
   } catch (e) {
-    console.log(e)
+    console.error('Unexpected error:', e)
     throw e
   }
 }

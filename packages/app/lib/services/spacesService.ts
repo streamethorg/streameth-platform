@@ -2,6 +2,7 @@ import {
   S3,
   GetObjectCommand,
   PutObjectCommand,
+  PutObjectCommandInput,
   ListBucketsCommand,
   ListObjectsCommand,
 } from '@aws-sdk/client-s3'
@@ -27,11 +28,13 @@ class S3Service {
     file: Buffer | Readable,
     contentType: string
   ): Promise<void> {
-    const params = {
+    const params: PutObjectCommandInput = {
       Bucket: bucketName,
       Key: key,
       Body: file,
       ContentType: contentType,
+      ACL: 'public-read'
+    
     }
 
     const command = new PutObjectCommand(params)
