@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
 import { redirect } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
 
 export const createOrganizationAction = async ({
   organization,
