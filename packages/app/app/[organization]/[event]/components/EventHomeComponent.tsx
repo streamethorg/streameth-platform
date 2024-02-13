@@ -10,7 +10,9 @@ import StagePreview from '../stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 
-import SpeakerComponent from '../speakers/components/SpeakerComponent'
+import SpeakerComponent, {
+  SpeakerComponentSkeleton,
+} from '../speakers/components/SpeakerComponent'
 import ScheduleComponent, {
   ScheduleSkeleton,
 } from '../schedule/components/ScheduleComponent'
@@ -120,7 +122,7 @@ export default function EventHomeComponent({
             date={searchParams.date}
           />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<SpeakerComponentSkeleton />}>
           <SpeakerComponent event={event} />
         </Suspense>
       </div>

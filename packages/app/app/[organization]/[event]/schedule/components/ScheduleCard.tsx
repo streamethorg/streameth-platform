@@ -2,7 +2,7 @@
 import ScheduleCardModal from './ScheduleCardModal'
 import moment from 'moment-timezone'
 import { getEventTimezoneText } from '@/lib/utils/time'
-
+import SpeakerIcon from '@/components/speakers/speakerIcon'
 import {
   Card,
   CardContent,
@@ -55,12 +55,7 @@ const ScheduleCard = ({
             {speakers && (
               <div className="flex py-1 items-center flex-row space-x-2 overflow-auto mt-auto">
                 {session.speakers.map((speaker) => (
-                  <Badge
-                    key={speaker.name}
-                    variant={'outline'}
-                    className="text-white">
-                    {speaker.name}
-                  </Badge>
+                  <SpeakerIcon key={speaker._id} speaker={speaker} />
                 ))}
               </div>
             )}

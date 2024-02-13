@@ -6,12 +6,7 @@ import { EventPageProps } from '@/lib/types'
 import { fetchAllSessions } from '@/lib/data'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchStage } from '@/lib/services/stageService'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
+import UpcomingSession from '../components/UpcomingSession'
 import { notFound } from 'next/navigation'
 export default async function Stage({ params }: EventPageProps) {
   if (!params.event || !params.stage) {
@@ -22,39 +17,17 @@ export default async function Stage({ params }: EventPageProps) {
     eventId: params.event,
   })
 
-  const sessionsData = await fetchAllSessions({
-    event: params.event,
-    stage: params.stage,
-    date: new Date(),
-  })
-
   const stage = await fetchStage({
     stage: params.stage,
   })
+  // Fetch sessions data
 
   if (!event || !stage) {
     return notFound()
   }
 
-  const tabs = []
-  if (!event?.plugins?.disableChat) {
-    tabs.push({
-      value: 'chat',
-      content: <Chat conversationId="d" />,
-    })
-  }
-
-  if (
-    sessionsData.sessions.length > 0 &&
-    !event?.plugins?.hideSchedule
-  ) {
-    tabs.push({
-      value: 'schedule',
-      content: (
-        <SessionList event={event} sessions={sessionsData.sessions} />
-      ),
-    })
-  }
+  const sessionsData = await fetchAllSessions({ stageId: stage._id })
+  const currentSession = sessionsData.sessions[0]
 
   return (
     <div className="bg-event flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] p-2 gap-2">
@@ -66,34 +39,20 @@ export default async function Stage({ params }: EventPageProps) {
         <SessionInfoBox
           inverted
           title={'Watching: ' + stage.name}
-          cardDescription={event.name}
+          avatarUrl={event.logo}
+          avatarFallback={event.name.slice(0, 1)}
           playerName={stage.name}
           streamId={stage.streamSettings?.streamId}
           description={event.description}
         />
       </div>
-      <Chat conversationId="d" />
-      {/* {tabs.length > 0 && (
-        <Tabs
-          defaultValue={tabs[0]?.value ?? ''}
-          className="md:w-[25%] w-full max-h-[100vh] rounded-md ">
-          <TabsList className="w-full ">
-            {tabs.map((tab) => (
-              <TabsTrigger key={tab.value} value={tab.value}>
-                {tab.value}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          {tabs.map((tab) => (
-            <TabsContent
-              className="h-[calc(100%-50px)] overflow-y-auto"
-              key={tab.value}
-              value={tab.value}>
-              {tab.content}
-            </TabsContent>
-          ))}
-        </Tabs>
-      )} */}
+      <div className="flex flex-col w-full lg:w-2/5 md:h-full z-40 top-[54px] gap-2">
+        <UpcomingSession
+          event={event}
+          currentSession={currentSession}
+        />
+        <Chat conversationId="" />
+      </div>
     </div>
   )
 }
