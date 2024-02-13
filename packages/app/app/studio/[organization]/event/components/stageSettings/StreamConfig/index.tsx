@@ -16,26 +16,26 @@ import MultistreamCard from './multistream/multistreamCard'
 const StreamConfig = ({ stage }: { stage: IStageModel }) => {
   const { selectedStageSetting } = useNavigation()
   const { data: stream, isLoading } = useStream(
-    stage.streamSettings.streamId ?? ''
+    stage?.streamSettings?.streamId ?? ''
   )
 
   if (selectedStageSetting !== 'settings') {
     return null
   }
 
-  if (isLoading || !stage.streamSettings.streamId) {
+  if (isLoading || !stage?.streamSettings.streamId) {
     return null
   }
 
   return (
     <div className="border-none shadow-none h-full text-foreground">
       <CardHeader>
-        <CardTitle>{stage.name} stage</CardTitle>
+        <CardTitle>{stage?.name} stage</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-row gap-4">
         <div className="flex flex-col w-1/2 gap-4">
           <Player
-            playerName={stage.name}
+            playerName={stage?.name}
             playbackId={stream?.playbackId}
           />
           <Card className="shadow-none border-border">
@@ -69,7 +69,7 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
         <div className="flex flex-col w-1/2 space-y-4">
           <div className="h-1/2">
             <MultistreamCard
-              streamId={stage.streamSettings.streamId}
+              streamId={stage?.streamSettings.streamId}
             />
           </div>
           <div className="h-1/2">

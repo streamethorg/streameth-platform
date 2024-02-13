@@ -135,9 +135,11 @@ export const updateEvent = async ({
 }
 export const deleteEvent = async ({
   eventId,
+  organizationId,
   authToken,
 }: {
   eventId: string
+  organizationId: string
   authToken: string
 }): Promise<IEventModel> => {
   try {
@@ -147,6 +149,7 @@ export const deleteEvent = async ({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,
       },
+      body: JSON.stringify({ organizationId }),
     })
     if (!response.ok) {
       throw 'Error deleting event'

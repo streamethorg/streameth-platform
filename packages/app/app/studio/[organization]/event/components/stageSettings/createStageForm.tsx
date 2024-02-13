@@ -24,12 +24,14 @@ import { toast } from 'sonner'
 import { createStageAction } from '@/lib/actions/stages'
 import { Loader2 } from 'lucide-react'
 import { IExtendedEvent } from '@/lib/types'
+import { useRouter } from 'next/navigation'
 
 export default function CreateStageForm({
   event,
 }: {
   event: IExtendedEvent
 }) {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof StageSchema>>({
@@ -58,6 +60,7 @@ export default function CreateStageForm({
       })
       .finally(() => {
         setIsLoading(false)
+        router.refresh()
       })
   }
 

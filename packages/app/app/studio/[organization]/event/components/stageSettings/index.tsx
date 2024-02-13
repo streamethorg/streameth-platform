@@ -9,7 +9,6 @@ const StageSettings = ({
   sessions,
 }: {
   stages: IStageModel[]
-
   sessions: IExtendedSession[]
 }) => {
   const { selectedStage, selectedSetting } = useNavigation()

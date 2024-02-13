@@ -8,8 +8,18 @@ import {
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { useNavigation } from '../navigation/navigationContext'
 import { deleteStageAction } from '@/lib/actions/stages'
+import { IExtendedEvent } from '@/lib/types'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
-const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
+const StageAccordion = ({
+  stages,
+  event,
+}: {
+  stages: IStageModel[]
+  event: IExtendedEvent
+}) => {
+  const router = useRouter()
   const {
     selectedStage,
     setSelectedStage,
@@ -18,11 +28,28 @@ const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
     setSelectedSetting,
   } = useNavigation()
 
-  const handleDeleteStage = (stageId: string, streamId: string) => {
+  const handleDeleteStage = async (
+    stageId: string,
+    organizationId: string,
+    streamId: string
+  ) => {
     if (
       window.confirm('Are you sure you want to delete this stage?')
     ) {
-      deleteStageAction({ stageId, streamId })
+      await deleteStageAction({ stageId, organizationId, streamId })
+        .then((response) => {
+          if (response) {
+            toast.success('Stage deleted')
+          } else {
+            toast.error('Error deleting stage')
+          }
+        })
+        .catch(() => {
+          toast.error('Error deleting stage')
+        })
+        .finally(() => {
+          router.refresh()
+        })
     }
   }
   return (
@@ -69,6 +96,7 @@ const StageAccordion = ({ stages }: { stages: IStageModel[] }) => {
               onClick={() => {
                 handleDeleteStage(
                   stage._id,
+                  event?.organizationId as string,
                   stage.streamSettings.streamId ?? ''
                 )
               }}>

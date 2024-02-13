@@ -31,6 +31,7 @@ const Navigation = ({
     ) {
       const response = deleteEventAction({
         eventId,
+        organizationId: event.organizationId as string,
       })
         .then((response) => {
           if (response) {
@@ -44,7 +45,6 @@ const Navigation = ({
         })
         .finally(() => {
           router.push(`/studio/${orgId}`)
-          router.refresh()
         })
     }
   }
@@ -65,7 +65,7 @@ const Navigation = ({
         {stages.length > 0 && <CreateStageForm event={event} />}
       </div>
       {stages.length > 0 ? (
-        <StagesAccordion stages={stages} />
+        <StagesAccordion event={event} stages={stages} />
       ) : (
         <div className="flex flex-row p-2 justify-between items-center border-b border-border">
           <div className="text-sm ">
