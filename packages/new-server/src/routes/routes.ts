@@ -965,6 +965,7 @@ export function RegisterRoutes(app: Router) {
                     page: {"in":"query","name":"page","dataType":"double"},
                     size: {"in":"query","name":"size","dataType":"double"},
                     timestamp: {"in":"query","name":"timestamp","dataType":"double"},
+                    assetId: {"in":"query","name":"assetId","dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

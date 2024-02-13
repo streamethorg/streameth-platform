@@ -21,7 +21,7 @@ const CreateEventPage = async ({ params }: studioPageParams) => {
     <div className="w-full h-full overflow-auto bg-secondary flex justify-center items-center">
       <Card className="p-4">
         <CardContent>
-          <CreateEventForm organizationId={organization._id} />
+          <CreateEventForm organization={organization} />
         </CardContent>
       </Card>
     </div>

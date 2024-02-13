@@ -66,13 +66,13 @@ export const hasData = ({ event }: { event: IExtendedEvent }) => {
 }
 
 export const getImageUrl = (image: string) => {
-  const url ="https://streameth-production.ams3.digitaloceanspaces.com"
-  console.log(process.env.NEXT_SPACE_STORAGE_URL)
-  const spaceStorage = process.env.NEXT_PUBLIC_API_URL  ?? null
-  if (!url) {
+  const spaceStorage =
+    process.env.NEXT_PUBLIC_SPACE_STORAGE_URL || null
+  if (!spaceStorage) {
     throw new Error('No SPACE STORAGE URL key found')
   }
-  return url + '/' + image
+
+  return spaceStorage + image
 }
 
 export const loadEnv = () => {
@@ -146,4 +146,12 @@ export const hasOrganization = (
     (organization) => organization.slug === searchParams
   )
   return hasOrganization
+}
+
+export const validateEnv = (envVar: string) => {
+  const value = process.env[envVar] || null
+  if (!value) {
+    throw new Error(`No ${value} found`)
+  }
+  return value
 }

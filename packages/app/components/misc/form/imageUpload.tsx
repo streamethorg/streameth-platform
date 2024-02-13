@@ -72,7 +72,7 @@ export default function ImageUpload({
           />
           <AspectRatio ratio={aspectRatio} className="relative">
             <Image
-              src={value || preview}
+              src={preview ?? value}
               className="z-10"
               alt="preview"
               fill
