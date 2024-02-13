@@ -20,12 +20,12 @@ import Livepeer from '@/public/livepeer-logo.png'
 import Image from 'next/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useAccount, useEnsName } from 'wagmi'
+import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
 interface Props {
   participantName: string
 }
 
 const ChatBar = ({ conversationId }: { conversationId: string }) => {
-  const [isLoading, setIsLoading] = useState(true)
   const serverUrl = 'wss://streameth-fjjg03ki.livekit.cloud'
   const [viewerToken, setViewerToken] = useState('')
   const [viewerName, setViewerName] = useState('')
@@ -90,7 +90,7 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
   if (!viewerToken || !viewerName) {
     return (
       <div className="flex h-full w-full flex-1 min-h-[400px]">
-        <Card className="h-full w-full md:w-52 lg:w-80">
+        <Card className="h-full w-full ">
           <div className="flex items-center space-x-4">
             <Skeleton className="h-12 w-12 rounded-full" />
             <div className="space-y-2">
@@ -109,7 +109,7 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
       serverUrl={serverUrl}
       className="flex flex-1 flex-col">
       <div className="flex h-full flex-1 min-h-[400px]">
-        <Card className="sticky border-l md:block h-full w-full md:w-52 lg:w-80">
+        <Card className="sticky border-l md:block h-full w-full">
           <div className="absolute top-0 bottom-0 right-0 flex h-full w-full flex-col gap-2 p-2">
             {<Chat participantName={viewerName} />}
           </div>
@@ -213,7 +213,7 @@ function Chat({ participantName }: Props) {
         </div>
       ) : (
         <div className="flex flex-col  gap-2">
-          <p>connect your wallet to chat</p>
+          <ConnectWalletButton />
         </div>
       )}
     </>
