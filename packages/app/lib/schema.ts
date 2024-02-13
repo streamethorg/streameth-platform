@@ -126,5 +126,4 @@ export const organizationSchema = z.object({
   location: z.string(),
   accentColor: z.string().optional(),
   slug: z.string().optional(),
-  walletAddress: z.string(),
 })

@@ -2167,6 +2167,14 @@
 							"format": "double",
 							"type": "number"
 						}
+					},
+					{
+						"in": "query",
+						"name": "assetId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
 					}
 				]
 			}
