@@ -31,7 +31,7 @@ const EditSession = async ({
             viewCount
           />{' '}
         </div>
-        <div className="w-1/3 h-full overflow-scroll relative">
+        <div className="w-1/3 h-full overflow-auto relative">
           <SessionAccordion session={session} />
         </div>
       </div>

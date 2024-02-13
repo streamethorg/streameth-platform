@@ -3,8 +3,8 @@ import * as z from 'zod'
 export const formSchema = z.object({
   name: z.string().min(1, 'name is required'),
   description: z.string(),
-  start: z.string(),
-  end: z.string(),
+  start: z.date(),
+  end: z.date(),
   location: z.string(),
   logo: z.string().optional(),
   banner: z.string().optional(),
@@ -67,6 +67,7 @@ export const StageSchema = z.object({
   streamSettings: IStreamSettingsSchema,
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
+  organizationId: z.string(),
 })
 
 // Sessions

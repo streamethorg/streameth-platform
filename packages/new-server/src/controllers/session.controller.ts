@@ -1,4 +1,5 @@
-import { SessionDto } from '@dtos/session.dto';
+import { CreateSessionDto } from '@dtos/session/create-session.dto';
+import { UpdateSessionDto } from '@dtos/session/update-session.dto';
 import { ISession } from '@interfaces/session.interface';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -24,11 +25,11 @@ export class SessionController extends Controller {
    *
    * @Summary Create session
    */
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post()
   async createSession(
-    @Body() body: SessionDto,
+    @Body() body: CreateSessionDto,
   ): Promise<IStandardResponse<ISession>> {
     console.log(body);
     const session = await this.sessionService.create(body);
@@ -39,12 +40,12 @@ export class SessionController extends Controller {
    *
    * @Summary Update session
    */
-  @Security('jwt')
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{sessionId}')
   async editSession(
     @Path() sessionId: string,
-    @Body() body: SessionDto,
+    @Body() body: UpdateSessionDto,
   ): Promise<IStandardResponse<ISession>> {
     const session = await this.sessionService.update(sessionId, body);
     return SendApiResponse('session updated', session);
@@ -78,6 +79,7 @@ export class SessionController extends Controller {
     @Query() page?: number,
     @Query() size?: number,
     @Query() timestamp?: number,
+    @Query() assetId?: string,
   ): Promise<
     IStandardResponse<{
       sessions: Array<ISession>;
@@ -94,7 +96,7 @@ export class SessionController extends Controller {
       page: page,
       size: size,
       timestamp: timestamp,
-      assetId: '',
+      assetId: assetId,
     };
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);

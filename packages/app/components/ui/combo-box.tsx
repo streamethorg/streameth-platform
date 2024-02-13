@@ -16,13 +16,22 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
+interface Item {
+  label: string
+  value: string
+}
+
 export default function Combobox({
-  items,
+  items = [],
   value,
   setValue,
+  valueKey = 'value',
+  labelKey = 'label',
 }: {
-  items: { label: string; value: string }[]
+  items?: Item[]
   value: string
+  valueKey?: string
+  labelKey?: string
   setValue: (value: string) => void
 }) {
   const [open, setOpen] = React.useState(false)
@@ -45,8 +54,12 @@ export default function Combobox({
           <CommandGroup>
             {items.map((item) => (
               <CommandItem
-                key={item.value}
-                value={item.value}
+                key={
+                  valueKey ? item[valueKey as keyof Item] : item.value
+                }
+                value={
+                  valueKey ? item[valueKey as keyof Item] : item.value
+                }
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? '' : currentValue)
                   setOpen(false)
@@ -57,7 +70,7 @@ export default function Combobox({
                     value === item.value ? 'opacity-100' : 'opacity-0'
                   )}
                 />
-                {item.label}
+                {labelKey ? item[labelKey as keyof Item] : item.label}
               </CommandItem>
             ))}
           </CommandGroup>

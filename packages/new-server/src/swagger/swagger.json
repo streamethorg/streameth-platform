@@ -7,8 +7,14 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"mongoose.Types.ObjectId": {
+				"type": "string"
+			},
 			"IOrganization": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -29,6 +35,9 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"walletAddress": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -36,7 +45,8 @@
 					"description",
 					"url",
 					"logo",
-					"location"
+					"location",
+					"walletAddress"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -100,9 +110,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"mongoose.Types.ObjectId": {
-				"type": "string"
-			},
 			"IStreamSettings": {
 				"properties": {
 					"streamId": {
@@ -154,12 +161,23 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
 					}
 				},
 				"required": [
 					"name",
 					"eventId",
-					"streamSettings"
+					"streamSettings",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -183,7 +201,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"StageDto": {
+			"CreateStageDto": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -206,12 +224,53 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"name",
 					"eventId",
-					"streamSettings"
+					"streamSettings",
+					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateStageDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"eventId": {
+						"type": "string"
+					},
+					"streamSettings": {
+						"$ref": "#/components/schemas/IStreamSettings"
+					},
+					"plugins": {
+						"items": {
+							"$ref": "#/components/schemas/IPlugin"
+						},
+						"type": "array"
+					},
+					"order": {
+						"type": "number",
+						"format": "double"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"eventId",
+					"streamSettings",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -255,6 +314,18 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"OrgIdDto": {
+				"properties": {
+					"organizationId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"ISpeaker": {
 				"properties": {
 					"_id": {
@@ -293,12 +364,23 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
 					}
 				},
 				"required": [
 					"name",
 					"bio",
-					"eventId"
+					"eventId",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -322,7 +404,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"SpeakerDto": {
+			"CreateSpeakerDto": {
 				"properties": {
 					"_id": {
 						"type": "string"
@@ -353,12 +435,16 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"name",
 					"bio",
-					"eventId"
+					"eventId",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -399,9 +485,6 @@
 						"format": "double"
 					}
 				},
-				"required": [
-					"streamUrl"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -424,13 +507,6 @@
 						"format": "double"
 					}
 				},
-				"required": [
-					"livepeerId",
-					"videoUrl",
-					"ipfsHash",
-					"format",
-					"duration"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -564,11 +640,116 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"SessionDto": {
+			"Pick_ISession.Exclude_keyofISession._id__": {
 				"properties": {
-					"_id": {
-						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					"name": {
+						"type": "string"
 					},
+					"description": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"stageId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"source": {
+						"$ref": "#/components/schemas/ISource"
+					},
+					"assetId": {
+						"type": "string"
+					},
+					"playback": {
+						"$ref": "#/components/schemas/IPlayback"
+					},
+					"videoUrl": {
+						"type": "string"
+					},
+					"playbackId": {
+						"type": "string"
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"track": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"coverImage": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"eventSlug": {
+						"type": "string"
+					},
+					"videoTranscription": {
+						"type": "string"
+					},
+					"aiDescription": {
+						"type": "string"
+					},
+					"autoLabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"start",
+					"end",
+					"stageId",
+					"speakers",
+					"eventId",
+					"organizationId"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"CreateSessionDto": {
+				"properties": {
 					"name": {
 						"type": "string"
 					},
@@ -639,6 +820,87 @@
 							"type": "string"
 						},
 						"type": "array"
+					},
+					"autolabels": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"start",
+					"end",
+					"stageId",
+					"speakers",
+					"eventId",
+					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateSessionDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"stageId": {
+						"type": "string"
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"source": {
+						"$ref": "#/components/schemas/ISource"
+					},
+					"playback": {
+						"$ref": "#/components/schemas/IPlayback"
+					},
+					"videoUrl": {
+						"type": "string"
+					},
+					"playbackId": {
+						"type": "string"
+					},
+					"eventId": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"track": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"coverImage": {
+						"type": "string"
+					},
+					"eventSlug": {
+						"type": "string"
+					},
+					"videoTranscription": {
+						"type": "string"
+					},
+					"aiDescription": {
+						"type": "string"
 					},
 					"autolabels": {
 						"items": {
@@ -732,7 +994,83 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"OrganizationDto": {
+			"Pick_IOrganization.Exclude_keyofIOrganization._id__": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"walletAddress": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"url",
+					"logo",
+					"location",
+					"walletAddress"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"CreateOrganizationDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"walletAddress": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"url",
+					"logo",
+					"location",
+					"walletAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateOrganizationDto": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -752,7 +1090,10 @@
 					"accentColor": {
 						"type": "string"
 					},
-					"slug": {
+					"walletAddress": {
+						"type": "string"
+					},
+					"organizationId": {
 						"type": "string"
 					}
 				},
@@ -761,10 +1102,24 @@
 					"description",
 					"url",
 					"logo",
-					"location"
+					"location",
+					"walletAddress",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"Pick_CreateOrganizationDto.walletAddress_": {
+				"properties": {
+					"walletAddress": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"walletAddress"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"IStandardResponse_Array_IOrganization__": {
 				"properties": {
@@ -929,10 +1284,26 @@
 						"type": "string"
 					},
 					"start": {
-						"type": "string"
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"end": {
-						"type": "string"
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"location": {
 						"type": "string"
@@ -1030,7 +1401,95 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"EventDto": {
+			"CreateEventDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"start": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"end": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"location": {
+						"type": "string"
+					},
+					"logo": {
+						"type": "string"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"endTime": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"dataImporter": {
+						"items": {
+							"$ref": "#/components/schemas/IDataImporter"
+						},
+						"type": "array"
+					},
+					"eventCover": {
+						"type": "string"
+					},
+					"archiveMode": {
+						"type": "boolean"
+					},
+					"website": {
+						"type": "string"
+					},
+					"timezone": {
+						"type": "string"
+					},
+					"accentColor": {
+						"type": "string"
+					},
+					"unlisted": {
+						"type": "boolean"
+					},
+					"dataExporter": {
+						"items": {
+							"$ref": "#/components/schemas/IDataExporter"
+						},
+						"type": "array"
+					},
+					"enableVideoDownloader": {
+						"type": "boolean"
+					},
+					"plugins": {
+						"$ref": "#/components/schemas/IPlugins"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"start",
+					"end",
+					"location",
+					"organizationId",
+					"timezone",
+					"logo",
+					"banner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateEventDto": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -1241,7 +1700,7 @@
 		"contact": {}
 	},
 	"paths": {
-		"/users/{userId}": {
+		"/users/{walletAddress}": {
 			"get": {
 				"operationId": "GetUserById",
 				"responses": {
@@ -1267,7 +1726,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "userId",
+						"name": "walletAddress",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -1296,7 +1755,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [],
@@ -1305,7 +1766,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/StageDto"
+								"$ref": "#/components/schemas/CreateStageDto"
 							}
 						}
 					}
@@ -1352,7 +1813,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [
@@ -1370,7 +1833,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/StageDto"
+								"$ref": "#/components/schemas/UpdateStageDto"
 							}
 						}
 					}
@@ -1424,7 +1887,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [
@@ -1436,7 +1901,17 @@
 							"type": "string"
 						}
 					}
-				]
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OrgIdDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/stages/event/{eventId}": {
@@ -1490,7 +1965,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [],
@@ -1499,7 +1976,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/SpeakerDto"
+								"$ref": "#/components/schemas/CreateSpeakerDto"
 							}
 						}
 					}
@@ -1588,7 +2065,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [],
@@ -1597,7 +2076,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/SessionDto"
+								"$ref": "#/components/schemas/CreateSessionDto"
 							}
 						}
 					}
@@ -1688,6 +2167,14 @@
 							"format": "double",
 							"type": "number"
 						}
+					},
+					{
+						"in": "query",
+						"name": "assetId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
 					}
 				]
 			}
@@ -1712,7 +2199,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [
@@ -1730,7 +2219,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/SessionDto"
+								"$ref": "#/components/schemas/UpdateSessionDto"
 							}
 						}
 					}
@@ -1781,6 +2270,7 @@
 						}
 					}
 				},
+				"summary": "Create organization",
 				"tags": [
 					"Organization"
 				],
@@ -1795,7 +2285,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/OrganizationDto"
+								"$ref": "#/components/schemas/CreateOrganizationDto"
 							}
 						}
 					}
@@ -1815,6 +2305,7 @@
 						}
 					}
 				},
+				"summary": "Get all organizations",
 				"tags": [
 					"Organization"
 				],
@@ -1837,12 +2328,15 @@
 						}
 					}
 				},
+				"summary": "Update organization",
 				"tags": [
 					"Organization"
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [
@@ -1860,7 +2354,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/OrganizationDto"
+								"$ref": "#/components/schemas/UpdateOrganizationDto"
 							}
 						}
 					}
@@ -1880,6 +2374,7 @@
 						}
 					}
 				},
+				"summary": "Get organization by",
 				"tags": [
 					"Organization"
 				],
@@ -1909,12 +2404,15 @@
 						}
 					}
 				},
+				"summary": "Delete organization",
 				"tags": [
 					"Organization"
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [
@@ -1926,7 +2424,65 @@
 							"type": "string"
 						}
 					}
-				]
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OrgIdDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/organizations/members/{organizationId}": {
+			"put": {
+				"operationId": "UpdateOrgMembers",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Add members to organization",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.walletAddress_"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/": {
@@ -1951,6 +2507,45 @@
 				"parameters": []
 			}
 		},
+		"/webhook": {
+			"post": {
+				"operationId": "Webhook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Index"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "Livepeer-Signature",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
 		"/events": {
 			"post": {
 				"operationId": "CreateEvent",
@@ -1972,7 +2567,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [],
@@ -1981,7 +2578,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/EventDto"
+								"$ref": "#/components/schemas/CreateEventDto"
 							}
 						}
 					}
@@ -2029,7 +2626,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [
@@ -2047,7 +2646,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/EventDto"
+								"$ref": "#/components/schemas/UpdateEventDto"
 							}
 						}
 					}
@@ -2101,7 +2700,9 @@
 				],
 				"security": [
 					{
-						"jwt": []
+						"jwt": [
+							"org"
+						]
 					}
 				],
 				"parameters": [
@@ -2113,7 +2714,17 @@
 							"type": "string"
 						}
 					}
-				]
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OrgIdDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/events/organization/{organizationId}": {

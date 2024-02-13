@@ -8,7 +8,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class SessionDto implements ISession {
+export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsNotEmpty()
   @IsString()
   name: string;

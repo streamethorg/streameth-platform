@@ -4,11 +4,11 @@ import Image from 'next/image'
 import VideoGrid from '@/components/misc/Videos'
 import Link from 'next/link'
 import { archivePath } from '@/lib/utils/utils'
-import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
+import { IExtendedOrganization } from '@/lib/types'
 export default async function OrganizationStrip({
   organization,
 }: {
-  organization: IOrganizationModel
+  organization: IExtendedOrganization
 }) {
   const videos = (
     await fetchAllSessions({
@@ -37,7 +37,7 @@ export default async function OrganizationStrip({
           </CardTitle>
         </Link>
       </div>
-      <div className="flex flex-row overflow-y-scroll gap-4 h-full">
+      <div className="flex flex-row overflow-y-auto gap-4 h-full">
         <VideoGrid scroll videos={videos} maxVideos={7} />
       </div>
     </div>

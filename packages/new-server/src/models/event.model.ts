@@ -5,8 +5,8 @@ const EventSchema = new Schema<IEventModel>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
     description: { type: String, default: '', required: true },
-    start: { type: String, default: '' },
-    end: { type: String, default: '' },
+    start: { type: Date, default: '' },
+    end: { type: Date, default: '' },
     location: { type: String, default: '', required: true },
     logo: { type: String, default: '' },
     banner: { type: String, default: '' },

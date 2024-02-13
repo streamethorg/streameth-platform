@@ -1,7 +1,7 @@
 import { ISpeaker } from '@interfaces/speaker.interface';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class SpeakerDto implements ISpeaker {
+export class CreateSpeakerDto implements ISpeaker {
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -33,4 +33,8 @@ export class SpeakerDto implements ISpeaker {
   @IsOptional()
   @IsString()
   company?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string;
 }

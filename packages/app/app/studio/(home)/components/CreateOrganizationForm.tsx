@@ -24,10 +24,13 @@ import { toast } from 'sonner'
 import { createOrganizationAction } from '@/lib/actions/organizations'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
+import { useAccount } from 'wagmi'
+import { generateId } from 'streameth-new-server/src/utils/util'
 
 export default function CreateOrganization() {
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { address } = useAccount()
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
     defaultValues: {
@@ -42,24 +45,29 @@ export default function CreateOrganization() {
   function onSubmit(values: z.infer<typeof organizationSchema>) {
     setIsLoading(true)
     createOrganizationAction({
-      organization: values,
+      organization: { ...values, walletAddress: address as string },
     })
       .then(() => {
         setIsOpen(false)
-        toast.success('Orgaiaztion created')
+        toast.success('Organization created')
       })
       .catch(() => {
-        toast.error('Error creating stage')
+        toast.error('Error creating organization')
       })
       .finally(() => {
         setIsLoading(false)
       })
   }
 
+  const isSubmitDisabled =
+    form.formState.isSubmitting ||
+    !form.formState.isValid ||
+    Object.keys(form.formState.dirtyFields).length === 0
+
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <Button variant={'secondary'} onClick={() => setIsOpen(true)}>
-        Create
+        Create an Organization
       </Button>
       <DialogContent className="bg-background">
         <DialogHeader>
@@ -124,6 +132,7 @@ export default function CreateOrganization() {
               )}
             />
             <FormField
+              disabled={!form.getValues('name')}
               control={form.control}
               name="logo"
               render={({ field }) => (
@@ -132,7 +141,9 @@ export default function CreateOrganization() {
                   <FormControl>
                     <ImageUpload
                       aspectRatio={1}
-                      path="organizations"
+                      path={`organizations/${generateId(
+                        form.getValues('name')
+                      )}`}
                       {...field}
                     />
                   </FormControl>
@@ -140,14 +151,16 @@ export default function CreateOrganization() {
                 </FormItem>
               )}
             />
-            {isLoading ? (
-              <Button disabled>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </Button>
-            ) : (
-              <Button type="submit">Create</Button>
-            )}
+            <Button disabled={isSubmitDisabled} type="submit">
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                  Please wait
+                </>
+              ) : (
+                'Create'
+              )}
+            </Button>
           </form>
         </Form>
       </DialogContent>
