@@ -45,14 +45,38 @@ export class AuthController extends Controller {
     @Body() token: AuthDto,
   ): Promise<IStandardResponse<boolean>> {
     const status = await this.authService.verifyToken(token);
-    return SendApiResponse('success', status);
+    return SendApiResponse('Success', status);
+  }
+
+  @SuccessResponse('202')
+  @Get('oauth2')
+  async loginYoutube(
+    @Request() req: express.Request,
+  ): Promise<IStandardResponse<string>> {
+    try {
+      const url = await validateOAuth();
+
+      return SendApiResponse('Success', url);
+    } catch (err) {
+      console.error(err);
+
+      return SendApiResponse(err.toString(), null, '500');
+    }
   }
 
   @SuccessResponse('200')
-  @Post('oauth2')
-  async loginYoutube(@Body() req: any): Promise<IStandardResponse<string>> {
-    const url = await validateOAuth();
+  @Get('/google/callback')
+  async googleCallback(
+    @Request() req: express.Request,
+  ): Promise<IStandardResponse<string>> {
+    try {
+      console.log(req);
 
-    return SendApiResponse('success', url);
+      return SendApiResponse('Success');
+    } catch (err) {
+      console.error(err);
+
+      return SendApiResponse(err.toString(), null, '500');
+    }
   }
 }

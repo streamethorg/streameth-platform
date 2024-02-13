@@ -45,6 +45,12 @@ export interface WatchPageProps {
   }
 }
 
+export interface GoogleCallbackProps {
+  searchParams: {
+    code: string
+  }
+}
+
 export interface IPagination {
   currentPage?: number
   totalPages: number
@@ -72,8 +78,8 @@ export interface IExtendedOrganization
 export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
 }
-export interface IStage extends IStageModel {}
-export interface ISpeaker extends ISpeakerModel {}
+export interface IStage extends IStageModel { }
+export interface ISpeaker extends ISpeakerModel { }
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
   organizations: IExtendedOrganization[]
 }

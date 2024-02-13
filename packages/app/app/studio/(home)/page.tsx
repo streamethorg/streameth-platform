@@ -22,9 +22,7 @@ const Studio = async () => {
     return <AuthorizationMessage />
   }
   const userData: IExtendedUser = await fetchUserAction({})
-  const response = await fetch(`${apiUrl()}/auth/oauth2`, {
-    method: 'POST',
-  })
+  const response = await fetch(`${apiUrl()}/auth/oauth2`)
   const another_response = await response.json()
   const url = another_response.data || 'streameth.org'
 
