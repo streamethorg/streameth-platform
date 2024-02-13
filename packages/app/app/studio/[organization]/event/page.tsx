@@ -9,6 +9,7 @@ import { studioPageParams } from '@/lib/types'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
 import { fetchAllSessions } from '@/lib/data'
+
 export default async function EventPage({
   searchParams,
 }: studioPageParams) {

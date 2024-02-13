@@ -31,7 +31,7 @@ const ScheduleComponent = async ({
 
   const sessionsData = await fetchAllSessions({
     event: event.slug,
-    stageId: stage ?? stages[0]?.id,
+    stageId: stage ?? stages[0].id,
   })
 
   const sessions = sessionsData.sessions.filter((session) => {
