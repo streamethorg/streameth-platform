@@ -3,7 +3,14 @@ import SideNavigation from '@/components/Layout/SideNavigation'
 import { File, Inbox } from 'lucide-react'
 import { studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
-import { cookies } from 'next/headers'
+import React from 'react'
+
+import { fetchUserAction } from '@/lib/actions/users'
+import CreateOrganization from '../(home)/components/CreateOrganizationForm'
+import SwitchOrganization from './components/SwitchOrganization'
+import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
+import CheckAuthorization from '@/components/authorization/CheckAuthorization'
+import { hasOrganization } from '@/lib/utils/utils'
 
 export type variant =
   | 'default'
@@ -13,16 +20,34 @@ export type variant =
   | 'ghost'
   | 'link'
 
-const Layout = ({
+const Layout = async ({
   children,
   params,
 }: {
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
-  const userSession = cookies().get('user-session')
-  if (!userSession?.value) {
-    return <>Unauthroised</>
+  const isAuthorized = CheckAuthorization()
+  if (!isAuthorized) {
+    return <AuthorizationMessage />
+  }
+  const userData = await fetchUserAction({})
+
+  if (
+    !hasOrganization(userData?.organizations, params.organization)
+  ) {
+    return (
+      <div className="flex flex-col items-center h-screen justify-center">
+        You do not belong to this organization, switch organization or
+        create a new one
+        <div className="flex gap-5 mt-5">
+          <SwitchOrganization
+            organizations={userData?.organizations}
+          />
+          <CreateOrganization />
+        </div>
+      </div>
+    )
   }
 
   const links = [

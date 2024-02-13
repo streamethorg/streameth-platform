@@ -1,4 +1,5 @@
-import { ConnectKitButton } from 'connectkit'
+'use client'
+import { ConnectKitButton, useSIWE } from 'connectkit'
 
 interface ConnectWalletButtonProps {
   btnText?: string
@@ -7,6 +8,7 @@ interface ConnectWalletButtonProps {
 export const ConnectWalletButton = ({
   btnText = 'Connect Wallet',
 }: ConnectWalletButtonProps) => {
+  const { isSignedIn } = useSIWE()
   return (
     <ConnectKitButton.Custom>
       {({ isConnected, show, truncatedAddress, ensName }) => {
@@ -15,7 +17,11 @@ export const ConnectWalletButton = ({
             <button
               onClick={show}
               className="text-black text-sm font-ubuntu font-bold rounded-xl h-full w-full bg-white py-1 px-3">
-              {isConnected ? ensName ?? truncatedAddress : btnText}
+              {isConnected && !isSignedIn
+                ? 'Sign In'
+                : isConnected
+                ? ensName ?? truncatedAddress
+                : btnText}
             </button>
           </div>
         )

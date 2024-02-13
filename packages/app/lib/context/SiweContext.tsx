@@ -15,7 +15,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { createPublicClient } from 'viem'
 
 let nonce: string
 let walletAddress: string
@@ -55,18 +54,32 @@ const siweConfig = {
     if (!res.ok) throw new Error('Failed to Verify')
     const data = (await res.json()).data
     localStorage.setItem('SWIEToken', data.token)
+    localStorage.setItem('address', walletAddress)
     // save to user-session cookie
     storeSession({
       token: data.token,
+      address: walletAddress,
     })
     return data
   },
   getSession: async () => {
     if (localStorage.getItem('SWIEToken')) {
-      return {
-        address: '0xA93950A195877F4eBC8A4aF3F6Ce2a109404b575',
-        chainId: 1,
-      }
+      const res = await fetch(`${apiUrl()}/auth/verify-token`, {
+        method: 'POST',
+        body: JSON.stringify({
+          token: localStorage.getItem('SWIEToken'),
+        }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      const resData = (await res.json()).data
+      const address = localStorage.getItem('address')
+      if (resData && address) {
+        return {
+          address: address as string,
+          chainId: 1,
+        }
+      } else return null
     }
     return null
   },
@@ -75,9 +88,11 @@ const siweConfig = {
     // delete user-session cookie
     storeSession({
       token: '',
+      address: '',
     })
     // delete token
     localStorage.removeItem('SWIEToken')
+    localStorage.removeItem('address')
     return true
   },
 } satisfies SIWEConfig
@@ -91,7 +106,7 @@ const config = createConfig(
       [mainnet.id]: http(),
       [base.id]: http(),
     },
-ssr: true,
+    ssr: true,
     // Required API Keys
     walletConnectProjectId:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
@@ -112,9 +127,9 @@ const SiweContext = (props: PropsWithChildren) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        {/* <SIWEProvider {...siweConfig}> */}
+        <SIWEProvider {...siweConfig}>
           <ConnectKitProvider>{props.children}</ConnectKitProvider>
-        {/* </SIWEProvider> */}
+        </SIWEProvider>
       </QueryClientProvider>
     </WagmiProvider>
   )

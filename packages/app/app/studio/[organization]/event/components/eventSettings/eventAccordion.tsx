@@ -43,9 +43,9 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
     defaultValues: {
       name: event.name,
       description: event.description,
-      start: event.start,
+      start: new Date(event.start),
       startTime: event.startTime,
-      end: event.end,
+      end: new Date(event.end),
       endTime: event.endTime,
       location: event.location,
       logo: event.logo,
@@ -144,7 +144,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                         <FormLabel className="">Start Date</FormLabel>
                         <FormControl>
                           <DatePicker
-                            value={new Date(field.value)}
+                            value={field.value}
                             onChange={field.onChange}
                           />
                         </FormControl>
@@ -178,7 +178,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                         <FormLabel className="">End Date</FormLabel>
                         <FormControl>
                           <DatePicker
-                            value={new Date(field.value)}
+                            value={field.value}
                             onChange={field.onChange}
                           />
                         </FormControl>
