@@ -62,7 +62,7 @@ const Navigation = ({
       <EventAccordion event={event} />
       <div className="flex flex-row p-2 justify-between items-center border-b border-border">
         <h3 className="text-2xl font-bold mt-4 mb-2">Livestreams</h3>
-        {stages.length > 0 && <CreateStageForm eventId={event._id} />}
+        {stages.length > 0 && <CreateStageForm event={event} />}
       </div>
       {stages.length > 0 ? (
         <StagesAccordion stages={stages} />
@@ -71,7 +71,7 @@ const Navigation = ({
           <div className="text-sm ">
             No livestreams yet. Create one to get started.
           </div>
-          <CreateStageForm eventId={event._id} />
+          <CreateStageForm event={event} />
         </div>
       )}
       <div className=" flex flex-row justify-between items-center mt-auto p-2">

@@ -36,7 +36,7 @@ const MultistreamCard = ({ streamId }: { streamId: string }) => {
           />
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col space-y-2 flex-grow overflow-scroll">
+      <CardContent className="flex flex-col space-y-2 flex-grow overflow-auto">
         <div className="flex flex-row border-b">
           <div className="w-1/2 font-bold">Name</div>
           <div className="w-1/4 font-bold">Profile</div>

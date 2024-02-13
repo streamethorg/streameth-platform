@@ -37,7 +37,7 @@ export default async function OrganizationStrip({
           </CardTitle>
         </Link>
       </div>
-      <div className="flex flex-row overflow-y-scroll gap-4 h-full">
+      <div className="flex flex-row overflow-y-auto gap-4 h-full">
         <VideoGrid scroll videos={videos} maxVideos={7} />
       </div>
     </div>

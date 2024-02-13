@@ -10,7 +10,7 @@ const Layout = async ({
   return (
     <div className="w-full">
       <HomePageNavbar />
-      <div className="top-[74px] flex flex-col p-4 overflow-scroll text-foreground">
+      <div className="top-[74px] flex flex-col overflow-auto p-4 text-foreground">
         {children}
       </div>
       <Footer />

@@ -23,11 +23,12 @@ import { StageSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import { createStageAction } from '@/lib/actions/stages'
 import { Loader2 } from 'lucide-react'
+import { IExtendedEvent } from '@/lib/types'
 
 export default function CreateStageForm({
-  eventId,
+  event,
 }: {
-  eventId: string
+  event: IExtendedEvent
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -35,7 +36,8 @@ export default function CreateStageForm({
     resolver: zodResolver(StageSchema),
     defaultValues: {
       name: '',
-      eventId: eventId,
+      eventId: event?._id,
+      organizationId: event?.organizationId as string,
       streamSettings: {
         streamId: '',
       },

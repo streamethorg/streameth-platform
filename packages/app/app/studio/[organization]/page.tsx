@@ -5,7 +5,6 @@ import {
   CardContent,
 } from '@/components/ui/card'
 import { studioPageParams } from '@/lib/types'
-import { fetchOrganization } from '@/lib/services/organizationService'
 import { fetchEvents } from '@/lib/services/eventService'
 import Image from 'next/image'
 import Link from 'next/link'

@@ -24,11 +24,11 @@ export class CreateEventDto implements IEvent {
 
   @IsNotEmpty()
   @IsString()
-  start!: string;
+  start!: Date;
 
   @IsNotEmpty()
   @IsString()
-  end!: string;
+  end!: Date;
 
   @IsNotEmpty()
   @IsString()
