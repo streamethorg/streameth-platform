@@ -66,9 +66,13 @@ export const hasData = ({ event }: { event: IExtendedEvent }) => {
 }
 
 export const getImageUrl = (image: string) => {
-  //return `https://raw.githubusercontent.com/streamethorg/streameth-platform/main/images${image}`
-  // temp revert to github
-  return `https://streameth-production.ams3.digitaloceanspaces.com${image}`
+  const spaceStorage =
+    process.env.NEXT_PUBLIC_SPACE_STORAGE_URL || null
+  if (!spaceStorage) {
+    throw new Error('No SPACE STORAGE URL key found')
+  }
+
+  return spaceStorage + image
 }
 
 export const loadEnv = () => {
