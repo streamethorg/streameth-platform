@@ -99,7 +99,8 @@ export async function fetchAllSessions({
     startIndex,
     endIndex
   )
-
+    // throttle for test
+    await new Promise((r) => setTimeout(r, 1000))
   // Return paginated data and pagination metadata
   return {
     sessions: searchQuery ? paginatedSessions : allSessions.sessions,

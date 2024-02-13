@@ -29,10 +29,9 @@ const ScheduleComponent = async ({
     new Date(event.end)
   )
 
-  console.log(stage, date)
   const sessionsData = await fetchAllSessions({
     event: event.slug,
-    stageId: stage,
+    stageId: stage ?? stages[0].id,
   })
 
   const sessions = sessionsData.sessions.filter((session) => {
@@ -62,5 +61,34 @@ const ScheduleComponent = async ({
     </Card>
   )
 }
+
+export const ScheduleSkeleton = () => (
+  <div className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow animate-pulse">
+    <div className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
+      {/* Title Placeholder */}
+      <div className="h-10 bg-gray-300 rounded w-1/4"></div>
+      {/* Date Select Placeholder */}
+      <div className="flex-1 flex space-x-2">
+        <div className="h-10 bg-gray-300 rounded w-full max-w-xs"></div>
+      </div>
+      {/* Stage Select Placeholder */}
+      <div className="flex-1 flex space-x-2">
+        <div className="h-10 bg-gray-300 rounded w-full max-w-xs"></div>
+      </div>
+    </div>
+    <div className="p-3 lg:p-6">
+      <div className="w-full flex flex-col relative space-y-2">
+        {/* Session List Placeholders */}
+        {Array(5)
+          .fill(0)
+          .map((_, index) => (
+            <div
+              key={index}
+              className="h-20 bg-gray-300 rounded"></div>
+          ))}
+      </div>
+    </div>
+  </div>
+)
 
 export default ScheduleComponent

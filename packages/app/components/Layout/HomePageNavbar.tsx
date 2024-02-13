@@ -129,7 +129,7 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className="max-w-[100vw] p-2 hidden md:hidden z-[99] backdrop-blur-sm bg-opacity-90 sticky top-0 lg:flex flex-row items-center justify-between">
+    <NavigationMenu className="w-full p-2 hidden md:hidden z-[99] backdrop-blur-sm bg-opacity-90 sticky top-0 lg:flex flex-row items-center justify-between">
       <Link href="/">
         <Image
           src="/logo_dark.png"

@@ -29,8 +29,6 @@ const Layout = async ({
     backgroundColor: event.accentColor,
   } as React.CSSProperties
 
-  console.log(navbarRoutes)
-
   return (
     <div
       className="w-full h-full flex flex-col  z-1 min-h-screen"
