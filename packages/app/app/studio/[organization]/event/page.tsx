@@ -10,6 +10,7 @@ import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
 import { fetchAllSessions } from '@/lib/data'
 import { NavigationProvider } from './components/navigation/navigationContext'
+
 export default async function EventPage({
   searchParams,
 }: studioPageParams) {

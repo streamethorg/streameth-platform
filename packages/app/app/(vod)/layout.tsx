@@ -7,11 +7,34 @@ const Layout = async ({
 }: {
   children: React.ReactNode
 }) => {
+  const pages = [
+    {
+      name: 'Videography',
+      href: 'https://info.streameth.org/stream-eth-studio',
+      bgColor: 'bg-muted ',
+    },
+    {
+      name: 'Product',
+      href: 'https://info.streameth.org/services',
+      bgColor: 'bg-muted ',
+    },
+    {
+      name: 'Host your event',
+      href: 'https://info.streameth.org/contact-us',
+      bgColor: 'bg-primary text-primary-foreground',
+    },
+    // {
+    //   name: 'studio',
+    //   href: '/studio/base',
+    //   bgColor: 'bg-primary text-primary-foreground',
+    // },
+  ]
+
   return (
-    <div className="mx-auto w-screen max-w-screen-2xl h-screen">
-      <HomePageNavbar />
+    <div className="mx-auto w-full max-w-screen-2xl h-screen">
+      <HomePageNavbar pages={pages} />
       <div className=" flex flex-col overflow-auto p-2 lg:p-4">
-        <Suspense>{children}</Suspense>
+        {children}
       </div>
       <div className="sticky mb-5 top-[100vh]">
         <Footer />
