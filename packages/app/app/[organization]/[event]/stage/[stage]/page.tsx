@@ -1,6 +1,5 @@
 import Player from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
-import SessionList from '@/components/sessions/SessionList'
 import Chat from '@/components/plugins/Chat'
 import { EventPageProps } from '@/lib/types'
 import { fetchAllSessions } from '@/lib/data'
@@ -8,6 +7,9 @@ import { fetchEvent } from '@/lib/services/eventService'
 import { fetchStage } from '@/lib/services/stageService'
 import UpcomingSession from '../components/UpcomingSession'
 import { notFound } from 'next/navigation'
+import { generalMetadata, stageMetadata } from '@/lib/utils/metadata'
+import { Metadata } from 'next'
+
 export default async function Stage({ params }: EventPageProps) {
   if (!params.event || !params.stage) {
     return notFound()
@@ -55,4 +57,29 @@ export default async function Stage({ params }: EventPageProps) {
       </div>
     </div>
   )
+}
+
+export async function generateMetadata({
+  params,
+}: EventPageProps): Promise<Metadata> {
+  if (!params.event || !params.stage) {
+    return generalMetadata
+  }
+
+  const event = await fetchEvent({
+    eventId: params.event,
+  })
+
+  const stage = await fetchStage({
+    stage: params.stage,
+  })
+
+  if (!event || !stage) {
+    return generalMetadata
+  }
+
+  return stageMetadata({
+    event,
+    stage,
+  })
 }

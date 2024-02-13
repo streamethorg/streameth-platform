@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-import { IExtendedEvent } from '../types'
-
+import { IExtendedEvent, IExtendedSession } from '../types'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 const BASE_IMAGE = 'https://streameth.org/streameth_banner.png'
 
 export const generalMetadata: Metadata = {
@@ -59,7 +59,7 @@ export const archiveMetadata = ({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${event} | StreamETH`,
+      title: `${event.name} | StreamETH`,
       description: `${event.description}`,
       images: {
         url: imageUrl,
@@ -101,6 +101,50 @@ export const watchMetadata = ({
       card: 'summary_large_image',
       title: `${session.name} | StreamETH`,
       description: `${session.description}`,
+      images: {
+        url: imageUrl,
+        alt: 'StreamETH Logo',
+      },
+    },
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en-US': '/en-US',
+      },
+    },
+  }
+}
+
+
+export const stageMetadata = ({
+  event,
+  stage
+}: {
+  event: IExtendedEvent,
+  stage: IStageModel
+}):Metadata => {
+
+  const imageUrl = event.eventCover
+    ? event.eventCover
+    : BASE_IMAGE
+
+  return {
+    title: `${stage.name} | StreamETH`,
+    description: `${event.description}`,
+    metadataBase: new URL('https://streameth.org'),
+    openGraph: {
+      title: `${stage.name} | StreamETH`,
+      siteName: 'StreamETH',
+      description: `${event.description}`,
+      images: {
+        url: imageUrl,
+        alt: 'StreamETH Logo',
+      },
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${stage.name} | StreamETH`,
+      description: `${event.description}`,
       images: {
         url: imageUrl,
         alt: 'StreamETH Logo',

@@ -31,7 +31,7 @@ const UpcomingSession = ({
         </button>
       </div>
       {isVisible && (
-        <div className="p-2">
+        <div className="p-1">
           <ScheduleCard
             event={event}
             session={currentSession}
