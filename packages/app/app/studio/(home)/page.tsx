@@ -12,8 +12,6 @@ import { fetchUserAction } from '@/lib/actions/users'
 import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
 import { IExtendedUser } from '@/lib/types'
-import { Youtube } from 'lucide-react'
-import { cookies } from 'next/headers'
 
 const Studio = async () => {
   const isAuthorized = CheckAuthorization()
@@ -22,35 +20,17 @@ const Studio = async () => {
     return <AuthorizationMessage />
   }
   const userData: IExtendedUser = await fetchUserAction({})
-  const response = await fetch(
-    'http://localhost:3000/api/google/oauth2',
-    {
-      cache: 'no-store',
-    }
-  )
-  if (!response.ok) {
-    throw new Error(await response.text())
-  }
-  const url = await response.json()
-
-  const encodedToken = cookies().get('google_token')
-  const token = JSON.parse(
-    decodeURIComponent(encodedToken?.value || '')
-  )
-  console.log(token)
 
   return (
     <div className="flex flex-col p-4 w-full h-full">
       <div className="flex justify-between items-center mb-20">
         <h1>Studio</h1>
-        {!token && (
-          <div>
-            <Link href={url}>
-              <Youtube />
-            </Link>
-          </div>
-        )}
-        <CreateOrganization />
+        <div className="flex items-center">
+          <CreateOrganization />
+          <Link href={'studio/user'}>
+            <div className="mx-3 w-10 h-10 bg-black rounded-full"></div>
+          </Link>
+        </div>
       </div>
       {userData?.organizations?.length > 0 ? (
         <div className="grid grid-cols-3 gap-4">
