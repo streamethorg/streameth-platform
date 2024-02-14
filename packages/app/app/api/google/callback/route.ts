@@ -28,8 +28,21 @@ export async function GET(request: NextRequest) {
     })
 
     oAuthClient.setCredentials(tokens as Credentials)
+    console.log(tokens)
 
-    return NextResponse.redirect('http://localhost:3000/studio')
+    const encodedTokens = encodeURIComponent(JSON.stringify(tokens))
+    const oneMonth = 31 * 24 * 60 * 60 * 1000 // Milliseconds in one month
+    const cookieValue = `google_token=${encodedTokens}; Secure; Max-Age=${
+      oneMonth / 1000
+    }; Path=/`
+
+    const baseUrl = request.nextUrl.origin
+    const response = NextResponse.redirect(
+      `http://localhost:3000/studio`
+    )
+    response.headers.set('Set-Cookie', cookieValue)
+
+    return response
   } catch (err) {
     return NextResponse.json(
       { error: err },
