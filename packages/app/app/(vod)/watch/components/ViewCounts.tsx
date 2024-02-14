@@ -1,12 +1,12 @@
-import { useAssetMetrics } from '@livepeer/react'
+import { getSessionMetrics } from '@/lib/actions/sessions'
 
-const ViewCounts = ({ assetId }: { assetId: string }) => {
-  const { data, isLoading } = useAssetMetrics({ assetId })
-  if (isLoading) return null
-  const viewMetrics = data?.metrics[0].startViews
+const ViewCounts = async ({ playbackId }: { playbackId: string }) => {
+  const data = await getSessionMetrics({ playbackId })
 
   return (
-    <p className="text-sm text-secodary py-2">{viewMetrics} views</p>
+    <p className="text-sm text-secodary py-2">
+      {data.viewCount} views
+    </p>
   )
 }
 

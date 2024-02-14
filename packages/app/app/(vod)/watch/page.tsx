@@ -31,7 +31,7 @@ export default async function Watch({
 
   return (
     <div className="h-full flex flex-col w-full gap-4 lg:flex-row relative">
-      <div className="flex flex-col w-full h-full z-40 lg:w-[75%] sticky lg:relative lg:top-0 gap-2 ">
+      <div className="flex flex-col w-full h-full lg:w-[75%] gap-2 ">
         <PlayerWithControls
           src={[
             {

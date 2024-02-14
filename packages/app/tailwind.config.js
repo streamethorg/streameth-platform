@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        streameth: "bg-gradient-to-b from-[#FF9976] to-[#6426EF]",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

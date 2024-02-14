@@ -84,7 +84,7 @@ const SessionInfoBox = ({
             <span>{title}</span>
           </CardTitle>
           <CardDescription>
-            {viewCount && assetId && <ViewCounts assetId={assetId} />}
+            {/* {viewCount && playbackId && <ViewCounts playbackId={playbackId}/>} */}
             <div
               className={`inverted && ${'text-white'} flex flex-row`}>
               {cardDescription}
@@ -98,7 +98,7 @@ const SessionInfoBox = ({
             playbackId={playbackId}
             playerName={playerName}
           />
-          {assetId && <VideoDownload assetId={assetId} />}
+          {/* {assetId && <VideoDownload assetId={assetId} />} */}
         </div>
         {/* <DropdownMenuWithActionButtons
           streamId={streamId}

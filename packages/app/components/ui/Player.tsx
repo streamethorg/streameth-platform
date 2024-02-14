@@ -34,7 +34,7 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
 
   return (
     <Player.Root src={props.src}>
-      <Player.Container className="h-full w-full overflow-hidden bg-black outline-none transition">
+      <Player.Container className="rounded-md bg-gradient-to-b from-[#FF9976] to-[#6426EF]  h-full w-full overflow-hidden  outline-none transition">
         <Player.Video
           title="Live stream"
           className={cn('h-full w-full transition')}
@@ -95,7 +95,7 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
             <div className="flex flex-1 items-center gap-3">
               <Player.PlayPauseTrigger className="w-6 h-6 hover:scale-110 transition flex-shrink-0">
                 <Player.PlayingIndicator asChild matcher={false}>
-                  <PlayIcon className="w-full h-full" />
+                  <PlayIcon className=" w-full h-full" />
                 </Player.PlayingIndicator>
                 <Player.PlayingIndicator asChild>
                   <PauseIcon className="w-full h-full" />
@@ -253,13 +253,16 @@ export const Settings = React.forwardRef(function Search(
           type="button"
           className={className}
           aria-label="Playback settings"
-          onClick={(e) => e.stopPropagation()}>
+          onClick={(e) => {
+            console.log(e)
+            e.stopPropagation()
+          }}>
           <SettingsIcon />
         </button>
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
-          className="w-60 rounded-md bg-black/50 border border-white/50 backdrop-blur-md p-3 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+          className=" w-60 rounded-md text-white bg-black/50 border border-white/50 backdrop-blur-md p-3 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
           side="top"
           alignOffset={-70}
           align="end"
@@ -286,7 +289,7 @@ export const Settings = React.forwardRef(function Search(
                   </Player.SelectIcon>
                 </Player.SelectTrigger>
                 <Player.SelectPortal>
-                  <Player.SelectContent className="overflow-hidden bg-black rounded-sm">
+                  <Player.SelectContent className=" overflow-hidden bg-white border border-white/50 rounded-sm">
                     <Player.SelectViewport className="p-1">
                       <Player.SelectGroup>
                         <RateSelectItem value={0.5}>
@@ -332,7 +335,7 @@ export const Settings = React.forwardRef(function Search(
                   </Player.SelectIcon>
                 </Player.SelectTrigger>
                 <Player.SelectPortal>
-                  <Player.SelectContent className="overflow-hidden bg-black rounded-sm">
+                  <Player.SelectContent className="overflow-hidden bg-white rounded-sm">
                     <Player.SelectViewport className="p-[5px]">
                       <Player.SelectGroup>
                         <VideoQualitySelectItem value="auto">

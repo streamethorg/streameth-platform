@@ -1,5 +1,5 @@
 'use server'
-import { Livepeer, GetPublicTotalViewsMetricsResponse } from 'livepeer'
+import { Livepeer } from 'livepeer'
 import { cookies } from 'next/headers'
 import { IExtendedSession } from '../types'
 import { updateSession } from '../services/sessionService'
@@ -66,10 +66,31 @@ export const updateSessionAction = async ({
 interface IMetrics {
   startViews: number
 }
-const getSessionMetrics = async ({
+export const getSessionMetrics = async ({
   playbackId,
 }: {
   playbackId: string
-}): Promise<GetPublicTotalViewsMetricsResponse> => {
-  return await livepeer.metrics.getPublicTotalViews(playbackId)
+}): Promise<{
+  viewCount: number
+  playTimeMins: number
+}> => {
+  try {
+    const metrics = await livepeer.metrics.getPublicTotalViews(
+      playbackId
+    )
+    if (!metrics.object) {
+      return {
+        viewCount: 0,
+        playTimeMins: 0,
+      }
+    }
+    return {
+      viewCount: metrics.object?.viewCount,
+      playTimeMins: metrics.object?.playtimeMins,
+    }
+  } catch (error) {
+    console.error('Error getting metrics:', error)
+    throw error
+  }
+
 }
