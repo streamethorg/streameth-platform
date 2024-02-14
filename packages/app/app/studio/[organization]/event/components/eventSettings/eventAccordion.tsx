@@ -29,13 +29,20 @@ import ColorPicker from '@/components/misc/form/colorPicker'
 import TimePicker from '@/components/misc/form/timePicker'
 import DatePicker from '@/components/misc/form/datePicker'
 import { generateTimezones } from '@/lib/utils/time'
-import { useNavigation } from '../navigation/navigationContext'
 import { toast } from 'sonner'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { updateEventAction } from '@/lib/actions/events'
 import { IExtendedEvent } from '@/lib/types'
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation'
 
 const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
   const [isUpdatingEvent, setIsUpdatingEvent] =
     useState<boolean>(false)
   const form = useForm<z.infer<typeof eventSchema>>({
@@ -80,8 +87,17 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
         setIsUpdatingEvent(false)
       })
   }
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
 
-  const { selectedSetting, setSelectedSetting } = useNavigation()
+      return params.toString()
+    },
+    [searchParams]
+  )
+
+  // const { selectedSetting, setSelectedSetting } = useNavigation()
 
   return (
     <Form {...form}>
@@ -89,7 +105,14 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
         <Accordion
           type="single"
           collapsible
-          onValueChange={() => setSelectedSetting('event')}>
+          onValueChange={() => {
+            router.push(
+              pathname +
+                '?' +
+                createQueryString('selectedSetting', 'event')
+            )
+            // setSelectedSetting('event')
+          }}>
           <AccordionItem value="item-1" className="px-2">
             <AccordionTrigger>Basics</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8">

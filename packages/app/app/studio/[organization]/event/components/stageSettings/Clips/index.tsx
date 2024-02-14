@@ -1,12 +1,16 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
-import { useNavigation } from '../../navigation/navigationContext'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { IExtendedSession } from '@/lib/types'
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation'
 
 const Clips = ({
   stage,
@@ -15,6 +19,9 @@ const Clips = ({
   stage: IStageModel
   sessions: IExtendedSession[]
 }) => {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
   const [selectedSession, setSelectedSession] = useState<
     IExtendedSession | undefined
   >()
@@ -27,10 +34,17 @@ const Clips = ({
     }
   }, [stage, sessions])
 
-  const { selectedStageSetting, setSelectedStageSetting } =
-    useNavigation()
+  const stageSetting = searchParams.get('stageSetting')
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
 
-  if (selectedStageSetting !== 'clip') {
+      return params.toString()
+    },
+    [searchParams]
+  )
+  if (stageSetting !== 'clip') {
     return null
   }
 
@@ -46,7 +60,12 @@ const Clips = ({
               <Button
                 variant={'secondary'}
                 onClick={() => {
-                  setSelectedStageSetting('settings')
+                  router.push(
+                    pathname +
+                      '?' +
+                      createQueryString('stageSetting', 'settings')
+                  )
+                  // setstageSetting('settings')
                 }}>
                 Cancel
               </Button>
@@ -79,7 +98,12 @@ const Clips = ({
             variant={'outline'}
             className=""
             onClick={() => {
-              setSelectedStageSetting('settings')
+              router.push(
+                pathname +
+                  '?' +
+                  createQueryString('stageSetting', 'settings')
+              )
+              // setstageSetting('settings')
             }}>
             Back to settings
           </Button>

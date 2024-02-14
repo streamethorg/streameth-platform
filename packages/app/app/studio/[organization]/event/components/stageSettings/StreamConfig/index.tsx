@@ -8,22 +8,23 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import Player from '@/components/ui/Player'
-import { useNavigation } from '../../navigation/navigationContext'
 import { useStream } from '@livepeer/react'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import MultistreamCard from './multistream/multistreamCard'
+import { useSearchParams } from 'next/navigation'
 
 const StreamConfig = ({ stage }: { stage: IStageModel }) => {
-  const { selectedStageSetting } = useNavigation()
   const { data: stream, isLoading } = useStream(
-    stage?.streamSettings?.streamId ?? ''
+    stage.streamSettings?.streamId ?? ''
   )
+  const searchParams = useSearchParams()
+  const stageSetting = searchParams.get('stageSetting')
 
-  if (selectedStageSetting !== 'settings') {
+  if (stageSetting !== 'settings') {
     return null
   }
 
-  if (isLoading || !stage?.streamSettings.streamId) {
+  if (isLoading || !stage.streamSettings.streamId) {
     return null
   }
 
