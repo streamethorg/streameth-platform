@@ -1,8 +1,7 @@
 import createOAuthClient from '@/lib/utils/googleAuth'
 import { NextRequest, NextResponse } from 'next/server'
 
-const SCOPES =
-  'https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/drive.readonly'
+const SCOPES = 'https://www.googleapis.com/auth/youtube.upload'
 
 export async function GET(req: NextRequest) {
   const oAuthClient = await createOAuthClient()
