@@ -3,10 +3,12 @@ import {
   createEvent,
   updateEvent,
   deleteEvent,
+  fetchEvent,
 } from '@/lib/services/eventService'
 import { cookies } from 'next/headers'
 import { IExtendedEvent } from '../types'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
+import GoogleSheetService from '@/lib/services/googleSheetService'
 
 export const createEventAction = async ({
   event,
@@ -68,4 +70,41 @@ export const deleteEventAction = async ({
   }
 
   return response
+}
+
+export const signUp = async (
+  prevState: {
+    message: string
+    success: boolean
+  },
+  formData: FormData
+) => {
+  console.log(formData)
+  const email = formData.get('email') as string
+  const eventId = formData.get('eventId') as string
+
+  const event = await fetchEvent({ eventId })
+  if (!event) return { message: 'Failed to sign up', success: false }
+  if (
+    !event.dataImporter ||
+    event.dataImporter.length === 0 ||
+    event.dataImporter[0].type !== 'gsheet' ||
+    !event.dataImporter[0].config.sheetId
+  )
+    return { message: 'Failed to sign up', success: false }
+
+  try {
+    const googleSheetService = new GoogleSheetService(
+      event.dataImporter[0].config.sheetId
+    )
+
+    await googleSheetService.appendData('emails', [
+      [new Date().toLocaleTimeString(), email],
+    ])
+
+    return { message: 'Signed up successfully', success: true }
+  } catch (error) {
+    console.error('Error appending data to Google Sheets:', error)
+    return { message: 'Failed to sign up', success: false }
+  }
 }
