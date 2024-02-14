@@ -13,7 +13,6 @@ import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
 import { IExtendedUser } from '@/lib/types'
 import { Youtube } from 'lucide-react'
-import { apiUrl } from '@/lib/utils/utils'
 
 const Studio = async () => {
   const isAuthorized = CheckAuthorization()
@@ -22,9 +21,14 @@ const Studio = async () => {
     return <AuthorizationMessage />
   }
   const userData: IExtendedUser = await fetchUserAction({})
-  const response = await fetch(`${apiUrl()}/auth/oauth2`)
-  const another_response = await response.json()
-  const url = another_response.data || 'streameth.org'
+  const response = await fetch(
+    'http://localhost:3000/api/google/oauth2',
+    { cache: 'no-store' }
+  )
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+  const url = await response.json()
 
   return (
     <div className="flex flex-col p-4 w-full h-full">
@@ -63,7 +67,7 @@ const Studio = async () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col font-bold text-xl items-center justify-center">
+        <div className="flex flex-col justify-center items-center text-xl font-bold">
           Create an organization to get started
           <CreateOrganization />
         </div>

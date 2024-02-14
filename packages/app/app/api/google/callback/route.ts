@@ -1,3 +1,6 @@
+import createOAuthClient from '@/lib/utils/googleAuth'
+import { Credentials } from 'google-auth-library'
+import { redirect } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -6,25 +9,33 @@ export async function GET(request: NextRequest) {
 
   if (!code) {
     console.error('Google token does not exist')
-    const baseUrl =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000'
-        : request.nextUrl.origin
-    return NextResponse.redirect(`${baseUrl}/studio`)
+    return redirect(`/studio`)
   }
 
-  const oneMonth = 31 * 24 * 60 * 60 * 1000 // Milliseconds in one month
-  const cookieValue = `google_token=${code}; Secure; Max-Age=${
-    oneMonth / 1000
-  }; Path=/`
+  try {
+    const oAuthClient = await createOAuthClient()
 
-  // TODO: need to take a look at this
-  const baseUrl =
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : request.nextUrl.origin
-  const response = NextResponse.redirect(`${baseUrl}/studio`)
-  response.headers.set('Set-Cookie', cookieValue)
+    const tokens = await new Promise((resolve, reject) => {
+      oAuthClient.getToken(code, (err, tokens) => {
+        if (err) {
+          reject(err)
+        } else if (!tokens) {
+          reject('Tokens do not exist')
+        }
 
-  return response
+        resolve(tokens)
+      })
+    })
+
+    oAuthClient.setCredentials(tokens as Credentials)
+
+    return NextResponse.redirect('http://localhost:3000/studio')
+  } catch (err) {
+    return NextResponse.json(
+      { error: err },
+      {
+        status: 500,
+      }
+    )
+  }
 }
