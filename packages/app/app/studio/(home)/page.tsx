@@ -21,10 +21,9 @@ const Studio = async () => {
     return <AuthorizationMessage />
   }
   const userData: IExtendedUser = await fetchUserAction({})
-  const response = await fetch(
-    'http://localhost:3000/api/google/oauth2',
-    { cache: 'no-store' }
-  )
+  const response = await fetch('/api/google/oauth2', {
+    cache: 'no-store',
+  })
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`)
   }
