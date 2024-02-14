@@ -1,6 +1,31 @@
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { IExtendedSession } from '../types'
 import { apiUrl } from '@/lib/utils/utils'
+import { Livepeer } from 'livepeer'
+export const fetchSession = async ({
+  session,
+}: {
+  session: string
+}): Promise<IExtendedSession | null> => {
+  try {
+    const LivepeerClient = new Livepeer({
+      apiKey: process.env.LIVEPEER_API_KEY,
+    })
+    const response = await fetch(`${apiUrl()}/sessions/${session}`)
+    if (!response.ok) {
+      return null
+    }
+    const data:IExtendedSession = (await response.json()).data
+    if (data.assetId) {
+      const livepeerData = await LivepeerClient.asset.get(data.assetId)
+      data.videoUrl = livepeerData.asset?.playbackUrl
+    }
+    return data
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event session'
+  }
+}
 
 export const updateSession = async ({
   session,

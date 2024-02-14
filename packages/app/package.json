@@ -18,7 +18,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@livekit/components-react": "^1.5.3",
     "@livekit/components-styles": "^1.0.9",
-    "@livepeer/react": "^3.1.9",
+    "@livepeer/react": "^4.1.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-avatar": "^1.0.4",

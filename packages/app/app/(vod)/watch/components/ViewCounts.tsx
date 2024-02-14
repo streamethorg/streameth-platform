@@ -1,4 +1,3 @@
-'use client'
 import { useAssetMetrics } from '@livepeer/react'
 
 const ViewCounts = ({ assetId }: { assetId: string }) => {

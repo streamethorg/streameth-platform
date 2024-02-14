@@ -1,5 +1,5 @@
 'use server'
-import { Livepeer } from 'livepeer'
+import { Livepeer, GetPublicTotalViewsMetricsResponse } from 'livepeer'
 import { cookies } from 'next/headers'
 import { IExtendedSession } from '../types'
 import { updateSession } from '../services/sessionService'
@@ -48,7 +48,6 @@ export const updateSessionAction = async ({
 }: {
   session: IExtendedSession
 }) => {
-
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
     throw new Error('No user session found')
@@ -62,4 +61,15 @@ export const updateSessionAction = async ({
     throw new Error('Error updating session')
   }
   return response
+}
+
+interface IMetrics {
+  startViews: number
+}
+const getSessionMetrics = async ({
+  playbackId,
+}: {
+  playbackId: string
+}): Promise<GetPublicTotalViewsMetricsResponse> => {
+  return await livepeer.metrics.getPublicTotalViews(playbackId)
 }

@@ -114,22 +114,7 @@ export async function fetchAllSessions({
   }
 }
 
-export const fetchSession = async ({
-  session,
-}: {
-  session: string
-}): Promise<IExtendedSession | null> => {
-  try {
-    const response = await fetch(`${apiUrl()}/sessions/${session}`)
-    if (!response.ok) {
-      return null
-    }
-    return (await response.json()).data
-  } catch (e) {
-    console.log(e)
-    throw 'Error fetching event session'
-  }
-}
+
 
 export async function fetchEventSpeakers({
   event,
