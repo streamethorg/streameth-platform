@@ -21,7 +21,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
       <SelectTrigger className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
         <SelectValue placeholder="Date select" />
       </SelectTrigger>
-      <SelectContent className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
+      <SelectContent className="bg-white rounded-lg border-white border-opacity-10">
         {dates.map((dateNum) => (
           <SelectItem key={dateNum} value={dateNum.toString()}>
             {new Date(dateNum).toDateString()}

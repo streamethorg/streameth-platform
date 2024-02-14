@@ -43,7 +43,7 @@ export async function fetchEvents({
           new Date(event.end).getTime() >= date.getTime()
       )
     }
-
+   
     return data
   } catch (e) {
     console.log(e)

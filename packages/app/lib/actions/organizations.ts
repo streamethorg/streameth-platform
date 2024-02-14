@@ -1,8 +1,9 @@
 "use server"
 import { createOrganization } from '@/lib/services/organizationService'
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
-
+import { redirect } from 'next/navigation'
 
 export const createOrganizationAction = async ({
   organization,
@@ -17,10 +18,11 @@ export const createOrganizationAction = async ({
     organization: organization,
     authToken,
   })
+  console.log(response)
 
   if (!response) {
     throw new Error('Error creating organization')
   }
-
+  revalidatePath('/studio')
   return response
 }

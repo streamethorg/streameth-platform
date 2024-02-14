@@ -63,8 +63,9 @@ const Studio = async () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center text-xl font-bold">
-          No event found
+        <div className="flex flex-col font-bold text-xl items-center justify-center">
+          Create an organization to get started
+          <CreateOrganization />
         </div>
       )}
     </div>

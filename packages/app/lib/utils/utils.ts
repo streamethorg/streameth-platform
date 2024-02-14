@@ -66,11 +66,13 @@ export const hasData = ({ event }: { event: IExtendedEvent }) => {
 }
 
 export const getImageUrl = (image: string) => {
-  const spaceStorage = process.env.SPACE_STORAGE_URL || null
+  const spaceStorage =
+    process.env.NEXT_PUBLIC_SPACE_STORAGE_URL || null
   if (!spaceStorage) {
     throw new Error('No SPACE STORAGE URL key found')
   }
-  return process.env.NEXT_PUBLIC_SPACE_STORAGE + '/' + image
+
+  return spaceStorage + image
 }
 
 export const loadEnv = () => {
@@ -144,4 +146,12 @@ export const hasOrganization = (
     (organization) => organization.slug === searchParams
   )
   return hasOrganization
+}
+
+export const validateEnv = (envVar: string) => {
+  const value = process.env[envVar] || null
+  if (!value) {
+    throw new Error(`No ${value} found`)
+  }
+  return value
 }

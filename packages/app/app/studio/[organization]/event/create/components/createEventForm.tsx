@@ -27,11 +27,12 @@ import { toast } from 'sonner'
 import { generateTimezones } from '@/lib/utils/time'
 import { Loader2 } from 'lucide-react'
 import MDEditor from '@uiw/react-md-editor'
+import { IExtendedOrganization } from '@/lib/types'
 
 export default function CreateEventForm({
-  organizationId,
+  organization,
 }: {
-  organizationId: string
+  organization: IExtendedOrganization
 }) {
   const [isCreatingEvent, setIsCreatingEvent] =
     useState<boolean>(false)
@@ -58,7 +59,7 @@ export default function CreateEventForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsCreatingEvent(true)
     const response = createEventAction({
-      event: { ...values, organizationId: organizationId },
+      event: { ...values, organizationId: organization?._id },
     })
       .then((response) => {
         if (response) {
@@ -235,7 +236,7 @@ export default function CreateEventForm({
                   <FormControl>
                     <ImageUpload
                       {...field}
-                      path="events"
+                      path={`events/${organization?.slug}`}
                       onChange={field.onChange}
                       aspectRatio={1}
                     />
@@ -254,7 +255,7 @@ export default function CreateEventForm({
                   <FormLabel>Event Cover</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      path="events"
+                      path={`events/${organization?.slug}`}
                       {...field}
                       onChange={field.onChange}
                       aspectRatio={16 / 9}
@@ -274,7 +275,7 @@ export default function CreateEventForm({
                   <FormLabel>Event Banner</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      path="events"
+                      path={`events/${organization?.slug}`}
                       {...field}
                       onChange={field.onChange}
                       aspectRatio={3 / 1}
@@ -304,7 +305,7 @@ export default function CreateEventForm({
         />
         <div className="flex flex-row">
           <Button variant={'destructive'}>
-            <Link href={`/studio/${organizationId}`} passHref>
+            <Link href={`/studio/${organization._id}`} passHref>
               Cancel
             </Link>
           </Button>

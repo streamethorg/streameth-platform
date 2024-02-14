@@ -5,12 +5,13 @@ import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 
+export interface Page {
+  name: string
+  href: string
+  bgColor?: string
+}
 export interface NavBarProps {
-  pages: {
-    name: string
-    href: string
-    bgColor?: string
-  }[]
+  pages: Page[]
   logo: string
   homePath: string
   showNav: boolean
