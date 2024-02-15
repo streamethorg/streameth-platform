@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useStream, MultistreamTargetRef } from '@livepeer/react'
+import { Suspense } from 'react'
 import {
   Card,
   CardHeader,
@@ -8,32 +7,24 @@ import {
 } from '@/components/ui/card'
 import MultistreamTargetItem from './MultistreamTarget'
 import { CreateMultistreamTarget } from './CreateMultistreamTarget'
+import {
+  getMultistreamTarget,
+  getStageStream,
+} from '@/lib/actions/stages'
 
-const MultistreamCard = ({ streamId }: { streamId: string }) => {
-  const { data, isLoading, refetch } = useStream(streamId)
-  const [multistreamTargets, setMultistreamTargets] = useState<
-    MultistreamTargetRef[]
-  >([])
-  useEffect(() => {
-    if (data && data.multistream) {
-      setMultistreamTargets(data.multistream.targets)
-    }
-  }, [data])
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
+const MultistreamCard = async ({
+  streamId,
+}: {
+  streamId: string
+}) => {
+  const targets =
+    (await getStageStream(streamId))?.multistream?.targets ?? []
   return (
     <Card className="shadow-none border-border h-full flex flex-col">
       <CardHeader>
         <CardTitle className="flex flex-row items-center justify-between">
           Multistream Targets
-          <CreateMultistreamTarget
-            streamId={streamId}
-            currentTargets={multistreamTargets}
-            refetch={refetch}
-          />
+          <CreateMultistreamTarget streamId={streamId} />
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col space-y-2 flex-grow overflow-auto">
@@ -42,14 +33,31 @@ const MultistreamCard = ({ streamId }: { streamId: string }) => {
           <div className="w-1/4 font-bold">Profile</div>
           <div className="w-1/4 font-bold"></div>
         </div>
-        {multistreamTargets.map((target) => (
-          <MultistreamTargetItem
+        {targets.map((target) => (
+          <Suspense
             key={target.id}
-            streamId={streamId}
-            target={target}
-            currentTargets={multistreamTargets}
-            refetch={refetch}
-          />
+            fallback={
+              <div className="w-full bg-gray-600 animate-pulse" />
+            }>
+            {target.id &&
+              getMultistreamTarget({ targetId: target.id }).then(
+                (data) => {
+                  return (
+                    <MultistreamTargetItem
+                      key={data?.id}
+                      streamId={streamId}
+                      target={{
+                        id: data?.id,
+                        profile: target.profile,
+                        spec: {
+                          name: data?.name,
+                        },
+                      }}
+                    />
+                  )
+                }
+              )}
+          </Suspense>
         ))}
       </CardContent>
     </Card>

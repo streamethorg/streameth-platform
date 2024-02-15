@@ -9,7 +9,7 @@ import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface
 import { deleteStageAction } from '@/lib/actions/stages'
 import { IExtendedEvent } from '@/lib/types'
 import { toast } from 'sonner'
-import { useSearchParams } from 'next/navigation'
+import useSearchParams from '@/lib/hooks/useSearchParams'
 
 const StageAccordion = ({
   stages,
@@ -18,8 +18,8 @@ const StageAccordion = ({
   stages: IStageModel[]
   event: IExtendedEvent
 }) => {
-  const searchParams = useSearchParams()
-  const eventId = searchParams.get('eventId')
+  const { handleTermChange, searchParams } = useSearchParams()
+
   const stageSetting = searchParams.get('stageSetting')
   const selectedStage = searchParams.get('stage')
 
@@ -43,7 +43,12 @@ const StageAccordion = ({
           toast.error('Error deleting stage')
         })
         .finally(() => {
-          window.history.pushState(null, '', `?eventId=${eventId}`)
+          handleTermChange([
+            {
+              key: 'settings',
+              value: 'event',
+            },
+          ])
         })
     }
   }
@@ -60,21 +65,31 @@ const StageAccordion = ({
             value={stage.name}>
             <AccordionTrigger
               onClick={() => {
-                window.history.pushState(
-                  null,
-                  '',
-                  `?eventId=${eventId}&setting=stages&stage=${stage._id}&stageSetting=settings`
-                )
+                handleTermChange([
+                  {
+                    key: 'stage',
+                    value: stage._id,
+                  },
+                  {
+                    key: 'settings',
+                    value: 'stage',
+                  },
+                ])
               }}>
               {stage.name}
             </AccordionTrigger>
             <AccordionContent
               onClick={() => {
-                window.history.pushState(
-                  null,
-                  '',
-                  `?eventId=${eventId}&setting=stages&stage=${stage._id}&stageSetting=settings`
-                )
+                handleTermChange([
+                  {
+                    key: 'stage',
+                    value: stage._id,
+                  },
+                  {
+                    key: 'stageSetting',
+                    value: 'settings',
+                  },
+                ])
               }}>
               <p
                 className={`${
@@ -86,11 +101,16 @@ const StageAccordion = ({
             </AccordionContent>
             <AccordionContent
               onClick={() => {
-                window.history.pushState(
-                  null,
-                  '',
-                  `?eventId=${eventId}&setting=stages&stageSetting=clip`
-                )
+                handleTermChange([
+                  {
+                    key: 'stage',
+                    value: stage._id,
+                  },
+                  {
+                    key: 'stageSetting',
+                    value: 'clip',
+                  },
+                ])
               }}>
               <p
                 className={`${

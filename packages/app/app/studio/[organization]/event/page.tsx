@@ -1,11 +1,13 @@
-import * as React from 'react'
+import React, { Suspense } from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Navigation from './components/navigation'
 import { studioPageParams } from '@/lib/types'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
 import { fetchAllSessions } from '@/lib/data'
-import StreamConfig from './components/stageSettings/StageConfig'
+import StreamConfig, {
+  StreamConfigSkeleton,
+} from './components/stageSettings/StageConfig'
 import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
 
 export default async function EventPage({
@@ -18,7 +20,7 @@ export default async function EventPage({
     stage: stageId,
     stageSetting,
   } = searchParams
-
+  console.log(searchParams, settings !== 'stage')
   const event = await fetchEvent({ eventId: eventId })
   const stages = await fetchEventStages({
     eventId: eventId,
@@ -41,7 +43,7 @@ export default async function EventPage({
           organizationId={params.organization}
         />
       </TooltipProvider>
-      {settings !== 'stage' && (
+      {settings === 'event' && (
         <div
           className="w-full h-full overflow-auto"
           style={{ ...style }}>
@@ -60,8 +62,11 @@ export default async function EventPage({
       )}
       <div className="w-full h-full">
         <div className="p-2 h-full">
-          {settings == 'stage' && <StreamConfig stageId={stageId} />}
-
+          {settings === 'stage' && (
+            <Suspense fallback={<StreamConfigSkeleton />}>
+              <StreamConfig stageId={stageId} />
+            </Suspense>
+          )}
           {/* {settings == 'stage' && stageSetting === 'clip' && (
           <Clips
             stage={stage}

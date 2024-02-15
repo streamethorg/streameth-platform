@@ -1,45 +1,33 @@
-import { useEffect } from 'react'
+'use client'
+import { useState } from 'react'
 import { toast } from 'sonner'
-import {
-  useUpdateStream,
-  MultistreamTargetRef,
-} from '@livepeer/react'
 import { Loader2 } from 'lucide-react'
+import { deleteMultistreamTarget } from '@/lib/actions/stages'
 
 const MultistreamTargetItem = ({
   streamId,
   target,
-  currentTargets,
-  refetch,
 }: {
   streamId: string
-  target: MultistreamTargetRef
-  currentTargets: MultistreamTargetRef[]
-  refetch: () => void
+  target: {
+    id?: string
+    spec: {
+      name?: string
+    }
+    profile: string
+  }
 }) => {
-  const {
-    mutate: updateStream,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useUpdateStream({
-    streamId: streamId,
-    multistream: {
-      targets: [...currentTargets.filter((t) => t.id !== target.id)],
-    },
-  })
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast('Multistream target deleted successfully')
-      refetch()
+  const [isLoading, setIsLoading] = useState(false)
+  const handleDelete = async (targetId: string) => {
+    setIsLoading(true)
+    try {
+      await deleteMultistreamTarget(streamId, targetId)
+      toast.success('Multistream target deleted')
+      setIsLoading(false)
+    } catch (error) {
+      toast.error("Couldn't delete multistream target")
     }
-    if (isError) {
-      console.error('Failed to delete multistream target:', error)
-      toast('Error deleting multistream target')
-    }
-  }, [isSuccess, isError, error, refetch])
+  }
 
   return (
     <div className="flex flex-row border-b py-2">
@@ -48,7 +36,7 @@ const MultistreamTargetItem = ({
       <p
         className="w-1/4 text-right text-destructive cursor-pointer"
         onClick={() => {
-          updateStream?.()
+          handleDelete(target.id ?? '')
         }}>
         {isLoading ? (
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />

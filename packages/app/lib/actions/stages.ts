@@ -101,17 +101,75 @@ export const getStageStream = async (
   }
 }
 
-export const updateStageStream = async ({
-  streamId,
-  name,
-}: {
-  streamId: string
-  name: string
-}) => {
-  try {
-    await livepeer.stream.update(streamId, { name })
-  } catch (error) {
-    console.error('Error updating stream:', error)
-    throw new Error('Error updating stream')
+export const createMultistream = async (
+  prevState: {
+    message: string
+    success: boolean
+  },
+  formData: FormData
+) => {
+  'use server'
+  const streamId = formData.get('streamId') as string
+  const name = formData.get('name') as string
+  const url = formData.get('url') as string
+  const profile = formData.get('profile') as string
+  const streamKey = formData.get('streamKey') as string
+
+  const livepeer = new Livepeer({
+    apiKey: process.env.LIVEPEER_API_KEY,
+  })
+  const response = await livepeer.stream.createMultistreamTarget(
+    streamId,
+    {
+      spec: {
+        name,
+        url: url + '/' + streamKey,
+      },
+      profile: 'source',
+    }
+  )
+  if (response.statusCode !== 200) {
+    return {
+      message: 'Error creating multistream target',
+      success: false,
+    }
   }
+  revalidatePath('/studio')
+
+  return { message: 'Multistream target created', success: true }
+}
+
+export const deleteMultistreamTarget = async (
+  streamId: string,
+  targetId: string
+) => {
+  'use server'
+  const livepeer = new Livepeer({
+    apiKey: process.env.LIVEPEER_API_KEY,
+  })
+
+  const response = await livepeer.stream.deleteMultistreamTarget(
+    streamId,
+    targetId
+  )
+  
+  revalidatePath('/studio')
+
+  return response
+}
+
+export const getMultistreamTarget = async ({
+  targetId,
+}: {
+  targetId: string
+}) => {
+  'use server'
+  const response = await livepeer.multistreamTarget.get(targetId)
+  if (response.statusCode !== 200) {
+    console.error('Error getting multistream target')
+    return null
+  }
+  revalidatePath('/studio')
+
+  return response.multistreamTarget
 }

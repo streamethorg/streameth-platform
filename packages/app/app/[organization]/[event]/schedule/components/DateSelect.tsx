@@ -10,14 +10,19 @@ import {
 import useSearchParams from '@/lib/hooks/useSearchParams'
 
 const DateSelect = ({ dates }: { dates: number[] }) => {
-  const { searchParams, handleTermChange } = useSearchParams({
-    key: 'date',
-  })
+  const { searchParams, handleTermChange } = useSearchParams()
 
   return (
     <Select
       defaultValue={searchParams.get('date') || dates[0].toString()}
-      onValueChange={(value) => handleTermChange(value)}>
+      onValueChange={(value) =>
+        handleTermChange([
+          {
+            key: 'date',
+            value,
+          },
+        ])
+      }>
       <SelectTrigger className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
         <SelectValue placeholder="Date select" />
       </SelectTrigger>

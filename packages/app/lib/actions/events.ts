@@ -16,7 +16,6 @@ export const createEventAction = async ({
 }: {
   event: IEvent
 }) => {
-  // create scheduelling sheet, and create folder strucutre in drive
 
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
