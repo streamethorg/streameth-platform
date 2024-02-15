@@ -10,8 +10,12 @@ import StagePreview from '../stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 
-import SpeakerComponent from '../speakers/components/SpeakerComponent'
-import ScheduleComponent from '../schedule/components/ScheduleComponent'
+import SpeakerComponent, {
+  SpeakerComponentSkeleton,
+} from '../speakers/components/SpeakerComponent'
+import ScheduleComponent, {
+  ScheduleSkeleton,
+} from '../schedule/components/ScheduleComponent'
 import Image from 'next/image'
 import {
   getEventPeriod,
@@ -110,7 +114,7 @@ export default function EventHomeComponent({
             </div>
           </CardFooter>
         </Card>
-        <Suspense>
+        <Suspense fallback={<ScheduleSkeleton />}>
           <ScheduleComponent
             stages={stages}
             event={event}
@@ -118,7 +122,7 @@ export default function EventHomeComponent({
             date={searchParams.date}
           />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<SpeakerComponentSkeleton />}>
           <SpeakerComponent event={event} />
         </Suspense>
       </div>

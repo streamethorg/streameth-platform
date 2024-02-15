@@ -1,11 +1,5 @@
 'use client'
-
-import React, {
-  useState,
-  Suspense,
-  useLayoutEffect,
-  useEffect,
-} from 'react'
+import React, { useState, Suspense, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import SearchBar from '@/components/misc/SearchBar'
 import Link from 'next/link'
@@ -13,37 +7,16 @@ import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Navbar from './Navbar'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
-import {
-  NavigationMenuItem,
-  NavigationMenuLink,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu'
 import { Search } from 'lucide-react'
+import { Page } from '@/lib/types'
 import { useSIWE } from 'connectkit'
-import { useAccount } from 'wagmi'
-import { IExtendedUser } from '@/lib/types'
-import { fetchUserAction } from '@/lib/actions/users'
 import useUserData from '@/lib/hooks/useUserData'
 
-const pages = [
-  {
-    name: 'Videography',
-    href: 'https://info.streameth.org/stream-eth-studio',
-    bgColor: 'bg-muted ',
-  },
-  {
-    name: 'Product',
-    href: 'https://info.streameth.org/services',
-    bgColor: 'bg-muted ',
-  },
-  {
-    name: 'Host your event',
-    href: 'https://info.streameth.org/contact-us',
-    bgColor: 'bg-primary text-primary-foreground',
-  },
-]
-
-const getPages = (isSignedIn: boolean, studioOrg?: string) => {
+const getPages = (
+  pages: Page[],
+  isSignedIn: boolean,
+  studioOrg?: string
+) => {
   if (isSignedIn) {
     return [
       ...pages,
@@ -56,16 +29,28 @@ const getPages = (isSignedIn: boolean, studioOrg?: string) => {
   } else return pages
 }
 
-const HomePageNavbar = () => {
+const HomePageNavbar = ({
+  pages,
+  showSearchBar = true,
+}: {
+  pages: Page[]
+  showSearchBar?: boolean
+}) => {
   return (
     <Suspense fallback={null}>
-      <MobileNavBar />
-      <PCNavBar />
+      <MobileNavBar pages={pages} showSearchBar={showSearchBar} />
+      <PCNavBar pages={pages} showSearchBar={showSearchBar} />
     </Suspense>
   )
 }
 
-const MobileNavBar = () => {
+const MobileNavBar = ({
+  pages,
+  showSearchBar,
+}: {
+  pages: Page[]
+  showSearchBar: boolean
+}) => {
   const [menuVisible, setMenuVisible] = useState(false)
   const [searchVisible, setSearchVisible] = useState(false)
   const toggleSearch = () => setSearchVisible(!searchVisible)
@@ -82,17 +67,17 @@ const MobileNavBar = () => {
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="lg:hidden z-[999999] backdrop-blur-sm bg-background bg-opacity-90 sticky top-0 flex flex-row items-center">
+    <NavigationMenu className="lg:hidden z-[999999] backdrop-blur-sm bg-transparent bg-opacity-90 sticky top-0 flex flex-row items-center">
       {(searchVisible || menuVisible) && (
         <div className="h-[100vh] w-[100vw] bg-black bg-opacity-50 absolute top-0 left-0" />
       )}
 
-      {searchVisible && (
+      {searchVisible && showSearchBar && (
         <div className="absolute bottom-[-56px] w-full bg-secondary">
           <SearchBar />
         </div>
       )}
-      <div className="bg-white p-2 w-full h-full relative flex flex-row items-center">
+      <div className="p-2 w-full h-full relative flex flex-row items-center">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -104,11 +89,7 @@ const MobileNavBar = () => {
         </Link>
 
         <div className="flex items-center ml-auto">
-          {!searchVisible ? (
-            <button onClick={toggleSearch} className="p-2">
-              <Search className="w-6 h-6 text-primary" />
-            </button>
-          ) : (
+          {showSearchBar && (
             <button onClick={toggleSearch} className="p-2">
               <Search className="w-6 h-6 text-primary" />
             </button>
@@ -126,23 +107,29 @@ const MobileNavBar = () => {
         {menuVisible && (
           <Navbar
             pages={getPages(
+              pages,
               isSignedIn,
               userData?.organizations?.[0]?.slug
             )}
           />
         )}
-
         <ConnectWalletButton />
       </div>
     </NavigationMenu>
   )
 }
 
-const PCNavBar = () => {
+const PCNavBar = ({
+  pages,
+  showSearchBar,
+}: {
+  pages: Page[]
+  showSearchBar: boolean
+}) => {
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className="hidden md:hidden z-[99] backdrop-blur-sm bg-background bg-opacity-90 sticky top-0 p-4 lg:flex flex-row items-center justify-between">
+    <NavigationMenu className="w-full p-2 hidden md:hidden z-[99] backdrop-blur-sm bg-opacity-90 sticky top-0 lg:flex flex-row items-center justify-between">
       <Link href="/">
         <Image
           src="/logo_dark.png"
@@ -152,11 +139,12 @@ const PCNavBar = () => {
           className="hidden lg:block"
         />
       </Link>
-      <div className="flex-grow mx-4 items-center flex justify-center">
-        <SearchBar />
+      <div className="flex-grow  items-center flex justify-center">
+        {showSearchBar && <SearchBar />}
       </div>
       <Navbar
         pages={getPages(
+          pages,
           isSignedIn,
           userData?.organizations?.[0]?.slug
         )}

@@ -27,7 +27,7 @@ describe('Tests for homepage', () => {
 
   it('can click image', () => {
     cy.get(
-      ':nth-child(2) > .overflow-y-scroll > .max-w-screen > .lg\\:grid > :nth-child(1) > .min-h-full'
+      ':nth-child(2) > .overflow-y-auto > .max-w-screen > .lg\\:grid > :nth-child(1) > .min-h-full'
     ).click()
   })
 

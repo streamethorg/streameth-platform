@@ -39,7 +39,7 @@ const UpcomingEvents = async ({
           Explore current and past events
         </CardDescription>
       </CardHeader>
-      <CardContent className="px-0 lg:px-0 flex flex-row overflow-x-scroll space-x-4 ">
+      <CardContent className="px-0 lg:px-0 flex flex-row overflow-auto space-x-4 ">
         {events.map(
           ({ name, eventCover, accentColor, slug }, index) => (
             <div key={index}>

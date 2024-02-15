@@ -21,9 +21,9 @@ const NavBarButton = ({
     onClick={() => setIsNavVisible(!isNavVisible)}
     className="lg:hidden z-50">
     {!isNavVisible ? (
-      <Bars3Icon className="w-[40px] h-[40px]   rounded  mx-auto" />
+      <Bars3Icon className="w-[40px] h-[40px] border border-white text-white   rounded  mx-auto" />
     ) : (
-      <XMarkIcon className="w-[40px] h-[40px]   rounded   mx-auto" />
+      <XMarkIcon className="w-[40px] h-[40px] border border-white text-white  rounded   mx-auto" />
     )}
   </button>
 )
@@ -59,7 +59,7 @@ export default function NavbarTop({
             />
           </Link>
         </div>
-        <div className=" flex flex-row items-center justify-end h-full w-full">
+        <div className=" flex flex-row items-center justify-end h-full w-full space-x-2">
           {menuVisible && (
             <Navbar
               pages={
