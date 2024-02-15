@@ -1,4 +1,7 @@
-import { IStageModel, IStage } from 'streameth-new-server/src/interfaces/stage.interface'
+import {
+  IStageModel,
+  IStage,
+} from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 
 export async function fetchStage({
@@ -21,20 +24,29 @@ export async function fetchStage({
 
 export async function deleteStage({
   stageId,
-  authToken
+  organizationId,
+  authToken,
 }: {
   stageId: string
+  organizationId: string
   authToken: string
-}): Promise<void> {
-  const response = await fetch(`${apiUrl()}/stages/${stageId}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    },
-  })
-  if (!response.ok) {
-    throw 'Error deleting stage'
+}): Promise<IStageModel> {
+  try {
+    const response = await fetch(`${apiUrl()}/stages/${stageId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ organizationId }),
+    })
+    if (!response.ok) {
+      throw 'Error deleting stage'
+    }
+    return await response.json()
+  } catch (e) {
+    console.log('error in deleteStage', e)
+    throw e
   }
 }
 
@@ -58,7 +70,6 @@ export async function createStage({
   }
   return (await response.json()).data
 }
-
 
 export async function fetchEventStages({
   eventId,

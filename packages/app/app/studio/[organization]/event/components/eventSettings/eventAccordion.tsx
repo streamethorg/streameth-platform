@@ -29,13 +29,16 @@ import ColorPicker from '@/components/misc/form/colorPicker'
 import TimePicker from '@/components/misc/form/timePicker'
 import DatePicker from '@/components/misc/form/datePicker'
 import { generateTimezones } from '@/lib/utils/time'
-import { useNavigation } from '../navigation/navigationContext'
 import { toast } from 'sonner'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { updateEventAction } from '@/lib/actions/events'
 import { IExtendedEvent } from '@/lib/types'
+import { useSearchParams } from 'next/navigation'
 
 const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
+  const searchParams = useSearchParams()
+
+  const eventId = searchParams.get('eventId')
   const [isUpdatingEvent, setIsUpdatingEvent] =
     useState<boolean>(false)
   const form = useForm<z.infer<typeof eventSchema>>({
@@ -81,15 +84,19 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
       })
   }
 
-  const { selectedSetting, setSelectedSetting } = useNavigation()
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <Accordion
           type="single"
           collapsible
-          onValueChange={() => setSelectedSetting('event')}>
+          onValueChange={() => {
+            window.history.pushState(
+              null,
+              '',
+              `?eventId=${eventId}&setting=event`
+            )
+          }}>
           <AccordionItem value="item-1" className="px-2">
             <AccordionTrigger>Basics</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8">

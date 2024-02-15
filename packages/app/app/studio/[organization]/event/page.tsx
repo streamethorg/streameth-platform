@@ -9,8 +9,6 @@ import { studioPageParams } from '@/lib/types'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
 import { fetchAllSessions } from '@/lib/data'
-import { NavigationProvider } from './components/navigation/navigationContext'
-
 export default async function EventPage({
   searchParams,
 }: studioPageParams) {
@@ -27,16 +25,11 @@ export default async function EventPage({
 
   return (
     <TooltipProvider>
-      <NavigationProvider>
-        <div className="flex flex-row h-full overflow-hidden w-full">
-          <Navigation event={event} stages={stages} />
-          <EventSettings event={event} stages={stages} />
-          <StageSettings
-            stages={stages}
-            sessions={sessions.sessions}
-          />
-        </div>
-      </NavigationProvider>
+      <div className="flex flex-row h-full overflow-hidden w-full">
+        <Navigation event={event} stages={stages} />
+        <EventSettings event={event} stages={stages} />
+        <StageSettings stages={stages} sessions={sessions.sessions} />
+      </div>
     </TooltipProvider>
   )
 }

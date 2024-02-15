@@ -83,7 +83,7 @@ const Layout = async ({
         />
       </StudioPageNavbar>
       <div className="top-[74px] flex flex-col h-[calc(100vh-74px)]">
-        <div className="flex flex-row h-full">
+        <div className="flex h-full flex-row">
           <div className="flex flex-col flex-grow h-full overflow-hidden">
             {children}
           </div>
