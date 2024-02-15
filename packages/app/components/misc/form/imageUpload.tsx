@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { getImageUrl } from '@/lib/utils/utils'
 import { upload } from '@/lib/actions/fileUpload'
+import { toast } from 'sonner'
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   // FileList is immutable, so we need to create a new one
@@ -37,10 +38,11 @@ export default function ImageUpload({
   const [preview, setPreview] = useState(
     value ? getImageUrl('/' + path + '/' + value) : ''
   )
+  const [isUploading, setIsUploading] = useState(false)
 
   const onSubmit = async (file: File) => {
     if (!file) return
-
+    setIsUploading(true)
     try {
       const data = new FormData()
       data.set('file', file)
@@ -50,18 +52,25 @@ export default function ImageUpload({
         body: data,
       })
       // handle the error
+      if (!res.ok) {
+        throw new Error(await res.text())
+      }
       onChange(getImageUrl('/' + path + '/' + file.name))
-
-      if (!res.ok) throw new Error(await res.text())
+      toast.success('Image uploaded successfully')
+      setIsUploading(false)
     } catch (e: any) {
       // Handle errors here
+      setIsUploading(false)
+      toast.error('Error uploading image')
       console.error(e)
     }
   }
 
   return (
     <>
-      {preview ? (
+      {isUploading ? (
+        <div className="text-sm">Uploading image...</div>
+      ) : preview ? (
         <div className="relative flex flex-col w-full">
           <XMarkIcon
             className="z-[9999999999994] relative ml-auto h-6 w-6"
@@ -82,6 +91,7 @@ export default function ImageUpload({
       ) : (
         <Input
           type="file"
+          accept=".png,.jpg"
           {...rest}
           onChange={(event) => {
             const { files, displayUrl } = getImageData(event)
