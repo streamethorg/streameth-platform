@@ -10,6 +10,7 @@ Below is an overview of the personal data we process:
 
 - Your ERC20 Wallet Address
 - Your "Last Seen" Activity
+- Internetbrowser and device type
 
 All your personal data is encrypted.
 
