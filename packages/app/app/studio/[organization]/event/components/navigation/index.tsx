@@ -81,7 +81,7 @@ const Navigation = ({
       )}
       <div className=" flex flex-row justify-between items-center mt-auto p-2">
         <Button className="" variant={'outline'}>
-          <Link href={`/studio/${event.organizationId}`}>Cancel</Link>
+          <Link href={`/studio/${orgId}`}>Cancel</Link>
         </Button>
         <Button
           onClick={() => handleDeleteEvent(event._id!)}

@@ -33,16 +33,12 @@ import { toast } from 'sonner'
 import { useCallback, useState } from 'react'
 import { updateEventAction } from '@/lib/actions/events'
 import { IExtendedEvent } from '@/lib/types'
-import {
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
   const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
+
+  const eventId = searchParams.get('eventId')
   const [isUpdatingEvent, setIsUpdatingEvent] =
     useState<boolean>(false)
   const form = useForm<z.infer<typeof eventSchema>>({
@@ -87,17 +83,6 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
         setIsUpdatingEvent(false)
       })
   }
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams]
-  )
-
-  // const { selectedSetting, setSelectedSetting } = useNavigation()
 
   return (
     <Form {...form}>
@@ -106,12 +91,11 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
           type="single"
           collapsible
           onValueChange={() => {
-            router.push(
-              pathname +
-                '?' +
-                createQueryString('selectedSetting', 'event')
+            window.history.pushState(
+              null,
+              '',
+              `?eventId=${eventId}&setting=event`
             )
-            // setSelectedSetting('event')
           }}>
           <AccordionItem value="item-1" className="px-2">
             <AccordionTrigger>Basics</AccordionTrigger>

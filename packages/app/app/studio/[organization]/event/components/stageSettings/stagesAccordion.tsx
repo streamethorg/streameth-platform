@@ -9,12 +9,7 @@ import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface
 import { deleteStageAction } from '@/lib/actions/stages'
 import { IExtendedEvent } from '@/lib/types'
 import { toast } from 'sonner'
-import {
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation'
-import { useCallback } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const StageAccordion = ({
   stages,
@@ -24,20 +19,10 @@ const StageAccordion = ({
   event: IExtendedEvent
 }) => {
   const searchParams = useSearchParams()
-
+  const eventId = searchParams.get('eventId')
   const router = useRouter()
-  const pathname = usePathname()
   const stageSetting = searchParams.get('stageSetting')
-  const selectedStage = searchParams.get('selectedStage')
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams]
-  )
+  const selectedStage = searchParams.get('stage')
 
   const handleDeleteStage = async (
     stageId: string,
@@ -67,43 +52,29 @@ const StageAccordion = ({
     <Accordion
       type="single"
       collapsible
-      defaultValue={selectedStage as string}
-      onValueChange={() => {
-        router.push(
-          pathname +
-            '?' +
-            createQueryString('selectedSetting', 'stages')
-        )
-
-        // setSelectedSetting('stages')
-      }}>
+      defaultValue={selectedStage as string}>
       {stages.map((stage) => {
         return (
           <AccordionItem
             className="px-2"
             key={stage._id}
-            value={stage.name}
-            onClick={() => {
-              router.push(
-                pathname +
-                  '?' +
-                  createQueryString('selectedStage', stage._id)
-              )
-
-              // setSelectedStage(stage._id)
-            }}>
-            <AccordionTrigger>{stage.name}</AccordionTrigger>
+            value={stage.name}>
+            <AccordionTrigger
+              onClick={() => {
+                window.history.pushState(
+                  null,
+                  '',
+                  `?eventId=${eventId}&setting=stages&stage=${stage._id}&stageSetting=settings`
+                )
+              }}>
+              {stage.name}
+            </AccordionTrigger>
             <AccordionContent
               onClick={() => {
-                router.push(
-                  pathname +
-                    '?' +
-                    createQueryString('stageSetting', 'settings')
-                )
-                router.push(
-                  pathname +
-                    '?' +
-                    createQueryString('selectedSetting', 'stages')
+                window.history.pushState(
+                  null,
+                  '',
+                  `?eventId=${eventId}&setting=stages&stage=${stage._id}&stageSetting=settings`
                 )
               }}>
               <p
@@ -116,12 +87,11 @@ const StageAccordion = ({
             </AccordionContent>
             <AccordionContent
               onClick={() => {
-                router.push(
-                  pathname +
-                    '?' +
-                    createQueryString('stageSetting', 'clip')
+                window.history.pushState(
+                  null,
+                  '',
+                  `?eventId=${eventId}&setting=stages&stageSetting=clip`
                 )
-                // setstageSetting('clip')
               }}>
               <p
                 className={`${

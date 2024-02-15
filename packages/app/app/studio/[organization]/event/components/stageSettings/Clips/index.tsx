@@ -1,16 +1,12 @@
 'use client'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { IExtendedSession } from '@/lib/types'
-import {
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const Clips = ({
   stage,
@@ -20,8 +16,6 @@ const Clips = ({
   sessions: IExtendedSession[]
 }) => {
   const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
   const [selectedSession, setSelectedSession] = useState<
     IExtendedSession | undefined
   >()
@@ -34,16 +28,9 @@ const Clips = ({
     }
   }, [stage, sessions])
 
+  const eventId = searchParams.get('eventId')
   const stageSetting = searchParams.get('stageSetting')
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
 
-      return params.toString()
-    },
-    [searchParams]
-  )
   if (stageSetting !== 'clip') {
     return null
   }
@@ -60,12 +47,11 @@ const Clips = ({
               <Button
                 variant={'secondary'}
                 onClick={() => {
-                  router.push(
-                    pathname +
-                      '?' +
-                      createQueryString('stageSetting', 'settings')
+                  window.history.pushState(
+                    null,
+                    '',
+                    `?eventId=${eventId}&setting=stages&stageSetting=settings`
                   )
-                  // setstageSetting('settings')
                 }}>
                 Cancel
               </Button>
@@ -98,12 +84,11 @@ const Clips = ({
             variant={'outline'}
             className=""
             onClick={() => {
-              router.push(
-                pathname +
-                  '?' +
-                  createQueryString('stageSetting', 'settings')
+              window.history.pushState(
+                null,
+                '',
+                `?eventId=${eventId}&setting=stages&stageSetting=settings`
               )
-              // setstageSetting('settings')
             }}>
             Back to settings
           </Button>

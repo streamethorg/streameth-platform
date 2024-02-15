@@ -13,7 +13,7 @@ const EventSettings = ({
 }) => {
   const searchParams = useSearchParams()
 
-  const selectedSetting = searchParams.get('selectedSetting')
+  const selectedSetting = searchParams.get('setting')
   const style = {
     '--colors-accent': event.accentColor,
   } as React.CSSProperties

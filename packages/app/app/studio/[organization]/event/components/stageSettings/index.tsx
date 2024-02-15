@@ -12,11 +12,10 @@ const StageSettings = ({
   sessions: IExtendedSession[]
 }) => {
   const searchParams = useSearchParams()
-  // const { selectedStage, selectedSetting } = useNavigation()
-  const selectedSetting = searchParams.get('selectedSetting')
-  const selectedStage = searchParams.get('selectedStage')
-  if (selectedSetting !== 'stages') return null
 
+  const selectedSetting = searchParams.get('setting')
+  const selectedStage = searchParams.get('stage')
+  if (selectedSetting !== 'stages') return null
   const stage =
     stages.filter((stage) => stage._id === selectedStage)[0] ||
     stages[0]
