@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import CreateClipCard from './CreateClipCard'
 import SessionCard from './SessionCard'
-import { useNavigation } from '../../navigation/navigationContext'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { IExtendedSession } from '@/lib/types'
+import { useSearchParams } from 'next/navigation'
 
 const Clips = ({
   stage,
@@ -15,6 +15,7 @@ const Clips = ({
   stage: IStageModel
   sessions: IExtendedSession[]
 }) => {
+  const searchParams = useSearchParams()
   const [selectedSession, setSelectedSession] = useState<
     IExtendedSession | undefined
   >()
@@ -27,10 +28,10 @@ const Clips = ({
     }
   }, [stage, sessions])
 
-  const { selectedStageSetting, setSelectedStageSetting } =
-    useNavigation()
+  const eventId = searchParams.get('eventId')
+  const stageSetting = searchParams.get('stageSetting')
 
-  if (selectedStageSetting !== 'clip') {
+  if (stageSetting !== 'clip') {
     return null
   }
 
@@ -46,7 +47,11 @@ const Clips = ({
               <Button
                 variant={'secondary'}
                 onClick={() => {
-                  setSelectedStageSetting('settings')
+                  window.history.pushState(
+                    null,
+                    '',
+                    `?eventId=${eventId}&setting=stages&stageSetting=settings`
+                  )
                 }}>
                 Cancel
               </Button>
@@ -79,7 +84,11 @@ const Clips = ({
             variant={'outline'}
             className=""
             onClick={() => {
-              setSelectedStageSetting('settings')
+              window.history.pushState(
+                null,
+                '',
+                `?eventId=${eventId}&setting=stages&stageSetting=settings`
+              )
             }}>
             Back to settings
           </Button>

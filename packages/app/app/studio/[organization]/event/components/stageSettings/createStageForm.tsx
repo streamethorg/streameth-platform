@@ -58,6 +58,7 @@ export default function CreateStageForm({
       })
       .finally(() => {
         setIsLoading(false)
+        window.history.pushState(null, '', `?eventId=${event.slug}`)
       })
   }
 
