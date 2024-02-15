@@ -81,9 +81,13 @@ const StudioPageNavbar = ({
         {children}
       </div>
       <SwitchOrganization organizations={userData?.organizations} />
-      <div className="ml-auto flex flex-row items-center justify-end h-full">
+      <div className="ml-auto pl-2 flex flex-row items-center justify-end h-full">
         {menuVisible && (
-          <Navbar pages={isMobile ? [...pages] : pages} />
+          <Navbar
+            isMobile={isMobile}
+            setIsNavVisible={setMenuVisible}
+            pages={isMobile ? [...pages] : pages}
+          />
         )}
         {pages.length > 1 && (
           <NavBarButton
