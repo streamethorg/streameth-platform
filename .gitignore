@@ -46,3 +46,5 @@ google_sa_secret.json
 
 # Sentry Config File
 .sentryclirc
+
+.yarn

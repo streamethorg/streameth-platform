@@ -1,4 +1,3 @@
-'use client'
 import {
   Card,
   CardHeader,
@@ -7,27 +6,22 @@ import {
   CardTitle,
   CardFooter,
 } from '@/components/ui/card'
-import Player from '@/components/ui/Player'
-import { useStream } from '@livepeer/react'
+import { PlayerWithControls } from '@/components/ui/Player'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import MultistreamCard from './multistream/multistreamCard'
-import { useSearchParams } from 'next/navigation'
+import { getStageStream } from '@/lib/actions/stages'
+import { fetchStage } from '@/lib/services/stageService'
 
-const StreamConfig = ({ stage }: { stage: IStageModel }) => {
-  const { data: stream, isLoading } = useStream(
-    stage?.streamSettings?.streamId ?? ''
-  )
-  const searchParams = useSearchParams()
-  const stageSetting = searchParams.get('stageSetting')
-
-  if (stageSetting !== 'settings') {
-    return null
+const StreamConfig = async ({ stageId }: { stageId: string }) => {
+  const stage = await fetchStage({ stage: stageId })
+  if (!stage || !stage.streamSettings.streamId) {
+    return <div> no stage found</div>
   }
+  const data = await getStageStream(stage.streamSettings.streamId)
 
-  if (isLoading || !stage?.streamSettings.streamId) {
-    return null
+  if (!data) {
+    return <div> no stream data found</div>
   }
-
   return (
     <div className="border-none shadow-none h-full text-foreground">
       <CardHeader>
@@ -35,9 +29,16 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
       </CardHeader>
       <CardContent className="flex flex-row gap-4">
         <div className="flex flex-col w-1/2 gap-4">
-          <Player
-            playerName={stage?.name}
-            playbackId={stream?.playbackId}
+          <PlayerWithControls
+            src={[
+              {
+                src: `https://livepeercdn.studio/hls/${data.playbackId}/index.m3u8`,
+                width: 1920,
+                height: 1080,
+                mime: 'application/vnd.apple.mpegurl',
+                type: 'hls',
+              },
+            ]}
           />
           <Card className="shadow-none border-border">
             <CardHeader>
@@ -54,15 +55,15 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
               <p className="font-bold">RTMP Ingest:</p>
               <p>rtmp://rtmp.livepeer.com/live</p>
               <p className="font-bold">Stream key:</p>
-              <p>{stream?.streamKey}</p>
+              <p>{data?.streamKey}</p>
             </CardContent>
             <CardFooter className="flex flex-row justify-between text-sm text-muted-foreground">
               <p>
                 Last seen:{' '}
-                {new Date(stream?.lastSeen as number).toDateString()}
+                {new Date(data?.lastSeen as number).toDateString()}
               </p>
               <p className="ml-auto">
-                {stream?.isActive ? 'active' : 'not active'}
+                {data?.isActive ? 'active' : 'not active'}
               </p>
             </CardFooter>
           </Card>

@@ -4,6 +4,7 @@ import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { createStage, deleteStage } from '../services/stageService'
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
+import { Stream } from 'livepeer/dist/models/components'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -83,4 +84,34 @@ export const deleteStageAction = async ({
   }
   revalidatePath('/studio')
   return response
+}
+
+export const getStageStream = async (
+  streamId: string
+): Promise<Stream | null> => {
+  try {
+    const stream = await livepeer.stream.get(streamId)
+    if (!stream.stream) {
+      return null
+    }
+    return stream.stream
+  } catch (error) {
+    console.error('Error getting stream:', error)
+    return null
+  }
+}
+
+export const updateStageStream = async ({
+  streamId,
+  name,
+}: {
+  streamId: string
+  name: string
+}) => {
+  try {
+    await livepeer.stream.update(streamId, { name })
+  } catch (error) {
+    console.error('Error updating stream:', error)
+    throw new Error('Error updating stream')
+  }
 }

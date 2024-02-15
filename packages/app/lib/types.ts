@@ -61,6 +61,7 @@ export interface studioPageParams {
     eventId: string
     settings: string
     stage: string
+    stageSetting: string
   }
 }
 export interface IExtendedEvent extends IEvent {
