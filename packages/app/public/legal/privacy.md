@@ -2,6 +2,8 @@
 
 StreamETH International B.V. is responsible for processing personal data as outlined in this privacy statement.
 
+StreamETH International B.V. is steadfast in its commitment to safeguarding privacy, embodying the principles of _"Privacy by Design"_ and _"Privacy by Default"_ of article 25 of the GDPR (AVG) at the core of our operations.
+
 ## Personal Data We Process
 
 StreamETH International B.V. processes your personal data because you use our services and/or because you have provided it to us.
@@ -12,7 +14,7 @@ Below is an overview of the personal data we process:
 - Your "Last Seen" Activity
 - Internetbrowser and device type
 
-All your personal data is encrypted.
+All your personal data is encrypted or anonymous.
 
 ## Personal Data Processing
 
