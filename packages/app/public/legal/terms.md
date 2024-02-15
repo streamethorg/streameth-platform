@@ -52,8 +52,8 @@ In these general terms and conditions the following is understood:
 **Article 8. Compensation and payment terms**
 
 1. If StreamETH International B.V. has incurred higher costs and/or performed more work, which were reasonably  necessary for the execution of the Assignment, StreamETH International B.V. will charge this to the Client.
-2. 2. The Client pays an advance of 50% prior to the assignment for hired crew and rented equipment.
-3. 3. In principle, an invoice will be sent to the Client at the end of the Assignment for the execution of  the Assignment. Invoicing also takes place if the Client does not use the delivered goods. For  extensive assignments, billing takes place in whole or in parts (by means of advance payment) in  advance.
+2. The Client pays an advance of 50% prior to the assignment for hired crew and rented equipment.
+3. In principle, an invoice will be sent to the Client at the end of the Assignment for the execution of  the Assignment. Invoicing also takes place if the Client does not use the delivered goods. For  extensive assignments, billing takes place in whole or in parts (by means of advance payment) in  advance.
 4. Invoices must be paid within 14 days after the invoice date, in default of which the Client is in  default without further notice of default and the Client then owes a legal commercial interest from  the due date of the invoice.
 5. Payment by the Client constitutes recognition of the invoice's indebtedness.
 
