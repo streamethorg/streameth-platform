@@ -62,7 +62,6 @@ export const deleteStageAction = async ({
   organizationId: string
   streamId?: string
 }) => {
-  // console.log('deleg eeeeeeeevent', eventId, organizationId)
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
     throw new Error('No user session found')

@@ -15,7 +15,7 @@ import { useSearchParams } from 'next/navigation'
 
 const StreamConfig = ({ stage }: { stage: IStageModel }) => {
   const { data: stream, isLoading } = useStream(
-    stage.streamSettings?.streamId ?? ''
+    stage?.streamSettings?.streamId ?? ''
   )
   const searchParams = useSearchParams()
   const stageSetting = searchParams.get('stageSetting')
@@ -24,7 +24,7 @@ const StreamConfig = ({ stage }: { stage: IStageModel }) => {
     return null
   }
 
-  if (isLoading || !stage.streamSettings.streamId) {
+  if (isLoading || !stage?.streamSettings.streamId) {
     return null
   }
 

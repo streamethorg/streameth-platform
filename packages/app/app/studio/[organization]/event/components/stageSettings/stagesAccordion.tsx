@@ -9,7 +9,7 @@ import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface
 import { deleteStageAction } from '@/lib/actions/stages'
 import { IExtendedEvent } from '@/lib/types'
 import { toast } from 'sonner'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const StageAccordion = ({
   stages,
@@ -20,7 +20,6 @@ const StageAccordion = ({
 }) => {
   const searchParams = useSearchParams()
   const eventId = searchParams.get('eventId')
-  const router = useRouter()
   const stageSetting = searchParams.get('stageSetting')
   const selectedStage = searchParams.get('stage')
 
@@ -44,7 +43,7 @@ const StageAccordion = ({
           toast.error('Error deleting stage')
         })
         .finally(() => {
-          router.refresh()
+          window.history.pushState(null, '', `?eventId=${eventId}`)
         })
     }
   }
