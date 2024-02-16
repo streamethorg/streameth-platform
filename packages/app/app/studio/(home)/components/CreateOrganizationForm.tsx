@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -143,7 +144,7 @@ export default function CreateOrganization() {
               control={form.control}
               name="logo"
               render={({ field }) => (
-                <FormItem className=" max-w-[50px]">
+                <FormItem className="max-w-[50px]">
                   <FormLabel className="">Logo</FormLabel>
                   <FormControl>
                     <ImageUpload
@@ -161,7 +162,7 @@ export default function CreateOrganization() {
             <Button disabled={isSubmitDisabled} type="submit">
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                  <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
                   Please wait
                 </>
               ) : (

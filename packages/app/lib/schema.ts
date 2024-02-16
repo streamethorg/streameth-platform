@@ -127,3 +127,11 @@ export const organizationSchema = z.object({
   accentColor: z.string().optional(),
   slug: z.string().optional(),
 })
+
+export const videoUploadSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  thumbnail: z.string(),
+  uploadYoutube: z.boolean(),
+  slug: z.string().optional(),
+})
