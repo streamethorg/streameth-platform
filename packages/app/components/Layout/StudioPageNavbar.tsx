@@ -19,11 +19,11 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="lg:hidden z-50">
+    className="z-50 lg:hidden">
     {!isNavVisible ? (
-      <Bars3Icon className="w-[36px] h-[36px] bg-primary  rounded  mx-auto" />
+      <Bars3Icon className="mx-auto rounded w-[36px] h-[36px] bg-primary" />
     ) : (
-      <XMarkIcon className="w-[36px] h-[36px] bg-primary  rounded   mx-auto" />
+      <XMarkIcon className="mx-auto rounded w-[36px] h-[36px] bg-primary" />
     )}
   </button>
 )
@@ -46,7 +46,7 @@ const StudioPageNavbar = ({
   const pages = [
     {
       name: 'Upload video',
-      href: 'https://info.streameth.org/stream-eth-studio',
+      href: '/studio/upload',
       bgColor: 'bg-muted ',
     },
 
@@ -58,8 +58,8 @@ const StudioPageNavbar = ({
   ]
 
   return (
-    <NavigationMenu className="z-1 sticky top-0 p-2 lg:p-4 border-b flex flex-row items-center">
-      <div className=" lg:flex-initial">
+    <NavigationMenu className="flex sticky top-0 flex-row items-center p-2 border-b lg:p-4 z-1">
+      <div className="lg:flex-initial">
         <Link href="/">
           <Image
             className="hidden lg:block"
@@ -69,7 +69,7 @@ const StudioPageNavbar = ({
             height={40}
           />
           <Image
-            className="block lg:hidden aspect-square h-full"
+            className="block h-full lg:hidden aspect-square"
             src="/logo.png"
             alt="Streameth logo"
             height={36}
@@ -77,11 +77,11 @@ const StudioPageNavbar = ({
           />
         </Link>
       </div>
-      <div className="flex-grow mx-2 flex justify-center">
+      <div className="flex flex-grow justify-center mx-2">
         {children}
       </div>
       <SwitchOrganization organizations={userData?.organizations} />
-      <div className="ml-auto flex flex-row items-center justify-end h-full">
+      <div className="flex flex-row justify-end items-center ml-auto h-full">
         {menuVisible && (
           <Navbar pages={isMobile ? [...pages] : pages} />
         )}
