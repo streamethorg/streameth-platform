@@ -16,15 +16,15 @@ const items = {
   },
   privacy: {
     item: 'Privacy',
-    href: '#',
+    href: '/privacy',
   },
   terms: {
     item: 'Terms',
-    href: 'https://streameth.notion.site/StreamETH-International-B-V-Terms-and-Conditions-4d6c7924134c4b2886bd171d2bad0966',
+    href: '/terms',
   },
 }
 
-const Footer = () => {
+const Footer = ({ active }: { active?: string }) => {
   const year = new Date().getFullYear()
 
   return (
@@ -40,6 +40,7 @@ const Footer = () => {
       <div className="flex justify-center pb-1 w-full text-sm text-black md:hidden">
         © {year} StreamETH International B.V.
       </div>
+      {/* Visible on larger screens */}
       <div className="hidden text-sm text-black md:block">
         © {year} StreamETH International B.V.
       </div>
@@ -47,7 +48,9 @@ const Footer = () => {
         <Link
           key={key}
           href={href}
-          className="mx-2 text-sm font-light text-black underline">
+          className={`mx-2 text-sm ${
+            active === key ? 'font-bold' : 'font-light'
+          } text-black underline hover:no-underline`}>
           {item}
         </Link>
       ))}
