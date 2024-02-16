@@ -7,7 +7,10 @@ import { Button } from '@/components/ui/button'
 import CreateStageForm from '../stageSettings/createStageForm'
 import Link from 'next/link'
 import { IExtendedEvent } from '@/lib/types'
-import { deleteEventAction } from '@/lib/actions/events'
+import {
+  deleteEventAction,
+  updateEventAction,
+} from '@/lib/actions/events'
 import { toast } from 'sonner'
 import {
   useRouter,
@@ -53,6 +56,22 @@ const Navigation = ({
         })
     }
   }
+
+  const handlePublishEvent = () => {
+    updateEventAction({
+      event: { ...event, unlisted: !event.unlisted },
+    })
+      .then((response) => {
+        if (response) {
+          toast.success('Event updated')
+        } else {
+          toast.error('Error publishing event')
+        }
+      })
+      .catch(() => {
+        toast.error('Error publishing event')
+      })
+  }
   return (
     <div
       className={cn(
@@ -63,6 +82,11 @@ const Navigation = ({
         <h3 className="text-2xl font-bold mt-4 mb-2 ">
           Event settings
         </h3>
+        <Button
+          onClick={handlePublishEvent}
+          variant={!event.unlisted ? 'outline' : 'default'}>
+          {event.unlisted ? 'Publish' : 'Un-publish'}
+        </Button>
       </div>
       <EventAccordion event={event} />
       <div className="flex flex-row p-2 justify-between items-center border-b border-border">
