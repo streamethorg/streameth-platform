@@ -32,6 +32,7 @@ StreamETH International B.V. processes your personal data for the following purp
 
 - To offer you the option to create an account
 - To offer you the option to automatically delete your account after a year of inactivity
+- To gather insights from anonymous analytics, such as tracking the internet browser and device type, to improve our services and user experience. This information is collected in a way that does not allow for individual user identification.
 
 ## Retention Period for Personal Data
 
