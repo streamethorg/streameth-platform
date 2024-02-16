@@ -9,7 +9,7 @@ import {
   useCreateClip,
   Player,
 } from '@livepeer/react'
-import { useClipContext } from './ClipContext'
+import { useClipContext } from './components/ClipContext'
 
 const StudioPlayer = ({ playbackId }: { playbackId: string }) => {
   const { selectedStreamSession, setPlaybackStatus } =

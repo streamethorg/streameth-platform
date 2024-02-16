@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { eventSchema } from '@/lib/schema'
 
-import DataConfigElement from '../../../../../../components/misc/form/dataConfigElement'
+import DataConfigElement from '../../../../../../../components/misc/form/dataConfigElement'
 import {
   Accordion,
   AccordionContent,

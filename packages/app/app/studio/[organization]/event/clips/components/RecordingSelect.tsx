@@ -6,25 +6,27 @@ import {
   SelectGroup,
   SelectItem,
 } from '@/components/ui/select'
-import { useClipContext } from './ClipContext'
-import { useStreamSessions } from '@livepeer/react'
 import { SelectContent } from '@/components/ui/select'
+import useSearchParams from '@/lib/hooks/useSearchParams'
+import { Session } from 'livepeer/dist/models/components'
+const RecordingSelect = ({
+  streamRecordings,
+}: {
+  streamRecordings: Session[]
+}) => {
+  const { handleTermChange, searchParams } = useSearchParams()
+  const selectedSession = searchParams.get('selectedRecording')
 
-const SessionSelect = ({ streamId }: { streamId: string }) => {
-  const { setSelectedStreamSession } = useClipContext()
-
-  const { data: streamSessions, isLoading } = useStreamSessions({
-    streamId,
-  })
-
-  if (isLoading) return null
-  if (!streamSessions) return <div>No stream sessions found</div>
+  if (!streamRecordings) return <div>No stream sessions found</div>
 
   return (
     <Select
       onValueChange={(value) => {
-        const session = streamSessions.find((s) => s.id === value)
-        session && setSelectedStreamSession(session)
+        const session = streamRecordings.find((s) => s.id === value)
+        session &&
+          handleTermChange([
+            { key: 'selectedRecording', value: session.id },
+          ])
       }}>
       <SelectTrigger>
         <SelectValue
@@ -33,7 +35,7 @@ const SessionSelect = ({ streamId }: { streamId: string }) => {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {streamSessions.map((session) => (
+          {streamRecordings.map((session) => (
             <SelectItem key={session.id} value={session.id}>
               {new Date(session.lastSeen as number).toUTCString()}
             </SelectItem>
@@ -44,4 +46,4 @@ const SessionSelect = ({ streamId }: { streamId: string }) => {
   )
 }
 
-export default SessionSelect
+export default RecordingSelect

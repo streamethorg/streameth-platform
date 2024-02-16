@@ -64,6 +64,19 @@ export interface studioPageParams {
     stageSetting: string
   }
 }
+
+export interface ClipsPageParams {
+  params: {
+    organization: string
+    session: string
+  }
+  searchParams: {
+    eventId: string
+    stage: string
+    selectedSession: string
+  }
+}
+
 export interface IExtendedEvent extends IEvent {
   _id: string
 }

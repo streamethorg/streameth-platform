@@ -4,7 +4,6 @@ import Navigation from './components/navigation'
 import { studioPageParams } from '@/lib/types'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
-import { fetchAllSessions } from '@/lib/data'
 import StreamConfig, {
   StreamConfigSkeleton,
 } from './components/stageSettings/StageConfig'
@@ -14,19 +13,11 @@ export default async function EventPage({
   params,
   searchParams,
 }: studioPageParams) {
-  const {
-    settings,
-    eventId,
-    stage: stageId,
-    stageSetting,
-  } = searchParams
-  console.log(searchParams, settings !== 'stage')
+  const { settings, eventId, stage: stageId } = searchParams
+
   const event = await fetchEvent({ eventId: eventId })
   const stages = await fetchEventStages({
     eventId: eventId,
-  })
-  const sessions = await fetchAllSessions({
-    event: eventId,
   })
 
   if (!event) return null
@@ -67,14 +58,6 @@ export default async function EventPage({
               <StreamConfig stageId={stageId} />
             </Suspense>
           )}
-          {/* {settings == 'stage' && stageSetting === 'clip' && (
-          <Clips
-            stage={stage}
-            sessions={sessions.filter(
-              (session) => session.stageId === stage._id
-            )}
-          />
-        )} */}
         </div>
       </div>
     </div>

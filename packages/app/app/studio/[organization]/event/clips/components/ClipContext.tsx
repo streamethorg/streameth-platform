@@ -1,5 +1,5 @@
+'use client'
 import React, { createContext, useContext, useState } from 'react'
-import { StreamSession } from '@livepeer/react'
 
 type PlaybackStatus = {
   progress: number
