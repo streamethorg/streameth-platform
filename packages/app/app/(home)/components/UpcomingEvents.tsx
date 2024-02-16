@@ -24,9 +24,15 @@ const UpcomingEvents = async ({
   organization?: IOrganizationModel['_id']
   archive?: boolean
 }) => {
-  const events = await fetchEvents({
-    date,
-    organizationSlug: organization,
+  const events = (
+    await fetchEvents({
+      organizationSlug: organization,
+    })
+  ).filter((event) => {
+    if (date) {
+      return new Date(event.start) > date
+    }
+    return true
   })
 
   if (events.length === 0) return null
