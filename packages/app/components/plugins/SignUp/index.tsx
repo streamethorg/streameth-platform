@@ -10,6 +10,7 @@ import {
   CredenzaFooter,
   CredenzaBody,
 } from '@/components/ui/crezenda'
+//@ts-ignore
 import { useFormStatus, useFormState } from 'react-dom'
 import { IExtendedEvent } from '@/lib/types'
 import { Input } from '@/components/ui/input'
