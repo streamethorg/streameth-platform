@@ -9,6 +9,7 @@ import { cookies } from 'next/headers'
 import { IExtendedEvent } from '../types'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 import GoogleSheetService from '@/lib/services/googleSheetService'
+import { revalidatePath } from 'next/cache'
 
 export const createEventAction = async ({
   event,
@@ -29,7 +30,7 @@ export const createEventAction = async ({
   if (!response) {
     throw new Error('Error creating event')
   }
-
+  revalidatePath('/studio')
   return response
 }
 
@@ -50,13 +51,16 @@ export const updateEventAction = async ({
   if (!response) {
     throw new Error('Error updating event')
   }
+  revalidatePath('/studio')
   return response
 }
 
 export const deleteEventAction = async ({
   eventId,
+  organizationId,
 }: {
   eventId: string
+  organizationId: string
 }) => {
   const authToken = cookies().get('user-session')?.value
 
@@ -64,11 +68,15 @@ export const deleteEventAction = async ({
     throw new Error('No user session found')
   }
 
-  const response = await deleteEvent({ eventId, authToken })
+  const response = await deleteEvent({
+    eventId,
+    organizationId,
+    authToken,
+  })
   if (!response) {
     throw new Error('Error deleting event')
   }
-
+  revalidatePath('/studio')
   return response
 }
 

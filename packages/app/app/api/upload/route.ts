@@ -19,5 +19,8 @@ export async function POST(request: NextRequest) {
     buffer,
     file.type
   )
-  return NextResponse.json({ success: true })
+
+  return NextResponse.json({
+    success: true,
+  })
 }

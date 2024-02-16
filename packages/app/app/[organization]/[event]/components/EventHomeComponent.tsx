@@ -52,7 +52,7 @@ export default function EventHomeComponent({
         <Card className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
           <AspectRatio ratio={3 / 1} className="overflow-clip">
             <Image
-              className="rounded-lg  p-2"
+              className="rounded-lg object-contain h-full p-2"
               src={bannerImg!}
               alt="Event Cover"
               width={1500}
@@ -62,6 +62,7 @@ export default function EventHomeComponent({
               }}
             />
           </AspectRatio>
+
           <CardHeader>
             <div className="flex flex-col md:flex-row w-full my-2 gap-2">
               <CardTitle className="py-2 text-4xl uppercase text-white">
