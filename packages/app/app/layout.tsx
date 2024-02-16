@@ -37,7 +37,7 @@ export default function RootLayout({
                 <TopNavbarContextProvider>
                   {children}
 
-                  <div className="fixed bottom-4 left-4 z-50">
+                  <div className="fixed bottom-4 left-4 z-50 mr-4">
                     <CookieBanner />
                   </div>
                 </TopNavbarContextProvider>
