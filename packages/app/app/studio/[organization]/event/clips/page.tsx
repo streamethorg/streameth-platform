@@ -13,7 +13,7 @@ import TimeSetter from './components/TimeSetter'
 import CreateClipButton from './components/CreateClipButton'
 import { CardContent } from '@/components/ui/card'
 import { ClipProvider } from './components/ClipContext'
-
+import StudioPlayer from './components/Player'
 const EventClips = async ({
   params,
   searchParams,
@@ -34,9 +34,9 @@ const EventClips = async ({
     await livepeer.session.getRecorded(parentStream)
   ).classes
 
-  const sessions = (
-    await fetchAllSessions({ event: eventId, stageId: stage })
-  ).sessions
+  const sessions = (await fetchAllSessions({ stageId: stage }))
+    .sessions
+  console.log('recording', JSON.parse(JSON.stringify(recordings)))
 
   const session = sessions.find((s) => s._id === selectedSession)
 
@@ -59,7 +59,7 @@ const EventClips = async ({
           <div className="px-2 space-y-2">
             {session.name}
             <div>
-              {session.assetId ? (
+              {false ? (
                 <>
                   <PlayerWithControls
                     src={[
@@ -76,9 +76,11 @@ const EventClips = async ({
                 </>
               ) : (
                 <ClipProvider>
-                  <></>
+                  <StudioPlayer />
                   <RecordingSelect
-                    streamRecordings={recordings ?? []}
+                    streamRecordings={JSON.parse(
+                      JSON.stringify(recordings)
+                    )}
                   />
                   <div className="flex flex-row w-full space-x-1 items-center">
                     <TimeSetter label="Clip start" type="start" />

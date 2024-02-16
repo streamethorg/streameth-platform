@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {
   Select,
@@ -25,18 +26,19 @@ const RecordingSelect = ({
         const session = streamRecordings.find((s) => s.id === value)
         session &&
           handleTermChange([
-            { key: 'selectedRecording', value: session.id },
+            { key: 'selectedRecording', value: session.id ?? '' },
           ])
       }}>
       <SelectTrigger>
         <SelectValue
+          defaultValue={selectedSession ?? ''}
           placeholder={'Select a session to create clips from'}
         />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           {streamRecordings.map((session) => (
-            <SelectItem key={session.id} value={session.id}>
+            <SelectItem key={session.id} value={session.id ?? ''}>
               {new Date(session.lastSeen as number).toUTCString()}
             </SelectItem>
           ))}

@@ -10,6 +10,7 @@ import { deleteStageAction } from '@/lib/actions/stages'
 import { IExtendedEvent } from '@/lib/types'
 import { toast } from 'sonner'
 import useSearchParams from '@/lib/hooks/useSearchParams'
+import Link from 'next/link'
 
 const StageAccordion = ({
   stages,
@@ -99,26 +100,18 @@ const StageAccordion = ({
                 Livestream settings
               </p>
             </AccordionContent>
-            <AccordionContent
-              onClick={() => {
-                handleTermChange([
-                  {
-                    key: 'stage',
-                    value: stage._id,
-                  },
-                  {
-                    key: 'stageSetting',
-                    value: 'clip',
-                  },
-                ])
-              }}>
-              <p
-                className={`${
-                  stageSetting === 'clip' && 'border-l border-primary'
-                } px-2`}>
-                Clips
-              </p>
-            </AccordionContent>
+            <Link
+              href={`event/clips?eventId=${event._id}&stage=${stage._id}`}>
+              <AccordionContent>
+                <p
+                  className={`${
+                    stageSetting === 'clip' &&
+                    'border-l border-primary'
+                  } px-2`}>
+                  Clips
+                </p>
+              </AccordionContent>
+            </Link>
             <AccordionContent
               onClick={() => {
                 handleDeleteStage(
