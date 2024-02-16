@@ -28,11 +28,14 @@ export async function fetchEvents({
         return []
       }
       const response = await fetch(
-        `${apiUrl()}/events/organization/${organization._id}`
+        `${apiUrl()}/events/organization/${organization._id}`,
+        { cache: 'no-store' }
       )
       data = (await response.json()).data ?? []
     } else {
-      const response = await fetch(`${apiUrl()}/events`)
+      const response = await fetch(`${apiUrl()}/events`, {
+        cache: 'no-store',
+      })
       data = (await response.json()).data ?? []
     }
 
@@ -43,7 +46,7 @@ export async function fetchEvents({
           new Date(event.end).getTime() >= date.getTime()
       )
     }
-   
+
     return data
   } catch (e) {
     console.log(e)
@@ -124,9 +127,6 @@ export const updateEvent = async ({
       },
       body: JSON.stringify(modifiedObject),
     })
-    if (!response.ok) {
-      throw 'Error updating event'
-    }
     return (await response.json()).data
   } catch (e) {
     console.log('error in updateEvent', e)

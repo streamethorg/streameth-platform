@@ -1,6 +1,8 @@
 import UpcomingEvents from './components/UpcomingEvents'
 import { Suspense } from 'react'
-import OrganizationStrip from './components/OrganizationStrip'
+import OrganizationStrip, {
+  OrganizationStripSkeleton,
+} from './components/OrganizationStrip'
 import {
   CardTitle,
   Card,
@@ -8,12 +10,8 @@ import {
   CardContent,
 } from '@/components/ui/card'
 import HeroHeader from './components/HeroHeader'
-import { Skeleton } from '@/components/ui/skeleton'
 import { fetchOrganizations } from '@/lib/services/organizationService'
-
-const Loading = () => {
-  return <Skeleton className=" h-96 w-full bg-muted" />
-}
+import UpcomingLoader from './components/UpcomingLoader'
 
 export const revalidate = 3600 // 1 day
 
@@ -22,7 +20,7 @@ export default async function Home() {
   return (
     <>
       <HeroHeader />
-      <Suspense>
+      <Suspense fallback={<UpcomingLoader />}>
         <UpcomingEvents date={new Date()} />
       </Suspense>
       <div className="">
@@ -33,7 +31,9 @@ export default async function Home() {
         </CardHeader>
         <CardContent className="space-y-8 border-0 px-0 lg:px-0">
           {organizations?.map((organization) => (
-            <Suspense key={organization._id} fallback={<Loading />}>
+            <Suspense
+              key={organization._id}
+              fallback={<OrganizationStripSkeleton />}>
               <OrganizationStrip organization={organization} />
             </Suspense>
           ))}

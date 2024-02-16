@@ -44,5 +44,45 @@ export default async function OrganizationStrip({
   )
 }
 
-{
+export const OrganizationStripSkeleton = () => {
+  return (
+    <div className="animate-pulse">
+      <div className="flex flex-col space-y-4">
+        <div className="flex flex-row my-2 items-center">
+          <div className="rounded-full bg-gray-300 h-8 w-8"></div>
+          <div className="h-6 bg-gray-300 rounded ml-2 mr-auto w-1/4"></div>
+        </div>
+        <div className="flex flex-row overflow-y-auto gap-4 h-full">
+          <VideoGridSkeleton />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const VideoGridSkeleton = () => {
+  const skeletonCards = Array(7).fill(0) // Assuming you want 7 placeholders
+
+  return (
+    <div className="max-w-screen lg:w-full bg-transparent border-none">
+      <div className="flex flex-row gap-8 gap-x-4">
+        {skeletonCards.map((_, index) => (
+          <VideoCardSkeleton key={index} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const VideoCardSkeleton = () => {
+  return (
+    <div className="w-[300px] lg:w-full h-full flex-initial space-y-2">
+      <div className="h-44 bg-gray-300 rounded-xl"></div>
+      <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+      <div className="flex flex-row items-center space-x-2">
+        <div className="h-6 w-6 bg-gray-300 rounded-md"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+      </div>
+    </div>
+  )
 }
