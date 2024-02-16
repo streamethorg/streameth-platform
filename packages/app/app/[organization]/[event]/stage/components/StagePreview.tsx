@@ -3,6 +3,7 @@ import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface
 import Link from 'next/link'
 import Image from 'next/image'
 import banner from '@/public/streameth_banner.png'
+import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 export default function StagePreview({
   stage,
   organization,
@@ -20,14 +21,8 @@ export default function StagePreview({
     <Link
       key={stage._id}
       href={`/${organization}/${event}/stage/${stage._id}`}>
-      <Card>
-        <Image
-          className="p-1"
-          src={eventCover || banner}
-          alt="Event Cover"
-          width={1500}
-          height={500}
-        />
+      <Card className="w-full max-w-[350px]">
+        <Thumbnail imageUrl={eventCover} />
         <CardHeader className="bg-transparent">
           <p className="lowercase text-lg text-white font-normal">
             {stage.name}
