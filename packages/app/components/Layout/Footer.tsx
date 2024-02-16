@@ -16,11 +16,11 @@ const items = {
   },
   privacy: {
     item: 'Privacy',
-    href: 'https://streameth.org/privacy',
+    href: '/privacy',
   },
   terms: {
     item: 'Terms',
-    href: 'https://streameth.org/terms',
+    href: '/terms',
   },
 }
 
