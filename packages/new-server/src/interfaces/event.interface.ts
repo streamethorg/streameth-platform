@@ -23,6 +23,7 @@ export interface IPlugins {
 }
 
 export interface IEvent {
+  _id?: Types.ObjectId;
   name: string;
   description: string;
   start: Date | string;
@@ -45,4 +46,4 @@ export interface IEvent {
   plugins?: IPlugins;
   slug?: string;
 }
-export interface IEventModel extends IEvent, Document {}
+export interface IEventModel extends Omit<IEvent, '_id'>, Document {}
