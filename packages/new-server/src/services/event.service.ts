@@ -1,7 +1,9 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IEvent } from '@interfaces/event.interface';
+import { StateType } from '@interfaces/state.interface';
 import Events from '@models/event.model';
+import State from '@models/state.model';
 
 export default class EventService {
   private path: string;
@@ -17,15 +19,22 @@ export default class EventService {
       `${this.path}/${data.organizationId}`,
     );
     if (findEvent) throw new HttpException(409, 'Event already exists');
-    return this.controller.store.create(
+    const createEvent = await this.controller.store.create(
       data.name,
       data,
       `${this.path}/${data.organizationId}`,
     );
+    await State.create({
+      eventId: createEvent._id,
+      eventSlug: createEvent.slug,
+      sheetType: data.dataImporter[0].type,
+      type: StateType.event,
+    });
+    return createEvent;
   }
 
   async update(eventId: string, event: IEvent): Promise<IEvent> {
-    return await this.controller.store.update(eventId, event);
+    return await this.controller.store.update(eventId, event, event.name);
   }
 
   async get(eventId: string): Promise<IEvent> {

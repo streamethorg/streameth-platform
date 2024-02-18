@@ -31,7 +31,14 @@ export default class StageService {
   }
 
   async update(stageId: string, stage: IStage): Promise<IStage> {
-    return await this.controller.store.update(stageId, stage);
+    return await this.controller.store.update(stageId, stage, stage.name);
+  }
+
+  async findStageForEvent(stageId: string, eventId: string): Promise<IStage> {
+    return await this.controller.store.findOne({
+      slug: stageId,
+      eventId: eventId,
+    });
   }
 
   async findAllStagesForEvent(eventId: string): Promise<Array<IStage>> {
