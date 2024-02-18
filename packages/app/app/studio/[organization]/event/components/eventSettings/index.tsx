@@ -1,8 +1,8 @@
 'use client'
 import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
-import { useNavigation } from '../navigation/navigationContext'
 import { IExtendedEvent } from '@/lib/types'
+import { useSearchParams } from 'next/navigation'
 
 const EventSettings = ({
   event,
@@ -11,8 +11,9 @@ const EventSettings = ({
   event: IExtendedEvent
   stages: IStageModel[]
 }) => {
-  const { selectedSetting } = useNavigation()
+  const searchParams = useSearchParams()
 
+  const selectedSetting = searchParams.get('setting')
   const style = {
     '--colors-accent': event.accentColor,
   } as React.CSSProperties

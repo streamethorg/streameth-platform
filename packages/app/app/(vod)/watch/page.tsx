@@ -59,7 +59,7 @@ export default async function Watch({
         </TabsList>
         {tabs.map((tab) => (
           <TabsContent
-            className="h-[calc(100%-50px)] overflow-y-scroll"
+            className="h-[calc(100%-50px)] w-full"
             key={tab.value}
             value={tab.value}>
             {tab.content}

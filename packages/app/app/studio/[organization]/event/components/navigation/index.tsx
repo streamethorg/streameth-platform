@@ -2,15 +2,21 @@
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import EventAccordion from '../eventSettings/eventAccordion'
 import StagesAccordion from '../stageSettings/stagesAccordion'
-import { useNavigation } from './navigationContext'
 import { cn } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 import CreateStageForm from '../stageSettings/createStageForm'
 import Link from 'next/link'
 import { IExtendedEvent } from '@/lib/types'
-import { deleteEventAction } from '@/lib/actions/events'
+import {
+  deleteEventAction,
+  updateEventAction,
+} from '@/lib/actions/events'
 import { toast } from 'sonner'
-import { useRouter, usePathname } from 'next/navigation'
+import {
+  useRouter,
+  usePathname,
+  useSearchParams,
+} from 'next/navigation'
 const Navigation = ({
   event,
   stages,
@@ -18,9 +24,11 @@ const Navigation = ({
   event: IExtendedEvent
   stages: IStageModel[]
 }) => {
-  const { selectedStageSetting } = useNavigation()
   const router = useRouter()
   const pathname = usePathname()
+
+  const searchParams = useSearchParams()
+  const stageSetting = searchParams.get('stageSetting')
 
   const findOrg = pathname.split('/')
   const orgId = findOrg[2]
@@ -31,6 +39,7 @@ const Navigation = ({
     ) {
       const response = deleteEventAction({
         eventId,
+        organizationId: event.organizationId as string,
       })
         .then((response) => {
           if (response) {
@@ -44,20 +53,40 @@ const Navigation = ({
         })
         .finally(() => {
           router.push(`/studio/${orgId}`)
-          router.refresh()
         })
     }
+  }
+
+  const handlePublishEvent = () => {
+    updateEventAction({
+      event: { ...event, unlisted: !event.unlisted },
+    })
+      .then((response) => {
+        if (response) {
+          toast.success('Event updated')
+        } else {
+          toast.error('Error publishing event')
+        }
+      })
+      .catch(() => {
+        toast.error('Error publishing event')
+      })
   }
   return (
     <div
       className={cn(
         'w-2/6 min-w-[400px] h-full border-r border-border flex flex-col text-foreground',
-        selectedStageSetting === 'clip' && 'hidden'
+        stageSetting === 'clip' && 'hidden'
       )}>
       <div className="flex flex-row p-2 justify-between items-center border-b border-border">
         <h3 className="text-2xl font-bold mt-4 mb-2 ">
           Event settings
         </h3>
+        <Button
+          onClick={handlePublishEvent}
+          variant={!event.unlisted ? 'outline' : 'default'}>
+          {event.unlisted ? 'Publish' : 'Un-publish'}
+        </Button>
       </div>
       <EventAccordion event={event} />
       <div className="flex flex-row p-2 justify-between items-center border-b border-border">
@@ -65,7 +94,7 @@ const Navigation = ({
         {stages.length > 0 && <CreateStageForm event={event} />}
       </div>
       {stages.length > 0 ? (
-        <StagesAccordion stages={stages} />
+        <StagesAccordion event={event} stages={stages} />
       ) : (
         <div className="flex flex-row p-2 justify-between items-center border-b border-border">
           <div className="text-sm ">
@@ -76,7 +105,7 @@ const Navigation = ({
       )}
       <div className=" flex flex-row justify-between items-center mt-auto p-2">
         <Button className="" variant={'outline'}>
-          <Link href={`/studio/${event.organizationId}`}>Cancel</Link>
+          <Link href={`/studio/${orgId}`}>Cancel</Link>
         </Button>
         <Button
           onClick={() => handleDeleteEvent(event._id!)}

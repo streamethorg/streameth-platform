@@ -24,9 +24,15 @@ const UpcomingEvents = async ({
   organization?: IOrganizationModel['_id']
   archive?: boolean
 }) => {
-  const events = await fetchEvents({
-    date,
-    organizationSlug: organization,
+  const events = (
+    await fetchEvents({
+      organizationSlug: organization,
+    })
+  ).filter((event) => {
+    if (date) {
+      return new Date(event.start) > date
+    }
+    return true
   })
 
   if (events.length === 0) return null
@@ -39,7 +45,7 @@ const UpcomingEvents = async ({
           Explore current and past events
         </CardDescription>
       </CardHeader>
-      <CardContent className="px-0 lg:px-0 flex flex-row overflow-x-scroll space-x-4 ">
+      <CardContent className="px-0 lg:px-0 flex flex-row overflow-auto space-x-4 ">
         {events.map(
           ({ name, eventCover, accentColor, slug }, index) => (
             <div key={index}>

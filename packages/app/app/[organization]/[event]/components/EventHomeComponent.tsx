@@ -10,8 +10,12 @@ import StagePreview from '../stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 
-import SpeakerComponent from '../speakers/components/SpeakerComponent'
-import ScheduleComponent from '../schedule/components/ScheduleComponent'
+import SpeakerComponent, {
+  SpeakerComponentSkeleton,
+} from '../speakers/components/SpeakerComponent'
+import ScheduleComponent, {
+  ScheduleSkeleton,
+} from '../schedule/components/ScheduleComponent'
 import Image from 'next/image'
 import {
   getEventPeriod,
@@ -23,7 +27,7 @@ import remarkGfm from 'remark-gfm'
 import { Suspense } from 'react'
 import banner from '@/public/streameth_twitter_banner.jpeg'
 import { IExtendedEvent } from '@/lib/types'
-
+import SignUp from '@/components/plugins/SignUp'
 export default function EventHomeComponent({
   event,
   stages,
@@ -46,9 +50,9 @@ export default function EventHomeComponent({
     <div className="flex flex-col w-full h-full bg-event px-2">
       <div className=" relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
         <Card className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
-          <AspectRatio ratio={3 / 1}>
+          <AspectRatio ratio={3 / 1} className="overflow-clip">
             <Image
-              className="rounded-lg  p-2"
+              className="rounded-lg object-contain h-full p-2"
               src={bannerImg!}
               alt="Event Cover"
               width={1500}
@@ -58,10 +62,14 @@ export default function EventHomeComponent({
               }}
             />
           </AspectRatio>
+
           <CardHeader>
-            <CardTitle className="py-2 text-4xl uppercase text-white">
-              {event.name}
-            </CardTitle>
+            <div className="flex flex-col md:flex-row w-full my-2 gap-2">
+              <CardTitle className="py-2 text-4xl uppercase text-white">
+                {event.name}
+              </CardTitle>
+              <SignUp event={event} />
+            </div>
             <div className="text-sm text-white">
               <p>
                 <span className="mr-2">&#128197;</span>
@@ -97,7 +105,7 @@ export default function EventHomeComponent({
           </CardContent>
           <CardFooter className="flex flex-col p-4 space-y-2 w-full items-start">
             <CardTitle className=" text-white">Livestreams</CardTitle>
-            <div className="grid lg:grid-cols-2 gap-4 pt-0 lg:pt-0">
+            <div className="w-full grid lg:grid-cols-2 gap-4 pt-0 lg:pt-0">
               {stages?.map((stage) => (
                 <StagePreview
                   key={stage._id}
@@ -110,7 +118,7 @@ export default function EventHomeComponent({
             </div>
           </CardFooter>
         </Card>
-        <Suspense>
+        <Suspense fallback={<ScheduleSkeleton />}>
           <ScheduleComponent
             stages={stages}
             event={event}
@@ -118,7 +126,7 @@ export default function EventHomeComponent({
             date={searchParams.date}
           />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<SpeakerComponentSkeleton />}>
           <SpeakerComponent event={event} />
         </Suspense>
       </div>

@@ -1,37 +1,21 @@
-import Videos from '@/components/misc/Videos'
 import { SearchPageProps } from '@/lib/types'
 import UpcomingEvents from '@/app/(home)/components/UpcomingEvents'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import Pagination from '../components/pagination'
+import UpcomingLoader from '@/app/(home)/components/UpcomingLoader'
 import {
   generalMetadata,
   archiveMetadata,
 } from '@/lib/utils/metadata'
 import { Metadata } from 'next'
-import { fetchAllSessions } from '@/lib/data'
 import { fetchEvent } from '@/lib/services/eventService'
 import { Suspense } from 'react'
-
+import ArchiveVideos from '@/app/(vod)/components/ArchiveVideos'
+import ArchiveVideoSkeleton from '../components/ArchiveVideosSkeleton'
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
-  const videos = await fetchAllSessions({
-    organizationSlug: searchParams.organization,
-    event: searchParams.event,
-    limit: 12,
-    onlyVideos: true,
-    searchQuery: searchParams.searchQuery,
-    page: Number(searchParams.page || 1),
-  })
-
   return (
-    <Suspense>
-      <div className="">
+    <div className="w-full">
+      <Suspense fallback={<UpcomingLoader />}>
         <UpcomingEvents
           archive={false}
           organization={
@@ -40,15 +24,11 @@ export default async function ArchivePage({
               : 'invalid'
           }
         />
-        <div>
-          <div className="flex flex-row items-center justify-between mb-4">
-            <CardTitle className="">Results</CardTitle>
-            <Pagination {...videos.pagination} />
-          </div>
-          <Videos videos={videos.sessions} />
-        </div>
-      </div>
-    </Suspense>
+      </Suspense>
+      <Suspense fallback={<ArchiveVideoSkeleton />}>
+        <ArchiveVideos searchParams={searchParams} />
+      </Suspense>
+    </div>
   )
 }
 

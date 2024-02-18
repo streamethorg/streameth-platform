@@ -5,7 +5,6 @@ import {
   CardDescription,
   CardTitle,
   CardContent,
-  CardFooter,
   CardHeader,
 } from '@/components/ui/card'
 
@@ -15,8 +14,8 @@ import SpeakerIcon from '../speakers/speakerIcon'
 import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
-import DropdownMenuWithActionButtons from './DropdownMenuWithActionButtons'
 import { ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 
 // TODO LOADING STAT
 const SessionInfoBox = ({
@@ -30,6 +29,8 @@ const SessionInfoBox = ({
   assetId,
   viewCount,
   inverted,
+  avatarUrl,
+  avatarFallback,
 }: {
   title: string
   cardDescription?: string
@@ -41,6 +42,8 @@ const SessionInfoBox = ({
   assetId?: string
   viewCount?: boolean
   inverted?: boolean
+  avatarUrl?: string
+  avatarFallback?: string
 }) => {
   const [isOpened, setIsOpened] = useState(false)
   const [isExpandable, setIsExpandable] = useState(false)
@@ -67,13 +70,19 @@ const SessionInfoBox = ({
   return (
     <div
       className={`${
-        inverted
-          ? 'text-white rounded-lg border bg-card text-card-foreground shadow bg-opacity-10 bg-white border-white border-opacity-10'
-          : ''
+        inverted ? 'text-white rounded-lg  text-card-foreground ' : ''
       }`}>
       <CardHeader className=" p-2 lg:p-2 flex w-full lg:items-center justify-between flex-col lg:flex-row">
         <div className="md:flex flex-col">
-          <CardTitle className="">{title}</CardTitle>
+          <CardTitle className="flex flex-row space-x-2 items-center">
+            {avatarUrl && (
+              <Avatar>
+                <AvatarImage src={avatarUrl} alt={avatarFallback} />
+                <AvatarFallback>{avatarFallback}</AvatarFallback>
+              </Avatar>
+            )}
+            <span>{title}</span>
+          </CardTitle>
           <CardDescription>
             {viewCount && assetId && <ViewCounts assetId={assetId} />}
             <div

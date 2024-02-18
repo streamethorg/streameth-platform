@@ -27,14 +27,18 @@ import { toast } from 'sonner'
 import { generateTimezones } from '@/lib/utils/time'
 import { Loader2 } from 'lucide-react'
 import MDEditor from '@uiw/react-md-editor'
+import { IExtendedOrganization } from '@/lib/types'
+import { useRouter } from 'next/navigation'
+import { getFormSubmitStatus } from '@/lib/utils/utils'
 
 export default function CreateEventForm({
-  organizationId,
+  organization,
 }: {
-  organizationId: string
+  organization: IExtendedOrganization
 }) {
   const [isCreatingEvent, setIsCreatingEvent] =
     useState<boolean>(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,7 +62,7 @@ export default function CreateEventForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsCreatingEvent(true)
     const response = createEventAction({
-      event: { ...values, organizationId: organizationId },
+      event: { ...values, organizationId: organization?._id },
     })
       .then((response) => {
         if (response) {
@@ -72,6 +76,8 @@ export default function CreateEventForm({
       })
       .finally(() => {
         setIsCreatingEvent(false)
+        router.push(`/studio/${organization?.slug}`)
+        router.refresh()
       })
   }
 
@@ -79,7 +85,7 @@ export default function CreateEventForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8">
+        className="space-y-8 mt-10">
         <FormField
           control={form.control}
           name="name"
@@ -234,10 +240,9 @@ export default function CreateEventForm({
                   <FormLabel>Event Logo</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      {...field}
-                      path="events"
-                      onChange={field.onChange}
+                      path={`events/${organization?.slug}`}
                       aspectRatio={1}
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -254,9 +259,8 @@ export default function CreateEventForm({
                   <FormLabel>Event Cover</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      path="events"
+                      path={`events/${organization?.slug}`}
                       {...field}
-                      onChange={field.onChange}
                       aspectRatio={16 / 9}
                     />
                   </FormControl>
@@ -274,9 +278,8 @@ export default function CreateEventForm({
                   <FormLabel>Event Banner</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      path="events"
+                      path={`events/${organization?.slug}`}
                       {...field}
-                      onChange={field.onChange}
                       aspectRatio={3 / 1}
                     />
                   </FormControl>
@@ -304,20 +307,23 @@ export default function CreateEventForm({
         />
         <div className="flex flex-row">
           <Button variant={'destructive'}>
-            <Link href={`/studio/${organizationId}`} passHref>
+            <Link href={`/studio/${organization.slug}`} passHref>
               Cancel
             </Link>
           </Button>
-          {isCreatingEvent ? (
-            <Button disabled>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </Button>
-          ) : (
-            <Button className="ml-2" type="submit">
-              Create Event
-            </Button>
-          )}
+          <Button
+            disabled={getFormSubmitStatus(form)}
+            className="ml-2"
+            type="submit">
+            {isCreatingEvent ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                Please wait
+              </>
+            ) : (
+              'Create Event'
+            )}
+          </Button>
         </div>
       </form>
     </Form>
