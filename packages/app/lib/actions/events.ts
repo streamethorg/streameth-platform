@@ -43,11 +43,20 @@ export const updateEventAction = async ({
   if (!authToken) {
     throw new Error('No user session found')
   }
+
+  // TODO
+  // @ts-ignore
+  delete event.createdAt
+  // @ts-ignore
+  delete event.updatedAt
+  // @ts-ignore
+  delete event.__v
+
   const response = await updateEvent({
     event: { ...event },
     authToken,
   })
-
+  console.log('response', response)
   if (!response) {
     throw new Error('Error updating event')
   }
