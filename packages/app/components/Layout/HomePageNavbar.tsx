@@ -30,9 +30,11 @@ const getPages = (
 }
 
 const HomePageNavbar = ({
+  logo,
   pages,
   showSearchBar = true,
 }: {
+  logo?: string
   pages: Page[]
   showSearchBar?: boolean
 }) => {

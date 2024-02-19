@@ -105,7 +105,7 @@ const DataConfigElement = ({
         <div>
           <Input
             name="sheetId"
-            value={(config as GSheetConfig).sheetId || ''}
+            value={(config as GSheetConfig)?.sheetId || ''}
             onChange={handleConfigChange}
             placeholder="Sheet ID"
           />

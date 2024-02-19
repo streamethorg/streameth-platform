@@ -56,7 +56,6 @@ export const updateEventAction = async ({
     event: { ...event },
     authToken,
   })
-  console.log('response', response)
   if (!response) {
     throw new Error('Error updating event')
   }
