@@ -3,9 +3,16 @@ import useSearchParams from '@/lib/hooks/useSearchParams'
 import { Card, CardContent } from '@/components/ui/card'
 import { IExtendedSession } from '@/lib/types'
 import { Button } from '@/components/ui/button'
+import CreateSession from '../../../library/create/CreateSession'
 const SessionList = ({
   sessions,
+  eventId,
+  organizationId,
+  stageId,
 }: {
+  eventId: string
+  organizationId: string
+  stageId: string
   sessions: IExtendedSession[]
 }) => {
   const { handleTermChange, searchParams } = useSearchParams()
@@ -35,7 +42,7 @@ const SessionList = ({
                 {session.name}
               </h2>
               <div className="text-xs text-gray-600 mt-2">
-                <p>{new Date(session.start).toLocaleString()}</p>
+                <p>{new Date(session.start).toString()}</p>
                 <div className="flex flex-row space-x-2 items-center mt-1">
                   {!session.assetId ? (
                     <span className="bg-red-500 rounded-full w-3 h-3"></span>
@@ -64,9 +71,11 @@ const SessionList = ({
           }}>
           Back to settings
         </Button>
-        <Button variant={'default'} className="w-full">
-          Create new session
-        </Button>
+        <CreateSession
+          stageId={stageId}
+          eventId={eventId}
+          organizationId={organizationId}
+        />
       </div>
     </div>
   )

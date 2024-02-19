@@ -74,6 +74,7 @@ export interface ClipsPageParams {
     eventId: string
     stage: string
     selectedSession: string
+    selectedRecording: string
   }
 }
 

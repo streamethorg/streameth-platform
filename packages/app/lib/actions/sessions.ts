@@ -2,12 +2,32 @@
 import { Livepeer } from 'livepeer'
 import { cookies } from 'next/headers'
 import { IExtendedSession } from '../types'
-import { updateSession } from '../services/sessionService'
+import { updateSession, createSession } from '../services/sessionService'
+import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
 })
 
+export const createSessionAction = async ({
+  session,
+}: {
+  session: ISession
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  const response = await createSession({
+    session,
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error creating session')
+  }
+  return response
+}
 export const createClip = async ({
   playbackId,
   sessionId,
@@ -27,6 +47,7 @@ export const createClip = async ({
     sessionId,
     startTime: start,
   })
+  console.log('clip', clip)
   const updatedSession = {
     ...session,
     assetId: clip.object?.asset.id,
@@ -40,6 +61,8 @@ export const createClip = async ({
   delete updatedSession.updatedAt
   // @ts-ignore
   delete updatedSession.__v
+  // @ts-ignore
+  
   await updateSessionAction({ session: updatedSession })
 }
 
@@ -49,6 +72,7 @@ export const updateSessionAction = async ({
   session: IExtendedSession
 }) => {
   const authToken = cookies().get('user-session')?.value
+  console.log('authToken', authToken) 
   if (!authToken) {
     throw new Error('No user session found')
   }

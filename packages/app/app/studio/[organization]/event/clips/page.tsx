@@ -5,45 +5,51 @@ import SessionList from './components/SessionList'
 import { notFound } from 'next/navigation'
 import { PlayerWithControls } from '@/components/ui/Player'
 import RecordingSelect from './components/RecordingSelect'
-import { getStageStream } from '@/lib/actions/stages'
 import { fetchStage } from '@/lib/services/stageService'
-import { Livepeer } from 'livepeer'
 import ClipStatus from './components/ClipStatus'
 import TimeSetter from './components/TimeSetter'
 import CreateClipButton from './components/CreateClipButton'
-import { CardContent } from '@/components/ui/card'
 import { ClipProvider } from './components/ClipContext'
-import StudioPlayer from './components/Player'
+import ReactHlsPlayer from './components/Player'
+import { Livepeer } from 'livepeer'
+import { fetchEvent } from '@/lib/services/eventService'
+
 const EventClips = async ({
   params,
   searchParams,
 }: ClipsPageParams) => {
-  const { eventId, stage, selectedSession } = searchParams
+  const { eventId, stage, selectedSession, selectedRecording } =
+    searchParams
   if (!eventId || !stage) return notFound()
-
-  const stageData = await fetchStage({ stage })
-
-  if (!stageData) return notFound()
-  const parentStream = stageData.streamSettings.streamId ?? ''
 
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
   })
 
-  const recordings = (
-    await livepeer.session.getRecorded(parentStream)
-  ).classes
+  const stageData = await fetchStage({ stage })
 
+  if (!stageData) return notFound()
+  const parentStream = (
+    await livepeer.stream.get(stageData.streamSettings.streamId ?? '')
+  ).stream
+  const recordings = (
+    await livepeer.session.getRecorded(parentStream?.id ?? '')
+  ).classes
   const sessions = (await fetchAllSessions({ stageId: stage }))
     .sessions
-  console.log('recording', JSON.parse(JSON.stringify(recordings)))
 
   const session = sessions.find((s) => s._id === selectedSession)
+
+  const event = await fetchEvent({ eventId })
+
+  if (!event || !parentStream || !parentStream.playbackId)
+    return notFound()
 
   if (sessions.length === 0) {
     return (
       <NoSession
-        organization={params.organization}
+        stageId={stage}
+        organization={event.organizationId as string}
         eventId={eventId}
       />
     )
@@ -52,7 +58,12 @@ const EventClips = async ({
   return (
     <div className="flex flex-row h-full gap-2">
       <div className="flex flex-col w-2/6 border-none rounded-none overflow-auto h-full gap-2">
-        <SessionList sessions={sessions} />
+        <SessionList
+          sessions={sessions}
+          eventId={eventId}
+          organizationId={event.organizationId as string}
+          stageId={stage}
+        />
       </div>
       <div className="flex flex-col w-full h-full overflow-auto">
         {session ? (
@@ -76,7 +87,11 @@ const EventClips = async ({
                 </>
               ) : (
                 <ClipProvider>
-                  <StudioPlayer />
+                  <ReactHlsPlayer
+                    playbackId={parentStream?.playbackId}
+                    selectedStreamSession={selectedRecording}
+                  />
+                  ,
                   <RecordingSelect
                     streamRecordings={JSON.parse(
                       JSON.stringify(recordings)
@@ -86,7 +101,8 @@ const EventClips = async ({
                     <TimeSetter label="Clip start" type="start" />
                     <TimeSetter label="Clip end" type="end" />
                     <CreateClipButton
-                      playbackId={parentStream}
+                      selectedRecording={selectedRecording}
+                      playbackId={parentStream?.playbackId}
                       session={session}
                     />
                   </div>

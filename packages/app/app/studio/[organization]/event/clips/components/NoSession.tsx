@@ -1,13 +1,16 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import CreateSession from '../../../library/create/CreateSession'
 
-const NoSession = ({
+const NoSession = async ({
   organization,
   eventId,
+  stageId,
 }: {
   organization: string
   eventId: string
+  stageId: string
 }) => {
   return (
     <div className="flex flex-col items-center justify-center h-full">
@@ -20,9 +23,11 @@ const NoSession = ({
             <Link href={`studio/${organization}?eventId=${eventId}`}>
               <Button>Cancel</Button>
             </Link>
-            <Button variant={'default'} className="w-full">
-              Create new session
-            </Button>
+            <CreateSession
+              eventId={eventId}
+              stageId={stageId}
+              organizationId={event?.organizationId as string}
+            />
           </div>
         </CardContent>
       </Card>

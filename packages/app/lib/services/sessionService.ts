@@ -2,6 +2,39 @@ import { ISessionModel } from 'streameth-new-server/src/interfaces/session.inter
 import { IExtendedSession } from '../types'
 import { apiUrl } from '@/lib/utils/utils'
 import { Livepeer } from 'livepeer'
+import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
+import { revalidatePath } from 'next/cache'
+
+export const createSession = async ({
+  session,
+  authToken,
+}: {
+  session: ISession
+  authToken: string
+}): Promise<ISession> => {
+
+  try {
+    const response = await fetch(
+      `${apiUrl()}/sessions`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(session),
+      }
+    )
+    if (!response.ok) {
+      throw 'Error updating session'
+    }
+    revalidatePath("/studio")
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateSession', e)
+    throw e
+  }
+}
 export const fetchSession = async ({
   session,
 }: {
@@ -15,9 +48,11 @@ export const fetchSession = async ({
     if (!response.ok) {
       return null
     }
-    const data:IExtendedSession = (await response.json()).data
+    const data: IExtendedSession = (await response.json()).data
     if (data.assetId) {
-      const livepeerData = await LivepeerClient.asset.get(data.assetId)
+      const livepeerData = await LivepeerClient.asset.get(
+        data.assetId
+      )
       data.videoUrl = livepeerData.asset?.playbackUrl
     }
     return data
@@ -34,7 +69,8 @@ export const updateSession = async ({
   session: IExtendedSession
   authToken: string
 }): Promise<ISessionModel> => {
-  const modifiedSession = (({ _id, ...rest }) => rest)(session)
+  const modifiedSession = (({ _id, assetId, ...rest }) => rest)(session)
+  console.log('modifiedSession', modifiedSession)
   try {
     const response = await fetch(
       `${apiUrl()}/sessions/${session._id}`,
@@ -47,6 +83,7 @@ export const updateSession = async ({
         body: JSON.stringify(modifiedSession),
       }
     )
+    console.log('response', await response.json())
     if (!response.ok) {
       throw 'Error updating session'
     }

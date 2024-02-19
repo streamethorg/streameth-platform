@@ -8,26 +8,23 @@ import { IExtendedSession } from '@/lib/types'
 const CreateClipButton = ({
   playbackId,
   session,
+  selectedRecording,
 }: {
   playbackId: string
+  selectedRecording: string
   session: IExtendedSession
 }) => {
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const {
-    selectedStreamSession,
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
-  } = useClipContext()
+  const { startTime, setStartTime, endTime, setEndTime } =
+    useClipContext()
 
   const handleCreateClip = () => {
-    if (selectedStreamSession && startTime && endTime) {
+    if (selectedRecording && startTime && endTime) {
       setIsLoading(true)
       createClip({
         playbackId,
-        sessionId: selectedStreamSession.id,
+        sessionId: selectedRecording,
         start: startTime.unix,
         end: endTime.unix,
         session,
