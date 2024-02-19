@@ -96,15 +96,12 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/fluent-ffmpeg": "^2.1.21",
     "@types/fuzzy-search": "^2.1.5",
     "@types/node": "20.3.0",
-    "@types/react": "^18.2.13",
-    "@types/react-color": "^3.0.11",
-    "@types/react-dom": "18.2.4",
-    "@tailwindcss/typography": "^0.5.10",
-    "@types/fuzzy-search": "^2.1.5",
     "@types/react": "18.2.37",
+    "@types/react-color": "^3.0.11",
     "@types/react-dom": "18.2.15",
     "@types/react-scroll": "^1.8.7",
     "cypress": "^13.6.2",
