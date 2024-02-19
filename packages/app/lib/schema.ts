@@ -131,7 +131,7 @@ export const organizationSchema = z.object({
 export const videoUploadSchema = z.object({
   name: z.string(),
   description: z.string(),
-  thumbnail: z.string(),
+  coverImage: z.string(),
   uploadYoutube: z.boolean(),
   slug: z.string().optional(),
 })

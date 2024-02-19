@@ -16,12 +16,15 @@ import {
 import { Input } from '@/components/ui/input'
 import { videoUploadSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import { createOrganizationAction } from '@/lib/actions/organizations'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
 import { Card, CardTitle } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import InfoHoverCard from './InfoHoverCard'
+import { updateSession } from '@/lib/services/sessionService'
+import uploadYouTubeAction from '@/lib/actions/youtube'
 
 export default function UploadVideoForm() {
   const [isLoading, setIsLoading] = useState(false)
@@ -31,29 +34,34 @@ export default function UploadVideoForm() {
     defaultValues: {
       name: '',
       description: '',
-      thumbnail: '',
+      coverImage: '',
       uploadYoutube: false,
     },
   })
 
   function onSubmit(values: z.infer<typeof videoUploadSchema>) {
+    console.log(values)
     setIsLoading(true)
     if (!address) {
       toast.error('No wallet address found')
       return
     }
-    createOrganizationAction({
-      video: { ...values, walletAddress: address as string },
-    })
-      .then(() => {
-        toast.success('Video created')
-      })
-      .catch(() => {
-        toast.error('Error uploading a video')
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+
+    if (values.uploadYoutube === true) {
+      uploadYouTubeAction()
+    }
+
+    // TODO: How should I link a session to a video? Or should it create a new video?
+    // updateSession({ session: {...session, name: values.name }, authToken: '' })
+    //   .then(() => {
+    //     toast.success('Video created')
+    //   })
+    //   .catch(() => {
+    //     toast.error('Error uploading a video')
+    //   })
+    //   .finally(() => {
+    //     setIsLoading(false)
+    //   })
   }
 
   const isSubmitDisabled =
@@ -98,9 +106,42 @@ export default function UploadVideoForm() {
             )}
           />
           <FormField
+            control={form.control}
+            name="uploadYoutube"
+            render={({
+              field: { onChange, onBlur, value, name, ref },
+            }) => (
+              <FormItem>
+                <div className="flex items-center space-x-2">
+                  <FormControl>
+                    <Checkbox
+                      id="uploadYoutube"
+                      name={name}
+                      ref={ref}
+                      checked={value}
+                      onCheckedChange={onChange}
+                      onBlur={onBlur}
+                    />
+                  </FormControl>
+                  <FormLabel
+                    htmlFor="uploadYoutube"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    Upload to YouTube...
+                  </FormLabel>
+                  <InfoHoverCard
+                    title={'Upload this video to YouTube'}
+                    description={
+                      'Linking your YouTube Channel to StreamETH enables automated video uploads, streamlining the content sharing process.'
+                    }
+                  />
+                </div>
+              </FormItem>
+            )}
+          />
+          <FormField
             disabled={!form.getValues('name')}
             control={form.control}
-            name="thumbnail"
+            name="coverImage"
             render={({ field }) => (
               <FormItem className="max-w-[50px]">
                 <FormLabel className="">Thumbnail</FormLabel>
@@ -108,7 +149,7 @@ export default function UploadVideoForm() {
                   <ImageUpload
                     aspectRatio={1}
                     path={`organizations/${generateId(
-                      form.getValues('thumbnail')
+                      form.getValues('coverImage')
                     )}`}
                     {...field}
                   />
