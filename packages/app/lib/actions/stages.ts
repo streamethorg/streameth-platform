@@ -3,10 +3,11 @@ import { Livepeer } from 'livepeer'
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { createStage, deleteStage } from '../services/stageService'
 import { cookies } from 'next/headers'
+import { revalidatePath } from 'next/cache'
 
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  })
+const livepeer = new Livepeer({
+  apiKey: process.env.LIVEPEER_API_KEY,
+})
 
 export const createStageAction = async ({
   stage,
@@ -29,7 +30,7 @@ export const createStageAction = async ({
         },
         body: JSON.stringify({
           name: stage.name,
-          record: true
+          record: true,
         }),
       }
     )
@@ -48,15 +49,17 @@ export const createStageAction = async ({
   if (!response) {
     throw new Error('Error creating stage')
   }
-
+  revalidatePath('/studio')
   return response
 }
 
 export const deleteStageAction = async ({
   stageId,
+  organizationId,
   streamId,
 }: {
   stageId: string
+  organizationId: string
   streamId?: string
 }) => {
   const authToken = cookies().get('user-session')?.value
@@ -70,5 +73,14 @@ export const deleteStageAction = async ({
       console.error('Error deleting stream:', error)
     }
   }
-  await deleteStage({ stageId, authToken })
+  const response = await deleteStage({
+    stageId,
+    organizationId,
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error deleting stage')
+  }
+  revalidatePath('/studio')
+  return response
 }

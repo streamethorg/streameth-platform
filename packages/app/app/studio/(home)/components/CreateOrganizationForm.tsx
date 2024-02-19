@@ -27,6 +27,7 @@ import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
+import { getFormSubmitStatus } from '@/lib/utils/utils'
 
 export default function CreateOrganization() {
   const [isOpen, setIsOpen] = useState(false)
@@ -63,11 +64,6 @@ export default function CreateOrganization() {
         setIsLoading(false)
       })
   }
-
-  const isSubmitDisabled =
-    form.formState.isSubmitting ||
-    !form.formState.isValid ||
-    Object.keys(form.formState.dirtyFields).length === 0
 
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
@@ -159,7 +155,9 @@ export default function CreateOrganization() {
                 </FormItem>
               )}
             />
-            <Button disabled={isSubmitDisabled} type="submit">
+            <Button
+              disabled={getFormSubmitStatus(form)}
+              type="submit">
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}

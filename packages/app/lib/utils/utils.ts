@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { IExtendedEvent, IExtendedOrganization } from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
+import { UseFormProps, UseFormReturn } from 'react-hook-form'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -154,4 +155,12 @@ export const validateEnv = (envVar: string) => {
     throw new Error(`No ${value} found`)
   }
   return value
+}
+
+export const getFormSubmitStatus = (form: UseFormReturn<any>) => {
+  const isSubmitDisabled =
+    form.formState.isSubmitting ||
+    !form.formState.isValid ||
+    Object.keys(form.formState.dirtyFields).length === 0
+  return isSubmitDisabled
 }

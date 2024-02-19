@@ -2,14 +2,14 @@ describe('archive page', () => {
   it('search for event name', () => {
     cy.visit('http://localhost:3000/archive?event=ethberlin_2022')
     cy.get(
-      '[href="/watch?event=ethberlin_2022&session=65a9ef94973b440841226273"] > .font-semibold'
+      '[href="/watch?event=ethberlin_2022&session=65b8f8c6a5b2d09b88ec0cc2"] > .font-semibold'
     )
   })
 
   it('search for organization name', () => {
     cy.visit('http://localhost:3000/archive?organization=ethberlin')
     cy.get(
-      '[href="/watch?event=ethberlin_2022&session=65a9ef93973b44084122620f"] > .font-semibold'
+      '[href="/watch?event=ethberlin_2022&session=65b8f8c6a5b2d09b88ec0cc2"] > .font-semibold'
     )
     cy.get('[href="/archive?event=protocol_berg"] > .inline-flex')
   })
@@ -19,14 +19,14 @@ describe('archive page', () => {
       'http://localhost:3000/archive?searchQuery=lets%20be%20fr'
     )
     cy.get(
-      '[href="/watch?event=ethberlin_2022&session=65a9ef94973b440841226273"] > .font-semibold'
+      '[href="/watch?event=ethberlin_2022&session=65b8f8c8a5b2d09b88ec0d4a"] > .font-semibold'
     )
   })
 
   it('search for speaker name', () => {
     cy.visit('http://localhost:3000/archive?searchQuery=jonas')
     cy.get(
-      '[href="/watch?event=funding_the_commons_berlin_2023&session=65a9ef94973b440841226251"] > .font-semibold'
+      '[href="/watch?event=funding_the_commons_berlin_2023&session=65b8f8c9a5b2d09b88ec0d83"] > .font-semibold'
     )
   })
 
@@ -35,7 +35,7 @@ describe('archive page', () => {
       'http://localhost:3000/archive?event=ethberlin_2022&searchQuery=lets%20be%20fr'
     )
     cy.get(
-      '[href="/watch?event=ethberlin_2022&session=65a9ef94973b440841226273"] > .font-semibold'
+      '[href="/watch?event=ethberlin_2022&session=65b8f8c8a5b2d09b88ec0d4a"] > .font-semibold'
     )
   })
 
@@ -44,7 +44,7 @@ describe('archive page', () => {
       'http://localhost:3000/archive?organization=ethberlin&searchQuery=lets%20be%20fr'
     )
     cy.get(
-      '[href="/watch?event=ethberlin_2022&session=65a9ef94973b440841226273"] > .font-semibold'
+      '[href="/watch?event=ethberlin_2022&session=65b8f8c8a5b2d09b88ec0d4a"] > .font-semibold'
     )
   })
 
@@ -53,7 +53,7 @@ describe('archive page', () => {
       'http://localhost:3000/archive?event=funding_the_commons_berlin_2023&searchQuery=jonas'
     )
     cy.get(
-      '[href="/watch?event=funding_the_commons_berlin_2023&session=65a9ef94973b440841226251"] > .font-semibold'
+      '[href="/watch?event=funding_the_commons_berlin_2023&session=65b8f8c9a5b2d09b88ec0d83"] > .font-semibold'
     )
   })
 
@@ -75,14 +75,14 @@ describe('archive page', () => {
     cy.visit('http://localhost:3000/archive')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '1 of 67'
+      '1 of 68'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)').click()
 
     cy.url().should('include', 'page=2')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '2 of 67'
+      '2 of 68'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)')
   })
