@@ -14,11 +14,6 @@ export default class SessionServcie {
   }
 
   async create(data: ISession): Promise<ISession> {
-    const findSession = await this.controller.store.findOne(
-      { name: data.name },
-      `${this.path}/${data.eventId}`,
-    );
-    // if (findSession) throw new HttpException(409, 'Session already exists');
     return this.controller.store.create(
       data.name,
       data,
@@ -27,7 +22,7 @@ export default class SessionServcie {
   }
 
   async update(sessionId: string, session: ISession): Promise<ISession> {
-    return await this.controller.store.update(sessionId, session);
+    return await this.controller.store.update(sessionId, session, session.name);
   }
 
   async get(sessionId: string): Promise<ISession> {

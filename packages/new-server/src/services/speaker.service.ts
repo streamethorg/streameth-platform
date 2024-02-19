@@ -20,10 +20,24 @@ export default class SpeakerService {
     );
   }
 
+  async update(speakerId: string, data: ISpeaker): Promise<ISpeaker> {
+    return await this.controller.store.update(speakerId, data, data.name);
+  }
+
   async get(speakerId: string): Promise<ISpeaker> {
     const findSpeaker = await this.controller.store.findById(speakerId);
     if (!findSpeaker) throw new HttpException(404, 'Speaker not found');
     return findSpeaker;
+  }
+
+  async findSpeakerForEvent(
+    speakerId: string,
+    eventId: string,
+  ): Promise<ISpeaker> {
+    return await this.controller.store.findOne({
+      slug: speakerId,
+      eventId: eventId,
+    });
   }
 
   async findAllSpeakersForEvent(eventId: string): Promise<Array<ISpeaker>> {

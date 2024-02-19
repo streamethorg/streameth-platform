@@ -12,11 +12,13 @@ export default class DB<T> implements IStorageController<T> {
     return await this.model.create({ ...data, slug: generateId(query) });
   }
 
-  async update(id: string, data: T): Promise<T> {
-    const update = await this.model.findById(id);
+  async update(id: string, data: T, query: string): Promise<T> {
+    const update: any = await this.model.findById(id);
+    const slug = query ?? update.name;
     await update.updateOne(
       {
         ...data,
+        slug: generateId(slug),
       },
       { upsert: true },
     );
