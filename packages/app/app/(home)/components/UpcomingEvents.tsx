@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
@@ -15,6 +16,8 @@ import { fetchEvents } from '@/lib/services/eventService'
 import { archivePath } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
+import { getDateAsString } from '@/lib/utils/time'
+
 const UpcomingEvents = async ({
   date,
   organization,
@@ -47,8 +50,18 @@ const UpcomingEvents = async ({
       </CardHeader>
       <CardContent className="px-0 lg:px-0 flex flex-row overflow-auto space-x-4 ">
         {events.map(
-          ({ name, eventCover, accentColor, slug }, index) => (
-            <div key={index}>
+          (
+            {
+              name,
+              eventCover,
+              accentColor,
+              slug,
+              organizationId,
+              start,
+            },
+            index
+          ) => (
+            <Link key={index} href={`/${organizationId}/${slug}`}>
               <Card
                 className="p-2 w-[350px] h-full border-none text-foreground"
                 style={{
@@ -58,28 +71,20 @@ const UpcomingEvents = async ({
                   <div className=" relative">
                     <Thumbnail imageUrl={eventCover} />
                   </div>
-                  <CardHeader className=" px-2 lg:px-2 lg:py-2  rounded mt-1 bg-white bg-opacity-10 space-y-4">
+                  <CardHeader className=" px-2 lg:px-2 lg:py-2  rounded mt-1 bg-white bg-opacity-10">
                     <CardTitle className="truncate text-body text-white text-xl">
                       {name}
                     </CardTitle>
-                    <CardDescription className="text-white flex flex-row space-x-2 ">
-                      <Link href={archivePath({ event: slug })}>
-                        <Button variant="outline" className="w-full">
-                          Archive
-                        </Button>
-                      </Link>
-                      <Link href={`/${organization}/${slug}`}>
-                        <Button
-                          variant="secondary"
-                          className="w-full">
-                          Event page
-                        </Button>
-                      </Link>
+                    <CardDescription className="text-white flex flex-col">
+                      {new Date(start).toDateString()}
+                      <Button variant="outline" className="w-full">
+                        Event page
+                      </Button>
                     </CardDescription>
                   </CardHeader>
                 </div>
               </Card>
-            </div>
+            </Link>
           )
         )}
       </CardContent>
