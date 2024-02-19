@@ -1,10 +1,6 @@
 'use client'
 
 import { useState, useRef, useMemo, useCallback } from 'react'
-import {
-  ContextMenu,
-  ContextMenuTrigger,
-} from '@/components/ui/context-menu'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
@@ -13,9 +9,6 @@ import { useCreateAsset } from '@livepeer/react'
 import { useDropzone } from 'react-dropzone'
 
 // TODO: No drag and drop for phone
-//
-// TODO:
-// Make working cancel button
 
 const CreateAndViewAsset = ({ video }: { video: File }) => {
   const {
@@ -28,26 +21,7 @@ const CreateAndViewAsset = ({ video }: { video: File }) => {
     sources: [{ name: video.name, file: video }] as const,
   })
 
-  console.log(video)
-  console.log(status)
-
-  // const onDrop = useCallback(async (acceptedFiles: File[]) => {
-  //   if (
-  //     acceptedFiles &&
-  //     acceptedFiles.length > 0 &&
-  //     acceptedFiles?.[0]
-  //   ) {
-  //     setVideo(acceptedFiles[0])
-  //   }
-  // }, [])
-
-  // const { getRootProps, getInputProps } = useDropzone({
-  //   accept: {
-  //     'video/*': ['*.mp4'],
-  //   },
-  //   maxFiles: 1,
-  //   onDrop,
-  // })
+  console.log('Uploading video: ', video.name)
 
   const progressFormatted = useMemo(
     () =>
@@ -72,6 +46,22 @@ const Upload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [fileUploaded, setFileUploaded] = useState<boolean>(false)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      const file = acceptedFiles[0]
+      setSelectedFile(file)
+      setFileUploaded(true)
+    }
+  }, [])
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'video/*': ['*.mp4'],
+    },
+    maxFiles: 1,
+    onDrop,
+  })
 
   const handleButtonClick = () => {
     fileInputRef.current?.click()
@@ -99,28 +89,24 @@ const Upload = () => {
       </div>
       <div className="flex justify-center items-center">
         {!fileUploaded ? (
-          <ContextMenu>
-            <ContextMenuTrigger className="flex flex-col justify-center items-center p-4 text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed h-[550px] w-[700px]">
-              <h1 className="mb-2 text-center">
-                Drag and drop videos to upload
-              </h1>
-              <input
-                type="file"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-                accept="video/*"
-                onChange={(event) => {
-                  const file = event.target.files?.[0]
-                  if (file) {
-                    handleUpload(file)
-                  }
-                }}
-              />
-              <Button onClick={handleButtonClick}>
-                Upload video...
-              </Button>
-            </ContextMenuTrigger>
-          </ContextMenu>
+          <div
+            {...getRootProps()}
+            className="flex flex-col justify-center items-center p-4 text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed h-[550px] w-[700px]">
+            <input
+              {...getInputProps()}
+              ref={fileInputRef}
+              onChange={(event) => {
+                const file = event.target.files?.[0]
+                if (file) {
+                  handleUpload(file)
+                }
+              }}
+            />
+            <p>Drag and drop videos to upload...</p>
+            <Button className="mt-3" onClick={handleButtonClick}>
+              Upload a file...
+            </Button>
+          </div>
         ) : (
           <div className="flex flex-col justify-center items-center">
             <UploadVideoForm />
