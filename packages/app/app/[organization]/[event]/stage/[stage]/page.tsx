@@ -9,6 +9,7 @@ import UpcomingSession from '../components/UpcomingSession'
 import { notFound } from 'next/navigation'
 import { generalMetadata, stageMetadata } from '@/lib/utils/metadata'
 import { Metadata } from 'next'
+import { fetchChat } from '@/lib/services/chatService'
 
 export default async function Stage({ params }: EventPageProps) {
   if (!params.event || !params.stage) {
@@ -28,6 +29,7 @@ export default async function Stage({ params }: EventPageProps) {
     return notFound()
   }
 
+  const prevChatMessages = await fetchChat({ stageId: stage?._id })
   const sessionsData = await fetchAllSessions({ stageId: stage._id })
   const currentSession = sessionsData.sessions[0]
 
@@ -53,7 +55,10 @@ export default async function Stage({ params }: EventPageProps) {
           event={event}
           currentSession={currentSession}
         />
-        <Chat conversationId="" />
+        <Chat
+          prevChatMessages={prevChatMessages}
+          stageId={stage?._id}
+        />
       </div>
     </div>
   )

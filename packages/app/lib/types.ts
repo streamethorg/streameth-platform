@@ -4,6 +4,7 @@ import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
+import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
 
 export interface Page {
   name: string
@@ -77,4 +78,7 @@ export interface IStage extends IStageModel {}
 export interface ISpeaker extends ISpeakerModel {}
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
   organizations: IExtendedOrganization[]
+}
+export interface IExtendedChat extends Omit<IChat, '_id'> {
+  _id: string
 }
