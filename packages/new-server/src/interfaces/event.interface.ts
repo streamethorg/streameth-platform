@@ -10,7 +10,7 @@ export interface GSheetConfig {
 export interface PretalxConfig {
   url?: string;
   apiToken: string;
-  sheetId?: string
+  sheetId?: string;
 }
 
 export type IDataImporter =

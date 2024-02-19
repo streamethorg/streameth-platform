@@ -19,22 +19,25 @@ export default class EventService {
       `${this.path}/${data.organizationId}`,
     );
     if (findEvent) throw new HttpException(409, 'Event already exists');
-    const createEvent = await this.controller.store.create(
+    return await this.controller.store.create(
       data.name,
       data,
       `${this.path}/${data.organizationId}`,
     );
-    await State.create({
-      eventId: createEvent._id,
-      eventSlug: createEvent.slug,
-      sheetType: data.dataImporter[0].type,
-      type: StateType.event,
-    });
-    return createEvent;
   }
 
-  async update(eventId: string, event: IEvent): Promise<IEvent> {
-    return await this.controller.store.update(eventId, event, event.name);
+  async update(eventId: string, data: IEvent): Promise<IEvent> {
+    const event = await this.controller.store.update(eventId, data, data.name);
+    console.log('xxx', data.dataImporter[0].config.sheetId.length !== 0);
+    if (data.dataImporter[0].config.sheetId.length !== 0) {
+      await State.create({
+        eventId: event._id,
+        eventSlug: event.slug,
+        sheetType: data.dataImporter[0].type,
+        type: StateType.event,
+      });
+    }
+    return event;
   }
 
   async get(eventId: string): Promise<IEvent> {
