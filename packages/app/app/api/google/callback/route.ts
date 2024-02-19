@@ -28,7 +28,6 @@ export async function GET(request: NextRequest) {
     })
 
     oAuthClient.setCredentials(tokens as Credentials)
-    console.log(tokens)
 
     const encodedTokens = encodeURIComponent(JSON.stringify(tokens))
     const oneMonth = 31 * 24 * 60 * 60 * 1000 // Milliseconds in one month

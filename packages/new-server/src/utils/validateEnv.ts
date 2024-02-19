@@ -24,6 +24,7 @@ const validateEnv = () => {
     SPACES_KEY: str(),
     SPACES_SECRET: str(),
     LIVEPEER_WEBHOOK_SECRET: str(),
+    OAUTH_SECRET: str(),
   });
 };
 

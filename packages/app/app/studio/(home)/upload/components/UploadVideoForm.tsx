@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { videoUploadSchema } from '@/lib/schema'
+import { sessionSchema, videoUploadSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
@@ -23,8 +23,8 @@ import { generateId } from 'streameth-new-server/src/utils/util'
 import { Card, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import InfoHoverCard from './InfoHoverCard'
-import { updateSession } from '@/lib/services/sessionService'
-import uploadYouTubeAction from '@/lib/actions/youtube'
+import { apiUrl } from '@/lib/utils/utils'
+import { getCookie } from '@/lib/actions/cookieConsent'
 
 export default function UploadVideoForm() {
   const [isLoading, setIsLoading] = useState(false)
@@ -39,16 +39,28 @@ export default function UploadVideoForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof videoUploadSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof videoUploadSchema>) {
     setIsLoading(true)
     if (!address) {
       toast.error('No wallet address found')
       return
     }
 
-    if (values.uploadYoutube === true) {
-      uploadYouTubeAction()
+    // TODO: Get session
+    const sessionId = '65d382e3ad51d4af4f44758b'
+    const googleToken = await getCookie('google_token')
+
+    // TODO: It should first be uploaded to Livepeer before uploading to YouTube
+    if (values.uploadYoutube === true && googleToken) {
+      const response = await fetch(
+        `${apiUrl()}/sessions/upload/${sessionId}?googleToken=${
+          googleToken.value
+        }`
+      )
+      if (!response.ok) {
+        throw new Error(`Something went wrong ${response.status}`)
+      }
+      console.log('All good')
     }
 
     // TODO: How should I link a session to a video? Or should it create a new video?

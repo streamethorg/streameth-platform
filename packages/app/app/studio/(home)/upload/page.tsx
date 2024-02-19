@@ -8,7 +8,7 @@ import UploadVideoForm from './components/UploadVideoForm'
 import { useCreateAsset } from '@livepeer/react'
 import { useDropzone } from 'react-dropzone'
 
-// TODO: No drag and drop for phone
+// TODO: Disable drag and drop for phone
 
 const CreateAndViewAsset = ({ video }: { video: File }) => {
   const {
