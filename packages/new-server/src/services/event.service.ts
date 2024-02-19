@@ -28,7 +28,6 @@ export default class EventService {
 
   async update(eventId: string, data: IEvent): Promise<IEvent> {
     const event = await this.controller.store.update(eventId, data, data.name);
-    console.log('xxx', data.dataImporter[0].config.sheetId.length !== 0);
     if (data.dataImporter[0].config.sheetId.length !== 0) {
       await State.create({
         eventId: event._id,
