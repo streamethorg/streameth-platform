@@ -48,3 +48,5 @@ google_sa_secret.json
 .sentryclirc
 
 .yarn/*
+.yarn
+.yarn/

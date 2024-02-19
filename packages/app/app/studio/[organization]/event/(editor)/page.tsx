@@ -51,15 +51,15 @@ export default async function EventPage({
           />
         </div>
       )}
-      <div className="w-full h-full">
-        <div className="p-2 h-full">
-          {settings === 'stage' && (
+      {settings === 'stage' && (
+        <div className="w-full h-full">
+          <div className="h-full overflow-auto">
             <Suspense fallback={<StreamConfigSkeleton />}>
               <StreamConfig stageId={stageId} />
             </Suspense>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

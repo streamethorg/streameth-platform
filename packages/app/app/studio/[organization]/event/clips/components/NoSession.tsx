@@ -26,7 +26,7 @@ const NoSession = async ({
             <CreateSession
               eventId={eventId}
               stageId={stageId}
-              organizationId={event?.organizationId as string}
+              organizationId={organization}
             />
           </div>
         </CardContent>

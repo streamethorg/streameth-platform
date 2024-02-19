@@ -12,10 +12,6 @@ type PlaybackTime = {
 }
 
 type ClipContextType = {
-  selectedStreamSession: StreamSession | null
-  setSelectedStreamSession: React.Dispatch<
-    React.SetStateAction<StreamSession | null>
-  >
   playbackStatus: PlaybackStatus | null
   setPlaybackStatus: React.Dispatch<
     React.SetStateAction<PlaybackStatus | null>
@@ -39,8 +35,6 @@ export const ClipProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [selectedStreamSession, setSelectedStreamSession] =
-    useState<StreamSession | null>(null)
   const [playbackStatus, setPlaybackStatus] =
     useState<PlaybackStatus | null>(null)
   const [startTime, setStartTime] = useState<PlaybackTime | null>(
@@ -51,8 +45,6 @@ export const ClipProvider = ({
   return (
     <ClipContext.Provider
       value={{
-        selectedStreamSession,
-        setSelectedStreamSession,
         playbackStatus,
         setPlaybackStatus,
         startTime,

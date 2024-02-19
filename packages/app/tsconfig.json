@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "packages/app/admin/[organization]/components"
-, "cypress.config.js"  ],
+    "cypress.config.js"
+  ],
   "exclude": ["node_modules", "packages"]
 }

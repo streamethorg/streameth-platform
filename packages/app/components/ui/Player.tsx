@@ -161,6 +161,8 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
   )
 }
 
+export default PlayerWithControls
+
 export const PlayerLoading = ({
   title,
   description,

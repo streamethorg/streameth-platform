@@ -25,10 +25,10 @@ const StreamConfig = async ({ stageId }: { stageId: string }) => {
   }
   return (
     <div className="border-none shadow-none h-full text-foreground">
-      <CardHeader>
+      <CardHeader className="">
         <CardTitle>{stage?.name} stage</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-row gap-4">
+      <CardContent className=" lg:pt-0 flex flex-row gap-4">
         <div className="flex flex-col w-1/2 gap-4">
           <PlayerWithControls
             src={[

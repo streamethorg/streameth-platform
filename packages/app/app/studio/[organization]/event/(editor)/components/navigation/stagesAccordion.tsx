@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import {
   Accordion,
   AccordionContent,
@@ -23,7 +24,7 @@ const StageAccordion = ({
 
   const stageSetting = searchParams.get('stageSetting')
   const selectedStage = searchParams.get('stage')
-
+  const [value, setValue] = useState(stageSetting ?? '')
   const handleDeleteStage = async (
     stageId: string,
     organizationId: string,
@@ -54,16 +55,13 @@ const StageAccordion = ({
     }
   }
   return (
-    <Accordion
-      type="single"
-      collapsible
-      defaultValue={selectedStage as string}>
+    <Accordion type="single" value={value} onValueChange={setValue}>
       {stages.map((stage) => {
         return (
           <AccordionItem
             className="px-2"
             key={stage._id}
-            value={stage.name}>
+            value={stage._id}>
             <AccordionTrigger
               onClick={() => {
                 handleTermChange([
@@ -92,11 +90,7 @@ const StageAccordion = ({
                   },
                 ])
               }}>
-              <p
-                className={`${
-                  stageSetting === 'settings' &&
-                  'border-l border-primary'
-                } px-2`}>
+              <p className={`${'border-l border-primary'} px-2`}>
                 Livestream settings
               </p>
             </AccordionContent>
