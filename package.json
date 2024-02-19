@@ -16,7 +16,7 @@
     "start": "yarn workspace @streameth/streameth-app start",
     "next:lint": "yarn workspace @streameth/streameth-app lint",
     "next:check-types": "yarn workspace @streameth/streameth-app check-types",
-    "prettier:fix": "yarn workspace @streameth/streameth-app prettier:write",
+    "prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix",
     "prettier:check": "yarn workspace @streameth/streameth-app prettier:check",
     "precommit": "lint-staged",
     "tools": "yarn workspace @streameth/av-tools tools",
