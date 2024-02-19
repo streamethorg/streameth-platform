@@ -9,6 +9,7 @@ export interface IPlugin {
 }
 
 export class IStage {
+  _id?: Types.ObjectId;
   name: string;
   eventId: Types.ObjectId | string;
   streamSettings: IStreamSettings;
@@ -18,4 +19,4 @@ export class IStage {
   organizationId: Types.ObjectId | string;
 }
 
-export interface IStageModel extends IStage, Document {}
+export interface IStageModel extends Omit<IStage, '_id'>, Document {}

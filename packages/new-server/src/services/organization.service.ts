@@ -32,7 +32,11 @@ export default class OrganizationService {
     organizationId: string,
     organization: IOrganization,
   ): Promise<IOrganization> {
-    return await this.controller.store.update(organizationId, organization);
+    return await this.controller.store.update(
+      organizationId,
+      organization,
+      organization.name,
+    );
   }
 
   async get(organizationId: string): Promise<IOrganization> {
