@@ -38,7 +38,7 @@ export class EventController extends Controller {
   /**
    * @summary Update Event
    */
-  @Security('jwt', ['org'])
+  // @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{eventId}')
   async editEvent(

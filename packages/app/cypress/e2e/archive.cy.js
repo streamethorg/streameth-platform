@@ -9,7 +9,7 @@ describe('archive page', () => {
   it('search for organization name', () => {
     cy.visit('http://localhost:3000/archive?organization=ethberlin')
     cy.get(
-      '[href="/watch?event=ethberlin_2022&session=65b8f8c6a5b2d09b88ec0cc2"] > .font-semibold'
+      '[href="/watch?event=ethberlin_2022&session=65b8f8c5a5b2d09b88ec0cbb"] > .font-semibold'
     )
     cy.get('[href="/archive?event=protocol_berg"] > .inline-flex')
   })
@@ -75,14 +75,14 @@ describe('archive page', () => {
     cy.visit('http://localhost:3000/archive')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '1 of 68'
+      '1 of 67'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)').click()
 
     cy.url().should('include', 'page=2')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '2 of 68'
+      '2 of 67'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)')
   })

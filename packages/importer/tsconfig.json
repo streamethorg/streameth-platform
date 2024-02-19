@@ -1,0 +1,35 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "target": "ES2021",
+      "lib": ["ES2021"],
+      "typeRoots": ["node_modules/@types"],
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node",
+      "module": "commonjs",
+      "pretty": true,
+      "sourceMap": true,
+      "declaration": true,
+      "allowJs": true,
+      "noEmit": false,
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "importHelpers": true,
+      "baseUrl": "./",
+      "outDir": "./dist",
+      "paths": {
+        "@server/*": ["../new-server/src/*"],
+        "@interfaces/*": ["../new-server/src/interfaces/*"],
+        "@models/*": ["../new-server/src/models/*"],
+        "@databases/*": ["../new-server/src/databases/*"],
+        "@exceptions/*": ["../new-server/src/exceptions/*"],
+        "@utils/*": ["../new-server/src/utils/*"]
+      }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+  }
+  
