@@ -3,7 +3,9 @@ import Player from '@/components/ui/Player'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import { notFound } from 'next/navigation'
-const EmbedPage = () => {
+import { Suspense } from 'react'
+
+const Embed = () => {
   const { searchParams } = useSearchParams()
   const playbackId = searchParams.get('playbackId')
   const vod = searchParams.get('vod') === 'true'
@@ -27,5 +29,10 @@ const EmbedPage = () => {
     </div>
   )
 }
+const EmbedPage = () => (
+  <Suspense>
+    <Embed />
+  </Suspense>
+)
 
 export default EmbedPage
