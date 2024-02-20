@@ -12,23 +12,19 @@ export const createSession = async ({
   session: ISession
   authToken: string
 }): Promise<ISession> => {
-
   try {
-    const response = await fetch(
-      `${apiUrl()}/sessions`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(session),
-      }
-    )
+    const response = await fetch(`${apiUrl()}/sessions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(session),
+    })
     if (!response.ok) {
       throw 'Error updating session'
     }
-    revalidatePath("/studio")
+    revalidatePath('/studio')
     return (await response.json()).data
   } catch (e) {
     console.log('error in updateSession', e)
@@ -69,7 +65,8 @@ export const updateSession = async ({
   session: IExtendedSession
   authToken: string
 }): Promise<ISessionModel> => {
-  const modifiedSession = (({ _id, assetId, ...rest }) => rest)(session)
+  const modifiedSession = (({ _id, slug, autoLabels, ...rest }) =>
+    rest)(session)
   console.log('modifiedSession', modifiedSession)
   try {
     const response = await fetch(
@@ -83,7 +80,6 @@ export const updateSession = async ({
         body: JSON.stringify(modifiedSession),
       }
     )
-    console.log('response', await response.json())
     if (!response.ok) {
       throw 'Error updating session'
     }

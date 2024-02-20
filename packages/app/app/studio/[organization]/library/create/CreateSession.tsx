@@ -72,12 +72,12 @@ export default function CreateSession({
 
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
-      <Button onClick={() => setIsOpen(true)}>
-        Create an Organization
+      <Button className="w-full" onClick={() => setIsOpen(true)}>
+        Create an clip
       </Button>
       <DialogContent className="bg-background">
         <DialogHeader>
-          <DialogTitle>Create Organization</DialogTitle>
+          <DialogTitle>Create a new clip</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form

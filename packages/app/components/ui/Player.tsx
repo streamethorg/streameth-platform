@@ -95,55 +95,55 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
             <div className="flex flex-1 items-center gap-3">
               <Player.PlayPauseTrigger className="w-6 h-6 hover:scale-110 transition flex-shrink-0">
                 <Player.PlayingIndicator asChild matcher={false}>
-                  <PlayIcon className=" w-full h-full" />
+                  <PlayIcon className="text-white w-full h-full" />
                 </Player.PlayingIndicator>
                 <Player.PlayingIndicator asChild>
-                  <PauseIcon className="w-full h-full" />
+                  <PauseIcon className="text-white w-full h-full" />
                 </Player.PlayingIndicator>
               </Player.PlayPauseTrigger>
 
               <Player.LiveIndicator className="gap-2 flex items-center">
-                <div className="bg-red-600 h-1.5 w-1.5 rounded-full" />
+                <div className="bg-red-600 text-white h-1.5 w-1.5 rounded-full" />
                 <span className="text-sm select-none">LIVE</span>
               </Player.LiveIndicator>
               <Player.LiveIndicator
                 matcher={false}
                 className="flex gap-2 items-center">
-                <Player.Time className="text-sm tabular-nums select-none" />
+                <Player.Time className="text-white text-sm tabular-nums select-none" />
               </Player.LiveIndicator>
 
               <Player.MuteTrigger className="w-6 h-6 hover:scale-110 transition flex-shrink-0">
                 <Player.VolumeIndicator asChild matcher={false}>
-                  <MuteIcon className="w-full h-full" />
+                  <MuteIcon className="text-white w-full h-full" />
                 </Player.VolumeIndicator>
                 <Player.VolumeIndicator asChild matcher={true}>
-                  <UnmuteIcon className="w-full h-full" />
+                  <UnmuteIcon className="text-white w-full h-full" />
                 </Player.VolumeIndicator>
               </Player.MuteTrigger>
               <Player.Volume className="relative mr-1 flex-1 group flex cursor-pointer items-center select-none touch-none max-w-[120px] h-5">
                 <Player.Track className="bg-white/30 relative grow rounded-full transition h-[2px] md:h-[3px] group-hover:h-[3px] group-hover:md:h-[4px]">
-                  <Player.Range className="absolute bg-white rounded-full h-full" />
+                  <Player.Range className="text-white absolute bg-white rounded-full h-full" />
                 </Player.Track>
-                <Player.Thumb className="block transition group-hover:scale-110 w-3 h-3 bg-white rounded-full" />
+                <Player.Thumb className="text-white block transition group-hover:scale-110 w-3 h-3 bg-white rounded-full" />
               </Player.Volume>
             </div>
             <div className="flex sm:flex-1 md:flex-[1.5] justify-end items-center gap-2.5">
               <Player.FullscreenIndicator matcher={false} asChild>
-                <Settings className="w-6 h-6 transition flex-shrink-0" />
+                <Settings className="text-white w-6 h-6 transition flex-shrink-0" />
               </Player.FullscreenIndicator>
               {/* <Clip className="flex items-center w-6 h-6 justify-center" /> */}
 
               <Player.PictureInPictureTrigger className="w-6 h-6 hover:scale-110 transition flex-shrink-0">
-                <PictureInPictureIcon className="w-full h-full" />
+                <PictureInPictureIcon className="text-white w-full h-full" />
               </Player.PictureInPictureTrigger>
 
               <Player.FullscreenTrigger className="w-6 h-6 hover:scale-110 transition flex-shrink-0">
                 <Player.FullscreenIndicator asChild>
-                  <ExitFullscreenIcon className="w-full h-full" />
+                  <ExitFullscreenIcon className="text-white w-full h-full" />
                 </Player.FullscreenIndicator>
 
                 <Player.FullscreenIndicator matcher={false} asChild>
-                  <EnterFullscreenIcon className="w-full h-full" />
+                  <EnterFullscreenIcon className="text-white w-full h-full" />
                 </Player.FullscreenIndicator>
               </Player.FullscreenTrigger>
             </div>

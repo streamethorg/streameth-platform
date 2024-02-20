@@ -13,7 +13,7 @@ const NoSession = async ({
   stageId: string
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="flex flex-col items-center justify-center h-full w-full">
       <Card className="">
         <CardContent>
           <div className="text-2xl mb-4 text-center w-full">

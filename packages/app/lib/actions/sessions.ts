@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import { IExtendedSession } from '../types'
 import { updateSession, createSession } from '../services/sessionService'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
+import { revalidatePath } from 'next/cache'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -47,7 +48,6 @@ export const createClip = async ({
     sessionId,
     startTime: start,
   })
-  console.log('clip', clip)
   const updatedSession = {
     ...session,
     assetId: clip.object?.asset.id,
@@ -63,6 +63,7 @@ export const createClip = async ({
   delete updatedSession.__v
   // @ts-ignore
   
+  revalidatePath('/studio')
   await updateSessionAction({ session: updatedSession })
 }
 
@@ -72,7 +73,6 @@ export const updateSessionAction = async ({
   session: IExtendedSession
 }) => {
   const authToken = cookies().get('user-session')?.value
-  console.log('authToken', authToken) 
   if (!authToken) {
     throw new Error('No user session found')
   }

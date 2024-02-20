@@ -21,7 +21,7 @@ const useSearchParams = () => {
       } else {
         params.delete(term.key)
       }
-      replace(`${pathname}?${params.toString()}`, { scroll: false })
+      replace(`${pathname}?${params.toString()}`)
     }
   }
   return {
