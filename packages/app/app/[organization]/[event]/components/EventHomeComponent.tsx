@@ -48,7 +48,7 @@ export default function EventHomeComponent({
   const bannerImg = event.banner !== '' ? event.banner : banner
   return (
     <div className="flex flex-col w-full h-full bg-event px-2">
-      <div className=" relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
+      <div className="w-full relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
         <Card className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
           <AspectRatio ratio={3 / 1} className="overflow-clip">
             <Image

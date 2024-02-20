@@ -73,11 +73,11 @@ const SessionInfoBox = ({
           />
           {assetId && <VideoDownload assetId={assetId} />}
         </div>
-        <InfoBoxDescription
-          description={description}
-          speakers={speakers}
-        />
       </CardHeader>
+      <InfoBoxDescription
+        description={description}
+        speakers={speakers}
+      />
     </div>
   )
 }
