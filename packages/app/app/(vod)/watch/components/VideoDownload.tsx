@@ -1,14 +1,15 @@
-'use client'
-import React, { useState } from 'react'
-import { useAsset } from '@livepeer/react'
+import { Livepeer } from 'livepeer'
 import { Badge } from '@/components/ui/badge'
 
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
-const VideoDownload = ({ assetId }: { assetId: string }) => {
-  const { data: asset, isLoading } = useAsset({ assetId })
+const VideoDownload = async ({ assetId }: { assetId: string }) => {
+  const livepeer = new Livepeer({
+    apiKey: process.env.LIVEPEER_API_KEY,
+  })
 
-  if (isLoading) return null
-  if (!asset?.downloadUrl) return null
+  const asset = (await livepeer.asset.get(assetId)).asset
+
+  if (!asset) return null
 
   return (
     <a

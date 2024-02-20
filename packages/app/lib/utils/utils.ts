@@ -176,3 +176,12 @@ export const formatIdentify = (identity = '') => {
     : identity
   return parsedIdentity
 }
+export const buildPlaybackUrl = (
+  playbackId: string,
+  vod?: boolean
+): string => {
+  if (vod) {
+    return `https://lp-playback.com/hls/${playbackId}/index.m3u8`
+  }
+  return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
+}

@@ -1,6 +1,12 @@
 import { IPlayback, ISource } from '@interfaces/session.interface';
 import { ISpeaker } from '@interfaces/speaker.interface';
-import { IsArray, IsObject, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class UpdateSessionDto {
   @IsOptional()
@@ -47,7 +53,7 @@ export class UpdateSessionDto {
   @IsString()
   eventId: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   organizationId: string;
 
@@ -74,4 +80,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsArray()
   autolabels?: string[];
+
+  @IsOptional()
+  @IsString()
+  assetId?: string;
 }

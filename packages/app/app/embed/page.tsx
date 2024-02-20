@@ -1,34 +1,38 @@
 'use client'
-import { useEffect, useState } from 'react'
 import Player from '@/components/ui/Player'
+import { buildPlaybackUrl } from '@/lib/utils/utils'
+import useSearchParams from '@/lib/hooks/useSearchParams'
+import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
-const EmbedPage = () => {
-  const [playbackId, setPlaybackId] = useState<string | undefined>(
-    undefined
-  )
-  const [streamId, setStreamId] = useState<string | undefined>(
-    undefined
-  )
-  const [playerName, setPlayerName] = useState<string>('unknown')
-
-  useEffect(() => {
-    if (window !== undefined) {
-      const params = new URLSearchParams(window.location.search)
-      setPlaybackId(params.get('playbackId') ?? undefined)
-      setStreamId(params.get('streamId') ?? undefined)
-      setPlayerName(params.get('playerName') ?? 'unknown')
-    }
-  }, [])
+const Embed = () => {
+  const { searchParams } = useSearchParams()
+  const playbackId = searchParams.get('playbackId')
+  const vod = searchParams.get('vod') === 'true'
+  if (!playbackId) {
+    return notFound()
+  }
 
   return (
     <div className="absolute top-0 left-0 w-screen h-screen bg-black flex justify-center items-center">
       <Player
-        playbackId={playbackId ? playbackId : undefined}
-        streamId={streamId ? streamId : undefined}
-        playerName={playerName ? playerName : 'unknown'}
+        src={[
+          {
+            src: buildPlaybackUrl(playbackId, vod) as `${string}m3u8`,
+            width: 1920,
+            height: 1080,
+            mime: 'application/vnd.apple.mpegurl',
+            type: 'hls',
+          },
+        ]}
       />
     </div>
   )
 }
+const EmbedPage = () => (
+  <Suspense>
+    <Embed />
+  </Suspense>
+)
 
 export default EmbedPage

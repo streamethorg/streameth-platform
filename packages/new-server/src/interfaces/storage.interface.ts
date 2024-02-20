@@ -1,6 +1,6 @@
 export interface IStorageController<T> {
   create: (query?: string, data?: T, path?: string) => Promise<T>;
-  update?: (id: string, data: T) => Promise<T>;
+  update: (id: string, data: T, query?: string) => Promise<T>;
   findById: (id: string) => Promise<T>;
   findOne?: (query: {}, path?: string) => Promise<T>;
   findAll: (

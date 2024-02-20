@@ -8,8 +8,9 @@ export interface GSheetConfig {
   url?: string;
 }
 export interface PretalxConfig {
-  url: string;
+  url?: string;
   apiToken: string;
+  sheetId?: string;
 }
 
 export type IDataImporter =
@@ -23,6 +24,7 @@ export interface IPlugins {
 }
 
 export interface IEvent {
+  _id?: Types.ObjectId | string;
   name: string;
   description: string;
   start: Date | string;
@@ -45,4 +47,4 @@ export interface IEvent {
   plugins?: IPlugins;
   slug?: string;
 }
-export interface IEventModel extends IEvent, Document {}
+export interface IEventModel extends Omit<IEvent, '_id'>, Document {}

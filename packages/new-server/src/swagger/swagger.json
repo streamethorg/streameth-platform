@@ -133,6 +133,9 @@
 			},
 			"IStage": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -203,6 +206,9 @@
 			},
 			"CreateStageDto": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -907,6 +913,9 @@
 							"type": "string"
 						},
 						"type": "array"
+					},
+					"assetId": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1190,10 +1199,12 @@
 					},
 					"apiToken": {
 						"type": "string"
+					},
+					"sheetId": {
+						"type": "string"
 					}
 				},
 				"required": [
-					"url",
 					"apiToken"
 				],
 				"type": "object",
@@ -1277,6 +1288,16 @@
 			},
 			"IEvent": {
 				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
 					"name": {
 						"type": "string"
 					},
@@ -1403,6 +1424,16 @@
 			},
 			"CreateEventDto": {
 				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
 					"name": {
 						"type": "string"
 					},
@@ -1491,6 +1522,16 @@
 			},
 			"UpdateEventDto": {
 				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
 					"name": {
 						"type": "string"
 					},
@@ -2734,13 +2775,7 @@
 				"tags": [
 					"Event"
 				],
-				"security": [
-					{
-						"jwt": [
-							"org"
-						]
-					}
-				],
+				"security": [],
 				"parameters": [
 					{
 						"in": "path",

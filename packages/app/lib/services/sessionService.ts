@@ -1,6 +1,62 @@
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import { IExtendedSession } from '../types'
 import { apiUrl } from '@/lib/utils/utils'
+import { Livepeer } from 'livepeer'
+import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
+import { revalidatePath } from 'next/cache'
+
+export const createSession = async ({
+  session,
+  authToken,
+}: {
+  session: ISession
+  authToken: string
+}): Promise<ISession> => {
+  try {
+    const response = await fetch(`${apiUrl()}/sessions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(session),
+    })
+    if (!response.ok) {
+      throw 'Error updating session'
+    }
+    revalidatePath('/studio')
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateSession', e)
+    throw e
+  }
+}
+export const fetchSession = async ({
+  session,
+}: {
+  session: string
+}): Promise<IExtendedSession | null> => {
+  try {
+    const LivepeerClient = new Livepeer({
+      apiKey: process.env.LIVEPEER_API_KEY,
+    })
+    const response = await fetch(`${apiUrl()}/sessions/${session}`)
+    if (!response.ok) {
+      return null
+    }
+    const data: IExtendedSession = (await response.json()).data
+    if (data.assetId) {
+      const livepeerData = await LivepeerClient.asset.get(
+        data.assetId
+      )
+      data.videoUrl = livepeerData.asset?.playbackUrl
+    }
+    return data
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event session'
+  }
+}
 
 export const updateSession = async ({
   session,
@@ -9,7 +65,8 @@ export const updateSession = async ({
   session: IExtendedSession
   authToken: string
 }): Promise<ISessionModel> => {
-  const modifiedSession = (({ _id, ...rest }) => rest)(session)
+  const modifiedSession = (({ _id, slug, autoLabels, ...rest }) =>
+    rest)(session)
   try {
     const response = await fetch(
       `${apiUrl()}/sessions/${session._id}`,

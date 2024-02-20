@@ -13,14 +13,19 @@ import {
 } from '@/components/ui/select'
 
 const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
-  const { searchParams, handleTermChange } = useSearchParams({
-    key: 'stage',
-  })
+  const { searchParams, handleTermChange } = useSearchParams()
 
   return (
     <Select
       defaultValue={searchParams.get('stage') || stages[0]?._id}
-      onValueChange={(value: string) => handleTermChange(value)}>
+      onValueChange={(value: string) =>
+        handleTermChange([
+          {
+            key: 'stage',
+            value,
+          },
+        ])
+      }>
       <SelectTrigger className="bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
         <SelectValue placeholder="Stage select" />
       </SelectTrigger>

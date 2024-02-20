@@ -11,6 +11,8 @@ import { generalMetadata, stageMetadata } from '@/lib/utils/metadata'
 import { Metadata } from 'next'
 import { fetchChat } from '@/lib/services/chatService'
 
+import { Livepeer } from 'livepeer'
+import { buildPlaybackUrl } from '@/lib/utils/utils'
 export default async function Stage({ params }: EventPageProps) {
   if (!params.event || !params.stage) {
     return notFound()
@@ -23,13 +25,24 @@ export default async function Stage({ params }: EventPageProps) {
   const stage = await fetchStage({
     stage: params.stage,
   })
-  // Fetch sessions data
+
+  const livepeer = new Livepeer({
+    apiKey: process.env.LIVEPEER_API_KEY,
+  })
 
   if (!event || !stage) {
     return notFound()
   }
 
   const prevChatMessages = await fetchChat({ stageId: stage?._id })
+  const stream = (
+    await livepeer.stream.get(stage.streamSettings?.streamId ?? '')
+  ).stream
+
+  if (!stream || !stream.playbackId) {
+    return notFound()
+  }
+
   const sessionsData = await fetchAllSessions({ stageId: stage._id })
   const currentSession = sessionsData.sessions[0]
 
@@ -37,8 +50,17 @@ export default async function Stage({ params }: EventPageProps) {
     <div className="bg-event flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] p-2 gap-2">
       <div className="flex flex-col w-full md:h-full z-40 md:w-full top-[54px] gap-2">
         <Player
-          streamId={stage.streamSettings?.streamId}
-          playerName={stage.name}
+          src={[
+            {
+              src: buildPlaybackUrl(
+                stream.playbackId
+              ) as `${string}m3u8`,
+              width: 1920,
+              height: 1080,
+              mime: 'application/vnd.apple.mpegurl',
+              type: 'hls',
+            },
+          ]}
         />
         <SessionInfoBox
           inverted
