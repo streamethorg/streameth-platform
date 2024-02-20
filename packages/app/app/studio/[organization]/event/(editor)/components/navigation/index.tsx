@@ -7,10 +7,7 @@ import { Button } from '@/components/ui/button'
 import CreateStageForm from '../stageSettings/createStageForm'
 import Link from 'next/link'
 import { IExtendedEvent } from '@/lib/types'
-import {
-  deleteEventAction,
-  updateEventAction,
-} from '@/lib/actions/events'
+import { updateEventAction } from '@/lib/actions/events'
 import { toast } from 'sonner'
 
 const Navigation = ({
@@ -22,27 +19,6 @@ const Navigation = ({
   stages: IStageModel[]
   organizationId: string
 }) => {
-  const handleDeleteEvent = (eventId: string) => {
-    if (
-      window.confirm('Are you sure you want to delete this event?')
-    ) {
-      const response = deleteEventAction({
-        eventId,
-        organizationId: event.organizationId as string,
-      })
-        .then((response) => {
-          if (response) {
-            toast.success('Event deleted')
-          } else {
-            toast.error('Error deleting event')
-          }
-        })
-        .catch(() => {
-          toast.error('Error deleting event')
-        })
-    }
-  }
-
   const handlePublishEvent = () => {
     updateEventAction({
       event: { ...event, unlisted: !event.unlisted },
@@ -92,14 +68,6 @@ const Navigation = ({
         <Button className="" variant={'outline'}>
           <Link href={`/studio/${organizationId}`}>Cancel</Link>
         </Button>
-        <Button
-          onClick={() => handleDeleteEvent(event._id!)}
-          variant={'destructive'}>
-          Delete
-        </Button>
-        {/* <Button className="" variant={'outline'}>
-          Publish
-        </Button> */}
       </div>
     </div>
   )
