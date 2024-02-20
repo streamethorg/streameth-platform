@@ -85,7 +85,6 @@ export async function fetchEventStages({
     )
 
     const data = (await response.json()).data
-    console.log('data', `${apiUrl()}/stages/event/${eventId}`, data)
     return data.map((stage: IStage) => stage)
   } catch (e) {
     console.log(e)

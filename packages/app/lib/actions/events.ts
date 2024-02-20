@@ -94,7 +94,6 @@ export const signUp = async (
   },
   formData: FormData
 ) => {
-  console.log(formData)
   const email = formData.get('email') as string
   const eventId = formData.get('eventId') as string
 
