@@ -20,11 +20,11 @@ const getPages = (
   if (isSignedIn) {
     return [
       ...pages,
-      {
-        name: 'studio',
-        href: studioOrg ? `/studio/${studioOrg}` : '/studio',
-        bgColor: 'bg-primary text-primary-foreground',
-      },
+      // {
+      //   name: 'studio',
+      //   href: studioOrg ? `/studio/${studioOrg}` : '/studio',
+      //   bgColor: 'bg-primary text-primary-foreground',
+      // },
     ]
   } else return pages
 }

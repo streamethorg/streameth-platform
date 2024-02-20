@@ -8,6 +8,7 @@ import StreamConfig, {
   StreamConfigSkeleton,
 } from './components/stageSettings/StageConfig'
 import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
+import { notFound } from 'next/navigation'
 
 export default async function EventPage({
   params,
@@ -16,15 +17,16 @@ export default async function EventPage({
   const { settings, eventId, stage: stageId } = searchParams
 
   const event = await fetchEvent({ eventId: eventId })
-  const stages = await fetchEventStages({
-    eventId: eventId,
-  })
+  if (!event) return notFound()
 
-  if (!event) return null
+  const stages = await fetchEventStages({
+    eventId: event.slug,
+  })
 
   const style = {
     '--colors-accent': event.accentColor,
   } as React.CSSProperties
+
   return (
     <div className="flex flex-row h-full overflow-hidden w-full">
       <TooltipProvider>
@@ -34,7 +36,7 @@ export default async function EventPage({
           organizationId={params.organization}
         />
       </TooltipProvider>
-      {settings === 'event' && (
+      {settings !== 'stage' && (
         <div
           className="w-full h-full overflow-auto"
           style={{ ...style }}>
@@ -54,7 +56,9 @@ export default async function EventPage({
       {settings === 'stage' && (
         <div className="w-full h-full">
           <div className="h-full overflow-auto">
-            <Suspense fallback={<StreamConfigSkeleton />}>
+            <Suspense
+              key={stageId}
+              fallback={<StreamConfigSkeleton />}>
               <StreamConfig stageId={stageId} />
             </Suspense>
           </div>

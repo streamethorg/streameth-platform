@@ -93,6 +93,7 @@ const models: TsoaRoute.Models = {
     "IStage": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
             "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
             "streamSettings": {"ref":"IStreamSettings","required":true},
@@ -117,6 +118,7 @@ const models: TsoaRoute.Models = {
     "CreateStageDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
             "eventId": {"dataType":"string","required":true},
             "streamSettings": {"ref":"IStreamSettings","required":true},
@@ -340,6 +342,7 @@ const models: TsoaRoute.Models = {
             "videoTranscription": {"dataType":"string"},
             "aiDescription": {"dataType":"string"},
             "autolabels": {"dataType":"array","array":{"dataType":"string"}},
+            "assetId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -439,8 +442,9 @@ const models: TsoaRoute.Models = {
     "PretalxConfig": {
         "dataType": "refObject",
         "properties": {
-            "url": {"dataType":"string","required":true},
+            "url": {"dataType":"string"},
             "apiToken": {"dataType":"string","required":true},
+            "sheetId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -467,6 +471,7 @@ const models: TsoaRoute.Models = {
     "IEvent": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}],"required":true},
@@ -505,6 +510,7 @@ const models: TsoaRoute.Models = {
     "CreateEventDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"datetime","required":true},
@@ -533,6 +539,7 @@ const models: TsoaRoute.Models = {
     "UpdateEventDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"string","required":true},
@@ -1217,7 +1224,6 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/events/:eventId',
-            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.editEvent)),
 
