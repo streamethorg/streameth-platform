@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +10,8 @@ import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface
 import { deleteStageAction } from '@/lib/actions/stages'
 import { IExtendedEvent } from '@/lib/types'
 import { toast } from 'sonner'
-import { useSearchParams } from 'next/navigation'
+import useSearchParams from '@/lib/hooks/useSearchParams'
+import Link from 'next/link'
 
 const StageAccordion = ({
   stages,
@@ -18,11 +20,11 @@ const StageAccordion = ({
   stages: IStageModel[]
   event: IExtendedEvent
 }) => {
-  const searchParams = useSearchParams()
-  const eventId = searchParams.get('eventId')
+  const { handleTermChange, searchParams } = useSearchParams()
+
   const stageSetting = searchParams.get('stageSetting')
   const selectedStage = searchParams.get('stage')
-
+  const [value, setValue] = useState(stageSetting ?? '')
   const handleDeleteStage = async (
     stageId: string,
     organizationId: string,
@@ -43,62 +45,67 @@ const StageAccordion = ({
           toast.error('Error deleting stage')
         })
         .finally(() => {
-          window.history.pushState(null, '', `?eventId=${eventId}`)
+          handleTermChange([
+            {
+              key: 'settings',
+              value: 'event',
+            },
+          ])
         })
     }
   }
   return (
-    <Accordion
-      type="single"
-      collapsible
-      defaultValue={selectedStage as string}>
+    <Accordion type="single" value={value} onValueChange={setValue}>
       {stages.map((stage) => {
         return (
           <AccordionItem
             className="px-2"
             key={stage._id}
-            value={stage.name}>
+            value={stage._id}>
             <AccordionTrigger
               onClick={() => {
-                window.history.pushState(
-                  null,
-                  '',
-                  `?eventId=${eventId}&setting=stages&stage=${stage._id}&stageSetting=settings`
-                )
+                handleTermChange([
+                  {
+                    key: 'stage',
+                    value: stage._id,
+                  },
+                  {
+                    key: 'settings',
+                    value: 'stage',
+                  },
+                ])
               }}>
               {stage.name}
             </AccordionTrigger>
             <AccordionContent
               onClick={() => {
-                window.history.pushState(
-                  null,
-                  '',
-                  `?eventId=${eventId}&setting=stages&stage=${stage._id}&stageSetting=settings`
-                )
+                handleTermChange([
+                  {
+                    key: 'stage',
+                    value: stage._id,
+                  },
+                  {
+                    key: 'stageSetting',
+                    value: 'settings',
+                  },
+                ])
               }}>
-              <p
-                className={`${
-                  stageSetting === 'settings' &&
-                  'border-l border-primary'
-                } px-2`}>
+              <p className={`${'border-l border-primary'} px-2`}>
                 Livestream settings
               </p>
             </AccordionContent>
-            <AccordionContent
-              onClick={() => {
-                window.history.pushState(
-                  null,
-                  '',
-                  `?eventId=${eventId}&setting=stages&stageSetting=clip`
-                )
-              }}>
-              <p
-                className={`${
-                  stageSetting === 'clip' && 'border-l border-primary'
-                } px-2`}>
-                Clips
-              </p>
-            </AccordionContent>
+            <Link
+              href={`event/clips?eventId=${event._id}&stage=${stage._id}`}>
+              <AccordionContent>
+                <p
+                  className={`${
+                    stageSetting === 'clip' &&
+                    'border-l border-primary'
+                  } px-2`}>
+                  Clips
+                </p>
+              </AccordionContent>
+            </Link>
             <AccordionContent
               onClick={() => {
                 handleDeleteStage(

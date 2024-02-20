@@ -164,3 +164,13 @@ export const getFormSubmitStatus = (form: UseFormReturn<any>) => {
     Object.keys(form.formState.dirtyFields).length === 0
   return isSubmitDisabled
 }
+
+export const buildPlaybackUrl = (
+  playbackId: string,
+  vod?: boolean
+): string => {
+  if (vod) {
+    return `https://lp-playback.com/hls/${playbackId}/index.m3u8`
+  }
+  return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
+}

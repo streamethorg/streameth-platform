@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import CreateEventForm from './components/createEventForm'
 import { studioPageParams } from '@/lib/types'
 import { notFound } from 'next/navigation'

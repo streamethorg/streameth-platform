@@ -1,7 +1,7 @@
+'use client'
 import React from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
 import { useClipContext } from './ClipContext'
 import { Badge } from '@/components/ui/badge'
 
@@ -21,7 +21,6 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
 
   const handleSetTime = () => {
     if (playbackStatus) {
-      console.log('playbackStatus', playbackStatus)
       const timeSetting = {
         unix: Date.now() - playbackStatus.offset,
         displayTime: playbackStatus.progress.toFixed(0).toString(),

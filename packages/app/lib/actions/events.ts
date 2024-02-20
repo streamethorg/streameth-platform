@@ -8,15 +8,14 @@ import {
 import { cookies } from 'next/headers'
 import { IExtendedEvent } from '../types'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
-import GoogleSheetService from '@/lib/services/googleSheetService'
 import { revalidatePath } from 'next/cache'
+import GoogleSheetService from '@/lib/services/googleSheetService'
 
 export const createEventAction = async ({
   event,
 }: {
   event: IEvent
 }) => {
-  // create scheduelling sheet, and create folder strucutre in drive
 
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {

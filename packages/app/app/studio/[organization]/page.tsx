@@ -25,7 +25,7 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
             return (
               <Link
                 key={index}
-                href={`/studio/${params.organization}/event?eventId=${event.slug}&setting=event`}>
+                href={`/studio/${params.organization}/event?eventId=${event.slug}&settings=event`}>
                 <Card
                   className="p-2 w-72 h-full "
                   style={{

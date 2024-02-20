@@ -1,4 +1,4 @@
-import Player from '@/components/ui/Player'
+import { PlayerWithControls } from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { WatchPageProps } from '@/lib/types'
 import {
@@ -12,7 +12,7 @@ import { Metadata } from 'next'
 import { apiUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
-import { fetchSession } from '@/lib/data'
+import { fetchSession } from '@/lib/services/sessionService'
 
 export default async function Watch({
   searchParams,
@@ -21,7 +21,7 @@ export default async function Watch({
   const video = await fetchSession({
     session: searchParams.session,
   })
-  if (!video) return notFound()
+  if (!video || !video.videoUrl) return notFound()
 
   const tabs = []
   tabs.push({
@@ -31,11 +31,17 @@ export default async function Watch({
 
   return (
     <div className="h-full flex flex-col w-full gap-4 lg:flex-row relative">
-      <div className="flex flex-col w-full h-full z-40 lg:w-[75%] sticky lg:relative lg:top-0 gap-2 ">
-        <Player
-          assetId={video.assetId}
-          playbackId={video.playbackId}
-          playerName={video.name}
+      <div className="flex flex-col w-full h-full lg:w-[75%] gap-2 ">
+        <PlayerWithControls
+          src={[
+            {
+              src: video.videoUrl as `${string}m3u8`,
+              width: 1920,
+              height: 1080,
+              mime: 'application/vnd.apple.mpegurl',
+              type: 'hls',
+            },
+          ]}
         />
         <SessionInfoBox
           title={video.name}
@@ -44,6 +50,7 @@ export default async function Watch({
           playbackId={video.playbackId}
           speakers={video.speakers}
           assetId={video.assetId}
+          vod={true}
           viewCount
         />
       </div>
