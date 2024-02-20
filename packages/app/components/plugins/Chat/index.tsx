@@ -4,7 +4,7 @@ import {
   ReceivedChatMessage,
 } from '@livekit/components-react'
 import { ConnectionState } from '@livekit/components-react'
-import { cn } from '@/lib/utils/utils'
+import { cn, formatIdentify } from '@/lib/utils/utils'
 import { useChat } from '@livekit/components-react'
 import {
   useCallback,
@@ -217,15 +217,15 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
           <div
             key={message.timestamp}
             className="flex items-center gap-2 p-2">
-            <Card className="flex flex-col p-2">
-              <div className="flex items-center gap-2">
+            <Card className="flex flex-col  p-2">
+              <div className="flex items-center  gap-2">
                 <div
                   className={cn(
                     'text-xs font-semibold',
                     participantName === message.from?.identity &&
                       'text-indigo-500'
                   )}>
-                  {message.from?.identity}
+                  {formatIdentify(message.from?.identity)}
                   {participantName === message.from?.identity &&
                     ' (you)'}
                 </div>
