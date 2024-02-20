@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { ReloadIcon } from '@radix-ui/react-icons'
+import InfoHoverCard from '@/components/misc/InfoHoverCard'
 
 const initialState = {
   message: '',
@@ -29,7 +30,7 @@ function SubmitButton() {
   if (pending) {
     return (
       <Button disabled>
-        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+        <ReloadIcon className="mr-2 w-4 h-4 animate-spin" />
         Please wait
       </Button>
     )
@@ -57,13 +58,24 @@ const SignUpModal = ({
       <CredenzaHeader>
         <CredenzaTitle>{event.name}</CredenzaTitle>
         <CredenzaDescription>
-          Sign up to get a reminder for this event
+          <div className="flex justify-start">
+            <span className="mr-2">
+              Sign up to get a reminder for this event
+            </span>
+            <div className="my-auto">
+              <InfoHoverCard
+                title={''}
+                description="Your email address will be used solely to send you a one-time reminder for this event. We respect your privacy and will not store, share, or use your email for any other purposes."
+                size={16}
+              />
+            </div>
+          </div>
         </CredenzaDescription>
       </CredenzaHeader>
-      <CredenzaBody className="flex flex-col items-center justify-center">
+      <CredenzaBody className="flex flex-col justify-center items-center">
         <form
           action={formAction}
-          className="w-full flex flex-row items-center justify-center">
+          className="flex flex-row justify-center items-center w-full">
           <Input
             className="w-full"
             id="email"
