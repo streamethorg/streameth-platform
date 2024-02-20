@@ -50,6 +50,7 @@ export default async function Watch({
           playbackId={video.playbackId}
           speakers={video.speakers}
           assetId={video.assetId}
+          vod={true}
           viewCount
         />
       </div>

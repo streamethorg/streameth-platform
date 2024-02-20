@@ -1,7 +1,4 @@
-import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
-
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
+import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 
 import {
   CredenzaContent,
@@ -15,8 +12,7 @@ import Link from 'next/link'
 import { IExtendedEvent, IExtendedSession } from '@/lib/types'
 
 interface Params {
-  event: IExtendedEvent
-  speaker: ISpeakerModel
+  speaker: ISpeaker
   sessions?: IExtendedSession[]
 }
 

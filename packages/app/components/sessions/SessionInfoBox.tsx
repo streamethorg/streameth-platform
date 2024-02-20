@@ -24,6 +24,7 @@ const SessionInfoBox = ({
   inverted,
   avatarUrl,
   avatarFallback,
+  vod = false,
 }: {
   title: string
   cardDescription?: string
@@ -37,6 +38,7 @@ const SessionInfoBox = ({
   inverted?: boolean
   avatarUrl?: string
   avatarFallback?: string
+  vod?: boolean
 }) => {
   return (
     <div
@@ -70,6 +72,7 @@ const SessionInfoBox = ({
             streamId={streamId}
             playbackId={playbackId}
             playerName={playerName}
+            vod={vod}
           />
           {assetId && <VideoDownload assetId={assetId} />}
         </div>

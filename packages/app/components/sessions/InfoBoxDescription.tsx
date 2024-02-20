@@ -47,7 +47,7 @@ const InfoBoxDescription = ({
           isExpandable && !isOpened && 'max-h-10'
         }`}>
         {description}
-        <div className="flex flex-row mt-2 space-x-2">
+        <div className="flex flex-row mt-2 space-x-2 overflow-auto">
           {speakers &&
             speakers.map((speaker) => (
               <SpeakerIcon key={speaker._id} speaker={speaker} />

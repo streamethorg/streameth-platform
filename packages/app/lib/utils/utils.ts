@@ -165,7 +165,12 @@ export const getFormSubmitStatus = (form: UseFormReturn<any>) => {
   return isSubmitDisabled
 }
 
-
-export const buildPlaybackUrl = (playbackId: string): string => {
-  return `https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`;
+export const buildPlaybackUrl = (
+  playbackId: string,
+  vod?: boolean
+): string => {
+  if (vod) {
+    return `https://lp-playback.com/hls/${playbackId}/index.m3u8`
+  }
+  return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
 }

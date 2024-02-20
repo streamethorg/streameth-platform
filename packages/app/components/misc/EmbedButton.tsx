@@ -7,12 +7,26 @@ import {
   DialogContent,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import {
+  Credenza,
+  CredenzaBody,
+  CredenzaClose,
+  CredenzaContent,
+  CredenzaDescription,
+  CredenzaFooter,
+  CredenzaHeader,
+  CredenzaTitle,
+  CredenzaTrigger,
+} from '../ui/crezenda'
+import { Input } from '../ui/input'
+import { Card, CardContent, CardTitle } from '../ui/card'
 
 const ModalContent: React.FC<{
   playbackId?: string
   streamId?: string
   playerName: string
-}> = ({ playbackId, streamId, playerName }) => {
+  vod?: boolean
+}> = ({ playbackId, streamId, playerName, vod }) => {
   const [copied, setCopied] = useState(false)
   const copiedClass = copied ? 'opacity-100' : 'opacity-0'
   const [url, setUrl] = useState('')
@@ -28,6 +42,7 @@ const ModalContent: React.FC<{
   const generateParams = () => {
     const params = new URLSearchParams()
     params.append('playbackId', playbackId ?? '')
+    params.append('vod', vod ? 'true' : 'false')
     params.append('streamId', streamId ?? '')
     params.append('playerName', playerName ?? '')
 
@@ -52,24 +67,29 @@ const ModalContent: React.FC<{
   }
 
   return (
-    <DialogContent className="max-w-[450px]">
-      <div className="flex flex-col items-center justify-center w-full h-full ">
-        <span className="text-xl mb-4 ">
+    <CredenzaContent className="max-w-[450px]">
+      <CredenzaHeader>
+        <CredenzaTitle>Embed video</CredenzaTitle>
+        <CredenzaDescription className="text-xl mb-4 ">
           Easily embed this stream into your website by adding the
           iframe code below
-        </span>
-
-        <span
-          className="relative max-w-[350px]   rounded-xl px-2 py-1 overflow-clip whitespace-nowrap cursor-pointer"
-          onClick={copyToClipboard}>
-          {generatedEmbedCode}
-        </span>
+        </CredenzaDescription>
+      </CredenzaHeader>
+      <CredenzaBody>
+        <Input
+          disabled
+          className="relative border-primary rounded-xl px-2 py-1 overflow-clip whitespace-nowrap cursor-pointer"
+          onClick={copyToClipboard}
+          value={generatedEmbedCode}></Input>
         <span
           className={`absolute bottom-3 left-0 right-0 flex items-center justify-center text-accent transition-opacity duration-200 ${copiedClass}`}>
           Copied to clipboard!
         </span>
-      </div>
-    </DialogContent>
+      </CredenzaBody>
+      <CredenzaFooter>
+        <></>
+      </CredenzaFooter>
+    </CredenzaContent>
   )
 }
 
@@ -77,25 +97,28 @@ function EmbedButton({
   playbackId,
   streamId,
   playerName,
+  vod,
 }: {
   playbackId?: string
   streamId?: string
   playerName: string
+  vod?: boolean
 }) {
   return (
-    <Dialog>
-      <DialogTrigger>
+    <Credenza>
+      <CredenzaTrigger>
         <Badge className="bg-secondary text-secondary-foreground">
           <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  lg:h-8 lg:w-8 " />
           Embed
         </Badge>
-      </DialogTrigger>
+      </CredenzaTrigger>
       <ModalContent
+        vod={vod}
         playbackId={playbackId}
         streamId={streamId}
         playerName={playerName}
       />
-    </Dialog>
+    </Credenza>
   )
 }
 

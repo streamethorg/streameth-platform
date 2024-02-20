@@ -48,7 +48,7 @@ const UpcomingEvents = async ({
           Explore current and past events
         </CardDescription>
       </CardHeader>
-      <CardContent className="px-0 lg:px-0 flex flex-row overflow-auto space-x-4 ">
+      <CardContent className="w-full px-0 lg:px-0 flex flex-row overflow-auto space-x-4 ">
         {events.map(
           (
             {
@@ -61,12 +61,15 @@ const UpcomingEvents = async ({
             },
             index
           ) => (
-            <Link key={index} href={`/${organizationId}/${slug}`}>
-              <Card
-                className="p-2 w-[350px] h-full border-none text-foreground"
-                style={{
-                  backgroundColor: accentColor,
-                }}>
+            <Card
+              key={index}
+              className="p-2 w-full lg:w-[350px] h-full border-none text-foreground"
+              style={{
+                backgroundColor: accentColor,
+              }}>
+              <Link
+                href={`/${organizationId}/${slug}`}
+                className="w-full h-full">
                 <div className=" min-h-full rounded-xl  uppercase">
                   <div className=" relative">
                     <Thumbnail imageUrl={eventCover} />
@@ -83,8 +86,8 @@ const UpcomingEvents = async ({
                     </CardDescription>
                   </CardHeader>
                 </div>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           )
         )}
       </CardContent>

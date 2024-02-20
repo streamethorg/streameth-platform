@@ -41,11 +41,7 @@ const SpeakerCard = ({
           </CardDescription>
         </Card>
       </CredenzaTrigger>
-      <SpeakerModal
-        event={event}
-        speaker={speaker}
-        sessions={speakerSessions}
-      />
+      <SpeakerModal speaker={speaker} sessions={speakerSessions} />
     </Credenza>
   )
 }
