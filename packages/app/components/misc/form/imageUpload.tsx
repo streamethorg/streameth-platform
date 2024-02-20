@@ -1,12 +1,11 @@
 'use client'
-import { Input } from '@/components/ui/input'
 
+import { Input } from '@/components/ui/input'
 import { ChangeEvent, useState } from 'react'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Image from 'next/image'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { X } from 'lucide-react'
 import { getImageUrl } from '@/lib/utils/utils'
-import { upload } from '@/lib/actions/fileUpload'
 import { toast } from 'sonner'
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
@@ -71,9 +70,10 @@ export default function ImageUpload({
       {isUploading ? (
         <div className="text-sm">Uploading image...</div>
       ) : preview ? (
-        <div className="relative flex flex-col w-full">
-          <XMarkIcon
-            className="z-[9999999999994] relative ml-auto h-6 w-6"
+        <div className="flex relative flex-col w-full">
+          <X
+            size={24}
+            className="relative ml-auto z-[9999999999994]"
             onClick={() => {
               onChange(null)
               setPreview('')

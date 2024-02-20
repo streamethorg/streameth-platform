@@ -5,7 +5,7 @@ import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Menu, X } from 'lucide-react'
 import Navbar from './Navbar'
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
 import useUserData from '@/lib/hooks/useUserData'
@@ -19,11 +19,19 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="lg:hidden z-50">
+    className="z-50 lg:hidden">
     {!isNavVisible ? (
-      <Bars3Icon className="w-[36px] h-[36px] bg-primary  rounded  mx-auto" />
+      <Menu
+        size={36}
+        strokeWidth={1.5}
+        className="mx-auto rounded bg-primary"
+      />
     ) : (
-      <XMarkIcon className="w-[36px] h-[36px] bg-primary  rounded   mx-auto" />
+      <X
+        size={36}
+        strokeWidth={1.5}
+        className="mx-auto rounded bg-primary"
+      />
     )}
   </button>
 )
@@ -58,8 +66,8 @@ const StudioPageNavbar = ({
   ]
 
   return (
-    <NavigationMenu className="z-1 sticky top-0 p-2 lg:p-4 border-b flex flex-row items-center">
-      <div className=" lg:flex-initial">
+    <NavigationMenu className="flex sticky top-0 flex-row items-center p-2 border-b lg:p-4 z-1">
+      <div className="lg:flex-initial">
         <Link href="/">
           <Image
             className="hidden lg:block"
@@ -69,7 +77,7 @@ const StudioPageNavbar = ({
             height={40}
           />
           <Image
-            className="block lg:hidden aspect-square h-full"
+            className="block h-full lg:hidden aspect-square"
             src="/logo.png"
             alt="Streameth logo"
             height={36}
@@ -77,11 +85,11 @@ const StudioPageNavbar = ({
           />
         </Link>
       </div>
-      <div className="flex-grow mx-2 flex justify-center">
+      <div className="flex flex-grow justify-center mx-2">
         {children}
       </div>
       <SwitchOrganization organizations={userData?.organizations} />
-      <div className="ml-auto pl-2 flex flex-row items-center justify-end h-full">
+      <div className="flex flex-row justify-end items-center pl-2 ml-auto h-full">
         {menuVisible && (
           <Navbar
             isMobile={isMobile}

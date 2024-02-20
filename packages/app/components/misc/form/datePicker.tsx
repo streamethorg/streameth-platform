@@ -1,4 +1,4 @@
-import { CalendarIcon } from '@heroicons/react/24/outline'
+import { CalendarSearch } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
 import {
   Popover,
@@ -26,10 +26,10 @@ export default function DatePicker({
             !value && 'text-muted-foreground'
           )}>
           {value ? format(value, 'PPP') : <span>Pick a date</span>}
-          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+          <CalendarSearch size={17} className="ml-auto opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent className="p-0 w-auto" align="start">
         <Calendar
           mode="single"
           selected={new Date(value)}
