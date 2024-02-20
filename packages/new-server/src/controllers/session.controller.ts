@@ -1,14 +1,14 @@
-import S3Service from '@app/lib/services/spacesService';
 import { downloadM3U8ToMP4 } from '@avtools/ffmpeg';
 import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
+import { IGoogleToken } from '@interfaces/googletoken.interface';
 import { ISession } from '@interfaces/session.interface';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import createOAuthClient from '@utils/oauth';
-import { createReadStream, existsSync, createWriteStream } from 'fs';
+import { existsSync } from 'fs';
+import { Credentials } from 'google-auth-library';
 import { google } from 'googleapis';
-import https from 'https';
 import {
   Body,
   Controller,
@@ -80,9 +80,8 @@ export class SessionController extends Controller {
     @Path() sessionId: string,
     @Query() googleToken: string,
   ): Promise<IStandardResponse<ISession>> {
-    // TODO: Make type for tokens
     const session = await this.sessionService.get(sessionId);
-    const tokens = JSON.parse(decodeURIComponent(googleToken));
+    const tokens: Credentials = JSON.parse(decodeURIComponent(googleToken));
 
     const oAuthClient = await createOAuthClient();
     oAuthClient.setCredentials(tokens);
@@ -94,7 +93,7 @@ export class SessionController extends Controller {
 
     if (!session.videoUrl) {
       console.log('video Url does not exist');
-      return SendApiResponse('Video url does not exist');
+      return SendApiResponse('Video url does not exist', null, '500');
     }
 
     const videoFilePath = `./tmp/${session.slug}.mp4`;
@@ -102,76 +101,7 @@ export class SessionController extends Controller {
       await downloadM3U8ToMP4(session.videoUrl, session.slug, './tmp');
     }
 
-    youtube.videos.insert(
-      {
-        part: ['status', 'snippet'],
-        requestBody: {
-          snippet: {
-            title: session.name,
-            description: session.description,
-            defaultLanguage: 'en',
-            defaultAudioLanguage: 'en',
-          },
-          status: {
-            privacyStatus: 'private', //TODO: Change this once done
-          },
-        },
-        media: {
-          body: createReadStream(videoFilePath),
-        },
-      },
-      async function(err, response) {
-        if (err) {
-          console.log('The API returned an error: ' + err);
-          return;
-        }
-        console.log(response.data);
-
-        if (!session.coverImage) {
-          return;
-        }
-
-        const filePath = `./tmp/${session.slug}.jpg`;
-        https
-          .get(session.coverImage, (response) => {
-            if (response.statusCode === 200) {
-              const fileStream = createWriteStream(filePath);
-              response.pipe(fileStream);
-
-              fileStream.on('finish', () => {
-                fileStream.close();
-                console.log('Download completed and file saved to', filePath);
-              });
-            } else {
-              console.log(
-                'Request failed with status code:',
-                response.statusCode,
-              );
-            }
-          })
-          .on('error', (error) => {
-            console.error('Error downloading the file:', error.message);
-            return;
-          });
-
-        console.log('Video uploaded. Uploading the thumbnail now.');
-        youtube.thumbnails.set(
-          {
-            videoId: response.data.id,
-            media: {
-              body: createReadStream(filePath),
-            },
-          },
-          function(err, response) {
-            if (err) {
-              console.log('The API returned an error: ' + err);
-              return;
-            }
-            console.log(response.data);
-          },
-        );
-      },
-    );
+    await this.sessionService.uploadToYouTube(session, youtube, videoFilePath);
 
     return SendApiResponse('session fetched', session);
   }

@@ -5,37 +5,39 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import UploadVideoForm from './components/UploadVideoForm'
-import { useCreateAsset } from '@livepeer/react'
 import { useDropzone } from 'react-dropzone'
 
 // TODO: Disable drag and drop for phone
 
 const CreateAndViewAsset = ({ video }: { video: File }) => {
-  const {
-    mutate: createAsset,
-    data: asset,
-    status,
-    progress,
-    error,
-  } = useCreateAsset({
-    sources: [{ name: video.name, file: video }] as const,
-  })
+  // const {
+  //   mutate: createAsset,
+  //   data: asset,
+  //   status,
+  //   progress,
+  //   error,
+  // } = useCreateAsset({
+  //   sources: [{ name: video.name, file: video }] as const,
+  // })
 
   console.log('Uploading video: ', video.name)
 
-  const progressFormatted = useMemo(
-    () =>
-      progress?.[0].phase === 'failed'
-        ? 0
-        : progress?.[0].phase === 'waiting'
-        ? 0
-        : progress?.[0].phase === 'uploading'
-        ? Math.round(progress?.[0]?.progress * 100)
-        : progress?.[0].phase === 'processing'
-        ? Math.round(progress?.[0]?.progress * 100)
-        : null,
-    [progress]
-  )
+  // const progressFormatted = useMemo(
+  //   () =>
+  //     progress?.[0].phase === 'failed'
+  //       ? 0
+  //       : progress?.[0].phase === 'waiting'
+  //       ? 0
+  //       : progress?.[0].phase === 'uploading'
+  //       ? Math.round(progress?.[0]?.progress * 100)
+  //       : progress?.[0].phase === 'processing'
+  //       ? Math.round(progress?.[0]?.progress * 100)
+  //       : null,
+  //   [progress]
+  // )
+  //
+
+  const progressFormatted = 40
 
   return (
     <Progress value={progressFormatted} className="w-[60 %] my-5" />

@@ -93,6 +93,7 @@ const models: TsoaRoute.Models = {
     "IStage": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
             "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
             "streamSettings": {"ref":"IStreamSettings","required":true},
@@ -117,6 +118,7 @@ const models: TsoaRoute.Models = {
     "CreateStageDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
             "eventId": {"dataType":"string","required":true},
             "streamSettings": {"ref":"IStreamSettings","required":true},
@@ -340,6 +342,7 @@ const models: TsoaRoute.Models = {
             "videoTranscription": {"dataType":"string"},
             "aiDescription": {"dataType":"string"},
             "autolabels": {"dataType":"array","array":{"dataType":"string"}},
+            "assetId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -439,8 +442,9 @@ const models: TsoaRoute.Models = {
     "PretalxConfig": {
         "dataType": "refObject",
         "properties": {
-            "url": {"dataType":"string","required":true},
+            "url": {"dataType":"string"},
             "apiToken": {"dataType":"string","required":true},
+            "sheetId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -467,6 +471,7 @@ const models: TsoaRoute.Models = {
     "IEvent": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}],"required":true},
@@ -505,6 +510,7 @@ const models: TsoaRoute.Models = {
     "CreateEventDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"datetime","required":true},
@@ -533,6 +539,7 @@ const models: TsoaRoute.Models = {
     "UpdateEventDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"string","required":true},
@@ -946,6 +953,32 @@ export function RegisterRoutes(app: Router) {
 
               const promise = controller.getSessionById.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/sessions/upload/:sessionId',
+            ...(fetchMiddlewares<RequestHandler>(SessionController)),
+            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.uploadSessionToYouTube)),
+
+            function SessionController_uploadSessionToYouTube(request: any, response: any, next: any) {
+            const args = {
+                    sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
+                    googleToken: {"in":"query","name":"googleToken","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new SessionController();
+
+
+              const promise = controller.uploadSessionToYouTube.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 201, next);
             } catch (err) {
                 return next(err);
             }

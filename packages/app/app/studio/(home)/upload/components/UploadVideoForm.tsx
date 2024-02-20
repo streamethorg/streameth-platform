@@ -22,7 +22,7 @@ import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
 import { Card, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
-import InfoHoverCard from './InfoHoverCard'
+import InfoHoverCard from '@/components/misc/InfoHoverCard'
 import { apiUrl } from '@/lib/utils/utils'
 import { getCookie } from '@/lib/actions/cookieConsent'
 
