@@ -164,3 +164,8 @@ export const getFormSubmitStatus = (form: UseFormReturn<any>) => {
     Object.keys(form.formState.dirtyFields).length === 0
   return isSubmitDisabled
 }
+
+
+export const buildPlaybackUrl = (playbackId: string): string => {
+  return `https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`;
+}

@@ -4,21 +4,26 @@ import {
   useRouter,
 } from 'next/navigation'
 
-const useSearchParams = ({ key }: { key: string }) => {
+interface ITerm {
+  key: string
+  value: string
+}
+const useSearchParams = () => {
   const pathname = usePathname()
   const { replace } = useRouter()
   const searchParams = useNextSearchParams()
 
-  function handleTermChange(term: string) {
+  function handleTermChange(terms: ITerm[]) {
     const params = new URLSearchParams(searchParams)
-    if (term) {
-      params.set(key, term)
-    } else {
-      params.delete(key)
+    for (const term of terms) {
+      if (term.value) {
+        params.set(term.key, term.value)
+      } else {
+        params.delete(term.key)
+      }
+      replace(`${pathname}?${params.toString()}`)
     }
-    replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
-
   return {
     searchParams,
     handleTermChange,
