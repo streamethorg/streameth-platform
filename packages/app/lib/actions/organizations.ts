@@ -18,7 +18,6 @@ export const createOrganizationAction = async ({
     organization: organization,
     authToken,
   })
-  console.log(response)
 
   if (!response) {
     throw new Error('Error creating organization')

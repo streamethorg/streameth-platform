@@ -2,11 +2,7 @@
 import { useEffect, useState, useContext } from 'react'
 import { CodeBracketIcon } from '@heroicons/react/24/outline'
 import { Badge } from '@/components/ui/badge'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+
 import {
   Credenza,
   CredenzaBody,
