@@ -1,4 +1,9 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import CreateEventForm from './components/createEventForm'
 import { studioPageParams } from '@/lib/types'
 import { notFound } from 'next/navigation'
@@ -18,12 +23,8 @@ const CreateEventPage = async ({ params }: studioPageParams) => {
   }
 
   return (
-    <div className="w-full h-full overflow-auto bg-secondary flex justify-center items-center">
-      <Card className="p-4">
-        <CardContent>
-          <CreateEventForm organization={organization} />
-        </CardContent>
-      </Card>
+    <div className="w-full h-full  flex justify-center items-center p-4">
+      <CreateEventForm organization={organization} />
     </div>
   )
 }

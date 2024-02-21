@@ -7,9 +7,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 const Pagination = (props: IPagination) => {
-  const { handleTermChange, searchParams } = useSearchParams({
-    key: 'page',
-  })
+  const { handleTermChange, searchParams } = useSearchParams()
   const currentPage = Number(searchParams.get('page')) || 1
 
   return (
@@ -19,7 +17,12 @@ const Pagination = (props: IPagination) => {
           className="p-2 rounded-full  hover:bg-gray-100"
           onClick={() => {
             if (currentPage > 1) {
-              handleTermChange((currentPage - 1).toString())
+              handleTermChange([
+                {
+                  key: 'page',
+                  value: (currentPage - 1).toString(),
+                },
+              ])
             }
           }}>
           <ArrowLeftIcon className="h-6 w-6" />
@@ -31,7 +34,9 @@ const Pagination = (props: IPagination) => {
           className="p-2 rounded-full  hover:bg-gray-100"
           onClick={() => {
             if (currentPage < props.totalPages) {
-              handleTermChange((currentPage + 1).toString())
+              handleTermChange([
+                { key: 'page', value: (currentPage + 1).toString() },
+              ])
             }
           }}>
           <ArrowRightIcon className="h-6 w-6" />

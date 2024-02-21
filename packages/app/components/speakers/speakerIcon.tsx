@@ -7,7 +7,8 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
-
+import SpeakerModal from '@/app/[organization]/[event]/speakers/components/SpeakerModal'
+import { Credenza, CredenzaTrigger } from '../ui/crezenda'
 function CreateBlockie(username: string) {
   return makeBlockie(username)
 }
@@ -36,14 +37,19 @@ export default function SpeakerIcon({
     )
   }
   return (
-    <Badge className="bg-background text-primary border border-secondary">
-      <Avatar className="my-1">
-        <AvatarImage src={speaker.photo} />
-        <AvatarFallback className="">
-          {speaker.name.slice(0, 1).toUpperCase()}
-        </AvatarFallback>
-      </Avatar>
-      <span className="ml-2 text-base">{speaker.name}</span>
-    </Badge>
+    <Credenza>
+      <SpeakerModal speaker={speaker} />
+      <CredenzaTrigger>
+        <Badge className="bg-background z-50 text-primary border border-secondary">
+          <Avatar className="my-1">
+            <AvatarImage src={speaker?.photo} />
+            <AvatarFallback className="">
+              {speaker?.name.slice(0, 1).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          <span className="ml-2 text-sm">{speaker?.name}</span>
+        </Badge>
+      </CredenzaTrigger>
+    </Credenza>
   )
 }

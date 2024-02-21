@@ -1,7 +1,10 @@
 'use client'
-import { LiveKitRoom } from '@livekit/components-react'
+import {
+  LiveKitRoom,
+  ReceivedChatMessage,
+} from '@livekit/components-react'
 import { ConnectionState } from '@livekit/components-react'
-import { cn } from '@/lib/utils/utils'
+import { cn, formatIdentify } from '@/lib/utils/utils'
 import { useChat } from '@livekit/components-react'
 import {
   useCallback,
@@ -21,11 +24,22 @@ import Image from 'next/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useAccount, useEnsName } from 'wagmi'
 import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
+import { IExtendedChat } from '@/lib/types'
+import { createChatAction } from '@/lib/actions/chat'
+import { useSIWE } from 'connectkit'
 interface Props {
   participantName: string
+  stageId: string
+  prevChatMessages: IExtendedChat[]
 }
 
-const ChatBar = ({ conversationId }: { conversationId: string }) => {
+const ChatBar = ({
+  stageId,
+  prevChatMessages,
+}: {
+  stageId: string
+  prevChatMessages: IExtendedChat[]
+}) => {
   const serverUrl = 'wss://streameth-fjjg03ki.livekit.cloud'
   const [viewerToken, setViewerToken] = useState('')
   const [viewerName, setViewerName] = useState('')
@@ -37,7 +51,7 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
   })
 
   const fakeName = data ? data : account.address
-  const slug = conversationId
+  const slug = stageId
 
   useEffect(() => {
     if (!account || loadingEns) {
@@ -111,7 +125,13 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
       <div className="flex h-full flex-1 min-h-[400px]">
         <Card className="sticky border-l md:block h-full w-full">
           <div className="absolute top-0 bottom-0 right-0 flex h-full w-full flex-col gap-2 p-2">
-            {<Chat participantName={viewerName} />}
+            {
+              <Chat
+                prevChatMessages={prevChatMessages}
+                stageId={stageId}
+                participantName={viewerName}
+              />
+            }
           </div>
         </Card>
       </div>
@@ -121,16 +141,42 @@ const ChatBar = ({ conversationId }: { conversationId: string }) => {
 
 export default ChatBar
 
-function Chat({ participantName }: Props) {
+function Chat({ participantName, stageId, prevChatMessages }: Props) {
   const { chatMessages: messages, send } = useChat()
-
+  const [chatMessages, setChatMessages] = useState<
+    Array<IExtendedChat | ReceivedChatMessage>
+  >([])
   const reverseMessages = useMemo(
-    () => messages.sort((a, b) => b.timestamp - a.timestamp),
-    [messages]
+    () => chatMessages.sort((a, b) => b.timestamp - a.timestamp),
+    [chatMessages]
   )
+
+  useEffect(() => {
+    // Merge prevChatMessages and reverseMessages
+    const mergedMessages = [...prevChatMessages, ...messages] as (
+      | IExtendedChat
+      | ReceivedChatMessage
+    )[]
+    setChatMessages(mergedMessages)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages])
+  const { isSignedIn } = useSIWE()
   const account = useAccount()
 
   const [message, setMessage] = useState('')
+
+  const sendMessage = useCallback(async () => {
+    await createChatAction({
+      chat: {
+        stageId,
+        message,
+        from: {
+          identity: participantName,
+        },
+        timestamp: new Date().getTime(),
+      },
+    })
+  }, [stageId, message, participantName])
 
   const onEnter = useCallback(
     (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -139,18 +185,20 @@ function Chat({ participantName }: Props) {
         if (message.trim().length > 0 && send) {
           send(message).catch((err) => console.error(err))
           setMessage('')
+          sendMessage()
         }
       }
     },
-    [message, send]
+    [message, sendMessage, send]
   )
 
   const onSend = useCallback(() => {
     if (message.trim().length > 0 && send) {
       send(message).catch((err) => console.error(err))
       setMessage('')
+      sendMessage()
     }
-  }, [message, send])
+  }, [message, sendMessage, send])
 
   return (
     <>
@@ -169,15 +217,15 @@ function Chat({ participantName }: Props) {
           <div
             key={message.timestamp}
             className="flex items-center gap-2 p-2">
-            <Card className="flex flex-col p-2">
-              <div className="flex items-center gap-2">
+            <Card className="flex flex-col  p-2">
+              <div className="flex items-center  gap-2">
                 <div
                   className={cn(
                     'text-xs font-semibold',
                     participantName === message.from?.identity &&
                       'text-indigo-500'
                   )}>
-                  {message.from?.identity}
+                  {formatIdentify(message.from?.identity)}
                   {participantName === message.from?.identity &&
                     ' (you)'}
                 </div>
@@ -192,7 +240,7 @@ function Chat({ participantName }: Props) {
           </div>
         ))}
       </div>
-      {account.isConnected ? (
+      {account.isConnected && isSignedIn ? (
         <div className="flex flex-col  gap-2">
           <Textarea
             value={message}

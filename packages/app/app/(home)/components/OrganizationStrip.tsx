@@ -30,7 +30,6 @@ export default async function OrganizationStrip({
           height={34}
           width={34}
         />
-
         <Link href={archivePath({ organization: organization.slug })}>
           <CardTitle className=" text-2xl ml-2 mr-auto hover:underline">
             {organization.name} {' >'}

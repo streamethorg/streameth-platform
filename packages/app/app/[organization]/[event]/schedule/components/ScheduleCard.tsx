@@ -55,7 +55,7 @@ const ScheduleCard = ({
             {speakers && (
               <div className="flex py-1 items-center flex-row space-x-2 overflow-auto mt-auto">
                 {session.speakers.map((speaker) => (
-                  <SpeakerIcon key={speaker._id} speaker={speaker} />
+                  <SpeakerIcon key={speaker?._id} speaker={speaker} />
                 ))}
               </div>
             )}

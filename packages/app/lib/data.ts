@@ -65,7 +65,7 @@ export async function fetchAllSessions({
     speakerIds,
   }
   const response = await fetch(
-    constructApiUrl(`${apiUrl()}/sessions`, params), 
+    constructApiUrl(`${apiUrl()}/sessions`, params),
     {
       cache: 'no-store',
     }
@@ -111,23 +111,6 @@ export async function fetchAllSessions({
           totalItems,
           limit,
         },
-  }
-}
-
-export const fetchSession = async ({
-  session,
-}: {
-  session: string
-}): Promise<IExtendedSession | null> => {
-  try {
-    const response = await fetch(`${apiUrl()}/sessions/${session}`)
-    if (!response.ok) {
-      return null
-    }
-    return (await response.json()).data
-  } catch (e) {
-    console.log(e)
-    throw 'Error fetching event session'
   }
 }
 

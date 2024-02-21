@@ -9,23 +9,23 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-
-import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
-
 import { fetchEvents } from '@/lib/services/eventService'
 import { archivePath } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import { getDateAsString } from '@/lib/utils/time'
+import { IExtendedOrganization } from '@/lib/types'
 
 const UpcomingEvents = async ({
+  organizations,
   date,
   organization,
   archive,
 }: {
   date?: Date
-  organization?: IOrganizationModel['_id']
   archive?: boolean
+  organizations?: IExtendedOrganization[]
+  organization?: IExtendedOrganization['_id']
 }) => {
   const events = (
     await fetchEvents({
@@ -38,6 +38,13 @@ const UpcomingEvents = async ({
     return true
   })
 
+  const organizationSlug = (organizationId: string) => {
+    const orgSlug = organizations?.find(
+      (org) => org._id === organizationId
+    )?.slug
+    return orgSlug ? orgSlug : organization
+  }
+
   if (events.length === 0) return null
 
   return (
@@ -48,7 +55,7 @@ const UpcomingEvents = async ({
           Explore current and past events
         </CardDescription>
       </CardHeader>
-      <CardContent className="px-0 lg:px-0 flex flex-row overflow-auto space-x-4 ">
+      <CardContent className="w-full px-0 lg:px-0 flex flex-row overflow-auto space-x-4 ">
         {events.map(
           (
             {
@@ -61,12 +68,17 @@ const UpcomingEvents = async ({
             },
             index
           ) => (
-            <Link key={index} href={`/${organizationId}/${slug}`}>
-              <Card
-                className="p-2 w-[350px] h-full border-none text-foreground"
-                style={{
-                  backgroundColor: accentColor,
-                }}>
+            <Card
+              key={index}
+              className="p-2 w-full lg:w-[350px] h-full border-none text-foreground"
+              style={{
+                backgroundColor: accentColor,
+              }}>
+              <Link
+                href={`/${organizationSlug(
+                  organizationId as string
+                )}/${slug}`}
+                className="w-full h-full">
                 <div className=" min-h-full rounded-xl  uppercase">
                   <div className=" relative">
                     <Thumbnail imageUrl={eventCover} />
@@ -83,8 +95,8 @@ const UpcomingEvents = async ({
                     </CardDescription>
                   </CardHeader>
                 </div>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           )
         )}
       </CardContent>

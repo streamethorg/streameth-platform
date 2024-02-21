@@ -24,7 +24,7 @@ const SpeakerCard = ({
 }) => {
   const speakerSessions = sessions?.filter((session) =>
     session.speakers.some(
-      (sessionSpeaker) => sessionSpeaker._id === speaker._id
+      (sessionSpeaker) => sessionSpeaker?._id === speaker?._id
     )
   )
 
@@ -41,11 +41,7 @@ const SpeakerCard = ({
           </CardDescription>
         </Card>
       </CredenzaTrigger>
-      <SpeakerModal
-        event={event}
-        speaker={speaker}
-        sessions={speakerSessions}
-      />
+      <SpeakerModal speaker={speaker} sessions={speakerSessions} />
     </Credenza>
   )
 }

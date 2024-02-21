@@ -13,10 +13,7 @@ interface IEventSearchResult {
   slug: string
 }
 export default function SearchBar(): JSX.Element {
-  const { searchParams, handleTermChange: handleTermChangeOverload } =
-    useSearchParams({
-      key: 'searchQuery',
-    })
+  const { searchParams } = useSearchParams()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>(
     searchParams.get('searchQuery') || ''
