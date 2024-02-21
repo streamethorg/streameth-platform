@@ -49,6 +49,20 @@ export class EventController extends Controller {
     return SendApiResponse('event udpated', event);
   }
 
+  /**
+   * @summary Event importer
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Put('/import/{eventId}')
+  async evenImporter(
+    @Path() eventId: string,
+    @Body() organizationId: OrgIdDto,
+  ): Promise<IStandardResponse<void>> {
+    await this.eventService.eventImport(eventId);
+    return SendApiResponse('syncing..');
+  }
+
   @SuccessResponse('200')
   @Get('{eventId}')
   async getEventById(
