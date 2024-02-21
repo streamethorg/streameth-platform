@@ -135,7 +135,7 @@ const SessionContent = async ({
           <ReactHlsPlayer
             playbackId={parentStream?.playbackId ?? ''}
             selectedStreamSession={
-              selectedRecording ?? recordings?.[0].id
+              selectedRecording ?? recordings?.[0]?.id
             }
           />
           <RecordingSelect

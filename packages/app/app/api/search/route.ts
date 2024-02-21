@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
       organizationSlug: searchParams.get('organization') || undefined,
       searchQuery: searchParams.get('searchQuery') || undefined,
       onlyVideos: true,
+      limit: 5,
     })
   ).sessions
 
