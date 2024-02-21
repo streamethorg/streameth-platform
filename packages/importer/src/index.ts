@@ -37,7 +37,7 @@ class ImporterService {
           let eventData = await controller.eventService.get(
             state.eventId.toString(),
           );
-          let sheetId = eventData.dataImporter[0].config.sheetId
+          let sheetId = eventData.dataImporter[0].config.sheetId;
           let eventId = eventData._id.toString();
           await controller.generateSpeakers(sheetId, eventId);
           await controller.generateStages(sheetId, eventId);
@@ -73,7 +73,7 @@ class ImporterService {
           let eventData = await controller.eventService.get(
             state.eventId.toString(),
           );
-          let sheetId = eventData.dataImporter[0].config.sheetId
+          let sheetId = eventData.dataImporter[0].config.sheetId;
           let eventId = eventData._id.toString();
           await controller.syncSpeakers(sheetId, eventId);
           await controller.syncStages(sheetId, eventId);

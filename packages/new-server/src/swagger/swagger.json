@@ -133,6 +133,9 @@
 			},
 			"IStage": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -203,6 +206,9 @@
 			},
 			"CreateStageDto": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -907,6 +913,9 @@
 							"type": "string"
 						},
 						"type": "array"
+					},
+					"assetId": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1190,10 +1199,12 @@
 					},
 					"apiToken": {
 						"type": "string"
+					},
+					"sheetId": {
+						"type": "string"
 					}
 				},
 				"required": [
-					"url",
 					"apiToken"
 				],
 				"type": "object",
@@ -1277,6 +1288,16 @@
 			},
 			"IEvent": {
 				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
 					"name": {
 						"type": "string"
 					},
@@ -1403,6 +1424,16 @@
 			},
 			"CreateEventDto": {
 				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
 					"name": {
 						"type": "string"
 					},
@@ -1491,6 +1522,16 @@
 			},
 			"UpdateEventDto": {
 				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
 					"name": {
 						"type": "string"
 					},
@@ -1586,6 +1627,116 @@
 					"data": {
 						"items": {
 							"$ref": "#/components/schemas/IEvent"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IFrom": {
+				"properties": {
+					"identity": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"identity"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IChat": {
+				"properties": {
+					"stageId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"message": {
+						"type": "string"
+					},
+					"from": {
+						"$ref": "#/components/schemas/IFrom"
+					},
+					"timestamp": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"stageId",
+					"message",
+					"from",
+					"timestamp"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IChat_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IChat"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateChatDto": {
+				"properties": {
+					"stageId": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"from": {
+						"$ref": "#/components/schemas/IFrom"
+					},
+					"timestamp": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"stageId",
+					"message",
+					"from",
+					"timestamp"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IChat-Array_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IChat"
 						},
 						"type": "array"
 					}
@@ -2750,6 +2901,75 @@
 					{
 						"in": "path",
 						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/chats": {
+			"post": {
+				"operationId": "CreateCHar",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IChat_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Creates Chat",
+				"tags": [
+					"Chat"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateChatDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/{stageId}": {
+			"get": {
+				"operationId": "GetChatStageById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IChat-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all chats by stage",
+				"tags": [
+					"Chat"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "stageId",
 						"required": true,
 						"schema": {
 							"type": "string"

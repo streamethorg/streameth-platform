@@ -4,8 +4,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { formSchema } from '@/lib/schema'
 import * as z from 'zod'
-
-import { Textarea } from '@/components/ui/textarea'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -83,249 +87,259 @@ export default function CreateEventForm({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 mt-10">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="">Title</FormLabel>
-              <FormControl>
-                <Input placeholder="a title" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="">Description</FormLabel>
-              <FormControl>
-                {/* <Textarea
+      <Card className="max-w-4xl w-full relative border border-secondary h-full">
+        <CardHeader className="h-[88px]">
+          <CardTitle className="flex flex-row justify-between items-center">
+            <p>Create an event for {organization.name}</p>
+            <Button
+              disabled={getFormSubmitStatus(form)}
+              className="ml-2"
+              type="submit">
+              {isCreatingEvent ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                  Please wait
+                </>
+              ) : (
+                'Create Event'
+              )}
+            </Button>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="h-[calc(100%-88px)] overflow-auto">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="">Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="a title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="">Description</FormLabel>
+                  <FormControl>
+                    {/* <Textarea
                   placeholder="enter your event description"
                   {...field}
                 /> */}
-                <div className="container">
-                  <MDEditor
-                    value={field.value}
-                    onChange={(a) => field.onChange(a)}
-                  />
-                  {/* <MDEditor.Markdown
+                    <div className="container">
+                      <MDEditor
+                        value={field.value}
+                        onChange={(a) => field.onChange(a)}
+                      />
+                      {/* <MDEditor.Markdown
                     source={field.value}
                     style={{ whiteSpace: 'pre-wrap' }}
                   /> */}
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="location"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="">Location</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="enter the event location"
-                  {...field}
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex flex-row space-x-4 w-full">
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem className="w-1/2">
+                    <FormLabel className="">Location</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="enter the event location"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="timezone"
+                render={({ field }) => (
+                  <FormItem className="w-1/2">
+                    <FormLabel className="">
+                      Select the event timezone
+                    </FormLabel>
+                    <FormControl>
+                      <Combobox
+                        items={generateTimezones()}
+                        value={field.value}
+                        setValue={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex flex-row space-x-4">
+              <div className="flex flex-row w-1/2 space-x-1">
+                <FormField
+                  control={form.control}
+                  name="start"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel className="">Start Date</FormLabel>
+                      <FormControl>
+                        <DatePicker
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-row space-x-4">
-          <div className="flex flex-row w-1/2 space-x-1">
-            <FormField
-              control={form.control}
-              name="start"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="">Start Date</FormLabel>
-                  <FormControl>
-                    <DatePicker
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="startTime"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="">Start Time</FormLabel>
-                  <FormControl>
-                    <TimePicker
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex flex-row w-1/2 space-x-1">
-            <FormField
-              control={form.control}
-              name="end"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="">End Date</FormLabel>
-                  <FormControl>
-                    <DatePicker
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="endTime"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="">End Time</FormLabel>
-                  <FormControl>
-                    <TimePicker
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        </div>
-        <FormField
-          control={form.control}
-          name="timezone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="">
-                Select the event timezone
-              </FormLabel>
-              <FormControl>
-                <Combobox
-                  items={generateTimezones()}
-                  value={field.value}
-                  setValue={field.onChange}
+                <FormField
+                  control={form.control}
+                  name="startTime"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel className="">Start Time</FormLabel>
+                      <FormControl>
+                        <TimePicker
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-row space-x-2">
-          <div className="flex w-1/6">
-            <FormField
-              control={form.control}
-              name="logo"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Event Logo</FormLabel>
-                  <FormControl>
-                    <ImageUpload
-                      path={`events/${organization?.slug}`}
-                      aspectRatio={1}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex w-2/6 ">
-            <FormField
-              control={form.control}
-              name="eventCover"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Event Cover</FormLabel>
-                  <FormControl>
-                    <ImageUpload
-                      path={`events/${organization?.slug}`}
-                      {...field}
-                      aspectRatio={16 / 9}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex w-3/6">
-            <FormField
-              control={form.control}
-              name="banner"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Event Banner</FormLabel>
-                  <FormControl>
-                    <ImageUpload
-                      path={`events/${organization?.slug}`}
-                      {...field}
-                      aspectRatio={3 / 1}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        </div>
-        <FormField
-          control={form.control}
-          name="accentColor"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Event Color</FormLabel>
-              <FormControl>
-                <ColorPicker
-                  color={field.value}
-                  onChange={field.onChange}
+              </div>
+              <div className="flex flex-row w-1/2 space-x-1">
+                <FormField
+                  control={form.control}
+                  name="end"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel className="">End Date</FormLabel>
+                      <FormControl>
+                        <DatePicker
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-row">
-          <Button variant={'destructive'}>
-            <Link href={`/studio/${organization.slug}`} passHref>
-              Cancel
-            </Link>
-          </Button>
-          <Button
-            disabled={getFormSubmitStatus(form)}
-            className="ml-2"
-            type="submit">
-            {isCreatingEvent ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                Please wait
-              </>
-            ) : (
-              'Create Event'
-            )}
-          </Button>
-        </div>
-      </form>
+                <FormField
+                  control={form.control}
+                  name="endTime"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel className="">End Time</FormLabel>
+                      <FormControl>
+                        <TimePicker
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-row space-x-2">
+              <div className="flex w-1/6">
+                <FormField
+                  control={form.control}
+                  name="logo"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Event Logo</FormLabel>
+                      <FormControl>
+                        <ImageUpload
+                          path={`events/${organization?.slug}`}
+                          aspectRatio={1}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex w-2/6 ">
+                <FormField
+                  control={form.control}
+                  name="eventCover"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Event Cover</FormLabel>
+                      <FormControl>
+                        <ImageUpload
+                          path={`events/${organization?.slug}`}
+                          {...field}
+                          aspectRatio={16 / 9}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex w-3/6">
+                <FormField
+                  control={form.control}
+                  name="banner"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Event Banner</FormLabel>
+                      <FormControl>
+                        <ImageUpload
+                          path={`events/${organization?.slug}`}
+                          {...field}
+                          aspectRatio={3 / 1}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <FormField
+              control={form.control}
+              name="accentColor"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Event Color</FormLabel>
+                  <FormControl>
+                    <ColorPicker
+                      color={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button variant={'destructive'}>
+              <Link href={`/studio/${organization.slug}`} passHref>
+                Cancel
+              </Link>
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </Form>
   )
 }

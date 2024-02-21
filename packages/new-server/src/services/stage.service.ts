@@ -42,17 +42,13 @@ export default class StageService {
   }
 
   async findAllStagesForEvent(eventId: string): Promise<Array<IStage>> {
-    const event = await Events.findOne({ slug: eventId });
+    const isObjectId = /[0-9a-f]{24}/i.test(eventId);
+    const filter = isObjectId ? { _id: eventId } : { slug: eventId };
+    const event = await Events.findOne(filter);
     return await this.controller.store.findAll(
       { eventId: event?._id },
       `${this.path}/${eventId}`,
     );
-    // stages.sort((a, b) => {
-    //   if (a?.order && b?.order) {
-    //     return a.order - b.order
-    //   }
-    //   return 0
-    // })
   }
 
   async deleteOne(stageId: string): Promise<void> {
