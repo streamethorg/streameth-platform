@@ -4,7 +4,7 @@ import Image from 'next/image'
 import SearchBar from '@/components/misc/SearchBar'
 import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Menu, X } from 'lucide-react'
 import Navbar from './Navbar'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 import { Search } from 'lucide-react'
@@ -69,24 +69,24 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="lg:hidden z-[999999] backdrop-blur-sm bg-transparent bg-opacity-90 sticky top-0 flex flex-row items-center">
+    <NavigationMenu className="flex sticky top-0 flex-row items-center bg-transparent bg-opacity-90 lg:hidden z-[999999] backdrop-blur-sm">
       {(searchVisible || menuVisible) && (
-        <div className="h-[100vh] w-[100vw] bg-black bg-opacity-50 absolute top-0 left-0" />
+        <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
 
       {searchVisible && showSearchBar && (
-        <div className="absolute bottom-[-56px] w-full bg-secondary">
+        <div className="absolute w-full bottom-[-56px] bg-secondary">
           <SearchBar />
         </div>
       )}
-      <div className="p-2 w-full h-full relative flex flex-row items-center">
+      <div className="flex relative flex-row items-center p-2 w-full h-full">
         <Link href="/">
           <Image
             src="/logo.png"
             alt="Logo"
             height={36}
             width={36}
-            className="aspect-square h-full"
+            className="h-full aspect-square"
           />
         </Link>
 
@@ -99,9 +99,17 @@ const MobileNavBar = ({
           {pages.length > 0 && (
             <button onClick={toggleMenu} className="z-50 p-2">
               {!menuVisible ? (
-                <Bars3Icon className="w-6 h-6 bg-primary text-white rounded" />
+                <Menu
+                  size={23}
+                  strokeWidth={1.5}
+                  className="text-white rounded bg-primary"
+                />
               ) : (
-                <XMarkIcon className="w-6 h-6 bg-primary text-white rounded" />
+                <X
+                  size={23}
+                  strokeWidth={1.5}
+                  className="text-white rounded bg-primary"
+                />
               )}
             </button>
           )}
@@ -131,7 +139,7 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className="w-full p-2 hidden md:hidden z-[99] backdrop-blur-sm bg-opacity-90 sticky top-0 lg:flex flex-row items-center justify-between">
+    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-opacity-90 md:hidden lg:flex z-[99] backdrop-blur-sm">
       <Link href="/">
         <Image
           src="/logo_dark.png"
@@ -141,7 +149,7 @@ const PCNavBar = ({
           className="hidden lg:block"
         />
       </Link>
-      <div className="flex-grow  items-center flex justify-center">
+      <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
       </div>
       <Navbar

@@ -1,6 +1,5 @@
 'use client'
 import useSearchParams from '@/lib/hooks/useSearchParams'
-import { Asset } from 'livepeer/dist/models/components'
 import PlayerWithControls from '@/components/ui/Player'
 import { Button } from '@/components/ui/button'
 

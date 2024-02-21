@@ -26,7 +26,7 @@ export default async function Watch({
   const tabs = []
   tabs.push({
     value: 'Related videos',
-    content: <RelatedVideos event={searchParams.event} />,
+    content: <RelatedVideos searchQuery={video.name} />,
   })
 
   return (
