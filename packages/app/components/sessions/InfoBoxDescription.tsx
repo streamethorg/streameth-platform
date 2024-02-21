@@ -1,12 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import {
-  Card,
-  CardDescription,
-  CardTitle,
-  CardContent,
-  CardHeader,
-} from '@/components/ui/card'
+import { CardContent } from '@/components/ui/card'
 import { ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react'
 import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import SpeakerIcon from '../speakers/speakerIcon'
@@ -19,7 +13,7 @@ const InfoBoxDescription = ({
   description?: string
 }) => {
   const [isOpened, setIsOpened] = useState(false)
-  const [isExpandable, setIsExpandable] = useState(false)
+  const [isExpandable, setIsExpandable] = useState(true)
   const descriptionRef = useRef(null)
 
   useEffect(() => {
@@ -27,7 +21,7 @@ const InfoBoxDescription = ({
       if (descriptionRef.current) {
         const isMobile = window.innerWidth <= 768 // Adjust mobile breakpoint as needed
         const descriptionHeight = description?.length || 0
-        setIsExpandable(isMobile && descriptionHeight < 100)
+        setIsExpandable(isMobile && descriptionHeight > 100)
       }
     }
 
