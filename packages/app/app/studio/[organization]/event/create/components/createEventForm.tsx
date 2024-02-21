@@ -91,19 +91,6 @@ export default function CreateEventForm({
         <CardHeader className="h-[88px]">
           <CardTitle className="flex flex-row justify-between items-center">
             <p>Create an event for {organization.name}</p>
-            <Button
-              disabled={getFormSubmitStatus(form)}
-              className="ml-2"
-              type="submit">
-              {isCreatingEvent ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                  Please wait
-                </>
-              ) : (
-                'Create Event'
-              )}
-            </Button>
           </CardTitle>
         </CardHeader>
         <CardContent className="h-[calc(100%-88px)] overflow-auto">
@@ -130,19 +117,11 @@ export default function CreateEventForm({
                 <FormItem>
                   <FormLabel className="">Description</FormLabel>
                   <FormControl>
-                    {/* <Textarea
-                  placeholder="enter your event description"
-                  {...field}
-                /> */}
                     <div className="container">
                       <MDEditor
                         value={field.value}
                         onChange={(a) => field.onChange(a)}
                       />
-                      {/* <MDEditor.Markdown
-                    source={field.value}
-                    style={{ whiteSpace: 'pre-wrap' }}
-                  /> */}
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -332,11 +311,26 @@ export default function CreateEventForm({
                 </FormItem>
               )}
             />
-            <Button variant={'destructive'}>
-              <Link href={`/studio/${organization.slug}`} passHref>
-                Cancel
-              </Link>
-            </Button>
+            <div className="flex flex-row justify-between">
+              <Button variant={'destructive'}>
+                <Link href={`/studio/${organization.slug}`} passHref>
+                  Cancel
+                </Link>
+              </Button>
+              <Button
+                disabled={getFormSubmitStatus(form)}
+                className="ml-2"
+                type="submit">
+                {isCreatingEvent ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                    Please wait
+                  </>
+                ) : (
+                  'Create Event'
+                )}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

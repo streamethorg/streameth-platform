@@ -2,7 +2,7 @@
 import { Livepeer } from 'livepeer'
 import { cookies } from 'next/headers'
 import { IExtendedSession } from '../types'
-import { updateSession, createSession } from '../services/sessionService'
+import { updateSession, createSession, deleteSession } from '../services/sessionService'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { revalidatePath } from 'next/cache'
 
@@ -117,4 +117,20 @@ export const getSessionMetrics = async ({
     throw error
   }
 
+}
+
+export const deleteSessionAction = async ({sessionId}: {sessionId: string}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  const response = await deleteSession({
+    sessionId,
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error updating session')
+  }
+  return response
 }
