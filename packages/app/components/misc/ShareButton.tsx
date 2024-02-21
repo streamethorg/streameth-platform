@@ -7,7 +7,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from 'react-share'
-import { ShareIcon } from '@heroicons/react/24/outline'
+import { Share2 } from 'lucide-react'
 import {
   FacebookIcon,
   RedditIcon,
@@ -49,7 +49,7 @@ const ShareModalContent = () => {
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>
-        <div className="flex flex-row items-center justify-center space-x-4 px-4 pb-4">
+        <div className="flex flex-row justify-center items-center px-4 pb-4 space-x-4">
           <FacebookShareButton url={currentUrl} quote={text}>
             <FacebookIcon size={42} round />
           </FacebookShareButton>
@@ -79,7 +79,7 @@ const ShareButton = () => {
     <Credenza>
       <CredenzaTrigger>
         <Badge className="bg-secondary text-secondary-foreground">
-          <ShareIcon className=" p-1 h-6 w-6  lg:h-8 lg:w-8 cursor-pointer  " />
+          <Share2 size={24} className="p-1" />
           Share
         </Badge>
       </CredenzaTrigger>

@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Menu, X } from 'lucide-react'
 import Navbar from './Navbar'
 
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
@@ -19,11 +19,19 @@ const NavBarButton = ({
 }) => (
   <button
     onClick={() => setIsNavVisible(!isNavVisible)}
-    className="lg:hidden z-50">
+    className="z-50 lg:hidden">
     {!isNavVisible ? (
-      <Bars3Icon className="w-[40px] h-[40px] border border-white text-white   rounded  mx-auto" />
+      <Menu
+        size={40}
+        strokeWidth={1.5}
+        className="mx-auto text-white rounded border border-white bg-primary"
+      />
     ) : (
-      <XMarkIcon className="w-[40px] h-[40px] border border-white text-white  rounded   mx-auto" />
+      <X
+        size={23}
+        strokeWidth={1.5}
+        className="mx-auto text-white rounded border border-white bg-primary"
+      />
     )}
   </button>
 )
@@ -45,8 +53,8 @@ export default function NavbarTop({
     return null
   }
   return (
-    <NavigationMenu className="z-[69] bg-event sticky top-0">
-      <div className="flex p-2 px-2 lg:px-4 w-full justify-between">
+    <NavigationMenu className="sticky top-0 z-[69] bg-event">
+      <div className="flex justify-between p-2 px-2 w-full lg:px-4">
         <div className="flex items-center">
           <Link href={homePath ? homePath : '/'} className="">
             <span className="sr-only">Logo</span>
@@ -59,7 +67,7 @@ export default function NavbarTop({
             />
           </Link>
         </div>
-        <div className=" flex flex-row items-center justify-end h-full w-full space-x-2">
+        <div className="flex flex-row justify-end items-center space-x-2 w-full h-full">
           {menuVisible && (
             <Navbar
               pages={
