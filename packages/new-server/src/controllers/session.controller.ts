@@ -1,3 +1,4 @@
+import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
 import { ISession } from '@interfaces/session.interface';
@@ -15,6 +16,7 @@ import {
   SuccessResponse,
   Tags,
   Security,
+  Delete,
 } from 'tsoa';
 @Tags('Session')
 @Route('sessions')
@@ -99,5 +101,19 @@ export class SessionController extends Controller {
     };
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);
+  }
+
+  /**
+   * @summary Delete Session
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Delete('{sessionId}')
+  async deleteSession(
+    @Path() sessionId: string,
+    @Body() organizationId: OrgIdDto,
+  ): Promise<IStandardResponse<void>> {
+    await this.sessionService.deleteOne(sessionId);
+    return SendApiResponse('deleted');
   }
 }
