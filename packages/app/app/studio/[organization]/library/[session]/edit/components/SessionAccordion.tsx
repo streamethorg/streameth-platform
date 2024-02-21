@@ -17,8 +17,12 @@ import ImageUpload from '@/components/misc/form/imageUpload'
 import { sessionSchema } from '@/lib/schema'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { updateSessionAction } from '@/lib/actions/sessions'
+import {
+  updateSessionAction,
+  deleteSessionAction,
+} from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
+import { Loader2 } from 'lucide-react'
 
 const SessionAccordion = ({
   session,
@@ -33,25 +37,22 @@ const SessionAccordion = ({
       name: session.name,
       description: session.description,
       coverImage: session.coverImage,
-      assetId: session.assetId,
-      videoUrl: session.videoUrl,
-      playbackId: session.playbackId,
     },
   })
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof sessionSchema>) {
     setIsUpdatingSession(true)
-    const response = updateSessionAction({
+    updateSessionAction({
       session: {
         ...values,
         _id: session._id,
-        speakers: session.speakers,
         organizationId: session.organizationId,
         eventId: session.eventId,
         stageId: session.stageId,
-        start: session.start,
-        end: session.end,
+        start: session.start ?? Number(new Date()),
+        end: session.end ?? Number(new Date()),
+        speakers: session.speakers ?? [],
       },
     })
       .then((response) => {
@@ -69,9 +70,37 @@ const SessionAccordion = ({
       })
   }
 
+  const handleDeleteSession = () => {
+    if (
+      window.confirm('Are you sure you want to delete this session?')
+    ) {
+      deleteSessionAction({
+        sessionId: session._id!,
+      })
+        .then((response) => {
+          if (response) {
+            toast.success('Session deleted')
+          } else {
+            toast.error('Error deleting session')
+          }
+        })
+        .catch(() => {
+          toast.error('Error deleting session')
+        })
+    }
+  }
+
   return (
     <Form {...form}>
       <form
+        onError={(e) => {
+          e.preventDefault()
+          toast.error('Please fill out all fields')
+        }}
+        onInvalid={(e) => {
+          e.preventDefault()
+          toast.error('Please fill out all fields')
+        }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4">
         <FormField
@@ -133,7 +162,7 @@ const SessionAccordion = ({
             </FormItem>
           )}
         /> */}
-        <FormField
+        {/* <FormField
           control={form.control}
           name="assetId"
           render={({ field }) => (
@@ -168,13 +197,25 @@ const SessionAccordion = ({
               </FormControl>
             </FormItem>
           )}
-        />
-        <Button
-          disabled={isUpdatingSession}
-          className="w-full"
-          type="submit">
-          Save changes
-        </Button>
+        /> */}
+        <div className="flex flex-row justify-between space-x-2 ">
+          <Button
+            onClick={handleDeleteSession}
+            variant={'destructive'}
+            className="w-full">
+            Delete session
+          </Button>
+          <Button className="w-full" type="submit">
+            {isUpdatingSession ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                Please Updating session
+              </>
+            ) : (
+              'Update session'
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   )

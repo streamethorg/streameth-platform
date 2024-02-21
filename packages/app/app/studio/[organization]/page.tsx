@@ -19,7 +19,7 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
   return (
     <div className="max-w-4xl w-full mx-auto py-2">
       <div className="w-full flex flex-row justify-between items-center py-2">
-        <CardTitle> Your organizations</CardTitle>
+        <CardTitle> Your events</CardTitle>
         <Link href={`/studio/${params.organization}/event/create`}>
           <Button className="w-full">Create Event</Button>
         </Link>
@@ -57,6 +57,11 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
             </Link>
           )
         })}
+        {events.length === 0 && (
+          <div className="flex flex-row justify-center items-center w-full h-full">
+            <p>No events yet</p>
+          </div>
+        )}
       </div>
     </div>
   )
