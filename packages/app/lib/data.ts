@@ -65,7 +65,7 @@ export async function fetchAllSessions({
     speakerIds,
   }
   const response = await fetch(
-    constructApiUrl(`${apiUrl()}/sessions`, params), 
+    constructApiUrl(`${apiUrl()}/sessions`, params),
     {
       cache: 'no-store',
     }
@@ -113,8 +113,6 @@ export async function fetchAllSessions({
         },
   }
 }
-
-
 
 export async function fetchEventSpeakers({
   event,

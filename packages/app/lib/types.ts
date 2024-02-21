@@ -4,6 +4,7 @@ import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
+import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
 
 export interface Page {
   name: string
@@ -100,16 +101,6 @@ export interface ISpeaker extends ISpeakerModel { }
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
   organizations: IExtendedOrganization[]
 }
-
-export interface IGoogleAuth {
-  web: {
-    client_id: string
-    project_id: string
-    auth_uri: string
-    token_uri: string
-    auth_provider_x509_cert_url: string
-    client_secret: string
-    javascript_origins?: string[]
-    redirect_uris?: string[]
-  }
+export interface IExtendedChat extends Omit<IChat, '_id'> {
+  _id: string
 }

@@ -1,17 +1,15 @@
-import StudioPageNavbar from '@/components/Layout/StudioPageNavbar'
-import SideNavigation from '@/components/Layout/SideNavigation'
-import { File, Inbox } from 'lucide-react'
 import { studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
 import React from 'react'
-
+import { Button } from '@/components/ui/button'
 import { fetchUserAction } from '@/lib/actions/users'
 import CreateOrganization from '../(home)/components/CreateOrganizationForm'
 import SwitchOrganization from './components/SwitchOrganization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
 import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import { hasOrganization } from '@/lib/utils/utils'
-
+import HomePageNavbar from '@/components/Layout/HomePageNavbar'
+import Link from 'next/link'
 export type variant =
   | 'default'
   | 'destructive'
@@ -33,59 +31,52 @@ const Layout = async ({
   }
   const userData = await fetchUserAction({})
 
-  if (
-    !hasOrganization(userData?.organizations, params.organization)
-  ) {
-    return (
-      <div className="flex flex-col items-center h-screen justify-center">
-        You do not belong to this organization, switch organization or
-        create a new one
-        <div className="flex gap-5 mt-5">
-          <SwitchOrganization
-            organizations={userData?.organizations}
-          />
-          <CreateOrganization />
-        </div>
-      </div>
-    )
-  }
-
-  const links = [
+  const pages = [
     {
-      title: 'Home',
-      icon: Inbox,
-      variant: 'ghost' as variant,
-      href: `/studio/${params.organization}`,
+      name: 'Videography',
+      href: 'https://info.streameth.org/stream-eth-studio',
+      bgColor: 'bg-muted ',
     },
     {
-      title: 'Library',
-      icon: File,
-      variant: 'ghost' as variant,
+      name: 'Videos',
+      bgColor: 'bg-muted',
       href: `/studio/${params.organization}/library`,
     },
     {
-      title: 'Settings',
-      icon: File,
-      variant: 'ghost' as variant,
-      href: `/studio/${params.organization}/settings`,
+      name: 'Events',
+      bgColor: 'bg-muted',
+      href: `/studio/${params.organization}`,
     },
   ]
+
   const headersList = headers()
   const pathname = headersList.get('next-url') || ''
 
   return (
     <div className="w-screen h-screen ">
-      <StudioPageNavbar organization={params.organization}>
-        <SideNavigation
-          isCollapsed={false}
-          links={links}
-          currentPath={pathname}
-        />
-      </StudioPageNavbar>
-      <div className="top-[74px] flex flex-col h-[calc(100vh-74px)]">
+      <HomePageNavbar pages={pages} showSearchBar={false} />
+      <div className="top-[56px] flex flex-col h-[calc(100vh-56px)] border-t border-secondary">
         <div className="flex h-full flex-row">
           <div className="flex flex-col flex-grow h-full overflow-hidden">
-            {children}
+            {!hasOrganization(
+              userData?.organizations,
+              params.organization
+            ) ? (
+              <div className="flex flex-col items-center h-screen justify-center">
+                You do not belong to this organization, switch
+                organization or create a new one
+                <div className="flex gap-5 mt-5">
+                  <SwitchOrganization
+                    organizations={userData?.organizations}
+                  />
+                  <Link href="/studio/create">
+                    <Button>Create Organization</Button>
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <>{children}</>
+            )}
           </div>
         </div>
       </div>

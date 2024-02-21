@@ -34,6 +34,7 @@ import { useCallback, useState } from 'react'
 import { updateEventAction } from '@/lib/actions/events'
 import { IExtendedEvent } from '@/lib/types'
 import useSearchParams from '@/lib/hooks/useSearchParams'
+import DeleteEvent from '../DeleteEventButton'
 
 const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
   const { handleTermChange, searchParams } = useSearchParams()
@@ -375,6 +376,12 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                 className="ml-auto">
                 Save
               </Button>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-4" className="px-2">
+            <AccordionTrigger>More</AccordionTrigger>
+            <AccordionContent className="p-2 space-y-8 flex flex-col">
+              <DeleteEvent event={event} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
