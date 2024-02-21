@@ -11,7 +11,8 @@ import { Search } from 'lucide-react'
 import { Page } from '@/lib/types'
 import { useSIWE } from 'connectkit'
 import useUserData from '@/lib/hooks/useUserData'
-
+import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
+import { IExtendedOrganization } from '@/lib/types'
 const getPages = (
   pages: Page[],
   isSignedIn: boolean,
@@ -33,15 +34,24 @@ const HomePageNavbar = ({
   logo,
   pages,
   showSearchBar = true,
+  organizations,
+  currentOrganization,
 }: {
   logo?: string
   pages: Page[]
   showSearchBar?: boolean
+  organizations?: IExtendedOrganization[]
+  currentOrganization?: string
 }) => {
   return (
     <Suspense fallback={null}>
       <MobileNavBar pages={pages} showSearchBar={showSearchBar} />
-      <PCNavBar pages={pages} showSearchBar={showSearchBar} />
+      <PCNavBar
+        pages={pages}
+        showSearchBar={showSearchBar}
+        organizations={organizations}
+        currentOrganization={currentOrganization}
+      />
     </Suspense>
   )
 }
@@ -132,9 +142,13 @@ const MobileNavBar = ({
 const PCNavBar = ({
   pages,
   showSearchBar,
+  organizations,
+  currentOrganization,
 }: {
   pages: Page[]
   showSearchBar: boolean
+  organizations?: IExtendedOrganization[]
+  currentOrganization?: string
 }) => {
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
@@ -152,6 +166,7 @@ const PCNavBar = ({
       <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
       </div>
+
       <Navbar
         pages={getPages(
           pages,
@@ -159,6 +174,14 @@ const PCNavBar = ({
           userData?.organizations?.[0]?.slug
         )}
       />
+      {organizations && (
+        <div className="m-1 mr-2">
+          <SwitchOrganization
+            organization={currentOrganization}
+            organizations={organizations}
+          />
+        </div>
+      )}
       <ConnectWalletButton />
     </NavigationMenu>
   )

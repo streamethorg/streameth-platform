@@ -51,7 +51,7 @@ const EventClips = async ({
       return (
         <NoSession
           stageId={stage}
-          organization={event.organizationId as string}
+          organization={params.organization}
           eventId={eventId}
         />
       )

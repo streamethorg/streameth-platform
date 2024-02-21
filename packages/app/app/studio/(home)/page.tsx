@@ -28,7 +28,7 @@ const Studio = async () => {
                 </Button>
               </Link>
             </div>
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 h-full overflow-auto">
               {userData?.organizations?.map((organization) => (
                 <Link
                   key={organization._id}

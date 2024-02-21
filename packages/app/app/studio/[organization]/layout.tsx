@@ -54,31 +54,32 @@ const Layout = async ({
 
   return (
     <div className="w-screen h-screen ">
-      <HomePageNavbar pages={pages} showSearchBar={false} />
-      <div className="top-[56px] flex flex-col h-[calc(100vh-56px)] border-t border-secondary">
-        <div className="flex h-full flex-row">
-          <div className="flex flex-col flex-grow h-full overflow-hidden">
-            {!hasOrganization(
-              userData?.organizations,
-              params.organization
-            ) ? (
-              <div className="flex flex-col items-center h-screen justify-center">
-                You do not belong to this organization, switch
-                organization or create a new one
-                <div className="flex gap-5 mt-5">
-                  <SwitchOrganization
-                    organizations={userData?.organizations}
-                  />
-                  <Link href="/studio/create">
-                    <Button>Create Organization</Button>
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <>{children}</>
-            )}
+      <HomePageNavbar
+        pages={pages}
+        showSearchBar={false}
+        currentOrganization={params.organization}
+        organizations={userData?.organizations}
+      />
+      <div className="top-[64px] overflow-hidden flex flex-col h-[calc(100vh-64px)] border-t border-secondary">
+        {!hasOrganization(
+          userData?.organizations,
+          params.organization
+        ) ? (
+          <div className="flex flex-col items-center h-screen justify-center">
+            You do not belong to this organization, switch
+            organization or create a new one
+            <div className="flex gap-5 mt-5">
+              <SwitchOrganization
+                organizations={userData?.organizations}
+              />
+              <Link href="/studio/create">
+                <Button>Create Organization</Button>
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="h-full w-full">{children}</div>
+        )}
       </div>
     </div>
   )

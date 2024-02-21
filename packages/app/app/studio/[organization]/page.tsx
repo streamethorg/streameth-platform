@@ -17,14 +17,14 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
   })
 
   return (
-    <div className="max-w-4xl w-full mx-auto py-2">
-      <div className="w-full flex flex-row justify-between items-center py-2">
+    <div className="max-w-4xl h-full w-full mx-auto p-4">
+      <div className="w-full flex flex-row justify-between items-center pb-2">
         <CardTitle> Your events</CardTitle>
         <Link href={`/studio/${params.organization}/event/create`}>
           <Button className="w-full">Create Event</Button>
         </Link>
       </div>
-      <div>
+      <div className="flex flex-col space-y-2 h-[calc(100%-60px)] overflow-auto">
         {events?.map((event, index) => {
           return (
             <Link
@@ -36,7 +36,7 @@ const OrganizationPage = async ({ params }: studioPageParams) => {
                     className=""
                     alt="logo"
                     src={event.eventCover ?? ''}
-                    width={250}
+                    width={280}
                     height={50}
                   />
                 </CardHeader>
