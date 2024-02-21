@@ -17,7 +17,7 @@ const ArchiveVideos = async ({ searchParams }: SearchPageProps) => {
   return (
     <div>
       <div className="flex flex-row items-center justify-between mb-4">
-        <CardTitle className="">Results</CardTitle>
+        <CardTitle className="px-2 lg:p-0">Results</CardTitle>
         <Pagination {...videos.pagination} />
       </div>
       <Videos videos={videos.sessions} />
