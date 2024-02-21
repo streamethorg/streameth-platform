@@ -2,12 +2,13 @@ import { type youtube_v3 } from 'googleapis';
 import { ISession } from '@interfaces/session.interface';
 import { createReadStream, createWriteStream } from 'fs';
 import https from 'http';
+import StateService from '@services/state.service';
 
-export function delay(ms: number): Promise<void> {
+function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function checkVideoProcessingStatus(
+async function checkVideoProcessingStatus(
   videoId: string,
   youtube: youtube_v3.Youtube,
 ) {
@@ -24,6 +25,8 @@ export async function uploadToYouTube(
   youtube: youtube_v3.Youtube,
   videoFilePath: string,
 ): Promise<void> {
+  const stateService = new StateService();
+
   youtube.videos.insert(
     {
       part: ['status', 'snippet'],
@@ -50,16 +53,27 @@ export async function uploadToYouTube(
       console.log('A YouTube video is being uploaded', response.data);
 
       let processingData = 'processing';
+
+      const state = await stateService.create({
+        type: 'video',
+        sessionId: session._id,
+        sessionSlug: session.slug,
+      } as any);
       while (processingData !== 'succeeded') {
         processingData = await checkVideoProcessingStatus(
           response.data.id,
           youtube,
         );
 
-        console.log(processingData);
-        // updateState;
-
-        if (processingData === 'processing') await delay(180000); // 3 minutes
+        if (processingData === 'processing') {
+          await delay(180000); // 3 minutes}
+        }
+        if (processingData === 'error') {
+          stateService.update(state._id.toString(), {
+            status: 'caneled',
+          } as any);
+          return;
+        }
       }
 
       if (!session.coverImage) {
@@ -86,6 +100,9 @@ export async function uploadToYouTube(
         })
         .on('error', (error) => {
           console.error('Error downloading the file:', error.message);
+          stateService.update(state._id.toString(), {
+            status: 'caneled',
+          } as any);
           return;
         });
 
@@ -100,9 +117,15 @@ export async function uploadToYouTube(
         function(err, response) {
           if (err) {
             console.log('The API returned an error: ' + err);
+            stateService.update(state._id.toString(), {
+              status: 'caneled',
+            } as any);
             return;
           }
           console.log(response.data);
+          stateService.update(state._id.toString(), {
+            status: 'completed',
+          } as any);
         },
       );
     },
