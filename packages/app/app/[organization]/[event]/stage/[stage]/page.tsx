@@ -9,6 +9,8 @@ import UpcomingSession from '../components/UpcomingSession'
 import { notFound } from 'next/navigation'
 import { generalMetadata, stageMetadata } from '@/lib/utils/metadata'
 import { Metadata } from 'next'
+import { fetchChat } from '@/lib/services/chatService'
+
 import { Livepeer } from 'livepeer'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
 export default async function Stage({ params }: EventPageProps) {
@@ -32,6 +34,7 @@ export default async function Stage({ params }: EventPageProps) {
     return notFound()
   }
 
+  const prevChatMessages = await fetchChat({ stageId: stage?._id })
   const stream = (
     await livepeer.stream.get(stage.streamSettings?.streamId ?? '')
   ).stream
@@ -74,7 +77,10 @@ export default async function Stage({ params }: EventPageProps) {
           event={event}
           currentSession={currentSession}
         />
-        <Chat conversationId="" />
+        <Chat
+          prevChatMessages={prevChatMessages}
+          stageId={stage?._id}
+        />
       </div>
     </div>
   )

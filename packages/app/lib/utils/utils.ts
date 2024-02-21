@@ -167,6 +167,17 @@ export const getFormSubmitStatus = (form: UseFormReturn<any>) => {
   return isSubmitDisabled
 }
 
+export const isEthereumAddress = (address: string) => {
+  const ethereumAddressRegex = /^(0x)?[0-9a-fA-F]{40}$/
+  return ethereumAddressRegex.test(address)
+}
+
+export const formatIdentify = (identity = '') => {
+  const parsedIdentity = isEthereumAddress(identity)
+    ? truncateAddr(identity)
+    : identity
+  return parsedIdentity
+}
 export const buildPlaybackUrl = (
   playbackId: string,
   vod?: boolean
