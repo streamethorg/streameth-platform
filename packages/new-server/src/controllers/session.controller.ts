@@ -80,30 +80,38 @@ export class SessionController extends Controller {
     @Path() sessionId: string,
     @Query() googleToken: string,
   ): Promise<IStandardResponse<ISession>> {
-    const session = await this.sessionService.get(sessionId);
-    const tokens: Credentials = JSON.parse(decodeURIComponent(googleToken));
+    try {
+      const session = await this.sessionService.get(sessionId);
+      const tokens: Credentials = JSON.parse(decodeURIComponent(googleToken));
 
-    const oAuthClient = await createOAuthClient();
-    oAuthClient.setCredentials(tokens);
+      const oAuthClient = await createOAuthClient();
+      oAuthClient.setCredentials(tokens);
 
-    const youtube = google.youtube({
-      version: 'v3',
-      auth: oAuthClient,
-    });
+      const youtube = google.youtube({
+        version: 'v3',
+        auth: oAuthClient,
+      });
 
-    if (!session.videoUrl) {
-      console.log('video Url does not exist');
-      return SendApiResponse('Video url does not exist', null, '500');
+      if (!session.videoUrl) {
+        console.log('video Url does not exist');
+        return SendApiResponse('Video url does not exist', null, '500');
+      }
+
+      const videoFilePath = `./tmp/${session.slug}.mp4`;
+      if (!existsSync(videoFilePath)) {
+        await downloadM3U8ToMP4(session.videoUrl, session.slug, './tmp');
+      }
+
+      await uploadToYouTube(session, youtube, videoFilePath);
+
+      return SendApiResponse('session fetched', session);
+    } catch (e) {
+      return SendApiResponse(
+        'An error while uploading a video to YouTube',
+        e.toString(),
+        '500',
+      );
     }
-
-    const videoFilePath = `./tmp/${session.slug}.mp4`;
-    if (!existsSync(videoFilePath)) {
-      await downloadM3U8ToMP4(session.videoUrl, session.slug, './tmp');
-    }
-
-    await uploadToYouTube(session, youtube, videoFilePath);
-
-    return SendApiResponse('session fetched', session);
   }
 
   /**
