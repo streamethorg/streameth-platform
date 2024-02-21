@@ -114,8 +114,10 @@ export const archivePath = ({
 
   if (searchQuery) {
     const url = new URL(window.location.href)
+
     if (
-      url.searchParams.has('event') ||
+      (url.pathname === '/archive' &&
+        url.searchParams.has('event')) ||
       url.searchParams.has('organization')
     ) {
       url.searchParams.set('searchQuery', searchQuery)
@@ -173,4 +175,8 @@ export const buildPlaybackUrl = (
     return `https://lp-playback.com/hls/${playbackId}/index.m3u8`
   }
   return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
+}
+
+export const isArchivedEvent = (endDate: string | Date) => {
+  return new Date() > new Date(endDate)
 }
