@@ -15,7 +15,7 @@ describe('watch page', () => {
   it('action bar works', () => {
     cy.get('.text-2xl')
     cy.get('.flex-col > .text-muted-foreground > .text-sm')
-    cy.get('[aria-controls="radix-:r5:"] > .inline-flex').click({
+    cy.get('[aria-controls="radix-:rg:"] > .inline-flex').click({
       force: true,
     })
   })
