@@ -45,14 +45,21 @@ export default function EventHomeComponent({
     date?: string
   }
 }) {
+  const style = {
+    '--colors-accent': event.accentColor,
+  } as React.CSSProperties
   const bannerImg = event.banner !== '' ? event.banner : banner
   return (
-    <div className="flex flex-col w-full h-full bg-event px-2">
+    <div
+      className="flex flex-col w-full bg-event px-2"
+      style={{ ...style }}>
       <div className="w-full relative space-y-4 lg:my-4 max-w-full lg:max-w-4xl mx-auto z-50">
         <Card className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
-          <AspectRatio ratio={3 / 1} className="overflow-clip">
+          <AspectRatio
+            ratio={3 / 1}
+            className="overflow-clip rounded-xl p-2">
             <Image
-              className="rounded-lg object-contain h-full p-2"
+              className="rounded-lg object-contain h-full"
               src={bannerImg!}
               alt="Event Cover"
               width={1500}
@@ -62,13 +69,14 @@ export default function EventHomeComponent({
               }}
             />
           </AspectRatio>
-
           <CardHeader>
             <div className="flex flex-col md:flex-row w-full my-2 gap-2">
               <CardTitle className="py-2 text-4xl uppercase text-white">
                 {event.name}
               </CardTitle>
-              <SignUp event={event} />
+              {event.dataImporter?.[0].config?.sheetId && (
+                <SignUp event={event} />
+              )}
             </div>
             <div className="text-sm text-white">
               <p>

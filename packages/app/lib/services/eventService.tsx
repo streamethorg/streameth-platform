@@ -118,20 +118,19 @@ export const updateEvent = async ({
   authToken: string
 }): Promise<IEventModel> => {
   const modifiedObject = (({ _id, ...rest }) => rest)(event)
-  try {
-    const response = await fetch(`${apiUrl()}/events/${event._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(modifiedObject),
-    })
-    return (await response.json()).data
-  } catch (e) {
-    console.log('error in updateEvent', e)
-    throw e
+  const response = await fetch(`${apiUrl()}/events/${event._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify(modifiedObject),
+  })
+  if (!response.ok) {
+    console.log('error in updateEvent', (await response.json()))
+    throw 'Error updating event'
   }
+  return (await response.json()).data
 }
 export const deleteEvent = async ({
   eventId,
