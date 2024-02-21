@@ -68,7 +68,7 @@ export default async function Stage({ params }: EventPageProps) {
           avatarUrl={event.logo}
           avatarFallback={event.name.slice(0, 1)}
           playerName={stage.name}
-          streamId={stage.streamSettings?.streamId}
+          playbackId={stream.playbackId}
           description={event.description}
         />
       </div>

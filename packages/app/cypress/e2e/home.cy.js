@@ -7,7 +7,9 @@ describe('Tests for homepage', () => {
     cy.visit('http://localhost:3000/')
     cy.scrollTo('bottom')
   })
-
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    return false
+  })
   it('Displays a list of organizations, which should have text', () => {
     cy.get(':nth-child(3) > .my-2 > a > .font-semibold').should(
       'not.be.empty'

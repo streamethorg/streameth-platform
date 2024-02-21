@@ -33,7 +33,10 @@ const ScheduleCardModal = ({
   }, [])
 
   const handleGoToStage = () => {
-    const stageUrl = `/${paramsOrgId}/${event.slug}/stage/${session.stageId}`
+    const watchUrl = `/watch?event=${event.slug}&session=${session._id}`
+    const stageUrl = session.assetId
+      ? watchUrl
+      : `/${paramsOrgId}/${session.eventSlug}/stage/${session.stageId}`
     !pathname.includes('schedule')
       ? router.push(stageUrl)
       : window.open(stageUrl, '_blank', 'noreferrer')

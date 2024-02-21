@@ -15,7 +15,6 @@ import {
   CredenzaTrigger,
 } from '../ui/crezenda'
 import { Input } from '../ui/input'
-import { Card, CardContent, CardTitle } from '../ui/card'
 
 const ModalContent: React.FC<{
   playbackId?: string
