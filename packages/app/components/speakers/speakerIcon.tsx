@@ -40,14 +40,14 @@ export default function SpeakerIcon({
     <Credenza>
       <SpeakerModal speaker={speaker} />
       <CredenzaTrigger>
-        <Badge className="bg-background text-primary border border-secondary">
+        <Badge className="bg-background z-50 text-primary border border-secondary">
           <Avatar className="my-1">
-            <AvatarImage src={speaker.photo} />
+            <AvatarImage src={speaker?.photo} />
             <AvatarFallback className="">
-              {speaker.name.slice(0, 1).toUpperCase()}
+              {speaker?.name.slice(0, 1).toUpperCase()}
             </AvatarFallback>
           </Avatar>
-          <span className="ml-2 text-sm">{speaker.name}</span>
+          <span className="ml-2 text-sm">{speaker?.name}</span>
         </Badge>
       </CredenzaTrigger>
     </Credenza>

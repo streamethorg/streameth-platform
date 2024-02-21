@@ -2775,7 +2775,13 @@
 				"tags": [
 					"Event"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
