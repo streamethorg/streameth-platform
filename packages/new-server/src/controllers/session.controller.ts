@@ -1,11 +1,11 @@
 import { downloadM3U8ToMP4 } from '@avtools/ffmpeg';
 import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
-import { IGoogleToken } from '@interfaces/googletoken.interface';
 import { ISession } from '@interfaces/session.interface';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import createOAuthClient from '@utils/oauth';
+import { uploadToYouTube } from '@utils/youtube';
 import { existsSync } from 'fs';
 import { Credentials } from 'google-auth-library';
 import { google } from 'googleapis';
@@ -101,7 +101,7 @@ export class SessionController extends Controller {
       await downloadM3U8ToMP4(session.videoUrl, session.slug, './tmp');
     }
 
-    await this.sessionService.uploadToYouTube(session, youtube, videoFilePath);
+    await uploadToYouTube(session, youtube, videoFilePath);
 
     return SendApiResponse('session fetched', session);
   }

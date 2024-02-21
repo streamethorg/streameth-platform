@@ -14,7 +14,7 @@ export enum StateStatus {
 
 export enum StateType {
   event = 'event',
-  video = 'video',
+  youtube = 'youtube',
 }
 export interface IState {
   eventId: string | Types.ObjectId;
