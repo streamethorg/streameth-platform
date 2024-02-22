@@ -32,10 +32,10 @@ export default function CreateOrganizationForm() {
     resolver: zodResolver(organizationSchema),
     defaultValues: {
       name: '',
-      description: '',
-      url: '',
+      description: '-',
+      url: '-',
       logo: '',
-      location: '',
+      location: '-',
     },
   })
 
@@ -109,7 +109,7 @@ export default function CreateOrganizationForm() {
             variant={'outline'}>
             Go back
           </Button>
-          <Button disabled={getFormSubmitStatus(form)} type="submit">
+          <Button type="submit">
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
