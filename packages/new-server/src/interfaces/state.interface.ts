@@ -1,4 +1,4 @@
-import { Types } from 'mongoose';
+import { Types, Document } from 'mongoose';
 
 export enum SheetType {
   gsheet = 'gsheet',
@@ -9,7 +9,7 @@ export enum StateStatus {
   pending = 'pending',
   completed = 'completed',
   canceled = 'canceled',
-  imported = 'imported',
+  sync = 'sync',
 }
 
 export enum StateType {
@@ -17,9 +17,12 @@ export enum StateType {
   video = 'video',
 }
 export interface IState {
-  eventId: string | Types.ObjectId;
-  eventSlug: string;
-  sheetType: SheetType;
-  status: StateStatus;
-  type: StateType;
+  _id?: string | Types.ObjectId;
+  eventId?: string | Types.ObjectId;
+  eventSlug?: string;
+  sheetType?: SheetType;
+  status?: StateStatus;
+  type?: StateType;
 }
+
+export interface IStateModel extends Omit<IState, '_id'>, Document {}
