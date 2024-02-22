@@ -40,7 +40,7 @@ const Library = async ({
             <Link
               key={index}
               href={`/studio/${params.organization}/library/${session._id}/edit`}>
-              <Card className="flex overflow-hidden flex-col border border-secondary h-full">
+              <Card className="flex overflow-hidden flex-col border border-secondary">
                 <CardHeader className=" relative p-0 lg:p-0 h-full">
                   <Thumbnail imageUrl={session.coverImage} />
                 </CardHeader>

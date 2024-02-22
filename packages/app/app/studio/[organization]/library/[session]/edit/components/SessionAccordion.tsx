@@ -70,7 +70,8 @@ const SessionAccordion = ({
       })
   }
 
-  const handleDeleteSession = () => {
+  const handleDeleteSession = (e: any) => {
+    e.preventDefault()
     if (
       window.confirm('Are you sure you want to delete this session?')
     ) {
