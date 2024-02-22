@@ -9,7 +9,7 @@ const UpcomingSession = ({
   currentSession,
 }: {
   event: IExtendedEvent
-  currentSession: IExtendedSession
+  currentSession?: IExtendedSession
 }) => {
   // State to control the visibility of the component
   const [isVisible, setIsVisible] = useState(true)
