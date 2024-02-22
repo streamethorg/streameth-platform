@@ -1,9 +1,14 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { IExtendedEvent, IExtendedOrganization } from '@/lib/types'
+import {
+  IExtendedEvent,
+  IExtendedOrganization,
+  IExtendedSession,
+} from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { UseFormProps, UseFormReturn } from 'react-hook-form'
+import { getDateInUTC } from './time'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -189,5 +194,21 @@ export const buildPlaybackUrl = (
 }
 
 export const isArchivedEvent = (endDate: string | Date) => {
-  return new Date() > new Date(endDate)
+  return getDateInUTC(new Date()) > getDateInUTC(new Date(endDate))
+}
+
+export const sortByStartDateAsc = (
+  a: IExtendedEvent | IExtendedSession,
+  b: IExtendedEvent
+) => {
+  const dateA = getDateInUTC(new Date(a.start))
+  const dateB = getDateInUTC(new Date(b.start))
+
+  if (dateA < dateB) {
+    return -1
+  } else if (dateA > dateB) {
+    return 1
+  } else {
+    return 0
+  }
 }
