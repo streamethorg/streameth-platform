@@ -10,10 +10,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { fetchEvents } from '@/lib/services/eventService'
-import { archivePath, isArchivedEvent } from '@/lib/utils/utils'
+import {
+  archivePath,
+  isArchivedEvent,
+  sortByStartDateAsc,
+} from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import { getDateAsString } from '@/lib/utils/time'
+import { getDateAsString, getDateInUTC } from '@/lib/utils/time'
 import { IExtendedOrganization } from '@/lib/types'
 
 const UpcomingEvents = async ({
@@ -31,12 +35,16 @@ const UpcomingEvents = async ({
     await fetchEvents({
       organizationSlug: organization,
     })
-  ).filter((event) => {
-    if (date) {
-      return new Date(event.start) > date
-    }
-    return true
-  })
+  )
+    .filter((event) => {
+      if (date) {
+        return (
+          getDateInUTC(new Date(event.start)) >= getDateInUTC(date)
+        )
+      }
+      return true
+    })
+    .sort(sortByStartDateAsc)
 
   const organizationSlug = (organizationId: string) => {
     const orgSlug = organizations?.find(
