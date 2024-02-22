@@ -23,7 +23,7 @@ import { Src } from '@livepeer/react'
 import { createClip } from '@/lib/actions/sessions'
 
 export function PlayerWithControls(props: { src: Src[] | null }) {
-  if (!props.src) {
+  if (!props.src || !props.src?.[0].src) {
     return (
       <PlayerLoading
         title="Invalid source"

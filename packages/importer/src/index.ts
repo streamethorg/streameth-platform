@@ -44,11 +44,12 @@ class ImporterService {
           await controller.generateSessions({
             sheetId: sheetId,
             eventId: eventId.toString(),
+            eventSlug: eventData.slug,
             organizationId: eventData.organizationId.toString(),
             timezone: eventData.timezone,
           });
           await State.findByIdAndUpdate(state._id, {
-            status: StateStatus.imported,
+            status: StateStatus.completed,
           });
         }
         console.info('done importing........');
@@ -65,7 +66,7 @@ class ImporterService {
       try {
         let states = await State.find({
           type: StateType.event,
-          status: StateStatus.imported,
+          status: StateStatus.sync,
         });
         if (states.length === 0) return;
         for (const state of states) {
@@ -80,8 +81,12 @@ class ImporterService {
           await controller.syncSessions({
             sheetId: sheetId,
             eventId: eventId.toString(),
+            eventSlug: eventData.slug,
             organizationId: eventData.organizationId.toString(),
             timezone: eventData.timezone,
+          });
+          await State.findByIdAndUpdate(state._id, {
+            status: StateStatus.completed,
           });
         }
         console.info('done syncing........');
@@ -124,7 +129,7 @@ class ImporterService {
       {
         attempts: 0,
         backoff: 30000,
-        jobId: config.jobId,
+        jobId: `${config.jobId}-2`,
         repeat: { cron: '*/10 * * * *' },
       },
     );
