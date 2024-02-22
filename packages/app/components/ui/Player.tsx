@@ -23,7 +23,6 @@ import { Src } from '@livepeer/react'
 import { createClip } from '@/lib/actions/sessions'
 
 export function PlayerWithControls(props: { src: Src[] | null }) {
-  console.log('props.src', props.src)
   if (!props.src || !props.src?.[0].src) {
     return (
       <PlayerLoading
