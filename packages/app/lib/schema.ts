@@ -93,10 +93,10 @@ export const sessionSchema = z.object({
 
 export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  description: z.string().min(1, 'Description is required'),
-  url: z.string().min(1, 'Website is required'),
+  description: z.string().optional(),
+  url: z.string().optional(),
   logo: z.string().min(1, 'Logo is required'),
-  location: z.string().min(1, 'Location is required'),
+  location: z.string().optional(),
   accentColor: z.string().optional(),
   slug: z.string().optional(),
 })

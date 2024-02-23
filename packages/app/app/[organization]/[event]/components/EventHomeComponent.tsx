@@ -74,7 +74,7 @@ export default function EventHomeComponent({
               <CardTitle className="py-2 text-4xl uppercase text-white">
                 {event.name}
               </CardTitle>
-              {event.dataImporter?.[0].config?.sheetId && (
+              {event.dataImporter?.[0]?.config?.sheetId && (
                 <SignUp event={event} />
               )}
             </div>

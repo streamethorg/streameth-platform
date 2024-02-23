@@ -65,10 +65,10 @@ export default function CreateSession({
     })
       .then(() => {
         setIsOpen(false)
-        toast.success('Organization created')
+        toast.success('Session created')
       })
       .catch(() => {
-        toast.error('Error creating organization')
+        toast.error('Error creating Session')
       })
       .finally(() => {
         setIsLoading(false)

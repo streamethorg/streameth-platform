@@ -22,6 +22,9 @@ export const createSession = async ({
       body: JSON.stringify(session),
     })
     if (!response.ok) {
+      console.log(session)
+      console.log(`${apiUrl()}/sessions`)
+      console.log('error in createSession', await response.json())
       throw 'Error updating session'
     }
     revalidatePath('/studio')

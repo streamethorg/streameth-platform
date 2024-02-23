@@ -33,23 +33,24 @@ const Studio = async () => {
                 <Link
                   key={organization._id}
                   href={`/studio/${organization.slug}`}>
-                  <Card className="flex overflow-hidden flex-row border border-secondary">
-                    <CardHeader className=" relative ">
+                  <Card className="h-full flex overflow-hidden flex-row shadow-none rounded-xl border border-secondary ">
+                    <CardHeader className=" relative p-3 lg:p-3">
                       <Image
-                        className="rounded-full min-w-[50px]"
+                        className="rounded-full h-full"
                         alt="logo"
                         src={organization.logo}
-                        width={50}
-                        height={50}
+                        width={45}
+                        height={30}
                       />
                     </CardHeader>
-                    <CardContent className="p-2 space-y-2 h-full flex flex-col">
-                      <CardTitle>{organization.name}</CardTitle>
-                      <p className=" overflow-hidden max-h-10 h-full flex">
-                        {organization.description}
-                      </p>
+                    <CardContent className="w-full space-y-2 h-full flex flex-col p-3 lg:p-3  justify-center">
+                      <p className="text-xl">{organization.name}</p>
                     </CardContent>
-                    <CardFooter className="flex flex-col"></CardFooter>
+                    <CardFooter className="space-y-2 h-full flex flex-col p-3 lg:p-3 items-center justify-center">
+                      <Button variant={'link'} className="w-full">
+                        Manage
+                      </Button>
+                    </CardFooter>
                   </Card>
                 </Link>
               ))}

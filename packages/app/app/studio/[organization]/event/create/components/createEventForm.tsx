@@ -87,7 +87,7 @@ export default function CreateEventForm({
 
   return (
     <Form {...form}>
-      <Card className="max-w-4xl w-full relative border border-secondary h-full">
+      <Card className="max-w-4xl w-full relative border shadow-none border-secondary h-full">
         <CardHeader className="h-[88px]">
           <CardTitle className="flex flex-row justify-between items-center">
             <p>Create an event for {organization.name}</p>
