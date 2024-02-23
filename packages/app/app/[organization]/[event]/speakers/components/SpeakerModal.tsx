@@ -1,5 +1,3 @@
-import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
-
 import {
   CredenzaContent,
   CredenzaDescription,
@@ -9,10 +7,10 @@ import {
 } from '@/components/ui/crezenda'
 
 import Link from 'next/link'
-import { IExtendedEvent, IExtendedSession } from '@/lib/types'
+import { IExtendedSpeaker, IExtendedSession } from '@/lib/types'
 
 interface Params {
-  speaker: ISpeaker
+  speaker: IExtendedSpeaker
   sessions?: IExtendedSession[]
 }
 

@@ -2,14 +2,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { CardContent } from '@/components/ui/card'
 import { ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react'
-import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import SpeakerIcon from '../speakers/speakerIcon'
+import { IExtendedSpeaker } from '@/lib/types'
 
 const InfoBoxDescription = ({
   description,
   speakers,
 }: {
-  speakers?: ISpeaker[]
+  speakers?: IExtendedSpeaker[]
   description?: string
 }) => {
   const [isOpened, setIsOpened] = useState(false)
