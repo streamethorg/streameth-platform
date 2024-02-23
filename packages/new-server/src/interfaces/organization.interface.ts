@@ -2,10 +2,10 @@ import { Document, Types } from 'mongoose';
 export interface IOrganization {
   _id?: Types.ObjectId;
   name: string;
-  description: string;
-  url: string;
+  description?: string;
+  url?: string;
   logo: string;
-  location: string;
+  location?: string;
   accentColor?: string;
   slug?: string;
   walletAddress: string;
