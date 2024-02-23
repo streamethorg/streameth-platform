@@ -112,12 +112,12 @@ const config = createConfig(
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
 
     // Required App Info
-    appName: 'Your App Name',
+    appName: 'Streameth',
 
     // Optional App Info
-    appDescription: 'Your App Description',
-    appUrl: 'https://family.co', // your app's url
-    appIcon: 'https://family.co/logo.png', // your app's icon, no bigger than 1024x1024px (max. 1MB)
+    appDescription: 'Streameth',
+    appUrl: 'https://streameth.org', // your app's url
+    appIcon: 'https://streameth.org/logo.png', // your app's icon, no bigger than 1024x1024px (max. 1MB)
   })
 )
 

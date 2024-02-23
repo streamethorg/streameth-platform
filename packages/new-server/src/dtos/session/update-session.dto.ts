@@ -31,7 +31,7 @@ export class UpdateSessionDto {
 
   @IsOptional()
   @IsArray()
-  speakers: ISpeaker[];
+  speakers: Omit<ISpeaker, 'organizationId'>[];
 
   @IsOptional()
   @IsObject()
