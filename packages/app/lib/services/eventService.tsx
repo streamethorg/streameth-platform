@@ -127,11 +127,11 @@ export const updateEvent = async ({
     body: JSON.stringify(modifiedObject),
   })
   if (!response.ok) {
-    console.log('error in updateEvent', (await response.json()))
     throw 'Error updating event'
   }
   return (await response.json()).data
 }
+
 export const deleteEvent = async ({
   eventId,
   organizationId,
@@ -159,4 +159,31 @@ export const deleteEvent = async ({
     console.log('error in deleteEvent', e)
     throw e
   }
+}
+
+export const syncEventImport = async ({
+  eventId,
+  organizationId,
+  authToken,
+}: {
+  eventId: string
+  organizationId: string
+  authToken: string
+}): Promise<IEventModel> => {
+  const response = await fetch(
+    `${apiUrl()}/events/import/${eventId}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(organizationId),
+    }
+  )
+  if (!response.ok) {
+    console.log('error in syncEventImport', await response.json())
+    throw 'Error syncing event'
+  }
+  return await response.json()
 }
