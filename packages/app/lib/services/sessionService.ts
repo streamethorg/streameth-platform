@@ -69,7 +69,7 @@ export const updateSession = async ({
 }): Promise<ISessionModel> => {
   const modifiedSession = (({ _id, slug, autoLabels, ...rest }) =>
     rest)(session)
-  console.log(session)
+
   try {
     const response = await fetch(
       `${apiUrl()}/sessions/${session._id}`,

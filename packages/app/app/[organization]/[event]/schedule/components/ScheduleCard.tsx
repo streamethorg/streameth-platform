@@ -46,14 +46,14 @@ const ScheduleCard = ({
                   {moment(session.end)
                     .tz(event?.timezone || 'UTC')
                     .format('HH:mm')}{' '}
-                  {getEventTimezoneText(event?.timezone || 'UTC')}
+                  ({getEventTimezoneText(event?.timezone || 'UTC')}){' '}
                 </>
               )}
             </CardDescription>
           </CardHeader>
           <CardContent className="p-2 lg:p-2">
             {speakers && (
-              <div className="flex py-1 items-center flex-row space-x-2 overflow-auto mt-auto">
+              <div className="flex py-1 -z-10 relative items-center flex-row space-x-2 overflow-auto mt-auto">
                 {session.speakers.map((speaker) => (
                   <SpeakerIcon key={speaker?._id} speaker={speaker} />
                 ))}
