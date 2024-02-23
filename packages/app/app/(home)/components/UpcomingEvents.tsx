@@ -13,6 +13,7 @@ import { fetchEvents } from '@/lib/services/eventService'
 import {
   archivePath,
   isArchivedEvent,
+  renderEventDay,
   sortByStartDateAsc,
 } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
@@ -39,7 +40,8 @@ const UpcomingEvents = async ({
     .filter((event) => {
       if (date) {
         return (
-          getDateInUTC(new Date(event.start)) >= getDateInUTC(date)
+          getDateInUTC(new Date(event.start)) >= getDateInUTC(date) ||
+          getDateInUTC(new Date(event.end)) >= getDateInUTC(date)
         )
       }
       return true
@@ -93,7 +95,7 @@ const UpcomingEvents = async ({
                   </CardTitle>
                   <CardDescription className="text-white flex flex-col">
                     {!isArchivedEvent(end) &&
-                      new Date(start).toDateString()}
+                      renderEventDay(start, end)}
                     <div className="flex flex-row space-x-2">
                       {isArchivedEvent(end) && (
                         <Link href={archivePath({ event: slug })}>

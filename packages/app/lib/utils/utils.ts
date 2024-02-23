@@ -212,3 +212,14 @@ export const sortByStartDateAsc = (
     return 0
   }
 }
+
+export const renderEventDay = (
+  start: string | Date,
+  end: string | Date
+) => {
+  if (start === end) return new Date(start).toDateString()
+
+  return `${new Date(start).toDateString()} - ${new Date(
+    end
+  ).toDateString()}`
+}
