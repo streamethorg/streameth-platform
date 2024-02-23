@@ -77,14 +77,14 @@ describe('archive page', () => {
     cy.visit('http://localhost:3000/archive')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '1 of 68'
+      '1 of 69'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)').click()
 
     cy.url().should('include', 'page=2')
     cy.get(':nth-child(2) > .flex > .mx-2').should(
       'contain',
-      '2 of 68'
+      '2 of 69'
     )
     cy.get(':nth-child(2) > .flex > :nth-child(3)')
   })
