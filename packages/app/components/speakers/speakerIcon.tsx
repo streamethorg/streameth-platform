@@ -1,5 +1,4 @@
 'use client'
-import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import makeBlockie from 'ethereum-blockies-base64'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -9,6 +8,7 @@ import {
 } from '@/components/ui/avatar'
 import SpeakerModal from '@/app/[organization]/[event]/speakers/components/SpeakerModal'
 import { Credenza, CredenzaTrigger } from '../ui/crezenda'
+import { IExtendedSpeaker } from '@/lib/types'
 function CreateBlockie(username: string) {
   return makeBlockie(username)
 }
@@ -17,7 +17,7 @@ export default function SpeakerIcon({
   speaker,
   onlyImage = false,
 }: {
-  speaker: ISpeaker
+  speaker: IExtendedSpeaker
   onlyImage?: boolean
 }) {
   if (onlyImage) {

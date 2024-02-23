@@ -55,7 +55,7 @@ const ScheduleCardModal = ({
           {moment(session.end)
             .tz(event?.timezone)
             .format('HH:mm')}{' '}
-          {getEventTimezoneText(event?.timezone)}
+          ({getEventTimezoneText(event?.timezone)})
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>

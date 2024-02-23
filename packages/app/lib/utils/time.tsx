@@ -2,10 +2,19 @@ import moment from 'moment-timezone'
 
 export function generateTimezones() {
   const timezones = moment.tz.names()
-  return timezones.map((timezone) => ({
-    label: timezone,
-    value: timezone,
-  }))
+  return timezones.map((timezone) => {
+    const gmtOffset = moment.tz(timezone).utcOffset()
+    const gmtOffsetString =
+      gmtOffset === 0
+        ? 'GMT'
+        : `GMT${moment.tz(timezone).format('Z')}`
+
+    return {
+      label: timezone,
+      value: timezone,
+      abbr: gmtOffsetString,
+    }
+  })
 }
 
 export const getTime = (date: Date): number => moment(date).valueOf()
@@ -62,9 +71,10 @@ export const getEventPeriod = (eventTime: string): string => {
 
 export const getEventTimezoneText = (utcValue: string): string => {
   const timezone = generateTimezones().find(
-    (tz) => tz.value === utcValue
+    (tz) => tz.value.toLowerCase() === utcValue.toLowerCase()
   )
-  return timezone ? timezone.label : ''
+
+  return timezone ? timezone.abbr : utcValue
 }
 
 export const isCurrentDateInUTC = (): number => {

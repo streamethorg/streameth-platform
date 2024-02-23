@@ -91,13 +91,15 @@ export default function EventHomeComponent({
               </p>
               <p>
                 <span className="mr-2">&#9200;</span>
-                {event?.startTime
-                  ? `${getEventPeriod(event.startTime)} - ${
-                      event.endTime
-                        ? getEventPeriod(event.endTime)
-                        : ''
-                    } ${event.timezone}`
-                  : 'TBD'}
+                <span className="capitalize">
+                  {event?.startTime
+                    ? `${getEventPeriod(event.startTime)} - ${
+                        event.endTime
+                          ? getEventPeriod(event.endTime)
+                          : ''
+                      } ${event.timezone}`
+                    : 'TBD'}
+                </span>
               </p>
 
               <p>
