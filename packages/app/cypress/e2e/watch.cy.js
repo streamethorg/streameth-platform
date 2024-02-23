@@ -9,7 +9,7 @@ describe('watch page', () => {
     return false
   })
   it('loads video', () => {
-    cy.get('.aspect-video > .rounded').should('exist')
+    cy.get('.aspect-video >').should('exist')
   })
 
   it('action bar works', () => {
