@@ -4,10 +4,11 @@ import { Schema, model } from 'mongoose';
 const OrganizationSchema = new Schema<IOrganizationModel>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
-    description: { type: String, default: '', required: true },
-    url: { type: String, default: '', required: true },
+    email: { type: String, default: '', required: true, index: true },
+    description: { type: String, default: '' },
+    url: { type: String, default: '' },
     logo: { type: String, default: '', required: true },
-    location: { type: String, default: '', required: true },
+    location: { type: String, default: '' },
     accentColor: { type: String, default: '' },
     slug: { type: String, default: '', index: true },
   },

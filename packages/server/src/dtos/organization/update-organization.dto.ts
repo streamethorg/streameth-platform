@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UpdateOrganizationDto {
   @IsOptional()
@@ -7,23 +7,12 @@ export class UpdateOrganizationDto {
 
   @IsOptional()
   @IsString()
-  description!: string;
-
-  @IsOptional()
-  @IsString()
-  url!: string;
-
-  @IsOptional()
-  @IsString()
   logo!: string;
 
   @IsOptional()
   @IsString()
-  location!: string;
-
-  @IsOptional()
-  @IsString()
-  accentColor?: string;
+  @IsEmail()
+  email!: string;
 
   @IsOptional()
   @IsString()

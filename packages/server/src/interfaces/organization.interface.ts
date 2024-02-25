@@ -2,6 +2,7 @@ import { Document, Types } from 'mongoose';
 export interface IOrganization {
   _id?: Types.ObjectId;
   name: string;
+  email: string;
   description?: string;
   url?: string;
   logo: string;
