@@ -12,8 +12,8 @@ export const config = {
     dir: validatedEnv.LOG_DIR,
   },
   cors: {
-    origin: validatedEnv.ORIGIN,
-    credentials: validatedEnv.CREDENTIALS,
+    origin: validatedEnv.CORS_ORIGIN,
+    credentials: validatedEnv.CORS_CREDENTIALS,
   },
   secretKey: validatedEnv.SECRET_KEY,
   jwt: {
