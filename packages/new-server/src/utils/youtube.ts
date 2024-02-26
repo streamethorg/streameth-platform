@@ -4,6 +4,7 @@ import { createReadStream, createWriteStream } from 'fs';
 import https from 'https';
 import StateService from '@services/state.service';
 import EventService from '@services/event.service';
+import { StateType } from '@interfaces/state.interface';
 
 // Utility function to introduce a delay
 function delay(ms: number): Promise<void> {
@@ -72,10 +73,10 @@ async function setThumbnail(
     });
 
     console.log('Thumbnail set successfully:', response.data);
-    await stateService.update(stateId, { status: 'completed' } as any);
+    await stateService.update(stateId, { status: 'completed' });
   } catch (error) {
     console.error('Error setting thumbnail:', error);
-    await stateService.update(stateId, { status: 'canceled' } as any);
+    await stateService.update(stateId, { status: 'canceled' });
   }
 }
 
@@ -122,11 +123,11 @@ export async function uploadToYouTube(
     console.log('YouTube video upload initiated:', insertResponse.data);
 
     const state = await stateService.create({
-      type: 'video',
+      type: StateType.video,
       sessionId: session._id,
       sessionSlug: session.slug,
       eventSlug: event[0].slug,
-    } as any);
+    });
 
     let processingStatus = 'processing';
     while (processingStatus === 'processing') {
@@ -139,7 +140,7 @@ export async function uploadToYouTube(
       } else if (processingStatus === 'error') {
         await stateService.update(state._id.toString(), {
           status: 'canceled',
-        } as any);
+        });
         return;
       }
     }
@@ -161,7 +162,7 @@ export async function uploadToYouTube(
 
     await stateService.update(state._id.toString(), {
       status: 'canceled',
-    } as any);
+    });
     return;
   } catch (error) {
     console.error('An error occurred:', error);
