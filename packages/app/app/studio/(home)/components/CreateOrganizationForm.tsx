@@ -33,10 +33,10 @@ export default function CreateOrganizationForm() {
     resolver: zodResolver(organizationSchema),
     defaultValues: {
       name: '',
-      description: '',
-      url: '',
+      description: '-',
+      url: '-',
       logo: '',
-      location: '',
+      location: '-',
     },
   })
 
@@ -83,50 +83,11 @@ export default function CreateOrganizationForm() {
           )}
         />
         <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="">Description</FormLabel>
-              <FormControl>
-                <Input placeholder="description" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="location"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="">Location</FormLabel>
-              <FormControl>
-                <Input placeholder="Location" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="url"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="">Website</FormLabel>
-              <FormControl>
-                <Input placeholder="streamId" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
           disabled={!form.getValues('name')}
           control={form.control}
           name="logo"
           render={({ field }) => (
-            <FormItem className=" max-w-[50px]">
+            <FormItem className=" max-w-[150px]">
               <FormLabel className="">Logo</FormLabel>
               <FormControl>
                 <ImageUpload
@@ -149,7 +110,7 @@ export default function CreateOrganizationForm() {
             variant={'outline'}>
             Go back
           </Button>
-          <Button disabled={getFormSubmitStatus(form)} type="submit">
+          <Button type="submit">
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}

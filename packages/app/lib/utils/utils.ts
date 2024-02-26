@@ -1,9 +1,14 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { IExtendedEvent, IExtendedOrganization } from '@/lib/types'
+import {
+  IExtendedEvent,
+  IExtendedOrganization,
+  IExtendedSession,
+} from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { UseFormProps, UseFormReturn } from 'react-hook-form'
+import { getDateInUTC } from './time'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -114,8 +119,10 @@ export const archivePath = ({
 
   if (searchQuery) {
     const url = new URL(window.location.href)
+
     if (
-      url.searchParams.has('event') ||
+      (url.pathname === '/archive' &&
+        url.searchParams.has('event')) ||
       url.searchParams.has('organization')
     ) {
       url.searchParams.set('searchQuery', searchQuery)
@@ -184,4 +191,35 @@ export const buildPlaybackUrl = (
     return `https://lp-playback.com/hls/${playbackId}/index.m3u8`
   }
   return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
+}
+
+export const isArchivedEvent = (endDate: string | Date) => {
+  return getDateInUTC(new Date()) > getDateInUTC(new Date(endDate))
+}
+
+export const sortByStartDateAsc = (
+  a: IExtendedEvent | IExtendedSession,
+  b: IExtendedEvent
+) => {
+  const dateA = getDateInUTC(new Date(a.start))
+  const dateB = getDateInUTC(new Date(b.start))
+
+  if (dateA < dateB) {
+    return -1
+  } else if (dateA > dateB) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
+export const renderEventDay = (
+  start: string | Date,
+  end: string | Date
+) => {
+  if (start === end) return new Date(start).toDateString()
+
+  return `${new Date(start).toDateString()} - ${new Date(
+    end
+  ).toDateString()}`
 }

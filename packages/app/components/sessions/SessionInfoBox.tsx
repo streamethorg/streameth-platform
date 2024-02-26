@@ -1,6 +1,5 @@
 import ShareButton from '@/components/misc/ShareButton'
 import EmbedButton from '@/components/misc/EmbedButton'
-import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
@@ -10,6 +9,7 @@ import {
   CardHeader,
 } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
+import { IExtendedSpeaker } from '@/lib/types'
 // TODO LOADING STAT
 const SessionInfoBox = ({
   title,
@@ -32,7 +32,7 @@ const SessionInfoBox = ({
   playbackId?: string | undefined
   streamId?: string | undefined
   playerName: string
-  speakers?: ISpeaker[]
+  speakers?: IExtendedSpeaker[]
   assetId?: string
   viewCount?: boolean
   inverted?: boolean

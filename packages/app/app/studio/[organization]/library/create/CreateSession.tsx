@@ -43,9 +43,6 @@ export default function CreateSession({
     defaultValues: {
       name: '',
       description: '',
-      start: Date.now(),
-      end: Date.now(),
-      stageId,
     },
   })
 
@@ -56,14 +53,22 @@ export default function CreateSession({
       return
     }
     createSessionAction({
-      session: { ...values, eventId, organizationId, speakers: [] },
+      session: {
+        ...values,
+        eventId,
+        organizationId,
+        speakers: [],
+        stageId,
+        start: 0,
+        end: 0,
+      },
     })
       .then(() => {
         setIsOpen(false)
-        toast.success('Organization created')
+        toast.success('Session created')
       })
       .catch(() => {
-        toast.error('Error creating organization')
+        toast.error('Error creating Session')
       })
       .finally(() => {
         setIsLoading(false)

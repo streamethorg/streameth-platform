@@ -22,7 +22,7 @@ export interface ISession {
   start: number;
   end: number;
   stageId: Types.ObjectId | string;
-  speakers: ISpeaker[];
+  speakers: Omit<ISpeaker, 'organizationId'>[];
   source?: ISource;
   assetId?: string;
   playback?: IPlayback;

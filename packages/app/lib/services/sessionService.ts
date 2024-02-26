@@ -22,6 +22,9 @@ export const createSession = async ({
       body: JSON.stringify(session),
     })
     if (!response.ok) {
+      console.log(session)
+      console.log(`${apiUrl()}/sessions`)
+      console.log('error in createSession', await response.json())
       throw 'Error updating session'
     }
     revalidatePath('/studio')
@@ -40,7 +43,9 @@ export const fetchSession = async ({
     const LivepeerClient = new Livepeer({
       apiKey: process.env.LIVEPEER_API_KEY,
     })
-    const response = await fetch(`${apiUrl()}/sessions/${session}`)
+    const response = await fetch(`${apiUrl()}/sessions/${session}`, {
+      cache: 'no-store',
+    })
     if (!response.ok) {
       return null
     }
@@ -67,6 +72,7 @@ export const updateSession = async ({
 }): Promise<ISessionModel> => {
   const modifiedSession = (({ _id, slug, autoLabels, ...rest }) =>
     rest)(session)
+
   try {
     const response = await fetch(
       `${apiUrl()}/sessions/${session._id}`,
@@ -80,11 +86,45 @@ export const updateSession = async ({
       }
     )
     if (!response.ok) {
+      console.log('error in updateSession', await response.json())
       throw 'Error updating session'
     }
     return (await response.json()).data
   } catch (e) {
     console.log('error in updateSession', e)
+    throw e
+  }
+}
+
+export const deleteSession = async ({
+  sessionId,
+  authToken,
+}: {
+  sessionId: string
+  authToken: string
+}) => {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/sessions/${sessionId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    )
+    if (!response.ok) {
+      console.log(
+        'error in deleteSession',
+        `${apiUrl()}/sessions/${sessionId}`,
+        await response.json()
+      )
+      throw 'Error deleting session'
+    }
+    return await response.json()
+  } catch (e) {
+    console.log('error in deleteSession', e)
     throw e
   }
 }

@@ -9,6 +9,7 @@ export enum StateStatus {
   pending = 'pending',
   completed = 'completed',
   canceled = 'canceled',
+  sync = 'sync',
 }
 
 export enum StateType {
@@ -26,4 +27,4 @@ export interface IState {
   type: StateType;
 }
 
-export interface IStateModel extends Omit<IState, '_id'>, Document { }
+export interface IStateModel extends Omit<IState, '_id'>, Document {}

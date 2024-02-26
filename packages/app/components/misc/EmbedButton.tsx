@@ -1,12 +1,11 @@
 'use client'
 import { useEffect, useState, useContext } from 'react'
-import { CodeBracketIcon } from '@heroicons/react/24/outline'
+import { Code } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
 import {
   Credenza,
   CredenzaBody,
-  CredenzaClose,
   CredenzaContent,
   CredenzaDescription,
   CredenzaFooter,
@@ -15,7 +14,6 @@ import {
   CredenzaTrigger,
 } from '../ui/crezenda'
 import { Input } from '../ui/input'
-import { Card, CardContent, CardTitle } from '../ui/card'
 
 const ModalContent: React.FC<{
   playbackId?: string
@@ -66,7 +64,7 @@ const ModalContent: React.FC<{
     <CredenzaContent className="max-w-[450px]">
       <CredenzaHeader>
         <CredenzaTitle>Embed video</CredenzaTitle>
-        <CredenzaDescription className="text-xl mb-4 ">
+        <CredenzaDescription className="mb-4 text-xl">
           Easily embed this stream into your website by adding the
           iframe code below
         </CredenzaDescription>
@@ -74,7 +72,7 @@ const ModalContent: React.FC<{
       <CredenzaBody>
         <Input
           disabled
-          className="relative border-primary rounded-xl px-2 py-1 overflow-clip whitespace-nowrap cursor-pointer"
+          className="relative py-1 px-2 whitespace-nowrap rounded-xl cursor-pointer border-primary overflow-clip"
           onClick={copyToClipboard}
           value={generatedEmbedCode}></Input>
         <span
@@ -104,7 +102,7 @@ function EmbedButton({
     <Credenza>
       <CredenzaTrigger>
         <Badge className="bg-secondary text-secondary-foreground">
-          <CodeBracketIcon className="font-bold   p-1 rounded cursor-pointer h-6 w-6  lg:h-8 lg:w-8 " />
+          <Code size={24} className="p-1" />
           Embed
         </Badge>
       </CredenzaTrigger>

@@ -11,17 +11,19 @@ import { SelectContent } from '@/components/ui/select'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import { Session } from 'livepeer/dist/models/components'
 const RecordingSelect = ({
+  selectedRecording,
   streamRecordings,
 }: {
+  selectedRecording: string
   streamRecordings: Session[]
 }) => {
   const { handleTermChange, searchParams } = useSearchParams()
-  const selectedSession = searchParams.get('selectedRecording')
 
   if (!streamRecordings) return <div>No stream sessions found</div>
 
   return (
     <Select
+      value={selectedRecording}
       onValueChange={(value) => {
         const session = streamRecordings.find((s) => s.id === value)
         session &&
@@ -31,7 +33,7 @@ const RecordingSelect = ({
       }}>
       <SelectTrigger>
         <SelectValue
-          defaultValue={selectedSession ?? ''}
+          defaultValue={selectedRecording}
           placeholder={'Select a session to create clips from'}
         />
       </SelectTrigger>

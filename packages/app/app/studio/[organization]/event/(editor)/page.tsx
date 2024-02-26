@@ -23,10 +23,6 @@ export default async function EventPage({
     eventId: event.slug,
   })
 
-  const style = {
-    '--colors-accent': event.accentColor,
-  } as React.CSSProperties
-
   return (
     <div className="flex flex-row h-full overflow-hidden w-full">
       <TooltipProvider>
@@ -37,9 +33,7 @@ export default async function EventPage({
         />
       </TooltipProvider>
       {settings !== 'stage' && (
-        <div
-          className="w-full h-full overflow-auto"
-          style={{ ...style }}>
+        <div className="w-full h-full overflow-auto">
           <EventHomeComponent
             event={event}
             stages={stages}

@@ -6,7 +6,7 @@ import { useClipContext } from './ClipContext'
 import { IExtendedSession } from '@/lib/types'
 import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
-
+import useSearchParams from '@/lib/hooks/useSearchParams'
 const CreateClipButton = ({
   playbackId,
   session,
@@ -21,6 +21,7 @@ const CreateClipButton = ({
   const { startTime, setStartTime, endTime, setEndTime } =
     useClipContext()
 
+  const { handleTermChange } = useSearchParams()
   const handleCreateClip = () => {
     if (selectedRecording && startTime && endTime) {
       setIsLoading(true)
@@ -42,6 +43,12 @@ const CreateClipButton = ({
           toast.error('Error creating clip')
         })
         .finally(() => {
+          handleTermChange([
+            {
+              key: 'replaceAsset',
+              value: '',
+            },
+          ])
           setIsLoading(false)
         })
     }

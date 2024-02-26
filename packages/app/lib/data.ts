@@ -64,6 +64,7 @@ export async function fetchAllSessions({
     onlyVideos,
     speakerIds,
   }
+
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {

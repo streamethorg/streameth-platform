@@ -1,8 +1,9 @@
 import * as z from 'zod'
 
 export const formSchema = z.object({
-  name: z.string().min(1, 'name is required'),
-  description: z.string(),
+  name: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),  description: z.string(),
   start: z.date(),
   end: z.date(),
   location: z.string(),
@@ -14,7 +15,7 @@ export const formSchema = z.object({
   archiveMode: z.boolean().optional(),
   website: z.string().optional(),
   timezone: z.string().min(1, 'timezone is required'),
-  accentColor: z.string().optional(),
+  accentColor: z.string().min(1, { message: "Lastname is required" }),
   unlisted: z.boolean().optional(),
   enableVideoDownloader: z.boolean().optional(),
 })
@@ -87,21 +88,15 @@ const speakerSchema = z.object({
 export const sessionSchema = z.object({
   name: z.string().max(255),
   description: z.string(),
-  start: z.number(),
-  end: z.number(),
-  stageId: z.string(),
-  videoUrl: z.string().optional(),
-  playbackId: z.string().optional(),
-  assetId: z.string().optional(),
   coverImage: z.string().optional(),
 })
 
 export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  description: z.string().min(1, 'Description is required'),
-  url: z.string().min(1, 'Website is required'),
+  description: z.string().optional(),
+  url: z.string().optional(),
   logo: z.string().min(1, 'Logo is required'),
-  location: z.string().min(1, 'Location is required'),
+  location: z.string().optional(),
   accentColor: z.string().optional(),
   slug: z.string().optional(),
 })
