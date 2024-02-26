@@ -8,7 +8,10 @@ import {
 } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { setNextCookie, hasCookie } from '@/lib/actions/cookieConsent'
+import {
+  setCookie as setNextCookie,
+  hasCookie,
+} from '@/lib/actions/cookieConsent'
 
 const CookieBanner = () => {
   const [cookie, setCookie] = useState<boolean>(true)
