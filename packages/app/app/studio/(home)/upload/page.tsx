@@ -1,59 +1,53 @@
 'use client'
 
-import { useState, useRef, useMemo, useCallback } from 'react'
+import { getUrlAction } from '@/lib/actions/sessions'
+import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
 import UploadVideoForm from './components/UploadVideoForm'
 import { useDropzone } from 'react-dropzone'
+import { FileUp } from 'lucide-react'
 
-// TODO: Disable drag and drop for phone
+// TODO:
+// - Add a progress bar
+// - Disable drag and drop for phone
 
-const CreateAndViewAsset = ({ video }: { video: File }) => {
-  // const {
-  //   mutate: createAsset,
-  //   data: asset,
-  //   status,
-  //   progress,
-  //   error,
-  // } = useCreateAsset({
-  //   sources: [{ name: video.name, file: video }] as const,
-  // })
+const performUpload = async (video: File, signal: AbortSignal) => {
+  try {
+    console.log('Uploading file: ', video)
+    const url = await getUrlAction(video.name)
 
-  console.log('Uploading video: ', video.name)
+    if (!url) throw new Error('Failed to obtain upload URL')
 
-  // const progressFormatted = useMemo(
-  //   () =>
-  //     progress?.[0].phase === 'failed'
-  //       ? 0
-  //       : progress?.[0].phase === 'waiting'
-  //       ? 0
-  //       : progress?.[0].phase === 'uploading'
-  //       ? Math.round(progress?.[0]?.progress * 100)
-  //       : progress?.[0].phase === 'processing'
-  //       ? Math.round(progress?.[0]?.progress * 100)
-  //       : null,
-  //   [progress]
-  // )
-  //
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': video.type,
+      },
+      body: video,
+      signal,
+    })
 
-  const progressFormatted = 40
+    if (!response.ok) {
+      throw new Error(`Upload failed with status: ${response.status}`)
+    }
 
-  return (
-    <Progress value={progressFormatted} className="w-[60 %] my-5" />
-  )
+    const data = await response.json()
+    console.log('Video uploaded successfully:', data)
+  } catch (error) {
+    console.error('Error during video upload:', error)
+  }
 }
 
 const Upload = () => {
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const [fileUploaded, setFileUploaded] = useState<boolean>(false)
+  const abortController = new AbortController()
+  const signal = abortController.signal
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       const file = acceptedFiles[0]
       setSelectedFile(file)
-      setFileUploaded(true)
     }
   }, [])
 
@@ -65,18 +59,15 @@ const Upload = () => {
     onDrop,
   })
 
-  const handleButtonClick = () => {
-    fileInputRef.current?.click()
-  }
-
   const handleUpload = (file: File) => {
+    console.log('Handeling upload')
     setSelectedFile(file)
-    setFileUploaded(true)
+    performUpload(file, signal)
   }
 
   const handleCancel = () => {
-    setFileUploaded(false)
     setSelectedFile(null)
+    abortController.abort()
   }
 
   return (
@@ -90,32 +81,31 @@ const Upload = () => {
         </div>
       </div>
       <div className="flex justify-center items-center">
-        {!fileUploaded ? (
+        {!selectedFile ? (
           <div
             {...getRootProps()}
-            className="flex flex-col justify-center items-center p-4 text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed h-[550px] w-[700px]">
+            className="flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 h-[550px] w-[700px]">
+            <FileUp className={'my-4'} size={65} />
             <input
               {...getInputProps()}
-              ref={fileInputRef}
               onChange={(event) => {
                 const file = event.target.files?.[0]
+                console.log('Being called...')
                 if (file) {
                   handleUpload(file)
                 }
               }}
             />
-            <p>Drag and drop videos to upload...</p>
-            <Button className="mt-3" onClick={handleButtonClick}>
-              Upload a file...
-            </Button>
+            <p>
+              Drag and drop videos to upload... Or just click here!
+            </p>
           </div>
         ) : (
           <div className="flex flex-col justify-center items-center">
             <UploadVideoForm />
-            {selectedFile && (
-              <CreateAndViewAsset video={selectedFile} />
-            )}
-            <Button onClick={handleCancel}>Cancel upload...</Button>
+            <Button className={'mt-3'} onClick={handleCancel}>
+              Cancel upload...
+            </Button>
           </div>
         )}
       </div>
