@@ -50,12 +50,6 @@ export interface WatchPageProps {
   }
 }
 
-export interface GoogleCallbackProps {
-  searchParams: {
-    code: string
-  }
-}
-
 export interface IPagination {
   currentPage?: number
   totalPages: number
