@@ -4,7 +4,7 @@ import { createReadStream, createWriteStream } from 'fs';
 import https from 'https';
 import StateService from '@services/state.service';
 import EventService from '@services/event.service';
-import { StateType } from '@interfaces/state.interface';
+import { StateStatus, StateType } from '@interfaces/state.interface';
 
 // Utility function to introduce a delay
 function delay(ms: number): Promise<void> {
@@ -73,10 +73,10 @@ async function setThumbnail(
     });
 
     console.log('Thumbnail set successfully:', response.data);
-    await stateService.update(stateId, { status: 'completed' });
+    await stateService.update(stateId, { status: StateStatus.completed });
   } catch (error) {
     console.error('Error setting thumbnail:', error);
-    await stateService.update(stateId, { status: 'canceled' });
+    await stateService.update(stateId, { status: StateStatus.canceled });
   }
 }
 
@@ -139,7 +139,7 @@ export async function uploadToYouTube(
         await delay(180000); // Delay for 3 minutes
       } else if (processingStatus === 'error') {
         await stateService.update(state._id.toString(), {
-          status: 'canceled',
+          status: StateStatus.canceled,
         });
         return;
       }
@@ -161,7 +161,7 @@ export async function uploadToYouTube(
     }
 
     await stateService.update(state._id.toString(), {
-      status: 'canceled',
+      status: StateStatus.canceled,
     });
     return;
   } catch (error) {
