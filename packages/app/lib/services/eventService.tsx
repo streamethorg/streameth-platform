@@ -178,7 +178,7 @@ export const syncEventImport = async ({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify(organizationId),
+      body: JSON.stringify({ organizationId }),
     }
   )
   if (!response.ok) {
