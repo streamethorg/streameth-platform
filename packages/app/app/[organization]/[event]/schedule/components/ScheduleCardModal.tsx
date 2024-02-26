@@ -33,7 +33,10 @@ const ScheduleCardModal = ({
   }, [])
 
   const handleGoToStage = () => {
-    const stageUrl = `/${paramsOrgId}/${session.eventId}/stage/${session.stageId}`
+    const watchUrl = `/watch?event=${event.slug}&session=${session._id}`
+    const stageUrl = session.assetId
+      ? watchUrl
+      : `/${paramsOrgId}/${event.slug}/stage/${session.stageId}`
     !pathname.includes('schedule')
       ? router.push(stageUrl)
       : window.open(stageUrl, '_blank', 'noreferrer')
@@ -52,14 +55,14 @@ const ScheduleCardModal = ({
           {moment(session.end)
             .tz(event?.timezone)
             .format('HH:mm')}{' '}
-          {getEventTimezoneText(event?.timezone)}
+          ({getEventTimezoneText(event?.timezone)})
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>
         {session.description && <p>{session.description}</p>}
         <p className="flex flex-row flex-wrap mt-3">
           {session.speakers.map((speaker) => (
-            <SpeakerIcon key={speaker._id} speaker={speaker} />
+            <SpeakerIcon key={speaker?._id} speaker={speaker} />
           ))}
         </p>
       </CredenzaBody>

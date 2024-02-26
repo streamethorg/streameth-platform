@@ -38,7 +38,7 @@ export class EventController extends Controller {
   /**
    * @summary Update Event
    */
-  // @Security('jwt', ['org'])
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{eventId}')
   async editEvent(
@@ -47,6 +47,20 @@ export class EventController extends Controller {
   ): Promise<IStandardResponse<IEvent>> {
     const event = await this.eventService.update(eventId, body);
     return SendApiResponse('event udpated', event);
+  }
+
+  /**
+   * @summary Event importer
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Put('/import/{eventId}')
+  async evenImporter(
+    @Path() eventId: string,
+    @Body() organizationId: OrgIdDto,
+  ): Promise<IStandardResponse<void>> {
+    await this.eventService.eventImport(eventId);
+    return SendApiResponse('syncing..');
   }
 
   @SuccessResponse('200')

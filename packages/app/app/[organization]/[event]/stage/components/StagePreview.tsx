@@ -21,7 +21,7 @@ export default function StagePreview({
     <Link
       key={stage._id}
       href={`/${organization}/${event}/stage/${stage._id}`}>
-      <Card className="w-full max-w-[350px]">
+      <Card className="w-full max-w-[350px] rounded-xl">
         <Thumbnail imageUrl={eventCover} />
         <CardHeader className="bg-transparent">
           <p className="lowercase text-lg text-white font-normal">

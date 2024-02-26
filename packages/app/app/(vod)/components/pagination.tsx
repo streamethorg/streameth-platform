@@ -1,10 +1,7 @@
 'use client'
 import { IPagination } from '@/lib/types'
 import useSearchParams from '@/lib/hooks/useSearchParams'
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-} from '@heroicons/react/24/outline'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const Pagination = (props: IPagination) => {
   const { handleTermChange, searchParams } = useSearchParams()
@@ -14,7 +11,7 @@ const Pagination = (props: IPagination) => {
     <div className="flex flex-row justify-center items-center">
       <div className="flex flex-row justify-center items-center">
         <button
-          className="p-2 rounded-full  hover:bg-gray-100"
+          className="p-2 rounded-full hover:bg-gray-100"
           onClick={() => {
             if (currentPage > 1) {
               handleTermChange([
@@ -25,13 +22,13 @@ const Pagination = (props: IPagination) => {
               ])
             }
           }}>
-          <ArrowLeftIcon className="h-6 w-6" />
+          <ArrowLeft size={24} />
         </button>
-        <div className="mx-2 ">
+        <div className="mx-2">
           {currentPage} of {props.totalPages}
         </div>
         <button
-          className="p-2 rounded-full  hover:bg-gray-100"
+          className="p-2 rounded-full hover:bg-gray-100"
           onClick={() => {
             if (currentPage < props.totalPages) {
               handleTermChange([
@@ -39,7 +36,7 @@ const Pagination = (props: IPagination) => {
               ])
             }
           }}>
-          <ArrowRightIcon className="h-6 w-6" />
+          <ArrowRight size={24} />
         </button>
       </div>
     </div>

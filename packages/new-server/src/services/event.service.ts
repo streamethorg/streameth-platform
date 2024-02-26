@@ -1,13 +1,15 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IEvent } from '@interfaces/event.interface';
-import { StateType } from '@interfaces/state.interface';
+import { StateStatus, StateType } from '@interfaces/state.interface';
 import Events from '@models/event.model';
+import StateService from './state.service';
 import State from '@models/state.model';
 
 export default class EventService {
   private path: string;
   private controller: BaseController<IEvent>;
+  private stateService = new StateService();
   constructor() {
     this.path = 'events';
     this.controller = new BaseController<IEvent>('db', Events);
@@ -28,14 +30,6 @@ export default class EventService {
 
   async update(eventId: string, data: IEvent): Promise<IEvent> {
     const event = await this.controller.store.update(eventId, data, data.name);
-    if (data.dataImporter[0].config.sheetId.length !== 0) {
-      await State.create({
-        eventId: event._id,
-        eventSlug: event.slug,
-        sheetType: data.dataImporter[0].type,
-        type: StateType.event,
-      });
-    }
     return event;
   }
 
@@ -70,5 +64,22 @@ export default class EventService {
   async deleteOne(eventId: string): Promise<void> {
     await this.get(eventId);
     return await this.controller.store.delete(eventId);
+  }
+
+  async eventImport(eventId: string): Promise<void> {
+    const findState = await this.stateService.findOne({ eventId: eventId });
+    if (!findState) {
+      let event = await this.get(eventId);
+      await State.create({
+        eventId: event._id,
+        eventSlug: event.slug,
+        sheetType: event.dataImporter[0].type,
+        type: StateType.event,
+      });
+    } else {
+      await this.stateService.update(findState._id.toString(), {
+        status: StateStatus.sync,
+      });
+    }
   }
 }

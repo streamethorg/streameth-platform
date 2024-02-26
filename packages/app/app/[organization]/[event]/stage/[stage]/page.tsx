@@ -44,8 +44,11 @@ export default async function Stage({ params }: EventPageProps) {
   }
 
   const sessionsData = await fetchAllSessions({ stageId: stage._id })
-  const currentSession = sessionsData.sessions[0]
+  const currentSession = sessionsData.sessions.find((s) => {
+    return s.start < Date.now() && s.end > Date.now()
+  })
 
+  console.log('currentSession', currentSession)
   return (
     <div className="bg-event flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] p-2 gap-2">
       <div className="flex flex-col w-full md:h-full z-40 md:w-full top-[54px] gap-2">
@@ -68,7 +71,7 @@ export default async function Stage({ params }: EventPageProps) {
           avatarUrl={event.logo}
           avatarFallback={event.name.slice(0, 1)}
           playerName={stage.name}
-          streamId={stage.streamSettings?.streamId}
+          playbackId={stream.playbackId}
           description={event.description}
         />
       </div>

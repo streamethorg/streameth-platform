@@ -37,18 +37,19 @@ class ImporterService {
           let eventData = await controller.eventService.get(
             state.eventId.toString(),
           );
-          let sheetId = eventData.dataImporter[0].config.sheetId
+          let sheetId = eventData.dataImporter[0].config.sheetId;
           let eventId = eventData._id.toString();
           await controller.generateSpeakers(sheetId, eventId);
           await controller.generateStages(sheetId, eventId);
           await controller.generateSessions({
             sheetId: sheetId,
             eventId: eventId.toString(),
+            eventSlug: eventData.slug,
             organizationId: eventData.organizationId.toString(),
             timezone: eventData.timezone,
           });
           await State.findByIdAndUpdate(state._id, {
-            status: StateStatus.imported,
+            status: StateStatus.completed,
           });
         }
         console.info('done importing........');
@@ -65,7 +66,7 @@ class ImporterService {
       try {
         let states = await State.find({
           type: StateType.event,
-          status: StateStatus.imported,
+          status: StateStatus.sync,
         });
         if (states.length === 0) return;
         for (const state of states) {
@@ -73,15 +74,19 @@ class ImporterService {
           let eventData = await controller.eventService.get(
             state.eventId.toString(),
           );
-          let sheetId = eventData.dataImporter[0].config.sheetId
+          let sheetId = eventData.dataImporter[0].config.sheetId;
           let eventId = eventData._id.toString();
           await controller.syncSpeakers(sheetId, eventId);
           await controller.syncStages(sheetId, eventId);
           await controller.syncSessions({
             sheetId: sheetId,
             eventId: eventId.toString(),
+            eventSlug: eventData.slug,
             organizationId: eventData.organizationId.toString(),
             timezone: eventData.timezone,
+          });
+          await State.findByIdAndUpdate(state._id, {
+            status: StateStatus.completed,
           });
         }
         console.info('done syncing........');
@@ -124,7 +129,7 @@ class ImporterService {
       {
         attempts: 0,
         backoff: 30000,
-        jobId: config.jobId,
+        jobId: `${config.jobId}-2`,
         repeat: { cron: '*/10 * * * *' },
       },
     );

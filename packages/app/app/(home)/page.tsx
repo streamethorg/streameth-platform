@@ -21,7 +21,10 @@ export default async function Home() {
     <>
       <HeroHeader />
       <Suspense fallback={<UpcomingLoader />}>
-        <UpcomingEvents date={new Date()} />
+        <UpcomingEvents
+          organizations={organizations}
+          date={new Date()}
+        />
       </Suspense>
       <div className="">
         <CardHeader className="px-0 lg:px-0">

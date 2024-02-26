@@ -135,17 +135,22 @@ const SessionContent = async ({
           <ReactHlsPlayer
             playbackId={parentStream?.playbackId ?? ''}
             selectedStreamSession={
-              selectedRecording ?? recordings?.[0].id
+              selectedRecording ?? recordings?.[0]?.id
             }
           />
           <RecordingSelect
+            selectedRecording={
+              selectedRecording ?? recordings?.[0]?.id
+            }
             streamRecordings={JSON.parse(JSON.stringify(recordings))}
           />
           <div className="flex flex-row w-full space-x-1 items-center justify-center">
             <TimeSetter label="Clip start" type="start" />
             <TimeSetter label="Clip end" type="end" />
             <CreateClipButton
-              selectedRecording={selectedRecording}
+              selectedRecording={
+                selectedRecording ?? recordings?.[0]?.id
+              }
               playbackId={parentStream?.playbackId ?? ''}
               session={session}
             />

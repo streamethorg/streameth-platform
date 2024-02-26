@@ -1,13 +1,13 @@
 import { fetchAllSessions } from '@/lib/data'
 import VideoCard from '@/components/misc/VideoCard'
 export default async function RelatedVideos({
-  event,
+  searchQuery,
 }: {
-  event: string
+  searchQuery: string
 }) {
   const videos = (
     await fetchAllSessions({
-      event: event,
+      searchQuery: searchQuery.slice(0, 4),
       onlyVideos: true,
       limit: 5,
     })

@@ -20,7 +20,7 @@ const NoSession = async ({
             No sessions yet
           </div>
           <div className="flex flex-row space-x-2">
-            <Link href={`studio/${organization}?eventId=${eventId}`}>
+            <Link href={`/studio/${organization}?eventId=${eventId}`}>
               <Button>Cancel</Button>
             </Link>
             <CreateSession
