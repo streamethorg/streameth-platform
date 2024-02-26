@@ -3,6 +3,7 @@ import { ISession } from '@interfaces/session.interface';
 import { createReadStream, createWriteStream } from 'fs';
 import https from 'https';
 import StateService from '@services/state.service';
+import EventService from '@services/event.service';
 
 // Utility function to introduce a delay
 function delay(ms: number): Promise<void> {
@@ -84,7 +85,20 @@ export async function uploadToYouTube(
   youtube: youtube_v3.Youtube,
   videoFilePath: string,
 ): Promise<void> {
+  const eventService = new EventService();
   const stateService = new StateService();
+
+  const events = await eventService.getAll();
+  const event = events.filter((event) => {
+    if (event.slug === session.eventSlug) {
+      return event;
+    }
+    return;
+  });
+
+  if (!event) {
+    throw new Error('Could not find event');
+  }
 
   try {
     const insertResponse = await youtube.videos.insert({
@@ -97,7 +111,7 @@ export async function uploadToYouTube(
           defaultAudioLanguage: 'en',
         },
         status: {
-          privacyStatus: 'private', // Change as needed
+          privacyStatus: event[0].unlisted ? 'unlisted' : 'public',
         },
       },
       media: {
@@ -111,6 +125,7 @@ export async function uploadToYouTube(
       type: 'video',
       sessionId: session._id,
       sessionSlug: session.slug,
+      eventSlug: event[0].slug,
     } as any);
 
     let processingStatus = 'processing';
@@ -141,11 +156,13 @@ export async function uploadToYouTube(
         stateService,
         state._id.toString(),
       );
-    } else {
-      await stateService.update(state._id.toString(), {
-        status: 'canceled',
-      } as any);
+      return;
     }
+
+    await stateService.update(state._id.toString(), {
+      status: 'canceled',
+    } as any);
+    return;
   } catch (error) {
     console.error('An error occurred:', error);
     return;

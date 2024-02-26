@@ -104,6 +104,7 @@ export class SessionController extends Controller {
         await downloadM3U8ToMP4(session.videoUrl, session.slug, './tmp');
       }
 
+      console.log('Uploading video...');
       await uploadToYouTube(session, youtube, videoFilePath);
 
       return SendApiResponse('session fetched', session);
