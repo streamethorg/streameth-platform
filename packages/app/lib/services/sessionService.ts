@@ -54,7 +54,7 @@ export const fetchSession = async ({
       const livepeerData = await LivepeerClient.asset.get(
         data.assetId
       )
-      data.videoUrl = livepeerData.asset?.playbackUrl
+      data.videoUrl = data.videoUrl ?? livepeerData.asset?.playbackUrl
     }
     return data
   } catch (e) {
