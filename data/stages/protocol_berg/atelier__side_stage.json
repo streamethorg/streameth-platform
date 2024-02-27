@@ -1,9 +1,0 @@
-{
-  "id": "atelier__side_stage",
-  "name": "Atelier - Side Stage",
-  "eventId": "protocol_berg",
-  "streamSettings": {
-    "streamId": "678c6374-3900-434e-8766-9d7139e0c643"
-  },
-  "order": 2
-}

@@ -1,4 +1,4 @@
-import SessionService from "../../../../new-server/src/services/session.service";
+import SessionService from "../../../../server/src/services/session.service";
 import startAITools from "../main";
 
 export async function callAITools() {
