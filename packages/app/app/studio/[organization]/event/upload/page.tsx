@@ -2,13 +2,14 @@
 
 import { getUrlAction } from '@/lib/actions/livepeer'
 import { useState, useCallback } from 'react'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import UploadVideoForm from './components/UploadVideoForm'
 import { useDropzone } from 'react-dropzone'
 import { FileUp } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
 import { getAssetAction } from '@/lib/actions/livepeer'
+import { studioPageParams } from '@/lib/types'
+import { createSessionAction } from '@/lib/actions/sessions'
 
 // TODO:
 // - Add a progress bar
@@ -49,7 +50,10 @@ const getProgress = async (assetId: string) => {
   return progress
 }
 
-const Upload = () => {
+const Upload = ({ params, searchParams }: studioPageParams) => {
+  const { eventId } = searchParams
+  const { organization } = params
+
   let assetId: string | undefined = undefined
   const [progress, setProgress] = useState<number>(0)
   const abortController = new AbortController()
@@ -74,6 +78,18 @@ const Upload = () => {
   const handleUpload = async (file: File) => {
     setSelectedFile(file)
 
+    await createSessionAction({
+      session: {
+        name: '',
+        description: '',
+        stageId: '',
+        eventId,
+        organizationId: organization,
+        speakers: [],
+        start: Date.now(),
+        end: Date.now(),
+      },
+    })
     const asset = await getUrlAction(file.name)
     if (!asset) throw new Error('Failed to obtain upload URL')
 
