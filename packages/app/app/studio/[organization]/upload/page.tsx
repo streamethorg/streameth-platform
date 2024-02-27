@@ -13,6 +13,7 @@ import { getAssetAction } from '@/lib/actions/livepeer'
 // TODO:
 // - Add a progress bar
 // - Disable drag and drop for phone
+// - State management
 
 const performUpload = async (
   url: string,
@@ -103,8 +104,6 @@ const Upload = () => {
         }
 
         setProgress(progress)
-        console.log('Progress:', progress)
-
         if (progress >= 100) {
           clearInterval(intervalId)
           console.log('Upload fully processed.')
@@ -120,46 +119,35 @@ const Upload = () => {
   }
 
   return (
-    <div className="flex flex-col p-4 w-full h-full">
-      <div className="flex justify-between items-center mb-20">
-        <h1>Studio</h1>
-        <div className="flex items-center">
-          <Link href={'/studio/user'}>
-            <div className="mx-3 w-10 h-10 bg-black rounded-full"></div>
-          </Link>
+    <div className="flex flex-col justify-center items-center p-4 w-full h-full">
+      {!selectedFile ? (
+        <div
+          {...getRootProps()}
+          className="flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 h-[550px] w-[700px]">
+          <FileUp className={'my-4'} size={65} />
+          <input
+            {...getInputProps()}
+            onChange={(event) => {
+              const file = event.target.files?.[0]
+              if (file) {
+                handleUpload(file)
+              }
+            }}
+          />
+          <p>Drag and drop videos to upload... Or just click here!</p>
         </div>
-      </div>
-      <div className="flex justify-center items-center">
-        {!selectedFile ? (
-          <div
-            {...getRootProps()}
-            className="flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 h-[550px] w-[700px]">
-            <FileUp className={'my-4'} size={65} />
-            <input
-              {...getInputProps()}
-              onChange={(event) => {
-                const file = event.target.files?.[0]
-                if (file) {
-                  handleUpload(file)
-                }
-              }}
-            />
-            <p>
-              Drag and drop videos to upload... Or just click here!
-            </p>
-          </div>
-        ) : (
-          <div className="flex flex-col justify-center items-center">
-            <UploadVideoForm />
-            <Progress value={progress} className="my-4" />
-            <Button
-              className="bg-red-300 hover:bg-red-500"
-              onClick={handleCancel}>
-              Cancel upload...
-            </Button>
-          </div>
-        )}
-      </div>
+      ) : (
+        <div className="flex flex-col justify-center items-center">
+          <UploadVideoForm />
+          <span className="mt-2 font-medium">{progress}%</span>
+          <Progress value={progress} className="mt-1 mb-4" />
+          <Button
+            className="bg-red-300 hover:bg-red-500"
+            onClick={handleCancel}>
+            Cancel upload...
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

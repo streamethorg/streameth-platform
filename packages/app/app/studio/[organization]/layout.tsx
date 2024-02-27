@@ -1,8 +1,14 @@
-import { studioPageParams } from '@/lib/types'
+import { Page, studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { fetchUserAction } from '@/lib/actions/users'
+import {
+  Video,
+  Film,
+  CalendarSearch,
+  UploadCloud,
+} from 'lucide-react'
 import CreateOrganization from '../(home)/components/CreateOrganizationForm'
 import SwitchOrganization from './components/SwitchOrganization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
@@ -31,21 +37,30 @@ const Layout = async ({
   }
   const userData = await fetchUserAction({})
 
-  const pages = [
+  const pages: Page[] = [
     {
       name: 'Videography',
       href: 'https://info.streameth.org/stream-eth-studio',
-      bgColor: 'bg-muted ',
+      bgColor: 'bg-muted',
+      icon: <Video size={21} />,
     },
     {
       name: 'Videos',
-      bgColor: 'bg-muted',
       href: `/studio/${params.organization}/library`,
+      bgColor: 'bg-muted',
+      icon: <Film size={21} />,
     },
     {
       name: 'Events',
-      bgColor: 'bg-muted',
       href: `/studio/${params.organization}`,
+      bgColor: 'bg-muted',
+      icon: <CalendarSearch size={21} />,
+    },
+    {
+      name: 'Upload',
+      href: `/studio/${params.organization}/upload`,
+      bgColor: 'bg-muted',
+      icon: <UploadCloud size={21} />,
     },
   ]
 
@@ -53,7 +68,7 @@ const Layout = async ({
   const pathname = headersList.get('next-url') || ''
 
   return (
-    <div className="w-screen h-screen ">
+    <div className="w-screen h-screen">
       <HomePageNavbar
         pages={pages}
         showSearchBar={false}
@@ -65,7 +80,7 @@ const Layout = async ({
           userData?.organizations,
           params.organization
         ) ? (
-          <div className="flex flex-col items-center h-screen justify-center">
+          <div className="flex flex-col justify-center items-center h-screen">
             You do not belong to this organization, switch
             organization or create a new one
             <div className="flex gap-5 mt-5">
@@ -78,7 +93,7 @@ const Layout = async ({
             </div>
           </div>
         ) : (
-          <div className="h-full w-full">{children}</div>
+          <div className="w-full h-full">{children}</div>
         )}
       </div>
     </div>

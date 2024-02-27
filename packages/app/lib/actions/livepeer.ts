@@ -14,7 +14,6 @@ export const getAssetAction = async (assetId: string) => {
       return null
     }
 
-    console.log(asset)
     return asset.asset?.status?.progress
   } catch (e) {
     console.error('Error fetching asset: ', assetId)
