@@ -54,7 +54,7 @@ const ChatBar = ({
   const slug = stageId
 
   useEffect(() => {
-    if (!account || loadingEns) {
+    if (!account || loadingEns || !fakeName) {
       return
     }
     const getOrCreateViewerToken = async () => {
@@ -70,10 +70,7 @@ const ChatBar = ({
           const expiry = new Date(payload.exp * 1000)
           if (expiry < new Date()) {
             sessionStorage.removeItem(SESSION_VIEWER_TOKEN_KEY)
-            const token = await createViewerToken(
-              slug,
-              fakeName ?? 'anonymous'
-            )
+            const token = await createViewerToken(slug, fakeName)
             setViewerToken(token)
             const jti = jwtDecode(token)?.jti
             jti && setViewerName(jti)
@@ -88,10 +85,7 @@ const ChatBar = ({
 
         setViewerToken(sessionToken)
       } else {
-        const token = await createViewerToken(
-          slug,
-          fakeName ?? 'anonymous'
-        )
+        const token = await createViewerToken(slug, fakeName)
         setViewerToken(token)
         const jti = jwtDecode(token)?.jti
         jti && setViewerName(jti)
@@ -216,14 +210,20 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
         {reverseMessages.map((message) => (
           <div
             key={message.timestamp}
-            className="flex items-center gap-2 p-2">
+            className={cn(
+              'flex items-center gap-2 p-2',
+              participantName === message.from?.identity
+                ? 'justify-end'
+                : 'justify-start'
+            )}>
             <Card className="flex flex-col  p-2">
-              <div className="flex items-center  gap-2">
+              <div className="flex items-center gap-2">
                 <div
                   className={cn(
                     'text-xs font-semibold',
-                    participantName === message.from?.identity &&
-                      'text-indigo-500'
+                    participantName === message.from?.identity
+                      ? 'text-black'
+                      : 'text-gray-500'
                   )}>
                   {formatIdentify(message.from?.identity)}
                   {participantName === message.from?.identity &&
