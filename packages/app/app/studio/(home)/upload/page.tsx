@@ -14,7 +14,6 @@ import { FileUp } from 'lucide-react'
 
 const performUpload = async (video: File, signal: AbortSignal) => {
   try {
-    console.log('Uploading file: ', video)
     const url = await getUrlAction(video.name)
 
     if (!url) throw new Error('Failed to obtain upload URL')
@@ -60,7 +59,6 @@ const Upload = () => {
   })
 
   const handleUpload = (file: File) => {
-    console.log('Handeling upload')
     setSelectedFile(file)
     performUpload(file, signal)
   }
@@ -90,7 +88,6 @@ const Upload = () => {
               {...getInputProps()}
               onChange={(event) => {
                 const file = event.target.files?.[0]
-                console.log('Being called...')
                 if (file) {
                   handleUpload(file)
                 }
@@ -103,7 +100,9 @@ const Upload = () => {
         ) : (
           <div className="flex flex-col justify-center items-center">
             <UploadVideoForm />
-            <Button className={'mt-3'} onClick={handleCancel}>
+            <Button
+              className="mt-3 bg-red-300 hover:bg-red-500"
+              onClick={handleCancel}>
               Cancel upload...
             </Button>
           </div>

@@ -24,10 +24,12 @@ import { Card, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import InfoHoverCard from '@/components/misc/InfoHoverCard'
 import { apiUrl } from '@/lib/utils/utils'
-import { getCookie } from '@/lib/actions/cookieConsent'
+import { getCookie, hasCookie } from '@/lib/actions/cookieConsent'
+import { fetchSession } from '@/lib/services/sessionService'
 
 export default function UploadVideoForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const [cookie, setCookie] = useState(false)
   const { address } = useAccount()
   const form = useForm<z.infer<typeof videoUploadSchema>>({
     resolver: zodResolver(videoUploadSchema),
@@ -39,6 +41,16 @@ export default function UploadVideoForm() {
     },
   })
 
+  useEffect(() => {
+    const fetchCookie = async () => {
+      const cookie = await hasCookie('google_token')
+      setCookie(cookie)
+    }
+
+    fetchCookie()
+    console.log(cookie)
+  }, [])
+
   async function onSubmit(values: z.infer<typeof videoUploadSchema>) {
     setIsLoading(true)
     if (!address) {
@@ -46,14 +58,16 @@ export default function UploadVideoForm() {
       return
     }
 
-    // TODO: Get session
-    const sessionId = '65d382e3ad51d4af4f44758b'
+    // TODO: Create and get session
+    const session = await fetchSession({
+      session: '65d382e3ad51d4af4f44758b',
+    })
     const googleToken = await getCookie('google_token')
 
     // TODO: It should first be uploaded to Livepeer before uploading to YouTube
     if (values.uploadYoutube === true && googleToken) {
       const response = await fetch(
-        `${apiUrl()}/sessions/upload/${sessionId}?googleToken=${
+        `${apiUrl()}/sessions/upload/${session?._id.toString()}?googleToken=${
           googleToken.value
         }`
       )
@@ -83,7 +97,9 @@ export default function UploadVideoForm() {
 
   return (
     <Card className="p-4 bg-gray-100">
-      <CardTitle>Fill in the information of the video</CardTitle>
+      <CardTitle className="my-2">
+        Fill in the information of the video
+      </CardTitle>
       <Form {...form}>
         <form
           onError={(errors) => {
@@ -120,6 +136,7 @@ export default function UploadVideoForm() {
           <FormField
             control={form.control}
             name="uploadYoutube"
+            disabled={cookie}
             render={({
               field: { onChange, onBlur, value, name, ref },
             }) => (
@@ -145,6 +162,7 @@ export default function UploadVideoForm() {
                     description={
                       'Linking your YouTube Channel to StreamETH enables automated video uploads, streamlining the content sharing process.'
                     }
+                    size={18}
                   />
                 </div>
               </FormItem>
@@ -174,7 +192,7 @@ export default function UploadVideoForm() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
-                Please wait
+                Please wait...
               </>
             ) : (
               'Add information to video...'
