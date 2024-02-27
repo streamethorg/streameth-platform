@@ -7,7 +7,7 @@
       "packages/app",
       "packages/tools/av-tools/utils",
       "packages/tools/ai-tools",
-      "packages/new-server",
+      "packages/server",
       "packages/importer"
     ]
   },
