@@ -20,7 +20,7 @@
     "importHelpers": true,
     "baseUrl": "./",
     "paths": {
-      "@server/*": ["../../new-server/src/*"],
+      "@server/*": ["../../server/src/*"],
       "@app/*": ["../../app/*"],
       "@avtools/*": ["../av-tools/utils/src/*"]
     }

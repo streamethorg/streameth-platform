@@ -32,10 +32,8 @@ export default function CreateOrganizationForm() {
     resolver: zodResolver(organizationSchema),
     defaultValues: {
       name: '',
-      description: '-',
-      url: '-',
       logo: '',
-      location: '-',
+      email: '',
     },
   })
 
@@ -76,6 +74,19 @@ export default function CreateOrganizationForm() {
               <FormLabel className="">Organization name</FormLabel>
               <FormControl>
                 <Input placeholder="name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="">Email</FormLabel>
+              <FormControl>
+                <Input placeholder="email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
