@@ -4,6 +4,7 @@ import {
   updateEvent,
   deleteEvent,
   fetchEvent,
+  syncEventImport,
 } from '@/lib/services/eventService'
 import { cookies } from 'next/headers'
 import { IExtendedEvent } from '../types'
@@ -16,7 +17,6 @@ export const createEventAction = async ({
 }: {
   event: IEvent
 }) => {
-
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
     throw new Error('No user session found')
@@ -121,4 +121,28 @@ export const signUp = async (
     console.error('Error appending data to Google Sheets:', error)
     return { message: 'Failed to sign up', success: false }
   }
+}
+
+export const syncEventImportAction = async ({
+  eventId,
+  organizationId,
+}: {
+  eventId: string
+  organizationId: string
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  const response = await syncEventImport({
+    eventId,
+    organizationId,
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error syncing event')
+  }
+  revalidatePath('/studio')
+  return response
 }
