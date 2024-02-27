@@ -137,20 +137,28 @@ const Upload = ({ params, searchParams }: studioPageParams) => {
   return (
     <div className="flex flex-col justify-center items-center p-4 w-full h-full">
       {!selectedFile ? (
-        <div
-          {...getRootProps()}
-          className="flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 h-[550px] w-[700px]">
-          <FileUp className={'my-4'} size={65} />
-          <input
-            {...getInputProps()}
-            onChange={(event) => {
-              const file = event.target.files?.[0]
-              if (file) {
-                handleUpload(file)
-              }
-            }}
-          />
-          <p>Drag and drop videos to upload... Or just click here!</p>
+        <div>
+          <p className="flex justify-center mb-3 text-xl">
+            You are about to upload to the event:&nbsp;
+            <span className="font-bold">{eventId}</span>
+          </p>
+          <div
+            {...getRootProps()}
+            className="flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 h-[550px] w-[700px]">
+            <FileUp className={'my-4'} size={65} />
+            <input
+              {...getInputProps()}
+              onChange={(event) => {
+                const file = event.target.files?.[0]
+                if (file) {
+                  handleUpload(file)
+                }
+              }}
+            />
+            <p>
+              Drag and drop videos to upload... Or just click here!
+            </p>
+          </div>
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center">

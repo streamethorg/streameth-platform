@@ -56,12 +56,12 @@ const Layout = async ({
       bgColor: 'bg-muted',
       icon: <CalendarSearch size={21} />,
     },
-    // {
-    //   name: 'Upload',
-    //   href: `/studio/${params.organization}/upload`,
-    //   bgColor: 'bg-muted',
-    //   icon: <UploadCloud size={21} />,
-    // },
+    {
+      name: 'Upload',
+      href: `/studio/${params.organization}/upload`,
+      bgColor: 'bg-muted',
+      icon: <UploadCloud size={21} />,
+    },
   ]
 
   const headersList = headers()
