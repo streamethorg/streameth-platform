@@ -2,8 +2,9 @@ import * as z from 'zod'
 
 export const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),  description: z.string(),
+    message: 'Username must be at least 2 characters.',
+  }),
+  description: z.string(),
   start: z.date(),
   end: z.date(),
   location: z.string(),
@@ -15,7 +16,7 @@ export const formSchema = z.object({
   archiveMode: z.boolean().optional(),
   website: z.string().optional(),
   timezone: z.string().min(1, 'timezone is required'),
-  accentColor: z.string().min(1, { message: "Lastname is required" }),
+  accentColor: z.string().min(1, { message: 'Lastname is required' }),
   unlisted: z.boolean().optional(),
   enableVideoDownloader: z.boolean().optional(),
 })
@@ -93,10 +94,6 @@ export const sessionSchema = z.object({
 
 export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  description: z.string().optional(),
-  url: z.string().optional(),
   logo: z.string().min(1, 'Logo is required'),
-  location: z.string().optional(),
-  accentColor: z.string().optional(),
-  slug: z.string().optional(),
+  email: z.string(),
 })
