@@ -141,15 +141,3 @@ export const deleteSessionAction = async ({
   }
   return response
 }
-
-export const getUrlAction = async (fileName: string) => {
-  try {
-    const asset = await livepeer.asset.create({
-      name: fileName,
-    })
-
-    return asset.object!.url
-  } catch (error) {
-    console.error('Error uploading video:', error)
-  }
-}

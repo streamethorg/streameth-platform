@@ -21,7 +21,7 @@ import ImageUpload from '@/components/misc/form/imageUpload'
 import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
 import { Card, CardTitle } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Switch } from '@/components/ui/switch'
 import InfoHoverCard from '@/components/misc/InfoHoverCard'
 import { apiUrl } from '@/lib/utils/utils'
 import { getCookie, hasCookie } from '@/lib/actions/cookieConsent'
@@ -48,7 +48,6 @@ export default function UploadVideoForm() {
     }
 
     fetchCookie()
-    console.log(cookie)
   }, [])
 
   async function onSubmit(values: z.infer<typeof videoUploadSchema>) {
@@ -96,7 +95,7 @@ export default function UploadVideoForm() {
     Object.keys(form.formState.dirtyFields).length === 0
 
   return (
-    <Card className="p-4 bg-gray-100">
+    <Card className="p-4 bg-gray-200">
       <CardTitle className="my-2">
         Fill in the information of the video
       </CardTitle>
@@ -136,26 +135,20 @@ export default function UploadVideoForm() {
           <FormField
             control={form.control}
             name="uploadYoutube"
-            disabled={cookie}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-            }) => (
+            render={({ field }) => (
               <FormItem>
                 <div className="flex items-center space-x-2">
                   <FormControl>
-                    <Checkbox
-                      id="uploadYoutube"
-                      name={name}
-                      ref={ref}
-                      checked={value}
-                      onCheckedChange={onChange}
-                      onBlur={onBlur}
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      disabled={!cookie}
                     />
                   </FormControl>
                   <FormLabel
                     htmlFor="uploadYoutube"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                    Upload to YouTube...
+                    Upload this video to YouTube...
                   </FormLabel>
                   <InfoHoverCard
                     title={'Upload this video to YouTube'}

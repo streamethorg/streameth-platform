@@ -1,23 +1,25 @@
 'use client'
 
-import { getUrlAction } from '@/lib/actions/sessions'
+import { getUrlAction } from '@/lib/actions/livepeer'
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import UploadVideoForm from './components/UploadVideoForm'
 import { useDropzone } from 'react-dropzone'
 import { FileUp } from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
+import { getAssetAction } from '@/lib/actions/livepeer'
 
 // TODO:
 // - Add a progress bar
 // - Disable drag and drop for phone
 
-const performUpload = async (video: File, signal: AbortSignal) => {
+const performUpload = async (
+  url: string,
+  video: File,
+  signal: AbortSignal
+) => {
   try {
-    const url = await getUrlAction(video.name)
-
-    if (!url) throw new Error('Failed to obtain upload URL')
-
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -31,14 +33,24 @@ const performUpload = async (video: File, signal: AbortSignal) => {
       throw new Error(`Upload failed with status: ${response.status}`)
     }
 
-    const data = await response.json()
-    console.log('Video uploaded successfully:', data)
+    console.log('Video uploaded successfully!')
   } catch (error) {
     console.error('Error during video upload:', error)
   }
 }
 
+const getProgress = async (assetId: string) => {
+  const progress = await getAssetAction(assetId)
+  if (!progress) {
+    return null // TODO: Handle this
+  }
+
+  return progress
+}
+
 const Upload = () => {
+  let assetId: string | undefined = undefined
+  const [progress, setProgress] = useState<number>(0)
   const abortController = new AbortController()
   const signal = abortController.signal
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -58,9 +70,48 @@ const Upload = () => {
     onDrop,
   })
 
-  const handleUpload = (file: File) => {
+  const handleUpload = async (file: File) => {
     setSelectedFile(file)
-    performUpload(file, signal)
+
+    const asset = await getUrlAction(file.name)
+    if (!asset) throw new Error('Failed to obtain upload URL')
+
+    assetId = asset.assetId
+    console.log('Uploading video...')
+
+    performUpload(asset.url, file, signal)
+      .then(() => {
+        console.log('Upload complete')
+      })
+      .catch((error) => {
+        console.error('Upload failed:', error)
+      })
+
+    const intervalId = setInterval(
+      async () => {
+        if (!assetId) {
+          console.log('No assetId available yet.')
+          return
+        }
+
+        console.log('Checking progress...')
+        const progress = await getProgress(assetId)
+
+        if (!progress) {
+          console.log('Something wrong with the progress...')
+          return
+        }
+
+        setProgress(progress)
+        console.log('Progress:', progress)
+
+        if (progress >= 100) {
+          clearInterval(intervalId)
+          console.log('Upload fully processed.')
+        }
+      },
+      1000 * 60 * 1 // Check every 1 minutes
+    )
   }
 
   const handleCancel = () => {
@@ -100,8 +151,9 @@ const Upload = () => {
         ) : (
           <div className="flex flex-col justify-center items-center">
             <UploadVideoForm />
+            <Progress value={progress} className="my-4" />
             <Button
-              className="mt-3 bg-red-300 hover:bg-red-500"
+              className="bg-red-300 hover:bg-red-500"
               onClick={handleCancel}>
               Cancel upload...
             </Button>
