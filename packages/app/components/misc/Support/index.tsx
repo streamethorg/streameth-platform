@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Bug } from 'lucide-react'
 import { createSupportTicketAction } from '@/lib/actions/support'
 import { supportSchema } from '@/lib/schema'
@@ -12,6 +12,7 @@ import { useSIWE } from 'connectkit'
 import SupportForm from './SupportForm'
 import { Button } from '../../ui/button'
 import { ConnectWalletButton } from '../ConnectWalletButton'
+import useClickOutside from '@/lib/hooks/useClickOutside'
 
 const Support = () => {
   const [isSupportClicked, setIsSupportClicked] = useState(false)
@@ -24,7 +25,7 @@ const Support = () => {
       message: '',
     },
   })
-
+  const supportRef = useRef(null)
   function onSubmit(values: z.infer<typeof supportSchema>) {
     setIsLoading(true)
     if (!isSignedIn) {
@@ -46,13 +47,15 @@ const Support = () => {
         setIsLoading(false)
       })
   }
-
+  useClickOutside(supportRef, () => setIsSupportClicked(false))
   const handleClose = () => {
     setMessageSent(false)
     setIsSupportClicked(false)
   }
   return (
-    <div className="fixed right-2 top-36 bg-white cursor-pointer p-4">
+    <div
+      ref={supportRef}
+      className="fixed right-2 top-36 bg-white cursor-pointer p-4">
       {!isSupportClicked && (
         <div onClick={() => setIsSupportClicked(true)}>
           <Bug />
