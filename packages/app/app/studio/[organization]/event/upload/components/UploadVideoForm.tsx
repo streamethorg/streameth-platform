@@ -27,7 +27,7 @@ import InfoHoverCard from '@/components/misc/interact/InfoHoverCard'
 import { getCookie, hasCookie } from '@/lib/actions/cookieConsent'
 import { fetchSession } from '@/lib/services/sessionService'
 
-export default function UploadVideoForm() {
+const UploadVideoForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [cookie, setCookie] = useState(false)
   const { address } = useAccount()
@@ -196,3 +196,5 @@ export default function UploadVideoForm() {
     </Card>
   )
 }
+
+export default UploadVideoForm
