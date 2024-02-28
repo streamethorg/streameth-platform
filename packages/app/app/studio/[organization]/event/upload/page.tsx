@@ -7,54 +7,84 @@ import UploadVideoForm from './components/UploadVideoForm'
 import { useDropzone } from 'react-dropzone'
 import { FileUp } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
-import { getAssetAction } from '@/lib/actions/livepeer'
 import { studioPageParams } from '@/lib/types'
-import { createSessionAction } from '@/lib/actions/sessions'
 
 // TODO:
 // - Add a progress bar
 // - Disable drag and drop for phone
 // - State management
 
-const performUpload = async (
-  url: string,
+// const performUpload = async (
+//   url: string,
+//   video: File,
+//   signal: AbortSignal
+// ) => {
+//   try {
+//     const response = await fetch(url, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': video.type,
+//       },
+//       body: video,
+//       signal,
+//     })
+//
+//     if (!response.ok) {
+//       throw new Error(`Upload failed with status: ${response.status}`)
+//     }
+//
+//     console.log('Video uploaded successfully!')
+//   } catch (error) {
+//     console.error('Error during video upload:', error)
+//   }
+// }
+
+const performUpload = (
   video: File,
-  signal: AbortSignal
+  signal: AbortSignal,
+  onProgress: (percentage: number) => void
 ) => {
-  try {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': video.type,
-      },
-      body: video,
-      signal,
-    })
+  const xhr = new XMLHttpRequest()
 
-    if (!response.ok) {
-      throw new Error(`Upload failed with status: ${response.status}`)
+  const formData = new FormData()
+  formData.append('file', video)
+
+  xhr.open('POST', '/api/upload-video', true)
+
+  signal.addEventListener('abort', () => {
+    xhr.abort()
+    console.error('Upload aborted')
+  })
+
+  xhr.upload.onprogress = (event) => {
+    if (event.lengthComputable) {
+      const percentage = Math.round(
+        (event.loaded / event.total) * 100
+      )
+      onProgress(percentage)
     }
-
-    console.log('Video uploaded successfully!')
-  } catch (error) {
-    console.error('Error during video upload:', error)
-  }
-}
-
-const getProgress = async (assetId: string) => {
-  const progress = await getAssetAction(assetId)
-  if (!progress) {
-    return null // TODO: Handle this
   }
 
-  return progress
+  xhr.onload = () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      console.log('Video uploaded successfully!')
+      return
+    }
+    console.error(`Upload failed with status: ${xhr.status}`)
+    console.error(xhr.response)
+  }
+
+  xhr.onerror = () => {
+    console.error('Error during video upload:', xhr.statusText)
+  }
+
+  xhr.send(formData)
 }
 
 const Upload = ({ params, searchParams }: studioPageParams) => {
   const { eventId } = searchParams
   const { organization } = params
 
-  let assetId: string | undefined = undefined
   const [progress, setProgress] = useState<number>(0)
   const abortController = new AbortController()
   const signal = abortController.signal
@@ -78,55 +108,46 @@ const Upload = ({ params, searchParams }: studioPageParams) => {
   const handleUpload = async (file: File) => {
     setSelectedFile(file)
 
-    await createSessionAction({
-      session: {
-        name: '',
-        description: '',
-        stageId: '',
-        eventId,
-        organizationId: organization,
-        speakers: [],
-        start: Date.now(),
-        end: Date.now(),
-      },
-    })
-    const asset = await getUrlAction(file.name)
-    if (!asset) throw new Error('Failed to obtain upload URL')
-
-    assetId = asset.assetId
+    // await createSessionAction({
+    //   session: {
+    //     name: '',
+    //     description: '',
+    //     stageId: '',
+    //     eventId,
+    //     organizationId: organization,
+    //     speakers: [],
+    //     start: Date.now(),
+    //     end: Date.now(),
+    //   },
+    // })
     console.log('Uploading video...')
+    performUpload(file, signal, (progress) => {
+      setProgress(progress)
+    })
 
-    performUpload(asset.url, file, signal)
-      .then(() => {
-        console.log('Upload complete')
-      })
-      .catch((error) => {
-        console.error('Upload failed:', error)
-      })
-
-    const intervalId = setInterval(
-      async () => {
-        if (!assetId) {
-          console.log('No assetId available yet.')
-          return
-        }
-
-        console.log('Checking progress...')
-        const progress = await getProgress(assetId)
-
-        if (!progress) {
-          console.log('Something wrong with the progress...')
-          return
-        }
-
-        setProgress(progress)
-        if (progress >= 100) {
-          clearInterval(intervalId)
-          console.log('Upload fully processed.')
-        }
-      },
-      1000 * 60 * 1 // Check every 1 minutes
-    )
+    // const intervalId = setInterval(
+    //   async () => {
+    //     if (!assetId) {
+    //       console.log('No assetId available yet.')
+    //       return
+    //     }
+    //
+    //     console.log('Checking progress...')
+    //     const progress = await getProgress(assetId)
+    //
+    //     if (!progress) {
+    //       console.log('Something wrong with the progress...')
+    //       return
+    //     }
+    //
+    //     setProgress(progress)
+    //     if (progress >= 100) {
+    //       clearInterval(intervalId)
+    //       console.log('Upload fully processed.')
+    //     }
+    //   },
+    //   1000 * 60 * 1 // Check every 1 minutes
+    // )
   }
 
   const handleCancel = () => {
