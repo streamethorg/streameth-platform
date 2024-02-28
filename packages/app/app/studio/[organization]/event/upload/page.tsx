@@ -1,60 +1,38 @@
 'use client'
 
-import { getUrlAction } from '@/lib/actions/livepeer'
-import { useState, useCallback } from 'react'
-import { Button } from '@/components/ui/button'
+import {
+  useState,
+  useCallback,
+  useRef,
+  type MutableRefObject,
+} from 'react'
 import UploadVideoForm from './components/UploadVideoForm'
 import { useDropzone } from 'react-dropzone'
 import { FileUp } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
 import { studioPageParams } from '@/lib/types'
+import Alert from '@/components/misc/interact/Alert'
 
 // TODO:
-// - Add a progress bar
 // - Disable drag and drop for phone
 // - State management
 
-// const performUpload = async (
-//   url: string,
-//   video: File,
-//   signal: AbortSignal
-// ) => {
-//   try {
-//     const response = await fetch(url, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': video.type,
-//       },
-//       body: video,
-//       signal,
-//     })
-//
-//     if (!response.ok) {
-//       throw new Error(`Upload failed with status: ${response.status}`)
-//     }
-//
-//     console.log('Video uploaded successfully!')
-//   } catch (error) {
-//     console.error('Error during video upload:', error)
-//   }
-// }
-
 const performUpload = (
   video: File,
-  signal: AbortSignal,
+  abortControllerRef: MutableRefObject<AbortController>,
   onProgress: (percentage: number) => void
 ) => {
-  const xhr = new XMLHttpRequest()
-
   const formData = new FormData()
   formData.append('file', video)
 
-  xhr.open('POST', '/api/upload-video', true)
+  const xhr = new XMLHttpRequest()
 
-  signal.addEventListener('abort', () => {
+  abortControllerRef.current.signal.addEventListener('abort', () => {
+    console.log('Aborting upload')
     xhr.abort()
-    console.error('Upload aborted')
   })
+
+  xhr.open('POST', '/api/upload-video', true)
 
   xhr.upload.onprogress = (event) => {
     if (event.lengthComputable) {
@@ -62,6 +40,7 @@ const performUpload = (
         (event.loaded / event.total) * 100
       )
       onProgress(percentage)
+      console.log(percentage)
     }
   }
 
@@ -86,8 +65,7 @@ const Upload = ({ params, searchParams }: studioPageParams) => {
   const { organization } = params
 
   const [progress, setProgress] = useState<number>(0)
-  const abortController = new AbortController()
-  const signal = abortController.signal
+  const abortControllerRef = useRef(new AbortController())
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -121,38 +99,17 @@ const Upload = ({ params, searchParams }: studioPageParams) => {
     //   },
     // })
     console.log('Uploading video...')
-    performUpload(file, signal, (progress) => {
-      setProgress(progress)
+    performUpload(file, abortControllerRef, (percentage) => {
+      setProgress(percentage)
     })
-
-    // const intervalId = setInterval(
-    //   async () => {
-    //     if (!assetId) {
-    //       console.log('No assetId available yet.')
-    //       return
-    //     }
-    //
-    //     console.log('Checking progress...')
-    //     const progress = await getProgress(assetId)
-    //
-    //     if (!progress) {
-    //       console.log('Something wrong with the progress...')
-    //       return
-    //     }
-    //
-    //     setProgress(progress)
-    //     if (progress >= 100) {
-    //       clearInterval(intervalId)
-    //       console.log('Upload fully processed.')
-    //     }
-    //   },
-    //   1000 * 60 * 1 // Check every 1 minutes
-    // )
   }
 
   const handleCancel = () => {
+    console.log('Canelling upload...')
     setSelectedFile(null)
-    abortController.abort()
+    setProgress(0)
+    abortControllerRef.current.abort()
+    abortControllerRef.current = new AbortController()
   }
 
   return (
@@ -186,11 +143,12 @@ const Upload = ({ params, searchParams }: studioPageParams) => {
           <UploadVideoForm />
           <span className="mt-2 font-medium">{progress}%</span>
           <Progress value={progress} className="mt-1 mb-4" />
-          <Button
-            className="bg-red-300 hover:bg-red-500"
-            onClick={handleCancel}>
-            Cancel upload...
-          </Button>
+          <Alert
+            triggerText="Cancel upload..."
+            dialogTitle="Are you sure to cancel the upload?"
+            dialogDescription=""
+            continueClick={() => handleCancel()}
+          />
         </div>
       )}
     </div>
