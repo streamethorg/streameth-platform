@@ -14,7 +14,7 @@ export const getAssetAction = async (assetId: string) => {
       return null
     }
 
-    return asset.asset?.status?.progress
+    return asset.asset?.status?.phase.toString()
   } catch (e) {
     console.error('Error fetching asset: ', assetId)
     return null

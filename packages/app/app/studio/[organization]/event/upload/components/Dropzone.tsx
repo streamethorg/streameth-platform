@@ -14,14 +14,18 @@ import { createSessionAction } from '@/lib/actions/sessions'
 import { type IExtendedEvent } from '@/lib/types'
 import { Progress } from '@/components/ui/progress'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+import { getUrlAction } from '@/lib/actions/livepeer'
+import type { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 
 const performUpload = (
   video: File,
+  url: string,
   abortControllerRef: MutableRefObject<AbortController>,
   onProgress: (percentage: number) => void
 ) => {
   const formData = new FormData()
   formData.append('file', video)
+  formData.append('url', url)
 
   const xhr = new XMLHttpRequest()
 
@@ -67,11 +71,11 @@ const Dropzone = ({
 
   const [progress, setProgress] = useState<number>(0)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [session, setSession] = useState<ISession | null>(null)
 
   const handleUpload = async (file: File) => {
-    setSelectedFile(file)
-
-    await createSessionAction({
+    const asset = await getUrlAction(file.name)
+    const session = await createSessionAction({
       session: {
         name: 'No Name',
         description: 'No Description',
@@ -79,14 +83,22 @@ const Dropzone = ({
         organizationId: event.organizationId,
         speakers: [],
         stageId: stages[0]._id!,
+        assetId: asset?.assetId,
         start: 0,
         end: 0,
       },
     })
+    setSelectedFile(file)
+    setSession(session)
     console.log('Uploading video...')
-    performUpload(file, abortControllerRef, (percentage) => {
-      setProgress(percentage)
-    })
+    performUpload(
+      file,
+      asset?.url!,
+      abortControllerRef,
+      (percentage) => {
+        setProgress(percentage)
+      }
+    )
   }
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -106,6 +118,7 @@ const Dropzone = ({
 
   const handleCancel = () => {
     setProgress(0)
+    setSession(null)
     setSelectedFile(null)
     abortControllerRef.current.abort()
     abortControllerRef.current = new AbortController()
@@ -113,7 +126,7 @@ const Dropzone = ({
 
   return (
     <div className="flex flex-col justify-center items-center p-4 w-full h-full">
-      {!selectedFile ? (
+      {!selectedFile && !session ? (
         <div>
           <p className="flex justify-center mb-3 text-xl">
             You are about to upload to the event:&nbsp;
@@ -139,15 +152,23 @@ const Dropzone = ({
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center">
-          <UploadVideoForm />
-          <span className="mt-2 font-medium">{progress}%</span>
-          <Progress value={progress} className="mt-1 mb-4" />
-          <Alert
-            triggerText="Cancel upload..."
-            dialogTitle="Are you sure to cancel the upload?"
-            dialogDescription=""
-            continueClick={() => handleCancel()}
-          />
+          {session && (
+            <UploadVideoForm session={session} progress={progress} />
+          )}
+          {progress < 100 ? (
+            <>
+              <span className="mt-2 font-medium">{progress}%</span>
+              <Progress value={progress} className="mt-1 mb-4" />
+              <Alert
+                triggerText="Cancel upload..."
+                dialogTitle="Are you sure to cancel the upload?"
+                dialogDescription=""
+                continueClick={() => handleCancel()}
+              />
+            </>
+          ) : (
+            <div className="mt-2">Finished upload</div> // TODO: Button to go to video
+          )}
         </div>
       )}
     </div>

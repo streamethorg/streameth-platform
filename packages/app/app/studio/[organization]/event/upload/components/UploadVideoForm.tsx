@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { sessionSchema, videoUploadSchema } from '@/lib/schema'
+import { videoUploadSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
@@ -26,8 +26,17 @@ import { apiUrl } from '@/lib/utils/utils'
 import InfoHoverCard from '@/components/misc/interact/InfoHoverCard'
 import { getCookie, hasCookie } from '@/lib/actions/cookieConsent'
 import { fetchSession } from '@/lib/services/sessionService'
+import { getAssetAction } from '@/lib/actions/livepeer'
+import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
+import { updateSessionAction } from '@/lib/actions/sessions'
 
-const UploadVideoForm = () => {
+const UploadVideoForm = ({
+  session,
+  progress,
+}: {
+  session: ISession
+  progress: number
+}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [cookie, setCookie] = useState(false)
   const { address } = useAccount()
@@ -50,49 +59,58 @@ const UploadVideoForm = () => {
     fetchCookie()
   }, [])
 
-  async function onSubmit(values: z.infer<typeof videoUploadSchema>) {
+  const onSubmit = (values: z.infer<typeof videoUploadSchema>) => {
     setIsLoading(true)
     if (!address) {
       toast.error('No wallet address found')
       return
     }
 
-    // TODO: Create and get session
-    const session = await fetchSession({
-      session: '65d382e3ad51d4af4f44758b',
+    updateSessionAction({
+      session: {
+        name: values.name,
+        description: values.description,
+        coverImage: values.coverImage,
+        _id: session._id!.toString(),
+        organizationId: session.organizationId,
+        eventId: session.eventId,
+        stageId: session.stageId,
+        start: session.start ?? Number(new Date()),
+        end: session.end ?? Number(new Date()),
+        speakers: session.speakers ?? [],
+      },
+      // TODO: How should I link a session to a video? Or should it create a new video?
     })
-    const googleToken = await getCookie('google_token')
+      .then(async () => {
+        toast.success('Video created')
+        const googleToken = await getCookie('google_token')
 
-    // TODO: It should first be uploaded to Livepeer before uploading to YouTube
-    if (values.uploadYoutube === true && googleToken) {
-      const response = await fetch(
-        `${apiUrl()}/sessions/upload/${session?._id.toString()}?googleToken=${
-          googleToken.value
-        }`
-      )
-      if (!response.ok) {
-        throw new Error(`Something went wrong ${response.status}`)
-      }
-      console.log('All good')
-    }
-
-    // TODO: How should I link a session to a video? Or should it create a new video?
-    // updateSession({ session: {...session, name: values.name }, authToken: '' })
-    //   .then(() => {
-    //     toast.success('Video created')
-    //   })
-    //   .catch(() => {
-    //     toast.error('Error uploading a video')
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false)
-    //   })
+        // TODO: It should first be uploaded to Livepeer before uploading to YouTube
+        if (values.uploadYoutube === true && googleToken) {
+          const response = await fetch(
+            `${apiUrl()}/sessions/upload/${session._id!.toString()}?googleToken=${
+              googleToken.value
+            }`
+          )
+          if (!response.ok) {
+            throw new Error(`Something went wrong ${response.status}`)
+          }
+          console.log('All good')
+        }
+      })
+      .catch(() => {
+        toast.error('Error uploading a video')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const isSubmitDisabled =
     form.formState.isSubmitting ||
     !form.formState.isValid ||
-    Object.keys(form.formState.dirtyFields).length === 0
+    Object.keys(form.formState.dirtyFields).length === 0 ||
+    progress < 100
 
   return (
     <Card className="p-4 bg-gray-200">
