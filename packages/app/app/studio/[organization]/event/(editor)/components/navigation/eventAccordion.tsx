@@ -31,7 +31,12 @@ import DatePicker from '@/components/misc/form/datePicker'
 import { generateTimezones } from '@/lib/utils/time'
 import { toast } from 'sonner'
 import { useCallback, useState } from 'react'
-import { updateEventAction } from '@/lib/actions/events'
+import MDEditor from '@uiw/react-md-editor'
+
+import {
+  syncEventImportAction,
+  updateEventAction,
+} from '@/lib/actions/events'
 import { IExtendedEvent } from '@/lib/types'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import DeleteEvent from '../DeleteEventButton'
@@ -40,6 +45,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
   const { handleTermChange, searchParams } = useSearchParams()
   const [isUpdatingEvent, setIsUpdatingEvent] =
     useState<boolean>(false)
+  const [isSyncingEvent, setIsSyncingEvent] = useState<boolean>(false)
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
@@ -83,6 +89,27 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
       })
   }
 
+  const handleEventSync = async () => {
+    setIsSyncingEvent(true)
+    const response = syncEventImportAction({
+      eventId: event._id,
+      organizationId: event.organizationId as string,
+    })
+      .then((response) => {
+        if (response) {
+          toast.success('Event synced')
+        } else {
+          toast.error('Error syncing event')
+        }
+      })
+      .catch(() => {
+        toast.error('Error syncing event')
+      })
+      .finally(() => {
+        setIsSyncingEvent(false)
+      })
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
@@ -122,9 +149,9 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                   <FormItem>
                     <FormLabel className="">Description</FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="a description"
-                        {...field}
+                      <MDEditor
+                        value={field.value}
+                        onChange={(a) => field.onChange(a)}
                       />
                     </FormControl>
                     <FormMessage />
@@ -351,7 +378,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
             <AccordionTrigger>Event CMS</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8">
               <span>
-                Import you speaker data and your schedule from one of
+                Import your speaker data and your schedule from one of
                 our supported data providers.
               </span>
               <FormField
@@ -370,12 +397,17 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                   </FormItem>
                 )}
               />
-              <Button
-                disabled={isUpdatingEvent}
-                type="submit"
-                className="ml-auto">
-                Save
-              </Button>
+              <div className="flex justify-between gap-5">
+                <Button disabled={isUpdatingEvent} type="submit">
+                  Save
+                </Button>
+                <Button
+                  onClick={handleEventSync}
+                  variant="secondary"
+                  disabled={isSyncingEvent}>
+                  Sync
+                </Button>
+              </div>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4" className="px-2">
