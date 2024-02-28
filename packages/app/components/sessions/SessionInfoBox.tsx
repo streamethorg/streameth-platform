@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
 import { IExtendedSpeaker } from '@/lib/types'
+import Markdown from 'react-markdown'
 // TODO LOADING STAT
 const SessionInfoBox = ({
   title,
