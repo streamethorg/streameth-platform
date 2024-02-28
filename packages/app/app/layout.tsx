@@ -8,6 +8,7 @@ import { TopNavbarContextProvider } from '@/lib/context/TopNavbarContext'
 import { generalMetadata } from '@/lib/utils/metadata'
 import { Toaster } from '@/components/ui/sonner'
 import CookieBanner from '@/components/misc/CookieBanner'
+import Support from '@/components/misc/Support'
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
@@ -36,7 +37,7 @@ export default function RootLayout({
               <ModalContextProvider>
                 <TopNavbarContextProvider>
                   {children}
-
+                  <Support />
                   <div className="fixed bottom-4 left-4 z-50 mr-4">
                     <CookieBanner />
                   </div>

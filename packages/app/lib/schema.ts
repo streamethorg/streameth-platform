@@ -97,3 +97,7 @@ export const organizationSchema = z.object({
   logo: z.string().min(1, 'Logo is required'),
   email: z.string(),
 })
+
+export const supportSchema = z.object({
+  message: z.string().min(1, 'Message is required'),
+})

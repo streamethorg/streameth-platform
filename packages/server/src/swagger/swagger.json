@@ -18,6 +18,9 @@
 					"name": {
 						"type": "string"
 					},
+					"email": {
+						"type": "string"
+					},
 					"description": {
 						"type": "string"
 					},
@@ -42,6 +45,7 @@
 				},
 				"required": [
 					"name",
+					"email",
 					"logo",
 					"walletAddress"
 				],
@@ -98,6 +102,71 @@
 					},
 					"data": {
 						"$ref": "#/components/schemas/IUser"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ISupport": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_ISupport_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/ISupport"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateSupportTicketDto": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_ISupport-Array_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/ISupport"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -1063,6 +1132,9 @@
 					"description": {
 						"type": "string"
 					},
+					"email": {
+						"type": "string"
+					},
 					"url": {
 						"type": "string"
 					},
@@ -1081,6 +1153,7 @@
 				},
 				"required": [
 					"name",
+					"email",
 					"logo",
 					"walletAddress"
 				],
@@ -1098,6 +1171,9 @@
 					"description": {
 						"type": "string"
 					},
+					"email": {
+						"type": "string"
+					},
 					"url": {
 						"type": "string"
 					},
@@ -1116,11 +1192,9 @@
 				},
 				"required": [
 					"name",
+					"email",
 					"logo",
-					"walletAddress",
-					"description",
-					"url",
-					"location"
+					"walletAddress"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1130,19 +1204,10 @@
 					"name": {
 						"type": "string"
 					},
-					"description": {
-						"type": "string"
-					},
-					"url": {
-						"type": "string"
-					},
 					"logo": {
 						"type": "string"
 					},
-					"location": {
-						"type": "string"
-					},
-					"accentColor": {
+					"email": {
 						"type": "string"
 					},
 					"walletAddress": {
@@ -1154,10 +1219,8 @@
 				},
 				"required": [
 					"name",
-					"description",
-					"url",
 					"logo",
-					"location",
+					"email",
 					"walletAddress",
 					"organizationId"
 				],
@@ -1930,6 +1993,64 @@
 						}
 					}
 				]
+			}
+		},
+		"/Tickets": {
+			"post": {
+				"operationId": "CreateTicket",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISupport_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Creates support ticket",
+				"tags": [
+					"Support"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateSupportTicketDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllTickets",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISupport-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all support tickets",
+				"tags": [
+					"Support"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/stages": {
@@ -2867,7 +2988,13 @@
 				"tags": [
 					"Event"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",

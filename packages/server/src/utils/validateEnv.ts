@@ -24,6 +24,8 @@ const validateEnv = () => {
     SPACES_KEY: str(),
     SPACES_SECRET: str(),
     LIVEPEER_WEBHOOK_SECRET: str(),
+    TELEGRAM_API_KEY: str(),
+    TELEGRAM_CHAT_ID: str(),
   });
 };
 
