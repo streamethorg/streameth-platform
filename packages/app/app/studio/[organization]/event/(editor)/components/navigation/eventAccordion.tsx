@@ -31,6 +31,8 @@ import DatePicker from '@/components/misc/form/datePicker'
 import { generateTimezones } from '@/lib/utils/time'
 import { toast } from 'sonner'
 import { useCallback, useState } from 'react'
+import MDEditor from '@uiw/react-md-editor'
+
 import {
   syncEventImportAction,
   updateEventAction,
@@ -147,9 +149,9 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                   <FormItem>
                     <FormLabel className="">Description</FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="a description"
-                        {...field}
+                      <MDEditor
+                        value={field.value}
+                        onChange={(a) => field.onChange(a)}
                       />
                     </FormControl>
                     <FormMessage />

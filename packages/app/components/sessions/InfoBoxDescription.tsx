@@ -4,6 +4,7 @@ import { CardContent } from '@/components/ui/card'
 import { ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react'
 import SpeakerIcon from '../speakers/speakerIcon'
 import { IExtendedSpeaker } from '@/lib/types'
+import MarkdownDisplay from '../misc/MarkdownDisplay'
 
 const InfoBoxDescription = ({
   description,
@@ -40,7 +41,7 @@ const InfoBoxDescription = ({
         className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
           isExpandable && !isOpened && 'max-h-10'
         }`}>
-        {description}
+        {description && <MarkdownDisplay content={description} />}
         <div className="flex flex-row mt-2 space-x-2 overflow-auto">
           {speakers &&
             speakers.map((speaker) => (
