@@ -28,10 +28,12 @@ import { getCookie, hasCookie } from '@/lib/actions/cookieConsent'
 import { fetchSession } from '@/lib/services/sessionService'
 import {
   getAssetAction,
+  getVideoPhaseAction,
   getVideoUrlAction,
 } from '@/lib/actions/livepeer'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { updateSessionAction } from '@/lib/actions/sessions'
+import { AssetPhase } from 'livepeer/dist/models/components'
 
 const UploadVideoForm = ({
   session,
@@ -71,12 +73,19 @@ const UploadVideoForm = ({
 
     const intervalId = setInterval(
       async () => {
-        const videoUrl = await getVideoUrlAction(session.assetId!)
-        if (!videoUrl) {
+        const phase: AssetPhase = (await getVideoPhaseAction(
+          session.assetId!
+        )) as AssetPhase
+        if (phase === AssetPhase.Processing) {
           console.log('videoUrl does not exist')
+          return
+        } else if (phase === AssetPhase.Failed) {
+          clearInterval(intervalId)
+          // TODO: Show that it failed
           return
         }
 
+        const videoUrl = await getVideoUrlAction(session.assetId!)
         updateSessionAction({
           session: {
             name: values.name,
