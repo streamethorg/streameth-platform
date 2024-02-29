@@ -94,9 +94,13 @@ export class SessionController extends Controller {
         auth: oAuthClient,
       });
 
-      if (!session.videoUrl) {
-        console.log('video Url does not exist');
-        return SendApiResponse('Video url does not exist', null, '500');
+      if (!session.assetId || !session.videoUrl) {
+        console.log('Asset Id or video Url does not exist');
+        return SendApiResponse(
+          'Asset Id or video Url does not exist',
+          null,
+          '500',
+        );
       }
 
       const videoFilePath = `./tmp/${session.slug}.mp4`;

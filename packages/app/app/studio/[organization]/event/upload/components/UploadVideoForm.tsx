@@ -26,7 +26,10 @@ import { apiUrl } from '@/lib/utils/utils'
 import InfoHoverCard from '@/components/misc/interact/InfoHoverCard'
 import { getCookie, hasCookie } from '@/lib/actions/cookieConsent'
 import { fetchSession } from '@/lib/services/sessionService'
-import { getAssetAction } from '@/lib/actions/livepeer'
+import {
+  getAssetAction,
+  getVideoUrlAction,
+} from '@/lib/actions/livepeer'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { updateSessionAction } from '@/lib/actions/sessions'
 
@@ -66,44 +69,61 @@ const UploadVideoForm = ({
       return
     }
 
-    updateSessionAction({
-      session: {
-        name: values.name,
-        description: values.description,
-        coverImage: values.coverImage,
-        _id: session._id!.toString(),
-        organizationId: session.organizationId,
-        eventId: session.eventId,
-        stageId: session.stageId,
-        start: session.start ?? Number(new Date()),
-        end: session.end ?? Number(new Date()),
-        speakers: session.speakers ?? [],
-      },
-      // TODO: How should I link a session to a video? Or should it create a new video?
-    })
-      .then(async () => {
-        toast.success('Video created')
-        const googleToken = await getCookie('google_token')
-
-        // TODO: It should first be uploaded to Livepeer before uploading to YouTube
-        if (values.uploadYoutube === true && googleToken) {
-          const response = await fetch(
-            `${apiUrl()}/sessions/upload/${session._id!.toString()}?googleToken=${
-              googleToken.value
-            }`
-          )
-          if (!response.ok) {
-            throw new Error(`Something went wrong ${response.status}`)
-          }
-          console.log('All good')
+    const intervalId = setInterval(
+      async () => {
+        const videoUrl = await getVideoUrlAction(session.assetId!)
+        if (!videoUrl) {
+          console.log('videoUrl does not exist')
+          return
         }
-      })
-      .catch(() => {
-        toast.error('Error uploading a video')
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+
+        updateSessionAction({
+          session: {
+            name: values.name,
+            description: values.description,
+            coverImage: values.coverImage,
+            _id: session._id!.toString(),
+            organizationId: session.organizationId,
+            eventId: session.eventId,
+            stageId: session.stageId,
+            start: session.start ?? Number(new Date()),
+            end: session.end ?? Number(new Date()),
+            speakers: session.speakers ?? [],
+            videoUrl: videoUrl!,
+          },
+        })
+          .then(async () => {
+            toast.success('Video updated...')
+            const googleToken = await getCookie('google_token')
+
+            if (
+              videoUrl &&
+              values.uploadYoutube === true &&
+              googleToken
+            ) {
+              const response = await fetch(
+                `${apiUrl()}/sessions/upload/${session._id!.toString()}?googleToken=${
+                  googleToken.value
+                }`
+              )
+              if (!response.ok) {
+                throw new Error(
+                  `Something went wrong ${response.status}`
+                )
+              }
+              console.log('All good')
+            }
+          })
+          .catch(() => {
+            toast.error('Error uploading a video')
+          })
+          .finally(() => {
+            setIsLoading(false)
+          })
+        clearInterval(intervalId)
+      },
+      1000 * 1 * 5 // 5 Seconds
+    )
   }
 
   const isSubmitDisabled =

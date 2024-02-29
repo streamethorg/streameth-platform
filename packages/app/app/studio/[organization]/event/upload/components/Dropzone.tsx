@@ -16,6 +16,8 @@ import { Progress } from '@/components/ui/progress'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { getUrlAction } from '@/lib/actions/livepeer'
 import type { ISession } from 'streameth-new-server/src/interfaces/session.interface'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 const performUpload = (
   video: File,
@@ -62,9 +64,11 @@ const performUpload = (
 
 const Dropzone = ({
   event,
+  organization,
   stages,
 }: {
   event: IExtendedEvent
+  organization: string
   stages: IStageModel[]
 }) => {
   const abortControllerRef = useRef(new AbortController())
@@ -124,6 +128,7 @@ const Dropzone = ({
     abortControllerRef.current = new AbortController()
   }
 
+  // TODO: Suspense?
   return (
     <div className="flex flex-col justify-center items-center p-4 w-full h-full">
       {!selectedFile && !session ? (
@@ -167,7 +172,17 @@ const Dropzone = ({
               />
             </>
           ) : (
-            <div className="mt-2">Finished upload</div> // TODO: Button to go to video
+            <>
+              {session && (
+                <>
+                  <span className="mx-4">Finished upload...</span>
+                  <Link
+                    href={`/studio/${organization}/library/${session._id?.toString()}/edit`}>
+                    <Button>Go to the video...</Button>
+                  </Link>
+                </>
+              )}
+            </>
           )}
         </div>
       )}

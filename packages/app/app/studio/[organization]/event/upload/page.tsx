@@ -10,6 +10,7 @@ import { fetchEventStages } from '@/lib/services/stageService'
 
 const Upload = async ({ params, searchParams }: studioPageParams) => {
   const { eventId } = searchParams
+  const { organization } = params
 
   const event = await fetchEvent({ eventId })
   if (!event) {
@@ -25,7 +26,11 @@ const Upload = async ({ params, searchParams }: studioPageParams) => {
 
   return (
     <div className="w-full h-full">
-      <Dropzone event={event!} stages={stages} />
+      <Dropzone
+        event={event}
+        organization={organization}
+        stages={stages}
+      />
     </div>
   )
 }

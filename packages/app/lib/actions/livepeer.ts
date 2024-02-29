@@ -6,7 +6,7 @@ const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
 })
 
-export const getAssetAction = async (assetId: string) => {
+export const getVideoPhaseAction = async (assetId: string) => {
   try {
     const asset = await livepeer.asset.get(assetId)
     if (asset.statusCode !== 200) {
@@ -15,6 +15,21 @@ export const getAssetAction = async (assetId: string) => {
     }
 
     return asset.asset?.status?.phase.toString()
+  } catch (e) {
+    console.error('Error fetching asset: ', assetId)
+    return null
+  }
+}
+
+export const getVideoUrlAction = async (assetId: string) => {
+  try {
+    const asset = await livepeer.asset.get(assetId)
+    if (asset.statusCode !== 200) {
+      console.error(asset.rawResponse)
+      return null
+    }
+
+    return asset.asset?.playbackUrl
   } catch (e) {
     console.error('Error fetching asset: ', assetId)
     return null
