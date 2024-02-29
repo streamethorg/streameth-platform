@@ -25,9 +25,7 @@ import { Switch } from '@/components/ui/switch'
 import { apiUrl } from '@/lib/utils/utils'
 import InfoHoverCard from '@/components/misc/interact/InfoHoverCard'
 import { getCookie, hasCookie } from '@/lib/actions/cookieConsent'
-import { fetchSession } from '@/lib/services/sessionService'
 import {
-  getAssetAction,
   getVideoPhaseAction,
   getVideoUrlAction,
 } from '@/lib/actions/livepeer'
