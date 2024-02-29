@@ -111,7 +111,6 @@ const UploadVideoForm = ({
                   `Something went wrong ${response.status}`
                 )
               }
-              console.log('All good')
             }
           })
           .catch(() => {
@@ -119,6 +118,7 @@ const UploadVideoForm = ({
           })
           .finally(() => {
             setIsLoading(false)
+            // TODO: Should redirect to the video
           })
         clearInterval(intervalId)
       },

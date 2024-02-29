@@ -91,13 +91,13 @@ export async function uploadToYouTube(
 
   const events = await eventService.getAll();
   const event = events.filter((event) => {
-    if (event.slug === session.eventSlug) {
+    if (event._id.toString() === session.eventId.toString()) {
       return event;
     }
     return;
   });
 
-  if (!event) {
+  if (!event || !event[0]) {
     throw new Error('Could not find event');
   }
 
