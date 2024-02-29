@@ -10,7 +10,6 @@ import { notFound } from 'next/navigation'
 import { generalMetadata, stageMetadata } from '@/lib/utils/metadata'
 import { Metadata } from 'next'
 import { fetchChat } from '@/lib/services/chatService'
-
 import { Livepeer } from 'livepeer'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
 export default async function Stage({ params }: EventPageProps) {
@@ -48,10 +47,9 @@ export default async function Stage({ params }: EventPageProps) {
     return s.start < Date.now() && s.end > Date.now()
   })
 
-  console.log('currentSession', currentSession)
   return (
     <div className="bg-event flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] p-2 gap-2">
-      <div className="flex flex-col w-full md:h-full z-40 md:w-full top-[54px] gap-2">
+      <div className="flex flex-col w-full md:h-full md:overflow-auto z-40 md:w-full top-[54px] gap-2">
         <Player
           src={[
             {
