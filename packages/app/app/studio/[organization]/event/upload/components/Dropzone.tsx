@@ -13,7 +13,7 @@ const Dropzone = ({
     (acceptedFiles: File[]) => {
       if (acceptedFiles && acceptedFiles.length > 0) {
         const file = acceptedFiles[0]
-        setSelectedFile(file)
+        handleUpload(file)
       }
     },
     [setSelectedFile]

@@ -1,19 +1,16 @@
 'use client'
 
-import { useState, useCallback, useRef, Suspense } from 'react'
+import { useState, useRef, Suspense } from 'react'
 import UploadVideoForm from './UploadVideoForm'
-import Alert from '@/components/misc/interact/Alert'
 import { createSessionAction } from '@/lib/actions/sessions'
 import { type IExtendedEvent } from '@/lib/types'
-import { Progress } from '@/components/ui/progress'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { getUrlAction } from '@/lib/actions/livepeer'
 import type { ISession } from 'streameth-new-server/src/interfaces/session.interface'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import uploadVideo from '../lib/uploadVideo'
 import InstructionBanner from './InstructionBanner'
 import Dropzone from './Dropzone'
+import UploadProgress from './UploadProgress'
 
 const VideoPage = ({
   event,
@@ -82,33 +79,21 @@ const VideoPage = ({
         </div>
       ) : (
         <Suspense fallback={<div>Loading session data...</div>}>
-          <div className="flex flex-col justify-center items-center max-w-[28%]">
-            <InstructionBanner progress={progress} />
-            <UploadVideoForm
-              session={session!}
+          <div className="max-w-[28%]">
+            <div className="flex flex-col justify-center items-center">
+              <InstructionBanner progress={progress} />
+              <UploadVideoForm
+                session={session!}
+                organization={organization}
+                progress={progress}
+              />
+            </div>
+            <UploadProgress
               organization={organization}
+              session={session!}
               progress={progress}
+              handleCancel={handleCancel}
             />
-            {progress < 100 ? (
-              <>
-                <span className="mt-2 font-medium">{progress}%</span>
-                <Progress value={progress} className="mt-1 mb-4" />
-                <Alert
-                  triggerText="Cancel upload..."
-                  dialogTitle="Are you sure to cancel the upload?"
-                  dialogDescription=""
-                  continueClick={() => handleCancel()}
-                />
-              </>
-            ) : (
-              <>
-                <span className="mx-4">Finished upload...</span>
-                <Link
-                  href={`/studio/${organization}/library/${session!._id?.toString()}/edit`}>
-                  <Button>Go to the video...</Button>
-                </Link>
-              </>
-            )}
           </div>
         </Suspense>
       )}
