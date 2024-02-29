@@ -1,5 +1,5 @@
 import { studioPageParams } from '@/lib/types'
-import Dropzone from './components/Dropzone'
+import VideoPage from './components/VideoPage'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
 
@@ -26,7 +26,7 @@ const Upload = async ({ params, searchParams }: studioPageParams) => {
 
   return (
     <div className="w-full h-full">
-      <Dropzone
+      <VideoPage
         event={event}
         organization={organization}
         stages={stages}

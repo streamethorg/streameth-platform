@@ -32,14 +32,18 @@ import {
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import { AssetPhase } from 'livepeer/dist/models/components'
+import { useRouter } from 'next/navigation'
 
 const UploadVideoForm = ({
   session,
+  organization,
   progress,
 }: {
   session: ISession
+  organization: string
   progress: number
 }) => {
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [cookie, setCookie] = useState(false)
   const { address } = useAccount()
@@ -124,8 +128,10 @@ const UploadVideoForm = ({
             toast.error('Error uploading a video')
           })
           .finally(() => {
-            setIsLoading(false)
-            // TODO: Should redirect to the video
+            console.log('Redirecting...')
+            router.push(
+              `/studio/${organization}/library/${session._id?.toString()}/edit`
+            )
           })
         clearInterval(intervalId)
       },
