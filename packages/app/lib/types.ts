@@ -13,7 +13,7 @@ export interface Page {
   name: string
   href: string
   bgColor?: string
-  icon: React.JSX.Element
+  icon?: React.JSX.Element
 }
 export interface NavBarProps {
   pages: Page[]
