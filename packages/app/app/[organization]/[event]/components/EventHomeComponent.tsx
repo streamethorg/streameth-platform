@@ -23,11 +23,12 @@ import {
   isSameDate,
 } from '@/lib/utils/time'
 import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import { Suspense } from 'react'
 import banner from '@/public/streameth_twitter_banner.jpeg'
 import { IExtendedEvent } from '@/lib/types'
 import SignUp from '@/components/plugins/SignUp'
+import MDEditor from '@uiw/react-md-editor'
+import MarkdownDisplay from '@/components/misc/MarkdownDisplay'
 export default function EventHomeComponent({
   event,
   stages,
@@ -109,9 +110,7 @@ export default function EventHomeComponent({
             </div>
           </CardHeader>
           <CardContent className="pt-0 lg:pt-0 text-white">
-            <Markdown remarkPlugins={[remarkGfm]}>
-              {event.description}
-            </Markdown>
+            <MarkdownDisplay content={event.description} />
           </CardContent>
           <CardFooter className="flex flex-col p-4 space-y-2 w-full items-start">
             <CardTitle className=" text-white">Livestreams</CardTitle>
