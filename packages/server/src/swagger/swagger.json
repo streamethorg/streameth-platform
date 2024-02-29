@@ -115,6 +115,12 @@
 				"properties": {
 					"message": {
 						"type": "string"
+					},
+					"telegram": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -145,6 +151,12 @@
 			"CreateSupportTicketDto": {
 				"properties": {
 					"message": {
+						"type": "string"
+					},
+					"telegram": {
+						"type": "string"
+					},
+					"email": {
 						"type": "string"
 					}
 				},

@@ -83,6 +83,8 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "message": {"dataType":"string","required":true},
+            "telegram": {"dataType":"string"},
+            "email": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -101,6 +103,8 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "message": {"dataType":"string","required":true},
+            "telegram": {"dataType":"string"},
+            "email": {"dataType":"string"},
         },
         "additionalProperties": false,
     },

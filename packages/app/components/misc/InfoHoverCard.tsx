@@ -3,23 +3,36 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { Info } from 'lucide-react'
+import { Info, LucideProps } from 'lucide-react'
+import { ForwardRefExoticComponent } from 'react'
+
+type IconType = ForwardRefExoticComponent<LucideProps> & {
+  displayName?: string
+}
 
 const InfoHoverCard = ({
   title,
   description,
   size = 24,
   stroke = 2,
+  Icon = Info,
+  iconClassName,
 }: {
   title: string
   description: string
   size?: number
   stroke?: number
+  Icon?: IconType
+  iconClassName?: string
 }) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Info size={size} strokeWidth={stroke} />
+        <Icon
+          className={iconClassName}
+          size={size}
+          strokeWidth={stroke}
+        />
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
         <div className="flex justify-between space-x-4">

@@ -95,9 +95,11 @@ export const sessionSchema = z.object({
 export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   logo: z.string().min(1, 'Logo is required'),
-  email: z.string(),
+  email: z.string().email(),
 })
 
 export const supportSchema = z.object({
   message: z.string().min(1, 'Message is required'),
+  telegram: z.string().optional(),
+  email: z.string().optional(),
 })
