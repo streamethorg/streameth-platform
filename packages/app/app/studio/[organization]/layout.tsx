@@ -10,6 +10,7 @@ import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import { hasOrganization } from '@/lib/utils/utils'
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Link from 'next/link'
+import Navigation from './components/Navigation'
 export type variant =
   | 'default'
   | 'destructive'
@@ -78,7 +79,10 @@ const Layout = async ({
             </div>
           </div>
         ) : (
-          <div className="h-full w-full">{children}</div>
+          <div className="h-full w-full flex flex-row">
+            <Navigation organizationSlug={params.organization} />
+            <div className="w-full h-full">{children}</div>
+          </div>
         )}
       </div>
     </div>
