@@ -77,7 +77,7 @@ export class SessionController extends Controller {
    * @Summary Upload session to YouTube
    */
   @SuccessResponse('201')
-  @Get('upload/{sessionId}')
+  @Post('upload/{sessionId}')
   async uploadSessionToYouTube(
     @Path() sessionId: string,
     @Query() googleToken: string,
