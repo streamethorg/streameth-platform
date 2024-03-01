@@ -18,6 +18,9 @@
 					"name": {
 						"type": "string"
 					},
+					"email": {
+						"type": "string"
+					},
 					"description": {
 						"type": "string"
 					},
@@ -42,6 +45,7 @@
 				},
 				"required": [
 					"name",
+					"email",
 					"logo",
 					"walletAddress"
 				],
@@ -1063,6 +1067,9 @@
 					"description": {
 						"type": "string"
 					},
+					"email": {
+						"type": "string"
+					},
 					"url": {
 						"type": "string"
 					},
@@ -1081,6 +1088,7 @@
 				},
 				"required": [
 					"name",
+					"email",
 					"logo",
 					"walletAddress"
 				],
@@ -1098,6 +1106,9 @@
 					"description": {
 						"type": "string"
 					},
+					"email": {
+						"type": "string"
+					},
 					"url": {
 						"type": "string"
 					},
@@ -1116,11 +1127,9 @@
 				},
 				"required": [
 					"name",
+					"email",
 					"logo",
-					"walletAddress",
-					"description",
-					"url",
-					"location"
+					"walletAddress"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1130,19 +1139,10 @@
 					"name": {
 						"type": "string"
 					},
-					"description": {
-						"type": "string"
-					},
-					"url": {
-						"type": "string"
-					},
 					"logo": {
 						"type": "string"
 					},
-					"location": {
-						"type": "string"
-					},
-					"accentColor": {
+					"email": {
 						"type": "string"
 					},
 					"walletAddress": {
@@ -1154,10 +1154,8 @@
 				},
 				"required": [
 					"name",
-					"description",
-					"url",
 					"logo",
-					"location",
+					"email",
 					"walletAddress",
 					"organizationId"
 				],
@@ -2499,7 +2497,7 @@
 			}
 		},
 		"/sessions/upload/{sessionId}": {
-			"get": {
+			"post": {
 				"operationId": "UploadSessionToYouTube",
 				"responses": {
 					"201": {
@@ -2906,7 +2904,13 @@
 				"tags": [
 					"Event"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",

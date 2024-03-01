@@ -37,6 +37,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
+            "email": {"dataType":"string","required":true},
             "description": {"dataType":"string"},
             "url": {"dataType":"string"},
             "logo": {"dataType":"string","required":true},
@@ -381,7 +382,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"slug":{"dataType":"string"},"description":{"dataType":"string"},"url":{"dataType":"string"},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"walletAddress":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"slug":{"dataType":"string"},"description":{"dataType":"string"},"email":{"dataType":"string","required":true},"url":{"dataType":"string"},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"walletAddress":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -389,10 +390,11 @@ const models: TsoaRoute.Models = {
         "properties": {
             "name": {"dataType":"string","required":true},
             "slug": {"dataType":"string"},
-            "description": {"dataType":"string","required":true},
-            "url": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "email": {"dataType":"string","required":true},
+            "url": {"dataType":"string"},
             "logo": {"dataType":"string","required":true},
-            "location": {"dataType":"string","required":true},
+            "location": {"dataType":"string"},
             "accentColor": {"dataType":"string"},
             "walletAddress": {"dataType":"string","required":true},
         },
@@ -403,11 +405,8 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "url": {"dataType":"string","required":true},
             "logo": {"dataType":"string","required":true},
-            "location": {"dataType":"string","required":true},
-            "accentColor": {"dataType":"string"},
+            "email": {"dataType":"string","required":true},
             "walletAddress": {"dataType":"string","required":true},
             "organizationId": {"dataType":"string","required":true},
         },
@@ -1020,7 +1019,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/sessions/upload/:sessionId',
+        app.post('/sessions/upload/:sessionId',
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.uploadSessionToYouTube)),
 
@@ -1339,6 +1338,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/events/:eventId',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.editEvent)),
 
