@@ -41,18 +41,23 @@ const EventTable = async ({
             <TableCell className="font-medium w-[450px]">
               <div className="flex flex-row w-full space-x-4">
                 <Image
-                  className=""
+                  className="rounded-md"
                   alt="logo"
                   src={event.eventCover ?? ''}
                   width={100}
                   height={50}
                 />
-                <div className="flex flex-col">
-                  <p>{event.name}</p>
-                  <p className="text-xs text-muted-foreground max-h-8 overflow-clip">
-                    {event.description}
-                  </p>
-                </div>
+                <Link
+                  href={`/studio/${organization}/event?eventId=${event.slug}&settings=event`}>
+                  <div className="flex flex-col">
+                    <p className=" hover:text-underline">
+                      {event.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground max-h-8 overflow-clip">
+                      {event.description}
+                    </p>
+                  </div>
+                </Link>
               </div>
             </TableCell>
             <TableCell>
@@ -66,7 +71,7 @@ const EventTable = async ({
               <Tooltip>
                 <TooltipTrigger>
                   <Link
-                    className="h-full px-4 text-primary"
+                    className="h-full px-4"
                     href={`/studio/${organization}/event?eventId=${event.slug}&settings=event`}>
                     <FilePenLine />
                   </Link>
@@ -76,7 +81,7 @@ const EventTable = async ({
               <Tooltip>
                 <TooltipTrigger>
                   <Link
-                    className="h-full px-4 text-primary"
+                    className="h-full px-4 "
                     href={`/${organization}/${event.slug}`}>
                     <Eye />
                   </Link>

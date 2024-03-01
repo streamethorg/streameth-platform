@@ -105,6 +105,7 @@ export interface IExtendedOrganization
 }
 export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
+  createdAt: Date
 }
 export interface IStage extends IStageModel { }
 export interface IExtendedSpeaker

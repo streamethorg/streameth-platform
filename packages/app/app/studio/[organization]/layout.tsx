@@ -10,14 +10,6 @@ import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import { hasOrganization } from '@/lib/utils/utils'
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Link from 'next/link'
-import Navigation from './components/Navigation'
-export type variant =
-  | 'default'
-  | 'destructive'
-  | 'outline'
-  | 'secondary'
-  | 'ghost'
-  | 'link'
 
 const Layout = async ({
   children,
@@ -32,31 +24,13 @@ const Layout = async ({
   }
   const userData = await fetchUserAction({})
 
-  const pages = [
-    {
-      name: 'Videography',
-      href: 'https://info.streameth.org/stream-eth-studio',
-      bgColor: 'bg-muted ',
-    },
-    {
-      name: 'Videos',
-      bgColor: 'bg-muted',
-      href: `/studio/${params.organization}/library`,
-    },
-    {
-      name: 'Events',
-      bgColor: 'bg-muted',
-      href: `/studio/${params.organization}`,
-    },
-  ]
-
   const headersList = headers()
   const pathname = headersList.get('next-url') || ''
 
   return (
     <div className="w-screen h-screen ">
       <HomePageNavbar
-        pages={pages}
+        pages={[]}
         showSearchBar={false}
         currentOrganization={params.organization}
         organizations={userData?.organizations}
@@ -80,8 +54,9 @@ const Layout = async ({
           </div>
         ) : (
           <div className="h-full w-full flex flex-row">
-            <Navigation organizationSlug={params.organization} />
-            <div className="w-full h-full">{children}</div>
+            <div className="w-full h-full overflow-scroll">
+              {children}
+            </div>
           </div>
         )}
       </div>
