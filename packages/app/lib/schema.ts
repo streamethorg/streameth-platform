@@ -97,3 +97,11 @@ export const organizationSchema = z.object({
   logo: z.string().min(1, 'Logo is required'),
   email: z.string(),
 })
+
+export const videoUploadSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  coverImage: z.string(),
+  uploadYoutube: z.boolean(),
+  slug: z.string().optional(),
+})

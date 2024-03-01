@@ -8,7 +8,10 @@ import {
 } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { cookieConsent, getCookie } from '@/lib/actions/cookieConsent'
+import {
+  setCookie as setNextCookie,
+  hasCookie,
+} from '@/lib/actions/cookieConsent'
 
 const CookieBanner = () => {
   const [cookie, setCookie] = useState<boolean>(true)
@@ -17,7 +20,7 @@ const CookieBanner = () => {
 
   useEffect(() => {
     const checkCookieConsent = async () => {
-      const cookieValue = await getCookie('cookie_consent')
+      const cookieValue = await hasCookie('cookie_consent')
       setCookie(cookieValue)
     }
 
@@ -34,7 +37,7 @@ const CookieBanner = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault()
-    await cookieConsent()
+    await setNextCookie('cookie_consent', 'true')
     setShouldFadeOut(true)
 
     setTimeout(() => {
