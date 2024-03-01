@@ -64,6 +64,9 @@ const Support = () => {
       <CredenzaContent className="!z-50">
         <CredenzaTitle>Bug/Content Error Report</CredenzaTitle>
         <div>
+          {messageSent && (
+            <p className="font-bold pb-2">Message sent 🎉!!</p>
+          )}
           <p className="pb-2">
             Feel free to become a part of our{' '}
             <a
@@ -105,9 +108,10 @@ const Support = () => {
         </div>
       </CredenzaContent>
       <CredenzaTrigger>
-        <div className="bg-red-500 cursor-pointer p-1 mr-2 lg:ml-auto lg:p-2 rounded-lg">
+        <div className="bg-muted cursor-pointer p-1 mr-1 lg:ml-0 lg:p-2 rounded-lg">
           <InfoHoverCard
             Icon={Bug}
+            iconColor="red"
             iconClassName="w-4 h-4 lg:w-5 lg:h-5"
             title="Bug/Content error report"
             description="Directly send us a support ticket or report content error"

@@ -16,6 +16,7 @@ const InfoHoverCard = ({
   size = 24,
   stroke = 2,
   Icon = Info,
+  iconColor,
   iconClassName,
 }: {
   title: string
@@ -23,6 +24,7 @@ const InfoHoverCard = ({
   size?: number
   stroke?: number
   Icon?: IconType
+  iconColor?: string
   iconClassName?: string
 }) => {
   return (
@@ -30,6 +32,7 @@ const InfoHoverCard = ({
       <HoverCardTrigger asChild>
         <Icon
           className={iconClassName}
+          color={iconColor}
           size={size}
           strokeWidth={stroke}
         />
