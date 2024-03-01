@@ -159,7 +159,7 @@ export const hasOrganization = (
 export const validateEnv = (envVar: string) => {
   const value = process.env[envVar] || null
   if (!value) {
-    throw new Error(`No ${value} found`)
+    throw new Error(`No ${envVar} found`)
   }
   return value
 }

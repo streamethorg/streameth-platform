@@ -1,4 +1,4 @@
-"use server"
+'use server'
 import { createOrganization } from '@/lib/services/organizationService'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'

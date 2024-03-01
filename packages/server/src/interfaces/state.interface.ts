@@ -19,10 +19,12 @@ export enum StateType {
 export interface IState {
   _id?: string | Types.ObjectId;
   eventId?: string | Types.ObjectId;
+  sessionId?: string | Types.ObjectId;
   eventSlug?: string;
+  sessionSlug?: string;
   sheetType?: SheetType;
   status?: StateStatus;
   type?: StateType;
 }
 
-export interface IStateModel extends Omit<IState, '_id'>, Document {}
+export interface IStateModel extends Omit<IState, '_id'>, Document { }

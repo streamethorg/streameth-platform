@@ -33,8 +33,7 @@ class S3Service {
       Key: key,
       Body: file,
       ContentType: contentType,
-      ACL: 'public-read'
-    
+      ACL: 'public-read',
     }
 
     const command = new PutObjectCommand(params)

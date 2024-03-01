@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { Stream } from 'livepeer/dist/models/components'
 
- const livepeer = new Livepeer({
+const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
 })
 
@@ -152,7 +152,7 @@ export const deleteMultistreamTarget = async (
     streamId,
     targetId
   )
-  
+
   revalidatePath('/studio')
 
   return response

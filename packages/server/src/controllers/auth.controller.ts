@@ -14,6 +14,7 @@ import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { UserDto } from '@dtos/user/user.dto';
 import { AuthDto } from '@dtos/auth/auth.dto';
 import { IUser } from '@interfaces/user.interface';
+
 @Tags('Auth')
 @Route('auth')
 export class AuthController extends Controller {
@@ -33,7 +34,7 @@ export class AuthController extends Controller {
   async generateNonce(
     @Request() req: express.Request,
   ): Promise<IStandardResponse<string>> {
-    const nonce = await this.authService.generateNonce();
+    const nonce = this.authService.generateNonce();
     return SendApiResponse('nonce generated', nonce.nonce);
   }
 
@@ -43,6 +44,6 @@ export class AuthController extends Controller {
     @Body() token: AuthDto,
   ): Promise<IStandardResponse<boolean>> {
     const status = await this.authService.verifyToken(token);
-    return SendApiResponse('success', status);
+    return SendApiResponse('Success', status);
   }
 }
