@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers'
+
 const CheckAuthorization = () => {
   const userSession = cookies().get('user-session')
 
