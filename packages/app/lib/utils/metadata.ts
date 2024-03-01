@@ -115,18 +115,14 @@ export const watchMetadata = ({
   }
 }
 
-
 export const stageMetadata = ({
   event,
-  stage
+  stage,
 }: {
-  event: IExtendedEvent,
+  event: IExtendedEvent
   stage: IStageModel
-}):Metadata => {
-
-  const imageUrl = event.eventCover
-    ? event.eventCover
-    : BASE_IMAGE
+}): Metadata => {
+  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
 
   return {
     title: `${stage.name} | StreamETH`,
@@ -159,15 +155,12 @@ export const stageMetadata = ({
   }
 }
 
-
 export const eventMetadata = ({
   event,
 }: {
   event: IExtendedEvent
 }): Metadata => {
-  const imageUrl = event.eventCover
-    ? event.eventCover
-    : BASE_IMAGE
+  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
 
   return {
     title: `${event.name} | StreamETH`,
