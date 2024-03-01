@@ -115,7 +115,8 @@ const UploadVideoForm = ({
               const response = await fetch(
                 `${apiUrl()}/sessions/upload/${session._id!.toString()}?googleToken=${
                   googleToken.value
-                }`
+                }`,
+                { method: 'POST' }
               )
               if (!response.ok) {
                 throw new Error(
