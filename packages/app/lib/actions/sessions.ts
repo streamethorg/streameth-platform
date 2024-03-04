@@ -123,8 +123,10 @@ export const getSessionMetrics = async ({
 }
 
 export const deleteSessionAction = async ({
+  organizationId,
   sessionId,
 }: {
+  organizationId: string
   sessionId: string
 }) => {
   const authToken = cookies().get('user-session')?.value
@@ -134,10 +136,12 @@ export const deleteSessionAction = async ({
 
   const response = await deleteSession({
     sessionId,
+    organizationId,
     authToken,
   })
   if (!response) {
     throw new Error('Error updating session')
   }
+  revalidatePath('/studio')
   return response
 }

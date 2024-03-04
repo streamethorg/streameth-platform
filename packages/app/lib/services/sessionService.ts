@@ -98,9 +98,11 @@ export const updateSession = async ({
 
 export const deleteSession = async ({
   sessionId,
+  organizationId,
   authToken,
 }: {
   sessionId: string
+  organizationId: string
   authToken: string
 }) => {
   try {
@@ -112,15 +114,12 @@ export const deleteSession = async ({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
+        body: JSON.stringify({ organizationId }),
       }
     )
+
     if (!response.ok) {
-      console.log(
-        'error in deleteSession',
-        `${apiUrl()}/sessions/${sessionId}`,
-        await response.json()
-      )
-      throw 'Error deleting session'
+      throw 'Error deleting stage'
     }
     return await response.json()
   } catch (e) {

@@ -23,12 +23,14 @@ import {
 } from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
 import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const SessionAccordion = ({
   session,
 }: {
   session: IExtendedSession
 }) => {
+  const router = useRouter()
   const [isUpdatingSession, setIsUpdatingSession] =
     useState<boolean>(false)
   const form = useForm<z.infer<typeof sessionSchema>>({
@@ -76,11 +78,13 @@ const SessionAccordion = ({
       window.confirm('Are you sure you want to delete this session?')
     ) {
       deleteSessionAction({
+        organizationId: session.organizationId as string,
         sessionId: session._id!,
       })
         .then((response) => {
           if (response) {
             toast.success('Session deleted')
+            router.back()
           } else {
             toast.error('Error deleting session')
           }
