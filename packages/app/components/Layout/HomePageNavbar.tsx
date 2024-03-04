@@ -13,6 +13,7 @@ import { useSIWE } from 'connectkit'
 import useUserData from '@/lib/hooks/useUserData'
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
 import { IExtendedOrganization } from '@/lib/types'
+import { cn } from '@/lib/utils/utils'
 const getPages = (
   pages: Page[],
   isSignedIn: boolean,
@@ -43,7 +44,6 @@ const HomePageNavbar = ({
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
 }) => {
-  console.log('logoooooooo', logo)
   return (
     <Suspense fallback={null}>
       <MobileNavBar
@@ -97,7 +97,12 @@ const MobileNavBar = ({
           <SearchBar />
         </div>
       )}
-      <div className="flex relative flex-row items-center p-2 w-full h-full">
+      <div
+        className={cn(
+          'flex relative flex-row  items-center p-2 w-full h-full',
+          menuVisible && 'bg-background',
+          searchVisible && showSearchBar && 'bg-background'
+        )}>
         <Link href="/">
           <Image
             src={logo ?? '/logo.png'}
