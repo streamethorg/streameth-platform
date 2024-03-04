@@ -3,13 +3,6 @@ import { headers } from 'next/headers'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { fetchUserAction } from '@/lib/actions/users'
-import {
-  Video,
-  Film,
-  CalendarSearch,
-  UploadCloud,
-} from 'lucide-react'
-import CreateOrganization from '../(home)/components/CreateOrganizationForm'
 import SwitchOrganization from './components/SwitchOrganization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
 import CheckAuthorization from '@/components/authorization/CheckAuthorization'
@@ -33,10 +26,24 @@ const Layout = async ({
   const headersList = headers()
   const pathname = headersList.get('next-url') || ''
 
+  const pages = [
+    {
+      name: 'Upload Video',
+      href: `/studio/${params.organization}/upload`,
+      bgColor: 'border border-muted',
+    },
+    {
+      href: `/studio/${params.organization}/event/create`,
+      name: 'Create Event',
+      bgColor:
+        'bg-primary text-white hover:bg-primary hover:text-white',
+    },
+  ]
+
   return (
     <div className="w-screen h-screen">
       <HomePageNavbar
-        pages={[]}
+        pages={pages}
         showSearchBar={false}
         currentOrganization={params.organization}
         organizations={userData?.organizations}

@@ -17,7 +17,7 @@ const OrganizationPage = async ({
   return (
     <div className="h-full w-full flex flex-row">
       <Navigation organizationSlug={params.organization} />
-      <div className='h-full w-full'>
+      <div className="h-full w-full">
         {{
           events: (
             <EventList

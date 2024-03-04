@@ -2763,11 +2763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@livepeer/react@npm:^4.1.2":
-=======
 "@livepeer/react@npm:^4.1.8":
->>>>>>> origin/develop
   version: 4.1.8
   resolution: "@livepeer/react@npm:4.1.8"
   dependencies:
@@ -3745,8 +3741,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@radix-ui/react-alert-dialog@npm:^1.0.5":
   version: 1.0.5
   resolution: "@radix-ui/react-alert-dialog@npm:1.0.5"
@@ -3772,7 +3766,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> origin/develop
 "@radix-ui/react-arrow@npm:1.0.3":
   version: 1.0.3
   resolution: "@radix-ui/react-arrow@npm:1.0.3"
@@ -4016,11 +4009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@radix-ui/react-dialog@npm:^1.0.4, @radix-ui/react-dialog@npm:^1.0.5":
-=======
 "@radix-ui/react-dialog@npm:1.0.5, @radix-ui/react-dialog@npm:^1.0.4, @radix-ui/react-dialog@npm:^1.0.5":
->>>>>>> origin/develop
   version: 1.0.5
   resolution: "@radix-ui/react-dialog@npm:1.0.5"
   dependencies:
@@ -4684,8 +4673,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@radix-ui/react-switch@npm:^1.0.3":
   version: 1.0.3
   resolution: "@radix-ui/react-switch@npm:1.0.3"
@@ -4712,7 +4699,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> origin/develop
 "@radix-ui/react-tabs@npm:^1.0.4":
   version: 1.0.4
   resolution: "@radix-ui/react-tabs@npm:1.0.4"
@@ -5889,14 +5875,9 @@ __metadata:
     "@hookform/resolvers": "npm:^3.3.4"
     "@livekit/components-react": "npm:^1.5.3"
     "@livekit/components-styles": "npm:^1.0.9"
-<<<<<<< HEAD
-    "@livepeer/react": "npm:^4.1.2"
-    "@radix-ui/react-accordion": "npm:^1.1.2"
-=======
     "@livepeer/react": "npm:^4.1.8"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-alert-dialog": "npm:^1.0.5"
->>>>>>> origin/develop
     "@radix-ui/react-aspect-ratio": "npm:^1.0.3"
     "@radix-ui/react-avatar": "npm:^1.0.4"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
@@ -5912,10 +5893,7 @@ __metadata:
     "@radix-ui/react-select": "npm:^2.0.0"
     "@radix-ui/react-separator": "npm:^1.0.3"
     "@radix-ui/react-slot": "npm:^1.0.2"
-<<<<<<< HEAD
-=======
     "@radix-ui/react-switch": "npm:^1.0.3"
->>>>>>> origin/develop
     "@radix-ui/react-tabs": "npm:^1.0.4"
     "@radix-ui/react-tooltip": "npm:^1.0.7"
     "@tailwindcss/typography": "npm:^0.5.10"
@@ -5952,11 +5930,7 @@ __metadata:
     jwt-decode: "npm:^4.0.0"
     livekit-client: "npm:^1.15.11"
     livekit-server-sdk: "npm:^1.2.7"
-<<<<<<< HEAD
-    livepeer: "npm:^3.0.1"
-=======
     livepeer: "npm:^3.0.2"
->>>>>>> origin/develop
     lokijs: "npm:^1.5.12"
     lucide-react: "npm:^0.308.0"
     moment-timezone: "npm:^0.5.43"
@@ -15017,11 +14991,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"livepeer@npm:^3.0.1, livepeer@npm:^3.0.2":
-=======
 "livepeer@npm:^3.0.2":
->>>>>>> origin/develop
   version: 3.0.2
   resolution: "livepeer@npm:3.0.2"
   dependencies:

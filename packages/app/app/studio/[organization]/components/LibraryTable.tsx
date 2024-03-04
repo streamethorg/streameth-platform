@@ -31,7 +31,7 @@ const LibraryTable = async ({
   ).sessions
 
   return (
-    <Table className=" h-full w-full">
+    <Table className="">
       <TableCaption>A list of all your videos.</TableCaption>
       <TableHeader className="sticky top-0 bg-white z-50">
         <TableRow>
@@ -61,7 +61,7 @@ const LibraryTable = async ({
               <Tooltip>
                 <TooltipTrigger>
                   <Link
-                    className="h-full px-4"
+                    className=" px-4"
                     href={`/studio/${organization}/library/${item._id}`}>
                     <FilePenLine />
                   </Link>
