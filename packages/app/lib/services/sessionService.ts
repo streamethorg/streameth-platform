@@ -119,7 +119,7 @@ export const deleteSession = async ({
     )
 
     if (!response.ok) {
-      throw 'Error deleting stage'
+      throw 'Error deleting session'
     }
     return await response.json()
   } catch (e) {
