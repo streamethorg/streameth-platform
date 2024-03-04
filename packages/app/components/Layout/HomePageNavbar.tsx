@@ -43,10 +43,16 @@ const HomePageNavbar = ({
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
 }) => {
+  console.log('logoooooooo', logo)
   return (
     <Suspense fallback={null}>
-      <MobileNavBar pages={pages} showSearchBar={showSearchBar} />
+      <MobileNavBar
+        logo={logo}
+        pages={pages}
+        showSearchBar={showSearchBar}
+      />
       <PCNavBar
+        logo={logo}
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
@@ -57,9 +63,11 @@ const HomePageNavbar = ({
 }
 
 const MobileNavBar = ({
+  logo,
   pages,
   showSearchBar,
 }: {
+  logo?: string
   pages: Page[]
   showSearchBar: boolean
 }) => {
@@ -92,7 +100,7 @@ const MobileNavBar = ({
       <div className="flex relative flex-row items-center p-2 w-full h-full">
         <Link href="/">
           <Image
-            src="/logo.png"
+            src={logo ?? '/logo.png'}
             alt="Logo"
             height={36}
             width={36}
@@ -140,11 +148,13 @@ const MobileNavBar = ({
 }
 
 const PCNavBar = ({
+  logo,
   pages,
   showSearchBar,
   organizations,
   currentOrganization,
 }: {
+  logo?: string
   pages: Page[]
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
@@ -156,10 +166,10 @@ const PCNavBar = ({
     <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-opacity-90 md:hidden lg:flex z-[99] backdrop-blur-sm">
       <Link href="/">
         <Image
-          src="/logo_dark.png"
+          src={logo ?? '/logo_dark.png'}
           alt="Logo"
-          width={230}
-          height={30}
+          width={logo ? 50 : 230}
+          height={logo ? 50 : 30}
           className="hidden lg:block"
         />
       </Link>
