@@ -11068,7 +11068,7 @@ livekit-server-sdk@^1.2.7:
     long "^5.0.0"
     protobufjs "^7.2.4"
 
-livepeer@^3.0.1, livepeer@^3.0.2:
+livepeer@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/livepeer/-/livepeer-3.0.2.tgz#169daf9651db29c20ff387a0693884e245142c10"
   integrity sha512-+PiM4BKLFYK2JAO16rZPdrTUq5PF40KP7vztq44OafwLR3ousawqOm+Kr4/+V4WoCXdhve5BU/atyTRrcjvHvA==
