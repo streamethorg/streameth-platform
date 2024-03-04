@@ -13,7 +13,12 @@ export async function upload(data: FormData) {
   const buffer = Buffer.from(bytes)
 
   const s3 = new S3Service()
-  const result = await s3.uploadFile("bucketname", file.name, buffer, file.type)
+  const result = await s3.uploadFile(
+    'bucketname',
+    file.name,
+    buffer,
+    file.type
+  )
 
   return { success: true }
 }

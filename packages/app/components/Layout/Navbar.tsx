@@ -21,13 +21,10 @@ export default function Navbar({
   }
 
   return (
-    <div
-      className="flex z-50 absolute w-screen top-[56px] right-0  
-    lg:w-[unset] items-center text-center lg:relative lg:top-[unset] 
-    lg:items-center lg:h-full">
+    <div className="flex absolute right-0 z-50 items-center w-screen text-center lg:relative lg:items-center lg:h-full top-[56px] lg:w-[unset] lg:top-[unset]">
       <ul
         onClick={() => isMobile && setIsNavVisible?.(false)}
-        className="flex flex-col lg:flex-row w-full lg:space-x-2 lg:px-2">
+        className="flex flex-col w-full lg:flex-row lg:px-2 lg:space-x-2">
         {pages.map((item) => (
           <NavigationMenuItem key={item.name}>
             <Link href={item.href} legacyBehavior passHref>
@@ -36,6 +33,7 @@ export default function Navbar({
                   navigationMenuTriggerStyle() + ' ' + item.bgColor
                 }>
                 {item.name}
+                <div className="ml-2">{item.icon}</div>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>

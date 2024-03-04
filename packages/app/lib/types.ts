@@ -13,6 +13,7 @@ export interface Page {
   name: string
   href: string
   bgColor?: string
+  icon?: React.JSX.Element
 }
 export interface NavBarProps {
   pages: Page[]
@@ -83,6 +84,19 @@ export interface ClipsPageParams {
   }
 }
 
+export interface IGoogleAuth {
+  web: {
+    client_id: string
+    project_id: string
+    auth_uri: string
+    token_uri: string
+    auth_provider_x509_cert_url: string
+    client_secret: string
+    redirect_uris: string[]
+    javascript_origins: string[]
+  }
+}
+
 export interface IExtendedEvent extends IEvent {
   _id: string
 }
@@ -92,6 +106,7 @@ export interface IExtendedOrganization
 }
 export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
+  createdAt?: string
 }
 export interface IStage extends IStageModel {}
 export interface IExtendedSpeaker

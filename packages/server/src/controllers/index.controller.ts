@@ -1,7 +1,6 @@
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { Controller, Get, Route, Tags, Body, Post, Header } from 'tsoa';
 import startAITools from '@aitools/main';
-import crypto from 'crypto';
 import { validateWebhook } from '@utils/validateWebhook';
 
 @Tags('Index')
@@ -24,6 +23,7 @@ export class IndexController extends Controller {
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
 
+      console.log('Creating Summary for:', payload.payload.id);
       await startAITools(payload.payload.id);
       return SendApiResponse('OK');
     } catch (err) {

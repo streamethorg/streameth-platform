@@ -17,7 +17,7 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
-import InfoHoverCard from '../InfoHoverCard'
+import InfoHoverCard from '../interact/InfoHoverCard'
 
 const Support = () => {
   const [isLoading, setIsLoading] = useState(false)

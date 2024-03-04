@@ -19,9 +19,9 @@ export default class StateService {
     return await this.controller.store.update(stateId, data);
   }
 
-  async findOne(query: {}): Promise<IState> {
-    const findState = await this.controller.store.findOne(query);
-    if (!findState) throw new HttpException(404, ' state not found');
-    return findState;
+  async findOne(query:{}):Promise<IState>{
+    const findState = await this.controller.store.findOne(query)
+    if(!findState) throw new HttpException(404, ' state not found')
+    return findState
   }
 }
