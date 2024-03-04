@@ -14,7 +14,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { IExtendedEvent, IExtendedSession } from '@/lib/types'
+import { IExtendedSession } from '@/lib/types'
 import { fetchAllSessions } from '@/lib/data'
 import { fetchEvent } from '@/lib/services/eventService'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
@@ -56,8 +56,7 @@ const LibraryTable = async ({
                 </div>
               </div>
             </TableCell>
-            
-            <TableCell>{new Date(item.createdAt).toUTCString()}</TableCell>
+            {item.createdAt && <TableCell>{new Date(item.createdAt).toUTCString()}</TableCell> }
             <TableCell className="flex flex-row space-x-4">
               <Tooltip>
                 <TooltipTrigger>
