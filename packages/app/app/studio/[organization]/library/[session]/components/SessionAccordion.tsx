@@ -94,14 +94,6 @@ const SessionAccordion = ({
   return (
     <Form {...form}>
       <form
-        onError={(e) => {
-          e.preventDefault()
-          toast.error('Please fill out all fields')
-        }}
-        onInvalid={(e) => {
-          e.preventDefault()
-          toast.error('Please fill out all fields')
-        }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4">
         <FormField
