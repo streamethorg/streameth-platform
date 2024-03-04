@@ -16,7 +16,7 @@ export const formSchema = z.object({
   archiveMode: z.boolean().optional(),
   website: z.string().optional(),
   timezone: z.string().min(1, 'timezone is required'),
-  accentColor: z.string().min(1, { message: 'Lastname is required' }),
+  accentColor: z.string().min(1, { message: 'color is required' }),
   unlisted: z.boolean().optional(),
   enableVideoDownloader: z.boolean().optional(),
 })
