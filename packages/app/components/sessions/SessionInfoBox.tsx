@@ -1,5 +1,5 @@
-import ShareButton from '@/components/misc/ShareButton'
-import EmbedButton from '@/components/misc/EmbedButton'
+import ShareButton from '@/components/misc/interact/ShareButton'
+import EmbedButton from '@/components/misc/interact/EmbedButton'
 import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
 import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
@@ -46,9 +46,9 @@ const SessionInfoBox = ({
       className={`${
         inverted ? 'text-white rounded-lg  text-card-foreground ' : ''
       }`}>
-      <CardHeader className=" p-2 lg:p-2 flex w-full lg:items-center justify-between flex-col lg:flex-row">
-        <div className="md:flex flex-col">
-          <CardTitle className="flex flex-row space-x-2 items-center">
+      <CardHeader className="flex flex-col justify-between p-2 w-full lg:flex-row lg:items-center lg:p-2">
+        <div className="flex-col md:flex">
+          <CardTitle className="flex flex-row items-center space-x-2">
             {avatarUrl && (
               <Avatar>
                 <AvatarImage src={avatarUrl} alt={avatarFallback} />
@@ -67,7 +67,7 @@ const SessionInfoBox = ({
             </div>
           </CardDescription>
         </div>
-        <div className="flex flex-row space-x-1 my-0 ml-auto">
+        <div className="flex flex-row my-0 ml-auto space-x-1">
           <ShareButton />
           <EmbedButton
             streamId={streamId}

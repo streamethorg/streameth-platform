@@ -62,7 +62,6 @@ export default function CreateEventForm({
     },
   })
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsCreatingEvent(true)
     const response = createEventAction({
@@ -312,11 +311,10 @@ export default function CreateEventForm({
               )}
             />
             <div className="flex flex-row justify-between">
-              <Button variant={'destructive'}>
+              
                 <Link href={`/studio/${organization.slug}`} passHref>
-                  Cancel
+                 Cancel
                 </Link>
-              </Button>
               <Button
                 disabled={getFormSubmitStatus(form)}
                 className="ml-2"

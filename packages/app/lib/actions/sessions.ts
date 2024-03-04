@@ -124,8 +124,10 @@ export const getSessionMetrics = async ({
 
 export const deleteSessionAction = async ({
   sessionId,
+  organizationId,
 }: {
   sessionId: string
+  organizationId: string
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
@@ -134,6 +136,7 @@ export const deleteSessionAction = async ({
 
   const response = await deleteSession({
     sessionId,
+    organizationId,
     authToken,
   })
   if (!response) {

@@ -4,6 +4,7 @@ import { fetchSession } from '@/lib/services/sessionService'
 import { PlayerWithControls } from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { Livepeer } from 'livepeer'
+import { notFound } from 'next/navigation'
 
 const EditSession = async ({
   params,
@@ -16,16 +17,14 @@ const EditSession = async ({
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
   })
+  if (!session) {
+    return notFound()
+  }
 
   const video = (await livepeer.asset.get(session?.assetId as string))
     .asset
 
-  if (!session || !video)
-    return (
-      <div>
-        <h1>No session found</h1>
-      </div>
-    )
+  if (!video) return notFound()
 
   return (
     <div className="p-4 h-full">
@@ -51,7 +50,10 @@ const EditSession = async ({
           />{' '}
         </div>
         <div className="w-1/3 h-full overflow-auto relative">
-          <SessionAccordion session={session} />
+          <SessionAccordion
+            session={session}
+            organizationSlug={params.organization}
+          />
         </div>
       </div>
     </div>

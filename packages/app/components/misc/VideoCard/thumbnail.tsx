@@ -29,7 +29,7 @@ export default function Thumbnail({
   }, [imageUrl, fallBack])
 
   return (
-    <div className="aspect-video relative">
+    <div className="aspect-video relative w-full">
       <Image
         placeholder="blur"
         blurDataURL={fallbackImage}

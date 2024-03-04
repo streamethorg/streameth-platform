@@ -10,6 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
@@ -26,9 +27,12 @@ import { Loader2 } from 'lucide-react'
 
 const SessionAccordion = ({
   session,
+  organizationSlug,
 }: {
   session: IExtendedSession
+  organizationSlug: string
 }) => {
+  const router = useRouter()
   const [isUpdatingSession, setIsUpdatingSession] =
     useState<boolean>(false)
   const form = useForm<z.infer<typeof sessionSchema>>({
@@ -77,10 +81,12 @@ const SessionAccordion = ({
     ) {
       deleteSessionAction({
         sessionId: session._id!,
+        organizationId: session.organizationId as string,
       })
         .then((response) => {
           if (response) {
             toast.success('Session deleted')
+            router.push(`/studio/${organizationSlug}?settings=videos`)
           } else {
             toast.error('Error deleting session')
           }
@@ -94,14 +100,6 @@ const SessionAccordion = ({
   return (
     <Form {...form}>
       <form
-        onError={(e) => {
-          e.preventDefault()
-          toast.error('Please fill out all fields')
-        }}
-        onInvalid={(e) => {
-          e.preventDefault()
-          toast.error('Please fill out all fields')
-        }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4">
         <FormField
