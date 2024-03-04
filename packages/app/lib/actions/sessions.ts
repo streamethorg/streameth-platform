@@ -125,11 +125,9 @@ export const getSessionMetrics = async ({
 export const deleteSessionAction = async ({
   organizationId,
   sessionId,
-  organizationId,
 }: {
   organizationId: string
   sessionId: string
-  organizationId: string
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {

@@ -115,7 +115,6 @@ export const deleteSession = async ({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ organizationId }),
       }
     )
 
