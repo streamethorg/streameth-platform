@@ -31,9 +31,6 @@ const Upload = async ({ params, searchParams }: studioPageParams) => {
       <Card className="w-full max-w-4xl shadow-none border-secondary m-auto my-4 ">
         <CardHeader className="flex flex-row justify-between items-center">
           <CardTitle>Upload Video</CardTitle>
-          <Link href={`/studio/${organization}`}>
-            <Button variant={'link'}>Back</Button>
-          </Link>
         </CardHeader>
         <CardContent>
           <UploadVideoForm

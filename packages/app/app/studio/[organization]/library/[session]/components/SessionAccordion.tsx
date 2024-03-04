@@ -86,7 +86,7 @@ const SessionAccordion = ({
         .then((response) => {
           if (response) {
             toast.success('Session deleted')
-            router.push(`/studio/${organizationSlug}/library`)
+            router.push(`/studio/${organizationSlug}?settings=videos`)
           } else {
             toast.error('Error deleting session')
           }

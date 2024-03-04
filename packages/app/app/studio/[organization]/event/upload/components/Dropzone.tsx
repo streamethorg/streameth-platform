@@ -38,7 +38,6 @@ const Dropzone = ({
             setProgress(percentage)
           },
           async () => {
-            onChange(uploadUrl?.assetId)
             setAssetId(uploadUrl?.assetId as string)
           }
         )
@@ -53,6 +52,7 @@ const Dropzone = ({
         const playbackUrl = await getVideoUrlAction(assetId)
         if (playbackUrl) {
           setVideoUrl(playbackUrl)
+          onChange(assetId)
           setIsUploading(false)
           clearInterval(interval)
         }
@@ -69,7 +69,6 @@ const Dropzone = ({
     onDrop,
   })
 
-
   if (isUploading) {
     return (
       <div className="aspect-video flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 w-full h-full">
@@ -79,7 +78,6 @@ const Dropzone = ({
     )
   }
 
-  
   if (videoUrl) {
     return (
       <div className="aspect-video flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 w-full h-full">

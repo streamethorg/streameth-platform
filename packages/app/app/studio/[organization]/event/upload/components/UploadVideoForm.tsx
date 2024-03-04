@@ -21,7 +21,7 @@ import { useAccount } from 'wagmi'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import Dropzone from './Dropzone'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function UploadVideoForm({
   eventId,
@@ -68,7 +68,9 @@ export default function UploadVideoForm({
       .then((session) => {
         toast.success('Session created')
         setIsLoading(false)
-        router.push(`/studio/${organizationSlug}/library/${session._id}/edit`)
+        router.push(
+          `/studio/${organizationSlug}/library/${session._id}/edit`
+        )
       })
       .catch((e) => {
         console.log(e)
@@ -145,11 +147,11 @@ export default function UploadVideoForm({
               control={form.control}
               name="coverImage"
               render={({ field }) => (
-                <FormItem className="max-w-[150px]">
+                <FormItem className="w-full">
                   <FormLabel className="">Thumbnail</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      aspectRatio={1}
+                      aspectRatio={16/9}
                       path={`organizations/${eventId}
                     )}`}
                       {...field}
@@ -177,19 +179,32 @@ export default function UploadVideoForm({
             />
           </div>
         </div>
-        <Button
-          disabled={getFormSubmitStatus(form)}
-          type="submit"
-          className="mt-4 max-w-[150px] ml-auto">
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
-              wait...
-            </>
-          ) : (
-            'Create video'
-          )}
-        </Button>
+        <div className="mt-4 flex flex-row space-x-4 items-center justify-between w-full">
+          <Button
+            onClick={(e) => {
+              e.preventDefault()
+              router.push(
+                `/studio/${organizationSlug}?settings=video`
+              )
+            }}
+            variant="link"
+            className="text-black">
+            Cancel
+          </Button>
+          <Button
+            disabled={!(form.getValues("assetId") === "")}
+            type="submit"
+            className=" max-w-[150px] ml-auto">
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                Please wait...
+              </>
+            ) : (
+              'Create video'
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   )
