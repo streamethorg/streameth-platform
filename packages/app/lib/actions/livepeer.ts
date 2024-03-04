@@ -22,14 +22,18 @@ export const getVideoPhaseAction = async (assetId: string) => {
 }
 
 export const getVideoUrlAction = async (assetId: string) => {
+  console.log('assetId', assetId)
   try {
     const asset = await livepeer.asset.get(assetId)
     if (asset.statusCode !== 200) {
       console.error(asset.rawResponse)
       return null
     }
-
-    return asset.asset?.playbackUrl
+    console.log('asset', asset.asset)
+    if (!asset.asset?.playbackUrl) {
+      return null
+    }
+    return asset.asset.playbackUrl
   } catch (e) {
     console.error('Error fetching asset: ', assetId)
     return null
@@ -37,7 +41,7 @@ export const getVideoUrlAction = async (assetId: string) => {
 }
 
 interface UrlActionParams {
-  assetId?: string
+  assetId: string
   url: string
 }
 

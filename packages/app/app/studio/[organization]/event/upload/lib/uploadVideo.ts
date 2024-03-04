@@ -4,7 +4,8 @@ const uploadVideo = (
   video: File,
   url: string,
   abortControllerRef: MutableRefObject<AbortController>,
-  onProgress: (percentage: number) => void
+  onProgress: (percentage: number) => void,
+  onSucess: () => void
 ) => {
   const formData = new FormData()
   formData.append('file', video)
@@ -30,6 +31,7 @@ const uploadVideo = (
   xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 300) {
       console.log('Video uploaded successfully!')
+      onSucess()
       return
     }
     console.error(`Upload failed with status: ${xhr.status}`)
