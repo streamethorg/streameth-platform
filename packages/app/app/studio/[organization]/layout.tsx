@@ -3,26 +3,12 @@ import { headers } from 'next/headers'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { fetchUserAction } from '@/lib/actions/users'
-import {
-  Video,
-  Film,
-  CalendarSearch,
-  UploadCloud,
-} from 'lucide-react'
-import CreateOrganization from '../(home)/components/CreateOrganizationForm'
 import SwitchOrganization from './components/SwitchOrganization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
 import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import { hasOrganization } from '@/lib/utils/utils'
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Link from 'next/link'
-export type variant =
-  | 'default'
-  | 'destructive'
-  | 'outline'
-  | 'secondary'
-  | 'ghost'
-  | 'link'
 
 const Layout = async ({
   children,
@@ -37,35 +23,22 @@ const Layout = async ({
   }
   const userData = await fetchUserAction({})
 
-  const pages: Page[] = [
-    {
-      name: 'Videography',
-      href: 'https://info.streameth.org/stream-eth-studio',
-      bgColor: 'bg-muted',
-      icon: <Video size={21} />,
-    },
-    {
-      name: 'Videos',
-      href: `/studio/${params.organization}/library`,
-      bgColor: 'bg-muted',
-      icon: <Film size={21} />,
-    },
-    {
-      name: 'Events',
-      href: `/studio/${params.organization}`,
-      bgColor: 'bg-muted',
-      icon: <CalendarSearch size={21} />,
-    },
-    {
-      name: 'Upload',
-      href: `/studio/${params.organization}/upload`,
-      bgColor: 'bg-muted',
-      icon: <UploadCloud size={21} />,
-    },
-  ]
-
   const headersList = headers()
   const pathname = headersList.get('next-url') || ''
+
+  const pages = [
+    {
+      name: 'Upload Video',
+      href: `/studio/${params.organization}/upload`,
+      bgColor: 'border border-muted',
+    },
+    {
+      href: `/studio/${params.organization}/event/create`,
+      name: 'Create Event',
+      bgColor:
+        'bg-primary text-white hover:bg-primary hover:text-white',
+    },
+  ]
 
   return (
     <div className="w-screen h-screen">
@@ -93,7 +66,11 @@ const Layout = async ({
             </div>
           </div>
         ) : (
-          <div className="w-full h-full">{children}</div>
+          <div className="h-full w-full flex flex-row">
+            <div className="w-full h-full overflow-scroll">
+              {children}
+            </div>
+          </div>
         )}
       </div>
     </div>

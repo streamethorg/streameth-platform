@@ -11,7 +11,7 @@ const Upload = async ({ params }: studioPageParams) => {
   })
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-full">
       <UploadCloud size={65} />
       Please choose an event first before proceeding to the next
       step...
