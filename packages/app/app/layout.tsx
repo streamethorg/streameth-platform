@@ -7,8 +7,7 @@ import { LoadingContextProvider } from '@/lib/context/LoadingContext'
 import { TopNavbarContextProvider } from '@/lib/context/TopNavbarContext'
 import { generalMetadata } from '@/lib/utils/metadata'
 import { Toaster } from '@/components/ui/sonner'
-import CookieBanner from '@/components/misc/CookieBanner'
-import { TooltipProvider } from '@/components/ui/tooltip'
+import CookieBanner from '@/components/misc/interact/CookieBanner'
 
 const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],

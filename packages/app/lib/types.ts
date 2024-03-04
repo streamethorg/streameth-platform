@@ -13,6 +13,7 @@ export interface Page {
   name: string
   href: string
   bgColor?: string
+  icon?: React.JSX.Element
 }
 export interface NavBarProps {
   pages: Page[]
@@ -107,7 +108,6 @@ export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
   createdAt?: string
 }
-
 export interface IStage extends IStageModel {}
 export interface IExtendedSpeaker
   extends Omit<ISpeaker, 'organizationId'> {}

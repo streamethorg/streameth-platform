@@ -22,7 +22,7 @@ const StudioLayout = (props: { children: React.ReactNode }) => {
   ]
 
   return (
-    <div className="w-screen h-screen ">
+    <div className="w-screen h-screen">
       <HomePageNavbar pages={pages} showSearchBar={false} />
       <div className="top-[74px] flex flex-col h-[calc(100vh-74px)]">
         {props.children}

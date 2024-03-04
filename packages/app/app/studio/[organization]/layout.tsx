@@ -1,8 +1,14 @@
-import { studioPageParams } from '@/lib/types'
+import { Page, studioPageParams } from '@/lib/types'
 import { headers } from 'next/headers'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { fetchUserAction } from '@/lib/actions/users'
+import {
+  Video,
+  Film,
+  CalendarSearch,
+  UploadCloud,
+} from 'lucide-react'
 import CreateOrganization from '../(home)/components/CreateOrganizationForm'
 import SwitchOrganization from './components/SwitchOrganization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
@@ -28,7 +34,7 @@ const Layout = async ({
   const pathname = headersList.get('next-url') || ''
 
   return (
-    <div className="w-screen h-screen ">
+    <div className="w-screen h-screen">
       <HomePageNavbar
         pages={[]}
         showSearchBar={false}
@@ -40,7 +46,7 @@ const Layout = async ({
           userData?.organizations,
           params.organization
         ) ? (
-          <div className="flex flex-col items-center h-screen justify-center">
+          <div className="flex flex-col justify-center items-center h-screen">
             You do not belong to this organization, switch
             organization or create a new one
             <div className="flex gap-5 mt-5">

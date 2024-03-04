@@ -12,8 +12,8 @@ import {
   CredenzaHeader,
   CredenzaTitle,
   CredenzaTrigger,
-} from '../ui/crezenda'
-import { Input } from '../ui/input'
+} from '@/components/ui/crezenda'
+import { Input } from '@/components/ui/input'
 
 const ModalContent: React.FC<{
   playbackId?: string

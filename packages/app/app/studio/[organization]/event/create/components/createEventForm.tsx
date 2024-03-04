@@ -62,7 +62,6 @@ export default function CreateEventForm({
     },
   })
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsCreatingEvent(true)
     const response = createEventAction({
