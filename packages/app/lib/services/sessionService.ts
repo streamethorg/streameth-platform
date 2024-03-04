@@ -110,6 +110,7 @@ export const deleteSession = async ({
       `${apiUrl()}/sessions/${sessionId}`,
       {
         method: 'DELETE',
+        body: JSON.stringify({ organizationId }),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,

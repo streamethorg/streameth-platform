@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { IExtendedEvent } from '@/lib/types'
 import { updateEventAction } from '@/lib/actions/events'
 import { toast } from 'sonner'
-
+import { ArrowLeft } from 'lucide-react'
 const Navigation = ({
   event,
   stages,
@@ -65,9 +65,11 @@ const Navigation = ({
         </div>
       )}
       <div className=" flex flex-row justify-between items-center mt-auto p-2">
-        <Button className="" variant={'outline'}>
-          <Link href={`/studio/${organizationId}`}>Cancel</Link>
-        </Button>
+        <Link
+          href={`/studio/${organizationId}`}
+          className="flex flex-row p-2 hover:underline">
+          <ArrowLeft /> exit event editor
+        </Link>
       </div>
     </div>
   )

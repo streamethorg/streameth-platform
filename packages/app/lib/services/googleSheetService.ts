@@ -1,6 +1,4 @@
 import { google } from 'googleapis'
-import { OAuth2Client } from 'google-auth-library'
-
 class GoogleSheetService {
   sheetId: string
   connection: any
