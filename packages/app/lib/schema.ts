@@ -87,10 +87,21 @@ const speakerSchema = z.object({
 })
 
 export const sessionSchema = z.object({
-  name: z.string().min(1, { message: 'Required' }),
-  description: z.string().min(1, { message: 'Required' }),
+  name: z.string().min(1, { message: 'Name is required' }),
+  description: z
+    .string()
+    .min(1, { message: 'Description is required' }),
   coverImage: z.string().optional(),
-  assetId: z.string().optional(),
+  assetId: z.string(),
+})
+
+export const videoUploadSchema = z.object({
+  name: z.string().min(1, { message: 'Name is required' }),
+  description: z
+    .string()
+    .min(1, { message: 'Description is required' }),
+  coverImage: z.string().optional(),
+  assetId: z.string().min(1, { message: 'AssetId is required' }),
 })
 
 export const organizationSchema = z.object({

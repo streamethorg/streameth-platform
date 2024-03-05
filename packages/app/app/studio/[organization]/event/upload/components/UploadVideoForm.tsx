@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { sessionSchema } from '@/lib/schema'
+import { videoUploadSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import { createSessionAction } from '@/lib/actions/sessions'
 import { Loader2 } from 'lucide-react'
@@ -38,8 +38,8 @@ export default function UploadVideoForm({
   const { address } = useAccount()
   const router = useRouter()
 
-  const form = useForm<z.infer<typeof sessionSchema>>({
-    resolver: zodResolver(sessionSchema),
+  const form = useForm<z.infer<typeof videoUploadSchema>>({
+    resolver: zodResolver(videoUploadSchema),
     defaultValues: {
       name: '',
       description: '',
@@ -48,7 +48,7 @@ export default function UploadVideoForm({
     },
   })
 
-  function onSubmit(values: z.infer<typeof sessionSchema>) {
+  function onSubmit(values: z.infer<typeof videoUploadSchema>) {
     setIsLoading(true)
     if (!address) {
       toast.error('No wallet address found')
@@ -69,7 +69,7 @@ export default function UploadVideoForm({
         toast.success('Session created')
         setIsLoading(false)
         router.push(
-          `/studio/${organizationSlug}/library/${session._id}/edit`
+          `/studio/${organizationSlug}/library/${session._id}`
         )
       })
       .catch((e) => {
@@ -180,7 +180,7 @@ export default function UploadVideoForm({
           </div>
         </div>
         <Button
-          disabled={getFormSubmitStatus(form)}
+          disabled={isLoading || getFormSubmitStatus(form)}
           type="submit"
           className="mt-4 max-w-[150px] ml-auto">
           {isLoading ? (

@@ -32,14 +32,16 @@ const Library = async ({
     <div className="max-w-full h-full w-full mx-auto  p-4">
       <div className="w-full flex flex-row justify-between items-center pb-2">
         <CardTitle>Library</CardTitle>
-        <Button disabled>Upload video</Button>
+        <Link href={`/studio/${params.organization}/upload`}>
+          <Button>Upload video</Button>
+        </Link>
       </div>
       <div className="grid grid-cols-4 gap-4 h-[calc(100%-60px)] overflow-auto">
         {sessions?.map((session, index) => {
           return (
             <Link
               key={index}
-              href={`/studio/${params.organization}/library/${session._id}/edit`}>
+              href={`/studio/${params.organization}/library/${session._id}`}>
               <Card className="flex overflow-hidden flex-col border border-secondary">
                 <CardHeader className=" relative p-0 lg:p-0 h-full">
                   <Thumbnail imageUrl={session.coverImage} />
