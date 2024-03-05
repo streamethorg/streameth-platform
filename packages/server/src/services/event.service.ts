@@ -57,7 +57,7 @@ export default class EventService {
 
   async findAllOwnedEvents(organizationId: string): Promise<Array<IEvent>> {
     return await this.controller.store.findAll(
-      { organizationId: organizationId },
+      { organizationId: organizationId, unlisted: false },
       `${this.path}/${organizationId}`,
     );
   }
