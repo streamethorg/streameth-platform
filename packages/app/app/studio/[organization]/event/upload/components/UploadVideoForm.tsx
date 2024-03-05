@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { videoUploadSchema } from '@/lib/schema'
+import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import { createSessionAction } from '@/lib/actions/sessions'
 import { Loader2 } from 'lucide-react'
@@ -21,7 +21,7 @@ import { useAccount } from 'wagmi'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import Dropzone from './Dropzone'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function UploadVideoForm({
   eventId,
@@ -38,8 +38,8 @@ export default function UploadVideoForm({
   const { address } = useAccount()
   const router = useRouter()
 
-  const form = useForm<z.infer<typeof videoUploadSchema>>({
-    resolver: zodResolver(videoUploadSchema),
+  const form = useForm<z.infer<typeof sessionSchema>>({
+    resolver: zodResolver(sessionSchema),
     defaultValues: {
       name: '',
       description: '',
@@ -48,7 +48,7 @@ export default function UploadVideoForm({
     },
   })
 
-  function onSubmit(values: z.infer<typeof videoUploadSchema>) {
+  function onSubmit(values: z.infer<typeof sessionSchema>) {
     setIsLoading(true)
     if (!address) {
       toast.error('No wallet address found')
@@ -147,11 +147,11 @@ export default function UploadVideoForm({
               control={form.control}
               name="coverImage"
               render={({ field }) => (
-                <FormItem className="max-w-[150px]">
+                <FormItem className="w-full">
                   <FormLabel className="">Thumbnail</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      aspectRatio={1}
+                      aspectRatio={16 / 9}
                       path={`organizations/${eventId}
                     )}`}
                       {...field}
@@ -179,19 +179,37 @@ export default function UploadVideoForm({
             />
           </div>
         </div>
-        <Button
-          disabled={isLoading || getFormSubmitStatus(form)}
-          type="submit"
-          className="mt-4 max-w-[150px] ml-auto">
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
-              wait...
-            </>
-          ) : (
-            'Create video'
-          )}
-        </Button>
+
+        <div className="mt-4 flex flex-row space-x-4 items-center justify-between w-full">
+          <Button
+            onClick={(e) => {
+              e.preventDefault()
+              router.push(
+                `/studio/${organizationSlug}?settings=video`
+              )
+            }}
+            variant="link"
+            className="text-black">
+            Cancel
+          </Button>
+          <Button
+            disabled={
+              !form.getValues('assetId') ||
+              getFormSubmitStatus(form) ||
+              isLoading
+            }
+            type="submit"
+            className=" max-w-[150px] ml-auto">
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                Please wait...
+              </>
+            ) : (
+              'Create video'
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   )

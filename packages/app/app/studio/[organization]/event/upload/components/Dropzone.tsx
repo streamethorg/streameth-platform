@@ -38,7 +38,6 @@ const Dropzone = ({
             setProgress(percentage)
           },
           async () => {
-            onChange(uploadUrl?.assetId)
             setAssetId(uploadUrl?.assetId as string)
           }
         )
@@ -49,14 +48,16 @@ const Dropzone = ({
 
   useEffect(() => {
     if (assetId) {
-      const getPlaybackUrl = async () => {
+      const interval = setInterval(async () => {
         const playbackUrl = await getVideoUrlAction(assetId)
         if (playbackUrl) {
           setVideoUrl(playbackUrl)
+          onChange(assetId)
           setIsUploading(false)
+          clearInterval(interval)
         }
-      }
-      getPlaybackUrl()
+        console.log(playbackUrl)
+      }, 3000)
     }
   }, [isUploading, assetId])
 
@@ -71,7 +72,7 @@ const Dropzone = ({
   if (isUploading) {
     return (
       <div className="aspect-video flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 w-full h-full">
-        <p>Uploading...</p>
+        <p>Uploading. Please wait..</p>
         <Progress value={progress} />
       </div>
     )

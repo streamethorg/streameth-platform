@@ -27,4 +27,4 @@ export interface IState {
   type?: StateType;
 }
 
-export interface IStateModel extends Omit<IState, '_id'>, Document { }
+export interface IStateModel extends Omit<IState, '_id'>, Document {}

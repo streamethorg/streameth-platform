@@ -95,15 +95,6 @@ export const sessionSchema = z.object({
   assetId: z.string(),
 })
 
-export const videoUploadSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-  description: z
-    .string()
-    .min(1, { message: 'Description is required' }),
-  coverImage: z.string().optional(),
-  assetId: z.string().min(1, { message: 'AssetId is required' }),
-})
-
 export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   logo: z.string().min(1, 'Logo is required'),

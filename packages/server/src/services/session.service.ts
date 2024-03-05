@@ -14,9 +14,10 @@ export default class SessionServcie {
   }
 
   async create(data: ISession): Promise<ISession> {
+    const event = await Event.findById(data.eventId);
     return this.controller.store.create(
       data.name,
-      data,
+      { ...data, eventSlug: event.slug },
       `${this.path}/${data.eventId}`,
     );
   }
