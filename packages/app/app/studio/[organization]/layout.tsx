@@ -17,7 +17,7 @@ const Layout = async ({
   children: React.ReactNode
   params: studioPageParams['params']
 }) => {
-  const isAuthorized = CheckAuthorization()
+  const isAuthorized = await CheckAuthorization()
   if (!isAuthorized) {
     return <AuthorizationMessage />
   }

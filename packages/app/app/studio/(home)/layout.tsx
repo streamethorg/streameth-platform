@@ -2,8 +2,8 @@ import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
 
-const StudioLayout = (props: { children: React.ReactNode }) => {
-  const isAuthorized = CheckAuthorization()
+const StudioLayout = async (props: { children: React.ReactNode }) => {
+  const isAuthorized = await CheckAuthorization()
   if (!isAuthorized) {
     return <AuthorizationMessage />
   }
