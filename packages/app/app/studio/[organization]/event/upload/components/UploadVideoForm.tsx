@@ -179,7 +179,6 @@ export default function UploadVideoForm({
             />
           </div>
         </div>
-
         <div className="mt-4 flex flex-row space-x-4 items-center justify-between w-full">
           <Button
             onClick={(e) => {
