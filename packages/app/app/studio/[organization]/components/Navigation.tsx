@@ -54,7 +54,7 @@ const Navigation = async ({
         </Avatar>
 
         <h3 className="text-2xl font-bold">{organization.name}</h3>
-        <Badge variant={"outline"}>
+        <Badge variant={'outline'}>
           <Link href={`/archive?organization=${organization.slug}`}>
             Organization page
           </Link>

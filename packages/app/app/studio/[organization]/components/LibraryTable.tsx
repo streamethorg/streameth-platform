@@ -56,7 +56,11 @@ const LibraryTable = async ({
                 </div>
               </div>
             </TableCell>
-            {item.createdAt && <TableCell>{new Date(item.createdAt).toUTCString()}</TableCell> }
+            {item.createdAt && (
+              <TableCell>
+                {new Date(item.createdAt).toUTCString()}
+              </TableCell>
+            )}
             <TableCell className="flex flex-row space-x-4">
               <Tooltip>
                 <TooltipTrigger>

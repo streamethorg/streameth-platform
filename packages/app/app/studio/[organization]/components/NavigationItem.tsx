@@ -15,7 +15,9 @@ const NavigationItem = ({
   const { searchParams, handleTermChange } = useSearchParams()
 
   const param = searchParams?.get('settings')
-  const active = param === navigationPath || (!param && navigationPath === 'events')
+  const active =
+    param === navigationPath ||
+    (!param && navigationPath === 'events')
   return (
     <AccordionItem
       value={title}

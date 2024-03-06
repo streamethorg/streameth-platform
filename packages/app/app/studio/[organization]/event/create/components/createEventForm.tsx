@@ -311,10 +311,9 @@ export default function CreateEventForm({
               )}
             />
             <div className="flex flex-row justify-between">
-              
-                <Link href={`/studio/${organization.slug}`} passHref>
-                 Cancel
-                </Link>
+              <Link href={`/studio/${organization.slug}`} passHref>
+                Cancel
+              </Link>
               <Button
                 disabled={getFormSubmitStatus(form)}
                 className="ml-2"

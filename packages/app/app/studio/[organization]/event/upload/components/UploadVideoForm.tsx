@@ -151,7 +151,7 @@ export default function UploadVideoForm({
                   <FormLabel className="">Thumbnail</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      aspectRatio={16/9}
+                      aspectRatio={16 / 9}
                       path={`organizations/${eventId}
                     )}`}
                       {...field}
@@ -192,7 +192,7 @@ export default function UploadVideoForm({
             Cancel
           </Button>
           <Button
-            disabled={!(form.getValues("assetId") === "")}
+            disabled={!(form.getValues('assetId') === '')}
             type="submit"
             className=" max-w-[150px] ml-auto">
             {isLoading ? (

@@ -149,7 +149,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                   <FormItem>
                     <FormLabel className="">Description</FormLabel>
                     <FormControl>
-                      <MDEditor 
+                      <MDEditor
                         value={field.value}
                         onChange={(a) => field.onChange(a)}
                       />
