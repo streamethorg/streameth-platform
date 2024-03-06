@@ -123,9 +123,11 @@ export const getSessionMetrics = async ({
 }
 
 export const deleteSessionAction = async ({
+  organizationId,
   sessionId,
   organizationId,
 }: {
+  organizationId: string
   sessionId: string
   organizationId: string
 }) => {
@@ -142,5 +144,6 @@ export const deleteSessionAction = async ({
   if (!response) {
     throw new Error('Error updating session')
   }
+  revalidatePath('/studio')
   return response
 }

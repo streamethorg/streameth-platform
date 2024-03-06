@@ -49,7 +49,12 @@ export const getUrlAction = async (
   fileName: string
 ): Promise<UrlActionParams | null> => {
   try {
-    const asset = await livepeer.asset.create({ name: fileName })
+    const asset = await livepeer.asset.create({
+      name: fileName,
+      storage: {
+        ipfs: true,
+      },
+    })
 
     if (!asset.object) {
       return null

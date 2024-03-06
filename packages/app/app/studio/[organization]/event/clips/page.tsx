@@ -27,7 +27,6 @@ const EventClips = async ({
     selectedRecording,
     replaceAsset,
   } = searchParams
-
   if (!eventId || !stage) {
     return notFound()
   }
@@ -51,6 +50,7 @@ const EventClips = async ({
       return (
         <NoSession
           stageId={stage}
+          organizationSlug={params.organization}
           organization={event.organizationId as string}
           eventId={eventId}
         />

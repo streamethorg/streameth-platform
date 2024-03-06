@@ -69,7 +69,7 @@ export default function UploadVideoForm({
         toast.success('Session created')
         setIsLoading(false)
         router.push(
-          `/studio/${organizationSlug}/library/${session._id}/edit`
+          `/studio/${organizationSlug}/library/${session._id}`
         )
       })
       .catch((e) => {
@@ -192,7 +192,11 @@ export default function UploadVideoForm({
             Cancel
           </Button>
           <Button
-            disabled={!(form.getValues('assetId') === '')}
+            disabled={
+              !form.getValues('assetId') ||
+              getFormSubmitStatus(form) ||
+              isLoading
+            }
             type="submit"
             className=" max-w-[150px] ml-auto">
             {isLoading ? (

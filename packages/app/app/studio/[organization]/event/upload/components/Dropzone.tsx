@@ -72,7 +72,7 @@ const Dropzone = ({
   if (isUploading) {
     return (
       <div className="aspect-video flex flex-col justify-center items-center text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 w-full h-full">
-        <p>Uploading</p>
+        <p>Uploading. Please wait..</p>
         <Progress value={progress} />
       </div>
     )

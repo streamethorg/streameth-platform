@@ -7,17 +7,18 @@ const uploadVideo = (
   onProgress: (percentage: number) => void,
   onSucess: () => void
 ) => {
-  const formData = new FormData()
-  formData.append('file', video)
-  formData.append('url', url)
-
   const xhr = new XMLHttpRequest()
 
   abortControllerRef.current.signal.addEventListener('abort', () => {
     console.log('Aborting upload')
     xhr.abort()
   })
-  xhr.open('POST', '/api/upload-video', true)
+  xhr.open('PUT', url, true)
+  xhr.setRequestHeader(
+    'Authorization',
+    `Bearer ${process.env.NEXT_PUBLIC_LIVEPEER_API_KEY}`
+  )
+  xhr.setRequestHeader('Content-Type', video.type)
 
   xhr.upload.onprogress = (event) => {
     if (event.lengthComputable) {
@@ -42,7 +43,7 @@ const uploadVideo = (
     console.error('Error during video upload:', xhr.statusText)
   }
 
-  xhr.send(formData)
+  xhr.send(video)
 }
 
 export default uploadVideo
