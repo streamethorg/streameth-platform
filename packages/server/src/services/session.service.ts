@@ -56,7 +56,10 @@ export default class SessionServcie {
       filter = { ...filter, organizationId: org?._id };
     }
     if (d.onlyVideos) {
-      filter = { ...filter, playbackId: { $ne: '' } };
+      filter = {
+        ...filter,
+        $or: [{ playbackId: { $ne: '' } }, { assetId: { $ne: '' } }],
+      };
     }
     if (d.assetId != undefined) {
       filter = { ...filter, assetId: d.assetId };
