@@ -82,7 +82,6 @@ const SessionAccordion = ({
       deleteSessionAction({
         organizationId: session.organizationId as string,
         sessionId: session._id!,
-        organizationId: session.organizationId as string,
       })
         .then((response) => {
           if (response) {
