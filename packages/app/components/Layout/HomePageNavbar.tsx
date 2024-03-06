@@ -13,6 +13,7 @@ import { useSIWE } from 'connectkit'
 import useUserData from '@/lib/hooks/useUserData'
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
 import { IExtendedOrganization } from '@/lib/types'
+import { cn } from '@/lib/utils/utils'
 import Support from '../misc/Support'
 const getPages = (
   pages: Page[],
@@ -46,8 +47,13 @@ const HomePageNavbar = ({
 }) => {
   return (
     <Suspense fallback={null}>
-      <MobileNavBar pages={pages} showSearchBar={showSearchBar} />
+      <MobileNavBar
+        logo={logo}
+        pages={pages}
+        showSearchBar={showSearchBar}
+      />
       <PCNavBar
+        logo={logo}
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
@@ -58,9 +64,11 @@ const HomePageNavbar = ({
 }
 
 const MobileNavBar = ({
+  logo,
   pages,
   showSearchBar,
 }: {
+  logo?: string
   pages: Page[]
   showSearchBar: boolean
 }) => {
@@ -90,10 +98,15 @@ const MobileNavBar = ({
           <SearchBar />
         </div>
       )}
-      <div className="flex relative flex-row items-center p-2 w-full h-full">
+      <div
+        className={cn(
+          'flex relative flex-row  items-center p-2 w-full h-full',
+          menuVisible && 'bg-background',
+          searchVisible && showSearchBar && 'bg-background'
+        )}>
         <Link href="/">
           <Image
-            src="/logo.png"
+            src={logo ?? '/logo.png'}
             alt="Logo"
             height={36}
             width={36}
@@ -142,11 +155,13 @@ const MobileNavBar = ({
 }
 
 const PCNavBar = ({
+  logo,
   pages,
   showSearchBar,
   organizations,
   currentOrganization,
 }: {
+  logo?: string
   pages: Page[]
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
@@ -158,10 +173,10 @@ const PCNavBar = ({
     <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-opacity-90 md:hidden lg:flex z-[99] backdrop-blur-sm">
       <Link href="/">
         <Image
-          src="/logo_dark.png"
+          src={logo ?? '/logo_dark.png'}
           alt="Logo"
-          width={230}
-          height={30}
+          width={logo ? 50 : 230}
+          height={logo ? 50 : 30}
           className="hidden lg:block"
         />
       </Link>

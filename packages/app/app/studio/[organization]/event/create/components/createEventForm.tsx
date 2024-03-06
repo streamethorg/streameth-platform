@@ -63,6 +63,11 @@ export default function CreateEventForm({
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (values.start > values.end) {
+      toast.error('Start date must be before the end date')
+      setIsCreatingEvent(false)
+      return
+    }
     setIsCreatingEvent(true)
     const response = createEventAction({
       event: { ...values, organizationId: organization?._id },

@@ -49,7 +49,7 @@ const Navigation = ({
           {event.unlisted ? 'Publish' : 'Un-publish'}
         </Button>
       </div>
-      <EventAccordion event={event} />
+      <EventAccordion organizationId={organizationId} event={event} />
       <div className="flex flex-row p-2 justify-between items-center border-b border-border">
         <h3 className="text-2xl font-bold mt-4 mb-2">Livestreams</h3>
         {stages.length > 0 && <CreateStageForm event={event} />}
