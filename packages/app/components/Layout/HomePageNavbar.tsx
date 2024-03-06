@@ -14,6 +14,7 @@ import useUserData from '@/lib/hooks/useUserData'
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
 import { IExtendedOrganization } from '@/lib/types'
 import { cn } from '@/lib/utils/utils'
+import Support from '../misc/Support'
 const getPages = (
   pages: Page[],
   isSignedIn: boolean,
@@ -137,6 +138,7 @@ const MobileNavBar = ({
             </button>
           )}
         </div>
+        <Support />
         {menuVisible && (
           <Navbar
             pages={getPages(
@@ -181,7 +183,7 @@ const PCNavBar = ({
       <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
       </div>
-
+      <Support />
       <Navbar
         pages={getPages(
           pages,

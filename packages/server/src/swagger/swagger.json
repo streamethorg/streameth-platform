@@ -111,6 +111,83 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"ISupport": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"telegram": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_ISupport_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/ISupport"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateSupportTicketDto": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"telegram": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_ISupport-Array_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/ISupport"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStreamSettings": {
 				"properties": {
 					"streamId": {
@@ -1928,6 +2005,64 @@
 						}
 					}
 				]
+			}
+		},
+		"/Tickets": {
+			"post": {
+				"operationId": "CreateTicket",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISupport_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Creates support ticket",
+				"tags": [
+					"Support"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateSupportTicketDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllTickets",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_ISupport-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all support tickets",
+				"tags": [
+					"Support"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/stages": {
