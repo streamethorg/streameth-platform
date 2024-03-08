@@ -31,7 +31,7 @@ const Layout = async ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="w-full">
+    <div className="mx-auto w-full max-w-screen-2xl h-screen">
       <HomePageNavbar pages={pages} showSearchBar={true} />
       <div className="top-[74px] flex flex-col p-4 overflow-auto text-foreground">
         {children}

@@ -16,7 +16,7 @@ export const formSchema = z.object({
   archiveMode: z.boolean().optional(),
   website: z.string().optional(),
   timezone: z.string().min(1, 'timezone is required'),
-  accentColor: z.string().min(1, { message: 'Lastname is required' }),
+  accentColor: z.string().min(1, { message: 'color is required' }),
   unlisted: z.boolean().optional(),
   enableVideoDownloader: z.boolean().optional(),
 })
@@ -87,18 +87,22 @@ const speakerSchema = z.object({
 })
 
 export const sessionSchema = z.object({
-  name: z.string().min(1, { message: 'Required' }),
-  description: z.string().min(1, { message: 'Required' }),
+  name: z.string().min(1, { message: 'Name is required' }),
+  description: z
+    .string()
+    .min(1, { message: 'Description is required' }),
   coverImage: z.string().optional(),
-  assetId: z.string().optional(),
+  assetId: z.string(),
 })
-
-
 
 export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   logo: z.string().min(1, 'Logo is required'),
-  email: z.string(),
+  email: z.string().email(),
 })
 
-
+export const supportSchema = z.object({
+  message: z.string().min(1, 'Message is required'),
+  telegram: z.string().optional(),
+  email: z.string().optional(),
+})

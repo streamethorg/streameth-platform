@@ -63,6 +63,11 @@ export default function CreateEventForm({
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (values.start > values.end) {
+      toast.error('Start date must be before the end date')
+      setIsCreatingEvent(false)
+      return
+    }
     setIsCreatingEvent(true)
     const response = createEventAction({
       event: { ...values, organizationId: organization?._id },
@@ -311,10 +316,9 @@ export default function CreateEventForm({
               )}
             />
             <div className="flex flex-row justify-between">
-              
-                <Link href={`/studio/${organization.slug}`} passHref>
-                 Cancel
-                </Link>
+              <Link href={`/studio/${organization.slug}`} passHref>
+                Cancel
+              </Link>
               <Button
                 disabled={getFormSubmitStatus(form)}
                 className="ml-2"

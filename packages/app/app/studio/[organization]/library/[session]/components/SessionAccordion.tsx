@@ -80,8 +80,8 @@ const SessionAccordion = ({
       window.confirm('Are you sure you want to delete this session?')
     ) {
       deleteSessionAction({
-        sessionId: session._id!,
         organizationId: session.organizationId as string,
+        sessionId: session._id!,
       })
         .then((response) => {
           if (response) {

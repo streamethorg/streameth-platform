@@ -41,7 +41,13 @@ import { IExtendedEvent } from '@/lib/types'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import DeleteEvent from '../DeleteEventButton'
 
-const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
+const EventAccordion = ({
+  organizationId,
+  event,
+}: {
+  organizationId: string
+  event: IExtendedEvent
+}) => {
   const { handleTermChange, searchParams } = useSearchParams()
   const [isUpdatingEvent, setIsUpdatingEvent] =
     useState<boolean>(false)
@@ -149,7 +155,7 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                   <FormItem>
                     <FormLabel className="">Description</FormLabel>
                     <FormControl>
-                      <MDEditor 
+                      <MDEditor
                         value={field.value}
                         onChange={(a) => field.onChange(a)}
                       />
@@ -404,7 +410,8 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
                 <Button
                   onClick={handleEventSync}
                   variant="secondary"
-                  disabled={isSyncingEvent}>
+                  disabled={isSyncingEvent}
+                  type="button">
                   Sync
                 </Button>
               </div>
@@ -413,7 +420,10 @@ const EventAccordion = ({ event }: { event: IExtendedEvent }) => {
           <AccordionItem value="item-4" className="px-2">
             <AccordionTrigger>More</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8 flex flex-col">
-              <DeleteEvent event={event} />
+              <DeleteEvent
+                organizationId={organizationId}
+                event={event}
+              />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
