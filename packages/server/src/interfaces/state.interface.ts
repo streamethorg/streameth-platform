@@ -16,6 +16,7 @@ export enum StateType {
   event = 'event',
   video = 'video',
 }
+
 export interface IState {
   _id?: string | Types.ObjectId;
   eventId?: string | Types.ObjectId;
@@ -27,4 +28,4 @@ export interface IState {
   type?: StateType;
 }
 
-export interface IStateModel extends Omit<IState, '_id'>, Document {}
+export interface IStateModel extends Omit<IState, '_id'>, Document { }
