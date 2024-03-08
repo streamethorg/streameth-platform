@@ -10,28 +10,35 @@ import {
   Path,
   Post,
   Put,
+  Query,
   Route,
+  Security,
   SuccessResponse,
   Tags,
-  Security,
-  Query,
 } from 'tsoa';
 
 @Tags('State')
-@Route('states')
+@Route('state')
 export class StateController extends Controller {
   private stateService = new StateService();
 
+  /**
+   *
+   * @Summary Create state
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('201')
-  @Post('')
+  @Post()
   async createState(
     @Body() body: CreateStateDto,
   ): Promise<IStandardResponse<IState>> {
     const state = await this.stateService.create(body);
     return SendApiResponse('state created', state);
   }
-
+  /**
+   *
+   * @Summary Edit state
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{stateId}')
@@ -62,15 +69,4 @@ export class StateController extends Controller {
     const states = await this.stateService.getAll(queryParams);
     return SendApiResponse('States fetched', states);
   }
-
-  //   @Security('jwt', ['org'])
-  //   @SuccessResponse('200')
-  //   @Delete('{stageId}')
-  //   async deleteStage(
-  //     @Path() stageId: string,
-  //     @Body() organizationId: OrgIdDto,
-  //   ): Promise<IStandardResponse<void>> {
-  //     const stage = await this.stateService.deleteOne(stageId);
-  //     return SendApiResponse('deleted', stage);
-  //   }
 }
