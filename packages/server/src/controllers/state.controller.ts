@@ -18,7 +18,7 @@ import {
 } from 'tsoa';
 
 @Tags('State')
-@Route('state')
+@Route('states')
 export class StateController extends Controller {
   private stateService = new StateService();
 
