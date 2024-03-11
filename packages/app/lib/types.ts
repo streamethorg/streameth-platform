@@ -6,6 +6,7 @@ import {
   ISpeaker,
   ISpeakerModel,
 } from 'streameth-new-server/src/interfaces/speaker.interface'
+import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
 
@@ -13,6 +14,7 @@ export interface Page {
   name: string
   href: string
   bgColor?: string
+  icon?: React.JSX.Element
 }
 export interface NavBarProps {
   pages: Page[]
@@ -83,6 +85,19 @@ export interface ClipsPageParams {
   }
 }
 
+export interface IGoogleAuth {
+  web: {
+    client_id: string
+    project_id: string
+    auth_uri: string
+    token_uri: string
+    auth_provider_x509_cert_url: string
+    client_secret: string
+    redirect_uris: string[]
+    javascript_origins: string[]
+  }
+}
+
 export interface IExtendedEvent extends IEvent {
   _id: string
 }
@@ -92,6 +107,7 @@ export interface IExtendedOrganization
 }
 export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
+  createdAt?: string
 }
 export interface IStage extends IStageModel {}
 export interface IExtendedSpeaker
@@ -100,5 +116,9 @@ export interface IExtendedUser extends Omit<IUser, 'organizations'> {
   organizations: IExtendedOrganization[]
 }
 export interface IExtendedChat extends Omit<IChat, '_id'> {
+  _id: string
+}
+
+export interface IExtendedState extends Omit<IState, '_id'> {
   _id: string
 }

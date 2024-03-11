@@ -21,12 +21,12 @@
       "baseUrl": "./",
       "outDir": "./dist",
       "paths": {
-        "@server/*": ["../new-server/src/*"],
-        "@interfaces/*": ["../new-server/src/interfaces/*"],
-        "@models/*": ["../new-server/src/models/*"],
-        "@databases/*": ["../new-server/src/databases/*"],
-        "@exceptions/*": ["../new-server/src/exceptions/*"],
-        "@utils/*": ["../new-server/src/utils/*"]
+        "@server/*": ["../server/src/*"],
+        "@interfaces/*": ["../server/src/interfaces/*"],
+        "@models/*": ["../server/src/models/*"],
+        "@databases/*": ["../server/src/databases/*"],
+        "@exceptions/*": ["../server/src/exceptions/*"],
+        "@utils/*": ["../server/src/utils/*"]
       }
     },
     "include": ["src/**/*"],

@@ -34,6 +34,7 @@ const Layout = async ({
       className="w-full h-full flex flex-col  z-1 min-h-screen"
       style={style}>
       <HomePageNavbar
+        logo={event?.logo}
         pages={navbarRoutes.pages}
         showSearchBar={false}
       />

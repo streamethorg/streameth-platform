@@ -7,7 +7,7 @@
       "packages/app",
       "packages/tools/av-tools/utils",
       "packages/tools/ai-tools",
-      "packages/new-server",
+      "packages/server",
       "packages/importer"
     ]
   },
@@ -17,7 +17,7 @@
     "start": "yarn workspace @streameth/streameth-app start",
     "next:lint": "yarn workspace @streameth/streameth-app lint",
     "next:check-types": "yarn workspace @streameth/streameth-app check-types",
-    "prettier:fix": "yarn workspace @streameth/streameth-app prettier:write",
+    "prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix",
     "prettier:check": "yarn workspace @streameth/streameth-app prettier:check",
     "precommit": "lint-staged",
     "tools": "yarn workspace @streameth/av-tools tools",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "husky": "^8.0.3",
-    "lint-staged": "^15.1.0"
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.2.5"
   }
 }
