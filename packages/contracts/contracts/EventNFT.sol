@@ -1,41 +1,45 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-event sessionMinted(address receipeint, uint256 sessionId);
 
 error MintFeeNotPaid(string message);
 error NonExistentTokenURI(string message);
 error WithdrawTransfer(string message);
 
 contract Event is ERC721, ERC721URIStorage, Ownable(msg.sender) {
-
     using Strings for uint256;
+
+    uint256 public constant baseFee = 1e10;
     uint256 public totalSupply;
-    bool public isInitialized = false;
 
     string public EventName;
     string public baseTokenURI;
     string public description;
+    bool public isInitialized = false;
     bool public limitedSupply;
     uint256 public maxSupply;
-    string uri;
 
     uint256 public mintFee;
     uint256 public mintStartTime;
     uint256 public mintEndTime;
 
     address[] public EventAddresses;
+    address public streamethGnosisWallet;
 
    
-    mapping(address => mapping(uint256 => bool)) private _sessionMinted;
+    mapping(address => mapping(string => bool)) private _sessionMinted;
 
-    constructor() ERC721("StreamethEvent", "SEVENT") {}
+    event sessionMinted(address receipeint, string sessionId);
+
+
+    constructor(string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {}
 
     function initialize(
         string memory _baseTokenURI,
@@ -45,7 +49,8 @@ contract Event is ERC721, ERC721URIStorage, Ownable(msg.sender) {
         uint256 _maxSupply,
         uint256 _mintFee,
         uint256 _mintStartTime,
-        uint256 _mintEndTime
+        uint256 _mintEndTime,
+        address _streamethGnosisWallet
     ) external {
         require(!isInitialized, "Contract is already initialized!");
         isInitialized = true;
@@ -57,6 +62,7 @@ contract Event is ERC721, ERC721URIStorage, Ownable(msg.sender) {
         mintFee = _mintFee;
         mintStartTime = _mintStartTime;
         mintEndTime = _mintEndTime;
+        streamethGnosisWallet = _streamethGnosisWallet;
     }
 
     // @dev: This function is used to add new addresses to the list of allowed people to stream
@@ -89,38 +95,38 @@ contract Event is ERC721, ERC721URIStorage, Ownable(msg.sender) {
     }
 
 
-       /// ======================== Mint Methods ========================
-    	function mintAction(string memory _uri ) internal{
-		 uint256 tokenId = ++totalSupply;
+    /// ======================== Mint Methods ========================
+    function mintAction(string memory _uri ) internal{
+		uint256 tokenId = ++totalSupply;
    		_safeMint(msg.sender, tokenId);
-          _setTokenURI(tokenId,_uri);
+        _setTokenURI(tokenId,_uri);
 
 	}
 
     // @dev: This function is used to mint a new token paying the mint price or free if the caller is the owner
     // @param: recipient: address of the recipient
     // @return: newTokenId: id of the new token
-    function sessionMint(uint256 sessionId) public payable {
+    function sessionMint(string memory sessionId) public payable {
         require(!_sessionMinted[msg.sender][sessionId], "User has already minted this session");
         require(mintStartTime < block.timestamp && block.timestamp < mintEndTime, "Not mint period");
-
+        string memory uri = string.concat(baseTokenURI,sessionId, ".json");
         if (limitedSupply) {
             require(totalSupply < maxSupply, "No more tokens available");
         }
 
         if (msg.sender == owner()) {
-            uri = string.concat(baseTokenURI, Strings.toString(sessionId), ".json");
             _sessionMinted[msg.sender][sessionId] = true;
               mintAction(uri);
         }
 
-        if (msg.value < mintFee) {
+        if (msg.value < mintFee + baseFee) {
             revert MintFeeNotPaid("Mint fee not paid");
         } else {
-           uri = string.concat(baseTokenURI, Strings.toString(sessionId), ".json");
             _sessionMinted[msg.sender][sessionId] = true;
-              mintAction(uri);
-         
+
+        // Transfer baseFee to the streamethGnosisWallet
+        payable(streamethGnosisWallet).transfer(baseFee);
+        mintAction(uri);
         }
         emit sessionMinted(msg.sender, sessionId);
     }
@@ -136,7 +142,7 @@ contract Event is ERC721, ERC721URIStorage, Ownable(msg.sender) {
         }
     }
 
-        function supportsInterface(bytes4 interfaceId)
+    function supportsInterface(bytes4 interfaceId)
         public
         view
         override(ERC721, ERC721URIStorage)
