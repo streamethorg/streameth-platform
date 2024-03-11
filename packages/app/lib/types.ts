@@ -6,6 +6,7 @@ import {
   ISpeaker,
   ISpeakerModel,
 } from 'streameth-new-server/src/interfaces/speaker.interface'
+import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
 
@@ -115,5 +116,9 @@ export interface IExtendedUser extends Omit<IUser, 'organizations'> {
   organizations: IExtendedOrganization[]
 }
 export interface IExtendedChat extends Omit<IChat, '_id'> {
+  _id: string
+}
+
+export interface IExtendedState extends Omit<IState, '_id'> {
   _id: string
 }
