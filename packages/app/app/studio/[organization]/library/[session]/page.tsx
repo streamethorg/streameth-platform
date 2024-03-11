@@ -36,8 +36,6 @@ const EditSession = async ({
     sessionId: session._id.toString(),
   })
 
-  console.log(videoState)
-
   return (
     <div className="p-4 h-full">
       <div className="flex flex-row space-x-4 h-full">
