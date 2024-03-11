@@ -4,12 +4,13 @@ describe('Tests for homepage', () => {
     // so we must tell it to visit our website with the `cy.visit()` command.
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
-    cy.visit('http://localhost:3000/')
-    cy.scrollTo('bottom')
+    cy.visit('/')
   })
+
   Cypress.on('uncaught:exception', (err, runnable) => {
     return false
   })
+
   it('Displays a list of organizations, which should have text', () => {
     cy.get(':nth-child(3) > .my-2 > a > .font-semibold').should(
       'not.be.empty'
@@ -41,5 +42,15 @@ describe('Tests for homepage', () => {
 
   it('can click organization name', () => {
     cy.get(':nth-child(1) > .my-2 > a > .font-semibold').click()
+  })
+
+  it('Video is playing on the homepage', () => {
+    cy.get('div > video')
+      .should('exist')
+      .then(($video) => {
+        const videoElement = $video.get(0)
+
+        expect(videoElement.paused).to.be.false
+      })
   })
 })
