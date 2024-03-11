@@ -65,23 +65,6 @@ const SessionAccordion = ({
       },
     })
       .then(async (response) => {
-        if (googleToken && values.youtubeUpload) {
-          console.log('Got a token...')
-          fetch(`${apiUrl}/upload/${session._id.toString()}`, {
-            method: 'POST',
-          }).catch((e) => {
-            console.log(e)
-            toast.error('Error uploading to YouTube')
-          })
-
-          await createState(
-            session.eventId.toString(),
-            session._id.toString(),
-            StateType.video
-          )
-        }
-        console.log('Got no token...')
-
         if (response) {
           toast.success('Session updated')
         } else {
