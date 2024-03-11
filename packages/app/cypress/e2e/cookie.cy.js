@@ -1,4 +1,8 @@
 describe('Cookie Banner', () => {
+  beforeEach(() => {
+    cy.clearCookies()
+  })
+
   it('See if Cookie Banner exist', () => {
     cy.visit('/')
     cy.get('div[role="alert"]')
