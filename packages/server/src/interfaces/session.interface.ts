@@ -37,6 +37,7 @@ export interface ISession {
   videoTranscription?: string;
   aiDescription?: string;
   autoLabels?: string[];
+  youtubeUpload?: boolean;
 }
 
-export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
+export interface ISessionModel extends Omit<ISession, '_id'>, Document { }

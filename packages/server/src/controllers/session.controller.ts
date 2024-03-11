@@ -110,8 +110,11 @@ export class SessionController extends Controller {
 
       console.log('Uploading video...');
       await uploadToYouTube(session, youtube, videoFilePath);
+      await this.sessionService.update(sessionId, {
+        youtubeUpload: true,
+      } as any);
 
-      return SendApiResponse('session fetched', session);
+      return SendApiResponse('Video uploaded...', session);
     } catch (e) {
       return SendApiResponse(
         'An error while uploading a video to YouTube',

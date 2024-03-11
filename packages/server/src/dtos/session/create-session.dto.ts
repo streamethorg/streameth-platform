@@ -6,6 +6,7 @@ import {
   IsObject,
   IsOptional,
   IsString,
+  IsBoolean,
 } from 'class-validator';
 
 export class CreateSessionDto implements Omit<ISession, '_id'> {
@@ -80,4 +81,8 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsOptional()
   @IsArray()
   autolabels?: string[];
+
+  @IsOptional()
+  @IsBoolean()
+  youtubeUpload?: boolean;
 }
