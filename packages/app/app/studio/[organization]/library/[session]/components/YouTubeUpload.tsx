@@ -63,6 +63,20 @@ const YouTubeUpload = ({
     router.push(url)
   }
 
+  if (videoState?.status === StateStatus.pending) {
+    const intervalId = setInterval(async () => {
+      const state = await fetchState({
+        type: StateType.video,
+        sessionId: session._id.toString(),
+      })
+
+      if (state?.status !== StateStatus.pending) {
+        setPending(state?.status!)
+        clearInterval(intervalId)
+      }
+    }, 1000 * 10) // 10 seconds
+  }
+
   if (!googleToken) {
     return (
       <Button className="w-full my-3" onClick={handleLogin}>
