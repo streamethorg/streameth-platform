@@ -22,22 +22,18 @@ import {
   updateSessionAction,
   deleteSessionAction,
 } from '@/lib/actions/sessions'
-import { IExtendedSession, IExtendedState } from '@/lib/types'
-import { Loader2, Youtube } from 'lucide-react'
-import { Switch } from '@/components/ui/switch'
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
+import { IExtendedSession } from '@/lib/types'
+import { Loader2 } from 'lucide-react'
 import { apiUrl } from '@/lib/utils/utils'
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface'
+import { createState } from '@/lib/services/stateService'
 
 const SessionAccordion = ({
   session,
   organizationSlug,
-  googleToken,
-  videoState,
 }: {
   session: IExtendedSession
   organizationSlug: string
-  googleToken: RequestCookie | undefined
-  videoState: IExtendedState
 }) => {
   const router = useRouter()
   const [isUpdatingSession, setIsUpdatingSession] =
@@ -51,17 +47,6 @@ const SessionAccordion = ({
       youtubeUpload: session.youtubeUpload,
     },
   })
-
-  const handleLogin = async () => {
-    const response = await fetch('/api/google/oauth2', {
-      cache: 'no-store',
-    })
-    if (!response.ok) {
-      throw new Error(await response.text())
-    }
-    const url = await response.json()
-    console.log(url)
-  }
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof sessionSchema>) {
@@ -79,7 +64,7 @@ const SessionAccordion = ({
         speakers: session.speakers ?? [],
       },
     })
-      .then((response) => {
+      .then(async (response) => {
         if (googleToken && values.youtubeUpload) {
           console.log('Got a token...')
           fetch(`${apiUrl}/upload/${session._id.toString()}`, {
@@ -88,6 +73,12 @@ const SessionAccordion = ({
             console.log(e)
             toast.error('Error uploading to YouTube')
           })
+
+          await createState(
+            session.eventId.toString(),
+            session._id.toString(),
+            StateType.video
+          )
         }
         console.log('Got no token...')
 
@@ -172,36 +163,6 @@ const SessionAccordion = ({
                   onChange={field.onChange}
                   aspectRatio={16 / 9}
                 />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="youtubeUpload"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Upload to YouTube</FormLabel>
-              <FormControl>
-                {googleToken ? (
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    disabled={field.value}
-                    aria-readonly
-                  />
-                ) : (
-                  <div className="flex justify-between">
-                    <h1>
-                      Please login with your Google Account to upload
-                      to YouTube
-                    </h1>
-                    <Youtube
-                      className="cursor-pointer"
-                      onClick={handleLogin}
-                    />
-                  </div>
-                )}
               </FormControl>
             </FormItem>
           )}

@@ -6,7 +6,9 @@ import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { Livepeer } from 'livepeer'
 import { notFound } from 'next/navigation'
 import { cookies } from 'next/headers'
+import YouTubeUpload from './components/YouTubeUpload'
 import { fetchState } from '@/lib/services/stateService'
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface'
 
 const EditSession = async ({
   params,
@@ -29,10 +31,12 @@ const EditSession = async ({
   if (!video) return notFound()
 
   const cookie = cookies().get('google_token')
-  const videoState = await fetchState(
-    session.eventId.toString(),
-    session._id.toString()
-  )
+  const videoState = await fetchState({
+    type: StateType.video,
+    sessionId: session._id.toString(),
+  })
+
+  console.log(videoState)
 
   return (
     <div className="p-4 h-full">
@@ -61,6 +65,9 @@ const EditSession = async ({
           <SessionAccordion
             session={session}
             organizationSlug={params.organization}
+          />
+          <YouTubeUpload
+            session={session}
             googleToken={cookie}
             videoState={videoState}
           />

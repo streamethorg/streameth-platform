@@ -1,6 +1,6 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IState } from '@interfaces/state.interface';
+import { IState, StateType } from '@interfaces/state.interface';
 import Session from '@models/session.model';
 import State from '@models/state.model';
 import Event from '@models/event.model';
@@ -32,31 +32,5 @@ export default class StateService {
     if (!findState) throw new HttpException(404, ' state not found');
 
     return findState;
-  }
-
-  async getAll(d: {
-    eventId?: string;
-    sessionId?: string;
-    eventSlug?: string;
-  }): Promise<Array<IState>> {
-    let filter = {};
-    if (d.eventId != undefined) {
-      let event = await Event.findOne({ slug: d.eventId });
-      filter = { ...filter, eventId: event?._id };
-    }
-    if (d.sessionId != undefined) {
-      let session = await Session.findOne({ slug: d.sessionId });
-      filter = { ...filter, sessionId: session?._id };
-    }
-    if (d.eventSlug != undefined) {
-      filter = { ...filter, eventSlug: d.eventSlug };
-    }
-
-    const [states] = await Promise.all([
-      await this.controller.store.findAll(filter, this.path),
-      await this.controller.store.findAll(filter, this.path, 0, 0),
-    ]);
-
-    return states;
   }
 }
