@@ -3,6 +3,7 @@ import Pagination from './pagination'
 import { fetchAllSessions } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { SearchPageProps } from '@/lib/types'
+import { FileQuestion } from 'lucide-react'
 
 const ArchiveVideos = async ({ searchParams }: SearchPageProps) => {
   const videos = await fetchAllSessions({
@@ -13,6 +14,17 @@ const ArchiveVideos = async ({ searchParams }: SearchPageProps) => {
     searchQuery: searchParams.searchQuery,
     page: Number(searchParams.page || 1),
   })
+
+  if (videos.pagination.totalItems === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center mt-[25%]">
+        <FileQuestion size={65} />
+        <span className="bolt text-xl mt-2">
+          No videos have been found
+        </span>
+      </div>
+    )
+  }
 
   return (
     <div>
