@@ -1,8 +1,4 @@
 describe('Archive', () => {
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    return false
-  })
-
   it('Checks the button is visually disabled', () => {
     cy.visit('/archive?event=ethberlin_2022')
 

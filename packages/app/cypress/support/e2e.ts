@@ -16,6 +16,14 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+  if (err.message.includes('NEXT_NOT_FOUND')) {
+    return false
+  }
+
+  return undefined
+})
+
 beforeEach(() => {
   cy.viewport(1200, 1000)
 })

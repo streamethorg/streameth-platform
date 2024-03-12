@@ -5,9 +5,7 @@ describe('watch page', () => {
       { failOnStatusCode: false }
     )
   })
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    return false
-  })
+
   it('loads video', () => {
     cy.get('.aspect-video >').should('exist')
   })
