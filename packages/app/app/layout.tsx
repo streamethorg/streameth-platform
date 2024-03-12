@@ -1,5 +1,5 @@
 import './globals.css'
-import { Ubuntu, Heebo } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import GeneralContext from '@/lib/context/GeneralContext'
 import { ModalContextProvider } from '@/lib/context/ModalContext'
 import { MobileContextProvider } from '@/lib/context/MobileContext'
@@ -9,15 +9,9 @@ import { generalMetadata } from '@/lib/utils/metadata'
 import { Toaster } from '@/components/ui/sonner'
 import CookieBanner from '@/components/misc/interact/CookieBanner'
 import { TooltipProvider } from '@/components/ui/tooltip'
-const ubuntu = Ubuntu({
-  weight: ['400', '500', '700'],
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-ubuntu',
-})
-
-const heebo = Heebo({
-  subsets: ['latin'],
-  variable: '--font-heebo',
+  variable: '--font-inter',
 })
 
 export default function RootLayout({
@@ -26,27 +20,29 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${ubuntu.variable} font-ubuntu`}>
-      <body
-        className={`${heebo.variable} font-sans flex flex-col w-full min-h-screen  mx-auto bg-background `}>
-        <TooltipProvider>
-          <GeneralContext>
-            <Toaster />
-            <LoadingContextProvider>
-              <MobileContextProvider>
-                <ModalContextProvider>
-                  <TopNavbarContextProvider>
-                    {children}
+    <html lang="en" className={`${inter.variable}`}>
+      <body className="">
+        <main
+          className={`${inter.variable} flex flex-col w-full min-h-screen  mx-auto bg-background `}>
+          <TooltipProvider>
+            <GeneralContext>
+              <Toaster />
+              <LoadingContextProvider>
+                <MobileContextProvider>
+                  <ModalContextProvider>
+                    <TopNavbarContextProvider>
+                      {children}
 
-                    <div className="fixed bottom-4 left-4 z-50 mr-4">
-                      <CookieBanner />
-                    </div>
-                  </TopNavbarContextProvider>
-                </ModalContextProvider>
-              </MobileContextProvider>
-            </LoadingContextProvider>
-          </GeneralContext>
-        </TooltipProvider>
+                      <div className="fixed bottom-4 left-4 z-50 mr-4">
+                        <CookieBanner />
+                      </div>
+                    </TopNavbarContextProvider>
+                  </ModalContextProvider>
+                </MobileContextProvider>
+              </LoadingContextProvider>
+            </GeneralContext>
+          </TooltipProvider>
+        </main>
       </body>
     </html>
   )

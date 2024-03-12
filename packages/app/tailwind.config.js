@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   darkMode: ['class'],
   content: [
@@ -17,6 +19,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+      },
       colors: {
         streameth: "bg-gradient-to-b from-[#FF9976] to-[#6426EF]",
         border: "hsl(var(--border))",
