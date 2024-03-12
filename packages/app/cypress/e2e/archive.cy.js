@@ -8,13 +8,13 @@ describe('Archive', () => {
       .should('have.attr', 'disabled')
   })
 
-  it('404 when no videos nor organisations have been found', () => {
+  it('Error when no videos nor organisations have been found', () => {
     cy.visit(
       '/archive?searchQuery=jonaswefweijfweifjwefefopwekfowekfefopwefkweof'
     )
 
-    cy.get('h2.text-4xl.font-bold.mb-4')
-      .contains('404: Not Found')
+    cy.get('span.bolt')
+      .contains('No videos have been found')
       .should('exist')
   })
 
