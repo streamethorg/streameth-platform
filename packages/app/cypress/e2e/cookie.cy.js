@@ -18,10 +18,12 @@ describe('Cookie Banner', () => {
   //   cy.get('@cookieBanner').get('.mt-3 > .mr-1').click()
   //
   //   cy.wait(4000) // Wait for cookie to process
-  //   cy.getCookie('cookie_consent').then((cookie) => {
-  //     expect(cookie.value).to.eq('true')
-  //     expect(cookie.secure).to.be.true
-  //   })
+  //   cy.getCookie('cookie_consent')
+  //     .debug()
+  //     .then((cookie) => {
+  //       expect(cookie.value).to.eq('true')
+  //       expect(cookie.secure).to.be.true
+  //     })
   // })
 
   it('"More information..." should redirect to "/privacy"', () => {
