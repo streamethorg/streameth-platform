@@ -5,6 +5,7 @@ config();
 
 const validateEnv = () => {
   return cleanEnv(process.env, {
+    BASE_URL: str(),
     NODE_ENV: str(),
     APP_PORT: port(),
     DB_HOST: str(),
@@ -27,6 +28,7 @@ const validateEnv = () => {
     TELEGRAM_API_KEY: str(),
     TELEGRAM_CHAT_ID: str(),
     OAUTH_SECRET: str(),
+    THIRDWEB_SECRET_KEY: str(),
   });
 };
 

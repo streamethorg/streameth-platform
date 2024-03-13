@@ -44,6 +44,7 @@ const SessionSchema = new Schema<ISessionModel>(
     videoTranscription: { type: String, default: '' },
     aiDescription: { type: String, default: '' },
     autoLabels: [{ type: String }],
+    nftURI: { type: String, default: '' },
   },
   {
     timestamps: true,

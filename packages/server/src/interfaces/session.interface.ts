@@ -37,6 +37,8 @@ export interface ISession {
   videoTranscription?: string;
   aiDescription?: string;
   autoLabels?: string[];
+  nftURI?: string;
+  createdAt?: string;
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
