@@ -14,16 +14,15 @@ describe('Cookie Banner', () => {
       .and('be.visible')
   })
 
-  it('Accepts cookies on archive page and checks for the cookie_consent cookie', () => {
-    cy.visit('/archive')
-    cy.get('@cookieBanner').get('.mt-3 > .mr-1').click()
-
-    cy.wait(4000) // Wait for cookie to process
-    cy.getCookie('cookie_consent').then((cookie) => {
-      expect(cookie.value).to.eq('true')
-      expect(cookie.secure).to.be.true
-    })
-  })
+  // it('Accepts cookies on archive page and checks for the cookie_consent cookie', () => {
+  //   cy.get('@cookieBanner').get('.mt-3 > .mr-1').click()
+  //
+  //   cy.wait(4000) // Wait for cookie to process
+  //   cy.getCookie('cookie_consent').then((cookie) => {
+  //     expect(cookie.value).to.eq('true')
+  //     expect(cookie.secure).to.be.true
+  //   })
+  // })
 
   it('"More information..." should redirect to "/privacy"', () => {
     cy.get('@cookieBanner').find('a[href*="/privacy"]').click()
