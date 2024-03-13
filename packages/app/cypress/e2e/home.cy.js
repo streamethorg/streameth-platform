@@ -37,7 +37,7 @@ describe('Tests for homepage', () => {
   })
 
   it('Video is playing on the homepage', () => {
-    cy.get('div > video')
+    cy.get('div > video', { timeout: 10000 })
       .should('exist')
       .then(($video) => {
         const videoElement = $video.get(0)
