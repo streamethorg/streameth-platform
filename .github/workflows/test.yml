@@ -65,6 +65,7 @@ jobs:
           start: yarn --cwd packages/app start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
+          group: "Chrome"
           browser: chrome
           working-directory: packages/app
           record: true
@@ -101,6 +102,7 @@ jobs:
           start: yarn --cwd packages/app start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
+          group: "Chrome"
           browser: chrome
           working-directory: packages/app
           record: true
@@ -144,6 +146,7 @@ jobs:
           start: yarn --cwd packages/app start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
+          group: "Firefox"
           browser: firefox
           working-directory: packages/app
           record: true
@@ -180,7 +183,8 @@ jobs:
           start: yarn --cwd packages/app start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
-          browser: chrome
+          group: "Firefox"
+          browser: firefox
           record: true
           parallel: true
           working-directory: packages/app
