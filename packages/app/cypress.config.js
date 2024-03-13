@@ -3,6 +3,7 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) { },
+    projectId: 't4kovj',
     baseUrl: 'http://localhost:3000',
     defaultCommandTimeout: 12000,
     pageLoadTimeout: 60000,
