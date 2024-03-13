@@ -67,6 +67,7 @@ jobs:
           wait-on-timeout: 120
           browser: chrome
           working-directory: packages/app
+          record: true
           parallel: true
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
@@ -102,6 +103,7 @@ jobs:
           wait-on-timeout: 120
           browser: chrome
           working-directory: packages/app
+          record: true
           parallel: true
           config: |
             {
@@ -144,6 +146,7 @@ jobs:
           wait-on-timeout: 120
           browser: firefox
           working-directory: packages/app
+          record: true
           parallel: true
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
@@ -178,6 +181,7 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
+          record: true
           parallel: true
           working-directory: packages/app
           config: |
