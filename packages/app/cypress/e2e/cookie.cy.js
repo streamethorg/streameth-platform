@@ -1,20 +1,20 @@
 describe('Cookie Banner', () => {
   beforeEach(() => {
     cy.clearCookies()
+    cy.visit('/')
   })
 
   it('See if Cookie Banner exist', () => {
-    cy.visit('/')
-    cy.get('div[role="alert"]')
+    cy.get('div[role="alert"]', { timeout: 10000 })
       .should('contain.text', 'We Use Cookies 🍪')
       .and('be.visible')
   })
 
   it('Accepts cookies and checks for the cookie_consent cookie', () => {
-    cy.visit('/')
-    cy.get('div[role="alert"]').contains('button', 'Ok').click()
+    cy.get('div[role="alert"]', { timeout: 10000 })
+      .contains('button', 'Ok')
+      .click()
 
-    cy.wait(2000)
     cy.getCookie('cookie_consent').then((cookie) => {
       expect(cookie.value).to.eq('true')
       expect(cookie.secure).to.be.true
@@ -23,9 +23,10 @@ describe('Cookie Banner', () => {
 
   it('Accepts cookies on archive page and checks for the cookie_consent cookie', () => {
     cy.visit('/archive')
-    cy.get('div[role="alert"]').contains('button', 'Ok').click()
+    cy.get('div[role="alert"]', { timeout: 10000 })
+      .contains('button', 'Ok')
+      .click()
 
-    cy.wait(2000)
     cy.getCookie('cookie_consent').then((cookie) => {
       expect(cookie.value).to.eq('true')
       expect(cookie.secure).to.be.true
@@ -33,8 +34,9 @@ describe('Cookie Banner', () => {
   })
 
   it('"More information..." should redirect to "/privacy"', () => {
-    cy.visit('/')
-    cy.get('div[role="alert"] a[href*="/privacy"]').click()
+    cy.get('div[role="alert"] a[href*="/privacy"]', {
+      timeout: 10000,
+    }).click()
     cy.url().should('include', '/privacy')
   })
 })
