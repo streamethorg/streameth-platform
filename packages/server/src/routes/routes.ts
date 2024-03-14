@@ -521,6 +521,21 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IEventNFT": {
+        "dataType": "refObject",
+        "properties": {
+            "address": {"dataType":"string"},
+            "name": {"dataType":"string"},
+            "symbol": {"dataType":"string"},
+            "uri": {"dataType":"string"},
+            "maxSupply": {"dataType":"string"},
+            "mintFee": {"dataType":"string"},
+            "startTime": {"dataType":"string"},
+            "endTime": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IEvent": {
         "dataType": "refObject",
         "properties": {
@@ -546,6 +561,7 @@ const models: TsoaRoute.Models = {
             "enableVideoDownloader": {"dataType":"boolean"},
             "plugins": {"ref":"IPlugins"},
             "slug": {"dataType":"string"},
+            "eventNFT": {"ref":"IEventNFT"},
         },
         "additionalProperties": false,
     },
@@ -585,6 +601,8 @@ const models: TsoaRoute.Models = {
             "enableVideoDownloader": {"dataType":"boolean"},
             "plugins": {"ref":"IPlugins"},
             "slug": {"dataType":"string"},
+            "eventNFT": {"ref":"IEventNFT"},
+            "nftAddress": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -614,6 +632,7 @@ const models: TsoaRoute.Models = {
             "enableVideoDownloader": {"dataType":"boolean"},
             "plugins": {"ref":"IPlugins"},
             "slug": {"dataType":"string"},
+            "eventNFT": {"ref":"IEventNFT"},
         },
         "additionalProperties": false,
     },
