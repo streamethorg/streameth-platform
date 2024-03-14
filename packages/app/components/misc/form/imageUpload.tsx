@@ -7,7 +7,8 @@ import Image from 'next/image'
 import { X } from 'lucide-react'
 import { getImageUrl } from '@/lib/utils/utils'
 import { toast } from 'sonner'
-
+import { Label } from '@radix-ui/react-label'
+import { Image as ImageLogo } from 'lucide-react'
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   // FileList is immutable, so we need to create a new one
   const dataTransfer = new DataTransfer()
@@ -23,16 +24,22 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
 }
 
 export default function ImageUpload({
+  id,
+  placeholder,
   onChange,
   aspectRatio,
   value,
   path,
+  className,
   ...rest
 }: {
+  id: string
+  placeholder: string
   aspectRatio: number
   onChange: (files: string | null) => void
   value: string | null | undefined
   path: string
+  className?: string
 }) {
   const [preview, setPreview] = useState(
     value ? getImageUrl('/' + path + '/' + value) : ''
@@ -89,16 +96,27 @@ export default function ImageUpload({
           </AspectRatio>
         </div>
       ) : (
-        <Input
-          type="file"
-          accept=".png,.jpg"
-          {...rest}
-          onChange={(event) => {
-            const { files, displayUrl } = getImageData(event)
-            setPreview(displayUrl)
-            onSubmit(files[0])
-          }}
-        />
+        <>
+          <Label
+            htmlFor={id}
+            className={`${className} flex justify-center items-center`}>
+            <ImageLogo />
+            {placeholder}
+          </Label>
+          <Input
+            id={id}
+            type="file"
+            accept=".png,.jpg"
+            placeholder="Upload image"
+            className="hidden"
+            {...rest}
+            onChange={(event) => {
+              const { files, displayUrl } = getImageData(event)
+              setPreview(displayUrl)
+              onSubmit(files[0])
+            }}
+          />
+        </>
       )}
     </>
   )

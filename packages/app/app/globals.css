@@ -5,6 +5,15 @@
 @layer base {
   :root {
     --background: 210, 40%, 98%;
+    --neutrals-100: 210, 40%, 96%;
+    --neutrals-200: 214, 32%, 91%;
+    --neutrals-300: 213, 27%, 84%;
+    --neutrals-400: 215, 20%, 65%;
+    --neutrals-500: 215, 16%, 47%;
+    --neutrals-600: 215, 19%, 35%;
+    --neutrals-700: 210, 40%, 60%;
+    --neutrals-800: 210, 40%, 50%;
+    --neutrals-900: 210, 40%, 40%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
