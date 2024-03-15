@@ -1,10 +1,6 @@
-// 'use client'
 import Player from '@/components/ui/Player'
-import { buildPlaybackUrl } from '@/lib/utils/utils'
-import useSearchParams from '@/lib/hooks/useSearchParams'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import { fetchSession } from '@/lib/services/sessionService'
 import { Livepeer } from 'livepeer'
 import { getSrc } from '@livepeer/react/external'
 import { EmbedPageParams } from '@/lib/types'
@@ -22,7 +18,6 @@ const Embed = ({
     if (vod === 'true') return videoSrc
     return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
   }
-  console.log('videoSrc', videoSrc)
 
   return (
     <div className="absolute top-0 left-0 w-screen h-screen bg-black flex justify-center items-center">
