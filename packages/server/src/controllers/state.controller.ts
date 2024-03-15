@@ -1,6 +1,6 @@
 import { CreateStateDto } from '@dtos/state/create-state.dto';
 import { UpdateStateDto } from '@dtos/state/update-state.dto';
-import { IState } from '@interfaces/state.interface';
+import { IState, StateType } from '@interfaces/state.interface';
 import StateService from '@services/state.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
@@ -52,21 +52,15 @@ export class StateController extends Controller {
 
   /**
    *
-   * @Summary Get all states
+   * @Summary Get state
    */
   @SuccessResponse('200')
-  @Get()
-  async getAllStates(
-    @Query() eventId?: string,
-    @Query() sessionId?: string,
-    @Query() eventSlug?: string,
-  ): Promise<IStandardResponse<Array<IState>>> {
-    const queryParams = {
-      eventId: eventId,
-      sessionId: sessionId,
-      eventSlug: eventSlug,
-    };
-    const states = await this.stateService.getAll(queryParams);
-    return SendApiResponse('States fetched', states);
+  @Get('session')
+  async getStateBySession(
+    @Query() sessionId: string,
+    @Query() type: StateType,
+  ): Promise<IStandardResponse<IState>> {
+    const state = await this.stateService.findOne({ type, sessionId });
+    return SendApiResponse('Fetched state', state);
   }
 }

@@ -93,6 +93,7 @@ export const sessionSchema = z.object({
     .min(1, { message: 'Description is required' }),
   coverImage: z.string().optional(),
   assetId: z.string(),
+  youtubeUpload: z.boolean(),
 })
 
 export const organizationSchema = z.object({

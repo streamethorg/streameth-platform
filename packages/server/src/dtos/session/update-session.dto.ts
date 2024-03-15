@@ -2,6 +2,7 @@ import { IPlayback, ISource } from '@interfaces/session.interface';
 import { ISpeaker } from '@interfaces/speaker.interface';
 import {
   IsArray,
+  IsBoolean,
   IsNotEmpty,
   IsObject,
   IsOptional,
@@ -84,4 +85,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsString()
   assetId?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  youtubeUpload?: boolean;
 }

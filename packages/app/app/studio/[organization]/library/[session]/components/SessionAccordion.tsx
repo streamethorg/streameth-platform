@@ -24,6 +24,9 @@ import {
 } from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
 import { Loader2 } from 'lucide-react'
+import { apiUrl } from '@/lib/utils/utils'
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface'
+import { createState } from '@/lib/services/stateService'
 
 const SessionAccordion = ({
   session,
@@ -41,12 +44,14 @@ const SessionAccordion = ({
       name: session.name,
       description: session.description,
       coverImage: session.coverImage,
+      youtubeUpload: session.youtubeUpload,
     },
   })
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof sessionSchema>) {
     setIsUpdatingSession(true)
+
     updateSessionAction({
       session: {
         ...values,
@@ -59,7 +64,7 @@ const SessionAccordion = ({
         speakers: session.speakers ?? [],
       },
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response) {
           toast.success('Session updated')
         } else {

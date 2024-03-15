@@ -24,15 +24,15 @@ export class CreateStateDto implements IState {
   @IsString()
   sessionSlug?: string;
 
-  @IsNotEmpty()
-  @IsString()
-  sheetType: SheetType;
-
-  @IsNotEmpty()
-  @IsString()
-  StateStatus: StateStatus;
-
   @IsOptional()
   @IsString()
-  type?: StateType;
+  sheetType?: SheetType;
+
+  @IsNotEmpty()
+  @IsString()
+  status: StateStatus;
+
+  @IsNotEmpty()
+  @IsString()
+  type: StateType;
 }

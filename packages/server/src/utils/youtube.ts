@@ -15,13 +15,13 @@ function delay(ms: number): Promise<void> {
 async function checkVideoProcessingStatus(
   videoId: string,
   youtube: youtube_v3.Youtube,
-): Promise<string> {
+): Promise<string | null> {
   const response = await youtube.videos.list({
     id: [videoId],
     part: ['processingDetails'],
   });
 
-  return response.data.items[0].processingDetails.processingStatus;
+  return response.data.items[0].processingDetails.processingStatus || null;
 }
 
 // Downloads an image from a URL and saves it to a file
@@ -124,9 +124,9 @@ export async function uploadToYouTube(
 
     const state = await stateService.create({
       type: StateType.video,
+      status: StateStatus.pending,
       sessionId: session._id,
       sessionSlug: session.slug,
-      eventSlug: event[0].slug,
     });
 
     let processingStatus = 'processing';
@@ -145,7 +145,13 @@ export async function uploadToYouTube(
       }
     }
 
-    if (!session.coverImage) return;
+    if (!session.coverImage) {
+      await stateService.update(state._id.toString(), {
+        status: StateStatus.completed,
+      });
+
+      return;
+    }
 
     const filePath = `./tmp/${session.slug}.jpg`;
     const imageResponse = await downloadImage(session.coverImage, filePath);
@@ -163,7 +169,6 @@ export async function uploadToYouTube(
     await stateService.update(state._id.toString(), {
       status: StateStatus.canceled,
     });
-    return;
   } catch (error) {
     console.error('An error occurred:', error);
     return;
