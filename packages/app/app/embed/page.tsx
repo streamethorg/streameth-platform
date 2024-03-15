@@ -36,6 +36,9 @@ const Embed = ({
   )
 }
 const EmbedPage = async ({ searchParams }: EmbedPageParams) => {
+  if (!searchParams.playbackId) {
+    return notFound()
+  }
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
   })
@@ -45,9 +48,6 @@ const EmbedPage = async ({ searchParams }: EmbedPageParams) => {
   )
   const src = getSrc(playbackInfo.playbackInfo)
 
-  if (!searchParams.playbackId) {
-    return notFound()
-  }
   return (
     <Suspense>
       <Embed
