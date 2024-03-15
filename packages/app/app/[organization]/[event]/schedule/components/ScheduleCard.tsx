@@ -20,11 +20,13 @@ const ScheduleCard = ({
   session,
   showTime = false,
   speakers = false,
+  date,
 }: {
   event: IExtendedEvent
   session: IExtendedSession
   showTime?: boolean
   speakers?: boolean
+  date?: string
 }) => {
   const isActive =
     new Date(session.start).getTime() < Date.now() &&
@@ -39,6 +41,8 @@ const ScheduleCard = ({
             <CardDescription className="text-secondary">
               {showTime && (
                 <>
+                  {date === 'all' &&
+                    new Date(session.start).toDateString()}{' '}
                   {moment(session.start)
                     .tz(event.timezone || 'UTC')
                     .format('HH:mm')}{' '}
