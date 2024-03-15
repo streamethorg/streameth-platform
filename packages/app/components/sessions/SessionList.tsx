@@ -7,6 +7,7 @@ interface Props {
   event: IExtendedEvent
   sessions: IExtendedSession[]
   currentSession?: IExtendedSession
+  date?: string
 }
 
 const scroll = Scroll.scroller
@@ -25,6 +26,7 @@ export default function SessionList({
   event,
   sessions,
   currentSession,
+  date,
 }: Props) {
   const getCurrDaySessions = () => {
     return sessions.filter(
@@ -77,6 +79,7 @@ export default function SessionList({
           <Element key={index} name={i._id}>
             <li id={i._id} className="mb-3 text-lg">
               <ScheduleCard
+                date={date}
                 event={event}
                 session={i}
                 showTime
