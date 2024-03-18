@@ -7,6 +7,8 @@ import { UserController } from './../controllers/user.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { SupportController } from './../controllers/support.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { StateController } from './../controllers/state.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { StageController } from './../controllers/stage.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { SpeakerController } from './../controllers/speaker.controller';
@@ -115,6 +117,86 @@ const models: TsoaRoute.Models = {
             "status": {"dataType":"string","required":true},
             "message": {"dataType":"string","required":true},
             "data": {"dataType":"array","array":{"dataType":"refObject","ref":"ISupport"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SheetType": {
+        "dataType": "refEnum",
+        "enums": ["gsheet","pretalx"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "StateStatus": {
+        "dataType": "refEnum",
+        "enums": ["pending","completed","canceled","sync"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "StateType": {
+        "dataType": "refEnum",
+        "enums": ["event","video"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IState": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "eventId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "sessionId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "eventSlug": {"dataType":"string"},
+            "sessionSlug": {"dataType":"string"},
+            "sheetType": {"ref":"SheetType"},
+            "status": {"ref":"StateStatus"},
+            "type": {"ref":"StateType"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_IState_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"ref":"IState"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateStateDto": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "eventId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "sessionId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "eventSlug": {"dataType":"string"},
+            "sessionSlug": {"dataType":"string"},
+            "sheetType": {"ref":"SheetType","required":true},
+            "status": {"ref":"StateStatus"},
+            "type": {"ref":"StateType"},
+            "StateStatus": {"ref":"StateStatus","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UpdateStateDto": {
+        "dataType": "refObject",
+        "properties": {
+            "eventId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "sessionId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "eventSlug": {"dataType":"string"},
+            "sessionSlug": {"dataType":"string"},
+            "sheetType": {"ref":"SheetType","required":true},
+            "StateStatus": {"ref":"StateStatus","required":true},
+            "type": {"ref":"StateType"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_Array_IState__": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IState"}},
         },
         "additionalProperties": false,
     },
@@ -797,6 +879,86 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.getAllTickets.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/states',
+            authenticateMiddleware([{"jwt":["org"]}]),
+            ...(fetchMiddlewares<RequestHandler>(StateController)),
+            ...(fetchMiddlewares<RequestHandler>(StateController.prototype.createState)),
+
+            function StateController_createState(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateStateDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new StateController();
+
+
+              const promise = controller.createState.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 201, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/states/:stateId',
+            authenticateMiddleware([{"jwt":["org"]}]),
+            ...(fetchMiddlewares<RequestHandler>(StateController)),
+            ...(fetchMiddlewares<RequestHandler>(StateController.prototype.updateState)),
+
+            function StateController_updateState(request: any, response: any, next: any) {
+            const args = {
+                    stateId: {"in":"path","name":"stateId","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"ref":"UpdateStateDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new StateController();
+
+
+              const promise = controller.updateState.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/states',
+            ...(fetchMiddlewares<RequestHandler>(StateController)),
+            ...(fetchMiddlewares<RequestHandler>(StateController.prototype.getAllStates)),
+
+            function StateController_getAllStates(request: any, response: any, next: any) {
+            const args = {
+                    eventId: {"in":"query","name":"eventId","dataType":"string"},
+                    sessionId: {"in":"query","name":"sessionId","dataType":"string"},
+                    eventSlug: {"in":"query","name":"eventSlug","dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new StateController();
+
+
+              const promise = controller.getAllStates.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 200, next);
             } catch (err) {
                 return next(err);

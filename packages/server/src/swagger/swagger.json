@@ -188,6 +188,224 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"SheetType": {
+				"enum": [
+					"gsheet",
+					"pretalx"
+				],
+				"type": "string"
+			},
+			"StateStatus": {
+				"enum": [
+					"pending",
+					"completed",
+					"canceled",
+					"sync"
+				],
+				"type": "string"
+			},
+			"StateType": {
+				"enum": [
+					"event",
+					"video"
+				],
+				"type": "string"
+			},
+			"IState": {
+				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"sessionId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"eventSlug": {
+						"type": "string"
+					},
+					"sessionSlug": {
+						"type": "string"
+					},
+					"sheetType": {
+						"$ref": "#/components/schemas/SheetType"
+					},
+					"status": {
+						"$ref": "#/components/schemas/StateStatus"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StateType"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IState_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IState"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateStateDto": {
+				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"sessionId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"eventSlug": {
+						"type": "string"
+					},
+					"sessionSlug": {
+						"type": "string"
+					},
+					"sheetType": {
+						"$ref": "#/components/schemas/SheetType"
+					},
+					"status": {
+						"$ref": "#/components/schemas/StateStatus"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StateType"
+					},
+					"StateStatus": {
+						"$ref": "#/components/schemas/StateStatus"
+					}
+				},
+				"required": [
+					"sheetType",
+					"StateStatus"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateStateDto": {
+				"properties": {
+					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"sessionId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"eventSlug": {
+						"type": "string"
+					},
+					"sessionSlug": {
+						"type": "string"
+					},
+					"sheetType": {
+						"$ref": "#/components/schemas/SheetType"
+					},
+					"StateStatus": {
+						"$ref": "#/components/schemas/StateStatus"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StateType"
+					}
+				},
+				"required": [
+					"sheetType",
+					"StateStatus"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IState__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IState"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStreamSettings": {
 				"properties": {
 					"streamId": {
@@ -2063,6 +2281,136 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/states": {
+			"post": {
+				"operationId": "CreateState",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IState_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"State"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateStateDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllStates",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IState__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"State"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "eventId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "sessionId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "eventSlug",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/states/{stateId}": {
+			"put": {
+				"operationId": "UpdateState",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IState_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"State"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "stateId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateStateDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/stages": {
