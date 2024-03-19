@@ -42,13 +42,13 @@ const Layout = async ({
 
   return (
     <div className="w-screen h-screen">
-      <HomePageNavbar
+      {/* <HomePageNavbar
         pages={pages}
         showSearchBar={false}
         currentOrganization={params.organization}
         organizations={userData?.organizations}
-      />
-      <div className="top-[64px] overflow-hidden flex flex-col h-[calc(100vh-64px)] border-t border-secondary">
+      /> */}
+      <div className="overflow-hidden flex flex-col h-full border-t border-secondary">
         {!hasOrganization(
           userData?.organizations,
           params.organization
@@ -67,7 +67,7 @@ const Layout = async ({
           </div>
         ) : (
           <div className="h-full w-full flex flex-row">
-            <div className="w-full h-full overflow-scroll">
+            <div className="w-full h-full overflow-auto">
               {children}
             </div>
           </div>
