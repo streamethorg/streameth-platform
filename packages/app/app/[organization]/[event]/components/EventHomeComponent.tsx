@@ -94,12 +94,9 @@ export default function EventHomeComponent({
                 <span className="mr-2">&#9200;</span>
                 <span className="capitalize">
                   {event?.startTime
-                    ? `${event.startTime?.replace(
-                        /\s?[AP]M/g,
-                        ''
-                      )} - ${
+                    ? `${getEventPeriod(event.startTime)} - ${
                         event.endTime
-                          ? event.endTime?.replace(/\s?[AP]M/g, '')
+                          ? getEventPeriod(event.endTime)
                           : ''
                       } ${event.timezone}`
                     : 'TBD'}
