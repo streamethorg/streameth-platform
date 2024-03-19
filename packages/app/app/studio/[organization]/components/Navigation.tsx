@@ -40,21 +40,25 @@ const Navigation = async ({
   return (
     <div
       className={cn(
-        'overflow-auto bg-[#251571]  w-full max-w-[250px] h-full border-r border-border flex flex-col text-foreground'
+        'overflow-auto w-full max-w-[250px] h-full border-r border-border flex flex-col text-foreground'
       )}>
-      <div className="flex space-y-2 p-4 gap-2 text-white items-center border-b border-border">
+      <div className="flex flex-col space-y-2 p-4 justify-between items-center border-b border-border">
         <Avatar className="">
           <AvatarImage
-            src="/logo.png"
-            alt="Streameth Studio"
-            width={40}
-            height={35}
+            src={organization?.logo}
+            alt={organization.name}
           />
+          <AvatarFallback>
+            {organization.name.slice(0, 1)}
+          </AvatarFallback>
         </Avatar>
-        <div>
-          <h3 className="font-bold text-2xl">StreamETH</h3>
-          <p className="font-medium text-sm tracking-wider">STUDIO</p>
-        </div>
+
+        <h3 className="text-2xl font-bold">{organization.name}</h3>
+        <Badge variant={'outline'}>
+          <Link href={`/archive?organization=${organization.slug}`}>
+            Organization page
+          </Link>
+        </Badge>
       </div>
       <Accordion type="single" collapsible>
         {navigationItems.map((item, index) => (
