@@ -36,26 +36,25 @@ export default function SessionList({
     )
   }
 
-  const sortedSessions =
-    getCurrDaySessions().length && !date
-      ? getCurrDaySessions().sort((a, b) => {
-          if (a.start < b.start) {
-            return -1
-          } else if (a.start > b.start) {
-            return 1
-          } else {
-            return 0
-          }
-        })
-      : sessions.slice().sort((a, b) => {
-          if (a.start < b.start) {
-            return -1
-          } else if (a.start > b.start) {
-            return 1
-          } else {
-            return 0
-          }
-        })
+  const sortedSessions = getCurrDaySessions().length
+    ? getCurrDaySessions().sort((a, b) => {
+        if (a.start < b.start) {
+          return -1
+        } else if (a.start > b.start) {
+          return 1
+        } else {
+          return 0
+        }
+      })
+    : sessions.slice().sort((a, b) => {
+        if (a.start < b.start) {
+          return -1
+        } else if (a.start > b.start) {
+          return 1
+        } else {
+          return 0
+        }
+      })
 
   useEffect(() => {
     if (currentSession) {
