@@ -112,8 +112,8 @@ export const signUp = async (
       event.dataImporter[0].config.sheetId
     )
 
-    await googleSheetService.appendData('emails', [
-      [new Date().toLocaleTimeString(), email],
+    await googleSheetService.appendData('Email Sign-Ups', [
+      [new Date().toString(), email],
     ])
 
     return { message: 'Signed up successfully', success: true }
