@@ -15,9 +15,11 @@ export const ConnectWalletButton = ({
       {({ isConnected, show, truncatedAddress, ensName }) => {
         return (
           <Button onClick={show} className="">
-            {isConnected
+            {isConnected && !isSignedIn
+              ? 'Sign In'
+              : isConnected
               ? ensName ?? truncatedAddress
-              : 'Connect Wallet'}
+              : btnText}
           </Button>
         )
       }}
