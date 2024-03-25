@@ -24,7 +24,7 @@ class ImporterService {
 
   private async initializeImporter(): Promise<void> {
     console.info('queue', await this.queue.getRepeatableJobs());
-    //this.queue.obliterate({force: true})
+    this.queue.obliterate({ force: true });
     this.queue.process(async (job: any) => {
       try {
         let states = await State.find({
@@ -39,7 +39,7 @@ class ImporterService {
           );
           let sheetId = eventData.dataImporter[0].config.sheetId;
           let eventId = eventData._id.toString();
-          await controller.generateSpeakers(sheetId, eventId);
+          //await controller.generateSpeakers(sheetId, eventId);
           await controller.generateStages(sheetId, eventId);
           await controller.generateSessions({
             sheetId: sheetId,
@@ -61,7 +61,7 @@ class ImporterService {
 
   private async initializeSyncImporter(): Promise<void> {
     console.info('syncQueue', await this.queue.getRepeatableJobs());
-    //this.syncQueue.obliterate({force: true})
+    this.syncQueue.obliterate({force: true})
     this.syncQueue.process(async (job: any) => {
       try {
         let states = await State.find({
