@@ -22,10 +22,9 @@ const NavigationItem = ({
     <AccordionItem
       value={title}
       title={title}
-      className={`p-4 flex flex-row space-x-2 cursor-pointer ${
-        active
-          ? 'bg-primary-foreground text-primary border-b-0 border-t-0 border-l-4 border-primary'
-          : 'border-none '
+      className={`drop-shadow font-light border-none flex flex-row space-x-4 cursor-pointer p-2 ${
+        active &&
+        'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'
       }`}
       onClick={() => {
         handleTermChange([

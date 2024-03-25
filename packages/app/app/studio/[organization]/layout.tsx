@@ -9,6 +9,7 @@ import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import { hasOrganization } from '@/lib/utils/utils'
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Link from 'next/link'
+import Navigation from './components/Navigation'
 
 const Layout = async ({
   children,
@@ -41,37 +42,41 @@ const Layout = async ({
   ]
 
   return (
-    <div className="w-screen h-screen">
-      <HomePageNavbar
-        pages={pages}
-        showSearchBar={false}
-        currentOrganization={params.organization}
-        organizations={userData?.organizations}
-      />
-      <div className="top-[64px] overflow-hidden flex flex-col h-[calc(100vh-64px)] border-t border-secondary">
-        {!hasOrganization(
-          userData?.organizations,
-          params.organization
-        ) ? (
-          <div className="flex flex-col justify-center items-center h-screen">
-            You do not belong to this organization, switch
-            organization or create a new one
-            <div className="flex gap-5 mt-5">
-              <SwitchOrganization
-                organizations={userData?.organizations}
-              />
-              <Link href="/studio/create">
-                <Button>Create Organization</Button>
-              </Link>
+    <div className="w-screen h-screen flex flex-row">
+      <Navigation organizationSlug={params.organization} />
+      <div className='flex flex-col w-full'>
+        <HomePageNavbar
+          pages={pages}
+          showSearchBar={false}
+          currentOrganization={params.organization}
+          organizations={userData?.organizations}
+        />
+
+        <div className="top-[64px] overflow-hidden flex flex-col h-[calc(100vh-64px)] border-t border-secondary">
+          {!hasOrganization(
+            userData?.organizations,
+            params.organization
+          ) ? (
+            <div className="flex flex-col justify-center items-center h-screen">
+              You do not belong to this organization, switch
+              organization or create a new one
+              <div className="flex gap-5 mt-5">
+                <SwitchOrganization
+                  organizations={userData?.organizations}
+                />
+                <Link href="/studio/create">
+                  <Button>Create Organization</Button>
+                </Link>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="h-full w-full flex flex-row">
-            <div className="w-full h-full overflow-scroll">
-              {children}
+          ) : (
+            <div className="h-full w-full flex flex-row">
+              <div className="w-full h-full overflow-scroll">
+                {children}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )
