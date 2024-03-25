@@ -13,9 +13,9 @@ export class CreateStageDto implements IStage {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  eventId: string;
+  eventId?: string;
 
   @IsNotEmpty()
   @IsObject()

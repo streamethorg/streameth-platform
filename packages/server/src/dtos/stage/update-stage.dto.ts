@@ -13,9 +13,9 @@ export class UpdateStageDto {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  eventId: string;
+  eventId?: string;
 
   @IsNotEmpty()
   @IsObject()

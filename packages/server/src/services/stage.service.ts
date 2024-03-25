@@ -3,6 +3,7 @@ import { HttpException } from '@exceptions/HttpException';
 import { IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
 import Events from '@models/event.model';
+import { Types } from 'mongoose';
 
 export default class StageService {
   private path: string;
@@ -13,10 +14,14 @@ export default class StageService {
   }
 
   async create(data: IStage): Promise<IStage> {
+    const eventId =
+      !data.eventId || data.eventId.toString().length === 0
+        ? new Types.ObjectId().toString()
+        : data.eventId;
     return this.controller.store.create(
       data.name,
-      data,
-      `${this.path}/${data.eventId}`,
+      { ...data, eventId: eventId },
+      `${this.path}/${eventId}`,
     );
   }
 
