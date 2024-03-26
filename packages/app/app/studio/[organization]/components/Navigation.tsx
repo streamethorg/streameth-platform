@@ -10,10 +10,24 @@ const navigationItems = [
     title: 'Home',
     navigationPath: '/studio',
     icon: <Home />,
+  }, {
+    title: 'Events',
+    navigationPath: 'events',
+    icon: <Videotape />,
   },
   {
-    title: 'Videos',
+    title: 'Library',
     navigationPath: 'videos',
+    icon: <Videotape />,
+  },
+  {
+    title: 'Livestreams',
+    navigationPath: 'livestreams',
+    icon: <Videotape />,
+  },
+  {
+    title: 'NFTS',
+    navigationPath: 'nfts',
     icon: <Videotape />,
   },
   {
