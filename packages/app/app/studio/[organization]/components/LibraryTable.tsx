@@ -19,6 +19,7 @@ import {
 import { Button } from '@/components/ui/button'
 import TableRows from './TableRows'
 import { Suspense } from 'react'
+import UploadAsset from './AssetBanner'
 
 const LibraryTable = async ({
   organization,
@@ -54,7 +55,7 @@ const LibraryTable = async ({
   const assets = await Promise.all(assetPromises)
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
       <div className="flex flex-col w-full h-full bg-white">
         <Card className="p-4 shadow-none lg:border-none bg-secondary">
           <CardHeader>
@@ -64,38 +65,43 @@ const LibraryTable = async ({
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <Button variant={'primary'} className="text-white">
-              Upload video
-            </Button>
+            <UploadAsset organization={organization} />
           </CardFooter>
         </Card>
-        <Table className="bg-white">
-          <TableHeader className="sticky top-0 z-50 bg-white">
-            <TableRow className="hover:bg-white">
-              <TableHead>Index</TableHead>
-              <TableHead>Asset name</TableHead>
-              <TableHead>Created at</TableHead>
-              <TableHead>IPFS Url</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody className="overflow-scroll">
-            {sessions?.map((item, index) => (
-              <TableRow key={item._id}>
-                <TableRows
-                  item={item}
-                  index={index}
-                  organization={organization}
-                  hash={
-                    assets[index]?.storage?.ipfs?.nftMetadata?.cid
-                  }
-                />
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center">
+              Loading...
+            </div>
+          }>
+          <Table className="bg-white">
+            <TableHeader className="sticky top-0 z-50 bg-white">
+              <TableRow className="hover:bg-white">
+                <TableHead>Index</TableHead>
+                <TableHead>Asset name</TableHead>
+                <TableHead>Created at</TableHead>
+                <TableHead>IPFS Url</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody className="overflow-scroll">
+              {sessions?.map((item, index) => (
+                <TableRow key={item._id}>
+                  <TableRows
+                    item={item}
+                    index={index}
+                    organization={organization}
+                    hash={
+                      assets[index]?.storage?.ipfs?.nftMetadata?.cid
+                    }
+                  />
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Suspense>
       </div>
-    </Suspense>
+    </>
   )
 }
 
