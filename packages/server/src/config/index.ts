@@ -28,4 +28,8 @@ export const config = {
   storage: {
     thirdWebSecretKey: validatedEnv.THIRDWEB_SECRET_KEY,
   },
+  livepeer: {
+    host: validatedEnv.LIVEPEER_BASE_URL,
+    secretKey: validatedEnv.LIVEPEER_API_KEY,
+  },
 };

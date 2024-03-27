@@ -7,6 +7,7 @@ import Event from '@models/event.model';
 import { ThirdwebStorage } from '@thirdweb-dev/storage';
 import { config } from '@config';
 import { Types } from 'mongoose';
+import Stage from '@models/stage.model';
 
 export default class SessionServcie {
   private path: string;
@@ -77,7 +78,8 @@ export default class SessionServcie {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      filter = { ...filter, stageId: d.stageId };
+      let stage = await Stage.findOne({ slug: d.stageId });
+      filter = { ...filter, stageId: stage?._id };
     }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
     const pageNumber = Number(d.page) || 0;
