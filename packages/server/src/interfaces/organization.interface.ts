@@ -9,6 +9,7 @@ export interface IOrganization {
   location?: string;
   accentColor?: string;
   slug?: string;
+  banner?: string;
   walletAddress: string;
 }
 export interface IOrganizationModel
