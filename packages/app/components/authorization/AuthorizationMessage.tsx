@@ -37,7 +37,7 @@ const AuthorizationMessage = () => {
       </div>
       <div className="w-1/2 h-full bg-primary relative">
         <Image
-        quality={100}
+          quality={100}
           alt="login background"
           src={LoginBackground}
           layout="fill"
@@ -49,9 +49,7 @@ const AuthorizationMessage = () => {
           className="w-full h-full object-cover"
         /> */}
       </div>
-      <div>
-        
-      </div>
+      <div></div>
     </div>
   )
 }
