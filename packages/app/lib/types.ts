@@ -129,3 +129,23 @@ export interface EmbedPageParams {
     playbackId: string
   }
 }
+
+export interface LivestreamPageParams {
+  params: {
+    organization: string
+  }
+  searchParams: {
+    streamId: string
+  }
+}
+
+export interface IGenerateEmbed {
+  playbackId?: string
+  vod?: boolean
+  streamId?: string
+  playerName: string
+}
+
+export interface IGenerateEmbedCode extends IGenerateEmbed {
+  url: string
+}

@@ -65,7 +65,7 @@ const IPluginSchema = z.object({
 
 export const StageSchema = z.object({
   name: z.string().min(1, { message: 'Required' }),
-  eventId: z.string(),
+  eventId: z.string().optional(),
   streamSettings: IStreamSettingsSchema,
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
