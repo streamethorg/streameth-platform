@@ -58,9 +58,7 @@ const OrganizationPage = async ({
                 </CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button variant="primary">
-                  Upload video
-                </Button>
+                <Button variant="primary">Upload video</Button>
               </CardFooter>
             </Card>
             <Card className="text-white min-h-full w-full m-auto border-secondary col-span-1 bg-gradient-to-b from-[#1E293B] to-[#000000] ">
@@ -72,9 +70,7 @@ const OrganizationPage = async ({
                 </CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button variant="primary">
-                  Upload video
-                </Button>
+                <Button variant="primary">Upload video</Button>
               </CardFooter>
             </Card>
             <Card className="text-white bg-gradient-to-br from-[#3D22BA] to-[#6426EF] w-full h-full col-span-2 ">
