@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-gradient-to-b from-[#4219FF] to-[#3D22BA] border-primary',
+        primary:
+          'bg-gradient-to-b from-[#4219FF] to-[#3D22BA] border-primary',
         default:
           'bg-primary text-primary-foreground hover:bg-opacity-80',
         destructive:

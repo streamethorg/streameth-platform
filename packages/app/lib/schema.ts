@@ -99,6 +99,7 @@ export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   logo: z.string().min(1, 'Logo is required'),
   email: z.string().email(),
+  banner: z.string().optional(),
 })
 
 export const supportSchema = z.object({

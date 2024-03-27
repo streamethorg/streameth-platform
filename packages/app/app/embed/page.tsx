@@ -1,16 +1,22 @@
-'use client'
 import Player from '@/components/ui/Player'
-import { buildPlaybackUrl } from '@/lib/utils/utils'
-import useSearchParams from '@/lib/hooks/useSearchParams'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import { Livepeer } from 'livepeer'
+import { getSrc } from '@livepeer/react/external'
+import { EmbedPageParams } from '@/lib/types'
 
-const Embed = () => {
-  const { searchParams } = useSearchParams()
-  const playbackId = searchParams.get('playbackId')
-  const vod = searchParams.get('vod') === 'true'
-  if (!playbackId) {
-    return notFound()
+const Embed = ({
+  vod,
+  playbackId,
+  videoSrc,
+}: {
+  videoSrc?: string
+  playbackId: string
+  vod?: string
+}) => {
+  const getVideoUrl = () => {
+    if (vod === 'true') return videoSrc
+    return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
   }
 
   return (
@@ -18,7 +24,7 @@ const Embed = () => {
       <Player
         src={[
           {
-            src: buildPlaybackUrl(playbackId, vod) as `${string}m3u8`,
+            src: getVideoUrl() as `${string}m3u8`,
             width: 1920,
             height: 1080,
             mime: 'application/vnd.apple.mpegurl',
@@ -29,10 +35,28 @@ const Embed = () => {
     </div>
   )
 }
-const EmbedPage = () => (
-  <Suspense>
-    <Embed />
-  </Suspense>
-)
+const EmbedPage = async ({ searchParams }: EmbedPageParams) => {
+  if (!searchParams.playbackId) {
+    return notFound()
+  }
+  const livepeer = new Livepeer({
+    apiKey: process.env.LIVEPEER_API_KEY,
+  })
+
+  const playbackInfo = await livepeer.playback.get(
+    searchParams.playbackId
+  )
+  const src = getSrc(playbackInfo.playbackInfo)
+
+  return (
+    <Suspense>
+      <Embed
+        playbackId={searchParams?.playbackId}
+        vod={searchParams.vod}
+        videoSrc={src?.[1].src}
+      />
+    </Suspense>
+  )
+}
 
 export default EmbedPage

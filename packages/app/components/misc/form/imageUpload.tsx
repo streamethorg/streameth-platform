@@ -33,8 +33,8 @@ export default function ImageUpload({
   className,
   ...rest
 }: {
-  id: string
-  placeholder: string
+  id?: string
+  placeholder?: string
   aspectRatio: number
   onChange: (files: string | null) => void
   value: string | null | undefined

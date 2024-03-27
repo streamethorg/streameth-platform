@@ -122,3 +122,10 @@ export interface IExtendedChat extends Omit<IChat, '_id'> {
 export interface IExtendedState extends Omit<IState, '_id'> {
   _id: string
 }
+
+export interface EmbedPageParams {
+  searchParams: {
+    vod: string
+    playbackId: string
+  }
+}

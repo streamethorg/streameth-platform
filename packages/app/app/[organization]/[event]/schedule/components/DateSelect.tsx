@@ -14,7 +14,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
 
   return (
     <Select
-      defaultValue={searchParams.get('date') || dates[0].toString()}
+      defaultValue={searchParams.get('date') || dates[0]?.toString()}
       onValueChange={(value) =>
         handleTermChange([
           {
@@ -32,6 +32,9 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
             {new Date(dateNum).toDateString()}
           </SelectItem>
         ))}
+        {dates.length > 1 && (
+          <SelectItem value="all">All Dates</SelectItem>
+        )}
       </SelectContent>
     </Select>
   )
