@@ -1,14 +1,14 @@
 'use client'
 
-import { Label } from '@/components/ui/label'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { FilePenLine, Eye, TrashIcon, Menu } from 'lucide-react'
+import { FilePenLine, Eye, Menu } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import DeleteAsset from './DeleteAsset'
 
 const PopoverActions = ({
   itemId,
@@ -47,14 +47,10 @@ const PopoverActions = ({
                 <p>View</p>
               </Link>
             </Button>
-            <Button variant={'destructive'}>
-              <Link
-                className="flex flex-row justify-center items-center space-x-2"
-                href={`/watch?session=${itemId}`}>
-                <TrashIcon />
-                <p>Delete</p>
-              </Link>
-            </Button>
+            <DeleteAsset
+              organizationId={organization}
+              sessionId={itemId}
+            />
           </div>
         </div>
       </PopoverContent>

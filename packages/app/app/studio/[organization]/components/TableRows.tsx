@@ -30,7 +30,7 @@ const TableRows = ({
   return (
     <>
       <TableCell className="font-medium">
-        <p>{index}</p>
+        <p>{index + 1}</p>
       </TableCell>
       <TableCell className="font-medium">
         <div className="flex flex-row items-center space-x-4 w-full">
