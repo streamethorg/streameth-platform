@@ -68,6 +68,7 @@ export interface studioPageParams {
     settings: string
     stage: string
     stageSetting: string
+    streamId: string
   }
 }
 
@@ -121,4 +122,31 @@ export interface IExtendedChat extends Omit<IChat, '_id'> {
 
 export interface IExtendedState extends Omit<IState, '_id'> {
   _id: string
+}
+
+export interface EmbedPageParams {
+  searchParams: {
+    vod: string
+    playbackId: string
+  }
+}
+
+export interface LivestreamPageParams {
+  params: {
+    organization: string
+  }
+  searchParams: {
+    streamId: string
+  }
+}
+
+export interface IGenerateEmbed {
+  playbackId?: string
+  vod?: boolean
+  streamId?: string
+  playerName: string
+}
+
+export interface IGenerateEmbedCode extends IGenerateEmbed {
+  url: string
 }

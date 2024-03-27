@@ -8,7 +8,7 @@ import {
 } from 'connectkit'
 import { PropsWithChildren } from 'react'
 import { http, createConfig, WagmiProvider } from 'wagmi'
-import { optimism, mainnet, base } from 'wagmi/chains'
+import { mainnet, base, baseSepolia } from 'wagmi/chains'
 import { apiUrl } from '../utils/utils'
 import { storeSession } from '@/lib/actions/auth'
 import {
@@ -18,7 +18,7 @@ import {
 
 let nonce: string
 let walletAddress: string
-
+let selectedChainId: number
 const siweConfig = {
   getNonce: async () => {
     const res = await fetch(`${apiUrl()}/auth/nonce/generate`)
@@ -29,6 +29,7 @@ const siweConfig = {
   },
   createMessage: ({ nonce, address, chainId }) => {
     walletAddress = address
+    selectedChainId = chainId
     return new SiweMessage({
       nonce,
       chainId,
@@ -55,6 +56,7 @@ const siweConfig = {
     const data = (await res.json()).data
     localStorage.setItem('SWIEToken', data.token)
     localStorage.setItem('address', walletAddress)
+    localStorage.setItem('chainId', selectedChainId.toString())
     // save to user-session cookie
     storeSession({
       token: data.token,
@@ -74,10 +76,11 @@ const siweConfig = {
       })
       const resData = (await res.json()).data
       const address = localStorage.getItem('address')
+      const chainId = localStorage.getItem('chainId')
       if (resData && address) {
         return {
           address: address as string,
-          chainId: 1,
+          chainId: Number(chainId),
         }
       } else return null
     }
@@ -100,11 +103,14 @@ const siweConfig = {
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [mainnet, base],
+    chains: [mainnet, base, baseSepolia],
     transports: {
       // RPC URL for each chain
       [mainnet.id]: http(),
       [base.id]: http(),
+      [baseSepolia.id]: http(
+        process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL || ''
+      ),
     },
     ssr: true,
     // Required API Keys

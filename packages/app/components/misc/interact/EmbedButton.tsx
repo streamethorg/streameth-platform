@@ -14,6 +14,7 @@ import {
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
 import { Input } from '@/components/ui/input'
+import { generateEmbedCode } from '@/lib/utils/utils'
 
 const ModalContent: React.FC<{
   playbackId?: string
@@ -33,21 +34,13 @@ const ModalContent: React.FC<{
     }
   }, [copied])
 
-  const generateParams = () => {
-    const params = new URLSearchParams()
-    params.append('playbackId', playbackId ?? '')
-    params.append('vod', vod ? 'true' : 'false')
-    params.append('streamId', streamId ?? '')
-    params.append('playerName', playerName ?? '')
-
-    return params.toString()
-  }
-
-  const generateEmbedCode = () => {
-    return `<iframe src="${url}/embed/?${generateParams()}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-  }
-
-  const generatedEmbedCode = generateEmbedCode()
+  const generatedEmbedCode = generateEmbedCode({
+    url,
+    playbackId,
+    vod,
+    streamId,
+    playerName,
+  })
 
   const copyToClipboard = async () => {
     try {

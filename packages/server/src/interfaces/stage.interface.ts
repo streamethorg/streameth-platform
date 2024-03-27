@@ -11,7 +11,7 @@ export interface IPlugin {
 export class IStage {
   _id?: Types.ObjectId;
   name: string;
-  eventId: Types.ObjectId | string;
+  eventId?: Types.ObjectId | string;
   streamSettings: IStreamSettings;
   plugins?: IPlugin[];
   order?: number;

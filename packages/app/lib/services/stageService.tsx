@@ -65,6 +65,7 @@ export async function createStage({
     },
     body: JSON.stringify(stage),
   })
+
   if (!response.ok) {
     throw 'Error creating stage'
   }

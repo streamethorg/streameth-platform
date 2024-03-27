@@ -19,6 +19,7 @@ export const createStageAction = async ({
   if (!authToken) {
     throw new Error('No user session found')
   }
+
   try {
     // post to https://livepeer.studio/api/stream
     const response = await fetch(
@@ -42,6 +43,7 @@ export const createStageAction = async ({
     console.error('Error creating stream:', error)
     throw new Error('Error creating stream')
   }
+
   const response = await createStage({
     stage: stage,
     authToken,
@@ -118,25 +120,30 @@ export const createMultistream = async (
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
   })
-  const response = await livepeer.stream.createMultistreamTarget(
-    streamId,
-    {
-      spec: {
-        name,
-        url: url + '/' + streamKey,
-      },
-      profile: 'source',
+  try {
+    const response = await livepeer.stream.createMultistreamTarget(
+      streamId,
+      {
+        spec: {
+          name,
+          url: url + '/' + streamKey,
+        },
+        profile: 'source',
+      }
+    )
+    if (response.statusCode !== 200) {
+      return {
+        message: 'Error creating multistream target',
+        success: false,
+      }
     }
-  )
-  if (response.statusCode !== 200) {
-    return {
-      message: 'Error creating multistream target',
-      success: false,
-    }
-  }
-  revalidatePath('/studio')
+    revalidatePath('/studio')
 
-  return { message: 'Multistream target created', success: true }
+    return { message: 'Multistream target created', success: true }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error creating multistream:', success: false }
+  }
 }
 
 export const deleteMultistreamTarget = async (
@@ -152,10 +159,13 @@ export const deleteMultistreamTarget = async (
     streamId,
     targetId
   )
-
+  if (response.statusCode !== 200) {
+    console.error('Error deleting multistream target')
+    return null
+  }
   revalidatePath('/studio')
 
-  return response
+  return response.rawResponse?.statusText
 }
 
 export const getMultistreamTarget = async ({

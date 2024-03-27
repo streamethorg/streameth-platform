@@ -10,7 +10,8 @@ const navigationItems = [
     title: 'Home',
     navigationPath: '/studio',
     icon: <Home />,
-  }, {
+  },
+  {
     title: 'Events',
     navigationPath: 'events',
     icon: <Videotape />,
@@ -23,7 +24,7 @@ const navigationItems = [
   {
     title: 'Livestreams',
     navigationPath: 'livestreams',
-    icon: <Videotape />,
+    icon: <Radio />,
   },
   {
     title: 'NFTS',
@@ -51,12 +52,16 @@ const Navigation = async ({
       )}>
       <div className="flex flex-col p-4  justify-between items-center">
         <Image src={Logo} alt="Logo" width={160} height={80} />
+
+        <Accordion
+          type="single"
+          className="p-4 space-y-4"
+          collapsible>
+          {navigationItems.map((item, index) => (
+            <NavigationItem key={index} {...item} />
+          ))}
+        </Accordion>
       </div>
-      <Accordion type="single" className='p-4 space-y-4' collapsible>
-        {navigationItems.map((item, index) => (
-          <NavigationItem key={index} {...item} />
-        ))}
-      </Accordion>
     </div>
   )
 }

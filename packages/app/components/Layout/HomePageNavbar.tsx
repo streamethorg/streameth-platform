@@ -182,14 +182,7 @@ const PCNavBar = ({
           userData?.organizations?.[0]?.slug
         )}
       />
-      {organizations && (
-        <div className="m-1 mr-2">
-          <SwitchOrganization
-            organization={currentOrganization}
-            organizations={organizations}
-          />
-        </div>
-      )}
+
       <ConnectWalletButton />
     </NavigationMenu>
   )

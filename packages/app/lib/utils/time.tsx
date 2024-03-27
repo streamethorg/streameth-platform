@@ -1,4 +1,5 @@
 import moment from 'moment-timezone'
+import { IExtendedSession } from '../types'
 
 export function generateTimezones() {
   const timezones = moment.tz.names()
@@ -83,4 +84,23 @@ export const isCurrentDateInUTC = (): number => {
 
 export const getDateInUTC = (date: Date): number => {
   return moment(date).utc().startOf('day').valueOf()
+}
+
+export const getSessionDays = (sessions: IExtendedSession[]) => {
+  // Create a Set to store unique dates
+  const uniqueDates = new Set()
+
+  // Iterate through sessions to extract and filter dates
+  sessions.forEach((session) => {
+    const sessionDate = new Date(session.start).toDateString()
+    uniqueDates.add(sessionDate)
+  })
+
+  // Convert Set to array and convert each date to timestamp
+  const uniqueDatesArray = Array.from(uniqueDates)
+  const uniqueTimestampsArray = uniqueDatesArray.map((dateString) =>
+    new Date(dateString as string).getTime()
+  )
+
+  return uniqueTimestampsArray
 }
