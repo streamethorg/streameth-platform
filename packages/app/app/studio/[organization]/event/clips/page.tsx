@@ -60,7 +60,7 @@ const EventClips = async ({
     const sessionContent =
       session &&
       selectedSession &&
-      stageData.streamSettings.streamId ? (
+      stageData.streamSettings?.streamId ? (
         <Suspense
           key={selectedSession + selectedRecording}
           fallback={<div className="w-full">loading</div>}>
@@ -68,7 +68,7 @@ const EventClips = async ({
             session={session}
             selectedRecording={selectedRecording}
             replaceAsset={replaceAsset}
-            streamId={stageData.streamSettings.streamId}
+            streamId={stageData.streamSettings?.streamId}
           />
         </Suspense>
       ) : (

@@ -37,7 +37,9 @@ export const createStageAction = async ({
     )
 
     const data = await response.json()
-    stage.streamSettings.streamId = data.id
+    if(stage.streamSettings?.streamId){
+      stage.streamSettings.streamId = data.id
+    }
   } catch (error) {
     console.error('Error creating stream:', error)
     throw new Error('Error creating stream')

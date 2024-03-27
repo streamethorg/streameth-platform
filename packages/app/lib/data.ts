@@ -166,7 +166,7 @@ export async function fetchNavBarRoutes({
     })
 
   for (const stage of stageData) {
-    if (stage.streamSettings.streamId) {
+    if (stage.streamSettings?.streamId) {
       pages.push({
         href: `/${organization}/${event}/stage/${stage._id}`,
         name: stage.name,

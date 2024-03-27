@@ -111,7 +111,7 @@ const StageAccordion = ({
                 handleDeleteStage(
                   stage._id,
                   event?.organizationId as string,
-                  stage.streamSettings.streamId ?? ''
+                  stage.streamSettings?.streamId ?? ''
                 )
               }}>
               <p className={`px-2`}>Delete</p>
