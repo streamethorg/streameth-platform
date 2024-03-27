@@ -4,6 +4,7 @@ import { IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
 import Events from '@models/event.model';
 import { Types } from 'mongoose';
+import { createStream } from '@utils/livepeer';
 
 export default class StageService {
   private path: string;
@@ -18,9 +19,18 @@ export default class StageService {
       !data.eventId || data.eventId.toString().length === 0
         ? new Types.ObjectId().toString()
         : data.eventId;
+    const stream = await createStream(data.name);
     return this.controller.store.create(
       data.name,
-      { ...data, eventId: eventId },
+      {
+        ...data,
+        eventId: eventId,
+        streamSettings: {
+          streamId: stream.streamId,
+          parentId: stream.parentId,
+          playbackId: stream.playbackId,
+        },
+      },
       `${this.path}/${eventId}`,
     );
   }
@@ -54,6 +64,13 @@ export default class StageService {
       { eventId: event?._id },
       `${this.path}/${eventId}`,
     );
+  }
+  async findAllStagesForOrganization(
+    organizationId: string,
+  ): Promise<Array<IStage>> {
+    return await this.controller.store.findAll({
+      organizationId: organizationId,
+    });
   }
 
   async deleteOne(stageId: string): Promise<void> {

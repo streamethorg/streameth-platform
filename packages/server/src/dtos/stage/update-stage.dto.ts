@@ -17,9 +17,9 @@ export class UpdateStageDto {
   @IsString()
   eventId?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsObject()
-  streamSettings: IStreamSettings;
+  streamSettings?: IStreamSettings;
 
   @IsOptional()
   @IsArray()
