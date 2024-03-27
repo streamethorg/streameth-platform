@@ -15,11 +15,23 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import Image from 'next/image'
 
 interface Item {
   label: string
   value: string
+  logo?: string
 }
+
+const renderLogo = (logo?: string) => (
+  <Image
+    className="mr-1"
+    src={logo!}
+    alt="logo"
+    width={20}
+    height={20}
+  />
+)
 
 export default function Combobox({
   items = [],
@@ -27,14 +39,20 @@ export default function Combobox({
   setValue,
   valueKey = 'value',
   labelKey = 'label',
+  logo,
 }: {
   items?: Item[]
   value: string
   valueKey?: string
   labelKey?: string
+  logo?: boolean
   setValue: (value: string) => void
 }) {
   const [open, setOpen] = React.useState(false)
+  const orgLogo = items.find(
+    (item) => item[valueKey as keyof Item] === value
+  )?.logo
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -43,7 +61,9 @@ export default function Combobox({
           role="combobox"
           aria-expanded={open}
           className="w-full justify-between">
+          {logo && renderLogo(orgLogo)}
           {value ? value : 'Select item...'}
+
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

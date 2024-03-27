@@ -11,10 +11,12 @@ const SwitchOrganization = ({
   organizations?: IExtendedOrganization[]
 }) => {
   const router = useRouter()
+
   return (
     <div>
       <Combobox
         items={organizations as any[]}
+        logo
         valueKey="slug"
         labelKey="name"
         value={organization || ''}
