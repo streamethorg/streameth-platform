@@ -71,7 +71,7 @@ const Layout = async ({
             </div>
           ) : (
             <div className="h-full w-full flex flex-row">
-              <div className="w-full h-full overflow-auto">
+              <div className="w-full h-full overflow-scroll">
                 {children}
               </div>
             </div>

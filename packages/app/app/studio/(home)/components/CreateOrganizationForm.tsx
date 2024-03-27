@@ -35,6 +35,7 @@ export default function CreateOrganizationForm() {
       name: '',
       logo: '',
       email: '',
+      banner: '',
     },
   })
 

@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import Livestreams from './livestreams/page'
 
 const OrganizationPage = async ({
   params,
@@ -29,6 +30,12 @@ const OrganizationPage = async ({
             <EventList
               organization={params.organization}
               events={events}
+            />
+          ),
+          livestreams: (
+            <Livestreams
+              params={params}
+              searchParams={searchParams}
             />
           ),
           videos: <LibraryTable organization={params.organization} />,

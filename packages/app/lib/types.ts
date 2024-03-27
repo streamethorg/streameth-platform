@@ -68,6 +68,7 @@ export interface studioPageParams {
     settings: string
     stage: string
     stageSetting: string
+    streamId: string
   }
 }
 
