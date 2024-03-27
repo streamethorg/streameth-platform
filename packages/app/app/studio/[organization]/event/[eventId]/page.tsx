@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import Navigation from './components/navigation'
+// import Navigation from '../(editor)/components/navigation'
 import { studioPageParams } from '@/lib/types'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
@@ -9,6 +9,7 @@ import StreamConfig, {
 } from './components/stageSettings/StageConfig'
 import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
 import { notFound } from 'next/navigation'
+import Navigation from './components/navigation'
 
 export default async function EventPage({
   params,
@@ -16,7 +17,7 @@ export default async function EventPage({
 }: studioPageParams) {
   const { settings, eventId, stage: stageId } = searchParams
 
-  const event = await fetchEvent({ eventId: eventId })
+  const event = await fetchEvent({ eventId: params?.eventId })
   if (!event) return notFound()
 
   const stages = await fetchEventStages({

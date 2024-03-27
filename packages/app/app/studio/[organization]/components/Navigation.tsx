@@ -3,28 +3,28 @@ import { Accordion, AccordionItem } from '@/components/ui/accordion'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import Logo from '@/public/studio_logo.png'
 import NavigationItem from './NavigationItem'
-import { Radio, Videotape, Settings, Home } from 'lucide-react'
+import { Radio, Videotape, Video, Settings, Home } from 'lucide-react'
 import Image from 'next/image'
 const navigationItems = [
   {
     title: 'Home',
-    navigationPath: '/studio',
+    navigationPath: '',
     icon: <Home />,
   },
   {
     title: 'Events',
-    navigationPath: 'events',
+    navigationPath: 'event',
     icon: <Videotape />,
   },
   {
     title: 'Library',
-    navigationPath: 'videos',
+    navigationPath: 'library',
     icon: <Videotape />,
   },
   {
     title: 'Livestreams',
     navigationPath: 'livestreams',
-    icon: <Videotape />,
+    icon: <Video />,
   },
   {
     title: 'NFTS',
@@ -48,20 +48,25 @@ const Navigation = async ({
   return (
     <div
       className={cn(
-        'bg-primary overflow-auto w-full max-w-[250px] h-full border-r border-border flex flex-col text-foreground'
+        'bg-primary overflow-auto w-full max-w-[250px] h-full border-r border-border flex flex-col text-black'
       )}>
-      <div className="flex flex-col p-4  justify-between items-center">
-        <Image src={Logo} alt="Logo" width={160} height={80} />
+      <Image
+        className="p-4"
+        src={Logo}
+        alt="Logo"
+        width={160}
+        height={80}
+      />
 
-        <Accordion
-          type="single"
-          className="p-4 space-y-4"
-          collapsible>
-          {navigationItems.map((item, index) => (
-            <NavigationItem key={index} {...item} />
-          ))}
-        </Accordion>
-      </div>
+      <Accordion type="single" className="p-4 space-y-4" collapsible>
+        {navigationItems.map((item, index) => (
+          <NavigationItem
+            organization={organizationSlug}
+            key={index}
+            {...item}
+          />
+        ))}
+      </Accordion>
     </div>
   )
 }

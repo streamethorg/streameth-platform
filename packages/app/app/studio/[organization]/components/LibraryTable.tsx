@@ -34,7 +34,7 @@ const LibraryTable = async ({
   ).sessions
 
   return (
-    <div className='flex flex-col h-full w-full bg-white'>
+    <div className="flex flex-col h-full w-full bg-white">
       <Card className="shadow-none p-4 bg-secondary lg:border-none">
         <CardHeader>
           <CardTitle>Assets</CardTitle>
@@ -84,7 +84,7 @@ const LibraryTable = async ({
                   <Link
                     className="flex flex-row items-center space-x-2 justify-center"
                     href={`/studio/${organization}/library/${item._id}`}>
-                    <FilePenLine className='text-muted-foreground' />
+                    <FilePenLine className="text-muted-foreground" />
                     <p className="">Edit</p>
                   </Link>
                 </Button>
@@ -92,7 +92,7 @@ const LibraryTable = async ({
                   <Link
                     className="flex flex-row items-center space-x-2 justify-center"
                     href={`/watch?session=${item._id}`}>
-                    <Eye className='text-muted-foreground' />
+                    <Eye className="text-muted-foreground" />
                     <p className="">View</p>
                   </Link>
                 </Button>
@@ -100,7 +100,7 @@ const LibraryTable = async ({
                   <Link
                     className="flex flex-row items-center space-x-2 justify-center"
                     href={`/watch?session=${item._id}`}>
-                    <TrashIcon className=' text-red-600' />
+                    <TrashIcon className=" text-red-600" />
                   </Link>
                 </Button>
               </TableCell>
