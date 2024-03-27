@@ -65,6 +65,7 @@ export interface studioPageParams {
     eventId?: string
   }
   searchParams: {
+    eventId?: string
     settings: string
     stage: string
     stageSetting: string
