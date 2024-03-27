@@ -32,7 +32,7 @@ const StreamConfig = async ({ stageId }: { stageId: string }) => {
           <PlayerWithControls
             src={[
               {
-                src: `https://livepeercdn.studio/hls/f22fg5wdzkj4nckb/index.m3u8`,
+                src: `https://livepeercdn.studio/hls/${data.playbackId}/index.m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
