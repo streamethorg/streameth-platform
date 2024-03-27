@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
-// import Navigation from '../(editor)/components/navigation'
 import { studioPageParams } from '@/lib/types'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
@@ -15,7 +14,7 @@ export default async function EventPage({
   params,
   searchParams,
 }: studioPageParams) {
-  const { settings, eventId, stage: stageId } = searchParams
+  const { settings, stage: stageId } = searchParams
 
   const event = await fetchEvent({ eventId: params?.eventId })
   if (!event) return notFound()

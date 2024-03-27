@@ -33,6 +33,7 @@ export default function CreateOrganizationForm() {
     resolver: zodResolver(organizationSchema),
     defaultValues: {
       name: '',
+      banner: '',
       logo: '',
       email: '',
       banner: '',
