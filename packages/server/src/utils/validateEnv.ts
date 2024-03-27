@@ -17,6 +17,7 @@ const validateEnv = () => {
     JWT_SECRET: str(),
     JWT_EXPIRY: str(),
     GOOGLE_API_KEY: str(),
+    LIVEPEER_BASE_URL: str(),
     LIVEPEER_API_KEY: str(),
     GITHUB_API_TOKEN: str(),
     BUCKET_NAME: str(),

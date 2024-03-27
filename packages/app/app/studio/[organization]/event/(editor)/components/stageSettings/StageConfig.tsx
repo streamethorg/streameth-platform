@@ -14,10 +14,10 @@ import { fetchStage } from '@/lib/services/stageService'
 
 const StreamConfig = async ({ stageId }: { stageId: string }) => {
   const stage = await fetchStage({ stage: stageId })
-  if (!stage || !stage.streamSettings.streamId) {
+  if (!stage || !stage.streamSettings?.streamId) {
     return <div> no stage found</div>
   }
-  const data = await getStageStream(stage.streamSettings.streamId)
+  const data = await getStageStream(stage.streamSettings?.streamId)
 
   if (!data) {
     return <div> no stream data found</div>

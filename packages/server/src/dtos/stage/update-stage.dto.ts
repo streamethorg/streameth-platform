@@ -13,13 +13,13 @@ export class UpdateStageDto {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  eventId: string;
+  eventId?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsObject()
-  streamSettings: IStreamSettings;
+  streamSettings?: IStreamSettings;
 
   @IsOptional()
   @IsArray()

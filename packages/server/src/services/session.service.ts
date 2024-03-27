@@ -6,6 +6,8 @@ import Session from '@models/session.model';
 import Event from '@models/event.model';
 import { ThirdwebStorage } from '@thirdweb-dev/storage';
 import { config } from '@config';
+import { Types } from 'mongoose';
+import Stage from '@models/stage.model';
 
 export default class SessionServcie {
   private path: string;
@@ -16,11 +18,20 @@ export default class SessionServcie {
   }
 
   async create(data: ISession): Promise<ISession> {
-    const event = await Event.findById(data.eventId);
+    let eventId = '';
+    let eventSlug = '';
+    if (data.eventId == undefined || data.eventId.toString().length === 0) {
+      eventId = new Types.ObjectId().toString();
+      data.speakers.map((speaker) => (speaker.eventId = eventId));
+    } else {
+      let event = await Event.findById(data.eventId);
+      eventId = event._id;
+      eventSlug = event.slug;
+    }
     return this.controller.store.create(
       data.name,
-      { ...data, eventSlug: event.slug },
-      `${this.path}/${data.eventId}`,
+      { ...data, eventSlug: eventSlug, eventId: eventId },
+      `${this.path}/${eventId}`,
     );
   }
 
@@ -67,7 +78,8 @@ export default class SessionServcie {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      filter = { ...filter, stageId: d.stageId };
+      let stage = await Stage.findOne({ slug: d.stageId });
+      filter = { ...filter, stageId: stage?._id };
     }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
     const pageNumber = Number(d.page) || 0;
