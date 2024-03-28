@@ -38,6 +38,7 @@ export interface ISession {
   aiDescription?: string;
   autoLabels?: string[];
   nftURI?: string;
+  ipfsURI: string;
   createdAt?: string;
 }
 
