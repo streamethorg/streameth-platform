@@ -62,9 +62,10 @@ export interface studioPageParams {
   params: {
     organization: string
     session: string
+    eventId?: string
   }
   searchParams: {
-    eventId: string
+    eventId?: string
     settings: string
     stage: string
     stageSetting: string
@@ -75,9 +76,9 @@ export interface ClipsPageParams {
   params: {
     organization: string
     session: string
+    eventId: string
   }
   searchParams: {
-    eventId: string
     stage: string
     selectedSession: string
     selectedRecording: string
@@ -121,4 +122,11 @@ export interface IExtendedChat extends Omit<IChat, '_id'> {
 
 export interface IExtendedState extends Omit<IState, '_id'> {
   _id: string
+}
+
+export interface EmbedPageParams {
+  searchParams: {
+    vod: string
+    playbackId: string
+  }
 }

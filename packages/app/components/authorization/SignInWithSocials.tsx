@@ -6,10 +6,14 @@ import Image from 'next/image'
 const SignInWithSocials = () => {
   return (
     <div className="flex flex-col w-full space-y-4">
-      <Button disabled className="w-full bg-white text-black rounded-xl border">
+      <Button
+        disabled
+        className="w-full bg-white text-black rounded-xl border">
         Continue with Google
       </Button>
-      <Button disabled className="flex flex-row w-full bg-[#8A63D2] text-white rounded-xl border">
+      <Button
+        disabled
+        className="flex flex-row w-full bg-[#8A63D2] text-white rounded-xl border">
         <Image
           src={farcasterLogo}
           alt="farcaster logo "
@@ -18,7 +22,9 @@ const SignInWithSocials = () => {
         />
         <p className="mx-2">Continue with Farcaster</p>
       </Button>
-      <Button disabled className="flex flex-row w-full bg-black text-white rounded-xl border">
+      <Button
+        disabled
+        className="flex flex-row w-full bg-black text-white rounded-xl border">
         <Image
           src={twitterLogo}
           alt="twitter logo "
