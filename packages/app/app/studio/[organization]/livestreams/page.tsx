@@ -10,6 +10,11 @@ import CreateLivestreamModal from './CreateLivestreamModal'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { LivestreamPageParams } from '@/lib/types'
 import Livestream from './Livestream'
+import {
+  fetchEventStages,
+  fetchOrganizationStages,
+} from '@/lib/services/stageService'
+import LivestreamTable from './LivestreamTable'
 
 const Livestreams = async ({
   params,
@@ -20,11 +25,18 @@ const Livestreams = async ({
   })
   const { streamId } = searchParams
   if (!organization) return null
-
+  const stages = await fetchEventStages({
+    eventId: '65a9138b7932ebe436ba96ac',
+  })
+  console.log(stages)
   return (
     <div>
       {!streamId ? (
-        <Card className="shadow-none p-4 bg-secondary lg:border-none">
+        <Card
+          style={{
+            backgroundImage: `url(/backgrounds/livestreamBg.png)`,
+          }}
+          className="shadow-none bg-cover bg-no-repeat p-4 lg:border-none">
           <CardHeader>
             <CardTitle>Livestreams</CardTitle>
             <CardDescription className="max-w-[500px]">
@@ -41,6 +53,11 @@ const Livestreams = async ({
           streamId={streamId}
         />
       )}
+
+      <LivestreamTable
+        organizationSlug={params?.organization}
+        streams={stages}
+      />
     </div>
   )
 }

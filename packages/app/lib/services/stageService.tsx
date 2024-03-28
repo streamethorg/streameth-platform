@@ -92,3 +92,24 @@ export async function fetchEventStages({
     throw 'Error fetching stages'
   }
 }
+
+export async function fetchOrganizationStages({
+  organizationId,
+}: {
+  organizationId?: string
+}): Promise<IStageModel[]> {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/stages/organization/${organizationId}`,
+      {
+        cache: 'no-store',
+      }
+    )
+
+    const data = (await response.json()).data
+    return data.map((stage: IStage) => stage)
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching stages'
+  }
+}
