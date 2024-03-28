@@ -30,7 +30,7 @@ const UploadProgress = ({
           />
         </Card>
       ) : (
-        <Card className="flex justify-between bg-gray-200 p-2 px-4 my-2 w-full">
+        <Card className="flex justify-between p-2 px-4 my-2 w-full bg-gray-200">
           <Button asChild>
             <Link
               href={`/studio/${organization}/library/${session!._id?.toString()}/edit`}>

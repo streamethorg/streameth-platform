@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -13,7 +12,7 @@ import {
 import { Button } from '@/components/ui/button'
 import UploadVideoForm from './upload/UploadVideoForm'
 
-const UploadAsset = ({ organization }: { organization: string }) => {
+const AssetBanner = ({ organization }: { organization: string }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -38,4 +37,4 @@ const UploadAsset = ({ organization }: { organization: string }) => {
   )
 }
 
-export default UploadAsset
+export default AssetBanner

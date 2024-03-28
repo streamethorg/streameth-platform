@@ -5,7 +5,7 @@ import { MutableRefObject } from 'react'
 import { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { FileUp } from 'lucide-react'
-import uploadVideo from '../../lib/uploadVideo'
+import uploadVideo from '@/lib/uploadVideo'
 import {
   getUrlAction,
   getVideoUrlAction,

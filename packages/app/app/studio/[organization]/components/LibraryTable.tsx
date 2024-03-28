@@ -19,7 +19,7 @@ import {
 import { Button } from '@/components/ui/button'
 import TableRows from './TableRows'
 import { Suspense } from 'react'
-import UploadAsset from './AssetBanner'
+import AssetBanner from './AssetBanner'
 
 const LibraryTable = async ({
   organization,
@@ -65,7 +65,7 @@ const LibraryTable = async ({
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <UploadAsset organization={organization} />
+            <AssetBanner organization={organization} />
           </CardFooter>
         </Card>
         <Suspense

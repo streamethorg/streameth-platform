@@ -62,10 +62,7 @@ const TableRows = ({
         )}
       </TableCell>
       <TableCell>
-        <PopoverActions
-          itemId={item._id}
-          organization={organization}
-        />
+        <PopoverActions session={item} organization={organization} />
       </TableCell>
     </>
   )

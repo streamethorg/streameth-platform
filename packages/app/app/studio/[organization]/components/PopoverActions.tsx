@@ -9,14 +9,17 @@ import { FilePenLine, Eye, Menu } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import DeleteAsset from './DeleteAsset'
+import { IExtendedSession } from '@/lib/types'
 
 const PopoverActions = ({
-  itemId,
+  session,
   organization,
 }: {
-  itemId: string
+  session: IExtendedSession
   organization: string
 }) => {
+  const itemId = session._id
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -48,8 +51,8 @@ const PopoverActions = ({
               </Link>
             </Button>
             <DeleteAsset
-              organizationId={organization}
-              sessionId={itemId}
+              session={itemId}
+              href={`/studio/${organization}?settings=videos`}
             />
           </div>
         </div>
