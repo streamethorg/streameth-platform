@@ -59,3 +59,41 @@ export const createAsset = async (
     throw new HttpException(400, 'Error fetching a Livepeer url');
   }
 };
+
+export const getVideoUrlAction = async (assetId: string) => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    if (!data.playbackUrl) {
+      return '';
+    }
+    return data.playbackUrl;
+  } catch (e) {
+    console.error(`Error fetching asset:`, e);
+  }
+};
+
+export const getVideoPhaseAction = async (assetId: string) => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    if (!data.playbackUrl) {
+      return '';
+    }
+    return data.status.phase;
+  } catch (e) {
+    console.error(`Error fetching asset:`, e);
+  }
+};
