@@ -8,6 +8,7 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     description: { type: String, default: '' },
     url: { type: String, default: '' },
     logo: { type: String, default: '', required: true },
+    banner: { type: String, default: '' },
     location: { type: String, default: '' },
     accentColor: { type: String, default: '' },
     slug: { type: String, default: '', index: true },

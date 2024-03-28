@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils/utils'
-import { Accordion, AccordionItem } from '@/components/ui/accordion'
+import { Accordion } from '@/components/ui/accordion'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import Logo from '@/public/studio_logo.png'
 import NavigationItem from './NavigationItem'
-import { Radio, Videotape, Video, Settings, Home } from 'lucide-react'
+import { Radio, Videotape, Settings, Home } from 'lucide-react'
 import Image from 'next/image'
 const navigationItems = [
   {
