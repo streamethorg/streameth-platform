@@ -28,7 +28,7 @@ export interface ISession {
   playback?: IPlayback;
   videoUrl?: string;
   playbackId?: string;
-  eventId: Types.ObjectId | string;
+  eventId?: Types.ObjectId | string;
   organizationId: Types.ObjectId | string;
   track?: string[];
   coverImage?: string;
@@ -37,6 +37,9 @@ export interface ISession {
   videoTranscription?: string;
   aiDescription?: string;
   autoLabels?: string[];
+  nftURI?: string;
+  ipfsURI?: string;
+  createdAt?: string;
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
