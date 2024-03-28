@@ -62,9 +62,9 @@ export interface studioPageParams {
   params: {
     organization: string
     session: string
+    eventId?: string
   }
   searchParams: {
-    eventId: string
     settings: string
     stage: string
     stageSetting: string
@@ -76,9 +76,9 @@ export interface ClipsPageParams {
   params: {
     organization: string
     session: string
+    eventId: string
   }
   searchParams: {
-    eventId: string
     stage: string
     selectedSession: string
     selectedRecording: string

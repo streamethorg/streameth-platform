@@ -11,7 +11,7 @@ import {
 import { Stream } from 'livepeer/dist/models/components'
 import { getMultistreamTarget } from '@/lib/actions/stages'
 import DeleteMultistream from './DeleteMultistream'
-import { CreateMultistreamTarget } from '../event/(editor)/components/stageSettings/multistream/CreateMultistreamTarget'
+import { CreateMultistreamTarget } from '../event/[eventId]/components/stageSettings/multistream/CreateMultistreamTarget'
 
 const Multistream = ({ stream }: { stream: Stream }) => {
   if (!stream) return null

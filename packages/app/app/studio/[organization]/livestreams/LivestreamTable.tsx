@@ -36,7 +36,7 @@ const LivestreamTable = ({
             <TableCell className="font-medium">
               <Link
                 key={stream._id}
-                href={`/studio/${organizationSlug}/edit?streamId=${stream?._id}`}>
+                href={`/studio/${organizationSlug}/livestreams/edit?streamId=${stream?._id}`}>
                 <div className="flex flex-row w-full space-x-4">
                   <div className="w-[100px]">
                     <Image

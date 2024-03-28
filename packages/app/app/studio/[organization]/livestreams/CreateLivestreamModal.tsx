@@ -45,9 +45,6 @@ const CreateLivestreamModal = ({
     defaultValues: {
       name: '',
       organizationId: organization?._id,
-      streamSettings: {
-        streamId: '',
-      },
     },
   })
 
@@ -99,7 +96,10 @@ const CreateLivestreamModal = ({
                     Stream name
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="name" {...field} />
+                    <Input
+                      placeholder="e.g. My first livestream"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

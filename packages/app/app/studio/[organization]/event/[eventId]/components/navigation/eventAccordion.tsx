@@ -132,7 +132,7 @@ const EventAccordion = ({
               { key: 'stageSettings', value: '' },
             ])
           }}>
-          <AccordionItem value="item-1" className="px-2">
+          <AccordionItem value="item-1" className="px-2 text-black">
             <AccordionTrigger>Basics</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8">
               <FormField

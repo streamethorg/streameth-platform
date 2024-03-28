@@ -23,7 +23,7 @@ const StreamConfig = async ({ stageId }: { stageId: string }) => {
     return <div> no stream data found</div>
   }
   return (
-    <div className="border-none shadow-none h-full text-foreground">
+    <div className="border-none shadow-none h-full text-black">
       <CardHeader className="">
         <CardTitle>{stage?.name} stage</CardTitle>
       </CardHeader>
@@ -93,7 +93,7 @@ const StreamConfig = async ({ stageId }: { stageId: string }) => {
 
 export const StreamConfigSkeleton = () => {
   return (
-    <div className="border-none shadow-none h-full text-foreground animate-pulse">
+    <div className="border-none shadow-none h-full text-black animate-pulse">
       <div className="p-4">
         <div className="h-8 bg-gray-300 rounded-md w-3/4"></div>
       </div>

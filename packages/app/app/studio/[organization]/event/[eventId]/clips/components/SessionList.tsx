@@ -3,7 +3,7 @@ import useSearchParams from '@/lib/hooks/useSearchParams'
 import { Card } from '@/components/ui/card'
 import { IExtendedSession } from '@/lib/types'
 import { Button } from '@/components/ui/button'
-import CreateSession from '../../../library/create/CreateSession'
+import CreateSession from '../../../../library/create/CreateSession'
 import Link from 'next/link'
 const SessionList = ({
   sessions,
@@ -69,8 +69,7 @@ const SessionList = ({
           ))}
       </div>
       <div className="flex flex-row space-x-2 mt-auto w-full">
-        <Link
-          href={`/studio/${organizationSlug}/event?eventId=${eventId}`}>
+        <Link href={`/studio/${organizationSlug}/event/${eventId}`}>
           <Button variant={'outline'} className="">
             Back to settings
           </Button>
