@@ -4,6 +4,7 @@ import { Schema, model } from 'mongoose';
 export const StageSchema = new Schema<IStageModel>(
   {
     name: { type: String, default: '', required: true },
+    description: { type: String, default: '' },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
     streamSettings: {
@@ -17,7 +18,7 @@ export const StageSchema = new Schema<IStageModel>(
       },
     ],
     order: { type: Number, default: 0 },
-    published: { type: String, default: '' },
+    published: { type: Boolean, default: false },
     slug: { type: String, default: '', index: true },
   },
   {

@@ -13,12 +13,13 @@ export interface IPlugin {
 export class IStage {
   _id?: Types.ObjectId;
   name: string;
+  description?: string;
   eventId?: Types.ObjectId | string;
   streamSettings?: IStreamSettings;
   plugins?: IPlugin[];
   order?: number;
   slug?: string;
-  published?: string;
+  published?: boolean;
   organizationId: Types.ObjectId | string;
 }
 
