@@ -69,6 +69,16 @@ export class StageController extends Controller {
     return SendApiResponse('stages fetched', stages);
   }
 
+  @SuccessResponse('200')
+  @Get('/organization/{organizationId}')
+  async getAllStagesForOrganization(
+    organizationId: string,
+  ): Promise<IStandardResponse<Array<IStage>>> {
+    const stages =
+      await this.stageService.findAllStagesForOrganization(organizationId);
+    return SendApiResponse('stages fetched', stages);
+  }
+
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{stageId}')

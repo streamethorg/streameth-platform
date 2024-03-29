@@ -1,6 +1,7 @@
 import { IPlugin, IStreamSettings } from '@interfaces/stage.interface';
 import {
   IsArray,
+  IsBoolean,
   IsNotEmpty,
   IsNumber,
   IsObject,
@@ -13,13 +14,21 @@ export class UpdateStageDto {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  eventId: string;
+  description?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
+  eventId?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  published?: boolean;
+
+  @IsOptional()
   @IsObject()
-  streamSettings: IStreamSettings;
+  streamSettings?: IStreamSettings;
 
   @IsOptional()
   @IsArray()

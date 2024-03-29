@@ -23,14 +23,13 @@ export default class StateService {
 
   async get(stateId: string): Promise<IState> {
     const findState = await this.controller.store.findById(stateId);
-    if (!findState) throw new HttpException(404, ' state not found');
+    if (!findState) throw new HttpException(404, 'state not found');
     return findState;
   }
 
   async findOne(query: {}): Promise<IState> {
     const findState = await this.controller.store.findOne(query);
-    if (!findState) throw new HttpException(404, ' state not found');
-
+    if (!findState) throw new HttpException(404, 'state not found');
     return findState;
   }
 

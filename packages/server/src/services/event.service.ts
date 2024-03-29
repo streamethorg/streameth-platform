@@ -3,13 +3,11 @@ import { HttpException } from '@exceptions/HttpException';
 import { IEvent } from '@interfaces/event.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import Events from '@models/event.model';
-import StateService from './state.service';
 import State from '@models/state.model';
 
 export default class EventService {
   private path: string;
   private controller: BaseController<IEvent>;
-  private stateService = new StateService();
   constructor() {
     this.path = 'events';
     this.controller = new BaseController<IEvent>('db', Events);
@@ -67,7 +65,7 @@ export default class EventService {
   }
 
   async eventImport(eventId: string): Promise<void> {
-    const findState = await this.stateService.findOne({ eventId: eventId });
+    const findState = await State.findOne({ eventId: eventId });
     if (!findState) {
       let event = await this.get(eventId);
       await State.create({
@@ -77,7 +75,7 @@ export default class EventService {
         type: StateType.event,
       });
     } else {
-      await this.stateService.update(findState._id.toString(), {
+      await findState.updateOne({
         status: StateStatus.sync,
       });
     }

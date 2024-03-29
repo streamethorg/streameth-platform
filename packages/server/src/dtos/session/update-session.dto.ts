@@ -51,7 +51,7 @@ export class UpdateSessionDto {
 
   @IsOptional()
   @IsString()
-  eventId: string;
+  eventId?: string;
 
   @IsNotEmpty()
   @IsString()

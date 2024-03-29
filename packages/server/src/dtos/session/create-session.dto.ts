@@ -49,9 +49,9 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsString()
   playbackId?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  eventId: string;
+  eventId?: string;
 
   @IsNotEmpty()
   @IsString()
