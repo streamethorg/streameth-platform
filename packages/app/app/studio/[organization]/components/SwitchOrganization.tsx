@@ -19,6 +19,7 @@ const SwitchOrganization = ({
         logo
         valueKey="slug"
         labelKey="name"
+        variant="ghost"
         value={organization || ''}
         setValue={(org) => {
           router.push(`/studio/${org}`)

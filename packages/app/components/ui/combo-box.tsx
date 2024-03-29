@@ -40,12 +40,14 @@ export default function Combobox({
   valueKey = 'value',
   labelKey = 'label',
   logo,
+  variant = 'outline',
 }: {
   items?: Item[]
   value: string
   valueKey?: string
   labelKey?: string
   logo?: boolean
+  variant?: 'outline' | 'primary' | 'ghost'
   setValue: (value: string) => void
 }) {
   const [open, setOpen] = React.useState(false)
@@ -57,7 +59,7 @@ export default function Combobox({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          variant={variant}
           role="combobox"
           aria-expanded={open}
           className="w-full justify-between">
