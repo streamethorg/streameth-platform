@@ -18,7 +18,6 @@ import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import { createSessionAction } from '@/lib/actions/sessions'
 import { Loader2 } from 'lucide-react'
-import { useAccount } from 'wagmi'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import Dropzone from './Dropzone'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
@@ -58,19 +57,20 @@ const UploadVideoForm = ({
     createSessionAction({
       session: {
         ...values,
-        eventId,
-        organizationId: organization,
+        eventId: '65d3823d7a3d271078aa0a6f',
+        organizationId: '65d380137a3d271078aa0a32',
         speakers: [],
         start: 0,
         end: 0,
-        stageId: '',
+        stageId: '65df81574d771aa98151dd60',
       },
     })
       .then((session) => {
         toast.success('Session created')
-        router.push(
-          `/studio/${organizationSlug}/library/${session._id}`
-        )
+        location.reload()
+        // router.push(
+        //   `/studio/${organizationSlug}/library/${session._id}`
+        // )
       })
       .catch((e) => {
         console.log(e)

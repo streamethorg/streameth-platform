@@ -79,6 +79,25 @@ export const getVideoUrlAction = async (assetId: string) => {
   }
 };
 
+export const getAsset = async (assetId: string) => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    if (!data) {
+      return '';
+    }
+    return data;
+  } catch (e) {
+    console.error(`Error fetching asset:`, e);
+  }
+};
+
 export const getVideoPhaseAction = async (assetId: string) => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {

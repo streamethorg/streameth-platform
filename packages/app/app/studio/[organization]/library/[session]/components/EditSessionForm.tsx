@@ -22,7 +22,7 @@ import { generateId } from 'streameth-new-server/src/utils/util'
 import { IExtendedSession } from '@/lib/types'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
-import DeleteAsset from '../../../components/DeleteAsset'
+import DeleteAsset from '../../../components/library/DeleteAsset'
 
 const EditSessionFrom = ({
   session,
@@ -114,7 +114,6 @@ const EditSessionFrom = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageUpload
-                  className="m-auto w-full h-full border-2 border-gray-300 border-dashed transition cursor-pointer rounded-s bg-neutrals-100 hover:bg-neutrals-200"
                   aspectRatio={1}
                   path={`session/${generateId(
                     form.getValues('name')
@@ -129,8 +128,7 @@ const EditSessionFrom = ({
 
         <div className="space-x-2">
           <DeleteAsset
-            sessionId={session._id}
-            organizationId={session.organizationId as string}
+            session={session}
             href={`/studio/${session.organizationId}?settings=videos`}
           />
           <Button

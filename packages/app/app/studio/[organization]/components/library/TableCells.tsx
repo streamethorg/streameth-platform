@@ -12,18 +12,16 @@ const TableCells = ({
   item,
   index,
   organization,
-  hash,
 }: {
   item: IExtendedSession
   index: number
   organization: string
-  hash: string | undefined
 }) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
     setCopied(true)
-    navigator.clipboard.writeText(hash!)
+    navigator.clipboard.writeText(item.ipfsURI!)
     setTimeout(() => setCopied(false), 2000)
   }
 
@@ -46,12 +44,12 @@ const TableCells = ({
         </TableCell>
       )}
       <TableCell className="relative truncate w-[150px]">
-        {hash ? (
+        {item.ipfsURI ? (
           <div
             className="flex items-center hover:bg-gray-200 min-w-[150px] group"
             onClick={handleCopy}>
             <span className="flex-1 m-2 rounded cursor-pointer">
-              {copied ? 'Copied' : hash}
+              {copied ? 'Copied' : item.ipfsURI}
             </span>
             <Copy className="p-1 mr-2 opacity-0 group-hover:opacity-100">
               Copy IPFS Hash

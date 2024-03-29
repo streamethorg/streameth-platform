@@ -7,7 +7,6 @@ import {
   TableHead,
   TableBody,
 } from '@/components/ui/table'
-import { Livepeer } from 'livepeer'
 import { fetchAllSessions } from '@/lib/data'
 import {
   Card,
@@ -17,7 +16,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import TableCells from './TableCells'
-import { Suspense } from 'react'
 import UploadVideoDialog from './UploadVideoDialog'
 
 const LibraryTable = async ({
@@ -30,28 +28,7 @@ const LibraryTable = async ({
       organizationSlug: organization,
       onlyVideos: true,
     })
-  ).sessions
-
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  })
-
-  const assetPromises = sessions.map(async (session) => {
-    if (!session.assetId) {
-      return Promise.reject(new Error('assetId is missing'))
-    }
-    return livepeer.asset
-      .get(session.assetId as string)
-      .then((response) => response.asset)
-      .catch((error) => {
-        console.error(
-          `Failed to fetch asset for assetId ${session.assetId}:`,
-          error
-        )
-      })
-  })
-
-  const assets = await Promise.all(assetPromises)
+  ).sessions.filter((session) => session.videoUrl)
 
   if (!sessions || sessions.length === 0) {
     return (
@@ -67,9 +44,6 @@ const LibraryTable = async ({
             <UploadVideoDialog organization={organization} />
           </CardFooter>
         </Card>
-        <div className="flex justify-center items-center h-full text-3xl font-bold">
-          No Assets available
-        </div>
       </div>
     )
   }
@@ -87,16 +61,15 @@ const LibraryTable = async ({
           <UploadVideoDialog organization={organization} />
         </CardFooter>
       </Card>
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center">
-            Loading...
-          </div>
-        }>
+      {!sessions || sessions.length === 0 ? (
+        <div className="flex justify-center items-center h-full text-3xl font-bold">
+          No Assets available
+        </div>
+      ) : (
         <Table className="bg-white">
           <TableHeader className="sticky top-0 z-50 bg-white">
             <TableRow className="hover:bg-white">
-              <TableHead>Index</TableHead>
+              <TableHead>#</TableHead>
               <TableHead>Asset name</TableHead>
               <TableHead>Created at</TableHead>
               <TableHead>IPFS Url</TableHead>
@@ -110,15 +83,12 @@ const LibraryTable = async ({
                   item={item}
                   index={index}
                   organization={organization}
-                  hash={
-                    assets[index]?.storage?.ipfs?.nftMetadata?.cid
-                  }
                 />
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </Suspense>
+      )}
     </div>
   )
 }

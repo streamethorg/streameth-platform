@@ -3,7 +3,7 @@
 import { studioPageParams } from '@/lib/types'
 import { fetchEvents } from '@/lib/services/eventService'
 import EventList from './components/EventTable'
-import LibraryTable from './components/LibraryTable'
+import LibraryTable from './components/library/LibraryTable'
 import {
   Card,
   CardDescription,

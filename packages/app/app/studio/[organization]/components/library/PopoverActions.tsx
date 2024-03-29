@@ -51,7 +51,7 @@ const PopoverActions = ({
               </Link>
             </Button>
             <DeleteAsset
-              session={itemId}
+              session={session}
               href={`/studio/${organization}?settings=videos`}
             />
           </div>
