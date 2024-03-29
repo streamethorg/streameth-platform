@@ -78,7 +78,7 @@ export default function CreateSession({
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <Button className="w-full" onClick={() => setIsOpen(true)}>
-        Create an clip
+        Create clip
       </Button>
       <DialogContent className="bg-background">
         <DialogHeader>
@@ -96,9 +96,7 @@ export default function CreateSession({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="">
-                    Organization name
-                  </FormLabel>
+                  <FormLabel className="">Clip name</FormLabel>
                   <FormControl>
                     <Input placeholder="name" {...field} />
                   </FormControl>

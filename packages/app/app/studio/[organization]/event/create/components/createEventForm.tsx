@@ -316,7 +316,9 @@ export default function CreateEventForm({
               )}
             />
             <div className="flex flex-row justify-between">
-              <Link href={`/studio/${organization.slug}`} passHref>
+              <Link
+                href={`/studio/${organization.slug}/event`}
+                passHref>
                 Cancel
               </Link>
               <Button

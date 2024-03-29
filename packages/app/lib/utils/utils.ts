@@ -4,11 +4,14 @@ import {
   IExtendedEvent,
   IExtendedOrganization,
   IExtendedSession,
+  IGenerateEmbed,
+  IGenerateEmbedCode,
 } from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { UseFormProps, UseFormReturn } from 'react-hook-form'
 import { getDateInUTC } from './time'
+import { toast } from 'sonner'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -222,4 +225,39 @@ export const renderEventDay = (
   return `${new Date(start).toDateString()} - ${new Date(
     end
   ).toDateString()}`
+}
+
+export const copyToClipboard = (text: string) => {
+  navigator.clipboard.writeText(text)
+  toast('Copied to clipboard')
+}
+
+export const generateParams = ({
+  playbackId,
+  vod,
+  streamId,
+  playerName,
+}: IGenerateEmbed) => {
+  const params = new URLSearchParams()
+  params.append('playbackId', playbackId ?? '')
+  params.append('vod', vod ? 'true' : 'false')
+  params.append('streamId', streamId ?? '')
+  params.append('playerName', playerName ?? '')
+
+  return params.toString()
+}
+
+export const generateEmbedCode = ({
+  url,
+  playbackId,
+  vod,
+  streamId,
+  playerName,
+}: IGenerateEmbedCode) => {
+  return `<iframe src="${url}/embed/?${generateParams({
+    playbackId,
+    vod,
+    streamId,
+    playerName,
+  })}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
 }

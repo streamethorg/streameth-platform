@@ -4,6 +4,10 @@ import { ISession } from '@interfaces/session.interface';
 import Organization from '@models/organization.model';
 import Session from '@models/session.model';
 import Event from '@models/event.model';
+import { ThirdwebStorage } from '@thirdweb-dev/storage';
+import { config } from '@config';
+import { Types } from 'mongoose';
+import Stage from '@models/stage.model';
 
 export default class SessionServcie {
   private path: string;
@@ -14,11 +18,20 @@ export default class SessionServcie {
   }
 
   async create(data: ISession): Promise<ISession> {
-    const event = await Event.findById(data.eventId);
+    let eventId = '';
+    let eventSlug = '';
+    if (data.eventId == undefined || data.eventId.toString().length === 0) {
+      eventId = new Types.ObjectId().toString();
+      data.speakers.map((speaker) => (speaker.eventId = eventId));
+    } else {
+      let event = await Event.findById(data.eventId);
+      eventId = event._id;
+      eventSlug = event.slug;
+    }
     return this.controller.store.create(
       data.name,
-      { ...data, eventSlug: event.slug },
-      `${this.path}/${data.eventId}`,
+      { ...data, eventSlug: eventSlug, eventId: eventId },
+      `${this.path}/${eventId}`,
     );
   }
 
@@ -65,7 +78,8 @@ export default class SessionServcie {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      filter = { ...filter, stageId: d.stageId };
+      let stage = await Stage.findOne({ slug: d.stageId });
+      filter = { ...filter, stageId: stage?._id };
     }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
     const pageNumber = Number(d.page) || 0;
@@ -87,5 +101,48 @@ export default class SessionServcie {
   async deleteOne(sessionId: string): Promise<void> {
     await this.get(sessionId);
     return await this.controller.store.delete(sessionId);
+  }
+
+  async createMetadata(sessionId: string) {
+    let session = await Session.findById(sessionId); //await this.get(sessionId);
+    let metadata = JSON.stringify({
+      name: session.name,
+      description: session.description,
+      external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
+      animation_url: '',
+      image: session.coverImage,
+      attributes: [
+        {
+          start: session.start,
+          end: session.end,
+          stageId: session.stageId,
+          speakers: session.speakers,
+          source: session.source,
+          playbackId: session.playbackId,
+          assetId: session.assetId,
+          eventId: session.eventId,
+          track: session.track,
+          coverImage: session.coverImage,
+          slug: session.slug,
+          organizationId: session.organizationId,
+          eventSlug: session.eventSlug,
+          createdAt: session.createdAt,
+          aiDescription: session.aiDescription,
+          autoLabels: session.autoLabels,
+          videoTranscription: session.videoTranscription,
+        },
+      ],
+    });
+    const URI = await this.upload(metadata);
+    await session.updateOne({ nftURI: URI });
+    return URI;
+  }
+
+  async upload(file: Express.Multer.File | {}): Promise<string> {
+    const storage = new ThirdwebStorage({
+      secretKey: config.storage.thirdWebSecretKey,
+    });
+    const URI = await storage.upload(file);
+    return await storage.resolveScheme(URI);
   }
 }

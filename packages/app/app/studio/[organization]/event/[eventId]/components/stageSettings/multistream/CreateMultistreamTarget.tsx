@@ -34,13 +34,15 @@ function SubmitButton() {
       </Button>
     )
   }
-  return <Button type="submit">Sign Up</Button>
+  return <Button type="submit">Create</Button>
 }
 
 export const CreateMultistreamTarget = ({
   streamId,
+  btnName = 'Create',
 }: {
-  streamId: string
+  streamId?: string
+  btnName?: string
 }) => {
   const [open, setOpen] = React.useState(false)
   const [state, formAction] = useFormState(
@@ -56,7 +58,7 @@ export const CreateMultistreamTarget = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Create</Button>
+        <Button variant="outline">{btnName}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-white">
         <DialogHeader>

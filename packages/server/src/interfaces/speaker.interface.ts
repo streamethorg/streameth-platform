@@ -4,7 +4,7 @@ export interface ISpeaker {
   _id?: string;
   name: string;
   bio: string;
-  eventId: Types.ObjectId | string;
+  eventId?: Types.ObjectId | string;
   twitter?: string;
   github?: string;
   website?: string;

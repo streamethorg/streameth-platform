@@ -12,7 +12,7 @@ const SESSION_DATA_RANGE = 'A3:N';
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
-}
+};
 export default class GSheetImporter extends BaseImporter {
   private googleSheetService = new GoogleSheetService();
 
@@ -41,7 +41,7 @@ export default class GSheetImporter extends BaseImporter {
           createSpeaker._id.toString(),
           hash,
         ]);
-        sleep(3000)
+        sleep(3000);
       } catch (e) {
         console.error(`Error creating speaker:`, speaker, e);
       }
@@ -74,7 +74,7 @@ export default class GSheetImporter extends BaseImporter {
           createStage._id.toString(),
           hash,
         ]);
-        sleep(3000)
+        sleep(3000);
       } catch (e) {
         console.error(`Error creating stage:`, stage, e);
       }
@@ -84,7 +84,7 @@ export default class GSheetImporter extends BaseImporter {
   async generateSessions(d: {
     sheetId: string;
     eventId: string;
-    eventSlug: string
+    eventSlug: string;
     organizationId: string;
     timezone: string;
   }): Promise<void> {
@@ -100,8 +100,16 @@ export default class GSheetImporter extends BaseImporter {
     );
     for (const [index, row] of data.entries()) {
       try {
-        const [Name, Description, stageId, Day, Start, End, ...speakerIdsRaw] =
-          row.slice(0, 11);
+        const [
+          Name,
+          Description,
+          stageId,
+          Day,
+          Start,
+          End,
+          sessionType,
+          ...speakerIdsRaw
+        ] = row.slice(0, 11);
         const speakerPromises = speakerIdsRaw
           .filter(Boolean)
           .map((speakerId: string) =>
@@ -136,6 +144,7 @@ export default class GSheetImporter extends BaseImporter {
             .tz(`${newDate()} ${End}:00`, 'YYYY-MM-DD HH:mm:ss', d.timezone)
             .valueOf(),
           track: row[13],
+          coverImage: row[17],
           // moderator: row[12],
         };
         const hash = this.generateHash(session, config.secretKey);
@@ -145,7 +154,7 @@ export default class GSheetImporter extends BaseImporter {
           createSession._id.toString(),
           hash,
         ]);
-        sleep(3000)
+        sleep(3000);
       } catch (e) {
         console.error(`Error creating session:`, e);
       }
@@ -179,12 +188,16 @@ export default class GSheetImporter extends BaseImporter {
         previousHash,
       );
       if (compareHash) continue;
+      if (speakerId == undefined) {
+        await this.createSpeaker(speaker, index, sheetId);
+        continue;
+      }
       try {
         const hash = this.generateHash(speaker, config.secretKey);
         await this.speakerService.update(speakerId, speaker);
         const updateRange = `${SPEAKER_SHEET}!H${index + 3}`;
         await this.googleSheetService.appendData(sheetId, updateRange, [hash]);
-        sleep(3000)
+        sleep(3000);
       } catch (e) {
         console.error(`Error updating speaker:`, speaker, e);
       }
@@ -223,7 +236,7 @@ export default class GSheetImporter extends BaseImporter {
         await this.stageService.update(stageId, stage);
         const updateRange = `${STAGE_SHEET}!F${index + 2}`;
         await this.googleSheetService.appendData(sheetId, updateRange, [hash]);
-        sleep(3000)
+        sleep(3000);
       } catch (e) {
         console.error(`Error updating stage:`, stage, e);
       }
@@ -257,8 +270,16 @@ export default class GSheetImporter extends BaseImporter {
     for (const [index, row] of data.entries()) {
       const [sessionId, previousHash] = extraData[index];
       try {
-        const [Name, Description, stageId, Day, Start, sheetType, End, ...speakerIdsRaw] =
-          row.slice(0, 11);
+        const [
+          Name,
+          Description,
+          stageId,
+          Day,
+          Start,
+          sessionType,
+          End,
+          ...speakerIdsRaw
+        ] = row.slice(0, 11);
         const speakerPromises = speakerIdsRaw
           .filter(Boolean)
           .map((speakerId: string) =>
@@ -293,6 +314,7 @@ export default class GSheetImporter extends BaseImporter {
             .tz(`${newDate()} ${End}:00`, 'YYYY-MM-DD HH:mm:ss', d.timezone)
             .valueOf(),
           track: row[13],
+          coverImage: row[17],
           // moderator: row[12],
         };
         const compareHash = this.compareHash(
@@ -301,14 +323,45 @@ export default class GSheetImporter extends BaseImporter {
           previousHash,
         );
         if (compareHash) continue;
+        if (sessionId == undefined) {
+          await this.createSession(session, index, sheetId);
+          continue;
+        }
         const hash = this.generateHash(session, config.secretKey);
         await this.sessionService.update(sessionId, session);
         const updateRange = `${SESSION_SHEET}!T${index + 3}`;
         await this.googleSheetService.appendData(sheetId, updateRange, [hash]);
-        sleep(3000)
+        sleep(3000);
       } catch (e) {
         console.error(`Error updating session:`, e);
       }
     }
+  }
+  private async createSession(
+    sessionData: any,
+    index: number,
+    sheetId: string,
+  ) {
+    const hash = this.generateHash(sessionData, config.secretKey);
+    const createSession = await this.sessionService.create(sessionData);
+    const updateRange = `${SESSION_SHEET}!S${index + 3}:T${index + 3}`;
+    await this.googleSheetService.appendData(sheetId, updateRange, [
+      createSession._id.toString(),
+      hash,
+    ]);
+  }
+
+  private async createSpeaker(
+    speakerData: any,
+    index: number,
+    sheetId: string,
+  ) {
+    const hash = this.generateHash(speakerData, config.secretKey);
+    const createSpeaker = await this.speakerService.create(speakerData);
+    const updateRange = `${SPEAKER_SHEET}!G${index + 3}:H${index + 3}`;
+    await this.googleSheetService.appendData(sheetId, updateRange, [
+      createSpeaker._id.toString(),
+      hash,
+    ]);
   }
 }

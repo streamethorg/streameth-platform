@@ -29,7 +29,7 @@ export default async function Stage({ params }: EventPageProps) {
     apiKey: process.env.LIVEPEER_API_KEY,
   })
 
-  if (!event || !stage) {
+  if (!event || !stage || !stage?._id) {
     return notFound()
   }
 
