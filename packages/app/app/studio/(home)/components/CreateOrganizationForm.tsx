@@ -22,8 +22,8 @@ import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
+import { getFormSubmitStatus } from '@/lib/utils/utils'
 import { useRouter } from 'next/navigation'
-
 export default function CreateOrganizationForm() {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
@@ -67,46 +67,6 @@ export default function CreateOrganizationForm() {
         }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8">
-        <div>
-          <FormField
-            control={form.control}
-            name="banner"
-            render={({ field }) => (
-              <FormItem className="">
-                <FormControl>
-                  <ImageUpload
-                    className="w-full h-40 rounded-xl bg-neutrals-300"
-                    aspectRatio={1}
-                    path={`organizations/${generateId(
-                      form.getValues('name')
-                    )}`}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="logo"
-            render={({ field }) => (
-              <FormItem className="flex relative w-24 h-24 p-1 rounded-full bg-white mt-[-50px] mx-4">
-                <FormControl>
-                  <ImageUpload
-                    className="w-full h-full rounded-full bg-neutrals-300 m-auto"
-                    aspectRatio={1}
-                    path={`organizations/${generateId(
-                      form.getValues('name')
-                    )}`}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
         <FormField
           control={form.control}
           name="name"
@@ -133,7 +93,26 @@ export default function CreateOrganizationForm() {
             </FormItem>
           )}
         />
-
+        <FormField
+          disabled={!form.getValues('name')}
+          control={form.control}
+          name="logo"
+          render={({ field }) => (
+            <FormItem className="max-w-[150px]">
+              <FormLabel className="">Logo</FormLabel>
+              <FormControl>
+                <ImageUpload
+                  aspectRatio={1}
+                  path={`organizations/${generateId(
+                    form.getValues('name')
+                  )}`}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="flex flex-row justify-between">
           <Button
             onClick={() => {
@@ -145,7 +124,7 @@ export default function CreateOrganizationForm() {
           <Button type="submit">
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
                 Please wait
               </>
             ) : (
