@@ -122,7 +122,6 @@ export const updateStage = async ({
   stage: IExtendedStage
   authToken: string
 }): Promise<IExtendedStage> => {
-  // Extract only the necessary properties from the stage object
   const { _id, createdAt, updatedAt, __v, ...rest } = stage
 
   try {
@@ -132,7 +131,7 @@ export const updateStage = async ({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify(rest), // Send only the properties to be updated
+      body: JSON.stringify(rest),
     })
 
     if (!response.ok) {

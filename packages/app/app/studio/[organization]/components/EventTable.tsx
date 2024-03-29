@@ -84,7 +84,7 @@ const EventTable = async ({
                 <Button variant={'outline'}>
                   <Link
                     className="flex flex-row events-center space-x-2 justify-center"
-                    href={`/studio/${organization}/event/${event._id}`}>
+                    href={`/studio/${organization}/library/${event._id}`}>
                     <FilePenLine className="text-muted-foreground" />
                     <p className="">Edit</p>
                   </Link>
