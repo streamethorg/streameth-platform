@@ -1,11 +1,11 @@
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import {
-  ISpeaker,
-  ISpeakerModel,
-} from 'streameth-new-server/src/interfaces/speaker.interface'
+  IStage,
+  IStageModel,
+} from 'streameth-new-server/src/interfaces/stage.interface'
+import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
@@ -69,6 +69,7 @@ export interface studioPageParams {
     settings: string
     stage: string
     stageSetting: string
+    streamId: string
   }
 }
 
@@ -110,7 +111,12 @@ export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
   createdAt?: string
 }
-export interface IStage extends IStageModel {}
+export interface IExtendedStage extends Omit<IStage, '_id'> {
+  _id?: string
+  createdAt?: string
+  updatedAt?: string
+  __v?: string
+}
 export interface IExtendedSpeaker
   extends Omit<ISpeaker, 'organizationId'> {}
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
@@ -129,4 +135,22 @@ export interface EmbedPageParams {
     vod: string
     playbackId: string
   }
+}
+
+export interface LivestreamPageParams {
+  params: {
+    organization: string
+    streamId: string
+  }
+}
+
+export interface IGenerateEmbed {
+  playbackId?: string
+  vod?: boolean
+  streamId?: string
+  playerName: string
+}
+
+export interface IGenerateEmbedCode extends IGenerateEmbed {
+  url: string
 }
