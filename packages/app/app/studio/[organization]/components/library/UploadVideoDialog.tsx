@@ -10,9 +10,13 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import UploadVideoForm from './upload/UploadVideoForm'
+import UploadVideoForm from '../upload/UploadVideoForm'
 
-const AssetBanner = ({ organization }: { organization: string }) => {
+const UploadVideoDialog = ({
+  organization,
+}: {
+  organization: string
+}) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,7 +24,7 @@ const AssetBanner = ({ organization }: { organization: string }) => {
           Upload video
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[525px] sm:max-h-[800px]">
         <DialogHeader>
           <DialogTitle>Upload Asset</DialogTitle>
           <DialogDescription>
@@ -37,4 +41,4 @@ const AssetBanner = ({ organization }: { organization: string }) => {
   )
 }
 
-export default AssetBanner
+export default UploadVideoDialog

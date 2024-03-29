@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -35,7 +35,6 @@ const UploadVideoForm = ({
   organizationSlug: string
 }) => {
   const router = useRouter()
-  const { address } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
   const abortControllerRef = useRef(new AbortController())
 
@@ -55,10 +54,7 @@ const UploadVideoForm = ({
 
   function onSubmit(values: z.infer<typeof sessionSchema>) {
     setIsLoading(true)
-    if (!address) {
-      toast.error('No wallet address found')
-      return
-    }
+
     createSessionAction({
       session: {
         ...values,
@@ -67,11 +63,11 @@ const UploadVideoForm = ({
         speakers: [],
         start: 0,
         end: 0,
+        stageId: '',
       },
-    } as any)
+    })
       .then((session) => {
         toast.success('Session created')
-        setIsLoading(false)
         router.push(
           `/studio/${organizationSlug}/library/${session._id}`
         )
@@ -80,7 +76,15 @@ const UploadVideoForm = ({
         console.log(e)
         toast.error('Error creating Session')
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
+
+  useEffect(() => {
+    const subscription = form.watch((values) => console.log(values))
+    return () => subscription.unsubscribe()
+  }, [form])
 
   return (
     <Form {...form}>
@@ -129,7 +133,7 @@ const UploadVideoForm = ({
           control={form.control}
           name="coverImage"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="max-h-[80px]">
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageUpload
@@ -137,7 +141,6 @@ const UploadVideoForm = ({
                   path={`organizations/${eventId}
                     )}`}
                   {...field}
-                  className="bg-gray-200"
                 />
               </FormControl>
               <FormMessage />
@@ -170,11 +173,7 @@ const UploadVideoForm = ({
             </Button>
           </DialogClose>
           <Button
-            disabled={
-              !form.getValues('assetId') ||
-              getFormSubmitStatus(form) ||
-              isLoading
-            }
+            disabled={getFormSubmitStatus(form) || isLoading}
             variant={'primary'}
             type="submit">
             {isLoading ? (

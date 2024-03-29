@@ -8,7 +8,7 @@ import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import { useState } from 'react'
 import PopoverActions from './PopoverActions'
 
-const TableRows = ({
+const TableCells = ({
   item,
   index,
   organization,
@@ -85,4 +85,4 @@ const LibraryThumbnail = async ({
   )
 }
 
-export default TableRows
+export default TableCells

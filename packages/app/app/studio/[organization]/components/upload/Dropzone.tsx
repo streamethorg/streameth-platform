@@ -40,6 +40,7 @@ const Dropzone = ({
           },
           async () => {
             setAssetId(uploadUrl?.assetId as string)
+            console.log(assetId)
           }
         )
       }
@@ -47,18 +48,10 @@ const Dropzone = ({
     [onChange]
   )
 
+  // Should be done via a Webhook
   useEffect(() => {
     if (assetId) {
       onChange(assetId)
-
-      const interval = setInterval(async () => {
-        const playbackUrl = await getVideoUrlAction(assetId)
-        if (playbackUrl) {
-          setVideoUrl(playbackUrl)
-          clearInterval(interval)
-        }
-        console.log(playbackUrl)
-      }, 3000)
     }
   }, [isUploading, assetId])
 
@@ -73,7 +66,9 @@ const Dropzone = ({
   if (isUploading && progress >= 100) {
     return (
       <div className="flex flex-col justify-center items-center w-full h-full text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
-        <p className="m-2">Uploading finished! Processing now...</p>
+        <p className="m-2">
+          Uploading finished! Processing now... Please proceeed...
+        </p>
       </div>
     )
   }
