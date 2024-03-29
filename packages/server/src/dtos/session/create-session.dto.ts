@@ -80,4 +80,8 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsOptional()
   @IsArray()
   autolabels?: string[];
+
+  @IsOptional()
+  @IsString()
+  ipfsURI?: string;
 }

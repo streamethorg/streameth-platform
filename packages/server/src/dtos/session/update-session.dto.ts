@@ -84,4 +84,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsString()
   assetId?: string;
+
+  @IsOptional()
+  @IsString()
+  ipfsURI?: string;
 }
