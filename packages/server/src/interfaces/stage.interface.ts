@@ -1,9 +1,16 @@
 import { Document, Types } from 'mongoose';
 
+export interface TargetOutput {
+  profile: string;
+  videOnly?: boolean;
+  id?: string;
+}
 export interface IStreamSettings {
   streamId?: string;
   parentId?: string;
   playbackId?: string;
+  isHealthy?: boolean;
+  targets?: TargetOutput[];
 }
 
 export interface IPlugin {
