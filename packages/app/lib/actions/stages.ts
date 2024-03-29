@@ -1,10 +1,15 @@
 'use server'
 import { Livepeer } from 'livepeer'
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
-import { createStage, deleteStage } from '../services/stageService'
+import {
+  createStage,
+  deleteStage,
+  updateStage,
+} from '../services/stageService'
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { Stream } from 'livepeer/dist/models/components'
+import { IExtendedStage } from '../types'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -13,7 +18,7 @@ const livepeer = new Livepeer({
 export const createStageAction = async ({
   stage,
 }: {
-  stage: IStage
+  stage: IExtendedStage
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
@@ -184,4 +189,25 @@ export const getMultistreamTarget = async ({
   revalidatePath('/studio')
 
   return response.multistreamTarget
+}
+
+export const updateStageAction = async ({
+  stage,
+}: {
+  stage: IExtendedStage
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  const response = await updateStage({
+    stage: { ...stage },
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error updating stage')
+  }
+  revalidatePath('/studio')
+  return response
 }

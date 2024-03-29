@@ -11,11 +11,12 @@ import {
 import { Stream } from 'livepeer/dist/models/components'
 import { getMultistreamTarget } from '@/lib/actions/stages'
 import DeleteMultistream from './DeleteMultistream'
-import { CreateMultistreamTarget } from '../event/[eventId]/components/stageSettings/multistream/CreateMultistreamTarget'
+import { CreateMultistreamTarget } from '../../../event/[eventId]/components/stageSettings/multistream/CreateMultistreamTarget'
+import { IExtendedStage } from '@/lib/types'
 
-const Multistream = ({ stream }: { stream: Stream }) => {
+const Multistream = ({ stream }: { stream: IExtendedStage }) => {
   if (!stream) return null
-  const streamTargets = stream?.multistream?.targets
+  const streamTargets = stream?.streamSettings?.targets || []
 
   return (
     <div>
@@ -26,7 +27,9 @@ const Multistream = ({ stream }: { stream: Stream }) => {
               Multistream Target
             </CardTitle>
 
-            <CreateMultistreamTarget streamId={stream?.id} />
+            <CreateMultistreamTarget
+              streamId={stream?.streamSettings?.streamId}
+            />
           </CardContent>
         </Card>
       ) : (
@@ -37,7 +40,7 @@ const Multistream = ({ stream }: { stream: Stream }) => {
             </CardTitle>
             <CreateMultistreamTarget
               btnName="Add Target"
-              streamId={stream?.id}
+              streamId={stream?.streamSettings?.streamId}
             />
           </CardContent>
           <Card>
@@ -68,7 +71,9 @@ const Multistream = ({ stream }: { stream: Stream }) => {
                             <TableCell className="font-medium"></TableCell>
                             <TableCell className="font-medium flex justify-end">
                               <DeleteMultistream
-                                streamId={stream.id}
+                                streamId={
+                                  stream?.streamSettings?.streamId
+                                }
                                 targetId={target.id}
                               />
                             </TableCell>

@@ -19,7 +19,7 @@ import ScheduleComponent, {
 import Image from 'next/image'
 import {
   getEventPeriod,
-  extractDate,
+  formatDate,
   isSameDate,
 } from '@/lib/utils/time'
 import Markdown from 'react-markdown'
@@ -82,12 +82,12 @@ export default function EventHomeComponent({
             <div className="text-sm text-white">
               <p>
                 <span className="mr-2">&#128197;</span>
-                {extractDate(new Date(event.start))}
+                {formatDate(new Date(event.start))}
                 {!isSameDate(
                   new Date(event.start),
                   new Date(event.end)
                 )
-                  ? ` - ${extractDate(new Date(event.end))}`
+                  ? ` - ${formatDate(new Date(event.end))}`
                   : ''}
               </p>
               <p>

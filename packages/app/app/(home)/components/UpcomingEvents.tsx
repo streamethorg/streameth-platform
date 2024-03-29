@@ -17,7 +17,7 @@ import {
 } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import { getDateAsString, getDateInUTC } from '@/lib/utils/time'
+import { formatDate, getDateInUTC } from '@/lib/utils/time'
 import { IExtendedOrganization } from '@/lib/types'
 
 const UpcomingEvents = async ({

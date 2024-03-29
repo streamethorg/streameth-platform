@@ -54,7 +54,7 @@ const ChatBar = ({
   const slug = stageId
 
   useEffect(() => {
-    if (!account || loadingEns || !fakeName) {
+    if (!account || loadingEns || !fakeName || !stageId) {
       return
     }
     const getOrCreateViewerToken = async () => {

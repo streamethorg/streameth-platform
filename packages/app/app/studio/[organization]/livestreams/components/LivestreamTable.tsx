@@ -6,8 +6,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { IStage } from '@/lib/types'
-import { getDateAsString } from '@/lib/utils/time'
+import { IExtendedStage } from '@/lib/types'
+import { formatDate } from '@/lib/utils/time'
 import { CircleEllipsis } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,7 +17,7 @@ const LivestreamTable = ({
   streams,
   organizationSlug,
 }: {
-  streams: IStage[]
+  streams: IExtendedStage[]
   organizationSlug: string
 }) => {
   return (
@@ -36,7 +36,7 @@ const LivestreamTable = ({
             <TableCell className="font-medium">
               <Link
                 key={stream._id}
-                href={`/studio/${organizationSlug}/livestreams/edit?streamId=${stream?._id}`}>
+                href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
                 <div className="flex flex-row w-full space-x-4">
                   <div className="w-[100px]">
                     <Image
@@ -53,11 +53,14 @@ const LivestreamTable = ({
               </Link>
             </TableCell>
             <TableCell>
-              {getDateAsString(stream?.createdAt)}
+              {formatDate(
+                new Date(stream?.createdAt as string),
+                'ddd. MMMM. D, YYYY'
+              )}
             </TableCell>
-            <TableCell>{stream?.ipfshash}</TableCell>
+            <TableCell>{stream?.streamSettings?.ipfshash}</TableCell>
             <TableCell className="flex flex-row space-x-4">
-              <CircleEllipsis />
+              {/* <CircleEllipsis /> */}
             </TableCell>
           </TableRow>
         ))}

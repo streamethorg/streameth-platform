@@ -26,16 +26,16 @@ const navigationItems = [
     navigationPath: 'livestreams',
     icon: <Radio />,
   },
-  {
-    title: 'NFTS',
-    navigationPath: 'nfts',
-    icon: <Videotape />,
-  },
-  {
-    title: 'Settings',
-    navigationPath: 'settings',
-    icon: <Settings />,
-  },
+  // {
+  //   title: 'NFTS',
+  //   navigationPath: 'nfts',
+  //   icon: <Videotape />,
+  // },
+  // {
+  //   title: 'Settings',
+  //   navigationPath: 'settings',
+  //   icon: <Settings />,
+  // },
 ]
 
 const Navigation = async ({

@@ -3,12 +3,13 @@ import {
   IStage,
 } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
+import { IExtendedStage } from '../types'
 
 export async function fetchStage({
   stage,
 }: {
   stage: string
-}): Promise<IStageModel | null> {
+}): Promise<IExtendedStage | null> {
   try {
     const response = await fetch(`${apiUrl()}/stages/${stage}`)
     const data = (await response.json()).data
@@ -54,7 +55,7 @@ export async function createStage({
   stage,
   authToken,
 }: {
-  stage: IStage
+  stage: IExtendedStage
   authToken: string
 }): Promise<IStage> {
   const response = await fetch(`${apiUrl()}/stages`, {
@@ -97,7 +98,7 @@ export async function fetchOrganizationStages({
   organizationId,
 }: {
   organizationId?: string
-}): Promise<IStageModel[]> {
+}): Promise<IExtendedStage[]> {
   try {
     const response = await fetch(
       `${apiUrl()}/stages/organization/${organizationId}`,
@@ -111,5 +112,38 @@ export async function fetchOrganizationStages({
   } catch (e) {
     console.log(e)
     throw 'Error fetching stages'
+  }
+}
+
+export const updateStage = async ({
+  stage,
+  authToken,
+}: {
+  stage: IExtendedStage
+  authToken: string
+}): Promise<IExtendedStage> => {
+  // Extract only the necessary properties from the stage object
+  const { _id, createdAt, updatedAt, __v, ...rest } = stage
+
+  try {
+    const response = await fetch(`${apiUrl()}/stages/${_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(rest), // Send only the properties to be updated
+    })
+
+    if (!response.ok) {
+      throw new Error('Error updating stage')
+    }
+
+    const responseData = await response.json()
+    const updatedStage: IExtendedStage = responseData.data
+    return updatedStage
+  } catch (error) {
+    console.error('Error updating stage:', error)
+    throw error
   }
 }

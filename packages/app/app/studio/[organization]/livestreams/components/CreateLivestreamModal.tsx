@@ -56,7 +56,7 @@ const CreateLivestreamModal = ({
     })
       .then((response) => {
         toast.success('Stream created')
-        streamId = response?.streamSettings?.streamId
+        streamId = response?._id as string
       })
       .catch(() => {
         toast.error('Error creating stream')
@@ -64,7 +64,7 @@ const CreateLivestreamModal = ({
       .finally(() => {
         setIsLoading(false)
         router.push(
-          `/studio/${organization?.slug}/livestreams?streamId=${streamId}`
+          `/studio/${organization?.slug}/livestreams/${streamId}`
         )
       })
   }
@@ -111,6 +111,7 @@ const CreateLivestreamModal = ({
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button
+                variant="primary"
                 disabled={getFormSubmitStatus(form)}
                 type="submit">
                 Create livestream
