@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import CreateSession from '../../../library/create/CreateSession'
+import CreateSession from '../../../../library/create/CreateSession'
 
 const NoSession = async ({
   organization,
@@ -23,7 +23,7 @@ const NoSession = async ({
           </div>
           <div className="flex flex-row space-x-2">
             <Link
-              href={`/studio/${organizationSlug}/event?eventId=${eventId}&settings=event`}>
+              href={`/studio/${organizationSlug}/event/${eventId}?settings=event`}>
               <Button>Cancel</Button>
             </Link>
             <CreateSession

@@ -20,27 +20,23 @@ const EventClips = async ({
   params,
   searchParams,
 }: ClipsPageParams) => {
-  const {
-    eventId,
-    stage,
-    selectedSession,
-    selectedRecording,
-    replaceAsset,
-  } = searchParams
-  if (!eventId || !stage) {
+  const { stage, selectedSession, selectedRecording, replaceAsset } =
+    searchParams
+
+  if (!params.eventId || !stage) {
     return notFound()
   }
 
   try {
     const stageData = await fetchStage({ stage })
+
     if (!stageData) {
       return notFound()
     }
-
     const sessions = (await fetchAllSessions({ stageId: stage }))
       .sessions
     const session = sessions.find((s) => s._id === selectedSession)
-    const event = await fetchEvent({ eventId })
+    const event = await fetchEvent({ eventId: params.eventId })
 
     if (!event) {
       return notFound()
@@ -52,7 +48,7 @@ const EventClips = async ({
           stageId={stage}
           organizationSlug={params.organization}
           organization={event.organizationId as string}
-          eventId={eventId}
+          eventId={params.eventId}
         />
       )
     }
@@ -81,7 +77,7 @@ const EventClips = async ({
           <SessionList
             organizationSlug={params.organization}
             sessions={sessions}
-            eventId={eventId}
+            eventId={params.eventId}
             organizationId={event.organizationId as string}
             stageId={stage}
           />

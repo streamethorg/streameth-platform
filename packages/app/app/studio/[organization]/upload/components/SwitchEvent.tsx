@@ -22,7 +22,7 @@ const SwitchEvent = ({
         labelKey="name"
         value={event || ''}
         setValue={(event) => {
-          router.push(`event/upload?eventId=${event}`)
+          router.push(`event/${event}/upload`)
         }}
       />
     </div>

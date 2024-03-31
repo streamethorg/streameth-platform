@@ -1,10 +1,15 @@
 'use server'
 import { Livepeer } from 'livepeer'
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
-import { createStage, deleteStage } from '../services/stageService'
+import {
+  createStage,
+  deleteStage,
+  updateStage,
+} from '../services/stageService'
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { Stream } from 'livepeer/dist/models/components'
+import { IExtendedStage } from '../types'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -13,12 +18,13 @@ const livepeer = new Livepeer({
 export const createStageAction = async ({
   stage,
 }: {
-  stage: IStage
+  stage: IExtendedStage
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
     throw new Error('No user session found')
   }
+
   try {
     // post to https://livepeer.studio/api/stream
     const response = await fetch(
@@ -37,13 +43,14 @@ export const createStageAction = async ({
     )
 
     const data = await response.json()
-    if(stage.streamSettings?.streamId){
+    if (stage.streamSettings?.streamId) {
       stage.streamSettings.streamId = data.id
     }
   } catch (error) {
     console.error('Error creating stream:', error)
     throw new Error('Error creating stream')
   }
+
   const response = await createStage({
     stage: stage,
     authToken,
@@ -120,25 +127,30 @@ export const createMultistream = async (
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
   })
-  const response = await livepeer.stream.createMultistreamTarget(
-    streamId,
-    {
-      spec: {
-        name,
-        url: url + '/' + streamKey,
-      },
-      profile: 'source',
+  try {
+    const response = await livepeer.stream.createMultistreamTarget(
+      streamId,
+      {
+        spec: {
+          name,
+          url: url + '/' + streamKey,
+        },
+        profile: 'source',
+      }
+    )
+    if (response.statusCode !== 200) {
+      return {
+        message: 'Error creating multistream target',
+        success: false,
+      }
     }
-  )
-  if (response.statusCode !== 200) {
-    return {
-      message: 'Error creating multistream target',
-      success: false,
-    }
-  }
-  revalidatePath('/studio')
+    revalidatePath('/studio')
 
-  return { message: 'Multistream target created', success: true }
+    return { message: 'Multistream target created', success: true }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error creating multistream:', success: false }
+  }
 }
 
 export const deleteMultistreamTarget = async (
@@ -154,10 +166,13 @@ export const deleteMultistreamTarget = async (
     streamId,
     targetId
   )
-
+  if (response.statusCode !== 200) {
+    console.error('Error deleting multistream target')
+    return null
+  }
   revalidatePath('/studio')
 
-  return response
+  return response.rawResponse?.statusText
 }
 
 export const getMultistreamTarget = async ({
@@ -174,4 +189,25 @@ export const getMultistreamTarget = async ({
   revalidatePath('/studio')
 
   return response.multistreamTarget
+}
+
+export const updateStageAction = async ({
+  stage,
+}: {
+  stage: IExtendedStage
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  const response = await updateStage({
+    stage: { ...stage },
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error updating stage')
+  }
+  revalidatePath('/studio')
+  return response
 }
