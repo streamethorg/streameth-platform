@@ -328,7 +328,12 @@ export default class GSheetImporter extends BaseImporter {
           continue;
         }
         const hash = this.generateHash(session, config.secretKey);
-        await this.sessionService.update(sessionId, session);
+        const findSession = await this.sessionService.get(sessionId);
+        await this.sessionService.update(sessionId, {
+          ...session,
+          assetId: findSession.assetId,
+          playbackId: findSession.playbackId,
+        });
         const updateRange = `${SESSION_SHEET}!T${index + 3}`;
         await this.googleSheetService.appendData(sheetId, updateRange, [hash]);
         sleep(3000);

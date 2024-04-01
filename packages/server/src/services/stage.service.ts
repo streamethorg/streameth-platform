@@ -4,7 +4,7 @@ import { IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
 import Events from '@models/event.model';
 import { Types } from 'mongoose';
-import { createStream } from '@utils/livepeer';
+import { createStream, getStreamInfo } from '@utils/livepeer';
 
 export default class StageService {
   private path: string;
@@ -65,6 +65,7 @@ export default class StageService {
       `${this.path}/${eventId}`,
     );
   }
+
   async findAllStagesForOrganization(
     organizationId: string,
   ): Promise<Array<IStage>> {
@@ -76,5 +77,22 @@ export default class StageService {
   async deleteOne(stageId: string): Promise<void> {
     await this.get(stageId);
     return await this.controller.store.delete(stageId);
+  }
+
+  async findStreamAndUpdate(id: string): Promise<void> {
+    const stream = await getStreamInfo(id);
+    if (stream.isActive || stream.isHealthy) {
+      await Stage.findOneAndUpdate(
+        { 'streamSettings.streamId': id },
+        {
+          $set: {
+            streamSettings: {
+              isActive: stream.isActive,
+              isHealthy: stream.isHealthy,
+            },
+          },
+        },
+      );
+    }
   }
 }
