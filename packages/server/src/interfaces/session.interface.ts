@@ -18,7 +18,7 @@ export interface IPlayback {
 export enum SessionType {
   clip = 'clip',
   livestream = 'livestream',
-  upload = 'upload',
+  video = 'video',
 }
 
 export interface ISession {
