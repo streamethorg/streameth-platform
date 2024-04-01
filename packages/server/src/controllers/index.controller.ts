@@ -24,12 +24,12 @@ export class IndexController extends Controller {
         console.log('Invalid signature or timestamp');
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
-      switch(payload.event){
+      switch (payload.event) {
         case 'asset.ready':
-          await startAITools(payload.payload.id)
+          await startAITools(payload.payload.id);
           break;
         case 'stream.started':
-          await this.stageService.findStreamAndUpdate(payload.stream.id)
+          await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;
         default:
           break;
