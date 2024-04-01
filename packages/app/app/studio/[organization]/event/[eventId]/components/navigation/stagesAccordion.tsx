@@ -94,8 +94,7 @@ const StageAccordion = ({
                 Livestream settings
               </p>
             </AccordionContent>
-            <Link
-              href={`event/clips?eventId=${event._id}&stage=${stage._id}`}>
+            <Link href={`${event._id}/clips?stage=${stage._id}`}>
               <AccordionContent>
                 <p
                   className={`${

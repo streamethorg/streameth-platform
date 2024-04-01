@@ -88,7 +88,7 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="flex sticky top-0 flex-row items-center bg-transparent bg-opacity-90 lg:hidden z-[999999] backdrop-blur-sm">
+    <NavigationMenu className="bg-white flex sticky top-0 flex-row items-center lg:hidden z-[999999]">
       {(searchVisible || menuVisible) && (
         <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
@@ -170,16 +170,26 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-opacity-90 md:hidden lg:flex z-[99] backdrop-blur-sm">
-      <Link href="/">
-        <Image
-          src={logo ?? '/logo_dark.png'}
-          alt="Logo"
-          width={logo ? 50 : 230}
-          height={logo ? 50 : 30}
-          className="hidden lg:block"
-        />
-      </Link>
+    <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-white md:hidden lg:flex z-[99] ">
+      {organizations && (
+        <div className="m-1 mr-2">
+          <SwitchOrganization
+            organization={currentOrganization}
+            organizations={organizations}
+          />
+        </div>
+      )}
+      {showSearchBar && (
+        <Link href="/">
+          <Image
+            src={logo ?? '/logo_dark.png'}
+            alt="Logo"
+            width={logo ? 50 : 230}
+            height={logo ? 50 : 30}
+            className="hidden lg:block"
+          />
+        </Link>
+      )}
       <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
       </div>
@@ -191,14 +201,7 @@ const PCNavBar = ({
           userData?.organizations?.[0]?.slug
         )}
       />
-      {organizations && (
-        <div className="m-1 mr-2">
-          <SwitchOrganization
-            organization={currentOrganization}
-            organizations={organizations}
-          />
-        </div>
-      )}
+
       <ConnectWalletButton />
     </NavigationMenu>
   )
