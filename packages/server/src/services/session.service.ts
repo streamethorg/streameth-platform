@@ -61,11 +61,13 @@ export default class SessionServcie {
   }> {
     let filter = {};
     if (d.event != undefined) {
-      let event = await Event.findOne({ slug: d.event });
+      let query = this.queryByIdOrSlug(d.event);
+      let event = await Event.findOne(query);
       filter = { ...filter, eventId: event?._id };
     }
     if (d.organization != undefined) {
-      let org = await Organization.findOne({ slug: d.organization });
+      let query = this.queryByIdOrSlug(d.organization);
+      let org = await Organization.findOne(query);
       filter = { ...filter, organizationId: org?._id };
     }
     if (d.onlyVideos) {
@@ -78,7 +80,8 @@ export default class SessionServcie {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      let stage = await Stage.findOne({ slug: d.stageId });
+      let query = this.queryByIdOrSlug(d.stageId);
+      let stage = await Stage.findOne(query);
       filter = { ...filter, stageId: stage?._id };
     }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
@@ -144,5 +147,11 @@ export default class SessionServcie {
     });
     const URI = await storage.upload(file);
     return await storage.resolveScheme(URI);
+  }
+
+  private queryByIdOrSlug(id: string) {
+    const isObjectId = /[0-9a-f]{24}/i.test(id);
+    const query = isObjectId ? { _id: id } : { slug: id };
+    return query;
   }
 }
