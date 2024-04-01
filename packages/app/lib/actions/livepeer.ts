@@ -1,6 +1,7 @@
 'use server'
 
 import { Livepeer } from 'livepeer'
+import { Session } from 'livepeer/dist/models/components'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -69,5 +70,33 @@ export const getUrlAction = async (
   } catch (error) {
     console.error('Error fetching a Livepeer url:', error)
     return null
+  }
+}
+
+export const getStreamRecordings = async ({
+  streamId,
+}: {
+  streamId: string
+}) => {
+
+  if (!streamId) {
+    return {
+      parentStream: null,
+      recordings: [],
+    }
+  }
+  const parentStream = (await livepeer.stream.get(streamId)).stream
+  const recordings = (
+    await livepeer.session.getRecorded(parentStream?.id ?? '')
+  ).classes
+  if (!recordings) {
+    return {
+      parentStream,
+      recordings: [],
+    }
+  }
+  return {
+    parentStream,
+    recordings: JSON.parse(JSON.stringify(recordings)) as Session[]
   }
 }

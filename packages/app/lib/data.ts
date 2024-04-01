@@ -71,6 +71,7 @@ export async function fetchAllSessions({
       cache: 'no-store',
     }
   )
+  console.log(constructApiUrl(`${apiUrl()}/sessions`, params))
   const a = await response.json()
   const allSessions = a.data
   if (searchQuery) {

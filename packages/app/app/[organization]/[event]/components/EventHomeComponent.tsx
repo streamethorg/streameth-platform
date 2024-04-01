@@ -11,7 +11,6 @@ import ScheduleComponent, {
 } from '../schedule/components/ScheduleComponent'
 import Image from 'next/image'
 import {
-  getEventPeriod,
   formatDate,
   isSameDate,
 } from '@/lib/utils/time'
