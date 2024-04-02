@@ -5,7 +5,7 @@ import { Livepeer } from 'livepeer'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Code, Download, Share2 } from 'lucide-react'
-import EditSessionFrom from './components/EditSessionForm'
+import EditSessionForm from './components/EditSessionForm'
 import Link from 'next/link'
 import EmbedButton, {
   EmbedModalContent,
@@ -47,7 +47,7 @@ const EditSession = async ({
       <div className="flex flex-row space-x-4">
         <div className="px-10 space-y-4 w-2/3">
           <h1 className="text-5xl font-bold">Video Details</h1>
-          <EditSessionFrom session={session} />
+          <EditSessionForm session={session} />
         </div>
         <div className="w-1/3">
           <PlayerWithControls
