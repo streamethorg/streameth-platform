@@ -26,6 +26,16 @@ const navigationItems = [
     navigationPath: 'livestreams',
     icon: <Radio />,
   },
+  {
+    title: 'Clips',
+    navigationPath: 'clips',
+    icon: <Videotape />,
+  },
+  {
+    title: 'Settings',
+    navigationPath: 'settings',
+    icon: <Settings />,
+  },
   // {
   //   title: 'NFTS',
   //   navigationPath: 'nfts',

@@ -22,8 +22,8 @@ const RecordingSelect = ({
   if (!streamRecordings) return <div>No stream sessions found</div>
 
   return (
-    <div className='space-y-2'>
-      <p>Select livestream recording</p>
+    <div className="space-y-2">
+      <p className="text-sm font-bold">Recording</p>
       <Select
         value={selectedRecording}
         onValueChange={(value) => {
@@ -33,13 +33,13 @@ const RecordingSelect = ({
               { key: 'selectedRecording', value: session.id ?? '' },
             ])
         }}>
-        <SelectTrigger>
+        <SelectTrigger className="bg-white">
           <SelectValue
             defaultValue={selectedRecording}
             placeholder={'Select a session to create clips from'}
           />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-white">
           <SelectGroup>
             {streamRecordings.map((session) => (
               <SelectItem key={session.id} value={session.id ?? ''}>

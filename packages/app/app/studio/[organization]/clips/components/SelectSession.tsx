@@ -8,27 +8,31 @@ import {
   SelectItem,
 } from '@/components/ui/select'
 import useSearchParams from '@/lib/hooks/useSearchParams'
-import { IStage } from '@/lib/types'
+import { IExtendedStage } from '@/lib/types'
 
 const SelectSession = ({
   stages,
   currentStageId,
 }: {
-  stages: IStage[]
+  stages: IExtendedStage[]
   currentStageId?: string
 }) => {
   const { handleTermChange } = useSearchParams()
 
   const options = stages.map((stage) => ({
     label: stage.name,
-    value: stage.id,
+    value: stage._id as string,
   }))
 
+  const currentStage = options.find(
+    (option) => option.value === currentStageId
+  )
+
   return (
-    <div className='flex flex-col space-y-2'>
-      <p>Select livestream</p>
+    <div className="flex flex-col space-y-2 w-full ">
+      <p className="text-sm font-bold">Livestream</p>
       <Select
-        defaultValue={currentStageId}
+        value={currentStage?.value}
         onValueChange={(value) =>
           handleTermChange([
             {
@@ -37,10 +41,10 @@ const SelectSession = ({
             },
           ])
         }>
-        <SelectTrigger>
-          <SelectValue />
+        <SelectTrigger className="bg-white">
+          <SelectValue placeholder="Select a livestream" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-white">
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}
