@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils/utils'
-import { Accordion, AccordionItem } from '@/components/ui/accordion'
+import { Accordion } from '@/components/ui/accordion'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import Logo from '@/public/studio_logo.png'
 import NavigationItem from './NavigationItem'
@@ -8,34 +8,34 @@ import Image from 'next/image'
 const navigationItems = [
   {
     title: 'Home',
-    navigationPath: '/studio',
+    navigationPath: '',
     icon: <Home />,
   },
   {
     title: 'Events',
-    navigationPath: 'events',
+    navigationPath: 'event',
     icon: <Videotape />,
   },
   {
     title: 'Library',
-    navigationPath: 'videos',
+    navigationPath: 'library',
     icon: <Videotape />,
   },
   {
     title: 'Livestreams',
     navigationPath: 'livestreams',
-    icon: <Videotape />,
+    icon: <Radio />,
   },
-  {
-    title: 'NFTS',
-    navigationPath: 'nfts',
-    icon: <Videotape />,
-  },
-  {
-    title: 'Settings',
-    navigationPath: 'settings',
-    icon: <Settings />,
-  },
+  // {
+  //   title: 'NFTS',
+  //   navigationPath: 'nfts',
+  //   icon: <Videotape />,
+  // },
+  // {
+  //   title: 'Settings',
+  //   navigationPath: 'settings',
+  //   icon: <Settings />,
+  // },
 ]
 
 const Navigation = async ({
@@ -48,14 +48,23 @@ const Navigation = async ({
   return (
     <div
       className={cn(
-        'bg-primary overflow-auto w-full max-w-[250px] h-full border-r border-border flex flex-col text-foreground'
+        'bg-primary overflow-auto w-full max-w-[250px] h-full border-r border-border flex flex-col text-black'
       )}>
-      <div className="flex flex-col p-4  justify-between items-center">
-        <Image src={Logo} alt="Logo" width={160} height={80} />
-      </div>
+      <Image
+        className="p-4"
+        src={Logo}
+        alt="Logo"
+        width={160}
+        height={80}
+      />
+
       <Accordion type="single" className="p-4 space-y-4" collapsible>
         {navigationItems.map((item, index) => (
-          <NavigationItem key={index} {...item} />
+          <NavigationItem
+            organization={organizationSlug}
+            key={index}
+            {...item}
+          />
         ))}
       </Accordion>
     </div>

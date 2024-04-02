@@ -33,6 +33,22 @@ export const createStream = async (
   }
 };
 
+export const getStreamInfo = async (streamId: string): Promise<any> => {
+  try {
+    const response = await fetch(`${host}/api/stream/${streamId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    throw new HttpException(400, 'Error fetching livestream');
+  }
+};
+
 export const createAsset = async (
   fileName: string,
 ): Promise<{ url: string; assetId: string }> => {
@@ -60,7 +76,12 @@ export const createAsset = async (
   }
 };
 
-export const getVideoUrlAction = async (assetId: string) => {
+export const getAsset = async (
+  assetId: string,
+): Promise<{
+  playbackUrl: string;
+  phaseStatus: string;
+}> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
       method: 'get',
@@ -111,7 +132,11 @@ export const getVideoPhaseAction = async (assetId: string) => {
     if (!data.playbackUrl) {
       return '';
     }
-    return data.status.phase;
+
+    return {
+      playbackUrl: data.playbackUrl ?? '',
+      phaseStatus: data.status.phase ?? '',
+    };
   } catch (e) {
     console.error(`Error fetching asset:`, e);
   }

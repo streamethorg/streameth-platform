@@ -1,7 +1,8 @@
-import { IPlayback, ISource } from '@interfaces/session.interface';
+import { IPlayback, ISource, SessionType } from '@interfaces/session.interface';
 import { ISpeaker } from '@interfaces/speaker.interface';
 import {
   IsArray,
+  IsBoolean,
   IsNotEmpty,
   IsObject,
   IsOptional,
@@ -88,4 +89,16 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsString()
   ipfsURI?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  published?: boolean;
+
+  @IsOptional()
+  @IsString()
+  type?: SessionType;
+
+  @IsOptional()
+  @IsString()
+  nftURI?: string;
 }

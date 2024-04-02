@@ -171,6 +171,25 @@ const PCNavBar = ({
   const { userData } = useUserData()
   return (
     <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-white md:hidden lg:flex z-[99] ">
+      {organizations && (
+        <div className="m-1 mr-2">
+          <SwitchOrganization
+            organization={currentOrganization}
+            organizations={organizations}
+          />
+        </div>
+      )}
+      {showSearchBar && (
+        <Link href="/">
+          <Image
+            src={logo ?? '/logo_dark.png'}
+            alt="Logo"
+            width={logo ? 50 : 230}
+            height={logo ? 50 : 30}
+            className="hidden lg:block"
+          />
+        </Link>
+      )}
       <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
       </div>
@@ -182,14 +201,7 @@ const PCNavBar = ({
           userData?.organizations?.[0]?.slug
         )}
       />
-      {organizations && (
-        <div className="m-1 mr-2">
-          <SwitchOrganization
-            organization={currentOrganization}
-            organizations={organizations}
-          />
-        </div>
-      )}
+
       <ConnectWalletButton />
     </NavigationMenu>
   )

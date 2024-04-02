@@ -29,6 +29,8 @@ export default function ImageUpload({
   path,
   ...rest
 }: {
+  id?: string
+  placeholder?: string
   aspectRatio: number
   onChange: (files: string | null) => void
   value: string | null | undefined

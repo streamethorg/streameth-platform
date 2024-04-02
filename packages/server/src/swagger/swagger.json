@@ -474,7 +474,6 @@
 				},
 				"required": [
 					"name",
-					"eventId",
 					"streamSettings",
 					"organizationId"
 				],
@@ -533,9 +532,9 @@
 				},
 				"required": [
 					"name",
-					"eventId",
 					"streamSettings",
-					"organizationId"
+					"organizationId",
+					"eventId"
 				],
 				"type": "object",
 				"additionalProperties": false
