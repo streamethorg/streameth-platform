@@ -7,6 +7,7 @@ export const createStream = async (
   name: string,
 ): Promise<{
   streamId: string;
+  streamKey: string;
   parentId: string;
   playbackId: string;
 }> => {
@@ -25,6 +26,7 @@ export const createStream = async (
     const data = await response.json();
     return {
       streamId: data.id,
+      streamKey: data.streamKey,
       parentId: data.parentId,
       playbackId: data.playbackId,
     };

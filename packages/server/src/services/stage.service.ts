@@ -27,6 +27,7 @@ export default class StageService {
         eventId: eventId,
         streamSettings: {
           streamId: stream.streamId,
+          streamKey: stream.streamKey,
           parentId: stream.parentId,
           playbackId: stream.playbackId,
         },
