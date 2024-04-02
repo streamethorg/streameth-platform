@@ -28,7 +28,7 @@ import {
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
 
-const ShareModalContent = () => {
+export const ShareModalContent = () => {
   const text = `Check out this event on @streameth!`
   const [currentUrl, setCurrentUrl] = useState('')
   useEffect(() => {

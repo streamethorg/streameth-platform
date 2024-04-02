@@ -1,5 +1,5 @@
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import { createAsset, getStreamInfo, getAsset } from '@utils/livepeer';
+import { createAsset, getStreamInfo, getPlayback } from '@utils/livepeer';
 import {
   Tags,
   Route,
@@ -33,6 +33,6 @@ export class StreamController extends Controller {
   async getVideoUrl(
     @Path() assetId: string,
   ): Promise<IStandardResponse<{ playbackUrl: string; phaseStatus: string }>> {
-    return SendApiResponse('asset fetched', await getAsset(assetId));
+    return SendApiResponse('asset fetched', await getPlayback(assetId));
   }
 }

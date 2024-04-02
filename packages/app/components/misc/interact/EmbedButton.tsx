@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { generateEmbedCode } from '@/lib/utils/utils'
 
-const ModalContent: React.FC<{
+export const EmbedModalContent: React.FC<{
   playbackId?: string
   streamId?: string
   playerName: string
@@ -99,7 +99,7 @@ function EmbedButton({
           Embed
         </Badge>
       </CredenzaTrigger>
-      <ModalContent
+      <EmbedModalContent
         vod={vod}
         playbackId={playbackId}
         streamId={streamId}

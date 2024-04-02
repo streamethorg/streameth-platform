@@ -7,6 +7,11 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft, Code, Download, Share2 } from 'lucide-react'
 import EditSessionFrom from './components/EditSessionForm'
 import Link from 'next/link'
+import EmbedButton, {
+  EmbedModalContent,
+} from '@/components/misc/interact/EmbedButton'
+import { ShareModalContent } from '@/components/misc/interact/ShareButton'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 
 const EditSession = async ({
   params,
@@ -32,7 +37,7 @@ const EditSession = async ({
 
   return (
     <div className="p-2 h-full">
-      <Link href={`/studio/${params.organization}?settings=videos`}>
+      <Link href={`/studio/${params.organization}/library`}>
         <div className="flex justify-start items-center my-4 mx-10 space-x-4">
           <ArrowLeft />
           <p>Back to library</p>
@@ -57,18 +62,37 @@ const EditSession = async ({
             ]}
           />
           <div className="flex justify-end my-2 space-x-2">
-            <Button className="space-x-2">
-              <Share2 size={20} />
-              <p>Share</p>
-            </Button>
-            <Button className="space-x-2">
-              <Code size={21} />
-              <p>Embed</p>
-            </Button>
-            <Button className="space-x-2">
-              <Download size={19} />
-              <p>Download</p>
-            </Button>
+            <Dialog>
+              <DialogTrigger>
+                <Button className="space-x-2">
+                  <Share2 size={20} />
+                  <p>Share</p>
+                </Button>
+              </DialogTrigger>
+              <ShareModalContent />
+            </Dialog>
+            <Dialog>
+              <DialogTrigger>
+                <Button className="space-x-2">
+                  <Code size={21} />
+                  <p>Embed</p>
+                </Button>
+              </DialogTrigger>
+              <EmbedModalContent
+                playbackId={video.playbackId}
+                playerName={video.name}
+              />
+            </Dialog>
+            <Link
+              href={video.downloadUrl!}
+              download={video.name}
+              target="_blank"
+              className="flex justify-center items-center">
+              <Button className="space-x-2">
+                <Download size={19} />
+                <p>Download</p>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

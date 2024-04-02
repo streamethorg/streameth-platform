@@ -79,11 +79,7 @@ const EditSessionFrom = ({
             <FormItem>
               <FormLabel>Video title *</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="name"
-                  {...field}
-                  className="border-2 border-neutral-200"
-                />
+                <Input placeholder="name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -96,11 +92,7 @@ const EditSessionFrom = ({
             <FormItem>
               <FormLabel>Description *</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="description"
-                  {...field}
-                  className="border-2 border-neutral-200"
-                />
+                <Input placeholder="description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -126,10 +118,11 @@ const EditSessionFrom = ({
           )}
         />
 
-        <div className="space-x-2">
+        <div className="flex items-center space-x-2">
           <DeleteAsset
             session={session}
             href={`/studio/${session.organizationId}?settings=videos`}
+            showIcon={false}
           />
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}

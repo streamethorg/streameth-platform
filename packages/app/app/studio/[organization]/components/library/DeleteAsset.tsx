@@ -18,9 +18,11 @@ import { useRouter } from 'next/navigation'
 const DeleteAsset = ({
   session,
   href,
+  showIcon = true,
 }: {
   session: IExtendedSession
   href: string
+  showIcon?: boolean
 }) => {
   const router = useRouter()
 
@@ -37,7 +39,7 @@ const DeleteAsset = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button variant={'destructive'}>
-          <TrashIcon />
+          {showIcon && <TrashIcon />}
           <p>Delete</p>
         </Button>
       </DialogTrigger>

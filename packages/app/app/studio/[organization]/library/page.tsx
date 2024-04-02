@@ -1,5 +1,5 @@
 import React from 'react'
-import LibraryTable from '../components/LibraryTable'
+import LibraryTable from '../components/library/LibraryTable'
 
 const Library = ({
   params,

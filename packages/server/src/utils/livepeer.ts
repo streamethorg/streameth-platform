@@ -76,7 +76,7 @@ export const createAsset = async (
   }
 };
 
-export const getAsset = async (
+export const getPlayback = async (
   assetId: string,
 ): Promise<{
   playbackUrl: string;
