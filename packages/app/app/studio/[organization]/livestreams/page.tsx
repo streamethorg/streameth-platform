@@ -11,6 +11,7 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 import { LivestreamPageParams } from '@/lib/types'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import LivestreamTable from './components/LivestreamTable'
+import Image from 'next/image'
 
 const Livestreams = async ({ params }: LivestreamPageParams) => {
   const organization = await fetchOrganization({
@@ -23,12 +24,12 @@ const Livestreams = async ({ params }: LivestreamPageParams) => {
   })
 
   return (
-    <div className="p-4 flex flex-col gap-5">
+    <div className="flex flex-col justify-center bg-white">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/livestreamBg.png)`,
         }}
-        className="shadow-none bg-cover bg-no-repeat p-4 lg:border-none">
+        className="shadow-none bg-cover bg-no-repeat p-4 border-none">
         <CardHeader>
           <CardTitle>Livestreams</CardTitle>
           <CardDescription className="max-w-[500px]">
@@ -40,10 +41,33 @@ const Livestreams = async ({ params }: LivestreamPageParams) => {
         </CardFooter>
       </Card>
 
-      <LivestreamTable
-        organizationSlug={params?.organization}
-        streams={stages}
-      />
+      {stages.length > 0 ? (
+        <LivestreamTable
+          organizationSlug={params?.organization}
+          streams={stages}
+        />
+      ) : (
+        <div>
+          <div className="h-10 bg-white border-y border-muted flex justify-end"></div>
+          <div className="flex h-96 bg-white gap-4 m-auto flex-col justify-center items-center">
+            <Image
+              src="/folder.png"
+              width={150}
+              height={150}
+              alt="empty livestream"
+            />
+            <CardTitle className="font-semibold text-2xl">
+              The livestream is empty
+            </CardTitle>
+            <CardDescription>
+              Create your first livestream to get started!
+            </CardDescription>
+            <div className="w-fit mt-2">
+              <CreateLivestreamModal organization={organization} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

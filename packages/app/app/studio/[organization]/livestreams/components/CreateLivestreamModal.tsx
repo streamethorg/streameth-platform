@@ -72,7 +72,7 @@ const CreateLivestreamModal = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Create Livestream</Button>
+        <Button variant="primary">Create Livestream</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-white">
         <DialogHeader>
@@ -111,8 +111,9 @@ const CreateLivestreamModal = ({
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button
+                loading={isLoading}
                 variant="primary"
-                disabled={getFormSubmitStatus(form)}
+                disabled={getFormSubmitStatus(form) || isLoading}
                 type="submit">
                 Create livestream
               </Button>

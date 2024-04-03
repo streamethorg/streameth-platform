@@ -35,12 +35,14 @@ const getPages = (
 const HomePageNavbar = ({
   logo,
   pages,
+  showLogo = true,
   showSearchBar = true,
   organizations,
   currentOrganization,
 }: {
   logo?: string
   pages: Page[]
+  showLogo?: boolean
   showSearchBar?: boolean
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
@@ -51,8 +53,11 @@ const HomePageNavbar = ({
         logo={logo}
         pages={pages}
         showSearchBar={showSearchBar}
+        organizations={organizations}
+        currentOrganization={currentOrganization}
       />
       <PCNavBar
+        showLogo={showLogo}
         logo={logo}
         pages={pages}
         showSearchBar={showSearchBar}
@@ -67,10 +72,14 @@ const MobileNavBar = ({
   logo,
   pages,
   showSearchBar,
+  organizations,
+  currentOrganization,
 }: {
   logo?: string
   pages: Page[]
   showSearchBar: boolean
+  organizations?: IExtendedOrganization[]
+  currentOrganization?: string
 }) => {
   const [menuVisible, setMenuVisible] = useState(false)
   const [searchVisible, setSearchVisible] = useState(false)
@@ -104,15 +113,25 @@ const MobileNavBar = ({
           menuVisible && 'bg-background',
           searchVisible && showSearchBar && 'bg-background'
         )}>
-        <Link href="/">
-          <Image
-            src={logo ?? '/logo.png'}
-            alt="Logo"
-            height={36}
-            width={36}
-            className="h-full aspect-square"
-          />
-        </Link>
+        {organizations && (
+          <div className="m-1 mr-2">
+            <SwitchOrganization
+              organization={currentOrganization}
+              organizations={organizations}
+            />
+          </div>
+        )}
+        {showSearchBar && (
+          <Link href="/">
+            <Image
+              src={logo ?? '/logo.png'}
+              alt="Logo"
+              height={36}
+              width={36}
+              className="h-full aspect-square"
+            />
+          </Link>
+        )}
 
         <div className="flex items-center ml-auto">
           {showSearchBar && (
@@ -158,11 +177,13 @@ const PCNavBar = ({
   logo,
   pages,
   showSearchBar,
+  showLogo,
   organizations,
   currentOrganization,
 }: {
   logo?: string
   pages: Page[]
+  showLogo: boolean
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
@@ -179,7 +200,7 @@ const PCNavBar = ({
           />
         </div>
       )}
-      {showSearchBar && (
+      {showLogo && (
         <Link href="/">
           <Image
             src={logo ?? '/logo_dark.png'}

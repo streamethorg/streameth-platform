@@ -47,6 +47,7 @@ const Layout = async ({
       <div className="flex flex-col w-full">
         <HomePageNavbar
           pages={pages}
+          showLogo={false}
           showSearchBar={false}
           currentOrganization={params.organization}
           organizations={userData?.organizations}

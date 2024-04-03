@@ -53,7 +53,10 @@ export default async function EventPage({
             <Suspense
               key={stageId}
               fallback={<StreamConfigSkeleton />}>
-              <StreamConfig stageId={stageId} />
+              <StreamConfig
+                organization={params.organization}
+                stageId={stageId}
+              />
             </Suspense>
           </div>
         </div>

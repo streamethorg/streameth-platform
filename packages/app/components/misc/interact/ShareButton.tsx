@@ -28,24 +28,32 @@ import {
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
 
-const ShareModalContent = () => {
+export const ShareModalContent = ({
+  url,
+  livestream = false,
+}: {
+  url?: string
+  livestream?: boolean
+}) => {
   const text = `Check out this event on @streameth!`
-  const [currentUrl, setCurrentUrl] = useState('')
+  const [currentUrl, setCurrentUrl] = useState(url ?? '')
   useEffect(() => {
     // This code will only run on the client side
     if (typeof window === 'undefined') return
-    setCurrentUrl(window.location.href)
-  }, [])
+    if (!url) {
+      setCurrentUrl(window.location.href)
+    }
+  }, [url])
 
   return (
     <CredenzaContent>
       <CredenzaHeader>
         <CredenzaTitle className="text-center">
-          Share this event
+          Share this {livestream ? 'livestream' : 'event'}
         </CredenzaTitle>
         <CredenzaDescription>
-          Share this event with your friends and followers, tag
-          @streameth and earn rewards!
+          Share this {livestream ? 'livestream' : 'event'} with your
+          friends and followers, tag @streameth and earn rewards!
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>
@@ -74,16 +82,29 @@ const ShareModalContent = () => {
   )
 }
 
-const ShareButton = () => {
+const ShareButton = ({
+  className,
+  url,
+  livestream,
+}: {
+  className?: string
+  url?: string
+  livestream?: boolean
+}) => {
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Badge className="bg-secondary text-secondary-foreground">
+        <Badge
+          className={`${
+            className
+              ? className
+              : 'bg-secondary text-secondary-foreground'
+          }`}>
           <Share2 size={24} className="p-1" />
           Share
         </Badge>
       </CredenzaTrigger>
-      <ShareModalContent />
+      <ShareModalContent livestream={livestream} url={url} />
     </Credenza>
   )
 }
