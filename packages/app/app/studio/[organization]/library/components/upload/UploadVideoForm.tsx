@@ -63,7 +63,7 @@ const UploadVideoForm = ({
         start: 0,
         end: 0,
       },
-    } as any)
+    })
       .catch((e) => {
         console.log(e)
         toast.error('Error creating Session')
