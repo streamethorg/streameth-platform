@@ -7,9 +7,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft, Code, Download, Share2 } from 'lucide-react'
 import EditSessionForm from './components/EditSessionForm'
 import Link from 'next/link'
-import EmbedButton, {
-  EmbedModalContent,
-} from '@/components/misc/interact/EmbedButton'
+import { EmbedModalContent } from '@/components/misc/interact/EmbedButton'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 
@@ -61,12 +59,12 @@ const EditSession = async ({
               },
             ]}
           />
-          <div className="flex justify-end my-2 space-x-2">
+          <div className="flex justify-end items-center my-2 space-x-2">
             <Dialog>
               <DialogTrigger>
                 <Button className="space-x-2">
                   <Share2 size={20} />
-                  <p>Share</p>
+                  <p className="hidden xl:flex">Share</p>
                 </Button>
               </DialogTrigger>
               <ShareModalContent />
@@ -75,7 +73,7 @@ const EditSession = async ({
               <DialogTrigger>
                 <Button className="space-x-2">
                   <Code size={21} />
-                  <p>Embed</p>
+                  <p className="hidden xl:flex">Embed</p>
                 </Button>
               </DialogTrigger>
               <EmbedModalContent
@@ -90,7 +88,7 @@ const EditSession = async ({
               className="flex justify-center items-center">
               <Button className="space-x-2">
                 <Download size={19} />
-                <p>Download</p>
+                <p className="hidden xl:flex">Download</p>
               </Button>
             </Link>
           </div>

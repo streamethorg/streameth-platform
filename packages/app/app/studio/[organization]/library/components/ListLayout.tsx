@@ -7,7 +7,7 @@ import {
   TableHead,
   TableBody,
 } from '@/components/ui/table'
-import TableCells from '../../components/library/TableCells'
+import TableCells from './TableCells'
 import { LayoutGrid, Rows3 } from 'lucide-react'
 import { IExtendedSession } from '@/lib/types'
 import Link from 'next/link'

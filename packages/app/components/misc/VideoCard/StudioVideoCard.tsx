@@ -4,13 +4,10 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Thumbnail from './thumbnail'
-import Image from 'next/image'
 import Link from 'next/link'
 import { fetchEvent } from '@/lib/services/eventService'
-import { archivePath } from '@/lib/utils/utils'
 import { IExtendedSession, eLayout } from '@/lib/types'
-import { EllipsisVertical } from 'lucide-react'
-import PopoverActions from '@/app/studio/[organization]/components/library/PopoverActions'
+import PopoverActions from '@/app/studio/[organization]/library/components/PopoverActions'
 
 const StudioVideoCard = async ({
   session,

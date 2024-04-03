@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import UploadVideoDialog from '../components/library/UploadVideoDialog'
+import UploadVideoDialog from './components/UploadVideoDialog'
 import GridLayout from './components/GridLayout'
 import { Suspense } from 'react'
 import { eLayout } from '@/lib/types'

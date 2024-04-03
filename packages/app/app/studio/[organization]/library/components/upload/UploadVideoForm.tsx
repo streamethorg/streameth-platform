@@ -21,19 +21,19 @@ import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import Dropzone from './Dropzone'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
-import { useRouter } from 'next/navigation'
-import { DialogClose } from '@radix-ui/react-dialog'
+import { DialogClose } from '@/components/ui/dialog'
 
 const UploadVideoForm = ({
   eventId,
-  organization,
+  organizationId,
   organizationSlug,
+  onFinish,
 }: {
   eventId?: string
-  organization: string
+  organizationId: string
   organizationSlug: string
+  onFinish: () => void
 }) => {
-  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const abortControllerRef = useRef(new AbortController())
 
@@ -51,8 +51,6 @@ const UploadVideoForm = ({
     abortControllerRef.current.abort()
   }
 
-  console.log(organizationSlug)
-
   function onSubmit(values: z.infer<typeof sessionSchema>) {
     setIsLoading(true)
 
@@ -60,32 +58,21 @@ const UploadVideoForm = ({
       session: {
         ...values,
         eventId: eventId || '',
-        organizationId: '65d380137a3d271078aa0a32',
+        organizationId,
         speakers: [],
         start: 0,
         end: 0,
       },
     } as any)
-      .then((session) => {
-        toast.success('Session created')
-        location.reload()
-        // router.push(
-        //   `/studio/${organizationSlug}/library/${session._id}`
-        // )
-      })
       .catch((e) => {
         console.log(e)
         toast.error('Error creating Session')
       })
       .finally(() => {
         setIsLoading(false)
+        onFinish()
       })
   }
-
-  useEffect(() => {
-    const subscription = form.watch((values) => console.log(values))
-    return () => subscription.unsubscribe()
-  }, [form])
 
   return (
     <Form {...form}>

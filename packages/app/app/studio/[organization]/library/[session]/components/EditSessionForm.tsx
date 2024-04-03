@@ -22,7 +22,7 @@ import { generateId } from 'streameth-new-server/src/utils/util'
 import { IExtendedSession } from '@/lib/types'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
-import DeleteAsset from '../../../components/library/DeleteAsset'
+import DeleteAsset from '../../components/DeleteAsset'
 
 const EditSessionFrom = ({
   session,
