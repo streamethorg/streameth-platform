@@ -14,7 +14,9 @@ import { CardTitle } from '@/components/ui/card'
 import { Film } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import VideoCard from '@/components/misc/VideoCard'
+import Preview from '../Preview'
+import ClipsSessionList from './components/ClipSessionList'
+
 const ClipContainer = ({
   children,
 }: {
@@ -27,11 +29,47 @@ const ClipContainer = ({
   </div>
 )
 
+const SessionContent = async ({
+  selectedRecording,
+  parentStream,
+  stageId,
+  organizationId,
+}: {
+  selectedRecording: string
+  parentStream: string
+  stageName: string
+  stageId: string
+  organizationId: string
+}) => {
+  return (
+    <div className="flex flex-col w-full h-full overflow-auto space-y-4">
+      <ClipProvider>
+        <ReactHlsPlayer
+          playbackId={parentStream}
+          selectedStreamSession={selectedRecording}
+        />
+        <div className="flex flex-col space-y-4">
+          <div className="flex flex-row w-full space-x-2 items-center justify-center">
+            <TimeSetter label="Clip start" type="start" />
+            <TimeSetter label="Clip end" type="end" />
+            <CreateClipButton
+              selectedRecording={selectedRecording}
+              playbackId={parentStream}
+              stageId={stageId}
+              organizationId={organizationId}
+            />
+          </div>
+        </div>
+      </ClipProvider>
+    </div>
+  )
+}
+
 const EventClips = async ({
   params,
   searchParams,
 }: ClipsPageParams) => {
-  const { stage, selectedRecording } = searchParams
+  const { stage, selectedRecording, previewId } = searchParams
 
   const stages = await fetchStages({
     organizationId: params.organization,
@@ -40,7 +78,7 @@ const EventClips = async ({
   if (stages.length === 0) {
     return (
       <ClipContainer>
-        <div className="text-center max-w-[500px] space-y-4 w-full border rounded-lg p-4 mx-auto flex bg-background flex-col justify-center items-center h-full">
+        <div className="text-center max-w-[500px] space-y-4 w-full border rounded-lg p-4 mx-auto mb-auto flex bg-background flex-col justify-center items-center h-full">
           <Film className="p-4 rounded-lg" size={84} />
           <p className=" font-bold text-lg">Clip a livestream!</p>
           <p className="text-sm text-foreground-muted">
@@ -56,14 +94,13 @@ const EventClips = async ({
   }
 
   const currentStage = stages.find((s) => {
-    console.log('s.id', s._id, stage)
     return s._id === stage
   })
 
   if (!currentStage) {
     return (
       <ClipContainer>
-        <div className="flex max-w-[500px] h-auto mx-auto flex-col w-full p-4 items-center space-y-4">
+        <div className="flex max-w-[500px] h-auto mx-auto mb-auto flex-col w-full p-4 items-center space-y-4">
           <SelectSession stages={stages} currentStageId={stage} />
           <div className="bg-white text-center  space-y-2 w-full border rounded-lg p-4 mx-auto flex bg-background flex-col justify-center items-center h-full">
             <Film className="p-4 rounded-lg" size={84} />
@@ -73,7 +110,6 @@ const EventClips = async ({
               the dropdown above
             </p>
             <p className="font-bold">or</p>
-
             <Link href={`/studio/${params.organization}/upload`}>
               <Button>Create a livestream</Button>
             </Link>
@@ -109,7 +145,8 @@ const EventClips = async ({
             <Film className="p-4 rounded-lg" size={84} />
             <p className=" font-bold text-lg">No recordings</p>
             <p className="text-sm text-foreground-muted">
-              This stream does not have any recordings, go live and come back to clip to clip your livestream 
+              This stream does not have any recordings, go live and
+              come back to clip to clip your livestream
             </p>
             <Link href={`/studio/${params.organization}/upload`}>
               <Button>Go Live</Button>
@@ -145,12 +182,23 @@ const EventClips = async ({
   })
 
   const sessions = await fetchAllSessions({
-    event: event?.slug,
     stageId: currentStage._id,
   })
 
   return (
     <ClipContainer>
+      {previewId && (
+        <Preview
+          initialIsOpen={previewId !== ''}
+          organizationId={event?.organizationId as string}
+          playbackId={
+            sessions.sessions.find(
+              (session) => session._id === previewId
+            )?.playbackId
+          }
+        />
+      )}
+
       <div className="flex flex-col w-full p-8 ">
         <div className="flex flex-row justify-center space-x-4 my-4 w-full">
           <SelectSession
@@ -168,6 +216,8 @@ const EventClips = async ({
           parentStream={
             stageRecordings.parentStream?.playbackId ?? ''
           }
+          stageId={currentStage._id}
+          organizationId={event?.organizationId as string}
         />
       </div>
       {sessions.sessions && event && (
@@ -176,46 +226,13 @@ const EventClips = async ({
             Livestream clips
           </CardTitle>
           <div className="h-[calc(100%-50px)] overflow-y-scroll">
-            {sessions.sessions.map((session) => (
-              <div key={session._id} className="px-4 py-2">
-                <VideoCard session={session} />
-              </div>
-            ))}
+            <ClipsSessionList event={event} sessions={sessions.sessions} />
           </div>
         </div>
       )}
     </ClipContainer>
   )
 }
-const SessionContent = async ({
-  selectedRecording,
-  parentStream,
-  stageName,
-}: {
-  selectedRecording: string
-  parentStream: string
-  stageName: string
-}) => {
-  return (
-    <div className="flex flex-col w-full h-full overflow-auto space-y-4">
-      <ClipProvider>
-        <ReactHlsPlayer
-          playbackId={parentStream}
-          selectedStreamSession={selectedRecording}
-        />
-        <div className="flex flex-col space-y-4">
-          <div className="flex flex-row w-full space-x-2 items-center justify-center">
-            <TimeSetter label="Clip start" type="start" />
-            <TimeSetter label="Clip end" type="end" />
-            <CreateClipButton
-              selectedRecording={selectedRecording}
-              playbackId={parentStream}
-            />
-          </div>
-        </div>
-      </ClipProvider>
-    </div>
-  )
-}
+
 
 export default EventClips

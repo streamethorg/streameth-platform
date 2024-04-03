@@ -22,7 +22,7 @@ const RecordingSelect = ({
   if (!streamRecordings) return <div>No stream sessions found</div>
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 w-full">
       <p className="text-sm font-bold">Recording</p>
       <Select
         value={selectedRecording}

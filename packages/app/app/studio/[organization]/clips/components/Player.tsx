@@ -68,9 +68,10 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   return (
     <video
       ref={videoRef}
-      autoPlay={true}
+      autoPlay={false}
       controls
       style={{
+        borderRadius: '8px',
         width: '100%',
         height: 'auto',
         background: 'black',

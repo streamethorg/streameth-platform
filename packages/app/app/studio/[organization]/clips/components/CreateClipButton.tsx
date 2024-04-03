@@ -1,6 +1,9 @@
 'use client'
 import React from 'react'
-import { createClip } from '@/lib/actions/sessions'
+import {
+  createClip,
+  createSessionAction,
+} from '@/lib/actions/sessions'
 import { Button } from '@/components/ui/button'
 import { useClipContext } from './ClipContext'
 import { Loader2 } from 'lucide-react'
@@ -11,10 +14,14 @@ import { Label } from '@/components/ui/label'
 const CreateClipButton = ({
   playbackId,
   selectedRecording,
+  stageId,
   session,
+  organizationId,
 }: {
   playbackId: string
   selectedRecording: string
+  stageId: string
+  organizationId: string
   session?: any
 }) => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -23,17 +30,30 @@ const CreateClipButton = ({
     useClipContext()
 
   const { handleTermChange } = useSearchParams()
-  const handleCreateClip = () => {
-    if (selectedRecording && startTime && endTime) {
+  const handleCreateClip = async () => {
+    if (!session) {
+      session = await createSessionAction({
+        session: {
+          name,
+          description: 'Clip',
+          start: new Date().getTime(),
+          end: new Date().getTime(),
+          stageId,
+          organizationId,
+          speakers: [],
+          type: 'clip',
+        },
+      })
+    }
+
+    if (selectedRecording && startTime && endTime && session) {
       setIsLoading(true)
       createClip({
         playbackId,
         sessionId: selectedRecording,
         start: startTime.unix,
         end: endTime.unix,
-        session: {
-          _id: selectedRecording,
-        },
+        session,
       })
         .then(() => {
           setIsLoading(false)
@@ -48,8 +68,8 @@ const CreateClipButton = ({
         .finally(() => {
           handleTermChange([
             {
-              key: 'replaceAsset',
-              value: '',
+              key: 'previewId',
+              value: session._id,
             },
           ])
           setIsLoading(false)
@@ -62,12 +82,15 @@ const CreateClipButton = ({
       <div className="flex flex-col space-y-2">
         <Label>Clip name</Label>
         <Input
+        className=' bg-white'
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <Button
-        disabled={isLoading || !selectedRecording || !startTime || !endTime}
+        disabled={
+          isLoading || !selectedRecording || !startTime || !endTime
+        }
         onClick={handleCreateClip}
         variant="primary"
         className="mt-auto text-white">
