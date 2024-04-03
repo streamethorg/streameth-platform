@@ -77,7 +77,7 @@ export default class StageService {
 
   async deleteOne(stageId: string): Promise<void> {
     const stream = await this.get(stageId);
-    await deleteStream(stream.streamSettings.streamId)
+    await deleteStream(stream.streamSettings.streamId);
     return await this.controller.store.delete(stageId);
   }
 
