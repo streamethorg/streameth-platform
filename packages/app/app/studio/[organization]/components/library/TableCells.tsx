@@ -7,6 +7,7 @@ import { fetchEvent } from '@/lib/services/eventService'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import { useState } from 'react'
 import PopoverActions from './PopoverActions'
+import Link from 'next/link'
 
 const TableCells = ({
   item,
@@ -35,20 +36,23 @@ const TableCells = ({
           <div className="w-[100px]">
             <LibraryThumbnail session={item} />
           </div>
-          <span>{item.name}</span>
+          <Link href={`/watch?session=${item._id}`}>
+            <span className="hover:underline">{item.name}</span>
+          </Link>
         </div>
       </TableCell>
+      <TableCell>Private</TableCell>
       {item.createdAt && (
-        <TableCell>
+        <TableCell className="truncate">
           {new Date(item.createdAt).toUTCString()}
         </TableCell>
       )}
-      <TableCell className="relative truncate w-[150px]">
+      <TableCell className="relative max-w-[200px]">
         {item.ipfsURI ? (
           <div
-            className="flex items-center hover:bg-gray-200 min-w-[150px] group"
+            className="flex items-center hover:bg-gray-200 group"
             onClick={handleCopy}>
-            <span className="flex-1 m-2 rounded cursor-pointer">
+            <span className="flex-1 m-2 rounded cursor-pointer truncate">
               {copied ? 'Copied' : item.ipfsURI}
             </span>
             <Copy className="p-1 mr-2 opacity-0 group-hover:opacity-100">

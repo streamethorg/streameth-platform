@@ -38,7 +38,7 @@ const DeleteAsset = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'destructive'}>
+        <Button variant={'destructive'} className="space-x-2">
           {showIcon && <TrashIcon />}
           <p>Delete</p>
         </Button>
