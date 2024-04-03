@@ -54,6 +54,7 @@ const EditSessionFrom = ({
         start: session.start ?? Number(new Date()),
         end: session.end ?? Number(new Date()),
         speakers: session.speakers ?? [],
+        type: session.type,
       },
     })
       .then(() => toast.success('Session updated'))

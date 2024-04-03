@@ -28,7 +28,7 @@ export class UpdateSessionDto {
 
   @IsOptional()
   @IsString()
-  stageId: string;
+  stageId?: string;
 
   @IsOptional()
   @IsArray()
@@ -96,7 +96,7 @@ export class UpdateSessionDto {
 
   @IsOptional()
   @IsString()
-  type?: SessionType;
+  type: SessionType;
 
   @IsOptional()
   @IsString()

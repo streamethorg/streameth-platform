@@ -57,6 +57,7 @@ const SessionAccordion = ({
         start: session.start ?? Number(new Date()),
         end: session.end ?? Number(new Date()),
         speakers: session.speakers ?? [],
+        type: session.type,
       },
     })
       .then((response) => {
@@ -197,7 +198,7 @@ const SessionAccordion = ({
             </FormItem>
           )}
         /> */}
-        <div className="flex flex-row justify-between space-x-2 ">
+        <div className="flex flex-row justify-between space-x-2">
           <Button
             onClick={handleDeleteSession}
             variant={'destructive'}
@@ -207,7 +208,7 @@ const SessionAccordion = ({
           <Button className="w-full" type="submit">
             {isUpdatingSession ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
                 Please Updating session
               </>
             ) : (
