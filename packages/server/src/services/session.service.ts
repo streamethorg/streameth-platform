@@ -23,6 +23,9 @@ export default class SessionServcie {
     let stageId = '';
     if (data.stageId == undefined || data.stageId.toString().length === 0) {
       stageId = new Types.ObjectId().toString();
+    } else {
+      let stage = await Stage.findById(data.stageId);
+      stageId = stage._id;
     }
     if (data.eventId == undefined || data.eventId.toString().length === 0) {
       eventId = new Types.ObjectId().toString();
