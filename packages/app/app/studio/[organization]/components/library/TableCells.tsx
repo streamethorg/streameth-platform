@@ -1,7 +1,7 @@
 'use client'
 
 import { TableCell } from '@/components/ui/table'
-import { IExtendedSession } from '@/lib/types'
+import { IExtendedSession, eLayout } from '@/lib/types'
 import { Copy } from 'lucide-react'
 import { fetchEvent } from '@/lib/services/eventService'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
@@ -64,7 +64,11 @@ const TableCells = ({
         )}
       </TableCell>
       <TableCell>
-        <PopoverActions session={item} organization={organization} />
+        <PopoverActions
+          session={item}
+          organizationSlug={organization}
+          layout={eLayout.list}
+        />
       </TableCell>
     </>
   )

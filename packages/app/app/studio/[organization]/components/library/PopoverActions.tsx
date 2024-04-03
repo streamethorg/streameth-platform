@@ -5,36 +5,50 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { FilePenLine, Eye, Menu, Share2 } from 'lucide-react'
+import {
+  FilePenLine,
+  Eye,
+  Menu,
+  Share2,
+  EllipsisVertical,
+  Copy,
+} from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import DeleteAsset from './DeleteAsset'
-import { IExtendedSession } from '@/lib/types'
+import { IExtendedSession, eLayout } from '@/lib/types'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
+import { PopoverClose } from '@radix-ui/react-popover'
 
 const PopoverActions = ({
   session,
-  organization,
+  organizationSlug,
+  layout,
 }: {
   session: IExtendedSession
-  organization: string
+  organizationSlug: string
+  layout: eLayout
 }) => {
   const itemId = session._id
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(session.ipfsURI!)
+  }
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Menu className="cursor-pointer" />
+        <EllipsisVertical className="cursor-pointer" />
       </PopoverTrigger>
       <PopoverContent className="w-60">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Dialog>
-              <DialogTrigger className="w-full">
+              <DialogTrigger>
                 <Button
                   variant={'outline'}
-                  className="w-full space-x-2">
+                  className="space-x-2 w-full">
                   <Share2 className="=text-muted-foreground" />
                   <p className="">Share</p>
                 </Button>
@@ -44,7 +58,7 @@ const PopoverActions = ({
             <Button variant={'outline'}>
               <Link
                 className="flex flex-row justify-center items-center space-x-2"
-                href={`/studio/${organization}/library/${itemId}`}>
+                href={`/studio/${organizationSlug}/library/${itemId}`}>
                 <FilePenLine className="text-muted-foreground" />
                 <p className="">Edit</p>
               </Link>
@@ -57,9 +71,20 @@ const PopoverActions = ({
                 <p>View</p>
               </Link>
             </Button>
+            {layout == eLayout.grid && (
+              <PopoverClose>
+                <Button
+                  variant={'outline'}
+                  className="space-x-2 w-full"
+                  onClick={() => handleCopy()}>
+                  <Copy className="text-muted-foreground" />
+                  <p>Copy IPFS Hash</p>
+                </Button>
+              </PopoverClose>
+            )}
             <DeleteAsset
               session={session}
-              href={`/studio/${organization}?settings=videos`}
+              href={`/studio/${organizationSlug}?settings=videos`}
             />
           </div>
         </div>

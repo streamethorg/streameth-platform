@@ -11,11 +11,9 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import UploadVideoDialog from '../components/library/UploadVideoDialog'
-
-enum eLayout {
-  grid = 'grid',
-  list = 'list',
-}
+import GridLayout from './components/GridLayout'
+import { Suspense } from 'react'
+import { eLayout } from '@/lib/types'
 
 const Library = async ({
   params,
@@ -49,10 +47,12 @@ const Library = async ({
             <UploadVideoDialog organization={params.organization} />
           </CardFooter>
         </Card>
-        <ListLayout
-          sessions={sessions}
-          organizationSlug={params.organization}
-        />
+        <Suspense>
+          <ListLayout
+            sessions={sessions}
+            organizationSlug={params.organization}
+          />
+        </Suspense>
       </div>
     )
   } else if (searchParams.layout === eLayout.grid) {
@@ -69,6 +69,12 @@ const Library = async ({
             <UploadVideoDialog organization={params.organization} />
           </CardFooter>
         </Card>
+        <Suspense>
+          <GridLayout
+            sessions={sessions}
+            organizationSlug={params.organization}
+          />
+        </Suspense>
       </div>
     )
   }
