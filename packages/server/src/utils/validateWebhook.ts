@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { config } from '@config';
 
 export function validateWebhook(
   livepeerSignature: string,
@@ -15,9 +16,8 @@ export function validateWebhook(
   const signature = signatureParts['v1'];
   const signedPayload = JSON.stringify(payload);
 
-  const secret = process.env.LIVEPEER_WEBHOOK_SECRET;
   const expectedSignature = crypto
-    .createHmac('sha256', secret)
+    .createHmac('sha256', config.livepeer.secretKey)
     .update(signedPayload)
     .digest('hex');
 
