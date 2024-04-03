@@ -7,6 +7,7 @@ export const createStream = async (
   name: string,
 ): Promise<{
   streamId: string;
+  streamKey: string;
   parentId: string;
   playbackId: string;
 }> => {
@@ -25,6 +26,7 @@ export const createStream = async (
     const data = await response.json();
     return {
       streamId: data.id,
+      streamKey: data.streamKey,
       parentId: data.parentId,
       playbackId: data.playbackId,
     };
@@ -33,8 +35,23 @@ export const createStream = async (
   }
 };
 
+export const deleteStream = async (streamId: string): Promise<void> => {
+  try {
+   await fetch(`${host}/api/stream/${streamId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+  } catch (e) {
+    throw new HttpException(400, 'Service unavailable');
+  }
+};
+
 export const getStreamInfo = async (streamId: string): Promise<any> => {
   try {
+
     const response = await fetch(`${host}/api/stream/${streamId}`, {
       method: 'get',
       headers: {

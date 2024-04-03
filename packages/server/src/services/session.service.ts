@@ -20,6 +20,10 @@ export default class SessionServcie {
   async create(data: ISession): Promise<ISession> {
     let eventId = '';
     let eventSlug = '';
+    let stageId = '';
+    if (data.stageId == undefined || data.stageId.toString().length === 0) {
+      stageId = new Types.ObjectId().toString();
+    }
     if (data.eventId == undefined || data.eventId.toString().length === 0) {
       eventId = new Types.ObjectId().toString();
       data.speakers.map((speaker) => (speaker.eventId = eventId));
@@ -30,7 +34,7 @@ export default class SessionServcie {
     }
     return this.controller.store.create(
       data.name,
-      { ...data, eventSlug: eventSlug, eventId: eventId },
+      { ...data, eventSlug: eventSlug, eventId: eventId, stageId: stageId },
       `${this.path}/${eventId}`,
     );
   }
