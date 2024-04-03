@@ -44,7 +44,10 @@ const Library = async ({
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <UploadVideoDialog organization={params.organization} />
+            <UploadVideoDialog
+              organizationId={sessions[0].organizationId.toString()}
+              organizationSlug={params.organization}
+            />
           </CardFooter>
         </Card>
         <Suspense>
@@ -66,7 +69,10 @@ const Library = async ({
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <UploadVideoDialog organization={params.organization} />
+            <UploadVideoDialog
+              organizationId={sessions[0].organizationId.toString()}
+              organizationSlug={params.organization}
+            />
           </CardFooter>
         </Card>
         <Suspense>

@@ -51,20 +51,21 @@ const UploadVideoForm = ({
     abortControllerRef.current.abort()
   }
 
+  console.log(organizationSlug)
+
   function onSubmit(values: z.infer<typeof sessionSchema>) {
     setIsLoading(true)
 
     createSessionAction({
       session: {
         ...values,
-        eventId: '65d3823d7a3d271078aa0a6f',
+        eventId: eventId || '',
         organizationId: '65d380137a3d271078aa0a32',
         speakers: [],
         start: 0,
         end: 0,
-        stageId: '65df81574d771aa98151dd60',
       },
-    })
+    } as any)
       .then((session) => {
         toast.success('Session created')
         location.reload()
@@ -101,11 +102,7 @@ const UploadVideoForm = ({
             <FormItem>
               <FormLabel>Video title *</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="name"
-                  {...field}
-                  className="bg-gray-200"
-                />
+                <Input placeholder="name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -116,13 +113,9 @@ const UploadVideoForm = ({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="">Description *</FormLabel>
+              <FormLabel>Description *</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="description"
-                  {...field}
-                  className="bg-gray-200"
-                />
+                <Input placeholder="description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -13,9 +13,11 @@ import { Button } from '@/components/ui/button'
 import UploadVideoForm from '../upload/UploadVideoForm'
 
 const UploadVideoDialog = ({
-  organization,
+  organizationId,
+  organizationSlug,
 }: {
-  organization: string
+  organizationId: string
+  organizationSlug: string
 }) => {
   return (
     <Dialog>
@@ -33,8 +35,8 @@ const UploadVideoDialog = ({
         </DialogHeader>
         <Separator />
         <UploadVideoForm
-          organization={organization}
-          organizationSlug={organization}
+          organization={organizationId}
+          organizationSlug={organizationSlug}
         />
       </DialogContent>
     </Dialog>

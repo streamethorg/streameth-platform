@@ -8,7 +8,6 @@ import {
   TableBody,
 } from '@/components/ui/table'
 import TableCells from '../../components/library/TableCells'
-import { Suspense } from 'react'
 import { LayoutGrid, Rows3 } from 'lucide-react'
 import { IExtendedSession } from '@/lib/types'
 import Link from 'next/link'

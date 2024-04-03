@@ -121,7 +121,7 @@ const EditSessionFrom = ({
         <div className="flex items-center space-x-2">
           <DeleteAsset
             session={session}
-            href={`/studio/${session.organizationId}?settings=videos`}
+            href={`/studio/${session.organizationId}/library`}
             showIcon={false}
           />
           <Button
