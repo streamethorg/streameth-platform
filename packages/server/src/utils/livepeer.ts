@@ -37,7 +37,7 @@ export const createStream = async (
 
 export const deleteStream = async (streamId: string): Promise<void> => {
   try {
-   await fetch(`${host}/api/stream/${streamId}`, {
+    await fetch(`${host}/api/stream/${streamId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +51,6 @@ export const deleteStream = async (streamId: string): Promise<void> => {
 
 export const getStreamInfo = async (streamId: string): Promise<any> => {
   try {
-
     const response = await fetch(`${host}/api/stream/${streamId}`, {
       method: 'get',
       headers: {
