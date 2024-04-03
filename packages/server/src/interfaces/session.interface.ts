@@ -46,7 +46,7 @@ export interface ISession {
   nftURI?: string;
   ipfsURI?: string;
   published?: boolean;
-  type?: SessionType;
+  type: SessionType;
   createdAt?: string;
 }
 

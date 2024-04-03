@@ -31,9 +31,9 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsString()
   end: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  stageId: string;
+  stageId?: string;
 
   @IsNotEmpty()
   @IsArray()

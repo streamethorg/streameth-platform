@@ -33,6 +33,7 @@ export const createSessionAction = async ({
   }
   return response
 }
+
 export const createClip = async ({
   playbackId,
   sessionId,

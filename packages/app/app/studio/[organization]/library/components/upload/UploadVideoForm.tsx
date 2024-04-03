@@ -22,6 +22,7 @@ import ImageUpload from '@/components/misc/form/imageUpload'
 import Dropzone from './Dropzone'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import { DialogClose } from '@/components/ui/dialog'
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
 
 const UploadVideoForm = ({
   eventId,
@@ -62,15 +63,16 @@ const UploadVideoForm = ({
         speakers: [],
         start: 0,
         end: 0,
+        type: SessionType.video,
       },
     })
+      .then(() => onFinish())
       .catch((e) => {
         console.log(e)
         toast.error('Error creating Session')
       })
       .finally(() => {
         setIsLoading(false)
-        onFinish()
       })
   }
 
