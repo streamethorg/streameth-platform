@@ -1,81 +1,89 @@
-import Image from 'next/image'
-import remarkGfm from 'remark-gfm'
 import { notFound } from 'next/navigation'
-import Markdown from 'react-markdown'
 import { Metadata, ResolvingMetadata } from 'next'
 import { fetchOrganization } from '@/lib/services/organizationService'
+import Channel from './components/Channel'
+import { ChannelPageParams } from '@/lib/types'
+import HomePageNavbar from '@/components/Layout/HomePageNavbar'
+import Footer from '@/components/Layout/Footer'
+import { fetchSession } from '@/lib/services/sessionService'
 
-interface Params {
-  params: {
-    organizationSlug: string
-  }
-}
+import ChannelPlayer from './components/ChannelPlayer'
+import { fetchOrganizationStages } from '@/lib/services/stageService'
 
-export default async function OrganizationHome({ params }: Params) {
-  if (!params.organizationSlug) {
+const pages = [
+  {
+    name: 'Videography',
+    href: 'https://info.streameth.org/stream-eth-studio',
+    bgColor: 'bg-muted ',
+  },
+  {
+    name: 'Product',
+    href: 'https://info.streameth.org/services',
+    bgColor: 'bg-muted ',
+  },
+  {
+    name: 'Host your event',
+    href: 'https://info.streameth.org/contact-us',
+    bgColor: 'bg-primary text-primary-foreground',
+  },
+]
+
+export default async function OrganizationHome({
+  params,
+  searchParams,
+}: ChannelPageParams) {
+  if (!params.organization) {
     return notFound()
   }
   const organization = await fetchOrganization({
-    organizationSlug: params.organizationSlug,
+    organizationSlug: params.organization,
   })
   if (!organization) {
     return notFound()
   }
 
+  const libraryVideo = await fetchSession({
+    session: searchParams.playbackId,
+  })
+
+  const allStreams = await fetchOrganizationStages({
+    organizationId: organization._id,
+  })
+  const activeStream = allStreams?.filter(
+    (stream) => stream?.streamSettings?.isActive
+  )
+  const playerActive = !!libraryVideo || !!activeStream[0]
+
   return (
-    <main className="w-screen mx-auto fixed overflow-auto h-screen">
-      <div className="sticky  top-0 z-50 flex p-4 px-9 gap-4">
-        <Image
-          src={organization.logo}
-          width={50}
-          height={50}
-          style={{
-            objectFit: 'cover',
-          }}
-          alt={`${organization.name} logo`}
+    <div className="mx-auto w-full max-w-screen-2xl">
+      <HomePageNavbar pages={pages} />
+      {playerActive && (
+        <ChannelPlayer
+          libraryVideo={libraryVideo}
+          organization={organization}
+          activeStream={activeStream[0]}
         />
-        {/* <FilterBar events={events.map((event) => event.toJson())} /> */}
+      )}
+      <div className="flex flex-col overflow-auto p-0 lg:p-4">
+        <Channel
+          tab={searchParams.tab}
+          playerActive={playerActive}
+          organizationSlug={params.organization}
+        />
       </div>
-      <div
-        className="mx-8 rounded-xl"
-        style={{
-          backgroundColor: organization.accentColor
-            ? organization.accentColor
-            : '#fff',
-        }}>
-        <div className="bg-base py-4 rounded-xl my-3">
-          <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
-            {organization.name}
-          </p>
-          <article className="prose max-w-full text-center prose-invert p-4">
-            <Markdown remarkPlugins={[remarkGfm]}>
-              {organization.description}
-            </Markdown>
-          </article>
-        </div>
+      <div className="sticky mb-5 top-[100vh]">
+        <Footer />
       </div>
-      <hr className="h-px mx-9  bg-base" />
-      <div className="overflow-auto h-screen">
-        <div className="px-4">
-          {/* {upComing.length > 0 && (
-            <>
-              <p className="px-4 mt-3 font-ubuntu font-bold lg:py-2 text-blue text-2xl lg:text-4xl">
-                Upcoming Events
-              </p>
-            </>
-          )} */}
-        </div>
-      </div>
-    </main>
+    </div>
   )
 }
 
 export async function generateMetadata(
-  { params }: Params,
+  { params }: ChannelPageParams,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const organizationInfo = await fetchOrganization({
-    organizationSlug: params.organizationSlug,
+    organizationSlug: params.organization,
   })
 
   if (!organizationInfo) {

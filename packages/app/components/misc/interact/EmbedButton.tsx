@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/crezenda'
 import { Input } from '@/components/ui/input'
 import { generateEmbedCode } from '@/lib/utils/utils'
+import { Button } from '@/components/ui/button'
 
 const ModalContent: React.FC<{
   playbackId?: string
@@ -94,10 +95,10 @@ function EmbedButton({
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Badge className="bg-secondary text-secondary-foreground">
+        <Button className="bg-white" variant="outline">
           <Code size={24} className="p-1" />
           Embed
-        </Badge>
+        </Button>
       </CredenzaTrigger>
       <ModalContent
         vod={vod}

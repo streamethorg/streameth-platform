@@ -2,6 +2,7 @@ import { Livepeer } from 'livepeer'
 import { Badge } from '@/components/ui/badge'
 
 import { ArrowDownToLine } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const VideoDownload = async ({ assetId }: { assetId: string }) => {
   const livepeer = new Livepeer({
@@ -18,10 +19,10 @@ const VideoDownload = async ({ assetId }: { assetId: string }) => {
       download={asset.name}
       target="_blank"
       className="flex justify-center items-center">
-      <Badge className="bg-secondary text-secondary-foreground">
+      <Button className="bg-white" variant="outline">
         <ArrowDownToLine size={24} className="p-1 cursor-pointer" />
         Download
-      </Badge>
+      </Button>
     </a>
   )
 }
