@@ -215,7 +215,7 @@ const EventClips = async ({
         <div className="flex flex-row justify-center space-x-4 my-4 w-full">
           <SelectSession
             stages={stages}
-            currentStageId={currentStage.id}
+            currentStageId={currentStage._id}
           />
           <RecordingSelect
             selectedRecording={currentRecording ?? undefined}
