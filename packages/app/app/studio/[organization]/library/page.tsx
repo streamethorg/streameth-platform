@@ -12,20 +12,21 @@ import {
 } from '@/components/ui/card'
 import UploadVideoDialog from './components/UploadVideoDialog'
 import GridLayout from './components/GridLayout'
-import { eLayout } from '@/lib/types'
+import { eLayout, eSort } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
-import { Suspense } from 'react'
 
 const Library = async ({
   params,
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout }
+  searchParams: { layout: eLayout; sort: eSort }
 }) => {
-  if (!searchParams.layout) {
-    redirect(`/studio/${params.organization}/library?layout=list`)
+  if (!searchParams.layout || !searchParams.sort) {
+    redirect(
+      `/studio/${params.organization}/library?layout=list&sort=asc`
+    )
   }
 
   const organization = await fetchOrganization({
@@ -41,7 +42,14 @@ const Library = async ({
       organizationSlug: params.organization,
       onlyVideos: true,
     })
-  ).sessions.filter((session) => session.videoUrl)
+  ).sessions
+    .filter((session) => session.videoUrl)
+    .sort((a, b) => {
+      if (searchParams.sort === eSort.asc) {
+        return a.name.localeCompare(b.name)
+      }
+      return b.name.localeCompare(a.name)
+    })
 
   if (searchParams.layout === eLayout.list) {
     return (
@@ -63,6 +71,8 @@ const Library = async ({
           sessions={sessions}
           organizationId={organization._id.toString()}
           organizationSlug={params.organization}
+          sort={searchParams.sort}
+          layout={searchParams.layout}
         />
       </div>
     )

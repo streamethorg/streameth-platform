@@ -3,18 +3,17 @@
 import { TableCell } from '@/components/ui/table'
 import { IExtendedSession, eLayout } from '@/lib/types'
 import { Copy } from 'lucide-react'
-import { fetchEvent } from '@/lib/services/eventService'
-import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import PopoverActions from './PopoverActions'
 import Link from 'next/link'
+import Image from 'next/image'
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
+import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 
 const TableCells = ({
   item,
-  index,
   organization,
 }: {
   item: IExtendedSession
-  index: number
   organization: string
 }) => {
   const handleCopy = () => {
@@ -24,13 +23,24 @@ const TableCells = ({
   return (
     <>
       <TableCell className="font-medium">
-        <p>{index + 1}</p>
-      </TableCell>
-      <TableCell className="font-medium">
         <div className="flex flex-row items-center space-x-4 w-full">
           <div className="w-[100px]">
-            <LibraryThumbnail session={item} />
+            <AspectRatio ratio={16 / 9}>
+              {item.coverImage ? (
+                <Image
+                  src={item.coverImage}
+                  fill
+                  alt="Thumbnail Image"
+                  quality={50}
+                />
+              ) : (
+                <div className="flex justify-center items-center w-full h-full">
+                  <DefaultThumbnail className="max-w-full max-h-full" />
+                </div>
+              )}
+            </AspectRatio>
           </div>
+
           <Link href={`/watch?session=${item._id}`}>
             <span className="hover:underline">{item.name}</span>
           </Link>
@@ -66,23 +76,6 @@ const TableCells = ({
         />
       </TableCell>
     </>
-  )
-}
-
-const LibraryThumbnail = async ({
-  session,
-}: {
-  session: IExtendedSession
-}) => {
-  const sessionEvent = await fetchEvent({
-    eventId: session.eventId as string,
-  })
-
-  return (
-    <Thumbnail
-      imageUrl={session.coverImage}
-      fallBack={sessionEvent?.eventCover}
-    />
   )
 }
 

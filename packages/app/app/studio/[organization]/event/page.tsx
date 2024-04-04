@@ -7,6 +7,7 @@ const Events = async ({ params }: studioPageParams) => {
   const events = await fetchEvents({
     organizationSlug: params.organization,
   })
+
   return (
     <EventTable organization={params.organization} events={events} />
   )

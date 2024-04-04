@@ -2,13 +2,14 @@
 
 import { IExtendedSession, eLayout } from '@/lib/types'
 import StudioVideoCard from '@/components/misc/VideoCard/StudioVideoCard'
-import Link from 'next/link'
-import { Rows3, LayoutGrid } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
-import { TableHeader, Table, TableHead } from '@/components/ui/table'
+import {
+  TableHeader,
+  Table,
+  TableHead,
+  TableBody,
+} from '@/components/ui/table'
 import EmptyLibrary from './EmptyLibrary'
-import { Suspense } from 'react'
-import { Skeleton } from '@/components/ui/skeleton'
 import LayoutSelection from './LayoutSelection'
 
 const GridLayout = async ({
@@ -33,20 +34,12 @@ const GridLayout = async ({
     <Table>
       <TableHeader>
         <TableHead>
-          <LayoutSelection
-            currentLayout={eLayout.grid}
-            organizationSlug={organizationSlug}
-          />
+          <LayoutSelection />
         </TableHead>
       </TableHeader>
       <Separator />
-      <div className="grid grid-cols-4 gap-4 m-5">
-        <Suspense
-          fallback={
-            <div>
-              <Skeleton className="rounded-full w-[100px] h-[20px]" />
-            </div>
-          }>
+      <TableBody>
+        <div className="grid grid-cols-4 gap-4 m-5">
           {sessions.map((session) => (
             <div key={session._id}>
               <StudioVideoCard
@@ -55,8 +48,8 @@ const GridLayout = async ({
               />
             </div>
           ))}
-        </Suspense>
-      </div>
+        </div>
+      </TableBody>
     </Table>
   )
 }

@@ -1,51 +1,44 @@
 'use client'
 
-import Link from 'next/link'
 import { LayoutGrid, Rows3 } from 'lucide-react'
 import { eLayout } from '@/lib/types'
+import useSearchParams from '@/lib/hooks/useSearchParams'
 
-const LayoutSelection = ({
-  organizationSlug,
-  currentLayout,
-}: {
-  organizationSlug: string
-  currentLayout: eLayout
-}) => {
-  if (currentLayout == eLayout.grid) {
-    return (
-      <div className="flex justify-end space-x-2">
-        <Link
-          href={`/studio/${organizationSlug}/library?layout=grid`}>
-          <LayoutGrid
-            size={30}
-            className="p-1 text-white bg-purple-500 rounded-md border transition"
-          />
-        </Link>
-        <Link
-          href={`/studio/${organizationSlug}/library?layout=list`}>
-          <Rows3
-            size={30}
-            className="p-1 rounded-md border transition hover:text-white hover:bg-purple-500"
-          />
-        </Link>
-      </div>
-    )
-  }
+const LayoutSelection = () => {
+  const { searchParams, handleTermChange } = useSearchParams()
+  const currentLayout = searchParams.get('layout')
+
+  const layoutOptions = [
+    {
+      icon: LayoutGrid,
+      value: eLayout.grid,
+      activeClass: 'text-white bg-purple-500',
+      inactiveClass: 'hover:text-white hover:bg-purple-500',
+    },
+    {
+      icon: Rows3,
+      value: eLayout.list,
+      activeClass: 'text-white bg-purple-500',
+      inactiveClass: 'hover:text-white hover:bg-purple-500',
+    },
+  ]
 
   return (
     <div className="flex justify-end space-x-2">
-      <Link href={`/studio/${organizationSlug}/library?layout=grid`}>
-        <LayoutGrid
-          size={30}
-          className="p-1 rounded-md border transition hover:text-white hover:bg-purple-500"
-        />
-      </Link>
-      <Link href={`/studio/${organizationSlug}/library?layout=list`}>
-        <Rows3
-          size={30}
-          className="p-1 text-white bg-purple-500 rounded-md border transition"
-        />
-      </Link>
+      {layoutOptions.map(
+        ({ icon: Icon, value, activeClass, inactiveClass }) => (
+          <Icon
+            key={value}
+            size={30}
+            className={`p-1 rounded-md border transition cursor-pointer ${
+              currentLayout === value ? activeClass : inactiveClass
+            }`}
+            onClick={() =>
+              handleTermChange([{ key: 'layout', value }])
+            }
+          />
+        )
+      )}
     </div>
   )
 }

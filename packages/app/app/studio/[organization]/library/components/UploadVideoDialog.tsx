@@ -32,7 +32,7 @@ const UploadVideoDialog = ({
           Upload video
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px] sm:max-h-[800px]">
+      <DialogContent className="bg-white sm:max-w-[525px] sm:max-h-[800px]">
         {isUploaded ? (
           <>
             <DialogHeader className="p-10 space-y-4">

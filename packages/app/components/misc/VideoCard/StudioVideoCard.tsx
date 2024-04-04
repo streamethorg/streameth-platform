@@ -1,4 +1,4 @@
-'use server'
+'use client'
 
 import {
   CardDescription,
@@ -7,11 +7,12 @@ import {
 } from '@/components/ui/card'
 import Thumbnail from './thumbnail'
 import Link from 'next/link'
-import { fetchEvent } from '@/lib/services/eventService'
 import { IExtendedSession, eLayout } from '@/lib/types'
 import PopoverActions from '@/app/studio/[organization]/library/components/PopoverActions'
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
+import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 
-const StudioVideoCard = async ({
+const StudioVideoCard = ({
   session,
   organizationSlug,
   invertedColors,
@@ -20,10 +21,6 @@ const StudioVideoCard = async ({
   organizationSlug: string
   invertedColors?: boolean
 }) => {
-  const event = await fetchEvent({
-    eventId: `${session.eventId}`,
-  })
-
   const headerClass = invertedColors ? ' ' : ''
   const descriptionClass = invertedColors ? '' : ''
 
@@ -31,10 +28,13 @@ const StudioVideoCard = async ({
     <div className="w-full min-h-full uppercase rounded-xl">
       <Link
         href={`/watch?event=${session.eventSlug}&session=${session._id}`}>
-        <Thumbnail
-          imageUrl={session.coverImage}
-          fallBack={event?.eventCover}
-        />
+        {session.coverImage ? (
+          <Thumbnail imageUrl={session.coverImage} />
+        ) : (
+          <div className="flex justify-center items-center w-full h-full">
+            <DefaultThumbnail />
+          </div>
+        )}
       </Link>
       <CardHeader
         className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none ${headerClass}`}>

@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import {
   Table,
@@ -9,22 +9,28 @@ import {
 } from '@/components/ui/table'
 import TableCells from './TableCells'
 import { ChevronsUpDown } from 'lucide-react'
-import { IExtendedSession, eLayout } from '@/lib/types'
+import { IExtendedSession, eLayout, eSort } from '@/lib/types'
 import EmptyLibrary from './EmptyLibrary'
 import LayoutSelection from './LayoutSelection'
+// import { usePathname, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 
-const ListLayout = ({
+const ListLayout = async ({
   sessions,
   organizationId,
   organizationSlug,
+  layout,
+  sort,
 }: {
   sessions: IExtendedSession[]
   organizationId: string
   organizationSlug: string
+  layout: eLayout
+  sort: eSort
 }) => {
-  const handleFilter = () => {
-    console.log('click')
-  }
+  const href = `/studio/test_xanny/library?layout=${layout}&sort=${
+    sort === eSort.asc ? eSort.desc : eSort.asc
+  }`
 
   if (!sessions || sessions.length === 0) {
     return (
@@ -39,41 +45,26 @@ const ListLayout = ({
     <Table className="bg-white">
       <TableHeader className="sticky top-0 z-50 bg-white">
         <TableRow className="hover:bg-white">
-          <TableHead>#</TableHead>
-          <TableHead>
-            <div
-              className="flex justify-start items-center space-x-2 cursor-pointer"
-              onClick={() => handleFilter()}>
-              <p>Title</p>
-              <ChevronsUpDown size={15} />
-            </div>
+          <TableHead className="cursor-pointer">
+            <Link href={href}>
+              <div className="flex justify-start items-center space-x-2">
+                <p>Title</p>
+                <ChevronsUpDown size={15} />
+              </div>
+            </Link>
           </TableHead>
           <TableHead>Visibility</TableHead>
-          <TableHead>
-            <div
-              className="flex justify-start items-center space-x-2 cursor-pointer"
-              onClick={() => handleFilter()}>
-              <p>Created at</p>
-              <ChevronsUpDown size={15} />
-            </div>
-          </TableHead>
+          <TableHead>Created at</TableHead>
           <TableHead>IPFS Hash</TableHead>
           <TableHead>
-            <LayoutSelection
-              currentLayout={eLayout.list}
-              organizationSlug={organizationSlug}
-            />
+            <LayoutSelection />
           </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="overflow-scroll">
-        {sessions?.map((item, index) => (
+        {sessions.map((item) => (
           <TableRow key={item._id}>
-            <TableCells
-              item={item}
-              index={index}
-              organization={organizationSlug}
-            />
+            <TableCells item={item} organization={organizationSlug} />
           </TableRow>
         ))}
       </TableBody>
