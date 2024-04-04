@@ -17,7 +17,7 @@ export function validateWebhook(
   const signedPayload = JSON.stringify(payload);
 
   const expectedSignature = crypto
-    .createHmac('sha256', config.livepeer.secretKey)
+    .createHmac('sha256', config.livepeer.webhookSecretKey)
     .update(signedPayload)
     .digest('hex');
 
