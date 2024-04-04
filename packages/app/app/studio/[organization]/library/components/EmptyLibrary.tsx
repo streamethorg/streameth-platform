@@ -19,10 +19,7 @@ const EmptyLibrary = ({
           Upload your first video to get started!
         </p>
       </div>
-      <UploadVideoDialog
-        organizationId={organizationId}
-        organizationSlug={organizationSlug}
-      />
+      <UploadVideoDialog organizationId={organizationId} />
     </div>
   )
 }
