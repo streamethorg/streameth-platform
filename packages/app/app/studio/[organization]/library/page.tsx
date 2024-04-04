@@ -25,7 +25,7 @@ const Library = async ({
 }) => {
   if (!searchParams.layout || !searchParams.sort) {
     redirect(
-      `/studio/${params.organization}/library?layout=list&sort=asc`
+      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}`
     )
   }
 
@@ -45,10 +45,24 @@ const Library = async ({
   ).sessions
     .filter((session) => session.videoUrl)
     .sort((a, b) => {
-      if (searchParams.sort === eSort.asc) {
-        return a.name.localeCompare(b.name)
+      switch (searchParams.sort) {
+        case eSort.asc_alpha:
+          return a.name.localeCompare(b.name)
+        case eSort.desc_alpha:
+          return b.name.localeCompare(a.name)
+        case eSort.asc_date:
+          return (
+            new Date(a.createdAt!).getTime() -
+            new Date(b.createdAt!).getTime()
+          )
+        case eSort.desc_date:
+          return (
+            new Date(b.createdAt!).getTime() -
+            new Date(a.createdAt!).getTime()
+          )
+        default:
+          return a.name.localeCompare(b.name)
       }
-      return b.name.localeCompare(a.name)
     })
 
   if (searchParams.layout === eLayout.list) {
@@ -71,8 +85,6 @@ const Library = async ({
           sessions={sessions}
           organizationId={organization._id.toString()}
           organizationSlug={params.organization}
-          sort={searchParams.sort}
-          layout={searchParams.layout}
         />
       </div>
     )
@@ -101,7 +113,9 @@ const Library = async ({
     )
   }
 
-  redirect(`/studio/${params.organization}/library?layout=list`)
+  redirect(
+    `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}`
+  )
 }
 
 export default Library

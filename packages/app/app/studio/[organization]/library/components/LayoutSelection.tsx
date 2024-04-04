@@ -12,14 +12,14 @@ const LayoutSelection = () => {
     {
       icon: LayoutGrid,
       value: eLayout.grid,
-      activeClass: 'text-white bg-purple-500',
-      inactiveClass: 'hover:text-white hover:bg-purple-500',
+      activeClass: 'text-white bg-[#3D22BA]',
+      inactiveClass: 'hover:text-white hover:bg-[#3D22BA]',
     },
     {
       icon: Rows3,
       value: eLayout.list,
-      activeClass: 'text-white bg-purple-500',
-      inactiveClass: 'hover:text-white hover:bg-purple-500',
+      activeClass: 'text-white bg-[#3D22BA]',
+      inactiveClass: 'hover:text-white hover:bg-[#3D22BA]',
     },
   ]
 

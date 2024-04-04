@@ -1,4 +1,4 @@
-'use server'
+'use client'
 
 import {
   Table,
@@ -9,28 +9,22 @@ import {
 } from '@/components/ui/table'
 import TableCells from './TableCells'
 import { ChevronsUpDown } from 'lucide-react'
-import { IExtendedSession, eLayout, eSort } from '@/lib/types'
+import { IExtendedSession, eSort } from '@/lib/types'
 import EmptyLibrary from './EmptyLibrary'
 import LayoutSelection from './LayoutSelection'
-// import { usePathname, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
+import useSearchParams from '@/lib/hooks/useSearchParams'
 
-const ListLayout = async ({
+const ListLayout = ({
   sessions,
   organizationId,
   organizationSlug,
-  layout,
-  sort,
 }: {
   sessions: IExtendedSession[]
   organizationId: string
   organizationSlug: string
-  layout: eLayout
-  sort: eSort
 }) => {
-  const href = `/studio/test_xanny/library?layout=${layout}&sort=${
-    sort === eSort.asc ? eSort.desc : eSort.asc
-  }`
+  const { searchParams, handleTermChange } = useSearchParams()
+  const currentSort = searchParams.get('sort') as eSort
 
   if (!sessions || sessions.length === 0) {
     return (
@@ -46,15 +40,48 @@ const ListLayout = async ({
       <TableHeader className="sticky top-0 z-50 bg-white">
         <TableRow className="hover:bg-white">
           <TableHead className="cursor-pointer">
-            <Link href={href}>
-              <div className="flex justify-start items-center space-x-2">
-                <p>Title</p>
-                <ChevronsUpDown size={15} />
-              </div>
-            </Link>
+            <div
+              className="flex justify-start items-center space-x-2"
+              onClick={() =>
+                handleTermChange([
+                  {
+                    key: 'sort',
+                    value:
+                      currentSort === eSort.asc_alpha
+                        ? eSort.desc_alpha
+                        : eSort.asc_alpha,
+                  },
+                ])
+              }>
+              <p>Title</p>
+              <ChevronsUpDown
+                size={15}
+                className="rounded-md hover:bg-gray-200"
+              />
+            </div>
           </TableHead>
           <TableHead>Visibility</TableHead>
-          <TableHead>Created at</TableHead>
+          <TableHead className="cursor-pointer">
+            <div
+              className="flex justify-start items-center space-x-2"
+              onClick={() =>
+                handleTermChange([
+                  {
+                    key: 'sort',
+                    value:
+                      currentSort === eSort.asc_date
+                        ? eSort.desc_date
+                        : eSort.asc_date,
+                  },
+                ])
+              }>
+              <p>Created at</p>
+              <ChevronsUpDown
+                size={15}
+                className="rounded-md hover:bg-gray-200"
+              />
+            </div>
+          </TableHead>
           <TableHead>IPFS Hash</TableHead>
           <TableHead>
             <LayoutSelection />
