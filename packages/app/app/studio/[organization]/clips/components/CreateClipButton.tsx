@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
 const CreateClipButton = ({
   playbackId,
   selectedRecording,
@@ -41,7 +42,7 @@ const CreateClipButton = ({
           stageId,
           organizationId,
           speakers: [],
-          type: 'clip',
+          type: SessionType['clip'],
         },
       })
     }
