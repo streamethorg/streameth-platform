@@ -1,4 +1,4 @@
-import { ISessionModel } from '@interfaces/session.interface';
+import { ISessionModel, SessionType } from '@interfaces/session.interface';
 import { Schema, model } from 'mongoose';
 
 const SessionSchema = new Schema<ISessionModel>(
@@ -46,6 +46,8 @@ const SessionSchema = new Schema<ISessionModel>(
     autoLabels: [{ type: String }],
     nftURI: { type: String, default: '' },
     ipfsURI: { type: String, default: '' },
+    published: { type: Boolean, default: false },
+    type: { type: String, enum: Object.keys(SessionType) },
   },
   {
     timestamps: true,

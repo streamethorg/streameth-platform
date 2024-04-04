@@ -9,8 +9,11 @@ export const StageSchema = new Schema<IStageModel>(
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
     streamSettings: {
       streamId: { type: String, default: '' },
+      streamKey: { type: String, default: '' },
       parentId: { type: String, default: '' },
       playbackId: { type: String, default: '' },
+      isActive: { type: Boolean, default: false },
+      isHealthy: { type: Boolean, default: false },
     },
     plugins: [
       {
