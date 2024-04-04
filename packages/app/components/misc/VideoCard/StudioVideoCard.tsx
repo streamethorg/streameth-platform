@@ -1,3 +1,5 @@
+'use server'
+
 import {
   CardDescription,
   CardHeader,
@@ -11,9 +13,11 @@ import PopoverActions from '@/app/studio/[organization]/library/components/Popov
 
 const StudioVideoCard = async ({
   session,
+  organizationSlug,
   invertedColors,
 }: {
   session: IExtendedSession
+  organizationSlug: string
   invertedColors?: boolean
 }) => {
   const event = await fetchEvent({
@@ -49,7 +53,7 @@ const StudioVideoCard = async ({
             </CardDescription>
             <PopoverActions
               session={session}
-              organizationSlug={'text_xanny'}
+              organizationSlug={organizationSlug}
               layout={eLayout.grid}
             />
           </div>

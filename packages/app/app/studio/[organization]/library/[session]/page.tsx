@@ -31,8 +31,6 @@ const EditSession = async ({
 
   if (!video) return notFound()
 
-  console.log(video)
-
   return (
     <div className="p-2 h-full">
       <Link href={`/studio/${params.organization}/library`}>

@@ -7,11 +7,10 @@ import {
 } from '@/components/ui/popover'
 import {
   FilePenLine,
-  Eye,
-  Menu,
   Share2,
   EllipsisVertical,
   Copy,
+  Download,
 } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -61,14 +60,6 @@ const PopoverActions = ({
                 href={`/studio/${organizationSlug}/library/${itemId}`}>
                 <FilePenLine className="text-muted-foreground" />
                 <p className="">Edit</p>
-              </Link>
-            </Button>
-            <Button variant={'outline'}>
-              <Link
-                className="flex flex-row justify-center items-center space-x-2"
-                href={`/watch?session=${itemId}`}>
-                <Eye className="text-muted-foreground" />
-                <p>View</p>
               </Link>
             </Button>
             {layout == eLayout.grid && (

@@ -1,4 +1,4 @@
-'use server'
+'use client'
 
 import {
   Table,
@@ -8,22 +8,30 @@ import {
   TableBody,
 } from '@/components/ui/table'
 import TableCells from './TableCells'
-import { LayoutGrid, Rows3 } from 'lucide-react'
-import { IExtendedSession } from '@/lib/types'
-import Link from 'next/link'
+import { ChevronsUpDown } from 'lucide-react'
+import { IExtendedSession, eLayout } from '@/lib/types'
+import EmptyLibrary from './EmptyLibrary'
+import LayoutSelection from './LayoutSelection'
 
-const ListLayout = async ({
+const ListLayout = ({
   sessions,
+  organizationId,
   organizationSlug,
 }: {
   sessions: IExtendedSession[]
+  organizationId: string
   organizationSlug: string
 }) => {
+  const handleFilter = () => {
+    console.log('click')
+  }
+
   if (!sessions || sessions.length === 0) {
     return (
-      <div className="flex justify-center items-center h-full text-3xl font-bold">
-        No Assets available
-      </div>
+      <EmptyLibrary
+        organizationId={organizationId}
+        organizationSlug={organizationSlug}
+      />
     )
   }
 
@@ -32,27 +40,29 @@ const ListLayout = async ({
       <TableHeader className="sticky top-0 z-50 bg-white">
         <TableRow className="hover:bg-white">
           <TableHead>#</TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Visibility</TableHead>
-          <TableHead>Created at</TableHead>
-          <TableHead>IPFS Uri</TableHead>
           <TableHead>
-            <div className="flex justify-end space-x-2">
-              <Link
-                href={`/studio/${organizationSlug}/library?layout=grid`}>
-                <LayoutGrid
-                  size={30}
-                  className="p-1 rounded-md border transition hover:text-white hover:bg-purple-500"
-                />
-              </Link>
-              <Link
-                href={`/studio/${organizationSlug}/library?layout=list`}>
-                <Rows3
-                  size={30}
-                  className="p-1 text-white bg-purple-500 rounded-md border transition"
-                />
-              </Link>
+            <div
+              className="flex justify-start items-center space-x-2 cursor-pointer"
+              onClick={() => handleFilter()}>
+              <p>Title</p>
+              <ChevronsUpDown size={15} />
             </div>
+          </TableHead>
+          <TableHead>Visibility</TableHead>
+          <TableHead>
+            <div
+              className="flex justify-start items-center space-x-2 cursor-pointer"
+              onClick={() => handleFilter()}>
+              <p>Created at</p>
+              <ChevronsUpDown size={15} />
+            </div>
+          </TableHead>
+          <TableHead>IPFS Hash</TableHead>
+          <TableHead>
+            <LayoutSelection
+              currentLayout={eLayout.list}
+              organizationSlug={organizationSlug}
+            />
           </TableHead>
         </TableRow>
       </TableHeader>

@@ -5,7 +5,6 @@ import { IExtendedSession, eLayout } from '@/lib/types'
 import { Copy } from 'lucide-react'
 import { fetchEvent } from '@/lib/services/eventService'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import { useState } from 'react'
 import PopoverActions from './PopoverActions'
 import Link from 'next/link'
 
@@ -18,12 +17,8 @@ const TableCells = ({
   index: number
   organization: string
 }) => {
-  const [copied, setCopied] = useState(false)
-
   const handleCopy = () => {
-    setCopied(true)
     navigator.clipboard.writeText(item.ipfsURI!)
-    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -53,7 +48,7 @@ const TableCells = ({
             className="flex items-center hover:bg-gray-200 group"
             onClick={handleCopy}>
             <span className="flex-1 m-2 rounded cursor-pointer truncate">
-              {copied ? 'Copied' : item.ipfsURI}
+              {item.ipfsURI}
             </span>
             <Copy className="p-1 mr-2 opacity-0 group-hover:opacity-100">
               Copy IPFS Hash

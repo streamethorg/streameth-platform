@@ -12,8 +12,10 @@ import {
 } from '@/components/ui/card'
 import UploadVideoDialog from './components/UploadVideoDialog'
 import GridLayout from './components/GridLayout'
-import { Suspense } from 'react'
 import { eLayout } from '@/lib/types'
+import { fetchOrganization } from '@/lib/services/organizationService'
+import NotFound from '@/not-found'
+import { Suspense } from 'react'
 
 const Library = async ({
   params,
@@ -24,6 +26,14 @@ const Library = async ({
 }) => {
   if (!searchParams.layout) {
     redirect(`/studio/${params.organization}/library?layout=list`)
+  }
+
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
+
+  if (!organization) {
+    return NotFound()
   }
 
   const sessions = (
@@ -45,17 +55,15 @@ const Library = async ({
           </CardHeader>
           <CardFooter>
             <UploadVideoDialog
-              organizationId={sessions[0].organizationId.toString()}
-              organizationSlug={params.organization}
+              organizationId={organization._id.toString()}
             />
           </CardFooter>
         </Card>
-        <Suspense>
-          <ListLayout
-            sessions={sessions}
-            organizationSlug={params.organization}
-          />
-        </Suspense>
+        <ListLayout
+          sessions={sessions}
+          organizationId={organization._id.toString()}
+          organizationSlug={params.organization}
+        />
       </div>
     )
   } else if (searchParams.layout === eLayout.grid) {
@@ -70,20 +78,20 @@ const Library = async ({
           </CardHeader>
           <CardFooter>
             <UploadVideoDialog
-              organizationId={sessions[0].organizationId.toString()}
-              organizationSlug={params.organization}
+              organizationId={organization._id.toString()}
             />
           </CardFooter>
         </Card>
-        <Suspense>
-          <GridLayout
-            sessions={sessions}
-            organizationSlug={params.organization}
-          />
-        </Suspense>
+        <GridLayout
+          sessions={sessions}
+          organizationId={organization._id.toString()}
+          organizationSlug={params.organization}
+        />
       </div>
     )
   }
+
+  redirect(`/studio/${params.organization}/library?layout=list`)
 }
 
 export default Library

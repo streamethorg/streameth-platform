@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -25,14 +25,14 @@ import { DialogClose } from '@/components/ui/dialog'
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
 
 const UploadVideoForm = ({
+  stageId,
   eventId,
   organizationId,
-  organizationSlug,
   onFinish,
 }: {
+  stageId?: string
   eventId?: string
   organizationId: string
-  organizationSlug: string
   onFinish: () => void
 }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -58,12 +58,13 @@ const UploadVideoForm = ({
     createSessionAction({
       session: {
         ...values,
-        eventId: eventId || '',
         organizationId,
         speakers: [],
         start: 0,
         end: 0,
         type: SessionType.video,
+        eventId: eventId || '',
+        stageId: stageId || '',
       },
     })
       .then(() => onFinish())
@@ -145,11 +146,11 @@ const UploadVideoForm = ({
             </FormItem>
           )}
         />
-        <div className="flex justify-end">
+        <div className="flex justify-end space-x-2">
           <DialogClose>
             <Button
               variant="secondary"
-              className="text-black"
+              className="text-black border-2"
               onClick={() => handleCancel()}>
               Cancel
             </Button>
@@ -164,7 +165,7 @@ const UploadVideoForm = ({
                 Please wait...
               </>
             ) : (
-              'Create asset'
+              <p className="text-white">Create asset</p>
             )}
           </Button>
         </div>

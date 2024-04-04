@@ -1,24 +1,31 @@
 'use server'
 
-import { IExtendedSession } from '@/lib/types'
+import { IExtendedSession, eLayout } from '@/lib/types'
 import StudioVideoCard from '@/components/misc/VideoCard/StudioVideoCard'
 import Link from 'next/link'
 import { Rows3, LayoutGrid } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { TableHeader, Table, TableHead } from '@/components/ui/table'
+import EmptyLibrary from './EmptyLibrary'
+import { Suspense } from 'react'
+import { Skeleton } from '@/components/ui/skeleton'
+import LayoutSelection from './LayoutSelection'
 
 const GridLayout = async ({
   sessions,
+  organizationId,
   organizationSlug,
 }: {
   sessions: IExtendedSession[]
+  organizationId: string
   organizationSlug: string
 }) => {
   if (!sessions || sessions.length === 0) {
     return (
-      <div className="flex justify-center items-center h-full text-3xl font-bold">
-        No Assets available
-      </div>
+      <EmptyLibrary
+        organizationId={organizationId}
+        organizationSlug={organizationSlug}
+      />
     )
   }
 
@@ -26,31 +33,29 @@ const GridLayout = async ({
     <Table>
       <TableHeader>
         <TableHead>
-          <div className="flex justify-end space-x-2">
-            <Link
-              href={`/studio/${organizationSlug}/library?layout=grid`}>
-              <LayoutGrid
-                size={30}
-                className="p-1 text-white bg-purple-500 rounded-md border transition"
-              />
-            </Link>
-            <Link
-              href={`/studio/${organizationSlug}/library?layout=list`}>
-              <Rows3
-                size={30}
-                className="p-1 rounded-md border transition hover:text-white hover:bg-purple-500"
-              />
-            </Link>
-          </div>
+          <LayoutSelection
+            currentLayout={eLayout.grid}
+            organizationSlug={organizationSlug}
+          />
         </TableHead>
       </TableHeader>
       <Separator />
       <div className="grid grid-cols-4 gap-4 m-5">
-        {sessions.map((session) => (
-          <div key={session._id}>
-            <StudioVideoCard session={session} />
-          </div>
-        ))}
+        <Suspense
+          fallback={
+            <div>
+              <Skeleton className="rounded-full w-[100px] h-[20px]" />
+            </div>
+          }>
+          {sessions.map((session) => (
+            <div key={session._id}>
+              <StudioVideoCard
+                session={session}
+                organizationSlug={organizationSlug}
+              />
+            </div>
+          ))}
+        </Suspense>
       </div>
     </Table>
   )
