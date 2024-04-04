@@ -23,9 +23,11 @@ const SpeakerCard = ({
   sessions: IExtendedSession[]
 }) => {
   const speakerSessions = sessions?.filter((session) =>
-    session.speakers.some(
-      (sessionSpeaker) => sessionSpeaker?._id === speaker?._id
-    )
+    session.speakers
+      ? session.speakers.some(
+          (sessionSpeaker) => sessionSpeaker?._id === speaker?._id
+        )
+      : []
   )
 
   return (
