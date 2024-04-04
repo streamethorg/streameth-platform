@@ -30,7 +30,7 @@ export const getVideoUrlAction = async (assetId: string) => {
       console.error(asset.rawResponse)
       return null
     }
-    console.log('asset', asset.asset)
+
     if (!asset.asset?.playbackUrl) {
       return null
     }
@@ -78,7 +78,6 @@ export const getStreamRecordings = async ({
 }: {
   streamId: string
 }) => {
-
   if (!streamId) {
     return {
       parentStream: null,
@@ -97,6 +96,21 @@ export const getStreamRecordings = async ({
   }
   return {
     parentStream,
-    recordings: JSON.parse(JSON.stringify(recordings)) as Session[]
+    recordings: JSON.parse(JSON.stringify(recordings)) as Session[],
+  }
+}
+
+export const getAsset = async (assetId: string) => {
+  try {
+    const asset = await livepeer.asset.get(assetId)
+    if (asset.statusCode !== 200) {
+      console.error(asset.rawResponse)
+      return null
+    }
+
+    return JSON.parse(JSON.stringify(asset.asset))
+  } catch (e) {
+    console.error('Error fetching asset: ', assetId)
+    return null
   }
 }

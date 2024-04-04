@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { ClipsPageParams } from '@/lib/types'
 import SelectSession from './components/SelectSession'
 import RecordingSelect from './components/RecordingSelect'
@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Preview from '../Preview'
 import ClipsSessionList from './components/ClipSessionList'
-
+import { getAsset } from '@/lib/actions/livepeer'
 const ClipContainer = ({
   children,
 }: {
@@ -185,18 +185,30 @@ const EventClips = async ({
     stageId: currentStage._id,
   })
 
+  const previewAsset = await (async function () {
+    if (previewId) {
+      const session = sessions.sessions.find(
+        (session) => session._id === previewId
+      )
+
+      if (session) {
+        return await getAsset(session.assetId as string)
+      }
+    }
+    return undefined
+  })()
+
   return (
     <ClipContainer>
-      {previewId && (
-        <Preview
-          initialIsOpen={previewId !== ''}
-          organizationId={event?.organizationId as string}
-          playbackId={
-            sessions.sessions.find(
-              (session) => session._id === previewId
-            )?.playbackId
-          }
-        />
+      {previewAsset && (
+        <Suspense fallback={<>Loading</>}>
+          <Preview
+            initialIsOpen={previewId !== ''}
+            organizationId={event?.organizationId as string}
+            asset={previewAsset}
+            sessionId={previewId}
+          />
+        </Suspense>
       )}
 
       <div className="flex flex-col w-full p-8 ">
@@ -222,17 +234,19 @@ const EventClips = async ({
       </div>
       {sessions.sessions && event && (
         <div className="w-1/3 h-full bg-background bg-white border-l">
-          <CardTitle className="bg-white p-2 border-b">
+          <CardTitle className="bg-white p-2 border-b text-lg">
             Livestream clips
           </CardTitle>
           <div className="h-[calc(100%-50px)] overflow-y-scroll">
-            <ClipsSessionList event={event} sessions={sessions.sessions} />
+            <ClipsSessionList
+              event={event}
+              sessions={sessions.sessions}
+            />
           </div>
         </div>
       )}
     </ClipContainer>
   )
 }
-
 
 export default EventClips
