@@ -27,8 +27,10 @@ import { Textarea } from '@/components/ui/textarea'
 
 const EditSessionFrom = ({
   session,
+  organizationSlug,
 }: {
   session: IExtendedSession
+  organizationSlug: string
 }) => {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -134,7 +136,7 @@ const EditSessionFrom = ({
         <div className="flex items-center space-x-2">
           <DeleteAsset
             session={session}
-            href={`/studio/${session.organizationId}/library`}
+            href={`/studio/${organizationSlug}/library`}
             TriggerComponent={
               <Button
                 variant={'destructive-outline'}

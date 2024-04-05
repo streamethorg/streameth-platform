@@ -75,7 +75,7 @@ const PopoverActions = ({
             )}
             <DeleteAsset
               session={session}
-              href={`/studio/${organizationSlug}?settings=videos`}
+              href={`/studio/${organizationSlug}/library`}
               TriggerComponent={
                 <Button
                   variant={'destructive-outline'}

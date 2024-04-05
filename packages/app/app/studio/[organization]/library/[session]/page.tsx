@@ -7,7 +7,6 @@ import { ArrowLeft } from 'lucide-react'
 import EditSessionForm from './components/EditSessionForm'
 import Link from 'next/link'
 import SessionOptions from './components/SessionOptions'
-import { Suspense } from 'react'
 
 const EditSession = async ({
   params,
@@ -41,7 +40,10 @@ const EditSession = async ({
       <div className="flex flex-row space-x-4">
         <div className="px-10 space-y-4 w-2/3">
           <h1 className="text-5xl font-bold">Video Details</h1>
-          <EditSessionForm session={session} />
+          <EditSessionForm
+            session={session}
+            organizationSlug={params.organization}
+          />
         </div>
         <div className="w-1/3">
           <PlayerWithControls

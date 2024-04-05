@@ -13,7 +13,6 @@ import { IExtendedSession, eSort } from '@/lib/types'
 import EmptyLibrary from './EmptyLibrary'
 import LayoutSelection from './LayoutSelection'
 import useSearchParams from '@/lib/hooks/useSearchParams'
-
 const ListLayout = ({
   sessions,
   organizationId,
