@@ -14,10 +14,12 @@ const Navigation = ({
   event,
   stages,
   organizationId,
+  organizationSlug,
 }: {
   event: IExtendedEvent
   stages: IStageModel[]
   organizationId: string
+  organizationSlug: string
 }) => {
   const handlePublishEvent = () => {
     updateEventAction({
@@ -55,7 +57,11 @@ const Navigation = ({
         {stages.length > 0 && <CreateStageForm event={event} />}
       </div>
       {stages.length > 0 ? (
-        <StagesAccordion event={event} stages={stages} />
+        <StagesAccordion
+          organization={organizationSlug}
+          event={event}
+          stages={stages}
+        />
       ) : (
         <div className="flex flex-row p-2 justify-between items-center border-b border-border">
           <div className="text-sm ">

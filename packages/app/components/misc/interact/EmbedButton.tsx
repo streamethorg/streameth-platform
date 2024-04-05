@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState, useContext } from 'react'
 import { Code } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 
 import {
   Credenza,

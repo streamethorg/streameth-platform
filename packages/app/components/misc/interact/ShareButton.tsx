@@ -15,7 +15,6 @@ import {
   XIcon,
   WhatsappIcon,
 } from 'react-share'
-import { Badge } from '@/components/ui/badge'
 
 import {
   Credenza,
