@@ -1,6 +1,7 @@
 export enum LivepeerEvent {
   assetReady = 'asset.ready',
   streamReady = 'stream.ready',
+  streamIdle = 'stream.idle'
   //Add whatever you need
 }
 

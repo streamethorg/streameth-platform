@@ -83,16 +83,14 @@ export default class StageService {
 
   async findStreamAndUpdate(id: string): Promise<void> {
     const stream = await getStreamInfo(id);
-    if (stream.isActive || stream.isHealthy) {
-      let stage = await Stage.findOne({ 'streamSettings.streamId': id });
-      if (!stage) throw new HttpException(400, 'stage not found');
-      await stage.updateOne(
-        {
-          'streamSettings.isActive': stream.isActive,
-          'streamSettings.isHealthy': stream.isHealthy,
-        },
-        { upsert: true },
-      );
-    }
+    let stage = await Stage.findOne({ 'streamSettings.streamId': id });
+    if (!stage) throw new HttpException(400, 'stage not found');
+    await stage.updateOne(
+      {
+        'streamSettings.isActive': stream.isActive,
+        'streamSettings.isHealthy': stream.isHealthy ?? false,
+      },
+      { upsert: true },
+    );
   }
 }
