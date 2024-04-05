@@ -1,18 +1,13 @@
-'use server'
+'use client'
 
-import { IExtendedSession, eLayout } from '@/lib/types'
-import StudioVideoCard from '@/components/misc/VideoCard/StudioVideoCard'
+import { IExtendedSession } from '@/lib/types'
 import { Separator } from '@/components/ui/separator'
-import {
-  TableHeader,
-  Table,
-  TableHead,
-  TableBody,
-} from '@/components/ui/table'
 import EmptyLibrary from './EmptyLibrary'
 import LayoutSelection from './LayoutSelection'
+import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
+import { DropdownItems } from './misc/DropdownGrid'
 
-const GridLayout = async ({
+const GridLayout = ({
   sessions,
   organizationId,
   organizationSlug,
@@ -31,26 +26,26 @@ const GridLayout = async ({
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableHead>
-          <LayoutSelection />
-        </TableHead>
-      </TableHeader>
-      <Separator />
-      <TableBody>
-        <div className="grid grid-cols-4 gap-4 m-5">
-          {sessions.map((session) => (
-            <div key={session._id}>
-              <StudioVideoCard
-                session={session}
-                organizationSlug={organizationSlug}
-              />
-            </div>
-          ))}
-        </div>
-      </TableBody>
-    </Table>
+    <>
+      <div className="py-2 px-4 space-y-2">
+        <LayoutSelection />
+        <Separator />
+      </div>
+      <div className="grid grid-cols-4 gap-4 m-5">
+        {sessions.map((session) => (
+          <div key={session._id}>
+            <VideoCardWithMenu
+              session={session}
+              link={`watch?event=${session.eventSlug}&session=${session._id}`}
+              DropdownMenuItems={DropdownItems({
+                organizationSlug: organizationSlug,
+                session: session,
+              })}
+            />
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 

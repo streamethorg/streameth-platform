@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
+import { formatDate } from '@/lib/utils/time'
 
 const TableCells = ({
   item,
@@ -51,7 +52,10 @@ const TableCells = ({
       <TableCell>Private</TableCell>
       {item.createdAt && (
         <TableCell className="truncate">
-          {new Date(item.createdAt).toUTCString()}
+          {formatDate(
+            new Date(item.createdAt as string),
+            'ddd. MMM. D, YYYY'
+          )}
         </TableCell>
       )}
       <TableCell className="relative max-w-[200px]">

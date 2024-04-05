@@ -15,6 +15,7 @@ import GridLayout from './components/GridLayout'
 import { eLayout, eSort } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
+import { Suspense } from 'react'
 
 const Library = async ({
   params,

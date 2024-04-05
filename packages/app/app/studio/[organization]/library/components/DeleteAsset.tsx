@@ -14,15 +14,16 @@ import { deleteSessionAction } from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
 import { TrashIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { ReactNode } from 'react'
 
 const DeleteAsset = ({
   session,
   href,
-  showIcon = true,
+  TriggerComponent,
 }: {
   session: IExtendedSession
   href: string
-  showIcon?: boolean
+  TriggerComponent: ReactNode
 }) => {
   const router = useRouter()
 
@@ -37,12 +38,7 @@ const DeleteAsset = ({
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant={'destructive'} className="space-x-2">
-          {showIcon && <TrashIcon />}
-          <p>Delete</p>
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{TriggerComponent}</DialogTrigger>
       <DialogContent className="p-10 sm:max-w-[475px]">
         <DialogHeader className="mx-auto space-y-4">
           <div className="p-4 mx-auto bg-red-500 rounded-full">

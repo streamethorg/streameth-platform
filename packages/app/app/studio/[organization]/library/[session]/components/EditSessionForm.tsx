@@ -16,13 +16,14 @@ import {
 import { Input } from '@/components/ui/input'
 import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import { Loader2 } from 'lucide-react'
-import ImageUpload from '@/components/misc/form/imageUpload'
+import { Loader2, TrashIcon } from 'lucide-react'
+import ImageDropzone from './ImageDropzone'
 import { generateId } from 'streameth-new-server/src/utils/util'
 import { IExtendedSession } from '@/lib/types'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import DeleteAsset from '../../components/DeleteAsset'
+import { Textarea } from '@/components/ui/textarea'
 
 const EditSessionFrom = ({
   session,
@@ -80,7 +81,13 @@ const EditSessionFrom = ({
             <FormItem>
               <FormLabel>Video title *</FormLabel>
               <FormControl>
-                <Input placeholder="name" {...field} />
+                <Input
+                  className={
+                    'bg-white border border-gray-300 rounded-md'
+                  }
+                  placeholder="name"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,10 +97,16 @@ const EditSessionFrom = ({
           control={form.control}
           name="description"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="h-50">
               <FormLabel>Description *</FormLabel>
               <FormControl>
-                <Input placeholder="description" {...field} />
+                <Textarea
+                  className={
+                    'bg-white border border-gray-300 rounded-md'
+                  }
+                  placeholder="description"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -103,11 +116,10 @@ const EditSessionFrom = ({
           control={form.control}
           name="coverImage"
           render={({ field }) => (
-            <FormItem className="w-96 h-52">
+            <FormItem>
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
-                <ImageUpload
-                  aspectRatio={1}
+                <ImageDropzone
                   path={`session/${generateId(
                     form.getValues('name')
                   )}`}
@@ -123,11 +135,20 @@ const EditSessionFrom = ({
           <DeleteAsset
             session={session}
             href={`/studio/${session.organizationId}/library`}
-            showIcon={false}
+            TriggerComponent={
+              <Button
+                variant={'destructive-outline'}
+                className="space-x-2">
+                <TrashIcon />
+                <p>Delete video</p>
+              </Button>
+            }
           />
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}
-            type="submit">
+            type="submit"
+            variant={'secondary'}
+            className="border-2">
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 w-4 h-4 animate-spin" />
