@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Hls from 'hls.js'
 import { useClipContext } from './ClipContext'
 
@@ -18,6 +18,8 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
     progress: 0,
     offset: 0,
   })
+
+  const [error, setError] = useState<string | null>(null)
 
   const src = `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${selectedStreamSession}/output.m3u8`
 
@@ -40,6 +42,11 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         }
       })
 
+      // set error
+      hls.on(Hls.Events.ERROR, (event, data) => {
+        setError(data.details)
+      })
+
       const intervalId = setInterval(() => {
         if (videoRef.current) {
           const progress = videoRef.current.currentTime
@@ -48,26 +55,27 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
           setPlaybackStatus({ ...playbackRef.current })
         }
       }, 1000)
-
-      // return () => {
-      //   clearInterval(intervalId);
-      //   if (Hls.isSupported() && videoRef.current) {
-      //     // Optionally destroy Hls instance when the component unmounts
-      //     const hlsInstance = Hls.getInstance(videoRef.current);
-      //     if (hlsInstance) {
-      //       hlsInstance.destroy();
-      //     }
-      //   }
-      // };
     }
   }, [src, setPlaybackStatus])
 
+  if (error) {
+    return (
+      <div className=" aspect-video text-white bg-black flex flex-col items-center justify-center">
+        <p>Clips can only be created for recordings that are less than 7 days old</p>
+      </div>
+    )
+  }
   return (
     <video
       ref={videoRef}
-      autoPlay={true}
+      autoPlay={false}
       controls
-      style={{ width: '100%', height: 'auto' }}></video>
+      style={{
+        borderRadius: '8px',
+        width: '100%',
+        height: 'auto',
+        background: 'black',
+      }}></video>
   )
 }
 

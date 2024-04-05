@@ -56,7 +56,6 @@ const Dropzone = ({
           setIsUploading(false)
           clearInterval(interval)
         }
-        console.log(playbackUrl)
       }, 3000)
     }
   }, [isUploading, assetId])

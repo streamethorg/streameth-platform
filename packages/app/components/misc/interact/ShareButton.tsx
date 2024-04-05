@@ -78,7 +78,7 @@ const ShareButton = () => {
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Badge className="bg-secondary text-secondary-foreground">
+        <Badge>
           <Share2 size={24} className="p-1" />
           Share
         </Badge>

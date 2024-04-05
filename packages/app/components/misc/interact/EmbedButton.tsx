@@ -94,7 +94,7 @@ function EmbedButton({
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Badge className="bg-secondary text-secondary-foreground">
+        <Badge >
           <Code size={24} className="p-1" />
           Embed
         </Badge>

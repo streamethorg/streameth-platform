@@ -14,9 +14,11 @@ import useSearchParams from '@/lib/hooks/useSearchParams'
 import Link from 'next/link'
 
 const StageAccordion = ({
+  organization, 
   stages,
   event,
 }: {
+  organization: string
   stages: IStageModel[]
   event: IExtendedEvent
 }) => {
@@ -94,7 +96,7 @@ const StageAccordion = ({
                 Livestream settings
               </p>
             </AccordionContent>
-            <Link href={`${event._id}/clips?stage=${stage._id}`}>
+            <Link href={`/studio/${organization}/clips?stage=${stage._id}`}>
               <AccordionContent>
                 <p
                   className={`${
