@@ -12,10 +12,9 @@ import {
   FacebookIcon,
   RedditIcon,
   TelegramIcon,
-  TwitterIcon,
+  XIcon,
   WhatsappIcon,
 } from 'react-share'
-import { Badge } from '@/components/ui/badge'
 
 import {
   Credenza,
@@ -27,34 +26,41 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
+import { Button } from '@/components/ui/button'
 
-export const ShareModalContent = () => {
-  const text = `Check out this event on @streameth!`
+export const ShareModalContent = ({
+  url,
+  shareFor = 'event',
+}: {
+  url?: string
+  shareFor?: string
+}) => {
+  const text = `Check out this ${shareFor} on @streameth!`
   const [currentUrl, setCurrentUrl] = useState('')
   useEffect(() => {
     // This code will only run on the client side
     if (typeof window === 'undefined') return
-    setCurrentUrl(window.location.href)
+    !url && setCurrentUrl(window.location.href)
   }, [])
 
   return (
     <CredenzaContent>
       <CredenzaHeader>
         <CredenzaTitle className="text-center">
-          Share this event
+          Share this {shareFor}
         </CredenzaTitle>
         <CredenzaDescription>
-          Share this event with your friends and followers, tag
+          Share this {shareFor} with your friends and followers, tag
           @streameth and earn rewards!
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>
         <div className="flex flex-row justify-center items-center px-4 pb-4 space-x-4">
-          <FacebookShareButton url={currentUrl} quote={text}>
+          <FacebookShareButton url={currentUrl} title={text}>
             <FacebookIcon size={42} round />
           </FacebookShareButton>
           <TwitterShareButton url={currentUrl} title={text}>
-            <TwitterIcon size={42} round />
+            <XIcon size={42} round />
           </TwitterShareButton>
           <RedditShareButton url={currentUrl} title={text}>
             <RedditIcon size={42} round />
@@ -74,16 +80,24 @@ export const ShareModalContent = () => {
   )
 }
 
-const ShareButton = () => {
+const ShareButton = ({
+  url,
+  className,
+  variant = 'outline',
+}: {
+  url?: string
+  className?: string
+  variant?: 'outline' | 'ghost' | 'primary' | 'default'
+}) => {
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Badge>
+        <Button variant={variant} className={className}>
           <Share2 size={24} className="p-1" />
           Share
-        </Badge>
+        </Button>
       </CredenzaTrigger>
-      <ShareModalContent />
+      <ShareModalContent url={url} />
     </Credenza>
   )
 }

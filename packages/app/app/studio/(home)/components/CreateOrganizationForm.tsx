@@ -36,6 +36,7 @@ export default function CreateOrganizationForm() {
       banner: '',
       logo: '',
       email: '',
+      bio: '',
     },
   })
 
@@ -67,13 +68,57 @@ export default function CreateOrganizationForm() {
           alert(errors)
         }}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8">
+        className="space-y-4">
+        <div>
+          <FormField
+            control={form.control}
+            name="banner"
+            render={({ field }) => (
+              <FormItem className="">
+                <FormControl>
+                  <ImageUpload
+                    className="w-full h-40 rounded-xl bg-neutrals-300 "
+                    placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
+                    Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
+                    aspectRatio={1}
+                    path={`organizations/${generateId(
+                      form.getValues('name')
+                    )}`}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="logo"
+            render={({ field }) => (
+              <FormItem className="flex relative w-24 h-24 p-1 rounded-full bg-white mt-[-50px] mx-4">
+                <FormControl>
+                  <ImageUpload
+                    className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"
+                    aspectRatio={1}
+                    path={`organizations/${generateId(
+                      form.getValues('name')
+                    )}`}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="">Organization name</FormLabel>
+              <FormLabel required className="">
+                Organization name
+              </FormLabel>
               <FormControl>
                 <Input placeholder="name" {...field} />
               </FormControl>
@@ -81,6 +126,7 @@ export default function CreateOrganizationForm() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="email"
@@ -94,28 +140,24 @@ export default function CreateOrganizationForm() {
             </FormItem>
           )}
         />
+
         <FormField
-          disabled={!form.getValues('name')}
           control={form.control}
-          name="logo"
+          name="bio"
           render={({ field }) => (
-            <FormItem className="max-w-[150px]">
-              <FormLabel className="">Logo</FormLabel>
+            <FormItem>
+              <FormLabel className="">Bio</FormLabel>
               <FormControl>
-                <ImageUpload
-                  aspectRatio={1}
-                  path={`organizations/${generateId(
-                    form.getValues('name')
-                  )}`}
-                  {...field}
-                />
+                <Input placeholder="Bio" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <div className="flex flex-row justify-between">
           <Button
+            type="button"
             onClick={() => {
               router.back()
             }}

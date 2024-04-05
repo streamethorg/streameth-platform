@@ -5068,20 +5068,20 @@
   resolved "https://registry.yarnpkg.com/@telegraf/types/-/types-7.1.0.tgz#d8bd9b2f5070b4de46971416e890338cd89fc23d"
   integrity sha512-kGevOIbpMcIlCDeorKGpwZmdH7kHbqlk/Yj6dEpJMKEQw5lk0KVQY0OLXaCswy8GqlIVLd5625OB+rAntP9xVw==
 
-"@thirdweb-dev/crypto@0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@thirdweb-dev/crypto/-/crypto-0.2.3.tgz#e22644aa405feb0e8e51a6bea1982170bb7ccc06"
-  integrity sha512-Jea3YXglGW4GNqOX4EkQp22sSL04jvVLeBmMuaDdlIXDOPJk9odBU/oTh2LcNpBRBMiclK/J/V1Eq6KaxXo1xA==
+"@thirdweb-dev/crypto@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/crypto/-/crypto-0.2.4.tgz#e70cb83fef0446a8c9139c263e07fddfb97b8922"
+  integrity sha512-26kvfv9TciNPXWzNYzOqXA4NQyv2LnF7iiZybkuZUf/QquB00p6ZvcA4/ymN5PZlTXxgLYyGUnzQF5MOs067eA==
   dependencies:
     "@noble/hashes" "^1.4.0"
     js-sha3 "^0.9.3"
 
 "@thirdweb-dev/storage@^2.0.10":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@thirdweb-dev/storage/-/storage-2.0.12.tgz#ce516148564c2658de4f223aeaff7a9917996961"
-  integrity sha512-3C3VJ6yHa4EDfzhBNpLGp0+hu/twx9fTjhqNvkl+GLVx8GusSz/0bmTce3YhVySrpFTx1eopteayO+tcq5m61Q==
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/storage/-/storage-2.0.13.tgz#132bccedf329106cd58059c9118244485e1bb40e"
+  integrity sha512-m+q7RrI7c7G3XC/tmgdY23mAaYbLAIQN83ySpXSe/3Rrybg20EYofcvHVoMkRXSm5ojJvmwfE4SxiZfpsSsTHw==
   dependencies:
-    "@thirdweb-dev/crypto" "0.2.3"
+    "@thirdweb-dev/crypto" "0.2.4"
     cid-tool "^3.0.0"
     form-data "^4.0.0"
     uuid "^9.0.1"
@@ -5613,9 +5613,9 @@
   integrity sha512-cumHmIAf6On83X7yP+LrsEyUOf/YlociZelmpRYaGFydoaPdxdt80MAbu6vWerQT2COCp2nPvHdsbD7tHn/YlQ==
 
 "@types/node@>=18.0.0":
-  version "20.12.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.12.2.tgz#9facdd11102f38b21b4ebedd9d7999663343d72e"
-  integrity sha512-zQ0NYO87hyN6Xrclcqp7f8ZbXNbRfoGWNcMvHTPQp9UUrwI0mI7XBz+cu7/W6/VClYo2g63B0cjull/srU7LgQ==
+  version "20.12.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.12.4.tgz#af5921bd75ccdf3a3d8b3fa75bf3d3359268cd11"
+  integrity sha512-E+Fa9z3wSQpzgYQdYmme5X3OTuejnnTx88A6p6vkkJosR3KBz+HpE3kqNm98VE6cfLFcISx7zW7MsJkH6KwbTw==
   dependencies:
     undici-types "~5.26.4"
 
@@ -15753,10 +15753,10 @@ react-scroll@^1.8.9:
     lodash.throttle "^4.1.1"
     prop-types "^15.7.2"
 
-react-share@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/react-share/-/react-share-4.4.1.tgz#4bfb0b512e26afedfea2fb66eb13c95c28fb216a"
-  integrity sha512-AJ9m9RiJssqvYg7MoJUc9J0D7b/liWrsfQ99ndKc5vJ4oVHHd4Fy87jBlKEQPibT40oYA3AQ/a9/oQY6/yaigw==
+react-share@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-share/-/react-share-5.1.0.tgz#27eff763e5c233c8765cacf595b039093cb9b408"
+  integrity sha512-OvyfMtj/0UzH1wi90OdHhZVJ6WUC/+IeWvBwppeZozwIGyAjQgyR0QXlHOrxVHVECqnGvcpBaFTXVrqouTieaw==
   dependencies:
     classnames "^2.3.2"
     jsonp "^0.2.1"

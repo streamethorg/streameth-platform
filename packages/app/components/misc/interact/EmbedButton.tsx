@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Code } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 
 import {
   Credenza,
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/crezenda'
 import { Input } from '@/components/ui/input'
 import { generateEmbedCode } from '@/lib/utils/utils'
+import { Button } from '@/components/ui/button'
 
 export const EmbedModalContent: React.FC<{
   playbackId?: string
@@ -91,10 +91,10 @@ function EmbedButton({
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Badge>
+        <Button className="bg-white" variant="outline">
           <Code size={24} className="p-1" />
           Embed
-        </Badge>
+        </Button>
       </CredenzaTrigger>
       <EmbedModalContent
         vod={vod}
