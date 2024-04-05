@@ -29,6 +29,7 @@ export class IndexController extends Controller {
           await startAITools(payload.payload.id);
           break;
         case 'stream.started':
+        case 'stream.idle':
           await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;
         default:
