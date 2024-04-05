@@ -10,6 +10,7 @@ import {
   Share2,
   EllipsisVertical,
   Copy,
+  TrashIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -75,7 +76,14 @@ const PopoverActions = ({
             <DeleteAsset
               session={session}
               href={`/studio/${organizationSlug}?settings=videos`}
-              TriggerComponent={<div>Hello world</div>}
+              TriggerComponent={
+                <Button
+                  variant={'destructive-outline'}
+                  className="flex justify-center space-x-2">
+                  <TrashIcon />
+                  <p>Delete</p>
+                </Button>
+              }
             />
           </div>
         </div>

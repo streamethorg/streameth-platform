@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { Code } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
@@ -8,7 +8,6 @@ import {
   CredenzaBody,
   CredenzaContent,
   CredenzaDescription,
-  CredenzaFooter,
   CredenzaHeader,
   CredenzaTitle,
   CredenzaTrigger,
@@ -25,6 +24,7 @@ export const EmbedModalContent: React.FC<{
   const [copied, setCopied] = useState(false)
   const copiedClass = copied ? 'opacity-100' : 'opacity-0'
   const [url, setUrl] = useState('')
+
   useEffect(() => {
     if (copied) {
       setTimeout(() => setCopied(false), 2000)
@@ -73,9 +73,6 @@ export const EmbedModalContent: React.FC<{
           Copied to clipboard!
         </span>
       </CredenzaBody>
-      <CredenzaFooter>
-        <></>
-      </CredenzaFooter>
     </CredenzaContent>
   )
 }
