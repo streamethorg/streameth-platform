@@ -75,6 +75,7 @@ const PopoverActions = ({
             <DeleteAsset
               session={session}
               href={`/studio/${organizationSlug}?settings=videos`}
+              TriggerComponent={<div>Hello world</div>}
             />
           </div>
         </div>
