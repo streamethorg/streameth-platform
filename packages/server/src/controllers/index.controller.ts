@@ -17,7 +17,7 @@ export class IndexController extends Controller {
   }
   @Post('/webhook')
   async webhook(
-    @Header('Livepeer-Signature') livepeerSignature: string,
+    @Header('livepeer-signature') livepeerSignature: string,
     @Body() payload: any,
   ): Promise<IStandardResponse<string>> {
     try {

@@ -31,5 +31,6 @@ export const config = {
   livepeer: {
     host: validatedEnv.LIVEPEER_BASE_URL,
     secretKey: validatedEnv.LIVEPEER_API_KEY,
+    webhookSecretKey: validatedEnv.LIVEPEER_WEBHOOK_SECRET,
   },
 };
