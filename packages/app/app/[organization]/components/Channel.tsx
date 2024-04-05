@@ -44,7 +44,7 @@ const Channel = async ({
     <div>
       <div className="flex flex-col gap-5">
         {!playerActive && (
-          <Card className="overflow-hidden mt-4 shadow-none bg-white">
+          <Card className="overflow-hidden mx-4 lg:mx-0 mt-4 shadow-none bg-white">
             <div className="w-full h-[250px] rounded-lg relative">
               <Image
                 src="/backgrounds/channelBg.png"
@@ -57,7 +57,7 @@ const Channel = async ({
               <div className="w-[100px] h-[100px] bg-[#1E293B] rounded-[9999999px] border-2 border-white left-8 -bottom-11 absolute overflow-hidden">
                 <Image
                   src={organization?.logo || '/UserEmptyIcon.png'}
-                  alt="User"
+                  alt={organization?.name}
                   quality={100}
                   fill
                   className="w-full h-full"
