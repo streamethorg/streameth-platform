@@ -9,6 +9,7 @@ import { fetchSession } from '@/lib/services/sessionService'
 
 import ChannelPlayer from './components/ChannelPlayer'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
+import { fetchAllSessions } from '@/lib/data'
 
 const pages = [
   {
@@ -46,6 +47,16 @@ export default async function OrganizationHome({
     session: searchParams.playbackId,
   })
 
+  const searchVideos = (
+    await fetchAllSessions({
+      organizationSlug: params.organization,
+      onlyVideos: true,
+      searchQuery: searchParams.search,
+      limit: 50,
+      page: 1,
+    })
+  ).sessions
+
   const allStreams = await fetchOrganizationStages({
     organizationId: organization._id,
   })
@@ -69,6 +80,8 @@ export default async function OrganizationHome({
           tab={searchParams.tab}
           playerActive={playerActive}
           organizationSlug={params.organization}
+          searchVideos={searchVideos}
+          searchQuery={searchParams.search}
         />
       </div>
       <div className="sticky mb-5 top-[100vh]">

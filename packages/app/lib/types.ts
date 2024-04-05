@@ -162,5 +162,6 @@ export interface ChannelPageParams {
   searchParams: {
     tab?: string
     playbackId: string
+    search: string
   }
 }

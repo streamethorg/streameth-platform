@@ -1,10 +1,5 @@
 import { Card } from '@/components/ui/card'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { fetchAllSessions } from '@/lib/data'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import Image from 'next/image'
@@ -12,80 +7,38 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import ChannelShareIcons from './ChannelShareIcons'
 import { IExtendedSession } from '@/lib/types'
-
-import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
-import { Download } from 'lucide-react'
-import ShareVideoMenuItem from './ShareVideoMenuItem'
-
-function StreamTable({
-  streams,
-  tabValue,
-  organizationSlug,
-}: {
-  tabValue: string
-  streams: IExtendedSession[]
-  organizationSlug?: string
-}) {
-  return (
-    <TabsContent className="p-4" value={tabValue}>
-      {streams.length === 0 && (
-        <div className="mt-12 text-muted-foreground">
-          This user doesn&apos;t have any {tabValue}.
-        </div>
-      )}
-
-      <div className=" lg:w-full bg-transparent border-none ">
-        <div className="lg:grid md:grid-cols-2 lg:grid-cols-4 gap-5 gap-x-4">
-          {streams.map((stream) => (
-            <div
-              key={stream._id}
-              className={`lg:w-full h-full border-none  flex-initial`}>
-              <VideoCardWithMenu
-                session={stream}
-                link={`/${organizationSlug}?tab=${tabValue}&playbackId=${stream._id}`}
-                DropdownMenuItems={
-                  <>
-                    <DropdownMenuItem>
-                      <ShareVideoMenuItem
-                        url={`/${organizationSlug}?tab=${tabValue}&playbackId=${stream._id}`}
-                      />
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Button variant="ghost">
-                        <Download className="w-5 h-5 pr-1" /> Download
-                      </Button>
-                    </DropdownMenuItem>
-                  </>
-                }
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </TabsContent>
-  )
-}
+import ChannelSearchBar from './ChannelSearchBar'
+import ChannelTabContentItem from './ChannelTabContentItem'
 
 const Channel = async ({
   organizationSlug,
   playerActive,
   tab,
+  searchVideos,
+  searchQuery,
 }: {
   organizationSlug: string
   playerActive?: boolean
+  searchVideos: IExtendedSession[]
   tab?: string
+  searchQuery?: string
 }) => {
   const organization = await fetchOrganization({ organizationSlug })
   if (!organization) return notFound()
 
-  const videos = (
+  const AllVideos = (
     await fetchAllSessions({
       organizationSlug: organizationSlug,
       onlyVideos: true,
     })
   ).sessions
+
+  const livestreams = AllVideos.filter(
+    (video) => video.type === 'livestream'
+  )
+  const videos = AllVideos.filter(
+    (video) => video.type === 'clip' || video.type === 'video'
+  )
 
   return (
     <div>
@@ -128,27 +81,38 @@ const Channel = async ({
             </div>
           </Card>
         )}
-        <Card className="pt-2 relative shadow-none bg-white">
+        <Card className="pt-2 mx-4 lg:mx-0 relative shadow-none bg-white">
           <div className="absolute right-0 mt-2 mr-4"></div>
 
           <Tabs defaultValue={tab ?? 'livestreams'}>
-            <TabsList>
+            <TabsList className="border-b border-muted w-full !justify-start h-auto !pt-4 p-0">
               <TabsTrigger value="livestreams">
                 Livestreams
               </TabsTrigger>
               <TabsTrigger value="videos">Videos</TabsTrigger>
-              <TabsTrigger value="search"></TabsTrigger>
+              <TabsTrigger
+                className="hidden"
+                disabled
+                value="search"></TabsTrigger>
+              <ChannelSearchBar />
             </TabsList>
 
-            <StreamTable
+            <ChannelTabContentItem
               organizationSlug={organization.slug}
-              streams={videos}
+              streams={livestreams}
               tabValue="livestreams"
             />
-            <StreamTable
+            <ChannelTabContentItem
               organizationSlug={organization.slug}
               streams={videos}
               tabValue="videos"
+            />
+
+            <ChannelTabContentItem
+              organizationSlug={organization.slug}
+              streams={searchVideos}
+              tabValue="search"
+              searchQuery={searchQuery}
             />
           </Tabs>
         </Card>

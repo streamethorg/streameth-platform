@@ -45,7 +45,7 @@ const ChannelPlayer = ({
         <CardTitle>
           {libraryVideo?.name ?? activeStream.name}
         </CardTitle>
-        <div className="flex items-end justify-between gap-3 mt-2">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 mt-2">
           <div className="flex items-center gap-3">
             <div>
               <Image
