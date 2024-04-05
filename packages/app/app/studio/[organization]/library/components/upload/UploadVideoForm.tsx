@@ -80,9 +80,6 @@ const UploadVideoForm = ({
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {
-          alert(errors)
-        }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8">
         <FormField

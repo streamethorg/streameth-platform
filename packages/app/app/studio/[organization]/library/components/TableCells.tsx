@@ -9,6 +9,7 @@ import Image from 'next/image'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { formatDate } from '@/lib/utils/time'
+import { toast } from 'sonner'
 
 const TableCells = ({
   item,
@@ -19,6 +20,7 @@ const TableCells = ({
 }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(item.ipfsURI!)
+    toast.success('Copied IPFS Hash to your clipboard')
   }
 
   return (
@@ -49,7 +51,7 @@ const TableCells = ({
           </Link>
         </div>
       </TableCell>
-      <TableCell>Private</TableCell>
+      <TableCell>{item.published ? 'Public' : 'Private'}</TableCell>
       {item.createdAt && (
         <TableCell className="truncate">
           {formatDate(
