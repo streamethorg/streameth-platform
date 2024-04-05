@@ -60,7 +60,7 @@ const VideoCardWithMenu = ({
         </CardHeader>
 
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger className="z-10">
             <EllipsisVertical className="mt-2" />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
