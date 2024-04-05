@@ -49,7 +49,7 @@ export class IndexController extends Controller {
 
           // await startAITools(payload.payload.id);
           break;
-        case LivepeerEvent.streamReady:
+        case LivepeerEvent.streamStarted:
         case LivepeerEvent.streamIdle:
           await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;
