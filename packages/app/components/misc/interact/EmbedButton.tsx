@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { Code } from 'lucide-react'
 
 import {
@@ -7,7 +7,6 @@ import {
   CredenzaBody,
   CredenzaContent,
   CredenzaDescription,
-  CredenzaFooter,
   CredenzaHeader,
   CredenzaTitle,
   CredenzaTrigger,
@@ -16,7 +15,7 @@ import { Input } from '@/components/ui/input'
 import { generateEmbedCode } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 
-const ModalContent: React.FC<{
+export const EmbedModalContent: React.FC<{
   playbackId?: string
   streamId?: string
   playerName: string
@@ -25,6 +24,7 @@ const ModalContent: React.FC<{
   const [copied, setCopied] = useState(false)
   const copiedClass = copied ? 'opacity-100' : 'opacity-0'
   const [url, setUrl] = useState('')
+
   useEffect(() => {
     if (copied) {
       setTimeout(() => setCopied(false), 2000)
@@ -73,9 +73,6 @@ const ModalContent: React.FC<{
           Copied to clipboard!
         </span>
       </CredenzaBody>
-      <CredenzaFooter>
-        <></>
-      </CredenzaFooter>
     </CredenzaContent>
   )
 }
@@ -99,7 +96,7 @@ function EmbedButton({
           Embed
         </Button>
       </CredenzaTrigger>
-      <ModalContent
+      <EmbedModalContent
         vod={vod}
         playbackId={playbackId}
         streamId={streamId}

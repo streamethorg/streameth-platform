@@ -25,6 +25,7 @@ import { createSessionAction } from '@/lib/actions/sessions'
 import { Loader2 } from 'lucide-react'
 import { useAccount } from 'wagmi'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
 
 export default function CreateSession({
   eventId,
@@ -61,6 +62,7 @@ export default function CreateSession({
         stageId,
         start: 0,
         end: 0,
+        type: SessionType.video, // TODO: Should be in the parameter
       },
     })
       .then(() => {
@@ -122,7 +124,7 @@ export default function CreateSession({
               type="submit">
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                  <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
                   Please wait
                 </>
               ) : (

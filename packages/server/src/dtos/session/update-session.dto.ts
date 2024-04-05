@@ -28,7 +28,7 @@ export class UpdateSessionDto {
 
   @IsOptional()
   @IsString()
-  stageId: string;
+  stageId?: string;
 
   @IsOptional()
   @IsArray()
@@ -87,12 +87,16 @@ export class UpdateSessionDto {
   assetId?: string;
 
   @IsOptional()
+  @IsString()
+  ipfsURI?: string;
+
+  @IsOptional()
   @IsBoolean()
   published?: boolean;
 
   @IsOptional()
   @IsString()
-  type?: SessionType;
+  type: SessionType;
 
   @IsOptional()
   @IsString()

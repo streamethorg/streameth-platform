@@ -27,7 +27,7 @@ export interface ISession {
   description: string;
   start: number;
   end: number;
-  stageId: Types.ObjectId | string;
+  stageId?: Types.ObjectId | string;
   speakers?: Omit<ISpeaker, 'organizationId'>[];
   source?: ISource;
   assetId?: string;
@@ -46,8 +46,8 @@ export interface ISession {
   nftURI?: string;
   ipfsURI?: string;
   published?: boolean;
-  type?: SessionType;
+  type: SessionType;
   createdAt?: string;
 }
 
-export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
+export interface ISessionModel extends Omit<ISession, '_id'>, Document { }

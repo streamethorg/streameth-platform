@@ -92,12 +92,7 @@ export const createAsset = async (
   }
 };
 
-export const getAsset = async (
-  assetId: string,
-): Promise<{
-  playbackUrl: string;
-  phaseStatus: string;
-}> => {
+export const getPlayback = async (assetId: string): Promise<string> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
       method: 'get',
@@ -107,6 +102,48 @@ export const getAsset = async (
       },
     });
     const data = await response.json();
+    if (!data.playbackUrl) {
+      return '';
+    }
+    return data.playbackUrl;
+  } catch (e) {
+    console.error(`Error fetching asset:`, e);
+  }
+};
+
+export const getAsset = async (assetId: string) => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    if (!data) {
+      return '';
+    }
+    return data;
+  } catch (e) {
+    console.error(`Error fetching asset:`, e);
+  }
+};
+
+export const getVideoPhaseAction = async (assetId: string) => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    if (!data.playbackUrl) {
+      return '';
+    }
+
     return {
       playbackUrl: data.playbackUrl ?? '',
       phaseStatus: data.status.phase ?? '',
