@@ -36,7 +36,7 @@ export const ShareModalContent = ({
   shareFor?: string
 }) => {
   const text = `Check out this ${shareFor} on @streameth!`
-  const [currentUrl, setCurrentUrl] = useState('')
+  const [currentUrl, setCurrentUrl] = useState(url ?? '')
   useEffect(() => {
     // This code will only run on the client side
     if (typeof window === 'undefined') return
@@ -84,10 +84,12 @@ const ShareButton = ({
   url,
   className,
   variant = 'outline',
+  shareFor,
 }: {
   url?: string
   className?: string
   variant?: 'outline' | 'ghost' | 'primary' | 'default'
+  shareFor?: string
 }) => {
   return (
     <Credenza>
@@ -97,7 +99,7 @@ const ShareButton = ({
           Share
         </Button>
       </CredenzaTrigger>
-      <ShareModalContent url={url} />
+      <ShareModalContent url={url} shareFor={shareFor} />
     </Credenza>
   )
 }

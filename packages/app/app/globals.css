@@ -31,11 +31,14 @@
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+    --destructive-secondary: 0, 100%, 50%, 0.24;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.3rem;
     --grey: 213, 27%, 84%, 1;
+    --success: 137, 66%, 30%, 1;
+    --success-foreground: 112, 100%, 31%, 0.2;
   }
 
   .black {

@@ -19,10 +19,10 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
   const streamTargets = stream?.streamSettings?.targets || []
 
   return (
-    <div>
+    <div className="w-full">
       {streamTargets?.length === 0 ? (
-        <Card>
-          <CardContent className="flex justify-between items-center">
+        <Card className="shadow-none bg-white">
+          <CardContent className="p-3 lg:p-6 flex justify-between items-center ">
             <CardTitle className="text-xl">
               Multistream Target
             </CardTitle>
@@ -33,7 +33,7 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
           </CardContent>
         </Card>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full">
           <CardContent className="!p-4 flex items-center justify-between ">
             <CardTitle className="text-2xl">
               Multistream Target
@@ -43,7 +43,7 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
               streamId={stream?.streamSettings?.streamId}
             />
           </CardContent>
-          <Card>
+          <Card className="shadow-none bg-white">
             <Table>
               <TableHeader className="sticky top-0 z-50">
                 <TableRow>

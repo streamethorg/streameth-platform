@@ -11,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'bg-gradient-to-b from-[#4219FF] to-[#5E48C6] border-primary',
+          'bg-gradient-to-b text-white from-[#3D22BA] to-[#6426EF] border-primary',
         default:
           'bg-primary text-primary-foreground hover:bg-opacity-80',
         destructive:
@@ -29,7 +29,7 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
+        sm: 'h-9 rounded-md px-2',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
       },
@@ -55,6 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant,
       size,
       loading,
+      disabled,
       children,
       asChild = false,
       ...props
@@ -66,6 +67,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        disabled={disabled || loading}
         {...props}>
         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         {children}
