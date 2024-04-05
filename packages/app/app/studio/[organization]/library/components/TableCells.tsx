@@ -30,35 +30,6 @@ const TableCells = ({
     toast.success('Copied IPFS Hash to your clipboard')
   }
 
-  const handlePublishment = () => {
-    updateSessionAction({
-      session: {
-        _id: item._id,
-        name: item.name,
-        description: item.description,
-        organizationId: item.organizationId,
-        eventId: item.eventId,
-        stageId: item.stageId,
-        start: item.start ?? Number(new Date()),
-        end: item.end ?? Number(new Date()),
-        speakers: item.speakers ?? [],
-        type: item.type,
-        published: !item.published,
-      },
-    })
-      .then(() => {
-        if (item.published === true) {
-          toast.success('Succesfully made your asset private')
-        } else if (item.published === false) {
-          toast.success('Succesfully made your asset public')
-        }
-      })
-      .catch(() => {
-        toast.error('Something went wrong...')
-      })
-      .finally(() => location.reload())
-  }
-
   return (
     <>
       <TableCell className="relative font-medium">
