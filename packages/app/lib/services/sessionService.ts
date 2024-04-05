@@ -119,6 +119,7 @@ export const deleteSession = async ({
     )
 
     if (!response.ok) {
+      console.log('error in deleteSession', await response.json())
       throw 'Error deleting session'
     }
     return await response.json()

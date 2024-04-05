@@ -41,17 +41,12 @@ const ScheduleComponent = async ({
   if (!sessionsData.sessions.length) return null
 
   return (
-    <Card
-      id="schedule"
-      className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow">
-      <CardHeader className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
-        <CardTitle className="text-4xl uppercase lg:mr-4">
-          Schedule
-        </CardTitle>
+    <Card id="schedule" className="shadow-none border-none">
+      <CardHeader className=" flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-start">
         <DateSelect dates={dates} />
         <StageSelect stages={stages} />
       </CardHeader>
-      <CardContent className="p-3 lg:p-6">
+      <CardContent className="">
         <div className="w-full flex flex-col relative">
           <SessionList
             date={date}
@@ -67,20 +62,16 @@ const ScheduleComponent = async ({
 export const ScheduleSkeleton = () => (
   <div className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow animate-pulse">
     <div className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
-      {/* Title Placeholder */}
       <div className="h-10 bg-gray-300 rounded w-1/4"></div>
-      {/* Date Select Placeholder */}
       <div className="flex-1 flex space-x-2">
         <div className="h-10 bg-gray-300 rounded w-full max-w-xs"></div>
       </div>
-      {/* Stage Select Placeholder */}
       <div className="flex-1 flex space-x-2">
         <div className="h-10 bg-gray-300 rounded w-full max-w-xs"></div>
       </div>
     </div>
     <div className="p-3 lg:p-6">
       <div className="w-full flex flex-col relative space-y-2">
-        {/* Session List Placeholders */}
         {Array(5)
           .fill(0)
           .map((_, index) => (

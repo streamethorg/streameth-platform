@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import { getImageUrl } from '@/lib/utils/utils'
 import { useEffect, useState } from 'react'
 const fetchImage = async (url: string): Promise<boolean> => {
   try {
@@ -19,7 +18,6 @@ export default function Thumbnail({
   fallBack?: string
 }) {
   const streamethThumbnail = imageUrl ?? ''
-  const [image, setImage] = useState('')
 
   const [error, setError] = useState(false)
   const [fallbackImage, setFallbackImage] = useState('/cover.png')

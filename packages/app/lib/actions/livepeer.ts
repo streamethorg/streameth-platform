@@ -1,6 +1,7 @@
 'use server'
 
 import { Livepeer } from 'livepeer'
+import { Session } from 'livepeer/dist/models/components'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -29,7 +30,7 @@ export const getVideoUrlAction = async (assetId: string) => {
       console.error(asset.rawResponse)
       return null
     }
-    console.log('asset', asset.asset)
+
     if (!asset.asset?.playbackUrl) {
       return null
     }
@@ -68,6 +69,48 @@ export const getUrlAction = async (
     return params
   } catch (error) {
     console.error('Error fetching a Livepeer url:', error)
+    return null
+  }
+}
+
+export const getStreamRecordings = async ({
+  streamId,
+}: {
+  streamId: string
+}) => {
+  if (!streamId) {
+    return {
+      parentStream: null,
+      recordings: [],
+    }
+  }
+  const parentStream = (await livepeer.stream.get(streamId)).stream
+  const recordings = (
+    await livepeer.session.getRecorded(parentStream?.id ?? '')
+  ).classes
+  if (!recordings) {
+    return {
+      parentStream,
+      recordings: [],
+    }
+  }
+  return {
+    parentStream,
+    recordings: JSON.parse(JSON.stringify(recordings)) as Session[],
+  }
+}
+
+export const getAsset = async (assetId: string) => {
+  try {
+    const asset = await livepeer.asset.get(assetId)
+    if (asset.statusCode !== 200) {
+      console.error(asset.rawResponse)
+      return null
+    }
+
+    return JSON.parse(JSON.stringify(asset.asset))
+  } catch (e) {
+    console.error('Error fetching asset: ', assetId)
     return null
   }
 }

@@ -96,6 +96,7 @@ export interface ClipsPageParams {
     selectedSession: string
     selectedRecording: string
     replaceAsset: string
+    previewId: string
   }
 }
 

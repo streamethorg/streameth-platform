@@ -73,23 +73,19 @@ export default function SessionList({
   }
 
   return (
-    <ul id="sessionList" className="h-full relative lg:overflow-auto">
+    <div id="sessionList" className="grid grid-cols-3 gap-4">
       {sortedSessions.map((i, index) => {
         if (i.name === 'Blank') return null
         return (
-          <Element key={index} name={i._id}>
-            <li id={i._id} className="mb-3 text-lg">
-              <ScheduleCard
-                date={date}
-                event={event}
-                session={i}
-                showTime
-                speakers
-              />
-            </li>
-          </Element>
+          <ScheduleCard
+            key={index}
+            event={event}
+            session={i}
+            showTime
+            speakers
+          />
         )
       })}
-    </ul>
+    </div>
   )
 }
