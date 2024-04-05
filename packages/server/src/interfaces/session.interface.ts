@@ -15,6 +15,12 @@ export interface IPlayback {
   duration?: number;
 }
 
+export enum SessionType {
+  clip = 'clip',
+  livestream = 'livestream',
+  video = 'video',
+}
+
 export interface ISession {
   _id?: Types.ObjectId;
   name: string;
@@ -22,7 +28,7 @@ export interface ISession {
   start: number;
   end: number;
   stageId: Types.ObjectId | string;
-  speakers: Omit<ISpeaker, 'organizationId'>[];
+  speakers?: Omit<ISpeaker, 'organizationId'>[];
   source?: ISource;
   assetId?: string;
   playback?: IPlayback;
@@ -39,6 +45,8 @@ export interface ISession {
   autoLabels?: string[];
   nftURI?: string;
   ipfsURI?: string;
+  published?: boolean;
+  type?: SessionType;
   createdAt?: string;
 }
 

@@ -11,7 +11,7 @@ import {
 import InfoBoxDescription from './InfoBoxDescription'
 import { IExtendedSpeaker } from '@/lib/types'
 import Markdown from 'react-markdown'
-// TODO LOADING STAT
+
 const SessionInfoBox = ({
   title,
   cardDescription,
@@ -46,16 +46,17 @@ const SessionInfoBox = ({
       className={`${
         inverted ? 'text-white rounded-lg  text-card-foreground ' : ''
       }`}>
-      <CardHeader className="flex flex-col justify-between p-2 w-full lg:flex-row lg:items-center lg:p-2">
+      <CardHeader className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:p-0">
         <div className="flex-col md:flex">
-          <CardTitle className="flex flex-row items-center space-x-2">
-            {avatarUrl && (
+          <CardTitle className="flex flex-col items-start space-x-2 lg:text-2xl">
+            <span>{title}</span>
+
+            {/* {avatarUrl && (
               <Avatar>
                 <AvatarImage src={avatarUrl} alt={avatarFallback} />
                 <AvatarFallback>{avatarFallback}</AvatarFallback>
               </Avatar>
-            )}
-            <span>{title}</span>
+            )} */}
           </CardTitle>
           <CardDescription>
             {viewCount && playbackId && (

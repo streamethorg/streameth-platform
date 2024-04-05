@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    color: #334155;
     --background: 210, 40%, 98%;
     --neutrals-100: 210, 40%, 96%;
     --neutrals-200: 214, 32%, 91%;

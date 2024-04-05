@@ -4,6 +4,7 @@ import {
 } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 import { IExtendedStage } from '../types'
+import { fetchEvents } from './eventService'
 
 export async function fetchStage({
   stage,
@@ -22,6 +23,27 @@ export async function fetchStage({
   } catch (e) {
     console.log(e)
     throw 'Error fetching stage'
+  }
+}
+
+export async function fetchStages({
+  organizationId,
+}: {
+  organizationId: string
+}): Promise<IStageModel[]> {
+  try {
+    const events = await fetchEvents({ organizationId })
+    const stages: IStageModel[] = []
+    for (const event of events) {
+      const response = await fetchEventStages({ eventId: event._id })
+      response.forEach((stage) => {
+        stages.push(stage)
+      })
+    }
+    return stages
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching stages'
   }
 }
 

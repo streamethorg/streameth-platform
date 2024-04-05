@@ -25,6 +25,7 @@ export default async function EventPage({
     <div className="flex flex-row h-full overflow-hidden w-full">
       <TooltipProvider>
         <Navigation
+          organizationSlug={params.organization}
           event={event}
           stages={stages}
           organizationId={params.organization}

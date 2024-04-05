@@ -20,6 +20,13 @@ export default class SessionServcie {
   async create(data: ISession): Promise<ISession> {
     let eventId = '';
     let eventSlug = '';
+    let stageId = '';
+    if (data.stageId == undefined || data.stageId.toString().length === 0) {
+      stageId = new Types.ObjectId().toString();
+    } else {
+      let stage = await Stage.findById(data.stageId);
+      stageId = stage._id;
+    }
     if (data.eventId == undefined || data.eventId.toString().length === 0) {
       eventId = new Types.ObjectId().toString();
       data.speakers.map((speaker) => (speaker.eventId = eventId));
@@ -30,7 +37,7 @@ export default class SessionServcie {
     }
     return this.controller.store.create(
       data.name,
-      { ...data, eventSlug: eventSlug, eventId: eventId },
+      { ...data, eventSlug: eventSlug, eventId: eventId, stageId: stageId },
       `${this.path}/${eventId}`,
     );
   }
@@ -61,11 +68,13 @@ export default class SessionServcie {
   }> {
     let filter = {};
     if (d.event != undefined) {
-      let event = await Event.findOne({ slug: d.event });
+      let query = this.queryByIdOrSlug(d.event);
+      let event = await Event.findOne(query);
       filter = { ...filter, eventId: event?._id };
     }
     if (d.organization != undefined) {
-      let org = await Organization.findOne({ slug: d.organization });
+      let query = this.queryByIdOrSlug(d.organization);
+      let org = await Organization.findOne(query);
       filter = { ...filter, organizationId: org?._id };
     }
     if (d.onlyVideos) {
@@ -78,7 +87,8 @@ export default class SessionServcie {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      let stage = await Stage.findOne({ slug: d.stageId });
+      let query = this.queryByIdOrSlug(d.stageId);
+      let stage = await Stage.findOne(query);
       filter = { ...filter, stageId: stage?._id };
     }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
@@ -144,5 +154,11 @@ export default class SessionServcie {
     });
     const URI = await storage.upload(file);
     return await storage.resolveScheme(URI);
+  }
+
+  private queryByIdOrSlug(id: string) {
+    const isObjectId = /[0-9a-f]{24}/i.test(id);
+    const query = isObjectId ? { _id: id } : { slug: id };
+    return query;
   }
 }

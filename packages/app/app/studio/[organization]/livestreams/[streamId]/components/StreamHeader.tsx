@@ -38,11 +38,7 @@ const StreamHeader = ({
         )}
         <ShareButton
           url={`${url}/${organization}?streamId=${stream.streamSettings?.streamId}`}
-          livestream
-          className={buttonVariants({
-            variant: 'outline',
-            className: 'text-black bg-white font-normal',
-          })}
+          shareFor="livestream"
         />
       </div>
     </div>

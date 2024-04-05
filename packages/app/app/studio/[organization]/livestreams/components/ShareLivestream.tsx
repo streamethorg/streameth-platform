@@ -22,11 +22,7 @@ const ShareLivestream = ({
     <div onClick={(e) => e.stopPropagation()}>
       <ShareButton
         url={`${url}/${organization}?streamId=${streamId}`}
-        livestream
-        className={buttonVariants({
-          variant: 'outline',
-          className: 'text-black font-normal',
-        })}
+        shareFor="livestream"
       />
     </div>
   )
