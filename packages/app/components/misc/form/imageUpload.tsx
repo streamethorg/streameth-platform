@@ -100,10 +100,10 @@ export default function ImageUpload({
           <Label
             htmlFor={id}
             className={`${className} flex justify-center flex-col items-center`}>
-            <div className="bg-neutral-400 p-2 rounded-full text-white">
+            <div className="p-2 text-white rounded-full bg-neutral-400">
               <ImageLogo />
             </div>
-            <p className="text-center w-full lg:w-2/3 text-[12px] p-1">
+            <p className="p-1 w-full text-center lg:w-2/3 text-[12px]">
               {placeholder}
             </p>
           </Label>

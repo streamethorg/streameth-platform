@@ -22,8 +22,8 @@ import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
+import { getFormSubmitStatus } from '@/lib/utils/utils'
 import { useRouter } from 'next/navigation'
-
 export default function CreateOrganizationForm() {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
@@ -167,7 +167,7 @@ export default function CreateOrganizationForm() {
           <Button type="submit">
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
                 Please wait
               </>
             ) : (

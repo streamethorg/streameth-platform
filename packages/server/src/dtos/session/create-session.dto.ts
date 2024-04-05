@@ -31,9 +31,9 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsString()
   end: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  stageId: string;
+  stageId?: string;
 
   @IsNotEmpty()
   @IsArray()
@@ -86,6 +86,10 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsOptional()
   @IsArray()
   autolabels?: string[];
+
+  @IsOptional()
+  @IsString()
+  ipfsURI?: string;
 
   @IsOptional()
   @IsBoolean()

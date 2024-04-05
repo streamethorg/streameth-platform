@@ -10,6 +10,18 @@ import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
 
+export enum eSort {
+  asc_alpha = 'asc_alpha',
+  desc_alpha = 'desc_alpha',
+  asc_date = 'asc_date',
+  desc_date = 'desc_date',
+}
+
+export enum eLayout {
+  grid = 'grid',
+  list = 'list',
+}
+
 export interface Page {
   name: string
   href: string

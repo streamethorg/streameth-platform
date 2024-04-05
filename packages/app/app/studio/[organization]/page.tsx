@@ -1,3 +1,5 @@
+'use server'
+
 import {
   Card,
   CardDescription,

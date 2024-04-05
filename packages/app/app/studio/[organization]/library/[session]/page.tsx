@@ -1,10 +1,12 @@
 import { studioPageParams } from '@/lib/types'
-import SessionAccordion from './components/SessionAccordion'
 import { fetchSession } from '@/lib/services/sessionService'
 import { PlayerWithControls } from '@/components/ui/Player'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { Livepeer } from 'livepeer'
 import { notFound } from 'next/navigation'
+import { ArrowLeft } from 'lucide-react'
+import EditSessionForm from './components/EditSessionForm'
+import Link from 'next/link'
+import SessionOptions from './components/SessionOptions'
 
 const EditSession = async ({
   params,
@@ -17,19 +19,33 @@ const EditSession = async ({
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
   })
-  if (!session) {
+
+  if (!session || !session.assetId) {
     return notFound()
   }
 
-  const video = (await livepeer.asset.get(session?.assetId as string))
-    .asset
+  const video = (await livepeer.asset.get(session.assetId)).asset
 
   if (!video) return notFound()
 
   return (
-    <div className="p-4 h-full">
-      <div className="flex flex-row space-x-4 h-full">
-        <div className="w-full">
+    <div className="p-2 h-full">
+      <Link href={`/studio/${params.organization}/library`}>
+        <div className="flex justify-start items-center my-4 mx-10 space-x-4">
+          <ArrowLeft />
+          <p>Back to library</p>
+        </div>
+      </Link>
+
+      <div className="flex flex-row space-x-4">
+        <div className="px-10 space-y-4 w-2/3">
+          <h1 className="text-5xl font-bold">Video Details</h1>
+          <EditSessionForm
+            session={session}
+            organizationSlug={params.organization}
+          />
+        </div>
+        <div className="w-1/3">
           <PlayerWithControls
             src={[
               {
@@ -41,18 +57,10 @@ const EditSession = async ({
               },
             ]}
           />
-          <SessionInfoBox
-            title={session.name}
-            playerName={session.name}
-            playbackId={session.playbackId}
-            assetId={session.assetId}
-            viewCount
-          />{' '}
-        </div>
-        <div className="w-1/3 h-full overflow-auto relative">
-          <SessionAccordion
-            session={session}
-            organizationSlug={params.organization}
+          <SessionOptions
+            name={video.name}
+            playbackId={video.playbackId!}
+            downloadUrl={video.downloadUrl!}
           />
         </div>
       </div>

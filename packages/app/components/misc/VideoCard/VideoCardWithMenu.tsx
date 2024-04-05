@@ -9,8 +9,10 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
+import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
 import React, { ReactNode } from 'react'
@@ -27,10 +29,15 @@ const VideoCardWithMenu = ({
   return (
     <div className="w-full min-h-full uppercase rounded-xl">
       <Link href={link}>
-        <Thumbnail
-          imageUrl={session.coverImage}
-          fallBack={session.coverImage}
-        />
+        {session.coverImage ? (
+          <Thumbnail imageUrl={session.coverImage} />
+        ) : (
+          <AspectRatio
+            ratio={16 / 9}
+            className="flex justify-center items-center w-full h-full">
+            <DefaultThumbnail />
+          </AspectRatio>
+        )}
       </Link>
       <div className="flex justify-between items-start">
         <CardHeader
