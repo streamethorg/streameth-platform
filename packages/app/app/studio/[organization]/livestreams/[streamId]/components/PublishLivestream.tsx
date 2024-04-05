@@ -32,8 +32,9 @@ const PublishLivestream = ({
   }
 
   return (
-    <div className="flex justify-end gap-4 pb-10">
+    <div className="flex justify-end gap-4 pb-10 w-full">
       <Button
+        className="bg-white"
         loading={isLoading}
         onClick={handlePublishStream}
         disabled={stream?.published || isLoading}
@@ -49,6 +50,7 @@ const PublishLivestream = ({
       </Button>
       {stream?.published && (
         <Button
+          className="bg-white"
           loading={isLoading}
           onClick={handlePublishStream}
           disabled={!stream?.published || isLoading}

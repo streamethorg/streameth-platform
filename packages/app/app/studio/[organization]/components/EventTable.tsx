@@ -37,9 +37,7 @@ const EventTable = async ({
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <Button variant={'primary'} className="text-white">
-            Create Event
-          </Button>
+          <Button variant={'primary'}>Create Event</Button>
         </CardFooter>
       </Card>
       <Table className="bg-white">
