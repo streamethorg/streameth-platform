@@ -12,7 +12,12 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import ChannelShareIcons from './ChannelShareIcons'
 import { IExtendedSession } from '@/lib/types'
-import ChannelVideoCard from './ChannelVideoCard'
+
+import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { Download } from 'lucide-react'
+import ShareVideoMenuItem from './ShareVideoMenuItem'
 
 function StreamTable({
   streams,
@@ -37,10 +42,23 @@ function StreamTable({
             <div
               key={stream._id}
               className={`lg:w-full h-full border-none  flex-initial`}>
-              <ChannelVideoCard
-                organizationSlug={organizationSlug}
+              <VideoCardWithMenu
                 session={stream}
-                tab={tabValue}
+                link={`/${organizationSlug}?tab=${tabValue}&playbackId=${stream._id}`}
+                DropdownMenuItems={
+                  <>
+                    <DropdownMenuItem>
+                      <ShareVideoMenuItem
+                        url={`/${organizationSlug}?tab=${tabValue}&playbackId=${stream._id}`}
+                      />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Button variant="ghost">
+                        <Download className="w-5 h-5 pr-1" /> Download
+                      </Button>
+                    </DropdownMenuItem>
+                  </>
+                }
               />
             </div>
           ))}

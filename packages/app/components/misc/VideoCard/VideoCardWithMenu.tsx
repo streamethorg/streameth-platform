@@ -1,5 +1,4 @@
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import { Button } from '@/components/ui/button'
 import {
   CardDescription,
   CardHeader,
@@ -8,29 +7,26 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
-import { Download, EllipsisVertical } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
-import ShareVideoMenuItem from './ShareVideoMenuItem'
+import React, { ReactNode } from 'react'
 
-const ChannelVideoCard = ({
+const VideoCardWithMenu = ({
   session,
-  organizationSlug,
-  tab,
+  DropdownMenuItems,
+  link,
 }: {
   session: IExtendedSession
-  organizationSlug?: string
-  tab?: string
+  DropdownMenuItems?: ReactNode
+  link: string
 }) => {
   return (
     <div className="w-full min-h-full uppercase rounded-xl">
-      <Link
-        href={`/${organizationSlug}?tab=${tab}&playbackId=${session._id}`}>
+      <Link href={link}>
         <Thumbnail
           imageUrl={session.coverImage}
           fallBack={session.coverImage}
@@ -39,8 +35,7 @@ const ChannelVideoCard = ({
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
-          <Link
-            href={`/${organizationSlug}?tab=${tab}&playbackId=${session._id}`}>
+          <Link href={link}>
             <CardTitle
               className={`text-sm capitalize line-clamp-2 overflow-hidden  hover:underline `}>
               {session.name}
@@ -62,16 +57,7 @@ const ChannelVideoCard = ({
             <EllipsisVertical className="mt-2 " />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>
-              <ShareVideoMenuItem
-                url={`/${organizationSlug}?tab=${tab}&playbackId=${session._id}`}
-              />
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Button variant="ghost">
-                <Download className="w-5 h-5 pr-1" /> Download
-              </Button>
-            </DropdownMenuItem>
+            {DropdownMenuItems}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -79,4 +65,4 @@ const ChannelVideoCard = ({
   )
 }
 
-export default ChannelVideoCard
+export default VideoCardWithMenu
