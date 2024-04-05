@@ -3,9 +3,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { studioPageParams } from '@/lib/types'
 import { fetchEvent } from '@/lib/services/eventService'
 import { fetchEventStages } from '@/lib/services/stageService'
-import StreamConfig, {
-  StreamConfigSkeleton,
-} from './components/stageSettings/StageConfig'
+import StreamConfig from './components/stageSettings/StageConfig'
 import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
 import { notFound } from 'next/navigation'
 import Navigation from './components/navigation'
@@ -50,14 +48,10 @@ export default async function EventPage({
       {settings === 'stage' && (
         <div className="w-full h-full">
           <div className="h-full overflow-auto">
-            <Suspense
-              key={stageId}
-              fallback={<StreamConfigSkeleton />}>
-              <StreamConfig
-                organization={params.organization}
-                stageId={stageId}
-              />
-            </Suspense>
+            <StreamConfig
+              organization={params.organization}
+              stageId={stageId}
+            />
           </div>
         </div>
       )}

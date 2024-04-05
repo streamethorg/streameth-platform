@@ -58,7 +58,7 @@ export const ShareModalContent = ({
       </CredenzaHeader>
       <CredenzaBody>
         <div className="flex flex-row justify-center items-center px-4 pb-4 space-x-4">
-          <FacebookShareButton url={currentUrl} quote={text}>
+          <FacebookShareButton url={currentUrl} title={text}>
             <FacebookIcon size={42} round />
           </FacebookShareButton>
           <TwitterShareButton url={currentUrl} title={text}>

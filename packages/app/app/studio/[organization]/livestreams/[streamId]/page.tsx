@@ -22,10 +22,10 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
       <StreamHeader
         organization={params.organization}
         stream={stream}
+        isLiveStreamPage
       />
 
-      <StreamConfigWithPlayer stream={stream} />
-      <StreamHealth
+      <StreamConfigWithPlayer
         stream={stream}
         streamId={params.streamId}
         organization={params.organization}

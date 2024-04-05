@@ -1,11 +1,3 @@
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import {
   Table,
   TableBody,
@@ -16,18 +8,10 @@ import {
 } from '@/components/ui/table'
 import { IExtendedStage } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
-import { MoreVertical, Share2, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import DeleteLivestream from './DeleteLivestream'
-import ShareButton, {
-  ShareModalContent,
-} from '@/components/misc/interact/ShareButton'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+
 import ShareLivestream from './ShareLivestream'
 
 const LivestreamTable = ({

@@ -7,7 +7,6 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { deleteStageAction } from '@/lib/actions/stages'
 import { IExtendedStage } from '@/lib/types'
 import { Trash2 } from 'lucide-react'
@@ -16,6 +15,7 @@ import { toast } from 'sonner'
 
 const DeleteLivestream = ({ stream }: { stream: IExtendedStage }) => {
   const [isDeleting, setIsDeleting] = useState(false)
+  const [open, setOpen] = useState(false)
   const handleDeleteStage = async () => {
     setIsDeleting(true)
     await deleteStageAction({
@@ -26,6 +26,7 @@ const DeleteLivestream = ({ stream }: { stream: IExtendedStage }) => {
       .then((response) => {
         if (response) {
           toast.success('Livestream deleted')
+          setOpen(false)
         } else {
           toast.error('Error deleting livestream')
         }
@@ -39,7 +40,7 @@ const DeleteLivestream = ({ stream }: { stream: IExtendedStage }) => {
   }
   return (
     <div onClick={(e) => e.stopPropagation()}>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger>
           <Button className="hover:border-none" variant={'outline'}>
             <Trash2 className="text-destructive w-5 h-5" />
@@ -56,10 +57,10 @@ const DeleteLivestream = ({ stream }: { stream: IExtendedStage }) => {
             <DialogClose>
               <Button variant="ghost">Cancel</Button>
             </DialogClose>
+
             <Button
-              loading={isDeleting}
-              disabled={isDeleting}
               onClick={handleDeleteStage}
+              loading={isDeleting}
               variant="destructive">
               Delete
             </Button>

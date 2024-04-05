@@ -11,7 +11,9 @@ export async function fetchStage({
   stage: string
 }): Promise<IExtendedStage | null> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/${stage}`)
+    const response = await fetch(`${apiUrl()}/stages/${stage}`, {
+      cache: 'no-cache',
+    })
     const data = (await response.json()).data
     if (!data) {
       return null

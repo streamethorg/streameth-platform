@@ -1,4 +1,5 @@
 'use client'
+import DatePicker from '@/components/misc/form/datePicker'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -57,15 +58,16 @@ const CreateLivestreamModal = ({
       .then((response) => {
         toast.success('Stream created')
         streamId = response?._id as string
+        router.push(
+          `/studio/${organization?.slug}/livestreams/${streamId}`
+        )
       })
       .catch(() => {
         toast.error('Error creating stream')
       })
       .finally(() => {
         setIsLoading(false)
-        router.push(
-          `/studio/${organization?.slug}/livestreams/${streamId}`
-        )
+        setOpen(false)
       })
   }
 
