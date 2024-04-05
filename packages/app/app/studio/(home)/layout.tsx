@@ -10,7 +10,11 @@ const StudioLayout = async (props: { children: React.ReactNode }) => {
 
   return (
     <div className="w-screen h-screen">
-      <HomePageNavbar pages={[]} showSearchBar={false} />
+      <HomePageNavbar
+        pages={[]}
+        showLogo={true}
+        showSearchBar={false}
+      />
       <div className="top-[74px] flex flex-col h-[calc(100vh-74px)]">
         {props.children}
       </div>

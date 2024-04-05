@@ -39,6 +39,9 @@
 					"slug": {
 						"type": "string"
 					},
+					"banner": {
+						"type": "string"
+					},
 					"walletAddress": {
 						"type": "string"
 					}
@@ -406,10 +409,52 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"TargetOutput": {
+				"properties": {
+					"profile": {
+						"type": "string"
+					},
+					"videoOnly": {
+						"type": "boolean"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"profile"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStreamSettings": {
 				"properties": {
 					"streamId": {
 						"type": "string"
+					},
+					"parentId": {
+						"type": "string"
+					},
+					"playbackId": {
+						"type": "string"
+					},
+					"isHealthy": {
+						"type": "boolean"
+					},
+					"isActive": {
+						"type": "boolean"
+					},
+					"streamKey": {
+						"type": "string"
+					},
+					"ipfshash": {
+						"type": "string"
+					},
+					"targets": {
+						"items": {
+							"$ref": "#/components/schemas/TargetOutput"
+						},
+						"type": "array"
 					}
 				},
 				"type": "object",
@@ -430,9 +475,19 @@
 			"IStage": {
 				"properties": {
 					"_id": {
-						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"name": {
+						"type": "string"
+					},
+					"description": {
 						"type": "string"
 					},
 					"eventId": {
@@ -461,6 +516,9 @@
 					"slug": {
 						"type": "string"
 					},
+					"published": {
+						"type": "boolean"
+					},
 					"organizationId": {
 						"anyOf": [
 							{
@@ -470,11 +528,13 @@
 								"type": "string"
 							}
 						]
+					},
+					"thumbnail": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"name",
-					"streamSettings",
 					"organizationId"
 				],
 				"type": "object",
@@ -502,9 +562,19 @@
 			"CreateStageDto": {
 				"properties": {
 					"_id": {
-						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"name": {
+						"type": "string"
+					},
+					"description": {
 						"type": "string"
 					},
 					"eventId": {
@@ -526,15 +596,19 @@
 					"slug": {
 						"type": "string"
 					},
+					"published": {
+						"type": "boolean"
+					},
 					"organizationId": {
+						"type": "string"
+					},
+					"thumbnail": {
 						"type": "string"
 					}
 				},
 				"required": [
 					"name",
-					"streamSettings",
-					"organizationId",
-					"eventId"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -544,8 +618,14 @@
 					"name": {
 						"type": "string"
 					},
+					"description": {
+						"type": "string"
+					},
 					"eventId": {
 						"type": "string"
+					},
+					"published": {
+						"type": "boolean"
 					},
 					"streamSettings": {
 						"$ref": "#/components/schemas/IStreamSettings"
@@ -569,8 +649,6 @@
 				},
 				"required": [
 					"name",
-					"eventId",
-					"streamSettings",
 					"organizationId"
 				],
 				"type": "object",
@@ -680,7 +758,6 @@
 				"required": [
 					"name",
 					"bio",
-					"eventId",
 					"organizationId"
 				],
 				"type": "object",
@@ -744,8 +821,8 @@
 				"required": [
 					"name",
 					"bio",
-					"eventId",
-					"organizationId"
+					"organizationId",
+					"eventId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -814,8 +891,7 @@
 				},
 				"required": [
 					"name",
-					"bio",
-					"eventId"
+					"bio"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -959,6 +1035,15 @@
 							"type": "string"
 						},
 						"type": "array"
+					},
+					"nftURI": {
+						"type": "string"
+					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -968,7 +1053,6 @@
 					"end",
 					"stageId",
 					"speakers",
-					"eventId",
 					"organizationId"
 				],
 				"type": "object",
@@ -1086,12 +1170,20 @@
 							"type": "string"
 						},
 						"type": "array"
+					},
+					"nftURI": {
+						"type": "string"
+					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"organizationId",
 					"name",
-					"eventId",
 					"description",
 					"start",
 					"end",
@@ -1174,6 +1266,15 @@
 						},
 						"type": "array"
 					},
+					"nftURI": {
+						"type": "string"
+					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
+					},
 					"autolabels": {
 						"items": {
 							"type": "string"
@@ -1184,12 +1285,30 @@
 				"required": [
 					"organizationId",
 					"name",
-					"eventId",
 					"description",
 					"start",
 					"end",
 					"stageId",
 					"speakers"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_string_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1272,7 +1391,6 @@
 					"end",
 					"stageId",
 					"speakers",
-					"eventId",
 					"organizationId"
 				],
 				"type": "object",
@@ -1376,6 +1494,9 @@
 					"accentColor": {
 						"type": "string"
 					},
+					"banner": {
+						"type": "string"
+					},
 					"walletAddress": {
 						"type": "string"
 					}
@@ -1413,6 +1534,9 @@
 						"type": "string"
 					},
 					"accentColor": {
+						"type": "string"
+					},
+					"banner": {
 						"type": "string"
 					},
 					"walletAddress": {
@@ -1481,25 +1605,6 @@
 							"$ref": "#/components/schemas/IOrganization"
 						},
 						"type": "array"
-					}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_string_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -2622,6 +2727,37 @@
 				]
 			}
 		},
+		"/stages/organization/{organizationId}": {
+			"get": {
+				"operationId": "GetAllStagesForOrganization",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IStage__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/speakers": {
 			"post": {
 				"operationId": "CreateSpeaker",
@@ -2849,6 +2985,37 @@
 						"in": "query",
 						"name": "assetId",
 						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/sessions/metadata/{sessionId}": {
+			"post": {
+				"operationId": "UploadSessionMetadata",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "sessionId",
+						"required": true,
 						"schema": {
 							"type": "string"
 						}
