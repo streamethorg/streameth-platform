@@ -1,7 +1,5 @@
 'use client'
-import {
-  IStageModel,
-} from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import {
   Select,
@@ -16,7 +14,7 @@ const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <span className='text-sm '>Stage</span>
+      <span className="text-sm ">Stage</span>
       <Select
         defaultValue={searchParams.get('stage') || stages[0]?._id}
         onValueChange={(value: string) =>

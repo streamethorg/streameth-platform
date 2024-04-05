@@ -83,14 +83,18 @@ const CreateClipButton = ({
       <div className="flex flex-col space-y-2">
         <Label>Clip name</Label>
         <Input
-        className=' bg-white'
+          className=" bg-white"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <Button
         disabled={
-          isLoading || !selectedRecording || !startTime || !endTime || !name
+          isLoading ||
+          !selectedRecording ||
+          !startTime ||
+          !endTime ||
+          !name
         }
         onClick={handleCreateClip}
         variant="primary"

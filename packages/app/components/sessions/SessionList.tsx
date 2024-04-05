@@ -77,7 +77,13 @@ export default function SessionList({
       {sortedSessions.map((i, index) => {
         if (i.name === 'Blank') return null
         return (
-          <ScheduleCard key={index} event={event} session={i} showTime speakers />
+          <ScheduleCard
+            key={index}
+            event={event}
+            session={i}
+            showTime
+            speakers
+          />
         )
       })}
     </div>

@@ -10,10 +10,7 @@ import ScheduleComponent, {
   ScheduleSkeleton,
 } from '../schedule/components/ScheduleComponent'
 import Image from 'next/image'
-import {
-  formatDate,
-  isSameDate,
-} from '@/lib/utils/time'
+import { formatDate, isSameDate } from '@/lib/utils/time'
 import { Suspense } from 'react'
 import banner from '@/public/streameth_twitter_banner.jpeg'
 import { IExtendedEvent } from '@/lib/types'

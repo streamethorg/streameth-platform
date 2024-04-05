@@ -4,7 +4,6 @@ import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 
-
 export default function StagePreview({
   stage,
   eventCover,

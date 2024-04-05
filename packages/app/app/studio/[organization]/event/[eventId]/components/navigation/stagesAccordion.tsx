@@ -14,7 +14,7 @@ import useSearchParams from '@/lib/hooks/useSearchParams'
 import Link from 'next/link'
 
 const StageAccordion = ({
-  organization, 
+  organization,
   stages,
   event,
 }: {
@@ -96,7 +96,8 @@ const StageAccordion = ({
                 Livestream settings
               </p>
             </AccordionContent>
-            <Link href={`/studio/${organization}/clips?stage=${stage._id}`}>
+            <Link
+              href={`/studio/${organization}/clips?stage=${stage._id}`}>
               <AccordionContent>
                 <p
                   className={`${

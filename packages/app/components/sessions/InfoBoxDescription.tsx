@@ -35,7 +35,8 @@ const InfoBoxDescription = ({
     }
   }, [])
 
-  if (!description && (!speakers || speakers.length === 0)) return null
+  if (!description && (!speakers || speakers.length === 0))
+    return null
 
   return (
     <CardContent className="relative p-2 lg:p-2  border-t">

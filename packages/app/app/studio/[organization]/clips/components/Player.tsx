@@ -61,7 +61,10 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   if (error) {
     return (
       <div className=" aspect-video text-white bg-black flex flex-col items-center justify-center">
-        <p>Clips can only be created for recordings that are less than 7 days old</p>
+        <p>
+          Clips can only be created for recordings that are less than
+          7 days old
+        </p>
       </div>
     )
   }

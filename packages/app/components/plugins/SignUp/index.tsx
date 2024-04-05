@@ -109,8 +109,8 @@ const SignUp = ({ event }: { event: IExtendedEvent }) => {
   return (
     <Credenza open={open} onOpenChange={setOpen}>
       <SignUpModal event={event} setOpen={setOpen} />
-      <CredenzaTrigger className='justify-start'>
-        <div className='px-4 py-2 bg-primary rounded-lg text-white text-thin' >
+      <CredenzaTrigger className="justify-start">
+        <div className="px-4 py-2 bg-primary rounded-lg text-white text-thin">
           Set a reminder
         </div>
       </CredenzaTrigger>
