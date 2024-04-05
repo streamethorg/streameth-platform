@@ -99,9 +99,13 @@ export default function ImageUpload({
         <>
           <Label
             htmlFor={id}
-            className={`${className} flex justify-center items-center`}>
-            <ImageLogo />
-            {placeholder}
+            className={`${className} flex justify-center flex-col items-center`}>
+            <div className="bg-neutral-400 p-2 rounded-full text-white">
+              <ImageLogo />
+            </div>
+            <p className="text-center w-full lg:w-2/3 text-[12px] p-1">
+              {placeholder}
+            </p>
           </Label>
           <Input
             id={id}

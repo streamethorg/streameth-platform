@@ -84,6 +84,7 @@ export interface ClipsPageParams {
     selectedSession: string
     selectedRecording: string
     replaceAsset: string
+    previewId: string
   }
 }
 
@@ -153,4 +154,15 @@ export interface IGenerateEmbed {
 
 export interface IGenerateEmbedCode extends IGenerateEmbed {
   url: string
+}
+
+export interface ChannelPageParams {
+  params: {
+    organization: string
+  }
+  searchParams: {
+    tab?: string
+    playbackId: string
+    search: string
+  }
 }
