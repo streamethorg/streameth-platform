@@ -12,9 +12,6 @@ import {
 import { Button } from '@/components/ui/button'
 import DeleteAsset from '../DeleteAsset'
 import { IExtendedSession } from '@/lib/types'
-import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import { ShareModalContent } from '@/components/misc/interact/ShareButton'
-import { DialogContent } from '@radix-ui/react-dialog'
 import Link from 'next/link'
 
 const TriggerComponent = (): ReactNode => {
@@ -42,28 +39,16 @@ export const DropdownItems = ({
   return (
     <div className="flex flex-col justify-start">
       <DropdownMenuItem>
-        <Button variant={'ghost'} className="space-x-2">
-          <Share2 className="=text-muted-foreground" />
-          <p className="">Share</p>
-        </Button>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        <Button variant={'ghost'} className="space-x-2">
-          <Download />
-          <p>Download</p>
-        </Button>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        <Button variant={'ghost'}>
-          <Link
-            className="flex flex-row justify-center items-center space-x-2"
-            href={`/studio/${organizationSlug}/library/${
-              session._id as string
-            }`}>
+        <Link
+          className="flex flex-row justify-center items-center space-x-2"
+          href={`/studio/${organizationSlug}/library/${
+            session._id as string
+          }`}>
+          <Button variant={'ghost'}>
             <FilePenLine className="text-muted-foreground" />
             <p className="">Edit</p>
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </DropdownMenuItem>
       <DropdownMenuItem>
         <Button
@@ -73,13 +58,6 @@ export const DropdownItems = ({
           <Copy />
           <p>Copy IPFS Hash</p>
         </Button>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        <DeleteAsset
-          session={session}
-          href={`/studio/${organizationSlug}/library`}
-          TriggerComponent={TriggerComponent()}
-        />
       </DropdownMenuItem>
     </div>
   )
