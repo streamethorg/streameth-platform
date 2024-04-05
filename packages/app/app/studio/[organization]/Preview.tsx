@@ -33,11 +33,13 @@ const Preview = ({
   useEffect(() => {
     if (status?.phase === 'processing') {
       const interval = setInterval(() => {
-        handleTermChange([{ key: 'poll', value: new Date().getTime().toString() }])
+        handleTermChange([
+          { key: 'poll', value: new Date().getTime().toString() },
+        ])
       }, 10000)
       return () => clearInterval(interval)
     }
-  }, [status?.phase,  handleTermChange])
+  }, [status?.phase, handleTermChange])
 
   const handleClose = () => {
     if (isOpen) {
@@ -66,10 +68,11 @@ const Preview = ({
         <div className="p-4 space-y-2 ">
           {status?.phase === 'processing' ? (
             <div className="bg-background p-4 rounded-lg flex flex-col items-center justify-center text-black aspect-video">
-              <p className="">
-                Video is processing
+              <p className="">Video is processing</p>
+              <p>
+                {(Number(status?.progress?.toFixed(2)) ?? 0) * 100}%
+                complete
               </p>
-              <p>{(Number(status?.progress?.toFixed(2)) ?? 0) * 100}% complete</p>
             </div>
           ) : (
             <Player

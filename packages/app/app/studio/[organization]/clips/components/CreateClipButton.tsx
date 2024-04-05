@@ -90,7 +90,7 @@ const CreateClipButton = ({
       </div>
       <Button
         disabled={
-          isLoading || !selectedRecording || !startTime || !endTime
+          isLoading || !selectedRecording || !startTime || !endTime || !name
         }
         onClick={handleCreateClip}
         variant="primary"

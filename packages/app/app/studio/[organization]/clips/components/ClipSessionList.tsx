@@ -7,7 +7,7 @@ const ClipsSessionList = ({
   sessions,
   event,
 }: {
-  event: IExtendedEvent
+  event?: IExtendedEvent
   sessions: IExtendedSession[]
 }) => {
   const { handleTermChange } = useSearchParams()
