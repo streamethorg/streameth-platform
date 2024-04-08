@@ -15,6 +15,12 @@ import GridLayout from './components/GridLayout'
 import { eLayout, eSort } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
+import { fetchAllStates } from '@/lib/services/stateService'
+import {
+  StateStatus,
+  StateType,
+} from 'streameth-new-server/src/interfaces/state.interface'
+import { stat } from 'fs/promises'
 
 const Library = async ({
   params,
@@ -64,6 +70,12 @@ const Library = async ({
           return a.name.localeCompare(b.name)
       }
     })
+
+  const states = await fetchAllStates({
+    type: StateType.video,
+    status: StateStatus.pending,
+  })
+  console.log(states)
 
   if (searchParams.layout === eLayout.list) {
     return (

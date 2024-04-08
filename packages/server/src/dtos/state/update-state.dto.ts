@@ -7,6 +7,10 @@ export class UpdateStateDto {
   @IsString()
   eventId?: string | Types.ObjectId;
 
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string | Types.ObjectId;
+
   @IsOptional()
   @IsString()
   sessionId?: string | Types.ObjectId;
@@ -19,13 +23,13 @@ export class UpdateStateDto {
   @IsString()
   sessionSlug?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  sheetType: SheetType;
+  sheetType?: SheetType;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  StateStatus: StateStatus;
+  status?: StateStatus;
 
   @IsOptional()
   @IsString()
