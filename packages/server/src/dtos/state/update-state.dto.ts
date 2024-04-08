@@ -7,9 +7,9 @@ export class UpdateStateDto {
   @IsString()
   eventId?: string | Types.ObjectId;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  organizationId: string | Types.ObjectId;
+  organizationId?: string | Types.ObjectId;
 
   @IsOptional()
   @IsString()
