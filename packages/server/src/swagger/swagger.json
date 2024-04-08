@@ -24,6 +24,9 @@
 					"description": {
 						"type": "string"
 					},
+					"bio": {
+						"type": "string"
+					},
 					"url": {
 						"type": "string"
 					},
@@ -182,6 +185,73 @@
 							"$ref": "#/components/schemas/ISupport"
 						},
 						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__url-string--assetId-string__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"assetId": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"assetId",
+							"url"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_any_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_string_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -531,6 +601,10 @@
 					},
 					"thumbnail": {
 						"type": "string"
+					},
+					"streamDate": {
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
@@ -604,6 +678,10 @@
 					},
 					"thumbnail": {
 						"type": "string"
+					},
+					"streamDate": {
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
@@ -644,6 +722,9 @@
 						"type": "string"
 					},
 					"slug": {
+						"type": "string"
+					},
+					"streamDate": {
 						"type": "string"
 					}
 				},
@@ -939,6 +1020,14 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"SessionType": {
+				"enum": [
+					"clip",
+					"livestream",
+					"video"
+				],
+				"type": "string"
+			},
 			"ISession": {
 				"properties": {
 					"_id": {
@@ -1042,6 +1131,12 @@
 					"ipfsURI": {
 						"type": "string"
 					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
 					"createdAt": {
 						"type": "string"
 					}
@@ -1051,9 +1146,8 @@
 					"description",
 					"start",
 					"end",
-					"stageId",
-					"speakers",
-					"organizationId"
+					"organizationId",
+					"type"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1177,6 +1271,12 @@
 					"ipfsURI": {
 						"type": "string"
 					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
 					"createdAt": {
 						"type": "string"
 					}
@@ -1187,8 +1287,7 @@
 					"description",
 					"start",
 					"end",
-					"stageId",
-					"speakers"
+					"type"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -1272,6 +1371,12 @@
 					"ipfsURI": {
 						"type": "string"
 					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
 					"createdAt": {
 						"type": "string"
 					},
@@ -1288,27 +1393,8 @@
 					"description",
 					"start",
 					"end",
-					"stageId",
+					"type",
 					"speakers"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_string_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"status",
-					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1382,6 +1468,18 @@
 					},
 					"assetId": {
 						"type": "string"
+					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
+					"nftURI": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1389,9 +1487,9 @@
 					"description",
 					"start",
 					"end",
-					"stageId",
 					"speakers",
-					"organizationId"
+					"organizationId",
+					"type"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1473,6 +1571,9 @@
 					"name": {
 						"type": "string"
 					},
+					"bio": {
+						"type": "string"
+					},
 					"slug": {
 						"type": "string"
 					},
@@ -1513,6 +1614,9 @@
 			"CreateOrganizationDto": {
 				"properties": {
 					"name": {
+						"type": "string"
+					},
+					"bio": {
 						"type": "string"
 					},
 					"slug": {
@@ -2385,6 +2489,98 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/streams/asset": {
+			"post": {
+				"operationId": "CreateAsset",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__url-string--assetId-string__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/streams/{streamId}": {
+			"get": {
+				"operationId": "GetStream",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "streamId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/streams/asset/{assetId}": {
+			"get": {
+				"operationId": "GetVideoUrl",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "assetId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/states": {
@@ -3458,7 +3654,7 @@
 				"parameters": [
 					{
 						"in": "header",
-						"name": "Livepeer-Signature",
+						"name": "livepeer-signature",
 						"required": true,
 						"schema": {
 							"type": "string"

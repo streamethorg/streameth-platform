@@ -24,7 +24,7 @@ const Livestreams = async ({ params }: LivestreamPageParams) => {
   })
 
   return (
-    <div className="flex flex-col justify-center bg-white">
+    <div className="flex flex-col bg-white h-full">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/livestreamBg.png)`,

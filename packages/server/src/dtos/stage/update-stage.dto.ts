@@ -43,4 +43,8 @@ export class UpdateStageDto {
   organizationId: string;
 
   slug?: string;
+
+  @IsOptional()
+  @IsString()
+  streamDate?: string;
 }

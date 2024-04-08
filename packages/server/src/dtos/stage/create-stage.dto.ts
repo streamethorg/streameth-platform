@@ -29,4 +29,8 @@ export class CreateStageDto implements IStage {
   organizationId: string;
 
   slug?: string;
+
+  @IsOptional()
+  @IsString()
+  streamDate?: Date;
 }

@@ -26,7 +26,7 @@ const TimePicker = ({
           <span className="text-muted-foreground">select time</span>
         )}
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="z-[99999999999999]">
         {generateTimeOptions(30).map((time) => (
           <SelectItem key={time} value={time}>
             {time}
@@ -45,7 +45,7 @@ function generateTimeOptions(interval: number) {
     for (let minute = 0; minute < 60; minute += interval) {
       const timeString = `${hour.toString().padStart(2, '0')}:${minute
         .toString()
-        .padStart(2, '0')} ${hour < 12 ? 'AM' : 'PM'}`
+        .padStart(2, '0')}`
       times.push(timeString)
     }
   }
