@@ -96,10 +96,10 @@ export default function ImageUpload({
           </AspectRatio>
         </div>
       ) : (
-        <>
-          <Label
+        <AspectRatio ratio={aspectRatio} className="relative">
+          <Label 
             htmlFor={id}
-            className={`${className} flex justify-center flex-col items-center`}>
+            className={`${className} flex justify-center flex-col items-center border border-dotted h-full rounded-xl bg-secondary`}>
             <div className="p-2 text-white rounded-full bg-neutral-400">
               <ImageLogo />
             </div>
@@ -120,7 +120,7 @@ export default function ImageUpload({
               onSubmit(files[0])
             }}
           />
-        </>
+        </AspectRatio>
       )}
     </>
   )

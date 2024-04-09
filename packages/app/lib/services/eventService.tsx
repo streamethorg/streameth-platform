@@ -101,6 +101,7 @@ export const createEvent = async ({
       body: JSON.stringify(event),
     })
     if (!response.ok) {
+      console.log('error in createEvent', await response.json())
       throw 'Error creating event'
     }
     return (await response.json()).data
