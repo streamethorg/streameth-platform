@@ -69,6 +69,8 @@ export const StageSchema = z.object({
   streamSettings: IStreamSettingsSchema.optional(),
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
+  streamDate: z.date().optional(),
+  streamTime: z.string().optional(),
   organizationId: z.string(),
 })
 

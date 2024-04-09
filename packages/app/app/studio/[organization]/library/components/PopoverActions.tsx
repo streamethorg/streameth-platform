@@ -19,6 +19,7 @@ import { IExtendedSession, eLayout } from '@/lib/types'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
 import { PopoverClose } from '@radix-ui/react-popover'
+import { toast } from 'sonner'
 
 const PopoverActions = ({
   session,
@@ -33,6 +34,7 @@ const PopoverActions = ({
 
   const handleCopy = () => {
     navigator.clipboard.writeText(session.ipfsURI!)
+    toast.success('Copied IPFS Hash to your clipboard')
   }
 
   return (

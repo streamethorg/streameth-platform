@@ -33,6 +33,7 @@ export class IStage {
   published?: boolean;
   organizationId: Types.ObjectId | string;
   thumbnail?: string;
+  streamDate?: Date | string;
 }
 
 export interface IStageModel extends Omit<IStage, '_id'>, Document {}

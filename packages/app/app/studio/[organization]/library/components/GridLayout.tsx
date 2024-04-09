@@ -36,7 +36,7 @@ const GridLayout = ({
           <div key={session._id}>
             <VideoCardWithMenu
               session={session}
-              link={`watch?event=${session.eventSlug}&session=${session._id}`}
+              link={`watch?session=${session._id}`}
               DropdownMenuItems={DropdownItems({
                 organizationSlug: organizationSlug,
                 session: session,
