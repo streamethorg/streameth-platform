@@ -37,7 +37,7 @@ const StreamHeader = ({
           </Link>
         )}
         <ShareButton
-          url={`${url}/${organization}?streamId=${stream.streamSettings?.streamId}`}
+          url={`${url}/${organization}?streamId=${stream._id}`}
           shareFor="livestream"
         />
       </div>
