@@ -603,8 +603,15 @@
 						"type": "string"
 					},
 					"streamDate": {
-						"type": "string",
-						"format": "date-time"
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
 					}
 				},
 				"required": [

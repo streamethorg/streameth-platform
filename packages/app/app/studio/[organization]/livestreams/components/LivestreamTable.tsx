@@ -14,6 +14,7 @@ import DeleteLivestream from './DeleteLivestream'
 
 import ShareLivestream from './ShareLivestream'
 import ToggleLivestreamVisibility from './ToggleLivestreamVisibility'
+import TableSort from '@/components/misc/TableSort'
 
 const LivestreamTable = ({
   streams,
@@ -27,8 +28,12 @@ const LivestreamTable = ({
       <Table className="bg-white">
         <TableHeader className="sticky top-0 bg-white z-50">
           <TableRow className="hover:bg-white">
-            <TableHead>Title</TableHead>
-            <TableHead>Date</TableHead>
+            <TableHead>
+              <TableSort title="Title" sortBy="name" />
+            </TableHead>
+            <TableHead>
+              <TableSort title="Date" sortBy="date" />
+            </TableHead>
             <TableHead>Visibility</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>

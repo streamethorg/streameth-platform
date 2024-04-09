@@ -12,9 +12,10 @@ import {
 } from '@/components/ui/card'
 import UploadVideoDialog from './components/UploadVideoDialog'
 import GridLayout from './components/GridLayout'
-import { eLayout, eSort } from '@/lib/types'
+import { IExtendedSession, eLayout, eSort } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
+import { sortArray } from '@/lib/utils/utils'
 
 const Library = async ({
   params,
@@ -42,29 +43,9 @@ const Library = async ({
       organizationSlug: params.organization,
       onlyVideos: true,
     })
-  ).sessions
-    .filter((session) => session.videoUrl)
-    .sort((a, b) => {
-      switch (searchParams.sort) {
-        case eSort.asc_alpha:
-          return a.name.localeCompare(b.name)
-        case eSort.desc_alpha:
-          return b.name.localeCompare(a.name)
-        case eSort.asc_date:
-          return (
-            new Date(a.createdAt!).getTime() -
-            new Date(b.createdAt!).getTime()
-          )
-        case eSort.desc_date:
-          return (
-            new Date(b.createdAt!).getTime() -
-            new Date(a.createdAt!).getTime()
-          )
-        default:
-          return a.name.localeCompare(b.name)
-      }
-    })
+  ).sessions.filter((session) => session.videoUrl)
 
+  const sortedSessions = sortArray(sessions, searchParams.sort)
   if (searchParams.layout === eLayout.list) {
     return (
       <div className="flex flex-col w-full h-full bg-white">
@@ -82,7 +63,7 @@ const Library = async ({
           </CardFooter>
         </Card>
         <ListLayout
-          sessions={sessions}
+          sessions={sortedSessions as IExtendedSession[]}
           organizationId={organization._id.toString()}
           organizationSlug={params.organization}
         />
@@ -105,7 +86,7 @@ const Library = async ({
           </CardFooter>
         </Card>
         <GridLayout
-          sessions={sessions}
+          sessions={sortedSessions as IExtendedSession[]}
           organizationId={organization._id.toString()}
           organizationSlug={params.organization}
         />

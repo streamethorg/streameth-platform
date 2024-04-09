@@ -285,7 +285,7 @@ const models: TsoaRoute.Models = {
             "published": {"dataType":"boolean"},
             "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
             "thumbnail": {"dataType":"string"},
-            "streamDate": {"dataType":"datetime"},
+            "streamDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
         },
         "additionalProperties": false,
     },

@@ -8,20 +8,27 @@ import {
 import React from 'react'
 import CreateLivestreamModal from './components/CreateLivestreamModal'
 import { fetchOrganization } from '@/lib/services/organizationService'
-import { LivestreamPageParams } from '@/lib/types'
+import { LivestreamPageParams, eSort } from '@/lib/types'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import LivestreamTable from './components/LivestreamTable'
 import Image from 'next/image'
+import { sortArray } from '@/lib/utils/utils'
 
-const Livestreams = async ({ params }: LivestreamPageParams) => {
+const Livestreams = async ({
+  params,
+  searchParams,
+}: LivestreamPageParams) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
 
   if (!organization) return null
-  const stages = await fetchOrganizationStages({
-    organizationId: organization._id,
-  })
+  const stages = sortArray(
+    await fetchOrganizationStages({
+      organizationId: organization._id,
+    }),
+    searchParams.sort
+  )
 
   return (
     <div className="flex flex-col bg-white h-full">

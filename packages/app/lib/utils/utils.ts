@@ -4,8 +4,10 @@ import {
   IExtendedEvent,
   IExtendedOrganization,
   IExtendedSession,
+  IExtendedStage,
   IGenerateEmbed,
   IGenerateEmbedCode,
+  eSort,
 } from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
@@ -260,4 +262,34 @@ export const generateEmbedCode = ({
     streamId,
     playerName,
   })}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+}
+
+export const sortArray = (
+  stages: IExtendedStage[] | IExtendedSession[],
+  sortBy: string
+) => {
+  return stages.sort((a, b) => {
+    if (sortBy) {
+      switch (sortBy) {
+        case eSort.asc_alpha:
+          return a.name.localeCompare(b.name)
+        case eSort.desc_alpha:
+          return b.name.localeCompare(a.name)
+        case eSort.asc_date:
+          return (
+            new Date(a.createdAt!).getTime() -
+            new Date(b.createdAt!).getTime()
+          )
+        case eSort.desc_date:
+          return (
+            new Date(b.createdAt!).getTime() -
+            new Date(a.createdAt!).getTime()
+          )
+        default:
+          return 0
+      }
+    } else {
+      return 0
+    }
+  })
 }
