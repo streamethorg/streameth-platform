@@ -29,7 +29,9 @@ export default function DatePicker({
           <CalendarSearch size={17} className="ml-auto opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 w-auto" align="start">
+      <PopoverContent
+        className="p-0 w-auto z-[99999999999999]"
+        align="start">
         <Calendar
           mode="single"
           selected={new Date(value)}

@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/card'
 import UploadVideoDialog from './components/UploadVideoDialog'
 import GridLayout from './components/GridLayout'
-import { eLayout, eSort } from '@/lib/types'
 import { fetchAllStates } from '@/lib/services/stateService'
 import {
   StateStatus,
@@ -22,8 +21,10 @@ import { Suspense } from 'react'
 import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
 import TableSkeleton from '@/components/misc/Table/TableSkeleton'
 import EmptyLibrary from './components/EmptyLibrary'
+import { IExtendedSession, eLayout, eSort } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
+import { sortArray } from '@/lib/utils/utils'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -69,33 +70,16 @@ const Library = async ({
       organizationSlug: params.organization,
       onlyVideos: true,
     })
-  ).sessions
-    .filter((session) => session.videoUrl)
-    .sort((a, b) => {
-      switch (searchParams.sort) {
-        case eSort.asc_alpha:
-          return a.name.localeCompare(b.name)
-        case eSort.desc_alpha:
-          return b.name.localeCompare(a.name)
-        case eSort.asc_date:
-          return (
-            new Date(a.createdAt!).getTime() -
-            new Date(b.createdAt!).getTime()
-          )
-        case eSort.desc_date:
-          return (
-            new Date(b.createdAt!).getTime() -
-            new Date(a.createdAt!).getTime()
-          )
-        default:
-          return a.name.localeCompare(b.name)
-      }
-    })
+  ).sessions.filter((session) => session.videoUrl)
 
   const states = await fetchAllStates({
     type: StateType.video,
     status: StateStatus.pending,
   })
+  const sortedSessions = sortArray(
+    sessions,
+    searchParams.sort
+  ) as unknown as IExtendedSession[]
 
   return (
     <div className="flex flex-col w-full h-full bg-white">
@@ -118,13 +102,13 @@ const Library = async ({
         <>
           {eLayout.list === searchParams.layout && (
             <ListLayout
-              sessions={sessions}
+              sessions={sortedSessions}
               organizationSlug={params.organization}
             />
           )}
           {eLayout.grid === searchParams.layout && (
             <GridLayout
-              sessions={sessions}
+              sessions={sortedSessions}
               organizationSlug={params.organization}
             />
           )}

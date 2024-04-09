@@ -23,6 +23,7 @@ export const StageSchema = new Schema<IStageModel>(
     order: { type: Number, default: 0 },
     published: { type: Boolean, default: false },
     slug: { type: String, default: '', index: true },
+    streamDate: { type: Date, default: Date.now() },
   },
   {
     timestamps: true,
