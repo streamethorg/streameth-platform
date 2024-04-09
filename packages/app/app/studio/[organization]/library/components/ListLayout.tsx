@@ -10,29 +10,18 @@ import {
 import TableCells from './TableCells'
 import { ChevronsUpDown } from 'lucide-react'
 import { IExtendedSession, eSort } from '@/lib/types'
-import EmptyLibrary from './EmptyLibrary'
 import LayoutSelection from './LayoutSelection'
 import useSearchParams from '@/lib/hooks/useSearchParams'
+
 const ListLayout = ({
   sessions,
-  organizationId,
   organizationSlug,
 }: {
   sessions: IExtendedSession[]
-  organizationId: string
   organizationSlug: string
 }) => {
   const { searchParams, handleTermChange } = useSearchParams()
   const currentSort = searchParams.get('sort') as eSort
-
-  if (!sessions || sessions.length === 0) {
-    return (
-      <EmptyLibrary
-        organizationId={organizationId}
-        organizationSlug={organizationSlug}
-      />
-    )
-  }
 
   return (
     <Table className="bg-white">

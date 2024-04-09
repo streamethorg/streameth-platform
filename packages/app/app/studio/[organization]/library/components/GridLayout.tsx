@@ -9,22 +9,11 @@ import { DropdownItems } from './misc/DropdownGrid'
 
 const GridLayout = ({
   sessions,
-  organizationId,
   organizationSlug,
 }: {
   sessions: IExtendedSession[]
-  organizationId: string
   organizationSlug: string
 }) => {
-  if (!sessions || sessions.length === 0) {
-    return (
-      <EmptyLibrary
-        organizationId={organizationId}
-        organizationSlug={organizationSlug}
-      />
-    )
-  }
-
   return (
     <>
       <div className="py-2 px-4 space-y-2">
