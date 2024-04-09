@@ -67,8 +67,8 @@ export class EventController extends Controller {
   @SuccessResponse('200')
   @Get()
   async getAllEvents(
-    @Query() organizationId: string,
-    @Query() unlisted: boolean,
+    @Query() organizationId?: string,
+    @Query() unlisted?: boolean,
   ): Promise<IStandardResponse<Array<IEvent>>> {
     const query = {
       organizationId: organizationId,

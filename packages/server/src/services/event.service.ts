@@ -58,7 +58,7 @@ export default class EventService {
       filter = { ...filter, organizationId: d.organizationId };
     }
     return await this.controller.store.findAll(
-      { ...filter, unlisted: d.unlisted },
+      { ...filter, unlisted: d.unlisted ?? false },
       this.path,
     );
   }
