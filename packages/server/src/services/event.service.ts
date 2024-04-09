@@ -49,16 +49,20 @@ export default class EventService {
     return findEvent;
   }
 
-  async getAll(): Promise<Array<IEvent>> {
-    return await this.controller.store.findAll({ unlisted: false }, this.path);
-  }
-
-  async findAllOwnedEvents(organizationId: string): Promise<Array<IEvent>> {
+  async getAll(d: {
+    organizationId: string;
+    unlisted: boolean;
+  }): Promise<Array<IEvent>> {
+    let filter = {};
+    if (d.organizationId != undefined) {
+      filter = { ...filter, organizationId: d.organizationId };
+    }
     return await this.controller.store.findAll(
-      { organizationId: organizationId, unlisted: false },
-      `${this.path}/${organizationId}`,
+      { ...filter, unlisted: d.unlisted ?? false },
+      this.path,
     );
   }
+
   async deleteOne(eventId: string): Promise<void> {
     await this.get(eventId);
     return await this.controller.store.delete(eventId);
