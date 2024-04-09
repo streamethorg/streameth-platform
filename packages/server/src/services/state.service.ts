@@ -46,7 +46,7 @@ export default class StateService {
       filter = { ...filter, eventId: event?._id };
     }
     if (d.sessionId != undefined) {
-      let session = await Session.findOne({ slug: d.sessionId });
+      let session = await Session.findOne({ _id: d.sessionId });
       filter = { ...filter, sessionId: session?._id };
     }
     if (d.eventSlug != undefined) {
