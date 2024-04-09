@@ -191,15 +191,7 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-white md:hidden lg:flex z-[99] ">
-      {organizations && (
-        <div className="m-1 mr-2">
-          <SwitchOrganization
-            organization={currentOrganization}
-            organizations={organizations}
-          />
-        </div>
-      )}
+    <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row items-center p-2 w-full bg-white md:hidden lg:flex">    
       {showLogo && (
         <Link href="/">
           <Image
@@ -214,7 +206,12 @@ const PCNavBar = ({
       <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
       </div>
-      <Support />
+      {organizations && (
+        <SwitchOrganization
+          organization={currentOrganization}
+          organizations={organizations}
+        />
+      )}
       <Navbar
         pages={getPages(
           pages,
