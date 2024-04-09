@@ -62,7 +62,7 @@ const TableCells = ({
   return (
     <>
       <TableCell className="relative font-medium">
-        <div className="flex flex-row items-center space-x-4 w-full">
+        <div className="flex flex-row items-center space-x-4 w-full ">
           <div className="min-w-[100px]">
             <AspectRatio ratio={16 / 9}>
               {item.coverImage ? (
@@ -81,7 +81,7 @@ const TableCells = ({
           </div>
 
           <Link href={`/watch?session=${item._id}`}>
-            <span className="hover:underline truncate">
+            <span className="hover:underline line-clamp-3">
               {item.name}
             </span>
           </Link>

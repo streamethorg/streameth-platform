@@ -13,6 +13,8 @@ import React from 'react'
 import DeleteLivestream from './DeleteLivestream'
 
 import ShareLivestream from './ShareLivestream'
+import ToggleLivestreamVisibility from './ToggleLivestreamVisibility'
+import TableSort from '@/components/misc/TableSort'
 
 const LivestreamTable = ({
   streams,
@@ -26,8 +28,13 @@ const LivestreamTable = ({
       <Table className="bg-white">
         <TableHeader className="sticky top-0 bg-white z-50">
           <TableRow className="hover:bg-white">
-            <TableHead>Title</TableHead>
-            <TableHead>Date</TableHead>
+            <TableHead>
+              <TableSort title="Title" sortBy="name" />
+            </TableHead>
+            <TableHead>
+              <TableSort title="Date" sortBy="date" />
+            </TableHead>
+            <TableHead>Visibility</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -45,12 +52,28 @@ const LivestreamTable = ({
               </TableCell>
 
               <TableCell>
-                {formatDate(
-                  new Date(stream?.createdAt as string),
-                  'ddd. MMMM. D, YYYY'
+                {stream.streamDate ? (
+                  <p>
+                    {formatDate(
+                      new Date(stream?.streamDate),
+                      'ddd. MMMM. D, YYYY'
+                    )}{' '}
+                    {new Date(stream.streamDate) > new Date() && (
+                      <span className="block text-sm text-muted-foreground">
+                        Scheduled
+                      </span>
+                    )}
+                  </p>
+                ) : (
+                  formatDate(
+                    new Date(stream?.createdAt as string),
+                    'ddd. MMMM. D, YYYY'
+                  )
                 )}
               </TableCell>
-
+              <TableCell>
+                <ToggleLivestreamVisibility item={stream} />
+              </TableCell>
               <TableCell>
                 <div className="flex gap-4 items-center">
                   <ShareLivestream
