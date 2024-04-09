@@ -62,6 +62,7 @@ const Preview = ({
       })
   }
 
+
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="bg-transparent max-w-4xl w-full text-white">

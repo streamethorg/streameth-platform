@@ -230,7 +230,7 @@ const EventClips = async ({
         <div className="flex flex-col w-full h-full overflow-auto space-y-4">
           <ClipProvider>
             <ReactHlsPlayer
-              playbackId={stageRecordings.parentStream.id}
+              playbackId={stageRecordings.parentStream?.playbackId ?? ""}
               selectedStreamSession={currentRecording}
             />
             <div className="flex flex-col space-y-4">
