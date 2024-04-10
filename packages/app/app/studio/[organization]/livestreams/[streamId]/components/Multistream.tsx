@@ -56,17 +56,12 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
               <TableBody className="overflow-scroll ">
                 {streamTargets?.map((target) => (
                   <TableRow key={target.id} className="">
-                    {target.id &&
-                      getMultistreamTarget({
-                        targetId: target.id,
-                      }).then((data) => {
-                        return (
                           <>
                             <TableCell className="font-medium">
-                              {data?.name}
+                              {target?.name}
                             </TableCell>
                             <TableCell className="font-medium">
-                              {target?.profile}
+                              source
                             </TableCell>
                             <TableCell className="font-medium"></TableCell>
                             <TableCell className="font-medium flex justify-end">
@@ -78,8 +73,6 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
                               />
                             </TableCell>
                           </>
-                        )
-                      })}
                   </TableRow>
                 ))}
               </TableBody>
