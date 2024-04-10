@@ -92,7 +92,11 @@ const ChannelPlayer = ({
               playerName={libraryVideo?.name ?? activeStream?.name}
               vod={libraryVideo ? true : false}
             />
-            <ShareButton className="bg-white" />
+            <ShareButton
+              shareFor={libraryVideo ? 'video' : 'livestream'}
+              title={`Share ${libraryVideo ? 'video' : 'livestream'}`}
+              className="bg-white"
+            />
             {libraryVideo?.assetId && (
               <VideoDownload
                 assetId={libraryVideo.assetId as string}

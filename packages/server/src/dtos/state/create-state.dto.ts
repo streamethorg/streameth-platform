@@ -12,6 +12,10 @@ export class CreateStateDto implements IState {
   @IsString()
   eventId?: string | Types.ObjectId;
 
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string | Types.ObjectId;
+
   @IsOptional()
   @IsString()
   sessionId?: string | Types.ObjectId;
@@ -24,15 +28,15 @@ export class CreateStateDto implements IState {
   @IsString()
   sessionSlug?: string;
 
-  @IsNotEmpty()
-  @IsString()
-  sheetType: SheetType;
-
-  @IsNotEmpty()
-  @IsString()
-  StateStatus: StateStatus;
-
   @IsOptional()
+  @IsString()
+  sheetType?: SheetType;
+
+  @IsNotEmpty()
+  @IsString()
+  status?: StateStatus;
+
+  @IsNotEmpty()
   @IsString()
   type?: StateType;
 }

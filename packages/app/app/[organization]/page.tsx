@@ -8,7 +8,10 @@ import Footer from '@/components/Layout/Footer'
 import { fetchSession } from '@/lib/services/sessionService'
 
 import ChannelPlayer from './components/ChannelPlayer'
-import { fetchOrganizationStages } from '@/lib/services/stageService'
+import {
+  fetchOrganizationStages,
+  fetchStage,
+} from '@/lib/services/stageService'
 import { fetchAllSessions } from '@/lib/data'
 
 const pages = [
@@ -44,7 +47,11 @@ export default async function OrganizationHome({
   }
 
   const libraryVideo = await fetchSession({
-    session: searchParams.playbackId,
+    session: searchParams.id,
+  })
+
+  const playbackLivestream = await fetchStage({
+    stage: searchParams.streamId,
   })
 
   const searchVideos = (
@@ -63,7 +70,9 @@ export default async function OrganizationHome({
   const activeStream = allStreams?.filter(
     (stream) => stream?.streamSettings?.isActive
   )
-  const playerActive = !!libraryVideo || !!activeStream[0]
+
+  const playerActive =
+    !!libraryVideo || !!playbackLivestream || !!activeStream[0]
 
   return (
     <div className="mx-auto w-full max-w-5xl">
@@ -72,7 +81,7 @@ export default async function OrganizationHome({
         <ChannelPlayer
           libraryVideo={libraryVideo}
           organization={organization}
-          activeStream={activeStream[0]}
+          activeStream={playbackLivestream ?? activeStream[0]}
         />
       )}
       <div className="flex flex-col overflow-auto p-0 lg:p-4">

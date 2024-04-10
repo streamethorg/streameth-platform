@@ -54,7 +54,9 @@ const ToggleLivestreamVisibility = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem
-            className="space-x-2 cursor-pointer pointer-events-none"
+            className={`space-x-2 cursor-pointer ${
+              isLoading ? 'pointer-events-none' : ''
+            }`}
             onClick={handleToggleVisibility}>
             {!item.published ? (
               <>

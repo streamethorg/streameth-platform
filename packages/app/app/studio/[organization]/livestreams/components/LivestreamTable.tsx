@@ -15,6 +15,8 @@ import DeleteLivestream from './DeleteLivestream'
 import ShareLivestream from './ShareLivestream'
 import ToggleLivestreamVisibility from './ToggleLivestreamVisibility'
 import TableSort from '@/components/misc/TableSort'
+import { Button } from '@/components/ui/button'
+import { Paperclip } from 'lucide-react'
 
 const LivestreamTable = ({
   streams,
@@ -75,7 +77,16 @@ const LivestreamTable = ({
                 <ToggleLivestreamVisibility item={stream} />
               </TableCell>
               <TableCell>
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-3 items-center">
+                  <Link
+                    href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
+                    <Button
+                      variant="outline"
+                      className="flex items-center gap-1">
+                      <Paperclip className="w-4 h-4" />
+                      Clip
+                    </Button>
+                  </Link>
                   <ShareLivestream
                     organization={organizationSlug}
                     streamId={stream._id}
