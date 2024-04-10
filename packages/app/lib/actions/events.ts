@@ -11,7 +11,7 @@ import { IExtendedEvent } from '../types'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 import { revalidatePath } from 'next/cache'
 import GoogleSheetService from '@/lib/services/googleSheetService'
-
+import GoogleDriveService from '@/lib/services/googleDriveService'
 export const createEventAction = async ({
   event,
 }: {
@@ -145,4 +145,30 @@ export const syncEventImportAction = async ({
   }
   revalidatePath('/studio')
   return response
+}
+
+export const createGoogleSheetAction = async ({
+  eventName,
+}: {
+  eventName: string
+}) => {
+  const templateSheetId =
+    '1VaukqmViY09M_xuXT3GkaY6sAet5KeKZmjMuhT_C-kc'
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+
+  const googleDriveService = new GoogleDriveService()
+  const sheetId = await googleDriveService.copyFile(
+    templateSheetId,
+    eventName
+  )
+
+  if (!sheetId) {
+    throw new Error('Error creating Google Sheet')
+  }
+
+  return sheetId
 }

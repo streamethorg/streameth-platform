@@ -51,7 +51,10 @@ export default function ImageUpload({
     setIsUploading(true)
     try {
       const data = new FormData()
+      file.name.replace(/[^a-zA-Z0-9.]/g, '_')
+
       data.set('file', file)
+
       data.set('path', path)
       const res = await fetch('/api/upload', {
         method: 'POST',
@@ -86,20 +89,21 @@ export default function ImageUpload({
               setPreview('')
             }}
           />
-          <AspectRatio ratio={aspectRatio} className="relative">
+          <div
+            className={`${className} relative flex justify-center flex-col items-center border border-dotted bg-secondary`}>
             <Image
               src={preview ?? value}
               className="z-10"
               alt="preview"
               fill
             />
-          </AspectRatio>
+          </div>
         </div>
       ) : (
         <>
           <Label
             htmlFor={id}
-            className={`${className} flex justify-center flex-col items-center`}>
+            className={`${className} flex justify-center flex-col items-center border border-dotted bg-secondary`}>
             <div className="p-2 text-white rounded-full bg-neutral-400">
               <ImageLogo />
             </div>

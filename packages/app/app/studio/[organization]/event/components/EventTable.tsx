@@ -9,6 +9,7 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
+import { Trash2 } from 'lucide-react'
 import {
   Card,
   CardDescription,
@@ -18,6 +19,8 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { IExtendedEvent } from '@/lib/types'
+import DeleteEvent from './DeleteEvent'
+
 const EventTable = async ({
   organization,
   events,
@@ -37,7 +40,9 @@ const EventTable = async ({
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <Button variant={'primary'}>Create Event</Button>
+          <Link href={`/studio/${organization}/event/create`}>
+            <Button variant={'primary'}>Create Event</Button>
+          </Link>
         </CardFooter>
       </Card>
       <Table className="bg-white">
@@ -90,17 +95,18 @@ const EventTable = async ({
                 <Button variant={'outline'}>
                   <Link
                     className="flex flex-row events-center space-x-2 justify-center"
-                    href={`/watch?session=${event._id}`}>
+                    href={`/${event.organizationId}/${event.slug}`}>
                     <Eye className="text-muted-foreground" />
                     <p className="">View</p>
                   </Link>
                 </Button>
                 <Button variant={'outline'}>
-                  <Link
-                    className="flex flex-row events-center space-x-2 justify-center"
-                    href={`/watch?session=${event._id}`}>
-                    <TrashIcon className=" text-red-600" />
-                  </Link>
+                  <DeleteEvent
+                    event={event}
+                    TriggerComponent={
+                      <Trash2 className="text-destructive w-5 h-5" />
+                    }
+                  />
                 </Button>
               </TableCell>
             </TableRow>

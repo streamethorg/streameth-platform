@@ -82,6 +82,7 @@ export interface studioPageParams {
     stage: string
     stageSetting: string
     streamId: string
+    collapsed?: boolean
   }
 }
 
