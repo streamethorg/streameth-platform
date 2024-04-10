@@ -31,7 +31,7 @@ export async function fetchEvents({
         return []
       }
       const response = await fetch(
-        `${apiUrl()}/events?organizationId=${organization._id}&unlisted=${unlisted}`,
+        `${apiUrl()}/events?organizationId=${organization._id}`,
         { cache: 'no-store' }
       )
       data = (await response.json()).data ?? []

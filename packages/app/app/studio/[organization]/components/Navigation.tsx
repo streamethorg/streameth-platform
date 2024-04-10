@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils/utils'
 import { Accordion } from '@/components/ui/accordion'
 import Logo from '@/public/studio_logo.png'
+import LogoCollapsed from '@/public/logo.png'
 import NavigationItem from './NavigationItem'
 import { Radio, Videotape, Settings, Home, CalendarDays, ScissorsLineDashed } from 'lucide-react'
 import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
@@ -63,14 +64,13 @@ const Navigation = ({
         }
       )}
       style={{
-        transition: 'max-width 0.3s ease-in-out',
+        transition: 'max-width 0.3s ease-out-in',
       }}>
       <Image
-        className="p-4 h-[56px]"
-        src={Logo}
+        className="p-2 h-[56px]"
+        src={isCollapsed ? LogoCollapsed : Logo}
         alt="Logo"
-        width={160}
-        height={80}
+        width={180}
       />
 
       <Accordion type="single" className="space-y-4" collapsible>
