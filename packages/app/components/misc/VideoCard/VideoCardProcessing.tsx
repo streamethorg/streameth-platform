@@ -7,7 +7,7 @@ import {
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { EllipsisVertical, Loader2 } from 'lucide-react'
 
 const VideoCardProcessing = ({

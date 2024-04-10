@@ -73,9 +73,10 @@ const TableCells = ({
               {item.coverImage ? (
                 <Image
                   src={item.coverImage}
+                  style={{ objectFit: 'contain' }}
                   fill
                   alt="Thumbnail Image"
-                  quality={50}
+                  quality={40}
                 />
               ) : (
                 <div className="flex justify-center items-center w-full h-full">
