@@ -122,7 +122,7 @@ const EditSessionFrom = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageDropzone
-                  path={`session/${generateId(
+                  path={`sessions/${generateId(
                     form.getValues('name')
                   )}`}
                   {...field}
