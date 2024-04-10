@@ -47,6 +47,7 @@ const CookieBanner = () => {
 
   if (cookie) return null
 
+  return null
   return (
     <Alert
       className={`lg:w-[35%] w-full transition-opacity duration-800 ${
