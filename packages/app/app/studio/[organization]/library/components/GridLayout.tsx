@@ -2,10 +2,10 @@
 
 import { IExtendedSession } from '@/lib/types'
 import { Separator } from '@/components/ui/separator'
-import EmptyLibrary from './EmptyLibrary'
 import LayoutSelection from './LayoutSelection'
 import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
 import { DropdownItems } from './misc/DropdownGrid'
+import VideoCardProcessing from '@/components/misc/VideoCard/VideoCardProcessing'
 
 const GridLayout = ({
   sessions,
@@ -23,14 +23,18 @@ const GridLayout = ({
       <div className="grid grid-cols-4 gap-4 m-5">
         {sessions.map((session) => (
           <div key={session._id}>
-            <VideoCardWithMenu
-              session={session}
-              link={`watch?session=${session._id}`}
-              DropdownMenuItems={DropdownItems({
-                organizationSlug: organizationSlug,
-                session: session,
-              })}
-            />
+            {session.videoUrl ? (
+              <VideoCardWithMenu
+                session={session}
+                link={`watch?session=${session._id}`}
+                DropdownMenuItems={DropdownItems({
+                  organizationSlug: organizationSlug,
+                  session: session,
+                })}
+              />
+            ) : (
+              <VideoCardProcessing session={session} />
+            )}
           </div>
         ))}
       </div>
