@@ -34,6 +34,7 @@ import MDEditor from '@uiw/react-md-editor'
 import { IExtendedOrganization } from '@/lib/types'
 import { useRouter } from 'next/navigation'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
+import DataConfigElement from '@/components/misc/form/dataConfigElement'
 
 export default function CreateEventForm({
   organization,
@@ -60,6 +61,7 @@ export default function CreateEventForm({
       startTime: '',
       endTime: '',
       accentColor: '',
+      dataImporter: [],
     },
   })
 
@@ -76,7 +78,9 @@ export default function CreateEventForm({
       .then((response) => {
         if (response) {
           toast.success('Event created')
-          router.push(`/studio/${organization?.slug}/event/${response._id}`)
+          router.push(
+            `/studio/${organization?.slug}/event/${response._id}`
+          )
           router.refresh()
         } else {
           toast.error('Error creating event')
@@ -92,14 +96,14 @@ export default function CreateEventForm({
 
   return (
     <Form {...form}>
-      <Card className="border max-w-4xl w-full relative rounded-2xl bg-white shadow-none">
+      <Card className="border max-w-4xl w-full relative rounded-2xl bg-white shadow-none mx-auto">
         <CardHeader className="border-b flex flex-row justify-between items-center">
           <p className="text-3xl">Create an event</p>
           <div className="flex flex-row justify-between w-full  max-w-[300px]">
             {[
               { stage: 0, name: 'Details' },
               { stage: 1, name: 'Design' },
-              { stage: 2, name: 'Design' },
+              { stage: 2, name: 'Data' },
             ].map((i, index) => (
               <div
                 className="relative w-full flex flex-col"
@@ -284,22 +288,6 @@ export default function CreateEventForm({
                   />
                 </div>
               </div>
-              <div className="items-end justify-end flex flex-row space-x-2">
-                <Button
-                  variant={'outline'}
-                  onClick={() => setStage(stage - 1)}>
-                  Back
-                </Button>
-
-                <Button
-                  variant={'primary'}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setStage(stage + 1)
-                  }}>
-                  Next
-                </Button>
-              </div>
             </div>
             <div
               id="section2"
@@ -311,55 +299,63 @@ export default function CreateEventForm({
                     }
               }
               className="space-y-4 p-4">
-              <div className="flex flex-row space-x-2">
-                <div className="flex w-1/3">
-                  <FormField
-                    control={form.control}
-                    name="logo"
-                    render={({ field }) => (
-                      <FormItem className="w-full max-w-[150px]">
-                        <FormLabel>Event Logo</FormLabel>
-                        <FormControl>
-                          <ImageUpload
-                            path={`events/${organization?.slug}`}
-                            aspectRatio={1}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="flex w-2/3 ">
-                  <FormField
-                    control={form.control}
-                    name="eventCover"
-                    render={({ field }) => (
-                      <FormItem className="w-full max-w-[320px]">
-                        <FormLabel>Event Cover</FormLabel>
-                        <FormControl>
-                          <ImageUpload
-                            path={`events/${organization?.slug}`}
-                            {...field}
-                            aspectRatio={16 / 9}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-              <div className="flex w-full">
+              <div
+                className="
+              ">
+                <p className="mb-4 text-lg">
+                  Upload event Logo and Banner
+                </p>
                 <FormField
                   control={form.control}
                   name="banner"
                   render={({ field }) => (
-                    <FormItem className="w-full max-w-[600px]">
-                      <FormLabel>Event Banner</FormLabel>
+                    <FormItem className="">
                       <FormControl>
                         <ImageUpload
+                          className="w-full h-52 rounded-xl bg-neutrals-300 "
+                          placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
+                    Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
+                          aspectRatio={16 / 9}
+                          path={`events/${organization?.slug}`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="logo"
+                  render={({ field }) => (
+                    <FormItem className="flex relative w-24 h-24 p-1 rounded-full bg-white mt-[-50px] mx-4">
+                      <FormControl>
+                        <ImageUpload
+                          className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"
+                          aspectRatio={1}
+                          path={`events/${organization?.slug}`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex w-full space-x-4">
+                <FormField
+                  control={form.control}
+                  name="eventCover"
+                  render={({ field }) => (
+                    <FormItem className="w-full max-w-[600px]">
+                      <p className="mb-2 text-lg">
+                        Upload event Logo and Banner
+                      </p>
+                      <FormControl>
+                        <ImageUpload
+                          className="rounded-xl h-40"
+                          placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
+                        Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
                           path={`events/${organization?.slug}`}
                           {...field}
                           aspectRatio={3 / 1}
@@ -369,16 +365,54 @@ export default function CreateEventForm({
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="accentColor"
+                  render={({ field }) => (
+                    <FormItem className="w-full max-w-[600px]">
+                      <p className="mb-2 text-lg">
+                        Choose accent color
+                      </p>
+                      <FormControl>
+                        <ColorPicker
+                          color={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <div
+              id="section3"
+              className="space-y-4 p-4"
+              style={
+                stage !== 2
+                  ? { display: 'none' }
+                  : {
+                      display: 'block',
+                    }
+              }>
+              <div className="flex flex-col space-y-4">
+                <p className=" text-lg font-semibold">Import event data</p>
+                <p className="max-w-[550px]">
+                  Import your event data from Pretalx or Google
+                  sheets. Add Speakers and Schedule to your even. If
+                  you dont have a data source yet, you can create a
+                  new Google Sheet using our template.
+                </p>
               </div>
               <FormField
                 control={form.control}
-                name="accentColor"
+                name="dataImporter"
                 render={({ field }) => (
                   <FormItem className="w-full max-w-[600px]">
-                    <FormLabel>Event Accent Color</FormLabel>
+                    <FormLabel>Data Provider</FormLabel>
                     <FormControl>
-                      <ColorPicker
-                        color={field.value}
+                      <DataConfigElement
+                        value={field.value}
                         onChange={field.onChange}
                       />
                     </FormControl>
@@ -386,7 +420,9 @@ export default function CreateEventForm({
                   </FormItem>
                 )}
               />
-              <div className="flex flex-row justify-end">
+            </div>
+            <div className="items-end justify-end flex flex-row space-x-2">
+              {stage !== 0 && (
                 <Button
                   variant={'outline'}
                   onClick={(e) => {
@@ -395,6 +431,18 @@ export default function CreateEventForm({
                   }}>
                   Back
                 </Button>
+              )}
+              {stage != 2 && (
+                <Button
+                  variant={'primary'}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setStage(stage + 1)
+                  }}>
+                  Next
+                </Button>
+              )}
+              {stage == 2 && (
                 <Button
                   disabled={getFormSubmitStatus(form)}
                   className="ml-2"
@@ -408,7 +456,7 @@ export default function CreateEventForm({
                     'Create Event'
                   )}
                 </Button>
-              </div>
+              )}
             </div>
           </form>
         </CardContent>

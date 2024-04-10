@@ -66,7 +66,7 @@ export default async function OrganizationHome({
   const playerActive = !!libraryVideo || !!activeStream[0]
 
   return (
-    <div className="mx-auto w-full max-w-screen-2xl">
+    <div className="mx-auto w-full max-w-5xl">
       <HomePageNavbar pages={pages} />
       {playerActive && (
         <ChannelPlayer

@@ -13,7 +13,7 @@ const SwitchOrganization = ({
   const router = useRouter()
 
   return (
-    <div>
+    <div className='px-2'>
       <Combobox
         items={organizations as any[]}
         logo

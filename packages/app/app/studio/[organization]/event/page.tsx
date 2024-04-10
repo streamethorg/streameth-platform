@@ -6,6 +6,7 @@ import { fetchEvents } from '@/lib/services/eventService'
 const Events = async ({ params }: studioPageParams) => {
   const events = await fetchEvents({
     organizationSlug: params.organization,
+    unlisted: false,
   })
 
   return (

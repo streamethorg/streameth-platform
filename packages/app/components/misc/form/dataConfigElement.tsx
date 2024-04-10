@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react'
 import {
   Select,
@@ -10,8 +11,9 @@ import {
   GSheetConfig,
   PretalxConfig,
 } from 'streameth-new-server/src/interfaces/event.interface'
+import { createGoogleSheetAction } from '@/lib/actions/events'
 import { Input } from '@/components/ui/input'
-
+import { Button } from '@/components/ui/button'
 interface Provider {
   name: string
   value: 'gsheet' | 'pretalx'
@@ -39,7 +41,7 @@ const DataConfigElement = ({
   const initialProvider = initialValue
     ? initialValue.type
     : providers[0].value
-
+  const [isLoading, setIsLoading] = useState(false)
   const [selectedProvider, setSelectedProvider] = useState<
     'gsheet' | 'pretalx'
   >(initialProvider)
@@ -73,13 +75,25 @@ const DataConfigElement = ({
     setConfig(updatedConfig)
   }
 
+  const handleCreateSheet = async () => {
+    setIsLoading(true)
+    const sheetId = await createGoogleSheetAction({
+      eventName: 'test',
+    })
+    setConfig({
+      ...config,
+      sheetId,
+    })
+    setIsLoading(false)
+  }
+
   const handleProviderChange = (value: string) => {
     const newProvider = value as 'gsheet' | 'pretalx'
     setSelectedProvider(newProvider)
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 flex flex-col">
       <Select
         defaultValue={initialProvider}
         onValueChange={handleProviderChange}>
@@ -102,14 +116,24 @@ const DataConfigElement = ({
       </Select>
 
       {selectedProvider === 'gsheet' && (
-        <div>
+        <div className='flex flex-row w-full'>
           <Input
             name="sheetId"
+            className=' rounded-r-none'
             value={(config as GSheetConfig)?.sheetId || ''}
             onChange={handleConfigChange}
             placeholder="Sheet ID"
           />
-          {/* Add other Google Sheet config fields here */}
+          <Button
+            variant={'secondary'}
+            className="border-l-0 border-t border-b border-r rounded-l-none"
+            loading={isLoading}
+            disabled={
+              config.sheetId !== undefined && config.sheetId !== ''
+            }
+            onClick={handleCreateSheet}>
+            Create new
+          </Button>
         </div>
       )}
 

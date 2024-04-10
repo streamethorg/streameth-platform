@@ -191,7 +191,7 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row items-center p-2 w-full bg-white md:hidden lg:flex">    
+    <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row items-center p-2 w-full bg-white md:hidden lg:flex">
       {showLogo && (
         <Link href="/">
           <Image
@@ -203,23 +203,24 @@ const PCNavBar = ({
           />
         </Link>
       )}
-      <div className="flex flex-grow justify-center items-center">
+      {/* <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
-      </div>
-      {organizations && (
-        <SwitchOrganization
-          organization={currentOrganization}
-          organizations={organizations}
-        />
-      )}
-      <Navbar
-        pages={getPages(
-          pages,
-          isSignedIn,
-          userData?.organizations?.[0]?.slug
+      </div> */}
+      <div className="flex items-center ml-auto space-x-2">
+        {organizations && (
+          <SwitchOrganization
+            organization={currentOrganization}
+            organizations={organizations}
+          />
         )}
-      />
-
+        <Navbar
+          pages={getPages(
+            pages,
+            isSignedIn,
+            userData?.organizations?.[0]?.slug
+          )}
+        />
+      </div>
       <ConnectWalletButton />
     </NavigationMenu>
   )
