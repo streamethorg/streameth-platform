@@ -59,7 +59,7 @@ const StreamHealth = ({
             )}
           </CardTitle>
           <Link
-            href={`/${organization}?playbackId=${streamId}`}
+            href={`/${organization}?streamId=${streamId}`}
             target="_blank">
             <Button variant="outline">
               View Livestream
