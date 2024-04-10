@@ -37,6 +37,18 @@ export class EventController extends Controller {
   }
 
   /**
+   * @summary Get Event
+   */
+  @SuccessResponse('200')
+  @Get('{eventId}')
+  async getEventById(
+    @Path() eventId: string,
+  ): Promise<IStandardResponse<IEvent>> {
+    const event = await this.eventService.get(eventId);
+    return SendApiResponse('event fetched', event);
+  }
+
+  /**
    * @summary Update Event
    */
   @Security('jwt', ['org'])
