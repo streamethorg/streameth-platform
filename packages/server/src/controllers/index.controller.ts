@@ -11,6 +11,7 @@ import { getAsset } from '@utils/livepeer';
 @Route('')
 export class IndexController extends Controller {
   private stageService = new StageService();
+  private sessionService = new SessionServcie();
   @Get()
   async index(): Promise<IStandardResponse<string>> {
     return SendApiResponse('OK');
@@ -22,41 +23,36 @@ export class IndexController extends Controller {
   ): Promise<IStandardResponse<string>> {
     try {
       const webhookAuth = validateWebhook(livepeerSignature, payload);
-      console.log(payload);
-
       if (!webhookAuth) {
         console.log('Invalid signature or timestamp');
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
       switch (payload.event) {
         case LivepeerEvent.assetReady:
-          const sessionService = new SessionServcie();
           const asset = await getAsset(payload.payload.id);
-          const { sessions } = await sessionService.getAll({
+          const session = await this.sessionService.findOne({
             assetId: asset.id,
-          } as any);
-  
-          if (!sessions || sessions.length === 0 || sessions.length > 1) {
+          });
+          if (!session) {
             return SendApiResponse('No session found', null, '400');
           }
-  
-          const session = sessions[0];
-  
-          await sessionService.update(session._id.toString(), {
+          await this.sessionService.update(session._id.toString(), {
             ipfsURI: asset.storage?.ipfs?.cid,
             videoUrl: asset.playbackUrl,
           } as any);
-
-          // await startAITools(payload.payload.id);
           break;
         case LivepeerEvent.streamStarted:
         case LivepeerEvent.streamIdle:
           await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;
+        case LivepeerEvent.recordingReady:
+          await this.sessionService.createStreamRecordings(
+            payload.payload.session,
+          );
+          break;
         default:
           break;
       }
-
       return SendApiResponse('OK');
     } catch (err) {
       console.log(err);
