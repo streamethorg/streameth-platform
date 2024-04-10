@@ -65,17 +65,24 @@ const Library = async ({
     return NotFound()
   }
 
+  const statesSet = new Set(
+    (
+      await fetchAllStates({
+        type: StateType.video,
+        status: StateStatus.pending,
+      })
+    ).map((state) => state.sessionId) as unknown as Set<string>
+  )
+
   const sessions = (
     await fetchAllSessions({
       organizationSlug: params.organization,
-      onlyVideos: true,
     })
-  ).sessions.filter((session) => session.videoUrl)
+  ).sessions.filter(
+    (session) =>
+      session.videoUrl || statesSet.has(session._id.toString())
+  )
 
-  const states = await fetchAllStates({
-    type: StateType.video,
-    status: StateStatus.pending,
-  })
   const sortedSessions = sortArray(
     sessions,
     searchParams.sort
