@@ -23,6 +23,12 @@ import Dropzone from './Dropzone'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import { DialogClose } from '@/components/ui/dialog'
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
+import { createStateAction } from '@/lib/actions/state'
+import {
+  SheetType,
+  StateStatus,
+  StateType,
+} from 'streameth-new-server/src/interfaces/state.interface'
 
 const UploadVideoForm = ({
   stageId,
@@ -67,7 +73,18 @@ const UploadVideoForm = ({
         stageId: stageId || '',
       },
     })
-      .then(() => onFinish())
+      .then(async (session) => {
+        onFinish()
+
+        const state = await createStateAction({
+          state: {
+            sessionId: session._id,
+            type: StateType.video,
+            sessionSlug: session.slug,
+            organizationId: session.organizationId,
+          },
+        })
+      })
       .catch((e) => {
         console.log(e)
         toast.error('Error creating Session')

@@ -12,7 +12,7 @@ import {
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
 import React, { ReactNode } from 'react'
@@ -60,7 +60,7 @@ const VideoCardWithMenu = ({
         </CardHeader>
 
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger className="z-10">
             <EllipsisVertical className="mt-2" />
           </DropdownMenuTrigger>
           <DropdownMenuContent>

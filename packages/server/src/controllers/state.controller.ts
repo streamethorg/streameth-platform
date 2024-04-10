@@ -1,6 +1,6 @@
 import { CreateStateDto } from '@dtos/state/create-state.dto';
 import { UpdateStateDto } from '@dtos/state/update-state.dto';
-import { IState } from '@interfaces/state.interface';
+import { IState, StateStatus, StateType } from '@interfaces/state.interface';
 import StateService from '@services/state.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
@@ -60,13 +60,18 @@ export class StateController extends Controller {
     @Query() eventId?: string,
     @Query() sessionId?: string,
     @Query() eventSlug?: string,
+    @Query() type?: string,
+    @Query() status?: string,
   ): Promise<IStandardResponse<Array<IState>>> {
     const queryParams = {
       eventId: eventId,
       sessionId: sessionId,
       eventSlug: eventSlug,
+      type: type as StateType,
+      status: status as StateStatus,
     };
     const states = await this.stateService.getAll(queryParams);
+
     return SendApiResponse('States fetched', states);
   }
 }
