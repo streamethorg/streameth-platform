@@ -41,12 +41,12 @@ const ChannelTabContentItem = ({
               className={`lg:w-full h-full border-none  flex-initial`}>
               <VideoCardWithMenu
                 session={stream}
-                link={`/${organizationSlug}?tab=${tabValue}&playbackId=${stream._id}`}
+                link={`/${organizationSlug}?tab=${tabValue}&id=${stream._id}`}
                 DropdownMenuItems={
                   <>
                     <DropdownMenuItem>
                       <ShareVideoMenuItem
-                        url={`/${organizationSlug}?tab=${tabValue}&playbackId=${stream._id}`}
+                        url={`/${organizationSlug}?tab=${tabValue}&id=${stream._id}`}
                       />
                     </DropdownMenuItem>
                     <DropdownMenuItem>
