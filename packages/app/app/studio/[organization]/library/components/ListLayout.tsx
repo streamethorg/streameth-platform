@@ -9,27 +9,15 @@ import {
 } from '@/components/ui/table'
 import TableCells from './TableCells'
 import { IExtendedSession, eSort } from '@/lib/types'
-import EmptyLibrary from './EmptyLibrary'
 import LayoutSelection from './LayoutSelection'
 import TableSort from '@/components/misc/TableSort'
 const ListLayout = ({
   sessions,
-  organizationId,
   organizationSlug,
 }: {
   sessions: IExtendedSession[]
-  organizationId: string
   organizationSlug: string
 }) => {
-  if (!sessions || sessions.length === 0) {
-    return (
-      <EmptyLibrary
-        organizationId={organizationId}
-        organizationSlug={organizationSlug}
-      />
-    )
-  }
-
   return (
     <Table className="bg-white">
       <TableHeader className="sticky top-0 z-50 bg-white">

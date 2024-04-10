@@ -1,5 +1,26 @@
 import * as z from 'zod'
 
+const GSheetConfigSchema = z.object({
+  sheetId: z.string().optional(),
+  apiKey: z.string().optional(),
+  driveId: z.string().optional(),
+  driveApiKey: z.string().optional(),
+})
+
+const PretalxConfigSchema = z.object({
+  url: z.string(),
+  apiToken: z.string(),
+})
+
+
+const IDataImporterSchema = z.union([
+  z.object({ type: z.literal('gsheet'), config: GSheetConfigSchema }),
+  z.object({
+    type: z.literal('pretalx'),
+    config: PretalxConfigSchema,
+  }),
+])
+
 export const formSchema = z.object({
   name: z.string().min(2, {
     message: 'Username must be at least 2 characters.',
@@ -19,27 +40,11 @@ export const formSchema = z.object({
   accentColor: z.string().min(1, { message: 'color is required' }),
   unlisted: z.boolean().optional(),
   enableVideoDownloader: z.boolean().optional(),
+  dataImporter: z.array(IDataImporterSchema).optional(),
+
 })
 
-const GSheetConfigSchema = z.object({
-  sheetId: z.string().optional(),
-  apiKey: z.string().optional(),
-  driveId: z.string().optional(),
-  driveApiKey: z.string().optional(),
-})
 
-const PretalxConfigSchema = z.object({
-  url: z.string(),
-  apiToken: z.string(),
-})
-
-const IDataImporterSchema = z.union([
-  z.object({ type: z.literal('gsheet'), config: GSheetConfigSchema }),
-  z.object({
-    type: z.literal('pretalx'),
-    config: PretalxConfigSchema,
-  }),
-])
 
 const IPluginsSchema = z.object({
   disableChat: z.boolean(),

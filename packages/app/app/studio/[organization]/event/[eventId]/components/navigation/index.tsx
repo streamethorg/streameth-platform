@@ -39,7 +39,7 @@ const Navigation = ({
   return (
     <div
       className={cn(
-        'overflow-auto w-2/6 min-w-[400px] h-full border-r border-border flex flex-col text-black'
+        'overflow-auto w-2/6 bg-white min-w-[400px] h-full border-r border-border flex flex-col text-black'
       )}>
       <div className="flex flex-row p-2 justify-between items-center border-b border-border">
         <h3 className="text-2xl font-bold mt-4 mb-2 ">

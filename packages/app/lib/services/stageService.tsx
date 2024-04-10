@@ -32,15 +32,13 @@ export async function fetchStages({
   organizationId: string
 }): Promise<IStageModel[]> {
   try {
-    const events = await fetchEvents({ organizationId })
-    const stages: IStageModel[] = []
-    for (const event of events) {
-      const response = await fetchEventStages({ eventId: event._id })
-      response.forEach((stage) => {
-        stages.push(stage)
-      })
-    }
-    return stages
+    console.log(organizationId)
+    const stages = await fetch(`${apiUrl()}/stages/organization/${organizationId}`, {
+      cache: 'no-cache',
+    })
+    const data = (await stages.json()).data
+    return data.map((stage: IStage) => stage)
+
   } catch (e) {
     console.log(e)
     throw 'Error fetching stages'

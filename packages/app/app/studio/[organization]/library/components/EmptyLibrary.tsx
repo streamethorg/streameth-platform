@@ -1,14 +1,12 @@
-'use client'
+'use server'
 
 import EmptyFolder from '@/lib/svg/EmptyFolder'
 import UploadVideoDialog from './UploadVideoDialog'
 
-const EmptyLibrary = ({
+const EmptyLibrary = async ({
   organizationId,
-  organizationSlug,
 }: {
   organizationId: string
-  organizationSlug: string
 }) => {
   return (
     <div className="flex flex-col justify-center items-center space-y-6 h-full">

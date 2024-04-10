@@ -12,7 +12,7 @@ import {
   FacebookIcon,
   RedditIcon,
   TelegramIcon,
-  XIcon,
+  TwitterIcon,
   WhatsappIcon,
 } from 'react-share'
 
@@ -60,7 +60,7 @@ export const ShareModalContent = ({
             <FacebookIcon size={42} round />
           </FacebookShareButton>
           <TwitterShareButton url={currentUrl} title={text}>
-            <XIcon size={42} round />
+            <TwitterIcon size={42} round />
           </TwitterShareButton>
           <RedditShareButton url={currentUrl} title={text}>
             <RedditIcon size={42} round />

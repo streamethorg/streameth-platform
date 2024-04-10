@@ -71,9 +71,7 @@ const EditSessionFrom = ({
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {
-          alert(errors)
-        }}
+        onError={(errors) => {}}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6">
         <FormField
@@ -122,7 +120,7 @@ const EditSessionFrom = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageDropzone
-                  path={`session/${generateId(
+                  path={`sessions/${generateId(
                     form.getValues('name')
                   )}`}
                   {...field}
@@ -149,7 +147,7 @@ const EditSessionFrom = ({
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}
             type="submit"
-            variant={'secondary'}
+            variant={'primary'}
             className="border-2">
             {isLoading ? (
               <>

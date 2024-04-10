@@ -20,6 +20,9 @@ const ColorPicker = ({
     <Popover>
       <PopoverTrigger>
         <Input
+          style={{
+            backgroundColor: color,
+          }}
           type="text"
           value={color}
           readOnly

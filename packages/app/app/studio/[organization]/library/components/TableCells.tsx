@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { updateSessionAction } from '@/lib/actions/sessions'
+import ProcessingSkeleton from './misc/ProcessingSkeleton'
 
 const TableCells = ({
   item,
@@ -59,18 +60,23 @@ const TableCells = ({
       .finally(() => location.reload())
   }
 
+  if (!item.videoUrl) {
+    return <ProcessingSkeleton item={item} />
+  }
+
   return (
     <>
       <TableCell className="relative font-medium">
-        <div className="flex flex-row items-center space-x-4 w-full ">
+        <div className="flex flex-row items-center space-x-4 w-full">
           <div className="min-w-[100px]">
             <AspectRatio ratio={16 / 9}>
               {item.coverImage ? (
                 <Image
                   src={item.coverImage}
+                  style={{ objectFit: 'contain' }}
                   fill
                   alt="Thumbnail Image"
-                  quality={50}
+                  quality={40}
                 />
               ) : (
                 <div className="flex justify-center items-center w-full h-full">

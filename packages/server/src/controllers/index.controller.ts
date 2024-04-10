@@ -6,12 +6,16 @@ import StageService from '@services/stage.service';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import SessionServcie from '@services/session.service';
 import { getAsset } from '@utils/livepeer';
+import StateService from '@services/state.service';
+import { StateStatus } from '@interfaces/state.interface';
 
 @Tags('Index')
 @Route('')
 export class IndexController extends Controller {
   private stageService = new StageService();
   private sessionService = new SessionServcie();
+  private stateService = new StateService();
+
   @Get()
   async index(): Promise<IStandardResponse<string>> {
     return SendApiResponse('OK');
@@ -27,6 +31,8 @@ export class IndexController extends Controller {
         console.log('Invalid signature or timestamp');
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
+
+      console.log('hi');
       switch (payload.event) {
         case LivepeerEvent.assetReady:
           const asset = await getAsset(payload.payload.id);
@@ -42,6 +48,7 @@ export class IndexController extends Controller {
           } as any);
           break;
         case LivepeerEvent.streamStarted:
+          break;
         case LivepeerEvent.streamIdle:
           await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;
@@ -51,7 +58,7 @@ export class IndexController extends Controller {
           );
           break;
         default:
-          break;
+          return SendApiResponse('Event not recognizable', null, '400');
       }
       return SendApiResponse('OK');
     } catch (err) {
