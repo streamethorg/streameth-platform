@@ -116,10 +116,10 @@ const DataConfigElement = ({
       </Select>
 
       {selectedProvider === 'gsheet' && (
-        <div className='flex flex-row w-full'>
+        <div className="flex flex-row w-full">
           <Input
             name="sheetId"
-            className=' rounded-r-none'
+            className=" rounded-r-none"
             value={(config as GSheetConfig)?.sheetId || ''}
             onChange={handleConfigChange}
             placeholder="Sheet ID"

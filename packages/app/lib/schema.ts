@@ -12,7 +12,6 @@ const PretalxConfigSchema = z.object({
   apiToken: z.string(),
 })
 
-
 const IDataImporterSchema = z.union([
   z.object({ type: z.literal('gsheet'), config: GSheetConfigSchema }),
   z.object({
@@ -41,10 +40,7 @@ export const formSchema = z.object({
   unlisted: z.boolean().optional(),
   enableVideoDownloader: z.boolean().optional(),
   dataImporter: z.array(IDataImporterSchema).optional(),
-
 })
-
-
 
 const IPluginsSchema = z.object({
   disableChat: z.boolean(),

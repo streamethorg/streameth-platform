@@ -58,5 +58,4 @@ class GoogleSheetService {
   }
 }
 
-
 export default GoogleSheetService

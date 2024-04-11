@@ -7,12 +7,11 @@ import {
 import { fetchOrganization } from './organizationService'
 import { IExtendedEvent } from '../types'
 
-
 export async function fetchEvents({
   organizationId,
   organizationSlug,
   date,
-  unlisted=false,
+  unlisted = false,
 }: {
   organizationId?: string
   organizationSlug?: string
@@ -70,7 +69,10 @@ export async function fetchEvent({
       return null
     }
 
-    console.log('fetching event',`${apiUrl()}/events/${eventId ?? eventSlug}`)
+    console.log(
+      'fetching event',
+      `${apiUrl()}/events/${eventId ?? eventSlug}`
+    )
     const data = await fetch(
       `${apiUrl()}/events/${eventId ?? eventSlug}`,
       {

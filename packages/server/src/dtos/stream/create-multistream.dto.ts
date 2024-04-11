@@ -16,5 +16,5 @@ export class CreateMultiStreamDto implements IMultiStream {
 
   @IsNotEmpty()
   @IsString()
-  targetURI: string;
+  targetURL: string;
 }

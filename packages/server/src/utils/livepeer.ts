@@ -176,7 +176,7 @@ export const createMultiStream = async (data: IMultiStream): Promise<void> => {
       {
         spec: {
           name: data.name,
-          url: data.targetURI + '/' + data.targetStreamKey,
+          url: data.targetURL + '/' + data.targetStreamKey,
         },
         profile: 'source',
       },

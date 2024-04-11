@@ -58,8 +58,7 @@ const OrganizationPage = async ({
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Link
-                href={`/studio/${params.organization}/clips`}>
+              <Link href={`/studio/${params.organization}/clips`}>
                 <Button variant="primary">Clip livestream</Button>
               </Link>
             </CardFooter>
