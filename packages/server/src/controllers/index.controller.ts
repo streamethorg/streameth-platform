@@ -4,7 +4,7 @@ import startAITools from '@aitools/main';
 import { validateWebhook } from '@utils/validateWebhook';
 import StageService from '@services/stage.service';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
-import SessionServcie from '@services/session.service';
+import SessionService from '@services/session.service';
 import { getAsset } from '@utils/livepeer';
 import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
@@ -13,7 +13,7 @@ import { StateStatus } from '@interfaces/state.interface';
 @Route('')
 export class IndexController extends Controller {
   private stageService = new StageService();
-  private sessionService = new SessionServcie();
+  private sessionService = new SessionService();
   private stateService = new StateService();
 
   @Get()
@@ -32,20 +32,9 @@ export class IndexController extends Controller {
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
 
-      console.log('hi');
       switch (payload.event) {
         case LivepeerEvent.assetReady:
-          const asset = await getAsset(payload.payload.id);
-          const session = await this.sessionService.findOne({
-            assetId: asset.id,
-          });
-          if (!session) {
-            return SendApiResponse('No session found', null, '400');
-          }
-          await this.sessionService.update(session._id.toString(), {
-            ipfsURI: asset.storage?.ipfs?.cid,
-            videoUrl: asset.playbackUrl,
-          } as any);
+          await this.assetReady(payload.payload.id);
           break;
         case LivepeerEvent.streamStarted:
           break;
@@ -65,5 +54,33 @@ export class IndexController extends Controller {
       console.log(err);
       return SendApiResponse(err.toString(), null, '500');
     }
+  }
+
+  private async assetReady(id: string) {
+    const asset = await getAsset(id);
+    const session = await this.sessionService.findOne({
+      assetId: asset.id,
+    });
+
+    if (!session) {
+      return SendApiResponse('No session found', null, '400');
+    }
+    await this.sessionService.update(session._id.toString(), {
+      ipfsURI: asset.storage?.ipfs?.cid,
+      videoUrl: asset.playbackUrl,
+    } as any);
+
+    const state = await this.stateService.getAll({
+      sessionId: session._id.toString(),
+    });
+
+    if (!state || state.length === 0) {
+      return SendApiResponse('No state found', null, '400');
+    }
+    await this.stateService.update(state[0]._id.toString(), {
+      status: StateStatus.completed,
+    });
+
+    // await startAITools(payload.payload.id);
   }
 }
