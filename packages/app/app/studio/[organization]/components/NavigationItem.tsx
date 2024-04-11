@@ -31,12 +31,14 @@ const NavigationItem = ({
       className="border-none text-white">
       <Link
         passHref
-        className={`drop-shadow no-underline font-light border-none flex flex-row items-center ${collapsed ? "justify-center" : "justify-start mx-4"} cursor-pointer space-x-2 p-2 ${
+        className={`drop-shadow no-underline font-light border-none flex flex-row items-center ${
+          collapsed ? 'justify-center' : 'justify-start mx-4'
+        } cursor-pointer space-x-2 p-2 ${
           active &&
           'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'
         }`}
         href={`/studio/${organization}/${navigationPath}`}>
-          {icon} {!collapsed && <p>{title}</p>}
+        {icon} {!collapsed && <p>{title}</p>}
       </Link>
     </AccordionItem>
   )

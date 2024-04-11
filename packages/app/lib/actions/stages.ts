@@ -1,8 +1,9 @@
 'use server'
 import { Livepeer } from 'livepeer'
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import {
+  createMultistream,
   createStage,
+  deleteMultistream,
   deleteStage,
   updateStage,
 } from '../services/stageService'
@@ -25,32 +26,6 @@ export const createStageAction = async ({
     throw new Error('No user session found')
   }
 
-  // try {
-  // post to https://livepeer.studio/api/stream
-  // const response = await fetch(
-  //   'https://livepeer.studio/api/stream',
-  //   {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${process.env.LIVEPEER_API_KEY}`,
-  //     },
-  //     body: JSON.stringify({
-  //       name: stage.name,
-  //       record: true,
-  //     }),
-  //   }
-  // )
-
-  // const data = await response.json()
-  //   if (stage.streamSettings?.streamId) {
-  //     stage.streamSettings.streamId = data.id
-  //   }
-  // } catch (error) {
-  //   console.error('Error creating stream:', error)
-  //   throw new Error('Error creating stream')
-  // }
-
   const response = await createStage({
     stage: stage,
     authToken,
@@ -66,23 +41,15 @@ export const createStageAction = async ({
 export const deleteStageAction = async ({
   stageId,
   organizationId,
-  streamId,
 }: {
   stageId: string
   organizationId: string
-  streamId?: string
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
     throw new Error('No user session found')
   }
-  if (streamId) {
-    try {
-      await livepeer.stream.delete(streamId)
-    } catch (error) {
-      console.error('Error deleting stream:', error)
-    }
-  }
+
   const response = await deleteStage({
     stageId,
     organizationId,
@@ -110,7 +77,7 @@ export const getStageStream = async (
   }
 }
 
-export const createMultistream = async (
+export const createMultistreamAction = async (
   prevState: {
     message: string
     success: boolean
@@ -121,58 +88,51 @@ export const createMultistream = async (
   const streamId = formData.get('streamId') as string
   const name = formData.get('name') as string
   const url = formData.get('url') as string
-  const profile = formData.get('profile') as string
   const streamKey = formData.get('streamKey') as string
 
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  })
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
   try {
-    const response = await livepeer.stream.createMultistreamTarget(
+    const response = await createMultistream({
       streamId,
-      {
-        spec: {
-          name,
-          url: url + '/' + streamKey,
-        },
-        profile: 'source',
-      }
-    )
-    if (response.statusCode !== 200) {
-      return {
-        message: 'Error creating multistream target',
-        success: false,
-      }
-    }
-    revalidatePath('/studio')
+      name,
+      targetURL: url,
+      targetStreamKey: streamKey,
+      authToken,
+    })
 
-    return { message: 'Multistream target created', success: true }
+    revalidatePath('/studio')
+    if (!response) {
+      throw new Error('Error creating multistream:')
+    }
+    return { message: response.message, success: true }
   } catch (error) {
     console.error(error)
     return { message: 'Error creating multistream:', success: false }
   }
 }
 
-export const deleteMultistreamTarget = async (
+export const deleteMultistreamAction = async (
   streamId: string,
   targetId: string
 ) => {
-  'use server'
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  })
-
-  const response = await livepeer.stream.deleteMultistreamTarget(
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+  const response = await deleteMultistream({
     streamId,
-    targetId
-  )
-  if (response.statusCode !== 200) {
-    console.error('Error deleting multistream target')
-    return null
+    targetId,
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error deleting stage')
   }
   revalidatePath('/studio')
 
-  return response.rawResponse?.statusText
+  return response
 }
 
 export const getMultistreamTarget = async ({

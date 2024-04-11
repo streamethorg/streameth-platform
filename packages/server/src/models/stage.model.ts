@@ -14,6 +14,12 @@ export const StageSchema = new Schema<IStageModel>(
       playbackId: { type: String, default: '' },
       isActive: { type: Boolean, default: false },
       isHealthy: { type: Boolean, default: false },
+      targets: [
+        {
+          id: { type: String },
+          name: { type: String },
+        },
+      ],
     },
     plugins: [
       {

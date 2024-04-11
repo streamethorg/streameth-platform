@@ -159,7 +159,6 @@ export const createGoogleSheetAction = async ({
     throw new Error('No user session found')
   }
 
-
   const googleDriveService = new GoogleDriveService()
   const sheetId = await googleDriveService.copyFile(
     templateSheetId,

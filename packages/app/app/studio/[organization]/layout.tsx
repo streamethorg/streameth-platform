@@ -14,23 +14,23 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 const Layout = async ({
   children,
   params,
-  searchParams
 }: {
   children: React.ReactNode
   params: studioPageParams['params']
-  searchParams: studioPageParams['searchParams']
 }) => {
   const isAuthorized = await CheckAuthorization()
   if (!isAuthorized) {
     return <AuthorizationMessage />
   }
   const userData = await fetchUserAction({})
-  const organization = await fetchOrganization({ organizationSlug: params.organization})
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
   if (!organization) return null
 
   return (
     <div className="w-screen h-screen flex flex-row">
-      <Navigation organizationSlug={params.organization}  />
+      <Navigation organizationSlug={params.organization} />
       <div className="flex flex-col w-full">
         <HomePageNavbar
           pages={[]}

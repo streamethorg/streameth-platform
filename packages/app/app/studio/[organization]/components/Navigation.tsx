@@ -5,7 +5,14 @@ import { Accordion } from '@/components/ui/accordion'
 import Logo from '@/public/studio_logo.png'
 import LogoCollapsed from '@/public/logo.png'
 import NavigationItem from './NavigationItem'
-import { Radio, Videotape, Settings, Home, CalendarDays, ScissorsLineDashed } from 'lucide-react'
+import {
+  Radio,
+  Videotape,
+  Settings,
+  Home,
+  CalendarDays,
+  ScissorsLineDashed,
+} from 'lucide-react'
 import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
 import Image from 'next/image'
 const navigationItems = [

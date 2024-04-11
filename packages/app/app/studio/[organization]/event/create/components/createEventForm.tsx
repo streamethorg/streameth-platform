@@ -396,7 +396,9 @@ export default function CreateEventForm({
                     }
               }>
               <div className="flex flex-col space-y-4">
-                <p className=" text-lg font-semibold">Import event data</p>
+                <p className=" text-lg font-semibold">
+                  Import event data
+                </p>
                 <p className="max-w-[550px]">
                   Import your event data from Pretalx or Google
                   sheets. Add Speakers and Schedule to your even. If

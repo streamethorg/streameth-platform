@@ -104,7 +104,7 @@ const EventClips = async ({
               livestream to get started
             </p>
             <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button variant={"primary"}>Create a livestream</Button>
+              <Button variant={'primary'}>Create a livestream</Button>
             </Link>
           </div>
         </div>
@@ -130,7 +130,7 @@ const EventClips = async ({
             </p>
             <p className="font-bold">or</p>
             <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button variant={"primary"}>Create a livestream</Button>
+              <Button variant={'primary'}>Create a livestream</Button>
             </Link>
           </div>
         </div>
@@ -171,7 +171,7 @@ const EventClips = async ({
               come back to clip to clip your livestream
             </p>
             <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button variant={"primary"}>Go Live</Button>
+              <Button variant={'primary'}>Go Live</Button>
             </Link>
           </div>
         </div>

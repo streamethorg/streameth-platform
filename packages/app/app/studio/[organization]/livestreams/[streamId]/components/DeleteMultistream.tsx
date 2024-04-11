@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { deleteMultistreamTarget } from '@/lib/actions/stages'
+import { deleteMultistreamAction } from '@/lib/actions/stages'
 import { Loader2, Trash2 } from 'lucide-react'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
@@ -17,7 +17,7 @@ const DeleteMultistream = ({
   const handleDelete = async (streamId: string, targetId: string) => {
     setIsLoading(true)
     try {
-      await deleteMultistreamTarget(streamId, targetId)
+      await deleteMultistreamAction(streamId, targetId)
       toast.success('Multistream target deleted')
       setIsLoading(false)
     } catch (error) {

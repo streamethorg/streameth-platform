@@ -2,6 +2,12 @@ import fetch from 'node-fetch';
 import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
 const { host, secretKey } = config.livepeer;
+import { Livepeer } from 'livepeer';
+import { IMultiStream } from '@interfaces/stream.interface';
+import Stage from '@models/stage.model';
+const livepeer = new Livepeer({
+  apiKey: secretKey,
+});
 
 export const createStream = async (
   name: string,
@@ -150,5 +156,61 @@ export const getVideoPhaseAction = async (assetId: string) => {
     };
   } catch (e) {
     console.error(`Error fetching asset:`, e);
+  }
+};
+
+export const getStreamRecordings = async (streamId: string): Promise<any> => {
+  try {
+    const stream = await getStreamInfo(streamId);
+    const recordings = await livepeer.session.getRecorded(stream.id);
+    return recordings.classes;
+  } catch (e) {
+    throw new HttpException(400, 'Error fetching stream recordings');
+  }
+};
+
+export const createMultiStream = async (data: IMultiStream): Promise<void> => {
+  try {
+    const response = await livepeer.stream.createMultistreamTarget(
+      data.streamId,
+      {
+        spec: {
+          name: data.name,
+          url: data.targetURL + '/' + data.targetStreamKey,
+        },
+        profile: 'source',
+      },
+    );
+    const multistream = JSON.parse(response.rawResponse.data.toString());
+    const stage = await Stage.findOne({
+      'streamSettings.streamId': data.streamId,
+    });
+    await stage.updateOne({
+      $push: {
+        'streamSettings.targets': {
+          id: multistream.id,
+          name: multistream.name,
+        },
+      },
+    });
+  } catch (e) {
+    throw new HttpException(400, 'Error creating multistream');
+  }
+};
+
+export const deleteMultiStream = async (data: {
+  streamId: string;
+  targetId: string;
+}): Promise<void> => {
+  try {
+    await livepeer.multistreamTarget.delete(data.targetId);
+    const stage = await Stage.findOne({
+      'streamSettings.streamId': data.streamId,
+    });
+    await stage.updateOne({
+      $pull: { 'streamSettings.targets': { id: data.targetId } },
+    });
+  } catch (e) {
+    throw new HttpException(400, 'Error deleting multistream');
   }
 };
