@@ -82,6 +82,7 @@ export interface studioPageParams {
     stage: string
     stageSetting: string
     streamId: string
+    collapsed?: boolean
   }
 }
 
@@ -175,7 +176,8 @@ export interface ChannelPageParams {
   }
   searchParams: {
     tab?: string
-    playbackId: string
     search: string
+    id: string
+    streamId: string
   }
 }

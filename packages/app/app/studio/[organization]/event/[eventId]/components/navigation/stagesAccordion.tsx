@@ -29,13 +29,12 @@ const StageAccordion = ({
   const [value, setValue] = useState(stageSetting ?? '')
   const handleDeleteStage = async (
     stageId: string,
-    organizationId: string,
-    streamId: string
+    organizationId: string
   ) => {
     if (
       window.confirm('Are you sure you want to delete this stage?')
     ) {
-      await deleteStageAction({ stageId, organizationId, streamId })
+      await deleteStageAction({ stageId, organizationId })
         .then((response) => {
           if (response) {
             toast.success('Stage deleted')
@@ -112,8 +111,7 @@ const StageAccordion = ({
               onClick={() => {
                 handleDeleteStage(
                   stage._id,
-                  event?.organizationId as string,
-                  stage.streamSettings?.streamId ?? ''
+                  event?.organizationId as string
                 )
               }}>
               <p className={`px-2`}>Delete</p>

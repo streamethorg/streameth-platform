@@ -19,6 +19,8 @@ import ClipsSessionList from './components/ClipSessionList'
 import { getAsset } from '@/lib/actions/livepeer'
 import { fetchSession } from '@/lib/services/sessionService'
 import { IExtendedEvent, IExtendedStage } from '@/lib/types'
+import { fetchOrganization } from '@/lib/services/organizationService'
+import { notFound } from 'next/navigation'
 
 const ClipContainer = ({
   children,
@@ -78,8 +80,16 @@ const EventClips = async ({
 }: ClipsPageParams) => {
   const { stage, selectedRecording, previewId } = searchParams
 
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
+
+  if (!organization) {
+    return notFound()
+  }
+
   const stages = await fetchStages({
-    organizationId: params.organization,
+    organizationId: organization._id,
   })
 
   if (stages.length === 0) {
@@ -94,7 +104,7 @@ const EventClips = async ({
               livestream to get started
             </p>
             <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button>Create a livestream</Button>
+              <Button variant={'primary'}>Create a livestream</Button>
             </Link>
           </div>
         </div>
@@ -120,7 +130,7 @@ const EventClips = async ({
             </p>
             <p className="font-bold">or</p>
             <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button>Create a livestream</Button>
+              <Button variant={'primary'}>Create a livestream</Button>
             </Link>
           </div>
         </div>
@@ -161,7 +171,7 @@ const EventClips = async ({
               come back to clip to clip your livestream
             </p>
             <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button>Go Live</Button>
+              <Button variant={'primary'}>Go Live</Button>
             </Link>
           </div>
         </div>
@@ -211,7 +221,7 @@ const EventClips = async ({
       {previewAsset && (
         <Preview
           initialIsOpen={previewId !== ''}
-          organizationId={event?.organizationId as string}
+          organizationId={organization._id as string}
           asset={previewAsset}
           sessionId={previewId}
         />
@@ -241,11 +251,11 @@ const EventClips = async ({
                 <TimeSetter label="Clip end" type="end" />
                 <CreateClipButton
                   selectedRecording={currentRecording}
-                  playbackId={stageRecordings.parentStream.id}
-                  stageId={currentStage._id}
-                  organizationId={
-                    currentStage.organizationId as string
+                  playbackId={
+                    stageRecordings.parentStream?.playbackId ?? ''
                   }
+                  stageId={currentStage._id}
+                  organizationId={organization._id as string}
                 />
               </div>
             </div>

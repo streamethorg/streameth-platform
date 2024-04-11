@@ -8,8 +8,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
-const OrganizationPage = async () => {
+const OrganizationPage = async ({
+  params,
+}: {
+  params: { organization: string }
+}) => {
   return (
     <div className="h-full w-full flex flex-row ">
       <div className="h-full w-full">
@@ -23,9 +28,12 @@ const OrganizationPage = async () => {
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button className="bg-white text-black">
-                Create an Event {'>'}
-              </Button>
+              <Link
+                href={`/studio/${params.organization}/event/create`}>
+                <Button className="bg-white text-black">
+                  Create an Event
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
           <Card className="text-white min-h-full w-full m-auto border-secondary col-span-1 bg-gradient-to-b from-[#1E293B] to-[#000000] ">
@@ -33,23 +41,26 @@ const OrganizationPage = async () => {
               <CardTitle>Upload video</CardTitle>
               <CardDescription className="text-white">
                 Upload and manage video content on your organization’s
-                page{' '}
+                page
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button variant="primary">Upload video</Button>
+              <Link href={`/studio/${params.organization}/library`}>
+                <Button variant="primary">Upload video</Button>
+              </Link>
             </CardFooter>
           </Card>
           <Card className="text-white min-h-full w-full m-auto border-secondary col-span-1 bg-gradient-to-b from-[#1E293B] to-[#000000] ">
             <CardHeader>
-              <CardTitle>Upload video</CardTitle>
+              <CardTitle>Clip a livestream</CardTitle>
               <CardDescription className="text-white">
-                Upload and manage video content on your organization’s
-                page{' '}
+                Clip livestreams to share with your community
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button variant="primary">Upload video</Button>
+              <Link href={`/studio/${params.organization}/clips`}>
+                <Button variant="primary">Clip livestream</Button>
+              </Link>
             </CardFooter>
           </Card>
           <Card className="text-white bg-gradient-to-br from-[#3D22BA] to-[#6426EF] w-full h-full col-span-2 ">
@@ -61,9 +72,12 @@ const OrganizationPage = async () => {
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button className="bg-white text-black">
-                Start a livestream
-              </Button>
+              <Link
+                href={`/studio/${params.organization}/livestreams`}>
+                <Button className="bg-white text-black">
+                  Start a livestream
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         </div>

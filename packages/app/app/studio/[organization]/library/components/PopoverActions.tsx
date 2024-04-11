@@ -8,9 +8,9 @@ import {
 import {
   FilePenLine,
   Share2,
-  EllipsisVertical,
   Copy,
   TrashIcon,
+  CircleEllipsisIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -40,7 +40,7 @@ const PopoverActions = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <EllipsisVertical className="cursor-pointer" />
+        <CircleEllipsisIcon className="cursor-pointer" />
       </PopoverTrigger>
       <PopoverContent className="w-60">
         <div className="grid gap-4">

@@ -1,26 +1,5 @@
 import * as z from 'zod'
 
-export const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-  description: z.string(),
-  start: z.date(),
-  end: z.date(),
-  location: z.string(),
-  logo: z.string().optional(),
-  banner: z.string().optional(),
-  startTime: z.string().optional(),
-  endTime: z.string().optional(),
-  eventCover: z.string().optional(),
-  archiveMode: z.boolean().optional(),
-  website: z.string().optional(),
-  timezone: z.string().min(1, 'timezone is required'),
-  accentColor: z.string().min(1, { message: 'color is required' }),
-  unlisted: z.boolean().optional(),
-  enableVideoDownloader: z.boolean().optional(),
-})
-
 const GSheetConfigSchema = z.object({
   sheetId: z.string().optional(),
   apiKey: z.string().optional(),
@@ -40,6 +19,28 @@ const IDataImporterSchema = z.union([
     config: PretalxConfigSchema,
   }),
 ])
+
+export const formSchema = z.object({
+  name: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  description: z.string(),
+  start: z.date(),
+  end: z.date(),
+  location: z.string(),
+  logo: z.string().optional(),
+  banner: z.string().optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+  eventCover: z.string().optional(),
+  archiveMode: z.boolean().optional(),
+  website: z.string().optional(),
+  timezone: z.string().min(1, 'timezone is required'),
+  accentColor: z.string().min(1, { message: 'color is required' }),
+  unlisted: z.boolean().optional(),
+  enableVideoDownloader: z.boolean().optional(),
+  dataImporter: z.array(IDataImporterSchema).optional(),
+})
 
 const IPluginsSchema = z.object({
   disableChat: z.boolean(),

@@ -1,11 +1,9 @@
 import { Document, Types } from 'mongoose';
 
 export interface TargetOutput {
-  profile: string;
-  videoOnly?: boolean;
   id?: string;
+  name?: string;
 }
-
 export interface IStreamSettings {
   streamId?: string;
   parentId?: string;

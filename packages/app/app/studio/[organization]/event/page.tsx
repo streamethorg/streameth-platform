@@ -1,5 +1,5 @@
 import React from 'react'
-import EventTable from '../components/EventTable'
+import EventTable from './components/EventTable'
 import { studioPageParams } from '@/lib/types'
 import { fetchEvents } from '@/lib/services/eventService'
 

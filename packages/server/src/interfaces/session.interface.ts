@@ -50,4 +50,4 @@ export interface ISession {
   createdAt?: string;
 }
 
-export interface ISessionModel extends Omit<ISession, '_id'>, Document { }
+export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

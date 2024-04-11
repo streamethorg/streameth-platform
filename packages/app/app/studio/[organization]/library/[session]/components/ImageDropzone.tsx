@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { FileUp, X } from 'lucide-react'
+import { FileUp, ImageUp, X } from 'lucide-react'
 import { getImageUrl } from '@/lib/utils/utils'
 import { toast } from 'sonner'
 import { useCallback, useState } from 'react'
@@ -75,6 +75,7 @@ export default function ImageDropzone({
     accept: {
       'image/*': ['.png', '.jpg', '.jpeg'],
     },
+    maxSize: 5 * 1024 * 1024, // 5 MB
     maxFiles: 1,
     onDrop,
   })
@@ -82,7 +83,7 @@ export default function ImageDropzone({
   return (
     <>
       {isUploading ? (
-        <div className="flex z-10 justify-center items-center h-52 bg-white border border-gray-400 border-dashed transition">
+        <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
           <div className="text-sm">Uploading image...</div>
         </div>
       ) : preview ? (
@@ -95,11 +96,11 @@ export default function ImageDropzone({
               setPreview('')
             }}
           />
-          <div className="flex z-10 justify-center items-center h-52 bg-white border border-gray-400 border-dashed transition">
+          <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
             <Image
               src={preview ?? value}
               alt="preview"
-              quality={60}
+              quality={50}
               width={150}
               height={150}
             />
@@ -108,8 +109,8 @@ export default function ImageDropzone({
       ) : (
         <div
           {...getRootProps()}
-          className="flex flex-col justify-center items-center space-y-4 h-52 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-square">
-          <FileUp size={65} />
+          className="flex z-10 flex-col justify-center items-center space-y-4 h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200">
+          <ImageUp size={35} />
           <input {...getInputProps()} />
           <div className="mx-4">
             <p>

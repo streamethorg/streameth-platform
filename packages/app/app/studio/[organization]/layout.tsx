@@ -1,5 +1,4 @@
-import { Page, studioPageParams } from '@/lib/types'
-import { headers } from 'next/headers'
+import { studioPageParams } from '@/lib/types'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { fetchUserAction } from '@/lib/actions/users'
@@ -10,6 +9,7 @@ import { hasOrganization } from '@/lib/utils/utils'
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Link from 'next/link'
 import Navigation from './components/Navigation'
+import { fetchOrganization } from '@/lib/services/organizationService'
 
 const Layout = async ({
   children,
@@ -23,30 +23,17 @@ const Layout = async ({
     return <AuthorizationMessage />
   }
   const userData = await fetchUserAction({})
-
-  const headersList = headers()
-  const pathname = headersList.get('next-url') || ''
-
-  const pages = [
-    {
-      name: 'Upload Video',
-      href: `/studio/${params.organization}/upload`,
-      bgColor: 'border border-muted',
-    },
-    {
-      href: `/studio/${params.organization}/event/create`,
-      name: 'Create Event',
-      bgColor:
-        'bg-primary text-white hover:bg-primary hover:text-white',
-    },
-  ]
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
+  if (!organization) return null
 
   return (
     <div className="w-screen h-screen flex flex-row">
       <Navigation organizationSlug={params.organization} />
       <div className="flex flex-col w-full">
         <HomePageNavbar
-          pages={pages}
+          pages={[]}
           showLogo={false}
           showSearchBar={false}
           currentOrganization={params.organization}

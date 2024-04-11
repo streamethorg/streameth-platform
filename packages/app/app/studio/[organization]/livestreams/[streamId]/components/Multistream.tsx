@@ -8,8 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Stream } from 'livepeer/dist/models/components'
-import { getMultistreamTarget } from '@/lib/actions/stages'
 import DeleteMultistream from './DeleteMultistream'
 import { CreateMultistreamTarget } from '../../../event/[eventId]/components/stageSettings/multistream/CreateMultistreamTarget'
 import { IExtendedStage } from '@/lib/types'
@@ -49,37 +47,27 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
                 <TableRow>
                   <TableHead className="">Name</TableHead>
                   <TableHead>Profile</TableHead>
-                  <TableHead>Status</TableHead>
                 </TableRow>
               </TableHeader>
 
               <TableBody className="overflow-scroll ">
                 {streamTargets?.map((target) => (
                   <TableRow key={target.id} className="">
-                    {target.id &&
-                      getMultistreamTarget({
-                        targetId: target.id,
-                      }).then((data) => {
-                        return (
-                          <>
-                            <TableCell className="font-medium">
-                              {data?.name}
-                            </TableCell>
-                            <TableCell className="font-medium">
-                              {target?.profile}
-                            </TableCell>
-                            <TableCell className="font-medium"></TableCell>
-                            <TableCell className="font-medium flex justify-end">
-                              <DeleteMultistream
-                                streamId={
-                                  stream?.streamSettings?.streamId
-                                }
-                                targetId={target.id}
-                              />
-                            </TableCell>
-                          </>
-                        )
-                      })}
+                    <>
+                      <TableCell className="font-medium">
+                        {target?.name}
+                      </TableCell>
+                      <TableCell className="font-medium">
+                        source
+                      </TableCell>
+
+                      <TableCell className="font-medium flex justify-end">
+                        <DeleteMultistream
+                          streamId={stream?.streamSettings?.streamId}
+                          targetId={target.id}
+                        />
+                      </TableCell>
+                    </>
                   </TableRow>
                 ))}
               </TableBody>

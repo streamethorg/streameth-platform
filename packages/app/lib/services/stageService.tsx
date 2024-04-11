@@ -32,15 +32,15 @@ export async function fetchStages({
   organizationId: string
 }): Promise<IStageModel[]> {
   try {
-    const events = await fetchEvents({ organizationId })
-    const stages: IStageModel[] = []
-    for (const event of events) {
-      const response = await fetchEventStages({ eventId: event._id })
-      response.forEach((stage) => {
-        stages.push(stage)
-      })
-    }
-    return stages
+    console.log(organizationId)
+    const stages = await fetch(
+      `${apiUrl()}/stages/organization/${organizationId}`,
+      {
+        cache: 'no-cache',
+      }
+    )
+    const data = (await stages.json()).data
+    return data.map((stage: IStage) => stage)
   } catch (e) {
     console.log(e)
     throw 'Error fetching stages'
@@ -168,5 +168,67 @@ export const updateStage = async ({
   } catch (error) {
     console.error('Error updating stage:', error)
     throw error
+  }
+}
+
+export async function createMultistream({
+  name,
+  streamId,
+  targetURL,
+  targetStreamKey,
+  authToken,
+}: {
+  name: string
+  streamId: string
+  targetStreamKey: string
+  targetURL: string
+  authToken: string
+}): Promise<{ message: string; status: string }> {
+  const response = await fetch(`${apiUrl()}/streams/multistream`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify({
+      name,
+      streamId,
+      targetURL,
+      targetStreamKey,
+    }),
+  })
+
+  if (!response.ok) {
+    throw 'Error creating stage'
+  }
+
+  return await response.json()
+}
+
+export async function deleteMultistream({
+  streamId,
+  targetId,
+  authToken,
+}: {
+  streamId: string
+  targetId: string
+  authToken: string
+}): Promise<IStageModel> {
+  try {
+    const response = await fetch(`${apiUrl()}/streams/multistream`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ streamId, targetId }),
+    })
+    if (!response.ok) {
+      throw 'Error deleting multistream'
+    }
+    return await response.json()
+  } catch (e) {
+    console.log('error in deleteMultistream', e)
+    throw e
   }
 }

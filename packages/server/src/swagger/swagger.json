@@ -194,6 +194,80 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse_any_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateMultiStreamDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"streamId": {
+						"type": "string"
+					},
+					"targetStreamKey": {
+						"type": "string"
+					},
+					"targetURL": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"streamId",
+					"targetStreamKey",
+					"targetURL"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_void_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeleteMultiStreamDto": {
+				"properties": {
+					"streamId": {
+						"type": "string"
+					},
+					"targetId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"streamId",
+					"targetId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStandardResponse__url-string--assetId-string__": {
 				"properties": {
 					"status": {
@@ -217,23 +291,6 @@
 						],
 						"type": "object"
 					}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_any_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {}
 				},
 				"required": [
 					"status",
@@ -297,6 +354,16 @@
 						]
 					},
 					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"organizationId": {
 						"anyOf": [
 							{
 								"type": "string"
@@ -376,6 +443,16 @@
 							}
 						]
 					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
 					"sessionId": {
 						"anyOf": [
 							{
@@ -400,14 +477,10 @@
 					},
 					"type": {
 						"$ref": "#/components/schemas/StateType"
-					},
-					"StateStatus": {
-						"$ref": "#/components/schemas/StateStatus"
 					}
 				},
 				"required": [
-					"sheetType",
-					"StateStatus"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -415,6 +488,16 @@
 			"UpdateStateDto": {
 				"properties": {
 					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"organizationId": {
 						"anyOf": [
 							{
 								"type": "string"
@@ -443,17 +526,13 @@
 					"sheetType": {
 						"$ref": "#/components/schemas/SheetType"
 					},
-					"StateStatus": {
+					"status": {
 						"$ref": "#/components/schemas/StateStatus"
 					},
 					"type": {
 						"$ref": "#/components/schemas/StateType"
 					}
 				},
-				"required": [
-					"sheetType",
-					"StateStatus"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -481,19 +560,13 @@
 			},
 			"TargetOutput": {
 				"properties": {
-					"profile": {
+					"id": {
 						"type": "string"
 					},
-					"videoOnly": {
-						"type": "boolean"
-					},
-					"id": {
+					"name": {
 						"type": "string"
 					}
 				},
-				"required": [
-					"profile"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -756,23 +829,6 @@
 						},
 						"type": "array"
 					}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_void_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {}
 				},
 				"required": [
 					"status",
@@ -2498,6 +2554,68 @@
 				"parameters": []
 			}
 		},
+		"/streams/multistream": {
+			"post": {
+				"operationId": "CreateMultiStream",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMultiStreamDto"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteMultiStream",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteMultiStreamDto"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/streams/asset": {
 			"post": {
 				"operationId": "CreateAsset",
@@ -2665,6 +2783,22 @@
 					{
 						"in": "query",
 						"name": "eventSlug",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "type",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "status",
 						"required": false,
 						"schema": {
 							"type": "string"
@@ -3734,10 +3868,57 @@
 					"Event"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "organizationId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "unlisted",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				]
 			}
 		},
 		"/events/{eventId}": {
+			"get": {
+				"operationId": "GetEventById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IEvent_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get Event",
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
 			"put": {
 				"operationId": "EditEvent",
 				"responses": {
@@ -3783,35 +3964,6 @@
 						}
 					}
 				}
-			},
-			"get": {
-				"operationId": "GetEventById",
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_IEvent_"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Event"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "eventId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
 			},
 			"delete": {
 				"operationId": "DeleteEvent",
@@ -3905,37 +4057,6 @@
 						}
 					}
 				}
-			}
-		},
-		"/events/organization/{organizationId}": {
-			"get": {
-				"operationId": "GetAllEventsForOrganization",
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_Array_IEvent__"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Event"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "organizationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
 			}
 		},
 		"/chats": {

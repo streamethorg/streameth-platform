@@ -21,7 +21,6 @@ const DeleteLivestream = ({ stream }: { stream: IExtendedStage }) => {
     await deleteStageAction({
       stageId: stream._id as string,
       organizationId: stream.organizationId as string,
-      streamId: stream.streamSettings?.streamId,
     })
       .then((response) => {
         if (response) {

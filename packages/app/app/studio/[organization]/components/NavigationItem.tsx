@@ -9,11 +9,13 @@ const NavigationItem = ({
   navigationPath,
   icon,
   organization,
+  collapsed,
 }: {
   title: string
   navigationPath: string
   icon: React.ReactNode
   organization: string
+  collapsed?: boolean
 }) => {
   const pathname = usePathname()
   const params = pathname.split('/')
@@ -28,12 +30,15 @@ const NavigationItem = ({
       title={title}
       className="border-none text-white">
       <Link
-        className={`drop-shadow no-underline font-light border-none flex flex-row space-x-4 cursor-pointer p-2 ${
+        passHref
+        className={`drop-shadow no-underline font-light border-none flex flex-row items-center ${
+          collapsed ? 'justify-center' : 'justify-start mx-4'
+        } cursor-pointer space-x-2 p-2 ${
           active &&
           'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'
         }`}
         href={`/studio/${organization}/${navigationPath}`}>
-        {icon} <p>{title}</p>
+        {icon} {!collapsed && <p>{title}</p>}
       </Link>
     </AccordionItem>
   )

@@ -29,6 +29,7 @@ import {
   StateStatus,
   StateType,
 } from 'streameth-new-server/src/interfaces/state.interface'
+import ImageDropzone from '../../[session]/components/ImageDropzone'
 
 const UploadVideoForm = ({
   stageId,
@@ -130,12 +131,10 @@ const UploadVideoForm = ({
           control={form.control}
           name="coverImage"
           render={({ field }) => (
-            <FormItem className="max-h-[80px]">
-              <FormLabel>Thumbnail</FormLabel>
+            <FormItem>
               <FormControl>
-                <ImageUpload
-                  aspectRatio={16 / 9}
-                  path={`organizations/${eventId}
+                <ImageDropzone
+                  path={`sessions/${eventId}
                     )}`}
                   {...field}
                 />

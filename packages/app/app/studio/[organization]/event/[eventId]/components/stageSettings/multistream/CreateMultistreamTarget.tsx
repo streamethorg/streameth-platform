@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { createMultistream } from '@/lib/actions/stages'
+import { createMultistreamAction } from '@/lib/actions/stages'
 import { ReloadIcon } from '@radix-ui/react-icons'
 // TODO
 //@ts-ignore
@@ -46,7 +46,7 @@ export const CreateMultistreamTarget = ({
 }) => {
   const [open, setOpen] = React.useState(false)
   const [state, formAction] = useFormState(
-    createMultistream,
+    createMultistreamAction,
     initialState
   )
   useEffect(() => {
@@ -99,19 +99,7 @@ export const CreateMultistreamTarget = ({
               placeholder="e.g. a1b2-4d3c-e5f6-8h7g"
             />
           </div>
-          {/* <div className="grid grid-cols-4 items-center gap-4">
-            <Label className="text-right">Profile</Label>
-            <div className="col-span-3 flex">
-              <div className="flex items-center mr-4">
-                <Input type="radio" name="profile" value="source" />
-                <Label className="ml-2">Source</Label>
-              </div>
-              <div className="flex items-center mr-4">
-                <Input type="radio" name="profile" value="720p" />
-                <Label className="ml-2">720p</Label>
-              </div>
-            </div>
-          </div> */}
+
           <DialogFooter>
             <SubmitButton />
           </DialogFooter>

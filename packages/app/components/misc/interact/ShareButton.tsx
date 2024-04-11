@@ -12,7 +12,7 @@ import {
   FacebookIcon,
   RedditIcon,
   TelegramIcon,
-  XIcon,
+  TwitterIcon,
   WhatsappIcon,
 } from 'react-share'
 
@@ -60,7 +60,7 @@ export const ShareModalContent = ({
             <FacebookIcon size={42} round />
           </FacebookShareButton>
           <TwitterShareButton url={currentUrl} title={text}>
-            <XIcon size={42} round />
+            <TwitterIcon size={42} round />
           </TwitterShareButton>
           <RedditShareButton url={currentUrl} title={text}>
             <RedditIcon size={42} round />
@@ -85,18 +85,20 @@ const ShareButton = ({
   className,
   variant = 'outline',
   shareFor,
+  title = 'Share',
 }: {
   url?: string
   className?: string
   variant?: 'outline' | 'ghost' | 'primary' | 'default'
   shareFor?: string
+  title?: string
 }) => {
   return (
     <Credenza>
       <CredenzaTrigger>
         <Button variant={variant} className={className}>
           <Share2 size={24} className="p-1" />
-          Share
+          {title}
         </Button>
       </CredenzaTrigger>
       <ShareModalContent url={url} shareFor={shareFor} />
