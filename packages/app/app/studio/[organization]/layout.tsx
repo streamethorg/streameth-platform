@@ -14,11 +14,9 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 const Layout = async ({
   children,
   params,
-  searchParams,
 }: {
   children: React.ReactNode
   params: studioPageParams['params']
-  searchParams: studioPageParams['searchParams']
 }) => {
   const isAuthorized = await CheckAuthorization()
   if (!isAuthorized) {
