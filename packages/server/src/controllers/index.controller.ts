@@ -32,13 +32,13 @@ export class IndexController extends Controller {
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
 
-      console.log('hi');
       switch (payload.event) {
         case LivepeerEvent.assetReady:
           const asset = await getAsset(payload.payload.id);
           const session = await this.sessionService.findOne({
             assetId: asset.id,
           });
+
           if (!session) {
             return SendApiResponse('No session found', null, '400');
           }
@@ -46,6 +46,19 @@ export class IndexController extends Controller {
             ipfsURI: asset.storage?.ipfs?.cid,
             videoUrl: asset.playbackUrl,
           } as any);
+
+          const state = await this.stateService.getAll({
+            sessionId: session._id.toString(),
+          });
+
+          if (!state || state.length === 0) {
+            return SendApiResponse('No state found', null, '400');
+          }
+          await this.stateService.update(state[0]._id.toString(), {
+            status: StateStatus.completed,
+          });
+
+          // await startAITools(payload.payload.id);
           break;
         case LivepeerEvent.streamStarted:
           break;
