@@ -15,6 +15,9 @@ import {
 } from 'lucide-react'
 import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
 import Image from 'next/image'
+import StreamethStudio from '@/lib/svg/StreamethStudio'
+import StreamethLogo from '@/lib/svg/StreamethLogo'
+
 const navigationItems = [
   {
     title: 'Home',
@@ -61,24 +64,27 @@ const Navigation = ({
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   return (
-    <div
+    <aside
       className={cn(
         'bg-primary overflow-auto w-full h-full border-r border-border flex flex-col text-black',
         {
           'max-w-[50px]': isCollapsed,
-          'max-w-[200px]': !isCollapsed,
+          'max-w-[250px]': !isCollapsed,
           'transition-max-width': true,
         }
       )}
       style={{
         transition: 'max-width 0.3s ease-out-in',
       }}>
-      <Image
-        className="p-2 h-[56px]"
-        src={isCollapsed ? LogoCollapsed : Logo}
-        alt="Logo"
-        width={180}
-      />
+      {isCollapsed ? (
+        <div className="my-2 mx-1">
+          <StreamethLogo />
+        </div>
+      ) : (
+        <div className="p-2 my-2 mx-4 h-[56px] w-[180px]">
+          <StreamethStudio />
+        </div>
+      )}
 
       <Accordion type="single" className="space-y-4" collapsible>
         {navigationItems.map((item, index) => (
@@ -93,17 +99,17 @@ const Navigation = ({
 
       <div
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="cursor-pointer text-white flex w-full items-center justify-center mt-auto mb-10">
+        className="flex justify-center items-center mt-auto mb-5 w-full text-white cursor-pointer">
         {isCollapsed ? (
           <ArrowRightFromLine className="cursor-pointer" />
         ) : (
-          <div className="flex flex-row ">
-            <ArrowLeftToLine className="cursor-pointer mr-1" />
+          <div className="flex flex-row">
+            <ArrowLeftToLine className="mr-1 cursor-pointer" />
             Collapse
           </div>
         )}
       </div>
-    </div>
+    </aside>
   )
 }
 
