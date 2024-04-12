@@ -59,14 +59,16 @@ const VideoCardWithMenu = ({
           </div>
         </CardHeader>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger className="z-10">
-            <EllipsisVertical className="mt-2" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {DropdownMenuItems}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {DropdownMenuItems && (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="z-10">
+              <EllipsisVertical className="mt-2" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {DropdownMenuItems}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </div>
   )

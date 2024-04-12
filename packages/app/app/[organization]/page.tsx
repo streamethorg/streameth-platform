@@ -3,45 +3,58 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import Channel from './components/Channel'
 import { ChannelPageParams } from '@/lib/types'
-import HomePageNavbar from '@/components/Layout/HomePageNavbar'
-import Footer from '@/components/Layout/Footer'
 import { fetchSession } from '@/lib/services/sessionService'
-
-import ChannelPlayer from './components/ChannelPlayer'
+import ChannelShareIcons from './components/ChannelShareIcons'
 import {
   fetchOrganizationStages,
   fetchStage,
 } from '@/lib/services/stageService'
+import Image from 'next/image'
 import { fetchAllSessions } from '@/lib/data'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Suspense } from 'react'
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
 
-const pages = [
-  {
-    name: 'Videography',
-    href: 'https://info.streameth.org/stream-eth-studio',
-    bgColor: 'bg-muted ',
-  },
-  {
-    name: 'Product',
-    href: 'https://info.streameth.org/services',
-    bgColor: 'bg-muted ',
-  },
-  {
-    name: 'Host your event',
-    href: 'https://info.streameth.org/contact-us',
-    bgColor: 'bg-primary text-primary-foreground',
-  },
-]
+const Loading = () => {
+  return (
+    <Card className="p-4 space-y-6 bg-white shadow-none">
+      <h1 className="text-xl font-bold">Upcoming Streams</h1>
+      <div className="grid grid-cols-4 gap-4 m-5">
+        {Array.from({ length: 2 }).map((_, index) => (
+          <VideoCardSkeleton key={index} />
+        ))}
+      </div>
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold">Watch More</h1>
+        <h3 className="text-sm hover:underline">See more videos</h3>
+      </div>
+      <div className="grid grid-cols-4 gap-4 m-5">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <VideoCardSkeleton key={index} />
+        ))}
+      </div>
+    </Card>
+  )
+}
 
-export default async function OrganizationHome({
+const OrganizationHome = async ({
   params,
   searchParams,
-}: ChannelPageParams) {
+}: ChannelPageParams) => {
   if (!params.organization) {
     return notFound()
   }
+
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
+
   if (!organization) {
     return notFound()
   }
@@ -75,16 +88,33 @@ export default async function OrganizationHome({
     !!libraryVideo || !!playbackLivestream || !!activeStream[0]
 
   return (
-    <div className="mx-auto w-full max-w-5xl">
-      <HomePageNavbar pages={pages} />
-      {playerActive && (
-        <ChannelPlayer
-          libraryVideo={libraryVideo}
-          organization={organization}
-          activeStream={playbackLivestream ?? activeStream[0]}
-        />
-      )}
-      <div className="flex flex-col overflow-auto p-0 lg:p-4">
+    <>
+      <div className="my-5">
+        <AspectRatio ratio={4 / 1} className="w-full h-[256px]">
+          <Image
+            src={'/streameth_banner.png'}
+            alt="banner"
+            quality={100}
+            objectFit="cover"
+            className="rounded-xl"
+            fill
+            priority
+          />
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+          <div className="absolute right-0 bottom-0 left-0 p-4 text-white">
+            <h2 className="text-2xl font-bold">
+              {organization.name}
+            </h2>
+            <p className="text-lg">{organization.description}</p>
+          </div>
+
+          <div className="absolute right-0 bottom-0 p-4 text-white">
+            <ChannelShareIcons organization={organization} />
+          </div>
+        </AspectRatio>
+      </div>
+
+      <Suspense fallback={<Loading />}>
         <Channel
           tab={searchParams.tab}
           playerActive={playerActive}
@@ -92,11 +122,8 @@ export default async function OrganizationHome({
           searchVideos={searchVideos}
           searchQuery={searchParams.search}
         />
-      </div>
-      <div className="sticky mb-5 top-[100vh]">
-        <Footer />
-      </div>
-    </div>
+      </Suspense>
+    </>
   )
 }
 
@@ -132,3 +159,5 @@ export async function generateMetadata(
     }
   }
 }
+
+export default OrganizationHome

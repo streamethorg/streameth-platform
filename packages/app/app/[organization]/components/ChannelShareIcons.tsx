@@ -16,7 +16,7 @@ const ChannelShareIcons = ({
       <Credenza>
         <CredenzaTrigger>
           <Share2
-            className="text-muted-foreground"
+            className="text-white text-muted-foreground"
             width={22}
             height={22}
           />
@@ -35,7 +35,10 @@ const ChannelShareIcons = ({
 
       {organization?.url && (
         <Link target="_blank" rel="noopener" href={organization?.url}>
-          <Globe className="text-muted-foreground" size={25} />
+          <Globe
+            className="text-white text-muted-foreground"
+            size={25}
+          />
         </Link>
       )}
     </div>
