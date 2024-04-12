@@ -16,7 +16,7 @@ import ShareLivestream from './ShareLivestream'
 import ToggleLivestreamVisibility from './ToggleLivestreamVisibility'
 import TableSort from '@/components/misc/TableSort'
 import { Button } from '@/components/ui/button'
-import { Paperclip } from 'lucide-react'
+import { ScissorsLineDashed } from 'lucide-react'
 
 const LivestreamTable = ({
   streams,
@@ -83,7 +83,7 @@ const LivestreamTable = ({
                     <Button
                       variant="outline"
                       className="flex items-center gap-1">
-                      <Paperclip className="w-4 h-4" />
+                      <ScissorsLineDashed className="w-4 h-4" />
                       Clip
                     </Button>
                   </Link>
