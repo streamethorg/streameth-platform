@@ -16,6 +16,7 @@ import {
 import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
 import Image from 'next/image'
 import StreamethStudio from '@/lib/svg/StreamethStudio'
+import StreamethLogo from '@/lib/svg/StreamethLogo'
 
 const navigationItems = [
   {
@@ -75,9 +76,15 @@ const Navigation = ({
       style={{
         transition: 'max-width 0.3s ease-out-in',
       }}>
-      <div className="p-2 my-2 mx-4 h-[56px] w-[180px]">
-        <StreamethStudio />
-      </div>
+      {isCollapsed ? (
+        <div className="my-2 mx-1">
+          <StreamethLogo />
+        </div>
+      ) : (
+        <div className="p-2 my-2 mx-4 h-[56px] w-[180px]">
+          <StreamethStudio />
+        </div>
+      )}
 
       <Accordion type="single" className="space-y-4" collapsible>
         {navigationItems.map((item, index) => (
@@ -92,7 +99,7 @@ const Navigation = ({
 
       <div
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="flex justify-center items-center mt-auto mb-10 w-full text-white cursor-pointer">
+        className="flex justify-center items-center mt-auto mb-5 w-full text-white cursor-pointer">
         {isCollapsed ? (
           <ArrowRightFromLine className="cursor-pointer" />
         ) : (
