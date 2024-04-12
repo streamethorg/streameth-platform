@@ -46,12 +46,12 @@ const navigationItems = [
     icon: <ScissorsLineDashed />,
     defaultCollapsed: false,
   },
-  {
-    title: 'Settings',
-    navigationPath: 'settings',
-    icon: <Settings />,
-    defaultCollapsed: false,
-  },
+  // {
+  //   title: 'Settings',
+  //   navigationPath: 'settings',
+  //   icon: <Settings />,
+  //   defaultCollapsed: false,
+  // },
 ]
 const Navigation = ({
   organizationSlug,
