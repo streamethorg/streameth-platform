@@ -6,7 +6,6 @@ import React from 'react'
 import { IExtendedSession } from '@/lib/types'
 import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
 import Link from 'next/link'
-import Camera from '@/lib/svg/Camera'
 import { Video } from 'lucide-react'
 
 const Channel = async ({
