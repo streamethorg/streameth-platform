@@ -8,17 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { IExtendedSession, INFTSessions } from '@/lib/types'
-import { formatDate } from '@/lib/utils/time'
-
 import { PlusCircle } from 'lucide-react'
-import Image from 'next/image'
 import React, { useState } from 'react'
 import AddMediaTabItem from './AddMediaTabItem'
 import SelectedMediaItem from './SelectedMediaItem'
@@ -29,11 +21,13 @@ const AddMedia = ({
   stages,
   setFormState,
   formState,
+  type,
 }: {
   stages: INFTSessions[]
   formState: ICreateNFT
   setFormState: React.Dispatch<React.SetStateAction<ICreateNFT>>
   videos: INFTSessions[]
+  type: string
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -79,18 +73,21 @@ const AddMedia = ({
                 setFormState={setFormState}
                 tabValue="videos"
                 videos={filteredVideos}
+                type={type}
               />
               <AddMediaTabItem
                 formState={formState}
                 setFormState={setFormState}
                 tabValue="livestreams"
                 videos={stages}
+                type={type}
               />
               <AddMediaTabItem
                 formState={formState}
                 setFormState={setFormState}
                 tabValue="clips"
                 videos={clips}
+                type={type}
               />
             </Tabs>
           </div>

@@ -11,11 +11,13 @@ const AddMediaTabItem = ({
   videos,
   formState,
   setFormState,
+  type,
 }: {
   setFormState: React.Dispatch<React.SetStateAction<ICreateNFT>>
   formState: ICreateNFT
   tabValue: string
   videos: INFTSessions[]
+  type: string
 }) => {
   const parsedVideos = videos.map((video) => ({
     ...video,
@@ -40,18 +42,29 @@ const AddMediaTabItem = ({
               checked={formState?.selectedVideo?.some(
                 (v) => v._id === video._id
               )}
-              onCheckedChange={() =>
-                setFormState((prevState) => ({
-                  ...prevState,
-                  selectedVideo: prevState.selectedVideo.some(
-                    (v) => v._id === video._id
-                  )
-                    ? prevState.selectedVideo.filter(
-                        (v) => v._id !== video._id
-                      )
-                    : [...prevState.selectedVideo, video],
-                }))
-              }
+              onCheckedChange={() => {
+                if (type === 'single') {
+                  setFormState((prevState) => ({
+                    ...prevState,
+                    selectedVideo: prevState.selectedVideo.some(
+                      (v) => v._id === video._id
+                    )
+                      ? []
+                      : [video],
+                  }))
+                } else {
+                  setFormState((prevState) => ({
+                    ...prevState,
+                    selectedVideo: prevState.selectedVideo.some(
+                      (v) => v._id === video._id
+                    )
+                      ? prevState.selectedVideo.filter(
+                          (v) => v._id !== video._id
+                        )
+                      : [...prevState.selectedVideo, video],
+                  }))
+                }
+              }}
             />
           </div>
           <div className="min-w-[200px] w-[200px]">

@@ -100,6 +100,7 @@ const CreateNFTForm = ({
               formState={formState}
               videos={videos}
               stages={stages}
+              type={type}
             />
           )}
         </div>
