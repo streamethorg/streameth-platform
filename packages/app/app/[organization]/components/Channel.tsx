@@ -6,6 +6,8 @@ import React from 'react'
 import { IExtendedSession } from '@/lib/types'
 import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
 import Link from 'next/link'
+import Camera from '@/lib/svg/Camera'
+import { Video } from 'lucide-react'
 
 const Channel = async ({
   organizationSlug,
@@ -37,16 +39,32 @@ const Channel = async ({
     (video) => video.type === 'clip' || video.type === 'video'
   )
 
+  if (videos.length === 0 && livestreams.length === 0) {
+    return (
+      <Card className="flex flex-col justify-center items-center bg-white shadow-none items-centerp-4 min-h-[450px]">
+        <Video size={130} />
+        <p>No videos or livestreams uploaded yet</p>
+      </Card>
+    )
+  }
+
   return (
     <Card className="p-4 space-y-6 bg-white shadow-none">
-      <h1 className="text-xl font-bold">Upcoming Streams</h1>
-      <div className="grid grid-cols-3 gap-4">
-        {livestreams.map((livestream, index) => (
-          <Card key={index} className="bg-gray-500 aspect-square">
-            {livestream.name}
-          </Card>
-        ))}
-      </div>
+      {livestreams.length !== 0 && (
+        <>
+          <h1 className="text-xl font-bold">Upcoming Streams</h1>
+          <div className="grid grid-cols-3 gap-4">
+            {livestreams.map((livestream) => (
+              <VideoCardWithMenu
+                key={livestream._id.toString()}
+                session={livestream}
+                link={livestream.videoUrl!}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold">Watch More</h1>
         <Link href={`/${organization.slug}/videos`}>
@@ -54,11 +72,11 @@ const Channel = async ({
         </Link>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {videos.map((video, index) => (
+        {videos.map((video) => (
           <VideoCardWithMenu
-            key={index}
+            key={video._id.toString()}
             session={video}
-            link={video.videoUrl!}
+            link={`/watch?session=${video._id.toString()}`}
           />
         ))}
       </div>

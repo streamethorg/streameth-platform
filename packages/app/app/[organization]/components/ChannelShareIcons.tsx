@@ -12,13 +12,12 @@ const ChannelShareIcons = ({
   organization: IExtendedOrganization
 }) => {
   return (
-    <div className="flex flex-row justify-center items-center px-4 space-x-4">
+    <div className="flex justify-end items-center px-4 space-x-4">
       <Credenza>
         <CredenzaTrigger>
           <Share2
             className="text-white text-muted-foreground"
-            width={22}
-            height={22}
+            size={22}
           />
         </CredenzaTrigger>
         <ShareModalContent shareFor="channel" />

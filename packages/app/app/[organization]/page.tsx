@@ -13,26 +13,22 @@ import Image from 'next/image'
 import { fetchAllSessions } from '@/lib/data'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Suspense } from 'react'
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
+import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
 
 const Loading = () => {
   return (
-    <Card className="p-4 space-y-6 bg-white shadow-none">
-      <h1 className="text-xl font-bold">Upcoming Streams</h1>
+    <Card className="p-4 space-y-6 bg-white shadow-none animate-pulse">
+      <div className="w-1/4 h-6 bg-gray-300 rounded"></div>
       <div className="grid grid-cols-4 gap-4 m-5">
         {Array.from({ length: 2 }).map((_, index) => (
           <VideoCardSkeleton key={index} />
         ))}
       </div>
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">Watch More</h1>
-        <h3 className="text-sm hover:underline">See more videos</h3>
+        <div className="w-1/4 h-6 bg-gray-300 rounded"></div>
+        <div className="w-1/5 h-4 bg-gray-300 rounded"></div>
       </div>
       <div className="grid grid-cols-4 gap-4 m-5">
         {Array.from({ length: 6 }).map((_, index) => (
@@ -91,15 +87,21 @@ const OrganizationHome = async ({
     <>
       <div className="my-5">
         <AspectRatio ratio={4 / 1} className="w-full h-[256px]">
-          <Image
-            src={'/streameth_banner.png'}
-            alt="banner"
-            quality={100}
-            objectFit="cover"
-            className="rounded-xl"
-            fill
-            priority
-          />
+          {organization.banner ? (
+            <Image
+              src={organization.banner}
+              alt="banner"
+              quality={100}
+              objectFit="cover"
+              className="rounded-xl"
+              fill
+              priority
+            />
+          ) : (
+            <div className="h-full bg-gray-300">
+              <StreamethLogoWhite />
+            </div>
+          )}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
           <div className="absolute right-0 bottom-0 left-0 p-4 text-white">
             <h2 className="text-2xl font-bold">
