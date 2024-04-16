@@ -7,7 +7,6 @@ import { useDropzone } from 'react-dropzone'
 import { FileUp } from 'lucide-react'
 import uploadVideo from '@/lib/uploadVideo'
 import { getUrlAction } from '@/lib/actions/livepeer'
-import { Progress } from '@/components/ui/progress'
 
 const Dropzone = ({
   onChange,
@@ -53,15 +52,16 @@ const Dropzone = ({
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'video/*': ['.mp4'],
+      'video/*': ['.mp4', '.mov'],
     },
+    maxSize: 5 * 1024 * 1024 * 1024, // 5 GB in bytes
     maxFiles: 1,
     onDrop,
   })
 
   if (isUploading && progress >= 100) {
     return (
-      <div className="flex flex-col justify-center items-center w-full h-full text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
+      <div className="flex flex-col justify-center items-center w-full h-40 text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
         <p className="m-2">
           Uploading finished! Processing now... Please proceeed...
         </p>
@@ -71,7 +71,7 @@ const Dropzone = ({
 
   if (isUploading && progress < 100) {
     return (
-      <div className="flex flex-col justify-center items-center p-2 w-full h-full bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
+      <div className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
         <div className="flex relative justify-center items-center w-full h-full">
           <div className="absolute top-0 left-0 w-full h-full bg-gray-300 rounded-md opacity-50"></div>
           <div
@@ -89,13 +89,13 @@ const Dropzone = ({
   return (
     <div
       {...getRootProps()}
-      className="flex flex-col justify-center items-center w-full h-full text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
-      <FileUp className={'my-4'} size={65} />
+      className="flex flex-col justify-center items-center space-y-2 w-full h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200">
+      <FileUp size={35} />
       <input {...getInputProps()} />
       <div className="mx-4">
         <p>Drag and drop videos to upload... Or just click here!</p>
         <p>
-          Maximum video file size is 10GB. Best resolution of 1920 x
+          Maximum video file size is 5GB. Best resolution of 1920 x
           1080. Aspect ratio of 16:9
         </p>
       </div>
