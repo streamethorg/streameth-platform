@@ -181,3 +181,7 @@ export interface ChannelPageParams {
     streamId: string
   }
 }
+
+export interface INFTSessions extends IExtendedSession {
+  videoType: string
+}

@@ -13,7 +13,11 @@ import {
   CalendarDays,
   ScissorsLineDashed,
 } from 'lucide-react'
-import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
+import {
+  ArrowLeftToLine,
+  ArrowRightFromLine,
+  Image as ImageIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 const navigationItems = [
   {
@@ -44,6 +48,12 @@ const navigationItems = [
     title: 'Clips',
     navigationPath: 'clips',
     icon: <ScissorsLineDashed />,
+    defaultCollapsed: false,
+  },
+  {
+    title: 'Mint NFT',
+    navigationPath: 'nfts',
+    icon: <ImageIcon />,
     defaultCollapsed: false,
   },
   {
