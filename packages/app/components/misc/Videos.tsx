@@ -1,5 +1,6 @@
 import VideoCard from '@/components/misc/VideoCard'
 import { IExtendedSession } from '@/lib/types'
+import VideoCardWithMenu from './VideoCard/VideoCardWithMenu'
 export default async function VideoGrid({
   videos,
   maxVideos,
@@ -16,7 +17,7 @@ export default async function VideoGrid({
       <div
         className={`${
           scroll ? 'flex flex-row' : 'grid grid-cols-1'
-        }  lg:grid md:grid-cols-2 lg:grid-cols-4 gap-8 gap-x-4`}>
+        }  lg:grid md:grid-cols-3 lg:grid-cols-3 gap-8 gap-x-4`}>
         {videos.map((video, index) =>
           ({ maxVideos }) && maxVideos && index > maxVideos ? null : (
             <div
@@ -24,7 +25,12 @@ export default async function VideoGrid({
               className={`${
                 scroll && 'w-[300px]'
               } lg:w-full h-full border-none  flex-initial`}>
-              <VideoCard session={video} />
+              <VideoCardWithMenu
+                session={video}
+                link={`/${
+                  video.organizationId
+                }/watch?session=${video._id.toString()}`}
+              />
             </div>
           )
         )}

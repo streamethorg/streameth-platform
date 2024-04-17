@@ -31,7 +31,7 @@ const OrganizationHome = async ({
   }
 
   return (
-    <div className="max-w-5xl m-auto w-full">
+    <div className="w-full max-w-5xl m-auto">
       <div className="z-10 md:p-4 relative w-full">
         <AspectRatio ratio={3 / 1} className="w-full rounded-xl relative">
           {organization.banner ? (

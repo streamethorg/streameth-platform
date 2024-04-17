@@ -3,7 +3,7 @@ import Link from 'next/link'
 import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
 import VideoCardSkeleton, {
 } from '@/components/misc/VideoCard/VideoCardSkeleton'
-
+import Videos from '@/components/misc/Videos'
 const WatchGrid = async ({
   organizationSlug,
 }: {
@@ -29,16 +29,7 @@ const WatchGrid = async ({
           <h3 className="text-sm hover:underline">See more videos</h3>
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-        {videos.slice(0, 4).map((video) => (
-          <VideoCardWithMenu
-            key={video._id.toString()}
-            showDate={false}
-            session={video}
-            link={`/${organizationSlug}/watch?session=${video._id.toString()}`}
-          />
-        ))}
-      </div>
+      <Videos videos={videos} maxVideos={4} />
     </>
   )
 }

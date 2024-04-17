@@ -5,7 +5,7 @@ import { fetchEvents } from '@/lib/services/eventService'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
-
+  console.log(searchParams.get('searchQuery'), searchParams.get('organization'))
   const events = await fetchEvents({})
   const sessions = (
     await fetchAllSessions({
@@ -46,7 +46,10 @@ export async function GET(request: NextRequest) {
     .slice(0, 5)
 
   const returnData = {
-    sessions: searchResults.map((session) => session.name),
+    sessions: searchResults.map((session) => ({
+      id: session._id,
+      name: session.name,
+    })),
     events: eventResults.map((event) => ({
       id: event._id,
       name: event.name,

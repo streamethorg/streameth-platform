@@ -2,17 +2,26 @@ import { CardTitle } from '@/components/ui/card'
 import Pagination from './pagination'
 import { fetchAllSessions } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
-import { SearchPageProps } from '@/lib/types'
 import { FileQuestion } from 'lucide-react'
 
-const ArchiveVideos = async ({ searchParams }: SearchPageProps) => {
+const ArchiveVideos = async ({ 
+  organizationSlug,
+  event,
+  searchQuery,
+  page,
+ }: {
+  organizationSlug?: string
+  event?: string
+  searchQuery?: string
+  page?: number
+ }) => {
   const videos = await fetchAllSessions({
-    organizationSlug: searchParams.organization,
-    event: searchParams.event,
+    organizationSlug,
+    event: event,
     limit: 12,
     onlyVideos: true,
-    searchQuery: searchParams.searchQuery,
-    page: Number(searchParams.page || 1),
+    searchQuery,
+    page: Number(page || 1),
   })
 
   if (videos.pagination.totalItems === 0) {

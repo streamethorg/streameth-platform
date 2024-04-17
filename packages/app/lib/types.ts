@@ -61,11 +61,12 @@ export interface OrganizationPageProps {
     organization: string
   }
   searchParams: {
-    tab?: string
-    search: string
     id: string
     streamId: string
     session: string
+    event?: string
+    searchQuery?: string
+    page?: string
   }
 }
 

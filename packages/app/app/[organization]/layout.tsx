@@ -4,21 +4,7 @@ import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Footer from '@/components/Layout/Footer'
 
 const pages = [
-  // {
-  //   name: 'Videography',
-  //   href: 'https://info.streameth.org/stream-eth-studio',
-  //   bgColor: 'bg-muted ',
-  // },
-  // {
-  //   name: 'Product',
-  //   href: 'https://info.streameth.org/services',
-  //   bgColor: 'bg-muted ',
-  // },
-  // {
-  //   name: 'Host your event',
-  //   href: 'https://info.streameth.org/contact-us',
-  //   bgColor: 'bg-primary text-primary-foreground',
-  // },
+
   {
     name: 'Videos',
     href: '/',
@@ -27,16 +13,16 @@ const pages = [
 ]
 
 const Layout = async ({
+  params,
   children,
 }: {
+  params: { organization: string }
   children: React.ReactNode
 }) => {
   return (
-    <div className="mx-auto w-full bg-white">
-      <HomePageNavbar pages={pages} />
-
-      {children}
-
+    <div className="mx-auto min-h-[100vh] w-full bg-white flex flex-col">
+      <HomePageNavbar currentOrganization={params.organization} pages={pages} showSearchBar />
+      <div className=' w-full flex-grow h-full'>{children}</div>
       <div className="sticky mb-5 top-[100vh]">
         <Footer />
       </div>
