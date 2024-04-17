@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { CardContent } from '@/components/ui/card'
 import MarkdownDisplay from '../misc/MarkdownDisplay'
 
 const InfoBoxDescription = ({
@@ -34,11 +33,11 @@ const InfoBoxDescription = ({
   if (!description) return null
 
   return (
-    <CardContent className="relative">
+    <div className='py-4 relative'>
       <div
         ref={descriptionRef}
         className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
-          isExpandable && !isOpened && 'max-h-5 max-w-[90%] truncate'
+          isExpandable && !isOpened && 'max-h-10 max-w-[90%] truncate'
         }`}>
         {description && <MarkdownDisplay content={description} />}
       </div>
@@ -49,7 +48,7 @@ const InfoBoxDescription = ({
           {isOpened ? 'less' : 'more'}
         </button>
       )}
-    </CardContent>
+    </div>
   )
 }
 

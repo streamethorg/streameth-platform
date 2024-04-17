@@ -34,19 +34,19 @@ const OrganizationHome = async ({
       <div className="relative z-10 w-full md:p-4">
         <AspectRatio
           ratio={3 / 1}
-          className="relative w-full rounded-xl">
+          className="relative w-full md:rounded-xl">
           {organization.banner ? (
             <Image
               src={organization.banner}
               alt="banner"
               quality={100}
               objectFit="cover"
-              className="rounded-xl"
+              className="md:rounded-xl"
               fill
               priority
             />
           ) : (
-            <div className="h-full bg-gray-300 rounded-xl">
+            <div className="h-full bg-gray-300 md:rounded-xl">
               <StreamethLogoWhite />
             </div>
           )}

@@ -140,24 +140,23 @@ const MobileNavBar = ({
             </button>
           )}
           {pages.length > 0 && (
-            <button onClick={toggleMenu} className="z-50 p-2">
+            <button onClick={toggleMenu} className="z-50 ">
               {!menuVisible ? (
                 <Menu
-                  size={23}
-                  strokeWidth={1.5}
-                  className="text-white rounded bg-primary"
+                  size={30}
+                  strokeWidth={2}
+                  className=""
                 />
               ) : (
                 <X
-                  size={23}
-                  strokeWidth={1.5}
-                  className="text-white rounded bg-primary"
+                size={30}
+                strokeWidth={2}
+                className=""
                 />
               )}
             </button>
           )}
         </div>
-        <Support />
         {menuVisible && (
           <Navbar
             pages={getPages(
@@ -167,7 +166,6 @@ const MobileNavBar = ({
             )}
           />
         )}
-        <ConnectWalletButton />
       </div>
     </NavigationMenu>
   )

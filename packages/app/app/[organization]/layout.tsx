@@ -3,13 +3,7 @@
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Footer from '@/components/Layout/Footer'
 
-const pages = [
-  {
-    name: 'Videos',
-    href: '/',
-    bgColor: 'bg-muted',
-  },
-]
+
 
 const Layout = async ({
   params,
@@ -18,6 +12,20 @@ const Layout = async ({
   params: { organization: string }
   children: React.ReactNode
 }) => {
+
+  const pages = [
+    {
+      name: 'Home',
+      href: `/${params.organization}`,
+      bgColor: 'bg-muted',
+    },
+    {
+      name: 'Videos',
+      href: `/${params.organization}/videos`,
+      bgColor: 'bg-muted',
+    },
+  ]
+
   return (
     <div className="mx-auto min-h-[100vh] w-full bg-white flex flex-col">
       <HomePageNavbar

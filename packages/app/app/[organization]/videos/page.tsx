@@ -31,7 +31,7 @@ export default async function ArchivePage({
 
   return (
     <div>
-      <div className="max-h-[200px] h-full aspect-video w-full">
+      <div className="hidden md:block max-h-[200px] h-full aspect-video w-full">
         {organization.banner ? (
           <Image
             src={organization.banner}

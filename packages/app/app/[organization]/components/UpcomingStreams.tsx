@@ -26,7 +26,7 @@ const UpcomingStreams = async ({
             <div className="md:hidden">
               <VideoCardMobile
                 session={livestream}
-                link={`/${organizationId}]`}
+                link={`/${organizationSlug}/livestream?stage=${livestream._id.toString()}`}
               />
             </div>
             <div className="hidden md:block">

@@ -31,8 +31,8 @@ export default async function Watch({
 
   return (
     <Suspense key={video._id} fallback={<div>Loading...</div>}>
-      <div className="flex flex-col gap-4 w-full h-full md:px-16 md:pt-5 lg:flex-row">
-        <div className="flex flex-col h-full">
+      <div className="flex flex-col gap-4 w-full h-full max-w-7xl mx-auto">
+        <div className="flex flex-col h-full w-full">
           <PlayerWithControls
             src={[
               {
@@ -44,9 +44,11 @@ export default async function Watch({
               },
             ]}
           />
-          <SessionInfoBox video={video} vod={true} />
+          <div className="w-full px-4 ">
+            <SessionInfoBox video={video} vod={true} />
+          </div>
         </div>
-        <div className="md:hidden">
+        <div className="px-4">
           <WatchGrid organizationSlug={params.organization} />
         </div>
       </div>

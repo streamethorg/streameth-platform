@@ -88,7 +88,7 @@ export default function SearchBar({
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="max-w-[500px]"
+        className="max-w-[500px] bg-white"
         placeholder="Search"
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

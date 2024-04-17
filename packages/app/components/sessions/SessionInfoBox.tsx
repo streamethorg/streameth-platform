@@ -21,24 +21,24 @@ const SessionInfoBox = async ({
 }) => {
   return (
     <div
-      className={`${
+      className={`flex flex-col md:flex-row py-4 md:space-x-2  ${
         inverted ? 'text-white rounded-lg  text-card-foreground ' : ''
       }`}>
-      <CardHeader className="flex flex-col justify-start w-full">
-        <CardTitle className="items-start px-3 pt-3 text-xl md:px-0 lg:text-2xl">
+      <div className="flex flex-col justify-start w-full ">
+        <CardTitle className="flex flex-row justify-between items-start text-xl lg:text-2xl">
           <span>{video.name}</span>
         </CardTitle>
-        <CardDescription>
-          <InfoBoxDescription description={video.description} />
-          <div className="flex justify-between items-center mx-3 mb-auto space-x-2 md:justify-end md:mx-0">
-            <Button className="w-full md:w-36">Collect Video</Button>
+        <InfoBoxDescription description={video.description} />
+      </div>
+      <div className="mb-auto flex justify-between items-center space-x-2 md:justify-end">
+            <Button variant={'primary'} className="w-full md:w-36">
+              Collect Video
+            </Button>
             <Button className="hidden md:block" variant={'outline'}>
               Collect Video
             </Button>
             <PopoverActions session={video} />
           </div>
-        </CardDescription>
-      </CardHeader>
     </div>
   )
 }

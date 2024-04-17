@@ -33,7 +33,7 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
 
   return (
     <Player.Root src={props.src}>
-      <Player.Container className="rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF]  h-full w-full overflow-hidden  outline-none transition">
+      <Player.Container className="md:rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF]  h-full w-full overflow-hidden  outline-none transition">
         <Player.Video
           title="Live stream"
           className={cn('h-full w-full transition')}

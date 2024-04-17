@@ -1,19 +1,20 @@
 import { fetchAllSessions } from '@/lib/data'
 import Link from 'next/link'
-import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
 import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
 import Videos from '@/components/misc/Videos'
 
 const WatchGrid = async ({
   organizationSlug,
+  gridLength = 4,
 }: {
   organizationSlug: string
+  gridLength?: number
 }) => {
   const videos = (
     await fetchAllSessions({
       organizationSlug,
       onlyVideos: true,
-      limit: 4,
+      limit: gridLength,
     })
   ).sessions
 
@@ -22,8 +23,8 @@ const WatchGrid = async ({
   }
 
   return (
-    <div className="px-3">
-      <div className="flex justify-between items-center">
+    <div className="w-full">
+      <div className="flex justify-between items-center pb-4">
         <h1 className="text-xl font-bold">Watch More</h1>
         <Link href={`/${organizationSlug}/videos`}>
           <h3 className="text-sm hover:underline">See more videos</h3>
@@ -32,7 +33,7 @@ const WatchGrid = async ({
       <Videos
         videos={videos}
         OrganizationSlug={organizationSlug}
-        maxVideos={4}
+        maxVideos={gridLength}
       />
     </div>
   )
