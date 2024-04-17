@@ -124,3 +124,12 @@ export const supportSchema = z.object({
   telegram: z.string().optional(),
   email: z.string().optional(),
 })
+
+export const nftSchema = z.object({
+  name: z.string().min(1, 'Message is required'),
+  description: z
+    .string()
+    .min(1, 'Description is required')
+    .max(200, 'Description is too long'),
+  thumbnail: z.string().optional(),
+})

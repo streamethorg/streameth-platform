@@ -13,7 +13,11 @@ import {
   CalendarDays,
   ScissorsLineDashed,
 } from 'lucide-react'
-import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
+import {
+  ArrowLeftToLine,
+  ArrowRightFromLine,
+  Image as ImageIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 import StreamethStudio from '@/lib/svg/StreamethStudio'
 import StreamethLogo from '@/lib/svg/StreamethLogo'
@@ -49,6 +53,12 @@ const navigationItems = [
     icon: <ScissorsLineDashed />,
     defaultCollapsed: false,
   },
+  {
+    title: 'Mint NFT',
+    navigationPath: 'nfts',
+    icon: <ImageIcon />,
+    defaultCollapsed: false,
+  },
   // {
   //   title: 'Settings',
   //   navigationPath: 'settings',
@@ -56,6 +66,7 @@ const navigationItems = [
   //   defaultCollapsed: false,
   // },
 ]
+
 const Navigation = ({
   organizationSlug,
 }: {
