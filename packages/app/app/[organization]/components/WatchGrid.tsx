@@ -35,7 +35,7 @@ const WatchGrid = async ({
             key={video._id.toString()}
             showDate={false}
             session={video}
-            link={`/watch?session=${video._id.toString()}`}
+            link={`/${organizationSlug}/watch?session=${video._id.toString()}`}
           />
         ))}
       </div>

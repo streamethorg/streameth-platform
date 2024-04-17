@@ -65,6 +65,7 @@ export interface OrganizationPageProps {
     search: string
     id: string
     streamId: string
+    session: string
   }
 }
 

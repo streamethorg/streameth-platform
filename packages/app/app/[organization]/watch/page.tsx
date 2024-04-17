@@ -1,34 +1,34 @@
 import { PlayerWithControls } from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { OrganizationPageProps } from '@/lib/types'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
-import RelatedVideos from './components/RelatedVideos'
 import { Metadata } from 'next'
 import { apiUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
 import { fetchSession } from '@/lib/services/sessionService'
+import { fetchOrganization } from '@/lib/services/organizationService'
 import { Suspense } from 'react'
+import WatchGrid from '../components/WatchGrid'
 
 export default async function Watch({
+  params,
   searchParams,
 }: OrganizationPageProps) {
+
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
+
+  if (!organization) {
+    return notFound()
+  }
+
   if (!searchParams.session) return notFound()
   const video = await fetchSession({
     session: searchParams.session,
   })
   if (!video || !video.videoUrl) return notFound()
 
-  const tabs = []
-  tabs.push({
-    value: 'Related videos',
-    content: <RelatedVideos searchQuery={video.name} />,
-  })
 
   return (
     <Suspense key={video._id} fallback={<div>Loading...</div>}>
@@ -56,25 +56,7 @@ export default async function Watch({
             viewCount
           />
         </div>
-        <Tabs
-          defaultValue={tabs[0]?.value ?? ''}
-          className="lg:w-[25%] w-full max-h-[100%] ">
-          <TabsList className="w-full bg-secondary">
-            {tabs.map((tab) => (
-              <TabsTrigger key={tab.value} value={tab.value}>
-                {tab.value}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          {tabs.map((tab) => (
-            <TabsContent
-              className="h-[calc(100%-50px)] w-full"
-              key={tab.value}
-              value={tab.value}>
-              {tab.content}
-            </TabsContent>
-          ))}
-        </Tabs>
+        <WatchGrid organizationSlug={params.organization} />
       </div>
     </Suspense>
   )
@@ -82,7 +64,7 @@ export default async function Watch({
 
 export async function generateMetadata({
   searchParams,
-}: WatchPageProps): Promise<Metadata> {
+}: OrganizationPageProps): Promise<Metadata> {
   const response = await fetch(
     `${apiUrl()}/sessions/${searchParams.session}`
   )
