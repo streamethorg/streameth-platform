@@ -19,10 +19,12 @@ import React, { ReactNode } from 'react'
 
 const VideoCardWithMenu = ({
   session,
+  showDate = true,
   DropdownMenuItems,
   link,
 }: {
   session: IExtendedSession
+  showDate?: boolean
   DropdownMenuItems?: ReactNode
   link: string
 }) => {
@@ -49,14 +51,16 @@ const VideoCardWithMenu = ({
             </CardTitle>
           </Link>
 
-          <div className="flex justify-between items-center">
-            <CardDescription className={`text-xs truncate `}>
-              {formatDate(
-                new Date(session.createdAt as string),
-                'ddd. MMM. D, YYYY'
-              )}
-            </CardDescription>
-          </div>
+          {showDate && (
+            <div className="flex justify-between items-center">
+              <CardDescription className={`text-xs truncate `}>
+                {formatDate(
+                  new Date(session.createdAt as string),
+                  'ddd. MMM. D, YYYY'
+                )}
+              </CardDescription>
+            </div>
+          )}
         </CardHeader>
 
         {DropdownMenuItems && (

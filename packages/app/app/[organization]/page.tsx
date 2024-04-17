@@ -14,23 +14,28 @@ import { fetchAllSessions } from '@/lib/data'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Suspense } from 'react'
 import { Card } from '@/components/ui/card'
-import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
+import VideoCardSkeleton, {
+  VideoCardSkeletonMobile,
+} from '@/components/misc/VideoCard/VideoCardSkeleton'
 import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
 
 const Loading = () => {
   return (
-    <Card className="p-4 space-y-6 bg-white shadow-none animate-pulse">
-      <div className="w-1/4 h-6 bg-gray-300 rounded"></div>
-      <div className="grid grid-cols-4 gap-4 m-5">
-        {Array.from({ length: 2 }).map((_, index) => (
-          <VideoCardSkeleton key={index} />
+    <Card className="p-4 mt-40 space-y-6 bg-white shadow-none animate-pulse md:mt-4">
+      <div className="w-1/4 h-6 bg-gray-300 rounded md:hidden"></div>
+      <div className="grid grid-rows-3 gap-4 m-5 md:hidden md:grid-cols-3 md:m-0">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div key={index} className="block md:hidden">
+            <VideoCardSkeletonMobile />
+          </div>
         ))}
       </div>
+
       <div className="flex justify-between items-center">
         <div className="w-1/4 h-6 bg-gray-300 rounded"></div>
         <div className="w-1/5 h-4 bg-gray-300 rounded"></div>
       </div>
-      <div className="grid grid-cols-4 gap-4 m-5">
+      <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-4">
         {Array.from({ length: 6 }).map((_, index) => (
           <VideoCardSkeleton key={index} />
         ))}
@@ -85,7 +90,7 @@ const OrganizationHome = async ({
 
   return (
     <>
-      <div className="my-5">
+      <div className="z-10 my-5">
         <AspectRatio ratio={4 / 1} className="w-full h-[256px]">
           {organization.banner ? (
             <Image
@@ -103,14 +108,11 @@ const OrganizationHome = async ({
             </div>
           )}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
-          <div className="absolute right-0 bottom-0 left-0 p-4 text-white">
+          <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 text-white">
             <h2 className="text-2xl font-bold">
               {organization.name}
             </h2>
             <p className="text-lg">{organization.description}</p>
-          </div>
-
-          <div className="absolute right-0 bottom-0 p-4 text-white">
             <ChannelShareIcons organization={organization} />
           </div>
         </AspectRatio>
