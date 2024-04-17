@@ -8,8 +8,10 @@ import VideoCardSkeleton, {
 
 const UpcomingStreams = async ({
   organizationId,
+  organizationSlug,
 }: {
   organizationId: string
+  organizationSlug: string
 }) => {
   const livestreams = await fetchStages({
     organizationId,
@@ -22,10 +24,16 @@ const UpcomingStreams = async ({
         {livestreams.map((livestream) => (
           <React.Fragment key={livestream._id.toString()}>
             <div className="md:hidden">
-              <VideoCardMobile session={livestream} link={`/`} />
+              <VideoCardMobile
+                session={livestream}
+                link={`/${organizationId}]`}
+              />
             </div>
             <div className="hidden md:block">
-              <VideoCardWithMenu session={livestream} link={`/`} />
+              <VideoCardWithMenu
+                session={livestream}
+                link={`/${organizationSlug}/livestream?stage=${livestream._id.toString()}`}
+              />
             </div>
           </React.Fragment>
         ))}

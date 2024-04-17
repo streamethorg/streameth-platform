@@ -70,7 +70,6 @@ export interface OrganizationPageProps {
   }
 }
 
-
 export interface WatchPageProps {
   searchParams: {
     event: string

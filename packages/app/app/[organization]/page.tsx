@@ -8,11 +8,10 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Suspense } from 'react'
 import { Card } from '@/components/ui/card'
 import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
-import WatchGrid, { WatchGrdiLoading } from './components/WatchGrid'
+import WatchGrid, { WatchGridLoading } from './components/WatchGrid'
 import UpcomingStreams, {
   UpcomingStreamsLoading,
 } from './components/UpcomingStreams'
-
 
 const OrganizationHome = async ({
   params,
@@ -31,9 +30,11 @@ const OrganizationHome = async ({
   }
 
   return (
-    <div className="w-full max-w-7xl m-auto">
-      <div className="z-10 md:p-4 relative w-full">
-        <AspectRatio ratio={3 / 1} className="w-full rounded-xl relative">
+    <div className="m-auto w-full max-w-7xl">
+      <div className="relative z-10 w-full md:p-4">
+        <AspectRatio
+          ratio={3 / 1}
+          className="relative w-full rounded-xl">
           {organization.banner ? (
             <Image
               src={organization.banner}
@@ -50,7 +51,7 @@ const OrganizationHome = async ({
             </div>
           )}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
-          <div className="w-full absolute right-0 bottom-0 left-0 p-4 space-y-2 text-white">
+          <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
             <div className="flex flex-row justify-between w-full">
               <div>
                 <h2 className="text-2xl font-bold">
@@ -63,11 +64,14 @@ const OrganizationHome = async ({
           </div>
         </AspectRatio>
       </div>
-      <Card className="p-4 space-y-6 bg-white shadow-none border-none w-full">
+      <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none">
         <Suspense fallback={<UpcomingStreamsLoading />}>
-          <UpcomingStreams organizationId={organization._id} />
+          <UpcomingStreams
+            organizationSlug={params.organization}
+            organizationId={organization._id}
+          />
         </Suspense>
-        <Suspense fallback={<WatchGrdiLoading />}>
+        <Suspense fallback={<WatchGridLoading />}>
           <WatchGrid organizationSlug={params.organization} />
         </Suspense>
       </Card>

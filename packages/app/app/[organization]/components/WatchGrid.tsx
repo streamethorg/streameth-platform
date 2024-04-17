@@ -1,9 +1,9 @@
 import { fetchAllSessions } from '@/lib/data'
 import Link from 'next/link'
 import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
-import VideoCardSkeleton, {
-} from '@/components/misc/VideoCard/VideoCardSkeleton'
+import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
 import Videos from '@/components/misc/Videos'
+
 const WatchGrid = async ({
   organizationSlug,
 }: {
@@ -22,21 +22,25 @@ const WatchGrid = async ({
   }
 
   return (
-    <>
+    <div className="px-3">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold">Watch More</h1>
         <Link href={`/${organizationSlug}/videos`}>
           <h3 className="text-sm hover:underline">See more videos</h3>
         </Link>
       </div>
-      <Videos videos={videos} maxVideos={4} />
-    </>
+      <Videos
+        videos={videos}
+        OrganizationSlug={organizationSlug}
+        maxVideos={4}
+      />
+    </div>
   )
 }
 
 export default WatchGrid
 
-export const WatchGrdiLoading = () => (
+export const WatchGridLoading = () => (
   <>
     <div className="flex justify-between items-center">
       <div className="w-1/4 h-6 bg-gray-300 rounded"></div>

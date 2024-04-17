@@ -30,11 +30,11 @@ const VideoCardWithMenu = ({
 }) => {
   return (
     <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
-      <Link className='w-full h-full' href={link}>
+      <Link className="w-full h-full" href={link}>
         {session.coverImage ? (
           <Thumbnail imageUrl={session.coverImage} />
         ) : (
-          <div className='w-full h-full aspect-video'>
+          <div className="w-full h-full aspect-video">
             <DefaultThumbnail />
           </div>
         )}

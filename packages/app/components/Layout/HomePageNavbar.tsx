@@ -46,7 +46,7 @@ const HomePageNavbar = ({
   showSearchBar?: boolean
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
-}) => { 
+}) => {
   return (
     <Suspense fallback={null}>
       <MobileNavBar
@@ -204,7 +204,9 @@ const PCNavBar = ({
         </Link>
       )}
       <div className="flex flex-grow justify-center items-center">
-        {showSearchBar && <SearchBar organizationSlug={currentOrganization} />}
+        {showSearchBar && (
+          <SearchBar organizationSlug={currentOrganization} />
+        )}
       </div>
       <div className="flex items-center ml-auto space-x-2">
         {organizations && (

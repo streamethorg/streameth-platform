@@ -5,7 +5,10 @@ import { fetchEvents } from '@/lib/services/eventService'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
-  console.log(searchParams.get('searchQuery'), searchParams.get('organization'))
+  console.log(
+    searchParams.get('searchQuery'),
+    searchParams.get('organization')
+  )
   const events = await fetchEvents({})
   const sessions = (
     await fetchAllSessions({

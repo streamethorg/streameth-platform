@@ -102,8 +102,6 @@ export const apiUrl = () => {
   return api
 }
 
-
-
 export const archivePath = ({
   organization,
   event,

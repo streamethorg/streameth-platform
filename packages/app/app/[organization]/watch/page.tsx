@@ -14,7 +14,6 @@ export default async function Watch({
   params,
   searchParams,
 }: OrganizationPageProps) {
-
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
@@ -27,13 +26,13 @@ export default async function Watch({
   const video = await fetchSession({
     session: searchParams.session,
   })
-  if (!video || !video.videoUrl) return notFound()
 
+  if (!video || !video.videoUrl) return notFound()
 
   return (
     <Suspense key={video._id} fallback={<div>Loading...</div>}>
-      <div className="h-full flex flex-col w-full gap-4 lg:flex-row relative">
-        <div className="flex flex-col w-full h-full lg:w-[75%] gap-2 ">
+      <div className="flex flex-col gap-4 w-full h-full md:px-16 md:pt-5 lg:flex-row">
+        <div className="flex flex-col h-full">
           <PlayerWithControls
             src={[
               {
@@ -45,18 +44,11 @@ export default async function Watch({
               },
             ]}
           />
-          <SessionInfoBox
-            title={video.name}
-            description={video.description}
-            playerName={video.name}
-            playbackId={video.playbackId}
-            speakers={video.speakers}
-            assetId={video.assetId}
-            vod={true}
-            viewCount
-          />
+          <SessionInfoBox video={video} vod={true} />
         </div>
-        <WatchGrid organizationSlug={params.organization} />
+        <div className="md:hidden">
+          <WatchGrid organizationSlug={params.organization} />
+        </div>
       </div>
     </Suspense>
   )

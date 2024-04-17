@@ -20,7 +20,7 @@ interface ISessionSearchResult {
 }
 
 export default function SearchBar({
-  organizationSlug
+  organizationSlug,
 }: {
   organizationSlug?: string
 }): JSX.Element {
@@ -30,8 +30,12 @@ export default function SearchBar({
     searchParams.get('searchQuery') || ''
   )
   const [isOpened, setIsOpened] = useState<boolean>(false)
-  const [searchResults, setSearchResults] = useState<ISessionSearchResult[]>([])
-  const [eventResults, setEventResults] = useState<IEventSearchResult[]>([])
+  const [searchResults, setSearchResults] = useState<
+    ISessionSearchResult[]
+  >([])
+  const [eventResults, setEventResults] = useState<
+    IEventSearchResult[]
+  >([])
   const debouncedSearchQuery = useDebounce(searchQuery, 500)
 
   const dropdownRef = useRef<HTMLDivElement>(null) // ref for the dropdown
@@ -40,7 +44,9 @@ export default function SearchBar({
   useEffect(() => {
     if (debouncedSearchQuery) {
       setIsLoading(true)
-      fetch(`/api/search?organization=${organizationSlug}&searchQuery=${debouncedSearchQuery}`)
+      fetch(
+        `/api/search?organization=${organizationSlug}&searchQuery=${debouncedSearchQuery}`
+      )
         .then((res) => res.json())
         .then(
           (data: {
@@ -100,17 +106,19 @@ export default function SearchBar({
               {searchResults.length > 0 && (
                 <div className="mt-2">
                   <div className="text font-bold">Videos</div>
-                  {searchResults.map((result: ISessionSearchResult) => (
-                    <div
-                      onClick={() => {
-                        handleTermChange(result)
-                        setIsOpened(false)
-                      }}
-                      className="p-1"
-                      key={result.id}>
-                      {result.name}
-                    </div>
-                  ))}
+                  {searchResults.map(
+                    (result: ISessionSearchResult) => (
+                      <div
+                        onClick={() => {
+                          handleTermChange(result)
+                          setIsOpened(false)
+                        }}
+                        className="p-1"
+                        key={result.id}>
+                        {result.name}
+                      </div>
+                    )
+                  )}
                 </div>
               )}
               {eventResults.length > 0 && (

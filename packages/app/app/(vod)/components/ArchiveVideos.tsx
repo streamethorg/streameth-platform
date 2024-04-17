@@ -4,17 +4,17 @@ import { fetchAllSessions } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { FileQuestion } from 'lucide-react'
 
-const ArchiveVideos = async ({ 
+const ArchiveVideos = async ({
   organizationSlug,
   event,
   searchQuery,
   page,
- }: {
+}: {
   organizationSlug?: string
   event?: string
   searchQuery?: string
   page?: number
- }) => {
+}) => {
   const videos = await fetchAllSessions({
     organizationSlug,
     event: event,
