@@ -2018,6 +2018,36 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IEventNFT": {
+				"properties": {
+					"address": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"symbol": {
+						"type": "string"
+					},
+					"uri": {
+						"type": "string"
+					},
+					"maxSupply": {
+						"type": "string"
+					},
+					"mintFee": {
+						"type": "string"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"endTime": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IEvent": {
 				"properties": {
 					"_id": {
@@ -2121,6 +2151,9 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"eventNFT": {
+						"$ref": "#/components/schemas/IEventNFT"
 					}
 				},
 				"required": [
@@ -2236,6 +2269,12 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"eventNFT": {
+						"$ref": "#/components/schemas/IEventNFT"
+					},
+					"nftAddress": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -2332,6 +2371,9 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"eventNFT": {
+						"$ref": "#/components/schemas/IEventNFT"
 					}
 				},
 				"required": [

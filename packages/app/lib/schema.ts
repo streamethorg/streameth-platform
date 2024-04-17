@@ -48,12 +48,25 @@ const IPluginsSchema = z.object({
   hideSpeaker: z.boolean().optional(),
 })
 
+const IEventNFTSchema = z.object({
+  address: z.string().optional(),
+  name: z.string().optional(),
+  symbol: z.string().optional(),
+  uri: z.string().optional(),
+  limitedSupply: z.string().optional(),
+  maxSupply: z.string().optional(),
+  mintFee: z.string().optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+})
+
 export const eventSchema = z.object({
   ...formSchema.shape,
   dataImporter: z.array(IDataImporterSchema).optional(),
   plugins: IPluginsSchema.optional(),
   unlisted: z.boolean().optional(),
   archiveMode: z.boolean().optional(),
+  eventNFT: IEventNFTSchema.optional(),
 })
 
 const IStreamSettingsSchema = z.object({

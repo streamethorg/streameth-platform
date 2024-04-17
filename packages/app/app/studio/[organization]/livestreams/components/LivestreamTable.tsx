@@ -25,10 +25,12 @@ const LivestreamTable = ({
   streams: IExtendedStage[]
   organizationSlug: string
 }) => {
+  // TODO: Somewhere in the last Table cell is a hydration error
+
   return (
-    <div className="">
+    <div>
       <Table className="bg-white">
-        <TableHeader className="sticky top-0 bg-white z-50">
+        <TableHeader className="sticky top-0 z-50 bg-white">
           <TableRow className="hover:bg-white">
             <TableHead>
               <TableSort title="Title" sortBy="name" />
@@ -40,15 +42,15 @@ const LivestreamTable = ({
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="overflow-auto ">
+        <TableBody className="overflow-auto">
           {streams?.map((stream) => (
             <TableRow key={stream._id}>
               <TableCell className="font-medium">
                 <Link
                   key={stream._id}
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
-                  <div className="flex flex-row items-center w-full space-x-4">
-                    <p className="underline">{stream?.name}</p>
+                  <div className="flex flex-row items-center space-x-4 w-full">
+                    <p className="hover:underline">{stream?.name}</p>
                   </div>
                 </Link>
               </TableCell>
@@ -82,7 +84,7 @@ const LivestreamTable = ({
                     href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
                     <Button
                       variant="outline"
-                      className="flex items-center gap-1">
+                      className="flex gap-1 items-center">
                       <ScissorsLineDashed className="w-4 h-4" />
                       Clip
                     </Button>
