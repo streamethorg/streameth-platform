@@ -10,4 +10,5 @@ export interface INftCollection {
   thumbnail: string;
   type: NftCollectionType;
   organizationId: Types.ObjectId | string;
+  videos: any;
 }

@@ -1781,6 +1781,128 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"NftCollectionType": {
+				"enum": [
+					"single",
+					"multiple"
+				],
+				"type": "string"
+			},
+			"INftCollection": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/NftCollectionType"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"videos": {}
+				},
+				"required": [
+					"name",
+					"description",
+					"thumbnail",
+					"type",
+					"organizationId",
+					"videos"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_INftCollection_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/INftCollection"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateNftCollectionDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/NftCollectionType"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"videos": {}
+				},
+				"required": [
+					"name",
+					"description",
+					"thumbnail",
+					"type",
+					"organizationId",
+					"videos"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_INftCollection__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/INftCollection"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"GSheetConfig": {
 				"properties": {
 					"sheetId": {
@@ -3749,6 +3871,120 @@
 						}
 					}
 				}
+			}
+		},
+		"/collections": {
+			"post": {
+				"operationId": "CreateNftCollection",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_INftCollection_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateNftCollectionDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllCollections",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_INftCollection__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/collections/{collectionId}": {
+			"get": {
+				"operationId": "GetNftCollectionById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_INftCollection_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "collectionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/collections/organization/{organizationId}": {
+			"get": {
+				"operationId": "GetAllOrganizationNft",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_INftCollection__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/": {

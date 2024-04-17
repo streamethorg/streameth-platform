@@ -22,7 +22,7 @@ const CreateNFT = async ({
       onlyVideos: true,
     })
   ).sessions
-  if (!organizationId || !type) return null
+  if (!organizationId) return null
   const stages = await fetchOrganizationStages({ organizationId })
 
   return (

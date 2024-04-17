@@ -10,21 +10,33 @@ import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import CreateNFTCollectionModal from './components/CreateNFTCollectionModal'
+import { fetchOrganizationNFTCollections } from '@/lib/services/nftCollectionService'
+import { fetchOrganization } from '@/lib/services/organizationService'
+import NFTCollectionCard from './components/NFTCollectionCard'
 
-const NFT = ({
+const NFT = async ({
+  params,
   searchParams,
 }: {
+  params: { organization: string }
   searchParams: { type: string }
 }) => {
   const { type } = searchParams
-  const nftCollections = []
+  const organizationId = (
+    await fetchOrganization({ organizationSlug: params.organization })
+  )?._id
+  if (!organizationId) return null
+  const nftCollections = await fetchOrganizationNFTCollections({
+    organizationId,
+  })
+
   return (
     <div className="flex flex-col bg-white h-full">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/nftBg.jpg)`,
         }}
-        className="shadow-none bg-cover text-white bg-no-repeat p-4 border-none">
+        className="shadow-none bg-cover bg-black text-white bg-no-repeat p-4 border-none">
         <CardHeader>
           <CardTitle>Create Epic NFT Collection</CardTitle>
           <CardDescription className="max-w-[400px] text-white">
@@ -38,7 +50,7 @@ const NFT = ({
       </Card>
 
       <div className="flex flex-col p-4">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-4">
           <p className="text-lg font-semibold">Your Collections</p>
           <div className="flex gap-2 items-center font-medium">
             <p>Sort By</p>
@@ -48,7 +60,13 @@ const NFT = ({
           </div>
         </div>
 
-        {nftCollections.length > 0 ? null : (
+        {nftCollections.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
+            {nftCollections.map((nft) => (
+              <NFTCollectionCard key={nft._id} nft={nft} />
+            ))}
+          </div>
+        ) : (
           <div className="flex h-96 bg-white m-auto flex-col justify-center items-center">
             <Image
               src="/images/empty-box.png"

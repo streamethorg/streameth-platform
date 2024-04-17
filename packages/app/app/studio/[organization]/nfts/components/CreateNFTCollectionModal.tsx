@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog'
@@ -84,7 +83,10 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
 
         <div className="mt-4">
           <Link href={`nfts/create?type=${type}`}>
-            <Button className="w-full" variant="primary">
+            <Button
+              disabled={!type}
+              className="w-full"
+              variant="primary">
               Create Collection
             </Button>
           </Link>

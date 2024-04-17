@@ -11,6 +11,9 @@ import { nftSchema } from '@/lib/schema'
 import AddMedia from './AddMedia'
 import { INFTSessions } from '@/lib/types'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
+import { createNFTCollectionAction } from '@/lib/actions/nftCollection'
+import PublishingNFTModal from './PublishingNFTModal'
+import { toast } from 'sonner'
 
 export interface ICreateNFT {
   selectedVideo: INFTSessions[]
@@ -30,6 +33,9 @@ const CreateNFTForm = ({
   type: string
 }) => {
   const [step, setStep] = useState(1)
+  const [isPublishingCollection, setIsPublishingCollection] =
+    useState(false)
+  const [isPublished, setIsPublished] = useState(false)
   const form = useForm<z.infer<typeof nftSchema>>({
     resolver: zodResolver(nftSchema),
     defaultValues: {
@@ -42,11 +48,12 @@ const CreateNFTForm = ({
     selectedVideo: [],
   })
 
-  const createNFTCollection = () => {
+  const createNFTCollection = async () => {
+    setIsPublishingCollection(true)
     const formData = {
       name: form.getValues('name'),
       description: form.getValues('description'),
-      thumbnail: form.getValues('description'),
+      thumbnail: form.getValues('thumbnail'),
       type: type,
       organizationId: organizationId,
       videos: [
@@ -57,6 +64,19 @@ const CreateNFTForm = ({
             video.videoType !== 'livestream' ? video._id : '',
         })),
       ],
+    }
+    try {
+      form.reset()
+      setFormState({ selectedVideo: [] })
+      const createNFTResponse = await createNFTCollectionAction({
+        nftCollection: formData,
+      })
+
+      toast.success('NFT Collection successfully created')
+      setIsPublished(true)
+    } catch (error) {
+      setIsPublishingCollection(false)
+      toast.error('Error creating NFT Collection')
     }
   }
 
@@ -120,8 +140,10 @@ const CreateNFTForm = ({
             Go Back
           </Button>
           <Button
+            loading={isPublishingCollection}
             disabled={
               getFormSubmitStatus(form) ||
+              isPublishingCollection ||
               (step == 2 && formState.selectedVideo.length < 1)
             }
             onClick={handleNextButton}
@@ -130,6 +152,12 @@ const CreateNFTForm = ({
           </Button>
         </div>
       </div>
+      <PublishingNFTModal
+        open={isPublishingCollection}
+        onClose={setIsPublishingCollection}
+        isPublished={isPublished}
+        organization={organizationSlug}
+      />
     </div>
   )
 }
