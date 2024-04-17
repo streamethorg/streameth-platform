@@ -29,16 +29,14 @@ const VideoCardWithMenu = ({
   link: string
 }) => {
   return (
-    <div className="w-full min-h-full uppercase rounded-xl">
-      <Link href={link}>
+    <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
+      <Link className='w-full h-full' href={link}>
         {session.coverImage ? (
           <Thumbnail imageUrl={session.coverImage} />
         ) : (
-          <AspectRatio
-            ratio={16 / 9}
-            className="flex justify-center items-center w-full h-full">
+          <div className='w-full h-full aspect-video'>
             <DefaultThumbnail />
-          </AspectRatio>
+          </div>
         )}
       </Link>
       <div className="flex justify-between items-start">
@@ -50,7 +48,6 @@ const VideoCardWithMenu = ({
               {session.name}
             </CardTitle>
           </Link>
-
           {showDate && (
             <div className="flex justify-between items-center">
               <CardDescription className={`text-xs truncate `}>

@@ -32,7 +32,7 @@ const Layout = async ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="mx-auto w-full max-w-5xl">
+    <div className="mx-auto w-full bg-white">
       <HomePageNavbar pages={pages} />
 
       {children}
