@@ -48,7 +48,7 @@ export default async function ArchivePage({
           </div>
         )}
       </div>
-      <div className="w-full max-w-5xl m-auto p-4">
+      <div className="w-full max-w-7xl m-auto p-4">
         <Suspense fallback={<ArchiveVideoSkeleton />}>
           <ArchiveVideos
             organizationSlug={params.organization}
