@@ -29,13 +29,17 @@ function SubmitButton() {
 
   if (pending) {
     return (
-      <Button disabled>
+      <Button className="self-end" disabled>
         <ReloadIcon className="mr-2 w-4 h-4 animate-spin" />
         Please wait
       </Button>
     )
   }
-  return <Button type="submit">Sign Up</Button>
+  return (
+    <Button className="self-end" type="submit">
+      Sign Up
+    </Button>
+  )
 }
 
 const SignUpModal = ({
@@ -75,7 +79,7 @@ const SignUpModal = ({
       <CredenzaBody className="flex flex-col justify-center items-center">
         <form
           action={formAction}
-          className="flex flex-row justify-center items-center w-full">
+          className="flex flex-col gap-3 justify-center items-center w-full">
           <Input
             className="w-full"
             id="email"
@@ -90,10 +94,10 @@ const SignUpModal = ({
             type="hidden"
             value={event._id}
           />
+          <SubmitButton />
         </form>
       </CredenzaBody>
       <CredenzaFooter>
-        <SubmitButton />
         <p>{state?.message}</p>
       </CredenzaFooter>
     </CredenzaContent>
@@ -105,8 +109,8 @@ const SignUp = ({ event }: { event: IExtendedEvent }) => {
   return (
     <Credenza open={open} onOpenChange={setOpen}>
       <SignUpModal event={event} setOpen={setOpen} />
-      <CredenzaTrigger>
-        <div className="px-2 mx-4 animate-pulse text-white uppercase rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF] p-[2px]">
+      <CredenzaTrigger className="justify-start">
+        <div className="px-4 py-2 bg-primary rounded-lg text-white text-thin">
           Set a reminder
         </div>
       </CredenzaTrigger>

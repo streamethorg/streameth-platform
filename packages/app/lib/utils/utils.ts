@@ -4,11 +4,16 @@ import {
   IExtendedEvent,
   IExtendedOrganization,
   IExtendedSession,
+  IExtendedStage,
+  IGenerateEmbed,
+  IGenerateEmbedCode,
+  eSort,
 } from '@/lib/types'
 import { IOrganizationModel } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface'
 import { UseFormProps, UseFormReturn } from 'react-hook-form'
 import { getDateInUTC } from './time'
+import { toast } from 'sonner'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -222,4 +227,69 @@ export const renderEventDay = (
   return `${new Date(start).toDateString()} - ${new Date(
     end
   ).toDateString()}`
+}
+
+export const copyToClipboard = (text: string) => {
+  navigator.clipboard.writeText(text)
+  toast('Copied to clipboard')
+}
+
+export const generateParams = ({
+  playbackId,
+  vod,
+  streamId,
+  playerName,
+}: IGenerateEmbed) => {
+  const params = new URLSearchParams()
+  params.append('playbackId', playbackId ?? '')
+  params.append('vod', vod ? 'true' : 'false')
+  params.append('streamId', streamId ?? '')
+  params.append('playerName', playerName ?? '')
+
+  return params.toString()
+}
+
+export const generateEmbedCode = ({
+  url,
+  playbackId,
+  vod,
+  streamId,
+  playerName,
+}: IGenerateEmbedCode) => {
+  return `<iframe src="${url}/embed/?${generateParams({
+    playbackId,
+    vod,
+    streamId,
+    playerName,
+  })}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+}
+
+export const sortArray = (
+  stages: IExtendedStage[] | IExtendedSession[],
+  sortBy: string
+) => {
+  return stages.sort((a, b) => {
+    if (sortBy) {
+      switch (sortBy) {
+        case eSort.asc_alpha:
+          return a.name.localeCompare(b.name)
+        case eSort.desc_alpha:
+          return b.name.localeCompare(a.name)
+        case eSort.asc_date:
+          return (
+            new Date(a.createdAt!).getTime() -
+            new Date(b.createdAt!).getTime()
+          )
+        case eSort.desc_date:
+          return (
+            new Date(b.createdAt!).getTime() -
+            new Date(a.createdAt!).getTime()
+          )
+        default:
+          return 0
+      }
+    } else {
+      return 0
+    }
+  })
 }

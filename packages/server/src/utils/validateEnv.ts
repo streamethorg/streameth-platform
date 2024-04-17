@@ -5,6 +5,7 @@ config();
 
 const validateEnv = () => {
   return cleanEnv(process.env, {
+    BASE_URL: str(),
     NODE_ENV: str(),
     APP_PORT: port(),
     DB_HOST: str(),
@@ -16,6 +17,7 @@ const validateEnv = () => {
     JWT_SECRET: str(),
     JWT_EXPIRY: str(),
     GOOGLE_API_KEY: str(),
+    LIVEPEER_BASE_URL: str(),
     LIVEPEER_API_KEY: str(),
     GITHUB_API_TOKEN: str(),
     BUCKET_NAME: str(),
@@ -27,6 +29,7 @@ const validateEnv = () => {
     TELEGRAM_API_KEY: str(),
     TELEGRAM_CHAT_ID: str(),
     OAUTH_SECRET: str(),
+    THIRDWEB_SECRET_KEY: str(),
   });
 };
 

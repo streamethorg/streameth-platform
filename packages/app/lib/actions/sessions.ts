@@ -23,7 +23,7 @@ export const createSessionAction = async ({
   if (!authToken) {
     throw new Error('No user session found')
   }
-  console.log('session', session)
+  console.log('Creating session:', session)
   const response = await createSession({
     session,
     authToken,
@@ -33,6 +33,7 @@ export const createSessionAction = async ({
   }
   return response
 }
+
 export const createClip = async ({
   playbackId,
   sessionId,
@@ -66,7 +67,7 @@ export const createClip = async ({
   // @ts-ignore
   delete updatedSession.__v
   // @ts-ignore
-
+  delete updatedSession.ipfsURI
   revalidatePath('/studio')
   await updateSessionAction({ session: updatedSession })
 }

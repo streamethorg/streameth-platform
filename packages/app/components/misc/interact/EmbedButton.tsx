@@ -1,21 +1,20 @@
 'use client'
-import { useEffect, useState, useContext } from 'react'
-import { Code } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+import { useEffect, useState } from 'react'
+import { Code, Copy } from 'lucide-react'
 
 import {
   Credenza,
   CredenzaBody,
   CredenzaContent,
   CredenzaDescription,
-  CredenzaFooter,
   CredenzaHeader,
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
-import { Input } from '@/components/ui/input'
+import { copyToClipboard, generateEmbedCode } from '@/lib/utils/utils'
+import { Button } from '@/components/ui/button'
 
-const ModalContent: React.FC<{
+export const EmbedModalContent: React.FC<{
   playbackId?: string
   streamId?: string
   playerName: string
@@ -24,6 +23,7 @@ const ModalContent: React.FC<{
   const [copied, setCopied] = useState(false)
   const copiedClass = copied ? 'opacity-100' : 'opacity-0'
   const [url, setUrl] = useState('')
+
   useEffect(() => {
     if (copied) {
       setTimeout(() => setCopied(false), 2000)
@@ -33,56 +33,37 @@ const ModalContent: React.FC<{
     }
   }, [copied])
 
-  const generateParams = () => {
-    const params = new URLSearchParams()
-    params.append('playbackId', playbackId ?? '')
-    params.append('vod', vod ? 'true' : 'false')
-    params.append('streamId', streamId ?? '')
-    params.append('playerName', playerName ?? '')
-
-    return params.toString()
-  }
-
-  const generateEmbedCode = () => {
-    return `<iframe src="${url}/embed/?${generateParams()}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-  }
-
-  const generatedEmbedCode = generateEmbedCode()
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(generatedEmbedCode)
-      setCopied(true)
-
-      setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy text: ', err)
-    }
-  }
+  const generatedEmbedCode = generateEmbedCode({
+    url,
+    playbackId,
+    vod,
+    streamId,
+    playerName,
+  })
 
   return (
     <CredenzaContent className="max-w-[450px]">
       <CredenzaHeader>
         <CredenzaTitle>Embed video</CredenzaTitle>
-        <CredenzaDescription className="mb-4 text-xl">
+        <CredenzaDescription className="mb-4 ">
           Easily embed this stream into your website by adding the
           iframe code below
         </CredenzaDescription>
       </CredenzaHeader>
-      <CredenzaBody>
-        <Input
-          disabled
-          className="relative py-1 px-2 whitespace-nowrap rounded-xl cursor-pointer border-primary overflow-clip"
-          onClick={copyToClipboard}
-          value={generatedEmbedCode}></Input>
-        <span
-          className={`absolute bottom-3 left-0 right-0 flex items-center justify-center text-accent transition-opacity duration-200 ${copiedClass}`}>
-          Copied to clipboard!
-        </span>
+      <CredenzaBody className="flex flex-col gap-3">
+        <div className="flex p-2 rounded-lg bg-input justify-between items-center text-[12px]">
+          <p>HTML</p>
+          <div
+            onClick={() => copyToClipboard(generatedEmbedCode)}
+            className="flex gap-2 cursor-pointer">
+            <Copy className="text-muted-foreground w-4 h-4" />
+            Copy Code
+          </div>
+        </div>
+        <p className="rounded-lg bg-input p-2 max-w-[400px] break-words text-[12px]">
+          {generatedEmbedCode}
+        </p>
       </CredenzaBody>
-      <CredenzaFooter>
-        <></>
-      </CredenzaFooter>
     </CredenzaContent>
   )
 }
@@ -101,12 +82,12 @@ function EmbedButton({
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Badge className="bg-secondary text-secondary-foreground">
+        <Button className="bg-white" variant="outline">
           <Code size={24} className="p-1" />
           Embed
-        </Badge>
+        </Button>
       </CredenzaTrigger>
-      <ModalContent
+      <EmbedModalContent
         vod={vod}
         playbackId={playbackId}
         streamId={streamId}

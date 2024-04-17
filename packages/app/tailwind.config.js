@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   darkMode: ['class'],
   content: [
@@ -17,17 +19,31 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+      },
       colors: {
-        streameth: "bg-gradient-to-b from-[#FF9976] to-[#6426EF]",
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        event: "var(--colors-accent)",
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        event: 'var(--colors-accent)',
+        neutrals: {
+          100: 'hsl(var(--neutrals-100))',
+          200: 'hsl(var(--neutrals-200))',
+          300: 'hsl(var(--neutrals-300))',
+          400: 'hsl(var(--neutrals-400))',
+          500: 'hsl(var(--neutrals-500))',
+          600: 'hsl(var(--neutrals-600))',
+          700: 'hsl(var(--neutrals-700))',
+          800: 'hsl(var(--neutrals-800))',
+          900: 'hsl(var(--neutrals-900))',
+        },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
+          DEFAULT: 'hsla(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          background: 'hsla(var(--primary-background))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -36,6 +52,7 @@ module.exports = {
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
+          secondary: 'hsl(var(--destructive-secondary))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
@@ -53,8 +70,16 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        grey: {
+          DEFAULT: 'hsla(var(--grey))',
+        },
+        success: {
+          DEFAULT: 'hsla(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
+        },
       },
       borderRadius: {
+        xl: 'calc(var(--radius) + 4px)',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',

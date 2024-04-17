@@ -1,26 +1,5 @@
 import * as z from 'zod'
 
-export const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-  description: z.string(),
-  start: z.date(),
-  end: z.date(),
-  location: z.string(),
-  logo: z.string().optional(),
-  banner: z.string().optional(),
-  startTime: z.string().optional(),
-  endTime: z.string().optional(),
-  eventCover: z.string().optional(),
-  archiveMode: z.boolean().optional(),
-  website: z.string().optional(),
-  timezone: z.string().min(1, 'timezone is required'),
-  accentColor: z.string().min(1, { message: 'color is required' }),
-  unlisted: z.boolean().optional(),
-  enableVideoDownloader: z.boolean().optional(),
-})
-
 const GSheetConfigSchema = z.object({
   sheetId: z.string().optional(),
   apiKey: z.string().optional(),
@@ -40,6 +19,28 @@ const IDataImporterSchema = z.union([
     config: PretalxConfigSchema,
   }),
 ])
+
+export const formSchema = z.object({
+  name: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  description: z.string(),
+  start: z.date(),
+  end: z.date(),
+  location: z.string(),
+  logo: z.string().optional(),
+  banner: z.string().optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+  eventCover: z.string().optional(),
+  archiveMode: z.boolean().optional(),
+  website: z.string().optional(),
+  timezone: z.string().min(1, 'timezone is required'),
+  accentColor: z.string().min(1, { message: 'color is required' }),
+  unlisted: z.boolean().optional(),
+  enableVideoDownloader: z.boolean().optional(),
+  dataImporter: z.array(IDataImporterSchema).optional(),
+})
 
 const IPluginsSchema = z.object({
   disableChat: z.boolean(),
@@ -69,7 +70,7 @@ export const eventSchema = z.object({
 })
 
 const IStreamSettingsSchema = z.object({
-  streamId: z.string(),
+  streamId: z.string().optional(),
 })
 
 const IPluginSchema = z.object({
@@ -78,10 +79,12 @@ const IPluginSchema = z.object({
 
 export const StageSchema = z.object({
   name: z.string().min(1, { message: 'Required' }),
-  eventId: z.string(),
-  streamSettings: IStreamSettingsSchema,
+  eventId: z.string().optional(),
+  streamSettings: IStreamSettingsSchema.optional(),
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
+  streamDate: z.date().optional(),
+  streamTime: z.string().optional(),
   organizationId: z.string(),
 })
 
@@ -105,12 +108,14 @@ export const sessionSchema = z.object({
     .string()
     .min(1, { message: 'Description is required' }),
   coverImage: z.string().optional(),
-  assetId: z.string(),
+  assetId: z.string().min(1, { message: 'Please upload a video' }),
 })
 
 export const organizationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   logo: z.string().min(1, 'Logo is required'),
+  banner: z.string().optional(),
+  bio: z.string().optional(),
   email: z.string().email(),
 })
 

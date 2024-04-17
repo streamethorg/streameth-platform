@@ -35,12 +35,14 @@ const getPages = (
 const HomePageNavbar = ({
   logo,
   pages,
+  showLogo = true,
   showSearchBar = true,
   organizations,
   currentOrganization,
 }: {
   logo?: string
   pages: Page[]
+  showLogo?: boolean
   showSearchBar?: boolean
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
@@ -51,8 +53,11 @@ const HomePageNavbar = ({
         logo={logo}
         pages={pages}
         showSearchBar={showSearchBar}
+        organizations={organizations}
+        currentOrganization={currentOrganization}
       />
       <PCNavBar
+        showLogo={showLogo}
         logo={logo}
         pages={pages}
         showSearchBar={showSearchBar}
@@ -67,10 +72,14 @@ const MobileNavBar = ({
   logo,
   pages,
   showSearchBar,
+  organizations,
+  currentOrganization,
 }: {
   logo?: string
   pages: Page[]
   showSearchBar: boolean
+  organizations?: IExtendedOrganization[]
+  currentOrganization?: string
 }) => {
   const [menuVisible, setMenuVisible] = useState(false)
   const [searchVisible, setSearchVisible] = useState(false)
@@ -88,7 +97,7 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="flex sticky top-0 flex-row items-center bg-transparent bg-opacity-90 lg:hidden z-[999999] backdrop-blur-sm">
+    <NavigationMenu className="bg-white flex sticky top-0 flex-row items-center lg:hidden z-[999999]">
       {(searchVisible || menuVisible) && (
         <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
@@ -104,15 +113,25 @@ const MobileNavBar = ({
           menuVisible && 'bg-background',
           searchVisible && showSearchBar && 'bg-background'
         )}>
-        <Link href="/">
-          <Image
-            src={logo ?? '/logo.png'}
-            alt="Logo"
-            height={36}
-            width={36}
-            className="h-full aspect-square"
-          />
-        </Link>
+        {organizations && (
+          <div className="m-1 mr-2">
+            <SwitchOrganization
+              organization={currentOrganization}
+              organizations={organizations}
+            />
+          </div>
+        )}
+        {showSearchBar && (
+          <Link href="/">
+            <Image
+              src={logo ?? '/logo.png'}
+              alt="Logo"
+              height={36}
+              width={36}
+              className="h-full aspect-square"
+            />
+          </Link>
+        )}
 
         <div className="flex items-center ml-auto">
           {showSearchBar && (
@@ -158,11 +177,13 @@ const PCNavBar = ({
   logo,
   pages,
   showSearchBar,
+  showLogo,
   organizations,
   currentOrganization,
 }: {
   logo?: string
   pages: Page[]
+  showLogo: boolean
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
@@ -170,35 +191,36 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 w-full bg-opacity-90 md:hidden lg:flex z-[99] backdrop-blur-sm">
-      <Link href="/">
-        <Image
-          src={logo ?? '/logo_dark.png'}
-          alt="Logo"
-          width={logo ? 50 : 230}
-          height={logo ? 50 : 30}
-          className="hidden lg:block"
-        />
-      </Link>
-      <div className="flex flex-grow justify-center items-center">
+    <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row items-center p-2 w-full bg-white md:hidden lg:flex">
+      {showLogo && (
+        <Link href="/">
+          <Image
+            src={logo ?? '/logo_dark.png'}
+            alt="Logo"
+            width={logo ? 50 : 230}
+            height={logo ? 50 : 30}
+            className="hidden lg:block"
+          />
+        </Link>
+      )}
+      {/* <div className="flex flex-grow justify-center items-center">
         {showSearchBar && <SearchBar />}
-      </div>
-      <Support />
-      <Navbar
-        pages={getPages(
-          pages,
-          isSignedIn,
-          userData?.organizations?.[0]?.slug
-        )}
-      />
-      {organizations && (
-        <div className="m-1 mr-2">
+      </div> */}
+      <div className="flex items-center ml-auto space-x-2">
+        {organizations && (
           <SwitchOrganization
             organization={currentOrganization}
             organizations={organizations}
           />
-        </div>
-      )}
+        )}
+        <Navbar
+          pages={getPages(
+            pages,
+            isSignedIn,
+            userData?.organizations?.[0]?.slug
+          )}
+        />
+      </div>
       <ConnectWalletButton />
     </NavigationMenu>
   )

@@ -11,7 +11,8 @@ const Pagination = (props: IPagination) => {
     <div className="flex flex-row justify-center items-center">
       <div className="flex flex-row justify-center items-center">
         <button
-          className="p-2 rounded-full hover:bg-gray-100"
+          className="p-2 rounded-full active:hover:bg-gray-100 disabled:text-gray-200"
+          disabled={props.currentPage === 1}
           onClick={() => {
             if (currentPage > 1) {
               handleTermChange([

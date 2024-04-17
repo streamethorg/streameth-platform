@@ -1,11 +1,16 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { ISession } from '@interfaces/session.interface';
+import { ISession, SessionType } from '@interfaces/session.interface';
 import Organization from '@models/organization.model';
 import Session from '@models/session.model';
 import Event from '@models/event.model';
+import { ThirdwebStorage } from '@thirdweb-dev/storage';
+import { config } from '@config';
+import { Types } from 'mongoose';
+import Stage from '@models/stage.model';
+import { getStreamRecordings } from '@utils/livepeer';
 
-export default class SessionServcie {
+export default class SessionService {
   private path: string;
   private controller: BaseController<ISession>;
   constructor() {
@@ -14,11 +19,30 @@ export default class SessionServcie {
   }
 
   async create(data: ISession): Promise<ISession> {
-    const event = await Event.findById(data.eventId);
+    let eventId = '';
+    let eventSlug = '';
+    let stageId = '';
+    if (data.stageId == undefined || data.stageId.toString().length === 0) {
+      stageId = new Types.ObjectId().toString();
+    } else {
+      let stage = await Stage.findById(data.stageId);
+      stageId = stage._id;
+    }
+    if (data.eventId == undefined || data.eventId.toString().length === 0) {
+      eventId = new Types.ObjectId().toString();
+      if (data.speakers == undefined || data.speakers.length == 0)
+        data.speakers = [];
+      if (data.speakers.length > 0)
+        data.speakers.map((speaker) => (speaker.eventId = eventId));
+    } else {
+      let event = await Event.findById(data.eventId);
+      eventId = event._id;
+      eventSlug = event.slug;
+    }
     return this.controller.store.create(
       data.name,
-      { ...data, eventSlug: event.slug },
-      `${this.path}/${data.eventId}`,
+      { ...data, eventSlug: eventSlug, eventId: eventId, stageId: stageId },
+      `${this.path}/${eventId}`,
     );
   }
 
@@ -26,9 +50,13 @@ export default class SessionServcie {
     return await this.controller.store.update(sessionId, session, session.name);
   }
 
+  async findOne(query: {}): Promise<ISession> {
+    return await this.controller.store.findOne(query);
+  }
+
   async get(sessionId: string): Promise<ISession> {
     const findSession = await this.controller.store.findById(sessionId);
-    if (!findSession) throw new HttpException(404, 'Event not found');
+    if (!findSession) throw new HttpException(404, 'Session not found');
     return findSession;
   }
 
@@ -48,11 +76,13 @@ export default class SessionServcie {
   }> {
     let filter = {};
     if (d.event != undefined) {
-      let event = await Event.findOne({ slug: d.event });
+      let query = this.queryByIdOrSlug(d.event);
+      let event = await Event.findOne(query);
       filter = { ...filter, eventId: event?._id };
     }
     if (d.organization != undefined) {
-      let org = await Organization.findOne({ slug: d.organization });
+      let query = this.queryByIdOrSlug(d.organization);
+      let org = await Organization.findOne(query);
       filter = { ...filter, organizationId: org?._id };
     }
     if (d.onlyVideos) {
@@ -65,7 +95,9 @@ export default class SessionServcie {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      filter = { ...filter, stageId: d.stageId };
+      let query = this.queryByIdOrSlug(d.stageId);
+      let stage = await Stage.findOne(query);
+      filter = { ...filter, stageId: stage?._id };
     }
     const pageSize = Number(d.size) || 0; //total documents to be fetched
     const pageNumber = Number(d.page) || 0;
@@ -87,5 +119,88 @@ export default class SessionServcie {
   async deleteOne(sessionId: string): Promise<void> {
     await this.get(sessionId);
     return await this.controller.store.delete(sessionId);
+  }
+
+  async createMetadata(sessionId: string) {
+    let session = await Session.findById(sessionId); //await this.get(sessionId);
+    let metadata = JSON.stringify({
+      name: session.name,
+      description: session.description,
+      external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
+      animation_url: '',
+      image: session.coverImage,
+      attributes: [
+        {
+          start: session.start,
+          end: session.end,
+          stageId: session.stageId,
+          speakers: session.speakers,
+          source: session.source,
+          playbackId: session.playbackId,
+          assetId: session.assetId,
+          eventId: session.eventId,
+          track: session.track,
+          coverImage: session.coverImage,
+          slug: session.slug,
+          organizationId: session.organizationId,
+          eventSlug: session.eventSlug,
+          createdAt: session.createdAt,
+          aiDescription: session.aiDescription,
+          autoLabels: session.autoLabels,
+          videoTranscription: session.videoTranscription,
+        },
+      ],
+    });
+    const URI = await this.upload(metadata);
+    await session.updateOne({ nftURI: URI });
+    return URI;
+  }
+
+  async upload(file: Express.Multer.File | {}): Promise<string> {
+    const storage = new ThirdwebStorage({
+      secretKey: config.storage.thirdWebSecretKey,
+    });
+    const URI = await storage.upload(file);
+    return await storage.resolveScheme(URI);
+  }
+
+  async createStreamRecordings(payload: any) {
+    let stage = await Stage.findOne({
+      'streamSettings.streamId': payload.parentId,
+    });
+    await this.create({
+      name: payload.name,
+      description: payload.name,
+      start: payload.createdAt,
+      end: payload.lastSeen,
+      playbackId: payload.playbackId,
+      videoUrl: payload.recordingUrl,
+      organizationId: stage.organizationId,
+      assetId: payload.assetId,
+      type: SessionType.livestream,
+    });
+  }
+
+  private async createMultipleStreamRecordings(streamId: string) {
+    const recordings = await getStreamRecordings(streamId);
+    for (const recording of recordings) {
+      let stage = await Stage.findOne({ 'streamSettings.streamId': streamId });
+      await this.create({
+        name: recording.name,
+        description: recording.name,
+        start: recording.createdAt,
+        end: recording.lastSeen,
+        playbackId: recording.playbackId,
+        videoUrl: recording.recordingUrl,
+        organizationId: stage.organizationId,
+        type: SessionType.livestream,
+      });
+    }
+  }
+
+  private queryByIdOrSlug(id: string) {
+    const isObjectId = /[0-9a-f]{24}/i.test(id);
+    const query = isObjectId ? { _id: id } : { slug: id };
+    return query;
   }
 }

@@ -7,7 +7,8 @@ import Image from 'next/image'
 import { X } from 'lucide-react'
 import { getImageUrl } from '@/lib/utils/utils'
 import { toast } from 'sonner'
-
+import { Label } from '@radix-ui/react-label'
+import { Image as ImageLogo } from 'lucide-react'
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   // FileList is immutable, so we need to create a new one
   const dataTransfer = new DataTransfer()
@@ -23,16 +24,22 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
 }
 
 export default function ImageUpload({
+  id,
+  placeholder,
   onChange,
   aspectRatio,
   value,
   path,
+  className,
   ...rest
 }: {
+  id?: string
+  placeholder?: string
   aspectRatio: number
   onChange: (files: string | null) => void
   value: string | null | undefined
   path: string
+  className?: string
 }) {
   const [preview, setPreview] = useState(
     value ? getImageUrl('/' + path + '/' + value) : ''
@@ -44,7 +51,10 @@ export default function ImageUpload({
     setIsUploading(true)
     try {
       const data = new FormData()
+      file.name.replace(/[^a-zA-Z0-9.]/g, '_')
+
       data.set('file', file)
+
       data.set('path', path)
       const res = await fetch('/api/upload', {
         method: 'POST',
@@ -79,26 +89,42 @@ export default function ImageUpload({
               setPreview('')
             }}
           />
-          <AspectRatio ratio={aspectRatio} className="relative">
+          <div
+            className={`${className} relative flex justify-center flex-col items-center border border-dotted bg-secondary`}>
             <Image
               src={preview ?? value}
               className="z-10"
               alt="preview"
               fill
             />
-          </AspectRatio>
+          </div>
         </div>
       ) : (
-        <Input
-          type="file"
-          accept=".png,.jpg"
-          {...rest}
-          onChange={(event) => {
-            const { files, displayUrl } = getImageData(event)
-            setPreview(displayUrl)
-            onSubmit(files[0])
-          }}
-        />
+        <>
+          <Label
+            htmlFor={id}
+            className={`${className} flex justify-center flex-col items-center border border-dotted bg-secondary`}>
+            <div className="p-2 text-white rounded-full bg-neutral-400">
+              <ImageLogo />
+            </div>
+            <p className="p-1 w-full text-center lg:w-2/3 text-[12px]">
+              {placeholder}
+            </p>
+          </Label>
+          <Input
+            id={id}
+            type="file"
+            accept=".png,.jpg"
+            placeholder="Upload image"
+            className="hidden"
+            {...rest}
+            onChange={(event) => {
+              const { files, displayUrl } = getImageData(event)
+              setPreview(displayUrl)
+              onSubmit(files[0])
+            }}
+          />
+        </>
       )}
     </>
   )

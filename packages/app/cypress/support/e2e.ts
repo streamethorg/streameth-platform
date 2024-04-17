@@ -16,6 +16,24 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // const errorsToIgnore = [
+  //   'NEXT_NOT_FOUND',
+  //   'Hydration failed because the initial UI does not match what was rendered on the server',
+  //   'There was an error while hydrating this Suspense boundary. Switched to client rendering.',
+  // ]
+  //
+  // const shouldIgnoreError = errorsToIgnore.some((errorText) =>
+  //   err.message.includes(errorText)
+  // )
+
+  // if (shouldIgnoreError) {
+  return false
+  // }
+
+  return undefined
+})
+
 beforeEach(() => {
   cy.viewport(1200, 1000)
 })

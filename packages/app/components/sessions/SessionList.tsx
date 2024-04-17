@@ -7,6 +7,7 @@ interface Props {
   event: IExtendedEvent
   sessions: IExtendedSession[]
   currentSession?: IExtendedSession
+  date?: string
 }
 
 const scroll = Scroll.scroller
@@ -25,6 +26,7 @@ export default function SessionList({
   event,
   sessions,
   currentSession,
+  date,
 }: Props) {
   const getCurrDaySessions = () => {
     return sessions.filter(
@@ -34,25 +36,26 @@ export default function SessionList({
     )
   }
 
-  const sortedSessions = getCurrDaySessions().length
-    ? getCurrDaySessions().sort((a, b) => {
-        if (a.start < b.start) {
-          return -1
-        } else if (a.start > b.start) {
-          return 1
-        } else {
-          return 0
-        }
-      })
-    : sessions.slice().sort((a, b) => {
-        if (a.start < b.start) {
-          return -1
-        } else if (a.start > b.start) {
-          return 1
-        } else {
-          return 0
-        }
-      })
+  const sortedSessions =
+    getCurrDaySessions().length && !date
+      ? getCurrDaySessions().sort((a, b) => {
+          if (a.start < b.start) {
+            return -1
+          } else if (a.start > b.start) {
+            return 1
+          } else {
+            return 0
+          }
+        })
+      : sessions.slice().sort((a, b) => {
+          if (a.start < b.start) {
+            return -1
+          } else if (a.start > b.start) {
+            return 1
+          } else {
+            return 0
+          }
+        })
 
   useEffect(() => {
     if (currentSession) {
@@ -70,22 +73,19 @@ export default function SessionList({
   }
 
   return (
-    <ul id="sessionList" className="h-full relative lg:overflow-auto">
+    <div id="sessionList" className="grid grid-cols-3 gap-4">
       {sortedSessions.map((i, index) => {
         if (i.name === 'Blank') return null
         return (
-          <Element key={index} name={i._id}>
-            <li id={i._id} className="mb-3 text-lg">
-              <ScheduleCard
-                event={event}
-                session={i}
-                showTime
-                speakers
-              />
-            </li>
-          </Element>
+          <ScheduleCard
+            key={index}
+            event={event}
+            session={i}
+            showTime
+            speakers
+          />
         )
       })}
-    </ul>
+    </div>
   )
 }

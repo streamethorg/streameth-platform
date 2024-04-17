@@ -1,6 +1,10 @@
 import { Metadata } from 'next'
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-import { IExtendedEvent, IExtendedSession } from '../types'
+import {
+  IExtendedEvent,
+  IExtendedSession,
+  IExtendedStage,
+} from '../types'
 import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 const BASE_IMAGE = 'https://streameth.org/streameth_banner.png'
 
@@ -120,7 +124,7 @@ export const stageMetadata = ({
   stage,
 }: {
   event: IExtendedEvent
-  stage: IStageModel
+  stage: IExtendedStage
 }): Metadata => {
   const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
 

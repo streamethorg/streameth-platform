@@ -11,10 +11,12 @@ export async function fetchEvents({
   organizationId,
   organizationSlug,
   date,
+  unlisted = false,
 }: {
   organizationId?: string
   organizationSlug?: string
   date?: Date
+  unlisted?: boolean
 }): Promise<IExtendedEvent[]> {
   try {
     let data: IExtendedEvent[] = []
@@ -28,7 +30,7 @@ export async function fetchEvents({
         return []
       }
       const response = await fetch(
-        `${apiUrl()}/events/organization/${organization._id}`,
+        `${apiUrl()}/events?organizationId=${organization._id}`,
         { cache: 'no-store' }
       )
       data = (await response.json()).data ?? []
@@ -67,6 +69,10 @@ export async function fetchEvent({
       return null
     }
 
+    console.log(
+      'fetching event',
+      `${apiUrl()}/events/${eventId ?? eventSlug}`
+    )
     const data = await fetch(
       `${apiUrl()}/events/${eventId ?? eventSlug}`,
       {
@@ -101,6 +107,7 @@ export const createEvent = async ({
       body: JSON.stringify(event),
     })
     if (!response.ok) {
+      console.log('error in createEvent', await response.json())
       throw 'Error creating event'
     }
     return (await response.json()).data

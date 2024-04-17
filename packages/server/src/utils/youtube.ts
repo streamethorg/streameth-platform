@@ -88,19 +88,10 @@ export async function uploadToYouTube(
 ): Promise<void> {
   const eventService = new EventService();
   const stateService = new StateService();
-
-  const events = await eventService.getAll();
-  const event = events.filter((event) => {
-    if (event._id.toString() === session.eventId.toString()) {
-      return event;
-    }
-    return;
-  });
-
-  if (!event || !event[0]) {
+  const event = await eventService.get(session.eventId.toString());
+  if (!event) {
     throw new Error('Could not find event');
   }
-
   try {
     const insertResponse = await youtube.videos.insert({
       part: ['status', 'snippet'],

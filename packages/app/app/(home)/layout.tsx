@@ -33,7 +33,7 @@ const Layout = async ({
   return (
     <div className="mx-auto w-full max-w-screen-2xl h-screen">
       <HomePageNavbar pages={pages} showSearchBar={true} />
-      <div className="top-[74px] flex flex-col p-4 overflow-auto text-foreground">
+      <div className="bg-white top-[74px] flex flex-col p-4 overflow-auto text-foreground">
         {children}
       </div>
       <Footer />

@@ -9,6 +9,7 @@ import { Schema, model } from 'mongoose';
 const StateSchema = new Schema<IStateModel>(
   {
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
+    organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     sessionId: { type: Schema.Types.ObjectId, ref: 'Session' },
     eventSlug: { type: String, default: '' },
     sessionSlug: { type: String, default: '' },

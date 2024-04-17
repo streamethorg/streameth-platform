@@ -1,13 +1,26 @@
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import {
-  ISpeaker,
-  ISpeakerModel,
-} from 'streameth-new-server/src/interfaces/speaker.interface'
+  IStage,
+  IStageModel,
+} from 'streameth-new-server/src/interfaces/stage.interface'
+import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
+import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
+
+export enum eSort {
+  asc_alpha = 'asc_alpha',
+  desc_alpha = 'desc_alpha',
+  asc_date = 'asc_date',
+  desc_date = 'desc_date',
+}
+
+export enum eLayout {
+  grid = 'grid',
+  list = 'list',
+}
 
 export interface Page {
   name: string
@@ -61,12 +74,15 @@ export interface studioPageParams {
   params: {
     organization: string
     session: string
+    eventId?: string
   }
   searchParams: {
-    eventId: string
+    eventId?: string
     settings: string
     stage: string
     stageSetting: string
+    streamId: string
+    collapsed?: boolean
   }
 }
 
@@ -74,13 +90,14 @@ export interface ClipsPageParams {
   params: {
     organization: string
     session: string
+    eventId: string
   }
   searchParams: {
-    eventId: string
     stage: string
     selectedSession: string
     selectedRecording: string
     replaceAsset: string
+    previewId: string
   }
 }
 
@@ -108,7 +125,12 @@ export interface IExtendedSession extends Omit<ISession, '_id'> {
   _id: string
   createdAt?: string
 }
-export interface IStage extends IStageModel {}
+export interface IExtendedStage extends Omit<IStage, '_id'> {
+  _id?: string
+  createdAt?: string
+  updatedAt?: string
+  __v?: string
+}
 export interface IExtendedSpeaker
   extends Omit<ISpeaker, 'organizationId'> {}
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
@@ -116,4 +138,46 @@ export interface IExtendedUser extends Omit<IUser, 'organizations'> {
 }
 export interface IExtendedChat extends Omit<IChat, '_id'> {
   _id: string
+}
+
+export interface IExtendedState extends Omit<IState, '_id'> {
+  _id: string
+}
+
+export interface EmbedPageParams {
+  searchParams: {
+    vod: string
+    playbackId: string
+  }
+}
+
+export interface LivestreamPageParams {
+  params: {
+    organization: string
+    streamId: string
+  }
+  searchParams: { layout: eLayout; sort: eSort }
+}
+
+export interface IGenerateEmbed {
+  playbackId?: string
+  vod?: boolean
+  streamId?: string
+  playerName: string
+}
+
+export interface IGenerateEmbedCode extends IGenerateEmbed {
+  url: string
+}
+
+export interface ChannelPageParams {
+  params: {
+    organization: string
+  }
+  searchParams: {
+    tab?: string
+    search: string
+    id: string
+    streamId: string
+  }
 }

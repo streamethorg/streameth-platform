@@ -13,6 +13,7 @@ import {
   Delete,
   Tags,
   Security,
+  Query,
 } from 'tsoa';
 import { CreateEventDto } from '@dtos/event/create-event.dto';
 import { UpdateEventDto } from '@dtos/event/update-event.dto';
@@ -33,6 +34,18 @@ export class EventController extends Controller {
   ): Promise<IStandardResponse<IEvent>> {
     const event = await this.eventService.create(body);
     return SendApiResponse('event created', event);
+  }
+
+  /**
+   * @summary Get Event
+   */
+  @SuccessResponse('200')
+  @Get('{eventId}')
+  async getEventById(
+    @Path() eventId: string,
+  ): Promise<IStandardResponse<IEvent>> {
+    const event = await this.eventService.get(eventId);
+    return SendApiResponse('event fetched', event);
   }
 
   /**
@@ -64,27 +77,16 @@ export class EventController extends Controller {
   }
 
   @SuccessResponse('200')
-  @Get('{eventId}')
-  async getEventById(
-    @Path() eventId: string,
-  ): Promise<IStandardResponse<IEvent>> {
-    const event = await this.eventService.get(eventId);
-    return SendApiResponse('event fetched', event);
-  }
-
-  @SuccessResponse('200')
   @Get()
-  async getAllEvents(): Promise<IStandardResponse<Array<IEvent>>> {
-    const events = await this.eventService.getAll();
-    return SendApiResponse('events fetched', events);
-  }
-
-  @SuccessResponse('200')
-  @Get('organization/{organizationId}')
-  async getAllEventsForOrganization(
-    @Path() organizationId: string,
+  async getAllEvents(
+    @Query() organizationId?: string,
+    @Query() unlisted?: boolean,
   ): Promise<IStandardResponse<Array<IEvent>>> {
-    const events = await this.eventService.findAllOwnedEvents(organizationId);
+    const query = {
+      organizationId: organizationId,
+      unlisted: unlisted,
+    };
+    const events = await this.eventService.getAll(query);
     return SendApiResponse('events fetched', events);
   }
 

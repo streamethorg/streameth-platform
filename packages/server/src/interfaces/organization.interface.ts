@@ -4,11 +4,13 @@ export interface IOrganization {
   name: string;
   email: string;
   description?: string;
+  bio?: string;
   url?: string;
   logo: string;
   location?: string;
   accentColor?: string;
   slug?: string;
+  banner?: string;
   walletAddress: string;
 }
 export interface IOrganizationModel

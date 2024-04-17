@@ -1,71 +1,115 @@
+'use client'
+import { useState } from 'react'
 import { cn } from '@/lib/utils/utils'
-import { Accordion, AccordionItem } from '@/components/ui/accordion'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import {
-  AvatarImage,
-  Avatar,
-  AvatarFallback,
-} from '@/components/ui/avatar'
-import Logo from '@/public/logo.png'
-import { Badge } from '@/components/ui/badge'
-import Link from 'next/link'
+import { Accordion } from '@/components/ui/accordion'
+import Logo from '@/public/studio_logo.png'
+import LogoCollapsed from '@/public/logo.png'
 import NavigationItem from './NavigationItem'
-import { Radio, Videotape, Settings } from 'lucide-react'
+import {
+  Radio,
+  Videotape,
+  Settings,
+  Home,
+  CalendarDays,
+  ScissorsLineDashed,
+} from 'lucide-react'
+import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
+import Image from 'next/image'
+import StreamethStudio from '@/lib/svg/StreamethStudio'
+import StreamethLogo from '@/lib/svg/StreamethLogo'
 
 const navigationItems = [
   {
+    title: 'Home',
+    navigationPath: '',
+    icon: <Home />,
+    defaultCollapsed: false,
+  },
+  {
     title: 'Events',
-    navigationPath: 'events',
-    icon: <Radio />,
+    navigationPath: 'event',
+    icon: <CalendarDays />,
+    defaultCollapsed: false,
   },
   {
-    title: 'Videos',
-    navigationPath: 'videos',
+    title: 'Library',
+    navigationPath: 'library',
     icon: <Videotape />,
+    defaultCollapsed: false,
   },
   {
-    title: 'Settings',
-    navigationPath: 'settings',
-    icon: <Settings />,
+    title: 'Livestreams',
+    navigationPath: 'livestreams',
+    icon: <Radio />,
+    defaultCollapsed: false,
   },
+  {
+    title: 'Clips',
+    navigationPath: 'clips',
+    icon: <ScissorsLineDashed />,
+    defaultCollapsed: false,
+  },
+  // {
+  //   title: 'Settings',
+  //   navigationPath: 'settings',
+  //   icon: <Settings />,
+  //   defaultCollapsed: false,
+  // },
 ]
-
-const Navigation = async ({
+const Navigation = ({
   organizationSlug,
 }: {
   organizationSlug: string
 }) => {
-  const organization = await fetchOrganization({ organizationSlug })
-  if (!organization) return null
-  return (
-    <div
-      className={cn(
-        'overflow-auto w-full max-w-[250px] h-full border-r border-border flex flex-col text-foreground'
-      )}>
-      <div className="flex flex-col space-y-2 p-4 justify-between items-center border-b border-border">
-        <Avatar className="">
-          <AvatarImage
-            src={organization?.logo}
-            alt={organization.name}
-          />
-          <AvatarFallback>
-            {organization.name.slice(0, 1)}
-          </AvatarFallback>
-        </Avatar>
+  const [isCollapsed, setIsCollapsed] = useState(false)
 
-        <h3 className="text-2xl font-bold">{organization.name}</h3>
-        <Badge variant={'outline'}>
-          <Link href={`/archive?organization=${organization.slug}`}>
-            Organization page
-          </Link>
-        </Badge>
-      </div>
-      <Accordion type="single" collapsible>
+  return (
+    <aside
+      className={cn(
+        'bg-primary overflow-auto w-full h-full border-r border-border flex flex-col text-black',
+        {
+          'max-w-[50px]': isCollapsed,
+          'max-w-[250px]': !isCollapsed,
+          'transition-max-width': true,
+        }
+      )}
+      style={{
+        transition: 'max-width 0.3s ease-out-in',
+      }}>
+      {isCollapsed ? (
+        <div className="my-2 mx-1">
+          <StreamethLogo />
+        </div>
+      ) : (
+        <div className="p-2 my-2 mx-4 h-[56px] w-[180px]">
+          <StreamethStudio />
+        </div>
+      )}
+
+      <Accordion type="single" className="space-y-4" collapsible>
         {navigationItems.map((item, index) => (
-          <NavigationItem key={index} {...item} />
+          <NavigationItem
+            organization={organizationSlug}
+            key={index}
+            collapsed={isCollapsed}
+            {...item}
+          />
         ))}
       </Accordion>
-    </div>
+
+      <div
+        onClick={() => setIsCollapsed(!isCollapsed)}
+        className="flex justify-center items-center mt-auto mb-5 w-full text-white cursor-pointer">
+        {isCollapsed ? (
+          <ArrowRightFromLine className="cursor-pointer" />
+        ) : (
+          <div className="flex flex-row">
+            <ArrowLeftToLine className="mr-1 cursor-pointer" />
+            Collapse
+          </div>
+        )}
+      </div>
+    </aside>
   )
 }
 
