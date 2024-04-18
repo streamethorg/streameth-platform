@@ -16,8 +16,10 @@ const NftSchema = new Schema<INftCollection>(
         type: { type: String, default: '' },
         stageId: { type: String, default: '' },
         sessionId: { type: String, default: '' },
+        ipfsURI: { type: String, default: '' },
       },
     ],
+    contractAddress: { type: String, default: '' },
   },
   {
     timestamps: true,

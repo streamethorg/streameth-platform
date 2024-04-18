@@ -14,5 +14,7 @@ export interface INftCollection {
     type: string;
     sessionId?: string;
     stageId?: string;
+    ipfsURI?: string;
   }[];
+  contractAddress: string;
 }
