@@ -9,6 +9,7 @@ import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
+import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface'
 
 export enum eSort {
   asc_alpha = 'asc_alpha',
@@ -144,6 +145,11 @@ export interface IExtendedState extends Omit<IState, '_id'> {
   _id: string
 }
 
+export interface IExtendedNftCollections
+  extends Omit<INftCollection, '_id'> {
+  _id: string
+}
+
 export interface EmbedPageParams {
   searchParams: {
     vod: string
@@ -180,4 +186,8 @@ export interface ChannelPageParams {
     id: string
     streamId: string
   }
+}
+
+export interface INFTSessions extends IExtendedSession {
+  videoType: string
 }
