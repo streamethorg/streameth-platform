@@ -95,4 +95,8 @@ export class CreateEventDto implements IEvent {
   plugins?: IPlugins;
 
   slug?: string;
+
+  @IsOptional()
+  @IsString()
+  nftAddress?: string;
 }

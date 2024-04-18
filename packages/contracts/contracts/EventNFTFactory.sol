@@ -25,7 +25,8 @@ contract EventNFTFactory {
         uint256 _maxSupply,
         uint256 _mintFee,
         uint256 _mintStartTime,
-        uint256 _mintEndTime
+        uint256 _mintEndTime,
+        address _streamethGnosisWallet
     ) external returns (address) {
         address cloneEvent = address(implementation).clone();
         EventNFT(cloneEvent).initialize(
@@ -36,7 +37,8 @@ contract EventNFTFactory {
             _maxSupply,
             _mintFee,
             _mintStartTime,
-            _mintEndTime
+            _mintEndTime,
+            _streamethGnosisWallet
         );
         EventNFT(cloneEvent).transferOwnership(msg.sender);
         events.push(address(cloneEvent));
