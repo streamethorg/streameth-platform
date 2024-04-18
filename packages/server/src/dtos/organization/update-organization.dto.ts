@@ -18,7 +18,11 @@ export class UpdateOrganizationDto {
   @IsString()
   walletAddress: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  organizationId: string;
+  banner?: string;
+
+  @IsOptional()
+  @IsString()
+  organizationId?: string;
 }
