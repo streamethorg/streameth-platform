@@ -34,12 +34,11 @@ contract EventNFT is
     uint256 public mintEndTime;
 
     address[] public EventAddresses;
-    address public streamethGnosisWallet =
-        0x9268d03EfF4A9A595ef619764AFCB9976c0375df;
+    address public streamethGnosisWallet;
 
     mapping(address => mapping(string => bool)) private _sessionMinted;
 
-    /// ======================== Events ========================
+/// ======================== Events ========================
     event sessionMinted(address receipeint, string sessionId);
 
     function initialize(
@@ -50,12 +49,12 @@ contract EventNFT is
         uint256 _maxSupply,
         uint256 _mintFee,
         uint256 _mintStartTime,
-        uint256 _mintEndTime
+        uint256 _mintEndTime,
     ) public initializer {
         __ERC721_init(_name, _symbol);
         __ERC721URIStorage_init();
         __Ownable_init(_msgSender());
-
+        
         baseTokenURI = _baseTokenURI;
         eventName = _name;
         limitedSupply = _limitedSupply;

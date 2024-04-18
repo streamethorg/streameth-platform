@@ -23,6 +23,17 @@ export interface IPlugins {
   hideSchedule?: boolean;
 }
 
+export interface IEventNFT {
+  address?: string;
+  name?: string;
+  symbol?: string;
+  uri?: string;
+  maxSupply?: string;
+  mintFee?: string;
+  startTime?: string;
+  endTime?: string;
+}
+
 export interface IEvent {
   _id?: Types.ObjectId | string;
   name: string;
@@ -46,5 +57,6 @@ export interface IEvent {
   enableVideoDownloader?: boolean;
   plugins?: IPlugins;
   slug?: string;
+  eventNFT?: IEventNFT;
 }
 export interface IEventModel extends Omit<IEvent, '_id'>, Document {}

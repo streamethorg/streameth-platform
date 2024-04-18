@@ -38,6 +38,11 @@ const EventSchema = new Schema<IEventModel>(
       disableChat: { type: Boolean, default: false },
     },
     slug: { type: String, default: '', index: true },
+    eventNFT: {
+      address: { type: String, default: '' },
+      name: { type: String, default: '' },
+      symbol: { type: String, default: '' },
+    },
   },
   {
     timestamps: true,
