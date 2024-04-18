@@ -21,7 +21,6 @@ const CollectionDetails = ({
   form: UseFormReturn<{
     description: string
     name: string
-
     thumbnail?: string | undefined
   }>
 }) => {

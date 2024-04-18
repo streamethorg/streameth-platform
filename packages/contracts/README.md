@@ -1,8 +1,8 @@
 # NFT Contract`
 
-### EventNFT implementation https://sepolia.basescan.org/address/0x1905fd47595a42843E10f6BC08ec5D6D80662a15#code
+### EventNFT implementation https://sepolia.basescan.org/address/0xd6Cf19dA8c196AFB5954e551C6ce9786F229e358#code
 
-### EventNFT Factory https://sepolia.basescan.org/address/0x5c74670907A3F4bE0d17fB1ED94F8CA01426fad6#code
+### EventNFT Factory https://sepolia.basescan.org/address/0xA9908C45F67d35981C7985Ebfe8052f1F57C00f6#code
 
 ```shell
 npx hardhat help
@@ -11,6 +11,7 @@ REPORT_GAS=true npx hardhat test
 npx hardhat compile
 npx hardhat node
 npx hardhat run scripts/deploy.ts
+npx hardhat run scripts/deploy.ts --network <network name>
 ```
 
 ### Environment Variables
