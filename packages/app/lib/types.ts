@@ -68,6 +68,7 @@ export interface OrganizationPageProps {
     event?: string
     searchQuery?: string
     page?: string
+    collectionId?: string
   }
 }
 
@@ -162,6 +163,7 @@ export interface IExtendedState extends Omit<IState, '_id'> {
 export interface IExtendedNftCollections
   extends Omit<INftCollection, '_id'> {
   _id: string
+  createdAt: string
 }
 
 export interface EmbedPageParams {

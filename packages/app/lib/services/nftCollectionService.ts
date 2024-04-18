@@ -44,3 +44,25 @@ export async function fetchOrganizationNFTCollections({
     throw 'Error fetching stages'
   }
 }
+
+export async function fetchNFTCollection({
+  collectionId,
+}: {
+  collectionId?: string
+}): Promise<IExtendedNftCollections | null> {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/collections/${collectionId}`,
+      {
+        cache: 'no-store',
+      }
+    )
+    if (!response.ok) {
+      return null
+    }
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in fetchEvent', e)
+    throw e
+  }
+}
