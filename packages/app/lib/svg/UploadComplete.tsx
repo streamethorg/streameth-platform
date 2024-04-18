@@ -48,8 +48,8 @@ const UploadComplete: React.FC<
           fill="#3FB570"
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M112.707 97.2929C113.098 97.6834 113.098 98.3166 112.707 98.7071L101.707 109.707C101.317 110.098 100.683 110.098 100.293 109.707L95.2929 104.707C94.9024 104.317 94.9024 103.683 95.2929 103.293C95.6834 102.902 96.3166 102.902 96.7071 103.293L101 107.586L111.293 97.2929C111.683 96.9024 112.317 96.9024 112.707 97.2929Z"
           fill="white"
         />
@@ -102,7 +102,7 @@ const UploadComplete: React.FC<
           y2="-22.6718"
           gradientUnits="userSpaceOnUse">
           <stop stopColor="#3D22BA" />
-          <stop offset="1" stop-color="#6426EF" />
+          <stop offset="1" stopColor="#6426EF" />
         </linearGradient>
       </defs>
     </svg>
