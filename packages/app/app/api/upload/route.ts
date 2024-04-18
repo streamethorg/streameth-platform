@@ -13,12 +13,14 @@ export async function POST(request: NextRequest) {
   const bytes = await file.arrayBuffer()
   const buffer = Buffer.from(bytes)
   const s3 = new S3Service()
+  console.log('uploading file to', path + '/' + file.name)
   const result = await s3.uploadFile(
     validateEnv('SPACE_STORAGE_PATH'),
     path + '/' + file.name,
     buffer,
     file.type
   )
+
 
   return NextResponse.json({
     success: true,

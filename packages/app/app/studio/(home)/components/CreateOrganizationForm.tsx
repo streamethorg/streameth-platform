@@ -17,26 +17,34 @@ import { Input } from '@/components/ui/input'
 
 import { organizationSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import { createOrganizationAction } from '@/lib/actions/organizations'
+import {
+  createOrganizationAction,
+  updateOrganizationAction,
+} from '@/lib/actions/organizations'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
-import { getFormSubmitStatus } from '@/lib/utils/utils'
 import { useRouter } from 'next/navigation'
-export default function CreateOrganizationForm() {
+import { IExtendedOrganization } from '@/lib/types'
+export default function CreateOrganizationForm({
+  organization,
+}: {
+  organization?: IExtendedOrganization
+}) {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const { address } = useAccount()
+  console.log(organization)
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
     defaultValues: {
-      name: '',
-      banner: '',
-      logo: '',
-      email: '',
-      bio: '',
+      name: organization?.name || '',
+      banner: organization?.banner || '',
+      logo: organization?.logo || '',
+      email: organization?.email || '',
+      bio: organization?.bio || '',
     },
   })
 
@@ -46,6 +54,29 @@ export default function CreateOrganizationForm() {
       toast.error('No wallet address found')
       return
     }
+
+    if (organization) {
+      alert('update')
+      updateOrganizationAction({
+        organization: {
+          organizationId: organization._id,
+          ...values,
+          walletAddress: address as string,
+        },
+      })
+        .then(() => {
+          setIsOpen(false)
+          toast.success('Organization updated')
+        })
+        .catch(() => {
+          toast.error('Error updating organization')
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+      return
+    }
+
     createOrganizationAction({
       organization: { ...values, walletAddress: address as string },
     })

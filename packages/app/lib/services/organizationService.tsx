@@ -75,3 +75,38 @@ export async function createOrganization({
     throw e
   }
 }
+
+
+export async function updateOrganization({
+  organization,
+  authToken,
+}: {
+  organization: IExtendedOrganization
+  authToken: string
+}): Promise<IOrganization> {
+  if (!authToken) {
+    throw 'No auth token'
+  }
+  // const modifiedObject = (({ _id, description, ...rest }) => rest)(organization)
+  // modifiedObject['organizationId'] = organization._id
+  console.log(organization, `${apiUrl()}/organizations/${organization.organizationId}`)
+  try {
+    const response = await fetch(`${apiUrl()}/organizations/${organization.organizationId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(organization),
+    })
+
+    if (response.ok) {
+      return (await response.json()).data
+    } else {
+      throw await response.json()
+    }
+  } catch (e) {
+    console.error('Unexpected error:', e)
+    throw e
+  }
+}
