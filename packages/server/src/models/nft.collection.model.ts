@@ -14,10 +14,12 @@ const NftSchema = new Schema<INftCollection>(
     videos: [
       {
         type: { type: String, default: '' },
-        stageId: { type: Schema.Types.ObjectId, ref: 'Stage' },
-        sessionId: { type: Schema.Types.ObjectId, ref: 'Session' },
+        stageId: { type: String, default: '' },
+        sessionId: { type: String, default: '' },
+        ipfsURI: { type: String, default: '' },
       },
     ],
+    contractAddress: { type: String, default: '' },
   },
   {
     timestamps: true,
