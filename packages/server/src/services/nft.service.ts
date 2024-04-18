@@ -31,7 +31,7 @@ export default class CollectionService {
     }
     if (data.type == 'multiple') {
       let files = [];
-      for (const video of data.videos) {
+      for (const [index, video] of data.videos.entries()) {
         let metadata = await this.getMetadata({
           type: video.type,
           sessionId: video.sessionId,
@@ -40,7 +40,11 @@ export default class CollectionService {
         files.push(metadata);
       }
       let urls = await uploadMultipleMetadata(files);
-      data.videos.map((video, index) => (video.ipfsURI = urls[index]));
+      data.videos.map(
+        (video, index) => (
+          (video.ipfsURI = urls[index]), (video.index = index)
+        ),
+      );
       data.ipfsPath = this.getIpfsPath(urls[0]);
     }
     return await this.controller.store.create(
