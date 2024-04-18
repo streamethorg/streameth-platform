@@ -12,6 +12,13 @@ import WatchGrid, { WatchGridLoading } from './components/WatchGrid'
 import UpcomingStreams, {
   UpcomingStreamsLoading,
 } from './components/UpcomingStreams'
+import {
+  fetchOrganizationStages,
+  fetchStage,
+} from '@/lib/services/stageService'
+import PlayerWithControls from '@/components/ui/Player'
+import { Dot } from 'lucide-react'
+import { Separator } from '@/components/ui/separator'
 
 const OrganizationHome = async ({
   params,
@@ -29,40 +36,80 @@ const OrganizationHome = async ({
     return notFound()
   }
 
+  const allStreams = await fetchOrganizationStages({
+    organizationId: organization._id,
+  })
+  const activeStream = allStreams?.filter(
+    (stream) => stream?.streamSettings?.isActive
+  )
+
+  const playerActive = !!activeStream[0]
+
   return (
     <div className="m-auto w-full max-w-7xl">
-      <div className="relative z-10 w-full md:p-4">
-        <AspectRatio
-          ratio={3 / 1}
-          className="relative w-full md:rounded-xl">
-          {organization.banner ? (
-            <Image
-              src={organization.banner}
-              alt="banner"
-              quality={100}
-              objectFit="cover"
-              className="md:rounded-xl"
-              fill
-              priority
+      <div className="relative w-full md:p-4">
+        {playerActive ? (
+          <>
+            <PlayerWithControls
+              src={[
+                {
+                  src: 'https://lp-playback.com/hls/1051kh7p17jz1q5a/index.m3u8',
+                  width: 1920,
+                  height: 1080,
+                  mime: 'application/vnd.apple.mpegurl',
+                  type: 'hls',
+                },
+              ]}
             />
-          ) : (
-            <div className="h-full bg-gray-300 md:rounded-xl">
-              <StreamethLogoWhite />
-            </div>
-          )}
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
-          <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
-            <div className="flex flex-row justify-between w-full">
-              <div>
-                <h2 className="text-2xl font-bold">
-                  {organization.name}
-                </h2>
-                <p className="text-lg">{organization.description}</p>
+            <div className="flex justify-between items-center px-4 space-x-2">
+              <span className="font-bold">
+                {activeStream[0].name}
+              </span>
+              <div className="flex justify-end items-center">
+                <span className="font-bold">Live</span>
+                <Dot
+                  size={45}
+                  className="text-red-300 animate-ping"
+                />
               </div>
-              <ChannelShareIcons organization={organization} />
             </div>
-          </div>
-        </AspectRatio>
+            <Separator />
+          </>
+        ) : (
+          <AspectRatio
+            ratio={3 / 1}
+            className="relative w-full md:rounded-xl">
+            {organization.banner ? (
+              <Image
+                src={organization.banner}
+                alt="banner"
+                quality={100}
+                objectFit="cover"
+                className="md:rounded-xl"
+                fill
+                priority
+              />
+            ) : (
+              <div className="h-full bg-gray-300 md:rounded-xl">
+                <StreamethLogoWhite />
+              </div>
+            )}
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
+              <div className="flex flex-row justify-between w-full">
+                <div>
+                  <h2 className="text-2xl font-bold">
+                    {organization.name}
+                  </h2>
+                  <p className="text-lg">
+                    {organization.description}
+                  </p>
+                </div>
+                <ChannelShareIcons organization={organization} />
+              </div>
+            </div>
+          </AspectRatio>
+        )}
       </div>
       <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none">
         <Suspense fallback={<UpcomingStreamsLoading />}>
