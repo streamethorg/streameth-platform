@@ -36,18 +36,10 @@ const ArchiveVideos = async ({
   }
 
   return (
-    <div>
-      <div className="flex flex-row items-center justify-between mb-4">
-        <CardTitle className="px-2 lg:p-0 text-lg">
-          All videos
-        </CardTitle>
-        <Pagination {...videos.pagination} />
-      </div>
-      <Videos
-        OrganizationSlug={organizationSlug}
-        videos={videos.sessions}
-      />
-    </div>
+    <Videos
+      OrganizationSlug={organizationSlug}
+      videos={videos.sessions}
+    />
   )
 }
 

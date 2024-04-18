@@ -1,3 +1,5 @@
+"use client"
+import { useState } from 'react'
 import { CalendarSearch } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -16,10 +18,12 @@ export default function DatePicker({
   value: Date
   onChange: (value: Date) => void
 }) {
+  const [isOpen, setIsOpen] = useState(false)
   return (
-    <Popover>
+    <Popover open={isOpen}>
       <PopoverTrigger asChild>
         <Button
+          onClick={() => setIsOpen(true)}
           variant={'outline'}
           className={cn(
             'w-[240px] pl-3 text-left font-normal',

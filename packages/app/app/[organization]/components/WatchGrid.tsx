@@ -18,10 +18,6 @@ const WatchGrid = async ({
     })
   ).sessions
 
-  if (videos.length === 0) {
-    return null
-  }
-
   return (
     <div className="w-full">
       <div className="flex justify-between items-center pb-4">
@@ -35,6 +31,11 @@ const WatchGrid = async ({
         OrganizationSlug={organizationSlug}
         maxVideos={gridLength}
       />
+      {videos.length === 0 && (
+        <div className="w-full px-8">
+          <p>No videos available</p>
+        </div>
+      )}
     </div>
   )
 }
