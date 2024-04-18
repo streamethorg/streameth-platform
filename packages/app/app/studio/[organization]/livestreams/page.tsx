@@ -67,7 +67,10 @@ const Livestreams = async ({
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <CreateLivestreamModal organization={organization} />
+          <CreateLivestreamModal
+            show={searchParams?.show}
+            organization={organization}
+          />
         </CardFooter>
       </Card>
 
