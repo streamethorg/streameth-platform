@@ -43,7 +43,7 @@ export class SessionController extends Controller {
     const session = await this.sessionService.create(body);
     return SendApiResponse('session created', session);
   }
-  
+
   /**
    *
    * @Summary Update session

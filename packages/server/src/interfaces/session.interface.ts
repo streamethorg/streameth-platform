@@ -43,7 +43,7 @@ export interface ISession {
   videoTranscription?: string;
   aiDescription?: string;
   autoLabels?: string[];
-  nftURI?: string;
+  ipfsHash?: string;
   mintable?: boolean;
   published?: boolean;
   type: SessionType;
