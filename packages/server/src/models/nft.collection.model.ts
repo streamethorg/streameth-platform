@@ -13,6 +13,7 @@ const NftSchema = new Schema<INftCollection>(
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     videos: [
       {
+        index: { type: Number, default: 0 },
         type: { type: String, default: '' },
         stageId: { type: String, default: '' },
         sessionId: { type: String, default: '' },
@@ -20,6 +21,7 @@ const NftSchema = new Schema<INftCollection>(
       },
     ],
     contractAddress: { type: String, default: '' },
+    ipfsPath: { type: String, default: '' },
   },
   {
     timestamps: true,

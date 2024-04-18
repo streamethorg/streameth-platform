@@ -4,7 +4,6 @@ import { ISession, SessionType } from '@interfaces/session.interface';
 import Organization from '@models/organization.model';
 import Session from '@models/session.model';
 import Event from '@models/event.model';
-import { ThirdwebStorage } from '@thirdweb-dev/storage';
 import { config } from '@config';
 import { Types } from 'mongoose';
 import Stage from '@models/stage.model';
@@ -122,8 +121,8 @@ export default class SessionService {
   }
 
   async createMetadata(sessionId: string) {
-    let session = await Session.findById(sessionId); //await this.get(sessionId);
-    let metadata = JSON.stringify({
+    let session = await Session.findById(sessionId);
+    let metadata = {
       name: session.name,
       description: session.description,
       external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
@@ -150,18 +149,9 @@ export default class SessionService {
           videoTranscription: session.videoTranscription,
         },
       ],
-    });
-    const URI = await this.upload(metadata);
-    await session.updateOne({ nftURI: URI });
-    return URI;
-  }
-
-  async upload(file: Express.Multer.File | {}): Promise<string> {
-    const storage = new ThirdwebStorage({
-      secretKey: config.storage.thirdWebSecretKey,
-    });
-    const URI = await storage.upload(file);
-    return await storage.resolveScheme(URI);
+    };
+    await session.updateOne({ mintable: true });
+    return metadata;
   }
 
   async createStreamRecordings(payload: any) {

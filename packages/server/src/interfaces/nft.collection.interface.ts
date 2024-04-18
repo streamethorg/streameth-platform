@@ -11,10 +11,12 @@ export interface INftCollection {
   type: NftCollectionType;
   organizationId: Types.ObjectId | string;
   videos: {
+    index?: number;
     type: string;
     sessionId?: string;
     stageId?: string;
     ipfsURI?: string;
   }[];
   contractAddress?: string;
+  ipfsPath?: string;
 }

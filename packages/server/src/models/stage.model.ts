@@ -30,6 +30,7 @@ export const StageSchema = new Schema<IStageModel>(
     published: { type: Boolean, default: false },
     slug: { type: String, default: '', index: true },
     streamDate: { type: Date, default: Date.now() },
+    mintable: { type: Boolean, default: false },
   },
   {
     timestamps: true,
