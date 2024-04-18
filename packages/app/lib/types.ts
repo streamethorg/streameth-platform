@@ -162,7 +162,7 @@ export interface LivestreamPageParams {
     organization: string
     streamId: string
   }
-  searchParams: { layout: eLayout; sort: eSort }
+  searchParams: { layout: eLayout; sort: eSort; show: boolean }
 }
 
 export interface IGenerateEmbed {
