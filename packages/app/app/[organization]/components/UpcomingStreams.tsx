@@ -18,7 +18,9 @@ const UpcomingStreams = async ({
   })
 
   livestreams = livestreams.filter((livestream) => {
-    return new Date(livestream.streamDate) > new Date()
+    // filter by streams in the future or happening today
+    return true
+
   })
 
   livestreams = livestreams.filter((livestream) => {

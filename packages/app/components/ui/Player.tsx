@@ -103,7 +103,7 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
 
               <Player.LiveIndicator className="gap-2 flex items-center">
                 <div className="bg-red-600 text-white h-1.5 w-1.5 rounded-full" />
-                <span className="text-sm select-none">LIVE</span>
+                <span className="text-sm text-white select-none">LIVE</span>
               </Player.LiveIndicator>
               <Player.LiveIndicator
                 matcher={false}

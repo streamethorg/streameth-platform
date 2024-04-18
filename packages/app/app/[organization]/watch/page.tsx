@@ -45,7 +45,11 @@ export default async function Watch({
             ]}
           />
           <div className="w-full px-4 md:px-0">
-            <SessionInfoBox video={video} vod={true} />
+            <SessionInfoBox 
+              name={video.name}
+              description={video.description ?? ''}
+              date={video.createdAt as string}
+            vod={true} />
           </div>
         </div>
         <div className="px-4">

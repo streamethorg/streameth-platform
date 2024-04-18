@@ -1,29 +1,24 @@
 'use server'
 
-import {
-  CardDescription,
-  CardTitle,
-  CardHeader,
-} from '@/components/ui/card'
+import { CardTitle } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
 import { IExtendedSession, IExtendedStage } from '@/lib/types'
-import { Button } from '../ui/button'
 import { formatDate } from '@/lib/utils/time'
+import SignUp from '../plugins/SignUp'
 
 const SessionInfoBox = async ({
-  video,
-  stage,
+  name,
+  description,
   inverted,
+  date,
   vod = false,
 }: {
-  video?: IExtendedSession
-  stage?: IExtendedStage
+  name: string
+  description: string
+  date: string
   inverted?: boolean
   vod?: boolean
 }) => {
-  if (!stage && !video) {
-    return null
-  }
 
   return (
     <div
@@ -32,29 +27,20 @@ const SessionInfoBox = async ({
       }`}>
       <div className="flex flex-col justify-start w-full">
         <CardTitle className="flex flex-row justify-between items-start text-xl lg:text-2xl">
-          <span>{video?.name || stage?.name}</span>
+          <span>{name}</span>
         </CardTitle>
         <InfoBoxDescription
-          description={
-            video?.description ||
-            stage?.description ||
-            'No description'
-          }
+          description={description}
         />
-        <p className="hidden md:block">
+        <p className="">
           {formatDate(
-            new Date(video?.createdAt! || stage?.streamDate!),
+            new Date(date),
             'ddd. MMMM. D, YYYY'
           )}
         </p>
       </div>
       <div className="flex justify-between items-center mb-auto space-x-2 md:justify-end">
-        <Button variant={'primary'} className="w-full md:w-36">
-          Set Reminder
-        </Button>
-        <Button className="hidden md:block" variant={'outline'}>
-          Set Reminder
-        </Button>
+        {/* <SignUp event={name} /> */}
       </div>
     </div>
   )

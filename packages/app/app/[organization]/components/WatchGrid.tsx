@@ -10,13 +10,15 @@ const WatchGrid = async ({
   organizationSlug: string
   gridLength?: number
 }) => {
-  const videos = (
+  let videos = (
     await fetchAllSessions({
       organizationSlug,
       onlyVideos: true,
       limit: gridLength,
     })
   ).sessions
+
+  videos = videos.filter((video) => video.published)
 
   return (
     <div className="w-full">

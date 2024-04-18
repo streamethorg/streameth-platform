@@ -7,7 +7,7 @@ const EventSelect = ({ events }: { events: IExtendedEvent[] }) => {
   const { handleTermChange, searchParams } = useSearchParams()
   const event = searchParams.get('event') || ''
 
-  if (!events) {
+  if (events.length === 0) {
     return null
   }
   
