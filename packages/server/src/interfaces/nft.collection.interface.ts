@@ -16,5 +16,5 @@ export interface INftCollection {
     stageId?: string;
     ipfsURI?: string;
   }[];
-  contractAddress: string;
+  contractAddress?: string;
 }
