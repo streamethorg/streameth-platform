@@ -31,14 +31,14 @@ const SessionInfoBox = async ({
         <InfoBoxDescription description={video.description} />
       </div>
       <div className="mb-auto flex justify-between items-center space-x-2 md:justify-end">
-            <Button variant={'primary'} className="w-full md:w-36">
-              Collect Video
-            </Button>
-            <Button className="hidden md:block" variant={'outline'}>
-              Collect Video
-            </Button>
-            <PopoverActions session={video} />
-          </div>
+        <Button variant={'primary'} className="w-full md:w-36">
+          Collect Video
+        </Button>
+        <Button className="hidden md:block" variant={'outline'}>
+          Collect Video
+        </Button>
+        <PopoverActions session={video} />
+      </div>
     </div>
   )
 }

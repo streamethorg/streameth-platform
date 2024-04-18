@@ -35,10 +35,12 @@ import { formatDate } from '@/lib/utils/time'
 
 const CreateLivestreamModal = ({
   organization,
+  show,
 }: {
+  show?: boolean
   organization: IExtendedOrganization
 }) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(show ?? false)
   const [isLoading, setIsLoading] = useState(false)
   const [streamType, setStreamType] = useState<
     'instant' | 'schedule' | undefined
