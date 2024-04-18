@@ -8,7 +8,7 @@ interface ConnectWalletButtonProps {
 
 export const ConnectWalletButton = ({
   btnText = 'Connect Wallet',
-  className
+  className,
 }: ConnectWalletButtonProps) => {
   const { isSignedIn } = useSIWE()
 

@@ -3,8 +3,6 @@
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Footer from '@/components/Layout/Footer'
 
-
-
 const Layout = async ({
   params,
   children,
@@ -12,7 +10,6 @@ const Layout = async ({
   params: { organization: string }
   children: React.ReactNode
 }) => {
-
   const pages = [
     {
       name: 'Home',

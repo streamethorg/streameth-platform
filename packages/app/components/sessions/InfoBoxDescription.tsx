@@ -33,7 +33,7 @@ const InfoBoxDescription = ({
   if (!description) return null
 
   return (
-    <div className='py-4 relative'>
+    <div className="py-4 relative">
       <div
         ref={descriptionRef}
         className={`transition-max-height duration-700 ease-in-out overflow-hidden ${

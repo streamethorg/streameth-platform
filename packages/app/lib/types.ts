@@ -67,6 +67,7 @@ export interface OrganizationPageProps {
     event?: string
     searchQuery?: string
     page?: string
+    stage?: string
   }
 }
 

@@ -40,7 +40,7 @@ export default function Navbar({
           </NavigationMenuItem>
         ))}
         <NavigationMenuItem key={'connect'} className="md:hidden">
-          <ConnectWalletButton className="w-full rounded-none"/>
+          <ConnectWalletButton className="w-full rounded-none" />
         </NavigationMenuItem>
       </ul>
     </div>

@@ -142,17 +142,9 @@ const MobileNavBar = ({
           {pages.length > 0 && (
             <button onClick={toggleMenu} className="z-50 ">
               {!menuVisible ? (
-                <Menu
-                  size={30}
-                  strokeWidth={2}
-                  className=""
-                />
+                <Menu size={30} strokeWidth={2} className="" />
               ) : (
-                <X
-                size={30}
-                strokeWidth={2}
-                className=""
-                />
+                <X size={30} strokeWidth={2} className="" />
               )}
             </button>
           )}
