@@ -32,6 +32,8 @@ export class IStage {
   organizationId: Types.ObjectId | string;
   thumbnail?: string;
   streamDate?: Date | string;
+  mintable?: boolean;
+  createdAt?: string;
 }
 
 export interface IStageModel extends Omit<IStage, '_id'>, Document {}

@@ -43,20 +43,7 @@ export class SessionController extends Controller {
     const session = await this.sessionService.create(body);
     return SendApiResponse('session created', session);
   }
-
-  /**
-   *
-   * @Summary Create session metadata
-   */
-  @SuccessResponse('201')
-  @Post('metadata/{sessionId}')
-  async uploadSessionMetadata(
-    @Path() sessionId: string,
-  ): Promise<IStandardResponse<string>> {
-    const session = await this.sessionService.createMetadata(sessionId);
-    return SendApiResponse('session metadata created', session);
-  }
-
+  
   /**
    *
    * @Summary Update session

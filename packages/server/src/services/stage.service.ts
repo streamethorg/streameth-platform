@@ -5,6 +5,7 @@ import Stage from '@models/stage.model';
 import Events from '@models/event.model';
 import { Types } from 'mongoose';
 import { createStream, deleteStream, getStreamInfo } from '@utils/livepeer';
+import { config } from '@config';
 
 export default class StageService {
   private path: string;
@@ -92,5 +93,30 @@ export default class StageService {
       },
       { upsert: true },
     );
+  }
+
+  async createMetadata(stageId: string) {
+    let stage = await Stage.findById(stageId);
+    let metadata = {
+      name: stage.name,
+      description: stage.description,
+      external_url: '',
+      animation_ur: `${config.baseUrl}/embed/?playbackId=${stage.streamSettings.playbackId}&vod=false&streamId=${stage.streamSettings.streamId}&playerName=${stage.name}`,
+      //image: stage.thumnbnail,
+      attributes: [
+        {
+          name: stage.name,
+          description: stage.description,
+          organizationId: stage.organizationId,
+          eventId: stage.eventId,
+          slug: stage.slug,
+          createdAt: stage.createdAt,
+          streamId: stage.streamSettings.streamId,
+          playbackId: stage.streamSettings.playbackId,
+        },
+      ],
+    };
+    await stage.updateOne({ mintable: true });
+    return metadata;
   }
 }

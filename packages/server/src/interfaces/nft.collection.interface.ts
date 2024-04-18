@@ -17,4 +17,5 @@ export interface INftCollection {
     ipfsURI?: string;
   }[];
   contractAddress?: string;
+  ipfsPath?: string;
 }
