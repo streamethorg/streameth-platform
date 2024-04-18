@@ -1819,8 +1819,7 @@
 					"description",
 					"thumbnail",
 					"type",
-					"organizationId",
-					"videos"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1875,8 +1874,7 @@
 					"description",
 					"thumbnail",
 					"type",
-					"organizationId",
-					"videos"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false

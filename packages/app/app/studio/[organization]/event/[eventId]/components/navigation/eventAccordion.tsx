@@ -40,9 +40,6 @@ import {
 import { IExtendedEvent } from '@/lib/types'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import DeleteEvent from '../DeleteEventButton'
-import { useReadContract, useWriteContract } from 'wagmi'
-import { EventFactoryABI } from '@/lib/contracts/EventFactoryabi'
-import { EventFactoryAddress } from '@/lib/contracts'
 
 const EventAccordion = ({
   organizationId,
@@ -70,7 +67,6 @@ const EventAccordion = ({
       accentColor: event.accentColor,
       dataImporter: event.dataImporter,
       timezone: event.timezone,
-      eventNFT: event.eventNFT,
     },
   })
   // 2. Define a submit handler.
@@ -119,32 +115,7 @@ const EventAccordion = ({
         setIsSyncingEvent(false)
       })
   }
-  const result = useReadContract({
-    abi: EventFactoryABI,
-    address: '0x5c74670907A3F4bE0d17fB1ED94F8CA01426fad6',
-    functionName: 'getAllEvents',
-  })
 
-  const createEvent = useWriteContract()
-  const handleCreateNFT = async () => {
-    createEvent.writeContractAsync({
-      abi: EventFactoryABI,
-      address: EventFactoryAddress,
-      functionName: 'createEvent',
-      args: [
-        form.getValues('eventNFT.uri'),
-        form.getValues('eventNFT.name'),
-        form.getValues('eventNFT.symbol'),
-        form.getValues('eventNFT.limitedSupply'),
-        Number(form.getValues('eventNFT.maxSupply')),
-        form.getValues('eventNFT.mintFee'),
-        Number(form.getValues('eventNFT.startTime')),
-        Number(form.getValues('eventNFT.endTime')),
-        '0x9268d03EfF4A9A595ef619764AFCB9976c0375df',
-      ],
-    })
-  }
-  console.log('error', createEvent.error)
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
@@ -447,144 +418,6 @@ const EventAccordion = ({
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4" className="px-2">
-            <AccordionTrigger>Event NFT</AccordionTrigger>
-            <AccordionContent className="p-2 space-y-8">
-              <span>Create your your event nft collection.</span>
-              <FormField
-                control={form.control}
-                name="eventNFT.name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">NFT name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="short NFT name"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="eventNFT.symbol"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">Symbol</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="e.g BAS (max 6 letters)"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="eventNFT.uri"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">Base Token Uri</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="base token uri"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="eventNFT.limitedSupply"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">
-                      Limited Supply?
-                    </FormLabel>
-                    <FormControl>
-                      <Combobox
-                        items={[
-                          { label: 'true', value: 'true' },
-                          { label: 'false', value: 'false' },
-                        ]}
-                        value={field.value!}
-                        setValue={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="eventNFT.maxSupply"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">Max Supply</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g 1000" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="eventNFT.mintFee"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">Mint Fee</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="enter fee"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="eventNFT.startTime"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">Start Time</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Start Time" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="eventNFT.endTime"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="">End Time</FormLabel>
-                    <FormControl>
-                      <Input placeholder="End Time" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex justify-between gap-5">
-                <Button onClick={handleCreateNFT} type="button">
-                  Create NFT
-                </Button>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="item-5" className="px-2">
             <AccordionTrigger>More</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8 flex flex-col">
               <DeleteEvent
