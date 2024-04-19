@@ -11,7 +11,10 @@ import { nftSchema } from '@/lib/schema'
 import AddMedia from './AddMedia'
 import { INFTSessions } from '@/lib/types'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
-import { createNFTCollectionAction } from '@/lib/actions/nftCollection'
+import {
+  createNFTCollectionAction,
+  updateNFTCollectionAction,
+} from '@/lib/actions/nftCollection'
 import PublishingNFTModal from './PublishingNFTModal'
 import { toast } from 'sonner'
 import {
@@ -59,8 +62,8 @@ const CreateNFTForm = ({
       startTime: '',
       endDate: new Date(),
       endTime: '',
-      maxSupply: '',
-      limitedSupply: '',
+      maxSupply: '10000',
+      limitedSupply: 'false',
     },
   })
   const [formState, setFormState] = useState<ICreateNFT>({
@@ -87,7 +90,7 @@ const CreateNFTForm = ({
     eventName: 'VideoCreated',
     onLogs(logs) {
       //@ts-ignore
-      setNftContractAddress(logs[0]?.args?.eventAddress)
+      setNftContractAddress(logs[0]?.args?.videoCollectionAddress)
       console.log('New logs!', logs)
     },
   })
@@ -100,23 +103,31 @@ const CreateNFTForm = ({
   )
   // Update collection with address
   const updateCollection = async () => {
-    const createNFTResponse = await createNFTCollectionAction({
-      nftCollection: {
+    await updateNFTCollectionAction({
+      //@ts-ignore
+      collection: {
         ...formResponseData,
         contractAddress: nftContractAddress,
       },
     })
+      .then((response) => {
+        console.log('updateCollection', response)
+      })
+      .catch((error) => console.log(error))
   }
 
   useEffect(() => {
     if (isSuccess) {
       setIsPublished(true)
+
       toast.success('NFT Collection successfully created')
     }
 
-    if (error) {
+    if (nftContractAddress) {
+      console.log('calling ', nftContractAddress)
+      updateCollection()
     }
-  }, [isSuccess, error])
+  }, [isSuccess, error, nftContractAddress])
 
   const createEventCollection = (ipfsPath?: string) => {
     writeContract({
@@ -162,10 +173,11 @@ const CreateNFTForm = ({
       const createNFTResponse = await createNFTCollectionAction({
         nftCollection: formData,
       })
-      createEventCollection(createNFTResponse.ipfsPath)
       setFormResponseData(createNFTResponse)
+      createEventCollection(createNFTResponse.ipfsPath)
 
       form.reset()
+      setStep(1)
       setFormState({ selectedVideo: [] })
     } catch (error) {
       setIsPublishingCollection(false)

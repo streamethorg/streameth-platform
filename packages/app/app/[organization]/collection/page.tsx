@@ -11,6 +11,7 @@ import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import ChannelBanner from '../components/ChannelBanner'
 import ShareButton from '@/components/misc/interact/ShareButton'
 import Image from 'next/image'
+import CollectVideButton from '@/components/sessions/CollectVideButton'
 
 const Collection = async ({
   params,
@@ -71,7 +72,7 @@ const Collection = async ({
               <p>{collection.videos?.length} Unique Items</p>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant={'primary'}>Collect All Videos</Button>
+              <CollectVideButton nftCollection={collection} all />
               <ShareButton shareFor="Collection" />
             </div>
           </div>

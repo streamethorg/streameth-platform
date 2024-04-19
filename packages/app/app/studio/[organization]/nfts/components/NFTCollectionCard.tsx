@@ -1,6 +1,4 @@
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import ShareButton from '@/components/misc/interact/ShareButton'
-import { CardHeader, CardTitle } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,29 +7,21 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { IExtendedNftCollections } from '@/lib/types'
 import { EllipsisVertical } from 'lucide-react'
-import Image from 'next/image'
 import React from 'react'
+import ShareVideoNFT from '../create/components/ShareVideoNFT'
 
 const NFTCollectionCard = ({
   nft,
+  organization,
 }: {
   nft: IExtendedNftCollections
+  organization: string
 }) => {
   return (
     <div className="border border-grey bg-secondary rounded-xl p-2">
-      {/* {nft.thumbnail ? (
-        // <div className="w-full  bg-grey rounded-xl">
-          {/* <Image
-            src={nft.thumbnail}
-            width={150}
-            height={150}
-            alt="nft thumbnail"
-            style={{ objectFit: 'contain' }}
-            className="object-contain w-full h-full"
-          /> */}
       <Thumbnail
         imageUrl={nft.thumbnail}
-        // fallBack="/images/videoPlaceholder.png"
+        fallBack="/images/videoPlaceholder.png"
       />
 
       <div className="flex justify-between items-start">
@@ -51,9 +41,11 @@ const NFTCollectionCard = ({
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem>
-              <ShareButton />
+              <ShareVideoNFT
+                collectionId={nft._id}
+                organization={organization}
+              />
             </DropdownMenuItem>
-            {/* {DropdownMenuItems} */}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

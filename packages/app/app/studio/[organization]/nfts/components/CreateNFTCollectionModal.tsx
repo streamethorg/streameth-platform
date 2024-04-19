@@ -18,10 +18,10 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary">Create NFT Collection</Button>
+        <Button variant="primary">Create VideoNFT</Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>Create NFT Collection</DialogHeader>
+        <DialogHeader>Select NFT Type</DialogHeader>
 
         <div className="flex items-center gap-5">
           <div
@@ -87,7 +87,7 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
               disabled={!type}
               className="w-full"
               variant="primary">
-              Create Collection
+              Create NFT
             </Button>
           </Link>
         </div>

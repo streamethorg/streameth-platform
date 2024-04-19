@@ -11,10 +11,8 @@ import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import {
   IExtendedNftCollections,
   IExtendedSession,
-  IExtendedStage,
 } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -38,7 +36,7 @@ const CollectionGrid = async ({
   }
   const collection = session || stage
   const collectionImage = session?.coverImage || stage?.thumbnail
-  console.log(collection)
+
   if (!collection) return null
 
   return (

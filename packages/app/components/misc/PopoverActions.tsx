@@ -51,7 +51,7 @@ const PopoverActions = ({
               </DialogTrigger>
               <ShareModalContent />
             </Dialog>
-            {session.mintable && (
+            {session.nftCollections[0] && (
               <Button
                 className="space-x-2 w-full"
                 variant={'outline'}>

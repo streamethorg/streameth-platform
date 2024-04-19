@@ -26,6 +26,8 @@ const SessionInfoBox = async ({
   const nftCollection = await fetchNFTCollection({
     collectionId: '6621bab63cd91449cc3554a8',
   }) //video.collectionId
+
+  console.log(video.nftCollections[0])
   return (
     <div
       className={`flex flex-col md:flex-row py-4 md:space-x-2  ${
@@ -38,7 +40,7 @@ const SessionInfoBox = async ({
         <InfoBoxDescription description={video.description} />
       </div>
       <div className="mb-auto flex justify-start items-center space-x-2 md:justify-end">
-        {video.mintable && (
+        {video.nftCollections[0] && (
           <CollectVideButton
             video={video}
             nftCollection={nftCollection}

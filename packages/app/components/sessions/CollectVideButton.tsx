@@ -12,15 +12,18 @@ import {
 } from 'wagmi'
 import { VideoNFTAbi } from '@/lib/contract'
 import { toast } from 'sonner'
+import { calMintPrice, getVideoIndex } from '@/lib/utils/utils'
 
 const CollectVideButton = ({
   video,
   nftCollection,
   variant = 'primary',
+  all = false,
 }: {
-  video: IExtendedSession
+  video?: IExtendedSession
   nftCollection: IExtendedNftCollections | null
   variant?: 'primary' | 'outline'
+  all?: boolean
 }) => {
   const videoNFTContract = {
     address: nftCollection?.contractAddress as `0x${string}`,
@@ -39,16 +42,6 @@ const CollectVideButton = ({
       },
     ],
   })
-
-  const calMintPrice = () => {
-    if (result.data) {
-      return (
-        Number(result?.data[0].result) +
-        Number(result?.data[1].result).toString()
-      )
-    }
-    return null
-  }
 
   const {
     data: hash,
@@ -73,17 +66,19 @@ const CollectVideButton = ({
     }
   }, [isSuccess, isError])
 
-  const videoIndex = nftCollection?.videos?.find(
-    (vid) => vid.sessionId == video._id
-  )?.index
-
   const mintCollection = () => {
     writeContract({
       abi: VideoNFTAbi,
       address: nftCollection?.contractAddress as `0x${string}`,
       functionName: 'sessionMint',
-      args: [[videoIndex]],
-      value: BigInt(calMintPrice() as string),
+      args: [getVideoIndex(all, nftCollection!, video)],
+      value: BigInt(
+        calMintPrice(
+          result?.data as { result: BigInt }[],
+          all,
+          nftCollection!
+        ) as string
+      ),
     })
   }
 
@@ -94,7 +89,7 @@ const CollectVideButton = ({
         onClick={mintCollection}
         variant={variant}
         className="w-full md:w-36">
-        Collect Video
+        {all ? 'Collect All Videos' : 'Collect Video'}
       </Button>
     </div>
   )

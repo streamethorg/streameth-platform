@@ -23,7 +23,7 @@ contract VideoNFT is
     uint256 public constant baseFee = 1e10;
     uint256 public totalSupply;
 
-    string public eventName;
+    string public videoNFTName;
     string public baseTokenUri;
     bool public limitedSupply;
     uint256 public maxSupply;
@@ -55,7 +55,7 @@ contract VideoNFT is
         __Ownable_init(_msgSender());
 
         baseTokenUri = _baseTokenUri;
-        eventName = _name;
+        videoNFTName = _name;
         limitedSupply = _limitedSupply;
         maxSupply = _maxSupply;
         mintFee = _mintFee;
@@ -79,7 +79,7 @@ contract VideoNFT is
     }
 
     function setName(string memory _name) public onlyOwner {
-        eventName = _name;
+        videoNFTName = _name;
     }
 
     // @dev: This function is used to update the mint fee, can only be called by onlyOwner
@@ -156,7 +156,7 @@ contract VideoNFT is
     {
         return (
             baseTokenUri,
-            eventName,
+            videoNFTName,
             limitedSupply,
             totalSupply,
             maxSupply,

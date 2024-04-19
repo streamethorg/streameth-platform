@@ -97,7 +97,7 @@ const CollectionDetails = ({
             )}
           />
 
-          <div className="flex gap-4 w-full">
+          <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}
               name="symbol"
@@ -135,7 +135,7 @@ const CollectionDetails = ({
             />
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}
               name="startDate"
@@ -169,7 +169,7 @@ const CollectionDetails = ({
               )}
             />
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}
               name="endDate"
@@ -203,7 +203,7 @@ const CollectionDetails = ({
               )}
             />
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}
               name="limitedSupply"
