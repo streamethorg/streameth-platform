@@ -13,7 +13,6 @@ import UpcomingStreams, {
   UpcomingStreamsLoading,
 } from './components/UpcomingStreams'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
-import { Separator } from '@/components/ui/separator'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 const OrganizationHome = async ({

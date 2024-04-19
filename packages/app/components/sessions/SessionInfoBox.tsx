@@ -4,7 +4,7 @@ import { CardTitle } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
 import { formatDate } from '@/lib/utils/time'
 import SignUp from '../plugins/SignUp'
-import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
+import ViewCounts from '@/app/[organization]/components/ViewCounts'
 
 const SessionInfoBox = async ({
   name,
