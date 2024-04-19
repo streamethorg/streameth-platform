@@ -41,7 +41,7 @@ const NFTCollectionCard = ({
 
           <p className="text-sm text-muted-foreground">
             {nft.videos?.length} item
-            {nft.videos?.length < 1 ? '' : 's'}
+            {nft?.videos?.length < 1 ? '' : 's'}
           </p>
         </div>
 
