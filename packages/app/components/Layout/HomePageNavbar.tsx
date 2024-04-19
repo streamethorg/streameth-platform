@@ -47,6 +47,10 @@ const HomePageNavbar = ({
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
 }) => {
+  if (logo === '') {
+    logo = undefined
+  }
+
   return (
     <Suspense fallback={null}>
       <MobileNavBar
@@ -109,7 +113,7 @@ const MobileNavBar = ({
       )}
       <div
         className={cn(
-          'flex relative flex-row  items-center p-2 w-full h-full',
+          'flex relative flex-row  items-center px-4 py-2 w-full h-full',
           menuVisible && 'bg-background',
           searchVisible && showSearchBar && 'bg-background'
         )}>
