@@ -1,6 +1,9 @@
 'use client'
+import DatePicker from '@/components/misc/form/datePicker'
 import ImageUpload from '@/components/misc/form/imageUpload'
+import TimePicker from '@/components/misc/form/timePicker'
 import { CardTitle } from '@/components/ui/card'
+import Combobox from '@/components/ui/combo-box'
 import {
   Form,
   FormControl,
@@ -21,7 +24,15 @@ const CollectionDetails = ({
   form: UseFormReturn<{
     description: string
     name: string
+    symbol: string
+    mintFee: string
     thumbnail?: string | undefined
+    startDate: Date
+    startTime: string
+    endDate: Date
+    endTime: string
+    limitedSupply: string
+    maxSupply: string
   }>
 }) => {
   return (
@@ -85,6 +96,153 @@ const CollectionDetails = ({
               </FormItem>
             )}
           />
+
+          <div className="flex gap-4 w-full">
+            <FormField
+              control={form.control}
+              name="symbol"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel required className="">
+                    Symbol
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Symbol" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="mintFee"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel required className="">
+                    Mint Fee
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      min="0"
+                      placeholder="Mint Fee"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex gap-4">
+            <FormField
+              control={form.control}
+              name="startDate"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel required>Start Date</FormLabel>
+                  <FormControl>
+                    <DatePicker
+                      value={field.value as Date}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="startTime"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel required>Start Time</FormLabel>
+                  <FormControl>
+                    <TimePicker
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex gap-4">
+            <FormField
+              control={form.control}
+              name="endDate"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel required>End Date</FormLabel>
+                  <FormControl>
+                    <DatePicker
+                      value={field.value as Date}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="endTime"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel required>End Time</FormLabel>
+                  <FormControl>
+                    <TimePicker
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex gap-4">
+            <FormField
+              control={form.control}
+              name="limitedSupply"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Limited Supply?</FormLabel>
+                  <FormControl>
+                    <Combobox
+                      items={[
+                        { value: 'false', label: 'false' },
+                        { value: 'true', label: 'true' },
+                      ]}
+                      value={field.value}
+                      setValue={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="maxSupply"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel required>Max Supply</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      min="0"
+                      placeholder="Max Supply"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <FormField
             control={form.control}
             name="description"

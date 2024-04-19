@@ -29,7 +29,7 @@ const NFT = async ({
   const nftCollections = await fetchOrganizationNFTCollections({
     organizationId,
   })
-
+  console.log('collection', JSON.stringify(nftCollections))
   return (
     <div className="flex flex-col bg-white h-full">
       <Card
@@ -91,3 +91,30 @@ const NFT = async ({
 }
 
 export default NFT
+const obj = {
+  name: 'ETH Safari 2023',
+  description: 'Some dec',
+  thumbnail:
+    'https://streameth-develop.ams3.digitaloceanspaces.com/nftcollections/2.a1f5695f030fa16c13aa.png',
+  type: 'multiple',
+  organizationId: '65a90bf17932ebe436ba9345',
+  videos: [
+    [
+      {
+        type: 'video',
+        stageId: '',
+        sessionId: '65b8f60ba5b2d09b88ec0c74',
+      },
+      {
+        type: 'video',
+        stageId: '',
+        sessionId: '65b8f60ba5b2d09b88ec0c7a',
+      },
+      {
+        type: 'video',
+        stageId: '',
+        sessionId: '65b8f60ba5b2d09b88ec0c80',
+      },
+    ],
+  ],
+}

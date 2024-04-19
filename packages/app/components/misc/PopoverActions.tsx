@@ -24,8 +24,10 @@ import { toast } from 'sonner'
 
 const PopoverActions = ({
   session,
+  organizationSlug,
 }: {
   session: IExtendedSession
+  organizationSlug: string
 }) => {
   return (
     <Popover>
@@ -49,10 +51,18 @@ const PopoverActions = ({
               </DialogTrigger>
               <ShareModalContent />
             </Dialog>
-            <Button className="space-x-2 w-full" variant={'outline'}>
-              <Layers />
-              <p className="">View Collection</p>
-            </Button>
+            {session.mintable && (
+              <Button
+                className="space-x-2 w-full"
+                variant={'outline'}>
+                <Layers />
+                <Link
+                  href={`/${organizationSlug}/collection?collectionId=${session.nftCollections[0]}`}
+                  className="">
+                  View Collection
+                </Link>
+              </Button>
+            )}
             <Button
               className="space-x-2 w-full text-red-500"
               variant={'outline'}>

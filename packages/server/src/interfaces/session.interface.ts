@@ -47,6 +47,8 @@ export interface ISession {
   ipfsURI?: string;
   published?: boolean;
   type: SessionType;
+  mintable?: boolean;
+  nftCollections: string[];
   createdAt?: string;
 }
 

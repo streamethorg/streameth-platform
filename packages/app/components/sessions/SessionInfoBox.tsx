@@ -7,18 +7,25 @@ import {
 } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
 import { IExtendedSession } from '@/lib/types'
-import { Button } from '../ui/button'
 import PopoverActions from '../misc/PopoverActions'
+import ShareButton from '../misc/interact/ShareButton'
+import CollectVideButton from './CollectVideButton'
+import { fetchNFTCollection } from '@/lib/services/nftCollectionService'
 
 const SessionInfoBox = async ({
   video,
   inverted,
   vod = false,
+  organizationSlug,
 }: {
   video: IExtendedSession
   inverted?: boolean
   vod?: boolean
+  organizationSlug: string
 }) => {
+  const nftCollection = await fetchNFTCollection({
+    collectionId: '6621bab63cd91449cc3554a8',
+  }) //video.collectionId
   return (
     <div
       className={`flex flex-col md:flex-row py-4 md:space-x-2  ${
@@ -30,14 +37,19 @@ const SessionInfoBox = async ({
         </CardTitle>
         <InfoBoxDescription description={video.description} />
       </div>
-      <div className="mb-auto flex justify-between items-center space-x-2 md:justify-end">
-        <Button variant={'primary'} className="w-full md:w-36">
-          Collect Video
-        </Button>
-        <Button className="hidden md:block" variant={'outline'}>
-          Collect Video
-        </Button>
-        <PopoverActions session={video} />
+      <div className="mb-auto flex justify-start items-center space-x-2 md:justify-end">
+        {video.mintable && (
+          <CollectVideButton
+            video={video}
+            nftCollection={nftCollection}
+          />
+        )}
+
+        <ShareButton shareFor="video" />
+        <PopoverActions
+          organizationSlug={organizationSlug}
+          session={video}
+        />
       </div>
     </div>
   )

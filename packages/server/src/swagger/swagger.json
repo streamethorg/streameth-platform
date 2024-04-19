@@ -1200,6 +1200,15 @@
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
 					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"nftCollections": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
 					"createdAt": {
 						"type": "string"
 					}
@@ -1210,7 +1219,8 @@
 					"start",
 					"end",
 					"organizationId",
-					"type"
+					"type",
+					"nftCollections"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1340,6 +1350,15 @@
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
 					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"nftCollections": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
 					"createdAt": {
 						"type": "string"
 					}
@@ -1350,7 +1369,8 @@
 					"description",
 					"start",
 					"end",
-					"type"
+					"type",
+					"nftCollections"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -1440,6 +1460,15 @@
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
 					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"nftCollections": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
 					"createdAt": {
 						"type": "string"
 					},
@@ -1457,6 +1486,7 @@
 					"start",
 					"end",
 					"type",
+					"nftCollections",
 					"speakers"
 				],
 				"type": "object",
@@ -1812,14 +1842,47 @@
 							}
 						]
 					},
-					"videos": {}
+					"videos": {
+						"items": {
+							"properties": {
+								"ipfsURI": {
+									"type": "string"
+								},
+								"stageId": {
+									"type": "string"
+								},
+								"sessionId": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								},
+								"index": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"type"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"contractAddress": {
+						"type": "string"
+					},
+					"ipfsPath": {
+						"type": "string"
+					}
 				},
 				"required": [
 					"name",
 					"description",
 					"thumbnail",
 					"type",
-					"organizationId"
+					"organizationId",
+					"videos"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1867,14 +1930,47 @@
 							}
 						]
 					},
-					"videos": {}
+					"videos": {
+						"items": {
+							"properties": {
+								"ipfsURI": {
+									"type": "string"
+								},
+								"stageId": {
+									"type": "string"
+								},
+								"sessionId": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								},
+								"index": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"type"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"contractAddress": {
+						"type": "string"
+					},
+					"ipfsPath": {
+						"type": "string"
+					}
 				},
 				"required": [
 					"name",
 					"description",
 					"thumbnail",
 					"type",
-					"organizationId"
+					"organizationId",
+					"videos"
 				],
 				"type": "object",
 				"additionalProperties": false

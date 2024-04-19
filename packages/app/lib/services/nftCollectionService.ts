@@ -19,7 +19,7 @@ export async function createNFTCollection({
   })
 
   if (!response.ok) {
-    throw 'Error creating stage'
+    throw 'Error creating collection'
   }
   return (await response.json()).data
 }
@@ -41,7 +41,7 @@ export async function fetchOrganizationNFTCollections({
     return data.map((nftCollection: any) => nftCollection)
   } catch (e) {
     console.log(e)
-    throw 'Error fetching stages'
+    throw 'Error fetching collections'
   }
 }
 
@@ -62,7 +62,7 @@ export async function fetchNFTCollection({
     }
     return (await response.json()).data
   } catch (e) {
-    console.log('error in fetchEvent', e)
+    console.log('error fetching collection', e)
     throw e
   }
 }

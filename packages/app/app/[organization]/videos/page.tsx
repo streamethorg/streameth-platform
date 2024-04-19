@@ -8,10 +8,11 @@ import { fetchEvent } from '@/lib/services/eventService'
 import { Suspense } from 'react'
 import ArchiveVideos from '@/app/(vod)/components/ArchiveVideos'
 import ArchiveVideoSkeleton from '@/app/(vod)/components/ArchiveVideosSkeleton'
-import Image from 'next/image'
+
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
-import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
+
+import ChannelBanner from '../components/ChannelBanner'
 
 export default async function ArchivePage({
   params,
@@ -31,23 +32,7 @@ export default async function ArchivePage({
 
   return (
     <div>
-      <div className="hidden md:block max-h-[200px] h-full aspect-video w-full">
-        {organization.banner ? (
-          <Image
-            src={organization.banner}
-            alt="banner"
-            quality={100}
-            objectFit="cover"
-            className="rounded-xl"
-            fill
-            priority
-          />
-        ) : (
-          <div className=" bg-gray-300 rounded-xl md:rounded-none max-h-[200px] h-full">
-            <StreamethLogoWhite />
-          </div>
-        )}
-      </div>
+      <ChannelBanner organization={organization} />
       <div className="w-full max-w-7xl m-auto p-4">
         <Suspense fallback={<ArchiveVideoSkeleton />}>
           <ArchiveVideos

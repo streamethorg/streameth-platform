@@ -1,5 +1,5 @@
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import { Button } from '@/components/ui/button'
+import CollectVideButton from '@/components/sessions/CollectVideButton'
 import {
   CardDescription,
   CardHeader,
@@ -8,29 +8,44 @@ import {
 import { fetchSession } from '@/lib/services/sessionService'
 import { fetchStage } from '@/lib/services/stageService'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
+import {
+  IExtendedNftCollections,
+  IExtendedSession,
+  IExtendedStage,
+} from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const CollectionGrid = async ({ link = '#', video }) => {
+const CollectionGrid = async ({
+  video,
+  nftCollection,
+}: {
+  video: { type?: string; sessionId?: string; stageId?: string }
+  nftCollection: IExtendedNftCollections
+}) => {
   let session
+  let stage
   if (video.type === 'video') {
     session = await fetchSession({
-      session: video.sessionId,
+      session: video.sessionId as string,
     })
   } else {
-    session = await fetchStage({
-      stage: video.stageId,
+    stage = await fetchStage({
+      stage: video.stageId as string,
     })
   }
-  //   console.log('CollectionGrid1', session)
+  const collection = session || stage
+  const collectionImage = session?.coverImage || stage?.thumbnail
+  console.log(collection)
+  if (!collection) return null
 
-  if (!session) return null
   return (
     <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
-      <Link className="w-full h-full" href={link}>
-        {session?.coverImage ? (
-          <Thumbnail imageUrl={session?.coverImage} />
+      <Link className="w-full h-full" href={'#'}>
+        {collectionImage ? (
+          <Thumbnail imageUrl={collectionImage!} />
         ) : (
           <div className="w-full h-full aspect-video">
             <DefaultThumbnail />
@@ -40,26 +55,28 @@ const CollectionGrid = async ({ link = '#', video }) => {
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
-          <Link href={link}>
+          <Link href={'#'}>
             <CardTitle
               className={`text-sm capitalize line-clamp-2 overflow-hidden  hover:underline `}>
-              {session.name}
+              {collection?.name}
             </CardTitle>
           </Link>
 
           <div className="flex justify-between items-center">
             <CardDescription className={`text-xs truncate `}>
               {formatDate(
-                new Date(session.createdAt as string),
+                new Date(collection?.createdAt as string),
                 'ddd. MMM. D, YYYY'
               )}
             </CardDescription>
           </div>
         </CardHeader>
       </div>
-      <Button variant="outline" className="w-fit">
-        Collect Video
-      </Button>
+      <CollectVideButton
+        variant="outline"
+        video={collection as IExtendedSession}
+        nftCollection={nftCollection}
+      />
     </div>
   )
 }

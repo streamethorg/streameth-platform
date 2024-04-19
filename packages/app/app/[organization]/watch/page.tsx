@@ -45,7 +45,11 @@ export default async function Watch({
             ]}
           />
           <div className="w-full px-4 ">
-            <SessionInfoBox video={video} vod={true} />
+            <SessionInfoBox
+              video={video}
+              vod={true}
+              organizationSlug={params.organization}
+            />
           </div>
         </div>
         <div className="px-4">

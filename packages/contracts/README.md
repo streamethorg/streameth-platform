@@ -1,8 +1,8 @@
 # NFT Contract`
 
-### EventNFT implementation https://sepolia.basescan.org/address/0xd6Cf19dA8c196AFB5954e551C6ce9786F229e358#code
+### VideoNFT implementation https://sepolia.basescan.org/address/0xc874C3CB9fA5131D8978dF3eD3996D620415d73A#code
 
-### EventNFT Factory https://sepolia.basescan.org/address/0xA9908C45F67d35981C7985Ebfe8052f1F57C00f6#code
+### VideoNFT Factory https://sepolia.basescan.org/address/0x12fb8277a7aA0210fe44fAD5eDb1F7ceA4490E9e#code
 
 ```shell
 npx hardhat help

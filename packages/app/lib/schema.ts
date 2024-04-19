@@ -132,4 +132,12 @@ export const nftSchema = z.object({
     .min(1, 'Description is required')
     .max(200, 'Description is too long'),
   thumbnail: z.string().optional(),
+  symbol: z.string(),
+  mintFee: z.string(),
+  startDate: z.date(),
+  startTime: z.string(),
+  endDate: z.date(),
+  endTime: z.string(),
+  maxSupply: z.string(),
+  limitedSupply: z.string(),
 })

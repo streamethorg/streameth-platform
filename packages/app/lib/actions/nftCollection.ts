@@ -17,10 +17,11 @@ export const createNFTCollectionAction = async ({
     nftCollection: nftCollection,
     authToken,
   })
-
+  console.log('server response', response)
   if (!response) {
-    throw new Error('Error creating stage')
+    throw new Error('Error creating NFt Collection')
   }
   revalidatePath('/studio')
+
   return response
 }
