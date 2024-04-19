@@ -1,5 +1,3 @@
-import { CardTitle } from '@/components/ui/card'
-import Pagination from './pagination'
 import { fetchAllSessions } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { FileQuestion } from 'lucide-react'
@@ -28,7 +26,7 @@ const ArchiveVideos = async ({
     return (
       <div className="flex flex-col justify-center items-center mt-[25%]">
         <FileQuestion size={65} />
-        <span className="bolt text-xl mt-2">
+        <span className="mt-2 text-xl bolt">
           No videos have been found
         </span>
       </div>
@@ -36,18 +34,10 @@ const ArchiveVideos = async ({
   }
 
   return (
-    <div>
-      <div className="flex flex-row items-center justify-between mb-4">
-        <CardTitle className="px-2 lg:p-0 text-lg">
-          All videos
-        </CardTitle>
-        <Pagination {...videos.pagination} />
-      </div>
-      <Videos
-        OrganizationSlug={organizationSlug}
-        videos={videos.sessions}
-      />
-    </div>
+    <Videos
+      OrganizationSlug={organizationSlug}
+      videos={videos.sessions}
+    />
   )
 }
 

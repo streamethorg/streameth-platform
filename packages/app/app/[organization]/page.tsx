@@ -12,7 +12,9 @@ import WatchGrid, { WatchGridLoading } from './components/WatchGrid'
 import UpcomingStreams, {
   UpcomingStreamsLoading,
 } from './components/UpcomingStreams'
-
+import { fetchOrganizationStages } from '@/lib/services/stageService'
+import Player from './livestream/components/Player'
+import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 const OrganizationHome = async ({
   params,
   searchParams,
@@ -29,46 +31,82 @@ const OrganizationHome = async ({
     return notFound()
   }
 
+  const allStreams = (
+    await fetchOrganizationStages({
+      organizationId: organization._id,
+    })
+  ).filter((stream) => stream.published)
+
+  const nextStreamNotToday = allStreams?.filter(
+    (stream) =>
+      stream?.streamDate && new Date(stream.streamDate) > new Date()
+  )
+
+  const activeStream = allStreams?.filter(
+    (stream) => stream?.streamSettings?.isActive
+  )
+
+  const playerActive = !!activeStream[0] || !!nextStreamNotToday[0]
+  const stage = activeStream[0]
+    ? activeStream[0]
+    : nextStreamNotToday[0]
+
   return (
     <div className="m-auto w-full max-w-7xl">
-      <div className="relative z-10 w-full md:p-4">
-        <AspectRatio
-          ratio={3 / 1}
-          className="relative w-full md:rounded-xl">
-          {organization.banner ? (
-            <Image
-              src={organization.banner}
-              alt="banner"
-              quality={100}
-              objectFit="cover"
-              className="md:rounded-xl"
-              fill
-              priority
-            />
-          ) : (
-            <div className="h-full bg-gray-300 md:rounded-xl">
-              <StreamethLogoWhite />
+      <div className="relative w-full">
+        {playerActive ? (
+          <>
+            <Player stage={stage} />
+            <div className="px-4 w-full md:p-0 md:px-4">
+              <SessionInfoBox
+                name={stage.name}
+                description={stage.description ?? ''}
+                date={stage.streamDate as string}
+                vod={true}
+              />
             </div>
-          )}
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
-          <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
-            <div className="flex flex-row justify-between w-full">
-              <div>
-                <h2 className="text-2xl font-bold">
-                  {organization.name}
-                </h2>
-                <p className="text-lg">{organization.description}</p>
+          </>
+        ) : (
+          <AspectRatio
+            ratio={3 / 1}
+            className="relative w-full md:rounded-xl">
+            {organization.banner ? (
+              <Image
+                src={organization.banner}
+                alt="banner"
+                quality={100}
+                objectFit="cover"
+                className="md:rounded-xl"
+                fill
+                priority
+              />
+            ) : (
+              <div className="h-full bg-gray-300 md:rounded-xl">
+                <StreamethLogoWhite />
               </div>
-              <ChannelShareIcons organization={organization} />
+            )}
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
+              <div className="flex flex-row justify-between w-full">
+                <div>
+                  <h2 className="text-2xl font-bold">
+                    {organization.name}
+                  </h2>
+                  <p className="text-lg">
+                    {organization.description}
+                  </p>
+                </div>
+                <ChannelShareIcons organization={organization} />
+              </div>
             </div>
-          </div>
-        </AspectRatio>
+          </AspectRatio>
+        )}
       </div>
       <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none">
         <Suspense fallback={<UpcomingStreamsLoading />}>
           <UpcomingStreams
-            organizationSlug={params.organization}
             organizationId={organization._id}
+            organizationSlug={params.organization}
           />
         </Suspense>
         <Suspense fallback={<WatchGridLoading />}>

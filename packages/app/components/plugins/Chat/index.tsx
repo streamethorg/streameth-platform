@@ -3,7 +3,6 @@ import {
   LiveKitRoom,
   ReceivedChatMessage,
 } from '@livekit/components-react'
-import { ConnectionState } from '@livekit/components-react'
 import { cn, formatIdentify } from '@/lib/utils/utils'
 import { useChat } from '@livekit/components-react'
 import {
@@ -117,7 +116,7 @@ const ChatBar = ({
       serverUrl={serverUrl}
       className="flex flex-1 flex-col">
       <div className="flex h-full flex-1 min-h-[400px]">
-        <Card className="sticky border-l md:block h-full w-full">
+        <Card className="bg-opacity-30 sticky border-l md:block h-full w-full">
           <div className="absolute top-0 bottom-0 right-0 flex h-full w-full flex-col gap-2 p-2">
             {
               <Chat
@@ -244,7 +243,7 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
         <div className="flex flex-col  gap-2">
           <Textarea
             value={message}
-            className="min-h-[50px] w-full border-box h-1 bg-white dark:bg-zinc-900"
+            className="min-h-[50px] w-full border-box h-1  dark:bg-zinc-900"
             onChange={(e) => {
               setMessage(e.target.value)
             }}

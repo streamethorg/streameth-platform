@@ -2,6 +2,7 @@ import { fetchAllSessions } from '@/lib/data'
 import Link from 'next/link'
 import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
 import Videos from '@/components/misc/Videos'
+import { Video } from 'lucide-react'
 
 const WatchGrid = async ({
   organizationSlug,
@@ -10,7 +11,7 @@ const WatchGrid = async ({
   organizationSlug: string
   gridLength?: number
 }) => {
-  const videos = (
+  let videos = (
     await fetchAllSessions({
       organizationSlug,
       onlyVideos: true,
@@ -18,9 +19,7 @@ const WatchGrid = async ({
     })
   ).sessions
 
-  if (videos.length === 0) {
-    return null
-  }
+  videos = videos.filter((video) => video.published)
 
   return (
     <div className="w-full">
@@ -35,6 +34,12 @@ const WatchGrid = async ({
         OrganizationSlug={organizationSlug}
         maxVideos={gridLength}
       />
+      {videos.length === 0 && (
+        <div className="flex flex-col justify-center items-center space-y-2">
+          <Video size={80} />
+          <p>No videos available</p>
+        </div>
+      )}
     </div>
   )
 }

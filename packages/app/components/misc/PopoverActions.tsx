@@ -6,28 +6,23 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import {
-  FilePenLine,
   Share2,
-  Copy,
-  TrashIcon,
-  CircleEllipsisIcon,
   EllipsisVerticalIcon,
   Layers,
   Flag,
 } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { IExtendedSession, eLayout } from '@/lib/types'
+import { IExtendedSession } from '@/lib/types'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
-import { toast } from 'sonner'
 
 const PopoverActions = ({
   session,
   organizationSlug,
 }: {
-  session: IExtendedSession
-  organizationSlug: string
+  session?: IExtendedSession
+  organizationSlug?: string
 }) => {
   return (
     <Popover>
@@ -51,13 +46,13 @@ const PopoverActions = ({
               </DialogTrigger>
               <ShareModalContent />
             </Dialog>
-            {session.nftCollections[0] && (
+            {session?.nftCollections[0] && (
               <Button
                 className="space-x-2 w-full"
                 variant={'outline'}>
                 <Layers />
                 <Link
-                  href={`/${organizationSlug}/collection?collectionId=${session.nftCollections[0]}`}
+                  href={`/${organizationSlug}/collection?collectionId=${session?.nftCollections[0]}`}
                   className="">
                   View Collection
                 </Link>

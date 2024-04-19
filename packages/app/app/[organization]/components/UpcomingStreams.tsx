@@ -1,10 +1,8 @@
 import { fetchStages } from '@/lib/services/stageService'
-import VideoCardMobile from '@/components/misc/VideoCard/VideoCardMobile'
-import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
+import LivestreamCard from '@/components/misc/VideoCard/LivestreamCard'
 import React from 'react'
-import VideoCardSkeleton, {
-  VideoCardSkeletonMobile,
-} from '@/components/misc/VideoCard/VideoCardSkeleton'
+import { VideoCardSkeletonMobile } from '@/components/misc/VideoCard/VideoCardSkeleton'
+import { Podcast } from 'lucide-react'
 
 const UpcomingStreams = async ({
   organizationId,
@@ -13,8 +11,17 @@ const UpcomingStreams = async ({
   organizationId: string
   organizationSlug: string
 }) => {
-  const livestreams = await fetchStages({
+  let livestreams = await fetchStages({
     organizationId,
+  })
+
+  livestreams = livestreams.filter((livestream) => {
+    // filter by streams in the future or happening today
+    return true
+  })
+
+  livestreams = livestreams.filter((livestream) => {
+    return livestream.published
   })
 
   return (
@@ -23,21 +30,23 @@ const UpcomingStreams = async ({
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {livestreams.map((livestream) => (
           <React.Fragment key={livestream._id.toString()}>
-            <div className="md:hidden">
-              <VideoCardMobile
-                session={livestream}
-                link={`/${organizationSlug}/livestream?stage=${livestream._id.toString()}`}
-              />
-            </div>
-            <div className="hidden md:block">
-              <VideoCardWithMenu
-                session={livestream}
+            <div>
+              <LivestreamCard
+                name={livestream.name}
+                date={livestream.streamDate as string}
+                thumbnail={''}
                 link={`/${organizationSlug}/livestream?stage=${livestream._id.toString()}`}
               />
             </div>
           </React.Fragment>
         ))}
       </div>
+      {livestreams.length === 0 && (
+        <div className="flex flex-col justify-center items-center space-y-2">
+          <Podcast size={80} />
+          <p>No scheduled livestreams</p>
+        </div>
+      )}
     </>
   )
 }

@@ -1,15 +1,9 @@
 'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-const fetchImage = async (url: string): Promise<boolean> => {
-  try {
-    const image = await fetch(url)
-    if (image.ok) return false
-    return true
-  } catch (e) {
-    return false
-  }
-}
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+
 export default function Thumbnail({
   imageUrl,
   fallBack,
@@ -25,6 +19,16 @@ export default function Thumbnail({
     setError(false)
     fallBack && setFallbackImage(fallBack)
   }, [imageUrl, fallBack])
+
+  if (!streamethThumbnail || error) {
+    return (
+      <AspectRatio
+        ratio={16 / 9}
+        className="flex justify-center items-center w-full">
+        <DefaultThumbnail />
+      </AspectRatio>
+    )
+  }
 
   return (
     <div className="aspect-video relative w-full">
