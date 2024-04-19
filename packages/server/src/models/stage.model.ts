@@ -5,6 +5,7 @@ export const StageSchema = new Schema<IStageModel>(
   {
     name: { type: String, default: '', required: true },
     description: { type: String, default: '' },
+    thumbnail:{type: String, default:''},
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
     streamSettings: {
