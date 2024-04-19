@@ -3,8 +3,8 @@
 import { CardTitle } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
 import { formatDate } from '@/lib/utils/time'
-import SignUp from '../plugins/SignUp'
 import ViewCounts from '@/app/[organization]/components/ViewCounts'
+import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder'
 
 const SessionInfoBox = async ({
   name,
@@ -45,9 +45,16 @@ const SessionInfoBox = async ({
           )}
         </p>
       </div>
-      <div className="flex justify-between items-center mb-auto space-x-2 md:justify-end">
-        {/* <SignUp event={name} /> */}
-      </div>
+      {!playbackId && (
+        <div className="flex justify-between items-center mb-auto space-x-2 md:justify-end">
+          <CalendarReminder
+            eventName={name}
+            description={description}
+            start={date}
+            end={date}
+          />
+        </div>
+      )}
     </div>
   )
 }
