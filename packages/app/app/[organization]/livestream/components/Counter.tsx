@@ -34,7 +34,9 @@ const Counter = ({
   return (
     <div className="flex flex-row justify-between items-center md:p-4">
       <div className="aspect-video w-full bg-black md:rounded-xl flex flex-col items-center justify-center">
-        <p className='text-white text-2xl uppercase'>Stream will start in</p>
+        <p className="text-white text-2xl uppercase">
+          Stream will start in
+        </p>
         <div className="flex flex-row items-center justify-center space-x-2 m-8">
           <CounterBox
             lable="days"

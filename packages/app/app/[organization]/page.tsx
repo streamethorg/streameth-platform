@@ -46,16 +46,16 @@ const OrganizationHome = async ({
   )
 
   const playerActive = !!activeStream[0] || !!nextStreamNotToday[0]
-  const stage = activeStream[0] ? activeStream[0] : nextStreamNotToday[0]
+  const stage = activeStream[0]
+    ? activeStream[0]
+    : nextStreamNotToday[0]
   return (
     <div className="m-auto w-full max-w-7xl">
       <div className="relative w-full md:p-4">
         {playerActive ? (
           <>
-            <Player
-              stage={stage}
-            />
-            <div className=" w-full px-4 md:p-0">
+            <Player stage={stage} />
+            <div className="px-4 w-full md:p-0">
               <SessionInfoBox
                 name={stage.name}
                 description={stage.description ?? ''}
@@ -103,8 +103,8 @@ const OrganizationHome = async ({
       <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none">
         <Suspense fallback={<UpcomingStreamsLoading />}>
           <UpcomingStreams
-            organizationSlug={params.organization}
             organizationId={organization._id}
+            organizationSlug={params.organization}
           />
         </Suspense>
         <Suspense fallback={<WatchGridLoading />}>

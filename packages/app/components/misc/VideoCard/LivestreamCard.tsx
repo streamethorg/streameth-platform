@@ -32,7 +32,7 @@ const LivestreamCard = ({
     <div className="flex flex-row md:flex-col space-y-2 w-full min-h-full uppercase rounded-xl">
       <div className="flex-none my-auto w-1/4 md:w-full">
         <Link href={link}>
-            <Thumbnail imageUrl={thumbnail} />
+          <Thumbnail imageUrl={thumbnail} />
         </Link>
       </div>
       <div className="flex-grow ml-4 md:ml-0">
@@ -45,10 +45,7 @@ const LivestreamCard = ({
           {showDate && (
             <div className="flex justify-between items-center">
               <CardDescription className="text-xs truncate">
-                {formatDate(
-                  new Date(date),
-                  'ddd. MMM. D, YYYY'
-                )}
+                {formatDate(new Date(date), 'ddd. MMM. D, YYYY')}
               </CardDescription>
             </div>
           )}

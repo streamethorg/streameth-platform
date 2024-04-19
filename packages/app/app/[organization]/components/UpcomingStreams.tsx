@@ -1,10 +1,8 @@
 import { fetchStages } from '@/lib/services/stageService'
 import LivestreamCard from '@/components/misc/VideoCard/LivestreamCard'
-import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
 import React from 'react'
-import VideoCardSkeleton, {
-  VideoCardSkeletonMobile,
-} from '@/components/misc/VideoCard/VideoCardSkeleton'
+import { VideoCardSkeletonMobile } from '@/components/misc/VideoCard/VideoCardSkeleton'
+import { Podcast } from 'lucide-react'
 
 const UpcomingStreams = async ({
   organizationId,
@@ -20,7 +18,6 @@ const UpcomingStreams = async ({
   livestreams = livestreams.filter((livestream) => {
     // filter by streams in the future or happening today
     return true
-
   })
 
   livestreams = livestreams.filter((livestream) => {
@@ -43,12 +40,13 @@ const UpcomingStreams = async ({
             </div>
           </React.Fragment>
         ))}
-        {livestreams.length === 0 && (
-          <div className="w-full px-8">
-            <p>No scheduled livestreams</p>
-          </div>
-        )}
       </div>
+      {livestreams.length === 0 && (
+        <div className="flex flex-col justify-center items-center space-y-2">
+          <Podcast size={80} />
+          <p>No scheduled livestreams</p>
+        </div>
+      )}
     </>
   )
 }

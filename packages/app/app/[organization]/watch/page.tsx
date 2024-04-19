@@ -31,8 +31,8 @@ export default async function Watch({
 
   return (
     <Suspense key={video._id} fallback={<div>Loading...</div>}>
-      <div className="flex flex-col gap-4 w-full h-full max-w-7xl mx-auto">
-        <div className="flex flex-col h-full w-full md:p-4">
+      <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full">
+        <div className="flex flex-col w-full h-full md:p-4">
           <PlayerWithControls
             src={[
               {
@@ -44,12 +44,13 @@ export default async function Watch({
               },
             ]}
           />
-          <div className="w-full px-4 md:px-0">
-            <SessionInfoBox 
+          <div className="px-4 w-full md:px-0">
+            <SessionInfoBox
               name={video.name}
-              description={video.description ?? ''}
+              description={video.description ?? 'No description'}
               date={video.createdAt as string}
-            vod={true} />
+              playbackId={video.playbackId}
+            />
           </div>
         </div>
         <div className="px-4">

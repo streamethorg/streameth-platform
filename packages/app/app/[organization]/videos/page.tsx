@@ -6,8 +6,8 @@ import {
 import { Metadata } from 'next'
 import { fetchEvent, fetchEvents } from '@/lib/services/eventService'
 import { Suspense } from 'react'
-import ArchiveVideos from '@/app/(vod)/components/ArchiveVideos'
-import ArchiveVideoSkeleton from '@/app/(vod)/components/ArchiveVideosSkeleton'
+import ArchiveVideos from './components/ArchiveVideos'
+import ArchiveVideoSkeleton from '../livestream/components/ArchiveVideosSkeleton'
 import Image from 'next/image'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
@@ -36,7 +36,7 @@ export default async function ArchivePage({
 
   return (
     <div>
-      <div className="relative hidden md:block max-h-[200px] h-full aspect-video w-full">
+      <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
         {organization.banner ? (
           <Image
             src={organization.banner}
@@ -48,15 +48,15 @@ export default async function ArchivePage({
             priority
           />
         ) : (
-          <div className=" bg-gray-300 rounded-xl md:rounded-none max-h-[200px] h-full">
+          <div className="h-full bg-gray-300 rounded-xl md:rounded-none max-h-[200px]">
             <StreamethLogoWhite />
           </div>
         )}
       </div>
-      <div className="w-full max-w-7xl m-auto p-4">
-        <div className="w-full flex flex-row items-center justify-between mb-4">
-          <div className="px-2 lg:p-0 text-lg w-full">All videos</div>
-          <div className=''>
+      <div className="p-4 m-auto w-full max-w-7xl">
+        <div className="flex flex-row justify-between items-center mb-4 w-full">
+          <div className="px-2 w-full text-lg lg:p-0">All videos</div>
+          <div className="">
             <EventSelect events={events} />
           </div>
         </div>

@@ -110,9 +110,7 @@ const SignUp = ({ event }: { event: IExtendedEvent }) => {
     <Credenza open={open} onOpenChange={setOpen}>
       <SignUpModal event={event} setOpen={setOpen} />
       <CredenzaTrigger className="justify-start">
-        <Button variant={"outline"}>
-          Set a reminder
-        </Button>
+        <Button variant={'outline'}>Set a reminder</Button>
       </CredenzaTrigger>
     </Credenza>
   )

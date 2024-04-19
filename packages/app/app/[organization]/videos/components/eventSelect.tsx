@@ -10,16 +10,18 @@ const EventSelect = ({ events }: { events: IExtendedEvent[] }) => {
   if (events.length === 0) {
     return null
   }
-  
+
   return (
     <Combobox
-    value={events.find((e) => e._id === event)?.name || ''}
-    setValue={(value) => {
-      handleTermChange([{
-        key: 'event',
-        value,
-      }])
-    }}
+      value={events.find((e) => e._id === event)?.name || ''}
+      setValue={(value) => {
+        handleTermChange([
+          {
+            key: 'event',
+            value,
+          },
+        ])
+      }}
       items={events.map((event) => ({
         label: event.name,
         value: event._id,
