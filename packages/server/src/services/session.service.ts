@@ -120,7 +120,7 @@ export default class SessionService {
     return await this.controller.store.delete(sessionId);
   }
 
-  async createMetadata(sessionId: string) {
+  async createMetadata(sessionId: string, collectionId: string) {
     let session = await Session.findById(sessionId);
     let metadata = {
       name: session.name,
@@ -150,7 +150,10 @@ export default class SessionService {
         },
       ],
     };
-    await session.updateOne({ mintable: true });
+    await session.updateOne({
+      mintable: true,
+      $push: { nftCollections: collectionId },
+    });
     return metadata;
   }
 

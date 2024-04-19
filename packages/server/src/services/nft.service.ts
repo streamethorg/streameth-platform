@@ -18,12 +18,18 @@ export default class CollectionService {
   }
 
   async create(data: INftCollection): Promise<INftCollection> {
+    const createCollection = await this.controller.store.create(
+      data.name,
+      data,
+      `${this.path}/${data.organizationId}`,
+    );
     if (data.type == 'single') {
       let video = data.videos[0];
       let metadata = await this.getMetadata({
         type: video.type,
         sessionId: video.sessionId,
         stageId: video.stageId,
+        collectionId: createCollection._id.toString(),
       });
       let url = await uploadSingleMetadata(JSON.stringify(metadata));
       data.videos.map((video) => (video.ipfsURI = url));
@@ -31,13 +37,14 @@ export default class CollectionService {
     }
     if (data.type == 'multiple') {
       let files = [];
-      for (const [index, video] of data.videos.entries()) {
+      for (const video of data.videos) {
         let metadata = await this.getMetadata({
           type: video.type,
           sessionId: video.sessionId,
           stageId: video.stageId,
+          collectionId: createCollection._id.toString(),
         });
-        files.push(metadata);
+        files.push(JSON.stringify(metadata));
       }
       let urls = await uploadMultipleMetadata(files);
       data.videos.map(
@@ -47,11 +54,7 @@ export default class CollectionService {
       );
       data.ipfsPath = this.getIpfsPath(urls[0]);
     }
-    return await this.controller.store.create(
-      data.name,
-      data,
-      `${this.path}/${data.organizationId}`,
-    );
+    return createCollection;
   }
 
   async update(
@@ -83,12 +86,19 @@ export default class CollectionService {
     type: string;
     sessionId?: string;
     stageId: string;
+    collectionId: string;
   }) {
     if (data.type == 'livestream') {
-      return await this.stageService.createMetadata(data.stageId);
+      return await this.stageService.createMetadata(
+        data.stageId,
+        data.collectionId,
+      );
     }
     if (data.type == 'video') {
-      return await this.sessionService.createMetadata(data.sessionId);
+      return await this.sessionService.createMetadata(
+        data.sessionId,
+        data.collectionId,
+      );
     }
   }
 
