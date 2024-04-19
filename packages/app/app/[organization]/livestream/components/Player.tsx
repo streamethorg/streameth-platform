@@ -25,11 +25,11 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
 
   return (
-    <div className="flex flex-col w-full h-full ">
+    <div className="flex flex-col w-full h-full">
       {timeLeft > 0 ? (
         <Counter timeToStart={timeLeft} />
       ) : (
-        <div className="w-full h-full relative md:p-4">
+        <div className="relative w-full h-full">
           <PlayerWithControls
             src={[
               {
@@ -43,7 +43,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
               },
             ]}
           />
-          {/* <div className='absolute top-0 right-0 h-full w-[400px] flex'>
+          {/* <div className='flex absolute top-0 right-0 h-full w-[400px]'>
                 <ChatBar stageId={stage._id} prevChatMessages={prevChatMessages} />
               </div> */}
         </div>

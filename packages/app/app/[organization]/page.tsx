@@ -51,11 +51,11 @@ const OrganizationHome = async ({
     : nextStreamNotToday[0]
   return (
     <div className="m-auto w-full max-w-7xl">
-      <div className="relative w-full md:p-4">
+      <div className="relative w-full">
         {playerActive ? (
           <>
             <Player stage={stage} />
-            <div className="px-4 w-full md:p-0">
+            <div className="px-4 w-full md:p-0 md:px-4">
               <SessionInfoBox
                 name={stage.name}
                 description={stage.description ?? ''}
