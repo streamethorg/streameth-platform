@@ -71,6 +71,7 @@ export default async function Watch({
             <SessionInfoBox
               name={video.name}
               description={video.description ?? 'No description'}
+              speakers={video.speakers}
               date={video.createdAt as string}
               playbackId={video.playbackId}
             />

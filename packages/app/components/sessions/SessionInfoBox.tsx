@@ -5,19 +5,23 @@ import InfoBoxDescription from './InfoBoxDescription'
 import { formatDate } from '@/lib/utils/time'
 import ViewCounts from '@/app/[organization]/components/ViewCounts'
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder'
+import SpeakerIcon from '../speakers/speakerIcon'
+import { IExtendedSpeaker } from '@/lib/types'
 
 const SessionInfoBox = async ({
   name,
   description,
-  inverted,
-  playbackId,
   date,
+  speakers,
+  playbackId,
+  inverted,
   vod = false,
   viewCount = false,
 }: {
   name: string
   description: string
   date: string
+  speakers?: IExtendedSpeaker[]
   playbackId?: string
   inverted?: boolean
   vod?: boolean
@@ -33,6 +37,10 @@ const SessionInfoBox = async ({
           <span>{name}</span>
         </CardTitle>
         <InfoBoxDescription description={description} />
+        {speakers &&
+          speakers.map((speaker) => (
+            <SpeakerIcon key={speaker._id} speaker={speaker} />
+          ))}
         <p className="flex items-center space-x-2 text-sm">
           <span>
             {formatDate(new Date(date), 'ddd. MMMM D, YYYY')}

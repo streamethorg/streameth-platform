@@ -43,7 +43,7 @@ const Footer = ({ active }: { active?: string }) => {
         <Link
           key={key}
           href={href}
-          className={`mx-2 text-sm ${
+          className={`mx-1 text-sm ${
             active === key ? 'font-bold' : 'font-light'
           } text-gray-500 underline hover:no-underline`}>
           {item}

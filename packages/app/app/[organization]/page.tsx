@@ -31,9 +31,11 @@ const OrganizationHome = async ({
     return notFound()
   }
 
-  const allStreams = await fetchOrganizationStages({
-    organizationId: organization._id,
-  })
+  const allStreams = (
+    await fetchOrganizationStages({
+      organizationId: organization._id,
+    })
+  ).filter((stream) => stream.published)
 
   const nextStreamNotToday = allStreams?.filter(
     (stream) =>
@@ -48,6 +50,7 @@ const OrganizationHome = async ({
   const stage = activeStream[0]
     ? activeStream[0]
     : nextStreamNotToday[0]
+
   return (
     <div className="m-auto w-full max-w-7xl">
       <div className="relative w-full">
