@@ -1,16 +1,11 @@
 'use client'
+
 import { useState, useEffect, useRef } from 'react'
-import { CardContent } from '@/components/ui/card'
-import { ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react'
-import SpeakerIcon from '../speakers/speakerIcon'
-import { IExtendedSpeaker } from '@/lib/types'
 import MarkdownDisplay from '../misc/MarkdownDisplay'
 
 const InfoBoxDescription = ({
   description,
-  speakers,
 }: {
-  speakers?: IExtendedSpeaker[]
   description?: string
 }) => {
   const [isOpened, setIsOpened] = useState(false)
@@ -35,32 +30,25 @@ const InfoBoxDescription = ({
     }
   }, [])
 
-  if (!description && (!speakers || speakers.length === 0))
-    return null
+  if (!description) return null
 
   return (
-    <CardContent className="relative p-2 lg:p-2  border-t">
+    <div className="py-4 relative">
       <div
         ref={descriptionRef}
         className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
-          isExpandable && !isOpened && 'max-h-10'
+          isExpandable && !isOpened && 'max-h-10 max-w-[90%] truncate'
         }`}>
         {description && <MarkdownDisplay content={description} />}
-        <div className="flex flex-row mt-2 space-x-2 overflow-auto">
-          {speakers &&
-            speakers.map((speaker) => (
-              <SpeakerIcon key={speaker._id} speaker={speaker} />
-            ))}
-        </div>
       </div>
       {isExpandable && (
         <button
           onClick={() => setIsOpened(!isOpened)}
-          className="absolute ml-auto bottom-0 right-0 mr-2 text-primary">
-          {isOpened ? <ArrowUpWideNarrow /> : <ArrowDownWideNarrow />}
+          className="absolute right-0 bottom-0 pb-2 mr-5 ml-auto font-bold text-primary">
+          {isOpened ? 'less' : 'more'}
         </button>
       )}
-    </CardContent>
+    </div>
   )
 }
 

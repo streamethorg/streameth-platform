@@ -6,6 +6,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { NavBarProps } from '@/lib/types'
+import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 
 export default function Navbar({
   setIsNavVisible,
@@ -38,6 +39,9 @@ export default function Navbar({
             </Link>
           </NavigationMenuItem>
         ))}
+        <NavigationMenuItem key={'connect'} className="md:hidden">
+          <ConnectWalletButton className="w-full rounded-none" />
+        </NavigationMenuItem>
       </ul>
     </div>
   )

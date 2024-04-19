@@ -86,7 +86,7 @@ const TableCells = ({
             </AspectRatio>
           </div>
 
-          <Link href={`/watch?session=${item._id}`}>
+          <Link href={`/${organization}/watch?session=${item._id}`}>
             <span className="hover:underline line-clamp-3">
               {item.name}
             </span>
