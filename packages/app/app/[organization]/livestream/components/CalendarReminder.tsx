@@ -26,9 +26,17 @@ const CalendarReminder = ({
   }
 
   return (
-    <Button variant={'outline'} onClick={handleAddToCalendar}>
-      Add to Google Calendar
-    </Button>
+    <>
+      <Button
+        className="hidden md:block"
+        variant={'outline'}
+        onClick={handleAddToCalendar}>
+        Add to Google Calendar
+      </Button>
+      <Button className="md:hidden" onClick={handleAddToCalendar}>
+        Add to Google Calendar
+      </Button>
+    </>
   )
 }
 

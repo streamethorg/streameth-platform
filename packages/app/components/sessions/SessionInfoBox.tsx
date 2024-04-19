@@ -54,7 +54,7 @@ const SessionInfoBox = async ({
         </p>
       </div>
       {!playbackId && (
-        <div className="flex justify-between items-center mb-auto space-x-2 md:justify-end">
+        <div className="flex justify-between items-center mt-2 mb-auto md:justify-end md:space-x-2">
           <CalendarReminder
             eventName={name}
             description={description}
