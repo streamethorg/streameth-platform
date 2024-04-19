@@ -51,4 +51,8 @@ export class UpdateStageDto {
   @IsOptional()
   @IsString()
   thumbnail?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  mintable?: boolean;
 }
