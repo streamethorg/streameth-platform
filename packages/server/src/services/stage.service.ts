@@ -95,13 +95,13 @@ export default class StageService {
     );
   }
 
-  async createMetadata(stageId: string) {
+  async createMetadata(stageId: string, collectionId: string) {
     let stage = await Stage.findById(stageId);
     let metadata = {
       name: stage.name,
       description: stage.description,
       external_url: '',
-      animation_ur: `${config.baseUrl}/embed/?playbackId=${stage.streamSettings.playbackId}&vod=false&streamId=${stage.streamSettings.streamId}&playerName=${stage.name}`,
+      animation_url: `${config.baseUrl}/embed/?playbackId=${stage.streamSettings.playbackId}&vod=false&streamId=${stage.streamSettings.streamId}&playerName=${stage.name}`,
       //image: stage.thumnbnail,
       attributes: [
         {
@@ -116,7 +116,10 @@ export default class StageService {
         },
       ],
     };
-    await stage.updateOne({ mintable: true });
+    await stage.updateOne({
+      mintable: true,
+      $push: { nftCollections: collectionId },
+    });
     return metadata;
   }
 }

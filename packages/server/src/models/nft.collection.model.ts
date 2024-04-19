@@ -1,10 +1,10 @@
 import {
-  INftCollection,
+  INftCollectionModel,
   NftCollectionType,
 } from '@interfaces/nft.collection.interface';
 import { Schema, model } from 'mongoose';
 
-const NftSchema = new Schema<INftCollection>(
+const NftSchema = new Schema<INftCollectionModel>(
   {
     name: { type: String, default: '' },
     description: { type: String, default: '' },
@@ -28,5 +28,5 @@ const NftSchema = new Schema<INftCollection>(
   },
 );
 
-const NftCollection = model<INftCollection>('Nft-Collection', NftSchema);
+const NftCollection = model<INftCollectionModel>('Nft-Collection', NftSchema);
 export default NftCollection;

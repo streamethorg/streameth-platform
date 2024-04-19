@@ -48,6 +48,7 @@ const SessionSchema = new Schema<ISessionModel>(
     mintable: { type: Boolean, default: false },
     published: { type: Boolean, default: false },
     type: { type: String, enum: Object.keys(SessionType) },
+    nftCollections: [{ type: String, ref: 'Nft-Collection' }],
   },
   {
     timestamps: true,
