@@ -47,6 +47,10 @@ const HomePageNavbar = ({
   organizations?: IExtendedOrganization[]
   currentOrganization?: string
 }) => {
+  if (logo === '') {
+    logo = undefined
+  }
+
   return (
     <Suspense fallback={null}>
       <MobileNavBar
@@ -97,7 +101,7 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="bg-white flex sticky top-0 flex-row items-center lg:hidden z-[999999]">
+    <NavigationMenu className="flex sticky top-0 flex-row items-center bg-white lg:hidden z-[999999]">
       {(searchVisible || menuVisible) && (
         <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
@@ -109,7 +113,7 @@ const MobileNavBar = ({
       )}
       <div
         className={cn(
-          'flex relative flex-row  items-center p-2 w-full h-full',
+          'flex relative flex-row  items-center px-4 py-2 w-full h-full',
           menuVisible && 'bg-background',
           searchVisible && showSearchBar && 'bg-background'
         )}>
@@ -140,24 +144,15 @@ const MobileNavBar = ({
             </button>
           )}
           {pages.length > 0 && (
-            <button onClick={toggleMenu} className="z-50 p-2">
+            <button onClick={toggleMenu} className="z-50">
               {!menuVisible ? (
-                <Menu
-                  size={23}
-                  strokeWidth={1.5}
-                  className="text-white rounded bg-primary"
-                />
+                <Menu size={30} strokeWidth={2} className="" />
               ) : (
-                <X
-                  size={23}
-                  strokeWidth={1.5}
-                  className="text-white rounded bg-primary"
-                />
+                <X size={30} strokeWidth={2} className="" />
               )}
             </button>
           )}
         </div>
-        <Support />
         {menuVisible && (
           <Navbar
             pages={getPages(
@@ -167,7 +162,6 @@ const MobileNavBar = ({
             )}
           />
         )}
-        <ConnectWalletButton />
       </div>
     </NavigationMenu>
   )
@@ -191,7 +185,7 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className=" shadow-sm hidden sticky top-0 flex-row items-center p-2 w-full bg-white md:hidden lg:flex">
+    <NavigationMenu className="hidden sticky top-0 flex-row items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex">
       {showLogo && (
         <Link href="/">
           <Image
@@ -203,9 +197,11 @@ const PCNavBar = ({
           />
         </Link>
       )}
-      {/* <div className="flex flex-grow justify-center items-center">
-        {showSearchBar && <SearchBar />}
-      </div> */}
+      <div className="flex flex-grow justify-center items-center">
+        {showSearchBar && (
+          <SearchBar organizationSlug={currentOrganization} />
+        )}
+      </div>
       <div className="flex items-center ml-auto space-x-2">
         {organizations && (
           <SwitchOrganization

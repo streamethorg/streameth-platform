@@ -57,6 +57,21 @@ export interface SearchPageProps {
   }
 }
 
+export interface OrganizationPageProps {
+  params: {
+    organization: string
+  }
+  searchParams: {
+    id: string
+    streamId: string
+    session: string
+    event?: string
+    searchQuery?: string
+    page?: string
+    stage?: string
+  }
+}
+
 export interface WatchPageProps {
   searchParams: {
     event: string

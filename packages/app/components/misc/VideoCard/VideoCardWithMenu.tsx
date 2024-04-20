@@ -19,24 +19,24 @@ import React, { ReactNode } from 'react'
 
 const VideoCardWithMenu = ({
   session,
+  showDate = true,
   DropdownMenuItems,
   link,
 }: {
   session: IExtendedSession
+  showDate?: boolean
   DropdownMenuItems?: ReactNode
   link: string
 }) => {
   return (
-    <div className="w-full min-h-full uppercase rounded-xl">
-      <Link href={link}>
+    <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
+      <Link className="w-full h-full" href={link}>
         {session.coverImage ? (
           <Thumbnail imageUrl={session.coverImage} />
         ) : (
-          <AspectRatio
-            ratio={16 / 9}
-            className="flex justify-center items-center w-full h-full">
+          <div className="w-full h-full aspect-video">
             <DefaultThumbnail />
-          </AspectRatio>
+          </div>
         )}
       </Link>
       <div className="flex justify-between items-start">
@@ -48,25 +48,28 @@ const VideoCardWithMenu = ({
               {session.name}
             </CardTitle>
           </Link>
-
-          <div className="flex justify-between items-center">
-            <CardDescription className={`text-xs truncate `}>
-              {formatDate(
-                new Date(session.createdAt as string),
-                'ddd. MMM. D, YYYY'
-              )}
-            </CardDescription>
-          </div>
+          {showDate && (
+            <div className="flex justify-between items-center">
+              <CardDescription className={`text-xs truncate `}>
+                {formatDate(
+                  new Date(session.createdAt as string),
+                  'ddd. MMM. D, YYYY'
+                )}
+              </CardDescription>
+            </div>
+          )}
         </CardHeader>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger className="z-10">
-            <EllipsisVertical className="mt-2" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {DropdownMenuItems}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {DropdownMenuItems && (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="z-10">
+              <EllipsisVertical className="mt-2" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {DropdownMenuItems}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </div>
   )

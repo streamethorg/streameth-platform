@@ -6,7 +6,6 @@ import { fetchChat } from '@/lib/services/chatService'
 import { Livepeer } from 'livepeer'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
 import { IExtendedEvent } from '@/lib/types'
-
 export default async function StageComponent({
   event,
   stageId,
@@ -42,7 +41,7 @@ export default async function StageComponent({
 
   return (
     <div className=" flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] gap-2">
-      <div className="flex flex-col w-full md:h-full md:overflow-auto z-40 md:w-full top-[54px] gap-2">
+      <div className="flex z-40 flex-col gap-2 w-full md:overflow-auto md:w-full md:h-full top-[54px]">
         <Player
           src={[
             {
@@ -57,10 +56,9 @@ export default async function StageComponent({
           ]}
         />
         <SessionInfoBox
-          title={'Watching: ' + stage.name}
-          avatarUrl={event.logo}
-          avatarFallback={event.name.slice(0, 1)}
-          playerName={stage.name}
+          name={'Watching: ' + stage.name}
+          description={stage.description || 'No description'}
+          date={stage.createdAt as string}
           playbackId={stream.playbackId}
         />
       </div>
