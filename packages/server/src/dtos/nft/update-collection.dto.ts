@@ -25,7 +25,7 @@ export class UpdateNftCollectionDto {
 
   @IsOptional()
   @IsArray()
-  videos: {
+  videos?: {
     type: string;
     sessionId?: string;
     stageId?: string;

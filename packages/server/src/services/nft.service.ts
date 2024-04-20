@@ -54,7 +54,7 @@ export default class CollectionService {
       );
       data.ipfsPath = this.getIpfsPath(urls[0]);
     }
-    return createCollection;
+    return await this.update(createCollection._id.toString(), data);
   }
 
   async update(

@@ -7,6 +7,10 @@ export class UpdateOrganizationDto {
 
   @IsOptional()
   @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
   logo!: string;
 
   @IsOptional()
