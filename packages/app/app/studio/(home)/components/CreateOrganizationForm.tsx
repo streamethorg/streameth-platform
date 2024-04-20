@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-
+import { Textarea } from '@/components/ui/textarea'
 import { organizationSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import {
@@ -44,7 +44,8 @@ export default function CreateOrganizationForm({
       banner: organization?.banner || '',
       logo: organization?.logo || '',
       email: organization?.email || '',
-      bio: organization?.bio || '',
+      description: organization?.description || '',
+      website: organization?.url || '',
     },
   })
 
@@ -110,9 +111,7 @@ export default function CreateOrganizationForm({
                     placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
                     Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
                     aspectRatio={1}
-                    path={`organizations/${generateId(
-                      form.getValues('name')
-                    )}`}
+                    path={`organizations`}
                     {...field}
                   />
                 </FormControl>
@@ -129,9 +128,7 @@ export default function CreateOrganizationForm({
                   <ImageUpload
                     className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"
                     aspectRatio={1}
-                    path={`organizations/${generateId(
-                      form.getValues('name')
-                    )}`}
+                    path={`organizations`}
                     {...field}
                   />
                 </FormControl>
@@ -158,6 +155,20 @@ export default function CreateOrganizationForm({
 
         <FormField
           control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="">Description</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Description" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -172,12 +183,12 @@ export default function CreateOrganizationForm({
 
         <FormField
           control={form.control}
-          name="bio"
+          name="website"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="">Bio</FormLabel>
+              <FormLabel className="">Company website</FormLabel>
               <FormControl>
-                <Input placeholder="Bio" {...field} />
+                <Input placeholder="Company website" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -185,20 +196,27 @@ export default function CreateOrganizationForm({
         />
 
         <div className="flex flex-row justify-between">
+          {!organization && (
+            <Button
+              type="button"
+              onClick={() => {
+                router.back()
+              }}
+              variant={'outline'}>
+              Go back
+            </Button>
+          )}
           <Button
-            type="button"
-            onClick={() => {
-              router.back()
-            }}
-            variant={'outline'}>
-            Go back
-          </Button>
-          <Button type="submit">
+            type="submit"
+            className="ml-auto"
+            variant={'primary'}>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
                 Please wait
               </>
+            ) : organization ? (
+              'Update'
             ) : (
               'Create'
             )}

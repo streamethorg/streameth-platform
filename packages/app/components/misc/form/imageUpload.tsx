@@ -80,22 +80,24 @@ export default function ImageUpload({
   return (
     <>
       {isUploading ? (
-        <div className="text-sm">Uploading image...</div>
+        <div className={`${className} flex relative flex-col w-full`}>
+          Uploading image...
+        </div>
       ) : preview ? (
-        <div className="flex relative flex-col w-full">
+        <div className={`${className} flex relative flex-col w-full`}>
           <X
             size={24}
-            className="relative ml-auto z-[9999999999994]"
+            className="bg-white absolute ml-auto z-[9999999999994] text-muted-foreground right-0 border border-muted-foreground rounded-full"
             onClick={() => {
               onChange(null)
               setPreview('')
             }}
           />
           <div
-            className={`${className} relative flex justify-center flex-col items-center border border-dotted bg-secondary`}>
+            className={`w-full h-full relative flex justify-center flex-col items-center `}>
             <Image
               src={preview ?? value}
-              className="z-10"
+              className={`${className} z-10`}
               alt="preview"
               fill
             />
