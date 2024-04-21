@@ -9,6 +9,7 @@ import { IExtendedNftCollections } from '@/lib/types'
 import { EllipsisVertical } from 'lucide-react'
 import React from 'react'
 import ShareVideoNFT from '../create/components/ShareVideoNFT'
+import Link from 'next/link'
 
 const NFTCollectionCard = ({
   nft,
@@ -18,7 +19,9 @@ const NFTCollectionCard = ({
   organization: string
 }) => {
   return (
-    <div className="border border-grey bg-secondary rounded-xl p-2">
+    <Link
+      href={`/${organization}/collection?collectionId=${nft._id}`}
+      className="border border-grey bg-secondary rounded-xl p-2 cursor-pointer">
       <Thumbnail
         imageUrl={nft.thumbnail}
         fallBack="/images/videoPlaceholder.png"
@@ -30,8 +33,8 @@ const NFTCollectionCard = ({
           <p className={`line-clamp-1 font-medium`}>{nft.name}</p>
 
           <p className="text-sm text-muted-foreground">
-            {nft.videos?.length} item
-            {nft.videos?.length < 1 ? '' : 's'}
+            {nft?.videos?.length} item
+            {nft.videos.length < 1 ? '' : 's'}
           </p>
         </div>
 
@@ -49,7 +52,7 @@ const NFTCollectionCard = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </Link>
   )
 }
 

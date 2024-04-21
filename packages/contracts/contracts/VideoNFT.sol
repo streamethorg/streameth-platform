@@ -32,7 +32,7 @@ contract VideoNFT is
     uint256 public mintStartTime;
     uint256 public mintEndTime;
 
-    address public streamethGnosisWallet =
+    address public constant streamethGnosisWallet =
         0x9268d03EfF4A9A595ef619764AFCB9976c0375df;
 
     mapping(address => mapping(string => bool)) private _sessionMinted;

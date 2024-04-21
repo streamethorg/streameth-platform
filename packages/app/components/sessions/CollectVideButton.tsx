@@ -62,9 +62,10 @@ const CollectVideButton = ({
       )
     }
     if (isError) {
+      console.log(error)
       toast.error('NFT of the video failed to mint. Please try again')
     }
-  }, [isSuccess, isError])
+  }, [isSuccess, isError, error])
 
   const mintCollection = () => {
     writeContract({

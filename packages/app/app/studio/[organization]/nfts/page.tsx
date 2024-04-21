@@ -29,7 +29,7 @@ const NFT = async ({
   const nftCollections = await fetchOrganizationNFTCollections({
     organizationId,
   })
-
+  console.log(nftCollections)
   return (
     <div className="flex flex-col bg-white h-full">
       <Card
@@ -63,7 +63,11 @@ const NFT = async ({
         {nftCollections.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {nftCollections.map((nft) => (
-              <NFTCollectionCard key={nft._id} nft={nft} />
+              <NFTCollectionCard
+                organization={params.organization}
+                key={nft._id}
+                nft={nft}
+              />
             ))}
           </div>
         ) : (
