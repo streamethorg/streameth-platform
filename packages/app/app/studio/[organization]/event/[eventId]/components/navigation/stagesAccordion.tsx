@@ -6,9 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import { deleteStageAction } from '@/lib/actions/stages'
-import { IExtendedEvent } from '@/lib/types'
+import { IExtendedEvent, IExtendedStage } from '@/lib/types'
 import { toast } from 'sonner'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import Link from 'next/link'
@@ -19,7 +18,7 @@ const StageAccordion = ({
   event,
 }: {
   organization: string
-  stages: IStageModel[]
+  stages: IExtendedStage[]
   event: IExtendedEvent
 }) => {
   const { handleTermChange, searchParams } = useSearchParams()
@@ -62,13 +61,13 @@ const StageAccordion = ({
           <AccordionItem
             className="px-2"
             key={stage._id}
-            value={stage._id}>
+            value={stage?._id as string}>
             <AccordionTrigger
               onClick={() => {
                 handleTermChange([
                   {
                     key: 'stage',
-                    value: stage._id,
+                    value: stage?._id as string,
                   },
                   {
                     key: 'settings',
@@ -83,7 +82,7 @@ const StageAccordion = ({
                 handleTermChange([
                   {
                     key: 'stage',
-                    value: stage._id,
+                    value: stage._id as string,
                   },
                   {
                     key: 'stageSetting',
@@ -110,7 +109,7 @@ const StageAccordion = ({
             <AccordionContent
               onClick={() => {
                 handleDeleteStage(
-                  stage._id,
+                  stage._id as string,
                   event?.organizationId as string
                 )
               }}>

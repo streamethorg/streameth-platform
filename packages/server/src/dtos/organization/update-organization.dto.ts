@@ -7,6 +7,10 @@ export class UpdateOrganizationDto {
 
   @IsOptional()
   @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
   logo!: string;
 
   @IsOptional()
@@ -18,7 +22,11 @@ export class UpdateOrganizationDto {
   @IsString()
   walletAddress: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  organizationId: string;
+  banner?: string;
+
+  @IsOptional()
+  @IsString()
+  organizationId?: string;
 }

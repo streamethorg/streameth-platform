@@ -21,7 +21,7 @@ const PopoverActions = ({
   session,
   organizationSlug,
 }: {
-  session?: IExtendedSession
+  session: IExtendedSession
   organizationSlug?: string
 }) => {
   return (
@@ -46,7 +46,7 @@ const PopoverActions = ({
               </DialogTrigger>
               <ShareModalContent />
             </Dialog>
-            {session?.nftCollections[0] && (
+            {session?.nftCollections?.[0] && (
               <Button
                 className="space-x-2 w-full"
                 variant={'outline'}>
@@ -58,6 +58,10 @@ const PopoverActions = ({
                 </Link>
               </Button>
             )}
+            <Button className="space-x-2 w-full" variant={'outline'}>
+              <Layers />
+              <p className="">View Collection</p>
+            </Button>
             <Button
               className="space-x-2 w-full text-red-500"
               variant={'outline'}>

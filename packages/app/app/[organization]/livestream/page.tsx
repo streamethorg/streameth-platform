@@ -58,7 +58,7 @@ export default async function Livestream({
     <Suspense key={stage._id} fallback={<Loading />}>
       <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full">
         <Player stage={stage} />
-        <div className="px-4 w-full md:p-0">
+        <div className="px-4 w-full">
           <SessionInfoBox
             name={stage.name}
             description={stage.description ?? ''}

@@ -8,8 +8,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { IExtendedStage } from '@/lib/types'
 
-const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
+const StageSelect = ({ stages }: { stages: IExtendedStage[] }) => {
   const { searchParams, handleTermChange } = useSearchParams()
 
   return (
@@ -30,7 +31,7 @@ const StageSelect = ({ stages }: { stages: IStageModel[] }) => {
         </SelectTrigger>
         <SelectContent className="bg-white rounded-lg border-white border-opacity-10">
           {stages.map((stage) => (
-            <SelectItem key={stage._id} value={stage._id}>
+            <SelectItem key={stage._id} value={stage._id as string}>
               {stage.name}
             </SelectItem>
           ))}

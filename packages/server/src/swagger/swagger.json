@@ -685,6 +685,28 @@
 								"type": "string"
 							}
 						]
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"items": {
+									"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+								},
+								"type": "array"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
@@ -762,6 +784,28 @@
 					"streamDate": {
 						"type": "string",
 						"format": "date-time"
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"items": {
+									"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+								},
+								"type": "array"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
@@ -806,6 +850,12 @@
 					},
 					"streamDate": {
 						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
 					}
 				},
 				"required": [
@@ -1188,11 +1238,11 @@
 						},
 						"type": "array"
 					},
-					"nftURI": {
-						"type": "string"
-					},
 					"ipfsURI": {
 						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
 					},
 					"published": {
 						"type": "boolean"
@@ -1200,17 +1250,14 @@
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
 					},
-					"mintable": {
-						"type": "boolean"
+					"createdAt": {
+						"type": "string"
 					},
 					"nftCollections": {
 						"items": {
-							"type": "string"
+							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
 						},
 						"type": "array"
-					},
-					"createdAt": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -1219,8 +1266,7 @@
 					"start",
 					"end",
 					"organizationId",
-					"type",
-					"nftCollections"
+					"type"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1338,11 +1384,11 @@
 						},
 						"type": "array"
 					},
-					"nftURI": {
-						"type": "string"
-					},
 					"ipfsURI": {
 						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
 					},
 					"published": {
 						"type": "boolean"
@@ -1350,17 +1396,14 @@
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
 					},
-					"mintable": {
-						"type": "boolean"
+					"createdAt": {
+						"type": "string"
 					},
 					"nftCollections": {
 						"items": {
-							"type": "string"
+							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
 						},
 						"type": "array"
-					},
-					"createdAt": {
-						"type": "string"
 					}
 				},
 				"required": [
@@ -1369,8 +1412,7 @@
 					"description",
 					"start",
 					"end",
-					"type",
-					"nftCollections"
+					"type"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -1448,11 +1490,11 @@
 						},
 						"type": "array"
 					},
-					"nftURI": {
-						"type": "string"
-					},
 					"ipfsURI": {
 						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
 					},
 					"published": {
 						"type": "boolean"
@@ -1460,17 +1502,14 @@
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
 					},
-					"mintable": {
-						"type": "boolean"
+					"createdAt": {
+						"type": "string"
 					},
 					"nftCollections": {
 						"items": {
-							"type": "string"
+							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
 						},
 						"type": "array"
-					},
-					"createdAt": {
-						"type": "string"
 					},
 					"autolabels": {
 						"items": {
@@ -1486,7 +1525,6 @@
 					"start",
 					"end",
 					"type",
-					"nftCollections",
 					"speakers"
 				],
 				"type": "object",
@@ -1573,6 +1611,9 @@
 					},
 					"nftURI": {
 						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
 					}
 				},
 				"required": [
@@ -1754,6 +1795,9 @@
 					"name": {
 						"type": "string"
 					},
+					"description": {
+						"type": "string"
+					},
 					"logo": {
 						"type": "string"
 					},
@@ -1761,6 +1805,9 @@
 						"type": "string"
 					},
 					"walletAddress": {
+						"type": "string"
+					},
+					"banner": {
 						"type": "string"
 					},
 					"organizationId": {
@@ -1771,8 +1818,7 @@
 					"name",
 					"logo",
 					"email",
-					"walletAddress",
-					"organizationId"
+					"walletAddress"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1820,6 +1866,9 @@
 			},
 			"INftCollection": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -1881,8 +1930,7 @@
 					"description",
 					"thumbnail",
 					"type",
-					"organizationId",
-					"videos"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1908,6 +1956,9 @@
 			},
 			"CreateNftCollectionDto": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -1933,9 +1984,6 @@
 					"videos": {
 						"items": {
 							"properties": {
-								"ipfsURI": {
-									"type": "string"
-								},
 								"stageId": {
 									"type": "string"
 								},
@@ -1944,10 +1992,6 @@
 								},
 								"type": {
 									"type": "string"
-								},
-								"index": {
-									"type": "number",
-									"format": "double"
 								}
 							},
 							"required": [
@@ -1971,6 +2015,61 @@
 					"type",
 					"organizationId",
 					"videos"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateNftCollectionDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/NftCollectionType"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"videos": {
+						"items": {
+							"properties": {
+								"stageId": {
+									"type": "string"
+								},
+								"sessionId": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"type"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"thumbnail",
+					"type",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -3587,37 +3686,6 @@
 				]
 			}
 		},
-		"/sessions/metadata/{sessionId}": {
-			"post": {
-				"operationId": "UploadSessionMetadata",
-				"responses": {
-					"201": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_string_"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Session"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "sessionId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
 		"/sessions/{sessionId}": {
 			"put": {
 				"operationId": "EditSession",
@@ -4062,6 +4130,45 @@
 			}
 		},
 		"/collections/{collectionId}": {
+			"put": {
+				"operationId": "UpdateNftCollection",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_INftCollection_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "collectionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateNftCollectionDto"
+							}
+						}
+					}
+				}
+			},
 			"get": {
 				"operationId": "GetNftCollectionById",
 				"responses": {

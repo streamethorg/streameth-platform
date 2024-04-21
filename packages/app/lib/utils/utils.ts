@@ -326,7 +326,7 @@ export const calMintPrice = (
     const baseFee = Number(data[1].result)
     if (all) {
       const mintPrice =
-        (mintFee + baseFee) * nftCollection?.videos?.length
+        (mintFee + baseFee) * nftCollection?.videos?.length!
       return mintPrice.toString()
     } else {
       return (mintFee + baseFee).toString()

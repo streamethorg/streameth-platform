@@ -1,4 +1,5 @@
 import { CreateNftCollectionDto } from '@dtos/nft/create-colletion.dto';
+import { UpdateNftCollectionDto } from '@dtos/nft/update-collection.dto';
 import { INftCollection } from '@interfaces/nft.collection.interface';
 import CollectionService from '@services/nft.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -8,6 +9,7 @@ import {
   Get,
   Path,
   Post,
+  Put,
   Route,
   SuccessResponse,
   Tags,
@@ -29,6 +31,20 @@ export class NftCollectionRouter extends Controller {
   ): Promise<IStandardResponse<INftCollection>> {
     const collection = await this.collectionService.create(body);
     return SendApiResponse('collection created', collection);
+  }
+
+  /**
+   *
+   * @Summary Update nft collection
+   */
+  @SuccessResponse('201')
+  @Put('{collectionId}')
+  async updateNftCollection(
+    @Path() collectionId: string,
+    @Body() body: UpdateNftCollectionDto,
+  ): Promise<IStandardResponse<INftCollection>> {
+    const collection = await this.collectionService.update(collectionId, body);
+    return SendApiResponse('collection updated', collection);
   }
 
   /**

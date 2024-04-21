@@ -6,6 +6,10 @@ export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
   @IsString()
   name!: string;
 
+  @IsOptional()
+  @IsString()
+  description?: string;
+
   @IsNotEmpty()
   @IsString()
   logo!: string;

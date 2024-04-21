@@ -37,7 +37,7 @@ const SessionInfoBox = async ({
   video?: IExtendedSession
 }) => {
   const nftCollection = await fetchNFTCollection({
-    collectionId: video?.nftCollections[0],
+    collectionId: video?.nftCollections?.[0],
   })
   return (
     <div
@@ -65,30 +65,27 @@ const SessionInfoBox = async ({
           )}
         </p>
       </div>
-      <div className="mb-auto flex justify-start items-center space-x-2 md:justify-end">
-        {video?.nftCollections[0] && (
+      <div className="flex justify-between items-center mt-2 mb-auto md:justify-end md:space-x-2">
+        {video?.nftCollections?.[0] && (
           <CollectVideButton
             video={video}
             nftCollection={nftCollection}
           />
         )}
-
-        <ShareButton shareFor="video" />
-        <PopoverActions
+        {/* <ShareButton shareFor="video" /> */}
+        {/* <PopoverActions
           organizationSlug={organizationSlug}
           session={video}
-        />
-      </div>
-      {!playbackId && (
-        <div className="flex justify-between items-center mb-auto space-x-2 md:justify-end">
+        /> */}
+        {!playbackId && (
           <CalendarReminder
             eventName={name}
             description={description}
             start={date}
             end={date}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

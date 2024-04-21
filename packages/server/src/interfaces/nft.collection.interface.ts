@@ -5,12 +5,13 @@ export enum NftCollectionType {
   multiple = 'multiple',
 }
 export interface INftCollection {
+  _id?: Types.ObjectId;
   name: string;
   description: string;
   thumbnail: string;
   type: NftCollectionType;
   organizationId: Types.ObjectId | string;
-  videos: {
+  videos?: {
     index?: number;
     type: string;
     sessionId?: string;
@@ -20,3 +21,7 @@ export interface INftCollection {
   contractAddress?: string;
   ipfsPath?: string;
 }
+
+export interface INftCollectionModel
+  extends Omit<INftCollection, '_id'>,
+    Document {}

@@ -138,12 +138,16 @@ export interface IExtendedOrganization
   extends Omit<IOrganization, '_id'> {
   _id: string
 }
-export interface IExtendedSession extends Omit<ISession, '_id'> {
+export interface IExtendedSession
+  extends Omit<ISession, '_id' | 'nftCollections'> {
   _id: string
+  nftCollections?: string[]
   createdAt?: string
 }
-export interface IExtendedStage extends Omit<IStage, '_id'> {
+export interface IExtendedStage
+  extends Omit<IStage, '_id' | 'nftCollections'> {
   _id?: string
+  nftCollections?: string[]
   createdAt?: string
   updatedAt?: string
   __v?: string
