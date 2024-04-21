@@ -29,7 +29,7 @@ const NFT = async ({
   const nftCollections = await fetchOrganizationNFTCollections({
     organizationId,
   })
-  console.log(nftCollections)
+
   return (
     <div className="flex flex-col bg-white h-full">
       <Card
