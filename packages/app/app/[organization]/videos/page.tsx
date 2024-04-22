@@ -18,6 +18,7 @@ import { notFound } from 'next/navigation'
 import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
 import EventSelect from './components/eventSelect'
 import { fetchAllSessions } from '@/lib/data'
+import { Filter } from 'lucide-react'
 
 export default async function ArchivePage({
   params,
@@ -75,10 +76,8 @@ export default async function ArchivePage({
         )}
       </div>
       <div className="p-4 m-auto w-full max-w-7xl">
-        <div className="flex flex-row justify-between items-center mb-4 w-full">
-          <div className="px-2 w-full text-lg font-bold lg:p-0">
-            All videos
-          </div>
+        <div className="flex flex-row justify-between items-center mb-4 space-x-2 w-full">
+          <div className="w-full text-lg font-bold">All videos</div>
           <div>
             <EventSelect
               events={eventsWithVideos as IExtendedEvent[]}
