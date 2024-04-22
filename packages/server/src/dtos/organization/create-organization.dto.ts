@@ -26,4 +26,8 @@ export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
   @IsOptional()
   @IsString()
   banner?: string;
+
+  @IsOptional()
+  @IsString()
+  url?: string;
 }

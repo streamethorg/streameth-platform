@@ -6,7 +6,6 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-
 export class CreateStageDto implements IStage {
   @IsNotEmpty()
   @IsString()

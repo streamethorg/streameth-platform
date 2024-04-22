@@ -8,6 +8,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class UpdateStageDto {
   @IsNotEmpty()
@@ -55,4 +56,8 @@ export class UpdateStageDto {
   @IsOptional()
   @IsBoolean()
   mintable?: boolean;
+
+  @IsOptional()
+  @IsArray()
+  nftCollections?: Types.ObjectId | string[];
 }
