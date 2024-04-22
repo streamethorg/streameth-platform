@@ -20,8 +20,9 @@ import { toast } from 'sonner'
 import {
   type BaseError,
   useWaitForTransactionReceipt,
-  useWatchContractEvent,
   useWriteContract,
+  useAccount,
+  useTransactionReceipt,
 } from 'wagmi'
 
 import { VideoFactoryAbi, VideoFactoryAddress } from '@/lib/contract'
@@ -46,10 +47,13 @@ const CreateNFTForm = ({
   videos: INFTSessions[]
   type: string
 }) => {
+  const account = useAccount()
   const [step, setStep] = useState(1)
   const [isPublishingCollection, setIsPublishingCollection] =
     useState(false)
   const [isPublished, setIsPublished] = useState(false)
+  const [isTransactionApproved, setIsTransactionApproved] =
+    useState(false)
   const form = useForm<z.infer<typeof nftSchema>>({
     resolver: zodResolver(nftSchema),
     defaultValues: {
@@ -71,28 +75,12 @@ const CreateNFTForm = ({
   })
   const [formResponseData, setFormResponseData] =
     useState<INftCollection>()
-  const [nftContractAddress, setNftContractAddress] = useState()
-  const {
-    data: hash,
-    writeContract,
-    error,
-    isError,
-    isPending: isCreatingNftPending,
-  } = useWriteContract()
+
+  const { data: hash, writeContract, error } = useWriteContract()
 
   const { isSuccess } = useWaitForTransactionReceipt({
+    confirmations: 1,
     hash,
-  })
-
-  useWatchContractEvent({
-    address: VideoFactoryAddress,
-    abi: VideoFactoryAbi,
-    eventName: 'VideoCreated',
-    onLogs(logs) {
-      //@ts-ignore
-      setNftContractAddress(logs[0]?.args?.videoCollectionAddress)
-      console.log('New logs!', logs)
-    },
   })
 
   const parseMintFee = ethers.parseUnits(
@@ -102,12 +90,12 @@ const CreateNFTForm = ({
     'ether'
   )
   // Update collection with address
-  const updateCollection = async () => {
+  const updateCollection = async (address: string) => {
     await updateNFTCollectionAction({
       //@ts-ignore
       collection: {
         ...formResponseData,
-        contractAddress: nftContractAddress,
+        contractAddress: address,
       },
     })
       .then((response) => {
@@ -119,15 +107,13 @@ const CreateNFTForm = ({
   useEffect(() => {
     if (isSuccess) {
       setIsPublished(true)
-
       toast.success('NFT Collection successfully created')
     }
 
-    if (nftContractAddress) {
-      console.log('calling ', nftContractAddress)
-      updateCollection()
+    if (hash) {
+      setIsTransactionApproved(true)
     }
-  }, [isSuccess, error, nftContractAddress])
+  }, [isSuccess, error, hash])
 
   const createEventCollection = (ipfsPath?: string) => {
     writeContract({
@@ -152,6 +138,16 @@ const CreateNFTForm = ({
       ],
     })
   }
+
+  const result = useTransactionReceipt({
+    hash,
+  })
+
+  useEffect(() => {
+    if (result?.data?.logs[0]?.address) {
+      updateCollection(result?.data?.logs[0]?.address)
+    }
+  }, [result?.data?.logs])
 
   const createNFTCollection = async () => {
     setIsPublishingCollection(true)
@@ -263,9 +259,9 @@ const CreateNFTForm = ({
         isPublished={isPublished}
         organization={organizationSlug}
         hash={hash}
-        isCreatingNftPending={isCreatingNftPending}
         error={error as BaseError}
         isSuccess={isSuccess}
+        isTransactionApproved={isTransactionApproved}
       />
     </div>
   )
