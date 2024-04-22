@@ -6,7 +6,10 @@ import {
   IExtendedSession,
 } from '@/lib/types'
 import {
+  useAccount,
+  useChainId,
   useReadContracts,
+  useSwitchChain,
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi'
@@ -30,11 +33,12 @@ const CollectVideButton = ({
   all?: boolean
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [mintError, setMintError] = useState('')
   const videoNFTContract = {
     address: nftCollection?.contractAddress as `0x${string}`,
     abi: VideoNFTAbi,
   } as const
-
+  const { switchChain } = useSwitchChain()
   const result = useReadContracts({
     contracts: [
       {
@@ -55,7 +59,8 @@ const CollectVideButton = ({
     isError,
     isPending: isMintingNftPending,
   } = useWriteContract()
-
+  const account = useAccount()
+  const chain = useChainId()
   const { isSuccess, isLoading } = useWaitForTransactionReceipt({
     hash,
   })
@@ -75,19 +80,24 @@ const CollectVideButton = ({
 
   const mintCollection = () => {
     setIsOpen(true)
-    writeContract({
-      abi: VideoNFTAbi,
-      address: nftCollection?.contractAddress as `0x${string}`,
-      functionName: 'sessionMint',
-      args: [getVideoIndex(all, nftCollection!, video)],
-      value: BigInt(
-        calMintPrice(
-          result?.data as { result: BigInt }[],
-          all,
-          nftCollection!
-        ) as string
-      ),
-    })
+    if (!account.address || chain !== 84532) {
+      switchChain({ chainId: 84532 })
+      setMintError('Please switch to base sepolia before continuing.')
+    } else {
+      writeContract({
+        abi: VideoNFTAbi,
+        address: nftCollection?.contractAddress as `0x${string}`,
+        functionName: 'sessionMint',
+        args: [getVideoIndex(all, nftCollection!, video)],
+        value: BigInt(
+          calMintPrice(
+            result?.data as { result: BigInt }[],
+            all,
+            nftCollection!
+          ) as string
+        ),
+      })
+    }
   }
 
   return (
@@ -103,7 +113,11 @@ const CollectVideButton = ({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
           <DialogTitle>
-            {hash ? 'Transaction approved' : 'Approve transaction'}
+            {hash
+              ? 'Transaction approved'
+              : mintError
+              ? 'Error'
+              : 'Approve transaction'}
           </DialogTitle>
 
           {error ? (
