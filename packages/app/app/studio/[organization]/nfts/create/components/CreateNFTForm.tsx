@@ -28,6 +28,7 @@ import { VideoFactoryAbi, VideoFactoryAddress } from '@/lib/contract'
 import { getDateWithTime } from '@/lib/utils/time'
 import { ethers } from 'ethers'
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface'
+import useVideoContractEvent from '@/lib/hooks/useVideoContractEvent'
 
 export interface ICreateNFT {
   selectedVideo: INFTSessions[]
@@ -50,6 +51,8 @@ const CreateNFTForm = ({
   const [isPublishingCollection, setIsPublishingCollection] =
     useState(false)
   const [isPublished, setIsPublished] = useState(false)
+  const [isTransactionApproved, setIsTransactionApproved] =
+    useState(false)
   const form = useForm<z.infer<typeof nftSchema>>({
     resolver: zodResolver(nftSchema),
     defaultValues: {
@@ -71,7 +74,9 @@ const CreateNFTForm = ({
   })
   const [formResponseData, setFormResponseData] =
     useState<INftCollection>()
-  const [nftContractAddress, setNftContractAddress] = useState()
+  const { nftContractAddress } = useVideoContractEvent()
+  // const [nftContractAddress, setNftContractAddress] = useState()
+  console.log('nftContractAddress', nftContractAddress)
   const {
     data: hash,
     writeContract,
@@ -82,17 +87,6 @@ const CreateNFTForm = ({
 
   const { isSuccess } = useWaitForTransactionReceipt({
     hash,
-  })
-
-  useWatchContractEvent({
-    address: VideoFactoryAddress,
-    abi: VideoFactoryAbi,
-    eventName: 'VideoCreated',
-    onLogs(logs) {
-      //@ts-ignore
-      setNftContractAddress(logs[0]?.args?.videoCollectionAddress)
-      console.log('New logs!', logs)
-    },
   })
 
   const parseMintFee = ethers.parseUnits(
@@ -119,15 +113,18 @@ const CreateNFTForm = ({
   useEffect(() => {
     if (isSuccess) {
       setIsPublished(true)
-
       toast.success('NFT Collection successfully created')
+    }
+
+    if (hash) {
+      setIsTransactionApproved(true)
     }
 
     if (nftContractAddress) {
       console.log('calling ', nftContractAddress)
       updateCollection()
     }
-  }, [isSuccess, error, nftContractAddress])
+  }, [isSuccess, error, nftContractAddress, hash])
 
   const createEventCollection = (ipfsPath?: string) => {
     writeContract({
@@ -263,9 +260,9 @@ const CreateNFTForm = ({
         isPublished={isPublished}
         organization={organizationSlug}
         hash={hash}
-        isCreatingNftPending={isCreatingNftPending}
         error={error as BaseError}
         isSuccess={isSuccess}
+        isTransactionApproved={isTransactionApproved}
       />
     </div>
   )
