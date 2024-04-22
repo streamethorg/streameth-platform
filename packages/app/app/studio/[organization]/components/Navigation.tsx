@@ -54,6 +54,12 @@ const navigationItems = [
     defaultCollapsed: false,
   },
   {
+    title: 'Settings',
+    navigationPath: 'settings',
+    icon: <Settings />,
+    defaultCollapsed: false,
+  },
+  {
     title: 'Mint NFT',
     navigationPath: 'nfts',
     icon: <ImageIcon />,

@@ -69,10 +69,6 @@ export async function fetchEvent({
       return null
     }
 
-    console.log(
-      'fetching event',
-      `${apiUrl()}/events/${eventId ?? eventSlug}`
-    )
     const data = await fetch(
       `${apiUrl()}/events/${eventId ?? eventSlug}`,
       {
