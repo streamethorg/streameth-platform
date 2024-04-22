@@ -1,0 +1,63 @@
+'use client'
+
+import { SidebarUI, SidebarItem } from './Sidebar'
+import {
+  CalendarDays,
+  Videotape,
+  Radio,
+  ScissorsLineDashed,
+  Home,
+  ImageIcon,
+} from 'lucide-react'
+
+const navigationItems = [
+  {
+    text: 'Home',
+    navigationPath: '',
+    icon: <Home size={20} />,
+  },
+  {
+    text: 'Events',
+    navigationPath: 'events',
+    icon: <CalendarDays size={20} />,
+  },
+  {
+    text: 'Library',
+    navigationPath: 'library',
+    icon: <Videotape size={20} />,
+  },
+  {
+    text: 'Livestreams',
+    navigationPath: 'livestreams',
+    icon: <Radio size={20} />,
+  },
+  {
+    text: 'Clips',
+    navigationPath: 'clips',
+    icon: <ScissorsLineDashed size={20} />,
+  },
+  {
+    text: 'Mint NFT',
+    navigationPath: 'nfts',
+    icon: <ImageIcon size={20} />,
+  },
+]
+
+const SidebarMenu = ({}) => {
+  return (
+    <div className="relative z-10 w-[1/4]">
+      <SidebarUI>
+        {navigationItems.map((item, index) => (
+          <SidebarItem
+            key={index}
+            navigationPath={item.navigationPath}
+            text={item.text}
+            icon={item.icon}
+          />
+        ))}
+      </SidebarUI>
+    </div>
+  )
+}
+
+export default SidebarMenu
