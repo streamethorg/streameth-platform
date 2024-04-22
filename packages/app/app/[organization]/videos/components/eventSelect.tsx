@@ -18,14 +18,17 @@ const EventSelect = ({ events }: { events: IExtendedEvent[] }) => {
         handleTermChange([
           {
             key: 'event',
-            value,
+            value: value,
           },
         ])
       }}
-      items={events.map((event) => ({
-        label: event.name,
-        value: event._id,
-      }))}
+      items={[
+        { label: 'None', value: '' },
+        ...events.map((event) => ({
+          label: event.name,
+          value: event._id,
+        })),
+      ]}
     />
   )
 }

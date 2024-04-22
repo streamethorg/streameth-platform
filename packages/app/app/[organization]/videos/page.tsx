@@ -1,4 +1,8 @@
-import { OrganizationPageProps, SearchPageProps } from '@/lib/types'
+import {
+  IExtendedEvent,
+  OrganizationPageProps,
+  SearchPageProps,
+} from '@/lib/types'
 import {
   generalMetadata,
   archiveMetadata,
@@ -13,6 +17,7 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
 import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
 import EventSelect from './components/eventSelect'
+import { fetchAllSessions } from '@/lib/data'
 
 export default async function ArchivePage({
   params,
@@ -34,6 +39,23 @@ export default async function ArchivePage({
     organizationId: organization?._id,
   })
 
+  const results = await Promise.all(
+    events.map(async (event) => {
+      const sessions = (
+        await fetchAllSessions({
+          event: event._id.toString(),
+          onlyVideos: true,
+        })
+      ).sessions
+
+      return sessions.length > 0 ? event : undefined
+    })
+  )
+
+  const eventsWithVideos = results.filter(
+    (event) => event !== undefined
+  )
+
   return (
     <div>
       <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
@@ -43,7 +65,6 @@ export default async function ArchivePage({
             alt="banner"
             quality={100}
             objectFit="cover"
-            className=""
             fill
             priority
           />
@@ -55,9 +76,13 @@ export default async function ArchivePage({
       </div>
       <div className="p-4 m-auto w-full max-w-7xl">
         <div className="flex flex-row justify-between items-center mb-4 w-full">
-          <div className="px-2 w-full text-lg lg:p-0">All videos</div>
-          <div className="">
-            <EventSelect events={events} />
+          <div className="px-2 w-full text-lg font-bold lg:p-0">
+            All videos
+          </div>
+          <div>
+            <EventSelect
+              events={eventsWithVideos as IExtendedEvent[]}
+            />
           </div>
         </div>
         <Suspense fallback={<ArchiveVideoSkeleton />}>
