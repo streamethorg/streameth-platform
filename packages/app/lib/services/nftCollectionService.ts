@@ -25,7 +25,6 @@ export async function createNFTCollection({
 }
 
 export const updateNFTCollection = async ({
-  collectionId,
   collection,
   authToken,
 }: {
@@ -33,9 +32,14 @@ export const updateNFTCollection = async ({
   authToken: string
   collectionId?: string
 }): Promise<INftCollection> => {
-  const modifiedObject = (({ _id, videos, ...rest }) => rest)(
-    collection
-  )
+  const modifiedObject = (({
+    _id,
+    videos,
+    createdAt,
+    updatedAt,
+    __v,
+    ...rest
+  }) => rest)(collection)
   const response = await fetch(
     `${apiUrl()}/collections/${collection._id}`,
     {

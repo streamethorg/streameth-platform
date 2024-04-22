@@ -168,7 +168,9 @@ export interface IExtendedState extends Omit<IState, '_id'> {
 export interface IExtendedNftCollections
   extends Omit<INftCollection, '_id'> {
   _id: string
-  createdAt: string
+  createdAt?: string
+  updatedAt?: string
+  __v?: string
 }
 
 export interface EmbedPageParams {
