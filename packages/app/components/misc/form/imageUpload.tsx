@@ -116,7 +116,7 @@ export default function ImageUpload({
           <Input
             id={id}
             type="file"
-            accept=".png,.jpg"
+            accept=".png,.jpg, .jpeg"
             placeholder="Upload image"
             className="hidden"
             {...rest}

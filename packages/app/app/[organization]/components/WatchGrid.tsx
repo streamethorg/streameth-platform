@@ -19,7 +19,6 @@ const WatchGrid = async ({
     })
   ).sessions
 
-  videos = videos.filter((video) => video.published)
 
   return (
     <div className="w-full">

@@ -20,7 +20,7 @@ export default async function ArchivePage({
       return redirect('/404')
     }
 
-    return redirect(`/${organization.slug}/archive`)
+    return redirect(`/${organization.slug}/videos`)
   }
 
   if (searchParams.event) {

@@ -36,7 +36,7 @@ export default function Thumbnail({
         placeholder="blur"
         blurDataURL={fallbackImage}
         loading="lazy"
-        className="rounded"
+        className="rounded-xl"
         alt="Session image"
         quality={80}
         src={error ? fallbackImage : streamethThumbnail}
