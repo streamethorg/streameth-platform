@@ -95,7 +95,7 @@ const ShareButton = ({
 }) => {
   return (
     <Credenza>
-      <CredenzaTrigger className="w-full">
+      <CredenzaTrigger>
         <Button variant={variant} className={className}>
           <Share2 size={24} className="p-1" />
           {title}
