@@ -21,7 +21,7 @@ const CreateClipButton = ({
 }: {
   playbackId: string
   selectedRecording: string
-  stageId: string
+  stageId?: string
   organizationId: string
   session?: any
 }) => {

@@ -1,7 +1,4 @@
-import {
-  IStageModel,
-  IStage,
-} from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 import { IExtendedStage } from '../types'
 import { fetchEvents } from './eventService'
@@ -30,7 +27,7 @@ export async function fetchStages({
   organizationId,
 }: {
   organizationId: string
-}): Promise<IStageModel[]> {
+}): Promise<IExtendedStage[]> {
   try {
     console.log(organizationId)
     const stages = await fetch(
@@ -55,7 +52,7 @@ export async function deleteStage({
   stageId: string
   organizationId: string
   authToken: string
-}): Promise<IStageModel> {
+}): Promise<IExtendedStage> {
   try {
     const response = await fetch(`${apiUrl()}/stages/${stageId}`, {
       method: 'DELETE',
@@ -92,6 +89,7 @@ export async function createStage({
   })
 
   if (!response.ok) {
+    console.log((await response.json()))
     throw 'Error creating stage'
   }
   return (await response.json()).data
@@ -101,7 +99,7 @@ export async function fetchEventStages({
   eventId,
 }: {
   eventId?: string
-}): Promise<IStageModel[]> {
+}): Promise<IExtendedStage[]> {
   try {
     const response = await fetch(
       `${apiUrl()}/stages/event/${eventId}`,
@@ -213,7 +211,7 @@ export async function deleteMultistream({
   streamId: string
   targetId: string
   authToken: string
-}): Promise<IStageModel> {
+}): Promise<IExtendedStage> {
   try {
     const response = await fetch(`${apiUrl()}/streams/multistream`, {
       method: 'DELETE',

@@ -117,6 +117,8 @@ export const organizationSchema = z.object({
   banner: z.string().optional(),
   bio: z.string().optional(),
   email: z.string().email(),
+  description: z.string().optional(),
+  // url: z.string().optional(),
 })
 
 export const supportSchema = z.object({
@@ -130,6 +132,14 @@ export const nftSchema = z.object({
   description: z
     .string()
     .min(1, 'Description is required')
-    .max(200, 'Description is too long'),
+    .max(300, 'Description is too long'),
   thumbnail: z.string().optional(),
+  symbol: z.string(),
+  mintFee: z.string(),
+  startDate: z.date(),
+  startTime: z.string(),
+  endDate: z.date(),
+  endTime: z.string(),
+  maxSupply: z.string(),
+  limitedSupply: z.string(),
 })

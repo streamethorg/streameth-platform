@@ -74,6 +74,8 @@ export default async function Watch({
               speakers={video.speakers}
               date={video.createdAt as string}
               playbackId={video.playbackId}
+              video={video}
+              organizationSlug={params.organization}
             />
           </div>
         </div>

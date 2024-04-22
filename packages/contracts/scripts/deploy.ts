@@ -2,13 +2,13 @@ import { ethers } from "hardhat";
 
 async function main() {
   // Deploy Implementation contract
-  const ImplContract = await ethers.getContractFactory("EventNFT");
+  const ImplContract = await ethers.getContractFactory("VideoNFT");
   const deployImplContract = await ImplContract.deploy();
   await deployImplContract.waitForDeployment();
   console.log("DeployedImplContractAt:", await deployImplContract.getAddress());
 
   // Deploy factory contract
-  const factoryContract = await ethers.getContractFactory("EventNFTFactory");
+  const factoryContract = await ethers.getContractFactory("VideoNFTFactory");
   const deployFactoryContract = await factoryContract.deploy(
     await deployImplContract.getAddress()
   );

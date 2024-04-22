@@ -8,7 +8,11 @@ import {
 import React, { Suspense } from 'react'
 import CreateLivestreamModal from './components/CreateLivestreamModal'
 import { fetchOrganization } from '@/lib/services/organizationService'
-import { LivestreamPageParams, eSort } from '@/lib/types'
+import {
+  IExtendedStage,
+  LivestreamPageParams,
+  eSort,
+} from '@/lib/types'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import LivestreamTable from './components/LivestreamTable'
 import { sortArray } from '@/lib/utils/utils'
@@ -77,7 +81,7 @@ const Livestreams = async ({
       {stages.length > 0 ? (
         <LivestreamTable
           organizationSlug={params?.organization}
-          streams={stages}
+          streams={stages as IExtendedStage[]}
         />
       ) : (
         <div>

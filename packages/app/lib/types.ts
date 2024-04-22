@@ -68,6 +68,7 @@ export interface OrganizationPageProps {
     event?: string
     searchQuery?: string
     page?: string
+    collectionId?: string
     stage?: string
   }
 }
@@ -137,12 +138,16 @@ export interface IExtendedOrganization
   extends Omit<IOrganization, '_id'> {
   _id: string
 }
-export interface IExtendedSession extends Omit<ISession, '_id'> {
+export interface IExtendedSession
+  extends Omit<ISession, '_id' | 'nftCollections'> {
   _id: string
+  nftCollections?: string[]
   createdAt?: string
 }
-export interface IExtendedStage extends Omit<IStage, '_id'> {
+export interface IExtendedStage
+  extends Omit<IStage, '_id' | 'nftCollections'> {
   _id?: string
+  nftCollections?: string[]
   createdAt?: string
   updatedAt?: string
   __v?: string
@@ -163,6 +168,7 @@ export interface IExtendedState extends Omit<IState, '_id'> {
 export interface IExtendedNftCollections
   extends Omit<INftCollection, '_id'> {
   _id: string
+  createdAt: string
 }
 
 export interface EmbedPageParams {

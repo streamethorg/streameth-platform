@@ -29,13 +29,13 @@ const UpcomingStreams = async ({
       <h1 className="text-xl font-bold">Upcoming Streams</h1>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {livestreams.map((livestream) => (
-          <React.Fragment key={livestream._id.toString()}>
+          <React.Fragment key={livestream?._id?.toString()}>
             <div>
               <LivestreamCard
                 name={livestream.name}
                 date={livestream.streamDate as string}
                 thumbnail={''}
-                link={`/${organizationSlug}/livestream?stage=${livestream._id.toString()}`}
+                link={`/${organizationSlug}/livestream?stage=${livestream?._id?.toString()}`}
               />
             </div>
           </React.Fragment>

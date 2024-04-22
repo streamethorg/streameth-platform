@@ -61,9 +61,13 @@ const NFT = async ({
         </div>
 
         {nftCollections.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {nftCollections.map((nft) => (
-              <NFTCollectionCard key={nft._id} nft={nft} />
+              <NFTCollectionCard
+                organization={params.organization}
+                key={nft._id}
+                nft={nft}
+              />
             ))}
           </div>
         ) : (
@@ -91,3 +95,30 @@ const NFT = async ({
 }
 
 export default NFT
+const obj = {
+  name: 'ETH Safari 2023',
+  description: 'Some dec',
+  thumbnail:
+    'https://streameth-develop.ams3.digitaloceanspaces.com/nftcollections/2.a1f5695f030fa16c13aa.png',
+  type: 'multiple',
+  organizationId: '65a90bf17932ebe436ba9345',
+  videos: [
+    [
+      {
+        type: 'video',
+        stageId: '',
+        sessionId: '65b8f60ba5b2d09b88ec0c74',
+      },
+      {
+        type: 'video',
+        stageId: '',
+        sessionId: '65b8f60ba5b2d09b88ec0c7a',
+      },
+      {
+        type: 'video',
+        stageId: '',
+        sessionId: '65b8f60ba5b2d09b88ec0c80',
+      },
+    ],
+  ],
+}

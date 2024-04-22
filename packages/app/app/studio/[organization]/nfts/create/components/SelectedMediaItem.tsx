@@ -4,6 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
@@ -24,10 +25,11 @@ const SelectedMediaItem = ({
         onClick={() => handleRemoveSelected(video)}>
         <XCircle className="fill-muted-foreground text-white w-7 h-7" />
       </div>
-      <Thumbnail
-        imageUrl={video.coverImage}
-        fallBack={'/images/videoPlaceholder.png'}
-      />
+      {video.coverImage ? (
+        <Thumbnail imageUrl={video.coverImage} />
+      ) : (
+        <DefaultThumbnail />
+      )}
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
