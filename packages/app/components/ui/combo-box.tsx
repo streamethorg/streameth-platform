@@ -34,6 +34,7 @@ const renderLogo = (logo?: string) => (
 )
 
 export default function Combobox({
+  placeholder = 'Select item',
   items = [],
   value,
   setValue,
@@ -42,6 +43,7 @@ export default function Combobox({
   logo,
   variant = 'outline',
 }: {
+  placeholder?: string
   items?: Item[]
   value: string
   valueKey?: string
@@ -64,7 +66,7 @@ export default function Combobox({
           aria-expanded={open}
           className="w-full justify-between">
           {logo && renderLogo(orgLogo)}
-          {value ? value : 'Select item...'}
+          {value ? value : placeholder}
 
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

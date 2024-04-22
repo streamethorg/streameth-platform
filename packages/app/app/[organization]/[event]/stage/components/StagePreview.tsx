@@ -19,7 +19,7 @@ export default function StagePreview({
 
   return (
     <Card
-      className="w-full max-w-[350px] rounded-xl"
+      className="w-full max-w-[350px] rounded-xl shadow-none border"
       onClick={() =>
         handleTermChange([
           {
@@ -30,7 +30,7 @@ export default function StagePreview({
       }>
       <Thumbnail imageUrl={eventCover} />
       <CardHeader className="bg-transparent">
-        <p className="lowercase text-lg text-white font-normal">
+        <p className="lowercase text-lg font-normal">
           {stage.name}
         </p>
       </CardHeader>

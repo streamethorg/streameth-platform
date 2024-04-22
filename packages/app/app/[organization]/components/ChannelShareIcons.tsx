@@ -12,7 +12,7 @@ const ChannelShareIcons = ({
   organization: IExtendedOrganization
 }) => {
   return (
-    <div className="flex justify-start items-center space-x-4">
+    <div className="mt-auto flex justify-start items-center space-x-4">
       <Credenza>
         <CredenzaTrigger>
           <Share2

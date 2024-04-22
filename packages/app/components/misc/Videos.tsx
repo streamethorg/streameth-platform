@@ -1,4 +1,3 @@
-import VideoCard from '@/components/misc/VideoCard'
 import { IExtendedSession } from '@/lib/types'
 import VideoCardWithMenu from './VideoCard/VideoCardWithMenu'
 export default async function VideoGrid({

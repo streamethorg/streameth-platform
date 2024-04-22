@@ -4,6 +4,7 @@ import { fetchEventStages } from '@/lib/services/stageService'
 import { EventPageProps } from '@/lib/types'
 import { ResolvingMetadata, Metadata } from 'next'
 import EventHomeComponent from './components/EventHomeComponent'
+
 export async function generateStaticParams() {
   const allEvents = await fetchEvents({})
   const paths = allEvents.map((event) => ({
@@ -27,6 +28,7 @@ export default async function EventHome({
   const stages = await fetchEventStages({
     eventId: event.slug,
   })
+
 
   return (
     <EventHomeComponent

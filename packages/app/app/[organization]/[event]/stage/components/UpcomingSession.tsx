@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { CardContent, CardTitle } from '@/components/ui/card'
+import { CardTitle } from '@/components/ui/card'
 import ScheduleCard from '../../schedule/components/ScheduleCard'
 import { IExtendedEvent, IExtendedSession } from '@/lib/types'
 
