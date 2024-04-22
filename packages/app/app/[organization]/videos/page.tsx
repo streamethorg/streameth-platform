@@ -1,14 +1,10 @@
 import {
+  ChannelPageParams,
   IExtendedEvent,
   OrganizationPageProps,
-  SearchPageProps,
 } from '@/lib/types'
-import {
-  generalMetadata,
-  archiveMetadata,
-} from '@/lib/utils/metadata'
-import { Metadata } from 'next'
-import { fetchEvent, fetchEvents } from '@/lib/services/eventService'
+import { Metadata, ResolvingMetadata } from 'next'
+import { fetchEvents } from '@/lib/services/eventService'
 import { Suspense } from 'react'
 import ArchiveVideos from './components/ArchiveVideos'
 import ArchiveVideoSkeleton from '../livestream/components/ArchiveVideosSkeleton'
@@ -18,7 +14,6 @@ import { notFound } from 'next/navigation'
 import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
 import EventSelect from './components/eventSelect'
 import { fetchAllSessions } from '@/lib/data'
-import { Filter } from 'lucide-react'
 
 export default async function ArchivePage({
   params,
@@ -97,14 +92,35 @@ export default async function ArchivePage({
   )
 }
 
-export async function generateMetadata({
-  searchParams,
-}: SearchPageProps): Promise<Metadata> {
-  if (!searchParams.event) return generalMetadata
-  const event = await fetchEvent({
-    eventSlug: searchParams.event,
+export async function generateMetadata(
+  { params }: ChannelPageParams,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const organizationInfo = await fetchOrganization({
+    organizationSlug: params.organization,
   })
 
-  if (!event) return generalMetadata
-  return archiveMetadata({ event })
+  if (!organizationInfo) {
+    return {
+      title: 'Organization not found',
+      description: 'Organization not found',
+    }
+  }
+
+  const imageUrl = organizationInfo.logo
+  try {
+    return {
+      title: organizationInfo.name,
+      description: organizationInfo.description,
+      openGraph: {
+        images: [imageUrl],
+      },
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      title: organizationInfo.name,
+      description: organizationInfo.description,
+    }
+  }
 }
