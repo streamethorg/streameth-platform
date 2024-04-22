@@ -41,18 +41,17 @@ const SessionInfoBox = async ({
   })
   return (
     <div
-      className={`flex flex-col md:flex-row py-4 md:space-x-2  ${
+      className={`flex flex-col md:flex-row py-4 md:space-x-2 ${
         inverted ? 'text-white rounded-lg  text-card-foreground ' : ''
       }`}>
       <div className="flex flex-col justify-start w-full">
         <CardTitle className="flex flex-row justify-between items-start text-xl lg:text-2xl">
           <span>{name}</span>
         </CardTitle>
-        <InfoBoxDescription description={description} />
-        {speakers &&
-          speakers.map((speaker) => (
-            <SpeakerIcon key={speaker._id} speaker={speaker} />
-          ))}
+        <InfoBoxDescription
+          speakers={speakers}
+          description={description}
+        />
         <p className="flex items-center space-x-2 text-sm">
           <span>
             {formatDate(new Date(date), 'ddd. MMMM D, YYYY')}
@@ -65,14 +64,20 @@ const SessionInfoBox = async ({
           )}
         </p>
       </div>
-      <div className="flex justify-between items-center mt-2 mb-auto md:justify-end md:space-x-2">
-        {video?.nftCollections?.[0] && (
-          <CollectVideButton
-            video={video}
-            nftCollection={nftCollection}
-          />
+      <div className="flex justify-between items-center mt-2 mb-auto space-x-2 md:justify-end md:mt-0">
+        {video?.nftCollections?.[0] ? (
+          <>
+            <div className="w-3/4">
+              <CollectVideButton
+                video={video}
+                nftCollection={nftCollection}
+              />
+            </div>
+            <ShareButton shareFor="video" />
+          </>
+        ) : (
+          <ShareButton className="w-full" shareFor="video" />
         )}
-        {/* <ShareButton shareFor="video" /> */}
         {/* <PopoverActions
           organizationSlug={organizationSlug}
           session={video}
