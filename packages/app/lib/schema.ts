@@ -117,6 +117,8 @@ export const organizationSchema = z.object({
   banner: z.string().optional(),
   bio: z.string().optional(),
   email: z.string().email(),
+  description: z.string().optional(),
+  // url: z.string().optional(),
 })
 
 export const supportSchema = z.object({

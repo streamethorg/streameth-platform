@@ -24,7 +24,6 @@ export const createState = async ({
       body: JSON.stringify(state),
     })
     if (!response.ok) {
-      console.log(`${apiUrl()}/states`)
       console.log('error in createState', await response.json())
       throw 'Error updating state'
     }

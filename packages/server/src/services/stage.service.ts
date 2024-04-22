@@ -43,8 +43,12 @@ export default class StageService {
     return findStage;
   }
 
-  async getAll(): Promise<Array<IStage>> {
-    return await this.controller.store.findAll({}, this.path);
+  async getAll(d: { published: boolean }): Promise<Array<IStage>> {
+    let filter = {};
+    if (d.published != undefined) {
+      filter = { ...filter, published: d.published };
+    }
+    return await this.controller.store.findAll(filter, this.path);
   }
 
   async update(stageId: string, stage: IStage): Promise<IStage> {

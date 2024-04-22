@@ -16,30 +16,26 @@ import { Button } from '@/components/ui/button'
 import { IExtendedEvent, IExtendedSession } from '@/lib/types'
 
 const ScheduleCardModal = ({
+  organizationSlug,
   event,
   session,
 }: {
+  organizationSlug: string
   event: IExtendedEvent
   session: IExtendedSession
 }) => {
   const [showGoToStage, setShowGoToStage] = useState(false)
   const router = useRouter()
-  const pathname = usePathname()
 
-  const paramsOrgId = pathname.split('/')[1]
   useEffect(() => {
     const url = window.location.href
     setShowGoToStage(!url.includes('/stage'))
   }, [])
 
   const handleGoToStage = () => {
-    const watchUrl = `/watch?event=${event.slug}&session=${session._id}`
-    const stageUrl = session.assetId
-      ? watchUrl
-      : `/${paramsOrgId}/${event.slug}/stage/${session.stageId}`
-    !pathname.includes('schedule')
-      ? router.push(stageUrl)
-      : window.open(stageUrl, '_blank', 'noreferrer')
+    router.push(
+      `/${event.organizationId}/watch?session=${session._id}`
+    )
   }
 
   return (

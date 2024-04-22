@@ -69,7 +69,7 @@ const ScheduleCard = ({
           </CardFooter>
         </Card>
       </CredenzaTrigger>
-      <ScheduleCardModal event={event} session={session} />
+      {/* <ScheduleCardModal event={event} session={session} /> */}
     </Credenza>
   )
 }

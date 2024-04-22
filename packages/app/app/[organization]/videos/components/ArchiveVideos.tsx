@@ -1,6 +1,7 @@
 import { fetchAllSessions } from '@/lib/data'
 import Videos from '@/components/misc/Videos'
 import { FileQuestion } from 'lucide-react'
+import Pagination from './pagination'
 
 const ArchiveVideos = async ({
   organizationSlug,
@@ -34,10 +35,13 @@ const ArchiveVideos = async ({
   }
 
   return (
-    <Videos
-      OrganizationSlug={organizationSlug}
-      videos={videos.sessions}
-    />
+    <>
+      <Videos
+        OrganizationSlug={organizationSlug}
+        videos={videos.sessions}
+      />
+      <Pagination {...videos.pagination} />
+    </>
   )
 }
 

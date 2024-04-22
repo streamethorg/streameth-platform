@@ -19,14 +19,16 @@ const WatchGrid = async ({
     })
   ).sessions
 
-  videos = videos.filter((video) => video.published)
-
   return (
     <div className="w-full">
       <div className="flex justify-between items-center pb-4">
         <h1 className="text-xl font-bold">Watch More</h1>
         <Link href={`/${organizationSlug}/videos`}>
-          <h3 className="text-sm hover:underline">See more videos</h3>
+          {videos.length !== 0 && (
+            <h3 className="text-sm hover:underline">
+              See more videos
+            </h3>
+          )}
         </Link>
       </div>
       <Videos
@@ -35,9 +37,9 @@ const WatchGrid = async ({
         maxVideos={gridLength}
       />
       {videos.length === 0 && (
-        <div className="flex flex-col justify-center items-center space-y-2">
-          <Video size={80} />
-          <p>No videos available</p>
+        <div className="space-x-4 flex flex-row justify-center items-center bg-secondary rounded-xl p-4">
+          <Video size={20} />
+          <p>No videos uploaded</p>
         </div>
       )}
     </div>

@@ -13,6 +13,7 @@ const EventSelect = ({ events }: { events: IExtendedEvent[] }) => {
 
   return (
     <Combobox
+      placeholder="Select an event"
       value={events.find((e) => e._id === event)?.name || ''}
       setValue={(value) => {
         handleTermChange([

@@ -1,6 +1,7 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IOrganization } from '@interfaces/organization.interface';
+import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
 
@@ -66,11 +67,24 @@ export default class OrganizationService {
     return await this.controller.store.delete(organizationId);
   }
 
-  async updateOrgMembers(organizationId: string, walletAddress: string) {
+  async getOrgMembers(organizationId: string): Promise<Array<IUser>> {
+    const users = await User.find({ organizations: organizationId });
+    return users;
+  }
+
+  async addOrgMember(organizationId: string, walletAddress: string) {
     await this.get(organizationId);
     await User.findOneAndUpdate(
       { walletAddress: walletAddress },
       { $addToSet: { organizations: organizationId } },
+    );
+  }
+
+  async deleteOrgMember(organizationId: string, walletAddress: string) {
+    await this.get(organizationId);
+    await User.findOneAndUpdate(
+      { walletAddress: walletAddress },
+      { $pull: { organizations: organizationId } },
     );
   }
 }

@@ -1,6 +1,9 @@
 import { notFound } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
-import { fetchOrganization } from '@/lib/services/organizationService'
+import {
+  fetchOrganization,
+  fetchOrganizations,
+} from '@/lib/services/organizationService'
 import { ChannelPageParams } from '@/lib/types'
 import ChannelShareIcons from './components/ChannelShareIcons'
 import Image from 'next/image'
@@ -15,6 +18,14 @@ import UpcomingStreams, {
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
+
+export async function generateStaticParams() {
+  const organizations = await fetchOrganizations()
+  const paths = organizations.map((organization) => ({
+    organization: organization.slug,
+  }))
+  return paths
+}
 
 const OrganizationHome = async ({
   params,
@@ -53,7 +64,7 @@ const OrganizationHome = async ({
     : nextStreamNotToday[0]
 
   return (
-    <div className="m-auto w-full max-w-7xl">
+    <div className="m-auto w-full max-w-7xl space-y-4 md:p-4">
       <div className="relative w-full">
         {playerActive ? (
           <>
@@ -86,14 +97,14 @@ const OrganizationHome = async ({
                 <StreamethLogoWhite />
               </div>
             )}
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
-            <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
+            <div className=" absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="p-4 absolute right-0 bottom-0 left-0 space-y-2 w-full text-white ">
               <div className="flex flex-row justify-between w-full">
                 <div>
                   <h2 className="text-2xl font-bold">
                     {organization.name}
                   </h2>
-                  <p className="text-lg">
+                  <p className="hidden md:block text-lg mr-12">
                     {organization.description}
                   </p>
                 </div>
@@ -103,7 +114,7 @@ const OrganizationHome = async ({
           </AspectRatio>
         )}
       </div>
-      <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none">
+      <Card className="space-y-6 w-full bg-white border-none shadow-none p-4 md:p-0">
         <Suspense fallback={<UpcomingStreamsLoading />}>
           <UpcomingStreams
             organizationId={organization._id}

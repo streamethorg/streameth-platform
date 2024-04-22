@@ -68,12 +68,16 @@ export default class SessionService {
     onlyVideos: boolean;
     size: number;
     page: number;
+    published: boolean;
   }): Promise<{
     sessions: Array<ISession>;
     totalDocuments: number;
     pageable: { page: number; size: number };
   }> {
     let filter = {};
+    if (d.published != undefined) {
+      filter = { ...filter, published: d.published };
+    }
     if (d.event != undefined) {
       let query = this.queryByIdOrSlug(d.event);
       let event = await Event.findOne(query);
@@ -126,7 +130,7 @@ export default class SessionService {
       name: session.name,
       description: session.description,
       external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
-      animation_url: '',
+      animation_url: `${config.baseUrl}/embed?playbackId=${session.playbackId}&vod=true&playerName=${session.name}`,
       image: session.coverImage,
       attributes: [
         {

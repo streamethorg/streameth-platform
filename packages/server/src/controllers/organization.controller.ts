@@ -2,6 +2,7 @@ import { CreateOrganizationDto } from '@dtos/organization/create-organization.dt
 import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { UpdateOrganizationDto } from '@dtos/organization/update-organization.dto';
 import { IOrganization } from '@interfaces/organization.interface';
+import { IUser } from '@interfaces/user.interface';
 import OrganizationService from '@services/organization.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
@@ -51,16 +52,16 @@ export class OrganizationController extends Controller {
   }
 
   /**
-   * @summary Add members to organization
+   * @summary Add member to organization
    */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
-  @Put('/members/{organizationId}')
+  @Put('/member/{organizationId}')
   async updateOrgMembers(
     @Path() organizationId: string,
     @Body() body: Pick<CreateOrganizationDto, 'walletAddress'>,
   ): Promise<IStandardResponse<void>> {
-    const org = await this.organizationService.updateOrgMembers(
+    const org = await this.organizationService.addOrgMember(
       organizationId,
       body.walletAddress,
     );
@@ -92,6 +93,19 @@ export class OrganizationController extends Controller {
   }
 
   /**
+   * @summary Get all organization members
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Get('/member/{organizationId}')
+  async getAllOrgMembers(
+    @Path() organizationId: string,
+  ): Promise<IStandardResponse<Array<IUser>>> {
+    const users = await this.organizationService.getOrgMembers(organizationId);
+    return SendApiResponse('organization members fetched', users);
+  }
+
+  /**
    * @summary Delete organization
    */
   @Security('jwt', ['org'])
@@ -103,5 +117,22 @@ export class OrganizationController extends Controller {
   ): Promise<IStandardResponse<void>> {
     await this.organizationService.deleteOne(organizationId);
     return SendApiResponse('deleted');
+  }
+
+  /**
+   * @summary Delete organization member
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Delete('/member/{organizationId}')
+  async deleteOrgMember(
+    @Path() organizationId: string,
+    @Body() body: Pick<CreateOrganizationDto, 'walletAddress'>,
+  ): Promise<IStandardResponse<void>> {
+    const org = await this.organizationService.deleteOrgMember(
+      organizationId,
+      body.walletAddress,
+    );
+    return SendApiResponse('memeber deleted', org);
   }
 }
