@@ -48,7 +48,7 @@ export interface ISession {
   published?: boolean;
   type: SessionType;
   createdAt?: string;
-  nftCollections?: Types.ObjectId[];
+  nftCollections?: Types.ObjectId | string[];
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
