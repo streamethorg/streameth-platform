@@ -1,12 +1,11 @@
 'use client'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import EventAccordion from './eventAccordion'
 import StagesAccordion from './stagesAccordion'
 import { cn } from '@/lib/utils/utils'
 import { Button } from '@/components/ui/button'
 import CreateStageForm from '../stageSettings/createStageForm'
 import Link from 'next/link'
-import { IExtendedEvent } from '@/lib/types'
+import { IExtendedEvent, IExtendedStage } from '@/lib/types'
 import { updateEventAction } from '@/lib/actions/events'
 import { toast } from 'sonner'
 import { ArrowLeft } from 'lucide-react'
@@ -17,7 +16,7 @@ const Navigation = ({
   organizationSlug,
 }: {
   event: IExtendedEvent
-  stages: IStageModel[]
+  stages: IExtendedStage[]
   organizationId: string
   organizationSlug: string
 }) => {

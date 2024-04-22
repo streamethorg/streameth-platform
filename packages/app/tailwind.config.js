@@ -29,6 +29,7 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         event: 'var(--colors-accent)',
+        blue: '#066FF9',
         neutrals: {
           100: 'hsl(var(--neutrals-100))',
           200: 'hsl(var(--neutrals-200))',

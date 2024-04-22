@@ -67,17 +67,18 @@ const AddMediaTabItem = ({
               }}
             />
           </div>
-          <div className="min-w-[200px] w-[200px]">
+          <div className="min-w-[200px] w-[112px]">
             <Image
-              className="rounded-xl w-full"
               src={
                 video.coverImage
                   ? video.coverImage
                   : '/images/videoPlaceholder.png'
               }
               alt={video.name}
-              width={200}
-              height={112}
+              width="0"
+              height="0"
+              sizes="100vw"
+              className="w-full rounded-xl h-auto"
             />
           </div>
           <div>

@@ -12,7 +12,7 @@ error MintFeeNotPaid(string message);
 error NonExistentTokenURI(string message);
 error WithdrawTransfer(string message);
 
-contract EventNFT is
+contract VideoNFT is
     Initializable,
     OwnableUpgradeable,
     ERC721Upgradeable,
@@ -23,9 +23,8 @@ contract EventNFT is
     uint256 public constant baseFee = 1e10;
     uint256 public totalSupply;
 
-    string public eventName;
-    string public baseTokenURI;
-    // string public description;
+    string public videoNFTName;
+    string public baseTokenUri;
     bool public limitedSupply;
     uint256 public maxSupply;
 
@@ -33,43 +32,36 @@ contract EventNFT is
     uint256 public mintStartTime;
     uint256 public mintEndTime;
 
-    address[] public EventAddresses;
-    address public streamethGnosisWallet;
+    address public constant streamethGnosisWallet =
+        0x9268d03EfF4A9A595ef619764AFCB9976c0375df;
 
     mapping(address => mapping(string => bool)) private _sessionMinted;
 
-/// ======================== Events ========================
-    event sessionMinted(address receipeint, string sessionId);
+    /// ======================== Events ========================
+    event sessionMinted(address receipeint, uint256 mintPrice);
 
     function initialize(
-        string memory _baseTokenURI,
+        string memory _baseTokenUri,
         string memory _name,
         string memory _symbol,
         bool _limitedSupply,
         uint256 _maxSupply,
         uint256 _mintFee,
         uint256 _mintStartTime,
-        uint256 _mintEndTime,
+        uint256 _mintEndTime
     ) public initializer {
         __ERC721_init(_name, _symbol);
         __ERC721URIStorage_init();
         __Ownable_init(_msgSender());
-        
-        baseTokenURI = _baseTokenURI;
-        eventName = _name;
+
+        baseTokenUri = _baseTokenUri;
+        videoNFTName = _name;
         limitedSupply = _limitedSupply;
         maxSupply = _maxSupply;
         mintFee = _mintFee;
         mintStartTime = _mintStartTime;
         mintEndTime = _mintEndTime;
     }
-
-    // @dev: This function is used to add new addresses to the list of allowed people to stream
-    // @param: _newEmitter: address of the new emitter
-    // @return: void
-    // function addEmitterAddress(address _newEmitter) public {
-    //     EventAddresses.push(_newEmitter);
-    // }
 
     function tokenURI(
         uint256 tokenId
@@ -82,18 +74,14 @@ contract EventNFT is
         return super.tokenURI(tokenId);
     }
 
-    function setTokenURI(string memory _baseTokenURI) public onlyOwner {
-        baseTokenURI = _baseTokenURI;
+    function setTokenURI(string memory _baseTokenUri) public onlyOwner {
+        baseTokenUri = _baseTokenUri;
     }
 
     function setName(string memory _name) public onlyOwner {
-        eventName = _name;
+        videoNFTName = _name;
     }
 
-    // function setDescription(string memory _description) public  {
-    //       require(hasRole(DEFAULT_ADMIN_ROLE, _msgSender()));
-    //     description = _description;
-    // }
     // @dev: This function is used to update the mint fee, can only be called by onlyOwner
     function setMintFee(uint256 _mintFee) public onlyOwner {
         mintFee = _mintFee;
@@ -109,35 +97,34 @@ contract EventNFT is
     // @dev: This function is used to mint a new token paying the mint price or free if the caller is the owner
     // @param: recipient: address of the recipient
     // @return: newTokenId: id of the new token
-    function sessionMint(string memory sessionId) public payable {
-        require(
-            !_sessionMinted[msg.sender][sessionId],
-            "User has already minted this session"
-        );
-        require(
-            mintStartTime < block.timestamp && block.timestamp < mintEndTime,
-            "Not mint period"
-        );
-        string memory uri = string.concat(baseTokenURI, sessionId, ".json");
+    function sessionMint(uint256[] calldata _id) public payable {
+        uint256 amount = _id.length;
+        uint256 mintPrice = (mintFee + baseFee) * amount;
+        require(msg.value == mintPrice, "Incorrect mint fee");
+        require(msg.sender == tx.origin, "Contract call");
+        // require(
+        //     mintStartTime < block.timestamp && block.timestamp < mintEndTime,
+        //     "Not mint period"
+        // );
+
         if (limitedSupply) {
             require(totalSupply < maxSupply, "No more tokens available");
         }
 
-        if (msg.sender == owner()) {
-            _sessionMinted[msg.sender][sessionId] = true;
-            mintAction(uri);
-        }
+        // Transfer baseFee to the streamethGnosisWallet
+        payable(streamethGnosisWallet).transfer(baseFee * amount);
 
-        if (msg.value < mintFee + baseFee) {
-            revert MintFeeNotPaid("Mint fee not paid");
-        } else {
-            _sessionMinted[msg.sender][sessionId] = true;
-
-            // Transfer baseFee to the streamethGnosisWallet
-            payable(streamethGnosisWallet).transfer(baseFee);
+        uint256[] memory id = _id;
+        uint8 _index = 0;
+        for (uint256 i = 1; i <= amount; i++) {
+            string memory uri = string.concat(
+                baseTokenUri,
+                Strings.toString(id[_index])
+            );
             mintAction(uri);
+            _index++;
         }
-        emit sessionMinted(msg.sender, sessionId);
+        emit sessionMinted(msg.sender, mintPrice);
     }
 
     // @dev: This function is used to withdraw the payments from the contract
@@ -165,20 +152,11 @@ contract EventNFT is
     function getMetadata()
         public
         view
-        returns (
-            string memory,
-            string memory,
-            // string memory,
-            bool,
-            uint256,
-            uint256,
-            uint256
-        )
+        returns (string memory, string memory, bool, uint256, uint256, uint256)
     {
         return (
-            baseTokenURI,
-            eventName,
-            // description,
+            baseTokenUri,
+            videoNFTName,
             limitedSupply,
             totalSupply,
             maxSupply,

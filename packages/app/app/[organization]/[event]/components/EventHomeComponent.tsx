@@ -2,7 +2,6 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 
 import StagePreview from '../stage/components/StagePreview'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import SpeakerComponent, {
   SpeakerComponentSkeleton,
 } from '../speakers/components/SpeakerComponent'
@@ -13,7 +12,7 @@ import Image from 'next/image'
 import { formatDate, isSameDate } from '@/lib/utils/time'
 import { Suspense } from 'react'
 import banner from '@/public/streameth_twitter_banner.jpeg'
-import { IExtendedEvent } from '@/lib/types'
+import { IExtendedEvent, IExtendedStage } from '@/lib/types'
 import SignUp from '@/components/plugins/SignUp'
 import MarkdownDisplay from '@/components/misc/MarkdownDisplay'
 import {
@@ -31,7 +30,7 @@ export default function EventHomeComponent({
   searchParams,
 }: {
   event: IExtendedEvent
-  stages: IStageModel[]
+  stages: IExtendedStage[]
 
   params: {
     organization: string

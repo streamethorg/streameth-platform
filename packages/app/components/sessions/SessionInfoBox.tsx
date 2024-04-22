@@ -2,6 +2,11 @@
 
 import { CardTitle } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
+import { IExtendedSession } from '@/lib/types'
+import PopoverActions from '../misc/PopoverActions'
+import ShareButton from '../misc/interact/ShareButton'
+import CollectVideButton from './CollectVideButton'
+import { fetchNFTCollection } from '@/lib/services/nftCollectionService'
 import { formatDate } from '@/lib/utils/time'
 import ViewCounts from '@/app/[organization]/components/ViewCounts'
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder'
@@ -16,7 +21,9 @@ const SessionInfoBox = async ({
   playbackId,
   inverted,
   vod = false,
+  organizationSlug,
   viewCount = false,
+  video,
 }: {
   name: string
   description: string
@@ -25,8 +32,13 @@ const SessionInfoBox = async ({
   playbackId?: string
   inverted?: boolean
   vod?: boolean
+  organizationSlug?: string
   viewCount?: boolean
+  video?: IExtendedSession
 }) => {
+  const nftCollection = await fetchNFTCollection({
+    collectionId: video?.nftCollections?.[0],
+  })
   return (
     <div
       className={`flex flex-col md:flex-row py-4 md:space-x-2  ${
@@ -53,16 +65,27 @@ const SessionInfoBox = async ({
           )}
         </p>
       </div>
-      {!playbackId && (
-        <div className="flex justify-between items-center mt-2 mb-auto md:justify-end md:space-x-2">
+      <div className="flex justify-between items-center mt-2 mb-auto md:justify-end md:space-x-2">
+        {video?.nftCollections?.[0] && (
+          <CollectVideButton
+            video={video}
+            nftCollection={nftCollection}
+          />
+        )}
+        {/* <ShareButton shareFor="video" /> */}
+        {/* <PopoverActions
+          organizationSlug={organizationSlug}
+          session={video}
+        /> */}
+        {!playbackId && (
           <CalendarReminder
             eventName={name}
             description={description}
             start={date}
             end={date}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

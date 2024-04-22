@@ -103,3 +103,8 @@ export const getSessionDays = (sessions: IExtendedSession[]) => {
 
   return uniqueTimestampsArray
 }
+
+export const getDateWithTime = (date: Date, time: string) => {
+  const dateInput = formatDate(new Date(date), 'YYYY-MM-DD')
+  return new Date(`${dateInput}T${time}`)
+}

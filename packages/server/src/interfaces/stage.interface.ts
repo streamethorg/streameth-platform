@@ -34,7 +34,7 @@ export class IStage {
   streamDate?: Date | string;
   mintable?: boolean;
   createdAt?: string;
-  nftCollections?: Types.ObjectId[];
+  nftCollections?: Types.ObjectId[] | string[];
 }
 
 export interface IStageModel extends Omit<IStage, '_id'>, Document {}
