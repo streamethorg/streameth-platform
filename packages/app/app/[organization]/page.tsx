@@ -1,6 +1,9 @@
 import { notFound } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
-import { fetchOrganization } from '@/lib/services/organizationService'
+import {
+  fetchOrganization,
+  fetchOrganizations,
+} from '@/lib/services/organizationService'
 import { ChannelPageParams } from '@/lib/types'
 import ChannelShareIcons from './components/ChannelShareIcons'
 import Image from 'next/image'
@@ -15,6 +18,15 @@ import UpcomingStreams, {
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
+
+export async function generateStaticParams() {
+  const organizations = await fetchOrganizations()
+  const paths = organizations.map((organization) => ({
+    organization: organization.slug,
+  }))
+  return paths
+}
+
 const OrganizationHome = async ({
   params,
   searchParams,
