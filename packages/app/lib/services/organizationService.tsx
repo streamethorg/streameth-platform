@@ -76,7 +76,6 @@ export async function createOrganization({
   }
 }
 
-
 export async function updateOrganization({
   organization,
   authToken,
@@ -87,18 +86,20 @@ export async function updateOrganization({
   if (!authToken) {
     throw 'No auth token'
   }
-  // const modifiedObject = (({ _id, description, ...rest }) => rest)(organization)
-  // modifiedObject['organizationId'] = organization._id
-  console.log(organization, `${apiUrl()}/organizations/${organization.organizationId}`)
+  const modifiedObject = (({ _id, ...rest }) => rest)(organization)
+
   try {
-    const response = await fetch(`${apiUrl()}/organizations/${organization.organizationId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(organization),
-    })
+    const response = await fetch(
+      `${apiUrl()}/organizations/${organization._id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(modifiedObject),
+      }
+    )
 
     if (response.ok) {
       return (await response.json()).data

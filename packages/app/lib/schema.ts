@@ -105,7 +105,7 @@ export const organizationSchema = z.object({
   bio: z.string().optional(),
   email: z.string().email(),
   description: z.string().optional(),
-  website: z.string().optional(),
+  // url: z.string().optional(),
 })
 
 export const supportSchema = z.object({

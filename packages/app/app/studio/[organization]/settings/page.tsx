@@ -25,10 +25,10 @@ const Settings = async ({
       title: 'Basic Info',
       path: `basicInfo`,
     },
-    {
-      title: 'Users',
-      path: `users`,
-    },
+    // {
+    //   title: 'Users',
+    //   path: `users`,
+    // },
   ]
 
   return (

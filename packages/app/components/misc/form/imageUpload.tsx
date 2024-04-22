@@ -56,7 +56,6 @@ export default function ImageUpload({
       data.set('file', file)
 
       data.set('path', path)
-      console.log(data.getAll('path'), data.getAll('file'))
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: data,
@@ -65,7 +64,6 @@ export default function ImageUpload({
       if (!res.ok) {
         throw new Error(await res.text())
       }
-      console.log(getImageUrl('/' + path + '/' + file.name))
       onChange(getImageUrl('/' + path + '/' + file.name))
       toast.success('Image uploaded successfully')
       setIsUploading(false)

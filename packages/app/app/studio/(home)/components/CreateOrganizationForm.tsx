@@ -36,7 +36,6 @@ export default function CreateOrganizationForm({
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const { address } = useAccount()
-  console.log(organization)
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
     defaultValues: {
@@ -45,7 +44,7 @@ export default function CreateOrganizationForm({
       logo: organization?.logo || '',
       email: organization?.email || '',
       description: organization?.description || '',
-      website: organization?.url || '',
+      // url: organization?.url || '',
     },
   })
 
@@ -57,10 +56,9 @@ export default function CreateOrganizationForm({
     }
 
     if (organization) {
-      alert('update')
       updateOrganizationAction({
         organization: {
-          organizationId: organization._id,
+          _id: organization._id,
           ...values,
           walletAddress: address as string,
         },
@@ -181,9 +179,9 @@ export default function CreateOrganizationForm({
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
-          name="website"
+          name="url"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="">Company website</FormLabel>
@@ -193,7 +191,7 @@ export default function CreateOrganizationForm({
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <div className="flex flex-row justify-between">
           {!organization && (
