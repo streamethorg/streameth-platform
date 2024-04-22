@@ -33,7 +33,9 @@ const ScheduleCardModal = ({
   }, [])
 
   const handleGoToStage = () => {
-router.push(`/${event.organizationId}/watch?session=${session._id}`)
+    router.push(
+      `/${event.organizationId}/watch?session=${session._id}`
+    )
   }
 
   return (

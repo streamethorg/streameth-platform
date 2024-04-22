@@ -30,9 +30,7 @@ export default function StagePreview({
       }>
       <Thumbnail imageUrl={eventCover} />
       <CardHeader className="bg-transparent">
-        <p className="lowercase text-lg font-normal">
-          {stage.name}
-        </p>
+        <p className="lowercase text-lg font-normal">{stage.name}</p>
       </CardHeader>
     </Card>
   )

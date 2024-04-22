@@ -22,7 +22,7 @@ export default function SpeakerIcon({
 }) {
   if (onlyImage) {
     return (
-      <Avatar className="my-2 ">
+      <Avatar className="my-2">
         <AvatarImage
           src={
             speaker.photo
@@ -40,7 +40,7 @@ export default function SpeakerIcon({
     <Credenza>
       <SpeakerModal speaker={speaker} />
       <CredenzaTrigger>
-        <Badge className="bg-background z-50 text-primary border border-secondary">
+        <Badge className="z-50 border bg-background text-primary border-secondary">
           <Avatar className="my-1">
             <AvatarImage src={speaker?.photo} />
             <AvatarFallback className="">

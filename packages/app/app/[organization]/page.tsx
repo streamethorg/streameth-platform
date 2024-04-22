@@ -81,7 +81,7 @@ const OrganizationHome = async ({
         ) : (
           <AspectRatio
             ratio={3 / 1}
-            className="relative w-full md:rounded-xl">
+            className="relative mt-3 w-full md:rounded-xl">
             {organization.banner ? (
               <Image
                 src={organization.banner}

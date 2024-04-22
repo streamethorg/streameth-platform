@@ -89,7 +89,7 @@ export async function createStage({
   })
 
   if (!response.ok) {
-    console.log((await response.json()))
+    console.log(await response.json())
     throw 'Error creating stage'
   }
   return (await response.json()).data

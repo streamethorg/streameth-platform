@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { fetchEvent } from '@/lib/services/eventService'
 import { EventPageProps } from '@/lib/types'
 import { ResolvingMetadata, Metadata } from 'next'
-import {redirect } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { fetchOrganization } from '@/lib/services/organizationService'
 // export async function generateStaticParams() {
 //   const allEvents = await fetchEvents({})
@@ -30,17 +30,14 @@ export default async function EventHome({
     return notFound()
   } else {
     redirect(`/${organization.slug}`)
-    return "loading..."
+    return 'loading...'
   }
 
   // if (!event) return notFound()
 
-  
-
   // const stages = await fetchEventStages({
   //   eventId: event.slug,
   // })
-
 
   // return (
   //   <EventHomeComponent

@@ -1,10 +1,10 @@
-import { OrganizationPageProps, SearchPageProps } from '@/lib/types'
 import {
-  generalMetadata,
-  archiveMetadata,
-} from '@/lib/utils/metadata'
-import { Metadata } from 'next'
-import { fetchEvent, fetchEvents } from '@/lib/services/eventService'
+  ChannelPageParams,
+  IExtendedEvent,
+  OrganizationPageProps,
+} from '@/lib/types'
+import { Metadata, ResolvingMetadata } from 'next'
+import { fetchEvents } from '@/lib/services/eventService'
 import { Suspense } from 'react'
 import ArchiveVideos from './components/ArchiveVideos'
 import ArchiveVideoSkeleton from '../livestream/components/ArchiveVideosSkeleton'
@@ -13,6 +13,7 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
 import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
 import EventSelect from './components/eventSelect'
+import { fetchAllSessions } from '@/lib/data'
 
 export default async function ArchivePage({
   params,
@@ -34,6 +35,23 @@ export default async function ArchivePage({
     organizationId: organization?._id,
   })
 
+  const results = await Promise.all(
+    events.map(async (event) => {
+      const sessions = (
+        await fetchAllSessions({
+          event: event._id.toString(),
+          onlyVideos: true,
+        })
+      ).sessions
+
+      return sessions.length > 0 ? event : undefined
+    })
+  )
+
+  const eventsWithVideos = results.filter(
+    (event) => event !== undefined
+  )
+
   return (
     <div>
       <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
@@ -43,7 +61,6 @@ export default async function ArchivePage({
             alt="banner"
             quality={100}
             objectFit="cover"
-            className=""
             fill
             priority
           />
@@ -54,10 +71,12 @@ export default async function ArchivePage({
         )}
       </div>
       <div className="p-4 m-auto w-full max-w-7xl">
-        <div className="flex flex-row justify-between items-center mb-4 w-full">
-          <div className="px-2 w-full text-lg lg:p-0">All videos</div>
-          <div className="">
-            <EventSelect events={events} />
+        <div className="flex flex-row justify-between items-center mb-4 space-x-2 w-full">
+          <div className="w-full text-lg font-bold">All videos</div>
+          <div>
+            <EventSelect
+              events={eventsWithVideos as IExtendedEvent[]}
+            />
           </div>
         </div>
         <Suspense fallback={<ArchiveVideoSkeleton />}>
@@ -73,14 +92,35 @@ export default async function ArchivePage({
   )
 }
 
-export async function generateMetadata({
-  searchParams,
-}: SearchPageProps): Promise<Metadata> {
-  if (!searchParams.event) return generalMetadata
-  const event = await fetchEvent({
-    eventSlug: searchParams.event,
+export async function generateMetadata(
+  { params }: ChannelPageParams,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const organizationInfo = await fetchOrganization({
+    organizationSlug: params.organization,
   })
 
-  if (!event) return generalMetadata
-  return archiveMetadata({ event })
+  if (!organizationInfo) {
+    return {
+      title: 'Organization not found',
+      description: 'Organization not found',
+    }
+  }
+
+  const imageUrl = organizationInfo.logo
+  try {
+    return {
+      title: organizationInfo.name,
+      description: organizationInfo.description,
+      openGraph: {
+        images: [imageUrl],
+      },
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      title: organizationInfo.name,
+      description: organizationInfo.description,
+    }
+  }
 }

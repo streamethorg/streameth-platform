@@ -36,11 +36,11 @@ const ArchiveVideos = async ({
 
   return (
     <>
-    <Videos
-      OrganizationSlug={organizationSlug}
-      videos={videos.sessions}
-    />
-    <Pagination {...videos.pagination} />
+      <Videos
+        OrganizationSlug={organizationSlug}
+        videos={videos.sessions}
+      />
+      <Pagination {...videos.pagination} />
     </>
   )
 }

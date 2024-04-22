@@ -20,7 +20,6 @@ export async function POST(request: NextRequest) {
     file.type
   )
 
-
   return NextResponse.json({
     success: true,
   })

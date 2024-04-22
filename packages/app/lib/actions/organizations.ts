@@ -1,5 +1,8 @@
 'use server'
-import { createOrganization, updateOrganization } from '@/lib/services/organizationService'
+import {
+  createOrganization,
+  updateOrganization,
+} from '@/lib/services/organizationService'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'

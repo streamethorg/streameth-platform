@@ -36,7 +36,9 @@ const SpeakerCard = ({
         <Card className="shadow-none border">
           <CardHeader className="space-y-4 p-2 lg:p-2">
             <SpeakerPhoto speaker={speaker} size="lg" />
-            <CardTitle className="mx-auto text-lg mr-auto">{speaker.name}</CardTitle>
+            <CardTitle className="mx-auto text-lg mr-auto">
+              {speaker.name}
+            </CardTitle>
           </CardHeader>
           <CardDescription className=" overflow-clip">
             {speaker.company}
