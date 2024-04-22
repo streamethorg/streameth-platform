@@ -56,6 +56,8 @@ const CreateNFTForm = ({
   const [step, setStep] = useState(1)
   const [isPublishingCollection, setIsPublishingCollection] =
     useState(false)
+  const [isGeneratingMetadata, setIsGeneratingMetadata] =
+    useState(false)
   const [isPublished, setIsPublished] = useState(false)
   const [publishError, setPublishError] = useState('')
   const [isTransactionApproved, setIsTransactionApproved] =
@@ -105,8 +107,12 @@ const CreateNFTForm = ({
       },
     })
       .then((response) => {
-        setIsPublished(true)
-        toast.success('NFT Collection successfully created')
+        if (response) {
+          setIsPublished(true)
+          toast.success('NFT Collection successfully created')
+        } else {
+          toast.error('Error updating NFT Collection')
+        }
       })
       .catch(() => setPublishError('Error creating collection'))
   }
@@ -154,6 +160,7 @@ const CreateNFTForm = ({
   const createNFTCollection = async () => {
     setPublishError('')
     setIsPublishingCollection(true)
+    setIsGeneratingMetadata(true)
     if (!account.address || chain !== 84532) {
       switchChain({ chainId: 84532 })
       setPublishError(
@@ -183,7 +190,7 @@ const CreateNFTForm = ({
         })
         setFormResponseData(createNFTResponse)
         createEventCollection(createNFTResponse.ipfsPath)
-
+        setIsGeneratingMetadata(false)
         form.reset()
         setStep(1)
         setFormState({ selectedVideo: [] })
@@ -277,6 +284,7 @@ const CreateNFTForm = ({
         isSuccess={isSuccess}
         isTransactionApproved={isTransactionApproved}
         publishError={publishError}
+        isGeneratingMetadata={isGeneratingMetadata}
       />
     </div>
   )

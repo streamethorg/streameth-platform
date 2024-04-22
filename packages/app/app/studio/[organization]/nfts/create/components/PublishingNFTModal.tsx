@@ -22,6 +22,7 @@ const PublishingNFTModal = ({
   error,
   isTransactionApproved,
   publishError,
+  isGeneratingMetadata,
 }: {
   open: boolean
   onClose: React.Dispatch<React.SetStateAction<boolean>>
@@ -32,6 +33,7 @@ const PublishingNFTModal = ({
   isTransactionApproved: boolean
   error: BaseError | null
   publishError?: string
+  isGeneratingMetadata?: boolean
 }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -41,11 +43,24 @@ const PublishingNFTModal = ({
         </DialogTitle>
         {!isPublished && !error && !publishError && (
           <>
-            {' '}
             <DialogTitle className="text-lg font-semibold">
               Publishing your NFT
             </DialogTitle>
             <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-2">
+                <div className="bg-grey p-2 mr-2 rounded-full h-fit">
+                  {!isGeneratingMetadata ? (
+                    <CheckCircle2 className="text-white fill-success w-6 h-6" />
+                  ) : (
+                    <Loader2 className="w-6 h-6 text-success  rounded-full animate-spin" />
+                  )}
+                </div>
+                <div>
+                  <p className="font-medium">
+                    Generating collection metadata
+                  </p>
+                </div>
+              </div>
               <div className="flex items-center gap-2">
                 <div className="bg-grey p-2 mr-2 rounded-full h-fit">
                   {isTransactionApproved ? (

@@ -130,7 +130,7 @@ export default class SessionService {
       name: session.name,
       description: session.description,
       external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
-      animation_url: `${config.baseUrl}/embed?playbackId=${session.playbackId}&vod=true&playerName=${session.name}`,
+      animation_url: `<iframe src="https://streameth.org/embed/?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name} width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
       image: session.coverImage,
       attributes: [
         {

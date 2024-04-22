@@ -46,19 +46,12 @@ export const updateNFTCollection = async ({
         body: JSON.stringify(rest),
       }
     )
-    console.log(
-      JSON.stringify(collection),
-      'responssee',
-      await response.json()
-    )
+
     if (!response.ok) {
       throw 'Error updating collection'
     }
 
-    const responseData = await response.json()
-    const updatedCollections: IExtendedNftCollections =
-      responseData.data
-    return updatedCollections
+    return (await response.json()).data
   } catch (error) {
     console.error('Error updating collection:', error)
     throw error
