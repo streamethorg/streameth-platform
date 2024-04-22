@@ -43,7 +43,7 @@ const TableCells = ({
         start: item.start ?? Number(new Date()),
         end: item.end ?? Number(new Date()),
         speakers: item.speakers ?? [],
-        type: item.type,
+        type: item.type ?? 'video',
         published: !item.published,
       },
     })
@@ -57,7 +57,6 @@ const TableCells = ({
       .catch(() => {
         toast.error('Something went wrong...')
       })
-      .finally(() => location.reload())
   }
 
   if (!item.videoUrl) {
@@ -66,7 +65,7 @@ const TableCells = ({
 
   return (
     <>
-      <TableCell className="relative font-medium">
+      <TableCell className="relative font-medium max-w-[500px]">
         <div className="flex flex-row items-center space-x-4 w-full">
           <div className="min-w-[100px]">
             <AspectRatio ratio={16 / 9}>

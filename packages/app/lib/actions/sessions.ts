@@ -89,6 +89,7 @@ export const updateSessionAction = async ({
   if (!response) {
     throw new Error('Error updating session')
   }
+  revalidatePath(`/studio/${session.organizationId}`)
   return response
 }
 
