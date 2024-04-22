@@ -1,14 +1,14 @@
 'use client'
 import { Card, CardHeader } from '@/components/ui/card'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import useSearchParams from '@/lib/hooks/useSearchParams'
+import { IExtendedStage } from '@/lib/types'
 
 export default function StagePreview({
   stage,
   eventCover,
 }: {
-  stage: IStageModel
+  stage: IExtendedStage
   organization: string
   event: string
   eventCover: string | undefined
@@ -24,7 +24,7 @@ export default function StagePreview({
         handleTermChange([
           {
             key: 'livestream',
-            value: stage._id,
+            value: stage._id as string,
           },
         ])
       }>

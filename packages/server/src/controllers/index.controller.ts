@@ -37,7 +37,6 @@ export class IndexController extends Controller {
           await this.assetReady(payload.payload.id);
           break;
         case LivepeerEvent.streamStarted:
-          break;
         case LivepeerEvent.streamIdle:
           await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;

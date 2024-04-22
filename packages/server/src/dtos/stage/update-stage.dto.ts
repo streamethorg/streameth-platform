@@ -47,4 +47,12 @@ export class UpdateStageDto {
   @IsOptional()
   @IsString()
   streamDate?: string;
+
+  @IsOptional()
+  @IsString()
+  thumbnail?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  mintable?: boolean;
 }

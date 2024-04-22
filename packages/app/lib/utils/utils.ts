@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import {
   IExtendedEvent,
+  IExtendedNftCollections,
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
@@ -292,4 +293,44 @@ export const sortArray = (
       return 0
     }
   })
+}
+
+export const getVideoIndex = (
+  all: boolean,
+  nftCollection: IExtendedNftCollections,
+  video?: IExtendedSession
+) => {
+  let videoIndex = []
+
+  if (all) {
+    videoIndex = nftCollection?.videos?.map((vid) => vid?.index) || []
+  } else {
+    const index = nftCollection?.videos?.find(
+      (vid) => vid.sessionId === video?._id
+    )?.index
+    if (index !== undefined) {
+      videoIndex.push(index)
+    }
+  }
+
+  return videoIndex
+}
+
+export const calMintPrice = (
+  data: { result: BigInt }[],
+  all: boolean,
+  nftCollection: IExtendedNftCollections
+) => {
+  if (data) {
+    const mintFee = Number(data[0].result)
+    const baseFee = Number(data[1].result)
+    if (all) {
+      const mintPrice =
+        (mintFee + baseFee) * nftCollection?.videos?.length!
+      return mintPrice.toString()
+    } else {
+      return (mintFee + baseFee).toString()
+    }
+  }
+  return null
 }

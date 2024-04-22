@@ -73,7 +73,7 @@ const OrganizationPage = async ({
             </CardHeader>
             <CardFooter>
               <Link
-                href={`/studio/${params.organization}/livestreams`}>
+                href={`/studio/${params.organization}/livestreams?show=true`}>
                 <Button className="bg-white text-black">
                   Start a livestream
                 </Button>

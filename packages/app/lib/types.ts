@@ -9,6 +9,7 @@ import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
+import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface'
 
 export enum eSort {
   asc_alpha = 'asc_alpha',
@@ -53,6 +54,22 @@ export interface SearchPageProps {
     event?: string
     searchQuery?: string
     page?: string
+  }
+}
+
+export interface OrganizationPageProps {
+  params: {
+    organization: string
+  }
+  searchParams: {
+    id: string
+    streamId: string
+    session: string
+    event?: string
+    searchQuery?: string
+    page?: string
+    collectionId?: string
+    stage?: string
   }
 }
 
@@ -121,12 +138,16 @@ export interface IExtendedOrganization
   extends Omit<IOrganization, '_id'> {
   _id: string
 }
-export interface IExtendedSession extends Omit<ISession, '_id'> {
+export interface IExtendedSession
+  extends Omit<ISession, '_id' | 'nftCollections'> {
   _id: string
+  nftCollections?: string[]
   createdAt?: string
 }
-export interface IExtendedStage extends Omit<IStage, '_id'> {
+export interface IExtendedStage
+  extends Omit<IStage, '_id' | 'nftCollections'> {
   _id?: string
+  nftCollections?: string[]
   createdAt?: string
   updatedAt?: string
   __v?: string
@@ -144,6 +165,12 @@ export interface IExtendedState extends Omit<IState, '_id'> {
   _id: string
 }
 
+export interface IExtendedNftCollections
+  extends Omit<INftCollection, '_id'> {
+  _id: string
+  createdAt: string
+}
+
 export interface EmbedPageParams {
   searchParams: {
     vod: string
@@ -156,7 +183,7 @@ export interface LivestreamPageParams {
     organization: string
     streamId: string
   }
-  searchParams: { layout: eLayout; sort: eSort }
+  searchParams: { layout: eLayout; sort: eSort; show: boolean }
 }
 
 export interface IGenerateEmbed {
@@ -180,4 +207,8 @@ export interface ChannelPageParams {
     id: string
     streamId: string
   }
+}
+
+export interface INFTSessions extends IExtendedSession {
+  videoType: string
 }

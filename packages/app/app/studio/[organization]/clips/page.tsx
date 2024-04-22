@@ -254,7 +254,7 @@ const EventClips = async ({
                   playbackId={
                     stageRecordings.parentStream?.playbackId ?? ''
                   }
-                  stageId={currentStage._id}
+                  stageId={currentStage?._id}
                   organizationId={organization._id as string}
                 />
               </div>

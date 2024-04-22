@@ -43,11 +43,12 @@ export interface ISession {
   videoTranscription?: string;
   aiDescription?: string;
   autoLabels?: string[];
-  nftURI?: string;
   ipfsURI?: string;
+  mintable?: boolean;
   published?: boolean;
   type: SessionType;
   createdAt?: string;
+  nftCollections?: Types.ObjectId[];
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

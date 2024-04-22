@@ -1,101 +1,118 @@
 import { notFound } from 'next/navigation'
 import { Metadata, ResolvingMetadata } from 'next'
 import { fetchOrganization } from '@/lib/services/organizationService'
-import Channel from './components/Channel'
 import { ChannelPageParams } from '@/lib/types'
-import HomePageNavbar from '@/components/Layout/HomePageNavbar'
-import Footer from '@/components/Layout/Footer'
-import { fetchSession } from '@/lib/services/sessionService'
-
-import ChannelPlayer from './components/ChannelPlayer'
-import {
-  fetchOrganizationStages,
-  fetchStage,
-} from '@/lib/services/stageService'
-import { fetchAllSessions } from '@/lib/data'
-
-const pages = [
-  {
-    name: 'Videography',
-    href: 'https://info.streameth.org/stream-eth-studio',
-    bgColor: 'bg-muted ',
-  },
-  {
-    name: 'Product',
-    href: 'https://info.streameth.org/services',
-    bgColor: 'bg-muted ',
-  },
-  {
-    name: 'Host your event',
-    href: 'https://info.streameth.org/contact-us',
-    bgColor: 'bg-primary text-primary-foreground',
-  },
-]
-
-export default async function OrganizationHome({
+import ChannelShareIcons from './components/ChannelShareIcons'
+import Image from 'next/image'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Suspense } from 'react'
+import { Card } from '@/components/ui/card'
+import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
+import WatchGrid, { WatchGridLoading } from './components/WatchGrid'
+import UpcomingStreams, {
+  UpcomingStreamsLoading,
+} from './components/UpcomingStreams'
+import { fetchOrganizationStages } from '@/lib/services/stageService'
+import Player from './livestream/components/Player'
+import SessionInfoBox from '@/components/sessions/SessionInfoBox'
+const OrganizationHome = async ({
   params,
   searchParams,
-}: ChannelPageParams) {
+}: ChannelPageParams) => {
   if (!params.organization) {
     return notFound()
   }
+
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
+
   if (!organization) {
     return notFound()
   }
 
-  const libraryVideo = await fetchSession({
-    session: searchParams.id,
-  })
-
-  const playbackLivestream = await fetchStage({
-    stage: searchParams.streamId,
-  })
-
-  const searchVideos = (
-    await fetchAllSessions({
-      organizationSlug: params.organization,
-      onlyVideos: true,
-      searchQuery: searchParams.search,
-      limit: 50,
-      page: 1,
+  const allStreams = (
+    await fetchOrganizationStages({
+      organizationId: organization._id,
     })
-  ).sessions
+  ).filter((stream) => stream.published)
 
-  const allStreams = await fetchOrganizationStages({
-    organizationId: organization._id,
-  })
+  const nextStreamNotToday = allStreams?.filter(
+    (stream) =>
+      stream?.streamDate && new Date(stream.streamDate) > new Date()
+  )
+
   const activeStream = allStreams?.filter(
     (stream) => stream?.streamSettings?.isActive
   )
 
-  const playerActive =
-    !!libraryVideo || !!playbackLivestream || !!activeStream[0]
+  const playerActive = !!activeStream[0] || !!nextStreamNotToday[0]
+  const stage = activeStream[0]
+    ? activeStream[0]
+    : nextStreamNotToday[0]
 
   return (
-    <div className="mx-auto w-full max-w-5xl">
-      <HomePageNavbar pages={pages} />
-      {playerActive && (
-        <ChannelPlayer
-          libraryVideo={libraryVideo}
-          organization={organization}
-          activeStream={playbackLivestream ?? activeStream[0]}
-        />
-      )}
-      <div className="flex flex-col overflow-auto p-0 lg:p-4">
-        <Channel
-          tab={searchParams.tab}
-          playerActive={playerActive}
-          organizationSlug={params.organization}
-          searchVideos={searchVideos}
-          searchQuery={searchParams.search}
-        />
+    <div className="m-auto w-full max-w-7xl">
+      <div className="relative w-full">
+        {playerActive ? (
+          <>
+            <Player stage={stage} />
+            <div className="px-4 w-full md:p-0 md:px-4">
+              <SessionInfoBox
+                name={stage.name}
+                description={stage.description ?? ''}
+                date={stage.streamDate as string}
+                vod={true}
+              />
+            </div>
+          </>
+        ) : (
+          <AspectRatio
+            ratio={3 / 1}
+            className="relative w-full md:rounded-xl">
+            {organization.banner ? (
+              <Image
+                src={organization.banner}
+                alt="banner"
+                quality={100}
+                objectFit="cover"
+                className="md:rounded-xl"
+                fill
+                priority
+              />
+            ) : (
+              <div className="h-full bg-gray-300 md:rounded-xl">
+                <StreamethLogoWhite />
+              </div>
+            )}
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
+              <div className="flex flex-row justify-between w-full">
+                <div>
+                  <h2 className="text-2xl font-bold">
+                    {organization.name}
+                  </h2>
+                  <p className="text-lg">
+                    {organization.description}
+                  </p>
+                </div>
+                <ChannelShareIcons organization={organization} />
+              </div>
+            </div>
+          </AspectRatio>
+        )}
       </div>
-      <div className="sticky mb-5 top-[100vh]">
-        <Footer />
-      </div>
+      <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none">
+        <Suspense fallback={<UpcomingStreamsLoading />}>
+          <UpcomingStreams
+            organizationId={organization._id}
+            organizationSlug={params.organization}
+          />
+        </Suspense>
+        <Suspense fallback={<WatchGridLoading />}>
+          <WatchGrid organizationSlug={params.organization} />
+        </Suspense>
+      </Card>
     </div>
   )
 }
@@ -132,3 +149,5 @@ export async function generateMetadata(
     }
   }
 }
+
+export default OrganizationHome

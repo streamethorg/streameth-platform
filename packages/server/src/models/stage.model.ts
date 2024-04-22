@@ -5,6 +5,7 @@ export const StageSchema = new Schema<IStageModel>(
   {
     name: { type: String, default: '', required: true },
     description: { type: String, default: '' },
+    thumbnail: { type: String, default: '' },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
     streamSettings: {
@@ -30,6 +31,8 @@ export const StageSchema = new Schema<IStageModel>(
     published: { type: Boolean, default: false },
     slug: { type: String, default: '', index: true },
     streamDate: { type: Date, default: Date.now() },
+    mintable: { type: Boolean, default: false },
+    nftCollections: [{ type: String, ref: 'Nft-Collection' }],
   },
   {
     timestamps: true,

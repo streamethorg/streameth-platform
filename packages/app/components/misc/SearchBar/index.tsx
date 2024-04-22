@@ -6,20 +6,33 @@ import useSearchParams from '@/lib/hooks/useSearchParams'
 import useDebounce from '@/lib/hooks/useDebounce'
 import { archivePath } from '@/lib/utils/utils'
 import useClickOutside from '@/lib/hooks/useClickOutside'
-
+import { useRouter } from 'next/navigation'
+import { fetchSession } from '@/lib/services/sessionService'
 interface IEventSearchResult {
   id: string
   name: string
   slug: string
 }
-export default function SearchBar(): JSX.Element {
+
+interface ISessionSearchResult {
+  id: string
+  name: string
+}
+
+export default function SearchBar({
+  organizationSlug,
+}: {
+  organizationSlug?: string
+}): JSX.Element {
   const { searchParams } = useSearchParams()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>(
     searchParams.get('searchQuery') || ''
   )
   const [isOpened, setIsOpened] = useState<boolean>(false)
-  const [searchResults, setSearchResults] = useState<string[]>([])
+  const [searchResults, setSearchResults] = useState<
+    ISessionSearchResult[]
+  >([])
   const [eventResults, setEventResults] = useState<
     IEventSearchResult[]
   >([])
@@ -27,15 +40,17 @@ export default function SearchBar(): JSX.Element {
 
   const dropdownRef = useRef<HTMLDivElement>(null) // ref for the dropdown
   const inputRef = useRef<HTMLInputElement>(null) // ref for the input field
-
+  const router = useRouter()
   useEffect(() => {
     if (debouncedSearchQuery) {
       setIsLoading(true)
-      fetch('/api/search?searchQuery=' + debouncedSearchQuery)
+      fetch(
+        `/api/search?organization=${organizationSlug}&searchQuery=${debouncedSearchQuery}`
+      )
         .then((res) => res.json())
         .then(
           (data: {
-            sessions: string[]
+            sessions: ISessionSearchResult[]
             events: IEventSearchResult[]
           }) => {
             setSearchResults(data.sessions)
@@ -48,8 +63,13 @@ export default function SearchBar(): JSX.Element {
 
   useClickOutside(dropdownRef, () => setIsOpened(false))
 
-  const handleTermChange = (term: string) => {
-    window.location.href = archivePath({ searchQuery: term })
+  const handleTermChange = (session: ISessionSearchResult) => {
+    alert(organizationSlug)
+    if (organizationSlug) {
+      router.push(`/${organizationSlug}/watch?session=${session.id}`)
+      return
+    }
+    router.push(archivePath({ searchQuery: session.name }))
     //  handleTermChangeOverload(term)
   }
 
@@ -62,13 +82,13 @@ export default function SearchBar(): JSX.Element {
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            handleTermChange(searchQuery)
+            router.push(archivePath({ event: searchQuery }))
             setIsOpened(false)
           }
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="max-w-[500px]"
+        className="max-w-[500px] bg-white"
         placeholder="Search"
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,17 +106,19 @@ export default function SearchBar(): JSX.Element {
               {searchResults.length > 0 && (
                 <div className="mt-2">
                   <div className="text font-bold">Videos</div>
-                  {searchResults.map((result: string) => (
-                    <div
-                      onClick={() => {
-                        handleTermChange(result)
-                        setIsOpened(false)
-                      }}
-                      className="p-1"
-                      key={result}>
-                      {result}
-                    </div>
-                  ))}
+                  {searchResults.map(
+                    (result: ISessionSearchResult) => (
+                      <div
+                        onClick={() => {
+                          handleTermChange(result)
+                          setIsOpened(false)
+                        }}
+                        className="p-1"
+                        key={result.id}>
+                        {result.name}
+                      </div>
+                    )
+                  )}
                 </div>
               )}
               {eventResults.length > 0 && (

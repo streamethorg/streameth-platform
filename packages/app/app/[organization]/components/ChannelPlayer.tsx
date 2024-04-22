@@ -1,5 +1,5 @@
-import VideoDownload from '@/app/(vod)/watch/components/VideoDownload'
-import ViewCounts from '@/app/(vod)/watch/components/ViewCounts'
+import VideoDownload from './VideoDownload'
+import ViewCounts from './ViewCounts'
 import EmbedButton from '@/components/misc/interact/EmbedButton'
 import ShareButton from '@/components/misc/interact/ShareButton'
 import PlayerWithControls from '@/components/ui/Player'
@@ -45,8 +45,8 @@ const ChannelPlayer = ({
         <CardTitle>
           {libraryVideo?.name ?? activeStream.name}
         </CardTitle>
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 mt-2">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-3 mt-2 lg:flex-row lg:justify-between lg:items-end">
+          <div className="flex gap-3 items-center">
             <div>
               <Image
                 className="rounded-full"
@@ -58,7 +58,7 @@ const ChannelPlayer = ({
             </div>
             <div className="flex flex-col">
               <p className="font-medium">{organization.name}</p>
-              <div className="text-[12px] text-muted-foreground flex items-center gap-1">
+              <div className="flex gap-1 items-center text-[12px] text-muted-foreground">
                 <p className="text-muted-foreground">
                   Created{' '}
                   {`${new Date(

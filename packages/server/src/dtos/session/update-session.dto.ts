@@ -101,4 +101,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsString()
   nftURI?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  mintable?: boolean;
 }

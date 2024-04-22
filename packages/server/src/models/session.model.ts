@@ -44,10 +44,11 @@ const SessionSchema = new Schema<ISessionModel>(
     videoTranscription: { type: String, default: '' },
     aiDescription: { type: String, default: '' },
     autoLabels: [{ type: String }],
-    nftURI: { type: String, default: '' },
     ipfsURI: { type: String, default: '' },
+    mintable: { type: Boolean, default: false },
     published: { type: Boolean, default: false },
     type: { type: String, enum: Object.keys(SessionType) },
+    nftCollections: [{ type: String, ref: 'Nft-Collection' }],
   },
   {
     timestamps: true,

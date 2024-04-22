@@ -33,4 +33,8 @@ export class CreateStageDto implements IStage {
   @IsOptional()
   @IsString()
   streamDate?: Date;
+
+  @IsOptional()
+  @IsString()
+  thumbnail?: string;
 }

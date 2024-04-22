@@ -1,7 +1,7 @@
 'use client'
 import { useContext, useEffect, useState } from 'react'
 import { useAccount } from 'wagmi'
-import CastrABI from '@/lib/contracts/Castr-abi'
+// import CastrABI from '@/lib/contracts/VideoFactoryAbi'
 import { Button } from '@/components/ui/button'
 import { ConnectKitButton } from 'connectkit'
 import { ModalContext } from '@/lib/context/ModalContext'
