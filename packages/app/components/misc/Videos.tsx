@@ -1,7 +1,11 @@
 import { IExtendedSession } from '@/lib/types'
 import VideoCardWithMenu from './VideoCard/VideoCardWithMenu'
 import { Suspense } from 'react'
-import {Card, CardHeader, CardDescription} from '@/components/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardDescription,
+} from '@/components/ui/card'
 export default async function VideoGrid({
   videos,
   OrganizationSlug,

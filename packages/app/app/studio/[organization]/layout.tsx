@@ -10,6 +10,7 @@ import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Link from 'next/link'
 import Navigation from './components/Navigation'
 import { fetchOrganization } from '@/lib/services/organizationService'
+import SidebarMenu from '@/components/Sidebar/SidebarMenu'
 
 const Layout = async ({
   children,
@@ -29,8 +30,8 @@ const Layout = async ({
   if (!organization) return null
 
   return (
-    <div className="w-screen h-screen flex flex-row">
-      <Navigation organizationSlug={params.organization} />
+    <div className="flex flex-row w-screen h-screen">
+      <SidebarMenu organizationSlug={params.organization} />
       <div className="flex flex-col w-full">
         <HomePageNavbar
           pages={[]}
@@ -58,8 +59,8 @@ const Layout = async ({
               </div>
             </div>
           ) : (
-            <div className="h-full w-full flex flex-row">
-              <div className="w-full h-full overflow-y-auto">
+            <div className="flex flex-row w-full h-full">
+              <div className="overflow-y-auto w-full h-full">
                 {children}
               </div>
             </div>

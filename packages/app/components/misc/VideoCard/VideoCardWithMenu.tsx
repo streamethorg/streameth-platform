@@ -29,13 +29,15 @@ const VideoCardWithMenu = async ({
   DropdownMenuItems?: ReactNode
   link: string
 }) => {
-  const thumbnail = (await generateThumbnail(session))
-
+  const thumbnail = await generateThumbnail(session)
 
   return (
     <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
       <Link className="w-full h-full" href={link}>
-        <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
+        <Thumbnail
+          imageUrl={session.coverImage}
+          fallBack={thumbnail}
+        />
       </Link>
       <div className="flex justify-between items-start">
         <CardHeader

@@ -165,7 +165,7 @@ export const generateThumbnail = async (
       }
     }
 
-    return undefined  
+    return undefined
 
     throw new Error('No thumbnail found')
   } catch (e) {

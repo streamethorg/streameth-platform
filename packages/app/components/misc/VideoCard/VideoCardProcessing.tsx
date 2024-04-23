@@ -14,10 +14,10 @@ const VideoCardProcessing = async ({
 }: {
   session: IExtendedSession
 }) => {
-  const thumbnail = await generateThumbnail(session) || ""
+  const thumbnail = (await generateThumbnail(session)) || ''
   return (
     <div className="w-full min-h-full uppercase rounded-xl animate-pulse">
-        <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
+      <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>

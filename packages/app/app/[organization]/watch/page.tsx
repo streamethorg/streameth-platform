@@ -45,13 +45,15 @@ export default async function Watch({
     return notFound()
   }
 
-
   if (!searchParams.session) return notFound()
   const video = await fetchSession({
     session: searchParams.session,
   })
 
-  const videoUrl = await getVideoUrlAction(video?.assetId, video?.playbackId)
+  const videoUrl = await getVideoUrlAction(
+    video?.assetId,
+    video?.playbackId
+  )
   if (!video || !videoUrl) return notFound()
 
   return (
