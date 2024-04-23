@@ -695,10 +695,7 @@
 					"nftCollections": {
 						"anyOf": [
 							{
-								"items": {
-									"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-								},
-								"type": "array"
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
 							},
 							{
 								"items": {
@@ -794,10 +791,7 @@
 					"nftCollections": {
 						"anyOf": [
 							{
-								"items": {
-									"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-								},
-								"type": "array"
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
 							},
 							{
 								"items": {
@@ -856,6 +850,19 @@
 					},
 					"mintable": {
 						"type": "boolean"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
@@ -1254,10 +1261,17 @@
 						"type": "string"
 					},
 					"nftCollections": {
-						"items": {
-							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-						},
-						"type": "array"
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
@@ -1400,10 +1414,17 @@
 						"type": "string"
 					},
 					"nftCollections": {
-						"items": {
-							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-						},
-						"type": "array"
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
@@ -1506,10 +1527,17 @@
 						"type": "string"
 					},
 					"nftCollections": {
-						"items": {
-							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-						},
-						"type": "array"
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					},
 					"autolabels": {
 						"items": {
@@ -1614,6 +1642,19 @@
 					},
 					"mintable": {
 						"type": "boolean"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
@@ -1812,6 +1853,9 @@
 					},
 					"organizationId": {
 						"type": "string"
+					},
+					"url": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1846,6 +1890,28 @@
 					"data": {
 						"items": {
 							"$ref": "#/components/schemas/IOrganization"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IUser__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IUser"
 						},
 						"type": "array"
 					}
@@ -2030,6 +2096,12 @@
 					"thumbnail": {
 						"type": "string"
 					},
+					"contractAddress": {
+						"type": "string"
+					},
+					"ipfsPath": {
+						"type": "string"
+					},
 					"type": {
 						"$ref": "#/components/schemas/NftCollectionType"
 					},
@@ -2046,6 +2118,9 @@
 					"videos": {
 						"items": {
 							"properties": {
+								"ipfsURI": {
+									"type": "string"
+								},
 								"stageId": {
 									"type": "string"
 								},
@@ -2054,6 +2129,10 @@
 								},
 								"type": {
 									"type": "string"
+								},
+								"index": {
+									"type": "number",
+									"format": "double"
 								}
 							},
 							"required": [
@@ -2068,6 +2147,8 @@
 					"name",
 					"description",
 					"thumbnail",
+					"contractAddress",
+					"ipfsPath",
 					"type",
 					"organizationId"
 				],
@@ -3266,7 +3347,16 @@
 					"Stage"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "published",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				]
 			}
 		},
 		"/stages/{stageId}": {
@@ -3682,6 +3772,14 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"in": "query",
+						"name": "published",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
 					}
 				]
 			}
@@ -4029,7 +4127,7 @@
 				}
 			}
 		},
-		"/organizations/members/{organizationId}": {
+		"/organizations/member/{organizationId}": {
 			"put": {
 				"operationId": "UpdateOrgMembers",
 				"responses": {
@@ -4044,7 +4142,89 @@
 						}
 					}
 				},
-				"summary": "Add members to organization",
+				"summary": "Add member to organization",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.walletAddress_"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllOrgMembers",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IUser__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all organization members",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteOrgMember",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Delete organization member",
 				"tags": [
 					"Organization"
 				],

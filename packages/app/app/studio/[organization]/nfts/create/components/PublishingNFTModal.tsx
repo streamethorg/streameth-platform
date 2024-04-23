@@ -6,11 +6,12 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { CheckCircle2, ExternalLinkIcon, Loader2 } from 'lucide-react'
+import { Ban, CheckCircle2, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { type BaseError } from 'wagmi'
+import TransactionHash from './TransactionHash'
 
 const PublishingNFTModal = ({
   open,
@@ -18,9 +19,10 @@ const PublishingNFTModal = ({
   isPublished,
   organization,
   hash,
-  isCreatingNftPending,
   error,
-  isSuccess,
+  isTransactionApproved,
+  publishError,
+  isGeneratingMetadata,
 }: {
   open: boolean
   onClose: React.Dispatch<React.SetStateAction<boolean>>
@@ -28,22 +30,40 @@ const PublishingNFTModal = ({
   isSuccess: boolean
   organization: string
   hash?: string
-  isCreatingNftPending: boolean
+  isTransactionApproved: boolean
   error: BaseError | null
+  publishError?: string
+  isGeneratingMetadata?: boolean
 }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
-        {!isPublished && !error && (
+        <DialogTitle className="text-lg font-semibold">
+          {publishError && 'Error'}
+        </DialogTitle>
+        {!isPublished && !error && !publishError && (
           <>
-            {' '}
             <DialogTitle className="text-lg font-semibold">
               Publishing your NFT
             </DialogTitle>
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <div className="bg-grey p-2 mr-2 rounded-full h-fit">
-                  {isCreatingNftPending ? (
+                  {!isGeneratingMetadata ? (
+                    <CheckCircle2 className="text-white fill-success w-6 h-6" />
+                  ) : (
+                    <Loader2 className="w-6 h-6 text-success  rounded-full animate-spin" />
+                  )}
+                </div>
+                <div>
+                  <p className="font-medium">
+                    Generating collection metadata
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="bg-grey p-2 mr-2 rounded-full h-fit">
+                  {isTransactionApproved ? (
                     <CheckCircle2 className="text-white fill-success w-6 h-6" />
                   ) : (
                     <Loader2 className="w-6 h-6 text-success  rounded-full animate-spin" />
@@ -72,22 +92,13 @@ const PublishingNFTModal = ({
                     It may take some time for the transaction to be
                     processed.
                   </p>
-                  {hash && (
-                    <Link
-                      target="_blank"
-                      rel="noopener"
-                      className="text-blue text-sm flex items-center gap-1"
-                      href={`https://sepolia.basescan.org/tx/${hash}`}>
-                      View on Base Ethereum Scan{' '}
-                      <ExternalLinkIcon className="w-4 h-4" />
-                    </Link>
-                  )}
+                  {hash && <TransactionHash hash={hash} />}
                 </div>
               </div>
             </div>
           </>
         )}
-        {isSuccess && (
+        {isPublished && (
           <div className="flex flex-col justify-center items-center text-center p-4">
             <Image
               src="/images/NFTSuccess.png"
@@ -102,6 +113,7 @@ const PublishingNFTModal = ({
               Your collection now published. Share link to invite your
               community.
             </p>
+            {hash && <TransactionHash hash={hash} />}
             <div className="flex items-center gap-4 mt-8">
               {/* // TODO correct nft link */}
               <ShareButton
@@ -122,6 +134,13 @@ const PublishingNFTModal = ({
           <div className="text-destructive text-center">
             Error:{' '}
             {(error as BaseError).shortMessage || error.message}
+          </div>
+        )}
+
+        {publishError && (
+          <div className="text-destructive flex flex-col items-center justify-center text-center">
+            <Ban className="w-10 h-10 mb-4" />
+            {publishError}
           </div>
         )}
       </DialogContent>

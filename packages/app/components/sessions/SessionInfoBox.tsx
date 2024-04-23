@@ -10,6 +10,8 @@ import { formatDate } from '@/lib/utils/time'
 import ViewCounts from '@/app/[organization]/components/ViewCounts'
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder'
 import { IExtendedSpeaker } from '@/lib/types'
+import { Download } from 'lucide-react'
+import { Button } from '../ui/button'
 import VideoDownload from '@/app/[organization]/components/VideoDownload'
 
 const SessionInfoBox = async ({

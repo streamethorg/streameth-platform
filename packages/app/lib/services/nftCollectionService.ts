@@ -25,37 +25,37 @@ export async function createNFTCollection({
 }
 
 export const updateNFTCollection = async ({
-  collectionId,
   collection,
   authToken,
 }: {
   collection: IExtendedNftCollections
   authToken: string
   collectionId?: string
-}): Promise<INftCollection> => {
-  const modifiedObject = (({ _id, videos, ...rest }) => rest)(
+}): Promise<IExtendedNftCollections> => {
+  const { _id, videos, createdAt, updatedAt, __v, ...rest } =
     collection
-  )
-  const response = await fetch(
-    `${apiUrl()}/collections/${collection._id}`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(modifiedObject),
+  try {
+    const response = await fetch(
+      `${apiUrl()}/collections/${collection._id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(rest),
+      }
+    )
+
+    if (!response.ok) {
+      throw 'Error updating collection'
     }
-  )
-  console.log(
-    JSON.stringify(collection),
-    'responssee',
-    await response.json()
-  )
-  if (!response.ok) {
-    throw 'Error updating collection'
+
+    return (await response.json()).data
+  } catch (error) {
+    console.error('Error updating collection:', error)
+    throw error
   }
-  return (await response.json()).data
 }
 
 export async function fetchOrganizationNFTCollections({

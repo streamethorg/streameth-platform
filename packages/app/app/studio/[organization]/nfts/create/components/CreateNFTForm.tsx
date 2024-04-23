@@ -20,8 +20,11 @@ import { toast } from 'sonner'
 import {
   type BaseError,
   useWaitForTransactionReceipt,
-  useWatchContractEvent,
   useWriteContract,
+  useAccount,
+  useTransactionReceipt,
+  useChainId,
+  useSwitchChain,
 } from 'wagmi'
 
 import { VideoFactoryAbi, VideoFactoryAddress } from '@/lib/contract'
@@ -46,10 +49,19 @@ const CreateNFTForm = ({
   videos: INFTSessions[]
   type: string
 }) => {
+  const account = useAccount()
+  const chain = useChainId()
+  const { switchChain } = useSwitchChain()
+
   const [step, setStep] = useState(1)
   const [isPublishingCollection, setIsPublishingCollection] =
     useState(false)
+  const [isGeneratingMetadata, setIsGeneratingMetadata] =
+    useState(false)
   const [isPublished, setIsPublished] = useState(false)
+  const [publishError, setPublishError] = useState('')
+  const [isTransactionApproved, setIsTransactionApproved] =
+    useState(false)
   const form = useForm<z.infer<typeof nftSchema>>({
     resolver: zodResolver(nftSchema),
     defaultValues: {
@@ -71,28 +83,12 @@ const CreateNFTForm = ({
   })
   const [formResponseData, setFormResponseData] =
     useState<INftCollection>()
-  const [nftContractAddress, setNftContractAddress] = useState()
-  const {
-    data: hash,
-    writeContract,
-    error,
-    isError,
-    isPending: isCreatingNftPending,
-  } = useWriteContract()
+
+  const { data: hash, writeContract, error } = useWriteContract()
 
   const { isSuccess } = useWaitForTransactionReceipt({
+    confirmations: 1,
     hash,
-  })
-
-  useWatchContractEvent({
-    address: VideoFactoryAddress,
-    abi: VideoFactoryAbi,
-    eventName: 'VideoCreated',
-    onLogs(logs) {
-      //@ts-ignore
-      setNftContractAddress(logs[0]?.args?.videoCollectionAddress)
-      console.log('New logs!', logs)
-    },
   })
 
   const parseMintFee = ethers.parseUnits(
@@ -102,32 +98,40 @@ const CreateNFTForm = ({
     'ether'
   )
   // Update collection with address
-  const updateCollection = async () => {
+  const updateCollection = async (address: string) => {
     await updateNFTCollectionAction({
       //@ts-ignore
       collection: {
         ...formResponseData,
-        contractAddress: nftContractAddress,
+        contractAddress: address,
       },
     })
       .then((response) => {
-        console.log('updateCollection', response)
+        if (response) {
+          setIsPublished(true)
+          toast.success('NFT Collection successfully created')
+        } else {
+          toast.error('Error updating NFT Collection')
+        }
       })
-      .catch((error) => console.log(error))
+      .catch(() => setPublishError('Error creating collection'))
   }
+  const result = useTransactionReceipt({
+    hash,
+  })
 
   useEffect(() => {
-    if (isSuccess) {
-      setIsPublished(true)
-
-      toast.success('NFT Collection successfully created')
+    if (result?.data?.logs[0]?.address) {
+      updateCollection(result?.data?.logs[0]?.address)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result?.data?.logs])
 
-    if (nftContractAddress) {
-      console.log('calling ', nftContractAddress)
-      updateCollection()
+  useEffect(() => {
+    if (hash) {
+      setIsTransactionApproved(true)
     }
-  }, [isSuccess, error, nftContractAddress])
+  }, [hash])
 
   const createEventCollection = (ipfsPath?: string) => {
     writeContract({
@@ -154,34 +158,47 @@ const CreateNFTForm = ({
   }
 
   const createNFTCollection = async () => {
+    setPublishError('')
     setIsPublishingCollection(true)
-    const formData = {
-      name: form.getValues('name'),
-      description: form.getValues('description'),
-      thumbnail: form.getValues('thumbnail'),
-      type: type,
-      organizationId: organizationId,
-      videos: formState.selectedVideo.map((video) => ({
-        type:
-          video.videoType === 'livestreams' ? 'livestream' : 'video',
-        stageId: video.videoType === 'livestreams' ? video._id : '',
-        sessionId: video.videoType !== 'livestreams' ? video._id : '',
-      })),
-    }
+    setIsGeneratingMetadata(true)
+    if (!account.address || chain !== 84532) {
+      switchChain({ chainId: 84532 })
+      setPublishError(
+        'Please switch to base sepolia before continuing.'
+      )
+    } else {
+      const formData = {
+        name: form.getValues('name'),
+        description: form.getValues('description'),
+        thumbnail: form.getValues('thumbnail'),
+        type: type,
+        organizationId: organizationId,
+        videos: formState.selectedVideo.map((video) => ({
+          type:
+            video.videoType === 'livestreams'
+              ? 'livestream'
+              : 'video',
+          stageId: video.videoType === 'livestreams' ? video._id : '',
+          sessionId:
+            video.videoType !== 'livestreams' ? video._id : '',
+        })),
+      }
 
-    try {
-      const createNFTResponse = await createNFTCollectionAction({
-        nftCollection: formData,
-      })
-      setFormResponseData(createNFTResponse)
-      createEventCollection(createNFTResponse.ipfsPath)
-
-      form.reset()
-      setStep(1)
-      setFormState({ selectedVideo: [] })
-    } catch (error) {
-      setIsPublishingCollection(false)
-      toast.error('Error creating NFT Collection')
+      try {
+        const createNFTResponse = await createNFTCollectionAction({
+          nftCollection: formData,
+        })
+        setFormResponseData(createNFTResponse)
+        createEventCollection(createNFTResponse.ipfsPath)
+        setIsGeneratingMetadata(false)
+        form.reset()
+        setStep(1)
+        setFormState({ selectedVideo: [] })
+      } catch (error) {
+        setIsPublishingCollection(false)
+        setPublishError('Error while publishing')
+        toast.error('Error creating NFT Collection')
+      }
     }
   }
 
@@ -263,9 +280,11 @@ const CreateNFTForm = ({
         isPublished={isPublished}
         organization={organizationSlug}
         hash={hash}
-        isCreatingNftPending={isCreatingNftPending}
         error={error as BaseError}
         isSuccess={isSuccess}
+        isTransactionApproved={isTransactionApproved}
+        publishError={publishError}
+        isGeneratingMetadata={isGeneratingMetadata}
       />
     </div>
   )

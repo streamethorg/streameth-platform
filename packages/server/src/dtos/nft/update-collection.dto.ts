@@ -17,6 +17,14 @@ export class UpdateNftCollectionDto {
 
   @IsOptional()
   @IsString()
+  contractAddress: string;
+
+  @IsOptional()
+  @IsString()
+  ipfsPath: string;
+
+  @IsOptional()
+  @IsString()
   type: NftCollectionType;
 
   @IsOptional()
@@ -26,8 +34,10 @@ export class UpdateNftCollectionDto {
   @IsOptional()
   @IsArray()
   videos?: {
+    index?: number;
     type: string;
     sessionId?: string;
     stageId?: string;
+    ipfsURI?: string;
   }[];
 }
