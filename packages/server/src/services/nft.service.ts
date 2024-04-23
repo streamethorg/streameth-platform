@@ -45,7 +45,7 @@ export default class CollectionService {
         stageId: video.stageId,
       });
       let url = await uploadSingleMetadata(JSON.stringify(metadata));
-      data.videos.map((video) => (video.ipfsURI = url));
+      data.videos.map((video) => (video.ipfsURI = url), (video.index = 0));
       data.ipfsPath = this.getIpfsPath(url);
     }
     if (data.type == 'multiple') {

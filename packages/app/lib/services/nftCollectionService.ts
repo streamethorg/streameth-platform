@@ -6,7 +6,7 @@ export async function createNFTCollection({
   nftCollection,
   authToken,
 }: {
-  nftCollection: IExtendedNftCollections
+  nftCollection: INftCollection
   authToken: string
 }): Promise<INftCollection> {
   const response = await fetch(`${apiUrl()}/collections`, {
@@ -99,4 +99,29 @@ export async function fetchNFTCollection({
     console.log('error fetching collection', e)
     throw e
   }
+}
+
+export async function generateNFTCollectionMetadata({
+  nftCollection,
+  authToken,
+}: {
+  nftCollection: INftCollection
+  authToken: string
+}): Promise<INftCollection> {
+  const response = await fetch(
+    `${apiUrl()}/collections/metadata/generate`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(nftCollection),
+    }
+  )
+
+  if (!response.ok) {
+    throw 'Error generating collection metadata'
+  }
+  return (await response.json()).data
 }

@@ -1,5 +1,4 @@
 'use client'
-import ShareButton from '@/components/misc/interact/ShareButton'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -12,6 +11,7 @@ import Link from 'next/link'
 import React from 'react'
 import { type BaseError } from 'wagmi'
 import TransactionHash from './TransactionHash'
+import ShareCollection from './ShareCollection'
 
 const PublishingNFTModal = ({
   open,
@@ -23,6 +23,7 @@ const PublishingNFTModal = ({
   isTransactionApproved,
   publishError,
   isGeneratingMetadata,
+  collectionId,
 }: {
   open: boolean
   onClose: React.Dispatch<React.SetStateAction<boolean>>
@@ -34,6 +35,7 @@ const PublishingNFTModal = ({
   error: BaseError | null
   publishError?: string
   isGeneratingMetadata?: boolean
+  collectionId?: string
 }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -115,11 +117,8 @@ const PublishingNFTModal = ({
             </p>
             {hash && <TransactionHash hash={hash} />}
             <div className="flex items-center gap-4 mt-8">
-              {/* // TODO correct nft link */}
-              <ShareButton
-                url={`streameth`}
-                shareFor="nft collection"
-              />
+              <ShareCollection collectionId={collectionId} />
+
               <Link href={`/studio/${organization}/nfts`}>
                 <Button
                   onClick={() => onClose(false)}

@@ -24,10 +24,6 @@ export class UpdateNftCollectionDto {
   ipfsPath?: string;
 
   @IsOptional()
-  @IsBoolean()
-  active?: boolean;
-
-  @IsOptional()
   @IsString()
   type?: NftCollectionType;
 

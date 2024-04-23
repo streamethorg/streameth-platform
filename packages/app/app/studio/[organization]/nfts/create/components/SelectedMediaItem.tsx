@@ -25,11 +25,13 @@ const SelectedMediaItem = ({
         onClick={() => handleRemoveSelected(video)}>
         <XCircle className="fill-muted-foreground text-white w-7 h-7" />
       </div>
-      {video.coverImage ? (
-        <Thumbnail imageUrl={video.coverImage} />
-      ) : (
-        <DefaultThumbnail />
-      )}
+      <div className="overflow-hidden">
+        {video.coverImage ? (
+          <Thumbnail imageUrl={video.coverImage} />
+        ) : (
+          <DefaultThumbnail />
+        )}
+      </div>
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>

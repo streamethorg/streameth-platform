@@ -1655,6 +1655,9 @@
 								"type": "array"
 							}
 						]
+					},
+					"active": {
+						"type": "boolean"
 					}
 				},
 				"required": [
@@ -1991,13 +1994,6 @@
 						"type": "string"
 					}
 				},
-				"required": [
-					"name",
-					"description",
-					"thumbnail",
-					"type",
-					"organizationId"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -2050,6 +2046,9 @@
 					"videos": {
 						"items": {
 							"properties": {
+								"ipfsURI": {
+									"type": "string"
+								},
 								"stageId": {
 									"type": "string"
 								},
@@ -2058,10 +2057,16 @@
 								},
 								"type": {
 									"type": "string"
+								},
+								"index": {
+									"type": "number",
+									"format": "double"
 								}
 							},
 							"required": [
-								"type"
+								"ipfsURI",
+								"type",
+								"index"
 							],
 							"type": "object"
 						},
@@ -2081,6 +2086,38 @@
 					"type",
 					"organizationId",
 					"videos"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__ipfsPath-string--videos-Array_any___": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"videos": {
+								"items": {},
+								"type": "array"
+							},
+							"ipfsPath": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"videos",
+							"ipfsPath"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -2143,15 +2180,6 @@
 						"type": "array"
 					}
 				},
-				"required": [
-					"name",
-					"description",
-					"thumbnail",
-					"contractAddress",
-					"ipfsPath",
-					"type",
-					"organizationId"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -4307,6 +4335,38 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/collections/metadata/generate": {
+			"post": {
+				"operationId": "GenerateNftMetadata",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__ipfsPath-string--videos-Array_any___"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateNftCollectionDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/collections/{collectionId}": {
