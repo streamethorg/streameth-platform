@@ -80,11 +80,20 @@ export default async function Watch({
               playbackId={video.playbackId}
               video={video}
               organizationSlug={params.organization}
+              vod={true}
             />
           </div>
         </div>
         <div className="px-4">
-          <WatchGrid organizationSlug={params.organization} />
+          <div className="md:hidden">
+            <WatchGrid organizationSlug={params.organization} />
+          </div>
+          <div className="hidden md:block">
+            <WatchGrid
+              organizationSlug={params.organization}
+              gridLength={6}
+            />
+          </div>
         </div>
       </div>
     </Suspense>

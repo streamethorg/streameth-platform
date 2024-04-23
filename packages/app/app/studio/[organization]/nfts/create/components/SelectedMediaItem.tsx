@@ -1,3 +1,5 @@
+'use client'
+import { useEffect, useState } from 'react'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import {
   CardDescription,
@@ -12,14 +14,22 @@ import { formatDate } from '@/lib/utils/time'
 import { XCircle } from 'lucide-react'
 import React from 'react'
 
-const SelectedMediaItem = async ({
+const SelectedMediaItem = ({
   video,
   handleRemoveSelected,
 }: {
   handleRemoveSelected: (video: IExtendedSession) => void
   video: IExtendedSession
 }) => {
-  const thumbnail = (await generateThumbnail(video)) || ''
+  const [generatedThumbnail, setGeneratedThumbnail] = useState('')
+  const getThumbnail = async () => {
+    const thumbnail = await generateThumbnail(video)
+    if (thumbnail) setGeneratedThumbnail(thumbnail)
+    return
+  }
+  useEffect(() => {
+    if (video) getThumbnail()
+  }, [video])
   return (
     <div className="mt-4 relative">
       <div
@@ -27,7 +37,7 @@ const SelectedMediaItem = async ({
         onClick={() => handleRemoveSelected(video)}>
         <XCircle className="fill-muted-foreground text-white w-7 h-7" />
       </div>
-      <Thumbnail imageUrl={thumbnail} />
+      <Thumbnail imageUrl={generatedThumbnail} />
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>

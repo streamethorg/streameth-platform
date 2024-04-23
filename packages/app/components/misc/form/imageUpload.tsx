@@ -50,11 +50,13 @@ export default function ImageUpload({
     setIsUploading(true)
     try {
       const data = new FormData()
-      const normalisedFile = {
-        ...(file as File),
-        name: file.name.replace(/[^a-zA-Z0-9.]/g, '_'),
-      } as File
-      data.set('file', normalisedFile)
+
+      data.set(
+        'file',
+        new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
+          type: file.type,
+        })
+      )
       data.set('path', path)
       const res = await fetch('/api/upload', {
         method: 'POST',
@@ -119,9 +121,9 @@ export default function ImageUpload({
             accept=".png,.jpg, .jpeg"
             placeholder="Upload image"
             className="hidden"
-            {...rest}
             onChange={(event) => {
               const { files, displayUrl } = getImageData(event)
+              console.log(files)
               setPreview(displayUrl)
               onSubmit(files[0])
             }}
