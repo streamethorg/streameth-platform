@@ -19,7 +19,7 @@ const SelectedMediaItem = async ({
   handleRemoveSelected: (video: IExtendedSession) => void
   video: IExtendedSession
 }) => {
-  const thumbnail = await generateThumbnail(video) || ""
+  const thumbnail = (await generateThumbnail(video)) || ''
   return (
     <div className="mt-4 relative">
       <div
@@ -27,7 +27,7 @@ const SelectedMediaItem = async ({
         onClick={() => handleRemoveSelected(video)}>
         <XCircle className="fill-muted-foreground text-white w-7 h-7" />
       </div>
-        <Thumbnail imageUrl={thumbnail} />
+      <Thumbnail imageUrl={thumbnail} />
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>

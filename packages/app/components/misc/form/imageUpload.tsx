@@ -52,7 +52,7 @@ export default function ImageUpload({
       const data = new FormData()
       const normalisedFile = {
         ...(file as File),
-        name: file.name.replace(/[^a-zA-Z0-9.]/g, '_')
+        name: file.name.replace(/[^a-zA-Z0-9.]/g, '_'),
       } as File
       data.set('file', normalisedFile)
       data.set('path', path)

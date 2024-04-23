@@ -19,6 +19,7 @@ const ArchiveVideos = async ({
     event: event,
     limit: 12,
     onlyVideos: true,
+    published: true,
     searchQuery,
     page: Number(page || 1),
   })

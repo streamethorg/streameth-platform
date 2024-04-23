@@ -11,10 +11,11 @@ const WatchGrid = async ({
   organizationSlug: string
   gridLength?: number
 }) => {
-  let videos = (
+  const videos = (
     await fetchAllSessions({
       organizationSlug,
       onlyVideos: true,
+      published: true,
       limit: gridLength,
     })
   ).sessions
@@ -37,7 +38,7 @@ const WatchGrid = async ({
         maxVideos={gridLength}
       />
       {videos.length === 0 && (
-        <div className="space-x-4 flex flex-row justify-center items-center bg-secondary rounded-xl p-4">
+        <div className="flex flex-row justify-center items-center p-4 space-x-4 rounded-xl bg-secondary">
           <Video size={20} />
           <p>No videos uploaded</p>
         </div>
@@ -46,8 +47,6 @@ const WatchGrid = async ({
   )
 }
 
-export default WatchGrid
-
 export const WatchGridLoading = () => (
   <>
     <div className="flex justify-between items-center">
@@ -55,9 +54,11 @@ export const WatchGridLoading = () => (
       <div className="w-1/5 h-4 bg-gray-300 rounded"></div>
     </div>
     <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-4">
-      {Array.from({ length: 6 }).map((_, index) => (
+      {Array.from({ length: 3 }).map((_, index) => (
         <VideoCardSkeleton key={index} />
       ))}
     </div>
   </>
 )
+
+export default WatchGrid
