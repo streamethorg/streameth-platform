@@ -157,6 +157,7 @@ export const updateStage = async ({
     })
 
     if (!response.ok) {
+      console.log('error in updateStage', await response.json(), rest)
       throw new Error('Error updating stage')
     }
 
