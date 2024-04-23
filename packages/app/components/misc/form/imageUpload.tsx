@@ -2,7 +2,6 @@
 
 import { Input } from '@/components/ui/input'
 import { ChangeEvent, useState } from 'react'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Image from 'next/image'
 import { X } from 'lucide-react'
 import { getImageUrl } from '@/lib/utils/utils'
@@ -51,10 +50,11 @@ export default function ImageUpload({
     setIsUploading(true)
     try {
       const data = new FormData()
-      file.name.replace(/[^a-zA-Z0-9.]/g, '_')
-
-      data.set('file', file)
-
+      const normalisedFile = {
+        ...(file as File),
+        name: file.name.replace(/[^a-zA-Z0-9.]/g, '_')
+      } as File
+      data.set('file', normalisedFile)
       data.set('path', path)
       const res = await fetch('/api/upload', {
         method: 'POST',

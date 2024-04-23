@@ -24,6 +24,7 @@ import { updateSessionAction } from '@/lib/actions/sessions'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import DeleteAsset from '../../components/DeleteAsset'
 import { Textarea } from '@/components/ui/textarea'
+import ImageUpload from '@/components/misc/form/imageUpload'
 
 const EditSessionFrom = ({
   session,
@@ -119,7 +120,9 @@ const EditSessionFrom = ({
             <FormItem>
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
-                <ImageDropzone
+                <ImageUpload
+                className='aspect-video max-w-[480px] relative rounded-xl bg-neutrals-300'
+                  aspectRatio={16 / 9}
                   path={`sessions/${generateId(
                     form.getValues('name')
                   )}`}
