@@ -748,7 +748,7 @@ const models: TsoaRoute.Models = {
     "UpdateNftCollectionDto": {
         "dataType": "refObject",
         "properties": {
-            "name": {"dataType":"string"},
+            "name": {"dataType":"string","required":true},
             "description": {"dataType":"string"},
             "thumbnail": {"dataType":"string"},
             "contractAddress": {"dataType":"string"},

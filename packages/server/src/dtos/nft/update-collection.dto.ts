@@ -3,9 +3,8 @@ import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 
 export class UpdateNftCollectionDto {
-  @IsOptional()
   @IsString()
-  name?: string;
+  name: string;
 
   @IsOptional()
   @IsString()
