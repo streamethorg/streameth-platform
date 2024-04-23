@@ -110,4 +110,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsArray()
   nftCollections?: Types.ObjectId | string[];
+
+  @IsOptional()
+  @IsBoolean()
+  active?: boolean;
 }

@@ -22,7 +22,7 @@ const NftSchema = new Schema<INftCollectionModel>(
     ],
     active: { type: Boolean, default: false },
     contractAddress: { type: String, default: '' },
-    ipfsPath: { type: String, default: '' },
+    ipfsPath: { type: String, default: '' }
   },
 
   {

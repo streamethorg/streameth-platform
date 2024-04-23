@@ -6,11 +6,11 @@ export enum NftCollectionType {
 }
 export interface INftCollection {
   _id?: Types.ObjectId;
-  name: string;
-  description: string;
-  thumbnail: string;
-  type: NftCollectionType;
-  organizationId: Types.ObjectId | string;
+  name?: string;
+  description?: string;
+  thumbnail?: string;
+  type?: NftCollectionType;
+  organizationId?: Types.ObjectId | string;
   videos?: {
     index?: number;
     type: string;
@@ -20,7 +20,7 @@ export interface INftCollection {
   }[];
   contractAddress?: string;
   ipfsPath?: string;
-  active: boolean;
+  active?: boolean;
 }
 
 export interface INftCollectionModel

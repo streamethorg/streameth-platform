@@ -5,23 +5,23 @@ import { Types } from 'mongoose';
 export class UpdateNftCollectionDto {
   @IsOptional()
   @IsString()
-  name: string;
+  name?: string;
 
   @IsOptional()
   @IsString()
-  description: string;
+  description?: string;
 
   @IsOptional()
   @IsString()
-  thumbnail: string;
+  thumbnail?: string;
 
   @IsOptional()
   @IsString()
-  contractAddress: string;
+  contractAddress?: string;
 
   @IsOptional()
   @IsString()
-  ipfsPath: string;
+  ipfsPath?: string;
 
   @IsOptional()
   @IsBoolean()
@@ -29,11 +29,11 @@ export class UpdateNftCollectionDto {
 
   @IsOptional()
   @IsString()
-  type: NftCollectionType;
+  type?: NftCollectionType;
 
   @IsOptional()
   @IsString()
-  organizationId: string | Types.ObjectId;
+  organizationId?: string | Types.ObjectId;
 
   @IsOptional()
   @IsArray()
