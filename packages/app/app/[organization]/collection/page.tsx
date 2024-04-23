@@ -10,6 +10,7 @@ import ChannelBanner from '../components/ChannelBanner'
 import ShareButton from '@/components/misc/interact/ShareButton'
 import Image from 'next/image'
 import CollectVideButton from '@/components/sessions/CollectVideButton'
+import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 
 const Collection = async ({
   params,
@@ -34,28 +35,10 @@ const Collection = async ({
     <div>
       <ChannelBanner organization={organization} />
       <div className="w-full max-w-7xl m-auto p-4 space-y-8">
-        <div className="flex items-center gap-3">
-          <div className="relative w-[200px] h-[200px] aspect-square">
-            {collection.thumbnail ? (
-              <Image
-                loading="lazy"
-                className="rounded"
-                alt="Collection image"
-                quality={80}
-                src={collection.thumbnail!}
-                fill
-                sizes="(max-width: 768px) 50%, (max-width: 1200px) 40%, 22%"
-                style={{
-                  objectFit: 'cover',
-                }}
-              />
-            ) : (
-              <div className="w-full h-full aspect-video">
-                <DefaultThumbnail />
-              </div>
-            )}
+        <div className="flex flex-row items-center gap-3 w-full">
+          <div className="relative w-1/3 aspect-square">
+            <Thumbnail imageUrl={collection.thumbnail} />
           </div>
-
           <div className="space-y-2">
             <h4 className="text-2xl">{collection.name}</h4>
             <p>{collection.description}</p>
