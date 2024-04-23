@@ -3,14 +3,12 @@
 import { CardTitle } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
 import { IExtendedSession } from '@/lib/types'
-import PopoverActions from '../misc/PopoverActions'
 import ShareButton from '../misc/interact/ShareButton'
 import CollectVideButton from './CollectVideButton'
 import { fetchNFTCollection } from '@/lib/services/nftCollectionService'
 import { formatDate } from '@/lib/utils/time'
 import ViewCounts from '@/app/[organization]/components/ViewCounts'
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder'
-import SpeakerIcon from '../speakers/speakerIcon'
 import { IExtendedSpeaker } from '@/lib/types'
 import { Download } from 'lucide-react'
 import { Button } from '../ui/button'
@@ -76,7 +74,9 @@ const SessionInfoBox = async ({
         )}
         <div className="flex flex-row space-x-2">
           <ShareButton shareFor="video" />
-          <VideoDownload assetId={video?.assetId!} />
+          {video?.assetId && (
+            <VideoDownload assetId={video?.assetId} />
+          )}
         </div>
         {/* <PopoverActions
           organizationSlug={organizationSlug}
