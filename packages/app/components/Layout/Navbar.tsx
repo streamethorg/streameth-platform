@@ -34,7 +34,7 @@ export default function Navbar({
                   navigationMenuTriggerStyle() + ' ' + item.bgColor
                 }>
                 {item.name}
-                <div className="ml-2">{item.icon}</div>
+                {/* <div className="ml-2 text-black">{item.icon}</div> */}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
