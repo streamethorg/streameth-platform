@@ -24,7 +24,6 @@ const NFTCollectionCard = ({
       className="border border-grey bg-secondary rounded-xl p-2 cursor-pointer">
       <Thumbnail
         imageUrl={nft.thumbnail}
-        fallBack="/images/videoPlaceholder.png"
       />
 
       <div className="flex justify-between items-start">

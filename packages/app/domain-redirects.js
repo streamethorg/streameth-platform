@@ -36,3 +36,5 @@ const redirects = [
     permanent: true,
   }
 ]
+
+module.exports = redirects

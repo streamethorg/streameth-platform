@@ -19,13 +19,13 @@ import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 
-// export async function generateStaticParams() {
-//   const organizations = await fetchOrganizations()
-//   const paths = organizations.map((organization) => ({
-//     organization: organization.slug,
-//   }))
-//   return paths
-// }
+export async function generateStaticParams() {
+  const organizations = await fetchOrganizations()
+  const paths = organizations.map((organization) => ({
+    organization: organization.slug,
+  }))
+  return paths
+}
 
 const OrganizationHome = async ({
   params,

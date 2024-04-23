@@ -7,6 +7,8 @@ const VideoDownload = async ({ assetId }: { assetId: string }) => {
     apiKey: process.env.LIVEPEER_API_KEY,
   })
 
+  if (!assetId) return null
+
   const asset = (await livepeer.asset.get(assetId)).asset
 
   if (!asset) return null

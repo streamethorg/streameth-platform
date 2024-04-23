@@ -4,28 +4,20 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { EllipsisVertical, Loader2 } from 'lucide-react'
+import { generateThumbnail } from '@/lib/actions/livepeer'
 
-const VideoCardProcessing = ({
+const VideoCardProcessing = async ({
   session,
 }: {
   session: IExtendedSession
 }) => {
+  const thumbnail = await generateThumbnail(session) || ""
   return (
     <div className="w-full min-h-full uppercase rounded-xl animate-pulse">
-      {session.coverImage ? (
-        <Thumbnail imageUrl={session.coverImage} />
-      ) : (
-        <AspectRatio
-          ratio={16 / 9}
-          className="flex justify-center items-center w-full h-full">
-          <DefaultThumbnail />
-        </AspectRatio>
-      )}
+        <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>

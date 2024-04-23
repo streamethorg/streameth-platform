@@ -9,7 +9,7 @@ import { fetchSession } from '@/lib/services/sessionService'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { Suspense } from 'react'
 import WatchGrid from '../components/WatchGrid'
-
+import { getVideoUrlAction } from '@/lib/actions/livepeer'
 const Loading = () => {
   return (
     <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full animate-pulse">
@@ -45,12 +45,14 @@ export default async function Watch({
     return notFound()
   }
 
+
   if (!searchParams.session) return notFound()
   const video = await fetchSession({
     session: searchParams.session,
   })
 
-  if (!video || !video.videoUrl) return notFound()
+  const videoUrl = await getVideoUrlAction(video?.assetId, video?.playbackId)
+  if (!video || !videoUrl) return notFound()
 
   return (
     <Suspense key={video._id} fallback={<Loading />}>
@@ -59,7 +61,7 @@ export default async function Watch({
           <PlayerWithControls
             src={[
               {
-                src: video.videoUrl as `${string}m3u8`,
+                src: videoUrl as `${string}m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',

@@ -42,13 +42,7 @@ const CollectionGrid = async ({
   return (
     <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
       <Link className="w-full h-full" href={'#'}>
-        {collectionImage ? (
-          <Thumbnail imageUrl={collectionImage!} />
-        ) : (
-          <div className="w-full h-full aspect-video">
-            <DefaultThumbnail />
-          </div>
-        )}
+        <Thumbnail imageUrl={collectionImage!} />
       </Link>
       <div className="flex justify-between items-start">
         <CardHeader

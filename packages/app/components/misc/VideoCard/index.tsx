@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState } from 'react'
 import {
   CardDescription,
   CardHeader,
@@ -7,6 +8,8 @@ import {
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import { IExtendedSession, IExtendedEvent } from '@/lib/types'
+import { generateThumbnail } from '@/lib/actions/livepeer'
+import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 
 const VideoCard = ({
   session,
@@ -19,13 +22,14 @@ const VideoCard = ({
 }) => {
   const headerClass = invertedColors ? ' ' : ''
   const descriptionClass = invertedColors ? '' : ''
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined)
 
+  useEffect(() => {
+   generateThumbnail(session).then((url) => url && setImageUrl(url))
+  }, [session])
   return (
     <div className="min-h-full w-full rounded-xl  uppercase">
-      <Thumbnail
-        imageUrl={session.coverImage}
-        fallBack={event?.eventCover}
-      />
+        <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
       <CardHeader
         className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none ${headerClass}`}>
         <CardTitle className={`text-sm truncate ${descriptionClass}`}>
