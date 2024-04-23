@@ -244,7 +244,7 @@ const CreateNFTForm = ({
       </div>
       <div className="bg-white w-full p-4 lg:p-8 flex flex-col justify-between">
         <div>
-          {step == 1 && <CollectionDetails form={form} />}
+          {step == 1 && <CollectionDetails type={type} form={form} />}
           {step == 2 && (
             <AddMedia
               setFormState={setFormState}
@@ -279,7 +279,11 @@ const CreateNFTForm = ({
             }
             onClick={handleNextButton}
             variant="primary">
-            {step == 1 ? 'Continue' : 'Publish Collection'}
+            {step == 1
+              ? 'Continue'
+              : type == 'multiple'
+              ? 'Publish Collection'
+              : 'Publish VideoNFT'}
           </Button>
         </div>
       </div>

@@ -32,7 +32,7 @@ const NFT = async ({
     await fetchOrganizationNFTCollections({
       organizationId,
     }),
-    searchParams.sort
+    searchParams.sort || 'desc_alpha'
   )
 
   return (
@@ -49,6 +49,7 @@ const NFT = async ({
             collection from your livestream on Base Chain.
           </CardDescription>
         </CardHeader>
+
         <CardFooter>
           <CreateNFTCollectionModal type={type} />
         </CardFooter>
