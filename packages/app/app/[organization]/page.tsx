@@ -18,6 +18,7 @@ import UpcomingStreams, {
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
+import React from 'react'
 
 // export async function generateStaticParams() {
 //   const organizations = await fetchOrganizations()
@@ -64,12 +65,12 @@ const OrganizationHome = async ({
     : nextStreamNotToday[0]
 
   return (
-    <div className="m-auto w-full max-w-7xl space-y-4 md:p-4">
+    <div className="m-auto space-y-4 w-full max-w-7xl md:p-4">
       <div className="relative w-full">
         {playerActive ? (
           <>
             <Player stage={stage} />
-            <div className="px-4 w-full md:p-0 md:px-4">
+            <div className="px-4 w-full md:p-0">
               <SessionInfoBox
                 name={stage.name}
                 description={stage.description ?? ''}
@@ -97,14 +98,14 @@ const OrganizationHome = async ({
                 <StreamethLogoWhite />
               </div>
             )}
-            <div className=" absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
-            <div className="p-4 absolute right-0 bottom-0 left-0 space-y-2 w-full text-white ">
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
               <div className="flex flex-row justify-between w-full">
                 <div>
                   <h2 className="text-2xl font-bold">
                     {organization.name}
                   </h2>
-                  <p className="hidden md:block text-lg mr-12">
+                  <p className="hidden mr-12 text-lg md:block">
                     {organization.description}
                   </p>
                 </div>
@@ -114,7 +115,7 @@ const OrganizationHome = async ({
           </AspectRatio>
         )}
       </div>
-      <Card className="space-y-6 w-full bg-white border-none shadow-none p-4 md:p-0">
+      <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none md:p-0">
         <Suspense fallback={<UpcomingStreamsLoading />}>
           <UpcomingStreams
             organizationId={organization._id}
@@ -122,7 +123,15 @@ const OrganizationHome = async ({
           />
         </Suspense>
         <Suspense fallback={<WatchGridLoading />}>
-          <WatchGrid organizationSlug={params.organization} />
+          <div className="md:hidden">
+            <WatchGrid organizationSlug={params.organization} />
+          </div>
+          <div className="hidden md:block">
+            <WatchGrid
+              organizationSlug={params.organization}
+              gridLength={6}
+            />
+          </div>
         </Suspense>
       </Card>
     </div>
