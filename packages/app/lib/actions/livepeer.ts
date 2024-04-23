@@ -2,6 +2,8 @@
 
 import { Livepeer } from 'livepeer'
 import { Session } from 'livepeer/dist/models/components'
+import { IExtendedSession } from '../types'
+import { fetchEvent } from '../services/eventService'
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -22,19 +24,27 @@ export const getVideoPhaseAction = async (assetId: string) => {
   }
 }
 
-export const getVideoUrlAction = async (assetId: string) => {
-  console.log('assetId', assetId)
+export const getVideoUrlAction = async (
+  assetId?: string,
+  playbackId?: string
+) => {
   try {
-    const asset = await livepeer.asset.get(assetId)
-    if (asset.statusCode !== 200) {
-      console.error(asset.rawResponse)
-      return null
+    if (assetId) {
+      const asset = await livepeer.asset.get(assetId)
+      if (asset.statusCode !== 200) {
+        console.error(asset.rawResponse)
+      }
+
+      if (asset.asset?.playbackUrl) {
+        return asset.asset.playbackUrl
+      }
     }
 
-    if (!asset.asset?.playbackUrl) {
-      return null
+    if (playbackId) {
+      return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/index.m3u8`
     }
-    return asset.asset.playbackUrl
+
+    return null
   } catch (e) {
     console.error('Error fetching asset: ', assetId)
     return null
@@ -112,5 +122,54 @@ export const getAsset = async (assetId: string) => {
   } catch (e) {
     console.error('Error fetching asset: ', assetId)
     return null
+  }
+}
+
+export const generateThumbnail = async (
+  session: IExtendedSession
+) => {
+  'use server'
+  try {
+    if (session.playbackId || session.assetId) {
+      let playbackId = session.playbackId
+      if (!playbackId) {
+        const asset = await livepeer.asset.get(
+          session.assetId as string
+        )
+        if (asset.statusCode === 200) {
+          playbackId = asset.asset?.playbackId
+        }
+      }
+      if (playbackId) {
+        const asset = await livepeer.playback.get(
+          playbackId as string
+        )
+        if (asset.statusCode === 200) {
+          const lpThumbnails =
+            asset.playbackInfo?.meta.source.filter(
+              (source) => source.hrn === 'Thumbnails'
+            ) ?? []
+          if (lpThumbnails.length > 0) {
+            return lpThumbnails[0].url
+          }
+        }
+      }
+    }
+
+    if (session.eventId) {
+      const coverResponse = (
+        await fetchEvent({ eventId: session.eventId as string })
+      )?.eventCover
+      if (coverResponse) {
+        return coverResponse
+      }
+    }
+
+    return undefined
+
+    throw new Error('No thumbnail found')
+  } catch (e) {
+    console.error('Error fetching thumbnail')
+    return undefined
   }
 }

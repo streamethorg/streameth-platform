@@ -4,6 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { generateThumbnail } from '@/lib/actions/livepeer'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 
 import { IExtendedSession } from '@/lib/types'
@@ -11,13 +12,14 @@ import { formatDate } from '@/lib/utils/time'
 import { XCircle } from 'lucide-react'
 import React from 'react'
 
-const SelectedMediaItem = ({
+const SelectedMediaItem = async ({
   video,
   handleRemoveSelected,
 }: {
   handleRemoveSelected: (video: IExtendedSession) => void
   video: IExtendedSession
 }) => {
+  const thumbnail = (await generateThumbnail(video)) || ''
   return (
     <div className="mt-4 relative">
       <div
@@ -25,11 +27,7 @@ const SelectedMediaItem = ({
         onClick={() => handleRemoveSelected(video)}>
         <XCircle className="fill-muted-foreground text-white w-7 h-7" />
       </div>
-      {video.coverImage ? (
-        <Thumbnail imageUrl={video.coverImage} />
-      ) : (
-        <DefaultThumbnail />
-      )}
+      <Thumbnail imageUrl={thumbnail} />
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>

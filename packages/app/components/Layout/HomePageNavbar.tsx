@@ -15,7 +15,7 @@ import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrg
 import { IExtendedOrganization } from '@/lib/types'
 import { cn } from '@/lib/utils/utils'
 import Support from '../misc/Support'
-
+import { Button } from '@/components/ui/button'
 const getPages = (
   pages: Page[],
   isSignedIn: boolean,
@@ -197,6 +197,13 @@ const PCNavBar = ({
               height={logo ? 50 : 30}
               className="hidden lg:block"
             />
+          </Link>
+        )}
+        {organizations && (
+          <Link href={`/${currentOrganization}`}>
+            <Button className="hidden lg:block" variant={'primary'}>
+              View channel page
+            </Button>
           </Link>
         )}
       </div>

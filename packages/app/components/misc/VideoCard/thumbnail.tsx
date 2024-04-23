@@ -20,7 +20,7 @@ export default function Thumbnail({
     fallBack && setFallbackImage(fallBack)
   }, [imageUrl, fallBack])
 
-  if (!streamethThumbnail || error) {
+  if (!streamethThumbnail && !fallBack) {
     return (
       <AspectRatio
         ratio={16 / 9}

@@ -29,12 +29,12 @@ const navigationItems = [
     icon: <Home />,
     defaultCollapsed: false,
   },
-  {
-    title: 'Events',
-    navigationPath: 'event',
-    icon: <CalendarDays />,
-    defaultCollapsed: false,
-  },
+  // {
+  //   title: 'Events',
+  //   navigationPath: 'event',
+  //   icon: <CalendarDays />,
+  //   defaultCollapsed: false,
+  // },
   {
     title: 'Library',
     navigationPath: 'library',
@@ -54,17 +54,18 @@ const navigationItems = [
     defaultCollapsed: false,
   },
   {
-    title: 'Settings',
-    navigationPath: 'settings',
-    icon: <Settings />,
-    defaultCollapsed: false,
-  },
-  {
     title: 'Mint NFT',
     navigationPath: 'nfts',
     icon: <ImageIcon />,
     defaultCollapsed: false,
   },
+  {
+    title: 'Settings',
+    navigationPath: 'settings',
+    icon: <Settings />,
+    defaultCollapsed: false,
+  },
+
   // {
   //   title: 'Settings',
   //   navigationPath: 'settings',
