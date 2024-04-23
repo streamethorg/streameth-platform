@@ -45,8 +45,6 @@ export default async function ArchivePage({
         })
       ).sessions
 
-      console.log(sessions)
-
       return sessions.length > 0 ? event : undefined
     })
   )

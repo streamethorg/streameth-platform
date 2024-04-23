@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import generateGoogleCalendar from '@/lib/utils/generateGoogleCalendar'
+import { CalendarPlus } from 'lucide-react'
 
 const CalendarReminder = ({
   eventName,
@@ -28,13 +29,17 @@ const CalendarReminder = ({
   return (
     <>
       <Button
-        className="hidden md:block"
+        className="hidden space-x-2 md:flex"
         variant={'outline'}
         onClick={handleAddToCalendar}>
-        Add to Google Calendar
+        <CalendarPlus size={20} />
+        <span>Add to Google Calendar</span>
       </Button>
-      <Button className="md:hidden" onClick={handleAddToCalendar}>
-        Add to Google Calendar
+      <Button
+        className="space-x-2 md:hidden"
+        onClick={handleAddToCalendar}>
+        <CalendarPlus size={20} />
+        <span>Add to Google Calendar</span>
       </Button>
     </>
   )

@@ -64,7 +64,7 @@ const OrganizationHome = async ({
     : nextStreamNotToday[0]
 
   return (
-    <div className="m-auto space-y-4 w-full max-w-7xl md:p-4">
+    <div className="mx-auto space-y-4 w-full max-w-7xl md:p-4">
       <div className="relative w-full">
         {playerActive ? (
           <>

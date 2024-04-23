@@ -2,7 +2,10 @@
 
 import { CardTitle } from '@/components/ui/card'
 import InfoBoxDescription from './InfoBoxDescription'
-import { IExtendedSession } from '@/lib/types'
+import {
+  IExtendedNftCollections,
+  IExtendedSession,
+} from '@/lib/types'
 import ShareButton from '../misc/interact/ShareButton'
 import CollectVideButton from './CollectVideButton'
 import { fetchNFTCollection } from '@/lib/services/nftCollectionService'
@@ -11,6 +14,110 @@ import ViewCounts from '@/app/[organization]/components/ViewCounts'
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder'
 import { IExtendedSpeaker } from '@/lib/types'
 import VideoDownload from '@/app/[organization]/components/VideoDownload'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '../ui/popover'
+import { Button } from '../ui/button'
+import { CalendarPlus, EllipsisVertical } from 'lucide-react'
+
+const DesktopButtons = ({
+  name,
+  description,
+  date,
+  video,
+  nftCollection,
+  vod,
+}: {
+  name: string
+  description: string
+  date: string
+  video?: IExtendedSession
+  nftCollection: IExtendedNftCollections | null
+  vod: boolean
+}) => {
+  return (
+    <>
+      {video?.nftCollections?.[0] && (
+        <CollectVideButton
+          video={video}
+          nftCollection={nftCollection}
+        />
+      )}
+      <div className="flex flex-row space-x-2">
+        <ShareButton shareFor="video" /> {/* Hydration Error */}
+        {video?.assetId && <VideoDownload assetId={video?.assetId} />}
+      </div>
+      {!vod && (
+        <CalendarReminder
+          eventName={name}
+          description={description}
+          start={date}
+          end={date}
+        />
+      )}
+    </>
+  )
+}
+
+const MobileButtons = ({
+  name,
+  description,
+  date,
+  video,
+  nftCollection,
+  vod,
+}: {
+  name: string
+  description: string
+  date: string
+  video?: IExtendedSession
+  nftCollection: IExtendedNftCollections | null
+  vod: boolean
+}) => {
+  return (
+    <>
+      {video?.nftCollections?.[0] ? (
+        <>
+          <div className="w-full">
+            <CollectVideButton
+              video={video}
+              nftCollection={nftCollection}
+            />
+          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <EllipsisVertical
+                size={30}
+                className="cursor-pointer"
+              />
+            </PopoverTrigger>
+            <PopoverContent className="flex flex-col space-y-2 w-full">
+              {/* Hydration Error */}
+              <ShareButton className="w-full" shareFor="video" />{' '}
+              {video?.assetId && (
+                <VideoDownload assetId={video?.assetId} />
+              )}
+              {!vod && (
+                <>
+                  <CalendarReminder
+                    eventName={name}
+                    description={description}
+                    start={date}
+                    end={date}
+                  />
+                </>
+              )}
+            </PopoverContent>
+          </Popover>
+        </>
+      ) : (
+        <ShareButton variant={'primary'} shareFor="video" />
+      )}
+    </>
+  )
+}
 
 const SessionInfoBox = async ({
   name,
@@ -38,6 +145,7 @@ const SessionInfoBox = async ({
   const nftCollection = await fetchNFTCollection({
     collectionId: video?.nftCollections?.[0],
   })
+
   return (
     <div
       className={`flex flex-col md:flex-row py-4 md:space-x-2 ${
@@ -63,32 +171,28 @@ const SessionInfoBox = async ({
           )}
         </p>
       </div>
-      <div className="flex justify-between items-center mt-2 mb-auto space-x-2 md:justify-end md:mt-0">
-        {video?.nftCollections?.[0] && (
-          <CollectVideButton
+      <>
+        <div className="hidden justify-end items-center mt-0 mb-auto space-x-2 md:flex">
+          <DesktopButtons
+            name={name}
+            description={description}
+            date={date}
             video={video}
             nftCollection={nftCollection}
+            vod={vod}
           />
-        )}
-        <div className="flex flex-row space-x-2">
-          <ShareButton shareFor="video" />
-          {video?.assetId && (
-            <VideoDownload assetId={video?.assetId} />
-          )}
         </div>
-        {/* <PopoverActions
-          organizationSlug={organizationSlug}
-          session={video}
-        /> */}
-        {!playbackId && (
-          <CalendarReminder
-            eventName={name}
+        <div className="flex justify-between items-center mt-2 mb-auto space-x-2 md:hidden">
+          <MobileButtons
+            name={name}
             description={description}
-            start={date}
-            end={date}
+            date={date}
+            video={video}
+            nftCollection={nftCollection}
+            vod={vod}
           />
-        )}
-      </div>
+        </div>
+      </>
     </div>
   )
 }

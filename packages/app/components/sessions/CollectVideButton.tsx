@@ -121,19 +121,19 @@ const CollectVideButton = ({
           </DialogTitle>
 
           {error ? (
-            <div className="text-destructive text-center">
+            <div className="text-center text-destructive">
               Error:{' '}
               {(error as BaseError).shortMessage || error.message}
             </div>
           ) : hash ? (
             <TransactionHash hash={hash} />
           ) : (
-            <div className="flex items-center gap-2">
-              <div className="bg-grey p-2 mr-2 rounded-full h-fit">
+            <div className="flex gap-2 items-center">
+              <div className="p-2 mr-2 rounded-full bg-grey h-fit">
                 {!isMintingNftPending ? (
-                  <CheckCircle2 className="text-white fill-success w-6 h-6" />
+                  <CheckCircle2 className="w-6 h-6 text-white fill-success" />
                 ) : (
-                  <Loader2 className="w-6 h-6 text-success  rounded-full animate-spin" />
+                  <Loader2 className="w-6 h-6 rounded-full animate-spin text-success" />
                 )}
               </div>
               <div>

@@ -56,19 +56,26 @@ export default async function Livestream({
 
   return (
     <Suspense key={stage._id} fallback={<Loading />}>
-      <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full">
+      <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full md:mt-4">
         <Player stage={stage} />
-        <div className="px-4 w-full">
+        <div className="px-4 w-full md:p-0">
           <SessionInfoBox
             name={stage.name}
             description={stage.description ?? ''}
             date={stage.streamDate as string}
-            vod={true}
             video={stage as IExtendedSession}
           />
         </div>
-        <div className="px-4">
-          <WatchGrid organizationSlug={params.organization} />
+        <div className="px-4 md:px-0">
+          <div className="md:hidden">
+            <WatchGrid organizationSlug={params.organization} />
+          </div>
+          <div className="hidden md:block">
+            <WatchGrid
+              organizationSlug={params.organization}
+              gridLength={6}
+            />
+          </div>
         </div>
       </div>
     </Suspense>
