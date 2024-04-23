@@ -1,6 +1,4 @@
 import { Livepeer } from 'livepeer'
-import { Badge } from '@/components/ui/badge'
-
 import { ArrowDownToLine } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
