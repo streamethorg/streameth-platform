@@ -26,7 +26,7 @@ const CollectionDetails = ({
     name: string
     symbol: string
     mintFee: string
-    thumbnail?: string | undefined
+    thumbnail: string
     startDate: Date
     startTime: string
     endDate: Date

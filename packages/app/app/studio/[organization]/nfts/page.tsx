@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardDescription,
@@ -6,29 +5,35 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { ChevronDown } from 'lucide-react'
+
 import Image from 'next/image'
 import React from 'react'
 import CreateNFTCollectionModal from './components/CreateNFTCollectionModal'
 import { fetchOrganizationNFTCollections } from '@/lib/services/nftCollectionService'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NFTCollectionCard from './components/NFTCollectionCard'
+import MintNftSort from './components/MintNftSort'
+import { sortArray } from '@/lib/utils/utils'
+import { IExtendedNftCollections } from '@/lib/types'
 
 const NFT = async ({
   params,
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { type: string }
+  searchParams: { type: string; sort: string }
 }) => {
   const { type } = searchParams
   const organizationId = (
     await fetchOrganization({ organizationSlug: params.organization })
   )?._id
   if (!organizationId) return null
-  const nftCollections = await fetchOrganizationNFTCollections({
-    organizationId,
-  })
+  const nftCollections = sortArray(
+    await fetchOrganizationNFTCollections({
+      organizationId,
+    }),
+    searchParams.sort
+  )
 
   return (
     <div className="flex flex-col bg-white h-full">
@@ -49,15 +54,10 @@ const NFT = async ({
         </CardFooter>
       </Card>
 
-      <div className="flex flex-col p-4">
+      <div className="flex flex-col p-4 h-full">
         <div className="flex justify-between items-center mb-4">
           <p className="text-lg font-semibold">Your Collections</p>
-          <div className="flex gap-2 items-center font-medium">
-            <p>Sort By</p>
-            <Button variant="outline">
-              Most Recent <ChevronDown className="w-5 h-5" />
-            </Button>
-          </div>
+          <MintNftSort />
         </div>
 
         {nftCollections.length > 0 ? (
@@ -66,7 +66,7 @@ const NFT = async ({
               <NFTCollectionCard
                 organization={params.organization}
                 key={nft._id}
-                nft={nft}
+                nft={nft as IExtendedNftCollections}
               />
             ))}
           </div>
@@ -95,30 +95,3 @@ const NFT = async ({
 }
 
 export default NFT
-const obj = {
-  name: 'ETH Safari 2023',
-  description: 'Some dec',
-  thumbnail:
-    'https://streameth-develop.ams3.digitaloceanspaces.com/nftcollections/2.a1f5695f030fa16c13aa.png',
-  type: 'multiple',
-  organizationId: '65a90bf17932ebe436ba9345',
-  videos: [
-    [
-      {
-        type: 'video',
-        stageId: '',
-        sessionId: '65b8f60ba5b2d09b88ec0c74',
-      },
-      {
-        type: 'video',
-        stageId: '',
-        sessionId: '65b8f60ba5b2d09b88ec0c7a',
-      },
-      {
-        type: 'video',
-        stageId: '',
-        sessionId: '65b8f60ba5b2d09b88ec0c80',
-      },
-    ],
-  ],
-}

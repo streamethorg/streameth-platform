@@ -23,6 +23,8 @@ import {
   useWriteContract,
   useAccount,
   useTransactionReceipt,
+  useChainId,
+  useSwitchChain,
 } from 'wagmi'
 
 import { VideoFactoryAbi, VideoFactoryAddress } from '@/lib/contract'
@@ -48,10 +50,16 @@ const CreateNFTForm = ({
   type: string
 }) => {
   const account = useAccount()
+  const chain = useChainId()
+  const { switchChain } = useSwitchChain()
+
   const [step, setStep] = useState(1)
   const [isPublishingCollection, setIsPublishingCollection] =
     useState(false)
+  const [isGeneratingMetadata, setIsGeneratingMetadata] =
+    useState(false)
   const [isPublished, setIsPublished] = useState(false)
+  const [publishError, setPublishError] = useState('')
   const [isTransactionApproved, setIsTransactionApproved] =
     useState(false)
   const form = useForm<z.infer<typeof nftSchema>>({
@@ -99,21 +107,31 @@ const CreateNFTForm = ({
       },
     })
       .then((response) => {
-        console.log('updateCollection', response)
+        if (response) {
+          setIsPublished(true)
+          toast.success('NFT Collection successfully created')
+        } else {
+          toast.error('Error updating NFT Collection')
+        }
       })
-      .catch((error) => console.log(error))
+      .catch(() => setPublishError('Error creating collection'))
   }
+  const result = useTransactionReceipt({
+    hash,
+  })
 
   useEffect(() => {
-    if (isSuccess) {
-      setIsPublished(true)
-      toast.success('NFT Collection successfully created')
+    if (result?.data?.logs[0]?.address) {
+      updateCollection(result?.data?.logs[0]?.address)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result?.data?.logs])
 
+  useEffect(() => {
     if (hash) {
       setIsTransactionApproved(true)
     }
-  }, [isSuccess, error, hash])
+  }, [hash])
 
   const createEventCollection = (ipfsPath?: string) => {
     writeContract({
@@ -139,45 +157,48 @@ const CreateNFTForm = ({
     })
   }
 
-  const result = useTransactionReceipt({
-    hash,
-  })
-
-  useEffect(() => {
-    if (result?.data?.logs[0]?.address) {
-      updateCollection(result?.data?.logs[0]?.address)
-    }
-  }, [result?.data?.logs])
-
   const createNFTCollection = async () => {
+    setPublishError('')
     setIsPublishingCollection(true)
-    const formData = {
-      name: form.getValues('name'),
-      description: form.getValues('description'),
-      thumbnail: form.getValues('thumbnail'),
-      type: type,
-      organizationId: organizationId,
-      videos: formState.selectedVideo.map((video) => ({
-        type:
-          video.videoType === 'livestreams' ? 'livestream' : 'video',
-        stageId: video.videoType === 'livestreams' ? video._id : '',
-        sessionId: video.videoType !== 'livestreams' ? video._id : '',
-      })),
-    }
+    setIsGeneratingMetadata(true)
+    if (!account.address || chain !== 84532) {
+      switchChain({ chainId: 84532 })
+      setPublishError(
+        'Please switch to base sepolia before continuing.'
+      )
+    } else {
+      const formData = {
+        name: form.getValues('name'),
+        description: form.getValues('description'),
+        thumbnail: form.getValues('thumbnail'),
+        type: type,
+        organizationId: organizationId,
+        videos: formState.selectedVideo.map((video) => ({
+          type:
+            video.videoType === 'livestreams'
+              ? 'livestream'
+              : 'video',
+          stageId: video.videoType === 'livestreams' ? video._id : '',
+          sessionId:
+            video.videoType !== 'livestreams' ? video._id : '',
+        })),
+      }
 
-    try {
-      const createNFTResponse = await createNFTCollectionAction({
-        nftCollection: formData,
-      })
-      setFormResponseData(createNFTResponse)
-      createEventCollection(createNFTResponse.ipfsPath)
-
-      form.reset()
-      setStep(1)
-      setFormState({ selectedVideo: [] })
-    } catch (error) {
-      setIsPublishingCollection(false)
-      toast.error('Error creating NFT Collection')
+      try {
+        const createNFTResponse = await createNFTCollectionAction({
+          nftCollection: formData,
+        })
+        setFormResponseData(createNFTResponse)
+        createEventCollection(createNFTResponse.ipfsPath)
+        setIsGeneratingMetadata(false)
+        form.reset()
+        setStep(1)
+        setFormState({ selectedVideo: [] })
+      } catch (error) {
+        setIsPublishingCollection(false)
+        setPublishError('Error while publishing')
+        toast.error('Error creating NFT Collection')
+      }
     }
   }
 
@@ -262,6 +283,8 @@ const CreateNFTForm = ({
         error={error as BaseError}
         isSuccess={isSuccess}
         isTransactionApproved={isTransactionApproved}
+        publishError={publishError}
+        isGeneratingMetadata={isGeneratingMetadata}
       />
     </div>
   )

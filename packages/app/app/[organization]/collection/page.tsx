@@ -63,7 +63,7 @@ const Collection = async ({
               <p>
                 Created{' '}
                 {formatDate(
-                  new Date(collection.createdAt),
+                  new Date(collection.createdAt as string),
                   'MMM. YYYY'
                 )}
               </p>
