@@ -15,6 +15,7 @@ const WatchGrid = async ({
     await fetchAllSessions({
       organizationSlug,
       onlyVideos: true,
+      published: true,
       limit: gridLength,
     })
   ).sessions

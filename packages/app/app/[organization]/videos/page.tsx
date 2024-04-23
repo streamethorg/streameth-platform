@@ -41,8 +41,11 @@ export default async function ArchivePage({
         await fetchAllSessions({
           event: event._id.toString(),
           onlyVideos: true,
+          published: true,
         })
       ).sessions
+
+      console.log(sessions)
 
       return sessions.length > 0 ? event : undefined
     })
@@ -54,8 +57,8 @@ export default async function ArchivePage({
 
   return (
     <div>
-      <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
-        {organization.banner ? (
+      {organization.banner && (
+        <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
           <Image
             src={organization.banner}
             alt="banner"
@@ -64,12 +67,8 @@ export default async function ArchivePage({
             fill
             priority
           />
-        ) : (
-          <div className="h-full bg-gray-300 rounded-xl md:rounded-none max-h-[200px]">
-            <StreamethLogoWhite />
-          </div>
-        )}
-      </div>
+        </div>
+      )}
       <div className="p-4 m-auto w-full max-w-7xl">
         <div className="flex flex-row justify-between items-center mb-4 space-x-2 w-full">
           <div className="w-full text-lg font-bold">All videos</div>

@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import NotFound from '@/not-found'
 import { Metadata, ResolvingMetadata } from 'next'
 import {
   fetchOrganization,
@@ -18,7 +18,6 @@ import UpcomingStreams, {
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
-import React from 'react'
 
 // export async function generateStaticParams() {
 //   const organizations = await fetchOrganizations()
@@ -33,7 +32,7 @@ const OrganizationHome = async ({
   searchParams,
 }: ChannelPageParams) => {
   if (!params.organization) {
-    return notFound()
+    return NotFound()
   }
 
   const organization = await fetchOrganization({
@@ -41,7 +40,7 @@ const OrganizationHome = async ({
   })
 
   if (!organization) {
-    return notFound()
+    return NotFound()
   }
 
   const allStreams = (
