@@ -6,7 +6,7 @@ export enum NftCollectionType {
 }
 export interface INftCollection {
   _id?: Types.ObjectId;
-  name?: string;
+  name: string;
   description?: string;
   thumbnail?: string;
   type?: NftCollectionType;

@@ -266,7 +266,10 @@ export const generateEmbedCode = ({
 }
 
 export const sortArray = (
-  stages: IExtendedStage[] | IExtendedSession[],
+  stages:
+    | IExtendedStage[]
+    | IExtendedSession[]
+    | IExtendedNftCollections[],
   sortBy: string
 ) => {
   return stages.sort((a, b) => {

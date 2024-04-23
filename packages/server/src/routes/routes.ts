@@ -697,7 +697,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "_id": {"ref":"mongoose.Types.ObjectId"},
-            "name": {"dataType":"string"},
+            "name": {"dataType":"string","required":true},
             "description": {"dataType":"string"},
             "thumbnail": {"dataType":"string"},
             "type": {"ref":"NftCollectionType"},

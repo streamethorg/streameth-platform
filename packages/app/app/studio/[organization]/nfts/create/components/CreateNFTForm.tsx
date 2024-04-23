@@ -104,6 +104,7 @@ const CreateNFTForm = ({
     await createNFTCollectionAction({
       nftCollection: {
         ...formResponseData,
+        name: formResponseData?.name as string,
         contractAddress: address,
       },
     })
