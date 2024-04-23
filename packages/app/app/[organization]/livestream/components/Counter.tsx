@@ -10,9 +10,9 @@ const CounterBox = ({
   lable: string
 }) => {
   return (
-    <div className="text-black flex flex-col justify-between items-center p-2 bg-opacity-70 bg-white rounded-lg">
-      <div className="text-xl md:text-6xl font-black ">{number}</div>
-      <div className=" text md:text-xl  ">{lable}</div>
+    <div className="flex flex-col justify-between items-center p-2 text-black bg-white bg-opacity-70 rounded-lg">
+      <div className="text-xl font-black md:text-6xl">{number}</div>
+      <div className="md:text-xl text">{lable}</div>
     </div>
   )
 }
@@ -32,27 +32,27 @@ const Counter = ({
   }, [time])
 
   return (
-    <div className="flex flex-row justify-between items-center md:p-4">
-      <div className="aspect-video w-full bg-black md:rounded-xl flex flex-col items-center justify-center">
-        <p className="text-white text-2xl uppercase">
+    <div className="flex flex-row justify-between items-center md:p-0">
+      <div className="flex flex-col justify-center items-center w-full bg-black md:rounded-xl aspect-video">
+        <p className="text-2xl text-white uppercase">
           Stream will start in
         </p>
-        <div className="flex flex-row items-center justify-center space-x-2 m-8">
+        <div className="flex flex-row justify-center items-center m-8 space-x-2">
           <CounterBox
             lable="days"
             number={Math.floor(time / 86400)}
           />
-          <span className=" text-4xl text-white">:</span>
+          <span className="text-4xl text-white">:</span>
           <CounterBox
             lable="hours"
             number={Math.floor((time % 86400) / 3600)}
           />
-          <span className=" text-4xl text-white">:</span>
+          <span className="text-4xl text-white">:</span>
           <CounterBox
             lable="minutes"
             number={Math.floor((time % 3600) / 60)}
           />
-          <span className=" text-4xl text-white">:</span>
+          <span className="text-4xl text-white">:</span>
           <CounterBox
             lable="seconds"
             number={Math.floor(time % 60)}

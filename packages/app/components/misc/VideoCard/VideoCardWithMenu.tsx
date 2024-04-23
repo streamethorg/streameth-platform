@@ -16,8 +16,9 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
 import React, { ReactNode } from 'react'
+import { generateThumbnail } from '@/lib/actions/livepeer'
 
-const VideoCardWithMenu = ({
+const VideoCardWithMenu = async ({
   session,
   showDate = true,
   DropdownMenuItems,
@@ -28,16 +29,15 @@ const VideoCardWithMenu = ({
   DropdownMenuItems?: ReactNode
   link: string
 }) => {
+  const thumbnail = await generateThumbnail(session)
+
   return (
     <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
       <Link className="w-full h-full" href={link}>
-        {session.coverImage ? (
-          <Thumbnail imageUrl={session.coverImage} />
-        ) : (
-          <div className="w-full h-full aspect-video">
-            <DefaultThumbnail />
-          </div>
-        )}
+        <Thumbnail
+          imageUrl={session.coverImage}
+          fallBack={thumbnail}
+        />
       </Link>
       <div className="flex justify-between items-start">
         <CardHeader

@@ -22,10 +22,7 @@ const NFTCollectionCard = ({
     <Link
       href={`/${organization}/collection?collectionId=${nft._id}`}
       className="border border-grey bg-secondary rounded-xl p-2 cursor-pointer">
-      <Thumbnail
-        imageUrl={nft.thumbnail}
-        fallBack="/images/videoPlaceholder.png"
-      />
+      <Thumbnail imageUrl={nft.thumbnail} />
 
       <div className="flex justify-between items-start">
         <div

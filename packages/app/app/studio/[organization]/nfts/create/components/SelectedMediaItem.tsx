@@ -1,11 +1,12 @@
+'use client'
+import { useEffect, useState } from 'react'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import {
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
-
+import { generateThumbnail } from '@/lib/actions/livepeer'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
 import { XCircle } from 'lucide-react'
@@ -18,6 +19,19 @@ const SelectedMediaItem = ({
   handleRemoveSelected: (video: IExtendedSession) => void
   video: IExtendedSession
 }) => {
+  const [generatedThumbnail, setGeneratedThumbnail] = useState<
+    string | undefined
+  >('')
+  const getThumbnail = async () => {
+    const thumbnail = await generateThumbnail(video)
+
+    if (thumbnail) setGeneratedThumbnail(thumbnail)
+    return
+  }
+  useEffect(() => {
+    if (video) getThumbnail()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [video])
   return (
     <div className="mt-4 relative">
       <div
@@ -25,11 +39,12 @@ const SelectedMediaItem = ({
         onClick={() => handleRemoveSelected(video)}>
         <XCircle className="fill-muted-foreground text-white w-7 h-7" />
       </div>
+
       <div className="overflow-hidden">
         {video.coverImage ? (
           <Thumbnail imageUrl={video.coverImage} />
         ) : (
-          <DefaultThumbnail />
+          <Thumbnail imageUrl={generatedThumbnail} />
         )}
       </div>
       <div className="flex justify-between items-start">

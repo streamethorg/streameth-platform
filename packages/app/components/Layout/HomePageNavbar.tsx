@@ -15,6 +15,7 @@ import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrg
 import { IExtendedOrganization } from '@/lib/types'
 import { cn } from '@/lib/utils/utils'
 import Support from '../misc/Support'
+import { Button } from '@/components/ui/button'
 const getPages = (
   pages: Page[],
   isSignedIn: boolean,
@@ -185,24 +186,33 @@ const PCNavBar = ({
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex">
-      {showLogo && (
-        <Link href="/">
-          <Image
-            src={logo ?? '/logo_dark.png'}
-            alt="Logo"
-            width={logo ? 50 : 230}
-            height={logo ? 50 : 30}
-            className="hidden lg:block"
-          />
-        </Link>
-      )}
-      <div className="flex flex-grow justify-center items-center">
+    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex">
+      <div className="flex flex-1 justify-start items-center">
+        {showLogo && (
+          <Link href="/">
+            <Image
+              src={logo ?? '/logo_dark.png'}
+              alt="Logo"
+              width={logo ? 50 : 230}
+              height={logo ? 50 : 30}
+              className="hidden lg:block"
+            />
+          </Link>
+        )}
+        {organizations && (
+          <Link href={`/${currentOrganization}`}>
+            <Button className="hidden lg:block" variant={'primary'}>
+              View channel page
+            </Button>
+          </Link>
+        )}
+      </div>
+      <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
         {showSearchBar && (
           <SearchBar organizationSlug={currentOrganization} />
         )}
       </div>
-      <div className="flex items-center ml-auto space-x-2">
+      <div className="flex flex-1 justify-end items-center">
         {organizations && (
           <SwitchOrganization
             organization={currentOrganization}
@@ -216,8 +226,8 @@ const PCNavBar = ({
             userData?.organizations?.[0]?.slug
           )}
         />
+        <ConnectWalletButton />
       </div>
-      <ConnectWalletButton />
     </NavigationMenu>
   )
 }
