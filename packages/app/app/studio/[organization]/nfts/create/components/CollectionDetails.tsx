@@ -27,10 +27,10 @@ const CollectionDetails = ({
     symbol: string
     mintFee: string
     thumbnail: string
-    startDate: Date
-    startTime: string
-    endDate: Date
-    endTime: string
+    // startDate: Date
+    // startTime: string
+    // endDate: Date
+    // endTime: string
     limitedSupply: string
     maxSupply: string
   }>
@@ -134,8 +134,8 @@ const CollectionDetails = ({
               )}
             />
           </div>
-
-          <div className="flex gap-4 flex-col lg:flex-row w-full">
+          {/*//// Temp hiding this    
+          {/* <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}
               name="startDate"
@@ -202,7 +202,7 @@ const CollectionDetails = ({
                 </FormItem>
               )}
             />
-          </div>
+          </div> */}
           <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}

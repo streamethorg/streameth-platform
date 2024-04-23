@@ -20,6 +20,7 @@ export interface INftCollection {
   }[];
   contractAddress?: string;
   ipfsPath?: string;
+  active: boolean;
 }
 
 export interface INftCollectionModel

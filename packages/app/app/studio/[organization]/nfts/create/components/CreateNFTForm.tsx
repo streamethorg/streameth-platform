@@ -70,10 +70,6 @@ const CreateNFTForm = ({
       symbol: '',
       mintFee: '0',
       thumbnail: '',
-      startDate: new Date(),
-      startTime: '',
-      endDate: new Date(),
-      endTime: '',
       maxSupply: '10000',
       limitedSupply: 'false',
     },
@@ -104,6 +100,7 @@ const CreateNFTForm = ({
       collection: {
         ...formResponseData,
         contractAddress: address,
+        active: true,
       },
     })
       .then((response) => {
@@ -145,14 +142,8 @@ const CreateNFTForm = ({
         Boolean(form.getValues('limitedSupply')),
         Number(form.getValues('maxSupply')),
         parseMintFee,
-        getDateWithTime(
-          form.getValues('startDate'),
-          form.getValues('startTime')
-        ).getTime(),
-        getDateWithTime(
-          form.getValues('endDate'),
-          form.getValues('endTime')
-        ).getTime(),
+        0,
+        0,
       ],
     })
   }

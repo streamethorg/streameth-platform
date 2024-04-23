@@ -20,9 +20,11 @@ const NftSchema = new Schema<INftCollectionModel>(
         ipfsURI: { type: String, default: '' },
       },
     ],
+    active: { type: Boolean, default: false },
     contractAddress: { type: String, default: '' },
     ipfsPath: { type: String, default: '' },
   },
+
   {
     timestamps: true,
   },

@@ -1,5 +1,5 @@
 import { NftCollectionType } from '@interfaces/nft.collection.interface';
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 
 export class UpdateNftCollectionDto {
@@ -22,6 +22,10 @@ export class UpdateNftCollectionDto {
   @IsOptional()
   @IsString()
   ipfsPath: string;
+
+  @IsOptional()
+  @IsBoolean()
+  active?: boolean;
 
   @IsOptional()
   @IsString()

@@ -306,7 +306,8 @@ export const getVideoIndex = (
     videoIndex = nftCollection?.videos?.map((vid) => vid?.index) || []
   } else {
     const index = nftCollection?.videos?.find(
-      (vid) => vid.sessionId === video?._id
+      (vid) =>
+        vid.sessionId == video?._id || vid.stageId === video?._id
     )?.index
     if (index !== undefined) {
       videoIndex.push(index)
