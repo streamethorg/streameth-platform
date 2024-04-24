@@ -136,6 +136,7 @@ const CreateLivestreamModal = ({
                     <FormLabel required>Stream name</FormLabel>
                     <FormControl>
                       <Input
+                        max={30}
                         placeholder="e.g. My first livestream"
                         {...field}
                       />

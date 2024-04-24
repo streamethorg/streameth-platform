@@ -15,6 +15,7 @@ import {
   TelegramIcon,
   TwitterIcon,
   WhatsappIcon,
+  XIcon,
 } from 'react-share'
 
 import {
@@ -28,6 +29,7 @@ import {
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
 import { Button } from '@/components/ui/button'
+import CopyText from '@/components/misc/CopyText'
 
 export const ShareModalContent = ({
   url,
@@ -56,12 +58,15 @@ export const ShareModalContent = ({
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>
+        <div className="pb-4">
+          <CopyText label="Url" text={currentUrl} />
+        </div>
         <div className="flex flex-row justify-center items-center px-4 pb-4 space-x-4">
           <FacebookShareButton url={currentUrl} title={text}>
             <FacebookIcon size={42} round />
           </FacebookShareButton>
           <TwitterShareButton url={currentUrl} title={text}>
-            <TwitterIcon size={42} round />
+            <XIcon size={42} round />
           </TwitterShareButton>
           <RedditShareButton url={currentUrl} title={text}>
             <RedditIcon size={42} round />

@@ -43,7 +43,7 @@ export class NftCollectionRouter extends Controller {
     @Body() body: UpdateNftCollectionDto,
   ): Promise<IStandardResponse<{ ipfsPath: string; videos: Array<any> }>> {
     const metadata = await this.collectionService.generateMetadata(body);
-    return SendApiResponse('metadata generted', metadata);
+    return SendApiResponse('metadata generated', metadata);
   }
 
   /**

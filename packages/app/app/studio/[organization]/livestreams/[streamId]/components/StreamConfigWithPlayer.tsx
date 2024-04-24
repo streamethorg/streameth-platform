@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import StreamInput from './StreamInput'
+import CopyText from '../../../../../../components/misc/CopyText'
 import PlayerWithControls from '@/components/ui/Player'
 import { IExtendedStage } from '@/lib/types'
 import { fetchStage } from '@/lib/services/stageService'
@@ -52,11 +52,11 @@ const StreamConfigWithPlayer = ({
             users
           </p>
           <div className="flex flex-col gap-3">
-            <StreamInput
+            <CopyText
               label="RTMP Ingest"
               text="rtmp://rtmp.livepeer.com/live"
             />
-            <StreamInput
+            <CopyText
               label="Stream key"
               text={stream?.streamSettings?.streamKey}
             />
