@@ -29,8 +29,10 @@ import { useRouter } from 'next/navigation'
 import { IExtendedOrganization } from '@/lib/types'
 export default function CreateOrganizationForm({
   organization,
+  disableName = false,
 }: {
   organization?: IExtendedOrganization
+  disableName?: boolean
 }) {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
@@ -121,17 +123,19 @@ export default function CreateOrganizationForm({
             control={form.control}
             name="logo"
             render={({ field }) => (
-              <FormItem className="flex relative w-24 h-24 p-1 rounded-full bg-white mt-[-50px] mx-4">
-                <FormControl>
-                  <ImageUpload
-                    className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"
-                    aspectRatio={1}
-                    path={`organizations`}
-                    {...field}
-                  />
-                </FormControl>
+              <>
+                <FormItem className="flex relative w-24 h-24 p-1 rounded-full bg-white mt-[-50px] mx-4">
+                  <FormControl>
+                    <ImageUpload
+                      className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"
+                      aspectRatio={1}
+                      path={`organizations`}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
                 <FormMessage />
-              </FormItem>
+              </>
             )}
           />
         </div>
@@ -144,7 +148,11 @@ export default function CreateOrganizationForm({
                 Organization name
               </FormLabel>
               <FormControl>
-                <Input placeholder="name" {...field} />
+                <Input
+                  disabled={disableName}
+                  placeholder="name"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -170,7 +178,9 @@ export default function CreateOrganizationForm({
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="">Email</FormLabel>
+              <FormLabel required className="">
+                Email
+              </FormLabel>
               <FormControl>
                 <Input placeholder="email" {...field} />
               </FormControl>
