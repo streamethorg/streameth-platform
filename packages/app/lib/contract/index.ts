@@ -1,6 +1,8 @@
 export const VideoFactoryAddress =
   '0x12fb8277a7aA0210fe44fAD5eDb1F7ceA4490E9e'
 
+export const contractChainID = 84532
+
 export const VideoFactoryAbi = [
   {
     inputs: [

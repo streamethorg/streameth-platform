@@ -2,7 +2,7 @@
 import { copyToClipboard } from '@/lib/utils/utils'
 import { Copy } from 'lucide-react'
 
-const StreamInput = ({
+const CopyText = ({
   label,
   text = '',
 }: {
@@ -22,4 +22,4 @@ const StreamInput = ({
     />
   </div>
 )
-export default StreamInput
+export default CopyText

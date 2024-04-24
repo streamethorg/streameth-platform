@@ -8,6 +8,14 @@ import { getImageUrl } from '@/lib/utils/utils'
 import { toast } from 'sonner'
 import { Label } from '@radix-ui/react-label'
 import { Image as ImageLogo } from 'lucide-react'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   // FileList is immutable, so we need to create a new one
   const dataTransfer = new DataTransfer()
@@ -20,6 +28,44 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
   const files = dataTransfer.files
   const displayUrl = URL.createObjectURL(event.target.files![0])
   return { files, displayUrl }
+}
+
+const ConfirmImageDeletion = ({
+  onChange,
+  setPreview,
+}: {
+  onChange: (files: string | null) => void
+  setPreview: React.Dispatch<React.SetStateAction<string>>
+}) => {
+  const [open, setOpen] = useState(false)
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger>
+        <X
+          size={24}
+          className="bg-white absolute ml-auto z-[9999999999994] text-muted-foreground right-0 border border-muted-foreground rounded-full cursor-pointer"
+        />
+      </DialogTrigger>
+      <DialogContent className="flex flex-col gap-5 justify-center items-center">
+        <p className="text-xl">
+          Are you sure you want to remove this image?
+        </p>
+        <DialogFooter className="flex items-center gap-4">
+          <Button onClick={() => setOpen(false)} variant="ghost">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              onChange('')
+              setPreview('')
+            }}
+            variant="destructive">
+            Delete
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
 }
 
 export default function ImageUpload({
@@ -67,13 +113,13 @@ export default function ImageUpload({
         throw new Error(await res.text())
       }
       onChange(getImageUrl('/' + path + '/' + file.name))
-      toast.success('Image uploaded successfully')
-      setIsUploading(false)
+      return 'Image uploaded successfully'
     } catch (e: any) {
       // Handle errors here
-      setIsUploading(false)
-      toast.error('Error uploading image')
       console.error(e)
+      throw e
+    } finally {
+      setIsUploading(false)
     }
   }
 
@@ -85,13 +131,9 @@ export default function ImageUpload({
         </div>
       ) : preview ? (
         <div className={`${className} flex relative flex-col w-full`}>
-          <X
-            size={24}
-            className="bg-white absolute ml-auto z-[9999999999994] text-muted-foreground right-0 border border-muted-foreground rounded-full"
-            onClick={() => {
-              onChange(null)
-              setPreview('')
-            }}
+          <ConfirmImageDeletion
+            onChange={onChange}
+            setPreview={setPreview}
           />
           <div
             className={`w-full h-full relative flex justify-center flex-col items-center `}>
@@ -107,7 +149,7 @@ export default function ImageUpload({
         <>
           <Label
             htmlFor={id}
-            className={`${className} flex justify-center flex-col items-center border border-dotted bg-secondary`}>
+            className={`${className} flex justify-center flex-col items-center border border-dotted bg-secondary cursor-pointer`}>
             <div className="p-2 text-white rounded-full bg-neutral-400">
               <ImageLogo />
             </div>
@@ -125,7 +167,17 @@ export default function ImageUpload({
               const { files, displayUrl } = getImageData(event)
               console.log(files)
               setPreview(displayUrl)
-              onSubmit(files[0])
+              toast.promise(onSubmit(files[0]), {
+                loading: 'Uploading image',
+                success: (message) => {
+                  toast.success(message)
+                  return 'Image uploaded successfully'
+                },
+                error: (error) => {
+                  toast.error('Error uploading image')
+                  return error.message || 'Unknown error'
+                },
+              })
             }}
           />
         </>
