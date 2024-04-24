@@ -18,11 +18,16 @@ import {
   Get,
   Path,
   Delete,
+  Security,
 } from 'tsoa';
 
 @Tags('Stream')
 @Route('streams')
 export class StreamController extends Controller {
+  /**
+   * @summary  Create Multistream
+   */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('multistream')
   async createMultiStream(
@@ -34,6 +39,10 @@ export class StreamController extends Controller {
     );
   }
 
+  /**
+   * @summary  Delete Multistream
+   */
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('multistream')
   async deleteMultiStream(
@@ -45,6 +54,9 @@ export class StreamController extends Controller {
     );
   }
 
+  /**
+   * @summary  Create stream asset
+   */
   @SuccessResponse('201')
   @Post('asset')
   async createAsset(
@@ -53,12 +65,18 @@ export class StreamController extends Controller {
     return SendApiResponse('Asset created', await createAsset(body));
   }
 
+  /**
+   * @summary  Get Stream
+   */
   @SuccessResponse('200')
   @Get('{streamId}')
   async getStream(@Path() streamId: string): Promise<IStandardResponse<any>> {
     return SendApiResponse('Stream fetched', await getStreamInfo(streamId));
   }
 
+  /**
+   * @summary  Get Viddo url
+   */
   @SuccessResponse('200')
   @Get('asset/{assetId}')
   async getVideoUrl(

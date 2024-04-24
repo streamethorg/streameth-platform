@@ -17,4 +17,8 @@ export class CreateMultiStreamDto implements IMultiStream {
   @IsNotEmpty()
   @IsString()
   targetURL: string;
+
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string;
 }

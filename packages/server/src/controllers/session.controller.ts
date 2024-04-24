@@ -31,8 +31,7 @@ export class SessionController extends Controller {
   private sessionService = new SessionServcie();
 
   /**
-   *
-   * @Summary Create session
+   * @summary Create Session
    */
   @Security('jwt', ['org'])
   @SuccessResponse('201')
@@ -45,8 +44,7 @@ export class SessionController extends Controller {
   }
 
   /**
-   *
-   * @Summary Update session
+   * @summary Update Session
    */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
@@ -60,8 +58,7 @@ export class SessionController extends Controller {
   }
 
   /**
-   *
-   * @Summary Fetch session by id
+   * @summary Fetch session by id
    */
   @SuccessResponse('200')
   @Get('{sessionId}')
@@ -73,8 +70,7 @@ export class SessionController extends Controller {
   }
 
   /**
-   *
-   * @Summary Upload session to YouTube
+   * @summary Upload session to YouTube
    */
   @SuccessResponse('201')
   @Post('upload/{sessionId}')
@@ -122,8 +118,7 @@ export class SessionController extends Controller {
   }
 
   /**
-   *
-   * @Summary Get all sessions
+   * @summary Get All Session
    */
   @SuccessResponse('200')
   @Get()

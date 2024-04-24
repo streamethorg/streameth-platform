@@ -13,6 +13,7 @@ import {
   Route,
   SuccessResponse,
   Tags,
+  Security,
 } from 'tsoa';
 
 @Tags('Collections')
@@ -21,9 +22,9 @@ export class NftCollectionRouter extends Controller {
   private collectionService = new CollectionService();
 
   /**
-   *
-   * @Summary Create nft collection
+   * @summary Create nft collection
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post()
   async createNftCollection(
@@ -34,9 +35,9 @@ export class NftCollectionRouter extends Controller {
   }
 
   /**
-   *
-   * @Summary Generate nft metadata
+   * @summary Generate nft metadata
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('metadata/generate')
   async generateNftMetadata(
@@ -47,9 +48,9 @@ export class NftCollectionRouter extends Controller {
   }
 
   /**
-   *
-   * @Summary Update nft collection
+   * @summary  Update nft collection
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Put('{collectionId}')
   async updateNftCollection(
@@ -61,8 +62,7 @@ export class NftCollectionRouter extends Controller {
   }
 
   /**
-   *
-   * @Summary Get all nft collections
+   * @summary  Get all nft collections
    */
   @SuccessResponse('200')
   @Get()
@@ -72,8 +72,7 @@ export class NftCollectionRouter extends Controller {
   }
 
   /**
-   *
-   * @Summary Get Nft collection by id
+   * @summary  Get Nft collection by id
    */
   @SuccessResponse('200')
   @Get('{collectionId}')
@@ -85,8 +84,7 @@ export class NftCollectionRouter extends Controller {
   }
 
   /**
-   *
-   * @Summary Get Nft collections by organization
+   * @summary  Get Nft collections by organization
    */
   @SuccessResponse('200')
   @Get('organization/{organizationId}')
