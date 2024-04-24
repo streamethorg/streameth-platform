@@ -127,7 +127,7 @@ const MobileNavBar = ({
           </div>
         )}
         {showSearchBar && (
-          <Link href="/">
+          <Link href={`/${currentOrganization}`}>
             <Image
               src={logo ?? '/logo.png'}
               alt="Logo"
