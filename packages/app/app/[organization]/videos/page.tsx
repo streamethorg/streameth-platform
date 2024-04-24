@@ -11,7 +11,6 @@ import ArchiveVideoSkeleton from '../livestream/components/ArchiveVideosSkeleton
 import Image from 'next/image'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
-import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
 import EventSelect from './components/eventSelect'
 import { fetchAllSessions } from '@/lib/data'
 
