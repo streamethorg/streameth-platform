@@ -40,7 +40,7 @@ const CreateLivestreamModal = ({
   show?: boolean
   organization: IExtendedOrganization
 }) => {
-  const [open, setOpen] = React.useState(show ?? false)
+  const [open, setOpen] = useState(show ?? false)
   const [isLoading, setIsLoading] = useState(false)
   const [streamType, setStreamType] = useState<
     'instant' | 'schedule' | undefined

@@ -16,9 +16,12 @@ import UploadComplete from '@/lib/svg/UploadComplete'
 
 const UploadVideoDialog = ({
   organizationId,
+  show,
 }: {
+  show?: boolean
   organizationId: string
 }) => {
+  const [open, setOpen] = useState(show ?? false)
   const [isUploaded, setIsUploaded] = useState(false)
 
   const onFinish = () => {
@@ -26,7 +29,7 @@ const UploadVideoDialog = ({
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant={'primary'} className="text-white">
           Upload video

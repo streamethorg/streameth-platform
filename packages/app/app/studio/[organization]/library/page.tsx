@@ -55,7 +55,7 @@ const Library = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort }
+  searchParams: { layout: eLayout; sort: eSort; show?: boolean }
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -99,6 +99,7 @@ const Library = async ({
         </CardHeader>
         <CardFooter>
           <UploadVideoDialog
+            show={searchParams?.show}
             organizationId={organization._id.toString()}
           />
         </CardFooter>
@@ -130,7 +131,7 @@ const LibraryPage = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort }
+  searchParams: { layout: eLayout; sort: eSort; show: boolean }
 }) => {
   if (
     !searchParams.layout ||
@@ -139,7 +140,7 @@ const LibraryPage = async ({
       searchParams.layout !== eLayout.list)
   ) {
     redirect(
-      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}`
+      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}&show=${searchParams.show}`
     )
   }
 
