@@ -7,9 +7,11 @@ import { Podcast } from 'lucide-react'
 const UpcomingStreams = async ({
   organizationId,
   organizationSlug,
+  currentStreamId,
 }: {
   organizationId: string
   organizationSlug: string
+  currentStreamId: string
 }) => {
   let livestreams = await fetchStages({
     organizationId,
@@ -17,7 +19,7 @@ const UpcomingStreams = async ({
 
   livestreams = livestreams.filter((livestream) => {
     // filter by streams in the future or happening today
-    return true
+    return livestream._id !== currentStreamId
   })
 
   livestreams = livestreams.filter((livestream) => {

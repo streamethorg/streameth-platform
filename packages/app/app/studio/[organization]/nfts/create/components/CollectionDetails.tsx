@@ -17,20 +17,23 @@ import { Textarea } from '@/components/ui/textarea'
 
 import React from 'react'
 import { UseFormReturn } from 'react-hook-form'
+import { NftCollectionType } from 'streameth-new-server/src/interfaces/nft.collection.interface'
 
 const CollectionDetails = ({
   form,
+  type,
 }: {
+  type: NftCollectionType
   form: UseFormReturn<{
     description: string
     name: string
     symbol: string
     mintFee: string
     thumbnail: string
-    startDate: Date
-    startTime: string
-    endDate: Date
-    endTime: string
+    // startDate: Date
+    // startTime: string
+    // endDate: Date
+    // endTime: string
     limitedSupply: string
     maxSupply: string
   }>
@@ -38,7 +41,7 @@ const CollectionDetails = ({
   return (
     <div>
       <CardTitle className="text-2xl font-semibold mb-4">
-        Collection Details
+        {type === 'multiple' ? 'Collection' : 'NFT'} Details
       </CardTitle>
       <Form {...form}>
         <form
@@ -134,8 +137,8 @@ const CollectionDetails = ({
               )}
             />
           </div>
-
-          <div className="flex gap-4 flex-col lg:flex-row w-full">
+          {/*//// Temp hiding this    
+          {/* <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}
               name="startDate"
@@ -202,7 +205,7 @@ const CollectionDetails = ({
                 </FormItem>
               )}
             />
-          </div>
+          </div> */}
           <div className="flex gap-4 flex-col lg:flex-row w-full">
             <FormField
               control={form.control}

@@ -20,8 +20,8 @@ export const ConnectWalletButton = ({
             {isConnected && !isSignedIn
               ? 'Sign In'
               : isConnected
-              ? ensName ?? truncatedAddress
-              : btnText}
+                ? ensName ?? truncatedAddress
+                : btnText}
           </Button>
         )
       }}

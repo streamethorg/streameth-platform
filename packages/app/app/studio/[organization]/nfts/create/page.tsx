@@ -4,6 +4,7 @@ import { fetchAllSessions } from '@/lib/data'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { INFTSessions } from '@/lib/types'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
+import { NftCollectionType } from 'streameth-new-server/src/interfaces/nft.collection.interface'
 
 const CreateNFT = async ({
   params,
@@ -32,7 +33,7 @@ const CreateNFT = async ({
         stages={stages as INFTSessions[]}
         organizationId={organizationId}
         organizationSlug={params.organization}
-        type={type}
+        type={type as NftCollectionType}
       />
     </div>
   )

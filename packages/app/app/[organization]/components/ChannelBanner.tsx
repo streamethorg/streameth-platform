@@ -9,7 +9,7 @@ const ChannelBanner = ({
   organization: IExtendedOrganization
 }) => {
   return (
-    <div className="hidden md:block max-h-[200px] h-full aspect-video w-full">
+    <div className="hidden relative md:block max-h-[200px] h-full aspect-video w-full">
       {organization.banner ? (
         <Image
           src={organization.banner}

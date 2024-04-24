@@ -266,7 +266,10 @@ export const generateEmbedCode = ({
 }
 
 export const sortArray = (
-  stages: IExtendedStage[] | IExtendedSession[],
+  stages:
+    | IExtendedStage[]
+    | IExtendedSession[]
+    | IExtendedNftCollections[],
   sortBy: string
 ) => {
   return stages.sort((a, b) => {
@@ -306,7 +309,8 @@ export const getVideoIndex = (
     videoIndex = nftCollection?.videos?.map((vid) => vid?.index) || []
   } else {
     const index = nftCollection?.videos?.find(
-      (vid) => vid.sessionId === video?._id
+      (vid) =>
+        vid.sessionId == video?._id || vid.stageId === video?._id
     )?.index
     if (index !== undefined) {
       videoIndex.push(index)

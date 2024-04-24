@@ -119,6 +119,7 @@ const OrganizationHome = async ({
           <UpcomingStreams
             organizationId={organization._id}
             organizationSlug={params.organization}
+            currentStreamId={searchParams.streamId}
           />
         </Suspense>
         <Suspense fallback={<WatchGridLoading />}>

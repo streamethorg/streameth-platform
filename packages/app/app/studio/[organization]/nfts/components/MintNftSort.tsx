@@ -24,7 +24,7 @@ const MintNftSort = () => {
       <Combobox
         items={sortOptions as any[]}
         variant="ghost"
-        value={selectedSort || 'default'}
+        value={selectedSort || 'name'}
         setValue={(value) => {
           handleTermChange([{ key: 'sort', value: value }])
         }}

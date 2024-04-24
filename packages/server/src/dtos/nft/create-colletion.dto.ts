@@ -29,8 +29,14 @@ export class CreateNftCollectionDto implements INftCollection {
   @IsNotEmpty()
   @IsArray()
   videos: {
+    index: number;
     type: string;
     sessionId?: string;
     stageId?: string;
+    ipfsURI: string;
   }[];
+
+  @IsNotEmpty()
+  @IsString()
+  ipfsPath?: string;
 }

@@ -5,6 +5,8 @@ import NftCollection from '@models/nft.collection.model';
 import SessionService from './session.service';
 import StageService from './stage.service';
 import { uploadMultipleMetadata, uploadSingleMetadata } from '@utils/storage';
+import Stage from '@models/stage.model';
+import Session from '@models/session.model';
 
 export default class CollectionService {
   private path: string;
@@ -23,16 +25,27 @@ export default class CollectionService {
       data,
       `${this.path}/${data.organizationId}`,
     );
+    for (const video of data.videos) {
+      await this.updateVideoType({
+        type: video.type,
+        sessionId: video.sessionId,
+        stageId: video.stageId,
+        collectionId: createCollection._id.toString(),
+      });
+    }
+    return createCollection;
+  }
+
+  async generateMetadata(data: INftCollection) {
     if (data.type == 'single') {
       let video = data.videos[0];
       let metadata = await this.getMetadata({
         type: video.type,
         sessionId: video.sessionId,
         stageId: video.stageId,
-        collectionId: createCollection._id.toString(),
       });
       let url = await uploadSingleMetadata(JSON.stringify(metadata));
-      data.videos.map((video) => (video.ipfsURI = url));
+      data.videos.map((video) => (video.ipfsURI = url), (video.index = 0));
       data.ipfsPath = this.getIpfsPath(url);
     }
     if (data.type == 'multiple') {
@@ -42,7 +55,6 @@ export default class CollectionService {
           type: video.type,
           sessionId: video.sessionId,
           stageId: video.stageId,
-          collectionId: createCollection._id.toString(),
         });
         files.push(JSON.stringify(metadata));
       }
@@ -54,7 +66,10 @@ export default class CollectionService {
       );
       data.ipfsPath = this.getIpfsPath(urls[0]);
     }
-    return await this.update(createCollection._id.toString(), data);
+    return {
+      ipfsPath: data.ipfsPath,
+      videos: data.videos,
+    };
   }
 
   async update(
@@ -86,19 +101,32 @@ export default class CollectionService {
     type: string;
     sessionId?: string;
     stageId: string;
+  }) {
+    if (data.type == 'livestream') {
+      return await this.stageService.createMetadata(data.stageId);
+    }
+    if (data.type == 'video') {
+      return await this.sessionService.createMetadata(data.sessionId);
+    }
+  }
+
+  private async updateVideoType(data: {
+    type: string;
+    sessionId?: string;
+    stageId: string;
     collectionId: string;
   }) {
     if (data.type == 'livestream') {
-      return await this.stageService.createMetadata(
-        data.stageId,
-        data.collectionId,
-      );
+      await Stage.findByIdAndUpdate(data.stageId, {
+        mintable: true,
+        $addToSet: { nftCollections: data.collectionId },
+      });
     }
     if (data.type == 'video') {
-      return await this.sessionService.createMetadata(
-        data.sessionId,
-        data.collectionId,
-      );
+      await Session.findByIdAndUpdate(data.sessionId, {
+        mintable: true,
+        $addToSet: { nftCollections: data.collectionId },
+      });
     }
   }
 
