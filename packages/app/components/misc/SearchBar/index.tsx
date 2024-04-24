@@ -23,9 +23,11 @@ interface ISessionSearchResult {
 export default function SearchBar({
   organizationSlug,
   searchVisible = true,
+  isMobile = false,
 }: {
   organizationSlug?: string
   searchVisible?: boolean
+  isMobile?: boolean
 }): JSX.Element {
   const { searchParams } = useSearchParams()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -66,7 +68,7 @@ export default function SearchBar({
   }, [debouncedSearchQuery])
 
   useEffect(() => {
-    if (searchVisible && inputRef.current) {
+    if (searchVisible && isMobile && inputRef.current) {
       inputRef.current.focus()
     }
   }, [searchVisible])

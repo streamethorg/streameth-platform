@@ -109,7 +109,7 @@ const MobileNavBar = ({
 
       {searchVisible && showSearchBar && (
         <div className="absolute w-full bottom-[-56px] bg-secondary">
-          <SearchBar />
+          <SearchBar isMobile={true} />
         </div>
       )}
       <div
@@ -209,7 +209,10 @@ const PCNavBar = ({
       </div>
       <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
         {showSearchBar && (
-          <SearchBar organizationSlug={currentOrganization} />
+          <SearchBar
+            searchVisible={showSearchBar}
+            organizationSlug={currentOrganization}
+          />
         )}
       </div>
       <div className="flex flex-1 justify-end items-center">
