@@ -41,6 +41,7 @@ export default function DatePicker({
           selected={new Date(value)}
           onSelect={(date) => {
             onChange(date ?? new Date())
+            setIsOpen(false)
           }}
           disabled={(date) =>
             date <= new Date() || date < new Date('1900-01-01')
