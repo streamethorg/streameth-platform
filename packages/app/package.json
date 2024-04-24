@@ -103,7 +103,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-color": "^3.0.11",
-    "@types/react-dom": "^18.2.15",
+    "@types/react-dom": "^18",
     "@types/react-scroll": "^1.8.7",
     "cypress": "^13.6.2",
     "eslint": "^8",
