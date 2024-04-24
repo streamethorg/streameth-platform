@@ -11,7 +11,7 @@ const SidebarContext = createContext<
 >(undefined)
 
 export const SidebarUI = ({ children }: { children: ReactNode }) => {
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(true)
 
   return (
     <aside className="flex flex-col h-screen border-r bg-primary">
@@ -42,16 +42,16 @@ export const SidebarItem = ({
   icon,
   text,
   navigationPath,
-  active = false,
 }: {
   icon: ReactNode
   text: string
   navigationPath: string
-  active?: boolean
 }) => {
   const router = useRouter()
+  const pathname = usePathname()
+  const active = pathname === navigationPath
   const { expanded } = useContext(SidebarContext) ?? {
-    expanded: false,
+    expanded: true,
   }
 
   const handleRoute = () => {
@@ -67,7 +67,7 @@ export const SidebarItem = ({
             transition-colors group
             ${
               active
-                ? 'bg-gradient-to-tr from-red-200 to-red-100 text-red-800'
+                ? 'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'
                 : 'hover:bg-secondary-foreground'
             }
     `}>
