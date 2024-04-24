@@ -47,7 +47,10 @@ const Settings = async ({
       </div>
       <Card className="w-3/4 rounded-r-xl m-auto bg-white border-none shadow-none">
         <CardContent>
-          <CreateOrganizationForm organization={organization} />
+          <CreateOrganizationForm
+            disableName={true}
+            organization={organization}
+          />
         </CardContent>
       </Card>
     </div>

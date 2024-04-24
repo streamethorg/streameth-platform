@@ -78,7 +78,10 @@ const IPluginSchema = z.object({
 })
 
 export const StageSchema = z.object({
-  name: z.string().min(1, { message: 'Required' }),
+  name: z
+    .string()
+    .min(1, { message: 'Name is Required' })
+    .max(30, { message: 'Name is too long. (Max 30 length)' }),
   eventId: z.string().optional(),
   streamSettings: IStreamSettingsSchema.optional(),
   plugins: z.array(IPluginSchema).optional(),
@@ -123,11 +126,11 @@ export const organizationSchema = z.object({
   logo: z.string().min(1, 'Logo is required'),
   banner: z.string().optional(),
   bio: z.string().optional(),
-  email: z.string().email(),
   description: z
     .string()
     .max(40, { message: 'Description is too long' })
     .optional(),
+  email: z.string().email().min(1, 'Email is required'),
   // url: z.string().optional(),
 })
 

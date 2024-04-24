@@ -50,7 +50,9 @@ const LivestreamTable = ({
                   key={stream._id}
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
                   <div className="flex flex-row items-center space-x-4 w-full">
-                    <p className="hover:underline">{stream?.name}</p>
+                    <p className="hover:underline line-clamp-2 max-w-[150px] md:max-w-[200px] lg:max-w-[300px]">
+                      {stream?.name}
+                    </p>
                   </div>
                 </Link>
               </TableCell>

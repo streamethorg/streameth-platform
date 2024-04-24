@@ -29,7 +29,8 @@ const Pagination = (props: IPagination) => {
           {currentPage} of {props.totalPages}
         </div>
         <button
-          className="p-2 rounded-full hover:bg-gray-100"
+          className="p-2 rounded-full disabled:text-gray-200 active:hover:bg-gray-100"
+          disabled={props.totalPages === currentPage}
           onClick={() => {
             if (currentPage < props.totalPages) {
               handleTermChange([

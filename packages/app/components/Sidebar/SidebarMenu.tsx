@@ -17,11 +17,11 @@ const navigationItems = [
     navigationPath: '',
     icon: <Home size={20} />,
   },
-  {
-    text: 'Events',
-    navigationPath: '/events',
-    icon: <CalendarDays size={20} />,
-  },
+  // {
+  //   text: 'Events',
+  //   navigationPath: '/events',
+  //   icon: <CalendarDays size={20} />,
+  // },
   {
     text: 'Library',
     navigationPath: '/library',
