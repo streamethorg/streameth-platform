@@ -1,35 +1,34 @@
 import { NftCollectionType } from '@interfaces/nft.collection.interface';
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 
 export class UpdateNftCollectionDto {
-  @IsOptional()
   @IsString()
   name: string;
 
   @IsOptional()
   @IsString()
-  description: string;
+  description?: string;
 
   @IsOptional()
   @IsString()
-  thumbnail: string;
+  thumbnail?: string;
 
   @IsOptional()
   @IsString()
-  contractAddress: string;
+  contractAddress?: string;
 
   @IsOptional()
   @IsString()
-  ipfsPath: string;
+  ipfsPath?: string;
 
   @IsOptional()
   @IsString()
-  type: NftCollectionType;
+  type?: NftCollectionType;
 
   @IsOptional()
   @IsString()
-  organizationId: string | Types.ObjectId;
+  organizationId?: string | Types.ObjectId;
 
   @IsOptional()
   @IsArray()

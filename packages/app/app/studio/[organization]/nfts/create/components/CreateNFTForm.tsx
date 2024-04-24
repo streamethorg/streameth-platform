@@ -13,7 +13,7 @@ import { INFTSessions } from '@/lib/types'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import {
   createNFTCollectionAction,
-  updateNFTCollectionAction,
+  generateNFTCollectionMetadataAction,
 } from '@/lib/actions/nftCollection'
 import PublishingNFTModal from './PublishingNFTModal'
 import { toast } from 'sonner'
@@ -30,7 +30,10 @@ import {
 import { VideoFactoryAbi, VideoFactoryAddress } from '@/lib/contract'
 import { getDateWithTime } from '@/lib/utils/time'
 import { ethers } from 'ethers'
-import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface'
+import {
+  INftCollection,
+  NftCollectionType,
+} from 'streameth-new-server/src/interfaces/nft.collection.interface'
 
 export interface ICreateNFT {
   selectedVideo: INFTSessions[]
@@ -47,7 +50,7 @@ const CreateNFTForm = ({
   organizationId: string
   organizationSlug: string
   videos: INFTSessions[]
-  type: string
+  type: NftCollectionType
 }) => {
   const account = useAccount()
   const chain = useChainId()
@@ -62,6 +65,9 @@ const CreateNFTForm = ({
   const [publishError, setPublishError] = useState('')
   const [isTransactionApproved, setIsTransactionApproved] =
     useState(false)
+  const [collectionId, setCollectionId] = useState<
+    string | undefined
+  >('')
   const form = useForm<z.infer<typeof nftSchema>>({
     resolver: zodResolver(nftSchema),
     defaultValues: {
@@ -70,10 +76,6 @@ const CreateNFTForm = ({
       symbol: '',
       mintFee: '0',
       thumbnail: '',
-      startDate: new Date(),
-      startTime: '',
-      endDate: new Date(),
-      endTime: '',
       maxSupply: '10000',
       limitedSupply: 'false',
     },
@@ -98,23 +100,32 @@ const CreateNFTForm = ({
     'ether'
   )
   // Update collection with address
-  const updateCollection = async (address: string) => {
-    await updateNFTCollectionAction({
-      //@ts-ignore
-      collection: {
+  const createCollection = async (address: string) => {
+    await createNFTCollectionAction({
+      nftCollection: {
         ...formResponseData,
+        name: formResponseData?.name as string,
         contractAddress: address,
       },
     })
       .then((response) => {
         if (response) {
           setIsPublished(true)
+          form.reset()
+          setFormState({ selectedVideo: [] })
+          setStep(1)
+          setCollectionId(response?._id?.toString())
           toast.success('NFT Collection successfully created')
         } else {
-          toast.error('Error updating NFT Collection')
+          setIsPublished(false)
+          setPublishError('Error creating NFT Collection')
+          toast.error('Error creating NFT Collection')
         }
       })
-      .catch(() => setPublishError('Error creating collection'))
+      .catch(() => {
+        toast.error('Error creating NFT Collection')
+        setPublishError('Error creating collection')
+      })
   }
   const result = useTransactionReceipt({
     hash,
@@ -122,7 +133,7 @@ const CreateNFTForm = ({
 
   useEffect(() => {
     if (result?.data?.logs[0]?.address) {
-      updateCollection(result?.data?.logs[0]?.address)
+      createCollection(result?.data?.logs[0]?.address)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result?.data?.logs])
@@ -133,7 +144,7 @@ const CreateNFTForm = ({
     }
   }, [hash])
 
-  const createEventCollection = (ipfsPath?: string) => {
+  const createCollectionContract = (ipfsPath?: string) => {
     writeContract({
       abi: VideoFactoryAbi,
       address: VideoFactoryAddress,
@@ -145,19 +156,14 @@ const CreateNFTForm = ({
         Boolean(form.getValues('limitedSupply')),
         Number(form.getValues('maxSupply')),
         parseMintFee,
-        getDateWithTime(
-          form.getValues('startDate'),
-          form.getValues('startTime')
-        ).getTime(),
-        getDateWithTime(
-          form.getValues('endDate'),
-          form.getValues('endTime')
-        ).getTime(),
+        0,
+        0,
       ],
     })
   }
 
   const createNFTCollection = async () => {
+    setIsPublished(false)
     setPublishError('')
     setIsPublishingCollection(true)
     setIsGeneratingMetadata(true)
@@ -185,15 +191,18 @@ const CreateNFTForm = ({
       }
 
       try {
-        const createNFTResponse = await createNFTCollectionAction({
-          nftCollection: formData,
-        })
-        setFormResponseData(createNFTResponse)
-        createEventCollection(createNFTResponse.ipfsPath)
+        const collectionMetadata =
+          await generateNFTCollectionMetadataAction({
+            nftCollection: formData,
+          })
         setIsGeneratingMetadata(false)
-        form.reset()
-        setStep(1)
-        setFormState({ selectedVideo: [] })
+
+        setFormResponseData({
+          ...formData,
+          ipfsPath: collectionMetadata.ipfsPath,
+          videos: collectionMetadata.videos,
+        })
+        createCollectionContract(collectionMetadata.ipfsPath)
       } catch (error) {
         setIsPublishingCollection(false)
         setPublishError('Error while publishing')
@@ -235,7 +244,7 @@ const CreateNFTForm = ({
       </div>
       <div className="bg-white w-full p-4 lg:p-8 flex flex-col justify-between">
         <div>
-          {step == 1 && <CollectionDetails form={form} />}
+          {step == 1 && <CollectionDetails type={type} form={form} />}
           {step == 2 && (
             <AddMedia
               setFormState={setFormState}
@@ -270,7 +279,11 @@ const CreateNFTForm = ({
             }
             onClick={handleNextButton}
             variant="primary">
-            {step == 1 ? 'Continue' : 'Publish Collection'}
+            {step == 1
+              ? 'Continue'
+              : type == 'multiple'
+              ? 'Publish Collection'
+              : 'Publish VideoNFT'}
           </Button>
         </div>
       </div>
@@ -285,6 +298,7 @@ const CreateNFTForm = ({
         isTransactionApproved={isTransactionApproved}
         publishError={publishError}
         isGeneratingMetadata={isGeneratingMetadata}
+        collectionId={collectionId}
       />
     </div>
   )

@@ -23,6 +23,7 @@ const NftSchema = new Schema<INftCollectionModel>(
     contractAddress: { type: String, default: '' },
     ipfsPath: { type: String, default: '' },
   },
+
   {
     timestamps: true,
   },

@@ -34,6 +34,7 @@ const CollectVideButton = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [mintError, setMintError] = useState('')
+  const [isMinting, setIsMinting] = useState(false)
   const videoNFTContract = {
     address: nftCollection?.contractAddress as `0x${string}`,
     abi: VideoNFTAbi,
@@ -61,28 +62,33 @@ const CollectVideButton = ({
   } = useWriteContract()
   const account = useAccount()
   const chain = useChainId()
-  const { isSuccess, isLoading } = useWaitForTransactionReceipt({
+
+  const { isSuccess } = useWaitForTransactionReceipt({
     hash,
   })
 
   useEffect(() => {
     if (isSuccess) {
       setIsOpen(false)
+      setIsMinting(false)
       toast.success(
         'NFT of the video successfully minted to your wallet'
       )
     }
     if (isError) {
-      console.log(error)
+      setIsMinting(false)
       toast.error('NFT of the video failed to mint. Please try again')
     }
   }, [isSuccess, isError, error])
 
   const mintCollection = () => {
+    setMintError('')
+    setIsMinting(true)
     setIsOpen(true)
     if (!account.address || chain !== 84532) {
       switchChain({ chainId: 84532 })
       setMintError('Please switch to base sepolia before continuing.')
+      setIsMinting(false)
     } else {
       writeContract({
         abi: VideoNFTAbi,
@@ -92,7 +98,7 @@ const CollectVideButton = ({
         value: BigInt(
           calMintPrice(
             result?.data as { result: BigInt }[],
-            all,
+            true,
             nftCollection!
           ) as string
         ),
@@ -103,7 +109,7 @@ const CollectVideButton = ({
   return (
     <div>
       <Button
-        loading={isMintingNftPending || isLoading}
+        loading={isMinting}
         onClick={mintCollection}
         variant={variant}
         className="w-full md:w-36">
@@ -113,20 +119,20 @@ const CollectVideButton = ({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
           <DialogTitle>
-            {hash
-              ? 'Transaction approved'
-              : mintError
+            {isError || mintError
               ? 'Error'
+              : hash
+              ? 'Transaction Approved'
               : 'Approve transaction'}
           </DialogTitle>
 
-          {error ? (
-            <div className="text-center text-destructive">
-              Error:{' '}
-              {(error as BaseError).shortMessage || error.message}
+          {hash && <TransactionHash hash={hash} />}
+          {mintError || error ? (
+            <div className="text-destructive text-center">
+              {mintError ||
+                (error as BaseError).shortMessage ||
+                error?.message}
             </div>
-          ) : hash ? (
-            <TransactionHash hash={hash} />
           ) : (
             <div className="flex gap-2 items-center">
               <div className="p-2 mr-2 rounded-full bg-grey h-fit">

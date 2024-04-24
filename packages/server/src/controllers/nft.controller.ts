@@ -35,6 +35,19 @@ export class NftCollectionRouter extends Controller {
 
   /**
    *
+   * @Summary Generate nft metadata
+   */
+  @SuccessResponse('201')
+  @Post('metadata/generate')
+  async generateNftMetadata(
+    @Body() body: UpdateNftCollectionDto,
+  ): Promise<IStandardResponse<{ ipfsPath: string; videos: Array<any> }>> {
+    const metadata = await this.collectionService.generateMetadata(body);
+    return SendApiResponse('metadata generted', metadata);
+  }
+
+  /**
+   *
    * @Summary Update nft collection
    */
   @SuccessResponse('201')

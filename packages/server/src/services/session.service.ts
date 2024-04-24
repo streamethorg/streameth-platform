@@ -124,13 +124,13 @@ export default class SessionService {
     return await this.controller.store.delete(sessionId);
   }
 
-  async createMetadata(sessionId: string, collectionId: string) {
+  async createMetadata(sessionId: string) {
     let session = await Session.findById(sessionId);
     let metadata = {
       name: session.name,
       description: session.description,
       external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
-      animation_url: `<iframe src="https://streameth.org/embed/?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name} width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
+      animation_url: `${config.baseUrl}/embed/?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name}`,
       image: session.coverImage,
       attributes: [
         {
@@ -154,10 +154,6 @@ export default class SessionService {
         },
       ],
     };
-    await session.updateOne({
-      mintable: true,
-      $push: { nftCollections: collectionId },
-    });
     return metadata;
   }
 

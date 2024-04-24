@@ -600,6 +600,7 @@ const models: TsoaRoute.Models = {
             "nftURI": {"dataType":"string"},
             "mintable": {"dataType":"boolean"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
+            "active": {"dataType":"boolean"},
         },
         "additionalProperties": false,
     },
@@ -697,10 +698,10 @@ const models: TsoaRoute.Models = {
         "properties": {
             "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "thumbnail": {"dataType":"string","required":true},
-            "type": {"ref":"NftCollectionType","required":true},
-            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "description": {"dataType":"string"},
+            "thumbnail": {"dataType":"string"},
+            "type": {"ref":"NftCollectionType"},
+            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "videos": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"ipfsURI":{"dataType":"string"},"stageId":{"dataType":"string"},"sessionId":{"dataType":"string"},"type":{"dataType":"string","required":true},"index":{"dataType":"double"}}}},
             "contractAddress": {"dataType":"string"},
             "ipfsPath": {"dataType":"string"},
@@ -727,9 +728,19 @@ const models: TsoaRoute.Models = {
             "thumbnail": {"dataType":"string","required":true},
             "type": {"ref":"NftCollectionType","required":true},
             "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},
-            "videos": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"stageId":{"dataType":"string"},"sessionId":{"dataType":"string"},"type":{"dataType":"string","required":true}}},"required":true},
+            "videos": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"ipfsURI":{"dataType":"string","required":true},"stageId":{"dataType":"string"},"sessionId":{"dataType":"string"},"type":{"dataType":"string","required":true},"index":{"dataType":"double","required":true}}},"required":true},
             "contractAddress": {"dataType":"string"},
             "ipfsPath": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse__ipfsPath-string--videos-Array_any___": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"videos":{"dataType":"array","array":{"dataType":"any"},"required":true},"ipfsPath":{"dataType":"string","required":true}}},
         },
         "additionalProperties": false,
     },
@@ -738,12 +749,12 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "thumbnail": {"dataType":"string","required":true},
-            "contractAddress": {"dataType":"string","required":true},
-            "ipfsPath": {"dataType":"string","required":true},
-            "type": {"ref":"NftCollectionType","required":true},
-            "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},
+            "description": {"dataType":"string"},
+            "thumbnail": {"dataType":"string"},
+            "contractAddress": {"dataType":"string"},
+            "ipfsPath": {"dataType":"string"},
+            "type": {"ref":"NftCollectionType"},
+            "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "videos": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"ipfsURI":{"dataType":"string"},"stageId":{"dataType":"string"},"sessionId":{"dataType":"string"},"type":{"dataType":"string","required":true},"index":{"dataType":"double"}}}},
         },
         "additionalProperties": false,
@@ -2132,6 +2143,36 @@ export function RegisterRoutes(app: Router) {
 
               templateService.apiHandler({
                 methodName: 'createNftCollection',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/collections/metadata/generate',
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.generateNftMetadata)),
+
+            function NftCollectionRouter_generateNftMetadata(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"UpdateNftCollectionDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new NftCollectionRouter();
+
+              templateService.apiHandler({
+                methodName: 'generateNftMetadata',
                 controller,
                 response,
                 next,

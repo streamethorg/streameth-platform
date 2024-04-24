@@ -136,10 +136,6 @@ export const nftSchema = z.object({
   thumbnail: z.string(),
   symbol: z.string(),
   mintFee: z.string(),
-  startDate: z.date(),
-  startTime: z.string(),
-  endDate: z.date(),
-  endTime: z.string(),
   maxSupply: z.string(),
   limitedSupply: z.string(),
 })
