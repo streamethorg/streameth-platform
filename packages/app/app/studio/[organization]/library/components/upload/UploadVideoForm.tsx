@@ -18,17 +18,12 @@ import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
 import { createSessionAction } from '@/lib/actions/sessions'
 import { Loader2 } from 'lucide-react'
-import ImageUpload from '@/components/misc/form/imageUpload'
 import Dropzone from './Dropzone'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import { DialogClose } from '@/components/ui/dialog'
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
 import { createStateAction } from '@/lib/actions/state'
-import {
-  SheetType,
-  StateStatus,
-  StateType,
-} from 'streameth-new-server/src/interfaces/state.interface'
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface'
 import ImageDropzone from '../../[session]/components/ImageDropzone'
 
 const UploadVideoForm = ({

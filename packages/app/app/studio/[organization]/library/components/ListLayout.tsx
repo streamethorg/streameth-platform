@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import {
   Table,
@@ -11,7 +11,8 @@ import TableCells from './TableCells'
 import { IExtendedSession, eSort } from '@/lib/types'
 import LayoutSelection from './LayoutSelection'
 import TableSort from '@/components/misc/TableSort'
-const ListLayout = ({
+
+const ListLayout = async ({
   sessions,
   organizationSlug,
 }: {

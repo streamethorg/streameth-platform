@@ -7,7 +7,7 @@ import { Podcast } from 'lucide-react'
 const UpcomingStreams = async ({
   organizationId,
   organizationSlug,
-  currentStreamId
+  currentStreamId,
 }: {
   organizationId: string
   organizationSlug: string
