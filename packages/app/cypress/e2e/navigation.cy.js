@@ -5,7 +5,7 @@ describe('Navigation', () => {
 
   it('should navigate to the info page', () => {
     cy.get(
-      'a[href*="https://info.streameth.org/stream-eth-studio"]'
+      'a[href*="https://streameth.org/stream-eth-studio"]'
     ).click()
   })
 
