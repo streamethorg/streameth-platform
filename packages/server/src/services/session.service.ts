@@ -130,7 +130,7 @@ export default class SessionService {
       name: session.name,
       description: session.description,
       external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
-      animation_url: `${config.baseUrl}/embed/?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name}`,
+      animation_url: `${config.baseUrl}/embed?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name}`,
       image: session.coverImage,
       attributes: [
         {
@@ -157,6 +157,19 @@ export default class SessionService {
     return metadata;
   }
 
+  async getOrgEventSessions(organizationId: string): Promise<Array<ISession>> {
+    let sessions = [];
+    const events = await Event.find({ organizationId: organizationId });
+    for (const event of events) {
+      let session = await this.getAll({
+        event: event._id,
+        published: true,
+        onlyVideos: true,
+      } as any);
+      sessions.push(session.sessions);
+    }
+    return sessions;
+  }
   async createStreamRecordings(payload: any) {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,

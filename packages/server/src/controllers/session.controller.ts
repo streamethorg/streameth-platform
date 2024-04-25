@@ -58,6 +58,19 @@ export class SessionController extends Controller {
   }
 
   /**
+   * @summary Get all event sessions
+   */
+  @SuccessResponse('200')
+  @Get('organization/{organizationId}')
+  async getOrgEventSessions(
+    @Path() organizationId: string,
+  ): Promise<IStandardResponse<Array<ISession>>> {
+    const sessions =
+      await this.sessionService.getOrgEventSessions(organizationId);
+    return SendApiResponse('sessions fetched', sessions);
+  }
+
+  /**
    * @summary Fetch session by id
    */
   @SuccessResponse('200')
