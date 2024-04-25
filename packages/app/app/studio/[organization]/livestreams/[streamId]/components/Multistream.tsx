@@ -12,7 +12,13 @@ import DeleteMultistream from './DeleteMultistream'
 import { CreateMultistreamTarget } from '../../../event/[eventId]/components/stageSettings/multistream/CreateMultistreamTarget'
 import { IExtendedStage } from '@/lib/types'
 
-const Multistream = ({ stream }: { stream: IExtendedStage }) => {
+const Multistream = ({
+  stream,
+  organizationId,
+}: {
+  stream: IExtendedStage
+  organizationId: string
+}) => {
   if (!stream) return null
   const streamTargets = stream?.streamSettings?.targets || []
 
@@ -26,6 +32,7 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
             </CardTitle>
 
             <CreateMultistreamTarget
+              organizationId={organizationId}
               streamId={stream?.streamSettings?.streamId}
             />
           </CardContent>
@@ -38,6 +45,7 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
             </CardTitle>
             <CreateMultistreamTarget
               btnName="Add Target"
+              organizationId={organizationId}
               streamId={stream?.streamSettings?.streamId}
             />
           </CardContent>
@@ -64,6 +72,7 @@ const Multistream = ({ stream }: { stream: IExtendedStage }) => {
                       <TableCell className="font-medium flex justify-end">
                         <DeleteMultistream
                           streamId={stream?.streamSettings?.streamId}
+                          organizationId={organizationId}
                           targetId={target.id}
                         />
                       </TableCell>

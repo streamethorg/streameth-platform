@@ -8,4 +8,8 @@ export class DeleteMultiStreamDto {
   @IsNotEmpty()
   @IsString()
   targetId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  organizationId: string;
 }

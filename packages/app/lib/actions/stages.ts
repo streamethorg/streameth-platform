@@ -89,6 +89,7 @@ export const createMultistreamAction = async (
   const name = formData.get('name') as string
   const url = formData.get('url') as string
   const streamKey = formData.get('streamKey') as string
+  const organizationId = formData.get('organizationId') as string
 
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
@@ -101,6 +102,7 @@ export const createMultistreamAction = async (
       targetURL: url,
       targetStreamKey: streamKey,
       authToken,
+      organizationId,
     })
 
     revalidatePath('/studio')
@@ -116,6 +118,7 @@ export const createMultistreamAction = async (
 
 export const deleteMultistreamAction = async (
   streamId: string,
+  organizationId: string,
   targetId: string
 ) => {
   const authToken = cookies().get('user-session')?.value
@@ -125,6 +128,7 @@ export const deleteMultistreamAction = async (
   const response = await deleteMultistream({
     streamId,
     targetId,
+    organizationId,
     authToken,
   })
   if (!response) {

@@ -28,7 +28,10 @@ const StreamConfig = async ({
         stream={stage}
       />
 
-      <Multistream stream={stage} />
+      <Multistream
+        organizationId={stage.organizationId as string}
+        stream={stage}
+      />
 
       <LivestreamEmbedCode
         streamId={stage?.streamSettings?.streamId}
