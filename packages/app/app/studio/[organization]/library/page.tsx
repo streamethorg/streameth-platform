@@ -55,7 +55,7 @@ const Library = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort }
+  searchParams: { layout: eLayout; sort: eSort; show?: boolean }
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -130,7 +130,7 @@ const LibraryPage = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort }
+  searchParams: { layout: eLayout; sort: eSort; show: boolean }
 }) => {
   if (
     !searchParams.layout ||

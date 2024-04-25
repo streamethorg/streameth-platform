@@ -19,6 +19,7 @@ const UploadVideoDialog = ({
 }: {
   organizationId: string
 }) => {
+  const [open, setOpen] = useState(false)
   const [isUploaded, setIsUploaded] = useState(false)
 
   const onFinish = () => {
@@ -26,7 +27,7 @@ const UploadVideoDialog = ({
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant={'primary'} className="text-white">
           Upload video

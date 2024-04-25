@@ -32,6 +32,7 @@ import { z } from 'zod'
 import CreateLivestreamOptions from './CreateLivestreamOptions'
 import TimePicker from '@/components/misc/form/timePicker'
 import { formatDate } from '@/lib/utils/time'
+import ImageUpload from '@/components/misc/form/imageUpload'
 
 const CreateLivestreamModal = ({
   organization,
@@ -40,7 +41,7 @@ const CreateLivestreamModal = ({
   show?: boolean
   organization: IExtendedOrganization
 }) => {
-  const [open, setOpen] = React.useState(show ?? false)
+  const [open, setOpen] = useState(show ?? false)
   const [isLoading, setIsLoading] = useState(false)
   const [streamType, setStreamType] = useState<
     'instant' | 'schedule' | undefined
@@ -138,6 +139,27 @@ const CreateLivestreamModal = ({
                       <Input
                         max={30}
                         placeholder="e.g. My first livestream"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="thumbnail"
+                render={({ field }) => (
+                  <FormItem className="flex p-1 aspect-video mt-4">
+                    <FormLabel>Thumbnail</FormLabel>
+                    <FormControl>
+                      <ImageUpload
+                        placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
+                        Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
+                        className="w-full h-full bg-neutrals-300 text-black m-auto"
+                        aspectRatio={1}
+                        path={`livestreams/${organization?.slug}`}
                         {...field}
                       />
                     </FormControl>

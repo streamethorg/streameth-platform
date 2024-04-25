@@ -81,9 +81,10 @@ export default function CreateOrganizationForm({
     createOrganizationAction({
       organization: { ...values, walletAddress: address as string },
     })
-      .then(() => {
+      .then((response) => {
         setIsOpen(false)
         toast.success('Organization created')
+        router.push(`/studio/${response.slug}`)
       })
       .catch(() => {
         toast.error('Error creating organization')
@@ -150,7 +151,7 @@ export default function CreateOrganizationForm({
               <FormControl>
                 <Input
                   disabled={disableName}
-                  placeholder="name"
+                  placeholder="Name"
                   {...field}
                 />
               </FormControl>
@@ -182,7 +183,7 @@ export default function CreateOrganizationForm({
                 Email
               </FormLabel>
               <FormControl>
-                <Input placeholder="email" {...field} />
+                <Input placeholder="Email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -65,6 +65,7 @@ const Collection = async ({
               video={video}
               key={collection._id}
               nftCollection={collection}
+              organizationSlug={params.organization}
             />
           ))}
         </div>
