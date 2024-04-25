@@ -30,7 +30,10 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
         organization={params.organization}
       />
 
-      <Multistream stream={stream} />
+      <Multistream
+        stream={stream}
+        organizationId={stream.organizationId as string}
+      />
 
       <LivestreamEmbedCode
         streamId={stream?.streamSettings?.streamId}

@@ -224,13 +224,17 @@
 					},
 					"targetURL": {
 						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"name",
 					"streamId",
 					"targetStreamKey",
-					"targetURL"
+					"targetURL",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -259,11 +263,15 @@
 					},
 					"targetId": {
 						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"streamId",
-					"targetId"
+					"targetId",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1672,6 +1680,28 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse_Array_ISession__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/ISession"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___": {
 				"properties": {
 					"status": {
@@ -3041,10 +3071,17 @@
 						}
 					}
 				},
+				"summary": "Create Multistream",
 				"tags": [
 					"Stream"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -3071,10 +3108,17 @@
 						}
 					}
 				},
+				"summary": "Delete Multistream",
 				"tags": [
 					"Stream"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -3103,6 +3147,7 @@
 						}
 					}
 				},
+				"summary": "Create stream asset",
 				"tags": [
 					"Stream"
 				],
@@ -3133,6 +3178,7 @@
 						}
 					}
 				},
+				"summary": "Get Stream",
 				"tags": [
 					"Stream"
 				],
@@ -3164,6 +3210,7 @@
 						}
 					}
 				},
+				"summary": "Get Viddo url",
 				"tags": [
 					"Stream"
 				],
@@ -3341,6 +3388,7 @@
 						}
 					}
 				},
+				"summary": "Create Session",
 				"tags": [
 					"Stage"
 				],
@@ -3377,6 +3425,7 @@
 						}
 					}
 				},
+				"summary": "Get All Stage",
 				"tags": [
 					"Stage"
 				],
@@ -3408,6 +3457,7 @@
 						}
 					}
 				},
+				"summary": "Update Stage",
 				"tags": [
 					"Stage"
 				],
@@ -3453,6 +3503,7 @@
 						}
 					}
 				},
+				"summary": "Get Stage by id",
 				"tags": [
 					"Stage"
 				],
@@ -3482,6 +3533,7 @@
 						}
 					}
 				},
+				"summary": "Delete Stage",
 				"tags": [
 					"Stage"
 				],
@@ -3529,6 +3581,7 @@
 						}
 					}
 				},
+				"summary": "Get All Stage for Event",
 				"tags": [
 					"Stage"
 				],
@@ -3560,6 +3613,7 @@
 						}
 					}
 				},
+				"summary": "Get All Stage for Organization",
 				"tags": [
 					"Stage"
 				],
@@ -3691,6 +3745,7 @@
 						}
 					}
 				},
+				"summary": "Create Session",
 				"tags": [
 					"Session"
 				],
@@ -3727,6 +3782,7 @@
 						}
 					}
 				},
+				"summary": "Get All Session",
 				"tags": [
 					"Session"
 				],
@@ -3833,6 +3889,7 @@
 						}
 					}
 				},
+				"summary": "Update Session",
 				"tags": [
 					"Session"
 				],
@@ -3878,6 +3935,7 @@
 						}
 					}
 				},
+				"summary": "Fetch session by id",
 				"tags": [
 					"Session"
 				],
@@ -3940,6 +3998,38 @@
 				}
 			}
 		},
+		"/sessions/organization/{organizationId}": {
+			"get": {
+				"operationId": "GetOrgEventSessions",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_ISession__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all event sessions",
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/sessions/upload/{sessionId}": {
 			"post": {
 				"operationId": "UploadSessionToYouTube",
@@ -3955,6 +4045,7 @@
 						}
 					}
 				},
+				"summary": "Upload session to YouTube",
 				"tags": [
 					"Session"
 				],
@@ -4306,10 +4397,17 @@
 						}
 					}
 				},
+				"summary": "Create nft collection",
 				"tags": [
 					"Collections"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -4336,6 +4434,7 @@
 						}
 					}
 				},
+				"summary": "Get all nft collections",
 				"tags": [
 					"Collections"
 				],
@@ -4358,10 +4457,17 @@
 						}
 					}
 				},
+				"summary": "Generate nft metadata",
 				"tags": [
 					"Collections"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -4390,10 +4496,17 @@
 						}
 					}
 				},
+				"summary": "Update nft collection",
 				"tags": [
 					"Collections"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -4429,6 +4542,7 @@
 						}
 					}
 				},
+				"summary": "Get Nft collection by id",
 				"tags": [
 					"Collections"
 				],
@@ -4460,6 +4574,7 @@
 						}
 					}
 				},
+				"summary": "Get Nft collections by organization",
 				"tags": [
 					"Collections"
 				],
@@ -4589,6 +4704,7 @@
 						}
 					}
 				},
+				"summary": "Get All Event",
 				"tags": [
 					"Event"
 				],
@@ -4704,6 +4820,7 @@
 						}
 					}
 				},
+				"summary": "Delete Event",
 				"tags": [
 					"Event"
 				],

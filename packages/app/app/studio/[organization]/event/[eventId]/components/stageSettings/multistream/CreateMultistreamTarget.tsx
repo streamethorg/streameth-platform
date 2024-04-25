@@ -39,9 +39,11 @@ function SubmitButton() {
 
 export const CreateMultistreamTarget = ({
   streamId,
+  organizationId,
   btnName = 'Create',
 }: {
   streamId?: string
+  organizationId?: string
   btnName?: string
 }) => {
   const [open, setOpen] = React.useState(false)
@@ -67,6 +69,11 @@ export const CreateMultistreamTarget = ({
         <form action={formAction} className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Input type="hidden" name="streamId" value={streamId} />
+            <Input
+              type="hidden"
+              name="organizationId"
+              value={organizationId}
+            />
             <Label htmlFor="name" className="text-right">
               Name
             </Label>

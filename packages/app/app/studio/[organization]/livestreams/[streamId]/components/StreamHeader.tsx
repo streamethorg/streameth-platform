@@ -26,7 +26,7 @@ const StreamHeader = ({
   }, [])
   return (
     <div className="flex items-center justify-between w-full">
-      <CardTitle className="lg:max-w-[550px] line-clamp-1">
+      <CardTitle className="lg:max-w-[550px] line-clamp-2">
         {stream.name}
       </CardTitle>
       <div className="flex items-center gap-4">

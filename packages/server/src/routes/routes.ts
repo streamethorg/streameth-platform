@@ -147,6 +147,7 @@ const models: TsoaRoute.Models = {
             "streamId": {"dataType":"string","required":true},
             "targetStreamKey": {"dataType":"string","required":true},
             "targetURL": {"dataType":"string","required":true},
+            "organizationId": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -166,6 +167,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "streamId": {"dataType":"string","required":true},
             "targetId": {"dataType":"string","required":true},
+            "organizationId": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -601,6 +603,16 @@ const models: TsoaRoute.Models = {
             "mintable": {"dataType":"boolean"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "active": {"dataType":"boolean"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_Array_ISession__": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"ISession"}},
         },
         "additionalProperties": false,
     },
@@ -1128,6 +1140,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/streams/multistream',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.createMultiStream)),
 
@@ -1158,6 +1171,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/streams/multistream',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.deleteMultiStream)),
 
@@ -1743,6 +1757,36 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/sessions/organization/:organizationId',
+            ...(fetchMiddlewares<RequestHandler>(SessionController)),
+            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getOrgEventSessions)),
+
+            function SessionController_getOrgEventSessions(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new SessionController();
+
+              templateService.apiHandler({
+                methodName: 'getOrgEventSessions',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/sessions/:sessionId',
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getSessionById)),
@@ -2125,6 +2169,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/collections',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.createNftCollection)),
 
@@ -2155,6 +2200,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/collections/metadata/generate',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.generateNftMetadata)),
 
@@ -2185,6 +2231,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/collections/:collectionId',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.updateNftCollection)),
 

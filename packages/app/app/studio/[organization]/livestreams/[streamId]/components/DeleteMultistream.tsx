@@ -7,9 +7,11 @@ import { toast } from 'sonner'
 
 const DeleteMultistream = ({
   streamId,
+  organizationId,
   targetId,
 }: {
   streamId?: string
+  organizationId: string
   targetId?: string
 }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -17,7 +19,11 @@ const DeleteMultistream = ({
   const handleDelete = async (streamId: string, targetId: string) => {
     setIsLoading(true)
     try {
-      await deleteMultistreamAction(streamId, targetId)
+      await deleteMultistreamAction(
+        streamId,
+        organizationId,
+        targetId
+      )
       toast.success('Multistream target deleted')
       setIsLoading(false)
     } catch (error) {
