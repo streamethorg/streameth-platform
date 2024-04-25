@@ -12,6 +12,7 @@ import { Metadata } from 'next'
 import { fetchChat } from '@/lib/services/chatService'
 import { Livepeer } from 'livepeer'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
+
 export default async function Stage({ params }: EventPageProps) {
   if (!params.event || !params.stage) {
     return notFound()
@@ -29,7 +30,7 @@ export default async function Stage({ params }: EventPageProps) {
     apiKey: process.env.LIVEPEER_API_KEY,
   })
 
-  if (!event || !stage) {
+  if (!event || !stage || !stage?._id) {
     return notFound()
   }
 
@@ -49,7 +50,7 @@ export default async function Stage({ params }: EventPageProps) {
 
   return (
     <div className="bg-event flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] p-2 gap-2">
-      <div className="flex flex-col w-full md:h-full md:overflow-auto z-40 md:w-full top-[54px] gap-2">
+      <div className="flex z-40 flex-col gap-2 w-full md:overflow-auto md:w-full md:h-full top-[54px]">
         <Player
           src={[
             {
@@ -64,16 +65,14 @@ export default async function Stage({ params }: EventPageProps) {
           ]}
         />
         <SessionInfoBox
-          inverted
-          title={'Watching: ' + stage.name}
-          avatarUrl={event.logo}
-          avatarFallback={event.name.slice(0, 1)}
-          playerName={stage.name}
-          playbackId={stream.playbackId}
+          name={`Watching: ${stage.name}`}
           description={event.description}
+          date={stage.createdAt as string}
+          inverted
+          playbackId={stream.playbackId}
         />
       </div>
-      <div className="flex flex-col w-full lg:w-2/5 md:h-full z-40 top-[54px] gap-2">
+      <div className="flex z-40 flex-col gap-2 w-full md:h-full lg:w-2/5 top-[54px]">
         <UpcomingSession
           event={event}
           currentSession={currentSession}

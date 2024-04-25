@@ -1,8 +1,12 @@
 const shouldAnalyzeBundles = process.env.ANALYZE === true
-
 /** @type {import('next').NextConfig} */
 let nextConfig = {
   redirects: async () => [
+    {
+      source: '/',
+      destination: '/index.html',
+      permanent: true,
+    },
     {
       source: '/',
       has: [
@@ -37,7 +41,7 @@ let nextConfig = {
       destination:
         'https://launch.scroll.io/scroll/scroll_announcement_stream',
       permanent: true,
-    },
+    }
   ],
 
   async headers() {

@@ -20,11 +20,10 @@ export function generateTimezones() {
 
 export const getTime = (date: Date): number => moment(date).valueOf()
 
-export const extractDate = (date: Date): string =>
-  moment(date).format('YYYY-MM-DD')
-
-export const getDateAsString = (date: Date): string =>
-  moment(date).format('YYYY-MM-DD')
+export const formatDate = (
+  date: Date,
+  format = 'YYYY-MM-DD'
+): string => moment(date).format(format)
 
 export const getEventDays = (start: Date, end: Date): number[] => {
   const startDate = moment(start)
@@ -103,4 +102,9 @@ export const getSessionDays = (sessions: IExtendedSession[]) => {
   )
 
   return uniqueTimestampsArray
+}
+
+export const getDateWithTime = (date: Date, time: string) => {
+  const dateInput = formatDate(new Date(date), 'YYYY-MM-DD')
+  return new Date(`${dateInput}T${time}`)
 }

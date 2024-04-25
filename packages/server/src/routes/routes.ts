@@ -1,11 +1,13 @@
 /* tslint:disable */
 /* eslint-disable */
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
+import { TsoaRoute, fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../controllers/user.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { SupportController } from './../controllers/support.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { StreamController } from './../controllers/stream.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { StateController } from './../controllers/state.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -17,6 +19,8 @@ import { SessionController } from './../controllers/session.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { OrganizationController } from './../controllers/organization.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { NftCollectionRouter } from './../controllers/nft.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { IndexController } from './../controllers/index.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EventController } from './../controllers/event.controller';
@@ -26,7 +30,10 @@ import { ChatController } from './../controllers/chat.controller';
 import { AuthController } from './../controllers/auth.controller';
 import { expressAuthentication } from './../middlewares/auth.middleware';
 // @ts-ignore - no great way to install types from subpackage
-import type { RequestHandler, Router } from 'express';
+import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
+
+const expressAuthenticationRecasted = expressAuthentication as (req: ExRequest, securityName: string, scopes?: string[], res?: ExResponse) => Promise<any>;
+
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
@@ -43,11 +50,13 @@ const models: TsoaRoute.Models = {
             "name": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
             "description": {"dataType":"string"},
+            "bio": {"dataType":"string"},
             "url": {"dataType":"string"},
             "logo": {"dataType":"string","required":true},
             "location": {"dataType":"string"},
             "accentColor": {"dataType":"string"},
             "slug": {"dataType":"string"},
+            "banner": {"dataType":"string"},
             "walletAddress": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
@@ -121,6 +130,66 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_any_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"any"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateMultiStreamDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "streamId": {"dataType":"string","required":true},
+            "targetStreamKey": {"dataType":"string","required":true},
+            "targetURL": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_void_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"void"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "DeleteMultiStreamDto": {
+        "dataType": "refObject",
+        "properties": {
+            "streamId": {"dataType":"string","required":true},
+            "targetId": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse__url-string--assetId-string__": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"assetId":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_string_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "SheetType": {
         "dataType": "refEnum",
         "enums": ["gsheet","pretalx"],
@@ -141,6 +210,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "_id": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "eventId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "sessionId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "eventSlug": {"dataType":"string"},
             "sessionSlug": {"dataType":"string"},
@@ -166,13 +236,13 @@ const models: TsoaRoute.Models = {
         "properties": {
             "_id": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "eventId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},
             "sessionId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "eventSlug": {"dataType":"string"},
             "sessionSlug": {"dataType":"string"},
-            "sheetType": {"ref":"SheetType","required":true},
+            "sheetType": {"ref":"SheetType"},
             "status": {"ref":"StateStatus"},
             "type": {"ref":"StateType"},
-            "StateStatus": {"ref":"StateStatus","required":true},
         },
         "additionalProperties": false,
     },
@@ -181,11 +251,12 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "eventId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "sessionId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
             "eventSlug": {"dataType":"string"},
             "sessionSlug": {"dataType":"string"},
-            "sheetType": {"ref":"SheetType","required":true},
-            "StateStatus": {"ref":"StateStatus","required":true},
+            "sheetType": {"ref":"SheetType"},
+            "status": {"ref":"StateStatus"},
             "type": {"ref":"StateType"},
         },
         "additionalProperties": false,
@@ -201,10 +272,26 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TargetOutput": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string"},
+            "name": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStreamSettings": {
         "dataType": "refObject",
         "properties": {
             "streamId": {"dataType":"string"},
+            "parentId": {"dataType":"string"},
+            "playbackId": {"dataType":"string"},
+            "isHealthy": {"dataType":"boolean"},
+            "isActive": {"dataType":"boolean"},
+            "streamKey": {"dataType":"string"},
+            "ipfshash": {"dataType":"string"},
+            "targets": {"dataType":"array","array":{"dataType":"refObject","ref":"TargetOutput"}},
         },
         "additionalProperties": false,
     },
@@ -220,14 +307,21 @@ const models: TsoaRoute.Models = {
     "IStage": {
         "dataType": "refObject",
         "properties": {
-            "_id": {"ref":"mongoose.Types.ObjectId"},
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
-            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "streamSettings": {"ref":"IStreamSettings","required":true},
+            "description": {"dataType":"string"},
+            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
+            "streamSettings": {"ref":"IStreamSettings"},
             "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
             "order": {"dataType":"double"},
             "slug": {"dataType":"string"},
+            "published": {"dataType":"boolean"},
             "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "thumbnail": {"dataType":"string"},
+            "streamDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
+            "mintable": {"dataType":"boolean"},
+            "createdAt": {"dataType":"string"},
+            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
         },
         "additionalProperties": false,
     },
@@ -245,14 +339,21 @@ const models: TsoaRoute.Models = {
     "CreateStageDto": {
         "dataType": "refObject",
         "properties": {
-            "_id": {"ref":"mongoose.Types.ObjectId"},
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "name": {"dataType":"string","required":true},
-            "eventId": {"dataType":"string","required":true},
-            "streamSettings": {"ref":"IStreamSettings","required":true},
+            "description": {"dataType":"string"},
+            "eventId": {"dataType":"string"},
+            "streamSettings": {"ref":"IStreamSettings"},
             "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
             "order": {"dataType":"double"},
             "slug": {"dataType":"string"},
+            "published": {"dataType":"boolean"},
             "organizationId": {"dataType":"string","required":true},
+            "thumbnail": {"dataType":"string"},
+            "streamDate": {"dataType":"datetime"},
+            "mintable": {"dataType":"boolean"},
+            "createdAt": {"dataType":"string"},
+            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
         },
         "additionalProperties": false,
     },
@@ -261,12 +362,18 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "name": {"dataType":"string","required":true},
-            "eventId": {"dataType":"string","required":true},
-            "streamSettings": {"ref":"IStreamSettings","required":true},
+            "description": {"dataType":"string"},
+            "eventId": {"dataType":"string"},
+            "published": {"dataType":"boolean"},
+            "streamSettings": {"ref":"IStreamSettings"},
             "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
             "order": {"dataType":"double"},
             "organizationId": {"dataType":"string","required":true},
             "slug": {"dataType":"string"},
+            "streamDate": {"dataType":"string"},
+            "thumbnail": {"dataType":"string"},
+            "mintable": {"dataType":"boolean"},
+            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
         },
         "additionalProperties": false,
     },
@@ -277,16 +384,6 @@ const models: TsoaRoute.Models = {
             "status": {"dataType":"string","required":true},
             "message": {"dataType":"string","required":true},
             "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IStage"}},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_void_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"void"},
         },
         "additionalProperties": false,
     },
@@ -305,7 +402,7 @@ const models: TsoaRoute.Models = {
             "_id": {"dataType":"string"},
             "name": {"dataType":"string","required":true},
             "bio": {"dataType":"string","required":true},
-            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "twitter": {"dataType":"string"},
             "github": {"dataType":"string"},
             "website": {"dataType":"string"},
@@ -357,7 +454,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_ISpeaker.Exclude_keyofISpeaker.organizationId__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"_id":{"dataType":"string"},"name":{"dataType":"string","required":true},"bio":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"twitter":{"dataType":"string"},"github":{"dataType":"string"},"website":{"dataType":"string"},"photo":{"dataType":"string"},"company":{"dataType":"string"},"slug":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"_id":{"dataType":"string"},"name":{"dataType":"string","required":true},"bio":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"twitter":{"dataType":"string"},"github":{"dataType":"string"},"website":{"dataType":"string"},"photo":{"dataType":"string"},"company":{"dataType":"string"},"slug":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Omit_ISpeaker.organizationId_": {
@@ -387,6 +484,11 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SessionType": {
+        "dataType": "refEnum",
+        "enums": ["clip","livestream","video"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ISession": {
         "dataType": "refObject",
         "properties": {
@@ -395,14 +497,14 @@ const models: TsoaRoute.Models = {
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"double","required":true},
             "end": {"dataType":"double","required":true},
-            "stageId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "speakers": {"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"},"required":true},
+            "stageId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
+            "speakers": {"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"}},
             "source": {"ref":"ISource"},
             "assetId": {"dataType":"string"},
             "playback": {"ref":"IPlayback"},
             "videoUrl": {"dataType":"string"},
             "playbackId": {"dataType":"string"},
-            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
             "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
             "track": {"dataType":"array","array":{"dataType":"string"}},
             "coverImage": {"dataType":"string"},
@@ -411,6 +513,12 @@ const models: TsoaRoute.Models = {
             "videoTranscription": {"dataType":"string"},
             "aiDescription": {"dataType":"string"},
             "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
+            "ipfsURI": {"dataType":"string"},
+            "mintable": {"dataType":"boolean"},
+            "published": {"dataType":"boolean"},
+            "type": {"ref":"SessionType","required":true},
+            "createdAt": {"dataType":"string"},
+            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
         },
         "additionalProperties": false,
     },
@@ -427,7 +535,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_ISession.Exclude_keyofISession._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"name":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"slug":{"dataType":"string"},"description":{"dataType":"string","required":true},"start":{"dataType":"double","required":true},"end":{"dataType":"double","required":true},"stageId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"speakers":{"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"},"required":true},"source":{"ref":"ISource"},"assetId":{"dataType":"string"},"playback":{"ref":"IPlayback"},"videoUrl":{"dataType":"string"},"playbackId":{"dataType":"string"},"track":{"dataType":"array","array":{"dataType":"string"}},"coverImage":{"dataType":"string"},"eventSlug":{"dataType":"string"},"videoTranscription":{"dataType":"string"},"aiDescription":{"dataType":"string"},"autoLabels":{"dataType":"array","array":{"dataType":"string"}}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"name":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"slug":{"dataType":"string"},"description":{"dataType":"string","required":true},"start":{"dataType":"double","required":true},"end":{"dataType":"double","required":true},"stageId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"speakers":{"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"}},"source":{"ref":"ISource"},"assetId":{"dataType":"string"},"playback":{"ref":"IPlayback"},"videoUrl":{"dataType":"string"},"playbackId":{"dataType":"string"},"track":{"dataType":"array","array":{"dataType":"string"}},"coverImage":{"dataType":"string"},"eventSlug":{"dataType":"string"},"videoTranscription":{"dataType":"string"},"aiDescription":{"dataType":"string"},"autoLabels":{"dataType":"array","array":{"dataType":"string"}},"ipfsURI":{"dataType":"string"},"mintable":{"dataType":"boolean"},"published":{"dataType":"boolean"},"type":{"ref":"SessionType","required":true},"createdAt":{"dataType":"string"},"nftCollections":{"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateSessionDto": {
@@ -435,12 +543,12 @@ const models: TsoaRoute.Models = {
         "properties": {
             "organizationId": {"dataType":"string","required":true},
             "name": {"dataType":"string","required":true},
-            "eventId": {"dataType":"string","required":true},
+            "eventId": {"dataType":"string"},
             "slug": {"dataType":"string"},
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"double","required":true},
             "end": {"dataType":"double","required":true},
-            "stageId": {"dataType":"string","required":true},
+            "stageId": {"dataType":"string"},
             "speakers": {"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"},"required":true},
             "source": {"ref":"ISource"},
             "assetId": {"dataType":"string"},
@@ -453,6 +561,12 @@ const models: TsoaRoute.Models = {
             "videoTranscription": {"dataType":"string"},
             "aiDescription": {"dataType":"string"},
             "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
+            "ipfsURI": {"dataType":"string"},
+            "mintable": {"dataType":"boolean"},
+            "published": {"dataType":"boolean"},
+            "type": {"ref":"SessionType","required":true},
+            "createdAt": {"dataType":"string"},
+            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "autolabels": {"dataType":"array","array":{"dataType":"string"}},
         },
         "additionalProperties": false,
@@ -465,13 +579,13 @@ const models: TsoaRoute.Models = {
             "description": {"dataType":"string","required":true},
             "start": {"dataType":"double","required":true},
             "end": {"dataType":"double","required":true},
-            "stageId": {"dataType":"string","required":true},
+            "stageId": {"dataType":"string"},
             "speakers": {"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"},"required":true},
             "source": {"ref":"ISource"},
             "playback": {"ref":"IPlayback"},
             "videoUrl": {"dataType":"string"},
             "playbackId": {"dataType":"string"},
-            "eventId": {"dataType":"string","required":true},
+            "eventId": {"dataType":"string"},
             "organizationId": {"dataType":"string","required":true},
             "track": {"dataType":"array","array":{"dataType":"string"}},
             "coverImage": {"dataType":"string"},
@@ -480,6 +594,13 @@ const models: TsoaRoute.Models = {
             "aiDescription": {"dataType":"string"},
             "autolabels": {"dataType":"array","array":{"dataType":"string"}},
             "assetId": {"dataType":"string"},
+            "ipfsURI": {"dataType":"string"},
+            "published": {"dataType":"boolean"},
+            "type": {"ref":"SessionType","required":true},
+            "nftURI": {"dataType":"string"},
+            "mintable": {"dataType":"boolean"},
+            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
+            "active": {"dataType":"boolean"},
         },
         "additionalProperties": false,
     },
@@ -506,13 +627,14 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"slug":{"dataType":"string"},"description":{"dataType":"string"},"email":{"dataType":"string","required":true},"url":{"dataType":"string"},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"walletAddress":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"email":{"dataType":"string","required":true},"url":{"dataType":"string"},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"walletAddress":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
         "dataType": "refObject",
         "properties": {
             "name": {"dataType":"string","required":true},
+            "bio": {"dataType":"string"},
             "slug": {"dataType":"string"},
             "description": {"dataType":"string"},
             "email": {"dataType":"string","required":true},
@@ -520,6 +642,7 @@ const models: TsoaRoute.Models = {
             "logo": {"dataType":"string","required":true},
             "location": {"dataType":"string"},
             "accentColor": {"dataType":"string"},
+            "banner": {"dataType":"string"},
             "walletAddress": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
@@ -529,10 +652,13 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
             "logo": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
             "walletAddress": {"dataType":"string","required":true},
-            "organizationId": {"dataType":"string","required":true},
+            "banner": {"dataType":"string"},
+            "organizationId": {"dataType":"string"},
+            "url": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -552,12 +678,94 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_string_": {
+    "IStandardResponse_Array_IUser__": {
         "dataType": "refObject",
         "properties": {
             "status": {"dataType":"string","required":true},
             "message": {"dataType":"string","required":true},
-            "data": {"dataType":"string"},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IUser"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftCollectionType": {
+        "dataType": "refEnum",
+        "enums": ["single","multiple"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "INftCollection": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "thumbnail": {"dataType":"string"},
+            "type": {"ref":"NftCollectionType"},
+            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
+            "videos": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"ipfsURI":{"dataType":"string"},"stageId":{"dataType":"string"},"sessionId":{"dataType":"string"},"type":{"dataType":"string","required":true},"index":{"dataType":"double"}}}},
+            "contractAddress": {"dataType":"string"},
+            "ipfsPath": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_INftCollection_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"ref":"INftCollection"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateNftCollectionDto": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string","required":true},
+            "thumbnail": {"dataType":"string","required":true},
+            "type": {"ref":"NftCollectionType","required":true},
+            "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},
+            "videos": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"ipfsURI":{"dataType":"string","required":true},"stageId":{"dataType":"string"},"sessionId":{"dataType":"string"},"type":{"dataType":"string","required":true},"index":{"dataType":"double","required":true}}},"required":true},
+            "contractAddress": {"dataType":"string"},
+            "ipfsPath": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse__ipfsPath-string--videos-Array_any___": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"videos":{"dataType":"array","array":{"dataType":"any"},"required":true},"ipfsPath":{"dataType":"string","required":true}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UpdateNftCollectionDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "thumbnail": {"dataType":"string"},
+            "contractAddress": {"dataType":"string"},
+            "ipfsPath": {"dataType":"string"},
+            "type": {"ref":"NftCollectionType"},
+            "organizationId": {"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},
+            "videos": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"ipfsURI":{"dataType":"string"},"stageId":{"dataType":"string"},"sessionId":{"dataType":"string"},"type":{"dataType":"string","required":true},"index":{"dataType":"double"}}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_Array_INftCollection__": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"INftCollection"}},
         },
         "additionalProperties": false,
     },
@@ -603,6 +811,21 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IEventNFT": {
+        "dataType": "refObject",
+        "properties": {
+            "address": {"dataType":"string"},
+            "name": {"dataType":"string"},
+            "symbol": {"dataType":"string"},
+            "uri": {"dataType":"string"},
+            "maxSupply": {"dataType":"string"},
+            "mintFee": {"dataType":"string"},
+            "startTime": {"dataType":"string"},
+            "endTime": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IEvent": {
         "dataType": "refObject",
         "properties": {
@@ -628,6 +851,7 @@ const models: TsoaRoute.Models = {
             "enableVideoDownloader": {"dataType":"boolean"},
             "plugins": {"ref":"IPlugins"},
             "slug": {"dataType":"string"},
+            "eventNFT": {"ref":"IEventNFT"},
         },
         "additionalProperties": false,
     },
@@ -667,6 +891,8 @@ const models: TsoaRoute.Models = {
             "enableVideoDownloader": {"dataType":"boolean"},
             "plugins": {"ref":"IPlugins"},
             "slug": {"dataType":"string"},
+            "eventNFT": {"ref":"IEventNFT"},
+            "nftAddress": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -696,6 +922,7 @@ const models: TsoaRoute.Models = {
             "enableVideoDownloader": {"dataType":"boolean"},
             "plugins": {"ref":"IPlugins"},
             "slug": {"dataType":"string"},
+            "eventNFT": {"ref":"IEventNFT"},
         },
         "additionalProperties": false,
     },
@@ -800,7 +1027,7 @@ const models: TsoaRoute.Models = {
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
-const validationService = new ValidationService(models);
+const templateService = new ExpressTemplateService(models, {"noImplicitAdditionalProperties":"throw-on-extras","bodyCoercion":true});
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
@@ -814,8 +1041,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(UserController)),
             ...(fetchMiddlewares<RequestHandler>(UserController.prototype.getUserById)),
 
-            function UserController_getUserById(request: any, response: any, next: any) {
-            const args = {
+            function UserController_getUserById(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     walletAddress: {"in":"path","name":"walletAddress","required":true,"dataType":"string"},
             };
 
@@ -823,13 +1050,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new UserController();
 
-
-              const promise = controller.getUserById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getUserById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -840,8 +1072,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SupportController)),
             ...(fetchMiddlewares<RequestHandler>(SupportController.prototype.createTicket)),
 
-            function SupportController_createTicket(request: any, response: any, next: any) {
-            const args = {
+            function SupportController_createTicket(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateSupportTicketDto"},
             };
 
@@ -849,13 +1081,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SupportController();
 
-
-              const promise = controller.createTicket.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'createTicket',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -865,21 +1102,176 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SupportController)),
             ...(fetchMiddlewares<RequestHandler>(SupportController.prototype.getAllTickets)),
 
-            function SupportController_getAllTickets(request: any, response: any, next: any) {
-            const args = {
+            function SupportController_getAllTickets(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SupportController();
 
+              templateService.apiHandler({
+                methodName: 'getAllTickets',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/streams/multistream',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.createMultiStream)),
 
-              const promise = controller.getAllTickets.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+            function StreamController_createMultiStream(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateMultiStreamDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              templateService.apiHandler({
+                methodName: 'createMultiStream',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/streams/multistream',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.deleteMultiStream)),
+
+            function StreamController_deleteMultiStream(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"DeleteMultiStreamDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              templateService.apiHandler({
+                methodName: 'deleteMultiStream',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/streams/asset',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.createAsset)),
+
+            function StreamController_createAsset(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"any"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              templateService.apiHandler({
+                methodName: 'createAsset',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/streams/:streamId',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getStream)),
+
+            function StreamController_getStream(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    streamId: {"in":"path","name":"streamId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              templateService.apiHandler({
+                methodName: 'getStream',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/streams/asset/:assetId',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getVideoUrl)),
+
+            function StreamController_getVideoUrl(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    assetId: {"in":"path","name":"assetId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              templateService.apiHandler({
+                methodName: 'getVideoUrl',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -890,8 +1282,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StateController)),
             ...(fetchMiddlewares<RequestHandler>(StateController.prototype.createState)),
 
-            function StateController_createState(request: any, response: any, next: any) {
-            const args = {
+            function StateController_createState(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateStateDto"},
             };
 
@@ -899,13 +1291,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StateController();
 
-
-              const promise = controller.createState.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'createState',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -916,8 +1313,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StateController)),
             ...(fetchMiddlewares<RequestHandler>(StateController.prototype.updateState)),
 
-            function StateController_updateState(request: any, response: any, next: any) {
-            const args = {
+            function StateController_updateState(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stateId: {"in":"path","name":"stateId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateStateDto"},
             };
@@ -926,13 +1323,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StateController();
 
-
-              const promise = controller.updateState.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'updateState',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -942,24 +1344,31 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StateController)),
             ...(fetchMiddlewares<RequestHandler>(StateController.prototype.getAllStates)),
 
-            function StateController_getAllStates(request: any, response: any, next: any) {
-            const args = {
+            function StateController_getAllStates(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"query","name":"eventId","dataType":"string"},
                     sessionId: {"in":"query","name":"sessionId","dataType":"string"},
                     eventSlug: {"in":"query","name":"eventSlug","dataType":"string"},
+                    type: {"in":"query","name":"type","dataType":"string"},
+                    status: {"in":"query","name":"status","dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StateController();
 
-
-              const promise = controller.getAllStates.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getAllStates',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -970,8 +1379,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.createStage)),
 
-            function StageController_createStage(request: any, response: any, next: any) {
-            const args = {
+            function StageController_createStage(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateStageDto"},
             };
 
@@ -979,13 +1388,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StageController();
 
-
-              const promise = controller.createStage.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'createStage',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -996,8 +1410,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.editStage)),
 
-            function StageController_editStage(request: any, response: any, next: any) {
-            const args = {
+            function StageController_editStage(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateStageDto"},
             };
@@ -1006,13 +1420,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StageController();
 
-
-              const promise = controller.editStage.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'editStage',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1022,8 +1441,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getStageById)),
 
-            function StageController_getStageById(request: any, response: any, next: any) {
-            const args = {
+            function StageController_getStageById(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
             };
 
@@ -1031,13 +1450,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StageController();
 
-
-              const promise = controller.getStageById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getStageById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1047,21 +1471,27 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStages)),
 
-            function StageController_getAllStages(request: any, response: any, next: any) {
-            const args = {
+            function StageController_getAllStages(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    published: {"in":"query","name":"published","dataType":"boolean"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StageController();
 
-
-              const promise = controller.getAllStages.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getAllStages',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1071,8 +1501,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStagesForEvent)),
 
-            function StageController_getAllStagesForEvent(request: any, response: any, next: any) {
-            const args = {
+            function StageController_getAllStagesForEvent(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
             };
 
@@ -1080,13 +1510,48 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StageController();
 
+              templateService.apiHandler({
+                methodName: 'getAllStagesForEvent',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/stages/organization/:organizationId',
+            ...(fetchMiddlewares<RequestHandler>(StageController)),
+            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStagesForOrganization)),
 
-              const promise = controller.getAllStagesForEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+            function StageController_getAllStagesForOrganization(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StageController();
+
+              templateService.apiHandler({
+                methodName: 'getAllStagesForOrganization',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1097,8 +1562,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.deleteStage)),
 
-            function StageController_deleteStage(request: any, response: any, next: any) {
-            const args = {
+            function StageController_deleteStage(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
             };
@@ -1107,13 +1572,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new StageController();
 
-
-              const promise = controller.deleteStage.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'deleteStage',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1124,8 +1594,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
             ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.createSpeaker)),
 
-            function SpeakerController_createSpeaker(request: any, response: any, next: any) {
-            const args = {
+            function SpeakerController_createSpeaker(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateSpeakerDto"},
             };
 
@@ -1133,13 +1603,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SpeakerController();
 
-
-              const promise = controller.createSpeaker.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'createSpeaker',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1149,8 +1624,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
             ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.getSpeaker)),
 
-            function SpeakerController_getSpeaker(request: any, response: any, next: any) {
-            const args = {
+            function SpeakerController_getSpeaker(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     speakerId: {"in":"path","name":"speakerId","required":true,"dataType":"string"},
             };
 
@@ -1158,13 +1633,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SpeakerController();
 
-
-              const promise = controller.getSpeaker.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getSpeaker',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1174,8 +1654,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
             ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.getAllSpeakersForEvent)),
 
-            function SpeakerController_getAllSpeakersForEvent(request: any, response: any, next: any) {
-            const args = {
+            function SpeakerController_getAllSpeakersForEvent(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
             };
 
@@ -1183,13 +1663,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SpeakerController();
 
-
-              const promise = controller.getAllSpeakersForEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getAllSpeakersForEvent',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1200,8 +1685,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.createSession)),
 
-            function SessionController_createSession(request: any, response: any, next: any) {
-            const args = {
+            function SessionController_createSession(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateSessionDto"},
             };
 
@@ -1209,13 +1694,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SessionController();
 
-
-              const promise = controller.createSession.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'createSession',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1226,8 +1716,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.editSession)),
 
-            function SessionController_editSession(request: any, response: any, next: any) {
-            const args = {
+            function SessionController_editSession(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateSessionDto"},
             };
@@ -1236,13 +1726,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SessionController();
 
-
-              const promise = controller.editSession.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'editSession',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1252,8 +1747,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getSessionById)),
 
-            function SessionController_getSessionById(request: any, response: any, next: any) {
-            const args = {
+            function SessionController_getSessionById(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
             };
 
@@ -1261,13 +1756,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SessionController();
 
-
-              const promise = controller.getSessionById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getSessionById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1277,8 +1777,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.uploadSessionToYouTube)),
 
-            function SessionController_uploadSessionToYouTube(request: any, response: any, next: any) {
-            const args = {
+            function SessionController_uploadSessionToYouTube(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
                     googleToken: {"in":"query","name":"googleToken","required":true,"dataType":"string"},
             };
@@ -1287,13 +1787,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SessionController();
 
-
-              const promise = controller.uploadSessionToYouTube.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'uploadSessionToYouTube',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1303,8 +1808,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getAllSessions)),
 
-            function SessionController_getAllSessions(request: any, response: any, next: any) {
-            const args = {
+            function SessionController_getAllSessions(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     event: {"in":"query","name":"event","dataType":"string"},
                     organization: {"in":"query","name":"organization","dataType":"string"},
                     speaker: {"in":"query","name":"speaker","dataType":"string"},
@@ -1314,19 +1819,25 @@ export function RegisterRoutes(app: Router) {
                     size: {"in":"query","name":"size","dataType":"double"},
                     timestamp: {"in":"query","name":"timestamp","dataType":"double"},
                     assetId: {"in":"query","name":"assetId","dataType":"string"},
+                    published: {"in":"query","name":"published","dataType":"boolean"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SessionController();
 
-
-              const promise = controller.getAllSessions.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getAllSessions',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1337,8 +1848,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.deleteSession)),
 
-            function SessionController_deleteSession(request: any, response: any, next: any) {
-            const args = {
+            function SessionController_deleteSession(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
             };
@@ -1347,13 +1858,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new SessionController();
 
-
-              const promise = controller.deleteSession.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'deleteSession',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1364,8 +1880,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.createOrganization)),
 
-            function OrganizationController_createOrganization(request: any, response: any, next: any) {
-            const args = {
+            function OrganizationController_createOrganization(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateOrganizationDto"},
             };
 
@@ -1373,13 +1889,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new OrganizationController();
 
-
-              const promise = controller.createOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'createOrganization',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1390,8 +1911,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.editOrganization)),
 
-            function OrganizationController_editOrganization(request: any, response: any, next: any) {
-            const args = {
+            function OrganizationController_editOrganization(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateOrganizationDto"},
             };
@@ -1400,25 +1921,30 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new OrganizationController();
 
-
-              const promise = controller.editOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'editOrganization',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/organizations/members/:organizationId',
+        app.put('/organizations/member/:organizationId',
             authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.updateOrgMembers)),
 
-            function OrganizationController_updateOrgMembers(request: any, response: any, next: any) {
-            const args = {
+            function OrganizationController_updateOrgMembers(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"Pick_CreateOrganizationDto.walletAddress_"},
             };
@@ -1427,13 +1953,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new OrganizationController();
 
-
-              const promise = controller.updateOrgMembers.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'updateOrgMembers',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1443,8 +1974,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getOrganizationById)),
 
-            function OrganizationController_getOrganizationById(request: any, response: any, next: any) {
-            const args = {
+            function OrganizationController_getOrganizationById(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
             };
 
@@ -1452,13 +1983,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new OrganizationController();
 
-
-              const promise = controller.getOrganizationById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getOrganizationById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1468,21 +2004,57 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getAllOrganizations)),
 
-            function OrganizationController_getAllOrganizations(request: any, response: any, next: any) {
-            const args = {
+            function OrganizationController_getAllOrganizations(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new OrganizationController();
 
+              templateService.apiHandler({
+                methodName: 'getAllOrganizations',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/organizations/member/:organizationId',
+            authenticateMiddleware([{"jwt":["org"]}]),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getAllOrgMembers)),
 
-              const promise = controller.getAllOrganizations.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+            function OrganizationController_getAllOrgMembers(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new OrganizationController();
+
+              templateService.apiHandler({
+                methodName: 'getAllOrgMembers',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1493,8 +2065,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.deleteOrganization)),
 
-            function OrganizationController_deleteOrganization(request: any, response: any, next: any) {
-            const args = {
+            function OrganizationController_deleteOrganization(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
                     _organizationId: {"in":"body","name":"_organizationId","required":true,"ref":"OrgIdDto"},
             };
@@ -1503,13 +2075,230 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new OrganizationController();
 
+              templateService.apiHandler({
+                methodName: 'deleteOrganization',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/organizations/member/:organizationId',
+            authenticateMiddleware([{"jwt":["org"]}]),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.deleteOrgMember)),
 
-              const promise = controller.deleteOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+            function OrganizationController_deleteOrgMember(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"ref":"Pick_CreateOrganizationDto.walletAddress_"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new OrganizationController();
+
+              templateService.apiHandler({
+                methodName: 'deleteOrgMember',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/collections',
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.createNftCollection)),
+
+            function NftCollectionRouter_createNftCollection(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateNftCollectionDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new NftCollectionRouter();
+
+              templateService.apiHandler({
+                methodName: 'createNftCollection',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/collections/metadata/generate',
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.generateNftMetadata)),
+
+            function NftCollectionRouter_generateNftMetadata(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"UpdateNftCollectionDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new NftCollectionRouter();
+
+              templateService.apiHandler({
+                methodName: 'generateNftMetadata',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/collections/:collectionId',
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.updateNftCollection)),
+
+            function NftCollectionRouter_updateNftCollection(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    collectionId: {"in":"path","name":"collectionId","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"ref":"UpdateNftCollectionDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new NftCollectionRouter();
+
+              templateService.apiHandler({
+                methodName: 'updateNftCollection',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/collections',
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.getAllCollections)),
+
+            function NftCollectionRouter_getAllCollections(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new NftCollectionRouter();
+
+              templateService.apiHandler({
+                methodName: 'getAllCollections',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/collections/:collectionId',
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.getNftCollectionById)),
+
+            function NftCollectionRouter_getNftCollectionById(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    collectionId: {"in":"path","name":"collectionId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new NftCollectionRouter();
+
+              templateService.apiHandler({
+                methodName: 'getNftCollectionById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/collections/organization/:organizationId',
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
+            ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.getAllOrganizationNft)),
+
+            function NftCollectionRouter_getAllOrganizationNft(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new NftCollectionRouter();
+
+              templateService.apiHandler({
+                methodName: 'getAllOrganizationNft',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1519,21 +2308,26 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(IndexController)),
             ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.index)),
 
-            function IndexController_index(request: any, response: any, next: any) {
-            const args = {
+            function IndexController_index(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new IndexController();
 
-
-              const promise = controller.index.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              templateService.apiHandler({
+                methodName: 'index',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1543,9 +2337,9 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(IndexController)),
             ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.webhook)),
 
-            function IndexController_webhook(request: any, response: any, next: any) {
-            const args = {
-                    livepeerSignature: {"in":"header","name":"Livepeer-Signature","required":true,"dataType":"string"},
+            function IndexController_webhook(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    livepeerSignature: {"in":"header","name":"livepeer-signature","required":true,"dataType":"string"},
                     payload: {"in":"body","name":"payload","required":true,"dataType":"any"},
             };
 
@@ -1553,13 +2347,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new IndexController();
 
-
-              const promise = controller.webhook.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              templateService.apiHandler({
+                methodName: 'webhook',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1570,8 +2369,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.createEvent)),
 
-            function EventController_createEvent(request: any, response: any, next: any) {
-            const args = {
+            function EventController_createEvent(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateEventDto"},
             };
 
@@ -1579,13 +2378,48 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new EventController();
 
+              templateService.apiHandler({
+                methodName: 'createEvent',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/events/:eventId',
+            ...(fetchMiddlewares<RequestHandler>(EventController)),
+            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getEventById)),
 
-              const promise = controller.createEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+            function EventController_getEventById(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new EventController();
+
+              templateService.apiHandler({
+                methodName: 'getEventById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1596,8 +2430,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.editEvent)),
 
-            function EventController_editEvent(request: any, response: any, next: any) {
-            const args = {
+            function EventController_editEvent(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateEventDto"},
             };
@@ -1606,13 +2440,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new EventController();
 
-
-              const promise = controller.editEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'editEvent',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1623,8 +2462,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.evenImporter)),
 
-            function EventController_evenImporter(request: any, response: any, next: any) {
-            const args = {
+            function EventController_evenImporter(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
             };
@@ -1633,38 +2472,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new EventController();
 
-
-              const promise = controller.evenImporter.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/events/:eventId',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getEventById)),
-
-            function EventController_getEventById(request: any, response: any, next: any) {
-            const args = {
-                    eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.getEventById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'evenImporter',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1674,46 +2493,28 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getAllEvents)),
 
-            function EventController_getAllEvents(request: any, response: any, next: any) {
-            const args = {
+            function EventController_getAllEvents(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"query","name":"organizationId","dataType":"string"},
+                    unlisted: {"in":"query","name":"unlisted","dataType":"boolean"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new EventController();
 
-
-              const promise = controller.getAllEvents.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/events/organization/:organizationId',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getAllEventsForOrganization)),
-
-            function EventController_getAllEventsForOrganization(request: any, response: any, next: any) {
-            const args = {
-                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new EventController();
-
-
-              const promise = controller.getAllEventsForOrganization.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getAllEvents',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1724,8 +2525,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.deleteEvent)),
 
-            function EventController_deleteEvent(request: any, response: any, next: any) {
-            const args = {
+            function EventController_deleteEvent(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
             };
@@ -1734,13 +2535,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new EventController();
 
-
-              const promise = controller.deleteEvent.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'deleteEvent',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1751,8 +2557,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ChatController)),
             ...(fetchMiddlewares<RequestHandler>(ChatController.prototype.createCHar)),
 
-            function ChatController_createCHar(request: any, response: any, next: any) {
-            const args = {
+            function ChatController_createCHar(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateChatDto"},
             };
 
@@ -1760,13 +2566,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new ChatController();
 
-
-              const promise = controller.createCHar.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'createCHar',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1776,8 +2587,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ChatController)),
             ...(fetchMiddlewares<RequestHandler>(ChatController.prototype.getChatStageById)),
 
-            function ChatController_getChatStageById(request: any, response: any, next: any) {
-            const args = {
+            function ChatController_getChatStageById(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
             };
 
@@ -1785,13 +2596,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new ChatController();
 
-
-              const promise = controller.getChatStageById.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'getChatStageById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1801,8 +2617,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(AuthController)),
             ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.login)),
 
-            function AuthController_login(request: any, response: any, next: any) {
-            const args = {
+            function AuthController_login(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"UserDto"},
             };
 
@@ -1810,13 +2626,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new AuthController();
 
-
-              const promise = controller.login.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'login',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1826,8 +2647,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(AuthController)),
             ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.generateNonce)),
 
-            function AuthController_generateNonce(request: any, response: any, next: any) {
-            const args = {
+            function AuthController_generateNonce(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     req: {"in":"request","name":"req","required":true,"dataType":"object"},
             };
 
@@ -1835,13 +2656,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new AuthController();
 
-
-              const promise = controller.generateNonce.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 200, next);
+              templateService.apiHandler({
+                methodName: 'generateNonce',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1851,8 +2677,8 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(AuthController)),
             ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.verifyToken)),
 
-            function AuthController_verifyToken(request: any, response: any, next: any) {
-            const args = {
+            function AuthController_verifyToken(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
                     token: {"in":"body","name":"token","required":true,"ref":"AuthDto"},
             };
 
@@ -1860,13 +2686,18 @@ export function RegisterRoutes(app: Router) {
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
                 const controller = new AuthController();
 
-
-              const promise = controller.verifyToken.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, 201, next);
+              templateService.apiHandler({
+                methodName: 'verifyToken',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -1879,7 +2710,7 @@ export function RegisterRoutes(app: Router) {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
     function authenticateMiddleware(security: TsoaRoute.Security[] = []) {
-        return async function runAuthenticationMiddleware(request: any, _response: any, next: any) {
+        return async function runAuthenticationMiddleware(request: any, response: any, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
@@ -1899,7 +2730,7 @@ export function RegisterRoutes(app: Router) {
 
                     for (const name in secMethod) {
                         secMethodAndPromises.push(
-                            expressAuthentication(request, name, secMethod[name])
+                            expressAuthenticationRecasted(request, name, secMethod[name], response)
                                 .catch(pushAndRethrow)
                         );
                     }
@@ -1911,7 +2742,7 @@ export function RegisterRoutes(app: Router) {
                 } else {
                     for (const name in secMethod) {
                         secMethodOrPromises.push(
-                            expressAuthentication(request, name, secMethod[name])
+                            expressAuthenticationRecasted(request, name, secMethod[name], response)
                                 .catch(pushAndRethrow)
                         );
                     }
@@ -1922,107 +2753,28 @@ export function RegisterRoutes(app: Router) {
 
             try {
                 request['user'] = await Promise.any(secMethodOrPromises);
+
+                // Response was sent in middleware, abort
+                if (response.writableEnded) {
+                    return;
+                }
+
                 next();
             }
             catch(err) {
                 // Show most recent error as response
                 const error = failedAttempts.pop();
                 error.status = error.status || 401;
+
+                // Response was sent in middleware, abort
+                if (response.writableEnded) {
+                    return;
+                }
                 next(error);
             }
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         }
-    }
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function isController(object: any): object is Controller {
-        return 'getHeaders' in object && 'getStatus' in object && 'setStatus' in object;
-    }
-
-    function promiseHandler(controllerObj: any, promise: any, response: any, successStatus: any, next: any) {
-        return Promise.resolve(promise)
-            .then((data: any) => {
-                let statusCode = successStatus;
-                let headers;
-                if (isController(controllerObj)) {
-                    headers = controllerObj.getHeaders();
-                    statusCode = controllerObj.getStatus() || statusCode;
-                }
-
-                // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-                returnHandler(response, statusCode, data, headers)
-            })
-            .catch((error: any) => next(error));
-    }
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function returnHandler(response: any, statusCode?: number, data?: any, headers: any = {}) {
-        if (response.headersSent) {
-            return;
-        }
-        Object.keys(headers).forEach((name: string) => {
-            response.set(name, headers[name]);
-        });
-        if (data && typeof data.pipe === 'function' && data.readable && typeof data._read === 'function') {
-            response.status(statusCode || 200)
-            data.pipe(response);
-        } else if (data !== null && data !== undefined) {
-            response.status(statusCode || 200).json(data);
-        } else {
-            response.status(statusCode || 204).end();
-        }
-    }
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function responder(response: any): TsoaResponse<HttpStatusCodeLiteral, unknown>  {
-        return function(status, data, headers) {
-            returnHandler(response, status, data, headers);
-        };
-    };
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function getValidatedArgs(args: any, request: any, response: any): any[] {
-        const fieldErrors: FieldErrors  = {};
-        const values = Object.keys(args).map((key) => {
-            const name = args[key].name;
-            switch (args[key].in) {
-                case 'request':
-                    return request;
-                case 'query':
-                    return validationService.ValidateParam(args[key], request.query[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'queries':
-                    return validationService.ValidateParam(args[key], request.query, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'path':
-                    return validationService.ValidateParam(args[key], request.params[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'header':
-                    return validationService.ValidateParam(args[key], request.header(name), name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'body':
-                    return validationService.ValidateParam(args[key], request.body, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'body-prop':
-                    return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, 'body.', {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'formData':
-                    if (args[key].dataType === 'file') {
-                        return validationService.ValidateParam(args[key], request.file, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    } else if (args[key].dataType === 'array' && args[key].array.dataType === 'file') {
-                        return validationService.ValidateParam(args[key], request.files, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    } else {
-                        return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    }
-                case 'res':
-                    return responder(response);
-            }
-        });
-
-        if (Object.keys(fieldErrors).length > 0) {
-            throw new ValidateError(fieldErrors, '');
-        }
-        return values;
     }
 
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

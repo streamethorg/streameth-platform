@@ -22,8 +22,6 @@ export const createSession = async ({
       body: JSON.stringify(session),
     })
     if (!response.ok) {
-      console.log(session)
-      console.log(`${apiUrl()}/sessions`)
       console.log('error in createSession', await response.json())
       throw 'Error updating session'
     }
@@ -119,6 +117,7 @@ export const deleteSession = async ({
     )
 
     if (!response.ok) {
+      console.log('error in deleteSession', await response.json())
       throw 'Error deleting session'
     }
     return await response.json()

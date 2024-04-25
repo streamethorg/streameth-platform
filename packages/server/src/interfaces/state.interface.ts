@@ -20,6 +20,7 @@ export enum StateType {
 export interface IState {
   _id?: string | Types.ObjectId;
   eventId?: string | Types.ObjectId;
+  organizationId?: string | Types.ObjectId;
   sessionId?: string | Types.ObjectId;
   eventSlug?: string;
   sessionSlug?: string;

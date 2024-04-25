@@ -1,7 +1,13 @@
-import { IPlayback, ISession, ISource } from '@interfaces/session.interface';
+import {
+  IPlayback,
+  ISession,
+  ISource,
+  SessionType,
+} from '@interfaces/session.interface';
 import { ISpeaker } from '@interfaces/speaker.interface';
 import {
   IsArray,
+  IsBoolean,
   IsNotEmpty,
   IsObject,
   IsOptional,
@@ -25,9 +31,9 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsString()
   end: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  stageId: string;
+  stageId?: string;
 
   @IsNotEmpty()
   @IsArray()
@@ -49,9 +55,9 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsString()
   playbackId?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  eventId: string;
+  eventId?: string;
 
   @IsNotEmpty()
   @IsString()
@@ -80,4 +86,16 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsOptional()
   @IsArray()
   autolabels?: string[];
+
+  @IsOptional()
+  @IsString()
+  ipfsURI?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  published?: boolean;
+
+  @IsNotEmpty()
+  @IsString()
+  type: SessionType;
 }

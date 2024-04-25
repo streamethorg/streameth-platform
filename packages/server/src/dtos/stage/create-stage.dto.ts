@@ -1,25 +1,19 @@
-import { IPlugin, IStage, IStreamSettings } from '@interfaces/stage.interface';
+import { IPlugin, IStage } from '@interfaces/stage.interface';
 import {
   IsArray,
   IsNotEmpty,
   IsNumber,
-  IsObject,
   IsOptional,
   IsString,
 } from 'class-validator';
-
 export class CreateStageDto implements IStage {
   @IsNotEmpty()
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  eventId: string;
-
-  @IsNotEmpty()
-  @IsObject()
-  streamSettings: IStreamSettings;
+  eventId?: string;
 
   @IsOptional()
   @IsArray()
@@ -34,4 +28,12 @@ export class CreateStageDto implements IStage {
   organizationId: string;
 
   slug?: string;
+
+  @IsOptional()
+  @IsString()
+  streamDate?: Date;
+
+  @IsOptional()
+  @IsString()
+  thumbnail?: string;
 }

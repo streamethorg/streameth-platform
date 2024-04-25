@@ -20,7 +20,6 @@ import React, { useCallback, useTransition } from 'react'
 import { toast } from 'sonner'
 
 import { Src } from '@livepeer/react'
-import { createClip } from '@/lib/actions/sessions'
 
 export function PlayerWithControls(props: { src: Src[] | null }) {
   if (!props.src || !props.src?.[0].src) {
@@ -34,7 +33,7 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
 
   return (
     <Player.Root src={props.src}>
-      <Player.Container className="rounded-md bg-gradient-to-b from-[#FF9976] to-[#6426EF]  h-full w-full overflow-hidden  outline-none transition">
+      <Player.Container className="md:rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF]  h-full w-full overflow-hidden  outline-none transition">
         <Player.Video
           title="Live stream"
           className={cn('h-full w-full transition')}
@@ -104,7 +103,9 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
 
               <Player.LiveIndicator className="gap-2 flex items-center">
                 <div className="bg-red-600 text-white h-1.5 w-1.5 rounded-full" />
-                <span className="text-sm select-none">LIVE</span>
+                <span className="text-sm text-white select-none">
+                  LIVE
+                </span>
               </Player.LiveIndicator>
               <Player.LiveIndicator
                 matcher={false}

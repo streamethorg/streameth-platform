@@ -15,39 +15,63 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import Image from 'next/image'
 
 interface Item {
   label: string
   value: string
+  logo?: string
 }
 
+const renderLogo = (logo?: string) => (
+  <Image
+    className="mr-1"
+    src={logo!}
+    alt="logo"
+    width={20}
+    height={20}
+  />
+)
+
 export default function Combobox({
+  placeholder = 'Select item',
   items = [],
   value,
   setValue,
   valueKey = 'value',
   labelKey = 'label',
+  logo,
+  variant = 'outline',
 }: {
+  placeholder?: string
   items?: Item[]
   value: string
   valueKey?: string
   labelKey?: string
+  logo?: boolean
+  variant?: 'outline' | 'primary' | 'ghost'
   setValue: (value: string) => void
 }) {
   const [open, setOpen] = React.useState(false)
+  const orgLogo = items.find(
+    (item) => item[valueKey as keyof Item] === value
+  )?.logo
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          variant={'outline'}
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between">
-          {value ? value : 'Select item...'}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          className="justify-between w-full">
+          {logo && renderLogo(orgLogo)}
+          {value ? value : placeholder}
+
+          <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full h-[400px] p-0">
+      <PopoverContent className="p-0 w-full h-[400px]">
         <Command>
           <CommandInput placeholder="Search item..." />
           <CommandEmpty>No item found.</CommandEmpty>

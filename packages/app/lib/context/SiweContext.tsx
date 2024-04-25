@@ -103,14 +103,14 @@ const siweConfig = {
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [mainnet, base, baseSepolia],
+    chains: [baseSepolia, mainnet, base],
     transports: {
       // RPC URL for each chain
-      [mainnet.id]: http(),
-      [base.id]: http(),
       [baseSepolia.id]: http(
         process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL || ''
       ),
+      [mainnet.id]: http(),
+      [base.id]: http(),
     },
     ssr: true,
     // Required API Keys

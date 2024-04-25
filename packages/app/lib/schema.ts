@@ -1,26 +1,5 @@
 import * as z from 'zod'
 
-export const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-  description: z.string(),
-  start: z.date(),
-  end: z.date(),
-  location: z.string(),
-  logo: z.string().optional(),
-  banner: z.string().optional(),
-  startTime: z.string().optional(),
-  endTime: z.string().optional(),
-  eventCover: z.string().optional(),
-  archiveMode: z.boolean().optional(),
-  website: z.string().optional(),
-  timezone: z.string().min(1, 'timezone is required'),
-  accentColor: z.string().min(1, { message: 'color is required' }),
-  unlisted: z.boolean().optional(),
-  enableVideoDownloader: z.boolean().optional(),
-})
-
 const GSheetConfigSchema = z.object({
   sheetId: z.string().optional(),
   apiKey: z.string().optional(),
@@ -41,10 +20,44 @@ const IDataImporterSchema = z.union([
   }),
 ])
 
+export const formSchema = z.object({
+  name: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  description: z.string(),
+  start: z.date(),
+  end: z.date(),
+  location: z.string(),
+  logo: z.string().optional(),
+  banner: z.string().optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+  eventCover: z.string().optional(),
+  archiveMode: z.boolean().optional(),
+  website: z.string().optional(),
+  timezone: z.string().min(1, 'timezone is required'),
+  accentColor: z.string().min(1, { message: 'color is required' }),
+  unlisted: z.boolean().optional(),
+  enableVideoDownloader: z.boolean().optional(),
+  dataImporter: z.array(IDataImporterSchema).optional(),
+})
+
 const IPluginsSchema = z.object({
   disableChat: z.boolean(),
   hideSchedule: z.boolean().optional(),
   hideSpeaker: z.boolean().optional(),
+})
+
+const IEventNFTSchema = z.object({
+  address: z.string().optional(),
+  name: z.string().optional(),
+  symbol: z.string().optional(),
+  uri: z.string().optional(),
+  limitedSupply: z.string().optional(),
+  maxSupply: z.string().optional(),
+  mintFee: z.string().optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
 })
 
 export const eventSchema = z.object({
@@ -53,10 +66,11 @@ export const eventSchema = z.object({
   plugins: IPluginsSchema.optional(),
   unlisted: z.boolean().optional(),
   archiveMode: z.boolean().optional(),
+  eventNFT: IEventNFTSchema.optional(),
 })
 
 const IStreamSettingsSchema = z.object({
-  streamId: z.string(),
+  streamId: z.string().optional(),
 })
 
 const IPluginSchema = z.object({
@@ -64,11 +78,17 @@ const IPluginSchema = z.object({
 })
 
 export const StageSchema = z.object({
-  name: z.string().min(1, { message: 'Required' }),
-  eventId: z.string(),
-  streamSettings: IStreamSettingsSchema,
+  name: z
+    .string()
+    .min(1, { message: 'Name is Required' })
+    .max(55, { message: 'Name is too long. (Max 30 length)' }),
+  eventId: z.string().optional(),
+  streamSettings: IStreamSettingsSchema.optional(),
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
+  streamDate: z.date().optional(),
+  streamTime: z.string().optional(),
+  thumbnail: z.string().optional(),
   organizationId: z.string(),
 })
 
@@ -87,22 +107,49 @@ const speakerSchema = z.object({
 })
 
 export const sessionSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
+  name: z
+    .string()
+    .min(1, { message: 'Name is required' })
+    .max(25, { message: 'Name is too long' }),
   description: z
     .string()
-    .min(1, { message: 'Description is required' }),
+    .min(1, { message: 'Description is required' })
+    .max(150, { message: 'Description is too long' }),
   coverImage: z.string().optional(),
-  assetId: z.string().optional(),
+  assetId: z.string().min(1, { message: 'Please upload a video' }),
 })
 
 export const organizationSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
+  name: z
+    .string()
+    .min(1, 'Name is required')
+    .max(25, { message: 'Name is too long' }),
   logo: z.string().min(1, 'Logo is required'),
-  email: z.string().email(),
+  banner: z.string().optional(),
+  bio: z.string().optional(),
+  description: z
+    .string()
+    .max(40, { message: 'Description is too long' })
+    .optional(),
+  email: z.string().email().min(1, 'Email is required'),
+  // url: z.string().optional(),
 })
 
 export const supportSchema = z.object({
   message: z.string().min(1, 'Message is required'),
   telegram: z.string().optional(),
   email: z.string().optional(),
+})
+
+export const nftSchema = z.object({
+  name: z.string().min(1, 'Message is required'),
+  description: z
+    .string()
+    .min(1, 'Description is required')
+    .max(300, 'Description is too long'),
+  thumbnail: z.string(),
+  symbol: z.string(),
+  mintFee: z.string(),
+  maxSupply: z.string(),
+  limitedSupply: z.string(),
 })

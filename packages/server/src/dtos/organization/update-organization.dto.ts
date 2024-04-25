@@ -1,9 +1,13 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class UpdateOrganizationDto {
   @IsOptional()
   @IsString()
   name!: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
 
   @IsOptional()
   @IsString()
@@ -18,7 +22,15 @@ export class UpdateOrganizationDto {
   @IsString()
   walletAddress: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  organizationId: string;
+  banner?: string;
+
+  @IsOptional()
+  @IsString()
+  organizationId?: string;
+
+  @IsOptional()
+  @IsString()
+  url?: string;
 }

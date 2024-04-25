@@ -16,6 +16,7 @@ import {
   SuccessResponse,
   Tags,
   Security,
+  Query,
 } from 'tsoa';
 
 @Tags('Stage')
@@ -55,8 +56,13 @@ export class StageController extends Controller {
 
   @SuccessResponse('200')
   @Get()
-  async getAllStages(): Promise<IStandardResponse<Array<IStage>>> {
-    const stages = await this.stageService.getAll();
+  async getAllStages(
+    @Query() published?: boolean,
+  ): Promise<IStandardResponse<Array<IStage>>> {
+    const queryParams = {
+      published: published,
+    };
+    const stages = await this.stageService.getAll(queryParams);
     return SendApiResponse('stages fetched', stages);
   }
 
@@ -66,6 +72,16 @@ export class StageController extends Controller {
     eventId: string,
   ): Promise<IStandardResponse<Array<IStage>>> {
     const stages = await this.stageService.findAllStagesForEvent(eventId);
+    return SendApiResponse('stages fetched', stages);
+  }
+
+  @SuccessResponse('200')
+  @Get('/organization/{organizationId}')
+  async getAllStagesForOrganization(
+    organizationId: string,
+  ): Promise<IStandardResponse<Array<IStage>>> {
+    const stages =
+      await this.stageService.findAllStagesForOrganization(organizationId);
     return SendApiResponse('stages fetched', stages);
   }
 

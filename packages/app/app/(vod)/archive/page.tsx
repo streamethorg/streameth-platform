@@ -1,35 +1,45 @@
 import { SearchPageProps } from '@/lib/types'
-import UpcomingEvents from '@/app/(home)/components/UpcomingEvents'
-import UpcomingLoader from '@/app/(home)/components/UpcomingLoader'
+import { fetchOrganization } from '@/lib/services/organizationService'
+import { fetchEvent } from '@/lib/services/eventService'
+import { redirect } from 'next/navigation'
 import {
   generalMetadata,
   archiveMetadata,
 } from '@/lib/utils/metadata'
 import { Metadata } from 'next'
-import { fetchEvent } from '@/lib/services/eventService'
-import { Suspense } from 'react'
-import ArchiveVideos from '@/app/(vod)/components/ArchiveVideos'
-import ArchiveVideoSkeleton from '../components/ArchiveVideosSkeleton'
+
 export default async function ArchivePage({
   searchParams,
 }: SearchPageProps) {
-  return (
-    <div className="w-full">
-      <Suspense fallback={<UpcomingLoader />}>
-        <UpcomingEvents
-          archive={false}
-          organization={
-            searchParams.organization
-              ? searchParams.organization
-              : 'invalid'
-          }
-        />
-      </Suspense>
-      <Suspense fallback={<ArchiveVideoSkeleton />}>
-        <ArchiveVideos searchParams={searchParams} />
-      </Suspense>
-    </div>
-  )
+  if (searchParams.organization) {
+    const organization = await fetchOrganization({
+      organizationSlug: searchParams.organization,
+    })
+
+    if (!organization) {
+      return redirect('/404')
+    }
+
+    return redirect(`/${organization.slug}/videos`)
+  }
+
+  if (searchParams.event) {
+    const event = await fetchEvent({
+      eventSlug: searchParams.event,
+    })
+
+    const organization = await fetchOrganization({
+      organizationId: event?.organizationId as string,
+    })
+
+    if (!event || !organization) {
+      return redirect('/404')
+    }
+
+    return redirect(`/${organization.slug}/archive`)
+  }
+
+  return <>Page moved</>
 }
 
 export async function generateMetadata({

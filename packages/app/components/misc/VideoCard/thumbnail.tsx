@@ -1,16 +1,9 @@
 'use client'
 import Image from 'next/image'
-import { getImageUrl } from '@/lib/utils/utils'
 import { useEffect, useState } from 'react'
-const fetchImage = async (url: string): Promise<boolean> => {
-  try {
-    const image = await fetch(url)
-    if (image.ok) return false
-    return true
-  } catch (e) {
-    return false
-  }
-}
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+
 export default function Thumbnail({
   imageUrl,
   fallBack,
@@ -19,7 +12,6 @@ export default function Thumbnail({
   fallBack?: string
 }) {
   const streamethThumbnail = imageUrl ?? ''
-  const [image, setImage] = useState('')
 
   const [error, setError] = useState(false)
   const [fallbackImage, setFallbackImage] = useState('/cover.png')
@@ -28,13 +20,23 @@ export default function Thumbnail({
     fallBack && setFallbackImage(fallBack)
   }, [imageUrl, fallBack])
 
+  if (!streamethThumbnail && !fallBack) {
+    return (
+      <AspectRatio
+        ratio={16 / 9}
+        className="flex justify-center items-center w-full">
+        <DefaultThumbnail />
+      </AspectRatio>
+    )
+  }
+
   return (
     <div className="aspect-video relative w-full">
       <Image
         placeholder="blur"
         blurDataURL={fallbackImage}
         loading="lazy"
-        className="rounded"
+        className="rounded-xl"
         alt="Session image"
         quality={80}
         src={error ? fallbackImage : streamethThumbnail}

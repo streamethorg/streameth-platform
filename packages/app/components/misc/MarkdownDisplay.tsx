@@ -5,7 +5,11 @@ const MarkdownDisplay = ({ content }: { content: string }) => {
   return (
     <MDEditor.Markdown
       source={content}
-      style={{ whiteSpace: 'pre-wrap', background: 'transparent' }}
+      style={{
+        color: 'gray',
+        whiteSpace: 'pre-wrap',
+        background: 'transparent',
+      }}
     />
   )
 }

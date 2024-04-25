@@ -1,81 +1,149 @@
-import Image from 'next/image'
-import remarkGfm from 'remark-gfm'
-import { notFound } from 'next/navigation'
-import Markdown from 'react-markdown'
+import NotFound from '@/not-found'
 import { Metadata, ResolvingMetadata } from 'next'
-import { fetchOrganization } from '@/lib/services/organizationService'
+import {
+  fetchOrganization,
+  fetchOrganizations,
+} from '@/lib/services/organizationService'
+import { ChannelPageParams } from '@/lib/types'
+import ChannelShareIcons from './components/ChannelShareIcons'
+import Image from 'next/image'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Suspense } from 'react'
+import { Card } from '@/components/ui/card'
+import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
+import WatchGrid, { WatchGridLoading } from './components/WatchGrid'
+import UpcomingStreams, {
+  UpcomingStreamsLoading,
+} from './components/UpcomingStreams'
+import { fetchOrganizationStages } from '@/lib/services/stageService'
+import Player from './livestream/components/Player'
+import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 
-interface Params {
-  params: {
-    organizationSlug: string
-  }
+export async function generateStaticParams() {
+  const organizations = await fetchOrganizations()
+  const paths = organizations.map((organization) => ({
+    organization: organization.slug,
+  }))
+  return paths
 }
 
-export default async function OrganizationHome({ params }: Params) {
-  if (!params.organizationSlug) {
-    return notFound()
-  }
-  const organization = await fetchOrganization({
-    organizationSlug: params.organizationSlug,
-  })
-  if (!organization) {
-    return notFound()
+const OrganizationHome = async ({
+  params,
+  searchParams,
+}: ChannelPageParams) => {
+  if (!params.organization) {
+    return NotFound()
   }
 
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
+
+  if (!organization) {
+    return NotFound()
+  }
+
+  const allStreams = (
+    await fetchOrganizationStages({
+      organizationId: organization._id,
+    })
+  ).filter((stream) => stream.published)
+
+  const nextStreamNotToday = allStreams?.filter(
+    (stream) =>
+      stream?.streamDate && new Date(stream.streamDate) > new Date()
+  )
+
+  const activeStream = allStreams?.filter(
+    (stream) => stream?.streamSettings?.isActive
+  )
+
+  const playerActive = !!activeStream[0] || !!nextStreamNotToday[0]
+  const stage = activeStream[0]
+    ? activeStream[0]
+    : nextStreamNotToday[0]
+
   return (
-    <main className="w-screen mx-auto fixed overflow-auto h-screen">
-      <div className="sticky  top-0 z-50 flex p-4 px-9 gap-4">
-        <Image
-          src={organization.logo}
-          width={50}
-          height={50}
-          style={{
-            objectFit: 'cover',
-          }}
-          alt={`${organization.name} logo`}
-        />
-        {/* <FilterBar events={events.map((event) => event.toJson())} /> */}
+    <div className="mx-auto space-y-4 w-full max-w-7xl md:p-4">
+      <div className="relative w-full">
+        {playerActive ? (
+          <>
+            <Player stage={stage} />
+            <div className="px-4 w-full md:p-0">
+              <SessionInfoBox
+                name={stage.name}
+                description={stage.description ?? ''}
+                date={stage.streamDate as string}
+                vod={true}
+              />
+            </div>
+          </>
+        ) : (
+          <AspectRatio
+            ratio={3 / 1}
+            className="relative mt-3 w-full md:rounded-xl">
+            {organization.banner ? (
+              <Image
+                src={organization.banner}
+                alt="banner"
+                quality={100}
+                objectFit="cover"
+                className="md:rounded-xl"
+                fill
+                priority
+              />
+            ) : (
+              <div className="h-full bg-gray-300 md:rounded-xl">
+                <StreamethLogoWhite />
+              </div>
+            )}
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
+              <div className="flex flex-row justify-between w-full">
+                <div>
+                  <h2 className="text-2xl font-bold">
+                    {organization.name}
+                  </h2>
+                  <p className="hidden mr-12 text-lg md:block">
+                    {organization.description}
+                  </p>
+                </div>
+                <ChannelShareIcons organization={organization} />
+              </div>
+            </div>
+          </AspectRatio>
+        )}
       </div>
-      <div
-        className="mx-8 rounded-xl"
-        style={{
-          backgroundColor: organization.accentColor
-            ? organization.accentColor
-            : '#fff',
-        }}>
-        <div className="bg-base py-4 rounded-xl my-3">
-          <p className="flex justify-center pt-4 text-accent font-bold text-4xl">
-            {organization.name}
-          </p>
-          <article className="prose max-w-full text-center prose-invert p-4">
-            <Markdown remarkPlugins={[remarkGfm]}>
-              {organization.description}
-            </Markdown>
-          </article>
-        </div>
-      </div>
-      <hr className="h-px mx-9  bg-base" />
-      <div className="overflow-auto h-screen">
-        <div className="px-4">
-          {/* {upComing.length > 0 && (
-            <>
-              <p className="px-4 mt-3 font-ubuntu font-bold lg:py-2 text-blue text-2xl lg:text-4xl">
-                Upcoming Events
-              </p>
-            </>
-          )} */}
-        </div>
-      </div>
-    </main>
+      <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none md:p-0">
+        <Suspense fallback={<UpcomingStreamsLoading />}>
+          <UpcomingStreams
+            organizationId={organization._id}
+            organizationSlug={params.organization}
+            currentStreamId={searchParams.streamId}
+          />
+        </Suspense>
+        <Suspense fallback={<WatchGridLoading />}>
+          <div className="md:hidden">
+            <WatchGrid organizationSlug={params.organization} />
+          </div>
+          <div className="hidden md:block">
+            <WatchGrid
+              organizationSlug={params.organization}
+              gridLength={6}
+            />
+          </div>
+        </Suspense>
+      </Card>
+    </div>
   )
 }
 
 export async function generateMetadata(
-  { params }: Params,
+  { params }: ChannelPageParams,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const organizationInfo = await fetchOrganization({
-    organizationSlug: params.organizationSlug,
+    organizationSlug: params.organization,
   })
 
   if (!organizationInfo) {
@@ -102,3 +170,5 @@ export async function generateMetadata(
     }
   }
 }
+
+export default OrganizationHome

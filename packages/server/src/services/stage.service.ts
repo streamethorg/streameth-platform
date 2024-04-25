@@ -3,6 +3,9 @@ import { HttpException } from '@exceptions/HttpException';
 import { IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
 import Events from '@models/event.model';
+import { Types } from 'mongoose';
+import { createStream, deleteStream, getStreamInfo } from '@utils/livepeer';
+import { config } from '@config';
 
 export default class StageService {
   private path: string;
@@ -13,10 +16,24 @@ export default class StageService {
   }
 
   async create(data: IStage): Promise<IStage> {
+    const eventId =
+      !data.eventId || data.eventId.toString().length === 0
+        ? new Types.ObjectId().toString()
+        : data.eventId;
+    const stream = await createStream(data.name);
     return this.controller.store.create(
       data.name,
-      data,
-      `${this.path}/${data.eventId}`,
+      {
+        ...data,
+        eventId: eventId,
+        streamSettings: {
+          streamId: stream.streamId,
+          streamKey: stream.streamKey,
+          parentId: stream.parentId,
+          playbackId: stream.playbackId,
+        },
+      },
+      `${this.path}/${eventId}`,
     );
   }
 
@@ -26,8 +43,12 @@ export default class StageService {
     return findStage;
   }
 
-  async getAll(): Promise<Array<IStage>> {
-    return await this.controller.store.findAll({}, this.path);
+  async getAll(d: { published: boolean }): Promise<Array<IStage>> {
+    let filter = {};
+    if (d.published != undefined) {
+      filter = { ...filter, published: d.published };
+    }
+    return await this.controller.store.findAll(filter, this.path);
   }
 
   async update(stageId: string, stage: IStage): Promise<IStage> {
@@ -51,8 +72,54 @@ export default class StageService {
     );
   }
 
+  async findAllStagesForOrganization(
+    organizationId: string,
+  ): Promise<Array<IStage>> {
+    return await this.controller.store.findAll({
+      organizationId: organizationId,
+    });
+  }
+
   async deleteOne(stageId: string): Promise<void> {
-    await this.get(stageId);
+    const stream = await this.get(stageId);
+    await deleteStream(stream.streamSettings.streamId);
     return await this.controller.store.delete(stageId);
+  }
+
+  async findStreamAndUpdate(id: string): Promise<void> {
+    const stream = await getStreamInfo(id);
+    let stage = await Stage.findOne({ 'streamSettings.streamId': id });
+    if (!stage) throw new HttpException(400, 'stage not found');
+    await stage.updateOne(
+      {
+        'streamSettings.isActive': stream.isActive,
+        'streamSettings.isHealthy': stream.isHealthy ?? false,
+      },
+      { upsert: true },
+    );
+  }
+
+  async createMetadata(stageId: string) {
+    let stage = await Stage.findById(stageId);
+    let metadata = {
+      name: stage.name,
+      description: stage.description,
+      external_url: '',
+      animation_url: `${config.baseUrl}/embed/?playbackId=${stage.streamSettings.playbackId}&vod=false&streamId=${stage.streamSettings.streamId}&playerName=${stage.name}`,
+      //image: stage.thumnbnail,
+      attributes: [
+        {
+          name: stage.name,
+          description: stage.description,
+          organizationId: stage.organizationId,
+          eventId: stage.eventId,
+          slug: stage.slug,
+          createdAt: stage.createdAt,
+          streamId: stage.streamSettings.streamId,
+          playbackId: stage.streamSettings.playbackId,
+        },
+      ],
+    };
+    return metadata;
   }
 }

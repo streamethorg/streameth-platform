@@ -1,10 +1,14 @@
 import { IOrganization } from '@interfaces/organization.interface';
-import { IsNotEmpty, IsString, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsString, IsEmail, IsOptional } from 'class-validator';
 
 export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
   @IsNotEmpty()
   @IsString()
   name!: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
 
   @IsNotEmpty()
   @IsString()
@@ -18,4 +22,12 @@ export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
   @IsNotEmpty()
   @IsString()
   walletAddress: string;
+
+  @IsOptional()
+  @IsString()
+  banner?: string;
+
+  @IsOptional()
+  @IsString()
+  url?: string;
 }

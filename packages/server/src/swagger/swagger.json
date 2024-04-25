@@ -24,6 +24,9 @@
 					"description": {
 						"type": "string"
 					},
+					"bio": {
+						"type": "string"
+					},
 					"url": {
 						"type": "string"
 					},
@@ -37,6 +40,9 @@
 						"type": "string"
 					},
 					"slug": {
+						"type": "string"
+					},
+					"banner": {
 						"type": "string"
 					},
 					"walletAddress": {
@@ -188,6 +194,130 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse_any_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateMultiStreamDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"streamId": {
+						"type": "string"
+					},
+					"targetStreamKey": {
+						"type": "string"
+					},
+					"targetURL": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"streamId",
+					"targetStreamKey",
+					"targetURL"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_void_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeleteMultiStreamDto": {
+				"properties": {
+					"streamId": {
+						"type": "string"
+					},
+					"targetId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"streamId",
+					"targetId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__url-string--assetId-string__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"assetId": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"assetId",
+							"url"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_string_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"SheetType": {
 				"enum": [
 					"gsheet",
@@ -224,6 +354,16 @@
 						]
 					},
 					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"organizationId": {
 						"anyOf": [
 							{
 								"type": "string"
@@ -303,6 +443,16 @@
 							}
 						]
 					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
 					"sessionId": {
 						"anyOf": [
 							{
@@ -327,14 +477,10 @@
 					},
 					"type": {
 						"$ref": "#/components/schemas/StateType"
-					},
-					"StateStatus": {
-						"$ref": "#/components/schemas/StateStatus"
 					}
 				},
 				"required": [
-					"sheetType",
-					"StateStatus"
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -342,6 +488,16 @@
 			"UpdateStateDto": {
 				"properties": {
 					"eventId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"organizationId": {
 						"anyOf": [
 							{
 								"type": "string"
@@ -370,17 +526,13 @@
 					"sheetType": {
 						"$ref": "#/components/schemas/SheetType"
 					},
-					"StateStatus": {
+					"status": {
 						"$ref": "#/components/schemas/StateStatus"
 					},
 					"type": {
 						"$ref": "#/components/schemas/StateType"
 					}
 				},
-				"required": [
-					"sheetType",
-					"StateStatus"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -406,10 +558,46 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"TargetOutput": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStreamSettings": {
 				"properties": {
 					"streamId": {
 						"type": "string"
+					},
+					"parentId": {
+						"type": "string"
+					},
+					"playbackId": {
+						"type": "string"
+					},
+					"isHealthy": {
+						"type": "boolean"
+					},
+					"isActive": {
+						"type": "boolean"
+					},
+					"streamKey": {
+						"type": "string"
+					},
+					"ipfshash": {
+						"type": "string"
+					},
+					"targets": {
+						"items": {
+							"$ref": "#/components/schemas/TargetOutput"
+						},
+						"type": "array"
 					}
 				},
 				"type": "object",
@@ -430,9 +618,19 @@
 			"IStage": {
 				"properties": {
 					"_id": {
-						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"name": {
+						"type": "string"
+					},
+					"description": {
 						"type": "string"
 					},
 					"eventId": {
@@ -461,6 +659,9 @@
 					"slug": {
 						"type": "string"
 					},
+					"published": {
+						"type": "boolean"
+					},
 					"organizationId": {
 						"anyOf": [
 							{
@@ -470,12 +671,43 @@
 								"type": "string"
 							}
 						]
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"streamDate": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
 					"name",
-					"eventId",
-					"streamSettings",
 					"organizationId"
 				],
 				"type": "object",
@@ -503,9 +735,19 @@
 			"CreateStageDto": {
 				"properties": {
 					"_id": {
-						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"name": {
+						"type": "string"
+					},
+					"description": {
 						"type": "string"
 					},
 					"eventId": {
@@ -527,14 +769,41 @@
 					"slug": {
 						"type": "string"
 					},
+					"published": {
+						"type": "boolean"
+					},
 					"organizationId": {
 						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"streamDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
 					"name",
-					"eventId",
-					"streamSettings",
 					"organizationId"
 				],
 				"type": "object",
@@ -545,8 +814,14 @@
 					"name": {
 						"type": "string"
 					},
+					"description": {
+						"type": "string"
+					},
 					"eventId": {
 						"type": "string"
+					},
+					"published": {
+						"type": "boolean"
 					},
 					"streamSettings": {
 						"$ref": "#/components/schemas/IStreamSettings"
@@ -566,12 +841,32 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"streamDate": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
 					"name",
-					"eventId",
-					"streamSettings",
 					"organizationId"
 				],
 				"type": "object",
@@ -591,23 +886,6 @@
 						},
 						"type": "array"
 					}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_void_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {}
 				},
 				"required": [
 					"status",
@@ -681,7 +959,6 @@
 				"required": [
 					"name",
 					"bio",
-					"eventId",
 					"organizationId"
 				],
 				"type": "object",
@@ -745,8 +1022,8 @@
 				"required": [
 					"name",
 					"bio",
-					"eventId",
-					"organizationId"
+					"organizationId",
+					"eventId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -815,8 +1092,7 @@
 				},
 				"required": [
 					"name",
-					"bio",
-					"eventId"
+					"bio"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -863,6 +1139,14 @@
 				},
 				"type": "object",
 				"additionalProperties": false
+			},
+			"SessionType": {
+				"enum": [
+					"clip",
+					"livestream",
+					"video"
+				],
+				"type": "string"
 			},
 			"ISession": {
 				"properties": {
@@ -960,6 +1244,34 @@
 							"type": "string"
 						},
 						"type": "array"
+					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
@@ -967,10 +1279,8 @@
 					"description",
 					"start",
 					"end",
-					"stageId",
-					"speakers",
-					"eventId",
-					"organizationId"
+					"organizationId",
+					"type"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1087,17 +1397,43 @@
 							"type": "string"
 						},
 						"type": "array"
+					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
 					}
 				},
 				"required": [
 					"organizationId",
 					"name",
-					"eventId",
 					"description",
 					"start",
 					"end",
-					"stageId",
-					"speakers"
+					"type"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -1175,6 +1511,34 @@
 						},
 						"type": "array"
 					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
+					},
 					"autolabels": {
 						"items": {
 							"type": "string"
@@ -1185,11 +1549,10 @@
 				"required": [
 					"organizationId",
 					"name",
-					"eventId",
 					"description",
 					"start",
 					"end",
-					"stageId",
+					"type",
 					"speakers"
 				],
 				"type": "object",
@@ -1264,6 +1627,37 @@
 					},
 					"assetId": {
 						"type": "string"
+					},
+					"ipfsURI": {
+						"type": "string"
+					},
+					"published": {
+						"type": "boolean"
+					},
+					"type": {
+						"$ref": "#/components/schemas/SessionType"
+					},
+					"nftURI": {
+						"type": "string"
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
+					},
+					"active": {
+						"type": "boolean"
 					}
 				},
 				"required": [
@@ -1271,10 +1665,9 @@
 					"description",
 					"start",
 					"end",
-					"stageId",
 					"speakers",
-					"eventId",
-					"organizationId"
+					"organizationId",
+					"type"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1356,6 +1749,9 @@
 					"name": {
 						"type": "string"
 					},
+					"bio": {
+						"type": "string"
+					},
 					"slug": {
 						"type": "string"
 					},
@@ -1375,6 +1771,9 @@
 						"type": "string"
 					},
 					"accentColor": {
+						"type": "string"
+					},
+					"banner": {
 						"type": "string"
 					},
 					"walletAddress": {
@@ -1395,6 +1794,9 @@
 					"name": {
 						"type": "string"
 					},
+					"bio": {
+						"type": "string"
+					},
 					"slug": {
 						"type": "string"
 					},
@@ -1416,6 +1818,9 @@
 					"accentColor": {
 						"type": "string"
 					},
+					"banner": {
+						"type": "string"
+					},
 					"walletAddress": {
 						"type": "string"
 					}
@@ -1434,6 +1839,9 @@
 					"name": {
 						"type": "string"
 					},
+					"description": {
+						"type": "string"
+					},
 					"logo": {
 						"type": "string"
 					},
@@ -1443,7 +1851,13 @@
 					"walletAddress": {
 						"type": "string"
 					},
+					"banner": {
+						"type": "string"
+					},
 					"organizationId": {
+						"type": "string"
+					},
+					"url": {
 						"type": "string"
 					}
 				},
@@ -1451,8 +1865,7 @@
 					"name",
 					"logo",
 					"email",
-					"walletAddress",
-					"organizationId"
+					"walletAddress"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1491,7 +1904,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"IStandardResponse_string_": {
+			"IStandardResponse_Array_IUser__": {
 				"properties": {
 					"status": {
 						"type": "string"
@@ -1500,7 +1913,295 @@
 						"type": "string"
 					},
 					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IUser"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftCollectionType": {
+				"enum": [
+					"single",
+					"multiple"
+				],
+				"type": "string"
+			},
+			"INftCollection": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"name": {
 						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/NftCollectionType"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"videos": {
+						"items": {
+							"properties": {
+								"ipfsURI": {
+									"type": "string"
+								},
+								"stageId": {
+									"type": "string"
+								},
+								"sessionId": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								},
+								"index": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"type"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"contractAddress": {
+						"type": "string"
+					},
+					"ipfsPath": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_INftCollection_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/INftCollection"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateNftCollectionDto": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/NftCollectionType"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"videos": {
+						"items": {
+							"properties": {
+								"ipfsURI": {
+									"type": "string"
+								},
+								"stageId": {
+									"type": "string"
+								},
+								"sessionId": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								},
+								"index": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"ipfsURI",
+								"type",
+								"index"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"contractAddress": {
+						"type": "string"
+					},
+					"ipfsPath": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"thumbnail",
+					"type",
+					"organizationId",
+					"videos"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__ipfsPath-string--videos-Array_any___": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"videos": {
+								"items": {},
+								"type": "array"
+							},
+							"ipfsPath": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"videos",
+							"ipfsPath"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateNftCollectionDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"contractAddress": {
+						"type": "string"
+					},
+					"ipfsPath": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/NftCollectionType"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
+					},
+					"videos": {
+						"items": {
+							"properties": {
+								"ipfsURI": {
+									"type": "string"
+								},
+								"stageId": {
+									"type": "string"
+								},
+								"sessionId": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								},
+								"index": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"type"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_INftCollection__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/INftCollection"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -1625,6 +2326,36 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IEventNFT": {
+				"properties": {
+					"address": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"symbol": {
+						"type": "string"
+					},
+					"uri": {
+						"type": "string"
+					},
+					"maxSupply": {
+						"type": "string"
+					},
+					"mintFee": {
+						"type": "string"
+					},
+					"startTime": {
+						"type": "string"
+					},
+					"endTime": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IEvent": {
 				"properties": {
 					"_id": {
@@ -1728,6 +2459,9 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"eventNFT": {
+						"$ref": "#/components/schemas/IEventNFT"
 					}
 				},
 				"required": [
@@ -1843,6 +2577,12 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"eventNFT": {
+						"$ref": "#/components/schemas/IEventNFT"
+					},
+					"nftAddress": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1939,6 +2679,9 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"eventNFT": {
+						"$ref": "#/components/schemas/IEventNFT"
 					}
 				},
 				"required": [
@@ -2283,6 +3026,160 @@
 				"parameters": []
 			}
 		},
+		"/streams/multistream": {
+			"post": {
+				"operationId": "CreateMultiStream",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMultiStreamDto"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteMultiStream",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteMultiStreamDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/streams/asset": {
+			"post": {
+				"operationId": "CreateAsset",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__url-string--assetId-string__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/streams/{streamId}": {
+			"get": {
+				"operationId": "GetStream",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "streamId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/streams/asset/{assetId}": {
+			"get": {
+				"operationId": "GetVideoUrl",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "assetId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/states": {
 			"post": {
 				"operationId": "CreateState",
@@ -2358,6 +3255,22 @@
 					{
 						"in": "query",
 						"name": "eventSlug",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "type",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "status",
 						"required": false,
 						"schema": {
 							"type": "string"
@@ -2468,7 +3381,16 @@
 					"Stage"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "published",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				]
 			}
 		},
 		"/stages/{stageId}": {
@@ -2615,6 +3537,37 @@
 					{
 						"in": "path",
 						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/stages/organization/{organizationId}": {
+			"get": {
+				"operationId": "GetAllStagesForOrganization",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IStage__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stage"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -2852,6 +3805,14 @@
 						"required": false,
 						"schema": {
 							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "published",
+						"required": false,
+						"schema": {
+							"type": "boolean"
 						}
 					}
 				]
@@ -3200,7 +4161,7 @@
 				}
 			}
 		},
-		"/organizations/members/{organizationId}": {
+		"/organizations/member/{organizationId}": {
 			"put": {
 				"operationId": "UpdateOrgMembers",
 				"responses": {
@@ -3215,7 +4176,7 @@
 						}
 					}
 				},
-				"summary": "Add members to organization",
+				"summary": "Add member to organization",
 				"tags": [
 					"Organization"
 				],
@@ -3246,6 +4207,273 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetAllOrgMembers",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IUser__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all organization members",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteOrgMember",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Delete organization member",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.walletAddress_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/collections": {
+			"post": {
+				"operationId": "CreateNftCollection",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_INftCollection_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateNftCollectionDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllCollections",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_INftCollection__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/collections/metadata/generate": {
+			"post": {
+				"operationId": "GenerateNftMetadata",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__ipfsPath-string--videos-Array_any___"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateNftCollectionDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/collections/{collectionId}": {
+			"put": {
+				"operationId": "UpdateNftCollection",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_INftCollection_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "collectionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateNftCollectionDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetNftCollectionById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_INftCollection_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "collectionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/collections/organization/{organizationId}": {
+			"get": {
+				"operationId": "GetAllOrganizationNft",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_INftCollection__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Collections"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/": {
@@ -3292,7 +4520,7 @@
 				"parameters": [
 					{
 						"in": "header",
-						"name": "Livepeer-Signature",
+						"name": "livepeer-signature",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -3365,10 +4593,57 @@
 					"Event"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "organizationId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "unlisted",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				]
 			}
 		},
 		"/events/{eventId}": {
+			"get": {
+				"operationId": "GetEventById",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IEvent_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get Event",
+				"tags": [
+					"Event"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "eventId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
 			"put": {
 				"operationId": "EditEvent",
 				"responses": {
@@ -3414,35 +4689,6 @@
 						}
 					}
 				}
-			},
-			"get": {
-				"operationId": "GetEventById",
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_IEvent_"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Event"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "eventId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
 			},
 			"delete": {
 				"operationId": "DeleteEvent",
@@ -3536,37 +4782,6 @@
 						}
 					}
 				}
-			}
-		},
-		"/events/organization/{organizationId}": {
-			"get": {
-				"operationId": "GetAllEventsForOrganization",
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_Array_IEvent__"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Event"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "organizationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
 			}
 		},
 		"/chats": {

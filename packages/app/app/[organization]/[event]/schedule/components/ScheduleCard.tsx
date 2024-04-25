@@ -2,18 +2,18 @@
 import ScheduleCardModal from './ScheduleCardModal'
 import moment from 'moment-timezone'
 import { getEventTimezoneText } from '@/lib/utils/time'
-import SpeakerIcon from '@/components/speakers/speakerIcon'
+import { ClockIcon, WavesIcon } from 'lucide-react'
 import {
   Card,
-  CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 
-import { Badge } from '@/components/ui/badge'
 import { CredenzaTrigger, Credenza } from '@/components/ui/crezenda'
 import { IExtendedEvent, IExtendedSession } from '@/lib/types'
+import { Button } from '@/components/ui/button'
 
 const ScheduleCard = ({
   event,
@@ -35,43 +35,41 @@ const ScheduleCard = ({
   return (
     <Credenza>
       <CredenzaTrigger asChild>
-        <Card className="p-3 lg:p-3 bg-white bg-opacity-10 rounded-lg border-white border-opacity-10">
-          <CardHeader className="text-white pb-0 lg:pb-0 p-2 lg:p-2">
-            <CardTitle>{session.name}</CardTitle>
-            <CardDescription className="text-secondary">
+        <Card className="flex flex-col shadow-none hover:bg-secondary hover:border-primary">
+          <CardHeader>
+            <CardTitle className="text-lg">{session.name}</CardTitle>
+            <CardDescription className="flex flex-row justify-start items-center space-x-2">
               {showTime && (
                 <>
-                  {date === 'all' &&
-                    new Date(session.start).toDateString()}{' '}
-                  {moment(session.start)
-                    .tz(event.timezone || 'UTC')
-                    .format('HH:mm')}{' '}
-                  -{' '}
-                  {moment(session.end)
-                    .tz(event?.timezone || 'UTC')
-                    .format('HH:mm')}{' '}
-                  ({getEventTimezoneText(event?.timezone || 'UTC')}){' '}
+                  <ClockIcon className="w-4 h-4" />
+                  <p>
+                    {moment(session.start)
+                      .tz(event.timezone || 'UTC')
+                      .format('HH:mm')}{' '}
+                    -{' '}
+                    {moment(session.end)
+                      .tz(event?.timezone || 'UTC')
+                      .format('HH:mm')}
+                    {' | '}
+                    {getEventTimezoneText(event?.timezone || 'UTC')}
+                  </p>
                 </>
               )}
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-2 lg:p-2">
-            {speakers && (
-              <div className="flex py-1 -z-10 relative items-center flex-row space-x-2 overflow-auto mt-auto">
-                {session.speakers.map((speaker) => (
-                  <SpeakerIcon key={speaker?._id} speaker={speaker} />
-                ))}
-              </div>
-            )}
+          <CardFooter className="mt-auto">
             {isActive && (
               <p className="text-bold text-red-500 ml-auto animate-pulse">
                 Live
               </p>
             )}
-          </CardContent>
+            <Button variant={'secondary'}>
+              <WavesIcon className="w-4 h-4 mr-2" /> Watch
+            </Button>
+          </CardFooter>
         </Card>
       </CredenzaTrigger>
-      <ScheduleCardModal event={event} session={session} />
+      {/* <ScheduleCardModal event={event} session={session} /> */}
     </Credenza>
   )
 }

@@ -1,4 +1,4 @@
-import { ISessionModel } from '@interfaces/session.interface';
+import { ISessionModel, SessionType } from '@interfaces/session.interface';
 import { Schema, model } from 'mongoose';
 
 const SessionSchema = new Schema<ISessionModel>(
@@ -44,6 +44,11 @@ const SessionSchema = new Schema<ISessionModel>(
     videoTranscription: { type: String, default: '' },
     aiDescription: { type: String, default: '' },
     autoLabels: [{ type: String }],
+    ipfsURI: { type: String, default: '' },
+    mintable: { type: Boolean, default: false },
+    published: { type: Boolean, default: false },
+    type: { type: String, enum: Object.keys(SessionType) },
+    nftCollections: [{ type: String, ref: 'Nft-Collection' }],
   },
   {
     timestamps: true,

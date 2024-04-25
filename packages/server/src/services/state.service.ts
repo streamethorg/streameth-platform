@@ -1,6 +1,6 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IState } from '@interfaces/state.interface';
+import { IState, StateStatus, StateType } from '@interfaces/state.interface';
 import Session from '@models/session.model';
 import State from '@models/state.model';
 import Event from '@models/event.model';
@@ -23,14 +23,13 @@ export default class StateService {
 
   async get(stateId: string): Promise<IState> {
     const findState = await this.controller.store.findById(stateId);
-    if (!findState) throw new HttpException(404, ' state not found');
+    if (!findState) throw new HttpException(404, 'state not found');
     return findState;
   }
 
   async findOne(query: {}): Promise<IState> {
     const findState = await this.controller.store.findOne(query);
-    if (!findState) throw new HttpException(404, ' state not found');
-
+    if (!findState) throw new HttpException(404, 'state not found');
     return findState;
   }
 
@@ -38,6 +37,8 @@ export default class StateService {
     eventId?: string;
     sessionId?: string;
     eventSlug?: string;
+    type?: StateType;
+    status?: StateStatus;
   }): Promise<Array<IState>> {
     let filter = {};
     if (d.eventId != undefined) {
@@ -45,11 +46,17 @@ export default class StateService {
       filter = { ...filter, eventId: event?._id };
     }
     if (d.sessionId != undefined) {
-      let session = await Session.findOne({ slug: d.sessionId });
+      let session = await Session.findOne({ _id: d.sessionId });
       filter = { ...filter, sessionId: session?._id };
     }
     if (d.eventSlug != undefined) {
       filter = { ...filter, eventSlug: d.eventSlug };
+    }
+    if (d.type != undefined) {
+      filter = { ...filter, type: d.type };
+    }
+    if (d.status != undefined) {
+      filter = { ...filter, status: d.status };
     }
 
     const [states] = await Promise.all([

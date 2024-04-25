@@ -9,6 +9,10 @@ export class UpdateStateDto {
 
   @IsOptional()
   @IsString()
+  organizationId?: string | Types.ObjectId;
+
+  @IsOptional()
+  @IsString()
   sessionId?: string | Types.ObjectId;
 
   @IsOptional()
@@ -19,13 +23,13 @@ export class UpdateStateDto {
   @IsString()
   sessionSlug?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  sheetType: SheetType;
+  sheetType?: SheetType;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  StateStatus: StateStatus;
+  status?: StateStatus;
 
   @IsOptional()
   @IsString()
