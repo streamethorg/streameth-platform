@@ -118,8 +118,8 @@ export default function ImageDropzone({
               here!
             </p>
             <p>
-              Maximum image file size is 1MB. Best resolution of 200 x
-              200. Aspect ratio of 1:1
+              Maximum image file size is 1MB. Best resolution of 1920
+              x 1080. Aspect ratio of 16:9
             </p>
           </div>
         </div>
