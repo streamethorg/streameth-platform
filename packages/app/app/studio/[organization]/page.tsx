@@ -45,8 +45,7 @@ const OrganizationPage = async ({
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Link
-                href={`/studio/${params.organization}/library?show=true`}>
+              <Link href={`/studio/${params.organization}/library`}>
                 <Button variant="primary">Upload Video</Button>
               </Link>
             </CardFooter>

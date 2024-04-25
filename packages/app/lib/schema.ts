@@ -81,13 +81,14 @@ export const StageSchema = z.object({
   name: z
     .string()
     .min(1, { message: 'Name is Required' })
-    .max(30, { message: 'Name is too long. (Max 30 length)' }),
+    .max(55, { message: 'Name is too long. (Max 30 length)' }),
   eventId: z.string().optional(),
   streamSettings: IStreamSettingsSchema.optional(),
   plugins: z.array(IPluginSchema).optional(),
   order: z.number().optional(),
   streamDate: z.date().optional(),
   streamTime: z.string().optional(),
+  thumbnail: z.string().optional(),
   organizationId: z.string(),
 })
 

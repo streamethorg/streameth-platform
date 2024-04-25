@@ -19,9 +19,11 @@ import React from 'react'
 const CollectionGrid = async ({
   video,
   nftCollection,
+  organizationSlug,
 }: {
   video: { type?: string; sessionId?: string; stageId?: string }
   nftCollection: IExtendedNftCollections
+  organizationSlug?: string
 }) => {
   let session
   let stage
@@ -38,16 +40,19 @@ const CollectionGrid = async ({
   const collectionImage = session?.coverImage || stage?.thumbnail
 
   if (!collection) return null
+  const link = `/${organizationSlug}/${
+    video.type === 'video' ? 'watch?session' : 'livestream?stage'
+  }=${collection?._id?.toString()}`
 
   return (
     <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
-      <Link className="w-full h-full" href={'#'}>
+      <Link className="w-full h-full" href={link}>
         <Thumbnail imageUrl={collectionImage!} />
       </Link>
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
-          <Link href={'#'}>
+          <Link href={link}>
             <CardTitle
               className={`text-sm capitalize line-clamp-2 overflow-hidden  hover:underline `}>
               {collection?.name}

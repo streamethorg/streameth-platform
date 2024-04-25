@@ -16,12 +16,10 @@ import UploadComplete from '@/lib/svg/UploadComplete'
 
 const UploadVideoDialog = ({
   organizationId,
-  show,
 }: {
-  show?: boolean
   organizationId: string
 }) => {
-  const [open, setOpen] = useState(show ?? false)
+  const [open, setOpen] = useState(false)
   const [isUploaded, setIsUploaded] = useState(false)
 
   const onFinish = () => {

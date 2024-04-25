@@ -99,7 +99,6 @@ const Library = async ({
         </CardHeader>
         <CardFooter>
           <UploadVideoDialog
-            show={searchParams?.show}
             organizationId={organization._id.toString()}
           />
         </CardFooter>
@@ -140,7 +139,7 @@ const LibraryPage = async ({
       searchParams.layout !== eLayout.list)
   ) {
     redirect(
-      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}&show=${searchParams.show}`
+      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}`
     )
   }
 

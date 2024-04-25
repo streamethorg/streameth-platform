@@ -123,9 +123,7 @@ const EditSessionFrom = ({
                 <ImageUpload
                   className="aspect-video max-w-[480px] relative rounded-xl bg-neutrals-300"
                   aspectRatio={16 / 9}
-                  path={`sessions/${generateId(
-                    form.getValues('name')
-                  )}`}
+                  path={`sessions/${organizationSlug}`}
                   {...field}
                 />
               </FormControl>
