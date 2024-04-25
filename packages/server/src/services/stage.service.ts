@@ -105,8 +105,8 @@ export default class StageService {
       name: stage.name,
       description: stage.description,
       external_url: '',
-      animation_url: `${config.baseUrl}/embed/?playbackId=${stage.streamSettings.playbackId}&vod=false&streamId=${stage.streamSettings.streamId}&playerName=${stage.name}`,
-      //image: stage.thumnbnail,
+      animation_url: `${config.baseUrl}/embed?playbackId=${stage.streamSettings.playbackId}&vod=false&streamId=${stage.streamSettings.streamId}&playerName=${stage.name}`,
+      image: stage.thumbnail,
       attributes: [
         {
           name: stage.name,
