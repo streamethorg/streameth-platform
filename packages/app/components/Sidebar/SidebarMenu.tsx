@@ -8,6 +8,7 @@ import {
   ScissorsLineDashed,
   Home,
   ImageIcon,
+  Settings,
 } from 'lucide-react'
 
 const navigationItems = [
@@ -16,41 +17,50 @@ const navigationItems = [
     navigationPath: '',
     icon: <Home size={20} />,
   },
-  {
-    text: 'Events',
-    navigationPath: 'events',
-    icon: <CalendarDays size={20} />,
-  },
+  // {
+  //   text: 'Events',
+  //   navigationPath: '/events',
+  //   icon: <CalendarDays size={20} />,
+  // },
   {
     text: 'Library',
-    navigationPath: 'library',
+    navigationPath: '/library',
     icon: <Videotape size={20} />,
   },
   {
     text: 'Livestreams',
-    navigationPath: 'livestreams',
+    navigationPath: '/livestreams',
     icon: <Radio size={20} />,
   },
   {
     text: 'Clips',
-    navigationPath: 'clips',
+    navigationPath: '/clips',
     icon: <ScissorsLineDashed size={20} />,
   },
   {
     text: 'Mint NFT',
-    navigationPath: 'nfts',
+    navigationPath: '/nfts',
     icon: <ImageIcon size={20} />,
+  },
+  {
+    text: 'Settings',
+    navigationPath: '/settings',
+    icon: <Settings />,
   },
 ]
 
-const SidebarMenu = ({}) => {
+const SidebarMenu = ({
+  organizationSlug,
+}: {
+  organizationSlug: string
+}) => {
   return (
-    <div className="relative z-10 w-[1/4]">
+    <div className="relative z-[60] w-[1/4]">
       <SidebarUI>
         {navigationItems.map((item, index) => (
           <SidebarItem
             key={index}
-            navigationPath={item.navigationPath}
+            navigationPath={`/studio/${organizationSlug}${item.navigationPath}`}
             text={item.text}
             icon={item.icon}
           />

@@ -26,12 +26,14 @@ const StreamHeader = ({
   }, [])
   return (
     <div className="flex items-center justify-between w-full">
-      <CardTitle>{stream.name}</CardTitle>
+      <CardTitle className="lg:max-w-[550px] line-clamp-1">
+        {stream.name}
+      </CardTitle>
       <div className="flex items-center gap-4">
         {isLiveStreamPage && (
           <Link
             href={`/studio/${organization}/livestreams`}
-            className="flex gap-1 items-center text-sm">
+            className="flex gap-1 items-center text-sm w-full">
             <ArrowLeft className="w-4 h-4" />
             Back to livestreams
           </Link>

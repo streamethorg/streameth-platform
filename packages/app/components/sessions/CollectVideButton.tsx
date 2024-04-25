@@ -13,13 +13,14 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi'
-import { VideoNFTAbi } from '@/lib/contract'
+import { VideoNFTAbi, contractChainID } from '@/lib/contract'
 import { toast } from 'sonner'
 import { calMintPrice, getVideoIndex } from '@/lib/utils/utils'
 import { Dialog, DialogContent, DialogTitle } from '../ui/dialog'
 import { CheckCircle2, Loader2 } from 'lucide-react'
 import { type BaseError } from 'wagmi'
 import TransactionHash from '@/app/studio/[organization]/nfts/create/components/TransactionHash'
+import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 
 const CollectVideButton = ({
   video,
@@ -34,12 +35,16 @@ const CollectVideButton = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [mintError, setMintError] = useState('')
-  const [isMinting, setIsMinting] = useState(false)
+
   const videoNFTContract = {
     address: nftCollection?.contractAddress as `0x${string}`,
     abi: VideoNFTAbi,
+    chainId: contractChainID,
   } as const
-  const { switchChain } = useSwitchChain()
+
+  const { switchChainAsync, isPending: IsSwitchingChain } =
+    useSwitchChain()
+
   const result = useReadContracts({
     contracts: [
       {
@@ -70,26 +75,18 @@ const CollectVideButton = ({
   useEffect(() => {
     if (isSuccess) {
       setIsOpen(false)
-      setIsMinting(false)
       toast.success(
         'NFT of the video successfully minted to your wallet'
       )
     }
     if (isError) {
-      setIsMinting(false)
       toast.error('NFT of the video failed to mint. Please try again')
     }
   }, [isSuccess, isError, error])
 
-  const mintCollection = () => {
+  const handleWriteContract = () => {
     setMintError('')
-    setIsMinting(true)
-    setIsOpen(true)
-    if (!account.address || chain !== 84532) {
-      switchChain({ chainId: 84532 })
-      setMintError('Please switch to base sepolia before continuing.')
-      setIsMinting(false)
-    } else {
+    if (result?.data?.[0].status === 'success') {
       writeContract({
         abi: VideoNFTAbi,
         address: nftCollection?.contractAddress as `0x${string}`,
@@ -103,18 +100,44 @@ const CollectVideButton = ({
           ) as string
         ),
       })
+    } else {
+      setMintError('An error occurred, try again later')
+    }
+  }
+
+  const mintCollection = () => {
+    setMintError('')
+    setIsOpen(true)
+    if (chain !== contractChainID) {
+      switchChainAsync(
+        { chainId: contractChainID },
+        {
+          onSuccess: () => {
+            handleWriteContract()
+          },
+          onError: () => {
+            setMintError('Error switching chain')
+          },
+        }
+      )
+    } else {
+      handleWriteContract()
     }
   }
 
   return (
     <div>
-      <Button
-        loading={isMinting}
-        onClick={mintCollection}
-        variant={variant}
-        className="w-full md:w-36">
-        {all ? 'Collect All Videos' : 'Collect Video'}
-      </Button>
+      {!account.address ? (
+        <ConnectWalletButton />
+      ) : (
+        <Button
+          loading={isMintingNftPending || IsSwitchingChain}
+          onClick={mintCollection}
+          variant={variant}
+          className="w-full md:w-36">
+          {all ? 'Collect All Videos' : 'Collect Video'}
+        </Button>
+      )}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
@@ -126,20 +149,21 @@ const CollectVideButton = ({
               : 'Approve transaction'}
           </DialogTitle>
 
-          {hash && <TransactionHash hash={hash} />}
           {mintError || error ? (
             <div className="text-destructive text-center">
               {mintError ||
                 (error as BaseError).shortMessage ||
                 error?.message}
             </div>
+          ) : hash ? (
+            <TransactionHash hash={hash} />
           ) : (
             <div className="flex gap-2 items-center">
               <div className="p-2 mr-2 rounded-full bg-grey h-fit">
-                {!isMintingNftPending ? (
-                  <CheckCircle2 className="w-6 h-6 text-white fill-success" />
-                ) : (
+                {isMintingNftPending || IsSwitchingChain ? (
                   <Loader2 className="w-6 h-6 rounded-full animate-spin text-success" />
+                ) : (
+                  <CheckCircle2 className="w-6 h-6 text-white fill-success" />
                 )}
               </div>
               <div>
@@ -147,8 +171,8 @@ const CollectVideButton = ({
                   Go to your wallet to approve the transaction
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  You&apos;ll be asked to pay gas fees and sign in
-                  order to deploy your contract on the blockchain.
+                  You&apos;ll be asked to pay gas fees plus mint fee
+                  to collect video on the blockchain.
                 </p>
               </div>
             </div>

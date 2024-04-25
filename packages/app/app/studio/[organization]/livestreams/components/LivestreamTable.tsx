@@ -17,6 +17,8 @@ import ToggleLivestreamVisibility from './ToggleLivestreamVisibility'
 import TableSort from '@/components/misc/TableSort'
 import { Button } from '@/components/ui/button'
 import { ScissorsLineDashed } from 'lucide-react'
+import Thumbnail from '@/components/misc/VideoCard/thumbnail'
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 
 const LivestreamTable = ({
   streams,
@@ -45,12 +47,21 @@ const LivestreamTable = ({
         <TableBody className="overflow-auto">
           {streams?.map((stream) => (
             <TableRow key={stream._id}>
-              <TableCell className="font-medium">
+              <TableCell className="font-medium max-w-[500px]">
                 <Link
                   key={stream._id}
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
                   <div className="flex flex-row items-center space-x-4 w-full">
-                    <p className="hover:underline">{stream?.name}</p>
+                    <div className="overflow-hidden min-w-[100px] w-[100px]">
+                      {stream.thumbnail ? (
+                        <Thumbnail imageUrl={stream.thumbnail} />
+                      ) : (
+                        <DefaultThumbnail />
+                      )}
+                    </div>
+                    <p className="hover:underline line-clamp-3">
+                      {stream?.name}
+                    </p>
                   </div>
                 </Link>
               </TableCell>

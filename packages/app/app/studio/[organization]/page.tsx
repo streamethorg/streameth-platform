@@ -41,12 +41,12 @@ const OrganizationPage = async ({
               <CardTitle>Upload video</CardTitle>
               <CardDescription className="text-white">
                 Upload and manage video content on your organization’s
-                page
+                page.
               </CardDescription>
             </CardHeader>
             <CardFooter>
               <Link href={`/studio/${params.organization}/library`}>
-                <Button variant="primary">Upload video</Button>
+                <Button variant="primary">Upload Video</Button>
               </Link>
             </CardFooter>
           </Card>
@@ -54,12 +54,12 @@ const OrganizationPage = async ({
             <CardHeader>
               <CardTitle>Clip a livestream</CardTitle>
               <CardDescription className="text-white">
-                Clip livestreams to share with your community
+                Clip livestreams to share with your community.
               </CardDescription>
             </CardHeader>
             <CardFooter>
               <Link href={`/studio/${params.organization}/clips`}>
-                <Button variant="primary">Clip livestream</Button>
+                <Button variant="primary">Clip Livestream</Button>
               </Link>
             </CardFooter>
           </Card>
@@ -75,7 +75,7 @@ const OrganizationPage = async ({
               <Link
                 href={`/studio/${params.organization}/livestreams?show=true`}>
                 <Button className="bg-white text-black">
-                  Start a livestream
+                  Start a Livestream
                 </Button>
               </Link>
             </CardFooter>

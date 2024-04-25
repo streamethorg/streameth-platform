@@ -8,6 +8,7 @@ import { archivePath } from '@/lib/utils/utils'
 import useClickOutside from '@/lib/hooks/useClickOutside'
 import { useRouter } from 'next/navigation'
 import { fetchSession } from '@/lib/services/sessionService'
+
 interface IEventSearchResult {
   id: string
   name: string
@@ -21,8 +22,12 @@ interface ISessionSearchResult {
 
 export default function SearchBar({
   organizationSlug,
+  searchVisible = true,
+  isMobile = false,
 }: {
   organizationSlug?: string
+  searchVisible?: boolean
+  isMobile?: boolean
 }): JSX.Element {
   const { searchParams } = useSearchParams()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -41,6 +46,7 @@ export default function SearchBar({
   const dropdownRef = useRef<HTMLDivElement>(null) // ref for the dropdown
   const inputRef = useRef<HTMLInputElement>(null) // ref for the input field
   const router = useRouter()
+
   useEffect(() => {
     if (debouncedSearchQuery) {
       setIsLoading(true)
@@ -61,6 +67,12 @@ export default function SearchBar({
     }
   }, [debouncedSearchQuery])
 
+  useEffect(() => {
+    if (searchVisible && isMobile && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [searchVisible])
+
   useClickOutside(dropdownRef, () => setIsOpened(false))
 
   const handleTermChange = (session: ISessionSearchResult) => {
@@ -78,7 +90,7 @@ export default function SearchBar({
   }
 
   return (
-    <div className="flex max-w-[500px] flex-col items-center justify-center relative w-full p-2">
+    <div className="flex relative flex-col justify-center items-center p-2 w-full max-w-[500px]">
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -88,8 +100,8 @@ export default function SearchBar({
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="max-w-[500px] bg-white"
-        placeholder="Search"
+        className="bg-white max-w-[500px]"
+        placeholder="Search..."
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setSearchQuery(e.target.value)
@@ -98,14 +110,14 @@ export default function SearchBar({
       {isOpened && debouncedSearchQuery && (
         <div
           ref={dropdownRef}
-          className="w-full absolute top-[55px] p-2 max-w-[500px] bg-secondary">
+          className="absolute p-2 w-full top-[55px] max-w-[500px] bg-secondary">
           {isLoading ? (
             <div>Loading...</div>
           ) : (
             <div className="flex flex-col bg-white">
               {searchResults.length > 0 && (
                 <div className="mt-2">
-                  <div className="text font-bold">Videos</div>
+                  <div className="font-bold text">Videos</div>
                   {searchResults.map(
                     (result: ISessionSearchResult) => (
                       <div
@@ -122,15 +134,15 @@ export default function SearchBar({
                 </div>
               )}
               {eventResults.length > 0 && (
-                <div className="mt-2 mx-2 p-2">
-                  <div className="text font-bold">Events</div>
+                <div className="p-2 mx-2 mt-2">
+                  <div className="font-bold text">Events</div>
                   {eventResults.map((result: IEventSearchResult) => (
                     <div
                       onClick={() => {
                         handleEventChange(result.slug)
                         setIsOpened(false)
                       }}
-                      className="p-1 "
+                      className="p-1"
                       key={result.name}>
                       {result.name}
                     </div>

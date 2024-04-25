@@ -27,8 +27,11 @@ import {
   useSwitchChain,
 } from 'wagmi'
 
-import { VideoFactoryAbi, VideoFactoryAddress } from '@/lib/contract'
-import { getDateWithTime } from '@/lib/utils/time'
+import {
+  VideoFactoryAbi,
+  VideoFactoryAddress,
+  contractChainID,
+} from '@/lib/contract'
 import { ethers } from 'ethers'
 import {
   INftCollection,
@@ -54,7 +57,7 @@ const CreateNFTForm = ({
 }) => {
   const account = useAccount()
   const chain = useChainId()
-  const { switchChain } = useSwitchChain()
+  const { switchChain, switchChainAsync } = useSwitchChain()
 
   const [step, setStep] = useState(1)
   const [isPublishingCollection, setIsPublishingCollection] =
@@ -92,6 +95,12 @@ const CreateNFTForm = ({
     confirmations: 1,
     hash,
   })
+
+  useEffect(() => {
+    if (chain !== contractChainID)
+      switchChain({ chainId: contractChainID })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chain])
 
   const parseMintFee = ethers.parseUnits(
     form.getValues('mintFee')
@@ -162,52 +171,61 @@ const CreateNFTForm = ({
     })
   }
 
+  const handleWriteContract = async () => {
+    const formData = {
+      name: form.getValues('name'),
+      description: form.getValues('description'),
+      thumbnail: form.getValues('thumbnail'),
+      type: type,
+      organizationId: organizationId,
+      videos: formState.selectedVideo.map((video) => ({
+        type:
+          video.videoType === 'livestreams' ? 'livestream' : 'video',
+        stageId: video.videoType === 'livestreams' ? video._id : '',
+        sessionId: video.videoType !== 'livestreams' ? video._id : '',
+      })),
+    }
+
+    try {
+      const collectionMetadata =
+        await generateNFTCollectionMetadataAction({
+          nftCollection: formData,
+        })
+      setIsGeneratingMetadata(false)
+
+      setFormResponseData({
+        ...formData,
+        ipfsPath: collectionMetadata.ipfsPath,
+        videos: collectionMetadata.videos,
+      })
+      createCollectionContract(collectionMetadata.ipfsPath)
+    } catch (error) {
+      setIsPublishingCollection(false)
+      setPublishError('Error while publishing')
+      toast.error('Error creating NFT Collection')
+    }
+  }
+
   const createNFTCollection = async () => {
     setIsPublished(false)
     setPublishError('')
     setIsPublishingCollection(true)
     setIsGeneratingMetadata(true)
     if (!account.address || chain !== 84532) {
-      switchChain({ chainId: 84532 })
-      setPublishError(
-        'Please switch to base sepolia before continuing.'
+      switchChainAsync(
+        { chainId: contractChainID },
+        {
+          onSuccess: () => {
+            handleWriteContract()
+          },
+          onError: () => {
+            setIsPublishingCollection(false)
+            setPublishError('Error switching chain')
+          },
+        }
       )
     } else {
-      const formData = {
-        name: form.getValues('name'),
-        description: form.getValues('description'),
-        thumbnail: form.getValues('thumbnail'),
-        type: type,
-        organizationId: organizationId,
-        videos: formState.selectedVideo.map((video) => ({
-          type:
-            video.videoType === 'livestreams'
-              ? 'livestream'
-              : 'video',
-          stageId: video.videoType === 'livestreams' ? video._id : '',
-          sessionId:
-            video.videoType !== 'livestreams' ? video._id : '',
-        })),
-      }
-
-      try {
-        const collectionMetadata =
-          await generateNFTCollectionMetadataAction({
-            nftCollection: formData,
-          })
-        setIsGeneratingMetadata(false)
-
-        setFormResponseData({
-          ...formData,
-          ipfsPath: collectionMetadata.ipfsPath,
-          videos: collectionMetadata.videos,
-        })
-        createCollectionContract(collectionMetadata.ipfsPath)
-      } catch (error) {
-        setIsPublishingCollection(false)
-        setPublishError('Error while publishing')
-        toast.error('Error creating NFT Collection')
-      }
+      handleWriteContract()
     }
   }
 
