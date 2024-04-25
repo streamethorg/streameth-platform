@@ -105,8 +105,9 @@ export const getSessionMetrics = async ({
   playTimeMins: number
 }> => {
   try {
-    const metrics =
-      await livepeer.metrics.getPublicTotalViews(playbackId)
+    const metrics = await livepeer.metrics.getPublicTotalViews(
+      playbackId
+    )
     if (!metrics.object) {
       return {
         viewCount: 0,

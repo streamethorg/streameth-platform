@@ -145,8 +145,8 @@ const CollectVideButton = ({
             {isError || mintError
               ? 'Error'
               : hash
-                ? 'Transaction Approved'
-                : 'Approve transaction'}
+              ? 'Transaction Approved'
+              : 'Approve transaction'}
           </DialogTitle>
 
           {mintError || error ? (
