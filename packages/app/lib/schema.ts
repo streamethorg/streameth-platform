@@ -107,21 +107,31 @@ const speakerSchema = z.object({
 })
 
 export const sessionSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
+  name: z
+    .string()
+    .min(1, { message: 'Name is required' })
+    .max(25, { message: 'Name is too long' }),
   description: z
     .string()
-    .min(1, { message: 'Description is required' }),
+    .min(1, { message: 'Description is required' })
+    .max(150, { message: 'Description is too long' }),
   coverImage: z.string().optional(),
   assetId: z.string().min(1, { message: 'Please upload a video' }),
 })
 
 export const organizationSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
+  name: z
+    .string()
+    .min(1, 'Name is required')
+    .max(25, { message: 'Name is too long' }),
   logo: z.string().min(1, 'Logo is required'),
   banner: z.string().optional(),
   bio: z.string().optional(),
+  description: z
+    .string()
+    .max(40, { message: 'Description is too long' })
+    .optional(),
   email: z.string().email().min(1, 'Email is required'),
-  description: z.string().optional(),
   // url: z.string().optional(),
 })
 

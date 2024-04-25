@@ -24,6 +24,10 @@ const UploadVideoDialog = ({
 
   const onFinish = () => {
     setIsUploaded(true)
+
+    setTimeout(() => {
+      setIsUploaded(false)
+    }, 10000)
   }
 
   return (

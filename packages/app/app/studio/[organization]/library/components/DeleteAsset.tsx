@@ -22,7 +22,7 @@ const DeleteAsset = ({
   TriggerComponent,
 }: {
   session: IExtendedSession
-  href: string
+  href: string | 'refresh'
   TriggerComponent: ReactNode
 }) => {
   const router = useRouter()
@@ -33,6 +33,9 @@ const DeleteAsset = ({
       sessionId: session._id,
     })
 
+    if (href === 'refresh') {
+      location.reload()
+    }
     router.push(href)
   }
 

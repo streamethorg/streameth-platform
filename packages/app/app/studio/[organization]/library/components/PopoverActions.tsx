@@ -20,6 +20,8 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { toast } from 'sonner'
+import VideoDownload from '@/app/[organization]/components/VideoDownload'
+import VideoDownloadClient from '@/components/misc/VideoDownloadClient'
 
 const PopoverActions = ({
   session,
@@ -64,6 +66,14 @@ const PopoverActions = ({
                 <p className="">Edit</p>
               </Link>
             </Button>
+            {session.playbackId && (
+              <VideoDownloadClient
+                className="flex flex-row justify-center items-center space-x-2 w-full bg-white"
+                videoName={`${session.name}.mp4`}
+                variant="outline"
+                playbackId={session.playbackId}
+              />
+            )}
             {layout == eLayout.grid && (
               <PopoverClose>
                 <Button

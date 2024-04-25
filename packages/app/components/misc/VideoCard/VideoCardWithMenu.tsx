@@ -1,3 +1,5 @@
+'use client'
+
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import {
   CardDescription,
@@ -9,16 +11,15 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
 import React, { ReactNode } from 'react'
 import { generateThumbnail } from '@/lib/actions/livepeer'
+import { useEffect, useState } from 'react'
 
-const VideoCardWithMenu = async ({
+const VideoCardWithMenu = ({
   session,
   showDate = true,
   DropdownMenuItems,
@@ -29,10 +30,27 @@ const VideoCardWithMenu = async ({
   DropdownMenuItems?: ReactNode
   link: string
 }) => {
-  const thumbnail = await generateThumbnail(session)
+  const [thumbnail, setThumbnail] = useState<string | undefined>(
+    undefined
+  )
+
+  useEffect(() => {
+    const getThumbnail = async (session: IExtendedSession) => {
+      try {
+        const generatedThumbnail = await generateThumbnail(session)
+        setThumbnail(generatedThumbnail)
+      } catch (error) {
+        console.error('Failed to generate thumbnail:', error)
+      }
+    }
+
+    if (session) {
+      getThumbnail(session)
+    }
+  }, [])
 
   return (
-    <div className="w-full min-h-full uppercase rounded-xl flex flex-col">
+    <div className="flex flex-col w-full min-h-full uppercase rounded-xl">
       <Link className="w-full h-full" href={link}>
         <Thumbnail
           imageUrl={session.coverImage}

@@ -1,7 +1,7 @@
 'use client'
 
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
-import { ReactNode } from 'react'
+import { ReactNode, forwardRef } from 'react'
 import {
   Copy,
   Download,
@@ -14,17 +14,18 @@ import DeleteAsset from '../DeleteAsset'
 import { IExtendedSession } from '@/lib/types'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import VideoDownloadClient from '@/components/misc/VideoDownloadClient'
 
-const TriggerComponent = (): ReactNode => {
-  return (
-    <div className="flex justify-start">
-      <Button variant={'ghost'} className="space-x-2">
-        <TrashIcon className="text-red-500" />
-        <p>Delete</p>
-      </Button>
-    </div>
-  )
-}
+// const TriggerComponent = forwardRef<HTMLDivElement, {}>(
+//   (props, ref) => (
+//     <div ref={ref} className="flex justify-start">
+//       <Button variant={'ghost'} className="space-x-2">
+//         <TrashIcon className="text-red-500" />
+//         <p>Delete</p>
+//       </Button>
+//     </div>
+//   )
+// )
 
 export const DropdownItems = ({
   session,
@@ -47,8 +48,8 @@ export const DropdownItems = ({
           }`}>
           <Button
             variant={'ghost'}
-            className="flex flex-row justify-center items-center space-x-2">
-            <FilePenLine className="text-muted-foreground" />
+            className="flex flex-row justify-center items-center space-x-2 text-muted-foreground">
+            <FilePenLine />
             <p className="">Edit</p>
           </Button>
         </Link>
@@ -56,12 +57,22 @@ export const DropdownItems = ({
       <DropdownMenuItem>
         <Button
           variant={'ghost'}
-          className="space-x-2"
+          className="space-x-2 text-muted-foreground"
           onClick={() => handleCopy()}>
           <Copy />
           <p>Copy IPFS Hash</p>
         </Button>
       </DropdownMenuItem>
+      {session.playbackId && (
+        <DropdownMenuItem>
+          <VideoDownloadClient
+            className="space-x-2 text-muted-foreground"
+            videoName={`${session.name}.mp4`}
+            variant="ghost"
+            playbackId={session.playbackId}
+          />
+        </DropdownMenuItem>
+      )}
     </div>
   )
 }

@@ -4,7 +4,7 @@ let nextConfig = {
   redirects: async () => [
     {
       source: '/',
-      destination: '/studio',
+      destination: '/index.html',
       permanent: true,
     },
     {
