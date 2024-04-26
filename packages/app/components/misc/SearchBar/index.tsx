@@ -76,7 +76,6 @@ export default function SearchBar({
   useClickOutside(dropdownRef, () => setIsOpened(false))
 
   const handleTermChange = (session: ISessionSearchResult) => {
-    alert(organizationSlug)
     if (organizationSlug) {
       router.push(`/${organizationSlug}/watch?session=${session.id}`)
       return
