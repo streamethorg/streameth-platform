@@ -12,6 +12,28 @@ let nextConfig = {
       has: [
         {
           type: 'host',
+          value: 'zuzalu.streameth.org',
+        },
+      ],
+      destination: 'https://streameth.org/zuzalu',
+      permanent: true,
+    },
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
+          value: 'swarm.streameth.org',
+        },
+      ],
+      destination: 'https://streameth.org/swarm',
+      permanent: true,
+    },
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
           value: 'basemiami.xyz',
         },
       ],
