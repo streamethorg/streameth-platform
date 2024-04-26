@@ -129,8 +129,8 @@ export default class SessionService {
     let metadata = {
       name: session.name,
       description: session.description,
-      external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
-      animation_url: `${config.baseUrl}/embed?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name}`,
+      external_url: `${config.playerUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
+      animation_url: `${config.playerUrl}/embed?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name}`,
       image: session.coverImage,
       attributes: [
         {
