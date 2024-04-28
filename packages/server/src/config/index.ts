@@ -3,6 +3,7 @@ import validateEnv from '@utils/validateEnv';
 const validatedEnv = validateEnv();
 export const config = {
   baseUrl: validatedEnv.BASE_URL,
+  playerUrl: validatedEnv.PLAYER_URL,
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
   db: {

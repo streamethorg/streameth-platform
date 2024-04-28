@@ -77,9 +77,6 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
-    this.app.use((req, res, next) => {
-      res.setHeader('Content-Security-Policy', 'sandbox allow-same-origin');
-    });
     RegisterRoutes(this.app);
   }
 

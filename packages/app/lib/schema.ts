@@ -129,7 +129,7 @@ export const organizationSchema = z.object({
   bio: z.string().optional(),
   description: z
     .string()
-    .max(40, { message: 'Description is too long' })
+    .max(400, { message: 'Description is too long' })
     .optional(),
   email: z.string().email().min(1, 'Email is required'),
   // url: z.string().optional(),
