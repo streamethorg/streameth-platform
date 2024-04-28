@@ -12,10 +12,32 @@ let nextConfig = {
       has: [
         {
           type: 'host',
+          value: 'zuzalu.streameth.org',
+        },
+      ],
+      destination: 'https://streameth.org/zuzalu',
+      permanent: true,
+    },
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
+          value: 'swarm.streameth.org',
+        },
+      ],
+      destination: 'https://streameth.org/swarm',
+      permanent: true,
+    },
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
           value: 'basemiami.xyz',
         },
       ],
-      destination: 'https://basemiami.xyz/base/base_event',
+      destination: 'https://basemiami.xyz/base',
       permanent: true,
     },
     {
@@ -27,7 +49,7 @@ let nextConfig = {
         },
       ],
       destination:
-        'https://watch.protocol.berlin/ethberlin/protocol_berg',
+        'https://watch.protocol.berlin/ethberlin',
       permanent: true,
     },
     {
@@ -39,7 +61,7 @@ let nextConfig = {
         },
       ],
       destination:
-        'https://launch.scroll.io/scroll/scroll_announcement_stream',
+        'https://launch.scroll.io/scroll',
       permanent: true,
     }
   ],
