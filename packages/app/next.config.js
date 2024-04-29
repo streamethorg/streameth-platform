@@ -29,6 +29,17 @@ let nextConfig = {
       permanent: true,
     },
     {
+      source: '/archive',
+      has: [
+        {
+          type: 'host',
+          value: 'zuzalu.streameth.org',
+        },
+      ],
+      destination: 'https://streameth.org/zuzalu',
+      permanent: true,
+    },
+    {
       source: '/',
       has: [
         {
