@@ -150,7 +150,7 @@ export const generateThumbnail = async (
               (source) => source.hrn === 'Thumbnails'
             ) ?? []
           if (lpThumbnails.length > 0) {
-            return lpThumbnails[0].url
+            return lpThumbnails[0].url.replace("thumbnails.vtt", "keyframes_0.jpg") 
           }
         }
       }
