@@ -112,7 +112,11 @@ export default function ImageUpload({
       if (!res.ok) {
         throw new Error(await res.text())
       }
-      onChange(getImageUrl('/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')))
+      onChange(
+        getImageUrl(
+          '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
+        )
+      )
       return 'Image uploaded successfully'
     } catch (e: any) {
       // Handle errors here
