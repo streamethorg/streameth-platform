@@ -172,7 +172,7 @@ const CreateNFTForm = ({
   }
 
   const handleWriteContract = async () => {
-    const formData = {
+    const formData: INftCollection = {
       name: form.getValues('name'),
       description: form.getValues('description'),
       thumbnail: form.getValues('thumbnail'),

@@ -176,12 +176,14 @@ export async function createMultistream({
   targetURL,
   targetStreamKey,
   authToken,
+  organizationId,
 }: {
   name: string
   streamId: string
   targetStreamKey: string
   targetURL: string
   authToken: string
+  organizationId?: string
 }): Promise<{ message: string; status: string }> {
   const response = await fetch(`${apiUrl()}/streams/multistream`, {
     method: 'POST',
@@ -194,11 +196,12 @@ export async function createMultistream({
       streamId,
       targetURL,
       targetStreamKey,
+      organizationId,
     }),
   })
 
   if (!response.ok) {
-    throw 'Error creating stage'
+    throw 'Error creating multistream'
   }
 
   return await response.json()
@@ -208,10 +211,12 @@ export async function deleteMultistream({
   streamId,
   targetId,
   authToken,
+  organizationId,
 }: {
   streamId: string
   targetId: string
   authToken: string
+  organizationId?: string
 }): Promise<IExtendedStage> {
   try {
     const response = await fetch(`${apiUrl()}/streams/multistream`, {
@@ -220,7 +225,7 @@ export async function deleteMultistream({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify({ streamId, targetId }),
+      body: JSON.stringify({ streamId, targetId, organizationId }),
     })
     if (!response.ok) {
       throw 'Error deleting multistream'

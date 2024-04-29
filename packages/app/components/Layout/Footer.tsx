@@ -5,11 +5,11 @@ import Link from 'next/link'
 const items = {
   // about: {
   //   item: 'About us',
-  //   href: 'https://streameth.org',
+  //   href: 'https://info.streameth.org',
   // },
   // contact: {
   //   item: 'Contact',
-  //   href: 'https://streameth.org/#team',
+  //   href: 'https://info.streameth.org/#team',
   // },
   // docs: {
   //   item: 'Docs',

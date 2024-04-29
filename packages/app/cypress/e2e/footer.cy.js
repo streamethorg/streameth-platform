@@ -9,9 +9,7 @@ describe('Footer', () => {
   })
 
   it('Click on "Contact us"', () => {
-    cy.get(
-      'footer > a[href*="https://streameth.org/#team"]'
-    ).click()
+    cy.get('footer > a[href*="https://streameth.org/#team"]').click()
   })
 
   it('Click on "Docs"', () => {

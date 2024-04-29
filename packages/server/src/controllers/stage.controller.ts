@@ -24,6 +24,9 @@ import {
 export class StageController extends Controller {
   private stageService = new StageService();
 
+  /**
+   * @summary Create Session
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post()
@@ -34,6 +37,9 @@ export class StageController extends Controller {
     return SendApiResponse('stage created', stage);
   }
 
+  /**
+   * @summary Update Stage
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{stageId}')
@@ -45,6 +51,9 @@ export class StageController extends Controller {
     return SendApiResponse('stage updated', stage);
   }
 
+  /**
+   * @summary Get Stage by id
+   */
   @SuccessResponse('200')
   @Get('{stageId}')
   async getStageById(
@@ -54,6 +63,9 @@ export class StageController extends Controller {
     return SendApiResponse('stage fetched', stage);
   }
 
+  /**
+   * @summary Get All Stage
+   */
   @SuccessResponse('200')
   @Get()
   async getAllStages(
@@ -66,6 +78,9 @@ export class StageController extends Controller {
     return SendApiResponse('stages fetched', stages);
   }
 
+  /**
+   * @summary Get All Stage for Event
+   */
   @SuccessResponse('200')
   @Get('/event/{eventId}')
   async getAllStagesForEvent(
@@ -75,6 +90,9 @@ export class StageController extends Controller {
     return SendApiResponse('stages fetched', stages);
   }
 
+  /**
+   * @summary Get All Stage for Organization
+   */
   @SuccessResponse('200')
   @Get('/organization/{organizationId}')
   async getAllStagesForOrganization(
@@ -85,6 +103,9 @@ export class StageController extends Controller {
     return SendApiResponse('stages fetched', stages);
   }
 
+  /**
+   * @summary Delete Stage
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{stageId}')

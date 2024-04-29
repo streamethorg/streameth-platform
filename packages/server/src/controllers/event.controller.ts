@@ -76,6 +76,9 @@ export class EventController extends Controller {
     return SendApiResponse('syncing..');
   }
 
+  /**
+   * @summary Get All Event
+   */
   @SuccessResponse('200')
   @Get()
   async getAllEvents(
@@ -90,6 +93,9 @@ export class EventController extends Controller {
     return SendApiResponse('events fetched', events);
   }
 
+  /**
+   * @summary Delete Event
+   */
   @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{eventId}')
