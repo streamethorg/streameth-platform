@@ -31,6 +31,7 @@ const validateEnv = () => {
     TELEGRAM_CHAT_ID: str(),
     OAUTH_SECRET: str(),
     THIRDWEB_SECRET_KEY: str(),
+    WALLET_ADDRESSES: str(),
   });
 };
 

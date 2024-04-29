@@ -4,6 +4,7 @@ import { IOrganization } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
+import { config } from '@config';
 
 export default class OrganizationService {
   private path: string;
@@ -23,8 +24,12 @@ export default class OrganizationService {
       data,
       this.path,
     );
-    await User.findOneAndUpdate(
-      { walletAddress: data.walletAddress },
+    const wallets = [
+      ...config.wallets.trim().split(','),
+      data.walletAddress,
+    ];
+    await User.updateMany(
+      { walletAddress: { $in: wallets } },
       { $addToSet: { organizations: createOrg._id } },
     );
     return createOrg;
