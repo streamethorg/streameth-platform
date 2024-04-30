@@ -38,20 +38,15 @@ const SupportForm = ({
             alert(errors)
           }}
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8">
+          className="space-y-4">
           <FormField
             control={form.control}
-            name="message"
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel required className="">
-                  Message
-                </FormLabel>
+                <FormLabel required>Email</FormLabel>
                 <FormControl>
-                  <Textarea
-                    placeholder="Describe the bug here"
-                    {...field}
-                  />
+                  <Input placeholder="Email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -65,7 +60,7 @@ const SupportForm = ({
               <FormItem>
                 <FormLabel className="">Telegram Id</FormLabel>
                 <FormControl>
-                  <Input placeholder="telegram Id" {...field} />
+                  <Input placeholder="Telegram Id" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -74,12 +69,17 @@ const SupportForm = ({
 
           <FormField
             control={form.control}
-            name="email"
+            name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="">Email</FormLabel>
+                <FormLabel required className="">
+                  Message
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="email" {...field} />
+                  <Textarea
+                    placeholder="Describe your issue here"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

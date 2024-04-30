@@ -1,6 +1,6 @@
 'use client'
-import React, { useRef, useState } from 'react'
-import { Bug } from 'lucide-react'
+import React, { useState } from 'react'
+import { MessageCircleQuestion, X } from 'lucide-react'
 import { createSupportTicketAction } from '@/lib/actions/support'
 import { supportSchema } from '@/lib/schema'
 import * as z from 'zod'
@@ -62,7 +62,7 @@ const Support = () => {
   return (
     <Credenza open={open} onOpenChange={setOpen}>
       <CredenzaContent className="!z-50">
-        <CredenzaTitle>Bug/Content Error Report</CredenzaTitle>
+        <CredenzaTitle>Contact Support</CredenzaTitle>
         <div>
           {messageSent && (
             <p className="font-bold pb-2">Message sent 🎉!!</p>
@@ -108,14 +108,14 @@ const Support = () => {
         </div>
       </CredenzaContent>
       <CredenzaTrigger>
-        <div className="bg-muted cursor-pointer p-1 mr-1 lg:ml-0 lg:p-2 rounded-lg">
-          <InfoHoverCard
-            Icon={Bug}
-            iconColor="red"
-            iconClassName="w-4 h-4 lg:w-5 lg:h-5"
-            title="Bug/Content error report"
-            description="Directly send us a support ticket or report content error"
-          />
+        <div className="fixed bottom-4 right-0 cursor-pointer p-1 mr-1 lg:ml-0 lg:p-2">
+          <div className="rounded-full p-4 bg-white shadow-xl border-muted-foreground">
+            {!open ? (
+              <MessageCircleQuestion className="text-muted-foreground h-8 w-8" />
+            ) : (
+              <X className="text-muted-foreground h-8 w-8" />
+            )}
+          </div>
         </div>
       </CredenzaTrigger>
     </Credenza>
