@@ -14,7 +14,7 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
   const [expanded, setExpanded] = useState(true)
 
   return (
-    <aside className="flex flex-col h-screen border-r bg-primary">
+    <aside className="flex flex-col h-screen bg-primary">
       <div className="flex justify-between items-center p-4 pb-2">
         <div
           className={`flex items-center overflow-hidden transition-all ${
