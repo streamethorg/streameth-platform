@@ -13,4 +13,8 @@ export class CreateSupportTicketDto implements ISupport {
   @IsOptional()
   @IsString()
   email?: string;
+
+  @IsOptional()
+  @IsString()
+  image?: string;
 }

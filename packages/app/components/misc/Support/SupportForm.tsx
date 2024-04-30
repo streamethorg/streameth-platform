@@ -13,6 +13,7 @@ import { Loader2 } from 'lucide-react'
 import { UseFormReturn } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
+import ImageUpload from '../form/imageUpload'
 
 const SupportForm = ({
   form,
@@ -24,6 +25,7 @@ const SupportForm = ({
     message: string
     telegram?: string
     email?: string
+    image?: string
   }>
   isLoading: boolean
   onSubmit: (values: { message: string }) => void
@@ -31,7 +33,6 @@ const SupportForm = ({
 }) => {
   return (
     <div>
-      <h2 className="pb-2 pt-3 font-bold">Send a support ticket</h2>
       <Form {...form}>
         <form
           onError={(errors) => {
@@ -58,9 +59,9 @@ const SupportForm = ({
             name="telegram"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="">Telegram Id</FormLabel>
+                <FormLabel className="">Telegram ID</FormLabel>
                 <FormControl>
-                  <Input placeholder="Telegram Id" {...field} />
+                  <Input placeholder="@streameth" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -77,7 +78,28 @@ const SupportForm = ({
                 </FormLabel>
                 <FormControl>
                   <Textarea
+                    className="h-[120px]"
                     placeholder="Describe your issue here"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="image"
+            render={({ field }) => (
+              <FormItem className="flex p-2   mt-4">
+                {/* <FormLabel>Image</FormLabel> */}
+                <FormControl>
+                  <ImageUpload
+                    placeholder="Drag or click to upload image here. "
+                    className="w-full h-full bg-neutrals-300 text-black m-auto py-4"
+                    aspectRatio={1}
+                    path={`support`}
                     {...field}
                   />
                 </FormControl>

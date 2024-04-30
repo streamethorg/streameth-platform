@@ -30,6 +30,7 @@ const Support = () => {
       message: '',
       telegram: '',
       email: '',
+      image: '',
     },
   })
 
@@ -61,7 +62,7 @@ const Support = () => {
   }
   return (
     <Credenza open={open} onOpenChange={setOpen}>
-      <CredenzaContent className="!z-50">
+      <CredenzaContent className="!z-50 overflow-auto max-h-[700px]">
         <CredenzaTitle>Contact Support</CredenzaTitle>
         <div>
           {messageSent && (
@@ -109,11 +110,11 @@ const Support = () => {
       </CredenzaContent>
       <CredenzaTrigger>
         <div className="fixed bottom-4 right-0 cursor-pointer p-1 mr-1 lg:ml-0 lg:p-2">
-          <div className="rounded-full p-4 bg-white shadow-xl border-muted-foreground">
+          <div className="rounded-full p-4 bg-white shadow-xl">
             {!open ? (
-              <MessageCircleQuestion className="text-muted-foreground h-8 w-8" />
+              <MessageCircleQuestion className="text-muted-foreground h-7 w-7" />
             ) : (
-              <X className="text-muted-foreground h-8 w-8" />
+              <X className="text-muted-foreground h-7 w-7" />
             )}
           </div>
         </div>
