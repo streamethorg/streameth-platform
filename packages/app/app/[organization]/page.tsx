@@ -18,6 +18,7 @@ import UpcomingStreams, {
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
+import ChannelDescription from './components/ChannelDescription'
 
 export async function generateStaticParams() {
   const organizations = await fetchOrganizations()
@@ -104,9 +105,9 @@ const OrganizationHome = async ({
                   <h2 className="text-2xl font-bold">
                     {organization.name}
                   </h2>
-                  <p className="hidden mr-12 text-lg md:block">
-                    {organization.description}
-                  </p>
+                  <ChannelDescription
+                    description={organization.description}
+                  />
                 </div>
                 <ChannelShareIcons organization={organization} />
               </div>
