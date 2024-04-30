@@ -38,7 +38,7 @@ export default function Thumbnail({
         loading="lazy"
         className="rounded-xl"
         alt="Session image"
-        quality={80}
+        quality={100}
         src={error ? fallbackImage : streamethThumbnail}
         fill
         sizes="(max-width: 768px) 100%, (max-width: 1200px) 50%, 33%"
