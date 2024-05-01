@@ -109,7 +109,12 @@ const CreateLivestreamModal = ({
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={() => {
+        setOpen(!open)
+        setStreamType(undefined)
+      }}>
       <DialogTrigger asChild>
         <Button variant="primary">Create Livestream</Button>
       </DialogTrigger>

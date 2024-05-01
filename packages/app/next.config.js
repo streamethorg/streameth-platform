@@ -5,6 +5,16 @@ let nextConfig = {
     {
       source: '/',
       destination: '/index.html',
+      has: [
+        {
+          type: 'host',
+          value: 'www.streameth.org',
+        },
+        {
+          type: 'host',
+          value: 'streameth.org',
+        },
+      ],
       permanent: true,
     },
     {
