@@ -36,11 +36,11 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
       </SidebarContext.Provider>
 
       <Link
-        className="text-grey flex items-center p-4 pb-10 relative transition-colors group"
+        className="flex relative items-center p-2 mx-4 mb-8 rounded-lg transition-colors text-grey group hover:bg-secondary-foreground"
         target="_blank"
         rel="noopener noreferrer"
         href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
-        <BookOpenText className="w-6 h-6" />{' '}
+        <BookOpenText className="w-6 h-6" />
         <span
           className={`overflow-hidden transition-all ${
             expanded ? 'w-52 ml-3' : 'w-0'
