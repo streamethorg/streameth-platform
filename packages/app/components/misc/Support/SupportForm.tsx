@@ -92,8 +92,7 @@ const SupportForm = ({
             control={form.control}
             name="image"
             render={({ field }) => (
-              <FormItem className="flex p-2   mt-4">
-                {/* <FormLabel>Image</FormLabel> */}
+              <FormItem className="flex border-dashed border rounded-xl mt-4">
                 <FormControl>
                   <ImageUpload
                     placeholder="Drag or click to upload image here. "
