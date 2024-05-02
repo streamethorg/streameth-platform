@@ -13,6 +13,7 @@ import { Loader2 } from 'lucide-react'
 import { UseFormReturn } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
+import ImageUpload from '../form/imageUpload'
 
 const SupportForm = ({
   form,
@@ -24,6 +25,7 @@ const SupportForm = ({
     message: string
     telegram?: string
     email?: string
+    image?: string
   }>
   isLoading: boolean
   onSubmit: (values: { message: string }) => void
@@ -31,27 +33,21 @@ const SupportForm = ({
 }) => {
   return (
     <div>
-      <h2 className="pb-2 pt-3 font-bold">Send a support ticket</h2>
       <Form {...form}>
         <form
           onError={(errors) => {
             alert(errors)
           }}
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8">
+          className="space-y-4">
           <FormField
             control={form.control}
-            name="message"
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel required className="">
-                  Message
-                </FormLabel>
+                <FormLabel required>Email</FormLabel>
                 <FormControl>
-                  <Textarea
-                    placeholder="Describe the bug here"
-                    {...field}
-                  />
+                  <Input placeholder="Email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -63,9 +59,9 @@ const SupportForm = ({
             name="telegram"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="">Telegram Id</FormLabel>
+                <FormLabel className="">Telegram ID</FormLabel>
                 <FormControl>
-                  <Input placeholder="telegram Id" {...field} />
+                  <Input placeholder="@streameth" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -74,12 +70,38 @@ const SupportForm = ({
 
           <FormField
             control={form.control}
-            name="email"
+            name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="">Email</FormLabel>
+                <FormLabel required className="">
+                  Message
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="email" {...field} />
+                  <Textarea
+                    className="h-[120px]"
+                    placeholder="Describe your issue here"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="image"
+            render={({ field }) => (
+              <FormItem className="flex p-2   mt-4">
+                {/* <FormLabel>Image</FormLabel> */}
+                <FormControl>
+                  <ImageUpload
+                    placeholder="Drag or click to upload image here. "
+                    className="w-full h-full bg-neutrals-300 text-black m-auto py-4"
+                    aspectRatio={1}
+                    path={`support`}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
