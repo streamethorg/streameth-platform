@@ -62,7 +62,7 @@ const Support = () => {
   }
   return (
     <Credenza open={open} onOpenChange={setOpen}>
-      <CredenzaContent className="!z-50 overflow-auto max-h-[700px]">
+      <CredenzaContent className="!z-[999999] p-6 md:overflow-auto max-h-[700px]">
         <CredenzaTitle>Contact Support</CredenzaTitle>
         <div>
           {messageSent && (
