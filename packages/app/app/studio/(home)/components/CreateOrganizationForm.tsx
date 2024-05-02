@@ -125,7 +125,7 @@ export default function CreateOrganizationForm({
             name="logo"
             render={({ field }) => (
               <>
-                <FormItem className="flex relative w-24 h-24 p-1 rounded-full bg-white mt-[-50px] mx-4">
+                <FormItem className="flex relative w-24 h-24 p-1 z-40 rounded-full bg-white mt-[-50px] mx-4">
                   <FormControl>
                     <ImageUpload
                       className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"

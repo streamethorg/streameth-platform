@@ -9,6 +9,7 @@ import { generalMetadata } from '@/lib/utils/metadata'
 import { Toaster } from '@/components/ui/sonner'
 import CookieBanner from '@/components/misc/interact/CookieBanner'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import Support from '@/components/misc/Support'
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -32,7 +33,7 @@ export default function RootLayout({
                   <ModalContextProvider>
                     <TopNavbarContextProvider>
                       {children}
-
+                      <Support />
                       <div className="fixed bottom-4 left-4 z-50 mr-4">
                         <CookieBanner />
                       </div>

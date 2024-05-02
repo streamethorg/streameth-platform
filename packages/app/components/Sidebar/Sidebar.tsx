@@ -1,7 +1,7 @@
 'use client'
 
 import StreamethStudio from '@/lib/svg/StreamethStudio'
-import { ChevronLast, ChevronFirst } from 'lucide-react'
+import { ChevronLast, ChevronFirst, BookOpenText } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useContext, createContext, useState, ReactNode } from 'react'
@@ -14,7 +14,7 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
   const [expanded, setExpanded] = useState(true)
 
   return (
-    <aside className="flex flex-col h-screen border-r bg-primary">
+    <aside className="flex flex-col h-screen bg-primary">
       <div className="flex justify-between items-center p-4 pb-2">
         <div
           className={`flex items-center overflow-hidden transition-all ${
@@ -34,6 +34,31 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
       <SidebarContext.Provider value={{ expanded }}>
         <ul className="flex-1 px-3 text-white">{children}</ul>
       </SidebarContext.Provider>
+
+      <Link
+        className="flex relative items-center p-2 mx-4 mb-8 rounded-lg transition-colors text-grey group hover:bg-secondary-foreground"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
+        <BookOpenText className="w-6 h-6" />
+        <span
+          className={`overflow-hidden transition-all ${
+            expanded ? 'w-52 ml-3' : 'w-0'
+          }`}>
+          Docs
+        </span>
+        {!expanded && (
+          <div
+            className={`
+          absolute left-full rounded-md px-2 py-1 ml-2
+          bg-primary text-sm
+          invisible opacity-20 -translate-x-3 transition-all
+          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+      `}>
+            Docs
+          </div>
+        )}
+      </Link>
     </aside>
   )
 }
