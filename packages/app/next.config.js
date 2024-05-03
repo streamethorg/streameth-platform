@@ -14,15 +14,22 @@ let nextConfig = {
           type: 'host',
           value: 'streameth.org',
         },
-        {
-          type: 'host',
-          value: 'localhost:3000',
-        }
       ],
       permanent: true,
     },
     {
       source: '/',
+      has: [
+        {
+          type: 'host',
+          value: 'zuzalu.streameth.org',
+        },
+      ],
+      destination: 'https://streameth.org/zuzalu',
+      permanent: true,
+    },
+    {
+      source: '/archive',
       has: [
         {
           type: 'host',
