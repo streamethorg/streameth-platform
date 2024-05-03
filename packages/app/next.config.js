@@ -14,6 +14,10 @@ let nextConfig = {
           type: 'host',
           value: 'streameth.org',
         },
+        {
+          type: 'host',
+          value: 'localhost:3000',
+        }
       ],
       permanent: true,
     },
