@@ -39,6 +39,6 @@
       "@server/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/http", "src/logs", "src/tests", "src/routes"]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": [    ".esbuild", "node_modules", "src/http", "src/logs", "src/tests", "src/routes"]
 }
