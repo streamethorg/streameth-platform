@@ -8,6 +8,7 @@ import { config } from '@config';
 import { Types } from 'mongoose';
 import Stage from '@models/stage.model';
 import { getStreamRecordings } from '@utils/livepeer';
+import Fuse from 'fuse.js';
 
 export default class SessionService {
   private path: string;
@@ -169,6 +170,16 @@ export default class SessionService {
       sessions.push(session.sessions);
     }
     return sessions;
+  }
+
+  async filterSessions(query: string): Promise<Array<ISession>> {
+    const options = {
+      keys: ['name', 'description', 'speakers.name'],
+    };
+    const sessions = await this.getAll({ page: 0, size: 0 } as any);
+    const fuse = new Fuse(sessions.sessions, options);
+    const result: any = fuse.search(query);
+    return result;
   }
   async createStreamRecordings(payload: any) {
     let stage = await Stage.findOne({
