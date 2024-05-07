@@ -63,7 +63,7 @@ const Livestreams = async ({
         style={{
           backgroundImage: `url(/backgrounds/livestreamBg.png)`,
         }}
-        className="p-4 bg-no-repeat bg-cover border-none shadow-none">
+        className="p-4 bg-no-repeat bg-cover rounded-none border-none shadow-none">
         <CardHeader>
           <CardTitle>Livestreams</CardTitle>
           <CardDescription className="max-w-[500px]">

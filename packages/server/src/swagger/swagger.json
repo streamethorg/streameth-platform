@@ -127,6 +127,9 @@
 					},
 					"email": {
 						"type": "string"
+					},
+					"image": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -163,6 +166,9 @@
 						"type": "string"
 					},
 					"email": {
+						"type": "string"
+					},
+					"image": {
 						"type": "string"
 					}
 				},

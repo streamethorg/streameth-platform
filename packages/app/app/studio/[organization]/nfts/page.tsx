@@ -39,9 +39,10 @@ const NFT = async ({
     <div className="flex flex-col bg-white h-full">
       <Card
         style={{
-          backgroundImage: `url(/backgrounds/nftBg.jpg)`,
+          backgroundImage: `url(/backgrounds/nftBg.svg)`,
+          backgroundPositionX: 'center',
         }}
-        className="shadow-none bg-cover bg-black text-white bg-no-repeat p-4 border-none">
+        className="shadow-none bg-cover rounded-none bg-black text-white bg-no-repeat p-4 border-none">
         <CardHeader>
           <CardTitle>Create Epic NFT Collection</CardTitle>
           <CardDescription className="max-w-[400px] text-white">
