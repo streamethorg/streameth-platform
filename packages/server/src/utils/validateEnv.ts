@@ -32,6 +32,7 @@ const validateEnv = () => {
     OAUTH_SECRET: str(),
     THIRDWEB_SECRET_KEY: str(),
     WALLET_ADDRESSES: str(),
+    TEST_URL: str(),
   });
 };
 
