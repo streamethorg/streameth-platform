@@ -29,7 +29,9 @@ const OrganizationPage = async ({
             </CardHeader>
             <CardFooter>
               <Link href={`/studio/${params.organization}/library`}>
-                <Button variant="primary">Upload Video</Button>
+              <Button className="bg-white text-black">
+                Upload Video
+              </Button>
               </Link>
             </CardFooter>
           </Card>
