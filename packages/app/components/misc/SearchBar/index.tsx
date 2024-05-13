@@ -7,8 +7,8 @@ import useDebounce from '@/lib/hooks/useDebounce'
 import { apiUrl, archivePath } from '@/lib/utils/utils'
 import useClickOutside from '@/lib/hooks/useClickOutside'
 import { useRouter } from 'next/navigation'
-import { fetchSession } from '@/lib/services/sessionService'
 import { IExtendedSession } from '@/lib/types'
+import { LoaderCircle } from 'lucide-react'
 
 interface IEventSearchResult {
   id: string
@@ -26,7 +26,7 @@ export default function SearchBar({
   searchVisible = true,
   isMobile = false,
 }: {
-  organizationSlug?: string
+  organizationSlug: string
   searchVisible?: boolean
   isMobile?: boolean
 }): JSX.Element {
@@ -52,7 +52,7 @@ export default function SearchBar({
     if (debouncedSearchQuery) {
       setIsLoading(true)
       fetch(
-        `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}`
+        `${apiUrl()}/sessions/${organizationSlug}/search?search=${debouncedSearchQuery}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -81,12 +81,20 @@ export default function SearchBar({
       )
       return
     }
-    router.push(archivePath({ searchQuery: session.name }))
+    router.push(
+      archivePath({
+        organizationSlug: organizationSlug,
+        searchQuery: session.name,
+      })
+    )
     //  handleTermChangeOverload(term)
   }
 
   const handleEventChange = (term: string) => {
-    window.location.href = archivePath({ event: term })
+    window.location.href = archivePath({
+      organizationSlug: organizationSlug,
+      event: term,
+    })
   }
 
   return (
@@ -94,8 +102,10 @@ export default function SearchBar({
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            router.push(archivePath({ event: searchQuery }))
             setIsOpened(false)
+            router.push(
+              archivePath({ organizationSlug: organizationSlug })
+            )
           }
         }}
         ref={inputRef}
@@ -112,7 +122,10 @@ export default function SearchBar({
           ref={dropdownRef}
           className="absolute p-2 w-full top-[55px] max-w-[500px] bg-secondary">
           {isLoading ? (
-            <div>Loading...</div>
+            <div className="flex space-x-2">
+              <span>Loading...</span>
+              <LoaderCircle className="animate-spin" />
+            </div>
           ) : (
             <div className="flex flex-col bg-white">
               {searchResults.length > 0 && (

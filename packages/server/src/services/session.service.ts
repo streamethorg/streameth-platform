@@ -172,15 +172,24 @@ export default class SessionService {
     return sessions;
   }
 
-  async filterSessions(query: string): Promise<Array<ISession>> {
+  async filterSessions(
+    query: string,
+    organizationSlug?: string,
+  ): Promise<Array<ISession>> {
     const options = {
       keys: ['name', 'description', 'speakers.name'],
     };
-    const sessions = await this.getAll({ page: 0, size: 0 } as any);
+    const sessions = await this.getAll({
+      organization: organizationSlug,
+      page: 0,
+      size: 0,
+    } as any);
+
     const fuse = new Fuse(sessions.sessions, options);
     const result: any = fuse.search(query);
     return result;
   }
+
   async createStreamRecordings(payload: any) {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
