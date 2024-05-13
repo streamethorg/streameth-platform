@@ -4,10 +4,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import useDebounce from '@/lib/hooks/useDebounce'
-import { archivePath } from '@/lib/utils/utils'
+import { apiUrl, archivePath } from '@/lib/utils/utils'
 import useClickOutside from '@/lib/hooks/useClickOutside'
 import { useRouter } from 'next/navigation'
 import { fetchSession } from '@/lib/services/sessionService'
+import { IExtendedSession } from '@/lib/types'
 
 interface IEventSearchResult {
   id: string
@@ -36,7 +37,7 @@ export default function SearchBar({
   )
   const [isOpened, setIsOpened] = useState<boolean>(false)
   const [searchResults, setSearchResults] = useState<
-    ISessionSearchResult[]
+    IExtendedSession[]
   >([])
   const [eventResults, setEventResults] = useState<
     IEventSearchResult[]
@@ -51,19 +52,17 @@ export default function SearchBar({
     if (debouncedSearchQuery) {
       setIsLoading(true)
       fetch(
-        `/api/search?organization=${organizationSlug}&searchQuery=${debouncedSearchQuery}`
+        `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}`
       )
         .then((res) => res.json())
-        .then(
-          (data: {
-            sessions: ISessionSearchResult[]
-            events: IEventSearchResult[]
-          }) => {
-            setSearchResults(data.sessions)
-            setEventResults(data.events)
-            setIsLoading(false)
-          }
-        )
+        .then((data) => {
+          const items = data.data
+            .map((obj: any) => obj.item)
+            .slice(0, 15)
+
+          setSearchResults(items)
+          setIsLoading(false)
+        })
     }
   }, [debouncedSearchQuery])
 
@@ -75,9 +74,11 @@ export default function SearchBar({
 
   useClickOutside(dropdownRef, () => setIsOpened(false))
 
-  const handleTermChange = (session: ISessionSearchResult) => {
+  const handleTermChange = (session: IExtendedSession) => {
     if (organizationSlug) {
-      router.push(`/${organizationSlug}/watch?session=${session.id}`)
+      router.push(
+        `/${organizationSlug}/watch?session=${session._id.toString()}`
+      )
       return
     }
     router.push(archivePath({ searchQuery: session.name }))
@@ -116,23 +117,21 @@ export default function SearchBar({
             <div className="flex flex-col bg-white">
               {searchResults.length > 0 && (
                 <div className="mt-2">
-                  <div className="font-bold text">Videos</div>
-                  {searchResults.map(
-                    (result: ISessionSearchResult) => (
-                      <div
-                        onClick={() => {
-                          handleTermChange(result)
-                          setIsOpened(false)
-                        }}
-                        className="p-1"
-                        key={result.id}>
-                        {result.name}
-                      </div>
-                    )
-                  )}
+                  <div className="p-1 font-bold text">Videos</div>
+                  {searchResults.map((result) => (
+                    <div
+                      onClick={() => {
+                        handleTermChange(result)
+                        setIsOpened(false)
+                      }}
+                      className="p-1 cursor-pointer hover:bg-gray-100"
+                      key={result._id.toString()}>
+                      {result.name}
+                    </div>
+                  ))}
                 </div>
               )}
-              {eventResults.length > 0 && (
+              {/*{eventResults.length > 0 && (
                 <div className="p-2 mx-2 mt-2">
                   <div className="font-bold text">Events</div>
                   {eventResults.map((result: IEventSearchResult) => (
@@ -147,7 +146,7 @@ export default function SearchBar({
                     </div>
                   ))}
                 </div>
-              )}
+              )}*/}
             </div>
           )}
         </div>

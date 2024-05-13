@@ -78,7 +78,7 @@ export class SessionController extends Controller {
   async filterSession(
     @Query() search: string,
   ): Promise<IStandardResponse<Array<ISession>>> {
-    let sessions = await this.sessionService.filterSessions(search);
+    const sessions = await this.sessionService.filterSessions(search);
     return SendApiResponse('sessions fetched', sessions);
   }
 
