@@ -10,10 +10,6 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "generate:routes": "tsoa spec-and-routes"
   },
-  "engines": {
-    "npm": "^10.0.0 ",
-    "node": "^18.0.0"
-  },
   "dependencies": {
     "@thirdweb-dev/storage": "^2.0.10",
     "bcrypt": "^5.1.1",
