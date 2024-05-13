@@ -46,7 +46,7 @@ const HomePageNavbar = ({
   showLogo?: boolean
   showSearchBar?: boolean
   organizations?: IExtendedOrganization[]
-  currentOrganization: string
+  currentOrganization?: string
 }) => {
   if (logo === '') {
     logo = undefined
@@ -59,7 +59,7 @@ const HomePageNavbar = ({
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
-        currentOrganization={currentOrganization}
+        currentOrganization={currentOrganization || ''}
       />
       <PCNavBar
         showLogo={showLogo}
@@ -67,7 +67,7 @@ const HomePageNavbar = ({
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
-        currentOrganization={currentOrganization}
+        currentOrganization={currentOrganization || ''}
       />
     </Suspense>
   )
