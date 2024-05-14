@@ -104,20 +104,16 @@ export const apiUrl = () => {
 }
 
 export const archivePath = ({
-  organization,
+  organizationSlug,
   event,
   searchQuery,
 }: {
-  organization?: IOrganizationModel['slug']
+  organizationSlug: IOrganizationModel['slug']
   event?: IEventModel['slug']
   searchQuery?: string
 }) => {
   const params = new URLSearchParams()
   let newSearchQueryPath
-
-  if (organization) {
-    params.append('organization', organization)
-  }
 
   if (event) {
     params.append('event', event)
@@ -127,8 +123,7 @@ export const archivePath = ({
     const url = new URL(window.location.href)
 
     if (
-      (url.pathname === '/archive' &&
-        url.searchParams.has('event')) ||
+      (url.pathname === '/videos' && url.searchParams.has('event')) ||
       url.searchParams.has('organization')
     ) {
       url.searchParams.set('searchQuery', searchQuery)
@@ -149,7 +144,7 @@ export const archivePath = ({
 
   return newSearchQueryPath
     ? newSearchQueryPath
-    : `/archive?${params.toString()}`
+    : `/${organizationSlug}/videos?${params.toString()}`
 }
 
 export const hasOrganization = (

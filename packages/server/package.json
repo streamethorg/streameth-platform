@@ -6,7 +6,7 @@
     "start": "node ./dist/server/src/server.js",
     "dev": "nodemon --config nodemon.json",
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
-    "test": "mocha --timeout 30000 --require esbuild-register --extension ts --watch-extensions ts test/**/*.spec.ts",
+    "test": "mocha --timeout 30000 --require esbuild-register --extension ts test/index.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "generate:routes": "tsoa spec-and-routes"
   },
@@ -36,14 +36,13 @@
     "mongoose": "7.6.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "node-fetch": "2",
+    "node-fetch": "^2",
     "reflect-metadata": "^0.2.1",
     "siwe": "^2.1.4",
     "swagger-ui-express": "^5.0.0",
     "telegraf": "^4.16.2",
     "tsc-alias": "^1.8.8",
     "tsoa": "6.0.1",
-    "typescript": "^5.3.3",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -51,7 +50,7 @@
     "@swc/cli": "^0.1.63",
     "@swc/core": "^1.3.101",
     "@types/bcrypt": "^5.0.2",
-    "@types/chai": "^4.3.14",
+    "@types/chai": "^4.3.16",
     "@types/chai-http": "^4.2.0",
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.6",
@@ -62,11 +61,11 @@
     "@types/mocha": "^10.0.6",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.12.11",
     "@types/supertest": "^2.0.16",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
-    "chai": "^5.1.0",
+    "chai": "^5.1.1",
     "chai-http": "^4.4.0",
     "cross-env": "^7.0.3",
     "esbuild": "^0.19.9",
@@ -81,7 +80,8 @@
     "pm2": "^5.2.0",
     "prettier": "^3.1.1",
     "supertest": "^6.2.4",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
   },
   "husky": {
     "hooks": {

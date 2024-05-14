@@ -3,6 +3,7 @@ import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
 import { ISession } from '@interfaces/session.interface';
+import Organization from '@models/organization.model';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import createOAuthClient from '@utils/oauth';
@@ -78,7 +79,23 @@ export class SessionController extends Controller {
   async filterSession(
     @Query() search: string,
   ): Promise<IStandardResponse<Array<ISession>>> {
-    let sessions = await this.sessionService.filterSessions(search);
+    const sessions = await this.sessionService.filterSessions(search);
+    return SendApiResponse('sessions fetched', sessions);
+  }
+
+  /**
+   * @summary Search sessions per organisation
+   */
+  @SuccessResponse('200')
+  @Get('{organizationSlug}/search')
+  async filterSessionByOrganisation(
+    @Path() organizationSlug: string,
+    @Query() search: string,
+  ): Promise<IStandardResponse<Array<ISession>>> {
+    const sessions = await this.sessionService.filterSessions(
+      search,
+      organizationSlug,
+    );
     return SendApiResponse('sessions fetched', sessions);
   }
 
