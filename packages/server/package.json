@@ -11,6 +11,7 @@
     "generate:routes": "tsoa spec-and-routes"
   },
   "dependencies": {
+    "@privy-io/server-auth": "^1.7.3",
     "@thirdweb-dev/storage": "^2.0.10",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",

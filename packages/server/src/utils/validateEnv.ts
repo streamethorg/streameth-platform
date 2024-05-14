@@ -32,6 +32,8 @@ const validateEnv = () => {
     OAUTH_SECRET: str(),
     THIRDWEB_SECRET_KEY: str(),
     WALLET_ADDRESSES: str(),
+    PRIVY_APP_ID: str(),
+    PRIVY_SECRET_KEY: str(),
   });
 };
 

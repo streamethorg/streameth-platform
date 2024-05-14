@@ -35,4 +35,8 @@ export const config = {
     secretKey: validatedEnv.LIVEPEER_API_KEY,
     webhookSecretKey: validatedEnv.LIVEPEER_WEBHOOK_SECRET,
   },
+  privy: {
+    appId: validatedEnv.PRIVY_APP_ID,
+    appSecret: validatedEnv.PRIVY_SECRET_KEY,
+  },
 };
