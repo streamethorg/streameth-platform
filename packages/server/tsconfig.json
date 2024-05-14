@@ -39,7 +39,7 @@
       "@server/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "test/**/*"],
+  "include": ["src/**/*"],
   "exclude": [
     ".esbuild",
     "node_modules",
