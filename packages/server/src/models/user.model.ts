@@ -10,6 +10,13 @@ const UserSchema = new Schema<IUserModel>(
       unique: true,
       default: '',
     },
+    did: {
+      type: String,
+      required: true,
+      index: true,
+      unique: true,
+      default: '',
+    },
     organizations: [{ type: Schema.Types.ObjectId, ref: 'Organization' }],
     role: { type: String, enum: Object.keys(UserRole), default: UserRole.user },
   },

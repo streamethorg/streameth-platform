@@ -24,10 +24,7 @@ export default class OrganizationService {
       data,
       this.path,
     );
-    const wallets = [
-      ...config.wallets.trim().split(','),
-      data.walletAddress,
-    ];
+    const wallets = [...config.wallets.trim().split(','), data.walletAddress];
     await User.updateMany(
       { walletAddress: { $in: wallets } },
       { $addToSet: { organizations: createOrg._id } },
