@@ -1,29 +1,23 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
-import { useAccount } from 'wagmi'
-// import CastrABI from '@/lib/contracts/VideoFactoryAbi'
-import { Button } from '@/components/ui/button'
-import { ConnectKitButton } from 'connectkit'
-import { ModalContext } from '@/lib/context/ModalContext'
-import { base } from 'viem/chains'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const MintSuccess = ({ hash }: { hash: string }) => {
   return (
-    <div className="p-10 w-[400px] lg:w-[600px] flex flex-col items-center justify-center">
+    <div className="flex flex-col justify-center items-center p-10 w-[400px] lg:w-[600px]">
       <Image
         width={150}
         height={150}
         src="/success.png"
         alt="success"
       />
-      <h3 className="text-3xl mt-2 font-bold">Mint Successful</h3>
+      <h3 className="mt-2 text-3xl font-bold">Mint Successful</h3>
       <Link
         href={`https://basescan.org/tx/${hash}`}
         target="_blank"
         rel="noopener"
-        className="pt-4 text-left whitespace-nowrap underline text-blue">
+        className="pt-4 text-left underline whitespace-nowrap text-blue">
         View Tx on Base Scan
       </Link>
     </div>
@@ -71,7 +65,7 @@ export const MintSuccess = ({ hash }: { hash: string }) => {
 //   useEffect(() => {
 //     if (mintError) {
 //       openModal(
-//         <div className="p-10 w-[400px] lg:w-[600px] text-center">
+//         <div className="p-10 text-center w-[400px] lg:w-[600px]">
 //           {mintError.message}
 //         </div>
 //       )
