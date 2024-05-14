@@ -10,6 +10,6 @@ export interface IUser {
   organizations?: IOrganization[];
   role?: UserRole;
   token?: string;
-  did: string;
+  did?: string;
 }
 export interface IUserModel extends IUser, Document {}
