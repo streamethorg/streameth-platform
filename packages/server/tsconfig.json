@@ -40,5 +40,12 @@
     }
   },
   "include": ["src/**/*", "test/**/*"],
-  "exclude": [    ".esbuild", "node_modules", "src/http", "src/logs", "src/tests", "src/routes"]
+  "exclude": [
+    ".esbuild",
+    "node_modules",
+    "src/http",
+    "src/logs",
+    "src/tests",
+    "src/routes"
+  ]
 }
