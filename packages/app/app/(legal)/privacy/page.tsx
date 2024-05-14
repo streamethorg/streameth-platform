@@ -15,7 +15,7 @@ const Terms = async () => {
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
-        <Card className="flex flex-col justify-between p-5 my-5 w-full max-w-4xl bg-gray-300">
+        <Card className="flex flex-col justify-between p-5 my-5 w-full max-w-4xl bg-gray-100">
           <div>
             <CardTitle className="ml-4">
               <Image
