@@ -6,7 +6,7 @@
     "start": "node ./dist/server/src/server.js",
     "dev": "nodemon --config nodemon.json",
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
-    "test": "mocha --timeout 30000 --require esbuild-register --extension ts --watch-extensions ts test/**/*.spec.ts",
+    "test": "mocha --timeout 30000 --require esbuild-register --extension ts test/**/*.spec.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "generate:routes": "tsoa spec-and-routes"
   },
@@ -42,7 +42,6 @@
     "telegraf": "^4.16.2",
     "tsc-alias": "^1.8.8",
     "tsoa": "6.0.1",
-    "typescript": "^5.3.3",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -80,7 +79,8 @@
     "pm2": "^5.2.0",
     "prettier": "^3.1.1",
     "supertest": "^6.2.4",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
   },
   "husky": {
     "hooks": {
