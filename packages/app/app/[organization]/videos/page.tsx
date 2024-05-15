@@ -68,7 +68,11 @@ export default async function ArchivePage({
       )}
       <div className="p-4 m-auto w-full max-w-7xl">
         <div className="flex flex-row justify-between items-center mb-4 space-x-2 w-full">
-          <div className="w-full text-lg font-bold">All videos</div>
+          <div className="w-full text-lg font-bold">
+            {searchParams.searchQuery
+              ? 'Search results'
+              : 'All videos'}
+          </div>
           <div>
             <EventSelect
               events={eventsWithVideos as IExtendedEvent[]}

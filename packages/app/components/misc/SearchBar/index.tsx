@@ -75,19 +75,10 @@ export default function SearchBar({
   useClickOutside(dropdownRef, () => setIsOpened(false))
 
   const handleTermChange = (session: IExtendedSession) => {
-    if (organizationSlug) {
-      router.push(
-        `/${organizationSlug}/watch?session=${session._id.toString()}`
-      )
-      return
-    }
     router.push(
-      archivePath({
-        organizationSlug: organizationSlug,
-        searchQuery: session.name,
-      })
+      `/${organizationSlug}/watch?session=${session._id.toString()}`
     )
-    //  handleTermChangeOverload(term)
+    return
   }
 
   const handleEventChange = (term: string) => {
@@ -104,7 +95,10 @@ export default function SearchBar({
           if (e.key === 'Enter') {
             setIsOpened(false)
             router.push(
-              archivePath({ organizationSlug: organizationSlug })
+              archivePath({
+                organizationSlug: organizationSlug,
+                searchQuery: searchQuery,
+              })
             )
           }
         }}
