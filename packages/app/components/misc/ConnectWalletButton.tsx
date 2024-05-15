@@ -1,30 +1,65 @@
 'use client'
-import { ConnectKitButton, useSIWE } from 'connectkit'
 import { Button } from '@/components/ui/button'
+import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth'
+import { storeSession } from '@/lib/actions/auth'
+import { apiUrl } from '@/lib/utils/utils'
+
 interface ConnectWalletButtonProps {
   className?: string
   btnText?: string
 }
 
 export const ConnectWalletButton = ({
-  btnText = 'Connect Wallet',
+  btnText = 'Sign in',
   className,
 }: ConnectWalletButtonProps) => {
-  const { isSignedIn } = useSIWE()
+  const { authenticated } = usePrivy()
+
+  const getSession = async () => {
+    const privyToken = localStorage.getItem('privy:token')
+    const token = privyToken ? JSON.parse(privyToken) : null
+    const res = await fetch(`${apiUrl()}/auth/login`, {
+      method: 'POST',
+      body: JSON.stringify({
+        token: token,
+      }),
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    const resData = await res.json()
+
+    storeSession({
+      token: resData?.data?.token,
+      address: resData?.data?.user?.walletAddress,
+    })
+  }
+
+  const { login } = useLogin({
+    onComplete: () => {
+      getSession()
+    },
+    onError: (error) => {
+      storeSession({
+        token: '',
+        address: '',
+      })
+    },
+  })
+
+  const { logout } = useLogout({
+    onSuccess: () => {
+      storeSession({
+        token: '',
+        address: '',
+      })
+    },
+  })
 
   return (
-    <ConnectKitButton.Custom>
-      {({ isConnected, show, truncatedAddress, ensName }) => {
-        return (
-          <Button onClick={show} className={className}>
-            {isConnected && !isSignedIn
-              ? 'Sign In'
-              : isConnected
-              ? ensName ?? truncatedAddress
-              : btnText}
-          </Button>
-        )
-      }}
-    </ConnectKitButton.Custom>
+    <Button
+      onClick={authenticated ? logout : login}
+      className={className}>
+      {authenticated ? 'Sign Out' : btnText}
+    </Button>
   )
 }
