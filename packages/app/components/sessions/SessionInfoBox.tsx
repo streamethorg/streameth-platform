@@ -159,7 +159,7 @@ const SessionInfoBox = async ({
           speakers={speakers}
           description={description}
         />
-        <p className="flex items-center space-x-2 text-sm">
+        <div className="flex items-center space-x-2 text-sm">
           <span>
             {formatDate(new Date(date), 'ddd. MMMM D, YYYY')}
           </span>
@@ -169,7 +169,7 @@ const SessionInfoBox = async ({
               <ViewCounts playbackId={playbackId} />
             </>
           )}
-        </p>
+        </div>
       </div>
       <>
         <div className="hidden justify-end items-center mt-0 mb-auto space-x-2 md:flex">
