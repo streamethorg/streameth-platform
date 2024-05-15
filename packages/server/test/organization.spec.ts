@@ -1,31 +1,9 @@
 import { before, describe, it } from 'node:test';
-import { generateWalletInfo } from './auth';
 import { config } from '@config';
-import { generateRandomString } from './utils/generateRandomString';
+import { Mock } from '.';
 
-export const organizationTest = (chaiRequest: any, expect: any) => {
+export const organizationTest = (mock: Mock, chaiRequest: any, expect: any) => {
   describe('generate auth token', (done) => {
-    let token = '';
-    let organizationId = '';
-    let walletAddress = '';
-
-    const organizationName = generateRandomString(12);
-
-    before(async () => {
-      const sig = await generateWalletInfo();
-      const response = await chaiRequest
-        .request(config.testUrl)
-        .post(`/auth/login`)
-        .send({
-          walletAddress: sig.walletAddress,
-          nonce: sig.nonce,
-          signature: sig.signature,
-          message: sig.message,
-        });
-      token = response.body.data.token;
-      walletAddress = sig.walletAddress;
-    });
-
     describe('Organization API', () => {
       describe('/POST organizations', async () => {
         let response: any;
@@ -33,7 +11,7 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
         it('should return 400 when field is missing', async () => {
           const org = {
             email: 'streameth@gmail.com',
-            walletAddress: walletAddress,
+            walletAddress: mock.walletAddress,
             // Missing logo & name
           };
 
@@ -41,7 +19,7 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
             .request(config.testUrl)
             .post('/organizations')
             .send(org)
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${mock.token}`);
 
           expect(response).to.have.status(400);
           expect(response.body.data);
@@ -49,19 +27,19 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
 
         it('should create an organization', async () => {
           const org = {
-            name: organizationName,
+            name: mock.organizationName,
             email: 'streameth@gmail.com',
             logo: 'https://streameth.com',
-            walletAddress: walletAddress,
+            walletAddress: mock.walletAddress,
           };
 
           response = await chaiRequest
             .request(config.testUrl)
             .post('/organizations')
             .send(org)
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${mock.token}`);
 
-          organizationId = response.body.data._id.toString();
+          mock.organizationId = response.body.data._id.toString();
         });
 
         it('should return 201 status code', async () => {
@@ -93,12 +71,12 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
       describe('/GET organization/:id', () => {
         let response;
         before(async () => {
-          if (!organizationId) {
+          if (!mock.organizationId) {
             throw new Error('No organization id found');
           }
           response = await chaiRequest
             .request(config.testUrl)
-            .get(`/organizations/${organizationId}`)
+            .get(`/organizations/${mock.organizationId}`)
             .send();
         });
         it('should return 200 status code', async () => {
@@ -115,9 +93,9 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
         it('should add a member to organization', async () => {
           response = await chaiRequest
             .request(config.testUrl)
-            .put(`/organizations/member/${organizationId}`)
-            .send({ walletAddress: walletAddress })
-            .set('Authorization', `Bearer ${token}`);
+            .put(`/organizations/member/${mock.organizationId}`)
+            .send({ walletAddress: mock.walletAddress })
+            .set('Authorization', `Bearer ${mock.token}`);
         });
         it('should return 200 status code', async () => {
           expect(response).to.have.status(200);
@@ -128,15 +106,15 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
         let response;
         it('should return 400 when field is empty', async () => {
           let org = {
-            name: 'streameth',
+            name: mock.organizationName,
             email: 'streameth@gmail.com',
-            walletAddress: walletAddress,
+            walletAddress: mock.walletAddress,
           };
           let response = await chaiRequest
             .request(config.testUrl)
-            .put(`/organizations/${organizationId}`)
+            .put(`/organizations/${mock.organizationId}`)
             .send(org)
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${mock.token}`);
           expect(response).to.have.status(400);
           expect(response.body.data);
         });
@@ -145,13 +123,13 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
             name: 'streameth1',
             email: 'streameth1@gmail.com',
             logo: 'https://streameths.com',
-            walletAddress: walletAddress,
+            walletAddress: mock.walletAddress,
           };
           response = await chaiRequest
             .request(config.testUrl)
-            .put(`/organizations/${organizationId}`)
+            .put(`/organizations/${mock.organizationId}`)
             .send(org)
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${mock.token}`);
         });
         it('should return 200 status code', async () => {
           expect(response).to.have.status(200);
@@ -177,9 +155,9 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
         it('should fetch all members of an organization', async () => {
           response = await chaiRequest
             .request(config.testUrl)
-            .get(`/organizations/member/${organizationId}`)
+            .get(`/organizations/member/${mock.organizationId}`)
             .send()
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${mock.token}`);
         });
 
         it('should return 200 status code', async () => {
@@ -212,9 +190,9 @@ export const organizationTest = (chaiRequest: any, expect: any) => {
         it('should delete organization', async () => {
           response = await chaiRequest
             .request(config.testUrl)
-            .delete(`/organizations/${organizationId}`)
-            .send({ organizationId: organizationId })
-            .set('Authorization', `Bearer ${token}`);
+            .delete(`/organizations/${mock.organizationId}`)
+            .send({ organizationId: mock.organizationId })
+            .set('Authorization', `Bearer ${mock.token}`);
         });
         it('should return 200 status code', async () => {
           expect(response).to.have.status(200);
