@@ -15,6 +15,7 @@ import Image from 'next/image'
 import { usePrivy } from '@privy-io/react-auth'
 import { toast } from 'sonner'
 
+import Link from 'next/link'
 const AuthorizationMessage = () => {
   const { ready, authenticated, login } = usePrivy()
 
@@ -28,19 +29,36 @@ const AuthorizationMessage = () => {
   }, [ready, authenticated])
 
   return (
-    <div className="flex flex-row h-screen w-screen">
-      <div className="w-1/2 h-full flex flex-col items-center justify-center">
-        <Card className="max-w-[500px] shadow-none ">
+    <div className="flex flex-row w-screen h-screen">
+      <div className="flex flex-col justify-center items-center w-1/2 h-full">
+        <Card className="shadow-none max-w-[500px]">
           <CardHeader className="text-center">
             <CardTitle>Welcome to StreamETH</CardTitle>
-            <CardDescription>Log-in / Sign-up</CardDescription>
-            <div className="w-full pt-[20px] flex items-center justify-center">
+            <CardDescription>
+              Click the sign in button to connect to StreamETH
+            </CardDescription>
+            <div className="flex justify-center items-center w-full pt-[20px]">
               <ConnectWalletButton />
             </div>
           </CardHeader>
+
+          <CardContent>
+            {/* <SignInWithSocials /> */}
+            <p className="mt-2 text-sm text-muted-foreground">
+              By signing up you agree to the{' '}
+              <Link className="underline" href="/terms">
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link className="underline" href="/privacy">
+                Privacy Policy
+              </Link>
+              .
+            </p>
+          </CardContent>
         </Card>
       </div>
-      <div className="w-1/2 h-full bg-primary relative">
+      <div className="relative w-1/2 h-full bg-primary">
         <Image
           quality={100}
           alt="login background"
@@ -48,6 +66,11 @@ const AuthorizationMessage = () => {
           layout="fill"
           objectFit="cover"
         />
+        {/* <img
+          src="/login-background.png"
+          alt="login background"
+          className="object-cover w-full h-full"
+        /> */}
       </div>
       <div></div>
     </div>

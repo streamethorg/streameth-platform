@@ -59,7 +59,7 @@ const HomePageNavbar = ({
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
-        currentOrganization={currentOrganization}
+        currentOrganization={currentOrganization || ''}
       />
       <PCNavBar
         showLogo={showLogo}
@@ -67,7 +67,7 @@ const HomePageNavbar = ({
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
-        currentOrganization={currentOrganization}
+        currentOrganization={currentOrganization || ''}
       />
     </Suspense>
   )
@@ -84,7 +84,7 @@ const MobileNavBar = ({
   pages: Page[]
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
-  currentOrganization?: string
+  currentOrganization: string
 }) => {
   const [menuVisible, setMenuVisible] = useState(false)
   const [searchVisible, setSearchVisible] = useState(false)
@@ -109,7 +109,10 @@ const MobileNavBar = ({
 
       {searchVisible && showSearchBar && (
         <div className="absolute w-full bottom-[-56px] bg-secondary">
-          <SearchBar isMobile={true} />
+          <SearchBar
+            organizationSlug={currentOrganization}
+            isMobile={true}
+          />
         </div>
       )}
       <div
@@ -181,7 +184,7 @@ const PCNavBar = ({
   showLogo: boolean
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
-  currentOrganization?: string
+  currentOrganization: string
 }) => {
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
