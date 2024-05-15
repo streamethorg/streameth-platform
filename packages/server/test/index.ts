@@ -50,7 +50,7 @@ const start = () => {
 
     // organizationTest(mock, chaiRequest, expect);
     // stageTest(chaiRequest, expect);
-    sessionTest(chaiRequest, expect);
+    sessionTest(mock, chaiRequest, expect);
     // eventTest(chaiRequest, expect);
   });
 };
