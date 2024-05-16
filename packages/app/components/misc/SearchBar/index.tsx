@@ -116,10 +116,7 @@ export default function SearchBar({
           ref={dropdownRef}
           className="absolute p-2 w-full top-[55px] max-w-[500px] bg-secondary">
           {isLoading ? (
-            <div className="flex space-x-2">
-              <span>Loading...</span>
-              <LoaderCircle className="animate-spin" />
-            </div>
+            <span>Loading...</span>
           ) : (
             <div className="flex flex-col bg-white">
               {searchResults.length > 0 && (
