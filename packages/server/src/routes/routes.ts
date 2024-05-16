@@ -70,12 +70,11 @@ const models: TsoaRoute.Models = {
     "IUser": {
         "dataType": "refObject",
         "properties": {
-            "walletAddress": {"dataType":"string","required":true},
+            "walletAddress": {"dataType":"string"},
             "organizations": {"dataType":"array","array":{"dataType":"refObject","ref":"IOrganization"}},
             "role": {"ref":"UserRole"},
-            "signature": {"dataType":"string","required":true},
-            "nonce": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
+            "token": {"dataType":"string"},
+            "did": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -1014,27 +1013,6 @@ const models: TsoaRoute.Models = {
     "UserDto": {
         "dataType": "refObject",
         "properties": {
-            "walletAddress": {"dataType":"string","required":true},
-            "signature": {"dataType":"string","required":true},
-            "nonce": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_boolean_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"boolean"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AuthDto": {
-        "dataType": "refObject",
-        "properties": {
             "token": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
@@ -1789,6 +1767,67 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/sessions/search',
+            ...(fetchMiddlewares<RequestHandler>(SessionController)),
+            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.filterSession)),
+
+            function SessionController_filterSession(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    search: {"in":"query","name":"search","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new SessionController();
+
+              templateService.apiHandler({
+                methodName: 'filterSession',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/sessions/:organizationSlug/search',
+            ...(fetchMiddlewares<RequestHandler>(SessionController)),
+            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.filterSessionByOrganisation)),
+
+            function SessionController_filterSessionByOrganisation(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationSlug: {"in":"path","name":"organizationSlug","required":true,"dataType":"string"},
+                    search: {"in":"query","name":"search","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new SessionController();
+
+              templateService.apiHandler({
+                methodName: 'filterSessionByOrganisation',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/sessions/:sessionId',
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getSessionById)),
@@ -2114,7 +2153,6 @@ export function RegisterRoutes(app: Router) {
             function OrganizationController_deleteOrganization(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
-                    _organizationId: {"in":"body","name":"_organizationId","required":true,"ref":"OrgIdDto"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -2681,66 +2719,6 @@ export function RegisterRoutes(app: Router) {
 
               templateService.apiHandler({
                 methodName: 'login',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 201,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/auth/nonce/generate',
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.generateNonce)),
-
-            function AuthController_generateNonce(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new AuthController();
-
-              templateService.apiHandler({
-                methodName: 'generateNonce',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 200,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/auth/verify-token',
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.verifyToken)),
-
-            function AuthController_verifyToken(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    token: {"in":"body","name":"token","required":true,"ref":"AuthDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new AuthController();
-
-              templateService.apiHandler({
-                methodName: 'verifyToken',
                 controller,
                 response,
                 next,

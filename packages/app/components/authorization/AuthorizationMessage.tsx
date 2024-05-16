@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 import {
   Card,
@@ -7,11 +8,26 @@ import {
   CardTitle,
   CardContent,
 } from '@/components/ui/card'
-import SignInWithSocials from './SignInWithSocials'
+
 import LoginBackground from '@/public/login-background.png'
 import Image from 'next/image'
+
+import { usePrivy } from '@privy-io/react-auth'
+import { toast } from 'sonner'
+
 import Link from 'next/link'
 const AuthorizationMessage = () => {
+  const { ready, authenticated, login } = usePrivy()
+
+  useEffect(() => {
+    if (ready && !authenticated) {
+      login()
+    }
+    if (authenticated) {
+      toast.message('Redirecting to Studio')
+    }
+  }, [ready, authenticated])
+
   return (
     <div className="flex flex-row w-screen h-screen">
       <div className="flex flex-col justify-center items-center w-1/2 h-full">
@@ -19,21 +35,16 @@ const AuthorizationMessage = () => {
           <CardHeader className="text-center">
             <CardTitle>Welcome to StreamETH</CardTitle>
             <CardDescription>
-              Connect your wallet to continue.
+              Click the sign in button to connect to StreamETH
             </CardDescription>
             <div className="flex justify-center items-center w-full pt-[20px]">
               <ConnectWalletButton />
             </div>
           </CardHeader>
 
-          <div className="flex flex-row justify-between items-center px-4 my-4 space-x-2">
-            <p className="w-full border" />
-            <div>OR</div>
-            <p className="w-full border" />
-          </div>
           <CardContent>
-            <SignInWithSocials />
-            <p className="mt-4 text-sm">
+            {/* <SignInWithSocials /> */}
+            <p className="mt-2 text-sm text-muted-foreground">
               By signing up you agree to the{' '}
               <Link className="underline" href="/terms">
                 Terms of Service

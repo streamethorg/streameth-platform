@@ -79,22 +79,13 @@
 					"role": {
 						"$ref": "#/components/schemas/UserRole"
 					},
-					"signature": {
+					"token": {
 						"type": "string"
 					},
-					"nonce": {
-						"type": "string"
-					},
-					"message": {
+					"did": {
 						"type": "string"
 					}
 				},
-				"required": [
-					"walletAddress",
-					"signature",
-					"nonce",
-					"message"
-				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -2899,49 +2890,6 @@
 			},
 			"UserDto": {
 				"properties": {
-					"walletAddress": {
-						"type": "string"
-					},
-					"signature": {
-						"type": "string"
-					},
-					"nonce": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"walletAddress",
-					"signature",
-					"nonce",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_boolean_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"type": "boolean"
-					}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AuthDto": {
-				"properties": {
 					"token": {
 						"type": "string"
 					}
@@ -4036,6 +3984,78 @@
 				]
 			}
 		},
+		"/sessions/search": {
+			"get": {
+				"operationId": "FilterSession",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_ISession__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Search sessions",
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "search",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/sessions/{organizationSlug}/search": {
+			"get": {
+				"operationId": "FilterSessionByOrganisation",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_ISession__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Search sessions per organisation",
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationSlug",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "search",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/sessions/upload/{sessionId}": {
 			"post": {
 				"operationId": "UploadSessionToYouTube",
@@ -4245,17 +4265,7 @@
 							"type": "string"
 						}
 					}
-				],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/OrgIdDto"
-							}
-						}
-					}
-				}
+				]
 			}
 		},
 		"/organizations/member/{organizationId}": {
@@ -5002,60 +5012,6 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/UserDto"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/auth/nonce/generate": {
-			"get": {
-				"operationId": "GenerateNonce",
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_string_"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Auth"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/auth/verify-token": {
-			"post": {
-				"operationId": "VerifyToken",
-				"responses": {
-					"201": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_boolean_"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Auth"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/AuthDto"
 							}
 						}
 					}
