@@ -192,7 +192,7 @@ const PCNavBar = ({
     <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex">
       <div className="flex flex-1 justify-start items-center">
         {showLogo && (
-          <a href="/">
+          <Link href={`/${currentOrganization}`}>
             <Image
               src={logo ?? '/logo_dark.png'}
               alt="Logo"
@@ -200,7 +200,7 @@ const PCNavBar = ({
               height={logo ? 50 : 30}
               className="hidden lg:block"
             />
-          </a>
+          </Link>
         )}
         {organizations && (
           <Link href={`/${currentOrganization}`}>

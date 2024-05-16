@@ -33,10 +33,14 @@ const SessionOptions = ({
   name,
   playbackId,
   downloadUrl,
+  organizationSlug,
+  sessionId,
 }: {
   name: string
   playbackId: string
   downloadUrl: string
+  organizationSlug: string
+  sessionId: string
 }) => {
   const handleDownload = async () => {
     try {
@@ -67,7 +71,12 @@ const SessionOptions = ({
       <DialogComponent
         text={'share'}
         Icon={<Share2 size={20} />}
-        Modal={<ShareModalContent />}
+        Modal={
+          <ShareModalContent
+            url={`${window.location.origin}/${organizationSlug}/watch?session=${sessionId}`}
+            shareFor="video"
+          />
+        }
       />
       <DialogComponent
         text={'Embed'}

@@ -60,7 +60,7 @@ const VideoCardWithMenu = ({
       <div className="flex justify-between items-start">
         <CardHeader
           className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
-          <Link href={link}>
+          <Link target="_blank" rel="noopener" href={link}>
             <CardTitle
               className={`text-sm capitalize line-clamp-2 overflow-hidden  hover:underline `}>
               {session.name}

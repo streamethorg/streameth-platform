@@ -26,7 +26,7 @@ const GridLayout = ({
             {session.videoUrl ? (
               <VideoCardWithMenu
                 session={session}
-                link={`watch?session=${session._id}`}
+                link={`/${organizationSlug}/watch?session=${session._id}`}
                 DropdownMenuItems={DropdownItems({
                   organizationSlug: organizationSlug,
                   session: session,
