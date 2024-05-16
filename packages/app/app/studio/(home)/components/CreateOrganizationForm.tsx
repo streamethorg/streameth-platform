@@ -23,10 +23,10 @@ import {
 } from '@/lib/actions/organizations'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
-import { useAccount } from 'wagmi'
 import { generateId } from 'streameth-new-server/src/utils/util'
 import { useRouter } from 'next/navigation'
 import { IExtendedOrganization } from '@/lib/types'
+
 export default function CreateOrganizationForm({
   organization,
   disableName = false,
@@ -37,7 +37,7 @@ export default function CreateOrganizationForm({
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const { address } = useAccount()
+
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
     defaultValues: {
@@ -52,17 +52,12 @@ export default function CreateOrganizationForm({
 
   function onSubmit(values: z.infer<typeof organizationSchema>) {
     setIsLoading(true)
-    if (!address) {
-      toast.error('No wallet address found')
-      return
-    }
 
     if (organization) {
       updateOrganizationAction({
         organization: {
           _id: organization._id,
           ...values,
-          walletAddress: address as string,
         },
       })
         .then(() => {
@@ -79,7 +74,7 @@ export default function CreateOrganizationForm({
     }
 
     createOrganizationAction({
-      organization: { ...values, walletAddress: address as string },
+      organization: values,
     })
       .then((response) => {
         setIsOpen(false)

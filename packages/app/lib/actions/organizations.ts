@@ -15,11 +15,15 @@ export const createOrganizationAction = async ({
   organization: IOrganization
 }) => {
   const authToken = cookies().get('user-session')?.value
-  if (!authToken) {
-    throw new Error('No user session found')
+  const walletAddress = cookies().get('user-address')?.value
+  if (!authToken || !walletAddress) {
+    throw new Error('No user session or wallet address found')
   }
   const response = await createOrganization({
-    organization: organization,
+    organization: {
+      ...organization,
+      walletAddress: walletAddress,
+    },
     authToken,
   })
 
@@ -36,11 +40,15 @@ export const updateOrganizationAction = async ({
   organization: IExtendedOrganization
 }) => {
   const authToken = cookies().get('user-session')?.value
-  if (!authToken) {
-    throw new Error('No user session found')
+  const walletAddress = cookies().get('user-address')?.value
+  if (!authToken || !walletAddress) {
+    throw new Error('No user session or wallet address found')
   }
   const response = await updateOrganization({
-    organization: organization,
+    organization: {
+      ...organization,
+      walletAddress: walletAddress,
+    },
     authToken,
   })
 
