@@ -58,7 +58,7 @@ export default function SearchBar({
         .then((data) => {
           const items = data.data
             .map((obj: any) => obj.item)
-            .slice(0, 15)
+            .slice(0, 10)
 
           setSearchResults(items)
           setIsLoading(false)
@@ -75,19 +75,10 @@ export default function SearchBar({
   useClickOutside(dropdownRef, () => setIsOpened(false))
 
   const handleTermChange = (session: IExtendedSession) => {
-    if (organizationSlug) {
-      router.push(
-        `/${organizationSlug}/watch?session=${session._id.toString()}`
-      )
-      return
-    }
     router.push(
-      archivePath({
-        organizationSlug: organizationSlug,
-        searchQuery: session.name,
-      })
+      `/${organizationSlug}/watch?session=${session._id.toString()}`
     )
-    //  handleTermChangeOverload(term)
+    return
   }
 
   const handleEventChange = (term: string) => {
@@ -104,7 +95,10 @@ export default function SearchBar({
           if (e.key === 'Enter') {
             setIsOpened(false)
             router.push(
-              archivePath({ organizationSlug: organizationSlug })
+              archivePath({
+                organizationSlug: organizationSlug,
+                searchQuery: searchQuery,
+              })
             )
           }
         }}
@@ -122,10 +116,7 @@ export default function SearchBar({
           ref={dropdownRef}
           className="absolute p-2 w-full top-[55px] max-w-[500px] bg-secondary">
           {isLoading ? (
-            <div className="flex space-x-2">
-              <span>Loading...</span>
-              <LoaderCircle className="animate-spin" />
-            </div>
+            <span>Loading...</span>
           ) : (
             <div className="flex flex-col bg-white">
               {searchResults.length > 0 && (
