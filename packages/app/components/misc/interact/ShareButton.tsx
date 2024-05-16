@@ -99,14 +99,16 @@ const ShareButton = ({
   shareFor?: string
   title?: string
 }) => {
-  // CredenzaTrigger is already a button, this creates a hydration error
+  // Applying button styles to a span element
+  const buttonClassNames = `inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-xl shadow-sm focus:outline-none bg-white border border-input hover:bg-accent hover:text-accent-foreground ${className}`
+
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Button variant={variant} className={className}>
+        <span className={buttonClassNames}>
           <Share2 size={24} className="p-1" />
           {title}
-        </Button>
+        </span>
       </CredenzaTrigger>
       <ShareModalContent url={url} shareFor={shareFor} />
     </Credenza>
