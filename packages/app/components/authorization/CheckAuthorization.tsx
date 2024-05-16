@@ -2,8 +2,9 @@ import { apiUrl } from '@/lib/utils/utils'
 import { cookies } from 'next/headers'
 
 const CheckAuthorization = async () => {
-  const userSession = cookies().get('user-session')
-  const res = await fetch(`${apiUrl()}/auth/verify-token`, {
+  const userSession = cookies().get('privy-token')
+
+  const res = await fetch(`${apiUrl()}/auth/login`, {
     method: 'POST',
     body: JSON.stringify({
       token: userSession?.value,
@@ -11,7 +12,8 @@ const CheckAuthorization = async () => {
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
   })
-  const isAuthorized = (await res.json()).data
+  const resData = await res.json()
+  const isAuthorized = !!userSession && resData.status === 'success'
 
   return isAuthorized
 }

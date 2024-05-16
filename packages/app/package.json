@@ -18,6 +18,7 @@
     "@livekit/components-react": "^1.5.3",
     "@livekit/components-styles": "^1.0.9",
     "@livepeer/react": "^4.1.8",
+    "@privy-io/react-auth": "^1.64.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
