@@ -22,7 +22,7 @@ const InfoBoxDescription = ({
       if (descriptionRef.current) {
         const descriptionHeight = descriptionRef.current.scrollHeight
         setIsExpandable(descriptionHeight > 100) // Adjust height threshold as needed
-        setMaxHeight(isOpened ? `${descriptionHeight}px` : '50px') // Adjust to show a part of the description
+        setMaxHeight(isOpened ? `${descriptionHeight}px` : '50px')
       }
     }
 
@@ -66,7 +66,7 @@ const InfoBoxDescription = ({
               setMaxHeight(
                 !isOpened
                   ? `${descriptionRef.current.scrollHeight}px`
-                  : '100px' // Adjust to show a part of the description
+                  : '100px'
               )
             }
           }}

@@ -19,8 +19,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '../ui/popover'
-import { Button } from '../ui/button'
-import { CalendarPlus, EllipsisVertical } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react'
 
 const DesktopButtons = ({
   name,
@@ -46,7 +45,7 @@ const DesktopButtons = ({
         />
       )}
       <div className="flex flex-row space-x-2">
-        <ShareButton shareFor="video" /> {/* Hydration Error */}
+        <ShareButton shareFor="video" />
         {video?.assetId && <VideoDownload assetId={video?.assetId} />}
       </div>
       {!vod && (
