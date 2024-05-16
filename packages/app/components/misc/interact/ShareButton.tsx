@@ -99,6 +99,7 @@ const ShareButton = ({
   shareFor?: string
   title?: string
 }) => {
+  // CredenzaTrigger is already a button, this creates a hydration error
   return (
     <Credenza>
       <CredenzaTrigger>

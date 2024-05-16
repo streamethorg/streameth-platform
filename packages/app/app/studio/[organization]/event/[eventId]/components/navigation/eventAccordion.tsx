@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { eventSchema } from '@/lib/schema'
 
-import DataConfigElement from '../../../../../../../components/misc/form/dataConfigElement'
+import DataConfigElement from '@/components/misc/form/dataConfigElement'
 import {
   Accordion,
   AccordionContent,
@@ -21,7 +21,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import Combobox from '@/components/ui/combo-box'
 import ImageUpload from '@/components/misc/form/imageUpload'
@@ -177,7 +176,7 @@ const EventAccordion = ({
             <AccordionTrigger>Time</AccordionTrigger>
             <AccordionContent className="p-2 space-y-8">
               <div className="flex flex-col space-y-8">
-                <div className="flex flex-row w-full space-x-1">
+                <div className="flex flex-row space-x-1 w-full">
                   <FormField
                     control={form.control}
                     name="start"
@@ -211,7 +210,7 @@ const EventAccordion = ({
                     )}
                   />
                 </div>
-                <div className="flex flex-row w-full space-x-1">
+                <div className="flex flex-row space-x-1 w-full">
                   <FormField
                     control={form.control}
                     name="end"
@@ -313,7 +312,7 @@ const EventAccordion = ({
                     )}
                   />
                 </div>
-                <div className="flex w-2/6 ">
+                <div className="flex w-2/6">
                   <FormField
                     control={form.control}
                     name="eventCover"
@@ -403,7 +402,7 @@ const EventAccordion = ({
                   </FormItem>
                 )}
               />
-              <div className="flex justify-between gap-5">
+              <div className="flex gap-5 justify-between">
                 <Button disabled={isUpdatingEvent} type="submit">
                   Save
                 </Button>
@@ -419,7 +418,7 @@ const EventAccordion = ({
           </AccordionItem>
           <AccordionItem value="item-4" className="px-2">
             <AccordionTrigger>More</AccordionTrigger>
-            <AccordionContent className="p-2 space-y-8 flex flex-col">
+            <AccordionContent className="flex flex-col p-2 space-y-8">
               <DeleteEvent
                 organizationId={organizationId}
                 event={event}

@@ -17,7 +17,6 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
-import InfoHoverCard from '../interact/InfoHoverCard'
 
 const Support = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -66,12 +65,12 @@ const Support = () => {
         <CredenzaTitle>Contact Support</CredenzaTitle>
         <div>
           {messageSent && (
-            <p className="font-bold pb-2">Message sent 🎉!!</p>
+            <p className="pb-2 font-bold">Message sent 🎉!!</p>
           )}
           <p className="pb-2">
             Feel free to become a part of our{' '}
             <a
-              className="text-primary font-semibold"
+              className="font-semibold text-primary"
               href="https://t.me/+p7TgdE06G-4zZDU0"
               target="_blank"
               rel="noopener noopener">
@@ -80,7 +79,7 @@ const Support = () => {
             channel to stay informed about ticket updates, or
             alternatively, you can raise an issue on{' '}
             <a
-              className="text-primary font-semibold"
+              className="font-semibold text-primary"
               href="https://github.com/streamethorg/streameth-platform/issues"
               target="_blank"
               rel="noopener noopener">
@@ -95,7 +94,7 @@ const Support = () => {
             </div>
           ) : messageSent ? (
             <div>
-              <p className="font-bold pb-2">Message sent 🎉!!</p>
+              <p className="pb-2 font-bold">Message sent 🎉!!</p>
               <Button onClick={handleClose}>Close</Button>
             </div>
           ) : (
@@ -109,12 +108,12 @@ const Support = () => {
         </div>
       </CredenzaContent>
       <CredenzaTrigger>
-        <div className="fixed bottom-4 right-0 cursor-pointer p-1 mr-1 lg:ml-0 lg:p-2">
-          <div className="rounded-full p-4 bg-white shadow-xl">
+        <div className="fixed right-0 bottom-4 p-1 mr-1 cursor-pointer lg:p-2 lg:ml-0">
+          <div className="p-4 bg-white rounded-full shadow-xl">
             {!open ? (
-              <MessageCircleQuestion className="text-muted-foreground h-7 w-7" />
+              <MessageCircleQuestion className="w-7 h-7 text-muted-foreground" />
             ) : (
-              <X className="text-muted-foreground h-7 w-7" />
+              <X className="w-7 h-7 text-muted-foreground" />
             )}
           </div>
         </div>
