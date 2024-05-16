@@ -13,26 +13,26 @@ const InfoBoxDescription = ({
   speakers?: IExtendedSpeaker[]
 }) => {
   const [isOpened, setIsOpened] = useState(false)
-  const [isExpandable, setIsExpandable] = useState(true)
-  const descriptionRef = useRef(null)
+  const [isExpandable, setIsExpandable] = useState(false)
+  const [maxHeight, setMaxHeight] = useState('0px')
+  const descriptionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleResize = () => {
       if (descriptionRef.current) {
-        const isMobile = window.innerWidth <= 768 // Adjust mobile breakpoint as needed
-        const descriptionHeight = description?.length || 0
-        setIsExpandable(descriptionHeight > 100)
+        const descriptionHeight = descriptionRef.current.scrollHeight
+        setIsExpandable(descriptionHeight > 100) // Adjust height threshold as needed
+        setMaxHeight(isOpened ? `${descriptionHeight}px` : '50px') // Adjust to show a part of the description
       }
     }
 
-    // Check on mount and window resize
     handleResize()
     window.addEventListener('resize', handleResize)
 
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [isOpened])
 
   if (!description) return null
 
@@ -40,9 +40,8 @@ const InfoBoxDescription = ({
     <div className="relative py-4">
       <div
         ref={descriptionRef}
-        className={`transition-max-height duration-700 ease-in-out overflow-hidden ${
-          isExpandable && !isOpened && 'max-h-10 max-w-[90%] truncate'
-        }`}>
+        className="overflow-hidden duration-300 ease-in-out transition-max-height"
+        style={{ maxHeight: maxHeight }}>
         {description && (
           <div className="space-y-2">
             <MarkdownDisplay content={description} />
@@ -56,9 +55,21 @@ const InfoBoxDescription = ({
           </div>
         )}
       </div>
+      {isExpandable && !isOpened && (
+        <div className="absolute right-0 left-0 bottom-4 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+      )}
       {isExpandable && (
         <button
-          onClick={() => setIsOpened(!isOpened)}
+          onClick={() => {
+            setIsOpened(!isOpened)
+            if (descriptionRef.current) {
+              setMaxHeight(
+                !isOpened
+                  ? `${descriptionRef.current.scrollHeight}px`
+                  : '100px' // Adjust to show a part of the description
+              )
+            }
+          }}
           className="absolute right-0 bottom-0 pb-2 mr-5 ml-auto font-bold text-primary">
           {isOpened ? 'less' : 'more'}
         </button>
