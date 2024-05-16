@@ -58,7 +58,7 @@ export default function SearchBar({
         .then((data) => {
           const items = data.data
             .map((obj: any) => obj.item)
-            .slice(0, 15)
+            .slice(0, 10)
 
           setSearchResults(items)
           setIsLoading(false)
