@@ -28,7 +28,7 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import CopyText from '@/components/misc/CopyText'
 
 export const ShareModalContent = ({
@@ -99,8 +99,10 @@ const ShareButton = ({
   shareFor?: string
   title?: string
 }) => {
-  // Applying button styles to a span element
-  const buttonClassNames = `inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-xl shadow-sm focus:outline-none bg-white border border-input hover:bg-accent hover:text-accent-foreground ${className}`
+  const buttonClassNames = buttonVariants({
+    variant,
+    className,
+  })
 
   return (
     <Credenza>
