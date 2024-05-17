@@ -3,7 +3,7 @@
 import { IExtendedSession } from '@/lib/types'
 import { Separator } from '@/components/ui/separator'
 import LayoutSelection from './LayoutSelection'
-import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
+import VideoCardWithMenu from './misc/VideoCardWithMenu'
 import { DropdownItems } from './misc/DropdownGrid'
 import VideoCardProcessing from '@/components/misc/VideoCard/VideoCardProcessing'
 
