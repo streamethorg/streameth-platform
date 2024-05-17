@@ -144,7 +144,11 @@ const MobileNavBar = ({
         <div className="flex items-center ml-auto">
           {showSearchBar && (
             <button onClick={toggleSearch} className="p-2">
-              <Search className="w-6 h-6 text-primary" />
+              {searchVisible ? (
+                <X className="w-6 h-6 text-primary" />
+              ) : (
+                <Search className="w-6 h-6 text-primary" />
+              )}
             </button>
           )}
           {pages.length > 0 && (

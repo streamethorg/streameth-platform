@@ -120,31 +120,31 @@ export const archivePath = ({
   }
 
   if (searchQuery) {
-    const url = new URL(window.location.href)
+    // const url = new URL(window.location.href)
+    //
+    // if (
+    //   (url.pathname === '/videos' && url.searchParams.has('event')) ||
+    //   url.searchParams.has('organization')
+    // ) {
+    //   url.searchParams.set('searchQuery', searchQuery)
+    //   newSearchQueryPath =
+    //     // Iterate through existing parameters and include only 'event' and 'searchQuery'
+    //     newSearchQueryPath = `${url.pathname}?${[
+    //       ...url.searchParams.entries(),
+    //     ]
+    //       .filter(([key]) =>
+    //         ['organization', 'event', 'searchQuery'].includes(key)
+    //       )
+    //       .map(([key, value]) => `${key}=${value}`)
+    //       .join('&')}`
+    // } else {
+    //   params.append('searchQuery', searchQuery)
+    // }
 
-    if (
-      (url.pathname === '/videos' && url.searchParams.has('event')) ||
-      url.searchParams.has('organization')
-    ) {
-      url.searchParams.set('searchQuery', searchQuery)
-      newSearchQueryPath =
-        // Iterate through existing parameters and include only 'event' and 'searchQuery'
-        newSearchQueryPath = `${url.pathname}?${[
-          ...url.searchParams.entries(),
-        ]
-          .filter(([key]) =>
-            ['organization', 'event', 'searchQuery'].includes(key)
-          )
-          .map(([key, value]) => `${key}=${value}`)
-          .join('&')}`
-    } else {
-      params.append('searchQuery', searchQuery)
-    }
+    params.append('searchQuery', searchQuery)
   }
 
-  return newSearchQueryPath
-    ? newSearchQueryPath
-    : `/${organizationSlug}/videos?${params.toString()}`
+  return `/${organizationSlug}/videos?${params.toString()}`
 }
 
 export const hasOrganization = (
