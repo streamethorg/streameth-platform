@@ -14,7 +14,7 @@ import { deleteSessionAction } from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
 import { Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 
 const DeleteAsset = ({
   session,
@@ -26,12 +26,15 @@ const DeleteAsset = ({
   TriggerComponent: ReactNode
 }) => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
 
   const handleDelete = async () => {
+    setLoading(true)
     await deleteSessionAction({
       organizationId: session.organizationId as string,
       sessionId: session._id,
     })
+    setLoading(false)
 
     if (href === 'refresh') {
       location.reload()
@@ -54,6 +57,7 @@ const DeleteAsset = ({
             <Button variant={'secondary'}>Cancel</Button>
           </DialogClose>
           <Button
+            loading={loading}
             onClick={() => handleDelete()}
             variant={'destructive'}>
             Delete asset
