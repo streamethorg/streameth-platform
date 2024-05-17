@@ -24,7 +24,7 @@ const AuthorizationMessage = () => {
       login()
     }
     if (authenticated) {
-      toast.message('Redirecting to Studio')
+      toast.message('Redirecting to Studio...')
     }
   }, [ready, authenticated])
 
