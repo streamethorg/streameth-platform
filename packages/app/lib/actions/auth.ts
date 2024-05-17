@@ -12,3 +12,8 @@ export async function storeSession({
   cookies().set('user-session', token)
   cookies().set('user-address', address)
 }
+
+export async function deleteSession() {
+  cookies().delete('user-session')
+  cookies().delete('user-address')
+}

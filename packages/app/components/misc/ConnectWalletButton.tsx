@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth'
-import { storeSession } from '@/lib/actions/auth'
+import { deleteSession, storeSession } from '@/lib/actions/auth'
 import { apiUrl } from '@/lib/utils/utils'
 
 interface ConnectWalletButtonProps {
@@ -39,19 +39,13 @@ export const ConnectWalletButton = ({
       getSession()
     },
     onError: (error) => {
-      storeSession({
-        token: '',
-        address: '',
-      })
+      deleteSession()
     },
   })
 
   const { logout } = useLogout({
     onSuccess: () => {
-      storeSession({
-        token: '',
-        address: '',
-      })
+      deleteSession()
     },
   })
 

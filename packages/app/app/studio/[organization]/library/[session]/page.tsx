@@ -59,6 +59,8 @@ const EditSession = async ({
           />
           <SessionOptions
             name={video.name}
+            sessionId={params.session}
+            organizationSlug={params.organization}
             playbackId={video.playbackId!}
             downloadUrl={video.downloadUrl!}
           />

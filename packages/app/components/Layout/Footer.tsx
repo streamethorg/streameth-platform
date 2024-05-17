@@ -29,26 +29,30 @@ const Footer = ({ active }: { active?: string }) => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="flex flex-wrap justify-center items-center mt-5 mb-3 space-y-2 md:mb-5 z-[99999999]">
-      <StreamethLogoGray height={25} className="mb-2" />
-      {/* Visible only on small screens */}
-      <div className="flex justify-center w-full text-sm text-gray-500 md:hidden">
-        © {year} StreamETH International B.V.
+    <footer className="flex flex-col justify-center items-center mt-5 mb-3 space-y-2 md:mb-5 z-[99999999]">
+      <a className="cursor-pointer mb-2" href="/">
+        <StreamethLogoGray height={25} className="" />
+      </a>
+      <div className="flex items-center">
+        {/* Visible only on small screens */}
+        <div className="flex justify-center w-full text-sm text-gray-500 md:hidden">
+          © {year} StreamETH International B.V.
+        </div>
+        {/* Visible on larger screens */}
+        <div className="hidden text-sm text-gray-500 md:block">
+          © {year} StreamETH International B.V. |
+        </div>
+        {Object.entries(items).map(([key, { item, href }]) => (
+          <Link
+            key={key}
+            href={href}
+            className={`mx-1 text-sm ${
+              active === key ? 'font-bold' : 'font-light'
+            } text-gray-500 underline hover:no-underline`}>
+            {item}
+          </Link>
+        ))}
       </div>
-      {/* Visible on larger screens */}
-      <div className="hidden text-sm text-gray-500 md:block">
-        © {year} StreamETH International B.V. |
-      </div>
-      {Object.entries(items).map(([key, { item, href }]) => (
-        <Link
-          key={key}
-          href={href}
-          className={`mx-1 text-sm ${
-            active === key ? 'font-bold' : 'font-light'
-          } text-gray-500 underline hover:no-underline`}>
-          {item}
-        </Link>
-      ))}
     </footer>
   )
 }
