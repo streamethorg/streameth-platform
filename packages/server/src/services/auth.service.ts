@@ -21,7 +21,8 @@ export default class AuthService {
       await this.verifyMessage(data.signature, data.message, data.nonce);
     }
     if (!existingUser) {
-      existingUser = await this.userService.create(data);
+      throw new HttpException(404, 'User not found')
+      //existingUser = await this.userService.create(data);
     }
     let token = jwt.sign(
       { id: existingUser.walletAddress },
