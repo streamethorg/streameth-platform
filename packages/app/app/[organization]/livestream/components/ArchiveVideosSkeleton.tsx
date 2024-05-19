@@ -12,10 +12,10 @@ const ArchiveVideoSkeleton = () => {
           <div className="min-h-full uppercase rounded-xl">
             <div className="w-full animate-pulse bg-secondary aspect-video"></div>
             <CardHeader className="px-2 mt-1 bg-white bg-opacity-10 rounded lg:p-0 lg:py-2">
-              <CardDescription className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-2">
                 <div className="w-full h-5 animate-pulse bg-secondary" />
                 <div className="w-1/2 h-5 animate-pulse bg-secondary" />
-              </CardDescription>
+              </div>
             </CardHeader>
           </div>
         </Card>

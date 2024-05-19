@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import { Loader2, TrashIcon } from 'lucide-react'
+import { Loader2, Trash2 } from 'lucide-react'
 import ImageDropzone from './ImageDropzone'
 import { generateId } from 'streameth-new-server/src/utils/util'
 import { IExtendedSession } from '@/lib/types'
@@ -140,7 +140,7 @@ const EditSessionFrom = ({
               <Button
                 variant={'destructive-outline'}
                 className="space-x-2">
-                <TrashIcon />
+                <Trash2 />
                 <p>Delete video</p>
               </Button>
             }

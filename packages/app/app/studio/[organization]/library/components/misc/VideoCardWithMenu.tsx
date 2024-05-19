@@ -18,6 +18,11 @@ import Link from 'next/link'
 import React, { ReactNode } from 'react'
 import { generateThumbnail } from '@/lib/actions/livepeer'
 import { useEffect, useState } from 'react'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 
 const VideoCardWithMenu = ({
   session,
@@ -79,14 +84,14 @@ const VideoCardWithMenu = ({
         </CardHeader>
 
         {DropdownMenuItems && (
-          <DropdownMenu>
-            <DropdownMenuTrigger className="z-10">
+          <Popover>
+            <PopoverTrigger className="z-10">
               <EllipsisVertical className="mt-2" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            </PopoverTrigger>
+            <PopoverContent className="w-60">
               {DropdownMenuItems}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </PopoverContent>
+          </Popover>
         )}
       </div>
     </div>

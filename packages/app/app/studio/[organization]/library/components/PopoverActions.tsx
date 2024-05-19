@@ -9,7 +9,7 @@ import {
   FilePenLine,
   Share2,
   Copy,
-  TrashIcon,
+  Trash2,
   CircleEllipsisIcon,
 } from 'lucide-react'
 import Link from 'next/link'
@@ -56,7 +56,10 @@ const PopoverActions = ({
                   <p className="">Share</p>
                 </Button>
               </DialogTrigger>
-              <ShareModalContent />
+              <ShareModalContent
+                url={`${window.location.origin}/${organizationSlug}/watch?session=${itemId}`}
+                shareFor="video"
+              />
             </Dialog>
             <Button variant={'outline'}>
               <Link
@@ -92,7 +95,7 @@ const PopoverActions = ({
                 <Button
                   variant={'destructive-outline'}
                   className="flex justify-center space-x-2">
-                  <TrashIcon />
+                  <Trash2 />
                   <p>Delete</p>
                 </Button>
               }
