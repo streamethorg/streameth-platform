@@ -1,12 +1,12 @@
 'use client'
 
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { ReactNode, forwardRef } from 'react'
 import {
   Copy,
   Download,
   FilePenLine,
   Share2,
+  Trash2,
   TrashIcon,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -40,21 +40,19 @@ export const DropdownItems = ({
   }
 
   return (
-    <div className="flex flex-col justify-start">
-      <DropdownMenuItem>
+    <div className="grid gap-4">
+      <div className="grid gap-2">
         <Link
           href={`/studio/${organizationSlug}/library/${
             session._id as string
           }`}>
           <Button
             variant={'ghost'}
-            className="flex flex-row justify-center items-center space-x-2 text-muted-foreground">
+            className="space-x-2 w-full text-muted-foreground">
             <FilePenLine />
             <p className="">Edit</p>
           </Button>
         </Link>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
         <Button
           variant={'ghost'}
           className="space-x-2 text-muted-foreground"
@@ -62,17 +60,27 @@ export const DropdownItems = ({
           <Copy />
           <p>Copy IPFS Hash</p>
         </Button>
-      </DropdownMenuItem>
-      {session.playbackId && (
-        <DropdownMenuItem>
+        {session.playbackId && (
           <VideoDownloadClient
             className="space-x-2 text-muted-foreground"
             videoName={`${session.name}.mp4`}
             variant="ghost"
             playbackId={session.playbackId}
           />
-        </DropdownMenuItem>
-      )}
+        )}
+        <DeleteAsset
+          session={session}
+          href={`/studio/${organizationSlug}/library`}
+          TriggerComponent={
+            <Button
+              variant={'destructive-outline'}
+              className="flex justify-center space-x-2">
+              <Trash2 />
+              <p>Delete</p>
+            </Button>
+          }
+        />
+      </div>
     </div>
   )
 }

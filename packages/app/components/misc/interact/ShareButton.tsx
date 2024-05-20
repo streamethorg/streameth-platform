@@ -28,7 +28,7 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import CopyText from '@/components/misc/CopyText'
 
 export const ShareModalContent = ({
@@ -99,13 +99,18 @@ const ShareButton = ({
   shareFor?: string
   title?: string
 }) => {
+  const buttonClassNames = buttonVariants({
+    variant,
+    className,
+  })
+
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Button variant={variant} className={className}>
+        <span className={buttonClassNames}>
           <Share2 size={24} className="p-1" />
           {title}
-        </Button>
+        </span>
       </CredenzaTrigger>
       <ShareModalContent url={url} shareFor={shareFor} />
     </Credenza>

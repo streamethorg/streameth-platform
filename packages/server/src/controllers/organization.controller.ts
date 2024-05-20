@@ -113,7 +113,6 @@ export class OrganizationController extends Controller {
   @Delete('{organizationId}')
   async deleteOrganization(
     @Path() organizationId: string,
-    @Body() _organizationId: OrgIdDto,
   ): Promise<IStandardResponse<void>> {
     await this.organizationService.deleteOne(organizationId);
     return SendApiResponse('deleted');

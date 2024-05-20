@@ -59,7 +59,7 @@ const HomePageNavbar = ({
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
-        currentOrganization={currentOrganization}
+        currentOrganization={currentOrganization || ''}
       />
       <PCNavBar
         showLogo={showLogo}
@@ -67,7 +67,7 @@ const HomePageNavbar = ({
         pages={pages}
         showSearchBar={showSearchBar}
         organizations={organizations}
-        currentOrganization={currentOrganization}
+        currentOrganization={currentOrganization || ''}
       />
     </Suspense>
   )
@@ -84,7 +84,7 @@ const MobileNavBar = ({
   pages: Page[]
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
-  currentOrganization?: string
+  currentOrganization: string
 }) => {
   const [menuVisible, setMenuVisible] = useState(false)
   const [searchVisible, setSearchVisible] = useState(false)
@@ -109,7 +109,10 @@ const MobileNavBar = ({
 
       {searchVisible && showSearchBar && (
         <div className="absolute w-full bottom-[-56px] bg-secondary">
-          <SearchBar isMobile={true} />
+          <SearchBar
+            organizationSlug={currentOrganization}
+            isMobile={true}
+          />
         </div>
       )}
       <div
@@ -141,7 +144,11 @@ const MobileNavBar = ({
         <div className="flex items-center ml-auto">
           {showSearchBar && (
             <button onClick={toggleSearch} className="p-2">
-              <Search className="w-6 h-6 text-primary" />
+              {searchVisible ? (
+                <X className="w-6 h-6 text-primary" />
+              ) : (
+                <Search className="w-6 h-6 text-primary" />
+              )}
             </button>
           )}
           {pages.length > 0 && (
@@ -181,7 +188,7 @@ const PCNavBar = ({
   showLogo: boolean
   showSearchBar: boolean
   organizations?: IExtendedOrganization[]
-  currentOrganization?: string
+  currentOrganization: string
 }) => {
   const { isSignedIn } = useSIWE()
   const { userData } = useUserData()
@@ -189,7 +196,7 @@ const PCNavBar = ({
     <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex">
       <div className="flex flex-1 justify-start items-center">
         {showLogo && (
-          <Link href="/">
+          <Link href={`/${currentOrganization}`}>
             <Image
               src={logo ?? '/logo_dark.png'}
               alt="Logo"

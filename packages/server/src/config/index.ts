@@ -3,6 +3,7 @@ import validateEnv from '@utils/validateEnv';
 const validatedEnv = validateEnv();
 export const config = {
   baseUrl: validatedEnv.BASE_URL,
+  testUrl: validatedEnv.TEST_URL,
   playerUrl: validatedEnv.PLAYER_URL,
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
@@ -34,5 +35,9 @@ export const config = {
     host: validatedEnv.LIVEPEER_BASE_URL,
     secretKey: validatedEnv.LIVEPEER_API_KEY,
     webhookSecretKey: validatedEnv.LIVEPEER_WEBHOOK_SECRET,
+  },
+  privy: {
+    appId: validatedEnv.PRIVY_APP_ID,
+    appSecret: validatedEnv.PRIVY_SECRET_KEY,
   },
 };

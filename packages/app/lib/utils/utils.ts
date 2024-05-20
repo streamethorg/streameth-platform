@@ -104,52 +104,47 @@ export const apiUrl = () => {
 }
 
 export const archivePath = ({
-  organization,
+  organizationSlug,
   event,
   searchQuery,
 }: {
-  organization?: IOrganizationModel['slug']
+  organizationSlug: IOrganizationModel['slug']
   event?: IEventModel['slug']
   searchQuery?: string
 }) => {
   const params = new URLSearchParams()
   let newSearchQueryPath
 
-  if (organization) {
-    params.append('organization', organization)
-  }
-
   if (event) {
     params.append('event', event)
   }
 
   if (searchQuery) {
-    const url = new URL(window.location.href)
+    // const url = new URL(window.location.href)
+    //
+    // if (
+    //   (url.pathname === '/videos' && url.searchParams.has('event')) ||
+    //   url.searchParams.has('organization')
+    // ) {
+    //   url.searchParams.set('searchQuery', searchQuery)
+    //   newSearchQueryPath =
+    //     // Iterate through existing parameters and include only 'event' and 'searchQuery'
+    //     newSearchQueryPath = `${url.pathname}?${[
+    //       ...url.searchParams.entries(),
+    //     ]
+    //       .filter(([key]) =>
+    //         ['organization', 'event', 'searchQuery'].includes(key)
+    //       )
+    //       .map(([key, value]) => `${key}=${value}`)
+    //       .join('&')}`
+    // } else {
+    //   params.append('searchQuery', searchQuery)
+    // }
 
-    if (
-      (url.pathname === '/archive' &&
-        url.searchParams.has('event')) ||
-      url.searchParams.has('organization')
-    ) {
-      url.searchParams.set('searchQuery', searchQuery)
-      newSearchQueryPath =
-        // Iterate through existing parameters and include only 'event' and 'searchQuery'
-        newSearchQueryPath = `${url.pathname}?${[
-          ...url.searchParams.entries(),
-        ]
-          .filter(([key]) =>
-            ['organization', 'event', 'searchQuery'].includes(key)
-          )
-          .map(([key, value]) => `${key}=${value}`)
-          .join('&')}`
-    } else {
-      params.append('searchQuery', searchQuery)
-    }
+    params.append('searchQuery', searchQuery)
   }
 
-  return newSearchQueryPath
-    ? newSearchQueryPath
-    : `/archive?${params.toString()}`
+  return `/${organizationSlug}/videos?${params.toString()}`
 }
 
 export const hasOrganization = (

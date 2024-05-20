@@ -1,10 +1,9 @@
 import { IUser } from '@interfaces/user.interface';
-import { IAuth } from '@interfaces/auth.interface';
 import { HttpException } from '@exceptions/HttpException';
 import jwt from 'jsonwebtoken';
 import { config } from '@config';
 import UserService from './user.service';
-const { SiweMessage, generateNonce } = require('siwe');
+import { PrivyClient } from '@privy-io/server-auth';
 
 export default class AuthService {
   private userService = new UserService();
@@ -13,14 +12,19 @@ export default class AuthService {
     this.path = 'auth';
   }
 
+  private privy = new PrivyClient(config.privy.appId, config.privy.appSecret);
+
   async login(data: IUser): Promise<{ user: IUser; token: string }> {
+    let verifyToken = await this.verifyAuthToken(data.token);
+    let user = await this.privy.getUser(verifyToken.userId);
     let existingUser = await this.userService.findOne({
-      walletAddress: data.walletAddress,
+      walletAddress: user.wallet.address,
     });
-    if (existingUser) {
-      await this.verifyMessage(data.signature, data.message, data.nonce);
-    }
     if (!existingUser) {
+      existingUser = await this.userService.create({
+        walletAddress: user.wallet.address,
+        did: user.id,
+      });
       throw new HttpException(404, 'User not found')
       //existingUser = await this.userService.create(data);
     }
@@ -31,40 +35,22 @@ export default class AuthService {
         expiresIn: config.jwt.expiry,
       },
     );
-    return { user: existingUser, token };
+    return { user: existingUser, token: token };
   }
 
-  generateNonce(): { nonce: string } {
-    return { nonce: generateNonce() };
-  }
-
-  async verifyToken(data: IAuth): Promise<boolean> {
+  async verifyAuthToken(
+    token: string,
+  ): Promise<{ userId: string; sessionId: string }> {
     try {
-      jwt.verify(data.token, config.jwt.secret);
-      return true;
+      const authToken = await this.privy.verifyAuthToken(token);
+      return {
+        userId: authToken.userId,
+        sessionId: authToken.sessionId,
+      };
     } catch (e) {
-      if (
-        e instanceof jwt.TokenExpiredError ||
-        e instanceof jwt.JsonWebTokenError
-      ) {
-        return false;
+      if (e.code == 'ERR_JWT_EXPIRED') {
+        throw new HttpException(401, 'Jwt Expired');
       }
-      return false;
     }
-  }
-
-  async verifyMessage(
-    signature: string,
-    message: string,
-    nonce: string,
-  ): Promise<boolean> {
-    let siwe = new SiweMessage(message);
-    const signedMessage = await siwe.verify({
-      signature: signature,
-      nonce: nonce,
-    });
-    if (!signedMessage.success)
-      throw new HttpException(400, 'Verification failed');
-    return signedMessage.success;
   }
 }
