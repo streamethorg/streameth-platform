@@ -53,7 +53,7 @@ export default async function ArchivePage({
   )
 
   return (
-    <div>
+    <div className='h-full w-full flex flex-col'>
       {organization.banner && (
         <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
           <Image
@@ -66,7 +66,7 @@ export default async function ArchivePage({
           />
         </div>
       )}
-      <div className="p-4 m-auto w-full max-w-7xl">
+      <div className="p-4 m-auto w-full max-w-7xl h-full">
         <div className="flex flex-row justify-between items-center mb-4 space-x-2 w-full">
           <div className="w-full text-lg font-bold">
             {searchParams.searchQuery
