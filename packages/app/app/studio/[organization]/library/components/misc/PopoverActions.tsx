@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, forwardRef, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { Copy, FilePenLine, Share2, Trash2 } from 'lucide-react'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
