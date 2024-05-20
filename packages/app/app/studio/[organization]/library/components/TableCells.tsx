@@ -2,8 +2,13 @@
 
 import { TableCell } from '@/components/ui/table'
 import { IExtendedSession, eLayout } from '@/lib/types'
-import { ChevronDown, Copy, Earth, Lock } from 'lucide-react'
-import PopoverActions from './PopoverActions'
+import {
+  ChevronDown,
+  Copy,
+  EllipsisVertical,
+  Earth,
+  Lock,
+} from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
@@ -18,6 +23,12 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import ProcessingSkeleton from './misc/ProcessingSkeleton'
+import { PopoverActions } from './misc/PopoverActions'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 
 const TableCells = ({
   item,
@@ -154,11 +165,18 @@ const TableCells = ({
         )}
       </TableCell>
       <TableCell>
-        <PopoverActions
-          session={item}
-          organizationSlug={organization}
-          layout={eLayout.list}
-        />
+        <Popover>
+          <PopoverTrigger className="z-10">
+            <EllipsisVertical className="mt-2" />
+          </PopoverTrigger>
+          <PopoverContent className="w-60">
+            <PopoverActions
+              session={item}
+              organizationSlug={organization}
+              layout={eLayout.list}
+            />
+          </PopoverContent>
+        </Popover>
       </TableCell>
     </>
   )
