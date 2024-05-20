@@ -32,8 +32,7 @@ const Counter = ({
   }, [time])
 
   return (
-    <div className="flex flex-row justify-between items-center md:p-0">
-      <div className="flex flex-col justify-center items-center w-full bg-black md:rounded-xl aspect-video">
+      <div className="relative z-10 flex flex-col justify-center items-center w-full bg-black bg-opacity-70 md:rounded-xl aspect-video">
         <p className="text-2xl text-white uppercase">
           Stream will start in
         </p>
@@ -60,7 +59,6 @@ const Counter = ({
         </div>
         {/* <SignUp event={""} /> */}
       </div>
-    </div>
   )
 }
 
