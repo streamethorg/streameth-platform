@@ -1,11 +1,7 @@
 const shouldAnalyzeBundles = process.env.ANALYZE === true
 /** @type {import('next').NextConfig} */
 let nextConfig = {
-<<<<<<< HEAD
   // assetPrefix: 'https://streameth.org',
-=======
-  assetPrefix:'https://streameth.org',
->>>>>>> 5f6be0c8 (bugs (#575))
 
   redirects: async () => [
     {
