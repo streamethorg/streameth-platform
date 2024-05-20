@@ -25,7 +25,6 @@ import { IExtendedSession, eLayout, eSort } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
 import { sortArray } from '@/lib/utils/utils'
-import BackgroundLibrary from '@/lib/svg/BackgroundLibrary'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
