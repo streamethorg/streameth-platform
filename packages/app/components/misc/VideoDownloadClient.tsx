@@ -56,7 +56,7 @@ const VideoDownloadClient = ({
       variant={variant}
       className={className}>
       <Download size={21} />
-      <p className="hidden md:flex">Download</p>
+      <p className="hidden xl:flex">Download</p>
     </Button>
   )
 }
