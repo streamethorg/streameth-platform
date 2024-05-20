@@ -32,6 +32,7 @@ const Counter = ({
   }, [time])
 
   return (
+<<<<<<< HEAD
     <div className="relative z-10 flex flex-col justify-center items-center bg-black md:rounded-xl m-auto p-4">
       <p className="text-2xl text-white uppercase">
         Stream will start in
@@ -53,6 +54,35 @@ const Counter = ({
       </div>
       {/* <SignUp event={""} /> */}
     </div>
+=======
+      <div className="relative z-10 flex flex-col justify-center items-center w-full bg-black bg-opacity-70 md:rounded-xl aspect-video">
+        <p className="text-2xl text-white uppercase">
+          Stream will start in
+        </p>
+        <div className="flex flex-row justify-center items-center m-8 space-x-2">
+          <CounterBox
+            lable="days"
+            number={Math.floor(time / 86400)}
+          />
+          <span className="text-4xl text-white">:</span>
+          <CounterBox
+            lable="hours"
+            number={Math.floor((time % 86400) / 3600)}
+          />
+          <span className="text-4xl text-white">:</span>
+          <CounterBox
+            lable="minutes"
+            number={Math.floor((time % 3600) / 60)}
+          />
+          <span className="text-4xl text-white">:</span>
+          <CounterBox
+            lable="seconds"
+            number={Math.floor(time % 60)}
+          />
+        </div>
+        {/* <SignUp event={""} /> */}
+      </div>
+>>>>>>> 5f6be0c8 (bugs (#575))
   )
 }
 
