@@ -32,7 +32,7 @@ const Counter = ({
   }, [time])
 
   return (
-      <div className="relative z-10 flex flex-col justify-center items-center w-full bg-black bg-opacity-70 md:rounded-xl aspect-video">
+      <div className="relative z-10 flex flex-col justify-center items-center bg-black md:rounded-xl m-auto p-4">
         <p className="text-2xl text-white uppercase">
           Stream will start in
         </p>
