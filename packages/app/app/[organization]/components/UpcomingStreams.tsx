@@ -36,7 +36,7 @@ const UpcomingStreams = async ({
               <LivestreamCard
                 name={livestream.name}
                 date={livestream.streamDate as string}
-                thumbnail={livestream.thumbnail ?? ""}
+                thumbnail={livestream.thumbnail ?? ''}
                 link={`/${organizationSlug}/livestream?stage=${livestream?._id?.toString()}`}
               />
             </div>
