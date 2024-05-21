@@ -101,16 +101,18 @@ export default async function Watch({
 }
 
 export async function generateMetadata({
+  params,
   searchParams,
 }: OrganizationPageProps): Promise<Metadata> {
-  const response = await fetch(
-    `${apiUrl()}/sessions/${searchParams.session}`
-  )
-  const responseData = await response.json()
-  const video = responseData.data
-
   if (!searchParams.session) return generalMetadata
 
-  if (!video) return generalMetadata
-  return watchMetadata({ session: video })
+  const video = await fetchSession({
+    session: searchParams.session,
+  })
+  const organization = await fetchOrganization({
+    organizationSlug: params?.organization,
+  })
+
+  if (!video || !organization) return generalMetadata
+  return watchMetadata({ organization, session: video })
 }

@@ -4,7 +4,10 @@ import { IExtendedSession, OrganizationPageProps } from '@/lib/types'
 import { Metadata } from 'next'
 import { apiUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
-import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
+import {
+  generalMetadata,
+  livestreamMetadata,
+} from '@/lib/utils/metadata'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { Suspense } from 'react'
 import WatchGrid from '../components/WatchGrid'
@@ -83,16 +86,22 @@ export default async function Livestream({
 }
 
 export async function generateMetadata({
+  params,
   searchParams,
 }: OrganizationPageProps): Promise<Metadata> {
-  const response = await fetch(
-    `${apiUrl()}/sessions/${searchParams.session}`
-  )
-  const responseData = await response.json()
-  const video = responseData.data
+  if (!searchParams.stage) return generalMetadata
+  const stage = await fetchStage({
+    stage: searchParams.stage,
+  })
 
-  if (!searchParams.session) return generalMetadata
+  const organization = await fetchOrganization({
+    organizationSlug: params?.organization,
+  })
 
-  if (!video) return generalMetadata
-  return watchMetadata({ session: video })
+  if (!stage || !organization) return generalMetadata
+
+  return livestreamMetadata({
+    livestream: stage,
+    organization,
+  })
 }
