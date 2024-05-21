@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import CreateOrganizationForm from '../../(home)/components/CreateOrganizationForm'
 import { studioPageParams } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { Card, CardContent } from '@/components/ui/card'
 import NavigationItem from './components/NavigationItem'
+import TeamMembers from './components/TeamMembers'
+import { fetchOrganizationMembers } from '@/lib/services/organizationService'
 
 const Settings = async ({
   params,
@@ -20,16 +22,41 @@ const Settings = async ({
 
   if (!organization) return null
 
+  const members = await fetchOrganizationMembers({
+    organizationId: organization._id,
+  })
+
   const paths = [
     {
       title: 'Basic Info',
       path: `basicInfo`,
     },
-    // {
-    //   title: 'Users',
-    //   path: `users`,
-    // },
+    {
+      title: 'Team Members',
+      path: `teamMembers`,
+    },
   ]
+
+  const renderComponent = () => {
+    switch (searchParams?.settingsActiveTab) {
+      case 'basicInfo':
+      default:
+        return (
+          <CreateOrganizationForm
+            disableName={true}
+            organization={organization}
+          />
+        )
+
+      case 'teamMembers':
+        return (
+          <TeamMembers
+            members={members}
+            organizationId={organization._id}
+          />
+        )
+    }
+  }
 
   return (
     <div className="mx-auto max-w-4xl w-full mt-12 flex flex-row">
@@ -45,13 +72,8 @@ const Settings = async ({
           ))}
         </div>
       </div>
-      <Card className="w-3/4 rounded-r-xl m-auto bg-white border-none shadow-none">
-        <CardContent>
-          <CreateOrganizationForm
-            disableName={true}
-            organization={organization}
-          />
-        </CardContent>
+      <Card className="w-3/4 rounded-r-xl m-auto h-full bg-white border-none shadow-none">
+        <CardContent>{renderComponent()}</CardContent>
       </Card>
     </div>
   )

@@ -2,7 +2,9 @@ import { apiUrl } from '@/lib/utils/utils'
 import { cookies } from 'next/headers'
 
 const CheckAuthorization = async () => {
-  const userSession = cookies().get('privy-token')
+  const privyToken = cookies().get('privy-token')
+  const userSession = cookies().get('user-session')
+  const userAddress = cookies().get('user-address')
 
   const res = await fetch(`${apiUrl()}/auth/login`, {
     method: 'POST',
@@ -13,7 +15,11 @@ const CheckAuthorization = async () => {
     headers: { 'Content-Type': 'application/json' },
   })
   const resData = await res.json()
-  const isAuthorized = !!userSession && resData.status === 'success'
+  const isAuthorized =
+    !!userAddress &&
+    !!privyToken &&
+    !!userSession &&
+    resData.status === 'success'
 
   return isAuthorized
 }

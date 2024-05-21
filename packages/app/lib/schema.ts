@@ -154,3 +154,10 @@ export const nftSchema = z.object({
   maxSupply: z.string(),
   limitedSupply: z.string(),
 })
+
+export const addOrganizationMemberSchema = z.object({
+  walletAddress: z
+    .string()
+    .min(42, 'WalletAddress is required')
+    .max(42, 'Check Wallet Address'),
+})
