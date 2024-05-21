@@ -87,7 +87,7 @@ export const watchMetadata = ({
   organization?: IExtendedOrganization
   session: IExtendedSession
 }): Metadata => {
-  const imageUrl = session.coverImage
+  const imageUrl = session?.coverImage
     ? session.coverImage
     : BASE_IMAGE
 
