@@ -29,9 +29,9 @@ const OrganizationPage = async ({
             </CardHeader>
             <CardFooter>
               <Link href={`/studio/${params.organization}/library`}>
-              <Button className="bg-white text-black">
-                Upload Video
-              </Button>
+                <Button className="bg-white text-black">
+                  Upload Video
+                </Button>
               </Link>
             </CardFooter>
           </Card>
@@ -39,7 +39,8 @@ const OrganizationPage = async ({
             <CardHeader>
               <CardTitle>Create NFT</CardTitle>
               <CardDescription className="text-white">
-               Create NFTs from your video content and share them with your community.
+                Create NFTs from your video content and share them
+                with your community.
               </CardDescription>
             </CardHeader>
             <CardFooter>
