@@ -54,24 +54,17 @@ const OrganizationHome = async ({
     })
   ).filter((stream) => stream.published)
 
-  const nextStreamNotToday = allStreams?.filter(
-    (stream) =>
-      stream?.streamDate && new Date(stream.streamDate) > new Date()
+  const sortedStreams = allStreams.sort(
+    (a, b) =>
+      new Date(a.streamDate as string).getTime() - new Date(b.streamDate as string).getTime()
   )
 
-  const activeStream = allStreams?.filter(
-    (stream) => stream?.streamSettings?.isActive
-  )
-
-  const playerActive = !!activeStream[0] || !!nextStreamNotToday[0]
-  const stage = activeStream[0]
-    ? activeStream[0]
-    : nextStreamNotToday[0]
+  const stage = sortedStreams.length > 0 ? sortedStreams[0] : null
 
   return (
     <div className="mx-auto space-y-4 w-full max-w-7xl md:p-4">
       <div className="relative w-full">
-        {playerActive ? (
+        {stage ? (
           <>
             <Player stage={stage} />
             <div className="px-4 w-full md:p-0">
@@ -165,19 +158,18 @@ export async function generateMetadata(
     })
   ).filter((stream) => stream.published)
 
-  const nextStreamNotToday = allStreams?.filter(
-    (stream) =>
-      stream?.streamDate && new Date(stream.streamDate) > new Date()
+
+  const sortedStreams = allStreams.sort(
+    (a, b) =>
+      new Date(a.streamDate as string).getTime() - new Date(b.streamDate as string).getTime()
   )
 
-  const activeStream = allStreams?.filter(
-    (stream) => stream?.streamSettings?.isActive
-  )
+  const stage = sortedStreams.length > 0 ? sortedStreams[0] : null
 
-  const stage = activeStream[0]
-    ? activeStream[0]
-    : nextStreamNotToday[0]
-
+  if (!stage) {
+    return generalMetadata
+  }
+  
   return livestreamMetadata({
     livestream: stage,
     organization,
