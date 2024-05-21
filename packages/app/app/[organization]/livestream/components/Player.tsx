@@ -27,7 +27,6 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
   return (
     <div className="flex flex-col w-full h-full">
       {timeLeft > 0 ? (
-<<<<<<< HEAD
         <div className="flex relative aspect-video rounded-xl w-full h-full items-center justify-center">
           {stage.thumbnail && (
             <Image
@@ -37,10 +36,6 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
               alt="Livepeer Logo"
             />
           )}
-=======
-        <div className='relative aspect-video rounded-xl'>
-          {stage.thumbnail && <Image className='z-[0] rounded-xl' fill={true} src={stage.thumbnail} alt="Livepeer Logo" /> }
->>>>>>> 5f6be0c8 (bugs (#575))
           <Counter timeToStart={timeLeft} />
         </div>
       ) : (
