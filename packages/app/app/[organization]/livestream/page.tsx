@@ -54,6 +54,7 @@ export default async function Livestream({
   const stage = await fetchStage({
     stage: searchParams.stage,
   })
+
   if (!stage?._id || !stage.streamSettings?.streamId)
     return notFound()
 
