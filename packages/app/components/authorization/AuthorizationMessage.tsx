@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 import {
   Card,
@@ -12,19 +12,13 @@ import {
 import LoginBackground from '@/public/login-background.png'
 import Image from 'next/image'
 
-import {
-  usePrivy,
-  Captcha,
-  useLoginWithEmail,
-} from '@privy-io/react-auth'
+import { usePrivy } from '@privy-io/react-auth'
 import { toast } from 'sonner'
 
 import Link from 'next/link'
 import SignInWithSocials from './SignInWithSocials'
 const AuthorizationMessage = () => {
   const { ready, authenticated, login } = usePrivy()
-  const [email, setEmail] = useState('')
-  const { sendCode, loginWithCode } = useLoginWithEmail()
 
   useEffect(() => {
     if (ready && !authenticated) {
@@ -50,7 +44,7 @@ const AuthorizationMessage = () => {
           </CardHeader>
 
           <CardContent>
-            <SignInWithSocials />
+            {/* <SignInWithSocials /> */}
             <p className="mt-2 text-sm text-muted-foreground">
               By signing up you agree to the{' '}
               <Link className="underline" href="/terms">
