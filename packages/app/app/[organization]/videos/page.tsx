@@ -53,7 +53,7 @@ export default async function ArchivePage({
   )
 
   return (
-    <div className='h-full w-full flex flex-col'>
+    <div className="h-full w-full flex flex-col">
       {organization.banner && (
         <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
           <Image

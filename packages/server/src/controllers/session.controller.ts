@@ -114,6 +114,7 @@ export class SessionController extends Controller {
   /**
    * @summary Upload session to YouTube
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('upload/{sessionId}')
   async uploadSessionToYouTube(

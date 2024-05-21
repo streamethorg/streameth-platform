@@ -1,6 +1,7 @@
 import { apiUrl } from '@/lib/utils/utils'
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
-import { IExtendedOrganization } from '../types'
+import { IExtendedOrganization, IExtendedUser } from '../types'
+import { cookies } from 'next/headers'
 
 export async function fetchOrganization({
   organizationSlug,
@@ -108,6 +109,104 @@ export async function updateOrganization({
     }
   } catch (e) {
     console.error('Unexpected error:', e)
+    throw e
+  }
+}
+
+export async function addOrganizationMember({
+  organizationId,
+  memberWalletAddress,
+  authToken,
+}: {
+  organizationId: string
+  memberWalletAddress: string
+  authToken: string
+}): Promise<IOrganization> {
+  if (!authToken) {
+    throw 'No auth token'
+  }
+
+  try {
+    const response = await fetch(
+      `${apiUrl()}/organizations/member/${organizationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ walletAddress: memberWalletAddress }),
+      }
+    )
+
+    if (response.ok) {
+      return (await response.json()).message
+    } else {
+      throw await response.json()
+    }
+  } catch (e) {
+    console.error('Unexpected error:', e)
+    throw e
+  }
+}
+
+export async function fetchOrganizationMembers({
+  organizationId,
+}: {
+  organizationId: string
+}): Promise<IExtendedUser[]> {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw 'No auth token'
+  }
+
+  try {
+    const response = await fetch(
+      `${apiUrl()}/organizations/member/${organizationId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        cache: 'no-store',
+      }
+    )
+
+    return (await response.json()).data ?? []
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching organizations members'
+  }
+}
+
+export async function deleteTeamMember({
+  memberWalletAddress,
+  authToken,
+  organizationId,
+}: {
+  memberWalletAddress: string
+  authToken: string
+  organizationId?: string
+}): Promise<IExtendedUser> {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/organizations/member/${organizationId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ walletAddress: memberWalletAddress }),
+      }
+    )
+
+    if (!response.ok) {
+      throw 'Error deleting team member'
+    }
+    return await response.json()
+  } catch (e) {
+    console.log('error in delete team member', e)
     throw e
   }
 }

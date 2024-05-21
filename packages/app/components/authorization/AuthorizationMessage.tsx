@@ -16,6 +16,7 @@ import { usePrivy } from '@privy-io/react-auth'
 import { toast } from 'sonner'
 
 import Link from 'next/link'
+import SignInWithSocials from './SignInWithSocials'
 const AuthorizationMessage = () => {
   const { ready, authenticated, login } = usePrivy()
 
