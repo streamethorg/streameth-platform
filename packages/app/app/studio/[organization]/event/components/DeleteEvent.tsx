@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog'
 import { deleteEventAction } from '@/lib/actions/events'
 import { IExtendedEvent } from '@/lib/types'
-import { TrashIcon } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 import { ReactNode } from 'react'
 
 const DeleteAsset = ({
@@ -40,7 +40,7 @@ const DeleteAsset = ({
       <DialogContent className="p-10 sm:max-w-[475px]">
         <DialogHeader className="mx-auto space-y-4">
           <div className="p-4 mx-auto bg-red-500 rounded-full">
-            <TrashIcon className="text-white" />
+            <Trash2 className="text-white" />
           </div>
           <DialogTitle>Are you sure you want to delete?</DialogTitle>
         </DialogHeader>

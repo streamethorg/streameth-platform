@@ -9,17 +9,18 @@ const CheckAuthorization = async () => {
   const res = await fetch(`${apiUrl()}/auth/login`, {
     method: 'POST',
     body: JSON.stringify({
-      token: userSession?.value,
+      token: privyToken?.value,
     }),
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
   })
   const resData = await res.json()
+
   const isAuthorized =
-    !!userAddress &&
-    !!privyToken &&
-    !!userSession &&
-    resData.status === 'success'
+    !!userAddress?.value &&
+    !!privyToken?.value &&
+    !!userSession?.value &&
+    !!resData.status
 
   return isAuthorized
 }

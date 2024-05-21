@@ -3,7 +3,7 @@
 import { IExtendedSession } from '@/lib/types'
 import { Separator } from '@/components/ui/separator'
 import LayoutSelection from './LayoutSelection'
-import VideoCardWithMenu from '@/components/misc/VideoCard/VideoCardWithMenu'
+import VideoCardWithMenu from './misc/VideoCardWithMenu'
 import { DropdownItems } from './misc/DropdownGrid'
 import VideoCardProcessing from '@/components/misc/VideoCard/VideoCardProcessing'
 
@@ -26,7 +26,7 @@ const GridLayout = ({
             {session.videoUrl ? (
               <VideoCardWithMenu
                 session={session}
-                link={`watch?session=${session._id}`}
+                link={`/${organizationSlug}/watch?session=${session._id}`}
                 DropdownMenuItems={DropdownItems({
                   organizationSlug: organizationSlug,
                   session: session,
