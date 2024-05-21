@@ -19,6 +19,10 @@ import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import ChannelDescription from './components/ChannelDescription'
+import {
+  livestreamMetadata,
+  generalMetadata,
+} from '@/lib/utils/metadata'
 
 export async function generateStaticParams() {
   const organizations = await fetchOrganizations()
@@ -143,33 +147,41 @@ export async function generateMetadata(
   { params }: ChannelPageParams,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const organizationInfo = await fetchOrganization({
+  if (!params.organization) {
+    return generalMetadata
+  }
+
+  const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
 
-  if (!organizationInfo) {
-    return {
-      title: 'Organization not found',
-      description: 'Organization not found',
-    }
+  if (!organization) {
+    return generalMetadata
   }
 
-  const imageUrl = organizationInfo.logo
-  try {
-    return {
-      title: organizationInfo.name,
-      description: organizationInfo.description,
-      openGraph: {
-        images: [imageUrl],
-      },
-    }
-  } catch (e) {
-    console.log(e)
-    return {
-      title: organizationInfo.name,
-      description: organizationInfo.description,
-    }
-  }
+  const allStreams = (
+    await fetchOrganizationStages({
+      organizationId: organization._id,
+    })
+  ).filter((stream) => stream.published)
+
+  const nextStreamNotToday = allStreams?.filter(
+    (stream) =>
+      stream?.streamDate && new Date(stream.streamDate) > new Date()
+  )
+
+  const activeStream = allStreams?.filter(
+    (stream) => stream?.streamSettings?.isActive
+  )
+
+  const stage = activeStream[0]
+    ? activeStream[0]
+    : nextStreamNotToday[0]
+
+  return livestreamMetadata({
+    livestream: stage,
+    organization,
+  })
 }
 
 export default OrganizationHome
