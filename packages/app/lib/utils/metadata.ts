@@ -84,20 +84,20 @@ export const watchMetadata = ({
   organization,
   session,
 }: {
-  organization: IExtendedOrganization
+  organization?: IExtendedOrganization
   session: IExtendedSession
 }): Metadata => {
-  const imageUrl = session.coverImage
+  const imageUrl = session?.coverImage
     ? session.coverImage
     : BASE_IMAGE
 
   return {
-    title: `${session.name} | ${organization.name}`,
+    title: `${session.name} | ${organization?.name}`,
     description: `${session.description}`,
     metadataBase: new URL('https://streameth.org'),
     openGraph: {
       title: `${session.name}`,
-      siteName: `${organization.name}`,
+      siteName: `${organization?.name}`,
       description: `${session.description}`,
       images: {
         url: session.coverImage ? session.coverImage : BASE_IMAGE,
