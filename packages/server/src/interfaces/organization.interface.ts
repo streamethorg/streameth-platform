@@ -12,6 +12,7 @@ export interface IOrganization {
   slug?: string;
   banner?: string;
   walletAddress?: string;
+  address?: string;
 }
 export interface IOrganizationModel
   extends Omit<IOrganization, '_id'>,

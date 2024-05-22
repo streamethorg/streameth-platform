@@ -5,10 +5,14 @@ import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
 import { config } from '@config';
+import { isEthereumAddress } from '@utils/util';
+import privy from '@utils/privy';
+import UserService from './user.service';
 
 export default class OrganizationService {
   private path: string;
   private controller: BaseController<IOrganization>;
+  private userService = new UserService();
   constructor() {
     this.path = 'organizations';
     this.controller = new BaseController<IOrganization>('db', Organization);
@@ -74,8 +78,30 @@ export default class OrganizationService {
     return users;
   }
 
-  async addOrgMember(organizationId: string, walletAddress: string) {
+  async addOrgMember(organizationId: string, address: string) {
     await this.get(organizationId);
+    const isWalletAddress = isEthereumAddress(address);
+    let walletAddress: string = '';
+    if (isWalletAddress) walletAddress = address;
+    if (!isWalletAddress) {
+      let user = await privy.getUserByEmail(address);
+      if (!user) {
+        let newAccount = await privy.importUser({
+          linkedAccounts: [
+            {
+              type: 'email',
+              address: address,
+            },
+          ],
+          createEmbeddedWallet: true,
+        });
+        walletAddress = newAccount.wallet.address;
+        await this.userService.create({
+          did: newAccount.id,
+          walletAddress: newAccount.wallet.address,
+        });
+      } else walletAddress = user.wallet.address;
+    }
     await User.findOneAndUpdate(
       { walletAddress: walletAddress },
       { $addToSet: { organizations: organizationId } },

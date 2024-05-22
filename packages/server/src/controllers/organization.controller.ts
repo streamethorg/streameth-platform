@@ -59,11 +59,11 @@ export class OrganizationController extends Controller {
   @Put('/member/{organizationId}')
   async updateOrgMembers(
     @Path() organizationId: string,
-    @Body() body: Pick<CreateOrganizationDto, 'walletAddress'>,
+    @Body() body: Pick<CreateOrganizationDto, 'address'>,
   ): Promise<IStandardResponse<void>> {
     const org = await this.organizationService.addOrgMember(
       organizationId,
-      body.walletAddress,
+      body.address,
     );
     return SendApiResponse('member added', org);
   }
