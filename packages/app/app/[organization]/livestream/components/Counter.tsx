@@ -1,5 +1,5 @@
 'use client'
-import SignUp from '@/components/plugins/SignUp'
+
 import { useEffect, useState } from 'react'
 
 const CounterBox = ({
@@ -12,10 +12,11 @@ const CounterBox = ({
   return (
     <div className="flex flex-col justify-between items-center p-2 text-black bg-white bg-opacity-70 rounded-lg">
       <div className="text-xl font-black md:text-6xl">{number}</div>
-      <div className="md:text-xl text">{lable}</div>
+      <div className="text-sm md:text-xl">{lable}</div>
     </div>
   )
 }
+
 const Counter = ({
   timeToStart,
 }: {
@@ -32,26 +33,33 @@ const Counter = ({
   }, [time])
 
   return (
-    <div className="relative z-10 flex flex-col justify-center items-center bg-black md:rounded-xl m-auto p-4">
-      <p className="text-2xl text-white uppercase">
-        Stream will start in
-      </p>
-      <div className="flex flex-row justify-center items-center m-8 space-x-2">
-        <CounterBox lable="days" number={Math.floor(time / 86400)} />
-        <span className="text-4xl text-white">:</span>
-        <CounterBox
-          lable="hours"
-          number={Math.floor((time % 86400) / 3600)}
-        />
-        <span className="text-4xl text-white">:</span>
-        <CounterBox
-          lable="minutes"
-          number={Math.floor((time % 3600) / 60)}
-        />
-        <span className="text-4xl text-white">:</span>
-        <CounterBox lable="seconds" number={Math.floor(time % 60)} />
+    <div className="flex flex-col justify-between items-center md:p-0">
+      <div className="flex flex-col justify-center items-center w-full bg-black md:rounded-xl aspect-video">
+        <p className="text-xl text-center text-white uppercase md:text-2xl">
+          Stream will start in
+        </p>
+        <div className="flex flex-wrap justify-center items-center m-4 space-y-2 space-x-2 md:m-8 md:space-y-0">
+          <CounterBox
+            lable="days"
+            number={Math.floor(time / 86400)}
+          />
+          <span className="text-2xl text-white md:text-4xl">:</span>
+          <CounterBox
+            lable="hours"
+            number={Math.floor((time % 86400) / 3600)}
+          />
+          <span className="text-2xl text-white md:text-4xl">:</span>
+          <CounterBox
+            lable="minutes"
+            number={Math.floor((time % 3600) / 60)}
+          />
+          <span className="text-2xl text-white md:text-4xl">:</span>
+          <CounterBox
+            lable="seconds"
+            number={Math.floor(time % 60)}
+          />
+        </div>
       </div>
-      {/* <SignUp event={""} /> */}
     </div>
   )
 }
