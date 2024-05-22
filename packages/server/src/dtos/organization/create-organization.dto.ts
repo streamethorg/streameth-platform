@@ -30,4 +30,6 @@ export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
   @IsOptional()
   @IsString()
   url?: string;
+
+  address?: string;
 }

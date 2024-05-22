@@ -9,6 +9,9 @@ import { IUser } from '@interfaces/user.interface';
 export class AuthController extends Controller {
   private authService = new AuthService();
 
+  /**
+   * @summary Login
+   */
   @SuccessResponse('201')
   @Post('login')
   async login(
@@ -16,5 +19,17 @@ export class AuthController extends Controller {
   ): Promise<IStandardResponse<{ user: IUser; token: string }>> {
     const user = await this.authService.login(body);
     return SendApiResponse('logged in', user);
+  }
+
+  /**
+   * @summary Verify auth token
+   */
+  @SuccessResponse('201')
+  @Post('/verify-token')
+  async verifyToken(
+    @Body() body: UserDto,
+  ): Promise<IStandardResponse<boolean>> {
+    const status = await this.authService.verifyToken(body.token);
+    return SendApiResponse('Success', status);
   }
 }

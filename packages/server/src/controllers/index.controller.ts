@@ -1,5 +1,16 @@
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import { Controller, Get, Route, Tags, Body, Post, Header } from 'tsoa';
+import {
+  Controller,
+  Get,
+  Route,
+  Tags,
+  Body,
+  Post,
+  Header,
+  UploadedFile,
+  FormField,
+  Security,
+} from 'tsoa';
 import startAITools from '@aitools/main';
 import { validateWebhook } from '@utils/validateWebhook';
 import StageService from '@services/stage.service';
@@ -8,6 +19,8 @@ import SessionService from '@services/session.service';
 import { getAsset } from '@utils/livepeer';
 import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
+import StorageService from '@utils/s3';
+import { HttpException } from '@exceptions/HttpException';
 
 @Tags('Index')
 @Route('')
@@ -15,10 +28,26 @@ export class IndexController extends Controller {
   private stageService = new StageService();
   private sessionService = new SessionService();
   private stateService = new StateService();
+  private storageService = new StorageService();
 
   @Get()
   async index(): Promise<IStandardResponse<string>> {
     return SendApiResponse('OK');
+  }
+
+  @Security('jwt')
+  @Post('/upload')
+  async uploadImges(
+    @UploadedFile() file: Express.Multer.File,
+    @FormField() directory: string,
+  ): Promise<IStandardResponse<string>> {
+    if (!file) throw new HttpException(400, 'no or invalid image');
+    const image = await this.storageService.uploadFile(
+      `${directory}/${file.originalname}`,
+      file.buffer,
+      file.mimetype,
+    );
+    return SendApiResponse('image uploaded', image);
   }
   @Post('/webhook')
   async webhook(
