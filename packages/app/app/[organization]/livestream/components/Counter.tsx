@@ -33,8 +33,8 @@ const Counter = ({
   }, [time])
 
   return (
-    <div className="flex z-10 flex-col justify-between items-center md:p-0">
-      <div className="flex flex-col justify-center items-center w-full rounded-xl md:bg-black backdrop-blur-sm backdrop-brightness-50 aspect-video md:backdrop-brightness-100">
+    <div className="flex z-10 flex-col justify-between items-center md:p-0 backdrop-blur-sm backdrop-brightness-50 md:backdrop-brightness-100">
+      <div className="flex flex-col justify-center items-center w-full rounded-xl md:bg-black aspect-video">
         <p className="text-xl text-center text-white uppercase md:text-2xl">
           Stream will start in
         </p>
