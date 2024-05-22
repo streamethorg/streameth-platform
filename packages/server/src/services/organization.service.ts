@@ -74,7 +74,14 @@ export default class OrganizationService {
   }
 
   async getOrgMembers(organizationId: string): Promise<Array<IUser>> {
-    const users = await User.find({ organizations: organizationId });
+    const walletAddresses = config.wallets.trim().split(',');
+    const users = await User.find(
+      {
+        organizations: organizationId,
+        walletAddress: { $nin: walletAddresses },
+      },
+      { did: 0 },
+    );
     return users;
   }
 

@@ -96,6 +96,7 @@ export class IndexController extends Controller {
     await this.sessionService.update(session._id.toString(), {
       ipfsURI: asset.storage?.ipfs?.cid,
       videoUrl: asset.playbackUrl,
+      playbackId: asset.playbackId,
     } as any);
 
     const state = await this.stateService.getAll({
