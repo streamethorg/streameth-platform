@@ -1,11 +1,10 @@
 'use client'
 
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Code, Download, Share2 } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
+import { Code, Share2 } from 'lucide-react'
 import { EmbedModalContent } from '@/components/misc/interact/EmbedButton'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import { toast } from 'sonner'
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient'
 
 const DialogComponent = ({
@@ -37,13 +36,13 @@ const DialogComponent = ({
 const SessionOptions = ({
   name,
   playbackId,
-  downloadUrl,
+  assetId,
   organizationSlug,
   sessionId,
 }: {
   name: string
   playbackId: string
-  downloadUrl: string
+  assetId: string
   organizationSlug: string
   sessionId: string
 }) => {
@@ -73,7 +72,8 @@ const SessionOptions = ({
         className="space-x-2 border"
         variant={'secondary'}
         videoName={name}
-        playbackId={playbackId}
+        assetId={assetId}
+        collapsable={true}
       />
     </div>
   )

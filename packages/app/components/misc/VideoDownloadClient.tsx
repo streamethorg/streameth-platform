@@ -3,15 +3,18 @@
 import { Button } from '@/components/ui/button'
 import { Download } from 'lucide-react'
 import { toast } from 'sonner'
+import { cn } from '@/lib/utils/utils'
+import Collection from '@/app/[organization]/collection/page'
 
 const VideoDownloadClient = ({
   videoName,
-  playbackId,
+  assetId,
   variant,
   className,
+  collapsable = false,
 }: {
   videoName: string
-  playbackId: string
+  assetId: string
   variant?:
     | 'primary'
     | 'default'
@@ -23,14 +26,35 @@ const VideoDownloadClient = ({
     | 'green'
     | 'link'
   className?: string
+  collapsable?: boolean
 }) => {
+  const fetchAssetDetails = async (assetId: string) => {
+    const response = await fetch(
+      `https://livepeer.studio/api/asset/${assetId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_LIVEPEER_API_KEY}`,
+        },
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch asset details')
+    }
+
+    const assetData = await response.json()
+    return assetData
+  }
+
   const handleDownload = async () => {
     try {
-      // TODO: downloadUrl works, but should not be hardcoded
-      const downloadUrl = `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/video`
+      const assetData = await fetchAssetDetails(assetId)
+      const downloadUrl = assetData.downloadUrl
+
       const response = await fetch(downloadUrl)
-      if (!response.ok)
+      if (!response.ok) {
         throw new Error('Network response was not ok.')
+      }
 
       const data = await response.blob()
       const blobUrl = window.URL.createObjectURL(data)
@@ -44,7 +68,7 @@ const VideoDownloadClient = ({
       link.parentNode!.removeChild(link)
       window.URL.revokeObjectURL(blobUrl)
 
-      toast.success('Succesfully downloaded the video')
+      toast.success('Successfully downloaded the video')
     } catch (err) {
       toast.error('Failed to download the video')
     }
@@ -56,7 +80,7 @@ const VideoDownloadClient = ({
       variant={variant}
       className={className}>
       <Download size={21} />
-      <p className="hidden xl:flex">Download</p>
+      <p className={cn(collapsable && 'hidden xl:flex')}>Download</p>
     </Button>
   )
 }

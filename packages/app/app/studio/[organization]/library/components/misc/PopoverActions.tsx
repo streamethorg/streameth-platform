@@ -20,17 +20,9 @@ export const PopoverActions = ({
   organizationSlug: string
   layout: eLayout
 }): ReactNode => {
-  const [url, setUrl] = useState('')
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setUrl(
-        `${
-          location.origin
-        }/${organizationSlug}/watch?session=${session._id.toString()}`
-      )
-    }
-  }, [organizationSlug, session])
+  const url = `${
+    location.origin
+  }/${organizationSlug}/watch?session=${session._id.toString()}`
 
   const handleCopy = () => {
     navigator.clipboard.writeText(session.ipfsURI as string)
@@ -66,17 +58,17 @@ export const PopoverActions = ({
                 className: 'space-x-2 w-full',
               })}>
               <Share2 />
-              <p className="">Share</p>
+              <p>Share</p>
             </span>
           </DialogTrigger>
           <ShareModalContent url={url} shareFor="video" />
         </Dialog>
-        {session.playbackId && (
+        {session.assetId && (
           <VideoDownloadClient
             className="space-x-2"
             videoName={`${session.name}.mp4`}
             variant="outline"
-            playbackId={session.playbackId}
+            assetId={session.assetId}
           />
         )}
         <DeleteAsset

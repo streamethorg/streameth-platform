@@ -62,7 +62,7 @@ const EditSession = async ({
             sessionId={params.session}
             organizationSlug={params.organization}
             playbackId={video.playbackId!}
-            downloadUrl={video.downloadUrl!}
+            assetId={session.assetId}
           />
         </div>
       </div>
