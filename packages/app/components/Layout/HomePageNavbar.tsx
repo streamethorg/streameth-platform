@@ -102,7 +102,7 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="flex sticky top-0 flex-row items-center bg-white lg:hidden z-[999999]">
+    <NavigationMenu className="flex sticky top-0 flex-row items-center bg-white lg:hidden z-50">
       {(searchVisible || menuVisible) && (
         <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
