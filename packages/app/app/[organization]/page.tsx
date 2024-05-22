@@ -56,7 +56,8 @@ const OrganizationHome = async ({
 
   const sortedStreams = allStreams.sort(
     (a, b) =>
-      new Date(a.streamDate as string).getTime() - new Date(b.streamDate as string).getTime()
+      new Date(a.streamDate as string).getTime() -
+      new Date(b.streamDate as string).getTime()
   )
 
   const stage = sortedStreams.length > 0 ? sortedStreams[0] : null
@@ -158,10 +159,10 @@ export async function generateMetadata(
     })
   ).filter((stream) => stream.published)
 
-
   const sortedStreams = allStreams.sort(
     (a, b) =>
-      new Date(a.streamDate as string).getTime() - new Date(b.streamDate as string).getTime()
+      new Date(a.streamDate as string).getTime() -
+      new Date(b.streamDate as string).getTime()
   )
 
   const stage = sortedStreams.length > 0 ? sortedStreams[0] : null
@@ -169,7 +170,7 @@ export async function generateMetadata(
   if (!stage) {
     return generalMetadata
   }
-  
+
   return livestreamMetadata({
     livestream: stage,
     organization,
