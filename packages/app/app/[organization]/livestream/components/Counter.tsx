@@ -33,12 +33,12 @@ const Counter = ({
   }, [time])
 
   return (
-    <div className="flex flex-col justify-between items-center md:p-0">
-      <div className="flex flex-col justify-center items-center w-full bg-black md:rounded-xl aspect-video">
+    <div className="flex z-10 flex-col justify-between items-center md:p-0">
+      <div className="flex flex-col justify-center items-center w-full rounded-xl md:bg-black backdrop-blur-sm backdrop-brightness-50 aspect-video md:backdrop-brightness-100">
         <p className="text-xl text-center text-white uppercase md:text-2xl">
           Stream will start in
         </p>
-        <div className="flex flex-wrap justify-center items-center m-4 space-y-2 space-x-2 md:m-8 md:space-y-0">
+        <div className="flex flex-wrap justify-center items-center m-4 space-x-2 md:m-8 md:space-y-0">
           <CounterBox
             lable="days"
             number={Math.floor(time / 86400)}
