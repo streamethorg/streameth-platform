@@ -23,6 +23,8 @@ export default class AuthService {
         walletAddress: user.wallet.address,
         did: user.id,
       });
+      throw new HttpException(404, 'User not found');
+      //existingUser = await this.userService.create(data);
     }
     let token = jwt.sign(
       { id: existingUser.walletAddress },

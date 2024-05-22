@@ -5,7 +5,7 @@ import Counter from './Counter'
 import { PlayerWithControls } from '@/components/ui/Player'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
-
+import Image from 'next/image'
 const Player = async ({ stage }: { stage: IExtendedStage }) => {
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
@@ -27,7 +27,17 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
   return (
     <div className="flex flex-col w-full h-full">
       {timeLeft > 0 ? (
-        <Counter timeToStart={timeLeft} />
+        <div className="flex relative aspect-video rounded-xl w-full h-full items-center justify-center">
+          {stage.thumbnail && (
+            <Image
+              className="z-[0] rounded-xl"
+              fill={true}
+              src={stage.thumbnail}
+              alt="Livepeer Logo"
+            />
+          )}
+          <Counter timeToStart={timeLeft} />
+        </div>
       ) : (
         <div className="relative w-full h-full">
           <PlayerWithControls

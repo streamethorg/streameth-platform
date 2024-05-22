@@ -39,13 +39,19 @@ export const ConnectWalletButton = ({
       getSession()
     },
     onError: (error) => {
-      deleteSession()
+      storeSession({
+        token: '',
+        address: '',
+      })
     },
   })
 
   const { logout } = useLogout({
     onSuccess: () => {
-      deleteSession()
+      storeSession({
+        token: '',
+        address: '',
+      })
     },
   })
 
