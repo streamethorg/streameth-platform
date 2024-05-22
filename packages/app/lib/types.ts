@@ -155,6 +155,7 @@ export interface IExtendedStage
 export interface IExtendedSpeaker
   extends Omit<ISpeaker, 'organizationId'> {}
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
+  _id: string
   organizations: IExtendedOrganization[]
 }
 export interface IExtendedChat extends Omit<IChat, '_id'> {

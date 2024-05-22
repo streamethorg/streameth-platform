@@ -1,6 +1,8 @@
 const shouldAnalyzeBundles = process.env.ANALYZE === true
 /** @type {import('next').NextConfig} */
 let nextConfig = {
+   assetPrefix: "https://streameth.org",
+
   redirects: async () => [
     {
       source: '/',
@@ -69,8 +71,7 @@ let nextConfig = {
           value: 'watch.protocol.berlin',
         },
       ],
-      destination:
-        'https://watch.protocol.berlin/ethberlin',
+      destination: 'https://watch.protocol.berlin/ethberlin',
       permanent: true,
     },
     {
@@ -81,10 +82,9 @@ let nextConfig = {
           value: 'launch.scroll.io',
         },
       ],
-      destination:
-        'https://launch.scroll.io/scroll',
+      destination: 'https://launch.scroll.io/scroll',
       permanent: true,
-    }
+    },
   ],
 
   async headers() {
@@ -121,6 +121,7 @@ let nextConfig = {
     return config
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

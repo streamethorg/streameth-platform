@@ -26,7 +26,7 @@ const ArchiveVideos = async ({
 
   if (videos.pagination.totalItems === 0) {
     return (
-      <div className="flex flex-col justify-center items-center mt-[25%]">
+      <div className="flex flex-col justify-center items-center h-full w-full mt-10">
         <FileQuestion size={65} />
         <span className="mt-2 text-xl bolt">
           No videos have been found
