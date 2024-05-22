@@ -31,6 +31,11 @@ export const generateId = (key: string) => {
     .toLowerCase();
 };
 
+export const isEthereumAddress = (address: string): boolean => {
+  const ethereumAddressRegex = /^(0x)?[0-9a-fA-F]{40}$/;
+  return ethereumAddressRegex.test(address);
+};
+
 export const PUBLIC_PATH = '../../../public';
 export const IMAGE_BASE_PATH = path.join(process.cwd(), 'public');
 export const BASE_PATH = path.join(process.cwd(), '../../data');
