@@ -19,6 +19,10 @@ import { fetchOrganizationStages } from '@/lib/services/stageService'
 import Player from './livestream/components/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import ChannelDescription from './components/ChannelDescription'
+import {
+  livestreamMetadata,
+  generalMetadata,
+} from '@/lib/utils/metadata'
 
 export async function generateStaticParams() {
   const organizations = await fetchOrganizations()
@@ -50,24 +54,18 @@ const OrganizationHome = async ({
     })
   ).filter((stream) => stream.published)
 
-  const nextStreamNotToday = allStreams?.filter(
-    (stream) =>
-      stream?.streamDate && new Date(stream.streamDate) > new Date()
+  const sortedStreams = allStreams.sort(
+    (a, b) =>
+      new Date(a.streamDate as string).getTime() -
+      new Date(b.streamDate as string).getTime()
   )
 
-  const activeStream = allStreams?.filter(
-    (stream) => stream?.streamSettings?.isActive
-  )
-
-  const playerActive = !!activeStream[0] || !!nextStreamNotToday[0]
-  const stage = activeStream[0]
-    ? activeStream[0]
-    : nextStreamNotToday[0]
+  const stage = sortedStreams.length > 0 ? sortedStreams[0] : null
 
   return (
     <div className="mx-auto space-y-4 w-full max-w-7xl md:p-4">
       <div className="relative w-full">
-        {playerActive ? (
+        {stage ? (
           <>
             <Player stage={stage} />
             <div className="px-4 w-full md:p-0">
@@ -143,33 +141,40 @@ export async function generateMetadata(
   { params }: ChannelPageParams,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const organizationInfo = await fetchOrganization({
+  if (!params.organization) {
+    return generalMetadata
+  }
+
+  const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
 
-  if (!organizationInfo) {
-    return {
-      title: 'Organization not found',
-      description: 'Organization not found',
-    }
+  if (!organization) {
+    return generalMetadata
   }
 
-  const imageUrl = organizationInfo.logo
-  try {
-    return {
-      title: organizationInfo.name,
-      description: organizationInfo.description,
-      openGraph: {
-        images: [imageUrl],
-      },
-    }
-  } catch (e) {
-    console.log(e)
-    return {
-      title: organizationInfo.name,
-      description: organizationInfo.description,
-    }
+  const allStreams = (
+    await fetchOrganizationStages({
+      organizationId: organization._id,
+    })
+  ).filter((stream) => stream.published)
+
+  const sortedStreams = allStreams.sort(
+    (a, b) =>
+      new Date(a.streamDate as string).getTime() -
+      new Date(b.streamDate as string).getTime()
+  )
+
+  const stage = sortedStreams.length > 0 ? sortedStreams[0] : null
+
+  if (!stage) {
+    return generalMetadata
   }
+
+  return livestreamMetadata({
+    livestream: stage,
+    organization,
+  })
 }
 
 export default OrganizationHome
