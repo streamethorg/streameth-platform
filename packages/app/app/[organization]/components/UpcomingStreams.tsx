@@ -25,6 +25,7 @@ const UpcomingStreams = async ({
   livestreams = livestreams.filter((livestream) => {
     return livestream.published
   })
+  const org = organizationSlug === "livepeertv" ? "tv": organizationSlug
 
   return (
     <>
@@ -37,7 +38,7 @@ const UpcomingStreams = async ({
                 name={livestream.name}
                 date={livestream.streamDate as string}
                 thumbnail={livestream.thumbnail ?? ''}
-                link={`/${organizationSlug}/livestream?stage=${livestream?._id?.toString()}`}
+                link={`/${org}/livestream?stage=${livestream?._id?.toString()}`}
               />
             </div>
           </React.Fragment>
