@@ -6,7 +6,7 @@
     "start": "node ./dist/server/src/server.js",
     "dev": "nodemon --config nodemon.json",
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
-    "test": "mocha --timeout 30000 --require esbuild-register --extension ts test/index.ts",
+    "test": "mocha",
     "format": "prettier --write \"src/**/*.ts\"",
     "generate:routes": "tsoa spec-and-routes"
   },
@@ -62,7 +62,6 @@
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.12.11",
-    "@types/supertest": "^2.0.16",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "chai": "^5.1.1",
@@ -71,7 +70,6 @@
     "esbuild": "^0.19.9",
     "esbuild-register": "^3.5.0",
     "esbuild-runner": "^2.2.2",
-    "jest": "^28.1.1",
     "lint-staged": "^13.0.3",
     "mocha": "^10.4.0",
     "node-config": "^0.0.2",
@@ -79,7 +77,6 @@
     "nodemon": "^3.0.2",
     "pm2": "^5.2.0",
     "prettier": "^3.1.1",
-    "supertest": "^6.2.4",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
