@@ -23,7 +23,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
     new Date(stage.streamDate as string).getTime() - Date.now()
 
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
-
+  console.log(buildPlaybackUrl(stream.playbackId))
   return (
     <div className="flex flex-col w-full h-full">
       {timeLeft > 0 ? (
@@ -43,9 +43,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
           <PlayerWithControls
             src={[
               {
-                src: buildPlaybackUrl(
-                  stream.playbackId
-                ) as `${string}m3u8`,
+                src: "https://livepeercdn.studio/hls/f9f6f4cv566jslqd/index.m3u8" as `${string}m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
