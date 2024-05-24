@@ -13,6 +13,11 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
 import EventSelect from './components/eventSelect'
 import { fetchAllSessions } from '@/lib/data'
+import {
+  generalMetadata,
+  livestreamMetadata,
+  organizationMetadata,
+} from '@/lib/utils/metadata'
 
 export default async function ArchivePage({
   params,
@@ -53,7 +58,7 @@ export default async function ArchivePage({
   )
 
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className="flex flex-col w-full h-full">
       {organization.banner && (
         <div className="hidden relative w-full h-full md:block max-h-[200px] aspect-video">
           <Image
@@ -96,31 +101,19 @@ export async function generateMetadata(
   { params }: ChannelPageParams,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const organizationInfo = await fetchOrganization({
+  if (!params.organization) {
+    return generalMetadata
+  }
+
+  const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
 
-  if (!organizationInfo) {
-    return {
-      title: 'Organization not found',
-      description: 'Organization not found',
-    }
+  if (!organization) {
+    return generalMetadata
   }
 
-  const imageUrl = organizationInfo.logo
-  try {
-    return {
-      title: organizationInfo.name,
-      description: organizationInfo.description,
-      openGraph: {
-        images: [imageUrl],
-      },
-    }
-  } catch (e) {
-    console.log(e)
-    return {
-      title: organizationInfo.name,
-      description: organizationInfo.description,
-    }
-  }
+  return organizationMetadata({
+    organization,
+  })
 }

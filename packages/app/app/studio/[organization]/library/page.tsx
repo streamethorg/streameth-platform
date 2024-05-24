@@ -90,11 +90,15 @@ const Library = async ({
 
   return (
     <div className="flex flex-col w-full h-full bg-white">
-      <Card className="p-4 shadow-none lg:border-none bg-secondary">
+      <Card
+        style={{
+          backgroundImage: `url(/backgrounds/livestreamBg.png)`,
+        }}
+        className="p-4 bg-no-repeat bg-cover border-none shadow-none">
         <CardHeader>
           <CardTitle>Assets</CardTitle>
           <CardDescription>
-            Upload and manage pre recorded videos
+            Upload and manage pre-recorded videos
           </CardDescription>
         </CardHeader>
         <CardFooter>
