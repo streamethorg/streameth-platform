@@ -43,7 +43,9 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
           <PlayerWithControls
             src={[
               {
-                src:  buildPlaybackUrl(stream.playbackId) as `${string} m3u8`,
+                src: buildPlaybackUrl(
+                  stream.playbackId
+                ) as `${string} m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',

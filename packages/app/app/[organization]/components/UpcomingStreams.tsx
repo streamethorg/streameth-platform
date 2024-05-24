@@ -25,7 +25,8 @@ const UpcomingStreams = async ({
   livestreams = livestreams.filter((livestream) => {
     return livestream.published
   })
-  const org = organizationSlug === "livepeertv" ? "tv": organizationSlug
+  const org =
+    organizationSlug === 'livepeertv' ? 'tv' : organizationSlug
 
   return (
     <>
