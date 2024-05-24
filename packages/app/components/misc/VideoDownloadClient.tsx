@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Download } from 'lucide-react'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils/utils'
+import { apiUrl, cn } from '@/lib/utils/utils'
 import Collection from '@/app/[organization]/collection/page'
 
 const VideoDownloadClient = ({
@@ -28,28 +28,21 @@ const VideoDownloadClient = ({
   className?: string
   collapsable?: boolean
 }) => {
-  const fetchAssetDetails = async (assetId: string) => {
+  const fetchDownloadUrl = async (assetId: string) => {
     const response = await fetch(
-      `https://livepeer.studio/api/asset/${assetId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_LIVEPEER_API_KEY}`,
-        },
-      }
+      `${apiUrl()}/streams/asset/${assetId}`
     )
 
     if (!response.ok) {
       throw new Error('Failed to fetch asset details')
     }
 
-    const assetData = await response.json()
-    return assetData
+    return (await response.json()).data
   }
 
   const handleDownload = async () => {
     try {
-      const assetData = await fetchAssetDetails(assetId)
-      const downloadUrl = assetData.downloadUrl
+      const downloadUrl = await fetchDownloadUrl(assetId)
 
       const response = await fetch(downloadUrl)
       if (!response.ok) {
