@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
 import {
   IExtendedEvent,
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
 } from '../types'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
+
 const BASE_IMAGE = 'https://streameth.org/streameth_banner.png'
 
 export const generalMetadata: Metadata = {
@@ -40,6 +39,46 @@ export const generalMetadata: Metadata = {
       'en-US': '/en-US',
     },
   },
+}
+
+export const organizationMetadata = ({
+  organization,
+}: {
+  organization: IExtendedOrganization
+}): Metadata => {
+  const imageUrl = organization.banner
+    ? organization.banner
+    : BASE_IMAGE
+
+  return {
+    title: `${organization.name} | StreamETH`,
+    description: `${organization.description}`,
+    metadataBase: new URL('https://streameth.org'),
+    openGraph: {
+      title: `${organization.name} | StreamETH`,
+      siteName: 'StreamETH',
+      description: `Archive of ${organization.description}`,
+      images: {
+        url: imageUrl,
+        alt: 'StreamETH Logo',
+      },
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${organization.name} | StreamETH`,
+      description: `${organization.description}`,
+      images: {
+        url: imageUrl,
+        alt: 'StreamETH Logo',
+      },
+    },
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en-US': '/en-US',
+      },
+    },
+  }
 }
 
 export const archiveMetadata = ({
