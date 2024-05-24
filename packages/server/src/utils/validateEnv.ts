@@ -34,7 +34,7 @@ const validateEnv = () => {
     WALLET_ADDRESSES: str(),
     PRIVY_APP_ID: str(),
     PRIVY_SECRET_KEY: str(),
-    TEST_URL: str()
+    TEST_URL: str(),
   });
 };
 

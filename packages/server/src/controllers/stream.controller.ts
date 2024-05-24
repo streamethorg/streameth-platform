@@ -75,7 +75,7 @@ export class StreamController extends Controller {
   }
 
   /**
-   * @summary  Get Viddo url
+   * @summary  Get Video url
    */
   @SuccessResponse('200')
   @Get('asset/{assetId}')
