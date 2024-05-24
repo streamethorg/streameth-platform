@@ -30,9 +30,7 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
             </AspectRatio>
           </div>
 
-          <span className="hover:underline line-clamp-3">
-            {item.name}
-          </span>
+          <span className="line-clamp-3">{item.name}</span>
         </div>
       </TableCell>
       <TableCell>

@@ -29,6 +29,12 @@ export const config = {
     chatId: validatedEnv.TELEGRAM_CHAT_ID,
   },
   storage: {
+    s3: {
+      name: validatedEnv.BUCKET_NAME,
+      host: validatedEnv.BUCKET_URL,
+      secretKey: validatedEnv.SPACES_SECRET,
+      apiKey: validatedEnv.SPACES_KEY,
+    },
     thirdWebSecretKey: validatedEnv.THIRDWEB_SECRET_KEY,
   },
   livepeer: {

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth'
 import { deleteSession, storeSession } from '@/lib/actions/auth'
 import { apiUrl } from '@/lib/utils/utils'
+import { Loader2 } from 'lucide-react'
 
 interface ConnectWalletButtonProps {
   className?: string
@@ -13,7 +14,7 @@ export const ConnectWalletButton = ({
   btnText = 'Sign in',
   className,
 }: ConnectWalletButtonProps) => {
-  const { authenticated } = usePrivy()
+  const { ready, authenticated } = usePrivy()
 
   const getSession = async () => {
     const privyToken = localStorage.getItem('privy:token')
@@ -59,7 +60,13 @@ export const ConnectWalletButton = ({
     <Button
       onClick={authenticated ? logout : login}
       className={className}>
-      {authenticated ? 'Sign Out' : btnText}
+      {!ready ? (
+        <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+      ) : authenticated ? (
+        'Sign Out'
+      ) : (
+        btnText
+      )}
     </Button>
   )
 }

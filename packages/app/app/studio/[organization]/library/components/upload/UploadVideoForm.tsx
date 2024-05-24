@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -156,12 +156,13 @@ const UploadVideoForm = ({
         />
         <div className="flex justify-end space-x-2">
           <DialogClose>
-            <Button
-              variant="secondary"
-              className="text-black border-2"
+            <span
+              className={`
+                ${buttonVariants({ variant: 'secondary' })}
+                  'text-black border-2`}
               onClick={() => handleCancel()}>
               Cancel
-            </Button>
+            </span>
           </DialogClose>
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}

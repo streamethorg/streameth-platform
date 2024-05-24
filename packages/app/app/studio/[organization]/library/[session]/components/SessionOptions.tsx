@@ -1,11 +1,11 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Code, Download, Share2 } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
+import { Code, Share2 } from 'lucide-react'
 import { EmbedModalContent } from '@/components/misc/interact/EmbedButton'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import { toast } from 'sonner'
+import VideoDownloadClient from '@/components/misc/VideoDownloadClient'
 
 const DialogComponent = ({
   text,
@@ -19,10 +19,14 @@ const DialogComponent = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant={'secondary'} className="space-x-2 border-2">
+        <span
+          className={buttonVariants({
+            variant: 'secondary',
+            className: 'space-x-2 border',
+          })}>
           {Icon}
           <p className="hidden xl:flex">{text}</p>
-        </Button>
+        </span>
       </DialogTrigger>
       {Modal}
     </Dialog>
@@ -32,40 +36,16 @@ const DialogComponent = ({
 const SessionOptions = ({
   name,
   playbackId,
-  downloadUrl,
+  assetId,
   organizationSlug,
   sessionId,
 }: {
   name: string
   playbackId: string
-  downloadUrl: string
+  assetId: string
   organizationSlug: string
   sessionId: string
 }) => {
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(downloadUrl)
-      if (!response.ok)
-        throw new Error('Network response was not ok.')
-
-      const data = await response.blob()
-      const blobUrl = window.URL.createObjectURL(data)
-      const link = document.createElement('a')
-
-      link.href = blobUrl
-      link.setAttribute('download', name)
-      document.body.appendChild(link)
-
-      link.click()
-      link.parentNode!.removeChild(link)
-      window.URL.revokeObjectURL(blobUrl)
-
-      toast.success('Succesfully downloaded the video')
-    } catch (err) {
-      toast.error('Failed to download the video')
-    }
-  }
-
   return (
     <div className="flex justify-end items-center my-2 space-x-2">
       <DialogComponent
@@ -73,7 +53,7 @@ const SessionOptions = ({
         Icon={<Share2 size={20} />}
         Modal={
           <ShareModalContent
-            url={`${window.location.origin}/${organizationSlug}/watch?session=${sessionId}`}
+            url={`${location.origin}/${organizationSlug}/watch?session=${sessionId}`}
             shareFor="video"
           />
         }
@@ -88,13 +68,13 @@ const SessionOptions = ({
           />
         }
       />
-      <Button
-        onClick={handleDownload}
+      <VideoDownloadClient
+        className="space-x-2 border"
         variant={'secondary'}
-        className="space-x-2 border border-gray-300">
-        <Download size={19} />
-        <p className="hidden xl:flex">Download</p>
-      </Button>
+        videoName={name}
+        assetId={assetId}
+        collapsable={true}
+      />
     </div>
   )
 }

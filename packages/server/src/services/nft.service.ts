@@ -4,7 +4,10 @@ import { INftCollection } from '@interfaces/nft.collection.interface';
 import NftCollection from '@models/nft.collection.model';
 import SessionService from './session.service';
 import StageService from './stage.service';
-import { uploadMultipleMetadata, uploadSingleMetadata } from '@utils/storage';
+import {
+  uploadMultipleMetadata,
+  uploadSingleMetadata,
+} from '@utils/nft.storage';
 import Stage from '@models/stage.model';
 import Session from '@models/session.model';
 
