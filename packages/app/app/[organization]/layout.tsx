@@ -12,15 +12,16 @@ const Layout = async ({
   params: { organization: string }
   children: React.ReactNode
 }) => {
+  const org = params.organization === "livepeertv" ? "tv": params.organization
   const pages = [
     {
       name: 'Home',
-      href: `/${params.organization}`,
+      href: `/${org}`,
       bgColor: 'bg-muted',
     },
     {
       name: 'Videos',
-      href: `/${params.organization}/videos`,
+      href: `/${org}/videos`,
       bgColor: 'bg-muted',
     },
   ]
