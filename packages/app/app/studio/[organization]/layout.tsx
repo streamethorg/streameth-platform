@@ -24,10 +24,6 @@ const Layout = async ({
     return <AuthorizationMessage />
   }
   const userData = await fetchUserAction({})
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  })
-  if (!organization) return null
 
   return (
     <div className="flex flex-row w-screen h-screen">
@@ -46,15 +42,17 @@ const Layout = async ({
             userData?.organizations,
             params.organization
           ) ? (
-            <div className="flex flex-col justify-center items-center h-screen">
-              You do not belong to this organization, switch
-              organization or create a new one
+            <div className="flex flex-col justify-center items-center h-screen text-center w-4/5 mx-auto">
+              Organization not found or You do not belong to this
+              organization, switch organization or create a new one
               <div className="flex gap-5 mt-5">
                 <SwitchOrganization
                   organizations={userData?.organizations}
                 />
                 <Link href="/studio/create">
-                  <Button>Create Organization</Button>
+                  <Button variant="primary">
+                    Create Organization
+                  </Button>
                 </Link>
               </div>
             </div>

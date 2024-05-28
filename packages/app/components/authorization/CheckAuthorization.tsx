@@ -15,12 +15,12 @@ const CheckAuthorization = async () => {
     headers: { 'Content-Type': 'application/json' },
   })
   const resData = await res.json()
-
   const isAuthorized =
     !!userAddress?.value &&
     !!privyToken?.value &&
     !!userSession?.value &&
     resData.data
+
 
   return isAuthorized
 }
