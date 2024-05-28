@@ -16,7 +16,7 @@ import { validateWebhook } from '@utils/validateWebhook';
 import StageService from '@services/stage.service';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import SessionService from '@services/session.service';
-import { getAsset } from '@utils/livepeer';
+import { getAsset, updateAsset } from '@utils/livepeer';
 import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
 import StorageService from '@utils/s3';
@@ -93,8 +93,9 @@ export class IndexController extends Controller {
     if (!session) {
       return SendApiResponse('No session found', null, '400');
     }
+    const ipfs = await updateAsset(id)
     await this.sessionService.update(session._id.toString(), {
-      ipfsURI: asset.storage?.ipfs?.cid,
+      ipfsURI: ipfs,
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
     } as any);
