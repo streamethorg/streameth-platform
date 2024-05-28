@@ -19,7 +19,8 @@ const CheckAuthorization = async () => {
     !!userAddress?.value &&
     !!privyToken?.value &&
     !!userSession?.value &&
-    !!resData.data
+    resData.data
+
 
   return isAuthorized
 }
