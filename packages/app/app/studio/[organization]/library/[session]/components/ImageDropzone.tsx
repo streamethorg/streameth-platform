@@ -1,11 +1,19 @@
 'use client'
 
 import Image from 'next/image'
-import { FileUp, ImageUp, X } from 'lucide-react'
+import { ImageUp, X } from 'lucide-react'
 import { getImageUrl } from '@/lib/utils/utils'
 import { toast } from 'sonner'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, forwardRef } from 'react'
 import { useDropzone } from 'react-dropzone'
+
+interface ImageDropzoneProps {
+  id?: string
+  placeholder?: string
+  onChange: (files: string | null) => void
+  value: string | null | undefined
+  path: string
+}
 
 function getImageData(file: File) {
   const dataTransfer = new DataTransfer()
@@ -17,113 +25,109 @@ function getImageData(file: File) {
   return { files, displayUrl }
 }
 
-export default function ImageDropzone({
-  onChange,
-  value,
-  path,
-  ...rest
-}: {
-  id?: string
-  placeholder?: string
-  onChange: (files: string | null) => void
-  value: string | null | undefined
-  path: string
-}) {
-  const [preview, setPreview] = useState(
-    value ? getImageUrl('/' + path + '/' + value) : ''
-  )
-  const [isUploading, setIsUploading] = useState(false)
+const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
+  (props, ref) => {
+    const { onChange, value, path, ...rest } = props
+    const [preview, setPreview] = useState(
+      value ? getImageUrl('/' + path + '/' + value) : ''
+    )
+    const [isUploading, setIsUploading] = useState(false)
 
-  const onSubmit = async (file: File) => {
-    if (!file) return
-    setIsUploading(true)
-    try {
-      const data = new FormData()
-      data.set('file', file)
-      data.set('path', path)
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      })
-      if (!res.ok) {
-        throw new Error(await res.text())
+    const onSubmit = async (file: File) => {
+      if (!file) return
+      setIsUploading(true)
+      try {
+        const data = new FormData()
+        data.set('file', file)
+        data.set('path', path)
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: data,
+        })
+        if (!res.ok) {
+          throw new Error(await res.text())
+        }
+        onChange(getImageUrl('/' + path + '/' + file.name))
+        toast.success('Image uploaded successfully')
+        setIsUploading(false)
+      } catch (e: any) {
+        // Handle errors here
+        setIsUploading(false)
+        toast.error('Error uploading image')
+        console.error(e)
       }
-      onChange(getImageUrl('/' + path + '/' + file.name))
-      toast.success('Image uploaded successfully')
-      setIsUploading(false)
-    } catch (e: any) {
-      // Handle errors here
-      setIsUploading(false)
-      toast.error('Error uploading image')
-      console.error(e)
     }
-  }
 
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      if (acceptedFiles.length > 0) {
-        const { displayUrl } = getImageData(acceptedFiles[0])
+    const onDrop = useCallback(
+      (acceptedFiles: File[]) => {
+        if (acceptedFiles.length > 0) {
+          const { displayUrl } = getImageData(acceptedFiles[0])
 
-        setPreview(displayUrl)
-        onSubmit(acceptedFiles[0])
-      }
-    },
-    [onChange]
-  )
+          setPreview(displayUrl)
+          onSubmit(acceptedFiles[0])
+        }
+      },
+      [onChange]
+    )
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      'image/*': ['.png', '.jpg', '.jpeg'],
-    },
-    maxSize: 5 * 1024 * 1024, // 5 MB
-    maxFiles: 1,
-    onDrop,
-  })
+    const { getRootProps, getInputProps } = useDropzone({
+      accept: {
+        'image/*': ['.png', '.jpg', '.jpeg'],
+      },
+      maxSize: 5 * 1024 * 1024, // 5 MB
+      maxFiles: 1,
+      onDrop,
+    })
 
-  return (
-    <>
-      {isUploading ? (
-        <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
-          <div className="text-sm">Uploading image...</div>
-        </div>
-      ) : preview ? (
-        <>
-          <X
-            size={24}
-            className="ml-auto rounded-md cursor-pointer hover:bg-gray-300 z-[9999999999994]"
-            onClick={() => {
-              onChange(null)
-              setPreview('')
-            }}
-          />
+    return (
+      <div ref={ref} {...rest}>
+        {isUploading ? (
           <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
-            <Image
-              src={preview ?? value}
-              alt="preview"
-              quality={50}
-              width={150}
-              height={150}
+            <div className="text-sm">Uploading image...</div>
+          </div>
+        ) : preview ? (
+          <>
+            <X
+              size={24}
+              className="ml-auto rounded-md cursor-pointer hover:bg-gray-300 z-[9999999999994]"
+              onClick={() => {
+                onChange(null)
+                setPreview('')
+              }}
             />
+            <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
+              <Image
+                src={preview ?? value}
+                alt="preview"
+                quality={50}
+                width={150}
+                height={150}
+              />
+            </div>
+          </>
+        ) : (
+          <div
+            {...getRootProps()}
+            className="flex z-10 flex-col justify-center items-center space-y-4 h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200">
+            <ImageUp size={35} />
+            <input {...getInputProps()} />
+            <div className="mx-4">
+              <p>
+                Drag and drop your thumbnail to upload... Or just
+                click here!
+              </p>
+              <p>
+                Maximum image file size is 1MB. Best resolution of
+                1920 x 1080. Aspect ratio of 16:9
+              </p>
+            </div>
           </div>
-        </>
-      ) : (
-        <div
-          {...getRootProps()}
-          className="flex z-10 flex-col justify-center items-center space-y-4 h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200">
-          <ImageUp size={35} />
-          <input {...getInputProps()} />
-          <div className="mx-4">
-            <p>
-              Drag and drop your thumbnail to upload... Or just click
-              here!
-            </p>
-            <p>
-              Maximum image file size is 1MB. Best resolution of 1920
-              x 1080. Aspect ratio of 16:9
-            </p>
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
+        )}
+      </div>
+    )
+  }
+)
+
+ImageDropzone.displayName = 'ImageDropzone'
+
+export default ImageDropzone

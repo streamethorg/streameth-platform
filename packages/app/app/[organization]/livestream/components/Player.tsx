@@ -23,14 +23,14 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
     new Date(stage.streamDate as string).getTime() - Date.now()
 
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
-
+  console.log(buildPlaybackUrl(stream.playbackId))
   return (
     <div className="flex flex-col w-full h-full">
       {timeLeft > 0 ? (
-        <div className="flex relative aspect-video rounded-xl w-full h-full items-center justify-center">
+        <div className="flex relative aspect-video rounded-xl w-full h-full items-end justify-end">
           {stage.thumbnail && (
             <Image
-              className="z-[0] rounded-xl"
+              className="z-[0] lg:rounded-xl"
               fill={true}
               src={stage.thumbnail}
               alt="Livepeer Logo"
@@ -45,7 +45,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
               {
                 src: buildPlaybackUrl(
                   stream.playbackId
-                ) as `${string}m3u8`,
+                ) as `${string} m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',

@@ -121,7 +121,7 @@ const EditSessionFrom = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageUpload
-                  className="aspect-video max-w-[480px] relative rounded-xl bg-neutrals-300"
+                  className="relative rounded-xl aspect-video max-w-[480px] bg-neutrals-300"
                   aspectRatio={16 / 9}
                   path={`sessions/${organizationSlug}`}
                   {...field}
@@ -139,7 +139,7 @@ const EditSessionFrom = ({
             TriggerComponent={
               <Button
                 variant={'destructive-outline'}
-                className="space-x-2">
+                className="space-x-2 hover:bg-gray-100">
                 <Trash2 />
                 <p>Delete video</p>
               </Button>
@@ -148,8 +148,7 @@ const EditSessionFrom = ({
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}
             type="submit"
-            variant={'primary'}
-            className="border-2">
+            variant={'primary'}>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 w-4 h-4 animate-spin" />

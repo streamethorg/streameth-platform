@@ -11,8 +11,6 @@ const ProviderContext = ({
     <PrivyProvider
       appId={process.env.NEXT_PUBLIC_PRIVY_ID!}
       config={{
-        // @ts-expect-error headless is an internal prop
-        headless: true,
         // Customize Privy's appearance in your app
         appearance: {
           theme: 'light',

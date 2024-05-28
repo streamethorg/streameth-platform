@@ -11,42 +11,61 @@ import { toast } from 'sonner'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
+import {
+  ISession,
+  SessionType,
+} from 'streameth-new-server/src/interfaces/session.interface'
+import { IExtendedSession } from '@/lib/types'
+import {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select'
 const CreateClipButton = ({
   playbackId,
   selectedRecording,
   stageId,
-  session,
   organizationId,
+  sessions,
+  custom,
 }: {
   playbackId: string
   selectedRecording: string
   stageId?: string
   organizationId: string
-  session?: any
+  sessions: IExtendedSession[]
+  custom?: boolean
 }) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [name, setName] = React.useState('')
   const { startTime, setStartTime, endTime, setEndTime } =
     useClipContext()
+  const [sessionId, setSessionId] = React.useState('')
 
   const { handleTermChange } = useSearchParams()
   const handleCreateClip = async () => {
-    if (!session) {
-      session = await createSessionAction({
-        session: {
-          name,
-          description: 'Clip',
-          start: new Date().getTime(),
-          end: new Date().getTime(),
-          stageId,
-          organizationId,
-          speakers: [],
-          type: SessionType['clip'],
-        },
+    let customSession: ISession = {
+      name,
+      description: 'Clip',
+      start: new Date().getTime(),
+      end: new Date().getTime(),
+      stageId,
+      organizationId,
+      speakers: [],
+      type: SessionType['clip'],
+    }
+    if (custom) {
+      customSession = await createSessionAction({
+        session: { ...customSession },
       })
     }
 
+    const session = custom
+      ? customSession
+      : sessions.find((s) => s._id === sessionId)
     if (selectedRecording && startTime && endTime && session) {
       setIsLoading(true)
       createClip({
@@ -60,6 +79,7 @@ const CreateClipButton = ({
           setIsLoading(false)
           setStartTime(null)
           setEndTime(null)
+          setSessionId('')
           toast.success('Clip created')
         })
         .catch(() => {
@@ -70,7 +90,7 @@ const CreateClipButton = ({
           handleTermChange([
             {
               key: 'previewId',
-              value: session._id,
+              value: session._id as string,
             },
           ])
           setIsLoading(false)
@@ -80,13 +100,29 @@ const CreateClipButton = ({
 
   return (
     <div className="flex flex-row space-x-2">
-      <div className="flex flex-col space-y-2">
-        <Label>Clip name</Label>
-        <Input
-          className=" bg-white"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <div className="flex flex-col space-y-2 w-[150px]">
+        <Label>{custom ? 'Session name' : 'Select Session'}</Label>
+        {custom ? (
+          <Input
+            className=" bg-white"
+            placeholder="Enter session name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        ) : (
+          <Select onValueChange={(value) => setSessionId(value)}>
+            <SelectTrigger className="bg-white">
+              <SelectValue placeholder="Select a session" />
+            </SelectTrigger>
+            <SelectContent className="bg-white max-w-[400px] !justify-start">
+              {sessions?.map((session) => (
+                <SelectItem key={session._id} value={session._id}>
+                  {session.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
       </div>
       <Button
         disabled={
@@ -94,7 +130,9 @@ const CreateClipButton = ({
           !selectedRecording ||
           !startTime ||
           !endTime ||
-          !name
+          custom
+            ? !name
+            : !sessionId
         }
         onClick={handleCreateClip}
         variant="primary"
