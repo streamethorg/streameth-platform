@@ -26,7 +26,7 @@ interface Item {
 const renderLogo = (logo?: string) => (
   <Image
     className="mr-1"
-    src={logo!}
+    src={logo ?? '/logo.png'}
     alt="logo"
     width={20}
     height={20}
@@ -54,7 +54,7 @@ export default function Combobox({
 }) {
   const [open, setOpen] = React.useState(false)
   const orgLogo = items.find(
-    (item) => item[valueKey as keyof Item] === value
+    (item) => item[labelKey as keyof Item] === value
   )?.logo
 
   return (

@@ -17,11 +17,12 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
+import { usePrivy } from '@privy-io/react-auth'
 
 const Support = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [messageSent, setMessageSent] = useState(false)
-  const { isSignedIn } = useSIWE()
+  const { authenticated } = usePrivy()
   const [open, setOpen] = useState(false)
   const form = useForm<z.infer<typeof supportSchema>>({
     resolver: zodResolver(supportSchema),
@@ -35,7 +36,7 @@ const Support = () => {
 
   function onSubmit(values: z.infer<typeof supportSchema>) {
     setIsLoading(true)
-    if (!isSignedIn) {
+    if (!authenticated) {
       toast.error('No wallet address found')
       return
     }
@@ -87,7 +88,7 @@ const Support = () => {
             </a>
           </p>
 
-          {!isSignedIn ? (
+          {!authenticated ? (
             <div>
               <p className="py-2">Sign in to send us a message</p>
               <ConnectWalletButton />
