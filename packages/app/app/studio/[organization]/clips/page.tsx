@@ -64,10 +64,6 @@ const SessionSidebar = async ({
   event?: IExtendedEvent
   sessions: IExtendedSession[]
 }) => {
-  // const sessions = await fetchAllSessions({
-  //   stageId: currentStage._id,
-  // })
-
   return (
     <div className="w-1/3 h-full bg-background bg-white border-l">
       <CardTitle className="bg-white p-2 border-b text-lg">
@@ -299,20 +295,6 @@ const EventClips = async ({
                   </div>
                 </TabsContent>
               </Tabs>
-              {/* <div className="flex flex-row w-full space-x-2 items-center justify-center">
-                <TimeSetter label="Clip start" type="start" />
-                <TimeSetter label="Clip end" type="end" />
-
-                <CreateClipButton
-                  selectedRecording={currentRecording}
-                  playbackId={
-                    stageRecordings.parentStream?.playbackId ?? ''
-                  }
-                  stageId={currentStage?._id}
-                  organizationId={organization._id as string}
-                  sessions={sessions.sessions}
-                />
-              </div> */}
             </div>
           </ClipProvider>
         </div>
