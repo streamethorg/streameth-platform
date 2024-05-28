@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { ClipsPageParams } from '@/lib/types'
+import { ClipsPageParams, IExtendedSession } from '@/lib/types'
 import SelectSession from './components/SelectSession'
 import RecordingSelect from './components/RecordingSelect'
 import TimeSetter from './components/TimeSetter'
@@ -21,6 +21,12 @@ import { fetchSession } from '@/lib/services/sessionService'
 import { IExtendedEvent, IExtendedStage } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '@/components/ui/tabs'
 
 const ClipContainer = ({
   children,
@@ -52,13 +58,15 @@ const SkeletonSidebar = () => (
 const SessionSidebar = async ({
   currentStage,
   event,
+  sessions,
 }: {
   currentStage: IExtendedStage
   event?: IExtendedEvent
+  sessions: IExtendedSession[]
 }) => {
-  const sessions = await fetchAllSessions({
-    stageId: currentStage._id,
-  })
+  // const sessions = await fetchAllSessions({
+  //   stageId: currentStage._id,
+  // })
 
   return (
     <div className="w-1/3 h-full bg-background bg-white border-l">
@@ -66,10 +74,7 @@ const SessionSidebar = async ({
         Livestream clips
       </CardTitle>
       <div className="h-[calc(100%-50px)] overflow-y-scroll">
-        <ClipsSessionList
-          event={event}
-          sessions={sessions.sessions}
-        />
+        <ClipsSessionList event={event} sessions={sessions} />
       </div>
     </div>
   )
@@ -204,6 +209,10 @@ const EventClips = async ({
     eventId: currentStage.eventId as string,
   })
 
+  const sessions = await fetchAllSessions({
+    stageId: currentStage._id,
+  })
+
   const previewAsset = await (async function () {
     if (previewId) {
       const session = await fetchSession({
@@ -246,9 +255,54 @@ const EventClips = async ({
               selectedStreamSession={currentRecording}
             />
             <div className="flex flex-col space-y-4">
-              <div className="flex flex-row w-full space-x-2 items-center justify-center">
+              <Tabs defaultValue={'sessions'}>
+                <TabsList className="border-y border-grey w-full !justify-start gap-5">
+                  <TabsTrigger className="px-0" value="sessions">
+                    Clip Session
+                  </TabsTrigger>
+                  <TabsTrigger value="custom">
+                    Create Custom Clip
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="sessions">
+                  <div className="flex flex-row w-full space-x-2 items-center justify-center">
+                    <TimeSetter label="Clip start" type="start" />
+                    <TimeSetter label="Clip end" type="end" />
+
+                    <CreateClipButton
+                      selectedRecording={currentRecording}
+                      playbackId={
+                        stageRecordings.parentStream?.playbackId ?? ''
+                      }
+                      stageId={currentStage?._id}
+                      organizationId={organization._id as string}
+                      sessions={sessions.sessions}
+                    />
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="custom">
+                  <div className="flex flex-row w-full space-x-2 items-center justify-center">
+                    <TimeSetter label="Clip start" type="start" />
+                    <TimeSetter label="Clip end" type="end" />
+
+                    <CreateClipButton
+                      selectedRecording={currentRecording}
+                      playbackId={
+                        stageRecordings.parentStream?.playbackId ?? ''
+                      }
+                      stageId={currentStage?._id}
+                      organizationId={organization._id as string}
+                      sessions={sessions.sessions}
+                      custom
+                    />
+                  </div>
+                </TabsContent>
+              </Tabs>
+              {/* <div className="flex flex-row w-full space-x-2 items-center justify-center">
                 <TimeSetter label="Clip start" type="start" />
                 <TimeSetter label="Clip end" type="end" />
+
                 <CreateClipButton
                   selectedRecording={currentRecording}
                   playbackId={
@@ -256,8 +310,9 @@ const EventClips = async ({
                   }
                   stageId={currentStage?._id}
                   organizationId={organization._id as string}
+                  sessions={sessions.sessions}
                 />
-              </div>
+              </div> */}
             </div>
           </ClipProvider>
         </div>
@@ -266,6 +321,7 @@ const EventClips = async ({
         <SessionSidebar
           currentStage={currentStage}
           event={event ?? undefined}
+          sessions={sessions.sessions}
         />
       </Suspense>
     </ClipContainer>
