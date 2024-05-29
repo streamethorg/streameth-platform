@@ -29,7 +29,6 @@ export async function fetchStages({
   organizationId: string
 }): Promise<IExtendedStage[]> {
   try {
-    console.log(organizationId)
     const stages = await fetch(
       `${apiUrl()}/stages/organization/${organizationId}`,
       {
@@ -89,7 +88,6 @@ export async function createStage({
   })
 
   if (!response.ok) {
-    console.log(await response.json())
     throw 'Error creating stage'
   }
   return (await response.json()).data
@@ -145,7 +143,7 @@ export const updateStage = async ({
   authToken: string
 }): Promise<IExtendedStage> => {
   const { _id, createdAt, updatedAt, __v, ...rest } = stage
-
+  console.log('_id: ' + _id)
   try {
     const response = await fetch(`${apiUrl()}/stages/${_id}`, {
       method: 'PUT',
@@ -157,13 +155,9 @@ export const updateStage = async ({
     })
 
     if (!response.ok) {
-      console.log('error in updateStage', await response.json(), rest)
       throw new Error('Error updating stage')
     }
-
-    const responseData = await response.json()
-    const updatedStage: IExtendedStage = responseData.data
-    return updatedStage
+    return (await response.json()).data
   } catch (error) {
     console.error('Error updating stage:', error)
     throw error

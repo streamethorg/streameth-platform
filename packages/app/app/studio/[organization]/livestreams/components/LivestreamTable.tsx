@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { IExtendedStage } from '@/lib/types'
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
 import Link from 'next/link'
 import React from 'react'
@@ -19,11 +19,15 @@ import { Button } from '@/components/ui/button'
 import { ScissorsLineDashed } from 'lucide-react'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
+import CreateLivestreamModal from './CreateLivestreamModal'
+import EditLivestream from './EditLivestream'
 
 const LivestreamTable = ({
   streams,
   organizationSlug,
+  organization,
 }: {
+  organization: IExtendedOrganization
   streams: IExtendedStage[]
   organizationSlug: string
 }) => {
@@ -91,6 +95,10 @@ const LivestreamTable = ({
               </TableCell>
               <TableCell>
                 <div className="flex gap-3 items-center">
+                  <EditLivestream
+                    organizationSlug={organizationSlug}
+                    livestream={stream}
+                  />
                   <Link
                     href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
                     <Button
