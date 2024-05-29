@@ -21,7 +21,6 @@ const CheckAuthorization = async () => {
     !!userSession?.value &&
     resData.data
 
-
   return isAuthorized
 }
 

@@ -4,6 +4,7 @@ import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Footer from '@/components/Layout/Footer'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
+import Support from '@/components/misc/Support'
 
 const Layout = async ({
   params,
@@ -43,7 +44,10 @@ const Layout = async ({
         pages={pages}
         showSearchBar
       />
-      <div className="flex-grow w-full h-full">{children}</div>
+      <div className="flex-grow w-full h-full">
+        {children}
+        <Support />
+      </div>
       <div className="sticky mb-5 top-[100vh]">
         <Footer />
       </div>

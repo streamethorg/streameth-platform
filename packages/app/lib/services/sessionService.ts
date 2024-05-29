@@ -68,8 +68,15 @@ export const updateSession = async ({
   session: IExtendedSession
   authToken: string
 }): Promise<ISessionModel> => {
-  const modifiedSession = (({ _id, slug, autoLabels, ...rest }) =>
-    rest)(session)
+  const modifiedSession = (({
+    _id,
+    slug,
+    autoLabels,
+    createdAt,
+    updatedAt,
+    __v,
+    ...rest
+  }) => rest)(session)
 
   try {
     const response = await fetch(

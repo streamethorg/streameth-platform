@@ -21,7 +21,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { updateSessionAction } from '@/lib/actions/sessions'
+import {
+  updateAssetAction,
+  updateSessionAction,
+} from '@/lib/actions/sessions'
 import ProcessingSkeleton from './misc/ProcessingSkeleton'
 import { PopoverActions } from './misc/PopoverActions'
 import {
@@ -29,6 +32,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
+import GetHashButton from './GetHashButton'
 
 const TableCells = ({
   item,
@@ -161,7 +166,7 @@ const TableCells = ({
             </Copy>
           </div>
         ) : (
-          'No IPFS Url available'
+          <GetHashButton session={item} />
         )}
       </TableCell>
       <TableCell>

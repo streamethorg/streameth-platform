@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 import { Copy, FilePenLine, Share2, Trash2 } from 'lucide-react'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
+import GetHashButton from '../GetHashButton'
 
 export const PopoverActions = ({
   session,
@@ -41,15 +42,18 @@ export const PopoverActions = ({
             <p className="">Edit</p>
           </Button>
         </Link>
-        {layout === eLayout.grid && (
-          <Button
-            variant={'outline'}
-            className="space-x-2"
-            onClick={() => handleCopy()}>
-            <Copy />
-            <p>Copy IPFS Hash</p>
-          </Button>
-        )}
+        {layout === eLayout.grid &&
+          (session.ipfsURI ? (
+            <Button
+              variant={'outline'}
+              className="space-x-2"
+              onClick={() => handleCopy()}>
+              <Copy />
+              <p>Copy IPFS Hash</p>
+            </Button>
+          ) : (
+            <GetHashButton session={session} />
+          ))}
         <Dialog>
           <DialogTrigger>
             <span

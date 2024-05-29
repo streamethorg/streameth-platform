@@ -80,6 +80,7 @@ const Livestreams = async ({
 
       {stages.length > 0 ? (
         <LivestreamTable
+          organization={organization}
           organizationSlug={params?.organization}
           streams={stages as IExtendedStage[]}
         />
