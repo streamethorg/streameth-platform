@@ -59,7 +59,7 @@ const LivestreamEmbedCode = ({
                 Copy Code
               </div>
             </div>
-            <p className="rounded-lg bg-input p-2 w-full text-[12px]">
+            <p className="rounded-lg bg-input p-2 w-full text-[12px] overflow-auto">
               {generatedEmbedCode}
             </p>
           </DialogContent>
