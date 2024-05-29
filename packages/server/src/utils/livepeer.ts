@@ -136,6 +136,29 @@ export const getAsset = async (assetId: string) => {
   }
 };
 
+export const updateAsset = async (assetId: string) => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'patch',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+      body: JSON.stringify({
+        storage: {
+          ipfs: true,
+        },
+      }),
+    });
+    await response.json();
+    setTimeout(() => {}, 10000);
+    const asset = await getAsset(assetId);
+    return asset.storage.ipfs.cid;
+  } catch (e) {
+    console.error(`Error updating asset:`, e);
+  }
+};
+
 export const getVideoPhaseAction = async (assetId: string) => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
