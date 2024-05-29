@@ -143,6 +143,8 @@ export interface IExtendedSession
   _id: string
   nftCollections?: string[]
   createdAt?: string
+  updatedAt?: string
+  __v?: string
 }
 export interface IExtendedStage
   extends Omit<IStage, '_id' | 'nftCollections'> {

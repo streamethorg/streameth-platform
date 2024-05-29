@@ -17,6 +17,25 @@ const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
 })
 
+export const updateAssetAction = async (
+  session: IExtendedSession
+) => {
+  const asset = await livepeer.asset.update(
+    session.assetId as string,
+    {
+      storage: {
+        ipfs: true,
+      },
+    }
+  )
+  await updateSessionAction({
+    session: {
+      ...session,
+      ipfsURI: asset.asset?.storage?.ipfs?.nftMetadata?.cid,
+    },
+  })
+}
+
 export const createSessionAction = async ({
   session,
 }: {
@@ -57,6 +76,7 @@ export const createClip = async ({
     startTime: start,
   })
   console.log('Clip created:', clip)
+
   const updatedSession = {
     ...session,
     assetId: clip.object?.asset.id,
@@ -64,6 +84,7 @@ export const createClip = async ({
     start: new Date().getTime(),
     end: new Date().getTime(),
     type: SessionType['clip'],
+    // ipfsURI: updateAsset?.asset?.storage?.ipfs as string,
   }
 
   // TODO
