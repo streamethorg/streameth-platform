@@ -1,6 +1,7 @@
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
+import Support from '@/components/misc/Support'
 
 const StudioLayout = async (props: { children: React.ReactNode }) => {
   const isAuthorized = await CheckAuthorization()
@@ -17,6 +18,7 @@ const StudioLayout = async (props: { children: React.ReactNode }) => {
       />
       <div className="top-[74px] flex flex-col h-[calc(100vh-74px)]">
         {props.children}
+        <Support />
       </div>
     </div>
   )
