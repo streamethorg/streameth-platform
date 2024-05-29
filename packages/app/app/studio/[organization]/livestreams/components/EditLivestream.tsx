@@ -54,7 +54,6 @@ const EditLivestream = ({
 
   const handleModalClose = () => {
     setOpen(false)
-    form.reset()
   }
 
   const dateInput = formatDate(
