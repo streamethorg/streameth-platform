@@ -28,7 +28,6 @@ export const ConnectWalletButton = ({
       headers: { 'Content-Type': 'application/json' },
     })
     const resData = await res.json()
-
     storeSession({
       token: resData?.data?.token,
       address: resData?.data?.user?.walletAddress,
@@ -40,19 +39,13 @@ export const ConnectWalletButton = ({
       getSession()
     },
     onError: (error) => {
-      storeSession({
-        token: '',
-        address: '',
-      })
+      deleteSession()
     },
   })
 
   const { logout } = useLogout({
     onSuccess: () => {
-      storeSession({
-        token: '',
-        address: '',
-      })
+      deleteSession()
     },
   })
 
@@ -70,3 +63,16 @@ export const ConnectWalletButton = ({
     </Button>
   )
 }
+;[
+  {
+    guid: 'c0105a4c-9b81-558a-b4a2-b193c27d482f',
+    id: 307,
+    code: 'ZQWHEL',
+    public_name: 'Stanley Qiufan CHEN',
+    avatar:
+      'https://cfp.ducttape.events/media/avatars/WechatIMG44_mGHjpPV.jpeg',
+    biography:
+      'Chen Qiufan (a.k.a. Stanley Chan) is an award-winning speculative fiction author, creative producer, research fellow, and early investor. His works include Waste Tide and AI 2041: Ten Visions for Our Future (co-authored with Dr. Kai-Fu Lee).',
+    answers: [],
+  },
+]
