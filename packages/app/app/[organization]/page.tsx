@@ -52,7 +52,12 @@ const OrganizationHome = async ({
     await fetchOrganizationStages({
       organizationId: organization._id,
     })
-  ).filter((stream) => stream.published)
+  ).filter(
+    (stream) =>
+      stream.published &&
+      (stream.streamSettings?.isActive ||
+        new Date(stream?.streamDate as string) > new Date())
+  )
 
   const sortedStreams = allStreams.sort(
     (a, b) =>
