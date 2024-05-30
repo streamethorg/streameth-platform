@@ -41,7 +41,7 @@ const CreateClipButton = ({
 }) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [name, setName] = React.useState('')
-  const { startTime, setStartTime, endTime, setEndTime } =
+  const { startTime, endTime } =
     useClipContext()
   const [sessionId, setSessionId] = React.useState('')
 
@@ -77,8 +77,6 @@ const CreateClipButton = ({
       })
         .then(() => {
           setIsLoading(false)
-          setStartTime(null)
-          setEndTime(null)
           setSessionId('')
           toast.success('Clip created')
         })
@@ -99,8 +97,8 @@ const CreateClipButton = ({
   }
 
   return (
-    <div className="flex flex-row space-x-2">
-      <div className="flex flex-col space-y-2 w-[150px]">
+    <div className="flex flex-row space-x-2 flex-grow">
+      <div className="flex flex-col flex-grow">
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
           <Input

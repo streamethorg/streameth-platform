@@ -7,7 +7,7 @@ type PlaybackStatus = {
 }
 
 type PlaybackTime = {
-  displayTime: string
+  displayTime: number
   unix: number
 }
 
@@ -16,13 +16,13 @@ type ClipContextType = {
   setPlaybackStatus: React.Dispatch<
     React.SetStateAction<PlaybackStatus | null>
   >
-  startTime: PlaybackTime | null
+  startTime: PlaybackTime
   setStartTime: React.Dispatch<
-    React.SetStateAction<PlaybackTime | null>
+    React.SetStateAction<PlaybackTime>
   >
-  endTime: PlaybackTime | null
+  endTime: PlaybackTime
   setEndTime: React.Dispatch<
-    React.SetStateAction<PlaybackTime | null>
+    React.SetStateAction<PlaybackTime>
   >
 }
 
@@ -37,10 +37,14 @@ export const ClipProvider = ({
 }) => {
   const [playbackStatus, setPlaybackStatus] =
     useState<PlaybackStatus | null>(null)
-  const [startTime, setStartTime] = useState<PlaybackTime | null>(
-    null
-  )
-  const [endTime, setEndTime] = useState<PlaybackTime | null>(null)
+  const [startTime, setStartTime] = useState<PlaybackTime>({
+    displayTime: 0,
+    unix: 0,
+  })
+  const [endTime, setEndTime] = useState<PlaybackTime>({
+    displayTime: 0,
+    unix: 0,
+  })
 
   return (
     <ClipContext.Provider

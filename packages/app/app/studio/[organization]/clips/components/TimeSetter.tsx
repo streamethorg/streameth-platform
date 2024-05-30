@@ -23,7 +23,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
     if (playbackStatus) {
       const timeSetting = {
         unix: Date.now() - playbackStatus.offset,
-        displayTime: playbackStatus.progress.toFixed(0).toString(),
+        displayTime: playbackStatus.progress,
       }
 
       if (type === 'start') {
@@ -35,7 +35,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
   }
 
   return (
-    <div className="flex-grow">
+    <div className="flex-grow max-w-[150px]">
       <Label>{label}</Label>
       <div className="flex flex-row border rounded relative h-full">
         <Input

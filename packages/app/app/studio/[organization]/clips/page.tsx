@@ -231,7 +231,7 @@ const EventClips = async ({
           sessionId={previewId}
         />
       )}
-      <div className="flex flex-col w-full p-8 ">
+      <div className="flex flex-col w-full px-4">
         <div className="flex flex-row justify-center space-x-4 my-4 w-full">
           <SelectSession
             stages={stages}
@@ -303,7 +303,9 @@ const EventClips = async ({
         <SessionSidebar
           currentStage={currentStage}
           event={event ?? undefined}
-          sessions={sessions.sessions}
+          sessions={sessions.sessions.filter(
+            (session) => session.assetId
+          )}
         />
       </Suspense>
     </ClipContainer>

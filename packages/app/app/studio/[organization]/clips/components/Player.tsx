@@ -13,13 +13,13 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   selectedStreamSession,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const { setPlaybackStatus } = useClipContext()
+  const { setPlaybackStatus, playbackStatus, setStartTime, startTime, endTime, setEndTime } = useClipContext()
   const playbackRef = useRef<{ progress: number; offset: number }>({
     progress: 0,
     offset: 0,
   })
-
   const [error, setError] = useState<string | null>(null)
+  const [dragging, setDragging] = useState<string | null>(null)
 
   const src = `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${selectedStreamSession}/output.m3u8`
 
@@ -42,7 +42,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         }
       })
 
-      // set error
+      // Set error handling
       hls.on(Hls.Events.ERROR, (event, data) => {
         setError(data.details)
       })
@@ -55,30 +55,110 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
           setPlaybackStatus({ ...playbackRef.current })
         }
       }, 1000)
+
+      return () => {
+        hls.destroy()
+        clearInterval(intervalId)
+      }
     }
   }, [src, setPlaybackStatus])
 
-  if (error) {
-    return (
-      <div className=" aspect-video text-white bg-black flex flex-col items-center justify-center">
-        <p>
-          Clips can only be created for recordings that are less than
-          7 days old
-        </p>
-      </div>
-    )
+  useEffect(() => {
+    if (videoRef.current && videoRef.current.duration && playbackStatus) {
+      setEndTime({
+        displayTime: videoRef.current.duration,
+        unix: Date.now() - playbackStatus.offset,
+      })
+    }
+  }, [videoRef.current?.duration])
+
+  const handleMouseDown = (marker: string) => {
+    setDragging(marker)
   }
+
+  const handleMouseMove = (event: MouseEvent) => {
+    if (dragging && videoRef.current && playbackStatus) {
+      const rect = videoRef.current.getBoundingClientRect()
+      const pos = ((event.clientX - rect.left) / rect.width) * videoRef.current.duration
+      if (dragging === 'start') {
+        if (pos >= 0 && pos < endTime.displayTime) {
+          setStartTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: pos,
+          })
+          videoRef.current.currentTime = pos
+        }
+      } else if (dragging === 'end') {
+        if (pos > startTime.displayTime && pos <= videoRef.current.duration) {
+          setEndTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: pos,
+          })
+          
+          videoRef.current.currentTime = pos
+        }
+      }
+    }
+  }
+
+  const handleMouseUp = () => {
+    setDragging(null)
+  }
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mouseup', handleMouseUp)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [dragging, startTime, endTime])
+
+  const getMarkerPosition = (time: number) => {
+    if (videoRef.current && videoRef.current.duration) {
+      return (time / videoRef.current.duration) * 100
+    }
+    return 0
+  }
+
+
   return (
-    <video
-      ref={videoRef}
-      autoPlay={false}
-      controls
-      style={{
-        borderRadius: '8px',
-        width: '100%',
-        height: 'auto',
-        background: 'black',
-      }}></video>
+    <div className="p-4 bg-white rounded-lg shadow-lg">
+      <div className="relative mb-4">
+        <video
+          ref={videoRef}
+          autoPlay={false}
+          controls={true}
+          className="w-full rounded-lg sticky top-0"
+        ></video>
+      </div>
+      <div className="relative h-5 bg-gray-300 rounded-full">
+        <div
+          className="absolute h-5 bg-blue rounded-full"
+          style={{
+            left: `${getMarkerPosition(startTime.displayTime)}%`,
+            right: `${100 - getMarkerPosition(endTime.displayTime)}%`,
+          }}
+        ></div>
+        <div
+          className="absolute top-[-5px] w-8 h-8 bg-green-500 rounded-full cursor-pointer"
+          style={{
+            left: `${getMarkerPosition(startTime.displayTime)}%`,
+          }}
+          onMouseDown={() => handleMouseDown('start')}
+        ></div>
+        <div
+          className="absolute top-[-5px] w-8 h-8 bg-red-500 rounded-full cursor-pointer"
+          style={{
+            left: `${getMarkerPosition(endTime.displayTime)}%`,
+          }}
+          onMouseDown={() => handleMouseDown('end')}
+        ></div>
+      </div>
+      <p>Clip Start: {startTime.displayTime.toFixed(2)} seconds</p>
+      <p>Clip End: {endTime.displayTime.toFixed(2)} seconds</p>
+    </div>
   )
 }
 
