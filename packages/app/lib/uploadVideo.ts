@@ -25,6 +25,8 @@ const uploadVideo = (
       const percentage = Math.round(
         (event.loaded / event.total) * 100
       )
+
+      console.log('I am at ', percentage, '%')
       onProgress(percentage)
     }
   }

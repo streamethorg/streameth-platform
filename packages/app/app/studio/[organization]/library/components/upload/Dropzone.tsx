@@ -24,21 +24,33 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
     const [isUploading, setIsUploading] = useState(false)
     const [assetId, setAssetId] = useState<string | null>(null)
 
-    const startUpload = async (file: File) => {
-      setIsUploading(true)
-      const uploadUrl = await getUrlAction(file.name)
-      if (uploadUrl) {
-        uploadVideo(
-          file,
-          uploadUrl.url,
-          abortControllerRef,
-          (percentage) => setProgress(percentage),
-          async () => {
-            setAssetId(uploadUrl.assetId)
-          }
-        )
-      }
-    }
+    const handleProgress = useCallback((percentage: number) => {
+      setProgress(percentage)
+    }, [])
+
+    const handleSuccess = useCallback(() => {
+      setIsUploading(false)
+    }, [])
+
+    const startUpload = useCallback(
+      async (file: File) => {
+        setIsUploading(true)
+        const uploadUrl = await getUrlAction(file.name)
+        if (uploadUrl) {
+          uploadVideo(
+            file,
+            uploadUrl.url,
+            abortControllerRef,
+            handleProgress,
+            async () => {
+              setAssetId(uploadUrl.assetId)
+              handleSuccess()
+            }
+          )
+        }
+      },
+      [abortControllerRef, handleProgress, handleSuccess]
+    )
 
     const onDrop = useCallback(
       (acceptedFiles: File[]) => {
@@ -46,14 +58,14 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
           startUpload(acceptedFiles[0])
         }
       },
-      [onChange]
+      [startUpload]
     )
 
     useEffect(() => {
       if (assetId) {
         onChange(assetId)
       }
-    }, [isUploading, assetId])
+    }, [assetId, onChange])
 
     const { getRootProps, getInputProps } = useDropzone({
       accept: {
@@ -80,12 +92,13 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
       return (
         <div
           ref={ref}
-          className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
+          className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed aspect-video">
           <div className="flex relative justify-center items-center w-full h-full">
             <div className="absolute top-0 left-0 w-full h-full bg-gray-300 rounded-md opacity-50"></div>
             <div
               className="absolute top-0 left-0 h-full bg-purple-400 rounded-md"
-              style={{ width: `${progress}%` }}></div>
+              style={{ width: `${progress}%` }}
+            />
             <div className="flex z-10 flex-col justify-center items-center">
               <p>{progress}%</p>
               <p>Uploading. Please wait...</p>
