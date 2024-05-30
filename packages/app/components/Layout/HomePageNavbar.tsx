@@ -14,8 +14,8 @@ import useUserData from '@/lib/hooks/useUserData'
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
 import { IExtendedOrganization } from '@/lib/types'
 import { cn } from '@/lib/utils/utils'
-import Support from '../misc/Support'
 import { Button } from '@/components/ui/button'
+
 const getPages = (
   pages: Page[],
   isSignedIn: boolean,
@@ -163,6 +163,7 @@ const MobileNavBar = ({
         </div>
         {menuVisible && (
           <Navbar
+            organization={currentOrganization}
             pages={getPages(
               pages,
               isSignedIn,
@@ -230,12 +231,14 @@ const PCNavBar = ({
           />
         )}
         <Navbar
+          organization={currentOrganization}
           pages={getPages(
             pages,
             isSignedIn,
             userData?.organizations?.[0]?.slug
           )}
         />
+
         <ConnectWalletButton />
       </div>
     </NavigationMenu>
