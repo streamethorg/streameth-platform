@@ -17,11 +17,13 @@ const Preview = ({
   asset,
   organizationId,
   sessionId,
+  organizationSlug,
 }: {
   initialIsOpen: boolean
   asset: Asset
   organizationId: string
   sessionId: string
+  organizationSlug: string
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const { handleTermChange } = useSearchParams()
@@ -97,7 +99,10 @@ const Preview = ({
               Delete
             </Button>
 
-            <ShareButton />
+            <ShareButton
+              url={`${location.origin}/${organizationSlug}/watch?session=${sessionId}`}
+              shareFor="video"
+            />
           </DialogFooter>
         </div>
       </DialogContent>

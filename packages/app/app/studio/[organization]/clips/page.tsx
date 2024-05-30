@@ -229,6 +229,7 @@ const EventClips = async ({
           organizationId={organization._id as string}
           asset={previewAsset}
           sessionId={previewId}
+          organizationSlug={params.organization}
         />
       )}
       <div className="flex flex-col w-full p-8 ">
