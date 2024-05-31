@@ -68,10 +68,9 @@ export const getUrlAction = async (
       },
     })
 
-    if (!asset.object) {
+    if (!asset) {
       return null
     }
-
     const params: UrlActionParams = {
       tusEndpoint: asset.object.tusEndpoint,
       url: asset.object.url,
