@@ -27,7 +27,7 @@ const AddTeamMembers = ({
   const form = useForm<z.infer<typeof addOrganizationMemberSchema>>({
     resolver: zodResolver(addOrganizationMemberSchema),
     defaultValues: {
-      walletAddress: '',
+      memberAddress: '',
     },
   })
   function onSubmit(
@@ -35,7 +35,7 @@ const AddTeamMembers = ({
   ) {
     setIsAddingMember(true)
     addOrganizationMemberAction({
-      memberWalletAddress: values.walletAddress,
+      memberAddress: values.memberAddress,
       organizationId,
     })
       .then((response) => {
@@ -74,7 +74,7 @@ const AddTeamMembers = ({
           /> */}
           <FormField
             control={form.control}
-            name="walletAddress"
+            name="memberAddress"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
