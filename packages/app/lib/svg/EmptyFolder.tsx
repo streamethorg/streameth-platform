@@ -1,10 +1,13 @@
 import React from 'react'
 
-const EmptyFolder: React.FC<React.SVGProps<SVGSVGElement>> = () => {
+const EmptyFolder: React.FC<React.SVGProps<SVGSVGElement>> = ({
+  width = '200',
+  height = '122',
+}) => {
   return (
     <svg
-      width="200"
-      height="122"
+      width={width}
+      height={height}
       viewBox="0 0 200 122"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
