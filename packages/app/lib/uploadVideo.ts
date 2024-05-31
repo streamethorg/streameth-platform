@@ -1,51 +1,45 @@
 import { type MutableRefObject } from 'react'
+import { Upload } from 'tus-js-client'
 
 const uploadVideo = (
   video: File,
   url: string,
   abortControllerRef: MutableRefObject<AbortController>,
   onProgress: (percentage: number) => void,
-  onSucess: () => void
+  onSuccess: () => void
 ) => {
-  const xhr = new XMLHttpRequest()
+  const upload = new Upload(video, {
+    endpoint: url,
+    uploadSize: video.size,
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_LIVEPEER_API_KEY}`,
+    },
+    metadata: {
+      filename: video.name,
+      filetype: video.type,
+    },
+    onError: (error) => {
+      console.log('An error occurred:', error)
+    },
+    onProgress: (bytesUploaded, bytesTotal) => {
+      const percentage = Math.round(
+        (bytesUploaded / bytesTotal) * 100
+      )
+      onProgress(percentage)
+    },
+    onSuccess: () => {
+      console.log('Upload successful!')
+      onSuccess()
+    },
+  })
 
+  abortControllerRef.current = new AbortController()
   abortControllerRef.current.signal.addEventListener('abort', () => {
     console.log('Aborting upload')
-    xhr.abort()
+    upload.abort()
   })
-  xhr.open('PUT', url, true)
-  xhr.setRequestHeader(
-    'Authorization',
-    `Bearer ${process.env.NEXT_PUBLIC_LIVEPEER_API_KEY}`
-  )
-  xhr.setRequestHeader('Content-Type', video.type)
 
-  xhr.upload.onprogress = (event) => {
-    if (event.lengthComputable) {
-      const percentage = Math.round(
-        (event.loaded / event.total) * 100
-      )
-
-      console.log('I am at ', percentage, '%')
-      onProgress(percentage)
-    }
-  }
-
-  xhr.onload = () => {
-    if (xhr.status >= 200 && xhr.status < 300) {
-      console.log('Video uploaded successfully!')
-      onSucess()
-      return
-    }
-    console.error(`Upload failed with status: ${xhr.status}`)
-    console.error(xhr.response)
-  }
-
-  xhr.onerror = () => {
-    console.error('Error during video upload:', xhr.statusText)
-  }
-
-  xhr.send(video)
+  upload.start()
 }
 
 export default uploadVideo

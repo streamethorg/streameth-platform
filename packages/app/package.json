@@ -87,6 +87,7 @@
     "siwe": "^2.1.4",
     "sonner": "^1.4.0",
     "streameth-new-server": "3.0.0",
+    "tus-js-client": "^4.1.0",
     "usehooks-ts": "^2.9.1",
     "vaul": "^0.8.0",
     "viem": "2.x",

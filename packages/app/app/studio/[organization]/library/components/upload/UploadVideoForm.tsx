@@ -54,7 +54,6 @@ const UploadVideoForm = ({
       assetId: '',
     },
   })
-  console.log('Rendering form')
 
   const handleCancel = () => {
     abortControllerRef.current.abort()
