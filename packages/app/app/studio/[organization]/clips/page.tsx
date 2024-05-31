@@ -27,6 +27,7 @@ import {
   TabsTrigger,
   TabsContent,
 } from '@/components/ui/tabs'
+import EmptyFolder from '@/lib/svg/EmptyFolder'
 
 const ClipContainer = ({
   children,
@@ -65,12 +66,26 @@ const SessionSidebar = async ({
   sessions: IExtendedSession[]
 }) => {
   return (
-    <div className="w-1/3 h-full bg-background bg-white border-l">
+    <div className="max-w-[300px] w-full h-full bg-background bg-white border-l">
       <CardTitle className="bg-white p-2 border-b text-lg">
         Livestream clips
       </CardTitle>
       <div className="h-[calc(100%-50px)] overflow-y-scroll">
-        <ClipsSessionList event={event} sessions={sessions} />
+        {sessions.length > 0 ? (
+          <ClipsSessionList event={event} sessions={sessions} />
+        ) : (
+          <div className="flex flex-col justify-center items-center space-y-6 h-full">
+            <EmptyFolder width={100} height={60} />
+            <div className="flex flex-col items-center">
+              <p className="text-xl font-bold">
+                No clips created yet
+              </p>
+              <p className=" text-gray-500">
+                Upload your first video to get started!
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -232,8 +247,8 @@ const EventClips = async ({
           organizationSlug={params.organization}
         />
       )}
-      <div className="flex flex-col w-full p-8 ">
-        <div className="flex flex-row justify-center space-x-4 my-4 w-full">
+      <div className="flex flex-col w-full pt-2 px-8 ">
+        {/* <div className="flex flex-row justify-center space-x-4 my-4 w-full">
           <SelectSession
             stages={stages}
             currentStageId={currentStage._id}
@@ -242,7 +257,7 @@ const EventClips = async ({
             selectedRecording={currentRecording ?? undefined}
             streamRecordings={stageRecordings.recordings}
           />
-        </div>
+        </div> */}
         <div className="flex flex-col w-full h-full overflow-auto space-y-4">
           <ClipProvider>
             <ReactHlsPlayer
@@ -304,7 +319,9 @@ const EventClips = async ({
         <SessionSidebar
           currentStage={currentStage}
           event={event ?? undefined}
-          sessions={sessions.sessions}
+          sessions={sessions.sessions.filter(
+            (session) => session.assetId
+          )}
         />
       </Suspense>
     </ClipContainer>

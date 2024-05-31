@@ -34,6 +34,9 @@ import {
 } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
 import GetHashButton from './GetHashButton'
+import { useEffect, useState } from 'react'
+import { generateThumbnail } from '@/lib/actions/livepeer'
+import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 
 const TableCells = ({
   item,
@@ -42,6 +45,13 @@ const TableCells = ({
   item: IExtendedSession
   organization: string
 }) => {
+  const [imageUrl, setImageUrl] = useState<string | undefined>(
+    undefined
+  )
+
+  useEffect(() => {
+    generateThumbnail(item).then((url) => url && setImageUrl(url))
+  }, [item])
   const handleCopy = () => {
     navigator.clipboard.writeText(item.ipfsURI!)
     toast.success('Copied IPFS Hash to your clipboard')
@@ -84,21 +94,10 @@ const TableCells = ({
       <TableCell className="relative font-medium max-w-[500px]">
         <div className="flex flex-row items-center space-x-4 w-full">
           <div className="min-w-[100px]">
-            <AspectRatio ratio={16 / 9}>
-              {item.coverImage ? (
-                <Image
-                  src={item.coverImage}
-                  style={{ objectFit: 'contain' }}
-                  fill
-                  alt="Thumbnail Image"
-                  quality={40}
-                />
-              ) : (
-                <div className="flex justify-center items-center w-full h-full">
-                  <DefaultThumbnail className="max-w-full max-h-full" />
-                </div>
-              )}
-            </AspectRatio>
+            <Thumbnail
+              imageUrl={item.coverImage}
+              fallBack={imageUrl}
+            />
           </div>
 
           <Link href={`library/${item._id}`}>

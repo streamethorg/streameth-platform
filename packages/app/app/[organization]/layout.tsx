@@ -13,8 +13,7 @@ const Layout = async ({
   params: { organization: string }
   children: React.ReactNode
 }) => {
-  const org =
-    params.organization === 'livepeertv' ? 'tv' : params.organization
+  const org = params.organization
   const pages = [
     {
       name: 'Home',

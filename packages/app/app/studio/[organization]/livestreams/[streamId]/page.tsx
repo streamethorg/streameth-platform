@@ -17,31 +17,33 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4 m-auto max-w-5xl">
-      <StreamHeader
-        organization={params.organization}
-        stream={stream}
-        isLiveStreamPage
-      />
+    <div className=" m-auto w-full h-full overflow-y-scroll">
+      <div className="flex flex-col max-w-5xl items-center gap-4 p-4 m-auto min-h-full">
+        <StreamHeader
+          organization={params.organization}
+          stream={stream}
+          isLiveStreamPage
+        />
 
-      <StreamConfigWithPlayer
-        stream={stream}
-        streamId={params.streamId}
-        organization={params.organization}
-      />
+        <StreamConfigWithPlayer
+          stream={stream}
+          streamId={params.streamId}
+          organization={params.organization}
+        />
 
-      <Multistream
-        stream={stream}
-        organizationId={stream.organizationId as string}
-      />
+        <Multistream
+          stream={stream}
+          organizationId={stream.organizationId as string}
+        />
 
-      <LivestreamEmbedCode
-        streamId={stream?.streamSettings?.streamId}
-        playbackId={stream?.streamSettings?.playbackId}
-        playerName={stream?.name}
-      />
+        <LivestreamEmbedCode
+          streamId={stream?.streamSettings?.streamId}
+          playbackId={stream?.streamSettings?.playbackId}
+          playerName={stream?.name}
+        />
 
-      <PublishLivestream stream={stream} />
+        <PublishLivestream stream={stream} />
+      </div>
     </div>
   )
 }

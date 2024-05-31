@@ -99,8 +99,8 @@ const CreateClipButton = ({
   }
 
   return (
-    <div className="flex flex-row space-x-2">
-      <div className="flex flex-col space-y-2 w-[150px]">
+    <div className="flex flex-row flex-grow space-x-2">
+      <div className="flex flex-col w-full ">
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
           <Input

@@ -18,7 +18,7 @@ const GetHashButton = ({
         toast.success('Hash generated')
       })
       .catch(() => {
-        toast.error('Failed to generate hash')
+        toast.error('Failed to generate hash, try again later')
       })
       .finally(() => {
         setIsGetHash(false)
