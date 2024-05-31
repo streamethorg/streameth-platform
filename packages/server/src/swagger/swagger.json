@@ -47,6 +47,9 @@
 					},
 					"walletAddress": {
 						"type": "string"
+					},
+					"address": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1804,6 +1807,9 @@
 					},
 					"walletAddress": {
 						"type": "string"
+					},
+					"address": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1847,6 +1853,9 @@
 						"type": "string"
 					},
 					"walletAddress": {
+						"type": "string"
+					},
+					"address": {
 						"type": "string"
 					}
 				},
@@ -1895,15 +1904,12 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_CreateOrganizationDto.walletAddress_": {
+			"Pick_CreateOrganizationDto.address_": {
 				"properties": {
-					"walletAddress": {
+					"address": {
 						"type": "string"
 					}
 				},
-				"required": [
-					"walletAddress"
-				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
@@ -1950,6 +1956,18 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"Pick_CreateOrganizationDto.walletAddress_": {
+				"properties": {
+					"walletAddress": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"walletAddress"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"NftCollectionType": {
 				"enum": [
@@ -2897,6 +2915,25 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"IStandardResponse_boolean_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {
@@ -3162,7 +3199,7 @@
 						}
 					}
 				},
-				"summary": "Get Viddo url",
+				"summary": "Get Video url",
 				"tags": [
 					"Stream"
 				],
@@ -4073,7 +4110,13 @@
 				"tags": [
 					"Session"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -4307,7 +4350,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.walletAddress_"
+								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.address_"
 							}
 						}
 					}
@@ -4625,6 +4668,55 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/upload": {
+			"post": {
+				"operationId": "UploadImges",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Index"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "string",
+										"format": "binary"
+									},
+									"directory": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"file",
+									"directory"
+								]
+							}
+						}
+					}
+				}
 			}
 		},
 		"/webhook": {
@@ -4999,6 +5091,40 @@
 						}
 					}
 				},
+				"summary": "Login",
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/verify-token": {
+			"post": {
+				"operationId": "VerifyToken",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_boolean_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Verify auth token",
 				"tags": [
 					"Auth"
 				],
