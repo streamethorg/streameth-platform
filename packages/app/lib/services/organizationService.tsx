@@ -115,11 +115,11 @@ export async function updateOrganization({
 
 export async function addOrganizationMember({
   organizationId,
-  memberWalletAddress,
+  memberAddress,
   authToken,
 }: {
   organizationId: string
-  memberWalletAddress: string
+  memberAddress: string
   authToken: string
 }): Promise<IOrganization> {
   if (!authToken) {
@@ -135,7 +135,7 @@ export async function addOrganizationMember({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ walletAddress: memberWalletAddress }),
+        body: JSON.stringify({ address: memberAddress }),
       }
     )
 
