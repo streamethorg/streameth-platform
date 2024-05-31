@@ -37,6 +37,7 @@ import {
   INftCollection,
   NftCollectionType,
 } from 'streameth-new-server/src/interfaces/nft.collection.interface'
+import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
 
 export interface ICreateNFT {
   selectedVideo: INFTSessions[]
@@ -288,21 +289,25 @@ const CreateNFTForm = ({
             variant="outline">
             Go Back
           </Button>
-          <Button
-            loading={isPublishingCollection}
-            disabled={
-              getFormSubmitStatus(form) ||
-              isPublishingCollection ||
-              (step == 2 && formState.selectedVideo.length < 1)
-            }
-            onClick={handleNextButton}
-            variant="primary">
-            {step == 1
-              ? 'Continue'
-              : type == 'multiple'
-              ? 'Publish Collection'
-              : 'Publish VideoNFT'}
-          </Button>
+          {step === 2 && !account.address && !account.isConnected ? (
+            <ConnectWalletButton />
+          ) : (
+            <Button
+              loading={isPublishingCollection}
+              disabled={
+                getFormSubmitStatus(form) ||
+                isPublishingCollection ||
+                (step == 2 && formState.selectedVideo.length < 1)
+              }
+              onClick={handleNextButton}
+              variant="primary">
+              {step == 1
+                ? 'Continue'
+                : type == 'multiple'
+                ? 'Publish Collection'
+                : 'Publish VideoNFT'}
+            </Button>
+          )}
         </div>
       </div>
       <PublishingNFTModal
