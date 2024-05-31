@@ -117,6 +117,7 @@ export const sessionSchema = z.object({
     .max(300, { message: 'Description is too long' }),
   coverImage: z.string().optional(),
   assetId: z.string().min(1, { message: 'Please upload a video' }),
+  published: z.boolean().default(false),
 })
 
 export const organizationSchema = z.object({

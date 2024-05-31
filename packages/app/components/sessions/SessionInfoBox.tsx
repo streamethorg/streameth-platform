@@ -20,6 +20,7 @@ import {
   PopoverTrigger,
 } from '../ui/popover'
 import { EllipsisVertical } from 'lucide-react'
+import VideoDownloadClient from '../misc/VideoDownloadClient'
 
 const DesktopButtons = ({
   name,
@@ -46,7 +47,13 @@ const DesktopButtons = ({
       )}
       <div className="flex flex-row space-x-2">
         <ShareButton shareFor="video" />
-        {video?.assetId && <VideoDownload assetId={video?.assetId} />}
+        {video?.assetId && (
+          <VideoDownloadClient
+            variant="outline"
+            videoName={`${video.name}.mp4`}
+            assetId={video?.assetId}
+          />
+        )}
       </div>
       {!vod && (
         <CalendarReminder
@@ -96,7 +103,10 @@ const MobileButtons = ({
               {/* Hydration Error */}
               <ShareButton className="w-full" shareFor="video" />{' '}
               {video?.assetId && (
-                <VideoDownload assetId={video?.assetId} />
+                <VideoDownloadClient
+                  videoName={`${video.name}.mp4`}
+                  assetId={video?.assetId}
+                />
               )}
               {!vod && (
                 <>

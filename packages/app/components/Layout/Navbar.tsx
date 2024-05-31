@@ -6,8 +6,10 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { NavBarProps } from '@/lib/types'
-import { ConnectWalletButton } from '../misc/ConnectWalletButton'
+import { SignInUserButton } from '../misc/SignInUserButton'
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
+import { ConnectWalletButton } from '../misc/ConnectWalletButton'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar({
   setIsNavVisible,
@@ -20,6 +22,8 @@ export default function Navbar({
   pages: NavBarProps['pages']
   organization?: string
 }) {
+  const pathname = usePathname()
+  const isStudio = pathname.includes('studio')
   if (pages.length === 0) {
     return null
   }
@@ -60,7 +64,9 @@ export default function Navbar({
           </Dialog>
         )}
         <NavigationMenuItem key={'connect'} className="lg:hidden">
-          <ConnectWalletButton className="w-full rounded-none" />
+          {isStudio && (
+            <SignInUserButton className="w-full rounded-none" />
+          )}
         </NavigationMenuItem>
       </ul>
     </div>
