@@ -62,7 +62,7 @@
     "jwt-decode": "^4.0.0",
     "livekit-client": "^1.15.11",
     "livekit-server-sdk": "^1.2.7",
-    "livepeer": "^3.0.2",
+    "livepeer": "3.0.2",
     "lokijs": "^1.5.12",
     "lucide-react": "^0.366.0",
     "moment-timezone": "^0.5.43",

@@ -52,9 +52,9 @@ export const getVideoUrlAction = async (
 }
 
 interface UrlActionParams {
-  assetId: string
-  tusEndpoint: string
-  url: string
+  assetId?: string
+  tusEndpoint?: string
+  url?: string
 }
 
 export const getUrlAction = async (
@@ -72,9 +72,9 @@ export const getUrlAction = async (
       return null
     }
     const params: UrlActionParams = {
-      tusEndpoint: asset.object.tusEndpoint,
-      url: asset.object.url,
-      assetId: asset.object.asset.id,
+      tusEndpoint: asset?.object?.tusEndpoint,
+      url: asset?.object?.url,
+      assetId: asset?.object?.asset.id,
     }
 
     return params
