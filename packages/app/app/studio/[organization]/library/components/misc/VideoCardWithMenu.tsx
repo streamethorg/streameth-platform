@@ -70,7 +70,7 @@ const VideoCardWithMenu = ({
             <div className="flex justify-between items-center">
               <CardDescription className={`text-xs truncate `}>
                 {formatDate(
-                  new Date(session.createdAt as string),
+                  new Date(session.updatedAt as string),
                   'ddd. MMM. D, YYYY'
                 )}
               </CardDescription>
