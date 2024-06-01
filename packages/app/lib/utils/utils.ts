@@ -276,13 +276,13 @@ export const sortArray = (
           return b.name.localeCompare(a.name)
         case eSort.asc_date:
           return (
-            new Date(a.createdAt!).getTime() -
-            new Date(b.createdAt!).getTime()
+            new Date(a.updatedAt!).getTime() -
+            new Date(b.updatedAt!).getTime()
           )
         case eSort.desc_date:
           return (
-            new Date(b.createdAt!).getTime() -
-            new Date(a.createdAt!).getTime()
+            new Date(b.updatedAt!).getTime() -
+            new Date(a.updatedAt!).getTime()
           )
         default:
           return 0

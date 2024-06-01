@@ -144,10 +144,10 @@ const TableCells = ({
           </DropdownMenu>
         </div>
       </TableCell>
-      {item.createdAt && (
+      {item.updatedAt && (
         <TableCell className="truncate">
           {formatDate(
-            new Date(item.createdAt as string),
+            new Date(item.updatedAt as string),
             'ddd. MMM. D, YYYY'
           )}
         </TableCell>
