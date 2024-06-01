@@ -28,7 +28,7 @@ const ListLayout = async ({
           </TableHead>
           <TableHead>Visibility</TableHead>
           <TableHead className="cursor-pointer">
-            <TableSort title="Created at" sortBy="date" />
+            <TableSort title="Updated at" sortBy="date" />
           </TableHead>
           <TableHead>IPFS Hash</TableHead>
           <TableHead>
