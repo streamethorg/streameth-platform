@@ -83,7 +83,7 @@ const VideoCardWithMenu = ({
             <PopoverTrigger className="z-10">
               <EllipsisVertical className="mt-2" />
             </PopoverTrigger>
-            <PopoverContent className="w-60">
+            <PopoverContent className="w-fit">
               {DropdownMenuItems}
             </PopoverContent>
           </Popover>

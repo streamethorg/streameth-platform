@@ -3,6 +3,7 @@ import DatePicker from '@/components/misc/form/datePicker'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import TimePicker from '@/components/misc/form/timePicker'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
@@ -20,6 +21,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { updateStageAction } from '@/lib/actions/stages'
 import { StageSchema } from '@/lib/schema'
 import { IExtendedStage } from '@/lib/types'
@@ -40,6 +42,9 @@ const EditLivestream = ({
 }) => {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isMultiDate, setIsMultiDate] = useState(
+    livestream?.isMultipleDate
+  )
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
     defaultValues: {
@@ -49,9 +54,14 @@ const EditLivestream = ({
         new Date(livestream?.streamDate as string) || new Date(),
       thumbnail: livestream?.thumbnail,
       streamTime: getTimeString(livestream.streamDate) || '00:00',
+      streamEndDate:
+        new Date(livestream?.streamEndDate as string) || new Date(),
+      streamEndTime:
+        getTimeString(livestream.streamEndDate) || '00:00',
+      isMultipleDate: livestream?.isMultipleDate || false,
     },
   })
-
+  console.log(livestream)
   const handleModalClose = () => {
     setOpen(false)
   }
@@ -62,16 +72,27 @@ const EditLivestream = ({
   )
   const timeInput = form.getValues('streamTime')
   const formattedDate = new Date(`${dateInput}T${timeInput}`)
+  const formattedEndDate = new Date(
+    new Date(
+      `${formatDate(
+        new Date(`${form.getValues('streamEndDate')}`),
+        'YYYY-MM-DD'
+      )}T${form.getValues('streamEndTime')}`
+    )
+  )
   const isPast = formattedDate < new Date()
+  const validateEndDate = formattedEndDate < formattedDate
 
   function onSubmit(values: z.infer<typeof StageSchema>) {
     setIsLoading(true)
-    const { streamTime, ...otherValues } = values
+    const { streamTime, streamEndTime, ...otherValues } = values
 
     updateStageAction({
       stage: {
         ...otherValues,
         streamDate: formattedDate,
+        streamEndDate: formattedEndDate,
+        isMultipleDate: isMultiDate,
         _id: livestream._id,
       },
     })
@@ -135,8 +156,32 @@ const EditLivestream = ({
                 </FormItem>
               )}
             />
-
-            <div className="flex space-x-3 mt-8">
+            <div className="mt-6">
+              {' '}
+              <p
+                className="text-sm"
+                onClick={() => setIsMultiDate(!isMultiDate)}>
+                Streaming multiple days?
+              </p>{' '}
+              <div className="flex items-center gap-5 mt-1">
+                <div className="flex items-center gap-1">
+                  <Checkbox
+                    checked={isMultiDate}
+                    onCheckedChange={() => setIsMultiDate(true)}
+                  />
+                  <Label>Yes</Label>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Checkbox
+                    onCheckedChange={() =>
+                      setIsMultiDate(!isMultiDate)
+                    }
+                    checked={!isMultiDate}></Checkbox>
+                  <Label>No</Label>
+                </div>
+              </div>
+            </div>
+            <div className="flex space-x-3 mt-4">
               <FormField
                 control={form.control}
                 name="streamDate"
@@ -176,6 +221,56 @@ const EditLivestream = ({
                 Couldn&apos;t schedule. The date and time selected are
                 too far in the past.
               </p>
+            )}
+
+            {isMultiDate && (
+              <>
+                <div className="flex space-x-3 mt-4">
+                  <FormField
+                    control={form.control}
+                    name="streamEndDate"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel required>
+                          Stream End Date
+                        </FormLabel>
+                        <FormControl>
+                          <DatePicker
+                            value={field.value as Date}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="streamEndTime"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel required>
+                          Stream End Time
+                        </FormLabel>
+                        <FormControl>
+                          <TimePicker
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                {validateEndDate && (
+                  <p className="text-destructive text-[12px] mt-1">
+                    Couldn&apos;t schedule. End date and time selected
+                    are too far in the past.
+                  </p>
+                )}
+              </>
             )}
 
             <DialogFooter className="mt-8">
