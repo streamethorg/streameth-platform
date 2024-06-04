@@ -29,9 +29,11 @@ export class IStage {
   order?: number;
   slug?: string;
   published?: boolean;
+  isMultipleDate?: boolean;
   organizationId: Types.ObjectId | string;
   thumbnail?: string;
   streamDate?: Date | string;
+  streamEndDate?: Date | string;
   mintable?: boolean;
   createdAt?: string;
   nftCollections?: Types.ObjectId | string[];
