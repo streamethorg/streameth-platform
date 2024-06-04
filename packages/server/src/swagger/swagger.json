@@ -669,6 +669,9 @@
 					"published": {
 						"type": "boolean"
 					},
+					"isMultipleDate": {
+						"type": "boolean"
+					},
 					"organizationId": {
 						"anyOf": [
 							{
@@ -683,6 +686,17 @@
 						"type": "string"
 					},
 					"streamDate": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"streamEndDate": {
 						"anyOf": [
 							{
 								"type": "string",
@@ -779,6 +793,9 @@
 					"published": {
 						"type": "boolean"
 					},
+					"isMultipleDate": {
+						"type": "boolean"
+					},
 					"organizationId": {
 						"type": "string"
 					},
@@ -786,6 +803,10 @@
 						"type": "string"
 					},
 					"streamDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"streamEndDate": {
 						"type": "string",
 						"format": "date-time"
 					},
@@ -830,6 +851,9 @@
 					"published": {
 						"type": "boolean"
 					},
+					"isMultipleDate": {
+						"type": "boolean"
+					},
 					"streamSettings": {
 						"$ref": "#/components/schemas/IStreamSettings"
 					},
@@ -850,6 +874,9 @@
 						"type": "string"
 					},
 					"streamDate": {
+						"type": "string"
+					},
+					"streamEndDate": {
 						"type": "string"
 					},
 					"thumbnail": {

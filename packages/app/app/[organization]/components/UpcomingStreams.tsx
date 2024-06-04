@@ -36,6 +36,7 @@ const UpcomingStreams = async ({
           <React.Fragment key={livestream?._id?.toString()}>
             <div>
               <LivestreamCard
+                livestream={livestream}
                 name={livestream.name}
                 date={livestream.streamDate as string}
                 thumbnail={livestream.thumbnail ?? ''}

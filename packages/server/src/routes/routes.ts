@@ -322,9 +322,11 @@ const models: TsoaRoute.Models = {
             "order": {"dataType":"double"},
             "slug": {"dataType":"string"},
             "published": {"dataType":"boolean"},
+            "isMultipleDate": {"dataType":"boolean"},
             "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
             "thumbnail": {"dataType":"string"},
             "streamDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
+            "streamEndDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
             "mintable": {"dataType":"boolean"},
             "createdAt": {"dataType":"string"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
@@ -354,9 +356,11 @@ const models: TsoaRoute.Models = {
             "order": {"dataType":"double"},
             "slug": {"dataType":"string"},
             "published": {"dataType":"boolean"},
+            "isMultipleDate": {"dataType":"boolean"},
             "organizationId": {"dataType":"string","required":true},
             "thumbnail": {"dataType":"string"},
             "streamDate": {"dataType":"datetime"},
+            "streamEndDate": {"dataType":"datetime"},
             "mintable": {"dataType":"boolean"},
             "createdAt": {"dataType":"string"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
@@ -371,12 +375,14 @@ const models: TsoaRoute.Models = {
             "description": {"dataType":"string"},
             "eventId": {"dataType":"string"},
             "published": {"dataType":"boolean"},
+            "isMultipleDate": {"dataType":"boolean"},
             "streamSettings": {"ref":"IStreamSettings"},
             "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
             "order": {"dataType":"double"},
             "organizationId": {"dataType":"string","required":true},
             "slug": {"dataType":"string"},
             "streamDate": {"dataType":"string"},
+            "streamEndDate": {"dataType":"string"},
             "thumbnail": {"dataType":"string"},
             "mintable": {"dataType":"boolean"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
@@ -1052,7 +1058,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(UserController)),
             ...(fetchMiddlewares<RequestHandler>(UserController.prototype.getUserById)),
 
-            function UserController_getUserById(request: ExRequest, response: ExResponse, next: any) {
+            async function UserController_getUserById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     walletAddress: {"in":"path","name":"walletAddress","required":true,"dataType":"string"},
             };
@@ -1065,7 +1071,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new UserController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getUserById',
                 controller,
                 response,
@@ -1083,7 +1089,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SupportController)),
             ...(fetchMiddlewares<RequestHandler>(SupportController.prototype.createTicket)),
 
-            function SupportController_createTicket(request: ExRequest, response: ExResponse, next: any) {
+            async function SupportController_createTicket(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateSupportTicketDto"},
             };
@@ -1096,7 +1102,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SupportController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createTicket',
                 controller,
                 response,
@@ -1113,7 +1119,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SupportController)),
             ...(fetchMiddlewares<RequestHandler>(SupportController.prototype.getAllTickets)),
 
-            function SupportController_getAllTickets(request: ExRequest, response: ExResponse, next: any) {
+            async function SupportController_getAllTickets(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
@@ -1125,7 +1131,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SupportController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllTickets',
                 controller,
                 response,
@@ -1143,7 +1149,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.createMultiStream)),
 
-            function StreamController_createMultiStream(request: ExRequest, response: ExResponse, next: any) {
+            async function StreamController_createMultiStream(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateMultiStreamDto"},
             };
@@ -1156,7 +1162,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StreamController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createMultiStream',
                 controller,
                 response,
@@ -1174,7 +1180,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.deleteMultiStream)),
 
-            function StreamController_deleteMultiStream(request: ExRequest, response: ExResponse, next: any) {
+            async function StreamController_deleteMultiStream(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"DeleteMultiStreamDto"},
             };
@@ -1187,7 +1193,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StreamController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'deleteMultiStream',
                 controller,
                 response,
@@ -1204,7 +1210,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.createAsset)),
 
-            function StreamController_createAsset(request: ExRequest, response: ExResponse, next: any) {
+            async function StreamController_createAsset(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"dataType":"any"},
             };
@@ -1217,7 +1223,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StreamController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createAsset',
                 controller,
                 response,
@@ -1234,7 +1240,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getStream)),
 
-            function StreamController_getStream(request: ExRequest, response: ExResponse, next: any) {
+            async function StreamController_getStream(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     streamId: {"in":"path","name":"streamId","required":true,"dataType":"string"},
             };
@@ -1247,7 +1253,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StreamController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getStream',
                 controller,
                 response,
@@ -1264,7 +1270,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getVideoUrl)),
 
-            function StreamController_getVideoUrl(request: ExRequest, response: ExResponse, next: any) {
+            async function StreamController_getVideoUrl(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     assetId: {"in":"path","name":"assetId","required":true,"dataType":"string"},
             };
@@ -1277,7 +1283,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StreamController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getVideoUrl',
                 controller,
                 response,
@@ -1295,7 +1301,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StateController)),
             ...(fetchMiddlewares<RequestHandler>(StateController.prototype.createState)),
 
-            function StateController_createState(request: ExRequest, response: ExResponse, next: any) {
+            async function StateController_createState(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateStateDto"},
             };
@@ -1308,7 +1314,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StateController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createState',
                 controller,
                 response,
@@ -1326,7 +1332,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StateController)),
             ...(fetchMiddlewares<RequestHandler>(StateController.prototype.updateState)),
 
-            function StateController_updateState(request: ExRequest, response: ExResponse, next: any) {
+            async function StateController_updateState(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stateId: {"in":"path","name":"stateId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateStateDto"},
@@ -1340,7 +1346,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StateController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'updateState',
                 controller,
                 response,
@@ -1357,7 +1363,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StateController)),
             ...(fetchMiddlewares<RequestHandler>(StateController.prototype.getAllStates)),
 
-            function StateController_getAllStates(request: ExRequest, response: ExResponse, next: any) {
+            async function StateController_getAllStates(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"query","name":"eventId","dataType":"string"},
                     sessionId: {"in":"query","name":"sessionId","dataType":"string"},
@@ -1374,7 +1380,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StateController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllStates',
                 controller,
                 response,
@@ -1392,7 +1398,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.createStage)),
 
-            function StageController_createStage(request: ExRequest, response: ExResponse, next: any) {
+            async function StageController_createStage(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateStageDto"},
             };
@@ -1405,7 +1411,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StageController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createStage',
                 controller,
                 response,
@@ -1423,7 +1429,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.editStage)),
 
-            function StageController_editStage(request: ExRequest, response: ExResponse, next: any) {
+            async function StageController_editStage(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateStageDto"},
@@ -1437,7 +1443,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StageController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'editStage',
                 controller,
                 response,
@@ -1454,7 +1460,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getStageById)),
 
-            function StageController_getStageById(request: ExRequest, response: ExResponse, next: any) {
+            async function StageController_getStageById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
             };
@@ -1467,7 +1473,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StageController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getStageById',
                 controller,
                 response,
@@ -1484,7 +1490,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStages)),
 
-            function StageController_getAllStages(request: ExRequest, response: ExResponse, next: any) {
+            async function StageController_getAllStages(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     published: {"in":"query","name":"published","dataType":"boolean"},
             };
@@ -1497,7 +1503,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StageController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllStages',
                 controller,
                 response,
@@ -1514,7 +1520,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStagesForEvent)),
 
-            function StageController_getAllStagesForEvent(request: ExRequest, response: ExResponse, next: any) {
+            async function StageController_getAllStagesForEvent(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
             };
@@ -1527,7 +1533,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StageController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllStagesForEvent',
                 controller,
                 response,
@@ -1544,7 +1550,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.getAllStagesForOrganization)),
 
-            function StageController_getAllStagesForOrganization(request: ExRequest, response: ExResponse, next: any) {
+            async function StageController_getAllStagesForOrganization(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
             };
@@ -1557,7 +1563,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StageController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllStagesForOrganization',
                 controller,
                 response,
@@ -1575,7 +1581,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(StageController)),
             ...(fetchMiddlewares<RequestHandler>(StageController.prototype.deleteStage)),
 
-            function StageController_deleteStage(request: ExRequest, response: ExResponse, next: any) {
+            async function StageController_deleteStage(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
@@ -1589,7 +1595,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new StageController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'deleteStage',
                 controller,
                 response,
@@ -1607,7 +1613,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
             ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.createSpeaker)),
 
-            function SpeakerController_createSpeaker(request: ExRequest, response: ExResponse, next: any) {
+            async function SpeakerController_createSpeaker(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateSpeakerDto"},
             };
@@ -1620,7 +1626,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SpeakerController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createSpeaker',
                 controller,
                 response,
@@ -1637,7 +1643,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
             ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.getSpeaker)),
 
-            function SpeakerController_getSpeaker(request: ExRequest, response: ExResponse, next: any) {
+            async function SpeakerController_getSpeaker(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     speakerId: {"in":"path","name":"speakerId","required":true,"dataType":"string"},
             };
@@ -1650,7 +1656,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SpeakerController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getSpeaker',
                 controller,
                 response,
@@ -1667,7 +1673,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SpeakerController)),
             ...(fetchMiddlewares<RequestHandler>(SpeakerController.prototype.getAllSpeakersForEvent)),
 
-            function SpeakerController_getAllSpeakersForEvent(request: ExRequest, response: ExResponse, next: any) {
+            async function SpeakerController_getAllSpeakersForEvent(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
             };
@@ -1680,7 +1686,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SpeakerController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllSpeakersForEvent',
                 controller,
                 response,
@@ -1698,7 +1704,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.createSession)),
 
-            function SessionController_createSession(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_createSession(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateSessionDto"},
             };
@@ -1711,7 +1717,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createSession',
                 controller,
                 response,
@@ -1729,7 +1735,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.editSession)),
 
-            function SessionController_editSession(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_editSession(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateSessionDto"},
@@ -1743,7 +1749,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'editSession',
                 controller,
                 response,
@@ -1760,7 +1766,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getOrgEventSessions)),
 
-            function SessionController_getOrgEventSessions(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_getOrgEventSessions(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
             };
@@ -1773,7 +1779,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getOrgEventSessions',
                 controller,
                 response,
@@ -1790,7 +1796,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.filterSession)),
 
-            function SessionController_filterSession(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_filterSession(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     search: {"in":"query","name":"search","required":true,"dataType":"string"},
             };
@@ -1803,7 +1809,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'filterSession',
                 controller,
                 response,
@@ -1820,7 +1826,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.filterSessionByOrganisation)),
 
-            function SessionController_filterSessionByOrganisation(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_filterSessionByOrganisation(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationSlug: {"in":"path","name":"organizationSlug","required":true,"dataType":"string"},
                     search: {"in":"query","name":"search","required":true,"dataType":"string"},
@@ -1834,7 +1840,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'filterSessionByOrganisation',
                 controller,
                 response,
@@ -1851,7 +1857,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getSessionById)),
 
-            function SessionController_getSessionById(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_getSessionById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
             };
@@ -1864,7 +1870,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getSessionById',
                 controller,
                 response,
@@ -1882,7 +1888,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.uploadSessionToYouTube)),
 
-            function SessionController_uploadSessionToYouTube(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_uploadSessionToYouTube(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
                     googleToken: {"in":"query","name":"googleToken","required":true,"dataType":"string"},
@@ -1896,7 +1902,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'uploadSessionToYouTube',
                 controller,
                 response,
@@ -1913,7 +1919,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.getAllSessions)),
 
-            function SessionController_getAllSessions(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_getAllSessions(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     event: {"in":"query","name":"event","dataType":"string"},
                     organization: {"in":"query","name":"organization","dataType":"string"},
@@ -1935,7 +1941,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllSessions',
                 controller,
                 response,
@@ -1953,7 +1959,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(SessionController)),
             ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.deleteSession)),
 
-            function SessionController_deleteSession(request: ExRequest, response: ExResponse, next: any) {
+            async function SessionController_deleteSession(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
@@ -1967,7 +1973,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new SessionController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'deleteSession',
                 controller,
                 response,
@@ -1985,7 +1991,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.createOrganization)),
 
-            function OrganizationController_createOrganization(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_createOrganization(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateOrganizationDto"},
             };
@@ -1998,7 +2004,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createOrganization',
                 controller,
                 response,
@@ -2016,7 +2022,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.editOrganization)),
 
-            function OrganizationController_editOrganization(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_editOrganization(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateOrganizationDto"},
@@ -2030,7 +2036,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'editOrganization',
                 controller,
                 response,
@@ -2048,7 +2054,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.updateOrgMembers)),
 
-            function OrganizationController_updateOrgMembers(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_updateOrgMembers(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"Pick_CreateOrganizationDto.address_"},
@@ -2062,7 +2068,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'updateOrgMembers',
                 controller,
                 response,
@@ -2079,7 +2085,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getOrganizationById)),
 
-            function OrganizationController_getOrganizationById(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_getOrganizationById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
             };
@@ -2092,7 +2098,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getOrganizationById',
                 controller,
                 response,
@@ -2109,7 +2115,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getAllOrganizations)),
 
-            function OrganizationController_getAllOrganizations(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_getAllOrganizations(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
@@ -2121,7 +2127,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllOrganizations',
                 controller,
                 response,
@@ -2139,7 +2145,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.getAllOrgMembers)),
 
-            function OrganizationController_getAllOrgMembers(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_getAllOrgMembers(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
             };
@@ -2152,7 +2158,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllOrgMembers',
                 controller,
                 response,
@@ -2170,7 +2176,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.deleteOrganization)),
 
-            function OrganizationController_deleteOrganization(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_deleteOrganization(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
             };
@@ -2183,7 +2189,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'deleteOrganization',
                 controller,
                 response,
@@ -2201,7 +2207,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.deleteOrgMember)),
 
-            function OrganizationController_deleteOrgMember(request: ExRequest, response: ExResponse, next: any) {
+            async function OrganizationController_deleteOrgMember(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"Pick_CreateOrganizationDto.walletAddress_"},
@@ -2215,7 +2221,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new OrganizationController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'deleteOrgMember',
                 controller,
                 response,
@@ -2233,7 +2239,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.createNftCollection)),
 
-            function NftCollectionRouter_createNftCollection(request: ExRequest, response: ExResponse, next: any) {
+            async function NftCollectionRouter_createNftCollection(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateNftCollectionDto"},
             };
@@ -2246,7 +2252,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new NftCollectionRouter();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createNftCollection',
                 controller,
                 response,
@@ -2264,7 +2270,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.generateNftMetadata)),
 
-            function NftCollectionRouter_generateNftMetadata(request: ExRequest, response: ExResponse, next: any) {
+            async function NftCollectionRouter_generateNftMetadata(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateNftCollectionDto"},
             };
@@ -2277,7 +2283,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new NftCollectionRouter();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'generateNftMetadata',
                 controller,
                 response,
@@ -2295,7 +2301,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.updateNftCollection)),
 
-            function NftCollectionRouter_updateNftCollection(request: ExRequest, response: ExResponse, next: any) {
+            async function NftCollectionRouter_updateNftCollection(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     collectionId: {"in":"path","name":"collectionId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateNftCollectionDto"},
@@ -2309,7 +2315,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new NftCollectionRouter();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'updateNftCollection',
                 controller,
                 response,
@@ -2326,7 +2332,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.getAllCollections)),
 
-            function NftCollectionRouter_getAllCollections(request: ExRequest, response: ExResponse, next: any) {
+            async function NftCollectionRouter_getAllCollections(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
@@ -2338,7 +2344,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new NftCollectionRouter();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllCollections',
                 controller,
                 response,
@@ -2355,7 +2361,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.getNftCollectionById)),
 
-            function NftCollectionRouter_getNftCollectionById(request: ExRequest, response: ExResponse, next: any) {
+            async function NftCollectionRouter_getNftCollectionById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     collectionId: {"in":"path","name":"collectionId","required":true,"dataType":"string"},
             };
@@ -2368,7 +2374,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new NftCollectionRouter();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getNftCollectionById',
                 controller,
                 response,
@@ -2385,7 +2391,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter)),
             ...(fetchMiddlewares<RequestHandler>(NftCollectionRouter.prototype.getAllOrganizationNft)),
 
-            function NftCollectionRouter_getAllOrganizationNft(request: ExRequest, response: ExResponse, next: any) {
+            async function NftCollectionRouter_getAllOrganizationNft(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
             };
@@ -2398,7 +2404,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new NftCollectionRouter();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllOrganizationNft',
                 controller,
                 response,
@@ -2415,7 +2421,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(IndexController)),
             ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.index)),
 
-            function IndexController_index(request: ExRequest, response: ExResponse, next: any) {
+            async function IndexController_index(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
@@ -2427,7 +2433,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new IndexController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'index',
                 controller,
                 response,
@@ -2446,7 +2452,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(IndexController)),
             ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.uploadImges)),
 
-            function IndexController_uploadImges(request: ExRequest, response: ExResponse, next: any) {
+            async function IndexController_uploadImges(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     file: {"in":"formData","name":"file","required":true,"dataType":"file"},
                     directory: {"in":"formData","name":"directory","required":true,"dataType":"string"},
@@ -2460,7 +2466,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new IndexController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'uploadImges',
                 controller,
                 response,
@@ -2477,7 +2483,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(IndexController)),
             ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.webhook)),
 
-            function IndexController_webhook(request: ExRequest, response: ExResponse, next: any) {
+            async function IndexController_webhook(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     livepeerSignature: {"in":"header","name":"livepeer-signature","required":true,"dataType":"string"},
                     payload: {"in":"body","name":"payload","required":true,"dataType":"any"},
@@ -2491,7 +2497,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new IndexController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'webhook',
                 controller,
                 response,
@@ -2509,7 +2515,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.createEvent)),
 
-            function EventController_createEvent(request: ExRequest, response: ExResponse, next: any) {
+            async function EventController_createEvent(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateEventDto"},
             };
@@ -2522,7 +2528,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new EventController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createEvent',
                 controller,
                 response,
@@ -2539,7 +2545,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getEventById)),
 
-            function EventController_getEventById(request: ExRequest, response: ExResponse, next: any) {
+            async function EventController_getEventById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
             };
@@ -2552,7 +2558,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new EventController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getEventById',
                 controller,
                 response,
@@ -2570,7 +2576,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.editEvent)),
 
-            function EventController_editEvent(request: ExRequest, response: ExResponse, next: any) {
+            async function EventController_editEvent(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
                     body: {"in":"body","name":"body","required":true,"ref":"UpdateEventDto"},
@@ -2584,7 +2590,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new EventController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'editEvent',
                 controller,
                 response,
@@ -2602,7 +2608,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.evenImporter)),
 
-            function EventController_evenImporter(request: ExRequest, response: ExResponse, next: any) {
+            async function EventController_evenImporter(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
@@ -2616,7 +2622,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new EventController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'evenImporter',
                 controller,
                 response,
@@ -2633,7 +2639,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getAllEvents)),
 
-            function EventController_getAllEvents(request: ExRequest, response: ExResponse, next: any) {
+            async function EventController_getAllEvents(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"query","name":"organizationId","dataType":"string"},
                     unlisted: {"in":"query","name":"unlisted","dataType":"boolean"},
@@ -2647,7 +2653,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new EventController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getAllEvents',
                 controller,
                 response,
@@ -2665,7 +2671,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(EventController)),
             ...(fetchMiddlewares<RequestHandler>(EventController.prototype.deleteEvent)),
 
-            function EventController_deleteEvent(request: ExRequest, response: ExResponse, next: any) {
+            async function EventController_deleteEvent(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     eventId: {"in":"path","name":"eventId","required":true,"dataType":"string"},
                     organizationId: {"in":"body","name":"organizationId","required":true,"ref":"OrgIdDto"},
@@ -2679,7 +2685,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new EventController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'deleteEvent',
                 controller,
                 response,
@@ -2697,7 +2703,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ChatController)),
             ...(fetchMiddlewares<RequestHandler>(ChatController.prototype.createCHar)),
 
-            function ChatController_createCHar(request: ExRequest, response: ExResponse, next: any) {
+            async function ChatController_createCHar(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"CreateChatDto"},
             };
@@ -2710,7 +2716,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new ChatController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'createCHar',
                 controller,
                 response,
@@ -2727,7 +2733,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(ChatController)),
             ...(fetchMiddlewares<RequestHandler>(ChatController.prototype.getChatStageById)),
 
-            function ChatController_getChatStageById(request: ExRequest, response: ExResponse, next: any) {
+            async function ChatController_getChatStageById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     stageId: {"in":"path","name":"stageId","required":true,"dataType":"string"},
             };
@@ -2740,7 +2746,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new ChatController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'getChatStageById',
                 controller,
                 response,
@@ -2757,7 +2763,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(AuthController)),
             ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.login)),
 
-            function AuthController_login(request: ExRequest, response: ExResponse, next: any) {
+            async function AuthController_login(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"UserDto"},
             };
@@ -2770,7 +2776,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new AuthController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'login',
                 controller,
                 response,
@@ -2787,7 +2793,7 @@ export function RegisterRoutes(app: Router) {
             ...(fetchMiddlewares<RequestHandler>(AuthController)),
             ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.verifyToken)),
 
-            function AuthController_verifyToken(request: ExRequest, response: ExResponse, next: any) {
+            async function AuthController_verifyToken(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     body: {"in":"body","name":"body","required":true,"ref":"UserDto"},
             };
@@ -2800,7 +2806,7 @@ export function RegisterRoutes(app: Router) {
 
                 const controller = new AuthController();
 
-              templateService.apiHandler({
+              await templateService.apiHandler({
                 methodName: 'verifyToken',
                 controller,
                 response,
