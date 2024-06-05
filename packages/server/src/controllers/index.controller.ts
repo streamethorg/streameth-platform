@@ -93,7 +93,7 @@ export class IndexController extends Controller {
     if (!session) {
       return SendApiResponse('No session found', null, '400');
     }
-    const ipfs = await updateAsset(id)
+    const ipfs = await updateAsset(id);
     await this.sessionService.update(session._id.toString(), {
       ipfsURI: ipfs,
       videoUrl: asset.playbackUrl,
