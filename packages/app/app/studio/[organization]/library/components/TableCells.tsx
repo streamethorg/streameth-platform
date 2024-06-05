@@ -10,9 +10,6 @@ import {
   Lock,
 } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { formatDate } from '@/lib/utils/time'
 import { toast } from 'sonner'
 import {

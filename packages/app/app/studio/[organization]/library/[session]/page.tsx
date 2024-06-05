@@ -31,15 +31,15 @@ const EditSession = async ({
   return (
     <div className="p-2 h-full">
       <Link href={`/studio/${params.organization}/library`}>
-        <div className="flex justify-start items-center my-4 mx-10 space-x-4">
+        <div className="flex justify-start items-center my-4 mx-6 space-x-4">
           <ArrowLeft />
           <p>Back to library</p>
         </div>
       </Link>
 
       <div className="flex flex-row space-x-4">
-        <div className="px-10 space-y-4 w-2/3">
-          <h1 className="text-5xl font-bold">Video Details</h1>
+        <div className="px-6 space-y-4 w-2/3">
+          <h3 className="text-5xl font-bold">Video Details</h3>
           <EditSessionForm
             session={session}
             organizationSlug={params.organization}

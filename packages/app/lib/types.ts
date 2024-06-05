@@ -100,6 +100,13 @@ export interface studioPageParams {
   }
 }
 
+export interface nftPageParams {
+  params: {
+    organization: string
+    nftId?: string
+  }
+}
+
 export interface ClipsPageParams {
   params: {
     organization: string
