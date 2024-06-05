@@ -5,6 +5,7 @@ import InfoBoxDescription from './InfoBoxDescription'
 import {
   IExtendedNftCollections,
   IExtendedSession,
+  IExtendedStage,
 } from '@/lib/types'
 import ShareButton from '../misc/interact/ShareButton'
 import CollectVideButton from './CollectVideButton'
@@ -149,12 +150,12 @@ const SessionInfoBox = async ({
   vod?: boolean
   organizationSlug?: string
   viewCount?: boolean
-  video?: IExtendedSession
+  video?: IExtendedStage
 }) => {
   const nftCollection = await fetchNFTCollection({
     collectionId: video?.nftCollections?.[0],
   })
-
+  console.log('video', video)
   return (
     <div
       className={`flex flex-col md:flex-row py-4 md:space-x-2 ${
@@ -170,7 +171,18 @@ const SessionInfoBox = async ({
         />
         <div className="flex items-center space-x-2 text-sm">
           <span>
-            {formatDate(new Date(date), 'ddd. MMMM D, YYYY')}
+            {video?.isMultipleDate && video?.streamEndDate
+              ? `${formatDate(
+                  new Date(date),
+                  'ddd. MMM. D, YYY, h:mm a'
+                )} - ${formatDate(
+                  new Date(video?.streamEndDate),
+                  'ddd. MMM. D, YYYY, h:mm a'
+                )}`
+              : formatDate(
+                  new Date(date),
+                  'ddd. MMM. D, YYYY, h:mm a'
+                )}
           </span>
           {playbackId && (
             <>

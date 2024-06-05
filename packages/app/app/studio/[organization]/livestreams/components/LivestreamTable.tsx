@@ -82,14 +82,14 @@ const LivestreamTable = ({
                   <p className="text-sm">
                     {formatDate(
                       new Date(stream?.streamDate),
-                      'ddd. MMMM D, YYYY, HH:mm a'
+                      'ddd. MMMM D, YYYY, h:mm a'
                     )}{' '}
                     {stream.isMultipleDate &&
                       stream.streamEndDate &&
                       ' - ' +
                         formatDate(
                           new Date(stream?.streamEndDate),
-                          'ddd. MMMM D, YYYY, HH:mm a'
+                          'ddd. MMMM D, YYYY, h:mm a'
                         )}
                     {new Date(stream.streamDate) > new Date() && (
                       <span className="block text-sm text-muted-foreground">

@@ -130,7 +130,6 @@ export const getDownloadUrl = async (assetId: string): Promise<string> => {
     if (!data.downloadUrl) {
       return '';
     }
-    console.log(`Download url: ${data.downloadUrl}`);
     return data.downloadUrl;
   } catch (e) {
     console.error(`Error fetching asset:`, e);
