@@ -1,13 +1,14 @@
+import { CreateClipDto } from '@dtos/stream/create-clip.dto';
 import { CreateMultiStreamDto } from '@dtos/stream/create-multistream.dto';
 import { DeleteMultiStreamDto } from '@dtos/stream/delete-multistream.dto';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
   createAsset,
   getStreamInfo,
-  getPlayback,
   createMultiStream,
   deleteMultiStream,
   getDownloadUrl,
+  createClip,
 } from '@utils/livepeer';
 import {
   Tags,
@@ -84,5 +85,17 @@ export class StreamController extends Controller {
     @Path() assetId: string,
   ): Promise<IStandardResponse<string>> {
     return SendApiResponse('Playback fetched', await getDownloadUrl(assetId));
+  }
+
+  /**
+   * @summary  Create clip
+   */
+  @SuccessResponse('201')
+  @Post('clip')
+  async createClip(
+    @Body() body: CreateClipDto,
+  ): Promise<IStandardResponse<any>> {
+    const clip = await createClip(body);
+    return SendApiResponse('clipped', clip);
   }
 }

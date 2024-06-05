@@ -170,7 +170,7 @@ export const updateAsset = async (assetId: string) => {
       }),
     });
     await response.json();
-    setTimeout(() => {}, 10000);
+    await sleep(20000);
     const asset = await getAsset(assetId);
     return asset.storage.ipfs.cid;
   } catch (e) {
@@ -256,3 +256,49 @@ export const deleteMultiStream = async (data: {
     throw new HttpException(400, 'Error deleting multistream');
   }
 };
+
+export const generateThumbnail = async (data: {
+  assetId?: string;
+  playbackId: string;
+}) => {
+  try {
+    let playbackId = data.playbackId;
+    if (!data.playbackId) {
+      const asset = await getAsset(data.playbackId);
+      playbackId = asset.playbackId;
+    }
+    const asset = await livepeer.playback.get(playbackId as string);
+    const lpThumbnails =
+      asset.playbackInfo?.meta.source.filter(
+        (source) => source.hrn === 'Thumbnails',
+      ) ?? [];
+    if (lpThumbnails.length > 0) {
+      return lpThumbnails[0].url.replace('thumbnails.vtt', 'keyframes_0.jpg');
+    }
+  } catch (e) {
+    throw new HttpException(400, 'Error generating thumbnail');
+  }
+};
+
+export const createClip = async (data: {
+  playbackId: string;
+  sessionId: string;
+  start: number;
+  end: number;
+}) => {
+  try {
+    const clip = await livepeer.stream.createClip({
+      endTime: data.end,
+      startTime: data.start,
+      sessionId: data.sessionId,
+      playbackId: data.playbackId,
+    });
+    return clip;
+  } catch (e) {
+    throw new HttpException(400, 'Error creating clip');
+  }
+};
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
