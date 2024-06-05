@@ -37,7 +37,9 @@ export const PopoverActions = ({
           href={`/studio/${organizationSlug}/library/${
             session._id as string
           }`}>
-          <Button variant={'outline'} className="space-x-2 w-full">
+          <Button
+            variant={'ghost'}
+            className="space-x-2 w-full !justify-start">
             <FilePenLine />
             <p className="">Edit</p>
           </Button>
@@ -45,7 +47,7 @@ export const PopoverActions = ({
         {layout === eLayout.grid &&
           (session.ipfsURI ? (
             <Button
-              variant={'outline'}
+              variant={'ghost'}
               className="space-x-2"
               onClick={() => handleCopy()}>
               <Copy />
@@ -58,8 +60,8 @@ export const PopoverActions = ({
           <DialogTrigger>
             <span
               className={buttonVariants({
-                variant: 'outline',
-                className: 'space-x-2 w-full',
+                variant: 'ghost',
+                className: 'space-x-2 w-full !justify-start',
               })}>
               <Share2 />
               <p>Share</p>
@@ -69,9 +71,9 @@ export const PopoverActions = ({
         </Dialog>
         {session.assetId && (
           <VideoDownloadClient
-            className="space-x-2"
+            className="space-x-2 !justify-start"
             videoName={`${session.name}.mp4`}
-            variant="outline"
+            variant="ghost"
             assetId={session.assetId}
           />
         )}
@@ -81,11 +83,11 @@ export const PopoverActions = ({
           TriggerComponent={
             <span
               className={buttonVariants({
-                variant: 'destructive-outline',
+                variant: 'ghost',
                 className:
-                  'flex justify-center space-x-2 cursor-pointer hover:bg-gray-100',
+                  'flex space-x-2 cursor-pointer hover:bg-gray-100 !justify-start',
               })}>
-              <Trash2 />
+              <Trash2 className="text-destructive" />
               <p>Delete</p>
             </span>
           }

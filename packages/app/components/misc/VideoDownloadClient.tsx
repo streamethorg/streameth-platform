@@ -74,7 +74,7 @@ const VideoDownloadClient = ({
       onClick={handleDownload}
       variant={variant}
       className={className}>
-      <Download size={24} className="p-1" />
+      <Download className=" w-5 h-5" />
       <p className={cn(collapsable && 'hidden xl:flex')}>
         {loading ? 'Downloading...' : 'Download'}
       </p>

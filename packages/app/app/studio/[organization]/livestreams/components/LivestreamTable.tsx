@@ -10,17 +10,19 @@ import { IExtendedOrganization, IExtendedStage } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
 import Link from 'next/link'
 import React from 'react'
-import DeleteLivestream from './DeleteLivestream'
-
-import ShareLivestream from './ShareLivestream'
 import ToggleLivestreamVisibility from './ToggleLivestreamVisibility'
 import TableSort from '@/components/misc/TableSort'
-import { Button } from '@/components/ui/button'
-import { ScissorsLineDashed } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
-import CreateLivestreamModal from './CreateLivestreamModal'
 import EditLivestream from './EditLivestream'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import LivestreamActions from './LivestreamActions'
+import { StreamInfo } from 'livekit-server-sdk/dist/proto/livekit_egress'
 
 const LivestreamTable = ({
   streams,
@@ -55,12 +57,17 @@ const LivestreamTable = ({
                 <Link
                   key={stream._id}
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
-                  <div className="flex flex-row items-center space-x-4 w-full">
-                    <div className="overflow-hidden min-w-[100px] w-[100px]">
+                  <div className=" flex flex-row items-center space-x-4 w-full">
+                    <div className="relative overflow-hidden min-w-[100px] w-[100px]">
                       {stream.thumbnail ? (
                         <Thumbnail imageUrl={stream.thumbnail} />
                       ) : (
                         <DefaultThumbnail />
+                      )}
+                      {stream.streamSettings?.isActive && (
+                        <p className="absolute top-0 right-0 text-white bg-destructive p-1 text-sm">
+                          live
+                        </p>
                       )}
                     </div>
                     <p className="hover:underline line-clamp-3">
@@ -71,12 +78,19 @@ const LivestreamTable = ({
               </TableCell>
 
               <TableCell>
-                {stream.streamDate ? (
-                  <p>
+                {stream?.streamDate ? (
+                  <p className="text-sm">
                     {formatDate(
                       new Date(stream?.streamDate),
-                      'ddd. MMMM. D, YYYY'
+                      'ddd. MMMM D, YYYY, HH:mm a'
                     )}{' '}
+                    {stream.isMultipleDate &&
+                      stream.streamEndDate &&
+                      ' - ' +
+                        formatDate(
+                          new Date(stream?.streamEndDate),
+                          'ddd. MMMM D, YYYY, HH:mm a'
+                        )}
                     {new Date(stream.streamDate) > new Date() && (
                       <span className="block text-sm text-muted-foreground">
                         Scheduled
@@ -93,27 +107,23 @@ const LivestreamTable = ({
               <TableCell>
                 <ToggleLivestreamVisibility item={stream} />
               </TableCell>
-              <TableCell>
-                <div className="flex gap-3 items-center">
-                  <EditLivestream
-                    organizationSlug={organizationSlug}
-                    livestream={stream}
-                  />
-                  <Link
-                    href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
-                    <Button
-                      variant="outline"
-                      className="flex gap-1 items-center">
-                      <ScissorsLineDashed className="w-4 h-4" />
-                      Clip
-                    </Button>
-                  </Link>
-                  <ShareLivestream
-                    organization={organizationSlug}
-                    streamId={stream._id}
-                  />
-                  <DeleteLivestream stream={stream} />
-                </div>
+              <TableCell className="flex items-center gap-2">
+                <EditLivestream
+                  organizationSlug={organizationSlug}
+                  livestream={stream}
+                />
+
+                <Popover>
+                  <PopoverTrigger className="z-10">
+                    <EllipsisVertical className="mt-2" />
+                  </PopoverTrigger>
+                  <PopoverContent className="w-fit">
+                    <LivestreamActions
+                      stream={stream}
+                      organizationSlug={organizationSlug}
+                    />
+                  </PopoverContent>
+                </Popover>
               </TableCell>
             </TableRow>
           ))}

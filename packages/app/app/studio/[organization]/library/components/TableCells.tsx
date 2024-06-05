@@ -8,6 +8,7 @@ import {
   EllipsisVertical,
   Earth,
   Lock,
+  Loader2,
 } from 'lucide-react'
 import Link from 'next/link'
 import { formatDate } from '@/lib/utils/time'
@@ -45,6 +46,7 @@ const TableCells = ({
   const [imageUrl, setImageUrl] = useState<string | undefined>(
     undefined
   )
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     generateThumbnail(item).then((url) => url && setImageUrl(url))
@@ -55,6 +57,7 @@ const TableCells = ({
   }
 
   const handlePublishment = () => {
+    setIsLoading(true)
     updateSessionAction({
       session: {
         _id: item._id,
@@ -76,8 +79,10 @@ const TableCells = ({
         } else if (item.published === false) {
           toast.success('Succesfully made your asset public')
         }
+        setIsLoading(false)
       })
       .catch(() => {
+        setIsLoading(false)
         toast.error('Something went wrong...')
       })
   }
@@ -106,7 +111,9 @@ const TableCells = ({
       </TableCell>
       <TableCell>
         <div className="flex justify-start items-center space-x-2">
-          {item.published ? (
+          {isLoading ? (
+            <Loader2 className="animate-spin" />
+          ) : item.published ? (
             <>
               <Earth size={16} />
               <p>Public</p>
@@ -119,7 +126,7 @@ const TableCells = ({
           )}
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <ChevronDown size={20} />
+              {isLoading ? null : <ChevronDown size={20} />}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem
@@ -170,7 +177,7 @@ const TableCells = ({
           <PopoverTrigger className="z-10">
             <EllipsisVertical className="mt-2" />
           </PopoverTrigger>
-          <PopoverContent className="w-60">
+          <PopoverContent className="w-fit">
             <PopoverActions
               session={item}
               organizationSlug={organization}

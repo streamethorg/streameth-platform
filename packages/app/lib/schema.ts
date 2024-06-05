@@ -90,6 +90,9 @@ export const StageSchema = z.object({
   streamTime: z.string().optional(),
   thumbnail: z.string().optional(),
   organizationId: z.string(),
+  streamEndDate: z.date().optional(),
+  streamEndTime: z.string().optional(),
+  isMultipleDate: z.boolean().optional(),
 })
 
 // Sessions
