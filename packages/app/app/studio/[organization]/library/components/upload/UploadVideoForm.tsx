@@ -54,7 +54,6 @@ const UploadVideoForm = ({
       assetId: '',
     },
   })
-  console.log('Rendering form')
 
   const handleCancel = () => {
     abortControllerRef.current.abort()
@@ -136,6 +135,7 @@ const UploadVideoForm = ({
           name="published"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Visibility</FormLabel>
               <FormControl>
                 <div className="flex justify-start items-center space-x-2">
                   {field.value ? (

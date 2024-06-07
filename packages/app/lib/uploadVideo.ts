@@ -26,7 +26,6 @@ const uploadVideo = (
         (bytesUploaded / bytesTotal) * 100
       )
 
-      console.log('I am at ', percentage, '%')
       onProgress(percentage)
     },
     onSuccess: () => {

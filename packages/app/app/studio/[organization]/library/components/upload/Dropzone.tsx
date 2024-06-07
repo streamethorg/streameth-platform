@@ -46,14 +46,14 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
           startUpload(acceptedFiles[0])
         }
       },
-      [startUpload]
+      [onChange]
     )
 
     useEffect(() => {
       if (assetId) {
         onChange(assetId)
       }
-    }, [assetId, onChange])
+    }, [isUploading, assetId])
 
     const { getRootProps, getInputProps } = useDropzone({
       accept: {
