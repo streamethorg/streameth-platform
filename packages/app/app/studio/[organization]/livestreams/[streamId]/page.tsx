@@ -7,6 +7,8 @@ import { LivestreamPageParams } from '@/lib/types'
 import PublishLivestream from './components/PublishLivestream'
 import StreamConfigWithPlayer from './components/StreamConfigWithPlayer'
 import StreamHeader from './components/StreamHeader'
+import ShareButton from '@/components/misc/interact/ShareButton'
+import { LinkedinIcon, XIcon } from 'react-share'
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null
@@ -18,31 +20,48 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
 
   return (
     <div className=" m-auto w-full h-full overflow-y-scroll">
-      <div className="flex flex-col max-w-5xl items-center gap-4 p-4 m-auto min-h-full">
+      <div className="flex flex-col p-8 w-full">
         <StreamHeader
           organization={params.organization}
           stream={stream}
           isLiveStreamPage
         />
+        <div className="flex flex-row gap-4 w-full">
+          <div className="flex flex-col">
+            <StreamConfigWithPlayer
+              stream={stream}
+              streamId={params.streamId}
+              organization={params.organization}
+            />
+            <div className="flex items-center  w-full py-2 space-x-2">
+              <span className="lg:max-w-[550px] line-clamp-2 text-xl font-bold mr-auto">
+                {stream.name}
+              </span>
+              <LivestreamEmbedCode
+                streamId={stream?.streamSettings?.streamId}
+                playbackId={stream?.streamSettings?.playbackId}
+                playerName={stream?.name}
+              />
+              <ShareButton
+                url={`/${params.organization}/livestream?stage=${stream._id}`}
+                shareFor="livestream"
+              />
+            </div>
+          </div>
 
-        <StreamConfigWithPlayer
-          stream={stream}
-          streamId={params.streamId}
-          organization={params.organization}
-        />
+          <div className=" h-auto flex flex-col space-y-4 w-full max-w-[25%] justify-start">
 
-        <Multistream
-          stream={stream}
-          organizationId={stream.organizationId as string}
-        />
-
-        <LivestreamEmbedCode
-          streamId={stream?.streamSettings?.streamId}
-          playbackId={stream?.streamSettings?.playbackId}
-          playerName={stream?.name}
-        />
-
-        <PublishLivestream stream={stream} />
+            <div className=" bg-black rounded-xl items-center justify-center w-full text-white flex flex-row h-auto max-h-[88px] text-xl">
+              <XIcon />
+              Stream to X
+            </div>
+            <PublishLivestream stream={stream} />
+            <Multistream
+              stream={stream}
+              organizationId={stream.organizationId as string}
+            />
+          </div>
+        </div>
       </div>
     </div>
   )

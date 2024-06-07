@@ -37,9 +37,9 @@ const LivestreamTable = ({
 
   return (
     <div className="rounded-xl shadow-sm">
-      <Table className="bg-white rounded-t-xl">
-        <TableHeader className="sticky top-0 z-50 bg-white rounded-t-xl">
-          <TableRow className="hover:bg-whiterounded-t-xl">
+      <Table className="bg-white rounded-t-xl ">
+        <TableHeader className="sticky top-0 z-50 bg-gray-100 border-separate">
+          <TableRow className="hover:bg-whiterounded-t-xl border-b">
             <TableHead>
               <TableSort title="Title" sortBy="name" />
             </TableHead>
@@ -108,7 +108,7 @@ const LivestreamTable = ({
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
                   <Button
                     variant="outline"
-                    className="border-[#4219FF]">
+                    className="border-[#4219FF] hover:bg-[#4219FF] hover:text-white">
                     Go live
                   </Button>
                 </Link>

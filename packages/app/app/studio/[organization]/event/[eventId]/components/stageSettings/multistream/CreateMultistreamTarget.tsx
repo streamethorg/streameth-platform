@@ -40,7 +40,7 @@ function SubmitButton() {
 export const CreateMultistreamTarget = ({
   streamId,
   organizationId,
-  btnName = 'Create',
+  btnName = 'Add',
 }: {
   streamId?: string
   organizationId?: string

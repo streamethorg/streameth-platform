@@ -5,6 +5,9 @@ import { IExtendedStage } from '@/lib/types'
 import { toast } from 'sonner'
 import { updateStageAction } from '@/lib/actions/stages'
 import { Check } from 'lucide-react'
+import { Card } from '@/components/ui/card'
+import StreamethLogo from '@/public/logo.png'
+import Image from 'next/image'
 
 const PublishLivestream = ({
   stream,
@@ -32,21 +35,15 @@ const PublishLivestream = ({
   }
 
   return (
-    <div className="flex justify-end gap-4 pb-10 w-full">
+    <>
       <Button
-        className="bg-white"
+        className=" w-full text-white flex flex-row justify-center h-auto max-h-[88px] text-xl space-x-4"
         loading={isLoading}
         onClick={handlePublishStream}
         disabled={stream?.published || isLoading}
-        variant={!stream.published ? 'outline' : 'green'}>
-        {stream.published ? (
-          <p className="flex gap-1 items-center">
-            <Check className="w-4 h-4 text-[#1A7F37]" /> Livestream
-            Published
-          </p>
-        ) : (
-          'Publish Livestream'
-        )}
+        variant={'primary'}>
+        <Image src={StreamethLogo} alt="img" width={50} height={50} />
+        <span>Stream to channel</span>
       </Button>
       {stream?.published && (
         <Button
@@ -58,7 +55,7 @@ const PublishLivestream = ({
           Un-publish
         </Button>
       )}
-    </div>
+    </>
   )
 }
 

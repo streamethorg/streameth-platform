@@ -6,7 +6,6 @@ const StreamethLogo: React.FC<React.SVGProps<SVGSVGElement>> = () => {
       width="41"
       height="36"
       viewBox="0 0 41 36"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"

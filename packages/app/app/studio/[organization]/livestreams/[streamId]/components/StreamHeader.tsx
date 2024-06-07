@@ -25,24 +25,15 @@ const StreamHeader = ({
     setUrl(window.location.origin)
   }, [])
   return (
-    <div className="flex items-center justify-between w-full">
-      <CardTitle className="lg:max-w-[550px] line-clamp-2">
-        {stream.name}
-      </CardTitle>
-      <div className="flex items-center gap-4">
-        {isLiveStreamPage && (
-          <Link
-            href={`/studio/${organization}/livestreams`}
-            className="flex gap-1 items-center text-sm w-full">
-            <ArrowLeft className="w-4 h-4" />
-            Back to livestreams
-          </Link>
-        )}
-        <ShareButton
-          url={`${url}/${organization}/livestream?stage=${stream._id}`}
-          shareFor="livestream"
-        />
-      </div>
+    <div>
+      {isLiveStreamPage && (
+        <Link
+          href={`/studio/${organization}`}
+          className="flex w-full items-center ">
+          <ArrowLeft className="w-4 h-4" />
+          Exit
+        </Link>
+      )}
     </div>
   )
 }

@@ -28,7 +28,7 @@ const Multistream = ({
         <Card className="shadow-none bg-white">
           <CardContent className="p-3 lg:p-6 flex justify-between items-center ">
             <CardTitle className="text-xl">
-              Multistream Target
+              Custom Platform
             </CardTitle>
 
             <CreateMultistreamTarget

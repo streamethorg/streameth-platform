@@ -15,7 +15,7 @@ const navigationItems = [
   {
     text: 'Home',
     navigationPath: '',
-    icon: <Home size={20} />,
+    icon: <Home size={25} />,
   },
   // {
   //   text: 'Events',
@@ -25,12 +25,12 @@ const navigationItems = [
   {
     text: 'Library',
     navigationPath: '/library',
-    icon: <Videotape size={20} />,
+    icon: <Videotape size={25} />,
   },
   {
     text: 'Livestreams',
     navigationPath: '/livestreams',
-    icon: <Radio size={20} />,
+    icon: <Radio size={25} />,
   },
   // {
   //   text: 'Clips',
@@ -45,18 +45,20 @@ const navigationItems = [
   {
     text: 'Team',
     navigationPath: '/settings',
-    icon: <Settings />,
+    icon: <Settings size={25} />,
   },
 ]
 
 const SidebarMenu = ({
   organizationSlug,
+  initalExpanded
 }: {
   organizationSlug: string
+  initalExpanded?: boolean
 }) => {
   return (
     <div className="relative z-[60]">
-      <SidebarUI>
+      <SidebarUI initalExpanded={initalExpanded}>
         {navigationItems.map((item, index) => (
           <SidebarItem
             key={index}

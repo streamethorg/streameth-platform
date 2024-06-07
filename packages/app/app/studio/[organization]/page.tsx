@@ -1,23 +1,12 @@
 'use server'
 
 import {
-  CalendarDays,
-  Videotape,
-  Radio,
-  ScissorsLineDashed,
-  Home,
-  ImageIcon,
-  Settings,
   CameraIcon,
-  Camera,
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Livestreams, Loading } from './livestreams/page'
 import {
-  IExtendedStage,
   LivestreamPageParams,
-  eSort,
 } from '@/lib/types'
 import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal'
 import { Suspense } from 'react'
@@ -33,7 +22,7 @@ const OrganizationPage = async ({
   if (!organization) return <></>
 
   return (
-    <div className="h-full w-full flex flex-row ">
+    <div className="h-full w-full flex flex-row overflow-scroll">
       <div className="h-full w-full p-12 flex flex-col">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="grid grid-rows-1 grid-cols-4 gap-4 max-w-5xl py-4">

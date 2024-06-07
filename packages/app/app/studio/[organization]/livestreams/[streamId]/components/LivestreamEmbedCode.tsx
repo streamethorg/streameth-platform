@@ -34,9 +34,6 @@ const LivestreamEmbedCode = ({
     playerName: playerName,
   })
   return (
-    <Card className="w-full shadow-none bg-white">
-      <CardContent className="p-3 lg:p-6 flex justify-between items-center">
-        <CardTitle className="text-xl">Embed Stream</CardTitle>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex gap-1">
@@ -64,8 +61,6 @@ const LivestreamEmbedCode = ({
             </p>
           </DialogContent>
         </Dialog>
-      </CardContent>
-    </Card>
   )
 }
 

@@ -45,7 +45,7 @@ export const Livestreams = async ({
   )
 
   return (
-    <div className="flex flex-col h-full bg-white border rounded-xl">
+    <div className="flex flex-col min-h-[300px] bg-white border rounded-xl">
       {stages.length > 0 ? (
         <LivestreamTable
           organization={organization}
