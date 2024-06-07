@@ -19,28 +19,15 @@ import { sortArray } from '@/lib/utils/utils'
 import EmptyFolder from '@/lib/svg/EmptyFolder'
 import TableSkeleton from '@/components/misc/Table/TableSkeleton'
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div className="flex flex-col h-full bg-white">
-      <Card
-        style={{
-          backgroundImage: `url(/backgrounds/livestreamBg.png)`,
-        }}
-        className="p-4 bg-no-repeat bg-cover border-none shadow-none">
-        <CardHeader>
-          <CardTitle>Livestreams</CardTitle>
-          <CardDescription className="max-w-[500px]">
-            Manage your old livestreams or go live!
-          </CardDescription>
-        </CardHeader>
-      </Card>
-
       <TableSkeleton />
     </div>
   )
 }
 
-const Livestreams = async ({
+export const Livestreams = async ({
   params,
   searchParams,
 }: LivestreamPageParams) => {
@@ -58,26 +45,7 @@ const Livestreams = async ({
   )
 
   return (
-    <div className="flex flex-col h-full bg-white">
-      <Card
-        style={{
-          backgroundImage: `url(/backgrounds/livestreamBg.png)`,
-        }}
-        className="p-4 bg-no-repeat bg-cover rounded-none border-none shadow-none">
-        <CardHeader>
-          <CardTitle>Livestreams</CardTitle>
-          <CardDescription className="max-w-[500px]">
-            Manage your old livestreams or go live!
-          </CardDescription>
-        </CardHeader>
-        <CardFooter>
-          <CreateLivestreamModal
-            show={searchParams?.show}
-            organization={organization}
-          />
-        </CardFooter>
-      </Card>
-
+    <div className="flex flex-col h-full bg-white border rounded-xl">
       {stages.length > 0 ? (
         <LivestreamTable
           organization={organization}

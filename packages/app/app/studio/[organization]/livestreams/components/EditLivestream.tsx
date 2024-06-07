@@ -110,7 +110,9 @@ const EditLivestream = ({
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)}>
       <DialogTrigger>
-        <Button variant="outline">Edit</Button>
+        <Button variant="link"> 
+        
+        Edit</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

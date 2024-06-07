@@ -15,14 +15,14 @@ import TableSort from '@/components/misc/TableSort'
 import { EllipsisVertical } from 'lucide-react'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
-import EditLivestream from './EditLivestream'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
 import LivestreamActions from './LivestreamActions'
-import { StreamInfo } from 'livekit-server-sdk/dist/proto/livekit_egress'
+import { Button } from '@/components/ui/button'
+import { ScissorsLineDashed } from 'lucide-react'
 
 const LivestreamTable = ({
   streams,
@@ -36,10 +36,10 @@ const LivestreamTable = ({
   // TODO: Somewhere in the last Table cell is a hydration error
 
   return (
-    <div>
-      <Table className="bg-white">
-        <TableHeader className="sticky top-0 z-50 bg-white">
-          <TableRow className="hover:bg-white">
+    <div className="rounded-xl shadow-sm">
+      <Table className="bg-white rounded-t-xl">
+        <TableHeader className="sticky top-0 z-50 bg-white rounded-t-xl">
+          <TableRow className="hover:bg-whiterounded-t-xl">
             <TableHead>
               <TableSort title="Title" sortBy="name" />
             </TableHead>
@@ -54,29 +54,24 @@ const LivestreamTable = ({
           {streams?.map((stream) => (
             <TableRow key={stream._id}>
               <TableCell className="font-medium max-w-[500px]">
-                <Link
-                  key={stream._id}
-                  href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
-                  <div className=" flex flex-row items-center space-x-4 w-full">
-                    <div className="relative overflow-hidden min-w-[100px] w-[100px]">
-                      {stream.thumbnail ? (
-                        <Thumbnail imageUrl={stream.thumbnail} />
-                      ) : (
-                        <DefaultThumbnail />
-                      )}
-                      {stream.streamSettings?.isActive && (
-                        <p className="absolute top-0 right-0 text-white bg-destructive p-1 text-sm">
-                          live
-                        </p>
-                      )}
-                    </div>
-                    <p className="hover:underline line-clamp-3">
-                      {stream?.name}
-                    </p>
+                <div className=" flex flex-row items-center space-x-4 w-full">
+                  <div className="relative overflow-hidden min-w-[100px] w-[100px]">
+                    {stream.thumbnail ? (
+                      <Thumbnail imageUrl={stream.thumbnail} />
+                    ) : (
+                      <DefaultThumbnail />
+                    )}
+                    {stream.streamSettings?.isActive && (
+                      <p className="absolute top-0 right-0 text-white bg-destructive p-1 text-sm">
+                        live
+                      </p>
+                    )}
                   </div>
-                </Link>
+                  <p className="hover:underline line-clamp-3">
+                    {stream?.name}
+                  </p>
+                </div>
               </TableCell>
-
               <TableCell>
                 {stream?.streamDate ? (
                   <p className="text-sm">
@@ -108,10 +103,24 @@ const LivestreamTable = ({
                 <ToggleLivestreamVisibility item={stream} />
               </TableCell>
               <TableCell className="flex items-center gap-2">
-                <EditLivestream
-                  organizationSlug={organizationSlug}
-                  livestream={stream}
-                />
+                <Link
+                  key={stream._id}
+                  href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
+                  <Button
+                    variant="outline"
+                    className="border-[#4219FF]">
+                    Go live
+                  </Button>
+                </Link>
+                <Link
+                  href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
+                  <Button
+                    variant="outline"
+                    className="flex gap-1 items-center w-full">
+                    <ScissorsLineDashed className="w-4 h-4" />
+                    Clip
+                  </Button>
+                </Link>
 
                 <Popover>
                   <PopoverTrigger className="z-10">

@@ -3,9 +3,8 @@ import { IExtendedStage } from '@/lib/types'
 import React from 'react'
 import ShareLivestream from './ShareLivestream'
 import DeleteLivestream from './DeleteLivestream'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { ScissorsLineDashed } from 'lucide-react'
+
+import EditLivestream from './EditLivestream'
 
 const LivestreamActions = ({
   stream,
@@ -16,15 +15,11 @@ const LivestreamActions = ({
 }) => {
   return (
     <div className="space-y-2">
-      <Link
-        href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
-        <Button
-          variant="ghost"
-          className="flex gap-1 items-center w-full">
-          <ScissorsLineDashed className="w-4 h-4" />
-          Clip
-        </Button>
-      </Link>
+      <EditLivestream
+        organizationSlug={organizationSlug}
+        livestream={stream}
+      />
+   
       <ShareLivestream
         organization={organizationSlug}
         streamId={stream._id}

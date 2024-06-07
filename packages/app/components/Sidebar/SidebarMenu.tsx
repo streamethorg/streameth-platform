@@ -32,18 +32,18 @@ const navigationItems = [
     navigationPath: '/livestreams',
     icon: <Radio size={20} />,
   },
+  // {
+  //   text: 'Clips',
+  //   navigationPath: '/clips',
+  //   icon: <ScissorsLineDashed size={20} />,
+  // },
+  // {
+  //   text: 'Mint NFT',
+  //   navigationPath: '/nfts',
+  //   icon: <ImageIcon size={20} />,
+  // },
   {
-    text: 'Clips',
-    navigationPath: '/clips',
-    icon: <ScissorsLineDashed size={20} />,
-  },
-  {
-    text: 'Mint NFT',
-    navigationPath: '/nfts',
-    icon: <ImageIcon size={20} />,
-  },
-  {
-    text: 'Settings',
+    text: 'Team',
     navigationPath: '/settings',
     icon: <Settings />,
   },
@@ -55,7 +55,7 @@ const SidebarMenu = ({
   organizationSlug: string
 }) => {
   return (
-    <div className="relative z-[60] w-[1/4]">
+    <div className="relative z-[60]">
       <SidebarUI>
         {navigationItems.map((item, index) => (
           <SidebarItem

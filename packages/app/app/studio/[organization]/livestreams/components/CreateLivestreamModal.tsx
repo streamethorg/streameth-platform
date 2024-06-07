@@ -35,7 +35,7 @@ import { formatDate } from '@/lib/utils/time'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
-
+import { CameraIcon } from 'lucide-react'
 const CreateLivestreamModal = ({
   organization,
   show,
@@ -137,7 +137,12 @@ const CreateLivestreamModal = ({
         setStreamType(undefined)
       }}>
       <DialogTrigger asChild>
-        <Button variant="primary">Create Livestream</Button>
+        <Button variant={'outline'} className="h-auto flex flex-row bg-white px-2 justify-start rounded-xl  border space-x-4 items-center">
+          <div className="p-4 border bg-primary  rounded-xl text-white">
+            <CameraIcon className="h-6" />
+          </div>
+          <span className="">Create Livestream</span>
+        </Button>
       </DialogTrigger>
       {!streamType ? (
         <CreateLivestreamOptions setStreamType={setStreamType} />

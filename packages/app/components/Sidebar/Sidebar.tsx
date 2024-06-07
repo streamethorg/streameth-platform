@@ -14,11 +14,11 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
   const [expanded, setExpanded] = useState(true)
 
   return (
-    <aside className="flex flex-col h-screen bg-primary">
+    <aside className="flex flex-col h-screen bg-white border-r">
       <div className="flex justify-between items-center p-4 pb-2">
         <div
           className={`flex items-center overflow-hidden transition-all ${
-            expanded ? 'w-48' : 'w-0'
+            expanded ? 'w-40' : 'w-0'
           }`}>
           <div className="pl-2">
             <StreamethStudio />
@@ -32,7 +32,7 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
       </div>
 
       <SidebarContext.Provider value={{ expanded }}>
-        <ul className="flex-1 px-3 text-white">{children}</ul>
+        <ul className="flex-1 px-3 ">{children}</ul>
       </SidebarContext.Provider>
 
       <Link
@@ -43,7 +43,7 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
         <BookOpenText className="w-6 h-6" />
         <span
           className={`overflow-hidden transition-all ${
-            expanded ? 'w-52 ml-3' : 'w-0'
+            expanded ? 'ml-3' : 'w-0'
           }`}>
           Docs
         </span>
@@ -89,17 +89,13 @@ export const SidebarItem = ({
       className={`
         relative flex items-center py-2 px-3 my-1
             font-medium rounded-md cursor-pointer
-            transition-colors group
-            ${
-              active
-                ? 'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'
-                : 'hover:bg-secondary-foreground'
-            }
+            transition-colors group  hover:border hover:border-primary
+            ${active ? 'border border-primary rounded-xl' : '  '}
     `}>
       {icon}
       <span
-        className={`overflow-hidden transition-all ${
-          expanded ? 'w-52 ml-3' : 'w-0'
+        className={`overflow-hidden transition-all text-sm ${
+          expanded ? ' ml-3' : 'w-0'
         }`}>
         {text}
       </span>
