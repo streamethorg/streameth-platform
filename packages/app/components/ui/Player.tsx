@@ -1,7 +1,6 @@
 'use client'
 import { cn } from '@/lib/utils/utils'
 import {
-  ClipIcon,
   EnterFullscreenIcon,
   ExitFullscreenIcon,
   LoadingIcon,
@@ -14,14 +13,33 @@ import {
 } from '@livepeer/react/assets'
 import * as Player from '@livepeer/react/player'
 import * as Popover from '@radix-ui/react-popover'
-import { ClipPayload } from 'livepeer/dist/models/components'
 import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react'
-import React, { useCallback, useTransition } from 'react'
-import { toast } from 'sonner'
+import React from 'react'
+import { useRef, useEffect } from 'react'
+// @ts-ignore
+import mux from 'mux-embed'
 
 import { Src } from '@livepeer/react'
 
 export function PlayerWithControls(props: { src: Src[] | null }) {
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      const initTime = mux.utils.now()
+
+      mux.monitor(videoRef.current, {
+        debug: false,
+        data: {
+          env_key: '1lgdh87bv14j6bhv83buspkj3',
+          player_name: 'Main Player', // Arbitrary string to identify the player
+          player_init_time: initTime,
+          // Add other metadata fields here
+        },
+      })
+    }
+  }, [videoRef])
+
   if (!props.src || !props.src?.[0].src) {
     return (
       <PlayerLoading
@@ -35,6 +53,8 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
     <Player.Root src={props.src}>
       <Player.Container className="md:rounded-xl bg-gradient-to-b from-[#FF9976] to-[#6426EF]  h-full w-full overflow-hidden  outline-none transition">
         <Player.Video
+          ref={videoRef}
+          id={`player-${props.src[0].src}`}
           title="Live stream"
           className={cn('h-full w-full transition')}
         />

@@ -62,11 +62,11 @@ export const updateOrganizationAction = async ({
 }
 
 export const addOrganizationMemberAction = async ({
-  memberWalletAddress,
+  memberAddress,
   organizationId,
 }: {
   organizationId: string
-  memberWalletAddress: string
+  memberAddress: string
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
@@ -75,7 +75,7 @@ export const addOrganizationMemberAction = async ({
 
   const response = await addOrganizationMember({
     organizationId,
-    memberWalletAddress,
+    memberAddress,
     authToken,
   })
 

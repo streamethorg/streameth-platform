@@ -10,7 +10,7 @@ import { toast } from 'sonner'
 import { useSIWE } from 'connectkit'
 import SupportForm from './SupportForm'
 import { Button } from '../../ui/button'
-import { ConnectWalletButton } from '../ConnectWalletButton'
+import { SignInUserButton } from '../SignInUserButton'
 import {
   Credenza,
   CredenzaContent,
@@ -91,7 +91,7 @@ const Support = () => {
           {!authenticated ? (
             <div>
               <p className="py-2">Sign in to send us a message</p>
-              <ConnectWalletButton />
+              <SignInUserButton />
             </div>
           ) : messageSent ? (
             <div>

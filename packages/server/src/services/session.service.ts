@@ -7,7 +7,11 @@ import Event from '@models/event.model';
 import { config } from '@config';
 import { Types } from 'mongoose';
 import Stage from '@models/stage.model';
-import { getStreamRecordings } from '@utils/livepeer';
+import {
+  getDownloadUrl,
+  getPlayback,
+  getStreamRecordings,
+} from '@utils/livepeer';
 import Fuse from 'fuse.js';
 
 export default class SessionService {
@@ -127,11 +131,14 @@ export default class SessionService {
 
   async createMetadata(sessionId: string) {
     let session = await Session.findById(sessionId);
+    let animation = await getDownloadUrl(session.assetId);
+    console.log('animation_url:', animation);
     let metadata = {
       name: session.name,
       description: session.description,
       external_url: `${config.baseUrl}/watch?event=${session.eventSlug}&session=${session._id}`,
-      animation_url: `${config.playerUrl}/embed?playbackId=${session.playbackId}&vod=true&streamId=&playerName=${session.name}`,
+      animation_url: await getDownloadUrl(session.assetId),
+      // animation_url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${session.playbackId}/1080p0.mp4`,
       image: session.coverImage,
       attributes: [
         {

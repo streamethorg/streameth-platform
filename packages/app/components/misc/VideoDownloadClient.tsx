@@ -5,6 +5,7 @@ import { Download } from 'lucide-react'
 import { toast } from 'sonner'
 import { apiUrl, cn } from '@/lib/utils/utils'
 import Collection from '@/app/[organization]/collection/page'
+import { useState } from 'react'
 
 const VideoDownloadClient = ({
   videoName,
@@ -28,6 +29,7 @@ const VideoDownloadClient = ({
   className?: string
   collapsable?: boolean
 }) => {
+  const [loading, setLoading] = useState(false)
   const fetchDownloadUrl = async (assetId: string) => {
     const response = await fetch(
       `${apiUrl()}/streams/asset/${assetId}`
@@ -41,39 +43,42 @@ const VideoDownloadClient = ({
   }
 
   const handleDownload = async () => {
+    setLoading(true)
     try {
       const downloadUrl = await fetchDownloadUrl(assetId)
 
-      const response = await fetch(downloadUrl)
-      if (!response.ok) {
-        throw new Error('Network response was not ok.')
-      }
-
-      const data = await response.blob()
-      const blobUrl = window.URL.createObjectURL(data)
+      // Create a temporary anchor element
       const link = document.createElement('a')
+      link.href = downloadUrl
+      link.setAttribute('download', videoName) // Set the desired file name
 
-      link.href = blobUrl
-      link.setAttribute('download', videoName)
+      // Append the anchor to the body
       document.body.appendChild(link)
 
+      // Trigger the download by simulating a click
       link.click()
-      link.parentNode!.removeChild(link)
-      window.URL.revokeObjectURL(blobUrl)
 
-      toast.success('Successfully downloaded the video')
+      // Clean up by removing the anchor element
+      document.body.removeChild(link)
+
+      toast.success('Download started')
+      setLoading(false)
     } catch (err) {
-      toast.error('Failed to download the video')
+      setLoading(false)
+      toast.error('Failed to download video')
     }
   }
 
   return (
     <Button
+      disabled={loading}
       onClick={handleDownload}
       variant={variant}
       className={className}>
-      <Download size={21} />
-      <p className={cn(collapsable && 'hidden xl:flex')}>Download</p>
+      <Download className=" w-5 h-5" />
+      <p className={cn(collapsable && 'hidden xl:flex')}>
+        {loading ? 'Downloading...' : 'Download'}
+      </p>
     </Button>
   )
 }

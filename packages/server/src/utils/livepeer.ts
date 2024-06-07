@@ -111,12 +111,31 @@ export const getPlayback = async (assetId: string): Promise<string> => {
     if (!data.playbackUrl) {
       return '';
     }
+
     return data.playbackUrl;
   } catch (e) {
     console.error(`Error fetching asset:`, e);
   }
 };
-
+export const getDownloadUrl = async (assetId: string): Promise<string> => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    if (!data.downloadUrl) {
+      return '';
+    }
+    console.log(`Download url: ${data.downloadUrl}`);
+    return data.downloadUrl;
+  } catch (e) {
+    console.error(`Error fetching asset:`, e);
+  }
+};
 export const getAsset = async (assetId: string) => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {

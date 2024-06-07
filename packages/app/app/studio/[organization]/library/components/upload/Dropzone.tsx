@@ -24,33 +24,21 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
     const [isUploading, setIsUploading] = useState(false)
     const [assetId, setAssetId] = useState<string | null>(null)
 
-    const handleProgress = useCallback((percentage: number) => {
-      setProgress(percentage)
-    }, [])
-
-    const handleSuccess = useCallback(() => {
-      setIsUploading(false)
-    }, [])
-
-    const startUpload = useCallback(
-      async (file: File) => {
-        setIsUploading(true)
-        const uploadUrl = await getUrlAction(file.name)
-        if (uploadUrl) {
-          uploadVideo(
-            file,
-            uploadUrl.url,
-            abortControllerRef,
-            handleProgress,
-            async () => {
-              setAssetId(uploadUrl.assetId)
-              handleSuccess()
-            }
-          )
-        }
-      },
-      [abortControllerRef, handleProgress, handleSuccess]
-    )
+    const startUpload = async (file: File) => {
+      setIsUploading(true)
+      const uploadUrl = await getUrlAction(file.name)
+      if (uploadUrl) {
+        uploadVideo(
+          file,
+          uploadUrl?.tusEndpoint as string,
+          abortControllerRef,
+          (percentage) => setProgress(percentage),
+          async () => {
+            setAssetId(uploadUrl.assetId as string)
+          }
+        )
+      }
+    }
 
     const onDrop = useCallback(
       (acceptedFiles: File[]) => {

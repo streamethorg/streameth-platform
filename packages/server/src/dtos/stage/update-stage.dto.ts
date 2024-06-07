@@ -28,6 +28,10 @@ export class UpdateStageDto {
   published?: boolean;
 
   @IsOptional()
+  @IsBoolean()
+  isMultipleDate?: boolean;
+
+  @IsOptional()
   @IsObject()
   streamSettings?: IStreamSettings;
 
@@ -48,6 +52,10 @@ export class UpdateStageDto {
   @IsOptional()
   @IsString()
   streamDate?: string;
+
+  @IsOptional()
+  @IsString()
+  streamEndDate?: string;
 
   @IsOptional()
   @IsString()

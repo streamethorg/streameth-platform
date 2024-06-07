@@ -33,6 +33,8 @@ import CreateLivestreamOptions from './CreateLivestreamOptions'
 import TimePicker from '@/components/misc/form/timePicker'
 import { formatDate } from '@/lib/utils/time'
 import ImageUpload from '@/components/misc/form/imageUpload'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 
 const CreateLivestreamModal = ({
   organization,
@@ -42,6 +44,7 @@ const CreateLivestreamModal = ({
   organization: IExtendedOrganization
 }) => {
   const [open, setOpen] = useState(show ?? false)
+  const [isMultiDate, setIsMultiDate] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [streamType, setStreamType] = useState<
     'instant' | 'schedule' | undefined
@@ -56,22 +59,37 @@ const CreateLivestreamModal = ({
       organizationId: organization?._id,
       streamDate: new Date(),
       streamTime: '',
+      streamEndDate: new Date(),
+      streamEndTime: '',
+      isMultipleDate: isMultiDate,
     },
   })
 
   const handleModalClose = () => {
     setOpen(false)
     setStreamType(undefined)
+    setIsMultiDate(false)
     form.reset()
   }
 
-  const dateInput = formatDate(
-    new Date(`${form.getValues('streamDate')}`),
-    'YYYY-MM-DD'
+  const formattedDate = new Date(
+    `${formatDate(
+      new Date(`${form.getValues('streamDate')}`),
+      'YYYY-MM-DD'
+    )}T${form.getValues('streamTime')}`
   )
-  const timeInput = form.getValues('streamTime')
-  const formattedDate = new Date(`${dateInput}T${timeInput}`)
+
+  const formattedEndDate = new Date(
+    new Date(
+      `${formatDate(
+        new Date(`${form.getValues('streamEndDate')}`),
+        'YYYY-MM-DD'
+      )}T${form.getValues('streamEndTime')}`
+    )
+  )
   const isPast = formattedDate < new Date()
+  const validateEndDate = formattedEndDate < formattedDate
+
   const isScheduleFormDisable =
     !form.getValues('streamDate') ||
     !form.getValues('streamTime') ||
@@ -82,11 +100,13 @@ const CreateLivestreamModal = ({
     setIsLoading(true)
     let streamId: string | undefined
     // destructure and omit streamTime from the payload
-    const { streamTime, ...otherValues } = values
+    const { streamTime, streamEndTime, ...otherValues } = values
     createStageAction({
       stage: {
         ...otherValues,
         streamDate: isSchedule ? formattedDate : new Date(),
+        streamEndDate: isMultiDate ? formattedEndDate : new Date(),
+        isMultipleDate: isMultiDate,
       },
     })
       .then((response) => {
@@ -101,6 +121,7 @@ const CreateLivestreamModal = ({
       })
       .catch(() => {
         toast.error('Error creating stream')
+        setIsLoading(false)
       })
       .finally(() => {
         setIsLoading(false)
@@ -121,7 +142,7 @@ const CreateLivestreamModal = ({
       {!streamType ? (
         <CreateLivestreamOptions setStreamType={setStreamType} />
       ) : (
-        <DialogContent className="sm:max-w-[425px] bg-white">
+        <DialogContent className="sm:max-w-[450px] bg-white overflow-auto">
           <DialogHeader>
             <DialogTitle>
               {!isSchedule ? 'Create' : 'Schedule'} livestream
@@ -175,13 +196,41 @@ const CreateLivestreamModal = ({
 
               {isSchedule && (
                 <>
-                  <div className="flex space-x-3 mt-8">
+                  <div className="mt-6">
+                    {' '}
+                    <p
+                      className="text-sm"
+                      onClick={() => setIsMultiDate(!isMultiDate)}>
+                      Streaming multiple days?
+                    </p>{' '}
+                    <div className="flex items-center gap-5 mt-1">
+                      <div className="flex items-center gap-1">
+                        <Checkbox
+                          checked={isMultiDate}
+                          onCheckedChange={() => setIsMultiDate(true)}
+                        />
+                        <Label>Yes</Label>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Checkbox
+                          defaultChecked
+                          onCheckedChange={() =>
+                            setIsMultiDate(!isMultiDate)
+                          }
+                          checked={!isMultiDate}></Checkbox>
+                        <Label>No</Label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex space-x-3 mt-4">
                     <FormField
                       control={form.control}
                       name="streamDate"
                       render={({ field }) => (
                         <FormItem className="w-full">
-                          <FormLabel required>Stream Date</FormLabel>
+                          <FormLabel required>
+                            Stream {isMultiDate ? 'Start' : ''} Date
+                          </FormLabel>
                           <FormControl>
                             <DatePicker
                               value={field.value as Date}
@@ -198,7 +247,9 @@ const CreateLivestreamModal = ({
                       name="streamTime"
                       render={({ field }) => (
                         <FormItem className="w-full">
-                          <FormLabel required>Stream Time</FormLabel>
+                          <FormLabel required>
+                            Stream {isMultiDate ? 'Start' : ''} Time
+                          </FormLabel>
                           <FormControl>
                             <TimePicker
                               value={field.value}
@@ -215,6 +266,56 @@ const CreateLivestreamModal = ({
                       Couldn&apos;t schedule. The date and time
                       selected are too far in the past.
                     </p>
+                  )}
+
+                  {isMultiDate && (
+                    <>
+                      <div className="flex space-x-3 mt-4">
+                        <FormField
+                          control={form.control}
+                          name="streamEndDate"
+                          render={({ field }) => (
+                            <FormItem className="w-full">
+                              <FormLabel required>
+                                Stream End Date
+                              </FormLabel>
+                              <FormControl>
+                                <DatePicker
+                                  value={field.value as Date}
+                                  onChange={field.onChange}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="streamEndTime"
+                          render={({ field }) => (
+                            <FormItem className="w-full">
+                              <FormLabel required>
+                                Stream End Time
+                              </FormLabel>
+                              <FormControl>
+                                <TimePicker
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      {validateEndDate && (
+                        <p className="text-destructive text-[12px] mt-1">
+                          Couldn&apos;t schedule. End date and time
+                          selected are too far in the past.
+                        </p>
+                      )}
+                    </>
                   )}
                 </>
               )}

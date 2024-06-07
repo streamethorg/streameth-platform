@@ -6,17 +6,24 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { NavBarProps } from '@/lib/types'
+import { SignInUserButton } from '../misc/SignInUserButton'
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar({
   setIsNavVisible,
   isMobile,
   pages,
+  organization,
 }: {
   isMobile?: boolean
   setIsNavVisible?: React.Dispatch<React.SetStateAction<boolean>>
   pages: NavBarProps['pages']
+  organization?: string
 }) {
+  const pathname = usePathname()
+  const isStudio = pathname.includes('studio')
   if (pages.length === 0) {
     return null
   }
@@ -39,8 +46,27 @@ export default function Navbar({
             </Link>
           </NavigationMenuItem>
         ))}
-        <NavigationMenuItem key={'connect'} className="md:hidden">
-          <ConnectWalletButton className="w-full rounded-none" />
+        {organization === 'ethprague' && (
+          <Dialog>
+            <DialogTrigger>
+              <NavigationMenuItem
+                className={`${navigationMenuTriggerStyle()} bg-muted`}>
+                Schedule
+              </NavigationMenuItem>
+            </DialogTrigger>
+            <DialogContent className="w-[calc(100vw-54px)] lg:min-w-[1000px] xl:min-w-[1250px] 2xl:min-w-[1400px] h-[calc(100vh-54px)] md:h-[800px] p-2 md:p-0">
+              <iframe
+                src="https://ethprague.com/schedule"
+                width="100%"
+                height="100%"
+                name="myiFrame"></iframe>
+            </DialogContent>
+          </Dialog>
+        )}
+        <NavigationMenuItem key={'connect'} className="lg:hidden">
+          {isStudio && (
+            <SignInUserButton className="w-full rounded-none" />
+          )}
         </NavigationMenuItem>
       </ul>
     </div>

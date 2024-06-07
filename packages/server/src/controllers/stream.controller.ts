@@ -7,6 +7,7 @@ import {
   getPlayback,
   createMultiStream,
   deleteMultiStream,
+  getDownloadUrl,
 } from '@utils/livepeer';
 import {
   Tags,
@@ -82,6 +83,6 @@ export class StreamController extends Controller {
   async getVideoUrl(
     @Path() assetId: string,
   ): Promise<IStandardResponse<string>> {
-    return SendApiResponse('Playback fetched', await getPlayback(assetId));
+    return SendApiResponse('Playback fetched', await getDownloadUrl(assetId));
   }
 }

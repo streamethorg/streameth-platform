@@ -70,7 +70,7 @@ const VideoCardWithMenu = ({
             <div className="flex justify-between items-center">
               <CardDescription className={`text-xs truncate `}>
                 {formatDate(
-                  new Date(session.createdAt as string),
+                  new Date(session.updatedAt as string),
                   'ddd. MMM. D, YYYY'
                 )}
               </CardDescription>
@@ -83,7 +83,7 @@ const VideoCardWithMenu = ({
             <PopoverTrigger className="z-10">
               <EllipsisVertical className="mt-2" />
             </PopoverTrigger>
-            <PopoverContent className="w-60">
+            <PopoverContent className="w-fit">
               {DropdownMenuItems}
             </PopoverContent>
           </Popover>

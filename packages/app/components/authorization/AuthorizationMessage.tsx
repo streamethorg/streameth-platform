@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
-import { ConnectWalletButton } from '../misc/ConnectWalletButton'
+import { SignInUserButton } from '../misc/SignInUserButton'
 import {
   Card,
   CardHeader,
@@ -40,7 +40,7 @@ const AuthorizationMessage = () => {
               Click the sign in button to connect to StreamETH
             </CardDescription>
             <div className="flex justify-center items-center w-full pt-[20px]">
-              <ConnectWalletButton />
+              <SignInUserButton />
             </div>
           </CardHeader>
 
