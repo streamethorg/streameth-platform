@@ -80,13 +80,12 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
       return (
         <div
           ref={ref}
-          className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed aspect-video">
+          className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video">
           <div className="flex relative justify-center items-center w-full h-full">
             <div className="absolute top-0 left-0 w-full h-full bg-gray-300 rounded-md opacity-50"></div>
             <div
               className="absolute top-0 left-0 h-full bg-purple-400 rounded-md"
-              style={{ width: `${progress}%` }}
-            />
+              style={{ width: `${progress}%` }}></div>
             <div className="flex z-10 flex-col justify-center items-center">
               <p>{progress}%</p>
               <p>Uploading. Please wait...</p>
