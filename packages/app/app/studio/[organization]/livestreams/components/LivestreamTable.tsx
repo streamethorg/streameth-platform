@@ -33,8 +33,6 @@ const LivestreamTable = ({
   streams: IExtendedStage[]
   organizationSlug: string
 }) => {
-  // TODO: Somewhere in the last Table cell is a hydration error
-
   return (
     <div className="rounded-xl shadow-sm">
       <Table className="bg-white rounded-t-xl ">

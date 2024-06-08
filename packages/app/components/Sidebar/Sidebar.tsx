@@ -22,7 +22,7 @@ export const SidebarUI = ({
   const [expanded, setExpanded] = useState(initalExpanded ?? false)
 
   return (
-    <aside className="flex flex-col h-screen bg-white border-r">
+    <aside className="flex flex-col h-screen bg-white border-r z-0">
       <div className="flex justify-between items-center p-4">
         <div
           className={`flex items-center overflow-hidden transition-all ${

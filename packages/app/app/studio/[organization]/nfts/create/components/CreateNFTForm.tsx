@@ -38,6 +38,7 @@ import {
   NftCollectionType,
 } from 'streameth-new-server/src/interfaces/nft.collection.interface'
 import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 export interface ICreateNFT {
   selectedVideo: INFTSessions[]
@@ -236,94 +237,107 @@ const CreateNFTForm = ({
   }
 
   return (
-    <div className="m-4 flex rounded-xl border border-grey overflow-auto">
-      <div className="p-4 lg:p-8 bg-muted min-w-[250px] space-y-2 w-1/3 border-r border-grey">
-        <p
-          className={`p-2 flex gap-1 rounded-xl items-center ${
-            step == 1
-              ? 'bg-grey text-black font-medium'
-              : 'text-muted-foreground'
-          }`}>
-          {step == 2 && (
-            <CheckCircle2 className="text-white fill-success w-7 h-7" />
-          )}{' '}
-          Collection Details
-        </p>
-        <p
-          className={`p-2 flex gap-1 rounded-xl items-center ${
-            step == 2
-              ? 'bg-grey text-black font-medium'
-              : 'text-muted-foreground'
-          }`}>
-          {formState.selectedVideo.length > 0 && (
-            <CheckCircle2 className="text-white fill-success w-7 h-7" />
-          )}{' '}
-          Add Media
-        </p>
-      </div>
-      <div className="bg-white w-full p-4 lg:p-8 flex flex-col justify-between">
-        <div>
-          {step == 1 && <CollectionDetails type={type} form={form} />}
-          {step == 2 && (
-            <AddMedia
-              setFormState={setFormState}
-              formState={formState}
-              videos={videos}
-              stages={stages}
-              type={type}
-            />
-          )}
+    <Dialog>
+      <DialogTrigger asChild>
+        <div className=" bg-pink-600 rounded-xl items-center justify-center w-full text-white flex flex-row h-auto max-h-[88px] text-xl">
+          Stream as NFT
         </div>
+      </DialogTrigger>
+      <DialogContent className="max-w-5xl bg transparent p-0 rounded-xl">
+        <div className="flex rounded-lg border border-grey overflow-auto ">
+          <div className="p-4 lg:p-8 bg-muted min-w-[250px] space-y-2 w-1/3 border-r border-grey">
+            <p
+              className={`p-2 flex gap-1 rounded-xl items-center ${
+                step == 1
+                  ? 'bg-grey text-black font-medium'
+                  : 'text-muted-foreground'
+              }`}>
+              {step == 2 && (
+                <CheckCircle2 className="text-white fill-success w-7 h-7" />
+              )}{' '}
+              Collection Details
+            </p>
+            <p
+              className={`p-2 flex gap-1 rounded-xl items-center ${
+                step == 2
+                  ? 'bg-grey text-black font-medium'
+                  : 'text-muted-foreground'
+              }`}>
+              {formState.selectedVideo.length > 0 && (
+                <CheckCircle2 className="text-white fill-success w-7 h-7" />
+              )}{' '}
+              Add Media
+            </p>
+          </div>
+          <div className="bg-white w-full p-4 lg:p-8 flex flex-col justify-between">
+            <div>
+              {step == 1 && (
+                <CollectionDetails type={type} form={form} />
+              )}
+              {step == 2 && (
+                <AddMedia
+                  setFormState={setFormState}
+                  formState={formState}
+                  videos={videos}
+                  stages={stages}
+                  type={type}
+                />
+              )}
+            </div>
 
-        <div className="flex gap-3 self-end mt-5">
-          <Link href={`/studio/${organizationSlug}/nfts`}>
-            <Button
-              className="border-none shadow-none"
-              variant="destructive-outline">
-              Cancel
-            </Button>
-          </Link>
-          <Button
-            disabled={step == 1}
-            onClick={() => setStep(1)}
-            variant="outline">
-            Go Back
-          </Button>
-          {step === 2 && !account.address && !account.isConnected ? (
-            <ConnectWalletButton />
-          ) : (
-            <Button
-              loading={isPublishingCollection}
-              disabled={
-                getFormSubmitStatus(form) ||
-                isPublishingCollection ||
-                (step == 2 && formState.selectedVideo.length < 1)
-              }
-              onClick={handleNextButton}
-              variant="primary">
-              {step == 1
-                ? 'Continue'
-                : type == 'multiple'
-                ? 'Publish Collection'
-                : 'Publish VideoNFT'}
-            </Button>
-          )}
+            <div className="flex gap-3 self-end mt-5">
+              <Link href={`/studio/${organizationSlug}/nfts`}>
+                <Button
+                  className="border-none shadow-none"
+                  variant="destructive-outline">
+                  Cancel
+                </Button>
+              </Link>
+              <Button
+                disabled={step == 1}
+                onClick={() => setStep(1)}
+                variant="outline">
+                Go Back
+              </Button>
+              {step === 2 &&
+              !account.address &&
+              !account.isConnected ? (
+                <ConnectWalletButton />
+              ) : (
+                <Button
+                  loading={isPublishingCollection}
+                  disabled={
+                    getFormSubmitStatus(form) ||
+                    isPublishingCollection ||
+                    (step == 2 && formState.selectedVideo.length < 1)
+                  }
+                  onClick={handleNextButton}
+                  variant="primary">
+                  {step == 1
+                    ? 'Continue'
+                    : type == 'multiple'
+                    ? 'Publish Collection'
+                    : 'Publish VideoNFT'}
+                </Button>
+              )}
+            </div>
+          </div>
+          <PublishingNFTModal
+            open={isPublishingCollection}
+            onClose={setIsPublishingCollection}
+            isPublished={isPublished}
+            organization={organizationSlug}
+            hash={hash}
+            error={error as BaseError}
+            isSuccess={isSuccess}
+            isTransactionApproved={isTransactionApproved}
+            publishError={publishError}
+            isGeneratingMetadata={isGeneratingMetadata}
+            collectionId={collectionId}
+          />
         </div>
-      </div>
-      <PublishingNFTModal
-        open={isPublishingCollection}
-        onClose={setIsPublishingCollection}
-        isPublished={isPublished}
-        organization={organizationSlug}
-        hash={hash}
-        error={error as BaseError}
-        isSuccess={isSuccess}
-        isTransactionApproved={isTransactionApproved}
-        publishError={publishError}
-        isGeneratingMetadata={isGeneratingMetadata}
-        collectionId={collectionId}
-      />
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 

@@ -9,6 +9,7 @@ import StreamConfigWithPlayer from './components/StreamConfigWithPlayer'
 import StreamHeader from './components/StreamHeader'
 import ShareButton from '@/components/misc/interact/ShareButton'
 import { LinkedinIcon, XIcon } from 'react-share'
+import CreateNFTModal from '../../nfts/create/components/CreateNFTModal'
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null
@@ -50,11 +51,11 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
           </div>
 
           <div className=" h-auto flex flex-col space-y-4 w-full max-w-[25%] justify-start">
-
             <div className=" bg-black rounded-xl items-center justify-center w-full text-white flex flex-row h-auto max-h-[88px] text-xl">
               <XIcon />
               Stream to X
             </div>
+            <CreateNFTModal organization={params.organization} type='signle' />
             <PublishLivestream stream={stream} />
             <Multistream
               stream={stream}

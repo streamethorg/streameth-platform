@@ -57,7 +57,7 @@ const SidebarMenu = ({
   initalExpanded?: boolean
 }) => {
   return (
-    <div className="relative z-[60]">
+    <div className="relative z-[10]">
       <SidebarUI initalExpanded={initalExpanded}>
         {navigationItems.map((item, index) => (
           <SidebarItem
