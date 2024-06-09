@@ -25,6 +25,17 @@ let nextConfig = {
       has: [
         {
           type: 'host',
+          value: 'live.lagosblockchainweek.io',
+        },
+      ],
+      destination: 'https://live.lagosblockchainweek.io/lbwtv',
+      permanent: true,
+    },
+    {
+      source: '/',
+      has: [
+        {
+          type: 'host',
           value: 'live.ethprague.com',
         },
       ],
