@@ -1,4 +1,3 @@
-
 const redirects = [
   {
     source: '/',
@@ -9,6 +8,17 @@ const redirects = [
       },
     ],
     destination: 'https://basemiami.xyz/base/base_event',
+    permanent: true,
+  },
+  {
+    source: '/',
+    has: [
+      {
+        type: 'host',
+        value: 'live.lagosblockchainweek.io',
+      },
+    ],
+    destination: 'https://live.lagosblockchainweek.io/lbwtv',
     permanent: true,
   },
   {
@@ -34,7 +44,7 @@ const redirects = [
     destination:
       'https://launch.scroll.io/scroll/scroll_announcement_stream',
     permanent: true,
-  }
+  },
 ]
 
 module.exports = redirects
