@@ -11,43 +11,7 @@ import {
   Settings,
 } from 'lucide-react'
 
-const navigationItems = [
-  {
-    text: 'Home',
-    navigationPath: '',
-    icon: <Home size={25} />,
-  },
-  // {
-  //   text: 'Events',
-  //   navigationPath: '/events',
-  //   icon: <CalendarDays size={20} />,
-  // },
-  {
-    text: 'Library',
-    navigationPath: '/library',
-    icon: <Videotape size={25} />,
-  },
-  {
-    text: 'Livestreams',
-    navigationPath: '/livestreams',
-    icon: <Radio size={25} />,
-  },
-  // {
-  //   text: 'Clips',
-  //   navigationPath: '/clips',
-  //   icon: <ScissorsLineDashed size={20} />,
-  // },
-  // {
-  //   text: 'Mint NFT',
-  //   navigationPath: '/nfts',
-  //   icon: <ImageIcon size={20} />,
-  // },
-  {
-    text: 'Team',
-    navigationPath: '/settings',
-    icon: <Settings size={25} />,
-  },
-]
+
 
 const SidebarMenu = ({
   organizationSlug,
@@ -56,6 +20,30 @@ const SidebarMenu = ({
   organizationSlug: string
   initalExpanded?: boolean
 }) => {
+
+  const navigationItems = [
+    {
+      text: 'Home',
+      navigationPath: '',
+      icon: <Home size={25} />,
+    },
+    {
+      text: 'Library',
+      navigationPath: '/library',
+      icon: <Videotape size={25} />,
+    },
+    {
+      text: 'Channel Settings',
+      navigationPath: `/settings`,
+      icon: <Radio size={25} />,
+    },
+    {
+      text: 'Team',
+      navigationPath: '/team',
+      icon: <Settings size={25} />,
+    },
+  ]
+
   return (
     <div className="relative z-[10]">
       <SidebarUI initalExpanded={initalExpanded}>

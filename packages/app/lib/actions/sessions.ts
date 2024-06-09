@@ -17,6 +17,8 @@ const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
 })
 
+
+
 export const updateAssetAction = async (
   session: IExtendedSession
 ) => {

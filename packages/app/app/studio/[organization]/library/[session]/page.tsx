@@ -7,6 +7,10 @@ import { ArrowLeft } from 'lucide-react'
 import EditSessionForm from './components/EditSessionForm'
 import Link from 'next/link'
 import SessionOptions from './components/SessionOptions'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import GetHashButton from '../components/GetHashButton'
+import TextPlaceholder from '@/components/ui/text-placeholder'
 
 const EditSession = async ({
   params,
@@ -29,23 +33,23 @@ const EditSession = async ({
   if (!video) return notFound()
 
   return (
-    <div className="p-2 h-full">
+    <div className="p-8 h-full">
       <Link href={`/studio/${params.organization}/library`}>
-        <div className="flex justify-start items-center my-4 mx-10 space-x-4">
+        <div className="flex justify-start items-center mb-4 space-x-4">
           <ArrowLeft />
           <p>Back to library</p>
         </div>
       </Link>
 
-      <div className="flex flex-row space-x-4">
-        <div className="px-10 space-y-4 w-2/3">
-          <h1 className="text-5xl font-bold">Video Details</h1>
+      <div className="flex flex-row space-x-4 ">
+        <div className=" space-y-4 w-2/3 bg-white p-4 rounded-xl border">
+          <h1 className="text-lg font-bold">Video Details</h1>
           <EditSessionForm
             session={session}
             organizationSlug={params.organization}
           />
         </div>
-        <div className="w-1/3">
+        <div className="w-1/3 flex flex-col space-y-4">
           <PlayerWithControls
             src={[
               {
@@ -57,13 +61,40 @@ const EditSession = async ({
               },
             ]}
           />
-          <SessionOptions
+          <div className="flex flex-col bg-white p-4 rounded-xl border space-y-4">
+            <h1 className="text-lg font-bold">Publish video</h1>
+            <div className="flex flex-row">
+              <GetHashButton session={session} />
+            </div>
+          </div>
+          <div className="flex flex-col p-4 space-y-4 bg-white border rounded-xl">
+            <h1 className="text-lg font-bold">Video data</h1>
+            {session.playbackId && (
+              <div>
+                <Label>Playback Id</Label>
+                <TextPlaceholder text={session.playbackId} />
+              </div>
+            )}
+            {session.assetId && (
+              <div>
+                <Label>Asset Id</Label>
+                <TextPlaceholder text={session.assetId} />
+              </div>
+            )}
+            {session.videoTranscription && (
+              <div>
+                <Label>Transcript</Label>
+                <TextPlaceholder text={session.videoTranscription} />
+              </div>
+            )}
+          </div>
+          {/* <SessionOptions
             name={video.name}
             sessionId={params.session}
             organizationSlug={params.organization}
             playbackId={video.playbackId!}
             assetId={session.assetId}
-          />
+          /> */}
         </div>
       </div>
     </div>

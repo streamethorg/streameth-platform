@@ -132,8 +132,8 @@ const EditSessionFrom = ({
           )}
         />
 
-        <div className="flex items-center space-x-2">
-          <DeleteAsset
+        <div className="flex items-end justify-end space-x-2">
+          {/* <DeleteAsset
             session={session}
             href={`/studio/${organizationSlug}/library`}
             TriggerComponent={
@@ -144,7 +144,7 @@ const EditSessionFrom = ({
                 <p>Delete video</p>
               </Button>
             }
-          />
+          /> */}
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}
             type="submit"
@@ -155,7 +155,7 @@ const EditSessionFrom = ({
                 Please wait...
               </>
             ) : (
-              'Update video'
+              'Update details'
             )}
           </Button>
         </div>

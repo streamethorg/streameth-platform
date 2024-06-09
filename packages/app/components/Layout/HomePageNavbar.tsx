@@ -183,13 +183,13 @@ const PCNavBar = ({
             />
           </Link>
         )}
-        {organizations && (
-          <Link href={`/${currentOrganization}`}>
-            <Button className="hidden lg:block" variant={'primary'}>
-              View channel page
-            </Button>
-          </Link>
-        )}
+          {/* {organizations && (
+            <Link href={`/${currentOrganization}`}>
+              <Button className="hidden lg:block" variant={'primary'}>
+                View channel page
+              </Button>
+            </Link>
+          )} */}
       </div>
       <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
         {showSearchBar && (

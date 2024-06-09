@@ -31,9 +31,10 @@ const Loading = ({ layout }: { layout: string }) => {
     <div className="flex flex-col space-y-4 w-full h-full bg-white">
       <Card className="p-4 shadow-none lg:border-none bg-secondary">
         <CardHeader>
-          <CardTitle>Assets</CardTitle>
+          <CardTitle>Video library</CardTitle>
           <CardDescription>
-            Upload and manage pre recorded videos
+            Manage you clips and livestream recordings or upload a new
+            video.
           </CardDescription>
         </CardHeader>
         <CardFooter></CardFooter>
@@ -96,9 +97,10 @@ const Library = async ({
         }}
         className="p-4 bg-no-repeat bg-cover border-none shadow-none">
         <CardHeader>
-          <CardTitle>Assets</CardTitle>
+          <CardTitle>Video library</CardTitle>
           <CardDescription>
-            Upload and manage pre-recorded videos
+            Manage you clips and livestream recordings or upload a new
+            video.
           </CardDescription>
         </CardHeader>
         <CardFooter>
