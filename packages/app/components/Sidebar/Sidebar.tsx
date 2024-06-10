@@ -26,7 +26,7 @@ export const SidebarUI = ({
       <div className="flex justify-between items-center p-4">
         <div
           className={`flex items-center overflow-hidden transition-all ${
-            expanded ? 'w-40' : 'w-10'
+            expanded ? 'w-44' : 'w-10'
           }`}>
           <div className="">
             {expanded ? (
@@ -41,20 +41,8 @@ export const SidebarUI = ({
       <SidebarContext.Provider value={{ expanded }}>
         <ul className="flex-1 px-3 space-y-4">{children}</ul>
       </SidebarContext.Provider>
-      <button
-        onClick={() => setExpanded((curr) => !curr)}
-        className="p-1.5 text-black mx-auto">
-        {expanded ? (
-          <span className='flex flex-row w-full'>
-            <ChevronFirst />
-            Collapse
-          </span>
-        ) : (
-          <ChevronLast />
-        )}
-      </button>
       <Link
-        className="flex relative items-center justify-center space-x-2 p-2 mx-auto w-full mb-8 rounded-lg transition-colors text-black group"
+        className="flex relative items-center justify-center space-x-2 p-2 mx-auto w-full rounded-lg transition-colors text-black group"
         target="_blank"
         rel="noopener noreferrer"
         href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
@@ -78,6 +66,18 @@ export const SidebarUI = ({
           </div>
         )}
       </Link>
+      <button
+        onClick={() => setExpanded((curr) => !curr)}
+        className="p-1.5 text-black mx-auto mb-8">
+        {expanded ? (
+          <span className="flex flex-row w-full">
+            <ChevronFirst />
+            Collapse
+          </span>
+        ) : (
+          <ChevronLast />
+        )}
+      </button>
     </aside>
   )
 }
@@ -109,7 +109,11 @@ export const SidebarItem = ({
         relative flex items-center py-2
             font-medium rounded-md cursor-pointer
             transition-colors group   hover:border hover:border-primary hover:rounded-xl
-            ${active ? 'border border-primary rounded-xl ' : 'border border-white '} 
+            ${
+              active
+                ? 'border border-primary rounded-xl '
+                : 'border border-white '
+            } 
             ${expanded ? 'px-2' : 'justify-center '}
     `}>
       {icon}

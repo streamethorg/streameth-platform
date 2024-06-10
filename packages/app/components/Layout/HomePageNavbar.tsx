@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 import { usePathname } from 'next/navigation'
 import { useAccount } from 'wagmi'
+import UserDropdown from '../misc/UserDropdown'
 
 const HomePageNavbar = ({
   logo,
@@ -183,13 +184,13 @@ const PCNavBar = ({
             />
           </Link>
         )}
-          {/* {organizations && (
-            <Link href={`/${currentOrganization}`}>
-              <Button className="hidden lg:block" variant={'primary'}>
-                View channel page
-              </Button>
-            </Link>
-          )} */}
+        {organizations && (
+          <Link href={`/${currentOrganization}`}>
+            <Button className="hidden lg:block" variant={'primary'}>
+              View channel page
+            </Button>
+          </Link>
+        )}
       </div>
       <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
         {showSearchBar && (
@@ -200,19 +201,18 @@ const PCNavBar = ({
         )}
       </div>
       <div className="flex flex-1 justify-end items-center">
-        {organizations && (
-          <SwitchOrganization
-            organization={currentOrganization}
-            organizations={organizations}
-          />
-        )}
         <Navbar organization={currentOrganization} pages={pages} />
-        {isConnected && (
+        {isConnected && !isStudio && (
           <div className="mr-2">
             <ConnectWalletButton />
           </div>
         )}
-        {isStudio && <SignInUserButton />}
+        {isStudio && (
+          <UserDropdown
+            organizations={organizations}
+            organization={currentOrganization}
+          />
+        )}
       </div>
     </NavigationMenu>
   )
