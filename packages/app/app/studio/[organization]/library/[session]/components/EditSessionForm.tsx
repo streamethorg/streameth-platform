@@ -131,6 +131,7 @@ const EditSessionFrom = ({
           name="published"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Visibility</FormLabel>
               <FormControl>
                 <div className="flex justify-start items-center space-x-2">
                   {field.value ? (

@@ -49,7 +49,7 @@ const EditSession = async ({
             organizationSlug={params.organization}
           />
         </div>
-        <div className="w-1/3">
+        <div className="space-y-2 w-1/3">
           <PlayerWithControls
             src={[
               {
@@ -60,13 +60,6 @@ const EditSession = async ({
                 type: 'hls',
               },
             ]}
-          />
-          <SessionOptions
-            name={video.name}
-            sessionId={params.session}
-            organizationSlug={params.organization}
-            playbackId={video.playbackId!}
-            assetId={session.assetId}
           />
           <Card>
             <CardContent>
@@ -92,6 +85,14 @@ const EditSession = async ({
               )}
             </CardContent>
           </Card>
+
+          <SessionOptions
+            name={video.name}
+            sessionId={params.session}
+            organizationSlug={params.organization}
+            playbackId={video.playbackId!}
+            assetId={session.assetId}
+          />
         </div>
       </div>
     </div>
