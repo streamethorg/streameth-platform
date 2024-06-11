@@ -9,6 +9,10 @@ import {
   deleteMultiStream,
   getDownloadUrl,
   createClip,
+  getSessionMetrics,
+  getStreamRecordings,
+  uploadToIpfs,
+  getAsset,
 } from '@utils/livepeer';
 import {
   Tags,
@@ -77,14 +81,62 @@ export class StreamController extends Controller {
   }
 
   /**
-   * @summary  Get Video url
+   * @summary  Get Asset
    */
   @SuccessResponse('200')
   @Get('asset/{assetId}')
+  async getAsset(@Path() assetId: string): Promise<IStandardResponse<any>> {
+    return SendApiResponse('Asset fetched', await getAsset(assetId));
+  }
+
+  /**
+   * @summary  Get Video url
+   */
+  @SuccessResponse('200')
+  @Get('asset/url/{assetId}')
   async getVideoUrl(
     @Path() assetId: string,
   ): Promise<IStandardResponse<string>> {
     return SendApiResponse('Playback fetched', await getDownloadUrl(assetId));
+  }
+
+  /**
+   * @summary  Get stream metrics
+   */
+  @SuccessResponse('200')
+  @Get('metric/{playbackId}')
+  async getSessionMetrics(
+    @Path() playbackId: string,
+  ): Promise<IStandardResponse<{ viewCount: number; playTimeMins: number }>> {
+    return SendApiResponse(
+      'Stream metrics',
+      await getSessionMetrics(playbackId),
+    );
+  }
+
+  /**
+   * @summary  Get stream recordings
+   */
+  @SuccessResponse('200')
+  @Get('recording/{streamId}')
+  async getStreamRecordings(
+    @Path() streamId: string,
+  ): Promise<IStandardResponse<any>> {
+    return SendApiResponse(
+      'Stream recordings',
+      await getStreamRecordings(streamId),
+    );
+  }
+
+  /**
+   * @summary  Upload
+   */
+  @SuccessResponse('200')
+  @Get('upload/{assetId}')
+  async uploadToIpfs(
+    @Path() assetId: string,
+  ): Promise<IStandardResponse<string>> {
+    return SendApiResponse('Upload', await uploadToIpfs(assetId));
   }
 
   /**

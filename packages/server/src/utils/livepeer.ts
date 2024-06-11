@@ -155,7 +155,7 @@ export const getAsset = async (assetId: string) => {
   }
 };
 
-export const updateAsset = async (assetId: string) => {
+export const uploadToIpfs = async (assetId: string) => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
       method: 'patch',
@@ -277,6 +277,26 @@ export const generateThumbnail = async (data: {
     }
   } catch (e) {
     throw new HttpException(400, 'Error generating thumbnail');
+  }
+};
+
+export const getSessionMetrics = async (
+  playbackId: string,
+): Promise<{ viewCount: number; playTimeMins: number }> => {
+  try {
+    const metrics = await livepeer.metrics.getPublicTotalViews(playbackId);
+    if (!metrics.object) {
+      return {
+        viewCount: 0,
+        playTimeMins: 0,
+      };
+    }
+    return {
+      viewCount: metrics.object?.viewCount,
+      playTimeMins: metrics.object?.playtimeMins,
+    };
+  } catch (e) {
+    throw new HttpException(400, 'Error getting metrics');
   }
 };
 
