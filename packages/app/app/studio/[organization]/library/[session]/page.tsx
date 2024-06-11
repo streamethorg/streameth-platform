@@ -80,7 +80,7 @@ const EditSession = async ({
               <span className="font-bold">Video size</span>
               {video.size && (
                 <span className="flex">
-                  {Math.round(video.size / 1000)} MB
+                  {Math.round(video.size / 100000)} MB
                 </span>
               )}
             </CardContent>
