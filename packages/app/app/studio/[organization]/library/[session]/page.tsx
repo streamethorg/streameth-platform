@@ -79,7 +79,7 @@ const EditSession = async ({
               )}
               <span className="font-bold">Video size</span>
               {video.size && (
-                <span className="flex">
+                <span className="flex pl-2">
                   {Math.round(video.size / 100000)} MB
                 </span>
               )}
