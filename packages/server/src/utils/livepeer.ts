@@ -6,6 +6,8 @@ import { Livepeer } from 'livepeer';
 import { IMultiStream } from '@interfaces/stream.interface';
 import Stage from '@models/stage.model';
 import { Session } from 'livepeer/dist/models/components';
+import SessionModel from '@models/session.model';
+import { SessionType } from '@interfaces/session.interface';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -137,6 +139,7 @@ export const getDownloadUrl = async (assetId: string): Promise<string> => {
     console.error(`Error fetching asset:`, e);
   }
 };
+
 export const getAsset = async (assetId: string) => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
@@ -179,7 +182,9 @@ export const uploadToIpfs = async (assetId: string) => {
   }
 };
 
-export const getVideoPhaseAction = async (assetId: string) => {
+export const getVideoPhaseAction = async (
+  assetId: string,
+): Promise<{ playbackUrl: string; phaseStatus: string }> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
       method: 'get',
@@ -190,7 +195,10 @@ export const getVideoPhaseAction = async (assetId: string) => {
     });
     const data = await response.json();
     if (!data.playbackUrl) {
-      return '';
+      return {
+        playbackUrl: '',
+        phaseStatus: '',
+      };
     }
 
     return {
@@ -324,6 +332,13 @@ export const createClip = async (data: {
       startTime: data.start,
       sessionId: data.sessionId,
       playbackId: data.playbackId,
+    });
+    await SessionModel.findByIdAndUpdate(data.sessionId, {
+      assetId: clip.object.asset.id,
+      playbackId: clip.object.asset.playbackId,
+      start: new Date().getTime(),
+      end: new Date().getTime(),
+      type: SessionType.clip,
     });
     return clip;
   } catch (e) {

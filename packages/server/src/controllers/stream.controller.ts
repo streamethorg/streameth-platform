@@ -13,6 +13,8 @@ import {
   getStreamRecordings,
   uploadToIpfs,
   getAsset,
+  generateThumbnail,
+  getVideoPhaseAction,
 } from '@utils/livepeer';
 import {
   Tags,
@@ -97,7 +99,19 @@ export class StreamController extends Controller {
   async getVideoUrl(
     @Path() assetId: string,
   ): Promise<IStandardResponse<string>> {
-    return SendApiResponse('Playback fetched', await getDownloadUrl(assetId));
+    return SendApiResponse('Video url fetched', await getDownloadUrl(assetId));
+  }
+
+  /**
+   * @summary  Get Video Phase Action
+   */
+  @SuccessResponse('200')
+  @Get('asset/phase-action/{assetId}')
+  async getPhaseAction(
+    @Path() assetId: string,
+  ): Promise<IStandardResponse<{ playbackUrl: string; phaseStatus: string }>> {
+    const phaseAction = await getVideoPhaseAction(assetId);
+    return SendApiResponse('phase status fetched', phaseAction);
   }
 
   /**
@@ -149,5 +163,15 @@ export class StreamController extends Controller {
   ): Promise<IStandardResponse<any>> {
     const clip = await createClip(body);
     return SendApiResponse('clipped', clip);
+  }
+
+  /**
+   * @summary  Generate thumbnail
+   */
+  @SuccessResponse('201')
+  @Post('thumbnail/generate')
+  async generateThumbnail(@Body() body: any): Promise<IStandardResponse<any>> {
+    const thumbnail = await generateThumbnail(body.assetId);
+    return SendApiResponse('thumbnail generated', thumbnail);
   }
 }
