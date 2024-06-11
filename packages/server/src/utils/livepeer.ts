@@ -5,6 +5,7 @@ const { host, secretKey } = config.livepeer;
 import { Livepeer } from 'livepeer';
 import { IMultiStream } from '@interfaces/stream.interface';
 import Stage from '@models/stage.model';
+import { Session } from 'livepeer/dist/models/components';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -203,9 +204,20 @@ export const getVideoPhaseAction = async (assetId: string) => {
 
 export const getStreamRecordings = async (streamId: string): Promise<any> => {
   try {
-    const stream = await getStreamInfo(streamId);
-    const recordings = await livepeer.session.getRecorded(stream.id);
-    return recordings.classes;
+    const parentStream = await getStreamInfo(streamId);
+    const recordings = (
+      await livepeer.session.getRecorded(parentStream?.id ?? '')
+    ).classes;
+    if (!recordings) {
+      return {
+        parentStream,
+        recordings: [],
+      };
+    }
+    return {
+      parentStream,
+      recordings: JSON.parse(JSON.stringify(recordings)) as Session[],
+    };
   } catch (e) {
     throw new HttpException(400, 'Error fetching stream recordings');
   }

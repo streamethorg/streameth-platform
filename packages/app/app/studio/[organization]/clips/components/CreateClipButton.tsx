@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import {
-  createClip,
+  createClipAction,
   createSessionAction,
 } from '@/lib/actions/sessions'
 import { Button } from '@/components/ui/button'
@@ -68,12 +68,12 @@ const CreateClipButton = ({
       : sessions.find((s) => s._id === sessionId)
     if (selectedRecording && startTime && endTime && session) {
       setIsLoading(true)
-      createClip({
+      createClipAction({
         playbackId,
         sessionId: selectedRecording,
         start: startTime.unix,
         end: endTime.unix,
-        session,
+        // session,
       })
         .then(() => {
           setIsLoading(false)

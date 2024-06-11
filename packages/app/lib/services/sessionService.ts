@@ -4,6 +4,7 @@ import { apiUrl } from '@/lib/utils/utils'
 import { Livepeer } from 'livepeer'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { revalidatePath } from 'next/cache'
+import { GetAssetResponse } from 'livepeer/dist/models/operations'
 
 export const createSession = async ({
   session,
@@ -131,5 +132,89 @@ export const deleteSession = async ({
   } catch (e) {
     console.log('error in deleteSession', e)
     throw e
+  }
+}
+
+export const createClip = async ({
+  start,
+  end,
+  playbackId,
+  sessionId,
+  authToken, // session
+}: {
+  // session: IExtendedSession
+  authToken: string
+  playbackId: string
+  sessionId: string
+  start: number
+  end: number
+}): Promise<ISession> => {
+  try {
+    const response = await fetch(`${apiUrl()}/streams/clip`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ end, playbackId, sessionId, start }),
+    })
+    if (!response.ok) {
+      console.log('error in createSession', await response.json())
+      throw 'Error updating session'
+    }
+    revalidatePath('/studio')
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateSession', e)
+    throw e
+  }
+}
+
+export const fetchSessionMetrics = async ({
+  playbackId,
+}: {
+  playbackId: string
+}): Promise<{ viewCount: number; playTimeMins: number }> => {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/streams/metric/${playbackId}`,
+      {
+        cache: 'no-store',
+      }
+    )
+    if (!response.ok) {
+      return {
+        viewCount: 0,
+        playTimeMins: 0,
+      }
+    }
+
+    return (await response.json()).data
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event session'
+  }
+}
+
+export const fetchAsset = async ({
+  assetId,
+}: {
+  assetId: string
+}): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/streams/asset/${assetId}`,
+      {
+        cache: 'no-store',
+      }
+    )
+    if (!response.ok) {
+      return null
+    }
+
+    return (await response.json()).data
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching event session'
   }
 }

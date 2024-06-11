@@ -196,6 +196,27 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse__viewCount-number--playTimeMins-number__": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"playTimeMins":{"dataType":"double","required":true},"viewCount":{"dataType":"double","required":true}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateClipDto": {
+        "dataType": "refObject",
+        "properties": {
+            "playbackId": {"dataType":"string","required":true},
+            "sessionId": {"dataType":"string","required":true},
+            "start": {"dataType":"double","required":true},
+            "end": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "SheetType": {
         "dataType": "refEnum",
         "enums": ["gsheet","pretalx"],
@@ -1268,6 +1289,36 @@ export function RegisterRoutes(app: Router) {
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/streams/asset/:assetId',
             ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getAsset)),
+
+            async function StreamController_getAsset(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    assetId: {"in":"path","name":"assetId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              await templateService.apiHandler({
+                methodName: 'getAsset',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/streams/asset/url/:assetId',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
             ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getVideoUrl)),
 
             async function StreamController_getVideoUrl(request: ExRequest, response: ExResponse, next: any) {
@@ -1290,6 +1341,126 @@ export function RegisterRoutes(app: Router) {
                 next,
                 validatedArgs,
                 successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/streams/metric/:playbackId',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getSessionMetrics)),
+
+            async function StreamController_getSessionMetrics(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    playbackId: {"in":"path","name":"playbackId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              await templateService.apiHandler({
+                methodName: 'getSessionMetrics',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/streams/recording/:streamId',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getStreamRecordings)),
+
+            async function StreamController_getStreamRecordings(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    streamId: {"in":"path","name":"streamId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              await templateService.apiHandler({
+                methodName: 'getStreamRecordings',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/streams/upload/:assetId',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.uploadToIpfs)),
+
+            async function StreamController_uploadToIpfs(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    assetId: {"in":"path","name":"assetId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              await templateService.apiHandler({
+                methodName: 'uploadToIpfs',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/streams/clip',
+            ...(fetchMiddlewares<RequestHandler>(StreamController)),
+            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.createClip)),
+
+            async function StreamController_createClip(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateClipDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StreamController();
+
+              await templateService.apiHandler({
+                methodName: 'createClip',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
               });
             } catch (err) {
                 return next(err);
