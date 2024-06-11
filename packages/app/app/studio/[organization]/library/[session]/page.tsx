@@ -1,3 +1,5 @@
+'use server'
+
 import { studioPageParams } from '@/lib/types'
 import { fetchSession } from '@/lib/services/sessionService'
 import { PlayerWithControls } from '@/components/ui/Player'
@@ -7,6 +9,8 @@ import { ArrowLeft } from 'lucide-react'
 import EditSessionForm from './components/EditSessionForm'
 import Link from 'next/link'
 import SessionOptions from './components/SessionOptions'
+import { Card, CardContent } from '@/components/ui/card'
+import CopyItem from '@/components/misc/CopyString'
 
 const EditSession = async ({
   params,
@@ -29,7 +33,7 @@ const EditSession = async ({
   if (!video) return notFound()
 
   return (
-    <div className="p-2 h-full">
+    <div className="px-2">
       <Link href={`/studio/${params.organization}/library`}>
         <div className="flex justify-start items-center my-4 mx-10 space-x-4">
           <ArrowLeft />
@@ -45,7 +49,7 @@ const EditSession = async ({
             organizationSlug={params.organization}
           />
         </div>
-        <div className="w-1/3">
+        <div className="space-y-2 w-1/3">
           <PlayerWithControls
             src={[
               {
@@ -57,6 +61,31 @@ const EditSession = async ({
               },
             ]}
           />
+          <Card>
+            <CardContent>
+              <span className="font-bold">Playback ID</span>
+              {video.playbackId && (
+                <CopyItem
+                  item={video.playbackId}
+                  itemName="playback ID"
+                />
+              )}
+              <span className="font-bold">Asset ID</span>
+              {video.playbackId && (
+                <CopyItem
+                  item={session.assetId}
+                  itemName="asset ID"
+                />
+              )}
+              <span className="font-bold">Video size</span>
+              {video.size && (
+                <span className="flex pl-2">
+                  {Math.round(video.size / 100000)} MB
+                </span>
+              )}
+            </CardContent>
+          </Card>
+
           <SessionOptions
             name={video.name}
             sessionId={params.session}

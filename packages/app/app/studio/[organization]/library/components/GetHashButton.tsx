@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@/components/ui/button'
 import { updateAssetAction } from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
@@ -29,7 +30,7 @@ const GetHashButton = ({
       loading={isGettingHash}
       variant="primary"
       onClick={() => handleGetHash()}>
-      get hash
+      Upload to IPFS
     </Button>
   )
 }
