@@ -7,7 +7,7 @@ let nextConfig = {
   redirects: async () => [
     {
       source: '/',
-      destination: '/index.html',
+      destination: 'https://info.streameth.org',
       has: [
         {
           type: 'host',
