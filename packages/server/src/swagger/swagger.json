@@ -325,6 +325,100 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse__playbackUrl-string--phaseStatus-string__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"phaseStatus": {
+								"type": "string"
+							},
+							"playbackUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"phaseStatus",
+							"playbackUrl"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__viewCount-number--playTimeMins-number__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"playTimeMins": {
+								"type": "number",
+								"format": "double"
+							},
+							"viewCount": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"playTimeMins",
+							"viewCount"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateClipDto": {
+				"properties": {
+					"playbackId": {
+						"type": "string"
+					},
+					"sessionId": {
+						"type": "string"
+					},
+					"recordingId": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"playbackId",
+					"sessionId",
+					"recordingId",
+					"start",
+					"end"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"SheetType": {
 				"enum": [
 					"gsheet",
@@ -3213,6 +3307,38 @@
 		},
 		"/streams/asset/{assetId}": {
 			"get": {
+				"operationId": "GetAsset",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get Asset",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "assetId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/streams/asset/url/{assetId}": {
+			"get": {
 				"operationId": "GetVideoUrl",
 				"responses": {
 					"200": {
@@ -3241,6 +3367,198 @@
 						}
 					}
 				]
+			}
+		},
+		"/streams/asset/phase-action/{assetId}": {
+			"get": {
+				"operationId": "GetPhaseAction",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__playbackUrl-string--phaseStatus-string__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get Video Phase Action",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "assetId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/streams/metric/{playbackId}": {
+			"get": {
+				"operationId": "GetSessionMetrics",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__viewCount-number--playTimeMins-number__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get stream metrics",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "playbackId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/streams/recording/{streamId}": {
+			"get": {
+				"operationId": "GetStreamRecordings",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get stream recordings",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "streamId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/streams/upload/{assetId}": {
+			"get": {
+				"operationId": "UploadToIpfs",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_string_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Upload",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "assetId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/streams/clip": {
+			"post": {
+				"operationId": "CreateClip",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Create clip",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateClipDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/streams/thumbnail/generate": {
+			"post": {
+				"operationId": "GenerateThumbnail",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Generate thumbnail",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
 			}
 		},
 		"/states": {

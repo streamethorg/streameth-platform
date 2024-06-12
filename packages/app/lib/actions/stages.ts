@@ -9,12 +9,7 @@ import {
 } from '../services/stageService'
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
-import { Stream } from 'livepeer/dist/models/components'
 import { IExtendedStage } from '../types'
-
-const livepeer = new Livepeer({
-  apiKey: process.env.LIVEPEER_API_KEY,
-})
 
 export const createStageAction = async ({
   stage,
@@ -60,21 +55,6 @@ export const deleteStageAction = async ({
   }
   revalidatePath('/studio')
   return response
-}
-
-export const getStageStream = async (
-  streamId: string
-): Promise<Stream | null> => {
-  try {
-    const stream = await livepeer.stream.get(streamId)
-    if (!stream.stream) {
-      return null
-    }
-    return stream.stream
-  } catch (error) {
-    console.error('Error getting stream:', error)
-    return null
-  }
 }
 
 export const createMultistreamAction = async (
@@ -137,22 +117,6 @@ export const deleteMultistreamAction = async (
   revalidatePath('/studio')
 
   return response
-}
-
-export const getMultistreamTarget = async ({
-  targetId,
-}: {
-  targetId: string
-}) => {
-  'use server'
-  const response = await livepeer.multistreamTarget.get(targetId)
-  if (response.statusCode !== 200) {
-    console.error('Error getting multistream target')
-    return null
-  }
-  revalidatePath('/studio')
-
-  return response.multistreamTarget
 }
 
 export const updateStageAction = async ({

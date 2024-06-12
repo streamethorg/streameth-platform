@@ -1,17 +1,11 @@
 'use server'
 
-import { Livepeer } from 'livepeer'
-import { Session } from 'livepeer/dist/models/components'
-import { IExtendedSession } from '../types'
-import { fetchEvent } from '../services/eventService'
-
-const livepeer = new Livepeer({
-  apiKey: process.env.LIVEPEER_API_KEY,
-})
+import { fetchAsset } from '../services/sessionService'
+import { createAssetAction } from './sessions'
 
 export const getVideoPhaseAction = async (assetId: string) => {
   try {
-    const asset = await livepeer.asset.get(assetId)
+    const asset = await fetchAsset({ assetId })
     if (asset.statusCode !== 200) {
       console.error(asset.rawResponse)
       return null
@@ -30,7 +24,7 @@ export const getVideoUrlAction = async (
 ) => {
   try {
     if (assetId) {
-      const asset = await livepeer.asset.get(assetId)
+      const asset = await fetchAsset({ assetId })
       if (asset.statusCode !== 200) {
         console.error(asset.rawResponse)
       }
@@ -61,117 +55,22 @@ export const getUrlAction = async (
   fileName: string
 ): Promise<UrlActionParams | null> => {
   try {
-    const asset = await livepeer.asset.create({
-      name: fileName,
-      storage: {
-        ipfs: true,
-      },
+    const asset = await createAssetAction({
+      fileName,
     })
 
     if (!asset) {
       return null
     }
     const params: UrlActionParams = {
-      tusEndpoint: asset?.object?.tusEndpoint,
-      url: asset?.object?.url,
-      assetId: asset?.object?.asset.id,
+      tusEndpoint: asset.tusEndpoint,
+      url: asset.url,
+      assetId: asset.assetId,
     }
 
     return params
   } catch (error) {
     console.error('Error fetching a Livepeer url:', error)
     return null
-  }
-}
-
-export const getStreamRecordings = async ({
-  streamId,
-}: {
-  streamId: string
-}) => {
-  if (!streamId) {
-    return {
-      parentStream: null,
-      recordings: [],
-    }
-  }
-  const parentStream = (await livepeer.stream.get(streamId)).stream
-  const recordings = (
-    await livepeer.session.getRecorded(parentStream?.id ?? '')
-  ).classes
-  if (!recordings) {
-    return {
-      parentStream,
-      recordings: [],
-    }
-  }
-  return {
-    parentStream,
-    recordings: JSON.parse(JSON.stringify(recordings)) as Session[],
-  }
-}
-
-export const getAsset = async (assetId: string) => {
-  try {
-    const asset = await livepeer.asset.get(assetId)
-    if (asset.statusCode !== 200) {
-      console.error(asset.rawResponse)
-      return null
-    }
-
-    return JSON.parse(JSON.stringify(asset.asset))
-  } catch (e) {
-    console.error('Error fetching asset: ', assetId)
-    return null
-  }
-}
-
-export const generateThumbnail = async (
-  session: IExtendedSession
-) => {
-  'use server'
-  try {
-    if (session.playbackId || session.assetId) {
-      let playbackId = session.playbackId
-      if (!playbackId) {
-        const asset = await livepeer.asset.get(
-          session.assetId as string
-        )
-        if (asset.statusCode === 200) {
-          playbackId = asset.asset?.playbackId
-        }
-      }
-      if (playbackId) {
-        const asset = await livepeer.playback.get(
-          playbackId as string
-        )
-        if (asset.statusCode === 200) {
-          const lpThumbnails =
-            asset.playbackInfo?.meta.source.filter(
-              (source) => source.hrn === 'Thumbnails'
-            ) ?? []
-          if (lpThumbnails.length > 0) {
-            return lpThumbnails[0].url.replace(
-              'thumbnails.vtt',
-              'keyframes_0.jpg'
-            )
-          }
-        }
-      }
-    }
-
-    if (session.eventId) {
-      const coverResponse = (
-        await fetchEvent({ eventId: session.eventId as string })
-      )?.eventCover
-      if (coverResponse) {
-        return coverResponse
-      }
-    }
-
-    return undefined
-  } catch (e) {
-    console.error('Error fetching thumbnail')
-    return undefined
   }
 }

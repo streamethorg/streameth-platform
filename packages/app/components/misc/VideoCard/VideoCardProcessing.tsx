@@ -7,14 +7,15 @@ import {
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
 import { EllipsisVertical, Loader2 } from 'lucide-react'
-import { generateThumbnail } from '@/lib/actions/livepeer'
+import { generateThumbnailAction } from '@/lib/actions/sessions'
 
 const VideoCardProcessing = async ({
   session,
 }: {
   session: IExtendedSession
 }) => {
-  const thumbnail = (await generateThumbnail(session)) || ''
+  const thumbnail = (await generateThumbnailAction(session)) || ''
+
   return (
     <div className="w-full min-h-full uppercase rounded-xl animate-pulse">
       <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
