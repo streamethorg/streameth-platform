@@ -4,16 +4,12 @@ import { TableCell } from '@/components/ui/table'
 import { IExtendedSession, eLayout } from '@/lib/types'
 import {
   ChevronDown,
-  Copy,
   EllipsisVertical,
   Earth,
   Lock,
   Loader2,
 } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { formatDate } from '@/lib/utils/time'
 import { toast } from 'sonner'
 import {
@@ -22,10 +18,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {
-  updateAssetAction,
-  updateSessionAction,
-} from '@/lib/actions/sessions'
+import { updateSessionAction } from '@/lib/actions/sessions'
 import ProcessingSkeleton from './misc/ProcessingSkeleton'
 import { PopoverActions } from './misc/PopoverActions'
 import {
@@ -33,11 +26,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { Button } from '@/components/ui/button'
 import GetHashButton from './GetHashButton'
-import { useEffect, useState } from 'react'
-import { generateThumbnail } from '@/lib/actions/livepeer'
+import CopyItem from '@/components/misc/CopyString'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
+import { generateThumbnail } from '@/lib/actions/livepeer'
+import { useEffect, useState } from 'react'
 
 const TableCells = ({
   item,
@@ -54,10 +47,6 @@ const TableCells = ({
   useEffect(() => {
     generateThumbnail(item).then((url) => url && setImageUrl(url))
   }, [item])
-  const handleCopy = () => {
-    navigator.clipboard.writeText(item.ipfsURI!)
-    toast.success('Copied IPFS Hash to your clipboard')
-  }
 
   const handlePublishment = () => {
     setIsLoading(true)
@@ -161,16 +150,7 @@ const TableCells = ({
       )}
       <TableCell className="relative max-w-[200px]">
         {item.ipfsURI ? (
-          <div
-            className="flex items-center hover:bg-gray-200 group"
-            onClick={handleCopy}>
-            <span className="flex-1 m-2 rounded cursor-pointer truncate">
-              {item.ipfsURI}
-            </span>
-            <Copy className="p-1 mr-2 opacity-0 group-hover:opacity-100">
-              Copy IPFS Hash
-            </Copy>
-          </div>
+          <CopyItem item={item.ipfsURI} itemName="IPFS Uri" />
         ) : (
           <GetHashButton session={item} />
         )}

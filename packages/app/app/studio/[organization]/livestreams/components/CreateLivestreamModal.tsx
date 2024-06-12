@@ -105,7 +105,7 @@ const CreateLivestreamModal = ({
       stage: {
         ...otherValues,
         streamDate: isSchedule ? formattedDate : new Date(),
-        streamEndDate: formattedEndDate,
+        streamEndDate: isMultiDate ? formattedEndDate : new Date(),
         isMultipleDate: isMultiDate,
       },
     })
@@ -121,6 +121,7 @@ const CreateLivestreamModal = ({
       })
       .catch(() => {
         toast.error('Error creating stream')
+        setIsLoading(false)
       })
       .finally(() => {
         setIsLoading(false)

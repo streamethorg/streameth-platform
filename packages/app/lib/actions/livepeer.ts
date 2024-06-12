@@ -130,8 +130,6 @@ export const generateThumbnail = async (
     }
 
     return undefined
-
-    throw new Error('No thumbnail found')
   } catch (e) {
     console.error('Error fetching thumbnail')
     return undefined
