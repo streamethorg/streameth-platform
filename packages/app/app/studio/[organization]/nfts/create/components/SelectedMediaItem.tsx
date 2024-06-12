@@ -6,11 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { generateThumbnail } from '@/lib/actions/livepeer'
 import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
 import { XCircle } from 'lucide-react'
 import React from 'react'
+import { generateThumbnailAction } from '@/lib/actions/sessions'
 
 const SelectedMediaItem = ({
   video,
@@ -23,7 +23,7 @@ const SelectedMediaItem = ({
     string | undefined
   >('')
   const getThumbnail = async () => {
-    const thumbnail = await generateThumbnail(video)
+    const thumbnail = await generateThumbnailAction(video)
 
     if (thumbnail) setGeneratedThumbnail(thumbnail)
     return

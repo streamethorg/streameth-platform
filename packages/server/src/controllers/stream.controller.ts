@@ -70,7 +70,8 @@ export class StreamController extends Controller {
   async createAsset(
     @Body() body: any,
   ): Promise<IStandardResponse<{ url: string; assetId: string }>> {
-    return SendApiResponse('Asset created', await createAsset(body));
+    console.log('boddddu', body);
+    return SendApiResponse('Asset created', await createAsset(body.fileName));
   }
 
   /**
@@ -171,7 +172,10 @@ export class StreamController extends Controller {
   @SuccessResponse('201')
   @Post('thumbnail/generate')
   async generateThumbnail(@Body() body: any): Promise<IStandardResponse<any>> {
-    const thumbnail = await generateThumbnail(body.assetId);
+    const thumbnail = await generateThumbnail({
+      assetId: body.assetId,
+      playbackId: body.playbackId,
+    });
     return SendApiResponse('thumbnail generated', thumbnail);
   }
 }

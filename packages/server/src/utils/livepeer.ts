@@ -76,7 +76,7 @@ export const getStreamInfo = async (streamId: string): Promise<any> => {
 
 export const createAsset = async (
   fileName: string,
-): Promise<{ url: string; assetId: string }> => {
+): Promise<{ url: string; assetId: string; tusEndpoint: string }> => {
   try {
     const response = await fetch(`${host}/api/asset/request-upload`, {
       method: 'post',
@@ -92,7 +92,9 @@ export const createAsset = async (
       }),
     });
     const data = await response.json();
+
     return {
+      tusEndpoint: data.tusEndpoint,
       url: data.url,
       assetId: data.asset.id,
     };
@@ -284,14 +286,16 @@ export const generateThumbnail = async (data: {
   try {
     let playbackId = data.playbackId;
     if (!data.playbackId) {
-      const asset = await getAsset(data.playbackId);
+      const asset = await getAsset(data.assetId);
       playbackId = asset.playbackId;
     }
     const asset = await livepeer.playback.get(playbackId as string);
+
     const lpThumbnails =
       asset.playbackInfo?.meta.source.filter(
         (source) => source.hrn === 'Thumbnails',
       ) ?? [];
+
     if (lpThumbnails.length > 0) {
       return lpThumbnails[0].url.replace('thumbnails.vtt', 'keyframes_0.jpg');
     }
@@ -323,6 +327,7 @@ export const getSessionMetrics = async (
 export const createClip = async (data: {
   playbackId: string;
   sessionId: string;
+  recordingId: string;
   start: number;
   end: number;
 }) => {
@@ -330,18 +335,20 @@ export const createClip = async (data: {
     const clip = await livepeer.stream.createClip({
       endTime: data.end,
       startTime: data.start,
-      sessionId: data.sessionId,
+      sessionId: data.recordingId,
       playbackId: data.playbackId,
     });
+    const parsedClip = JSON.parse(clip.rawResponse.data.toString());
     await SessionModel.findByIdAndUpdate(data.sessionId, {
-      assetId: clip.object.asset.id,
-      playbackId: clip.object.asset.playbackId,
+      assetId: parsedClip.asset.id,
+      playbackId: parsedClip.asset.playbackId,
       start: new Date().getTime(),
       end: new Date().getTime(),
       type: SessionType.clip,
     });
-    return clip;
+    return parsedClip;
   } catch (e) {
+    console.log('error', e);
     throw new HttpException(400, 'Error creating clip');
   }
 };

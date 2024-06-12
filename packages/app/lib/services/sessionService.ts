@@ -139,13 +139,14 @@ export const createClip = async ({
   start,
   end,
   playbackId,
+  recordingId,
+  authToken,
   sessionId,
-  authToken, // session
 }: {
-  // session: IExtendedSession
+  sessionId: string
   authToken: string
   playbackId: string
-  sessionId: string
+  recordingId: string
   start: number
   end: number
 }): Promise<ISession> => {
@@ -156,10 +157,16 @@ export const createClip = async ({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify({ end, playbackId, sessionId, start }),
+      body: JSON.stringify({
+        end,
+        playbackId,
+        sessionId,
+        start,
+        recordingId,
+      }),
     })
+
     if (!response.ok) {
-      console.log('error in createSession', await response.json())
       throw 'Error updating session'
     }
     revalidatePath('/studio')
@@ -216,5 +223,67 @@ export const fetchAsset = async ({
   } catch (e) {
     console.log(e)
     throw 'Error fetching event session'
+  }
+}
+
+export const createAsset = async ({
+  fileName,
+  authToken,
+}: {
+  fileName: string
+  authToken: string
+}): Promise<any> => {
+  try {
+    const response = await fetch(`${apiUrl()}/streams/asset`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ fileName }),
+    })
+
+    if (!response.ok) {
+      throw 'Error updating session'
+    }
+    revalidatePath('/studio')
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateSession', e)
+    throw e
+  }
+}
+
+export const generateThumbnail = async ({
+  session,
+  authToken,
+}: {
+  session: IExtendedSession
+  authToken: string
+}): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/streams/thumbnail/generate`,
+      {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({
+          playbackId: session.playbackId,
+          assetId: session.assetId,
+        }),
+      }
+    )
+    if (!response.ok) {
+      throw 'Error updating session'
+    }
+    revalidatePath('/studio')
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateSession', e)
+    throw e
   }
 }

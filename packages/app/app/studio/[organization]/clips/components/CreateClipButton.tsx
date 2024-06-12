@@ -70,10 +70,10 @@ const CreateClipButton = ({
       setIsLoading(true)
       createClipAction({
         playbackId,
-        sessionId: selectedRecording,
+        recordingId: selectedRecording,
         start: startTime.unix,
         end: endTime.unix,
-        // session,
+        sessionId: session._id as string,
       })
         .then(() => {
           setIsLoading(false)

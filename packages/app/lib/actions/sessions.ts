@@ -7,6 +7,8 @@ import {
   createSession,
   deleteSession,
   createClip,
+  createAsset,
+  generateThumbnail,
 } from '../services/sessionService'
 import {
   ISession,
@@ -61,13 +63,14 @@ export const createClipAction = async ({
   playbackId,
   sessionId,
   start,
-  end, // session,
+  end,
+  recordingId,
 }: {
   playbackId: string
   sessionId: string
   start: number
   end: number
-  // session: IExtendedSession
+  recordingId: string
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
@@ -80,6 +83,7 @@ export const createClipAction = async ({
     sessionId,
     start,
     authToken,
+    recordingId,
   })
   if (!response) {
     throw new Error('Error creating session')
@@ -131,4 +135,45 @@ export const deleteSessionAction = async ({
   }
   revalidatePath('/studio')
   return response
+}
+
+export const createAssetAction = async ({
+  fileName,
+}: {
+  fileName: string
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  try {
+    const asset = await createAsset({ fileName, authToken })
+    if (!asset) {
+      return null
+    }
+
+    return asset
+  } catch (e) {
+    console.error('Error creating asset')
+    return null
+  }
+}
+
+export const generateThumbnailAction = async (
+  session: IExtendedSession
+) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  try {
+    const res = await generateThumbnail({ session, authToken })
+
+    return res
+  } catch (e) {
+    console.error('Error generating thumbnail acton')
+    return null
+  }
 }

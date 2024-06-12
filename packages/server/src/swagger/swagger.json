@@ -325,6 +325,37 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse__playbackUrl-string--phaseStatus-string__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"phaseStatus": {
+								"type": "string"
+							},
+							"playbackUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"phaseStatus",
+							"playbackUrl"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStandardResponse__viewCount-number--playTimeMins-number__": {
 				"properties": {
 					"status": {
@@ -366,6 +397,9 @@
 					"sessionId": {
 						"type": "string"
 					},
+					"recordingId": {
+						"type": "string"
+					},
 					"start": {
 						"type": "number",
 						"format": "double"
@@ -378,6 +412,7 @@
 				"required": [
 					"playbackId",
 					"sessionId",
+					"recordingId",
 					"start",
 					"end"
 				],
@@ -3334,6 +3369,38 @@
 				]
 			}
 		},
+		"/streams/asset/phase-action/{assetId}": {
+			"get": {
+				"operationId": "GetPhaseAction",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__playbackUrl-string--phaseStatus-string__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get Video Phase Action",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "assetId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/streams/metric/{playbackId}": {
 			"get": {
 				"operationId": "GetSessionMetrics",
@@ -3458,6 +3525,37 @@
 							"schema": {
 								"$ref": "#/components/schemas/CreateClipDto"
 							}
+						}
+					}
+				}
+			}
+		},
+		"/streams/thumbnail/generate": {
+			"post": {
+				"operationId": "GenerateThumbnail",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Generate thumbnail",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
 						}
 					}
 				}

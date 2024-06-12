@@ -18,7 +18,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { updateSessionAction } from '@/lib/actions/sessions'
+import {
+  generateThumbnailAction,
+  updateSessionAction,
+} from '@/lib/actions/sessions'
 import ProcessingSkeleton from './misc/ProcessingSkeleton'
 import { PopoverActions } from './misc/PopoverActions'
 import {
@@ -29,7 +32,6 @@ import {
 import GetHashButton from './GetHashButton'
 import CopyItem from '@/components/misc/CopyString'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import { generateThumbnail } from '@/lib/actions/livepeer'
 import { useEffect, useState } from 'react'
 
 const TableCells = ({
@@ -45,7 +47,9 @@ const TableCells = ({
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    generateThumbnail(item).then((url) => url && setImageUrl(url))
+    generateThumbnailAction(item).then(
+      (url) => url && setImageUrl(url)
+    )
   }, [item])
 
   const handlePublishment = () => {
