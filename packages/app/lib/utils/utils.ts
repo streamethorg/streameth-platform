@@ -300,17 +300,16 @@ export const getVideoIndex = (
 ) => {
   let videoIndex = []
 
-  if (all) {
-    videoIndex = nftCollection?.videos?.map((vid) => vid?.index) || []
-  } else {
-    const index = nftCollection?.videos?.find(
-      (vid) =>
-        vid.sessionId == video?._id || vid.stageId === video?._id
-    )?.index
-    if (index !== undefined) {
-      videoIndex.push(index)
-    }
+  // if (all) {
+  //   videoIndex = nftCollection?.videos?.map((vid) => vid?.index) || []
+  // } else {
+  const index = nftCollection?.videos?.find(
+    (vid) => vid.sessionId == video?._id || vid.stageId === video?._id
+  )?.index
+  if (index !== undefined) {
+    videoIndex.push(index)
   }
+  // }
 
   return videoIndex
 }

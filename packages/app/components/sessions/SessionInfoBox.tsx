@@ -155,7 +155,7 @@ const SessionInfoBox = async ({
   const nftCollection = await fetchNFTCollection({
     collectionId: video?.nftCollections?.[0],
   })
-  console.log('video', video)
+
   return (
     <div
       className={`flex flex-col md:flex-row py-4 md:space-x-2 ${
@@ -198,7 +198,7 @@ const SessionInfoBox = async ({
             name={name}
             description={description}
             date={date}
-            video={video}
+            video={video as IExtendedSession}
             nftCollection={nftCollection}
             vod={vod}
           />
@@ -208,7 +208,7 @@ const SessionInfoBox = async ({
             name={name}
             description={description}
             date={date}
-            video={video}
+            video={video as IExtendedSession}
             nftCollection={nftCollection}
             vod={vod}
           />

@@ -14,7 +14,7 @@ const page = async ({ params }: nftPageParams) => {
     collectionId: params.nftId,
   })
   if (!collection) return notFound()
-  console.log(collection)
+
   return (
     <div className="p-2 mx-6 h-full">
       <Link href={`/studio/${params.organization}/library`}>

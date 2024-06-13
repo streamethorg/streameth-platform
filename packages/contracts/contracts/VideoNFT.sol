@@ -20,7 +20,7 @@ contract VideoNFT is
 {
     using Strings for uint256;
 
-    uint256 public constant baseFee = 1e10;
+    uint256 public constant baseFee = 0.000777 ether;
     uint256 public totalSupply;
 
     string public videoNFTName;
@@ -35,10 +35,10 @@ contract VideoNFT is
     address public constant streamethGnosisWallet =
         0x9268d03EfF4A9A595ef619764AFCB9976c0375df;
 
-    mapping(address => mapping(string => bool)) private _sessionMinted;
+    mapping(address => mapping(uint256 => bool)) public sessionMinted;
 
     /// ======================== Events ========================
-    event sessionMinted(address receipeint, uint256 mintPrice);
+    event SessionMinted(address receipeint, uint256 mintPrice);
 
     function initialize(
         string memory _baseTokenUri,
@@ -102,10 +102,6 @@ contract VideoNFT is
         uint256 mintPrice = (mintFee + baseFee) * amount;
         require(msg.value == mintPrice, "Incorrect mint fee");
         require(msg.sender == tx.origin, "Contract call");
-        // require(
-        //     mintStartTime < block.timestamp && block.timestamp < mintEndTime,
-        //     "Not mint period"
-        // );
 
         if (limitedSupply) {
             require(totalSupply < maxSupply, "No more tokens available");
@@ -122,9 +118,10 @@ contract VideoNFT is
                 Strings.toString(id[_index])
             );
             mintAction(uri);
+            sessionMinted[msg.sender][id[_index]] = true;
             _index++;
         }
-        emit sessionMinted(msg.sender, mintPrice);
+        emit SessionMinted(msg.sender, mintPrice);
     }
 
     // @dev: This function is used to withdraw the payments from the contract
