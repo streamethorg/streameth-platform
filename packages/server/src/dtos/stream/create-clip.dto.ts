@@ -10,6 +10,10 @@ export class CreateClipDto {
   sessionId!: string;
 
   @IsNotEmpty()
+  @IsString()
+  recordingId!: string;
+
+  @IsNotEmpty()
   @IsNumber()
   start!: number;
 
