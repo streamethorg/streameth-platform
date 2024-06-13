@@ -8,8 +8,8 @@ import {
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import { IExtendedSession, IExtendedEvent } from '@/lib/types'
-import { generateThumbnail } from '@/lib/actions/livepeer'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
+import { generateThumbnailAction } from '@/lib/actions/sessions'
 
 const VideoCard = ({
   session,
@@ -27,7 +27,9 @@ const VideoCard = ({
   )
 
   useEffect(() => {
-    generateThumbnail(session).then((url) => url && setImageUrl(url))
+    generateThumbnailAction(session).then(
+      (url) => url && setImageUrl(url)
+    )
   }, [session])
   return (
     <div className="min-h-full w-full rounded-xl  uppercase">

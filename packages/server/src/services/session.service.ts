@@ -111,7 +111,12 @@ export default class SessionService {
     const pageNumber = Number(d.page) || 0;
     const skip = pageSize * pageNumber - pageSize;
     const [sessions, totalDocuments] = await Promise.all([
-      await this.controller.store.findAll(filter, this.path, skip, pageSize),
+      await this.controller.store.findAllAndSort(
+        filter,
+        this.path,
+        skip,
+        pageSize,
+      ),
       await this.controller.store.findAll(filter, this.path, 0, 0),
     ]);
     return {

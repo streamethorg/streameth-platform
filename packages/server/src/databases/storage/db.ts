@@ -42,6 +42,19 @@ export default class DB<T> implements IStorageController<T> {
     return await this.model.find(query).skip(skip).limit(pageSize);
   }
 
+  async findAllAndSort(
+    query: {},
+    path: string,
+    skip: number,
+    pageSize: number,
+  ): Promise<Array<T>> {
+    return await this.model
+      .find(query)
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 });
+  }
+
   async delete(id: string): Promise<void> {
     await this.model.deleteOne(new Types.ObjectId(id));
   }

@@ -105,9 +105,7 @@ const UploadVideoForm = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Video title <span className="text-red-500">*</span>
-              </FormLabel>
+              <FormLabel required>Video title</FormLabel>
               <FormControl>
                 <Input placeholder="name" {...field} />
               </FormControl>
@@ -120,9 +118,7 @@ const UploadVideoForm = ({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Description <span className="text-red-500">*</span>
-              </FormLabel>
+              <FormLabel required>Description</FormLabel>
               <FormControl>
                 <Input placeholder="description" {...field} />
               </FormControl>
@@ -135,6 +131,7 @@ const UploadVideoForm = ({
           name="published"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Visibility</FormLabel>
               <FormControl>
                 <div className="flex justify-start items-center space-x-2">
                   {field.value ? (
