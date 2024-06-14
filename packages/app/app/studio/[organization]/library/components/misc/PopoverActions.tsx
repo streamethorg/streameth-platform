@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { Copy, FilePenLine, Share2, Trash2 } from 'lucide-react'
+import { Copy, Eye, FilePenLine, Share2, Trash2 } from 'lucide-react'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
 import DeleteAsset from '../DeleteAsset'
@@ -42,6 +42,17 @@ export const PopoverActions = ({
             className="space-x-2 w-full !justify-start">
             <FilePenLine />
             <p className="">Edit</p>
+          </Button>
+        </Link>
+        <Link
+          href={`/${organizationSlug}/watch?session=${
+            session._id as string
+          }`}>
+          <Button
+            variant={'ghost'}
+            className="space-x-2 w-full !justify-start">
+            <Eye />
+            <p className="">View</p>
           </Button>
         </Link>
         {layout === eLayout.grid &&

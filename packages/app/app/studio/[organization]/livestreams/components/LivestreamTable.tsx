@@ -57,15 +57,15 @@ const LivestreamTable = ({
                 <Link
                   key={stream._id}
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
-                  <div className=" flex flex-row items-center space-x-4 w-full">
-                    <div className="relative overflow-hidden min-w-[100px] w-[100px]">
+                  <div className="flex flex-row items-center space-x-4 w-full">
+                    <div className="overflow-hidden relative min-w-[100px] w-[100px]">
                       {stream.thumbnail ? (
                         <Thumbnail imageUrl={stream.thumbnail} />
                       ) : (
                         <DefaultThumbnail />
                       )}
                       {stream.streamSettings?.isActive && (
-                        <p className="absolute top-0 right-0 text-white bg-destructive p-1 text-sm">
+                        <p className="absolute top-0 right-0 p-1 text-sm text-white bg-destructive">
                           live
                         </p>
                       )}
@@ -107,15 +107,16 @@ const LivestreamTable = ({
               <TableCell>
                 <ToggleLivestreamVisibility item={stream} />
               </TableCell>
-              <TableCell className="flex items-center gap-2">
+              <TableCell>
                 <EditLivestream
                   organizationSlug={organizationSlug}
                   livestream={stream}
                 />
-
+              </TableCell>
+              <TableCell>
                 <Popover>
-                  <PopoverTrigger className="z-10">
-                    <EllipsisVertical className="mt-2" />
+                  <PopoverTrigger className="flex z-10 items-center">
+                    <EllipsisVertical />
                   </PopoverTrigger>
                   <PopoverContent className="w-fit">
                     <LivestreamActions

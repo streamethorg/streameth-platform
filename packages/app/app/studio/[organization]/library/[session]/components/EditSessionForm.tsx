@@ -74,14 +74,15 @@ const EditSessionFrom = ({
       .catch(() => toast.error('Error updating session'))
       .finally(() => {
         setIsLoading(false)
-        window.location.reload()
       })
   }
 
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {}}
+        onError={(errors) => {
+          console.error('Error:', errors)
+        }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6">
         <FormField
