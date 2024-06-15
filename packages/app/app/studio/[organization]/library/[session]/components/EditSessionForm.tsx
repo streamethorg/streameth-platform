@@ -34,6 +34,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useRouter } from 'next/navigation'
 
 const EditSessionFrom = ({
   session,
@@ -43,6 +44,7 @@ const EditSessionFrom = ({
   organizationSlug: string
 }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
@@ -74,6 +76,7 @@ const EditSessionFrom = ({
       .catch(() => toast.error('Error updating session'))
       .finally(() => {
         setIsLoading(false)
+        router.push(`/studio/${organizationSlug}/library`)
       })
   }
 
