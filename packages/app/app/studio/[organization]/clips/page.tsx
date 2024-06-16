@@ -256,7 +256,7 @@ const EventClips = async ({
           organizationSlug={params.organization}
         />
       )}
-      <div className="flex flex-col px-8 pt-2 w-full">
+      <div className="flex flex-col px-4 pt-2 w-full">
         {/* <div className="flex flex-row justify-center my-4 space-x-4 w-full">
           <SelectSession
             stages={stages}
