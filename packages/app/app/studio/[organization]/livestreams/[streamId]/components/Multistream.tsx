@@ -25,13 +25,13 @@ const Multistream = ({
   return (
     <div className="w-full">
       {streamTargets?.length === 0 ? (
-        <Card className="shadow-none bg-white">
-          <CardContent className="p-3 lg:p-6 flex justify-between items-center ">
-            <CardTitle className="text-xl">
-              Custom Platform
-            </CardTitle>
-
+        <Card className="bg-white shadow-none">
+          <CardContent className="flex flex-col justify-between items-center p-3 space-y-2 lg:p-6">
+            <p className="text-muted-foreground">
+              You have no destinations yet
+            </p>
             <CreateMultistreamTarget
+              btnName="Add First Channel"
               organizationId={organizationId}
               streamId={stream?.streamSettings?.streamId}
             />
@@ -39,26 +39,22 @@ const Multistream = ({
         </Card>
       ) : (
         <div className="flex flex-col gap-4 w-full">
-          <CardContent className="!p-4 flex items-center justify-between ">
-            <CardTitle className="text-2xl">
-              Multistream Target
+          <CardContent className="!p-0 flex items-center justify-between">
+            <CardTitle className="text-xl font-bold">
+              Multistream Channels
             </CardTitle>
-            <CreateMultistreamTarget
-              btnName="Add Target"
-              organizationId={organizationId}
-              streamId={stream?.streamSettings?.streamId}
-            />
+            <span>2 active</span>
           </CardContent>
-          <Card className="shadow-none bg-white">
+          <Card className="bg-white shadow-none">
             <Table>
               <TableHeader className="sticky top-0 z-50">
                 <TableRow>
-                  <TableHead className="">Name</TableHead>
+                  <TableHead>Name</TableHead>
                   <TableHead>Profile</TableHead>
                 </TableRow>
               </TableHeader>
 
-              <TableBody className="overflow-scroll ">
+              <TableBody className="overflow-scroll">
                 {streamTargets?.map((target) => (
                   <TableRow key={target.id} className="">
                     <>
@@ -69,7 +65,7 @@ const Multistream = ({
                         source
                       </TableCell>
 
-                      <TableCell className="font-medium flex justify-end">
+                      <TableCell className="flex justify-end font-medium">
                         <DeleteMultistream
                           streamId={stream?.streamSettings?.streamId}
                           organizationId={organizationId}

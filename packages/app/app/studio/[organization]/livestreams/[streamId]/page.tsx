@@ -1,27 +1,43 @@
-import React from 'react'
+'use server'
 
-import Multistream from './components/Multistream'
+import React from 'react'
 import LivestreamEmbedCode from './components/LivestreamEmbedCode'
 import { fetchStage } from '@/lib/services/stageService'
 import { LivestreamPageParams } from '@/lib/types'
-import PublishLivestream from './components/PublishLivestream'
 import StreamConfigWithPlayer from './components/StreamConfigWithPlayer'
 import StreamHeader from './components/StreamHeader'
 import ShareButton from '@/components/misc/interact/ShareButton'
-import { LinkedinIcon, XIcon } from 'react-share'
-import CreateNFTModal from '../../nfts/create/components/CreateNFTModal'
+import NotFound from '@/app/not-found'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import Destinations from './components/Destinations'
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null
   const stream = await fetchStage({ stage: params.streamId })
 
   if (!stream) {
-    return <div> no stream data found</div>
+    return NotFound()
   }
 
   return (
-    <div className=" m-auto w-full h-full overflow-y-scroll">
-      <div className="flex flex-col p-8 w-full">
+    <div className="flex overflow-y-scroll p-4 space-x-4 w-full h-full">
+      <div className="w-2/3">
         <StreamHeader
           organization={params.organization}
           stream={stream}
@@ -34,8 +50,8 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               streamId={params.streamId}
               organization={params.organization}
             />
-            <div className="flex items-center  w-full py-2 space-x-2">
-              <span className="lg:max-w-[550px] line-clamp-2 text-xl font-bold mr-auto">
+            <div className="flex items-center py-2 space-x-2 w-full">
+              <span className="mr-auto text-xl font-bold line-clamp-2 lg:max-w-[550px]">
                 {stream.name}
               </span>
               <LivestreamEmbedCode
@@ -49,20 +65,48 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               />
             </div>
           </div>
-
-          <div className=" h-auto flex flex-col space-y-4 w-full max-w-[25%] justify-start">
-            <div className=" bg-black rounded-xl items-center justify-center w-full text-white flex flex-row h-auto max-h-[88px] text-xl">
-              <XIcon />
-              Stream to X
-            </div>
-            <CreateNFTModal organization={params.organization} type='signle' />
-            <PublishLivestream stream={stream} />
-            <Multistream
-              stream={stream}
-              organizationId={stream.organizationId as string}
-            />
-          </div>
         </div>
+      </div>
+
+      <div className="w-1/3 h-full">
+        <Tabs defaultValue="destinations">
+          <TabsList className="grid grid-cols-2 max-w-2/3">
+            <TabsTrigger value="destinations">
+              Destinations
+            </TabsTrigger>
+            <TabsTrigger value="chat">Chat</TabsTrigger>
+          </TabsList>
+          <TabsContent value="destinations">
+            <Destinations
+              stream={stream}
+              organization={params.organization}
+            />
+          </TabsContent>
+          <TabsContent value="chat">
+            <Card>
+              <CardHeader>
+                <CardTitle>Password</CardTitle>
+                <CardDescription>
+                  Change your password here. After saving, you'll be
+                  logged out.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="space-y-1">
+                  <Label htmlFor="current">Current password</Label>
+                  <Input id="current" type="password" />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="new">New password</Label>
+                  <Input id="new" type="password" />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button>Save password</Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )

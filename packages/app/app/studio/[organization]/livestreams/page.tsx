@@ -1,3 +1,5 @@
+'use server'
+
 import {
   Card,
   CardDescription,
@@ -19,7 +21,7 @@ import { sortArray } from '@/lib/utils/utils'
 import EmptyFolder from '@/lib/svg/EmptyFolder'
 import TableSkeleton from '@/components/misc/Table/TableSkeleton'
 
-export const Loading = () => {
+const Loading = () => {
   return (
     <div className="flex flex-col h-full bg-white">
       <TableSkeleton />
@@ -45,7 +47,7 @@ export const Livestreams = async ({
   )
 
   return (
-    <div className="flex flex-col min-h-[300px] bg-white border rounded-xl">
+    <div className="flex flex-col bg-white rounded-xl border min-h-[300px]">
       {stages.length > 0 ? (
         <LivestreamTable
           organization={organization}

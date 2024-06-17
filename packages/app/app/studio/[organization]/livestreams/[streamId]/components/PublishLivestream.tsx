@@ -35,15 +35,14 @@ const PublishLivestream = ({
   }
 
   return (
-    <>
+    <div className="flex justify-between space-x-2">
       <Button
-        className=" w-full text-white flex flex-row justify-center h-auto max-h-[88px] text-xl space-x-4"
+        className="flex flex-row justify-center w-full text-xl text-white"
         loading={isLoading}
         onClick={handlePublishStream}
         disabled={stream?.published || isLoading}
-        variant={'primary'}>
-        <Image src={StreamethLogo} alt="img" width={50} height={50} />
-        <span>Stream to channel</span>
+        variant={'destructive'}>
+        <span className="font-bold">Go live!</span>
       </Button>
       {stream?.published && (
         <Button
@@ -52,10 +51,10 @@ const PublishLivestream = ({
           onClick={handlePublishStream}
           disabled={!stream?.published || isLoading}
           variant="destructive-outline">
-          Un-publish
+          Unpublish
         </Button>
       )}
-    </>
+    </div>
   )
 }
 
