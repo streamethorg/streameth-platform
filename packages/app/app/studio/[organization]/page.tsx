@@ -38,22 +38,7 @@ const OrganizationPage = async ({
               <span className=" ">Upload Video</span>
             </div>
           </Link>
-          <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center">
-              <div className="p-4 border bg-primary  rounded-xl text-white">
-                <CameraIcon className="h-6" />
-              </div>
-              <span className=" ">Upload Video</span>
-            </div>
-          </Link>
-          <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center">
-              <div className="p-4 border bg-primary  rounded-xl text-white">
-                <CameraIcon className="h-6" />
-              </div>
-              <span className=" ">Upload Video</span>
-            </div>
-          </Link>
+
         </div>
         <span className='py-4 font-bold text-lg'>Livestreams</span>
         <Suspense

@@ -65,9 +65,14 @@ const LivestreamTable = ({
                       </p>
                     )}
                   </div>
-                  <p className="hover:underline line-clamp-3">
-                    {stream?.name}
-                  </p>
+
+                  <Link
+                    key={stream._id}
+                    href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
+                    <p className="hover:underline line-clamp-3">
+                      {stream?.name}
+                    </p>
+                  </Link>
                 </div>
               </TableCell>
               <TableCell>
