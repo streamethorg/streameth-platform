@@ -6,8 +6,11 @@ import TimeSetter from './components/TimeSetter'
 import CreateClipButton from './components/CreateClipButton'
 import { ClipProvider } from './components/ClipContext'
 import ReactHlsPlayer from './components/Player'
-import { fetchStages } from '@/lib/services/stageService'
-import { getStreamRecordings } from '@/lib/actions/livepeer'
+import {
+  fetchStageRecordings,
+  fetchStages,
+} from '@/lib/services/stageService'
+
 import { fetchAllSessions } from '@/lib/data'
 import { fetchEvent } from '@/lib/services/eventService'
 import { CardTitle } from '@/components/ui/card'
@@ -16,8 +19,11 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Preview from '../Preview'
 import ClipsSessionList from './components/ClipSessionList'
-import { getAsset } from '@/lib/actions/livepeer'
-import { fetchSession } from '@/lib/services/sessionService'
+
+import {
+  fetchAsset,
+  fetchSession,
+} from '@/lib/services/sessionService'
 import { IExtendedEvent, IExtendedStage } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
@@ -28,6 +34,7 @@ import {
   TabsContent,
 } from '@/components/ui/tabs'
 import EmptyFolder from '@/lib/svg/EmptyFolder'
+import { Stream, Session } from 'livepeer/dist/models/components'
 
 const ClipContainer = ({
   children,
@@ -154,17 +161,17 @@ const EventClips = async ({
     )
   }
 
-  const stageRecordings = await getStreamRecordings({
+  const stageRecordings = await fetchStageRecordings({
     streamId: currentStage?.streamSettings?.streamId ?? '',
   })
 
   const currentRecording = (function () {
     if (selectedRecording) {
-      const recording = stageRecordings.recordings.find(
-        (recording) => recording.id === selectedRecording
+      const recording = stageRecordings?.recordings.find(
+        (recording: Session) => recording?.id === selectedRecording
       )
       if (recording) {
-        return recording.id ?? null
+        return recording?.id ?? null
       }
       return null
     }
@@ -172,7 +179,7 @@ const EventClips = async ({
   })()
 
   if (
-    stageRecordings.recordings.length === 0 ||
+    stageRecordings.recordings?.length === 0 ||
     !stageRecordings?.parentStream?.id
   ) {
     return (
@@ -230,7 +237,9 @@ const EventClips = async ({
         session: previewId,
       })
       if (session) {
-        return await getAsset(session.assetId as string)
+        return await fetchAsset({
+          assetId: session.assetId as string,
+        })
       }
     }
     return undefined

@@ -66,16 +66,7 @@ const TableCells = async ({
       )}
       {/* <TableCell className="relative max-w-[200px]">
         {item.ipfsURI ? (
-          <div
-            className="flex items-center hover:bg-gray-200 group"
-            onClick={handleCopy}>
-            <span className="flex-1 m-2 rounded cursor-pointer truncate">
-              {item.ipfsURI}
-            </span>
-            <Copy className="p-1 mr-2 opacity-0 group-hover:opacity-100">
-              Copy IPFS Hash
-            </Copy>
-          </div>
+          <CopyItem item={item.ipfsURI} itemName="IPFS Uri" />
         ) : (
           <GetHashButton session={item} />
         )}

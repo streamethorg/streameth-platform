@@ -4,12 +4,13 @@ import { studioPageParams } from '@/lib/types'
 import { fetchEvents } from '@/lib/services/eventService'
 
 const Events = async ({ params }: studioPageParams) => {
-  const events = await fetchEvents({
-    organizationSlug: params.organization,
-  })
+  // const events = await fetchEvents({
+  //   organizationSlug: params.organization,
+  // })
 
   return (
-    <EventTable organization={params.organization} events={events} />
+    <></>
+    // <EventTable organization={params.organization} events={events} />
   )
 }
 

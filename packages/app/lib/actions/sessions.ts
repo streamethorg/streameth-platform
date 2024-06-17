@@ -6,6 +6,9 @@ import {
   updateSession,
   createSession,
   deleteSession,
+  createClip,
+  createAsset,
+  generateThumbnail,
 } from '../services/sessionService'
 import {
   ISession,
@@ -58,48 +61,37 @@ export const createSessionAction = async ({
   return response
 }
 
-export const createClip = async ({
+export const createClipAction = async ({
   playbackId,
   sessionId,
   start,
   end,
-  session,
+  recordingId,
 }: {
   playbackId: string
   sessionId: string
   start: number
   end: number
-  session: IExtendedSession | ISession
+  recordingId: string
 }) => {
-  const clip = await livepeer.stream.createClip({
-    endTime: end,
-    playbackId,
-    sessionId,
-    startTime: start,
-  })
-  console.log('Clip created:', clip)
-
-  const updatedSession = {
-    ...session,
-    assetId: clip.object?.asset.id,
-    playbackId: clip.object?.asset.playbackId,
-    start: new Date().getTime(),
-    end: new Date().getTime(),
-    type: SessionType['clip'],
-    // ipfsURI: updateAsset?.asset?.storage?.ipfs as string,
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
   }
 
-  // TODO
-  // @ts-ignore
-  delete updatedSession.createdAt
-  // @ts-ignore
-  delete updatedSession.updatedAt
-  // @ts-ignore
-  delete updatedSession.__v
-  // @ts-ignore
-  delete updatedSession.ipfsURI
+  const response = await createClip({
+    end,
+    playbackId,
+    sessionId,
+    start,
+    authToken,
+    recordingId,
+  })
+  if (!response) {
+    throw new Error('Error creating session')
+  }
   revalidatePath('/studio')
-  await updateSessionAction({ session: updatedSession })
+  return response
 }
 
 export const updateSessionAction = async ({
@@ -121,37 +113,6 @@ export const updateSessionAction = async ({
   }
   revalidatePath(`/studio/${session.organizationId}`)
   return response
-}
-
-interface IMetrics {
-  startViews: number
-}
-export const getSessionMetrics = async ({
-  playbackId,
-}: {
-  playbackId: string
-}): Promise<{
-  viewCount: number
-  playTimeMins: number
-}> => {
-  try {
-    const metrics = await livepeer.metrics.getPublicTotalViews(
-      playbackId
-    )
-    if (!metrics.object) {
-      return {
-        viewCount: 0,
-        playTimeMins: 0,
-      }
-    }
-    return {
-      viewCount: metrics.object?.viewCount,
-      playTimeMins: metrics.object?.playtimeMins,
-    }
-  } catch (error) {
-    console.error('Error getting metrics:', error)
-    throw error
-  }
 }
 
 export const deleteSessionAction = async ({
@@ -176,4 +137,45 @@ export const deleteSessionAction = async ({
   }
   revalidatePath('/studio')
   return response
+}
+
+export const createAssetAction = async ({
+  fileName,
+}: {
+  fileName: string
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  try {
+    const asset = await createAsset({ fileName, authToken })
+    if (!asset) {
+      return null
+    }
+
+    return asset
+  } catch (e) {
+    console.error('Error creating asset')
+    return null
+  }
+}
+
+export const generateThumbnailAction = async (
+  session: IExtendedSession
+) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  try {
+    const res = await generateThumbnail({ session, authToken })
+
+    return res
+  } catch (e) {
+    console.error('Error generating thumbnail acton')
+    return null
+  }
 }

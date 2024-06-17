@@ -1,3 +1,5 @@
+'use server'
+
 import { studioPageParams } from '@/lib/types'
 import { fetchSession } from '@/lib/services/sessionService'
 import { PlayerWithControls } from '@/components/ui/Player'

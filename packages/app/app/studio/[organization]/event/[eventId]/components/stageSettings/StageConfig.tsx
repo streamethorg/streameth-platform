@@ -1,4 +1,3 @@
-// import { getStageStream } from '@/lib/actions/stages'
 import { fetchStage } from '@/lib/services/stageService'
 import LivestreamEmbedCode from '@/app/studio/[organization]/livestreams/[streamId]/components/LivestreamEmbedCode'
 import Multistream from '@/app/studio/[organization]/livestreams/[streamId]/components/Multistream'
@@ -16,7 +15,6 @@ const StreamConfig = async ({
   if (!stage || !stage.streamSettings?.streamId) {
     return <div> no stage found</div>
   }
-  // const data = await getStageStream(stage.streamSettings?.streamId)
 
   return (
     <div className="flex flex-col items-center gap-4 p-4 m-auto max-w-5xl">
