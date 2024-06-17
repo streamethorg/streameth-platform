@@ -231,8 +231,8 @@ const EventClips = async ({
           sessionId={previewId}
         />
       )}
-      <div className="flex flex-col w-full px-4">
-        <div className="flex flex-row justify-center space-x-4 my-4 w-full">
+      <div className="flex flex-col w-full">
+        {/* <div className="flex flex-row justify-center space-x-4 my-4 w-full">
           <SelectSession
             stages={stages}
             currentStageId={currentStage._id}
@@ -241,7 +241,7 @@ const EventClips = async ({
             selectedRecording={currentRecording ?? undefined}
             streamRecordings={stageRecordings.recordings}
           />
-        </div>
+        </div> */}
         <div className="flex flex-col w-full h-full overflow-auto space-y-4">
           <ClipProvider>
             <ReactHlsPlayer
@@ -250,7 +250,7 @@ const EventClips = async ({
               }
               selectedStreamSession={currentRecording}
             />
-            <div className="flex flex-col space-y-4">
+            {/* <div className="flex flex-col h-[300px]">
               <Tabs defaultValue={'sessions'}>
                 <TabsList className="border-y border-grey w-full !justify-start gap-5">
                   <TabsTrigger className="px-0" value="sessions">
@@ -295,11 +295,11 @@ const EventClips = async ({
                   </div>
                 </TabsContent>
               </Tabs>
-            </div>
+            </div> */}
           </ClipProvider>
         </div>
       </div>
-      <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
+      {/* <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
         <SessionSidebar
           currentStage={currentStage}
           event={event ?? undefined}
@@ -307,7 +307,7 @@ const EventClips = async ({
             (session) => session.assetId
           )}
         />
-      </Suspense>
+      </Suspense> */}
     </ClipContainer>
   )
 }
