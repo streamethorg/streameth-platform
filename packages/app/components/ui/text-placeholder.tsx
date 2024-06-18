@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { toast } from 'sonner'
 import { Copy } from 'lucide-react'
 

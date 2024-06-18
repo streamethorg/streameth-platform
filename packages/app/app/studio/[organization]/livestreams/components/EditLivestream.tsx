@@ -45,12 +45,12 @@ const EditLivestream = ({
   organizationSlug: string
   btnText?: string
   variant?:
-  | 'outline'
-  | 'ghost'
-  | 'primary'
-  | 'default'
-  | 'link'
-  | 'secondary'
+    | 'outline'
+    | 'ghost'
+    | 'primary'
+    | 'default'
+    | 'link'
+    | 'secondary'
 }) => {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)

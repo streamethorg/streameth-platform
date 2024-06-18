@@ -1,13 +1,9 @@
 'use server'
 
-import {
-  CameraIcon,
-} from 'lucide-react'
+import { CameraIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Livestreams, Loading } from './livestreams/page'
-import {
-  LivestreamPageParams,
-} from '@/lib/types'
+import { LivestreamPageParams } from '@/lib/types'
 import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal'
 import { Suspense } from 'react'
 import { fetchOrganization } from '@/lib/services/organizationService'
@@ -15,8 +11,8 @@ const OrganizationPage = async ({
   params,
   searchParams,
 }: LivestreamPageParams) => {
-  const organization  = await fetchOrganization({
-    organizationSlug: params.organization
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
   })
 
   if (!organization) return <></>
@@ -38,9 +34,8 @@ const OrganizationPage = async ({
               <span className=" ">Upload Video</span>
             </div>
           </Link>
-
         </div>
-        <span className='py-4 font-bold text-lg'>Livestreams</span>
+        <span className="py-4 font-bold text-lg">Livestreams</span>
         <Suspense
           key={searchParams.toString()}
           fallback={<Loading />}>

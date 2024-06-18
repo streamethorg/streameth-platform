@@ -38,7 +38,11 @@ import {
   NftCollectionType,
 } from 'streameth-new-server/src/interfaces/nft.collection.interface'
 import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 export interface ICreateNFT {
   selectedVideo: INFTSessions[]

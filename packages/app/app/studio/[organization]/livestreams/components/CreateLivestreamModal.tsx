@@ -137,7 +137,9 @@ const CreateLivestreamModal = ({
         setStreamType(undefined)
       }}>
       <DialogTrigger asChild>
-        <Button variant={'outline'} className="h-auto flex flex-row bg-white px-2 justify-start rounded-xl  border space-x-4 items-center">
+        <Button
+          variant={'outline'}
+          className="h-auto flex flex-row bg-white px-2 justify-start rounded-xl  border space-x-4 items-center">
           <div className="p-4 border bg-primary  rounded-xl text-white">
             <CameraIcon className="h-6" />
           </div>

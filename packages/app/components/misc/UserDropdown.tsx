@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,23 +6,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import SwitchOrganization from "@/app/studio/[organization]/components/SwitchOrganization"
-import { ConnectWalletButton } from "./ConnectWalletButton"
-import { SignInUserButton } from "./SignInUserButton"
-import { Button } from "../ui/button"
-import { IExtendedOrganization } from "@/lib/types"
-import { Label } from "@radix-ui/react-dropdown-menu"
+} from '@/components/ui/dropdown-menu'
+import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
+import { ConnectWalletButton } from './ConnectWalletButton'
+import { SignInUserButton } from './SignInUserButton'
+import { Button } from '../ui/button'
+import { IExtendedOrganization } from '@/lib/types'
+import { Label } from '@radix-ui/react-dropdown-menu'
 
 const UserDropdown = ({
   organization,
-  organizations
+  organizations,
 }: {
   organization?: string
   organizations?: IExtendedOrganization[]
-
 }) => {
-  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex flex-col">
@@ -35,9 +33,7 @@ const UserDropdown = ({
           <DropdownMenuItem>
             <ConnectWalletButton />
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex flex-col">
-            
-          </DropdownMenuItem>
+          <DropdownMenuItem className="flex flex-col"></DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignInUserButton />

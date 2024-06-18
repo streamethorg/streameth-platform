@@ -11,16 +11,13 @@ import {
   Settings,
 } from 'lucide-react'
 
-
-
 const SidebarMenu = ({
   organizationSlug,
-  initalExpanded
+  initalExpanded,
 }: {
   organizationSlug: string
   initalExpanded?: boolean
 }) => {
-
   const navigationItems = [
     {
       text: 'Home',

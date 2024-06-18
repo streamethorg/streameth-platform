@@ -5,7 +5,7 @@ const CheckAuthorization = async () => {
   const privyToken = cookies().get('privy-token')
   const userSession = cookies().get('user-session')
   const userAddress = cookies().get('user-address')
-  console.log(privyToken,userSession,userAddress)
+  console.log(privyToken, userSession, userAddress)
   const res = await fetch(`${apiUrl()}/auth/verify-token`, {
     method: 'POST',
     body: JSON.stringify({

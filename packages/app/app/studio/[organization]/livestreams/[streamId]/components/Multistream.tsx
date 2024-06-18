@@ -24,7 +24,7 @@ const MultiStreamActions = ({
   organizationId: string
   target: TargetOutput
 }) => {
-  const handleSwitch = () => { }
+  const handleSwitch = () => {}
 
   return (
     <>
