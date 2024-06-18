@@ -38,6 +38,9 @@ const StreamPlatformGrid = ({
   organizationId?: string
   setIsOpen: (open: boolean) => void
 }) => {
+  const [SelectedComponent, setSelectedComponent] =
+    useState<JSX.Element | null>(null)
+
   if (!streamId || !organizationId) {
     return NotFound()
   }
@@ -63,8 +66,6 @@ const StreamPlatformGrid = ({
       ),
     },
   ]
-  const [SelectedComponent, setSelectedComponent] =
-    useState<JSX.Element | null>(null)
 
   const handleBlockClick = (item: StreamTargetItem) => {
     if (item.onClick) {

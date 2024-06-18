@@ -15,7 +15,6 @@ import { createMultistreamAction } from '@/lib/actions/stages'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { useFormState, useFormStatus } from 'react-dom'
 import { Plus } from 'lucide-react'
-import Blocks from '@/app/studio/[organization]/livestreams/[streamId]/components/StreamPlatforms/Block'
 
 const initialState = {
   message: '',
@@ -58,7 +57,6 @@ export const CreateMultistreamTarget = ({
             Create multistream target
           </DialogTitle>
         </DialogHeader>
-        <Blocks />
       </DialogContent>
     </Dialog>
   )

@@ -3,7 +3,6 @@ import { IExtendedSession, eLayout } from '@/lib/types'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
 import { formatDate } from '@/lib/utils/time'
-
 import { getSessionMetrics } from '@/lib/actions/sessions'
 import ProcessingSkeleton from './misc/ProcessingSkeleton'
 import { PopoverActions } from './misc/PopoverActions'
@@ -12,7 +11,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { useState } from 'react'
 import { generateThumbnail } from '@/lib/actions/livepeer'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import PublishCell from './PublishCell'
