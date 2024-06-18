@@ -1,11 +1,26 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react'
 import Hls from 'hls.js'
 import { useClipContext } from './ClipContext'
+import { ArrowLeftSquare, ArrowRightSquare } from 'lucide-react'
+import { debounce } from 'lodash'
+
 export interface HlsPlayerProps {
   playbackId: string
   selectedStreamSession: string
 }
+
+const debouncedUpdate = debounce(
+  (callback: (data: any) => void, data: any) => {
+    callback(data)
+  },
+  100
+)
 
 const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   playbackId,
@@ -85,19 +100,75 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         unix: Date.now() - playbackStatus.offset,
       })
     }
-  }, [videoRef.current?.duration])
+  }, [])
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (selectedTooltip) {
-      const tooltipElement = document.getElementById(selectedTooltip)
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (
-        tooltipElement &&
-        !tooltipElement.contains(e.target as Node)
+        e.target instanceof HTMLElement &&
+        (e.target.id === 'increment' || e.target.id === 'decrement')
       ) {
-        setSelectedTooltip(null)
+        return
+      }
+
+      if (selectedTooltip) {
+        const tooltipElement =
+          document.getElementById(selectedTooltip)
+        if (
+          tooltipElement &&
+          !tooltipElement.contains(e.target as Node)
+        ) {
+          setSelectedTooltip(null)
+        }
       }
     }
-  }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [selectedTooltip])
+
+  const handle1SecondIncrementDecrement = useCallback(
+    (increment: boolean, marker: string) => {
+      if (videoRef.current && playbackStatus) {
+        const time =
+          marker === 'start'
+            ? startTime.displayTime
+            : endTime.displayTime
+        const newTime = increment ? time + 1 : time - 1
+        if (marker === 'start') {
+          if (newTime >= 0 && newTime < endTime.displayTime) {
+            debouncedUpdate(setStartTime, {
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: newTime,
+            })
+          }
+        } else if (marker === 'end') {
+          if (
+            newTime > startTime.displayTime &&
+            newTime <= videoRef.current.duration
+          ) {
+            debouncedUpdate(setEndTime, {
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: newTime,
+            })
+          }
+        }
+        videoRef.current.currentTime = newTime
+      }
+    },
+    [
+      videoRef.current,
+      playbackStatus,
+      startTime.displayTime,
+      endTime.displayTime,
+      debouncedUpdate,
+      setStartTime,
+      setEndTime,
+    ]
+  )
 
   const handleMouseDown = (
     marker: string,
@@ -112,56 +183,85 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
     )
   }
 
-  const handleMouseMove = (event: MouseEvent) => {
-    if (dragging && videoRef.current && playbackStatus) {
-      const rect = videoRef.current.getBoundingClientRect()
-      const mouseDelta = event.clientX - initialMousePos
-      const pos =
-        initialMarkerPos +
-        (mouseDelta / rect.width) * videoRef.current.duration
-      videoRef.current.currentTime = pos
-      if (dragging === 'start') {
-        if (pos >= 0 && pos < endTime.displayTime) {
-          setStartTime({
-            unix: Date.now() - playbackStatus.offset,
-            displayTime: pos,
-          })
-        }
-      } else if (dragging === 'end') {
-        if (
-          pos > startTime.displayTime &&
-          pos <= videoRef.current.duration
-        ) {
-          setEndTime({
-            unix: Date.now() - playbackStatus.offset,
-            displayTime: pos,
-          })
+  const handleMouseMove = useCallback(
+    (event: MouseEvent) => {
+      if (dragging && videoRef.current && playbackStatus) {
+        const rect = videoRef.current.getBoundingClientRect()
+        const mouseDelta = event.clientX - initialMousePos
+        const pos =
+          initialMarkerPos +
+          (mouseDelta / rect.width) * videoRef.current.duration
+        videoRef.current.currentTime = pos
+        if (dragging === 'start') {
+          if (pos >= 0 && pos < endTime.displayTime) {
+            setStartTime({
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: pos,
+            })
+          }
+        } else if (dragging === 'end') {
+          if (
+            pos > startTime.displayTime &&
+            pos <= videoRef.current.duration
+          ) {
+            setEndTime({
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: pos,
+            })
+          }
         }
       }
-    }
-  }
+    },
+    [
+      dragging,
+      initialMousePos,
+      initialMarkerPos,
+      endTime.displayTime,
+      startTime.displayTime,
+      playbackStatus,
+    ]
+  )
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     setDragging(null)
-  }
+  }, [])
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseup', handleMouseUp)
-    window.addEventListener('mousedown', handleClickOutside)
+    window.addEventListener('mousedown', (e) => {
+      e.preventDefault()
+    })
 
+    window.addEventListener('keydown', (e) => {
+      if (selectedTooltip) {
+        e.preventDefault()
+        if (e.key === 'ArrowRight') {
+          handle1SecondIncrementDecrement(true, selectedTooltip)
+        } else if (e.key === 'ArrowLeft') {
+          handle1SecondIncrementDecrement(false, selectedTooltip)
+        }
+      }
+
+      if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
+        if (videoRef.current) {
+          if (videoRef.current.paused) {
+            videoRef.current.play()
+          } else {
+            videoRef.current.pause()
+          }
+        }
+      }
+    })
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseup', handleMouseUp)
-      window.removeEventListener('mousedown', handleClickOutside)
     }
   }, [
-    dragging,
-    startTime,
-    endTime,
-    handleMouseDown,
+    handle1SecondIncrementDecrement,
+    handleMouseMove,
     handleMouseUp,
-    handleClickOutside,
+    selectedTooltip,
   ])
 
   const getMarkerPosition = (time: number) => {
@@ -208,7 +308,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         <video
           ref={videoRef}
           autoPlay={false}
-          controls={true}
+          controls={false}
           className="w-full rounded-lg sticky top-0"></video>
       </div>
       <div className="flex flex-row w-full justify-center items-center mb-4">
@@ -249,34 +349,58 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
           {videoRef.current &&
             videoRef.current.duration &&
             generateTimeStamps(videoRef.current.duration).map(
-              (time) => (
-                <div
-                  key={time}
-                  className={`absolute flex flex-col `}
-                  style={{
-                    left: `${
-                      (time / videoRef.current.duration) * 100
-                    }%`,
-                  }}>
-                  <p
-                    className={`text-xs ${
-                      time !== 0 && 'ml-[-25px]'
-                    }`}>
-                    {new Date(time * 1000)
-                      .toISOString()
-                      .substr(11, 8)}
-                  </p>
+              (time) => {
+                if (!videoRef || !videoRef.current) return 0
+                return (
                   <div
-                    className={`h-2 w-[1px] bg-black ${
-                      time !== 0 && 'ml-[-0.5px]'
-                    }`}
-                  />
-                </div>
-              )
+                    key={time}
+                    className={`absolute flex flex-col `}
+                    style={{
+                      left: `${
+                        (time / videoRef.current.duration) * 100
+                      }%`,
+                    }}>
+                    <p
+                      className={`text-xs ${
+                        time !== 0 && 'ml-[-25px]'
+                      }`}>
+                      {new Date(time * 1000)
+                        .toISOString()
+                        .substr(11, 8)}
+                    </p>
+                    <div
+                      className={`h-2 w-[1px] bg-black ${
+                        time !== 0 && 'ml-[-0.5px]'
+                      }`}
+                    />
+                  </div>
+                )
+              }
             )}
         </div>
         <div className="relative flex h-10  rounded-full">
-          <div className="bg-gray-300 my-auto h-2 w-full " />
+          <div className="bg-gray-400 my-auto h-2 w-full rounded-xl " />
+          <div
+            className="absolute h-10 border-2 border-primary flex rounded-xl"
+            style={{
+              left: `${getMarkerPosition(startTime.displayTime)}%`,
+              right: `${
+                100 - getMarkerPosition(endTime.displayTime)
+              }%`,
+            }}>
+            {/* {videoRef.current && !dragging && (
+              <div
+                className="h-20 w-[3px] absolute bg-black top-[-10px]"
+                style={{
+                  left: `${
+                    (videoRef.current.currentTime /
+                      videoRef.current.duration) *
+                    100
+                  }%`,
+                }}></div>
+            )} */}
+            <div className="bg-gray-200 my-auto h-2 w-full " />
+          </div>
           <Marker
             {...{
               startTime,
@@ -287,6 +411,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
               marker: 'start',
               setSelectedTooltip,
               selectedTooltip,
+              handle1SecondIncrementDecrement,
             }}
           />
           <Marker
@@ -299,6 +424,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
               marker: 'end',
               setSelectedTooltip,
               selectedTooltip,
+              handle1SecondIncrementDecrement,
             }}
           />
         </div>
@@ -318,7 +444,6 @@ const Marker = ({
   getMarkerPosition,
   formatTime,
   marker,
-  setSelectedTooltip,
   selectedTooltip,
 }: {
   startTime: { displayTime: number; unix: number }
@@ -326,53 +451,51 @@ const Marker = ({
   handleMouseDown: (marker: string, event: React.MouseEvent) => void
   getMarkerPosition: (time: number) => number
   formatTime: (seconds: number) => string
-  setSelectedTooltip: (marker: string | null) => void
   selectedTooltip: string | null
   marker: string
+  handle1SecondIncrementDecrement: (
+    increment: boolean,
+    marker: string
+  ) => void
 }) => {
   return (
-    <>
-      <div
-        className="absolute h-10 border-2 border-primary  rounded-xl"
-        style={{
-          left: `${getMarkerPosition(
-            marker === 'start'
-              ? startTime.displayTime
-              : endTime.displayTime
-          )}%`,
-          right: `${
-            marker === 'start' &&
-            98 - getMarkerPosition(endTime.displayTime)
-          }%`,
-        }}></div>
-      <div
-        className="absolute w-[15px] h-full"
-        style={{
-          left: `${getMarkerPosition(
-            marker === 'start'
-              ? startTime.displayTime
-              : endTime.displayTime
-          )}%`,
-        }}
-        onMouseDown={(e) => {
-          handleMouseDown(marker, e)
-        }}>
-        <div className="relative h-full w-full">
-          <div
-            id={marker}
-            className={`bg-opacity-10 h-full bg-primary cursor-pointer `}
-          />
-          {selectedTooltip === marker && (
-            <div className="absolute top-[-40px] left-[-25px] p-1 text-white bg-primary text-sm rounded-xl">
-              {formatTime(
-                marker === 'start'
-                  ? startTime.displayTime
-                  : endTime.displayTime
-              )}
-            </div>
-          )}
-        </div>
+    <div
+      className={`absolute w-[15px] h-full `}
+      style={{
+        left: `${getMarkerPosition(
+          marker === 'start'
+            ? startTime.displayTime
+            : endTime.displayTime
+        )}%`,
+      }}
+      onMouseDown={(e) => {
+        handleMouseDown(marker, e)
+      }}>
+      <div className="relative h-full w-full">
+        <div
+          id={marker}
+          className={`bg-opacity-10 h-full bg-primary cursor-pointer ${
+            marker !== 'start'
+              ? 'translate-x-[-100%] rounded-r-xl'
+              : 'rounded-l-xl '
+          } `}
+        />
+        {selectedTooltip === marker && (
+          <div className="absolute top-[-50px] left-[-55px] p-1 text-white bg-primary text-xs rounded-xl flex justify-center items-center flex-col">
+            <p className="flex flex-row w-[120px] space-x-1 items-center justify-center">
+              <span>Use</span>{' '}
+              <ArrowLeftSquare width={15} height={15} />
+              <ArrowRightSquare width={15} height={15} />{' '}
+              <span>to trim</span>
+            </p>
+            {formatTime(
+              marker === 'start'
+                ? startTime.displayTime
+                : endTime.displayTime
+            )}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   )
 }
