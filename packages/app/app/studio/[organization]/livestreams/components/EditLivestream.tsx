@@ -140,13 +140,13 @@ const EditLivestream = ({
               control={form.control}
               name="thumbnail"
               render={({ field }) => (
-                <FormItem className="flex p-1 aspect-video mt-4">
+                <FormItem className="flex p-1 mt-4 aspect-video">
                   <FormLabel>Thumbnail</FormLabel>
                   <FormControl>
                     <ImageUpload
                       placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
                         Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                      className="w-full h-full bg-neutrals-300 text-black m-auto"
+                      className="m-auto w-full h-full text-black bg-neutrals-300"
                       aspectRatio={1}
                       path={`livestreams/${organizationSlug}`}
                       {...field}
@@ -163,15 +163,15 @@ const EditLivestream = ({
                 onClick={() => setIsMultiDate(!isMultiDate)}>
                 Streaming multiple days?
               </p>{' '}
-              <div className="flex items-center gap-5 mt-1">
-                <div className="flex items-center gap-1">
+              <div className="flex gap-5 items-center mt-1">
+                <div className="flex gap-1 items-center">
                   <Checkbox
                     checked={isMultiDate}
                     onCheckedChange={() => setIsMultiDate(true)}
                   />
                   <Label>Yes</Label>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex gap-1 items-center">
                   <Checkbox
                     onCheckedChange={() =>
                       setIsMultiDate(!isMultiDate)
@@ -181,7 +181,7 @@ const EditLivestream = ({
                 </div>
               </div>
             </div>
-            <div className="flex space-x-3 mt-4">
+            <div className="flex mt-4 space-x-3">
               <FormField
                 control={form.control}
                 name="streamDate"
@@ -217,7 +217,7 @@ const EditLivestream = ({
               />
             </div>
             {isPast && (
-              <p className="text-destructive text-[12px] mt-1">
+              <p className="mt-1 text-destructive text-[12px]">
                 Couldn&apos;t schedule. The date and time selected are
                 too far in the past.
               </p>
@@ -225,7 +225,7 @@ const EditLivestream = ({
 
             {isMultiDate && (
               <>
-                <div className="flex space-x-3 mt-4">
+                <div className="flex mt-4 space-x-3">
                   <FormField
                     control={form.control}
                     name="streamEndDate"
@@ -265,7 +265,7 @@ const EditLivestream = ({
                   />
                 </div>
                 {validateEndDate && (
-                  <p className="text-destructive text-[12px] mt-1">
+                  <p className="mt-1 text-destructive text-[12px]">
                     Couldn&apos;t schedule. End date and time selected
                     are too far in the past.
                   </p>
@@ -286,7 +286,7 @@ const EditLivestream = ({
                 variant="primary"
                 disabled={getFormSubmitStatus(form) || isLoading}
                 type="submit">
-                Edit livestream
+                Update livestream
               </Button>
             </DialogFooter>
           </form>

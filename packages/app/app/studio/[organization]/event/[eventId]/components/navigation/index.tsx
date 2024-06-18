@@ -40,19 +40,19 @@ const Navigation = ({
       className={cn(
         'overflow-auto w-2/6 bg-white min-w-[400px] h-full border-r border-border flex flex-col text-black'
       )}>
-      <div className="flex flex-row p-2 justify-between items-center border-b border-border">
-        <h3 className="text-2xl font-bold mt-4 mb-2 ">
+      <div className="flex flex-row justify-between items-center p-2 border-b border-border">
+        <h3 className="mt-4 mb-2 text-2xl font-bold">
           Event settings
         </h3>
         <Button
           onClick={handlePublishEvent}
           variant={!event.unlisted ? 'outline' : 'default'}>
-          {event.unlisted ? 'Publish' : 'Un-publish'}
+          {event.unlisted ? 'Publish' : 'Unpublish'}
         </Button>
       </div>
       <EventAccordion organizationId={organizationId} event={event} />
-      <div className="flex flex-row p-2 justify-between items-center border-b border-border">
-        <h3 className="text-2xl font-bold mt-4 mb-2">Livestreams</h3>
+      <div className="flex flex-row justify-between items-center p-2 border-b border-border">
+        <h3 className="mt-4 mb-2 text-2xl font-bold">Livestreams</h3>
         {stages.length > 0 && <CreateStageForm event={event} />}
       </div>
       {stages.length > 0 ? (
@@ -62,14 +62,14 @@ const Navigation = ({
           stages={stages}
         />
       ) : (
-        <div className="flex flex-row p-2 justify-between items-center border-b border-border">
-          <div className="text-sm ">
+        <div className="flex flex-row justify-between items-center p-2 border-b border-border">
+          <div className="text-sm">
             No livestreams yet. Create one to get started.
           </div>
           <CreateStageForm event={event} />
         </div>
       )}
-      <div className=" flex flex-row justify-between items-center mt-auto p-2">
+      <div className="flex flex-row justify-between items-center p-2 mt-auto">
         <Link
           href={`/studio/${organizationId}/event`}
           className="flex flex-row p-2 hover:underline">
