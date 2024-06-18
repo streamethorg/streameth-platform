@@ -38,13 +38,12 @@ const DeleteMultistream = ({
       className="flex gap-1"
       variant="outline">
       {isLoading ? (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        <Loader2 className="mr-2 w-4 h-4 animate-spin" />
       ) : (
         <>
           <div>
-            <Trash2 className="text-destructive w-4 h-4" />
+            <Trash2 className="w-4 h-4 text-destructive" />
           </div>
-          Delete
         </>
       )}
     </Button>

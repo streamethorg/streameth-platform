@@ -21,7 +21,7 @@ import { sortArray } from '@/lib/utils/utils'
 import EmptyFolder from '@/lib/svg/EmptyFolder'
 import TableSkeleton from '@/components/misc/Table/TableSkeleton'
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div className="flex flex-col h-full bg-white">
       <TableSkeleton />

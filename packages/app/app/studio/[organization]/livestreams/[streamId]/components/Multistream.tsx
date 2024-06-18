@@ -9,8 +9,40 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import DeleteMultistream from './DeleteMultistream'
-import { CreateMultistreamTarget } from '../../../event/[eventId]/components/stageSettings/multistream/CreateMultistreamTarget'
+import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget'
 import { IExtendedStage } from '@/lib/types'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
+import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interface'
+
+const MultiStreamActions = ({
+  stream,
+  organizationId,
+  target,
+}: {
+  stream: IExtendedStage
+  organizationId: string
+  target: TargetOutput
+}) => {
+  const handleSwitch = () => { }
+
+  return (
+    <>
+      <div className="flex items-center space-x-2">
+        <Switch
+          onCheckedChange={() => handleSwitch()}
+          id="stream_active"
+        />
+        <Label htmlFor="stream_active" />
+      </div>
+      <DeleteMultistream
+        streamId={stream?.streamSettings?.streamId}
+        organizationId={organizationId}
+        targetId={target.id}
+      />
+    </>
+  )
+}
 
 const Multistream = ({
   stream,
@@ -33,7 +65,7 @@ const Multistream = ({
             <CreateMultistreamTarget
               btnName="Add First Channel"
               organizationId={organizationId}
-              streamId={stream?.streamSettings?.streamId}
+              streamId={stream?.streamSettings?.streamId || ''}
             />
           </CardContent>
         </Card>
@@ -43,33 +75,33 @@ const Multistream = ({
             <CardTitle className="text-xl font-bold">
               Multistream Channels
             </CardTitle>
-            <span>2 active</span>
+            <span className="text-muted-foreground">
+              {streamTargets.length} active
+            </span>
           </CardContent>
           <Card className="bg-white shadow-none">
             <Table>
               <TableHeader className="sticky top-0 z-50">
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Profile</TableHead>
+                  <TableHead className="min-w-[100px]">
+                    Name
+                  </TableHead>
                 </TableRow>
               </TableHeader>
 
               <TableBody className="overflow-scroll">
                 {streamTargets?.map((target) => (
-                  <TableRow key={target.id} className="">
+                  <TableRow key={target.id}>
                     <>
                       <TableCell className="font-medium">
                         {target?.name}
                       </TableCell>
-                      <TableCell className="font-medium">
-                        source
-                      </TableCell>
 
-                      <TableCell className="flex justify-end font-medium">
-                        <DeleteMultistream
-                          streamId={stream?.streamSettings?.streamId}
+                      <TableCell className="flex justify-end space-x-2">
+                        <MultiStreamActions
+                          stream={stream}
                           organizationId={organizationId}
-                          targetId={target.id}
+                          target={target}
                         />
                       </TableCell>
                     </>

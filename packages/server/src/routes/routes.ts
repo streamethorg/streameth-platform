@@ -313,6 +313,7 @@ const models: TsoaRoute.Models = {
     "TargetOutput": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"dataType":"string"},
             "id": {"dataType":"string"},
             "name": {"dataType":"string"},
         },

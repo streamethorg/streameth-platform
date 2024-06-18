@@ -1,30 +1,14 @@
 import React, { useState } from 'react'
 import { SiX, SiYoutube } from 'react-icons/si'
 import { Radio } from 'lucide-react'
-import CreateCustomStream from './CustomRtmp'
+import CreateCustomStream from './forms/CustomRtmpForm'
+import NotFound from '@/app/not-found'
 
 interface StreamTargetItem {
   title: string
   icon: JSX.Element
   onClick?: () => JSX.Element
 }
-
-const StreamTarget: StreamTargetItem[] = [
-  {
-    title: 'X',
-    icon: <SiX size={35} />,
-  },
-  {
-    title: 'YouTube',
-    icon: <SiYoutube size={45} color="#ff0000" />,
-  },
-  {
-    title: 'Custom RTMP',
-    icon: <Radio size={50} />,
-    onClick: () => <CreateCustomStream />,
-  },
-]
-
 const Block = ({
   index,
   item,
@@ -45,7 +29,40 @@ const Block = ({
   )
 }
 
-const IconGrid: React.FC = () => {
+const StreamPlatformGrid = ({
+  streamId,
+  organizationId,
+  setIsOpen,
+}: {
+  streamId?: string
+  organizationId?: string
+  setIsOpen: (open: boolean) => void
+}) => {
+  if (!streamId || !organizationId) {
+    return NotFound()
+  }
+
+  const StreamTarget: StreamTargetItem[] = [
+    {
+      title: 'X (WIP)',
+      icon: <SiX size={35} />,
+    },
+    {
+      title: 'YouTube (WIP)',
+      icon: <SiYoutube size={45} color="#ff0000" />,
+    },
+    {
+      title: 'Custom RTMP',
+      icon: <Radio size={50} />,
+      onClick: () => (
+        <CreateCustomStream
+          streamId={streamId}
+          organizationId={organizationId}
+          setIsOpen={setIsOpen}
+        />
+      ),
+    },
+  ]
   const [SelectedComponent, setSelectedComponent] =
     useState<JSX.Element | null>(null)
 
@@ -75,4 +92,4 @@ const IconGrid: React.FC = () => {
   )
 }
 
-export default IconGrid
+export default StreamPlatformGrid

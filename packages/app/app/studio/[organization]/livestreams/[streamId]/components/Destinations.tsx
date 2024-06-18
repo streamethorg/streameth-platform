@@ -1,19 +1,10 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { LinkedinIcon, XIcon } from 'react-share'
-import CreateNFTModal from '../../../nfts/create/components/CreateNFTModal'
+import { Card } from '@/components/ui/card'
 import Multistream from './Multistream'
 import PublishLivestream from './PublishLivestream'
 import { IExtendedStage } from '@/lib/types'
-import { Button } from '@/components/ui/button'
-import { FilePenLine, Plus } from 'lucide-react'
-import { CreateMultistreamTarget } from '../../../event/[eventId]/components/stageSettings/multistream/CreateMultistreamTarget'
+import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget'
+import NotFound from '@/app/not-found'
+import EditLivestream from '../../components/EditLivestream'
 
 const Destinations = ({
   organization,
@@ -22,18 +13,24 @@ const Destinations = ({
   organization: string
   stream: IExtendedStage
 }) => {
+  if (!stream.streamSettings?.streamId) {
+    return NotFound()
+  }
+
   return (
     <Card className="flex flex-col flex-grow justify-start p-4 space-y-4 h-full">
       <div className="flex justify-start space-x-2">
         <CreateMultistreamTarget
           btnName="Add Channel"
-          organizationId={organization}
+          organizationId={stream.organizationId as string}
           streamId={stream?.streamSettings?.streamId}
         />
-        <Button className="space-x-2" variant={'secondary'}>
-          <FilePenLine size={20} />
-          <span>Update livestream</span>
-        </Button>
+        <EditLivestream
+          stage={stream}
+          organizationSlug={organization}
+          variant="secondary"
+          btnText="Edit Livestream"
+        />
       </div>
       <Multistream
         stream={stream}
