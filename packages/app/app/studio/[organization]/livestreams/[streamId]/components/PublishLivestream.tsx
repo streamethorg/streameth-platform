@@ -36,17 +36,18 @@ const PublishLivestream = ({
 
   return (
     <div className="flex justify-between space-x-2">
-      <Button
-        className="flex flex-row justify-center w-full text-xl text-white"
-        loading={isLoading}
-        onClick={handlePublishStream}
-        disabled={stream?.published || isLoading}
-        variant={'destructive'}>
-        <span className="font-bold">Go live!</span>
-      </Button>
-      {stream?.published && (
+      {!stream?.published ? (
         <Button
-          className="bg-white"
+          className="flex flex-row justify-center w-full text-xl text-white"
+          loading={isLoading}
+          onClick={handlePublishStream}
+          disabled={stream?.published || isLoading}
+          variant={'destructive'}>
+          <span>Go live!</span>
+        </Button>
+      ) : (
+        <Button
+          className="flex flex-row justify-center w-full bg-white text-md"
           loading={isLoading}
           onClick={handlePublishStream}
           disabled={!stream?.published || isLoading}

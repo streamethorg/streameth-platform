@@ -11,38 +11,6 @@ import {
 import DeleteMultistream from './DeleteMultistream'
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget'
 import { IExtendedStage } from '@/lib/types'
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
-import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interface'
-
-const MultiStreamActions = ({
-  stream,
-  organizationId,
-  target,
-}: {
-  stream: IExtendedStage
-  organizationId: string
-  target: TargetOutput
-}) => {
-  const handleSwitch = () => {}
-
-  return (
-    <>
-      <div className="flex items-center space-x-2">
-        <Switch
-          onCheckedChange={() => handleSwitch()}
-          id="stream_active"
-        />
-        <Label htmlFor="stream_active" />
-      </div>
-      <DeleteMultistream
-        streamId={stream?.streamSettings?.streamId}
-        organizationId={organizationId}
-        targetId={target.id}
-      />
-    </>
-  )
-}
 
 const Multistream = ({
   stream,
@@ -98,10 +66,10 @@ const Multistream = ({
                       </TableCell>
 
                       <TableCell className="flex justify-end space-x-2">
-                        <MultiStreamActions
-                          stream={stream}
+                        <DeleteMultistream
+                          streamId={stream?.streamSettings?.streamId}
                           organizationId={organizationId}
-                          target={target}
+                          targetId={target.id}
                         />
                       </TableCell>
                     </>

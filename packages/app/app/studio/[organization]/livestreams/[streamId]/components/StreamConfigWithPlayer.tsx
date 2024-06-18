@@ -4,7 +4,6 @@ import CopyText from '../../../../../../components/misc/CopyText'
 import PlayerWithControls from '@/components/ui/Player'
 import { IExtendedStage } from '@/lib/types'
 import { fetchStage } from '@/lib/services/stageService'
-import StreamHealth from './StreamHealth'
 
 const StreamConfigWithPlayer = ({
   stream,
@@ -41,11 +40,11 @@ const StreamConfigWithPlayer = ({
   return (
     <>
       {!isLive ? (
-        <div className="bg-black text-white p-4 flex flex-col justify-center items-center w-full rounded-lg aspect-video max-w-5xl">
-          <h3 className="text-3xl lg:text-4xl mb-2 text-center font-semibold">
+        <div className="flex flex-col justify-center items-center p-4 w-full max-w-5xl text-white bg-black rounded-lg aspect-video">
+          <h3 className="mb-2 text-3xl font-semibold text-center lg:text-4xl">
             Connect your Streaming providers
           </h3>
-          <p className="text-lg text-center mb-6 lg:w-3/4">
+          <p className="mb-6 text-lg text-center lg:w-3/4">
             Copy and paste the stream key into your streaming
             software. Use either the RTMP or SRT ingest, depending on
             your use-case. The RTMP ingest is more common with OBS
@@ -75,12 +74,6 @@ const StreamConfigWithPlayer = ({
           ]}
         />
       )}
-      <StreamHealth
-        streamId={streamId}
-        organization={organization}
-        stream={stream}
-        isLive={isLive}
-      />
     </>
   )
 }

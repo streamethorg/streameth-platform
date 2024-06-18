@@ -42,34 +42,20 @@ const StreamHealth = ({
       checkIsHealthy()
     }, 10000)
   }, [stream?.streamSettings?.isHealthy, isLive])
+
   return (
     isLive && (
-      <Card className="w-full shadow-none bg-white">
-        <CardContent className="p-3 lg:p-6 flex justify-between items-center">
-          <CardTitle className="text-xl flex gap-2 items-center">
-            Stream Health:
-            {isHealthy ? (
-              <div className="flex p-2 rounded-full items-center text-sm bg-success-foreground text-success">
-                <DotFilledIcon className="w-7 h-7" /> Healthy
-              </div>
-            ) : (
-              <div className="flex p-2 rounded-full items-center text-sm bg-destructive-secondary text-destructive">
-                <DotFilledIcon className="w-7 h-7" /> UnHealthy
-              </div>
-            )}
-          </CardTitle>
-          <Link
-            href={`/${organization}/livestream?stage=${streamId}`}
-            target="_blank">
-            <Button variant="outline">
-              View Livestream
-              <div>
-                <ArrowRight className="w-4 h-4 pl-1" />
-              </div>
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
+      <>
+        {isHealthy ? (
+          <div className="flex items-center p-2 text-sm rounded-full bg-success-foreground text-success">
+            <DotFilledIcon className="w-4 h-4" /> Healthy
+          </div>
+        ) : (
+          <div className="flex items-center p-2 text-sm rounded-full bg-destructive-secondary text-destructive">
+            <DotFilledIcon className="w-4 h-4" /> UnHealthy
+          </div>
+        )}
+      </>
     )
   )
 }

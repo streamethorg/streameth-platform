@@ -14,18 +14,12 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Card, CardTitle } from '@/components/ui/card'
 import Destinations from './components/Destinations'
+import StreamHealth from './components/StreamHealth'
+import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null
@@ -43,27 +37,44 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
           stream={stream}
           isLiveStreamPage
         />
-        <div className="flex flex-row gap-4 w-full">
-          <div className="flex flex-col">
-            <StreamConfigWithPlayer
-              stream={stream}
-              streamId={params.streamId}
-              organization={params.organization}
-            />
-            <div className="flex items-center py-2 space-x-2 w-full">
-              <span className="mr-auto text-xl font-bold line-clamp-2 lg:max-w-[550px]">
+        <div className="flex flex-col">
+          <StreamConfigWithPlayer
+            stream={stream}
+            streamId={params.streamId}
+            organization={params.organization}
+          />
+          <div className="flex items-center py-2 space-x-2 w-full">
+            <div className="flex flex-grow justify-start items-center space-x-2">
+              <span className="text-xl font-bold line-clamp-2 lg:max-w-[550px]">
                 {stream.name}
               </span>
-              <LivestreamEmbedCode
-                streamId={stream?.streamSettings?.streamId}
-                playbackId={stream?.streamSettings?.playbackId}
-                playerName={stream?.name}
-              />
-              <ShareButton
-                url={`/${params.organization}/livestream?stage=${stream._id}`}
-                shareFor="livestream"
+              <StreamHealth
+                stream={stream}
+                streamId={stream?.streamSettings?.streamId || ''}
+                organization={params.organization}
+                isLive={stream.streamSettings?.isActive}
               />
             </div>
+
+            <LivestreamEmbedCode
+              streamId={stream?.streamSettings?.streamId}
+              playbackId={stream?.streamSettings?.playbackId}
+              playerName={stream?.name}
+            />
+            <ShareButton
+              url={`/${params.organization}/livestream?stage=${stream._id}`}
+              shareFor="livestream"
+            />
+            <Link
+              href={`/${params.organization}/livestream?stage=${stream._id}`}
+              target="_blank">
+              <Button variant="outline">
+                View Livestream
+                <div>
+                  <ArrowRight className="pl-1 w-4 h-4" />
+                </div>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
