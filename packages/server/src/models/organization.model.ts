@@ -12,6 +12,16 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     location: { type: String, default: '' },
     accentColor: { type: String, default: '' },
     slug: { type: String, default: '', index: true },
+    socials: [
+      {
+        type: { type: String, default: '' },
+        accessToken: { type: String, default: '' },
+        refreshToken: { type: String, default: '' },
+        expireTime: { type: Number, default: '' },
+        name: { type: String, default: '' },
+        thumbnail: { type: String, default: '' },
+      },
+    ],
   },
   {
     timestamps: true,

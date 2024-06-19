@@ -10,6 +10,38 @@
 			"mongoose.Types.ObjectId": {
 				"type": "string"
 			},
+			"ISocials": {
+				"properties": {
+					"type": {
+						"type": "string"
+					},
+					"accessToken": {
+						"type": "string"
+					},
+					"refreshToken": {
+						"type": "string"
+					},
+					"expireTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"type",
+					"accessToken",
+					"refreshToken",
+					"expireTime",
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IOrganization": {
 				"properties": {
 					"_id": {
@@ -50,6 +82,12 @@
 					},
 					"address": {
 						"type": "string"
+					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -661,6 +699,9 @@
 			},
 			"TargetOutput": {
 				"properties": {
+					"_id": {
+						"type": "string"
+					},
 					"id": {
 						"type": "string"
 					},
@@ -1931,6 +1972,12 @@
 					},
 					"address": {
 						"type": "string"
+					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -1978,6 +2025,12 @@
 					},
 					"address": {
 						"type": "string"
+					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -4455,13 +4508,7 @@
 				"tags": [
 					"Session"
 				],
-				"security": [
-					{
-						"jwt": [
-							"org"
-						]
-					}
-				],
+				"security": [],
 				"parameters": [
 					{
 						"in": "path",
@@ -4470,16 +4517,16 @@
 						"schema": {
 							"type": "string"
 						}
-					},
-					{
-						"in": "query",
-						"name": "googleToken",
-						"required": true,
-						"schema": {
-							"type": "string"
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
 						}
 					}
-				]
+				}
 			}
 		},
 		"/organizations": {
@@ -4778,6 +4825,108 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.walletAddress_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/organizations/socials/{organizationId}": {
+			"put": {
+				"operationId": "UpdateOrgSocials",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Add socials to organization",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ISocials"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteOrgSocial",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Delete organization social",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"socialId": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"socialId"
+								],
+								"type": "object"
 							}
 						}
 					}

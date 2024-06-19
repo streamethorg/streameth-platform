@@ -5,7 +5,6 @@ import https from 'https';
 import StateService from '@services/state.service';
 import EventService from '@services/event.service';
 import { StateStatus, StateType } from '@interfaces/state.interface';
-
 // Utility function to introduce a delay
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -86,12 +85,8 @@ export async function uploadToYouTube(
   youtube: youtube_v3.Youtube,
   videoFilePath: string,
 ): Promise<void> {
-  const eventService = new EventService();
   const stateService = new StateService();
-  const event = await eventService.get(session.eventId.toString());
-  if (!event) {
-    throw new Error('Could not find event');
-  }
+
   try {
     const insertResponse = await youtube.videos.insert({
       part: ['status', 'snippet'],
@@ -103,7 +98,7 @@ export async function uploadToYouTube(
           defaultAudioLanguage: 'en',
         },
         status: {
-          privacyStatus: event[0].unlisted ? 'unlisted' : 'public',
+          privacyStatus: session.published ? 'public' : 'unlisted',
         },
       },
       media: {
@@ -117,7 +112,6 @@ export async function uploadToYouTube(
       type: StateType.video,
       sessionId: session._id,
       sessionSlug: session.slug,
-      eventSlug: event[0].slug,
     });
 
     let processingStatus = 'processing';
