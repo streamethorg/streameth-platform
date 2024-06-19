@@ -53,7 +53,7 @@ export default function NavbarTop({
     return null
   }
   return (
-    <NavigationMenu className="sticky top-0 z-[69] bg-event">
+    <NavigationMenu className="sticky top-0 bg-event">
       <div className="flex justify-between p-2 px-2 w-full lg:px-4">
         <div className="flex items-center">
           <Link href={homePath ? homePath : '/'} className="">

@@ -2,7 +2,6 @@ import React, { Suspense } from 'react'
 import { ClipsPageParams, IExtendedSession } from '@/lib/types'
 import SelectSession from './components/SelectSession'
 import RecordingSelect from './components/RecordingSelect'
-import TimeSetter from './components/TimeSetter'
 import CreateClipButton from './components/CreateClipButton'
 import { ClipProvider } from './components/ClipContext'
 import ReactHlsPlayer from './components/Player'
@@ -21,12 +20,8 @@ import { fetchSession } from '@/lib/services/sessionService'
 import { IExtendedEvent, IExtendedStage } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '@/components/ui/tabs'
+import ClipSlider from './components/ClipSlider'
+import { Session, Stream } from 'livepeer/dist/models/components'
 
 const ClipContainer = ({
   children,
@@ -42,9 +37,7 @@ const ClipContainer = ({
 
 const SkeletonSidebar = () => (
   <div className="w-1/3 flex flex-col h-full bg-background bg-white border-l">
-    <CardTitle className="bg-white p-2 border-b text-lg">
-      Livestream clips
-    </CardTitle>
+
     <div className="h-[calc(100%-50px)] overflow-y-clip space-y-4">
       {[1, 2, 3, 4, 5].map((i) => (
         <div key={i} className="animate-pulse p-4">
@@ -56,20 +49,28 @@ const SkeletonSidebar = () => (
 )
 
 const SessionSidebar = async ({
-  currentStage,
   event,
   sessions,
+  currentRecording,
+  recordings,
 }: {
-  currentStage: IExtendedStage
   event?: IExtendedEvent
   sessions: IExtendedSession[]
+  currentRecording?: string
+  recordings: {
+    parentStream: Stream | undefined
+    recordings: Session[]
+  }
 }) => {
   return (
-    <div className="w-1/3 h-full bg-background bg-white border-l">
+    <div className="w-[300px] h-full bg-background bg-white border-l">
       <CardTitle className="bg-white p-2 border-b text-lg">
-        Livestream clips
+        <RecordingSelect
+          selectedRecording={currentRecording ?? undefined}
+          streamRecordings={recordings.recordings}
+        />
       </CardTitle>
-      <div className="h-[calc(100%-50px)] overflow-y-scroll">
+      <div className="h-[calc(100%-100px)] overflow-y-scroll">
         <ClipsSessionList event={event} sessions={sessions} />
       </div>
     </div>
@@ -232,17 +233,7 @@ const EventClips = async ({
         />
       )}
       <div className="flex flex-col w-full">
-        {/* <div className="flex flex-row justify-center space-x-4 my-4 w-full">
-          <SelectSession
-            stages={stages}
-            currentStageId={currentStage._id}
-          />
-          <RecordingSelect
-            selectedRecording={currentRecording ?? undefined}
-            streamRecordings={stageRecordings.recordings}
-          />
-        </div> */}
-        <div className="flex flex-col w-full h-full overflow-auto space-y-4">
+        <div className="flex flex-col w-full h-full overflow-auto space-y-4 p-4 bg-white">
           <ClipProvider>
             <ReactHlsPlayer
               playbackId={
@@ -250,64 +241,29 @@ const EventClips = async ({
               }
               selectedStreamSession={currentRecording}
             />
-            {/* <div className="flex flex-col h-[300px]">
-              <Tabs defaultValue={'sessions'}>
-                <TabsList className="border-y border-grey w-full !justify-start gap-5">
-                  <TabsTrigger className="px-0" value="sessions">
-                    Clip Session
-                  </TabsTrigger>
-                  <TabsTrigger value="custom">
-                    Create Custom Clip
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="sessions">
-                  <div className="flex flex-row w-full space-x-2 items-center justify-center">
-                    <TimeSetter label="Clip start" type="start" />
-                    <TimeSetter label="Clip end" type="end" />
-
-                    <CreateClipButton
-                      selectedRecording={currentRecording}
-                      playbackId={
-                        stageRecordings.parentStream?.playbackId ?? ''
-                      }
-                      stageId={currentStage?._id}
-                      organizationId={organization._id as string}
-                      sessions={sessions.sessions}
-                    />
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="custom">
-                  <div className="flex flex-row w-full space-x-2 items-center justify-center">
-                    <TimeSetter label="Clip start" type="start" />
-                    <TimeSetter label="Clip end" type="end" />
-
-                    <CreateClipButton
-                      selectedRecording={currentRecording}
-                      playbackId={
-                        stageRecordings.parentStream?.playbackId ?? ''
-                      }
-                      stageId={currentStage?._id}
-                      organizationId={organization._id as string}
-                      sessions={sessions.sessions}
-                      custom
-                    />
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div> */}
+            <ClipSlider />
+            <CreateClipButton
+              currentRecording={currentRecording}
+              playbackId={
+                stageRecordings.parentStream?.playbackId ?? ''
+              }
+              organization={organization}
+              currentStage={currentStage}
+              sessions={sessions}
+            />
           </ClipProvider>
         </div>
       </div>
-      {/* <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
+      <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
         <SessionSidebar
-          currentStage={currentStage}
           event={event ?? undefined}
           sessions={sessions.sessions.filter(
             (session) => session.assetId
           )}
+          currentRecording={currentRecording}
+          recordings={stageRecordings}
         />
-      </Suspense> */}
+      </Suspense>
     </ClipContainer>
   )
 }
