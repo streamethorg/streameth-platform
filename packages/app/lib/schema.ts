@@ -90,6 +90,9 @@ export const StageSchema = z.object({
   streamTime: z.string().optional(),
   thumbnail: z.string().optional(),
   organizationId: z.string(),
+  streamEndDate: z.date().optional(),
+  streamEndTime: z.string().optional(),
+  isMultipleDate: z.boolean().optional(),
 })
 
 // Sessions
@@ -110,13 +113,14 @@ export const sessionSchema = z.object({
   name: z
     .string()
     .min(1, { message: 'Name is required' })
-    .max(25, { message: 'Name is too long' }),
+    .max(100, { message: 'Name is too long' }),
   description: z
     .string()
     .min(1, { message: 'Description is required' })
-    .max(150, { message: 'Description is too long' }),
+    .max(300, { message: 'Description is too long' }),
   coverImage: z.string().optional(),
   assetId: z.string().min(1, { message: 'Please upload a video' }),
+  published: z.boolean().default(false),
 })
 
 export const organizationSchema = z.object({
@@ -155,9 +159,13 @@ export const nftSchema = z.object({
   limitedSupply: z.string(),
 })
 
+const isWalletAddress = (address: string) =>
+  /^0x[a-fA-F0-9]{40}$/.test(address)
+
+const emailSchema = z.string().email()
+const walletAddressSchema = z.string().refine(isWalletAddress, {
+  message: 'Invalid address',
+})
 export const addOrganizationMemberSchema = z.object({
-  walletAddress: z
-    .string()
-    .min(42, 'WalletAddress is required')
-    .max(42, 'Check Wallet Address'),
+  memberAddress: z.union([emailSchema, walletAddressSchema]),
 })

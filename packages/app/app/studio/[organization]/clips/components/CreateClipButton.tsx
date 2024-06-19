@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import {
-  createClip,
+  createClipAction,
   createSessionAction,
 } from '@/lib/actions/sessions'
 import { Button } from '@/components/ui/button'
@@ -109,6 +109,45 @@ const ClipButton = ({
           setIsLoading(false)
         })
     }
+
+    if (!selectedRecording) {
+      toast.error('No recording selected.')
+      return
+    }
+
+    if (!session) {
+      toast.error('Session information is missing.')
+      return
+    }
+
+    setIsLoading(true)
+    createClipAction({
+      playbackId,
+      recordingId: selectedRecording,
+      start: startTime.unix,
+      end: endTime.unix,
+      sessionId: session._id as string,
+    })
+      .then(() => {
+        setIsLoading(false)
+        setStartTime(null)
+        setEndTime(null)
+        setSessionId('')
+        toast.success('Clip created')
+      })
+      .catch(() => {
+        setIsLoading(false)
+        toast.error('Error creating clip')
+      })
+      .finally(() => {
+        handleTermChange([
+          {
+            key: 'previewId',
+            value: session._id as string,
+          },
+        ])
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -144,16 +183,14 @@ const ClipButton = ({
           !selectedRecording ||
           !startTime ||
           !endTime ||
-          custom
-            ? !name
-            : !sessionId
+          (custom ? !name : !sessionId)
         }
         onClick={handleCreateClip}
         variant="primary"
         className="mt-auto text-white">
         {isLoading ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+            <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
             wait
           </>
         ) : (

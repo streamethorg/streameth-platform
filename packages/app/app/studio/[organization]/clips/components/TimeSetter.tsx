@@ -35,9 +35,9 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
   }
 
   return (
-    <div className="flex-grow max-w-[150px]">
+    <div className="w-[200px]">
       <Label>{label}</Label>
-      <div className="flex flex-row border rounded relative h-full">
+      <div className="flex flex-row border rounded-xl relative h-full">
         <Input
           className="border-none bg-white"
           value={

@@ -30,11 +30,11 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
       if (uploadUrl) {
         uploadVideo(
           file,
-          uploadUrl.url,
+          uploadUrl?.tusEndpoint as string,
           abortControllerRef,
           (percentage) => setProgress(percentage),
           async () => {
-            setAssetId(uploadUrl.assetId)
+            setAssetId(uploadUrl.assetId as string)
           }
         )
       }

@@ -5,6 +5,9 @@ const { host, secretKey } = config.livepeer;
 import { Livepeer } from 'livepeer';
 import { IMultiStream } from '@interfaces/stream.interface';
 import Stage from '@models/stage.model';
+import { Session } from 'livepeer/dist/models/components';
+import SessionModel from '@models/session.model';
+import { SessionType } from '@interfaces/session.interface';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -73,7 +76,7 @@ export const getStreamInfo = async (streamId: string): Promise<any> => {
 
 export const createAsset = async (
   fileName: string,
-): Promise<{ url: string; assetId: string }> => {
+): Promise<{ url: string; assetId: string; tusEndpoint: string }> => {
   try {
     const response = await fetch(`${host}/api/asset/request-upload`, {
       method: 'post',
@@ -89,7 +92,9 @@ export const createAsset = async (
       }),
     });
     const data = await response.json();
+
     return {
+      tusEndpoint: data.tusEndpoint,
       url: data.url,
       assetId: data.asset.id,
     };
@@ -111,7 +116,27 @@ export const getPlayback = async (assetId: string): Promise<string> => {
     if (!data.playbackUrl) {
       return '';
     }
+
     return data.playbackUrl;
+  } catch (e) {
+    console.error(`Error fetching asset:`, e);
+  }
+};
+export const getDownloadUrl = async (assetId: string): Promise<string> => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+    });
+    const data = await response.json();
+    if (!data.downloadUrl) {
+      return '';
+    }
+    console.log(`Download url: ${data.downloadUrl}`);
+    return data.downloadUrl;
   } catch (e) {
     console.error(`Error fetching asset:`, e);
   }
@@ -136,7 +161,32 @@ export const getAsset = async (assetId: string) => {
   }
 };
 
-export const getVideoPhaseAction = async (assetId: string) => {
+export const uploadToIpfs = async (assetId: string) => {
+  try {
+    const response = await fetch(`${host}/api/asset/${assetId}`, {
+      method: 'patch',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+      body: JSON.stringify({
+        storage: {
+          ipfs: true,
+        },
+      }),
+    });
+    await response.json();
+    await sleep(20000);
+    const asset = await getAsset(assetId);
+    return asset.storage.ipfs.cid;
+  } catch (e) {
+    console.error(`Error updating asset:`, e);
+  }
+};
+
+export const getVideoPhaseAction = async (
+  assetId: string,
+): Promise<{ playbackUrl: string; phaseStatus: string }> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
       method: 'get',
@@ -147,7 +197,10 @@ export const getVideoPhaseAction = async (assetId: string) => {
     });
     const data = await response.json();
     if (!data.playbackUrl) {
-      return '';
+      return {
+        playbackUrl: '',
+        phaseStatus: '',
+      };
     }
 
     return {
@@ -161,9 +214,20 @@ export const getVideoPhaseAction = async (assetId: string) => {
 
 export const getStreamRecordings = async (streamId: string): Promise<any> => {
   try {
-    const stream = await getStreamInfo(streamId);
-    const recordings = await livepeer.session.getRecorded(stream.id);
-    return recordings.classes;
+    const parentStream = await getStreamInfo(streamId);
+    const recordings = (
+      await livepeer.session.getRecorded(parentStream?.id ?? '')
+    ).classes;
+    if (!recordings) {
+      return {
+        parentStream,
+        recordings: [],
+      };
+    }
+    return {
+      parentStream,
+      recordings: JSON.parse(JSON.stringify(recordings)) as Session[],
+    };
   } catch (e) {
     throw new HttpException(400, 'Error fetching stream recordings');
   }
@@ -214,3 +278,81 @@ export const deleteMultiStream = async (data: {
     throw new HttpException(400, 'Error deleting multistream');
   }
 };
+
+export const generateThumbnail = async (data: {
+  assetId?: string;
+  playbackId: string;
+}) => {
+  try {
+    let playbackId = data.playbackId;
+    if (!data.playbackId) {
+      const asset = await getAsset(data.assetId);
+      playbackId = asset.playbackId;
+    }
+    const asset = await livepeer.playback.get(playbackId as string);
+
+    const lpThumbnails =
+      asset.playbackInfo?.meta.source.filter(
+        (source) => source.hrn === 'Thumbnails',
+      ) ?? [];
+
+    if (lpThumbnails.length > 0) {
+      return lpThumbnails[0].url.replace('thumbnails.vtt', 'keyframes_0.jpg');
+    }
+  } catch (e) {
+    throw new HttpException(400, 'Error generating thumbnail');
+  }
+};
+
+export const getSessionMetrics = async (
+  playbackId: string,
+): Promise<{ viewCount: number; playTimeMins: number }> => {
+  try {
+    const metrics = await livepeer.metrics.getPublicTotalViews(playbackId);
+    if (!metrics.object) {
+      return {
+        viewCount: 0,
+        playTimeMins: 0,
+      };
+    }
+    return {
+      viewCount: metrics.object?.viewCount,
+      playTimeMins: metrics.object?.playtimeMins,
+    };
+  } catch (e) {
+    throw new HttpException(400, 'Error getting metrics');
+  }
+};
+
+export const createClip = async (data: {
+  playbackId: string;
+  sessionId: string;
+  recordingId: string;
+  start: number;
+  end: number;
+}) => {
+  try {
+    const clip = await livepeer.stream.createClip({
+      endTime: data.end,
+      startTime: data.start,
+      sessionId: data.recordingId,
+      playbackId: data.playbackId,
+    });
+    const parsedClip = JSON.parse(clip.rawResponse.data.toString());
+    await SessionModel.findByIdAndUpdate(data.sessionId, {
+      assetId: parsedClip.asset.id,
+      playbackId: parsedClip.asset.playbackId,
+      start: new Date().getTime(),
+      end: new Date().getTime(),
+      type: SessionType.clip,
+    });
+    return parsedClip;
+  } catch (e) {
+    console.log('error', e);
+    throw new HttpException(400, 'Error creating clip');
+  }
+};
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { updateStageAction } from '@/lib/actions/stages'
 import { IExtendedStage } from '@/lib/types'
-import { ChevronDown, Earth, Lock } from 'lucide-react'
+import { ChevronDown, Earth, Loader2, Lock } from 'lucide-react'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -37,7 +37,9 @@ const ToggleLivestreamVisibility = ({
   }
   return (
     <div className="flex justify-start items-center space-x-2">
-      {item.published ? (
+      {isLoading ? (
+        <Loader2 className="animate-spin" />
+      ) : item.published ? (
         <>
           <Earth size={16} />
           <p>Public</p>
@@ -50,7 +52,7 @@ const ToggleLivestreamVisibility = ({
       )}
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <ChevronDown size={20} />
+          {isLoading ? null : <ChevronDown size={20} />}
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem

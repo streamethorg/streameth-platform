@@ -1,6 +1,7 @@
 import { IPlugin, IStage } from '@interfaces/stage.interface';
 import {
   IsArray,
+  IsBoolean,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -35,5 +36,13 @@ export class CreateStageDto implements IStage {
 
   @IsOptional()
   @IsString()
+  streamEndDate?: Date;
+
+  @IsOptional()
+  @IsString()
   thumbnail?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isMultipleDate?: boolean;
 }

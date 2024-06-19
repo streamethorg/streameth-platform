@@ -1,4 +1,4 @@
-import { getSessionMetrics } from '@/lib/actions/sessions'
+import { fetchSessionMetrics } from '@/lib/services/sessionService'
 
 const ViewCounts = async ({
   playbackId,
@@ -7,7 +7,7 @@ const ViewCounts = async ({
   playbackId: string
   className?: string
 }) => {
-  const data = await getSessionMetrics({ playbackId })
+  const data = await fetchSessionMetrics({ playbackId })
 
   return (
     <p className={className ?? 'text-sm text-secodary py-2'}>

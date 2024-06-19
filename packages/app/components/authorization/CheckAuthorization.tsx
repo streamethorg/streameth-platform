@@ -2,7 +2,7 @@ import { apiUrl } from '@/lib/utils/utils'
 import { cookies } from 'next/headers'
 
 const CheckAuthorization = async () => {
-  const privyToken = cookies().get('privy-refresh-token')
+  const privyToken = cookies().get('privy-token')
   const userSession = cookies().get('user-session')
   const userAddress = cookies().get('user-address')
 
@@ -20,7 +20,6 @@ const CheckAuthorization = async () => {
     !!privyToken?.value &&
     !!userSession?.value &&
     resData.data
-
 
   return isAuthorized
 }

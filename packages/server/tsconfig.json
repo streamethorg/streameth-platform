@@ -45,7 +45,7 @@
     "node_modules",
     "src/http",
     "src/logs",
-    "src/tests",
+    "test",
     "src/routes"
   ]
 }

@@ -11,6 +11,7 @@ import Link from 'next/link'
 import Navigation from './components/Navigation'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import SidebarMenu from '@/components/Sidebar/SidebarMenu'
+import Support from '@/components/misc/Support'
 
 const Layout = async ({
   children,
@@ -60,6 +61,7 @@ const Layout = async ({
             <div className="flex flex-row w-full h-full">
               <div className="w-full h-full">
                 {children}
+                <Support />
               </div>
             </div>
           )}

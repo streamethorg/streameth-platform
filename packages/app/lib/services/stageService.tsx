@@ -2,6 +2,7 @@ import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 import { IExtendedStage } from '../types'
 import { fetchEvents } from './eventService'
+import { Stream } from 'livepeer/dist/models/components'
 
 export async function fetchStage({
   stage,
@@ -29,7 +30,6 @@ export async function fetchStages({
   organizationId: string
 }): Promise<IExtendedStage[]> {
   try {
-    console.log(organizationId)
     const stages = await fetch(
       `${apiUrl()}/stages/organization/${organizationId}`,
       {
@@ -89,7 +89,6 @@ export async function createStage({
   })
 
   if (!response.ok) {
-    console.log(await response.json())
     throw 'Error creating stage'
   }
   return (await response.json()).data
@@ -145,7 +144,6 @@ export const updateStage = async ({
   authToken: string
 }): Promise<IExtendedStage> => {
   const { _id, createdAt, updatedAt, __v, ...rest } = stage
-
   try {
     const response = await fetch(`${apiUrl()}/stages/${_id}`, {
       method: 'PUT',
@@ -157,13 +155,9 @@ export const updateStage = async ({
     })
 
     if (!response.ok) {
-      console.log('error in updateStage', await response.json(), rest)
       throw new Error('Error updating stage')
     }
-
-    const responseData = await response.json()
-    const updatedStage: IExtendedStage = responseData.data
-    return updatedStage
+    return (await response.json()).data
   } catch (error) {
     console.error('Error updating stage:', error)
     throw error
@@ -234,5 +228,28 @@ export async function deleteMultistream({
   } catch (e) {
     console.log('error in deleteMultistream', e)
     throw e
+  }
+}
+
+export async function fetchStageRecordings({
+  streamId,
+}: {
+  streamId: string
+}): Promise<any> {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/streams/recording/${streamId}`,
+      {
+        cache: 'no-cache',
+      }
+    )
+    const data = (await response.json()).data
+    if (!data) {
+      return null
+    }
+    return data
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching stage'
   }
 }

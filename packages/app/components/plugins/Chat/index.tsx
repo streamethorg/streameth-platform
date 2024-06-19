@@ -22,7 +22,7 @@ import Livepeer from '@/public/livepeer-logo.png'
 import Image from 'next/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useAccount, useEnsName } from 'wagmi'
-import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton'
+import { SignInUserButton } from '@/components/misc/SignInUserButton'
 import { IExtendedChat } from '@/lib/types'
 import { createChatAction } from '@/lib/actions/chat'
 import { useSIWE } from 'connectkit'
@@ -260,7 +260,7 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
         </div>
       ) : (
         <div className="flex flex-col  gap-2">
-          <ConnectWalletButton />
+          <SignInUserButton />
         </div>
       )}
     </>

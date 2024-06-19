@@ -1,6 +1,7 @@
 import { Document, Types } from 'mongoose';
 
 export interface TargetOutput {
+  _id?: string;
   id?: string;
   name?: string;
 }
@@ -29,9 +30,11 @@ export class IStage {
   order?: number;
   slug?: string;
   published?: boolean;
+  isMultipleDate?: boolean;
   organizationId: Types.ObjectId | string;
   thumbnail?: string;
   streamDate?: Date | string;
+  streamEndDate?: Date | string;
   mintable?: boolean;
   createdAt?: string;
   nftCollections?: Types.ObjectId | string[];

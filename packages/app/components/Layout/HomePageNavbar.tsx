@@ -6,32 +6,16 @@ import Link from 'next/link'
 import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { Menu, X } from 'lucide-react'
 import Navbar from './Navbar'
-import { ConnectWalletButton } from '../misc/ConnectWalletButton'
+import { SignInUserButton } from '../misc/SignInUserButton'
 import { Search } from 'lucide-react'
 import { Page } from '@/lib/types'
-import { useSIWE } from 'connectkit'
-import useUserData from '@/lib/hooks/useUserData'
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
 import { IExtendedOrganization } from '@/lib/types'
 import { cn } from '@/lib/utils/utils'
-import Support from '../misc/Support'
 import { Button } from '@/components/ui/button'
-const getPages = (
-  pages: Page[],
-  isSignedIn: boolean,
-  studioOrg?: string
-) => {
-  if (isSignedIn) {
-    return [
-      ...pages,
-      // {
-      //   name: 'studio',
-      //   href: studioOrg ? `/studio/${studioOrg}` : '/studio',
-      //   bgColor: 'bg-primary text-primary-foreground',
-      // },
-    ]
-  } else return pages
-}
+import { ConnectWalletButton } from '../misc/ConnectWalletButton'
+import { usePathname } from 'next/navigation'
+import { useAccount } from 'wagmi'
 
 const HomePageNavbar = ({
   logo,
@@ -90,8 +74,6 @@ const MobileNavBar = ({
   const [searchVisible, setSearchVisible] = useState(false)
   const toggleSearch = () => setSearchVisible(!searchVisible)
   const toggleMenu = () => setMenuVisible(!menuVisible)
-  const { isSignedIn } = useSIWE()
-  const { userData } = useUserData()
 
   useLayoutEffect(() => {
     if (menuVisible || searchVisible) {
@@ -162,13 +144,7 @@ const MobileNavBar = ({
           )}
         </div>
         {menuVisible && (
-          <Navbar
-            pages={getPages(
-              pages,
-              isSignedIn,
-              userData?.organizations?.[0]?.slug
-            )}
-          />
+          <Navbar organization={currentOrganization} pages={pages} />
         )}
       </div>
     </NavigationMenu>
@@ -190,8 +166,9 @@ const PCNavBar = ({
   organizations?: IExtendedOrganization[]
   currentOrganization: string
 }) => {
-  const { isSignedIn } = useSIWE()
-  const { userData } = useUserData()
+  const { isConnected } = useAccount()
+  const pathname = usePathname()
+  const isStudio = pathname.includes('studio')
   return (
     <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex">
       <div className="flex flex-1 justify-start items-center">
@@ -229,14 +206,13 @@ const PCNavBar = ({
             organizations={organizations}
           />
         )}
-        <Navbar
-          pages={getPages(
-            pages,
-            isSignedIn,
-            userData?.organizations?.[0]?.slug
-          )}
-        />
-        <ConnectWalletButton />
+        <Navbar organization={currentOrganization} pages={pages} />
+        {isConnected && (
+          <div className="mr-2">
+            <ConnectWalletButton />
+          </div>
+        )}
+        {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>
   )

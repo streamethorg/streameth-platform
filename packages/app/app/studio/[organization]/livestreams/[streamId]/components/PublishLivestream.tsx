@@ -32,7 +32,7 @@ const PublishLivestream = ({
   }
 
   return (
-    <div className="flex justify-end gap-4 pb-10 w-full">
+    <div className="flex gap-4 justify-end pb-10 w-full">
       <Button
         className="bg-white"
         loading={isLoading}
@@ -55,7 +55,7 @@ const PublishLivestream = ({
           onClick={handlePublishStream}
           disabled={!stream?.published || isLoading}
           variant="destructive-outline">
-          Un-publish
+          Unpublish
         </Button>
       )}
     </div>

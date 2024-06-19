@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { EllipsisVertical } from 'lucide-react'
+import { IExtendedStage } from '@/lib/types'
 
 const LivestreamCard = ({
   name,
@@ -20,6 +21,7 @@ const LivestreamCard = ({
   showDate = true,
   link,
   DropdownMenuItems,
+  livestream,
 }: {
   name: string
   thumbnail: string
@@ -27,6 +29,7 @@ const LivestreamCard = ({
   showDate?: boolean
   link: string
   DropdownMenuItems?: React.ReactNode
+  livestream: IExtendedStage
 }) => {
   return (
     <div className="flex flex-row md:flex-col space-y-2 w-full min-h-full uppercase rounded-xl">
@@ -45,7 +48,15 @@ const LivestreamCard = ({
           {showDate && (
             <div className="flex justify-between items-center">
               <CardDescription className="text-xs truncate">
-                {formatDate(new Date(date), 'ddd. MMM. D, YYYY')}
+                {livestream.isMultipleDate && livestream.streamEndDate
+                  ? `${formatDate(
+                      new Date(date),
+                      'ddd. MMM. D, YYYY'
+                    )} - ${formatDate(
+                      new Date(livestream.streamEndDate),
+                      'ddd. MMM. D, YYYY'
+                    )}`
+                  : formatDate(new Date(date), 'ddd. MMM. D, YYYY')}
               </CardDescription>
             </div>
           )}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -16,15 +16,25 @@ import {
 import { Input } from '@/components/ui/input'
 import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import { Loader2, Trash2 } from 'lucide-react'
-import ImageDropzone from './ImageDropzone'
-import { generateId } from 'streameth-new-server/src/utils/util'
+import {
+  Loader2,
+  Trash2,
+  Earth,
+  Lock,
+  ChevronDown,
+} from 'lucide-react'
 import { IExtendedSession } from '@/lib/types'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import DeleteAsset from '../../components/DeleteAsset'
 import { Textarea } from '@/components/ui/textarea'
 import ImageUpload from '@/components/misc/form/imageUpload'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { useRouter } from 'next/navigation'
 
 const EditSessionFrom = ({
   session,
@@ -34,6 +44,7 @@ const EditSessionFrom = ({
   organizationSlug: string
 }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
@@ -65,14 +76,16 @@ const EditSessionFrom = ({
       .catch(() => toast.error('Error updating session'))
       .finally(() => {
         setIsLoading(false)
-        window.location.reload()
+        router.push(`/studio/${organizationSlug}/library`)
       })
   }
 
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {}}
+        onError={(errors) => {
+          console.error('Error:', errors)
+        }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6">
         <FormField
@@ -80,7 +93,9 @@ const EditSessionFrom = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Video title *</FormLabel>
+              <FormLabel>
+                Video title <span className="text-red-500">*</span>
+              </FormLabel>
               <FormControl>
                 <Input
                   className={
@@ -99,7 +114,9 @@ const EditSessionFrom = ({
           name="description"
           render={({ field }) => (
             <FormItem className="h-50">
-              <FormLabel>Description *</FormLabel>
+              <FormLabel>
+                Description <span className="text-red-500">*</span>
+              </FormLabel>
               <FormControl>
                 <Textarea
                   className={
@@ -108,6 +125,49 @@ const EditSessionFrom = ({
                   placeholder="description"
                   {...field}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="published"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Visibility</FormLabel>
+              <FormControl>
+                <div className="flex justify-start items-center space-x-2">
+                  {field.value ? (
+                    <>
+                      <Earth size={16} />
+                      <p>Public</p>
+                    </>
+                  ) : (
+                    <>
+                      <Lock size={16} />
+                      <p>Private</p>
+                    </>
+                  )}
+                  <Popover>
+                    <PopoverTrigger>
+                      <ChevronDown size={20} />
+                    </PopoverTrigger>
+                    <PopoverContent className="flex justify-start items-center space-x-2 transition-colors cursor-pointer hover:bg-gray-200 w-[150px] z-[999999999999999]">
+                      {!field.value ? (
+                        <>
+                          <Earth size={16} />
+                          <p>Make Public</p>
+                        </>
+                      ) : (
+                        <>
+                          <Lock size={16} />
+                          <p>Make Private</p>
+                        </>
+                      )}
+                    </PopoverContent>
+                  </Popover>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -1,7 +1,7 @@
 'use client'
 
-import { ReactNode, useEffect, useState } from 'react'
-import { Copy, FilePenLine, Share2, Trash2 } from 'lucide-react'
+import { ReactNode } from 'react'
+import { Copy, Eye, FilePenLine, Share2, Trash2 } from 'lucide-react'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
 import DeleteAsset from '../DeleteAsset'
@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient'
 import { ShareModalContent } from '@/components/misc/interact/ShareButton'
+import GetHashButton from '../GetHashButton'
 
 export const PopoverActions = ({
   session,
@@ -36,26 +37,42 @@ export const PopoverActions = ({
           href={`/studio/${organizationSlug}/library/${
             session._id as string
           }`}>
-          <Button variant={'outline'} className="space-x-2 w-full">
+          <Button
+            variant={'ghost'}
+            className="space-x-2 w-full !justify-start">
             <FilePenLine />
             <p className="">Edit</p>
           </Button>
         </Link>
-        {layout === eLayout.grid && (
+        <Link
+          href={`/${organizationSlug}/watch?session=${
+            session._id as string
+          }`}>
           <Button
-            variant={'outline'}
-            className="space-x-2"
-            onClick={() => handleCopy()}>
-            <Copy />
-            <p>Copy IPFS Hash</p>
+            variant={'ghost'}
+            className="space-x-2 w-full !justify-start">
+            <Eye />
+            <p className="">View</p>
           </Button>
-        )}
+        </Link>
+        {layout === eLayout.grid &&
+          (session.ipfsURI ? (
+            <Button
+              variant={'ghost'}
+              className="space-x-2"
+              onClick={() => handleCopy()}>
+              <Copy />
+              <p>Copy IPFS Hash</p>
+            </Button>
+          ) : (
+            <GetHashButton session={session} />
+          ))}
         <Dialog>
           <DialogTrigger>
             <span
               className={buttonVariants({
-                variant: 'outline',
-                className: 'space-x-2 w-full',
+                variant: 'ghost',
+                className: 'space-x-2 w-full !justify-start',
               })}>
               <Share2 />
               <p>Share</p>
@@ -65,9 +82,9 @@ export const PopoverActions = ({
         </Dialog>
         {session.assetId && (
           <VideoDownloadClient
-            className="space-x-2"
+            className="space-x-2 !justify-start"
             videoName={`${session.name}.mp4`}
-            variant="outline"
+            variant="ghost"
             assetId={session.assetId}
           />
         )}
@@ -77,11 +94,11 @@ export const PopoverActions = ({
           TriggerComponent={
             <span
               className={buttonVariants({
-                variant: 'destructive-outline',
+                variant: 'ghost',
                 className:
-                  'flex justify-center space-x-2 cursor-pointer hover:bg-gray-100',
+                  'flex space-x-2 cursor-pointer hover:bg-gray-100 !justify-start',
               })}>
-              <Trash2 />
+              <Trash2 className="text-destructive" />
               <p>Delete</p>
             </span>
           }

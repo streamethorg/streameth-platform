@@ -11,13 +11,13 @@ import { formatDate } from '@/lib/utils/time'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
 import React, { ReactNode } from 'react'
-import { generateThumbnail } from '@/lib/actions/livepeer'
 import { useEffect, useState } from 'react'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { generateThumbnailAction } from '@/lib/actions/sessions'
 
 const VideoCardWithMenu = ({
   session,
@@ -37,7 +37,9 @@ const VideoCardWithMenu = ({
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
       try {
-        const generatedThumbnail = await generateThumbnail(session)
+        const generatedThumbnail = await generateThumbnailAction(
+          session
+        )
         setThumbnail(generatedThumbnail)
       } catch (error) {
         console.error('Failed to generate thumbnail:', error)
@@ -70,7 +72,7 @@ const VideoCardWithMenu = ({
             <div className="flex justify-between items-center">
               <CardDescription className={`text-xs truncate `}>
                 {formatDate(
-                  new Date(session.createdAt as string),
+                  new Date(session.updatedAt as string),
                   'ddd. MMM. D, YYYY'
                 )}
               </CardDescription>
@@ -83,7 +85,7 @@ const VideoCardWithMenu = ({
             <PopoverTrigger className="z-10">
               <EllipsisVertical className="mt-2" />
             </PopoverTrigger>
-            <PopoverContent className="w-60">
+            <PopoverContent className="w-fit">
               {DropdownMenuItems}
             </PopoverContent>
           </Popover>

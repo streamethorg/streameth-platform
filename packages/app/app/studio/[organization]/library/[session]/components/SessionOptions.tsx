@@ -65,6 +65,7 @@ const SessionOptions = ({
           <EmbedModalContent
             playbackId={playbackId}
             playerName={name}
+            vod
           />
         }
       />

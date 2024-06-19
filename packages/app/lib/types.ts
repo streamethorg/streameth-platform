@@ -1,10 +1,7 @@
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
-import {
-  IStage,
-  IStageModel,
-} from 'streameth-new-server/src/interfaces/stage.interface'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IState } from 'streameth-new-server/src/interfaces/state.interface'
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface'
@@ -143,6 +140,8 @@ export interface IExtendedSession
   _id: string
   nftCollections?: string[]
   createdAt?: string
+  updatedAt?: string
+  __v?: string
 }
 export interface IExtendedStage
   extends Omit<IStage, '_id' | 'nftCollections'> {
