@@ -126,8 +126,8 @@ const LivestreamTable = ({
                 </Link>
 
                 <Popover>
-                  <PopoverTrigger className="z-10">
-                    <EllipsisVertical className="mt-2" />
+                  <PopoverTrigger className="flex z-10 items-center">
+                    <EllipsisVertical />
                   </PopoverTrigger>
                   <PopoverContent className="w-fit">
                     <LivestreamActions

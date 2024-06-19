@@ -299,7 +299,7 @@ const EditLivestream = ({
                 variant="primary"
                 disabled={getFormSubmitStatus(form) || isLoading}
                 type="submit">
-                Edit livestream
+                Update livestream
               </Button>
             </DialogFooter>
           </form>
