@@ -35,9 +35,9 @@ const LivestreamTable = ({
 }) => {
   return (
     <div className="rounded-xl shadow-sm">
-      <Table className="bg-white rounded-t-xl ">
+      <Table className="bg-white rounded-t-xl">
         <TableHeader className="sticky top-0 z-50 bg-gray-100 border-separate">
-          <TableRow className="hover:bg-whiterounded-t-xl border-b">
+          <TableRow className="border-b hover:bg-whiterounded-t-xl">
             <TableHead>
               <TableSort title="Title" sortBy="name" />
             </TableHead>
@@ -52,15 +52,15 @@ const LivestreamTable = ({
           {streams?.map((stream) => (
             <TableRow key={stream._id}>
               <TableCell className="font-medium max-w-[500px]">
-                <div className=" flex flex-row items-center space-x-4 w-full">
-                  <div className="relative overflow-hidden min-w-[100px] w-[100px]">
+                <div className="flex flex-row items-center space-x-4 w-full">
+                  <div className="overflow-hidden relative min-w-[100px] w-[100px]">
                     {stream.thumbnail ? (
                       <Thumbnail imageUrl={stream.thumbnail} />
                     ) : (
                       <DefaultThumbnail />
                     )}
                     {stream.streamSettings?.isActive && (
-                      <p className="absolute top-0 right-0 text-white bg-destructive p-1 text-sm">
+                      <p className="absolute top-0 right-0 p-1 text-sm text-white bg-destructive">
                         live
                       </p>
                     )}
@@ -105,14 +105,14 @@ const LivestreamTable = ({
               <TableCell>
                 <ToggleLivestreamVisibility item={stream} />
               </TableCell>
-              <TableCell className="flex items-center gap-2">
+              <TableCell className="flex items-center my-2 space-x-2">
                 <Link
                   key={stream._id}
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
                   <Button
                     variant="outline"
                     className="border-[#4219FF] hover:bg-[#4219FF] hover:text-white">
-                    Go live
+                    Dashboard
                   </Button>
                 </Link>
                 <Link
@@ -124,7 +124,6 @@ const LivestreamTable = ({
                     Clip
                   </Button>
                 </Link>
-
                 <Popover>
                   <PopoverTrigger className="flex z-10 items-center">
                     <EllipsisVertical />

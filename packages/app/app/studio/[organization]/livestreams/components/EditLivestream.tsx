@@ -125,7 +125,7 @@ const EditLivestream = ({
           <span>{btnText}</span>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>Edit livestream Details</DialogTitle>
         </DialogHeader>

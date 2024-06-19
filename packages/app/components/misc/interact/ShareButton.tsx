@@ -13,7 +13,6 @@ import {
   FacebookIcon,
   RedditIcon,
   TelegramIcon,
-  TwitterIcon,
   WhatsappIcon,
   XIcon,
 } from 'react-share'
@@ -28,7 +27,7 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import CopyText from '@/components/misc/CopyText'
 
 export const ShareModalContent = ({
@@ -47,7 +46,7 @@ export const ShareModalContent = ({
   }, [])
 
   return (
-    <CredenzaContent>
+    <CredenzaContent className="max-w-[525px]">
       <CredenzaHeader>
         <CredenzaTitle className="text-center">
           Share this {shareFor}

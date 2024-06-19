@@ -22,19 +22,19 @@ export const SidebarUI = ({
   const [expanded, setExpanded] = useState(initalExpanded ?? false)
 
   return (
-    <aside className="flex flex-col h-screen bg-white border-r z-0">
+    <aside className="flex z-0 flex-col h-screen bg-white border-r">
       <div className="flex justify-between items-center p-4">
         <div
           className={`flex items-center overflow-hidden transition-all ${
             expanded ? 'w-44' : 'w-10'
           }`}>
-          <div className="">
+          <>
             {expanded ? (
               <StreamethStudio />
             ) : (
               <Image src={Logo} width={40} height={40} alt="log" />
             )}
-          </div>
+          </>
         </div>
       </div>
 
@@ -42,7 +42,7 @@ export const SidebarUI = ({
         <ul className="flex-1 px-3 space-y-4">{children}</ul>
       </SidebarContext.Provider>
       <Link
-        className="flex relative items-center justify-center space-x-2 p-2 mx-auto w-full rounded-lg transition-colors text-black group"
+        className="flex relative justify-center items-center p-2 mx-auto space-x-2 w-full text-black rounded-lg transition-colors group"
         target="_blank"
         rel="noopener noreferrer"
         href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
@@ -59,7 +59,7 @@ export const SidebarUI = ({
             className={`
           absolute left-full rounded-md px-2 py-1 ml-2
           bg-primary text-sm
-          invisible opacity-20 -translate-x-3 transition-all
+          invisible opacity-20 -translate-x-3 text-white transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}>
             Docs
@@ -68,7 +68,7 @@ export const SidebarUI = ({
       </Link>
       <button
         onClick={() => setExpanded((curr) => !curr)}
-        className="p-1.5 text-black mx-auto mb-8">
+        className="p-1.5 mx-auto mb-8 text-black">
         {expanded ? (
           <span className="flex flex-row w-full">
             <ChevronFirst />
@@ -107,7 +107,7 @@ export const SidebarItem = ({
       onClick={handleRoute}
       className={`
         relative flex items-center py-2
-            font-medium rounded-md cursor-pointer
+            font-medium rounded-xl cursor-pointer
             transition-colors group   hover:border hover:border-primary hover:rounded-xl
             ${
               active
