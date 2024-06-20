@@ -98,7 +98,7 @@ export default function CreateSession({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="">Clip name</FormLabel>
+                  <FormLabel>Clip name</FormLabel>
                   <FormControl>
                     <Input placeholder="name" {...field} />
                   </FormControl>
