@@ -3,7 +3,7 @@ import { IExtendedSession, eLayout } from '@/lib/types'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
 import { formatDate } from '@/lib/utils/time'
-import { getSessionMetrics } from '@/lib/actions/sessions'
+import { fetchSessionMetrics } from '@/lib/services/sessionService'
 import ProcessingSkeleton from './misc/ProcessingSkeleton'
 import { PopoverActions } from './misc/PopoverActions'
 import {
@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { generateThumbnail } from '@/lib/actions/livepeer'
+import { generateThumbnailAction } from '@/lib/actions/sessions'
 import Thumbnail from '@/components/misc/VideoCard/thumbnail'
 import PublishCell from './PublishCell'
 
@@ -22,9 +22,9 @@ const TableCells = async ({
   item: IExtendedSession
   organization: string
 }) => {
-  const imageUrl = await generateThumbnail(item)
+  const imageUrl = await generateThumbnailAction(item)
   const views = (
-    await getSessionMetrics({ playbackId: item.playbackId ?? '' })
+    await fetchSessionMetrics({ playbackId: item.playbackId ?? '' })
   ).viewCount
 
   if (!item.videoUrl) {

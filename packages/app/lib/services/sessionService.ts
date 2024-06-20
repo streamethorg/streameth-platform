@@ -4,7 +4,6 @@ import { apiUrl } from '@/lib/utils/utils'
 import { Livepeer } from 'livepeer'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { revalidatePath } from 'next/cache'
-import { GetAssetResponse } from 'livepeer/dist/models/operations'
 
 export const createSession = async ({
   session,
@@ -189,6 +188,7 @@ export const fetchSessionMetrics = async ({
         cache: 'no-store',
       }
     )
+    console.log('response', response)
     if (!response.ok) {
       return {
         viewCount: 0,
