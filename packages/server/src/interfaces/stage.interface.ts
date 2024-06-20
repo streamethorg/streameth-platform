@@ -1,6 +1,7 @@
 import { Document, Types } from 'mongoose';
 
 export interface TargetOutput {
+  _id?: string;
   id?: string;
   name?: string;
 }

@@ -29,7 +29,7 @@ function SubmitButton() {
   if (pending) {
     return (
       <Button disabled>
-        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+        <ReloadIcon className="mr-2 w-4 h-4 animate-spin" />
         Please wait
       </Button>
     )
@@ -46,28 +46,30 @@ export const CreateMultistreamTarget = ({
   organizationId?: string
   btnName?: string
 }) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const [state, formAction] = useFormState(
     createMultistreamAction,
     initialState
   )
+
   useEffect(() => {
     if (state.message) {
       toast[state.success ? 'success' : 'error'](state.message)
       setOpen(false)
     }
   }, [state])
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">{btnName}</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white">
+      <DialogContent className="bg-white sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create multistream target</DialogTitle>
         </DialogHeader>
         <form action={formAction} className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 gap-4 items-center">
             <Input type="hidden" name="streamId" value={streamId} />
             <Input
               type="hidden"
@@ -84,7 +86,7 @@ export const CreateMultistreamTarget = ({
               placeholder="e.g. streaming.tv"
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 gap-4 items-center">
             <Label htmlFor="url" className="text-right">
               Ingest URL
             </Label>
@@ -95,7 +97,7 @@ export const CreateMultistreamTarget = ({
               placeholder="e.g. rtmp://streaming.tv/live"
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 gap-4 items-center">
             <Label htmlFor="streamKey" className="text-right">
               Stream key (optional)
             </Label>

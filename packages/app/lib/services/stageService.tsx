@@ -2,6 +2,7 @@ import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 import { IExtendedStage } from '../types'
 import { fetchEvents } from './eventService'
+import { Session, Stream } from 'livepeer/dist/models/components'
 
 export async function fetchStage({
   stage,
@@ -227,5 +228,29 @@ export async function deleteMultistream({
   } catch (e) {
     console.log('error in deleteMultistream', e)
     throw e
+  }
+}
+
+export async function fetchStageRecordings({
+  streamId,
+}: {
+  streamId: string
+}): Promise<{ parentStream: Stream; recordings: Session[] } | null> {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/streams/recording/${streamId}`,
+      {
+        cache: 'no-cache',
+      }
+    )
+    const data = (await response.json()).data
+
+    if (!data) {
+      return null
+    }
+    return data
+  } catch (e) {
+    console.log(e)
+    throw 'Error fetching stage'
   }
 }

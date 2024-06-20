@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import {
-  createClip,
+  createClipAction,
   createSessionAction,
 } from '@/lib/actions/sessions'
 import { Button } from '@/components/ui/button'
@@ -66,45 +66,59 @@ const CreateClipButton = ({
     const session = custom
       ? customSession
       : sessions.find((s) => s._id === sessionId)
-    if (selectedRecording && startTime && endTime && session) {
-      setIsLoading(true)
-      createClip({
-        playbackId,
-        sessionId: selectedRecording,
-        start: startTime.unix,
-        end: endTime.unix,
-        session,
-      })
-        .then(() => {
-          setIsLoading(false)
-          setStartTime(null)
-          setEndTime(null)
-          setSessionId('')
-          toast.success('Clip created')
-        })
-        .catch(() => {
-          setIsLoading(false)
-          toast.error('Error creating clip')
-        })
-        .finally(() => {
-          handleTermChange([
-            {
-              key: 'previewId',
-              value: session._id as string,
-            },
-          ])
-          setIsLoading(false)
-        })
+
+    if (!endTime || !startTime || startTime >= endTime) {
+      toast.error('Start time must be earlier than end time.')
+      return
     }
+
+    if (!selectedRecording) {
+      toast.error('No recording selected.')
+      return
+    }
+
+    if (!session) {
+      toast.error('Session information is missing.')
+      return
+    }
+
+    setIsLoading(true)
+    createClipAction({
+      playbackId,
+      recordingId: selectedRecording,
+      start: startTime.unix,
+      end: endTime.unix,
+      sessionId: session._id as string,
+    })
+      .then(() => {
+        setIsLoading(false)
+        setStartTime(null)
+        setEndTime(null)
+        setSessionId('')
+        toast.success('Clip created')
+      })
+      .catch(() => {
+        setIsLoading(false)
+        toast.error('Error creating clip')
+      })
+      .finally(() => {
+        handleTermChange([
+          {
+            key: 'previewId',
+            value: session._id as string,
+          },
+        ])
+        setIsLoading(false)
+      })
   }
 
   return (
     <div className="flex flex-row flex-grow space-x-2">
-      <div className="flex flex-col w-full ">
+      <div className="flex flex-col w-full">
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
           <Input
-            className=" bg-white"
+            className="bg-white"
             placeholder="Enter session name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -130,16 +144,14 @@ const CreateClipButton = ({
           !selectedRecording ||
           !startTime ||
           !endTime ||
-          custom
-            ? !name
-            : !sessionId
+          (custom ? !name : !sessionId)
         }
         onClick={handleCreateClip}
         variant="primary"
         className="mt-auto text-white">
         {isLoading ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+            <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
             wait
           </>
         ) : (

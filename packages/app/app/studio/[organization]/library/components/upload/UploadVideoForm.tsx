@@ -105,13 +105,13 @@ const UploadVideoForm = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Video title <span className="text-red-500">*</span>
-              </FormLabel>
+              <div className="flex justify-between items-center space-x-2">
+                <FormLabel required>Video title</FormLabel>
+                <FormMessage />
+              </div>
               <FormControl>
                 <Input placeholder="name" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -120,13 +120,13 @@ const UploadVideoForm = ({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Description <span className="text-red-500">*</span>
-              </FormLabel>
+              <div className="flex justify-between items-center space-x-2">
+                <FormLabel required>Description</FormLabel>
+                <FormMessage />
+              </div>
               <FormControl>
                 <Input placeholder="description" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -135,6 +135,7 @@ const UploadVideoForm = ({
           name="published"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Visibility</FormLabel>
               <FormControl>
                 <div className="flex justify-start items-center space-x-2">
                   {field.value ? (
@@ -154,21 +155,24 @@ const UploadVideoForm = ({
                     </PopoverTrigger>
                     <PopoverContent className="flex justify-start items-center space-x-2 transition-colors cursor-pointer hover:bg-gray-200 w-[150px] z-[999999999999999]">
                       {!field.value ? (
-                        <>
+                        <div
+                          onClick={() => field.onChange(true)}
+                          className="flex items-center space-x-2">
                           <Earth size={16} />
                           <p>Make Public</p>
-                        </>
+                        </div>
                       ) : (
-                        <>
+                        <div
+                          onClick={() => field.onChange(false)}
+                          className="flex items-center space-x-2">
                           <Lock size={16} />
                           <p>Make Private</p>
-                        </>
+                        </div>
                       )}
                     </PopoverContent>
                   </Popover>
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -201,7 +205,6 @@ const UploadVideoForm = ({
                   abortControllerRef={abortControllerRef}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -216,7 +219,11 @@ const UploadVideoForm = ({
             </span>
           </DialogClose>
           <Button
-            disabled={getFormSubmitStatus(form) || isLoading}
+            disabled={
+              getFormSubmitStatus(form) ||
+              !form.getValues('assetId') ||
+              isLoading
+            }
             variant={'primary'}
             type="submit">
             {isLoading ? (
