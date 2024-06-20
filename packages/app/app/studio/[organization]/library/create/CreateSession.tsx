@@ -110,8 +110,8 @@ export default function CreateSession({
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem className="">
-                  <FormLabel className="">Description</FormLabel>
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Input placeholder="description" {...field} />
                   </FormControl>
