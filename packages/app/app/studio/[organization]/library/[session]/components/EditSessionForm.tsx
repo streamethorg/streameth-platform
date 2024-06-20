@@ -34,8 +34,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useRouter } from 'next/navigation'
 
-const EditSessionFrom = ({
+const EditSessionForm = ({
   session,
   organizationSlug,
 }: {
@@ -43,6 +44,7 @@ const EditSessionFrom = ({
   organizationSlug: string
 }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
@@ -51,6 +53,7 @@ const EditSessionFrom = ({
       description: session.description,
       coverImage: session.coverImage,
       assetId: session.assetId,
+      published: session.published,
     },
   })
 
@@ -74,14 +77,13 @@ const EditSessionFrom = ({
       .catch(() => toast.error('Error updating session'))
       .finally(() => {
         setIsLoading(false)
-        window.location.reload()
+        router.push(`/studio/${organizationSlug}/library`)
       })
   }
 
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {}}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6">
         <FormField
@@ -89,19 +91,19 @@ const EditSessionFrom = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Video title <span className="text-red-500">*</span>
-              </FormLabel>
+              <div className="flex justify-between items-center space-x-2">
+                <FormLabel>
+                  Video title <span className="text-red-500">*</span>
+                </FormLabel>
+                <FormMessage />
+              </div>
               <FormControl>
                 <Input
-                  className={
-                    'bg-white border border-gray-300 rounded-md'
-                  }
+                  className="bg-white rounded-md border border-gray-300"
                   placeholder="name"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -110,19 +112,19 @@ const EditSessionFrom = ({
           name="description"
           render={({ field }) => (
             <FormItem className="h-50">
-              <FormLabel>
-                Description <span className="text-red-500">*</span>
-              </FormLabel>
+              <div className="flex justify-between items-center space-x-2">
+                <FormLabel>
+                  Description <span className="text-red-500">*</span>
+                </FormLabel>
+                <FormMessage />
+              </div>
               <FormControl>
                 <Textarea
-                  className={
-                    'bg-white border border-gray-300 rounded-md'
-                  }
+                  className="bg-white rounded-md border border-gray-300"
                   placeholder="description"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -165,7 +167,6 @@ const EditSessionFrom = ({
                   </Popover>
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -183,7 +184,6 @@ const EditSessionFrom = ({
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -220,4 +220,4 @@ const EditSessionFrom = ({
   )
 }
 
-export default EditSessionFrom
+export default EditSessionForm

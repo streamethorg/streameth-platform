@@ -98,7 +98,7 @@ export default function CreateSession({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="">Clip name</FormLabel>
+                  <FormLabel>Clip name</FormLabel>
                   <FormControl>
                     <Input placeholder="name" {...field} />
                   </FormControl>
@@ -110,8 +110,8 @@ export default function CreateSession({
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem className="">
-                  <FormLabel className="">Description</FormLabel>
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Input placeholder="description" {...field} />
                   </FormControl>

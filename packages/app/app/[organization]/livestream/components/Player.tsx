@@ -1,4 +1,5 @@
 'use server'
+
 import { Livepeer } from 'livepeer'
 import { IExtendedStage } from '@/lib/types'
 import Counter from './Counter'
@@ -6,6 +7,7 @@ import { PlayerWithControls } from '@/components/ui/Player'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+
 const Player = async ({ stage }: { stage: IExtendedStage }) => {
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
@@ -23,14 +25,13 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
     new Date(stage.streamDate as string).getTime() - Date.now()
 
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
-  console.log(buildPlaybackUrl(stream.playbackId))
   return (
     <div className="flex flex-col w-full h-full">
       {timeLeft > 0 ? (
-        <div className="flex relative aspect-video rounded-xl w-full h-full items-end justify-end">
+        <div className="flex relative justify-end items-end w-full h-full rounded-xl aspect-video">
           {stage.thumbnail && (
             <Image
-              className="z-[0] lg:rounded-xl"
+              className="lg:rounded-xl z-[0]"
               fill={true}
               src={stage.thumbnail}
               alt="Livepeer Logo"
