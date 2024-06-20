@@ -23,7 +23,7 @@ import {
   fetchAsset,
   fetchSession,
 } from '@/lib/services/sessionService'
-import { IExtendedEvent, IExtendedStage } from '@/lib/types'
+import { IExtendedEvent } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
 import ClipSlider from './components/ClipSlider'

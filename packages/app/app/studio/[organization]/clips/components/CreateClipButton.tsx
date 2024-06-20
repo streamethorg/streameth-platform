@@ -81,34 +81,6 @@ const ClipButton = ({
     const session = custom
       ? customSession
       : sessions.find((s) => s._id === sessionId)
-    if (selectedRecording && startTime && endTime && session) {
-      setIsLoading(true)
-      createClip({
-        playbackId,
-        sessionId: selectedRecording,
-        start: startTime.unix,
-        end: endTime.unix,
-        session,
-      })
-        .then(() => {
-          setIsLoading(false)
-          setSessionId('')
-          toast.success('Clip created')
-        })
-        .catch(() => {
-          setIsLoading(false)
-          toast.error('Error creating clip')
-        })
-        .finally(() => {
-          handleTermChange([
-            {
-              key: 'previewId',
-              value: session._id as string,
-            },
-          ])
-          setIsLoading(false)
-        })
-    }
 
     if (!selectedRecording) {
       toast.error('No recording selected.')
@@ -130,8 +102,6 @@ const ClipButton = ({
     })
       .then(() => {
         setIsLoading(false)
-        setStartTime(null)
-        setEndTime(null)
         setSessionId('')
         toast.success('Clip created')
       })
@@ -156,7 +126,7 @@ const ClipButton = ({
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
           <Input
-          id="session-name"
+            id="session-name"
             className=" bg-white z-[999999]"
             placeholder="Enter session name"
             value={name}

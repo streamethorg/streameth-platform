@@ -30,7 +30,9 @@ const VideoCard = ({
     generateThumbnailAction(session).then(
       (url) => url && setImageUrl(url)
     )
-  }, [session])
+  }, [])
+
+
   return (
     <div className="min-h-full w-full rounded-xl  uppercase">
       <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
