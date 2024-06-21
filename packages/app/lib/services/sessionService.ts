@@ -287,3 +287,37 @@ export const generateThumbnail = async ({
     throw e
   }
 }
+export const uploadSessionToYouTube = async ({
+  sessionId,
+  googleToken,
+  authToken,
+}: {
+  sessionId: string
+  googleToken: string
+  authToken: string
+}): Promise<any> => {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/sessions/upload/${sessionId}`,
+      {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({
+          googleToken: googleToken,
+        }),
+      }
+    )
+    if (!response.ok) {
+      throw 'Error updating session'
+    }
+    // revalidatePath('/studio')
+    return (await response.json()).data
+  } catch (e) {
+    console.log('error in updateSession', e)
+    throw e
+  }
+}

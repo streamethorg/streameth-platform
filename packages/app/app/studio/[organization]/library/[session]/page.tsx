@@ -11,11 +11,16 @@ import Link from 'next/link'
 import SessionOptions from './components/SessionOptions'
 import { Card, CardContent } from '@/components/ui/card'
 import CopyItem from '@/components/misc/CopyString'
+import UploadToYoutubeButton from './components/UploadToYoutubeButton'
+import { fetchOrganization } from '@/lib/services/organizationService'
 
 const EditSession = async ({
   params,
   searchParams,
 }: studioPageParams) => {
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
   const session = await fetchSession({
     session: params.session,
   })
@@ -83,6 +88,12 @@ const EditSession = async ({
                   {Math.round(video.size / 100000)} MB
                 </span>
               )}
+              <UploadToYoutubeButton
+                organization={organization}
+                organizationSlug={params.organization}
+                sessionId={session._id}
+                hasChannel={searchParams?.hasChannel}
+              />
             </CardContent>
           </Card>
 
