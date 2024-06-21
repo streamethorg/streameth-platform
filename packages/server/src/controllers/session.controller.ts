@@ -6,7 +6,7 @@ import { ISession } from '@interfaces/session.interface';
 import Organization from '@models/organization.model';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import createOAuthClient from '@utils/oauth';
+import createOAuthClient, { getYoutubeClient } from '@utils/oauth';
 import { uploadToYouTube } from '@utils/youtube';
 import { existsSync } from 'fs';
 import { Credentials } from 'google-auth-library';
@@ -114,24 +114,15 @@ export class SessionController extends Controller {
   /**
    * @summary Upload session to YouTube
    */
-  @Security('jwt', ['org'])
+  // @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('upload/{sessionId}')
   async uploadSessionToYouTube(
     @Path() sessionId: string,
-    @Query() googleToken: string,
+    @Body() googleToken: any,
   ): Promise<IStandardResponse<ISession>> {
     try {
       const session = await this.sessionService.get(sessionId);
-      const tokens: Credentials = JSON.parse(decodeURIComponent(googleToken));
-
-      const oAuthClient = await createOAuthClient();
-      oAuthClient.setCredentials(tokens);
-
-      const youtube = google.youtube({
-        version: 'v3',
-        auth: oAuthClient,
-      });
 
       if (!session.assetId || !session.videoUrl) {
         console.log('Asset Id or video Url does not exist');
@@ -148,10 +139,11 @@ export class SessionController extends Controller {
       }
 
       console.log('Uploading video...');
-      await uploadToYouTube(session, youtube, videoFilePath);
+      // await uploadToYouTube(session, youtube, videoFilePath);
 
-      return SendApiResponse('session fetched', session);
+      return SendApiResponse('session fetched');
     } catch (e) {
+      console.log('uploadError', e);
       return SendApiResponse(
         'An error while uploading a video to YouTube',
         e.toString(),

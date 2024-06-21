@@ -1,11 +1,12 @@
+import { config } from '@config';
 import { google } from 'googleapis';
 
-async function createOAuthClient() {
-  const oAuthSecret: any = JSON.parse(process.env.OAUTH_SECRET || '');
-  const clientId = oAuthSecret.web.client_id;
-  const clientSecret = oAuthSecret.web.client_secret;
-  const redirectUris = oAuthSecret.web.redirect_uris;
+const oAuthSecret: any = JSON.parse(config.oauthSecret);
+const clientId = oAuthSecret.web.client_id;
+const clientSecret = oAuthSecret.web.client_secret;
+const redirectUris = oAuthSecret.web.redirect_uris;
 
+async function createOAuthClient() {
   const environment = process.env.NODE_ENV;
   const eEnv: Record<string, number> = {
     production: 0,
@@ -18,3 +19,15 @@ async function createOAuthClient() {
 }
 
 export default createOAuthClient;
+
+export const getYoutubeClient = (accessToken: string) => {
+  const oauth2Client = new google.auth.OAuth2();
+  oauth2Client.setCredentials({
+    access_token: accessToken,
+  });
+
+  return google.youtube({
+    version: 'v3',
+    auth: oauth2Client,
+  });
+};
