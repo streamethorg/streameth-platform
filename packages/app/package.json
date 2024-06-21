@@ -8,6 +8,8 @@
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "check-types": "tsc --noEmit --incremental",
+    "test:ui": "playwright test --ui",
+    "test": "playwright test",
     "prettier:fix": "prettier --write './app' './components' './lib'",
     "prettier:check": "prettier --check './app' './components' './lib' "
   },
