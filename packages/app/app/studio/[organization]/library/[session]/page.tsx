@@ -88,7 +88,6 @@ const EditSession = async ({
                   {Math.round(video.size / 100000)} MB
                 </span>
               )}
-
               <UploadToYoutubeButton
                 organization={organization}
                 organizationSlug={params.organization}

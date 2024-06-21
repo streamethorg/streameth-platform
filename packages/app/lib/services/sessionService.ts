@@ -287,7 +287,6 @@ export const generateThumbnail = async ({
     throw e
   }
 }
-
 export const uploadSessionToYouTube = async ({
   sessionId,
   googleToken,
