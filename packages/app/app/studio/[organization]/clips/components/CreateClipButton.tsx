@@ -67,7 +67,7 @@ const CreateClipButton = ({
       ? customSession
       : sessions.find((s) => s._id === sessionId)
 
-    if (!endTime || !startTime || startTime >= endTime) {
+    if (!endTime || !startTime || startTime < endTime) {
       toast.error('Start time must be earlier than end time.')
       return
     }
