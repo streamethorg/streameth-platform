@@ -61,7 +61,7 @@ const EditLivestream = ({
       isMultipleDate: livestream?.isMultipleDate || false,
     },
   })
-  console.log(livestream)
+
   const handleModalClose = () => {
     setOpen(false)
   }
