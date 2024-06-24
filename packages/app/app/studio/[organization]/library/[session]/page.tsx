@@ -35,7 +35,7 @@ const EditSession = async ({
   if (!video) return notFound()
 
   return (
-    <div className="p-8 h-full">
+    <div className="p-4 h-full">
       <Link href={`/studio/${params.organization}/library`}>
         <div className="flex justify-start items-center mb-4 space-x-4">
           <ArrowLeft />
@@ -43,15 +43,15 @@ const EditSession = async ({
         </div>
       </Link>
 
-      <div className="flex flex-row space-x-4 ">
-        <div className=" space-y-4 w-2/3 bg-white p-4 rounded-xl border">
+      <div className="flex flex-row space-x-4">
+        <div className="p-4 space-y-4 w-2/3 bg-white rounded-xl border">
           <h1 className="text-lg font-bold">Video Details</h1>
           <EditSessionForm
             session={session}
             organizationSlug={params.organization}
           />
         </div>
-        <div className="w-1/3 flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 w-1/3">
           <PlayerWithControls
             src={[
               {
@@ -63,13 +63,13 @@ const EditSession = async ({
               },
             ]}
           />
-          <div className="flex flex-col bg-white p-4 rounded-xl border space-y-4">
+          <div className="flex flex-col p-4 space-y-4 bg-white rounded-xl border">
             <h1 className="text-lg font-bold">Publish video</h1>
             <div className="flex flex-row">
               <GetHashButton session={session} />
             </div>
           </div>
-          <div className="flex flex-col p-4 space-y-4 bg-white border rounded-xl">
+          <div className="flex flex-col p-4 space-y-4 bg-white rounded-xl border">
             <h1 className="text-lg font-bold">Video data</h1>
             {session.playbackId && (
               <div>

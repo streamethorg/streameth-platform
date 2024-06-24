@@ -2,12 +2,10 @@
 
 import { SidebarUI, SidebarItem } from './Sidebar'
 import {
-  CalendarDays,
+  UsersRound,
   Videotape,
   Radio,
-  ScissorsLineDashed,
   Home,
-  ImageIcon,
   Settings,
 } from 'lucide-react'
 
@@ -30,13 +28,18 @@ const SidebarMenu = ({
       icon: <Videotape size={25} />,
     },
     {
-      text: 'Channel Settings',
-      navigationPath: `/settings`,
+      text: 'Livestreams',
+      navigationPath: '/livestreams',
       icon: <Radio size={25} />,
     },
     {
       text: 'Team',
       navigationPath: '/team',
+      icon: <UsersRound size={25} />,
+    },
+    {
+      text: 'Settings',
+      navigationPath: `/settings`,
       icon: <Settings size={25} />,
     },
   ]
