@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState, Suspense, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import SearchBar from '@/components/misc/SearchBar'
@@ -16,7 +17,6 @@ import { Button } from '@/components/ui/button'
 import { ConnectWalletButton } from '../misc/ConnectWalletButton'
 import { usePathname } from 'next/navigation'
 import { useAccount } from 'wagmi'
-import UserDropdown from '../misc/UserDropdown'
 
 const HomePageNavbar = ({
   logo,
@@ -85,7 +85,7 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="flex sticky top-0 flex-row items-center bg-white lg:hidden z-50">
+    <NavigationMenu className="flex sticky top-0 z-50 flex-row items-center bg-white lg:hidden">
       {(searchVisible || menuVisible) && (
         <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
@@ -201,18 +201,19 @@ const PCNavBar = ({
         )}
       </div>
       <div className="flex flex-1 justify-end items-center">
+        {organizations && (
+          <SwitchOrganization
+            organization={currentOrganization}
+            organizations={organizations}
+          />
+        )}
         <Navbar organization={currentOrganization} pages={pages} />
-        {isConnected && !isStudio && (
+        {isConnected && (
           <div className="mr-2">
             <ConnectWalletButton />
           </div>
         )}
-        {isStudio && (
-          <UserDropdown
-            organizations={organizations}
-            organization={currentOrganization}
-          />
-        )}
+        {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>
   )
