@@ -13,17 +13,9 @@ export default function Thumbnail({
   imageUrl,
   fallBack,
 }: ThumbnailProps) {
-  const [error, setError] = useState(false)
-  const [fallbackImage, setFallbackImage] = useState('/cover.png')
+  const srcUrl = imageUrl || fallBack
 
-  useEffect(() => {
-    setError(false)
-    if (fallBack) {
-      setFallbackImage(fallBack)
-    }
-  }, [imageUrl, fallBack])
-
-  if (!imageUrl && !fallBack) {
+  if (!srcUrl) {
     return (
       <AspectRatio
         ratio={16 / 9}
@@ -37,14 +29,14 @@ export default function Thumbnail({
     <div className="aspect-video relative w-full">
       <Image
         placeholder="blur"
-        blurDataURL={fallbackImage}
+        blurDataURL={srcUrl}
         loading="lazy"
         decoding="async"
         data-nimg="fill"
         className="rounded-xl"
         alt="Session image"
         quality={100}
-        src={error ? fallbackImage : imageUrl ?? ''}
+        src={srcUrl}
         fill
         sizes="(max-width: 768px) 100%, (max-width: 1200px) 50%, 33%"
         style={{
@@ -53,9 +45,6 @@ export default function Thumbnail({
           width: '100%',
           inset: 0,
           objectFit: 'cover',
-        }}
-        onError={() => {
-          setError(true)
         }}
       />
     </div>
