@@ -4919,12 +4919,12 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"socialId": {
+									"destinationId": {
 										"type": "string"
 									}
 								},
 								"required": [
-									"socialId"
+									"destinationId"
 								],
 								"type": "object"
 							}
