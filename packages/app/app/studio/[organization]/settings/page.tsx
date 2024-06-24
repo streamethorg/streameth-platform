@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import NavigationItem from './components/NavigationItem'
 import TeamMembers from './components/TeamMembers'
 import { fetchOrganizationMembers } from '@/lib/services/organizationService'
+import Destinations from './components/destinations'
 
 const Settings = async ({
   params,
@@ -35,6 +36,10 @@ const Settings = async ({
       title: 'Team Members',
       path: `teamMembers`,
     },
+    {
+      title: 'Destinations',
+      path: `destinations`,
+    },
   ]
 
   const renderComponent = () => {
@@ -55,11 +60,13 @@ const Settings = async ({
             organizationId={organization._id}
           />
         )
+      case 'destinations':
+        return <Destinations organization={organization} />
     }
   }
 
   return (
-    <div className="mx-auto max-w-4xl w-full mt-12 flex flex-row">
+    <div className="mx-auto max-w-4xl w-full flex flex-row h-full">
       <div className=" rounded-l-xl w-1/4 bg-neutrals-100 p-6 space-y-4">
         <h1 className="text-2xl font-medium ">Settings</h1>
         <div className="space-y-4">

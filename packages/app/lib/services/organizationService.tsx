@@ -244,3 +244,35 @@ export async function fetchOrganizationSocials({
     return null
   }
 }
+
+export async function deleteDestination({
+  destinationId,
+  authToken,
+  organizationId,
+}: {
+  destinationId: string
+  authToken: string
+  organizationId?: string
+}): Promise<IExtendedOrganization> {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/organizations/socials/${organizationId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ destinationId }),
+      }
+    )
+
+    if (!response.ok) {
+      throw 'Error deleting destination'
+    }
+    return await response.json()
+  } catch (e) {
+    console.log('error in delete destination', e)
+    throw e
+  }
+}
