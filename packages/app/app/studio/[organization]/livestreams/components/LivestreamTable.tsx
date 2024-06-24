@@ -85,10 +85,10 @@ const LivestreamTable = ({
                     {stream.isMultipleDate &&
                       stream.streamEndDate &&
                       ' - ' +
-                        formatDate(
-                          new Date(stream?.streamEndDate),
-                          'ddd. MMMM D, YYYY, HH:mm a'
-                        )}
+                      formatDate(
+                        new Date(stream?.streamEndDate),
+                        'ddd. MMMM D, YYYY, HH:mm a'
+                      )}
                     {new Date(stream.streamDate) > new Date() && (
                       <span className="block text-sm text-muted-foreground">
                         Scheduled
@@ -112,7 +112,7 @@ const LivestreamTable = ({
                   <Button
                     variant="outline"
                     className="border-[#4219FF] hover:bg-[#4219FF] hover:text-white">
-                    Dashboard
+                    Manage
                   </Button>
                 </Link>
                 <Link
