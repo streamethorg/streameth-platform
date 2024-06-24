@@ -2,7 +2,6 @@ import React, { Suspense } from 'react'
 import { ClipsPageParams, IExtendedSession } from '@/lib/types'
 import SelectSession from './components/SelectSession'
 import RecordingSelect from './components/RecordingSelect'
-import TimeSetter from './components/TimeSetter'
 import CreateClipButton from './components/CreateClipButton'
 import { ClipProvider } from './components/ClipContext'
 import ReactHlsPlayer from './components/Player'
@@ -24,17 +23,11 @@ import {
   fetchAsset,
   fetchSession,
 } from '@/lib/services/sessionService'
-import { IExtendedEvent, IExtendedStage } from '@/lib/types'
+import { IExtendedEvent } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '@/components/ui/tabs'
-import EmptyFolder from '@/lib/svg/EmptyFolder'
-import { Stream, Session } from 'livepeer/dist/models/components'
+import ClipSlider from './components/ClipSlider'
+import { Session, Stream } from 'livepeer/dist/models/components'
 
 const ClipContainer = ({
   children,
@@ -49,10 +42,7 @@ const ClipContainer = ({
 )
 
 const SkeletonSidebar = () => (
-  <div className="flex flex-col w-1/3 h-full bg-white border-l bg-background">
-    <CardTitle className="p-2 text-lg bg-white border-b">
-      Livestream clips
-    </CardTitle>
+  <div className="w-1/3 flex flex-col h-full bg-background bg-white border-l">
     <div className="h-[calc(100%-50px)] overflow-y-clip space-y-4">
       {[1, 2, 3, 4, 5].map((i) => (
         <div key={i} className="p-4 animate-pulse">
@@ -64,35 +54,29 @@ const SkeletonSidebar = () => (
 )
 
 const SessionSidebar = async ({
-  currentStage,
   event,
   sessions,
+  currentRecording,
+  recordings,
 }: {
-  currentStage: IExtendedStage
   event?: IExtendedEvent
   sessions: IExtendedSession[]
+  currentRecording?: string
+  recordings: {
+    parentStream: Stream | undefined
+    recordings: Session[]
+  }
 }) => {
   return (
-    <div className="w-full h-full bg-white border-l max-w-[300px] bg-background">
-      <CardTitle className="p-2 text-lg bg-white border-b">
-        Livestream clips
+    <div className="w-[300px] h-full bg-background bg-white border-l">
+      <CardTitle className="bg-white p-2 border-b text-lg">
+        <RecordingSelect
+          selectedRecording={currentRecording ?? undefined}
+          streamRecordings={recordings.recordings}
+        />
       </CardTitle>
-      <div className="h-[calc(100%-50px)] overflow-y-scroll">
-        {sessions.length > 0 ? (
-          <ClipsSessionList event={event} sessions={sessions} />
-        ) : (
-          <div className="flex flex-col justify-center items-center space-y-6 h-full">
-            <EmptyFolder width={100} height={60} />
-            <div className="flex flex-col items-center mx-2 text-center">
-              <p className="text-xl font-bold">
-                No clips created yet
-              </p>
-              <p className="text-gray-500">
-                Upload your first video to get started!
-              </p>
-            </div>
-          </div>
-        )}
+      <div className="h-[calc(100%-100px)] overflow-y-scroll">
+        <ClipsSessionList event={event} sessions={sessions} />
       </div>
     </div>
   )
@@ -256,18 +240,8 @@ const EventClips = async ({
           organizationSlug={params.organization}
         />
       )}
-      <div className="flex flex-col px-4 pt-2 w-full">
-        {/* <div className="flex flex-row justify-center my-4 space-x-4 w-full">
-          <SelectSession
-            stages={stages}
-            currentStageId={currentStage._id}
-          />
-          <RecordingSelect
-            selectedRecording={currentRecording ?? undefined}
-            streamRecordings={stageRecordings.recordings}
-          />
-        </div> */}
-        <div className="flex overflow-auto flex-col space-y-4 w-full h-full">
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full h-full overflow-auto space-y-4 p-4 bg-white">
           <ClipProvider>
             <ReactHlsPlayer
               playbackId={
@@ -275,62 +249,27 @@ const EventClips = async ({
               }
               selectedStreamSession={currentRecording}
             />
-            <div className="flex flex-col space-y-4">
-              <Tabs defaultValue={'sessions'}>
-                <TabsList className="border-y border-grey w-full !justify-start gap-5">
-                  <TabsTrigger className="px-0" value="sessions">
-                    Clip Session
-                  </TabsTrigger>
-                  <TabsTrigger value="custom">
-                    Create Custom Clip
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="sessions">
-                  <div className="flex flex-row justify-center items-center space-x-2 w-full">
-                    <TimeSetter label="Clip start" type="start" />
-                    <TimeSetter label="Clip end" type="end" />
-
-                    <CreateClipButton
-                      selectedRecording={currentRecording}
-                      playbackId={
-                        stageRecordings.parentStream?.playbackId ?? ''
-                      }
-                      stageId={currentStage?._id}
-                      organizationId={organization._id as string}
-                      sessions={sessions.sessions}
-                    />
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="custom">
-                  <div className="flex flex-row justify-center items-center space-x-2 w-full">
-                    <TimeSetter label="Clip start" type="start" />
-                    <TimeSetter label="Clip end" type="end" />
-
-                    <CreateClipButton
-                      selectedRecording={currentRecording}
-                      playbackId={
-                        stageRecordings.parentStream?.playbackId ?? ''
-                      }
-                      stageId={currentStage?._id}
-                      organizationId={organization._id as string}
-                      sessions={sessions.sessions}
-                      custom
-                    />
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div>
+            <ClipSlider />
+            <CreateClipButton
+              currentRecording={currentRecording}
+              playbackId={
+                stageRecordings.parentStream?.playbackId ?? ''
+              }
+              organization={organization}
+              currentStage={currentStage}
+              sessions={sessions}
+            />
           </ClipProvider>
         </div>
       </div>
       <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
         <SessionSidebar
-          currentStage={currentStage}
           event={event ?? undefined}
           sessions={sessions.sessions.filter(
             (session) => session.assetId
           )}
+          currentRecording={currentRecording}
+          recordings={stageRecordings}
         />
       </Suspense>
     </ClipContainer>

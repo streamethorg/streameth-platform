@@ -15,16 +15,32 @@ import {
   ISession,
   SessionType,
 } from 'streameth-new-server/src/interfaces/session.interface'
-import { IExtendedSession } from '@/lib/types'
+import {
+  IExtendedOrganization,
+  IExtendedSession,
+  IExtendedStage,
+} from '@/lib/types'
 import {
   Select,
-  SelectGroup,
   SelectValue,
   SelectTrigger,
   SelectContent,
   SelectItem,
 } from '@/components/ui/select'
-const CreateClipButton = ({
+
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '@/components/ui/tabs'
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+
+const ClipButton = ({
   playbackId,
   selectedRecording,
   stageId,
@@ -41,8 +57,7 @@ const CreateClipButton = ({
 }) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [name, setName] = React.useState('')
-  const { startTime, setStartTime, endTime, setEndTime } =
-    useClipContext()
+  const { startTime, endTime } = useClipContext()
   const [sessionId, setSessionId] = React.useState('')
 
   const { handleTermChange } = useSearchParams()
@@ -92,8 +107,6 @@ const CreateClipButton = ({
     })
       .then(() => {
         setIsLoading(false)
-        setStartTime(null)
-        setEndTime(null)
         setSessionId('')
         toast.success('Clip created')
       })
@@ -113,12 +126,13 @@ const CreateClipButton = ({
   }
 
   return (
-    <div className="flex flex-row flex-grow space-x-2">
-      <div className="flex flex-col w-full">
+    <div className="flex flex-col space-y-2 flex-grow">
+      <div className="flex flex-col flex-grow space-y-2 my-4">
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
           <Input
-            className="bg-white"
+            id="session-name"
+            className=" bg-white z-[999999]"
             placeholder="Enter session name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -128,7 +142,7 @@ const CreateClipButton = ({
             <SelectTrigger className="bg-white">
               <SelectValue placeholder="Select a session" />
             </SelectTrigger>
-            <SelectContent className="bg-white max-w-[400px] !justify-start">
+            <SelectContent className="bg-white !justify-start z-[999999]">
               {sessions?.map((session) => (
                 <SelectItem key={session._id} value={session._id}>
                   {session.name}
@@ -159,6 +173,78 @@ const CreateClipButton = ({
         )}
       </Button>
     </div>
+  )
+}
+
+const CreateClipButton = ({
+  currentRecording,
+  organization,
+  currentStage,
+  sessions,
+  playbackId,
+}: {
+  currentRecording: string
+  organization: IExtendedOrganization
+  playbackId: string
+  currentStage: IExtendedStage
+  sessions: {
+    sessions: IExtendedSession[]
+  }
+}) => {
+  const { isLoading } = useClipContext()
+
+  return (
+    <Dialog>
+      <DialogContent className="bg-white">
+        <div className="flex flex-col h-[300px] bg-white p-4">
+          <Tabs defaultValue={'sessions'}>
+            <TabsList className="border-y border-grey w-full !justify-start gap-5">
+              {sessions.sessions.length > 0 && (
+                <TabsTrigger className="px-0" value="sessions">
+                  Clip Session
+                </TabsTrigger>
+              )}
+              <TabsTrigger value="custom">
+                Create Custom Clip
+              </TabsTrigger>
+            </TabsList>
+            {sessions.sessions.length > 0 && (
+              <TabsContent value="sessions">
+                <div className="flex flex-row w-full space-x-2 items-center justify-center">
+                  <ClipButton
+                    selectedRecording={currentRecording}
+                    playbackId={playbackId}
+                    stageId={currentStage?._id}
+                    organizationId={organization._id as string}
+                    sessions={sessions.sessions}
+                  />
+                </div>
+              </TabsContent>
+            )}
+            <TabsContent value="custom">
+              <div className="flex flex-row w-full space-x-2 items-center justify-center">
+                <ClipButton
+                  selectedRecording={currentRecording}
+                  playbackId={playbackId}
+                  stageId={currentStage?._id}
+                  organizationId={organization._id as string}
+                  sessions={sessions.sessions}
+                  custom
+                />
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </DialogContent>
+      <DialogTrigger>
+        <Button
+          variant="primary"
+          className="w-full"
+          disabled={isLoading}>
+          Create Clip
+        </Button>
+      </DialogTrigger>
+    </Dialog>
   )
 }
 
