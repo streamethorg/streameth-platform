@@ -24,7 +24,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
     videoRef,
     playbackStatus,
     setEndTime,
-    endTime
+    endTime,
   } = useClipContext()
 
   const playbackRef = useRef<{ progress: number; offset: number }>({
@@ -41,8 +41,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
       const hls = new Hls()
       hls.loadSource(src)
       hls.attachMedia(videoRef.current)
-
-
 
       hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
         if (videoRef.current) {
@@ -66,8 +64,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
       videoRef.current.onseeked = () => {
         setIsLoading(false)
       }
-
-      
 
       // Set error handling
       hls.on(Hls.Events.ERROR, (event, data) => {

@@ -1,5 +1,10 @@
 'use client'
-import React, { createContext, useContext, useState, useRef } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+} from 'react'
 type PlaybackStatus = {
   progress: number
   offset: number
@@ -16,20 +21,18 @@ type ClipContextType = {
     React.SetStateAction<PlaybackStatus | null>
   >
   startTime: PlaybackTime
-  setStartTime: React.Dispatch<
-    React.SetStateAction<PlaybackTime>
-  >
+  setStartTime: React.Dispatch<React.SetStateAction<PlaybackTime>>
   endTime: PlaybackTime
-  setEndTime: React.Dispatch<
-    React.SetStateAction<PlaybackTime>
-  >
+  setEndTime: React.Dispatch<React.SetStateAction<PlaybackTime>>
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   videoRef: React.RefObject<HTMLVideoElement>
   dragging: string | null
   setDragging: React.Dispatch<React.SetStateAction<string | null>>
   selectedTooltip: string | null
-  setSelectedTooltip: React.Dispatch<React.SetStateAction<string | null>>
+  setSelectedTooltip: React.Dispatch<
+    React.SetStateAction<string | null>
+  >
 }
 
 const ClipContext = createContext<ClipContextType | null>(null)

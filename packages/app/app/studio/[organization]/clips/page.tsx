@@ -43,7 +43,6 @@ const ClipContainer = ({
 
 const SkeletonSidebar = () => (
   <div className="w-1/3 flex flex-col h-full bg-background bg-white border-l">
-
     <div className="h-[calc(100%-50px)] overflow-y-clip space-y-4">
       {[1, 2, 3, 4, 5].map((i) => (
         <div key={i} className="p-4 animate-pulse">

@@ -6,7 +6,12 @@ import React, {
   useCallback,
 } from 'react'
 import { useClipContext } from './ClipContext'
-import { ArrowLeftSquare, ArrowRightSquare, PlayIcon, PauseIcon } from 'lucide-react'
+import {
+  ArrowLeftSquare,
+  ArrowRightSquare,
+  PlayIcon,
+  PauseIcon,
+} from 'lucide-react'
 import { debounce } from 'lodash'
 
 const debouncedUpdate = debounce(
@@ -246,11 +251,11 @@ const ClipSlider = () => {
       <div className="flex flex-row w-full justify-center items-center  space-x-6 border-t border-b p-2">
         {videoRef.current?.paused ? (
           <button onClick={() => videoRef.current?.play()}>
-            <PlayIcon/>
+            <PlayIcon />
           </button>
         ) : (
           <button onClick={() => videoRef.current?.pause()}>
-            <PauseIcon/>
+            <PauseIcon />
           </button>
         )}
         <label>
