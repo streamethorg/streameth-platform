@@ -8,20 +8,8 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { IExtendedSession } from '@/lib/types'
 import { useState } from 'react'
-
-import {
-  getSessionMetrics,
-  updateSessionAction,
-} from '@/lib/actions/sessions'
-
-import {
-  ChevronDown,
-  Copy,
-  EllipsisVertical,
-  Earth,
-  Lock,
-  Loader2,
-} from 'lucide-react'
+import { updateSessionAction } from '@/lib/actions/sessions'
+import { ChevronDown, Earth, Lock, Loader2 } from 'lucide-react'
 
 const PublishCell = ({ item }: { item: IExtendedSession }) => {
   const [isLoading, setIsLoading] = useState(false)

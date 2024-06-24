@@ -11,10 +11,8 @@ import {
 
 const SidebarMenu = ({
   organizationSlug,
-  initalExpanded,
 }: {
   organizationSlug: string
-  initalExpanded?: boolean
 }) => {
   const navigationItems = [
     {
@@ -46,7 +44,7 @@ const SidebarMenu = ({
 
   return (
     <div className="relative z-[10]">
-      <SidebarUI initalExpanded={initalExpanded}>
+      <SidebarUI>
         {navigationItems.map((item, index) => (
           <SidebarItem
             key={index}
