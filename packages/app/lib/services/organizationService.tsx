@@ -210,3 +210,37 @@ export async function deleteTeamMember({
     throw e
   }
 }
+
+export async function fetchOrganizationSocials({
+  organizationId,
+}: {
+  organizationSlug?: string
+  organizationId?: string
+}): Promise<IExtendedOrganization | null> {
+  try {
+    if (!organizationId) {
+      return null
+    }
+    const authToken = cookies().get('user-session')?.value
+    if (!authToken) {
+      throw 'No auth token'
+    }
+
+    const response = await fetch(
+      `${apiUrl()}/organizations/${organizationId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        cache: 'no-store',
+      }
+    )
+    const data = (await response.json()).data
+
+    return data
+  } catch (e) {
+    console.log(e)
+    return null
+  }
+}

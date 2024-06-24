@@ -5,7 +5,7 @@ const { host, secretKey } = config.livepeer;
 import { Livepeer } from 'livepeer';
 import { IMultiStream } from '@interfaces/stream.interface';
 import Stage from '@models/stage.model';
-import { Session } from 'livepeer/dist/models/components';
+import { Session, Stream } from 'livepeer/dist/models/components';
 import SessionModel from '@models/session.model';
 import { SessionType } from '@interfaces/session.interface';
 const livepeer = new Livepeer({
@@ -58,7 +58,7 @@ export const deleteStream = async (streamId: string): Promise<void> => {
   }
 };
 
-export const getStreamInfo = async (streamId: string): Promise<any> => {
+export const getStreamInfo = async (streamId: string): Promise<Stream> => {
   try {
     const response = await fetch(`${host}/api/stream/${streamId}`, {
       method: 'get',

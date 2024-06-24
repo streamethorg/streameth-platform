@@ -152,7 +152,7 @@ const EventClips = async ({
   const currentRecording = (function () {
     if (selectedRecording) {
       const recording = stageRecordings?.recordings.find(
-        (recording: Session) => recording?.id === selectedRecording
+        (recording) => recording?.id === selectedRecording
       )
       if (recording) {
         return recording?.id ?? null
@@ -163,7 +163,7 @@ const EventClips = async ({
   })()
 
   if (
-    stageRecordings.recordings?.length === 0 ||
+    stageRecordings?.recordings?.length === 0 ||
     !stageRecordings?.parentStream?.id
   ) {
     return (

@@ -1,6 +1,6 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IOrganization } from '@interfaces/organization.interface';
+import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
@@ -121,5 +121,29 @@ export default class OrganizationService {
       { walletAddress: walletAddress },
       { $pull: { organizations: organizationId } },
     );
+  }
+
+  async addOrgSocial(organizationId: string, data: ISocials) {
+    await this.get(organizationId);
+    await Organization.findOneAndUpdate(
+      { _id: organizationId },
+      {
+        $addToSet: {
+          socials: {
+            type: data.type,
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+            expireTime: data.expireTime,
+            name: data.name,
+            thumbnail: data.thumbnail,
+          },
+        },
+      },
+    );
+  }
+
+  async deleteOrgSocial(organizationId: string, socialId: string) {
+    await this.get(organizationId);
+    await Organization.updateOne({ $pull: { social: { _id: socialId } } });
   }
 }

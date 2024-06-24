@@ -46,4 +46,5 @@ export const config = {
     appId: validatedEnv.PRIVY_APP_ID,
     appSecret: validatedEnv.PRIVY_SECRET_KEY,
   },
+  oauthSecret: validatedEnv.OAUTH_SECRET,
 };
