@@ -1,0 +1,4 @@
+.env
+tmp
+src/debug
+src/error

@@ -1,0 +1,23 @@
+{
+  "name": "@streameth/video-joiner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "queue": "node -r esbuild-runner/register ./src/video-queue.ts",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/amqplib": "^0.10.5",
+    "@types/node": "^20.14.6",
+    "esbuild": "^0.21.5",
+    "esbuild-runner": "^2.2.2",
+    "prettier": "^3.3.2"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "google-auth-library": "^9.11.0",
+    "googleapis": "^140.0.0",
+    "mongodb": "^6.7.0"
+  }
+}
