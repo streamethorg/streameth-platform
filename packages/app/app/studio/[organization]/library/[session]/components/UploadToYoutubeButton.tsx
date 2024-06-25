@@ -9,6 +9,7 @@ import { IExtendedOrganization } from '@/lib/types'
 import Link from 'next/link'
 
 import React, { useState } from 'react'
+import { SiYoutube } from 'react-icons/si'
 
 const NoYoutubeChannelModal = ({
   hasChannel,
@@ -78,7 +79,8 @@ const UploadToYoutubeButton = ({
     <>
       <Dialog>
         <DialogTrigger>
-          <Button variant={'destructive'} className="m-4">
+          <Button className="bg-[#FF0000] min-w-[200px]">
+            <SiYoutube className="mr-2" />
             Publish to Youtube
           </Button>
         </DialogTrigger>

@@ -64,7 +64,7 @@ const OrganizationPage = async ({
         <CardTitle className="p-4 font-bold text-lg">
           Livestreams
         </CardTitle>
-        <CardContent className="m-0 p-0">
+        <CardContent className="!m-0 !p-0">
           <Suspense
             key={searchParams.toString()}
             fallback={<Loading />}>
@@ -87,7 +87,7 @@ const OrganizationPage = async ({
         <CardTitle className="p-4 font-bold text-lg">
           Library
         </CardTitle>
-        <CardContent className="m-0 p-0">
+        <CardContent className="!m-0 !p-0">
           <LibraryListLayout
             sessions={
               sortedSessions.slice(0, 5) as IExtendedSession[]
