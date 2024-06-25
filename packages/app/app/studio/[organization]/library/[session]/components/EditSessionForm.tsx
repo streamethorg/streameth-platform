@@ -24,7 +24,6 @@ import DeleteAsset from '../../components/DeleteAsset'
 import { Textarea } from '@/components/ui/textarea'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { useRouter } from 'next/navigation'
-import Combobox from '@/components/ui/combo-box'
 import {
   Select,
   SelectContent,
@@ -33,7 +32,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const EditSessionFrom = ({
+const EditSessionForm = ({
   session,
   organizationSlug,
 }: {
@@ -81,9 +80,6 @@ const EditSessionFrom = ({
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {
-          console.error('Error:', errors)
-        }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6">
         <FormField
@@ -94,14 +90,11 @@ const EditSessionFrom = ({
               <FormLabel required>Video title</FormLabel>
               <FormControl>
                 <Input
-                  className={
-                    'bg-white border border-gray-300 rounded-md'
-                  }
+                  className="bg-white rounded-md border border-gray-300"
                   placeholder="name"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -113,14 +106,11 @@ const EditSessionFrom = ({
               <FormLabel required>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  className={
-                    'bg-white border border-gray-300 rounded-md'
-                  }
+                  className="bg-white rounded-md border border-gray-300"
                   placeholder="description"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -147,7 +137,6 @@ const EditSessionFrom = ({
                   </SelectContent>
                 </Select>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -165,7 +154,6 @@ const EditSessionFrom = ({
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -202,4 +190,4 @@ const EditSessionFrom = ({
   )
 }
 
-export default EditSessionFrom
+export default EditSessionForm

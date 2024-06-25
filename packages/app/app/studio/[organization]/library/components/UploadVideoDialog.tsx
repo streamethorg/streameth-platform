@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import UploadVideoForm from './upload/UploadVideoForm'
 import { useState } from 'react'
 import UploadComplete from '@/lib/svg/UploadComplete'
+import { useRouter } from 'next/navigation'
 
 const UploadVideoDialog = ({
   organizationId,
@@ -21,6 +22,7 @@ const UploadVideoDialog = ({
 }) => {
   const [open, setOpen] = useState(false)
   const [isUploaded, setIsUploaded] = useState(false)
+  const router = useRouter()
 
   const onFinish = () => {
     setIsUploaded(true)
@@ -57,7 +59,7 @@ const UploadVideoDialog = ({
             <Button
               variant={'secondary'}
               className="mx-auto w-1/3 border-2"
-              onClick={() => location.reload()}>
+              onClick={() => router.refresh()}>
               Go back to Assets
             </Button>
           </>

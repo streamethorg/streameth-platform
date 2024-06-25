@@ -14,18 +14,25 @@ import { Input } from '@/components/ui/input'
 import GetHashButton from '../components/GetHashButton'
 import TextPlaceholder from '@/components/ui/text-placeholder'
 import { Button } from '@/components/ui/button'
-import { SiTwitter, SiYoutube } from 'react-icons/si'
+import { SiTwitter } from 'react-icons/si'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { Card, CardContent } from '@/components/ui/card'
+import CopyItem from '@/components/misc/CopyString'
+import UploadToYoutubeButton from './components/UploadToYoutubeButton'
+import { fetchOrganization } from '@/lib/services/organizationService'
 
 const EditSession = async ({
   params,
   searchParams,
 }: studioPageParams) => {
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
   const session = await fetchSession({
     session: params.session,
   })
@@ -100,13 +107,16 @@ const EditSession = async ({
                   <div className="min-w-[200px]">
                     <GetHashButton session={session} />
                   </div>
-                  <Button className="bg-[#FF0000] min-w-[200px]">
-                    <SiYoutube className="mr-2" />
-                    Publish to Youtube
-                  </Button>
+
+                  <UploadToYoutubeButton
+                    organization={organization}
+                    organizationSlug={params.organization}
+                    sessionId={session._id}
+                    hasChannel={searchParams?.hasChannel}
+                  />
                   <Button className="bg-[#121212] min-w-[200px]">
                     <SiTwitter className="mr-2" /> Publish to
-                    X(Twitter)
+                    X(Twitter) (Coming Soon)
                   </Button>
                 </div>
               </AccordionContent>

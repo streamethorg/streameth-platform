@@ -110,16 +110,19 @@ const speakerSchema = z.object({
 })
 
 export const sessionSchema = z.object({
-  name: z
-    .string()
-    .min(1, { message: 'Name is required' })
-    .max(100, { message: 'Name is too long' }),
+  name: z.string().min(1, { message: 'Name is required' }).max(100, {
+    message:
+      'Name is too long. The maximum length is 100 characters.',
+  }),
   description: z
     .string()
     .min(1, { message: 'Description is required' })
-    .max(300, { message: 'Description is too long' }),
+    .max(600, {
+      message:
+        'Description is too long. The maximum length is 600 characters.',
+    }),
   coverImage: z.string().optional(),
-  assetId: z.string().min(1, { message: 'Please upload a video' }),
+  assetId: z.string().min(1, { message: 'Please upload a video.' }),
   published: z.boolean().default(false),
 })
 

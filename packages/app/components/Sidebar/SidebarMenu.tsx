@@ -43,7 +43,7 @@ const SidebarMenu = ({
   ]
 
   return (
-    <div className="relative z-[10]">
+    <div className="relative w-[1/4]">
       <SidebarUI>
         {navigationItems.map((item, index) => (
           <SidebarItem

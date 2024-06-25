@@ -1,4 +1,7 @@
-import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
+import {
+  IOrganization,
+  ISocials,
+} from 'streameth-new-server/src/interfaces/organization.interface'
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
@@ -97,6 +100,7 @@ export interface studioPageParams {
     stageSetting: string
     streamId: string
     collapsed?: boolean
+    hasChannel?: string
   }
 }
 
@@ -131,9 +135,14 @@ export interface IGoogleAuth {
 export interface IExtendedEvent extends IEvent {
   _id: string
 }
-export interface IExtendedOrganization
-  extends Omit<IOrganization, '_id'> {
+
+interface IExtendedSocials extends ISocials {
   _id: string
+}
+export interface IExtendedOrganization
+  extends Omit<IOrganization, '_id' | 'socials'> {
+  _id: string
+  socials?: IExtendedSocials[]
 }
 export interface IExtendedSession
   extends Omit<ISession, '_id' | 'nftCollections'> {

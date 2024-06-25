@@ -9,6 +9,7 @@ import {
   createClip,
   createAsset,
   generateThumbnail,
+  uploadSessionToYouTube,
 } from '../services/sessionService'
 import {
   ISession,
@@ -170,6 +171,31 @@ export const generateThumbnailAction = async (
 
   try {
     const res = await generateThumbnail({ session, authToken })
+
+    return res
+  } catch (e) {
+    console.error('Error generating thumbnail acton')
+    return null
+  }
+}
+export const uploadSessionToYouTubeAction = async ({
+  sessionId,
+  googleToken,
+}: {
+  sessionId: string
+  googleToken: string
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  try {
+    const res = await uploadSessionToYouTube({
+      sessionId,
+      googleToken,
+      authToken,
+    })
 
     return res
   } catch (e) {

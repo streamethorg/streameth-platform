@@ -37,7 +37,7 @@ const DeleteAsset = ({
     setLoading(false)
 
     if (href === 'refresh') {
-      location.reload()
+      router.refresh()
     }
     router.push(href)
   }

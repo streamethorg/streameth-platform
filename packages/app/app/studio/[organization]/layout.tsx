@@ -36,7 +36,7 @@ const Layout = async ({
           organizations={userData?.organizations}
         />
 
-        <div className="top-[64px] overflow-hidden flex flex-col h-[calc(100vh-54px)] border-t border-secondary">
+        <div className="top-[54px] overflow-hidden flex flex-col h-[calc(100vh-54px)] border-t border-secondary">
           {!hasOrganization(
             userData?.organizations,
             params.organization
@@ -57,7 +57,7 @@ const Layout = async ({
             </div>
           ) : (
             <div className="flex flex-row w-full h-full">
-              <div className=" w-full h-full">
+              <div className="w-full h-full">
                 {children}
                 <Support />
               </div>
