@@ -89,7 +89,7 @@ export default class CollectionService {
   }
 
   async getAll(): Promise<Array<INftCollection>> {
-    return await this.controller.store.findAll({}, this.path);
+    return await this.controller.store.findAll({});
   }
 
   async findAllNftForOrganization(
