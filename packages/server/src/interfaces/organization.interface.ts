@@ -1,6 +1,7 @@
 import { Document, Types } from 'mongoose';
 
 export interface ISocials {
+  _id?: string;
   type: string;
   accessToken: string;
   refreshToken: string;
