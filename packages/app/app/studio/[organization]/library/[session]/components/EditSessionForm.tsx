@@ -16,25 +16,22 @@ import {
 import { Input } from '@/components/ui/input'
 import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import {
-  Loader2,
-  Trash2,
-  Earth,
-  Lock,
-  ChevronDown,
-} from 'lucide-react'
+import { Loader2, Trash2 } from 'lucide-react'
 import { IExtendedSession } from '@/lib/types'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import DeleteAsset from '../../components/DeleteAsset'
 import { Textarea } from '@/components/ui/textarea'
 import ImageUpload from '@/components/misc/form/imageUpload'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
 import { useRouter } from 'next/navigation'
+import Combobox from '@/components/ui/combo-box'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 const EditSessionFrom = ({
   session,
@@ -53,6 +50,7 @@ const EditSessionFrom = ({
       description: session.description,
       coverImage: session.coverImage,
       assetId: session.assetId,
+      published: session.published,
     },
   })
 
@@ -93,9 +91,7 @@ const EditSessionFrom = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Video title <span className="text-red-500">*</span>
-              </FormLabel>
+              <FormLabel required>Video title</FormLabel>
               <FormControl>
                 <Input
                   className={
@@ -114,9 +110,7 @@ const EditSessionFrom = ({
           name="description"
           render={({ field }) => (
             <FormItem className="h-50">
-              <FormLabel>
-                Description <span className="text-red-500">*</span>
-              </FormLabel>
+              <FormLabel required>Description</FormLabel>
               <FormControl>
                 <Textarea
                   className={
@@ -130,44 +124,28 @@ const EditSessionFrom = ({
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="published"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-[200px]">
               <FormLabel>Visibility</FormLabel>
               <FormControl>
-                <div className="flex justify-start items-center space-x-2">
-                  {field.value ? (
-                    <>
-                      <Earth size={16} />
-                      <p>Public</p>
-                    </>
-                  ) : (
-                    <>
-                      <Lock size={16} />
-                      <p>Private</p>
-                    </>
-                  )}
-                  <Popover>
-                    <PopoverTrigger>
-                      <ChevronDown size={20} />
-                    </PopoverTrigger>
-                    <PopoverContent className="flex justify-start items-center space-x-2 transition-colors cursor-pointer hover:bg-gray-200 w-[150px] z-[999999999999999]">
-                      {!field.value ? (
-                        <>
-                          <Earth size={16} />
-                          <p>Make Public</p>
-                        </>
-                      ) : (
-                        <>
-                          <Lock size={16} />
-                          <p>Make Private</p>
-                        </>
-                      )}
-                    </PopoverContent>
-                  </Popover>
-                </div>
+                <Select
+                  onValueChange={(value) =>
+                    field.onChange(value === 'true')
+                  }>
+                  <SelectTrigger className="bg-white">
+                    <SelectValue
+                      placeholder={field.value ? 'Public' : 'Private'}
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="true">Public</SelectItem>
+                    <SelectItem value="false">Private</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
