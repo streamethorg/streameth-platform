@@ -60,30 +60,26 @@ const OrganizationPage = async ({
           </div>
         </Link>
       </div>
-      <Card className="mb-4 pb-4 shadow-none">
-        <CardTitle className="p-4 font-bold text-lg">
-          Livestreams
-        </CardTitle>
-        <CardContent className="!m-0 !p-0">
-          <Suspense
-            key={searchParams.toString()}
-            fallback={<Loading />}>
-            <LivestreamTable
-              organizationSlug={params?.organization}
-              streams={stages.slice(0, 5) as IExtendedStage[]}
-            />
-          </Suspense>
-          {stages?.length > 5 && (
+      {/* <Card className="mb-4 pb-4 shadow-none"> */}
+      <p className="p-4 font-bold text-lg">Livestreams</p>
+      {/* <CardContent className="!m-0 !p-0"> */}
+      <Suspense key={searchParams.toString()} fallback={<Loading />}>
+        <LivestreamTable
+          organizationSlug={params?.organization}
+          streams={stages as IExtendedStage[]}
+        />
+      </Suspense>
+      {/* {stages?.length > 5 && (
             <Link
               href={`/studio/${params.organization}/livestreams`}
               className="flex justify-end p-4 text-primary text-sm">
               See more
             </Link>
-          )}
-        </CardContent>
-      </Card>
+          )} */}
+      {/* </CardContent> */}
+      {/* </Card> */}
 
-      <Card className="shadow-none pb-4 bg-white">
+      {/* <Card className="shadow-none pb-4 bg-white">
         <CardTitle className="p-4 font-bold text-lg">
           Library
         </CardTitle>
@@ -102,7 +98,7 @@ const OrganizationPage = async ({
             </Link>
           )}
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   )
 }

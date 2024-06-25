@@ -81,7 +81,7 @@ const UploadToYoutubeButton = ({
         <DialogTrigger>
           <Button className="bg-[#FF0000] min-w-[200px]">
             <SiYoutube className="mr-2" />
-            Publish to Youtube
+            Publish to Youtube (Coming Soon)
           </Button>
         </DialogTrigger>
         <DialogContent className="px-8">

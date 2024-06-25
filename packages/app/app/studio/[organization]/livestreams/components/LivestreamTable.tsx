@@ -33,7 +33,7 @@ const LivestreamTable = ({
 }) => {
   return (
     <Table className="bg-white">
-      <TableHeader className="sticky top-0 z-50 !overflow-auto bg-white">
+      <TableHeader className="sticky  top-0 bg-white">
         <TableRow className="border-b hover:bg-white rounded-t-xl">
           <TableHead>
             <TableSort title="Title" sortBy="name" />
@@ -45,7 +45,7 @@ const LivestreamTable = ({
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="overflow-auto ">
+      <TableBody className="overflow-auto">
         {streams?.map((stream) => (
           <TableRow key={stream._id}>
             <TableCell className="font-medium max-w-[500px]">

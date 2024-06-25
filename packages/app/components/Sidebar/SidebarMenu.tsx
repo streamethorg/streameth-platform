@@ -25,11 +25,11 @@ const SidebarMenu = ({
       navigationPath: '/library',
       icon: <Videotape size={25} />,
     },
-    {
-      text: 'Livestreams',
-      navigationPath: '/livestreams',
-      icon: <Radio size={25} />,
-    },
+    // {
+    //   text: 'Livestreams',
+    //   navigationPath: '/livestreams',
+    //   icon: <Radio size={25} />,
+    // },
     {
       text: 'Team',
       navigationPath: '/team',
