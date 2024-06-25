@@ -117,5 +117,5 @@ export class UpdateSessionDto {
 
   @IsOptional()
   @IsArray()
-  socials?: string[];
+  socials?: { name: string; date: number }[];
 }
