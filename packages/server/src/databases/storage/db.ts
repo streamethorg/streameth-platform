@@ -25,8 +25,8 @@ export default class DB<T> implements IStorageController<T> {
     return await this.model.findById(id);
   }
 
-  async findById(id: string): Promise<T> {
-    return await this.model.findById(id);
+  async findById(id: string, fields: {}): Promise<T> {
+    return await this.model.findById(id, fields);
   }
 
   async findOne(query: {}): Promise<T> {
@@ -35,11 +35,12 @@ export default class DB<T> implements IStorageController<T> {
 
   async findAll(
     query: {},
+    fields: {},
     path: string,
     skip: number,
     pageSize: number,
   ): Promise<Array<T>> {
-    return await this.model.find(query).skip(skip).limit(pageSize);
+    return await this.model.find(query, fields).skip(skip).limit(pageSize);
   }
 
   async findAllAndSort(

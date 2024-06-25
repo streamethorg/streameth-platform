@@ -114,4 +114,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsBoolean()
   active?: boolean;
+
+  @IsOptional()
+  @IsArray()
+  socials?: string[];
 }
