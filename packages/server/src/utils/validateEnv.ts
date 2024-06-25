@@ -35,6 +35,11 @@ const validateEnv = () => {
     PRIVY_APP_ID: str(),
     PRIVY_SECRET_KEY: str(),
     TEST_URL: str(),
+    GOOGLE_OAUTH_SECRET: str(),
+    GOOGLE_CLIENT_ID: str(),
+    TWITTER_OAUTH_SECRET: str(),
+    TWITTER_CLIENT_ID: str(),
+    MQ_HOST: str(),
   });
 };
 
