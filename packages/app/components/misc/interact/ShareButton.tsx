@@ -43,7 +43,7 @@ export const ShareModalContent = ({
     // This code will only run on the client side
     if (typeof window === 'undefined') return
     !url && setCurrentUrl(window.location.href)
-  }, [])
+  }, [url])
 
   return (
     <CredenzaContent className="max-w-[525px]">

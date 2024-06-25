@@ -30,14 +30,16 @@ const GetHashButton = ({
   }
   return (
     <div className="flex flex-col w-full">
-      <Label>IPFS hash</Label>
       {session.ipfsURI ? (
-        <TextPlaceholder text={session.ipfsURI} />
+        <>
+          <Label>IPFS hash</Label>
+          <TextPlaceholder text={session.ipfsURI} />
+        </>
       ) : (
         <Button
           loading={isGettingHash}
           variant="default"
-          className="bg-teal-400 text-white"
+          className="bg-[#0b3a53] text-white"
           onClick={() => handleGetHash()}>
           Publish to IPFS
         </Button>

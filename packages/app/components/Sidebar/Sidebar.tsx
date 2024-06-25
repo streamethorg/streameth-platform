@@ -22,8 +22,9 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
     <aside className="flex flex-col h-screen bg-primary">
       <div className="flex justify-between items-center p-4 pb-2">
         <div
-          className={`flex items-center overflow-hidden transition-all ${expanded ? 'w-48' : 'w-0'
-            }`}>
+          className={`flex items-center overflow-hidden transition-all ${
+            expanded ? 'w-48' : 'w-0'
+          }`}>
           <div className="pl-2">
             <StreamethStudio />
           </div>
@@ -46,8 +47,9 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
         href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
         <BookOpenText className="w-6 h-6" />
         <span
-          className={`overflow-hidden transition-all ${expanded ? 'w-52 ml-3' : 'w-0'
-            }`}>
+          className={`overflow-hidden transition-all ${
+            expanded ? 'w-52 ml-3' : 'w-0'
+          }`}>
           Docs
         </span>
         {expanded && <MoveUpRight className="ml-auto" size={12} />}
@@ -94,15 +96,17 @@ export const SidebarItem = ({
         relative flex items-center py-2 px-3 my-1
             font-medium rounded-md cursor-pointer
             transition-colors group
-            ${active
-          ? 'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'
-          : 'hover:bg-secondary-foreground'
-        }
+            ${
+              active
+                ? 'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'
+                : 'hover:bg-secondary-foreground'
+            }
     `}>
       {icon}
       <span
-        className={`overflow-hidden transition-all ${expanded ? 'w-52 ml-3' : 'w-0'
-          }`}>
+        className={`overflow-hidden transition-all ${
+          expanded ? 'w-52 ml-3' : 'w-0'
+        }`}>
         {text}
       </span>
 

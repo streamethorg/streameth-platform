@@ -13,6 +13,14 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import GetHashButton from '../components/GetHashButton'
 import TextPlaceholder from '@/components/ui/text-placeholder'
+import { Button } from '@/components/ui/button'
+import { SiTwitter, SiYoutube } from 'react-icons/si'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 const EditSession = async ({
   params,
@@ -35,7 +43,7 @@ const EditSession = async ({
   if (!video) return notFound()
 
   return (
-    <div className="p-4 h-full">
+    <div className="p-4 h-full overflow-auto">
       <Link href={`/studio/${params.organization}/library`}>
         <div className="flex justify-start items-center mb-4 space-x-4">
           <ArrowLeft />
@@ -43,15 +51,15 @@ const EditSession = async ({
         </div>
       </Link>
 
-      <div className="flex flex-row space-x-4">
-        <div className="p-4 space-y-4 w-2/3 bg-white rounded-xl border">
+      <div className="flex flex-col md:flex-row gap-4 overflow-auto">
+        <div className="p-4 space-y-4 md:w-2/3 bg-white rounded-xl border">
           <h1 className="text-lg font-bold">Video Details</h1>
           <EditSessionForm
             session={session}
             organizationSlug={params.organization}
           />
         </div>
-        <div className="flex flex-col space-y-4 w-1/3">
+        <div className="flex flex-col space-y-4 md:w-1/3">
           <PlayerWithControls
             src={[
               {
@@ -63,40 +71,77 @@ const EditSession = async ({
               },
             ]}
           />
-          <div className="flex flex-col p-4 space-y-4 bg-white rounded-xl border">
-            <h1 className="text-lg font-bold">Publish video</h1>
-            <div className="flex flex-row">
-              <GetHashButton session={session} />
-            </div>
-          </div>
-          <div className="flex flex-col p-4 space-y-4 bg-white rounded-xl border">
-            <h1 className="text-lg font-bold">Video data</h1>
-            {session.playbackId && (
-              <div>
-                <Label>Playback Id</Label>
-                <TextPlaceholder text={session.playbackId} />
-              </div>
-            )}
-            {session.assetId && (
-              <div>
-                <Label>Asset Id</Label>
-                <TextPlaceholder text={session.assetId} />
-              </div>
-            )}
-            {session.videoTranscription && (
-              <div>
-                <Label>Transcript</Label>
-                <TextPlaceholder text={session.videoTranscription} />
-              </div>
-            )}
-          </div>
-          {/* <SessionOptions
-            name={video.name}
-            sessionId={params.session}
-            organizationSlug={params.organization}
-            playbackId={video.playbackId!}
-            assetId={session.assetId}
-          /> */}
+
+          <Accordion
+            className="space-y-4"
+            type="multiple"
+            defaultValue={['publishVideo', 'menu']}>
+            <AccordionItem defaultChecked value="menu">
+              <AccordionContent>
+                <SessionOptions
+                  name={video.name}
+                  sessionId={params.session}
+                  organizationSlug={params.organization}
+                  playbackId={video.playbackId!}
+                  assetId={session.assetId}
+                />
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem
+              className="bg-white rounded-xl border px-4"
+              value="publishVideo"
+              defaultChecked>
+              <AccordionTrigger>
+                <h1 className="text-lg font-bold">Publish video</h1>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="gap-2 flex flex-wrap">
+                  <div className="min-w-[200px]">
+                    <GetHashButton session={session} />
+                  </div>
+                  <Button className="bg-[#FF0000] min-w-[200px]">
+                    <SiYoutube className="mr-2" />
+                    Publish to Youtube
+                  </Button>
+                  <Button className="bg-[#121212] min-w-[200px]">
+                    <SiTwitter className="mr-2" /> Publish to
+                    X(Twitter)
+                  </Button>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem
+              className="bg-white rounded-xl border px-4"
+              value="videoData">
+              <AccordionTrigger>
+                <h1 className="text-lg font-bold">Video data</h1>
+              </AccordionTrigger>
+              <AccordionContent className="space-y-4 ">
+                {session.playbackId && (
+                  <div>
+                    <Label>Playback Id</Label>
+                    <TextPlaceholder text={session.playbackId} />
+                  </div>
+                )}
+                {session.assetId && (
+                  <div>
+                    <Label>Asset Id</Label>
+                    <TextPlaceholder text={session.assetId} />
+                  </div>
+                )}
+                {session.videoTranscription && (
+                  <div>
+                    <Label>Transcript</Label>
+                    <TextPlaceholder
+                      text={session.videoTranscription}
+                    />
+                  </div>
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </div>
