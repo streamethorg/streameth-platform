@@ -1,9 +1,7 @@
 const shouldAnalyzeBundles = process.env.ANALYZE === true
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production'
-let nextConfig = {
-  assetPrefix: isProd ? 'https://streameth.org' : undefined,
 
+let nextConfig = {
   redirects: async () => [
     {
       source: '/',
@@ -15,7 +13,7 @@ let nextConfig = {
         {
           type: 'host',
           value: 'www.streameth.org',
-        }
+        },
       ],
       destination: 'https://info.streameth.org',
       permanent: true,
