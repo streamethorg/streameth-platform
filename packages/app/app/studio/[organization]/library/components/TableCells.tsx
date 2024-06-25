@@ -62,13 +62,7 @@ const TableCells = async ({
           )}
         </TableCell>
       )}
-      {/* <TableCell className="relative max-w-[200px]">
-        {item.ipfsURI ? (
-          <CopyItem item={item.ipfsURI} itemName="IPFS Uri" />
-        ) : (
-          <GetHashButton session={item} />
-        )}
-      </TableCell> */}
+
       <TableCell className="relative max-w-[100px]">
         {views}
       </TableCell>

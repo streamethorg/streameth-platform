@@ -2,7 +2,7 @@
 
 import { fetchAllSessions } from '@/lib/data'
 import { redirect } from 'next/navigation'
-import ListLayout from './components/ListLayout'
+import LibraryListLayout from './components/LibraryListLayout'
 import {
   Card,
   CardDescription,
@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import UploadVideoDialog from './components/UploadVideoDialog'
-import GridLayout from './components/GridLayout'
 import { fetchAllStates } from '@/lib/services/stateService'
 import {
   StateStatus,
@@ -25,6 +24,7 @@ import { IExtendedSession, eLayout, eSort } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
 import { sortArray } from '@/lib/utils/utils'
+import LibraryGridLayout from './components/LibraryGridLayout'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -114,13 +114,13 @@ const Library = async ({
       ) : (
         <>
           {eLayout.list === searchParams.layout && (
-            <ListLayout
+            <LibraryListLayout
               sessions={sortedSessions}
               organizationSlug={params.organization}
             />
           )}
           {eLayout.grid === searchParams.layout && (
-            <GridLayout
+            <LibraryGridLayout
               sessions={sortedSessions}
               organizationSlug={params.organization}
             />

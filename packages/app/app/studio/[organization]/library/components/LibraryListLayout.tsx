@@ -12,7 +12,7 @@ import { IExtendedSession, eSort } from '@/lib/types'
 import LayoutSelection from './LayoutSelection'
 import TableSort from '@/components/misc/TableSort'
 
-const ListLayout = async ({
+const LibraryListLayout = async ({
   sessions,
   organizationSlug,
 }: {
@@ -36,7 +36,7 @@ const ListLayout = async ({
           </TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="overflow-scroll">
+      <TableBody className="overflow-auto">
         {sessions.map((item) => (
           <TableRow key={item._id}>
             <TableCells item={item} organization={organizationSlug} />
@@ -47,4 +47,4 @@ const ListLayout = async ({
   )
 }
 
-export default ListLayout
+export default LibraryListLayout

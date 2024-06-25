@@ -1,6 +1,12 @@
 'use server'
 
-import { CardDescription, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import React, { Suspense } from 'react'
 import CreateLivestreamModal from './components/CreateLivestreamModal'
 import { fetchOrganization } from '@/lib/services/organizationService'
@@ -37,10 +43,27 @@ export const Livestreams = async ({
   )
 
   return (
-    <div className="flex flex-col bg-white rounded-xl border min-h-[300px]">
+    <div className="flex flex-col bg-white rounded-xl border h-full">
+      <Card
+        style={{
+          backgroundImage: `url(/backgrounds/livestreamBg.png)`,
+        }}
+        className="p-4 bg-no-repeat bg-cover rounded-none border-none shadow-none">
+        <CardHeader>
+          <CardTitle>Livestreams</CardTitle>
+          <CardDescription className="max-w-[500px]">
+            Manage your old livestreams or go live!
+          </CardDescription>
+        </CardHeader>
+        <CardFooter>
+          <CreateLivestreamModal
+            show={searchParams?.show}
+            organization={organization}
+          />
+        </CardFooter>
+      </Card>
       {stages.length > 0 ? (
         <LivestreamTable
-          organization={organization}
           organizationSlug={params?.organization}
           streams={stages as IExtendedStage[]}
         />
@@ -55,7 +78,7 @@ export const Livestreams = async ({
             <CardDescription>
               Create your first livestream to get started!
             </CardDescription>
-            <div className="mt-2 w-fit">
+            <div className="mt-2 w-fit overflow-auto">
               <CreateLivestreamModal organization={organization} />
             </div>
           </div>
