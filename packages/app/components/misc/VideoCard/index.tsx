@@ -8,7 +8,6 @@ import {
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import { IExtendedSession, IExtendedEvent } from '@/lib/types'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { generateThumbnailAction } from '@/lib/actions/sessions'
 
 const VideoCard = ({

@@ -112,7 +112,7 @@ const Navigation = ({
         onClick={() => setIsCollapsed(!isCollapsed)}
         className="flex justify-center items-center mt-auto mb-5 w-full text-white cursor-pointer">
         {isCollapsed ? (
-          <ArrowRightFromLine className="cursor-pointer" />
+          <ArrowRightFromLine className="cursor-pointer mx-auto" />
         ) : (
           <div className="flex flex-row">
             <ArrowLeftToLine className="mr-1 cursor-pointer" />

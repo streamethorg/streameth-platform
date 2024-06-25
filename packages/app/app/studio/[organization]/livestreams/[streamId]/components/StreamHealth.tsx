@@ -41,6 +41,7 @@ const StreamHealth = ({
       checkIsHealthy()
     }, 10000)
   }, [stream?.streamSettings?.isHealthy, isLive])
+
   return (
     isLive && (
       <Card className="w-full bg-white shadow-none">

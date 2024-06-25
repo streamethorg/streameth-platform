@@ -1,50 +1,30 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { useState } from 'react'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { createMultistreamAction } from '@/lib/actions/stages'
-import { ReloadIcon } from '@radix-ui/react-icons'
-import { useFormState, useFormStatus } from 'react-dom'
 import { Plus } from 'lucide-react'
-
-const initialState = {
-  message: '',
-  success: false,
-}
+import StreamPlatformGrid from './StreamPlatforms'
 
 export const CreateMultistreamTarget = ({
   streamId,
   organizationId,
   btnName = 'Add',
 }: {
-  streamId?: string
-  organizationId?: string
+  streamId: string
+  organizationId: string
   btnName?: string
 }) => {
-  const [open, setOpen] = useState(false)
-  const [state, formAction] = useFormState(
-    createMultistreamAction,
-    initialState
-  )
-
-  useEffect(() => {
-    if (state.message) {
-      toast[state.success ? 'success' : 'error'](state.message)
-      setOpen(false)
-    }
-  }, [state])
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="primary" className="space-x-2">
           <Plus />
@@ -57,6 +37,11 @@ export const CreateMultistreamTarget = ({
             Create multistream target
           </DialogTitle>
         </DialogHeader>
+        <StreamPlatformGrid
+          streamId={streamId}
+          organizationId={organizationId}
+          setIsOpen={setIsOpen}
+        />
       </DialogContent>
     </Dialog>
   )

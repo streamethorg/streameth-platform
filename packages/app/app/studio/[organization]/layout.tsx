@@ -8,8 +8,6 @@ import CheckAuthorization from '@/components/authorization/CheckAuthorization'
 import { hasOrganization } from '@/lib/utils/utils'
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import Link from 'next/link'
-import Navigation from './components/Navigation'
-import { fetchOrganization } from '@/lib/services/organizationService'
 import SidebarMenu from '@/components/Sidebar/SidebarMenu'
 import Support from '@/components/misc/Support'
 
