@@ -84,15 +84,14 @@ export const createMultistreamAction = async (
       authToken,
       organizationId,
     })
-
     revalidatePath('/studio')
     if (!response) {
-      throw new Error('Error creating multistream:')
+      throw new Error('Error creating multistream')
     }
     return { message: response.message, success: true }
   } catch (error) {
     console.error(error)
-    return { message: 'Error creating multistream:', success: false }
+    return { message: 'Error creating multistream', success: false }
   }
 }
 

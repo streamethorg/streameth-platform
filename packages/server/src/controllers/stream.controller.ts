@@ -70,7 +70,6 @@ export class StreamController extends Controller {
   async createAsset(
     @Body() body: any,
   ): Promise<IStandardResponse<{ url: string; assetId: string }>> {
-    console.log('boddddu', body);
     return SendApiResponse('Asset created', await createAsset(body.fileName));
   }
 

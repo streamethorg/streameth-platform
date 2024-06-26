@@ -21,6 +21,7 @@ const DeleteTeamMember = ({
 }) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const [open, setOpen] = useState(false)
+
   const handleDeleteMember = async () => {
     setIsDeleting(true)
     await deleteTeamMemberAction({

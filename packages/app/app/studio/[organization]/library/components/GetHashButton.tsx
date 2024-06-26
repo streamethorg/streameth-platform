@@ -1,6 +1,8 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import TextPlaceholder from '@/components/ui/text-placeholder'
 import { updateAssetAction } from '@/lib/actions/sessions'
 import { IExtendedSession } from '@/lib/types'
 import React, { useState } from 'react'
@@ -12,6 +14,7 @@ const GetHashButton = ({
   session: IExtendedSession
 }) => {
   const [isGettingHash, setIsGetHash] = useState(false)
+
   const handleGetHash = async () => {
     setIsGetHash(true)
     await updateAssetAction(session)
@@ -26,12 +29,22 @@ const GetHashButton = ({
       })
   }
   return (
-    <Button
-      loading={isGettingHash}
-      variant="primary"
-      onClick={() => handleGetHash()}>
-      Upload to IPFS
-    </Button>
+    <div className="flex flex-col w-full">
+      {session.ipfsURI ? (
+        <>
+          <Label>IPFS hash</Label>
+          <TextPlaceholder text={session.ipfsURI} />
+        </>
+      ) : (
+        <Button
+          loading={isGettingHash}
+          variant="default"
+          className="bg-[#0b3a53] text-white"
+          onClick={() => handleGetHash()}>
+          Publish to IPFS
+        </Button>
+      )}
+    </div>
   )
 }
 

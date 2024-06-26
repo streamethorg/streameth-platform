@@ -1,3 +1,5 @@
+'use server'
+
 import {
   Card,
   CardDescription,
@@ -8,39 +10,22 @@ import {
 import React, { Suspense } from 'react'
 import CreateLivestreamModal from './components/CreateLivestreamModal'
 import { fetchOrganization } from '@/lib/services/organizationService'
-import {
-  IExtendedStage,
-  LivestreamPageParams,
-  eSort,
-} from '@/lib/types'
+import { IExtendedStage, LivestreamPageParams } from '@/lib/types'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
 import LivestreamTable from './components/LivestreamTable'
 import { sortArray } from '@/lib/utils/utils'
 import EmptyFolder from '@/lib/svg/EmptyFolder'
 import TableSkeleton from '@/components/misc/Table/TableSkeleton'
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div className="flex flex-col h-full bg-white">
-      <Card
-        style={{
-          backgroundImage: `url(/backgrounds/livestreamBg.png)`,
-        }}
-        className="p-4 bg-no-repeat bg-cover border-none shadow-none">
-        <CardHeader>
-          <CardTitle>Livestreams</CardTitle>
-          <CardDescription className="max-w-[500px]">
-            Manage your old livestreams or go live!
-          </CardDescription>
-        </CardHeader>
-      </Card>
-
       <TableSkeleton />
     </div>
   )
 }
 
-const Livestreams = async ({
+export const Livestreams = async ({
   params,
   searchParams,
 }: LivestreamPageParams) => {
@@ -58,7 +43,7 @@ const Livestreams = async ({
   )
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col bg-white rounded-xl border h-full">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/livestreamBg.png)`,
@@ -77,10 +62,8 @@ const Livestreams = async ({
           />
         </CardFooter>
       </Card>
-
       {stages.length > 0 ? (
         <LivestreamTable
-          organization={organization}
           organizationSlug={params?.organization}
           streams={stages as IExtendedStage[]}
         />
@@ -95,7 +78,7 @@ const Livestreams = async ({
             <CardDescription>
               Create your first livestream to get started!
             </CardDescription>
-            <div className="mt-2 w-fit">
+            <div className="mt-2 w-fit overflow-auto">
               <CreateLivestreamModal organization={organization} />
             </div>
           </div>

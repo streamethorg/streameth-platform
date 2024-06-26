@@ -2,7 +2,6 @@ import React, { Suspense } from 'react'
 import { ClipsPageParams, IExtendedSession } from '@/lib/types'
 import SelectSession from './components/SelectSession'
 import RecordingSelect from './components/RecordingSelect'
-import TimeSetter from './components/TimeSetter'
 import CreateClipButton from './components/CreateClipButton'
 import { ClipProvider } from './components/ClipContext'
 import ReactHlsPlayer from './components/Player'
@@ -24,25 +23,19 @@ import {
   fetchAsset,
   fetchSession,
 } from '@/lib/services/sessionService'
-import { IExtendedEvent, IExtendedStage } from '@/lib/types'
+import { IExtendedEvent } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '@/components/ui/tabs'
-import EmptyFolder from '@/lib/svg/EmptyFolder'
-import { Stream, Session } from 'livepeer/dist/models/components'
+import ClipSlider from './components/ClipSlider'
+import { Session, Stream } from 'livepeer/dist/models/components'
 
 const ClipContainer = ({
   children,
 }: {
   children: React.ReactNode
 }) => (
-  <div className="w-full h-full ">
-    <div className="flex flex-row h-full w-full mx-auto">
+  <div className="w-full h-full">
+    <div className="flex flex-row mx-auto w-full h-full">
       {children}
     </div>
   </div>
@@ -50,13 +43,10 @@ const ClipContainer = ({
 
 const SkeletonSidebar = () => (
   <div className="w-1/3 flex flex-col h-full bg-background bg-white border-l">
-    <CardTitle className="bg-white p-2 border-b text-lg">
-      Livestream clips
-    </CardTitle>
     <div className="h-[calc(100%-50px)] overflow-y-clip space-y-4">
       {[1, 2, 3, 4, 5].map((i) => (
-        <div key={i} className="animate-pulse p-4">
-          <div className="aspect-video bg-gray-200 rounded w-full p-4"></div>
+        <div key={i} className="p-4 animate-pulse">
+          <div className="p-4 w-full bg-gray-200 rounded aspect-video"></div>
         </div>
       ))}
     </div>
@@ -64,35 +54,29 @@ const SkeletonSidebar = () => (
 )
 
 const SessionSidebar = async ({
-  currentStage,
   event,
   sessions,
+  currentRecording,
+  recordings,
 }: {
-  currentStage: IExtendedStage
   event?: IExtendedEvent
   sessions: IExtendedSession[]
+  currentRecording?: string
+  recordings: {
+    parentStream: Stream | undefined
+    recordings: Session[]
+  }
 }) => {
   return (
-    <div className="max-w-[300px] w-full h-full bg-background bg-white border-l">
+    <div className="w-[300px] h-full bg-background bg-white border-l">
       <CardTitle className="bg-white p-2 border-b text-lg">
-        Livestream clips
+        <RecordingSelect
+          selectedRecording={currentRecording ?? undefined}
+          streamRecordings={recordings.recordings}
+        />
       </CardTitle>
-      <div className="h-[calc(100%-50px)] overflow-y-scroll">
-        {sessions.length > 0 ? (
-          <ClipsSessionList event={event} sessions={sessions} />
-        ) : (
-          <div className="flex flex-col justify-center items-center space-y-6 h-full">
-            <EmptyFolder width={100} height={60} />
-            <div className="flex flex-col items-center">
-              <p className="text-xl font-bold">
-                No clips created yet
-              </p>
-              <p className=" text-gray-500">
-                Upload your first video to get started!
-              </p>
-            </div>
-          </div>
-        )}
+      <div className="h-[calc(100%-100px)] overflow-y-scroll">
+        <ClipsSessionList event={event} sessions={sessions} />
       </div>
     </div>
   )
@@ -118,10 +102,10 @@ const EventClips = async ({
   if (stages.length === 0) {
     return (
       <ClipContainer>
-        <div className="flex max-w-[500px] h-auto mx-auto mb-auto flex-col w-full p-4 items-center space-y-4">
-          <div className="bg-white text-center max-w-[500px] space-y-4 w-full border rounded-lg p-4 mx-auto mb-auto flex bg-background flex-col justify-center items-center h-full">
+        <div className="flex flex-col items-center p-4 mx-auto mb-auto space-y-4 w-full h-auto max-w-[500px]">
+          <div className="flex flex-col justify-center items-center p-4 mx-auto mb-auto space-y-4 w-full h-full text-center bg-white rounded-lg border max-w-[500px] bg-background">
             <Film className="p-4 rounded-lg" size={84} />
-            <p className=" font-bold text-lg">Clip a livestream!</p>
+            <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-sm text-foreground-muted">
               You dont have any stages to clip from, first create a
               livestream to get started
@@ -142,11 +126,11 @@ const EventClips = async ({
   if (!currentStage) {
     return (
       <ClipContainer>
-        <div className="flex max-w-[500px] h-auto mx-auto mb-auto flex-col w-full p-4 items-center space-y-4">
+        <div className="flex flex-col items-center p-4 mx-auto mb-auto space-y-4 w-full h-auto max-w-[500px]">
           <SelectSession stages={stages} currentStageId={stage} />
-          <div className="bg-white text-center  space-y-2 w-full border rounded-lg p-4 mx-auto flex bg-background flex-col justify-center items-center h-full">
+          <div className="flex flex-col justify-center items-center p-4 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
             <Film className="p-4 rounded-lg" size={84} />
-            <p className=" font-bold text-lg">Clip a livestream!</p>
+            <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-sm text-foreground-muted">
               Please select a livestream that has a recordings from
               the dropdown above
@@ -168,7 +152,7 @@ const EventClips = async ({
   const currentRecording = (function () {
     if (selectedRecording) {
       const recording = stageRecordings?.recordings.find(
-        (recording: Session) => recording?.id === selectedRecording
+        (recording) => recording?.id === selectedRecording
       )
       if (recording) {
         return recording?.id ?? null
@@ -179,16 +163,16 @@ const EventClips = async ({
   })()
 
   if (
-    stageRecordings.recordings?.length === 0 ||
+    stageRecordings?.recordings?.length === 0 ||
     !stageRecordings?.parentStream?.id
   ) {
     return (
       <ClipContainer>
-        <div className="flex flex-col w-full p-4 max-w-[500px] space-y-4 mx-auto mb-auto">
+        <div className="flex flex-col p-4 mx-auto mb-auto space-y-4 w-full max-w-[500px]">
           <SelectSession stages={stages} currentStageId={stage} />
-          <div className="text-center bg-white  space-y-2 w-full border rounded-lg p-8 mx-auto flex bg-background flex-col justify-center items-center h-full">
+          <div className="flex flex-col justify-center items-center p-8 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
             <Film className="p-4 rounded-lg" size={84} />
-            <p className=" font-bold text-lg">No recordings</p>
+            <p className="text-lg font-bold">No recordings</p>
             <p className="text-sm text-foreground-muted">
               This stream does not have any recordings, go live and
               come back to clip to clip your livestream
@@ -205,14 +189,14 @@ const EventClips = async ({
   if (!currentRecording) {
     return (
       <ClipContainer>
-        <div className="flex flex-col w-full p-4 max-w-[500px] mx-auto mb-auto space-y-4">
+        <div className="flex flex-col p-4 mx-auto mb-auto space-y-4 w-full max-w-[500px]">
           <SelectSession stages={stages} currentStageId={stage} />
           <RecordingSelect
             streamRecordings={stageRecordings.recordings}
           />
-          <div className="bg-white text-center  space-y-2 w-full border rounded-lg p-4 mx-auto flex bg-background flex-col justify-center items-center h-full">
+          <div className="flex flex-col justify-center items-center p-4 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
             <Film className="p-4 rounded-lg" size={84} />
-            <p className=" font-bold text-lg">Clip a livestream!</p>
+            <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-sm text-foreground-muted">
               Please select a livestream recording from the dropdown
               above
@@ -256,18 +240,8 @@ const EventClips = async ({
           organizationSlug={params.organization}
         />
       )}
-      <div className="flex flex-col w-full pt-2 px-8 ">
-        {/* <div className="flex flex-row justify-center space-x-4 my-4 w-full">
-          <SelectSession
-            stages={stages}
-            currentStageId={currentStage._id}
-          />
-          <RecordingSelect
-            selectedRecording={currentRecording ?? undefined}
-            streamRecordings={stageRecordings.recordings}
-          />
-        </div> */}
-        <div className="flex flex-col w-full h-full overflow-auto space-y-4">
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full h-full overflow-auto space-y-4 p-4 bg-white">
           <ClipProvider>
             <ReactHlsPlayer
               playbackId={
@@ -275,62 +249,27 @@ const EventClips = async ({
               }
               selectedStreamSession={currentRecording}
             />
-            <div className="flex flex-col space-y-4">
-              <Tabs defaultValue={'sessions'}>
-                <TabsList className="border-y border-grey w-full !justify-start gap-5">
-                  <TabsTrigger className="px-0" value="sessions">
-                    Clip Session
-                  </TabsTrigger>
-                  <TabsTrigger value="custom">
-                    Create Custom Clip
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="sessions">
-                  <div className="flex flex-row w-full space-x-2 items-center justify-center">
-                    <TimeSetter label="Clip start" type="start" />
-                    <TimeSetter label="Clip end" type="end" />
-
-                    <CreateClipButton
-                      selectedRecording={currentRecording}
-                      playbackId={
-                        stageRecordings.parentStream?.playbackId ?? ''
-                      }
-                      stageId={currentStage?._id}
-                      organizationId={organization._id as string}
-                      sessions={sessions.sessions}
-                    />
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="custom">
-                  <div className="flex flex-row w-full space-x-2 items-center justify-center">
-                    <TimeSetter label="Clip start" type="start" />
-                    <TimeSetter label="Clip end" type="end" />
-
-                    <CreateClipButton
-                      selectedRecording={currentRecording}
-                      playbackId={
-                        stageRecordings.parentStream?.playbackId ?? ''
-                      }
-                      stageId={currentStage?._id}
-                      organizationId={organization._id as string}
-                      sessions={sessions.sessions}
-                      custom
-                    />
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div>
+            <ClipSlider />
+            <CreateClipButton
+              currentRecording={currentRecording}
+              playbackId={
+                stageRecordings.parentStream?.playbackId ?? ''
+              }
+              organization={organization}
+              currentStage={currentStage}
+              sessions={sessions}
+            />
           </ClipProvider>
         </div>
       </div>
       <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
         <SessionSidebar
-          currentStage={currentStage}
           event={event ?? undefined}
           sessions={sessions.sessions.filter(
             (session) => session.assetId
           )}
+          currentRecording={currentRecording}
+          recordings={stageRecordings}
         />
       </Suspense>
     </ClipContainer>
@@ -342,7 +281,7 @@ const ClipsPage = async ({
   searchParams,
 }: ClipsPageParams) => {
   const Skeleton = () => (
-    <div className="flex flex-col w-full p-4 max-w-[500px] space-y-4 mx-auto mb-auto">
+    <div className="flex flex-col p-4 mx-auto mb-auto space-y-4 w-full max-w-[500px]">
       {/* SelectSession Skeleton */}
       <div className="animate-pulse">
         <div className="h-8 bg-gray-200 rounded"></div>
@@ -350,15 +289,15 @@ const ClipsPage = async ({
 
       {/* Main Content Skeleton */}
       <div className="animate-pulse">
-        <div className="text-center bg-white space-y-2 w-full border rounded-lg p-8 mx-auto flex bg-background flex-col justify-center items-center h-full">
-          <div className="p-4 rounded-lg bg-gray-200 w-16 h-16"></div>
-          <div className="font-bold text-lg h-6 bg-gray-200 w-32 rounded"></div>
+        <div className="flex flex-col justify-center items-center p-8 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
+          <div className="p-4 w-16 h-16 bg-gray-200 rounded-lg"></div>
+          <div className="w-32 h-6 text-lg font-bold bg-gray-200 rounded"></div>
           <div className="text-sm text-foreground-muted">
-            <div className="h-4 bg-gray-200 w-3/4 rounded"></div>
-            <div className="h-4 bg-gray-200 w-4/5 rounded"></div>
-            <div className="h-4 bg-gray-200 w-3/4 rounded"></div>
+            <div className="w-3/4 h-4 bg-gray-200 rounded"></div>
+            <div className="w-4/5 h-4 bg-gray-200 rounded"></div>
+            <div className="w-3/4 h-4 bg-gray-200 rounded"></div>
           </div>
-          <div className="h-10 bg-gray-200 w-32 rounded"></div>
+          <div className="w-32 h-10 bg-gray-200 rounded"></div>
         </div>
       </div>
     </div>
@@ -366,27 +305,27 @@ const ClipsPage = async ({
 
   const Skeleton2 = () => (
     <div className="flex flex-row w-full">
-      <div className="flex flex-col w-full p-8 ">
-        <div className="flex flex-row justify-center space-x-4 my-4 w-full">
+      <div className="flex flex-col p-8 w-full">
+        <div className="flex flex-row justify-center my-4 space-x-4 w-full">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded-xl w-full"></div>
+            <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
           </div>
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded-xl w-full"></div>
+            <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
           </div>
         </div>
-        <div className="flex flex-col w-full h-full overflow-auto space-y-4">
+        <div className="flex overflow-auto flex-col space-y-4 w-full h-full">
           <div className="animate-pulse">
-            <div className=" aspect-video w-full bg-gray-200 rounded"></div>
+            <div className="w-full bg-gray-200 rounded aspect-video"></div>
           </div>
           {/* Clip Control Loading State */}
           <div className="animate-pulse">
             <div className="flex flex-col space-y-4">
-              <div className="flex flex-row w-full space-x-2 items-center justify-center">
-                <div className="h-8 bg-gray-200 rounded-xl w-full"></div>
-                <div className="h-8 bg-gray-200 rounded-xl w-full"></div>
-                <div className="h-8 bg-gray-200 rounded-xl w-full"></div>
-                <div className="h-8 bg-gray-200 rounded-xl w-full"></div>
+              <div className="flex flex-row justify-center items-center space-x-2 w-full">
+                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
+                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
+                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
+                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
               </div>
             </div>
           </div>
