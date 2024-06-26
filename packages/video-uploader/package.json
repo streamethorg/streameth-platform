@@ -1,10 +1,12 @@
 {
-  "name": "@streameth/video-joiner",
+  "name": "@streameth/video-uploader",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "queue": "node -r esbuild-runner/register ./src/video-queue.ts",
-    "format": "prettier --write \"src/**/*.ts\""
+    "dev": "node -r esbuild-runner/register ./src/video-queue.ts",
+    "build": "tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "node ./dist/video-queue.js"
   },
   "license": "MIT",
   "devDependencies": {
