@@ -166,6 +166,14 @@ export const createClip = async ({
     })
 
     if (!response.ok) {
+      console.log({
+        end,
+        playbackId,
+        sessionId,
+        start,
+        recordingId,
+      })
+      console.log('error in createClip', await response.json())
       throw 'Error updating session'
     }
     revalidatePath('/studio')
