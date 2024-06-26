@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2",
-    "livepeer": "^3.0.2"
+    "livepeer": "3.0.2"
   }
 }
