@@ -14,9 +14,18 @@ const sessions = db.collection('sessions');
 async function videoUploader() {
   try {
     const queue = 'videos';
-    const conn = await amqp.connect(process.env.MQ_HOST);
+    const conn = await amqp.connect({
+      protocol: 'amqp',
+      hostname: process.env.MQ_HOST,
+      port: Number(process.env.MQ_PORT),
+      username: process.env.MQ_USERNAME,
+      password: process.env.MQ_SECRET,
+      vhost: '/',
+    });
     const channel = await conn.createChannel();
-    conn.on('error', console.error);
+    conn.on('error', (e) => {
+      logger.error('RabbitMQ connection error:', e);
+    });
     channel.assertQueue(queue, {
       durable: true,
     });

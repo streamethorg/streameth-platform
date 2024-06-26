@@ -40,6 +40,9 @@ const validateEnv = () => {
     TWITTER_OAUTH_SECRET: str(),
     TWITTER_CLIENT_ID: str(),
     MQ_HOST: str(),
+    MQ_PORT: port(),
+    MQ_USERNAME: str(),
+    MQ_SECRET: str(),
   });
 };
 

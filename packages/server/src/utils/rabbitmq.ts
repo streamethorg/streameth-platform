@@ -1,12 +1,20 @@
 import { config } from '@config';
 import amqp from 'amqplib';
 import { logger } from './logger';
+const { host, port, username, secret } = config.mq;
 
 const RETRY_INTERVAL = 5000; // 5 seconds
 const MAX_RETRIES = 5;
 async function connectToRabbitMQ(retries = 0) {
   try {
-    const connection = await amqp.connect(config.mq);
+    const connection = await amqp.connect({
+      protocol: 'amqp',
+      hostname: host,
+      port: port,
+      username: username,
+      password: secret,
+      vhost: '/',
+    });
     logger.info('RabbitMQ connected', connection);
 
     connection.on('error', (e) => {

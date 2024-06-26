@@ -56,5 +56,10 @@ export const config = {
       clientId: validatedEnv.TWITTER_CLIENT_ID,
     },
   },
-  mq: validatedEnv.MQ_HOST,
+  mq: {
+    host: validatedEnv.MQ_HOST,
+    port: validatedEnv.MQ_PORT,
+    username: validatedEnv.MQ_USERNAME,
+    secret: validatedEnv.MQ_SECRET,
+  },
 };
