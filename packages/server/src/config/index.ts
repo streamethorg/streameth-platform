@@ -47,4 +47,5 @@ export const config = {
     appSecret: validatedEnv.PRIVY_SECRET_KEY,
   },
   oauthSecret: validatedEnv.OAUTH_SECRET,
+  firebaseServiceAccount: validatedEnv.FIREBASE_SERVICE_ACCOUNT,
 };
