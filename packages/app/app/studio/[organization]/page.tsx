@@ -36,7 +36,7 @@ const OrganizationPage = async ({
   ) as unknown as IExtendedStage[]
 
   return (
-    <div className="overflow-auto p-12 w-full h-full">
+    <div className="overflow-auto py-8 px-4 w-full">
       <h2 className="text-lg font-bold">Create</h2>
       <div className="flex gap-4 items-center py-4 max-w-5xl md">
         <CreateLivestreamModal

@@ -16,11 +16,11 @@ const Studio = async () => {
   const userData: IExtendedUser = await fetchUserAction({})
 
   return (
-    <div className="flex h-full flex-col">
-      <div className="flex flex-col flex-grow bg-background max-w-4xl w-full m-auto p-2 h-full overflow-auto">
+    <div className="flex flex-col h-full">
+      <div className="flex overflow-auto flex-col flex-grow p-2 m-auto w-full max-w-4xl h-full bg-background">
         {userData?.organizations?.length > 0 ? (
           <>
-            <div className="w-full flex flex-row justify-between items-center py-2">
+            <div className="flex flex-row justify-between items-center py-2 w-full">
               <CardTitle> Your organizations</CardTitle>
               <Link href="/studio/create">
                 <Button className="w-full">
@@ -28,25 +28,25 @@ const Studio = async () => {
                 </Button>
               </Link>
             </div>
-            <div className="flex flex-col space-y-2 h-full overflow-auto">
+            <div className="flex overflow-auto flex-col space-y-2 h-full">
               {userData?.organizations?.map((organization) => (
                 <Link
                   key={organization._id}
                   href={`/studio/${organization.slug}`}>
-                  <Card className="h-full flex overflow-hidden flex-row shadow-none rounded-xl border border-secondary ">
-                    <CardHeader className=" relative p-3 lg:p-3">
+                  <Card className="flex overflow-hidden flex-row h-full rounded-xl border shadow-none border-secondary">
+                    <CardHeader className="relative p-3 lg:p-3">
                       <Image
-                        className="rounded-full h-full"
+                        className="h-full rounded-full"
                         alt="logo"
                         src={organization.logo}
                         width={45}
                         height={30}
                       />
                     </CardHeader>
-                    <CardContent className="w-full space-y-2 h-full flex flex-col p-3 lg:p-3  justify-center">
+                    <CardContent className="flex flex-col justify-center p-3 space-y-2 w-full h-full lg:p-3">
                       <p className="text-xl">{organization.name}</p>
                     </CardContent>
-                    <CardFooter className="space-y-2 h-full flex flex-col p-3 lg:p-3 items-center justify-center">
+                    <CardFooter className="flex flex-col justify-center items-center p-3 space-y-2 h-full lg:p-3">
                       <Button variant={'link'} className="w-full">
                         Manage
                       </Button>
@@ -57,7 +57,7 @@ const Studio = async () => {
             </div>
           </>
         ) : (
-          <Card className="w-full m-auto border-secondary">
+          <Card className="m-auto w-full border-secondary">
             <CardHeader>
               <CardTitle>
                 Create an organization to get started
