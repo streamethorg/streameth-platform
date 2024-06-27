@@ -126,11 +126,20 @@ export const sessionSchema = z.object({
   published: z.boolean().default(false),
 })
 
+const blacklistedPatterns = [/create\//, /create/]
+
 export const organizationSchema = z.object({
   name: z
     .string()
     .min(1, 'Name is required')
-    .max(25, { message: 'Name is too long' }),
+    .max(25, { message: 'Name is too long' })
+    .refine(
+      (value) =>
+        !blacklistedPatterns.some((pattern) => pattern.test(value)),
+      {
+        message: `The string contains a blacklisted pattern.`,
+      }
+    ),
   logo: z.string().min(1, 'Logo is required'),
   banner: z.string().optional(),
   bio: z.string().optional(),
