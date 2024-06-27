@@ -58,7 +58,7 @@ export default function Combobox({
   )?.logo
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover modal={true} open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant={'outline'}
@@ -82,16 +82,18 @@ export default function Combobox({
                   valueKey ? item[valueKey as keyof Item] : item.value
                 }
                 value={
-                  valueKey ? item[valueKey as keyof Item] : item.value
+                  labelKey ? item[labelKey as keyof Item] : item.label
                 }
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? '' : currentValue)
+                  setValue(
+                    currentValue === item.label ? '' : item.value
+                  )
                   setOpen(false)
                 }}>
                 <Check
                   className={cn(
                     'mr-2 h-4 w-4',
-                    value === item.value ? 'opacity-100' : 'opacity-0'
+                    value === item.label ? 'opacity-100' : 'opacity-0'
                   )}
                 />
                 {labelKey ? item[labelKey as keyof Item] : item.label}

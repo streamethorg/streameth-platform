@@ -20,13 +20,6 @@ import {
   IExtendedSession,
   IExtendedStage,
 } from '@/lib/types'
-import {
-  Select,
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select'
 
 import {
   Tabs,
@@ -39,6 +32,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import Combobox from '@/components/ui/combo-box'
 
 const ClipButton = ({
   playbackId,
@@ -140,18 +134,19 @@ const ClipButton = ({
             onChange={(e) => setName(e.target.value)}
           />
         ) : (
-          <Select onValueChange={(value) => setSessionId(value)}>
-            <SelectTrigger className="bg-white">
-              <SelectValue placeholder="Select a session" />
-            </SelectTrigger>
-            <SelectContent className="bg-white !justify-start z-[999999]">
-              {sessions?.map((session) => (
-                <SelectItem key={session._id} value={session._id}>
-                  {session.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <Combobox
+            value={
+              sessions.find((s) => s._id === sessionId)?.name || ''
+            }
+            setValue={(value) => setSessionId(value)}
+            placeholder="Select a session"
+            items={[
+              ...sessions.map((session) => ({
+                label: session.name,
+                value: session._id,
+              })),
+            ]}
+          />
         )}
       </div>
       <Button
