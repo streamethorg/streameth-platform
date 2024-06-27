@@ -105,7 +105,6 @@ export class IndexController extends Controller {
       await updateEventVideoById(session.firebaseId, {
         url: asset.playbackUrl,
         mp4Url: await getDownloadUrl(asset.id),
-        iframeUrl: `<iframe src="http://streameth.org/embed/?playbackId=${asset.playbackId}&vod=true&streamId=&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
       });
     }
 
