@@ -26,12 +26,14 @@ const OrganizationPage = async ({
 
   if (!organization) return notFound()
 
-  const stages = sortArray(
-    await fetchOrganizationStages({
-      organizationId: organization._id,
-    }),
-    eSort.desc_date
-  )
+  const stages = await fetchOrganizationStages({
+    organizationId: organization._id,
+  })
+
+  const sortedStages = sortArray(
+    stages,
+    searchParams.sort
+  ) as unknown as IExtendedStage[]
 
   return (
     <div className="overflow-auto p-12 w-full h-full">
@@ -54,7 +56,7 @@ const OrganizationPage = async ({
       <Suspense key={searchParams.toString()} fallback={<Loading />}>
         <LivestreamTable
           organizationSlug={params?.organization}
-          streams={stages as IExtendedStage[]}
+          streams={sortedStages}
         />
       </Suspense>
     </div>
