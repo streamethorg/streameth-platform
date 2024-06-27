@@ -351,6 +351,7 @@ export const createClip = async (data: {
       const newData = {
         videoUrl: await getPlayback(session.assetId),
         downloadUrl: await getDownloadUrl(session.assetId),
+        assetId: parsedClip.asset.id,
       };
       // Update Firebase
       await updateEventById(session.firebaseId, newData);

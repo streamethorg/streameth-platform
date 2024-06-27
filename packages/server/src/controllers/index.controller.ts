@@ -16,11 +16,12 @@ import { validateWebhook } from '@utils/validateWebhook';
 import StageService from '@services/stage.service';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import SessionService from '@services/session.service';
-import { getAsset, uploadToIpfs } from '@utils/livepeer';
+import { getAsset, getDownloadUrl, uploadToIpfs } from '@utils/livepeer';
 import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
 import StorageService from '@utils/s3';
 import { HttpException } from '@exceptions/HttpException';
+import { updateEventById } from '@utils/firebase';
 
 @Tags('Index')
 @Route('')
@@ -99,6 +100,13 @@ export class IndexController extends Controller {
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
     } as any);
+
+    if (session.firebaseId) {
+      await updateEventById(session.firebaseId, {
+        videoUrl: asset.playbackUrl,
+        downloadUrl: await getDownloadUrl(asset.id),
+      });
+    }
 
     const state = await this.stateService.getAll({
       sessionId: session._id.toString(),
