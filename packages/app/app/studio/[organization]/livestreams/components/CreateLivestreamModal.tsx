@@ -1,4 +1,5 @@
 'use client'
+
 import DatePicker from '@/components/misc/form/datePicker'
 import { Button } from '@/components/ui/button'
 import {
@@ -50,7 +51,6 @@ const CreateLivestreamModal = ({
   const [streamType, setStreamType] = useState<
     'instant' | 'schedule' | undefined
   >()
-
   const router = useRouter()
 
   const form = useForm<z.infer<typeof StageSchema>>({
@@ -66,6 +66,12 @@ const CreateLivestreamModal = ({
     },
   })
 
+  const { watch } = form
+  const streamDate = watch('streamDate')
+  const streamTime = watch('streamTime')
+  const streamEndDate = watch('streamEndDate')
+  const streamEndTime = watch('streamEndTime')
+
   const handleModalClose = () => {
     setOpen(false)
     setStreamType(undefined)
@@ -73,28 +79,21 @@ const CreateLivestreamModal = ({
     form.reset()
   }
 
-  const formattedDate = new Date(
-    `${formatDate(
-      new Date(`${form.getValues('streamDate')}`),
-      'YYYY-MM-DD'
-    )}T${form.getValues('streamTime')}`
-  )
-
-  const formattedEndDate = new Date(
-    new Date(
-      `${formatDate(
-        new Date(`${form.getValues('streamEndDate')}`),
-        'YYYY-MM-DD'
-      )}T${form.getValues('streamEndTime')}`
+  const parseDate = (date?: Date, time?: string) => {
+    return new Date(
+      `${formatDate(date || new Date(), 'YYYY-MM-DD')}T${
+        time || '00:00'
+      }`
     )
-  )
+  }
+
+  const formattedDate = parseDate(streamDate, streamTime)
+  const formattedEndDate = parseDate(streamEndDate, streamEndTime)
+
   const isPast = formattedDate < new Date()
   const validateEndDate = formattedEndDate < formattedDate
+  const isScheduleFormDisable = !streamDate || !streamTime || isPast
 
-  const isScheduleFormDisable =
-    !form.getValues('streamDate') ||
-    !form.getValues('streamTime') ||
-    isPast
   const isSchedule = streamType === 'schedule'
 
   function onSubmit(values: z.infer<typeof StageSchema>) {
@@ -160,7 +159,6 @@ const CreateLivestreamModal = ({
               RTMP ingest URL to stream into.
             </DialogDescription>
           </DialogHeader>
-
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
@@ -180,7 +178,6 @@ const CreateLivestreamModal = ({
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="thumbnail"
@@ -189,9 +186,8 @@ const CreateLivestreamModal = ({
                     <FormLabel>Thumbnail</FormLabel>
                     <FormControl>
                       <ImageUpload
-                        placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
-                        Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                        className="m-auto w-full h-full text-black bg-neutrals-300"
+                        placeholder="Drag or click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
+                        className="w-full h-full bg-neutrals-300 text-black m-auto"
                         aspectRatio={1}
                         path={`livestreams/${organization?.slug}`}
                         {...field}
@@ -201,18 +197,16 @@ const CreateLivestreamModal = ({
                   </FormItem>
                 )}
               />
-
               {isSchedule && (
                 <>
                   <div className="mt-6">
-                    {' '}
                     <p
                       className="text-sm"
                       onClick={() => setIsMultiDate(!isMultiDate)}>
                       Streaming multiple days?
-                    </p>{' '}
-                    <div className="flex gap-5 items-center mt-1">
-                      <div className="flex gap-1 items-center">
+                    </p>
+                    <div className="flex items-center gap-5 mt-1">
+                      <div className="flex items-center gap-1">
                         <Checkbox
                           checked={isMultiDate}
                           onCheckedChange={() => setIsMultiDate(true)}
@@ -249,7 +243,6 @@ const CreateLivestreamModal = ({
                         </FormItem>
                       )}
                     />
-
                     <FormField
                       control={form.control}
                       name="streamTime"
@@ -275,7 +268,6 @@ const CreateLivestreamModal = ({
                       selected are too far in the past.
                     </p>
                   )}
-
                   {isMultiDate && (
                     <>
                       <div className="flex mt-4 space-x-3">
@@ -297,7 +289,6 @@ const CreateLivestreamModal = ({
                             </FormItem>
                           )}
                         />
-
                         <FormField
                           control={form.control}
                           name="streamEndTime"
@@ -327,12 +318,10 @@ const CreateLivestreamModal = ({
                   )}
                 </>
               )}
-
               <DialogFooter className="mt-8">
                 <Button onClick={handleModalClose} variant="outline">
                   Cancel
                 </Button>
-
                 <Button
                   loading={isLoading}
                   variant="primary"
