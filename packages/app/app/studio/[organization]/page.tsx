@@ -15,7 +15,7 @@ import LivestreamTable from './livestreams/components/LivestreamTable'
 import { notFound } from 'next/navigation'
 import { sortArray } from '@/lib/utils/utils'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
-import { fetchAllSessions } from '@/lib/data'
+
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -25,20 +25,13 @@ const OrganizationPage = async ({
   })
 
   if (!organization) return notFound()
+
   const stages = sortArray(
     await fetchOrganizationStages({
       organizationId: organization._id,
     }),
     eSort.desc_date
   )
-
-  const sessions = (
-    await fetchAllSessions({
-      organizationSlug: params.organization,
-    })
-  ).sessions.filter((session) => session.videoUrl)
-
-  const sortedSessions = sortArray(sessions, searchParams.sort)
 
   return (
     <div className="overflow-auto p-12 w-full h-full">
@@ -57,45 +50,13 @@ const OrganizationPage = async ({
           </div>
         </Link>
       </div>
-      {/* <Card className="pb-4 mb-4 shadow-none"> */}
       <p className="p-4 text-lg font-bold">Livestreams</p>
-      {/* <CardContent className="!m-0 !p-0"> */}
       <Suspense key={searchParams.toString()} fallback={<Loading />}>
         <LivestreamTable
           organizationSlug={params?.organization}
           streams={stages as IExtendedStage[]}
         />
       </Suspense>
-      {/* {stages?.length > 5 && (
-            <Link
-              href={`/studio/${params.organization}/livestreams`}
-              className="flex justify-end p-4 text-sm text-primary">
-              See more
-            </Link>
-          )} */}
-      {/* </CardContent> */}
-      {/* </Card> */}
-
-      {/* <Card className="pb-4 bg-white shadow-none">
-        <CardTitle className="p-4 text-lg font-bold">
-          Library
-        </CardTitle>
-        <CardContent className="!m-0 !p-0">
-          <LibraryListLayout
-            sessions={
-              sortedSessions.slice(0, 5) as IExtendedSession[]
-            }
-            organizationSlug={params.organization}
-          />
-          {sortedSessions?.length > 5 && (
-            <Link
-              href={`/studio/${params.organization}/library`}
-              className="flex justify-end p-4 text-sm text-primary">
-              See more
-            </Link>
-          )}
-        </CardContent>
-      </Card> */}
     </div>
   )
 }
