@@ -49,6 +49,7 @@ const SessionSchema = new Schema<ISessionModel>(
     published: { type: Boolean, default: false },
     type: { type: String, enum: Object.keys(SessionType) },
     nftCollections: [{ type: String, ref: 'Nft-Collection' }],
+    firebaseId: { type: String, default: '' },
   },
   {
     timestamps: true,

@@ -35,6 +35,7 @@ const validateEnv = () => {
     PRIVY_APP_ID: str(),
     PRIVY_SECRET_KEY: str(),
     TEST_URL: str(),
+    FIREBASE_SERVICE_ACCOUNT: str(),
   });
 };
 
