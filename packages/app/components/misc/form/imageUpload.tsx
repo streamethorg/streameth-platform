@@ -76,9 +76,11 @@ export default function ImageUpload({
   value,
   path,
   className,
+  maxSize = 5000000,
   ...rest
 }: {
   id?: string
+  maxSize?: number
   placeholder?: string
   aspectRatio: number
   onChange: (files: string | null) => void
@@ -97,6 +99,10 @@ export default function ImageUpload({
     try {
       const data = new FormData()
 
+      if (file.size > maxSize) {
+        throw new Error('File size is too big')
+      }
+
       data.set(
         'file',
         new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
@@ -108,7 +114,6 @@ export default function ImageUpload({
         method: 'POST',
         body: data,
       })
-      // handle the error
       if (!res.ok) {
         throw new Error(await res.text())
       }
@@ -119,8 +124,9 @@ export default function ImageUpload({
       )
       return 'Image uploaded successfully'
     } catch (e: any) {
-      // Handle errors here
       console.error(e)
+      setPreview('')
+
       throw e
     } finally {
       setIsUploading(false)
@@ -169,7 +175,7 @@ export default function ImageUpload({
             className="hidden"
             onChange={(event) => {
               const { files, displayUrl } = getImageData(event)
-              console.log(files)
+
               setPreview(displayUrl)
               toast.promise(onSubmit(files[0]), {
                 loading: 'Uploading image',
@@ -178,7 +184,7 @@ export default function ImageUpload({
                   return 'Image uploaded successfully'
                 },
                 error: (error) => {
-                  toast.error('Error uploading image')
+                  toast.error(error.message)
                   return error.message || 'Unknown error'
                 },
               })
