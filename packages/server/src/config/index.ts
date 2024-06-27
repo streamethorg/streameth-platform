@@ -62,4 +62,5 @@ export const config = {
     username: validatedEnv.MQ_USERNAME,
     secret: validatedEnv.MQ_SECRET,
   },
+  firebaseServiceAccount: validatedEnv.FIREBASE_SERVICE_ACCOUNT,
 };

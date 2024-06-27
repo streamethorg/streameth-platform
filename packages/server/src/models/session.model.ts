@@ -55,6 +55,7 @@ const SessionSchema = new Schema<ISessionModel>(
         date: { type: Number, default: 0 },
       },
     ],
+    firebaseId: { type: String, default: '' },
   },
   {
     timestamps: true,

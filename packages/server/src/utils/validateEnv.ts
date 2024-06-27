@@ -43,6 +43,7 @@ const validateEnv = () => {
     MQ_PORT: port(),
     MQ_USERNAME: str(),
     MQ_SECRET: str(),
+    FIREBASE_SERVICE_ACCOUNT: str(),
   });
 };
 

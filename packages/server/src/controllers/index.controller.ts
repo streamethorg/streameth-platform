@@ -16,11 +16,12 @@ import { validateWebhook } from '@utils/validateWebhook';
 import StageService from '@services/stage.service';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import SessionService from '@services/session.service';
-import { getAsset, uploadToIpfs } from '@utils/livepeer';
+import { getAsset, getDownloadUrl, uploadToIpfs } from '@utils/livepeer';
 import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
 import StorageService from '@utils/s3';
 import { HttpException } from '@exceptions/HttpException';
+import { updateEventVideoById } from '@utils/firebase';
 
 @Tags('Index')
 @Route('')
@@ -99,6 +100,14 @@ export class IndexController extends Controller {
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
     } as any);
+
+    if (session.firebaseId) {
+      await updateEventVideoById(session.firebaseId, {
+        url: asset.playbackUrl,
+        mp4Url: await getDownloadUrl(asset.id),
+        iframeUrl: `<iframe src="http://streameth.org/embed/?playbackId=${asset.playbackId}&vod=true&streamId=&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
+      });
+    }
 
     const state = await this.stateService.getAll({
       sessionId: session._id.toString(),

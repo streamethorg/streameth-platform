@@ -30,8 +30,8 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   }
 
   return (
-    <div className="flex overflow-y-scroll p-4 space-x-4 w-full h-full">
-      <div className="w-2/3">
+    <div className="flex flex-col lg:flex-row md:flex-row overflow-y-scroll p-4 space-x-4 w-full h-full">
+      <div className="">
         <StreamHeader
           organization={params.organization}
           stream={stream}
@@ -43,7 +43,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             streamId={params.streamId}
             organization={params.organization}
           />
-          <div className="flex items-center py-2 space-x-2 w-full">
+          <div className="flex flex-col lg:flex-row md:flex-row items-center py-2 space-x-2 space-y-2 w-full">
             <div className="flex flex-grow justify-start items-center space-x-2">
               <span className="text-xl font-bold line-clamp-2 lg:max-w-[550px]">
                 {stream.name}
@@ -79,7 +79,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
         </div>
       </div>
 
-      <div className="w-1/3 h-full">
+      <div className="">
         <Tabs defaultValue="destinations">
           <TabsList className="grid grid-cols-2 max-w-2/3">
             <TabsTrigger value="destinations">
