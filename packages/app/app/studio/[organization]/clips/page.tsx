@@ -210,12 +210,12 @@ const EventClips = async ({
   const event = await fetchEvent({
     eventId: currentStage.eventId as string,
   })
-  // NOTE: EthCC hack revert to sessions by StageId after EthCC
+  // NOTE: EthCC hack, revert to sessions by StageId after EthCC
   let sessions
-  if (params.organization === 'test_sam2') {
+  if (params.organization === 'ethcc') {
     sessions = await fetchAllSessions({
       organizationSlug: params.organization,
-      event: '667c2112dac19e330d060d89',
+      event: '667d41aac5090b2250b12e75',
     })
   } else {
     sessions = await fetchAllSessions({
