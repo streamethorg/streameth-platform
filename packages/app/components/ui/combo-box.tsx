@@ -38,8 +38,6 @@ export default function Combobox({
   items = [],
   value,
   setValue,
-  valueKey = 'value',
-  labelKey = 'label',
   logo,
   variant = 'outline',
 }: {
@@ -53,12 +51,10 @@ export default function Combobox({
   setValue: (value: string) => void
 }) {
   const [open, setOpen] = React.useState(false)
-  const orgLogo = items.find(
-    (item) => item[labelKey as keyof Item] === value
-  )?.logo
+  const orgLogo = items.find((item) => item.label === value)?.logo
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover modal={true} open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant={'outline'}
@@ -78,23 +74,21 @@ export default function Combobox({
           <CommandGroup>
             {items.map((item) => (
               <CommandItem
-                key={
-                  valueKey ? item[valueKey as keyof Item] : item.value
-                }
-                value={
-                  valueKey ? item[valueKey as keyof Item] : item.value
-                }
+                key={item.value}
+                value={item.label}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? '' : currentValue)
+                  setValue(
+                    currentValue === item.label ? '' : item.value
+                  )
                   setOpen(false)
                 }}>
                 <Check
                   className={cn(
                     'mr-2 h-4 w-4',
-                    value === item.value ? 'opacity-100' : 'opacity-0'
+                    value === item.label ? 'opacity-100' : 'opacity-0'
                   )}
                 />
-                {labelKey ? item[labelKey as keyof Item] : item.label}
+                {item.label}
               </CommandItem>
             ))}
           </CommandGroup>

@@ -55,7 +55,6 @@
     "encoding": "^0.1.13",
     "ethereum-blockies-base64": "^1.0.2",
     "ethers": "^6.7.1",
-    "ethersv5": "npm:ethers@^5.7.2",
     "fuzzy-search": "^3.2.1",
     "google-auth-library": "^9.6.3",
     "googleapis": "^133.0.0",
