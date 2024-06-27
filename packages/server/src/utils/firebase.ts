@@ -10,13 +10,23 @@ admin.initializeApp({
 const db = admin.firestore();
 
 // Function to update an event(session) document by ID
-export const updateEventById = async (eventId: string, newData) => {
+export const updateEventVideoById = async (eventVideoId: string, newData) => {
   try {
-    const eventRef = db.collection('events').doc(eventId);
+    const eventRef = db.collection('eventVideos').doc(eventVideoId);
 
     await eventRef.update(newData);
+  } catch (error) {
+    console.error('Error updating document: ', error);
+    throw error;
+  }
+};
 
-    console.log(`Event with ID ${eventId} has been updated successfully`);
+// Function to write an event(session) document by ID
+export const createEventVideoById = async (eventVideoId: string, newData) => {
+  try {
+    const eventRef = db.collection('eventVideos').doc(eventVideoId);
+
+    await eventRef.set(newData);
   } catch (error) {
     console.error('Error updating document: ', error);
     throw error;

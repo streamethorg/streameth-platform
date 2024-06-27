@@ -8,7 +8,7 @@ import Stage from '@models/stage.model';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import SessionModel from '@models/session.model';
 import { SessionType } from '@interfaces/session.interface';
-import { updateEventById } from './firebase';
+import { createEventVideoById } from './firebase';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -348,13 +348,22 @@ export const createClip = async (data: {
       type: SessionType.clip,
     });
     if (session.firebaseId) {
+      const speakerNames = session.speakers
+        .map((speaker) => speaker.name)
+        .join(', ');
       const newData = {
-        videoUrl: await getPlayback(session.assetId),
-        downloadUrl: await getDownloadUrl(session.assetId),
+        fullTitle: `${speakerNames} :  ${session.name}`,
+        title: session.name,
+        speaker: speakerNames,
+        description: session.description,
+        date: new Date(),
+        track: session.track.map((track) => track).join(', '),
+        url: await getPlayback(session.assetId),
+        mp4Url: await getDownloadUrl(session.assetId),
         assetId: parsedClip.asset.id,
       };
       // Update Firebase
-      await updateEventById(session.firebaseId, newData);
+      await createEventVideoById(session.firebaseId, newData);
     }
 
     return parsedClip;

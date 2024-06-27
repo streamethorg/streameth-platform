@@ -21,7 +21,7 @@ import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
 import StorageService from '@utils/s3';
 import { HttpException } from '@exceptions/HttpException';
-import { updateEventById } from '@utils/firebase';
+import { updateEventVideoById } from '@utils/firebase';
 
 @Tags('Index')
 @Route('')
@@ -102,9 +102,10 @@ export class IndexController extends Controller {
     } as any);
 
     if (session.firebaseId) {
-      await updateEventById(session.firebaseId, {
-        videoUrl: asset.playbackUrl,
-        downloadUrl: await getDownloadUrl(asset.id),
+      await updateEventVideoById(session.firebaseId, {
+        url: asset.playbackUrl,
+        mp4Url: await getDownloadUrl(asset.id),
+        iframeUrl: `<iframe src="http://streameth.org/embed/?playbackId=${asset.playbackId}&vod=true&streamId=&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
       });
     }
 
