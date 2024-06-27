@@ -82,10 +82,12 @@ export default function Combobox({
                   valueKey ? item[valueKey as keyof Item] : item.value
                 }
                 value={
-                  valueKey ? item[valueKey as keyof Item] : item.value
+                  labelKey ? item[labelKey as keyof Item] : item.label
                 }
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? '' : currentValue)
+                  setValue(
+                    currentValue === item.label ? '' : item.value
+                  )
                   setOpen(false)
                 }}>
                 <Check
