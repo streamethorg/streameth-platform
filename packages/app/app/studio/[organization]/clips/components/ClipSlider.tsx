@@ -168,22 +168,8 @@ const ClipSlider = () => {
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseup', handleMouseUp)
-    window.addEventListener('mousedown', (e) => {
-      // e.preventDefault()
-      // if e has id textInput dont prevent
-      // if (
-      //   !(
-      //     e.target instanceof HTMLElement &&
-      //     e.target.id === 'session-name'
-      //   )
-      // ) {
-      //   e.preventDefault()
-      // }
-    })
-
     window.addEventListener('keydown', (e) => {
       if (selectedTooltip) {
-        e.preventDefault()
         if (e.key === 'ArrowRight') {
           handle1SecondIncrementDecrement(true, selectedTooltip)
         } else if (e.key === 'ArrowLeft') {

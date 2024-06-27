@@ -47,6 +47,7 @@ const ClipButton = ({
   organizationId,
   sessions,
   custom,
+  setDialogOpen,
 }: {
   playbackId: string
   selectedRecording: string
@@ -54,12 +55,12 @@ const ClipButton = ({
   organizationId: string
   sessions: IExtendedSession[]
   custom?: boolean
+  setDialogOpen: (value: boolean) => void
 }) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [name, setName] = React.useState('')
   const { startTime, endTime } = useClipContext()
   const [sessionId, setSessionId] = React.useState('')
-
   const { handleTermChange } = useSearchParams()
   const handleCreateClip = async () => {
     let customSession: ISession = {
@@ -108,6 +109,7 @@ const ClipButton = ({
       .then(() => {
         setIsLoading(false)
         setSessionId('')
+        setDialogOpen(false)
         toast.success('Clip created')
       })
       .catch(() => {
@@ -192,9 +194,10 @@ const CreateClipButton = ({
   }
 }) => {
   const { isLoading } = useClipContext()
+  const [dialogOpen, setIsOpen] = React.useState(false)
 
   return (
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setIsOpen}>
       <DialogContent className="bg-white">
         <div className="flex flex-col h-[300px] bg-white p-4">
           <Tabs defaultValue={'sessions'}>
@@ -217,6 +220,7 @@ const CreateClipButton = ({
                     stageId={currentStage?._id}
                     organizationId={organization._id as string}
                     sessions={sessions.sessions}
+                    setDialogOpen={setIsOpen}
                   />
                 </div>
               </TabsContent>
@@ -230,20 +234,20 @@ const CreateClipButton = ({
                   organizationId={organization._id as string}
                   sessions={sessions.sessions}
                   custom
+                  setDialogOpen={setIsOpen}
                 />
               </div>
             </TabsContent>
           </Tabs>
         </div>
       </DialogContent>
-      <DialogTrigger>
-        <Button
-          variant="primary"
-          className="w-full"
-          disabled={isLoading}>
-          Create Clip
-        </Button>
-      </DialogTrigger>
+      <Button
+        onClick={() => setIsOpen(true)}
+        variant="primary"
+        className="w-full"
+        disabled={isLoading}>
+        Create Clip
+      </Button>
     </Dialog>
   )
 }
