@@ -8,6 +8,7 @@ import Stage from '@models/stage.model';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import SessionModel from '@models/session.model';
 import { SessionType } from '@interfaces/session.interface';
+import { createEventVideoById } from './firebase';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -135,7 +136,6 @@ export const getDownloadUrl = async (assetId: string): Promise<string> => {
     if (!data.downloadUrl) {
       return '';
     }
-    console.log(`Download url: ${data.downloadUrl}`);
     return data.downloadUrl;
   } catch (e) {
     console.error(`Error fetching asset:`, e);
@@ -339,6 +339,7 @@ export const createClip = async (data: {
       playbackId: data.playbackId,
     });
     const parsedClip = JSON.parse(clip.rawResponse.data.toString());
+    let session = await SessionModel.findById(data.sessionId);
     await SessionModel.findByIdAndUpdate(data.sessionId, {
       assetId: parsedClip.asset.id,
       playbackId: parsedClip.asset.playbackId,
@@ -346,6 +347,25 @@ export const createClip = async (data: {
       end: new Date().getTime(),
       type: SessionType.clip,
     });
+    if (session.firebaseId) {
+      const speakerNames = session.speakers
+        .map((speaker) => speaker.name)
+        .join(', ');
+      const newData = {
+        fullTitle: `${speakerNames} :  ${session.name}`,
+        title: session.name,
+        speaker: speakerNames,
+        description: session.description,
+        date: new Date(),
+        track: session.track.map((track) => track).join(', '),
+        url: await getPlayback(session.assetId),
+        mp4Url: await getDownloadUrl(session.assetId),
+        assetId: parsedClip.asset.id,
+      };
+      // Update Firebase
+      await createEventVideoById(session.firebaseId, newData);
+    }
+
     return parsedClip;
   } catch (e) {
     console.log('error', e);
