@@ -1,10 +1,9 @@
 'use server'
 
-import { CameraIcon } from 'lucide-react'
+import { LuFileUp } from 'react-icons/lu'
 import Link from 'next/link'
-import { Livestreams, Loading } from './livestreams/page'
+import { Loading } from './livestreams/page'
 import {
-  IExtendedSession,
   IExtendedStage,
   LivestreamPageParams,
   eSort,
@@ -16,9 +15,7 @@ import LivestreamTable from './livestreams/components/LivestreamTable'
 import { notFound } from 'next/navigation'
 import { sortArray } from '@/lib/utils/utils'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
-import LibraryListLayout from './library/components/LibraryListLayout'
 import { fetchAllSessions } from '@/lib/data'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -44,24 +41,24 @@ const OrganizationPage = async ({
   const sortedSessions = sortArray(sessions, searchParams.sort)
 
   return (
-    <div className="h-full w-full p-12 overflow-auto">
+    <div className="overflow-auto p-12 w-full h-full">
       <h2 className="text-lg font-bold">Create</h2>
-      <div className="flex items-center md gap-4 max-w-5xl py-4">
+      <div className="flex gap-4 items-center py-4 max-w-5xl md">
         <CreateLivestreamModal
           show={searchParams?.show}
           organization={organization}
         />
         <Link href={`/studio/${params.organization}/library`}>
-          <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center">
-            <div className="p-4 border bg-primary  rounded-xl text-white">
-              <CameraIcon className="h-6" />
+          <div className="flex flex-row items-center p-2 pr-4 space-x-4 bg-white rounded-xl border transition-colors hover:bg-accent">
+            <div className="p-4 text-white rounded-xl border bg-primary">
+              <LuFileUp size={25} />
             </div>
-            <span className=" ">Upload Video</span>
+            <span>Upload video</span>
           </div>
         </Link>
       </div>
-      {/* <Card className="mb-4 pb-4 shadow-none"> */}
-      <p className="p-4 font-bold text-lg">Livestreams</p>
+      {/* <Card className="pb-4 mb-4 shadow-none"> */}
+      <p className="p-4 text-lg font-bold">Livestreams</p>
       {/* <CardContent className="!m-0 !p-0"> */}
       <Suspense key={searchParams.toString()} fallback={<Loading />}>
         <LivestreamTable
@@ -72,15 +69,15 @@ const OrganizationPage = async ({
       {/* {stages?.length > 5 && (
             <Link
               href={`/studio/${params.organization}/livestreams`}
-              className="flex justify-end p-4 text-primary text-sm">
+              className="flex justify-end p-4 text-sm text-primary">
               See more
             </Link>
           )} */}
       {/* </CardContent> */}
       {/* </Card> */}
 
-      {/* <Card className="shadow-none pb-4 bg-white">
-        <CardTitle className="p-4 font-bold text-lg">
+      {/* <Card className="pb-4 bg-white shadow-none">
+        <CardTitle className="p-4 text-lg font-bold">
           Library
         </CardTitle>
         <CardContent className="!m-0 !p-0">
@@ -93,7 +90,7 @@ const OrganizationPage = async ({
           {sortedSessions?.length > 5 && (
             <Link
               href={`/studio/${params.organization}/library`}
-              className="flex justify-end p-4 text-primary text-sm">
+              className="flex justify-end p-4 text-sm text-primary">
               See more
             </Link>
           )}
