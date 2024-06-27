@@ -17,10 +17,14 @@ const SwitchOrganization = ({
   return (
     <div className="px-2">
       <Combobox
-        items={organizations as any[]}
+        items={[
+          ...organizations.map((org) => ({
+            label: org.name,
+            value: org.slug!,
+            logo: org.logo,
+          })),
+        ]}
         logo
-        valueKey="slug"
-        labelKey="name"
         variant="ghost"
         value={selectedSort || ''}
         setValue={(org) => {
