@@ -15666,7 +15666,7 @@ run-series@^1.1.8:
   resolved "https://registry.npmjs.org/run-series/-/run-series-1.1.9.tgz"
   integrity sha512-Arc4hUN896vjkqCYrUXquBFtRZdv1PfLbTYP71efP6butxyQ0kWpiNJyAgsxscmQg1cqvHY32/UCBzXedTpU2g==
 
-rxjs@*, rxjs@7.8.1, rxjs@^7.5.1:
+rxjs@7.8.1, rxjs@^7.5.1, rxjs@^7.5.2:
   version "7.8.1"
   resolved "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
