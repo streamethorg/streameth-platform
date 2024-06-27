@@ -361,6 +361,7 @@ export const createClip = async (data: {
         url: await getPlayback(session.assetId),
         mp4Url: await getDownloadUrl(session.assetId),
         assetId: parsedClip.asset.id,
+        iframeUrl: `<iframe src="http://streameth.org/embed/?playbackId=${parsedClip.asset.playbackId}&vod=true&streamId=&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
       };
       // Update Firebase
       await createEventVideoById(session.firebaseId, newData);

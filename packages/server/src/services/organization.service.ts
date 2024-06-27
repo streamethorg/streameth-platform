@@ -95,6 +95,7 @@ export default class OrganizationService {
       if (!user) {
         let newAccount = await privy.importUser({
           linkedAccounts: [
+            //@ts-ignore
             {
               type: 'email',
               address: address,
