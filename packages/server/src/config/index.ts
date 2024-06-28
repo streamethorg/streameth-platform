@@ -62,5 +62,17 @@ export const config = {
     username: validatedEnv.MQ_USERNAME,
     secret: validatedEnv.MQ_SECRET,
   },
-  firebaseServiceAccount: validatedEnv.FIREBASE_SERVICE_ACCOUNT,
+  firebase: {
+    type: validatedEnv.FIREBASE_SERVICE_TYPE,
+    projectId: validatedEnv.FIREBASE_PROJECT_ID,
+    privateKeyId: validatedEnv.FIREBASE_PRIVATEKEY_ID,
+    privateKey: validatedEnv.FIREBASE_PRIVATEKEY,
+    clientEmail: validatedEnv.FIREBASE_CLIENT_EMAIL,
+    clientId: validatedEnv.FIREBASE_CLIENT_ID,
+    authUri: validatedEnv.FIREBASE_AUTH_URI,
+    tokenUri: validatedEnv.FIREBASE_TOKEN_URI,
+    authProviderCert: validatedEnv.FIREBASE_PROVIDER_CERT,
+    clientCert: validatedEnv.FIREBASE_CLIENT_CERT,
+    domain: validatedEnv.FIREBASE_DOMAIN,
+  },
 };
