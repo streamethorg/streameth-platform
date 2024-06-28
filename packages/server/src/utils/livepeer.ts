@@ -8,7 +8,7 @@ import Stage from '@models/stage.model';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import SessionModel from '@models/session.model';
 import { SessionType } from '@interfaces/session.interface';
-import { createEventVideoById } from './firebase';
+//import { createEventVideoById } from './firebase';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -364,7 +364,7 @@ export const createClip = async (data: {
         iframeUrl: `<iframe src="http://streameth.org/embed/?playbackId=${parsedClip.asset.playbackId}&vod=true&streamId=&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
       };
       // Update Firebase
-      await createEventVideoById(session.firebaseId, newData);
+      //await createEventVideoById(session.firebaseId, newData);
     }
 
     return parsedClip;

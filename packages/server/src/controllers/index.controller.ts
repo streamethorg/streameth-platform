@@ -21,7 +21,7 @@ import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
 import StorageService from '@utils/s3';
 import { HttpException } from '@exceptions/HttpException';
-import { updateEventVideoById } from '@utils/firebase';
+//import { updateEventVideoById } from '@utils/firebase';
 
 @Tags('Index')
 @Route('')
@@ -101,12 +101,12 @@ export class IndexController extends Controller {
       playbackId: asset.playbackId,
     } as any);
 
-    if (session.firebaseId) {
-      await updateEventVideoById(session.firebaseId, {
-        url: asset.playbackUrl,
-        mp4Url: await getDownloadUrl(asset.id),
-      });
-    }
+    // if (session.firebaseId) {
+    //   await updateEventVideoById(session.firebaseId, {
+    //     url: asset.playbackUrl,
+    //     mp4Url: await getDownloadUrl(asset.id),
+    //   });
+    // }
 
     const state = await this.stateService.getAll({
       sessionId: session._id.toString(),
