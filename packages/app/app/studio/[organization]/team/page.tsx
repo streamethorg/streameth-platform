@@ -21,6 +21,7 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
+
 const Settings = async ({
   params,
   searchParams,
@@ -52,8 +53,8 @@ const Settings = async ({
         <CardContent>
           <AddTeamMembers organizationId={organization._id} />
           <Table className="mt-4">
-            <TableHeader className="sticky top-0 z-50 bg-gray-100 border-separate">
-              <TableRow className="hover:bg-whiterounded-t-xl border-b">
+            <TableHeader className="sticky top-0 z-10 bg-gray-100 border-separate">
+              <TableRow className="border-b hover:bg-whiterounded-t-xl">
                 <TableHead>Wallet</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Actions</TableHead>
