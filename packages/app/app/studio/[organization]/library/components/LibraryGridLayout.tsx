@@ -7,7 +7,7 @@ import VideoCardWithMenu from './misc/VideoCardWithMenu'
 import { PopoverActions } from './misc/PopoverActions'
 import VideoCardProcessing from '@/components/misc/VideoCard/VideoCardProcessing'
 
-const GridLayout = ({
+const LibraryGridLayout = ({
   sessions,
   organizationSlug,
 }: {
@@ -43,4 +43,4 @@ const GridLayout = ({
   )
 }
 
-export default GridLayout
+export default LibraryGridLayout

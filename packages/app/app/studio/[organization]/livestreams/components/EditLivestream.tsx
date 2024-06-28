@@ -1,4 +1,5 @@
 'use client'
+
 import DatePicker from '@/components/misc/form/datePicker'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import TimePicker from '@/components/misc/form/timePicker'
@@ -28,37 +29,46 @@ import { IExtendedStage } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
 import { getFormSubmitStatus, getTimeString } from '@/lib/utils/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FilePenLine } from 'lucide-react'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
 const EditLivestream = ({
-  livestream,
+  stage,
   organizationSlug,
+  btnText = 'Edit',
+  variant = 'ghost',
 }: {
+  stage: IExtendedStage
   organizationSlug: string
-  livestream: IExtendedStage
+  btnText?: string
+  variant?:
+    | 'outline'
+    | 'ghost'
+    | 'primary'
+    | 'default'
+    | 'link'
+    | 'secondary'
 }) => {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isMultiDate, setIsMultiDate] = useState(
-    livestream?.isMultipleDate
+    stage?.isMultipleDate
   )
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
     defaultValues: {
-      name: livestream?.name,
-      organizationId: livestream?.organizationId as string,
-      streamDate:
-        new Date(livestream?.streamDate as string) || new Date(),
-      thumbnail: livestream?.thumbnail,
-      streamTime: getTimeString(livestream.streamDate) || '00:00',
+      name: stage?.name,
+      organizationId: stage?.organizationId as string,
+      streamDate: new Date(stage?.streamDate as string) || new Date(),
+      thumbnail: stage?.thumbnail,
+      streamTime: getTimeString(stage.streamDate) || '00:00',
       streamEndDate:
-        new Date(livestream?.streamEndDate as string) || new Date(),
-      streamEndTime:
-        getTimeString(livestream.streamEndDate) || '00:00',
-      isMultipleDate: livestream?.isMultipleDate || false,
+        new Date(stage?.streamEndDate as string) || new Date(),
+      streamEndTime: getTimeString(stage.streamEndDate) || '00:00',
+      isMultipleDate: stage?.isMultipleDate || false,
     },
   })
 
@@ -93,7 +103,7 @@ const EditLivestream = ({
         streamDate: formattedDate,
         streamEndDate: formattedEndDate,
         isMultipleDate: isMultiDate,
-        _id: livestream._id,
+        _id: stage._id,
       },
     })
       .then(() => {
@@ -109,10 +119,13 @@ const EditLivestream = ({
   }
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-      <DialogTrigger>
-        <Button variant="outline">Edit</Button>
+      <DialogTrigger className="w-full" asChild>
+        <Button className="flex space-x-2 w-full" variant={variant}>
+          <FilePenLine size={15} />
+          <span>{btnText}</span>
+        </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>Edit livestream Details</DialogTitle>
         </DialogHeader>
@@ -148,7 +161,7 @@ const EditLivestream = ({
                         Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
                       className="m-auto w-full h-full text-black bg-neutrals-300"
                       aspectRatio={1}
-                      path={`livestreams/${organizationSlug}`}
+                      path={`stages/${organizationSlug}`}
                       {...field}
                     />
                   </FormControl>

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Download } from 'lucide-react'
 import { toast } from 'sonner'
 import { apiUrl, cn } from '@/lib/utils/utils'
-import Collection from '@/app/[organization]/collection/page'
 import { useState } from 'react'
 
 const VideoDownloadClient = ({
@@ -76,7 +75,7 @@ const VideoDownloadClient = ({
       variant={variant}
       className={className}>
       <Download className=" w-5 h-5" />
-      <p className={cn(collapsable && 'hidden xl:flex')}>
+      <p className={cn(collapsable && 'flex')}>
         {loading ? 'Downloading...' : 'Download'}
       </p>
     </Button>

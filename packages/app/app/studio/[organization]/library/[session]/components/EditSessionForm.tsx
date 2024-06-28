@@ -16,25 +16,21 @@ import {
 import { Input } from '@/components/ui/input'
 import { sessionSchema } from '@/lib/schema'
 import { toast } from 'sonner'
-import {
-  Loader2,
-  Trash2,
-  Earth,
-  Lock,
-  ChevronDown,
-} from 'lucide-react'
+import { Loader2, Trash2 } from 'lucide-react'
 import { IExtendedSession } from '@/lib/types'
 import { updateSessionAction } from '@/lib/actions/sessions'
 import { getFormSubmitStatus } from '@/lib/utils/utils'
 import DeleteAsset from '../../components/DeleteAsset'
 import { Textarea } from '@/components/ui/textarea'
 import ImageUpload from '@/components/misc/form/imageUpload'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
 import { useRouter } from 'next/navigation'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 const EditSessionForm = ({
   session,
@@ -91,12 +87,7 @@ const EditSessionForm = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <div className="flex justify-between items-center space-x-2">
-                <FormLabel>
-                  Video title <span className="text-red-500">*</span>
-                </FormLabel>
-                <FormMessage />
-              </div>
+              <FormLabel required>Video title</FormLabel>
               <FormControl>
                 <Input
                   className="bg-white rounded-md border border-gray-300"
@@ -112,12 +103,7 @@ const EditSessionForm = ({
           name="description"
           render={({ field }) => (
             <FormItem className="h-50">
-              <div className="flex justify-between items-center space-x-2">
-                <FormLabel>
-                  Description <span className="text-red-500">*</span>
-                </FormLabel>
-                <FormMessage />
-              </div>
+              <FormLabel required>Description</FormLabel>
               <FormControl>
                 <Textarea
                   className="bg-white rounded-md border border-gray-300"
@@ -128,44 +114,28 @@ const EditSessionForm = ({
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="published"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-[200px]">
               <FormLabel>Visibility</FormLabel>
               <FormControl>
-                <div className="flex justify-start items-center space-x-2">
-                  {field.value ? (
-                    <>
-                      <Earth size={16} />
-                      <p>Public</p>
-                    </>
-                  ) : (
-                    <>
-                      <Lock size={16} />
-                      <p>Private</p>
-                    </>
-                  )}
-                  <Popover>
-                    <PopoverTrigger>
-                      <ChevronDown size={20} />
-                    </PopoverTrigger>
-                    <PopoverContent className="flex justify-start items-center space-x-2 transition-colors cursor-pointer hover:bg-gray-200 w-[150px] z-[999999999999999]">
-                      {!field.value ? (
-                        <>
-                          <Earth size={16} />
-                          <p>Make Public</p>
-                        </>
-                      ) : (
-                        <>
-                          <Lock size={16} />
-                          <p>Make Private</p>
-                        </>
-                      )}
-                    </PopoverContent>
-                  </Popover>
-                </div>
+                <Select
+                  onValueChange={(value) =>
+                    field.onChange(value === 'true')
+                  }>
+                  <SelectTrigger className="bg-white">
+                    <SelectValue
+                      placeholder={field.value ? 'Public' : 'Private'}
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="true">Public</SelectItem>
+                    <SelectItem value="false">Private</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
             </FormItem>
           )}
@@ -188,7 +158,7 @@ const EditSessionForm = ({
           )}
         />
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-end justify-end space-x-2">
           <DeleteAsset
             session={session}
             href={`/studio/${organizationSlug}/library`}
@@ -211,7 +181,7 @@ const EditSessionForm = ({
                 Please wait...
               </>
             ) : (
-              'Update video'
+              'Update details'
             )}
           </Button>
         </div>
