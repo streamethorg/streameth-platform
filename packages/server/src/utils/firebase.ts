@@ -1,10 +1,10 @@
 import { config } from '@config';
-import admin, { ServiceAccount } from 'firebase-admin';
+import admin from 'firebase-admin';
 
 const serviceAccount = {
   type: config.firebase.type,
   project_id: config.firebase.projectId,
-  private_key_id: config.firebase.privateKey,
+  private_key_id: config.firebase.privateKeyId,
   private_key: config.firebase.privateKey,
   client_email: config.firebase.clientEmail,
   client_id: config.firebase.clientId,
@@ -14,12 +14,12 @@ const serviceAccount = {
   client_x509_cert_url: config.firebase.clientCert,
   universe_domain: config.firebase.domain,
 };
+
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount as ServiceAccount),
+  credential: admin.credential.cert(serviceAccount as any),
 });
 
 const db = admin.firestore();
-
 // Function to update an event(session) document by ID
 export const updateEventVideoById = async (eventVideoId: string, newData) => {
   try {
