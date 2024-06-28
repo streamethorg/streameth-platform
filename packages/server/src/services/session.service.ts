@@ -11,7 +11,7 @@ import { getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import Fuse from 'fuse.js';
 import { IUploadSession } from '@interfaces/upload.session.interface';
 import { refreshAccessToken } from '@utils/oauth';
-//import connection from '@utils/rabbitmq';
+import connection from '@utils/rabbitmq';
 
 export default class SessionService {
   private path: string;
@@ -233,28 +233,28 @@ export default class SessionService {
     const token = org.socials.find(
       (e) => e.type == data.type && e._id == data.socialId,
     );
-    // if (data.type == 'youtube') {
-    //   data.token = await refreshAccessToken(token.refreshToken);
-    // }
-    // const queue = 'videos';
-    // const channel = await (await connection).createChannel();
-    // channel.assertQueue(queue, {
-    //   durable: true,
-    // });
-    // const payload = {
-    //   ...data,
-    //   session: {
-    //     videoUrl: session.videoUrl,
-    //     slug: session.slug,
-    //     name: session.name,
-    //     description: session.description,
-    //     coverImage: session.coverImage,
-    //     published: session.published,
-    //   },
-    // };
-    // channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
-    //   persistent: true,
-    // });
+    if (data.type == 'youtube') {
+      data.token = await refreshAccessToken(token.refreshToken);
+    }
+    const queue = 'videos';
+    const channel = await (await connection).createChannel();
+    channel.assertQueue(queue, {
+      durable: true,
+    });
+    const payload = {
+      ...data,
+      session: {
+        videoUrl: session.videoUrl,
+        slug: session.slug,
+        name: session.name,
+        description: session.description,
+        coverImage: session.coverImage,
+        published: session.published,
+      },
+    };
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
+      persistent: true,
+    });
   }
 
   private async createMultipleStreamRecordings(streamId: string) {
