@@ -1,10 +1,21 @@
 import { config } from '@config';
-import admin from 'firebase-admin';
+import admin, { ServiceAccount } from 'firebase-admin';
 
-const serviceAccount = JSON.parse(config.firebaseServiceAccount);
-
+const serviceAccount = {
+  type: config.firebase.type,
+  project_id: config.firebase.projectId,
+  private_key_id: config.firebase.privateKey,
+  private_key: config.firebase.privateKey,
+  client_email: config.firebase.clientEmail,
+  client_id: config.firebase.clientId,
+  auth_uri: config.firebase.authUri,
+  token_uri: config.firebase.tokenUri,
+  auth_provider_x509_cert_url: config.firebase.authProviderCert,
+  client_x509_cert_url: config.firebase.clientCert,
+  universe_domain: config.firebase.domain,
+};
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(serviceAccount as ServiceAccount),
 });
 
 const db = admin.firestore();
