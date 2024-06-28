@@ -11,7 +11,7 @@ import { getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import Fuse from 'fuse.js';
 import { IUploadSession } from '@interfaces/upload.session.interface';
 import { refreshAccessToken } from '@utils/oauth';
-import connection from '@utils/rabbitmq';
+//import connection from '@utils/rabbitmq';
 
 export default class SessionService {
   private path: string;
