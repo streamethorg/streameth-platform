@@ -1,11 +1,12 @@
 import { config } from '@config';
 import admin from 'firebase-admin';
 
+const privateKey = config.firebase.privateKey.replace(/\\n/g, '\n');
 const serviceAccount = {
   type: config.firebase.type,
   project_id: config.firebase.projectId,
   private_key_id: config.firebase.privateKeyId,
-  private_key: config.firebase.privateKey,
+  private_key: privateKey,
   client_email: config.firebase.clientEmail,
   client_id: config.firebase.clientId,
   auth_uri: config.firebase.authUri,
