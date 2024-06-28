@@ -358,8 +358,8 @@ export const createClip = async (data: {
         description: session.description,
         date: new Date(),
         track: session.track.map((track) => track).join(', '),
-        url: await getPlayback(session.assetId),
-        mp4Url: await getDownloadUrl(session.assetId),
+        url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/index.m3u8`,
+        mp4Url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/1080p0.mp4`,
         assetId: parsedClip.asset.id,
         iframeUrl: `<iframe src="http://streameth.org/embed/?playbackId=${parsedClip.asset.playbackId}&vod=true&streamId=&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
       };
