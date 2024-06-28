@@ -73,16 +73,18 @@ function EmbedButton({
   streamId,
   playerName,
   vod,
+  className,
 }: {
   playbackId?: string
   streamId?: string
   playerName: string
   vod?: boolean
+  className?: string
 }) {
   return (
     <Credenza>
       <CredenzaTrigger>
-        <Button className="bg-white" variant="outline">
+        <Button className={`bg-white ${className}`} variant="outline">
           <Code size={24} className="p-1" />
           Embed
         </Button>

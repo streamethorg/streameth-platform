@@ -48,7 +48,7 @@ export default class StageService {
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
     }
-    return await this.controller.store.findAll(filter, this.path);
+    return await this.controller.store.findAll(filter);
   }
 
   async update(stageId: string, stage: IStage): Promise<IStage> {
@@ -66,10 +66,7 @@ export default class StageService {
     const isObjectId = /[0-9a-f]{24}/i.test(eventId);
     const filter = isObjectId ? { _id: eventId } : { slug: eventId };
     const event = await Events.findOne(filter);
-    return await this.controller.store.findAll(
-      { eventId: event?._id },
-      `${this.path}/${eventId}`,
-    );
+    return await this.controller.store.findAll({ eventId: event?._id });
   }
 
   async findAllStagesForOrganization(

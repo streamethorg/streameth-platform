@@ -42,9 +42,8 @@ export default class SpeakerService {
 
   async findAllSpeakersForEvent(eventId: string): Promise<Array<ISpeaker>> {
     const event = await Events.findOne({ slug: eventId });
-    return await this.controller.store.findAll(
-      { eventId: event?._id.toString() },
-      `${this.path}/${eventId}`,
-    );
+    return await this.controller.store.findAll({
+      eventId: event?._id.toString(),
+    });
   }
 }

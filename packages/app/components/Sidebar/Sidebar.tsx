@@ -1,7 +1,12 @@
 'use client'
 
 import StreamethStudio from '@/lib/svg/StreamethStudio'
-import { ChevronLast, ChevronFirst, BookOpenText } from 'lucide-react'
+import {
+  ChevronLast,
+  ChevronFirst,
+  BookOpenText,
+  MoveUpRight,
+} from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useContext, createContext, useState, ReactNode } from 'react'
@@ -11,7 +16,7 @@ const SidebarContext = createContext<
 >(undefined)
 
 export const SidebarUI = ({ children }: { children: ReactNode }) => {
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState(false)
 
   return (
     <aside className="flex flex-col h-screen bg-primary">
@@ -47,6 +52,7 @@ export const SidebarUI = ({ children }: { children: ReactNode }) => {
           }`}>
           Docs
         </span>
+        {expanded && <MoveUpRight className="ml-auto" size={12} />}
         {!expanded && (
           <div
             className={`

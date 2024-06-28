@@ -46,5 +46,21 @@ export const config = {
     appId: validatedEnv.PRIVY_APP_ID,
     appSecret: validatedEnv.PRIVY_SECRET_KEY,
   },
-  oauthSecret: validatedEnv.OAUTH_SECRET,
+  oauth: {
+    google: {
+      secretKey: validatedEnv.GOOGLE_OAUTH_SECRET,
+      clientId: validatedEnv.GOOGLE_CLIENT_ID,
+    },
+    twitter: {
+      secretKey: validatedEnv.TWITTER_OAUTH_SECRET,
+      clientId: validatedEnv.TWITTER_CLIENT_ID,
+    },
+  },
+  mq: {
+    host: validatedEnv.MQ_HOST,
+    port: validatedEnv.MQ_PORT,
+    username: validatedEnv.MQ_USERNAME,
+    secret: validatedEnv.MQ_SECRET,
+  },
+  firebaseServiceAccount: validatedEnv.FIREBASE_SERVICE_ACCOUNT,
 };

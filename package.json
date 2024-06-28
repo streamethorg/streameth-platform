@@ -9,7 +9,8 @@
       "packages/tools/ai-tools",
       "packages/server",
       "packages/importer",
-      "packages/contracts"
+      "packages/contracts",
+      "packages/video-uploader"
     ]
   },
   "scripts": {

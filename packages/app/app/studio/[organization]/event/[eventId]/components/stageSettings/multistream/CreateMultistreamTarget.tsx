@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -10,37 +11,20 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { createMultistreamAction } from '@/lib/actions/stages'
 import { ReloadIcon } from '@radix-ui/react-icons'
-// TODO
-//@ts-ignore
 import { useFormState, useFormStatus } from 'react-dom'
+import { Plus } from 'lucide-react'
 
 const initialState = {
   message: '',
   success: false,
 }
 
-function SubmitButton() {
-  const { pending } = useFormStatus()
-
-  if (pending) {
-    return (
-      <Button disabled>
-        <ReloadIcon className="mr-2 w-4 h-4 animate-spin" />
-        Please wait
-      </Button>
-    )
-  }
-  return <Button type="submit">Create</Button>
-}
-
 export const CreateMultistreamTarget = ({
   streamId,
   organizationId,
-  btnName = 'Create',
+  btnName = 'Add',
 }: {
   streamId?: string
   organizationId?: string
@@ -62,57 +46,17 @@ export const CreateMultistreamTarget = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">{btnName}</Button>
+        <Button variant="primary" className="space-x-2">
+          <Plus />
+          <span className="font-bold">{btnName}</span>
+        </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white sm:max-w-[425px]">
+      <DialogContent className="px-8 bg-white sm:max-w-[625px]">
         <DialogHeader>
-          <DialogTitle>Create multistream target</DialogTitle>
+          <DialogTitle className="mx-auto">
+            Create multistream target
+          </DialogTitle>
         </DialogHeader>
-        <form action={formAction} className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 gap-4 items-center">
-            <Input type="hidden" name="streamId" value={streamId} />
-            <Input
-              type="hidden"
-              name="organizationId"
-              value={organizationId}
-            />
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              name="name"
-              className="col-span-3"
-              placeholder="e.g. streaming.tv"
-            />
-          </div>
-          <div className="grid grid-cols-4 gap-4 items-center">
-            <Label htmlFor="url" className="text-right">
-              Ingest URL
-            </Label>
-            <Input
-              id="url"
-              name="url"
-              className="col-span-3"
-              placeholder="e.g. rtmp://streaming.tv/live"
-            />
-          </div>
-          <div className="grid grid-cols-4 gap-4 items-center">
-            <Label htmlFor="streamKey" className="text-right">
-              Stream key (optional)
-            </Label>
-            <Input
-              id="streamKey"
-              name="streamKey"
-              className="col-span-3"
-              placeholder="e.g. a1b2-4d3c-e5f6-8h7g"
-            />
-          </div>
-
-          <DialogFooter>
-            <SubmitButton />
-          </DialogFooter>
-        </form>
       </DialogContent>
     </Dialog>
   )
