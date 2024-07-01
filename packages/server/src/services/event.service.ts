@@ -60,7 +60,7 @@ export default class EventService {
     if (d.unlisted != undefined) {
       filter = { ...filter, unlisted: d.unlisted };
     }
-    return await this.controller.store.findAll(filter, this.path);
+    return await this.controller.store.findAll(filter);
   }
 
   async deleteOne(eventId: string): Promise<void> {

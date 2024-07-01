@@ -8,6 +8,7 @@ import Stage from '@models/stage.model';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import SessionModel from '@models/session.model';
 import { SessionType } from '@interfaces/session.interface';
+import { createEventVideoById } from './firebase';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -135,7 +136,6 @@ export const getDownloadUrl = async (assetId: string): Promise<string> => {
     if (!data.downloadUrl) {
       return '';
     }
-    console.log(`Download url: ${data.downloadUrl}`);
     return data.downloadUrl;
   } catch (e) {
     console.error(`Error fetching asset:`, e);
@@ -339,6 +339,7 @@ export const createClip = async (data: {
       playbackId: data.playbackId,
     });
     const parsedClip = JSON.parse(clip.rawResponse.data.toString());
+    let session = await SessionModel.findById(data.sessionId);
     await SessionModel.findByIdAndUpdate(data.sessionId, {
       assetId: parsedClip.asset.id,
       playbackId: parsedClip.asset.playbackId,
@@ -346,6 +347,26 @@ export const createClip = async (data: {
       end: new Date().getTime(),
       type: SessionType.clip,
     });
+    if (session.firebaseId) {
+      const speakerNames = session.speakers
+        .map((speaker) => speaker.name)
+        .join(', ');
+      const newData = {
+        fullTitle: `${speakerNames} :  ${session.name}`,
+        title: session.name,
+        speaker: speakerNames,
+        description: session.description,
+        date: new Date(),
+        track: session.track.map((track) => track).join(', '),
+        url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/index.m3u8`,
+        mp4Url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/1080p0.mp4`,
+        assetId: parsedClip.asset.id,
+        iframeUrl: `<iframe src="http://streameth.org/embed/?playbackId=${parsedClip.asset.playbackId}&vod=true&streamId=&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
+      };
+      // Update Firebase
+      await createEventVideoById(session.firebaseId, newData);
+    }
+
     return parsedClip;
   } catch (e) {
     console.log('error', e);

@@ -59,13 +59,24 @@ export default class OrganizationService {
     if (!isObjectId && !isPathId) {
       return await this.controller.store.findOne({ slug: organizationId });
     }
-    const findOrg = await this.controller.store.findById(id);
+    const findOrg = await this.controller.store.findById(id, {
+      'socials.accessToken': 0,
+      'socials.refreshToken': 0,
+      'socials.expireTime': 0,
+    });
     if (!findOrg) throw new HttpException(404, 'Organization not found');
     return findOrg;
   }
 
   async getAll(): Promise<Array<IOrganization>> {
-    return await this.controller.store.findAll({}, this.path);
+    return await this.controller.store.findAll(
+      {},
+      {
+        'socials.accessToken': 0,
+        'socials.refreshToken': 0,
+        'socials.expireTime': 0,
+      },
+    );
   }
 
   async deleteOne(organizationId: string): Promise<void> {
@@ -95,6 +106,7 @@ export default class OrganizationService {
       if (!user) {
         let newAccount = await privy.importUser({
           linkedAccounts: [
+            //@ts-ignore
             {
               type: 'email',
               address: address,

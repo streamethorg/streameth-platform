@@ -34,38 +34,33 @@ const LivestreamEmbedCode = ({
     playerName: playerName,
   })
   return (
-    <Card className="w-full shadow-none bg-white">
-      <CardContent className="p-3 lg:p-6 flex justify-between items-center">
-        <CardTitle className="text-xl">Embed Stream</CardTitle>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button variant="outline" className="flex gap-1">
-              <Code2 className="w-4 h-4" /> <p>Copy Embed Code</p>
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="w-[450px]">
-            <DialogHeader>
-              <DialogTitle>Embed your Livestream</DialogTitle>
-              <DialogDescription>
-                Paste this code into your HTML file
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex p-2 rounded-lg bg-input justify-between items-center text-[12px]">
-              <p>HTML</p>
-              <div
-                onClick={() => copyToClipboard(generatedEmbedCode)}
-                className="flex gap-2 cursor-pointer">
-                <Copy className="text-muted-foreground w-4 h-4" />
-                Copy Code
-              </div>
-            </div>
-            <p className="rounded-lg bg-input p-2 w-full text-[12px] overflow-auto">
-              {generatedEmbedCode}
-            </p>
-          </DialogContent>
-        </Dialog>
-      </CardContent>
-    </Card>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" className="flex gap-1">
+          <Code2 className="w-4 h-4" /> <p>Copy Embed Code</p>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="w-[450px]">
+        <DialogHeader>
+          <DialogTitle>Embed your Livestream</DialogTitle>
+          <DialogDescription>
+            Paste this code into your HTML file
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex p-2 rounded-lg bg-input justify-between items-center text-[12px]">
+          <p>HTML</p>
+          <div
+            onClick={() => copyToClipboard(generatedEmbedCode)}
+            className="flex gap-2 cursor-pointer">
+            <Copy className="text-muted-foreground w-4 h-4" />
+            Copy Code
+          </div>
+        </div>
+        <p className="rounded-lg bg-input p-2 w-full text-[12px] overflow-auto">
+          {generatedEmbedCode}
+        </p>
+      </DialogContent>
+    </Dialog>
   )
 }
 

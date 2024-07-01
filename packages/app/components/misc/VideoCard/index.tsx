@@ -8,7 +8,6 @@ import {
 import Thumbnail from './thumbnail'
 import Image from 'next/image'
 import { IExtendedSession, IExtendedEvent } from '@/lib/types'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { generateThumbnailAction } from '@/lib/actions/sessions'
 
 const VideoCard = ({
@@ -30,7 +29,8 @@ const VideoCard = ({
     generateThumbnailAction(session).then(
       (url) => url && setImageUrl(url)
     )
-  }, [session])
+  }, [])
+
   return (
     <div className="min-h-full w-full rounded-xl  uppercase">
       <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />

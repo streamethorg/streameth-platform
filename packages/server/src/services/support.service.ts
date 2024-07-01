@@ -24,6 +24,6 @@ export default class SupportService {
   }
 
   async getAll(): Promise<Array<ISupport>> {
-    return await this.controller.store.findAll({}, this.path);
+    return await this.controller.store.findAll({});
   }
 }

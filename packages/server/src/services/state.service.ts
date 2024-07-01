@@ -60,8 +60,8 @@ export default class StateService {
     }
 
     const [states] = await Promise.all([
-      await this.controller.store.findAll(filter, this.path),
-      await this.controller.store.findAll(filter, this.path, 0, 0),
+      await this.controller.store.findAll(filter),
+      await this.controller.store.findAll(filter, {}, this.path, 0, 0),
     ]);
 
     return states;

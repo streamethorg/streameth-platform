@@ -49,6 +49,8 @@ export interface ISession {
   type: SessionType;
   createdAt?: string;
   nftCollections?: Types.ObjectId | string[];
+  socials?: { name: string; date: number }[];
+  firebaseId?: string;
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}
