@@ -8,8 +8,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { deleteDestinationAction } from '@/lib/actions/organizations'
-import { Trash2 } from 'lucide-react'
+
 import React, { useState } from 'react'
+import { LuTrash2 } from 'react-icons/lu'
 import { toast } from 'sonner'
 
 const DeleteDestination = ({
@@ -48,12 +49,13 @@ const DeleteDestination = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <Button className="justify-start" variant={'ghost'}>
-          <Trash2 className="text-destructive w-5 h-5 pr-1" /> Delete
+          <LuTrash2 className="text-destructive w-5 h-5 pr-1" />{' '}
+          Delete
         </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-5 justify-center items-center">
         <div className="bg-destructive rounded-full p-3">
-          <Trash2 className="text-white w-5 h-5" />
+          <LuTrash2 className="text-white w-5 h-5" />
         </div>
         <p className="text-xl">
           Are you sure you want to delete this Destination?
