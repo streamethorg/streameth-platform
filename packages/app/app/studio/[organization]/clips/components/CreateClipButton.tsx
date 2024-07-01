@@ -158,8 +158,8 @@ const ClipButton = ({
           (custom ? !name : !sessionId)
         }
         onClick={handleCreateClip}
-        variant="primary"
-        className="mt-auto text-white">
+        variant="outlinePrimary"
+        className="mt-auto text-base">
         {isLoading ? (
           <>
             <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
@@ -238,7 +238,7 @@ const CreateClipButton = ({
       </DialogContent>
       <Button
         onClick={() => setIsOpen(true)}
-        variant="primary"
+        variant="outlinePrimary"
         className="w-full"
         disabled={isLoading}>
         Create Clip

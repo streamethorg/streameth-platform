@@ -22,7 +22,7 @@ const CopyText = ({
     </div>
     <Copy
       onClick={() => copyToClipboard(text)}
-      className="text-muted-foreground w-5 h-5 cursor-pointer"
+      className="text-primary w-5 h-5 cursor-pointer"
     />
   </div>
 )

@@ -296,7 +296,7 @@ const EditLivestream = ({
 
               <Button
                 loading={isLoading}
-                variant="primary"
+                variant="outlinePrimary"
                 disabled={getFormSubmitStatus(form) || isLoading}
                 type="submit">
                 Update livestream
