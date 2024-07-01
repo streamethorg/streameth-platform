@@ -12,6 +12,9 @@
 			},
 			"ISocials": {
 				"properties": {
+					"_id": {
+						"type": "string"
+					},
 					"type": {
 						"type": "string"
 					},
@@ -1442,6 +1445,25 @@
 							}
 						]
 					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
 					"firebaseId": {
 						"type": "string"
 					}
@@ -1598,6 +1620,25 @@
 							}
 						]
 					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
 					"firebaseId": {
 						"type": "string"
 					}
@@ -1713,6 +1754,25 @@
 								"type": "array"
 							}
 						]
+					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
 					},
 					"firebaseId": {
 						"type": "string"
@@ -1836,6 +1896,25 @@
 					},
 					"active": {
 						"type": "boolean"
+					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -1868,6 +1947,33 @@
 				"required": [
 					"status",
 					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UploadSessionDto": {
+				"properties": {
+					"socialId": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"sessionId": {
+						"type": "string"
+					},
+					"token": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"socialId",
+					"organizationId",
+					"sessionId",
+					"type"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1958,6 +2064,12 @@
 					"description": {
 						"type": "string"
 					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
+					},
 					"email": {
 						"type": "string"
 					},
@@ -1981,12 +2093,6 @@
 					},
 					"address": {
 						"type": "string"
-					},
-					"socials": {
-						"items": {
-							"$ref": "#/components/schemas/ISocials"
-						},
-						"type": "array"
 					}
 				},
 				"required": [
@@ -2011,6 +2117,12 @@
 					"description": {
 						"type": "string"
 					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
+					},
 					"email": {
 						"type": "string"
 					},
@@ -2034,12 +2146,6 @@
 					},
 					"address": {
 						"type": "string"
-					},
-					"socials": {
-						"items": {
-							"$ref": "#/components/schemas/ISocials"
-						},
-						"type": "array"
 					}
 				},
 				"required": [
@@ -4498,41 +4604,34 @@
 				]
 			}
 		},
-		"/sessions/upload/{sessionId}": {
+		"/sessions/upload": {
 			"post": {
-				"operationId": "UploadSessionToYouTube",
+				"operationId": "UploadSessionToSocials",
 				"responses": {
 					"201": {
 						"description": "",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_ISession_"
+									"$ref": "#/components/schemas/IStandardResponse_void_"
 								}
 							}
 						}
 					}
 				},
-				"summary": "Upload session to YouTube",
+				"summary": "Publish session to socials",
 				"tags": [
 					"Session"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "sessionId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
+				"parameters": [],
 				"requestBody": {
 					"required": true,
 					"content": {
 						"application/json": {
-							"schema": {}
+							"schema": {
+								"$ref": "#/components/schemas/UploadSessionDto"
+							}
 						}
 					}
 				}
@@ -4928,12 +5027,12 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"socialId": {
+									"destinationId": {
 										"type": "string"
 									}
 								},
 								"required": [
-									"socialId"
+									"destinationId"
 								],
 								"type": "object"
 							}

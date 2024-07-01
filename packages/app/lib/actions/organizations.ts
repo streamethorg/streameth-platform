@@ -2,6 +2,7 @@
 import {
   addOrganizationMember,
   createOrganization,
+  deleteDestination,
   deleteTeamMember,
   updateOrganization,
 } from '@/lib/services/organizationService'
@@ -100,6 +101,30 @@ export const deleteTeamMemberAction = async ({
 
   const response = await deleteTeamMember({
     memberWalletAddress,
+    organizationId,
+    authToken,
+  })
+  if (!response) {
+    throw new Error('Error deleting team member action')
+  }
+  revalidatePath('/studio')
+  return response
+}
+
+export const deleteDestinationAction = async ({
+  destinationId,
+  organizationId,
+}: {
+  destinationId: string
+  organizationId: string
+}) => {
+  const authToken = cookies().get('user-session')?.value
+  if (!authToken) {
+    throw new Error('No user session found')
+  }
+
+  const response = await deleteDestination({
+    destinationId,
     organizationId,
     authToken,
   })
