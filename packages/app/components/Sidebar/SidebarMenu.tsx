@@ -1,13 +1,13 @@
 'use client'
 
 import { SidebarUI, SidebarItem } from './Sidebar'
-import { CiLocationOn } from 'react-icons/ci'
 
 import {
   LuUsers,
   LuVideotape,
   LuHome,
   LuSettings,
+  LuShare2,
 } from 'react-icons/lu'
 
 const SidebarMenu = ({
@@ -29,7 +29,7 @@ const SidebarMenu = ({
     {
       text: 'Destinations',
       navigationPath: '/destinations',
-      icon: <CiLocationOn size={25} />,
+      icon: <LuShare2 size={25} />,
     },
     {
       text: 'Team',
