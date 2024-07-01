@@ -41,7 +41,7 @@ const LivestreamTable = ({
 }) => {
   if (streams.length === 0) {
     return (
-      <div className="flex flex-col gap-4 justify-center items-center m-auto h-96 bg-white rounded-xl border">
+      <div className="w-full flex flex-col gap-4 justify-center items-center  h-96 bg-white rounded-xl border">
         <EmptyFolder />
         <CardTitle className="text-2xl font-semibold">
           No livestreams found
