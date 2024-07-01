@@ -35,7 +35,7 @@ const UploadVideoDialog = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={'primary'} className="text-white">
+        <Button variant={'outlinePrimary'} className='text-black'>
           Upload video
         </Button>
       </DialogTrigger>

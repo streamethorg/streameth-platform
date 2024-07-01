@@ -25,13 +25,13 @@ const Multistream = ({
   return (
     <div className="w-full">
       {streamTargets?.length === 0 ? (
-        <Card className="bg-white shadow-none">
+        <Card className="bg-white shadow-none border-none">
           <CardContent className="flex flex-col justify-between items-center p-3 space-y-2 lg:p-6">
             <p className="text-muted-foreground">
               You have no destinations yet
             </p>
             <CreateMultistreamTarget
-              btnName="Add First Channel"
+              btnName="Add First Destination"
               organizationId={organizationId}
               streamId={stream?.streamSettings?.streamId || ''}
             />

@@ -46,7 +46,7 @@ export const CreateMultistreamTarget = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="primary" className="space-x-2">
+        <Button variant="outlinePrimary" className="space-x-2">
           <Plus />
           <span className="font-bold">{btnName}</span>
         </Button>

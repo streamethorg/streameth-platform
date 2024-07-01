@@ -21,7 +21,7 @@ const LibraryListLayout = async ({
 }) => {
   return (
     <Table className="bg-white">
-      <TableHeader className="sticky top-0 z-50 bg-white">
+      <TableHeader className="sticky top-0 z-10 bg-white">
         <TableRow className="hover:bg-white">
           <TableHead className="cursor-pointer">
             <TableSort title="Title" sortBy="name" />

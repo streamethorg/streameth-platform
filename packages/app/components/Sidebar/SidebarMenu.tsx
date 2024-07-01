@@ -31,6 +31,11 @@ const SidebarMenu = ({
     //   icon: <Radio size={25} />,
     // },
     {
+      text: 'video NFTs',
+      navigationPath: '/nfts',
+      icon: <Radio size={25} />,
+    },
+    {
       text: 'Team',
       navigationPath: '/team',
       icon: <UsersRound size={25} />,

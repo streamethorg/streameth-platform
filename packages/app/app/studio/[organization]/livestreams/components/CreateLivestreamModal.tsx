@@ -324,7 +324,7 @@ const CreateLivestreamModal = ({
                 </Button>
                 <Button
                   loading={isLoading}
-                  variant="primary"
+                  variant="outlinePrimary"
                   disabled={
                     getFormSubmitStatus(form) ||
                     isLoading ||

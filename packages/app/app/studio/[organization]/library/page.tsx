@@ -90,15 +90,15 @@ const Library = async ({
   ) as unknown as IExtendedSession[]
 
   return (
-    <div className="flex flex-col w-full h-full bg-white">
+    <div className="flex flex-col w-full h-full">
       <Card
         style={{
-          backgroundImage: `url(/backgrounds/livestreamBg.png)`,
+          backgroundImage: `url(/backgrounds/nftBg.svg)`,
         }}
-        className="p-4 bg-no-repeat bg-cover border-none shadow-none">
+        className="text-white bg-black bg-cover border-none shadow-none rounded-none w-full">
         <CardHeader>
           <CardTitle>Video library</CardTitle>
-          <CardDescription>
+          <CardDescription className='text-white'>
             Manage you clips and livestream recordings or upload a new
             video.
           </CardDescription>

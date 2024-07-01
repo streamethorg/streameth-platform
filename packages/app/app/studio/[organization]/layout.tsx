@@ -49,7 +49,7 @@ const Layout = async ({
                   organizations={userData?.organizations}
                 />
                 <Link href="/studio/create">
-                  <Button variant="primary">
+                  <Button variant="outlinePrimary">
                     Create Organization
                   </Button>
                 </Link>
