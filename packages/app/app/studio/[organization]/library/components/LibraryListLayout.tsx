@@ -8,7 +8,7 @@ import {
   TableBody,
 } from '@/components/ui/table'
 import TableCells from './TableCells'
-import { IExtendedSession, eSort } from '@/lib/types'
+import { IExtendedSession } from '@/lib/types'
 import LayoutSelection from './LayoutSelection'
 import TableSort from '@/components/misc/TableSort'
 
@@ -21,7 +21,7 @@ const LibraryListLayout = async ({
 }) => {
   return (
     <Table className="bg-white">
-      <TableHeader className="sticky top-0 z-50 bg-white">
+      <TableHeader className="sticky top-0 z-10 bg-white">
         <TableRow className="hover:bg-white">
           <TableHead className="cursor-pointer">
             <TableSort title="Title" sortBy="name" />

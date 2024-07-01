@@ -91,7 +91,6 @@ export default function CreateOrganizationForm({
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {}}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4">
         <div>
@@ -103,8 +102,8 @@ export default function CreateOrganizationForm({
                 <FormControl>
                   <ImageUpload
                     className="w-full h-40 rounded-xl bg-neutrals-300"
-                    placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
-                    Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
+                    placeholder="Click to upload image here. Maximum image file size is 5MB.
+                    Best resolution of 1500 x 500px. Aspect ratio of 3:1."
                     aspectRatio={1}
                     path={`organizations`}
                     {...field}
