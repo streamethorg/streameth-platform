@@ -1,13 +1,14 @@
 'use client'
 
 import { SidebarUI, SidebarItem } from './Sidebar'
+import { CiLocationOn } from 'react-icons/ci'
+
 import {
-  UsersRound,
-  Videotape,
-  Radio,
-  Home,
-  Settings,
-} from 'lucide-react'
+  LuUsers,
+  LuVideotape,
+  LuHome,
+  LuSettings,
+} from 'react-icons/lu'
 
 const SidebarMenu = ({
   organizationSlug,
@@ -18,27 +19,27 @@ const SidebarMenu = ({
     {
       text: 'Home',
       navigationPath: '',
-      icon: <Home size={25} />,
+      icon: <LuHome size={25} />,
     },
     {
       text: 'Library',
       navigationPath: '/library',
-      icon: <Videotape size={25} />,
+      icon: <LuVideotape size={25} />,
     },
-    // {
-    //   text: 'Livestreams',
-    //   navigationPath: '/livestreams',
-    //   icon: <Radio size={25} />,
-    // },
+    {
+      text: 'Destinations',
+      navigationPath: '/destinations',
+      icon: <CiLocationOn size={25} />,
+    },
     {
       text: 'Team',
       navigationPath: '/team',
-      icon: <UsersRound size={25} />,
+      icon: <LuUsers size={25} />,
     },
     {
       text: 'Settings',
       navigationPath: `/settings`,
-      icon: <Settings size={25} />,
+      icon: <LuSettings size={25} />,
     },
   ]
 
