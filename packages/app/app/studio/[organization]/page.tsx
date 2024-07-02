@@ -1,13 +1,11 @@
 'use server'
 
-import { CameraIcon } from 'lucide-react'
+import { LuFileUp } from 'react-icons/lu'
 import Link from 'next/link'
-import { Livestreams, Loading } from './livestreams/page'
+import { Loading } from './livestreams/page'
 import {
-  IExtendedSession,
   IExtendedStage,
   LivestreamPageParams,
-  eSort,
 } from '@/lib/types'
 import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal'
 import { Suspense } from 'react'
@@ -16,9 +14,7 @@ import LivestreamTable from './livestreams/components/LivestreamTable'
 import { notFound } from 'next/navigation'
 import { sortArray } from '@/lib/utils/utils'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
-import LibraryListLayout from './library/components/LibraryListLayout'
-import { fetchAllSessions } from '@/lib/data'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -28,20 +24,15 @@ const OrganizationPage = async ({
   })
 
   if (!organization) return notFound()
-  const stages = sortArray(
-    await fetchOrganizationStages({
-      organizationId: organization._id,
-    }),
-    eSort.desc_date
-  )
 
-  const sessions = (
-    await fetchAllSessions({
-      organizationSlug: params.organization,
-    })
-  ).sessions.filter((session) => session.videoUrl)
+  const stages = await fetchOrganizationStages({
+    organizationId: organization._id,
+  })
 
-  const sortedSessions = sortArray(sessions, searchParams.sort)
+  const sortedStages = sortArray(
+    stages,
+    searchParams.sort
+  ) as unknown as IExtendedStage[]
 
   return (
     <div className="h-full w-full p-8 flex flex-col">
@@ -55,7 +46,7 @@ const OrganizationPage = async ({
           <Link href={`/studio/${params.organization}/library`}>
             <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center">
               <div className="p-4 border bg-primary  rounded-xl text-white">
-                <CameraIcon className="h-6" />
+                <LuFileUp className="h-6" />
               </div>
               <span className=" ">Upload Video</span>
             </div>
@@ -69,7 +60,7 @@ const OrganizationPage = async ({
           fallback={<Loading />}>
           <LivestreamTable
             organizationSlug={params?.organization}
-            streams={stages as IExtendedStage[]}
+            streams={sortedStages}
           />
         </Suspense>
       </div>

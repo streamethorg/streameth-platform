@@ -8,7 +8,7 @@ import {
   TableBody,
 } from '@/components/ui/table'
 import TableCells from './TableCells'
-import { IExtendedSession, eSort } from '@/lib/types'
+import { IExtendedSession } from '@/lib/types'
 import LayoutSelection from './LayoutSelection'
 import TableSort from '@/components/misc/TableSort'
 

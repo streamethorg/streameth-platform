@@ -36,7 +36,7 @@ import { formatDate } from '@/lib/utils/time'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
-import { CameraIcon } from 'lucide-react'
+import { LuRadio } from 'react-icons/lu'
 
 const CreateLivestreamModal = ({
   organization,
@@ -139,9 +139,9 @@ const CreateLivestreamModal = ({
       <DialogTrigger asChild>
         <Button
           variant={'outline'}
-          className="h-auto w-fit flex flex-row bg-white px-2 justify-start rounded-xl border space-x-4 items-center">
-          <div className="p-4 border bg-primary rounded-xl text-white">
-            <CameraIcon className="h-6" />
+          className="flex flex-row justify-start items-center p-2 pr-4 space-x-4 h-auto bg-white rounded-xl border w-fit">
+          <div className="p-4 text-white rounded-xl border bg-primary">
+            <LuRadio size={25} />
           </div>
           <span className="">Create Livestream</span>
         </Button>
@@ -149,7 +149,7 @@ const CreateLivestreamModal = ({
       {!streamType ? (
         <CreateLivestreamOptions setStreamType={setStreamType} />
       ) : (
-        <DialogContent className="sm:max-w-[450px] bg-white overflow-auto">
+        <DialogContent className="overflow-auto bg-white sm:max-w-[450px]">
           <DialogHeader>
             <DialogTitle>
               {!isSchedule ? 'Create' : 'Schedule'} livestream
@@ -182,12 +182,12 @@ const CreateLivestreamModal = ({
                 control={form.control}
                 name="thumbnail"
                 render={({ field }) => (
-                  <FormItem className="flex p-1 aspect-video mt-4">
+                  <FormItem className="flex p-1 mt-4 aspect-video">
                     <FormLabel>Thumbnail</FormLabel>
                     <FormControl>
                       <ImageUpload
-                        placeholder="Drag or click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                        className="w-full h-full bg-neutrals-300 text-black m-auto"
+                        placeholder="Click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
+                        className="m-auto w-full h-full text-black bg-neutrals-300"
                         aspectRatio={1}
                         path={`livestreams/${organization?.slug}`}
                         {...field}
@@ -213,7 +213,7 @@ const CreateLivestreamModal = ({
                         />
                         <Label>Yes</Label>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex gap-1 items-center">
                         <Checkbox
                           defaultChecked
                           onCheckedChange={() =>
@@ -224,7 +224,7 @@ const CreateLivestreamModal = ({
                       </div>
                     </div>
                   </div>
-                  <div className="flex space-x-3 mt-4">
+                  <div className="flex mt-4 space-x-3">
                     <FormField
                       control={form.control}
                       name="streamDate"
@@ -263,14 +263,14 @@ const CreateLivestreamModal = ({
                     />
                   </div>
                   {isPast && (
-                    <p className="text-destructive text-[12px] mt-1">
+                    <p className="mt-1 text-destructive text-[12px]">
                       Couldn&apos;t schedule. The date and time
                       selected are too far in the past.
                     </p>
                   )}
                   {isMultiDate && (
                     <>
-                      <div className="flex space-x-3 mt-4">
+                      <div className="flex mt-4 space-x-3">
                         <FormField
                           control={form.control}
                           name="streamEndDate"
@@ -309,7 +309,7 @@ const CreateLivestreamModal = ({
                         />
                       </div>
                       {validateEndDate && (
-                        <p className="text-destructive text-[12px] mt-1">
+                        <p className="mt-1 text-destructive text-[12px]">
                           Couldn&apos;t schedule. End date and time
                           selected are too far in the past.
                         </p>

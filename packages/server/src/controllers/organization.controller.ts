@@ -160,11 +160,11 @@ export class OrganizationController extends Controller {
   @Delete('/socials/{organizationId}')
   async deleteOrgSocial(
     @Path() organizationId: string,
-    @Body() body: { socialId: string },
+    @Body() body: { destinationId: string },
   ): Promise<IStandardResponse<void>> {
     const org = await this.organizationService.deleteOrgSocial(
       organizationId,
-      body.socialId,
+      body.destinationId,
     );
     return SendApiResponse('social deleted', org);
   }

@@ -8,7 +8,7 @@ const TransactionHash = ({ hash }: { hash: string }) => {
       target="_blank"
       rel="noopener"
       className="text-blue text-sm mt-1 flex items-center gap-1"
-      href={`https://sepolia.basescan.org/tx/${hash}`}>
+      href={`https://basescan.org/tx/${hash}`}>
       View on Base Scan <ExternalLinkIcon className="w-4 h-4" />
     </Link>
   )

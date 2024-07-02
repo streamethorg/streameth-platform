@@ -9,8 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import SwitchOrganization from '../components/SwitchOrganization'
-import { fetchUserAction } from '@/lib/actions/users'
 
 const Settings = async ({
   params,
@@ -25,7 +23,6 @@ const Settings = async ({
   })
 
   if (!organization) return null
-  const userData = await fetchUserAction({})
 
   return (
     <div className="flex p-12 items center">
