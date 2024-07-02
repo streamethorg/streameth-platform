@@ -316,7 +316,7 @@ const CreateNFTForm = ({
                     (step == 2 && formState.selectedVideo.length < 1)
                   }
                   onClick={handleNextButton}
-                  variant="primary">
+                  variant="outlinePrimary">
                   {step == 1
                     ? 'Continue'
                     : type == 'multiple'

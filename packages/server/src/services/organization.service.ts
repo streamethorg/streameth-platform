@@ -154,8 +154,14 @@ export default class OrganizationService {
     );
   }
 
-  async deleteOrgSocial(organizationId: string, socialId: string) {
-    await this.get(organizationId);
-    await Organization.updateOne({ $pull: { social: { _id: socialId } } });
+  async deleteOrgSocial(organizationId: string, destinationId: string) {
+    const organization = await this.get(organizationId);
+    if (!organization) {
+      throw new Error('Organization not found');
+    }
+    await Organization.updateOne(
+      { _id: organizationId },
+      { $pull: { socials: { _id: destinationId } } },
+    );
   }
 }

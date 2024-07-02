@@ -126,11 +126,51 @@ export const sessionSchema = z.object({
   published: z.boolean().default(false),
 })
 
+const blacklistedPatterns = [
+  /\./,
+  /\$/,
+  /\\/,
+  /\//,
+  /</,
+  />/,
+  /"/,
+  /'/,
+  /;/,
+  /:/,
+  /\|/,
+  /&/,
+  /\$/,
+  /#/,
+  /%/,
+  /\^/,
+  /\*/,
+  /@/,
+  /!/,
+  /\?/,
+  /^\s/, // Leading whitespace
+  /\s$/, // Trailing whitespace
+  /\s\s/, // Consecutive spaces
+  /[\x00-\x1F\x7F]/, // Control characters
+  /create/, // 'create'
+  /admin/i, // 'admin' case-insensitive
+  /root/i, // 'root' case-insensitive
+  /<script>/i, // '<script>' case-insensitive
+  /<img>/i, // '<img>' case-insensitive
+  /<a>/i, // '<a>' case-insensitive
+]
+
 export const organizationSchema = z.object({
   name: z
     .string()
     .min(1, 'Name is required')
-    .max(25, { message: 'Name is too long' }),
+    .max(25, { message: 'Name is too long' })
+    .refine(
+      (value) =>
+        !blacklistedPatterns.some((pattern) => pattern.test(value)),
+      {
+        message: `The string contains an invalid character(s).`,
+      }
+    ),
   logo: z.string().min(1, 'Logo is required'),
   banner: z.string().optional(),
   bio: z.string().optional(),

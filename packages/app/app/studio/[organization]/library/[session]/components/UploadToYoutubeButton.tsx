@@ -118,7 +118,7 @@ const UploadToYoutubeButton = ({
 
           <Button
             onClick={handlePublish}
-            variant="primary"
+            variant="outlinePrimary"
             disabled={!hasSocials || !selectedDestination}>
             Publish
           </Button>

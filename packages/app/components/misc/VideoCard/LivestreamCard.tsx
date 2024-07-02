@@ -47,16 +47,19 @@ const LivestreamCard = ({
           </Link>
           {showDate && (
             <div className="flex justify-between items-center">
-              <CardDescription className="text-xs truncate">
+              <CardDescription className="text-xs">
                 {livestream.isMultipleDate && livestream.streamEndDate
                   ? `${formatDate(
                       new Date(date),
-                      'ddd. MMM. D, YYYY'
+                      'ddd. MMM. D, YYYY, h:mm a'
                     )} - ${formatDate(
                       new Date(livestream.streamEndDate),
-                      'ddd. MMM. D, YYYY'
+                      'ddd. MMM. D, YYYY, h:mm a'
                     )}`
-                  : formatDate(new Date(date), 'ddd. MMM. D, YYYY')}
+                  : formatDate(
+                      new Date(date),
+                      'ddd. MMM. D, YYYY, h:mm a'
+                    )}
               </CardDescription>
             </div>
           )}

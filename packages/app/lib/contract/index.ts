@@ -1,27 +1,43 @@
 export const VideoFactoryAddress =
-  '0x12fb8277a7aA0210fe44fAD5eDb1F7ceA4490E9e'
+  '0x9F519A0e442f5e8FB1492638b0f3aA621182A9DA'
 
-export const contractChainID = 84532
+export const contractChainID = 8453
 
 export const VideoFactoryAbi = [
   {
     inputs: [
-      { internalType: 'address', name: '_impl', type: 'address' },
+      {
+        internalType: 'address',
+        name: '_impl',
+        type: 'address',
+      },
     ],
     stateMutability: 'nonpayable',
     type: 'constructor',
   },
-  { inputs: [], name: 'ERC1167FailedCreateClone', type: 'error' },
+  {
+    inputs: [],
+    name: 'ERC1167FailedCreateClone',
+    type: 'error',
+  },
   {
     inputs: [
-      { internalType: 'address', name: 'owner', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
     ],
     name: 'OwnableInvalidOwner',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'account', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'account',
+        type: 'address',
+      },
     ],
     name: 'OwnableUnauthorizedAccount',
     type: 'error',
@@ -84,15 +100,31 @@ export const VideoFactoryAbi = [
         name: '_baseTokenURI',
         type: 'string',
       },
-      { internalType: 'string', name: '_name', type: 'string' },
-      { internalType: 'string', name: '_symbol', type: 'string' },
-      { internalType: 'bool', name: '_limitedSupply', type: 'bool' },
+      {
+        internalType: 'string',
+        name: '_name',
+        type: 'string',
+      },
+      {
+        internalType: 'string',
+        name: '_symbol',
+        type: 'string',
+      },
+      {
+        internalType: 'bool',
+        name: '_limitedSupply',
+        type: 'bool',
+      },
       {
         internalType: 'uint256',
         name: '_maxSupply',
         type: 'uint256',
       },
-      { internalType: 'uint256', name: '_mintFee', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: '_mintFee',
+        type: 'uint256',
+      },
       {
         internalType: 'uint256',
         name: '_mintStartTime',
@@ -105,7 +137,13 @@ export const VideoFactoryAbi = [
       },
     ],
     name: 'createVideoCollection',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'nonpayable',
     type: 'function',
   },
@@ -113,7 +151,11 @@ export const VideoFactoryAbi = [
     inputs: [],
     name: 'getAllVideoCollections',
     outputs: [
-      { internalType: 'address[]', name: '', type: 'address[]' },
+      {
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
     ],
     stateMutability: 'view',
     type: 'function',
@@ -128,12 +170,36 @@ export const VideoFactoryAbi = [
     ],
     name: 'getMetadata',
     outputs: [
-      { internalType: 'string', name: '', type: 'string' },
-      { internalType: 'string', name: '', type: 'string' },
-      { internalType: 'bool', name: '', type: 'bool' },
-      { internalType: 'uint256', name: '', type: 'uint256' },
-      { internalType: 'uint256', name: '', type: 'uint256' },
-      { internalType: 'uint256', name: '', type: 'uint256' },
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
     type: 'function',
@@ -141,14 +207,26 @@ export const VideoFactoryAbi = [
   {
     inputs: [],
     name: 'implementation',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'owner',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
@@ -161,7 +239,11 @@ export const VideoFactoryAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'newOwner', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
+      },
     ],
     name: 'transferOwnership',
     outputs: [],
@@ -170,7 +252,11 @@ export const VideoFactoryAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: '_impl', type: 'address' },
+      {
+        internalType: 'address',
+        name: '_impl',
+        type: 'address',
+      },
     ],
     name: 'updateImplentation',
     outputs: [],
@@ -178,9 +264,21 @@ export const VideoFactoryAbi = [
     type: 'function',
   },
   {
-    inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     name: 'videoCollections',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
@@ -189,82 +287,146 @@ export const VideoFactoryAbi = [
 export const VideoNFTAbi = [
   {
     inputs: [
-      { internalType: 'address', name: 'sender', type: 'address' },
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
-      { internalType: 'address', name: 'owner', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
     ],
     name: 'ERC721IncorrectOwner',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'operator', type: 'address' },
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      {
+        internalType: 'address',
+        name: 'operator',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
     ],
     name: 'ERC721InsufficientApproval',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'approver', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'approver',
+        type: 'address',
+      },
     ],
     name: 'ERC721InvalidApprover',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'operator', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'operator',
+        type: 'address',
+      },
     ],
     name: 'ERC721InvalidOperator',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'owner', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
     ],
     name: 'ERC721InvalidOwner',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'receiver', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'receiver',
+        type: 'address',
+      },
     ],
     name: 'ERC721InvalidReceiver',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'sender', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
+      },
     ],
     name: 'ERC721InvalidSender',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
     ],
     name: 'ERC721NonexistentToken',
     type: 'error',
   },
-  { inputs: [], name: 'InvalidInitialization', type: 'error' },
-  { inputs: [], name: 'NotInitializing', type: 'error' },
+  {
+    inputs: [],
+    name: 'InvalidInitialization',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NotInitializing',
+    type: 'error',
+  },
   {
     inputs: [
-      { internalType: 'address', name: 'owner', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
     ],
     name: 'OwnableInvalidOwner',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'account', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'account',
+        type: 'address',
+      },
     ],
     name: 'OwnableUnauthorizedAccount',
     type: 'error',
   },
   {
     inputs: [
-      { internalType: 'string', name: 'message', type: 'string' },
+      {
+        internalType: 'string',
+        name: 'message',
+        type: 'string',
+      },
     ],
     name: 'WithdrawTransfer',
     type: 'error',
@@ -387,6 +549,25 @@ export const VideoNFTAbi = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: 'address',
+        name: 'receipeint',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'mintPrice',
+        type: 'uint256',
+      },
+    ],
+    name: 'SessionMinted',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: true,
         internalType: 'address',
         name: 'from',
@@ -409,28 +590,17 @@ export const VideoNFTAbi = [
     type: 'event',
   },
   {
-    anonymous: false,
     inputs: [
       {
-        indexed: false,
         internalType: 'address',
-        name: 'receipeint',
+        name: 'to',
         type: 'address',
       },
       {
-        indexed: false,
         internalType: 'uint256',
-        name: 'mintPrice',
+        name: 'tokenId',
         type: 'uint256',
       },
-    ],
-    name: 'sessionMinted',
-    type: 'event',
-  },
-  {
-    inputs: [
-      { internalType: 'address', name: 'to', type: 'address' },
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
     ],
     name: 'approve',
     outputs: [],
@@ -439,40 +609,65 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'owner', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
     ],
     name: 'balanceOf',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'baseFee',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'baseTokenUri',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'eventName',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
     ],
     name: 'getApproved',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
@@ -480,12 +675,36 @@ export const VideoNFTAbi = [
     inputs: [],
     name: 'getMetadata',
     outputs: [
-      { internalType: 'string', name: '', type: 'string' },
-      { internalType: 'string', name: '', type: 'string' },
-      { internalType: 'bool', name: '', type: 'bool' },
-      { internalType: 'uint256', name: '', type: 'uint256' },
-      { internalType: 'uint256', name: '', type: 'uint256' },
-      { internalType: 'uint256', name: '', type: 'uint256' },
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
     type: 'function',
@@ -497,15 +716,31 @@ export const VideoNFTAbi = [
         name: '_baseTokenUri',
         type: 'string',
       },
-      { internalType: 'string', name: '_name', type: 'string' },
-      { internalType: 'string', name: '_symbol', type: 'string' },
-      { internalType: 'bool', name: '_limitedSupply', type: 'bool' },
+      {
+        internalType: 'string',
+        name: '_name',
+        type: 'string',
+      },
+      {
+        internalType: 'string',
+        name: '_symbol',
+        type: 'string',
+      },
+      {
+        internalType: 'bool',
+        name: '_limitedSupply',
+        type: 'bool',
+      },
       {
         internalType: 'uint256',
         name: '_maxSupply',
         type: 'uint256',
       },
-      { internalType: 'uint256', name: '_mintFee', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: '_mintFee',
+        type: 'uint256',
+      },
       {
         internalType: 'uint256',
         name: '_mintStartTime',
@@ -524,69 +759,135 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'owner', type: 'address' },
-      { internalType: 'address', name: 'operator', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'operator',
+        type: 'address',
+      },
     ],
     name: 'isApprovedForAll',
-    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'limitedSupply',
-    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'maxSupply',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'mintEndTime',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'mintFee',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'mintStartTime',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'name',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'owner',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
     ],
     name: 'ownerOf',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
@@ -599,9 +900,21 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'from', type: 'address' },
-      { internalType: 'address', name: 'to', type: 'address' },
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
     ],
     name: 'safeTransferFrom',
     outputs: [],
@@ -610,10 +923,26 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'from', type: 'address' },
-      { internalType: 'address', name: 'to', type: 'address' },
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
-      { internalType: 'bytes', name: 'data', type: 'bytes' },
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bytes',
+        name: 'data',
+        type: 'bytes',
+      },
     ],
     name: 'safeTransferFrom',
     outputs: [],
@@ -622,7 +951,11 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'uint256[]', name: '_id', type: 'uint256[]' },
+      {
+        internalType: 'uint256[]',
+        name: '_id',
+        type: 'uint256[]',
+      },
     ],
     name: 'sessionMint',
     outputs: [],
@@ -631,8 +964,40 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'operator', type: 'address' },
-      { internalType: 'bool', name: 'approved', type: 'bool' },
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'sessionMinted',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'operator',
+        type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: 'approved',
+        type: 'bool',
+      },
     ],
     name: 'setApprovalForAll',
     outputs: [],
@@ -641,7 +1006,11 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'uint256', name: '_mintFee', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: '_mintFee',
+        type: 'uint256',
+      },
     ],
     name: 'setMintFee',
     outputs: [],
@@ -650,7 +1019,11 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'string', name: '_name', type: 'string' },
+      {
+        internalType: 'string',
+        name: '_name',
+        type: 'string',
+      },
     ],
     name: 'setName',
     outputs: [],
@@ -673,47 +1046,97 @@ export const VideoNFTAbi = [
   {
     inputs: [],
     name: 'streamethGnosisWallet',
-    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      { internalType: 'bytes4', name: 'interfaceId', type: 'bytes4' },
+      {
+        internalType: 'bytes4',
+        name: 'interfaceId',
+        type: 'bytes4',
+      },
     ],
     name: 'supportsInterface',
-    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'symbol',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
     ],
     name: 'tokenURI',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'totalSupply',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      { internalType: 'address', name: 'from', type: 'address' },
-      { internalType: 'address', name: 'to', type: 'address' },
-      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
     ],
     name: 'transferFrom',
     outputs: [],
@@ -722,11 +1145,28 @@ export const VideoNFTAbi = [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'newOwner', type: 'address' },
+      {
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
+      },
     ],
     name: 'transferOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'videoNFTName',
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
   {

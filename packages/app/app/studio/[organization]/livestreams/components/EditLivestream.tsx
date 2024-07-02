@@ -157,7 +157,7 @@ const EditLivestream = ({
                   <FormLabel>Thumbnail</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
+                      placeholder="Click to upload image here. Maximum image file size is 20MB.
                         Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
                       className="m-auto w-full h-full text-black bg-neutrals-300"
                       aspectRatio={1}
@@ -296,7 +296,7 @@ const EditLivestream = ({
 
               <Button
                 loading={isLoading}
-                variant="primary"
+                variant="outlinePrimary"
                 disabled={getFormSubmitStatus(form) || isLoading}
                 type="submit">
                 Update livestream

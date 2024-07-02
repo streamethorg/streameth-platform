@@ -92,11 +92,11 @@ const SupportForm = ({
             control={form.control}
             name="image"
             render={({ field }) => (
-              <FormItem className="flex border-dashed border rounded-xl mt-4">
+              <FormItem className="flex mt-4 rounded-xl border border-dashed">
                 <FormControl>
                   <ImageUpload
-                    placeholder="Drag or click to upload image here. "
-                    className="w-full h-full bg-neutrals-300 text-black m-auto py-4"
+                    placeholder="Click to upload image here. "
+                    className="py-4 m-auto w-full h-full text-black bg-neutrals-300"
                     aspectRatio={1}
                     path={`support`}
                     {...field}
