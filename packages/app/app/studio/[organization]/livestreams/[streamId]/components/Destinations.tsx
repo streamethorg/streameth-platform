@@ -18,17 +18,17 @@ const Destinations = ({
   }
 
   return (
-    <Card className="flex flex-col flex-grow justify-start p-4 space-y-4 h-full">
+    <Card className="w-1/3 flex flex-col flex-grow justify-start p-4 space-y-4 h-full shadow-none">
       <div className="flex justify-start space-x-2">
         <CreateMultistreamTarget
-          btnName="Add Channel"
+          btnName="Add Destination"
           organizationId={stream.organizationId as string}
           streamId={stream?.streamSettings?.streamId}
         />
         <EditLivestream
           stage={stream}
           organizationSlug={organization}
-          variant="secondary"
+          variant="outline"
           btnText="Edit Livestream"
         />
       </div>
@@ -36,7 +36,7 @@ const Destinations = ({
         stream={stream}
         organizationId={stream.organizationId as string}
       />
-      <PublishLivestream stream={stream} />
+      {/* <PublishLivestream stream={stream} /> */}
     </Card>
   )
 }

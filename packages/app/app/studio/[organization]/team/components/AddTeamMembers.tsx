@@ -89,7 +89,7 @@ const AddTeamMembers = ({
           />
           <Button
             disabled={isAddingMember}
-            variant="primary"
+            variant="outlinePrimary"
             type="submit">
             Invite
           </Button>
