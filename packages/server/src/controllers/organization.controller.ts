@@ -1,7 +1,7 @@
 import { CreateOrganizationDto } from '@dtos/organization/create-organization.dto';
 import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { UpdateOrganizationDto } from '@dtos/organization/update-organization.dto';
-import { IOrganization } from '@interfaces/organization.interface';
+import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import OrganizationService from '@services/organization.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -133,5 +133,39 @@ export class OrganizationController extends Controller {
       body.walletAddress,
     );
     return SendApiResponse('memeber deleted', org);
+  }
+
+  /**
+   * @summary Add socials to organization
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Put('/socials/{organizationId}')
+  async updateOrgSocials(
+    @Path() organizationId: string,
+    @Body() body: ISocials,
+  ): Promise<IStandardResponse<void>> {
+    const org = await this.organizationService.addOrgSocial(
+      organizationId,
+      body,
+    );
+    return SendApiResponse('social added', org);
+  }
+
+  /**
+   * @summary Delete organization social
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Delete('/socials/{organizationId}')
+  async deleteOrgSocial(
+    @Path() organizationId: string,
+    @Body() body: { destinationId: string },
+  ): Promise<IStandardResponse<void>> {
+    const org = await this.organizationService.deleteOrgSocial(
+      organizationId,
+      body.destinationId,
+    );
+    return SendApiResponse('social deleted', org);
   }
 }

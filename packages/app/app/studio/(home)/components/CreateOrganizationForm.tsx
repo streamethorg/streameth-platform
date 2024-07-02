@@ -23,7 +23,6 @@ import {
 } from '@/lib/actions/organizations'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from '@/components/misc/form/imageUpload'
-import { generateId } from 'streameth-new-server/src/utils/util'
 import { useRouter } from 'next/navigation'
 import { IExtendedOrganization } from '@/lib/types'
 
@@ -92,7 +91,6 @@ export default function CreateOrganizationForm({
   return (
     <Form {...form}>
       <form
-        onError={(errors) => {}}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4">
         <div>
@@ -103,9 +101,9 @@ export default function CreateOrganizationForm({
               <FormItem className="">
                 <FormControl>
                   <ImageUpload
-                    className="w-full h-40 rounded-xl bg-neutrals-300 "
-                    placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
-                    Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
+                    className="w-full h-40 rounded-xl bg-neutrals-300"
+                    placeholder="Click to upload image here. Maximum image file size is 5MB.
+                    Best resolution of 1500 x 500px. Aspect ratio of 3:1."
                     aspectRatio={1}
                     path={`organizations`}
                     {...field}
@@ -120,10 +118,10 @@ export default function CreateOrganizationForm({
             name="logo"
             render={({ field }) => (
               <>
-                <FormItem className="flex relative w-24 h-24 p-1 z-40 rounded-full bg-white mt-[-50px] mx-4">
+                <FormItem className="flex relative z-40 p-1 mx-4 w-24 h-24 bg-white rounded-full mt-[-50px]">
                   <FormControl>
                     <ImageUpload
-                      className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"
+                      className="m-auto w-full h-full text-white rounded-full bg-neutrals-300"
                       aspectRatio={1}
                       path={`organizations`}
                       {...field}

@@ -1,86 +1,64 @@
 'use server'
 
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { LuFileUp } from 'react-icons/lu'
 import Link from 'next/link'
+import { Loading } from './livestreams/page'
+import {
+  IExtendedStage,
+  LivestreamPageParams,
+  eSort,
+} from '@/lib/types'
+import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal'
+import { Suspense } from 'react'
+import { fetchOrganization } from '@/lib/services/organizationService'
+import LivestreamTable from './livestreams/components/LivestreamTable'
+import { notFound } from 'next/navigation'
+import { sortArray } from '@/lib/utils/utils'
+import { fetchOrganizationStages } from '@/lib/services/stageService'
 
 const OrganizationPage = async ({
   params,
-}: {
-  params: { organization: string }
-}) => {
+  searchParams,
+}: LivestreamPageParams) => {
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
+
+  if (!organization) return notFound()
+
+  const stages = await fetchOrganizationStages({
+    organizationId: organization._id,
+  })
+
+  const sortedStages = sortArray(
+    stages,
+    searchParams.sort
+  ) as unknown as IExtendedStage[]
+
   return (
-    <div className="h-full w-full flex flex-row ">
-      <div className="h-full w-full">
-        <div className="grid grid-rows-2 grid-cols-3 p-4 gap-4 max-w-5xl">
-          <Card className="text-white bg-gradient-to-br from-[#3D22BA] to-[#6426EF] w-full h-full col-span-2 ">
-            <CardHeader>
-              <CardTitle>Upload video</CardTitle>
-              <CardDescription className="text-white max-w-[300px]">
-                Upload and manage video content on your organization’s
-                page.
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Link href={`/studio/${params.organization}/library`}>
-                <Button className="bg-white text-black">
-                  Upload Video
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-          <Card className="text-white min-h-full w-full m-auto border-secondary col-span-1 bg-gradient-to-b from-[#1E293B] to-[#000000] ">
-            <CardHeader>
-              <CardTitle>Create NFT</CardTitle>
-              <CardDescription className="text-white">
-                Create NFTs from your video content and share them
-                with your community.
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Link href={`/studio/${params.organization}/nfts`}>
-                <Button variant="primary">Upload Video</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-          <Card className="text-white min-h-full w-full m-auto border-secondary col-span-1 bg-gradient-to-b from-[#1E293B] to-[#000000] ">
-            <CardHeader>
-              <CardTitle>Clip a livestream</CardTitle>
-              <CardDescription className="text-white">
-                Clip livestreams to share with your community.
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Link href={`/studio/${params.organization}/clips`}>
-                <Button variant="primary">Clip Livestream</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-          <Card className="text-white bg-gradient-to-br from-[#3D22BA] to-[#6426EF] w-full h-full col-span-2 ">
-            <CardHeader>
-              <CardTitle>Start a livestream</CardTitle>
-              <CardDescription className="text-white max-w-[300px]">
-                Stream your event without restrictions to millions of
-                views globally.
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Link
-                href={`/studio/${params.organization}/livestreams?show=true`}>
-                <Button className="bg-white text-black">
-                  Start a Livestream
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        </div>
+    <div className="overflow-auto py-8 px-4 w-full">
+      <h2 className="text-lg font-bold">Create</h2>
+      <div className="flex gap-4 items-center py-4 max-w-5xl md">
+        <CreateLivestreamModal
+          show={searchParams?.show}
+          organization={organization}
+        />
+        <Link href={`/studio/${params.organization}/library`}>
+          <div className="flex flex-row items-center p-2 pr-4 space-x-4 bg-white rounded-xl border transition-colors hover:bg-accent">
+            <div className="p-4 text-white rounded-xl border bg-primary">
+              <LuFileUp size={25} />
+            </div>
+            <span>Upload video</span>
+          </div>
+        </Link>
       </div>
+      <p className="p-4 text-lg font-bold">Livestreams</p>
+      <Suspense key={searchParams.toString()} fallback={<Loading />}>
+        <LivestreamTable
+          organizationSlug={params?.organization}
+          streams={sortedStages}
+        />
+      </Suspense>
     </div>
   )
 }

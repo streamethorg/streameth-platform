@@ -10,6 +10,41 @@
 			"mongoose.Types.ObjectId": {
 				"type": "string"
 			},
+			"ISocials": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					},
+					"accessToken": {
+						"type": "string"
+					},
+					"refreshToken": {
+						"type": "string"
+					},
+					"expireTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"type",
+					"accessToken",
+					"refreshToken",
+					"expireTime",
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IOrganization": {
 				"properties": {
 					"_id": {
@@ -50,6 +85,12 @@
 					},
 					"address": {
 						"type": "string"
+					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -661,6 +702,9 @@
 			},
 			"TargetOutput": {
 				"properties": {
+					"_id": {
+						"type": "string"
+					},
 					"id": {
 						"type": "string"
 					},
@@ -1400,6 +1444,28 @@
 								"type": "array"
 							}
 						]
+					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"firebaseId": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1553,6 +1619,28 @@
 								"type": "array"
 							}
 						]
+					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"firebaseId": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1666,6 +1754,28 @@
 								"type": "array"
 							}
 						]
+					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"firebaseId": {
+						"type": "string"
 					},
 					"autolabels": {
 						"items": {
@@ -1786,6 +1896,25 @@
 					},
 					"active": {
 						"type": "boolean"
+					},
+					"socials": {
+						"items": {
+							"properties": {
+								"date": {
+									"type": "number",
+									"format": "double"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"date",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
@@ -1818,6 +1947,33 @@
 				"required": [
 					"status",
 					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UploadSessionDto": {
+				"properties": {
+					"socialId": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"sessionId": {
+						"type": "string"
+					},
+					"token": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"socialId",
+					"organizationId",
+					"sessionId",
+					"type"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1908,6 +2064,12 @@
 					"description": {
 						"type": "string"
 					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
+					},
 					"email": {
 						"type": "string"
 					},
@@ -1954,6 +2116,12 @@
 					},
 					"description": {
 						"type": "string"
+					},
+					"socials": {
+						"items": {
+							"$ref": "#/components/schemas/ISocials"
+						},
+						"type": "array"
 					},
 					"email": {
 						"type": "string"
@@ -4436,50 +4604,37 @@
 				]
 			}
 		},
-		"/sessions/upload/{sessionId}": {
+		"/sessions/upload": {
 			"post": {
-				"operationId": "UploadSessionToYouTube",
+				"operationId": "UploadSessionToSocials",
 				"responses": {
 					"201": {
 						"description": "",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_ISession_"
+									"$ref": "#/components/schemas/IStandardResponse_void_"
 								}
 							}
 						}
 					}
 				},
-				"summary": "Upload session to YouTube",
+				"summary": "Publish session to socials",
 				"tags": [
 					"Session"
 				],
-				"security": [
-					{
-						"jwt": [
-							"org"
-						]
-					}
-				],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "sessionId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "googleToken",
-						"required": true,
-						"schema": {
-							"type": "string"
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UploadSessionDto"
+							}
 						}
 					}
-				]
+				}
 			}
 		},
 		"/organizations": {
@@ -4778,6 +4933,108 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.walletAddress_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/organizations/socials/{organizationId}": {
+			"put": {
+				"operationId": "UpdateOrgSocials",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Add socials to organization",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ISocials"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteOrgSocial",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Delete organization social",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"destinationId": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"destinationId"
+								],
+								"type": "object"
 							}
 						}
 					}

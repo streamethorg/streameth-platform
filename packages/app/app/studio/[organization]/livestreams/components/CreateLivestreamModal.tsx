@@ -1,4 +1,5 @@
 'use client'
+
 import DatePicker from '@/components/misc/form/datePicker'
 import { Button } from '@/components/ui/button'
 import {
@@ -35,6 +36,7 @@ import { formatDate } from '@/lib/utils/time'
 import ImageUpload from '@/components/misc/form/imageUpload'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
+import { LuRadio } from 'react-icons/lu'
 
 const CreateLivestreamModal = ({
   organization,
@@ -49,7 +51,6 @@ const CreateLivestreamModal = ({
   const [streamType, setStreamType] = useState<
     'instant' | 'schedule' | undefined
   >()
-
   const router = useRouter()
 
   const form = useForm<z.infer<typeof StageSchema>>({
@@ -65,6 +66,12 @@ const CreateLivestreamModal = ({
     },
   })
 
+  const { watch } = form
+  const streamDate = watch('streamDate')
+  const streamTime = watch('streamTime')
+  const streamEndDate = watch('streamEndDate')
+  const streamEndTime = watch('streamEndTime')
+
   const handleModalClose = () => {
     setOpen(false)
     setStreamType(undefined)
@@ -72,28 +79,21 @@ const CreateLivestreamModal = ({
     form.reset()
   }
 
-  const formattedDate = new Date(
-    `${formatDate(
-      new Date(`${form.getValues('streamDate')}`),
-      'YYYY-MM-DD'
-    )}T${form.getValues('streamTime')}`
-  )
-
-  const formattedEndDate = new Date(
-    new Date(
-      `${formatDate(
-        new Date(`${form.getValues('streamEndDate')}`),
-        'YYYY-MM-DD'
-      )}T${form.getValues('streamEndTime')}`
+  const parseDate = (date?: Date, time?: string) => {
+    return new Date(
+      `${formatDate(date || new Date(), 'YYYY-MM-DD')}T${
+        time || '00:00'
+      }`
     )
-  )
+  }
+
+  const formattedDate = parseDate(streamDate, streamTime)
+  const formattedEndDate = parseDate(streamEndDate, streamEndTime)
+
   const isPast = formattedDate < new Date()
   const validateEndDate = formattedEndDate < formattedDate
+  const isScheduleFormDisable = !streamDate || !streamTime || isPast
 
-  const isScheduleFormDisable =
-    !form.getValues('streamDate') ||
-    !form.getValues('streamTime') ||
-    isPast
   const isSchedule = streamType === 'schedule'
 
   function onSubmit(values: z.infer<typeof StageSchema>) {
@@ -137,12 +137,19 @@ const CreateLivestreamModal = ({
         setStreamType(undefined)
       }}>
       <DialogTrigger asChild>
-        <Button variant="primary">Create Livestream</Button>
+        <Button
+          variant={'outline'}
+          className="flex flex-row justify-start items-center p-2 pr-4 space-x-4 h-auto bg-white rounded-xl border w-fit">
+          <div className="p-4 text-white rounded-xl border bg-primary">
+            <LuRadio size={25} />
+          </div>
+          <span className="">Create Livestream</span>
+        </Button>
       </DialogTrigger>
       {!streamType ? (
         <CreateLivestreamOptions setStreamType={setStreamType} />
       ) : (
-        <DialogContent className="sm:max-w-[450px] bg-white overflow-auto">
+        <DialogContent className="overflow-auto bg-white sm:max-w-[450px]">
           <DialogHeader>
             <DialogTitle>
               {!isSchedule ? 'Create' : 'Schedule'} livestream
@@ -152,7 +159,6 @@ const CreateLivestreamModal = ({
               RTMP ingest URL to stream into.
             </DialogDescription>
           </DialogHeader>
-
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
@@ -172,18 +178,16 @@ const CreateLivestreamModal = ({
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="thumbnail"
                 render={({ field }) => (
-                  <FormItem className="flex p-1 aspect-video mt-4">
+                  <FormItem className="flex p-1 mt-4 aspect-video">
                     <FormLabel>Thumbnail</FormLabel>
                     <FormControl>
                       <ImageUpload
-                        placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
-                        Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                        className="w-full h-full bg-neutrals-300 text-black m-auto"
+                        placeholder="Click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
+                        className="m-auto w-full h-full text-black bg-neutrals-300"
                         aspectRatio={1}
                         path={`livestreams/${organization?.slug}`}
                         {...field}
@@ -193,16 +197,14 @@ const CreateLivestreamModal = ({
                   </FormItem>
                 )}
               />
-
               {isSchedule && (
                 <>
                   <div className="mt-6">
-                    {' '}
                     <p
                       className="text-sm"
                       onClick={() => setIsMultiDate(!isMultiDate)}>
                       Streaming multiple days?
-                    </p>{' '}
+                    </p>
                     <div className="flex items-center gap-5 mt-1">
                       <div className="flex items-center gap-1">
                         <Checkbox
@@ -211,7 +213,7 @@ const CreateLivestreamModal = ({
                         />
                         <Label>Yes</Label>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex gap-1 items-center">
                         <Checkbox
                           defaultChecked
                           onCheckedChange={() =>
@@ -222,7 +224,7 @@ const CreateLivestreamModal = ({
                       </div>
                     </div>
                   </div>
-                  <div className="flex space-x-3 mt-4">
+                  <div className="flex mt-4 space-x-3">
                     <FormField
                       control={form.control}
                       name="streamDate"
@@ -241,7 +243,6 @@ const CreateLivestreamModal = ({
                         </FormItem>
                       )}
                     />
-
                     <FormField
                       control={form.control}
                       name="streamTime"
@@ -262,15 +263,14 @@ const CreateLivestreamModal = ({
                     />
                   </div>
                   {isPast && (
-                    <p className="text-destructive text-[12px] mt-1">
+                    <p className="mt-1 text-destructive text-[12px]">
                       Couldn&apos;t schedule. The date and time
                       selected are too far in the past.
                     </p>
                   )}
-
                   {isMultiDate && (
                     <>
-                      <div className="flex space-x-3 mt-4">
+                      <div className="flex mt-4 space-x-3">
                         <FormField
                           control={form.control}
                           name="streamEndDate"
@@ -289,7 +289,6 @@ const CreateLivestreamModal = ({
                             </FormItem>
                           )}
                         />
-
                         <FormField
                           control={form.control}
                           name="streamEndTime"
@@ -310,7 +309,7 @@ const CreateLivestreamModal = ({
                         />
                       </div>
                       {validateEndDate && (
-                        <p className="text-destructive text-[12px] mt-1">
+                        <p className="mt-1 text-destructive text-[12px]">
                           Couldn&apos;t schedule. End date and time
                           selected are too far in the past.
                         </p>
@@ -319,12 +318,10 @@ const CreateLivestreamModal = ({
                   )}
                 </>
               )}
-
               <DialogFooter className="mt-8">
                 <Button onClick={handleModalClose} variant="outline">
                   Cancel
                 </Button>
-
                 <Button
                   loading={isLoading}
                   variant="primary"

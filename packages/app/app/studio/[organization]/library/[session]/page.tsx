@@ -9,13 +9,30 @@ import { ArrowLeft } from 'lucide-react'
 import EditSessionForm from './components/EditSessionForm'
 import Link from 'next/link'
 import SessionOptions from './components/SessionOptions'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import GetHashButton from '../components/GetHashButton'
+import TextPlaceholder from '@/components/ui/text-placeholder'
+import { Button } from '@/components/ui/button'
+import { SiTwitter } from 'react-icons/si'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { Card, CardContent } from '@/components/ui/card'
 import CopyItem from '@/components/misc/CopyString'
+import UploadToYoutubeButton from './components/UploadToYoutubeButton'
+import { fetchOrganization } from '@/lib/services/organizationService'
 
 const EditSession = async ({
   params,
   searchParams,
 }: studioPageParams) => {
+  const organization = await fetchOrganization({
+    organizationSlug: params.organization,
+  })
   const session = await fetchSession({
     session: params.session,
   })
@@ -33,23 +50,23 @@ const EditSession = async ({
   if (!video) return notFound()
 
   return (
-    <div className="px-2">
+    <div className="p-4 h-full overflow-auto">
       <Link href={`/studio/${params.organization}/library`}>
-        <div className="flex justify-start items-center my-4 mx-6 space-x-4">
+        <div className="flex justify-start items-center mb-4 space-x-4">
           <ArrowLeft />
           <p>Back to library</p>
         </div>
       </Link>
 
-      <div className="flex flex-row space-x-4">
-        <div className="px-6 space-y-4 w-2/3">
-          <h3 className="text-5xl font-bold">Video Details</h3>
+      <div className="flex flex-col md:flex-row gap-4 overflow-auto">
+        <div className="p-4 space-y-4 md:w-2/3 bg-white rounded-xl border">
+          <h1 className="text-lg font-bold">Video Details</h1>
           <EditSessionForm
             session={session}
             organizationSlug={params.organization}
           />
         </div>
-        <div className="space-y-2 w-1/3">
+        <div className="flex flex-col space-y-4 md:w-1/3">
           <PlayerWithControls
             src={[
               {
@@ -61,38 +78,80 @@ const EditSession = async ({
               },
             ]}
           />
-          <Card>
-            <CardContent>
-              <span className="font-bold">Playback ID</span>
-              {video.playbackId && (
-                <CopyItem
-                  item={video.playbackId}
-                  itemName="playback ID"
-                />
-              )}
-              <span className="font-bold">Asset ID</span>
-              {video.playbackId && (
-                <CopyItem
-                  item={session.assetId}
-                  itemName="asset ID"
-                />
-              )}
-              <span className="font-bold">Video size</span>
-              {video.size && (
-                <span className="flex pl-2">
-                  {Math.round(video.size / 100000)} MB
-                </span>
-              )}
-            </CardContent>
-          </Card>
 
-          <SessionOptions
-            name={video.name}
-            sessionId={params.session}
-            organizationSlug={params.organization}
-            playbackId={video.playbackId!}
-            assetId={session.assetId}
-          />
+          <Accordion
+            className="space-y-4"
+            type="multiple"
+            defaultValue={['publishVideo', 'menu']}>
+            <AccordionItem defaultChecked value="menu">
+              <AccordionContent>
+                <SessionOptions
+                  name={video.name}
+                  sessionId={params.session}
+                  organizationSlug={params.organization}
+                  playbackId={video.playbackId!}
+                  assetId={session.assetId}
+                />
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem
+              className="bg-white rounded-xl border px-4"
+              value="publishVideo"
+              defaultChecked>
+              <AccordionTrigger>
+                <h1 className="text-lg font-bold">Publish video</h1>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="gap-2 flex flex-wrap">
+                  <div className="min-w-[200px]">
+                    <GetHashButton session={session} />
+                  </div>
+
+                  <UploadToYoutubeButton
+                    organization={organization}
+                    organizationSlug={params.organization}
+                    sessionId={session._id}
+                    hasChannel={searchParams?.hasChannel}
+                  />
+                  <Button className="bg-[#121212] min-w-[200px]">
+                    <SiTwitter className="mr-2" /> Publish to
+                    X(Twitter) (Coming Soon)
+                  </Button>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem
+              className="bg-white rounded-xl border px-4"
+              value="videoData">
+              <AccordionTrigger>
+                <h1 className="text-lg font-bold">Video data</h1>
+              </AccordionTrigger>
+              <AccordionContent className="space-y-4 ">
+                {session.playbackId && (
+                  <div>
+                    <Label>Playback Id</Label>
+                    <TextPlaceholder text={session.playbackId} />
+                  </div>
+                )}
+                {session.assetId && (
+                  <div>
+                    <Label>Asset Id</Label>
+                    <TextPlaceholder text={session.assetId} />
+                  </div>
+                )}
+                {session.videoTranscription && (
+                  <div>
+                    <Label>Transcript</Label>
+                    <TextPlaceholder
+                      text={session.videoTranscription}
+                    />
+                  </div>
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </div>

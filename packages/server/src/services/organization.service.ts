@@ -1,6 +1,6 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IOrganization } from '@interfaces/organization.interface';
+import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
@@ -59,13 +59,24 @@ export default class OrganizationService {
     if (!isObjectId && !isPathId) {
       return await this.controller.store.findOne({ slug: organizationId });
     }
-    const findOrg = await this.controller.store.findById(id);
+    const findOrg = await this.controller.store.findById(id, {
+      'socials.accessToken': 0,
+      'socials.refreshToken': 0,
+      'socials.expireTime': 0,
+    });
     if (!findOrg) throw new HttpException(404, 'Organization not found');
     return findOrg;
   }
 
   async getAll(): Promise<Array<IOrganization>> {
-    return await this.controller.store.findAll({}, this.path);
+    return await this.controller.store.findAll(
+      {},
+      {
+        'socials.accessToken': 0,
+        'socials.refreshToken': 0,
+        'socials.expireTime': 0,
+      },
+    );
   }
 
   async deleteOne(organizationId: string): Promise<void> {
@@ -95,6 +106,7 @@ export default class OrganizationService {
       if (!user) {
         let newAccount = await privy.importUser({
           linkedAccounts: [
+            //@ts-ignore
             {
               type: 'email',
               address: address,
@@ -120,6 +132,36 @@ export default class OrganizationService {
     await User.findOneAndUpdate(
       { walletAddress: walletAddress },
       { $pull: { organizations: organizationId } },
+    );
+  }
+
+  async addOrgSocial(organizationId: string, data: ISocials) {
+    await this.get(organizationId);
+    await Organization.findOneAndUpdate(
+      { _id: organizationId },
+      {
+        $addToSet: {
+          socials: {
+            type: data.type,
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+            expireTime: data.expireTime,
+            name: data.name,
+            thumbnail: data.thumbnail,
+          },
+        },
+      },
+    );
+  }
+
+  async deleteOrgSocial(organizationId: string, destinationId: string) {
+    const organization = await this.get(organizationId);
+    if (!organization) {
+      throw new Error('Organization not found');
+    }
+    await Organization.updateOne(
+      { _id: organizationId },
+      { $pull: { socials: { _id: destinationId } } },
     );
   }
 }

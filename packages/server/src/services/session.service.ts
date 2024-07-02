@@ -7,12 +7,11 @@ import Event from '@models/event.model';
 import { config } from '@config';
 import { Types } from 'mongoose';
 import Stage from '@models/stage.model';
-import {
-  getDownloadUrl,
-  getPlayback,
-  getStreamRecordings,
-} from '@utils/livepeer';
+import { getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import Fuse from 'fuse.js';
+import { IUploadSession } from '@interfaces/upload.session.interface';
+import { refreshAccessToken } from '@utils/oauth';
+import connection from '@utils/rabbitmq';
 
 export default class SessionService {
   private path: string;
@@ -117,7 +116,7 @@ export default class SessionService {
         skip,
         pageSize,
       ),
-      await this.controller.store.findAll(filter, this.path, 0, 0),
+      await this.controller.store.findAll(filter, {}, this.path, 0, 0),
     ]);
     return {
       sessions: sessions,
@@ -215,6 +214,45 @@ export default class SessionService {
       organizationId: stage.organizationId,
       assetId: payload.assetId,
       type: SessionType.livestream,
+    });
+  }
+
+  async uploadSessionToSocials(data: IUploadSession) {
+    const session = await this.get(data.sessionId.toString());
+    if (!session.assetId || !session.videoUrl) {
+      throw new HttpException(400, 'Asset Id or video Url does not exist');
+    }
+    if (!session.coverImage) {
+      throw new HttpException(400, 'No cover image');
+    }
+    const org = await Organization.findOne({
+      _id: data.organizationId,
+      'socials._id': data.socialId,
+    });
+    const token = org.socials.find(
+      (e) => e.type == data.type && e._id == data.socialId,
+    );
+    if (data.type == 'youtube') {
+      data.token = await refreshAccessToken(token.refreshToken);
+    }
+    const queue = 'videos';
+    const channel = await (await connection).createChannel();
+    channel.assertQueue(queue, {
+      durable: true,
+    });
+    const payload = {
+      ...data,
+      session: {
+        videoUrl: session.videoUrl,
+        slug: session.slug,
+        name: session.name,
+        description: session.description,
+        coverImage: session.coverImage,
+        published: session.published,
+      },
+    };
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
+      persistent: true,
     });
   }
 

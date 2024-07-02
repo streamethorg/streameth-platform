@@ -23,7 +23,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
     if (playbackStatus) {
       const timeSetting = {
         unix: Date.now() - playbackStatus.offset,
-        displayTime: playbackStatus.progress.toFixed(0).toString(),
+        displayTime: playbackStatus.progress,
       }
 
       if (type === 'start') {

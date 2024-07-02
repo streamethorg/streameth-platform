@@ -8,11 +8,11 @@ import {
   TableBody,
 } from '@/components/ui/table'
 import TableCells from './TableCells'
-import { IExtendedSession, eSort } from '@/lib/types'
+import { IExtendedSession } from '@/lib/types'
 import LayoutSelection from './LayoutSelection'
 import TableSort from '@/components/misc/TableSort'
 
-const ListLayout = async ({
+const LibraryListLayout = async ({
   sessions,
   organizationSlug,
 }: {
@@ -21,7 +21,7 @@ const ListLayout = async ({
 }) => {
   return (
     <Table className="bg-white">
-      <TableHeader className="sticky top-0 z-50 bg-white">
+      <TableHeader className="sticky top-0 z-10 bg-white">
         <TableRow className="hover:bg-white">
           <TableHead className="cursor-pointer">
             <TableSort title="Title" sortBy="name" />
@@ -30,13 +30,13 @@ const ListLayout = async ({
           <TableHead className="cursor-pointer">
             <TableSort title="Updated at" sortBy="date" />
           </TableHead>
-          <TableHead>IPFS Hash</TableHead>
+          <TableHead>Views</TableHead>
           <TableHead>
             <LayoutSelection />
           </TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="overflow-scroll">
+      <TableBody className="overflow-auto">
         {sessions.map((item) => (
           <TableRow key={item._id}>
             <TableCells item={item} organization={organizationSlug} />
@@ -47,4 +47,4 @@ const ListLayout = async ({
   )
 }
 
-export default ListLayout
+export default LibraryListLayout

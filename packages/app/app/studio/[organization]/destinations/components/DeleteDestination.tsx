@@ -1,7 +1,5 @@
 'use client'
-import React, { useState } from 'react'
-import { Trash2 } from 'lucide-react'
-import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -9,52 +7,58 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { deleteTeamMemberAction } from '@/lib/actions/organizations'
+import { deleteDestinationAction } from '@/lib/actions/organizations'
 
-const DeleteTeamMember = ({
-  memberWalletAddress,
+import React, { useState } from 'react'
+import { LuTrash2 } from 'react-icons/lu'
+import { toast } from 'sonner'
+
+const DeleteDestination = ({
+  destinationId,
   organizationId,
 }: {
-  memberWalletAddress: string
+  destinationId: string
+
   organizationId: string
 }) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const [open, setOpen] = useState(false)
-  const handleDeleteMember = async () => {
+  const handleDeleteDestination = async () => {
     setIsDeleting(true)
-    await deleteTeamMemberAction({
-      memberWalletAddress,
+    await deleteDestinationAction({
+      destinationId,
       organizationId,
     })
       .then((response) => {
         if (response) {
-          toast.success('Member deleted')
+          toast.success('Destination deleted')
           setOpen(false)
         } else {
-          toast.error('Error deleting member')
+          toast.error('Error deleting destination')
         }
       })
       .catch(() => {
-        toast.error('Error deleting member')
+        toast.error('Error deleting destination')
       })
       .finally(() => {
         setIsDeleting(false)
       })
   }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <Button variant={'outline'}>
-          <Trash2 className="text-destructive w-5 h-5 " />
+        <Button className="justify-start" variant={'ghost'}>
+          <LuTrash2 className="text-destructive w-5 h-5 pr-1" />{' '}
+          Delete
         </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-5 justify-center items-center">
         <div className="bg-destructive rounded-full p-3">
-          <Trash2 className="text-white w-5 h-5" />
+          <LuTrash2 className="text-white w-5 h-5" />
         </div>
         <p className="text-xl">
-          Are you sure you want to delete this member?
+          Are you sure you want to delete this Destination?
         </p>
         <DialogFooter className="flex items-center gap-4">
           <DialogClose>
@@ -62,7 +66,7 @@ const DeleteTeamMember = ({
           </DialogClose>
 
           <Button
-            onClick={handleDeleteMember}
+            onClick={handleDeleteDestination}
             loading={isDeleting}
             variant="destructive">
             Delete
@@ -73,4 +77,4 @@ const DeleteTeamMember = ({
   )
 }
 
-export default DeleteTeamMember
+export default DeleteDestination

@@ -2,7 +2,7 @@ import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
 import { apiUrl } from '@/lib/utils/utils'
 import { IExtendedStage } from '../types'
 import { fetchEvents } from './eventService'
-import { Stream } from 'livepeer/dist/models/components'
+import { Session, Stream } from 'livepeer/dist/models/components'
 
 export async function fetchStage({
   stage,
@@ -235,7 +235,7 @@ export async function fetchStageRecordings({
   streamId,
 }: {
   streamId: string
-}): Promise<any> {
+}): Promise<{ parentStream: Stream; recordings: Session[] } | null> {
   try {
     const response = await fetch(
       `${apiUrl()}/streams/recording/${streamId}`,
@@ -244,6 +244,7 @@ export async function fetchStageRecordings({
       }
     )
     const data = (await response.json()).data
+
     if (!data) {
       return null
     }

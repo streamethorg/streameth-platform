@@ -5,6 +5,9 @@ import { IExtendedStage } from '@/lib/types'
 import { toast } from 'sonner'
 import { updateStageAction } from '@/lib/actions/stages'
 import { Check } from 'lucide-react'
+import { Card } from '@/components/ui/card'
+import StreamethLogo from '@/public/logo.png'
+import Image from 'next/image'
 
 const PublishLivestream = ({
   stream,
@@ -32,30 +35,24 @@ const PublishLivestream = ({
   }
 
   return (
-    <div className="flex justify-end gap-4 pb-10 w-full">
-      <Button
-        className="bg-white"
-        loading={isLoading}
-        onClick={handlePublishStream}
-        disabled={stream?.published || isLoading}
-        variant={!stream.published ? 'outline' : 'green'}>
-        {stream.published ? (
-          <p className="flex gap-1 items-center">
-            <Check className="w-4 h-4 text-[#1A7F37]" /> Livestream
-            Published
-          </p>
-        ) : (
-          'Publish Livestream'
-        )}
-      </Button>
-      {stream?.published && (
+    <div className="flex justify-between space-x-2">
+      {!stream?.published ? (
         <Button
-          className="bg-white"
+          className="flex flex-row justify-center w-full text-xl text-white"
+          loading={isLoading}
+          onClick={handlePublishStream}
+          disabled={stream?.published || isLoading}
+          variant={'destructive'}>
+          <span>Go live!</span>
+        </Button>
+      ) : (
+        <Button
+          className="flex flex-row justify-center w-full bg-white text-md"
           loading={isLoading}
           onClick={handlePublishStream}
           disabled={!stream?.published || isLoading}
           variant="destructive-outline">
-          Un-publish
+          Unpublish
         </Button>
       )}
     </div>

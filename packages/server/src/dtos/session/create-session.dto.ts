@@ -98,4 +98,8 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsNotEmpty()
   @IsString()
   type: SessionType;
+
+  @IsOptional()
+  @IsString()
+  firebaseId?: string;
 }

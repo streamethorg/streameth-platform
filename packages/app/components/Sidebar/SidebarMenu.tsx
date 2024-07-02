@@ -1,61 +1,50 @@
 'use client'
 
 import { SidebarUI, SidebarItem } from './Sidebar'
-import {
-  CalendarDays,
-  Videotape,
-  Radio,
-  ScissorsLineDashed,
-  Home,
-  ImageIcon,
-  Settings,
-} from 'lucide-react'
 
-const navigationItems = [
-  {
-    text: 'Home',
-    navigationPath: '',
-    icon: <Home size={20} />,
-  },
-  // {
-  //   text: 'Events',
-  //   navigationPath: '/events',
-  //   icon: <CalendarDays size={20} />,
-  // },
-  {
-    text: 'Library',
-    navigationPath: '/library',
-    icon: <Videotape size={20} />,
-  },
-  {
-    text: 'Livestreams',
-    navigationPath: '/livestreams',
-    icon: <Radio size={20} />,
-  },
-  {
-    text: 'Clips',
-    navigationPath: '/clips',
-    icon: <ScissorsLineDashed size={20} />,
-  },
-  {
-    text: 'Mint NFT',
-    navigationPath: '/nfts',
-    icon: <ImageIcon size={20} />,
-  },
-  {
-    text: 'Settings',
-    navigationPath: '/settings',
-    icon: <Settings />,
-  },
-]
+import {
+  LuUsers,
+  LuVideotape,
+  LuHome,
+  LuSettings,
+  LuShare2,
+} from 'react-icons/lu'
 
 const SidebarMenu = ({
   organizationSlug,
 }: {
   organizationSlug: string
 }) => {
+  const navigationItems = [
+    {
+      text: 'Home',
+      navigationPath: '',
+      icon: <LuHome size={25} />,
+    },
+    {
+      text: 'Library',
+      navigationPath: '/library',
+      icon: <LuVideotape size={25} />,
+    },
+    {
+      text: 'Destinations',
+      navigationPath: '/destinations',
+      icon: <LuShare2 size={25} />,
+    },
+    {
+      text: 'Team',
+      navigationPath: '/team',
+      icon: <LuUsers size={25} />,
+    },
+    {
+      text: 'Settings',
+      navigationPath: `/settings`,
+      icon: <LuSettings size={25} />,
+    },
+  ]
+
   return (
-    <div className="relative z-[60] w-[1/4]">
+    <div className="relative w-[1/4]">
       <SidebarUI>
         {navigationItems.map((item, index) => (
           <SidebarItem

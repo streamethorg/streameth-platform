@@ -1,4 +1,14 @@
 import { Document, Types } from 'mongoose';
+
+export interface ISocials {
+  _id?: string;
+  type: string;
+  accessToken: string;
+  refreshToken: string;
+  expireTime: number;
+  name: string;
+  thumbnail?: string;
+}
 export interface IOrganization {
   _id?: Types.ObjectId;
   name: string;
@@ -13,6 +23,7 @@ export interface IOrganization {
   banner?: string;
   walletAddress?: string;
   address?: string;
+  socials?: ISocials[];
 }
 export interface IOrganizationModel
   extends Omit<IOrganization, '_id'>,

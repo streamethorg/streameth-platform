@@ -1,16 +1,10 @@
-import { downloadM3U8ToMP4 } from '@avtools/ffmpeg';
 import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
+import { UploadSessionDto } from '@dtos/session/upload-session.dto';
 import { ISession } from '@interfaces/session.interface';
-import Organization from '@models/organization.model';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import createOAuthClient from '@utils/oauth';
-import { uploadToYouTube } from '@utils/youtube';
-import { existsSync } from 'fs';
-import { Credentials } from 'google-auth-library';
-import { google } from 'googleapis';
 import {
   Body,
   Controller,
@@ -112,52 +106,15 @@ export class SessionController extends Controller {
   }
 
   /**
-   * @summary Upload session to YouTube
+   * @summary Publish session to socials
    */
-  @Security('jwt', ['org'])
   @SuccessResponse('201')
-  @Post('upload/{sessionId}')
-  async uploadSessionToYouTube(
-    @Path() sessionId: string,
-    @Query() googleToken: string,
-  ): Promise<IStandardResponse<ISession>> {
-    try {
-      const session = await this.sessionService.get(sessionId);
-      const tokens: Credentials = JSON.parse(decodeURIComponent(googleToken));
-
-      const oAuthClient = await createOAuthClient();
-      oAuthClient.setCredentials(tokens);
-
-      const youtube = google.youtube({
-        version: 'v3',
-        auth: oAuthClient,
-      });
-
-      if (!session.assetId || !session.videoUrl) {
-        console.log('Asset Id or video Url does not exist');
-        return SendApiResponse(
-          'Asset Id or video Url does not exist',
-          null,
-          '500',
-        );
-      }
-
-      const videoFilePath = `./tmp/${session.slug}.mp4`;
-      if (!existsSync(videoFilePath)) {
-        await downloadM3U8ToMP4(session.videoUrl, session.slug, './tmp');
-      }
-
-      console.log('Uploading video...');
-      await uploadToYouTube(session, youtube, videoFilePath);
-
-      return SendApiResponse('session fetched', session);
-    } catch (e) {
-      return SendApiResponse(
-        'An error while uploading a video to YouTube',
-        e.toString(),
-        '500',
-      );
-    }
+  @Post('upload')
+  async uploadSessionToSocials(
+    @Body() body: UploadSessionDto,
+  ): Promise<IStandardResponse<void>> {
+    await this.sessionService.uploadSessionToSocials(body);
+    return SendApiResponse('uploading video');
   }
 
   /**

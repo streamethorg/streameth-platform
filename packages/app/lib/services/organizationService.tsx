@@ -210,3 +210,69 @@ export async function deleteTeamMember({
     throw e
   }
 }
+
+export async function fetchOrganizationSocials({
+  organizationId,
+}: {
+  organizationSlug?: string
+  organizationId?: string
+}): Promise<IExtendedOrganization | null> {
+  try {
+    if (!organizationId) {
+      return null
+    }
+    const authToken = cookies().get('user-session')?.value
+    if (!authToken) {
+      throw 'No auth token'
+    }
+
+    const response = await fetch(
+      `${apiUrl()}/organizations/${organizationId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        cache: 'no-store',
+      }
+    )
+    const data = (await response.json()).data
+
+    return data
+  } catch (e) {
+    console.log(e)
+    return null
+  }
+}
+
+export async function deleteDestination({
+  destinationId,
+  authToken,
+  organizationId,
+}: {
+  destinationId: string
+  authToken: string
+  organizationId?: string
+}): Promise<IExtendedOrganization> {
+  try {
+    const response = await fetch(
+      `${apiUrl()}/organizations/socials/${organizationId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ destinationId }),
+      }
+    )
+
+    if (!response.ok) {
+      throw 'Error deleting destination'
+    }
+    return await response.json()
+  } catch (e) {
+    console.log('error in delete destination', e)
+    throw e
+  }
+}

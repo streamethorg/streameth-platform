@@ -1,5 +1,10 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react'
 import Hls from 'hls.js'
 import { useClipContext } from './ClipContext'
 
@@ -12,8 +17,16 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   playbackId,
   selectedStreamSession,
 }) => {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const { setPlaybackStatus } = useClipContext()
+  const {
+    setPlaybackStatus,
+    setIsLoading,
+    isLoading,
+    videoRef,
+    playbackStatus,
+    setEndTime,
+    endTime,
+  } = useClipContext()
+
   const playbackRef = useRef<{ progress: number; offset: number }>({
     progress: 0,
     offset: 0,
@@ -42,7 +55,17 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         }
       })
 
-      // set error
+      // if seeking loading spinner
+      videoRef.current.onseeking = () => {
+        setIsLoading(true)
+      }
+
+      // if not seeking hide loading spinner
+      videoRef.current.onseeked = () => {
+        setIsLoading(false)
+      }
+
+      // Set error handling
       hls.on(Hls.Events.ERROR, (event, data) => {
         setError(data.details)
       })
@@ -55,30 +78,41 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
           setPlaybackStatus({ ...playbackRef.current })
         }
       }, 1000)
-    }
-  }, [src, setPlaybackStatus])
 
-  // if (error) {
-  //   return (
-  //     <div className=" aspect-video text-white bg-black flex flex-col items-center justify-center">
-  //       <p>
-  //         Clips can only be created for recordings that are less than
-  //         7 days old
-  //       </p>
-  //     </div>
-  //   )
-  // }
+      return () => {
+        hls.destroy()
+        clearInterval(intervalId)
+      }
+    }
+  }, [src, setPlaybackStatus, videoRef, setIsLoading])
+
+  useEffect(() => {
+    if (
+      videoRef.current &&
+      videoRef.current.duration &&
+      playbackStatus &&
+      endTime.unix === 0
+    ) {
+      setEndTime({
+        displayTime: videoRef.current.duration,
+        unix: Date.now() - playbackStatus.offset,
+      })
+    }
+  }, [setEndTime, videoRef, playbackStatus])
+
   return (
-    <video
-      ref={videoRef}
-      autoPlay={false}
-      controls
-      style={{
-        borderRadius: '8px',
-        width: '100%',
-        height: 'auto',
-        background: 'black',
-      }}></video>
+    <div className="relative mb-4 h-2/3 flex flex-grow">
+      <video
+        ref={videoRef}
+        autoPlay={false}
+        controls={false}
+        className="w-full rounded-lg sticky top-0"></video>
+      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+        {isLoading && (
+          <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-primary" />
+        )}
+      </div>
+    </div>
   )
 }
 

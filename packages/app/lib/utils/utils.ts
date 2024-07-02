@@ -168,8 +168,8 @@ export const validateEnv = (envVar: string) => {
 export const getFormSubmitStatus = (form: UseFormReturn<any>) => {
   const isSubmitDisabled =
     form.formState.isSubmitting ||
-    !form.formState.isValid ||
     Object.keys(form.formState.dirtyFields).length === 0
+
   return isSubmitDisabled
 }
 

@@ -2,7 +2,6 @@
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { IExtendedSession, OrganizationPageProps } from '@/lib/types'
 import { Metadata } from 'next'
-import { apiUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import {
   generalMetadata,
