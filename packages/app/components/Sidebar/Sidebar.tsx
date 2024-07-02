@@ -1,7 +1,4 @@
 'use client'
-
-import StreamethStudio from '@/lib/svg/StreamethStudio'
-import StreamethLogo from '@/lib/svg/StreamethLogo'
 import { ChevronLast, ChevronFirst, BookOpenText } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
