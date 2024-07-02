@@ -8,6 +8,7 @@ import {
   LuHome,
   LuSettings,
   LuShare2,
+  LuImage,
 } from 'react-icons/lu'
 
 const SidebarMenu = ({
@@ -36,6 +37,11 @@ const SidebarMenu = ({
       navigationPath: '/team',
       icon: <LuUsers size={25} />,
     },
+    // {
+    //   text: 'Collections',
+    //   navigationPath: '/nfts',
+    //   icon: <LuImage size={25} />,
+    // },
     {
       text: 'Settings',
       navigationPath: `/settings`,

@@ -33,6 +33,8 @@ const CollectVideButton = ({
   variant?: 'primary' | 'outline'
   all?: boolean
 }) => {
+  const account = useAccount()
+  const chain = useChainId()
   const [isOpen, setIsOpen] = useState(false)
   const [mintError, setMintError] = useState('')
 
@@ -55,8 +57,18 @@ const CollectVideButton = ({
         ...videoNFTContract,
         functionName: 'baseFee',
       },
+      {
+        ...videoNFTContract,
+        functionName: 'sessionMinted',
+        args: [
+          account?.address as `Ox${string}`,
+          getVideoIndex(all, nftCollection!, video),
+        ],
+      },
     ],
   })
+
+  const hasMintedSession = result.data?.[2].result
 
   const {
     data: hash,
@@ -65,8 +77,6 @@ const CollectVideButton = ({
     isError,
     isPending: isMintingNftPending,
   } = useWriteContract()
-  const account = useAccount()
-  const chain = useChainId()
 
   const { isSuccess } = useWaitForTransactionReceipt({
     hash,
@@ -86,17 +96,17 @@ const CollectVideButton = ({
 
   const handleWriteContract = () => {
     setMintError('')
-    if (result?.data?.[0].status === 'success') {
+    if (result?.data?.[0].status === 'success' && nftCollection) {
       writeContract({
         abi: VideoNFTAbi,
         address: nftCollection?.contractAddress as `0x${string}`,
         functionName: 'sessionMint',
-        args: [getVideoIndex(all, nftCollection!, video)],
+        args: [getVideoIndex(all, nftCollection, video)],
         value: BigInt(
           calMintPrice(
             result?.data as { result: BigInt }[],
             true,
-            nftCollection!
+            nftCollection
           ) as string
         ),
       })
@@ -125,7 +135,11 @@ const CollectVideButton = ({
     }
   }
 
-  return (
+  return hasMintedSession ? (
+    <Button disabled variant={'outline'}>
+      Session Collected
+    </Button>
+  ) : (
     <div>
       {!account.address ? (
         <ConnectWalletButton />

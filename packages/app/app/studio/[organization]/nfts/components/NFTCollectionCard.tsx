@@ -20,7 +20,7 @@ const NFTCollectionCard = ({
 }) => {
   return (
     <Link
-      href={`/${organization}/collection?collectionId=${nft._id}`}
+      href={`/studio/${organization}/nfts/${nft._id}`}
       className="border border-grey bg-secondary rounded-xl p-2 cursor-pointer">
       <Thumbnail imageUrl={nft.thumbnail} />
 
