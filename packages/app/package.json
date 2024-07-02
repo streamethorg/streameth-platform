@@ -8,7 +8,7 @@
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "check-types": "tsc --noEmit --incremental",
-    "test:ui": "playwright test --ui",
+    "test:ui": "dotenvx run -f test.env -- playwright test --ui",
     "test": "dotenvx run -f test.env -- playwright test",
     "prettier:fix": "prettier --write './app' './components' './lib' ./tests",
     "prettier:check": "prettier --check './app' './components' './lib' ./tests/"
@@ -100,7 +100,6 @@
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.0.1",
     "@playwright/test": "^1.37.0",
-    "@synthetixio/synpress": "^3.7.3",
     "@tailwindcss/typography": "^0.5.10",
     "@types/fluent-ffmpeg": "^2.1.21",
     "@types/fuzzy-search": "^2.1.5",
@@ -112,6 +111,7 @@
     "dotenv": "^16.4.5",
     "eslint": "8.50.0",
     "eslint-config-next": "^14.0.2",
+    "jose": "^5.6.2",
     "next-bundle-analyzer": "^0.6.8",
     "tailwind-merge": "^2.2.0",
     "tailwindcss": "3.3.2",
