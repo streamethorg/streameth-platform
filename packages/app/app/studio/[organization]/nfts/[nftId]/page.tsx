@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import ContractDetails from './components/ContractDetails'
 import CopyText from '@/components/misc/CopyText'
+import TitleTextItem from '@/components/ui/TitleTextItem'
 
 const page = async ({ params }: nftPageParams) => {
   if (!params.nftId) return notFound()
@@ -20,23 +21,29 @@ const page = async ({ params }: nftPageParams) => {
       <Link href={`/studio/${params.organization}/library`}>
         <div className="flex justify-start items-center my-4  space-x-4">
           <ArrowLeft />
-          <p>Back to NFT collection</p>
+          <p>Back to collections</p>
         </div>
       </Link>
 
-      <h3 className="text-5xl font-bold mb-3">Collection Details</h3>
+      <div className="flex flex-col bg-white rounded-xl border overflow-auto p-4">
+        <h3 className="text-lg font-bold mb-3">Collection Details</h3>
 
-      {/* <div className="w-full">
         <CopyText
+          width="600px"
           label="Contract Address:"
           text={collection.contractAddress}
         />
-      </div> */}
-      <p>Contract Address: {collection.contractAddress}</p>
-      <p>Collection Type: {collection.type}</p>
-      <p>Collection Items count: {collection.videos?.length}</p>
 
-      <ContractDetails />
+        <TitleTextItem title="Type:" text={collection.type} />
+        <TitleTextItem
+          title="Total Items:"
+          text={collection.videos?.length}
+        />
+
+        <ContractDetails
+          contractAddress={collection.contractAddress}
+        />
+      </div>
     </div>
   )
 }
