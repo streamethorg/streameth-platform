@@ -16,11 +16,12 @@ const UploadToYoutubeButton = ({
   organization,
   organizationSlug,
   sessionId,
+  hasThumbnail,
 }: {
   organization: IExtendedOrganization | null
   organizationSlug: string
   sessionId: string
-  hasChannel?: string
+  hasThumbnail: boolean
 }) => {
   const [openModal, setOpenModal] = useState(false)
   const [socialId, setSocialId] = useState<string>('')
@@ -88,41 +89,56 @@ const UploadToYoutubeButton = ({
         </Button>
       </DialogTrigger>
       <DialogContent className="px-8 z-[99999999999999999]">
-        <p className="font-medium">Select Youtube Destinations</p>
+        {hasThumbnail ? (
+          <div>
+            <p className="font-medium">Select Youtube Destinations</p>
 
-        <div className="flex flex-wrap items-center gap-5 py-5">
-          {organization?.socials?.map(
-            ({ name, type, thumbnail, _id }) => (
+            <div className="flex flex-wrap items-center gap-5 py-5">
+              {organization?.socials?.map(
+                ({ name, type, thumbnail, _id }) => (
+                  <div
+                    onClick={() => setSocialId(_id!)}
+                    key={_id}
+                    className={`flex flex-col items-center cursor-pointer ${
+                      socialId == _id ? 'opacity-100' : 'opacity-50'
+                    }`}>
+                    <div
+                      className="w-14 h-14 rounded-full bg-center bg-cover cursor-pointer"
+                      style={{
+                        backgroundImage: `url(${thumbnail})`,
+                      }}></div>
+                    <p className="text-sm line-clamp-1">{name}</p>
+                  </div>
+                )
+              )}
               <div
-                onClick={() => setSocialId(_id!)}
-                key={_id}
-                className={`flex flex-col items-center cursor-pointer ${
-                  socialId == _id ? 'opacity-100' : 'opacity-50'
-                }`}>
-                <div
-                  className="w-14 h-14 rounded-full bg-center bg-cover cursor-pointer"
-                  style={{
-                    backgroundImage: `url(${thumbnail})`,
-                  }}></div>
-                <p className="text-sm line-clamp-1">{name}</p>
+                onClick={handleYoutubeConnect}
+                className="flex flex-col items-center cursor-pointer">
+                <CiCirclePlus color="#000" size={56} />
+                <p className="text-sm">Add New</p>
               </div>
-            )
-          )}
-          <div
-            onClick={handleYoutubeConnect}
-            className="flex flex-col items-center cursor-pointer">
-            <CiCirclePlus color="#000" size={56} />
-            <p className="text-sm">Add New</p>
-          </div>
-        </div>
+            </div>
 
-        <Button
-          loading={isLoading}
-          onClick={handleYoutubePublish}
-          variant="primary"
-          disabled={!hasSocials || !socialId}>
-          Publish
-        </Button>
+            <Button
+              loading={isLoading}
+              onClick={handleYoutubePublish}
+              variant="primary"
+              disabled={!hasSocials || !socialId}>
+              Publish
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-4">
+            <p className="text-center font-bold">
+              Upload Session Thumbnail before continuing
+            </p>{' '}
+            <Button
+              onClick={() => setOpenModal(false)}
+              variant="primary">
+              Close
+            </Button>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   )

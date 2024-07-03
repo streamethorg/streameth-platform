@@ -115,9 +115,12 @@ const EditSession = async ({
                       organization={organization}
                       organizationSlug={params.organization}
                       sessionId={session._id}
+                      hasThumbnail={!!session.coverImage}
                     />
                   )}
-                  <Button className="bg-[#121212] min-w-[200px]">
+                  <Button
+                    disabled
+                    className="bg-[#121212] min-w-[200px]">
                     <SiTwitter className="mr-2" /> Publish to
                     X(Twitter) (Coming Soon)
                   </Button>
