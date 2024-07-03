@@ -27,11 +27,11 @@ const SidebarMenu = ({
       navigationPath: '/library',
       icon: <LuVideotape size={25} />,
     },
-    // {
-    //   text: 'Destinations',
-    //   navigationPath: '/destinations',
-    //   icon: <LuShare2 size={25} />,
-    // },
+    {
+      text: 'Destinations',
+      navigationPath: '/destinations',
+      icon: <LuShare2 size={25} />,
+    },
     {
       text: 'video NFTs',
       navigationPath: '/nfts',
@@ -42,11 +42,6 @@ const SidebarMenu = ({
       navigationPath: '/team',
       icon: <LuUsers size={25} />,
     },
-    // {
-    //   text: 'Collections',
-    //   navigationPath: '/nfts',
-    //   icon: <LuImage size={25} />,
-    // },
     {
       text: 'Settings',
       navigationPath: `/settings`,

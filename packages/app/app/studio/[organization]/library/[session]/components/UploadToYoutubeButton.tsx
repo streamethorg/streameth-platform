@@ -38,7 +38,6 @@ const UploadToYoutubeButton = ({
     )
     // Encode the redirect URL
     const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&state=${state}`
-    // window.location.href = authUrl
 
     // Calculate window size and position
     const width = window.innerWidth * 0.7

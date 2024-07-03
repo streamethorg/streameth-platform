@@ -3,6 +3,7 @@ import {
   isStreamingEnabled,
 } from '@/lib/utils/googleAuth'
 import { apiUrl } from '@/lib/utils/utils'
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
@@ -17,7 +18,7 @@ export async function GET(request: NextRequest) {
   const { redirectUrl, organizationId } = decodedState
   const authToken = cookies().get('user-session')?.value
   const originUrl = process.env.NEXT_PUBLIC_ORIGIN_URL || ''
-  console.log(originUrl)
+
   const parsedRedirectUrl = redirectUrl
     ? originUrl + redirectUrl
     : `/studio`
@@ -33,7 +34,7 @@ export async function GET(request: NextRequest) {
     const streamEnabled = await isStreamingEnabled(
       tokenDetails.access_token
     )
-    console.log('streamEnabled:', streamEnabled)
+
     if (streamEnabled) {
       // Add new auth to streamETh server storage
       const response = await fetch(
@@ -53,9 +54,11 @@ export async function GET(request: NextRequest) {
               new Date().getTime() + tokenDetails.expires_in,
             name: tokenDetails.name,
             thumbnail: tokenDetails.thumbnail,
+            email: tokenDetails.email,
           }),
         }
       )
+      revalidatePath('/studio')
       return NextResponse.redirect(
         new URL(parsedRedirectUrl, request.url)
       )
