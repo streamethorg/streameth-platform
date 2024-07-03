@@ -37,7 +37,7 @@ const OrganizationPage = async ({
 
   return (
     <div className="h-full w-full p-8 flex flex-col">
-      <div className='flex flex-col max-h-[200px] w-full'>
+      <div className="flex flex-col max-h-[200px] w-full">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center md gap-4 max-w-5xl py-4">
           <CreateLivestreamModal
@@ -54,7 +54,7 @@ const OrganizationPage = async ({
           </Link>
         </div>
       </div>
-      <div className='flex flex-col h-[80%]'>
+      <div className="flex flex-col h-[80%]">
         <p className="py-4 font-bold text-lg">Livestreams</p>
         <Suspense
           key={searchParams.toString()}

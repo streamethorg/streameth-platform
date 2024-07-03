@@ -1,6 +1,6 @@
 import {
   generateGoogleAccessToken,
-  hasYoutubeChannel,
+  isStreamingEnabled,
 } from '@/lib/utils/googleAuth'
 import { apiUrl } from '@/lib/utils/utils'
 import { cookies } from 'next/headers'
@@ -16,7 +16,11 @@ export async function GET(request: NextRequest) {
     : ''
   const { redirectUrl, organizationId } = decodedState
   const authToken = cookies().get('user-session')?.value
-  const parsedRedirectUrl = redirectUrl ? redirectUrl : `/studio`
+  const originUrl = process.env.NEXT_PUBLIC_ORIGIN_URL || ''
+  console.log(originUrl)
+  const parsedRedirectUrl = redirectUrl
+    ? originUrl + redirectUrl
+    : `/studio`
 
   if (!code || !authToken) {
     console.error('Google or auth token does not exist')
@@ -26,11 +30,11 @@ export async function GET(request: NextRequest) {
   try {
     const tokenDetails = await generateGoogleAccessToken(code)
     // Check if streaming is enabled
-    const hasChannel = await hasYoutubeChannel(
+    const streamEnabled = await isStreamingEnabled(
       tokenDetails.access_token
     )
-
-    if (hasChannel) {
+    console.log('streamEnabled:', streamEnabled)
+    if (streamEnabled) {
       // Add new auth to streamETh server storage
       const response = await fetch(
         `${apiUrl()}/organizations/socials/${organizationId}`,
@@ -56,11 +60,7 @@ export async function GET(request: NextRequest) {
         new URL(parsedRedirectUrl, request.url)
       )
     } else {
-      return NextResponse.redirect(
-        redirectUrl
-          ? redirectUrl + '?hasChannel=noChannel'
-          : `/studio`
-      )
+      return NextResponse.redirect(`${originUrl}/redirect/google`)
     }
   } catch (err) {
     return NextResponse.json(

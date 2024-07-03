@@ -98,7 +98,7 @@ const Library = async ({
         className="text-white bg-black bg-cover border-none shadow-none rounded-none w-full">
         <CardHeader>
           <CardTitle>Video library</CardTitle>
-          <CardDescription className='text-white'>
+          <CardDescription className="text-white">
             Manage you clips and livestream recordings or upload a new
             video.
           </CardDescription>

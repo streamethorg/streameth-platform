@@ -21,8 +21,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { Card, CardContent } from '@/components/ui/card'
-import CopyItem from '@/components/misc/CopyString'
 import UploadToYoutubeButton from './components/UploadToYoutubeButton'
 import { fetchOrganization } from '@/lib/services/organizationService'
 
@@ -112,7 +110,6 @@ const EditSession = async ({
                     organization={organization}
                     organizationSlug={params.organization}
                     sessionId={session._id}
-                    hasChannel={searchParams?.hasChannel}
                   />
                   <Button className="bg-[#121212] min-w-[200px]">
                     <SiTwitter className="mr-2" /> Publish to
