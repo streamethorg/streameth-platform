@@ -171,7 +171,7 @@ const PCNavBar = ({
   const pathname = usePathname()
   const isStudio = pathname.includes('studio')
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex z-[9999]">
+    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex z-[30]">
       <div className="flex flex-1 justify-start items-center">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>

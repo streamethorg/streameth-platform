@@ -27,7 +27,7 @@ const SessionOptions = ({
       />
       <EmbedButton
         className="w-full"
-        playbackId={playbackId}
+        sessionId={sessionId}
         playerName={name}
         vod
       />

@@ -58,8 +58,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             </div>
 
             <LivestreamEmbedCode
-              streamId={stream?.streamSettings?.streamId}
-              playbackId={stream?.streamSettings?.playbackId}
+              streamId={stream._id}
               playerName={stream?.name}
             />
             <ShareLivestream organization={params.organization} />
