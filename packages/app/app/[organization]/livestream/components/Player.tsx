@@ -9,7 +9,6 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 
 const Player = async ({ stage }: { stage: IExtendedStage }) => {
-
   if (!stage || !stage.streamSettings?.playbackId) {
     return notFound()
   }
@@ -35,6 +34,8 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
       ) : (
         <div className="relative w-full h-full">
           <PlayerWithControls
+            thumbnail={stage.thumbnail}
+            name={stage.name}
             src={[
               {
                 src: buildPlaybackUrl(

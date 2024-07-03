@@ -184,15 +184,24 @@ export function PlayerWithControls(props: {
 
             <div className="flex sm:flex-1 md:flex-[1.5] justify-end items-center gap-2.5">
               <Link href={'https://streameth.org'} rel="noopener noreferrer" target="_blank">
-                <div className="shadow border flex flex-row items-center justify-center bg-white space-x-2 rounded-xl p-1">
-                  <span className="text-xs hidden md:block">
+                <div className="shadow border hidden md:flex flex-row items-center justify-center bg-white space-x-2 rounded-xl p-1">
+                  <span className="text-xs">
                     Powered by
                   </span>
 
                   <Image
                     src={LogoDark}
                     width={140}
-                    height={60}
+                    height={23}
+                    className=""
+                    alt="StreamETH Logo"
+                  />
+                </div>
+                <div className="shadow border flex md:hidden flex-row items-center justify-center bg-white space-x-2 p-[0.8px] rounded">
+                  <Image
+                    src={LogoDark}
+                    width={80}
+                    height={13}
                     className=""
                     alt="StreamETH Logo"
                   />

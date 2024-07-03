@@ -2,7 +2,6 @@ import { PlayerWithControls } from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { OrganizationPageProps } from '@/lib/types'
 import { Metadata } from 'next'
-import { apiUrl, buildPlaybackUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
 import { fetchSession } from '@/lib/services/sessionService'
@@ -85,7 +84,6 @@ export default async function Watch({
               speakers={session.speakers}
               date={session.createdAt as string}
               playbackId={session.playbackId}
-              session={session}
               organizationSlug={params.organization}
               vod={true}
             />
