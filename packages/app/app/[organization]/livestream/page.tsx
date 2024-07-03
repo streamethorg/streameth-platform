@@ -56,7 +56,7 @@ export default async function Livestream({
 
   if (!stage?._id || !stage.streamSettings?.streamId)
     return notFound()
-  console.log('stageee', stage)
+
   return (
     <Suspense key={stage._id} fallback={<Loading />}>
       <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full md:px-4 md:mt-4">
