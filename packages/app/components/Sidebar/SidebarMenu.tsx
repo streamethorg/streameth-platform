@@ -33,7 +33,7 @@ const SidebarMenu = ({
       icon: <LuShare2 size={25} />,
     },
     {
-      text: 'video NFTs',
+      text: 'NFTs',
       navigationPath: '/nfts',
       icon: <LuLock size={25} />,
     },

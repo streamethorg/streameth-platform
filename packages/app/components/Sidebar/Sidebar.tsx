@@ -26,7 +26,7 @@ export const SidebarUI = ({
           className={`flex items-center overflow-hidden transition-all ${
             expanded ? 'w-40' : 'w-10'
           }`}>
-          <div className="">
+          <div className="transition-all">
             {expanded ? (
               <Image
                 src={LogoDark}
@@ -73,7 +73,7 @@ export const SidebarUI = ({
           <div
             className={`
           absolute left-full rounded-md px-2 py-1 ml-2
-          bg-primary text-sm
+          bg-primary text-sm text-white
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}>
@@ -131,7 +131,7 @@ export const SidebarItem = ({
         <div
           className={`
           absolute left-full rounded-md px-2 py-1 ml-4
-          z-50
+          z-[9999]
           bg-primary text-sm text-white
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0

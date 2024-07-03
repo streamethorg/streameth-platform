@@ -45,11 +45,11 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center">
+            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center hover:bg-secondary">
               <div className="p-4 border bg-primary  rounded-xl text-white">
-                <LuFileUp className="h-6" />
+                <LuFileUp size={25} />
               </div>
-              <span className=" ">Upload Video</span>
+              <span className="text-sm">Upload Video</span>
             </div>
           </Link>
         </div>

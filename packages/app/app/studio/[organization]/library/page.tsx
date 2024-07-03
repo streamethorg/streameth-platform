@@ -90,12 +90,12 @@ const Library = async ({
   ) as unknown as IExtendedSession[]
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-full bg-white">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/nftBg.svg)`,
         }}
-        className="text-white bg-black bg-cover border-none shadow-none rounded-none w-full">
+        className="shadow-none bg-cover rounded-none bg-black text-white bg-no-repeat p-4 border-none">
         <CardHeader>
           <CardTitle>Video library</CardTitle>
           <CardDescription className="text-white">
