@@ -9,7 +9,7 @@ const EmptyLibrary = async ({
   organizationId: string
 }) => {
   return (
-    <div className="flex flex-col justify-center items-center space-y-6 h-full">
+    <div className="flex flex-col justify-center items-center space-y-6 h-full bg-white">
       <EmptyFolder />
       <div className="flex flex-col items-center">
         <p className="text-3xl font-bold">The library is empty</p>
