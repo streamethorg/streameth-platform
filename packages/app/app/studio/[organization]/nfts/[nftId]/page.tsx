@@ -1,6 +1,6 @@
 import { fetchNFTCollection } from '@/lib/services/nftCollectionService'
 import { nftPageParams } from '@/lib/types'
-import { ArrowLeft } from 'lucide-react'
+import { LuArrowLeft } from 'react-icons/lu'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import React from 'react'
@@ -20,7 +20,7 @@ const page = async ({ params }: nftPageParams) => {
     <div className="p-2 mx-6 h-full">
       <Link href={`/studio/${params.organization}/library`}>
         <div className="flex justify-start items-center my-4  space-x-4">
-          <ArrowLeft />
+          <LuArrowLeft />
           <p>Back to collections</p>
         </div>
       </Link>

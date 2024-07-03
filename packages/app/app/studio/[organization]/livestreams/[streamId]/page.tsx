@@ -76,12 +76,11 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             </Link>
           </div>
         </div>
-      <Destinations
-        stream={stream}
-        organization={params.organization}
-      />
+        <Destinations
+          stream={stream}
+          organization={params.organization}
+        />
       </div>
-
     </div>
   )
 }

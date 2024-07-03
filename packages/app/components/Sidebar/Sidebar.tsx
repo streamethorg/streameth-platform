@@ -28,7 +28,12 @@ export const SidebarUI = ({
           }`}>
           <div className="transition-all">
             {expanded ? (
-              <Image src={LogoDark} width={140} height={40} alt="log" />
+              <Image
+                src={LogoDark}
+                width={140}
+                height={40}
+                alt="log"
+              />
             ) : (
               <Image src={Logo} width={40} height={40} alt="log" />
             )}

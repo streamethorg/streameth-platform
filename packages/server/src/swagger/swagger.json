@@ -33,6 +33,9 @@
 					},
 					"thumbnail": {
 						"type": "string"
+					},
+					"email": {
+						"type": "string"
 					}
 				},
 				"required": [

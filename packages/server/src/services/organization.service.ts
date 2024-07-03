@@ -136,22 +136,51 @@ export default class OrganizationService {
   }
 
   async addOrgSocial(organizationId: string, data: ISocials) {
-    await this.get(organizationId);
-    await Organization.findOneAndUpdate(
-      { _id: organizationId },
-      {
-        $addToSet: {
-          socials: {
-            type: data.type,
-            accessToken: data.accessToken,
-            refreshToken: data.refreshToken,
-            expireTime: data.expireTime,
-            name: data.name,
-            thumbnail: data.thumbnail,
+    const org = await this.get(organizationId);
+
+    const existingSocial = org.socials.find(
+      (social) => social.email === data.email && social.type === data.type,
+    );
+
+    if (existingSocial) {
+      // Update the social with new data
+      await Organization.findOneAndUpdate(
+        { _id: organizationId, 'socials.email': data.email },
+        await Organization.findOneAndUpdate(
+          {
+            _id: organizationId,
+            'socials.email': data.email,
+            'socials.type': data.type,
+          },
+          {
+            $set: {
+              'socials.$.accessToken': data.accessToken,
+              'socials.$.refreshToken': data.refreshToken,
+              'socials.$.expireTime': data.expireTime,
+            },
+          },
+          { upsert: true },
+        ),
+      );
+    } else {
+      // Add the new social entry
+      await Organization.findOneAndUpdate(
+        { _id: organizationId },
+        {
+          $addToSet: {
+            socials: {
+              type: data.type,
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken,
+              expireTime: data.expireTime,
+              name: data.name,
+              thumbnail: data.thumbnail,
+              email: data.email,
+            },
           },
         },
-      },
-    );
+      );
+    }
   }
 
   async deleteOrgSocial(organizationId: string, destinationId: string) {
