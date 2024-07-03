@@ -36,29 +36,35 @@ const OrganizationPage = async ({
   ) as unknown as IExtendedStage[]
 
   return (
-    <div className="overflow-auto py-8 px-4 w-full">
-      <h2 className="text-lg font-bold">Create</h2>
-      <div className="flex gap-4 items-center py-4 max-w-5xl md">
-        <CreateLivestreamModal
-          show={searchParams?.show}
-          organization={organization}
-        />
-        <Link href={`/studio/${params.organization}/library`}>
-          <div className="flex flex-row items-center p-2 pr-4 space-x-4 bg-white rounded-xl border transition-colors hover:bg-accent">
-            <div className="p-4 text-white rounded-xl border bg-primary">
-              <LuFileUp size={25} />
+    <div className="h-full w-full p-8 flex flex-col">
+      <div className='flex flex-col max-h-[200px] w-full'>
+        <h2 className="text-lg font-bold">Create</h2>
+        <div className="flex items-center md gap-4 max-w-5xl py-4">
+          <CreateLivestreamModal
+            show={searchParams?.show}
+            organization={organization}
+          />
+          <Link href={`/studio/${params.organization}/library`}>
+            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center">
+              <div className="p-4 border bg-primary  rounded-xl text-white">
+                <LuFileUp className="h-6" />
+              </div>
+              <span className=" ">Upload Video</span>
             </div>
-            <span>Upload video</span>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
-      <p className="p-4 text-lg font-bold">Livestreams</p>
-      <Suspense key={searchParams.toString()} fallback={<Loading />}>
-        <LivestreamTable
-          organizationSlug={params?.organization}
-          streams={sortedStages}
-        />
-      </Suspense>
+      <div className='flex flex-col h-[80%]'>
+        <p className="py-4 font-bold text-lg">Livestreams</p>
+        <Suspense
+          key={searchParams.toString()}
+          fallback={<Loading />}>
+          <LivestreamTable
+            organizationSlug={params?.organization}
+            streams={sortedStages}
+          />
+        </Suspense>
+      </div>
     </div>
   )
 }

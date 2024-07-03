@@ -103,7 +103,7 @@ const AddMedia = ({
             </Button>
             <Button
               onClick={() => setIsOpen(false)}
-              variant="primary">
+              variant="outlinePrimary">
               Continue
             </Button>
           </DialogFooter>

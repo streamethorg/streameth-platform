@@ -18,7 +18,7 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary">Create VideoNFT</Button>
+        <Button variant="outlinePrimary" className='text-black'>Create VideoNFT</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>Select NFT Type</DialogHeader>
@@ -86,7 +86,7 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             <Button
               disabled={!type}
               className="w-full"
-              variant="primary">
+              variant="outlinePrimary">
               Create NFT
             </Button>
           </Link>

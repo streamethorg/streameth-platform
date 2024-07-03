@@ -31,13 +31,13 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row md:flex-row overflow-y-scroll p-4 space-x-4 w-full h-full">
-      <div className="">
-        <StreamHeader
-          organization={params.organization}
-          stream={stream}
-          isLiveStreamPage
-        />
+    <div className="flex flex-col p-4 w-full h-full max-w-screen-2xl max-h-[1000px]">
+      <StreamHeader
+        organization={params.organization}
+        stream={stream}
+        isLiveStreamPage
+      />
+      <div className="flex flex-row w-full space-x-4 flex-grow">
         <div className="flex flex-col">
           <StreamConfigWithPlayer
             stream={stream}
@@ -76,29 +76,12 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             </Link>
           </div>
         </div>
+      <Destinations
+        stream={stream}
+        organization={params.organization}
+      />
       </div>
 
-      <div className="">
-        <Tabs defaultValue="destinations">
-          <TabsList className="grid grid-cols-2 max-w-2/3">
-            <TabsTrigger value="destinations">
-              Destinations
-            </TabsTrigger>
-            <TabsTrigger value="chat">Chat</TabsTrigger>
-          </TabsList>
-          <TabsContent value="destinations">
-            <Destinations
-              stream={stream}
-              organization={params.organization}
-            />
-          </TabsContent>
-          <TabsContent value="chat">
-            <Card>
-              <CardTitle className="p-4">Coming Soon</CardTitle>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
     </div>
   )
 }
