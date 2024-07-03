@@ -46,8 +46,7 @@ const NFT = async ({
         <CardHeader>
           <CardTitle>Create Epic NFT Collection</CardTitle>
           <CardDescription className="max-w-[400px] text-white">
-            Immortalize your livestreams with NFTs. Create NFT
-            collection from your livestream on Base Chain.
+            Create NFT collection from your livestream on Base Chain.
           </CardDescription>
         </CardHeader>
 
