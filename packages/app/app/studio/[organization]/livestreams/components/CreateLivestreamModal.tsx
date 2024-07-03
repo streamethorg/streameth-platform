@@ -143,7 +143,7 @@ const CreateLivestreamModal = ({
           <div className="p-4 text-white rounded-xl border bg-primary">
             <LuRadio size={25} />
           </div>
-          <span className="">Create Livestream</span>
+          <span className="text-sm">Create Livestream</span>
         </Button>
       </DialogTrigger>
       {!streamType ? (
