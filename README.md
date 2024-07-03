@@ -13,7 +13,7 @@ For a better understanding of what StreamETH offers and how it functions, please
 
 You can find detailed documentation on StreamETH's features and architecture here:
 
-- **[Documentation Link](#)** - Dive deep into the technical details and operational aspects of StreamETH.
+- **[Documentation Link](#)**: Dive deep into the technical details and operational aspects of StreamETH.
 
 ## StreamETH-Platform Summary
 
