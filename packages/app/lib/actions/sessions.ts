@@ -180,10 +180,14 @@ export const generateThumbnailAction = async (
 }
 export const uploadSessionToYouTubeAction = async ({
   sessionId,
-  googleToken,
+  organizationId,
+  socialId,
+  type,
 }: {
   sessionId: string
-  googleToken: string
+  organizationId: string
+  socialId: string
+  type: string
 }) => {
   const authToken = cookies().get('user-session')?.value
   if (!authToken) {
@@ -193,9 +197,12 @@ export const uploadSessionToYouTubeAction = async ({
   try {
     const res = await uploadSessionToYouTube({
       sessionId,
-      googleToken,
+      organizationId,
+      socialId,
+      type,
       authToken,
     })
+    revalidatePath('/studio')
 
     return res
   } catch (e) {
