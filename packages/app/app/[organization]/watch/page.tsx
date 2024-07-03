@@ -10,6 +10,7 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 import { Suspense } from 'react'
 import WatchGrid from '../components/WatchGrid'
 import { getVideoUrlAction } from '@/lib/actions/livepeer'
+import { generateThumbnailAction } from '@/lib/actions/sessions'
 const Loading = () => {
   return (
     <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full animate-pulse">
@@ -57,12 +58,16 @@ export default async function Watch({
     session.assetId,
     session.playbackId
   )
+  
+  const thumbnail = await generateThumbnailAction(session)
 
   return (
     <Suspense key={session._id} fallback={<Loading />}>
       <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full">
         <div className="flex flex-col w-full h-full md:p-4">
           <PlayerWithControls
+            name={session.name}
+            thumbnail={session.coverImage ?? thumbnail}
             src={[
               {
                 src: sessionUrl as `${string}m3u8`,

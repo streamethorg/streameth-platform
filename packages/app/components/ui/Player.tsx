@@ -20,6 +20,8 @@ import { useRef, useEffect } from 'react'
 import mux from 'mux-embed'
 import Image from 'next/image'
 import { Src } from '@livepeer/react'
+import LogoDark from '@/public/logo_dark.png'
+import Link from 'next/link'
 
 export function PlayerWithControls(props: {
   src: Src[] | null
@@ -36,7 +38,7 @@ export function PlayerWithControls(props: {
         debug: false,
         data: {
           env_key: '1lgdh87bv14j6bhv83buspkj3',
-          player_name: 'Main Player', // Arbitrary string to identify the player
+          player_name: 'Main Player',
           player_init_time: initTime,
           // Add other metadata fields here
         },
@@ -62,19 +64,38 @@ export function PlayerWithControls(props: {
           title={props.name ?? 'video'}
           className={cn('h-full w-full transition')}
         />
-        {props.thumbnail && (
-          <Player.Thumb>
+        {/* <Player.PlayingIndicator asChild matcher={false}>
+          <div className="shadow border flex flex-col items-center justify-center bg-white rounded-xl h-[60px] absolute top-0 bottom-0 py-0 p-2 m-2">
+            <span className="text-xs">Powered by</span>
+            <Image
+              src={LogoDark}
+              width={140}
+              height={60}
+              className=""
+              alt="StreamETH Logo"
+            />
+          </div>
+        </Player.PlayingIndicator> */}
+        <Player.PlayingIndicator asChild matcher={false}>
+          {props.thumbnail && (
             <Image
               src={props.thumbnail}
               alt={props.name ?? 'image'}
               layout="fill"
             />
-          </Player.Thumb>
-        )}
+          )}
+        </Player.PlayingIndicator>
         <Player.LoadingIndicator className="w-full relative h-full bg-black/50 backdrop-blur data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <LoadingIcon className="w-8 h-8 animate-spin" />
           </div>
+          {props.thumbnail && (
+            <Image
+              src={props.thumbnail}
+              alt={props.name ?? 'image'}
+              layout="fill"
+            />
+          )}
           <PlayerLoading />
         </Player.LoadingIndicator>
 
@@ -160,7 +181,23 @@ export function PlayerWithControls(props: {
                 <Player.Thumb className="text-white block transition group-hover:scale-110 w-3 h-3 bg-white rounded-full" />
               </Player.Volume>
             </div>
+
             <div className="flex sm:flex-1 md:flex-[1.5] justify-end items-center gap-2.5">
+              <Link href={'https://streameth.org'} rel="noopener noreferrer" target="_blank">
+                <div className="shadow border flex flex-row items-center justify-center bg-white space-x-2 rounded-xl p-1">
+                  <span className="text-xs hidden md:block">
+                    Powered by
+                  </span>
+
+                  <Image
+                    src={LogoDark}
+                    width={140}
+                    height={60}
+                    className=""
+                    alt="StreamETH Logo"
+                  />
+                </div>
+              </Link>
               <Player.FullscreenIndicator matcher={false} asChild>
                 <Settings className="text-white w-6 h-6 transition flex-shrink-0" />
               </Player.FullscreenIndicator>
