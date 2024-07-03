@@ -21,7 +21,6 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
-
 const Settings = async ({
   params,
   searchParams,

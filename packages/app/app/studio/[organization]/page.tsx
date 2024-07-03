@@ -15,7 +15,6 @@ import LivestreamTable from './livestreams/components/LivestreamTable'
 import { notFound } from 'next/navigation'
 import { sortArray } from '@/lib/utils/utils'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
-
 const OrganizationPage = async ({
   params,
   searchParams,
