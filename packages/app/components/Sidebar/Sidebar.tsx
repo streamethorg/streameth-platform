@@ -68,7 +68,6 @@ export const SidebarUI = ({
           }`}>
           Docs
         </span>
-
         {!expanded && (
           <div
             className={`
