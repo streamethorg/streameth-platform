@@ -18,10 +18,14 @@ import React from 'react'
 import { useRef, useEffect } from 'react'
 // @ts-ignore
 import mux from 'mux-embed'
-
+import Image from 'next/image'
 import { Src } from '@livepeer/react'
 
-export function PlayerWithControls(props: { src: Src[] | null }) {
+export function PlayerWithControls(props: {
+  src: Src[] | null
+  name?: string
+  thumbnail?: string
+}) {
   const videoRef = useRef(null)
 
   useEffect(() => {
@@ -55,10 +59,18 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
         <Player.Video
           ref={videoRef}
           id={`player-${props.src[0].src}`}
-          title="Live stream"
+          title={props.name ?? 'video'}
           className={cn('h-full w-full transition')}
         />
-
+        {props.thumbnail && (
+          <Player.Thumb>
+            <Image
+              src={props.thumbnail}
+              alt={props.name ?? 'image'}
+              layout="fill"
+            />
+          </Player.Thumb>
+        )}
         <Player.LoadingIndicator className="w-full relative h-full bg-black/50 backdrop-blur data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <LoadingIcon className="w-8 h-8 animate-spin" />

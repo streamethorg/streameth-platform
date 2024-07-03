@@ -192,7 +192,9 @@ export interface IExtendedNftCollections
 export interface EmbedPageParams {
   searchParams: {
     vod: string
-    playbackId: string
+    playbackId?: string
+    streamId?: string
+    sessionId?: string
   }
 }
 

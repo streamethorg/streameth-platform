@@ -2,7 +2,7 @@ import { PlayerWithControls } from '@/components/ui/Player'
 import SessionInfoBox from '@/components/sessions/SessionInfoBox'
 import { OrganizationPageProps } from '@/lib/types'
 import { Metadata } from 'next'
-import { apiUrl } from '@/lib/utils/utils'
+import { apiUrl, buildPlaybackUrl } from '@/lib/utils/utils'
 import { notFound } from 'next/navigation'
 import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
 import { fetchSession } from '@/lib/services/sessionService'
@@ -14,7 +14,7 @@ const Loading = () => {
   return (
     <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full animate-pulse">
       <div className="flex flex-col w-full h-full md:p-4">
-        <div className="w-full bg-gray-300 aspect-video"></div>
+        <div className="w-full bg-gray-300 aspect-session"></div>
         <div className="px-4 mt-4 space-y-2 w-full md:px-0">
           <div className="w-3/4 h-6 bg-gray-200 rounded"></div>
           <div className="w-full h-4 bg-gray-200 rounded"></div>
@@ -46,24 +46,26 @@ export default async function Watch({
   }
 
   if (!searchParams.session) return notFound()
-  const video = await fetchSession({
+  const session = await fetchSession({
     session: searchParams.session,
   })
 
-  const videoUrl = await getVideoUrlAction(
-    video?.assetId,
-    video?.playbackId
+  if (!session || (!session.playbackId && !session.assetId))
+    return notFound()
+
+  const sessionUrl = await getVideoUrlAction(
+    session.assetId,
+    session.playbackId
   )
-  if (!video || !videoUrl) return notFound()
 
   return (
-    <Suspense key={video._id} fallback={<Loading />}>
+    <Suspense key={session._id} fallback={<Loading />}>
       <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full">
         <div className="flex flex-col w-full h-full md:p-4">
           <PlayerWithControls
             src={[
               {
-                src: videoUrl as `${string}m3u8`,
+                src: sessionUrl as `${string}m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
@@ -73,12 +75,12 @@ export default async function Watch({
           />
           <div className="px-4 w-full md:px-0">
             <SessionInfoBox
-              name={video.name}
-              description={video.description ?? 'No description'}
-              speakers={video.speakers}
-              date={video.createdAt as string}
-              playbackId={video.playbackId}
-              video={video}
+              name={session.name}
+              description={session.description ?? 'No description'}
+              speakers={session.speakers}
+              date={session.createdAt as string}
+              playbackId={session.playbackId}
+              session={session}
               organizationSlug={params.organization}
               vod={true}
             />
@@ -106,13 +108,13 @@ export async function generateMetadata({
 }: OrganizationPageProps): Promise<Metadata> {
   if (!searchParams.session) return generalMetadata
 
-  const video = await fetchSession({
+  const session = await fetchSession({
     session: searchParams.session,
   })
   const organization = await fetchOrganization({
     organizationSlug: params?.organization,
   })
 
-  if (!video || !organization) return generalMetadata
-  return watchMetadata({ organization, session: video })
+  if (!session || !organization) return generalMetadata
+  return watchMetadata({ organization, session: session })
 }

@@ -14,7 +14,7 @@ const VideoDownloadClient = ({
   collapsable = false,
 }: {
   videoName: string
-  assetId: string
+  assetId?: string
   variant?:
     | 'primary'
     | 'default'
@@ -28,6 +28,10 @@ const VideoDownloadClient = ({
   className?: string
   collapsable?: boolean
 }) => {
+  if (!assetId) {
+    return null
+  }
+  
   const [loading, setLoading] = useState(false)
   const fetchDownloadUrl = async (assetId: string) => {
     const response = await fetch(
