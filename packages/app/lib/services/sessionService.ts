@@ -196,7 +196,6 @@ export const fetchSessionMetrics = async ({
         cache: 'no-store',
       }
     )
-    console.log('response', response)
     if (!response.ok) {
       return {
         viewCount: 0,
