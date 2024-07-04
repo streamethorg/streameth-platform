@@ -40,7 +40,7 @@ export class IndexController extends Controller {
   @Post('/upload')
   async uploadImges(
     @UploadedFile() file: Express.Multer.File,
-    @FormField() directory: string,
+    @FormField() directory: string
   ): Promise<IStandardResponse<string>> {
     if (!file) throw new HttpException(400, 'no or invalid image');
     const timestamp = Date.now().toString();
@@ -50,14 +50,14 @@ export class IndexController extends Controller {
     const image = await this.storageService.uploadFile(
       `${directory}/${newFileName}`,
       file.buffer,
-      file.mimetype,
+      file.mimetype
     );
     return SendApiResponse('image uploaded', image);
   }
   @Post('/webhook')
   async webhook(
     @Header('livepeer-signature') livepeerSignature: string,
-    @Body() payload: any,
+    @Body() payload: any
   ): Promise<IStandardResponse<string>> {
     try {
       const webhookAuth = validateWebhook(livepeerSignature, payload);
@@ -76,7 +76,7 @@ export class IndexController extends Controller {
           break;
         case LivepeerEvent.recordingReady:
           await this.sessionService.createStreamRecordings(
-            payload.payload.session,
+            payload.payload.session
           );
           break;
         default:

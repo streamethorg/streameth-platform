@@ -45,7 +45,7 @@ export default class SessionService {
     return this.controller.store.create(
       data.name,
       { ...data, eventSlug: eventSlug, eventId: eventId, stageId: stageId },
-      `${this.path}/${eventId}`,
+      `${this.path}/${eventId}`
     );
   }
 
@@ -114,7 +114,7 @@ export default class SessionService {
         filter,
         this.path,
         skip,
-        pageSize,
+        pageSize
       ),
       await this.controller.store.findAll(filter, {}, this.path, 0, 0),
     ]);
@@ -184,7 +184,7 @@ export default class SessionService {
 
   async filterSessions(
     query: string,
-    organizationSlug?: string,
+    organizationSlug?: string
   ): Promise<Array<ISession>> {
     const options = {
       keys: ['name', 'description', 'speakers.name'],
@@ -230,7 +230,7 @@ export default class SessionService {
       'socials._id': data.socialId,
     });
     const token = org.socials.find(
-      (e) => e.type == data.type && e._id == data.socialId,
+      (e) => e.type == data.type && e._id == data.socialId
     );
     if (data.type == 'youtube') {
       data.token = await refreshAccessToken(token.refreshToken);

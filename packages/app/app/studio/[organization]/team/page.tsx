@@ -1,18 +1,18 @@
-import React from 'react'
-import { studioPageParams } from '@/lib/types'
-import { fetchOrganization } from '@/lib/services/organizationService'
+import React from 'react';
+import { studioPageParams } from '@/lib/types';
+import { fetchOrganization } from '@/lib/services/organizationService';
 import {
   Card,
   CardTitle,
   CardDescription,
   CardHeader,
   CardContent,
-} from '@/components/ui/card'
-import { fetchOrganizationMembers } from '@/lib/services/organizationService'
-import AddTeamMembers from './components/AddTeamMembers'
-import DeleteTeamMember from './components/DeleteTeamMember'
-import { truncateAddr } from '@/lib/utils/utils'
-import { Button } from '@/components/ui/button'
+} from '@/components/ui/card';
+import { fetchOrganizationMembers } from '@/lib/services/organizationService';
+import AddTeamMembers from './components/AddTeamMembers';
+import DeleteTeamMember from './components/DeleteTeamMember';
+import { truncateAddr } from '@/lib/utils/utils';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableHead,
@@ -20,25 +20,25 @@ import {
   TableRow,
   TableBody,
   TableCell,
-} from '@/components/ui/table'
+} from '@/components/ui/table';
 const Settings = async ({
   params,
   searchParams,
 }: {
-  params: studioPageParams['params']
+  params: studioPageParams['params'];
   searchParams: {
-    settingsActiveTab?: string
-  }
+    settingsActiveTab?: string;
+  };
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
-  if (!organization) return null
+  if (!organization) return null;
 
   const members = await fetchOrganizationMembers({
     organizationId: organization._id,
-  })
+  });
 
   return (
     <div className="flex h-full w-full p-12">
@@ -78,7 +78,7 @@ const Settings = async ({
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

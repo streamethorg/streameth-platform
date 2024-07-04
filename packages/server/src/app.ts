@@ -69,7 +69,7 @@ class App {
       cors({
         origin: config.cors.origin.trim().split(','),
         credentials: config.cors.credentials,
-      }),
+      })
     );
     this.app.use(hpp());
     this.app.use(helmet());

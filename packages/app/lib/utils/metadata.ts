@@ -1,23 +1,21 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 import {
   IExtendedEvent,
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
-} from '../types'
+} from '../types';
 
-const BASE_IMAGE = 'https://streameth.org/streameth_banner.png'
+const BASE_IMAGE = 'https://streameth.org/streameth_banner.png';
 
 export const generalMetadata: Metadata = {
   title: 'StreamETH',
-  description:
-    'The complete solution to host your hybrid or virtual event.',
+  description: 'The complete solution to host your hybrid or virtual event.',
   metadataBase: new URL('https://streameth.org'),
   openGraph: {
     title: 'StreamETH',
     siteName: 'StreamETH',
-    description:
-      'The complete solution to host your hybrid or virtual event.',
+    description: 'The complete solution to host your hybrid or virtual event.',
     images: {
       url: BASE_IMAGE,
       alt: 'StreamETH Logo',
@@ -26,8 +24,7 @@ export const generalMetadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'StreamETH',
-    description:
-      'The complete solution to host your hybrid or virtual event.',
+    description: 'The complete solution to host your hybrid or virtual event.',
     images: {
       url: BASE_IMAGE,
       alt: 'StreamETH Logo',
@@ -39,16 +36,14 @@ export const generalMetadata: Metadata = {
       'en-US': '/en-US',
     },
   },
-}
+};
 
 export const organizationMetadata = ({
   organization,
 }: {
-  organization: IExtendedOrganization
+  organization: IExtendedOrganization;
 }): Metadata => {
-  const imageUrl = organization.banner
-    ? organization.banner
-    : BASE_IMAGE
+  const imageUrl = organization.banner ? organization.banner : BASE_IMAGE;
 
   return {
     title: `${organization.name} | StreamETH`,
@@ -78,15 +73,15 @@ export const organizationMetadata = ({
         'en-US': '/en-US',
       },
     },
-  }
-}
+  };
+};
 
 export const archiveMetadata = ({
   event,
 }: {
-  event: IExtendedEvent
+  event: IExtendedEvent;
 }): Metadata => {
-  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
+  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE;
 
   return {
     title: `${event.name} | StreamETH`,
@@ -116,19 +111,17 @@ export const archiveMetadata = ({
         'en-US': '/en-US',
       },
     },
-  }
-}
+  };
+};
 
 export const watchMetadata = ({
   organization,
   session,
 }: {
-  organization?: IExtendedOrganization
-  session: IExtendedSession
+  organization?: IExtendedOrganization;
+  session: IExtendedSession;
 }): Metadata => {
-  const imageUrl = session?.coverImage
-    ? session.coverImage
-    : BASE_IMAGE
+  const imageUrl = session?.coverImage ? session.coverImage : BASE_IMAGE;
 
   return {
     title: `${session.name} | ${organization?.name}`,
@@ -158,17 +151,17 @@ export const watchMetadata = ({
         'en-US': '/en-US',
       },
     },
-  }
-}
+  };
+};
 
 export const stageMetadata = ({
   event,
   stage,
 }: {
-  event: IExtendedEvent
-  stage: IExtendedStage
+  event: IExtendedEvent;
+  stage: IExtendedStage;
 }): Metadata => {
-  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
+  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE;
 
   return {
     title: `${stage.name} | StreamETH`,
@@ -198,15 +191,15 @@ export const stageMetadata = ({
         'en-US': '/en-US',
       },
     },
-  }
-}
+  };
+};
 
 export const eventMetadata = ({
   event,
 }: {
-  event: IExtendedEvent
+  event: IExtendedEvent;
 }): Metadata => {
-  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE
+  const imageUrl = event.eventCover ? event.eventCover : BASE_IMAGE;
 
   return {
     title: `${event.name} | StreamETH`,
@@ -236,19 +229,17 @@ export const eventMetadata = ({
         'en-US': '/en-US',
       },
     },
-  }
-}
+  };
+};
 
 export const livestreamMetadata = ({
   livestream,
   organization,
 }: {
-  livestream: IExtendedStage
-  organization: IExtendedOrganization
+  livestream: IExtendedStage;
+  organization: IExtendedOrganization;
 }): Metadata => {
-  const imageUrl = livestream.thumbnail
-    ? livestream.thumbnail
-    : BASE_IMAGE
+  const imageUrl = livestream.thumbnail ? livestream.thumbnail : BASE_IMAGE;
 
   return {
     title: `${livestream.name} | ${organization.name}`,
@@ -278,5 +269,5 @@ export const livestreamMetadata = ({
         'en-US': '/en-US',
       },
     },
-  }
-}
+  };
+};

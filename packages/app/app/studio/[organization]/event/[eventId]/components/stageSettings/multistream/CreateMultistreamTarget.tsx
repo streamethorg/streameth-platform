@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import React, { useEffect, useState } from 'react'
-import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
+import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,38 +10,38 @@ import {
   DialogTitle,
   DialogFooter,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { createMultistreamAction } from '@/lib/actions/stages'
-import { ReloadIcon } from '@radix-ui/react-icons'
-import { useFormState, useFormStatus } from 'react-dom'
-import { Plus } from 'lucide-react'
+} from '@/components/ui/dialog';
+import { createMultistreamAction } from '@/lib/actions/stages';
+import { ReloadIcon } from '@radix-ui/react-icons';
+import { useFormState, useFormStatus } from 'react-dom';
+import { Plus } from 'lucide-react';
 
 const initialState = {
   message: '',
   success: false,
-}
+};
 
 export const CreateMultistreamTarget = ({
   streamId,
   organizationId,
   btnName = 'Add',
 }: {
-  streamId?: string
-  organizationId?: string
-  btnName?: string
+  streamId?: string;
+  organizationId?: string;
+  btnName?: string;
 }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const [state, formAction] = useFormState(
     createMultistreamAction,
     initialState
-  )
+  );
 
   useEffect(() => {
     if (state.message) {
-      toast[state.success ? 'success' : 'error'](state.message)
-      setOpen(false)
+      toast[state.success ? 'success' : 'error'](state.message);
+      setOpen(false);
     }
-  }, [state])
+  }, [state]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -59,5 +59,5 @@ export const CreateMultistreamTarget = ({
         </DialogHeader>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

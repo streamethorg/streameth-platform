@@ -1,30 +1,30 @@
-'use server'
+'use server';
 
-import { fetchAllSessions } from '@/lib/data'
-import { redirect } from 'next/navigation'
-import LibraryListLayout from './components/LibraryListLayout'
+import { fetchAllSessions } from '@/lib/data';
+import { redirect } from 'next/navigation';
+import LibraryListLayout from './components/LibraryListLayout';
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import UploadVideoDialog from './components/UploadVideoDialog'
-import { fetchAllStates } from '@/lib/services/stateService'
+} from '@/components/ui/card';
+import UploadVideoDialog from './components/UploadVideoDialog';
+import { fetchAllStates } from '@/lib/services/stateService';
 import {
   StateStatus,
   StateType,
-} from 'streameth-new-server/src/interfaces/state.interface'
-import { Suspense } from 'react'
-import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
-import TableSkeleton from '@/components/misc/Table/TableSkeleton'
-import EmptyLibrary from './components/EmptyLibrary'
-import { IExtendedSession, eLayout, eSort } from '@/lib/types'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import NotFound from '@/not-found'
-import { sortArray } from '@/lib/utils/utils'
-import LibraryGridLayout from './components/LibraryGridLayout'
+} from 'streameth-new-server/src/interfaces/state.interface';
+import { Suspense } from 'react';
+import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton';
+import TableSkeleton from '@/components/misc/Table/TableSkeleton';
+import EmptyLibrary from './components/EmptyLibrary';
+import { IExtendedSession, eLayout, eSort } from '@/lib/types';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import NotFound from '@/not-found';
+import { sortArray } from '@/lib/utils/utils';
+import LibraryGridLayout from './components/LibraryGridLayout';
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -33,8 +33,7 @@ const Loading = ({ layout }: { layout: string }) => {
         <CardHeader>
           <CardTitle>Video library</CardTitle>
           <CardDescription>
-            Manage you clips and livestream recordings or upload a new
-            video.
+            Manage you clips and livestream recordings or upload a new video.
           </CardDescription>
         </CardHeader>
         <CardFooter></CardFooter>
@@ -48,22 +47,22 @@ const Loading = ({ layout }: { layout: string }) => {
       )}
       {eLayout.list === layout && <TableSkeleton />}
     </div>
-  )
-}
+  );
+};
 
 const Library = async ({
   params,
   searchParams,
 }: {
-  params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show?: boolean }
+  params: { organization: string };
+  searchParams: { layout: eLayout; sort: eSort; show?: boolean };
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
   if (!organization) {
-    return NotFound()
+    return NotFound();
   }
 
   const statesSet = new Set(
@@ -73,21 +72,20 @@ const Library = async ({
         status: StateStatus.pending,
       })
     ).map((state) => state.sessionId) as unknown as Set<string>
-  )
+  );
 
   const sessions = (
     await fetchAllSessions({
       organizationSlug: params.organization,
     })
   ).sessions.filter(
-    (session) =>
-      session.videoUrl || statesSet.has(session._id.toString())
-  )
+    (session) => session.videoUrl || statesSet.has(session._id.toString())
+  );
 
   const sortedSessions = sortArray(
     sessions,
     searchParams.sort
-  ) as unknown as IExtendedSession[]
+  ) as unknown as IExtendedSession[];
 
   return (
     <div className="flex h-full w-full flex-col bg-white">
@@ -95,18 +93,16 @@ const Library = async ({
         style={{
           backgroundImage: `url(/backgrounds/nftBg.svg)`,
         }}
-        className="rounded-none border-none bg-black bg-cover bg-no-repeat p-4 text-white shadow-none">
+        className="rounded-none border-none bg-black bg-cover bg-no-repeat p-4 text-white shadow-none"
+      >
         <CardHeader>
           <CardTitle>Video library</CardTitle>
           <CardDescription className="text-white">
-            Manage you clips and livestream recordings or upload a new
-            video.
+            Manage you clips and livestream recordings or upload a new video.
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <UploadVideoDialog
-            organizationId={organization._id.toString()}
-          />
+          <UploadVideoDialog organizationId={organization._id.toString()} />
         </CardFooter>
       </Card>
       {!sessions || sessions.length === 0 ? (
@@ -128,15 +124,15 @@ const Library = async ({
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
 const LibraryPage = async ({
   params,
   searchParams,
 }: {
-  params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show: boolean }
+  params: { organization: string };
+  searchParams: { layout: eLayout; sort: eSort; show: boolean };
 }) => {
   if (
     !searchParams.layout ||
@@ -146,16 +142,17 @@ const LibraryPage = async ({
   ) {
     redirect(
       `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}`
-    )
+    );
   }
 
   return (
     <Suspense
       key={searchParams.toString()}
-      fallback={<Loading layout={searchParams.layout} />}>
+      fallback={<Loading layout={searchParams.layout} />}
+    >
       <Library params={params} searchParams={searchParams} />
     </Suspense>
-  )
-}
+  );
+};
 
-export default LibraryPage
+export default LibraryPage;

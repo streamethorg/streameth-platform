@@ -26,7 +26,7 @@ export default class CollectionService {
     const createCollection = await this.controller.store.create(
       data.name,
       data,
-      `${this.path}/${data.organizationId}`,
+      `${this.path}/${data.organizationId}`
     );
     for (const video of data.videos) {
       await this.updateVideoType({
@@ -63,9 +63,7 @@ export default class CollectionService {
       }
       let urls = await uploadMultipleMetadata(files);
       data.videos.map(
-        (video, index) => (
-          (video.ipfsURI = urls[index]), (video.index = index)
-        ),
+        (video, index) => ((video.ipfsURI = urls[index]), (video.index = index))
       );
       data.ipfsPath = this.getIpfsPath(urls[0]);
     }
@@ -77,7 +75,7 @@ export default class CollectionService {
 
   async update(
     collectionId: string,
-    data: INftCollection,
+    data: INftCollection
   ): Promise<INftCollection> {
     return await this.controller.store.update(collectionId, data, data.name);
   }
@@ -93,7 +91,7 @@ export default class CollectionService {
   }
 
   async findAllNftForOrganization(
-    organizationId: string,
+    organizationId: string
   ): Promise<Array<INftCollection>> {
     return await this.controller.store.findAll({
       organizationId: organizationId,

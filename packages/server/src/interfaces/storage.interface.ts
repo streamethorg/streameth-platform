@@ -8,13 +8,13 @@ export interface IStorageController<T> {
     fields?: {},
     path?: string,
     skip?: number,
-    pageSize?: number,
+    pageSize?: number
   ) => Promise<Array<T>>;
   findAllAndSort?: (
     query?: {},
     path?: string,
     skip?: number,
-    pageSize?: number,
+    pageSize?: number
   ) => Promise<Array<T>>;
   delete: (id: string) => Promise<void>;
 }

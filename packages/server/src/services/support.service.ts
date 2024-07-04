@@ -18,7 +18,7 @@ export default class SupportService {
       config.telegram.chatId,
       data.message + data.image + 'sender:' + data.email
         ? data.email
-        : data.telegram,
+        : data.telegram
     );
     return await this.controller.store.create(' ', data);
   }

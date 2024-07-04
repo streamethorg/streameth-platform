@@ -30,7 +30,7 @@ export class EventController extends Controller {
   @SuccessResponse('201')
   @Post('')
   async createEvent(
-    @Body() body: CreateEventDto,
+    @Body() body: CreateEventDto
   ): Promise<IStandardResponse<IEvent>> {
     const event = await this.eventService.create(body);
     return SendApiResponse('event created', event);
@@ -42,7 +42,7 @@ export class EventController extends Controller {
   @SuccessResponse('200')
   @Get('{eventId}')
   async getEventById(
-    @Path() eventId: string,
+    @Path() eventId: string
   ): Promise<IStandardResponse<IEvent>> {
     const event = await this.eventService.get(eventId);
     return SendApiResponse('event fetched', event);
@@ -56,7 +56,7 @@ export class EventController extends Controller {
   @Put('{eventId}')
   async editEvent(
     @Path() eventId: string,
-    @Body() body: UpdateEventDto,
+    @Body() body: UpdateEventDto
   ): Promise<IStandardResponse<IEvent>> {
     const event = await this.eventService.update(eventId, body);
     return SendApiResponse('event udpated', event);
@@ -70,7 +70,7 @@ export class EventController extends Controller {
   @Put('/import/{eventId}')
   async evenImporter(
     @Path() eventId: string,
-    @Body() organizationId: OrgIdDto,
+    @Body() organizationId: OrgIdDto
   ): Promise<IStandardResponse<void>> {
     await this.eventService.eventImport(eventId);
     return SendApiResponse('syncing..');
@@ -83,7 +83,7 @@ export class EventController extends Controller {
   @Get()
   async getAllEvents(
     @Query() organizationId?: string,
-    @Query() unlisted?: boolean,
+    @Query() unlisted?: boolean
   ): Promise<IStandardResponse<Array<IEvent>>> {
     const query = {
       organizationId: organizationId,
@@ -101,7 +101,7 @@ export class EventController extends Controller {
   @Delete('{eventId}')
   async deleteEvent(
     @Path() eventId: string,
-    @Body() organizationId: OrgIdDto,
+    @Body() organizationId: OrgIdDto
   ): Promise<IStandardResponse<void>> {
     await this.eventService.deleteOne(eventId);
     return SendApiResponse('deleted');

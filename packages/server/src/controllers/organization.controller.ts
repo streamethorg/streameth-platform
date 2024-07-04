@@ -31,7 +31,7 @@ export class OrganizationController extends Controller {
   @SuccessResponse('201')
   @Post()
   async createOrganization(
-    @Body() body: CreateOrganizationDto,
+    @Body() body: CreateOrganizationDto
   ): Promise<IStandardResponse<IOrganization>> {
     const org = await this.organizationService.create(body);
     return SendApiResponse('organization created', org);
@@ -45,7 +45,7 @@ export class OrganizationController extends Controller {
   @Put('{organizationId}')
   async editOrganization(
     @Path() organizationId: string,
-    @Body() body: UpdateOrganizationDto,
+    @Body() body: UpdateOrganizationDto
   ): Promise<IStandardResponse<IOrganization>> {
     const org = await this.organizationService.update(organizationId, body);
     return SendApiResponse('event updated', org);
@@ -59,11 +59,11 @@ export class OrganizationController extends Controller {
   @Put('/member/{organizationId}')
   async updateOrgMembers(
     @Path() organizationId: string,
-    @Body() body: Pick<CreateOrganizationDto, 'address'>,
+    @Body() body: Pick<CreateOrganizationDto, 'address'>
   ): Promise<IStandardResponse<void>> {
     const org = await this.organizationService.addOrgMember(
       organizationId,
-      body.address,
+      body.address
     );
     return SendApiResponse('member added', org);
   }
@@ -74,7 +74,7 @@ export class OrganizationController extends Controller {
   @SuccessResponse('200')
   @Get('{organizationId}')
   async getOrganizationById(
-    @Path() organizationId: string,
+    @Path() organizationId: string
   ): Promise<IStandardResponse<IOrganization>> {
     const org = await this.organizationService.get(organizationId);
     return SendApiResponse('organization fetched', org);
@@ -99,7 +99,7 @@ export class OrganizationController extends Controller {
   @SuccessResponse('200')
   @Get('/member/{organizationId}')
   async getAllOrgMembers(
-    @Path() organizationId: string,
+    @Path() organizationId: string
   ): Promise<IStandardResponse<Array<IUser>>> {
     const users = await this.organizationService.getOrgMembers(organizationId);
     return SendApiResponse('organization members fetched', users);
@@ -112,7 +112,7 @@ export class OrganizationController extends Controller {
   @SuccessResponse('200')
   @Delete('{organizationId}')
   async deleteOrganization(
-    @Path() organizationId: string,
+    @Path() organizationId: string
   ): Promise<IStandardResponse<void>> {
     await this.organizationService.deleteOne(organizationId);
     return SendApiResponse('deleted');
@@ -126,11 +126,11 @@ export class OrganizationController extends Controller {
   @Delete('/member/{organizationId}')
   async deleteOrgMember(
     @Path() organizationId: string,
-    @Body() body: Pick<CreateOrganizationDto, 'walletAddress'>,
+    @Body() body: Pick<CreateOrganizationDto, 'walletAddress'>
   ): Promise<IStandardResponse<void>> {
     const org = await this.organizationService.deleteOrgMember(
       organizationId,
-      body.walletAddress,
+      body.walletAddress
     );
     return SendApiResponse('memeber deleted', org);
   }
@@ -143,11 +143,11 @@ export class OrganizationController extends Controller {
   @Put('/socials/{organizationId}')
   async updateOrgSocials(
     @Path() organizationId: string,
-    @Body() body: ISocials,
+    @Body() body: ISocials
   ): Promise<IStandardResponse<void>> {
     const org = await this.organizationService.addOrgSocial(
       organizationId,
-      body,
+      body
     );
     return SendApiResponse('social added', org);
   }
@@ -160,11 +160,11 @@ export class OrganizationController extends Controller {
   @Delete('/socials/{organizationId}')
   async deleteOrgSocial(
     @Path() organizationId: string,
-    @Body() body: { destinationId: string },
+    @Body() body: { destinationId: string }
   ): Promise<IStandardResponse<void>> {
     const org = await this.organizationService.deleteOrgSocial(
       organizationId,
-      body.destinationId,
+      body.destinationId
     );
     return SendApiResponse('social deleted', org);
   }

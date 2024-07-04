@@ -20,7 +20,7 @@ export default class DB<T> implements IStorageController<T> {
         ...data,
         slug: generateId(slug),
       },
-      { upsert: true },
+      { upsert: true }
     );
     return await this.model.findById(id);
   }
@@ -38,7 +38,7 @@ export default class DB<T> implements IStorageController<T> {
     fields: {},
     path: string,
     skip: number,
-    pageSize: number,
+    pageSize: number
   ): Promise<Array<T>> {
     return await this.model.find(query, fields).skip(skip).limit(pageSize);
   }
@@ -47,7 +47,7 @@ export default class DB<T> implements IStorageController<T> {
     query: {},
     path: string,
     skip: number,
-    pageSize: number,
+    pageSize: number
   ): Promise<Array<T>> {
     return await this.model
       .find(query)

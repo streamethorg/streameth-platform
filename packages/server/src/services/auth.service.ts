@@ -29,13 +29,13 @@ export default class AuthService {
       config.jwt.secret,
       {
         expiresIn: config.jwt.expiry,
-      },
+      }
     );
     return { user: existingUser, token: token };
   }
 
   async verifyAuthToken(
-    token: string,
+    token: string
   ): Promise<{ userId: string; sessionId: string }> {
     try {
       const authToken = await privy.verifyAuthToken(token);

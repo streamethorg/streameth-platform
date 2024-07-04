@@ -14,7 +14,7 @@ export const getTokenHeader = (req: Request): string | null => {
 export const expressAuthentication = async (
   req: Request,
   securityName: string,
-  scopes?: string[],
+  scopes?: string[]
 ) => {
   if (securityName === 'jwt') {
     const token = getTokenHeader(req);
@@ -30,7 +30,7 @@ export const expressAuthentication = async (
       if (
         scopes.length > 0 &&
         !user.organizations.includes(
-          req.body.organizationId ?? req.params.organizationId,
+          req.body.organizationId ?? req.params.organizationId
         )
       ) {
         throw new Error('Insufficient permissions to execute action');

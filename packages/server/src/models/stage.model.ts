@@ -38,7 +38,7 @@ export const StageSchema = new Schema<IStageModel>(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const Stage = model<IStageModel>('Stage', StageSchema);

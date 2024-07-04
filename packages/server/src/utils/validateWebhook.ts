@@ -3,7 +3,7 @@ import { config } from '@config';
 
 export function validateWebhook(
   livepeerSignature: string,
-  payload: any,
+  payload: any
 ): boolean {
   const elements = livepeerSignature.split(',');
   const signatureParts = elements.reduce((acc, element) => {
@@ -23,7 +23,7 @@ export function validateWebhook(
 
   const isSignatureValid = crypto.timingSafeEqual(
     Buffer.from(signature),
-    Buffer.from(expectedSignature),
+    Buffer.from(expectedSignature)
   );
 
   if (!isSignatureValid) {

@@ -13,7 +13,7 @@ function delay(ms: number): Promise<void> {
 // Checks the processing status of a YouTube video
 async function checkVideoProcessingStatus(
   videoId: string,
-  youtube: youtube_v3.Youtube,
+  youtube: youtube_v3.Youtube
 ): Promise<string> {
   const response = await youtube.videos.list({
     id: [videoId],
@@ -26,7 +26,7 @@ async function checkVideoProcessingStatus(
 // Downloads an image from a URL and saves it to a file
 async function downloadImage(
   url: string,
-  filePath: string,
+  filePath: string
 ): Promise<{ success: boolean; message?: string }> {
   return new Promise((resolve) => {
     https
@@ -61,7 +61,7 @@ async function setThumbnail(
   videoId: string,
   filePath: string,
   stateService: StateService,
-  stateId: string,
+  stateId: string
 ): Promise<void> {
   try {
     const response = await youtube.thumbnails.set({
@@ -83,7 +83,7 @@ async function setThumbnail(
 export async function uploadToYouTube(
   session: ISession,
   youtube: youtube_v3.Youtube,
-  videoFilePath: string,
+  videoFilePath: string
 ): Promise<void> {
   const stateService = new StateService();
 
@@ -118,7 +118,7 @@ export async function uploadToYouTube(
     while (processingStatus === 'processing') {
       processingStatus = await checkVideoProcessingStatus(
         insertResponse.data.id,
-        youtube,
+        youtube
       );
       if (processingStatus === 'processing') {
         await delay(180000); // Delay for 3 minutes
@@ -140,7 +140,7 @@ export async function uploadToYouTube(
         insertResponse.data.id,
         filePath,
         stateService,
-        state._id.toString(),
+        state._id.toString()
       );
       return;
     }

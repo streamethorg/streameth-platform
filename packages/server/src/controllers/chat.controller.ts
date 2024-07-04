@@ -27,7 +27,7 @@ export class ChatController extends Controller {
   @SuccessResponse('201')
   @Post('')
   async createCHar(
-    @Body() body: CreateChatDto,
+    @Body() body: CreateChatDto
   ): Promise<IStandardResponse<IChat>> {
     const chat = await this.chatService.create(body);
     return SendApiResponse('chat created', chat);
@@ -39,7 +39,7 @@ export class ChatController extends Controller {
   @SuccessResponse('200')
   @Get('{stageId}')
   async getChatStageById(
-    @Path() stageId: string,
+    @Path() stageId: string
   ): Promise<IStandardResponse<IChat[]>> {
     const chats = await this.chatService.getAllChatByStageId(stageId);
     return SendApiResponse('chats fetched', chats);

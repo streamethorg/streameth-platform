@@ -27,7 +27,7 @@ export class SupportController extends Controller {
   @SuccessResponse('201')
   @Post('')
   async createTicket(
-    @Body() body: CreateSupportTicketDto,
+    @Body() body: CreateSupportTicketDto
   ): Promise<IStandardResponse<ISupport>> {
     const ticket = await this.supportService.create(body);
     return SendApiResponse('ticket created', ticket);

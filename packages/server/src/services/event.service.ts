@@ -16,13 +16,13 @@ export default class EventService {
   async create(data: IEvent): Promise<IEvent> {
     const findEvent = await this.controller.store.findOne(
       { name: data.name },
-      `${this.path}/${data.organizationId}`,
+      `${this.path}/${data.organizationId}`
     );
     if (findEvent) throw new HttpException(409, 'Event already exists');
     return await this.controller.store.create(
       data.name,
       data,
-      `${this.path}/${data.organizationId}`,
+      `${this.path}/${data.organizationId}`
     );
   }
 

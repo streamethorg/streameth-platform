@@ -1,27 +1,22 @@
-import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 
-import StagePreview from '../stage/components/StagePreview'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
+import StagePreview from '../stage/components/StagePreview';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import SpeakerComponent, {
   SpeakerComponentSkeleton,
-} from '../speakers/components/SpeakerComponent'
+} from '../speakers/components/SpeakerComponent';
 import ScheduleComponent, {
   ScheduleSkeleton,
-} from '../schedule/components/ScheduleComponent'
-import Image from 'next/image'
-import { formatDate, isSameDate } from '@/lib/utils/time'
-import { Suspense } from 'react'
-import banner from '@/public/streameth_twitter_banner.jpeg'
-import { IExtendedEvent, IExtendedStage } from '@/lib/types'
-import SignUp from '@/components/plugins/SignUp'
-import MarkdownDisplay from '@/components/misc/MarkdownDisplay'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
-import StageComponent from '../stage/components/StageComponent'
+} from '../schedule/components/ScheduleComponent';
+import Image from 'next/image';
+import { formatDate, isSameDate } from '@/lib/utils/time';
+import { Suspense } from 'react';
+import banner from '@/public/streameth_twitter_banner.jpeg';
+import { IExtendedEvent, IExtendedStage } from '@/lib/types';
+import SignUp from '@/components/plugins/SignUp';
+import MarkdownDisplay from '@/components/misc/MarkdownDisplay';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import StageComponent from '../stage/components/StageComponent';
 
 export default function EventHomeComponent({
   event,
@@ -29,32 +24,31 @@ export default function EventHomeComponent({
   params,
   searchParams,
 }: {
-  event: IExtendedEvent
-  stages: IExtendedStage[]
+  event: IExtendedEvent;
+  stages: IExtendedStage[];
 
   params: {
-    organization: string
-  }
+    organization: string;
+  };
   searchParams: {
-    stage?: string
-    date?: string
-    livestream?: string
-  }
+    stage?: string;
+    date?: string;
+    livestream?: string;
+  };
 }) {
   const style = {
     '--colors-accent': event.accentColor,
-  } as React.CSSProperties
-  const bannerImg = event.banner !== '' ? event.banner : banner
+  } as React.CSSProperties;
+  const bannerImg = event.banner !== '' ? event.banner : banner;
   return (
     <div
       className="flex w-full flex-col bg-background px-2"
-      style={{ ...style }}>
+      style={{ ...style }}
+    >
       <div className="relative z-50 mx-auto w-full max-w-full space-y-4 lg:my-4 lg:max-w-5xl">
         {!searchParams.livestream ? (
           <Card className="border bg-white shadow-none lg:rounded-xl">
-            <AspectRatio
-              ratio={3 / 1}
-              className="overflow-clip rounded-xl p-2">
+            <AspectRatio ratio={3 / 1} className="overflow-clip rounded-xl p-2">
               <Image
                 className="h-full rounded-lg object-contain"
                 src={bannerImg!}
@@ -79,10 +73,7 @@ export default function EventHomeComponent({
                 <p>
                   <span className="mr-2">&#128197;</span>
                   {formatDate(new Date(event.start))}
-                  {!isSameDate(
-                    new Date(event.start),
-                    new Date(event.end)
-                  )
+                  {!isSameDate(new Date(event.start), new Date(event.end))
                     ? ` - ${formatDate(new Date(event.end))}`
                     : ''}
                 </p>
@@ -90,10 +81,7 @@ export default function EventHomeComponent({
                   <span className="mr-2">&#9200;</span>
                   <span className="capitalize">
                     {event?.startTime
-                      ? `${event.startTime?.replace(
-                          /\s?[AP]M/g,
-                          ''
-                        )} - ${
+                      ? `${event.startTime?.replace(/\s?[AP]M/g, '')} - ${
                           event.endTime
                             ? event.endTime?.replace(/\s?[AP]M/g, '')
                             : ''
@@ -110,14 +98,12 @@ export default function EventHomeComponent({
             </CardHeader>
           </Card>
         ) : (
-          <StageComponent
-            event={event}
-            stageId={searchParams.livestream}
-          />
+          <StageComponent event={event} stageId={searchParams.livestream} />
         )}
         <Tabs
           defaultValue="schedule"
-          className="rounded-xl border bg-white p-2">
+          className="rounded-xl border bg-white p-2"
+        >
           <TabsList className="w-full justify-start bg-white">
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="livestreams">Livestreams</TabsTrigger>
@@ -159,5 +145,5 @@ export default function EventHomeComponent({
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

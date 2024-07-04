@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import React from 'react';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -7,20 +7,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import DeleteMultistream from './DeleteMultistream'
-import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget'
-import { IExtendedStage } from '@/lib/types'
+} from '@/components/ui/table';
+import DeleteMultistream from './DeleteMultistream';
+import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
+import { IExtendedStage } from '@/lib/types';
 
 const Multistream = ({
   stream,
   organizationId,
 }: {
-  stream: IExtendedStage
-  organizationId: string
+  stream: IExtendedStage;
+  organizationId: string;
 }) => {
-  if (!stream) return null
-  const streamTargets = stream?.streamSettings?.targets || []
+  if (!stream) return null;
+  const streamTargets = stream?.streamSettings?.targets || [];
 
   return (
     <div className="w-full">
@@ -51,9 +51,7 @@ const Multistream = ({
             <Table>
               <TableHeader className="sticky top-0 z-50">
                 <TableRow>
-                  <TableHead className="min-w-[100px]">
-                    Name
-                  </TableHead>
+                  <TableHead className="min-w-[100px]">Name</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -81,7 +79,7 @@ const Multistream = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Multistream
+export default Multistream;

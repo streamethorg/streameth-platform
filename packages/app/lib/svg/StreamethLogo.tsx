@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const StreamethLogo: React.FC<React.SVGProps<SVGSVGElement>> = () => {
   return (
@@ -6,7 +6,8 @@ const StreamethLogo: React.FC<React.SVGProps<SVGSVGElement>> = () => {
       width="41"
       height="36"
       viewBox="0 0 41 36"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -32,7 +33,8 @@ const StreamethLogo: React.FC<React.SVGProps<SVGSVGElement>> = () => {
           y1="17.4768"
           x2="8.51433"
           y2="-15.393"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stopColor="#6426EF" />
           <stop offset="1" stopColor="#FF9976" />
         </linearGradient>
@@ -42,7 +44,8 @@ const StreamethLogo: React.FC<React.SVGProps<SVGSVGElement>> = () => {
           y1="55.1411"
           x2="-30.7261"
           y2="-82.6672"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stopColor="#6426EF" />
           <stop offset="1" stopColor="#FF9976" />
         </linearGradient>
@@ -52,13 +55,14 @@ const StreamethLogo: React.FC<React.SVGProps<SVGSVGElement>> = () => {
           y1="-184.371"
           x2="36.6422"
           y2="18.2123"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stopColor="#6426EF" />
           <stop offset="1" stopColor="#FF9976" />
         </linearGradient>
       </defs>
     </svg>
-  )
-}
+  );
+};
 
-export default StreamethLogo
+export default StreamethLogo;

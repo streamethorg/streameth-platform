@@ -6,7 +6,7 @@ const errorMiddleware = (
   error: any,
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   try {
     if (error.name == 'ValidateError') {
@@ -19,7 +19,7 @@ const errorMiddleware = (
       const message: string = error.message || 'Something went wrong';
       console.log('errpr', error);
       logger.error(
-        `[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`,
+        `[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`
       );
       res.status(status).json({ message });
     }

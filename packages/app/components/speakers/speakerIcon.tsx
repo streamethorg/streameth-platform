@@ -1,40 +1,32 @@
-'use client'
-import makeBlockie from 'ethereum-blockies-base64'
-import { Badge } from '@/components/ui/badge'
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/ui/avatar'
-import SpeakerModal from '@/app/[organization]/[event]/speakers/components/SpeakerModal'
-import { Credenza, CredenzaTrigger } from '../ui/crezenda'
-import { IExtendedSpeaker } from '@/lib/types'
+'use client';
+import makeBlockie from 'ethereum-blockies-base64';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import SpeakerModal from '@/app/[organization]/[event]/speakers/components/SpeakerModal';
+import { Credenza, CredenzaTrigger } from '../ui/crezenda';
+import { IExtendedSpeaker } from '@/lib/types';
 function CreateBlockie(username: string) {
-  return makeBlockie(username)
+  return makeBlockie(username);
 }
 
 export default function SpeakerIcon({
   speaker,
   onlyImage = false,
 }: {
-  speaker: IExtendedSpeaker
-  onlyImage?: boolean
+  speaker: IExtendedSpeaker;
+  onlyImage?: boolean;
 }) {
   if (onlyImage) {
     return (
       <Avatar className="my-2">
         <AvatarImage
-          src={
-            speaker.photo
-              ? speaker.photo
-              : CreateBlockie(speaker.name)
-          }
+          src={speaker.photo ? speaker.photo : CreateBlockie(speaker.name)}
         />
         <AvatarFallback>
           {speaker.name.slice(0, 1).toUpperCase()}
         </AvatarFallback>
       </Avatar>
-    )
+    );
   }
   return (
     <Credenza>
@@ -51,5 +43,5 @@ export default function SpeakerIcon({
         </Badge>
       </CredenzaTrigger>
     </Credenza>
-  )
+  );
 }

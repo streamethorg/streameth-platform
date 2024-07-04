@@ -26,12 +26,12 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const Organization = model<IOrganizationModel>(
   'Organization',
-  OrganizationSchema,
+  OrganizationSchema
 );
 
 export default Organization;

@@ -39,11 +39,11 @@ export class StreamController extends Controller {
   @SuccessResponse('201')
   @Post('multistream')
   async createMultiStream(
-    @Body() body: CreateMultiStreamDto,
+    @Body() body: CreateMultiStreamDto
   ): Promise<IStandardResponse<any>> {
     return SendApiResponse(
       'Multistream created',
-      await createMultiStream(body),
+      await createMultiStream(body)
     );
   }
 
@@ -54,11 +54,11 @@ export class StreamController extends Controller {
   @SuccessResponse('200')
   @Delete('multistream')
   async deleteMultiStream(
-    @Body() body: DeleteMultiStreamDto,
+    @Body() body: DeleteMultiStreamDto
   ): Promise<IStandardResponse<void>> {
     return SendApiResponse(
       'Multistream deleted',
-      await deleteMultiStream(body),
+      await deleteMultiStream(body)
     );
   }
 
@@ -68,7 +68,7 @@ export class StreamController extends Controller {
   @SuccessResponse('201')
   @Post('asset')
   async createAsset(
-    @Body() body: any,
+    @Body() body: any
   ): Promise<IStandardResponse<{ url: string; assetId: string }>> {
     return SendApiResponse('Asset created', await createAsset(body.fileName));
   }
@@ -97,7 +97,7 @@ export class StreamController extends Controller {
   @SuccessResponse('200')
   @Get('asset/url/{assetId}')
   async getVideoUrl(
-    @Path() assetId: string,
+    @Path() assetId: string
   ): Promise<IStandardResponse<string>> {
     return SendApiResponse('Video url fetched', await getDownloadUrl(assetId));
   }
@@ -108,7 +108,7 @@ export class StreamController extends Controller {
   @SuccessResponse('200')
   @Get('asset/phase-action/{assetId}')
   async getPhaseAction(
-    @Path() assetId: string,
+    @Path() assetId: string
   ): Promise<IStandardResponse<{ playbackUrl: string; phaseStatus: string }>> {
     const phaseAction = await getVideoPhaseAction(assetId);
     return SendApiResponse('phase status fetched', phaseAction);
@@ -120,11 +120,11 @@ export class StreamController extends Controller {
   @SuccessResponse('200')
   @Get('metric/{playbackId}')
   async getSessionMetrics(
-    @Path() playbackId: string,
+    @Path() playbackId: string
   ): Promise<IStandardResponse<{ viewCount: number; playTimeMins: number }>> {
     return SendApiResponse(
       'Stream metrics',
-      await getSessionMetrics(playbackId),
+      await getSessionMetrics(playbackId)
     );
   }
 
@@ -134,11 +134,11 @@ export class StreamController extends Controller {
   @SuccessResponse('200')
   @Get('recording/{streamId}')
   async getStreamRecordings(
-    @Path() streamId: string,
+    @Path() streamId: string
   ): Promise<IStandardResponse<any>> {
     return SendApiResponse(
       'Stream recordings',
-      await getStreamRecordings(streamId),
+      await getStreamRecordings(streamId)
     );
   }
 
@@ -148,7 +148,7 @@ export class StreamController extends Controller {
   @SuccessResponse('200')
   @Get('upload/{assetId}')
   async uploadToIpfs(
-    @Path() assetId: string,
+    @Path() assetId: string
   ): Promise<IStandardResponse<string>> {
     return SendApiResponse('Upload', await uploadToIpfs(assetId));
   }
@@ -159,7 +159,7 @@ export class StreamController extends Controller {
   @SuccessResponse('201')
   @Post('clip')
   async createClip(
-    @Body() body: CreateClipDto,
+    @Body() body: CreateClipDto
   ): Promise<IStandardResponse<any>> {
     const clip = await createClip(body);
     return SendApiResponse('clipped', clip);

@@ -16,7 +16,7 @@ export default class SpeakerService {
     return this.controller.store.create(
       data.name,
       data,
-      `${this.path}/${data.eventId}`,
+      `${this.path}/${data.eventId}`
     );
   }
 
@@ -32,7 +32,7 @@ export default class SpeakerService {
 
   async findSpeakerForEvent(
     speakerId: string,
-    eventId: string,
+    eventId: string
   ): Promise<ISpeaker> {
     return await this.controller.store.findOne({
       slug: speakerId,

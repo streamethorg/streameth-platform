@@ -30,7 +30,7 @@ export class StateController extends Controller {
   @SuccessResponse('201')
   @Post()
   async createState(
-    @Body() body: CreateStateDto,
+    @Body() body: CreateStateDto
   ): Promise<IStandardResponse<IState>> {
     const state = await this.stateService.create(body);
     return SendApiResponse('state created', state);
@@ -44,7 +44,7 @@ export class StateController extends Controller {
   @Put('{stateId}')
   async updateState(
     @Path() stateId: string,
-    @Body() body: UpdateStateDto,
+    @Body() body: UpdateStateDto
   ): Promise<IStandardResponse<IState>> {
     const state = await this.stateService.update(stateId, body);
     return SendApiResponse('state updated', state);
@@ -61,7 +61,7 @@ export class StateController extends Controller {
     @Query() sessionId?: string,
     @Query() eventSlug?: string,
     @Query() type?: string,
-    @Query() status?: string,
+    @Query() status?: string
   ): Promise<IStandardResponse<Array<IState>>> {
     const queryParams = {
       eventId: eventId,

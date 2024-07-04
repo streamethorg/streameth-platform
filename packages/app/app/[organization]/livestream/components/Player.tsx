@@ -1,28 +1,27 @@
-'use server'
+'use server';
 
-import { Livepeer } from 'livepeer'
-import { IExtendedStage } from '@/lib/types'
-import Counter from './Counter'
-import { PlayerWithControls } from '@/components/ui/Player'
-import { buildPlaybackUrl } from '@/lib/utils/utils'
-import { notFound } from 'next/navigation'
-import Image from 'next/image'
+import { Livepeer } from 'livepeer';
+import { IExtendedStage } from '@/lib/types';
+import Counter from './Counter';
+import { PlayerWithControls } from '@/components/ui/Player';
+import { buildPlaybackUrl } from '@/lib/utils/utils';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 const Player = async ({ stage }: { stage: IExtendedStage }) => {
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
-  })
+  });
 
   const stream = (
     await livepeer.stream.get(stage.streamSettings?.streamId ?? '')
-  ).stream
+  ).stream;
 
   if (!stream || !stream.playbackId) {
-    return notFound()
+    return notFound();
   }
 
-  const timeLeft =
-    new Date(stage.streamDate as string).getTime() - Date.now()
+  const timeLeft = new Date(stage.streamDate as string).getTime() - Date.now();
 
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
   return (
@@ -44,9 +43,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
           <PlayerWithControls
             src={[
               {
-                src: buildPlaybackUrl(
-                  stream.playbackId
-                ) as `${string} m3u8`,
+                src: buildPlaybackUrl(stream.playbackId) as `${string} m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
@@ -60,7 +57,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Player
+export default Player;

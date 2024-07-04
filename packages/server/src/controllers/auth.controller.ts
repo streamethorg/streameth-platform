@@ -15,7 +15,7 @@ export class AuthController extends Controller {
   @SuccessResponse('201')
   @Post('login')
   async login(
-    @Body() body: UserDto,
+    @Body() body: UserDto
   ): Promise<IStandardResponse<{ user: IUser; token: string }>> {
     const user = await this.authService.login(body);
     return SendApiResponse('logged in', user);
@@ -27,7 +27,7 @@ export class AuthController extends Controller {
   @SuccessResponse('201')
   @Post('/verify-token')
   async verifyToken(
-    @Body() body: UserDto,
+    @Body() body: UserDto
   ): Promise<IStandardResponse<boolean>> {
     const status = await this.authService.verifyToken(body.token);
     return SendApiResponse('Success', status);

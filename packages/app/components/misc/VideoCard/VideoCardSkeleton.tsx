@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { EllipsisVertical } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react';
 
 const VideoCardSkeleton = () => {
   return (
@@ -15,8 +15,8 @@ const VideoCardSkeleton = () => {
         <EllipsisVertical className="mt-2" />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const VideoCardSkeletonMobile = () => {
   return (
@@ -27,7 +27,7 @@ export const VideoCardSkeletonMobile = () => {
         <div className="h-3 w-1/2 rounded bg-gray-300"></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VideoCardSkeleton
+export default VideoCardSkeleton;

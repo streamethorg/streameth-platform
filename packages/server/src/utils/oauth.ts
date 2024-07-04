@@ -14,11 +14,11 @@ export const getYoutubeClient = (accessToken: string) => {
 };
 
 export const refreshAccessToken = async (
-  refreshToken: string,
+  refreshToken: string
 ): Promise<string> => {
   const oauth2Client = new google.auth.OAuth2(
     config.oauth.google.clientId,
-    config.oauth.google.secretKey,
+    config.oauth.google.secretKey
   );
   oauth2Client.setCredentials({
     refresh_token: refreshToken,

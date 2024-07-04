@@ -7,7 +7,7 @@ export interface IStandardResponse<T> {
 export const SendApiResponse = <T>(
   message: string,
   data?: T,
-  status: string = 'success',
+  status: string = 'success'
 ): IStandardResponse<T> => {
   return {
     status,

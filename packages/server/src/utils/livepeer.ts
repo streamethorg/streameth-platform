@@ -14,7 +14,7 @@ const livepeer = new Livepeer({
 });
 
 export const createStream = async (
-  name: string,
+  name: string
 ): Promise<{
   streamId: string;
   streamKey: string;
@@ -76,7 +76,7 @@ export const getStreamInfo = async (streamId: string): Promise<Stream> => {
 };
 
 export const createAsset = async (
-  fileName: string,
+  fileName: string
 ): Promise<{ url: string; assetId: string; tusEndpoint: string }> => {
   try {
     const response = await fetch(`${host}/api/asset/request-upload`, {
@@ -185,7 +185,7 @@ export const uploadToIpfs = async (assetId: string) => {
 };
 
 export const getVideoPhaseAction = async (
-  assetId: string,
+  assetId: string
 ): Promise<{ playbackUrl: string; phaseStatus: string }> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
@@ -243,7 +243,7 @@ export const createMultiStream = async (data: IMultiStream): Promise<void> => {
           url: data.targetURL + '/' + data.targetStreamKey,
         },
         profile: 'source',
-      },
+      }
     );
     const multistream = JSON.parse(response.rawResponse.data.toString());
     const stage = await Stage.findOne({
@@ -293,7 +293,7 @@ export const generateThumbnail = async (data: {
 
     const lpThumbnails =
       asset.playbackInfo?.meta.source.filter(
-        (source) => source.hrn === 'Thumbnails',
+        (source) => source.hrn === 'Thumbnails'
       ) ?? [];
 
     if (lpThumbnails.length > 0) {
@@ -305,7 +305,7 @@ export const generateThumbnail = async (data: {
 };
 
 export const getSessionMetrics = async (
-  playbackId: string,
+  playbackId: string
 ): Promise<{ viewCount: number; playTimeMins: number }> => {
   try {
     const metrics = await livepeer.metrics.getPublicTotalViews(playbackId);

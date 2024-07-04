@@ -26,7 +26,7 @@ export default class StorageService {
   async uploadFile(
     filename: string,
     file: Buffer | Readable,
-    contentType: string,
+    contentType: string
   ): Promise<string> {
     const params: PutObjectCommandInput = {
       Bucket: name,

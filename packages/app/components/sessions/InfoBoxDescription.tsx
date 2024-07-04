@@ -1,47 +1,48 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useRef } from 'react'
-import MarkdownDisplay from '../misc/MarkdownDisplay'
-import { IExtendedSpeaker } from '@/lib/types'
-import SpeakerIcon from '../speakers/speakerIcon'
+import { useState, useEffect, useRef } from 'react';
+import MarkdownDisplay from '../misc/MarkdownDisplay';
+import { IExtendedSpeaker } from '@/lib/types';
+import SpeakerIcon from '../speakers/speakerIcon';
 
 const InfoBoxDescription = ({
   description,
   speakers,
 }: {
-  description?: string
-  speakers?: IExtendedSpeaker[]
+  description?: string;
+  speakers?: IExtendedSpeaker[];
 }) => {
-  const [isOpened, setIsOpened] = useState(false)
-  const [isExpandable, setIsExpandable] = useState(false)
-  const [maxHeight, setMaxHeight] = useState('0px')
-  const descriptionRef = useRef<HTMLDivElement>(null)
+  const [isOpened, setIsOpened] = useState(false);
+  const [isExpandable, setIsExpandable] = useState(false);
+  const [maxHeight, setMaxHeight] = useState('0px');
+  const descriptionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
       if (descriptionRef.current) {
-        const descriptionHeight = descriptionRef.current.scrollHeight
-        setIsExpandable(descriptionHeight > 100) // Adjust height threshold as needed
-        setMaxHeight(isOpened ? `${descriptionHeight}px` : '50px')
+        const descriptionHeight = descriptionRef.current.scrollHeight;
+        setIsExpandable(descriptionHeight > 100); // Adjust height threshold as needed
+        setMaxHeight(isOpened ? `${descriptionHeight}px` : '50px');
       }
-    }
+    };
 
-    handleResize()
-    window.addEventListener('resize', handleResize)
+    handleResize();
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [isOpened])
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isOpened]);
 
-  if (!description) return null
+  if (!description) return null;
 
   return (
     <div className="relative py-4">
       <div
         ref={descriptionRef}
         className="transition-max-height overflow-hidden duration-300 ease-in-out"
-        style={{ maxHeight: maxHeight }}>
+        style={{ maxHeight: maxHeight }}
+      >
         {description && (
           <div className="space-y-2">
             <MarkdownDisplay content={description} />
@@ -61,21 +62,20 @@ const InfoBoxDescription = ({
       {isExpandable && (
         <button
           onClick={() => {
-            setIsOpened(!isOpened)
+            setIsOpened(!isOpened);
             if (descriptionRef.current) {
               setMaxHeight(
-                !isOpened
-                  ? `${descriptionRef.current.scrollHeight}px`
-                  : '100px'
-              )
+                !isOpened ? `${descriptionRef.current.scrollHeight}px` : '100px'
+              );
             }
           }}
-          className="absolute bottom-0 right-0 ml-auto mr-5 pb-2 font-bold text-primary">
+          className="absolute bottom-0 right-0 ml-auto mr-5 pb-2 font-bold text-primary"
+        >
           {isOpened ? 'less' : 'more'}
         </button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default InfoBoxDescription
+export default InfoBoxDescription;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Form,
   FormControl,
@@ -6,14 +6,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../ui/form'
-import { Textarea } from '../../ui/textarea'
-import { Button } from '../../ui/button'
-import { Loader2 } from 'lucide-react'
-import { UseFormReturn } from 'react-hook-form'
-import { Input } from '@/components/ui/input'
-import { getFormSubmitStatus } from '@/lib/utils/utils'
-import ImageUpload from '../form/imageUpload'
+} from '../../ui/form';
+import { Textarea } from '../../ui/textarea';
+import { Button } from '../../ui/button';
+import { Loader2 } from 'lucide-react';
+import { UseFormReturn } from 'react-hook-form';
+import { Input } from '@/components/ui/input';
+import { getFormSubmitStatus } from '@/lib/utils/utils';
+import ImageUpload from '../form/imageUpload';
 
 const SupportForm = ({
   form,
@@ -22,24 +22,25 @@ const SupportForm = ({
   handleClose,
 }: {
   form: UseFormReturn<{
-    message: string
-    telegram?: string
-    email?: string
-    image?: string
-  }>
-  isLoading: boolean
-  onSubmit: (values: { message: string }) => void
-  handleClose: () => void
+    message: string;
+    telegram?: string;
+    email?: string;
+    image?: string;
+  }>;
+  isLoading: boolean;
+  onSubmit: (values: { message: string }) => void;
+  handleClose: () => void;
 }) => {
   return (
     <div>
       <Form {...form}>
         <form
           onError={(errors) => {
-            alert(errors)
+            alert(errors);
           }}
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4">
+          className="space-y-4"
+        >
           <FormField
             control={form.control}
             name="email"
@@ -112,17 +113,18 @@ const SupportForm = ({
               className="w-full"
               onClick={handleClose}
               type="button"
-              variant={'outline'}>
+              variant={'outline'}
+            >
               Cancel
             </Button>
             <Button
               className="w-full"
               type="submit"
-              disabled={getFormSubmitStatus(form)}>
+              disabled={getFormSubmitStatus(form)}
+            >
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                  Please wait
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                 </>
               ) : (
                 'Send'
@@ -132,7 +134,7 @@ const SupportForm = ({
         </form>
       </Form>{' '}
     </div>
-  )
-}
+  );
+};
 
-export default SupportForm
+export default SupportForm;

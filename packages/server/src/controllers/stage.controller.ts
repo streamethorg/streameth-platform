@@ -31,7 +31,7 @@ export class StageController extends Controller {
   @SuccessResponse('201')
   @Post()
   async createStage(
-    @Body() body: CreateStageDto,
+    @Body() body: CreateStageDto
   ): Promise<IStandardResponse<IStage>> {
     const stage = await this.stageService.create(body);
     return SendApiResponse('stage created', stage);
@@ -45,7 +45,7 @@ export class StageController extends Controller {
   @Put('{stageId}')
   async editStage(
     @Path() stageId: string,
-    @Body() body: UpdateStageDto,
+    @Body() body: UpdateStageDto
   ): Promise<IStandardResponse<IStage>> {
     const stage = await this.stageService.update(stageId, body);
     return SendApiResponse('stage updated', stage);
@@ -57,7 +57,7 @@ export class StageController extends Controller {
   @SuccessResponse('200')
   @Get('{stageId}')
   async getStageById(
-    @Path() stageId: string,
+    @Path() stageId: string
   ): Promise<IStandardResponse<IStage>> {
     const stage = await this.stageService.get(stageId);
     return SendApiResponse('stage fetched', stage);
@@ -69,7 +69,7 @@ export class StageController extends Controller {
   @SuccessResponse('200')
   @Get()
   async getAllStages(
-    @Query() published?: boolean,
+    @Query() published?: boolean
   ): Promise<IStandardResponse<Array<IStage>>> {
     const queryParams = {
       published: published,
@@ -84,7 +84,7 @@ export class StageController extends Controller {
   @SuccessResponse('200')
   @Get('/event/{eventId}')
   async getAllStagesForEvent(
-    eventId: string,
+    eventId: string
   ): Promise<IStandardResponse<Array<IStage>>> {
     const stages = await this.stageService.findAllStagesForEvent(eventId);
     return SendApiResponse('stages fetched', stages);
@@ -96,7 +96,7 @@ export class StageController extends Controller {
   @SuccessResponse('200')
   @Get('/organization/{organizationId}')
   async getAllStagesForOrganization(
-    organizationId: string,
+    organizationId: string
   ): Promise<IStandardResponse<Array<IStage>>> {
     const stages =
       await this.stageService.findAllStagesForOrganization(organizationId);
@@ -111,7 +111,7 @@ export class StageController extends Controller {
   @Delete('{stageId}')
   async deleteStage(
     @Path() stageId: string,
-    @Body() organizationId: OrgIdDto,
+    @Body() organizationId: OrgIdDto
   ): Promise<IStandardResponse<void>> {
     const stage = await this.stageService.deleteOne(stageId);
     return SendApiResponse('deleted', stage);

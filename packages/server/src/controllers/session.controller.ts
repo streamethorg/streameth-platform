@@ -32,7 +32,7 @@ export class SessionController extends Controller {
   @SuccessResponse('201')
   @Post()
   async createSession(
-    @Body() body: CreateSessionDto,
+    @Body() body: CreateSessionDto
   ): Promise<IStandardResponse<ISession>> {
     const session = await this.sessionService.create(body);
     return SendApiResponse('session created', session);
@@ -46,7 +46,7 @@ export class SessionController extends Controller {
   @Put('{sessionId}')
   async editSession(
     @Path() sessionId: string,
-    @Body() body: UpdateSessionDto,
+    @Body() body: UpdateSessionDto
   ): Promise<IStandardResponse<ISession>> {
     const session = await this.sessionService.update(sessionId, body);
     return SendApiResponse('session updated', session);
@@ -58,7 +58,7 @@ export class SessionController extends Controller {
   @SuccessResponse('200')
   @Get('organization/{organizationId}')
   async getOrgEventSessions(
-    @Path() organizationId: string,
+    @Path() organizationId: string
   ): Promise<IStandardResponse<Array<ISession>>> {
     const sessions =
       await this.sessionService.getOrgEventSessions(organizationId);
@@ -71,7 +71,7 @@ export class SessionController extends Controller {
   @SuccessResponse('200')
   @Get('search')
   async filterSession(
-    @Query() search: string,
+    @Query() search: string
   ): Promise<IStandardResponse<Array<ISession>>> {
     const sessions = await this.sessionService.filterSessions(search);
     return SendApiResponse('sessions fetched', sessions);
@@ -84,11 +84,11 @@ export class SessionController extends Controller {
   @Get('{organizationSlug}/search')
   async filterSessionByOrganisation(
     @Path() organizationSlug: string,
-    @Query() search: string,
+    @Query() search: string
   ): Promise<IStandardResponse<Array<ISession>>> {
     const sessions = await this.sessionService.filterSessions(
       search,
-      organizationSlug,
+      organizationSlug
     );
     return SendApiResponse('sessions fetched', sessions);
   }
@@ -99,7 +99,7 @@ export class SessionController extends Controller {
   @SuccessResponse('200')
   @Get('{sessionId}')
   async getSessionById(
-    @Path() sessionId: string,
+    @Path() sessionId: string
   ): Promise<IStandardResponse<ISession>> {
     const session = await this.sessionService.get(sessionId);
     return SendApiResponse('session fetched', session);
@@ -111,7 +111,7 @@ export class SessionController extends Controller {
   @SuccessResponse('201')
   @Post('upload')
   async uploadSessionToSocials(
-    @Body() body: UploadSessionDto,
+    @Body() body: UploadSessionDto
   ): Promise<IStandardResponse<void>> {
     await this.sessionService.uploadSessionToSocials(body);
     return SendApiResponse('uploading video');
@@ -132,7 +132,7 @@ export class SessionController extends Controller {
     @Query() size?: number,
     @Query() timestamp?: number,
     @Query() assetId?: string,
-    @Query() published?: boolean,
+    @Query() published?: boolean
   ): Promise<
     IStandardResponse<{
       sessions: Array<ISession>;
@@ -164,7 +164,7 @@ export class SessionController extends Controller {
   @Delete('{sessionId}')
   async deleteSession(
     @Path() sessionId: string,
-    @Body() organizationId: OrgIdDto,
+    @Body() organizationId: OrgIdDto
   ): Promise<IStandardResponse<void>> {
     await this.sessionService.deleteOne(sessionId);
     return SendApiResponse('deleted');

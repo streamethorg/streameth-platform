@@ -1,38 +1,34 @@
-'use server'
+'use server';
 
-import { LuFileUp } from 'react-icons/lu'
-import Link from 'next/link'
-import { Loading } from './livestreams/page'
-import {
-  IExtendedStage,
-  LivestreamPageParams,
-  eSort,
-} from '@/lib/types'
-import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal'
-import { Suspense } from 'react'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import LivestreamTable from './livestreams/components/LivestreamTable'
-import { notFound } from 'next/navigation'
-import { sortArray } from '@/lib/utils/utils'
-import { fetchOrganizationStages } from '@/lib/services/stageService'
+import { LuFileUp } from 'react-icons/lu';
+import Link from 'next/link';
+import { Loading } from './livestreams/page';
+import { IExtendedStage, LivestreamPageParams, eSort } from '@/lib/types';
+import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal';
+import { Suspense } from 'react';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import LivestreamTable from './livestreams/components/LivestreamTable';
+import { notFound } from 'next/navigation';
+import { sortArray } from '@/lib/utils/utils';
+import { fetchOrganizationStages } from '@/lib/services/stageService';
 const OrganizationPage = async ({
   params,
   searchParams,
 }: LivestreamPageParams) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
-  if (!organization) return notFound()
+  if (!organization) return notFound();
 
   const stages = await fetchOrganizationStages({
     organizationId: organization._id,
-  })
+  });
 
   const sortedStages = sortArray(
     stages,
     searchParams.sort
-  ) as unknown as IExtendedStage[]
+  ) as unknown as IExtendedStage[];
 
   return (
     <div className="flex h-full w-full flex-col p-8">
@@ -55,9 +51,7 @@ const OrganizationPage = async ({
       </div>
       <div className="flex h-[80%] flex-col">
         <p className="py-4 text-lg font-bold">Livestreams</p>
-        <Suspense
-          key={searchParams.toString()}
-          fallback={<Loading />}>
+        <Suspense key={searchParams.toString()} fallback={<Loading />}>
           <LivestreamTable
             organizationSlug={params?.organization}
             streams={sortedStages}
@@ -65,7 +59,7 @@ const OrganizationPage = async ({
         </Suspense>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrganizationPage
+export default OrganizationPage;

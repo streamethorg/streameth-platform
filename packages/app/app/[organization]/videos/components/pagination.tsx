@@ -1,11 +1,11 @@
-'use client'
-import { IPagination } from '@/lib/types'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+'use client';
+import { IPagination } from '@/lib/types';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const Pagination = (props: IPagination) => {
-  const { handleTermChange, searchParams } = useSearchParams()
-  const currentPage = Number(searchParams.get('page')) || 1
+  const { handleTermChange, searchParams } = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || 1;
 
   return (
     <div className="flex flex-row items-center justify-center">
@@ -20,9 +20,10 @@ const Pagination = (props: IPagination) => {
                   key: 'page',
                   value: (currentPage - 1).toString(),
                 },
-              ])
+              ]);
             }
-          }}>
+          }}
+        >
           <ArrowLeft size={24} />
         </button>
         <div className="mx-2">
@@ -35,14 +36,15 @@ const Pagination = (props: IPagination) => {
             if (currentPage < props.totalPages) {
               handleTermChange([
                 { key: 'page', value: (currentPage + 1).toString() },
-              ])
+              ]);
             }
-          }}>
+          }}
+        >
           <ArrowRight size={24} />
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

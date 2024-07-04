@@ -1,24 +1,24 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect, useRef } from 'react'
-import { Input } from '@/components/ui/input'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import useDebounce from '@/lib/hooks/useDebounce'
-import { apiUrl, archivePath } from '@/lib/utils/utils'
-import useClickOutside from '@/lib/hooks/useClickOutside'
-import { useRouter } from 'next/navigation'
-import { IExtendedSession } from '@/lib/types'
-import { LoaderCircle } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react';
+import { Input } from '@/components/ui/input';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import useDebounce from '@/lib/hooks/useDebounce';
+import { apiUrl, archivePath } from '@/lib/utils/utils';
+import useClickOutside from '@/lib/hooks/useClickOutside';
+import { useRouter } from 'next/navigation';
+import { IExtendedSession } from '@/lib/types';
+import { LoaderCircle } from 'lucide-react';
 
 interface IEventSearchResult {
-  id: string
-  name: string
-  slug: string
+  id: string;
+  name: string;
+  slug: string;
 }
 
 interface ISessionSearchResult {
-  id: string
-  name: string
+  id: string;
+  name: string;
 }
 
 export default function SearchBar({
@@ -26,80 +26,72 @@ export default function SearchBar({
   searchVisible = true,
   isMobile = false,
 }: {
-  organizationSlug: string
-  searchVisible?: boolean
-  isMobile?: boolean
+  organizationSlug: string;
+  searchVisible?: boolean;
+  isMobile?: boolean;
 }): JSX.Element {
-  const { searchParams } = useSearchParams()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { searchParams } = useSearchParams();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>(
     searchParams.get('searchQuery') || ''
-  )
-  const [isOpened, setIsOpened] = useState<boolean>(false)
-  const [searchResults, setSearchResults] = useState<
-    IExtendedSession[]
-  >([])
-  const [eventResults, setEventResults] = useState<
-    IEventSearchResult[]
-  >([])
-  const debouncedSearchQuery = useDebounce(searchQuery, 500)
+  );
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [searchResults, setSearchResults] = useState<IExtendedSession[]>([]);
+  const [eventResults, setEventResults] = useState<IEventSearchResult[]>([]);
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
-  const dropdownRef = useRef<HTMLDivElement>(null) // ref for the dropdown
-  const inputRef = useRef<HTMLInputElement>(null) // ref for the input field
-  const router = useRouter()
+  const dropdownRef = useRef<HTMLDivElement>(null); // ref for the dropdown
+  const inputRef = useRef<HTMLInputElement>(null); // ref for the input field
+  const router = useRouter();
 
   useEffect(() => {
     if (debouncedSearchQuery) {
-      setIsLoading(true)
+      setIsLoading(true);
       fetch(
         `${apiUrl()}/sessions/${organizationSlug}/search?search=${debouncedSearchQuery}`
       )
         .then((res) => res.json())
         .then((data) => {
-          const items = data.data
-            .map((obj: any) => obj.item)
-            .slice(0, 10)
+          const items = data.data.map((obj: any) => obj.item).slice(0, 10);
 
-          setSearchResults(items)
-          setIsLoading(false)
-        })
+          setSearchResults(items);
+          setIsLoading(false);
+        });
     }
-  }, [debouncedSearchQuery])
+  }, [debouncedSearchQuery]);
 
   useEffect(() => {
     if (searchVisible && isMobile && inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
-  }, [searchVisible])
+  }, [searchVisible]);
 
-  useClickOutside(dropdownRef, () => setIsOpened(false))
+  useClickOutside(dropdownRef, () => setIsOpened(false));
 
   const handleTermChange = (session: IExtendedSession) => {
-    router.push(
-      `/${organizationSlug}/watch?session=${session._id.toString()}`
-    )
-    return
-  }
+    router.push(`/${organizationSlug}/watch?session=${session._id.toString()}`);
+    return;
+  };
 
   const handleEventChange = (term: string) => {
     window.location.href = archivePath({
       organizationSlug: organizationSlug,
       event: term,
-    })
-  }
+    });
+  };
 
   return (
     <div className="relative flex w-full max-w-[500px] flex-col items-center justify-center p-2">
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            setIsOpened(false)
+            setIsOpened(false);
             router.push(
               archivePath({
                 organizationSlug: organizationSlug,
                 searchQuery: searchQuery,
               })
-            )
+            );
           }
         }}
         ref={inputRef}
@@ -108,13 +100,14 @@ export default function SearchBar({
         placeholder="Search..."
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setSearchQuery(e.target.value)
+          setSearchQuery(e.target.value);
         }}
       />
       {isOpened && debouncedSearchQuery && (
         <div
           ref={dropdownRef}
-          className="absolute top-[55px] w-full max-w-[500px] bg-secondary p-2">
+          className="absolute top-[55px] w-full max-w-[500px] bg-secondary p-2"
+        >
           {isLoading ? (
             <span>Loading...</span>
           ) : (
@@ -125,11 +118,12 @@ export default function SearchBar({
                   {searchResults.map((result) => (
                     <div
                       onClick={() => {
-                        handleTermChange(result)
-                        setIsOpened(false)
+                        handleTermChange(result);
+                        setIsOpened(false);
                       }}
                       className="cursor-pointer p-1 hover:bg-gray-100"
-                      key={result._id.toString()}>
+                      key={result._id.toString()}
+                    >
                       {result.name}
                     </div>
                   ))}
@@ -156,5 +150,5 @@ export default function SearchBar({
         </div>
       )}
     </div>
-  )
+  );
 }

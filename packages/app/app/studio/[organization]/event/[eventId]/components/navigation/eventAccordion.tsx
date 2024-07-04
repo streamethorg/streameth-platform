@@ -1,16 +1,16 @@
-'use client'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { eventSchema } from '@/lib/schema'
+'use client';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { eventSchema } from '@/lib/schema';
 
-import DataConfigElement from '@/components/misc/form/dataConfigElement'
+import DataConfigElement from '@/components/misc/form/dataConfigElement';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
+} from '@/components/ui/accordion';
 
 import {
   Form,
@@ -19,38 +19,34 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import Combobox from '@/components/ui/combo-box'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import ColorPicker from '@/components/misc/form/colorPicker'
-import TimePicker from '@/components/misc/form/timePicker'
-import DatePicker from '@/components/misc/form/datePicker'
-import { generateTimezones } from '@/lib/utils/time'
-import { toast } from 'sonner'
-import { useCallback, useState } from 'react'
-import MDEditor from '@uiw/react-md-editor'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import Combobox from '@/components/ui/combo-box';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import ColorPicker from '@/components/misc/form/colorPicker';
+import TimePicker from '@/components/misc/form/timePicker';
+import DatePicker from '@/components/misc/form/datePicker';
+import { generateTimezones } from '@/lib/utils/time';
+import { toast } from 'sonner';
+import { useCallback, useState } from 'react';
+import MDEditor from '@uiw/react-md-editor';
 
-import {
-  syncEventImportAction,
-  updateEventAction,
-} from '@/lib/actions/events'
-import { IExtendedEvent } from '@/lib/types'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import DeleteEvent from '../DeleteEventButton'
+import { syncEventImportAction, updateEventAction } from '@/lib/actions/events';
+import { IExtendedEvent } from '@/lib/types';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import DeleteEvent from '../DeleteEventButton';
 
 const EventAccordion = ({
   organizationId,
   event,
 }: {
-  organizationId: string
-  event: IExtendedEvent
+  organizationId: string;
+  event: IExtendedEvent;
 }) => {
-  const { handleTermChange, searchParams } = useSearchParams()
-  const [isUpdatingEvent, setIsUpdatingEvent] =
-    useState<boolean>(false)
-  const [isSyncingEvent, setIsSyncingEvent] = useState<boolean>(false)
+  const { handleTermChange, searchParams } = useSearchParams();
+  const [isUpdatingEvent, setIsUpdatingEvent] = useState<boolean>(false);
+  const [isSyncingEvent, setIsSyncingEvent] = useState<boolean>(false);
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
@@ -67,10 +63,10 @@ const EventAccordion = ({
       dataImporter: event.dataImporter,
       timezone: event.timezone,
     },
-  })
+  });
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof eventSchema>) {
-    setIsUpdatingEvent(true)
+    setIsUpdatingEvent(true);
     const response = updateEventAction({
       event: {
         ...values,
@@ -81,39 +77,39 @@ const EventAccordion = ({
     })
       .then((response) => {
         if (response) {
-          toast.success('Event updated')
+          toast.success('Event updated');
         } else {
-          toast.error('Error updating event')
+          toast.error('Error updating event');
         }
       })
       .catch(() => {
-        toast.error('Error updating event')
+        toast.error('Error updating event');
       })
       .finally(() => {
-        setIsUpdatingEvent(false)
-      })
+        setIsUpdatingEvent(false);
+      });
   }
 
   const handleEventSync = async () => {
-    setIsSyncingEvent(true)
+    setIsSyncingEvent(true);
     const response = syncEventImportAction({
       eventId: event._id,
       organizationId: event.organizationId as string,
     })
       .then((response) => {
         if (response) {
-          toast.success('Event synced')
+          toast.success('Event synced');
         } else {
-          toast.error('Error syncing event')
+          toast.error('Error syncing event');
         }
       })
       .catch(() => {
-        toast.error('Error syncing event')
+        toast.error('Error syncing event');
       })
       .finally(() => {
-        setIsSyncingEvent(false)
-      })
-  }
+        setIsSyncingEvent(false);
+      });
+  };
 
   return (
     <Form {...form}>
@@ -129,8 +125,9 @@ const EventAccordion = ({
               },
               { key: 'stage', value: '' },
               { key: 'stageSettings', value: '' },
-            ])
-          }}>
+            ]);
+          }}
+        >
           <AccordionItem value="item-1" className="px-2 text-black">
             <AccordionTrigger>Basics</AccordionTrigger>
             <AccordionContent className="space-y-8 p-2">
@@ -167,7 +164,8 @@ const EventAccordion = ({
               <Button
                 disabled={isUpdatingEvent}
                 type="submit"
-                className="ml-auto">
+                className="ml-auto"
+              >
                 Save
               </Button>
             </AccordionContent>
@@ -252,10 +250,7 @@ const EventAccordion = ({
                   <FormItem>
                     <FormLabel className="">Location</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="e.g Denver, US"
-                        {...field}
-                      />
+                      <Input placeholder="e.g Denver, US" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -283,7 +278,8 @@ const EventAccordion = ({
               <Button
                 disabled={isUpdatingEvent}
                 type="submit"
-                className="ml-auto">
+                className="ml-auto"
+              >
                 Save
               </Button>
             </AccordionContent>
@@ -374,7 +370,8 @@ const EventAccordion = ({
               <Button
                 disabled={isUpdatingEvent}
                 type="submit"
-                className="ml-auto">
+                className="ml-auto"
+              >
                 Save
               </Button>
             </AccordionContent>
@@ -383,8 +380,8 @@ const EventAccordion = ({
             <AccordionTrigger>Event CMS</AccordionTrigger>
             <AccordionContent className="space-y-8 p-2">
               <span>
-                Import your speaker data and your schedule from one of
-                our supported data providers.
+                Import your speaker data and your schedule from one of our
+                supported data providers.
               </span>
               <FormField
                 control={form.control}
@@ -410,7 +407,8 @@ const EventAccordion = ({
                   onClick={handleEventSync}
                   variant="secondary"
                   disabled={isSyncingEvent}
-                  type="button">
+                  type="button"
+                >
                   Sync
                 </Button>
               </div>
@@ -419,16 +417,13 @@ const EventAccordion = ({
           <AccordionItem value="item-4" className="px-2">
             <AccordionTrigger>More</AccordionTrigger>
             <AccordionContent className="flex flex-col space-y-8 p-2">
-              <DeleteEvent
-                organizationId={organizationId}
-                event={event}
-              />
+              <DeleteEvent organizationId={organizationId} event={event} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default EventAccordion
+export default EventAccordion;

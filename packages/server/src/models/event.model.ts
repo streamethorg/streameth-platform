@@ -46,7 +46,7 @@ const EventSchema = new Schema<IEventModel>(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const Event = model<IEventModel>('Event', EventSchema);

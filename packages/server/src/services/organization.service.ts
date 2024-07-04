@@ -20,29 +20,29 @@ export default class OrganizationService {
   async create(data: IOrganization): Promise<IOrganization> {
     const findOrg = await this.controller.store.findOne(
       { name: data.name },
-      this.path,
+      this.path
     );
     if (findOrg) throw new HttpException(409, 'Organization already exists');
     const createOrg = await this.controller.store.create(
       data.name,
       data,
-      this.path,
+      this.path
     );
     const wallets = [...config.wallets.trim().split(','), data.walletAddress];
     await User.updateMany(
       { walletAddress: { $in: wallets } },
-      { $addToSet: { organizations: createOrg._id } },
+      { $addToSet: { organizations: createOrg._id } }
     );
     return createOrg;
   }
   async update(
     organizationId: string,
-    organization: IOrganization,
+    organization: IOrganization
   ): Promise<IOrganization> {
     return await this.controller.store.update(
       organizationId,
       organization,
-      organization.name,
+      organization.name
     );
   }
 
@@ -75,7 +75,7 @@ export default class OrganizationService {
         'socials.accessToken': 0,
         'socials.refreshToken': 0,
         'socials.expireTime': 0,
-      },
+      }
     );
   }
 
@@ -91,7 +91,7 @@ export default class OrganizationService {
         organizations: organizationId,
         walletAddress: { $nin: walletAddresses },
       },
-      { did: 0 },
+      { did: 0 }
     );
     return users;
   }
@@ -123,7 +123,7 @@ export default class OrganizationService {
     }
     await User.findOneAndUpdate(
       { walletAddress: walletAddress },
-      { $addToSet: { organizations: organizationId } },
+      { $addToSet: { organizations: organizationId } }
     );
   }
 
@@ -131,7 +131,7 @@ export default class OrganizationService {
     await this.get(organizationId);
     await User.findOneAndUpdate(
       { walletAddress: walletAddress },
-      { $pull: { organizations: organizationId } },
+      { $pull: { organizations: organizationId } }
     );
   }
 
@@ -140,7 +140,7 @@ export default class OrganizationService {
 
     const existingSocial = org.socials.find(
       (social) =>
-        social.channelId === data.channelId && social.type === data.type,
+        social.channelId === data.channelId && social.type === data.type
     );
 
     if (existingSocial) {
@@ -160,8 +160,8 @@ export default class OrganizationService {
               'socials.$.expireTime': data.expireTime,
             },
           },
-          { upsert: true },
-        ),
+          { upsert: true }
+        )
       );
     } else {
       // Add the new social entry
@@ -179,7 +179,7 @@ export default class OrganizationService {
               channelId: data.channelId,
             },
           },
-        },
+        }
       );
     }
   }
@@ -191,7 +191,7 @@ export default class OrganizationService {
     }
     await Organization.updateOne(
       { _id: organizationId },
-      { $pull: { socials: { _id: destinationId } } },
+      { $pull: { socials: { _id: destinationId } } }
     );
   }
 }

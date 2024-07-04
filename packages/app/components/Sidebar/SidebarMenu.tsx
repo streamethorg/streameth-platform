@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { SidebarUI, SidebarItem } from './Sidebar'
+import { SidebarUI, SidebarItem } from './Sidebar';
 
 import {
   LuUsers,
@@ -9,13 +9,9 @@ import {
   LuSettings,
   LuShare2,
   LuLock,
-} from 'react-icons/lu'
+} from 'react-icons/lu';
 
-const SidebarMenu = ({
-  organizationSlug,
-}: {
-  organizationSlug: string
-}) => {
+const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
   const navigationItems = [
     {
       text: 'Home',
@@ -47,7 +43,7 @@ const SidebarMenu = ({
       navigationPath: `/settings`,
       icon: <LuSettings size={25} />,
     },
-  ]
+  ];
 
   return (
     <div className="relative w-[1/4]">
@@ -62,7 +58,7 @@ const SidebarMenu = ({
         ))}
       </SidebarUI>
     </div>
-  )
-}
+  );
+};
 
-export default SidebarMenu
+export default SidebarMenu;

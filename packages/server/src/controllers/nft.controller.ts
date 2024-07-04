@@ -28,7 +28,7 @@ export class NftCollectionRouter extends Controller {
   @SuccessResponse('201')
   @Post()
   async createNftCollection(
-    @Body() body: CreateNftCollectionDto,
+    @Body() body: CreateNftCollectionDto
   ): Promise<IStandardResponse<INftCollection>> {
     const collection = await this.collectionService.create(body);
     return SendApiResponse('collection created', collection);
@@ -41,7 +41,7 @@ export class NftCollectionRouter extends Controller {
   @SuccessResponse('201')
   @Post('metadata/generate')
   async generateNftMetadata(
-    @Body() body: UpdateNftCollectionDto,
+    @Body() body: UpdateNftCollectionDto
   ): Promise<IStandardResponse<{ ipfsPath: string; videos: Array<any> }>> {
     const metadata = await this.collectionService.generateMetadata(body);
     return SendApiResponse('metadata generated', metadata);
@@ -55,7 +55,7 @@ export class NftCollectionRouter extends Controller {
   @Put('{collectionId}')
   async updateNftCollection(
     @Path() collectionId: string,
-    @Body() body: UpdateNftCollectionDto,
+    @Body() body: UpdateNftCollectionDto
   ): Promise<IStandardResponse<INftCollection>> {
     const collection = await this.collectionService.update(collectionId, body);
     return SendApiResponse('collection updated', collection);
@@ -77,7 +77,7 @@ export class NftCollectionRouter extends Controller {
   @SuccessResponse('200')
   @Get('{collectionId}')
   async getNftCollectionById(
-    @Path() collectionId: string,
+    @Path() collectionId: string
   ): Promise<IStandardResponse<INftCollection>> {
     const collection = await this.collectionService.get(collectionId);
     return SendApiResponse('collection fetched', collection);
@@ -89,7 +89,7 @@ export class NftCollectionRouter extends Controller {
   @SuccessResponse('200')
   @Get('organization/{organizationId}')
   async getAllOrganizationNft(
-    @Path() organizationId: string,
+    @Path() organizationId: string
   ): Promise<IStandardResponse<Array<INftCollection>>> {
     const collections =
       await this.collectionService.findAllNftForOrganization(organizationId);

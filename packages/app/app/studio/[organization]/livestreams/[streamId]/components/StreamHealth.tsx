@@ -1,12 +1,12 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import { fetchStage } from '@/lib/services/stageService'
-import { IExtendedStage } from '@/lib/types'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+'use client';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import { fetchStage } from '@/lib/services/stageService';
+import { IExtendedStage } from '@/lib/types';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 const StreamHealth = ({
   stream,
@@ -14,33 +14,31 @@ const StreamHealth = ({
   organization,
   isLive,
 }: {
-  stream: IExtendedStage
-  streamId: string
-  organization: string
-  isLive?: boolean
+  stream: IExtendedStage;
+  streamId: string;
+  organization: string;
+  isLive?: boolean;
 }) => {
-  const [isHealthy, setIsHealthy] = useState(
-    stream?.streamSettings?.isHealthy
-  )
+  const [isHealthy, setIsHealthy] = useState(stream?.streamSettings?.isHealthy);
 
   const checkIsHealthy = async () => {
     try {
-      const res = await fetchStage({ stage: stream._id as string })
-      setIsHealthy(res?.streamSettings?.isHealthy)
+      const res = await fetchStage({ stage: stream._id as string });
+      setIsHealthy(res?.streamSettings?.isHealthy);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     if (!isLive) {
-      return
+      return;
     }
 
     const interval = setInterval(() => {
-      checkIsHealthy()
-    }, 10000)
-  }, [stream?.streamSettings?.isHealthy, isLive])
+      checkIsHealthy();
+    }, 10000);
+  }, [stream?.streamSettings?.isHealthy, isLive]);
 
   return (
     isLive && (
@@ -68,7 +66,8 @@ const StreamHealth = ({
           </CardTitle>
           <Link
             href={`/${organization}/livestream?stage=${streamId}`}
-            target="_blank">
+            target="_blank"
+          >
             <Button variant="outline">
               View Livestream
               <div>
@@ -79,6 +78,6 @@ const StreamHealth = ({
         </CardContent>
       </Card>
     )
-  )
-}
-export default StreamHealth
+  );
+};
+export default StreamHealth;

@@ -18,7 +18,7 @@ const PaginationSkeleton = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PaginationSkeleton
+export default PaginationSkeleton;

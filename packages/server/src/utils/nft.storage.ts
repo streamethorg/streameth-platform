@@ -3,7 +3,7 @@ import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
 
 export const uploadSingleMetadata = async (
-  file: Express.Multer.File | {},
+  file: Express.Multer.File | {}
 ): Promise<string> => {
   try {
     const storage = new ThirdwebStorage({
@@ -17,7 +17,7 @@ export const uploadSingleMetadata = async (
 };
 
 export const uploadMultipleMetadata = async (
-  files: Express.Multer.File[] | Array<string>,
+  files: Express.Multer.File[] | Array<string>
 ): Promise<Array<string>> => {
   try {
     const storage = new ThirdwebStorage({
@@ -25,7 +25,7 @@ export const uploadMultipleMetadata = async (
     });
     const uploads = await storage.uploadBatch(files);
     const resolvedUrls = await Promise.all(
-      uploads.map((url) => resolveIpfsUrl(url)),
+      uploads.map((url) => resolveIpfsUrl(url))
     );
     return resolvedUrls;
   } catch (e) {

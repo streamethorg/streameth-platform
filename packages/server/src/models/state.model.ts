@@ -23,7 +23,7 @@ const StateSchema = new Schema<IStateModel>(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const State = model<IStateModel>('State', StateSchema);

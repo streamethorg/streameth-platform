@@ -23,7 +23,7 @@ export class SpeakerController extends Controller {
   @SuccessResponse('201')
   @Post()
   async createSpeaker(
-    @Body() body: CreateSpeakerDto,
+    @Body() body: CreateSpeakerDto
   ): Promise<IStandardResponse<ISpeaker>> {
     const createSpeaker = await this.speakerService.create(body);
     return SendApiResponse('speaker created', createSpeaker);
@@ -32,7 +32,7 @@ export class SpeakerController extends Controller {
   @SuccessResponse('200')
   @Get('{speakerId}')
   async getSpeaker(
-    @Path() speakerId: string,
+    @Path() speakerId: string
   ): Promise<IStandardResponse<ISpeaker>> {
     const speaker = await this.speakerService.get(speakerId);
     return SendApiResponse('speaker fetched', speaker);
@@ -41,7 +41,7 @@ export class SpeakerController extends Controller {
   @SuccessResponse('200')
   @Get('event/{eventId}')
   async getAllSpeakersForEvent(
-    eventId: string,
+    eventId: string
   ): Promise<IStandardResponse<Array<ISpeaker>>> {
     const speakers = await this.speakerService.findAllSpeakersForEvent(eventId);
     return SendApiResponse('speakers fetched', speakers);

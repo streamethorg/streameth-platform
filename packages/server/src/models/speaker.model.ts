@@ -15,7 +15,7 @@ const SpeakerSchema = new Schema<ISpeakerModel>(
   },
   {
     timestamps: true,
-  },
+  }
 );
 const Speaker = model<ISpeakerModel>('Speaker', SpeakerSchema);
 export default Speaker;

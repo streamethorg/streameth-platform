@@ -26,7 +26,7 @@ const NftSchema = new Schema<INftCollectionModel>(
 
   {
     timestamps: true,
-  },
+  }
 );
 
 const NftCollection = model<INftCollectionModel>('Nft-Collection', NftSchema);

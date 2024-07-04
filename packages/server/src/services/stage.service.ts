@@ -33,7 +33,7 @@ export default class StageService {
           playbackId: stream.playbackId,
         },
       },
-      `${this.path}/${eventId}`,
+      `${this.path}/${eventId}`
     );
   }
 
@@ -70,7 +70,7 @@ export default class StageService {
   }
 
   async findAllStagesForOrganization(
-    organizationId: string,
+    organizationId: string
   ): Promise<Array<IStage>> {
     return await this.controller.store.findAll({
       organizationId: organizationId,
@@ -92,7 +92,7 @@ export default class StageService {
         'streamSettings.isActive': stream.isActive,
         'streamSettings.isHealthy': stream.isHealthy ?? false,
       },
-      { upsert: true },
+      { upsert: true }
     );
   }
 

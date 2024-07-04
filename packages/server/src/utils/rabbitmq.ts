@@ -33,7 +33,7 @@ async function connectToRabbitMQ(retries = 0) {
   } catch (e) {
     if (retries < MAX_RETRIES) {
       logger.warn(
-        `RabbitMQ connection failed. Retrying in ${RETRY_INTERVAL / 1000} seconds...`,
+        `RabbitMQ connection failed. Retrying in ${RETRY_INTERVAL / 1000} seconds...`
       );
       setTimeout(() => connectToRabbitMQ(retries + 1), RETRY_INTERVAL);
     } else {
@@ -45,7 +45,7 @@ async function connectToRabbitMQ(retries = 0) {
 
 function reconnectToRabbitMQ() {
   logger.info(
-    `Reconnecting to RabbitMQ in ${RETRY_INTERVAL / 1000} seconds...`,
+    `Reconnecting to RabbitMQ in ${RETRY_INTERVAL / 1000} seconds...`
   );
   setTimeout(() => connectToRabbitMQ(), RETRY_INTERVAL);
 }

@@ -67,7 +67,7 @@ describe('Stage API', () => {
 
       if (response.status !== 200) {
         throw new Error(
-          `Failed to delete organization - STATUS: ${response.status}`,
+          `Failed to delete organization - STATUS: ${response.status}`
         );
       }
     } catch (error) {

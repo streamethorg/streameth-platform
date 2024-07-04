@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { Separator } from '@/components/ui/separator'
+import { Separator } from '@/components/ui/separator';
 import {
   Dialog,
   DialogContent,
@@ -8,29 +8,25 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import UploadVideoForm from './upload/UploadVideoForm'
-import { useState } from 'react'
-import UploadComplete from '@/lib/svg/UploadComplete'
-import { useRouter } from 'next/navigation'
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import UploadVideoForm from './upload/UploadVideoForm';
+import { useState } from 'react';
+import UploadComplete from '@/lib/svg/UploadComplete';
+import { useRouter } from 'next/navigation';
 
-const UploadVideoDialog = ({
-  organizationId,
-}: {
-  organizationId: string
-}) => {
-  const [open, setOpen] = useState(false)
-  const [isUploaded, setIsUploaded] = useState(false)
-  const router = useRouter()
+const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
+  const [open, setOpen] = useState(false);
+  const [isUploaded, setIsUploaded] = useState(false);
+  const router = useRouter();
 
   const onFinish = () => {
-    setIsUploaded(true)
+    setIsUploaded(true);
 
     setTimeout(() => {
-      setIsUploaded(false)
-    }, 10000)
-  }
+      setIsUploaded(false);
+    }, 10000);
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -47,19 +43,18 @@ const UploadVideoDialog = ({
                 <UploadComplete />
               </div>
               <div className="flex flex-col items-center space-y-2">
-                <DialogTitle>
-                  Video uploaded succesfully! 🎉
-                </DialogTitle>
+                <DialogTitle>Video uploaded succesfully! 🎉</DialogTitle>
                 <DialogDescription>
-                  Your video is currently being processed. This could
-                  take several minutes.
+                  Your video is currently being processed. This could take
+                  several minutes.
                 </DialogDescription>
               </div>
             </DialogHeader>
             <Button
               variant={'secondary'}
               className="mx-auto w-1/3 border-2"
-              onClick={() => router.refresh()}>
+              onClick={() => router.refresh()}
+            >
               Go back to Assets
             </Button>
           </>
@@ -80,7 +75,7 @@ const UploadVideoDialog = ({
         )}
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default UploadVideoDialog
+export default UploadVideoDialog;

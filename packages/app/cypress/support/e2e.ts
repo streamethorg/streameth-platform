@@ -14,7 +14,7 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // const errorsToIgnore = [
@@ -28,12 +28,12 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   // )
 
   // if (shouldIgnoreError) {
-  return false
+  return false;
   // }
 
-  return undefined
-})
+  return undefined;
+});
 
 beforeEach(() => {
-  cy.viewport(1200, 1000)
-})
+  cy.viewport(1200, 1000);
+});

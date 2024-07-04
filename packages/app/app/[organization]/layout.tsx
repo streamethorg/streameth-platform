@@ -1,19 +1,19 @@
-'use server'
+'use server';
 
-import HomePageNavbar from '@/components/Layout/HomePageNavbar'
-import Footer from '@/components/Layout/Footer'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import NotFound from '@/not-found'
-import Support from '@/components/misc/Support'
+import HomePageNavbar from '@/components/Layout/HomePageNavbar';
+import Footer from '@/components/Layout/Footer';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import NotFound from '@/not-found';
+import Support from '@/components/misc/Support';
 
 const Layout = async ({
   params,
   children,
 }: {
-  params: { organization: string }
-  children: React.ReactNode
+  params: { organization: string };
+  children: React.ReactNode;
 }) => {
-  const org = params.organization
+  const org = params.organization;
   const pages = [
     {
       name: 'Home',
@@ -25,14 +25,14 @@ const Layout = async ({
       href: `/${org}/videos`,
       bgColor: 'bg-muted',
     },
-  ]
+  ];
 
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
   if (!organization) {
-    return NotFound()
+    return NotFound();
   }
 
   return (
@@ -51,7 +51,7 @@ const Layout = async ({
         <Footer />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
