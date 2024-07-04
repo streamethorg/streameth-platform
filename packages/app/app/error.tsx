@@ -24,15 +24,14 @@ export default function Error({
           Oops, something went wrong!
         </h1>
         <p className="mt-4 text-muted-foreground">
-          We're sorry, but an unexpected error has occurred. Please try again later or contact support if the issue
-          persists.
+          We are sorry, but an unexpected error has occurred. Please
+          try again later or contact support if the issue persists.
         </p>
         <div className="mt-6">
           <Link
             href="https://info.streameth.org/"
             className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            prefetch={false}
-          >
+            prefetch={false}>
             Go to Homepage
           </Link>
         </div>
