@@ -80,7 +80,6 @@
     "node-gyp": "^9.1.0",
     "nodemon": "^3.0.2",
     "pm2": "^5.2.0",
-    "prettier": "^3.1.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
