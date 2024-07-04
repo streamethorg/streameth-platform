@@ -40,9 +40,22 @@ const expressAuthenticationRecasted = expressAuthentication as (req: ExRequest, 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "mongoose.Types.ObjectId": {
-        "dataType": "refAlias",
-        "type": {"dataType":"string","validators":{}},
+  'mongoose.Types.ObjectId': {
+    dataType: 'refAlias',
+    type: { dataType: 'string', validators: {} },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  ISocials: {
+    dataType: 'refObject',
+    properties: {
+      _id: { dataType: 'string' },
+      type: { dataType: 'string', required: true },
+      accessToken: { dataType: 'string', required: true },
+      refreshToken: { dataType: 'string', required: true },
+      expireTime: { dataType: 'double', required: true },
+      name: { dataType: 'string', required: true },
+      thumbnail: { dataType: 'string' },
+      channelId: { dataType: 'string' },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ISocials": {

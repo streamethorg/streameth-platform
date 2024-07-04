@@ -17,7 +17,7 @@ const StreamConfig = async ({
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4 m-auto max-w-5xl">
+    <div className="m-auto flex max-w-5xl flex-col items-center gap-4 p-4">
       <StreamHeader organization={organization} stream={stage} />
 
       <StreamConfigWithPlayer

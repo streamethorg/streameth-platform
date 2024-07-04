@@ -40,8 +40,8 @@ export default async function StageComponent({
   })
 
   return (
-    <div className=" flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] gap-2">
-      <div className="flex z-40 flex-col gap-2 w-full md:overflow-auto md:w-full md:h-full top-[54px]">
+    <div className="relative flex w-full flex-col gap-2 md:flex-row lg:max-h-[calc(100vh-54px)]">
+      <div className="top-[54px] z-40 flex w-full flex-col gap-2 md:h-full md:w-full md:overflow-auto">
         <Player
           src={[
             {

@@ -36,18 +36,18 @@ const Layout = async ({
   }
 
   return (
-    <div className="flex flex-col mx-auto w-full bg-white min-h-[100vh]">
+    <div className="mx-auto flex min-h-[100vh] w-full flex-col bg-white">
       <HomePageNavbar
         logo={organization?.logo}
         currentOrganization={params.organization}
         pages={pages}
         showSearchBar
       />
-      <div className="flex-grow w-full h-full">
+      <div className="h-full w-full flex-grow">
         {children}
         <Support />
       </div>
-      <div className="sticky mb-5 top-[100vh]">
+      <div className="sticky top-[100vh] mb-5">
         <Footer />
       </div>
     </div>

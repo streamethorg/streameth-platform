@@ -29,10 +29,10 @@ export default function Navbar({
   }
 
   return (
-    <div className="flex absolute right-0 z-50 items-center w-screen text-center lg:relative lg:items-center lg:h-full top-[56px] lg:w-[unset] lg:top-[unset]">
+    <div className="absolute right-0 top-[56px] z-50 flex w-screen items-center text-center lg:relative lg:top-[unset] lg:h-full lg:w-[unset] lg:items-center">
       <ul
         onClick={() => isMobile && setIsNavVisible?.(false)}
-        className="flex flex-col w-full lg:flex-row lg:px-2 lg:space-x-2">
+        className="flex w-full flex-col lg:flex-row lg:space-x-2 lg:px-2">
         {pages.map((item) => (
           <NavigationMenuItem key={item.name}>
             <Link href={item.href} legacyBehavior passHref>
@@ -54,7 +54,7 @@ export default function Navbar({
                 Schedule
               </NavigationMenuItem>
             </DialogTrigger>
-            <DialogContent className="w-[calc(100vw-54px)] lg:min-w-[1000px] xl:min-w-[1250px] 2xl:min-w-[1400px] h-[calc(100vh-54px)] md:h-[800px] p-2 md:p-0">
+            <DialogContent className="h-[calc(100vh-54px)] w-[calc(100vw-54px)] p-2 md:h-[800px] md:p-0 lg:min-w-[1000px] xl:min-w-[1250px] 2xl:min-w-[1400px]">
               <iframe
                 src="https://ethprague.com/schedule"
                 width="100%"

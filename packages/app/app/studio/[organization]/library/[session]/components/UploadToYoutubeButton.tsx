@@ -81,12 +81,12 @@ const UploadToYoutubeButton = ({
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger>
-        <Button className="bg-[#FF0000] min-w-[200px]">
+        <Button className="min-w-[200px] bg-[#FF0000]">
           <SiYoutube className="mr-2" />
           Publish to Youtube
         </Button>
       </DialogTrigger>
-      <DialogContent className="px-8 z-[99999999999999999]">
+      <DialogContent className="z-[99999999999999999] px-8">
         <p className="font-medium">Select Youtube Destinations</p>
 
         <div className="flex flex-wrap items-center gap-5 py-5">
@@ -95,21 +95,21 @@ const UploadToYoutubeButton = ({
               <div
                 onClick={() => setSocialId(_id!)}
                 key={_id}
-                className={`flex flex-col items-center cursor-pointer ${
+                className={`flex cursor-pointer flex-col items-center ${
                   socialId == _id ? 'opacity-100' : 'opacity-50'
                 }`}>
                 <div
-                  className="w-14 h-14 rounded-full bg-center bg-cover cursor-pointer"
+                  className="h-14 w-14 cursor-pointer rounded-full bg-cover bg-center"
                   style={{
                     backgroundImage: `url(${thumbnail})`,
                   }}></div>
-                <p className="text-sm line-clamp-1">{name}</p>
+                <p className="line-clamp-1 text-sm">{name}</p>
               </div>
             )
           )}
           <div
             onClick={handleYoutubeConnect}
-            className="flex flex-col items-center cursor-pointer">
+            className="flex cursor-pointer flex-col items-center">
             <CiCirclePlus color="#000" size={56} />
             <p className="text-sm">Add New</p>
           </div>

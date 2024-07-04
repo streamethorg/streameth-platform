@@ -45,22 +45,22 @@ export const EmbedModalContent: React.FC<{
     <CredenzaContent className="max-w-[450px]">
       <CredenzaHeader>
         <CredenzaTitle>Embed video</CredenzaTitle>
-        <CredenzaDescription className="mb-4 ">
+        <CredenzaDescription className="mb-4">
           Easily embed this stream into your website by adding the
           iframe code below
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody className="flex flex-col gap-3">
-        <div className="flex p-2 rounded-lg bg-input justify-between items-center text-[12px]">
+        <div className="flex items-center justify-between rounded-lg bg-input p-2 text-[12px]">
           <p>HTML</p>
           <div
             onClick={() => copyToClipboard(generatedEmbedCode)}
-            className="flex gap-2 cursor-pointer">
-            <Copy className="text-muted-foreground w-4 h-4" />
+            className="flex cursor-pointer gap-2">
+            <Copy className="h-4 w-4 text-muted-foreground" />
             Copy Code
           </div>
         </div>
-        <p className="rounded-lg bg-input p-2 max-w-[400px] break-words text-[12px]">
+        <p className="max-w-[400px] break-words rounded-lg bg-input p-2 text-[12px]">
           {generatedEmbedCode}
         </p>
       </CredenzaBody>

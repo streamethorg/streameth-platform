@@ -15,7 +15,7 @@ const StageSelect = ({ stages }: { stages: IExtendedStage[] }) => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <span className="text-sm ">Stage</span>
+      <span className="text-sm">Stage</span>
       <Select
         defaultValue={searchParams.get('stage') || stages[0]?._id}
         onValueChange={(value: string) =>
@@ -26,10 +26,10 @@ const StageSelect = ({ stages }: { stages: IExtendedStage[] }) => {
             },
           ])
         }>
-        <SelectTrigger className="border rounded-lg bg-white">
+        <SelectTrigger className="rounded-lg border bg-white">
           <SelectValue placeholder="Stage select" />
         </SelectTrigger>
-        <SelectContent className="bg-white rounded-lg border-white border-opacity-10">
+        <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
           {stages.map((stage) => (
             <SelectItem key={stage._id} value={stage._id as string}>
               {stage.name}

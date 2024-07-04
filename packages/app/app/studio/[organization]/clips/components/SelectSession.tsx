@@ -29,7 +29,7 @@ const SelectSession = ({
   )
 
   return (
-    <div className="flex flex-col space-y-2 w-full ">
+    <div className="flex w-full flex-col space-y-2">
       <p className="text-sm font-bold">Livestream</p>
       <Select
         value={currentStage?.value}
