@@ -101,7 +101,7 @@ export class IndexController extends Controller {
       playbackId: asset.playbackId,
     } as any);
 
-    if (session.firebaseId) {
+    if (session.firebaseId && asset.playbackUrl) {
       await updateEventVideoById(session.firebaseId, {
         url: asset.playbackUrl,
         mp4Url: await getDownloadUrl(asset.id),
