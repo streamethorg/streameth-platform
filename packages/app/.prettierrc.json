@@ -2,6 +2,7 @@
   "trailingComma": "es5",
   "semi": false,
   "singleQuote": true,
-  "printWidth": 70, 
-  "bracketSameLine": true
+  "printWidth": 70,
+  "bracketSameLine": true,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
