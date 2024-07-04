@@ -1,5 +1,6 @@
 'use client'
 
+import { BookOpenText } from 'lucide-react'
 import { SidebarUI, SidebarItem } from './Sidebar'
 
 import {
@@ -47,6 +48,12 @@ const SidebarMenu = ({
       navigationPath: `/settings`,
       icon: <LuSettings size={25} />,
     },
+    {
+      text: 'Docs',
+      navigationPath: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
+      icon: <BookOpenText size={25} />,
+      isExternal: true
+    }
   ]
 
   return (
@@ -55,9 +62,10 @@ const SidebarMenu = ({
         {navigationItems.map((item, index) => (
           <SidebarItem
             key={index}
-            navigationPath={`/studio/${organizationSlug}${item.navigationPath}`}
+            navigationPath={item.isExternal ? item.navigationPath : `/studio/${organizationSlug}${item.navigationPath}`}
             text={item.text}
             icon={item.icon}
+            isExternal={item.isExternal}
           />
         ))}
       </SidebarUI>
