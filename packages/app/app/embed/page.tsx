@@ -37,18 +37,6 @@ const Embed = ({
   )
 }
 
-const legacyFetch = async (playbackId: string, vod?: boolean) => {
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  })
-
-  const playbackInfo = await livepeer.playback.get(playbackId)
-  const src = getSrc(playbackInfo.playbackInfo)
-  if (src) {
-    return buildPlaybackUrl(src[1].src, vod)
-  }
-}
-
 const EmbedPage = async ({ searchParams }: EmbedPageParams) => {
   if (
     !searchParams.playbackId &&
@@ -59,10 +47,11 @@ const EmbedPage = async ({ searchParams }: EmbedPageParams) => {
   }
 
   if (searchParams.playbackId) {
-    const src = await legacyFetch(searchParams.playbackId)
-    if (!src) {
-      return notFound()
-    }
+    const src = buildPlaybackUrl(
+      searchParams.playbackId,
+      Boolean(searchParams?.vod)
+    )
+
     return (
       <Suspense fallback={<div>Loading...</div>}>
         <Embed src={src} />
