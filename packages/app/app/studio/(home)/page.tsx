@@ -16,11 +16,11 @@ const Studio = async () => {
   const userData: IExtendedUser = await fetchUserAction({})
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex overflow-auto flex-col flex-grow p-2 m-auto w-full max-w-4xl h-full bg-background">
+    <div className="flex h-full flex-col">
+      <div className="m-auto flex h-full w-full max-w-4xl flex-grow flex-col overflow-auto bg-background p-2">
         {userData?.organizations?.length > 0 ? (
           <>
-            <div className="flex flex-row justify-between items-center py-2 w-full">
+            <div className="flex w-full flex-row items-center justify-between py-2">
               <CardTitle> Your organizations</CardTitle>
               <Link href="/studio/create">
                 <Button className="w-full">
@@ -28,12 +28,12 @@ const Studio = async () => {
                 </Button>
               </Link>
             </div>
-            <div className="flex overflow-auto flex-col space-y-2 h-full">
+            <div className="flex h-full flex-col space-y-2 overflow-auto">
               {userData?.organizations?.map((organization) => (
                 <Link
                   key={organization._id}
                   href={`/studio/${organization.slug}`}>
-                  <Card className="flex overflow-hidden flex-row h-full rounded-xl border shadow-none border-secondary">
+                  <Card className="flex h-full flex-row overflow-hidden rounded-xl border border-secondary shadow-none">
                     <CardHeader className="relative p-3 lg:p-3">
                       <Image
                         className="h-full rounded-full"
@@ -43,10 +43,10 @@ const Studio = async () => {
                         height={30}
                       />
                     </CardHeader>
-                    <CardContent className="flex flex-col justify-center p-3 space-y-2 w-full h-full lg:p-3">
+                    <CardContent className="flex h-full w-full flex-col justify-center space-y-2 p-3 lg:p-3">
                       <p className="text-xl">{organization.name}</p>
                     </CardContent>
-                    <CardFooter className="flex flex-col justify-center items-center p-3 space-y-2 h-full lg:p-3">
+                    <CardFooter className="flex h-full flex-col items-center justify-center space-y-2 p-3 lg:p-3">
                       <Button variant={'link'} className="w-full">
                         Manage
                       </Button>

@@ -43,10 +43,10 @@ const ConfirmImageDeletion = ({
       <DialogTrigger>
         <X
           size={24}
-          className="bg-white absolute ml-auto z-[9999999999994] text-muted-foreground right-0 border border-muted-foreground rounded-full cursor-pointer"
+          className="absolute right-0 z-[9999999999994] ml-auto cursor-pointer rounded-full border border-muted-foreground bg-white text-muted-foreground"
         />
       </DialogTrigger>
-      <DialogContent className="flex flex-col gap-5 justify-center items-center">
+      <DialogContent className="flex flex-col items-center justify-center gap-5">
         <p className="text-xl">
           Are you sure you want to remove this image?
         </p>
@@ -136,17 +136,17 @@ export default function ImageUpload({
   return (
     <>
       {isUploading ? (
-        <div className={`${className} flex relative flex-col w-full`}>
+        <div className={`${className} relative flex w-full flex-col`}>
           Uploading image...
         </div>
       ) : preview ? (
-        <div className={`${className} flex relative flex-col w-full`}>
+        <div className={`${className} relative flex w-full flex-col`}>
           <ConfirmImageDeletion
             onChange={onChange}
             setPreview={setPreview}
           />
           <div
-            className={`w-full h-full relative flex justify-center flex-col items-center `}>
+            className={`relative flex h-full w-full flex-col items-center justify-center`}>
             <Image
               src={preview ?? value}
               className={`${className} z-10`}
@@ -159,11 +159,11 @@ export default function ImageUpload({
         <>
           <Label
             htmlFor={id}
-            className={`${className} flex justify-center flex-col items-center border border-dotted bg-secondary cursor-pointer`}>
-            <div className="p-2 text-white rounded-full bg-neutral-400">
+            className={`${className} flex cursor-pointer flex-col items-center justify-center border border-dotted bg-secondary`}>
+            <div className="rounded-full bg-neutral-400 p-2 text-white">
               <ImageLogo />
             </div>
-            <p className="p-1 w-full text-center lg:w-2/3 text-[12px]">
+            <p className="w-full p-1 text-center text-[12px] lg:w-2/3">
               {placeholder}
             </p>
           </Label>

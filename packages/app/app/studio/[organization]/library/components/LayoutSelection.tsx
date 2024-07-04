@@ -30,7 +30,7 @@ const LayoutSelection = () => {
           <Icon
             key={value}
             size={30}
-            className={`p-1 rounded-md border transition cursor-pointer ${
+            className={`cursor-pointer rounded-md border p-1 transition ${
               currentLayout === value ? activeClass : inactiveClass
             }`}
             onClick={() =>

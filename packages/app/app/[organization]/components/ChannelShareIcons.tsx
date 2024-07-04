@@ -13,11 +13,11 @@ const ChannelShareIcons = ({
   organization: IExtendedOrganization
 }) => {
   return (
-    <div className="mt-auto flex justify-start items-center space-x-4">
+    <div className="mt-auto flex items-center justify-start space-x-4">
       <Credenza>
         <CredenzaTrigger>
           <Share2
-            className="text-white text-muted-foreground"
+            className="text-muted-foreground text-white"
             size={22}
           />
         </CredenzaTrigger>
@@ -36,7 +36,7 @@ const ChannelShareIcons = ({
       {organization?.url && (
         <Link target="_blank" rel="noopener" href={organization?.url}>
           <Globe
-            className="text-white text-muted-foreground"
+            className="text-muted-foreground text-white"
             size={25}
           />
         </Link>

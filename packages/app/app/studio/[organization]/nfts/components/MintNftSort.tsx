@@ -18,7 +18,7 @@ const MintNftSort = () => {
     (s) => s?.value === currentSort
   )?.label
   return (
-    <div className="flex gap-2 items-center font-medium">
+    <div className="flex items-center gap-2 font-medium">
       <p className="w-full">Sort By</p>
 
       <Combobox

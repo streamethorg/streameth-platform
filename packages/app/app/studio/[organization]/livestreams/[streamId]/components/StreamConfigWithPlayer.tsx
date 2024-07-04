@@ -40,11 +40,11 @@ const StreamConfigWithPlayer = ({
   return (
     <>
       {!isLive ? (
-        <div className="flex flex-col justify-center items-center p-4 w-full max-w-5xl text-white bg-black rounded-lg aspect-video">
-          <h3 className="mb-2 text-3xl font-semibold text-center lg:text-4xl">
+        <div className="flex aspect-video w-full max-w-5xl flex-col items-center justify-center rounded-lg bg-black p-4 text-white">
+          <h3 className="mb-2 text-center text-3xl font-semibold lg:text-4xl">
             Connect your Streaming providers
           </h3>
-          <p className="mb-6 text-lg text-center lg:w-3/4">
+          <p className="mb-6 text-center text-lg lg:w-3/4">
             Copy and paste the stream key into your streaming
             software. Use either the RTMP or SRT ingest, depending on
             your use-case. The RTMP ingest is more common with OBS

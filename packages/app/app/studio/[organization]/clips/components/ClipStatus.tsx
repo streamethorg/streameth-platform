@@ -8,7 +8,7 @@ const ClipStatus = async ({ assetId }: { assetId: string }) => {
   const currentClip = (await livepeer.asset.get(assetId)).asset
 
   return (
-    <div className="flex flex-col mr-auto">
+    <div className="mr-auto flex flex-col">
       <p>Clip processing: {currentClip?.status?.phase}</p>
       <p>Progress: {currentClip?.status?.progress}</p>
       {currentClip?.status?.errorMessage && (

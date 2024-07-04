@@ -30,7 +30,7 @@ function SubmitButton() {
   if (pending) {
     return (
       <Button className="self-end" disabled>
-        <ReloadIcon className="mr-2 w-4 h-4 animate-spin" />
+        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
         Please wait
       </Button>
     )
@@ -76,10 +76,10 @@ const SignUpModal = ({
           </div>
         </CredenzaDescription>
       </CredenzaHeader>
-      <CredenzaBody className="flex flex-col justify-center items-center">
+      <CredenzaBody className="flex flex-col items-center justify-center">
         <form
           action={formAction}
-          className="flex flex-col gap-3 justify-center items-center w-full">
+          className="flex w-full flex-col items-center justify-center gap-3">
           <Input
             className="w-full"
             id="email"

@@ -21,12 +21,12 @@ const NFTCollectionCard = ({
   return (
     <Link
       href={`/studio/${organization}/nfts/${nft._id}`}
-      className="border border-grey bg-secondary rounded-xl p-2 cursor-pointer">
+      className="cursor-pointer rounded-xl border border-grey bg-secondary p-2">
       <Thumbnail imageUrl={nft.thumbnail} />
 
-      <div className="flex justify-between items-start">
+      <div className="flex items-start justify-between">
         <div
-          className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
+          className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}>
           <p className={`line-clamp-1 font-medium`}>{nft.name}</p>
 
           <p className="text-sm text-muted-foreground">

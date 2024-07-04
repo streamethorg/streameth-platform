@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable}`}>
       <body className="">
         <main
-          className={`${inter.variable} flex flex-col w-full min-h-screen  mx-auto bg-background `}>
+          className={`${inter.variable} mx-auto flex min-h-screen w-full flex-col bg-background`}>
           <TooltipProvider>
             <GeneralContext>
               <Toaster />

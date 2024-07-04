@@ -15,7 +15,7 @@ const NavigationItem = ({
     (!searchParams.get('settingsActiveTab') && path === 'basicInfo')
   return (
     <div
-      className={`flex flex-row items-center cursor-pointer space-x-2 p-2 ${
+      className={`flex cursor-pointer flex-row items-center space-x-2 p-2 ${
         active && 'rounded-lg border bg-gray-200'
       }`}
       onClick={() =>

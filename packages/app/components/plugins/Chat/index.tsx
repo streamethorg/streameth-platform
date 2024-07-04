@@ -96,8 +96,8 @@ const ChatBar = ({
 
   if (!viewerToken || !viewerName) {
     return (
-      <div className="flex h-full w-full flex-1 min-h-[400px]">
-        <Card className="h-full w-full ">
+      <div className="flex h-full min-h-[400px] w-full flex-1">
+        <Card className="h-full w-full">
           <div className="flex items-center space-x-4">
             <Skeleton className="h-12 w-12 rounded-full" />
             <div className="space-y-2">
@@ -115,9 +115,9 @@ const ChatBar = ({
       token={viewerToken}
       serverUrl={serverUrl}
       className="flex flex-1 flex-col">
-      <div className="flex h-full flex-1 min-h-[400px]">
-        <Card className="bg-opacity-30 sticky border-l md:block h-full w-full">
-          <div className="absolute top-0 bottom-0 right-0 flex h-full w-full flex-col gap-2 p-2">
+      <div className="flex h-full min-h-[400px] flex-1">
+        <Card className="sticky h-full w-full border-l bg-opacity-30 md:block">
+          <div className="absolute bottom-0 right-0 top-0 flex h-full w-full flex-col gap-2 p-2">
             {
               <Chat
                 prevChatMessages={prevChatMessages}
@@ -196,7 +196,7 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
   return (
     <>
       <div className="flex min-h-0 flex-1 flex-col-reverse overflow-y-auto">
-        <Card className="absolute top-0 left-0 right-0 m-1 flex flex-row p-2 space-x-2 justify-center items-center">
+        <Card className="absolute left-0 right-0 top-0 m-1 flex flex-row items-center justify-center space-x-2 p-2">
           <Image width={150} height={50} src={Logo} alt="Logo" />
           <span>❤️</span>
           <Image
@@ -215,7 +215,7 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
                 ? 'justify-end'
                 : 'justify-start'
             )}>
-            <Card className="flex flex-col  p-2">
+            <Card className="flex flex-col p-2">
               <div className="flex items-center gap-2">
                 <div
                   className={cn(
@@ -240,10 +240,10 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
         ))}
       </div>
       {account.isConnected && isSignedIn ? (
-        <div className="flex flex-col  gap-2">
+        <div className="flex flex-col gap-2">
           <Textarea
             value={message}
-            className="min-h-[50px] w-full border-box h-1  dark:bg-zinc-900"
+            className="border-box h-1 min-h-[50px] w-full dark:bg-zinc-900"
             onChange={(e) => {
               setMessage(e.target.value)
             }}
@@ -259,7 +259,7 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
           </Button>
         </div>
       ) : (
-        <div className="flex flex-col  gap-2">
+        <div className="flex flex-col gap-2">
           <SignInUserButton />
         </div>
       )}

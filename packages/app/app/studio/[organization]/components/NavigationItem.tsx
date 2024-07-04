@@ -31,8 +31,8 @@ const NavigationItem = ({
       className="border-none text-white">
       <Link
         passHref
-        className={`drop-shadow no-underline font-light border-none flex flex-row items-center ${
-          collapsed ? 'justify-center' : 'justify-start mx-4'
+        className={`flex flex-row items-center border-none font-light no-underline drop-shadow ${
+          collapsed ? 'justify-center' : 'mx-4 justify-start'
         } cursor-pointer space-x-2 p-2 ${
           active &&
           'rounded-lg bg-gradient-to-b from-[#4219FF] to-[#3D22BA]'

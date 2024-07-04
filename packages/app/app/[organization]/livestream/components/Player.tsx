@@ -26,12 +26,12 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
 
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex h-full w-full flex-col">
       {timeLeft > 0 ? (
-        <div className="flex relative justify-end items-end w-full h-full rounded-xl aspect-video">
+        <div className="relative flex aspect-video h-full w-full items-end justify-end rounded-xl">
           {stage.thumbnail && (
             <Image
-              className="lg:rounded-xl z-[0]"
+              className="z-[0] lg:rounded-xl"
               fill={true}
               src={stage.thumbnail}
               alt="Livepeer Logo"
@@ -40,7 +40,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
           <Counter timeToStart={timeLeft} />
         </div>
       ) : (
-        <div className="relative w-full h-full">
+        <div className="relative h-full w-full">
           <PlayerWithControls
             src={[
               {

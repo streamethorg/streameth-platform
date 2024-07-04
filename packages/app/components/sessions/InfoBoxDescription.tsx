@@ -40,13 +40,13 @@ const InfoBoxDescription = ({
     <div className="relative py-4">
       <div
         ref={descriptionRef}
-        className="overflow-hidden duration-300 ease-in-out transition-max-height"
+        className="transition-max-height overflow-hidden duration-300 ease-in-out"
         style={{ maxHeight: maxHeight }}>
         {description && (
           <div className="space-y-2">
             <MarkdownDisplay content={description} />
             {speakers && (
-              <div className="flex flex-col items-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
+              <div className="flex flex-col items-start space-y-2 md:flex-row md:space-x-2 md:space-y-0">
                 {speakers.map((speaker) => (
                   <SpeakerIcon key={speaker._id} speaker={speaker} />
                 ))}
@@ -56,7 +56,7 @@ const InfoBoxDescription = ({
         )}
       </div>
       {isExpandable && !isOpened && (
-        <div className="absolute right-0 left-0 bottom-4 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+        <div className="pointer-events-none absolute bottom-4 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent"></div>
       )}
       {isExpandable && (
         <button
@@ -70,7 +70,7 @@ const InfoBoxDescription = ({
               )
             }
           }}
-          className="absolute right-0 bottom-0 pb-2 mr-5 ml-auto font-bold text-primary">
+          className="absolute bottom-0 right-0 ml-auto mr-5 pb-2 font-bold text-primary">
           {isOpened ? 'less' : 'more'}
         </button>
       )}

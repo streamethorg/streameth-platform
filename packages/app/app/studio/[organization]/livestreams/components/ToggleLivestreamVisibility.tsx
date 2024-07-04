@@ -36,7 +36,7 @@ const ToggleLivestreamVisibility = ({
       })
   }
   return (
-    <div className="flex justify-start items-center space-x-2">
+    <div className="flex items-center justify-start space-x-2">
       {isLoading ? (
         <Loader2 className="animate-spin" />
       ) : item.published ? (
@@ -56,7 +56,7 @@ const ToggleLivestreamVisibility = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem
-            className={`space-x-2 cursor-pointer ${
+            className={`cursor-pointer space-x-2 ${
               isLoading ? 'pointer-events-none' : ''
             }`}
             onClick={handleToggleVisibility}>

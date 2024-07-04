@@ -23,7 +23,7 @@ const CreateEventPage = async ({ params }: studioPageParams) => {
   }
 
   return (
-    <div className="w-full h-full p-4">
+    <div className="h-full w-full p-4">
       <CreateEventForm organization={organization} />
     </div>
   )

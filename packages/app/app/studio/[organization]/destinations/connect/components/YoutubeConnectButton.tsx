@@ -29,7 +29,7 @@ const YoutubeConnectButton = ({
   return (
     <Button
       onClick={handleYoutubeConnect}
-      className="bg-[#FF0000] min-w-[200px]">
+      className="min-w-[200px] bg-[#FF0000]">
       <SiYoutube className="mr-2" />
       Youtube Channel
     </Button>

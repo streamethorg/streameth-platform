@@ -31,7 +31,7 @@ const Layout = async ({
 
   return (
     <div
-      className="w-full h-full flex flex-col  z-1 min-h-screen"
+      className="z-1 flex h-full min-h-screen w-full flex-col"
       style={style}>
       <HomePageNavbar
         logo={event?.logo}
@@ -39,7 +39,7 @@ const Layout = async ({
         showSearchBar={false}
       />
       <main
-        className={` top-[74px] flex w-full ml-auto lg:h-full flex-grow`}>
+        className={`top-[74px] ml-auto flex w-full flex-grow lg:h-full`}>
         {children}
       </main>
     </div>

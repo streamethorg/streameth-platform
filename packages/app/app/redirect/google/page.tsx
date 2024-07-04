@@ -6,7 +6,7 @@ import React from 'react'
 
 const GoogleRedirect = () => {
   return (
-    <div className="container mx-auto p-12 max-w-5xl text-black space-y-2">
+    <div className="container mx-auto max-w-5xl space-y-2 p-12 text-black">
       <h3 className="text-3xl font-bold">
         Enable live streaming on YouTube
       </h3>
@@ -37,7 +37,7 @@ const GoogleRedirect = () => {
         Having issues?{' '}
         <a
           target="_blank"
-          className="font-medium underline text-primary"
+          className="font-medium text-primary underline"
           rel="noopener noopener"
           href="https://t.me/+p7TgdE06G-4zZDU0">
           Contact Us

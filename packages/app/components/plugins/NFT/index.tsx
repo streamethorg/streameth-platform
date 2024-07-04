@@ -17,7 +17,7 @@ const NFTMintComponent = () => {
           for commemorative drops after the event.
         </p>
       </div>
-      <div className="flex flex-col w-full  p-2 shadow rounded-lg justify-center items-center">
+      <div className="flex w-full flex-col items-center justify-center rounded-lg p-2 shadow">
         <Image alt="nft image" src={nft}></Image>
         <div className="flex flex-row">
           {/* <MintButton address="0x3afa8ecae2503f6a892d40b9a0d905ece7a7219b" /> */}
