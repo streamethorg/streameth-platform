@@ -297,35 +297,40 @@ export const generateThumbnail = async ({
 }
 export const uploadSessionToYouTube = async ({
   sessionId,
-  googleToken,
+  type,
+  organizationId,
+  socialId,
   authToken,
 }: {
   sessionId: string
-  googleToken: string
+  type: string
+  organizationId: string
   authToken: string
+  socialId: string
 }): Promise<any> => {
   try {
-    const response = await fetch(
-      `${apiUrl()}/sessions/upload/${sessionId}`,
-      {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify({
-          googleToken: googleToken,
-        }),
-      }
-    )
+    const response = await fetch(`${apiUrl()}/sessions/upload`, {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        type,
+        sessionId,
+        organizationId,
+        socialId,
+      }),
+    })
+
     if (!response.ok) {
-      throw 'Error updating session'
+      return await response.json()
     }
-    // revalidatePath('/studio')
-    return (await response.json()).data
+
+    return (await response.json()).status
   } catch (e) {
-    console.log('error in updateSession', e)
+    console.log('error in upload session to social', e)
     throw e
   }
 }

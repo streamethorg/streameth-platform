@@ -20,6 +20,7 @@ import StreamHealth from './components/StreamHealth'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import ShareLivestream from '../components/ShareLivestream'
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null
@@ -61,10 +62,8 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               playbackId={stream?.streamSettings?.playbackId}
               playerName={stream?.name}
             />
-            <ShareButton
-              url={`/${params.organization}/livestream?stage=${stream._id}`}
-              shareFor="livestream"
-            />
+            <ShareLivestream organization={params.organization} />
+
             <Link
               href={`/${params.organization}/livestream?stage=${stream._id}`}
               target="_blank">
@@ -77,12 +76,11 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             </Link>
           </div>
         </div>
-      <Destinations
-        stream={stream}
-        organization={params.organization}
-      />
+        <Destinations
+          stream={stream}
+          organization={params.organization}
+        />
       </div>
-
     </div>
   )
 }

@@ -19,6 +19,8 @@ import Image from 'next/image'
 import { SiX, SiYoutube } from 'react-icons/si'
 import { LuRadio } from 'react-icons/lu'
 import DeleteDestination from './components/DeleteDestination'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 const Destinations = async ({
   params,
@@ -54,6 +56,9 @@ const Destinations = async ({
         </CardHeader>
 
         <CardContent>
+          <Link href="destinations/connect">
+            <Button variant="primary">Add a destination</Button>
+          </Link>
           <Table className="mt-4">
             <TableHeader className="sticky top-0 z-50 bg-gray-100 border-separate">
               <TableRow className="hover:bg-whiterounded-t-xl border-b">

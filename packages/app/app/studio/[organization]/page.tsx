@@ -15,7 +15,6 @@ import LivestreamTable from './livestreams/components/LivestreamTable'
 import { notFound } from 'next/navigation'
 import { sortArray } from '@/lib/utils/utils'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
-
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -37,7 +36,7 @@ const OrganizationPage = async ({
 
   return (
     <div className="h-full w-full p-8 flex flex-col">
-      <div className='flex flex-col max-h-[200px] w-full'>
+      <div className="flex flex-col max-h-[200px] w-full">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center md gap-4 max-w-5xl py-4">
           <CreateLivestreamModal
@@ -45,16 +44,16 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center">
+            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center hover:bg-secondary">
               <div className="p-4 border bg-primary  rounded-xl text-white">
-                <LuFileUp className="h-6" />
+                <LuFileUp size={25} />
               </div>
-              <span className=" ">Upload Video</span>
+              <span className="text-sm">Upload Video</span>
             </div>
           </Link>
         </div>
       </div>
-      <div className='flex flex-col h-[80%]'>
+      <div className="flex flex-col h-[80%]">
         <p className="py-4 font-bold text-lg">Livestreams</p>
         <Suspense
           key={searchParams.toString()}

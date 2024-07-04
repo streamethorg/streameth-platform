@@ -10,7 +10,6 @@ import EditSessionForm from './components/EditSessionForm'
 import Link from 'next/link'
 import SessionOptions from './components/SessionOptions'
 import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import GetHashButton from '../components/GetHashButton'
 import TextPlaceholder from '@/components/ui/text-placeholder'
 import { Button } from '@/components/ui/button'
@@ -21,8 +20,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { Card, CardContent } from '@/components/ui/card'
-import CopyItem from '@/components/misc/CopyString'
 import UploadToYoutubeButton from './components/UploadToYoutubeButton'
 import { fetchOrganization } from '@/lib/services/organizationService'
 
@@ -107,14 +104,23 @@ const EditSession = async ({
                   <div className="min-w-[200px]">
                     <GetHashButton session={session} />
                   </div>
-
-                  <UploadToYoutubeButton
-                    organization={organization}
-                    organizationSlug={params.organization}
-                    sessionId={session._id}
-                    hasChannel={searchParams?.hasChannel}
-                  />
-                  <Button className="bg-[#121212] min-w-[200px]">
+                  {session?.socials?.some(
+                    (s) => s.name === 'youtube'
+                  ) ? (
+                    <Button variant="outline">
+                      Video Published to Youtube
+                    </Button>
+                  ) : (
+                    <UploadToYoutubeButton
+                      organization={organization}
+                      organizationSlug={params.organization}
+                      sessionId={session._id}
+                      hasThumbnail={!!session.coverImage}
+                    />
+                  )}
+                  <Button
+                    disabled
+                    className="bg-[#121212] min-w-[200px]">
                     <SiTwitter className="mr-2" /> Publish to
                     X(Twitter) (Coming Soon)
                   </Button>

@@ -8,6 +8,7 @@ export interface ISocials {
   expireTime: number;
   name: string;
   thumbnail?: string;
+  email?: string;
 }
 export interface IOrganization {
   _id?: Types.ObjectId;

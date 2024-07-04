@@ -20,6 +20,7 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
         expireTime: { type: Number, default: '' },
         name: { type: String, default: '' },
         thumbnail: { type: String, default: '' },
+        email: { type: String, default: '' },
       },
     ],
   },
