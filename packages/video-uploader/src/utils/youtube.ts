@@ -1,6 +1,6 @@
-import { youtube_v3, google } from 'googleapis';
-import { createReadStream, createWriteStream, unlinkSync } from 'fs';
-import https from 'https';
+import { youtube_v3, google } from "googleapis";
+import { createReadStream, createWriteStream, unlinkSync } from "fs";
+import https from "https";
 
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -11,7 +11,7 @@ async function getYoutubeClient(accessToken: string) {
     access_token: accessToken,
   });
   return google.youtube({
-    version: 'v3',
+    version: "v3",
     auth: oauth2Client,
   });
 }
@@ -22,7 +22,7 @@ async function checkVideoProcessingStatus(
 ): Promise<string> {
   const response = await youtube.videos.list({
     id: [videoId],
-    part: ['processingDetails'],
+    part: ["processingDetails"],
   });
 
   return response.data.items[0].processingDetails.processingStatus;
@@ -39,21 +39,21 @@ async function downloadImage(
           const fileStream = createWriteStream(filePath);
           response.pipe(fileStream);
 
-          fileStream.on('finish', () => {
+          fileStream.on("finish", () => {
             fileStream.close();
-            console.log('Image download completed:', filePath);
+            console.log("Image download completed:", filePath);
             resolve({ success: true });
           });
         } else {
-          console.error('Image download failed:', response.statusCode);
+          console.error("Image download failed:", response.statusCode);
           resolve({
             success: false,
             message: `Failed with status code: ${response.statusCode}`,
           });
         }
       })
-      .on('error', (error) => {
-        console.error('Error downloading image:', error.message);
+      .on("error", (error) => {
+        console.error("Error downloading image:", error.message);
         resolve({ success: false, message: error.message });
       });
   });
@@ -71,9 +71,9 @@ async function setThumbnail(
         body: createReadStream(filePath),
       },
     });
-    console.log('Thumbnail set successfully:', response.data);
+    console.log("Thumbnail set successfully:", response.data);
   } catch (error) {
-    console.error('Error setting thumbnail:', error);
+    console.error("Error setting thumbnail:", error);
   }
 }
 
@@ -91,16 +91,18 @@ export async function uploadToYouTube(
   try {
     const youtube = await getYoutubeClient(accessToken);
     const insertResponse = await youtube.videos.insert({
-      part: ['status', 'snippet'],
+      part: ["status", "snippet"],
       requestBody: {
         snippet: {
           title: session.name,
           description: session.description,
-          defaultLanguage: 'en',
-          defaultAudioLanguage: 'en',
+          defaultLanguage: "en",
+          defaultAudioLanguage: "en",
         },
         status: {
-          privacyStatus: session.published ? 'public' : 'unlisted',
+          privacyStatus: session.published ? "public" : "unlisted",
+          selfDeclaredMadeForKids: false,
+          madeForKids: false,
         },
       },
       media: {
@@ -108,17 +110,15 @@ export async function uploadToYouTube(
       },
     });
 
-    console.log('YouTube video upload initiated:', insertResponse.data);
-
-    let processingStatus = 'processing';
-    while (processingStatus === 'processing') {
+    let processingStatus = "processing";
+    while (processingStatus === "processing") {
       processingStatus = await checkVideoProcessingStatus(
         insertResponse.data.id,
         youtube
       );
-      if (processingStatus === 'processing') {
+      if (processingStatus === "processing") {
         await delay(180000); // Delay for 3 minutes
-      } else if (processingStatus === 'error') {
+      } else if (processingStatus === "error") {
         return;
       }
     }
@@ -131,7 +131,7 @@ export async function uploadToYouTube(
     }
     return;
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error("An error occurred:", error);
     return;
   }
 }
