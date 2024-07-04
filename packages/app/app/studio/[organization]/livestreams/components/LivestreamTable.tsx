@@ -41,7 +41,7 @@ const LivestreamTable = ({
 }) => {
   if (streams.length === 0) {
     return (
-      <div className="w-full flex flex-col gap-4 justify-center items-center  h-96 bg-white rounded-xl border">
+      <div className="flex h-96 w-full flex-col items-center justify-center gap-4 rounded-xl border bg-white">
         <EmptyFolder />
         <CardTitle className="text-2xl font-semibold">
           No livestreams found
@@ -53,10 +53,10 @@ const LivestreamTable = ({
     )
   }
   return (
-    <div className=" rounded-xl border w-full h-[95%] bg-white p-1 mb-10">
-      <Table className="bg-white rounded-xl p-1">
-        <TableHeader className="sticky top-0 bg-white z-50 border-b">
-          <TableRow className=" hover:bg-white rounded-t-xl">
+    <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
+      <Table className="rounded-xl bg-white p-1">
+        <TableHeader className="sticky top-0 z-50 border-b bg-white">
+          <TableRow className="rounded-t-xl hover:bg-white">
             <TableHead>
               <TableSort title="Title" sortBy="name" />
             </TableHead>
@@ -70,16 +70,16 @@ const LivestreamTable = ({
         <TableBody className="overflow-auto">
           {streams?.map((stream) => (
             <TableRow key={stream._id}>
-              <TableCell className="font-medium max-w-[500px]">
-                <div className="flex flex-row items-center space-x-4 w-full">
-                  <div className="overflow-hidden relative min-w-[100px] w-[100px]">
+              <TableCell className="max-w-[500px] font-medium">
+                <div className="flex w-full flex-row items-center space-x-4">
+                  <div className="relative w-[100px] min-w-[100px] overflow-hidden">
                     {stream.thumbnail ? (
                       <Thumbnail imageUrl={stream.thumbnail} />
                     ) : (
                       <DefaultThumbnail />
                     )}
                     {stream.streamSettings?.isActive && (
-                      <p className="absolute top-0 right-0 p-1 text-sm text-white bg-destructive">
+                      <p className="absolute right-0 top-0 bg-destructive p-1 text-sm text-white">
                         live
                       </p>
                     )}
@@ -88,7 +88,7 @@ const LivestreamTable = ({
                   <Link
                     key={stream._id}
                     href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
-                    <p className="hover:underline line-clamp-3">
+                    <p className="line-clamp-3 hover:underline">
                       {stream?.name}
                     </p>
                   </Link>
@@ -124,7 +124,7 @@ const LivestreamTable = ({
               <TableCell>
                 <ToggleLivestreamVisibility item={stream} />
               </TableCell>
-              <TableCell className="flex items-center my-2 space-x-2">
+              <TableCell className="my-2 flex items-center space-x-2">
                 <Link
                   key={stream._id}
                   href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
@@ -134,13 +134,13 @@ const LivestreamTable = ({
                   href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
                   <Button
                     variant="primary"
-                    className="flex gap-1 items-center w-full">
-                    <ScissorsLineDashed className="w-4 h-4" />
+                    className="flex w-full items-center gap-1">
+                    <ScissorsLineDashed className="h-4 w-4" />
                     Clip
                   </Button>
                 </Link>
                 <Popover>
-                  <PopoverTrigger className="flex z-10 items-center">
+                  <PopoverTrigger className="z-10 flex items-center">
                     <EllipsisVertical />
                   </PopoverTrigger>
                   <PopoverContent className="w-fit">

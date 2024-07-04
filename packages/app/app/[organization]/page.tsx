@@ -68,12 +68,12 @@ const OrganizationHome = async ({
   const stage = sortedStreams.length > 0 ? sortedStreams[0] : null
 
   return (
-    <div className="mx-auto space-y-4 w-full max-w-7xl md:p-4">
+    <div className="mx-auto w-full max-w-7xl space-y-4 md:p-4">
       <div className="relative w-full">
         {stage ? (
           <>
             <Player stage={stage} />
-            <div className="px-4 w-full md:p-0">
+            <div className="w-full px-4 md:p-0">
               <SessionInfoBox
                 name={stage.name}
                 description={stage.description ?? ''}
@@ -102,9 +102,9 @@ const OrganizationHome = async ({
                 <StreamethLogoWhite />
               </div>
             )}
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
-            <div className="absolute right-0 bottom-0 left-0 p-4 space-y-2 w-full text-white">
-              <div className="flex flex-row justify-between w-full">
+            <div className="absolute left-0 top-0 h-full w-full bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 w-full space-y-2 p-4 text-white">
+              <div className="flex w-full flex-row justify-between">
                 <div>
                   <h2 className="text-2xl font-bold">
                     {organization.name}
@@ -119,7 +119,7 @@ const OrganizationHome = async ({
           </AspectRatio>
         )}
       </div>
-      <Card className="p-4 space-y-6 w-full bg-white border-none shadow-none md:p-0">
+      <Card className="w-full space-y-6 border-none bg-white p-4 shadow-none md:p-0">
         <Suspense fallback={<UpcomingStreamsLoading />}>
           <UpcomingStreams
             organizationId={organization._id}

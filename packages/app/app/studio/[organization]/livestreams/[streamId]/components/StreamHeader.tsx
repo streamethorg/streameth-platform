@@ -26,7 +26,7 @@ const StreamHeader = ({
     <div>
       {isLiveStreamPage && (
         <Link href={`/studio/${organization}`}>
-          <div className="flex justify-start items-center mb-4 space-x-4">
+          <div className="mb-4 flex items-center justify-start space-x-4">
             <ArrowLeft />
             <p>Back to homepage</p>
           </div>

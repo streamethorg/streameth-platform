@@ -46,7 +46,7 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
   }
 
   return (
-    <div className="flex justify-start items-center space-x-2">
+    <div className="flex items-center justify-start space-x-2">
       {isLoading ? (
         <Loader2 className="animate-spin" />
       ) : item.published ? (
@@ -66,7 +66,7 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem
-            className="space-x-2 cursor-pointer"
+            className="cursor-pointer space-x-2"
             onClick={() => handlePublishment()}>
             {!item.published ? (
               <>

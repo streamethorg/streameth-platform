@@ -37,7 +37,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
   return (
     <div className="w-[200px]">
       <Label>{label}</Label>
-      <div className="flex flex-row border rounded-xl relative h-full">
+      <div className="relative flex h-full flex-row rounded-xl border">
         <Input
           className="border-none bg-white"
           value={
@@ -47,7 +47,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
           }
         />
         <Badge
-          className="mx-2 absolute top-1/2 right-0 transform -translate-y-1/2 rounded-full text-xs bg-accent text-accent-foreground"
+          className="absolute right-0 top-1/2 mx-2 -translate-y-1/2 transform rounded-full bg-accent text-xs text-accent-foreground"
           onClick={handleSetTime}>
           Set {type.charAt(0).toUpperCase() + type.slice(1)}
         </Badge>

@@ -24,9 +24,9 @@ export function DropdownMenuWithActionButtons({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <MoreHorizontal className="flex p-2 w-10 h-10 rounded-full border md:hidden" />
+        <MoreHorizontal className="flex h-10 w-10 rounded-full border p-2 md:hidden" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white border-none">
+      <DropdownMenuContent className="border-none bg-white">
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <div className="w-full">

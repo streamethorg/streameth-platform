@@ -17,7 +17,7 @@ const CreateLivestreamOptions = ({
   >
 }) => {
   return (
-    <DialogContent className="sm:max-w-[425px] bg-white">
+    <DialogContent className="bg-white sm:max-w-[425px]">
       <DialogHeader>
         <DialogTitle>Create livestream</DialogTitle>
         <DialogDescription>
@@ -27,33 +27,31 @@ const CreateLivestreamOptions = ({
 
       <div className="flex flex-col space-y-3">
         <div
-          className="
-        border rounded-md p-3 hover:bg-secondary cursor-pointer"
+          className="cursor-pointer rounded-md border p-3 hover:bg-secondary"
           onClick={() => setStreamType('instant')}>
           <div className="flex items-center space-x-3">
-            <div className="bg-muted p-2 rounded-full">
+            <div className="rounded-full bg-muted p-2">
               <Radio />
             </div>
             <div className="flex flex-col">
               <h3 className="text-foreground">Right now</h3>
-              <p className="text-muted-foreground mt-1 text-sm">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Stream to your audience in real-time.
               </p>
             </div>
           </div>
         </div>
         <div
-          className="
-        border rounded-md p-3 hover:bg-secondary items-center cursor-pointer"
+          className="cursor-pointer items-center rounded-md border p-3 hover:bg-secondary"
           onClick={() => setStreamType('schedule')}>
           <div className="flex items-center space-x-3">
-            <div className="bg-muted p-2 rounded-full">
+            <div className="rounded-full bg-muted p-2">
               <Calendar />
             </div>
 
             <div className="flex flex-col">
               <h3>Schedule a stream</h3>
-              <p className="text-muted-foreground mt-1 text-sm">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Schedule a stream for later.
               </p>
             </div>

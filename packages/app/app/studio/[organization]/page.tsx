@@ -35,17 +35,17 @@ const OrganizationPage = async ({
   ) as unknown as IExtendedStage[]
 
   return (
-    <div className="h-full w-full p-8 flex flex-col">
-      <div className="flex flex-col max-h-[200px] w-full">
+    <div className="flex h-full w-full flex-col p-8">
+      <div className="flex max-h-[200px] w-full flex-col">
         <h2 className="text-lg font-bold">Create</h2>
-        <div className="flex items-center md gap-4 max-w-5xl py-4">
+        <div className="md flex max-w-5xl items-center gap-4 py-4">
           <CreateLivestreamModal
             show={searchParams?.show}
             organization={organization}
           />
           <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row bg-white p-2 rounded-xl  border space-x-4 items-center hover:bg-secondary">
-              <div className="p-4 border bg-primary  rounded-xl text-white">
+            <div className="flex flex-row items-center space-x-4 rounded-xl border bg-white p-2 hover:bg-secondary">
+              <div className="rounded-xl border bg-primary p-4 text-white">
                 <LuFileUp size={25} />
               </div>
               <span className="text-sm">Upload Video</span>
@@ -53,8 +53,8 @@ const OrganizationPage = async ({
           </Link>
         </div>
       </div>
-      <div className="flex flex-col h-[80%]">
-        <p className="py-4 font-bold text-lg">Livestreams</p>
+      <div className="flex h-[80%] flex-col">
+        <p className="py-4 text-lg font-bold">Livestreams</p>
         <Suspense
           key={searchParams.toString()}
           fallback={<Loading />}>

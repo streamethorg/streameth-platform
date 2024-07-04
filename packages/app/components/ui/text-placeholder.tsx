@@ -10,12 +10,12 @@ export default function TextPlaceholder({ text }: { text: string }) {
 
   return (
     <div
-      className="flex items-center hover:bg-gray-200 group w-full border rounded-xl"
+      className="group flex w-full items-center rounded-xl border hover:bg-gray-200"
       onClick={() => handleCopy(text)}>
-      <span className="flex-1 m-2 rounded cursor-pointer truncate">
+      <span className="m-2 flex-1 cursor-pointer truncate rounded">
         {text}
       </span>
-      <Copy className="p-1 mr-2 opacity-0 group-hover:opacity-100">
+      <Copy className="mr-2 p-1 opacity-0 group-hover:opacity-100">
         Copy to clipboard
       </Copy>
     </div>

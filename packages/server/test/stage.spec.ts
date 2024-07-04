@@ -82,7 +82,7 @@ describe('Stage API', () => {
     it('should return 400 when field is empty', async () => {
       const stage = {
         name: '',
-        organizationId: organizationId
+        organizationId: organizationId,
       };
 
       response = await chai

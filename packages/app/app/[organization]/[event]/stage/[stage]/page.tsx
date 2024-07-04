@@ -49,8 +49,8 @@ export default async function Stage({ params }: EventPageProps) {
   })
 
   return (
-    <div className="bg-event flex flex-col w-full md:flex-row relative lg:max-h-[calc(100vh-54px)] p-2 gap-2">
-      <div className="flex z-40 flex-col gap-2 w-full md:overflow-auto md:w-full md:h-full top-[54px]">
+    <div className="relative flex w-full flex-col gap-2 bg-event p-2 md:flex-row lg:max-h-[calc(100vh-54px)]">
+      <div className="top-[54px] z-40 flex w-full flex-col gap-2 md:h-full md:w-full md:overflow-auto">
         <Player
           src={[
             {
@@ -72,7 +72,7 @@ export default async function Stage({ params }: EventPageProps) {
           playbackId={stream.playbackId}
         />
       </div>
-      <div className="flex z-40 flex-col gap-2 w-full md:h-full lg:w-2/5 top-[54px]">
+      <div className="top-[54px] z-40 flex w-full flex-col gap-2 md:h-full lg:w-2/5">
         <UpcomingSession
           event={event}
           currentSession={currentSession}

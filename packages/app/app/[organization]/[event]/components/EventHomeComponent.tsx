@@ -47,16 +47,16 @@ export default function EventHomeComponent({
   const bannerImg = event.banner !== '' ? event.banner : banner
   return (
     <div
-      className="flex flex-col w-full bg-background px-2"
+      className="flex w-full flex-col bg-background px-2"
       style={{ ...style }}>
-      <div className="w-full relative space-y-4 lg:my-4 max-w-full lg:max-w-5xl mx-auto z-50">
+      <div className="relative z-50 mx-auto w-full max-w-full space-y-4 lg:my-4 lg:max-w-5xl">
         {!searchParams.livestream ? (
-          <Card className="bg-white shadow-none lg:rounded-xl border">
+          <Card className="border bg-white shadow-none lg:rounded-xl">
             <AspectRatio
               ratio={3 / 1}
               className="overflow-clip rounded-xl p-2">
               <Image
-                className="rounded-lg object-contain h-full"
+                className="h-full rounded-lg object-contain"
                 src={bannerImg!}
                 alt="Event Cover"
                 width={1500}
@@ -67,15 +67,15 @@ export default function EventHomeComponent({
               />
             </AspectRatio>
             <CardHeader className="flex flex-row items-start">
-              <div className="flex flex-col w-full my-2 gap-2 justify-start items-start">
-                <CardTitle className=" text-4xl uppercase">
+              <div className="my-2 flex w-full flex-col items-start justify-start gap-2">
+                <CardTitle className="text-4xl uppercase">
                   {event.name}
                 </CardTitle>
                 {event.dataImporter?.[0]?.config?.sheetId && (
                   <SignUp event={event} />
                 )}
               </div>
-              <div className="lg:min-w-[300px] text-sm space-y-2">
+              <div className="space-y-2 text-sm lg:min-w-[300px]">
                 <p>
                   <span className="mr-2">&#128197;</span>
                   {formatDate(new Date(event.start))}
@@ -117,8 +117,8 @@ export default function EventHomeComponent({
         )}
         <Tabs
           defaultValue="schedule"
-          className="bg-white rounded-xl border p-2">
-          <TabsList className="bg-white w-full justify-start">
+          className="rounded-xl border bg-white p-2">
+          <TabsList className="w-full justify-start bg-white">
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="livestreams">Livestreams</TabsTrigger>
             <TabsTrigger value="schedule">Schedule</TabsTrigger>
@@ -128,7 +128,7 @@ export default function EventHomeComponent({
             <MarkdownDisplay content={event.description} />
           </TabsContent>
           <TabsContent value="livestreams">
-            <div className="w-full grid lg:grid-cols-2 gap-4">
+            <div className="grid w-full gap-4 lg:grid-cols-2">
               {stages?.map((stage) => (
                 <StagePreview
                   key={stage._id}

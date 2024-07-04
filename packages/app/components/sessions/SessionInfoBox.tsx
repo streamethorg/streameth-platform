@@ -100,7 +100,7 @@ const MobileButtons = ({
                 className="cursor-pointer"
               />
             </PopoverTrigger>
-            <PopoverContent className="flex flex-col space-y-2 w-full">
+            <PopoverContent className="flex w-full flex-col space-y-2">
               {/* Hydration Error */}
               <ShareButton className="w-full" shareFor="video" />{' '}
               {video?.assetId && (
@@ -158,11 +158,11 @@ const SessionInfoBox = async ({
 
   return (
     <div
-      className={`flex flex-col md:flex-row py-4 md:space-x-2 ${
-        inverted ? 'text-white rounded-lg  text-card-foreground ' : ''
+      className={`flex flex-col py-4 md:flex-row md:space-x-2 ${
+        inverted ? 'rounded-lg text-card-foreground text-white' : ''
       }`}>
-      <div className="flex flex-col justify-start w-full">
-        <CardTitle className="flex flex-row justify-between items-start text-xl lg:text-2xl">
+      <div className="flex w-full flex-col justify-start">
+        <CardTitle className="flex flex-row items-start justify-between text-xl lg:text-2xl">
           <span>{name}</span>
         </CardTitle>
         <InfoBoxDescription
@@ -193,7 +193,7 @@ const SessionInfoBox = async ({
         </div>
       </div>
       <>
-        <div className="hidden justify-end items-center mt-0 mb-auto space-x-2 md:flex">
+        <div className="mb-auto mt-0 hidden items-center justify-end space-x-2 md:flex">
           <DesktopButtons
             name={name}
             description={description}
@@ -203,7 +203,7 @@ const SessionInfoBox = async ({
             vod={vod}
           />
         </div>
-        <div className="flex justify-between items-center mt-2 mb-auto space-x-2 md:hidden">
+        <div className="mb-auto mt-2 flex items-center justify-between space-x-2 md:hidden">
           <MobileButtons
             name={name}
             description={description}

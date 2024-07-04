@@ -133,7 +133,7 @@ const EventAccordion = ({
           }}>
           <AccordionItem value="item-1" className="px-2 text-black">
             <AccordionTrigger>Basics</AccordionTrigger>
-            <AccordionContent className="p-2 space-y-8">
+            <AccordionContent className="space-y-8 p-2">
               <FormField
                 control={form.control}
                 name="name"
@@ -174,9 +174,9 @@ const EventAccordion = ({
           </AccordionItem>
           <AccordionItem value="time" className="px-2">
             <AccordionTrigger>Time</AccordionTrigger>
-            <AccordionContent className="p-2 space-y-8">
+            <AccordionContent className="space-y-8 p-2">
               <div className="flex flex-col space-y-8">
-                <div className="flex flex-row space-x-1 w-full">
+                <div className="flex w-full flex-row space-x-1">
                   <FormField
                     control={form.control}
                     name="start"
@@ -210,7 +210,7 @@ const EventAccordion = ({
                     )}
                   />
                 </div>
-                <div className="flex flex-row space-x-1 w-full">
+                <div className="flex w-full flex-row space-x-1">
                   <FormField
                     control={form.control}
                     name="end"
@@ -290,7 +290,7 @@ const EventAccordion = ({
           </AccordionItem>
           <AccordionItem value="item-2" className="px-2">
             <AccordionTrigger>Appearance</AccordionTrigger>
-            <AccordionContent className="p-2 space-y-8">
+            <AccordionContent className="space-y-8 p-2">
               <div className="flex flex-row space-x-4">
                 <div className="flex w-1/6">
                   <FormField
@@ -381,7 +381,7 @@ const EventAccordion = ({
           </AccordionItem>
           <AccordionItem value="item-3" className="px-2">
             <AccordionTrigger>Event CMS</AccordionTrigger>
-            <AccordionContent className="p-2 space-y-8">
+            <AccordionContent className="space-y-8 p-2">
               <span>
                 Import your speaker data and your schedule from one of
                 our supported data providers.
@@ -402,7 +402,7 @@ const EventAccordion = ({
                   </FormItem>
                 )}
               />
-              <div className="flex gap-5 justify-between">
+              <div className="flex justify-between gap-5">
                 <Button disabled={isUpdatingEvent} type="submit">
                   Save
                 </Button>
@@ -418,7 +418,7 @@ const EventAccordion = ({
           </AccordionItem>
           <AccordionItem value="item-4" className="px-2">
             <AccordionTrigger>More</AccordionTrigger>
-            <AccordionContent className="flex flex-col p-2 space-y-8">
+            <AccordionContent className="flex flex-col space-y-8 p-2">
               <DeleteEvent
                 organizationId={organizationId}
                 event={event}

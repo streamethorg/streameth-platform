@@ -39,7 +39,7 @@ export const PopoverActions = ({
           }`}>
           <Button
             variant={'ghost'}
-            className="space-x-2 w-full !justify-start">
+            className="w-full !justify-start space-x-2">
             <FilePenLine />
             <p className="">Edit</p>
           </Button>
@@ -50,7 +50,7 @@ export const PopoverActions = ({
           }`}>
           <Button
             variant={'ghost'}
-            className="space-x-2 w-full !justify-start">
+            className="w-full !justify-start space-x-2">
             <Eye />
             <p className="">View</p>
           </Button>
@@ -72,7 +72,7 @@ export const PopoverActions = ({
             <span
               className={buttonVariants({
                 variant: 'ghost',
-                className: 'space-x-2 w-full !justify-start',
+                className: 'w-full !justify-start space-x-2',
               })}>
               <Share2 />
               <p>Share</p>
@@ -82,7 +82,7 @@ export const PopoverActions = ({
         </Dialog>
         {session.assetId && (
           <VideoDownloadClient
-            className="space-x-2 !justify-start"
+            className="!justify-start space-x-2"
             videoName={`${session.name}.mp4`}
             variant="ghost"
             assetId={session.assetId}
@@ -96,7 +96,7 @@ export const PopoverActions = ({
               className={buttonVariants({
                 variant: 'ghost',
                 className:
-                  'flex space-x-2 cursor-pointer hover:bg-gray-100 !justify-start',
+                  'flex cursor-pointer !justify-start space-x-2 hover:bg-gray-100',
               })}>
               <Trash2 className="text-destructive" />
               <p>Delete</p>

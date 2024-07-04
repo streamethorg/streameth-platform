@@ -13,19 +13,19 @@ const TableSkeleton = () => {
       <TableHeader className="sticky top-0 z-50 bg-white">
         <TableRow className="hover:bg-white">
           <TableHead>
-            <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-300"></div>
           </TableHead>
           <TableHead>
-            <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-300"></div>
           </TableHead>
           <TableHead>
-            <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-300"></div>
           </TableHead>
           <TableHead>
-            <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-300"></div>
           </TableHead>
           <TableHead>
-            <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-300"></div>
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -33,19 +33,19 @@ const TableSkeleton = () => {
         {Array.from({ length: 5 }).map((_, index) => (
           <TableRow key={index} className="animate-pulse">
             <TableCell>
-              <div className="w-full h-4 bg-gray-300 rounded"></div>
+              <div className="h-4 w-full rounded bg-gray-300"></div>
             </TableCell>
             <TableCell>
-              <div className="w-full h-4 bg-gray-300 rounded"></div>
+              <div className="h-4 w-full rounded bg-gray-300"></div>
             </TableCell>
             <TableCell>
-              <div className="w-full h-4 bg-gray-300 rounded"></div>
+              <div className="h-4 w-full rounded bg-gray-300"></div>
             </TableCell>
             <TableCell>
-              <div className="w-full h-4 bg-gray-300 rounded"></div>
+              <div className="h-4 w-full rounded bg-gray-300"></div>
             </TableCell>
             <TableCell>
-              <div className="w-full h-4 bg-gray-300 rounded"></div>
+              <div className="h-4 w-full rounded bg-gray-300"></div>
             </TableCell>
           </TableRow>
         ))}

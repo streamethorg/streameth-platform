@@ -17,21 +17,21 @@ const VideoCardProcessing = async ({
   const thumbnail = (await generateThumbnailAction(session)) || ''
 
   return (
-    <div className="w-full min-h-full uppercase rounded-xl animate-pulse">
+    <div className="min-h-full w-full animate-pulse rounded-xl uppercase">
       <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
-      <div className="flex justify-between items-start">
+      <div className="flex items-start justify-between">
         <CardHeader
-          className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
+          className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}>
           <CardTitle
-            className={`text-sm capitalize line-clamp-2 overflow-hidden`}>
-            <div className="flex justify-start items-center space-x-2">
+            className={`line-clamp-2 overflow-hidden text-sm capitalize`}>
+            <div className="flex items-center justify-start space-x-2">
               <Loader2 className="animate-spin" />
               <span>Processing...</span>
             </div>
           </CardTitle>
 
-          <div className="flex justify-between items-center">
-            <CardDescription className={`text-xs truncate `}>
+          <div className="flex items-center justify-between">
+            <CardDescription className={`truncate text-xs`}>
               {formatDate(
                 new Date(session.createdAt as string),
                 'ddd. MMM. D, YYYY'

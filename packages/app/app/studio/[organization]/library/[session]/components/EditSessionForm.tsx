@@ -90,7 +90,7 @@ const EditSessionForm = ({
               <FormLabel required>Video title</FormLabel>
               <FormControl>
                 <Input
-                  className="bg-white rounded-md border border-gray-300"
+                  className="rounded-md border border-gray-300 bg-white"
                   placeholder="name"
                   {...field}
                 />
@@ -106,7 +106,7 @@ const EditSessionForm = ({
               <FormLabel required>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  className="bg-white rounded-md border border-gray-300"
+                  className="rounded-md border border-gray-300 bg-white"
                   placeholder="description"
                   {...field}
                 />
@@ -148,7 +148,7 @@ const EditSessionForm = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageUpload
-                  className="relative rounded-xl aspect-video max-w-[480px] bg-neutrals-300"
+                  className="relative aspect-video max-w-[480px] rounded-xl bg-neutrals-300"
                   aspectRatio={16 / 9}
                   path={`sessions/${organizationSlug}`}
                   {...field}
@@ -177,7 +177,7 @@ const EditSessionForm = ({
             variant={'primary'}>
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Please wait...
               </>
             ) : (
