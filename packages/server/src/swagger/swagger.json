@@ -34,7 +34,7 @@
           "thumbnail": {
             "type": "string"
           },
-          "email": {
+          "channelId": {
             "type": "string"
           }
         },

@@ -3470,9 +3470,9 @@
     ws "~7.5.10"
 
 "@pm2/io@~6.0.0":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@pm2/io/-/io-6.0.1.tgz#300fefa485317f26e3bc348da061ca395a52149a"
-  integrity sha512-KiA+shC6sULQAr9mGZ1pg+6KVW9MF8NpG99x26Lf/082/Qy8qsTCtnJy+HQReW1A9Rdf0C/404cz0RZGZro+IA==
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@pm2/io/-/io-6.0.0.tgz#ad7222e7c6975664028fe727ff7b67e9b661eacc"
+  integrity sha512-sKUEgZoQ5/jRwTyMB1I7u2wXL6dG0j/F/M4ANJ7dJCApfW8nWC0RElMW2siEKvZ79iplIPAaWV27oyBoerEflw==
   dependencies:
     async "~2.6.1"
     debug "~4.3.1"
@@ -7302,9 +7302,9 @@ bare-stream@^2.0.0:
     streamx "^2.18.0"
 
 base-x@^3.0.2:
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/base-x/-/base-x-3.0.10.tgz#62de58653f8762b5d6f8d9fe30fa75f7b2585a75"
-  integrity sha512-7d0s06rR9rYaIWHkpfLIFICM/tkSVdoPC9qYAQRpxn9DdKNWNsKC0uk++akckyLq16Tx2WIinnZ6WRriAt6njQ==
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/base-x/-/base-x-3.0.9.tgz#6349aaabb58526332de9f60995e548a53fe21320"
+  integrity sha512-H7JU6iBHTal1gp56aKoaa//YUxEaAOUiydvrV/pILqIHXTtqxSkATOnDA2u+jZ/61sD+L/412+7kzXRtWukhpQ==
   dependencies:
     safe-buffer "^5.0.1"
 
