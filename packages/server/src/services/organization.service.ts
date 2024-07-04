@@ -139,17 +139,18 @@ export default class OrganizationService {
     const org = await this.get(organizationId);
 
     const existingSocial = org.socials.find(
-      (social) => social.email === data.email && social.type === data.type,
+      (social) =>
+        social.channelId === data.channelId && social.type === data.type,
     );
 
     if (existingSocial) {
       // Update the social with new data
       await Organization.findOneAndUpdate(
-        { _id: organizationId, 'socials.email': data.email },
+        { _id: organizationId, 'socials.channelId': data.channelId },
         await Organization.findOneAndUpdate(
           {
             _id: organizationId,
-            'socials.email': data.email,
+            'socials.channelId': data.channelId,
             'socials.type': data.type,
           },
           {
@@ -175,7 +176,7 @@ export default class OrganizationService {
               expireTime: data.expireTime,
               name: data.name,
               thumbnail: data.thumbnail,
-              email: data.email,
+              channelId: data.channelId,
             },
           },
         },
