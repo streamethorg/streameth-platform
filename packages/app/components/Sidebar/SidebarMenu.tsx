@@ -1,6 +1,4 @@
 'use client'
-
-import { BookOpenText } from 'lucide-react'
 import { SidebarUI, SidebarItem } from './Sidebar'
 
 import {
@@ -10,6 +8,7 @@ import {
   LuSettings,
   LuShare2,
   LuLock,
+  LuBookOpen,
 } from 'react-icons/lu'
 
 const SidebarMenu = ({
@@ -51,7 +50,7 @@ const SidebarMenu = ({
     {
       text: 'Docs',
       navigationPath: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
-      icon: <BookOpenText size={25} />,
+      icon: <LuBookOpen size={25} />,
       isExternal: true
     }
   ]
