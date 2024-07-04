@@ -115,7 +115,6 @@ const EditSession = async ({
                       organization={organization}
                       organizationSlug={params.organization}
                       sessionId={session._id}
-                      hasThumbnail={!!session.coverImage}
                     />
                   )}
                   <Button
