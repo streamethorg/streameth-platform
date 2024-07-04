@@ -92,11 +92,11 @@ const SupportForm = ({
             control={form.control}
             name="image"
             render={({ field }) => (
-              <FormItem className="flex mt-4 rounded-xl border border-dashed">
+              <FormItem className="mt-4 flex rounded-xl border border-dashed">
                 <FormControl>
                   <ImageUpload
                     placeholder="Click to upload image here. "
-                    className="py-4 m-auto w-full h-full text-black bg-neutrals-300"
+                    className="m-auto h-full w-full bg-neutrals-300 py-4 text-black"
                     aspectRatio={1}
                     path={`support`}
                     {...field}
@@ -107,7 +107,7 @@ const SupportForm = ({
             )}
           />
 
-          <div className="flex gap-10 flex-row justify-between">
+          <div className="flex flex-row justify-between gap-10">
             <Button
               className="w-full"
               onClick={handleClose}

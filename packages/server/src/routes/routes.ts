@@ -55,6 +55,7 @@ const models: TsoaRoute.Models = {
             "expireTime": {"dataType":"double","required":true},
             "name": {"dataType":"string","required":true},
             "thumbnail": {"dataType":"string"},
+            "channelId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },

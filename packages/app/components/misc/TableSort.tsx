@@ -33,7 +33,7 @@ const TableSort = ({
   }
   return (
     <div
-      className="flex justify-start items-center space-x-2"
+      className="flex items-center justify-start space-x-2"
       onClick={handleSortClick}>
       <p>{title}</p>
       <ChevronsUpDown

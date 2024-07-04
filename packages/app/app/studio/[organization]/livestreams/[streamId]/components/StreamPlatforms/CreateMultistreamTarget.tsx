@@ -31,7 +31,7 @@ export const CreateMultistreamTarget = ({
           <span className="">{btnName}</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="px-8 bg-white sm:max-w-[625px]">
+      <DialogContent className="bg-white px-8 sm:max-w-[625px]">
         <DialogHeader>
           <DialogTitle className="mx-auto">
             Create multistream target

@@ -136,22 +136,52 @@ export default class OrganizationService {
   }
 
   async addOrgSocial(organizationId: string, data: ISocials) {
-    await this.get(organizationId);
-    await Organization.findOneAndUpdate(
-      { _id: organizationId },
-      {
-        $addToSet: {
-          socials: {
-            type: data.type,
-            accessToken: data.accessToken,
-            refreshToken: data.refreshToken,
-            expireTime: data.expireTime,
-            name: data.name,
-            thumbnail: data.thumbnail,
+    const org = await this.get(organizationId);
+
+    const existingSocial = org.socials.find(
+      (social) =>
+        social.channelId === data.channelId && social.type === data.type,
+    );
+
+    if (existingSocial) {
+      // Update the social with new data
+      await Organization.findOneAndUpdate(
+        { _id: organizationId, 'socials.channelId': data.channelId },
+        await Organization.findOneAndUpdate(
+          {
+            _id: organizationId,
+            'socials.channelId': data.channelId,
+            'socials.type': data.type,
+          },
+          {
+            $set: {
+              'socials.$.accessToken': data.accessToken,
+              'socials.$.refreshToken': data.refreshToken,
+              'socials.$.expireTime': data.expireTime,
+            },
+          },
+          { upsert: true },
+        ),
+      );
+    } else {
+      // Add the new social entry
+      await Organization.findOneAndUpdate(
+        { _id: organizationId },
+        {
+          $addToSet: {
+            socials: {
+              type: data.type,
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken,
+              expireTime: data.expireTime,
+              name: data.name,
+              thumbnail: data.thumbnail,
+              channelId: data.channelId,
+            },
           },
         },
-      },
-    );
+      );
+    }
   }
 
   async deleteOrgSocial(organizationId: string, destinationId: string) {

@@ -19,7 +19,7 @@ const Embed = ({
   name?: string
 }) => {
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen bg-black flex justify-center items-center">
+    <div className="absolute left-0 top-0 flex h-screen w-screen items-center justify-center bg-black">
       <Player
         thumbnail={thumbnail}
         name={name}

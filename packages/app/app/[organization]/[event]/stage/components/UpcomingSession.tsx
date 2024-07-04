@@ -19,9 +19,9 @@ const UpcomingSession = ({
   // Early return if the component is not visible
 
   return (
-    <div className="relative bg-white bg-opacity-10 rounded-lg border border-white border-opacity-10">
-      <div className="flex flex-row p-2 10">
-        <CardTitle className=" text-white text-lg">
+    <div className="relative rounded-lg border border-white border-opacity-10 bg-white bg-opacity-10">
+      <div className="10 flex flex-row p-2">
+        <CardTitle className="text-lg text-white">
           Happening now
         </CardTitle>
         <button

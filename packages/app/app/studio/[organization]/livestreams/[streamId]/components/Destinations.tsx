@@ -18,7 +18,7 @@ const Destinations = ({
   }
 
   return (
-    <Card className="w-1/3 flex flex-col flex-grow justify-start p-4 space-y-4 h-full shadow-none">
+    <Card className="flex h-full w-1/3 flex-grow flex-col justify-start space-y-4 p-4 shadow-none">
       <div className="flex justify-start space-x-2">
         <CreateMultistreamTarget
           btnName="Add Destination"

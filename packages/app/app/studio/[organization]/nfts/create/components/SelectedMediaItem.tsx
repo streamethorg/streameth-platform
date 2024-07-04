@@ -33,11 +33,11 @@ const SelectedMediaItem = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [video])
   return (
-    <div className="mt-4 relative">
+    <div className="relative mt-4">
       <div
-        className="absolute z-50 end-0 p-2 cursor-pointer"
+        className="absolute end-0 z-50 cursor-pointer p-2"
         onClick={() => handleRemoveSelected(video)}>
-        <XCircle className="fill-muted-foreground text-white w-7 h-7" />
+        <XCircle className="h-7 w-7 fill-muted-foreground text-white" />
       </div>
 
       <div className="overflow-hidden">
@@ -47,16 +47,16 @@ const SelectedMediaItem = ({
           <Thumbnail imageUrl={generatedThumbnail} />
         )}
       </div>
-      <div className="flex justify-between items-start">
+      <div className="flex items-start justify-between">
         <CardHeader
-          className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
+          className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}>
           <CardTitle
-            className={`text-sm capitalize line-clamp-1 overflow-hidden `}>
+            className={`line-clamp-1 overflow-hidden text-sm capitalize`}>
             {video.name}
           </CardTitle>
 
-          <div className="flex justify-between items-center">
-            <CardDescription className={`text-xs truncate `}>
+          <div className="flex items-center justify-between">
+            <CardDescription className={`truncate text-xs`}>
               {formatDate(
                 new Date(video.createdAt as string),
                 'ddd. MMM. D, YYYY'

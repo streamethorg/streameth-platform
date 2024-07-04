@@ -19,9 +19,9 @@
     "start": "yarn workspace @streameth/streameth-app start",
     "next:lint": "yarn workspace @streameth/streameth-app lint",
     "next:check-types": "yarn workspace @streameth/streameth-app check-types",
-    "prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix",
-    "prettier:check": "yarn workspace @streameth/streameth-app prettier:check",
-    "precommit": "lint-staged",
+    "prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix && yarn workspace streameth-new-server prettier:fix",
+    "prettier:check": "yarn workspace @streameth/streameth-app prettier:check && yarn workspace streameth-new-server prettier:check",
+    "precommit": "lint-staged --verbose",
     "tools": "yarn workspace @streameth/av-tools tools",
     "split": "yarn workspace @streameth/av-tools run:split",
     "join": "yarn workspace @streameth/av-tools run:join",
@@ -29,11 +29,13 @@
     "install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn",
     "install:server": "yarn workspace @streameth/av-utils install && yarn workspace @streameth/ai-tools install",
     "build:server": "yarn workspace streameth-new-server build",
-    "start:server": "yarn workspace streameth-new-server start"
+    "start:server": "yarn workspace streameth-new-server start",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
-    "prettier": "^3.2.5"
+    "husky": "^9",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3",
+    "prettier-plugin-tailwindcss": "^0.6.5"
   }
 }

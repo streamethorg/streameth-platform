@@ -19,6 +19,8 @@ import Image from 'next/image'
 import { SiX, SiYoutube } from 'react-icons/si'
 import { LuRadio } from 'react-icons/lu'
 import DeleteDestination from './components/DeleteDestination'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 const Destinations = async ({
   params,
@@ -44,8 +46,8 @@ const Destinations = async ({
   }
 
   return (
-    <div className="p-12 flex w-full h-full">
-      <Card className="w-full rounded-r-xl bg-white shadow-none max-w-3xl border">
+    <div className="flex h-full w-full p-12">
+      <Card className="w-full max-w-3xl rounded-r-xl border bg-white shadow-none">
         <CardHeader>
           <CardTitle>Destinations</CardTitle>
           <CardDescription className="mt-2">
@@ -54,8 +56,11 @@ const Destinations = async ({
         </CardHeader>
 
         <CardContent>
+          <Link href="destinations/connect">
+            <Button variant="primary">Add a destination</Button>
+          </Link>
           <Table className="mt-4">
-            <TableHeader className="sticky top-0 z-50 bg-gray-100 border-separate">
+            <TableHeader className="sticky top-0 z-50 border-separate bg-gray-100">
               <TableRow className="hover:bg-whiterounded-t-xl border-b">
                 <TableHead>Name</TableHead>
                 <TableHead>Actions</TableHead>
@@ -79,7 +84,7 @@ const Destinations = async ({
 
                       <div>
                         <p className="font-semibold">{name}</p>
-                        <p className="capitalize text-sm text-ext-muted">
+                        <p className="text-ext-muted text-sm capitalize">
                           {type}
                         </p>
                       </div>

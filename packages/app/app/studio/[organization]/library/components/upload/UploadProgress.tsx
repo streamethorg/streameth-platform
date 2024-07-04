@@ -19,9 +19,9 @@ const UploadProgress = ({
   return (
     <>
       {progress < 100 ? (
-        <Card className="flex flex-col justify-center items-center p-2 px-4 my-2 w-full bg-gray-200">
+        <Card className="my-2 flex w-full flex-col items-center justify-center bg-gray-200 p-2 px-4">
           <CardTitle className="font-medium">{progress}%</CardTitle>
-          <Progress value={progress} className="mt-2 mb-4" />
+          <Progress value={progress} className="mb-4 mt-2" />
           <Alert
             triggerText="Cancel upload..."
             dialogTitle="Are you sure to cancel the upload?"
@@ -30,7 +30,7 @@ const UploadProgress = ({
           />
         </Card>
       ) : (
-        <Card className="flex justify-between p-2 px-4 my-2 w-full bg-gray-200">
+        <Card className="my-2 flex w-full justify-between bg-gray-200 p-2 px-4">
           <Button asChild>
             <Link
               href={`/studio/${organization}/library/${session!._id?.toString()}/edit`}>

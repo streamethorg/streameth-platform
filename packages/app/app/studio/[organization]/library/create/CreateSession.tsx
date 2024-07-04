@@ -124,7 +124,7 @@ export default function CreateSession({
               type="submit">
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 w-4 h-4 animate-spin" />{' '}
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
                   Please wait
                 </>
               ) : (

@@ -33,6 +33,9 @@
 					},
 					"thumbnail": {
 						"type": "string"
+					},
+					"channelId": {
+						"type": "string"
 					}
 				},
 				"required": [

@@ -1,6 +1,6 @@
 import { before, describe, it } from 'node:test';
 import { config } from '@config';
-import chai, {expect} from './global';
+import chai, { expect } from './global';
 
 describe('Speakers API', () => {
   let speakerId: string = '';

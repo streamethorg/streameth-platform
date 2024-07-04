@@ -21,7 +21,6 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
-
 const Settings = async ({
   params,
   searchParams,
@@ -42,19 +41,19 @@ const Settings = async ({
   })
 
   return (
-    <div className="p-12 flex w-full h-full">
-      <Card className="w-full rounded-r-xl bg-white shadow-none max-w-3xl border">
+    <div className="flex h-full w-full p-12">
+      <Card className="w-full max-w-3xl rounded-r-xl border bg-white shadow-none">
         <CardHeader>
           <CardTitle>Team members</CardTitle>
-          <CardDescription className="mt-2 mb-4">
+          <CardDescription className="mb-4 mt-2">
             Invite your team members to collaborate.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <AddTeamMembers organizationId={organization._id} />
           <Table className="mt-4">
-            <TableHeader className="sticky top-0 z-10 bg-gray-100 border-separate">
-              <TableRow className="border-b hover:bg-whiterounded-t-xl">
+            <TableHeader className="sticky top-0 z-10 border-separate bg-gray-100">
+              <TableRow className="hover:bg-whiterounded-t-xl border-b">
                 <TableHead>Wallet</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Actions</TableHead>

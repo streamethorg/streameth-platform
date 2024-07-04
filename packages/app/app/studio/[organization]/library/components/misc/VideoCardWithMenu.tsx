@@ -37,9 +37,8 @@ const VideoCardWithMenu = ({
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
       try {
-        const generatedThumbnail = await generateThumbnailAction(
-          session
-        )
+        const generatedThumbnail =
+          await generateThumbnailAction(session)
         setThumbnail(generatedThumbnail)
       } catch (error) {
         console.error('Failed to generate thumbnail:', error)
@@ -52,25 +51,25 @@ const VideoCardWithMenu = ({
   }, [])
 
   return (
-    <div className="flex flex-col w-full min-h-full uppercase rounded-xl">
-      <Link className="w-full h-full" href={link}>
+    <div className="flex min-h-full w-full flex-col rounded-xl uppercase">
+      <Link className="h-full w-full" href={link}>
         <Thumbnail
           imageUrl={session.coverImage}
           fallBack={thumbnail}
         />
       </Link>
-      <div className="flex justify-between items-start">
+      <div className="flex items-start justify-between">
         <CardHeader
-          className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none `}>
+          className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}>
           <Link target="_blank" rel="noopener" href={link}>
             <CardTitle
-              className={`text-sm capitalize line-clamp-2 overflow-hidden  hover:underline `}>
+              className={`line-clamp-2 overflow-hidden text-sm capitalize hover:underline`}>
               {session.name}
             </CardTitle>
           </Link>
           {showDate && (
-            <div className="flex justify-between items-center">
-              <CardDescription className={`text-xs truncate `}>
+            <div className="flex items-center justify-between">
+              <CardDescription className={`truncate text-xs`}>
                 {formatDate(
                   new Date(session.updatedAt as string),
                   'ddd. MMM. D, YYYY'

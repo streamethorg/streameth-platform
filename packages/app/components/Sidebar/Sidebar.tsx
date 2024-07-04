@@ -20,15 +20,20 @@ export const SidebarUI = ({
   const [expanded, setExpanded] = useState(initalExpanded ?? false)
 
   return (
-    <aside className="flex flex-col h-screen bg-white border-r">
-      <div className="flex justify-between items-center p-4">
+    <aside className="flex h-screen flex-col border-r bg-white">
+      <div className="flex items-center justify-between p-4">
         <div
           className={`flex items-center overflow-hidden transition-all ${
             expanded ? 'w-40' : 'w-10'
           }`}>
           <div className="transition-all">
             {expanded ? (
-              <Image src={LogoDark} width={140} height={40} alt="log" />
+              <Image
+                src={LogoDark}
+                width={140}
+                height={40}
+                alt="log"
+              />
             ) : (
               <Image src={Logo} width={40} height={40} alt="log" />
             )}
@@ -37,13 +42,13 @@ export const SidebarUI = ({
       </div>
 
       <SidebarContext.Provider value={{ expanded }}>
-        <ul className="flex-1 px-3 space-y-4">{children}</ul>
+        <ul className="flex-1 space-y-4 px-3">{children}</ul>
       </SidebarContext.Provider>
       <button
         onClick={() => setExpanded((curr) => !curr)}
-        className="p-1.5 text-black mx-auto">
+        className="mx-auto p-1.5 text-black">
         {expanded ? (
-          <span className="flex flex-row w-full">
+          <span className="flex w-full flex-row">
             <ChevronFirst />
             Collapse
           </span>
@@ -52,26 +57,20 @@ export const SidebarUI = ({
         )}
       </button>
       <Link
-        className="flex relative items-center justify-center space-x-2 p-2 mx-auto w-full mb-8 rounded-lg transition-colors text-black group"
+        className="group relative mx-auto mb-8 flex w-full items-center justify-center space-x-2 rounded-lg p-2 text-black transition-colors"
         target="_blank"
         rel="noopener noreferrer"
         href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
-        <BookOpenText className="w-6 h-6" />
+        <BookOpenText className="h-6 w-6" />
         <span
           className={`overflow-hidden transition-all ${
             expanded ? '' : 'w-0'
           }`}>
           Docs
         </span>
-
         {!expanded && (
           <div
-            className={`
-          absolute left-full rounded-md px-2 py-1 ml-2
-          bg-primary text-sm text-white
-          invisible opacity-20 -translate-x-3 transition-all
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-      `}>
+            className={`invisible absolute left-full ml-2 -translate-x-3 rounded-md bg-primary px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}>
             Docs
           </div>
         )}
@@ -103,34 +102,22 @@ export const SidebarItem = ({
   return (
     <li
       onClick={handleRoute}
-      className={`
-        relative flex items-center py-2
-            font-medium rounded-md cursor-pointer
-            transition-colors group   hover:border hover:border-primary hover:rounded-xl
-            ${
-              active
-                ? 'border border-primary rounded-xl '
-                : 'border border-white '
-            } 
-            ${expanded ? 'px-2' : 'justify-center '}
-    `}>
+      className={`group relative flex cursor-pointer items-center rounded-md py-2 font-medium transition-colors hover:rounded-xl hover:border hover:border-primary ${
+        active
+          ? 'rounded-xl border border-primary'
+          : 'border border-white'
+      } ${expanded ? 'px-2' : 'justify-center'} `}>
       {icon}
       <span
-        className={`overflow-hidden transition-all text-sm ${
-          expanded ? ' ml-3' : 'hidden'
+        className={`overflow-hidden text-sm transition-all ${
+          expanded ? 'ml-3' : 'hidden'
         }`}>
         {text}
       </span>
 
       {!expanded && (
         <div
-          className={`
-          absolute left-full rounded-md px-2 py-1 ml-4
-          z-[9999]
-          bg-primary text-sm text-white
-          invisible opacity-20 -translate-x-3 transition-all
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-      `}>
+          className={`invisible absolute left-full z-[9999] ml-4 -translate-x-3 rounded-md bg-primary px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}>
           {text}
         </div>
       )}

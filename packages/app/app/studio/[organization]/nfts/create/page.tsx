@@ -27,7 +27,7 @@ const CreateNFT = async ({
   const stages = await fetchOrganizationStages({ organizationId })
 
   return (
-    <div className="max-w-5xl mx-auto h-full overflow-auto">
+    <div className="mx-auto h-full max-w-5xl overflow-auto">
       <CreateNFTForm
         videos={videos as INFTSessions[]}
         stages={stages as INFTSessions[]}

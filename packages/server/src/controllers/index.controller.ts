@@ -43,8 +43,12 @@ export class IndexController extends Controller {
     @FormField() directory: string,
   ): Promise<IStandardResponse<string>> {
     if (!file) throw new HttpException(400, 'no or invalid image');
+    const timestamp = Date.now().toString();
+    const fileName = file.originalname.split('.')[0];
+    const fileExtension = file.originalname.split('.').pop();
+    const newFileName = `${fileName}-${timestamp}.${fileExtension}`;
     const image = await this.storageService.uploadFile(
-      `${directory}/${file.originalname}`,
+      `${directory}/${newFileName}`,
       file.buffer,
       file.mimetype,
     );

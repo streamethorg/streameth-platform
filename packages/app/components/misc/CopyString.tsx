@@ -17,10 +17,10 @@ const CopyItem = ({
 
   return (
     <div
-      className="flex items-center cursor-pointer hover:bg-gray-200 group"
+      className="group flex cursor-pointer items-center hover:bg-gray-200"
       onClick={handleCopy}>
       <span className="m-2 truncate">{item}</span>
-      <Copy className="p-1 mr-2 opacity-0 group-hover:opacity-100" />
+      <Copy className="mr-2 p-1 opacity-0 group-hover:opacity-100" />
     </div>
   )
 }

@@ -44,20 +44,15 @@ const ScheduleCardModal = ({
         <CredenzaTitle>{session.name}</CredenzaTitle>
         <CredenzaDescription>
           {new Date(session.start).toDateString()}{' '}
-          {moment(session.start)
-            .tz(event?.timezone)
-            .format('HH:mm')}{' '}
-          -{' '}
-          {moment(session.end)
-            .tz(event?.timezone)
-            .format('HH:mm')}{' '}
+          {moment(session.start).tz(event?.timezone).format('HH:mm')}{' '}
+          - {moment(session.end).tz(event?.timezone).format('HH:mm')}{' '}
           ({getEventTimezoneText(event?.timezone)})
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>
         {session.description && <p>{session.description}</p>}
         {session.speakers && (
-          <p className="flex flex-row flex-wrap mt-3">
+          <p className="mt-3 flex flex-row flex-wrap">
             {session.speakers.map((speaker) => (
               <SpeakerIcon key={speaker?._id} speaker={speaker} />
             ))}

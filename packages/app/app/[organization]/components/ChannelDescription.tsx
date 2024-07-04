@@ -26,7 +26,7 @@ const ChannelDescription = ({
   }, [contentRef])
 
   return (
-    <div className="hidden md:block w-4/5">
+    <div className="hidden w-4/5 md:block">
       <div
         ref={contentRef}
         className={!isExpanded ? 'line-clamp-2' : 'line-clamp-4'}>
@@ -35,9 +35,9 @@ const ChannelDescription = ({
       </div>
 
       {isClamped && (
-        <div className="flex justify-end cursor-pointer text-blue">
+        <div className="flex cursor-pointer justify-end text-blue">
           <p
-            className="font-semibold text-title"
+            className="text-title font-semibold"
             onClick={() => setExpanded(!isExpanded)}>
             {!isExpanded ? 'Read more' : ' Read less'}
           </p>

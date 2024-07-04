@@ -40,13 +40,13 @@ const ScheduleComponent = async ({
   if (!sessionsData.sessions.length) return null
 
   return (
-    <Card id="schedule" className="shadow-none border-none">
-      <CardHeader className=" flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-start">
+    <Card id="schedule" className="border-none shadow-none">
+      <CardHeader className="flex w-full flex-col justify-start space-y-2 lg:flex-row lg:space-x-4 lg:space-y-0">
         <DateSelect dates={dates} />
         <StageSelect stages={stages} />
       </CardHeader>
       <CardContent className="">
-        <div className="w-full flex flex-col relative">
+        <div className="relative flex w-full flex-col">
           <SessionList
             date={date}
             event={event}
@@ -59,24 +59,24 @@ const ScheduleComponent = async ({
 }
 
 export const ScheduleSkeleton = () => (
-  <div className="text-white bg-opacity-[0.04] bg-white border-white border-opacity-[0.04] lg:rounded-xl shadow animate-pulse">
-    <div className="p-3 lg:p-6 flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:space-x-4 justify-center">
-      <div className="h-10 bg-gray-300 rounded w-1/4"></div>
-      <div className="flex-1 flex space-x-2">
-        <div className="h-10 bg-gray-300 rounded w-full max-w-xs"></div>
+  <div className="animate-pulse border-white border-opacity-[0.04] bg-white bg-opacity-[0.04] text-white shadow lg:rounded-xl">
+    <div className="flex w-full flex-col justify-center space-y-2 p-3 lg:flex-row lg:space-x-4 lg:space-y-0 lg:p-6">
+      <div className="h-10 w-1/4 rounded bg-gray-300"></div>
+      <div className="flex flex-1 space-x-2">
+        <div className="h-10 w-full max-w-xs rounded bg-gray-300"></div>
       </div>
-      <div className="flex-1 flex space-x-2">
-        <div className="h-10 bg-gray-300 rounded w-full max-w-xs"></div>
+      <div className="flex flex-1 space-x-2">
+        <div className="h-10 w-full max-w-xs rounded bg-gray-300"></div>
       </div>
     </div>
     <div className="p-3 lg:p-6">
-      <div className="w-full flex flex-col relative space-y-2">
+      <div className="relative flex w-full flex-col space-y-2">
         {Array(5)
           .fill(0)
           .map((_, index) => (
             <div
               key={index}
-              className="h-20 bg-gray-300 rounded"></div>
+              className="h-20 rounded bg-gray-300"></div>
           ))}
       </div>
     </div>
