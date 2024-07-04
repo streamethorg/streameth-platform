@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
               new Date().getTime() + tokenDetails.expires_in,
             name: tokenDetails.name,
             thumbnail: tokenDetails.thumbnail,
-            email: tokenDetails.email,
+            channelId: tokenDetails.channelId,
           }),
         }
       )
@@ -63,7 +63,9 @@ export async function GET(request: NextRequest) {
         new URL(parsedRedirectUrl, request.url)
       )
     } else {
-      return NextResponse.redirect(`${originUrl}/redirect/google`)
+      return NextResponse.redirect(
+        `${originUrl}/redirect/google?channelId=${tokenDetails.channelId}`
+      )
     }
   } catch (err) {
     return NextResponse.json(

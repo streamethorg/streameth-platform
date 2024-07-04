@@ -99,14 +99,14 @@ export async function uploadToYouTube(
         },
         status: {
           privacyStatus: session.published ? 'public' : 'unlisted',
+          selfDeclaredMadeForKids: false,
+          madeForKids: false,
         },
       },
       media: {
         body: createReadStream(videoFilePath),
       },
     });
-
-    console.log('YouTube video upload initiated:', insertResponse.data);
 
     const state = await stateService.create({
       type: StateType.video,
