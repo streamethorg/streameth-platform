@@ -35,7 +35,7 @@ const AddMediaTabItem = ({
       )}
       {parsedVideos.map((video) => (
         <div
-          className="flex items-center gap-3 mt-8 mb-4"
+          className="mb-4 mt-8 flex items-center gap-3"
           key={video._id}>
           <div>
             <Checkbox
@@ -67,7 +67,7 @@ const AddMediaTabItem = ({
               }}
             />
           </div>
-          <div className="min-w-[200px] w-[112px]">
+          <div className="w-[112px] min-w-[200px]">
             <Image
               src={
                 video.coverImage
@@ -78,12 +78,12 @@ const AddMediaTabItem = ({
               width="0"
               height="0"
               sizes="100vw"
-              className="w-full rounded-xl h-auto"
+              className="h-auto w-full rounded-xl"
             />
           </div>
           <div>
-            <h4 className="font-medium mb-1">{video.name}</h4>
-            <p className="text-sm text-muted-foreground line-clamp-2">
+            <h4 className="mb-1 font-medium">{video.name}</h4>
+            <p className="line-clamp-2 text-sm text-muted-foreground">
               {video.description}
             </p>
             <p className="text-sm">

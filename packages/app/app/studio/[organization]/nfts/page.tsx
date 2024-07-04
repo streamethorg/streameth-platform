@@ -36,13 +36,13 @@ const NFT = async ({
   )
 
   return (
-    <div className="flex flex-col bg-white h-full">
+    <div className="flex h-full flex-col bg-white">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/nftBg.svg)`,
           backgroundPositionX: 'center',
         }}
-        className="shadow-none bg-cover rounded-none bg-black text-white bg-no-repeat p-4 border-none">
+        className="rounded-none border-none bg-black bg-cover bg-no-repeat p-4 text-white shadow-none">
         <CardHeader>
           <CardTitle>Create Epic NFT Collection</CardTitle>
           <CardDescription className="max-w-[400px] text-white">
@@ -56,14 +56,14 @@ const NFT = async ({
         </CardFooter>
       </Card>
 
-      <div className="flex flex-col p-4 h-full">
-        <div className="flex justify-between items-center mb-4">
+      <div className="flex h-full flex-col p-4">
+        <div className="mb-4 flex items-center justify-between">
           <p className="text-lg font-semibold">Your Collections</p>
           <MintNftSort />
         </div>
 
         {nftCollections.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
             {nftCollections.map((nft) => (
               <NFTCollectionCard
                 organization={params.organization}
@@ -73,20 +73,20 @@ const NFT = async ({
             ))}
           </div>
         ) : (
-          <div className="flex h-96 bg-white m-auto flex-col justify-center items-center">
+          <div className="m-auto flex h-96 flex-col items-center justify-center bg-white">
             <Image
               src="/images/empty-box.png"
               width={150}
               height={150}
               alt="empty nft"
             />
-            <CardTitle className="font-semibold text-2xl mt-4">
+            <CardTitle className="mt-4 text-2xl font-semibold">
               No NFT Collection
             </CardTitle>
             <CardDescription>
               Create your an NFT collection to get started!
             </CardDescription>
-            <div className="w-fit mt-6">
+            <div className="mt-6 w-fit">
               <CreateNFTCollectionModal type={type} />
             </div>
           </div>

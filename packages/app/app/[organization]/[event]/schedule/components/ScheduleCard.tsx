@@ -35,13 +35,13 @@ const ScheduleCard = ({
   return (
     <Credenza>
       <CredenzaTrigger asChild>
-        <Card className="flex flex-col shadow-none hover:bg-secondary hover:border-primary">
+        <Card className="flex flex-col shadow-none hover:border-primary hover:bg-secondary">
           <CardHeader>
             <CardTitle className="text-lg">{session.name}</CardTitle>
-            <CardDescription className="flex flex-row justify-start items-center space-x-2">
+            <CardDescription className="flex flex-row items-center justify-start space-x-2">
               {showTime && (
                 <>
-                  <ClockIcon className="w-4 h-4" />
+                  <ClockIcon className="h-4 w-4" />
                   <p>
                     {moment(session.start)
                       .tz(event.timezone || 'UTC')
@@ -59,12 +59,12 @@ const ScheduleCard = ({
           </CardHeader>
           <CardFooter className="mt-auto">
             {isActive && (
-              <p className="text-bold text-red-500 ml-auto animate-pulse">
+              <p className="text-bold ml-auto animate-pulse text-red-500">
                 Live
               </p>
             )}
             <Button variant={'secondary'}>
-              <WavesIcon className="w-4 h-4 mr-2" /> Watch
+              <WavesIcon className="mr-2 h-4 w-4" /> Watch
             </Button>
           </CardFooter>
         </Card>

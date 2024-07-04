@@ -35,15 +35,15 @@ const UploadVideoDialog = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={'outlinePrimary'} className='text-black'>
+        <Button variant={'outlinePrimary'} className="text-black">
           Upload video
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white sm:max-w-[525px] sm:max-h-[800px]">
+      <DialogContent className="bg-white sm:max-h-[800px] sm:max-w-[525px]">
         {isUploaded ? (
           <>
-            <DialogHeader className="p-10 space-y-4">
-              <div className="p-4 mx-auto">
+            <DialogHeader className="space-y-4 p-10">
+              <div className="mx-auto p-4">
                 <UploadComplete />
               </div>
               <div className="flex flex-col items-center space-y-2">

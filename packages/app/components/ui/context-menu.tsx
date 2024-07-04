@@ -35,7 +35,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     )}
     {...props}>
     {children}
-    <ChevronRight className="ml-auto w-4 h-4" />
+    <ChevronRight className="ml-auto h-4 w-4" />
   </ContextMenuPrimitive.SubTrigger>
 ))
 ContextMenuSubTrigger.displayName =
@@ -109,9 +109,9 @@ const ContextMenuCheckboxItem = React.forwardRef<
     )}
     checked={checked}
     {...props}>
-    <span className="flex absolute left-2 justify-center items-center w-3.5 h-3.5">
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <Check className="w-4 h-4" />
+        <Check className="h-4 w-4" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -133,9 +133,9 @@ const ContextMenuRadioItem = React.forwardRef<
       className
     )}
     {...props}>
-    <span className="flex absolute left-2 justify-center items-center w-3.5 h-3.5">
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <Circle className="w-2 h-2 fill-current" />
+        <Circle className="h-2 w-2 fill-current" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}

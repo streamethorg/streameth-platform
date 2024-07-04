@@ -12,21 +12,21 @@ import WatchGrid from '../components/WatchGrid'
 import { getVideoUrlAction } from '@/lib/actions/livepeer'
 const Loading = () => {
   return (
-    <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full animate-pulse">
-      <div className="flex flex-col w-full h-full md:p-4">
-        <div className="w-full bg-gray-300 aspect-video"></div>
-        <div className="px-4 mt-4 space-y-2 w-full md:px-0">
-          <div className="w-3/4 h-6 bg-gray-200 rounded"></div>
-          <div className="w-full h-4 bg-gray-200 rounded"></div>
-          <div className="w-1/4 h-4 bg-gray-200 rounded"></div>
+    <div className="mx-auto flex h-full w-full max-w-7xl animate-pulse flex-col gap-4">
+      <div className="flex h-full w-full flex-col md:p-4">
+        <div className="aspect-video w-full bg-gray-300"></div>
+        <div className="mt-4 w-full space-y-2 px-4 md:px-0">
+          <div className="h-6 w-3/4 rounded bg-gray-200"></div>
+          <div className="h-4 w-full rounded bg-gray-200"></div>
+          <div className="h-4 w-1/4 rounded bg-gray-200"></div>
         </div>
       </div>
       <div className="px-4">
         <div className="grid grid-cols-2 gap-4">
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
+          <div className="h-32 w-full rounded bg-gray-300 md:h-60"></div>
+          <div className="h-32 w-full rounded bg-gray-300 md:h-60"></div>
+          <div className="h-32 w-full rounded bg-gray-300 md:h-60"></div>
+          <div className="h-32 w-full rounded bg-gray-300 md:h-60"></div>
         </div>
       </div>
     </div>
@@ -58,8 +58,8 @@ export default async function Watch({
 
   return (
     <Suspense key={video._id} fallback={<Loading />}>
-      <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full">
-        <div className="flex flex-col w-full h-full md:p-4">
+      <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-4">
+        <div className="flex h-full w-full flex-col md:p-4">
           <PlayerWithControls
             src={[
               {
@@ -71,7 +71,7 @@ export default async function Watch({
               },
             ]}
           />
-          <div className="px-4 w-full md:px-0">
+          <div className="w-full px-4 md:px-0">
             <SessionInfoBox
               name={video.name}
               description={video.description ?? 'No description'}

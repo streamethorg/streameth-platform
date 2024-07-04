@@ -21,7 +21,7 @@ const Block = ({
   return (
     <div
       key={index}
-      className="flex flex-col justify-between items-center py-4 bg-white rounded shadow transition-colors hover:bg-gray-100 hover:cursor-pointer"
+      className="flex flex-col items-center justify-between rounded bg-white py-4 shadow transition-colors hover:cursor-pointer hover:bg-gray-100"
       onClick={handleClick}>
       <span className="my-auto">{item.icon}</span>
       <span className="text-black">{item.title}</span>

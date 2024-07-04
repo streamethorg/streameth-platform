@@ -66,10 +66,10 @@ const Preview = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-transparent max-w-4xl w-full text-white">
-        <div className="p-4 space-y-2 ">
+      <DialogContent className="w-full max-w-4xl bg-transparent text-white">
+        <div className="space-y-2 p-4">
           {status?.phase === 'processing' ? (
-            <div className="bg-background p-4 rounded-lg flex flex-col items-center justify-center text-black aspect-video">
+            <div className="flex aspect-video flex-col items-center justify-center rounded-lg bg-background p-4 text-black">
               <p className="">Video is processing</p>
               <p>
                 {(Number(status?.progress?.toFixed(2)) ?? 0) * 100}%
@@ -91,7 +91,7 @@ const Preview = ({
               ]}
             />
           )}
-          <DialogFooter className="text-black flex flex-row">
+          <DialogFooter className="flex flex-row text-black">
             <Button
               className="mr-auto"
               variant={'destructive'}

@@ -32,17 +32,17 @@ const VideoCard = ({
   }, [])
 
   return (
-    <div className="min-h-full w-full rounded-xl  uppercase">
+    <div className="min-h-full w-full rounded-xl uppercase">
       <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
       <CardHeader
-        className={`rounded p-1 mt-1 lg:p-2 shadow-none lg:shadow-none ${headerClass}`}>
-        <CardTitle className={`text-sm truncate ${descriptionClass}`}>
+        className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none ${headerClass}`}>
+        <CardTitle className={`truncate text-sm ${descriptionClass}`}>
           {session.name}
         </CardTitle>
         {event && (
           <div className="flex flex-row items-center justify-start">
             <Image
-              className="rounded-md mr-2"
+              className="mr-2 rounded-md"
               alt="logo"
               quality={80}
               src={event.logo!}
@@ -50,7 +50,7 @@ const VideoCard = ({
               width={24}
             />
             <CardDescription
-              className={`text-xs truncate ${descriptionClass}`}>
+              className={`truncate text-xs ${descriptionClass}`}>
               {event?.name}
             </CardDescription>
           </div>

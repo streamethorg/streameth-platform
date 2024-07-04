@@ -82,20 +82,20 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
     return (
       <div ref={ref} {...rest}>
         {isUploading ? (
-          <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
+          <div className="z-10 flex h-40 items-center justify-center border border-dashed border-gray-400 bg-white transition">
             <div className="text-sm">Uploading image...</div>
           </div>
         ) : preview ? (
           <>
             <X
               size={24}
-              className="ml-auto rounded-md cursor-pointer hover:bg-gray-300 z-[9999999999994]"
+              className="z-[9999999999994] ml-auto cursor-pointer rounded-md hover:bg-gray-300"
               onClick={() => {
                 onChange(null)
                 setPreview('')
               }}
             />
-            <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
+            <div className="z-10 flex h-40 items-center justify-center border border-dashed border-gray-400 bg-white transition">
               <Image
                 src={preview ?? value}
                 alt="preview"
@@ -108,7 +108,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
         ) : (
           <div
             {...getRootProps()}
-            className="flex z-10 flex-col justify-center items-center space-y-4 h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200">
+            className="z-10 flex h-40 cursor-pointer flex-col items-center justify-center space-y-4 rounded-md border-2 border-dashed border-gray-300 bg-white text-sm transition-colors hover:bg-gray-200">
             <ImageUp size={35} />
             <input {...getInputProps()} />
             <div className="mx-4">

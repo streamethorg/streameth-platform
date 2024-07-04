@@ -33,8 +33,8 @@ const TableCells = async ({
 
   return (
     <>
-      <TableCell className="relative font-medium max-w-[500px]">
-        <div className="flex flex-row items-center space-x-4 w-full">
+      <TableCell className="relative max-w-[500px] font-medium">
+        <div className="flex w-full flex-row items-center space-x-4">
           <div className="min-w-[100px]">
             <Thumbnail
               imageUrl={item.coverImage}
@@ -43,14 +43,14 @@ const TableCells = async ({
           </div>
 
           <Link href={`library/${item._id}`}>
-            <span className="hover:underline line-clamp-3">
+            <span className="line-clamp-3 hover:underline">
               {item.name}
             </span>
           </Link>
         </div>
       </TableCell>
       <TableCell>
-        <div className="flex justify-start items-center space-x-2">
+        <div className="flex items-center justify-start space-x-2">
           <PublishCell item={item} />
         </div>
       </TableCell>

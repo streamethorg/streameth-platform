@@ -45,22 +45,22 @@ const StreamHealth = ({
   return (
     isLive && (
       <Card className="w-full bg-white shadow-none">
-        <CardContent className="flex justify-between items-center p-3 lg:p-6">
-          <CardTitle className="flex gap-2 items-center text-xl">
+        <CardContent className="flex items-center justify-between p-3 lg:p-6">
+          <CardTitle className="flex items-center gap-2 text-xl">
             Stream Health:
             {isHealthy ? (
-              <div className="flex items-center p-2 py-1 pl-3 text-sm rounded-full bg-success-foreground text-success">
-                <span className="flex relative mr-2 w-2 h-2">
-                  <span className="inline-flex absolute w-full h-full bg-green-400 rounded-full opacity-75 animate-ping"></span>
-                  <span className="inline-flex relative w-2 h-2 bg-green-600 rounded-full"></span>
+              <div className="flex items-center rounded-full bg-success-foreground p-2 py-1 pl-3 text-sm text-success">
+                <span className="relative mr-2 flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-600"></span>
                 </span>
                 Healthy
               </div>
             ) : (
-              <div className="flex items-center p-2 py-1 pl-3 text-sm rounded-full bg-success-foreground text-success">
-                <span className="flex relative mr-2 w-2 h-2">
-                  <span className="inline-flex absolute w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
-                  <span className="inline-flex relative w-2 h-2 bg-red-600 rounded-full"></span>
+              <div className="flex items-center rounded-full bg-success-foreground p-2 py-1 pl-3 text-sm text-success">
+                <span className="relative mr-2 flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-600"></span>
                 </span>
                 Unhealthy
               </div>
@@ -72,7 +72,7 @@ const StreamHealth = ({
             <Button variant="outline">
               View Livestream
               <div>
-                <ArrowRight className="pl-1 w-4 h-4" />
+                <ArrowRight className="h-4 w-4 pl-1" />
               </div>
             </Button>
           </Link>

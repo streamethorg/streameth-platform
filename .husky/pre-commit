@@ -2,5 +2,3 @@
 
 yarn prettier:check
 yarn lint-staged --verbose
-
-exit 1

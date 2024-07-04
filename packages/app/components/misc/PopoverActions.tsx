@@ -28,7 +28,7 @@ const PopoverActions = ({
     <Popover>
       <PopoverTrigger asChild>
         <EllipsisVerticalIcon
-          className="text-black cursor-pointer"
+          className="cursor-pointer text-black"
           size={30}
         />
       </PopoverTrigger>
@@ -39,7 +39,7 @@ const PopoverActions = ({
               <DialogTrigger>
                 <Button
                   variant={'outline'}
-                  className="space-x-2 w-full">
+                  className="w-full space-x-2">
                   <Share2 />
                   <p className="">Share</p>
                 </Button>
@@ -48,7 +48,7 @@ const PopoverActions = ({
             </Dialog>
             {session?.nftCollections?.[0] && (
               <Button
-                className="space-x-2 w-full"
+                className="w-full space-x-2"
                 variant={'outline'}>
                 <Layers />
                 <Link
@@ -58,12 +58,12 @@ const PopoverActions = ({
                 </Link>
               </Button>
             )}
-            <Button className="space-x-2 w-full" variant={'outline'}>
+            <Button className="w-full space-x-2" variant={'outline'}>
               <Layers />
               <p className="">View Collection</p>
             </Button>
             <Button
-              className="space-x-2 w-full text-red-500"
+              className="w-full space-x-2 text-red-500"
               variant={'outline'}>
               <Flag />
               <p className="">Report</p>

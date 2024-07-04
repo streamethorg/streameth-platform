@@ -60,14 +60,14 @@ export default function Combobox({
           variant={'outline'}
           role="combobox"
           aria-expanded={open}
-          className="justify-between w-full">
+          className="w-full justify-between">
           {logo && renderLogo(orgLogo)}
           {value ? value : placeholder}
 
-          <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 w-full h-[400px]">
+      <PopoverContent className="h-[400px] w-full p-0">
         <Command>
           <CommandInput placeholder="Search item..." />
           <CommandEmpty>No item found.</CommandEmpty>

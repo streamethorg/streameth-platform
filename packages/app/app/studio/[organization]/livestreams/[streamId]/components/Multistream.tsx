@@ -25,8 +25,8 @@ const Multistream = ({
   return (
     <div className="w-full">
       {streamTargets?.length === 0 ? (
-        <Card className="bg-white shadow-none border-none">
-          <CardContent className="flex flex-col justify-between items-center p-3 space-y-2 lg:p-6">
+        <Card className="border-none bg-white shadow-none">
+          <CardContent className="flex flex-col items-center justify-between space-y-2 p-3 lg:p-6">
             <p className="text-muted-foreground">
               You have no destinations yet
             </p>
@@ -38,8 +38,8 @@ const Multistream = ({
           </CardContent>
         </Card>
       ) : (
-        <div className="flex flex-col gap-4 w-full">
-          <CardContent className="!p-0 flex items-center justify-between">
+        <div className="flex w-full flex-col gap-4">
+          <CardContent className="flex items-center justify-between !p-0">
             <CardTitle className="text-xl font-bold">
               Multistream Channels
             </CardTitle>

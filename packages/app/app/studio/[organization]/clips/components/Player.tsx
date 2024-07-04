@@ -101,15 +101,15 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   }, [setEndTime, videoRef, playbackStatus])
 
   return (
-    <div className="relative mb-4 h-2/3 flex flex-grow">
+    <div className="relative mb-4 flex h-2/3 flex-grow">
       <video
         ref={videoRef}
         autoPlay={false}
         controls={false}
-        className="w-full rounded-lg sticky top-0"></video>
-      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+        className="sticky top-0 w-full rounded-lg"></video>
+      <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
         {isLoading && (
-          <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-primary" />
+          <div className="h-20 w-20 animate-spin rounded-full border-b-2 border-t-2 border-primary" />
         )}
       </div>
     </div>

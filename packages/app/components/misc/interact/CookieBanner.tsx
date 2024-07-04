@@ -50,7 +50,7 @@ const CookieBanner = () => {
   return null
   return (
     <Alert
-      className={`lg:w-[35%] w-full transition-opacity duration-800 ${
+      className={`duration-800 w-full transition-opacity lg:w-[35%] ${
         isFadingIn ? 'opacity-0' : 'opacity-100'
       } ${shouldFadeOut ? 'opacity-0' : ''}`}>
       <AlertTitle>We Use Cookies 🍪</AlertTitle>

@@ -139,8 +139,8 @@ const CreateLivestreamModal = ({
       <DialogTrigger asChild>
         <Button
           variant={'outline'}
-          className="flex flex-row justify-start items-center p-2 pr-4 space-x-4 h-auto bg-white rounded-xl border w-fit">
-          <div className="p-4 text-white rounded-xl border bg-primary">
+          className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4">
+          <div className="rounded-xl border bg-primary p-4 text-white">
             <LuRadio size={25} />
           </div>
           <span className="">Create Livestream</span>
@@ -182,12 +182,12 @@ const CreateLivestreamModal = ({
                 control={form.control}
                 name="thumbnail"
                 render={({ field }) => (
-                  <FormItem className="flex p-1 mt-4 aspect-video">
+                  <FormItem className="mt-4 flex aspect-video p-1">
                     <FormLabel>Thumbnail</FormLabel>
                     <FormControl>
                       <ImageUpload
                         placeholder="Click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                        className="m-auto w-full h-full text-black bg-neutrals-300"
+                        className="m-auto h-full w-full bg-neutrals-300 text-black"
                         aspectRatio={1}
                         path={`livestreams/${organization?.slug}`}
                         {...field}
@@ -205,7 +205,7 @@ const CreateLivestreamModal = ({
                       onClick={() => setIsMultiDate(!isMultiDate)}>
                       Streaming multiple days?
                     </p>
-                    <div className="flex items-center gap-5 mt-1">
+                    <div className="mt-1 flex items-center gap-5">
                       <div className="flex items-center gap-1">
                         <Checkbox
                           checked={isMultiDate}
@@ -213,7 +213,7 @@ const CreateLivestreamModal = ({
                         />
                         <Label>Yes</Label>
                       </div>
-                      <div className="flex gap-1 items-center">
+                      <div className="flex items-center gap-1">
                         <Checkbox
                           defaultChecked
                           onCheckedChange={() =>
@@ -224,7 +224,7 @@ const CreateLivestreamModal = ({
                       </div>
                     </div>
                   </div>
-                  <div className="flex mt-4 space-x-3">
+                  <div className="mt-4 flex space-x-3">
                     <FormField
                       control={form.control}
                       name="streamDate"
@@ -263,14 +263,14 @@ const CreateLivestreamModal = ({
                     />
                   </div>
                   {isPast && (
-                    <p className="mt-1 text-destructive text-[12px]">
+                    <p className="mt-1 text-[12px] text-destructive">
                       Couldn&apos;t schedule. The date and time
                       selected are too far in the past.
                     </p>
                   )}
                   {isMultiDate && (
                     <>
-                      <div className="flex mt-4 space-x-3">
+                      <div className="mt-4 flex space-x-3">
                         <FormField
                           control={form.control}
                           name="streamEndDate"
@@ -309,7 +309,7 @@ const CreateLivestreamModal = ({
                         />
                       </div>
                       {validateEndDate && (
-                        <p className="mt-1 text-destructive text-[12px]">
+                        <p className="mt-1 text-[12px] text-destructive">
                           Couldn&apos;t schedule. End date and time
                           selected are too far in the past.
                         </p>

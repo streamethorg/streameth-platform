@@ -28,8 +28,8 @@ import LibraryGridLayout from './components/LibraryGridLayout'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
-    <div className="flex flex-col space-y-4 w-full h-full bg-white">
-      <Card className="p-4 shadow-none lg:border-none bg-secondary">
+    <div className="flex h-full w-full flex-col space-y-4 bg-white">
+      <Card className="bg-secondary p-4 shadow-none lg:border-none">
         <CardHeader>
           <CardTitle>Video library</CardTitle>
           <CardDescription>
@@ -40,7 +40,7 @@ const Loading = ({ layout }: { layout: string }) => {
         <CardFooter></CardFooter>
       </Card>
       {eLayout.grid === layout && (
-        <div className="grid grid-cols-4 gap-4 m-5">
+        <div className="m-5 grid grid-cols-4 gap-4">
           {Array.from({ length: 6 }).map((_, index) => (
             <VideoCardSkeleton key={index} />
           ))}
@@ -90,15 +90,15 @@ const Library = async ({
   ) as unknown as IExtendedSession[]
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex h-full w-full flex-col">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/nftBg.svg)`,
         }}
-        className="text-white bg-black bg-cover border-none shadow-none rounded-none w-full">
+        className="w-full rounded-none border-none bg-black bg-cover text-white shadow-none">
         <CardHeader>
           <CardTitle>Video library</CardTitle>
-          <CardDescription className='text-white'>
+          <CardDescription className="text-white">
             Manage you clips and livestream recordings or upload a new
             video.
           </CardDescription>

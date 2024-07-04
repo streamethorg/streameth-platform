@@ -50,16 +50,16 @@ const EditSession = async ({
   if (!video) return notFound()
 
   return (
-    <div className="p-4 h-full overflow-auto">
+    <div className="h-full overflow-auto p-4">
       <Link href={`/studio/${params.organization}/library`}>
-        <div className="flex justify-start items-center mb-4 space-x-4">
+        <div className="mb-4 flex items-center justify-start space-x-4">
           <ArrowLeft />
           <p>Back to library</p>
         </div>
       </Link>
 
-      <div className="flex flex-col md:flex-row gap-4 overflow-auto">
-        <div className="p-4 space-y-4 md:w-2/3 bg-white rounded-xl border">
+      <div className="flex flex-col gap-4 overflow-auto md:flex-row">
+        <div className="space-y-4 rounded-xl border bg-white p-4 md:w-2/3">
           <h1 className="text-lg font-bold">Video Details</h1>
           <EditSessionForm
             session={session}
@@ -96,14 +96,14 @@ const EditSession = async ({
             </AccordionItem>
 
             <AccordionItem
-              className="bg-white rounded-xl border px-4"
+              className="rounded-xl border bg-white px-4"
               value="publishVideo"
               defaultChecked>
               <AccordionTrigger>
                 <h1 className="text-lg font-bold">Publish video</h1>
               </AccordionTrigger>
               <AccordionContent>
-                <div className="gap-2 flex flex-wrap">
+                <div className="flex flex-wrap gap-2">
                   <div className="min-w-[200px]">
                     <GetHashButton session={session} />
                   </div>
@@ -114,7 +114,7 @@ const EditSession = async ({
                     sessionId={session._id}
                     hasChannel={searchParams?.hasChannel}
                   />
-                  <Button className="bg-[#121212] min-w-[200px]">
+                  <Button className="min-w-[200px] bg-[#121212]">
                     <SiTwitter className="mr-2" /> Publish to
                     X(Twitter) (Coming Soon)
                   </Button>
@@ -123,12 +123,12 @@ const EditSession = async ({
             </AccordionItem>
 
             <AccordionItem
-              className="bg-white rounded-xl border px-4"
+              className="rounded-xl border bg-white px-4"
               value="videoData">
               <AccordionTrigger>
                 <h1 className="text-lg font-bold">Video data</h1>
               </AccordionTrigger>
-              <AccordionContent className="space-y-4 ">
+              <AccordionContent className="space-y-4">
                 {session.playbackId && (
                   <div>
                     <Label>Playback Id</Label>

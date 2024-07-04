@@ -7,9 +7,8 @@ test.beforeEach(async ({ page }) => {
 })
 
 async function generatePrivyJWT() {
-  const { publicKey, privateKey } = await jose.generateKeyPair(
-    'ES256'
-  )
+  const { publicKey, privateKey } =
+    await jose.generateKeyPair('ES256')
 
   console.log(process.env.PRIVY_APP_ID)
 

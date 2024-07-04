@@ -18,9 +18,9 @@ const VideoDownload = async ({ assetId }: { assetId: string }) => {
       href={asset.downloadUrl}
       download={asset.name}
       target="_blank"
-      className="flex justify-center items-center">
+      className="flex items-center justify-center">
       <Button className="bg-white" variant="outline">
-        <Download size={24} className="p-1 cursor-pointer" />
+        <Download size={24} className="cursor-pointer p-1" />
         Download
       </Button>
     </a>
