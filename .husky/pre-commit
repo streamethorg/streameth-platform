@@ -1,4 +1,6 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/usr/bin/env bash
 
+yarn prettier:check
 yarn lint-staged --verbose
+
+exit 1
