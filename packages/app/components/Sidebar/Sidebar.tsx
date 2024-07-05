@@ -5,6 +5,7 @@ import { useContext, createContext, useState, ReactNode } from 'react'
 import Logo from '@/public/logo.png'
 import LogoDark from '@/public/logo_dark.png'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const SidebarContext = createContext<
   { expanded: boolean } | undefined
@@ -46,8 +47,7 @@ export const SidebarUI = ({
       </SidebarContext.Provider>
       <button
         onClick={() => setExpanded((curr) => !curr)}
-        className="p-1.5 text-black mx-auto mb-4">
-
+        className="mx-auto mb-4 p-1.5 text-black">
         {expanded ? (
           <span className="flex w-full flex-row">
             <ChevronFirst />
@@ -109,28 +109,16 @@ export const SidebarItem = ({
   return (
     <li
       onClick={handleClick}
-      className={`
-        relative flex items-center py-2
-        font-medium rounded-md cursor-pointer
-        transition-colors group hover:border hover:border-primary hover:rounded-xl
-        ${active && !isExternal ? 'border border-primary rounded-xl' : 'border border-white'}
-        ${expanded ? 'px-2' : 'justify-center'}
-      `}>
+      className={`group relative flex cursor-pointer items-center rounded-md py-2 font-medium transition-colors hover:rounded-xl hover:border hover:border-primary ${active && !isExternal ? 'rounded-xl border border-primary' : 'border border-white'} ${expanded ? 'px-2' : 'justify-center'} `}>
       {icon}
       <span
-        className={`overflow-hidden transition-all text-sm ${expanded ? 'ml-3' : 'hidden'}`}>
+        className={`overflow-hidden text-sm transition-all ${expanded ? 'ml-3' : 'hidden'}`}>
         {text}
       </span>
 
       {!expanded && (
         <div
-          className={`
-            absolute left-full rounded-md px-2 py-1 ml-4
-            z-[9999]
-            bg-primary text-sm text-white
-            invisible opacity-20 -translate-x-3 transition-all
-            group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-          `}>
+          className={`invisible absolute left-full z-[9999] ml-4 -translate-x-3 rounded-md bg-primary px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}>
           {text}
         </div>
       )}
