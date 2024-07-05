@@ -57,25 +57,6 @@ export const SidebarUI = ({
           <ChevronLast />
         )}
       </button>
-      <Link
-        className="group relative mx-auto mb-8 flex w-full items-center justify-center space-x-2 rounded-lg p-2 text-black transition-colors"
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
-        <BookOpenText className="h-6 w-6" />
-        <span
-          className={`overflow-hidden transition-all ${
-            expanded ? '' : 'w-0'
-          }`}>
-          Docs
-        </span>
-        {!expanded && (
-          <div
-            className={`invisible absolute left-full ml-2 -translate-x-3 rounded-md bg-primary px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}>
-            Docs
-          </div>
-        )}
-      </Link>
     </aside>
   )
 }
