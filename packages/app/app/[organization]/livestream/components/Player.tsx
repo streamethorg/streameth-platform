@@ -9,15 +9,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 
 const Player = async ({ stage }: { stage: IExtendedStage }) => {
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  })
-
-  const stream = (
-    await livepeer.stream.get(stage.streamSettings?.streamId ?? '')
-  ).stream
-
-  if (!stream || !stream.playbackId) {
+  if (!stage || !stage.streamSettings?.playbackId) {
     return notFound()
   }
 
@@ -42,10 +34,12 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
       ) : (
         <div className="relative h-full w-full">
           <PlayerWithControls
+            thumbnail={stage.thumbnail}
+            name={stage.name}
             src={[
               {
                 src: buildPlaybackUrl(
-                  stream.playbackId
+                  stage.streamSettings.playbackId
                 ) as `${string} m3u8`,
                 width: 1920,
                 height: 1080,

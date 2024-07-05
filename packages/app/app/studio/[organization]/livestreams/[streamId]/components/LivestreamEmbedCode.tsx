@@ -15,7 +15,6 @@ import { Code2, Copy } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 const LivestreamEmbedCode = ({
-  playbackId,
   streamId,
   playerName,
 }: IGenerateEmbed) => {
@@ -28,9 +27,8 @@ const LivestreamEmbedCode = ({
   }, [])
   const generatedEmbedCode = generateEmbedCode({
     url: url,
-    playbackId: playbackId,
     vod: false,
-    streamId: streamId,
+    stageId: streamId,
     playerName: playerName,
   })
   return (

@@ -85,7 +85,7 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="sticky top-0 z-50 flex flex-row items-center bg-white lg:hidden">
+    <NavigationMenu className="flex sticky top-0 z-[9999] flex-row items-center bg-white lg:hidden">
       {(searchVisible || menuVisible) && (
         <div className="absolute left-0 top-0 h-[100vh] w-[100vw] bg-black bg-opacity-50" />
       )}
@@ -171,8 +171,8 @@ const PCNavBar = ({
   const pathname = usePathname()
   const isStudio = pathname.includes('studio')
   return (
-    <NavigationMenu className="sticky top-0 hidden w-full flex-row items-center justify-between bg-white p-2 px-4 shadow-sm md:hidden lg:flex">
-      <div className="flex flex-1 items-center justify-start">
+    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex z-[30]">
+      <div className="flex flex-1 justify-start items-center">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>
             <Image
