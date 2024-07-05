@@ -13,7 +13,7 @@ const SessionOptions = ({
 }: {
   name: string
   playbackId: string
-  assetId: string
+  assetId?: string
   organizationSlug: string
   sessionId: string
 }) => {
@@ -27,7 +27,7 @@ const SessionOptions = ({
       />
       <EmbedButton
         className="w-full"
-        playbackId={playbackId}
+        sessionId={sessionId}
         playerName={name}
         vod
       />

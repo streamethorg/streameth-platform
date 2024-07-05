@@ -18,8 +18,17 @@ export const EmbedModalContent: React.FC<{
   playbackId?: string
   streamId?: string
   playerName: string
+  sessionId?: string
+  stageId?: string
   vod?: boolean
-}> = ({ playbackId, streamId, playerName, vod }) => {
+}> = ({
+  playbackId,
+  streamId,
+  playerName,
+  vod,
+  sessionId,
+  stageId,
+}) => {
   const [copied, setCopied] = useState(false)
   const copiedClass = copied ? 'opacity-100' : 'opacity-0'
   const [url, setUrl] = useState('')
@@ -36,6 +45,8 @@ export const EmbedModalContent: React.FC<{
   const generatedEmbedCode = generateEmbedCode({
     url,
     playbackId,
+    sessionId,
+    stageId,
     vod,
     streamId,
     playerName,
@@ -74,12 +85,16 @@ function EmbedButton({
   playerName,
   vod,
   className,
+  sessionId,
+  stageId,
 }: {
   playbackId?: string
   streamId?: string
   playerName: string
   vod?: boolean
   className?: string
+  sessionId?: string
+  stageId?: string
 }) {
   return (
     <Credenza>
@@ -94,6 +109,8 @@ function EmbedButton({
         playbackId={playbackId}
         streamId={streamId}
         playerName={playerName}
+        sessionId={sessionId}
+        stageId={stageId}
       />
     </Credenza>
   )

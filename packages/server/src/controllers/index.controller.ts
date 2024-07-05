@@ -98,14 +98,14 @@ export class IndexController extends Controller {
     if (!session) {
       return SendApiResponse('No session found', null, '400');
     }
-    const ipfs = await uploadToIpfs(id);
+    // const ipfs = await uploadToIpfs(id);
     await this.sessionService.update(session._id.toString(), {
-      ipfsURI: ipfs,
+      // ipfsURI: ipfs,
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
     } as any);
 
-    if (session.firebaseId) {
+    if (session.firebaseId && asset.playbackUrl) {
       await updateEventVideoById(session.firebaseId, {
         url: asset.playbackUrl,
         mp4Url: await getDownloadUrl(asset.id),
