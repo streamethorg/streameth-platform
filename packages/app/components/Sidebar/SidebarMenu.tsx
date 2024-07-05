@@ -19,40 +19,39 @@ const SidebarMenu = ({
   const navigationItems = [
     {
       text: 'Home',
-      navigationPath: '',
+      url: `/studio/${organizationSlug}`,
       icon: <LuHome size={25} />,
     },
     {
       text: 'Library',
-      navigationPath: '/library',
+      url: `/studio/${organizationSlug}/library`,
       icon: <LuVideotape size={25} />,
     },
     {
       text: 'Destinations',
-      navigationPath: '/destinations',
+      url: `/studio/${organizationSlug}/destinations`,
       icon: <LuShare2 size={25} />,
     },
     {
       text: 'NFTs',
-      navigationPath: '/nfts',
+      url: `/studio/${organizationSlug}/nfts`,
       icon: <LuLock size={25} />,
     },
     {
       text: 'Team',
-      navigationPath: '/team',
+      url: `/studio/${organizationSlug}/team`,
       icon: <LuUsers size={25} />,
     },
     {
       text: 'Settings',
-      navigationPath: `/settings`,
+      url: `/studio/${organizationSlug}/settings`,
       icon: <LuSettings size={25} />,
     },
     {
       text: 'Docs',
-      navigationPath: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
+      url: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
       icon: <LuBookOpen size={25} />,
-      isExternal: true
-    }
+    },
   ]
 
   return (
@@ -61,10 +60,9 @@ const SidebarMenu = ({
         {navigationItems.map((item, index) => (
           <SidebarItem
             key={index}
-            navigationPath={item.isExternal ? item.navigationPath : `/studio/${organizationSlug}${item.navigationPath}`}
+            url={item.url}
             text={item.text}
             icon={item.icon}
-            isExternal={item.isExternal}
           />
         ))}
       </SidebarUI>

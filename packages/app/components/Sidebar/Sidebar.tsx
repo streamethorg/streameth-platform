@@ -23,8 +23,9 @@ export const SidebarUI = ({
     <aside className="flex flex-col h-screen bg-white border-r">
       <div className="flex justify-between items-center p-4">
         <div
-          className={`flex items-center overflow-hidden transition-all ${expanded ? 'w-40' : 'w-10'
-            }`}>
+          className={`flex items-center overflow-hidden transition-all ${
+            expanded ? 'w-40' : 'w-10'
+          }`}>
           <div className="transition-all">
             {expanded ? (
               <Image
@@ -41,9 +42,7 @@ export const SidebarUI = ({
       </div>
 
       <SidebarContext.Provider value={{ expanded }}>
-        <ul className="flex-1 px-3 space-y-4">
-          {children}
-        </ul>
+        <ul className="flex-1 px-3 space-y-4">{children}</ul>
       </SidebarContext.Provider>
       <button
         onClick={() => setExpanded((curr) => !curr)}
@@ -64,26 +63,26 @@ export const SidebarUI = ({
 export const SidebarItem = ({
   icon,
   text,
-  navigationPath,
-  isExternal = false
+  url,
 }: {
   icon: ReactNode
   text: string
-  navigationPath: string
-  isExternal?: boolean
+  url: string
 }) => {
   const router = useRouter()
   const pathname = usePathname()
-  const active = pathname === navigationPath
+  const active = pathname === url
   const { expanded } = useContext(SidebarContext) ?? {
     expanded: true,
   }
 
+  const isExternal = url.startsWith('http') || url.startsWith('https')
+
   const handleClick = () => {
     if (isExternal) {
-      window.open(navigationPath, '_blank', 'noopener,noreferrer')
+      window.open(url, '_blank', 'noopener,noreferrer')
     } else {
-      router.push(navigationPath)
+      router.push(url)
     }
   }
 
@@ -96,12 +95,10 @@ export const SidebarItem = ({
         transition-colors group hover:border hover:border-primary hover:rounded-xl
         ${active && !isExternal ? 'border border-primary rounded-xl' : 'border border-white'}
         ${expanded ? 'px-2' : 'justify-center'}
-      `}
-    >
+      `}>
       {icon}
       <span
-        className={`overflow-hidden transition-all text-sm ${expanded ? 'ml-3' : 'hidden'}`}
-      >
+        className={`overflow-hidden transition-all text-sm ${expanded ? 'ml-3' : 'hidden'}`}>
         {text}
       </span>
 
@@ -113,8 +110,7 @@ export const SidebarItem = ({
             bg-primary text-sm text-white
             invisible opacity-20 -translate-x-3 transition-all
             group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-          `}
-        >
+          `}>
           {text}
         </div>
       )}
