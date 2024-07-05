@@ -18,10 +18,16 @@ import React from 'react';
 import { useRef, useEffect } from 'react';
 // @ts-ignore
 import mux from 'mux-embed';
-
+import Image from 'next/image';
 import { Src } from '@livepeer/react';
+import LogoDark from '@/public/logo_dark.png';
+import Link from 'next/link';
 
-export function PlayerWithControls(props: { src: Src[] | null }) {
+export function PlayerWithControls(props: {
+  src: Src[] | null;
+  name?: string;
+  thumbnail?: string;
+}) {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -32,7 +38,7 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
         debug: false,
         data: {
           env_key: '1lgdh87bv14j6bhv83buspkj3',
-          player_name: 'Main Player', // Arbitrary string to identify the player
+          player_name: 'Main Player',
           player_init_time: initTime,
           // Add other metadata fields here
         },
@@ -55,14 +61,41 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
         <Player.Video
           ref={videoRef}
           id={`player-${props.src[0].src}`}
-          title="Live stream"
+          title={props.name ?? 'video'}
           className={cn('h-full w-full transition')}
         />
-
+        {/* <Player.PlayingIndicator asChild matcher={false}>
+          <div className="shadow border flex flex-col items-center justify-center bg-white rounded-xl h-[60px] absolute top-0 bottom-0 py-0 p-2 m-2">
+            <span className="text-xs">Powered by</span>
+            <Image
+              src={LogoDark}
+              width={140}
+              height={60}
+              className=""
+              alt="StreamETH Logo"
+            />
+          </div>
+        </Player.PlayingIndicator> */}
+        <Player.PlayingIndicator asChild matcher={false}>
+          {props.thumbnail && (
+            <Image
+              src={props.thumbnail}
+              alt={props.name ?? 'image'}
+              layout="fill"
+            />
+          )}
+        </Player.PlayingIndicator>
         <Player.LoadingIndicator className="relative h-full w-full bg-black/50 backdrop-blur data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <LoadingIcon className="h-8 w-8 animate-spin" />
           </div>
+          {props.thumbnail && (
+            <Image
+              src={props.thumbnail}
+              alt={props.name ?? 'image'}
+              layout="fill"
+            />
+          )}
           <PlayerLoading />
         </Player.LoadingIndicator>
 
@@ -148,7 +181,32 @@ export function PlayerWithControls(props: { src: Src[] | null }) {
                 <Player.Thumb className="block h-3 w-3 rounded-full bg-white text-white transition group-hover:scale-110" />
               </Player.Volume>
             </div>
+
             <div className="flex items-center justify-end gap-2.5 sm:flex-1 md:flex-[1.5]">
+              <Link
+                href={'https://streameth.org'}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div className="hidden flex-row items-center justify-center space-x-2 rounded-xl border bg-white p-1 shadow md:flex">
+                  <Image
+                    src={LogoDark}
+                    width={120}
+                    height={23}
+                    className=""
+                    alt="StreamETH Logo"
+                  />
+                </div>
+                <div className="flex flex-row items-center justify-center space-x-2 rounded border bg-white p-[0.8px] shadow md:hidden">
+                  <Image
+                    src={LogoDark}
+                    width={80}
+                    height={13}
+                    className=""
+                    alt="StreamETH Logo"
+                  />
+                </div>
+              </Link>
               <Player.FullscreenIndicator matcher={false} asChild>
                 <Settings className="h-6 w-6 flex-shrink-0 text-white transition" />
               </Player.FullscreenIndicator>

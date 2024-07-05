@@ -152,14 +152,13 @@ export const createAssetAction = async ({ fileName }: { fileName: string }) => {
   }
 };
 
-export const generateThumbnailAction = async (session: IExtendedSession) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
+export const generateThumbnailAction = async (
+  session: IExtendedSession
+) => {
+
 
   try {
-    const res = await generateThumbnail({ session, authToken });
+    const res = await generateThumbnail({ session })
 
     return res;
   } catch (e) {

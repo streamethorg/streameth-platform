@@ -166,7 +166,7 @@ export interface IExtendedStage extends Omit<IStage, '_id' | 'nftCollections'> {
   updatedAt?: string;
   __v?: string;
 }
-export interface IExtendedSpeaker extends Omit<ISpeaker, 'organizationId'> {}
+export interface IExtendedSpeaker extends Omit<ISpeaker, 'organizationId'> { }
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
   _id: string;
   organizations: IExtendedOrganization[];
@@ -188,9 +188,11 @@ export interface IExtendedNftCollections extends Omit<INftCollection, '_id'> {
 
 export interface EmbedPageParams {
   searchParams: {
-    vod: string;
-    playbackId: string;
-  };
+    vod: string
+    playbackId?: string
+    stage?: string
+    session?: string
+  }
 }
 
 export interface LivestreamPageParams {
@@ -202,10 +204,12 @@ export interface LivestreamPageParams {
 }
 
 export interface IGenerateEmbed {
-  playbackId?: string;
-  vod?: boolean;
-  streamId?: string;
-  playerName: string;
+  playbackId?: string
+  vod?: boolean
+  streamId?: string
+  playerName: string
+  sessionId?: string
+  stageId?: string
 }
 
 export interface IGenerateEmbedCode extends IGenerateEmbed {

@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/accordion';
 import UploadToYoutubeButton from './components/UploadToYoutubeButton';
 import { fetchOrganization } from '@/lib/services/organizationService';
+import { getVideoUrlAction } from '@/lib/actions/livepeer';
 
 const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
@@ -31,18 +32,9 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  });
+  if (!session || (!session.playbackId && !session.assetId)) return notFound();
 
-  if (!session || !session.assetId) {
-    return notFound();
-  }
-
-  const video = (await livepeer.asset.get(session.assetId)).asset;
-
-  if (!video) return notFound();
-
+  const videoUrl = await getVideoUrlAction(session.assetId, session.playbackId);
   return (
     <div className="h-full overflow-auto p-4">
       <Link href={`/studio/${params.organization}/library`}>
@@ -64,7 +56,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
           <PlayerWithControls
             src={[
               {
-                src: video.playbackUrl as `${string}m3u8`,
+                src: videoUrl as `${string}m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
@@ -81,10 +73,10 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
             <AccordionItem defaultChecked value="menu">
               <AccordionContent>
                 <SessionOptions
-                  name={video.name}
+                  name={session.name}
                   sessionId={params.session}
                   organizationSlug={params.organization}
-                  playbackId={video.playbackId!}
+                  playbackId={session.playbackId!}
                   assetId={session.assetId}
                 />
               </AccordionContent>
