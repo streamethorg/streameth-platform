@@ -13,16 +13,16 @@ const CopyText = ({
 }) => (
   <div
     style={{ width: width }}
-    className="flex justify-between overflow-hidden items-center pr-2 bg-muted rounded-lg">
-    <div className="flex gap-1 items-center text-muted-foreground">
-      <div className="border-r border-red p-2 text-sm">
+    className="flex items-center justify-between overflow-hidden rounded-lg bg-muted pr-2">
+    <div className="flex items-center gap-1 text-muted-foreground">
+      <div className="border-red border-r p-2 text-sm">
         <p>{label}</p>
       </div>
-      <p className="text-sm overflow-auto">{text}</p>
+      <p className="overflow-auto text-sm">{text}</p>
     </div>
     <Copy
       onClick={() => copyToClipboard(text)}
-      className="text-primary w-5 h-5 cursor-pointer"
+      className="h-5 w-5 cursor-pointer text-primary"
     />
   </div>
 )

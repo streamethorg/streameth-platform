@@ -40,7 +40,7 @@ export default function SpeakerIcon({
     <Credenza>
       <SpeakerModal speaker={speaker} />
       <CredenzaTrigger>
-        <Badge className="z-50 border bg-background text-primary border-secondary">
+        <Badge className="z-50 border border-secondary bg-background text-primary">
           <Avatar className="my-1">
             <AvatarImage src={speaker?.photo} />
             <AvatarFallback className="">

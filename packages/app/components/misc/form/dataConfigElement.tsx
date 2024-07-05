@@ -93,7 +93,7 @@ const DataConfigElement = ({
   }
 
   return (
-    <div className="space-y-4 flex flex-col">
+    <div className="flex flex-col space-y-4">
       <Select
         defaultValue={initialProvider}
         onValueChange={handleProviderChange}>
@@ -116,17 +116,17 @@ const DataConfigElement = ({
       </Select>
 
       {selectedProvider === 'gsheet' && (
-        <div className="flex flex-row w-full">
+        <div className="flex w-full flex-row">
           <Input
             name="sheetId"
-            className=" rounded-r-none"
+            className="rounded-r-none"
             value={(config as GSheetConfig)?.sheetId || ''}
             onChange={handleConfigChange}
             placeholder="Sheet ID"
           />
           <Button
             variant={'secondary'}
-            className="border-l-0 border-t border-b border-r rounded-l-none"
+            className="rounded-l-none border-b border-l-0 border-r border-t"
             loading={isLoading}
             disabled={
               config.sheetId !== undefined && config.sheetId !== ''

@@ -37,7 +37,7 @@ const LivestreamEmbedCode = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="flex gap-1">
-          <Code2 className="w-4 h-4" /> <p>Copy Embed Code</p>
+          <Code2 className="h-4 w-4" /> <p>Copy Embed Code</p>
         </Button>
       </DialogTrigger>
       <DialogContent className="w-[450px]">
@@ -47,16 +47,16 @@ const LivestreamEmbedCode = ({
             Paste this code into your HTML file
           </DialogDescription>
         </DialogHeader>
-        <div className="flex p-2 rounded-lg bg-input justify-between items-center text-[12px]">
+        <div className="flex items-center justify-between rounded-lg bg-input p-2 text-[12px]">
           <p>HTML</p>
           <div
             onClick={() => copyToClipboard(generatedEmbedCode)}
-            className="flex gap-2 cursor-pointer">
-            <Copy className="text-muted-foreground w-4 h-4" />
+            className="flex cursor-pointer gap-2">
+            <Copy className="h-4 w-4 text-muted-foreground" />
             Copy Code
           </div>
         </div>
-        <p className="rounded-lg bg-input p-2 w-full text-[12px] overflow-auto">
+        <p className="w-full overflow-auto rounded-lg bg-input p-2 text-[12px]">
           {generatedEmbedCode}
         </p>
       </DialogContent>

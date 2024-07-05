@@ -38,10 +38,10 @@ const Navigation = ({
   return (
     <div
       className={cn(
-        'overflow-auto w-2/6 bg-white min-w-[400px] h-full border-r border-border flex flex-col text-black'
+        'flex h-full w-2/6 min-w-[400px] flex-col overflow-auto border-r border-border bg-white text-black'
       )}>
-      <div className="flex flex-row justify-between items-center p-2 border-b border-border">
-        <h3 className="mt-4 mb-2 text-2xl font-bold">
+      <div className="flex flex-row items-center justify-between border-b border-border p-2">
+        <h3 className="mb-2 mt-4 text-2xl font-bold">
           Event settings
         </h3>
         <Button
@@ -51,8 +51,8 @@ const Navigation = ({
         </Button>
       </div>
       <EventAccordion organizationId={organizationId} event={event} />
-      <div className="flex flex-row justify-between items-center p-2 border-b border-border">
-        <h3 className="mt-4 mb-2 text-2xl font-bold">Livestreams</h3>
+      <div className="flex flex-row items-center justify-between border-b border-border p-2">
+        <h3 className="mb-2 mt-4 text-2xl font-bold">Livestreams</h3>
         {stages.length > 0 && <CreateStageForm event={event} />}
       </div>
       {stages.length > 0 ? (
@@ -62,14 +62,14 @@ const Navigation = ({
           stages={stages}
         />
       ) : (
-        <div className="flex flex-row justify-between items-center p-2 border-b border-border">
+        <div className="flex flex-row items-center justify-between border-b border-border p-2">
           <div className="text-sm">
             No livestreams yet. Create one to get started.
           </div>
           <CreateStageForm event={event} />
         </div>
       )}
-      <div className="flex flex-row justify-between items-center p-2 mt-auto">
+      <div className="mt-auto flex flex-row items-center justify-between p-2">
         <Link
           href={`/studio/${organizationId}/event`}
           className="flex flex-row p-2 hover:underline">

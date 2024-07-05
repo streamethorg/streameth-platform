@@ -14,7 +14,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <span className="text-sm ">Date</span>
+      <span className="text-sm">Date</span>
       <Select
         defaultValue={searchParams.get('date') || dates[0].toString()}
         onValueChange={(value) =>
@@ -25,10 +25,10 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
             },
           ])
         }>
-        <SelectTrigger className=" rounded-lg border bg-white">
+        <SelectTrigger className="rounded-lg border bg-white">
           <SelectValue placeholder="Date select" />
         </SelectTrigger>
-        <SelectContent className="bg-white rounded-lg border-white border-opacity-10">
+        <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
           {dates.map((dateNum) => (
             <SelectItem key={dateNum} value={dateNum.toString()}>
               {new Date(dateNum).toDateString()}

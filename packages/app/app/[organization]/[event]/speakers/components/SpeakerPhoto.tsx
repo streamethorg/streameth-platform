@@ -33,7 +33,7 @@ const SpeakerPhoto = ({
   }
 
   return (
-    <div className={` relative ${sizeString}`}>
+    <div className={`relative ${sizeString}`}>
       <Image
         className="rounded"
         src={

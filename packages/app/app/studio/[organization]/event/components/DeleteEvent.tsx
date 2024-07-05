@@ -39,7 +39,7 @@ const DeleteAsset = ({
       <DialogTrigger asChild>{TriggerComponent}</DialogTrigger>
       <DialogContent className="p-10 sm:max-w-[475px]">
         <DialogHeader className="mx-auto space-y-4">
-          <div className="p-4 mx-auto bg-red-500 rounded-full">
+          <div className="mx-auto rounded-full bg-red-500 p-4">
             <Trash2 className="text-white" />
           </div>
           <DialogTitle>Are you sure you want to delete?</DialogTitle>

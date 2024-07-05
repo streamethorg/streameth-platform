@@ -21,7 +21,7 @@ function SubmitButton() {
   if (pending) {
     return (
       <Button disabled>
-        <ReloadIcon className="mr-2 w-4 h-4 animate-spin" />
+        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
         Please wait
       </Button>
     )
@@ -61,7 +61,7 @@ const CreateCustomStream = ({
 
   return (
     <form action={formAction} className="grid gap-4">
-      <div className="grid grid-cols-4 gap-4 items-center">
+      <div className="grid grid-cols-4 items-center gap-4">
         <Input type="hidden" name="streamId" value={streamId} />
         <Input
           type="hidden"
@@ -78,7 +78,7 @@ const CreateCustomStream = ({
           placeholder="e.g. streaming.tv"
         />
       </div>
-      <div className="grid grid-cols-4 gap-4 items-center">
+      <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="url" className="text-right">
           Ingest URL
         </Label>
@@ -89,7 +89,7 @@ const CreateCustomStream = ({
           placeholder="e.g. rtmp://streaming.tv/live"
         />
       </div>
-      <div className="grid grid-cols-4 gap-4 items-center">
+      <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="streamKey" className="text-right">
           Stream key
         </Label>

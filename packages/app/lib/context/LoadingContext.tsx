@@ -27,16 +27,16 @@ export const LoadingContextProvider = ({
 const LoadingModal = ({ isLoading }: { isLoading: boolean }) => {
   if (isLoading) {
     return (
-      <div className="fixed inset-0 z-[9999999999999999999] bg-white flex flex-col space-y-2 justify-center items-center">
+      <div className="fixed inset-0 z-[9999999999999999999] flex flex-col items-center justify-center space-y-2 bg-white">
         {/* <div className="w-20 h-20 border-4 border-black rounded-full animate-spin"></div> */}
         <Image
           src="/logo.png"
           alt="Streameth logo"
           width={100}
           height={100}
-          className=" animate-pulse"
+          className="animate-pulse"
         />
-        <p className="text-xl font-bold animate-pulse">Loading...</p>
+        <p className="animate-pulse text-xl font-bold">Loading...</p>
       </div>
     )
   }

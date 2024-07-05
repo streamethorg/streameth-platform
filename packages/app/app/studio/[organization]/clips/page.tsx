@@ -34,19 +34,19 @@ const ClipContainer = ({
 }: {
   children: React.ReactNode
 }) => (
-  <div className="w-full h-full">
-    <div className="flex flex-row mx-auto w-full h-full">
+  <div className="h-full w-full">
+    <div className="mx-auto flex h-full w-full flex-row">
       {children}
     </div>
   </div>
 )
 
 const SkeletonSidebar = () => (
-  <div className="w-1/3 flex flex-col h-full bg-background bg-white border-l">
-    <div className="h-[calc(100%-50px)] overflow-y-clip space-y-4">
+  <div className="flex h-full w-1/3 flex-col border-l bg-background bg-white">
+    <div className="h-[calc(100%-50px)] space-y-4 overflow-y-clip">
       {[1, 2, 3, 4, 5].map((i) => (
-        <div key={i} className="p-4 animate-pulse">
-          <div className="p-4 w-full bg-gray-200 rounded aspect-video"></div>
+        <div key={i} className="animate-pulse p-4">
+          <div className="aspect-video w-full rounded bg-gray-200 p-4"></div>
         </div>
       ))}
     </div>
@@ -68,8 +68,8 @@ const SessionSidebar = async ({
   }
 }) => {
   return (
-    <div className="w-[300px] h-full bg-background bg-white border-l">
-      <CardTitle className="bg-white p-2 border-b text-lg">
+    <div className="h-full w-[300px] border-l bg-background bg-white">
+      <CardTitle className="border-b bg-white p-2 text-lg">
         <RecordingSelect
           selectedRecording={currentRecording ?? undefined}
           streamRecordings={recordings.recordings}
@@ -102,11 +102,11 @@ const EventClips = async ({
   if (stages.length === 0) {
     return (
       <ClipContainer>
-        <div className="flex flex-col items-center p-4 mx-auto mb-auto space-y-4 w-full h-auto max-w-[500px]">
-          <div className="flex flex-col justify-center items-center p-4 mx-auto mb-auto space-y-4 w-full h-full text-center bg-white rounded-lg border max-w-[500px] bg-background">
-            <Film className="p-4 rounded-lg" size={84} />
+        <div className="mx-auto mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4">
+          <div className="mx-auto mb-auto flex h-full w-full max-w-[500px] flex-col items-center justify-center space-y-4 rounded-lg border bg-background bg-white p-4 text-center">
+            <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
-            <p className="text-sm text-foreground-muted">
+            <p className="text-foreground-muted text-sm">
               You dont have any stages to clip from, first create a
               livestream to get started
             </p>
@@ -126,12 +126,12 @@ const EventClips = async ({
   if (!currentStage) {
     return (
       <ClipContainer>
-        <div className="flex flex-col items-center p-4 mx-auto mb-auto space-y-4 w-full h-auto max-w-[500px]">
+        <div className="mx-auto mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4">
           <SelectSession stages={stages} currentStageId={stage} />
-          <div className="flex flex-col justify-center items-center p-4 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
-            <Film className="p-4 rounded-lg" size={84} />
+          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-4 text-center">
+            <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
-            <p className="text-sm text-foreground-muted">
+            <p className="text-foreground-muted text-sm">
               Please select a livestream that has a recordings from
               the dropdown above
             </p>
@@ -168,12 +168,12 @@ const EventClips = async ({
   ) {
     return (
       <ClipContainer>
-        <div className="flex flex-col p-4 mx-auto mb-auto space-y-4 w-full max-w-[500px]">
+        <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
           <SelectSession stages={stages} currentStageId={stage} />
-          <div className="flex flex-col justify-center items-center p-8 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
-            <Film className="p-4 rounded-lg" size={84} />
+          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-8 text-center">
+            <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">No recordings</p>
-            <p className="text-sm text-foreground-muted">
+            <p className="text-foreground-muted text-sm">
               This stream does not have any recordings, go live and
               come back to clip to clip your livestream
             </p>
@@ -189,15 +189,15 @@ const EventClips = async ({
   if (!currentRecording) {
     return (
       <ClipContainer>
-        <div className="flex flex-col p-4 mx-auto mb-auto space-y-4 w-full max-w-[500px]">
+        <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
           <SelectSession stages={stages} currentStageId={stage} />
           <RecordingSelect
             streamRecordings={stageRecordings.recordings}
           />
-          <div className="flex flex-col justify-center items-center p-4 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
-            <Film className="p-4 rounded-lg" size={84} />
+          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-4 text-center">
+            <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
-            <p className="text-sm text-foreground-muted">
+            <p className="text-foreground-muted text-sm">
               Please select a livestream recording from the dropdown
               above
             </p>
@@ -247,8 +247,8 @@ const EventClips = async ({
           organizationSlug={params.organization}
         />
       )}
-      <div className="flex flex-col w-full">
-        <div className="flex flex-col w-full h-full overflow-auto space-y-4 p-4 bg-white">
+      <div className="flex w-full flex-col">
+        <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
           <ClipProvider>
             <ReactHlsPlayer
               playbackId={
@@ -288,51 +288,51 @@ const ClipsPage = async ({
   searchParams,
 }: ClipsPageParams) => {
   const Skeleton = () => (
-    <div className="flex flex-col p-4 mx-auto mb-auto space-y-4 w-full max-w-[500px]">
+    <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
       {/* SelectSession Skeleton */}
       <div className="animate-pulse">
-        <div className="h-8 bg-gray-200 rounded"></div>
+        <div className="h-8 rounded bg-gray-200"></div>
       </div>
 
       {/* Main Content Skeleton */}
       <div className="animate-pulse">
-        <div className="flex flex-col justify-center items-center p-8 mx-auto space-y-2 w-full h-full text-center bg-white rounded-lg border bg-background">
-          <div className="p-4 w-16 h-16 bg-gray-200 rounded-lg"></div>
-          <div className="w-32 h-6 text-lg font-bold bg-gray-200 rounded"></div>
-          <div className="text-sm text-foreground-muted">
-            <div className="w-3/4 h-4 bg-gray-200 rounded"></div>
-            <div className="w-4/5 h-4 bg-gray-200 rounded"></div>
-            <div className="w-3/4 h-4 bg-gray-200 rounded"></div>
+        <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-8 text-center">
+          <div className="h-16 w-16 rounded-lg bg-gray-200 p-4"></div>
+          <div className="h-6 w-32 rounded bg-gray-200 text-lg font-bold"></div>
+          <div className="text-foreground-muted text-sm">
+            <div className="h-4 w-3/4 rounded bg-gray-200"></div>
+            <div className="h-4 w-4/5 rounded bg-gray-200"></div>
+            <div className="h-4 w-3/4 rounded bg-gray-200"></div>
           </div>
-          <div className="w-32 h-10 bg-gray-200 rounded"></div>
+          <div className="h-10 w-32 rounded bg-gray-200"></div>
         </div>
       </div>
     </div>
   )
 
   const Skeleton2 = () => (
-    <div className="flex flex-row w-full">
-      <div className="flex flex-col p-8 w-full">
-        <div className="flex flex-row justify-center my-4 space-x-4 w-full">
+    <div className="flex w-full flex-row">
+      <div className="flex w-full flex-col p-8">
+        <div className="my-4 flex w-full flex-row justify-center space-x-4">
           <div className="animate-pulse">
-            <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
+            <div className="h-8 w-full rounded-xl bg-gray-200"></div>
           </div>
           <div className="animate-pulse">
-            <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
+            <div className="h-8 w-full rounded-xl bg-gray-200"></div>
           </div>
         </div>
-        <div className="flex overflow-auto flex-col space-y-4 w-full h-full">
+        <div className="flex h-full w-full flex-col space-y-4 overflow-auto">
           <div className="animate-pulse">
-            <div className="w-full bg-gray-200 rounded aspect-video"></div>
+            <div className="aspect-video w-full rounded bg-gray-200"></div>
           </div>
           {/* Clip Control Loading State */}
           <div className="animate-pulse">
             <div className="flex flex-col space-y-4">
-              <div className="flex flex-row justify-center items-center space-x-2 w-full">
-                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
-                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
-                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
-                <div className="w-full h-8 bg-gray-200 rounded-xl"></div>
+              <div className="flex w-full flex-row items-center justify-center space-x-2">
+                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
+                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
+                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
+                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
               </div>
             </div>
           </div>

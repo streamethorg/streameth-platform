@@ -44,15 +44,15 @@ const AddMedia = ({
 
   return (
     <div>
-      <CardTitle className="text-2xl font-semibold mb-4">
+      <CardTitle className="mb-4 text-2xl font-semibold">
         Add Media
       </CardTitle>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger className="w-full">
-          <div className="flex gap-2 items-center justify-center h-[100px] bg-muted border-dashed border p-5 w-full border-muted-foreground rounded-xl text-muted-foreground text-sm">
+          <div className="flex h-[100px] w-full items-center justify-center gap-2 rounded-xl border border-dashed border-muted-foreground bg-muted p-5 text-sm text-muted-foreground">
             <div>
-              <PlusCircle className="w-5 h-5" />
+              <PlusCircle className="h-5 w-5" />
             </div>
             Add media from your gallery, livestreams and videos.
           </div>
@@ -61,7 +61,7 @@ const AddMedia = ({
           <DialogTitle>Add Media from your library</DialogTitle>
           <div className="">
             <Tabs defaultValue={'videos'}>
-              <TabsList className="border-y border-grey w-full !justify-start gap-5">
+              <TabsList className="w-full !justify-start gap-5 border-y border-grey">
                 <TabsTrigger value="livestreams">
                   Livestreams
                 </TabsTrigger>
@@ -110,7 +110,7 @@ const AddMedia = ({
         </DialogContent>
       </Dialog>
 
-      <div className="lg:grid md:grid-cols-2 lg:grid-cols-3 gap-5 gap-x-4">
+      <div className="gap-5 gap-x-4 md:grid-cols-2 lg:grid lg:grid-cols-3">
         {formState?.selectedVideo?.map((video: IExtendedSession) => (
           <SelectedMediaItem
             handleRemoveSelected={handleRemoveSelected}
