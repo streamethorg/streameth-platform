@@ -96,21 +96,21 @@ export default function CreateEventForm({
 
   return (
     <Form {...form}>
-      <Card className="border max-w-4xl w-full relative rounded-2xl bg-white shadow-none mx-auto">
-        <CardHeader className="border-b flex flex-row justify-between items-center">
+      <Card className="relative mx-auto w-full max-w-4xl rounded-2xl border bg-white shadow-none">
+        <CardHeader className="flex flex-row items-center justify-between border-b">
           <p className="text-3xl">Create an event</p>
-          <div className="flex flex-row justify-between w-full  max-w-[300px]">
+          <div className="flex w-full max-w-[300px] flex-row justify-between">
             {[
               { stage: 0, name: 'Details' },
               { stage: 1, name: 'Design' },
               { stage: 2, name: 'Data' },
             ].map((i, index) => (
               <div
-                className="relative w-full flex flex-col"
+                className="relative flex w-full flex-col"
                 key={i.stage}>
                 <div
                   onClick={() => setStage(i.stage)}
-                  className={`text-white z-50  cursor-pointer mx-auto w-8 h-8 flex items-center justify-center rounded-full text-sm ${
+                  className={`z-50 mx-auto flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-sm text-white ${
                     stage === i.stage
                       ? 'bg-green-500'
                       : 'bg-secondary'
@@ -120,10 +120,10 @@ export default function CreateEventForm({
                 {(i.stage === 0 || i.stage === 2) && (
                   <div
                     className={`${
-                      i.stage === 2 ? 'right-0 ' : 'left-0'
-                    } z-40 absolute top-0 w-1/2 h-full bg-white`}></div>
+                      i.stage === 2 ? 'right-0' : 'left-0'
+                    } absolute top-0 z-40 h-full w-1/2 bg-white`}></div>
                 )}
-                <hr className="z-[0] top-[15px] w-full  bg-black absolute" />
+                <hr className="absolute top-[15px] z-[0] w-full bg-black" />
                 <p
                   className={`z-50 mx-auto ${
                     stage === i.stage ? 'text-black' : 'text-muted'
@@ -180,7 +180,7 @@ export default function CreateEventForm({
                   </FormItem>
                 )}
               />
-              <div className="flex flex-row space-x-4 w-full">
+              <div className="flex w-full flex-row space-x-4">
                 <FormField
                   control={form.control}
                   name="location"
@@ -219,7 +219,7 @@ export default function CreateEventForm({
                 />
               </div>
               <div className="flex flex-row space-x-4">
-                <div className="flex flex-row w-1/2 space-x-1">
+                <div className="flex w-1/2 flex-row space-x-1">
                   <FormField
                     control={form.control}
                     name="start"
@@ -253,7 +253,7 @@ export default function CreateEventForm({
                     )}
                   />
                 </div>
-                <div className="flex flex-row w-1/2 space-x-1">
+                <div className="flex w-1/2 flex-row space-x-1">
                   <FormField
                     control={form.control}
                     name="end"
@@ -299,9 +299,7 @@ export default function CreateEventForm({
                     }
               }
               className="space-y-4 p-4">
-              <div
-                className="
-              ">
+              <div className=" ">
                 <p className="mb-4 text-lg">
                   Upload event Logo and Banner
                 </p>
@@ -312,7 +310,7 @@ export default function CreateEventForm({
                     <FormItem className="">
                       <FormControl>
                         <ImageUpload
-                          className="w-full h-52 rounded-xl bg-neutrals-300 "
+                          className="h-52 w-full rounded-xl bg-neutrals-300"
                           placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
                     Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
                           aspectRatio={16 / 9}
@@ -328,10 +326,10 @@ export default function CreateEventForm({
                   control={form.control}
                   name="logo"
                   render={({ field }) => (
-                    <FormItem className="flex relative w-24 h-24 p-1 rounded-full bg-white mt-[-50px] mx-4">
+                    <FormItem className="relative mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1">
                       <FormControl>
                         <ImageUpload
-                          className="w-full h-full rounded-full bg-neutrals-300 text-white m-auto"
+                          className="m-auto h-full w-full rounded-full bg-neutrals-300 text-white"
                           aspectRatio={1}
                           path={`events/${organization?.slug}`}
                           {...field}
@@ -353,7 +351,7 @@ export default function CreateEventForm({
                       </p>
                       <FormControl>
                         <ImageUpload
-                          className="rounded-xl h-40"
+                          className="h-40 rounded-xl"
                           placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
                         Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
                           path={`events/${organization?.slug}`}
@@ -396,7 +394,7 @@ export default function CreateEventForm({
                     }
               }>
               <div className="flex flex-col space-y-4">
-                <p className=" text-lg font-semibold">
+                <p className="text-lg font-semibold">
                   Import event data
                 </p>
                 <p className="max-w-[550px]">
@@ -423,7 +421,7 @@ export default function CreateEventForm({
                 )}
               />
             </div>
-            <div className="items-end justify-end flex flex-row space-x-2">
+            <div className="flex flex-row items-end justify-end space-x-2">
               {stage !== 0 && (
                 <Button
                   variant={'outline'}

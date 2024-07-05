@@ -30,15 +30,15 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             onClick={() =>
               handleTermChange([{ key: 'type', value: 'single' }])
             }
-            className={`relative flex flex-col p-3 border border-grey rounded-xl hover:bg-secondary cursor-pointer ${
+            className={`relative flex cursor-pointer flex-col rounded-xl border border-grey p-3 hover:bg-secondary ${
               type == 'single' ? 'bg-secondary' : 'bg-none'
             }`}>
             {type == 'single' && (
               <div className="absolute end-0 px-2">
-                <CheckCircle2 className="w-10 h-10 text-white fill-success" />
+                <CheckCircle2 className="h-10 w-10 fill-success text-white" />
               </div>
             )}
-            <div className="flex justify-center mb-3">
+            <div className="mb-3 flex justify-center">
               <Image
                 src="/images/singleNFT.png"
                 alt="single"
@@ -58,15 +58,15 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             onClick={() =>
               handleTermChange([{ key: 'type', value: 'multiple' }])
             }
-            className={`relative flex flex-col p-3 border border-grey rounded-xl hover:bg-secondary cursor-pointer ${
+            className={`relative flex cursor-pointer flex-col rounded-xl border border-grey p-3 hover:bg-secondary ${
               type == 'multiple' ? 'bg-secondary' : 'bg-none'
             }`}>
             {type == 'multiple' && (
               <div className="absolute end-0 px-2">
-                <CheckCircle2 className="w-10 h-10 text-white fill-success" />
+                <CheckCircle2 className="h-10 w-10 fill-success text-white" />
               </div>
             )}
-            <div className="flex justify-center mb-3">
+            <div className="mb-3 flex justify-center">
               <Image
                 src="/images/multipleNFT.png"
                 alt="multiple"

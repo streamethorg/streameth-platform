@@ -77,7 +77,7 @@ const Navigation = ({
   return (
     <aside
       className={cn(
-        'bg-primary overflow-auto w-full h-full border-r border-border flex flex-col text-black',
+        'flex h-full w-full flex-col overflow-auto border-r border-border bg-primary text-black',
         {
           'max-w-[50px]': isCollapsed,
           'max-w-[250px]': !isCollapsed,
@@ -88,11 +88,11 @@ const Navigation = ({
         transition: 'max-width 0.3s ease-out-in',
       }}>
       {isCollapsed ? (
-        <div className="my-2 mx-1">
+        <div className="mx-1 my-2">
           <StreamethLogo />
         </div>
       ) : (
-        <div className="p-2 my-2 mx-4 h-[56px] w-[180px]">
+        <div className="mx-4 my-2 h-[56px] w-[180px] p-2">
           <StreamethStudio />
         </div>
       )}
@@ -110,9 +110,9 @@ const Navigation = ({
 
       <div
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="flex justify-center items-center mt-auto mb-5 w-full text-white cursor-pointer">
+        className="mb-5 mt-auto flex w-full cursor-pointer items-center justify-center text-white">
         {isCollapsed ? (
-          <ArrowRightFromLine className="cursor-pointer mx-auto" />
+          <ArrowRightFromLine className="mx-auto cursor-pointer" />
         ) : (
           <div className="flex flex-row">
             <ArrowLeftToLine className="mr-1 cursor-pointer" />

@@ -17,16 +17,16 @@ const page = async ({ params }: nftPageParams) => {
   if (!collection) return notFound()
 
   return (
-    <div className="p-2 mx-6 h-full">
+    <div className="mx-6 h-full p-2">
       <Link href={`/studio/${params.organization}/library`}>
-        <div className="flex justify-start items-center my-4  space-x-4">
+        <div className="my-4 flex items-center justify-start space-x-4">
           <LuArrowLeft />
           <p>Back to collections</p>
         </div>
       </Link>
 
-      <div className="flex flex-col bg-white rounded-xl border overflow-auto p-4">
-        <h3 className="text-lg font-bold mb-3">Collection Details</h3>
+      <div className="flex flex-col overflow-auto rounded-xl border bg-white p-4">
+        <h3 className="mb-3 text-lg font-bold">Collection Details</h3>
 
         <CopyText
           width="600px"

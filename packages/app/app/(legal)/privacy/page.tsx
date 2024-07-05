@@ -14,8 +14,8 @@ const Terms = async () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center min-h-screen">
-        <Card className="flex flex-col justify-between p-5 my-5 w-full max-w-4xl bg-gray-100">
+      <div className="flex min-h-screen items-center justify-center">
+        <Card className="my-5 flex w-full max-w-4xl flex-col justify-between bg-gray-100 p-5">
           <div>
             <CardTitle className="ml-4">
               <Image
@@ -27,7 +27,7 @@ const Terms = async () => {
             </CardTitle>
             <Markdown
               remarkPlugins={[remarkGfm]}
-              className="p-4 my-5 max-w-full prose prose-sm">
+              className="prose prose-sm my-5 max-w-full p-4">
               {file}
             </Markdown>
           </div>

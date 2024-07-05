@@ -3,5 +3,6 @@
   "semi": false,
   "singleQuote": true,
   "printWidth": 70, 
-  "bracketSameLine": true
+  "bracketSameLine": true,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

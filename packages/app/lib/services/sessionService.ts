@@ -264,10 +264,8 @@ export const createAsset = async ({
 
 export const generateThumbnail = async ({
   session,
-  authToken,
 }: {
   session: IExtendedSession
-  authToken: string
 }): Promise<any> => {
   try {
     const response = await fetch(
@@ -277,7 +275,6 @@ export const generateThumbnail = async ({
         cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({
           playbackId: session.playbackId,

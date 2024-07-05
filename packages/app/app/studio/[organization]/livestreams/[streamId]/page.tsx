@@ -31,22 +31,22 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   }
 
   return (
-    <div className="flex flex-col p-4 w-full h-full max-w-screen-2xl max-h-[1000px]">
+    <div className="flex h-full max-h-[1000px] w-full max-w-screen-2xl flex-col p-4">
       <StreamHeader
         organization={params.organization}
         stream={stream}
         isLiveStreamPage
       />
-      <div className="flex flex-row w-full space-x-4 flex-grow">
+      <div className="flex w-full flex-grow flex-row space-x-4">
         <div className="flex flex-col">
           <StreamConfigWithPlayer
             stream={stream}
             streamId={params.streamId}
             organization={params.organization}
           />
-          <div className="flex flex-col lg:flex-row md:flex-row items-center py-2 space-x-2 space-y-2 w-full">
-            <div className="flex flex-grow justify-start items-center space-x-2">
-              <span className="text-xl font-bold line-clamp-2 lg:max-w-[550px]">
+          <div className="flex w-full flex-col items-center space-x-2 space-y-2 py-2 md:flex-row lg:flex-row">
+            <div className="flex flex-grow items-center justify-start space-x-2">
+              <span className="line-clamp-2 text-xl font-bold lg:max-w-[550px]">
                 {stream.name}
               </span>
               <StreamHealth
@@ -58,8 +58,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             </div>
 
             <LivestreamEmbedCode
-              streamId={stream?.streamSettings?.streamId}
-              playbackId={stream?.streamSettings?.playbackId}
+              streamId={stream._id}
               playerName={stream?.name}
             />
             <ShareLivestream organization={params.organization} />
@@ -70,7 +69,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               <Button variant="outline">
                 View Livestream
                 <div>
-                  <ArrowRight className="pl-1 w-4 h-4" />
+                  <ArrowRight className="h-4 w-4 pl-1" />
                 </div>
               </Button>
             </Link>

@@ -31,15 +31,15 @@ const AuthorizationMessage = () => {
   }, [ready, authenticated])
 
   return (
-    <div className="flex flex-row w-screen h-screen">
-      <div className="flex flex-col justify-center items-center w-1/2 h-full">
-        <Card className="shadow-none max-w-[500px]">
+    <div className="flex h-screen w-screen flex-row">
+      <div className="flex h-full w-1/2 flex-col items-center justify-center">
+        <Card className="max-w-[500px] shadow-none">
           <CardHeader className="text-center">
             <CardTitle>Welcome to StreamETH</CardTitle>
             <CardDescription>
               Click the sign in button to connect to StreamETH
             </CardDescription>
-            <div className="flex justify-center items-center w-full pt-[20px]">
+            <div className="flex w-full items-center justify-center pt-[20px]">
               <SignInUserButton />
             </div>
           </CardHeader>
@@ -60,7 +60,7 @@ const AuthorizationMessage = () => {
           </CardContent>
         </Card>
       </div>
-      <div className="relative w-1/2 h-full bg-primary">
+      <div className="relative h-full w-1/2 bg-primary">
         <Image
           quality={100}
           alt="login background"

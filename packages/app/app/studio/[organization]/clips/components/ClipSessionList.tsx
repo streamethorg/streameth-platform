@@ -20,7 +20,7 @@ const ClipsSessionList = ({
   return (
     <>
       {sortedSessions.map((session) => (
-        <div key={session._id} className=" px-4 py-2">
+        <div key={session._id} className="px-4 py-2">
           <div
             className="cursor-pointer"
             onClick={() =>

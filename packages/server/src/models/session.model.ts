@@ -56,6 +56,7 @@ const SessionSchema = new Schema<ISessionModel>(
       },
     ],
     firebaseId: { type: String, default: '' },
+    talkType: { type: String, default: '' },
   },
   {
     timestamps: true,

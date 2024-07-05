@@ -52,17 +52,17 @@ const DeleteMultistream = ({
           className="flex gap-1"
           variant="outline">
           {isLoading ? (
-            <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
             <div>
-              <Trash2 className="w-4 h-4 text-destructive" />
+              <Trash2 className="h-4 w-4 text-destructive" />
             </div>
           )}
         </Button>
       </DialogTrigger>
       <DialogContent className="p-10 sm:max-w-[475px]">
         <DialogHeader className="mx-auto space-y-4">
-          <div className="p-4 mx-auto bg-red-500 rounded-full">
+          <div className="mx-auto rounded-full bg-red-500 p-4">
             <Trash2 className="text-white" />
           </div>
           <DialogTitle>

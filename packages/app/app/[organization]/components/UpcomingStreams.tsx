@@ -47,7 +47,7 @@ const UpcomingStreams = async ({
         ))}
       </div>
       {livestreams.length === 0 && (
-        <div className="space-x-4 flex flex-row justify-center items-center bg-secondary rounded-xl p-4">
+        <div className="flex flex-row items-center justify-center space-x-4 rounded-xl bg-secondary p-4">
           <Podcast size={20} />
           <p>No scheduled livestreams</p>
         </div>
@@ -60,8 +60,8 @@ export default UpcomingStreams
 
 export const UpcomingStreamsLoading = () => (
   <>
-    <div className="w-1/4 h-6 bg-gray-300 rounded md:hidden"></div>
-    <div className="grid grid-rows-3 gap-4 m-5 md:hidden md:grid-cols-3 md:m-0">
+    <div className="h-6 w-1/4 rounded bg-gray-300 md:hidden"></div>
+    <div className="m-5 grid grid-rows-3 gap-4 md:m-0 md:hidden md:grid-cols-3">
       {Array.from({ length: 3 }).map((_, index) => (
         <div key={index} className="block md:hidden">
           <VideoCardSkeletonMobile />

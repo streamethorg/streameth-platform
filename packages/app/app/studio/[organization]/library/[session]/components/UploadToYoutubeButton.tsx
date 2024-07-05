@@ -16,12 +16,10 @@ const UploadToYoutubeButton = ({
   organization,
   organizationSlug,
   sessionId,
-  hasThumbnail,
 }: {
   organization: IExtendedOrganization | null
   organizationSlug: string
   sessionId: string
-  hasThumbnail: boolean
 }) => {
   const [openModal, setOpenModal] = useState(false)
   const [socialId, setSocialId] = useState<string>('')
@@ -38,7 +36,7 @@ const UploadToYoutubeButton = ({
       })
     )
     // Encode the redirect URL
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&state=${state}`
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube&state=${state}`
 
     // Calculate window size and position
     const width = window.innerWidth * 0.7
@@ -83,62 +81,47 @@ const UploadToYoutubeButton = ({
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger>
-        <Button className="bg-[#FF0000] min-w-[200px]">
+        <Button className="min-w-[200px] bg-[#FF0000]">
           <SiYoutube className="mr-2" />
           Publish to Youtube
         </Button>
       </DialogTrigger>
-      <DialogContent className="px-8 z-[99999999999999999]">
-        {hasThumbnail ? (
-          <div>
-            <p className="font-medium">Select Youtube Destinations</p>
+      <DialogContent className="z-[99999999999999999] px-8">
+        <p className="font-medium">Select Youtube Destinations</p>
 
-            <div className="flex flex-wrap items-center gap-5 py-5">
-              {organization?.socials?.map(
-                ({ name, type, thumbnail, _id }) => (
-                  <div
-                    onClick={() => setSocialId(_id!)}
-                    key={_id}
-                    className={`flex flex-col items-center cursor-pointer ${
-                      socialId == _id ? 'opacity-100' : 'opacity-50'
-                    }`}>
-                    <div
-                      className="w-14 h-14 rounded-full bg-center bg-cover cursor-pointer"
-                      style={{
-                        backgroundImage: `url(${thumbnail})`,
-                      }}></div>
-                    <p className="text-sm line-clamp-1">{name}</p>
-                  </div>
-                )
-              )}
+        <div className="flex flex-wrap items-center gap-5 py-5">
+          {organization?.socials?.map(
+            ({ name, type, thumbnail, _id }) => (
               <div
-                onClick={handleYoutubeConnect}
-                className="flex flex-col items-center cursor-pointer">
-                <CiCirclePlus color="#000" size={56} />
-                <p className="text-sm">Add New</p>
+                onClick={() => setSocialId(_id!)}
+                key={_id}
+                className={`flex cursor-pointer flex-col items-center ${
+                  socialId == _id ? 'opacity-100' : 'opacity-50'
+                }`}>
+                <div
+                  className="h-14 w-14 cursor-pointer rounded-full bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${thumbnail})`,
+                  }}></div>
+                <p className="line-clamp-1 text-sm">{name}</p>
               </div>
-            </div>
+            )
+          )}
+          <div
+            onClick={handleYoutubeConnect}
+            className="flex cursor-pointer flex-col items-center">
+            <CiCirclePlus color="#000" size={56} />
+            <p className="text-sm">Add New</p>
+          </div>
+        </div>
 
-            <Button
-              loading={isLoading}
-              onClick={handleYoutubePublish}
-              variant="primary"
-              disabled={!hasSocials || !socialId}>
-              Publish
-            </Button>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4">
-            <p className="text-center font-bold">
-              Upload Session Thumbnail before continuing
-            </p>{' '}
-            <Button
-              onClick={() => setOpenModal(false)}
-              variant="primary">
-              Close
-            </Button>
-          </div>
-        )}
+        <Button
+          loading={isLoading}
+          onClick={handleYoutubePublish}
+          variant="primary"
+          disabled={!hasSocials || !socialId}>
+          Publish
+        </Button>
       </DialogContent>
     </Dialog>
   )

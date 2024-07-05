@@ -9,15 +9,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 
 const Player = async ({ stage }: { stage: IExtendedStage }) => {
-  const livepeer = new Livepeer({
-    apiKey: process.env.LIVEPEER_API_KEY,
-  })
-
-  const stream = (
-    await livepeer.stream.get(stage.streamSettings?.streamId ?? '')
-  ).stream
-
-  if (!stream || !stream.playbackId) {
+  if (!stage || !stage.streamSettings?.playbackId) {
     return notFound()
   }
 
@@ -26,12 +18,12 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
 
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex h-full w-full flex-col">
       {timeLeft > 0 ? (
-        <div className="flex relative justify-end items-end w-full h-full rounded-xl aspect-video">
+        <div className="relative flex aspect-video h-full w-full items-end justify-end rounded-xl">
           {stage.thumbnail && (
             <Image
-              className="lg:rounded-xl z-[0]"
+              className="z-[0] lg:rounded-xl"
               fill={true}
               src={stage.thumbnail}
               alt="Livepeer Logo"
@@ -40,12 +32,14 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
           <Counter timeToStart={timeLeft} />
         </div>
       ) : (
-        <div className="relative w-full h-full">
+        <div className="relative h-full w-full">
           <PlayerWithControls
+            thumbnail={stage.thumbnail}
+            name={stage.name}
             src={[
               {
                 src: buildPlaybackUrl(
-                  stream.playbackId
+                  stage.streamSettings.playbackId
                 ) as `${string} m3u8`,
                 width: 1920,
                 height: 1080,

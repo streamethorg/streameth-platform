@@ -22,7 +22,7 @@ const WatchGrid = async ({
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center pb-4">
+      <div className="flex items-center justify-between pb-4">
         <h1 className="text-xl font-bold">Watch More</h1>
         <Link href={`/${organizationSlug}/videos`}>
           {videos.length !== 0 && (
@@ -38,7 +38,7 @@ const WatchGrid = async ({
         maxVideos={gridLength}
       />
       {videos.length === 0 && (
-        <div className="flex flex-row justify-center items-center p-4 space-x-4 rounded-xl bg-secondary">
+        <div className="flex flex-row items-center justify-center space-x-4 rounded-xl bg-secondary p-4">
           <Video size={20} />
           <p>No videos uploaded</p>
         </div>
@@ -49,11 +49,11 @@ const WatchGrid = async ({
 
 export const WatchGridLoading = () => (
   <>
-    <div className="flex justify-between items-center">
-      <div className="w-1/4 h-6 bg-gray-300 rounded"></div>
-      <div className="w-1/5 h-4 bg-gray-300 rounded"></div>
+    <div className="flex items-center justify-between">
+      <div className="h-6 w-1/4 rounded bg-gray-300"></div>
+      <div className="h-4 w-1/5 rounded bg-gray-300"></div>
     </div>
-    <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-4">
+    <div className="m-5 grid grid-cols-2 gap-4 md:grid-cols-4">
       {Array.from({ length: 3 }).map((_, index) => (
         <VideoCardSkeleton key={index} />
       ))}

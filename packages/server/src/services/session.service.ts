@@ -222,9 +222,9 @@ export default class SessionService {
     if (!session.assetId || !session.videoUrl) {
       throw new HttpException(400, 'Asset Id or video Url does not exist');
     }
-    if (!session.coverImage) {
-      throw new HttpException(400, 'No cover image');
-    }
+    // if (!session.coverImage) {
+    //   throw new HttpException(400, 'No cover image');
+    // }
     const org = await Organization.findOne({
       _id: data.organizationId,
       'socials._id': data.socialId,

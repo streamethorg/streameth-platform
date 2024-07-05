@@ -45,8 +45,8 @@ const ChannelPlayer = ({
         <CardTitle>
           {libraryVideo?.name ?? activeStream.name}
         </CardTitle>
-        <div className="flex flex-col gap-3 mt-2 lg:flex-row lg:justify-between lg:items-end">
-          <div className="flex gap-3 items-center">
+        <div className="mt-2 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex items-center gap-3">
             <div>
               <Image
                 className="rounded-full"
@@ -58,7 +58,7 @@ const ChannelPlayer = ({
             </div>
             <div className="flex flex-col">
               <p className="font-medium">{organization.name}</p>
-              <div className="flex gap-1 items-center text-[12px] text-muted-foreground">
+              <div className="flex items-center gap-1 text-[12px] text-muted-foreground">
                 <p className="text-muted-foreground">
                   Created{' '}
                   {`${new Date(
@@ -83,7 +83,7 @@ const ChannelPlayer = ({
             </div>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <EmbedButton
               playbackId={
                 libraryVideo?.playbackId ??

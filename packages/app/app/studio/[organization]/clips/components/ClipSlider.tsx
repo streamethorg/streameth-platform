@@ -233,8 +233,8 @@ const ClipSlider = () => {
   }
 
   return (
-    <div className="flex flex-col h-[200px]">
-      <div className="flex flex-row w-full justify-center items-center  space-x-6 border-t border-b p-2">
+    <div className="flex h-[200px] flex-col">
+      <div className="flex w-full flex-row items-center justify-center space-x-6 border-b border-t p-2">
         {videoRef.current?.paused ? (
           <button onClick={() => videoRef.current?.play()}>
             <PlayIcon />
@@ -273,7 +273,7 @@ const ClipSlider = () => {
         </span>
       </div>
       <div className="p-4">
-        <div className="h-5 mb-4 relative" onClick={handleSeek}>
+        <div className="relative mb-4 h-5" onClick={handleSeek}>
           {videoRef.current &&
             videoRef.current.duration &&
             generateTimeStamps(videoRef.current.duration).map(
@@ -282,7 +282,7 @@ const ClipSlider = () => {
                 return (
                   <div
                     key={time}
-                    className={`absolute flex flex-col `}
+                    className={`absolute flex flex-col`}
                     style={{
                       left: `${
                         (time / videoRef.current.duration) * 100
@@ -306,17 +306,17 @@ const ClipSlider = () => {
               }
             )}
         </div>
-        <div className="relative flex h-10  rounded-full">
-          <div className="bg-gray-400 my-auto h-2 w-full rounded-xl " />
+        <div className="relative flex h-10 rounded-full">
+          <div className="my-auto h-2 w-full rounded-xl bg-gray-400" />
           <div
-            className="absolute h-10 border-2 border-primary flex rounded-xl"
+            className="absolute flex h-10 rounded-xl border-2 border-primary"
             style={{
               left: `${getMarkerPosition(startTime.displayTime)}%`,
               right: `${
                 100 - getMarkerPosition(endTime.displayTime)
               }%`,
             }}>
-            <div className="bg-gray-200 my-auto h-2 w-full " />
+            <div className="my-auto h-2 w-full bg-gray-200" />
           </div>
           <Marker
             {...{
@@ -382,7 +382,7 @@ const Marker = ({
 }) => {
   return (
     <div
-      className={`absolute w-[15px] h-full `}
+      className={`absolute h-full w-[15px]`}
       style={{
         left: `${getMarkerPosition(
           marker === 'start'
@@ -396,15 +396,15 @@ const Marker = ({
       <div className="relative h-full w-full">
         <div
           id={marker}
-          className={`bg-opacity-10 h-full bg-primary cursor-pointer ${
+          className={`h-full cursor-pointer bg-primary bg-opacity-10 ${
             marker !== 'start'
               ? 'translate-x-[-100%] rounded-r-xl'
-              : 'rounded-l-xl '
+              : 'rounded-l-xl'
           } `}
         />
         {selectedTooltip === marker && (
-          <div className="absolute top-[-50px] left-[-55px] p-1 text-white bg-primary text-xs rounded-xl flex justify-center items-center flex-col">
-            <p className="flex flex-row w-[120px] space-x-1 items-center justify-center">
+          <div className="absolute left-[-55px] top-[-50px] flex flex-col items-center justify-center rounded-xl bg-primary p-1 text-xs text-white">
+            <p className="flex w-[120px] flex-row items-center justify-center space-x-1">
               <span>Use</span>{' '}
               <ArrowLeftSquare width={15} height={15} />
               <ArrowRightSquare width={15} height={15} />{' '}

@@ -122,13 +122,13 @@ const ClipButton = ({
   }
 
   return (
-    <div className="flex flex-col space-y-2 flex-grow">
-      <div className="flex flex-col flex-grow space-y-2 my-4">
+    <div className="flex flex-grow flex-col space-y-2">
+      <div className="my-4 flex flex-grow flex-col space-y-2">
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
           <Input
             id="session-name"
-            className=" bg-white z-[999999]"
+            className="z-[999999] bg-white"
             placeholder="Enter session name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -162,7 +162,7 @@ const ClipButton = ({
         className="mt-auto text-base">
         {isLoading ? (
           <>
-            <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
             wait
           </>
         ) : (
@@ -194,9 +194,9 @@ const CreateClipButton = ({
   return (
     <Dialog open={dialogOpen} onOpenChange={setIsOpen}>
       <DialogContent className="bg-white">
-        <div className="flex flex-col h-[300px] bg-white p-4">
+        <div className="flex h-[300px] flex-col bg-white p-4">
           <Tabs defaultValue={'sessions'}>
-            <TabsList className="border-y border-grey w-full !justify-start gap-5">
+            <TabsList className="w-full !justify-start gap-5 border-y border-grey">
               {sessions.sessions.length > 0 && (
                 <TabsTrigger className="px-0" value="sessions">
                   Clip Session
@@ -208,7 +208,7 @@ const CreateClipButton = ({
             </TabsList>
             {sessions.sessions.length > 0 && (
               <TabsContent value="sessions">
-                <div className="flex flex-row w-full space-x-2 items-center justify-center">
+                <div className="flex w-full flex-row items-center justify-center space-x-2">
                   <ClipButton
                     selectedRecording={currentRecording}
                     playbackId={playbackId}
@@ -221,7 +221,7 @@ const CreateClipButton = ({
               </TabsContent>
             )}
             <TabsContent value="custom">
-              <div className="flex flex-row w-full space-x-2 items-center justify-center">
+              <div className="flex w-full flex-row items-center justify-center space-x-2">
                 <ClipButton
                   selectedRecording={currentRecording}
                   playbackId={playbackId}

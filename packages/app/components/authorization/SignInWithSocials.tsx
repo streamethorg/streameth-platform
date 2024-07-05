@@ -17,12 +17,12 @@ const SignInWithSocials = () => {
   const { ready, authenticated } = usePrivy()
   const { sendCode, loginWithCode } = useLoginWithEmail()
   return (
-    <div className="flex flex-col w-full space-y-4">
+    <div className="flex w-full flex-col space-y-4">
       <Dialog>
         <DialogTrigger>
           <Button
             disabled
-            className="w-full bg-white text-black rounded-xl border">
+            className="w-full rounded-xl border bg-white text-black">
             Continue with Google
           </Button>
         </DialogTrigger>
@@ -55,7 +55,7 @@ const SignInWithSocials = () => {
       </Dialog>
       <Button
         disabled
-        className="flex flex-row w-full bg-[#8A63D2] text-white rounded-xl border">
+        className="flex w-full flex-row rounded-xl border bg-[#8A63D2] text-white">
         <Image
           src={farcasterLogo}
           alt="farcaster logo "
@@ -66,7 +66,7 @@ const SignInWithSocials = () => {
       </Button>
       <Button
         disabled
-        className="flex flex-row w-full bg-black text-white rounded-xl border">
+        className="flex w-full flex-row rounded-xl border bg-black text-white">
         <Image
           src={twitterLogo}
           alt="twitter logo "

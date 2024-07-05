@@ -13,12 +13,12 @@ const SessionOptions = ({
 }: {
   name: string
   playbackId: string
-  assetId: string
+  assetId?: string
   organizationSlug: string
   sessionId: string
 }) => {
   return (
-    <div className="flex flex-wrap items-center gap-2 w-full">
+    <div className="flex w-full flex-wrap items-center gap-2">
       <ShareButton
         className="w-full"
         variant="outline"
@@ -27,7 +27,7 @@ const SessionOptions = ({
       />
       <EmbedButton
         className="w-full"
-        playbackId={playbackId}
+        sessionId={sessionId}
         playerName={name}
         vod
       />

@@ -85,13 +85,13 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible])
 
   return (
-    <NavigationMenu className="flex sticky top-0 z-50 flex-row items-center bg-white lg:hidden">
+    <NavigationMenu className="flex sticky top-0 z-[9999] flex-row items-center bg-white lg:hidden">
       {(searchVisible || menuVisible) && (
-        <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
+        <div className="absolute left-0 top-0 h-[100vh] w-[100vw] bg-black bg-opacity-50" />
       )}
 
       {searchVisible && showSearchBar && (
-        <div className="absolute w-full bottom-[-56px] bg-secondary">
+        <div className="absolute bottom-[-56px] w-full bg-secondary">
           <SearchBar
             organizationSlug={currentOrganization}
             isMobile={true}
@@ -100,7 +100,7 @@ const MobileNavBar = ({
       )}
       <div
         className={cn(
-          'flex relative flex-row  items-center px-4 py-2 w-full h-full',
+          'relative flex h-full w-full flex-row items-center px-4 py-2',
           menuVisible && 'bg-background',
           searchVisible && showSearchBar && 'bg-background'
         )}>
@@ -119,18 +119,18 @@ const MobileNavBar = ({
               alt="Logo"
               height={36}
               width={36}
-              className="h-full aspect-square"
+              className="aspect-square h-full"
             />
           </Link>
         )}
 
-        <div className="flex items-center ml-auto">
+        <div className="ml-auto flex items-center">
           {showSearchBar && (
             <button onClick={toggleSearch} className="p-2">
               {searchVisible ? (
-                <X className="w-6 h-6 text-primary" />
+                <X className="h-6 w-6 text-primary" />
               ) : (
-                <Search className="w-6 h-6 text-primary" />
+                <Search className="h-6 w-6 text-primary" />
               )}
             </button>
           )}
@@ -171,7 +171,7 @@ const PCNavBar = ({
   const pathname = usePathname()
   const isStudio = pathname.includes('studio')
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex">
+    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex z-[30]">
       <div className="flex flex-1 justify-start items-center">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>
@@ -192,7 +192,7 @@ const PCNavBar = ({
           </Link>
         )}
       </div>
-      <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
+      <div className="mx-auto flex w-2/5 flex-grow-0 items-center justify-center">
         {showSearchBar && (
           <SearchBar
             searchVisible={showSearchBar}
@@ -200,7 +200,7 @@ const PCNavBar = ({
           />
         )}
       </div>
-      <div className="flex flex-1 justify-end items-center">
+      <div className="flex flex-1 items-center justify-end">
         {organizations && (
           <SwitchOrganization
             organization={currentOrganization}

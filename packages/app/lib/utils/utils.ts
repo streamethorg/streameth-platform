@@ -189,7 +189,7 @@ export const buildPlaybackUrl = (
   vod?: boolean
 ): string => {
   if (vod) {
-    return `https://lp-playback.com/hls/${playbackId}/index.m3u8`
+    return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/index.m3u8`
   }
   return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`
 }
@@ -235,9 +235,13 @@ export const generateParams = ({
   vod,
   streamId,
   playerName,
+  sessionId,
+  stageId,
 }: IGenerateEmbed) => {
   const params = new URLSearchParams()
-  params.append('playbackId', playbackId ?? '')
+  playbackId && params.append('playbackId', playbackId ?? '')
+  sessionId && params.append('session', sessionId ?? '')
+  stageId && params.append('stage', stageId ?? '')
   params.append('vod', vod ? 'true' : 'false')
   params.append('streamId', streamId ?? '')
   params.append('playerName', playerName ?? '')
@@ -248,6 +252,8 @@ export const generateParams = ({
 export const generateEmbedCode = ({
   url,
   playbackId,
+  sessionId,
+  stageId,
   vod,
   streamId,
   playerName,
@@ -257,6 +263,8 @@ export const generateEmbedCode = ({
     vod,
     streamId,
     playerName,
+    sessionId,
+    stageId,
   })}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
 }
 

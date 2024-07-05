@@ -9,7 +9,7 @@ const ChannelBanner = ({
   organization: IExtendedOrganization
 }) => {
   return (
-    <div className="hidden relative md:block max-h-[200px] h-full aspect-video w-full">
+    <div className="relative hidden aspect-video h-full max-h-[200px] w-full md:block">
       {organization.banner ? (
         <Image
           src={organization.banner}
@@ -21,7 +21,7 @@ const ChannelBanner = ({
           priority
         />
       ) : (
-        <div className=" bg-gray-300 rounded-xl md:rounded-none max-h-[200px] h-full">
+        <div className="h-full max-h-[200px] rounded-xl bg-gray-300 md:rounded-none">
           <StreamethLogoWhite />
         </div>
       )}
