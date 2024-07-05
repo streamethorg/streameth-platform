@@ -37,9 +37,8 @@ const VideoCardWithMenu = ({
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
       try {
-        const generatedThumbnail = await generateThumbnailAction(
-          session
-        )
+        const generatedThumbnail =
+          await generateThumbnailAction(session)
         setThumbnail(generatedThumbnail)
       } catch (error) {
         console.error('Failed to generate thumbnail:', error)

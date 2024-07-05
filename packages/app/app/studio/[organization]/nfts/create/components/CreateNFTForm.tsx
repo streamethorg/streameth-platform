@@ -320,8 +320,8 @@ const CreateNFTForm = ({
                   {step == 1
                     ? 'Continue'
                     : type == 'multiple'
-                    ? 'Publish Collection'
-                    : 'Publish VideoNFT'}
+                      ? 'Publish Collection'
+                      : 'Publish VideoNFT'}
                 </Button>
               )}
             </div>
