@@ -43,8 +43,12 @@ export class IndexController extends Controller {
     @FormField() directory: string,
   ): Promise<IStandardResponse<string>> {
     if (!file) throw new HttpException(400, 'no or invalid image');
+    const timestamp = Date.now().toString();
+    const fileName = file.originalname.split('.')[0];
+    const fileExtension = file.originalname.split('.').pop();
+    const newFileName = `${fileName}-${timestamp}.${fileExtension}`;
     const image = await this.storageService.uploadFile(
-      `${directory}/${file.originalname}`,
+      `${directory}/${newFileName}`,
       file.buffer,
       file.mimetype,
     );
@@ -94,14 +98,14 @@ export class IndexController extends Controller {
     if (!session) {
       return SendApiResponse('No session found', null, '400');
     }
-    const ipfs = await uploadToIpfs(id);
+    // const ipfs = await uploadToIpfs(id);
     await this.sessionService.update(session._id.toString(), {
-      ipfsURI: ipfs,
+      // ipfsURI: ipfs,
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
     } as any);
 
-    if (session.firebaseId) {
+    if (session.firebaseId && asset.playbackUrl) {
       await updateEventVideoById(session.firebaseId, {
         url: asset.playbackUrl,
         mp4Url: await getDownloadUrl(asset.id),

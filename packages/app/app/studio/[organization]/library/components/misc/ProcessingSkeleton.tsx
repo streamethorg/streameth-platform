@@ -11,8 +11,8 @@ import { IExtendedSession } from '@/lib/types'
 const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
   return (
     <>
-      <TableCell className="relative font-medium opacity-50 cursor-not-allowed bg-muted">
-        <div className="flex flex-row items-center space-x-4 w-full">
+      <TableCell className="relative cursor-not-allowed bg-muted font-medium opacity-50">
+        <div className="flex w-full flex-row items-center space-x-4">
           <div className="min-w-[100px]">
             <AspectRatio ratio={16 / 9}>
               {item.coverImage ? (
@@ -23,36 +23,36 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
                   quality={50}
                 />
               ) : (
-                <div className="flex justify-center items-center w-full h-full">
-                  <DefaultThumbnail className="max-w-full max-h-full" />
+                <div className="flex h-full w-full items-center justify-center">
+                  <DefaultThumbnail className="max-h-full max-w-full" />
                 </div>
               )}
             </AspectRatio>
           </div>
 
-          <span className="text-gray-400 line-clamp-3">
+          <span className="line-clamp-3 text-gray-400">
             {item.name}
           </span>
         </div>
       </TableCell>
-      <TableCell className="opacity-50 cursor-not-allowed bg-muted">
-        <div className="flex justify-start items-center space-x-2">
+      <TableCell className="cursor-not-allowed bg-muted opacity-50">
+        <div className="flex items-center justify-start space-x-2">
           <span>Processing...</span>
           <Loader2 className="animate-spin" />
         </div>
       </TableCell>
       {item.createdAt && (
-        <TableCell className="opacity-50 cursor-not-allowed truncate bg-muted">
+        <TableCell className="cursor-not-allowed truncate bg-muted opacity-50">
           {formatDate(
             new Date(item.createdAt as string),
             'ddd. MMM. D, YYYY'
           )}
         </TableCell>
       )}
-      <TableCell className="relative opacity-50 cursor-not-allowed bg-muted">
-        <div className="bg-gray-200 rounded-md animate-pulse w-[200px] h-[15px]"></div>
+      <TableCell className="relative cursor-not-allowed bg-muted opacity-50">
+        <div className="h-[15px] w-[200px] animate-pulse rounded-md bg-gray-200"></div>
       </TableCell>
-      <TableCell className="opacity-50 cursor-not-allowed bg-muted"></TableCell>
+      <TableCell className="cursor-not-allowed bg-muted opacity-50"></TableCell>
     </>
   )
 }

@@ -24,13 +24,13 @@ const NavBarButton = ({
       <Menu
         size={40}
         strokeWidth={1.5}
-        className="mx-auto text-white rounded border border-white bg-primary"
+        className="mx-auto rounded border border-white bg-primary text-white"
       />
     ) : (
       <X
         size={23}
         strokeWidth={1.5}
-        className="mx-auto text-white rounded border border-white bg-primary"
+        className="mx-auto rounded border border-white bg-primary text-white"
       />
     )}
   </button>
@@ -54,12 +54,12 @@ export default function NavbarTop({
   }
   return (
     <NavigationMenu className="sticky top-0 bg-event">
-      <div className="flex justify-between p-2 px-2 w-full lg:px-4">
+      <div className="flex w-full justify-between p-2 px-2 lg:px-4">
         <div className="flex items-center">
           <Link href={homePath ? homePath : '/'} className="">
             <span className="sr-only">Logo</span>
             <Image
-              className="rounded max-w-[40px]"
+              className="max-w-[40px] rounded"
               src={logo}
               alt="Logo"
               width={40}
@@ -67,7 +67,7 @@ export default function NavbarTop({
             />
           </Link>
         </div>
-        <div className="flex flex-row justify-end items-center space-x-2 w-full h-full">
+        <div className="flex h-full w-full flex-row items-center justify-end space-x-2">
           {menuVisible && (
             <Navbar
               pages={

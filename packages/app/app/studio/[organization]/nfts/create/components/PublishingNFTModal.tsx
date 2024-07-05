@@ -50,11 +50,11 @@ const PublishingNFTModal = ({
             </DialogTitle>
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
-                <div className="bg-grey p-2 mr-2 rounded-full h-fit">
+                <div className="mr-2 h-fit rounded-full bg-grey p-2">
                   {!isGeneratingMetadata ? (
-                    <CheckCircle2 className="text-white fill-success w-6 h-6" />
+                    <CheckCircle2 className="h-6 w-6 fill-success text-white" />
                   ) : (
-                    <Loader2 className="w-6 h-6 text-success  rounded-full animate-spin" />
+                    <Loader2 className="h-6 w-6 animate-spin rounded-full text-success" />
                   )}
                 </div>
                 <div>
@@ -64,11 +64,11 @@ const PublishingNFTModal = ({
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="bg-grey p-2 mr-2 rounded-full h-fit">
+                <div className="mr-2 h-fit rounded-full bg-grey p-2">
                   {isTransactionApproved ? (
-                    <CheckCircle2 className="text-white fill-success w-6 h-6" />
+                    <CheckCircle2 className="h-6 w-6 fill-success text-white" />
                   ) : (
-                    <Loader2 className="w-6 h-6 text-success  rounded-full animate-spin" />
+                    <Loader2 className="h-6 w-6 animate-spin rounded-full text-success" />
                   )}
                 </div>
                 <div>
@@ -82,8 +82,8 @@ const PublishingNFTModal = ({
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="bg-grey p-2 mr-2 rounded-full h-fit">
-                  <Loader2 className="w-6 h-6 text-success  rounded-full animate-spin" />
+                <div className="mr-2 h-fit rounded-full bg-grey p-2">
+                  <Loader2 className="h-6 w-6 animate-spin rounded-full text-success" />
                 </div>
 
                 <div>
@@ -101,22 +101,22 @@ const PublishingNFTModal = ({
           </>
         )}
         {isPublished && (
-          <div className="flex flex-col justify-center items-center text-center p-4">
+          <div className="flex flex-col items-center justify-center p-4 text-center">
             <Image
               src="/images/NFTSuccess.png"
               width="100"
               height="100"
               alt="success"
             />
-            <p className="text-2xl mt-4">
+            <p className="mt-4 text-2xl">
               NFT Collection successfully published
             </p>
-            <p className="text-muted-foreground mt-1">
+            <p className="mt-1 text-muted-foreground">
               Your collection now published. Share link to invite your
               community.
             </p>
             {hash && <TransactionHash hash={hash} />}
-            <div className="flex items-center gap-4 mt-8">
+            <div className="mt-8 flex items-center gap-4">
               <ShareCollection collectionId={collectionId} />
 
               <Link href={`/studio/${organization}/nfts`}>
@@ -130,15 +130,15 @@ const PublishingNFTModal = ({
           </div>
         )}
         {error && (
-          <div className="text-destructive text-center">
+          <div className="text-center text-destructive">
             Error:{' '}
             {(error as BaseError).shortMessage || error.message}
           </div>
         )}
 
         {publishError && (
-          <div className="text-destructive flex flex-col items-center justify-center text-center">
-            <Ban className="w-10 h-10 mb-4" />
+          <div className="flex flex-col items-center justify-center text-center text-destructive">
+            <Ban className="mb-4 h-10 w-10" />
             {publishError}
           </div>
         )}

@@ -29,8 +29,8 @@ const EventTable = async ({
   events: IExtendedEvent[]
 }) => {
   return (
-    <div className="flex flex-col h-full w-full bg-white">
-      <Card className="shadow-none p-4 bg-secondary lg:border-none">
+    <div className="flex h-full w-full flex-col bg-white">
+      <Card className="bg-secondary p-4 shadow-none lg:border-none">
         <CardHeader>
           <CardTitle>Events</CardTitle>
           <CardDescription className="max-w-[500px]">
@@ -46,7 +46,7 @@ const EventTable = async ({
         </CardFooter>
       </Card>
       <Table className="bg-white">
-        <TableHeader className="sticky top-0 bg-white z-50">
+        <TableHeader className="sticky top-0 z-50 bg-white">
           <TableRow className="hover:bg-white">
             <TableHead className="">Event name</TableHead>
             <TableHead>Visibility</TableHead>
@@ -54,11 +54,11 @@ const EventTable = async ({
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="overflow-scroll ">
+        <TableBody className="overflow-scroll">
           {events?.map((event, index) => (
             <TableRow className="" key={event._id}>
               <TableCell className="font-medium">
-                <div className="flex flex-row w-full space-x-4">
+                <div className="flex w-full flex-row space-x-4">
                   <div className="w-[100px]">
                     <Image
                       className="rounded-md"
@@ -68,9 +68,9 @@ const EventTable = async ({
                       height={50}
                     />
                   </div>
-                  <div className="flex flex-col ">
+                  <div className="flex flex-col">
                     <p>{event.name}</p>
-                    <p className="text-xs text-muted-foreground max-h-8 overflow-clip">
+                    <p className="max-h-8 overflow-clip text-xs text-muted-foreground">
                       {event.description}
                     </p>
                   </div>
@@ -86,7 +86,7 @@ const EventTable = async ({
               <TableCell className="flex flex-row space-x-4">
                 <Button variant={'outline'}>
                   <Link
-                    className="flex flex-row events-center space-x-2 justify-center"
+                    className="events-center flex flex-row justify-center space-x-2"
                     href={`/studio/${organization}/event/${event._id}`}>
                     <FilePenLine className="text-muted-foreground" />
                     <p className="">Edit</p>
@@ -94,7 +94,7 @@ const EventTable = async ({
                 </Button>
                 <Button variant={'outline'}>
                   <Link
-                    className="flex flex-row events-center space-x-2 justify-center"
+                    className="events-center flex flex-row justify-center space-x-2"
                     href={`/${event.organizationId}/${event.slug}`}>
                     <Eye className="text-muted-foreground" />
                     <p className="">View</p>
@@ -104,7 +104,7 @@ const EventTable = async ({
                   <DeleteEvent
                     event={event}
                     TriggerComponent={
-                      <Trash2 className="text-destructive w-5 h-5" />
+                      <Trash2 className="h-5 w-5 text-destructive" />
                     }
                   />
                 </Button>

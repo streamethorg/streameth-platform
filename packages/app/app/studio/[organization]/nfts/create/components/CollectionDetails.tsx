@@ -40,7 +40,7 @@ const CollectionDetails = ({
 }) => {
   return (
     <div>
-      <CardTitle className="text-2xl font-semibold mb-4">
+      <CardTitle className="mb-4 text-2xl font-semibold">
         {type === 'multiple' ? 'Collection' : 'NFT'} Details
       </CardTitle>
       <Form {...form}>
@@ -56,7 +56,7 @@ const CollectionDetails = ({
                 <FormItem className="">
                   <FormControl>
                     <ImageUpload
-                      className="aspect-square h-[100px] rounded-xl bg-neutrals-300 "
+                      className="aspect-square h-[100px] rounded-xl bg-neutrals-300"
                       aspectRatio={1}
                       path={`nftcollections`}
                       {...field}
@@ -68,7 +68,7 @@ const CollectionDetails = ({
             />
 
             <div>
-              <p className="font-medium mb-2">
+              <p className="mb-2 font-medium">
                 Thumbnail <span className="text-destructive">*</span>
               </p>
               <p className="text-sm">
@@ -100,7 +100,7 @@ const CollectionDetails = ({
             )}
           />
 
-          <div className="flex gap-4 flex-col lg:flex-row w-full">
+          <div className="flex w-full flex-col gap-4 lg:flex-row">
             <FormField
               control={form.control}
               name="symbol"
@@ -206,7 +206,7 @@ const CollectionDetails = ({
               )}
             />
           </div> */}
-          <div className="flex gap-4 flex-col lg:flex-row w-full">
+          <div className="flex w-full flex-col gap-4 lg:flex-row">
             <FormField
               control={form.control}
               name="limitedSupply"

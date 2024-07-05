@@ -20,8 +20,8 @@ export const SidebarUI = ({
   const [expanded, setExpanded] = useState(initalExpanded ?? false)
 
   return (
-    <aside className="flex flex-col h-screen bg-white border-r">
-      <div className="flex justify-between items-center p-4">
+    <aside className="flex h-screen flex-col border-r bg-white">
+      <div className="flex items-center justify-between p-4">
         <div
           className={`flex items-center overflow-hidden transition-all ${
             expanded ? 'w-40' : 'w-10'
@@ -42,13 +42,14 @@ export const SidebarUI = ({
       </div>
 
       <SidebarContext.Provider value={{ expanded }}>
-        <ul className="flex-1 px-3 space-y-4">{children}</ul>
+        <ul className="flex-1 space-y-4 px-3">{children}</ul>
       </SidebarContext.Provider>
       <button
         onClick={() => setExpanded((curr) => !curr)}
         className="p-1.5 text-black mx-auto mb-4">
+
         {expanded ? (
-          <span className="flex flex-row w-full">
+          <span className="flex w-full flex-row">
             <ChevronFirst />
             Collapse
           </span>
@@ -56,6 +57,25 @@ export const SidebarUI = ({
           <ChevronLast />
         )}
       </button>
+      <Link
+        className="group relative mx-auto mb-8 flex w-full items-center justify-center space-x-2 rounded-lg p-2 text-black transition-colors"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42">
+        <BookOpenText className="h-6 w-6" />
+        <span
+          className={`overflow-hidden transition-all ${
+            expanded ? '' : 'w-0'
+          }`}>
+          Docs
+        </span>
+        {!expanded && (
+          <div
+            className={`invisible absolute left-full ml-2 -translate-x-3 rounded-md bg-primary px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}>
+            Docs
+          </div>
+        )}
+      </Link>
     </aside>
   )
 }

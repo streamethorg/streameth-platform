@@ -243,37 +243,37 @@ const CreateNFTForm = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className=" bg-pink-600 rounded-xl items-center justify-center w-full text-white flex flex-row h-auto max-h-[88px] text-xl">
+        <div className="flex h-auto max-h-[88px] w-full flex-row items-center justify-center rounded-xl bg-pink-600 text-xl text-white">
           Stream as NFT
         </div>
       </DialogTrigger>
-      <DialogContent className="max-w-5xl bg transparent p-0 rounded-xl">
-        <div className="flex rounded-lg border border-grey overflow-auto ">
-          <div className="p-4 lg:p-8 bg-muted min-w-[250px] space-y-2 w-1/3 border-r border-grey">
+      <DialogContent className="bg transparent max-w-5xl rounded-xl p-0">
+        <div className="flex overflow-auto rounded-lg border border-grey">
+          <div className="w-1/3 min-w-[250px] space-y-2 border-r border-grey bg-muted p-4 lg:p-8">
             <p
-              className={`p-2 flex gap-1 rounded-xl items-center ${
+              className={`flex items-center gap-1 rounded-xl p-2 ${
                 step == 1
-                  ? 'bg-grey text-black font-medium'
+                  ? 'bg-grey font-medium text-black'
                   : 'text-muted-foreground'
               }`}>
               {step == 2 && (
-                <CheckCircle2 className="text-white fill-success w-7 h-7" />
+                <CheckCircle2 className="h-7 w-7 fill-success text-white" />
               )}{' '}
               Collection Details
             </p>
             <p
-              className={`p-2 flex gap-1 rounded-xl items-center ${
+              className={`flex items-center gap-1 rounded-xl p-2 ${
                 step == 2
-                  ? 'bg-grey text-black font-medium'
+                  ? 'bg-grey font-medium text-black'
                   : 'text-muted-foreground'
               }`}>
               {formState.selectedVideo.length > 0 && (
-                <CheckCircle2 className="text-white fill-success w-7 h-7" />
+                <CheckCircle2 className="h-7 w-7 fill-success text-white" />
               )}{' '}
               Add Media
             </p>
           </div>
-          <div className="bg-white w-full p-4 lg:p-8 flex flex-col justify-between">
+          <div className="flex w-full flex-col justify-between bg-white p-4 lg:p-8">
             <div>
               {step == 1 && (
                 <CollectionDetails type={type} form={form} />
@@ -289,7 +289,7 @@ const CreateNFTForm = ({
               )}
             </div>
 
-            <div className="flex gap-3 self-end mt-5">
+            <div className="mt-5 flex gap-3 self-end">
               <Link href={`/studio/${organizationSlug}/nfts`}>
                 <Button
                   className="border-none shadow-none"

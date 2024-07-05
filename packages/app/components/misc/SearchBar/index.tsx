@@ -89,7 +89,7 @@ export default function SearchBar({
   }
 
   return (
-    <div className="flex relative flex-col justify-center items-center p-2 w-full max-w-[500px]">
+    <div className="relative flex w-full max-w-[500px] flex-col items-center justify-center p-2">
       <Input
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -104,7 +104,7 @@ export default function SearchBar({
         }}
         ref={inputRef}
         onFocus={() => setIsOpened(true)}
-        className="bg-white max-w-[500px]"
+        className="max-w-[500px] bg-white"
         placeholder="Search..."
         value={searchQuery}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,21 +114,21 @@ export default function SearchBar({
       {isOpened && debouncedSearchQuery && (
         <div
           ref={dropdownRef}
-          className="absolute p-2 w-full top-[55px] max-w-[500px] bg-secondary">
+          className="absolute top-[55px] w-full max-w-[500px] bg-secondary p-2">
           {isLoading ? (
             <span>Loading...</span>
           ) : (
             <div className="flex flex-col bg-white">
               {searchResults.length > 0 && (
                 <div className="mt-2">
-                  <div className="p-1 font-bold text">Videos</div>
+                  <div className="text p-1 font-bold">Videos</div>
                   {searchResults.map((result) => (
                     <div
                       onClick={() => {
                         handleTermChange(result)
                         setIsOpened(false)
                       }}
-                      className="p-1 cursor-pointer hover:bg-gray-100"
+                      className="cursor-pointer p-1 hover:bg-gray-100"
                       key={result._id.toString()}>
                       {result.name}
                     </div>

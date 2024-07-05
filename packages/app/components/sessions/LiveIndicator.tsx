@@ -1,5 +1,5 @@
 export default function LiveIndicator() {
   return (
-    <div className="bg-red-500 text-xs px-2 py-1 rounded ">Live</div>
+    <div className="rounded bg-red-500 px-2 py-1 text-xs">Live</div>
   )
 }

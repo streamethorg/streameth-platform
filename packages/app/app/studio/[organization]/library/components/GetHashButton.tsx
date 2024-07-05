@@ -29,7 +29,7 @@ const GetHashButton = ({
       })
   }
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       {session.ipfsURI ? (
         <>
           <Label>IPFS hash</Label>

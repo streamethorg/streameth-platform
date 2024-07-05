@@ -192,7 +192,9 @@ export interface IExtendedNftCollections
 export interface EmbedPageParams {
   searchParams: {
     vod: string
-    playbackId: string
+    playbackId?: string
+    stage?: string
+    session?: string
   }
 }
 
@@ -209,6 +211,8 @@ export interface IGenerateEmbed {
   vod?: boolean
   streamId?: string
   playerName: string
+  sessionId?: string
+  stageId?: string
 }
 
 export interface IGenerateEmbedCode extends IGenerateEmbed {

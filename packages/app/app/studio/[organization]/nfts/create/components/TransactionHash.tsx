@@ -7,9 +7,9 @@ const TransactionHash = ({ hash }: { hash: string }) => {
     <Link
       target="_blank"
       rel="noopener"
-      className="text-blue text-sm mt-1 flex items-center gap-1"
+      className="mt-1 flex items-center gap-1 text-sm text-blue"
       href={`https://basescan.org/tx/${hash}`}>
-      View on Base Scan <ExternalLinkIcon className="w-4 h-4" />
+      View on Base Scan <ExternalLinkIcon className="h-4 w-4" />
     </Link>
   )
 }

@@ -1,5 +1,17 @@
 import { google } from 'googleapis'
 
+export const getYoutubeClient = (accessToken: string) => {
+  const oauth2Client = new google.auth.OAuth2()
+  oauth2Client.setCredentials({
+    access_token: accessToken,
+  })
+
+  return google.youtube({
+    version: 'v3',
+    auth: oauth2Client,
+  })
+}
+
 export const generateGoogleAccessToken = async (
   code: string
 ): Promise<any> => {
@@ -26,39 +38,25 @@ export const generateGoogleAccessToken = async (
     oauth2Client.setCredentials({
       access_token: data.access_token,
     })
+    const youtube = getYoutubeClient(data.access_token)
 
-    const people = google.people({
-      version: 'v1',
-      auth: oauth2Client,
+    // Use YouTube Data API to get channel details
+    const channelResponse = await youtube.channels.list({
+      part: ['snippet'],
+      mine: true,
     })
 
-    const peopleResponse = await people.people.get({
-      resourceName: 'people/me',
-      personFields: 'names,photos,emailAddresses',
-    })
-
+    const channel = channelResponse.data.items?.[0]
     const user = {
-      name: peopleResponse?.data?.names?.[0].displayName,
-      thumbnail: peopleResponse?.data?.photos?.[0].url,
-      email: peopleResponse?.data?.emailAddresses?.[0].value,
+      channelId: channel?.id,
+      name: channel?.snippet?.title,
+      thumbnail: channel?.snippet?.thumbnails?.default?.url,
     }
 
     return { ...data, ...user }
   } catch (error) {
     console.error('error in generateGoogleAccessToken', error)
   }
-}
-
-export const getYoutubeClient = (accessToken: string) => {
-  const oauth2Client = new google.auth.OAuth2()
-  oauth2Client.setCredentials({
-    access_token: accessToken,
-  })
-
-  return google.youtube({
-    version: 'v3',
-    auth: oauth2Client,
-  })
 }
 
 export const isStreamingEnabled = async (accessToken: string) => {
@@ -75,24 +73,6 @@ export const isStreamingEnabled = async (accessToken: string) => {
       : false
   } catch (error) {
     console.error('Error checking live broadcasts:', error)
-    return false
-  }
-}
-
-export const hasYoutubeChannel = async (accessToken: string) => {
-  const youtube = getYoutubeClient(accessToken)
-
-  try {
-    const response = await youtube.channels.list({
-      part: ['snippet'],
-      mine: true,
-    })
-
-    return response?.data?.items?.length
-      ? response?.data?.items?.length > 0
-      : false
-  } catch (error) {
-    console.error('Error checking YouTube channel:', error)
     return false
   }
 }

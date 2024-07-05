@@ -8,10 +8,10 @@ const Pagination = (props: IPagination) => {
   const currentPage = Number(searchParams.get('page')) || 1
 
   return (
-    <div className="flex flex-row justify-center items-center">
-      <div className="flex flex-row justify-center items-center">
+    <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center">
         <button
-          className="p-2 rounded-full disabled:text-gray-200 active:hover:bg-gray-100"
+          className="rounded-full p-2 active:hover:bg-gray-100 disabled:text-gray-200"
           disabled={props.currentPage === 1}
           onClick={() => {
             if (currentPage > 1) {
@@ -29,7 +29,7 @@ const Pagination = (props: IPagination) => {
           {currentPage} of {props.totalPages}
         </div>
         <button
-          className="p-2 rounded-full disabled:text-gray-200 active:hover:bg-gray-100"
+          className="rounded-full p-2 active:hover:bg-gray-100 disabled:text-gray-200"
           disabled={props.totalPages === currentPage}
           onClick={() => {
             if (currentPage < props.totalPages) {

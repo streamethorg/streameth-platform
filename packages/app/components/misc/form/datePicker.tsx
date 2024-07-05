@@ -34,7 +34,7 @@ export default function DatePicker({
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="p-0 w-auto z-[99999999999999]"
+        className="z-[99999999999999] w-auto p-0"
         align="start">
         <Calendar
           mode="single"

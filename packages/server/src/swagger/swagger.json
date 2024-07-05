@@ -34,7 +34,7 @@
 					"thumbnail": {
 						"type": "string"
 					},
-					"email": {
+					"channelId": {
 						"type": "string"
 					}
 				},
@@ -1469,6 +1469,9 @@
 					},
 					"firebaseId": {
 						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1644,6 +1647,9 @@
 					},
 					"firebaseId": {
 						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -1778,6 +1784,9 @@
 						"type": "array"
 					},
 					"firebaseId": {
+						"type": "string"
+					},
+					"talkType": {
 						"type": "string"
 					},
 					"autolabels": {

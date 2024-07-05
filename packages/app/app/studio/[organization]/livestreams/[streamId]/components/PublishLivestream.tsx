@@ -38,7 +38,7 @@ const PublishLivestream = ({
     <div className="flex justify-between space-x-2">
       {!stream?.published ? (
         <Button
-          className="flex flex-row justify-center w-full text-xl text-white"
+          className="flex w-full flex-row justify-center text-xl text-white"
           loading={isLoading}
           onClick={handlePublishStream}
           disabled={stream?.published || isLoading}
@@ -47,7 +47,7 @@ const PublishLivestream = ({
         </Button>
       ) : (
         <Button
-          className="flex flex-row justify-center w-full bg-white text-md"
+          className="text-md flex w-full flex-row justify-center bg-white"
           loading={isLoading}
           onClick={handlePublishStream}
           disabled={!stream?.published || isLoading}

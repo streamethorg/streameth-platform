@@ -15,27 +15,27 @@ const ConnectSocials = async ({
     organizationSlug: params.organization,
   })
   return (
-    <div className="p-2 mx-6 h-full">
+    <div className="mx-6 h-full p-2">
       <Link href={`/studio/${params.organization}/destinations`}>
-        <div className="flex justify-start items-center my-4  space-x-4">
+        <div className="my-4 flex items-center justify-start space-x-4">
           <LuArrowLeft />
           <p>Back to destinations</p>
         </div>
       </Link>
 
-      <div className="flex flex-col bg-white rounded-xl border overflow-auto p-4">
-        <h3 className="text-lg font-bold mb-3">Add a destination</h3>
+      <div className="flex flex-col overflow-auto rounded-xl border bg-white p-4">
+        <h3 className="mb-3 text-lg font-bold">Add a destination</h3>
         <p>
           Connect an account to StreamEth. Once connected, you can
           stream and upload clips and videos to it as often as you
           like.
         </p>
-        <div className="mt-4 flex flex-col gap-4 w-fit">
+        <div className="mt-4 flex w-fit flex-col gap-4">
           <YoutubeConnectButton
             organizationId={organization?._id}
             organizationSlug={params.organization}
           />
-          <Button disabled className="bg-[#121212] min-w-[200px]">
+          <Button disabled className="min-w-[200px] bg-[#121212]">
             <SiTwitter className="mr-2" />
             X(Twitter) (Coming Soon)
           </Button>

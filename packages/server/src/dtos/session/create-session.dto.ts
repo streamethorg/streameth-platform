@@ -102,4 +102,8 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsOptional()
   @IsString()
   firebaseId?: string;
+
+  @IsOptional()
+  @IsString()
+  talkType?: string;
 }

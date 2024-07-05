@@ -32,21 +32,21 @@ const LivestreamCard = ({
   livestream: IExtendedStage
 }) => {
   return (
-    <div className="flex flex-row md:flex-col space-y-2 w-full min-h-full uppercase rounded-xl">
-      <div className="flex-none my-auto w-1/4 md:w-full">
+    <div className="flex min-h-full w-full flex-row space-y-2 rounded-xl uppercase md:flex-col">
+      <div className="my-auto w-1/4 flex-none md:w-full">
         <Link href={link}>
           <Thumbnail imageUrl={thumbnail} />
         </Link>
       </div>
-      <div className="flex-grow ml-4 md:ml-0">
-        <CardHeader className="p-1 mt-1 rounded shadow-none md:py-0 lg:py-0 md:px-1 lg:px-1 lg:shadow-none">
+      <div className="ml-4 flex-grow md:ml-0">
+        <CardHeader className="mt-1 rounded p-1 shadow-none md:px-1 md:py-0 lg:px-1 lg:py-0 lg:shadow-none">
           <Link href={link}>
-            <CardTitle className="overflow-hidden text-sm capitalize hover:underline line-clamp-2">
+            <CardTitle className="line-clamp-2 overflow-hidden text-sm capitalize hover:underline">
               {name}
             </CardTitle>
           </Link>
           {showDate && (
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <CardDescription className="text-xs">
                 {livestream.isMultipleDate && livestream.streamEndDate
                   ? `${formatDate(
