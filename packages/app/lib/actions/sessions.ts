@@ -164,8 +164,6 @@ export const createAssetAction = async ({
 export const generateThumbnailAction = async (
   session: IExtendedSession
 ) => {
-
-
   try {
     const res = await generateThumbnail({ session })
 
