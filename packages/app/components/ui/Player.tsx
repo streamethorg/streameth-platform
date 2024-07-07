@@ -85,9 +85,9 @@ export function PlayerWithControls(props: {
             />
           )}
         </Player.PlayingIndicator>
-        <Player.LoadingIndicator className="w-full relative h-full bg-black/50 backdrop-blur data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <LoadingIcon className="w-8 h-8 animate-spin" />
+        <Player.LoadingIndicator className="relative h-full w-full bg-black/50 backdrop-blur data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <LoadingIcon className="h-8 w-8 animate-spin" />
           </div>
           {props.thumbnail && (
             <Image
@@ -182,11 +182,12 @@ export function PlayerWithControls(props: {
               </Player.Volume>
             </div>
 
-            <div className="flex sm:flex-1 md:flex-[1.5] justify-end items-center gap-2.5">
-              <Link href={'https://streameth.org'} rel="noopener noreferrer" target="_blank">
-                <div className="shadow border hidden md:flex flex-row items-center justify-center bg-white space-x-2 rounded-xl p-1">
-              
-
+            <div className="flex items-center justify-end gap-2.5 sm:flex-1 md:flex-[1.5]">
+              <Link
+                href={'https://streameth.org'}
+                rel="noopener noreferrer"
+                target="_blank">
+                <div className="hidden flex-row items-center justify-center space-x-2 rounded-xl border bg-white p-1 shadow md:flex">
                   <Image
                     src={LogoDark}
                     width={120}
@@ -195,7 +196,7 @@ export function PlayerWithControls(props: {
                     alt="StreamETH Logo"
                   />
                 </div>
-                <div className="shadow border flex md:hidden flex-row items-center justify-center bg-white space-x-2 p-[0.8px] rounded">
+                <div className="flex flex-row items-center justify-center space-x-2 rounded border bg-white p-[0.8px] shadow md:hidden">
                   <Image
                     src={LogoDark}
                     width={80}

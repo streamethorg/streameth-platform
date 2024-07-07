@@ -57,13 +57,13 @@ export default async function Watch({
     session.assetId,
     session.playbackId
   )
-  
+
   const thumbnail = await generateThumbnailAction(session)
 
   return (
     <Suspense key={session._id} fallback={<Loading />}>
-      <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full">
-        <div className="flex flex-col w-full h-full md:p-4">
+      <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-4">
+        <div className="flex h-full w-full flex-col md:p-4">
           <PlayerWithControls
             name={session.name}
             thumbnail={session.coverImage ?? thumbnail}

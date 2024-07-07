@@ -28,8 +28,6 @@ const VideoDownloadClient = ({
   className?: string
   collapsable?: boolean
 }) => {
-
-  
   const [loading, setLoading] = useState(false)
   if (!assetId) {
     return null
