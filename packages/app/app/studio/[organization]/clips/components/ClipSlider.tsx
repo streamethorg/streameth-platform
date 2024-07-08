@@ -13,6 +13,7 @@ import {
   PauseIcon,
 } from 'lucide-react'
 import { debounce } from 'lodash'
+import { start } from 'repl'
 
 const debouncedUpdate = debounce(
   (callback: (data: any) => void, data: any) => {
@@ -23,7 +24,6 @@ const debouncedUpdate = debounce(
 
 const ClipSlider = () => {
   const {
-    setPlaybackStatus,
     playbackStatus,
     setStartTime,
     startTime,
@@ -34,10 +34,43 @@ const ClipSlider = () => {
     setDragging,
     setSelectedTooltip,
     selectedTooltip,
+    isLoading,
   } = useClipContext()
 
   const [initialMousePos, setInitialMousePos] = useState<number>(0)
   const [initialMarkerPos, setInitialMarkerPos] = useState<number>(0)
+  const [updateTimeStart, setUpdateTimeStart] =
+    useState<boolean>(false)
+  const [updateTimeEnd, setUpdateTimeEnd] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (updateTimeStart && !isLoading && playbackStatus) {
+      console.log('updating time', dragging, playbackStatus.offset)
+      setStartTime({
+        unix: Date.now() - playbackStatus.offset,
+        displayTime: startTime.displayTime,
+      })
+      setUpdateTimeStart(false)
+    }
+    if (updateTimeEnd && !isLoading && playbackStatus) {
+      setEndTime({
+        unix: Date.now() - playbackStatus.offset,
+        displayTime: endTime.displayTime,
+      })
+      setUpdateTimeEnd(false)
+    }
+  }, [
+    updateTimeStart,
+    updateTimeEnd,
+    videoRef,
+    startTime,
+    isLoading,
+    dragging,
+    playbackStatus,
+    setStartTime,
+    setEndTime,
+    endTime.displayTime,
+  ])
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -77,6 +110,7 @@ const ClipSlider = () => {
         const newTime = increment ? time + 1 : time - 1
         if (marker === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
+            console.log('start', playbackStatus.offset)
             debouncedUpdate(setStartTime, {
               unix: Date.now() - playbackStatus.offset,
               displayTime: newTime,
@@ -134,6 +168,7 @@ const ClipSlider = () => {
               unix: Date.now() - playbackStatus.offset,
               displayTime: pos,
             })
+            setUpdateTimeStart(true)
           }
         } else if (dragging === 'end') {
           if (
@@ -144,6 +179,7 @@ const ClipSlider = () => {
               unix: Date.now() - playbackStatus.offset,
               displayTime: pos,
             })
+            setUpdateTimeEnd(true)
           }
         }
       }
@@ -329,6 +365,7 @@ const ClipSlider = () => {
               setSelectedTooltip,
               selectedTooltip,
               handle1SecondIncrementDecrement,
+              blocked: isLoading && dragging !== 'start',
             }}
           />
           <Marker
@@ -342,6 +379,7 @@ const ClipSlider = () => {
               setSelectedTooltip,
               selectedTooltip,
               handle1SecondIncrementDecrement,
+              blocked: isLoading && dragging !== 'end',
             }}
           />
         </div>
@@ -353,12 +391,6 @@ const ClipSlider = () => {
   )
 }
 
-function formatUnixTime(milliseconds: number) {
-  const seconds = Math.floor(milliseconds / 1000)
-  const minutes = Math.floor(seconds / 60)
-  const remainingSeconds = seconds % 60
-  return `${minutes} minutes ${remainingSeconds} seconds`
-}
 const Marker = ({
   startTime,
   endTime,
@@ -367,6 +399,7 @@ const Marker = ({
   formatTime,
   marker,
   selectedTooltip,
+  blocked,
 }: {
   startTime: { displayTime: number; unix: number }
   endTime: { displayTime: number; unix: number }
@@ -379,6 +412,7 @@ const Marker = ({
     increment: boolean,
     marker: string
   ) => void
+  blocked: boolean
 }) => {
   return (
     <div
@@ -391,7 +425,7 @@ const Marker = ({
         )}%`,
       }}
       onMouseDown={(e) => {
-        handleMouseDown(marker, e)
+        !blocked && handleMouseDown(marker, e)
       }}>
       <div className="relative h-full w-full">
         <div

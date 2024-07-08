@@ -33,6 +33,14 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import Combobox from '@/components/ui/combo-box'
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+} from '@/components/ui/select'
 
 const ClipButton = ({
   playbackId,
@@ -56,6 +64,8 @@ const ClipButton = ({
   const { startTime, endTime } = useClipContext()
   const [sessionId, setSessionId] = React.useState('')
   const { handleTermChange } = useSearchParams()
+  const [dayFilter, setDayFilter] = React.useState('')
+
   const handleCreateClip = async () => {
     let customSession: ISession = {
       name,
@@ -121,6 +131,16 @@ const ClipButton = ({
       })
   }
 
+  const uniqueDates = sessions.filter(
+    (session, index, self) =>
+      index ===
+      self.findIndex(
+        (t) =>
+          new Date(t.start).getDate() ===
+          new Date(session.start).getDate()
+      )
+  )
+
   return (
     <div className="flex flex-grow flex-col space-y-2">
       <div className="my-4 flex flex-grow flex-col space-y-2">
@@ -134,19 +154,51 @@ const ClipButton = ({
             onChange={(e) => setName(e.target.value)}
           />
         ) : (
-          <Combobox
-            value={
-              sessions.find((s) => s._id === sessionId)?.name || ''
-            }
-            setValue={(value) => setSessionId(value)}
-            placeholder="Select a session"
-            items={[
-              ...sessions.map((session) => ({
-                label: session.name,
-                value: session._id,
-              })).reverse(),
-            ]}
-          />
+          <>
+            <Select onValueChange={(value) => setDayFilter(value)}>
+              <SelectTrigger className="bg-white">
+                <SelectValue
+                  defaultValue={sessionId}
+                  placeholder={'Select a day'}
+                />
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                <SelectGroup>
+                  {uniqueDates.map((session) => (
+                    <SelectItem
+                      key={session._id}
+                      value={session.start.toString()}>
+                      {new Date(session.start).toDateString()}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Combobox
+              value={
+                sessions.find((s) => s._id === sessionId)?.name || ''
+              }
+              setValue={(value) => setSessionId(value)}
+              placeholder="Select a session"
+              items={[
+                ...sessions
+                  .filter((session) => {
+                    return dayFilter !== ''
+                      ? new Date(session.start).getDate() ===
+                          new Date(Number(dayFilter)).getDate()
+                      : true
+                  })
+                  .map((session) => ({
+                    label:
+                      session.assetId !== ''
+                        ? session.name + ' ✅'
+                        : session.name,
+                    value: session._id,
+                  }))
+                  .reverse(),
+              ]}
+            />
+          </>
         )}
       </div>
       <Button

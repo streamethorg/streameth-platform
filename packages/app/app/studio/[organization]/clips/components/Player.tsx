@@ -25,6 +25,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
     playbackStatus,
     setEndTime,
     endTime,
+    startTime,
   } = useClipContext()
 
   const playbackRef = useRef<{ progress: number; offset: number }>({
@@ -52,17 +53,14 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
               : Date.now())
           playbackRef.current = { progress, offset }
           setPlaybackStatus(playbackRef.current)
+          setIsLoading(false)
+          console.log(data.frag.rawProgramDateTime)
         }
       })
 
       // if seeking loading spinner
       videoRef.current.onseeking = () => {
         setIsLoading(true)
-      }
-
-      // if not seeking hide loading spinner
-      videoRef.current.onseeked = () => {
-        setIsLoading(false)
       }
 
       // Set error handling
