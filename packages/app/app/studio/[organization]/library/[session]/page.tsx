@@ -50,7 +50,10 @@ const EditSession = async ({
           <p>Back to library</p>
         </div>
       </Link>
-
+      <div>
+        start {session.start}
+        <div>end {session.end}</div>
+      </div>
       <div className="flex flex-col gap-4 overflow-auto md:flex-row">
         <div className="space-y-4 rounded-xl border bg-white p-4 md:w-2/3">
           <h1 className="text-lg font-bold">Video Details</h1>
