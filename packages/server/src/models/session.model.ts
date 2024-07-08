@@ -7,6 +7,8 @@ const SessionSchema = new Schema<ISessionModel>(
     description: { type: String, default: '', required: true },
     start: { type: Number },
     end: { type: Number },
+    startClipTime: { type: Number },
+    endClipTime: { type: Number },
     stageId: { type: Schema.Types.ObjectId, ref: 'Stage' },
     speakers: [
       {

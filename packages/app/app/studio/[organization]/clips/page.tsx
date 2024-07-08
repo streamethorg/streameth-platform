@@ -177,7 +177,6 @@ const EventClips = async ({
   const event = await fetchEvent({
     eventId: currentStage.eventId as string,
   })
-
   const sessions = await fetchAllSessions({
     stageId: currentStage._id,
   })

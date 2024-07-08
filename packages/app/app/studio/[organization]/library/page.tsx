@@ -25,6 +25,7 @@ import { fetchOrganization } from '@/lib/services/organizationService'
 import NotFound from '@/not-found'
 import { sortArray } from '@/lib/utils/utils'
 import LibraryGridLayout from './components/LibraryGridLayout'
+import Pagination from '@/app/[organization]/videos/components/pagination'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -56,7 +57,13 @@ const Library = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show?: boolean }
+  searchParams: {
+    layout: eLayout
+    sort: eSort
+    show?: boolean
+    limit?: number
+    page?: number
+  }
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -75,17 +82,15 @@ const Library = async ({
     ).map((state) => state.sessionId) as unknown as Set<string>
   )
 
-  const sessions = (
-    await fetchAllSessions({
-      organizationSlug: params.organization,
-    })
-  ).sessions.filter(
-    (session) =>
-      session.videoUrl || statesSet.has(session._id.toString())
-  )
+  const sessions = await fetchAllSessions({
+    organizationSlug: params.organization,
+    limit: searchParams.limit || 20,
+    page: searchParams.page || 1,
+    onlyVideos: true,
+  })
 
   const sortedSessions = sortArray(
-    sessions,
+    sessions.sessions,
     searchParams.sort
   ) as unknown as IExtendedSession[]
 
@@ -109,7 +114,7 @@ const Library = async ({
           />
         </CardFooter>
       </Card>
-      {!sessions || sessions.length === 0 ? (
+      {!sessions.sessions || sessions.sessions.length === 0 ? (
         <EmptyLibrary organizationId={organization._id.toString()} />
       ) : (
         <>
@@ -127,6 +132,7 @@ const Library = async ({
           )}
         </>
       )}
+      <Pagination {...sessions.pagination} />
     </div>
   )
 }
@@ -145,7 +151,7 @@ const LibraryPage = async ({
       searchParams.layout !== eLayout.list)
   ) {
     redirect(
-      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.asc_alpha}`
+      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.desc_date}&page=1&limit=20`
     )
   }
 
