@@ -57,13 +57,7 @@ const Library = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: {
-    layout: eLayout
-    sort: eSort
-    show?: boolean
-    limit?: number
-    page?: number
-  }
+  searchParams: { layout: eLayout; sort: eSort; show?: boolean, limit?: number, page?: number}
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -82,12 +76,14 @@ const Library = async ({
     ).map((state) => state.sessionId) as unknown as Set<string>
   )
 
-  const sessions = await fetchAllSessions({
-    organizationSlug: params.organization,
-    limit: searchParams.limit || 20,
-    page: searchParams.page || 1,
-    onlyVideos: true,
-  })
+  const sessions = (
+    await fetchAllSessions({
+      organizationSlug: params.organization,
+      limit: searchParams.limit || 20,
+      page: searchParams.page || 1,
+      onlyVideos: true,
+    })
+  )
 
   const sortedSessions = sortArray(
     sessions.sessions,
@@ -132,7 +128,7 @@ const Library = async ({
           )}
         </>
       )}
-      <Pagination {...sessions.pagination} />
+      <Pagination {...sessions.pagination}/>
     </div>
   )
 }
@@ -142,7 +138,7 @@ const LibraryPage = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show: boolean }
+  searchParams: { layout: eLayout; sort: eSort; show: boolean}
 }) => {
   if (
     !searchParams.layout ||
