@@ -182,11 +182,12 @@ const ClipButton = ({
               placeholder="Select a session"
               items={[
                 ...sessions
-                  .filter(
-                    (session) =>
-                      new Date(session.start).getDate() ===
-                      new Date(Number(dayFilter)).getDate()
-                  )
+                  .filter((session) => {
+                    return dayFilter !== ''
+                      ? new Date(session.start).getDate() ===
+                          new Date(Number(dayFilter)).getDate()
+                      : true
+                  })
                   .map((session) => ({
                     label:
                       session.assetId !== ''
