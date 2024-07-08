@@ -345,6 +345,8 @@ export const createClip = async (data: {
       playbackId: parsedClip.asset.playbackId,
       start: new Date().getTime(),
       end: new Date().getTime(),
+      startClipTime: data.start,
+      endClipTime: data.end,
       type: SessionType.clip,
     });
     if (session.firebaseId) {
