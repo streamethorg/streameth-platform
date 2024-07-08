@@ -92,12 +92,12 @@ const Preview = ({
             />
           )}
           <DialogFooter className="flex flex-row text-black">
-            <Button
+            {/* <Button
               className="mr-auto"
               variant={'destructive'}
               onClick={handleDelete}>
               Delete
-            </Button>
+            </Button> */}
 
             <ShareButton
               url={`${location.origin}/${organizationSlug}/watch?session=${sessionId}`}
