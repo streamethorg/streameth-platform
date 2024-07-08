@@ -4,6 +4,7 @@ import {
   IsArray,
   IsBoolean,
   IsNotEmpty,
+  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -26,6 +27,14 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsString()
   end: number;
+
+  @IsNumber()
+  @IsString()
+  startClipTime?: number;
+
+  @IsNumber()
+  @IsString()
+  endClipTime?: number;
 
   @IsOptional()
   @IsString()
