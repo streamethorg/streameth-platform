@@ -110,6 +110,7 @@ const ClipSlider = () => {
         const newTime = increment ? time + 1 : time - 1
         if (marker === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
+            console.log('start', playbackStatus.offset)
             debouncedUpdate(setStartTime, {
               unix: Date.now() - playbackStatus.offset,
               displayTime: newTime,
