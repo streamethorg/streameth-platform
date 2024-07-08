@@ -25,8 +25,8 @@ const Settings = async ({
   if (!organization) return null
 
   return (
-    <div className="items center flex p-12">
-      <Card className="h-full w-full max-w-3xl rounded-r-xl border bg-white shadow-none">
+    <div className="mx-auto my-12 flex w-full max-w-4xl">
+      <Card className="h-full w-full rounded-r-xl border bg-white shadow-none">
         <CardHeader>
           <CardTitle>Edit yout channel</CardTitle>
           <CardDescription>

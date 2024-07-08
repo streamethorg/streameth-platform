@@ -21,6 +21,7 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
+
 const Settings = async ({
   params,
   searchParams,
@@ -41,8 +42,8 @@ const Settings = async ({
   })
 
   return (
-    <div className="flex h-full w-full p-12">
-      <Card className="w-full max-w-3xl rounded-r-xl border bg-white shadow-none">
+    <div className="mx-auto my-12 flex h-[90%] w-full max-w-4xl">
+      <Card className="w-full rounded-r-xl border bg-white shadow-none">
         <CardHeader>
           <CardTitle>Team members</CardTitle>
           <CardDescription className="mb-4 mt-2">
