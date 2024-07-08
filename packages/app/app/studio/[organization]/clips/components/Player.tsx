@@ -105,7 +105,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
       <video
         ref={videoRef}
         autoPlay={false}
-        controls={false}
+        controls={true}
         className="sticky top-0 w-full rounded-lg"></video>
       <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
         {isLoading && (
