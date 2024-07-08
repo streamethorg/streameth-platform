@@ -144,7 +144,7 @@ const ClipButton = ({
               ...sessions.map((session) => ({
                 label: session.name,
                 value: session._id,
-              })),
+              })).reverse(),
             ]}
           />
         )}
