@@ -27,6 +27,8 @@ export interface ISession {
   description: string;
   start: number;
   end: number;
+  startClipTime?: number;
+  endClipTime?: number;
   stageId?: Types.ObjectId | string;
   speakers?: Omit<ISpeaker, 'organizationId'>[];
   source?: ISource;
