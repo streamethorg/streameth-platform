@@ -38,35 +38,37 @@ const SessionSidebar = ({
       )
   )
   const [dayFilter, setDayFilter] = React.useState(
-    uniqueDates[0].start || ''
+    uniqueDates[0]?.start || ''
   )
 
   return (
     <div className="h-full w-[400px] border-l bg-background bg-white">
       <CardTitle className="w-full border-b bg-white p-2 text-lg">
         <div className="flex flex-col space-y-2">
-          <Select onValueChange={(value) => setDayFilter(value)}>
-            <SelectTrigger className="bg-white">
-              <SelectValue
-                defaultValue={uniqueDates[0].start || ''}
-                placeholder={
-                  new Date(uniqueDates[0].start).toDateString() ||
-                  'select a day'
-                }
-              />
-            </SelectTrigger>
-            <SelectContent className="bg-white">
-              <SelectGroup>
-                {uniqueDates.map((session) => (
-                  <SelectItem
-                    key={session._id}
-                    value={session.start.toString()}>
-                    {new Date(session.start).toDateString()}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          {uniqueDates.length > 1 && (
+            <Select onValueChange={(value) => setDayFilter(value)}>
+              <SelectTrigger className="bg-white">
+                <SelectValue
+                  defaultValue={uniqueDates[0]?.start || ''}
+                  placeholder={
+                    new Date(uniqueDates[0]?.start).toDateString() ||
+                    'select a day'
+                  }
+                />
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                <SelectGroup>
+                  {uniqueDates.map((session) => (
+                    <SelectItem
+                      key={session._id}
+                      value={session.start.toString()}>
+                      {new Date(session.start).toDateString()}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          )}
           <Combobox
             value={
               sessions.find((s) => s._id === sessionId)?.name || ''
