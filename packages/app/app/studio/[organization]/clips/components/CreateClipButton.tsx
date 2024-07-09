@@ -141,10 +141,12 @@ const ClipButton = ({
             setValue={(value) => setSessionId(value)}
             placeholder="Select a session"
             items={[
-              ...sessions.map((session) => ({
-                label: session.name,
-                value: session._id,
-              })).reverse(),
+              ...sessions
+                .map((session) => ({
+                  label: session.name,
+                  value: session._id,
+                }))
+                .reverse(),
             ]}
           />
         )}

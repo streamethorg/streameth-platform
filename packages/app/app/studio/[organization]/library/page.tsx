@@ -26,6 +26,7 @@ import NotFound from '@/not-found'
 import { sortArray } from '@/lib/utils/utils'
 import LibraryGridLayout from './components/LibraryGridLayout'
 import Pagination from '@/app/[organization]/videos/components/pagination'
+import SearchBar from '@/components/misc/SearchBar'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -57,7 +58,14 @@ const Library = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show?: boolean, limit?: number, page?: number}
+  searchParams: {
+    layout: eLayout
+    sort: eSort
+    show?: boolean
+    limit?: number
+    page?: number
+    searchQuery?: string
+  }
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -76,15 +84,13 @@ const Library = async ({
     ).map((state) => state.sessionId) as unknown as Set<string>
   )
 
-  const sessions = (
-    await fetchAllSessions({
-      organizationSlug: params.organization,
-      limit: searchParams.limit || 20,
-      page: searchParams.page || 1,
-      onlyVideos: true,
-      searchQuery: 'clip'
-    })
-  )
+  const sessions = await fetchAllSessions({
+    organizationSlug: params.organization,
+    limit: searchParams.limit || 20,
+    page: searchParams.page || 1,
+    onlyVideos: true,
+    searchQuery: searchParams.searchQuery,
+  })
 
   const sortedSessions = sortArray(
     sessions.sessions,
@@ -111,6 +117,9 @@ const Library = async ({
           />
         </CardFooter>
       </Card>
+      <div className="z-[999] p-2">
+        <SearchBar organizationSlug={params.organization} isStudio />
+      </div>
       {!sessions.sessions || sessions.sessions.length === 0 ? (
         <EmptyLibrary organizationId={organization._id.toString()} />
       ) : (
@@ -129,7 +138,7 @@ const Library = async ({
           )}
         </>
       )}
-      <Pagination {...sessions.pagination}/>
+      <Pagination {...sessions.pagination} />
     </div>
   )
 }
@@ -139,7 +148,7 @@ const LibraryPage = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show: boolean}
+  searchParams: { layout: eLayout; sort: eSort; show: boolean }
 }) => {
   if (
     !searchParams.layout ||

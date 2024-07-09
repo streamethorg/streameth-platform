@@ -193,6 +193,7 @@ export default class SessionService {
       organization: organizationSlug,
       page: 0,
       size: 0,
+      onlyVideos: true,
     } as any);
 
     const fuse = new Fuse(sessions.sessions, options);
