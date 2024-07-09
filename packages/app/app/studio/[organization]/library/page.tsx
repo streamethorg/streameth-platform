@@ -82,6 +82,7 @@ const Library = async ({
       limit: searchParams.limit || 20,
       page: searchParams.page || 1,
       onlyVideos: true,
+      searchQuery: 'clip'
     })
   )
 
