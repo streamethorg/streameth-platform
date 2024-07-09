@@ -33,6 +33,8 @@ type ClipContextType = {
   setSelectedTooltip: React.Dispatch<
     React.SetStateAction<string | null>
   >
+  fragmentLoading: boolean
+  setFragmentLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ClipContext = createContext<ClipContextType | null>(null)
@@ -55,7 +57,8 @@ export const ClipProvider = ({
     unix: 0,
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
+  const [fragmentLoading, setFragmentLoading] =
+    useState<boolean>(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [dragging, setDragging] = useState<string | null>(null)
   const [selectedTooltip, setSelectedTooltip] = useState<
@@ -78,6 +81,8 @@ export const ClipProvider = ({
         setDragging,
         selectedTooltip,
         setSelectedTooltip,
+        fragmentLoading,
+        setFragmentLoading,
       }}>
       {children}
     </ClipContext.Provider>
