@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { ClipsPageParams, IExtendedSession } from '@/lib/types'
+import { ClipsPageParams } from '@/lib/types'
 import SelectSession from './components/SelectSession'
 import RecordingSelect from './components/RecordingSelect'
 import CreateClipButton from './components/CreateClipButton'
@@ -9,25 +9,20 @@ import {
   fetchStageRecordings,
   fetchStages,
 } from '@/lib/services/stageService'
-
 import { fetchAllSessions } from '@/lib/data'
 import { fetchEvent } from '@/lib/services/eventService'
-import { CardTitle } from '@/components/ui/card'
 import { Film } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Preview from '../Preview'
-import ClipsSessionList from './components/ClipSessionList'
-
+import SessionSidebar from './components/SessionSidebar'
 import {
   fetchAsset,
   fetchSession,
 } from '@/lib/services/sessionService'
-import { IExtendedEvent } from '@/lib/types'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { notFound } from 'next/navigation'
 import ClipSlider from './components/ClipSlider'
-import { Session, Stream } from 'livepeer/dist/models/components'
 
 const ClipContainer = ({
   children,
@@ -53,34 +48,6 @@ const SkeletonSidebar = () => (
   </div>
 )
 
-const SessionSidebar = async ({
-  event,
-  sessions,
-  currentRecording,
-  recordings,
-}: {
-  event?: IExtendedEvent
-  sessions: IExtendedSession[]
-  currentRecording?: string
-  recordings: {
-    parentStream: Stream | undefined
-    recordings: Session[]
-  }
-}) => {
-  return (
-    <div className="h-full w-[300px] border-l bg-background bg-white">
-      <CardTitle className="border-b bg-white p-2 text-lg">
-        <RecordingSelect
-          selectedRecording={currentRecording ?? undefined}
-          streamRecordings={recordings.recordings}
-        />
-      </CardTitle>
-      <div className="h-[calc(100%-100px)] overflow-y-scroll">
-        <ClipsSessionList event={event} sessions={sessions} />
-      </div>
-    </div>
-  )
-}
 const EventClips = async ({
   params,
   searchParams,
@@ -210,18 +177,9 @@ const EventClips = async ({
   const event = await fetchEvent({
     eventId: currentStage.eventId as string,
   })
-  // NOTE: EthCC hack, revert to sessions by StageId after EthCC
-  let sessions
-  if (params.organization === 'ethcc') {
-    sessions = await fetchAllSessions({
-      organizationSlug: params.organization,
-      event: '667d41aac5090b2250b12e75',
-    })
-  } else {
-    sessions = await fetchAllSessions({
-      stageId: currentStage._id,
-    })
-  }
+  const sessions = await fetchAllSessions({
+    stageId: currentStage._id,
+  })
   const previewAsset = await (async function () {
     if (previewId) {
       const session = await fetchSession({

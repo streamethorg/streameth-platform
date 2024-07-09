@@ -27,6 +27,7 @@ import { sortArray } from '@/lib/utils/utils'
 import LibraryGridLayout from './components/LibraryGridLayout'
 import Pagination from '@/app/[organization]/videos/components/pagination'
 import SearchBar from '@/components/misc/SearchBar'
+import { LuFileUp } from 'react-icons/lu'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -99,7 +100,7 @@ const Library = async ({
 
   return (
     <div className="flex h-full w-full flex-col bg-white">
-      <Card
+      {/* <Card
         style={{
           backgroundImage: `url(/backgrounds/nftBg.svg)`,
         }}
@@ -116,9 +117,26 @@ const Library = async ({
             organizationId={organization._id.toString()}
           />
         </CardFooter>
-      </Card>
-      <div className="z-[999] p-2">
-        <SearchBar organizationSlug={params.organization} isStudio />
+      </Card> */}
+      <div className="p-4">
+        <h2 className="text-lg font-bold">Video library</h2>
+        <div className="w flex items-center justify-between">
+          <div className="flex flex-row items-center space-x-4 rounded-xl border bg-white hover:bg-secondary">
+            <div className="rounded-xl border bg-primary p-4 text-white">
+              <LuFileUp size={25} />
+            </div>
+            <span className="text-sm">Upload Video</span>
+          </div>
+          {/* <div className="flex items-center justify-between p-2"> */}
+          <div className="z-[999]">
+            <SearchBar
+              organizationSlug={params.organization}
+              isStudio
+            />
+          </div>
+          <div>Filter</div>
+          {/* </div> */}
+        </div>
       </div>
       {!sessions.sessions || sessions.sessions.length === 0 ? (
         <EmptyLibrary organizationId={organization._id.toString()} />
