@@ -46,8 +46,8 @@ const Destinations = async ({
   }
 
   return (
-    <div className="flex h-full w-full p-12">
-      <Card className="w-full max-w-3xl rounded-r-xl border bg-white shadow-none">
+    <div className="mx-auto mt-12 flex h-[90%] w-full max-w-4xl">
+      <Card className="w-full rounded-r-xl border bg-white shadow-none">
         <CardHeader>
           <CardTitle>Destinations</CardTitle>
           <CardDescription className="mt-2">
