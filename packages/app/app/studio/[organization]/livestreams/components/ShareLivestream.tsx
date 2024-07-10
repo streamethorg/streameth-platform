@@ -4,9 +4,11 @@ import React, { useEffect, useState } from 'react'
 
 const ShareLivestream = ({
   streamId,
+  variant = 'ghost',
   organization,
 }: {
   organization: string
+  variant?: 'outline' | 'ghost' | 'primary' | 'default'
   streamId?: string
 }) => {
   const [url, setUrl] = useState('')
@@ -20,7 +22,7 @@ const ShareLivestream = ({
     <div onClick={(e) => e.stopPropagation()}>
       <ShareButton
         className="justify-start"
-        variant="ghost"
+        variant={variant}
         url={`${url}/${organization}/livestream?stage=${streamId}`}
         shareFor="livestream"
       />
