@@ -14,6 +14,7 @@ import UploadVideoForm from './upload/UploadVideoForm'
 import { useState } from 'react'
 import UploadComplete from '@/lib/svg/UploadComplete'
 import { useRouter } from 'next/navigation'
+import { LuFileUp } from 'react-icons/lu'
 
 const UploadVideoDialog = ({
   organizationId,
@@ -34,10 +35,11 @@ const UploadVideoDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant={'outlinePrimary'} className="text-black">
-          Upload video
-        </Button>
+      <DialogTrigger className="flex w-fit flex-row items-center space-x-4 rounded-xl border bg-white p-2 pr-4 hover:bg-secondary">
+        <div className="rounded-xl border bg-primary p-4 text-white">
+          <LuFileUp size={25} />
+        </div>
+        <span className="text-sm">Upload Video</span>
       </DialogTrigger>
       <DialogContent className="bg-white sm:max-h-[800px] sm:max-w-[525px]">
         {isUploaded ? (
