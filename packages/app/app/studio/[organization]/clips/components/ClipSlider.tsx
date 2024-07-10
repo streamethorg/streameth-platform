@@ -35,6 +35,7 @@ const ClipSlider = () => {
     setSelectedTooltip,
     selectedTooltip,
     isLoading,
+    fragmentLoading,
   } = useClipContext()
 
   const [initialMousePos, setInitialMousePos] = useState<number>(0)
@@ -44,15 +45,14 @@ const ClipSlider = () => {
   const [updateTimeEnd, setUpdateTimeEnd] = useState<boolean>(false)
 
   useEffect(() => {
-    if (updateTimeStart && !isLoading && playbackStatus) {
-      console.log('updating time', dragging, playbackStatus.offset)
+    if (updateTimeStart && !fragmentLoading && playbackStatus) {
       setStartTime({
         unix: Date.now() - playbackStatus.offset,
         displayTime: startTime.displayTime,
       })
       setUpdateTimeStart(false)
     }
-    if (updateTimeEnd && !isLoading && playbackStatus) {
+    if (updateTimeEnd && !fragmentLoading && playbackStatus) {
       setEndTime({
         unix: Date.now() - playbackStatus.offset,
         displayTime: endTime.displayTime,
@@ -64,12 +64,12 @@ const ClipSlider = () => {
     updateTimeEnd,
     videoRef,
     startTime,
-    isLoading,
     dragging,
     playbackStatus,
     setStartTime,
     setEndTime,
     endTime.displayTime,
+    fragmentLoading,
   ])
 
   useEffect(() => {
