@@ -15,6 +15,7 @@ import LivestreamTable from './livestreams/components/LivestreamTable'
 import { notFound } from 'next/navigation'
 import { sortArray } from '@/lib/utils/utils'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
+
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -35,7 +36,7 @@ const OrganizationPage = async ({
   ) as unknown as IExtendedStage[]
 
   return (
-    <div className="flex h-full w-full flex-col p-8">
+    <div className="flex h-full w-full flex-col p-4">
       <div className="flex max-h-[200px] w-full flex-col">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="md flex max-w-5xl items-center gap-4 py-4">
@@ -44,7 +45,7 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row items-center space-x-4 rounded-xl border bg-white p-2 hover:bg-secondary">
+            <div className="flex flex-row items-center space-x-4 rounded-xl border bg-white p-2 pr-4 transition-colors hover:bg-secondary">
               <div className="rounded-xl border bg-primary p-4 text-white">
                 <LuFileUp size={25} />
               </div>
