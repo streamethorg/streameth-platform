@@ -25,12 +25,15 @@ export default function SearchBar({
   organizationSlug,
   searchVisible = true,
   isMobile = false,
+  isStudio = false,
 }: {
   organizationSlug: string
   searchVisible?: boolean
   isMobile?: boolean
+  isStudio?: boolean
 }): JSX.Element {
-  const { searchParams } = useSearchParams()
+  const { searchParams, handleTermChange: handleStudioTermChange } =
+    useSearchParams()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>(
     searchParams.get('searchQuery') || ''
@@ -52,7 +55,7 @@ export default function SearchBar({
     if (debouncedSearchQuery) {
       setIsLoading(true)
       fetch(
-        `${apiUrl()}/sessions/${organizationSlug}/search?search=${debouncedSearchQuery}`
+        `${apiUrl()}/sessions/${organizationSlug}/search?search=${debouncedSearchQuery}&onlyVideos=true`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -76,7 +79,9 @@ export default function SearchBar({
 
   const handleTermChange = (session: IExtendedSession) => {
     router.push(
-      `/${organizationSlug}/watch?session=${session._id.toString()}`
+      isStudio
+        ? `/studio/${organizationSlug}/library/${session._id.toString()}`
+        : `/${organizationSlug}/watch?session=${session._id.toString()}`
     )
     return
   }
@@ -94,12 +99,23 @@ export default function SearchBar({
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             setIsOpened(false)
-            router.push(
-              archivePath({
-                organizationSlug: organizationSlug,
-                searchQuery: searchQuery,
-              })
-            )
+            isStudio
+              ? handleStudioTermChange([
+                  {
+                    key: 'searchQuery',
+                    value: searchQuery,
+                  },
+                  {
+                    key: 'page',
+                    value: '1',
+                  },
+                ])
+              : router.push(
+                  archivePath({
+                    organizationSlug: organizationSlug,
+                    searchQuery: searchQuery,
+                  })
+                )
           }
         }}
         ref={inputRef}

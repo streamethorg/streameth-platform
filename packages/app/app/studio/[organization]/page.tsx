@@ -1,7 +1,5 @@
 'use server'
 
-import { LuFileUp } from 'react-icons/lu'
-import Link from 'next/link'
 import { Loading } from './livestreams/page'
 import {
   IExtendedStage,
@@ -15,7 +13,7 @@ import LivestreamTable from './livestreams/components/LivestreamTable'
 import { notFound } from 'next/navigation'
 import { sortArray } from '@/lib/utils/utils'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
-
+import UploadVideoDialog from './library/components/UploadVideoDialog'
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -44,14 +42,9 @@ const OrganizationPage = async ({
             show={searchParams?.show}
             organization={organization}
           />
-          <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row items-center space-x-4 rounded-xl border bg-white p-2 pr-4 transition-colors hover:bg-secondary">
-              <div className="rounded-xl border bg-primary p-4 text-white">
-                <LuFileUp size={25} />
-              </div>
-              <span className="text-sm">Upload Video</span>
-            </div>
-          </Link>
+          <UploadVideoDialog
+            organizationId={organization._id.toString()}
+          />
         </div>
       </div>
       <div className="flex h-[80%] flex-col">
