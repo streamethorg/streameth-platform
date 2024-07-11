@@ -78,7 +78,10 @@ export default function Combobox({
                 value={item.label}
                 onSelect={(currentValue) => {
                   setValue(
-                    currentValue === item.label ? '' : item.value
+                    currentValue.toLowerCase() ===
+                      item.label.toLowerCase()
+                      ? item.value
+                      : value
                   )
                   setOpen(false)
                 }}>
