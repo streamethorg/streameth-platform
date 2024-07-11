@@ -772,6 +772,8 @@ const models: TsoaRoute.Models = {
       description: { dataType: 'string', required: true },
       start: { dataType: 'double', required: true },
       end: { dataType: 'double', required: true },
+      startClipTime: { dataType: 'double' },
+      endClipTime: { dataType: 'double' },
       stageId: {
         dataType: 'union',
         subSchemas: [
@@ -873,6 +875,8 @@ const models: TsoaRoute.Models = {
         description: { dataType: 'string', required: true },
         start: { dataType: 'double', required: true },
         end: { dataType: 'double', required: true },
+        startClipTime: { dataType: 'double' },
+        endClipTime: { dataType: 'double' },
         stageId: {
           dataType: 'union',
           subSchemas: [
@@ -934,6 +938,8 @@ const models: TsoaRoute.Models = {
       description: { dataType: 'string', required: true },
       start: { dataType: 'double', required: true },
       end: { dataType: 'double', required: true },
+      startClipTime: { dataType: 'double' },
+      endClipTime: { dataType: 'double' },
       stageId: { dataType: 'string' },
       speakers: {
         dataType: 'array',
@@ -987,6 +993,8 @@ const models: TsoaRoute.Models = {
       description: { dataType: 'string', required: true },
       start: { dataType: 'double', required: true },
       end: { dataType: 'double', required: true },
+      startClipTime: { dataType: 'double' },
+      endClipTime: { dataType: 'double' },
       stageId: { dataType: 'string' },
       speakers: {
         dataType: 'array',
@@ -3369,6 +3377,7 @@ export function RegisterRoutes(app: Router) {
         timestamp: { in: 'query', name: 'timestamp', dataType: 'double' },
         assetId: { in: 'query', name: 'assetId', dataType: 'string' },
         published: { in: 'query', name: 'published', dataType: 'boolean' },
+        type: { in: 'query', name: 'type', dataType: 'string' },
       };
 
       // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

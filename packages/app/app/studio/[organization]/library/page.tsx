@@ -3,19 +3,7 @@
 import { fetchAllSessions } from '@/lib/data'
 import { redirect } from 'next/navigation'
 import LibraryListLayout from './components/LibraryListLayout'
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import UploadVideoDialog from './components/UploadVideoDialog'
-import { fetchAllStates } from '@/lib/services/stateService'
-import {
-  StateStatus,
-  StateType,
-} from 'streameth-new-server/src/interfaces/state.interface'
 import { Suspense } from 'react'
 import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
 import TableSkeleton from '@/components/misc/Table/TableSkeleton'
@@ -26,20 +14,19 @@ import NotFound from '@/not-found'
 import { sortArray } from '@/lib/utils/utils'
 import LibraryGridLayout from './components/LibraryGridLayout'
 import Pagination from '@/app/[organization]/videos/components/pagination'
+import SearchBar from '@/components/misc/SearchBar'
+import LibraryFilter from './components/LibraryFilter'
+import { fetchOrganizationStages } from '@/lib/services/stageService'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
     <div className="flex h-full w-full flex-col space-y-4 bg-white">
-      <Card className="bg-secondary p-4 shadow-none lg:border-none">
-        <CardHeader>
-          <CardTitle>Video library</CardTitle>
-          <CardDescription>
-            Manage you clips and livestream recordings or upload a new
-            video.
-          </CardDescription>
-        </CardHeader>
-        <CardFooter></CardFooter>
-      </Card>
+      <div className="w-full p-4">
+        <h2 className="mb-2 text-lg font-bold">Video library</h2>
+        <div className="flex justify-between">
+          <div className="flex items-center"></div>
+        </div>
+      </div>
       {eLayout.grid === layout && (
         <div className="m-5 grid grid-cols-4 gap-4">
           {Array.from({ length: 6 }).map((_, index) => (
@@ -63,6 +50,10 @@ const Library = async ({
     show?: boolean
     limit?: number
     page?: number
+    searchQuery?: string
+    stage?: string
+    type?: string
+    published?: boolean
   }
 }) => {
   const organization = await fetchOrganization({
@@ -72,21 +63,19 @@ const Library = async ({
   if (!organization) {
     return NotFound()
   }
-
-  const statesSet = new Set(
-    (
-      await fetchAllStates({
-        type: StateType.video,
-        status: StateStatus.pending,
-      })
-    ).map((state) => state.sessionId) as unknown as Set<string>
-  )
+  const stages = await fetchOrganizationStages({
+    organizationId: organization._id,
+  })
 
   const sessions = await fetchAllSessions({
     organizationSlug: params.organization,
     limit: searchParams.limit || 20,
     page: searchParams.page || 1,
     onlyVideos: true,
+    searchQuery: searchParams.searchQuery,
+    stageId: searchParams.stage,
+    published: searchParams.published,
+    type: searchParams.type,
   })
 
   const sortedSessions = sortArray(
@@ -96,24 +85,24 @@ const Library = async ({
 
   return (
     <div className="flex h-full w-full flex-col bg-white">
-      <Card
-        style={{
-          backgroundImage: `url(/backgrounds/nftBg.svg)`,
-        }}
-        className="rounded-none border-none bg-black bg-cover bg-no-repeat p-4 text-white shadow-none">
-        <CardHeader>
-          <CardTitle>Video library</CardTitle>
-          <CardDescription className="text-white">
-            Manage you clips and livestream recordings or upload a new
-            video.
-          </CardDescription>
-        </CardHeader>
-        <CardFooter>
+      <div className="w-full p-4">
+        <h2 className="mb-2 text-lg font-bold">Video library</h2>
+        <div className="flex justify-between">
           <UploadVideoDialog
             organizationId={organization._id.toString()}
           />
-        </CardFooter>
-      </Card>
+
+          <div className="flex items-center">
+            <div className="z-50 min-w-[300px] lg:min-w-[400px]">
+              <SearchBar
+                organizationSlug={params.organization}
+                isStudio
+              />
+            </div>
+            <LibraryFilter stages={stages} />
+          </div>
+        </div>
+      </div>
       {!sessions.sessions || sessions.sessions.length === 0 ? (
         <EmptyLibrary organizationId={organization._id.toString()} />
       ) : (
@@ -132,7 +121,7 @@ const Library = async ({
           )}
         </>
       )}
-      <Pagination {...sessions.pagination} />
+      <Pagination {...sessions.pagination}/>
     </div>
   )
 }
@@ -142,7 +131,7 @@ const LibraryPage = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show: boolean }
+  searchParams: { layout: eLayout; sort: eSort; show: boolean}
 }) => {
   if (
     !searchParams.layout ||

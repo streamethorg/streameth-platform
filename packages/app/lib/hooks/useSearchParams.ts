@@ -6,7 +6,7 @@ import {
 
 interface ITerm {
   key: string
-  value: string
+  value: string | undefined
 }
 const useSearchParams = () => {
   const pathname = usePathname()
