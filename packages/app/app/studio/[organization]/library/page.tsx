@@ -121,7 +121,7 @@ const Library = async ({
           )}
         </>
       )}
-      <Pagination {...sessions.pagination} />
+      <Pagination {...sessions.pagination}/>
     </div>
   )
 }
@@ -131,7 +131,7 @@ const LibraryPage = async ({
   searchParams,
 }: {
   params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show: boolean }
+  searchParams: { layout: eLayout; sort: eSort; show: boolean}
 }) => {
   if (
     !searchParams.layout ||
