@@ -73,12 +73,16 @@ export default class SessionService {
     size: number;
     page: number;
     published: boolean;
+    type: string;
   }): Promise<{
     sessions: Array<ISession>;
     totalDocuments: number;
     pageable: { page: number; size: number };
   }> {
     let filter = {};
+    if (d.type !== undefined) {
+      filter = { ...filter, type: d.type };
+    }
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
     }
@@ -193,6 +197,7 @@ export default class SessionService {
       organization: organizationSlug,
       page: 0,
       size: 0,
+      onlyVideos: true,
     } as any);
 
     const fuse = new Fuse(sessions.sessions, options);
