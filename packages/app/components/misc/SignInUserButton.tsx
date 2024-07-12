@@ -4,6 +4,7 @@ import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth'
 import { deleteSession, storeSession } from '@/lib/actions/auth'
 import { apiUrl } from '@/lib/utils/utils'
 import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
 
 interface SignInUserButtonProps {
   className?: string
@@ -15,6 +16,7 @@ export const SignInUserButton = ({
   className,
 }: SignInUserButtonProps) => {
   const { ready, authenticated } = usePrivy()
+  const [isLoading, setIsLoading] = useState(false)
 
   const getSession = async () => {
     const privyToken = localStorage.getItem('privy:token')
@@ -37,23 +39,36 @@ export const SignInUserButton = ({
   const { login } = useLogin({
     onComplete: () => {
       getSession()
+      setIsLoading(false)
     },
     onError: (error) => {
       deleteSession()
+      setIsLoading(false)
     },
   })
 
   const { logout } = useLogout({
     onSuccess: () => {
       deleteSession()
+      setIsLoading(false)
     },
   })
 
+  const handleClick = () => {
+    setIsLoading(true)
+    if (authenticated) {
+      logout()
+    } else {
+      login()
+    }
+  }
+
   return (
     <Button
-      onClick={authenticated ? logout : login}
-      className={className}>
-      {!ready ? (
+      onClick={handleClick}
+      className={className}
+      disabled={!ready || isLoading}>
+      {!ready || isLoading ? (
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       ) : authenticated ? (
         'Sign Out'
