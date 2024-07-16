@@ -7,9 +7,8 @@ test.beforeEach(async ({ page }) => {
 })
 
 async function generatePrivyJWT() {
-  const { publicKey, privateKey } = await jose.generateKeyPair(
-    'ES256'
-  )
+  const { publicKey, privateKey } =
+    await jose.generateKeyPair('ES256')
 
   console.log(process.env.PRIVY_APP_ID)
 
@@ -42,24 +41,48 @@ async function generatePrivyJWT() {
   return authToken
 }
 
-test('login to studio page with Privy JWT', async ({ page }) => {
+test('login to studio page with Privy', async ({ page, context }) => {
   const authToken = await generatePrivyJWT()
   const accessToken = await getAccessToken()
 
-  console.log(accessToken)
+  // Mock user address (replace with a valid address format if needed)
+  const userAddress = '0x1234567890123456789012345678901234567890'
+
+  // Set the required cookies
+  await context.addCookies([
+    {
+      name: 'privy-token',
+      value: authToken,
+      domain: 'localhost',
+      path: '/',
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    },
+  ])
+
+  // Mock the token verification endpoint
+  await page.route(
+    'https://dev.api.streameth.org/auth/verify-token',
+    async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ data: true }),
+      })
+    }
+  )
 
   await page.goto('http://localhost:3000/studio/create', {
     waitUntil: 'networkidle',
   })
 
+  // Store the token in localStorage (if still needed)
   await page.evaluate((token) => {
     localStorage.setItem('privy:auth:token', token)
   }, authToken)
 
   await page.reload({ waitUntil: 'networkidle' })
-
   expect(page.url()).toContain('/studio')
-
   await expect(page.locator('text=Studio')).toBeVisible({
     timeout: 30000,
   })
