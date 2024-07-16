@@ -7,8 +7,6 @@
     "dev": "nodemon --config nodemon.json",
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "test": "mocha",
-    "prettier:fix": "prettier --write './src' './test'",
-    "prettier:check": "prettier --check './src' './test'",
     "generate:routes": "tsoa spec-and-routes"
   },
   "dependencies": {
