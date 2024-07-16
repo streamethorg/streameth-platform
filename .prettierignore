@@ -1,2 +1,4 @@
 packages/server/src/routes/*.ts
-packages/server/src/swagger/*.ts
+packages/server/src/swagger/
+packages/server/src/error/
+packages/server/src/debug/
