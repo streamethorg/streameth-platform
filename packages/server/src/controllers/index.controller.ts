@@ -16,7 +16,7 @@ import { validateWebhook } from '@utils/validateWebhook';
 import StageService from '@services/stage.service';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import SessionService from '@services/session.service';
-import { getAsset, getDownloadUrl, uploadToIpfs } from '@utils/livepeer';
+import { getAsset, getDownloadUrl } from '@utils/livepeer';
 import StateService from '@services/state.service';
 import { StateStatus } from '@interfaces/state.interface';
 import StorageService from '@utils/s3';
@@ -66,9 +66,14 @@ export class IndexController extends Controller {
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
 
+      console.log(payload);
+
       switch (payload.event) {
         case LivepeerEvent.assetReady:
           await this.assetReady(payload.payload.id);
+          break;
+        case LivepeerEvent.assetFailed:
+          await this.assetFailed(payload.payload.id);
           break;
         case LivepeerEvent.streamStarted:
         case LivepeerEvent.streamIdle:
@@ -124,5 +129,28 @@ export class IndexController extends Controller {
     });
 
     // await startAITools(payload.payload.id);
+  }
+
+  private async assetFailed(id: string) {
+    const asset = await getAsset(id);
+    const session = await this.sessionService.findOne({
+      assetId: asset.id,
+    });
+
+    if (!session) {
+      throw 'No session found';
+    }
+
+    const state = await this.stateService.getAll({
+      sessionId: session._id.toString(),
+    });
+
+    if (!state || state.length === 0) {
+      throw 'No state found';
+    }
+
+    await this.stateService.update(state[0]._id.toString(), {
+      status: StateStatus.error,
+    });
   }
 }

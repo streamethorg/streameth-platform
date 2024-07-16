@@ -10,6 +10,7 @@ export enum StateStatus {
   completed = 'completed',
   canceled = 'canceled',
   sync = 'sync',
+  error = 'error',
 }
 
 export enum StateType {
