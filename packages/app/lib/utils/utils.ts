@@ -185,7 +185,7 @@ export const formatIdentify = (identity = '') => {
 };
 export const buildPlaybackUrl = (playbackId: string, vod?: boolean): string => {
   if (vod) {
-    return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/index.m3u8`
+    return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/index.m3u8`;
   }
   return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`;
 };
@@ -229,13 +229,13 @@ export const generateParams = ({
   sessionId,
   stageId,
 }: IGenerateEmbed) => {
-  const params = new URLSearchParams()
-  playbackId && params.append('playbackId', playbackId ?? '')
-  sessionId && params.append('session', sessionId ?? '')
-  stageId && params.append('stage', stageId ?? '')
-  params.append('vod', vod ? 'true' : 'false')
-  params.append('streamId', streamId ?? '')
-  params.append('playerName', playerName ?? '')
+  const params = new URLSearchParams();
+  playbackId && params.append('playbackId', playbackId ?? '');
+  sessionId && params.append('session', sessionId ?? '');
+  stageId && params.append('stage', stageId ?? '');
+  params.append('vod', vod ? 'true' : 'false');
+  params.append('streamId', streamId ?? '');
+  params.append('playerName', playerName ?? '');
 
   return params.toString();
 };
@@ -256,8 +256,8 @@ export const generateEmbedCode = ({
     playerName,
     sessionId,
     stageId,
-  })}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-}
+  })}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+};
 
 export const sortArray = (
   stages: IExtendedStage[] | IExtendedSession[] | IExtendedNftCollections[],

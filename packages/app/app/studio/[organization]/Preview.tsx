@@ -65,7 +65,7 @@ const Preview = ({
       <DialogContent className="w-full max-w-4xl bg-transparent text-white">
         <div className="space-y-2 p-4">
           {status?.phase === 'processing' ? (
-            <div className="flex aspect-video flex-col items-center justify-center rounded-lg bg-background p-4 text-black">
+            <div className="bg-background flex aspect-video flex-col items-center justify-center rounded-lg p-4 text-black">
               <p className="">Video is processing</p>
               <p>
                 {(Number(status?.progress?.toFixed(2)) ?? 0) * 100}% complete

@@ -99,7 +99,7 @@ export default function CreateOrganizationForm({
               <FormItem className="">
                 <FormControl>
                   <ImageUpload
-                    className="h-40 w-full rounded-xl bg-neutrals-300"
+                    className="bg-neutrals-300 h-40 w-full rounded-xl"
                     placeholder="Click to upload image here. Maximum image file size is 5MB.
                     Best resolution of 1500 x 500px. Aspect ratio of 3:1."
                     aspectRatio={1}
@@ -119,7 +119,7 @@ export default function CreateOrganizationForm({
                 <FormItem className="relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1">
                   <FormControl>
                     <ImageUpload
-                      className="m-auto h-full w-full rounded-full bg-neutrals-300 text-white"
+                      className="bg-neutrals-300 m-auto h-full w-full rounded-full text-white"
                       aspectRatio={1}
                       path={`organizations`}
                       {...field}

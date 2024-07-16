@@ -79,7 +79,7 @@ const LivestreamTable = ({
                       <DefaultThumbnail />
                     )}
                     {stream.streamSettings?.isActive && (
-                      <p className="absolute right-0 top-0 bg-destructive p-1 text-sm text-white">
+                      <p className="bg-destructive absolute right-0 top-0 p-1 text-sm text-white">
                         live
                       </p>
                     )}
@@ -110,7 +110,7 @@ const LivestreamTable = ({
                           'ddd. MMMM D, YYYY, HH:mm a'
                         )}
                     {new Date(stream.streamDate) > new Date() && (
-                      <span className="block text-sm text-muted-foreground">
+                      <span className="text-muted-foreground block text-sm">
                         Scheduled
                       </span>
                     )}

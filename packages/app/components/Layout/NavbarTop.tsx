@@ -25,13 +25,13 @@ const NavBarButton = ({
       <Menu
         size={40}
         strokeWidth={1.5}
-        className="mx-auto rounded border border-white bg-primary text-white"
+        className="bg-primary mx-auto rounded border border-white text-white"
       />
     ) : (
       <X
         size={23}
         strokeWidth={1.5}
-        className="mx-auto rounded border border-white bg-primary text-white"
+        className="bg-primary mx-auto rounded border border-white text-white"
       />
     )}
   </button>
@@ -54,7 +54,7 @@ export default function NavbarTop({
     return null;
   }
   return (
-    <NavigationMenu className="sticky top-0 bg-event">
+    <NavigationMenu className="bg-event sticky top-0">
       <div className="flex w-full justify-between p-2 px-2 lg:px-4">
         <div className="flex items-center">
           <Link href={homePath ? homePath : '/'} className="">

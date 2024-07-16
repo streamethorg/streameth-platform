@@ -47,7 +47,7 @@ const StreamHealth = ({
           <CardTitle className="flex items-center gap-2 text-xl">
             Stream Health:
             {isHealthy ? (
-              <div className="flex items-center rounded-full bg-success-foreground p-2 py-1 pl-3 text-sm text-success">
+              <div className="bg-success-foreground text-success flex items-center rounded-full p-2 py-1 pl-3 text-sm">
                 <span className="relative mr-2 flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-green-600"></span>
@@ -55,7 +55,7 @@ const StreamHealth = ({
                 Healthy
               </div>
             ) : (
-              <div className="flex items-center rounded-full bg-success-foreground p-2 py-1 pl-3 text-sm text-success">
+              <div className="bg-success-foreground text-success flex items-center rounded-full p-2 py-1 pl-3 text-sm">
                 <span className="relative mr-2 flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-red-600"></span>

@@ -233,8 +233,8 @@ const CreateNFTForm = ({
         </div>
       </DialogTrigger>
       <DialogContent className="bg transparent max-w-5xl rounded-xl p-0">
-        <div className="flex overflow-auto rounded-lg border border-grey">
-          <div className="w-1/3 min-w-[250px] space-y-2 border-r border-grey bg-muted p-4 lg:p-8">
+        <div className="border-grey flex overflow-auto rounded-lg border">
+          <div className="border-grey bg-muted w-1/3 min-w-[250px] space-y-2 border-r p-4 lg:p-8">
             <p
               className={`flex items-center gap-1 rounded-xl p-2 ${
                 step == 1
@@ -243,7 +243,7 @@ const CreateNFTForm = ({
               }`}
             >
               {step == 2 && (
-                <CheckCircle2 className="h-7 w-7 fill-success text-white" />
+                <CheckCircle2 className="fill-success h-7 w-7 text-white" />
               )}{' '}
               Collection Details
             </p>
@@ -255,7 +255,7 @@ const CreateNFTForm = ({
               }`}
             >
               {formState.selectedVideo.length > 0 && (
-                <CheckCircle2 className="h-7 w-7 fill-success text-white" />
+                <CheckCircle2 className="fill-success h-7 w-7 text-white" />
               )}{' '}
               Add Media
             </p>

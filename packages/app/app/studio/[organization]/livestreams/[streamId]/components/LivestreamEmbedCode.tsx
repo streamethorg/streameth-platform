@@ -14,10 +14,7 @@ import { copyToClipboard, generateEmbedCode } from '@/lib/utils/utils';
 import { Code2, Copy } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-const LivestreamEmbedCode = ({
-  streamId,
-  playerName,
-}: IGenerateEmbed) => {
+const LivestreamEmbedCode = ({ streamId, playerName }: IGenerateEmbed) => {
   const [open, setOpen] = React.useState(false);
   const [url, setUrl] = useState('');
   useEffect(() => {
@@ -45,17 +42,17 @@ const LivestreamEmbedCode = ({
             Paste this code into your HTML file
           </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center justify-between rounded-lg bg-input p-2 text-[12px]">
+        <div className="bg-input flex items-center justify-between rounded-lg p-2 text-[12px]">
           <p>HTML</p>
           <div
             onClick={() => copyToClipboard(generatedEmbedCode)}
             className="flex cursor-pointer gap-2"
           >
-            <Copy className="h-4 w-4 text-muted-foreground" />
+            <Copy className="text-muted-foreground h-4 w-4" />
             Copy Code
           </div>
         </div>
-        <p className="w-full overflow-auto rounded-lg bg-input p-2 text-[12px]">
+        <p className="bg-input w-full overflow-auto rounded-lg p-2 text-[12px]">
           {generatedEmbedCode}
         </p>
       </DialogContent>

@@ -34,7 +34,7 @@ const SelectedMediaItem = ({
         className="absolute end-0 z-50 cursor-pointer p-2"
         onClick={() => handleRemoveSelected(video)}
       >
-        <XCircle className="h-7 w-7 fill-muted-foreground text-white" />
+        <XCircle className="fill-muted-foreground h-7 w-7 text-white" />
       </div>
 
       <div className="overflow-hidden">

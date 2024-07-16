@@ -105,7 +105,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
       ></video>
       <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
         {isLoading && (
-          <div className="h-20 w-20 animate-spin rounded-full border-b-2 border-t-2 border-primary" />
+          <div className="border-primary h-20 w-20 animate-spin rounded-full border-b-2 border-t-2" />
         )}
       </div>
     </div>

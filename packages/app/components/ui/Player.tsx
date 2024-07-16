@@ -85,7 +85,7 @@ export function PlayerWithControls(props: {
             />
           )}
         </Player.PlayingIndicator>
-        <Player.LoadingIndicator className="relative h-full w-full bg-black/50 backdrop-blur data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
+        <Player.LoadingIndicator className="data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0 relative h-full w-full bg-black/50 backdrop-blur">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <LoadingIcon className="h-8 w-8 animate-spin" />
           </div>
@@ -101,7 +101,7 @@ export function PlayerWithControls(props: {
 
         <Player.ErrorIndicator
           matcher="all"
-          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0"
+          className="data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0 absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000"
         >
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <LoadingIcon className="h-8 w-8 animate-spin" />
@@ -111,7 +111,7 @@ export function PlayerWithControls(props: {
 
         <Player.ErrorIndicator
           matcher="offline"
-          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg animate-in fade-in-0 duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0"
+          className="animate-in fade-in-0 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0 absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000"
         >
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1">
@@ -128,7 +128,7 @@ export function PlayerWithControls(props: {
 
         <Player.ErrorIndicator
           matcher="access-control"
-          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0"
+          className="data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0 absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000"
         >
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1">
@@ -143,7 +143,7 @@ export function PlayerWithControls(props: {
           </div>
         </Player.ErrorIndicator>
 
-        <Player.Controls className="flex flex-col-reverse gap-1 bg-gradient-to-b from-black/5 via-black/30 via-80% to-black/60 px-3 py-2 duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0 md:px-3">
+        <Player.Controls className="data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0 flex flex-col-reverse gap-1 bg-gradient-to-b from-black/5 via-black/30 via-80% to-black/60 px-3 py-2 duration-1000 md:px-3">
           <div className="flex justify-between gap-4">
             <div className="flex flex-1 items-center gap-3">
               <Player.PlayPauseTrigger className="h-6 w-6 flex-shrink-0 transition hover:scale-110">
@@ -342,7 +342,7 @@ export const Settings = React.forwardRef(function Search(
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
-          className="w-60 rounded-md border border-white/50 bg-black/50 p-3 text-white shadow-md outline-none backdrop-blur-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+          className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 w-60 rounded-md border border-white/50 bg-black/50 p-3 text-white shadow-md outline-none backdrop-blur-md"
           side="top"
           alignOffset={-70}
           align="end"

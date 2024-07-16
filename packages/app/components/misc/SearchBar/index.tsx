@@ -106,7 +106,7 @@ export default function SearchBar({
       {isOpened && debouncedSearchQuery && (
         <div
           ref={dropdownRef}
-          className="absolute top-[55px] w-full max-w-[500px] bg-secondary p-2"
+          className="bg-secondary absolute top-[55px] w-full max-w-[500px] p-2"
         >
           {isLoading ? (
             <span>Loading...</span>

@@ -152,13 +152,9 @@ export const createAssetAction = async ({ fileName }: { fileName: string }) => {
   }
 };
 
-export const generateThumbnailAction = async (
-  session: IExtendedSession
-) => {
-
-
+export const generateThumbnailAction = async (session: IExtendedSession) => {
   try {
-    const res = await generateThumbnail({ session })
+    const res = await generateThumbnail({ session });
 
     return res;
   } catch (e) {

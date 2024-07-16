@@ -43,7 +43,7 @@ const ConfirmImageDeletion = ({
       <DialogTrigger>
         <X
           size={24}
-          className="absolute right-0 z-[9999999999994] ml-auto cursor-pointer rounded-full border border-muted-foreground bg-white text-muted-foreground"
+          className="border-muted-foreground text-muted-foreground absolute right-0 z-[9999999999994] ml-auto cursor-pointer rounded-full border bg-white"
         />
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center justify-center gap-5">
@@ -154,7 +154,7 @@ export default function ImageUpload({
         <>
           <Label
             htmlFor={id}
-            className={`${className} flex cursor-pointer flex-col items-center justify-center border border-dotted bg-secondary`}
+            className={`${className} bg-secondary flex cursor-pointer flex-col items-center justify-center border border-dotted`}
           >
             <div className="rounded-full bg-neutral-400 p-2 text-white">
               <ImageLogo />

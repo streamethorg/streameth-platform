@@ -69,7 +69,7 @@ const Support = () => {
           <p className="pb-2">
             Feel free to become a part of our{' '}
             <a
-              className="font-semibold text-primary"
+              className="text-primary font-semibold"
               href="https://t.me/+p7TgdE06G-4zZDU0"
               target="_blank"
               rel="noopener noopener"
@@ -79,7 +79,7 @@ const Support = () => {
             channel to stay informed about ticket updates, or alternatively, you
             can raise an issue on{' '}
             <a
-              className="font-semibold text-primary"
+              className="text-primary font-semibold"
               href="https://github.com/streamethorg/streameth-platform/issues"
               target="_blank"
               rel="noopener noopener"
@@ -112,9 +112,9 @@ const Support = () => {
         <div className="fixed bottom-4 right-0 mr-1 cursor-pointer p-1 lg:ml-0 lg:p-2">
           <div className="rounded-full bg-white p-4 shadow-xl">
             {!open ? (
-              <MessageCircleQuestion className="h-7 w-7 text-muted-foreground" />
+              <MessageCircleQuestion className="text-muted-foreground h-7 w-7" />
             ) : (
-              <X className="h-7 w-7 text-muted-foreground" />
+              <X className="text-muted-foreground h-7 w-7" />
             )}
           </div>
         </div>

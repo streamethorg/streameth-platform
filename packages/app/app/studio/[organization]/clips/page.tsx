@@ -30,7 +30,7 @@ const ClipContainer = ({ children }: { children: React.ReactNode }) => (
 );
 
 const SkeletonSidebar = () => (
-  <div className="flex h-full w-1/3 flex-col border-l bg-background bg-white">
+  <div className="bg-background flex h-full w-1/3 flex-col border-l bg-white">
     <div className="h-[calc(100%-50px)] space-y-4 overflow-y-clip">
       {[1, 2, 3, 4, 5].map((i) => (
         <div key={i} className="animate-pulse p-4">
@@ -56,7 +56,7 @@ const SessionSidebar = async ({
   };
 }) => {
   return (
-    <div className="h-full w-[300px] border-l bg-background bg-white">
+    <div className="bg-background h-full w-[300px] border-l bg-white">
       <CardTitle className="border-b bg-white p-2 text-lg">
         <RecordingSelect
           selectedRecording={currentRecording ?? undefined}
@@ -88,7 +88,7 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
     return (
       <ClipContainer>
         <div className="mx-auto mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4">
-          <div className="mx-auto mb-auto flex h-full w-full max-w-[500px] flex-col items-center justify-center space-y-4 rounded-lg border bg-background bg-white p-4 text-center">
+          <div className="bg-background mx-auto mb-auto flex h-full w-full max-w-[500px] flex-col items-center justify-center space-y-4 rounded-lg border bg-white p-4 text-center">
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-foreground-muted text-sm">
@@ -113,7 +113,7 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
       <ClipContainer>
         <div className="mx-auto mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4">
           <SelectSession stages={stages} currentStageId={stage} />
-          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-4 text-center">
+          <div className="bg-background mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-white p-4 text-center">
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-foreground-muted text-sm">
@@ -155,7 +155,7 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
       <ClipContainer>
         <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
           <SelectSession stages={stages} currentStageId={stage} />
-          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-8 text-center">
+          <div className="bg-background mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-white p-8 text-center">
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">No recordings</p>
             <p className="text-foreground-muted text-sm">
@@ -177,7 +177,7 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
         <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
           <SelectSession stages={stages} currentStageId={stage} />
           <RecordingSelect streamRecordings={stageRecordings.recordings} />
-          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-4 text-center">
+          <div className="bg-background mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-white p-4 text-center">
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-foreground-muted text-sm">
@@ -269,7 +269,7 @@ const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
 
       {/* Main Content Skeleton */}
       <div className="animate-pulse">
-        <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-8 text-center">
+        <div className="bg-background mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-white p-8 text-center">
           <div className="h-16 w-16 rounded-lg bg-gray-200 p-4"></div>
           <div className="h-6 w-32 rounded bg-gray-200 text-lg font-bold"></div>
           <div className="text-foreground-muted text-sm">

@@ -38,10 +38,10 @@ const Navigation = ({
   return (
     <div
       className={cn(
-        'flex h-full w-2/6 min-w-[400px] flex-col overflow-auto border-r border-border bg-white text-black'
+        'border-border flex h-full w-2/6 min-w-[400px] flex-col overflow-auto border-r bg-white text-black'
       )}
     >
-      <div className="flex flex-row items-center justify-between border-b border-border p-2">
+      <div className="border-border flex flex-row items-center justify-between border-b p-2">
         <h3 className="mb-2 mt-4 text-2xl font-bold">Event settings</h3>
         <Button
           onClick={handlePublishEvent}
@@ -51,7 +51,7 @@ const Navigation = ({
         </Button>
       </div>
       <EventAccordion organizationId={organizationId} event={event} />
-      <div className="flex flex-row items-center justify-between border-b border-border p-2">
+      <div className="border-border flex flex-row items-center justify-between border-b p-2">
         <h3 className="mb-2 mt-4 text-2xl font-bold">Livestreams</h3>
         {stages.length > 0 && <CreateStageForm event={event} />}
       </div>
@@ -62,7 +62,7 @@ const Navigation = ({
           stages={stages}
         />
       ) : (
-        <div className="flex flex-row items-center justify-between border-b border-border p-2">
+        <div className="border-border flex flex-row items-center justify-between border-b p-2">
           <div className="text-sm">
             No livestreams yet. Create one to get started.
           </div>

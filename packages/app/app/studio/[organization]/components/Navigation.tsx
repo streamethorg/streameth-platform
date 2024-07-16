@@ -73,7 +73,7 @@ const Navigation = ({ organizationSlug }: { organizationSlug: string }) => {
   return (
     <aside
       className={cn(
-        'flex h-full w-full flex-col overflow-auto border-r border-border bg-primary text-black',
+        'border-border bg-primary flex h-full w-full flex-col overflow-auto border-r text-black',
         {
           'max-w-[50px]': isCollapsed,
           'max-w-[250px]': !isCollapsed,

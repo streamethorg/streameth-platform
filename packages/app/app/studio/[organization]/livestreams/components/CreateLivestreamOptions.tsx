@@ -25,33 +25,33 @@ const CreateLivestreamOptions = ({
 
       <div className="flex flex-col space-y-3">
         <div
-          className="cursor-pointer rounded-md border p-3 hover:bg-secondary"
+          className="hover:bg-secondary cursor-pointer rounded-md border p-3"
           onClick={() => setStreamType('instant')}
         >
           <div className="flex items-center space-x-3">
-            <div className="rounded-full bg-muted p-2">
+            <div className="bg-muted rounded-full p-2">
               <Radio />
             </div>
             <div className="flex flex-col">
               <h3 className="text-foreground">Right now</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="text-muted-foreground mt-1 text-sm">
                 Stream to your audience in real-time.
               </p>
             </div>
           </div>
         </div>
         <div
-          className="cursor-pointer items-center rounded-md border p-3 hover:bg-secondary"
+          className="hover:bg-secondary cursor-pointer items-center rounded-md border p-3"
           onClick={() => setStreamType('schedule')}
         >
           <div className="flex items-center space-x-3">
-            <div className="rounded-full bg-muted p-2">
+            <div className="bg-muted rounded-full p-2">
               <Calendar />
             </div>
 
             <div className="flex flex-col">
               <h3>Schedule a stream</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="text-muted-foreground mt-1 text-sm">
                 Schedule a stream for later.
               </p>
             </div>

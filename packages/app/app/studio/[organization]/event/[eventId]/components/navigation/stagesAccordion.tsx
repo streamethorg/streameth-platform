@@ -88,7 +88,7 @@ const StageAccordion = ({
                 ]);
               }}
             >
-              <p className={`${'border-l border-primary'} px-2`}>
+              <p className={`${'border-primary border-l'} px-2`}>
                 Livestream settings
               </p>
             </AccordionContent>
@@ -96,7 +96,7 @@ const StageAccordion = ({
               <AccordionContent>
                 <p
                   className={`${
-                    stageSetting === 'clip' && 'border-l border-primary'
+                    stageSetting === 'clip' && 'border-primary border-l'
                   } px-2`}
                 >
                   Clips

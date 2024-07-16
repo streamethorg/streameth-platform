@@ -150,7 +150,7 @@ const EditLivestream = ({
                     <ImageUpload
                       placeholder="Click to upload image here. Maximum image file size is 20MB.
                         Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                      className="m-auto h-full w-full bg-neutrals-300 text-black"
+                      className="bg-neutrals-300 m-auto h-full w-full text-black"
                       aspectRatio={1}
                       path={`stages/${organizationSlug}`}
                       {...field}
@@ -221,7 +221,7 @@ const EditLivestream = ({
               />
             </div>
             {isPast && (
-              <p className="mt-1 text-[12px] text-destructive">
+              <p className="text-destructive mt-1 text-[12px]">
                 Couldn&apos;t schedule. The date and time selected are too far
                 in the past.
               </p>
@@ -265,7 +265,7 @@ const EditLivestream = ({
                   />
                 </div>
                 {validateEndDate && (
-                  <p className="mt-1 text-[12px] text-destructive">
+                  <p className="text-destructive mt-1 text-[12px]">
                     Couldn&apos;t schedule. End date and time selected are too
                     far in the past.
                   </p>

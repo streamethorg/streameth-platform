@@ -46,7 +46,7 @@ const AuthorizationMessage = () => {
 
           <CardContent>
             {/* <SignInWithSocials /> */}
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-2 text-sm">
               By signing up you agree to the{' '}
               <Link className="underline" href="/terms">
                 Terms of Service
@@ -60,7 +60,7 @@ const AuthorizationMessage = () => {
           </CardContent>
         </Card>
       </div>
-      <div className="relative h-full w-1/2 bg-primary">
+      <div className="bg-primary relative h-full w-1/2">
         <Image
           quality={100}
           alt="login background"

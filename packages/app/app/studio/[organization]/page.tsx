@@ -40,8 +40,8 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <Link href={`/studio/${params.organization}/library`}>
-            <div className="flex flex-row items-center space-x-4 rounded-xl border bg-white p-2 hover:bg-secondary">
-              <div className="rounded-xl border bg-primary p-4 text-white">
+            <div className="hover:bg-secondary flex flex-row items-center space-x-4 rounded-xl border bg-white p-2">
+              <div className="bg-primary rounded-xl border p-4 text-white">
                 <LuFileUp size={25} />
               </div>
               <span className="text-sm">Upload Video</span>

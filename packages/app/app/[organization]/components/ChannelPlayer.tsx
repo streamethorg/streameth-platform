@@ -56,7 +56,7 @@ const ChannelPlayer = ({
             </div>
             <div className="flex flex-col">
               <p className="font-medium">{organization.name}</p>
-              <div className="flex items-center gap-1 text-[12px] text-muted-foreground">
+              <div className="text-muted-foreground flex items-center gap-1 text-[12px]">
                 <p className="text-muted-foreground">
                   Created{' '}
                   {`${new Date(

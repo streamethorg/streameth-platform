@@ -55,17 +55,17 @@ export const EmbedModalContent: React.FC<{
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody className="flex flex-col gap-3">
-        <div className="flex items-center justify-between rounded-lg bg-input p-2 text-[12px]">
+        <div className="bg-input flex items-center justify-between rounded-lg p-2 text-[12px]">
           <p>HTML</p>
           <div
             onClick={() => copyToClipboard(generatedEmbedCode)}
             className="flex cursor-pointer gap-2"
           >
-            <Copy className="h-4 w-4 text-muted-foreground" />
+            <Copy className="text-muted-foreground h-4 w-4" />
             Copy Code
           </div>
         </div>
-        <p className="max-w-[400px] break-words rounded-lg bg-input p-2 text-[12px]">
+        <p className="bg-input max-w-[400px] break-words rounded-lg p-2 text-[12px]">
           {generatedEmbedCode}
         </p>
       </CredenzaBody>

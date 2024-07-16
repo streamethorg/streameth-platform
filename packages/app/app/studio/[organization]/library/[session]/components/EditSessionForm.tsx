@@ -145,7 +145,7 @@ const EditSessionForm = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageUpload
-                  className="relative aspect-video max-w-[480px] rounded-xl bg-neutrals-300"
+                  className="bg-neutrals-300 relative aspect-video max-w-[480px] rounded-xl"
                   aspectRatio={16 / 9}
                   path={`sessions/${organizationSlug}`}
                   {...field}

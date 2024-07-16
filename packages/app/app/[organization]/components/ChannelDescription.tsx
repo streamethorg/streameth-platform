@@ -31,7 +31,7 @@ const ChannelDescription = ({ description }: { description?: string }) => {
       </div>
 
       {isClamped && (
-        <div className="flex cursor-pointer justify-end text-blue">
+        <div className="text-blue flex cursor-pointer justify-end">
           <p
             className="text-title font-semibold"
             onClick={() => setExpanded(!isExpanded)}

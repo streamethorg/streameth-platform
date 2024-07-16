@@ -48,7 +48,7 @@ const DeleteMultistream = ({
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
             <div>
-              <Trash2 className="h-4 w-4 text-destructive" />
+              <Trash2 className="text-destructive h-4 w-4" />
             </div>
           )}
         </Button>

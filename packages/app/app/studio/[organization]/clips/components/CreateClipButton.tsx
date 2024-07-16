@@ -182,7 +182,7 @@ const CreateClipButton = ({
       <DialogContent className="bg-white">
         <div className="flex h-[300px] flex-col bg-white p-4">
           <Tabs defaultValue={'sessions'}>
-            <TabsList className="w-full !justify-start gap-5 border-y border-grey">
+            <TabsList className="border-grey w-full !justify-start gap-5 border-y">
               {sessions.sessions.length > 0 && (
                 <TabsTrigger className="px-0" value="sessions">
                   Clip Session

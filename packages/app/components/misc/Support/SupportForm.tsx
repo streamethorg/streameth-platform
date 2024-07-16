@@ -97,7 +97,7 @@ const SupportForm = ({
                 <FormControl>
                   <ImageUpload
                     placeholder="Click to upload image here. "
-                    className="m-auto h-full w-full bg-neutrals-300 py-4 text-black"
+                    className="bg-neutrals-300 m-auto h-full w-full py-4 text-black"
                     aspectRatio={1}
                     path={`support`}
                     {...field}

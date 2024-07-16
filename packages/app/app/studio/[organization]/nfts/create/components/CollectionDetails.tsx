@@ -56,7 +56,7 @@ const CollectionDetails = ({
                 <FormItem className="">
                   <FormControl>
                     <ImageUpload
-                      className="aspect-square h-[100px] rounded-xl bg-neutrals-300"
+                      className="bg-neutrals-300 aspect-square h-[100px] rounded-xl"
                       aspectRatio={1}
                       path={`nftcollections`}
                       {...field}
@@ -74,7 +74,7 @@ const CollectionDetails = ({
               <p className="text-sm">
                 Drag or click to upload your logo image here.{' '}
               </p>
-              <p className="text-[12px] text-muted-foreground">
+              <p className="text-muted-foreground text-[12px]">
                 You may change this after deploying your contract. Recommended
                 size: 500 x 500. File types: JPG, PNG, SVG or GIF
               </p>
@@ -252,7 +252,7 @@ const CollectionDetails = ({
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    className="h-[200px] rounded-xl bg-muted"
+                    className="bg-muted h-[200px] rounded-xl"
                     placeholder="Brief description about your NFT collection"
                     {...field}
                   />

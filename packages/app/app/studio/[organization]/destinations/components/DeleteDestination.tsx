@@ -49,11 +49,11 @@ const DeleteDestination = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <Button className="justify-start" variant={'ghost'}>
-          <LuTrash2 className="h-5 w-5 pr-1 text-destructive" /> Delete
+          <LuTrash2 className="text-destructive h-5 w-5 pr-1" /> Delete
         </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center justify-center gap-5">
-        <div className="rounded-full bg-destructive p-3">
+        <div className="bg-destructive rounded-full p-3">
           <LuTrash2 className="h-5 w-5 text-white" />
         </div>
         <p className="text-xl">

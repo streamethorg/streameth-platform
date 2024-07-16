@@ -27,7 +27,7 @@ const AddMediaTabItem = ({
   return (
     <TabsContent className="max-h-[450px] overflow-auto" value={tabValue}>
       {parsedVideos.length === 0 && (
-        <div className="mt-12 text-muted-foreground">No {tabValue} found.</div>
+        <div className="text-muted-foreground mt-12">No {tabValue} found.</div>
       )}
       {parsedVideos.map((video) => (
         <div className="mb-4 mt-8 flex items-center gap-3" key={video._id}>
@@ -77,7 +77,7 @@ const AddMediaTabItem = ({
           </div>
           <div>
             <h4 className="mb-1 font-medium">{video.name}</h4>
-            <p className="line-clamp-2 text-sm text-muted-foreground">
+            <p className="text-muted-foreground line-clamp-2 text-sm">
               {video.description}
             </p>
             <p className="text-sm">

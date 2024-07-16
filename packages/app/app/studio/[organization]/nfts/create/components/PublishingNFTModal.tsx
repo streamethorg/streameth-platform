@@ -46,11 +46,11 @@ const PublishingNFTModal = ({
             </DialogTitle>
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
-                <div className="mr-2 h-fit rounded-full bg-grey p-2">
+                <div className="bg-grey mr-2 h-fit rounded-full p-2">
                   {!isGeneratingMetadata ? (
-                    <CheckCircle2 className="h-6 w-6 fill-success text-white" />
+                    <CheckCircle2 className="fill-success h-6 w-6 text-white" />
                   ) : (
-                    <Loader2 className="h-6 w-6 animate-spin rounded-full text-success" />
+                    <Loader2 className="text-success h-6 w-6 animate-spin rounded-full" />
                   )}
                 </div>
                 <div>
@@ -58,31 +58,31 @@ const PublishingNFTModal = ({
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="mr-2 h-fit rounded-full bg-grey p-2">
+                <div className="bg-grey mr-2 h-fit rounded-full p-2">
                   {isTransactionApproved ? (
-                    <CheckCircle2 className="h-6 w-6 fill-success text-white" />
+                    <CheckCircle2 className="fill-success h-6 w-6 text-white" />
                   ) : (
-                    <Loader2 className="h-6 w-6 animate-spin rounded-full text-success" />
+                    <Loader2 className="text-success h-6 w-6 animate-spin rounded-full" />
                   )}
                 </div>
                 <div>
                   <p className="font-medium">
                     Go to your wallet to approve the transaction
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     You&apos;ll be asked to pay gas fees and sign in order to
                     deploy your contract on the blockchain.
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="mr-2 h-fit rounded-full bg-grey p-2">
-                  <Loader2 className="h-6 w-6 animate-spin rounded-full text-success" />
+                <div className="bg-grey mr-2 h-fit rounded-full p-2">
+                  <Loader2 className="text-success h-6 w-6 animate-spin rounded-full" />
                 </div>
 
                 <div>
                   <p className="font-medium">Publishing your NFT Collection</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     It may take some time for the transaction to be processed.
                   </p>
                   {hash && <TransactionHash hash={hash} />}
@@ -102,7 +102,7 @@ const PublishingNFTModal = ({
             <p className="mt-4 text-2xl">
               NFT Collection successfully published
             </p>
-            <p className="mt-1 text-muted-foreground">
+            <p className="text-muted-foreground mt-1">
               Your collection now published. Share link to invite your
               community.
             </p>
@@ -119,13 +119,13 @@ const PublishingNFTModal = ({
           </div>
         )}
         {error && (
-          <div className="text-center text-destructive">
+          <div className="text-destructive text-center">
             Error: {(error as BaseError).shortMessage || error.message}
           </div>
         )}
 
         {publishError && (
-          <div className="flex flex-col items-center justify-center text-center text-destructive">
+          <div className="text-destructive flex flex-col items-center justify-center text-center">
             <Ban className="mb-4 h-10 w-10" />
             {publishError}
           </div>

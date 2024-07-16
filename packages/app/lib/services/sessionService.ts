@@ -251,23 +251,20 @@ export const createAsset = async ({
 export const generateThumbnail = async ({
   session,
 }: {
-  session: IExtendedSession
+  session: IExtendedSession;
 }): Promise<any> => {
   try {
-    const response = await fetch(
-      `${apiUrl()}/streams/thumbnail/generate`,
-      {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          playbackId: session.playbackId,
-          assetId: session.assetId,
-        }),
-      }
-    )
+    const response = await fetch(`${apiUrl()}/streams/thumbnail/generate`, {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        playbackId: session.playbackId,
+        assetId: session.assetId,
+      }),
+    });
     if (!response.ok) {
       throw 'Error updating session';
     }

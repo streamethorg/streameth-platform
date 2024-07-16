@@ -136,7 +136,7 @@ const CreateLivestreamModal = ({
           variant={'outline'}
           className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4"
         >
-          <div className="rounded-xl border bg-primary p-4 text-white">
+          <div className="bg-primary rounded-xl border p-4 text-white">
             <LuRadio size={25} />
           </div>
           <span className="text-sm">Create Livestream</span>
@@ -183,7 +183,7 @@ const CreateLivestreamModal = ({
                     <FormControl>
                       <ImageUpload
                         placeholder="Click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                        className="m-auto h-full w-full bg-neutrals-300 text-black"
+                        className="bg-neutrals-300 m-auto h-full w-full text-black"
                         aspectRatio={1}
                         path={`livestreams/${organization?.slug}`}
                         {...field}
@@ -259,7 +259,7 @@ const CreateLivestreamModal = ({
                     />
                   </div>
                   {isPast && (
-                    <p className="mt-1 text-[12px] text-destructive">
+                    <p className="text-destructive mt-1 text-[12px]">
                       Couldn&apos;t schedule. The date and time selected are too
                       far in the past.
                     </p>
@@ -301,7 +301,7 @@ const CreateLivestreamModal = ({
                         />
                       </div>
                       {validateEndDate && (
-                        <p className="mt-1 text-[12px] text-destructive">
+                        <p className="text-destructive mt-1 text-[12px]">
                           Couldn&apos;t schedule. End date and time selected are
                           too far in the past.
                         </p>

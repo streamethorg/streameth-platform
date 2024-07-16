@@ -69,7 +69,7 @@ const InfoBoxDescription = ({
               );
             }
           }}
-          className="absolute bottom-0 right-0 ml-auto mr-5 pb-2 font-bold text-primary"
+          className="text-primary absolute bottom-0 right-0 ml-auto mr-5 pb-2 font-bold"
         >
           {isOpened ? 'less' : 'more'}
         </button>

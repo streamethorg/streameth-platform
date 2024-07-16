@@ -39,7 +39,7 @@ const GoogleRedirect = ({
         Having issues?{' '}
         <a
           target="_blank"
-          className="font-medium text-primary underline"
+          className="text-primary font-medium underline"
           rel="noopener noopener"
           href="https://t.me/+p7TgdE06G-4zZDU0"
         >

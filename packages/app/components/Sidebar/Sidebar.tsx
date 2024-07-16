@@ -67,7 +67,7 @@ export const SidebarUI = ({
         </span>
         {!expanded && (
           <div
-            className={`invisible absolute left-full ml-2 -translate-x-3 rounded-md bg-primary px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}
+            className={`bg-primary invisible absolute left-full ml-2 -translate-x-3 rounded-md px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}
           >
             Docs
           </div>
@@ -100,8 +100,8 @@ export const SidebarItem = ({
   return (
     <li
       onClick={handleRoute}
-      className={`group relative flex cursor-pointer items-center rounded-md py-2 font-medium transition-colors hover:rounded-xl hover:border hover:border-primary ${
-        active ? 'rounded-xl border border-primary' : 'border border-white'
+      className={`hover:border-primary group relative flex cursor-pointer items-center rounded-md py-2 font-medium transition-colors hover:rounded-xl hover:border ${
+        active ? 'border-primary rounded-xl border' : 'border border-white'
       } ${expanded ? 'px-2' : 'justify-center'} `}
     >
       {icon}
@@ -115,7 +115,7 @@ export const SidebarItem = ({
 
       {!expanded && (
         <div
-          className={`invisible absolute left-full z-[9999] ml-4 -translate-x-3 rounded-md bg-primary px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}
+          className={`bg-primary invisible absolute left-full z-[9999] ml-4 -translate-x-3 rounded-md px-2 py-1 text-sm text-white opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}
         >
           {text}
         </div>

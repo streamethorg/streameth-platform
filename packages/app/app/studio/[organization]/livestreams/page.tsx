@@ -70,7 +70,7 @@ export const Livestreams = async ({
         />
       ) : (
         <div>
-          <div className="flex h-10 justify-end border-y border-muted bg-white"></div>
+          <div className="border-muted flex h-10 justify-end border-y bg-white"></div>
           <div className="m-auto flex h-96 flex-col items-center justify-center gap-4 bg-white">
             <EmptyFolder />
             <CardTitle className="text-2xl font-semibold">

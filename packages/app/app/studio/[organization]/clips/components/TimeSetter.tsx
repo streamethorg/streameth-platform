@@ -40,7 +40,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
           }
         />
         <Badge
-          className="absolute right-0 top-1/2 mx-2 -translate-y-1/2 transform rounded-full bg-accent text-xs text-accent-foreground"
+          className="bg-accent text-accent-foreground absolute right-0 top-1/2 mx-2 -translate-y-1/2 transform rounded-full text-xs"
           onClick={handleSetTime}
         >
           Set {type.charAt(0).toUpperCase() + type.slice(1)}

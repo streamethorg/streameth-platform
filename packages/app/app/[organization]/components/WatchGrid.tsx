@@ -36,7 +36,7 @@ const WatchGrid = async ({
         maxVideos={gridLength}
       />
       {videos.length === 0 && (
-        <div className="flex flex-row items-center justify-center space-x-4 rounded-xl bg-secondary p-4">
+        <div className="bg-secondary flex flex-row items-center justify-center space-x-4 rounded-xl p-4">
           <Video size={20} />
           <p>No videos uploaded</p>
         </div>

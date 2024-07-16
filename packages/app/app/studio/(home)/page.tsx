@@ -17,7 +17,7 @@ const Studio = async () => {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="m-auto flex h-full w-full max-w-4xl flex-grow flex-col overflow-auto bg-background p-2">
+      <div className="bg-background m-auto flex h-full w-full max-w-4xl flex-grow flex-col overflow-auto p-2">
         {userData?.organizations?.length > 0 ? (
           <>
             <div className="flex w-full flex-row items-center justify-between py-2">
@@ -32,7 +32,7 @@ const Studio = async () => {
                   key={organization._id}
                   href={`/studio/${organization.slug}`}
                 >
-                  <Card className="flex h-full flex-row overflow-hidden rounded-xl border border-secondary shadow-none">
+                  <Card className="border-secondary flex h-full flex-row overflow-hidden rounded-xl border shadow-none">
                     <CardHeader className="relative p-3 lg:p-3">
                       <Image
                         className="h-full rounded-full"
@@ -56,7 +56,7 @@ const Studio = async () => {
             </div>
           </>
         ) : (
-          <Card className="m-auto w-full border-secondary">
+          <Card className="border-secondary m-auto w-full">
             <CardHeader>
               <CardTitle>Create an organization to get started</CardTitle>
             </CardHeader>

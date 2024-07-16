@@ -48,7 +48,7 @@ const AddMedia = ({
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger className="w-full">
-          <div className="flex h-[100px] w-full items-center justify-center gap-2 rounded-xl border border-dashed border-muted-foreground bg-muted p-5 text-sm text-muted-foreground">
+          <div className="border-muted-foreground bg-muted text-muted-foreground flex h-[100px] w-full items-center justify-center gap-2 rounded-xl border border-dashed p-5 text-sm">
             <div>
               <PlusCircle className="h-5 w-5" />
             </div>
@@ -59,7 +59,7 @@ const AddMedia = ({
           <DialogTitle>Add Media from your library</DialogTitle>
           <div className="">
             <Tabs defaultValue={'videos'}>
-              <TabsList className="w-full !justify-start gap-5 border-y border-grey">
+              <TabsList className="border-grey w-full !justify-start gap-5 border-y">
                 <TabsTrigger value="livestreams">Livestreams</TabsTrigger>
                 <TabsTrigger value="videos">Videos</TabsTrigger>
                 <TabsTrigger value="clips">Clips</TabsTrigger>

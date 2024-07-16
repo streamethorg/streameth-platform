@@ -85,13 +85,13 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible]);
 
   return (
-    <NavigationMenu className="flex sticky top-0 z-[9999] flex-row items-center bg-white lg:hidden">
+    <NavigationMenu className="sticky top-0 z-[9999] flex flex-row items-center bg-white lg:hidden">
       {(searchVisible || menuVisible) && (
         <div className="absolute left-0 top-0 h-[100vh] w-[100vw] bg-black bg-opacity-50" />
       )}
 
       {searchVisible && showSearchBar && (
-        <div className="absolute bottom-[-56px] w-full bg-secondary">
+        <div className="bg-secondary absolute bottom-[-56px] w-full">
           <SearchBar organizationSlug={currentOrganization} isMobile={true} />
         </div>
       )}
@@ -126,9 +126,9 @@ const MobileNavBar = ({
           {showSearchBar && (
             <button onClick={toggleSearch} className="p-2">
               {searchVisible ? (
-                <X className="h-6 w-6 text-primary" />
+                <X className="text-primary h-6 w-6" />
               ) : (
-                <Search className="h-6 w-6 text-primary" />
+                <Search className="text-primary h-6 w-6" />
               )}
             </button>
           )}
@@ -169,8 +169,8 @@ const PCNavBar = ({
   const pathname = usePathname();
   const isStudio = pathname.includes('studio');
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white shadow-sm md:hidden lg:flex z-[30]">
-      <div className="flex flex-1 justify-start items-center">
+    <NavigationMenu className="sticky top-0 z-[30] hidden w-full flex-row items-center justify-between bg-white p-2 px-4 shadow-sm md:hidden lg:flex">
+      <div className="flex flex-1 items-center justify-start">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>
             <Image

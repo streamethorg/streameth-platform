@@ -278,7 +278,7 @@ const ClipSlider = () => {
         <div className="relative flex h-10 rounded-full">
           <div className="my-auto h-2 w-full rounded-xl bg-gray-400" />
           <div
-            className="absolute flex h-10 rounded-xl border-2 border-primary"
+            className="border-primary absolute flex h-10 rounded-xl border-2"
             style={{
               left: `${getMarkerPosition(startTime.displayTime)}%`,
               right: `${100 - getMarkerPosition(endTime.displayTime)}%`,
@@ -360,14 +360,14 @@ const Marker = ({
       <div className="relative h-full w-full">
         <div
           id={marker}
-          className={`h-full cursor-pointer bg-primary bg-opacity-10 ${
+          className={`bg-primary h-full cursor-pointer bg-opacity-10 ${
             marker !== 'start'
               ? 'translate-x-[-100%] rounded-r-xl'
               : 'rounded-l-xl'
           } `}
         />
         {selectedTooltip === marker && (
-          <div className="absolute left-[-55px] top-[-50px] flex flex-col items-center justify-center rounded-xl bg-primary p-1 text-xs text-white">
+          <div className="bg-primary absolute left-[-55px] top-[-50px] flex flex-col items-center justify-center rounded-xl p-1 text-xs text-white">
             <p className="flex w-[120px] flex-row items-center justify-center space-x-1">
               <span>Use</span> <ArrowLeftSquare width={15} height={15} />
               <ArrowRightSquare width={15} height={15} /> <span>to trim</span>

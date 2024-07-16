@@ -28,13 +28,13 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
         <div className="flex items-center gap-5">
           <div
             onClick={() => handleTermChange([{ key: 'type', value: 'single' }])}
-            className={`relative flex cursor-pointer flex-col rounded-xl border border-grey p-3 hover:bg-secondary ${
+            className={`border-grey hover:bg-secondary relative flex cursor-pointer flex-col rounded-xl border p-3 ${
               type == 'single' ? 'bg-secondary' : 'bg-none'
             }`}
           >
             {type == 'single' && (
               <div className="absolute end-0 px-2">
-                <CheckCircle2 className="h-10 w-10 fill-success text-white" />
+                <CheckCircle2 className="fill-success h-10 w-10 text-white" />
               </div>
             )}
             <div className="mb-3 flex justify-center">
@@ -47,7 +47,7 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
               />
             </div>
             <p className="font-medium">Single NFT</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Select single drop if you want to deploy one particular media into
               an NFT
             </p>
@@ -57,13 +57,13 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             onClick={() =>
               handleTermChange([{ key: 'type', value: 'multiple' }])
             }
-            className={`relative flex cursor-pointer flex-col rounded-xl border border-grey p-3 hover:bg-secondary ${
+            className={`border-grey hover:bg-secondary relative flex cursor-pointer flex-col rounded-xl border p-3 ${
               type == 'multiple' ? 'bg-secondary' : 'bg-none'
             }`}
           >
             {type == 'multiple' && (
               <div className="absolute end-0 px-2">
-                <CheckCircle2 className="h-10 w-10 fill-success text-white" />
+                <CheckCircle2 className="fill-success h-10 w-10 text-white" />
               </div>
             )}
             <div className="mb-3 flex justify-center">
@@ -76,7 +76,7 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
               />
             </div>
             <p className="font-medium">NFT Collection</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Select drop collection if you want to deploy multiple media into
               an NFT collection
             </p>

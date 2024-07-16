@@ -35,7 +35,7 @@ const ScheduleCard = ({
   return (
     <Credenza>
       <CredenzaTrigger asChild>
-        <Card className="flex flex-col shadow-none hover:border-primary hover:bg-secondary">
+        <Card className="hover:border-primary hover:bg-secondary flex flex-col shadow-none">
           <CardHeader>
             <CardTitle className="text-lg">{session.name}</CardTitle>
             <CardDescription className="flex flex-row items-center justify-start space-x-2">

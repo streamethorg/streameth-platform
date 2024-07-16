@@ -47,11 +47,11 @@ const DeleteTeamMember = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <Button variant={'outline'}>
-          <Trash2 className="h-5 w-5 text-destructive" />
+          <Trash2 className="text-destructive h-5 w-5" />
         </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center justify-center gap-5">
-        <div className="rounded-full bg-destructive p-3">
+        <div className="bg-destructive rounded-full p-3">
           <Trash2 className="h-5 w-5 text-white" />
         </div>
         <p className="text-xl">Are you sure you want to delete this member?</p>

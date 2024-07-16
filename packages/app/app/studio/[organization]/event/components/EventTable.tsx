@@ -69,7 +69,7 @@ const EventTable = async ({
                   </div>
                   <div className="flex flex-col">
                     <p>{event.name}</p>
-                    <p className="max-h-8 overflow-clip text-xs text-muted-foreground">
+                    <p className="text-muted-foreground max-h-8 overflow-clip text-xs">
                       {event.description}
                     </p>
                   </div>
@@ -103,7 +103,7 @@ const EventTable = async ({
                   <DeleteEvent
                     event={event}
                     TriggerComponent={
-                      <Trash2 className="h-5 w-5 text-destructive" />
+                      <Trash2 className="text-destructive h-5 w-5" />
                     }
                   />
                 </Button>

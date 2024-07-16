@@ -42,7 +42,7 @@ export default function EventHomeComponent({
   const bannerImg = event.banner !== '' ? event.banner : banner;
   return (
     <div
-      className="flex w-full flex-col bg-background px-2"
+      className="bg-background flex w-full flex-col px-2"
       style={{ ...style }}
     >
       <div className="relative z-50 mx-auto w-full max-w-full space-y-4 lg:my-4 lg:max-w-5xl">

@@ -49,7 +49,7 @@ export default async function Stage({ params }: EventPageProps) {
   });
 
   return (
-    <div className="relative flex w-full flex-col gap-2 bg-event p-2 md:flex-row lg:max-h-[calc(100vh-54px)]">
+    <div className="bg-event relative flex w-full flex-col gap-2 p-2 md:flex-row lg:max-h-[calc(100vh-54px)]">
       <div className="top-[54px] z-40 flex w-full flex-col gap-2 md:h-full md:w-full md:overflow-auto">
         <Player
           src={[

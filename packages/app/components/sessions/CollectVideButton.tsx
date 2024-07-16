@@ -159,25 +159,25 @@ const CollectVideButton = ({
           </DialogTitle>
 
           {mintError || error ? (
-            <div className="text-center text-destructive">
+            <div className="text-destructive text-center">
               {mintError || (error as BaseError).shortMessage || error?.message}
             </div>
           ) : hash ? (
             <TransactionHash hash={hash} />
           ) : (
             <div className="flex items-center gap-2">
-              <div className="mr-2 h-fit rounded-full bg-grey p-2">
+              <div className="bg-grey mr-2 h-fit rounded-full p-2">
                 {isMintingNftPending || IsSwitchingChain ? (
-                  <Loader2 className="h-6 w-6 animate-spin rounded-full text-success" />
+                  <Loader2 className="text-success h-6 w-6 animate-spin rounded-full" />
                 ) : (
-                  <CheckCircle2 className="h-6 w-6 fill-success text-white" />
+                  <CheckCircle2 className="fill-success h-6 w-6 text-white" />
                 )}
               </div>
               <div>
                 <p className="font-medium">
                   Go to your wallet to approve the transaction
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   You&apos;ll be asked to pay gas fees plus mint fee to collect
                   video on the blockchain.
                 </p>
