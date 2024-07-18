@@ -1,89 +1,45 @@
 import { test, expect } from '@playwright/test'
-import { getAccessToken } from '@privy-io/react-auth'
-import * as jose from 'jose'
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000/studio')
 })
 
-async function generatePrivyJWT() {
-  const { publicKey, privateKey } =
-    await jose.generateKeyPair('ES256')
+test('login to studio page with Privy', async ({ page }) => {
+  const email = process.env['PRIVY_EMAIL'] || ''
+  const otp = process.env['PRIVY_OTP'] || ''
 
-  console.log(process.env.PRIVY_APP_ID)
+  // Find and click the login button
+  const loginButton = page.getByRole('button', {
+    name: 'Log in with email or socials',
+  })
+  await expect(loginButton).toBeVisible({ timeout: 5000 })
+  await loginButton.click()
 
-  const session = 'test-session-' + Date.now()
-  const subject = 'did:privy:test-' + Date.now()
-  const issuer = 'privy.io'
-  const audience = process.env.PRIVY_APP_ID || ''
-  const expiration = '1h'
+  // Enter email
+  const emailInput = page.getByPlaceholder('your@email.com')
+  await expect(emailInput).toBeVisible({ timeout: 5000 })
+  await emailInput.fill(email)
+  await page.waitForTimeout(1000)
 
-  const authToken = await new jose.SignJWT({ sid: session })
-    .setProtectedHeader({ alg: 'ES256', typ: 'JWT' })
-    .setIssuer(issuer)
-    .setIssuedAt()
-    .setAudience(audience)
-    .setSubject(subject)
-    .setExpirationTime(expiration)
-    .sign(privateKey)
+  // Submit email
+  const submitButton = page.getByRole('button', { name: 'Submit' })
+  await expect(submitButton).toBeVisible({ timeout: 5000 })
+  await submitButton.click()
+  await page.waitForTimeout(1000)
 
-  try {
-    const payload = await jose.jwtVerify(authToken, publicKey, {
-      issuer: 'privy.io',
-      audience: process.env.PRIVY_APP_ID || '',
-    })
-    console.log('JWT verified successfully. Payload:', payload)
-  } catch (error) {
-    console.error(`JWT failed to verify with error: ${error}`)
-    throw error
+  // Enter OTP
+  for (let i = 0; i < 6; i++) {
+    const otpInput = page.locator(`input[name="code-${i}"]`)
+    await expect(otpInput).toBeVisible({ timeout: 5000 })
+    await otpInput.fill(otp[i])
+    await page.waitForTimeout(200)
   }
 
-  return authToken
-}
+  await page.waitForTimeout(3000)
 
-test('login to studio page with Privy', async ({ page, context }) => {
-  const authToken = await generatePrivyJWT()
-  const accessToken = await getAccessToken()
-
-  // Mock user address (replace with a valid address format if needed)
-  const userAddress = '0x1234567890123456789012345678901234567890'
-
-  // Set the required cookies
-  await context.addCookies([
-    {
-      name: 'privy-token',
-      value: authToken,
-      domain: 'localhost',
-      path: '/',
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    },
-  ])
-
-  // Mock the token verification endpoint
-  await page.route(
-    'https://dev.api.streameth.org/auth/verify-token',
-    async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ data: true }),
-      })
-    }
-  )
-
-  await page.goto('http://localhost:3000/studio/create', {
-    waitUntil: 'networkidle',
+  // Check for the existence of the heading
+  const heading = page.getByRole('heading', {
+    name: 'Create an organization to get started',
   })
-
-  // Store the token in localStorage (if still needed)
-  await page.evaluate((token) => {
-    localStorage.setItem('privy:auth:token', token)
-  }, authToken)
-
-  await page.reload({ waitUntil: 'networkidle' })
-  expect(page.url()).toContain('/studio')
-  await expect(page.locator('text=Studio')).toBeVisible({
-    timeout: 30000,
-  })
+  await expect(heading).toBeVisible({ timeout: 10000 })
 })
