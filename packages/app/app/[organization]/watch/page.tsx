@@ -86,6 +86,7 @@ export default async function Watch({
               playbackId={session.playbackId}
               organizationSlug={params.organization}
               vod={true}
+              video={session}
             />
           </div>
         </div>
@@ -119,5 +120,9 @@ export async function generateMetadata({
   })
 
   if (!session || !organization) return generalMetadata
-  return watchMetadata({ organization, session: session })
+
+  const thumbnail =
+    session.coverImage ?? (await generateThumbnailAction(session))
+
+  return watchMetadata({ organization, session: session, thumbnail })
 }

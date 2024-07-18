@@ -48,7 +48,7 @@ const VideoCardWithMenu = ({
     if (session) {
       getThumbnail(session)
     }
-  }, [])
+  }, [session])
 
   return (
     <div className="flex min-h-full w-full flex-col rounded-xl uppercase">
@@ -61,7 +61,7 @@ const VideoCardWithMenu = ({
       <div className="flex items-start justify-between">
         <CardHeader
           className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}>
-          <Link target="_blank" rel="noopener" href={link}>
+          <Link href={link}>
             <CardTitle
               className={`line-clamp-2 overflow-hidden text-sm capitalize hover:underline`}>
               {session.name}
