@@ -6,6 +6,7 @@ import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
 import { fetchSession } from '@/lib/services/sessionService'
 import { redirect } from 'next/navigation'
 import { fetchOrganization } from '@/lib/services/organizationService'
+import { generateThumbnailAction } from '@/lib/actions/sessions'
 export default async function Watch({
   searchParams,
 }: WatchPageProps) {
@@ -40,5 +41,8 @@ export async function generateMetadata({
   if (!searchParams.session) return generalMetadata
 
   if (!video) return generalMetadata
-  return watchMetadata({ session: video })
+  const thumbnail =
+    video.coverImage ?? (await generateThumbnailAction(video))
+
+  return watchMetadata({ session: video, thumbnail })
 }
