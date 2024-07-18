@@ -66,7 +66,7 @@ export class IndexController extends Controller {
         return SendApiResponse('Invalid signature or timestamp', null, '401');
       }
 
-      console.log(payload);
+      console.log('Livepeer Payload:', payload);
 
       switch (payload.event) {
         case LivepeerEvent.assetReady:
