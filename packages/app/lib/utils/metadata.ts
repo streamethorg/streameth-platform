@@ -122,14 +122,12 @@ export const archiveMetadata = ({
 export const watchMetadata = ({
   organization,
   session,
+  thumbnail,
 }: {
   organization?: IExtendedOrganization
   session: IExtendedSession
+  thumbnail: string
 }): Metadata => {
-  const imageUrl = session?.coverImage
-    ? session.coverImage
-    : BASE_IMAGE
-
   return {
     title: `${session.name} | ${organization?.name}`,
     description: `${session.description}`,
@@ -139,8 +137,8 @@ export const watchMetadata = ({
       siteName: `${organization?.name}`,
       description: `${session.description}`,
       images: {
-        url: session.coverImage ? session.coverImage : BASE_IMAGE,
-        alt: 'StreamETH Logo',
+        url: thumbnail ?? BASE_IMAGE,
+        alt: thumbnail ? session.name : 'StreamETH Logo',
       },
     },
     twitter: {
@@ -148,8 +146,8 @@ export const watchMetadata = ({
       title: `${session.name}`,
       description: `${session.description}`,
       images: {
-        url: session.coverImage ? session.coverImage : BASE_IMAGE,
-        alt: 'StreamETH Logo',
+        url: thumbnail ?? BASE_IMAGE,
+        alt: thumbnail ? session.name : 'StreamETH Logo',
       },
     },
     alternates: {
