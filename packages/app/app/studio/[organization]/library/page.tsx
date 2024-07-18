@@ -17,6 +17,11 @@ import Pagination from '@/app/[organization]/videos/components/pagination'
 import SearchBar from '@/components/misc/SearchBar'
 import LibraryFilter from './components/LibraryFilter'
 import { fetchOrganizationStages } from '@/lib/services/stageService'
+import { fetchAllStates } from '@/lib/services/stateService'
+import {
+  StateStatus,
+  StateType,
+} from 'streameth-new-server/src/interfaces/state.interface'
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -67,7 +72,16 @@ const Library = async ({
     organizationId: organization._id,
   })
 
-  const sessions = await fetchAllSessions({
+  const statesSet = new Set(
+    (
+      await fetchAllStates({
+        type: StateType.video,
+        status: StateStatus.pending,
+      })
+    ).map((state) => state.sessionId) as unknown as Set<string>
+  )
+
+  let sessions = await fetchAllSessions({
     organizationSlug: params.organization,
     limit: searchParams.limit || 20,
     page: searchParams.page || 1,
@@ -78,8 +92,13 @@ const Library = async ({
     type: searchParams.type,
   })
 
+  let filteredSession = sessions.sessions.filter(
+    (session) =>
+      session.videoUrl || statesSet.has(session._id.toString())
+  )
+
   const sortedSessions = sortArray(
-    sessions.sessions,
+    filteredSession,
     searchParams.sort
   ) as unknown as IExtendedSession[]
 
@@ -103,7 +122,7 @@ const Library = async ({
           </div>
         </div>
       </div>
-      {!sessions.sessions || sessions.sessions.length === 0 ? (
+      {!sortedSessions || sortedSessions.length === 0 ? (
         <EmptyLibrary organizationId={organization._id.toString()} />
       ) : (
         <>
