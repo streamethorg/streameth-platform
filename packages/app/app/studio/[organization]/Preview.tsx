@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import Player from '@/components/ui/Player'
 import {
@@ -9,9 +10,9 @@ import {
 import ShareButton from '@/components/misc/interact/ShareButton'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import { deleteSessionAction } from '@/lib/actions/sessions'
-import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { Asset } from 'livepeer/dist/models/components'
+import { Asset } from 'livepeer/models/components'
+
 const Preview = ({
   initialIsOpen,
   asset,
