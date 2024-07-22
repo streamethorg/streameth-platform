@@ -1,3 +1,12 @@
+---
+name: Post-Mortem template
+about: Template for important bug fix post-mortems
+title:
+labels:
+assignees: ''
+
+---
+
 # 😵 Post-Mortem 😵
 
 ## Summary
