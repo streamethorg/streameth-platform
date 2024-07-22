@@ -7,6 +7,7 @@ export const config = {
   playerUrl: validatedEnv.PLAYER_URL,
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
+  wallets: validatedEnv.WALLET_ADDRESSES,
   db: {
     host: validatedEnv.DB_HOST,
   },

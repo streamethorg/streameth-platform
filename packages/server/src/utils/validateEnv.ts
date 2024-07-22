@@ -18,6 +18,7 @@ const validateEnv = () => {
     JWT_EXPIRY: str(),
     LIVEPEER_BASE_URL: str(),
     LIVEPEER_API_KEY: str(),
+    WALLET_ADDRESSES: str(),
     BUCKET_NAME: str(),
     BUCKET_URL: str(),
     SPACES_KEY: str(),
