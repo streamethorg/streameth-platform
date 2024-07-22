@@ -1,11 +1,20 @@
+---
+name: Post-Mortem PR template
+about: PR description for bug fixes
+title: Post-Mortem title
+labels: 
+assignees: ''
+
+---
+
 # 😵 Post-Mortem 😵
 
 ## Summary
 <!-- Summarize the incident in a few sentences -->
 
 ## Impact
--    **Services Affected**: <!-- List the services or components affected by this incident -->
--    **User Impact**: <!-- Describe the impact on users or systems -->
+- **Services Affected**: <!-- List the services or components affected by this incident -->
+- **User Impact**: <!-- Describe the impact on users or systems -->
 
 ## Root Cause Analysis
 <!-- Provide a detailed explanation of the root cause of the incident -->
