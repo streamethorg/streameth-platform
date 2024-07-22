@@ -6,11 +6,10 @@
     "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p 3000",
-    "test": "cypress open",
     "lint": "next lint",
     "check-types": "tsc --noEmit --incremental",
-    "prettier:fix": "prettier --write './app' './components' './lib' './cypress'",
-    "prettier:check": "prettier --check './app' './components' './lib' './cypress'"
+    "prettier:fix": "prettier --write './app' './components' './lib'",
+    "prettier:check": "prettier --check './app' './components' './lib'"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.509.0",
