@@ -30,4 +30,4 @@ Please delete options that are not relevant.
 
 ## Additional context:
 
-Add any other context about the pull request here, like realted issues or important links to 3rd party documentation.
+Add any other context about the pull request here, like related issues or important links to 3rd party documentation.
