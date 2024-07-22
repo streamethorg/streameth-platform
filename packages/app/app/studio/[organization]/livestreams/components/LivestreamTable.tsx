@@ -23,13 +23,7 @@ import {
 import LivestreamActions from './LivestreamActions'
 import { Button } from '@/components/ui/button'
 import { ScissorsLineDashed } from 'lucide-react'
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { CardDescription, CardTitle } from '@/components/ui/card'
 import EmptyFolder from '@/lib/svg/EmptyFolder'
 
 const LivestreamTable = ({

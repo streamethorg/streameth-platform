@@ -31,14 +31,14 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   }
 
   return (
-    <div className="flex h-full max-h-[1000px] w-full max-w-screen-2xl flex-col p-4">
+    <div className="max-w-screen-3xl flex h-full max-h-[1000px] w-full flex-col p-4">
       <StreamHeader
         organization={params.organization}
         stream={stream}
         isLiveStreamPage
       />
       <div className="flex w-full flex-grow flex-row space-x-4">
-        <div className="flex flex-col">
+        <div className="flex w-2/3 flex-col">
           <StreamConfigWithPlayer
             stream={stream}
             streamId={params.streamId}
@@ -61,7 +61,10 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               streamId={stream._id}
               playerName={stream?.name}
             />
-            <ShareLivestream organization={params.organization} />
+            <ShareLivestream
+              variant={'outline'}
+              organization={params.organization}
+            />
 
             <Link
               href={`/${params.organization}/livestream?stage=${stream._id}`}

@@ -159,7 +159,7 @@ const EditSessionForm = ({
         />
 
         <div className="flex items-end justify-end space-x-2">
-          <DeleteAsset
+          {/* <DeleteAsset
             session={session}
             href={`/studio/${organizationSlug}/library`}
             TriggerComponent={
@@ -170,7 +170,7 @@ const EditSessionForm = ({
                 <p>Delete video</p>
               </Button>
             }
-          />
+          /> */}
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}
             type="submit"

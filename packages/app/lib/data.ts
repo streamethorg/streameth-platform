@@ -17,6 +17,7 @@ interface ApiParams {
   published?: boolean
   speakerIds?: string[] // Assuming speakerIds is an array of strings
   date?: Date
+  type?: string
 }
 
 function constructApiUrl(baseUrl: string, params: ApiParams): string {
@@ -44,6 +45,7 @@ export async function fetchAllSessions({
   page = 1,
   limit,
   searchQuery = '',
+  type,
 }: {
   event?: string
   organizationSlug?: string
@@ -54,6 +56,7 @@ export async function fetchAllSessions({
   page?: number
   limit?: number
   searchQuery?: string
+  type?: string
 }): Promise<{
   sessions: IExtendedSession[]
   pagination: IPagination
@@ -67,6 +70,7 @@ export async function fetchAllSessions({
     onlyVideos,
     published,
     speakerIds,
+    type,
   }
 
   const response = await fetch(

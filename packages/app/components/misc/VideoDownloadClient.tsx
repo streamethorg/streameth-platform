@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Download } from 'lucide-react'
+import { LuDownload } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { apiUrl, cn } from '@/lib/utils/utils'
 import { useState } from 'react'
@@ -47,25 +47,24 @@ const VideoDownloadClient = ({
   const handleDownload = async () => {
     setLoading(true)
     try {
-      const downloadUrl = await fetchDownloadUrl(assetId)
+      const object = await fetchDownloadUrl(assetId)
 
-      // Create a temporary anchor element
+      console.log(object.downloadUrl)
+
       const link = document.createElement('a')
-      link.href = downloadUrl
-      link.setAttribute('download', videoName) // Set the desired file name
+      link.href = object.downloadUrl
+      link.setAttribute('download', videoName)
 
-      // Append the anchor to the body
       document.body.appendChild(link)
 
-      // Trigger the download by simulating a click
       link.click()
 
-      // Clean up by removing the anchor element
       document.body.removeChild(link)
 
       toast.success('Download started')
       setLoading(false)
     } catch (err) {
+      console.log(err)
       setLoading(false)
       toast.error('Failed to download video')
     }
@@ -77,7 +76,7 @@ const VideoDownloadClient = ({
       onClick={handleDownload}
       variant={variant}
       className={className}>
-      <Download className="h-5 w-5" />
+      <LuDownload className="h-5 w-5" />
       <p className={cn(collapsable && 'flex')}>
         {loading ? 'Downloading...' : 'Download'}
       </p>

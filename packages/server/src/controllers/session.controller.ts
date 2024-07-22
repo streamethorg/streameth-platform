@@ -133,6 +133,7 @@ export class SessionController extends Controller {
     @Query() timestamp?: number,
     @Query() assetId?: string,
     @Query() published?: boolean,
+    @Query() type?: string,
   ): Promise<
     IStandardResponse<{
       sessions: Array<ISession>;
@@ -151,6 +152,7 @@ export class SessionController extends Controller {
       timestamp: timestamp,
       assetId: assetId,
       published: published,
+      type: type,
     };
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);

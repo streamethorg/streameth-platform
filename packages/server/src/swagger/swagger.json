@@ -1225,6 +1225,14 @@
             "type": "number",
             "format": "double"
           },
+          "startClipTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "endClipTime": {
+            "type": "number",
+            "format": "double"
+          },
           "stageId": {
             "anyOf": [
               {
@@ -1420,6 +1428,14 @@
             "type": "number",
             "format": "double"
           },
+          "startClipTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "endClipTime": {
+            "type": "number",
+            "format": "double"
+          },
           "stageId": {
             "anyOf": [
               {
@@ -1562,6 +1578,14 @@
             "type": "number",
             "format": "double"
           },
+          "startClipTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "endClipTime": {
+            "type": "number",
+            "format": "double"
+          },
           "stageId": {
             "type": "string"
           },
@@ -1692,6 +1716,14 @@
             "format": "double"
           },
           "end": {
+            "type": "number",
+            "format": "double"
+          },
+          "startClipTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "endClipTime": {
             "type": "number",
             "format": "double"
           },
@@ -4049,6 +4081,14 @@
             "required": false,
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           }
         ]

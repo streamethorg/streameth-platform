@@ -267,7 +267,16 @@ export const deleteMultiStream = async (data: {
   targetId: string;
 }): Promise<void> => {
   try {
-    await livepeer.multistreamTarget.delete(data.targetId);
+    await fetch(`${host}/api/multistream/target/${data.targetId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+      body: JSON.stringify({
+        disabled: true,
+      }),
+    });
     const stage = await Stage.findOne({
       'streamSettings.streamId': data.streamId,
     });
@@ -275,6 +284,7 @@ export const deleteMultiStream = async (data: {
       $pull: { 'streamSettings.targets': { id: data.targetId } },
     });
   } catch (e) {
+    console.log('error', e);
     throw new HttpException(400, 'Error deleting multistream');
   }
 };

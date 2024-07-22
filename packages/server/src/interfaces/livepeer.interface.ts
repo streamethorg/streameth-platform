@@ -1,5 +1,6 @@
 export enum LivepeerEvent {
   assetReady = 'asset.ready',
+  assetFailed = 'asset.failed',
   streamReady = 'stream.ready',
   streamIdle = 'stream.idle',
   streamStarted = 'stream.started',

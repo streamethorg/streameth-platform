@@ -41,6 +41,11 @@ import {
   SelectGroup,
   SelectItem,
 } from '@/components/ui/select'
+import { createStateAction } from '@/lib/actions/state'
+import {
+  StateStatus,
+  StateType,
+} from 'streameth-new-server/src/interfaces/state.interface'
 
 const ClipButton = ({
   playbackId,
@@ -110,10 +115,20 @@ const ClipButton = ({
       end: endTime.unix,
       sessionId: session._id as string,
     })
-      .then(() => {
+      .then(async () => {
         setIsLoading(false)
         setSessionId('')
         setDialogOpen(false)
+
+        await createStateAction({
+          state: {
+            sessionId: session._id,
+            type: StateType.video,
+            sessionSlug: session.slug,
+            organizationId: session.organizationId,
+          },
+        })
+
         toast.success('Clip created')
       })
       .catch(() => {
