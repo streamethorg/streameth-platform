@@ -72,7 +72,7 @@ const Preview = ({
             <div className="flex aspect-video flex-col items-center justify-center rounded-lg bg-background p-4 text-black">
               <p className="">Video is processing</p>
               <p>
-                {(Number(status?.progress?.toFixed(2)) ?? 0) * 100}%
+                {Math.round(Number(status?.progress ?? 0) * 100)}%
                 complete
               </p>
             </div>
