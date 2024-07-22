@@ -22,6 +22,7 @@ export const config = {
     secret: validatedEnv.JWT_SECRET,
     expiry: validatedEnv.JWT_EXPIRY,
   },
+  thirdWebSecretKey: validatedEnv.THIRDWEB_SECRET_KEY,
   telegram: {
     apiKey: validatedEnv.TELEGRAM_API_KEY,
     chatId: validatedEnv.TELEGRAM_CHAT_ID,

@@ -32,6 +32,7 @@ const validateEnv = () => {
     GOOGLE_CLIENT_ID: str(),
     TWITTER_OAUTH_SECRET: str(),
     TWITTER_CLIENT_ID: str(),
+    THIRDWEB_SECRET_KEY: str(),
     MQ_HOST: str(),
     MQ_PORT: port(),
     MQ_USERNAME: str(),
