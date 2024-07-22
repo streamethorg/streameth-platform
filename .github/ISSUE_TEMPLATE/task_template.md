@@ -1,7 +1,7 @@
 ---
 name: Task
 about: Define a new task related to a User Story
-title: [TASK]
+title: [TASK] 
 labels: task
 assignees: ''
 
