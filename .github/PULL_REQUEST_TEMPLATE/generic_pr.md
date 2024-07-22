@@ -1,3 +1,12 @@
+---
+name: Generic PR
+about: Template for general PRs
+title:
+labels:
+assignees: ''
+
+---
+
 # Pull Request Info
 
 ## Description
