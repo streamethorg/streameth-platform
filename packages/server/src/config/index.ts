@@ -7,7 +7,6 @@ export const config = {
   playerUrl: validatedEnv.PLAYER_URL,
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
-  wallets: validatedEnv.WALLET_ADDRESSES,
   db: {
     host: validatedEnv.DB_HOST,
   },
@@ -19,7 +18,6 @@ export const config = {
     origin: validatedEnv.CORS_ORIGIN,
     credentials: validatedEnv.CORS_CREDENTIALS,
   },
-  secretKey: validatedEnv.SECRET_KEY,
   jwt: {
     secret: validatedEnv.JWT_SECRET,
     expiry: validatedEnv.JWT_EXPIRY,
@@ -35,7 +33,6 @@ export const config = {
       secretKey: validatedEnv.SPACES_SECRET,
       apiKey: validatedEnv.SPACES_KEY,
     },
-    thirdWebSecretKey: validatedEnv.THIRDWEB_SECRET_KEY,
   },
   livepeer: {
     host: validatedEnv.LIVEPEER_BASE_URL,
