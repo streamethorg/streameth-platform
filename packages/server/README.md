@@ -22,18 +22,13 @@ LOG_FORMAT=<Your Desired Log Format> # Optional: Define the logging format
 LOG_DIR=<Directory for Logs> # Optional: Specify the directory for log files
 CORS_ORIGIN=<Your CORS Origin Whitelist> # Define allowed origins for CORS
 CORS_CREDENTIALS=true # or false; Set credentials for CORS
-SECRET_KEY=<Your Secret Key> # Generate with: openssl rand -base64 64
 JWT_SECRET=<Your JWT Secret> # Generate with: openssl rand -base64 64
 JWT_EXPIRY=<Token Expiry Duration> # Define JWT token expiry duration (e.g., '2h' for 2 hours)
-GITHUB_API_TOKEN= ""
-NEXT_PUBLIC_STUDIO_API_KEY=<> #Livepeer studio API key
-GOOGLE_API_KEY=<Your Google API Key> # Google services API key
 LIVEPEER_API_KEY=<Your Livepeer API Key> # Livepeer API key
 SPACES_KEY=<Your DigitalOcean Spaces Key> # DigitalOcean Spaces access key
 SPACES_SECRET=<Your DigitalOcean Spaces Secret> # DigitalOcean Spaces secret key
 BUCKET_NAME=<Your Bucket Name> # Bucket storage na  me
 BUCKET_URL=<Your Bucket URL> # Bucket storage url
-OPENAI_API_KEY=<Your OpenAI API Key> # OpenAI API key
 LIVEPEER_WEBHOOK_SECRET=<Your Livepeer Webhook Secret> # Livepeer webhook secret
 ```
 
