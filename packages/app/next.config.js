@@ -4,23 +4,27 @@ const shouldAnalyzeBundles = process.env.ANALYZE === true
 let nextConfig = {
   redirects: async () => [
     {
-      source: '/',
+      source: "/",
       has: [
         {
-          type: 'host',
-          value: 'streameth-test.vercel.app',
+          type: "host",
+          value: "streameth.org",
         },
         {
-          type: 'host',
-          value: 'streameth.org',
+          type: "host",
+          value: "www.streameth.org",
         },
         {
-          type: 'host',
-          value: 'www.streameth.org',
+          type: "host",
+          value: "localhost",
         },
+        {
+          type: "host",
+          value: "streameth-test.vercel.app",
+        }
       ],
-      destination: 'https://info.streameth.org',
-      permanent: true,
+      destination: "https://info.streameth.org",
+      permanent: true
     },
     {
       source: '/',
@@ -146,7 +150,7 @@ let nextConfig = {
     return config
   },
   images: {
-    unoptimized: true,
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: 'https',
