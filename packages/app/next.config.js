@@ -5,24 +5,6 @@ let nextConfig = {
   redirects: async () => [
     {
       source: "/",
-      has: [
-        {
-          type: "host",
-          value: "streameth.org",
-        },
-        {
-          type: "host",
-          value: "www.streameth.org",
-        },
-        {
-          type: "host",
-          value: "localhost",
-        },
-        {
-          type: "host",
-          value: "streameth-test.vercel.app",
-        }
-      ],
       destination: "https://info.streameth.org",
       permanent: true
     },
