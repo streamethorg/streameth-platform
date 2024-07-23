@@ -1,10 +1,9 @@
-import { test, expect } from '@playwright/test'
+import { test as setup, expect } from '@playwright/test'
 
-test.beforeEach(async ({ page }) => {
+const authFile = 'playwright/.auth/user.json'
+
+setup('login to studio page with Privy', async ({ page }) => {
   await page.goto('http://localhost:3000/studio')
-})
-
-test('login to studio page with Privy', async ({ page }) => {
   const email = process.env['PRIVY_EMAIL'] || ''
   const otp = process.env['PRIVY_OTP'] || ''
 
@@ -42,4 +41,6 @@ test('login to studio page with Privy', async ({ page }) => {
     name: 'Create an organization to get started',
   })
   await expect(heading).toBeVisible({ timeout: 10000 })
+
+  await page.context().storageState({ path: authFile })
 })
