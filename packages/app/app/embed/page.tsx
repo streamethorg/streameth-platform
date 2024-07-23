@@ -1,8 +1,6 @@
 import Player from '@/components/ui/Player'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import { Livepeer } from 'livepeer'
-import { getSrc } from '@livepeer/react/external'
 import { EmbedPageParams } from '@/lib/types'
 import { fetchStage } from '@/lib/services/stageService'
 import { buildPlaybackUrl } from '@/lib/utils/utils'
@@ -89,9 +87,13 @@ const EmbedPage = async ({ searchParams }: EmbedPageParams) => {
     }
 
     const videoUrl = await getVideoUrlAction(
-      session.assetId,
-      session.playbackId
+      session.assetId as string
     )
+
+    if (!videoUrl) {
+      return notFound()
+    }
+
     return (
       <Suspense fallback={<div>Loading...</div>}>
         <Embed

@@ -4,6 +4,7 @@ import { apiUrl } from '@/lib/utils/utils'
 import { Livepeer } from 'livepeer'
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { revalidatePath } from 'next/cache'
+import { Asset } from 'livepeer/models/components'
 
 export const createSession = async ({
   session,
@@ -215,7 +216,7 @@ export const fetchAsset = async ({
   assetId,
 }: {
   assetId: string
-}): Promise<any> => {
+}): Promise<Asset | null> => {
   try {
     const response = await fetch(
       `${apiUrl()}/streams/asset/${assetId}`,

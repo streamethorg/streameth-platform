@@ -6,36 +6,22 @@ import { createAssetAction } from './sessions'
 export const getVideoPhaseAction = async (assetId: string) => {
   try {
     const asset = await fetchAsset({ assetId })
-    if (asset.statusCode !== 200) {
-      console.error(asset.rawResponse)
+    if (!asset) {
       return null
     }
 
-    return asset.asset?.status?.phase.toString()
+    return asset.status?.phase.toString()
   } catch (e) {
     console.error('Error fetching asset: ', assetId)
     return null
   }
 }
 
-export const getVideoUrlAction = async (
-  assetId?: string,
-  playbackId?: string
-) => {
+export const getVideoUrlAction = async (assetId: string) => {
   try {
-    if (assetId) {
-      const asset = await fetchAsset({ assetId })
-      if (asset.statusCode !== 200) {
-        console.error(asset.rawResponse)
-      }
-
-      if (asset.asset?.playbackUrl) {
-        return asset.asset.playbackUrl
-      }
-    }
-
-    if (playbackId) {
-      return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/index.m3u8`
+    const asset = await fetchAsset({ assetId })
+    if (asset?.playbackUrl) {
+      return asset.playbackUrl
     }
 
     return null
