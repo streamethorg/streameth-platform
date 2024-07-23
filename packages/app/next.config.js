@@ -8,6 +8,10 @@ let nextConfig = {
       has: [
         {
           type: 'host',
+          value: 'streameth-test.vercel.app',
+        },
+        {
+          type: 'host',
           value: 'streameth.org',
         },
         {
