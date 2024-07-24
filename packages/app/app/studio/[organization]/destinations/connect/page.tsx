@@ -14,6 +14,12 @@ const ConnectSocials = async ({
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   })
+  const state = encodeURIComponent(
+    JSON.stringify({
+      redirectUrl: `/studio/${params.organization}/destinations`,
+      organizationId: organization?._id,
+    })
+  )
   return (
     <div className="mx-6 h-full p-2">
       <Link href={`/studio/${params.organization}/destinations`}>
@@ -35,10 +41,12 @@ const ConnectSocials = async ({
             organizationId={organization?._id}
             organizationSlug={params.organization}
           />
-          <Button disabled className="min-w-[200px] bg-[#121212]">
-            <SiTwitter className="mr-2" />
-            X(Twitter) (Coming Soon)
-          </Button>
+          <Link href={`/api/twitter/request?state=${state}`}>
+            <Button className="min-w-[200px] bg-[#121212]">
+              <SiTwitter className="mr-2" />
+              X(Twitter) (Coming Soon)
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
