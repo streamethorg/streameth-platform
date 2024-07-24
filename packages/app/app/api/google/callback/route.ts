@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
   const parsedRedirectUrl = redirectUrl
     ? originUrl + redirectUrl
     : `/studio`
-  console.log('authuser: ' + authuser, searchParams)
+
   if (!code || !authToken) {
     console.error('Google or auth token does not exist')
     return redirect(parsedRedirectUrl)
