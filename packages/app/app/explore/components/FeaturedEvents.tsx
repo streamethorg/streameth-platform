@@ -1,29 +1,43 @@
-import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import { fetchAllSessions } from '@/lib/data'
-import Link from 'next/link'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
-const FeaturedEvents = async () => {
+const FeaturedEvents = () => {
   const events = [
     {
-      name: 'Event 1',
-      date: '2022-01-01',
-      url: 'https://www.google.com',
-      thumbnail: 'https://via.placeholder.com/150',
+      id: 1,
+      title: 'Event 1',
+      date: '2024-08-01',
+      image: 'https://via.placeholder.com/300x200',
     },
+    // Add more events as needed
   ]
 
   return (
-    <div className="grid max-h-[500px] grid-cols-3 gap-4">
-      {events.map((event) => (
-        <Link href={event.thumbnail} key={event.name}>
-          <div className="">
-            <Thumbnail imageUrl={event.thumbnail} />
-            <div>
-              <p>{event.name}</p>
-              <p>{event.date}</p>
-            </div>
-          </div>
-        </Link>
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {events.map((event, index) => (
+        <Card
+          key={event.id}
+          className="overflow-hidden transition-all animate-in fade-in zoom-in duration-300 ease-out hover:scale-105 hover:cursor-pointer"
+          style={{ animationDelay: `${index * 150}ms` }}>
+          <CardHeader className="p-0">
+            <img
+              src={event.image}
+              alt={event.title}
+              className="h-48 w-full object-cover"
+            />
+          </CardHeader>
+          <CardContent className="p-5">
+            <CardTitle className="mb-2 text-xl font-bold">
+              {event.title}
+            </CardTitle>
+            <CardDescription>{event.date}</CardDescription>
+          </CardContent>
+        </Card>
       ))}
     </div>
   )

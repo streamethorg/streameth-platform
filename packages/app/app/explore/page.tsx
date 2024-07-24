@@ -5,16 +5,22 @@ import ExploreTabs from './components/ExploreTabs'
 
 const Home = ({ searchParams }: HomePageProps) => {
   return (
-    <div className="flex flex-col p-6">
-      <div>
-        <p>Featured events</p>
+    <div className="container mx-auto space-y-12 px-8 py-8 animate-in fade-in duration-500">
+      <section>
+        <h2 className="mb-6 text-3xl font-bold text-foreground">
+          Featured Events
+        </h2>
         <FeaturedEvents />
-      </div>
-      <div>
-        <p>Past sessions</p>
+      </section>
+      <section>
+        <h2 className="mb-6 text-3xl font-bold text-foreground">
+          Past Sessions
+        </h2>
         <ExploreTabs />
-        <ArchiveVideos {...searchParams} />
-      </div>
+        <div className="mt-8">
+          <ArchiveVideos {...searchParams} />
+        </div>
+      </section>
     </div>
   )
 }
