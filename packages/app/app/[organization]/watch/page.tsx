@@ -10,6 +10,7 @@ import { Suspense } from 'react'
 import WatchGrid from '../components/WatchGrid'
 import { getVideoUrlAction } from '@/lib/actions/livepeer'
 import { generateThumbnailAction } from '@/lib/actions/sessions'
+
 const Loading = () => {
   return (
     <div className="mx-auto flex h-full w-full max-w-7xl animate-pulse flex-col gap-4">
@@ -53,10 +54,11 @@ export default async function Watch({
   if (!session || (!session.playbackId && !session.assetId))
     return notFound()
 
-  const sessionUrl = await getVideoUrlAction(
-    session.assetId,
-    session.playbackId
-  )
+  const videoUrl = await getVideoUrlAction(session.assetId as string)
+
+  if (!videoUrl) {
+    return notFound()
+  }
 
   const thumbnail = await generateThumbnailAction(session)
 
@@ -69,7 +71,7 @@ export default async function Watch({
             thumbnail={session.coverImage ?? thumbnail}
             src={[
               {
-                src: sessionUrl as `${string}m3u8`,
+                src: videoUrl as `${string}m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
@@ -86,6 +88,7 @@ export default async function Watch({
               playbackId={session.playbackId}
               organizationSlug={params.organization}
               vod={true}
+              video={session}
             />
           </div>
         </div>
@@ -119,5 +122,9 @@ export async function generateMetadata({
   })
 
   if (!session || !organization) return generalMetadata
-  return watchMetadata({ organization, session: session })
+
+  const thumbnail =
+    session.coverImage ?? (await generateThumbnailAction(session))
+
+  return watchMetadata({ organization, session: session, thumbnail })
 }

@@ -38,10 +38,12 @@ const EditSession = async ({
   if (!session || (!session.playbackId && !session.assetId))
     return notFound()
 
-  const videoUrl = await getVideoUrlAction(
-    session.assetId,
-    session.playbackId
-  )
+  const videoUrl = await getVideoUrlAction(session.assetId as string)
+
+  if (!videoUrl) {
+    return notFound()
+  }
+
   return (
     <div className="h-full overflow-auto p-4">
       <Link href={`/studio/${params.organization}/library`}>

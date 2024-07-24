@@ -4,19 +4,9 @@ const shouldAnalyzeBundles = process.env.ANALYZE === true
 let nextConfig = {
   redirects: async () => [
     {
-      source: '/',
-      has: [
-        {
-          type: 'host',
-          value: 'streameth.org',
-        },
-        {
-          type: 'host',
-          value: 'www.streameth.org',
-        },
-      ],
-      destination: 'https://info.streameth.org',
-      permanent: true,
+      source: "/",
+      destination: "https://info.streameth.org",
+      permanent: true
     },
     {
       source: '/',
@@ -142,7 +132,7 @@ let nextConfig = {
     return config
   },
   images: {
-    unoptimized: true,
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: 'https',
