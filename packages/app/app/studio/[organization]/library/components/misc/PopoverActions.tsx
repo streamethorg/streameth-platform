@@ -88,7 +88,7 @@ export const PopoverActions = ({
             assetId={session.assetId}
           />
         )}
-        {/* <DeleteAsset
+        <DeleteAsset
           session={session}
           href={`/studio/${organizationSlug}/library`}
           TriggerComponent={
@@ -102,7 +102,7 @@ export const PopoverActions = ({
               <p>Delete</p>
             </span>
           }
-        /> */}
+        />
       </div>
     </div>
   )
