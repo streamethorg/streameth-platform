@@ -38,7 +38,7 @@ const Destinations = async ({
     switch (type) {
       case 'youtube':
         return <SiYoutube color="#FF0000" className={className} />
-      case 'x':
+      case 'twitter':
         return <SiX className={className} />
       default:
         return <LuRadio color="#000" className={className} />

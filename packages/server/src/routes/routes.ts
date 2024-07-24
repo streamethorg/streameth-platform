@@ -291,7 +291,7 @@ const models: TsoaRoute.Models = {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   StateStatus: {
     dataType: 'refEnum',
-    enums: ['pending', 'completed', 'canceled', 'sync'],
+    enums: ['pending', 'completed', 'canceled', 'sync', 'error'],
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   StateType: {

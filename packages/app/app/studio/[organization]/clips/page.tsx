@@ -194,6 +194,10 @@ const EventClips = async ({
     return undefined
   })()
 
+  if (!previewAsset) {
+    return notFound()
+  }
+
   return (
     <ClipContainer>
       {previewAsset && (

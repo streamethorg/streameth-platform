@@ -1,21 +1,21 @@
 'use client'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { uploadSessionToYouTubeAction } from '@/lib/actions/sessions'
+import { SiTwitter } from 'react-icons/si'
 import { IExtendedOrganization } from '@/lib/types'
-import React, { useState } from 'react'
-import { SiYoutube } from 'react-icons/si'
+import { uploadSessionToYouTubeAction } from '@/lib/actions/sessions'
 import { toast } from 'sonner'
 import { CiCirclePlus } from 'react-icons/ci'
 
-const UploadToYoutubeButton = ({
+const UploadTwitterButton = ({
   organization,
-  organizationSlug,
   sessionId,
+  organizationSlug,
 }: {
   organization: IExtendedOrganization | null
   organizationSlug: string
@@ -24,11 +24,8 @@ const UploadToYoutubeButton = ({
   const [openModal, setOpenModal] = useState(false)
   const [socialId, setSocialId] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''
-  const redirectUri =
-    process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI || ''
 
-  const handleYoutubeConnect = () => {
+  const handleTwitterConnect = () => {
     const state = encodeURIComponent(
       JSON.stringify({
         redirectUrl: `/studio/${organizationSlug}/library/${sessionId}`,
@@ -36,30 +33,20 @@ const UploadToYoutubeButton = ({
       })
     )
     // Encode the redirect URL
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&prompt=select_account&redirect_uri=${redirectUri}&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube&state=${state}`
-
-    // Calculate window size and position
-    const width = window.innerWidth * 0.7
-    const height = window.innerHeight * 0.7
-    const left = window.screen.width / 2 - width / 2
-    const top = window.screen.height / 2 - height / 2
+    const authUrl = `/api/twitter/request?state=${state}`
 
     // Open the OAuth URL in a new window
-    window.open(
-      authUrl,
-      'YouTube OAuth',
-      `width=${width},height=${height},top=${top},left=${left}`
-    )
+    window.location.href = authUrl
   }
   const hasSocials = organization?.socials?.length
     ? organization?.socials?.length > 0
     : false
 
-  const handleYoutubePublish = async () => {
+  const handleTwitterPublish = async () => {
     setIsLoading(true)
     try {
       const response = await uploadSessionToYouTubeAction({
-        type: 'youtube',
+        type: 'twitter',
         sessionId,
         organizationId: organization?._id as string,
         socialId,
@@ -71,7 +58,7 @@ const UploadToYoutubeButton = ({
         toast.success('Publish request successful')
       }
     } catch (error) {
-      toast.error('Error uploading video to YouTube')
+      toast.error('Error uploading video to Twitter')
     } finally {
       setIsLoading(false)
       setOpenModal(false)
@@ -80,18 +67,18 @@ const UploadToYoutubeButton = ({
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger disabled>
-        <Button disabled className="min-w-[200px] bg-[#FF0000]">
-          <SiYoutube className="mr-2" />
-          Publish to Youtube (Coming Soon)
+      <DialogTrigger>
+        <Button className="min-w-[200px] bg-[#121212]">
+          <SiTwitter className="mr-2" /> Publish to X(Twitter) (Coming
+          Soon)
         </Button>
       </DialogTrigger>
       <DialogContent className="z-[99999999999999999] px-8">
-        <p className="font-medium">Select Youtube Destination</p>
+        <p className="font-medium">Select Twitter Destination</p>
 
         <div className="flex flex-wrap items-center gap-5 py-5">
           {organization?.socials
-            ?.filter((s) => s.type == 'youtube')
+            ?.filter((s) => s.type == 'twitter')
             .map(({ name, thumbnail, _id }) => (
               <div
                 onClick={() => setSocialId(_id!)}
@@ -108,7 +95,7 @@ const UploadToYoutubeButton = ({
               </div>
             ))}
           <div
-            onClick={handleYoutubeConnect}
+            onClick={handleTwitterConnect}
             className="flex cursor-pointer flex-col items-center">
             <CiCirclePlus color="#000" size={56} />
             <p className="text-sm">Add New</p>
@@ -117,7 +104,7 @@ const UploadToYoutubeButton = ({
 
         <Button
           loading={isLoading}
-          onClick={handleYoutubePublish}
+          onClick={handleTwitterPublish}
           variant="primary"
           disabled={!hasSocials || !socialId}>
           Publish
@@ -127,4 +114,4 @@ const UploadToYoutubeButton = ({
   )
 }
 
-export default UploadToYoutubeButton
+export default UploadTwitterButton

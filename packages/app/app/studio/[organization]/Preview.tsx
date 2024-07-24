@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import Player from '@/components/ui/Player'
 import {
@@ -9,9 +10,9 @@ import {
 import ShareButton from '@/components/misc/interact/ShareButton'
 import useSearchParams from '@/lib/hooks/useSearchParams'
 import { deleteSessionAction } from '@/lib/actions/sessions'
-import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { Asset } from 'livepeer/dist/models/components'
+import { Asset } from 'livepeer/models/components'
+
 const Preview = ({
   initialIsOpen,
   asset,
@@ -72,7 +73,7 @@ const Preview = ({
             <div className="flex aspect-video flex-col items-center justify-center rounded-lg bg-background p-4 text-black">
               <p className="">Video is processing</p>
               <p>
-                {(Number(status?.progress?.toFixed(2)) ?? 0) * 100}%
+                {Math.round(Number(status?.progress ?? 0) * 100)}%
                 complete
               </p>
             </div>
