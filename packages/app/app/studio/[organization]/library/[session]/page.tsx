@@ -3,7 +3,6 @@
 import { studioPageParams } from '@/lib/types'
 import { fetchSession } from '@/lib/services/sessionService'
 import { PlayerWithControls } from '@/components/ui/Player'
-import { Livepeer } from 'livepeer'
 import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import EditSessionForm from './components/EditSessionForm'
@@ -23,6 +22,7 @@ import {
 import UploadToYoutubeButton from './components/UploadToYoutubeButton'
 import { fetchOrganization } from '@/lib/services/organizationService'
 import { getVideoUrlAction } from '@/lib/actions/livepeer'
+import UploadTwitterButton from './components/UploadTwitterButton'
 
 const EditSession = async ({
   params,
@@ -112,12 +112,11 @@ const EditSession = async ({
                       sessionId={session._id}
                     />
                   )}
-                  <Button
-                    disabled
-                    className="min-w-[200px] bg-[#121212]">
-                    <SiTwitter className="mr-2" /> Publish to
-                    X(Twitter) (Coming Soon)
-                  </Button>
+                  <UploadTwitterButton
+                    organization={organization}
+                    organizationSlug={params.organization}
+                    sessionId={session._id}
+                  />
                 </div>
               </AccordionContent>
             </AccordionItem>

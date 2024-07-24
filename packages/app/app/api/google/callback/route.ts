@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const code = searchParams.get('code')
   const state = searchParams.get('state')
+  const authuser = searchParams.get('authuser')
   const decodedState = state
     ? JSON.parse(decodeURIComponent(state))
     : ''
@@ -22,7 +23,7 @@ export async function GET(request: NextRequest) {
   const parsedRedirectUrl = redirectUrl
     ? originUrl + redirectUrl
     : `/studio`
-
+  console.log('authuser: ' + authuser, searchParams)
   if (!code || !authToken) {
     console.error('Google or auth token does not exist')
     return redirect(parsedRedirectUrl)
@@ -58,13 +59,14 @@ export async function GET(request: NextRequest) {
           }),
         }
       )
+
       revalidatePath('/studio')
       return NextResponse.redirect(
         new URL(parsedRedirectUrl, request.url)
       )
     } else {
       return NextResponse.redirect(
-        `${originUrl}/redirect/google?channelId=${tokenDetails.channelId}`
+        `${originUrl}/redirect/google?authuser=${authuser}`
       )
     }
   } catch (err) {
