@@ -27,11 +27,11 @@ const SidebarMenu = ({
       url: `/studio/${organizationSlug}/library`,
       icon: <LuVideotape size={25} />,
     },
-    {
-      text: 'Destinations',
-      url: `/studio/${organizationSlug}/destinations`,
-      icon: <LuShare2 size={25} />,
-    },
+    // {
+    //   text: 'Destinations',
+    //   url: `/studio/${organizationSlug}/destinations`,
+    //   icon: <LuShare2 size={25} />,
+    // },
     {
       text: 'NFTs',
       url: `/studio/${organizationSlug}/nfts`,

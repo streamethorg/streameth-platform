@@ -80,10 +80,10 @@ const UploadToYoutubeButton = ({
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger>
-        <Button className="min-w-[200px] bg-[#FF0000]">
+      <DialogTrigger disabled>
+        <Button disabled className="min-w-[200px] bg-[#FF0000]">
           <SiYoutube className="mr-2" />
-          Publish to Youtube
+          Publish to Youtube (Coming Soon)
         </Button>
       </DialogTrigger>
       <DialogContent className="z-[99999999999999999] px-8">
