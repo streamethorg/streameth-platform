@@ -1,20 +1,19 @@
-'use server'
+'use server';
 
-import { Livepeer } from 'livepeer'
-import { IExtendedStage } from '@/lib/types'
-import Counter from './Counter'
-import { PlayerWithControls } from '@/components/ui/Player'
-import { buildPlaybackUrl } from '@/lib/utils/utils'
-import { notFound } from 'next/navigation'
-import Image from 'next/image'
+import { Livepeer } from 'livepeer';
+import { IExtendedStage } from '@/lib/types';
+import Counter from './Counter';
+import { PlayerWithControls } from '@/components/ui/Player';
+import { buildPlaybackUrl } from '@/lib/utils/utils';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 const Player = async ({ stage }: { stage: IExtendedStage }) => {
   if (!stage || !stage.streamSettings?.playbackId) {
-    return notFound()
+    return notFound();
   }
 
-  const timeLeft =
-    new Date(stage.streamDate as string).getTime() - Date.now()
+  const timeLeft = new Date(stage.streamDate as string).getTime() - Date.now();
 
   // const prevChatMessages = await fetchChat({ stageId: stage?._id })
   return (
@@ -54,7 +53,7 @@ const Player = async ({ stage }: { stage: IExtendedStage }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Player
+export default Player;

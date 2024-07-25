@@ -1,21 +1,21 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   FacebookShareButton,
   RedditShareButton,
   TelegramShareButton,
   TwitterShareButton,
   WhatsappShareButton,
-} from 'react-share'
-import { Share2 } from 'lucide-react'
+} from 'react-share';
+import { Share2 } from 'lucide-react';
 import {
   FacebookIcon,
   RedditIcon,
   TelegramIcon,
   WhatsappIcon,
   XIcon,
-} from 'react-share'
+} from 'react-share';
 
 import {
   Credenza,
@@ -26,24 +26,24 @@ import {
   CredenzaHeader,
   CredenzaTitle,
   CredenzaTrigger,
-} from '@/components/ui/crezenda'
-import { buttonVariants } from '@/components/ui/button'
-import CopyText from '@/components/misc/CopyText'
+} from '@/components/ui/crezenda';
+import { buttonVariants } from '@/components/ui/button';
+import CopyText from '@/components/misc/CopyText';
 
 export const ShareModalContent = ({
   url,
   shareFor = 'event',
 }: {
-  url?: string
-  shareFor?: string
+  url?: string;
+  shareFor?: string;
 }) => {
-  const text = `Check out this ${shareFor} on @streameth!`
-  const [currentUrl, setCurrentUrl] = useState(url ?? '')
+  const text = `Check out this ${shareFor} on @streameth!`;
+  const [currentUrl, setCurrentUrl] = useState(url ?? '');
   useEffect(() => {
     // This code will only run on the client side
-    if (typeof window === 'undefined') return
-    !url && setCurrentUrl(window.location.href)
-  }, [url])
+    if (typeof window === 'undefined') return;
+    !url && setCurrentUrl(window.location.href);
+  }, [url]);
 
   return (
     <CredenzaContent className="max-w-[525px]">
@@ -52,8 +52,8 @@ export const ShareModalContent = ({
           Share this {shareFor}
         </CredenzaTitle>
         <CredenzaDescription>
-          Share this {shareFor} with your friends and followers, tag
-          @streameth and earn rewards!
+          Share this {shareFor} with your friends and followers, tag @streameth
+          and earn rewards!
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody>
@@ -82,8 +82,8 @@ export const ShareModalContent = ({
         <></>
       </CredenzaFooter>
     </CredenzaContent>
-  )
-}
+  );
+};
 
 const ShareButton = ({
   url,
@@ -92,16 +92,16 @@ const ShareButton = ({
   shareFor,
   title = 'Share',
 }: {
-  url?: string
-  className?: string
-  variant?: 'outline' | 'ghost' | 'primary' | 'default'
-  shareFor?: string
-  title?: string
+  url?: string;
+  className?: string;
+  variant?: 'outline' | 'ghost' | 'primary' | 'default';
+  shareFor?: string;
+  title?: string;
 }) => {
   const buttonClassNames = buttonVariants({
     variant,
     className,
-  })
+  });
 
   return (
     <Credenza>
@@ -113,7 +113,7 @@ const ShareButton = ({
       </CredenzaTrigger>
       <ShareModalContent url={url} shareFor={shareFor} />
     </Credenza>
-  )
-}
+  );
+};
 
-export default ShareButton
+export default ShareButton;

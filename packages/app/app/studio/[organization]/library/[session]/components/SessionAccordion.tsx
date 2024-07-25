@@ -1,7 +1,7 @@
-'use client'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
+'use client';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import {
   Form,
   FormControl,
@@ -9,32 +9,31 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { useRouter } from 'next/navigation'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import { sessionSchema } from '@/lib/schema'
-import { useState } from 'react'
-import { toast } from 'sonner'
+} from '@/components/ui/form';
+import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import { sessionSchema } from '@/lib/schema';
+import { useState } from 'react';
+import { toast } from 'sonner';
 import {
   updateSessionAction,
   deleteSessionAction,
-} from '@/lib/actions/sessions'
-import { IExtendedSession } from '@/lib/types'
-import { Loader2 } from 'lucide-react'
+} from '@/lib/actions/sessions';
+import { IExtendedSession } from '@/lib/types';
+import { Loader2 } from 'lucide-react';
 
 const SessionAccordion = ({
   session,
   organizationSlug,
 }: {
-  session: IExtendedSession
-  organizationSlug: string
+  session: IExtendedSession;
+  organizationSlug: string;
 }) => {
-  const router = useRouter()
-  const [isUpdatingSession, setIsUpdatingSession] =
-    useState<boolean>(false)
+  const router = useRouter();
+  const [isUpdatingSession, setIsUpdatingSession] = useState<boolean>(false);
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
     defaultValues: {
@@ -42,11 +41,11 @@ const SessionAccordion = ({
       description: session.description,
       coverImage: session.coverImage,
     },
-  })
+  });
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof sessionSchema>) {
-    setIsUpdatingSession(true)
+    setIsUpdatingSession(true);
     updateSessionAction({
       session: {
         ...values,
@@ -62,47 +61,43 @@ const SessionAccordion = ({
     })
       .then((response) => {
         if (response) {
-          toast.success('Session updated')
+          toast.success('Session updated');
         } else {
-          toast.error('Error updating session')
+          toast.error('Error updating session');
         }
       })
       .catch(() => {
-        toast.error('Error updating session')
+        toast.error('Error updating session');
       })
       .finally(() => {
-        setIsUpdatingSession(false)
-      })
+        setIsUpdatingSession(false);
+      });
   }
 
   const handleDeleteSession = (e: any) => {
-    e.preventDefault()
-    if (
-      window.confirm('Are you sure you want to delete this session?')
-    ) {
+    e.preventDefault();
+    if (window.confirm('Are you sure you want to delete this session?')) {
       deleteSessionAction({
         organizationId: session.organizationId as string,
         sessionId: session._id!,
       })
         .then((response) => {
           if (response) {
-            toast.success('Session deleted')
-            router.push(`/studio/${organizationSlug}?settings=videos`)
+            toast.success('Session deleted');
+            router.push(`/studio/${organizationSlug}?settings=videos`);
           } else {
-            toast.error('Error deleting session')
+            toast.error('Error deleting session');
           }
         })
         .catch(() => {
-          toast.error('Error deleting session')
-        })
+          toast.error('Error deleting session');
+        });
     }
-  }
+  };
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="name"
@@ -202,14 +197,15 @@ const SessionAccordion = ({
           <Button
             onClick={handleDeleteSession}
             variant={'destructive'}
-            className="w-full">
+            className="w-full"
+          >
             Delete session
           </Button>
           <Button className="w-full" type="submit">
             {isUpdatingSession ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                Please Updating session
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+                Updating session
               </>
             ) : (
               'Update session'
@@ -218,7 +214,7 @@ const SessionAccordion = ({
         </div>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default SessionAccordion
+export default SessionAccordion;

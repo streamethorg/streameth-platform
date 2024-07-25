@@ -1,56 +1,55 @@
-'use client'
-import { Button } from '@/components/ui/button'
+'use client';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogFooter,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { deleteDestinationAction } from '@/lib/actions/organizations'
+} from '@/components/ui/dialog';
+import { deleteDestinationAction } from '@/lib/actions/organizations';
 
-import React, { useState } from 'react'
-import { LuTrash2 } from 'react-icons/lu'
-import { toast } from 'sonner'
+import React, { useState } from 'react';
+import { LuTrash2 } from 'react-icons/lu';
+import { toast } from 'sonner';
 
 const DeleteDestination = ({
   destinationId,
   organizationId,
 }: {
-  destinationId: string
+  destinationId: string;
 
-  organizationId: string
+  organizationId: string;
 }) => {
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleDeleteDestination = async () => {
-    setIsDeleting(true)
+    setIsDeleting(true);
     await deleteDestinationAction({
       destinationId,
       organizationId,
     })
       .then((response) => {
         if (response) {
-          toast.success('Destination deleted')
-          setOpen(false)
+          toast.success('Destination deleted');
+          setOpen(false);
         } else {
-          toast.error('Error deleting destination')
+          toast.error('Error deleting destination');
         }
       })
       .catch(() => {
-        toast.error('Error deleting destination')
+        toast.error('Error deleting destination');
       })
       .finally(() => {
-        setIsDeleting(false)
-      })
-  }
+        setIsDeleting(false);
+      });
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <Button className="justify-start" variant={'ghost'}>
-          <LuTrash2 className="h-5 w-5 pr-1 text-destructive" />{' '}
-          Delete
+          <LuTrash2 className="h-5 w-5 pr-1 text-destructive" /> Delete
         </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center justify-center gap-5">
@@ -68,13 +67,14 @@ const DeleteDestination = ({
           <Button
             onClick={handleDeleteDestination}
             loading={isDeleting}
-            variant="destructive">
+            variant="destructive"
+          >
             Delete
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default DeleteDestination
+export default DeleteDestination;

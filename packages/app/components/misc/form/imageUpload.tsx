@@ -1,20 +1,20 @@
-'use client'
+'use client';
 
-import { Input } from '@/components/ui/input'
-import { ChangeEvent, useState } from 'react'
-import Image from 'next/image'
-import { X } from 'lucide-react'
-import { getImageUrl } from '@/lib/utils/utils'
-import { toast } from 'sonner'
-import { Label } from '@radix-ui/react-label'
-import { Image as ImageLogo } from 'lucide-react'
+import { Input } from '@/components/ui/input';
+import { ChangeEvent, useState } from 'react';
+import Image from 'next/image';
+import { X } from 'lucide-react';
+import { getImageUrl } from '@/lib/utils/utils';
+import { toast } from 'sonner';
+import { Label } from '@radix-ui/react-label';
+import { Image as ImageLogo } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   const dataTransfer = new DataTransfer()
@@ -35,7 +35,7 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
   onChange,
   setPreview,
 }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
@@ -45,9 +45,7 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
         />
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center justify-center gap-5">
-        <p className="text-xl">
-          Are you sure you want to remove this image?
-        </p>
+        <p className="text-xl">Are you sure you want to remove this image?</p>
         <DialogFooter className="flex items-center gap-4">
           <Button onClick={() => setOpen(false)} variant="ghost">
             Cancel
@@ -58,14 +56,15 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
               setPreview('')
               setOpen(false)
             }}
-            variant="destructive">
+            variant="destructive"
+          >
             Delete
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
 interface ImageUploadProps {
   id?: string
@@ -134,7 +133,7 @@ export default function ImageUpload({
       }
 
       if (file.size > maxSize) {
-        throw new Error('File size is too big')
+        throw new Error('File size is too big');
       }
 
       const data = new FormData()
@@ -143,14 +142,14 @@ export default function ImageUpload({
         new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
           type: file.type,
         })
-      )
-      data.set('path', path)
+      );
+      data.set('path', path);
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: data,
-      })
+      });
       if (!res.ok) {
-        throw new Error(await res.text())
+        throw new Error(await res.text());
       }
       const uploadedPath = getImageUrl(
         '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
@@ -162,9 +161,9 @@ export default function ImageUpload({
       setPreview('')
       throw e
     } finally {
-      setIsUploading(false)
+      setIsUploading(false);
     }
-  }
+  };
 
   const containerClasses = isProfileImage
     ? 'relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1'

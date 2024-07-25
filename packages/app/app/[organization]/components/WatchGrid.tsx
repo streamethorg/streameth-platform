@@ -1,15 +1,15 @@
-import { fetchAllSessions } from '@/lib/data'
-import Link from 'next/link'
-import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
-import Videos from '@/components/misc/Videos'
-import { Video } from 'lucide-react'
+import { fetchAllSessions } from '@/lib/data';
+import Link from 'next/link';
+import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton';
+import Videos from '@/components/misc/Videos';
+import { Video } from 'lucide-react';
 
 const WatchGrid = async ({
   organizationSlug,
   gridLength = 4,
 }: {
-  organizationSlug: string
-  gridLength?: number
+  organizationSlug: string;
+  gridLength?: number;
 }) => {
   const videos = (
     await fetchAllSessions({
@@ -18,7 +18,7 @@ const WatchGrid = async ({
       published: true,
       limit: gridLength,
     })
-  ).sessions
+  ).sessions;
 
   return (
     <div className="w-full">
@@ -26,9 +26,7 @@ const WatchGrid = async ({
         <h1 className="text-xl font-bold">Watch More</h1>
         <Link href={`/${organizationSlug}/videos`}>
           {videos.length !== 0 && (
-            <h3 className="text-sm hover:underline">
-              See more videos
-            </h3>
+            <h3 className="text-sm hover:underline">See more videos</h3>
           )}
         </Link>
       </div>
@@ -44,8 +42,8 @@ const WatchGrid = async ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 export const WatchGridLoading = () => (
   <>
@@ -59,6 +57,6 @@ export const WatchGridLoading = () => (
       ))}
     </div>
   </>
-)
+);
 
-export default WatchGrid
+export default WatchGrid;

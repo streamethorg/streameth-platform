@@ -1,5 +1,5 @@
-'use client'
-import MDEditor from '@uiw/react-md-editor'
+'use client';
+import MDEditor from '@uiw/react-md-editor';
 
 const MarkdownDisplay = ({ content }: { content: string }) => {
   return (
@@ -11,7 +11,7 @@ const MarkdownDisplay = ({ content }: { content: string }) => {
         background: 'transparent',
       }}
     />
-  )
-}
+  );
+};
 
-export default MarkdownDisplay
+export default MarkdownDisplay;

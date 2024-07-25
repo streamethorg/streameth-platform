@@ -4,36 +4,36 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 
-import Image from 'next/image'
-import React from 'react'
-import CreateNFTCollectionModal from './components/CreateNFTCollectionModal'
-import { fetchOrganizationNFTCollections } from '@/lib/services/nftCollectionService'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import NFTCollectionCard from './components/NFTCollectionCard'
-import MintNftSort from './components/MintNftSort'
-import { sortArray } from '@/lib/utils/utils'
-import { IExtendedNftCollections } from '@/lib/types'
+import Image from 'next/image';
+import React from 'react';
+import CreateNFTCollectionModal from './components/CreateNFTCollectionModal';
+import { fetchOrganizationNFTCollections } from '@/lib/services/nftCollectionService';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import NFTCollectionCard from './components/NFTCollectionCard';
+import MintNftSort from './components/MintNftSort';
+import { sortArray } from '@/lib/utils/utils';
+import { IExtendedNftCollections } from '@/lib/types';
 
 const NFT = async ({
   params,
   searchParams,
 }: {
-  params: { organization: string }
-  searchParams: { type: string; sort: string }
+  params: { organization: string };
+  searchParams: { type: string; sort: string };
 }) => {
-  const { type } = searchParams
+  const { type } = searchParams;
   const organizationId = (
     await fetchOrganization({ organizationSlug: params.organization })
-  )?._id
-  if (!organizationId) return null
+  )?._id;
+  if (!organizationId) return null;
   const nftCollections = sortArray(
     await fetchOrganizationNFTCollections({
       organizationId,
     }),
     searchParams.sort || 'desc_alpha'
-  )
+  );
 
   return (
     <div className="flex h-full flex-col bg-white">
@@ -42,7 +42,8 @@ const NFT = async ({
           backgroundImage: `url(/backgrounds/nftBg.svg)`,
           backgroundPositionX: 'center',
         }}
-        className="rounded-none border-none bg-black bg-cover bg-no-repeat p-4 text-white shadow-none">
+        className="rounded-none border-none bg-black bg-cover bg-no-repeat p-4 text-white shadow-none"
+      >
         <CardHeader>
           <CardTitle>Create Epic NFT Collection</CardTitle>
           <CardDescription className="max-w-[400px] text-white">
@@ -92,7 +93,7 @@ const NFT = async ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NFT
+export default NFT;

@@ -1,47 +1,45 @@
-'use server'
+'use server';
 
-import { studioPageParams } from '@/lib/types'
-import { fetchSession } from '@/lib/services/sessionService'
-import { PlayerWithControls } from '@/components/ui/Player'
-import { Livepeer } from 'livepeer'
-import { notFound } from 'next/navigation'
-import { ArrowLeft } from 'lucide-react'
-import EditSessionForm from './components/EditSessionForm'
-import Link from 'next/link'
-import SessionOptions from './components/SessionOptions'
-import { Label } from '@/components/ui/label'
-import GetHashButton from '../components/GetHashButton'
-import TextPlaceholder from '@/components/ui/text-placeholder'
-import { Button } from '@/components/ui/button'
-import { SiTwitter } from 'react-icons/si'
+import { studioPageParams } from '@/lib/types';
+import { fetchSession } from '@/lib/services/sessionService';
+import { PlayerWithControls } from '@/components/ui/Player';
+import { notFound } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
+import EditSessionForm from './components/EditSessionForm';
+import Link from 'next/link';
+import SessionOptions from './components/SessionOptions';
+import { Label } from '@/components/ui/label';
+import GetHashButton from '../components/GetHashButton';
+import TextPlaceholder from '@/components/ui/text-placeholder';
+import { Button } from '@/components/ui/button';
+import { SiTwitter } from 'react-icons/si';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
-import UploadToYoutubeButton from './components/UploadToYoutubeButton'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import { getVideoUrlAction } from '@/lib/actions/livepeer'
+} from '@/components/ui/accordion';
+import UploadToYoutubeButton from './components/UploadToYoutubeButton';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { getVideoUrlAction } from '@/lib/actions/livepeer';
+import UploadTwitterButton from './components/UploadTwitterButton';
 
-const EditSession = async ({
-  params,
-  searchParams,
-}: studioPageParams) => {
+const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
   const session = await fetchSession({
     session: params.session,
-  })
+  });
 
-  if (!session || (!session.playbackId && !session.assetId))
-    return notFound()
+  if (!session || (!session.playbackId && !session.assetId)) return notFound();
 
-  const videoUrl = await getVideoUrlAction(
-    session.assetId,
-    session.playbackId
-  )
+  const videoUrl = await getVideoUrlAction(session.assetId as string);
+
+  if (!videoUrl) {
+    return notFound();
+  }
+
   return (
     <div className="h-full overflow-auto p-4">
       <Link href={`/studio/${params.organization}/library`}>
@@ -74,7 +72,8 @@ const EditSession = async ({
           <Accordion
             className="space-y-4"
             type="multiple"
-            defaultValue={['publishVideo', 'menu']}>
+            defaultValue={['publishVideo', 'menu']}
+          >
             <AccordionItem defaultChecked value="menu">
               <AccordionContent>
                 <SessionOptions
@@ -90,7 +89,8 @@ const EditSession = async ({
             <AccordionItem
               className="rounded-xl border bg-white px-4"
               value="publishVideo"
-              defaultChecked>
+              defaultChecked
+            >
               <AccordionTrigger>
                 <h1 className="text-lg font-bold">Publish video</h1>
               </AccordionTrigger>
@@ -99,9 +99,7 @@ const EditSession = async ({
                   <div className="min-w-[200px]">
                     <GetHashButton session={session} />
                   </div>
-                  {session?.socials?.some(
-                    (s) => s.name === 'youtube'
-                  ) ? (
+                  {session?.socials?.some((s) => s.name === 'youtube') ? (
                     <Button variant="outline">
                       Video Published to Youtube
                     </Button>
@@ -112,19 +110,19 @@ const EditSession = async ({
                       sessionId={session._id}
                     />
                   )}
-                  <Button
-                    disabled
-                    className="min-w-[200px] bg-[#121212]">
-                    <SiTwitter className="mr-2" /> Publish to
-                    X(Twitter) (Coming Soon)
-                  </Button>
+                  <UploadTwitterButton
+                    organization={organization}
+                    organizationSlug={params.organization}
+                    sessionId={session._id}
+                  />
                 </div>
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem
               className="rounded-xl border bg-white px-4"
-              value="videoData">
+              value="videoData"
+            >
               <AccordionTrigger>
                 <h1 className="text-lg font-bold">Video data</h1>
               </AccordionTrigger>
@@ -144,9 +142,7 @@ const EditSession = async ({
                 {session.videoTranscription && (
                   <div>
                     <Label>Transcript</Label>
-                    <TextPlaceholder
-                      text={session.videoTranscription}
-                    />
+                    <TextPlaceholder text={session.videoTranscription} />
                   </div>
                 )}
               </AccordionContent>
@@ -155,7 +151,7 @@ const EditSession = async ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EditSession
+export default EditSession;

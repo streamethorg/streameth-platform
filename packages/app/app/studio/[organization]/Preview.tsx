@@ -1,17 +1,14 @@
-'use client'
-import { useEffect, useState } from 'react'
-import Player from '@/components/ui/Player'
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-} from '@/components/ui/dialog'
-import ShareButton from '@/components/misc/interact/ShareButton'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { deleteSessionAction } from '@/lib/actions/sessions'
-import { Button } from '@/components/ui/button'
-import { toast } from 'sonner'
-import { Asset } from 'livepeer/dist/models/components'
+'use client';
+
+import { useEffect, useState } from 'react';
+import Player from '@/components/ui/Player';
+import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
+import ShareButton from '@/components/misc/interact/ShareButton';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { deleteSessionAction } from '@/lib/actions/sessions';
+import { toast } from 'sonner';
+import { Asset } from 'livepeer/models/components';
+
 const Preview = ({
   initialIsOpen,
   asset,
@@ -19,36 +16,36 @@ const Preview = ({
   sessionId,
   organizationSlug,
 }: {
-  initialIsOpen: boolean
-  asset: Asset
-  organizationId: string
-  sessionId: string
-  organizationSlug: string
+  initialIsOpen: boolean;
+  asset: Asset;
+  organizationId: string;
+  sessionId: string;
+  organizationSlug: string;
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const { handleTermChange } = useSearchParams()
-  const { status, playbackUrl, playbackId } = asset
+  const [isOpen, setIsOpen] = useState(false);
+  const { handleTermChange } = useSearchParams();
+  const { status, playbackUrl, playbackId } = asset;
   useEffect(() => {
-    setIsOpen(initialIsOpen)
-  }, [initialIsOpen, playbackId])
+    setIsOpen(initialIsOpen);
+  }, [initialIsOpen, playbackId]);
 
   useEffect(() => {
     if (status?.phase === 'processing') {
       const interval = setInterval(() => {
         handleTermChange([
           { key: 'poll', value: new Date().getTime().toString() },
-        ])
-      }, 10000)
-      return () => clearInterval(interval)
+        ]);
+      }, 10000);
+      return () => clearInterval(interval);
     }
-  }, [status?.phase, handleTermChange])
+  }, [status?.phase, handleTermChange]);
 
   const handleClose = () => {
     if (isOpen) {
-      handleTermChange([{ key: 'previewId', value: '' }])
-      setIsOpen(false)
+      handleTermChange([{ key: 'previewId', value: '' }]);
+      setIsOpen(false);
     }
-  }
+  };
 
   const handleDelete = () => {
     deleteSessionAction({
@@ -56,13 +53,13 @@ const Preview = ({
       sessionId,
     })
       .then(() => {
-        toast.success('Session deleted')
-        handleClose()
+        toast.success('Session deleted');
+        handleClose();
       })
       .catch(() => {
-        toast.error('Error deleting session')
-      })
-  }
+        toast.error('Error deleting session');
+      });
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -71,10 +68,7 @@ const Preview = ({
           {status?.phase === 'processing' ? (
             <div className="flex aspect-video flex-col items-center justify-center rounded-lg bg-background p-4 text-black">
               <p className="">Video is processing</p>
-              <p>
-                {(Number(status?.progress?.toFixed(2)) ?? 0) * 100}%
-                complete
-              </p>
+              <p>{Math.round(Number(status?.progress ?? 0) * 100)}% complete</p>
             </div>
           ) : (
             <Player
@@ -107,7 +101,7 @@ const Preview = ({
         </div>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default Preview
+export default Preview;

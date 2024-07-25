@@ -1,8 +1,4 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-} from '@/components/ui/card'
+import { Card, CardDescription, CardHeader } from '@/components/ui/card';
 
 const ArchiveVideoSkeleton = () => {
   return (
@@ -21,7 +17,7 @@ const ArchiveVideoSkeleton = () => {
         </Card>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default ArchiveVideoSkeleton
+export default ArchiveVideoSkeleton;

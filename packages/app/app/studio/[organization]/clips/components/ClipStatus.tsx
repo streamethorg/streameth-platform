@@ -1,11 +1,11 @@
-import { Livepeer } from 'livepeer'
+import { Livepeer } from 'livepeer';
 
 const ClipStatus = async ({ assetId }: { assetId: string }) => {
   const livepeer = new Livepeer({
     apiKey: process.env.LIVEPEER_API_KEY,
-  })
+  });
 
-  const currentClip = (await livepeer.asset.get(assetId)).asset
+  const currentClip = (await livepeer.asset.get(assetId)).asset;
 
   return (
     <div className="mr-auto flex flex-col">
@@ -15,7 +15,7 @@ const ClipStatus = async ({ assetId }: { assetId: string }) => {
         <p>Error: {currentClip?.status?.errorMessage}</p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ClipStatus
+export default ClipStatus;

@@ -1,19 +1,19 @@
-'use client'
-import ScheduleCardModal from './ScheduleCardModal'
-import moment from 'moment-timezone'
-import { getEventTimezoneText } from '@/lib/utils/time'
-import { ClockIcon, WavesIcon } from 'lucide-react'
+'use client';
+import ScheduleCardModal from './ScheduleCardModal';
+import moment from 'moment-timezone';
+import { getEventTimezoneText } from '@/lib/utils/time';
+import { ClockIcon, WavesIcon } from 'lucide-react';
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 
-import { CredenzaTrigger, Credenza } from '@/components/ui/crezenda'
-import { IExtendedEvent, IExtendedSession } from '@/lib/types'
-import { Button } from '@/components/ui/button'
+import { CredenzaTrigger, Credenza } from '@/components/ui/crezenda';
+import { IExtendedEvent, IExtendedSession } from '@/lib/types';
+import { Button } from '@/components/ui/button';
 
 const ScheduleCard = ({
   event,
@@ -22,15 +22,15 @@ const ScheduleCard = ({
   speakers = false,
   date,
 }: {
-  event: IExtendedEvent
-  session: IExtendedSession
-  showTime?: boolean
-  speakers?: boolean
-  date?: string
+  event: IExtendedEvent;
+  session: IExtendedSession;
+  showTime?: boolean;
+  speakers?: boolean;
+  date?: string;
 }) => {
   const isActive =
     new Date(session.start).getTime() < Date.now() &&
-    new Date(session.end).getTime() > Date.now()
+    new Date(session.end).getTime() > Date.now();
 
   return (
     <Credenza>
@@ -71,7 +71,7 @@ const ScheduleCard = ({
       </CredenzaTrigger>
       {/* <ScheduleCardModal event={event} session={session} /> */}
     </Credenza>
-  )
-}
+  );
+};
 
-export default ScheduleCard
+export default ScheduleCard;

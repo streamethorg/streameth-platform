@@ -1,5 +1,5 @@
-'use client'
-import { cn } from '@/lib/utils/utils'
+'use client';
+import { cn } from '@/lib/utils/utils';
 import {
   EnterFullscreenIcon,
   ExitFullscreenIcon,
@@ -10,29 +10,29 @@ import {
   PlayIcon,
   SettingsIcon,
   UnmuteIcon,
-} from '@livepeer/react/assets'
-import * as Player from '@livepeer/react/player'
-import * as Popover from '@radix-ui/react-popover'
-import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react'
-import React from 'react'
-import { useRef, useEffect } from 'react'
+} from '@livepeer/react/assets';
+import * as Player from '@livepeer/react/player';
+import * as Popover from '@radix-ui/react-popover';
+import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react';
+import React from 'react';
+import { useRef, useEffect } from 'react';
 // @ts-ignore
-import mux from 'mux-embed'
-import Image from 'next/image'
-import { Src } from '@livepeer/react'
-import LogoDark from '@/public/logo_dark.png'
-import Link from 'next/link'
+import mux from 'mux-embed';
+import Image from 'next/image';
+import { Src } from '@livepeer/react';
+import LogoDark from '@/public/logo_dark.png';
+import Link from 'next/link';
 
 export function PlayerWithControls(props: {
-  src: Src[] | null
-  name?: string
-  thumbnail?: string
+  src: Src[] | null;
+  name?: string;
+  thumbnail?: string;
 }) {
-  const videoRef = useRef(null)
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (videoRef.current) {
-      const initTime = mux.utils.now()
+      const initTime = mux.utils.now();
 
       mux.monitor(videoRef.current, {
         debug: false,
@@ -42,9 +42,9 @@ export function PlayerWithControls(props: {
           player_init_time: initTime,
           // Add other metadata fields here
         },
-      })
+      });
     }
-  }, [videoRef])
+  }, [videoRef]);
 
   if (!props.src || !props.src?.[0].src) {
     return (
@@ -52,7 +52,7 @@ export function PlayerWithControls(props: {
         title="Invalid source"
         description="We could not fetch valid playback information for the playback ID you provided. Please check and try again."
       />
-    )
+    );
   }
 
   return (
@@ -101,7 +101,8 @@ export function PlayerWithControls(props: {
 
         <Player.ErrorIndicator
           matcher="all"
-          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
+          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0"
+        >
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <LoadingIcon className="h-8 w-8 animate-spin" />
           </div>
@@ -117,8 +118,7 @@ export function PlayerWithControls(props: {
                 Stream is offline
               </div>
               <div className="text-xs text-gray-100 sm:text-sm">
-                Playback will start automatically once the stream has
-                started
+                Playback will start automatically once the stream has started
               </div>
             </div>
             <LoadingIcon className="mx-auto h-6 w-6 animate-spin md:h-8 md:w-8" />
@@ -127,15 +127,15 @@ export function PlayerWithControls(props: {
 
         <Player.ErrorIndicator
           matcher="access-control"
-          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
+          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0"
+        >
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1">
               <div className="text-lg font-bold sm:text-2xl">
                 Stream is private
               </div>
               <div className="text-xs text-gray-100 sm:text-sm">
-                It looks like you do not have permission to view this
-                content
+                It looks like you do not have permission to view this content
               </div>
             </div>
             <LoadingIcon className="mx-auto h-6 w-6 animate-spin md:h-8 md:w-8" />
@@ -156,13 +156,12 @@ export function PlayerWithControls(props: {
 
               <Player.LiveIndicator className="flex items-center gap-2">
                 <div className="h-1.5 w-1.5 rounded-full bg-red-600 text-white" />
-                <span className="select-none text-sm text-white">
-                  LIVE
-                </span>
+                <span className="select-none text-sm text-white">LIVE</span>
               </Player.LiveIndicator>
               <Player.LiveIndicator
                 matcher={false}
-                className="flex items-center gap-2">
+                className="flex items-center gap-2"
+              >
                 <Player.Time className="select-none text-sm tabular-nums text-white" />
               </Player.LiveIndicator>
 
@@ -186,7 +185,8 @@ export function PlayerWithControls(props: {
               <Link
                 href={'https://streameth.org'}
                 rel="noopener noreferrer"
-                target="_blank">
+                target="_blank"
+              >
                 <div className="hidden flex-row items-center justify-center space-x-2 rounded-xl border bg-white p-1 shadow md:flex">
                   <Image
                     src={LogoDark}
@@ -236,17 +236,17 @@ export function PlayerWithControls(props: {
         </Player.Controls>
       </Player.Container>
     </Player.Root>
-  )
+  );
 }
 
-export default PlayerWithControls
+export default PlayerWithControls;
 
 export const PlayerLoading = ({
   title,
   description,
 }: {
-  title?: React.ReactNode
-  description?: React.ReactNode
+  title?: React.ReactNode;
+  description?: React.ReactNode;
 }) => (
   <div className="relative flex aspect-video w-full flex-col-reverse gap-3 overflow-hidden rounded-sm bg-white/10 px-3 py-2">
     <div className="flex justify-between">
@@ -264,16 +264,14 @@ export const PlayerLoading = ({
 
     {title && (
       <div className="absolute inset-10 flex flex-col items-center justify-center gap-1 text-center">
-        <span className="text-lg font-medium text-white">
-          {title}
-        </span>
+        <span className="text-lg font-medium text-white">{title}</span>
         {description && (
           <span className="text-sm text-white/80">{description}</span>
         )}
       </div>
     )}
   </div>
-)
+);
 
 // function Clip({ className }: { className?: string }) {
 //   const [isPending, startTransition] = useTransition()
@@ -334,9 +332,10 @@ export const Settings = React.forwardRef(function Search(
           className={className}
           aria-label="Playback settings"
           onClick={(e) => {
-            console.log(e)
-            e.stopPropagation()
-          }}>
+            console.log(e);
+            e.stopPropagation();
+          }}
+        >
           <SettingsIcon />
         </button>
       </Popover.Trigger>
@@ -346,23 +345,25 @@ export const Settings = React.forwardRef(function Search(
           side="top"
           alignOffset={-70}
           align="end"
-          onClick={(e) => e.stopPropagation()}>
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="flex flex-col gap-2">
-            <p className="mb-1 text-sm font-medium text-white/90">
-              Settings
-            </p>
+            <p className="mb-1 text-sm font-medium text-white/90">Settings</p>
             <Player.LiveIndicator
               matcher={false}
-              className="flex flex-col gap-2">
+              className="flex flex-col gap-2"
+            >
               <label
                 className="text-xs font-medium text-white/90"
-                htmlFor="speedSelect">
+                htmlFor="speedSelect"
+              >
                 Playback speed
               </label>
               <Player.RateSelect name="speedSelect">
                 <Player.SelectTrigger
                   className="inline-flex h-7 items-center justify-between gap-1 rounded-sm px-1 text-xs leading-none outline-none outline-1 outline-white/50"
-                  aria-label="Playback speed">
+                  aria-label="Playback speed"
+                >
                   <Player.SelectValue placeholder="Select a speed..." />
                   <Player.SelectIcon>
                     <ChevronDownIcon className="h-4 w-4" />
@@ -372,24 +373,12 @@ export const Settings = React.forwardRef(function Search(
                   <Player.SelectContent className="overflow-hidden rounded-sm border border-white/50 bg-white">
                     <Player.SelectViewport className="p-1">
                       <Player.SelectGroup>
-                        <RateSelectItem value={0.5}>
-                          0.5x
-                        </RateSelectItem>
-                        <RateSelectItem value={0.75}>
-                          0.75x
-                        </RateSelectItem>
-                        <RateSelectItem value={1}>
-                          1x (normal)
-                        </RateSelectItem>
-                        <RateSelectItem value={1.25}>
-                          1.25x
-                        </RateSelectItem>
-                        <RateSelectItem value={1.5}>
-                          1.5x
-                        </RateSelectItem>
-                        <RateSelectItem value={1.75}>
-                          1.75x
-                        </RateSelectItem>
+                        <RateSelectItem value={0.5}>0.5x</RateSelectItem>
+                        <RateSelectItem value={0.75}>0.75x</RateSelectItem>
+                        <RateSelectItem value={1}>1x (normal)</RateSelectItem>
+                        <RateSelectItem value={1.25}>1.25x</RateSelectItem>
+                        <RateSelectItem value={1.5}>1.5x</RateSelectItem>
+                        <RateSelectItem value={1.75}>1.75x</RateSelectItem>
                         <RateSelectItem value={2}>2x</RateSelectItem>
                       </Player.SelectGroup>
                     </Player.SelectViewport>
@@ -400,15 +389,18 @@ export const Settings = React.forwardRef(function Search(
             <div className="flex flex-col gap-2">
               <label
                 className="text-xs font-medium text-white/90"
-                htmlFor="qualitySelect">
+                htmlFor="qualitySelect"
+              >
                 Quality
               </label>
               <Player.VideoQualitySelect
                 name="qualitySelect"
-                defaultValue="1.0">
+                defaultValue="1.0"
+              >
                 <Player.SelectTrigger
                   className="inline-flex h-7 items-center justify-between gap-1 rounded-sm px-1 text-xs leading-none outline-none outline-1 outline-white/50"
-                  aria-label="Playback quality">
+                  aria-label="Playback quality"
+                >
                   <Player.SelectValue placeholder="Select a quality..." />
                   <Player.SelectIcon>
                     <ChevronDownIcon className="h-4 w-4" />
@@ -442,23 +434,21 @@ export const Settings = React.forwardRef(function Search(
           </div>
           <Popover.Close
             className="absolute right-2.5 top-2.5 inline-flex h-5 w-5 items-center justify-center rounded-full outline-none"
-            aria-label="Close">
+            aria-label="Close"
+          >
             <XIcon />
           </Popover.Close>
           <Popover.Arrow className="fill-white/50" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
-  )
-})
+  );
+});
 
 export const RateSelectItem = React.forwardRef<
   HTMLDivElement,
   Player.RateSelectItemProps
->(function RateSelectItem(
-  { children, className, ...props },
-  forwardedRef
-) {
+>(function RateSelectItem({ children, className, ...props }, forwardedRef) {
   return (
     <Player.RateSelectItem
       className={cn(
@@ -466,14 +456,15 @@ export const RateSelectItem = React.forwardRef<
         className
       )}
       {...props}
-      ref={forwardedRef}>
+      ref={forwardedRef}
+    >
       <Player.SelectItemText>{children}</Player.SelectItemText>
       <Player.SelectItemIndicator className="absolute left-0 inline-flex w-[25px] items-center justify-center">
         <CheckIcon className="h-4 w-4" />
       </Player.SelectItemIndicator>
     </Player.RateSelectItem>
-  )
-})
+  );
+});
 
 export const VideoQualitySelectItem = React.forwardRef<
   HTMLDivElement,
@@ -489,11 +480,12 @@ export const VideoQualitySelectItem = React.forwardRef<
         className
       )}
       {...props}
-      ref={forwardedRef}>
+      ref={forwardedRef}
+    >
       <Player.SelectItemText>{children}</Player.SelectItemText>
       <Player.SelectItemIndicator className="absolute left-0 inline-flex w-[25px] items-center justify-center">
         <CheckIcon className="h-4 w-4" />
       </Player.SelectItemIndicator>
     </Player.VideoQualitySelectItem>
-  )
-})
+  );
+});

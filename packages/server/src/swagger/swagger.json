@@ -411,7 +411,7 @@
         "type": "string"
       },
       "StateStatus": {
-        "enum": ["pending", "completed", "canceled", "sync"],
+        "enum": ["pending", "completed", "canceled", "sync", "error"],
         "type": "string"
       },
       "StateType": {

@@ -1,16 +1,11 @@
-'use client'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { formSchema } from '@/lib/schema'
-import * as z from 'zod'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+'use client';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { formSchema } from '@/lib/schema';
+import * as z from 'zod';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -18,33 +13,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import DatePicker from '@/components/misc/form/datePicker'
-import Combobox from '@/components/ui/combo-box'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import ColorPicker from '@/components/misc/form/colorPicker'
-import TimePicker from '@/components/misc/form/timePicker'
-import Link from 'next/link'
-import { createEventAction } from '@/lib/actions/events'
-import { toast } from 'sonner'
-import { generateTimezones } from '@/lib/utils/time'
-import { Loader2 } from 'lucide-react'
-import MDEditor from '@uiw/react-md-editor'
-import { IExtendedOrganization } from '@/lib/types'
-import { useRouter } from 'next/navigation'
-import { getFormSubmitStatus } from '@/lib/utils/utils'
-import DataConfigElement from '@/components/misc/form/dataConfigElement'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import DatePicker from '@/components/misc/form/datePicker';
+import Combobox from '@/components/ui/combo-box';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import ColorPicker from '@/components/misc/form/colorPicker';
+import TimePicker from '@/components/misc/form/timePicker';
+import Link from 'next/link';
+import { createEventAction } from '@/lib/actions/events';
+import { toast } from 'sonner';
+import { generateTimezones } from '@/lib/utils/time';
+import { Loader2 } from 'lucide-react';
+import MDEditor from '@uiw/react-md-editor';
+import { IExtendedOrganization } from '@/lib/types';
+import { useRouter } from 'next/navigation';
+import { getFormSubmitStatus } from '@/lib/utils/utils';
+import DataConfigElement from '@/components/misc/form/dataConfigElement';
 
 export default function CreateEventForm({
   organization,
 }: {
-  organization: IExtendedOrganization
+  organization: IExtendedOrganization;
 }) {
-  const [stage, setStage] = useState<number>(0)
-  const [isCreatingEvent, setIsCreatingEvent] =
-    useState<boolean>(false)
-  const router = useRouter()
+  const [stage, setStage] = useState<number>(0);
+  const [isCreatingEvent, setIsCreatingEvent] = useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,35 +57,33 @@ export default function CreateEventForm({
       accentColor: '',
       dataImporter: [],
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (values.start > values.end) {
-      toast.error('Start date must be before the end date')
-      setIsCreatingEvent(false)
-      return
+      toast.error('Start date must be before the end date');
+      setIsCreatingEvent(false);
+      return;
     }
-    setIsCreatingEvent(true)
+    setIsCreatingEvent(true);
     const response = createEventAction({
       event: { ...values, organizationId: organization?._id },
     })
       .then((response) => {
         if (response) {
-          toast.success('Event created')
-          router.push(
-            `/studio/${organization?.slug}/event/${response._id}`
-          )
-          router.refresh()
+          toast.success('Event created');
+          router.push(`/studio/${organization?.slug}/event/${response._id}`);
+          router.refresh();
         } else {
-          toast.error('Error creating event')
+          toast.error('Error creating event');
         }
       })
       .catch(() => {
-        toast.error('Error creating event')
+        toast.error('Error creating event');
       })
       .finally(() => {
-        setIsCreatingEvent(false)
-      })
+        setIsCreatingEvent(false);
+      });
   }
 
   return (
@@ -105,29 +97,28 @@ export default function CreateEventForm({
               { stage: 1, name: 'Design' },
               { stage: 2, name: 'Data' },
             ].map((i, index) => (
-              <div
-                className="relative flex w-full flex-col"
-                key={i.stage}>
+              <div className="relative flex w-full flex-col" key={i.stage}>
                 <div
                   onClick={() => setStage(i.stage)}
                   className={`z-50 mx-auto flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-sm text-white ${
-                    stage === i.stage
-                      ? 'bg-green-500'
-                      : 'bg-secondary'
-                  }`}>
+                    stage === i.stage ? 'bg-green-500' : 'bg-secondary'
+                  }`}
+                >
                   {i.stage + 1}
                 </div>
                 {(i.stage === 0 || i.stage === 2) && (
                   <div
                     className={`${
                       i.stage === 2 ? 'right-0' : 'left-0'
-                    } absolute top-0 z-40 h-full w-1/2 bg-white`}></div>
+                    } absolute top-0 z-40 h-full w-1/2 bg-white`}
+                  ></div>
                 )}
                 <hr className="absolute top-[15px] z-[0] w-full bg-black" />
                 <p
                   className={`z-50 mx-auto ${
                     stage === i.stage ? 'text-black' : 'text-muted'
-                  }`}>
+                  }`}
+                >
                   {i.name}
                 </p>
               </div>
@@ -145,7 +136,8 @@ export default function CreateEventForm({
                       display: 'block',
                     }
               }
-              id="section1">
+              id="section1"
+            >
               <FormField
                 control={form.control}
                 name="name"
@@ -298,11 +290,10 @@ export default function CreateEventForm({
                       display: 'block',
                     }
               }
-              className="space-y-4 p-4">
+              className="space-y-4 p-4"
+            >
               <div className=" ">
-                <p className="mb-4 text-lg">
-                  Upload event Logo and Banner
-                </p>
+                <p className="mb-4 text-lg">Upload event Logo and Banner</p>
                 <FormField
                   control={form.control}
                   name="banner"
@@ -368,9 +359,7 @@ export default function CreateEventForm({
                   name="accentColor"
                   render={({ field }) => (
                     <FormItem className="w-full max-w-[600px]">
-                      <p className="mb-2 text-lg">
-                        Choose accent color
-                      </p>
+                      <p className="mb-2 text-lg">Choose accent color</p>
                       <FormControl>
                         <ColorPicker
                           color={field.value}
@@ -392,16 +381,15 @@ export default function CreateEventForm({
                   : {
                       display: 'block',
                     }
-              }>
+              }
+            >
               <div className="flex flex-col space-y-4">
-                <p className="text-lg font-semibold">
-                  Import event data
-                </p>
+                <p className="text-lg font-semibold">Import event data</p>
                 <p className="max-w-[550px]">
-                  Import your event data from Pretalx or Google
-                  sheets. Add Speakers and Schedule to your even. If
-                  you dont have a data source yet, you can create a
-                  new Google Sheet using our template.
+                  Import your event data from Pretalx or Google sheets. Add
+                  Speakers and Schedule to your even. If you dont have a data
+                  source yet, you can create a new Google Sheet using our
+                  template.
                 </p>
               </div>
               <FormField
@@ -426,9 +414,10 @@ export default function CreateEventForm({
                 <Button
                   variant={'outline'}
                   onClick={(e) => {
-                    e.preventDefault()
-                    setStage(stage - 1)
-                  }}>
+                    e.preventDefault();
+                    setStage(stage - 1);
+                  }}
+                >
                   Back
                 </Button>
               )}
@@ -436,9 +425,10 @@ export default function CreateEventForm({
                 <Button
                   variant={'primary'}
                   onClick={(e) => {
-                    e.preventDefault()
-                    setStage(stage + 1)
-                  }}>
+                    e.preventDefault();
+                    setStage(stage + 1);
+                  }}
+                >
                   Next
                 </Button>
               )}
@@ -446,11 +436,12 @@ export default function CreateEventForm({
                 <Button
                   disabled={getFormSubmitStatus(form)}
                   className="ml-2"
-                  type="submit">
+                  type="submit"
+                >
                   {isCreatingEvent ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                      Please wait
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+                      wait
                     </>
                   ) : (
                     'Create Event'
@@ -462,5 +453,5 @@ export default function CreateEventForm({
         </CardContent>
       </Card>
     </Form>
-  )
+  );
 }

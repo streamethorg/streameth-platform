@@ -1,40 +1,28 @@
-import React, { Suspense } from 'react'
-import { ClipsPageParams } from '@/lib/types'
-import SelectSession from './components/SelectSession'
-import RecordingSelect from './components/RecordingSelect'
-import CreateClipButton from './components/CreateClipButton'
-import { ClipProvider } from './components/ClipContext'
-import ReactHlsPlayer from './components/Player'
-import {
-  fetchStageRecordings,
-  fetchStages,
-} from '@/lib/services/stageService'
-import { fetchAllSessions } from '@/lib/data'
-import { fetchEvent } from '@/lib/services/eventService'
-import { Film } from 'lucide-react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import Preview from '../Preview'
-import SessionSidebar from './components/SessionSidebar'
-import {
-  fetchAsset,
-  fetchSession,
-} from '@/lib/services/sessionService'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import { notFound } from 'next/navigation'
-import ClipSlider from './components/ClipSlider'
+import React, { Suspense } from 'react';
+import { ClipsPageParams } from '@/lib/types';
+import SelectSession from './components/SelectSession';
+import RecordingSelect from './components/RecordingSelect';
+import CreateClipButton from './components/CreateClipButton';
+import { ClipProvider } from './components/ClipContext';
+import ReactHlsPlayer from './components/Player';
+import { fetchStageRecordings, fetchStages } from '@/lib/services/stageService';
+import { fetchAllSessions } from '@/lib/data';
+import { fetchEvent } from '@/lib/services/eventService';
+import { Film } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import Preview from '../Preview';
+import SessionSidebar from './components/SessionSidebar';
+import { fetchAsset, fetchSession } from '@/lib/services/sessionService';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { notFound } from 'next/navigation';
+import ClipSlider from './components/ClipSlider';
 
-const ClipContainer = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => (
+const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
-    <div className="mx-auto flex h-full w-full flex-row">
-      {children}
-    </div>
+    <div className="mx-auto flex h-full w-full flex-row">{children}</div>
   </div>
-)
+);
 
 const SkeletonSidebar = () => (
   <div className="flex h-full w-1/3 flex-col border-l bg-background bg-white">
@@ -46,25 +34,22 @@ const SkeletonSidebar = () => (
       ))}
     </div>
   </div>
-)
+);
 
-const EventClips = async ({
-  params,
-  searchParams,
-}: ClipsPageParams) => {
-  const { stage, selectedRecording, previewId } = searchParams
+const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
+  const { stage, selectedRecording, previewId } = searchParams;
 
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
   if (!organization) {
-    return notFound()
+    return notFound();
   }
 
   const stages = await fetchStages({
     organizationId: organization._id,
-  })
+  });
 
   if (stages.length === 0) {
     return (
@@ -74,8 +59,8 @@ const EventClips = async ({
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-foreground-muted text-sm">
-              You dont have any stages to clip from, first create a
-              livestream to get started
+              You dont have any stages to clip from, first create a livestream
+              to get started
             </p>
             <Link href={`/studio/${params.organization}/livestreams`}>
               <Button variant={'primary'}>Create a livestream</Button>
@@ -83,12 +68,12 @@ const EventClips = async ({
           </div>
         </div>
       </ClipContainer>
-    )
+    );
   }
 
   const currentStage = stages.find((s) => {
-    return s._id === stage
-  })
+    return s._id === stage;
+  });
 
   if (!currentStage) {
     return (
@@ -99,8 +84,8 @@ const EventClips = async ({
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-foreground-muted text-sm">
-              Please select a livestream that has a recordings from
-              the dropdown above
+              Please select a livestream that has a recordings from the dropdown
+              above
             </p>
             <p className="font-bold">or</p>
             <Link href={`/studio/${params.organization}/livestreams`}>
@@ -109,25 +94,25 @@ const EventClips = async ({
           </div>
         </div>
       </ClipContainer>
-    )
+    );
   }
 
   const stageRecordings = await fetchStageRecordings({
     streamId: currentStage?.streamSettings?.streamId ?? '',
-  })
+  });
 
   const currentRecording = (function () {
     if (selectedRecording) {
       const recording = stageRecordings?.recordings.find(
         (recording) => recording?.id === selectedRecording
-      )
+      );
       if (recording) {
-        return recording?.id ?? null
+        return recording?.id ?? null;
       }
-      return null
+      return null;
     }
-    return null
-  })()
+    return null;
+  })();
 
   if (
     stageRecordings?.recordings?.length === 0 ||
@@ -141,8 +126,8 @@ const EventClips = async ({
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">No recordings</p>
             <p className="text-foreground-muted text-sm">
-              This stream does not have any recordings, go live and
-              come back to clip to clip your livestream
+              This stream does not have any recordings, go live and come back to
+              clip to clip your livestream
             </p>
             <Link href={`/studio/${params.organization}/livestreams`}>
               <Button variant={'primary'}>Go Live</Button>
@@ -150,7 +135,7 @@ const EventClips = async ({
           </div>
         </div>
       </ClipContainer>
-    )
+    );
   }
 
   if (!currentRecording) {
@@ -158,41 +143,42 @@ const EventClips = async ({
       <ClipContainer>
         <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
           <SelectSession stages={stages} currentStageId={stage} />
-          <RecordingSelect
-            streamRecordings={stageRecordings.recordings}
-          />
+          <RecordingSelect streamRecordings={stageRecordings.recordings} />
           <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-4 text-center">
             <Film className="rounded-lg p-4" size={84} />
             <p className="text-lg font-bold">Clip a livestream!</p>
             <p className="text-foreground-muted text-sm">
-              Please select a livestream recording from the dropdown
-              above
+              Please select a livestream recording from the dropdown above
             </p>
           </div>
         </div>
       </ClipContainer>
-    )
+    );
   }
 
   const event = await fetchEvent({
     eventId: currentStage.eventId as string,
-  })
+  });
   const sessions = await fetchAllSessions({
     stageId: currentStage._id,
-  })
+  });
   const previewAsset = await (async function () {
     if (previewId) {
       const session = await fetchSession({
         session: previewId,
-      })
+      });
       if (session) {
         return await fetchAsset({
           assetId: session.assetId as string,
-        })
+        });
       }
     }
-    return undefined
-  })()
+    return undefined;
+  })();
+
+  if (!previewAsset) {
+    return notFound();
+  }
 
   return (
     <ClipContainer>
@@ -209,17 +195,13 @@ const EventClips = async ({
         <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
           <ClipProvider>
             <ReactHlsPlayer
-              playbackId={
-                stageRecordings.parentStream?.playbackId ?? ''
-              }
+              playbackId={stageRecordings.parentStream?.playbackId ?? ''}
               selectedStreamSession={currentRecording}
             />
             <ClipSlider />
             <CreateClipButton
               currentRecording={currentRecording}
-              playbackId={
-                stageRecordings.parentStream?.playbackId ?? ''
-              }
+              playbackId={stageRecordings.parentStream?.playbackId ?? ''}
               organization={organization}
               currentStage={currentStage}
               sessions={sessions}
@@ -230,21 +212,16 @@ const EventClips = async ({
       <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
         <SessionSidebar
           event={event ?? undefined}
-          sessions={sessions.sessions.filter(
-            (session) => session.assetId
-          )}
+          sessions={sessions.sessions.filter((session) => session.assetId)}
           currentRecording={currentRecording}
           recordings={stageRecordings}
         />
       </Suspense>
     </ClipContainer>
-  )
-}
+  );
+};
 
-const ClipsPage = async ({
-  params,
-  searchParams,
-}: ClipsPageParams) => {
+const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
   const Skeleton = () => (
     <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
       {/* SelectSession Skeleton */}
@@ -266,7 +243,7 @@ const ClipsPage = async ({
         </div>
       </div>
     </div>
-  )
+  );
 
   const Skeleton2 = () => (
     <div className="flex w-full flex-row">
@@ -298,7 +275,7 @@ const ClipsPage = async ({
       </div>
       <SkeletonSidebar />
     </div>
-  )
+  );
   return (
     <Suspense
       key={searchParams.stage + searchParams.selectedRecording}
@@ -308,10 +285,11 @@ const ClipsPage = async ({
         ) : (
           <Skeleton />
         )
-      }>
+      }
+    >
       <EventClips params={params} searchParams={searchParams} />
     </Suspense>
-  )
-}
+  );
+};
 
-export default ClipsPage
+export default ClipsPage;

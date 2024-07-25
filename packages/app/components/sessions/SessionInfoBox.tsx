@@ -1,27 +1,23 @@
-'use server'
+'use server';
 
-import { CardTitle } from '@/components/ui/card'
-import InfoBoxDescription from './InfoBoxDescription'
+import { CardTitle } from '@/components/ui/card';
+import InfoBoxDescription from './InfoBoxDescription';
 import {
   IExtendedNftCollections,
   IExtendedSession,
   IExtendedStage,
-} from '@/lib/types'
-import ShareButton from '../misc/interact/ShareButton'
-import CollectVideButton from './CollectVideButton'
-import { fetchNFTCollection } from '@/lib/services/nftCollectionService'
-import { formatDate } from '@/lib/utils/time'
-import ViewCounts from '@/app/[organization]/components/ViewCounts'
-import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder'
-import { IExtendedSpeaker } from '@/lib/types'
-import VideoDownload from '@/app/[organization]/components/VideoDownload'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '../ui/popover'
-import { EllipsisVertical } from 'lucide-react'
-import VideoDownloadClient from '../misc/VideoDownloadClient'
+} from '@/lib/types';
+import ShareButton from '../misc/interact/ShareButton';
+import CollectVideButton from './CollectVideButton';
+import { fetchNFTCollection } from '@/lib/services/nftCollectionService';
+import { formatDate } from '@/lib/utils/time';
+import ViewCounts from '@/app/[organization]/components/ViewCounts';
+import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder';
+import { IExtendedSpeaker } from '@/lib/types';
+import VideoDownload from '@/app/[organization]/components/VideoDownload';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { EllipsisVertical } from 'lucide-react';
+import VideoDownloadClient from '../misc/VideoDownloadClient';
 
 const DesktopButtons = ({
   name,
@@ -31,20 +27,17 @@ const DesktopButtons = ({
   nftCollection,
   vod,
 }: {
-  name: string
-  description: string
-  date: string
-  video?: IExtendedSession
-  nftCollection: IExtendedNftCollections | null
-  vod: boolean
+  name: string;
+  description: string;
+  date: string;
+  video?: IExtendedSession;
+  nftCollection: IExtendedNftCollections | null;
+  vod: boolean;
 }) => {
   return (
     <>
       {video?.nftCollections?.[0] && (
-        <CollectVideButton
-          video={video}
-          nftCollection={nftCollection}
-        />
+        <CollectVideButton video={video} nftCollection={nftCollection} />
       )}
       <div className="flex flex-row space-x-2">
         <ShareButton shareFor="video" />
@@ -65,8 +58,8 @@ const DesktopButtons = ({
         />
       )}
     </>
-  )
-}
+  );
+};
 
 const MobileButtons = ({
   name,
@@ -76,29 +69,23 @@ const MobileButtons = ({
   nftCollection,
   vod,
 }: {
-  name: string
-  description: string
-  date: string
-  video?: IExtendedSession
-  nftCollection: IExtendedNftCollections | null
-  vod: boolean
+  name: string;
+  description: string;
+  date: string;
+  video?: IExtendedSession;
+  nftCollection: IExtendedNftCollections | null;
+  vod: boolean;
 }) => {
   return (
     <>
       {video?.nftCollections?.[0] ? (
         <>
           <div className="w-full">
-            <CollectVideButton
-              video={video}
-              nftCollection={nftCollection}
-            />
+            <CollectVideButton video={video} nftCollection={nftCollection} />
           </div>
           <Popover>
             <PopoverTrigger asChild>
-              <EllipsisVertical
-                size={30}
-                className="cursor-pointer"
-              />
+              <EllipsisVertical size={30} className="cursor-pointer" />
             </PopoverTrigger>
             <PopoverContent className="flex w-full flex-col space-y-2">
               {/* Hydration Error */}
@@ -126,8 +113,8 @@ const MobileButtons = ({
         <ShareButton variant={'primary'} shareFor="video" />
       )}
     </>
-  )
-}
+  );
+};
 
 const SessionInfoBox = async ({
   name,
@@ -141,34 +128,32 @@ const SessionInfoBox = async ({
   viewCount = false,
   video,
 }: {
-  name: string
-  description: string
-  date: string
-  speakers?: IExtendedSpeaker[]
-  playbackId?: string
-  inverted?: boolean
-  vod?: boolean
-  organizationSlug?: string
-  viewCount?: boolean
-  video?: IExtendedStage
+  name: string;
+  description: string;
+  date: string;
+  speakers?: IExtendedSpeaker[];
+  playbackId?: string;
+  inverted?: boolean;
+  vod?: boolean;
+  organizationSlug?: string;
+  viewCount?: boolean;
+  video?: IExtendedStage;
 }) => {
   const nftCollection = await fetchNFTCollection({
     collectionId: video?.nftCollections?.[0],
-  })
+  });
 
   return (
     <div
       className={`flex flex-col py-4 md:flex-row md:space-x-2 ${
         inverted ? 'rounded-lg text-card-foreground text-white' : ''
-      }`}>
+      }`}
+    >
       <div className="flex w-full flex-col justify-start">
         <CardTitle className="flex flex-row items-start justify-between text-xl lg:text-2xl">
           <span>{name}</span>
         </CardTitle>
-        <InfoBoxDescription
-          speakers={speakers}
-          description={description}
-        />
+        <InfoBoxDescription speakers={speakers} description={description} />
         <div className="flex items-center space-x-2 text-sm">
           <span>
             {video?.isMultipleDate && video?.streamEndDate
@@ -179,10 +164,7 @@ const SessionInfoBox = async ({
                   new Date(video?.streamEndDate),
                   'ddd. MMM. D, YYYY, h:mm a'
                 )}`
-              : formatDate(
-                  new Date(date),
-                  'ddd. MMM. D, YYYY, h:mm a'
-                )}
+              : formatDate(new Date(date), 'ddd. MMM. D, YYYY, h:mm a')}
           </span>
           {playbackId && (
             <>
@@ -215,7 +197,7 @@ const SessionInfoBox = async ({
         </div>
       </>
     </div>
-  )
-}
+  );
+};
 
-export default SessionInfoBox
+export default SessionInfoBox;

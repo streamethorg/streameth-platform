@@ -1,28 +1,28 @@
-import React from 'react'
-import CreateOrganizationForm from '../../(home)/components/CreateOrganizationForm'
-import { studioPageParams } from '@/lib/types'
-import { fetchOrganization } from '@/lib/services/organizationService'
+import React from 'react';
+import CreateOrganizationForm from '../../(home)/components/CreateOrganizationForm';
+import { studioPageParams } from '@/lib/types';
+import { fetchOrganization } from '@/lib/services/organizationService';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 
 const Settings = async ({
   params,
 }: {
-  params: studioPageParams['params']
+  params: studioPageParams['params'];
   searchParams: {
-    settingsActiveTab?: string
-  }
+    settingsActiveTab?: string;
+  };
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
-  if (!organization) return null
+  if (!organization) return null;
 
   return (
     <div className="mx-auto my-12 flex w-full max-w-4xl">
@@ -30,8 +30,7 @@ const Settings = async ({
         <CardHeader>
           <CardTitle>Edit yout channel</CardTitle>
           <CardDescription>
-            Header logo and description will appear on your channel
-            page
+            Header logo and description will appear on your channel page
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -42,7 +41,7 @@ const Settings = async ({
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

@@ -1,10 +1,10 @@
-import { Checkbox } from '@/components/ui/checkbox'
-import { TabsContent } from '@/components/ui/tabs'
-import { INFTSessions } from '@/lib/types'
-import { formatDate } from '@/lib/utils/time'
-import Image from 'next/image'
-import React from 'react'
-import { ICreateNFT } from './CreateNFTForm'
+import { Checkbox } from '@/components/ui/checkbox';
+import { TabsContent } from '@/components/ui/tabs';
+import { INFTSessions } from '@/lib/types';
+import { formatDate } from '@/lib/utils/time';
+import Image from 'next/image';
+import React from 'react';
+import { ICreateNFT } from './CreateNFTForm';
 
 const AddMediaTabItem = ({
   tabValue,
@@ -13,30 +13,24 @@ const AddMediaTabItem = ({
   setFormState,
   type,
 }: {
-  setFormState: React.Dispatch<React.SetStateAction<ICreateNFT>>
-  formState: ICreateNFT
-  tabValue: string
-  videos: INFTSessions[]
-  type: string
+  setFormState: React.Dispatch<React.SetStateAction<ICreateNFT>>;
+  formState: ICreateNFT;
+  tabValue: string;
+  videos: INFTSessions[];
+  type: string;
 }) => {
   const parsedVideos = videos.map((video) => ({
     ...video,
     videoType: tabValue,
-  }))
+  }));
 
   return (
-    <TabsContent
-      className="max-h-[450px] overflow-auto"
-      value={tabValue}>
+    <TabsContent className="max-h-[450px] overflow-auto" value={tabValue}>
       {parsedVideos.length === 0 && (
-        <div className="mt-12 text-muted-foreground">
-          No {tabValue} found.
-        </div>
+        <div className="mt-12 text-muted-foreground">No {tabValue} found.</div>
       )}
       {parsedVideos.map((video) => (
-        <div
-          className="mb-4 mt-8 flex items-center gap-3"
-          key={video._id}>
+        <div className="mb-4 mt-8 flex items-center gap-3" key={video._id}>
           <div>
             <Checkbox
               checked={formState?.selectedVideo?.some(
@@ -51,7 +45,7 @@ const AddMediaTabItem = ({
                     )
                       ? []
                       : [video],
-                  }))
+                  }));
                 } else {
                   setFormState((prevState) => ({
                     ...prevState,
@@ -62,7 +56,7 @@ const AddMediaTabItem = ({
                           (v) => v._id !== video._id
                         )
                       : [...prevState.selectedVideo, video],
-                  }))
+                  }));
                 }
               }}
             />
@@ -88,16 +82,13 @@ const AddMediaTabItem = ({
             </p>
             <p className="text-sm">
               {' '}
-              {formatDate(
-                new Date(video.createdAt as string),
-                'MMM. D, YYYY'
-              )}
+              {formatDate(new Date(video.createdAt as string), 'MMM. D, YYYY')}
             </p>
           </div>
         </div>
       ))}
     </TabsContent>
-  )
-}
+  );
+};
 
-export default AddMediaTabItem
+export default AddMediaTabItem;
