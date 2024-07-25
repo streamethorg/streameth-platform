@@ -5,33 +5,33 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { IExtendedOrganization, IExtendedStage } from '@/lib/types'
-import { formatDate } from '@/lib/utils/time'
-import Link from 'next/link'
-import React from 'react'
-import ToggleLivestreamVisibility from './ToggleLivestreamVisibility'
-import TableSort from '@/components/misc/TableSort'
-import { EllipsisVertical } from 'lucide-react'
-import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
+} from '@/components/ui/table';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
+import { formatDate } from '@/lib/utils/time';
+import Link from 'next/link';
+import React from 'react';
+import ToggleLivestreamVisibility from './ToggleLivestreamVisibility';
+import TableSort from '@/components/misc/TableSort';
+import { EllipsisVertical } from 'lucide-react';
+import Thumbnail from '@/components/misc/VideoCard/thumbnail';
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import LivestreamActions from './LivestreamActions'
-import { Button } from '@/components/ui/button'
-import { ScissorsLineDashed } from 'lucide-react'
-import { CardDescription, CardTitle } from '@/components/ui/card'
-import EmptyFolder from '@/lib/svg/EmptyFolder'
+} from '@/components/ui/popover';
+import LivestreamActions from './LivestreamActions';
+import { Button } from '@/components/ui/button';
+import { ScissorsLineDashed } from 'lucide-react';
+import { CardDescription, CardTitle } from '@/components/ui/card';
+import EmptyFolder from '@/lib/svg/EmptyFolder';
 
 const LivestreamTable = ({
   streams,
   organizationSlug,
 }: {
-  streams: IExtendedStage[]
-  organizationSlug: string
+  streams: IExtendedStage[];
+  organizationSlug: string;
 }) => {
   if (streams.length === 0) {
     return (
@@ -44,7 +44,7 @@ const LivestreamTable = ({
           Create your first livestream to get started!
         </CardDescription>
       </div>
-    )
+    );
   }
   return (
     <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
@@ -81,7 +81,8 @@ const LivestreamTable = ({
 
                   <Link
                     key={stream._id}
-                    href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
+                    href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
+                  >
                     <p className="line-clamp-3 hover:underline">
                       {stream?.name}
                     </p>
@@ -121,14 +122,17 @@ const LivestreamTable = ({
               <TableCell className="my-2 flex items-center space-x-2">
                 <Link
                   key={stream._id}
-                  href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}>
+                  href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
+                >
                   <Button variant="outlinePrimary">Manage</Button>
                 </Link>
                 <Link
-                  href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}>
+                  href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}
+                >
                   <Button
                     variant="primary"
-                    className="flex w-full items-center gap-1">
+                    className="flex w-full items-center gap-1"
+                  >
                     <ScissorsLineDashed className="h-4 w-4" />
                     Clip
                   </Button>
@@ -150,7 +154,7 @@ const LivestreamTable = ({
         </TableBody>
       </Table>
     </div>
-  )
-}
+  );
+};
 
-export default LivestreamTable
+export default LivestreamTable;

@@ -1,42 +1,38 @@
-import { IExtendedSession } from '@/lib/types'
-import VideoCardWithMenu from './VideoCard/VideoCardWithMenu'
-import { Suspense } from 'react'
-import {
-  Card,
-  CardHeader,
-  CardDescription,
-} from '@/components/ui/card'
+import { IExtendedSession } from '@/lib/types';
+import VideoCardWithMenu from './VideoCard/VideoCardWithMenu';
+import { Suspense } from 'react';
+import { Card, CardHeader, CardDescription } from '@/components/ui/card';
 export default async function VideoGrid({
   videos,
   OrganizationSlug,
   maxVideos,
   scroll,
 }: {
-  videos: IExtendedSession[]
-  OrganizationSlug?: string
-  maxVideos?: number
-  scroll?: boolean
+  videos: IExtendedSession[];
+  OrganizationSlug?: string;
+  maxVideos?: number;
+  scroll?: boolean;
 }) {
-  if (!videos) return null
+  if (!videos) return null;
 
   return (
     <div className="max-w-screen border-none bg-transparent lg:w-full">
       <div
         className={`${
           scroll ? 'flex flex-row' : 'grid grid-cols-2'
-        } gap-8 gap-x-4 md:grid-cols-3 lg:grid lg:grid-cols-3`}>
+        } gap-8 gap-x-4 md:grid-cols-3 lg:grid lg:grid-cols-3`}
+      >
         {videos.map((video, index) =>
           ({ maxVideos }) && maxVideos && index > maxVideos ? null : (
             <div
               key={video._id}
               className={`${
                 scroll && 'w-[300px]'
-              } h-full flex-initial border-none lg:w-full`}>
+              } h-full flex-initial border-none lg:w-full`}
+            >
               <Suspense
                 fallback={
-                  <Card
-                    key={index}
-                    className="border-none shadow-none">
+                  <Card key={index} className="border-none shadow-none">
                     <div className="min-h-full rounded-xl uppercase">
                       <div className="aspect-video w-full animate-pulse bg-secondary"></div>
                       <CardHeader className="mt-1 rounded bg-white bg-opacity-10 px-2 lg:p-0 lg:py-2">
@@ -47,7 +43,8 @@ export default async function VideoGrid({
                       </CardHeader>
                     </div>
                   </Card>
-                }>
+                }
+              >
                 <VideoCardWithMenu
                   session={video}
                   link={`/${OrganizationSlug}/watch?session=${video._id.toString()}`}
@@ -58,5 +55,5 @@ export default async function VideoGrid({
         )}
       </div>
     </div>
-  )
+  );
 }

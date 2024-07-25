@@ -1,28 +1,29 @@
-'use client'
-import { Button } from '../ui/button'
-import farcasterLogo from '@/public/farcaster-transparent-white.png'
-import lensLogo from '@/public/lens-green.png'
-import twitterLogo from '@/public/twitter-white.png'
-import Image from 'next/image'
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
-import { useLoginWithEmail, usePrivy } from '@privy-io/react-auth'
-import { useState } from 'react'
-import { Input } from '../ui/input'
+'use client';
+import { Button } from '../ui/button';
+import farcasterLogo from '@/public/farcaster-transparent-white.png';
+import lensLogo from '@/public/lens-green.png';
+import twitterLogo from '@/public/twitter-white.png';
+import Image from 'next/image';
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
+import { useLoginWithEmail, usePrivy } from '@privy-io/react-auth';
+import { useState } from 'react';
+import { Input } from '../ui/input';
 const SignInWithSocials = () => {
   // Local State
-  const [email, setEmail] = useState('')
-  const [code, setCode] = useState('')
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
 
   // Privy
-  const { ready, authenticated } = usePrivy()
-  const { sendCode, loginWithCode } = useLoginWithEmail()
+  const { ready, authenticated } = usePrivy();
+  const { sendCode, loginWithCode } = useLoginWithEmail();
   return (
     <div className="flex w-full flex-col space-y-4">
       <Dialog>
         <DialogTrigger>
           <Button
             disabled
-            className="w-full rounded-xl border bg-white text-black">
+            className="w-full rounded-xl border bg-white text-black"
+          >
             Continue with Google
           </Button>
         </DialogTrigger>
@@ -35,9 +36,7 @@ const SignInWithSocials = () => {
                 onChange={(e) => setEmail(e.currentTarget.value)}
               />
               {/* Once an email has been entered, send the OTP to it on click */}
-              <Button onClick={() => sendCode({ email })}>
-                Send Code
-              </Button>
+              <Button onClick={() => sendCode({ email })}>Send Code</Button>
             </div>
             <div className="flex gap-2">
               {/* Prompt your user to enter the OTP */}
@@ -46,16 +45,15 @@ const SignInWithSocials = () => {
                 onChange={(e) => setCode(e.currentTarget.value)}
               />
               {/* Once an OTP has been entered, submit it to Privy on click */}
-              <Button onClick={() => loginWithCode({ code })}>
-                Log in
-              </Button>
+              <Button onClick={() => loginWithCode({ code })}>Log in</Button>
             </div>
           </div>
         </DialogContent>
       </Dialog>
       <Button
         disabled
-        className="flex w-full flex-row rounded-xl border bg-[#8A63D2] text-white">
+        className="flex w-full flex-row rounded-xl border bg-[#8A63D2] text-white"
+      >
         <Image
           src={farcasterLogo}
           alt="farcaster logo "
@@ -66,13 +64,9 @@ const SignInWithSocials = () => {
       </Button>
       <Button
         disabled
-        className="flex w-full flex-row rounded-xl border bg-black text-white">
-        <Image
-          src={twitterLogo}
-          alt="twitter logo "
-          width={20}
-          height={20}
-        />
+        className="flex w-full flex-row rounded-xl border bg-black text-white"
+      >
+        <Image src={twitterLogo} alt="twitter logo " width={20} height={20} />
         <p className="mx-2">Continue with Twitter</p>
       </Button>
       {/* <Button className="flex flex-row w-full bg-black text-white rounded-xl border">
@@ -85,7 +79,7 @@ const SignInWithSocials = () => {
         <p className="mx-2">Continue with Lens</p>
       </Button> */}
     </div>
-  )
-}
+  );
+};
 
-export default SignInWithSocials
+export default SignInWithSocials;

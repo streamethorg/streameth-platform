@@ -1,7 +1,7 @@
-import { fetchAllSessions } from '@/lib/data'
-import Videos from '@/components/misc/Videos'
-import { FileQuestion } from 'lucide-react'
-import Pagination from './pagination'
+import { fetchAllSessions } from '@/lib/data';
+import Videos from '@/components/misc/Videos';
+import { FileQuestion } from 'lucide-react';
+import Pagination from './pagination';
 
 const ArchiveVideos = async ({
   organizationSlug,
@@ -9,10 +9,10 @@ const ArchiveVideos = async ({
   searchQuery,
   page,
 }: {
-  organizationSlug?: string
-  event?: string
-  searchQuery?: string
-  page?: number
+  organizationSlug?: string;
+  event?: string;
+  searchQuery?: string;
+  page?: number;
 }) => {
   const videos = await fetchAllSessions({
     organizationSlug,
@@ -22,7 +22,7 @@ const ArchiveVideos = async ({
     published: true,
     searchQuery,
     page: Number(page || 1),
-  })
+  });
 
   if (videos.pagination.totalItems === 0) {
     return (
@@ -32,18 +32,15 @@ const ArchiveVideos = async ({
           No videos have been uploaded yet
         </span>
       </div>
-    )
+    );
   }
 
   return (
     <>
-      <Videos
-        OrganizationSlug={organizationSlug}
-        videos={videos.sessions}
-      />
+      <Videos OrganizationSlug={organizationSlug} videos={videos.sessions} />
       <Pagination {...videos.pagination} />
     </>
-  )
-}
+  );
+};
 
-export default ArchiveVideos
+export default ArchiveVideos;

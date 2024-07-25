@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import {
   Table,
@@ -6,18 +6,18 @@ import {
   TableRow,
   TableHead,
   TableBody,
-} from '@/components/ui/table'
-import TableCells from './TableCells'
-import { IExtendedSession } from '@/lib/types'
-import LayoutSelection from './LayoutSelection'
-import TableSort from '@/components/misc/TableSort'
+} from '@/components/ui/table';
+import TableCells from './TableCells';
+import { IExtendedSession } from '@/lib/types';
+import LayoutSelection from './LayoutSelection';
+import TableSort from '@/components/misc/TableSort';
 
 const LibraryListLayout = async ({
   sessions,
   organizationSlug,
 }: {
-  sessions: IExtendedSession[]
-  organizationSlug: string
+  sessions: IExtendedSession[];
+  organizationSlug: string;
 }) => {
   return (
     <Table className="bg-white">
@@ -44,7 +44,7 @@ const LibraryListLayout = async ({
         ))}
       </TableBody>
     </Table>
-  )
-}
+  );
+};
 
-export default LibraryListLayout
+export default LibraryListLayout;

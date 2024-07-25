@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { fetchStage } from '@/lib/services/stageService'
-import { IExtendedStage } from '@/lib/types'
-import { useEffect, useState } from 'react'
+import { fetchStage } from '@/lib/services/stageService';
+import { IExtendedStage } from '@/lib/types';
+import { useEffect, useState } from 'react';
 
 const StreamHealth = ({
   stream,
@@ -10,33 +10,31 @@ const StreamHealth = ({
   organization,
   isLive,
 }: {
-  stream: IExtendedStage
-  streamId: string
-  organization: string
-  isLive?: boolean
+  stream: IExtendedStage;
+  streamId: string;
+  organization: string;
+  isLive?: boolean;
 }) => {
-  const [isHealthy, setIsHealthy] = useState(
-    stream?.streamSettings?.isHealthy
-  )
+  const [isHealthy, setIsHealthy] = useState(stream?.streamSettings?.isHealthy);
 
   const checkIsHealthy = async () => {
     try {
-      const res = await fetchStage({ stage: stream._id as string })
-      setIsHealthy(res?.streamSettings?.isHealthy)
+      const res = await fetchStage({ stage: stream._id as string });
+      setIsHealthy(res?.streamSettings?.isHealthy);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     if (!isLive) {
-      return
+      return;
     }
 
     setInterval(() => {
-      checkIsHealthy()
-    }, 10000)
-  }, [stream?.streamSettings?.isHealthy, isLive])
+      checkIsHealthy();
+    }, 10000);
+  }, [stream?.streamSettings?.isHealthy, isLive]);
 
   return (
     isLive && (
@@ -60,6 +58,6 @@ const StreamHealth = ({
         )}
       </>
     )
-  )
-}
-export default StreamHealth
+  );
+};
+export default StreamHealth;

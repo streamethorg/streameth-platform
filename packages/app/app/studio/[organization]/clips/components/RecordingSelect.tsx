@@ -1,25 +1,25 @@
-'use client'
-import React from 'react'
+'use client';
+import React from 'react';
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectGroup,
   SelectItem,
-} from '@/components/ui/select'
-import { SelectContent } from '@/components/ui/select'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { Session } from 'livepeer/dist/models/components'
+} from '@/components/ui/select';
+import { SelectContent } from '@/components/ui/select';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { Session } from 'livepeer/dist/models/components';
 const RecordingSelect = ({
   selectedRecording,
   streamRecordings,
 }: {
-  selectedRecording?: string
-  streamRecordings: Session[]
+  selectedRecording?: string;
+  streamRecordings: Session[];
 }) => {
-  const { handleTermChange, searchParams } = useSearchParams()
+  const { handleTermChange, searchParams } = useSearchParams();
 
-  if (!streamRecordings) return <div>No stream sessions found</div>
+  if (!streamRecordings) return <div>No stream sessions found</div>;
 
   return (
     <div className="w-full space-y-2">
@@ -27,12 +27,13 @@ const RecordingSelect = ({
       <Select
         value={selectedRecording}
         onValueChange={(value) => {
-          const session = streamRecordings.find((s) => s.id === value)
+          const session = streamRecordings.find((s) => s.id === value);
           session &&
             handleTermChange([
               { key: 'selectedRecording', value: session.id ?? '' },
-            ])
-        }}>
+            ]);
+        }}
+      >
         <SelectTrigger className="bg-white">
           <SelectValue
             defaultValue={selectedRecording}
@@ -50,7 +51,7 @@ const RecordingSelect = ({
         </SelectContent>
       </Select>
     </div>
-  )
-}
+  );
+};
 
-export default RecordingSelect
+export default RecordingSelect;

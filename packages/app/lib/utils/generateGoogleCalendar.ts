@@ -1,6 +1,6 @@
-import { formatDate } from './time'
+import { formatDate } from './time';
 
-const BASE_URL = 'https://calendar.google.com/calendar/render'
+const BASE_URL = 'https://calendar.google.com/calendar/render';
 
 const generateGoogleCalendar = ({
   eventName,
@@ -8,15 +8,15 @@ const generateGoogleCalendar = ({
   start,
   end,
 }: {
-  eventName: string
-  description: string
-  start: Date
-  end: Date
+  eventName: string;
+  description: string;
+  start: Date;
+  end: Date;
 }) => {
-  const startDate = formatDate(start, 'YYYYMMDDTHHmm00Z')
-  const endDate = formatDate(end, 'YYYYMMDDTHHmm00Z')
+  const startDate = formatDate(start, 'YYYYMMDDTHHmm00Z');
+  const endDate = formatDate(end, 'YYYYMMDDTHHmm00Z');
 
-  return `${BASE_URL}?action=TEMPLATE&text=${eventName}&dates=${startDate}/${endDate}&details=${description}`
-}
+  return `${BASE_URL}?action=TEMPLATE&text=${eventName}&dates=${startDate}/${endDate}&details=${description}`;
+};
 
-export default generateGoogleCalendar
+export default generateGoogleCalendar;

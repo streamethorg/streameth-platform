@@ -1,25 +1,25 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from '@/components/ui/dropdown-menu'
-import VideoDownload from '@/app/[organization]/components/VideoDownload'
-import ShareButton from '@/components/misc/interact/ShareButton'
-import EmbedButton from '@/components/misc/interact/EmbedButton'
-import { MoreHorizontal } from 'lucide-react'
+} from '@/components/ui/dropdown-menu';
+import VideoDownload from '@/app/[organization]/components/VideoDownload';
+import ShareButton from '@/components/misc/interact/ShareButton';
+import EmbedButton from '@/components/misc/interact/EmbedButton';
+import { MoreHorizontal } from 'lucide-react';
 export function DropdownMenuWithActionButtons({
   streamId,
   playbackId,
   playerName,
   assetId,
 }: {
-  streamId?: string
-  playbackId?: string
-  playerName: string
-  assetId?: string
+  streamId?: string;
+  playbackId?: string;
+  playerName: string;
+  assetId?: string;
 }) {
   return (
     <DropdownMenu>
@@ -52,7 +52,7 @@ export function DropdownMenuWithActionButtons({
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 
-export default DropdownMenuWithActionButtons
+export default DropdownMenuWithActionButtons;

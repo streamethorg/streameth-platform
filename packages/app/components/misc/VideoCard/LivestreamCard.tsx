@@ -1,18 +1,14 @@
-import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import {
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { formatDate } from '@/lib/utils/time'
-import Link from 'next/link'
+import Thumbnail from '@/components/misc/VideoCard/thumbnail';
+import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatDate } from '@/lib/utils/time';
+import Link from 'next/link';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { EllipsisVertical } from 'lucide-react'
-import { IExtendedStage } from '@/lib/types'
+} from '@/components/ui/dropdown-menu';
+import { EllipsisVertical } from 'lucide-react';
+import { IExtendedStage } from '@/lib/types';
 
 const LivestreamCard = ({
   name,
@@ -23,13 +19,13 @@ const LivestreamCard = ({
   DropdownMenuItems,
   livestream,
 }: {
-  name: string
-  thumbnail: string
-  date: string
-  showDate?: boolean
-  link: string
-  DropdownMenuItems?: React.ReactNode
-  livestream: IExtendedStage
+  name: string;
+  thumbnail: string;
+  date: string;
+  showDate?: boolean;
+  link: string;
+  DropdownMenuItems?: React.ReactNode;
+  livestream: IExtendedStage;
 }) => {
   return (
     <div className="flex min-h-full w-full flex-row space-y-2 rounded-xl uppercase md:flex-col">
@@ -56,10 +52,7 @@ const LivestreamCard = ({
                       new Date(livestream.streamEndDate),
                       'ddd. MMM. D, YYYY, h:mm a'
                     )}`
-                  : formatDate(
-                      new Date(date),
-                      'ddd. MMM. D, YYYY, h:mm a'
-                    )}
+                  : formatDate(new Date(date), 'ddd. MMM. D, YYYY, h:mm a')}
               </CardDescription>
             </div>
           )}
@@ -69,14 +62,12 @@ const LivestreamCard = ({
             <DropdownMenuTrigger className="z-10">
               <EllipsisVertical className="mt-2" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {DropdownMenuItems}
-            </DropdownMenuContent>
+            <DropdownMenuContent>{DropdownMenuItems}</DropdownMenuContent>
           </DropdownMenu>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LivestreamCard
+export default LivestreamCard;
