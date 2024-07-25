@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Footer from '@/components/Layout/Footer';
 import AuthorizationMessage from '@/components/authorization/AuthorizationMessage';
 import CheckAuthorization from '@/components/authorization/CheckAuthorization';
-import CreateRequestForm from './components/createRequestFrom';
+import CreateRequest from './components/createRequest';
 
 const DataRequest = async () => {
   const year = new Date().getFullYear();
@@ -16,9 +16,9 @@ const DataRequest = async () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <div className="flex flex-grow items-center justify-center">
-        <Card className="my-5 flex w-full max-w-4xl flex-col justify-between bg-gray-100 p-5">
+    <div className="flex flex-col min-h-screen">
+      <div className="flex flex-grow justify-center items-center">
+        <Card className="flex flex-col justify-between p-5 my-5 w-full max-w-4xl bg-gray-100">
           <CardTitle className="mb-6 ml-4">
             <Image
               src={'/logo.png'}
@@ -27,7 +27,7 @@ const DataRequest = async () => {
               height={50}
             />
           </CardTitle>
-          <CreateRequestForm />
+          <CreateRequest />
         </Card>
       </div>
       <Footer active={'data_request'} />

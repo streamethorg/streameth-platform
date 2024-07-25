@@ -4,7 +4,7 @@ import { useAccount } from 'wagmi';
 import { Button } from '@/components/ui/button';
 import { LuMail } from 'react-icons/lu';
 
-const CreateRequestForm = () => {
+const CreateRequest = () => {
   const { address } = useAccount();
 
   const handleEmailClick = () => {
@@ -34,7 +34,7 @@ Best regards,
         Please click the button below to email support@streameth.org with your
         request:
       </p>
-      <ul className="list-inside list-disc space-y-2 text-sm text-gray-600">
+      <ul className="space-y-2 text-sm list-disc list-inside text-gray-600">
         <li>
           Your login address:{' '}
           <span className="font-mono">{address || 'Not connected'}</span>
@@ -55,4 +55,4 @@ Best regards,
   );
 };
 
-export default CreateRequestForm;
+export default CreateRequest;
