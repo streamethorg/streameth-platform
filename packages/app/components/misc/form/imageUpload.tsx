@@ -17,25 +17,23 @@ import {
 import { Button } from '@/components/ui/button'
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
-  // FileList is immutable, so we need to create a new one
   const dataTransfer = new DataTransfer()
-
-  // Add newly uploaded images
   Array.from(event.target.files!).forEach((image) =>
     dataTransfer.items.add(image)
   )
-
   const files = dataTransfer.files
   const displayUrl = URL.createObjectURL(event.target.files![0])
   return { files, displayUrl }
 }
 
-const ConfirmImageDeletion = ({
-  onChange,
-  setPreview,
-}: {
+interface ConfirmImageDeletionProps {
   onChange: (files: string | null) => void
   setPreview: React.Dispatch<React.SetStateAction<string>>
+}
+
+const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
+  onChange,
+  setPreview,
 }) => {
   const [open, setOpen] = useState(false)
   return (
@@ -43,7 +41,7 @@ const ConfirmImageDeletion = ({
       <DialogTrigger>
         <X
           size={24}
-          className="absolute right-0 z-[9999999999994] ml-auto cursor-pointer rounded-full border border-muted-foreground bg-white text-muted-foreground"
+          className="absolute right-2 top-2 z-10 cursor-pointer rounded-full border border-muted-foreground bg-white text-muted-foreground"
         />
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center justify-center gap-5">
@@ -56,8 +54,9 @@ const ConfirmImageDeletion = ({
           </Button>
           <Button
             onClick={() => {
-              onChange('')
+              onChange(null)
               setPreview('')
+              setOpen(false)
             }}
             variant="destructive">
             Delete
@@ -66,6 +65,19 @@ const ConfirmImageDeletion = ({
       </DialogContent>
     </Dialog>
   )
+}
+
+interface ImageUploadProps {
+  id?: string
+  maxSize?: number
+  placeholder?: string
+  aspectRatio: number
+  onChange: (files: string | null) => void
+  value: string | null | undefined
+  path: string
+  className?: string
+  requireExactSize?: { width: number; height: number }
+  isProfileImage?: boolean
 }
 
 export default function ImageUpload({
@@ -77,32 +89,55 @@ export default function ImageUpload({
   path,
   className,
   maxSize = 5000000,
-  ...rest
-}: {
-  id?: string
-  maxSize?: number
-  placeholder?: string
-  aspectRatio: number
-  onChange: (files: string | null) => void
-  value: string | null | undefined
-  path: string
-  className?: string
-}) {
-  const [preview, setPreview] = useState(
+  requireExactSize,
+  isProfileImage = false,
+}: ImageUploadProps) {
+  const [preview, setPreview] = useState<string>(
     value ? getImageUrl('/' + path + '/' + value) : ''
   )
-  const [isUploading, setIsUploading] = useState(false)
+  const [isUploading, setIsUploading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const validateImage = (file: File): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const img = document.createElement('img')
+      img.onload = () => {
+        if (requireExactSize) {
+          if (
+            img.width !== requireExactSize.width ||
+            img.height !== requireExactSize.height
+          ) {
+            setError(
+              `Image must be exactly ${requireExactSize.width}x${requireExactSize.height} pixels`
+            )
+            resolve(false)
+          } else {
+            setError(null)
+            resolve(true)
+          }
+        } else {
+          setError(null)
+          resolve(true)
+        }
+      }
+      img.src = URL.createObjectURL(file)
+    })
+  }
 
   const onSubmit = async (file: File) => {
     if (!file) return
     setIsUploading(true)
     try {
-      const data = new FormData()
+      const isValidSize = await validateImage(file)
+      if (!isValidSize) {
+        throw new Error(error || 'Invalid image size')
+      }
 
       if (file.size > maxSize) {
         throw new Error('File size is too big')
       }
 
+      const data = new FormData()
       data.set(
         'file',
         new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
@@ -126,72 +161,84 @@ export default function ImageUpload({
     } catch (e: any) {
       console.error(e)
       setPreview('')
-
       throw e
     } finally {
       setIsUploading(false)
     }
   }
 
+  const containerClasses = isProfileImage
+    ? 'relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1'
+    : `${className} relative w-full h-40`
+
+  const imageClasses = isProfileImage
+    ? 'm-auto h-full w-full rounded-full bg-neutrals-300 text-white object-cover'
+    : 'w-full h-full object-cover'
+
+  const placeholderClasses = isProfileImage
+    ? 'flex cursor-pointer flex-col items-center justify-center w-full h-full rounded-full border border-dotted bg-secondary'
+    : 'flex cursor-pointer flex-col items-center justify-center w-full h-full border border-dotted bg-secondary'
+
   return (
-    <>
+    <div className={containerClasses}>
       {isUploading ? (
-        <div className={`${className} relative flex w-full flex-col`}>
+        <div className="flex h-full w-full items-center justify-center">
           Uploading image...
         </div>
       ) : preview ? (
-        <div className={`${className} relative flex w-full flex-col`}>
+        <div className="relative h-full w-full">
           <ConfirmImageDeletion
             onChange={onChange}
             setPreview={setPreview}
           />
-          <div
-            className={`relative flex h-full w-full flex-col items-center justify-center`}>
-            <Image
-              src={preview ?? value}
-              className={`${className} z-10`}
-              alt="preview"
-              fill
-            />
-          </div>
+          <Image
+            src={preview}
+            alt="preview"
+            fill
+            className={imageClasses}
+          />
         </div>
       ) : (
-        <>
-          <Label
-            htmlFor={id}
-            className={`${className} flex cursor-pointer flex-col items-center justify-center border border-dotted bg-secondary`}>
-            <div className="rounded-full bg-neutral-400 p-2 text-white">
-              <ImageLogo />
-            </div>
+        <Label htmlFor={id} className={placeholderClasses}>
+          <div className="rounded-full bg-neutral-400 p-2 text-white">
+            <ImageLogo />
+          </div>
+          {!isProfileImage && (
             <p className="w-full p-1 text-center text-[12px] lg:w-2/3">
               {placeholder}
             </p>
-          </Label>
-          <Input
-            id={id}
-            type="file"
-            accept=".png,.jpg, .jpeg"
-            placeholder="Upload image"
-            className="hidden"
-            onChange={(event) => {
-              const { files, displayUrl } = getImageData(event)
-
-              setPreview(displayUrl)
-              toast.promise(onSubmit(files[0]), {
-                loading: 'Uploading image',
-                success: (message) => {
-                  toast.success(message)
-                  return 'Image uploaded successfully'
-                },
-                error: (error) => {
-                  toast.error(error.message)
-                  return error.message || 'Unknown error'
-                },
-              })
-            }}
-          />
-        </>
+          )}
+        </Label>
       )}
-    </>
+      <Input
+        id={id}
+        type="file"
+        accept=".png,.jpg,.jpeg"
+        placeholder="Upload image"
+        className="hidden"
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          const { files, displayUrl } = getImageData(event)
+
+          setPreview(displayUrl)
+          toast.promise(onSubmit(files[0]), {
+            loading: 'Uploading image',
+            success: (message) => {
+              toast.success(message as string)
+              return 'Image uploaded successfully'
+            },
+            error: (error: Error) => {
+              toast.error(error.message)
+              setPreview('')
+              return error.message || 'Unknown error'
+            },
+          })
+        }}
+      />
+      {error && (
+        <p className="absolute bottom-[-2rem] left-0 right-0 mt-2 text-center text-sm text-red-500">
+          {error}
+        </p>
+      )}
+    </div>
   )
 }
