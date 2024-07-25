@@ -111,8 +111,7 @@ export function PlayerWithControls(props: {
 
         <Player.ErrorIndicator
           matcher="offline"
-          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg duration-1000 animate-in fade-in-0 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0"
-        >
+          className="absolute inset-0 flex select-none flex-col items-center justify-center gap-4 bg-black/40 text-center backdrop-blur-lg animate-in fade-in-0 duration-1000 data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1">
               <div className="text-lg font-bold sm:text-2xl">

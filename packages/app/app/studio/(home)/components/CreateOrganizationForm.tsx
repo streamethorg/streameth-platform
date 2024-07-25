@@ -26,16 +26,18 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { useRouter } from 'next/navigation';
 import { IExtendedOrganization } from '@/lib/types';
 
+interface CreateOrganizationFormProps {
+  organization?: IExtendedOrganization
+  disableName?: boolean
+}
+
 export default function CreateOrganizationForm({
   organization,
   disableName = false,
-}: {
-  organization?: IExtendedOrganization;
-  disableName?: boolean;
-}) {
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+}: CreateOrganizationFormProps) {
+  const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
@@ -45,7 +47,6 @@ export default function CreateOrganizationForm({
       logo: organization?.logo || '',
       email: organization?.email || '',
       description: organization?.description || '',
-      // url: organization?.url || '',
     },
   });
 
@@ -90,8 +91,10 @@ export default function CreateOrganizationForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4">
+        <div className="relative">
           <FormField
             control={form.control}
             name="banner"
@@ -100,10 +103,10 @@ export default function CreateOrganizationForm({
                 <FormControl>
                   <ImageUpload
                     className="h-40 w-full rounded-xl bg-neutrals-300"
-                    placeholder="Click to upload image here. Maximum image file size is 5MB.
-                    Best resolution of 1500 x 500px. Aspect ratio of 3:1."
-                    aspectRatio={1}
+                    placeholder="Click to upload image here. Image must be exactly 1500x500 pixels. Maximum file size is 5MB."
+                    aspectRatio={3 / 1}
                     path={`organizations`}
+                    requireExactSize={{ width: 1500, height: 500 }}
                     {...field}
                   />
                 </FormControl>
@@ -115,22 +118,22 @@ export default function CreateOrganizationForm({
             control={form.control}
             name="logo"
             render={({ field }) => (
-              <>
-                <FormItem className="relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1">
-                  <FormControl>
-                    <ImageUpload
-                      className="m-auto h-full w-full rounded-full bg-neutrals-300 text-white"
-                      aspectRatio={1}
-                      path={`organizations`}
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
+              <FormItem>
+                <FormControl>
+                  <ImageUpload
+                    placeholder="Upload logo"
+                    aspectRatio={1}
+                    path={`organizations`}
+                    isProfileImage={true}
+                    {...field}
+                  />
+                </FormControl>
                 <FormMessage />
-              </>
+              </FormItem>
             )}
           />
         </div>
+
         <FormField
           control={form.control}
           name="name"
@@ -177,20 +180,6 @@ export default function CreateOrganizationForm({
           )}
         />
 
-        {/* <FormField
-          control={form.control}
-          name="url"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="">Company website</FormLabel>
-              <FormControl>
-                <Input placeholder="Company website" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
-
         <div className="flex flex-row justify-between">
           {!organization && (
             <Button
@@ -218,4 +207,20 @@ export default function CreateOrganizationForm({
       </form>
     </Form>
   );
+}
+
+{
+  /* <FormField
+          control={form.control}
+          name="url"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="">Company website</FormLabel>
+              <FormControl>
+                <Input placeholder="Company website" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        /> */
 }
