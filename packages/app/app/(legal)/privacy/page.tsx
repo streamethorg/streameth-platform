@@ -6,7 +6,7 @@ import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 const Privacy = async () => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
   const file = await fs.readFile(
     process.cwd() + '/public/legal/privacy.md',
     'utf8'
@@ -40,4 +40,4 @@ const Privacy = async () => {
   );
 };
 
-export default Privacy
+export default Privacy;

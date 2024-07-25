@@ -1,18 +1,18 @@
-'use server'
+'use server';
 
-import { Card, CardTitle, CardFooter } from '@/components/ui/card'
-import Image from 'next/image'
-import Footer from '@/components/Layout/Footer'
-import AuthorizationMessage from '@/components/authorization/AuthorizationMessage'
-import CheckAuthorization from '@/components/authorization/CheckAuthorization'
-import CreateRequestForm from './components/createRequestFrom'
+import { Card, CardTitle, CardFooter } from '@/components/ui/card';
+import Image from 'next/image';
+import Footer from '@/components/Layout/Footer';
+import AuthorizationMessage from '@/components/authorization/AuthorizationMessage';
+import CheckAuthorization from '@/components/authorization/CheckAuthorization';
+import CreateRequestForm from './components/createRequestFrom';
 
 const DataRequest = async () => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
-  const isAuthorized = await CheckAuthorization()
+  const isAuthorized = await CheckAuthorization();
   if (!isAuthorized) {
-    return <AuthorizationMessage />
+    return <AuthorizationMessage />;
   }
 
   return (
@@ -32,7 +32,7 @@ const DataRequest = async () => {
       </div>
       <Footer active={'data_request'} />
     </div>
-  )
-}
+  );
+};
 
-export default DataRequest
+export default DataRequest;
