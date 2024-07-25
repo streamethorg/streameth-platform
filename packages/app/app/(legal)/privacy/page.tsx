@@ -5,7 +5,7 @@ import Footer from '@/components/Layout/Footer';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-const Terms = async () => {
+const Privacy = async () => {
   const year = new Date().getFullYear();
   const file = await fs.readFile(
     process.cwd() + '/public/legal/privacy.md',
@@ -40,4 +40,4 @@ const Terms = async () => {
   );
 };
 
-export default Terms;
+export default Privacy;
