@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { TableCell } from '@/components/ui/table'
-import { Loader2 } from 'lucide-react'
-import Image from 'next/image'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import { formatDate } from '@/lib/utils/time'
-import { IExtendedSession } from '@/lib/types'
+import { TableCell } from '@/components/ui/table';
+import { Loader2 } from 'lucide-react';
+import Image from 'next/image';
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail';
+import { AspectRatio } from '@radix-ui/react-aspect-ratio';
+import { formatDate } from '@/lib/utils/time';
+import { IExtendedSession } from '@/lib/types';
 
 const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
   return (
@@ -30,9 +30,7 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
             </AspectRatio>
           </div>
 
-          <span className="line-clamp-3 text-gray-400">
-            {item.name}
-          </span>
+          <span className="line-clamp-3 text-gray-400">{item.name}</span>
         </div>
       </TableCell>
       <TableCell className="cursor-not-allowed bg-muted opacity-50">
@@ -43,10 +41,7 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
       </TableCell>
       {item.createdAt && (
         <TableCell className="cursor-not-allowed truncate bg-muted opacity-50">
-          {formatDate(
-            new Date(item.createdAt as string),
-            'ddd. MMM. D, YYYY'
-          )}
+          {formatDate(new Date(item.createdAt as string), 'ddd. MMM. D, YYYY')}
         </TableCell>
       )}
       <TableCell className="relative cursor-not-allowed bg-muted opacity-50">
@@ -54,7 +49,7 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
       </TableCell>
       <TableCell className="cursor-not-allowed bg-muted opacity-50"></TableCell>
     </>
-  )
-}
+  );
+};
 
-export default ProcessingSkeleton
+export default ProcessingSkeleton;

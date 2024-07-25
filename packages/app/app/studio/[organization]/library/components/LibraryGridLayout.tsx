@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import { IExtendedSession, eLayout } from '@/lib/types'
-import { Separator } from '@/components/ui/separator'
-import LayoutSelection from './LayoutSelection'
-import VideoCardWithMenu from './misc/VideoCardWithMenu'
-import { PopoverActions } from './misc/PopoverActions'
-import VideoCardProcessing from '@/components/misc/VideoCard/VideoCardProcessing'
+import { IExtendedSession, eLayout } from '@/lib/types';
+import { Separator } from '@/components/ui/separator';
+import LayoutSelection from './LayoutSelection';
+import VideoCardWithMenu from './misc/VideoCardWithMenu';
+import { PopoverActions } from './misc/PopoverActions';
+import VideoCardProcessing from '@/components/misc/VideoCard/VideoCardProcessing';
 
 const LibraryGridLayout = ({
   sessions,
   organizationSlug,
 }: {
-  sessions: IExtendedSession[]
-  organizationSlug: string
+  sessions: IExtendedSession[];
+  organizationSlug: string;
 }) => {
   return (
     <>
@@ -40,7 +40,7 @@ const LibraryGridLayout = ({
         ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default LibraryGridLayout
+export default LibraryGridLayout;

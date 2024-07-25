@@ -5,7 +5,7 @@ import {
   TableRow,
   TableBody,
   TableCell,
-} from '@/components/ui/table'
+} from '@/components/ui/table';
 
 const TableSkeleton = () => {
   return (
@@ -51,7 +51,7 @@ const TableSkeleton = () => {
         ))}
       </TableBody>
     </Table>
-  )
-}
+  );
+};
 
-export default TableSkeleton
+export default TableSkeleton;

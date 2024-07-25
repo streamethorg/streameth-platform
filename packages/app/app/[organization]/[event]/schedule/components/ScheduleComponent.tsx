@@ -1,16 +1,11 @@
-import StageSelect from './StageSelect'
-import DateSelect from './DateSelect'
-import SessionList from '@/components/sessions/SessionList'
-import { fetchAllSessions } from '@/lib/data'
-import { getEventDays, getSessionDays } from '@/lib/utils/time'
-import { isSameDay } from '@/lib/utils/time'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { IExtendedEvent, IExtendedStage } from '@/lib/types'
+import StageSelect from './StageSelect';
+import DateSelect from './DateSelect';
+import SessionList from '@/components/sessions/SessionList';
+import { fetchAllSessions } from '@/lib/data';
+import { getEventDays, getSessionDays } from '@/lib/utils/time';
+import { isSameDay } from '@/lib/utils/time';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { IExtendedEvent, IExtendedStage } from '@/lib/types';
 
 const ScheduleComponent = async ({
   stages,
@@ -18,26 +13,26 @@ const ScheduleComponent = async ({
   stage,
   date,
 }: {
-  stages: IExtendedStage[]
-  event: IExtendedEvent
-  stage?: string
-  date?: string
+  stages: IExtendedStage[];
+  event: IExtendedEvent;
+  stage?: string;
+  date?: string;
 }) => {
   const sessionsData = await fetchAllSessions({
     event: event.slug,
     stageId: stage ?? stages[0]?._id,
-  })
+  });
 
-  const dates = getSessionDays(sessionsData.sessions)
+  const dates = getSessionDays(sessionsData.sessions);
   const sessions = sessionsData.sessions.filter((session) => {
     if (date) {
-      if (date === 'all') return true
-      return isSameDay(session.start, Number(date))
+      if (date === 'all') return true;
+      return isSameDay(session.start, Number(date));
     }
-    return isSameDay(session.start, Number(dates[0]))
-  })
+    return isSameDay(session.start, Number(dates[0]));
+  });
 
-  if (!sessionsData.sessions.length) return null
+  if (!sessionsData.sessions.length) return null;
 
   return (
     <Card id="schedule" className="border-none shadow-none">
@@ -47,16 +42,12 @@ const ScheduleComponent = async ({
       </CardHeader>
       <CardContent className="">
         <div className="relative flex w-full flex-col">
-          <SessionList
-            date={date}
-            event={event}
-            sessions={sessions}
-          />
+          <SessionList date={date} event={event} sessions={sessions} />
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 export const ScheduleSkeleton = () => (
   <div className="animate-pulse border-white border-opacity-[0.04] bg-white bg-opacity-[0.04] text-white shadow lg:rounded-xl">
@@ -74,13 +65,11 @@ export const ScheduleSkeleton = () => (
         {Array(5)
           .fill(0)
           .map((_, index) => (
-            <div
-              key={index}
-              className="h-20 rounded bg-gray-300"></div>
+            <div key={index} className="h-20 rounded bg-gray-300"></div>
           ))}
       </div>
     </div>
   </div>
-)
+);
 
-export default ScheduleComponent
+export default ScheduleComponent;

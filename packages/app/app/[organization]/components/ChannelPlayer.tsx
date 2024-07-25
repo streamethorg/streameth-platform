@@ -1,31 +1,31 @@
-import VideoDownload from './VideoDownload'
-import ViewCounts from './ViewCounts'
-import EmbedButton from '@/components/misc/interact/EmbedButton'
-import ShareButton from '@/components/misc/interact/ShareButton'
-import PlayerWithControls from '@/components/ui/Player'
-import { CardTitle } from '@/components/ui/card'
-import Image from 'next/image'
-import React from 'react'
-import ChannelShareIcons from './ChannelShareIcons'
+import VideoDownload from './VideoDownload';
+import ViewCounts from './ViewCounts';
+import EmbedButton from '@/components/misc/interact/EmbedButton';
+import ShareButton from '@/components/misc/interact/ShareButton';
+import PlayerWithControls from '@/components/ui/Player';
+import { CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
+import React from 'react';
+import ChannelShareIcons from './ChannelShareIcons';
 import {
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
-} from '@/lib/types'
+} from '@/lib/types';
 
 const ChannelPlayer = ({
   libraryVideo,
   organization,
   activeStream,
 }: {
-  libraryVideo: IExtendedSession | null
-  organization: IExtendedOrganization
-  activeStream: IExtendedStage
+  libraryVideo: IExtendedSession | null;
+  organization: IExtendedOrganization;
+  activeStream: IExtendedStage;
 }) => {
   const getVideoUrl = () => {
-    if (libraryVideo) return libraryVideo?.videoUrl
-    return `https://livepeercdn.studio/hls/${activeStream.streamSettings?.playbackId}/index.m3u8`
-  }
+    if (libraryVideo) return libraryVideo?.videoUrl;
+    return `https://livepeercdn.studio/hls/${activeStream.streamSettings?.playbackId}/index.m3u8`;
+  };
 
   return (
     <div>
@@ -42,9 +42,7 @@ const ChannelPlayer = ({
       />
 
       <div className="p-4">
-        <CardTitle>
-          {libraryVideo?.name ?? activeStream.name}
-        </CardTitle>
+        <CardTitle>{libraryVideo?.name ?? activeStream.name}</CardTitle>
         <div className="mt-2 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex items-center gap-3">
             <div>
@@ -74,8 +72,7 @@ const ChannelPlayer = ({
                       className="text-muted-foreground"
                       playbackId={
                         libraryVideo?.playbackId ??
-                        (activeStream?.streamSettings
-                          ?.playbackId as string)
+                        (activeStream?.streamSettings?.playbackId as string)
                       }
                     />
                   ))}
@@ -98,16 +95,14 @@ const ChannelPlayer = ({
               className="bg-white"
             />
             {libraryVideo?.assetId && (
-              <VideoDownload
-                assetId={libraryVideo.assetId as string}
-              />
+              <VideoDownload assetId={libraryVideo.assetId as string} />
             )}
             <ChannelShareIcons organization={organization} />
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChannelPlayer
+export default ChannelPlayer;

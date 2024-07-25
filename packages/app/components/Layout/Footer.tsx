@@ -1,6 +1,6 @@
-import StreamethLogoGray from '@/lib/svg/StreamethLogoGray'
-import Image from 'next/image'
-import Link from 'next/link'
+import StreamethLogoGray from '@/lib/svg/StreamethLogoGray';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const items = {
   // about: {
@@ -23,10 +23,10 @@ const items = {
     item: 'Terms',
     href: '/terms',
   },
-}
+};
 
 const Footer = ({ active }: { active?: string }) => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
     <footer className="z-[99999999] mb-3 mt-5 flex flex-col items-center justify-center space-y-2 md:mb-5">
@@ -48,13 +48,14 @@ const Footer = ({ active }: { active?: string }) => {
             href={href}
             className={`mx-1 text-sm ${
               active === key ? 'font-bold' : 'font-light'
-            } text-gray-500 underline hover:no-underline`}>
+            } text-gray-500 underline hover:no-underline`}
+          >
             {item}
           </Link>
         ))}
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

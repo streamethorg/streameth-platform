@@ -1,16 +1,16 @@
-import { Card, CardTitle, CardFooter } from '@/components/ui/card'
-import { promises as fs } from 'fs'
-import Image from 'next/image'
-import Footer from '@/components/Layout/Footer'
-import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import { Card, CardTitle, CardFooter } from '@/components/ui/card';
+import { promises as fs } from 'fs';
+import Image from 'next/image';
+import Footer from '@/components/Layout/Footer';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const Privacy = async () => {
   const year = new Date().getFullYear()
   const file = await fs.readFile(
     process.cwd() + '/public/legal/privacy.md',
     'utf8'
-  )
+  );
 
   return (
     <div>
@@ -27,18 +27,17 @@ const Privacy = async () => {
             </CardTitle>
             <Markdown
               remarkPlugins={[remarkGfm]}
-              className="prose prose-sm my-5 max-w-full p-4">
+              className="prose prose-sm my-5 max-w-full p-4"
+            >
               {file}
             </Markdown>
           </div>
-          <CardFooter>
-            © {year} StreamETH International B.V.
-          </CardFooter>
+          <CardFooter>© {year} StreamETH International B.V.</CardFooter>
         </Card>
       </div>
       <Footer active={'privacy'} />
     </div>
-  )
-}
+  );
+};
 
 export default Privacy

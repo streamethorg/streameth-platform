@@ -4,14 +4,14 @@ import {
   CredenzaTitle,
   CredenzaHeader,
   CredenzaBody,
-} from '@/components/ui/crezenda'
+} from '@/components/ui/crezenda';
 
-import Link from 'next/link'
-import { IExtendedSpeaker, IExtendedSession } from '@/lib/types'
+import Link from 'next/link';
+import { IExtendedSpeaker, IExtendedSession } from '@/lib/types';
 
 interface Params {
-  speaker: IExtendedSpeaker
-  sessions?: IExtendedSession[]
+  speaker: IExtendedSpeaker;
+  sessions?: IExtendedSession[];
 }
 
 const SpeakerModal = ({ speaker }: Params) => {
@@ -21,9 +21,7 @@ const SpeakerModal = ({ speaker }: Params) => {
         <CredenzaTitle>{speaker?.name}</CredenzaTitle>
         <CredenzaDescription>
           {speaker?.twitter && (
-            <Link
-              target="_blank"
-              href={`https://x.com/${speaker?.twitter}`}>
+            <Link target="_blank" href={`https://x.com/${speaker?.twitter}`}>
               Follow on X
             </Link>
           )}
@@ -31,7 +29,7 @@ const SpeakerModal = ({ speaker }: Params) => {
       </CredenzaHeader>
       <CredenzaBody className="p-4">{speaker?.bio}</CredenzaBody>
     </CredenzaContent>
-  )
-}
+  );
+};
 
-export default SpeakerModal
+export default SpeakerModal;

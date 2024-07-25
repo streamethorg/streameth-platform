@@ -1,25 +1,23 @@
-'use client'
-import React, { useEffect } from 'react'
-import Scroll, { Element } from 'react-scroll'
-import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard'
-import { IExtendedEvent, IExtendedSession } from '@/lib/types'
+'use client';
+import React, { useEffect } from 'react';
+import Scroll, { Element } from 'react-scroll';
+import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard';
+import { IExtendedEvent, IExtendedSession } from '@/lib/types';
 interface Props {
-  event: IExtendedEvent
-  sessions: IExtendedSession[]
-  currentSession?: IExtendedSession
-  date?: string
+  event: IExtendedEvent;
+  sessions: IExtendedSession[];
+  currentSession?: IExtendedSession;
+  date?: string;
 }
 
-const scroll = Scroll.scroller
+const scroll = Scroll.scroller;
 
 function NoSessionComponent() {
   return (
     <div className="m-4 flex h-60 flex-col items-center justify-center p-4">
-      <p className="text-gray-600">
-        No sessions scheduled for this stage!
-      </p>
+      <p className="text-gray-600">No sessions scheduled for this stage!</p>
     </div>
-  )
+  );
 }
 
 export default function SessionList({
@@ -33,29 +31,29 @@ export default function SessionList({
       (session) =>
         new Date(session.start).toLocaleDateString() ==
         new Date().toLocaleDateString()
-    )
-  }
+    );
+  };
 
   const sortedSessions =
     getCurrDaySessions().length && !date
       ? getCurrDaySessions().sort((a, b) => {
           if (a.start < b.start) {
-            return -1
+            return -1;
           } else if (a.start > b.start) {
-            return 1
+            return 1;
           } else {
-            return 0
+            return 0;
           }
         })
       : sessions.slice().sort((a, b) => {
           if (a.start < b.start) {
-            return -1
+            return -1;
           } else if (a.start > b.start) {
-            return 1
+            return 1;
           } else {
-            return 0
+            return 0;
           }
-        })
+        });
 
   useEffect(() => {
     if (currentSession) {
@@ -64,18 +62,18 @@ export default function SessionList({
         smooth: true,
         offset: 0,
         containerId: 'sessionList',
-      })
+      });
     }
-  }, [currentSession])
+  }, [currentSession]);
 
   if (sessions === undefined || sessions.length === 0) {
-    return <NoSessionComponent />
+    return <NoSessionComponent />;
   }
 
   return (
     <div id="sessionList" className="grid grid-cols-3 gap-4">
       {sortedSessions.map((i, index) => {
-        if (i.name === 'Blank') return null
+        if (i.name === 'Blank') return null;
         return (
           <ScheduleCard
             key={index}
@@ -84,8 +82,8 @@ export default function SessionList({
             showTime
             speakers
           />
-        )
+        );
       })}
     </div>
-  )
+  );
 }

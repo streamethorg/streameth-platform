@@ -1,33 +1,29 @@
-'use client'
+'use client';
 
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import TextPlaceholder from '@/components/ui/text-placeholder'
-import { updateAssetAction } from '@/lib/actions/sessions'
-import { IExtendedSession } from '@/lib/types'
-import React, { useState } from 'react'
-import { toast } from 'sonner'
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import TextPlaceholder from '@/components/ui/text-placeholder';
+import { updateAssetAction } from '@/lib/actions/sessions';
+import { IExtendedSession } from '@/lib/types';
+import React, { useState } from 'react';
+import { toast } from 'sonner';
 
-const GetHashButton = ({
-  session,
-}: {
-  session: IExtendedSession
-}) => {
-  const [isGettingHash, setIsGetHash] = useState(false)
+const GetHashButton = ({ session }: { session: IExtendedSession }) => {
+  const [isGettingHash, setIsGetHash] = useState(false);
 
   const handleGetHash = async () => {
-    setIsGetHash(true)
+    setIsGetHash(true);
     await updateAssetAction(session)
       .then(() => {
-        toast.success('Hash generated')
+        toast.success('Hash generated');
       })
       .catch(() => {
-        toast.error('Failed to generate hash, try again later')
+        toast.error('Failed to generate hash, try again later');
       })
       .finally(() => {
-        setIsGetHash(false)
-      })
-  }
+        setIsGetHash(false);
+      });
+  };
   return (
     <div className="flex w-full flex-col">
       {session.ipfsURI ? (
@@ -40,12 +36,13 @@ const GetHashButton = ({
           loading={isGettingHash}
           variant="default"
           className="bg-[#0b3a53] text-white"
-          onClick={() => handleGetHash()}>
+          onClick={() => handleGetHash()}
+        >
           Publish to IPFS
         </Button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default GetHashButton
+export default GetHashButton;

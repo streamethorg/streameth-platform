@@ -1,13 +1,9 @@
-'use server'
+'use server';
 
-import EmptyFolder from '@/lib/svg/EmptyFolder'
-import UploadVideoDialog from './UploadVideoDialog'
+import EmptyFolder from '@/lib/svg/EmptyFolder';
+import UploadVideoDialog from './UploadVideoDialog';
 
-const EmptyLibrary = async ({
-  organizationId,
-}: {
-  organizationId: string
-}) => {
+const EmptyLibrary = async ({ organizationId }: { organizationId: string }) => {
   return (
     <div className="flex h-full flex-col items-center justify-center space-y-6 bg-white">
       <EmptyFolder />
@@ -19,7 +15,7 @@ const EmptyLibrary = async ({
       </div>
       <UploadVideoDialog organizationId={organizationId} />
     </div>
-  )
-}
+  );
+};
 
-export default EmptyLibrary
+export default EmptyLibrary;

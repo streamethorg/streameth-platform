@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {
   Select,
@@ -6,11 +6,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import useSearchParams from '@/lib/hooks/useSearchParams'
+} from '@/components/ui/select';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 
 const DateSelect = ({ dates }: { dates: number[] }) => {
-  const { searchParams, handleTermChange } = useSearchParams()
+  const { searchParams, handleTermChange } = useSearchParams();
 
   return (
     <div className="flex flex-col space-y-2">
@@ -24,7 +24,8 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
               value,
             },
           ])
-        }>
+        }
+      >
         <SelectTrigger className="rounded-lg border bg-white">
           <SelectValue placeholder="Date select" />
         </SelectTrigger>
@@ -37,7 +38,7 @@ const DateSelect = ({ dates }: { dates: number[] }) => {
         </SelectContent>
       </Select>
     </div>
-  )
-}
+  );
+};
 
-export default DateSelect
+export default DateSelect;

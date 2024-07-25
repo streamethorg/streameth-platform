@@ -1,34 +1,34 @@
-'use client'
-import React, { useEffect } from 'react'
-import { SignInUserButton } from '../misc/SignInUserButton'
+'use client';
+import React, { useEffect } from 'react';
+import { SignInUserButton } from '../misc/SignInUserButton';
 import {
   Card,
   CardHeader,
   CardDescription,
   CardTitle,
   CardContent,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 
-import LoginBackground from '@/public/login-background.png'
-import Image from 'next/image'
+import LoginBackground from '@/public/login-background.png';
+import Image from 'next/image';
 
-import { usePrivy } from '@privy-io/react-auth'
-import { toast } from 'sonner'
+import { usePrivy } from '@privy-io/react-auth';
+import { toast } from 'sonner';
 
-import Link from 'next/link'
-import SignInWithSocials from './SignInWithSocials'
+import Link from 'next/link';
+import SignInWithSocials from './SignInWithSocials';
 
 const AuthorizationMessage = () => {
-  const { ready, authenticated, login } = usePrivy()
+  const { ready, authenticated, login } = usePrivy();
 
   useEffect(() => {
     if (ready && !authenticated) {
-      login()
+      login();
     }
     if (authenticated) {
-      toast.message('Redirecting to Studio...')
+      toast.message('Redirecting to Studio...');
     }
-  }, [ready, authenticated])
+  }, [ready, authenticated]);
 
   return (
     <div className="flex h-screen w-screen flex-row">
@@ -76,7 +76,7 @@ const AuthorizationMessage = () => {
       </div>
       <div></div>
     </div>
-  )
-}
+  );
+};
 
-export default AuthorizationMessage
+export default AuthorizationMessage;

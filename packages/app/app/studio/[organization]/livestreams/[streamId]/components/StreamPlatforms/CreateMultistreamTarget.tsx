@@ -1,27 +1,27 @@
-'use client'
+'use client';
 
-import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { Plus } from 'lucide-react'
-import StreamPlatformGrid from './StreamPlatforms'
+} from '@/components/ui/dialog';
+import { Plus } from 'lucide-react';
+import StreamPlatformGrid from './StreamPlatforms';
 
 export const CreateMultistreamTarget = ({
   streamId,
   organizationId,
   btnName = 'Add',
 }: {
-  streamId: string
-  organizationId: string
-  btnName?: string
+  streamId: string;
+  organizationId: string;
+  btnName?: string;
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -44,5 +44,5 @@ export const CreateMultistreamTarget = ({
         />
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

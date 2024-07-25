@@ -1,9 +1,9 @@
-'use client'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
+'use client';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -11,27 +11,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogHeader,
-} from '@/components/ui/dialog'
-import { StageSchema } from '@/lib/schema'
-import { toast } from 'sonner'
-import { createStageAction } from '@/lib/actions/stages'
-import { Loader2 } from 'lucide-react'
-import { IExtendedEvent } from '@/lib/types'
+} from '@/components/ui/dialog';
+import { StageSchema } from '@/lib/schema';
+import { toast } from 'sonner';
+import { createStageAction } from '@/lib/actions/stages';
+import { Loader2 } from 'lucide-react';
+import { IExtendedEvent } from '@/lib/types';
 
-export default function CreateStageForm({
-  event,
-}: {
-  event: IExtendedEvent
-}) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+export default function CreateStageForm({ event }: { event: IExtendedEvent }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
     defaultValues: {
@@ -42,24 +38,24 @@ export default function CreateStageForm({
         streamId: '',
       },
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof StageSchema>) {
-    setIsLoading(true)
+    setIsLoading(true);
     createStageAction({
       stage: values,
     })
       .then(() => {
-        setIsOpen(false)
-        toast.success('Stage created')
+        setIsOpen(false);
+        toast.success('Stage created');
       })
       .catch(() => {
-        toast.error('Error creating stage')
+        toast.error('Error creating stage');
       })
       .finally(() => {
-        setIsLoading(false)
-        window.history.pushState(null, '', `?eventId=${event.slug}`)
-      })
+        setIsLoading(false);
+        window.history.pushState(null, '', `?eventId=${event.slug}`);
+      });
   }
 
   return (
@@ -72,9 +68,7 @@ export default function CreateStageForm({
           <DialogTitle>Create stage</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
               name="name"
@@ -126,5 +120,5 @@ export default function CreateStageForm({
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

@@ -1,28 +1,26 @@
-'use client'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
+'use client';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import DefaultThumbnail from '@/lib/svg/DefaultThumbnail';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 type ThumbnailProps = {
-  imageUrl?: string
-  fallBack?: string
-}
+  imageUrl?: string;
+  fallBack?: string;
+};
 
-export default function Thumbnail({
-  imageUrl,
-  fallBack,
-}: ThumbnailProps) {
-  const srcUrl = imageUrl || fallBack
+export default function Thumbnail({ imageUrl, fallBack }: ThumbnailProps) {
+  const srcUrl = imageUrl || fallBack;
 
   if (!srcUrl) {
     return (
       <AspectRatio
         ratio={16 / 9}
-        className="flex w-full items-center justify-center">
+        className="flex w-full items-center justify-center"
+      >
         <DefaultThumbnail />
       </AspectRatio>
-    )
+    );
   }
 
   return (
@@ -48,5 +46,5 @@ export default function Thumbnail({
         }}
       />
     </div>
-  )
+  );
 }

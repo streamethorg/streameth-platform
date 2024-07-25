@@ -1,21 +1,21 @@
-'use client'
-import { toast } from 'sonner'
+'use client';
+import { toast } from 'sonner';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { IExtendedSession } from '@/lib/types'
-import { useState } from 'react'
-import { updateSessionAction } from '@/lib/actions/sessions'
-import { ChevronDown, Earth, Lock, Loader2 } from 'lucide-react'
+} from '@/components/ui/dropdown-menu';
+import { IExtendedSession } from '@/lib/types';
+import { useState } from 'react';
+import { updateSessionAction } from '@/lib/actions/sessions';
+import { ChevronDown, Earth, Lock, Loader2 } from 'lucide-react';
 
 const PublishCell = ({ item }: { item: IExtendedSession }) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePublishment = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     updateSessionAction({
       session: {
         _id: item._id,
@@ -33,17 +33,17 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
     })
       .then(() => {
         if (item.published === true) {
-          toast.success('Succesfully made your asset private')
+          toast.success('Succesfully made your asset private');
         } else if (item.published === false) {
-          toast.success('Succesfully made your asset public')
+          toast.success('Succesfully made your asset public');
         }
-        setIsLoading(false)
+        setIsLoading(false);
       })
       .catch(() => {
-        setIsLoading(false)
-        toast.error('Something went wrong...')
-      })
-  }
+        setIsLoading(false);
+        toast.error('Something went wrong...');
+      });
+  };
 
   return (
     <div className="flex items-center justify-start space-x-2">
@@ -67,7 +67,8 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
         <DropdownMenuContent>
           <DropdownMenuItem
             className="cursor-pointer space-x-2"
-            onClick={() => handlePublishment()}>
+            onClick={() => handlePublishment()}
+          >
             {!item.published ? (
               <>
                 <Earth size={16} />
@@ -83,6 +84,6 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
-}
-export default PublishCell
+  );
+};
+export default PublishCell;

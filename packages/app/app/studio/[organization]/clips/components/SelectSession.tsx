@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import {
   Select,
   SelectGroup,
@@ -6,27 +6,27 @@ import {
   SelectTrigger,
   SelectContent,
   SelectItem,
-} from '@/components/ui/select'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { IExtendedStage } from '@/lib/types'
+} from '@/components/ui/select';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { IExtendedStage } from '@/lib/types';
 
 const SelectSession = ({
   stages,
   currentStageId,
 }: {
-  stages: IExtendedStage[]
-  currentStageId?: string
+  stages: IExtendedStage[];
+  currentStageId?: string;
 }) => {
-  const { handleTermChange } = useSearchParams()
+  const { handleTermChange } = useSearchParams();
 
   const options = stages.map((stage) => ({
     label: stage.name,
     value: stage._id as string,
-  }))
+  }));
 
   const currentStage = options.find(
     (option) => option.value === currentStageId
-  )
+  );
 
   return (
     <div className="flex w-full flex-col space-y-2">
@@ -40,7 +40,8 @@ const SelectSession = ({
               value,
             },
           ])
-        }>
+        }
+      >
         <SelectTrigger className="bg-white">
           <SelectValue placeholder="Select a livestream" />
         </SelectTrigger>
@@ -53,7 +54,7 @@ const SelectSession = ({
         </SelectContent>
       </Select>
     </div>
-  )
-}
+  );
+};
 
-export default SelectSession
+export default SelectSession;
