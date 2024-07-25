@@ -52,7 +52,7 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
           </Button>
           <Button
             onClick={() => {
-              onChange(null);
+              onChange('');
               setPreview('');
               setOpen(false);
             }}
@@ -71,8 +71,8 @@ interface ImageUploadProps {
   maxSize?: number;
   placeholder?: string;
   aspectRatio: number;
-  onChange: (files: string | null) => void;
-  value: string | null | undefined;
+  onChange: (value: string) => void;
+  value: string | undefined;
   path: string;
   className?: string;
   requireExactSize?: { width: number; height: number };
@@ -185,7 +185,13 @@ export default function ImageUpload({
         </div>
       ) : preview ? (
         <div className="relative h-full w-full">
-          <ConfirmImageDeletion onChange={onChange} setPreview={setPreview} />
+          <ConfirmImageDeletion
+            onChange={() => {
+              onChange('');
+              setPreview('');
+            }}
+            setPreview={setPreview}
+          />
           <Image src={preview} alt="preview" fill className={imageClasses} />
         </div>
       ) : (
@@ -207,25 +213,31 @@ export default function ImageUpload({
         placeholder="Upload image"
         className="hidden"
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          const { files, displayUrl } = getImageData(event);
+          if (event.target.files && event.target.files.length > 0) {
+            const { files, displayUrl } = getImageData(event);
 
-          setPreview(displayUrl);
-          toast.promise(
-            onSubmit(files[0]).then((uploadedPath) => {
-              onChange(uploadedPath);
-              return 'Image uploaded successfully';
-            }),
-            {
-              loading: 'Uploading image',
-              success: (message) => {
-                return message;
-              },
-              error: (error: Error) => {
-                setPreview('');
-                return error.message || 'Unknown error';
-              },
-            }
-          );
+            setPreview(displayUrl);
+            toast.promise(
+              onSubmit(files[0]).then((uploadedPath) => {
+                onChange(uploadedPath);
+                return 'Image uploaded successfully';
+              }),
+              {
+                loading: 'Uploading image',
+                success: (message) => {
+                  return message;
+                },
+                error: (error: Error) => {
+                  setPreview('');
+                  onChange(''); // Set to empty string on error
+                  return error.message || 'Unknown error';
+                },
+              }
+            );
+          } else {
+            setPreview('');
+            onChange(''); // Set to empty string when no file is selected
+          }
         }}
       />
       {error && (
