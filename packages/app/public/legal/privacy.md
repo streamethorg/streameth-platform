@@ -2,20 +2,14 @@
 
 _Last updated July 25, 2024_
 
-StreamETH International B.V. is responsible for processing personal data as outlined in this privacy statement.
+This privacy notice for StreamETH International B.V. ('we', 'us', or 'our'), describes how and why we might collect, store, use, and/or share ('process') your information when you use our services ('Services'), such as when you visit our website at streameth.org, or any website of ours that links to this privacy policy 
+
+Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at support@streameth.org.
+
+
+## TL;DR 
 
 StreamETH International B.V. is steadfast in its commitment to safeguarding privacy, embodying the principles of _"Privacy by Design"_ and _"Privacy by Default"_ of article 25 of the GDPR (AVG) at the core of our operations.
-
-This privacy notice for StreamETH International B.V. ('we', 'us', or 'our'), describes how and why we might collect, store, use, and/or share ('process') your information when you use our services ('Services'), such as when you:
-
-- Visit our website at streameth.org, or any website of ours that links to this privacy policy 
-
-Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at xander@streameth.org.
-
-
-## SUMMARY OF KEY POINTS
-
-This summary provides key points from our privacy notice, but you can find out more details about any of these topics by clicking the link following each key point or by using our table of contents below to find the section you are looking for.
 
 What personal information do we process? When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use. Learn more about personal information you disclose to us.
 
@@ -35,7 +29,6 @@ How do you exercise your rights? The easiest way to exercise your rights is by v
 
 Want to learn more about what we do with any information we collect? Review the privacy notice in full.
 
-
 ## TABLE OF CONTENTS
 
 1. WHAT INFORMATION DO WE COLLECT?
@@ -49,18 +42,14 @@ Want to learn more about what we do with any information we collect? Review the 
 9. HOW DO WE KEEP YOUR INFORMATION SAFE?
 10. DO WE COLLECT INFORMATION FROM MINORS?
 11. WHAT ARE YOUR PRIVACY RIGHTS?
-12. CONTROLS FOR DO-NOT-TRACK FEATURES
-13. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
-14. DO WE MAKE UPDATES TO THIS NOTICE?
-15. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
-16. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
+12. DO WE MAKE UPDATES TO THIS NOTICE?
+13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
+14. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
 
 
 ## 1. WHAT INFORMATION DO WE COLLECT?
 
-Personal information you disclose to us
-
-In Short: We collect personal information that you provide to us.
+**In Short**: We collect personal information that you provide to us.
 
 We collect personal information that you voluntarily provide to us when you register on the Services, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.
 
@@ -79,7 +68,7 @@ Social Media Login Data. We may provide you with the option to register with us 
 
 ### Information automatically collected
 
-In Short: Some information — such as your browser and device characteristics — is collected automatically when you visit our Services.
+**In Short**: Some information — such as your browser and device characteristics — is collected automatically when you visit our Services.
 
 We automatically collect certain information when you visit, use, or navigate the Services. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as browser and device characteristics, operating system, referring URLs, country, information about how and when you use our Services, and other technical information. This information is primarily needed to maintain the security and operation of our Services, and for our internal analytics and reporting purposes.
 
@@ -89,7 +78,7 @@ The information we collect includes:
 
 - Device Data. We collect device data such as information about your computer, phone, tablet, or other device you use to access the Services. Depending on the device used, this device data may include information such as your device and application identification numbers, browser type, hardware model and operating system.
 
-Google API
+### Google API
 
 Our use of information received from Google APIs will adhere to Google API Services User Data Policy, including the [Limited Use](https://developers.google.com/terms/api-services-user-data-policy) requirements.
 
@@ -182,7 +171,7 @@ We have implemented appropriate and reasonable technical and organisational secu
 
 **In Short**: We do not knowingly collect data from or market to children under 18 years of age.
 
-We do not knowingly collect, solicit data from, or market to children under 18 years of age, nor do we knowingly sell such personal information. By using the Services, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent’s use of the Services. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at xander@streameth.org.
+We do not knowingly collect, solicit data from, or market to children under 18 years of age, nor do we knowingly sell such personal information. By using the Services, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent’s use of the Services. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at support@streameth.org.
 
 ## 11. WHAT ARE YOUR PRIVACY RIGHTS?
 
@@ -200,29 +189,25 @@ Withdrawing your consent: If we are relying on your consent to process your pers
 
 However, please note that this will not affect the lawfulness of the processing before its withdrawal nor, when applicable law allows, will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.
 
-Account Information
+### Account Information
 
-If you would at any time like to review or change the information in your account or terminate your account, you can:
-
-- Contact us using the contact information provided.
+If you would at any time like to review or change the information in your account or terminate your account, you can contact us using the contact information provided.
 
 Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, we may retain some information in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our legal terms and/or comply with applicable legal requirements.
 
-Cookies and similar technologies: Most Web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to remove cookies or reject cookies, this could affect certain features or services of our Services. For further information, please see our Cookie Notice: streameth.org/cookies.
+If you have questions or comments about your privacy rights, you may email us at support@streameth.org.
 
-If you have questions or comments about your privacy rights, you may email us at xander@streameth.org.
+## 12. DO WE MAKE UPDATES TO THIS NOTICE?
 
-## 13. DO WE MAKE UPDATES TO THIS NOTICE?
-
-In Short: Yes, we will update this notice as necessary to stay compliant with relevant laws.
+**In Short**: Yes, we will update this notice as necessary to stay compliant with relevant laws.
 
 We may update this privacy notice from time to time. The updated version will be indicated by an updated 'Revised' date at the top of this privacy notice. If we make material changes to this privacy notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this privacy notice frequently to be informed of how we are protecting your information.
 
-## 14. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
+## 13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
 
-If you have questions or comments about this notice, you may email us at xander@streameth.org.
+If you have questions or comments about this notice, you may email us at support@streameth.org.
 
-## 15. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
+## 14. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
 You have the right to view, correct, or delete your personal data. You have the right to withdraw your consent to data processing or to object to the processing of your personal data by us, and you have the right to data portability. This means you can request us to send the personal data we have about you in a computer file to you or another organisation mentioned by you.
 
 StreamETH International B.V. would also like to point out that you have the option to file a complaint with the national supervisory authority, the Dutch Data Protection Authority. You can do so via the following link: https://autoriteitpersoonsgegevens.nl/nl/contact-met-de-autoriteit-persoonsgegevens/tip-ons
