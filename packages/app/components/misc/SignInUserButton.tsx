@@ -4,7 +4,7 @@ import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth'
 import { deleteSession, storeSession } from '@/lib/actions/auth'
 import { apiUrl } from '@/lib/utils/utils'
 import { Loader2 } from 'lucide-react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface SignInUserButtonProps {
   className?: string
@@ -17,6 +17,13 @@ export const SignInUserButton = ({
 }: SignInUserButtonProps) => {
   const { ready, authenticated } = usePrivy()
   const [isLoading, setIsLoading] = useState(false)
+
+  const privyRefreshToken = localStorage.getItem(
+    'privy:refresh_token'
+  )
+  const parsePrivyRefreshToken = privyRefreshToken
+    ? JSON.parse(privyRefreshToken)
+    : null
 
   const getSession = async () => {
     const privyToken = localStorage.getItem('privy:token')
@@ -35,6 +42,11 @@ export const SignInUserButton = ({
       address: resData?.data?.user?.walletAddress,
     })
   }
+
+  useEffect(() => {
+    if (!parsePrivyRefreshToken) logout()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsePrivyRefreshToken])
 
   const { login } = useLogin({
     onComplete: () => {
