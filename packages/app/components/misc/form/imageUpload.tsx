@@ -124,8 +124,8 @@ export default function ImageUpload({
     })
   }
 
-  const onSubmit = async (file: File) => {
-    if (!file) return
+  const onSubmit = async (file: File): Promise<string> => {
+    if (!file) return ''
     setIsUploading(true)
     try {
       const isValidSize = await validateImage(file)
@@ -152,12 +152,11 @@ export default function ImageUpload({
       if (!res.ok) {
         throw new Error(await res.text())
       }
-      onChange(
-        getImageUrl(
-          '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
-        )
+      const uploadedPath = getImageUrl(
+        '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
       )
-      return 'Image uploaded successfully'
+      setPreview(uploadedPath)
+      return uploadedPath
     } catch (e: any) {
       console.error(e)
       setPreview('')
@@ -220,18 +219,22 @@ export default function ImageUpload({
           const { files, displayUrl } = getImageData(event)
 
           setPreview(displayUrl)
-          toast.promise(onSubmit(files[0]), {
-            loading: 'Uploading image',
-            success: (message) => {
-              toast.success(message as string)
+          toast.promise(
+            onSubmit(files[0]).then((uploadedPath) => {
+              onChange(uploadedPath)
               return 'Image uploaded successfully'
-            },
-            error: (error: Error) => {
-              toast.error(error.message)
-              setPreview('')
-              return error.message || 'Unknown error'
-            },
-          })
+            }),
+            {
+              loading: 'Uploading image',
+              success: (message) => {
+                return message
+              },
+              error: (error: Error) => {
+                setPreview('')
+                return error.message || 'Unknown error'
+              },
+            }
+          )
         }}
       />
       {error && (
