@@ -27,17 +27,17 @@ import { useRouter } from 'next/navigation';
 import { IExtendedOrganization } from '@/lib/types';
 
 interface CreateOrganizationFormProps {
-  organization?: IExtendedOrganization
-  disableName?: boolean
+  organization?: IExtendedOrganization;
+  disableName?: boolean;
 }
 
 export default function CreateOrganizationForm({
   organization,
   disableName = false,
 }: CreateOrganizationFormProps) {
-  const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
@@ -91,9 +91,7 @@ export default function CreateOrganizationForm({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="relative">
           <FormField
             control={form.control}

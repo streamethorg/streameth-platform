@@ -17,18 +17,18 @@ import {
 import { Button } from '@/components/ui/button';
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
-  const dataTransfer = new DataTransfer()
+  const dataTransfer = new DataTransfer();
   Array.from(event.target.files!).forEach((image) =>
     dataTransfer.items.add(image)
-  )
-  const files = dataTransfer.files
-  const displayUrl = URL.createObjectURL(event.target.files![0])
-  return { files, displayUrl }
+  );
+  const files = dataTransfer.files;
+  const displayUrl = URL.createObjectURL(event.target.files![0]);
+  return { files, displayUrl };
 }
 
 interface ConfirmImageDeletionProps {
-  onChange: (files: string | null) => void
-  setPreview: React.Dispatch<React.SetStateAction<string>>
+  onChange: (files: string | null) => void;
+  setPreview: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
@@ -52,9 +52,9 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
           </Button>
           <Button
             onClick={() => {
-              onChange(null)
-              setPreview('')
-              setOpen(false)
+              onChange(null);
+              setPreview('');
+              setOpen(false);
             }}
             variant="destructive"
           >
@@ -67,16 +67,16 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
 };
 
 interface ImageUploadProps {
-  id?: string
-  maxSize?: number
-  placeholder?: string
-  aspectRatio: number
-  onChange: (files: string | null) => void
-  value: string | null | undefined
-  path: string
-  className?: string
-  requireExactSize?: { width: number; height: number }
-  isProfileImage?: boolean
+  id?: string;
+  maxSize?: number;
+  placeholder?: string;
+  aspectRatio: number;
+  onChange: (files: string | null) => void;
+  value: string | null | undefined;
+  path: string;
+  className?: string;
+  requireExactSize?: { width: number; height: number };
+  isProfileImage?: boolean;
 }
 
 export default function ImageUpload({
@@ -93,13 +93,13 @@ export default function ImageUpload({
 }: ImageUploadProps) {
   const [preview, setPreview] = useState<string>(
     value ? getImageUrl('/' + path + '/' + value) : ''
-  )
-  const [isUploading, setIsUploading] = useState<boolean>(false)
-  const [error, setError] = useState<string | null>(null)
+  );
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const validateImage = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
-      const img = document.createElement('img')
+      const img = document.createElement('img');
       img.onload = () => {
         if (requireExactSize) {
           if (
@@ -108,35 +108,35 @@ export default function ImageUpload({
           ) {
             setError(
               `Image must be exactly ${requireExactSize.width}x${requireExactSize.height} pixels`
-            )
-            resolve(false)
+            );
+            resolve(false);
           } else {
-            setError(null)
-            resolve(true)
+            setError(null);
+            resolve(true);
           }
         } else {
-          setError(null)
-          resolve(true)
+          setError(null);
+          resolve(true);
         }
-      }
-      img.src = URL.createObjectURL(file)
-    })
-  }
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  };
 
   const onSubmit = async (file: File): Promise<string> => {
-    if (!file) return ''
-    setIsUploading(true)
+    if (!file) return '';
+    setIsUploading(true);
     try {
-      const isValidSize = await validateImage(file)
+      const isValidSize = await validateImage(file);
       if (!isValidSize) {
-        throw new Error(error || 'Invalid image size')
+        throw new Error(error || 'Invalid image size');
       }
 
       if (file.size > maxSize) {
         throw new Error('File size is too big');
       }
 
-      const data = new FormData()
+      const data = new FormData();
       data.set(
         'file',
         new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
@@ -153,13 +153,13 @@ export default function ImageUpload({
       }
       const uploadedPath = getImageUrl(
         '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
-      )
-      setPreview(uploadedPath)
-      return uploadedPath
+      );
+      setPreview(uploadedPath);
+      return uploadedPath;
     } catch (e: any) {
-      console.error(e)
-      setPreview('')
-      throw e
+      console.error(e);
+      setPreview('');
+      throw e;
     } finally {
       setIsUploading(false);
     }
@@ -167,15 +167,15 @@ export default function ImageUpload({
 
   const containerClasses = isProfileImage
     ? 'relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1'
-    : `${className} relative w-full h-40`
+    : `${className} relative w-full h-40`;
 
   const imageClasses = isProfileImage
     ? 'm-auto h-full w-full rounded-full bg-neutrals-300 text-white object-cover'
-    : 'w-full h-full object-cover'
+    : 'w-full h-full object-cover';
 
   const placeholderClasses = isProfileImage
     ? 'flex cursor-pointer flex-col items-center justify-center w-full h-full rounded-full border border-dotted bg-secondary'
-    : 'flex cursor-pointer flex-col items-center justify-center w-full h-full border border-dotted bg-secondary'
+    : 'flex cursor-pointer flex-col items-center justify-center w-full h-full border border-dotted bg-secondary';
 
   return (
     <div className={containerClasses}>
@@ -185,16 +185,8 @@ export default function ImageUpload({
         </div>
       ) : preview ? (
         <div className="relative h-full w-full">
-          <ConfirmImageDeletion
-            onChange={onChange}
-            setPreview={setPreview}
-          />
-          <Image
-            src={preview}
-            alt="preview"
-            fill
-            className={imageClasses}
-          />
+          <ConfirmImageDeletion onChange={onChange} setPreview={setPreview} />
+          <Image src={preview} alt="preview" fill className={imageClasses} />
         </div>
       ) : (
         <Label htmlFor={id} className={placeholderClasses}>
@@ -215,25 +207,25 @@ export default function ImageUpload({
         placeholder="Upload image"
         className="hidden"
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          const { files, displayUrl } = getImageData(event)
+          const { files, displayUrl } = getImageData(event);
 
-          setPreview(displayUrl)
+          setPreview(displayUrl);
           toast.promise(
             onSubmit(files[0]).then((uploadedPath) => {
-              onChange(uploadedPath)
-              return 'Image uploaded successfully'
+              onChange(uploadedPath);
+              return 'Image uploaded successfully';
             }),
             {
               loading: 'Uploading image',
               success: (message) => {
-                return message
+                return message;
               },
               error: (error: Error) => {
-                setPreview('')
-                return error.message || 'Unknown error'
+                setPreview('');
+                return error.message || 'Unknown error';
               },
             }
-          )
+          );
         }}
       />
       {error && (
@@ -242,5 +234,5 @@ export default function ImageUpload({
         </p>
       )}
     </div>
-  )
+  );
 }
