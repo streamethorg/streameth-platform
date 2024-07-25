@@ -11,10 +11,10 @@ const items = {
   //   item: 'Contact',
   //   href: 'https://info.streameth.org/#team',
   // },
-  // docs: {
-  //   item: 'Docs',
-  //   href: 'https://streameth.notion.site/a473a629420b4942904c851155a18c9b?v=4a29b97e7fd94bbbb38269cb808d3ac4',
-  // },
+  data_request: {
+    item: 'Data Request',
+    href: '/data-request',
+  },
   privacy: {
     item: 'Privacy',
     href: '/privacy',
