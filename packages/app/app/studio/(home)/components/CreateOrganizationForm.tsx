@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,30 +12,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { organizationSchema } from '@/lib/schema'
-import { toast } from 'sonner'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { organizationSchema } from '@/lib/schema';
+import { toast } from 'sonner';
 import {
   createOrganizationAction,
   updateOrganizationAction,
-} from '@/lib/actions/organizations'
-import { Loader2 } from 'lucide-react'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import { useRouter } from 'next/navigation'
-import { IExtendedOrganization } from '@/lib/types'
+} from '@/lib/actions/organizations';
+import { Loader2 } from 'lucide-react';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import { useRouter } from 'next/navigation';
+import { IExtendedOrganization } from '@/lib/types';
 
 export default function CreateOrganizationForm({
   organization,
   disableName = false,
 }: {
-  organization?: IExtendedOrganization
-  disableName?: boolean
+  organization?: IExtendedOrganization;
+  disableName?: boolean;
 }) {
-  const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
@@ -47,10 +47,10 @@ export default function CreateOrganizationForm({
       description: organization?.description || '',
       // url: organization?.url || '',
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof organizationSchema>) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     if (organization) {
       updateOrganizationAction({
@@ -60,39 +60,37 @@ export default function CreateOrganizationForm({
         },
       })
         .then(() => {
-          setIsOpen(false)
-          toast.success('Organization updated')
+          setIsOpen(false);
+          toast.success('Organization updated');
         })
         .catch(() => {
-          toast.error('Error updating organization')
+          toast.error('Error updating organization');
         })
         .finally(() => {
-          setIsLoading(false)
-        })
-      return
+          setIsLoading(false);
+        });
+      return;
     }
 
     createOrganizationAction({
       organization: values,
     })
       .then((response) => {
-        setIsOpen(false)
-        toast.success('Organization created')
-        router.push(`/studio/${response.slug}`)
+        setIsOpen(false);
+        toast.success('Organization created');
+        router.push(`/studio/${response.slug}`);
       })
       .catch(() => {
-        toast.error('Error creating organization')
+        toast.error('Error creating organization');
       })
       .finally(() => {
-        setIsLoading(false)
-      })
+        setIsLoading(false);
+      });
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <FormField
             control={form.control}
@@ -142,11 +140,7 @@ export default function CreateOrganizationForm({
                 Organization name
               </FormLabel>
               <FormControl>
-                <Input
-                  disabled={disableName}
-                  placeholder="Name"
-                  {...field}
-                />
+                <Input disabled={disableName} placeholder="Name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -202,20 +196,17 @@ export default function CreateOrganizationForm({
             <Button
               type="button"
               onClick={() => {
-                router.back()
+                router.back();
               }}
-              variant={'outline'}>
+              variant={'outline'}
+            >
               Go back
             </Button>
           )}
-          <Button
-            type="submit"
-            className="ml-auto"
-            variant={'primary'}>
+          <Button type="submit" className="ml-auto" variant={'primary'}>
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                Please wait
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
               </>
             ) : organization ? (
               'Update'
@@ -226,5 +217,5 @@ export default function CreateOrganizationForm({
         </div>
       </form>
     </Form>
-  )
+  );
 }

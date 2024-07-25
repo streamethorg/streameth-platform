@@ -1,5 +1,5 @@
-import { type MutableRefObject } from 'react'
-import { Upload } from 'tus-js-client'
+import { type MutableRefObject } from 'react';
+import { Upload } from 'tus-js-client';
 
 const uploadVideo = (
   video: File,
@@ -19,27 +19,25 @@ const uploadVideo = (
       filetype: video.type,
     },
     onError: (error) => {
-      console.log('An error occurred:', error)
+      console.log('An error occurred:', error);
     },
     onProgress: (bytesUploaded, bytesTotal) => {
-      const percentage = Math.round(
-        (bytesUploaded / bytesTotal) * 100
-      )
-      onProgress(percentage)
+      const percentage = Math.round((bytesUploaded / bytesTotal) * 100);
+      onProgress(percentage);
     },
     onSuccess: () => {
-      console.log('Upload successful!')
-      onSuccess()
+      console.log('Upload successful!');
+      onSuccess();
     },
-  })
+  });
 
-  abortControllerRef.current = new AbortController()
+  abortControllerRef.current = new AbortController();
   abortControllerRef.current.signal.addEventListener('abort', () => {
-    console.log('Aborting upload')
-    upload.abort()
-  })
+    console.log('Aborting upload');
+    upload.abort();
+  });
 
-  upload.start()
-}
+  upload.start();
+};
 
-export default uploadVideo
+export default uploadVideo;

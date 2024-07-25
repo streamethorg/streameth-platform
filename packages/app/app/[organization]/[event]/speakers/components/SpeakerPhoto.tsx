@@ -1,35 +1,35 @@
-import Image from 'next/image'
-import makeBlockie from 'ethereum-blockies-base64'
-import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
+import Image from 'next/image';
+import makeBlockie from 'ethereum-blockies-base64';
+import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface';
 
 function getFileIdFromUrl(url: string) {
-  const regex = /\/file\/d\/([^\/]+)\//
-  const match = url && url?.match(regex)
+  const regex = /\/file\/d\/([^\/]+)\//;
+  const match = url && url?.match(regex);
   if (match && match[1]) {
-    return `https://drive.google.com/uc?id=${match[1]}`
+    return `https://drive.google.com/uc?id=${match[1]}`;
   }
   // Return the original URL if no match is found
-  return url
+  return url;
 }
 
 function CreateBlockie(username: string) {
-  return makeBlockie(username)
+  return makeBlockie(username);
 }
 
 const SpeakerPhoto = ({
   speaker,
   size,
 }: {
-  speaker: ISpeakerModel
-  size?: 'sm' | 'md' | 'lg'
+  speaker: ISpeakerModel;
+  size?: 'sm' | 'md' | 'lg';
 }) => {
-  let sizeString
+  let sizeString;
   if (size === 'sm') {
-    sizeString = 'h-8 w-8 '
+    sizeString = 'h-8 w-8 ';
   } else if (size === 'md') {
-    sizeString = 'h-12 w-12'
+    sizeString = 'h-12 w-12';
   } else {
-    sizeString = 'w-full aspect-square rounded'
+    sizeString = 'w-full aspect-square rounded';
   }
 
   return (
@@ -47,7 +47,7 @@ const SpeakerPhoto = ({
         style={{ objectFit: 'cover' }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default SpeakerPhoto
+export default SpeakerPhoto;

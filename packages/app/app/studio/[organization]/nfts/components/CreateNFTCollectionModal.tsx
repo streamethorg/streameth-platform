@@ -1,19 +1,19 @@
-'use client'
-import { Button } from '@/components/ui/button'
+'use client';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { CheckCircle2 } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+} from '@/components/ui/dialog';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 const CreateNFTCollectionModal = ({ type }: { type: string }) => {
-  const { handleTermChange } = useSearchParams()
+  const { handleTermChange } = useSearchParams();
 
   return (
     <Dialog>
@@ -27,12 +27,11 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
 
         <div className="flex items-center gap-5">
           <div
-            onClick={() =>
-              handleTermChange([{ key: 'type', value: 'single' }])
-            }
+            onClick={() => handleTermChange([{ key: 'type', value: 'single' }])}
             className={`relative flex cursor-pointer flex-col rounded-xl border border-grey p-3 hover:bg-secondary ${
               type == 'single' ? 'bg-secondary' : 'bg-none'
-            }`}>
+            }`}
+          >
             {type == 'single' && (
               <div className="absolute end-0 px-2">
                 <CheckCircle2 className="h-10 w-10 fill-success text-white" />
@@ -49,8 +48,8 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             </div>
             <p className="font-medium">Single NFT</p>
             <p className="text-sm text-muted-foreground">
-              Select single drop if you want to deploy one particular
-              media into an NFT
+              Select single drop if you want to deploy one particular media into
+              an NFT
             </p>
           </div>
 
@@ -60,7 +59,8 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             }
             className={`relative flex cursor-pointer flex-col rounded-xl border border-grey p-3 hover:bg-secondary ${
               type == 'multiple' ? 'bg-secondary' : 'bg-none'
-            }`}>
+            }`}
+          >
             {type == 'multiple' && (
               <div className="absolute end-0 px-2">
                 <CheckCircle2 className="h-10 w-10 fill-success text-white" />
@@ -77,8 +77,8 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             </div>
             <p className="font-medium">NFT Collection</p>
             <p className="text-sm text-muted-foreground">
-              Select drop collection if you want to deploy multiple
-              media into an NFT collection
+              Select drop collection if you want to deploy multiple media into
+              an NFT collection
             </p>
           </div>
         </div>
@@ -88,14 +88,15 @@ const CreateNFTCollectionModal = ({ type }: { type: string }) => {
             <Button
               disabled={!type}
               className="w-full"
-              variant="outlinePrimary">
+              variant="outlinePrimary"
+            >
               Create NFT
             </Button>
           </Link>
         </div>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default CreateNFTCollectionModal
+export default CreateNFTCollectionModal;

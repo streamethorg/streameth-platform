@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -9,38 +9,38 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from '@/components/ui/dialog'
-import { deleteSessionAction } from '@/lib/actions/sessions'
-import { IExtendedSession } from '@/lib/types'
-import { Trash2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { ReactNode, useState } from 'react'
+} from '@/components/ui/dialog';
+import { deleteSessionAction } from '@/lib/actions/sessions';
+import { IExtendedSession } from '@/lib/types';
+import { Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ReactNode, useState } from 'react';
 
 const DeleteAsset = ({
   session,
   href,
   TriggerComponent,
 }: {
-  session: IExtendedSession
-  href: string | 'refresh'
-  TriggerComponent: ReactNode
+  session: IExtendedSession;
+  href: string | 'refresh';
+  TriggerComponent: ReactNode;
 }) => {
-  const router = useRouter()
-  const [loading, setLoading] = useState(false)
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
-    setLoading(true)
+    setLoading(true);
     await deleteSessionAction({
       organizationId: session.organizationId as string,
       sessionId: session._id,
-    })
-    setLoading(false)
+    });
+    setLoading(false);
 
     if (href === 'refresh') {
-      router.refresh()
+      router.refresh();
     }
-    router.push(href)
-  }
+    router.push(href);
+  };
 
   return (
     <Dialog>
@@ -59,13 +59,14 @@ const DeleteAsset = ({
           <Button
             loading={loading}
             onClick={() => handleDelete()}
-            variant={'destructive'}>
+            variant={'destructive'}
+          >
             Delete asset
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default DeleteAsset
+export default DeleteAsset;

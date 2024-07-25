@@ -1,29 +1,29 @@
-import React from 'react'
-import CreateNFTForm from './CreateNFTForm'
-import { fetchAllSessions } from '@/lib/data'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import { INFTSessions } from '@/lib/types'
-import { fetchOrganizationStages } from '@/lib/services/stageService'
-import { NftCollectionType } from 'streameth-new-server/src/interfaces/nft.collection.interface'
+import React from 'react';
+import CreateNFTForm from './CreateNFTForm';
+import { fetchAllSessions } from '@/lib/data';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { INFTSessions } from '@/lib/types';
+import { fetchOrganizationStages } from '@/lib/services/stageService';
+import { NftCollectionType } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 
 const CreateNFTModal = async ({
   organization,
   type,
 }: {
-  organization: string
-  type: string
+  organization: string;
+  type: string;
 }) => {
   const organizationId = (
     await fetchOrganization({ organizationSlug: organization })
-  )?._id
+  )?._id;
   const videos = (
     await fetchAllSessions({
       organizationSlug: organization,
       onlyVideos: true,
     })
-  ).sessions
-  if (!organizationId || !type) return null
-  const stages = await fetchOrganizationStages({ organizationId })
+  ).sessions;
+  if (!organizationId || !type) return null;
+  const stages = await fetchOrganizationStages({ organizationId });
 
   return (
     <CreateNFTForm
@@ -33,7 +33,7 @@ const CreateNFTModal = async ({
       organizationSlug={organization}
       type={type as NftCollectionType}
     />
-  )
-}
+  );
+};
 
-export default CreateNFTModal
+export default CreateNFTModal;

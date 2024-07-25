@@ -1,9 +1,9 @@
-'use client'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
+'use client';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -11,47 +11,47 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogHeader,
-} from '@/components/ui/dialog'
-import { sessionSchema } from '@/lib/schema'
-import { toast } from 'sonner'
-import { createSessionAction } from '@/lib/actions/sessions'
-import { Loader2 } from 'lucide-react'
-import { useAccount } from 'wagmi'
-import { getFormSubmitStatus } from '@/lib/utils/utils'
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
+} from '@/components/ui/dialog';
+import { sessionSchema } from '@/lib/schema';
+import { toast } from 'sonner';
+import { createSessionAction } from '@/lib/actions/sessions';
+import { Loader2 } from 'lucide-react';
+import { useAccount } from 'wagmi';
+import { getFormSubmitStatus } from '@/lib/utils/utils';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 
 export default function CreateSession({
   eventId,
   organizationId,
   stageId,
 }: {
-  eventId: string
-  organizationId: string
-  stageId: string
+  eventId: string;
+  organizationId: string;
+  stageId: string;
 }) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const { address } = useAccount()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { address } = useAccount();
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
     defaultValues: {
       name: '',
       description: '',
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof sessionSchema>) {
-    setIsLoading(true)
+    setIsLoading(true);
     if (!address) {
-      toast.error('No wallet address found')
-      return
+      toast.error('No wallet address found');
+      return;
     }
     createSessionAction({
       session: {
@@ -66,15 +66,15 @@ export default function CreateSession({
       },
     })
       .then(() => {
-        setIsOpen(false)
-        toast.success('Session created')
+        setIsOpen(false);
+        toast.success('Session created');
       })
       .catch(() => {
-        toast.error('Error creating Session')
+        toast.error('Error creating Session');
       })
       .finally(() => {
-        setIsLoading(false)
-      })
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -89,10 +89,11 @@ export default function CreateSession({
         <Form {...form}>
           <form
             onError={(errors) => {
-              alert(errors)
+              alert(errors);
             }}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8">
+            className="space-y-8"
+          >
             <FormField
               control={form.control}
               name="name"
@@ -119,13 +120,10 @@ export default function CreateSession({
                 </FormItem>
               )}
             />
-            <Button
-              disabled={getFormSubmitStatus(form)}
-              type="submit">
+            <Button disabled={getFormSubmitStatus(form)} type="submit">
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                  Please wait
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                 </>
               ) : (
                 'Create'
@@ -135,5 +133,5 @@ export default function CreateSession({
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

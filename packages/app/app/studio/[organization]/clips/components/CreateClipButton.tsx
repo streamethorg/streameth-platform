@@ -1,38 +1,26 @@
-'use client'
-import React from 'react'
-import {
-  createClipAction,
-  createSessionAction,
-} from '@/lib/actions/sessions'
-import { Button } from '@/components/ui/button'
-import { useClipContext } from './ClipContext'
-import { Loader2 } from 'lucide-react'
-import { toast } from 'sonner'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+'use client';
+import React from 'react';
+import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
+import { Button } from '@/components/ui/button';
+import { useClipContext } from './ClipContext';
+import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   ISession,
   SessionType,
-} from 'streameth-new-server/src/interfaces/session.interface'
+} from 'streameth-new-server/src/interfaces/session.interface';
 import {
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
-} from '@/lib/types'
+} from '@/lib/types';
 
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '@/components/ui/tabs'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import Combobox from '@/components/ui/combo-box'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import Combobox from '@/components/ui/combo-box';
 import {
   Select,
   SelectTrigger,
@@ -40,12 +28,12 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-} from '@/components/ui/select'
-import { createStateAction } from '@/lib/actions/state'
+} from '@/components/ui/select';
+import { createStateAction } from '@/lib/actions/state';
 import {
   StateStatus,
   StateType,
-} from 'streameth-new-server/src/interfaces/state.interface'
+} from 'streameth-new-server/src/interfaces/state.interface';
 
 const ClipButton = ({
   playbackId,
@@ -56,20 +44,20 @@ const ClipButton = ({
   custom,
   setDialogOpen,
 }: {
-  playbackId: string
-  selectedRecording: string
-  stageId?: string
-  organizationId: string
-  sessions: IExtendedSession[]
-  custom?: boolean
-  setDialogOpen: (value: boolean) => void
+  playbackId: string;
+  selectedRecording: string;
+  stageId?: string;
+  organizationId: string;
+  sessions: IExtendedSession[];
+  custom?: boolean;
+  setDialogOpen: (value: boolean) => void;
 }) => {
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [name, setName] = React.useState('')
-  const { startTime, endTime } = useClipContext()
-  const [sessionId, setSessionId] = React.useState('')
-  const { handleTermChange } = useSearchParams()
-  const [dayFilter, setDayFilter] = React.useState('')
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [name, setName] = React.useState('');
+  const { startTime, endTime } = useClipContext();
+  const [sessionId, setSessionId] = React.useState('');
+  const { handleTermChange } = useSearchParams();
+  const [dayFilter, setDayFilter] = React.useState('');
 
   const handleCreateClip = async () => {
     let customSession: ISession = {
@@ -81,33 +69,33 @@ const ClipButton = ({
       organizationId,
       speakers: [],
       type: SessionType['clip'],
-    }
+    };
     if (custom) {
       customSession = await createSessionAction({
         session: { ...customSession },
-      })
+      });
     }
 
     const session = custom
       ? customSession
-      : sessions.find((s) => s._id === sessionId)
+      : sessions.find((s) => s._id === sessionId);
 
     if (!endTime || !startTime || startTime < endTime) {
-      toast.error('Start time must be earlier than end time.')
-      return
+      toast.error('Start time must be earlier than end time.');
+      return;
     }
 
     if (!selectedRecording) {
-      toast.error('No recording selected.')
-      return
+      toast.error('No recording selected.');
+      return;
     }
 
     if (!session) {
-      toast.error('Session information is missing.')
-      return
+      toast.error('Session information is missing.');
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
     createClipAction({
       playbackId,
       recordingId: selectedRecording,
@@ -116,9 +104,9 @@ const ClipButton = ({
       sessionId: session._id as string,
     })
       .then(async () => {
-        setIsLoading(false)
-        setSessionId('')
-        setDialogOpen(false)
+        setIsLoading(false);
+        setSessionId('');
+        setDialogOpen(false);
 
         await createStateAction({
           state: {
@@ -127,13 +115,13 @@ const ClipButton = ({
             sessionSlug: session.slug,
             organizationId: session.organizationId,
           },
-        })
+        });
 
-        toast.success('Clip created')
+        toast.success('Clip created');
       })
       .catch(() => {
-        setIsLoading(false)
-        toast.error('Error creating clip')
+        setIsLoading(false);
+        toast.error('Error creating clip');
       })
       .finally(() => {
         handleTermChange([
@@ -141,20 +129,18 @@ const ClipButton = ({
             key: 'previewId',
             value: session._id as string,
           },
-        ])
-        setIsLoading(false)
-      })
-  }
+        ]);
+        setIsLoading(false);
+      });
+  };
 
   const uniqueDates = sessions.filter(
     (session, index, self) =>
       index ===
       self.findIndex(
-        (t) =>
-          new Date(t.start).getDate() ===
-          new Date(session.start).getDate()
+        (t) => new Date(t.start).getDate() === new Date(session.start).getDate()
       )
-  )
+  );
 
   return (
     <div className="flex flex-grow flex-col space-y-2">
@@ -182,7 +168,8 @@ const ClipButton = ({
                   {uniqueDates.map((session) => (
                     <SelectItem
                       key={session._id}
-                      value={session.start.toString()}>
+                      value={session.start.toString()}
+                    >
                       {new Date(session.start).toDateString()}
                     </SelectItem>
                   ))}
@@ -190,9 +177,7 @@ const ClipButton = ({
               </SelectContent>
             </Select>
             <Combobox
-              value={
-                sessions.find((s) => s._id === sessionId)?.name || ''
-              }
+              value={sessions.find((s) => s._id === sessionId)?.name || ''}
               setValue={(value) => setSessionId(value)}
               placeholder="Select a session"
               items={[
@@ -201,7 +186,7 @@ const ClipButton = ({
                     return dayFilter !== ''
                       ? new Date(session.start).getDate() ===
                           new Date(Number(dayFilter)).getDate()
-                      : true
+                      : true;
                   })
                   .map((session) => ({
                     label:
@@ -226,19 +211,19 @@ const ClipButton = ({
         }
         onClick={handleCreateClip}
         variant="outlinePrimary"
-        className="mt-auto text-base">
+        className="mt-auto text-base"
+      >
         {isLoading ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
-            wait
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
           </>
         ) : (
           'Create clip'
         )}
       </Button>
     </div>
-  )
-}
+  );
+};
 
 const CreateClipButton = ({
   currentRecording,
@@ -247,16 +232,16 @@ const CreateClipButton = ({
   sessions,
   playbackId,
 }: {
-  currentRecording: string
-  organization: IExtendedOrganization
-  playbackId: string
-  currentStage: IExtendedStage
+  currentRecording: string;
+  organization: IExtendedOrganization;
+  playbackId: string;
+  currentStage: IExtendedStage;
   sessions: {
-    sessions: IExtendedSession[]
-  }
+    sessions: IExtendedSession[];
+  };
 }) => {
-  const { isLoading } = useClipContext()
-  const [dialogOpen, setIsOpen] = React.useState(false)
+  const { isLoading } = useClipContext();
+  const [dialogOpen, setIsOpen] = React.useState(false);
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setIsOpen}>
@@ -269,9 +254,7 @@ const CreateClipButton = ({
                   Clip Session
                 </TabsTrigger>
               )}
-              <TabsTrigger value="custom">
-                Create Custom Clip
-              </TabsTrigger>
+              <TabsTrigger value="custom">Create Custom Clip</TabsTrigger>
             </TabsList>
             {sessions.sessions.length > 0 && (
               <TabsContent value="sessions">
@@ -307,11 +290,12 @@ const CreateClipButton = ({
         onClick={() => setIsOpen(true)}
         variant="outlinePrimary"
         className="w-full"
-        disabled={isLoading}>
+        disabled={isLoading}
+      >
         Create Clip
       </Button>
     </Dialog>
-  )
-}
+  );
+};
 
-export default CreateClipButton
+export default CreateClipButton;

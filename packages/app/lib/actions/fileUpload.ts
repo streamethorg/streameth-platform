@@ -1,24 +1,24 @@
-'use server'
-import S3Service from '@/lib/services/spacesService'
+'use server';
+import S3Service from '@/lib/services/spacesService';
 
 export async function upload(data: FormData) {
-  'use server'
+  'use server';
 
-  const file: File | null = data.get('file') as unknown as File
+  const file: File | null = data.get('file') as unknown as File;
   if (!file) {
-    throw new Error('No file uploaded')
+    throw new Error('No file uploaded');
   }
 
-  const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
 
-  const s3 = new S3Service()
+  const s3 = new S3Service();
   const result = await s3.uploadFile(
     'bucketname',
     file.name,
     buffer,
     file.type
-  )
+  );
 
-  return { success: true }
+  return { success: true };
 }

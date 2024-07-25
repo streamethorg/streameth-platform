@@ -1,40 +1,36 @@
-'use client'
+'use client';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { updateStageAction } from '@/lib/actions/stages'
-import { IExtendedStage } from '@/lib/types'
-import { ChevronDown, Earth, Loader2, Lock } from 'lucide-react'
-import React, { useState } from 'react'
-import { toast } from 'sonner'
+} from '@/components/ui/dropdown-menu';
+import { updateStageAction } from '@/lib/actions/stages';
+import { IExtendedStage } from '@/lib/types';
+import { ChevronDown, Earth, Loader2, Lock } from 'lucide-react';
+import React, { useState } from 'react';
+import { toast } from 'sonner';
 
-const ToggleLivestreamVisibility = ({
-  item,
-}: {
-  item: IExtendedStage
-}) => {
-  const [isLoading, setIsLoading] = useState(false)
+const ToggleLivestreamVisibility = ({ item }: { item: IExtendedStage }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const handleToggleVisibility = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     updateStageAction({
       stage: { ...item, published: !item.published },
     })
       .then((response) => {
         if (response) {
-          setIsLoading(false)
-          toast.success('Stream updated')
+          setIsLoading(false);
+          toast.success('Stream updated');
         } else {
-          toast.error('Error updating stream')
+          toast.error('Error updating stream');
         }
       })
       .catch(() => {
-        toast.error('Error updating stream')
-        setIsLoading(false)
-      })
-  }
+        toast.error('Error updating stream');
+        setIsLoading(false);
+      });
+  };
   return (
     <div className="flex items-center justify-start space-x-2">
       {isLoading ? (
@@ -59,7 +55,8 @@ const ToggleLivestreamVisibility = ({
             className={`cursor-pointer space-x-2 ${
               isLoading ? 'pointer-events-none' : ''
             }`}
-            onClick={handleToggleVisibility}>
+            onClick={handleToggleVisibility}
+          >
             {!item.published ? (
               <>
                 <Earth size={16} />
@@ -75,7 +72,7 @@ const ToggleLivestreamVisibility = ({
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
-}
+  );
+};
 
-export default ToggleLivestreamVisibility
+export default ToggleLivestreamVisibility;

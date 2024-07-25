@@ -1,18 +1,18 @@
-import React, { Suspense } from 'react'
-import { TooltipProvider } from '@/components/ui/tooltip'
-import { studioPageParams } from '@/lib/types'
-import { fetchEvent } from '@/lib/services/eventService'
-import { fetchEventStages } from '@/lib/services/stageService'
-import StreamConfig from './components/stageSettings/StageConfig'
-import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent'
-import { notFound } from 'next/navigation'
-import Navigation from './components/navigation'
+import React, { Suspense } from 'react';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { studioPageParams } from '@/lib/types';
+import { fetchEvent } from '@/lib/services/eventService';
+import { fetchEventStages } from '@/lib/services/stageService';
+import StreamConfig from './components/stageSettings/StageConfig';
+import EventHomeComponent from '@/app/[organization]/[event]/components/EventHomeComponent';
+import { notFound } from 'next/navigation';
+import Navigation from './components/navigation';
 
 export default async function EventPage({
   params,
   searchParams,
 }: studioPageParams) {
-  const { settings, stage: stageId } = searchParams
+  const { settings, stage: stageId } = searchParams;
 
   // const event = await fetchEvent({ eventId: params?.eventId })
   // if (!event) return notFound()
@@ -58,5 +58,5 @@ export default async function EventPage({
     //     </div>
     //   )}
     // </div>
-  )
+  );
 }

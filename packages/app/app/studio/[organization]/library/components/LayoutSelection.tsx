@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { LayoutGrid, Rows3 } from 'lucide-react'
-import { eLayout } from '@/lib/types'
-import useSearchParams from '@/lib/hooks/useSearchParams'
+import { LayoutGrid, Rows3 } from 'lucide-react';
+import { eLayout } from '@/lib/types';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 
 const LayoutSelection = () => {
-  const { searchParams, handleTermChange } = useSearchParams()
-  const currentLayout = searchParams.get('layout')
+  const { searchParams, handleTermChange } = useSearchParams();
+  const currentLayout = searchParams.get('layout');
 
   const layoutOptions = [
     {
@@ -21,7 +21,7 @@ const LayoutSelection = () => {
       activeClass: 'text-white bg-[#3D22BA]',
       inactiveClass: 'hover:text-white hover:bg-[#3D22BA]',
     },
-  ]
+  ];
 
   return (
     <div className="flex justify-end space-x-2">
@@ -33,14 +33,12 @@ const LayoutSelection = () => {
             className={`cursor-pointer rounded-md border p-1 transition ${
               currentLayout === value ? activeClass : inactiveClass
             }`}
-            onClick={() =>
-              handleTermChange([{ key: 'layout', value }])
-            }
+            onClick={() => handleTermChange([{ key: 'layout', value }])}
           />
         )
       )}
     </div>
-  )
-}
+  );
+};
 
-export default LayoutSelection
+export default LayoutSelection;
