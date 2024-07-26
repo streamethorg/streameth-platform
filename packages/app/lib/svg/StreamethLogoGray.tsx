@@ -10,7 +10,8 @@ const StreamethLogoGray: React.FC<React.SVGProps<SVGSVGElement>> = ({
       className={className}
       viewBox="0 0 176 33"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -34,7 +35,7 @@ const StreamethLogoGray: React.FC<React.SVGProps<SVGSVGElement>> = ({
         fill="#64748B"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default StreamethLogoGray
+export default StreamethLogoGray;

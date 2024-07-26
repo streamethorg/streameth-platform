@@ -1,17 +1,17 @@
-'use client'
-import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface'
-import useSearchParams from '@/lib/hooks/useSearchParams'
+'use client';
+import { IStageModel } from 'streameth-new-server/src/interfaces/stage.interface';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { IExtendedStage } from '@/lib/types'
+} from '@/components/ui/select';
+import { IExtendedStage } from '@/lib/types';
 
 const StageSelect = ({ stages }: { stages: IExtendedStage[] }) => {
-  const { searchParams, handleTermChange } = useSearchParams()
+  const { searchParams, handleTermChange } = useSearchParams();
 
   return (
     <div className="flex flex-col space-y-2">
@@ -25,7 +25,8 @@ const StageSelect = ({ stages }: { stages: IExtendedStage[] }) => {
               value,
             },
           ])
-        }>
+        }
+      >
         <SelectTrigger className="rounded-lg border bg-white">
           <SelectValue placeholder="Stage select" />
         </SelectTrigger>
@@ -38,7 +39,7 @@ const StageSelect = ({ stages }: { stages: IExtendedStage[] }) => {
         </SelectContent>
       </Select>
     </div>
-  )
-}
+  );
+};
 
-export default StageSelect
+export default StageSelect;

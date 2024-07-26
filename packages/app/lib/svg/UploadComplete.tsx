@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-const UploadComplete: React.FC<
-  React.SVGProps<SVGSVGElement>
-> = () => {
+const UploadComplete: React.FC<React.SVGProps<SVGSVGElement>> = () => {
   return (
     <svg
       width="120"
       height="120"
       viewBox="0 0 120 120"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g filter="url(#filter0_i_542_7480)">
         <rect
           width="120"
@@ -39,14 +38,7 @@ const UploadComplete: React.FC<
           stroke-linecap="round"
           stroke-linejoin="round"
         />
-        <rect
-          x="88"
-          y="88"
-          width="32"
-          height="32"
-          rx="16"
-          fill="#3FB570"
-        />
+        <rect x="88" y="88" width="32" height="32" rx="16" fill="#3FB570" />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -62,7 +54,8 @@ const UploadComplete: React.FC<
           width="128"
           height="126"
           filterUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB">
+          colorInterpolationFilters="sRGB"
+        >
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
@@ -78,12 +71,7 @@ const UploadComplete: React.FC<
           />
           <feOffset dx="8" dy="6" />
           <feGaussianBlur stdDeviation="5" />
-          <feComposite
-            in2="hardAlpha"
-            operator="arithmetic"
-            k2="-1"
-            k3="1"
-          />
+          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0.531026 0 0 0 0 0.43333 0 0 0 0 0.983318 0 0 0 1 0"
@@ -100,13 +88,14 @@ const UploadComplete: React.FC<
           y1="120.41"
           x2="51.7058"
           y2="-22.6718"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stopColor="#3D22BA" />
           <stop offset="1" stopColor="#6426EF" />
         </linearGradient>
       </defs>
     </svg>
-  )
-}
+  );
+};
 
-export default UploadComplete
+export default UploadComplete;

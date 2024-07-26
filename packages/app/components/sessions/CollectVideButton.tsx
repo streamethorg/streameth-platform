@@ -1,10 +1,7 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { Button } from '../ui/button'
-import {
-  IExtendedNftCollections,
-  IExtendedSession,
-} from '@/lib/types'
+'use client';
+import React, { useEffect, useState } from 'react';
+import { Button } from '../ui/button';
+import { IExtendedNftCollections, IExtendedSession } from '@/lib/types';
 import {
   useAccount,
   useChainId,
@@ -12,15 +9,15 @@ import {
   useSwitchChain,
   useWaitForTransactionReceipt,
   useWriteContract,
-} from 'wagmi'
-import { VideoNFTAbi, contractChainID } from '@/lib/contract'
-import { toast } from 'sonner'
-import { calMintPrice, getVideoIndex } from '@/lib/utils/utils'
-import { Dialog, DialogContent, DialogTitle } from '../ui/dialog'
-import { CheckCircle2, Loader2 } from 'lucide-react'
-import { type BaseError } from 'wagmi'
-import TransactionHash from '@/app/studio/[organization]/nfts/create/components/TransactionHash'
-import { ConnectWalletButton } from '../misc/ConnectWalletButton'
+} from 'wagmi';
+import { VideoNFTAbi, contractChainID } from '@/lib/contract';
+import { toast } from 'sonner';
+import { calMintPrice, getVideoIndex } from '@/lib/utils/utils';
+import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
+import { CheckCircle2, Loader2 } from 'lucide-react';
+import { type BaseError } from 'wagmi';
+import TransactionHash from '@/app/studio/[organization]/nfts/create/components/TransactionHash';
+import { ConnectWalletButton } from '../misc/ConnectWalletButton';
 
 const CollectVideButton = ({
   video,
@@ -28,24 +25,23 @@ const CollectVideButton = ({
   variant = 'primary',
   all = false,
 }: {
-  video?: IExtendedSession
-  nftCollection: IExtendedNftCollections | null
-  variant?: 'primary' | 'outline'
-  all?: boolean
+  video?: IExtendedSession;
+  nftCollection: IExtendedNftCollections | null;
+  variant?: 'primary' | 'outline';
+  all?: boolean;
 }) => {
-  const account = useAccount()
-  const chain = useChainId()
-  const [isOpen, setIsOpen] = useState(false)
-  const [mintError, setMintError] = useState('')
+  const account = useAccount();
+  const chain = useChainId();
+  const [isOpen, setIsOpen] = useState(false);
+  const [mintError, setMintError] = useState('');
 
   const videoNFTContract = {
     address: nftCollection?.contractAddress as `0x${string}`,
     abi: VideoNFTAbi,
     chainId: contractChainID,
-  } as const
+  } as const;
 
-  const { switchChainAsync, isPending: IsSwitchingChain } =
-    useSwitchChain()
+  const { switchChainAsync, isPending: IsSwitchingChain } = useSwitchChain();
 
   const result = useReadContracts({
     contracts: [
@@ -66,9 +62,9 @@ const CollectVideButton = ({
         ],
       },
     ],
-  })
+  });
 
-  const hasMintedSession = result.data?.[2].result
+  const hasMintedSession = result.data?.[2].result;
 
   const {
     data: hash,
@@ -76,26 +72,24 @@ const CollectVideButton = ({
     error,
     isError,
     isPending: isMintingNftPending,
-  } = useWriteContract()
+  } = useWriteContract();
 
   const { isSuccess } = useWaitForTransactionReceipt({
     hash,
-  })
+  });
 
   useEffect(() => {
     if (isSuccess) {
-      setIsOpen(false)
-      toast.success(
-        'NFT of the video successfully minted to your wallet'
-      )
+      setIsOpen(false);
+      toast.success('NFT of the video successfully minted to your wallet');
     }
     if (isError) {
-      toast.error('NFT of the video failed to mint. Please try again')
+      toast.error('NFT of the video failed to mint. Please try again');
     }
-  }, [isSuccess, isError, error])
+  }, [isSuccess, isError, error]);
 
   const handleWriteContract = () => {
-    setMintError('')
+    setMintError('');
     if (result?.data?.[0].status === 'success' && nftCollection) {
       writeContract({
         abi: VideoNFTAbi,
@@ -109,31 +103,31 @@ const CollectVideButton = ({
             nftCollection
           ) as string
         ),
-      })
+      });
     } else {
-      setMintError('An error occurred, try again later')
+      setMintError('An error occurred, try again later');
     }
-  }
+  };
 
   const mintCollection = () => {
-    setMintError('')
-    setIsOpen(true)
+    setMintError('');
+    setIsOpen(true);
     if (chain !== contractChainID) {
       switchChainAsync(
         { chainId: contractChainID },
         {
           onSuccess: () => {
-            handleWriteContract()
+            handleWriteContract();
           },
           onError: () => {
-            setMintError('Error switching chain')
+            setMintError('Error switching chain');
           },
         }
-      )
+      );
     } else {
-      handleWriteContract()
+      handleWriteContract();
     }
-  }
+  };
 
   return hasMintedSession ? (
     <Button disabled variant={'outline'}>
@@ -148,7 +142,8 @@ const CollectVideButton = ({
           loading={isMintingNftPending || IsSwitchingChain}
           onClick={mintCollection}
           variant={variant}
-          className="w-full md:w-36">
+          className="w-full md:w-36"
+        >
           {all ? 'Collect All Videos' : 'Collect Video'}
         </Button>
       )}
@@ -165,9 +160,7 @@ const CollectVideButton = ({
 
           {mintError || error ? (
             <div className="text-center text-destructive">
-              {mintError ||
-                (error as BaseError).shortMessage ||
-                error?.message}
+              {mintError || (error as BaseError).shortMessage || error?.message}
             </div>
           ) : hash ? (
             <TransactionHash hash={hash} />
@@ -185,8 +178,8 @@ const CollectVideButton = ({
                   Go to your wallet to approve the transaction
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  You&apos;ll be asked to pay gas fees plus mint fee
-                  to collect video on the blockchain.
+                  You&apos;ll be asked to pay gas fees plus mint fee to collect
+                  video on the blockchain.
                 </p>
               </div>
             </div>
@@ -194,7 +187,7 @@ const CollectVideButton = ({
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
-export default CollectVideButton
+export default CollectVideButton;

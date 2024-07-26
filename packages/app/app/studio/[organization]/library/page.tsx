@@ -1,27 +1,27 @@
-'use server'
+'use server';
 
-import { fetchAllSessions } from '@/lib/data'
-import { redirect } from 'next/navigation'
-import LibraryListLayout from './components/LibraryListLayout'
-import UploadVideoDialog from './components/UploadVideoDialog'
-import { Suspense } from 'react'
-import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton'
-import TableSkeleton from '@/components/misc/Table/TableSkeleton'
-import EmptyLibrary from './components/EmptyLibrary'
-import { IExtendedSession, eLayout, eSort } from '@/lib/types'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import NotFound from '@/not-found'
-import { sortArray } from '@/lib/utils/utils'
-import LibraryGridLayout from './components/LibraryGridLayout'
-import Pagination from '@/app/[organization]/videos/components/pagination'
-import SearchBar from '@/components/misc/SearchBar'
-import LibraryFilter from './components/LibraryFilter'
-import { fetchOrganizationStages } from '@/lib/services/stageService'
-import { fetchAllStates } from '@/lib/services/stateService'
+import { fetchAllSessions } from '@/lib/data';
+import { redirect } from 'next/navigation';
+import LibraryListLayout from './components/LibraryListLayout';
+import UploadVideoDialog from './components/UploadVideoDialog';
+import { Suspense } from 'react';
+import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton';
+import TableSkeleton from '@/components/misc/Table/TableSkeleton';
+import EmptyLibrary from './components/EmptyLibrary';
+import { IExtendedSession, eLayout, eSort } from '@/lib/types';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import NotFound from '@/not-found';
+import { sortArray } from '@/lib/utils/utils';
+import LibraryGridLayout from './components/LibraryGridLayout';
+import Pagination from '@/app/[organization]/videos/components/pagination';
+import SearchBar from '@/components/misc/SearchBar';
+import LibraryFilter from './components/LibraryFilter';
+import { fetchOrganizationStages } from '@/lib/services/stageService';
+import { fetchAllStates } from '@/lib/services/stateService';
 import {
   StateStatus,
   StateType,
-} from 'streameth-new-server/src/interfaces/state.interface'
+} from 'streameth-new-server/src/interfaces/state.interface';
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -41,36 +41,36 @@ const Loading = ({ layout }: { layout: string }) => {
       )}
       {eLayout.list === layout && <TableSkeleton />}
     </div>
-  )
-}
+  );
+};
 
 const Library = async ({
   params,
   searchParams,
 }: {
-  params: { organization: string }
+  params: { organization: string };
   searchParams: {
-    layout: eLayout
-    sort: eSort
-    show?: boolean
-    limit?: number
-    page?: number
-    searchQuery?: string
-    stage?: string
-    type?: string
-    published?: boolean
-  }
+    layout: eLayout;
+    sort: eSort;
+    show?: boolean;
+    limit?: number;
+    page?: number;
+    searchQuery?: string;
+    stage?: string;
+    type?: string;
+    published?: boolean;
+  };
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
   if (!organization) {
-    return NotFound()
+    return NotFound();
   }
   const stages = await fetchOrganizationStages({
     organizationId: organization._id,
-  })
+  });
 
   const statesSet = new Set(
     (
@@ -79,7 +79,7 @@ const Library = async ({
         status: StateStatus.pending,
       })
     ).map((state) => state.sessionId) as unknown as Set<string>
-  )
+  );
 
   let sessions = await fetchAllSessions({
     organizationSlug: params.organization,
@@ -90,33 +90,27 @@ const Library = async ({
     stageId: searchParams.stage,
     published: searchParams.published,
     type: searchParams.type,
-  })
+  });
 
   let filteredSession = sessions.sessions.filter(
-    (session) =>
-      session.videoUrl || statesSet.has(session._id.toString())
-  )
+    (session) => session.videoUrl || statesSet.has(session._id.toString())
+  );
 
   const sortedSessions = sortArray(
     filteredSession,
     searchParams.sort
-  ) as unknown as IExtendedSession[]
+  ) as unknown as IExtendedSession[];
 
   return (
     <div className="flex h-full w-full flex-col bg-white">
       <div className="w-full p-4">
         <h2 className="mb-2 text-lg font-bold">Video library</h2>
         <div className="flex justify-between">
-          <UploadVideoDialog
-            organizationId={organization._id.toString()}
-          />
+          <UploadVideoDialog organizationId={organization._id.toString()} />
 
           <div className="flex items-center">
             <div className="z-50 min-w-[300px] lg:min-w-[400px]">
-              <SearchBar
-                organizationSlug={params.organization}
-                isStudio
-              />
+              <SearchBar organizationSlug={params.organization} isStudio />
             </div>
             <LibraryFilter stages={stages} />
           </div>
@@ -142,15 +136,15 @@ const Library = async ({
       )}
       <Pagination {...sessions.pagination} />
     </div>
-  )
-}
+  );
+};
 
 const LibraryPage = async ({
   params,
   searchParams,
 }: {
-  params: { organization: string }
-  searchParams: { layout: eLayout; sort: eSort; show: boolean }
+  params: { organization: string };
+  searchParams: { layout: eLayout; sort: eSort; show: boolean };
 }) => {
   if (
     !searchParams.layout ||
@@ -160,16 +154,17 @@ const LibraryPage = async ({
   ) {
     redirect(
       `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.desc_date}&page=1&limit=20`
-    )
+    );
   }
 
   return (
     <Suspense
       key={searchParams.toString()}
-      fallback={<Loading layout={searchParams.layout} />}>
+      fallback={<Loading layout={searchParams.layout} />}
+    >
       <Library params={params} searchParams={searchParams} />
     </Suspense>
-  )
-}
+  );
+};
 
-export default LibraryPage
+export default LibraryPage;

@@ -1,9 +1,9 @@
-import { notFound } from 'next/navigation'
-import { fetchEvent } from '@/lib/services/eventService'
-import { EventPageProps } from '@/lib/types'
-import { ResolvingMetadata, Metadata } from 'next'
-import { redirect } from 'next/navigation'
-import { fetchOrganization } from '@/lib/services/organizationService'
+import { notFound } from 'next/navigation';
+import { fetchEvent } from '@/lib/services/eventService';
+import { EventPageProps } from '@/lib/types';
+import { ResolvingMetadata, Metadata } from 'next';
+import { redirect } from 'next/navigation';
+import { fetchOrganization } from '@/lib/services/organizationService';
 // export async function generateStaticParams() {
 //   const allEvents = await fetchEvents({})
 //   const paths = allEvents.map((event) => ({
@@ -24,13 +24,13 @@ export default async function EventHome({
 
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
   if (!organization) {
-    return notFound()
+    return notFound();
   } else {
-    redirect(`/${organization.slug}`)
-    return 'loading...'
+    redirect(`/${organization.slug}`);
+    return 'loading...';
   }
 
   // if (!event) return notFound()
@@ -53,18 +53,18 @@ export async function generateMetadata(
   { params }: EventPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { event } = params
+  const { event } = params;
   const eventInfo = await fetchEvent({
     eventSlug: event,
-  })
+  });
 
   if (!eventInfo) {
     return {
       title: 'StreamETH Event',
-    }
+    };
   }
 
-  const imageUrl = eventInfo.eventCover
+  const imageUrl = eventInfo.eventCover;
   try {
     return {
       title: eventInfo.name,
@@ -83,11 +83,11 @@ export async function generateMetadata(
           alt: eventInfo.name + ' Logo',
         },
       },
-    }
+    };
   } catch (e) {
-    console.log(e)
+    console.log(e);
     return {
       title: 'StreamETH Event',
-    }
+    };
   }
 }

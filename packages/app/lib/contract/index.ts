@@ -1,7 +1,6 @@
-export const VideoFactoryAddress =
-  '0x9F519A0e442f5e8FB1492638b0f3aA621182A9DA'
+export const VideoFactoryAddress = '0x9F519A0e442f5e8FB1492638b0f3aA621182A9DA';
 
-export const contractChainID = 8453
+export const contractChainID = 8453;
 
 export const VideoFactoryAbi = [
   {
@@ -282,7 +281,7 @@ export const VideoFactoryAbi = [
     stateMutability: 'view',
     type: 'function',
   },
-]
+];
 
 export const VideoNFTAbi = [
   {
@@ -1182,4 +1181,4 @@ export const VideoNFTAbi = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-]
+];

@@ -7,16 +7,23 @@ import { Loader2 } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 interface SignInUserButtonProps {
-  className?: string
-  btnText?: string
+  className?: string;
+  btnText?: string;
 }
 
 export const SignInUserButton = ({
   btnText = 'Sign in',
   className,
 }: SignInUserButtonProps) => {
-  const { ready, authenticated } = usePrivy()
-  const [isLoading, setIsLoading] = useState(false)
+  const { ready, authenticated } = usePrivy();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const privyRefreshToken = localStorage.getItem(
+    'privy:refresh_token'
+  )
+  const parsePrivyRefreshToken = privyRefreshToken
+    ? JSON.parse(privyRefreshToken)
+    : null
 
   const privyRefreshToken = localStorage.getItem(
     'privy:refresh_token'
@@ -26,8 +33,8 @@ export const SignInUserButton = ({
     : null
 
   const getSession = async () => {
-    const privyToken = localStorage.getItem('privy:token')
-    const token = privyToken ? JSON.parse(privyToken) : null
+    const privyToken = localStorage.getItem('privy:token');
+    const token = privyToken ? JSON.parse(privyToken) : null;
     const res = await fetch(`${apiUrl()}/auth/login`, {
       method: 'POST',
       body: JSON.stringify({
@@ -35,13 +42,18 @@ export const SignInUserButton = ({
       }),
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-    })
-    const resData = await res.json()
+    });
+    const resData = await res.json();
     storeSession({
       token: resData?.data?.token,
       address: resData?.data?.user?.walletAddress,
-    })
-  }
+    });
+  };
+
+  useEffect(() => {
+    if (!parsePrivyRefreshToken) logout()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsePrivyRefreshToken])
 
   useEffect(() => {
     if (!parsePrivyRefreshToken) logout()
@@ -50,36 +62,37 @@ export const SignInUserButton = ({
 
   const { login } = useLogin({
     onComplete: () => {
-      getSession()
-      setIsLoading(false)
+      getSession();
+      setIsLoading(false);
     },
     onError: (error) => {
-      deleteSession()
-      setIsLoading(false)
+      deleteSession();
+      setIsLoading(false);
     },
-  })
+  });
 
   const { logout } = useLogout({
     onSuccess: () => {
-      deleteSession()
-      setIsLoading(false)
+      deleteSession();
+      setIsLoading(false);
     },
-  })
+  });
 
   const handleClick = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (authenticated) {
-      logout()
+      logout();
     } else {
-      login()
+      login();
     }
-  }
+  };
 
   return (
     <Button
       onClick={handleClick}
       className={className}
-      disabled={!ready || isLoading}>
+      disabled={!ready || isLoading}
+    >
       {!ready || isLoading ? (
         <Loader2 className="h-4 w-4 animate-spin" />
       ) : authenticated ? (
@@ -88,5 +101,5 @@ export const SignInUserButton = ({
         btnText
       )}
     </Button>
-  )
-}
+  );
+};

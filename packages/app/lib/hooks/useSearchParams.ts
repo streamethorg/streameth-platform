@@ -2,32 +2,32 @@ import {
   useSearchParams as useNextSearchParams,
   usePathname,
   useRouter,
-} from 'next/navigation'
+} from 'next/navigation';
 
 interface ITerm {
-  key: string
-  value: string | undefined
+  key: string;
+  value: string | undefined;
 }
 const useSearchParams = () => {
-  const pathname = usePathname()
-  const { replace } = useRouter()
-  const searchParams = useNextSearchParams()
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const searchParams = useNextSearchParams();
 
   function handleTermChange(terms: ITerm[]) {
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams);
     for (const term of terms) {
       if (term.value) {
-        params.set(term.key, term.value)
+        params.set(term.key, term.value);
       } else {
-        params.delete(term.key)
+        params.delete(term.key);
       }
-      replace(`${pathname}?${params.toString()}`)
+      replace(`${pathname}?${params.toString()}`);
     }
   }
   return {
     searchParams,
     handleTermChange,
-  }
-}
+  };
+};
 
-export default useSearchParams
+export default useSearchParams;

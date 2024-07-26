@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import EmbedButton from '@/components/misc/interact/EmbedButton'
-import ShareButton from '@/components/misc/interact/ShareButton'
-import VideoDownloadClient from '@/components/misc/VideoDownloadClient'
+import EmbedButton from '@/components/misc/interact/EmbedButton';
+import ShareButton from '@/components/misc/interact/ShareButton';
+import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 
 const SessionOptions = ({
   name,
@@ -11,11 +11,11 @@ const SessionOptions = ({
   organizationSlug,
   sessionId,
 }: {
-  name: string
-  playbackId: string
-  assetId?: string
-  organizationSlug: string
-  sessionId: string
+  name: string;
+  playbackId: string;
+  assetId?: string;
+  organizationSlug: string;
+  sessionId: string;
 }) => {
   return (
     <div className="flex w-full flex-wrap items-center gap-2">
@@ -40,7 +40,7 @@ const SessionOptions = ({
         collapsable={true}
       />
     </div>
-  )
-}
+  );
+};
 
-export default SessionOptions
+export default SessionOptions;

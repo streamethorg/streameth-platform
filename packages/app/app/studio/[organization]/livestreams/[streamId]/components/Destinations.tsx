@@ -1,20 +1,20 @@
-import { Card } from '@/components/ui/card'
-import Multistream from './Multistream'
-import PublishLivestream from './PublishLivestream'
-import { IExtendedStage } from '@/lib/types'
-import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget'
-import NotFound from '@/app/not-found'
-import EditLivestream from '../../components/EditLivestream'
+import { Card } from '@/components/ui/card';
+import Multistream from './Multistream';
+import PublishLivestream from './PublishLivestream';
+import { IExtendedStage } from '@/lib/types';
+import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
+import NotFound from '@/app/not-found';
+import EditLivestream from '../../components/EditLivestream';
 
 const Destinations = ({
   organization,
   stream,
 }: {
-  organization: string
-  stream: IExtendedStage
+  organization: string;
+  stream: IExtendedStage;
 }) => {
   if (!stream.streamSettings?.streamId) {
-    return NotFound()
+    return NotFound();
   }
 
   return (
@@ -38,7 +38,7 @@ const Destinations = ({
       />
       {/* <PublishLivestream stream={stream} /> */}
     </Card>
-  )
-}
+  );
+};
 
-export default Destinations
+export default Destinations;

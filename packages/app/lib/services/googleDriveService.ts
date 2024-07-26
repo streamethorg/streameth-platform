@@ -1,7 +1,7 @@
-import { google } from 'googleapis'
+import { google } from 'googleapis';
 
 class GoogleDriveService {
-  connection: any
+  connection: any;
 
   constructor() {
     const serviceAccount = {
@@ -9,27 +9,27 @@ class GoogleDriveService {
       private_key:
         process.env.SERVICE_ACCOUNT_PRIVATE_KEY &&
         process.env.SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    }
+    };
 
     const jwtClient = new google.auth.JWT(
       serviceAccount.client_email,
       undefined,
       serviceAccount.private_key,
       ['https://www.googleapis.com/auth/drive']
-    )
+    );
 
     this.connection = google.drive({
       version: 'v3',
       auth: jwtClient,
-    })
+    });
   }
 
   async listFiles(): Promise<any[]> {
     const response = await this.connection.files.list({
       pageSize: 10,
       fields: 'files(id, name)',
-    })
-    return response.data.files || []
+    });
+    return response.data.files || [];
   }
 
   async copyFile(fileId: string, name: string): Promise<string> {
@@ -39,9 +39,9 @@ class GoogleDriveService {
       requestBody: {
         name,
       },
-    })
-    return response.data.id
+    });
+    return response.data.id;
   }
 }
 
-export default GoogleDriveService
+export default GoogleDriveService;

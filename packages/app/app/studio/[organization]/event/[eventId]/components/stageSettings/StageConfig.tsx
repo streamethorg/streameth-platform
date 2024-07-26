@@ -1,19 +1,19 @@
-import { fetchStage } from '@/lib/services/stageService'
-import LivestreamEmbedCode from '@/app/studio/[organization]/livestreams/[streamId]/components/LivestreamEmbedCode'
-import Multistream from '@/app/studio/[organization]/livestreams/[streamId]/components/Multistream'
-import StreamConfigWithPlayer from '@/app/studio/[organization]/livestreams/[streamId]/components/StreamConfigWithPlayer'
-import StreamHeader from '@/app/studio/[organization]/livestreams/[streamId]/components/StreamHeader'
+import { fetchStage } from '@/lib/services/stageService';
+import LivestreamEmbedCode from '@/app/studio/[organization]/livestreams/[streamId]/components/LivestreamEmbedCode';
+import Multistream from '@/app/studio/[organization]/livestreams/[streamId]/components/Multistream';
+import StreamConfigWithPlayer from '@/app/studio/[organization]/livestreams/[streamId]/components/StreamConfigWithPlayer';
+import StreamHeader from '@/app/studio/[organization]/livestreams/[streamId]/components/StreamHeader';
 
 const StreamConfig = async ({
   organization,
   stageId,
 }: {
-  organization: string
-  stageId: string
+  organization: string;
+  stageId: string;
 }) => {
-  const stage = await fetchStage({ stage: stageId })
+  const stage = await fetchStage({ stage: stageId });
   if (!stage || !stage.streamSettings?.streamId) {
-    return <div> no stage found</div>
+    return <div> no stage found</div>;
   }
 
   return (
@@ -37,7 +37,7 @@ const StreamConfig = async ({
         playerName={stage?.name}
       />
     </div>
-  )
-}
+  );
+};
 
-export default StreamConfig
+export default StreamConfig;

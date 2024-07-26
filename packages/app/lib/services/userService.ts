@@ -1,12 +1,12 @@
-import { apiUrl } from '../utils/utils'
-import { IExtendedUser } from '../types'
+import { apiUrl } from '../utils/utils';
+import { IExtendedUser } from '../types';
 
 export async function fetchUserData({
   userId,
   authToken,
 }: {
-  userId?: string
-  authToken?: string
+  userId?: string;
+  authToken?: string;
 }): Promise<IExtendedUser | null> {
   try {
     const data = await fetch(`${apiUrl()}/users/${userId}`, {
@@ -16,14 +16,14 @@ export async function fetchUserData({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,
       },
-    })
+    });
 
     if (!data.ok) {
-      return null
+      return null;
     }
-    return (await data.json()).data
+    return (await data.json()).data;
   } catch (e) {
-    console.log('error in fetchUser', e)
-    throw e
+    console.log('error in fetchUser', e);
+    throw e;
   }
 }

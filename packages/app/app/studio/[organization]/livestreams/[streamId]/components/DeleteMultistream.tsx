@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -9,48 +9,41 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from '@/components/ui/dialog'
-import { deleteMultistreamAction } from '@/lib/actions/stages'
-import { Loader2, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
-import { toast } from 'sonner'
+} from '@/components/ui/dialog';
+import { deleteMultistreamAction } from '@/lib/actions/stages';
+import { Loader2, Trash2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 const DeleteMultistream = ({
   streamId,
   organizationId,
   targetId,
 }: {
-  streamId?: string
-  organizationId: string
-  targetId?: string
+  streamId?: string;
+  organizationId: string;
+  targetId?: string;
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (!streamId || !targetId) return null
+  if (!streamId || !targetId) return null;
 
   const handleDelete = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      await deleteMultistreamAction(
-        streamId,
-        organizationId,
-        targetId
-      )
-      toast.success('Multistream target deleted')
+      await deleteMultistreamAction(streamId, organizationId, targetId);
+      toast.success('Multistream target deleted');
     } catch (error) {
-      toast.error("Couldn't delete multistream target")
+      toast.error("Couldn't delete multistream target");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          disabled={isLoading}
-          className="flex gap-1"
-          variant="outline">
+        <Button disabled={isLoading} className="flex gap-1" variant="outline">
           {isLoading ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
@@ -76,13 +69,14 @@ const DeleteMultistream = ({
           <Button
             onClick={handleDelete}
             variant="destructive"
-            loading={isLoading}>
+            loading={isLoading}
+          >
             Delete Multistream
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default DeleteMultistream
+export default DeleteMultistream;

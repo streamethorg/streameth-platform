@@ -1,25 +1,25 @@
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import React from 'react'
-import { LuArrowLeft } from 'react-icons/lu'
-import { SiTwitter } from 'react-icons/si'
-import YoutubeConnectButton from './components/YoutubeConnectButton'
-import { fetchOrganization } from '@/lib/services/organizationService'
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import React from 'react';
+import { LuArrowLeft } from 'react-icons/lu';
+import { SiTwitter } from 'react-icons/si';
+import YoutubeConnectButton from './components/YoutubeConnectButton';
+import { fetchOrganization } from '@/lib/services/organizationService';
 
 const ConnectSocials = async ({
   params,
 }: {
-  params: { organization: string }
+  params: { organization: string };
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
   const state = encodeURIComponent(
     JSON.stringify({
       redirectUrl: `/studio/${params.organization}/destinations`,
       organizationId: organization?._id,
     })
-  )
+  );
   return (
     <div className="mx-6 h-full p-2">
       <Link href={`/studio/${params.organization}/destinations`}>
@@ -32,9 +32,8 @@ const ConnectSocials = async ({
       <div className="flex flex-col overflow-auto rounded-xl border bg-white p-4">
         <h3 className="mb-3 text-lg font-bold">Add a destination</h3>
         <p>
-          Connect an account to StreamEth. Once connected, you can
-          stream and upload clips and videos to it as often as you
-          like.
+          Connect an account to StreamEth. Once connected, you can stream and
+          upload clips and videos to it as often as you like.
         </p>
         <div className="mt-4 flex w-fit flex-col gap-4">
           <YoutubeConnectButton
@@ -50,7 +49,7 @@ const ConnectSocials = async ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ConnectSocials
+export default ConnectSocials;

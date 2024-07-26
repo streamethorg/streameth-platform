@@ -1,28 +1,28 @@
-import { IChat } from 'streameth-new-server/src/interfaces/chat.interface'
-import { IExtendedChat } from '../types'
-import { apiUrl } from '../utils/utils'
+import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
+import { IExtendedChat } from '../types';
+import { apiUrl } from '../utils/utils';
 
 export async function fetchChat({
   stageId,
 }: {
-  stageId?: string
+  stageId?: string;
 }): Promise<IExtendedChat[]> {
   try {
     if (!stageId) {
-      return []
+      return [];
     }
 
     const data = await fetch(`${apiUrl()}/chats/${stageId}`, {
       cache: 'no-store',
-    })
+    });
 
     if (!data.ok) {
-      return []
+      return [];
     }
-    return (await data.json()).data
+    return (await data.json()).data;
   } catch (e) {
-    console.log('error in fetchChat', e)
-    throw e
+    console.log('error in fetchChat', e);
+    throw e;
   }
 }
 
@@ -30,10 +30,10 @@ export const createChat = async ({
   chat,
   authToken,
 }: {
-  chat: IChat
-  authToken: string
+  chat: IChat;
+  authToken: string;
 }): Promise<IExtendedChat> => {
-  console.log('createChat', chat)
+  console.log('createChat', chat);
   try {
     const response = await fetch(`${apiUrl()}/chats`, {
       method: 'POST',
@@ -42,13 +42,13 @@ export const createChat = async ({
         Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(chat),
-    })
+    });
     if (!response.ok) {
-      throw 'Error creating chat'
+      throw 'Error creating chat';
     }
-    return (await response.json()).data
+    return (await response.json()).data;
   } catch (e) {
-    console.log('error in createChat', e)
-    throw e
+    console.log('error in createChat', e);
+    throw e;
   }
-}
+};

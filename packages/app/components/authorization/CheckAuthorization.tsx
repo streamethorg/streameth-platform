@@ -1,5 +1,5 @@
-import { apiUrl } from '@/lib/utils/utils'
-import { cookies } from 'next/headers'
+import { apiUrl } from '@/lib/utils/utils';
+import { cookies } from 'next/headers';
 
 const CheckAuthorization = async () => {
   const userSession = cookies().get('user-session')
@@ -16,7 +16,7 @@ const CheckAuthorization = async () => {
   const isAuthorized =
     !!userAddress?.value && !!userSession?.value && resData.data
 
-  return isAuthorized
-}
+  return isAuthorized;
+};
 
-export default CheckAuthorization
+export default CheckAuthorization;

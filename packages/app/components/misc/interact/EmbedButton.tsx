@@ -1,6 +1,6 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { Code, Copy } from 'lucide-react'
+'use client';
+import { useEffect, useState } from 'react';
+import { Code, Copy } from 'lucide-react';
 
 import {
   Credenza,
@@ -10,37 +10,30 @@ import {
   CredenzaHeader,
   CredenzaTitle,
   CredenzaTrigger,
-} from '@/components/ui/crezenda'
-import { copyToClipboard, generateEmbedCode } from '@/lib/utils/utils'
-import { Button } from '@/components/ui/button'
+} from '@/components/ui/crezenda';
+import { copyToClipboard, generateEmbedCode } from '@/lib/utils/utils';
+import { Button } from '@/components/ui/button';
 
 export const EmbedModalContent: React.FC<{
-  playbackId?: string
-  streamId?: string
-  playerName: string
-  sessionId?: string
-  stageId?: string
-  vod?: boolean
-}> = ({
-  playbackId,
-  streamId,
-  playerName,
-  vod,
-  sessionId,
-  stageId,
-}) => {
-  const [copied, setCopied] = useState(false)
-  const copiedClass = copied ? 'opacity-100' : 'opacity-0'
-  const [url, setUrl] = useState('')
+  playbackId?: string;
+  streamId?: string;
+  playerName: string;
+  sessionId?: string;
+  stageId?: string;
+  vod?: boolean;
+}> = ({ playbackId, streamId, playerName, vod, sessionId, stageId }) => {
+  const [copied, setCopied] = useState(false);
+  const copiedClass = copied ? 'opacity-100' : 'opacity-0';
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     if (copied) {
-      setTimeout(() => setCopied(false), 2000)
+      setTimeout(() => setCopied(false), 2000);
     }
     if (typeof window !== 'undefined') {
-      setUrl(window.location.origin)
+      setUrl(window.location.origin);
     }
-  }, [copied])
+  }, [copied]);
 
   const generatedEmbedCode = generateEmbedCode({
     url,
@@ -50,15 +43,15 @@ export const EmbedModalContent: React.FC<{
     vod,
     streamId,
     playerName,
-  })
+  });
 
   return (
     <CredenzaContent className="max-w-[450px]">
       <CredenzaHeader>
         <CredenzaTitle>Embed video</CredenzaTitle>
         <CredenzaDescription className="mb-4">
-          Easily embed this stream into your website by adding the
-          iframe code below
+          Easily embed this stream into your website by adding the iframe code
+          below
         </CredenzaDescription>
       </CredenzaHeader>
       <CredenzaBody className="flex flex-col gap-3">
@@ -66,7 +59,8 @@ export const EmbedModalContent: React.FC<{
           <p>HTML</p>
           <div
             onClick={() => copyToClipboard(generatedEmbedCode)}
-            className="flex cursor-pointer gap-2">
+            className="flex cursor-pointer gap-2"
+          >
             <Copy className="h-4 w-4 text-muted-foreground" />
             Copy Code
           </div>
@@ -76,8 +70,8 @@ export const EmbedModalContent: React.FC<{
         </p>
       </CredenzaBody>
     </CredenzaContent>
-  )
-}
+  );
+};
 
 function EmbedButton({
   playbackId,
@@ -88,13 +82,13 @@ function EmbedButton({
   sessionId,
   stageId,
 }: {
-  playbackId?: string
-  streamId?: string
-  playerName: string
-  vod?: boolean
-  className?: string
-  sessionId?: string
-  stageId?: string
+  playbackId?: string;
+  streamId?: string;
+  playerName: string;
+  vod?: boolean;
+  className?: string;
+  sessionId?: string;
+  stageId?: string;
 }) {
   return (
     <Credenza>
@@ -113,7 +107,7 @@ function EmbedButton({
         stageId={stageId}
       />
     </Credenza>
-  )
+  );
 }
 
-export default EmbedButton
+export default EmbedButton;

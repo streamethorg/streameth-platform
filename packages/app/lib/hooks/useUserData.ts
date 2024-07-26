@@ -1,28 +1,28 @@
-import { useSIWE } from 'connectkit'
-import { useEffect, useState } from 'react'
-import { useAccount } from 'wagmi'
-import { fetchUserAction } from '../actions/users'
-import { IExtendedUser } from '../types'
+import { useSIWE } from 'connectkit';
+import { useEffect, useState } from 'react';
+import { useAccount } from 'wagmi';
+import { fetchUserAction } from '../actions/users';
+import { IExtendedUser } from '../types';
 
 const useUserData = () => {
-  const { isSignedIn } = useSIWE()
-  const { address } = useAccount()
-  const [userData, setUserData] = useState<IExtendedUser>()
+  const { isSignedIn } = useSIWE();
+  const { address } = useAccount();
+  const [userData, setUserData] = useState<IExtendedUser>();
   useEffect(() => {
     const getUserData = async () => {
       try {
         const userData = await fetchUserAction({
           userId: address as string,
-        })
-        setUserData(userData)
+        });
+        setUserData(userData);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
-    if (isSignedIn && address) getUserData()
-  }, [isSignedIn, address])
+    };
+    if (isSignedIn && address) getUserData();
+  }, [isSignedIn, address]);
 
-  return { userData }
-}
+  return { userData };
+};
 
-export default useUserData
+export default useUserData;

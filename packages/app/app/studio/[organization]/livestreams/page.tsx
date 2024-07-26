@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import {
   Card,
@@ -6,24 +6,24 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import React, { Suspense } from 'react'
-import CreateLivestreamModal from './components/CreateLivestreamModal'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import { IExtendedStage, LivestreamPageParams } from '@/lib/types'
-import { fetchOrganizationStages } from '@/lib/services/stageService'
-import LivestreamTable from './components/LivestreamTable'
-import { sortArray } from '@/lib/utils/utils'
-import EmptyFolder from '@/lib/svg/EmptyFolder'
-import TableSkeleton from '@/components/misc/Table/TableSkeleton'
+} from '@/components/ui/card';
+import React, { Suspense } from 'react';
+import CreateLivestreamModal from './components/CreateLivestreamModal';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { IExtendedStage, LivestreamPageParams } from '@/lib/types';
+import { fetchOrganizationStages } from '@/lib/services/stageService';
+import LivestreamTable from './components/LivestreamTable';
+import { sortArray } from '@/lib/utils/utils';
+import EmptyFolder from '@/lib/svg/EmptyFolder';
+import TableSkeleton from '@/components/misc/Table/TableSkeleton';
 
 export const Loading = () => {
   return (
     <div className="flex h-full flex-col bg-white">
       <TableSkeleton />
     </div>
-  )
-}
+  );
+};
 
 export const Livestreams = async ({
   params,
@@ -31,16 +31,16 @@ export const Livestreams = async ({
 }: LivestreamPageParams) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
-  if (!organization) return null
+  if (!organization) return null;
 
   const stages = sortArray(
     await fetchOrganizationStages({
       organizationId: organization._id,
     }),
     searchParams.sort
-  )
+  );
 
   return (
     <div className="flex h-full flex-col rounded-xl border bg-white">
@@ -48,7 +48,8 @@ export const Livestreams = async ({
         style={{
           backgroundImage: `url(/backgrounds/livestreamBg.png)`,
         }}
-        className="rounded-none border-none bg-cover bg-no-repeat p-4 shadow-none">
+        className="rounded-none border-none bg-cover bg-no-repeat p-4 shadow-none"
+      >
         <CardHeader>
           <CardTitle>Livestreams</CardTitle>
           <CardDescription className="max-w-[500px]">
@@ -85,18 +86,15 @@ export const Livestreams = async ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-const LivestreamsPage = ({
-  params,
-  searchParams,
-}: LivestreamPageParams) => {
+const LivestreamsPage = ({ params, searchParams }: LivestreamPageParams) => {
   return (
     <Suspense key={searchParams.toString()} fallback={<Loading />}>
       <Livestreams params={params} searchParams={searchParams} />
     </Suspense>
-  )
-}
+  );
+};
 
-export default LivestreamsPage
+export default LivestreamsPage;

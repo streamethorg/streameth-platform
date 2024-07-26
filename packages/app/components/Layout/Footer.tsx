@@ -1,6 +1,6 @@
-import StreamethLogoGray from '@/lib/svg/StreamethLogoGray'
-import Image from 'next/image'
-import Link from 'next/link'
+import StreamethLogoGray from '@/lib/svg/StreamethLogoGray';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const items = {
   // about: {
@@ -11,10 +11,10 @@ const items = {
   //   item: 'Contact',
   //   href: 'https://info.streameth.org/#team',
   // },
-  // docs: {
-  //   item: 'Docs',
-  //   href: 'https://streameth.notion.site/a473a629420b4942904c851155a18c9b?v=4a29b97e7fd94bbbb38269cb808d3ac4',
-  // },
+  data_request: {
+    item: 'Data Request',
+    href: '/data-request',
+  },
   privacy: {
     item: 'Privacy',
     href: '/privacy',
@@ -23,10 +23,10 @@ const items = {
     item: 'Terms',
     href: '/terms',
   },
-}
+};
 
 const Footer = ({ active }: { active?: string }) => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
     <footer className="z-[99999999] mb-3 mt-5 flex flex-col items-center justify-center space-y-2 md:mb-5">
@@ -48,13 +48,14 @@ const Footer = ({ active }: { active?: string }) => {
             href={href}
             className={`mx-1 text-sm ${
               active === key ? 'font-bold' : 'font-light'
-            } text-gray-500 underline hover:no-underline`}>
+            } text-gray-500 underline hover:no-underline`}
+          >
             {item}
           </Link>
         ))}
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
