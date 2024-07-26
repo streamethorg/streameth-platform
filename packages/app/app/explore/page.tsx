@@ -5,9 +5,24 @@ import ExploreTabs from './components/ExploreTabs'
 import { Input } from '@/components/ui/input'
 import { SearchIcon } from 'lucide-react'
 
+import HomePageNavbar from '@/components/Layout/HomePageNavbar'
+
 const Home = ({ searchParams }: HomePageProps) => {
+  const pages = [
+    {
+      name: 'Home',
+      href: `/`,
+      bgColor: 'bg-muted',
+    },
+  ]
   return (
     <div className="min-h-dvh flex flex-col">
+      <HomePageNavbar
+        logo=""
+        currentOrganization=""
+        pages={pages}
+        showSearchBar={false}
+      />
       <section className="bg-primary py-16 text-primary-foreground md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
@@ -18,13 +33,15 @@ const Home = ({ searchParams }: HomePageProps) => {
               Discover a wide range of engaging videos on various
               topics.
             </p>
-            <div className="mx-auto flex max-w-2xl items-center justify-center rounded-lg bg-primary-background/10 p-2">
-              <SearchIcon className="mr-3 h-6 w-6 text-primary-foreground/50" />
-              <Input
-                type="search"
-                placeholder="Search videos..."
-                className="w-full border-none bg-transparent text-primary-foreground placeholder-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
-              />
+            <div className="mx-auto max-w-2xl">
+              <div className="relative">
+                <SearchIcon className="absolute left-4 top-1/2 h-6 w-6 -translate-y-1/2 text-gray-400" />
+                <Input
+                  type="search"
+                  placeholder="Search videos..."
+                  className="w-full rounded-xl border-2 border-primary-foreground/20 bg-white py-3 pl-12 pr-4 text-lg text-gray-800 placeholder-gray-500 shadow-lg focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+              </div>
             </div>
           </div>
         </div>
