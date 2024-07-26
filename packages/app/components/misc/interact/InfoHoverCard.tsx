@@ -2,13 +2,13 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/components/ui/hover-card'
-import { Info, LucideProps } from 'lucide-react'
-import { ForwardRefExoticComponent } from 'react'
+} from '@/components/ui/hover-card';
+import { Info, LucideProps } from 'lucide-react';
+import { ForwardRefExoticComponent } from 'react';
 
 type IconType = ForwardRefExoticComponent<LucideProps> & {
-  displayName?: string
-}
+  displayName?: string;
+};
 
 const InfoHoverCard = ({
   title,
@@ -19,13 +19,13 @@ const InfoHoverCard = ({
   iconColor,
   iconClassName,
 }: {
-  title: string
-  description: string
-  size?: number
-  stroke?: number
-  Icon?: IconType
-  iconColor?: string
-  iconClassName?: string
+  title: string;
+  description: string;
+  size?: number;
+  stroke?: number;
+  Icon?: IconType;
+  iconColor?: string;
+  iconClassName?: string;
 }) => {
   return (
     <HoverCard>
@@ -46,7 +46,7 @@ const InfoHoverCard = ({
         </div>
       </HoverCardContent>
     </HoverCard>
-  )
-}
+  );
+};
 
-export default InfoHoverCard
+export default InfoHoverCard;

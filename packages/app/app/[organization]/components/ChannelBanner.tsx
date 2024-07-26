@@ -1,12 +1,12 @@
-import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite'
-import { IExtendedOrganization } from '@/lib/types'
-import Image from 'next/image'
-import React from 'react'
+import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite';
+import { IExtendedOrganization } from '@/lib/types';
+import Image from 'next/image';
+import React from 'react';
 
 const ChannelBanner = ({
   organization,
 }: {
-  organization: IExtendedOrganization
+  organization: IExtendedOrganization;
 }) => {
   return (
     <div className="relative hidden aspect-video h-full max-h-[200px] w-full md:block">
@@ -26,7 +26,7 @@ const ChannelBanner = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ChannelBanner
+export default ChannelBanner;

@@ -1,29 +1,27 @@
-import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import {
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { IExtendedSession } from '@/lib/types'
-import { formatDate } from '@/lib/utils/time'
-import { EllipsisVertical, Loader2 } from 'lucide-react'
-import { generateThumbnailAction } from '@/lib/actions/sessions'
+import Thumbnail from '@/components/misc/VideoCard/thumbnail';
+import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { IExtendedSession } from '@/lib/types';
+import { formatDate } from '@/lib/utils/time';
+import { EllipsisVertical, Loader2 } from 'lucide-react';
+import { generateThumbnailAction } from '@/lib/actions/sessions';
 
 const VideoCardProcessing = async ({
   session,
 }: {
-  session: IExtendedSession
+  session: IExtendedSession;
 }) => {
-  const thumbnail = (await generateThumbnailAction(session)) || ''
+  const thumbnail = (await generateThumbnailAction(session)) || '';
 
   return (
     <div className="min-h-full w-full animate-pulse rounded-xl uppercase">
       <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
       <div className="flex items-start justify-between">
         <CardHeader
-          className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}>
+          className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}
+        >
           <CardTitle
-            className={`line-clamp-2 overflow-hidden text-sm capitalize`}>
+            className={`line-clamp-2 overflow-hidden text-sm capitalize`}
+          >
             <div className="flex items-center justify-start space-x-2">
               <Loader2 className="animate-spin" />
               <span>Processing...</span>
@@ -43,7 +41,7 @@ const VideoCardProcessing = async ({
         <EllipsisVertical className="mt-2" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VideoCardProcessing
+export default VideoCardProcessing;

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,20 +6,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
-import { ConnectWalletButton } from './ConnectWalletButton'
-import { SignInUserButton } from './SignInUserButton'
-import { Button } from '../ui/button'
-import { IExtendedOrganization } from '@/lib/types'
-import { Label } from '@radix-ui/react-dropdown-menu'
+} from '@/components/ui/dropdown-menu';
+import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
+import { ConnectWalletButton } from './ConnectWalletButton';
+import { SignInUserButton } from './SignInUserButton';
+import { Button } from '../ui/button';
+import { IExtendedOrganization } from '@/lib/types';
+import { Label } from '@radix-ui/react-dropdown-menu';
 
 const UserDropdown = ({
   organization,
   organizations,
 }: {
-  organization?: string
-  organizations?: IExtendedOrganization[]
+  organization?: string;
+  organizations?: IExtendedOrganization[];
 }) => {
   return (
     <DropdownMenu>
@@ -41,7 +41,7 @@ const UserDropdown = ({
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export default UserDropdown
+export default UserDropdown;

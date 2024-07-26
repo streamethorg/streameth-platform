@@ -1,16 +1,11 @@
-'use client'
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from 'react'
-import Hls from 'hls.js'
-import { useClipContext } from './ClipContext'
+'use client';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import Hls from 'hls.js';
+import { useClipContext } from './ClipContext';
 
 export interface HlsPlayerProps {
-  playbackId: string
-  selectedStreamSession: string
+  playbackId: string;
+  selectedStreamSession: string;
 }
 
 const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
@@ -28,68 +23,68 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
     startTime,
     fragmentLoading,
     setFragmentLoading,
-  } = useClipContext()
+  } = useClipContext();
 
   const playbackRef = useRef<{ progress: number; offset: number }>({
     progress: 0,
     offset: 0,
-  })
+  });
 
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null);
 
-  const src = `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${selectedStreamSession}/output.m3u8`
+  const src = `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${selectedStreamSession}/output.m3u8`;
 
   useEffect(() => {
     if (Hls.isSupported() && videoRef.current) {
-      const hls = new Hls()
-      hls.loadSource(src)
-      hls.attachMedia(videoRef.current)
+      const hls = new Hls();
+      hls.loadSource(src);
+      hls.attachMedia(videoRef.current);
 
       hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
         if (videoRef.current) {
-          const progress = videoRef.current.currentTime
+          const progress = videoRef.current.currentTime;
           const offset =
             Date.now() -
             (data.frag.rawProgramDateTime
               ? new Date(data.frag.rawProgramDateTime).getTime()
-              : Date.now())
-          playbackRef.current = { progress, offset }
-          setPlaybackStatus(playbackRef.current)
-          console.log(data.frag.rawProgramDateTime)
-          setFragmentLoading(false)
+              : Date.now());
+          playbackRef.current = { progress, offset };
+          setPlaybackStatus(playbackRef.current);
+          console.log(data.frag.rawProgramDateTime);
+          setFragmentLoading(false);
         }
-      })
+      });
 
       // if seeking loading spinner
       videoRef.current.onseeking = () => {
-        setIsLoading(true)
-        setFragmentLoading(true)
-      }
+        setIsLoading(true);
+        setFragmentLoading(true);
+      };
 
       videoRef.current.onseeked = () => {
-        setIsLoading(false)
-      }
+        setIsLoading(false);
+      };
 
       // Set error handling
       hls.on(Hls.Events.ERROR, (event, data) => {
-        setError(data.details)
-      })
+        setError(data.details);
+      });
 
       const intervalId = setInterval(() => {
         if (videoRef.current) {
-          const progress = videoRef.current.currentTime
+          const progress = videoRef.current.currentTime;
           // Update progress without overwriting offset
-          playbackRef.current.progress = progress
-          setPlaybackStatus({ ...playbackRef.current })
+          playbackRef.current.progress = progress;
+          setPlaybackStatus({ ...playbackRef.current });
         }
-      }, 1000)
+      }, 1000);
 
       return () => {
-        hls.destroy()
-        clearInterval(intervalId)
-      }
+        hls.destroy();
+        clearInterval(intervalId);
+      };
     }
-  }, [src, setPlaybackStatus, videoRef, setIsLoading])
+  }, [src, setPlaybackStatus, videoRef, setIsLoading]);
 
   useEffect(() => {
     if (
@@ -101,9 +96,9 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
       setEndTime({
         displayTime: videoRef.current.duration,
         unix: Date.now() - playbackStatus.offset,
-      })
+      });
     }
-  }, [setEndTime, videoRef, playbackStatus])
+  }, [setEndTime, videoRef, playbackStatus]);
 
   return (
     <div className="relative mb-4 flex h-2/3 flex-grow">
@@ -115,14 +110,15 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         ref={videoRef}
         autoPlay={false}
         controls={false}
-        className="sticky top-0 w-full rounded-lg"></video>
+        className="sticky top-0 w-full rounded-lg"
+      ></video>
       <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
         {isLoading && (
           <div className="h-20 w-20 animate-spin rounded-full border-b-2 border-t-2 border-primary" />
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ReactHlsPlayer
+export default ReactHlsPlayer;

@@ -1,21 +1,21 @@
-'use client'
-import { SketchPicker } from 'react-color'
-import { Input } from '@/components/ui/input'
-import { useState } from 'react'
+'use client';
+import { SketchPicker } from 'react-color';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
+} from '@/components/ui/popover';
 
 const ColorPicker = ({
   color,
   onChange,
 }: {
-  color: string | undefined
-  onChange: (color: string) => void
+  color: string | undefined;
+  onChange: (color: string) => void;
 }) => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <Popover>
       <PopoverTrigger>
@@ -34,13 +34,13 @@ const ColorPicker = ({
           <SketchPicker
             color={color}
             onChange={(color) => {
-              onChange(color.hex)
+              onChange(color.hex);
             }}
           />
         </PopoverContent>
       )}
     </Popover>
-  )
-}
+  );
+};
 
-export default ColorPicker
+export default ColorPicker;

@@ -1,28 +1,28 @@
-'use client'
-import { useState, createContext } from 'react'
-import Image from 'next/image'
+'use client';
+import { useState, createContext } from 'react';
+import Image from 'next/image';
 export const LoadingContext = createContext<{
-  isLoading: boolean
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
   isLoading: true,
   setIsLoading: () => {},
-})
+});
 
 export const LoadingContextProvider = ({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
       <LoadingModal isLoading={false} />
       {children}
     </LoadingContext.Provider>
-  )
-}
+  );
+};
 
 const LoadingModal = ({ isLoading }: { isLoading: boolean }) => {
   if (isLoading) {
@@ -38,6 +38,6 @@ const LoadingModal = ({ isLoading }: { isLoading: boolean }) => {
         />
         <p className="animate-pulse text-xl font-bold">Loading...</p>
       </div>
-    )
+    );
   }
-}
+};

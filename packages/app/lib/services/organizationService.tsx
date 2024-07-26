@@ -1,18 +1,18 @@
-import { apiUrl } from '@/lib/utils/utils'
-import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface'
-import { IExtendedOrganization, IExtendedUser } from '../types'
-import { cookies } from 'next/headers'
+import { apiUrl } from '@/lib/utils/utils';
+import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
+import { IExtendedOrganization, IExtendedUser } from '../types';
+import { cookies } from 'next/headers';
 
 export async function fetchOrganization({
   organizationSlug,
   organizationId,
 }: {
-  organizationSlug?: string
-  organizationId?: string
+  organizationSlug?: string;
+  organizationId?: string;
 }): Promise<IExtendedOrganization | null> {
   try {
     if (!organizationSlug && !organizationId) {
-      return null
+      return null;
     }
     const response = await fetch(
       `${apiUrl()}/organizations/${
@@ -21,27 +21,25 @@ export async function fetchOrganization({
       {
         cache: 'no-store',
       }
-    )
-    const data = (await response.json()).data
+    );
+    const data = (await response.json()).data;
 
-    return data
+    return data;
   } catch (e) {
-    console.log(e)
-    return null
+    console.log(e);
+    return null;
   }
 }
 
-export async function fetchOrganizations(): Promise<
-  IExtendedOrganization[]
-> {
+export async function fetchOrganizations(): Promise<IExtendedOrganization[]> {
   try {
     const response = await fetch(`${apiUrl()}/organizations`, {
       cache: 'no-store',
-    })
-    return (await response.json()).data ?? []
+    });
+    return (await response.json()).data ?? [];
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching organizations'
+    console.log(e);
+    throw 'Error fetching organizations';
   }
 }
 
@@ -49,11 +47,11 @@ export async function createOrganization({
   organization,
   authToken,
 }: {
-  organization: IOrganization
-  authToken: string
+  organization: IOrganization;
+  authToken: string;
 }): Promise<IOrganization> {
   if (!authToken) {
-    throw 'No auth token'
+    throw 'No auth token';
   }
 
   try {
@@ -64,16 +62,16 @@ export async function createOrganization({
         Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(organization),
-    })
+    });
 
     if (response.ok) {
-      return (await response.json()).data
+      return (await response.json()).data;
     } else {
-      throw await response.json()
+      throw await response.json();
     }
   } catch (e) {
-    console.error('Unexpected error:', e)
-    throw e
+    console.error('Unexpected error:', e);
+    throw e;
   }
 }
 
@@ -81,13 +79,13 @@ export async function updateOrganization({
   organization,
   authToken,
 }: {
-  organization: IExtendedOrganization
-  authToken: string
+  organization: IExtendedOrganization;
+  authToken: string;
 }): Promise<IOrganization> {
   if (!authToken) {
-    throw 'No auth token'
+    throw 'No auth token';
   }
-  const modifiedObject = (({ _id, ...rest }) => rest)(organization)
+  const modifiedObject = (({ _id, ...rest }) => rest)(organization);
 
   try {
     const response = await fetch(
@@ -100,16 +98,16 @@ export async function updateOrganization({
         },
         body: JSON.stringify(modifiedObject),
       }
-    )
+    );
 
     if (response.ok) {
-      return (await response.json()).data
+      return (await response.json()).data;
     } else {
-      throw await response.json()
+      throw await response.json();
     }
   } catch (e) {
-    console.error('Unexpected error:', e)
-    throw e
+    console.error('Unexpected error:', e);
+    throw e;
   }
 }
 
@@ -118,12 +116,12 @@ export async function addOrganizationMember({
   memberAddress,
   authToken,
 }: {
-  organizationId: string
-  memberAddress: string
-  authToken: string
+  organizationId: string;
+  memberAddress: string;
+  authToken: string;
 }): Promise<IOrganization> {
   if (!authToken) {
-    throw 'No auth token'
+    throw 'No auth token';
   }
 
   try {
@@ -137,27 +135,27 @@ export async function addOrganizationMember({
         },
         body: JSON.stringify({ address: memberAddress }),
       }
-    )
+    );
 
     if (response.ok) {
-      return (await response.json()).message
+      return (await response.json()).message;
     } else {
-      throw await response.json()
+      throw await response.json();
     }
   } catch (e) {
-    console.error('Unexpected error:', e)
-    throw e
+    console.error('Unexpected error:', e);
+    throw e;
   }
 }
 
 export async function fetchOrganizationMembers({
   organizationId,
 }: {
-  organizationId: string
+  organizationId: string;
 }): Promise<IExtendedUser[]> {
-  const authToken = cookies().get('user-session')?.value
+  const authToken = cookies().get('user-session')?.value;
   if (!authToken) {
-    throw 'No auth token'
+    throw 'No auth token';
   }
 
   try {
@@ -170,12 +168,12 @@ export async function fetchOrganizationMembers({
         },
         cache: 'no-store',
       }
-    )
+    );
 
-    return (await response.json()).data ?? []
+    return (await response.json()).data ?? [];
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching organizations members'
+    console.log(e);
+    throw 'Error fetching organizations members';
   }
 }
 
@@ -184,9 +182,9 @@ export async function deleteTeamMember({
   authToken,
   organizationId,
 }: {
-  memberWalletAddress: string
-  authToken: string
-  organizationId?: string
+  memberWalletAddress: string;
+  authToken: string;
+  organizationId?: string;
 }): Promise<IExtendedUser> {
   try {
     const response = await fetch(
@@ -199,31 +197,31 @@ export async function deleteTeamMember({
         },
         body: JSON.stringify({ walletAddress: memberWalletAddress }),
       }
-    )
+    );
 
     if (!response.ok) {
-      throw 'Error deleting team member'
+      throw 'Error deleting team member';
     }
-    return await response.json()
+    return await response.json();
   } catch (e) {
-    console.log('error in delete team member', e)
-    throw e
+    console.log('error in delete team member', e);
+    throw e;
   }
 }
 
 export async function fetchOrganizationSocials({
   organizationId,
 }: {
-  organizationSlug?: string
-  organizationId?: string
+  organizationSlug?: string;
+  organizationId?: string;
 }): Promise<IExtendedOrganization | null> {
   try {
     if (!organizationId) {
-      return null
+      return null;
     }
-    const authToken = cookies().get('user-session')?.value
+    const authToken = cookies().get('user-session')?.value;
     if (!authToken) {
-      throw 'No auth token'
+      throw 'No auth token';
     }
 
     const response = await fetch(
@@ -235,13 +233,13 @@ export async function fetchOrganizationSocials({
         },
         cache: 'no-store',
       }
-    )
-    const data = (await response.json()).data
+    );
+    const data = (await response.json()).data;
 
-    return data
+    return data;
   } catch (e) {
-    console.log(e)
-    return null
+    console.log(e);
+    return null;
   }
 }
 
@@ -250,9 +248,9 @@ export async function deleteDestination({
   authToken,
   organizationId,
 }: {
-  destinationId: string
-  authToken: string
-  organizationId?: string
+  destinationId: string;
+  authToken: string;
+  organizationId?: string;
 }): Promise<IExtendedOrganization> {
   try {
     const response = await fetch(
@@ -265,14 +263,14 @@ export async function deleteDestination({
         },
         body: JSON.stringify({ destinationId }),
       }
-    )
+    );
 
     if (!response.ok) {
-      throw 'Error deleting destination'
+      throw 'Error deleting destination';
     }
-    return await response.json()
+    return await response.json();
   } catch (e) {
-    console.log('error in delete destination', e)
-    throw e
+    console.log('error in delete destination', e);
+    throw e;
   }
 }

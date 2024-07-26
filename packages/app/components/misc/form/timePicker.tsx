@@ -4,21 +4,22 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/ui/select';
 
 const TimePicker = ({
   value,
   onChange,
 }: {
-  value: string | undefined
-  onChange: (value: string) => void
+  value: string | undefined;
+  onChange: (value: string) => void;
 }) => {
   return (
     <Select
       onValueChange={(value) => {
-        onChange(value)
+        onChange(value);
       }}
-      defaultValue={value}>
+      defaultValue={value}
+    >
       <SelectTrigger>
         {value ? (
           value
@@ -34,20 +35,20 @@ const TimePicker = ({
         ))}
       </SelectContent>
     </Select>
-  )
-}
+  );
+};
 
-export default TimePicker
+export default TimePicker;
 
 function generateTimeOptions(interval: number) {
-  const times = []
+  const times = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += interval) {
       const timeString = `${hour.toString().padStart(2, '0')}:${minute
         .toString()
-        .padStart(2, '0')}`
-      times.push(timeString)
+        .padStart(2, '0')}`;
+      times.push(timeString);
     }
   }
-  return times
+  return times;
 }

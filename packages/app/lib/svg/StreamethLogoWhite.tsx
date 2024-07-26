@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const StreamethLogoWhite: React.FC<React.SVGProps<SVGSVGElement>> = ({
   width = '100%',
@@ -12,7 +12,8 @@ const StreamethLogoWhite: React.FC<React.SVGProps<SVGSVGElement>> = ({
       height={height}
       viewBox="0 0 400 400"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -32,7 +33,7 @@ const StreamethLogoWhite: React.FC<React.SVGProps<SVGSVGElement>> = ({
         fill="#F1F5F9"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default StreamethLogoWhite
+export default StreamethLogoWhite;

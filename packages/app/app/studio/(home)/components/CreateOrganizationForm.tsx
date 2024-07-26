@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,30 +12,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { organizationSchema } from '@/lib/schema'
-import { toast } from 'sonner'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { organizationSchema } from '@/lib/schema';
+import { toast } from 'sonner';
 import {
   createOrganizationAction,
   updateOrganizationAction,
-} from '@/lib/actions/organizations'
-import { Loader2 } from 'lucide-react'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import { useRouter } from 'next/navigation'
-import { IExtendedOrganization } from '@/lib/types'
+} from '@/lib/actions/organizations';
+import { Loader2 } from 'lucide-react';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import { useRouter } from 'next/navigation';
+import { IExtendedOrganization } from '@/lib/types';
+
+interface CreateOrganizationFormProps {
+  organization?: IExtendedOrganization;
+  disableName?: boolean;
+}
 
 export default function CreateOrganizationForm({
   organization,
   disableName = false,
-}: {
-  organization?: IExtendedOrganization
-  disableName?: boolean
-}) {
-  const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+}: CreateOrganizationFormProps) {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
@@ -45,12 +47,11 @@ export default function CreateOrganizationForm({
       logo: organization?.logo || '',
       email: organization?.email || '',
       description: organization?.description || '',
-      // url: organization?.url || '',
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof organizationSchema>) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     if (organization) {
       updateOrganizationAction({
@@ -60,40 +61,38 @@ export default function CreateOrganizationForm({
         },
       })
         .then(() => {
-          setIsOpen(false)
-          toast.success('Organization updated')
+          setIsOpen(false);
+          toast.success('Organization updated');
         })
         .catch(() => {
-          toast.error('Error updating organization')
+          toast.error('Error updating organization');
         })
         .finally(() => {
-          setIsLoading(false)
-        })
-      return
+          setIsLoading(false);
+        });
+      return;
     }
 
     createOrganizationAction({
       organization: values,
     })
       .then((response) => {
-        setIsOpen(false)
-        toast.success('Organization created')
-        router.push(`/studio/${response.slug}`)
+        setIsOpen(false);
+        toast.success('Organization created');
+        router.push(`/studio/${response.slug}`);
       })
       .catch(() => {
-        toast.error('Error creating organization')
+        toast.error('Error creating organization');
       })
       .finally(() => {
-        setIsLoading(false)
-      })
+        setIsLoading(false);
+      });
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4">
-        <div>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <div className="relative">
           <FormField
             control={form.control}
             name="banner"
@@ -102,10 +101,10 @@ export default function CreateOrganizationForm({
                 <FormControl>
                   <ImageUpload
                     className="h-40 w-full rounded-xl bg-neutrals-300"
-                    placeholder="Click to upload image here. Maximum image file size is 5MB.
-                    Best resolution of 1500 x 500px. Aspect ratio of 3:1."
-                    aspectRatio={1}
+                    placeholder="Click to upload image here. Image must be exactly 1500x500 pixels. Maximum file size is 5MB."
+                    aspectRatio={3 / 1}
                     path={`organizations`}
+                    requireExactSize={{ width: 1500, height: 500 }}
                     {...field}
                   />
                 </FormControl>
@@ -117,22 +116,22 @@ export default function CreateOrganizationForm({
             control={form.control}
             name="logo"
             render={({ field }) => (
-              <>
-                <FormItem className="relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1">
-                  <FormControl>
-                    <ImageUpload
-                      className="m-auto h-full w-full rounded-full bg-neutrals-300 text-white"
-                      aspectRatio={1}
-                      path={`organizations`}
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
+              <FormItem>
+                <FormControl>
+                  <ImageUpload
+                    placeholder="Upload logo"
+                    aspectRatio={1}
+                    path={`organizations`}
+                    isProfileImage={true}
+                    {...field}
+                  />
+                </FormControl>
                 <FormMessage />
-              </>
+              </FormItem>
             )}
           />
         </div>
+
         <FormField
           control={form.control}
           name="name"
@@ -142,11 +141,7 @@ export default function CreateOrganizationForm({
                 Organization name
               </FormLabel>
               <FormControl>
-                <Input
-                  disabled={disableName}
-                  placeholder="Name"
-                  {...field}
-                />
+                <Input disabled={disableName} placeholder="Name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -183,7 +178,37 @@ export default function CreateOrganizationForm({
           )}
         />
 
-        {/* <FormField
+        <div className="flex flex-row justify-between">
+          {!organization && (
+            <Button
+              type="button"
+              onClick={() => {
+                router.back();
+              }}
+              variant={'outline'}
+            >
+              Go back
+            </Button>
+          )}
+          <Button type="submit" className="ml-auto" variant={'primary'}>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+              </>
+            ) : organization ? (
+              'Update'
+            ) : (
+              'Create'
+            )}
+          </Button>
+        </div>
+      </form>
+    </Form>
+  );
+}
+
+{
+  /* <FormField
           control={form.control}
           name="url"
           render={({ field }) => (
@@ -195,36 +220,5 @@ export default function CreateOrganizationForm({
               <FormMessage />
             </FormItem>
           )}
-        /> */}
-
-        <div className="flex flex-row justify-between">
-          {!organization && (
-            <Button
-              type="button"
-              onClick={() => {
-                router.back()
-              }}
-              variant={'outline'}>
-              Go back
-            </Button>
-          )}
-          <Button
-            type="submit"
-            className="ml-auto"
-            variant={'primary'}>
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{' '}
-                Please wait
-              </>
-            ) : organization ? (
-              'Update'
-            ) : (
-              'Create'
-            )}
-          </Button>
-        </div>
-      </form>
-    </Form>
-  )
+        /> */
 }

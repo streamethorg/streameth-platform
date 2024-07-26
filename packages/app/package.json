@@ -17,7 +17,7 @@
     "@livekit/components-react": "^1.5.3",
     "@livekit/components-styles": "^1.0.9",
     "@livepeer/react": "^4.1.8",
-    "@privy-io/react-auth": "^1.64.0",
+    "@privy-io/react-auth": "^1.76.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -97,9 +97,9 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.7",
     "@tailwindcss/typography": "^0.5.13",
     "@types/fuzzy-search": "^2.1.5",
+    "@types/lodash": "^4.17.7",
     "@types/node": "20.14.11",
     "@types/react": "18.2.37",
     "@types/react-color": "^3.0.11",

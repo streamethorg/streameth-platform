@@ -1,26 +1,26 @@
-import SpeakerModal from './SpeakerModal'
-import SpeakerPhoto from './SpeakerPhoto'
-import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface'
-import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface'
+import SpeakerModal from './SpeakerModal';
+import SpeakerPhoto from './SpeakerPhoto';
+import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface';
+import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface';
 
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 
-import { CredenzaTrigger, Credenza } from '@/components/ui/crezenda'
-import { IExtendedEvent, IExtendedSession } from '@/lib/types'
+import { CredenzaTrigger, Credenza } from '@/components/ui/crezenda';
+import { IExtendedEvent, IExtendedSession } from '@/lib/types';
 
 const SpeakerCard = ({
   event,
   speaker,
   sessions,
 }: {
-  event: IExtendedEvent
-  speaker: ISpeakerModel
-  sessions: IExtendedSession[]
+  event: IExtendedEvent;
+  speaker: ISpeakerModel;
+  sessions: IExtendedSession[];
 }) => {
   const speakerSessions = sessions?.filter((session) =>
     session.speakers
@@ -28,7 +28,7 @@ const SpeakerCard = ({
           (sessionSpeaker) => sessionSpeaker?._id === speaker?._id
         )
       : []
-  )
+  );
 
   return (
     <Credenza>
@@ -47,7 +47,7 @@ const SpeakerCard = ({
       </CredenzaTrigger>
       <SpeakerModal speaker={speaker} sessions={speakerSessions} />
     </Credenza>
-  )
-}
+  );
+};
 
-export default SpeakerCard
+export default SpeakerCard;

@@ -1,13 +1,13 @@
-'use client'
-import React, { useState } from 'react'
-import { FaFilter } from 'react-icons/fa'
-import { Button } from '@/components/ui/button'
+'use client';
+import React, { useState } from 'react';
+import { FaFilter } from 'react-icons/fa';
+import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { IExtendedStage } from '@/lib/types'
+} from '@/components/ui/popover';
+import { IExtendedStage } from '@/lib/types';
 import {
   Select,
   SelectContent,
@@ -15,40 +15,39 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import useSearchParams from '@/lib/hooks/useSearchParams'
+} from '@/components/ui/select';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface'
-import { Checkbox } from '@/components/ui/checkbox'
+} from '@/components/ui/accordion';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
-  const { searchParams, handleTermChange } = useSearchParams()
+  const { searchParams, handleTermChange } = useSearchParams();
   const [selectedStage, setSelectedStage] = useState(
     searchParams.get('stage') || undefined
-  )
+  );
   const [selectedType, setSelectedType] = useState(
     searchParams.get('type') || undefined
-  )
+  );
   const [selectedVisibility, setSelectedVisibility] = useState(
     searchParams.get('published') || undefined
-  )
-  const [openPopover, setOpenPopover] = useState(false)
+  );
+  const [openPopover, setOpenPopover] = useState(false);
 
-  const count = [
-    selectedStage,
-    selectedType,
-    selectedVisibility,
-  ].reduce((count, item) => count + (item !== undefined ? 1 : 0), 0)
+  const count = [selectedStage, selectedType, selectedVisibility].reduce(
+    (count, item) => count + (item !== undefined ? 1 : 0),
+    0
+  );
   const handleClearFilter = () => {
-    setSelectedStage(undefined)
-    setSelectedType(undefined)
-    setSelectedVisibility(undefined)
-  }
+    setSelectedStage(undefined);
+    setSelectedType(undefined);
+    setSelectedVisibility(undefined);
+  };
   const handleSaveFilter = () => {
     handleTermChange([
       {
@@ -67,14 +66,14 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
         key: 'page',
         value: '1',
       },
-    ])
-    setOpenPopover(false)
-  }
+    ]);
+    setOpenPopover(false);
+  };
 
   const sessionTypes = Object.keys(SessionType).map((key) => ({
     label: key,
     value: (SessionType as any)[key],
-  }))
+  }));
 
   return (
     <Popover open={openPopover} onOpenChange={setOpenPopover}>
@@ -86,17 +85,11 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
       </PopoverTrigger>
       <PopoverContent className="space-y-4 p-0">
         <div className="flex items-center justify-between gap-2 border-b border-secondary p-2">
-          <Button
-            onClick={handleClearFilter}
-            size="sm"
-            variant="outline">
+          <Button onClick={handleClearFilter} size="sm" variant="outline">
             Clear
           </Button>
           <h4 className="text-center font-bold">Filters</h4>
-          <Button
-            onClick={handleSaveFilter}
-            size="sm"
-            variant="primary">
+          <Button onClick={handleSaveFilter} size="sm" variant="primary">
             Save
           </Button>
         </div>
@@ -114,7 +107,8 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             <AccordionContent className="p-2">
               <Select
                 value={selectedStage}
-                onValueChange={(value) => setSelectedStage(value)}>
+                onValueChange={(value) => setSelectedStage(value)}
+              >
                 <SelectTrigger>
                   <SelectValue
                     defaultValue={selectedStage}
@@ -147,7 +141,8 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             <AccordionContent className="p-2">
               <Select
                 value={selectedType}
-                onValueChange={(value) => setSelectedType(value)}>
+                onValueChange={(value) => setSelectedType(value)}
+              >
                 <SelectTrigger>
                   <SelectValue
                     defaultValue={selectedType}
@@ -172,9 +167,7 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
               <div className="flex items-center gap-2">
                 <Checkbox
                   checked={!!selectedVisibility}
-                  onCheckedChange={() =>
-                    setSelectedVisibility(undefined)
-                  }
+                  onCheckedChange={() => setSelectedVisibility(undefined)}
                 />
                 <h4 className="text-sm font-medium">Visibility</h4>
               </div>
@@ -182,9 +175,8 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             <AccordionContent className="p-2">
               <Select
                 value={selectedVisibility}
-                onValueChange={(value) =>
-                  setSelectedVisibility(value)
-                }>
+                onValueChange={(value) => setSelectedVisibility(value)}
+              >
                 <SelectTrigger>
                   <SelectValue
                     defaultValue={selectedVisibility}
@@ -203,7 +195,7 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
         </Accordion>
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};
 
-export default LibraryFilter
+export default LibraryFilter;
