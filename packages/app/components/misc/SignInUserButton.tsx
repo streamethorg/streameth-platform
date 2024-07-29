@@ -5,6 +5,9 @@ import { deleteSession, storeSession } from '@/lib/actions/auth';
 import { apiUrl } from '@/lib/utils/utils';
 import { Loader2 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
+import { toast } from 'sonner';
+import Link from 'next/link';
 
 interface SignInUserButtonProps {
   className?: string;
@@ -17,13 +20,15 @@ export const SignInUserButton = ({
 }: SignInUserButtonProps) => {
   const { ready, authenticated } = usePrivy();
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [privyRefreshToken, setPrivyRefreshToken] = useState<string | null>('');
 
-  const privyRefreshToken = localStorage.getItem('privy:refresh_token');
   const parsePrivyRefreshToken = privyRefreshToken
     ? JSON.parse(privyRefreshToken)
     : null;
 
   const getSession = async () => {
+    setIsLoading(true);
     const privyToken = localStorage.getItem('privy:token');
     const token = privyToken ? JSON.parse(privyToken) : null;
     const res = await fetch(`${apiUrl()}/auth/login`, {
@@ -35,26 +40,23 @@ export const SignInUserButton = ({
       headers: { 'Content-Type': 'application/json' },
     });
     const resData = await res.json();
-    storeSession({
-      token: resData?.data?.token,
-      address: resData?.data?.user?.walletAddress,
-    });
+    if (!resData.data?.token) {
+      logout();
+      setIsOpen(true);
+      deleteSession();
+    } else {
+      storeSession({
+        token: resData?.data?.token,
+        address: resData?.data?.user?.walletAddress,
+      });
+      toast.message('Redirecting to Studio...');
+    }
+    setIsLoading(false);
   };
-
-  useEffect(() => {
-    if (!parsePrivyRefreshToken) logout();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parsePrivyRefreshToken]);
-
-  useEffect(() => {
-    if (!parsePrivyRefreshToken) logout();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parsePrivyRefreshToken]);
 
   const { login } = useLogin({
     onComplete: () => {
       getSession();
-      setIsLoading(false);
     },
     onError: (error) => {
       deleteSession();
@@ -69,6 +71,19 @@ export const SignInUserButton = ({
     },
   });
 
+  useEffect(() => {
+    // Check if we're in the browser
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('privy:refresh_token');
+      setPrivyRefreshToken(token);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!parsePrivyRefreshToken) logout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsePrivyRefreshToken]);
+
   const handleClick = () => {
     setIsLoading(true);
     if (authenticated) {
@@ -79,18 +94,32 @@ export const SignInUserButton = ({
   };
 
   return (
-    <Button
-      onClick={handleClick}
-      className={className}
-      disabled={!ready || isLoading}
-    >
-      {!ready || isLoading ? (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      ) : authenticated ? (
-        'Sign Out'
-      ) : (
-        btnText
-      )}
-    </Button>
+    <>
+      <Button
+        onClick={handleClick}
+        className={className}
+        disabled={!ready || isLoading}
+      >
+        {!ready || isLoading ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : authenticated ? (
+          'Sign Out'
+        ) : (
+          btnText
+        )}
+      </Button>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTitle></DialogTitle>
+        <DialogContent className="text-center">
+          <p>User not found!</p>
+          <Link
+            className="text-primary text-bold"
+            href={'https://xg2nwufp1ju.typeform.com/to/UHZwa5M3'}
+          >
+            Create Account
+          </Link>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
