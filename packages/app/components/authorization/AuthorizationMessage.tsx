@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SignInUserButton } from '../misc/SignInUserButton';
 import {
   Card,
@@ -12,24 +12,10 @@ import {
 import LoginBackground from '@/public/login-background.png';
 import Image from 'next/image';
 
-import { usePrivy } from '@privy-io/react-auth';
-import { toast } from 'sonner';
-
 import Link from 'next/link';
 import SignInWithSocials from './SignInWithSocials';
 
 const AuthorizationMessage = () => {
-  const { ready, authenticated, login } = usePrivy();
-
-  useEffect(() => {
-    if (ready && !authenticated) {
-      login();
-    }
-    if (authenticated) {
-      toast.message('Redirecting to Studio...');
-    }
-  }, [ready, authenticated]);
-
   return (
     <div className="flex h-screen w-screen flex-row">
       <div className="flex h-full w-1/2 flex-col items-center justify-center">
@@ -39,8 +25,20 @@ const AuthorizationMessage = () => {
             <CardDescription>
               Click the sign in button to connect to StreamETH
             </CardDescription>
-            <div className="flex w-full items-center justify-center pt-[20px]">
-              <SignInUserButton />
+            <div className="flex flex-col divide-y gap-4">
+              <div className="flex w-full items-center justify-center pt-[20px]">
+                <SignInUserButton />
+              </div>
+
+              <div className="pt-6 text-sm">
+                Don&apos;t have an account? {` `}
+                <Link
+                  className="text-primary text-bold"
+                  href={'https://xg2nwufp1ju.typeform.com/to/UHZwa5M3'}
+                >
+                  Create Account
+                </Link>
+              </div>
             </div>
           </CardHeader>
 
@@ -74,7 +72,6 @@ const AuthorizationMessage = () => {
           className="object-cover w-full h-full"
         /> */}
       </div>
-      <div></div>
     </div>
   );
 };
