@@ -1,11 +1,14 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IStage } from '@interfaces/stage.interface';
+import { ILiveStream, IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
 import Events from '@models/event.model';
 import { Types } from 'mongoose';
 import { createStream, deleteStream, getStreamInfo } from '@utils/livepeer';
 import { config } from '@config';
+import Organization from '@models/organization.model';
+import { refreshAccessToken } from '@utils/oauth';
+import { createYoutubeLiveStream } from '@utils/youtube';
 
 export default class StageService {
   private path: string;
@@ -118,5 +121,19 @@ export default class StageService {
       ],
     };
     return metadata;
+  }
+
+  async createLiveStream(data: ILiveStream) {
+    const stage = await this.get(data.stageId);
+    const org = await Organization.findOne({ _id: stage.organizationId });
+    const token = org.socials.find(
+      (e) => e.type == data.socialType && e._id == data.socialId,
+    );
+    const refeshToken = await refreshAccessToken(token.refreshToken);
+    return await createYoutubeLiveStream({
+      accessToken: refeshToken,
+      title: stage.name,
+      streamDate: stage.streamDate.toString(),
+    });
   }
 }
