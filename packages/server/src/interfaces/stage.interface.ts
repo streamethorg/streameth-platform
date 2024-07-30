@@ -20,6 +20,13 @@ export interface IPlugin {
   name: string;
 }
 
+export interface ILiveStream {
+  stageId: string;
+  socialId: string;
+  socialType: string;
+  organizationId: string;
+}
+
 export class IStage {
   _id?: Types.ObjectId | string;
   name: string;
