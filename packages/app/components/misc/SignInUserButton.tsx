@@ -3,9 +3,15 @@ import { Button } from '@/components/ui/button';
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { deleteSession, storeSession } from '@/lib/actions/auth';
 import { apiUrl } from '@/lib/utils/utils';
-import { Loader2 } from 'lucide-react';
+import { ExternalLink, Loader2, UserX } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '../ui/dialog';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
@@ -111,15 +117,34 @@ export const SignInUserButton = ({
         )}
       </Button>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTitle></DialogTitle>
-        <DialogContent className="text-center">
-          <p>User not found!</p>
-          <Link
-            className="text-primary text-bold"
-            href={'https://xg2nwufp1ju.typeform.com/to/UHZwa5M3'}
-          >
-            Create Account
-          </Link>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-xl">
+              <UserX className="h-6 w-6 text-destructive" />
+              User Not Found
+            </DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <p className="text-muted-foreground">
+              We couldn't find your account. Would you like to create a new one?
+            </p>
+          </div>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+            <Button>
+              <Link
+                href="https://xg2nwufp1ju.typeform.com/to/UHZwa5M3"
+                className="flex items-center gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Create Account
+                <ExternalLink className="h-4 w-4" />
+              </Link>
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>
