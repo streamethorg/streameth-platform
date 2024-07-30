@@ -49,7 +49,6 @@ export const SignInUserButton = ({
         token: resData?.data?.token,
         address: resData?.data?.user?.walletAddress,
       });
-      toast.message('Redirecting to Studio...');
     }
     setIsLoading(false);
   };
@@ -80,9 +79,12 @@ export const SignInUserButton = ({
   }, []);
 
   useEffect(() => {
-    if (!parsePrivyRefreshToken) logout();
+    // This effect runs whenever privyRefreshToken changes
+    if (privyRefreshToken === null || privyRefreshToken === undefined) {
+      logout();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parsePrivyRefreshToken]);
+  }, [privyRefreshToken]);
 
   const handleClick = () => {
     setIsLoading(true);
