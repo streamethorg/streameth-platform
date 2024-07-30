@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { deleteSession, storeSession } from '@/lib/actions/auth';
 import { apiUrl } from '@/lib/utils/utils';
-import { ExternalLink, Loader2, UserX } from 'lucide-react';
+import { LuExternalLink, LuLoader2, LuUserX } from 'react-icons/lu';
 import React, { useEffect, useState } from 'react';
 import {
   Dialog,
@@ -109,7 +109,7 @@ export const SignInUserButton = ({
         disabled={!ready || isLoading}
       >
         {!ready || isLoading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
+          <LuLoader2 className="h-4 w-4 animate-spin" />
         ) : authenticated ? (
           'Sign Out'
         ) : (
@@ -120,7 +120,7 @@ export const SignInUserButton = ({
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              <UserX className="h-6 w-6 text-destructive" />
+              <LuUserX className="h-6 w-6 text-destructive" />
               User Not Found
             </DialogTitle>
           </DialogHeader>
@@ -141,7 +141,7 @@ export const SignInUserButton = ({
                 rel="noopener noreferrer"
               >
                 Create Account
-                <ExternalLink className="h-4 w-4" />
+                <LuExternalLink className="h-4 w-4" />
               </Link>
             </Button>
           </DialogFooter>
