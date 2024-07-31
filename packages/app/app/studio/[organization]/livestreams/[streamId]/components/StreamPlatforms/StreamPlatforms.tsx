@@ -37,11 +37,13 @@ const StreamPlatformGrid = ({
   organizationId,
   setIsOpen,
   organization,
+  stageId,
 }: {
   streamId?: string;
   organizationId?: string;
   setIsOpen: (open: boolean) => void;
   organization: IExtendedOrganization;
+  stageId: string;
 }) => {
   const [SelectedComponent, setSelectedComponent] =
     useState<JSX.Element | null>(null);
@@ -58,7 +60,13 @@ const StreamPlatformGrid = ({
     {
       title: 'YouTube (WIP)',
       icon: <SiYoutube size={45} color="#ff0000" />,
-      onClick: () => <CreateYoutubeStream organization={organization} />,
+      onClick: () => (
+        <CreateYoutubeStream
+          stageId={stageId}
+          organization={organization}
+          setIsOpen={setIsOpen}
+        />
+      ),
     },
     {
       title: 'Custom RTMP',

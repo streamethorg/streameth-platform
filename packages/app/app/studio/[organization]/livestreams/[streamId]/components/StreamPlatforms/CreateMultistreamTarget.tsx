@@ -18,11 +18,13 @@ export const CreateMultistreamTarget = ({
   organizationId,
   btnName = 'Add',
   organization,
+  stageId,
 }: {
   organization: IExtendedOrganization;
   streamId: string;
   organizationId: string;
   btnName?: string;
+  stageId: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,6 +47,7 @@ export const CreateMultistreamTarget = ({
           organizationId={organizationId}
           setIsOpen={setIsOpen}
           organization={organization}
+          stageId={stageId}
         />
       </DialogContent>
     </Dialog>

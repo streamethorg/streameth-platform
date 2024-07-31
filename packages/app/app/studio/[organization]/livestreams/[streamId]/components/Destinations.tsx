@@ -15,7 +15,7 @@ const Destinations = ({
   organizationSlug: string;
   stream: IExtendedStage;
 }) => {
-  if (!stream.streamSettings?.streamId) {
+  if (!stream.streamSettings?.streamId || !stream._id) {
     return NotFound();
   }
 
@@ -27,6 +27,7 @@ const Destinations = ({
           organizationId={stream.organizationId as string}
           streamId={stream?.streamSettings?.streamId}
           organization={organization}
+          stageId={stream._id}
         />
         <EditLivestream
           stage={stream}

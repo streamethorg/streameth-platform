@@ -155,18 +155,22 @@ export const createSocialLivestreamStageAction = async ({
   if (!authToken) {
     throw new Error('No user session found');
   }
+  try {
+    const response = await createSocialLivestreamStage({
+      stageId: stageId,
+      socialId: socialId,
+      socialType: socialType,
+      organizationId: organizationId,
+      authToken,
+    });
 
-  const response = await createSocialLivestreamStage({
-    stageId: stageId,
-    socialId: socialId,
-    socialType: socialType,
-    organizationId: organizationId,
-    authToken,
-  });
-
-  if (!response) {
-    throw new Error('Error creating stage livestream social');
+    if (!response) {
+      throw new Error('Error creating stage livestream social');
+    }
+    revalidatePath('/studio');
+    return response;
+  } catch (error) {
+    console.log('action error: ' + error, { error });
+    return { message: 'creating stage livestream social ', error };
   }
-  revalidatePath('/studio');
-  return response;
 };

@@ -1,15 +1,50 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { createSocialLivestreamStageAction } from '@/lib/actions/stages';
 import { IExtendedOrganization } from '@/lib/types';
 import React, { useState } from 'react';
 import { CiCirclePlus } from 'react-icons/ci';
+import { toast } from 'sonner';
 
 const CreateYoutubeStream = ({
   organization,
+  stageId,
+  setIsOpen,
 }: {
   organization: IExtendedOrganization;
+  stageId: string;
+  setIsOpen: (open: boolean) => void;
 }) => {
   const [socialId, setSocialId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleCreateYoutubeStream = async () => {
+    setIsLoading(true);
+    await createSocialLivestreamStageAction({
+      stageId: stageId,
+      socialId,
+      socialType: 'youtube',
+      organizationId: organization._id,
+    })
+      .then((response) => {
+        if (!response.error) {
+          toast.success('Youtube stream created');
+          setIsOpen(false);
+        } else {
+          toast.error(
+            'Error creating Youtube stream: ' + response.error.details
+          );
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast.error('Error creating Youtube stream' + error.details);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   return (
     <div>
       <div>
@@ -42,7 +77,12 @@ const CreateYoutubeStream = ({
         </div>
 
         <div className="text-right">
-          <Button disabled={!socialId} variant={'primary'}>
+          <Button
+            loading={isLoading}
+            onClick={handleCreateYoutubeStream}
+            disabled={!socialId}
+            variant={'primary'}
+          >
             Create
           </Button>
         </div>
