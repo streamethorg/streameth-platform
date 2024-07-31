@@ -139,6 +139,7 @@ export default class StageService {
       accessToken: accessToken,
       title: stage.name,
       streamDate: stage.streamDate.toString(),
+      thumbnail: stage.thumbnail,
     });
     await createMultiStream({
       name: stage.name,
