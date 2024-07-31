@@ -248,3 +248,31 @@ export async function fetchStageRecordings({
     throw 'Error fetching stage';
   }
 }
+
+export async function createSocialLivestreamStage({
+  stageId,
+  socialId,
+  socialType,
+  organizationId,
+  authToken,
+}: {
+  stageId: string;
+  socialId: string;
+  socialType: string;
+  organizationId: string;
+  authToken: string;
+}): Promise<IStage> {
+  const response = await fetch(`${apiUrl()}/stages/livestream`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify({ stageId, socialId, socialType, organizationId }),
+  });
+
+  if (!response.ok) {
+    throw 'Error creating stage livestream social';
+  }
+  return (await response.json()).data;
+}
