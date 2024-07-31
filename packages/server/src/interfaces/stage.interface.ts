@@ -4,6 +4,9 @@ export interface TargetOutput {
   _id?: string;
   id?: string;
   name?: string;
+  socialId?: string;
+  socialType?: string;
+  broadcastId?: string;
 }
 export interface IStreamSettings {
   streamId?: string;

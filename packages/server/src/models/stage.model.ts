@@ -19,6 +19,9 @@ export const StageSchema = new Schema<IStageModel>(
         {
           id: { type: String },
           name: { type: String },
+          socialId: { type: String },
+          socialType: { type: String },
+          broadcastId: { type: String },
         },
       ],
     },
