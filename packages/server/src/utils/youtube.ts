@@ -69,6 +69,7 @@ export const createYoutubeLiveStream = async (data: {
   accessToken: string;
   title: string;
   streamDate: string;
+  thumbnail: string;
 }): Promise<{ streamKey: string; ingestUrl: string; broadcastId: string }> => {
   const youtube = await getYoutubeClient(data.accessToken);
   const broadcastId = await createLiveBroadcast(
@@ -78,6 +79,19 @@ export const createYoutubeLiveStream = async (data: {
   );
   const stream = await createLiveStream(youtube, data.title);
   await bindBroadCastToStream(youtube, broadcastId, stream.id);
+  if (data.thumbnail) {
+    const response = await fetch(data.thumbnail, {
+      method: 'get',
+    });
+    const thumbnailData = await response.arrayBuffer();
+    const thumbnailBuffer = Buffer.from(thumbnailData);
+    await youtube.thumbnails.set({
+      videoId: broadcastId,
+      media: {
+        body: thumbnailBuffer,
+      },
+    });
+  }
   return {
     streamKey: stream.streamKey,
     ingestUrl: stream.ingestUrl,
