@@ -4,7 +4,12 @@ import { ILiveStream, IStage } from '@interfaces/stage.interface';
 import Stage from '@models/stage.model';
 import Events from '@models/event.model';
 import { Types } from 'mongoose';
-import { createStream, deleteStream, getStreamInfo } from '@utils/livepeer';
+import {
+  createMultiStream,
+  createStream,
+  deleteStream,
+  getStreamInfo,
+} from '@utils/livepeer';
 import { config } from '@config';
 import Organization from '@models/organization.model';
 import { refreshAccessToken } from '@utils/oauth';
@@ -129,11 +134,22 @@ export default class StageService {
     const token = org.socials.find(
       (e) => e.type == data.socialType && e._id == data.socialId,
     );
-    const refeshToken = await refreshAccessToken(token.refreshToken);
-    return await createYoutubeLiveStream({
-      accessToken: refeshToken,
+    const accessToken = await refreshAccessToken(token.refreshToken);
+    const stream = await createYoutubeLiveStream({
+      accessToken: accessToken,
       title: stage.name,
       streamDate: stage.streamDate.toString(),
     });
+    await createMultiStream({
+      name: stage.name,
+      streamId: stage.streamSettings.streamId,
+      targetStreamKey: stream.streamKey,
+      targetURL: stream.ingestUrl,
+      organizationId: stage.organizationId.toString(),
+      socialId: data.socialId,
+      socialType: data.socialType,
+      broadcastId: stream.broadcastId,
+    });
+    return stream;
   }
 }
