@@ -986,6 +986,50 @@
         "type": "object",
         "additionalProperties": false
       },
+      "IStandardResponse__streamKey-string--ingestUrl-string__": {
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "properties": {
+              "ingestUrl": {
+                "type": "string"
+              },
+              "streamKey": {
+                "type": "string"
+              }
+            },
+            "required": ["ingestUrl", "streamKey"],
+            "type": "object"
+          }
+        },
+        "required": ["status", "message"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "CreateLiveStreamDto": {
+        "properties": {
+          "stageId": {
+            "type": "string"
+          },
+          "socialId": {
+            "type": "string"
+          },
+          "socialType": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          }
+        },
+        "required": ["stageId", "socialId", "socialType", "organizationId"],
+        "type": "object",
+        "additionalProperties": false
+      },
       "ISpeaker": {
         "properties": {
           "_id": {
@@ -3854,6 +3898,41 @@
             }
           }
         ]
+      }
+    },
+    "/stages/livestream": {
+      "post": {
+        "operationId": "YoutubeStage",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStandardResponse__streamKey-string--ingestUrl-string__"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create Livestream on youtube & twitter",
+        "tags": ["Stage"],
+        "security": [
+          {
+            "jwt": ["org"]
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLiveStreamDto"
+              }
+            }
+          }
+        }
       }
     },
     "/speakers": {

@@ -13,8 +13,8 @@ export const getYoutubeClient = (accessToken: string) => {
 };
 
 export const generateGoogleAccessToken = async (code: string): Promise<any> => {
-  const OAUTH_SECRET = process.env.OAUTH_SECRET || '';
-  const oAuthSecret: any = JSON.parse(OAUTH_SECRET);
+  const GOOGLE_OAUTH_SECRET = process.env.GOOGLE_OAUTH_SECRET || '';
+  const oAuthSecret: any = JSON.parse(GOOGLE_OAUTH_SECRET);
   const clientId = oAuthSecret.web.client_id;
   const clientSecret = oAuthSecret.web.client_secret;
   const tokenUri = oAuthSecret.web.token_uri;
