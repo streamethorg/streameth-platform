@@ -4,4 +4,7 @@ export interface IMultiStream {
   targetStreamKey: string;
   targetURL: string;
   organizationId: string;
+  socialId?: string;
+  socialType?: string;
+  broadcastId?: string;
 }
