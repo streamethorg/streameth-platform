@@ -69,17 +69,26 @@ export const createYoutubeLiveStream = async (data: {
   accessToken: string;
   title: string;
   streamDate: string;
-}): Promise<{ streamKey: string; ingestUrl: string }> => {
+}): Promise<{ streamKey: string; ingestUrl: string; broadcastId: string }> => {
   const youtube = await getYoutubeClient(data.accessToken);
-  const broadCastId = await createLiveBroadcast(
+  const broadcastId = await createLiveBroadcast(
     youtube,
     data.title,
     data.streamDate,
   );
   const stream = await createLiveStream(youtube, data.title);
-  await bindBroadCastToStream(youtube, broadCastId, stream.id);
+  await bindBroadCastToStream(youtube, broadcastId, stream.id);
   return {
     streamKey: stream.streamKey,
     ingestUrl: stream.ingestUrl,
+    broadcastId: broadcastId,
   };
+};
+
+export const deleteYoutubeLiveStream = async (data: {
+  accessToken: string;
+  broadcastId: string;
+}): Promise<void> => {
+  const youtube = await getYoutubeClient(data.accessToken);
+  await youtube.liveBroadcasts.delete({ id: data.broadcastId });
 };
