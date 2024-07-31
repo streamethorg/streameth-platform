@@ -11,12 +11,15 @@ import {
 } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
 import StreamPlatformGrid from './StreamPlatforms';
+import { IExtendedOrganization } from '@/lib/types';
 
 export const CreateMultistreamTarget = ({
   streamId,
   organizationId,
   btnName = 'Add',
+  organization,
 }: {
+  organization: IExtendedOrganization;
   streamId: string;
   organizationId: string;
   btnName?: string;
@@ -41,6 +44,7 @@ export const CreateMultistreamTarget = ({
           streamId={streamId}
           organizationId={organizationId}
           setIsOpen={setIsOpen}
+          organization={organization}
         />
       </DialogContent>
     </Dialog>

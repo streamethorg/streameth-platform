@@ -8,20 +8,22 @@ import StreamConfigWithPlayer from './components/StreamConfigWithPlayer';
 import StreamHeader from './components/StreamHeader';
 import ShareButton from '@/components/misc/interact/ShareButton';
 import NotFound from '@/app/not-found';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardTitle } from '@/components/ui/card';
 import Destinations from './components/Destinations';
 import StreamHealth from './components/StreamHealth';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import ShareLivestream from '../components/ShareLivestream';
+import { fetchOrganization } from '@/lib/services/organizationService';
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null;
   const stream = await fetchStage({ stage: params.streamId });
+  const organization = await fetchOrganization({
+    organizationId: params.organization,
+  });
 
-  if (!stream) {
+  if (!stream || !organization) {
     return NotFound();
   }
 
@@ -74,7 +76,11 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             </Link>
           </div>
         </div>
-        <Destinations stream={stream} organization={params.organization} />
+        <Destinations
+          stream={stream}
+          organizationSlug={params.organization}
+          organization={organization}
+        />
       </div>
     </div>
   );

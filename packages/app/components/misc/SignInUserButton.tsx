@@ -126,7 +126,8 @@ export const SignInUserButton = ({
           </DialogHeader>
           <div className="py-4">
             <p className="text-muted-foreground">
-              We could not find your account. Would you like to create a new one?
+              We could not find your account. Would you like to create a new
+              one?
             </p>
           </div>
           <DialogFooter className="flex flex-col sm:flex-row gap-2">

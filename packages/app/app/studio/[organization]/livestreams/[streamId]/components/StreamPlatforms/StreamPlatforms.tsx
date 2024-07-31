@@ -3,6 +3,8 @@ import { SiX, SiYoutube } from 'react-icons/si';
 import { Radio } from 'lucide-react';
 import CreateCustomStream from './forms/CustomRtmpForm';
 import NotFound from '@/app/not-found';
+import CreateYoutubeStream from './CreateYoutubeStream';
+import { IExtendedOrganization } from '@/lib/types';
 
 interface StreamTargetItem {
   title: string;
@@ -34,10 +36,12 @@ const StreamPlatformGrid = ({
   streamId,
   organizationId,
   setIsOpen,
+  organization,
 }: {
   streamId?: string;
   organizationId?: string;
   setIsOpen: (open: boolean) => void;
+  organization: IExtendedOrganization;
 }) => {
   const [SelectedComponent, setSelectedComponent] =
     useState<JSX.Element | null>(null);
@@ -54,6 +58,7 @@ const StreamPlatformGrid = ({
     {
       title: 'YouTube (WIP)',
       icon: <SiYoutube size={45} color="#ff0000" />,
+      onClick: () => <CreateYoutubeStream organization={organization} />,
     },
     {
       title: 'Custom RTMP',

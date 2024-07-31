@@ -39,13 +39,14 @@ const ConnectSocials = async ({
           <YoutubeConnectButton
             organizationId={organization?._id}
             organizationSlug={params.organization}
+            state={state}
           />
-          <Link href={`/api/twitter/request?state=${state}`}>
-            <Button className="min-w-[200px] bg-[#121212]">
-              <SiTwitter className="mr-2" />
-              X(Twitter) (Coming Soon)
-            </Button>
-          </Link>
+          {/* <Link href={`/api/twitter/request?state=${state}`}> */}
+          <Button disabled className="min-w-[200px] bg-[#121212]">
+            <SiTwitter className="mr-2" />
+            X(Twitter) (Coming Soon)
+          </Button>
+          {/* </Link> */}
         </div>
       </div>
     </div>
