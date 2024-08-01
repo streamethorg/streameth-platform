@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   const clientId = oAuthSecret.web.client_id;
   const redirectUri = oAuthSecret.web.redirect_uri;
 
-  const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&prompt=select_account&redirect_uri=${redirectUri}&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&state=${state}`;
+  const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&prompt=select_account&redirect_uri=${redirectUri}&approval_prompt=force&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&state=${state}`;
 
   try {
     return NextResponse.redirect(authUrl);
