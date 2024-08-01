@@ -20,13 +20,17 @@ function SubmitButton() {
 
   if (pending) {
     return (
-      <Button disabled>
+      <Button variant={'primary'} disabled>
         <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
         Please wait
       </Button>
     );
   }
-  return <Button type="submit">Create</Button>;
+  return (
+    <Button variant={'primary'} type="submit">
+      Create
+    </Button>
+  );
 }
 
 const CreateCustomStream = ({

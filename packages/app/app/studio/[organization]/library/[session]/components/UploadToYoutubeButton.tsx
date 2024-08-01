@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { SiYoutube } from 'react-icons/si';
 import { toast } from 'sonner';
 import { CiCirclePlus } from 'react-icons/ci';
+import Link from 'next/link';
 
 const UploadToYoutubeButton = ({
   organization,
@@ -20,32 +21,28 @@ const UploadToYoutubeButton = ({
   const [openModal, setOpenModal] = useState(false);
   const [socialId, setSocialId] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
-  const redirectUri = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI || '';
 
-  const handleYoutubeConnect = () => {
-    const state = encodeURIComponent(
-      JSON.stringify({
-        redirectUrl: `/studio/${organizationSlug}/library/${sessionId}`,
-        organizationId: organization?._id,
-      })
-    );
-    // Encode the redirect URL
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&prompt=select_account&redirect_uri=${redirectUri}&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube&state=${state}`;
-
-    // Calculate window size and position
-    const width = window.innerWidth * 0.7;
-    const height = window.innerHeight * 0.7;
-    const left = window.screen.width / 2 - width / 2;
-    const top = window.screen.height / 2 - height / 2;
-
-    // Open the OAuth URL in a new window
-    window.open(
-      authUrl,
-      'YouTube OAuth',
-      `width=${width},height=${height},top=${top},left=${left}`
-    );
-  };
+  // Encode the redirect URL
+  const state = encodeURIComponent(
+    JSON.stringify({
+      redirectUrl: `/studio/${organizationSlug}/library/${sessionId}`,
+      organizationId: organization?._id,
+    })
+  );
+  const authUrl = `/api/google/request?state=${state}`;
+  // const handleYoutubeConnect = () => {
+  // Calculate window size and position
+  // const width = window.innerWidth * 0.7;
+  // const height = window.innerHeight * 0.7;
+  // const left = window.screen.width / 2 - width / 2;
+  // const top = window.screen.height / 2 - height / 2;
+  // Open the OAuth URL in a new window
+  // window.open(
+  //   authUrl,
+  //   'YouTube OAuth',
+  //   `width=${width},height=${height},top=${top},left=${left}`
+  // );
+  // };
   const hasSocials = organization?.socials?.length
     ? organization?.socials?.length > 0
     : false;
@@ -75,10 +72,10 @@ const UploadToYoutubeButton = ({
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger disabled>
-        <Button disabled className="min-w-[200px] bg-[#FF0000]">
+      <DialogTrigger>
+        <Button className="min-w-[200px] bg-[#FF0000]">
           <SiYoutube className="mr-2" />
-          Publish to Youtube (Coming Soon)
+          Publish to Youtube
         </Button>
       </DialogTrigger>
       <DialogContent className="z-[99999999999999999] px-8">
@@ -104,13 +101,13 @@ const UploadToYoutubeButton = ({
                 <p className="line-clamp-1 text-sm">{name}</p>
               </div>
             ))}
-          <div
-            onClick={handleYoutubeConnect}
+          <Link
+            href={authUrl}
             className="flex cursor-pointer flex-col items-center"
           >
             <CiCirclePlus color="#000" size={56} />
             <p className="text-sm">Add New</p>
-          </div>
+          </Link>
         </div>
 
         <Button

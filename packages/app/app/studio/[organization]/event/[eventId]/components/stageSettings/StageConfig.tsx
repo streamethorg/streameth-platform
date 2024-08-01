@@ -3,14 +3,18 @@ import LivestreamEmbedCode from '@/app/studio/[organization]/livestreams/[stream
 import Multistream from '@/app/studio/[organization]/livestreams/[streamId]/components/Multistream';
 import StreamConfigWithPlayer from '@/app/studio/[organization]/livestreams/[streamId]/components/StreamConfigWithPlayer';
 import StreamHeader from '@/app/studio/[organization]/livestreams/[streamId]/components/StreamHeader';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { notFound } from 'next/navigation';
 
 const StreamConfig = async ({
-  organization,
+  organizationSlug,
   stageId,
 }: {
-  organization: string;
+  organizationSlug: string;
   stageId: string;
 }) => {
+  const organization = await fetchOrganization({ organizationSlug });
+  if (!organization) return notFound();
   const stage = await fetchStage({ stage: stageId });
   if (!stage || !stage.streamSettings?.streamId) {
     return <div> no stage found</div>;
@@ -18,7 +22,7 @@ const StreamConfig = async ({
 
   return (
     <div className="m-auto flex max-w-5xl flex-col items-center gap-4 p-4">
-      <StreamHeader organization={organization} stream={stage} />
+      <StreamHeader organizationSlug={organizationSlug} stream={stage} />
 
       <StreamConfigWithPlayer
         organization={stage.organizationId as string}
@@ -27,6 +31,7 @@ const StreamConfig = async ({
       />
 
       <Multistream
+        organization={organization}
         organizationId={stage.organizationId as string}
         stream={stage}
       />

@@ -1,19 +1,20 @@
 import { Card } from '@/components/ui/card';
 import Multistream from './Multistream';
-import PublishLivestream from './PublishLivestream';
-import { IExtendedStage } from '@/lib/types';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
 import NotFound from '@/app/not-found';
 import EditLivestream from '../../components/EditLivestream';
 
 const Destinations = ({
   organization,
+  organizationSlug,
   stream,
 }: {
-  organization: string;
+  organization: IExtendedOrganization;
+  organizationSlug: string;
   stream: IExtendedStage;
 }) => {
-  if (!stream.streamSettings?.streamId) {
+  if (!stream.streamSettings?.streamId || !stream._id) {
     return NotFound();
   }
 
@@ -24,15 +25,19 @@ const Destinations = ({
           btnName="Add Destination"
           organizationId={stream.organizationId as string}
           streamId={stream?.streamSettings?.streamId}
+          organization={organization}
+          stageId={stream._id}
+          streamTargets={stream?.streamSettings?.targets || []}
         />
         <EditLivestream
           stage={stream}
-          organizationSlug={organization}
+          organizationSlug={organizationSlug}
           variant="outline"
           btnText="Edit Livestream"
         />
       </div>
       <Multistream
+        organization={organization}
         stream={stream}
         organizationId={stream.organizationId as string}
       />

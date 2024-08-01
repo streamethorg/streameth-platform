@@ -334,3 +334,20 @@ export const getTimeString = (date: Date | string | undefined) => {
       hour12: false,
     });
 };
+
+export const constructYoutubeLiveRedirect = (userEmail: string): string => {
+  const baseUrl = 'https://accounts.google.com/AccountChooser';
+  const youtubeUrl = 'https://www.youtube.com/live_dashboard';
+
+  const params = new URLSearchParams({
+    continue: youtubeUrl,
+    hl: 'en',
+    service: 'youtube',
+    theme: 'glif',
+    flowName: 'GlifWebSignIn',
+    flowEntry: 'ServiceLogin',
+    Email: userEmail,
+  });
+
+  return `${baseUrl}?${params.toString()}`;
+};

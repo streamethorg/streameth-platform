@@ -2,6 +2,7 @@
 import { Livepeer } from 'livepeer';
 import {
   createMultistream,
+  createSocialLivestreamStage,
   createStage,
   deleteMultistream,
   deleteStage,
@@ -137,4 +138,40 @@ export const updateStageAction = async ({
   }
   revalidatePath('/studio');
   return response;
+};
+
+export const createSocialLivestreamStageAction = async ({
+  stageId,
+  socialId,
+  socialType,
+  organizationId,
+}: {
+  stageId: string;
+  socialId: string;
+  socialType: string;
+  organizationId: string;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+  try {
+    const response = await createSocialLivestreamStage({
+      stageId: stageId,
+      socialId: socialId,
+      socialType: socialType,
+      organizationId: organizationId,
+      authToken,
+    });
+
+    if (!response) {
+      throw new Error('Error creating stage livestream social');
+    }
+    revalidatePath('/studio');
+    return response;
+  } catch (error: any) {
+    return {
+      error: error,
+    };
+  }
 };
