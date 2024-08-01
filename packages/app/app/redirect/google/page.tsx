@@ -1,5 +1,6 @@
 import Footer from '@/components/Layout/Footer';
 import { Button } from '@/components/ui/button';
+import { constructYoutubeLiveRedirect } from '@/lib/utils/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -7,7 +8,7 @@ import React from 'react';
 const GoogleRedirect = ({
   searchParams,
 }: {
-  searchParams: { authuser: string };
+  searchParams: { authUser: string };
 }) => {
   return (
     <div className="container mx-auto max-w-5xl space-y-2 p-12 text-black">
@@ -17,9 +18,7 @@ const GoogleRedirect = ({
         enable live streaming on your channel. To do this, follow these steps:{' '}
       </p>
       <p>1. Go to your YouTube live dashboard</p>
-      <Link
-        href={`https://www.youtube.com/signin?authuser=${searchParams.authuser}&next=%2Flive_dashboard&app=desktop`}
-      >
+      <Link href={constructYoutubeLiveRedirect(searchParams.authUser)}>
         <Button className="my-4">Open Youtube Live Dashboard</Button>
       </Link>
       <p>2. Follow YouTube&apos;s steps to enable live streaming.</p>
