@@ -135,10 +135,14 @@ export default class StageService {
       (e) => e.type == data.socialType && e._id == data.socialId,
     );
     const accessToken = await refreshAccessToken(token.refreshToken);
+    const streamDate =
+      new Date(stage.streamDate.toString()) < new Date()
+        ? new Date().toISOString()
+        : stage.streamDate.toString();
     const stream = await createYoutubeLiveStream({
       accessToken: accessToken,
       title: stage.name,
-      streamDate: stage.streamDate.toString(),
+      streamDate,
       thumbnail: stage.thumbnail,
     });
     await createMultiStream({

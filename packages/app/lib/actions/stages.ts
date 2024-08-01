@@ -169,8 +169,9 @@ export const createSocialLivestreamStageAction = async ({
     }
     revalidatePath('/studio');
     return response;
-  } catch (error) {
-    console.log('action error: ' + error, { error });
-    return { message: 'creating stage livestream social ', error };
+  } catch (error: any) {
+    return {
+      error: error,
+    };
   }
 };
