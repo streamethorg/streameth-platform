@@ -61,7 +61,7 @@ const StreamPlatformGrid = ({
       icon: <SiX size={35} />,
     },
     {
-      title: 'YouTube (WIP)',
+      title: 'YouTube',
       icon: <SiYoutube size={45} color="#ff0000" />,
       onClick: () => (
         <CreateYoutubeStream
