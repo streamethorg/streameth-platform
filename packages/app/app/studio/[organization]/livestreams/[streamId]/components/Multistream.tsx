@@ -10,17 +10,26 @@ import {
 } from '@/components/ui/table';
 import DeleteMultistream from './DeleteMultistream';
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
-import { IExtendedStage } from '@/lib/types';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
 
 const Multistream = ({
   stream,
   organizationId,
+  organization,
 }: {
+  organization: IExtendedOrganization;
   stream: IExtendedStage;
   organizationId: string;
 }) => {
-  if (!stream) return null;
+  if (!stream || !stream._id) return null;
   const streamTargets = stream?.streamSettings?.targets || [];
+
+  const getTargetName = (socialId: string) => {
+    if (socialId) {
+      const target = organization?.socials?.find((s) => s._id === socialId);
+      return `${target?.name} (${target?.type})`;
+    } else return null;
+  };
 
   return (
     <div className="w-full">
@@ -33,7 +42,10 @@ const Multistream = ({
             <CreateMultistreamTarget
               btnName="Add First Destination"
               organizationId={organizationId}
+              organization={organization}
               streamId={stream?.streamSettings?.streamId || ''}
+              stageId={stream._id}
+              streamTargets={streamTargets}
             />
           </CardContent>
         </Card>
@@ -60,7 +72,9 @@ const Multistream = ({
                   <TableRow key={target.id}>
                     <>
                       <TableCell className="font-medium">
-                        {target?.name}
+                        {target?.socialId
+                          ? getTargetName(target?.socialId)
+                          : target?.name}
                       </TableCell>
 
                       <TableCell className="flex justify-end space-x-2">

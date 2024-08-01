@@ -7,11 +7,11 @@ import { ArrowLeft } from 'lucide-react';
 
 const StreamHeader = ({
   stream,
-  organization,
+  organizationSlug,
   isLiveStreamPage,
 }: {
   stream: IExtendedStage;
-  organization: string;
+  organizationSlug: string;
   isLiveStreamPage?: boolean;
 }) => {
   const [url, setUrl] = useState('');
@@ -25,7 +25,7 @@ const StreamHeader = ({
   return (
     <div>
       {isLiveStreamPage && (
-        <Link href={`/studio/${organization}`}>
+        <Link href={`/studio/${organizationSlug}`}>
           <div className="mb-4 flex items-center justify-start space-x-4">
             <ArrowLeft />
             <p>Back to homepage</p>

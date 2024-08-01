@@ -1,6 +1,5 @@
 import { Card } from '@/components/ui/card';
 import Multistream from './Multistream';
-import PublishLivestream from './PublishLivestream';
 import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
 import NotFound from '@/app/not-found';
@@ -28,6 +27,7 @@ const Destinations = ({
           streamId={stream?.streamSettings?.streamId}
           organization={organization}
           stageId={stream._id}
+          streamTargets={stream?.streamSettings?.targets || []}
         />
         <EditLivestream
           stage={stream}
@@ -37,6 +37,7 @@ const Destinations = ({
         />
       </div>
       <Multistream
+        organization={organization}
         stream={stream}
         organizationId={stream.organizationId as string}
       />

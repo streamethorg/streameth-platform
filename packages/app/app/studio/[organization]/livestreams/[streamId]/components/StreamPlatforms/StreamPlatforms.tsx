@@ -4,7 +4,8 @@ import { Radio } from 'lucide-react';
 import CreateCustomStream from './forms/CustomRtmpForm';
 import NotFound from '@/app/not-found';
 import CreateYoutubeStream from './CreateYoutubeStream';
-import { IExtendedOrganization } from '@/lib/types';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
+import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interface';
 
 interface StreamTargetItem {
   title: string;
@@ -38,12 +39,14 @@ const StreamPlatformGrid = ({
   setIsOpen,
   organization,
   stageId,
+  streamTargets,
 }: {
   streamId?: string;
   organizationId?: string;
   setIsOpen: (open: boolean) => void;
   organization: IExtendedOrganization;
   stageId: string;
+  streamTargets: TargetOutput[];
 }) => {
   const [SelectedComponent, setSelectedComponent] =
     useState<JSX.Element | null>(null);
@@ -65,6 +68,7 @@ const StreamPlatformGrid = ({
           stageId={stageId}
           organization={organization}
           setIsOpen={setIsOpen}
+          streamTargets={streamTargets}
         />
       ),
     },

@@ -247,6 +247,15 @@
           },
           "organizationId": {
             "type": "string"
+          },
+          "socialId": {
+            "type": "string"
+          },
+          "socialType": {
+            "type": "string"
+          },
+          "broadcastId": {
+            "type": "string"
           }
         },
         "required": [
@@ -636,6 +645,15 @@
             "type": "string"
           },
           "name": {
+            "type": "string"
+          },
+          "socialId": {
+            "type": "string"
+          },
+          "socialType": {
+            "type": "string"
+          },
+          "broadcastId": {
             "type": "string"
           }
         },

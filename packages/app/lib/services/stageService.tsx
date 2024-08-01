@@ -280,7 +280,6 @@ export async function createSocialLivestreamStage({
 
     if (!response.ok) {
       const error = await response.json();
-      // Create a detailed error message
       const errorMessage = `Error ${response.status}: ${error.message || 'Unknown error occurred'}`;
       throw new Error(errorMessage);
     }

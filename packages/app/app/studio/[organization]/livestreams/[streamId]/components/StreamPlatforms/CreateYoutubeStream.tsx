@@ -1,19 +1,23 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { createSocialLivestreamStageAction } from '@/lib/actions/stages';
-import { IExtendedOrganization } from '@/lib/types';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { CiCirclePlus } from 'react-icons/ci';
 import { toast } from 'sonner';
+import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interface';
 
 const CreateYoutubeStream = ({
   organization,
   stageId,
   setIsOpen,
+  streamTargets,
 }: {
   organization: IExtendedOrganization;
   stageId: string;
   setIsOpen: (open: boolean) => void;
+  streamTargets: TargetOutput[];
 }) => {
   const [socialId, setSocialId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -45,35 +49,54 @@ const CreateYoutubeStream = ({
       });
   };
 
+  const state = encodeURIComponent(
+    JSON.stringify({
+      redirectUrl: `/studio/${organization?.slug}/livestreams/${stageId}`,
+      organizationId: organization?._id,
+    })
+  );
+
+  const checkIsTarget = (targetId: string): boolean => {
+    return streamTargets.some((t) => t.socialId === targetId);
+  };
   return (
     <div>
       <div>
         <p className="font-medium">Select Youtube Destination</p>
 
-        <div className="flex flex-wrap items-center gap-5 py-5">
+        <div className="flex flex-wrap items-start py-5">
           {organization?.socials
             ?.filter((s) => s.type == 'youtube')
             .map(({ name, thumbnail, _id }) => (
               <div
-                onClick={() => setSocialId(_id!)}
+                onClick={() => setSocialId(socialId ? '' : _id!)}
                 key={_id}
-                className={`flex cursor-pointer flex-col items-center ${
-                  socialId == _id ? 'opacity-100' : 'opacity-50'
-                }`}
+                className={`relative w-[100px] flex cursor-pointer flex-col items-center  ${checkIsTarget(_id) ? 'pointer-events-none opacity-50' : ''}`}
               >
                 <div
-                  className="h-14 w-14 cursor-pointer rounded-full bg-cover bg-center"
+                  className={`h-12 w-12 cursor-pointer rounded-full bg-cover bg-center ${
+                    socialId == _id || checkIsTarget(_id)
+                      ? 'outline-red-500 outline outline-4'
+                      : 'outline-none'
+                  }`}
                   style={{
                     backgroundImage: `url(${thumbnail})`,
                   }}
                 ></div>
-                <p className="line-clamp-1 text-sm">{name}</p>
+                <p
+                  className={`text-center p-2 text-sm ${socialId == _id ? 'text-semibold' : ''}`}
+                >
+                  {checkIsTarget(_id) ? `Streamed to ${name}` : name}
+                </p>
               </div>
             ))}
-          <div className="flex cursor-pointer flex-col items-center">
-            <CiCirclePlus color="#000" size={56} />
-            <p className="text-sm">Add New</p>
-          </div>
+          <Link
+            href={`/api/google/request?state=${state}`}
+            className="flex cursor-pointer flex-col items-center"
+          >
+            <CiCirclePlus color="#000" size={48} />
+            <p className="text-sm p-2">Add New</p>
+          </Link>
         </div>
 
         <div className="text-right">

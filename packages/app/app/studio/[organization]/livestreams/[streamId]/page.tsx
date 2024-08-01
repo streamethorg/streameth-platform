@@ -30,7 +30,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   return (
     <div className="max-w-screen-3xl flex h-full max-h-[1000px] w-full flex-col p-4">
       <StreamHeader
-        organization={params.organization}
+        organizationSlug={params.organization}
         stream={stream}
         isLiveStreamPage
       />
