@@ -38,7 +38,7 @@ const Home = ({ searchParams }: HomePageProps) => {
           <ExploreTabs />
           <div className="mt-8">
             <Suspense fallback={<div> Loading... </div>}>
-              {/* <ArchiveVideos {...searchParams} /> */}
+              <ArchiveVideos {...searchParams} />
             </Suspense>
           </div>
         </section>
