@@ -17,7 +17,7 @@ const Home = ({ searchParams }: HomePageProps) => {
     },
   ]
   return (
-    <div className="min-h-dvh flex flex-col bg-white">
+    <div className="flex min-h-dvh flex-col bg-white">
       <HomePageNavbar
         logo=""
         currentOrganization=""
