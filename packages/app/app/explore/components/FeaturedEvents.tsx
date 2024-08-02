@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+
 import { useState, useEffect } from 'react'
 
 interface Event {
@@ -96,7 +97,7 @@ const FeaturedEvents = () => {
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {events.map((event, index) => {
         const org = organizations[event.organizationId]
-        const eventUrl = `https://streameth.org/${org?.slug || event.slug}`
+        const eventUrl = `https://streameth.org/${org.slug}`
 
         return (
           <Link
@@ -105,7 +106,7 @@ const FeaturedEvents = () => {
             target="_blank"
             rel="noopener noreferrer">
             <Card
-              className="flex h-full flex-col overflow-hidden transition-all duration-300 ease-out animate-in fade-in zoom-in hover:scale-105"
+              className="flex h-full flex-col overflow-hidden duration-300 ease-out hover:scale-105"
               style={{ animationDelay: `${index * 150}ms` }}>
               <CardHeader className="flex-shrink-0 p-0">
                 <img
