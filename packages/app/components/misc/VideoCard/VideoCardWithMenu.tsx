@@ -16,7 +16,7 @@ import { IExtendedSession } from '@/lib/types'
 import { formatDate } from '@/lib/utils/time'
 import { EllipsisVertical } from 'lucide-react'
 import Link from 'next/link'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useMemo } from 'react'
 import { useEffect, useState } from 'react'
 
 const VideoCardWithMenu = ({
@@ -34,6 +34,8 @@ const VideoCardWithMenu = ({
     undefined
   )
 
+  const memoizedSession = useMemo(() => session, [])
+
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
       try {
@@ -48,7 +50,8 @@ const VideoCardWithMenu = ({
     if (session) {
       getThumbnail(session)
     }
-  }, [session])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [memoizedSession])
 
   return (
     <div className="flex min-h-full w-full flex-col rounded-xl uppercase">
