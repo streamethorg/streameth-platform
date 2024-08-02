@@ -2,8 +2,6 @@ import { HomePageProps } from '@/lib/types'
 import ArchiveVideos from '../[organization]/videos/components/ArchiveVideos'
 import FeaturedEvents from './components/FeaturedEvents'
 import ExploreTabs from './components/ExploreTabs'
-import { Input } from '@/components/ui/input'
-import { SearchIcon } from 'lucide-react'
 
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import { Suspense } from 'react'
