@@ -96,9 +96,7 @@ const FeaturedEvents = () => {
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {events.map((event, index) => {
         const org = organizations[event.organizationId]
-        const eventUrl =
-          event.website ||
-          `https://streameth.org/${org?.slug || event.slug}`
+        const eventUrl = `https://streameth.org/${org?.slug || event.slug}`
 
         return (
           <Link
