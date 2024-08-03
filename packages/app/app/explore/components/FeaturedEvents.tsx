@@ -1,4 +1,3 @@
-'use client'
 import Link from 'next/link'
 import {
   Card,
@@ -7,8 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-
-import { useState, useEffect } from 'react'
 
 interface Event {
   _id: string
@@ -30,69 +27,15 @@ interface Organization {
   slug: string
 }
 
-const FeaturedEvents = () => {
-  const [events, setEvents] = useState<Event[]>([])
-  const [organizations, setOrganizations] = useState<{
-    [key: string]: Organization
-  }>({})
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+interface FeaturedEventsProps {
+  events: Event[]
+  organizations: { [key: string]: Organization }
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [eventsResponse, orgsResponse] = await Promise.all([
-          fetch('https://api.streameth.org/events'),
-          fetch('https://api.streameth.org/organizations'),
-        ])
-
-        if (!eventsResponse.ok || !orgsResponse.ok) {
-          throw new Error('Failed to fetch data')
-        }
-
-        const eventsData = await eventsResponse.json()
-        const orgsData = await orgsResponse.json()
-
-        const sortedEvents = eventsData.data
-          .sort(
-            (a: Event, b: Event) =>
-              new Date(b.start).getTime() -
-              new Date(a.start).getTime()
-          )
-          .slice(0, 4)
-
-        const orgsMap = orgsData.data.reduce(
-          (
-            acc: { [key: string]: Organization },
-            org: Organization
-          ) => {
-            acc[org._id] = org
-            return acc
-          },
-          {}
-        )
-
-        setEvents(sortedEvents)
-        setOrganizations(orgsMap)
-      } catch (err) {
-        setError('Error fetching data')
-        console.error(err)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>
-  }
-
+const FeaturedEvents: React.FC<FeaturedEventsProps> = ({
+  events,
+  organizations,
+}) => {
   return (
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {events.map((event, index) => {

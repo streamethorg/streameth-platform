@@ -1,12 +1,13 @@
 import { HomePageProps } from '@/lib/types'
 import ArchiveVideos from '../[organization]/videos/components/ArchiveVideos'
+import { getFeaturedEventsData } from '../../components/misc/FeaturedEventsData'
 import FeaturedEvents from './components/FeaturedEvents'
 import ExploreTabs from './components/ExploreTabs'
-
 import HomePageNavbar from '@/components/Layout/HomePageNavbar'
 import { Suspense } from 'react'
 
-const Home = ({ searchParams }: HomePageProps) => {
+const Home = async ({ searchParams }: HomePageProps) => {
+  const { events, organizations } = await getFeaturedEventsData()
   const pages = [
     {
       name: 'Home',
@@ -27,7 +28,10 @@ const Home = ({ searchParams }: HomePageProps) => {
           <h2 className="mb-8 text-3xl font-bold text-foreground">
             Featured Events
           </h2>
-          <FeaturedEvents />
+          <FeaturedEvents
+            events={events}
+            organizations={organizations}
+          />
         </section>
         <section>
           <h2 className="mb-8 text-3xl font-bold text-foreground">
