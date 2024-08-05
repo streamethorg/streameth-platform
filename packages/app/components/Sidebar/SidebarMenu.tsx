@@ -1,5 +1,5 @@
-'use client'
-import { SidebarUI, SidebarItem } from './Sidebar'
+'use client';
+import { SidebarUI, SidebarItem } from './Sidebar';
 
 import {
   LuUsers,
@@ -9,13 +9,9 @@ import {
   LuShare2,
   LuLock,
   LuBookOpen,
-} from 'react-icons/lu'
+} from 'react-icons/lu';
 
-const SidebarMenu = ({
-  organizationSlug,
-}: {
-  organizationSlug: string
-}) => {
+const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
   const navigationItems = [
     {
       text: 'Home',
@@ -27,11 +23,11 @@ const SidebarMenu = ({
       url: `/studio/${organizationSlug}/library`,
       icon: <LuVideotape size={25} />,
     },
-    // {
-    //   text: 'Destinations',
-    //   url: `/studio/${organizationSlug}/destinations`,
-    //   icon: <LuShare2 size={25} />,
-    // },
+    {
+      text: 'Destinations',
+      url: `/studio/${organizationSlug}/destinations`,
+      icon: <LuShare2 size={25} />,
+    },
     {
       text: 'NFTs',
       url: `/studio/${organizationSlug}/nfts`,
@@ -52,7 +48,7 @@ const SidebarMenu = ({
       url: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
       icon: <LuBookOpen size={25} />,
     },
-  ]
+  ];
 
   return (
     <div className="relative w-[1/4]">
@@ -67,7 +63,7 @@ const SidebarMenu = ({
         ))}
       </SidebarUI>
     </div>
-  )
-}
+  );
+};
 
-export default SidebarMenu
+export default SidebarMenu;

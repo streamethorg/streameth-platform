@@ -1,16 +1,16 @@
-'use server'
+'use server';
 
-import { cookies } from 'next/headers'
+import { cookies } from 'next/headers';
 
-const EXPIRE_DATE_YEAR = 12 * 31 * 24 * 60 * 60 * 1000 // 1 year
+const EXPIRE_DATE_YEAR = 12 * 31 * 24 * 60 * 60 * 1000; // 1 year
 
 export const hasCookie = async (name: string) => {
-  return cookies().has(name)
-}
+  return cookies().has(name);
+};
 
 export const getCookie = async (name: string) => {
-  return cookies().get(name)
-}
+  return cookies().get(name);
+};
 
 /**
  *
@@ -26,5 +26,5 @@ export const setCookie = async (
   cookies().set(cookieName, cookieValue, {
     secure: true,
     expires: Date.now() + expires,
-  })
-}
+  });
+};

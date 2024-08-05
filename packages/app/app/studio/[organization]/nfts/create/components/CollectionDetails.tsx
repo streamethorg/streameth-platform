@@ -1,9 +1,9 @@
-'use client'
-import DatePicker from '@/components/misc/form/datePicker'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import TimePicker from '@/components/misc/form/timePicker'
-import { CardTitle } from '@/components/ui/card'
-import Combobox from '@/components/ui/combo-box'
+'use client';
+import DatePicker from '@/components/misc/form/datePicker';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import TimePicker from '@/components/misc/form/timePicker';
+import { CardTitle } from '@/components/ui/card';
+import Combobox from '@/components/ui/combo-box';
 import {
   Form,
   FormControl,
@@ -11,32 +11,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
-import React from 'react'
-import { UseFormReturn } from 'react-hook-form'
-import { NftCollectionType } from 'streameth-new-server/src/interfaces/nft.collection.interface'
+import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
+import { NftCollectionType } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 
 const CollectionDetails = ({
   form,
   type,
 }: {
-  type: NftCollectionType
+  type: NftCollectionType;
   form: UseFormReturn<{
-    description: string
-    name: string
-    symbol: string
-    mintFee: string
-    thumbnail: string
+    description: string;
+    name: string;
+    symbol: string;
+    mintFee: string;
+    thumbnail: string;
     // startDate: Date
     // startTime: string
     // endDate: Date
     // endTime: string
-    limitedSupply: string
-    maxSupply: string
-  }>
+    limitedSupply: string;
+    maxSupply: string;
+  }>;
 }) => {
   return (
     <div>
@@ -75,9 +75,8 @@ const CollectionDetails = ({
                 Drag or click to upload your logo image here.{' '}
               </p>
               <p className="text-[12px] text-muted-foreground">
-                You may change this after deploying your contract.
-                Recommended size: 500 x 500. File types: JPG, PNG, SVG
-                or GIF
+                You may change this after deploying your contract. Recommended
+                size: 500 x 500. File types: JPG, PNG, SVG or GIF
               </p>
             </div>
           </div>
@@ -90,10 +89,7 @@ const CollectionDetails = ({
                   Name
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="NFT Collection Name"
-                    {...field}
-                  />
+                  <Input placeholder="NFT Collection Name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -268,7 +264,7 @@ const CollectionDetails = ({
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default CollectionDetails
+export default CollectionDetails;

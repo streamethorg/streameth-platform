@@ -1,26 +1,26 @@
-import * as React from 'react'
-import { Check, ChevronsUpDown } from 'lucide-react'
+import * as React from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
 
-import { cn } from '@/lib/utils/utils'
-import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils/utils';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command'
+} from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import Image from 'next/image'
+} from '@/components/ui/popover';
+import Image from 'next/image';
 
 interface Item {
-  label: string
-  value: string
-  logo?: string
+  label: string;
+  value: string;
+  logo?: string;
 }
 
 const renderLogo = (logo?: string) => (
@@ -31,7 +31,7 @@ const renderLogo = (logo?: string) => (
     width={20}
     height={20}
   />
-)
+);
 
 export default function Combobox({
   placeholder = 'Select item',
@@ -41,17 +41,17 @@ export default function Combobox({
   logo,
   variant = 'outline',
 }: {
-  placeholder?: string
-  items?: Item[]
-  value: string
-  valueKey?: string
-  labelKey?: string
-  logo?: boolean
-  variant?: 'outline' | 'primary' | 'ghost'
-  setValue: (value: string) => void
+  placeholder?: string;
+  items?: Item[];
+  value: string;
+  valueKey?: string;
+  labelKey?: string;
+  logo?: boolean;
+  variant?: 'outline' | 'primary' | 'ghost';
+  setValue: (value: string) => void;
 }) {
-  const [open, setOpen] = React.useState(false)
-  const orgLogo = items.find((item) => item.label === value)?.logo
+  const [open, setOpen] = React.useState(false);
+  const orgLogo = items.find((item) => item.label === value)?.logo;
 
   return (
     <Popover modal={true} open={open} onOpenChange={setOpen}>
@@ -60,7 +60,8 @@ export default function Combobox({
           variant={'outline'}
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between">
+          className="w-full justify-between"
+        >
           {logo && renderLogo(orgLogo)}
           {value ? value : placeholder}
 
@@ -78,13 +79,13 @@ export default function Combobox({
                 value={item.label}
                 onSelect={(currentValue) => {
                   setValue(
-                    currentValue.toLowerCase() ===
-                      item.label.toLowerCase()
+                    currentValue.toLowerCase() === item.label.toLowerCase()
                       ? item.value
                       : value
-                  )
-                  setOpen(false)
-                }}>
+                  );
+                  setOpen(false);
+                }}
+              >
                 <Check
                   className={cn(
                     'mr-2 h-4 w-4',
@@ -98,5 +99,5 @@ export default function Combobox({
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

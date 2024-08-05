@@ -1,32 +1,31 @@
-import { fetchStages } from '@/lib/services/stageService'
-import LivestreamCard from '@/components/misc/VideoCard/LivestreamCard'
-import React from 'react'
-import { VideoCardSkeletonMobile } from '@/components/misc/VideoCard/VideoCardSkeleton'
-import { Podcast } from 'lucide-react'
+import { fetchStages } from '@/lib/services/stageService';
+import LivestreamCard from '@/components/misc/VideoCard/LivestreamCard';
+import React from 'react';
+import { VideoCardSkeletonMobile } from '@/components/misc/VideoCard/VideoCardSkeleton';
+import { Podcast } from 'lucide-react';
 
 const UpcomingStreams = async ({
   organizationId,
   organizationSlug,
   currentStreamId,
 }: {
-  organizationId: string
-  organizationSlug: string
-  currentStreamId: string
+  organizationId: string;
+  organizationSlug: string;
+  currentStreamId: string;
 }) => {
   let livestreams = await fetchStages({
     organizationId,
-  })
+  });
 
   livestreams = livestreams.filter((livestream) => {
     // filter by streams in the future or happening today
-    return livestream._id !== currentStreamId
-  })
+    return livestream._id !== currentStreamId;
+  });
 
   livestreams = livestreams.filter((livestream) => {
-    return livestream.published
-  })
-  const org =
-    organizationSlug === 'livepeertv' ? 'tv' : organizationSlug
+    return livestream.published;
+  });
+  const org = organizationSlug === 'livepeertv' ? 'tv' : organizationSlug;
 
   return (
     <>
@@ -53,10 +52,10 @@ const UpcomingStreams = async ({
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default UpcomingStreams
+export default UpcomingStreams;
 
 export const UpcomingStreamsLoading = () => (
   <>
@@ -69,4 +68,4 @@ export const UpcomingStreamsLoading = () => (
       ))}
     </div>
   </>
-)
+);

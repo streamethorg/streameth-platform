@@ -1,34 +1,34 @@
-import { TableCell } from '@/components/ui/table'
-import { IExtendedSession, eLayout } from '@/lib/types'
-import { EllipsisVertical } from 'lucide-react'
-import Link from 'next/link'
-import { formatDate } from '@/lib/utils/time'
-import { fetchSessionMetrics } from '@/lib/services/sessionService'
-import ProcessingSkeleton from './misc/ProcessingSkeleton'
-import { PopoverActions } from './misc/PopoverActions'
+import { TableCell } from '@/components/ui/table';
+import { IExtendedSession, eLayout } from '@/lib/types';
+import { EllipsisVertical } from 'lucide-react';
+import Link from 'next/link';
+import { formatDate } from '@/lib/utils/time';
+import { fetchSessionMetrics } from '@/lib/services/sessionService';
+import ProcessingSkeleton from './misc/ProcessingSkeleton';
+import { PopoverActions } from './misc/PopoverActions';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { generateThumbnailAction } from '@/lib/actions/sessions'
-import Thumbnail from '@/components/misc/VideoCard/thumbnail'
-import PublishCell from './PublishCell'
+} from '@/components/ui/popover';
+import { generateThumbnailAction } from '@/lib/actions/sessions';
+import Thumbnail from '@/components/misc/VideoCard/thumbnail';
+import PublishCell from './PublishCell';
 
 const TableCells = async ({
   item,
   organization,
 }: {
-  item: IExtendedSession
-  organization: string
+  item: IExtendedSession;
+  organization: string;
 }) => {
-  const imageUrl = await generateThumbnailAction(item)
+  const imageUrl = await generateThumbnailAction(item);
   const views = (
     await fetchSessionMetrics({ playbackId: item.playbackId ?? '' })
-  ).viewCount
+  ).viewCount;
 
   if (!item.videoUrl) {
-    return <ProcessingSkeleton item={item} />
+    return <ProcessingSkeleton item={item} />;
   }
 
   return (
@@ -36,16 +36,11 @@ const TableCells = async ({
       <TableCell className="relative max-w-[500px] font-medium">
         <div className="flex w-full flex-row items-center space-x-4">
           <div className="min-w-[100px]">
-            <Thumbnail
-              imageUrl={item.coverImage}
-              fallBack={imageUrl}
-            />
+            <Thumbnail imageUrl={item.coverImage} fallBack={imageUrl} />
           </div>
 
           <Link href={`library/${item._id}`}>
-            <span className="line-clamp-3 hover:underline">
-              {item.name}
-            </span>
+            <span className="line-clamp-3 hover:underline">{item.name}</span>
           </Link>
         </div>
       </TableCell>
@@ -56,16 +51,11 @@ const TableCells = async ({
       </TableCell>
       {item.updatedAt && (
         <TableCell className="truncate">
-          {formatDate(
-            new Date(item.updatedAt as string),
-            'ddd. MMM. D, YYYY'
-          )}
+          {formatDate(new Date(item.updatedAt as string), 'ddd. MMM. D, YYYY')}
         </TableCell>
       )}
 
-      <TableCell className="relative max-w-[100px]">
-        {views}
-      </TableCell>
+      <TableCell className="relative max-w-[100px]">{views}</TableCell>
       <TableCell>
         <Popover>
           <PopoverTrigger className="z-10">
@@ -81,7 +71,7 @@ const TableCells = async ({
         </Popover>
       </TableCell>
     </>
-  )
-}
+  );
+};
 
-export default TableCells
+export default TableCells;

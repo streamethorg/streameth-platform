@@ -5,11 +5,11 @@ import {
   PutObjectCommandInput,
   ListBucketsCommand,
   ListObjectsCommand,
-} from '@aws-sdk/client-s3'
-import { Readable } from 'stream'
+} from '@aws-sdk/client-s3';
+import { Readable } from 'stream';
 
 class S3Service {
-  private s3Client: S3
+  private s3Client: S3;
 
   constructor() {
     this.s3Client = new S3({
@@ -19,7 +19,7 @@ class S3Service {
         accessKeyId: process.env.SPACES_KEY ?? '',
         secretAccessKey: process.env.SPACES_SECRET ?? '',
       },
-    })
+    });
   }
 
   async uploadFile(
@@ -34,57 +34,54 @@ class S3Service {
       Body: file,
       ContentType: contentType,
       ACL: 'public-read',
-    }
+    };
 
-    const command = new PutObjectCommand(params)
-    await this.s3Client.send(command)
-    console.log('Uploaded file...')
+    const command = new PutObjectCommand(params);
+    await this.s3Client.send(command);
+    console.log('Uploaded file...');
   }
 
   async listBuckets() {
-    const command = new ListBucketsCommand({})
-    const { Buckets } = await this.s3Client.send(command)
+    const command = new ListBucketsCommand({});
+    const { Buckets } = await this.s3Client.send(command);
 
-    return Buckets
+    return Buckets;
   }
 
   async getBucket(bucketName: string, path?: string) {
     const params = {
       Bucket: bucketName,
-    }
+    };
 
-    const command = new ListObjectsCommand(params)
-    const data = await this.s3Client.send(command)
+    const command = new ListObjectsCommand(params);
+    const data = await this.s3Client.send(command);
 
     if (path && data.Contents) {
       const objectsWithPath = data.Contents.filter((object) =>
         object.Key!.includes(path)
-      )
-      return objectsWithPath
+      );
+      return objectsWithPath;
     }
 
-    return data
+    return data;
   }
 
-  async getObject(
-    bucketName: string,
-    key: string
-  ): Promise<string | null> {
+  async getObject(bucketName: string, key: string): Promise<string | null> {
     const params = {
       Bucket: bucketName,
       Key: key,
-    }
+    };
 
-    const getObjectCommand = new GetObjectCommand(params)
+    const getObjectCommand = new GetObjectCommand(params);
     try {
-      const response = await this.s3Client.send(getObjectCommand)
+      const response = await this.s3Client.send(getObjectCommand);
 
-      return response.Body!.transformToString()
+      return response.Body!.transformToString();
     } catch (err) {
-      console.log('Could not find object')
-      return null
+      console.log('Could not find object');
+      return null;
     }
   }
 }
 
-export default S3Service
+export default S3Service;

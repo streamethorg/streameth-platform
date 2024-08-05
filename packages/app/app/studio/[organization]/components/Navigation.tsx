@@ -1,10 +1,10 @@
-'use client'
-import { useState } from 'react'
-import { cn } from '@/lib/utils/utils'
-import { Accordion } from '@/components/ui/accordion'
-import Logo from '@/public/studio_logo.png'
-import LogoCollapsed from '@/public/logo.png'
-import NavigationItem from './NavigationItem'
+'use client';
+import { useState } from 'react';
+import { cn } from '@/lib/utils/utils';
+import { Accordion } from '@/components/ui/accordion';
+import Logo from '@/public/studio_logo.png';
+import LogoCollapsed from '@/public/logo.png';
+import NavigationItem from './NavigationItem';
 import {
   Radio,
   Videotape,
@@ -12,15 +12,15 @@ import {
   Home,
   CalendarDays,
   ScissorsLineDashed,
-} from 'lucide-react'
+} from 'lucide-react';
 import {
   ArrowLeftToLine,
   ArrowRightFromLine,
   Image as ImageIcon,
-} from 'lucide-react'
-import Image from 'next/image'
-import StreamethStudio from '@/lib/svg/StreamethStudio'
-import StreamethLogo from '@/lib/svg/StreamethLogo'
+} from 'lucide-react';
+import Image from 'next/image';
+import StreamethStudio from '@/lib/svg/StreamethStudio';
+import StreamethLogo from '@/lib/svg/StreamethLogo';
 
 const navigationItems = [
   {
@@ -65,14 +65,10 @@ const navigationItems = [
     icon: <Settings />,
     defaultCollapsed: false,
   },
-]
+];
 
-const Navigation = ({
-  organizationSlug,
-}: {
-  organizationSlug: string
-}) => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+const Navigation = ({ organizationSlug }: { organizationSlug: string }) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <aside
@@ -86,7 +82,8 @@ const Navigation = ({
       )}
       style={{
         transition: 'max-width 0.3s ease-out-in',
-      }}>
+      }}
+    >
       {isCollapsed ? (
         <div className="mx-1 my-2">
           <StreamethLogo />
@@ -110,7 +107,8 @@ const Navigation = ({
 
       <div
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="mb-5 mt-auto flex w-full cursor-pointer items-center justify-center text-white">
+        className="mb-5 mt-auto flex w-full cursor-pointer items-center justify-center text-white"
+      >
         {isCollapsed ? (
           <ArrowRightFromLine className="mx-auto cursor-pointer" />
         ) : (
@@ -121,7 +119,7 @@ const Navigation = ({
         )}
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

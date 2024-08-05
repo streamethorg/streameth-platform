@@ -1,22 +1,22 @@
-'use client'
+'use client';
 
-import React, { useState, Suspense, useLayoutEffect } from 'react'
-import Image from 'next/image'
-import SearchBar from '@/components/misc/SearchBar'
-import Link from 'next/link'
-import { NavigationMenu } from '@/components/ui/navigation-menu'
-import { Menu, X } from 'lucide-react'
-import Navbar from './Navbar'
-import { SignInUserButton } from '../misc/SignInUserButton'
-import { Search } from 'lucide-react'
-import { Page } from '@/lib/types'
-import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization'
-import { IExtendedOrganization } from '@/lib/types'
-import { cn } from '@/lib/utils/utils'
-import { Button } from '@/components/ui/button'
-import { ConnectWalletButton } from '../misc/ConnectWalletButton'
-import { usePathname } from 'next/navigation'
-import { useAccount } from 'wagmi'
+import React, { useState, Suspense, useLayoutEffect } from 'react';
+import Image from 'next/image';
+import SearchBar from '@/components/misc/SearchBar';
+import Link from 'next/link';
+import { NavigationMenu } from '@/components/ui/navigation-menu';
+import { Menu, X } from 'lucide-react';
+import Navbar from './Navbar';
+import { SignInUserButton } from '../misc/SignInUserButton';
+import { Search } from 'lucide-react';
+import { Page } from '@/lib/types';
+import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
+import { IExtendedOrganization } from '@/lib/types';
+import { cn } from '@/lib/utils/utils';
+import { Button } from '@/components/ui/button';
+import { ConnectWalletButton } from '../misc/ConnectWalletButton';
+import { usePathname } from 'next/navigation';
+import { useAccount } from 'wagmi';
 
 const HomePageNavbar = ({
   logo,
@@ -26,15 +26,15 @@ const HomePageNavbar = ({
   organizations,
   currentOrganization,
 }: {
-  logo?: string
-  pages: Page[]
-  showLogo?: boolean
-  showSearchBar?: boolean
-  organizations?: IExtendedOrganization[]
-  currentOrganization?: string
+  logo?: string;
+  pages: Page[];
+  showLogo?: boolean;
+  showSearchBar?: boolean;
+  organizations?: IExtendedOrganization[];
+  currentOrganization?: string;
 }) => {
   if (logo === '') {
-    logo = undefined
+    logo = undefined;
   }
 
   return (
@@ -55,8 +55,8 @@ const HomePageNavbar = ({
         currentOrganization={currentOrganization || ''}
       />
     </Suspense>
-  )
-}
+  );
+};
 
 const MobileNavBar = ({
   logo,
@@ -65,24 +65,24 @@ const MobileNavBar = ({
   organizations,
   currentOrganization,
 }: {
-  logo?: string
-  pages: Page[]
-  showSearchBar: boolean
-  organizations?: IExtendedOrganization[]
-  currentOrganization: string
+  logo?: string;
+  pages: Page[];
+  showSearchBar: boolean;
+  organizations?: IExtendedOrganization[];
+  currentOrganization: string;
 }) => {
-  const [menuVisible, setMenuVisible] = useState(false)
-  const [searchVisible, setSearchVisible] = useState(false)
-  const toggleSearch = () => setSearchVisible(!searchVisible)
-  const toggleMenu = () => setMenuVisible(!menuVisible)
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [searchVisible, setSearchVisible] = useState(false);
+  const toggleSearch = () => setSearchVisible(!searchVisible);
+  const toggleMenu = () => setMenuVisible(!menuVisible);
 
   useLayoutEffect(() => {
     if (menuVisible || searchVisible) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'
+      document.body.style.overflow = 'auto';
     }
-  }, [menuVisible, searchVisible])
+  }, [menuVisible, searchVisible]);
 
   return (
     <NavigationMenu className="sticky top-0 z-50 flex flex-row items-center bg-white lg:hidden">
@@ -92,10 +92,7 @@ const MobileNavBar = ({
 
       {searchVisible && showSearchBar && (
         <div className="absolute bottom-[-56px] w-full bg-secondary">
-          <SearchBar
-            organizationSlug={currentOrganization}
-            isMobile={true}
-          />
+          <SearchBar organizationSlug={currentOrganization} isMobile={true} />
         </div>
       )}
       <div
@@ -103,7 +100,8 @@ const MobileNavBar = ({
           'relative flex h-full w-full flex-row items-center px-4 py-2',
           menuVisible && 'bg-background',
           searchVisible && showSearchBar && 'bg-background'
-        )}>
+        )}
+      >
         {organizations && (
           <div className="m-1 mr-2">
             <SwitchOrganization
@@ -149,8 +147,8 @@ const MobileNavBar = ({
         )}
       </div>
     </NavigationMenu>
-  )
-}
+  );
+};
 
 const PCNavBar = ({
   logo,
@@ -160,16 +158,16 @@ const PCNavBar = ({
   organizations,
   currentOrganization,
 }: {
-  logo?: string
-  pages: Page[]
-  showLogo: boolean
-  showSearchBar: boolean
-  organizations?: IExtendedOrganization[]
-  currentOrganization: string
+  logo?: string;
+  pages: Page[];
+  showLogo: boolean;
+  showSearchBar: boolean;
+  organizations?: IExtendedOrganization[];
+  currentOrganization: string;
 }) => {
-  const { isConnected } = useAccount()
-  const pathname = usePathname()
-  const isStudio = pathname.includes('studio')
+  const { isConnected } = useAccount();
+  const pathname = usePathname();
+  const isStudio = pathname.includes('studio');
   return (
     <NavigationMenu className="sticky top-0 z-[30] hidden w-full flex-row items-center justify-between bg-white p-2 px-4 shadow-sm md:hidden lg:flex">
       <div className="flex flex-1 items-center justify-start">
@@ -216,7 +214,7 @@ const PCNavBar = ({
         {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>
-  )
-}
+  );
+};
 
-export default HomePageNavbar
+export default HomePageNavbar;

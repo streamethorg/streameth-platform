@@ -1,14 +1,14 @@
-'use client'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import Combobox from '@/components/ui/combo-box'
-import { IExtendedEvent } from '@/lib/types'
+'use client';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import Combobox from '@/components/ui/combo-box';
+import { IExtendedEvent } from '@/lib/types';
 
 const EventSelect = ({ events }: { events: IExtendedEvent[] }) => {
-  const { handleTermChange, searchParams } = useSearchParams()
-  const event = searchParams.get('event') || ''
+  const { handleTermChange, searchParams } = useSearchParams();
+  const event = searchParams.get('event') || '';
 
   if (events.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -21,7 +21,7 @@ const EventSelect = ({ events }: { events: IExtendedEvent[] }) => {
             key: 'event',
             value: value,
           },
-        ])
+        ]);
       }}
       items={[
         { label: 'None', value: '' },
@@ -31,7 +31,7 @@ const EventSelect = ({ events }: { events: IExtendedEvent[] }) => {
         })),
       ]}
     />
-  )
-}
+  );
+};
 
-export default EventSelect
+export default EventSelect;

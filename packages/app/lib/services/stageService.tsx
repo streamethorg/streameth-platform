@@ -1,33 +1,33 @@
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface'
-import { apiUrl } from '@/lib/utils/utils'
-import { IExtendedStage } from '../types'
-import { fetchEvents } from './eventService'
-import { Session, Stream } from 'livepeer/dist/models/components'
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
+import { apiUrl } from '@/lib/utils/utils';
+import { IExtendedStage } from '../types';
+import { fetchEvents } from './eventService';
+import { Session, Stream } from 'livepeer/dist/models/components';
 
 export async function fetchStage({
   stage,
 }: {
-  stage: string
+  stage: string;
 }): Promise<IExtendedStage | null> {
   try {
     const response = await fetch(`${apiUrl()}/stages/${stage}`, {
       cache: 'no-cache',
-    })
-    const data = (await response.json()).data
+    });
+    const data = (await response.json()).data;
     if (!data) {
-      return null
+      return null;
     }
-    return data
+    return data;
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching stage'
+    console.log(e);
+    throw 'Error fetching stage';
   }
 }
 
 export async function fetchStages({
   organizationId,
 }: {
-  organizationId: string
+  organizationId: string;
 }): Promise<IExtendedStage[]> {
   try {
     const stages = await fetch(
@@ -35,12 +35,12 @@ export async function fetchStages({
       {
         cache: 'no-cache',
       }
-    )
-    const data = (await stages.json()).data
-    return data.map((stage: IStage) => stage)
+    );
+    const data = (await stages.json()).data;
+    return data.map((stage: IStage) => stage);
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching stages'
+    console.log(e);
+    throw 'Error fetching stages';
   }
 }
 
@@ -49,9 +49,9 @@ export async function deleteStage({
   organizationId,
   authToken,
 }: {
-  stageId: string
-  organizationId: string
-  authToken: string
+  stageId: string;
+  organizationId: string;
+  authToken: string;
 }): Promise<IExtendedStage> {
   try {
     const response = await fetch(`${apiUrl()}/stages/${stageId}`, {
@@ -61,14 +61,14 @@ export async function deleteStage({
         Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ organizationId }),
-    })
+    });
     if (!response.ok) {
-      throw 'Error deleting stage'
+      throw 'Error deleting stage';
     }
-    return await response.json()
+    return await response.json();
   } catch (e) {
-    console.log('error in deleteStage', e)
-    throw e
+    console.log('error in deleteStage', e);
+    throw e;
   }
 }
 
@@ -76,8 +76,8 @@ export async function createStage({
   stage,
   authToken,
 }: {
-  stage: IExtendedStage
-  authToken: string
+  stage: IExtendedStage;
+  authToken: string;
 }): Promise<IStage> {
   const response = await fetch(`${apiUrl()}/stages`, {
     method: 'POST',
@@ -86,39 +86,36 @@ export async function createStage({
       Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify(stage),
-  })
+  });
 
   if (!response.ok) {
-    throw 'Error creating stage'
+    throw 'Error creating stage';
   }
-  return (await response.json()).data
+  return (await response.json()).data;
 }
 
 export async function fetchEventStages({
   eventId,
 }: {
-  eventId?: string
+  eventId?: string;
 }): Promise<IExtendedStage[]> {
   try {
-    const response = await fetch(
-      `${apiUrl()}/stages/event/${eventId}`,
-      {
-        cache: 'no-store',
-      }
-    )
+    const response = await fetch(`${apiUrl()}/stages/event/${eventId}`, {
+      cache: 'no-store',
+    });
 
-    const data = (await response.json()).data
-    return data.map((stage: IStage) => stage)
+    const data = (await response.json()).data;
+    return data.map((stage: IStage) => stage);
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching stages'
+    console.log(e);
+    throw 'Error fetching stages';
   }
 }
 
 export async function fetchOrganizationStages({
   organizationId,
 }: {
-  organizationId?: string
+  organizationId?: string;
 }): Promise<IExtendedStage[]> {
   try {
     const response = await fetch(
@@ -126,13 +123,13 @@ export async function fetchOrganizationStages({
       {
         cache: 'no-store',
       }
-    )
+    );
 
-    const data = (await response.json()).data
-    return data.map((stage: IStage) => stage)
+    const data = (await response.json()).data;
+    return data.map((stage: IStage) => stage);
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching stages'
+    console.log(e);
+    throw 'Error fetching stages';
   }
 }
 
@@ -140,10 +137,10 @@ export const updateStage = async ({
   stage,
   authToken,
 }: {
-  stage: IExtendedStage
-  authToken: string
+  stage: IExtendedStage;
+  authToken: string;
 }): Promise<IExtendedStage> => {
-  const { _id, createdAt, updatedAt, __v, ...rest } = stage
+  const { _id, createdAt, updatedAt, __v, ...rest } = stage;
   try {
     const response = await fetch(`${apiUrl()}/stages/${_id}`, {
       method: 'PUT',
@@ -152,17 +149,17 @@ export const updateStage = async ({
         Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(rest),
-    })
+    });
 
     if (!response.ok) {
-      throw new Error('Error updating stage')
+      throw new Error('Error updating stage');
     }
-    return (await response.json()).data
+    return (await response.json()).data;
   } catch (error) {
-    console.error('Error updating stage:', error)
-    throw error
+    console.error('Error updating stage:', error);
+    throw error;
   }
-}
+};
 
 export async function createMultistream({
   name,
@@ -172,12 +169,12 @@ export async function createMultistream({
   authToken,
   organizationId,
 }: {
-  name: string
-  streamId: string
-  targetStreamKey: string
-  targetURL: string
-  authToken: string
-  organizationId?: string
+  name: string;
+  streamId: string;
+  targetStreamKey: string;
+  targetURL: string;
+  authToken: string;
+  organizationId?: string;
 }): Promise<{ message: string; status: string }> {
   const response = await fetch(`${apiUrl()}/streams/multistream`, {
     method: 'POST',
@@ -192,13 +189,13 @@ export async function createMultistream({
       targetStreamKey,
       organizationId,
     }),
-  })
+  });
 
   if (!response.ok) {
-    throw 'Error creating multistream'
+    throw 'Error creating multistream';
   }
 
-  return await response.json()
+  return await response.json();
 }
 
 export async function deleteMultistream({
@@ -207,10 +204,10 @@ export async function deleteMultistream({
   authToken,
   organizationId,
 }: {
-  streamId: string
-  targetId: string
-  authToken: string
-  organizationId?: string
+  streamId: string;
+  targetId: string;
+  authToken: string;
+  organizationId?: string;
 }): Promise<IExtendedStage> {
   try {
     const response = await fetch(`${apiUrl()}/streams/multistream`, {
@@ -220,37 +217,79 @@ export async function deleteMultistream({
         Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ streamId, targetId, organizationId }),
-    })
+    });
     if (!response.ok) {
-      throw 'Error deleting multistream'
+      throw 'Error deleting multistream';
     }
-    return await response.json()
+    return await response.json();
   } catch (e) {
-    console.log('error in deleteMultistream', e)
-    throw e
+    console.log('error in deleteMultistream', e);
+    throw e;
   }
 }
 
 export async function fetchStageRecordings({
   streamId,
 }: {
-  streamId: string
+  streamId: string;
 }): Promise<{ parentStream: Stream; recordings: Session[] } | null> {
   try {
-    const response = await fetch(
-      `${apiUrl()}/streams/recording/${streamId}`,
-      {
-        cache: 'no-cache',
-      }
-    )
-    const data = (await response.json()).data
+    const response = await fetch(`${apiUrl()}/streams/recording/${streamId}`, {
+      cache: 'no-cache',
+    });
+    const data = (await response.json()).data;
 
     if (!data) {
-      return null
+      return null;
     }
-    return data
+    return data;
   } catch (e) {
-    console.log(e)
-    throw 'Error fetching stage'
+    console.log(e);
+    throw 'Error fetching stage';
+  }
+}
+
+export async function createSocialLivestreamStage({
+  stageId,
+  socialId,
+  socialType,
+  organizationId,
+  authToken,
+}: {
+  stageId: string;
+  socialId: string;
+  socialType: string;
+  organizationId: string;
+  authToken: string;
+}): Promise<{
+  error: { details: string };
+  data: {
+    ingestUrl: 'string';
+    streamKey: 'string';
+  };
+}> {
+  try {
+    const response = await fetch(`${apiUrl()}/stages/livestream`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ stageId, socialId, socialType, organizationId }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      const errorMessage = `Error ${response.status}: ${error.message || 'Unknown error occurred'}`;
+      throw new Error(errorMessage);
+    }
+    return (await response.json()).data;
+  } catch (error) {
+    const errorObject = {
+      message: 'Failed to create social livestream stage',
+      details: error instanceof Error ? error.message : 'Unknown error',
+    };
+
+    throw errorObject;
   }
 }

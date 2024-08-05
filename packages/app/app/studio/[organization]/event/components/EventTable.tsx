@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { FilePenLine, Eye, TrashIcon } from 'lucide-react'
+import Image from 'next/image';
+import Link from 'next/link';
+import { FilePenLine, Eye, TrashIcon } from 'lucide-react';
 import {
   Table,
   TableHeader,
@@ -8,25 +8,25 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from '@/components/ui/table'
-import { Trash2 } from 'lucide-react'
+} from '@/components/ui/table';
+import { Trash2 } from 'lucide-react';
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { IExtendedEvent } from '@/lib/types'
-import DeleteEvent from './DeleteEvent'
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { IExtendedEvent } from '@/lib/types';
+import DeleteEvent from './DeleteEvent';
 
 const EventTable = async ({
   organization,
   events,
 }: {
-  organization: string
-  events: IExtendedEvent[]
+  organization: string;
+  events: IExtendedEvent[];
 }) => {
   return (
     <div className="flex h-full w-full flex-col bg-white">
@@ -34,9 +34,8 @@ const EventTable = async ({
         <CardHeader>
           <CardTitle>Events</CardTitle>
           <CardDescription className="max-w-[500px]">
-            Create a customised landing page for your event, stream on
-            multiple stages concurrently, and engage with your
-            audience in real time!
+            Create a customised landing page for your event, stream on multiple
+            stages concurrently, and engage with your audience in real time!
           </CardDescription>
         </CardHeader>
         <CardFooter>
@@ -76,9 +75,7 @@ const EventTable = async ({
                   </div>
                 </div>
               </TableCell>
-              <TableCell>
-                {event.unlisted ? 'unlisted' : 'public'}
-              </TableCell>
+              <TableCell>{event.unlisted ? 'unlisted' : 'public'}</TableCell>
               <TableCell>
                 {new Date(event.start).toDateString()} -
                 {new Date(event.end).toDateString()}
@@ -87,7 +84,8 @@ const EventTable = async ({
                 <Button variant={'outline'}>
                   <Link
                     className="events-center flex flex-row justify-center space-x-2"
-                    href={`/studio/${organization}/event/${event._id}`}>
+                    href={`/studio/${organization}/event/${event._id}`}
+                  >
                     <FilePenLine className="text-muted-foreground" />
                     <p className="">Edit</p>
                   </Link>
@@ -95,7 +93,8 @@ const EventTable = async ({
                 <Button variant={'outline'}>
                   <Link
                     className="events-center flex flex-row justify-center space-x-2"
-                    href={`/${event.organizationId}/${event.slug}`}>
+                    href={`/${event.organizationId}/${event.slug}`}
+                  >
                     <Eye className="text-muted-foreground" />
                     <p className="">View</p>
                   </Link>
@@ -114,7 +113,7 @@ const EventTable = async ({
         </TableBody>
       </Table>
     </div>
-  )
-}
+  );
+};
 
-export default EventTable
+export default EventTable;

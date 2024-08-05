@@ -190,6 +190,9 @@ const models: TsoaRoute.Models = {
       targetStreamKey: { dataType: 'string', required: true },
       targetURL: { dataType: 'string', required: true },
       organizationId: { dataType: 'string', required: true },
+      socialId: { dataType: 'string' },
+      socialType: { dataType: 'string' },
+      broadcastId: { dataType: 'string' },
     },
     additionalProperties: false,
   },
@@ -291,7 +294,7 @@ const models: TsoaRoute.Models = {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   StateStatus: {
     dataType: 'refEnum',
-    enums: ['pending', 'completed', 'canceled', 'sync'],
+    enums: ['pending', 'completed', 'canceled', 'sync', 'error'],
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   StateType: {
@@ -442,6 +445,9 @@ const models: TsoaRoute.Models = {
       _id: { dataType: 'string' },
       id: { dataType: 'string' },
       name: { dataType: 'string' },
+      socialId: { dataType: 'string' },
+      socialType: { dataType: 'string' },
+      broadcastId: { dataType: 'string' },
     },
     additionalProperties: false,
   },
@@ -626,6 +632,33 @@ const models: TsoaRoute.Models = {
   OrgIdDto: {
     dataType: 'refObject',
     properties: {
+      organizationId: { dataType: 'string', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'IStandardResponse__streamKey-string--ingestUrl-string__': {
+    dataType: 'refObject',
+    properties: {
+      status: { dataType: 'string', required: true },
+      message: { dataType: 'string', required: true },
+      data: {
+        dataType: 'nestedObjectLiteral',
+        nestedProperties: {
+          ingestUrl: { dataType: 'string', required: true },
+          streamKey: { dataType: 'string', required: true },
+        },
+      },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CreateLiveStreamDto: {
+    dataType: 'refObject',
+    properties: {
+      stageId: { dataType: 'string', required: true },
+      socialId: { dataType: 'string', required: true },
+      socialType: { dataType: 'string', required: true },
       organizationId: { dataType: 'string', required: true },
     },
     additionalProperties: false,
@@ -2864,6 +2897,52 @@ export function RegisterRoutes(app: Router) {
           next,
           validatedArgs,
           successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/stages/livestream',
+    authenticateMiddleware([{ jwt: ['org'] }]),
+    ...fetchMiddlewares<RequestHandler>(StageController),
+    ...fetchMiddlewares<RequestHandler>(StageController.prototype.youtubeStage),
+
+    async function StageController_youtubeStage(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      const args: Record<string, TsoaRoute.ParameterSchema> = {
+        body: {
+          in: 'body',
+          name: 'body',
+          required: true,
+          ref: 'CreateLiveStreamDto',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args,
+          request,
+          response,
+        });
+
+        const controller = new StageController();
+
+        await templateService.apiHandler({
+          methodName: 'youtubeStage',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 201,
         });
       } catch (err) {
         return next(err);

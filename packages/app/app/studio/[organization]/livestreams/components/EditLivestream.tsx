@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import DatePicker from '@/components/misc/form/datePicker'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import TimePicker from '@/components/misc/form/timePicker'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import DatePicker from '@/components/misc/form/datePicker';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import TimePicker from '@/components/misc/form/timePicker';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -20,20 +20,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { updateStageAction } from '@/lib/actions/stages'
-import { StageSchema } from '@/lib/schema'
-import { IExtendedStage } from '@/lib/types'
-import { formatDate } from '@/lib/utils/time'
-import { getFormSubmitStatus, getTimeString } from '@/lib/utils/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { FilePenLine } from 'lucide-react'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { updateStageAction } from '@/lib/actions/stages';
+import { StageSchema } from '@/lib/schema';
+import { IExtendedStage } from '@/lib/types';
+import { formatDate } from '@/lib/utils/time';
+import { getFormSubmitStatus, getTimeString } from '@/lib/utils/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FilePenLine } from 'lucide-react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
 const EditLivestream = ({
   stage,
@@ -41,22 +41,14 @@ const EditLivestream = ({
   btnText = 'Edit',
   variant = 'ghost',
 }: {
-  stage: IExtendedStage
-  organizationSlug: string
-  btnText?: string
-  variant?:
-    | 'outline'
-    | 'ghost'
-    | 'primary'
-    | 'default'
-    | 'link'
-    | 'secondary'
+  stage: IExtendedStage;
+  organizationSlug: string;
+  btnText?: string;
+  variant?: 'outline' | 'ghost' | 'primary' | 'default' | 'link' | 'secondary';
 }) => {
-  const [open, setOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isMultiDate, setIsMultiDate] = useState(
-    stage?.isMultipleDate
-  )
+  const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isMultiDate, setIsMultiDate] = useState(stage?.isMultipleDate);
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
     defaultValues: {
@@ -65,23 +57,22 @@ const EditLivestream = ({
       streamDate: new Date(stage?.streamDate as string) || new Date(),
       thumbnail: stage?.thumbnail,
       streamTime: getTimeString(stage.streamDate) || '00:00',
-      streamEndDate:
-        new Date(stage?.streamEndDate as string) || new Date(),
+      streamEndDate: new Date(stage?.streamEndDate as string) || new Date(),
       streamEndTime: getTimeString(stage.streamEndDate) || '00:00',
       isMultipleDate: stage?.isMultipleDate || false,
     },
-  })
+  });
 
   const handleModalClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const dateInput = formatDate(
     new Date(`${form.getValues('streamDate')}`),
     'YYYY-MM-DD'
-  )
-  const timeInput = form.getValues('streamTime')
-  const formattedDate = new Date(`${dateInput}T${timeInput}`)
+  );
+  const timeInput = form.getValues('streamTime');
+  const formattedDate = new Date(`${dateInput}T${timeInput}`);
   const formattedEndDate = new Date(
     new Date(
       `${formatDate(
@@ -89,13 +80,13 @@ const EditLivestream = ({
         'YYYY-MM-DD'
       )}T${form.getValues('streamEndTime')}`
     )
-  )
-  const isPast = formattedDate < new Date()
-  const validateEndDate = formattedEndDate < formattedDate
+  );
+  const isPast = formattedDate < new Date();
+  const validateEndDate = formattedEndDate < formattedDate;
 
   function onSubmit(values: z.infer<typeof StageSchema>) {
-    setIsLoading(true)
-    const { streamTime, streamEndTime, ...otherValues } = values
+    setIsLoading(true);
+    const { streamTime, streamEndTime, ...otherValues } = values;
 
     updateStageAction({
       stage: {
@@ -107,15 +98,15 @@ const EditLivestream = ({
       },
     })
       .then(() => {
-        toast.success(`Stream updated`)
+        toast.success(`Stream updated`);
       })
       .catch(() => {
-        toast.error('Error updating stream')
+        toast.error('Error updating stream');
       })
       .finally(() => {
-        setIsLoading(false)
-        handleModalClose()
-      })
+        setIsLoading(false);
+        handleModalClose();
+      });
   }
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)}>
@@ -173,7 +164,8 @@ const EditLivestream = ({
               {' '}
               <p
                 className="text-sm"
-                onClick={() => setIsMultiDate(!isMultiDate)}>
+                onClick={() => setIsMultiDate(!isMultiDate)}
+              >
                 Streaming multiple days?
               </p>{' '}
               <div className="mt-1 flex items-center gap-5">
@@ -186,10 +178,9 @@ const EditLivestream = ({
                 </div>
                 <div className="flex items-center gap-1">
                   <Checkbox
-                    onCheckedChange={() =>
-                      setIsMultiDate(!isMultiDate)
-                    }
-                    checked={!isMultiDate}></Checkbox>
+                    onCheckedChange={() => setIsMultiDate(!isMultiDate)}
+                    checked={!isMultiDate}
+                  ></Checkbox>
                   <Label>No</Label>
                 </div>
               </div>
@@ -231,8 +222,8 @@ const EditLivestream = ({
             </div>
             {isPast && (
               <p className="mt-1 text-[12px] text-destructive">
-                Couldn&apos;t schedule. The date and time selected are
-                too far in the past.
+                Couldn&apos;t schedule. The date and time selected are too far
+                in the past.
               </p>
             )}
 
@@ -244,9 +235,7 @@ const EditLivestream = ({
                     name="streamEndDate"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel required>
-                          Stream End Date
-                        </FormLabel>
+                        <FormLabel required>Stream End Date</FormLabel>
                         <FormControl>
                           <DatePicker
                             value={field.value as Date}
@@ -263,9 +252,7 @@ const EditLivestream = ({
                     name="streamEndTime"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel required>
-                          Stream End Time
-                        </FormLabel>
+                        <FormLabel required>Stream End Time</FormLabel>
                         <FormControl>
                           <TimePicker
                             value={field.value}
@@ -279,8 +266,8 @@ const EditLivestream = ({
                 </div>
                 {validateEndDate && (
                   <p className="mt-1 text-[12px] text-destructive">
-                    Couldn&apos;t schedule. End date and time selected
-                    are too far in the past.
+                    Couldn&apos;t schedule. End date and time selected are too
+                    far in the past.
                   </p>
                 )}
               </>
@@ -290,7 +277,8 @@ const EditLivestream = ({
               <Button
                 type="button"
                 onClick={handleModalClose}
-                variant="outline">
+                variant="outline"
+              >
                 Cancel
               </Button>
 
@@ -298,7 +286,8 @@ const EditLivestream = ({
                 loading={isLoading}
                 variant="outlinePrimary"
                 disabled={getFormSubmitStatus(form) || isLoading}
-                type="submit">
+                type="submit"
+              >
                 Update livestream
               </Button>
             </DialogFooter>
@@ -306,7 +295,7 @@ const EditLivestream = ({
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default EditLivestream
+export default EditLivestream;

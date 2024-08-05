@@ -9,6 +9,9 @@ import { Session, Stream } from 'livepeer/dist/models/components';
 import SessionModel from '@models/session.model';
 import { SessionType } from '@interfaces/session.interface';
 import { createEventVideoById } from './firebase';
+import { deleteYoutubeLiveStream } from './youtube';
+import Organization from '@models/organization.model';
+import { refreshAccessToken } from './oauth';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -254,6 +257,9 @@ export const createMultiStream = async (data: IMultiStream): Promise<void> => {
         'streamSettings.targets': {
           id: multistream.id,
           name: multistream.name,
+          socialId: data.socialId ?? '',
+          socialType: data.socialType ?? '',
+          broadcastId: data.broadcastId ?? '',
         },
       },
     });
@@ -280,6 +286,20 @@ export const deleteMultiStream = async (data: {
     const stage = await Stage.findOne({
       'streamSettings.streamId': data.streamId,
     });
+    const target = stage.streamSettings.targets.find(
+      (e) => e.id == data.targetId,
+    );
+    if (target.socialType == 'youtube') {
+      const org = await Organization.findOne({ _id: stage.organizationId });
+      const token = org.socials.find(
+        (e) => e.type == target.socialType && e._id == target.socialId,
+      );
+      const accessToken = await refreshAccessToken(token.refreshToken);
+      await deleteYoutubeLiveStream({
+        broadcastId: target.broadcastId,
+        accessToken: accessToken,
+      });
+    }
     await stage.updateOne({
       $pull: { 'streamSettings.targets': { id: data.targetId } },
     });

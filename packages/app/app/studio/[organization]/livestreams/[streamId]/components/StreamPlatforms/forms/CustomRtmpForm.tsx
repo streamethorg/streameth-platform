@@ -1,32 +1,36 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
-import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
-import { DialogFooter } from '@/components/ui/dialog'
-import { createMultistreamAction } from '@/lib/actions/stages'
-import { ReloadIcon } from '@radix-ui/react-icons'
-import { useFormState, useFormStatus } from 'react-dom'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
+import { useEffect } from 'react';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { DialogFooter } from '@/components/ui/dialog';
+import { createMultistreamAction } from '@/lib/actions/stages';
+import { ReloadIcon } from '@radix-ui/react-icons';
+import { useFormState, useFormStatus } from 'react-dom';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 const initialState = {
   message: '',
   success: false,
-}
+};
 
 function SubmitButton() {
-  const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
 
   if (pending) {
     return (
-      <Button disabled>
+      <Button variant={'primary'} disabled>
         <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
         Please wait
       </Button>
-    )
+    );
   }
-  return <Button type="submit">Create</Button>
+  return (
+    <Button variant={'primary'} type="submit">
+      Create
+    </Button>
+  );
 }
 
 const CreateCustomStream = ({
@@ -35,39 +39,35 @@ const CreateCustomStream = ({
   btnName = 'Add',
   setIsOpen,
 }: {
-  streamId: string
-  organizationId: string
-  btnName?: string
-  setIsOpen: (open: boolean) => void
+  streamId: string;
+  organizationId: string;
+  btnName?: string;
+  setIsOpen: (open: boolean) => void;
 }) => {
   const [state, formAction] = useFormState(
     createMultistreamAction,
     initialState
-  )
+  );
 
   useEffect(() => {
     if (!state.message) {
-      return
+      return;
     }
 
     if (state.success === false) {
-      toast.error(state.message)
-      return
+      toast.error(state.message);
+      return;
     }
 
-    toast.success(state.message)
-    setIsOpen(false)
-  }, [state])
+    toast.success(state.message);
+    setIsOpen(false);
+  }, [state]);
 
   return (
     <form action={formAction} className="grid gap-4">
       <div className="grid grid-cols-4 items-center gap-4">
         <Input type="hidden" name="streamId" value={streamId} />
-        <Input
-          type="hidden"
-          name="organizationId"
-          value={organizationId}
-        />
+        <Input type="hidden" name="organizationId" value={organizationId} />
         <Label htmlFor="name" className="text-right">
           Name
         </Label>
@@ -108,13 +108,13 @@ const CreateCustomStream = ({
         <div className="flex flex-col">
           <h3 className="font-bold">About</h3>
           <p className="text-muted-foreground">
-            Allows you to add a Custom RTMP or more than 1 channel of
-            the same platform from our list of supported platforms.
+            Allows you to add a Custom RTMP or more than 1 channel of the same
+            platform from our list of supported platforms.
           </p>
         </div>
       </DialogFooter>
     </form>
-  )
-}
+  );
+};
 
-export default CreateCustomStream
+export default CreateCustomStream;

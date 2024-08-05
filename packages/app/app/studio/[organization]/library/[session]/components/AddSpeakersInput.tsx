@@ -1,39 +1,37 @@
-import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
-import SpeakerIcon from '@/components/speakers/speakerIcon'
-import { useEffect, useState } from 'react'
-import { apiUrl, cn } from '@/lib/utils/utils'
-import { Button } from '@/components/ui/button'
+import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface';
+import SpeakerIcon from '@/components/speakers/speakerIcon';
+import { useEffect, useState } from 'react';
+import { apiUrl, cn } from '@/lib/utils/utils';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command'
+} from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
+} from '@/components/ui/popover';
 
 const AddSpeakersInput = ({
   speakers,
   eventId,
 }: {
-  speakers: ISpeaker[]
-  eventId: string
+  speakers: ISpeaker[];
+  eventId: string;
 }) => {
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
-  const [allSpeakers, setAllSpeakers] = useState<ISpeaker[]>([])
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('');
+  const [allSpeakers, setAllSpeakers] = useState<ISpeaker[]>([]);
   const fetchSpeakers = async (): Promise<any> =>
-    fetch(`${apiUrl()}/speakers/event/${eventId}`).then((res) =>
-      res.json()
-    )
+    fetch(`${apiUrl()}/speakers/event/${eventId}`).then((res) => res.json());
 
   useEffect(() => {
-    fetchSpeakers().then((speakers) => setAllSpeakers(speakers.data))
-  }, [])
+    fetchSpeakers().then((speakers) => setAllSpeakers(speakers.data));
+  }, []);
 
   return (
     <div>
@@ -48,19 +46,16 @@ const AddSpeakersInput = ({
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[200px] justify-between">
+            className="w-[200px] justify-between"
+          >
             {value
-              ? allSpeakers.find((speaker) => speaker._id === value)
-                  ?.name
+              ? allSpeakers.find((speaker) => speaker._id === value)?.name
               : 'Select speaker...'}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
           <Command>
-            <CommandInput
-              placeholder="Search speaker..."
-              className="h-9"
-            />
+            <CommandInput placeholder="Search speaker..." className="h-9" />
             <CommandEmpty>No speaker found.</CommandEmpty>
             <CommandGroup>
               {allSpeakers.map((speaker) => (
@@ -68,11 +63,10 @@ const AddSpeakersInput = ({
                   key={speaker.name}
                   value={speaker._id}
                   onSelect={(currentValue) => {
-                    setValue(
-                      currentValue === value ? '' : currentValue
-                    )
-                    setOpen(false)
-                  }}>
+                    setValue(currentValue === value ? '' : currentValue);
+                    setOpen(false);
+                  }}
+                >
                   {speaker.name}
                 </CommandItem>
               ))}
@@ -81,7 +75,7 @@ const AddSpeakersInput = ({
         </PopoverContent>
       </Popover>
     </div>
-  )
-}
+  );
+};
 
-export default AddSpeakersInput
+export default AddSpeakersInput;

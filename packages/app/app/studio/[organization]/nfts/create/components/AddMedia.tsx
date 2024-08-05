@@ -1,20 +1,20 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import { CardTitle } from '@/components/ui/card'
+'use client';
+import { Button } from '@/components/ui/button';
+import { CardTitle } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { IExtendedSession, INFTSessions } from '@/lib/types'
-import { PlusCircle } from 'lucide-react'
-import React, { useState } from 'react'
-import AddMediaTabItem from './AddMediaTabItem'
-import SelectedMediaItem from './SelectedMediaItem'
-import { ICreateNFT } from './CreateNFTForm'
+} from '@/components/ui/dialog';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { IExtendedSession, INFTSessions } from '@/lib/types';
+import { PlusCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import AddMediaTabItem from './AddMediaTabItem';
+import SelectedMediaItem from './SelectedMediaItem';
+import { ICreateNFT } from './CreateNFTForm';
 
 const AddMedia = ({
   videos,
@@ -23,30 +23,28 @@ const AddMedia = ({
   formState,
   type,
 }: {
-  stages: INFTSessions[]
-  formState: ICreateNFT
-  setFormState: React.Dispatch<React.SetStateAction<ICreateNFT>>
-  videos: INFTSessions[]
-  type: string
+  stages: INFTSessions[];
+  formState: ICreateNFT;
+  setFormState: React.Dispatch<React.SetStateAction<ICreateNFT>>;
+  videos: INFTSessions[];
+  type: string;
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const filteredVideos = videos?.filter((v) => v.type !== 'clip')
-  const clips = videos?.filter((v) => v.type === 'clip')
+  const filteredVideos = videos?.filter((v) => v.type !== 'clip');
+  const clips = videos?.filter((v) => v.type === 'clip');
   const handleRemoveSelected = (itemToRemove: IExtendedSession) => {
     setFormState((prevState) => ({
       ...prevState,
       selectedVideo: prevState.selectedVideo.filter(
         (video) => video !== itemToRemove
       ),
-    }))
-  }
+    }));
+  };
 
   return (
     <div>
-      <CardTitle className="mb-4 text-2xl font-semibold">
-        Add Media
-      </CardTitle>
+      <CardTitle className="mb-4 text-2xl font-semibold">Add Media</CardTitle>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger className="w-full">
@@ -62,9 +60,7 @@ const AddMedia = ({
           <div className="">
             <Tabs defaultValue={'videos'}>
               <TabsList className="w-full !justify-start gap-5 border-y border-grey">
-                <TabsTrigger value="livestreams">
-                  Livestreams
-                </TabsTrigger>
+                <TabsTrigger value="livestreams">Livestreams</TabsTrigger>
                 <TabsTrigger value="videos">Videos</TabsTrigger>
                 <TabsTrigger value="clips">Clips</TabsTrigger>
               </TabsList>
@@ -94,16 +90,15 @@ const AddMedia = ({
           <DialogFooter>
             <Button
               onClick={() => {
-                setFormState({ ...formState, selectedVideo: [] })
-                setIsOpen(false)
+                setFormState({ ...formState, selectedVideo: [] });
+                setIsOpen(false);
               }}
               className="border-none shadow-none"
-              variant="destructive-outline">
+              variant="destructive-outline"
+            >
               Cancel
             </Button>
-            <Button
-              onClick={() => setIsOpen(false)}
-              variant="outlinePrimary">
+            <Button onClick={() => setIsOpen(false)} variant="outlinePrimary">
               Continue
             </Button>
           </DialogFooter>
@@ -120,7 +115,7 @@ const AddMedia = ({
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddMedia
+export default AddMedia;
