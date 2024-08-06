@@ -37,7 +37,7 @@ If you encounter any bugs, have feature requests, or want to suggest improvement
 
 **Please Note**: At this time, StreamETH is not open for external code contributions. We are a small team focused on delivering a high-quality product, and we are not currently set up to manage external developer code contributions effectively. We appreciate your interest, but we kindly ask that you refrain from submitting pull requests or expecting to contribute code at this stage. 🙏
 
-However, we do welcome and appreciate [issue submissions!](https://github.com/streamethorg/streameth-platform/issues) If you encounter bugs, have feature requests, or want to provide suggestions, please feel free to open an issue. Your feedback is valuable to us. 🐛💡
+However, we do welcome and appreciate [issue submissions!](https://github.com/streamethorg/streameth-platform/issues) If you encounter bugs 🐛, have feature requests, or want to provide suggestions, please feel free to open an issue. Your feedback is valuable to us. 🐛💡
 
 We plan to support full developer contributions in the future once we feel ready to manage them properly. We will update this README when that time comes. Thank you for your understanding. 🌟
 
