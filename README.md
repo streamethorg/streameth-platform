@@ -20,13 +20,6 @@ For a better understanding of what StreamETH offers and how it functions, please
 - **Application Site**: [streameth.org/studio](https://streameth.org/studio) - Interact with the StreamETH application. 🎬
 - **Create an event with us**: [Create Event](https://xg2nwufp1ju.typeform.com/to/UHZwa5M3?typeform-source=info.streameth.org)
 
-<!-- ## Documentation Resources 📚 -->
-<!---->
-<!-- You can find detailed documentation on StreamETH's features and architecture here: -->
-<!---->
-<!-- - **[Documentation Link](#)**: Dive deep into the technical details and operational aspects of StreamETH. 📖 -->
-
-
 ## Goals of StreamETH 🎯
 
 Our mission with StreamETH is to:
