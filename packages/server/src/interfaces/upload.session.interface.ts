@@ -4,6 +4,7 @@ export interface IUploadSession {
   socialId: string;
   organizationId: string | Types.ObjectId;
   sessionId: string | Types.ObjectId;
-  token?: string;
+  token?: { key?: string; secret: string };
   type: string;
+  text?: string;
 }
