@@ -8,6 +8,7 @@ setup('login to studio page with Privy', async ({ page }) => {
   const otp = process.env['PRIVY_OTP'] || '';
 
   // Find and click the login button
+  await page.getByRole('button', { name: 'Sign in' }).click();
   const loginButton = page.getByRole('button', {
     name: 'Log in with email or socials',
   });

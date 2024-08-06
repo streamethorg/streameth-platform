@@ -1,11 +1,24 @@
-import { test, expect } from '@playwright/test';
+import { test as base, expect } from '@playwright/test';
 import path from 'path';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
+import crypto from 'crypto';
 
-const ORG_NAME = 'test_organization';
-const API_URL = 'https://dev.api.streameth.org';
+const generateShortId = () => {
+  return crypto.randomBytes(3).toString('hex');
+};
 
-test.afterEach(async ({ request, context }) => {
+const test = base.extend({
+  orgId: async ({ browserName }, use, testInfo) => {
+    const baseEnv = process.env['ORG_NAME'] || 'TestOrg';
+    const uniqueId = generateShortId();
+    const orgId = `${baseEnv}_${browserName.toLowerCase()}_${uniqueId}`;
+    console.log(`Running test "${testInfo.title}" with ORG_ID: ${orgId}`);
+    await use(orgId);
+  },
+});
+const API_URL = process.env['NEXT_PUBLIC_API_URL'] || '';
+
+test.afterEach(async ({ request, context, orgId }) => {
   try {
     // Step 1: Get the authentication token
     const cookies = await context.cookies();
@@ -35,7 +48,7 @@ test.afterEach(async ({ request, context }) => {
     const responseBody = await getResponse.json();
     const organizations: IOrganization[] = responseBody.data;
 
-    const testOrg = organizations.find((org) => org.name === ORG_NAME);
+    const testOrg = organizations.find((org) => org.name === orgId);
 
     if (testOrg) {
       const organizationId = testOrg._id?.toString();
@@ -69,6 +82,7 @@ test.afterEach(async ({ request, context }) => {
 
 test('create an organization with all mandatory information', async ({
   page,
+  orgId,
 }) => {
   // Navigate to the create organization page
   await page.goto('http://localhost:3000/studio/create');
@@ -86,7 +100,7 @@ test('create an organization with all mandatory information', async ({
   const name = page.getByPlaceholder('Name');
   const email = page.getByPlaceholder('Email');
 
-  await name.fill(ORG_NAME);
+  await name.fill(orgId);
   await page.waitForTimeout(200);
   await email.fill('test@example.com');
   await page.waitForTimeout(200);
@@ -111,6 +125,7 @@ test('create an organization with all mandatory information', async ({
 
 test('create an organization with all mandatory information and description', async ({
   page,
+  orgId,
 }) => {
   // Navigate to the create organization page
   await page.goto('http://localhost:3000/studio/create');
@@ -125,7 +140,7 @@ test('create an organization with all mandatory information and description', as
   await expect(heading).toBeVisible({ timeout: 20000 });
 
   // Fill in the form
-  await page.getByPlaceholder('Name').fill(ORG_NAME);
+  await page.getByPlaceholder('Name').fill(orgId);
   await page.getByPlaceholder('Email').fill('test@example.com');
 
   // Upload logo
@@ -159,6 +174,7 @@ test('create an organization with all mandatory information and description', as
 
 test('create an organization with all mandatory information and a description too long', async ({
   page,
+  orgId,
 }) => {
   // Navigate to the create organization page
   await page.goto('http://localhost:3000/studio/create');
@@ -173,7 +189,7 @@ test('create an organization with all mandatory information and a description to
   await expect(heading).toBeVisible({ timeout: 20000 });
 
   // Fill in the form
-  await page.getByPlaceholder('Name').fill(ORG_NAME);
+  await page.getByPlaceholder('Name').fill(orgId);
   await page.getByPlaceholder('Email').fill('test@example.com');
 
   // Upload logo
@@ -223,6 +239,7 @@ test('create an organization with all mandatory information and a description to
 
 test('try to create an organization with missing the logo', async ({
   page,
+  orgId,
 }) => {
   // Navigate to the create organization page
   await page.goto('http://localhost:3000/studio/create');
@@ -240,7 +257,7 @@ test('try to create an organization with missing the logo', async ({
   const name = page.getByPlaceholder('Name');
   const email = page.getByPlaceholder('Email');
 
-  await name.fill(ORG_NAME);
+  await name.fill(orgId);
   await page.waitForTimeout(200);
   await email.fill('test@example.com');
   await page.waitForTimeout(200);
@@ -282,11 +299,12 @@ test('attempt to create an organization with missing name', async ({
 
 test('attempt to create an organization with missing email', async ({
   page,
+  orgId,
 }) => {
   await page.goto('http://localhost:3000/studio/create');
 
   // Fill only name and upload logo
-  await page.getByPlaceholder('Name').fill(ORG_NAME);
+  await page.getByPlaceholder('Name').fill(orgId);
 
   const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
   const fileChooserPromise = page.waitForEvent('filechooser');
