@@ -145,8 +145,8 @@ export const archivePath = ({
 
   return organizationSlug
     ? `/${organizationSlug}/videos?${params.toString()}`
-    : `/explore?${params.toString()}`
-}
+    : `/explore?${params.toString()}`;
+};
 
 export const hasOrganization = (
   userOrganizations?: IExtendedOrganization[],

@@ -6,14 +6,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { generateThumbnailAction } from '@/lib/actions/sessions'
-import { IExtendedSession } from '@/lib/types'
-import { formatDate } from '@/lib/utils/time'
-import { EllipsisVertical } from 'lucide-react'
-import Link from 'next/link'
-import React, { ReactNode, useMemo } from 'react'
-import { useEffect, useState } from 'react'
+} from '@/components/ui/dropdown-menu';
+import { generateThumbnailAction } from '@/lib/actions/sessions';
+import { IExtendedSession } from '@/lib/types';
+import { formatDate } from '@/lib/utils/time';
+import { EllipsisVertical } from 'lucide-react';
+import Link from 'next/link';
+import React, { ReactNode, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 const VideoCardWithMenu = ({
   session,
@@ -28,7 +28,7 @@ const VideoCardWithMenu = ({
 }) => {
   const [thumbnail, setThumbnail] = useState<string | undefined>(undefined);
 
-  const memoizedSession = useMemo(() => session, [])
+  const memoizedSession = useMemo(() => session, []);
 
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
@@ -44,7 +44,7 @@ const VideoCardWithMenu = ({
       getThumbnail(session);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [memoizedSession])
+  }, [memoizedSession]);
 
   return (
     <div className="flex min-h-full w-full flex-col rounded-xl uppercase">

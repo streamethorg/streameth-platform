@@ -12,7 +12,7 @@ import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 
 export interface HomePageProps {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export enum eSort {

@@ -1,20 +1,20 @@
-import { HomePageProps } from '@/lib/types'
-import ArchiveVideos from '../[organization]/videos/components/ArchiveVideos'
-import { getFeaturedEventsData } from '../../components/misc/FeaturedEventsData'
-import FeaturedEvents from './components/FeaturedEvents'
-import ExploreTabs from './components/ExploreTabs'
-import HomePageNavbar from '@/components/Layout/HomePageNavbar'
-import { Suspense } from 'react'
+import { HomePageProps } from '@/lib/types';
+import ArchiveVideos from '../[organization]/videos/components/ArchiveVideos';
+import { getFeaturedEventsData } from '../../components/misc/FeaturedEventsData';
+import FeaturedEvents from './components/FeaturedEvents';
+import ExploreTabs from './components/ExploreTabs';
+import HomePageNavbar from '@/components/Layout/HomePageNavbar';
+import { Suspense } from 'react';
 
 const Home = async ({ searchParams }: HomePageProps) => {
-  const { events, organizations } = await getFeaturedEventsData()
+  const { events, organizations } = await getFeaturedEventsData();
   const pages = [
     {
       name: 'Home',
       href: `/`,
       bgColor: 'bg-muted',
     },
-  ]
+  ];
   return (
     <div className="flex min-h-dvh flex-col bg-white">
       <HomePageNavbar
@@ -23,20 +23,15 @@ const Home = async ({ searchParams }: HomePageProps) => {
         pages={pages}
         showSearchBar={true}
       />
-      <div className="container mx-auto space-y-16 px-4 py-16 md:px-6">
-        <section>
-          <h2 className="mb-8 text-3xl font-bold text-foreground">
-            Featured Events
+      <div className="relative container mx-auto my-4 space-y-12 ">
+        <section className="space-y-8">
+          <h2 className="text-xl font-medium text-foreground">
+            Featured events
           </h2>
-          <FeaturedEvents
-            events={events}
-            organizations={organizations}
-          />
+          <FeaturedEvents events={events} organizations={organizations} />
         </section>
-        <section>
-          <h2 className="mb-8 text-3xl font-bold text-foreground">
-            Past Sessions
-          </h2>
+        <section className="relative">
+          <h2 className="text-xl font-medium text-foreground">Past sessions</h2>
           <ExploreTabs />
           <div className="mt-8">
             <Suspense fallback={<div> Loading... </div>}>
@@ -46,7 +41,7 @@ const Home = async ({ searchParams }: HomePageProps) => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
