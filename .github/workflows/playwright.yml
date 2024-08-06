@@ -43,11 +43,6 @@ jobs:
   chrome-tests:
     needs: install
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shardIndex: [1, 2]
-        shardTotal: [2]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -74,7 +69,7 @@ jobs:
       - name: Run Playwright tests on Chrome
         run: |
           cd packages/app
-          yarn playwright test --project=chromium --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+          yarn playwright test --project=chromium
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -85,18 +80,13 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-chrome-${{ matrix.shardIndex }}
+          name: playwright-report-chrome
           path: packages/app/playwright-report
           retention-days: 30
 
   firefox-tests:
     needs: install
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shardIndex: [1, 2]
-        shardTotal: [2]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -123,7 +113,7 @@ jobs:
       - name: Run Playwright tests on Firefox
         run: |
           cd packages/app
-          yarn playwright test --project=firefox --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+          yarn playwright test --project=firefox
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -134,14 +124,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-firefox-${{ matrix.shardIndex }}
-          path: packages/app/playwright-report
-          retention-days: 30
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report-chrome-mobile-${{ matrix.shardIndex }}
+          name: playwright-report-firefox
           path: packages/app/playwright-report
           retention-days: 30
