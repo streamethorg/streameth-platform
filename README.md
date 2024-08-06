@@ -31,7 +31,7 @@ Our mission with StreamETH is to:
 
 ## Submitting Issues 🐛
 
-We welcome issue submissions! If you encounter any bugs, have feature requests, or want to suggest improvements, please open an issue on our GitHub repository by clicking [here](https://github.com/streamethorg/streameth-platform/issues). Your feedback helps us improve StreamETH for everyone. 📝
+If you encounter any bugs, have feature requests, or want to suggest improvements, please open an issue on our GitHub repository by clicking [here](https://github.com/streamethorg/streameth-platform/issues). Your feedback helps us improve StreamETH for everyone. 📝
 
 ## ⚠️ Important Notice for Developers 🛠️
 
