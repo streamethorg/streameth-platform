@@ -11,15 +11,23 @@ import {
 } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
 import StreamPlatformGrid from './StreamPlatforms';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
+import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interface';
 
 export const CreateMultistreamTarget = ({
   streamId,
   organizationId,
   btnName = 'Add',
+  organization,
+  stageId,
+  streamTargets,
 }: {
+  organization: IExtendedOrganization;
   streamId: string;
   organizationId: string;
   btnName?: string;
+  stageId: string;
+  streamTargets: TargetOutput[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,6 +49,9 @@ export const CreateMultistreamTarget = ({
           streamId={streamId}
           organizationId={organizationId}
           setIsOpen={setIsOpen}
+          organization={organization}
+          stageId={stageId}
+          streamTargets={streamTargets}
         />
       </DialogContent>
     </Dialog>

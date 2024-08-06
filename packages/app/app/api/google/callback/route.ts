@@ -12,11 +12,12 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const code = searchParams.get('code');
   const state = searchParams.get('state');
-  const authuser = searchParams.get('authuser');
   const decodedState = state ? JSON.parse(decodeURIComponent(state)) : '';
   const { redirectUrl, organizationId } = decodedState;
   const authToken = cookies().get('user-session')?.value;
-  const originUrl = process.env.NEXT_PUBLIC_ORIGIN_URL || '';
+  const GOOGLE_OAUTH_SECRET = process.env.GOOGLE_OAUTH_SECRET!;
+  const oAuthSecret: any = JSON.parse(GOOGLE_OAUTH_SECRET);
+  const originUrl = oAuthSecret.web.javascript_origins;
 
   const parsedRedirectUrl = redirectUrl ? originUrl + redirectUrl : `/studio`;
 
@@ -27,6 +28,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const tokenDetails = await generateGoogleAccessToken(code);
+    console.log('tokenDetails', tokenDetails);
     // Check if streaming is enabled
     const streamEnabled = await isStreamingEnabled(tokenDetails.access_token);
 
@@ -57,7 +59,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(new URL(parsedRedirectUrl, request.url));
     } else {
       return NextResponse.redirect(
-        `${originUrl}/redirect/google?authuser=${authuser}`
+        `${originUrl}/redirect/google?authUser=${tokenDetails.authUser || '0'}`
       );
     }
   } catch (err) {

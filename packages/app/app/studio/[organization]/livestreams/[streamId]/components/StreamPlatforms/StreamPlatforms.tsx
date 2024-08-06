@@ -3,6 +3,9 @@ import { SiX, SiYoutube } from 'react-icons/si';
 import { Radio } from 'lucide-react';
 import CreateCustomStream from './forms/CustomRtmpForm';
 import NotFound from '@/app/not-found';
+import CreateYoutubeStream from './CreateYoutubeStream';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
+import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interface';
 
 interface StreamTargetItem {
   title: string;
@@ -34,10 +37,16 @@ const StreamPlatformGrid = ({
   streamId,
   organizationId,
   setIsOpen,
+  organization,
+  stageId,
+  streamTargets,
 }: {
   streamId?: string;
   organizationId?: string;
   setIsOpen: (open: boolean) => void;
+  organization: IExtendedOrganization;
+  stageId: string;
+  streamTargets: TargetOutput[];
 }) => {
   const [SelectedComponent, setSelectedComponent] =
     useState<JSX.Element | null>(null);
@@ -52,8 +61,16 @@ const StreamPlatformGrid = ({
       icon: <SiX size={35} />,
     },
     {
-      title: 'YouTube (WIP)',
+      title: 'YouTube',
       icon: <SiYoutube size={45} color="#ff0000" />,
+      onClick: () => (
+        <CreateYoutubeStream
+          stageId={stageId}
+          organization={organization}
+          setIsOpen={setIsOpen}
+          streamTargets={streamTargets}
+        />
+      ),
     },
     {
       title: 'Custom RTMP',

@@ -248,3 +248,48 @@ export async function fetchStageRecordings({
     throw 'Error fetching stage';
   }
 }
+
+export async function createSocialLivestreamStage({
+  stageId,
+  socialId,
+  socialType,
+  organizationId,
+  authToken,
+}: {
+  stageId: string;
+  socialId: string;
+  socialType: string;
+  organizationId: string;
+  authToken: string;
+}): Promise<{
+  error: { details: string };
+  data: {
+    ingestUrl: 'string';
+    streamKey: 'string';
+  };
+}> {
+  try {
+    const response = await fetch(`${apiUrl()}/stages/livestream`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ stageId, socialId, socialType, organizationId }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      const errorMessage = `Error ${response.status}: ${error.message || 'Unknown error occurred'}`;
+      throw new Error(errorMessage);
+    }
+    return (await response.json()).data;
+  } catch (error) {
+    const errorObject = {
+      message: 'Failed to create social livestream stage',
+      details: error instanceof Error ? error.message : 'Unknown error',
+    };
+
+    throw errorObject;
+  }
+}

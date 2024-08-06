@@ -12,7 +12,9 @@ export async function GET(request: NextRequest) {
   const redirectUrl = decodeURIComponent(searchParams.get('redirectUrl')!);
   const organizationId = searchParams.get('organizationId');
   const authToken = cookies().get('user-session')?.value;
-  const originUrl = process.env.NEXT_PUBLIC_ORIGIN_URL!;
+  const GOOGLE_OAUTH_SECRET = process.env.GOOGLE_OAUTH_SECRET!;
+  const oAuthSecret: any = JSON.parse(GOOGLE_OAUTH_SECRET);
+  const originUrl = oAuthSecret.web.javascript_origins;
 
   if (!oauthToken || !authToken) {
     console.error('Twitter oauth token does not exist');

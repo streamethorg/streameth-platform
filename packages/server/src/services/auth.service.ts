@@ -18,12 +18,12 @@ export default class AuthService {
     let existingUser = await this.userService.findOne({
       walletAddress: user.wallet.address,
     });
+
     if (!existingUser) {
-      existingUser = await this.userService.create({
-        walletAddress: user.wallet.address,
-        did: user.id,
-      });
+      await privy.deleteUser(verifyToken.userId);
+      throw new HttpException(404, 'User not found');
     }
+
     let token = jwt.sign(
       { id: existingUser.walletAddress },
       config.jwt.secret,

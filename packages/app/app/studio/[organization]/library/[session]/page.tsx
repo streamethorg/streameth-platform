@@ -99,22 +99,18 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                   <div className="min-w-[200px]">
                     <GetHashButton session={session} />
                   </div>
-                  {session?.socials?.some((s) => s.name === 'youtube') ? (
-                    <Button variant="outline">
-                      Video Published to Youtube
-                    </Button>
-                  ) : (
-                    <UploadToYoutubeButton
-                      organization={organization}
-                      organizationSlug={params.organization}
-                      sessionId={session._id}
-                    />
-                  )}
-                  <UploadTwitterButton
+
+                  <UploadToYoutubeButton
                     organization={organization}
                     organizationSlug={params.organization}
                     sessionId={session._id}
                   />
+
+                  {/* <UploadTwitterButton
+                    organization={organization}
+                    organizationSlug={params.organization}
+                    sessionId={session._id}
+                  /> */}
                 </div>
               </AccordionContent>
             </AccordionItem>

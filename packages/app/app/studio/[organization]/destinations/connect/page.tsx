@@ -36,16 +36,13 @@ const ConnectSocials = async ({
           upload clips and videos to it as often as you like.
         </p>
         <div className="mt-4 flex w-fit flex-col gap-4">
-          <YoutubeConnectButton
-            organizationId={organization?._id}
-            organizationSlug={params.organization}
-          />
-          <Link href={`/api/twitter/request?state=${state}`}>
-            <Button className="min-w-[200px] bg-[#121212]">
-              <SiTwitter className="mr-2" />
-              X(Twitter) (Coming Soon)
-            </Button>
-          </Link>
+          <YoutubeConnectButton state={state} />
+          {/* <Link href={`/api/twitter/request?state=${state}`}> */}
+          <Button disabled className="min-w-[200px] bg-[#121212]">
+            <SiTwitter className="mr-2" />
+            X(Twitter) (Coming Soon)
+          </Button>
+          {/* </Link> */}
         </div>
       </div>
     </div>
