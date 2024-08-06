@@ -75,6 +75,7 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           PRIVY_EMAIL: ${{ secrets.PRIVY_EMAIL }}
           PRIVY_OTP: ${{ secrets.PRIVY_OTP }}
+          ORG_NAME: test_org
 
       - name: Upload test results
         if: always()
@@ -119,6 +120,7 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           PRIVY_EMAIL: ${{ secrets.PRIVY_EMAIL }}
           PRIVY_OTP: ${{ secrets.PRIVY_OTP }}
+          ORG_NAME: test_org
 
       - name: Upload test results
         if: always()
