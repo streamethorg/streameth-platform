@@ -1,5 +1,3 @@
-Certainly! I'll add back the message about accepting issues. Here's the updated README.md with that information included:
-
 # StreamETH Platform 🎥🌐
 
 Welcome to the StreamETH platform repository! StreamETH produces world-class Virtual Events and Marketing Content. This README provides you with essential information about our platform. 🚀
@@ -37,54 +35,6 @@ Our mission with StreamETH is to:
 - Continuously enhance user experience with innovative features. 💡
 - Foster a community-driven approach to virtual event management. 🤝
 - Be the go-to event management platform for pre-production, production, and post-production 🎯
-
-<!-- ## Setup Quickstart ⚡ -->
-<!---->
-<!-- While we are not currently accepting external code contributions, we provide this setup information for transparency and future reference: -->
-<!---->
-<!-- ### Prerequisites 📋 -->
-<!---->
-<!-- - Node.js (v18 or above) 🟢 -->
-<!-- - Yarn 🧶 -->
-<!-- - Git 🐙 -->
-<!---->
-<!-- ### Environment Variables 🔐 -->
-<!---->
-<!-- Create a `.env` file at the root of the project and include the following variables: -->
-<!---->
-<!-- ```bash -->
-<!-- # Session secret key -->
-<!-- SESSION_SECRET=Generate key: "openssl rand -base64 64" -->
-<!---->
-<!-- # WalletConnect Project ID -->
-<!-- NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id_here -->
-<!---->
-<!-- # Infura Project ID -->
-<!-- NEXT_PUBLIC_INFURA_ID=your_infura_project_id_here -->
-<!---->
-<!-- # Sanity Studio API Key -->
-<!-- NEXT_PUBLIC_STUDIO_API_KEY=your_Livepeer_studio_api_key_here -->
-<!---->
-<!-- # Service Account Private Key for server-to-server interactions -->
-<!-- SERVICE_ACCOUNT_PRIVATE_KEY=your_service_account_private_key_here -->
-<!---->
-<!-- # Service Account Email -->
-<!-- SERVICE_ACCOUNT_EMAIL=your_service_account_email_here -->
-<!---->
-<!-- # Google API Key for services like Google Maps, etc. -->
-<!-- GOOGLE_API_KEY=your_google_api_key_here -->
-<!-- ``` -->
-<!---->
-<!-- Make sure to replace your_..._here with your actual environment variable values. -->
-<!---->
-<!-- ### Running Locally 🏃‍♂️ -->
-<!---->
-<!-- ```bash -->
-<!-- git clone git@github.com:streamethorg/streameth-platform.git -->
-<!-- cd streameth-platform -->
-<!-- yarn install -->
-<!-- yarn dev # or yarn dev -->
-<!-- ``` -->
 
 ## Submitting Issues 🐛
 
