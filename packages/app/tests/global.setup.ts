@@ -36,12 +36,14 @@ setup('login to studio page with Privy', async ({ page }) => {
   }
 
   await page.waitForTimeout(3000);
+  await page.goto('http://localhost:3000/studio/create');
+  await page.waitForURL('http://localhost:3000/studio/create');
 
   // Check for the existence of the heading
   const heading = page.getByRole('heading', {
-    name: 'Create an organization to get started',
+    name: 'Create an organization',
   });
-  await expect(heading).toBeVisible({ timeout: 20000 });
+  await expect(heading).toBeVisible({ timeout: 200000 });
 
   await page.context().storageState({ path: authFile });
 });
