@@ -1,8 +1,8 @@
-'use client'
-import React from 'react'
-import ClipsSessionList from './ClipSessionList'
-import { IExtendedSession } from '@/lib/types'
-import Combobox from '@/components/ui/combo-box'
+'use client';
+import React from 'react';
+import ClipsSessionList from './ClipSessionList';
+import { IExtendedSession } from '@/lib/types';
+import Combobox from '@/components/ui/combo-box';
 import {
   Select,
   SelectTrigger,
@@ -10,36 +10,32 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-} from '@/components/ui/select'
-import { CardTitle } from '@/components/ui/card'
-import { IExtendedEvent } from '@/lib/types'
-import { Session, Stream } from 'livepeer/dist/models/components'
+} from '@/components/ui/select';
+import { CardTitle } from '@/components/ui/card';
+import { IExtendedEvent } from '@/lib/types';
+import { Session, Stream } from 'livepeer/dist/models/components';
 
 const SessionSidebar = ({
   event,
   sessions,
 }: {
-  event?: IExtendedEvent
-  sessions: IExtendedSession[]
-  currentRecording?: string
+  event?: IExtendedEvent;
+  sessions: IExtendedSession[];
+  currentRecording?: string;
   recordings: {
-    parentStream: Stream | undefined
-    recordings: Session[]
-  }
+    parentStream: Stream | undefined;
+    recordings: Session[];
+  };
 }) => {
-  const [sessionId, setSessionId] = React.useState('')
+  const [sessionId, setSessionId] = React.useState('');
   const uniqueDates = sessions.filter(
     (session, index, self) =>
       index ===
       self.findIndex(
-        (t) =>
-          new Date(t.start).getDate() ===
-          new Date(session.start).getDate()
+        (t) => new Date(t.start).getDate() === new Date(session.start).getDate()
       )
-  )
-  const [dayFilter, setDayFilter] = React.useState(
-    uniqueDates[0]?.start || ''
-  )
+  );
+  const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
 
   return (
     <div className="h-full w-[400px] border-l bg-background bg-white">
@@ -61,7 +57,8 @@ const SessionSidebar = ({
                   {uniqueDates.map((session) => (
                     <SelectItem
                       key={session._id}
-                      value={session.start.toString()}>
+                      value={session.start.toString()}
+                    >
                       {new Date(session.start).toDateString()}
                     </SelectItem>
                   ))}
@@ -70,9 +67,7 @@ const SessionSidebar = ({
             </Select>
           )}
           <Combobox
-            value={
-              sessions.find((s) => s._id === sessionId)?.name || ''
-            }
+            value={sessions.find((s) => s._id === sessionId)?.name || ''}
             setValue={(value) => setSessionId(value)}
             placeholder="Select a session"
             items={[
@@ -104,14 +99,12 @@ const SessionSidebar = ({
                   new Date(Number(dayFilter)).getDate()
                 : true
             )
-            .filter((session) =>
-              sessionId ? session._id === sessionId : true
-            )
+            .filter((session) => (sessionId ? session._id === sessionId : true))
             .reverse()}
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SessionSidebar
+export default SessionSidebar;

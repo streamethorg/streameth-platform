@@ -1,15 +1,15 @@
-'use client'
-import { IPagination } from '@/lib/types'
-import useSearchParams from '@/lib/hooks/useSearchParams'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
-import { LuArrowLeft, LuArrowRight } from 'react-icons/lu'
+'use client';
+import { IPagination } from '@/lib/types';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import React, { useState } from 'react';
+import { LuArrowLeft, LuArrowRight } from 'react-icons/lu';
 
 const Pagination = (props: IPagination) => {
-  const [jumpPage, setJumpPage] = useState(props.currentPage)
-  const { handleTermChange, searchParams } = useSearchParams()
-  const currentPage = Number(searchParams.get('page')) || 1
+  const [jumpPage, setJumpPage] = useState(props.currentPage);
+  const { handleTermChange, searchParams } = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || 1;
 
   return (
     <div className="flex flex-row items-center justify-center p-2">
@@ -40,7 +40,8 @@ const Pagination = (props: IPagination) => {
               },
             ])
           }
-          variant="primary">
+          variant="primary"
+        >
           Go
         </Button>
       </div>
@@ -55,9 +56,10 @@ const Pagination = (props: IPagination) => {
                   key: 'page',
                   value: (currentPage - 1).toString(),
                 },
-              ])
+              ]);
             }
-          }}>
+          }}
+        >
           <LuArrowLeft size={24} />
         </button>
         <div className="mx-2">
@@ -70,14 +72,15 @@ const Pagination = (props: IPagination) => {
             if (currentPage < props.totalPages) {
               handleTermChange([
                 { key: 'page', value: (currentPage + 1).toString() },
-              ])
+              ]);
             }
-          }}>
+          }}
+        >
           <LuArrowRight size={24} />
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

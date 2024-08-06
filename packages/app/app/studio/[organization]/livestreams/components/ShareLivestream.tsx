@@ -1,23 +1,23 @@
-'use client'
-import ShareButton from '@/components/misc/interact/ShareButton'
-import React, { useEffect, useState } from 'react'
+'use client';
+import ShareButton from '@/components/misc/interact/ShareButton';
+import React, { useEffect, useState } from 'react';
 
 const ShareLivestream = ({
   streamId,
   variant = 'ghost',
   organization,
 }: {
-  organization: string
-  variant?: 'outline' | 'ghost' | 'primary' | 'default'
-  streamId?: string
+  organization: string;
+  variant?: 'outline' | 'ghost' | 'primary' | 'default';
+  streamId?: string;
 }) => {
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState('');
   useEffect(() => {
     // This code will only run on the client side
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined') return;
 
-    setUrl(window.location.origin)
-  }, [])
+    setUrl(window.location.origin);
+  }, []);
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <ShareButton
@@ -27,7 +27,7 @@ const ShareLivestream = ({
         shareFor="livestream"
       />
     </div>
-  )
-}
+  );
+};
 
-export default ShareLivestream
+export default ShareLivestream;

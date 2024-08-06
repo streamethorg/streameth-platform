@@ -19,7 +19,6 @@ export const config = {
     origin: validatedEnv.CORS_ORIGIN,
     credentials: validatedEnv.CORS_CREDENTIALS,
   },
-  secretKey: validatedEnv.SECRET_KEY,
   jwt: {
     secret: validatedEnv.JWT_SECRET,
     expiry: validatedEnv.JWT_EXPIRY,

@@ -1,5 +1,6 @@
 import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { CreateStageDto } from '@dtos/stage/create-stage.dto';
+import { CreateLiveStreamDto } from '@dtos/stage/livestream.dto';
 import { UpdateStageDto } from '@dtos/stage/update-stage.dto';
 import { IStage } from '@interfaces/stage.interface';
 import StageService from '@services/stage.service';
@@ -115,5 +116,18 @@ export class StageController extends Controller {
   ): Promise<IStandardResponse<void>> {
     const stage = await this.stageService.deleteOne(stageId);
     return SendApiResponse('deleted', stage);
+  }
+
+  /**
+   * @summary Create Livestream on youtube & twitter
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('201')
+  @Post('livestream')
+  async youtubeStage(
+    @Body() body: CreateLiveStreamDto,
+  ): Promise<IStandardResponse<{ streamKey: string; ingestUrl: string }>> {
+    const stream = await this.stageService.createLiveStream(body);
+    return SendApiResponse('livestream created', stream);
   }
 }

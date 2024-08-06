@@ -1,15 +1,16 @@
-import { PlayerWithControls } from '@/components/ui/Player'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
-import { OrganizationPageProps } from '@/lib/types'
-import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { generalMetadata, watchMetadata } from '@/lib/utils/metadata'
-import { fetchSession } from '@/lib/services/sessionService'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import { Suspense } from 'react'
-import WatchGrid from '../components/WatchGrid'
-import { getVideoUrlAction } from '@/lib/actions/livepeer'
-import { generateThumbnailAction } from '@/lib/actions/sessions'
+import { PlayerWithControls } from '@/components/ui/Player';
+import SessionInfoBox from '@/components/sessions/SessionInfoBox';
+import { OrganizationPageProps } from '@/lib/types';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { generalMetadata, watchMetadata } from '@/lib/utils/metadata';
+import { fetchSession } from '@/lib/services/sessionService';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { Suspense } from 'react';
+import WatchGrid from '../components/WatchGrid';
+import { getVideoUrlAction } from '@/lib/actions/livepeer';
+import { generateThumbnailAction } from '@/lib/actions/sessions';
+
 const Loading = () => {
   return (
     <div className="mx-auto flex h-full w-full max-w-7xl animate-pulse flex-col gap-4">
@@ -30,8 +31,8 @@ const Loading = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default async function Watch({
   params,
@@ -39,26 +40,26 @@ export default async function Watch({
 }: OrganizationPageProps) {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
   if (!organization) {
-    return notFound()
+    return notFound();
   }
 
-  if (!searchParams.session) return notFound()
+  if (!searchParams.session) return notFound();
   const session = await fetchSession({
     session: searchParams.session,
-  })
+  });
 
-  if (!session || (!session.playbackId && !session.assetId))
-    return notFound()
+  if (!session || (!session.playbackId && !session.assetId)) return notFound();
 
-  const sessionUrl = await getVideoUrlAction(
-    session.assetId,
-    session.playbackId
-  )
+  const videoUrl = await getVideoUrlAction(session.assetId as string);
 
-  const thumbnail = await generateThumbnailAction(session)
+  if (!videoUrl) {
+    return notFound();
+  }
+
+  const thumbnail = await generateThumbnailAction(session);
 
   return (
     <Suspense key={session._id} fallback={<Loading />}>
@@ -69,7 +70,7 @@ export default async function Watch({
             thumbnail={session.coverImage ?? thumbnail}
             src={[
               {
-                src: sessionUrl as `${string}m3u8`,
+                src: videoUrl as `${string}m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
@@ -95,34 +96,31 @@ export default async function Watch({
             <WatchGrid organizationSlug={params.organization} />
           </div>
           <div className="hidden md:block">
-            <WatchGrid
-              organizationSlug={params.organization}
-              gridLength={6}
-            />
+            <WatchGrid organizationSlug={params.organization} gridLength={6} />
           </div>
         </div>
       </div>
     </Suspense>
-  )
+  );
 }
 
 export async function generateMetadata({
   params,
   searchParams,
 }: OrganizationPageProps): Promise<Metadata> {
-  if (!searchParams.session) return generalMetadata
+  if (!searchParams.session) return generalMetadata;
 
   const session = await fetchSession({
     session: searchParams.session,
-  })
+  });
   const organization = await fetchOrganization({
     organizationSlug: params?.organization,
-  })
+  });
 
-  if (!session || !organization) return generalMetadata
+  if (!session || !organization) return generalMetadata;
 
   const thumbnail =
-    session.coverImage ?? (await generateThumbnailAction(session))
+    session.coverImage ?? (await generateThumbnailAction(session));
 
-  return watchMetadata({ organization, session: session, thumbnail })
+  return watchMetadata({ organization, session: session, thumbnail });
 }

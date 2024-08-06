@@ -4,6 +4,9 @@ export interface TargetOutput {
   _id?: string;
   id?: string;
   name?: string;
+  socialId?: string;
+  socialType?: string;
+  broadcastId?: string;
 }
 export interface IStreamSettings {
   streamId?: string;
@@ -18,6 +21,13 @@ export interface IStreamSettings {
 
 export interface IPlugin {
   name: string;
+}
+
+export interface ILiveStream {
+  stageId: string;
+  socialId: string;
+  socialType: string;
+  organizationId: string;
 }
 
 export class IStage {

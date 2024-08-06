@@ -1,35 +1,31 @@
-'use client'
-import React, { useEffect, useRef, useState } from 'react'
+'use client';
+import React, { useEffect, useRef, useState } from 'react';
 
-const ChannelDescription = ({
-  description,
-}: {
-  description?: string
-}) => {
-  const contentRef = useRef<HTMLDivElement>(null)
-  const [isClamped, setClamped] = useState(false)
-  const [isExpanded, setExpanded] = useState(false)
+const ChannelDescription = ({ description }: { description?: string }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isClamped, setClamped] = useState(false);
+  const [isExpanded, setExpanded] = useState(false);
 
   useEffect(() => {
     function handleResize() {
       if (contentRef && contentRef.current) {
         setClamped(
-          contentRef.current.scrollHeight >
-            contentRef.current.clientHeight
-        )
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
       }
     }
-    handleResize()
-    window.addEventListener('resize', handleResize)
+    handleResize();
+    window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize)
-  }, [contentRef])
+    return () => window.removeEventListener('resize', handleResize);
+  }, [contentRef]);
 
   return (
     <div className="hidden w-4/5 md:block">
       <div
         ref={contentRef}
-        className={!isExpanded ? 'line-clamp-2' : 'line-clamp-4'}>
+        className={!isExpanded ? 'line-clamp-2' : 'line-clamp-4'}
+      >
         {' '}
         {description}
       </div>
@@ -38,13 +34,14 @@ const ChannelDescription = ({
         <div className="flex cursor-pointer justify-end text-blue">
           <p
             className="text-title font-semibold"
-            onClick={() => setExpanded(!isExpanded)}>
+            onClick={() => setExpanded(!isExpanded)}
+          >
             {!isExpanded ? 'Read more' : ' Read less'}
           </p>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ChannelDescription
+export default ChannelDescription;

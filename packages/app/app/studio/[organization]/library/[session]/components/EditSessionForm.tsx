@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,35 +12,35 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { sessionSchema } from '@/lib/schema'
-import { toast } from 'sonner'
-import { Loader2, Trash2 } from 'lucide-react'
-import { IExtendedSession } from '@/lib/types'
-import { updateSessionAction } from '@/lib/actions/sessions'
-import { getFormSubmitStatus } from '@/lib/utils/utils'
-import DeleteAsset from '../../components/DeleteAsset'
-import { Textarea } from '@/components/ui/textarea'
-import ImageUpload from '@/components/misc/form/imageUpload'
-import { useRouter } from 'next/navigation'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { sessionSchema } from '@/lib/schema';
+import { toast } from 'sonner';
+import { Loader2, Trash2 } from 'lucide-react';
+import { IExtendedSession } from '@/lib/types';
+import { updateSessionAction } from '@/lib/actions/sessions';
+import { getFormSubmitStatus } from '@/lib/utils/utils';
+import DeleteAsset from '../../components/DeleteAsset';
+import { Textarea } from '@/components/ui/textarea';
+import ImageUpload from '@/components/misc/form/imageUpload';
+import { useRouter } from 'next/navigation';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/ui/select';
 
 const EditSessionForm = ({
   session,
   organizationSlug,
 }: {
-  session: IExtendedSession
-  organizationSlug: string
+  session: IExtendedSession;
+  organizationSlug: string;
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
@@ -51,10 +51,10 @@ const EditSessionForm = ({
       assetId: session.assetId,
       published: session.published,
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof sessionSchema>) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     updateSessionAction({
       session: {
@@ -72,16 +72,14 @@ const EditSessionForm = ({
       .then(() => toast.success('Session updated'))
       .catch(() => toast.error('Error updating session'))
       .finally(() => {
-        setIsLoading(false)
-        router.push(`/studio/${organizationSlug}/library`)
-      })
+        setIsLoading(false);
+        router.push(`/studio/${organizationSlug}/library`);
+      });
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="name"
@@ -123,9 +121,8 @@ const EditSessionForm = ({
               <FormLabel>Visibility</FormLabel>
               <FormControl>
                 <Select
-                  onValueChange={(value) =>
-                    field.onChange(value === 'true')
-                  }>
+                  onValueChange={(value) => field.onChange(value === 'true')}
+                >
                   <SelectTrigger className="bg-white">
                     <SelectValue
                       placeholder={field.value ? 'Public' : 'Private'}
@@ -159,22 +156,24 @@ const EditSessionForm = ({
         />
 
         <div className="flex items-end justify-end space-x-2">
-          {/* <DeleteAsset
+          <DeleteAsset
             session={session}
             href={`/studio/${organizationSlug}/library`}
             TriggerComponent={
               <Button
                 variant={'destructive-outline'}
-                className="space-x-2 hover:bg-gray-100">
+                className="space-x-2 hover:bg-gray-100"
+              >
                 <Trash2 />
                 <p>Delete video</p>
               </Button>
             }
-          /> */}
+          />
           <Button
             disabled={getFormSubmitStatus(form) || isLoading}
             type="submit"
-            variant={'primary'}>
+            variant={'primary'}
+          >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -187,7 +186,7 @@ const EditSessionForm = ({
         </div>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default EditSessionForm
+export default EditSessionForm;

@@ -1,6 +1,6 @@
-'use client'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+'use client';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -9,30 +9,30 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from '@/components/ui/dialog'
-import { deleteEventAction } from '@/lib/actions/events'
-import { IExtendedEvent } from '@/lib/types'
-import { Trash2 } from 'lucide-react'
-import { ReactNode } from 'react'
+} from '@/components/ui/dialog';
+import { deleteEventAction } from '@/lib/actions/events';
+import { IExtendedEvent } from '@/lib/types';
+import { Trash2 } from 'lucide-react';
+import { ReactNode } from 'react';
 
 const DeleteAsset = ({
   event,
   TriggerComponent,
 }: {
-  event: IExtendedEvent
-  TriggerComponent: ReactNode
+  event: IExtendedEvent;
+  TriggerComponent: ReactNode;
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleDelete = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     await deleteEventAction({
       organizationId: event.organizationId as string,
       eventId: event._id,
-    })
-    setIsLoading(false)
-    setOpen(false)
-  }
+    });
+    setIsLoading(false);
+    setOpen(false);
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -51,13 +51,14 @@ const DeleteAsset = ({
           <Button
             loading={isLoading}
             onClick={() => handleDelete()}
-            variant={'destructive'}>
+            variant={'destructive'}
+          >
             Delete event
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default DeleteAsset
+export default DeleteAsset;

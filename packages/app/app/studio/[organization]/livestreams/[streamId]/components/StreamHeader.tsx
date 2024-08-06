@@ -1,31 +1,31 @@
-'use client'
+'use client';
 
-import { IExtendedStage } from '@/lib/types'
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { IExtendedStage } from '@/lib/types';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 const StreamHeader = ({
   stream,
-  organization,
+  organizationSlug,
   isLiveStreamPage,
 }: {
-  stream: IExtendedStage
-  organization: string
-  isLiveStreamPage?: boolean
+  stream: IExtendedStage;
+  organizationSlug: string;
+  isLiveStreamPage?: boolean;
 }) => {
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState('');
   useEffect(() => {
     // This code will only run on the client side
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined') return;
 
-    setUrl(window.location.origin)
-  }, [])
+    setUrl(window.location.origin);
+  }, []);
 
   return (
     <div>
       {isLiveStreamPage && (
-        <Link href={`/studio/${organization}`}>
+        <Link href={`/studio/${organizationSlug}`}>
           <div className="mb-4 flex items-center justify-start space-x-4">
             <ArrowLeft />
             <p>Back to homepage</p>
@@ -33,7 +33,7 @@ const StreamHeader = ({
         </Link>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default StreamHeader
+export default StreamHeader;

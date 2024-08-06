@@ -1,12 +1,8 @@
-'use client'
-import React from 'react'
-import { PrivyProvider } from '@privy-io/react-auth'
+'use client';
+import React from 'react';
+import { PrivyProvider } from '@privy-io/react-auth';
 
-const ProviderContext = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
+const ProviderContext = ({ children }: { children: React.ReactNode }) => {
   return (
     <PrivyProvider
       appId={process.env.NEXT_PUBLIC_PRIVY_ID!}
@@ -18,21 +14,16 @@ const ProviderContext = ({
           logo: 'https://streameth.org/logo.png',
           landingHeader: 'Connect to StreamETH',
         },
-        loginMethods: [
-          'email',
-          'wallet',
-          'google',
-          'github',
-          'farcaster',
-        ],
+        loginMethods: ['email', 'wallet', 'google', 'github', 'farcaster'],
         // Create embedded wallets for users who don't have a wallet
         embeddedWallets: {
           createOnLogin: 'users-without-wallets',
         },
-      }}>
+      }}
+    >
       {children}
     </PrivyProvider>
-  )
-}
+  );
+};
 
-export default ProviderContext
+export default ProviderContext;

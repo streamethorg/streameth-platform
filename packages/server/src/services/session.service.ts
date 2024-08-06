@@ -238,7 +238,12 @@ export default class SessionService {
       (e) => e.type == data.type && e._id == data.socialId,
     );
     if (data.type == 'youtube') {
-      data.token = await refreshAccessToken(token.refreshToken);
+      data.token = {
+        secret: await refreshAccessToken(token.refreshToken),
+      };
+    }
+    if (data.type == 'twitter') {
+      data.token = { key: token.accessToken, secret: token.refreshToken };
     }
     const queue = 'videos';
     const channel = await (await connection).createChannel();

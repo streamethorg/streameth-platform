@@ -1,20 +1,20 @@
-import { fetchNFTCollection } from '@/lib/services/nftCollectionService'
-import { nftPageParams } from '@/lib/types'
-import { LuArrowLeft } from 'react-icons/lu'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import React from 'react'
-import ContractDetails from './components/ContractDetails'
-import CopyText from '@/components/misc/CopyText'
-import TitleTextItem from '@/components/ui/TitleTextItem'
+import { fetchNFTCollection } from '@/lib/services/nftCollectionService';
+import { nftPageParams } from '@/lib/types';
+import { LuArrowLeft } from 'react-icons/lu';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import React from 'react';
+import ContractDetails from './components/ContractDetails';
+import CopyText from '@/components/misc/CopyText';
+import TitleTextItem from '@/components/ui/TitleTextItem';
 
 const page = async ({ params }: nftPageParams) => {
-  if (!params.nftId) return notFound()
+  if (!params.nftId) return notFound();
 
   const collection = await fetchNFTCollection({
     collectionId: params.nftId,
-  })
-  if (!collection) return notFound()
+  });
+  if (!collection) return notFound();
 
   return (
     <div className="mx-6 h-full p-2">
@@ -35,17 +35,12 @@ const page = async ({ params }: nftPageParams) => {
         />
 
         <TitleTextItem title="Type:" text={collection.type} />
-        <TitleTextItem
-          title="Total Items:"
-          text={collection.videos?.length}
-        />
+        <TitleTextItem title="Total Items:" text={collection.videos?.length} />
 
-        <ContractDetails
-          contractAddress={collection.contractAddress}
-        />
+        <ContractDetails contractAddress={collection.contractAddress} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

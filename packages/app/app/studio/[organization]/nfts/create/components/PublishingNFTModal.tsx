@@ -1,17 +1,13 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import { Ban, CheckCircle2, Loader2 } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import { type BaseError } from 'wagmi'
-import TransactionHash from './TransactionHash'
-import ShareCollection from './ShareCollection'
+'use client';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Ban, CheckCircle2, Loader2 } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import { type BaseError } from 'wagmi';
+import TransactionHash from './TransactionHash';
+import ShareCollection from './ShareCollection';
 
 const PublishingNFTModal = ({
   open,
@@ -25,17 +21,17 @@ const PublishingNFTModal = ({
   isGeneratingMetadata,
   collectionId,
 }: {
-  open: boolean
-  onClose: React.Dispatch<React.SetStateAction<boolean>>
-  isPublished: boolean
-  isSuccess: boolean
-  organization: string
-  hash?: string
-  isTransactionApproved: boolean
-  error: BaseError | null
-  publishError?: string
-  isGeneratingMetadata?: boolean
-  collectionId?: string
+  open: boolean;
+  onClose: React.Dispatch<React.SetStateAction<boolean>>;
+  isPublished: boolean;
+  isSuccess: boolean;
+  organization: string;
+  hash?: string;
+  isTransactionApproved: boolean;
+  error: BaseError | null;
+  publishError?: string;
+  isGeneratingMetadata?: boolean;
+  collectionId?: string;
 }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -58,9 +54,7 @@ const PublishingNFTModal = ({
                   )}
                 </div>
                 <div>
-                  <p className="font-medium">
-                    Generating collection metadata
-                  </p>
+                  <p className="font-medium">Generating collection metadata</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -76,8 +70,8 @@ const PublishingNFTModal = ({
                     Go to your wallet to approve the transaction
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    You&apos;ll be asked to pay gas fees and sign in
-                    order to deploy your contract on the blockchain.
+                    You&apos;ll be asked to pay gas fees and sign in order to
+                    deploy your contract on the blockchain.
                   </p>
                 </div>
               </div>
@@ -87,12 +81,9 @@ const PublishingNFTModal = ({
                 </div>
 
                 <div>
-                  <p className="font-medium">
-                    Publishing your NFT Collection
-                  </p>
+                  <p className="font-medium">Publishing your NFT Collection</p>
                   <p className="text-sm text-muted-foreground">
-                    It may take some time for the transaction to be
-                    processed.
+                    It may take some time for the transaction to be processed.
                   </p>
                   {hash && <TransactionHash hash={hash} />}
                 </div>
@@ -120,9 +111,7 @@ const PublishingNFTModal = ({
               <ShareCollection collectionId={collectionId} />
 
               <Link href={`/studio/${organization}/nfts`}>
-                <Button
-                  onClick={() => onClose(false)}
-                  variant={'primary'}>
+                <Button onClick={() => onClose(false)} variant={'primary'}>
                   Done
                 </Button>
               </Link>
@@ -131,8 +120,7 @@ const PublishingNFTModal = ({
         )}
         {error && (
           <div className="text-center text-destructive">
-            Error:{' '}
-            {(error as BaseError).shortMessage || error.message}
+            Error: {(error as BaseError).shortMessage || error.message}
           </div>
         )}
 
@@ -144,7 +132,7 @@ const PublishingNFTModal = ({
         )}
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default PublishingNFTModal
+export default PublishingNFTModal;

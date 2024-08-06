@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 import {
   Card,
   CardTitle,
   CardDescription,
   CardHeader,
   CardContent,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 import {
   Table,
   TableHead,
@@ -13,37 +13,37 @@ import {
   TableRow,
   TableBody,
   TableCell,
-} from '@/components/ui/table'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import Image from 'next/image'
-import { SiX, SiYoutube } from 'react-icons/si'
-import { LuRadio } from 'react-icons/lu'
-import DeleteDestination from './components/DeleteDestination'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+} from '@/components/ui/table';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import Image from 'next/image';
+import { SiX, SiYoutube } from 'react-icons/si';
+import { LuRadio } from 'react-icons/lu';
+import DeleteDestination from './components/DeleteDestination';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const Destinations = async ({
   params,
 }: {
-  params: { organization: string }
+  params: { organization: string };
 }) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
-  if (!organization) return null
+  if (!organization) return null;
 
   const renderSocialTypeIcon = (type: string) => {
-    const className = 'absolute right-0 bottom-0'
+    const className = 'absolute right-0 bottom-0';
     switch (type) {
       case 'youtube':
-        return <SiYoutube color="#FF0000" className={className} />
-      case 'x':
-        return <SiX className={className} />
+        return <SiYoutube color="#FF0000" className={className} />;
+      case 'twitter':
+        return null;
       default:
-        return <LuRadio color="#000" className={className} />
+        return <LuRadio color="#000" className={className} />;
     }
-  }
+  };
 
   return (
     <div className="mx-auto mt-12 flex h-[90%] w-full max-w-4xl">
@@ -67,11 +67,15 @@ const Destinations = async ({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {organization?.socials?.map(
-                ({ _id, name, type, thumbnail }) => (
-                  <TableRow key={_id}>
-                    <TableCell className="flex items-center gap-4">
-                      <div className="relative">
+              {organization?.socials?.map(({ _id, name, type, thumbnail }) => (
+                <TableRow key={_id}>
+                  <TableCell className="flex items-center gap-4">
+                    <div className="relative">
+                      {type === 'twitter' ? (
+                        <div className="bg-black w-[50px] h-[50px] rounded-full">
+                          <SiX color="#fff" className="w-full h-full p-3" />
+                        </div>
+                      ) : (
                         <Image
                           className="rounded-full"
                           src={thumbnail!}
@@ -79,31 +83,31 @@ const Destinations = async ({
                           height={50}
                           alt={type}
                         />
-                        {renderSocialTypeIcon(type)}
-                      </div>
+                      )}
+                      {renderSocialTypeIcon(type)}
+                    </div>
 
-                      <div>
-                        <p className="font-semibold">{name}</p>
-                        <p className="text-ext-muted text-sm capitalize">
-                          {type}
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <DeleteDestination
-                        destinationId={_id}
-                        organizationId={organization._id}
-                      />
-                    </TableCell>
-                  </TableRow>
-                )
-              )}
+                    <div>
+                      <p className="font-semibold">{name}</p>
+                      <p className="text-ext-muted text-sm capitalize">
+                        {type}
+                      </p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <DeleteDestination
+                      destinationId={_id}
+                      organizationId={organization._id}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Destinations
+export default Destinations;

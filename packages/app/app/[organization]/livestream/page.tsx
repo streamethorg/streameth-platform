@@ -1,17 +1,14 @@
-'use server'
-import SessionInfoBox from '@/components/sessions/SessionInfoBox'
-import { IExtendedSession, OrganizationPageProps } from '@/lib/types'
-import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import {
-  generalMetadata,
-  livestreamMetadata,
-} from '@/lib/utils/metadata'
-import { fetchOrganization } from '@/lib/services/organizationService'
-import { Suspense } from 'react'
-import WatchGrid from '../components/WatchGrid'
-import { fetchStage } from '@/lib/services/stageService'
-import Player from './components/Player'
+'use server';
+import SessionInfoBox from '@/components/sessions/SessionInfoBox';
+import { IExtendedSession, OrganizationPageProps } from '@/lib/types';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { generalMetadata, livestreamMetadata } from '@/lib/utils/metadata';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { Suspense } from 'react';
+import WatchGrid from '../components/WatchGrid';
+import { fetchStage } from '@/lib/services/stageService';
+import Player from './components/Player';
 
 const Loading = () => {
   return (
@@ -33,8 +30,8 @@ const Loading = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default async function Livestream({
   params,
@@ -42,20 +39,19 @@ export default async function Livestream({
 }: OrganizationPageProps) {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
-  })
+  });
 
   if (!organization) {
-    return notFound()
+    return notFound();
   }
 
-  if (!searchParams.stage) return notFound()
+  if (!searchParams.stage) return notFound();
 
   const stage = await fetchStage({
     stage: searchParams.stage,
-  })
+  });
 
-  if (!stage?._id || !stage.streamSettings?.streamId)
-    return notFound()
+  if (!stage?._id || !stage.streamSettings?.streamId) return notFound();
 
   return (
     <Suspense key={stage._id} fallback={<Loading />}>
@@ -74,34 +70,31 @@ export default async function Livestream({
             <WatchGrid organizationSlug={params.organization} />
           </div>
           <div className="hidden md:block">
-            <WatchGrid
-              organizationSlug={params.organization}
-              gridLength={6}
-            />
+            <WatchGrid organizationSlug={params.organization} gridLength={6} />
           </div>
         </div>
       </div>
     </Suspense>
-  )
+  );
 }
 
 export async function generateMetadata({
   params,
   searchParams,
 }: OrganizationPageProps): Promise<Metadata> {
-  if (!searchParams.stage) return generalMetadata
+  if (!searchParams.stage) return generalMetadata;
   const stage = await fetchStage({
     stage: searchParams.stage,
-  })
+  });
 
   const organization = await fetchOrganization({
     organizationSlug: params?.organization,
-  })
+  });
 
-  if (!stage || !organization) return generalMetadata
+  if (!stage || !organization) return generalMetadata;
 
   return livestreamMetadata({
     livestream: stage,
     organization,
-  })
+  });
 }
