@@ -41,7 +41,7 @@ setup('login to studio page with Privy', async ({ page }) => {
   const heading = page.getByRole('heading', {
     name: 'Create an organization to get started',
   });
-  await expect(heading).toBeVisible({ timeout: 10000 });
+  await expect(heading).toBeVisible({ timeout: 20000 });
 
   await page.context().storageState({ path: authFile });
 });
