@@ -1093,8 +1093,15 @@ const models: TsoaRoute.Models = {
       socialId: { dataType: 'string', required: true },
       organizationId: { dataType: 'string', required: true },
       sessionId: { dataType: 'string', required: true },
-      token: { dataType: 'string' },
+      token: {
+        dataType: 'nestedObjectLiteral',
+        nestedProperties: {
+          secret: { dataType: 'string', required: true },
+          key: { dataType: 'string' },
+        },
+      },
       type: { dataType: 'string', required: true },
+      text: { dataType: 'string' },
     },
     additionalProperties: false,
   },
