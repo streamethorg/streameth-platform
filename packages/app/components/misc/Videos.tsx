@@ -47,7 +47,7 @@ export default async function VideoGrid({
               >
                 <VideoCardWithMenu
                   session={video}
-                  link={`/${OrganizationSlug}/watch?session=${video._id.toString()}`}
+                  link={`/${OrganizationSlug || video.organizationId}/watch?session=${video._id.toString()}`}
                 />
               </Suspense>
             </div>

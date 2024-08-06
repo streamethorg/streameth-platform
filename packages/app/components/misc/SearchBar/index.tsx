@@ -49,17 +49,34 @@ export default function SearchBar({
 
   useEffect(() => {
     if (debouncedSearchQuery) {
-      setIsLoading(true);
-      fetch(
-        `${apiUrl()}/sessions/${organizationSlug}/search?search=${debouncedSearchQuery}&onlyVideos=true`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          const items = data.data.map((obj: any) => obj.item).slice(0, 10);
+      setIsLoading(true)
+      if (organizationSlug) {
+        fetch(
+          `${apiUrl()}/sessions/${organizationSlug}/search?search=${debouncedSearchQuery}&onlyVideos=true`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            const items = data.data
+              .map((obj: any) => obj.item)
+              .slice(0, 10)
 
-          setSearchResults(items);
-          setIsLoading(false);
-        });
+            setSearchResults(items)
+            setIsLoading(false)
+          })
+      } else {
+        fetch(
+          `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}&onlyVideos=true`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            const items = data.data
+              .map((obj: any) => obj.item)
+              .slice(0, 10)
+
+            setSearchResults(items)
+            setIsLoading(false)
+          })
+      }
     }
   }, [debouncedSearchQuery]);
 
@@ -75,11 +92,10 @@ export default function SearchBar({
     router.push(
       isStudio
         ? `/studio/${organizationSlug}/library/${session._id.toString()}`
-        : `/${organizationSlug}/watch?session=${session._id.toString()}`
-    );
-    return;
-  };
-
+        : `/${organizationSlug || session.organizationId}/watch?session=${session._id.toString()}`
+    )
+    return
+  }
   const handleEventChange = (term: string) => {
     window.location.href = archivePath({
       organizationSlug: organizationSlug,

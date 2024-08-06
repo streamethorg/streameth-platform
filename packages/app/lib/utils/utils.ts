@@ -143,8 +143,10 @@ export const archivePath = ({
     params.append('searchQuery', searchQuery);
   }
 
-  return `/${organizationSlug}/videos?${params.toString()}`;
-};
+  return organizationSlug
+    ? `/${organizationSlug}/videos?${params.toString()}`
+    : `/explore?${params.toString()}`
+}
 
 export const hasOrganization = (
   userOrganizations?: IExtendedOrganization[],
