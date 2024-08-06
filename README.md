@@ -103,3 +103,7 @@ We plan to support full developer contributions in the future once we feel ready
 We value the community's interest in our project. We will update this README when we are ready to welcome full external contributions. Thank you for your patience and support as we continue to develop and improve StreamETH. 🙌
 
 Stay tuned for exciting updates and features! 🎉
+
+## Support
+
+We're here to help! If you have questions about our platform, please don't hesitate to reach out to support@streameth.org.
