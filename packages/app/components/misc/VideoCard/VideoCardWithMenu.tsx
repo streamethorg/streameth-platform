@@ -12,7 +12,7 @@ import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { EllipsisVertical } from 'lucide-react';
 import Link from 'next/link';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { useEffect, useState } from 'react';
 
 const VideoCardWithMenu = ({
@@ -27,7 +27,7 @@ const VideoCardWithMenu = ({
   link: string;
 }) => {
   const [thumbnail, setThumbnail] = useState<string | undefined>(undefined);
-
+  const memoizedSession = useMemo(() => session, []);
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
       try {
@@ -38,10 +38,10 @@ const VideoCardWithMenu = ({
       }
     };
 
-    if (session) {
-      getThumbnail(session);
+    if (memoizedSession && !memoizedSession.coverImage) {
+      getThumbnail(memoizedSession);
     }
-  }, [session]);
+  }, [memoizedSession]);
 
   return (
     <div className="flex min-h-full w-full flex-col rounded-xl uppercase">

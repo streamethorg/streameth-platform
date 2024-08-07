@@ -186,7 +186,7 @@ export const fetchSessionMetrics = async ({
     const response = await fetch(`${apiUrl()}/streams/metric/${playbackId}`, {
       cache: 'no-store',
     });
-    console.log('response', response);
+
     if (!response.ok) {
       return {
         viewCount: 0,
