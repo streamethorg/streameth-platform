@@ -176,10 +176,6 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
     return undefined;
   })();
 
-  if (!previewAsset) {
-    return notFound();
-  }
-
   return (
     <ClipContainer>
       {previewAsset && (
