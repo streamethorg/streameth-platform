@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node -r esbuild-runner/register ./src/video-queue.ts",
+    "dev": "nodemon -r esbuild-runner/register ./src/video-queue.ts --env=development",
     "build": "tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "node ./dist/video-queue.js"
@@ -20,6 +20,7 @@
     "amqplib": "^0.10.4",
     "google-auth-library": "^9.11.0",
     "googleapis": "^140.0.0",
-    "mongodb": "^6.7.0"
+    "mongodb": "^6.7.0",
+    "oauth-1.0a": "^2.2.6"
   }
 }
