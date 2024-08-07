@@ -21,7 +21,7 @@ import SessionInfoBox from '@/components/sessions/SessionInfoBox';
 import ChannelDescription from './components/ChannelDescription';
 import { livestreamMetadata, generalMetadata } from '@/lib/utils/metadata';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
   const organizations = await fetchOrganizations();
