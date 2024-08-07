@@ -85,7 +85,7 @@ test('create an organization with all mandatory information', async ({
   orgId,
 }) => {
   // Navigate to the create organization page
-  await page.goto('http://localhost:3000/studio/create');
+  await page.goto('/studio/create');
 
   // Check if we're on the correct page
   expect(page.url()).toContain('/studio/create');
@@ -118,8 +118,7 @@ test('create an organization with all mandatory information', async ({
 
   await page.getByRole('button', { name: 'Create' }).click();
 
-  await page.waitForTimeout(2000);
-
+  await page.goto(`/studio/${orgId}`);
   expect(page.getByRole('button', { name: 'View channel page' })).toBeVisible();
 });
 
@@ -128,7 +127,7 @@ test('create an organization with all mandatory information and description', as
   orgId,
 }) => {
   // Navigate to the create organization page
-  await page.goto('http://localhost:3000/studio/create');
+  await page.goto('/studio/create');
 
   // Check if we're on the correct page
   expect(page.url()).toContain('/studio/create');
@@ -167,8 +166,7 @@ test('create an organization with all mandatory information and description', as
   // Submit the form
   await page.getByRole('button', { name: 'Create' }).click();
 
-  await page.waitForTimeout(2000);
-
+  await page.goto(`/studio/${orgId}`);
   expect(page.getByRole('button', { name: 'View channel page' })).toBeVisible();
 });
 
@@ -177,7 +175,7 @@ test('create an organization with all mandatory information and a description to
   orgId,
 }) => {
   // Navigate to the create organization page
-  await page.goto('http://localhost:3000/studio/create');
+  await page.goto('/studio/create');
 
   // Check if we're on the correct page
   expect(page.url()).toContain('/studio/create');
@@ -242,7 +240,7 @@ test('try to create an organization with missing the logo', async ({
   orgId,
 }) => {
   // Navigate to the create organization page
-  await page.goto('http://localhost:3000/studio/create');
+  await page.goto('/studio/create');
 
   // Check if we're on the correct page
   expect(page.url()).toContain('/studio/create');
@@ -271,7 +269,7 @@ test('try to create an organization with missing the logo', async ({
 test('attempt to create an organization with missing name', async ({
   page,
 }) => {
-  await page.goto('http://localhost:3000/studio/create');
+  await page.goto('/studio/create');
 
   // Fill only email and upload logo
   await page.getByPlaceholder('Email').fill('test@example.com');
@@ -301,7 +299,7 @@ test('attempt to create an organization with missing email', async ({
   page,
   orgId,
 }) => {
-  await page.goto('http://localhost:3000/studio/create');
+  await page.goto('/studio/create');
 
   // Fill only name and upload logo
   await page.getByPlaceholder('Name').fill(orgId);
