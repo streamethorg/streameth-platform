@@ -1,9 +1,9 @@
 import { test as setup, expect } from '@playwright/test';
 
-const authFile = 'playwright/.auth/user.json';
+const authFile = 'packages/app/playwright/.auth/user.json';
 
 setup('login to studio page with Privy', async ({ page }) => {
-  await page.goto('http://localhost:3000/studio');
+  await page.goto('/studio');
   const email = process.env['PRIVY_EMAIL'] || '';
   const otp = process.env['PRIVY_OTP'] || '';
 
