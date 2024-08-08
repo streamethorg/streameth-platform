@@ -1,9 +1,13 @@
-import { fetchAllSessions } from '@/lib/data';
+'use client';
 import Videos from '@/components/misc/Videos';
-import { FileQuestion } from 'lucide-react';
+import { FileQuestion, VideoOff } from 'lucide-react';
 import Pagination from './pagination';
+import { useEffect, useState } from 'react';
+import { IExtendedSession, IPagination } from '@/lib/types';
+import { fetchAllSessions } from '@/lib/services/sessionService';
+import ArchiveVideoSkeleton from '../../../[organization]/livestream/components/ArchiveVideosSkeleton';
 
-const ArchiveVideos = async ({
+const ArchiveVideos = ({
   organizationSlug,
   event,
   searchQuery,
@@ -14,17 +18,41 @@ const ArchiveVideos = async ({
   searchQuery?: string;
   page?: number;
 }) => {
-  const videos = await fetchAllSessions({
-    organizationSlug,
-    event: event,
-    limit: 12,
-    onlyVideos: true,
-    published: true,
-    searchQuery,
-    page: Number(page || 1),
+  const [isLoading, setIsLoading] = useState(false);
+  const [videos, setVideos] = useState<IExtendedSession[]>([]);
+  const [currentSearchQuery, setCurrentSearchQuery] = useState('');
+  const [pagination, setPagination] = useState<IPagination>({
+    currentPage: 1,
+    totalPages: 0,
+    totalItems: 0,
+    limit: 0,
   });
+  useEffect(() => {
+    setIsLoading(true);
+    fetchAllSessions({
+      organizationSlug,
+      event: event,
+      limit: 12,
+      onlyVideos: true,
+      published: true,
+      searchQuery,
+      page: Number(page || 1),
+    })
+      .then((data) => {
+        if (searchQuery && searchQuery !== currentSearchQuery) {
+          setVideos(data.sessions);
+          setCurrentSearchQuery(searchQuery);
+        } else {
+          setVideos([...videos, ...data.sessions]);
+        }
+        setPagination(data.pagination);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [organizationSlug, event, searchQuery, page]);
 
-  if (videos.pagination.totalItems === 0) {
+  if (Videos.length === 0) {
     return (
       <div className="mt-10 flex h-full w-full flex-col items-center justify-center">
         <FileQuestion size={65} />
@@ -37,8 +65,12 @@ const ArchiveVideos = async ({
 
   return (
     <>
-      <Videos OrganizationSlug={organizationSlug} videos={videos.sessions} />
-      <Pagination {...videos.pagination} />
+      {isLoading ? (
+        <ArchiveVideoSkeleton />
+      ) : (
+        <Videos OrganizationSlug={organizationSlug} videos={videos} />
+      )}
+      <Pagination {...pagination} />
     </>
   );
 };

@@ -5,11 +5,44 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import { LuArrowLeft, LuArrowRight } from 'react-icons/lu';
+import { useEffect } from 'react';
 
 const Pagination = (props: IPagination) => {
   const [jumpPage, setJumpPage] = useState(props.currentPage);
   const { handleTermChange, searchParams } = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
+
+  // trigger when reaching bottom of the page
+  useEffect(() => {
+    console.log(
+      window.innerHeight,
+      document.documentElement.scrollTop,
+      document.documentElement.offsetHeight
+    );
+    const handleScroll = () => {
+      console.log(
+        window.innerHeight + document.documentElement.scrollTop,
+        document.documentElement.offsetHeight
+      );
+
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 <
+        document.documentElement.offsetHeight
+      ) {
+        return;
+      }
+      if (currentPage < props.totalPages) {
+        handleTermChange([
+          {
+            key: 'page',
+            value: (currentPage + 1).toString(),
+          },
+        ]);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [currentPage, props.totalPages, handleTermChange]);
 
   return (
     <div className="flex flex-row items-center justify-center p-2">
