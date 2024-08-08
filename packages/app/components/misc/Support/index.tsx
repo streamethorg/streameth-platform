@@ -62,6 +62,7 @@ const Support = () => {
     setMessageSent(false);
     setOpen(false);
   };
+  const isAuthenticated = authenticated || address;
 
   return (
     <Credenza open={open} onOpenChange={setOpen}>
@@ -91,7 +92,7 @@ const Support = () => {
             </a>
           </p>
 
-          {!authenticated || !!address ? (
+          {!isAuthenticated ? (
             <div>
               <p className="py-2">Sign in to send us a message</p>
               <ConnectWalletButton />
