@@ -231,3 +231,13 @@ export interface ChannelPageParams {
 export interface INFTSessions extends IExtendedSession {
   videoType: string;
 }
+
+interface ChunkTypes {
+  text: string;
+  timestamp: [number, number];
+}
+
+export interface ChunkDataTypes {
+  chunks: ChunkTypes[];
+  text: string;
+}

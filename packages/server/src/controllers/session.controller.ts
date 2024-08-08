@@ -106,6 +106,18 @@ export class SessionController extends Controller {
   }
 
   /**
+   * @summary Transcribe session
+   */
+  @SuccessResponse('201')
+  @Post('transcriptions')
+  async sessionTranscriptions(
+    @Body() body: Pick<UploadSessionDto, 'organizationId' | 'sessionId'>,
+  ): Promise<IStandardResponse<void>> {
+    await this.sessionService.sessionTranscriptions(body);
+    return SendApiResponse('transcriping session');
+  }
+
+  /**
    * @summary Publish session to socials
    */
   @SuccessResponse('201')

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -r esbuild-runner/register ./src/video-queue.ts --env=development",
+    "dev": "node -r esbuild-runner/register ./src/video-queue.ts",
+    "audio": "node -r esbuild-runner/register ./src/audio-queue.ts",
     "build": "tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "node ./dist/video-queue.js"
