@@ -14,11 +14,11 @@ export default class SupportService {
 
   async create(data: ISupport): Promise<ISupport> {
     const bot = new Telegraf(config.telegram.apiKey);
-    bot.telegram.sendMessage(
+    await bot.telegram.sendMessage(
       config.telegram.chatId,
-      data.message + data.image + 'sender:' + data.email
-        ? data.email
-        : data.telegram,
+      `Message: ${data.message}, Image: ${data.image ?? ''},  Sender Email: ${
+        data.email ?? ''
+      }, Sender Telegram: ${data.telegram ?? ''}`,
     );
     return await this.controller.store.create(' ', data);
   }
