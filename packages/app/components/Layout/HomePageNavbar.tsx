@@ -15,8 +15,10 @@ import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
 import { ConnectWalletButton } from '../misc/ConnectWalletButton';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
+import { IconLeft } from 'react-day-picker';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 
 const HomePageNavbar = ({
   logo,
@@ -167,7 +169,18 @@ const PCNavBar = ({
 }) => {
   const { isConnected } = useAccount();
   const pathname = usePathname();
+  const { searchParams, handleTermChange } = useSearchParams();
   const isStudio = pathname.includes('studio');
+
+  // Check if the URL contains the "clips" parameter and "selectedRecording"
+  const showGoBack =
+    pathname.includes('clips') && searchParams.has('selectedRecording');
+
+  // Handle the "Go back" functionality
+  const handleGoBack = () => {
+    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+  };
+
   return (
     <NavigationMenu className="sticky top-0 z-[30] hidden w-full flex-row items-center justify-between bg-white p-2 px-4 shadow-sm md:hidden lg:flex">
       <div className="flex flex-1 items-center justify-start">
@@ -183,11 +196,24 @@ const PCNavBar = ({
           </Link>
         )}
         {organizations && (
-          <Link href={`/${currentOrganization}`}>
-            <Button className="hidden lg:block" variant={'primary'}>
-              View channel page
-            </Button>
-          </Link>
+          <div className="flex flex-row space-x-1">
+            {showGoBack && (
+              <Button
+                className="hidden lg:block"
+                variant={'outline'}
+                onClick={handleGoBack}
+              >
+                <div className="flex">
+                  <IconLeft className="mr-1" /> Go back
+                </div>
+              </Button>
+            )}
+            <Link href={`/${currentOrganization}`}>
+              <Button className="hidden lg:block" variant={'primary'}>
+                View channel page
+              </Button>
+            </Link>
+          </div>
         )}
       </div>
       <div className="mx-auto flex w-2/5 flex-grow-0 items-center justify-center">
