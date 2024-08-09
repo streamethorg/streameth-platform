@@ -1,4 +1,8 @@
-import { ISessionModel, SessionType } from '@interfaces/session.interface';
+import {
+  ClippingStatus,
+  type ISessionModel,
+  SessionType,
+} from '@interfaces/session.interface';
 import { Schema, model } from 'mongoose';
 
 const SessionSchema = new Schema<ISessionModel>(
@@ -59,6 +63,7 @@ const SessionSchema = new Schema<ISessionModel>(
     ],
     firebaseId: { type: String, default: '' },
     talkType: { type: String, default: '' },
+    clippingStatus: { type: String, enum: Object.keys(ClippingStatus) },
   },
   {
     timestamps: true,
