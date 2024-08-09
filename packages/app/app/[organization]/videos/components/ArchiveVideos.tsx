@@ -65,12 +65,12 @@ const ArchiveVideos = ({
 
   return (
     <>
-      {isLoading ? (
-        <ArchiveVideoSkeleton />
-      ) : (
-        <Videos OrganizationSlug={organizationSlug} videos={videos} />
-      )}
-      <Pagination {...pagination} />
+      <Videos OrganizationSlug={organizationSlug} videos={videos} />
+      <Pagination
+        setPagination={setPagination}
+        pagination={pagination}
+        isLoading={isLoading}
+      />
     </>
   );
 };
