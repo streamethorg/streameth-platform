@@ -1,4 +1,4 @@
-import { Types, Document } from 'mongoose';
+import type { Document, Types } from 'mongoose';
 
 export enum SheetType {
   gsheet = 'gsheet',
@@ -10,7 +10,7 @@ export enum StateStatus {
   completed = 'completed',
   canceled = 'canceled',
   sync = 'sync',
-  error = 'error',
+  failed = 'failed',
 }
 
 export enum StateType {
