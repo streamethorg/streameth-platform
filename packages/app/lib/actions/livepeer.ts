@@ -17,16 +17,29 @@ export const getVideoPhaseAction = async (assetId: string) => {
   }
 };
 
-export const getVideoUrlAction = async (assetId: string) => {
+export const getVideoUrlAction = async (
+  identifier: string | { assetId?: string; playbackId?: string }
+): Promise<string | null> => {
   try {
-    const asset = await fetchAsset({ assetId });
-    if (asset?.playbackUrl) {
-      return asset.playbackUrl;
+    if (typeof identifier === 'string') {
+      // If identifier is a string, treat it as a playbackId
+      return `https://lp-playback.com/hls/${identifier}/index.m3u8`;
+    }
+
+    // If identifier is an object
+    if (identifier.assetId) {
+      const asset = await fetchAsset({ assetId: identifier.assetId });
+      console.log(asset);
+      if (asset?.playbackUrl) {
+        return asset.playbackUrl;
+      }
+    } else if (identifier.playbackId) {
+      return `https://lp-playback.com/hls/${identifier.playbackId}/index.m3u8`;
     }
 
     return null;
   } catch (e) {
-    console.error('Error fetching asset: ', assetId);
+    console.error('Error fetching asset or building URL:', identifier);
     return null;
   }
 };
