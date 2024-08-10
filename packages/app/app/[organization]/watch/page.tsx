@@ -52,15 +52,20 @@ export default async function Watch({
     session: searchParams.session,
   });
 
-  if (!session || !session.playbackId) return notFound();
+  // Check if session exists and has a playbackId. If not, return a 'not found' response.
+  if (!session?.playbackId) return notFound();
+  // Determine which identifier to use. Prioritize assetId if it exists, otherwise use playbackId.
+  const identifier = session.assetId || session.playbackId;
+  // Set the idType based on which identifier we're using.
+  // This ternary operation will set 'assetId' if session.assetId exists, otherwise 'playbackId'.
+  const idType = session.assetId ? 'assetId' : 'playbackId';
+  // Log which type of identifier we're using for debugging purposes.
+  // console.log(`Using ${idType} for video retrieval: ${identifier}`);
 
-  const videoUrl = await getVideoUrlAction(
-    session.assetId || session.playbackId
-  );
-
-  if (!videoUrl) {
-    return notFound();
-  }
+  // Attempt to get the video URL using the determined identifier and type.
+  const videoUrl = await getVideoUrlAction(identifier, idType);
+  // If we couldn't get a video URL, return a 'not found' response.
+  if (!videoUrl) return notFound();
 
   const thumbnail = await generateThumbnailAction(session);
 
