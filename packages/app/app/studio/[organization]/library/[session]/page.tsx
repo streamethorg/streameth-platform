@@ -32,7 +32,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  if (!session || (!session.playbackId && !session.assetId)) return notFound();
+  if (!session || !session.playbackId) return notFound();
 
   const videoUrl = await getVideoUrlAction(session.assetId as string);
 
