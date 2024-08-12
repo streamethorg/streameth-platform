@@ -1,0 +1,145 @@
+name: Playwright Tests with Dependency and Artifact Caching
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install yarn and dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+
+      - name: Install Playwright browsers
+        run: yarn playwright install --with-deps
+
+      - name: Build application
+        run: yarn build
+        env:
+          NEXT_PUBLIC_SPACE_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_SPACE_STORAGE_URL }}
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
+
+      - name: Save .next directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-artifact
+          if-no-files-found: error
+          path: packages/app/.next
+
+  chrome-tests:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+
+      - name: Install Playwright browsers
+        run: yarn playwright install --with-deps chromium
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: Run Playwright tests on Chrome
+        run: |
+          cd packages/app
+          yarn playwright test --project=chromium
+        env:
+          NEXT_PUBLIC_SPACE_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_SPACE_STORAGE_URL }}
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
+          PRIVY_EMAIL: ${{ secrets.PRIVY_EMAIL }}
+          PRIVY_OTP: ${{ secrets.PRIVY_OTP }}
+          ORG_NAME: test_org
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-chrome
+          path: packages/app/playwright-report
+          retention-days: 30
+
+  firefox-tests:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+
+      - name: Install Playwright browsers
+        run: yarn playwright install --with-deps
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v4
+        with:
+          name: next-artifact
+          path: packages/app/.next
+
+      - name: Run Playwright tests on Firefox
+        run: |
+          cd packages/app
+          yarn playwright test --project=firefox
+        env:
+          NEXT_PUBLIC_SPACE_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_SPACE_STORAGE_URL }}
+          NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
+          PRIVY_EMAIL: ${{ secrets.PRIVY_EMAIL }}
+          PRIVY_OTP: ${{ secrets.PRIVY_OTP }}
+          ORG_NAME: test_org
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-firefox
+          path: packages/app/playwright-report
+          retention-days: 30
