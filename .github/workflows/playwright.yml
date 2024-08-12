@@ -2,7 +2,7 @@ name: Playwright Tests with Dependency and Artifact Caching
 
 on:
   push:
-    branches: [main]
+    branches: [develop, main]
   pull_request:
     branches: [develop, main]
 
