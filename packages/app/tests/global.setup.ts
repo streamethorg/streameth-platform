@@ -1,6 +1,6 @@
 import { test as setup, expect } from '@playwright/test';
 
-const authFile = '/playwright/.auth/user.json';
+const authFile = 'playwright/.auth/user.json';
 
 setup('login to studio page with Privy', async ({ page }) => {
   await page.goto('/studio');
