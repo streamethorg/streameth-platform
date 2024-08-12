@@ -144,6 +144,7 @@ test('create an organization with all mandatory information and description', as
 
   // Upload logo
   const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
+  console.log('Path of Image:', logoPath);
   const [fileChooser] = await Promise.all([
     page.waitForEvent('filechooser'),
     page.locator('label').nth(1).click(),
@@ -235,7 +236,7 @@ test('create an organization with all mandatory information and a description to
   await expect(errorMessage).toBeVisible();
 });
 
-test('try to create an organization with missing the logo', async ({
+test('attempt to create an organization with missing the logo', async ({
   page,
   orgId,
 }) => {
