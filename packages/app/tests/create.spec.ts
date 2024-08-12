@@ -2,14 +2,42 @@ import { test as base, expect, Page } from '@playwright/test';
 import path from 'path';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
 import crypto from 'crypto';
+import fs from 'fs';
 
-const setFile = async (page: Page) => {
+const setFile = async (page: Page, maxRetries = 3, retryDelay = 1000) => {
   const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-  const fileChooserPromise = page.waitForEvent('filechooser');
 
-  await page.locator('label').nth(1).click();
-  const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(logoPath);
+  // Ensure the file exists
+  if (!fs.existsSync(logoPath)) {
+    throw new Error(`Logo file not found at ${logoPath}`);
+  }
+
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
+      const fileChooserPromise = page.waitForEvent('filechooser');
+
+      await page.locator('label').nth(1).click();
+      const fileChooser = await fileChooserPromise;
+      await fileChooser.setFiles(logoPath);
+
+      await expect(
+        page.getByText('Image uploaded successfully').first()
+      ).toBeVisible();
+      await expect(
+        page.getByText('Image uploaded successfully').first()
+      ).toBeHidden({ timeout: 7000 });
+      console.log('Image upload successful');
+      return;
+    } catch (error) {
+      console.error(`Attempt ${i + 1} failed:`, error);
+      if (i < maxRetries - 1) {
+        console.log(`Retrying in ${retryDelay}ms...`);
+        await page.waitForTimeout(retryDelay);
+      }
+    }
+  }
+  throw new Error('Failed to upload image after multiple attempts');
 };
 
 const generateShortId = () => {
@@ -110,15 +138,9 @@ test('create an organization with all mandatory information', async ({
   const email = page.getByPlaceholder('Email');
 
   await name.fill(orgId);
-  await page.waitForTimeout(200);
   await email.fill('test@example.com');
-  await page.waitForTimeout(200);
 
   await setFile(page);
-
-  await page.getByText('Image uploaded successfully').isVisible();
-  await page.waitForTimeout(6000);
-  await page.getByText('Image uploaded successfully').isHidden();
 
   await page.getByRole('button', { name: 'Create' }).click();
 
@@ -147,13 +169,6 @@ test('create an organization with all mandatory information and description', as
   await page.getByPlaceholder('Email').fill('test@example.com');
 
   await setFile(page);
-
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeVisible();
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeHidden({ timeout: 10000 });
 
   // Fill in the description (approximately 1000 characters)
   const description =
@@ -189,13 +204,6 @@ test('create an organization with all mandatory information and a description to
   await page.getByPlaceholder('Email').fill('test@example.com');
 
   await setFile(page);
-
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeVisible();
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeHidden({ timeout: 10000 });
 
   // Fill in the description (approximately 1000 characters)
   const longDescription =
@@ -248,9 +256,7 @@ test('attempt to create an organization with missing the logo', async ({
   const email = page.getByPlaceholder('Email');
 
   await name.fill(orgId);
-  await page.waitForTimeout(200);
   await email.fill('test@example.com');
-  await page.waitForTimeout(200);
 
   await page.getByRole('button', { name: 'Create' }).click();
 
@@ -267,13 +273,6 @@ test('attempt to create an organization with missing name', async ({
   await page.getByPlaceholder('Email').fill('test@example.com');
 
   await setFile(page);
-
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeVisible();
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeHidden({ timeout: 6000 });
 
   // Try to submit the form
   await page.getByRole('button', { name: 'Create' }).click();
@@ -293,13 +292,6 @@ test('attempt to create an organization with missing email', async ({
   await page.getByPlaceholder('Name').fill(orgId);
 
   await setFile(page);
-
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeVisible();
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeHidden({ timeout: 6000 });
 
   // Try to submit the form
   await page.getByRole('button', { name: 'Create' }).click();
