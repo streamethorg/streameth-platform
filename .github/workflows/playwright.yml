@@ -29,6 +29,7 @@ jobs:
       - name: Build application
         run: yarn build
         env:
+          NEXT_PUBLIC_SPACE_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_SPACE_STORAGE_URL }}
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
@@ -74,6 +75,7 @@ jobs:
           cd packages/app
           yarn playwright test --project=chromium
         env:
+          NEXT_PUBLIC_SPACE_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_SPACE_STORAGE_URL }}
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
@@ -123,6 +125,7 @@ jobs:
           cd packages/app
           yarn playwright test --project=firefox
         env:
+          NEXT_PUBLIC_SPACE_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_SPACE_STORAGE_URL }}
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
