@@ -36,8 +36,8 @@ setup('login to studio page with Privy', async ({ page }) => {
   }
 
   await page.waitForTimeout(3000);
-  await page.goto('http://localhost:3000/studio/create');
-  await page.waitForURL('http://localhost:3000/studio/create');
+  await page.goto('/studio/create');
+  await page.waitForURL('/studio/create');
 
   // Check for the existence of the heading
   const heading = page.getByRole('heading', {
