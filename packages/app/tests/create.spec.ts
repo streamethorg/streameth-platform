@@ -1,7 +1,16 @@
-import { test as base, expect } from '@playwright/test';
+import { test as base, expect, Page } from '@playwright/test';
 import path from 'path';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
 import crypto from 'crypto';
+
+const setFile = async (page: Page) => {
+  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
+  const fileChooserPromise = page.waitForEvent('filechooser');
+
+  await page.locator('label').nth(1).click();
+  const fileChooser = await fileChooserPromise;
+  await fileChooser.setFiles(logoPath);
+};
 
 const generateShortId = () => {
   return crypto.randomBytes(3).toString('hex');
@@ -105,12 +114,7 @@ test('create an organization with all mandatory information', async ({
   await email.fill('test@example.com');
   await page.waitForTimeout(200);
 
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-  const fileChooserPromise = page.waitForEvent('filechooser');
-
-  await page.locator('label').nth(1).click();
-  const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(logoPath);
+  await setFile(page);
 
   await page.getByText('Image uploaded successfully').isVisible();
   await page.waitForTimeout(6000);
@@ -142,14 +146,7 @@ test('create an organization with all mandatory information and description', as
   await page.getByPlaceholder('Name').fill(orgId);
   await page.getByPlaceholder('Email').fill('test@example.com');
 
-  // Upload logo
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-  console.log('Path of Image:', logoPath);
-  const [fileChooser] = await Promise.all([
-    page.waitForEvent('filechooser'),
-    page.locator('label').nth(1).click(),
-  ]);
-  await fileChooser.setFiles(logoPath);
+  await setFile(page);
 
   await expect(
     page.getByText('Image uploaded successfully').first()
@@ -191,13 +188,7 @@ test('create an organization with all mandatory information and a description to
   await page.getByPlaceholder('Name').fill(orgId);
   await page.getByPlaceholder('Email').fill('test@example.com');
 
-  // Upload logo
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-  const [fileChooser] = await Promise.all([
-    page.waitForEvent('filechooser'),
-    page.locator('label').nth(1).click(),
-  ]);
-  await fileChooser.setFiles(logoPath);
+  await setFile(page);
 
   await expect(
     page.getByText('Image uploaded successfully').first()
@@ -275,11 +266,7 @@ test('attempt to create an organization with missing name', async ({
   // Fill only email and upload logo
   await page.getByPlaceholder('Email').fill('test@example.com');
 
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-  const fileChooserPromise = page.waitForEvent('filechooser');
-  await page.locator('label').nth(1).click();
-  const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(logoPath);
+  await setFile(page);
 
   await expect(
     page.getByText('Image uploaded successfully').first()
@@ -305,11 +292,7 @@ test('attempt to create an organization with missing email', async ({
   // Fill only name and upload logo
   await page.getByPlaceholder('Name').fill(orgId);
 
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-  const fileChooserPromise = page.waitForEvent('filechooser');
-  await page.locator('label').nth(1).click();
-  const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(logoPath);
+  await setFile(page);
 
   await expect(
     page.getByText('Image uploaded successfully').first()
