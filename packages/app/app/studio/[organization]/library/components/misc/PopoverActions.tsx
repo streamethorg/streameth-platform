@@ -86,7 +86,6 @@ export const PopoverActions = ({
         )}
         <DeleteAsset
           session={session}
-          href={`/studio/${organizationSlug}/library`}
           TriggerComponent={
             <span
               className={buttonVariants({

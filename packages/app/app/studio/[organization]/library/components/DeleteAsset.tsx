@@ -22,7 +22,7 @@ const DeleteAsset = ({
   TriggerComponent,
 }: {
   session: IExtendedSession;
-  href: string | 'refresh';
+  href?: string;
   TriggerComponent: ReactNode;
 }) => {
   const router = useRouter();
@@ -36,22 +36,29 @@ const DeleteAsset = ({
     });
     setLoading(false);
 
-    if (href === 'refresh') {
-      router.refresh();
+    if (href) {
+      router.push(href);
     }
-    router.push(href);
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>{TriggerComponent}</DialogTrigger>
-      <DialogContent className="p-10 sm:max-w-[475px]">
+      <DialogContent className="p-10">
         <DialogHeader className="mx-auto space-y-4">
           <div className="mx-auto rounded-full bg-red-500 p-4">
             <Trash2 className="text-white" />
           </div>
-          <DialogTitle>Are you sure you want to delete?</DialogTitle>
+          <DialogTitle className="text-center">
+            Are you sure you want to delete this?
+          </DialogTitle>
         </DialogHeader>
+        <div>
+          <p>
+            If the video was created from a livestream, you can simply re-clip
+            the video without having to delete anything.
+          </p>
+        </div>
         <DialogFooter className="mx-auto">
           <DialogClose>
             <Button variant={'secondary'}>Cancel</Button>
