@@ -112,7 +112,7 @@ jobs:
           yarn install
 
       - name: Install Playwright browsers
-        run: yarn playwright install --with-deps firefox
+        run: yarn playwright install --with-deps
 
       - name: Download the build folders
         uses: actions/download-artifact@v4
