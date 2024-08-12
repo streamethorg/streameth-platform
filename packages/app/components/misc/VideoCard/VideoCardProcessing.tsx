@@ -4,14 +4,15 @@ import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { EllipsisVertical, Loader2 } from 'lucide-react';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
+import { useEffect, useState } from 'react';
+import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 
 const VideoCardProcessing = async ({
   session,
 }: {
   session: IExtendedSession;
 }) => {
-  const thumbnail = (await generateThumbnailAction(session)) || '';
-
+  const thumbnail = useGenerateThumbnail({ session });
   return (
     <div className="min-h-full w-full animate-pulse rounded-xl uppercase">
       <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />

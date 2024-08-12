@@ -1,10 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Thumbnail from './thumbnail';
 import Image from 'next/image';
 import { IExtendedSession, IExtendedEvent } from '@/lib/types';
-import { generateThumbnailAction } from '@/lib/actions/sessions';
+import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 
 const VideoCard = ({
   session,
@@ -17,11 +17,7 @@ const VideoCard = ({
 }) => {
   const headerClass = invertedColors ? ' ' : '';
   const descriptionClass = invertedColors ? '' : '';
-  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    generateThumbnailAction(session).then((url) => url && setImageUrl(url));
-  }, []);
+  const imageUrl = useGenerateThumbnail({ session });
 
   return (
     <div className="min-h-full w-full rounded-xl uppercase">
