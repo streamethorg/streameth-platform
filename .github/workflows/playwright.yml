@@ -29,7 +29,6 @@ jobs:
       - name: Build application
         run: yarn build
         env:
-
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
@@ -77,6 +76,10 @@ jobs:
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
           PRIVY_EMAIL: ${{ secrets.PRIVY_EMAIL }}
           PRIVY_OTP: ${{ secrets.PRIVY_OTP }}
           ORG_NAME: test_org
@@ -122,6 +125,10 @@ jobs:
         env:
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
           PRIVY_EMAIL: ${{ secrets.PRIVY_EMAIL }}
           PRIVY_OTP: ${{ secrets.PRIVY_OTP }}
           ORG_NAME: test_org
