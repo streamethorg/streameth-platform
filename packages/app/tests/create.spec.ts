@@ -12,32 +12,19 @@ const setFile = async (page: Page, maxRetries = 3, retryDelay = 1000) => {
     throw new Error(`Logo file not found at ${logoPath}`);
   }
 
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-      const fileChooserPromise = page.waitForEvent('filechooser');
+  const fileChooserPromise = page.waitForEvent('filechooser');
 
-      await page.locator('label').nth(1).click();
-      const fileChooser = await fileChooserPromise;
-      await fileChooser.setFiles(logoPath);
+  await page.locator('label').nth(1).click();
+  const fileChooser = await fileChooserPromise;
+  await fileChooser.setFiles(logoPath);
 
-      await expect(
-        page.getByText('Image uploaded successfully').first()
-      ).toBeVisible();
-      await expect(
-        page.getByText('Image uploaded successfully').first()
-      ).toBeHidden({ timeout: 7000 });
-      console.log('Image upload successful');
-      return;
-    } catch (error) {
-      console.error(`Attempt ${i + 1} failed:`, error);
-      if (i < maxRetries - 1) {
-        console.log(`Retrying in ${retryDelay}ms...`);
-        await page.waitForTimeout(retryDelay);
-      }
-    }
-  }
-  throw new Error('Failed to upload image after multiple attempts');
+  await expect(
+    page.getByText('Image uploaded successfully').first()
+  ).toBeVisible();
+  console.log('Image upload successful');
+  await expect(
+    page.getByText('Image uploaded successfully').first()
+  ).toBeHidden({ timeout: 7000 });
 };
 
 const generateShortId = () => {
