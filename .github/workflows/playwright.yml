@@ -29,9 +29,13 @@ jobs:
       - name: Build application
         run: yarn build
         env:
+
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          SPACES_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
 
       - name: Save .next directory
         uses: actions/upload-artifact@v4
