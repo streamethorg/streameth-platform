@@ -1,12 +1,11 @@
 import { HomePageProps } from '@/lib/types';
 import ArchiveVideos from '../[organization]/videos/components/ArchiveVideos';
-import { getFeaturedEventsData } from '../../components/misc/FeaturedEventsData';
 import FeaturedEvents from './components/FeaturedEvents';
 import ExploreTabs from './components/ExploreTabs';
 import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import { Suspense } from 'react';
 
-const Home = async ({ searchParams }: HomePageProps) => {
+const Explore = async ({ searchParams }: HomePageProps) => {
   const featuredEvents = [
     {
       name: 'EthCC [7]',
@@ -67,4 +66,4 @@ const Home = async ({ searchParams }: HomePageProps) => {
   );
 };
 
-export default Home;
+export default Explore;
