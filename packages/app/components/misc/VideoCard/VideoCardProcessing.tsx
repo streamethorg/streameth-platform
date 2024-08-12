@@ -28,12 +28,17 @@ const VideoCardProcessing = async ({
         >
           <CardTitle className={`overflow-hidden text-sm capitalize`}>
             {isPending ? (
-              <div className="flex items-center justify-start space-x-2">
-                <Loader2 className="animate-spin" />
-                <span>Processing...</span>
+              <div>
+                <p>{session.name}</p>
+                <div className="flex items-center justify-start space-x-2">
+                  <Loader2 className="animate-spin" />
+
+                  <span>Processing...</span>
+                </div>
               </div>
             ) : (
               <div className="">
+                <p>{session.name}</p>
                 <span className="text-destructive mr-2">
                   Processing Failed!
                 </span>
