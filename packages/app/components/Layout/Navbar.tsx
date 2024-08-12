@@ -39,7 +39,7 @@ export default function Navbar({
           {pages.map((item) => (
             <NavigationMenuItem key={item.name}>
               <Link href={item.href} legacyBehavior passHref>
-                <Button variant={item.bgColor} className="">
+                <Button variant={item.bgColor as any} className="">
                   {item.name}
                   {/* <div className="ml-2 text-black">{item.icon}</div> */}
                 </Button>
@@ -60,7 +60,7 @@ export default function Navbar({
         {pages.map((item) => (
           <NavigationMenuItem key={item.name}>
             <Link href={item.href} legacyBehavior passHref>
-              <Button variant={item.bgColor} className="">
+              <Button variant={item.bgColor as any} className="">
                 {item.name}
                 {/* <div className="ml-2 text-black">{item.icon}</div> */}
               </Button>
