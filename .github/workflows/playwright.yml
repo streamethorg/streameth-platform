@@ -35,7 +35,7 @@ jobs:
           NEXT_PUBLIC_PRIVY_ID: ${{ secrets.NEXT_PUBLIC_PRIVY_ID }}
           SPACES_KEY: ${{ secrets.SPACES_KEY }}
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
-          SPACES_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
+          SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
 
       - name: Save .next directory
         uses: actions/upload-artifact@v4
