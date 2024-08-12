@@ -86,7 +86,7 @@ export interface WatchPageProps {
 }
 
 export interface IPagination {
-  currentPage?: number;
+  currentPage: number;
   totalPages: number;
   totalItems: number;
   limit: number;

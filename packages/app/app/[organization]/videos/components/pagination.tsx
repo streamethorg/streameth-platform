@@ -6,40 +6,43 @@ import { useEffect } from 'react';
 
 const Pagination = ({
   pagination,
-  setPagination,
+  fetch,
   isLoading,
 }: {
-  pagination: IPagination;
-  setPagination: (pagination: IPagination) => void;
+  pagination: IPagination | null;
+  fetch: (params: { page: number }) => void;
   isLoading: boolean;
 }) => {
-  const [jumpPage, setJumpPage] = useState(pagination.currentPage);
-  const { handleTermChange, searchParams } = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
-
   // trigger when reaching bottom of the page
   useEffect(() => {
     const handleScroll = () => {
+      console.log(
+        isLoading,
+        window.innerHeight + document.documentElement.scrollTop + 1 <
+          document.documentElement.offsetHeight
+      );
       if (isLoading) return;
-
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 <
         document.documentElement.offsetHeight
       ) {
         return;
       }
-      if (currentPage < pagination.totalPages) {
-        setPagination({
-          currentPage: currentPage + 1,
-          totalPages: pagination.totalPages,
-          totalItems: pagination.totalItems,
-          limit: pagination.limit,
-        });
+      console.log('fetching next page');
+      console.log(pagination);
+      if (
+        !pagination ||
+        pagination.currentPage === pagination.totalPages ||
+        pagination.totalPages === 0
+      ) {
+        return;
       }
+
+      fetch({ page: pagination.currentPage + 1 });
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage, pagination.totalPages, handleTermChange]);
+  }, [pagination]);
 
   if (isLoading) {
     return <div className="flex justify-center items-center">Loading...</div>;
