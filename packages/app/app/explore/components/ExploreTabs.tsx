@@ -58,7 +58,7 @@ const ExploreTabs = () => {
   };
 
   return (
-    <div className=" w-full sticky top-[57px] z-[99999] bg-white pt-2 border-b">
+    <div className=" w-full sticky top-[57px] z-[5] bg-white pt-2 border-b">
       {showLeftArrow && (
         <button
           onClick={() => scroll('left')}

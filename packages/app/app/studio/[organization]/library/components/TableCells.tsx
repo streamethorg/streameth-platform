@@ -31,6 +31,7 @@ const TableCells = async ({
     return <ProcessingSkeleton item={item} />;
   }
 
+  console.log(item);
   return (
     <>
       <TableCell className="relative max-w-[500px] font-medium">

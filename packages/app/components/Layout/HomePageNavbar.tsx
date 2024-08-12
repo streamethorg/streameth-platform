@@ -14,7 +14,6 @@ import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrg
 import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
-import { ConnectWalletButton } from '../misc/ConnectWalletButton';
 import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 
@@ -132,7 +131,7 @@ const MobileNavBar = ({
               )}
             </button>
           )}
-          {pages.length > 0 && (
+          {pages.length > 1 && (
             <button onClick={toggleMenu} className="z-50">
               {!menuVisible ? (
                 <Menu size={30} strokeWidth={2} className="" />
@@ -142,9 +141,10 @@ const MobileNavBar = ({
             </button>
           )}
         </div>
-        {menuVisible && (
-          <Navbar organization={currentOrganization} pages={pages} />
-        )}
+        {menuVisible ||
+          (pages.length < 2 && (
+            <Navbar organization={currentOrganization} pages={pages} />
+          ))}
       </div>
     </NavigationMenu>
   );
@@ -206,11 +206,11 @@ const PCNavBar = ({
           />
         )}
         <Navbar organization={currentOrganization} pages={pages} />
-        {isConnected && (
+        {/* {isConnected && (
           <div className="mr-2">
             <ConnectWalletButton />
           </div>
-        )}
+        )} */}
         {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>
