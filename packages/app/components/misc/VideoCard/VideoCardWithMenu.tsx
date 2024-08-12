@@ -12,7 +12,7 @@ import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { EllipsisVertical } from 'lucide-react';
 import Link from 'next/link';
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode } from 'react';
 
 const VideoCardWithMenu = ({
   session,
