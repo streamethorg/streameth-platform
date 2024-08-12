@@ -230,6 +230,7 @@ export default function ImageUpload({
                 error: (error: Error) => {
                   setPreview('');
                   onChange(''); // Set to empty string on error
+                  console.error(error);
                   return error.message || 'Unknown error';
                 },
               }
