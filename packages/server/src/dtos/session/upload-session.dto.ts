@@ -1,5 +1,5 @@
 import { IUploadSession } from '@interfaces/upload.session.interface';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UploadSessionDto implements IUploadSession {
   @IsNotEmpty()
@@ -17,4 +17,8 @@ export class UploadSessionDto implements IUploadSession {
   @IsNotEmpty()
   @IsString()
   type: string;
+
+  @IsOptional()
+  @IsString()
+  text?: string;
 }

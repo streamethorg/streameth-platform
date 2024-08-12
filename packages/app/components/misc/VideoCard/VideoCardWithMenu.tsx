@@ -27,9 +27,8 @@ const VideoCardWithMenu = ({
   link: string;
 }) => {
   const [thumbnail, setThumbnail] = useState<string | undefined>(undefined);
-
+  
   const memoizedSession = useMemo(() => session, []);
-
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
       try {
@@ -40,8 +39,8 @@ const VideoCardWithMenu = ({
       }
     };
 
-    if (session) {
-      getThumbnail(session);
+    if (memoizedSession && !memoizedSession.coverImage) {
+      getThumbnail(memoizedSession);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [memoizedSession]);
