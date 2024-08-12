@@ -27,7 +27,7 @@ const VideoCardWithMenu = ({
   link: string;
 }) => {
   const [thumbnail, setThumbnail] = useState<string | undefined>(undefined);
-  
+
   const memoizedSession = useMemo(() => session, []);
   useEffect(() => {
     const getThumbnail = async (session: IExtendedSession) => {
