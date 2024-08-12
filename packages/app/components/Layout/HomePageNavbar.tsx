@@ -77,6 +77,17 @@ const MobileNavBar = ({
   const [searchVisible, setSearchVisible] = useState(false);
   const toggleSearch = () => setSearchVisible(!searchVisible);
   const toggleMenu = () => setMenuVisible(!menuVisible);
+  const pathname = usePathname();
+  const { searchParams, handleTermChange } = useSearchParams();
+
+  // Check if the URL contains the "clips" parameter and "selectedRecording"
+  const showGoBack =
+    pathname.includes('clips') && searchParams.has('selectedRecording');
+
+  // Handle the "Go back" functionality
+  const handleGoBack = () => {
+    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+  };
 
   useLayoutEffect(() => {
     if (menuVisible || searchVisible) {
@@ -112,16 +123,27 @@ const MobileNavBar = ({
             />
           </div>
         )}
-        {showSearchBar && (
-          <Link href={`/${currentOrganization}`}>
-            <Image
-              src={logo ?? '/logo.png'}
-              alt="Logo"
-              height={36}
-              width={36}
-              className="aspect-square h-full"
-            />
-          </Link>
+        {showGoBack ? (
+          <Button
+            className="mr-2"
+            variant="outline"
+            size="sm"
+            onClick={handleGoBack}
+          >
+            <IconLeft className="mr-1" /> Go back
+          </Button>
+        ) : (
+          showSearchBar && (
+            <Link href={`/${currentOrganization}`}>
+              <Image
+                src={logo ?? '/logo.png'}
+                alt="Logo"
+                height={36}
+                width={36}
+                className="aspect-square h-full"
+              />
+            </Link>
+          )
         )}
 
         <div className="ml-auto flex items-center">
