@@ -206,19 +206,3 @@ export default function CreateOrganizationForm({
     </Form>
   );
 }
-
-{
-  /* <FormField
-          control={form.control}
-          name="url"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="">Company website</FormLabel>
-              <FormControl>
-                <Input placeholder="Company website" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */
-}
