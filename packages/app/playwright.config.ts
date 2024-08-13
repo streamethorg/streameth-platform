@@ -1,7 +1,9 @@
 import { defineConfig, devices } from '@playwright/test'
 import path from 'path';
+import { validateEnvs } from './tests/utils/validateEnvs';
 
-require('dotenv').config({path: path.resolve(__dirname, 'test.env')})
+require('dotenv').config({ path: path.resolve(__dirname, '.env.test') })
+validateEnvs()
 
 /**
  * See https://playwright.dev/docs/test-configuration.
