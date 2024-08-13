@@ -1,8 +1,9 @@
+'use client';
 import { IExtendedSession } from '@/lib/types';
 import VideoCardWithMenu from './VideoCard/VideoCardWithMenu';
 import { Suspense } from 'react';
 import { Card, CardHeader, CardDescription } from '@/components/ui/card';
-export default async function VideoGrid({
+export default function VideoGrid({
   videos,
   OrganizationSlug,
   maxVideos,
@@ -47,7 +48,7 @@ export default async function VideoGrid({
               >
                 <VideoCardWithMenu
                   session={video}
-                  link={`/${OrganizationSlug}/watch?session=${video._id.toString()}`}
+                  link={`/${OrganizationSlug || video.organizationId}/watch?session=${video._id.toString()}`}
                 />
               </Suspense>
             </div>

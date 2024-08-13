@@ -13,7 +13,7 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import NotFound from '@/not-found';
 import { sortArray } from '@/lib/utils/utils';
 import LibraryGridLayout from './components/LibraryGridLayout';
-import Pagination from '@/app/[organization]/videos/components/pagination';
+import Pagination from './components/Pagination';
 import SearchBar from '@/components/misc/SearchBar';
 import LibraryFilter from './components/LibraryFilter';
 import { fetchOrganizationStages } from '@/lib/services/stageService';

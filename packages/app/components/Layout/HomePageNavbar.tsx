@@ -14,8 +14,7 @@ import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrg
 import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
-import { ConnectWalletButton } from '../misc/ConnectWalletButton';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
@@ -156,7 +155,7 @@ const MobileNavBar = ({
               )}
             </button>
           )}
-          {pages.length > 0 && (
+          {pages.length > 1 && (
             <button onClick={toggleMenu} className="z-50">
               {!menuVisible ? (
                 <Menu size={30} strokeWidth={2} className="" />
@@ -166,9 +165,10 @@ const MobileNavBar = ({
             </button>
           )}
         </div>
-        {menuVisible && (
-          <Navbar organization={currentOrganization} pages={pages} />
-        )}
+        {menuVisible ||
+          (pages.length < 2 && (
+            <Navbar organization={currentOrganization} pages={pages} />
+          ))}
       </div>
     </NavigationMenu>
   );
@@ -204,7 +204,7 @@ const PCNavBar = ({
   };
 
   return (
-    <NavigationMenu className="sticky top-0 z-[30] hidden w-full flex-row items-center justify-between bg-white p-2 px-4 shadow-sm md:hidden lg:flex">
+    <NavigationMenu className="sticky top-0 z-[30] hidden w-full flex-row items-center justify-between bg-white p-2 px-4 md:hidden lg:flex">
       <div className="flex flex-1 items-center justify-start">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>
@@ -254,11 +254,11 @@ const PCNavBar = ({
           />
         )}
         <Navbar organization={currentOrganization} pages={pages} />
-        {isConnected && (
+        {/* {isConnected && (
           <div className="mr-2">
             <ConnectWalletButton />
           </div>
-        )}
+        )} */}
         {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>

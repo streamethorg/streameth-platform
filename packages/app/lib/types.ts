@@ -11,6 +11,10 @@ import { IUser } from 'streameth-new-server/src/interfaces/user.interface';
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 
+export interface HomePageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
 export enum eSort {
   asc_alpha = 'asc_alpha',
   desc_alpha = 'desc_alpha',
@@ -82,7 +86,7 @@ export interface WatchPageProps {
 }
 
 export interface IPagination {
-  currentPage?: number;
+  currentPage: number;
   totalPages: number;
   totalItems: number;
   limit: number;

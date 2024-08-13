@@ -30,14 +30,11 @@ export async function fetchEvents({
         return [];
       }
       const response = await fetch(
-        `${apiUrl()}/events?organizationId=${organization._id}`,
-        { cache: 'no-store' }
+        `${apiUrl()}/events?organizationId=${organization._id}`
       );
       data = (await response.json()).data ?? [];
     } else {
-      const response = await fetch(`${apiUrl()}/events`, {
-        cache: 'no-store',
-      });
+      const response = await fetch(`${apiUrl()}/events`);
       data = (await response.json()).data ?? [];
     }
 
@@ -69,9 +66,7 @@ export async function fetchEvent({
       return null;
     }
 
-    const data = await fetch(`${apiUrl()}/events/${eventId ?? eventSlug}`, {
-      cache: 'no-store',
-    });
+    const data = await fetch(`${apiUrl()}/events/${eventId ?? eventSlug}`);
 
     if (!data.ok) {
       return null;

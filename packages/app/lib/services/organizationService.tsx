@@ -17,10 +17,7 @@ export async function fetchOrganization({
     const response = await fetch(
       `${apiUrl()}/organizations/${
         organizationId ? organizationId : organizationSlug
-      }`,
-      {
-        cache: 'no-store',
-      }
+      }`
     );
     const data = (await response.json()).data;
 
@@ -33,9 +30,7 @@ export async function fetchOrganization({
 
 export async function fetchOrganizations(): Promise<IExtendedOrganization[]> {
   try {
-    const response = await fetch(`${apiUrl()}/organizations`, {
-      cache: 'no-store',
-    });
+    const response = await fetch(`${apiUrl()}/organizations`);
     return (await response.json()).data ?? [];
   } catch (e) {
     console.log(e);
@@ -166,7 +161,6 @@ export async function fetchOrganizationMembers({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
-        cache: 'no-store',
       }
     );
 
@@ -231,7 +225,6 @@ export async function fetchOrganizationSocials({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
-        cache: 'no-store',
       }
     );
     const data = (await response.json()).data;

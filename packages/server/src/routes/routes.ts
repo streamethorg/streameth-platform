@@ -32,7 +32,7 @@ import { expressAuthentication } from './../middlewares/auth.middleware';
 // @ts-ignore - no great way to install types from subpackage
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 const multer = require('multer');
-const upload = multer({"limits":{"fileSize":8388608}});
+
 
 const expressAuthenticationRecasted = expressAuthentication as (req: ExRequest, securityName: string, scopes?: string[], res?: ExResponse) => Promise<any>;
 
@@ -97,7 +97,6 @@ const models: TsoaRoute.Models = {
         },
         "additionalProperties": false,
     },
-<<<<<<< HEAD
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_IUser_": {
         "dataType": "refObject",
@@ -105,383 +104,6 @@ const models: TsoaRoute.Models = {
             "status": {"dataType":"string","required":true},
             "message": {"dataType":"string","required":true},
             "data": {"ref":"IUser"},
-=======
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  CreateClipDto: {
-    dataType: 'refObject',
-    properties: {
-      playbackId: { dataType: 'string', required: true },
-      sessionId: { dataType: 'string', required: true },
-      recordingId: { dataType: 'string', required: true },
-      start: { dataType: 'double', required: true },
-      end: { dataType: 'double', required: true },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  SheetType: {
-    dataType: 'refEnum',
-    enums: ['gsheet', 'pretalx'],
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  StateStatus: {
-    dataType: 'refEnum',
-    enums: ['pending', 'completed', 'canceled', 'sync', 'failed'],
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  StateType: {
-    dataType: 'refEnum',
-    enums: ['event', 'video'],
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IState: {
-    dataType: 'refObject',
-    properties: {
-      _id: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      eventId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      organizationId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      sessionId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      eventSlug: { dataType: 'string' },
-      sessionSlug: { dataType: 'string' },
-      sheetType: { ref: 'SheetType' },
-      status: { ref: 'StateStatus' },
-      type: { ref: 'StateType' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IStandardResponse_IState_: {
-    dataType: 'refObject',
-    properties: {
-      status: { dataType: 'string', required: true },
-      message: { dataType: 'string', required: true },
-      data: { ref: 'IState' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  CreateStateDto: {
-    dataType: 'refObject',
-    properties: {
-      _id: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      eventId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      organizationId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-        required: true,
-      },
-      sessionId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      eventSlug: { dataType: 'string' },
-      sessionSlug: { dataType: 'string' },
-      sheetType: { ref: 'SheetType' },
-      status: { ref: 'StateStatus' },
-      type: { ref: 'StateType' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  UpdateStateDto: {
-    dataType: 'refObject',
-    properties: {
-      eventId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      organizationId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      sessionId: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'string' },
-          { ref: 'mongoose.Types.ObjectId' },
-        ],
-      },
-      eventSlug: { dataType: 'string' },
-      sessionSlug: { dataType: 'string' },
-      sheetType: { ref: 'SheetType' },
-      status: { ref: 'StateStatus' },
-      type: { ref: 'StateType' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IStandardResponse_Array_IState__: {
-    dataType: 'refObject',
-    properties: {
-      status: { dataType: 'string', required: true },
-      message: { dataType: 'string', required: true },
-      data: {
-        dataType: 'array',
-        array: { dataType: 'refObject', ref: 'IState' },
-      },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  TargetOutput: {
-    dataType: 'refObject',
-    properties: {
-      _id: { dataType: 'string' },
-      id: { dataType: 'string' },
-      name: { dataType: 'string' },
-      socialId: { dataType: 'string' },
-      socialType: { dataType: 'string' },
-      broadcastId: { dataType: 'string' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IStreamSettings: {
-    dataType: 'refObject',
-    properties: {
-      streamId: { dataType: 'string' },
-      parentId: { dataType: 'string' },
-      playbackId: { dataType: 'string' },
-      isHealthy: { dataType: 'boolean' },
-      isActive: { dataType: 'boolean' },
-      streamKey: { dataType: 'string' },
-      ipfshash: { dataType: 'string' },
-      targets: {
-        dataType: 'array',
-        array: { dataType: 'refObject', ref: 'TargetOutput' },
-      },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IPlugin: {
-    dataType: 'refObject',
-    properties: {
-      name: { dataType: 'string', required: true },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IStage: {
-    dataType: 'refObject',
-    properties: {
-      _id: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'string' },
-        ],
-      },
-      name: { dataType: 'string', required: true },
-      description: { dataType: 'string' },
-      eventId: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'string' },
-        ],
-      },
-      streamSettings: { ref: 'IStreamSettings' },
-      plugins: {
-        dataType: 'array',
-        array: { dataType: 'refObject', ref: 'IPlugin' },
-      },
-      order: { dataType: 'double' },
-      slug: { dataType: 'string' },
-      published: { dataType: 'boolean' },
-      isMultipleDate: { dataType: 'boolean' },
-      organizationId: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'string' },
-        ],
-        required: true,
-      },
-      thumbnail: { dataType: 'string' },
-      streamDate: {
-        dataType: 'union',
-        subSchemas: [{ dataType: 'datetime' }, { dataType: 'string' }],
-      },
-      streamEndDate: {
-        dataType: 'union',
-        subSchemas: [{ dataType: 'datetime' }, { dataType: 'string' }],
-      },
-      mintable: { dataType: 'boolean' },
-      createdAt: { dataType: 'string' },
-      nftCollections: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'array', array: { dataType: 'string' } },
-        ],
-      },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IStandardResponse_IStage_: {
-    dataType: 'refObject',
-    properties: {
-      status: { dataType: 'string', required: true },
-      message: { dataType: 'string', required: true },
-      data: { ref: 'IStage' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  CreateStageDto: {
-    dataType: 'refObject',
-    properties: {
-      _id: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'string' },
-        ],
-      },
-      name: { dataType: 'string', required: true },
-      description: { dataType: 'string' },
-      eventId: { dataType: 'string' },
-      streamSettings: { ref: 'IStreamSettings' },
-      plugins: {
-        dataType: 'array',
-        array: { dataType: 'refObject', ref: 'IPlugin' },
-      },
-      order: { dataType: 'double' },
-      slug: { dataType: 'string' },
-      published: { dataType: 'boolean' },
-      isMultipleDate: { dataType: 'boolean' },
-      organizationId: { dataType: 'string', required: true },
-      thumbnail: { dataType: 'string' },
-      streamDate: { dataType: 'datetime' },
-      streamEndDate: { dataType: 'datetime' },
-      mintable: { dataType: 'boolean' },
-      createdAt: { dataType: 'string' },
-      nftCollections: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'array', array: { dataType: 'string' } },
-        ],
-      },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  UpdateStageDto: {
-    dataType: 'refObject',
-    properties: {
-      name: { dataType: 'string', required: true },
-      description: { dataType: 'string' },
-      eventId: { dataType: 'string' },
-      published: { dataType: 'boolean' },
-      isMultipleDate: { dataType: 'boolean' },
-      streamSettings: { ref: 'IStreamSettings' },
-      plugins: {
-        dataType: 'array',
-        array: { dataType: 'refObject', ref: 'IPlugin' },
-      },
-      order: { dataType: 'double' },
-      organizationId: { dataType: 'string', required: true },
-      slug: { dataType: 'string' },
-      streamDate: { dataType: 'string' },
-      streamEndDate: { dataType: 'string' },
-      thumbnail: { dataType: 'string' },
-      mintable: { dataType: 'boolean' },
-      nftCollections: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'array', array: { dataType: 'string' } },
-        ],
-      },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IStandardResponse_Array_IStage__: {
-    dataType: 'refObject',
-    properties: {
-      status: { dataType: 'string', required: true },
-      message: { dataType: 'string', required: true },
-      data: {
-        dataType: 'array',
-        array: { dataType: 'refObject', ref: 'IStage' },
-      },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  OrgIdDto: {
-    dataType: 'refObject',
-    properties: {
-      organizationId: { dataType: 'string', required: true },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  'IStandardResponse__streamKey-string--ingestUrl-string__': {
-    dataType: 'refObject',
-    properties: {
-      status: { dataType: 'string', required: true },
-      message: { dataType: 'string', required: true },
-      data: {
-        dataType: 'nestedObjectLiteral',
-        nestedProperties: {
-          ingestUrl: { dataType: 'string', required: true },
-          streamKey: { dataType: 'string', required: true },
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
         },
         "additionalProperties": false,
     },
@@ -496,7 +118,6 @@ const models: TsoaRoute.Models = {
         },
         "additionalProperties": false,
     },
-<<<<<<< HEAD
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_ISupport_": {
         "dataType": "refObject",
@@ -506,123 +127,6 @@ const models: TsoaRoute.Models = {
             "data": {"ref":"ISupport"},
         },
         "additionalProperties": false,
-=======
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  'Omit_ISpeaker.organizationId_': {
-    dataType: 'refAlias',
-    type: {
-      ref: 'Pick_ISpeaker.Exclude_keyofISpeaker.organizationId__',
-      validators: {},
-    },
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  ISource: {
-    dataType: 'refObject',
-    properties: {
-      streamUrl: { dataType: 'string' },
-      start: { dataType: 'double' },
-      end: { dataType: 'double' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  IPlayback: {
-    dataType: 'refObject',
-    properties: {
-      livepeerId: { dataType: 'string' },
-      videoUrl: { dataType: 'string' },
-      ipfsHash: { dataType: 'string' },
-      format: { dataType: 'string' },
-      duration: { dataType: 'double' },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  SessionType: {
-    dataType: 'refEnum',
-    enums: ['clip', 'livestream', 'video'],
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  ClippingStatus: {
-    dataType: 'refEnum',
-    enums: ['pending', 'failed', 'completed'],
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  ISession: {
-    dataType: 'refObject',
-    properties: {
-      _id: { ref: 'mongoose.Types.ObjectId' },
-      name: { dataType: 'string', required: true },
-      description: { dataType: 'string', required: true },
-      start: { dataType: 'double', required: true },
-      end: { dataType: 'double', required: true },
-      startClipTime: { dataType: 'double' },
-      endClipTime: { dataType: 'double' },
-      stageId: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'string' },
-        ],
-      },
-      speakers: {
-        dataType: 'array',
-        array: { dataType: 'refAlias', ref: 'Omit_ISpeaker.organizationId_' },
-      },
-      source: { ref: 'ISource' },
-      assetId: { dataType: 'string' },
-      playback: { ref: 'IPlayback' },
-      videoUrl: { dataType: 'string' },
-      playbackId: { dataType: 'string' },
-      eventId: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'string' },
-        ],
-      },
-      organizationId: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'string' },
-        ],
-        required: true,
-      },
-      track: { dataType: 'array', array: { dataType: 'string' } },
-      coverImage: { dataType: 'string' },
-      slug: { dataType: 'string' },
-      eventSlug: { dataType: 'string' },
-      videoTranscription: { dataType: 'string' },
-      aiDescription: { dataType: 'string' },
-      autoLabels: { dataType: 'array', array: { dataType: 'string' } },
-      ipfsURI: { dataType: 'string' },
-      mintable: { dataType: 'boolean' },
-      published: { dataType: 'boolean' },
-      type: { ref: 'SessionType', required: true },
-      createdAt: { dataType: 'string' },
-      nftCollections: {
-        dataType: 'union',
-        subSchemas: [
-          { ref: 'mongoose.Types.ObjectId' },
-          { dataType: 'array', array: { dataType: 'string' } },
-        ],
-      },
-      socials: {
-        dataType: 'array',
-        array: {
-          dataType: 'nestedObjectLiteral',
-          nestedProperties: {
-            date: { dataType: 'double', required: true },
-            name: { dataType: 'string', required: true },
-          },
-        },
-      },
-      firebaseId: { dataType: 'string' },
-      talkType: { dataType: 'string' },
-      clippingStatus: { ref: 'ClippingStatus' },
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateSupportTicketDto": {
@@ -688,15 +192,7 @@ const models: TsoaRoute.Models = {
             "targetId": {"dataType":"string","required":true},
             "organizationId": {"dataType":"string","required":true},
         },
-<<<<<<< HEAD
         "additionalProperties": false,
-=======
-        firebaseId: { dataType: 'string' },
-        talkType: { dataType: 'string' },
-        clippingStatus: { ref: 'ClippingStatus' },
-      },
-      validators: {},
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse__url-string--assetId-string__": {
@@ -706,15 +202,7 @@ const models: TsoaRoute.Models = {
             "message": {"dataType":"string","required":true},
             "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"assetId":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
         },
-<<<<<<< HEAD
         "additionalProperties": false,
-=======
-      },
-      firebaseId: { dataType: 'string' },
-      talkType: { dataType: 'string' },
-      clippingStatus: { ref: 'ClippingStatus' },
-      autolabels: { dataType: 'array', array: { dataType: 'string' } },
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_string_": {
@@ -1670,11 +1158,19 @@ const templateService = new ExpressTemplateService(models, {"noImplicitAdditiona
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-export function RegisterRoutes(app: Router) {
+
+
+
+export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof multer>}) {
+
     // ###########################################################################################################
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+
+    const upload = opts?.multer ||  multer({"limits":{"fileSize":8388608}});
+
+    
         app.get('/users/:walletAddress',
             authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(UserController)),
