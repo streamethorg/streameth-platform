@@ -1,6 +1,7 @@
 'use server';
 
 import { fetchAsset } from '../services/sessionService';
+import { IExtendedSession } from '../types';
 import { createAssetAction } from './sessions';
 
 export const getVideoPhaseAction = async (assetId: string) => {
@@ -17,44 +18,22 @@ export const getVideoPhaseAction = async (assetId: string) => {
   }
 };
 
-/**
- * Retrieves the video URL for a given identifier, supporting both playbackId and assetId.
- * This function makes all videos playable, including older ones that don't have an assetId.
- *
- * @param {string} identifier - The unique identifier for the video. This can be either a playbackId or an assetId.
- * @param {'assetId' | 'playbackId'} type - Specifies whether the identifier is an 'assetId' or a 'playbackId'.
- * @returns {Promise<string | null>} A promise that resolves to the video URL if successful, or null if unsuccessful.
- *
- * @example
- * // Using with a playbackId
- * const videoUrl = await getVideoUrlAction(session.playbackId, 'playbackId');
- *
- * @example
- * // Using with an assetId
- * const videoUrl = await getVideoUrlAction(session.assetId!, 'assetId');
- *
- * @throws {Error} If there's an issue fetching the asset or building the URL.
- */
 export const getVideoUrlAction = async (
-  identifier: string,
-  type: 'assetId' | 'playbackId'
+  session: IExtendedSession
 ): Promise<string | null> => {
   try {
-    if (type === 'playbackId') {
-      // If type is playbackId, simply build the full URL
-      return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${identifier}/index.m3u8`;
-    } else if (type === 'assetId') {
-      // If type is assetId, use the fetch call to retrieve the videoUrl directly
-      const asset = await fetchAsset({ assetId: identifier });
-      console.log(asset);
+    if (session.assetId) {
+      const asset = await fetchAsset({ assetId: session.assetId });
       if (asset?.playbackUrl) {
         return asset.playbackUrl;
       }
+    } else {
+      return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${session.playbackId}/index.m3u8`;
     }
 
     return null;
   } catch (e) {
-    console.error('Error fetching asset or building URL:', identifier);
+    console.error('Error fetching asset or building URL');
     return null;
   }
 };

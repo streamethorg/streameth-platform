@@ -34,17 +34,8 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
 
   // Check if session exists and has a playbackId. If not, return a 'not found' response.
   if (!session?.playbackId) return notFound();
-  // Determine which identifier to use. Prioritize assetId if it exists, otherwise use playbackId.
-  const identifier = session.assetId || session.playbackId;
-  // Set the idType based on which identifier we're using.
-  // This ternary operation will set 'assetId' if session.assetId exists, otherwise 'playbackId'.
-  const idType = session.assetId ? 'assetId' : 'playbackId';
 
-  // Log which type of identifier we're using for debugging purposes.
-  // console.log(`Using ${idType} for video retrieval: ${identifier}`);
-
-  // Attempt to get the video URL using the determined identifier and type.
-  const videoUrl = await getVideoUrlAction(identifier, idType);
+  const videoUrl = await getVideoUrlAction(session);
 
   // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();

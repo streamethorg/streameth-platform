@@ -82,11 +82,11 @@ const EmbedPage = async ({ searchParams }: EmbedPageParams) => {
       session: searchParams.session,
     });
 
-    if (!session || (!session.playbackId && !session.assetId)) {
+    if (!session || !session.playbackId) {
       return notFound();
     }
 
-    const videoUrl = await getVideoUrlAction(session.assetId as string);
+    const videoUrl = await getVideoUrlAction(session);
 
     if (!videoUrl) {
       return notFound();
