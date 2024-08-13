@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { SiTwitter } from 'react-icons/si';
+import { SiX } from 'react-icons/si';
 import { IExtendedOrganization } from '@/lib/types';
 import { uploadSessionToYouTubeAction } from '@/lib/actions/sessions';
 import { toast } from 'sonner';
@@ -65,13 +65,13 @@ const UploadTwitterButton = ({
     <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger>
         <Button className="min-w-[200px] bg-[#121212]">
-          <SiTwitter className="mr-2" /> Publish to X(Twitter) (Coming Soon)
+          <SiX className="mr-2" /> Publish to X(Twitter) (Coming Soon)
         </Button>
       </DialogTrigger>
-      <DialogContent className="z-[99999999999999999] px-8">
+      <DialogContent className="px-8 z-[99999999999999999]">
         <p className="font-medium">Select Twitter Destination</p>
 
-        <div className="flex flex-wrap items-center gap-5 py-5">
+        <div className="flex flex-wrap gap-5 items-center py-5">
           {organization?.socials
             ?.filter((s) => s.type == 'twitter')
             .map(({ name, thumbnail, _id }) => (
@@ -83,17 +83,17 @@ const UploadTwitterButton = ({
                 }`}
               >
                 <div
-                  className="h-14 w-14 cursor-pointer rounded-full bg-cover bg-center"
+                  className="w-14 h-14 bg-center bg-cover rounded-full cursor-pointer"
                   style={{
                     backgroundImage: `url(${thumbnail})`,
                   }}
                 ></div>
-                <p className="line-clamp-1 text-sm">{name}</p>
+                <p className="text-sm line-clamp-1">{name}</p>
               </div>
             ))}
           <div
             onClick={handleTwitterConnect}
-            className="flex cursor-pointer flex-col items-center"
+            className="flex flex-col items-center cursor-pointer"
           >
             <CiCirclePlus color="#000" size={56} />
             <p className="text-sm">Add New</p>
