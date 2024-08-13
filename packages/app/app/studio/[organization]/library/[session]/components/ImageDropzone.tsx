@@ -6,7 +6,7 @@ import { getImageUrl } from '@/lib/utils/utils';
 import { toast } from 'sonner';
 import { useCallback, useState, forwardRef } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
+import { resizeImage } from '@/lib/utils/resizeImage';
 
 interface ImageDropzoneProps {
   id?: string;
@@ -23,73 +23,6 @@ function getImageData(file: File) {
   const displayUrl = URL.createObjectURL(file);
   return { files, displayUrl };
 }
-
-export const resizeImage = async (
-  file: File,
-  options = {
-    width: 1280,
-    height: 720,
-    contentType: 'image/jpeg',
-    quality: 0.9,
-  }
-): Promise<File> => {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = function () {
-      const canvas = document.createElement('canvas');
-      canvas.width = options.width;
-      canvas.height = options.height;
-      const ctx = canvas.getContext('2d');
-
-      if (!ctx) {
-        reject(new Error('Failed to get canvas context'));
-        return;
-      }
-
-      // Calculate dimensions to maintain aspect ratio and fill the canvas
-      const scale = Math.max(
-        canvas.width / img.width,
-        canvas.height / img.height
-      );
-      const x = canvas.width / 2 - (img.width / 2) * scale;
-      const y = canvas.height / 2 - (img.height / 2) * scale;
-
-      // Draw image on canvas, cropping if necessary
-      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) {
-            reject(new Error('Failed to create blob'));
-            return;
-          }
-          // Create a new File object
-          const resizedFile = new File([blob], file.name, {
-            type: options.contentType,
-            lastModified: new Date().getTime(),
-          });
-          resolve(resizedFile);
-        },
-        options.contentType,
-        options.quality
-      );
-    };
-
-    img.onerror = function () {
-      reject(new Error('Failed to load image'));
-    };
-
-    // Read the file and set the result as the img src
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      img.src = e.target?.result as string;
-    };
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
-    };
-    reader.readAsDataURL(file);
-  });
-};
 
 const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
   (props, ref) => {
