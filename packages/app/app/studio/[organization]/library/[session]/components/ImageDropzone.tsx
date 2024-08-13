@@ -1,11 +1,12 @@
 'use client';
 
-import Image from 'next/image';
+import NextImage from 'next/image';
 import { ImageUp, X } from 'lucide-react';
 import { getImageUrl } from '@/lib/utils/utils';
 import { toast } from 'sonner';
 import { useCallback, useState, forwardRef } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 
 interface ImageDropzoneProps {
   id?: string;
@@ -17,13 +18,78 @@ interface ImageDropzoneProps {
 
 function getImageData(file: File) {
   const dataTransfer = new DataTransfer();
-
   dataTransfer.items.add(file);
-
   const files = dataTransfer.files;
   const displayUrl = URL.createObjectURL(file);
   return { files, displayUrl };
 }
+
+export const resizeImage = async (
+  file: File,
+  options = {
+    width: 1280,
+    height: 720,
+    contentType: 'image/jpeg',
+    quality: 0.9,
+  }
+): Promise<File> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = function () {
+      const canvas = document.createElement('canvas');
+      canvas.width = options.width;
+      canvas.height = options.height;
+      const ctx = canvas.getContext('2d');
+
+      if (!ctx) {
+        reject(new Error('Failed to get canvas context'));
+        return;
+      }
+
+      // Calculate dimensions to maintain aspect ratio and fill the canvas
+      const scale = Math.max(
+        canvas.width / img.width,
+        canvas.height / img.height
+      );
+      const x = canvas.width / 2 - (img.width / 2) * scale;
+      const y = canvas.height / 2 - (img.height / 2) * scale;
+
+      // Draw image on canvas, cropping if necessary
+      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error('Failed to create blob'));
+            return;
+          }
+          // Create a new File object
+          const resizedFile = new File([blob], file.name, {
+            type: options.contentType,
+            lastModified: new Date().getTime(),
+          });
+          resolve(resizedFile);
+        },
+        options.contentType,
+        options.quality
+      );
+    };
+
+    img.onerror = function () {
+      reject(new Error('Failed to load image'));
+    };
+
+    // Read the file and set the result as the img src
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = () => {
+      reject(new Error('Failed to read file'));
+    };
+    reader.readAsDataURL(file);
+  });
+};
 
 const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
   (props, ref) => {
@@ -37,8 +103,9 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
       if (!file) return;
       setIsUploading(true);
       try {
+        const processedFile = await resizeImage(file);
         const data = new FormData();
-        data.set('file', file);
+        data.set('file', processedFile);
         data.set('path', path);
         const res = await fetch('/api/upload', {
           method: 'POST',
@@ -47,11 +114,11 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
         if (!res.ok) {
           throw new Error(await res.text());
         }
-        onChange(getImageUrl('/' + path + '/' + file.name));
+        console.log(getImageUrl('/' + path + '/' + processedFile.name));
+        onChange(getImageUrl('/' + path + '/' + processedFile.name));
         toast.success('Image uploaded successfully');
         setIsUploading(false);
-      } catch (e: any) {
-        // Handle errors here
+      } catch (e) {
         setIsUploading(false);
         toast.error('Error uploading image');
         console.error(e);
@@ -59,12 +126,15 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
     };
 
     const onDrop = useCallback(
-      (acceptedFiles: File[]) => {
+      async (acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
-          const { displayUrl } = getImageData(acceptedFiles[0]);
+          const processedFile = await resizeImage(acceptedFiles[0]);
+          const { displayUrl } = getImageData(processedFile);
+
+          console.log(displayUrl);
 
           setPreview(displayUrl);
-          onSubmit(acceptedFiles[0]);
+          onSubmit(processedFile);
         }
       },
       [onChange]
@@ -72,9 +142,9 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
 
     const { getRootProps, getInputProps } = useDropzone({
       accept: {
-        'image/*': ['.png', '.jpg', '.jpeg'],
+        'image/*': ['.png', '.jpg', '.gif'],
       },
-      maxSize: 5 * 1024 * 1024, // 5 MB
+      maxSize: 2 * 1024 * 1024, // 2 MB
       maxFiles: 1,
       onDrop,
     });
@@ -82,33 +152,34 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
     return (
       <div ref={ref} {...rest}>
         {isUploading ? (
-          <div className="z-10 flex h-40 items-center justify-center border border-dashed border-gray-400 bg-white transition">
+          <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
             <div className="text-sm">Uploading image...</div>
           </div>
         ) : preview ? (
-          <>
+          <div className="relative">
             <X
               size={24}
-              className="z-[9999999999994] ml-auto cursor-pointer rounded-md hover:bg-gray-300"
+              className="absolute top-2 right-2 z-20 rounded-md cursor-pointer hover:bg-gray-300"
               onClick={() => {
                 onChange(null);
                 setPreview('');
               }}
             />
-            <div className="z-10 flex h-40 items-center justify-center border border-dashed border-gray-400 bg-white transition">
-              <Image
+            <div className="flex justify-center w-full h-40 bg-white border-2 border-gray-300 border-dashed">
+              <NextImage
                 src={preview ?? value}
                 alt="preview"
-                quality={50}
-                width={150}
-                height={150}
+                className="object-contain w-[50%]"
+                quality={40}
+                width={1280}
+                height={720}
               />
             </div>
-          </>
+          </div>
         ) : (
           <div
             {...getRootProps()}
-            className="z-10 flex h-40 cursor-pointer flex-col items-center justify-center space-y-4 rounded-md border-2 border-dashed border-gray-300 bg-white text-sm transition-colors hover:bg-gray-200"
+            className="flex z-10 flex-col justify-center items-center space-y-4 h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200"
           >
             <ImageUp size={35} />
             <input {...getInputProps()} />
@@ -117,7 +188,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
                 Drag and drop your thumbnail to upload... Or just click here!
               </p>
               <p>
-                Maximum image file size is 1MB. Best resolution of 1920 x 1080.
+                Maximum image file size is 5MB. Best resolution is 1920 x 1080.
                 Aspect ratio of 16:9
               </p>
             </div>

@@ -77,7 +77,7 @@ const UploadVideoForm = ({
       .then(async (session) => {
         onFinish();
 
-        const state = await createStateAction({
+        await createStateAction({
           state: {
             sessionId: session._id,
             type: StateType.video,
@@ -103,7 +103,7 @@ const UploadVideoForm = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <div className="flex items-center justify-between space-x-2">
+              <div className="flex justify-between items-center space-x-2">
                 <FormLabel required>Video title</FormLabel>
                 <FormMessage />
               </div>
@@ -118,7 +118,7 @@ const UploadVideoForm = ({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <div className="flex items-center justify-between space-x-2">
+              <div className="flex justify-between items-center space-x-2">
                 <FormLabel required>Description</FormLabel>
                 <FormMessage />
               </div>
@@ -135,7 +135,7 @@ const UploadVideoForm = ({
             <FormItem>
               <FormLabel>Visibility</FormLabel>
               <FormControl>
-                <div className="flex items-center justify-start space-x-2">
+                <div className="flex justify-start items-center space-x-2">
                   {field.value ? (
                     <>
                       <Earth size={16} />
@@ -151,7 +151,7 @@ const UploadVideoForm = ({
                     <PopoverTrigger>
                       <ChevronDown size={20} />
                     </PopoverTrigger>
-                    <PopoverContent className="z-[999999999999999] flex w-[150px] cursor-pointer items-center justify-start space-x-2 transition-colors hover:bg-gray-200">
+                    <PopoverContent className="flex justify-start items-center space-x-2 transition-colors cursor-pointer hover:bg-gray-200 z-[999999999999999] w-[150px]">
                       {!field.value ? (
                         <div
                           onClick={() => field.onChange(true)}
@@ -225,7 +225,7 @@ const UploadVideoForm = ({
           >
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
                 Please wait...
               </>
             ) : (
