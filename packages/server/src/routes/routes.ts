@@ -32,7 +32,7 @@ import { expressAuthentication } from './../middlewares/auth.middleware';
 // @ts-ignore - no great way to install types from subpackage
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 const multer = require('multer');
-
+const upload = multer({"limits":{"fileSize":8388608}});
 
 const expressAuthenticationRecasted = expressAuthentication as (req: ExRequest, securityName: string, scopes?: string[], res?: ExResponse) => Promise<any>;
 
@@ -97,15 +97,6 @@ const models: TsoaRoute.Models = {
         },
         "additionalProperties": false,
     },
-<<<<<<< HEAD
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_IUser_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"IUser"},
-=======
     additionalProperties: false,
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -481,7 +472,6 @@ const models: TsoaRoute.Models = {
         nestedProperties: {
           ingestUrl: { dataType: 'string', required: true },
           streamKey: { dataType: 'string', required: true },
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
         },
         "additionalProperties": false,
     },
@@ -496,17 +486,6 @@ const models: TsoaRoute.Models = {
         },
         "additionalProperties": false,
     },
-<<<<<<< HEAD
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_ISupport_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"ISupport"},
-        },
-        "additionalProperties": false,
-=======
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   'Omit_ISpeaker.organizationId_': {
@@ -622,7 +601,6 @@ const models: TsoaRoute.Models = {
       firebaseId: { dataType: 'string' },
       talkType: { dataType: 'string' },
       clippingStatus: { ref: 'ClippingStatus' },
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateSupportTicketDto": {
@@ -688,15 +666,11 @@ const models: TsoaRoute.Models = {
             "targetId": {"dataType":"string","required":true},
             "organizationId": {"dataType":"string","required":true},
         },
-<<<<<<< HEAD
-        "additionalProperties": false,
-=======
         firebaseId: { dataType: 'string' },
         talkType: { dataType: 'string' },
         clippingStatus: { ref: 'ClippingStatus' },
       },
       validators: {},
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse__url-string--assetId-string__": {
@@ -706,15 +680,11 @@ const models: TsoaRoute.Models = {
             "message": {"dataType":"string","required":true},
             "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"assetId":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
         },
-<<<<<<< HEAD
-        "additionalProperties": false,
-=======
       },
       firebaseId: { dataType: 'string' },
       talkType: { dataType: 'string' },
       clippingStatus: { ref: 'ClippingStatus' },
       autolabels: { dataType: 'array', array: { dataType: 'string' } },
->>>>>>> 3752630a (⚡Displacy video processing error on the App)
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_string_": {
@@ -1670,19 +1640,11 @@ const templateService = new ExpressTemplateService(models, {"noImplicitAdditiona
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-
-
-
-export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof multer>}) {
-
+export function RegisterRoutes(app: Router) {
     // ###########################################################################################################
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-
-    const upload = opts?.multer ||  multer({"limits":{"fileSize":8388608}});
-
-    
         app.get('/users/:walletAddress',
             authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(UserController)),
