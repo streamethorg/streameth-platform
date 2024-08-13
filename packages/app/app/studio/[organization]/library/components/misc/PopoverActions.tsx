@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Copy, Eye, FilePenLine, Share2, Trash2 } from 'lucide-react';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -21,9 +21,17 @@ export const PopoverActions = ({
   organizationSlug: string;
   layout: eLayout;
 }): ReactNode => {
-  const url = `${
-    location.origin
-  }/${organizationSlug}/watch?session=${session._id.toString()}`;
+  const [url, setUrl] = useState('');
+  useEffect(() => {
+    // This code will only run on the client side
+    if (typeof window === 'undefined') return;
+    setUrl(
+      `${
+        window?.location?.origin
+      }/${organizationSlug}/watch?session=${session._id.toString()}`
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(session.ipfsURI as string);
