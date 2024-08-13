@@ -21,13 +21,13 @@ import SessionInfoBox from '@/components/sessions/SessionInfoBox';
 import ChannelDescription from './components/ChannelDescription';
 import { livestreamMetadata, generalMetadata } from '@/lib/utils/metadata';
 
-export async function generateStaticParams() {
-  const organizations = await fetchOrganizations();
-  const paths = organizations.map((organization) => ({
-    organization: organization.slug,
-  }));
-  return paths;
-}
+// export async function generateStaticParams() {
+//   const organizations = await fetchOrganizations();
+//   const paths = organizations.map((organization) => ({
+//     organization: organization.slug,
+//   }));
+//   return paths;
+// }
 
 const OrganizationHome = async ({
   params,
