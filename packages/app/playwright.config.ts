@@ -1,7 +1,9 @@
 import { defineConfig, devices } from '@playwright/test'
 import path from 'path';
+import { validateEnvs } from './tests/utils/validateEnvs';
 
-require('dotenv').config({path: path.resolve(__dirname, 'test.env')})
+require('dotenv').config({ path: path.resolve(__dirname, '.env.test') })
+validateEnvs()
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -44,29 +46,15 @@ export default defineConfig({
       dependencies: ['setup'],
     },
 
-    //{
-    //  name: 'webkit',
-    //  use: { ...devices['Desktop Safari'] },
-    //},
-
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
+    //{
+    //  name: 'Mobile Chrome',
+    //  use: { ...devices['Pixel 5'] },
+    //  dependencies: ['setup'],
+    //},
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
 
