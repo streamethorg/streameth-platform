@@ -47,17 +47,17 @@ export default async function Watch({
   }
 
   if (!searchParams.session) return notFound();
+
   const session = await fetchSession({
     session: searchParams.session,
   });
 
-  if (!session || (!session.playbackId && !session.assetId)) return notFound();
+  // Check if session exists and has a playbackId. If not, return a 'not found' response.
+  if (!session?.playbackId) return notFound();
 
-  const videoUrl = await getVideoUrlAction(session.assetId as string);
-
-  if (!videoUrl) {
-    return notFound();
-  }
+  const videoUrl = await getVideoUrlAction(session);
+  // If we couldn't get a video URL, return a 'not found' response.
+  if (!videoUrl) return notFound();
 
   const thumbnail = await generateThumbnailAction(session);
 
