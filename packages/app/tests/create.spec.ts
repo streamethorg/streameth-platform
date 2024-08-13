@@ -1,31 +1,7 @@
-import { test as base, expect, Page } from '@playwright/test';
-import path from 'path';
-import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
+import { test as base, expect } from '@playwright/test';
 import crypto from 'crypto';
-import fs from 'fs';
-
-const setFile = async (page: Page, maxRetries = 3, retryDelay = 1000) => {
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-
-  // Ensure the file exists
-  if (!fs.existsSync(logoPath)) {
-    throw new Error(`Logo file not found at ${logoPath}`);
-  }
-
-  const fileChooserPromise = page.waitForEvent('filechooser');
-
-  await page.locator('label').nth(1).click();
-  const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(logoPath);
-
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeVisible();
-  console.log('Image upload successful');
-  await expect(
-    page.getByText('Image uploaded successfully').first()
-  ).toBeHidden({ timeout: 7000 });
-};
+import { fetchOrganizations } from '@/lib/services/organizationService';
+import { setFile } from './utils/setFile';
 
 const generateShortId = () => {
   return crypto.randomBytes(3).toString('hex');
@@ -55,29 +31,13 @@ test.afterEach(async ({ request, context, orgId }) => {
       return;
     }
 
-    // Step 2: GET request to find the organization ID
-    const getResponse = await request.get(`${API_URL}/organizations`, {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    });
-
-    if (!getResponse.ok()) {
-      console.error(
-        `Failed to fetch organizations. Status: ${getResponse.status()}`
-      );
-      return;
-    }
-
-    const responseBody = await getResponse.json();
-    const organizations: IOrganization[] = responseBody.data;
-
+    const organizations = await fetchOrganizations();
     const testOrg = organizations.find((org) => org.name === orgId);
 
     if (testOrg) {
       const organizationId = testOrg._id?.toString();
 
-      // Step 3: DELETE request to remove the organization
+      // Step 2: DELETE request to remove the organization
       const deleteResponse = await request.delete(
         `${API_URL}/organizations/${organizationId}`,
         {
