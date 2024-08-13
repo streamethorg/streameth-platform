@@ -294,7 +294,7 @@ const models: TsoaRoute.Models = {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   StateStatus: {
     dataType: 'refEnum',
-    enums: ['pending', 'completed', 'canceled', 'sync', 'error'],
+    enums: ['pending', 'completed', 'canceled', 'sync', 'failed'],
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   StateType: {
@@ -797,6 +797,11 @@ const models: TsoaRoute.Models = {
     enums: ['clip', 'livestream', 'video'],
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  ClippingStatus: {
+    dataType: 'refEnum',
+    enums: ['pending', 'failed', 'completed'],
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   ISession: {
     dataType: 'refObject',
     properties: {
@@ -869,6 +874,7 @@ const models: TsoaRoute.Models = {
       },
       firebaseId: { dataType: 'string' },
       talkType: { dataType: 'string' },
+      clippingStatus: { ref: 'ClippingStatus' },
     },
     additionalProperties: false,
   },
@@ -956,6 +962,7 @@ const models: TsoaRoute.Models = {
         },
         firebaseId: { dataType: 'string' },
         talkType: { dataType: 'string' },
+        clippingStatus: { ref: 'ClippingStatus' },
       },
       validators: {},
     },
@@ -1014,6 +1021,7 @@ const models: TsoaRoute.Models = {
       },
       firebaseId: { dataType: 'string' },
       talkType: { dataType: 'string' },
+      clippingStatus: { ref: 'ClippingStatus' },
       autolabels: { dataType: 'array', array: { dataType: 'string' } },
     },
     additionalProperties: false,

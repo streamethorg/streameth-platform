@@ -327,7 +327,7 @@ export const generateThumbnail = async (data: {
       ) ?? [];
 
     if (lpThumbnails.length > 0) {
-      return lpThumbnails[0].url.replace('thumbnails.vtt', 'keyframes_0.jpg');
+      return lpThumbnails[0].url.replace('thumbnails.vtt', 'keyframes_0.png');
     }
   } catch (e) {
     throw new HttpException(400, 'Error generating thumbnail');

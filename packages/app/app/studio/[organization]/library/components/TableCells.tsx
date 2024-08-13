@@ -14,6 +14,7 @@ import {
 import { generateThumbnailAction } from '@/lib/actions/sessions';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import PublishCell from './PublishCell';
+import { ClippingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 
 const TableCells = async ({
   item,
@@ -27,7 +28,10 @@ const TableCells = async ({
     await fetchSessionMetrics({ playbackId: item.playbackId ?? '' })
   ).viewCount;
 
-  if (!item.videoUrl) {
+  if (
+    item.clippingStatus === ClippingStatus.pending ||
+    item.clippingStatus === ClippingStatus.failed
+  ) {
     return <ProcessingSkeleton item={item} />;
   }
 
