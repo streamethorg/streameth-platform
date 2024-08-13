@@ -34,31 +34,31 @@ test.afterEach(async ({ request, context, orgId }) => {
     const organizations = await fetchOrganizations();
     const testOrg = organizations.find((org) => org.name === orgId);
 
-    if (testOrg) {
-      const organizationId = testOrg._id?.toString();
-
-      // Step 2: DELETE request to remove the organization
-      const deleteResponse = await request.delete(
-        `${API_URL}/organizations/${organizationId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
-
-      if (deleteResponse.ok()) {
-        console.log(`Organization with ID ${organizationId} has been deleted.`);
-      } else {
-        console.error(
-          `Failed to delete organization. Status: ${deleteResponse.status()}`
-        );
-      }
-    } else {
+    if (!testOrg) {
       console.log(
         'Test organization not found. It may have already been deleted or was not created.'
       );
     }
+
+    const organizationId = testOrg?._id?.toString();
+
+    // Step 2: DELETE request to remove the organization
+    const deleteResponse = await request.delete(
+      `${API_URL}/organizations/${organizationId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
+
+    if (!deleteResponse.ok()) {
+      console.error(
+        `Failed to delete organization. Status: ${deleteResponse.status()}`
+      );
+    }
+
+    console.log(`Organization with ID ${organizationId} has been deleted.`);
   } catch (error) {
     console.error('Error in cleanup process:', error);
   }
