@@ -225,7 +225,7 @@ const PCNavBar = ({
                 variant={'outline'}
                 onClick={handleGoBack}
               >
-                <div className="flex">
+                <div className="flex items-center">
                   <IconLeft className="mr-1" /> Go back
                 </div>
               </Button>
