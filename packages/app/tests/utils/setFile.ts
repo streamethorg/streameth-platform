@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 export const setFile = async (page: Page) => {
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
+  const logoPath = path.join(__dirname, '..', '..', 'public', 'logo.png');
 
   // Ensure the file exists
   if (!fs.existsSync(logoPath)) {
