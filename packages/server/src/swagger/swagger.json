@@ -420,7 +420,7 @@
         "type": "string"
       },
       "StateStatus": {
-        "enum": ["pending", "completed", "canceled", "sync", "error"],
+        "enum": ["pending", "completed", "canceled", "sync", "failed"],
         "type": "string"
       },
       "StateType": {
@@ -1268,6 +1268,10 @@
         "enum": ["clip", "livestream", "video"],
         "type": "string"
       },
+      "ClippingStatus": {
+        "enum": ["pending", "failed", "completed"],
+        "type": "string"
+      },
       "ISession": {
         "properties": {
           "_id": {
@@ -1422,6 +1426,9 @@
           },
           "talkType": {
             "type": "string"
+          },
+          "clippingStatus": {
+            "$ref": "#/components/schemas/ClippingStatus"
           }
         },
         "required": [
@@ -1602,6 +1609,9 @@
           },
           "talkType": {
             "type": "string"
+          },
+          "clippingStatus": {
+            "$ref": "#/components/schemas/ClippingStatus"
           }
         },
         "required": [
@@ -1745,6 +1755,9 @@
           },
           "talkType": {
             "type": "string"
+          },
+          "clippingStatus": {
+            "$ref": "#/components/schemas/ClippingStatus"
           },
           "autolabels": {
             "items": {
@@ -1934,9 +1947,21 @@
             "type": "string"
           },
           "token": {
-            "type": "string"
+            "properties": {
+              "secret": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              }
+            },
+            "required": ["secret"],
+            "type": "object"
           },
           "type": {
+            "type": "string"
+          },
+          "text": {
             "type": "string"
           }
         },

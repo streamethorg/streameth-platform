@@ -10,7 +10,7 @@ interface ITerm {
 }
 const useSearchParams = () => {
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const { push } = useRouter();
   const searchParams = useNextSearchParams();
 
   function handleTermChange(terms: ITerm[]) {
@@ -21,9 +21,12 @@ const useSearchParams = () => {
       } else {
         params.delete(term.key);
       }
-      replace(`${pathname}?${params.toString()}`);
+      push(`${pathname}?${params.toString()}`, {
+        scroll: false,
+      });
     }
   }
+
   return {
     searchParams,
     handleTermChange,

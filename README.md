@@ -1,89 +1,52 @@
-# StreamETH Platform
+# StreamETH Platform 🎥🌐
 
-Welcome to the StreamETH platform repository! StreamETH produces world class Virtual Events and Marketing Content. This README provides you with all the necessary information to understand our platform, contribute to it, and get it up and running on your local machine.
+Welcome to the StreamETH platform repository! StreamETH produces world-class Virtual Events and Marketing Content. This README provides you with essential information about our platform. 🚀
 
-## Website Additions
+If you are planning on hosting an event, you can contact us by filling this [Typeform](https://xg2nwufp1ju.typeform.com/to/UHZwa5M3?typeform-source=info.streameth.org)
 
-For a better understanding of what StreamETH offers and how it functions, please visit our websites:
-
-- **Public Website**: [streameth.org](https://streameth.org) - Discover what StreamETH is all about and the unique features we offer.
-- **Application Site**: [app.streameth.org](https://app.streameth.org) - Interact with the StreamETH application.
-
-## Documentation Resources
-
-You can find detailed documentation on StreamETH's features and architecture here:
-
-- **[Documentation Link](#)**: Dive deep into the technical details and operational aspects of StreamETH.
-
-## StreamETH-Platform Summary
+## StreamETH-Platform Summary 📋
 
 StreamETH is designed to provide a seamless and flexible platform for hosting and attending events virtually or in a hybrid setting. It features:
 
-- **Interactive Sessions**: Engage with speakers and attendees through live.
-- **Scalability**: Cater to events of any size, from small gatherings to large conferences.
-- **Customisation**: Tailor the event experience to meet the specific needs of your audience.
+- **Interactive Sessions**: Engage with speakers and attendees through live. 💬
+- **Scalability**: Cater to events of any size, from small gatherings to large conferences. 📈
+- **Customisation**: Tailor the event experience to meet the specific needs of your audience. 🎨
 
-## Goals of StreamETH
+## Website Links 🌐
+
+For a better understanding of what StreamETH offers and how it functions, please visit our websites:
+
+- **Public Website**: [streameth.org](https://streameth.org) - Discover what StreamETH is all about and the unique features we offer. 🏠
+- **Application Site**: [streameth.org/studio](https://streameth.org/studio) - Interact with the StreamETH application. 🎬
+- **Create an event with us**: [Create Event](https://xg2nwufp1ju.typeform.com/to/UHZwa5M3?typeform-source=info.streameth.org)
+
+## Goals of StreamETH 🎯
 
 Our mission with StreamETH is to:
 
-- Offer a sustainable and inclusive event-hosting platform.
-- Continuously enhance user experience with innovative features.
-- Foster a community-driven approach to virtual event management.
+- Offer a sustainable and inclusive event-hosting platform. 🌱
+- Continuously enhance user experience with innovative features. 💡
+- Foster a community-driven approach to virtual event management. 🤝
+- Be the go-to event management platform for pre-production, production, and post-production 🎯
 
-## Setup Quickstart
+## Submitting Issues 🐛
 
-Setting up the StreamETH platform for development is straightforward. Here’s a quick rundown:
+If you encounter any bugs, have feature requests, or want to suggest improvements, please open an issue on our GitHub repository by clicking [here](https://github.com/streamethorg/streameth-platform/issues). Your feedback helps us improve StreamETH for everyone. 📝
 
-### Prerequisites
+## ⚠️ Important Notice for Developers 🛠️
 
-- Node.js (v18 or above)
-- Yarn
-- Git
+**Please Note**: At this time, StreamETH is not open for external code contributions. We are a small team focused on delivering a high-quality product, and we are not currently set up to manage external developer code contributions effectively. We appreciate your interest, but we kindly ask that you refrain from submitting pull requests or expecting to contribute code at this stage. 🙏
 
-### Environment Variables
+However, we do welcome and appreciate [issue submissions!](https://github.com/streamethorg/streameth-platform/issues) If you encounter bugs 🐛, have feature requests, or want to provide suggestions, please feel free to open an issue. Your feedback is valuable to us. 🐛💡
 
-Create a `.env` file at the root of the project and include the following variables:
+We plan to support full developer contributions in the future once we feel ready to manage them properly. We will update this README when that time comes. Thank you for your understanding. 🌟
 
-```bash
-# Session secret key
-SESSION_SECRET=Generate key: "openssl rand -base64 64"
+## Future Updates 🔮
 
-# WalletConnect Project ID
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id_here
+We value the community's interest in our project. We will update this README when we are ready to welcome full external contributions. Thank you for your patience and support as we continue to develop and improve StreamETH. 🙌
 
-# Infura Project ID
-NEXT_PUBLIC_INFURA_ID=your_infura_project_id_here
+Stay tuned for exciting updates and features! 🎉
 
-# Sanity Studio API Key
-NEXT_PUBLIC_STUDIO_API_KEY=your_Livepeer_studio_api_key_here
+## Support
 
-# Service Account Private Key for server-to-server interactions
-SERVICE_ACCOUNT_PRIVATE_KEY=your_service_account_private_key_here
-
-# Service Account Email
-SERVICE_ACCOUNT_EMAIL=your_service_account_email_here
-
-# Google API Key for services like Google Maps, etc.
-GOOGLE_API_KEY=your_google_api_key_here
-```
-
-Make sure to replace your_..._here with your actual environment variable values.
-
-### Running Locally
-
-```bash
-git clone git@github.com:streamethorg/streameth-platform.git
-cd streameth-platform
-yarn install
-yarn dev # or yarn dev
-```
-
-## Contribution Guidelines
-
-We welcome contributions from everyone. To contribute:
-
-- **Issues**: Feel free to submit issues for bug reports, feature requests, or suggestions through our [Issues tab](#).
-- **Pull Requests**: If you wish to contribute code, please make a pull request (PR) with a clear list of what you've done.
-
-Read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed information on how to contribute, commit messages, and the code review process.
+We're here to help! If you have questions about our platform, please don't hesitate to reach out to support@streameth.org.

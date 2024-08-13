@@ -7,13 +7,12 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { generateThumbnailAction } from '@/lib/actions/sessions';
+import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { EllipsisVertical } from 'lucide-react';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
 
 const VideoCardWithMenu = ({
   session,
@@ -26,22 +25,7 @@ const VideoCardWithMenu = ({
   DropdownMenuItems?: ReactNode;
   link: string;
 }) => {
-  const [thumbnail, setThumbnail] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    const getThumbnail = async (session: IExtendedSession) => {
-      try {
-        const generatedThumbnail = await generateThumbnailAction(session);
-        setThumbnail(generatedThumbnail);
-      } catch (error) {
-        console.error('Failed to generate thumbnail:', error);
-      }
-    };
-
-    if (session) {
-      getThumbnail(session);
-    }
-  }, [session]);
+  const thumbnail = useGenerateThumbnail({ session });
 
   return (
     <div className="flex min-h-full w-full flex-col rounded-xl uppercase">

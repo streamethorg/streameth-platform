@@ -96,8 +96,8 @@ const SupportForm = ({
               <FormItem className="mt-4 flex rounded-xl border border-dashed">
                 <FormControl>
                   <ImageUpload
-                    placeholder="Click to upload image here. "
-                    className="m-auto h-full w-full bg-neutrals-300 py-4 text-black"
+                    placeholder="Click to upload image here. (Optional) "
+                    className="m-auto min-h-[200px] w-full bg-neutrals-300 py-4 text-black"
                     aspectRatio={1}
                     path={`support`}
                     {...field}

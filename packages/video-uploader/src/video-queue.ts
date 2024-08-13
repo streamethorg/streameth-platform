@@ -5,6 +5,7 @@ import fs from 'fs';
 import { logger } from './utils/logger';
 import { config } from 'dotenv';
 import { MongoClient, ObjectId } from 'mongodb';
+import { uploadToTwitter } from './utils/twitter';
 config();
 
 const client = new MongoClient(process.env.DB_HOST);
@@ -39,11 +40,24 @@ async function videoUploader() {
           data.session.slug,
           './tmp'
         );
-        await uploadToYouTube(
-          data.session,
-          `./tmp/${data.session.slug}.mp4`,
-          data.token
-        );
+        switch (data.type) {
+          case 'youtube':
+            await uploadToYouTube(
+              data.session,
+              `./tmp/${data.session.slug}.mp4`,
+              data.token.secret
+            );
+            break;
+          case 'twitter':
+            await uploadToTwitter(
+              data.session,
+              `./tmp/${data.session.slug}.mp4`,
+              data.token
+            );
+            break;
+          default:
+            break;
+        }
         fs.unlinkSync(`./tmp/${data.session.slug}.mp4`);
         await sessions.findOneAndUpdate(
           { _id: ObjectId.createFromHexString(data.sessionId) },

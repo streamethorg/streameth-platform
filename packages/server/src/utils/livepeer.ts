@@ -12,6 +12,7 @@ import { createEventVideoById } from './firebase';
 import { deleteYoutubeLiveStream } from './youtube';
 import Organization from '@models/organization.model';
 import { refreshAccessToken } from './oauth';
+import { fetchAndParseVTT, parseVTT } from './util';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -327,7 +328,10 @@ export const generateThumbnail = async (data: {
       ) ?? [];
 
     if (lpThumbnails.length > 0) {
-      return lpThumbnails[0].url.replace('thumbnails.vtt', 'keyframes_0.jpg');
+      return lpThumbnails[0].url.replace(
+        'thumbnails.vtt',
+        `${await fetchAndParseVTT(lpThumbnails[0].url)}`,
+      );
     }
   } catch (e) {
     throw new HttpException(400, 'Error generating thumbnail');

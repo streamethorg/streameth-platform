@@ -39,7 +39,7 @@ const Destinations = async ({
       case 'youtube':
         return <SiYoutube color="#FF0000" className={className} />;
       case 'twitter':
-        return <SiX className={className} />;
+        return null;
       default:
         return <LuRadio color="#000" className={className} />;
     }
@@ -71,13 +71,19 @@ const Destinations = async ({
                 <TableRow key={_id}>
                   <TableCell className="flex items-center gap-4">
                     <div className="relative">
-                      <Image
-                        className="rounded-full"
-                        src={thumbnail!}
-                        width={50}
-                        height={50}
-                        alt={type}
-                      />
+                      {type === 'twitter' ? (
+                        <div className="bg-black w-[50px] h-[50px] rounded-full">
+                          <SiX color="#fff" className="w-full h-full p-3" />
+                        </div>
+                      ) : (
+                        <Image
+                          className="rounded-full"
+                          src={thumbnail!}
+                          width={50}
+                          height={50}
+                          alt={type}
+                        />
+                      )}
                       {renderSocialTypeIcon(type)}
                     </div>
 

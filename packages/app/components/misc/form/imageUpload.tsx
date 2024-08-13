@@ -12,6 +12,7 @@ import {
   Dialog,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -44,8 +45,10 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
           className="absolute right-2 top-2 z-10 cursor-pointer rounded-full border border-muted-foreground bg-white text-muted-foreground"
         />
       </DialogTrigger>
-      <DialogContent className="flex flex-col items-center justify-center gap-5">
-        <p className="text-xl">Are you sure you want to remove this image?</p>
+
+      <DialogContent className="flex flex-col items-center justify-center gap-5 z-[99999999999] ">
+        <DialogTitle>Delete Image</DialogTitle>
+        <p className="text-xl">Are you sure you want to delete this image?</p>
         <DialogFooter className="flex items-center gap-4">
           <Button onClick={() => setOpen(false)} variant="ghost">
             Cancel
