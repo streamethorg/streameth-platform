@@ -1,6 +1,6 @@
 'use client';
 
-import NextImage from 'next/image';
+import Image from 'next/image';
 import { ImageUp, X } from 'lucide-react';
 import { getImageUrl } from '@/lib/utils/utils';
 import { toast } from 'sonner';
@@ -36,10 +36,10 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
       if (!file) return;
       setIsUploading(true);
       try {
-        const processedFile = await resizeImage(file);
         const data = new FormData();
-        data.set('file', processedFile);
+        data.set('file', file);
         data.set('path', path);
+
         const res = await fetch('/api/upload', {
           method: 'POST',
           body: data,
@@ -47,8 +47,8 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
         if (!res.ok) {
           throw new Error(await res.text());
         }
-        console.log(getImageUrl('/' + path + '/' + processedFile.name));
-        onChange(getImageUrl('/' + path + '/' + processedFile.name));
+        onChange(getImageUrl('/' + path + '/' + file.name));
+
         toast.success('Image uploaded successfully');
         setIsUploading(false);
       } catch (e) {
@@ -63,8 +63,6 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
         if (acceptedFiles.length > 0) {
           const processedFile = await resizeImage(acceptedFiles[0]);
           const { displayUrl } = getImageData(processedFile);
-
-          console.log(displayUrl);
 
           setPreview(displayUrl);
           onSubmit(processedFile);
@@ -99,7 +97,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
               }}
             />
             <div className="flex justify-center w-full h-40 bg-white border-2 border-gray-300 border-dashed">
-              <NextImage
+              <Image
                 src={preview ?? value}
                 alt="preview"
                 className="object-contain w-[50%]"
@@ -121,7 +119,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
                 Drag and drop your thumbnail to upload... Or just click here!
               </p>
               <p>
-                Maximum image file size is 5MB. Best resolution is 1920 x 1080.
+                Maximum image file size is 2MB. Best resolution is 1920 x 1080.
                 Aspect ratio of 16:9
               </p>
             </div>
