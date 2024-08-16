@@ -6559,6 +6559,19 @@
     "@walletconnect/window-getters" "^1.0.1"
     tslib "1.14.1"
 
+"@zoralabs/protocol-deployments@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@zoralabs/protocol-deployments/-/protocol-deployments-0.3.0.tgz#4954cfa7564e152f5d668db4d8a650a17a295984"
+  integrity sha512-T8fVXQ3KC3qXcHfTG14Z6/vnY/2ImIhAjkFNhD3kWKtd8TaXVlLQ1Rqu13XCDP9HxvbmuaaXO/QUx8MHeQ+61g==
+
+"@zoralabs/protocol-sdk@^0.9.3":
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/@zoralabs/protocol-sdk/-/protocol-sdk-0.9.3.tgz#4fa83164ebfb0de03aa39b83c8198b79884ca973"
+  integrity sha512-w/aUShij65ylj3Sy70S7dKgQLUlcwXG65dUfJRtVSNlMqdCy/f312776DXEVxlTHqjtEi7EbSvFL0kcMRJUBeQ==
+  dependencies:
+    "@zoralabs/protocol-deployments" "^0.3.0"
+    abitype "^1.0.2"
+
 abbrev@1, abbrev@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -6573,6 +6586,11 @@ abitype@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/abitype/-/abitype-1.0.5.tgz#29d0daa3eea867ca90f7e4123144c1d1270774b6"
   integrity sha512-YzDhti7cjlfaBhHutMaboYB21Ha3rXR9QTkNJFzYC4kC8YclaiwPBBBJY8ejFdu2wnJeZCVZSMlQJ7fi8S6hsw==
+
+abitype@^1.0.2:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/abitype/-/abitype-1.0.6.tgz#76410903e1d88e34f1362746e2d407513c38565b"
+  integrity sha512-MMSqYh4+C/aVqI2RQaWqbvI4Kxo5cQV40WQ4QFtDnNzCkqChm8MuENhElmynZlO0qUy/ObkEUaXtKqYnx1Kp3A==
 
 abort-controller@^3.0.0:
   version "3.0.0"

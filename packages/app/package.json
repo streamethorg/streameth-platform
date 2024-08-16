@@ -44,6 +44,7 @@
     "@uiw/react-md-editor": "^4.0.3",
     "@vercel/analytics": "^1.0.2",
     "@vercel/speed-insights": "^1.0.2",
+    "@zoralabs/protocol-sdk": "^0.9.3",
     "autoprefixer": "10.4.14",
     "class-validator": "^0.14.0",
     "class-variance-authority": "^0.7.0",
