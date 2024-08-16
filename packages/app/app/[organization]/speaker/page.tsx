@@ -9,9 +9,9 @@ import { generalMetadata, watchMetadata } from '@/lib/utils/metadata';
 import { fetchSession } from '@/lib/services/sessionService';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { Suspense } from 'react';
-import WatchGrid from '../components/WatchGrid';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
+import { fetchSpeaker } from '@/lib/data';
 
 const Loading = () => {
   return (
@@ -45,11 +45,14 @@ const SpeakerPage = async ({ params, searchParams }: OrganizationPageProps) => {
     return notFound();
   }
 
-  if (!searchParams.session) return notFound();
+  if (!searchParams.session || !searchParams.speaker) return notFound();
 
   const session = await fetchSession({
     session: searchParams.session,
   });
+
+  const speaker = await fetchSpeaker({ speakerId: searchParams.speaker });
+  console.log(speaker);
 
   // Check if session exists and has a playbackId. If not, return a 'not found' response.
   if (!session?.playbackId) return notFound();
@@ -62,7 +65,7 @@ const SpeakerPage = async ({ params, searchParams }: OrganizationPageProps) => {
 
   return (
     <Suspense key={session._id} fallback={<Loading />}>
-      <div className="flex flex-col gap-4 w-full max-w-7xl h-full">
+      <div className="flex gap-4 w-full max-w-7xl h-full">
         <div className="flex flex-col w-2/3 h-full md:p-4">
           <PlayerWithControls
             name={session.name}
@@ -89,6 +92,10 @@ const SpeakerPage = async ({ params, searchParams }: OrganizationPageProps) => {
               video={session}
             />
           </div>
+        </div>
+        <div className="w-1/3">
+          <h1 className="ml-auto text-2xl font-bold">{speaker.name}</h1>
+          <p>{speaker.bio}</p>
         </div>
       </div>
     </Suspense>

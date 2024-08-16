@@ -132,6 +132,32 @@ export async function fetchEventSpeakers({
   }
 }
 
+export async function fetchSpeaker({
+  speakerId,
+}: {
+  speakerId: string;
+}): Promise<ISpeakerModel> {
+  try {
+    const response = await fetch(`${apiUrl()}/speakers/${speakerId}`);
+    return (await response.json()).data;
+  } catch (e) {
+    console.log(e);
+    throw 'Error fetching event speakers';
+  }
+}
+
+//export async function fetchSpeakers(): Promise<ISpeakerModel[]> {
+//  try {
+//    const response = await fetch(`${apiUrl()}/speakers`);
+//    const data = (await response.json()).data;
+//
+//    return data.map((speaker: ISpeakerModel) => speaker);
+//  } catch (e) {
+//    console.log(e);
+//    throw 'Error fetching event speakers';
+//  }
+//}
+
 export async function fetchNavBarRoutes({
   event,
   organization,
