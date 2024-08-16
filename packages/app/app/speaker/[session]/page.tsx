@@ -36,40 +36,37 @@ const Loading = () => {
   );
 };
 
-const SpeakerPage = async ({ params, searchParams }: OrganizationPageProps) => {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
+const SpeakerPage = async ({ params, searchParams }: any) => {
+  //const organization = await fetchOrganization({
+  //organizationSlug: params.organization,
+  //});
 
-  if (!organization) {
-    return notFound();
-  }
+  //if (!organization) {
+  //return notFound();
+  //}
 
-  if (!searchParams.session || !searchParams.speaker) return notFound();
+  if (!params.session) return notFound();
 
   const session = await fetchSession({
-    session: searchParams.session,
+    session: params.session,
   });
 
-  const speaker = await fetchSpeaker({ speakerId: searchParams.speaker });
-  console.log(speaker);
-
   // Check if session exists and has a playbackId. If not, return a 'not found' response.
-  if (!session?.playbackId) return notFound();
+  if (!session?.playbackId && !session) return notFound();
 
-  const videoUrl = await getVideoUrlAction(session);
+  const videoUrl = await getVideoUrlAction(session!);
   // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();
 
-  const thumbnail = await generateThumbnailAction(session);
+  const thumbnail = await generateThumbnailAction(session!);
 
   return (
-    <Suspense key={session._id} fallback={<Loading />}>
+    <Suspense key={session!._id} fallback={<Loading />}>
       <div className="flex gap-4 w-full max-w-7xl h-full">
         <div className="flex flex-col w-2/3 h-full md:p-4">
           <PlayerWithControls
-            name={session.name}
-            thumbnail={session.coverImage ?? thumbnail}
+            name={session!.name}
+            thumbnail={session!.coverImage ?? thumbnail}
             src={[
               {
                 src: videoUrl as `${string}m3u8`,
@@ -82,20 +79,20 @@ const SpeakerPage = async ({ params, searchParams }: OrganizationPageProps) => {
           />
           <div className="px-4 w-full md:px-0">
             <SessionInfoBox
-              name={session.name}
-              description={session.description ?? 'No description'}
-              speakers={session.speakers}
-              date={session.createdAt as string}
-              playbackId={session.playbackId}
+              name={session!.name}
+              description={session!.description ?? 'No description'}
+              speakers={session!.speakers}
+              date={session!.createdAt as string}
+              playbackId={session!.playbackId}
               organizationSlug={params.organization}
               vod={true}
-              video={session}
+              video={session!}
             />
           </div>
         </div>
         <div className="w-1/3">
-          <h1 className="ml-auto text-2xl font-bold">{speaker.name}</h1>
-          <p>{speaker.bio}</p>
+          {/*<h1 className="ml-auto text-2xl font-bold">{session.speakers[0]}</h1>*/}
+          {/*<p>{speaker.bio}</p>*/}
         </div>
       </div>
     </Suspense>
