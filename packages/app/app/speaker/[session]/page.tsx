@@ -11,6 +11,14 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import { Suspense } from 'react';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
+import dynamic from 'next/dynamic';
+
+const ClientSidePlayer = dynamic(
+  () => import('./components/ClientSidePlayer'),
+  {
+    ssr: false,
+  }
+);
 
 const Loading = () => {
   return (
@@ -42,8 +50,8 @@ const SessionPage = async ({ params }: any) => {
   return (
     <Suspense key={session!._id} fallback={<Loading />}>
       <div className="flex flex-col items-center w-full h-full p-4 md:p-8">
-        <div className="w-full max-w-5xl">
-          <PlayerWithControls
+        <div className="w-full max-w-4xl">
+          <ClientSidePlayer
             name={session!.name}
             thumbnail={session!.coverImage ?? thumbnail}
             src={[
@@ -73,7 +81,6 @@ const SessionPage = async ({ params }: any) => {
     </Suspense>
   );
 };
-
 export async function generateMetadata({
   params,
   searchParams,
