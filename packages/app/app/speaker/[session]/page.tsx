@@ -11,59 +11,38 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import { Suspense } from 'react';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
-import { fetchSpeaker } from '@/lib/data';
 
 const Loading = () => {
   return (
-    <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full animate-pulse">
-      <div className="flex flex-col w-full h-full md:p-4">
-        <div className="w-full bg-gray-300 aspect-video"></div>
-        <div className="px-4 mt-4 space-y-2 w-full md:px-0">
-          <div className="w-3/4 h-6 bg-gray-200 rounded"></div>
-          <div className="w-full h-4 bg-gray-200 rounded"></div>
-          <div className="w-1/4 h-4 bg-gray-200 rounded"></div>
-        </div>
-      </div>
-      <div className="px-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
-          <div className="w-full h-32 bg-gray-300 rounded md:h-60"></div>
-        </div>
+    <div className="flex flex-col items-center gap-4 w-full h-full animate-pulse p-4 md:p-8">
+      <div className="w-full max-w-4xl bg-gray-300 aspect-video"></div>
+      <div className="w-full max-w-4xl space-y-2">
+        <div className="w-3/4 h-6 bg-gray-200 rounded"></div>
+        <div className="w-full h-4 bg-gray-200 rounded"></div>
+        <div className="w-1/4 h-4 bg-gray-200 rounded"></div>
       </div>
     </div>
   );
 };
 
-const SpeakerPage = async ({ params, searchParams }: any) => {
-  //const organization = await fetchOrganization({
-  //organizationSlug: params.organization,
-  //});
-
-  //if (!organization) {
-  //return notFound();
-  //}
-
+const SessionPage = async ({ params }: any) => {
   if (!params.session) return notFound();
 
   const session = await fetchSession({
     session: params.session,
   });
 
-  // Check if session exists and has a playbackId. If not, return a 'not found' response.
   if (!session?.playbackId && !session) return notFound();
 
   const videoUrl = await getVideoUrlAction(session!);
-  // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();
 
   const thumbnail = await generateThumbnailAction(session!);
 
   return (
     <Suspense key={session!._id} fallback={<Loading />}>
-      <div className="flex gap-4 w-full max-w-7xl h-full">
-        <div className="flex flex-col w-2/3 h-full md:p-4">
+      <div className="flex flex-col items-center w-full h-full p-4 md:p-8">
+        <div className="w-full max-w-4xl">
           <PlayerWithControls
             name={session!.name}
             thumbnail={session!.coverImage ?? thumbnail}
@@ -77,7 +56,7 @@ const SpeakerPage = async ({ params, searchParams }: any) => {
               },
             ]}
           />
-          <div className="px-4 w-full md:px-0">
+          <div className="w-full mt-4">
             <SessionInfoBox
               name={session!.name}
               description={session!.description ?? 'No description'}
@@ -89,10 +68,6 @@ const SpeakerPage = async ({ params, searchParams }: any) => {
               video={session!}
             />
           </div>
-        </div>
-        <div className="w-1/3">
-          {/*<h1 className="ml-auto text-2xl font-bold">{session.speakers[0]}</h1>*/}
-          {/*<p>{speaker.bio}</p>*/}
         </div>
       </div>
     </Suspense>
@@ -120,4 +95,4 @@ export async function generateMetadata({
   return watchMetadata({ organization, session: session, thumbnail });
 }
 
-export default SpeakerPage;
+export default SessionPage;
