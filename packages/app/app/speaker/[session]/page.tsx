@@ -42,7 +42,7 @@ const SessionPage = async ({ params }: any) => {
   return (
     <Suspense key={session!._id} fallback={<Loading />}>
       <div className="flex flex-col items-center w-full h-full p-4 md:p-8">
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-5xl">
           <PlayerWithControls
             name={session!.name}
             thumbnail={session!.coverImage ?? thumbnail}
