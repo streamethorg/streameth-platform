@@ -17,6 +17,7 @@ const ClientSidePlayer = dynamic(
   () => import('./components/ClientSidePlayer'),
   {
     ssr: false,
+    loading: () => <Loading />,
   }
 );
 
