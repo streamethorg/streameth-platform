@@ -2012,6 +2012,26 @@
         "type": "object",
         "additionalProperties": false
       },
+      "ImportType": {
+        "enum": ["gsheet", "pretalx"],
+        "type": "string"
+      },
+      "Pick_IScheduleImporterDto.url-or-type-or-organizationId_": {
+        "properties": {
+          "organizationId": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ImportType"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": ["organizationId", "type", "url"],
+        "type": "object",
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      },
       "IStandardResponse_IOrganization_": {
         "properties": {
           "status": {
@@ -2048,10 +2068,10 @@
             },
             "type": "array"
           },
-          "email": {
+          "url": {
             "type": "string"
           },
-          "url": {
+          "email": {
             "type": "string"
           },
           "logo": {
@@ -2097,10 +2117,10 @@
             },
             "type": "array"
           },
-          "email": {
+          "url": {
             "type": "string"
           },
-          "url": {
+          "email": {
             "type": "string"
           },
           "logo": {
@@ -4453,6 +4473,36 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UploadSessionDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/import": {
+      "post": {
+        "operationId": "ImportSchdeule",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStandardResponse_void_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Schedule"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pick_IScheduleImporterDto.url-or-type-or-organizationId_"
               }
             }
           }

@@ -15,6 +15,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
+import ImportDataButton from './components/StreamPlatforms/StageDataImport/ImportDataButton';
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null;
@@ -41,11 +42,9 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             streamId={params.streamId}
             organization={params.organization}
           />
-          <div className="flex w-full flex-col items-center space-x-2 space-y-2 py-2 md:flex-row lg:flex-row">
-            <div className="flex flex-grow items-center justify-start space-x-2">
-              <span className="line-clamp-2 text-xl font-bold lg:max-w-[550px]">
-                {stream.name}
-              </span>
+          <div className="flex w-full flex-col items-center gap-2 py-2 md:flex-row md:flex-wrap">
+            <div className="flex items-center justify-start space-x-2">
+              <span className="text-xl font-bold pr-4">{stream.name}</span>
               <StreamHealth
                 stream={stream}
                 streamId={stream?.streamSettings?.streamId || ''}
@@ -74,6 +73,8 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
                 </div>
               </Button>
             </Link>
+
+            <ImportDataButton organizationId={organization._id} />
           </div>
         </div>
         <Destinations

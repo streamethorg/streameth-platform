@@ -3,6 +3,7 @@ import { IExtendedSession, IPagination } from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { Livepeer } from 'livepeer';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
+import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components';
 import FuzzySearch from 'fuzzy-search';
@@ -269,14 +270,6 @@ export const createClip = async ({
     });
 
     if (!response.ok) {
-      console.log({
-        end,
-        playbackId,
-        sessionId,
-        start,
-        recordingId,
-      });
-      console.log('error in createClip', await response.json());
       throw 'Error updating session';
     }
     revalidatePath('/studio');
@@ -422,6 +415,41 @@ export const uploadSessionToYouTube = async ({
     return (await response.json()).status;
   } catch (e) {
     console.log('error in upload session to social', e);
+    throw e;
+  }
+};
+
+export const sessionImport = async ({
+  url,
+  type,
+  organizationId,
+  authToken,
+}: {
+  url: string;
+  type: string;
+  organizationId: string;
+  authToken: string;
+}): Promise<IScheduleImporter> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        url,
+        type,
+        organizationId,
+      }),
+    });
+
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in sessionImport', e);
     throw e;
   }
 };
