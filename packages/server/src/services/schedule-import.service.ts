@@ -61,7 +61,7 @@ export default class ScheduleImporterService {
       status: 'completed',
       organizationId: organizationId,
       metadata: {
-        rooms,
+        stages: rooms,
         sessions: sessionss,
       },
     });
