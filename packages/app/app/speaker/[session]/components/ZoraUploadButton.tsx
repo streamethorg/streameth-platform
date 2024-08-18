@@ -78,7 +78,6 @@ const ZoraUploadButton = ({
   const uploadToZora = useCallback(async () => {
     if (!publicClient || !address || !session.assetId) return;
 
-    track('Upload to Zora', { location: 'Speaker Page' });
     setIsUploading(true);
     try {
       const downloadUrl = await getDownloadUrl(session.assetId);
@@ -146,7 +145,14 @@ const ZoraUploadButton = ({
   const isDisabled = isUploading || !state;
 
   return (
-    <Button onClick={uploadToZora} disabled={isDisabled} variant={variant}>
+    <Button
+      onClick={() => {
+        track('Upload to Zora', { location: 'Speaker Page' });
+        uploadToZora();
+      }}
+      disabled={isDisabled}
+      variant={variant}
+    >
       {isUploading
         ? 'Uploading...'
         : state

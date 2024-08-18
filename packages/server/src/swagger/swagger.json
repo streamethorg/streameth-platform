@@ -424,7 +424,7 @@
         "type": "string"
       },
       "StateType": {
-        "enum": ["event", "video"],
+        "enum": ["zora", "event", "video"],
         "type": "string"
       },
       "IState": {

@@ -67,7 +67,7 @@ const SessionPage = async ({
 
   return (
     <Suspense key={session!._id} fallback={<Loading />}>
-      <div className="flex flex-col items-center p-4 w-full h-full md:p-8">
+      <div className="flex flex-col items-center w-full h-full md:p-8">
         <div className="w-full max-w-4xl">
           <ClientSidePlayer
             name={session!.name}
@@ -82,7 +82,7 @@ const SessionPage = async ({
               },
             ]}
           />
-          <div className="mt-4 w-full">
+          <div className="p-4 mt-4 w-full">
             <SessionInfoBox
               name={session!.name}
               description={session!.description ?? 'No description'}
