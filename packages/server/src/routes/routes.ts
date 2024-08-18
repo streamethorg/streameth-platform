@@ -726,12 +726,13 @@ const models: TsoaRoute.Models = {
     "UploadSessionDto": {
         "dataType": "refObject",
         "properties": {
-            "socialId": {"dataType":"string","required":true},
-            "organizationId": {"dataType":"string","required":true},
+            "socialId": {"dataType":"string"},
+            "organizationId": {"dataType":"string"},
             "sessionId": {"dataType":"string","required":true},
             "token": {"dataType":"nestedObjectLiteral","nestedProperties":{"secret":{"dataType":"string","required":true},"key":{"dataType":"string"}}},
             "type": {"dataType":"string","required":true},
             "text": {"dataType":"string"},
+            "refreshToken": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
