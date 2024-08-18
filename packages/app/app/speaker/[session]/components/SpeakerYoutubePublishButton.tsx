@@ -4,6 +4,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { apiUrl } from '@/lib/utils/utils';
 import { DialogTitle } from '@radix-ui/react-dialog';
+import { track } from '@vercel/analytics';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -43,6 +44,7 @@ const SpeakerYoutubePublishButton = ({
 
   const handleYoutubePublish = async () => {
     setIsLoading(true);
+    track('Upload to YouTube', { location: 'Speaker Page' });
     try {
       const response = await fetch(`${apiUrl()}/sessions/upload`, {
         method: 'POST',
@@ -85,7 +87,7 @@ const SpeakerYoutubePublishButton = ({
             <div className="flex items-center pr-3">
               <Image
                 src={thumbnail}
-                className="rounded-full mr-2 p-1"
+                className="p-1 mr-2 rounded-full"
                 width={50}
                 height={50}
                 alt=""
@@ -100,7 +102,7 @@ const SpeakerYoutubePublishButton = ({
           ) : (
             <div>
               <p className="mb-2">Connect Youtube Account before continuing </p>
-              <div className="flex items-center gap-4">
+              <div className="flex gap-4 items-center">
                 <Button
                   onClick={handleModalClose}
                   className="w-full"
@@ -121,7 +123,7 @@ const SpeakerYoutubePublishButton = ({
           )}
 
           {refreshToken && (
-            <div className="flex items-center gap-4 w-full">
+            <div className="flex gap-4 items-center w-full">
               <Button
                 onClick={handleModalClose}
                 className="w-full"
@@ -131,7 +133,7 @@ const SpeakerYoutubePublishButton = ({
               </Button>
               <Button
                 variant="primary"
-                className="w-full overflow-hidden"
+                className="overflow-hidden w-full"
                 onClick={handleYoutubePublish}
                 loading={isLoading}
               >

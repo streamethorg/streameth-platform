@@ -2,7 +2,7 @@
 
 import { PlayerWithControls } from '@/components/ui/Player';
 import SessionInfoBox from '@/components/sessions/SessionInfoBox';
-import { OrganizationPageProps } from '@/lib/types';
+import { IExtendedState, OrganizationPageProps } from '@/lib/types';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { generalMetadata, watchMetadata } from '@/lib/utils/metadata';
@@ -15,6 +15,8 @@ import dynamic from 'next/dynamic';
 import SpeakerYoutubePublishButton from './components/SpeakerYoutubePublishButton';
 import { cookies } from 'next/headers';
 import ZoraUploadButton from './components/ZoraUploadButton';
+import { fetchAllStates } from '@/lib/services/stateService';
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
 
 const ClientSidePlayer = dynamic(
   () => import('./components/ClientSidePlayer'),
@@ -26,9 +28,9 @@ const ClientSidePlayer = dynamic(
 
 const Loading = () => {
   return (
-    <div className="flex flex-col items-center gap-4 w-full h-full animate-pulse p-4 md:p-8">
+    <div className="flex flex-col gap-4 items-center p-4 w-full h-full animate-pulse md:p-8">
       <div className="w-full max-w-4xl bg-gray-300 aspect-video"></div>
-      <div className="w-full max-w-4xl space-y-2">
+      <div className="space-y-2 w-full max-w-4xl">
         <div className="w-3/4 h-6 bg-gray-200 rounded"></div>
         <div className="w-full h-4 bg-gray-200 rounded"></div>
         <div className="w-1/4 h-4 bg-gray-200 rounded"></div>
@@ -49,12 +51,15 @@ const SessionPage = async ({
   const session = await fetchSession({
     session: params.session,
   });
-  console.log(session);
 
   if (!session?.playbackId && !session) return notFound();
 
-  const videoUrl = await getVideoUrlAction(session!);
+  const videoUrl = await getVideoUrlAction(session);
   if (!videoUrl) return notFound();
+
+  const state = (await fetchAllStates({ sessionId: session._id })).filter(
+    (state) => state.type === StateType.zoraNft
+  ) as unknown as IExtendedState;
 
   const thumbnail = await generateThumbnailAction(session!);
   const youtubeData = cookies().get('youtube_publish')?.value;
@@ -62,7 +67,7 @@ const SessionPage = async ({
 
   return (
     <Suspense key={session!._id} fallback={<Loading />}>
-      <div className="flex flex-col items-center w-full h-full p-4 md:p-8">
+      <div className="flex flex-col items-center p-4 w-full h-full md:p-8">
         <div className="w-full max-w-4xl">
           <ClientSidePlayer
             name={session!.name}
@@ -77,7 +82,7 @@ const SessionPage = async ({
               },
             ]}
           />
-          <div className="w-full mt-4">
+          <div className="mt-4 w-full">
             <SessionInfoBox
               name={session!.name}
               description={session!.description ?? 'No description'}
@@ -97,7 +102,11 @@ const SessionPage = async ({
                 refreshToken={youtube?.refreshToken}
               />
 
-              <ZoraUploadButton video={session!} variant="primary" />
+              <ZoraUploadButton
+                session={session}
+                state={state}
+                variant="primary"
+              />
             </div>
           </div>
         </div>
