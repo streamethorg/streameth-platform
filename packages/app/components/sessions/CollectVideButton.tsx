@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { IExtendedNftCollections, IExtendedSession } from '@/lib/types';
 import {
@@ -9,7 +9,6 @@ import {
   useSwitchChain,
   useWaitForTransactionReceipt,
   useWriteContract,
-  usePublicClient,
 } from 'wagmi';
 import { VideoNFTAbi, contractChainID } from '@/lib/contract';
 import { toast } from 'sonner';
@@ -19,29 +18,22 @@ import { CheckCircle2, Loader2 } from 'lucide-react';
 import { type BaseError } from 'wagmi';
 import TransactionHash from '@/app/studio/[organization]/nfts/create/components/TransactionHash';
 import { ConnectWalletButton } from '../misc/ConnectWalletButton';
-import { createCreatorClient } from '@zoralabs/protocol-sdk';
-import { zora } from 'viem/chains';
 
 const CollectVideButton = ({
   video,
   nftCollection,
   variant = 'primary',
   all = false,
-  standalone = false,
 }: {
   video?: IExtendedSession;
   nftCollection: IExtendedNftCollections | null;
   variant?: 'primary' | 'outline';
   all?: boolean;
-  standalone?: boolean;
 }) => {
   const account = useAccount();
   const chain = useChainId();
-  const publicClient = usePublicClient();
   const [isOpen, setIsOpen] = useState(false);
   const [mintError, setMintError] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
-  const [showUploadButton, setShowUploadButton] = useState(false);
 
   const videoNFTContract = {
     address: nftCollection?.contractAddress as `0x${string}`,
@@ -90,7 +82,6 @@ const CollectVideButton = ({
     if (isSuccess) {
       setIsOpen(false);
       toast.success('NFT of the video successfully minted to your wallet');
-      setShowUploadButton(true);
     }
     if (isError) {
       toast.error('NFT of the video failed to mint. Please try again');
@@ -114,7 +105,7 @@ const CollectVideButton = ({
         ),
       });
     } else {
-      setMintError('An error occurred, try again later please');
+      setMintError('An error occurred, try again later');
     }
   };
 
@@ -138,73 +129,6 @@ const CollectVideButton = ({
     }
   };
 
-  const uploadToZora = useCallback(async () => {
-    if (!publicClient || !account.address) return;
-
-    setIsUploading(true);
-    try {
-      const creatorClient = createCreatorClient({
-        chainId: zora.id,
-        publicClient,
-      });
-
-      const { parameters, contractAddress } = await creatorClient.create1155({
-        contract: {
-          name: video?.name || 'Video NFT',
-          uri: 'ipfs://DUMMY/contract.json', // Replace with actual contract metadata URI
-        },
-        token: {
-          tokenMetadataURI: 'ipfs://DUMMY/token.json', // Replace with actual token metadata URI
-          salesConfig: {
-            erc20Name: video?.name || 'Video Token',
-            erc20Symbol: 'VNFT',
-          },
-        },
-        account: account.address,
-      });
-
-      writeContract(parameters);
-
-      toast.success('Session successfully uploaded to Zora marketplace');
-      setShowUploadButton(false);
-    } catch (error) {
-      console.error('Error uploading to Zora:', error);
-      toast.error('Failed to upload session to Zora marketplace');
-    } finally {
-      setIsUploading(false);
-    }
-  }, [publicClient, account.address, video, writeContract]);
-
-  useEffect(() => {
-    if (account.isConnected && standalone) {
-      toast.success('Wallet connected successfully');
-      setShowUploadButton(true);
-    }
-  }, [account.isConnected, standalone]);
-
-  if (standalone) {
-    return (
-      <div>
-        {!account.isConnected ? (
-          <ConnectWalletButton />
-        ) : showUploadButton ? (
-          <Button
-            onClick={uploadToZora}
-            loading={isUploading}
-            variant={variant}
-            className="w-full md:w-36"
-          >
-            Upload to Zora
-          </Button>
-        ) : (
-          <Button disabled variant="outline">
-            Uploaded to Zora
-          </Button>
-        )}
-      </div>
-    );
-  }
-
   return hasMintedSession ? (
     <Button disabled variant={'outline'}>
       Session Collected
@@ -213,15 +137,6 @@ const CollectVideButton = ({
     <div>
       {!account.address ? (
         <ConnectWalletButton />
-      ) : showUploadButton ? (
-        <Button
-          onClick={uploadToZora}
-          loading={isUploading}
-          variant={variant}
-          className="w-full md:w-36"
-        >
-          Upload to Zora
-        </Button>
       ) : (
         <Button
           loading={isMintingNftPending || IsSwitchingChain}
