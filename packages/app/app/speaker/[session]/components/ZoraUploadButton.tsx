@@ -1,5 +1,6 @@
 'use client';
 
+import { track } from '@vercel/analytics';
 import { useState, useCallback } from 'react';
 import {
   useAccount,
@@ -19,7 +20,6 @@ import { IExtendedSession, IExtendedState } from '@/lib/types';
 import { apiUrl } from '@/lib/utils/utils';
 import { upload } from 'thirdweb/storage';
 import { createThirdwebClient } from 'thirdweb';
-import { notFound } from 'next/navigation';
 import { createStateAction } from '@/lib/actions/state';
 import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
 
@@ -78,9 +78,10 @@ const ZoraUploadButton = ({
   const uploadToZora = useCallback(async () => {
     if (!publicClient || !address || !session.assetId) return;
 
+    track('Upload to Zora', { location: 'Speaker Page' });
     setIsUploading(true);
     try {
-      const downloadUrl = await getDownloadUrl(session.assetId || '');
+      const downloadUrl = await getDownloadUrl(session.assetId);
       const coverImageUri = await uploadToIPFS(session.coverImage || '');
       const tokenMetadata = await makeMediaTokenMetadata({
         name: session.name,
