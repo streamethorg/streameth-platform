@@ -12,6 +12,8 @@ import { Suspense } from 'react';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
 import dynamic from 'next/dynamic';
+import SpeakerYoutubePublishButton from './components/SpeakerYoutubePublishButton';
+import { cookies } from 'next/headers';
 
 const ClientSidePlayer = dynamic(
   () => import('./components/ClientSidePlayer'),
@@ -34,7 +36,13 @@ const Loading = () => {
   );
 };
 
-const SessionPage = async ({ params }: any) => {
+const SessionPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { session: string };
+  searchParams: { m: string };
+}) => {
   if (!params.session) return notFound();
 
   const session = await fetchSession({
@@ -47,6 +55,8 @@ const SessionPage = async ({ params }: any) => {
   if (!videoUrl) return notFound();
 
   const thumbnail = await generateThumbnailAction(session!);
+  const youtubeData = cookies().get('youtube_publish')?.value;
+  const youtube = youtubeData ? JSON.parse(youtubeData) : undefined;
 
   return (
     <Suspense key={session!._id} fallback={<Loading />}>
@@ -72,9 +82,16 @@ const SessionPage = async ({ params }: any) => {
               speakers={session!.speakers}
               date={session!.createdAt as string}
               playbackId={session!.playbackId}
-              organizationSlug={params.organization}
+              // organizationSlug={params.organization}
               vod={true}
               video={session!}
+            />
+
+            <SpeakerYoutubePublishButton
+              openModal={searchParams.m}
+              sessionId={params.session}
+              thumbnail={youtube?.thumbnail}
+              refreshToken={youtube?.refreshToken}
             />
           </div>
         </div>
@@ -100,7 +117,7 @@ export async function generateMetadata({
   const thumbnail =
     session.coverImage ?? (await generateThumbnailAction(session));
 
-  return watchMetadata({ organization, session: session, thumbnail });
+  return watchMetadata({ organization, session, thumbnail });
 }
 
 export default SessionPage;
