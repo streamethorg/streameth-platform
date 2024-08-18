@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, useCallback } from 'react';
+
+import { useState, useCallback } from 'react';
 import {
   useAccount,
   usePublicClient,
@@ -11,21 +12,18 @@ import {
   makeMediaTokenMetadata,
   ContractMetadataJson,
 } from '@zoralabs/protocol-sdk';
-import { Button } from '../../../../components/ui/button';
-import { ConnectWalletButton } from '../../../../components/misc/ConnectWalletButton';
+import { Button } from '@/components/ui/button';
+import { ConnectWalletButton } from '@/components/misc/ConnectWalletButton';
 import { toast } from 'sonner';
-import { IExtendedSession } from '@/lib/types';
+import { IExtendedSession, IExtendedState } from '@/lib/types';
 import { apiUrl } from '@/lib/utils/utils';
 import { upload } from 'thirdweb/storage';
-
 import { createThirdwebClient } from 'thirdweb';
+import { notFound } from 'next/navigation';
+import { createStateAction } from '@/lib/actions/state';
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
 
-interface ZoraUploadButtonProps {
-  video: IExtendedSession;
-  variant?: 'primary' | 'outline';
-}
-
-const BASE_CHAIN_ID = 8453; // Base chain ID
+const BASE_CHAIN_ID = 8453;
 
 async function uploadToIPFS(content: string | object): Promise<string> {
   const client = createThirdwebClient({
@@ -35,20 +33,17 @@ async function uploadToIPFS(content: string | object): Promise<string> {
   let file: File;
 
   if (typeof content === 'string') {
-    // If content is a URL, fetch the file first
     const response = await fetch(content);
     const blob = await response.blob();
     file = new File([blob], 'file', { type: blob.type });
   } else {
-    // If content is an object, convert it to JSON
     const jsonString = JSON.stringify(content);
     file = new File([jsonString], 'metadata.json', {
       type: 'application/json',
     });
   }
 
-  const uri = await upload({ client, files: [file] });
-  return uri;
+  return await upload({ client, files: [file] });
 }
 
 async function getDownloadUrl(assetId: string): Promise<string> {
@@ -65,39 +60,37 @@ async function getDownloadUrl(assetId: string): Promise<string> {
   }
 }
 
-const ZoraUploadButton: React.FC<ZoraUploadButtonProps> = ({
-  video,
+const ZoraUploadButton = ({
+  session,
+  state,
   variant = 'primary',
+}: {
+  session: IExtendedSession;
+  state: IExtendedState | null;
+  variant?: 'primary' | 'outline';
 }) => {
   const [isUploading, setIsUploading] = useState(false);
-  const { address, isConnected } = useAccount();
   const publicClient = usePublicClient({ chainId: BASE_CHAIN_ID });
+  const { address, isConnected } = useAccount();
   const { writeContract } = useWriteContract();
   const { switchChain } = useSwitchChain();
 
   const uploadToZora = useCallback(async () => {
-    if (!publicClient || !address) return;
+    if (!publicClient || !address || !session.assetId) return;
 
     setIsUploading(true);
     try {
-      // Fetch the download URL
-      const downloadUrl = await getDownloadUrl(video.assetId || '');
-
-      // Upload cover image to IPFS
-      const coverImageUri = await uploadToIPFS(video.coverImage || '');
-
-      // Create token metadata
+      const downloadUrl = await getDownloadUrl(session.assetId || '');
+      const coverImageUri = await uploadToIPFS(session.coverImage || '');
       const tokenMetadata = await makeMediaTokenMetadata({
-        name: video.name,
-        description: video.description,
+        name: session.name,
+        description: session.description,
         mediaUrl: downloadUrl,
         thumbnailUrl: coverImageUri,
       });
 
-      // Upload token metadata to IPFS
       const tokenMetadataUri = await uploadToIPFS(tokenMetadata);
 
-      // Switch to Base chain if not already on it
       if (BASE_CHAIN_ID !== (await publicClient.getChainId())) {
         switchChain({ chainId: BASE_CHAIN_ID });
       }
@@ -107,19 +100,16 @@ const ZoraUploadButton: React.FC<ZoraUploadButtonProps> = ({
         publicClient,
       });
 
-      // Create contract metadata
       const contractMetadata: ContractMetadataJson = {
-        name: video.name,
-        description: video.description,
+        name: session.name,
+        description: session.description,
         image: coverImageUri,
       };
 
-      // Upload contract metadata to IPFS
       const contractMetadataUri = await uploadToIPFS(contractMetadata);
-
       const { parameters, contractAddress } = await creatorClient.create1155({
         contract: {
-          name: video.name,
+          name: session.name,
           uri: contractMetadataUri,
         },
         token: {
@@ -130,6 +120,14 @@ const ZoraUploadButton: React.FC<ZoraUploadButtonProps> = ({
 
       writeContract(parameters);
 
+      await createStateAction({
+        state: {
+          sessionId: session._id,
+          type: StateType.zoraNft,
+          sessionSlug: session.slug,
+          organizationId: session.organizationId,
+        },
+      });
       console.log('Upload successful. Contract address:', contractAddress);
       toast.success('Video successfully uploaded to Zora marketplace on Base');
     } catch (error) {
@@ -138,15 +136,21 @@ const ZoraUploadButton: React.FC<ZoraUploadButtonProps> = ({
     } finally {
       setIsUploading(false);
     }
-  }, [publicClient, address, video, writeContract, switchChain]);
+  }, [publicClient, address, session, writeContract, switchChain]);
 
   if (!isConnected) {
     return <ConnectWalletButton />;
   }
 
+  const isDisabled = isUploading || !state;
+
   return (
-    <Button onClick={uploadToZora} disabled={isUploading} variant={variant}>
-      {isUploading ? 'Uploading...' : 'Upload to Zora on Base'}
+    <Button onClick={uploadToZora} disabled={isDisabled} variant={variant}>
+      {isUploading
+        ? 'Uploading...'
+        : state
+          ? 'Upload to Zora'
+          : 'Already Uploaded'}
     </Button>
   );
 };
