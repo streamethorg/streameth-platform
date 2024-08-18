@@ -2,7 +2,6 @@
 
 import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import Footer from '@/components/Layout/Footer';
-import { Page } from '@/lib/types';
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (

@@ -45,7 +45,6 @@ const SpeakerYoutubePublishButton = ({
 
   const handleYoutubePublish = async () => {
     setIsLoading(true);
-    track('Upload to YouTube', { location: 'Speaker Page' });
     try {
       const response = await fetch(`${apiUrl()}/sessions/upload`, {
         method: 'POST',
@@ -135,7 +134,10 @@ const SpeakerYoutubePublishButton = ({
               <Button
                 variant="primary"
                 className="overflow-hidden w-full"
-                onClick={handleYoutubePublish}
+                onClick={() => {
+                  track('Upload to YouTube', { location: 'Speaker Page' });
+                  handleYoutubePublish();
+                }}
                 loading={isLoading}
               >
                 Publish
