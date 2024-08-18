@@ -49,6 +49,7 @@ const SessionPage = async ({
   const session = await fetchSession({
     session: params.session,
   });
+  console.log(session);
 
   if (!session?.playbackId && !session) return notFound();
 
