@@ -14,6 +14,7 @@ import { generateThumbnailAction } from '@/lib/actions/sessions';
 import dynamic from 'next/dynamic';
 import SpeakerYoutubePublishButton from './components/SpeakerYoutubePublishButton';
 import { cookies } from 'next/headers';
+import ZoraUploadButton from './components/ZoraUploadButton';
 
 const ClientSidePlayer = dynamic(
   () => import('./components/ClientSidePlayer'),
@@ -87,12 +88,16 @@ const SessionPage = async ({
               video={session!}
             />
 
-            <SpeakerYoutubePublishButton
-              openModal={searchParams.m}
-              sessionId={params.session}
-              thumbnail={youtube?.thumbnail}
-              refreshToken={youtube?.refreshToken}
-            />
+            <div className="flex space-x-2">
+              <SpeakerYoutubePublishButton
+                openModal={searchParams.m}
+                sessionId={params.session}
+                thumbnail={youtube?.thumbnail}
+                refreshToken={youtube?.refreshToken}
+              />
+
+              <ZoraUploadButton video={session!} variant="primary" />
+            </div>
           </div>
         </div>
       </div>
