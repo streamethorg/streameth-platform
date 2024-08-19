@@ -61,54 +61,52 @@ const CreateYoutubeStream = ({
   };
   return (
     <div>
-      <div>
-        <p className="font-medium">Select Youtube Destination</p>
+      <p className="font-medium">Select Youtube Destination</p>
 
-        <div className="flex flex-wrap items-start py-5">
-          {organization?.socials
-            ?.filter((s) => s.type == 'youtube')
-            .map(({ name, thumbnail, _id }) => (
+      <div className="flex flex-wrap items-start py-5">
+        {organization?.socials
+          ?.filter((s) => s.type == 'youtube')
+          .map(({ name, thumbnail, _id }) => (
+            <div
+              onClick={() => setSocialId(socialId ? '' : _id!)}
+              key={_id}
+              className={`relative w-[110px] flex cursor-pointer flex-col items-center  ${checkIsTarget(_id) ? 'pointer-events-none opacity-50' : ''}`}
+            >
               <div
-                onClick={() => setSocialId(socialId ? '' : _id!)}
-                key={_id}
-                className={`relative w-[110px] flex cursor-pointer flex-col items-center  ${checkIsTarget(_id) ? 'pointer-events-none opacity-50' : ''}`}
+                className={`h-12 w-12 cursor-pointer rounded-full bg-cover bg-center ${
+                  socialId == _id || checkIsTarget(_id)
+                    ? 'outline-red-500 outline outline-4'
+                    : 'outline-none'
+                }`}
+                style={{
+                  backgroundImage: `url(${thumbnail})`,
+                }}
+              ></div>
+              <p
+                className={`text-center p-2 text-sm ${socialId == _id ? 'text-semibold' : ''}`}
               >
-                <div
-                  className={`h-12 w-12 cursor-pointer rounded-full bg-cover bg-center ${
-                    socialId == _id || checkIsTarget(_id)
-                      ? 'outline-red-500 outline outline-4'
-                      : 'outline-none'
-                  }`}
-                  style={{
-                    backgroundImage: `url(${thumbnail})`,
-                  }}
-                ></div>
-                <p
-                  className={`text-center p-2 text-sm ${socialId == _id ? 'text-semibold' : ''}`}
-                >
-                  {checkIsTarget(_id) ? `Streamed to ${name}` : name}
-                </p>
-              </div>
-            ))}
-          <Link
-            href={`/api/google/request?state=${state}`}
-            className="flex cursor-pointer flex-col items-center"
-          >
-            <CiCirclePlus color="#000" size={48} />
-            <p className="text-sm p-2">Add New</p>
-          </Link>
-        </div>
+                {checkIsTarget(_id) ? `Streamed to ${name}` : name}
+              </p>
+            </div>
+          ))}
+        <Link
+          href={`/api/google/request?state=${state}`}
+          className="flex cursor-pointer flex-col items-center"
+        >
+          <CiCirclePlus color="#000" size={48} />
+          <p className="text-sm p-2">Add New</p>
+        </Link>
+      </div>
 
-        <div className="text-right">
-          <Button
-            loading={isLoading}
-            onClick={handleCreateYoutubeStream}
-            disabled={!socialId}
-            variant={'primary'}
-          >
-            Create
-          </Button>
-        </div>
+      <div className="text-right">
+        <Button
+          loading={isLoading}
+          onClick={handleCreateYoutubeStream}
+          disabled={!socialId}
+          variant={'primary'}
+        >
+          Create
+        </Button>
       </div>
     </div>
   );

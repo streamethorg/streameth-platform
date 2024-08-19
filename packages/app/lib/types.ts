@@ -74,6 +74,7 @@ export interface OrganizationPageProps {
     page?: string;
     collectionId?: string;
     stage?: string;
+    speaker?: string;
   };
 }
 

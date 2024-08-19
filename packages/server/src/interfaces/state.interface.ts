@@ -14,6 +14,7 @@ export enum StateStatus {
 }
 
 export enum StateType {
+  nft = 'nft',
   event = 'event',
   video = 'video',
 }

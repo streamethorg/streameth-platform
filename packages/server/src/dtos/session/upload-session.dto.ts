@@ -2,13 +2,13 @@ import { IUploadSession } from '@interfaces/upload.session.interface';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UploadSessionDto implements IUploadSession {
-  @IsNotEmpty()
   @IsString()
-  socialId: string;
+  @IsOptional()
+  socialId?: string;
 
-  @IsNotEmpty()
   @IsString()
-  organizationId: string;
+  @IsOptional()
+  organizationId?: string;
 
   @IsNotEmpty()
   @IsString()
@@ -21,4 +21,8 @@ export class UploadSessionDto implements IUploadSession {
   @IsOptional()
   @IsString()
   text?: string;
+
+  @IsOptional()
+  @IsString()
+  refreshToken?: string;
 }

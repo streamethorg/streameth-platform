@@ -35,6 +35,7 @@ export class StateController extends Controller {
     const state = await this.stateService.create(body);
     return SendApiResponse('state created', state);
   }
+
   /**
    *
    * @Summary Edit state

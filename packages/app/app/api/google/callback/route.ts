@@ -20,19 +20,31 @@ export async function GET(request: NextRequest) {
   const originUrl = oAuthSecret.web.javascript_origins;
 
   const parsedRedirectUrl = redirectUrl ? originUrl + redirectUrl : `/studio`;
-
-  if (!code || !authToken) {
+  // Temporary remove authToken check
+  if (!code) {
     console.error('Google or auth token does not exist');
     return redirect(parsedRedirectUrl);
   }
 
   try {
     const tokenDetails = await generateGoogleAccessToken(code);
-    console.log('tokenDetails', tokenDetails);
-    // Check if streaming is enabled
-    const streamEnabled = await isStreamingEnabled(tokenDetails.access_token);
 
-    if (streamEnabled) {
+    const streamEnabled = await isStreamingEnabled(tokenDetails.access_token);
+    if (redirectUrl.includes('speaker/') && tokenDetails.channelId) {
+      console.log('tokenDetails', tokenDetails);
+      // store data to local storage
+      cookies().set(
+        'youtube_publish',
+        JSON.stringify({
+          type: 'youtube',
+          refreshToken: tokenDetails.refresh_token,
+          name: tokenDetails.name,
+          thumbnail: tokenDetails.thumbnail,
+        })
+      );
+
+      return NextResponse.redirect(new URL(parsedRedirectUrl, request.url));
+    } else if (streamEnabled) {
       // Add new auth to streamETh server storage
       const response = await fetch(
         `${apiUrl()}/organizations/socials/${organizationId}`,
