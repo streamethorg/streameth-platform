@@ -1,12 +1,13 @@
 'use client';
 
 import { track } from '@vercel/analytics';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import {
   useAccount,
   usePublicClient,
   useWriteContract,
   useSwitchChain,
+  useWaitForTransactionReceipt,
 } from 'wagmi';
 import {
   createCreatorClient,
@@ -23,6 +24,10 @@ import { createThirdwebClient } from 'thirdweb';
 import { createStateAction } from '@/lib/actions/state';
 import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
 import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
+import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
+import { DialogTitle } from '@radix-ui/react-dialog';
+import Link from 'next/link';
+import CopyText from '@/components/misc/CopyText';
 
 const BASE_CHAIN_ID = 8453;
 
@@ -67,15 +72,44 @@ const ZoraUploadButton = ({
   variant = 'primary',
 }: {
   session: IExtendedSession;
-  state: IExtendedState | null;
+  state: IExtendedState[];
   variant?: 'primary' | 'outline';
 }) => {
-  const thumbnail = useGenerateThumbnail({ session: session });
+  const thumbnail = useGenerateThumbnail({ session });
   const [isUploading, setIsUploading] = useState(false);
   const publicClient = usePublicClient({ chainId: BASE_CHAIN_ID });
   const { address, isConnected } = useAccount();
-  const { writeContract } = useWriteContract();
+  const { data: hash, writeContract, isError } = useWriteContract();
   const { switchChain } = useSwitchChain();
+  const [isPublishedModal, setIsPublishedModal] = useState(false);
+  const [zoraContractAddress, setZoraContractAddress] = useState('');
+  const { isSuccess } = useWaitForTransactionReceipt({
+    hash,
+  });
+
+  const updateState = async () => {
+    await createStateAction({
+      state: {
+        sessionId: session._id,
+        type: 'nft' as StateType,
+        sessionSlug: session.slug,
+        organizationId: session.organizationId,
+      },
+    });
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      updateState();
+      setIsPublishedModal(true);
+      setIsUploading(false);
+      toast.success('Video successfully uploaded to Zora marketplace on Base');
+    }
+
+    if (isError) {
+      setIsUploading(false);
+      toast.error('Creation failed');
+    }
+  }, [isSuccess, isError]);
 
   const uploadToZora = useCallback(async () => {
     if (!publicClient || !address || !session.assetId) return;
@@ -92,7 +126,7 @@ const ZoraUploadButton = ({
         mediaUrl: downloadUrl,
         thumbnailUrl: coverImageUri,
       });
-
+      console.log('coverImageUri', coverImageUri, 'thumbnailUrl', thumbnail);
       const tokenMetadataUri = await uploadToIPFS(tokenMetadata);
 
       if (BASE_CHAIN_ID !== (await publicClient.getChainId())) {
@@ -124,21 +158,12 @@ const ZoraUploadButton = ({
 
       writeContract(parameters);
 
-      //await createStateAction({
-      //  state: {
-      //    sessionId: session._id,
-      //    type: StateType.zoraNft,
-      //    sessionSlug: session.slug,
-      //    organizationId: session.organizationId,
-      //  },
-      //});
+      setZoraContractAddress(contractAddress);
       console.log('Upload successful. Contract address:', contractAddress);
-      toast.success('Video successfully uploaded to Zora marketplace on Base');
     } catch (error) {
       console.error('Error uploading to Zora:', error);
       toast.error('Failed to upload video to Zora marketplace');
     } finally {
-      setIsUploading(false);
     }
   }, [publicClient, address, session, writeContract, switchChain]);
 
@@ -146,23 +171,55 @@ const ZoraUploadButton = ({
     return <ConnectWalletButton />;
   }
 
-  const isDisabled = isUploading || !state;
+  const isDisabled = isUploading || state?.length > 0;
 
   return (
-    <Button
-      onClick={() => {
-        track('Upload to Zora', { location: 'Speaker Page' });
-        uploadToZora();
-      }}
-      disabled={isDisabled}
-      variant={variant}
-    >
-      {isUploading
-        ? 'Uploading...'
-        : state
-          ? 'Upload to Zora'
-          : 'Already Uploaded'}
-    </Button>
+    <>
+      <Button
+        onClick={() => {
+          track('Upload to Zora', { location: 'Speaker Page' });
+          uploadToZora();
+        }}
+        disabled={isDisabled}
+        variant={variant}
+      >
+        {isUploading
+          ? 'Uploading...'
+          : !state[0]
+            ? 'Upload to Zora'
+            : 'Already Uploaded'}
+      </Button>
+      <Dialog open={isPublishedModal} onOpenChange={setIsPublishedModal}>
+        <DialogContent className="lg:min-w-[600px]">
+          <DialogTitle className="font-bold">
+            Upload to Zora Completed
+          </DialogTitle>
+          <p>Video successfully published to Zora</p>
+          <CopyText
+            width="100%"
+            label="Contract Address"
+            text={zoraContractAddress}
+          />
+
+          <Link
+            target="blank"
+            rel="noopener noreferrer"
+            href={`https://zora.co/collect/base:${zoraContractAddress}/1`}
+            className="underline"
+          >
+            View on Zora
+          </Link>
+          <DialogFooter>
+            <Button
+              onClick={() => setIsPublishedModal(false)}
+              variant={'outline'}
+            >
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
