@@ -29,8 +29,8 @@ const ClientSidePlayer = dynamic(
 const Loading = () => {
   return (
     <div className="flex flex-col gap-4 items-center p-4 w-full h-full animate-pulse md:p-8">
-      <div className="w-full max-w-4xl bg-gray-300 aspect-video"></div>
-      <div className="space-y-2 w-full max-w-4xl">
+      <div className="w-full max-w-6xl bg-gray-300 aspect-video"></div>
+      <div className="space-y-2 w-full max-w-6xl">
         <div className="w-3/4 h-6 bg-gray-200 rounded"></div>
         <div className="w-full h-4 bg-gray-200 rounded"></div>
         <div className="w-1/4 h-4 bg-gray-200 rounded"></div>
@@ -68,10 +68,10 @@ const SessionPage = async ({
   return (
     <Suspense key={session!._id} fallback={<Loading />}>
       <div className="flex flex-col items-center w-full h-full md:p-8">
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-6xl">
           <ClientSidePlayer
-            name={session!.name}
-            thumbnail={session!.coverImage ?? thumbnail}
+            name={session.name}
+            thumbnail={session.coverImage ?? thumbnail}
             src={[
               {
                 src: videoUrl as `${string}m3u8`,
@@ -82,7 +82,7 @@ const SessionPage = async ({
               },
             ]}
           />
-          <div className="p-4 mt-4 w-full">
+          <div className="p-4 mt-4 w-full md:p-0">
             <SessionInfoBox
               name={session!.name}
               description={session!.description ?? 'No description'}

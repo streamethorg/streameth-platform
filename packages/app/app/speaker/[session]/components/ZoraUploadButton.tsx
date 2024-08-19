@@ -22,6 +22,7 @@ import { upload } from 'thirdweb/storage';
 import { createThirdwebClient } from 'thirdweb';
 import { createStateAction } from '@/lib/actions/state';
 import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
+import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 
 const BASE_CHAIN_ID = 8453;
 
@@ -69,6 +70,7 @@ const ZoraUploadButton = ({
   state: IExtendedState | null;
   variant?: 'primary' | 'outline';
 }) => {
+  const thumbnail = useGenerateThumbnail({ session: session });
   const [isUploading, setIsUploading] = useState(false);
   const publicClient = usePublicClient({ chainId: BASE_CHAIN_ID });
   const { address, isConnected } = useAccount();
@@ -81,7 +83,9 @@ const ZoraUploadButton = ({
     setIsUploading(true);
     try {
       const downloadUrl = await getDownloadUrl(session.assetId);
-      const coverImageUri = await uploadToIPFS(session.coverImage || '');
+      const coverImageUri = await uploadToIPFS(
+        session.coverImage || thumbnail || ''
+      );
       const tokenMetadata = await makeMediaTokenMetadata({
         name: session.name,
         description: session.description,
@@ -120,14 +124,14 @@ const ZoraUploadButton = ({
 
       writeContract(parameters);
 
-      await createStateAction({
-        state: {
-          sessionId: session._id,
-          type: StateType.zoraNft,
-          sessionSlug: session.slug,
-          organizationId: session.organizationId,
-        },
-      });
+      //await createStateAction({
+      //  state: {
+      //    sessionId: session._id,
+      //    type: StateType.zoraNft,
+      //    sessionSlug: session.slug,
+      //    organizationId: session.organizationId,
+      //  },
+      //});
       console.log('Upload successful. Contract address:', contractAddress);
       toast.success('Video successfully uploaded to Zora marketplace on Base');
     } catch (error) {
