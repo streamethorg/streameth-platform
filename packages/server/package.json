@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./dist/server/src/server.js",
+    "start": "node ./dist/server.js",
     "dev": "nodemon --config nodemon.json",
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "test": "mocha",
