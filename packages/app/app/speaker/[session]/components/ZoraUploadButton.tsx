@@ -168,7 +168,7 @@ const ZoraUploadButton = ({
   }, [publicClient, address, session, writeContract, switchChain]);
 
   if (!isConnected) {
-    return <ConnectWalletButton />;
+    return <ConnectWalletButton btnText="Upload to Zora" />;
   }
 
   const isDisabled = isUploading || state?.length > 0;

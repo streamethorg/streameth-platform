@@ -74,56 +74,34 @@ const SpeakerYoutubePublishButton = ({
   };
 
   return (
-    <div>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <Button className="bg-[#FF0000]" onClick={() => setOpen(true)}>
-          <SiYoutube className="mr-2" /> Publish to Youtube
-        </Button>
-        <DialogContent>
-          <DialogTitle className="font-bold">
-            Publish Video to Youtube{' '}
-          </DialogTitle>
-          {refreshToken ? (
-            <div className="flex items-center pr-3">
-              <Image
-                src={thumbnail}
-                className="p-1 mr-2 rounded-full"
-                width={50}
-                height={50}
-                alt=""
-              />
-              <Link
-                className="text-sm underline"
-                href={`/api/google/request?state=${state}`}
-              >
-                Click to Reconnect
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <p className="mb-2">Connect Youtube Account before continuing </p>
-              <div className="flex gap-4 items-center">
-                <Button
-                  onClick={handleModalClose}
-                  className="w-full"
-                  variant={'outline'}
-                >
-                  Cancel
-                </Button>
-                <Link
-                  className="w-full"
-                  href={`/api/google/request?state=${state}`}
-                >
-                  <Button className="w-full" variant={'primary'}>
-                    Connect
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          )}
-
-          {refreshToken && (
-            <div className="flex gap-4 items-center w-full">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <Button className="bg-[#FF0000]" onClick={() => setOpen(true)}>
+        <SiYoutube className="mr-2" /> Publish to Youtube
+      </Button>
+      <DialogContent>
+        <DialogTitle className="font-bold">
+          Publish Video to Youtube{' '}
+        </DialogTitle>
+        {refreshToken ? (
+          <div className="flex items-center pr-3">
+            <Image
+              src={thumbnail}
+              className="p-1 mr-2 rounded-full"
+              width={50}
+              height={50}
+              alt=""
+            />
+            <Link
+              className="text-sm underline"
+              href={`/api/google/request?state=${state}`}
+            >
+              Click to Reconnect
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <p className="mb-2">Connect Youtube Account before continuing </p>
+            <div className="flex gap-4 items-center">
               <Button
                 onClick={handleModalClose}
                 className="w-full"
@@ -131,22 +109,42 @@ const SpeakerYoutubePublishButton = ({
               >
                 Cancel
               </Button>
-              <Button
-                variant="primary"
-                className="overflow-hidden w-full"
-                onClick={() => {
-                  track('Upload to YouTube', { location: 'Speaker Page' });
-                  handleYoutubePublish();
-                }}
-                loading={isLoading}
+              <Link
+                className="w-full"
+                href={`/api/google/request?state=${state}`}
               >
-                Publish
-              </Button>
+                <Button className="w-full" variant={'primary'}>
+                  Connect
+                </Button>
+              </Link>
             </div>
-          )}
-        </DialogContent>
-      </Dialog>
-    </div>
+          </div>
+        )}
+
+        {refreshToken && (
+          <div className="flex gap-4 items-center w-full">
+            <Button
+              onClick={handleModalClose}
+              className="w-full"
+              variant={'outline'}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              className="overflow-hidden w-full"
+              onClick={() => {
+                track('Upload to YouTube', { location: 'Speaker Page' });
+                handleYoutubePublish();
+              }}
+              loading={isLoading}
+            >
+              Publish
+            </Button>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 };
 
