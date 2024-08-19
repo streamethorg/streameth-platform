@@ -424,7 +424,7 @@
         "type": "string"
       },
       "StateType": {
-        "enum": ["zora", "event", "video"],
+        "enum": ["nft", "event", "video"],
         "type": "string"
       },
       "IState": {
