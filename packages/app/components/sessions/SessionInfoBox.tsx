@@ -37,11 +37,7 @@ const DesktopButtons = ({
   return (
     <>
       {video?.nftCollections?.[0] && (
-        <CollectVideButton
-          video={video}
-          nftCollection={nftCollection}
-          standalone={true}
-        />
+        <CollectVideButton video={video} nftCollection={nftCollection} />
       )}
       <div className="flex flex-row space-x-2">
         <ShareButton shareFor="video" />
