@@ -17,19 +17,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { stageSessionImportAction } from '@/lib/actions/sessions';
+import { sessionImportAction } from '@/lib/actions/sessions';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import StageImportPreviewDialog from './StageImportPreviewDialog';
+import StageImportPreviewDialog from '../[streamId]/components/StreamPlatforms/StageDataImport/StageImportPreviewDialog';
+import { FaFileImport } from 'react-icons/fa';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
-const ImportDataButton = ({
-  organizationId,
-  stageId,
-}: {
-  organizationId: string;
-  stageId: string;
-}) => {
+const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
   const [isImporting, setIsImporting] = useState(false);
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState('pretalx');
@@ -39,11 +34,10 @@ const ImportDataButton = ({
 
   const handleImportSession = async () => {
     setIsImporting(true);
-    await stageSessionImportAction({
+    await sessionImportAction({
       url,
       type: source,
       organizationId,
-      stageId,
     })
       .then((response) => {
         if (response) {
@@ -67,15 +61,22 @@ const ImportDataButton = ({
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="primary">Import Data</Button>
+          <Button
+            variant={'outline'}
+            className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4"
+          >
+            <div className="rounded-xl border bg-primary p-4 text-white">
+              <FaFileImport size={25} />
+            </div>
+            <span className="text-sm">Import Schedule</span>
+          </Button>
         </DialogTrigger>
         <DialogContent>
-          <DialogTitle>Import Stage Data</DialogTitle>
+          <DialogTitle>Import Schedule and Stage</DialogTitle>
           <DialogDescription>
-            Import a single room. Please ensure the stage name matches the room
-            name exactly and the URL ends with .json.
+            Import all rooms and their corresponding talks quickly and easily,
+            ensuring your setup is organized and up-to-date.
           </DialogDescription>
-
           <Label>Select Data Source</Label>
           <Select
             defaultValue={source}
@@ -118,9 +119,10 @@ const ImportDataButton = ({
         open={isPreviewOpen}
         previewData={previewData}
         onClose={setIsPreviewOpen}
+        hasRooms
       />
     </>
   );
 };
 
-export default ImportDataButton;
+export default ImportSchedule;

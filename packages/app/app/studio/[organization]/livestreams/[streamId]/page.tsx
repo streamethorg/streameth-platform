@@ -74,7 +74,10 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               </Button>
             </Link>
 
-            <ImportDataButton organizationId={organization._id} />
+            <ImportDataButton
+              organizationId={organization._id}
+              stageId={params.streamId}
+            />
           </div>
         </div>
         <Destinations

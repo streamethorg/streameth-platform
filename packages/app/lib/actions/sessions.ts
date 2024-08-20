@@ -11,6 +11,7 @@ import {
   generateThumbnail,
   uploadSessionToYouTube,
   sessionImport,
+  stageSessionImport,
 } from '../services/sessionService';
 import {
   ISession,
@@ -216,6 +217,39 @@ export const sessionImportAction = async ({
       organizationId,
       type,
       authToken,
+    });
+    revalidatePath('/studio');
+
+    return res;
+  } catch (e) {
+    console.error('Error importing session acton');
+    return null;
+  }
+};
+
+export const stageSessionImportAction = async ({
+  url,
+  type,
+  organizationId,
+  stageId,
+}: {
+  url: string;
+  organizationId: string;
+  type: string;
+  stageId: string;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+
+  try {
+    const res = await stageSessionImport({
+      url,
+      organizationId,
+      type,
+      authToken,
+      stageId,
     });
     revalidatePath('/studio');
 

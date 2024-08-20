@@ -453,3 +453,40 @@ export const sessionImport = async ({
     throw e;
   }
 };
+
+export const stageSessionImport = async ({
+  url,
+  type,
+  organizationId,
+  authToken,
+  stageId,
+}: {
+  url: string;
+  type: string;
+  organizationId: string;
+  authToken: string;
+  stageId: string;
+}): Promise<IScheduleImporter> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import/stage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        url,
+        type,
+        organizationId,
+        stageId,
+      }),
+    });
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in sessionImport', e);
+    throw e;
+  }
+};

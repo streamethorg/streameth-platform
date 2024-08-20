@@ -2032,6 +2032,25 @@
         "type": "object",
         "description": "From T, pick a set of properties whose keys are in the union K"
       },
+      "Pick_IScheduleImporterDto.url-or-type-or-organizationId-or-stageId_": {
+        "properties": {
+          "organizationId": {
+            "type": "string"
+          },
+          "stageId": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ImportType"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": ["organizationId", "stageId", "type", "url"],
+        "type": "object",
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      },
       "IStandardResponse_IOrganization_": {
         "properties": {
           "status": {
@@ -4503,6 +4522,36 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Pick_IScheduleImporterDto.url-or-type-or-organizationId_"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/import/stage": {
+      "post": {
+        "operationId": "ImportSchdeuleByStage",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStandardResponse_void_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Schedule"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pick_IScheduleImporterDto.url-or-type-or-organizationId-or-stageId_"
               }
             }
           }

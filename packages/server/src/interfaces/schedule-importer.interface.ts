@@ -14,7 +14,7 @@ export enum ImportStatus {
 }
 export interface IScheduleImportMetadata {
   sessions: ISession[];
-  rooms: IStage[];
+  stages: IStage[];
 }
 export interface IScheduleImporter {
   url: string;
