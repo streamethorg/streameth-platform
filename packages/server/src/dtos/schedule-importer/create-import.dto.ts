@@ -2,10 +2,11 @@ import {
   IScheduleImporter,
   ImportType,
 } from '@interfaces/schedule-importer.interface';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class IScheduleImporterDto
-  implements Pick<IScheduleImporter, 'url' | 'type' | 'organizationId'>
+  implements
+    Pick<IScheduleImporter, 'url' | 'type' | 'organizationId' | 'stageId'>
 {
   @IsNotEmpty()
   @IsString()
@@ -18,4 +19,8 @@ export class IScheduleImporterDto
   @IsNotEmpty()
   @IsString()
   organizationId: string;
+
+  @IsOptional()
+  @IsString()
+  stageId: string;
 }

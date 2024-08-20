@@ -21,5 +21,6 @@ export interface IScheduleImporter {
   type: ImportType;
   status: ImportStatus;
   organizationId: Types.ObjectId | string;
+  stageId?: Types.ObjectId | string;
   metadata: IScheduleImportMetadata;
 }

@@ -13,7 +13,20 @@ export class ScheduleImporterController extends Controller {
   async importSchdeule(
     @Body() body: Pick<IScheduleImporterDto, 'url' | 'type' | 'organizationId'>,
   ): Promise<IStandardResponse<void>> {
-    const importer = await this.importerService.importData(body);
+    const importer = await this.importerService.importSessionsAndStage(body);
+    return SendApiResponse('schedule generated', importer);
+  }
+
+  @SuccessResponse('201')
+  @Post('import/stage')
+  async importSchdeuleByStage(
+    @Body()
+    body: Pick<
+      IScheduleImporterDto,
+      'url' | 'type' | 'organizationId' | 'stageId'
+    >,
+  ): Promise<IStandardResponse<void>> {
+    const importer = await this.importerService.importByStage(body);
     return SendApiResponse('schedule generated', importer);
   }
 }
