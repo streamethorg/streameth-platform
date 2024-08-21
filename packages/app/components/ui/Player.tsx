@@ -77,13 +77,13 @@ export function PlayerWithControls(props: {
           </div>
         </Player.PlayingIndicator> */}
         <Player.PlayingIndicator asChild matcher={false}>
-          {props.thumbnail && (
+          {/* {props.thumbnail && (
             <Image
               src={props.thumbnail}
               alt={props.name ?? 'image'}
               layout="fill"
             />
-          )}
+          )} */}
         </Player.PlayingIndicator>
         <Player.LoadingIndicator className="relative h-full w-full bg-black/50 backdrop-blur data-[visible=true]:animate-in data-[visible=false]:animate-out data-[visible=false]:fade-out-0 data-[visible=true]:fade-in-0">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
