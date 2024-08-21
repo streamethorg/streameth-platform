@@ -6,6 +6,7 @@ import { getImageUrl } from '@/lib/utils/utils';
 import { toast } from 'sonner';
 import { useCallback, useState, forwardRef } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { imageUploadAction } from '@/lib/actions/imageUpload';
 
 interface ImageDropzoneProps {
   id?: string;
@@ -39,15 +40,12 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
       try {
         const data = new FormData();
         data.set('file', file);
-        data.set('path', path);
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: data,
-        });
-        if (!res.ok) {
-          throw new Error(await res.text());
+        data.set('directory', path);
+        const res = await imageUploadAction({ data });
+        if (!res) {
+          throw new Error('Error uploading image');
         }
-        onChange(getImageUrl('/' + path + '/' + file.name));
+        onChange(res);
         toast.success('Image uploaded successfully');
         setIsUploading(false);
       } catch (e: any) {

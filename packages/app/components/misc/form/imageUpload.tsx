@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { imageUploadAction } from '@/lib/actions/imageUpload';
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   const dataTransfer = new DataTransfer();
@@ -146,19 +147,13 @@ export default function ImageUpload({
           type: file.type,
         })
       );
-      data.set('path', path);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      });
-      if (!res.ok) {
-        throw new Error(await res.text());
+      data.set('directory', path);
+      const res = await imageUploadAction({ data });
+      if (!res) {
+        throw new Error('Error uploading image');
       }
-      const uploadedPath = getImageUrl(
-        '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
-      );
-      setPreview(uploadedPath);
-      return uploadedPath;
+      setPreview(res);
+      return res;
     } catch (e: any) {
       console.error(e);
       setPreview('');
