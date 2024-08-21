@@ -1,32 +1,38 @@
 ---
-name: Usability issue
-about: Report a usability problem to help us improve the user experience
-title: "[USABILITY]"
-labels: usability
+name: Bug report
+about: Create a report to help us improve
+title: "[BUG]"
+labels: bug
 assignees: ''
+
 ---
 
-**Describe the usability issue**
-A clear and concise description of what the usability problem is.
+**Describe the bug**
+A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to encounter the usability issue:
+Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
-4. Observe difficulty in '....'
+4. See error
 
-**Expected user experience**
-A clear and concise description of what you expected the user experience to be.
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-**Actual user experience**
-A clear and concise description of the actual, problematic user experience.
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-**Screenshots or screen recordings**
-If applicable, add screenshots or screen recordings to help explain the usability issue.
+**Desktop (please complete the following information):**
+ - Browser [e.g. chrome, safari] *Required*
+ - OS: [e.g. iOS] *Optional*
+ - Version [e.g. 22] *Optional*
 
-**Accessibility considerations**
-Does this usability issue impact accessibility? If so, please provide details.
+**Smartphone (please complete the following information):**
+ - Browser [e.g. stock browser, safari] *Required*
+ - Device: [e.g. iPhone6] *Optional*
+ - OS: [e.g. iOS8.1] *Optional*
+ - Version [e.g. 22] *Optional*
 
 **Additional context**
-Add any other context about the usability issue here.
+Add any other context about the problem here.
