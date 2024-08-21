@@ -11,8 +11,8 @@ import { resizeImage } from '@/lib/utils/resizeImage';
 interface ImageDropzoneProps {
   id?: string;
   placeholder?: string;
-  onChange: (files: string | null) => void;
-  value: string | null | undefined;
+  onChange: (file: File | string | null) => void;
+  value: File | string | null | undefined;
   path: string;
 }
 
@@ -36,18 +36,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
       if (!file) return;
       setIsUploading(true);
       try {
-        const data = new FormData();
-        data.set('file', file);
-        data.set('path', path);
-
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: data,
-        });
-        if (!res.ok) {
-          throw new Error(await res.text());
-        }
-        onChange(getImageUrl('/' + path + '/' + file.name));
+        onChange(file);
 
         toast.success('Image uploaded successfully');
         setIsUploading(false);
@@ -83,7 +72,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
     return (
       <div ref={ref} {...rest}>
         {isUploading ? (
-          <div className="flex z-10 justify-center items-center h-40 bg-white border border-gray-400 border-dashed transition">
+          <div className="flex z-10 justify-center items-center h-40 bg-white border-2 border-gray-300 border-dashed transition">
             <div className="text-sm">Uploading image...</div>
           </div>
         ) : preview ? (

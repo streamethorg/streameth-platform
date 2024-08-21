@@ -119,7 +119,7 @@ export const sessionSchema = z.object({
     .max(600, {
       message: 'Description is too long. The maximum length is 600 characters.',
     }),
-  coverImage: z.string().optional(),
+  coverImage: z.union([z.string(), z.instanceof(File)]).optional(),
   assetId: z.string().min(1, { message: 'Please upload a video.' }),
   published: z.boolean().default(false),
 });

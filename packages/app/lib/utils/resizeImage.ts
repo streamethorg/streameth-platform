@@ -1,6 +1,6 @@
 /**
- * Resizes an image file to a specified width and height while maintaining aspect ratio.
- * If the image's aspect ratio doesn't match the target dimensions, black bars are added.
+ * Resizes an image file to a specified width and height without stretching.
+ * The image is scaled to fit within the target dimensions, and black bars are added to fill the remaining space.
  *
  * @param file - The original image file to be resized.
  * @param [options] - Configuration options for the resize operation.
@@ -22,7 +22,7 @@ export const resizeImage = async (
 ): Promise<File> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.onload = function () {
+    img.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = options.width;
       canvas.height = options.height;
@@ -39,10 +39,12 @@ export const resizeImage = async (
         canvas.width / img.width,
         canvas.height / img.height
       );
-      const newWidth = img.width * scale;
-      const newHeight = img.height * scale;
-      const x = (canvas.width - newWidth) / 2;
-      const y = (canvas.height - newHeight) / 2;
+
+      const newWidth = Math.round(img.width * scale);
+      const newHeight = Math.round(img.height * scale);
+
+      const x = Math.round((canvas.width - newWidth) / 2);
+      const y = Math.round((canvas.height - newHeight) / 2);
 
       ctx.drawImage(img, x, y, newWidth, newHeight);
 
@@ -63,7 +65,7 @@ export const resizeImage = async (
       );
     };
 
-    img.onerror = function () {
+    img.onerror = () => {
       reject(new Error('Failed to load image'));
     };
 

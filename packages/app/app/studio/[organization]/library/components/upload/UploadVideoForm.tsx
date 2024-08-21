@@ -16,10 +16,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { sessionSchema } from '@/lib/schema';
 import { toast } from 'sonner';
-import { createSessionAction } from '@/lib/actions/sessions';
+import {
+  createSessionAction,
+  updateSessionAction,
+} from '@/lib/actions/sessions';
 import { Loader2, Earth, Lock, ChevronDown } from 'lucide-react';
 import Dropzone from './Dropzone';
-import { getFormSubmitStatus } from '@/lib/utils/utils';
+import { getFormSubmitStatus, getImageUrl } from '@/lib/utils/utils';
 import { DialogClose } from '@/components/ui/dialog';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { createStateAction } from '@/lib/actions/state';
@@ -50,7 +53,6 @@ const UploadVideoForm = ({
     defaultValues: {
       name: '',
       description: '',
-      coverImage: '',
       assetId: '',
     },
   });
@@ -65,6 +67,7 @@ const UploadVideoForm = ({
     createSessionAction({
       session: {
         ...values,
+        coverImage: '',
         organizationId,
         speakers: [],
         start: 0,
@@ -75,8 +78,25 @@ const UploadVideoForm = ({
       },
     })
       .then(async (session) => {
-        onFinish();
+        const file = values.coverImage as File;
+        const data = new FormData();
+        data.set('file', file);
+        data.set('path', `sessions/${eventId}`);
 
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: data,
+        });
+        if (!res.ok) {
+          throw new Error(await res.text());
+        }
+
+        const imageUrl = getImageUrl('/session/${eventId}/' + file.name);
+        console.log(imageUrl);
+
+        await updateSessionAction({
+          session: { ...session, coverImage: imageUrl },
+        });
         await createStateAction({
           state: {
             sessionId: session._id,
@@ -85,6 +105,7 @@ const UploadVideoForm = ({
             organizationId: session.organizationId,
           },
         });
+        onFinish();
       })
       .catch((e) => {
         console.log(e);
@@ -177,7 +198,6 @@ const UploadVideoForm = ({
           )}
         />
         <FormField
-          disabled={!form.getValues('name')}
           control={form.control}
           name="coverImage"
           render={({ field }) => (

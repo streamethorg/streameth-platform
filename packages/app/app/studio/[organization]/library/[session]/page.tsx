@@ -20,7 +20,6 @@ import {
 import UploadToYoutubeButton from './components/UploadToYoutubeButton';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
-import UploadTwitterButton from './components/UploadTwitterButton';
 
 const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
@@ -30,12 +29,9 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  // Check if session exists and has a playbackId. If not, return a 'not found' response.
   if (!session?.playbackId) return notFound();
 
   const videoUrl = await getVideoUrlAction(session);
-
-  // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();
 
   return (
