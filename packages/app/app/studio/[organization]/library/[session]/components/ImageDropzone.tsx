@@ -11,8 +11,8 @@ import { resizeImage } from '@/lib/utils/resizeImage';
 interface ImageDropzoneProps {
   id?: string;
   placeholder?: string;
-  onChange: (file: File | string | null) => void;
-  value: File | string | null | undefined;
+  onChange: (file: string | null) => void;
+  value: string | null | undefined;
   path: string;
 }
 
@@ -36,7 +36,18 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
       if (!file) return;
       setIsUploading(true);
       try {
-        onChange(file);
+        const data = new FormData();
+        data.set('file', file);
+        data.set('path', path);
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: data,
+        });
+        if (!res.ok) {
+          throw new Error(await res.text());
+        }
+        onChange(getImageUrl('/' + path + '/' + file.name));
 
         toast.success('Image uploaded successfully');
         setIsUploading(false);
@@ -108,7 +119,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
                 Drag and drop your thumbnail to upload... Or just click here!
               </p>
               <p>
-                Maximum image file size is 2MB. Best resolution is 1920 x 1080.
+                Maximum image file size is 2MB. Best resolution is 1280 x 720.
                 Aspect ratio of 16:9
               </p>
             </div>

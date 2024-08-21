@@ -52,6 +52,7 @@ const UploadVideoForm = ({
     resolver: zodResolver(sessionSchema),
     defaultValues: {
       name: '',
+      coverImage: '',
       description: '',
       assetId: '',
     },
@@ -78,25 +79,6 @@ const UploadVideoForm = ({
       },
     })
       .then(async (session) => {
-        const file = values.coverImage as File;
-        const data = new FormData();
-        data.set('file', file);
-        data.set('path', `sessions/${eventId}`);
-
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: data,
-        });
-        if (!res.ok) {
-          throw new Error(await res.text());
-        }
-
-        const imageUrl = getImageUrl('/session/${eventId}/' + file.name);
-        console.log(imageUrl);
-
-        await updateSessionAction({
-          session: { ...session, coverImage: imageUrl },
-        });
         await createStateAction({
           state: {
             sessionId: session._id,
