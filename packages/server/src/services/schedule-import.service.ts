@@ -5,7 +5,6 @@ import {
 } from '@interfaces/schedule-importer.interface';
 import { SessionType } from '@interfaces/session.interface';
 import ScheduleImport from '@models/schedule.model';
-import Session from '@models/session.model';
 import Stage from '@models/stage.model';
 import { generateId } from '@utils/util';
 import { Types } from 'mongoose';
@@ -50,6 +49,7 @@ export default class ScheduleImporterService {
           name: stage.name,
           organizationId: schedule.organizationId,
           slug: stage.slug,
+          streamDate: stage.streamDate,
         });
       }
     }
@@ -141,6 +141,7 @@ export default class ScheduleImporterService {
         name: room.name,
         slug: generateId(room.name),
         organizationId: organizationId,
+        streamDate: new Date(data.schedule.conference.start)
       };
     });
     let sessionsData = [];
