@@ -88,16 +88,16 @@ export default function CreateEventForm({
 
   return (
     <Form {...form}>
-      <Card className="relative mx-auto w-full max-w-4xl rounded-2xl border bg-white shadow-none">
-        <CardHeader className="flex flex-row items-center justify-between border-b">
+      <Card className="relative mx-auto w-full max-w-4xl bg-white rounded-2xl border shadow-none">
+        <CardHeader className="flex flex-row justify-between items-center border-b">
           <p className="text-3xl">Create an event</p>
-          <div className="flex w-full max-w-[300px] flex-row justify-between">
+          <div className="flex flex-row justify-between w-full max-w-[300px]">
             {[
               { stage: 0, name: 'Details' },
               { stage: 1, name: 'Design' },
               { stage: 2, name: 'Data' },
             ].map((i, index) => (
-              <div className="relative flex w-full flex-col" key={i.stage}>
+              <div className="flex relative flex-col w-full" key={i.stage}>
                 <div
                   onClick={() => setStage(i.stage)}
                   className={`z-50 mx-auto flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-sm text-white ${
@@ -113,7 +113,7 @@ export default function CreateEventForm({
                     } absolute top-0 z-40 h-full w-1/2 bg-white`}
                   ></div>
                 )}
-                <hr className="absolute top-[15px] z-[0] w-full bg-black" />
+                <hr className="absolute w-full bg-black top-[15px] z-[0]" />
                 <p
                   className={`z-50 mx-auto ${
                     stage === i.stage ? 'text-black' : 'text-muted'
@@ -128,7 +128,7 @@ export default function CreateEventForm({
         <CardContent className="'p-4">
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div
-              className="space-y-8 p-4"
+              className="p-4 space-y-8"
               style={
                 stage !== 0
                   ? { display: 'none' }
@@ -172,7 +172,7 @@ export default function CreateEventForm({
                   </FormItem>
                 )}
               />
-              <div className="flex w-full flex-row space-x-4">
+              <div className="flex flex-row space-x-4 w-full">
                 <FormField
                   control={form.control}
                   name="location"
@@ -211,7 +211,7 @@ export default function CreateEventForm({
                 />
               </div>
               <div className="flex flex-row space-x-4">
-                <div className="flex w-1/2 flex-row space-x-1">
+                <div className="flex flex-row space-x-1 w-1/2">
                   <FormField
                     control={form.control}
                     name="start"
@@ -245,7 +245,7 @@ export default function CreateEventForm({
                     )}
                   />
                 </div>
-                <div className="flex w-1/2 flex-row space-x-1">
+                <div className="flex flex-row space-x-1 w-1/2">
                   <FormField
                     control={form.control}
                     name="end"
@@ -290,9 +290,9 @@ export default function CreateEventForm({
                       display: 'block',
                     }
               }
-              className="space-y-4 p-4"
+              className="p-4 space-y-4"
             >
-              <div className=" ">
+              <div className="">
                 <p className="mb-4 text-lg">Upload event Logo and Banner</p>
                 <FormField
                   control={form.control}
@@ -301,10 +301,12 @@ export default function CreateEventForm({
                     <FormItem className="">
                       <FormControl>
                         <ImageUpload
-                          className="h-52 w-full rounded-xl bg-neutrals-300"
-                          placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
-                    Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
-                          aspectRatio={16 / 9}
+                          options={{
+                            placeholder:
+                              'Drag or click to upload image here. Maximum image file size is 5MB. Best resolution of 1584 x 396px. Aspect ratio of 4:1. ',
+                            aspectRatio: 16 / 9,
+                          }}
+                          className="w-full h-52 rounded-xl bg-neutrals-300"
                           path={`events/${organization?.slug}`}
                           {...field}
                         />
@@ -317,11 +319,13 @@ export default function CreateEventForm({
                   control={form.control}
                   name="logo"
                   render={({ field }) => (
-                    <FormItem className="relative mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1">
+                    <FormItem className="flex relative p-1 mx-4 w-24 h-24 bg-white rounded-full mt-[-50px]">
                       <FormControl>
                         <ImageUpload
-                          className="m-auto h-full w-full rounded-full bg-neutrals-300 text-white"
-                          aspectRatio={1}
+                          className="m-auto w-full h-full text-white rounded-full bg-neutrals-300"
+                          options={{
+                            aspectRatio: 1,
+                          }}
                           path={`events/${organization?.slug}`}
                           {...field}
                         />
@@ -331,7 +335,7 @@ export default function CreateEventForm({
                   )}
                 />
               </div>
-              <div className="flex w-full space-x-4">
+              <div className="flex space-x-4 w-full">
                 <FormField
                   control={form.control}
                   name="eventCover"
@@ -343,11 +347,13 @@ export default function CreateEventForm({
                       <FormControl>
                         <ImageUpload
                           className="h-40 rounded-xl"
-                          placeholder="Drag or click to upload image here. Maximum image file size is 20MB.
-                        Best resolution of 1584 x 396px. Aspect ratio of 4:1. "
+                          options={{
+                            aspectRatio: 3 / 1,
+                            placeholder:
+                              'Drag or click to upload image here. Maximum image file size is 2MB. Best resolution of 1584 x 396px. Aspect ratio of 3:1. ',
+                          }}
                           path={`events/${organization?.slug}`}
                           {...field}
-                          aspectRatio={3 / 1}
                         />
                       </FormControl>
                       <FormMessage />
@@ -374,7 +380,7 @@ export default function CreateEventForm({
             </div>
             <div
               id="section3"
-              className="space-y-4 p-4"
+              className="p-4 space-y-4"
               style={
                 stage !== 2
                   ? { display: 'none' }
@@ -409,7 +415,7 @@ export default function CreateEventForm({
                 )}
               />
             </div>
-            <div className="flex flex-row items-end justify-end space-x-2">
+            <div className="flex flex-row justify-end items-end space-x-2">
               {stage !== 0 && (
                 <Button
                   variant={'outline'}
@@ -440,7 +446,7 @@ export default function CreateEventForm({
                 >
                   {isCreatingEvent ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+                      <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
                       wait
                     </>
                   ) : (

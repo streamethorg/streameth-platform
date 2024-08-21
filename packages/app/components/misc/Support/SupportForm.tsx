@@ -93,12 +93,14 @@ const SupportForm = ({
             control={form.control}
             name="image"
             render={({ field }) => (
-              <FormItem className="mt-4 flex rounded-xl border border-dashed">
+              <FormItem className="flex mt-4 rounded-xl border border-dashed">
                 <FormControl>
                   <ImageUpload
-                    placeholder="Click to upload image here. (Optional) "
-                    className="m-auto min-h-[200px] w-full bg-neutrals-300 py-4 text-black"
-                    aspectRatio={1}
+                    options={{
+                      placeholder: 'Click to upload image here. (Optional) ',
+                      aspectRatio: 1,
+                    }}
+                    className="py-4 m-auto w-full text-black min-h-[200px] bg-neutrals-300"
                     path={`support`}
                     {...field}
                   />
@@ -108,7 +110,7 @@ const SupportForm = ({
             )}
           />
 
-          <div className="flex flex-row justify-between gap-10">
+          <div className="flex flex-row gap-10 justify-between">
             <Button
               className="w-full"
               onClick={handleClose}
@@ -124,7 +126,7 @@ const SupportForm = ({
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+                  <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
                 </>
               ) : (
                 'Send'
