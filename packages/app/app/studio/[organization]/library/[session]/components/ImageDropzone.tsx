@@ -37,7 +37,12 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
       setIsUploading(true);
       try {
         const data = new FormData();
-        data.set('file', file);
+        data.set(
+          'file',
+          new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
+            type: file.type,
+          })
+        );
         data.set('path', path);
 
         const res = await fetch('/api/upload', {
@@ -50,12 +55,11 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
         onChange(getImageUrl('/' + path + '/' + file.name));
 
         toast.success('Image uploaded successfully');
-        setIsUploading(false);
       } catch (e) {
-        setIsUploading(false);
-        toast.error('Error uploading image');
         console.error(e);
+        toast.error('Error uploading image');
       }
+      setIsUploading(false);
     };
 
     const onDrop = useCallback(

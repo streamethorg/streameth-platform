@@ -1,13 +1,17 @@
 'use client';
 
-import { Input } from '@/components/ui/input';
-import { ChangeEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useCallback,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import Image from 'next/image';
-import { X } from 'lucide-react';
+import { X, Image as ImageLogo } from 'lucide-react';
 import { getImageUrl } from '@/lib/utils/utils';
 import { toast } from 'sonner';
 import { Label } from '@radix-ui/react-label';
-import { Image as ImageLogo } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -16,14 +20,14 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { useDropzone } from 'react-dropzone';
+import { resizeImage } from '@/lib/utils/resizeImage';
 
-function getImageData(event: ChangeEvent<HTMLInputElement>) {
+function getImageData(file: File) {
   const dataTransfer = new DataTransfer();
-  Array.from(event.target.files!).forEach((image) =>
-    dataTransfer.items.add(image)
-  );
+  dataTransfer.items.add(file);
   const files = dataTransfer.files;
-  const displayUrl = URL.createObjectURL(event.target.files![0]);
+  const displayUrl = URL.createObjectURL(file);
   return { files, displayUrl };
 }
 
@@ -42,14 +46,14 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
       <DialogTrigger>
         <X
           size={24}
-          className="absolute right-2 top-2 z-10 cursor-pointer rounded-full border border-muted-foreground bg-white text-muted-foreground"
+          className="absolute top-2 right-2 z-10 bg-white rounded-full border cursor-pointer border-muted-foreground text-muted-foreground"
         />
       </DialogTrigger>
 
-      <DialogContent className="flex flex-col items-center justify-center gap-5 z-[99999999999] ">
+      <DialogContent className="flex flex-col gap-5 justify-center items-center z-[99999999999]">
         <DialogTitle>Delete Image</DialogTitle>
         <p className="text-xl">Are you sure you want to delete this image?</p>
-        <DialogFooter className="flex items-center gap-4">
+        <DialogFooter className="flex gap-4 items-center">
           <Button onClick={() => setOpen(false)} variant="ghost">
             Cancel
           </Button>
@@ -71,65 +75,85 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
 
 interface ImageUploadProps {
   id?: string;
-  maxSize?: number;
-  placeholder?: string;
-  aspectRatio: number;
+  options: {
+    maxSize?: number;
+    placeholder?: string;
+    aspectRatio: number;
+    requireExactSize?: { width: number; height: number };
+    isProfileImage?: boolean;
+  };
   onChange: (value: string) => void;
   value: string | undefined;
   path: string;
   className?: string;
-  requireExactSize?: { width: number; height: number };
-  isProfileImage?: boolean;
 }
 
-export default function ImageUpload({
-  id,
-  placeholder,
-  onChange,
-  aspectRatio,
-  value,
-  path,
-  className,
-  maxSize = 5000000,
-  requireExactSize,
-  isProfileImage = false,
-}: ImageUploadProps) {
-  const [preview, setPreview] = useState<string>(
-    value ? getImageUrl('/' + path + '/' + value) : ''
-  );
-  const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+export interface ImageUploadRef {
+  reset: () => void;
+}
 
-  const validateImage = (file: File): Promise<boolean> => {
-    return new Promise((resolve) => {
-      const img = document.createElement('img');
-      img.onload = () => {
-        if (requireExactSize) {
-          if (
-            img.width !== requireExactSize.width ||
-            img.height !== requireExactSize.height
-          ) {
-            setError(
-              `Image must be exactly ${requireExactSize.width}x${requireExactSize.height} pixels`
-            );
-            resolve(false);
+const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
+  (
+    {
+      id,
+      onChange,
+      value,
+      path,
+      className,
+      options: {
+        aspectRatio,
+        requireExactSize,
+        placeholder = 'preview',
+        maxSize = 2000000,
+        isProfileImage = false,
+      },
+    },
+    ref
+  ) => {
+    const [preview, setPreview] = useState<string>(
+      value ? getImageUrl('/' + path + '/' + value) : ''
+    );
+    const [isUploading, setIsUploading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+
+    useImperativeHandle(ref, () => ({
+      reset: () => {
+        setPreview('');
+        onChange('');
+        setError(null);
+      },
+    }));
+
+    const validateImage = (file: File): Promise<boolean> => {
+      return new Promise((resolve) => {
+        const img = document.createElement('img');
+        img.onload = () => {
+          if (requireExactSize) {
+            if (
+              img.width !== requireExactSize.width ||
+              img.height !== requireExactSize.height
+            ) {
+              setError(
+                `Image must be exactly ${requireExactSize.width}x${requireExactSize.height} pixels`
+              );
+              resolve(false);
+            } else {
+              setError(null);
+              resolve(true);
+            }
           } else {
             setError(null);
             resolve(true);
           }
-        } else {
-          setError(null);
-          resolve(true);
-        }
-      };
-      img.src = URL.createObjectURL(file);
-    });
-  };
+        };
+        img.src = URL.createObjectURL(file);
+      });
+    };
 
-  const onSubmit = async (file: File): Promise<string> => {
-    if (!file) return '';
-    setIsUploading(true);
-    try {
+    const onSubmit = async (file: File): Promise<string> => {
+      console.log('on Submit');
+      if (!file) return '';
+      setIsUploading(true);
       const isValidSize = await validateImage(file);
       if (!isValidSize) {
         throw new Error(error || 'Invalid image size');
@@ -158,96 +182,101 @@ export default function ImageUpload({
         '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
       );
       setPreview(uploadedPath);
-      return uploadedPath;
-    } catch (e: any) {
-      console.error(e);
-      setPreview('');
-      throw e;
-    } finally {
       setIsUploading(false);
-    }
-  };
 
-  const containerClasses = isProfileImage
-    ? 'relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1'
-    : `${className} relative w-full h-40`;
+      return uploadedPath;
+    };
 
-  const imageClasses = isProfileImage
-    ? 'm-auto h-full w-full rounded-full bg-neutrals-300 text-white object-cover'
-    : 'w-full h-full object-cover';
+    const onDrop = useCallback(
+      async (acceptedFiles: File[]) => {
+        if (acceptedFiles.length > 0) {
+          const processedFile = await resizeImage(acceptedFiles[0]);
+          const { displayUrl } = getImageData(processedFile);
 
-  const placeholderClasses = isProfileImage
-    ? 'flex cursor-pointer flex-col items-center justify-center w-full h-full rounded-full border border-dotted bg-secondary'
-    : 'flex cursor-pointer flex-col items-center justify-center w-full h-full border border-dotted bg-secondary';
+          setPreview(displayUrl);
+          toast.promise(
+            onSubmit(processedFile).then((uploadedPath) => {
+              onChange(uploadedPath);
+              return 'Image uploaded successfully';
+            }),
+            {
+              loading: 'Uploading image',
+              success: (message) => {
+                return message;
+              },
+              error: (error: Error) => {
+                onChange('');
+                setPreview('');
+                return error.message || 'Unknown error';
+              },
+            }
+          );
+        }
+      },
+      [onChange]
+    );
 
-  return (
-    <div className={containerClasses}>
-      {isUploading ? (
-        <div className="flex h-full w-full items-center justify-center">
-          Uploading image...
-        </div>
-      ) : preview ? (
-        <div className="relative h-full w-full">
-          <ConfirmImageDeletion
-            onChange={() => {
-              onChange('');
-              setPreview('');
-            }}
-            setPreview={setPreview}
-          />
-          <Image src={preview} alt="preview" fill className={imageClasses} />
-        </div>
-      ) : (
-        <Label htmlFor={id} className={placeholderClasses}>
-          <div className="rounded-full bg-neutral-400 p-2 text-white">
-            <ImageLogo />
+    const { getRootProps, getInputProps } = useDropzone({
+      accept: {
+        'image/*': ['.png', '.jpg', '.gif'],
+      },
+      maxSize,
+      maxFiles: 1,
+      onDrop,
+    });
+
+    const containerClasses = isProfileImage
+      ? 'relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1'
+      : `${className} relative w-full h-40`;
+
+    const imageClasses = isProfileImage
+      ? 'm-auto h-full w-full rounded-full bg-neutrals-300 text-white object-cover'
+      : 'w-full h-full object-contain';
+
+    const placeholderClasses = isProfileImage
+      ? 'flex cursor-pointer flex-col items-center justify-center w-full h-full rounded-full border border-dotted bg-secondary'
+      : 'flex cursor-pointer flex-col items-center justify-center w-full h-full border border-dotted bg-secondary';
+
+    return (
+      <div className={containerClasses}>
+        {isUploading ? (
+          <div className="flex justify-center items-center w-full h-full">
+            Uploading image...
           </div>
-          {!isProfileImage && (
-            <p className="w-full p-1 text-center text-[12px] lg:w-2/3">
-              {placeholder}
-            </p>
-          )}
-        </Label>
-      )}
-      <Input
-        id={id}
-        type="file"
-        accept=".png,.jpg,.jpeg"
-        placeholder="Upload image"
-        className="hidden"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          if (event.target.files && event.target.files.length > 0) {
-            const { files, displayUrl } = getImageData(event);
+        ) : preview ? (
+          <div className="relative w-full h-full">
+            <ConfirmImageDeletion
+              onChange={() => {
+                onChange('');
+                setPreview('');
+              }}
+              setPreview={setPreview}
+            />
+            <Image src={preview} alt="preview" fill className={imageClasses} />
+          </div>
+        ) : (
+          <div {...getRootProps()} className={placeholderClasses}>
+            <div className="p-2 text-white rounded-full bg-neutral-400">
+              <ImageLogo />
+            </div>
+            {!isProfileImage && (
+              <p className="p-1 w-full text-center lg:w-2/3 text-[12px]">
+                {placeholder}
+              </p>
+            )}
+            <input {...getInputProps()} />
+            {error && (
+              <p className="absolute right-0 left-0 mt-2 text-sm text-center text-red-500 bottom-[-2rem]">
+                {error}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+);
 
-            setPreview(displayUrl);
-            toast.promise(
-              onSubmit(files[0]).then((uploadedPath) => {
-                onChange(uploadedPath);
-                return 'Image uploaded successfully';
-              }),
-              {
-                loading: 'Uploading image',
-                success: (message) => {
-                  return message;
-                },
-                error: (error: Error) => {
-                  setPreview('');
-                  onChange(''); // Set to empty string on error
-                  return error.message || 'Unknown error';
-                },
-              }
-            );
-          } else {
-            setPreview('');
-            onChange(''); // Set to empty string when no file is selected
-          }
-        }}
-      />
-      {error && (
-        <p className="absolute bottom-[-2rem] left-0 right-0 mt-2 text-center text-sm text-red-500">
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
+ImageUpload.displayName = 'ImageUpload';
+
+export default ImageUpload;
