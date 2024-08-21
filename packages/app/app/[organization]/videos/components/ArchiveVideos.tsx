@@ -19,7 +19,7 @@ const ArchiveVideos = ({
   const [videos, setVideos] = useState<IExtendedSession[]>([]);
   const [pagination, setPagination] = useState<IPagination | null>(null);
   const [currentSearchQuery, setCurrentSearchQuery] = useState('');
-
+  const [currentEvent, setCurrentEvent] = useState('');
   const fetchSessions = ({
     page = 1,
     reset,
@@ -53,12 +53,15 @@ const ArchiveVideos = ({
   useEffect(() => {
     fetchSessions({
       page: 1,
-      reset: searchQuery !== currentSearchQuery,
+      reset: searchQuery !== currentSearchQuery || event !== currentEvent,
     });
     if (searchQuery && searchQuery !== currentSearchQuery) {
       setCurrentSearchQuery(searchQuery);
     }
-  }, [searchQuery]);
+    if (event && event !== currentEvent) {
+      setCurrentEvent(event);
+    }
+  }, [searchQuery, event]);
 
   if (Videos.length === 0) {
     return (
