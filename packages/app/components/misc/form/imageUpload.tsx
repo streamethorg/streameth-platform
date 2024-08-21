@@ -148,12 +148,12 @@ export default function ImageUpload({
         })
       );
       data.set('directory', path);
-      const res = await imageUploadAction({ data });
-      if (!res) {
+      const imageUrl = await imageUploadAction({ data });
+      if (!imageUrl) {
         throw new Error('Error uploading image');
       }
-      setPreview(res);
-      return res;
+      setPreview(imageUrl);
+      return imageUrl;
     } catch (e: any) {
       console.error(e);
       setPreview('');

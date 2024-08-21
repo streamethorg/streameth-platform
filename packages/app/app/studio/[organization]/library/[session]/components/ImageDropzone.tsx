@@ -41,11 +41,11 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
         const data = new FormData();
         data.set('file', file);
         data.set('directory', path);
-        const res = await imageUploadAction({ data });
-        if (!res) {
+        const imageUrl = await imageUploadAction({ data });
+        if (!imageUrl) {
           throw new Error('Error uploading image');
         }
-        onChange(res);
+        onChange(imageUrl);
         toast.success('Image uploaded successfully');
         setIsUploading(false);
       } catch (e: any) {
