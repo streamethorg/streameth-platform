@@ -20,7 +20,7 @@ import {
 import { stageSessionImportAction } from '@/lib/actions/sessions';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import StageImportPreviewDialog from './StageImportPreviewDialog';
+import ImportPreviewDialog from './ImportPreviewDialog';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
 const ImportDataButton = ({
@@ -36,6 +36,7 @@ const ImportDataButton = ({
   const [url, setUrl] = useState('');
   const [previewData, setPreviewData] = useState<IScheduleImportMetadata>();
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [scheduleId, setScheduleId] = useState('');
 
   const handleImportSession = async () => {
     setIsImporting(true);
@@ -48,7 +49,8 @@ const ImportDataButton = ({
       .then((response) => {
         if (response) {
           setPreviewData(response?.metadata);
-          toast.success('Session imported successfully');
+          setScheduleId(response?._id);
+          toast.success('Preview generated successfully');
           setIsPreviewOpen(true);
           setOpen(false);
         } else {
@@ -114,10 +116,11 @@ const ImportDataButton = ({
         </DialogContent>
       </Dialog>
 
-      <StageImportPreviewDialog
+      <ImportPreviewDialog
         open={isPreviewOpen}
         previewData={previewData}
-        onClose={setIsPreviewOpen}
+        setOpen={setIsPreviewOpen}
+        scheduleId={scheduleId}
       />
     </>
   );

@@ -4558,6 +4558,42 @@
         }
       }
     },
+    "/schedule/import/save": {
+      "post": {
+        "operationId": "Save",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IStandardResponse_void_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Schedule"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "scheduleId": {
+                    "type": "string"
+                  }
+                },
+                "required": ["scheduleId"],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
     "/organizations": {
       "post": {
         "operationId": "CreateOrganization",

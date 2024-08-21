@@ -6,27 +6,50 @@ import {
   DialogFooter,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { saveSessionImportAction } from '@/lib/actions/sessions';
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
-const StageImportPreviewDialog = ({
+const ImportPreviewDialog = ({
   previewData,
   open,
-  onClose,
+  setOpen,
   hasRooms = false,
+  scheduleId,
 }: {
   previewData?: IScheduleImportMetadata;
   open: boolean;
-  onClose: (open: boolean) => void;
+  setOpen: (open: boolean) => void;
   hasRooms?: boolean;
+  scheduleId: string;
 }) => {
   const [isSavingSessions, setIsSavingSessions] = useState(false);
-  // TODO:Coming soon when save endpoint is implemented
-  const handleSaveSessions = async () => {};
+
+  const handleSaveSessions = async () => {
+    setIsSavingSessions(true);
+    await saveSessionImportAction({
+      scheduleId,
+    })
+      .then((response) => {
+        if (response) {
+          toast.success('Session saved successfully');
+          setOpen(false);
+        } else {
+          toast.error('Error Saving data');
+        }
+      })
+      .catch(() => {
+        toast.error('Error Saving data');
+      })
+      .finally(() => {
+        setIsSavingSessions(false);
+      });
+  };
 
   return (
     <>
-      <Dialog open={open} onOpenChange={onClose}>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="md:min-w-[600px] lg:min-w-[800px] ">
           <DialogTitle>Import Preview</DialogTitle>
           <p className="font-bold">Please confirm data before saving.</p>
@@ -81,7 +104,7 @@ const StageImportPreviewDialog = ({
           </div>
 
           <DialogFooter>
-            <Button onClick={() => onClose(false)} variant={'outline'}>
+            <Button onClick={() => setOpen(false)} variant={'outline'}>
               Cancel
             </Button>
             <Button
@@ -89,7 +112,7 @@ const StageImportPreviewDialog = ({
                 handleSaveSessions();
               }}
               variant={'primary'}
-              disabled={!previewData}
+              disabled={!previewData || !scheduleId}
               loading={isSavingSessions}
             >
               Save
@@ -97,13 +120,8 @@ const StageImportPreviewDialog = ({
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      {/* <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
-        <DialogContent className="flex flex-column items-center justify-center">
-          <LiaCheckCircleSolid size={40} /> <p>Data Imported successfully.</p>
-        </DialogContent>
-      </Dialog> */}
     </>
   );
 };
 
-export default StageImportPreviewDialog;
+export default ImportPreviewDialog;

@@ -16,6 +16,8 @@ import Link from 'next/link';
 import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import ImportDataButton from './components/StreamPlatforms/StageDataImport/ImportDataButton';
+import ViewSessionsDialog from './components/StreamPlatforms/StageDataImport/ViewSessionsDialog';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null;
@@ -23,6 +25,8 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   const organization = await fetchOrganization({
     organizationId: params.organization,
   });
+  const stageSessions = (await fetchAllSessions({ stageId: params.streamId }))
+    .sessions;
 
   if (!stream || !organization) {
     return NotFound();
@@ -73,6 +77,10 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
                 </div>
               </Button>
             </Link>
+
+            {stageSessions.length > 0 && (
+              <ViewSessionsDialog sessions={stageSessions} />
+            )}
 
             <ImportDataButton
               organizationId={organization._id}

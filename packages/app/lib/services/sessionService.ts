@@ -1,5 +1,9 @@
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface';
-import { IExtendedSession, IPagination } from '../types';
+import {
+  IExtendedScheduleImporter,
+  IExtendedSession,
+  IPagination,
+} from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { Livepeer } from 'livepeer';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
@@ -429,7 +433,7 @@ export const sessionImport = async ({
   type: string;
   organizationId: string;
   authToken: string;
-}): Promise<IScheduleImporter> => {
+}): Promise<IExtendedScheduleImporter> => {
   try {
     const response = await fetch(`${apiUrl()}/schedule/import`, {
       method: 'POST',
@@ -466,7 +470,7 @@ export const stageSessionImport = async ({
   organizationId: string;
   authToken: string;
   stageId: string;
-}): Promise<IScheduleImporter> => {
+}): Promise<IExtendedScheduleImporter> => {
   try {
     const response = await fetch(`${apiUrl()}/schedule/import/stage`, {
       method: 'POST',
@@ -479,6 +483,34 @@ export const stageSessionImport = async ({
         type,
         organizationId,
         stageId,
+      }),
+    });
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in sessionImport', e);
+    throw e;
+  }
+};
+
+export const saveSessionImport = async ({
+  authToken,
+  scheduleId,
+}: {
+  authToken: string;
+  scheduleId: string;
+}): Promise<IExtendedScheduleImporter> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import/save`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        scheduleId,
       }),
     });
     if (!response.ok) {

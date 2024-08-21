@@ -20,7 +20,7 @@ import {
 import { sessionImportAction } from '@/lib/actions/sessions';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import StageImportPreviewDialog from '../[streamId]/components/StreamPlatforms/StageDataImport/StageImportPreviewDialog';
+import ImportPreviewDialog from '../[streamId]/components/StreamPlatforms/StageDataImport/ImportPreviewDialog';
 import { FaFileImport } from 'react-icons/fa';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
@@ -31,6 +31,7 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
   const [url, setUrl] = useState('');
   const [previewData, setPreviewData] = useState<IScheduleImportMetadata>();
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [scheduleId, setScheduleId] = useState('');
 
   const handleImportSession = async () => {
     setIsImporting(true);
@@ -42,7 +43,8 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
       .then((response) => {
         if (response) {
           setPreviewData(response?.metadata);
-          toast.success('Session imported successfully');
+          setScheduleId(response?._id);
+          toast.success('Preview generated successfully');
           setIsPreviewOpen(true);
           setOpen(false);
         } else {
@@ -115,11 +117,12 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
         </DialogContent>
       </Dialog>
 
-      <StageImportPreviewDialog
+      <ImportPreviewDialog
         open={isPreviewOpen}
         previewData={previewData}
-        onClose={setIsPreviewOpen}
+        setOpen={setIsPreviewOpen}
         hasRooms
+        scheduleId={scheduleId}
       />
     </>
   );
