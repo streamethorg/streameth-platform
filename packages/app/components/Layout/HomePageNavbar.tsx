@@ -97,13 +97,13 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible]);
 
   return (
-    <NavigationMenu className="sticky top-0 z-50 flex flex-row items-center bg-white lg:hidden">
+    <NavigationMenu className="flex sticky top-0 z-50 flex-row items-center bg-white lg:hidden">
       {(searchVisible || menuVisible) && (
-        <div className="absolute left-0 top-0 h-[100vh] w-[100vw] bg-black bg-opacity-50" />
+        <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
 
       {searchVisible && showSearchBar && (
-        <div className="absolute bottom-[-56px] w-full bg-secondary">
+        <div className="absolute w-full bottom-[-56px] bg-secondary">
           <SearchBar organizationSlug={currentOrganization} isMobile={true} />
         </div>
       )}
@@ -132,26 +132,24 @@ const MobileNavBar = ({
             <IconLeft className="mr-1" /> Go back
           </Button>
         ) : (
-          showSearchBar && (
-            <Link href={`/${currentOrganization}`}>
-              <Image
-                src={logo ?? '/logo.png'}
-                alt="Logo"
-                height={36}
-                width={36}
-                className="aspect-square h-full"
-              />
-            </Link>
-          )
+          <Link href={`/${currentOrganization}`}>
+            <Image
+              src={logo ?? '/logo.png'}
+              alt="Logo"
+              height={36}
+              width={36}
+              className="h-full aspect-square"
+            />
+          </Link>
         )}
 
-        <div className="ml-auto flex items-center">
+        <div className="flex items-center ml-auto">
           {showSearchBar && (
             <button onClick={toggleSearch} className="p-2">
               {searchVisible ? (
-                <X className="h-6 w-6 text-primary" />
+                <X className="w-6 h-6 text-primary" />
               ) : (
-                <Search className="h-6 w-6 text-primary" />
+                <Search className="w-6 h-6 text-primary" />
               )}
             </button>
           )}
@@ -204,8 +202,8 @@ const PCNavBar = ({
   };
 
   return (
-    <NavigationMenu className="sticky top-0 z-[30] hidden w-full flex-row items-center justify-between bg-white p-2 px-4 md:hidden lg:flex">
-      <div className="flex flex-1 items-center justify-start">
+    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white md:hidden lg:flex z-[30]">
+      <div className="flex flex-1 justify-start items-center">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>
             <Image
@@ -238,7 +236,7 @@ const PCNavBar = ({
           </div>
         )}
       </div>
-      <div className="mx-auto flex w-2/5 flex-grow-0 items-center justify-center">
+      <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
         {showSearchBar && (
           <SearchBar
             searchVisible={showSearchBar}
@@ -246,7 +244,7 @@ const PCNavBar = ({
           />
         )}
       </div>
-      <div className="flex flex-1 items-center justify-end">
+      <div className="flex flex-1 justify-end items-center">
         {organizations && (
           <SwitchOrganization
             organization={currentOrganization}

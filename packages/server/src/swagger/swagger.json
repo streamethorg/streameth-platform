@@ -424,7 +424,7 @@
         "type": "string"
       },
       "StateType": {
-        "enum": ["event", "video"],
+        "enum": ["nft", "event", "video"],
         "type": "string"
       },
       "IState": {
@@ -1963,9 +1963,12 @@
           },
           "text": {
             "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
           }
         },
-        "required": ["socialId", "organizationId", "sessionId", "type"],
+        "required": ["sessionId", "type"],
         "type": "object",
         "additionalProperties": false
       },
