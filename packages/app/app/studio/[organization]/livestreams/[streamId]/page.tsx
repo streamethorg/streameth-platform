@@ -79,7 +79,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             </Link>
 
             {stageSessions.length > 0 && (
-              <ViewSessionsDialog sessions={stageSessions} />
+              <ViewSessionsDialog sessions={stageSessions.reverse()} />
             )}
 
             <ImportDataButton

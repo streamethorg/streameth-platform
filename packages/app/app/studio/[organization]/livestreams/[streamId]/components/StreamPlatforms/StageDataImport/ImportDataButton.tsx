@@ -107,7 +107,7 @@ const ImportDataButton = ({
                 handleImportSession();
               }}
               variant={'primary'}
-              disabled={!url}
+              disabled={url.length < 8}
               loading={isImporting}
             >
               Import

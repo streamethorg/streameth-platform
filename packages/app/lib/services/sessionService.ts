@@ -501,7 +501,7 @@ export const saveSessionImport = async ({
 }: {
   authToken: string;
   scheduleId: string;
-}): Promise<IExtendedScheduleImporter> => {
+}): Promise<string> => {
   try {
     const response = await fetch(`${apiUrl()}/schedule/import/save`, {
       method: 'POST',
@@ -516,7 +516,8 @@ export const saveSessionImport = async ({
     if (!response.ok) {
       throw 'Error importing session';
     }
-    return (await response.json()).data;
+    revalidatePath('/studio');
+    return (await response.json()).message;
   } catch (e) {
     console.log('error in sessionImport', e);
     throw e;
