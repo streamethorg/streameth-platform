@@ -29,4 +29,13 @@ export class ScheduleImporterController extends Controller {
     const importer = await this.importerService.importByStage(body);
     return SendApiResponse('schedule generated', importer);
   }
+
+  @SuccessResponse('201')
+  @Post('import/save')
+  async save(
+    @Body() body: { scheduleId: string },
+  ): Promise<IStandardResponse<void>> {
+    await this.importerService.save(body.scheduleId);
+    return SendApiResponse('schedule saved');
+  }
 }

@@ -1,5 +1,8 @@
 import { HttpException } from '@exceptions/HttpException';
-import { IScheduleImporter } from '@interfaces/schedule-importer.interface';
+import {
+  ImportStatus,
+  IScheduleImporter,
+} from '@interfaces/schedule-importer.interface';
 import { SessionType } from '@interfaces/session.interface';
 import ScheduleImport from '@models/schedule.model';
 import Session from '@models/session.model';
@@ -7,7 +10,12 @@ import Stage from '@models/stage.model';
 import { generateId } from '@utils/util';
 import { Types } from 'mongoose';
 import fetch from 'node-fetch';
+import SessionService from './session.service';
+import StageService from './stage.service';
 export default class ScheduleImporterService {
+  private stageService = new StageService();
+  private sessionService = new SessionService();
+
   async importSessionsAndStage(data: {
     url: string;
     type: string;
@@ -30,6 +38,41 @@ export default class ScheduleImporterService {
       organizationId: data.organizationId,
       stageId: data.stageId,
     });
+  }
+
+  async save(scheduleId: string): Promise<void> {
+    const schedule = await ScheduleImport.findById(scheduleId);
+    if (!schedule) throw new HttpException(404, 'Schedule not found');
+    if (schedule.metadata.stages.length !== 0) {
+      for (const stage of schedule.metadata.stages) {
+        await this.stageService.create({
+          _id: stage._id,
+          name: stage.name,
+          organizationId: schedule.organizationId,
+          slug: stage.slug,
+        });
+      }
+    }
+    if (schedule.metadata.sessions.length !== 0) {
+      for (const session of schedule.metadata.sessions) {
+        await this.sessionService.create({
+          _id: session._id,
+          name: session.name,
+          description: session.description || 'No description',
+          start: session.start,
+          end: session.end,
+          slug: session.slug,
+          organizationId: session.organizationId,
+          type: session.type,
+          stageId: session.stageId,
+          speakers: session.speakers,
+        });
+      }
+    }
+    await schedule.updateOne(
+      { status: ImportStatus.completed },
+      { upsert: true },
+    );
   }
 
   private async pretalxStage(d: {
@@ -74,9 +117,10 @@ export default class ScheduleImporterService {
     return ScheduleImport.create({
       url: d.url,
       type: 'pretalx',
-      status: 'completed',
+      status: 'pending',
       organizationId: d.organizationId,
       metadata: {
+        stages: [],
         sessions: sessionsData,
       },
     });
@@ -96,6 +140,7 @@ export default class ScheduleImporterService {
         _id: new Types.ObjectId().toString(),
         name: room.name,
         slug: generateId(room.name),
+        organizationId: organizationId,
       };
     });
     let sessionsData = [];
@@ -130,7 +175,7 @@ export default class ScheduleImporterService {
     return ScheduleImport.create({
       url,
       type: 'pretalx',
-      status: 'completed',
+      status: 'pending',
       organizationId: organizationId,
       metadata: {
         stages: rooms,
