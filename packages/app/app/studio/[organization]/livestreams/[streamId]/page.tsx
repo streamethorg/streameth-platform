@@ -59,6 +59,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               playerName={stream?.name}
             />
             <ShareLivestream
+              streamId={params.streamId}
               variant={'outline'}
               organization={params.organization}
             />
