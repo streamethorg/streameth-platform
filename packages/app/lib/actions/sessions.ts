@@ -10,6 +10,9 @@ import {
   createAsset,
   generateThumbnail,
   uploadSessionToYouTube,
+  sessionImport,
+  stageSessionImport,
+  saveSessionImport,
 } from '../services/sessionService';
 import {
   ISession,
@@ -191,6 +194,93 @@ export const uploadSessionToYouTubeAction = async ({
     return res;
   } catch (e) {
     console.error('Error generating thumbnail acton');
+    return null;
+  }
+};
+
+export const sessionImportAction = async ({
+  url,
+  type,
+  organizationId,
+}: {
+  url: string;
+  organizationId: string;
+  type: string;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+
+  try {
+    const res = await sessionImport({
+      url,
+      organizationId,
+      type,
+      authToken,
+    });
+    revalidatePath('/studio');
+
+    return res;
+  } catch (e) {
+    console.error('Error importing session acton');
+    return null;
+  }
+};
+
+export const stageSessionImportAction = async ({
+  url,
+  type,
+  organizationId,
+  stageId,
+}: {
+  url: string;
+  organizationId: string;
+  type: string;
+  stageId: string;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+
+  try {
+    const res = await stageSessionImport({
+      url,
+      organizationId,
+      type,
+      authToken,
+      stageId,
+    });
+    revalidatePath('/studio');
+
+    return res;
+  } catch (e) {
+    console.error('Error importing session acton');
+    return null;
+  }
+};
+
+export const saveSessionImportAction = async ({
+  scheduleId,
+}: {
+  scheduleId: string;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+
+  try {
+    const res = await saveSessionImport({
+      scheduleId,
+      authToken,
+    });
+    revalidatePath('/studio');
+
+    return res;
+  } catch (e) {
+    console.error('Error importing session acton');
     return null;
   }
 };

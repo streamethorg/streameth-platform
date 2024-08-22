@@ -11,6 +11,7 @@ import {
 import DeleteMultistream from './DeleteMultistream';
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
 import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
+import { SiYoutube } from 'react-icons/si';
 
 const Multistream = ({
   stream,
@@ -27,7 +28,16 @@ const Multistream = ({
   const getTargetName = (socialId: string) => {
     if (socialId) {
       const target = organization?.socials?.find((s) => s._id === socialId);
-      return `${target?.name} (${target?.type})`;
+      return (
+        <div className="flex items-center gap-2">
+          {target?.name}
+          {target?.type === 'youtube' ? (
+            <SiYoutube color="#FF0000" size={25} />
+          ) : (
+            target?.type
+          )}
+        </div>
+      );
     } else return null;
   };
 
