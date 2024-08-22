@@ -1,5 +1,5 @@
-import BaseImporter from '..';
 import moment from 'moment-timezone';
+import BaseImporter from '..';
 
 export default class PretalxImporter extends BaseImporter {
   async generateSpeakers(sheetId: string, eventId: string): Promise<void> {

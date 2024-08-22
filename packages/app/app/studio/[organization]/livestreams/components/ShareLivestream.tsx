@@ -9,7 +9,7 @@ const ShareLivestream = ({
 }: {
   organization: string;
   variant?: 'outline' | 'ghost' | 'primary' | 'default';
-  streamId?: string;
+  streamId: string;
 }) => {
   const [url, setUrl] = useState('');
   useEffect(() => {

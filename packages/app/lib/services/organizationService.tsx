@@ -17,7 +17,8 @@ export async function fetchOrganization({
     const response = await fetch(
       `${apiUrl()}/organizations/${
         organizationId ? organizationId : organizationSlug
-      }`
+      }`,
+      { cache: 'no-store' }
     );
     const data = (await response.json()).data;
 

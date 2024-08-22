@@ -10,6 +10,7 @@ import { IState } from 'streameth-new-server/src/interfaces/state.interface';
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface';
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
+import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
 export interface HomePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -235,4 +236,8 @@ export interface ChannelPageParams {
 
 export interface INFTSessions extends IExtendedSession {
   videoType: string;
+}
+
+export interface IExtendedScheduleImporter extends IScheduleImporter {
+  _id: string;
 }
