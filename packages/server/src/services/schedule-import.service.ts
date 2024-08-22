@@ -141,7 +141,7 @@ export default class ScheduleImporterService {
         name: room.name,
         slug: generateId(room.name),
         organizationId: organizationId,
-        streamDate: new Date(data.schedule.conference.start)
+        streamDate: new Date(data.schedule.conference.start),
       };
     });
     let sessionsData = [];
