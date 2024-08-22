@@ -1,8 +1,13 @@
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface';
-import { IExtendedSession, IPagination } from '../types';
+import {
+  IExtendedScheduleImporter,
+  IExtendedSession,
+  IPagination,
+} from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { Livepeer } from 'livepeer';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
+import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components';
 import FuzzySearch from 'fuzzy-search';
@@ -270,14 +275,6 @@ export const createClip = async ({
     });
 
     if (!response.ok) {
-      console.log({
-        end,
-        playbackId,
-        sessionId,
-        start,
-        recordingId,
-      });
-      console.log('error in createClip', await response.json());
       throw 'Error updating session';
     }
     revalidatePath('/studio');
@@ -423,6 +420,107 @@ export const uploadSessionToYouTube = async ({
     return (await response.json()).status;
   } catch (e) {
     console.log('error in upload session to social', e);
+    throw e;
+  }
+};
+
+export const sessionImport = async ({
+  url,
+  type,
+  organizationId,
+  authToken,
+}: {
+  url: string;
+  type: string;
+  organizationId: string;
+  authToken: string;
+}): Promise<IExtendedScheduleImporter> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        url,
+        type,
+        organizationId,
+      }),
+    });
+
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in sessionImport', e);
+    throw e;
+  }
+};
+
+export const stageSessionImport = async ({
+  url,
+  type,
+  organizationId,
+  authToken,
+  stageId,
+}: {
+  url: string;
+  type: string;
+  organizationId: string;
+  authToken: string;
+  stageId: string;
+}): Promise<IExtendedScheduleImporter> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import/stage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        url,
+        type,
+        organizationId,
+        stageId,
+      }),
+    });
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in sessionImport', e);
+    throw e;
+  }
+};
+
+export const saveSessionImport = async ({
+  authToken,
+  scheduleId,
+}: {
+  authToken: string;
+  scheduleId: string;
+}): Promise<string> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import/save`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        scheduleId,
+      }),
+    });
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    revalidatePath('/studio');
+    return (await response.json()).message;
+  } catch (e) {
+    console.log('error in sessionImport', e);
     throw e;
   }
 };

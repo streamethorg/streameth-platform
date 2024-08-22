@@ -14,7 +14,7 @@ export enum StateStatus {
 }
 
 export enum StateType {
-  zoraNft = 'zora',
+  nft = 'nft',
   event = 'event',
   video = 'video',
 }

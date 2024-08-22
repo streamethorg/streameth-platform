@@ -37,11 +37,7 @@ const DesktopButtons = ({
   return (
     <>
       {video?.nftCollections?.[0] && (
-        <CollectVideButton
-          video={video}
-          nftCollection={nftCollection}
-          standalone={true}
-        />
+        <CollectVideButton video={video} nftCollection={nftCollection} />
       )}
       <div className="flex flex-row space-x-2">
         <ShareButton shareFor="video" />
@@ -80,43 +76,33 @@ const MobileButtons = ({
   nftCollection: IExtendedNftCollections | null;
   vod: boolean;
 }) => {
+  const hasCalendarReminder = !vod;
+
   return (
-    <>
-      {video?.nftCollections?.[0] ? (
-        <>
-          <div className="w-full">
-            <CollectVideButton video={video} nftCollection={nftCollection} />
-          </div>
-          <Popover>
-            <PopoverTrigger asChild>
-              <EllipsisVertical size={30} className="cursor-pointer" />
-            </PopoverTrigger>
-            <PopoverContent className="flex w-full flex-col space-y-2">
-              {/* Hydration Error */}
-              <ShareButton className="w-full" shareFor="video" />{' '}
-              {video?.assetId && (
-                <VideoDownloadClient
-                  videoName={`${video.name}.mp4`}
-                  assetId={video?.assetId}
-                />
-              )}
-              {!vod && (
-                <>
-                  <CalendarReminder
-                    eventName={name}
-                    description={description}
-                    start={date}
-                    end={date}
-                  />
-                </>
-              )}
-            </PopoverContent>
-          </Popover>
-        </>
-      ) : (
-        <ShareButton variant={'primary'} shareFor="video" />
+    <div className="flex w-full flex-wrap items-center gap-2">
+      {video?.nftCollections?.[0] && (
+        <CollectVideButton video={video} nftCollection={nftCollection} />
       )}
-    </>
+      <ShareButton
+        variant={video?.nftCollections?.[0] ? 'outline' : 'primary'}
+        shareFor="video"
+      />
+      {video?.assetId && (
+        <VideoDownloadClient
+          variant="outline"
+          videoName={`${video.name}.mp4`}
+          assetId={video?.assetId}
+        />
+      )}
+      {hasCalendarReminder && (
+        <CalendarReminder
+          eventName={name}
+          description={description}
+          start={date}
+          end={date}
+        />
+      )}
+    </div>
   );
 };
 

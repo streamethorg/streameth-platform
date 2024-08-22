@@ -58,8 +58,8 @@ const SessionPage = async ({
   if (!videoUrl) return notFound();
 
   const state = (await fetchAllStates({ sessionId: session._id })).filter(
-    (state) => state.type === StateType.zoraNft
-  ) as unknown as IExtendedState;
+    (state) => state.type === StateType.nft
+  ) as IExtendedState[];
 
   const thumbnail = await generateThumbnailAction(session!);
   const youtubeData = cookies().get('youtube_publish')?.value;
@@ -94,7 +94,7 @@ const SessionPage = async ({
               video={session!}
             />
 
-            <div className="flex space-x-2">
+            <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
               <SpeakerYoutubePublishButton
                 openModal={searchParams.m}
                 sessionId={params.session}
