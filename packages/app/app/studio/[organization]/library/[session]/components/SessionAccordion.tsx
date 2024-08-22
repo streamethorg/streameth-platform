@@ -133,6 +133,7 @@ const SessionAccordion = ({
               <FormControl>
                 <ImageUpload
                   options={{
+                    resize: true,
                     aspectRatio: 16 / 9,
                   }}
                   path={`sessions`}

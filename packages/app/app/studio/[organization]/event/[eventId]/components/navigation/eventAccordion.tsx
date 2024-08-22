@@ -298,6 +298,7 @@ const EventAccordion = ({
                         <FormControl>
                           <ImageUpload
                             options={{
+                              resize: false,
                               aspectRatio: 1,
                             }}
                             path="events"
@@ -319,6 +320,7 @@ const EventAccordion = ({
                         <FormControl>
                           <ImageUpload
                             options={{
+                              resize: false,
                               aspectRatio: 16 / 9,
                             }}
                             path="events"
@@ -342,7 +344,10 @@ const EventAccordion = ({
                             path="events"
                             {...field}
                             onChange={field.onChange}
-                            aspectRatio={3 / 1}
+                            options={{
+                              aspectRatio: 3 / 1,
+                              resize: false,
+                            }}
                           />
                         </FormControl>
                         <FormMessage />

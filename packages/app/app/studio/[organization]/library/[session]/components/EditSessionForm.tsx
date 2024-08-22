@@ -146,6 +146,7 @@ const EditSessionForm = ({
               <FormControl>
                 <ImageUpload
                   options={{
+                    resize: true,
                     placeholder:
                       'Drag and drop your thumbnail to upload...Or just click here! Maximum image file size is 2MB. Best resolution is 1280 x 720. Aspect ratio of 16:9',
                     aspectRatio: 16 / 9,

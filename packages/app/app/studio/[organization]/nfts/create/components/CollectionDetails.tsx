@@ -48,7 +48,7 @@ const CollectionDetails = ({
           className="space-y-4"
           // onSubmit={form.handleSubmit(onSubmit)}
         >
-          <div className="flex h-full items-center gap-4">
+          <div className="flex gap-4 items-center h-full">
             <FormField
               control={form.control}
               name="thumbnail"
@@ -56,8 +56,11 @@ const CollectionDetails = ({
                 <FormItem className="">
                   <FormControl>
                     <ImageUpload
-                      className="aspect-square h-[100px] rounded-xl bg-neutrals-300"
-                      aspectRatio={1}
+                      options={{
+                        aspectRatio: 1,
+                        resize: false,
+                      }}
+                      className="rounded-xl aspect-square h-[100px] bg-neutrals-300"
                       path={`nftcollections`}
                       {...field}
                     />
@@ -96,7 +99,7 @@ const CollectionDetails = ({
             )}
           />
 
-          <div className="flex w-full flex-col gap-4 lg:flex-row">
+          <div className="flex flex-col gap-4 w-full lg:flex-row">
             <FormField
               control={form.control}
               name="symbol"
@@ -134,7 +137,7 @@ const CollectionDetails = ({
             />
           </div>
           {/*//// Temp hiding this    
-          {/* <div className="flex gap-4 flex-col lg:flex-row w-full">
+          {/* <div className="flex flex-col gap-4 w-full lg:flex-row">
             <FormField
               control={form.control}
               name="startDate"
@@ -168,7 +171,7 @@ const CollectionDetails = ({
               )}
             />
           </div>
-          <div className="flex gap-4 flex-col lg:flex-row w-full">
+          <div className="flex flex-col gap-4 w-full lg:flex-row">
             <FormField
               control={form.control}
               name="endDate"
@@ -202,7 +205,7 @@ const CollectionDetails = ({
               )}
             />
           </div> */}
-          <div className="flex w-full flex-col gap-4 lg:flex-row">
+          <div className="flex flex-col gap-4 w-full lg:flex-row">
             <FormField
               control={form.control}
               name="limitedSupply"
@@ -252,7 +255,7 @@ const CollectionDetails = ({
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    className="h-[200px] rounded-xl bg-muted"
+                    className="rounded-xl h-[200px] bg-muted"
                     placeholder="Brief description about your NFT collection"
                     {...field}
                   />

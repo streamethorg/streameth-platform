@@ -302,6 +302,7 @@ export default function CreateEventForm({
                       <FormControl>
                         <ImageUpload
                           options={{
+                            resize: false,
                             placeholder:
                               'Drag or click to upload image here. Maximum image file size is 5MB. Best resolution of 1584 x 396px. Aspect ratio of 4:1. ',
                             aspectRatio: 16 / 9,
@@ -324,6 +325,7 @@ export default function CreateEventForm({
                         <ImageUpload
                           className="m-auto w-full h-full text-white rounded-full bg-neutrals-300"
                           options={{
+                            resize: false,
                             aspectRatio: 1,
                           }}
                           path={`events/${organization?.slug}`}
@@ -348,6 +350,7 @@ export default function CreateEventForm({
                         <ImageUpload
                           className="h-40 rounded-xl"
                           options={{
+                            resize: false,
                             aspectRatio: 3 / 1,
                             placeholder:
                               'Drag or click to upload image here. Maximum image file size is 2MB. Best resolution of 1584 x 396px. Aspect ratio of 3:1. ',

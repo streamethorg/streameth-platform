@@ -97,6 +97,7 @@ const SupportForm = ({
                 <FormControl>
                   <ImageUpload
                     options={{
+                      resize: false,
                       placeholder: 'Click to upload image here. (Optional) ',
                       aspectRatio: 1,
                     }}
