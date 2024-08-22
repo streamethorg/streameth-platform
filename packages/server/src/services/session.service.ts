@@ -15,13 +15,13 @@ import connection from '@utils/rabbitmq';
 
 export default class SessionService {
   private path: string;
-  private controller: BaseController<ISession>;
+  private controller: BaseController;
   constructor() {
     this.path = 'sessions';
     this.controller = new BaseController<ISession>('db', Session);
   }
 
-  async create(data: ISession): Promise<ISession> {
+  async create(data: ISession): Promise {
     let eventId = '';
     let eventSlug = '';
     let stageId = '';
@@ -49,36 +49,34 @@ export default class SessionService {
     );
   }
 
-  async update(sessionId: string, session: ISession): Promise<ISession> {
+  async update(sessionId: string, session: ISession): Promise {
     return await this.controller.store.update(sessionId, session, session.name);
   }
 
-  async findOne(query: {}): Promise<ISession> {
+  async findOne(query: {}): Promise {
     return await this.controller.store.findOne(query);
   }
 
-  async get(sessionId: string): Promise<ISession> {
+  async get(sessionId: string): Promise {
     const findSession = await this.controller.store.findById(sessionId);
     if (!findSession) throw new HttpException(404, 'Session not found');
     return findSession;
   }
 
-  async getAll(d: {
-    event: string;
-    organization: string;
-    speaker: string;
-    stageId: string;
-    assetId: string;
-    onlyVideos: boolean;
-    size: number;
-    page: number;
-    published: boolean;
-    type: string;
-  }): Promise<{
-    sessions: Array<ISession>;
-    totalDocuments: number;
-    pageable: { page: number; size: number };
-  }> {
+  async getAll(
+    d: {
+      event: string;
+      organization: string;
+      speaker: string;
+      stageId: string;
+      assetId: string;
+      onlyVideos: boolean;
+      size: number;
+      page: number;
+      published: boolean;
+      type: string;
+    },
+  ): Promise {
     let filter = {};
     if (d.type !== undefined) {
       filter = { ...filter, type: d.type };
@@ -132,7 +130,7 @@ export default class SessionService {
     };
   }
 
-  async deleteOne(sessionId: string): Promise<void> {
+  async deleteOne(sessionId: string): Promise {
     await this.get(sessionId);
     return await this.controller.store.delete(sessionId);
   }
@@ -172,7 +170,7 @@ export default class SessionService {
     return metadata;
   }
 
-  async getOrgEventSessions(organizationId: string): Promise<Array<ISession>> {
+  async getOrgEventSessions(organizationId: string): Promise {
     let sessions = [];
     const events = await Event.find({ organizationId: organizationId });
     for (const event of events) {
@@ -186,10 +184,7 @@ export default class SessionService {
     return sessions;
   }
 
-  async filterSessions(
-    query: string,
-    organizationSlug?: string,
-  ): Promise<Array<ISession>> {
+  async filterSessions(query: string, organizationSlug?: string): Promise {
     const options = {
       keys: ['name', 'description', 'speakers.name'],
     };

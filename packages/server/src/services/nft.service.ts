@@ -13,7 +13,7 @@ import Session from '@models/session.model';
 
 export default class CollectionService {
   private path: string;
-  private controller: BaseController<INftCollection>;
+  private controller: BaseController;
   private sessionService = new SessionService();
   private stageService = new StageService();
 
@@ -22,7 +22,7 @@ export default class CollectionService {
     this.controller = new BaseController<INftCollection>('db', NftCollection);
   }
 
-  async create(data: INftCollection): Promise<INftCollection> {
+  async create(data: INftCollection): Promise {
     const createCollection = await this.controller.store.create(
       data.name,
       data,
@@ -75,36 +75,33 @@ export default class CollectionService {
     };
   }
 
-  async update(
-    collectionId: string,
-    data: INftCollection,
-  ): Promise<INftCollection> {
+  async update(collectionId: string, data: INftCollection): Promise {
     return await this.controller.store.update(collectionId, data, data.name);
   }
 
-  async get(collectionId: string): Promise<INftCollection> {
+  async get(collectionId: string): Promise {
     const findCollection = await this.controller.store.findById(collectionId);
     if (!findCollection) throw new HttpException(404, 'Collection not found');
     return findCollection;
   }
 
-  async getAll(): Promise<Array<INftCollection>> {
+  async getAll(): Promise {
     return await this.controller.store.findAll({});
   }
 
-  async findAllNftForOrganization(
-    organizationId: string,
-  ): Promise<Array<INftCollection>> {
+  async findAllNftForOrganization(organizationId: string): Promise {
     return await this.controller.store.findAll({
       organizationId: organizationId,
     });
   }
 
-  private async getMetadata(data: {
-    type: string;
-    sessionId?: string;
-    stageId: string;
-  }) {
+  private async getMetadata(
+    data: {
+      type: string;
+      sessionId?: string;
+      stageId: string;
+    },
+  ) {
     if (data.type == 'livestream') {
       return await this.stageService.createMetadata(data.stageId);
     }
@@ -113,12 +110,14 @@ export default class CollectionService {
     }
   }
 
-  private async updateVideoType(data: {
-    type: string;
-    sessionId?: string;
-    stageId: string;
-    collectionId: string;
-  }) {
+  private async updateVideoType(
+    data: {
+      type: string;
+      sessionId?: string;
+      stageId: string;
+      collectionId: string;
+    },
+  ) {
     if (data.type == 'livestream') {
       await Stage.findByIdAndUpdate(data.stageId, {
         mintable: true,

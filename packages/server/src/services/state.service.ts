@@ -7,39 +7,41 @@ import Event from '@models/event.model';
 
 export default class StateService {
   private path: string;
-  private controller: BaseController<IState>;
+  private controller: BaseController;
   constructor() {
     this.path = 'state';
     this.controller = new BaseController<IState>('db', State);
   }
 
-  async create(data: IState): Promise<IState> {
+  async create(data: IState): Promise {
     return await this.controller.store.create(' ', data);
   }
 
-  async update(stateId: string, data: IState): Promise<IState> {
+  async update(stateId: string, data: IState): Promise {
     return await this.controller.store.update(stateId, data);
   }
 
-  async get(stateId: string): Promise<IState> {
+  async get(stateId: string): Promise {
     const findState = await this.controller.store.findById(stateId);
     if (!findState) throw new HttpException(404, 'state not found');
     return findState;
   }
 
-  async findOne(query: {}): Promise<IState> {
+  async findOne(query: {}): Promise {
     const findState = await this.controller.store.findOne(query);
     if (!findState) throw new HttpException(404, 'state not found');
     return findState;
   }
 
-  async getAll(d: {
-    eventId?: string;
-    sessionId?: string;
-    eventSlug?: string;
-    type?: StateType;
-    status?: StateStatus;
-  }): Promise<Array<IState>> {
+  async getAll(
+    d: {
+      eventId?: string;
+      sessionId?: string;
+      eventSlug?: string;
+      type?: StateType;
+      status?: StateStatus;
+    },
+  ): Promise {
     let filter = {};
     if (d.eventId != undefined) {
       let event = await Event.findOne({ slug: d.eventId });

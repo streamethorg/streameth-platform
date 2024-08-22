@@ -17,13 +17,13 @@ import { createYoutubeLiveStream } from '@utils/youtube';
 
 export default class StageService {
   private path: string;
-  private controller: BaseController<IStage>;
+  private controller: BaseController;
   constructor() {
     this.path = 'stages';
     this.controller = new BaseController<IStage>('db', Stage);
   }
 
-  async create(data: IStage): Promise<IStage> {
+  async create(data: IStage): Promise {
     const eventId =
       !data.eventId || data.eventId.toString().length === 0
         ? new Types.ObjectId().toString()
@@ -45,13 +45,13 @@ export default class StageService {
     );
   }
 
-  async get(stageId: string): Promise<IStage> {
+  async get(stageId: string): Promise {
     const findStage = await this.controller.store.findById(stageId);
     if (!findStage) throw new HttpException(404, 'Stage not found');
     return findStage;
   }
 
-  async getAll(d: { published: boolean }): Promise<Array<IStage>> {
+  async getAll(d: { published: boolean }): Promise {
     let filter = {};
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
@@ -59,39 +59,37 @@ export default class StageService {
     return await this.controller.store.findAll(filter);
   }
 
-  async update(stageId: string, stage: IStage): Promise<IStage> {
+  async update(stageId: string, stage: IStage): Promise {
     return await this.controller.store.update(stageId, stage, stage.name);
   }
 
-  async findStageForEvent(stageId: string, eventId: string): Promise<IStage> {
+  async findStageForEvent(stageId: string, eventId: string): Promise {
     return await this.controller.store.findOne({
       slug: stageId,
       eventId: eventId,
     });
   }
 
-  async findAllStagesForEvent(eventId: string): Promise<Array<IStage>> {
+  async findAllStagesForEvent(eventId: string): Promise {
     const isObjectId = /[0-9a-f]{24}/i.test(eventId);
     const filter = isObjectId ? { _id: eventId } : { slug: eventId };
     const event = await Events.findOne(filter);
     return await this.controller.store.findAll({ eventId: event?._id });
   }
 
-  async findAllStagesForOrganization(
-    organizationId: string,
-  ): Promise<Array<IStage>> {
+  async findAllStagesForOrganization(organizationId: string): Promise {
     return await this.controller.store.findAll({
       organizationId: organizationId,
     });
   }
 
-  async deleteOne(stageId: string): Promise<void> {
+  async deleteOne(stageId: string): Promise {
     const stream = await this.get(stageId);
     await deleteStream(stream.streamSettings.streamId);
     return await this.controller.store.delete(stageId);
   }
 
-  async findStreamAndUpdate(id: string): Promise<void> {
+  async findStreamAndUpdate(id: string): Promise {
     const stream = await getStreamInfo(id);
     let stage = await Stage.findOne({ 'streamSettings.streamId': id });
     if (!stage) throw new HttpException(400, 'stage not found');

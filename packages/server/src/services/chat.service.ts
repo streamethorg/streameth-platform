@@ -4,17 +4,17 @@ import Chat from '@models/chat.model';
 
 export default class ChatService {
   private path: string;
-  private controller: BaseController<IChat>;
+  private controller: BaseController;
   constructor() {
     this.path = 'chats';
     this.controller = new BaseController<IChat>('db', Chat);
   }
 
-  async create(data: IChat): Promise<IChat> {
+  async create(data: IChat): Promise {
     return await this.controller.store.create(data.stageId.toString(), data);
   }
 
-  async getAllChatByStageId(stageId: string): Promise<Array<IChat>> {
+  async getAllChatByStageId(stageId: string): Promise {
     return await this.controller.store.findAll({
       stageId: stageId,
     });
