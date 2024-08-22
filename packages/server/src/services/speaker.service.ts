@@ -6,13 +6,13 @@ import Events from '@models/event.model';
 
 export default class SpeakerService {
   private path: string;
-  private controller: BaseController;
+  private controller: BaseController<ISpeaker>;
   constructor() {
     this.path = 'speakers';
     this.controller = new BaseController<ISpeaker>('db', Speaker);
   }
 
-  async create(data: ISpeaker): Promise {
+  async create(data: ISpeaker): Promise<ISpeaker> {
     return this.controller.store.create(
       data.name,
       data,
@@ -20,24 +20,27 @@ export default class SpeakerService {
     );
   }
 
-  async update(speakerId: string, data: ISpeaker): Promise {
+  async update(speakerId: string, data: ISpeaker): Promise<ISpeaker> {
     return await this.controller.store.update(speakerId, data, data.name);
   }
 
-  async get(speakerId: string): Promise {
+  async get(speakerId: string): Promise<ISpeaker> {
     const findSpeaker = await this.controller.store.findById(speakerId);
     if (!findSpeaker) throw new HttpException(404, 'Speaker not found');
     return findSpeaker;
   }
 
-  async findSpeakerForEvent(speakerId: string, eventId: string): Promise {
+  async findSpeakerForEvent(
+    speakerId: string,
+    eventId: string,
+  ): Promise<ISpeaker> {
     return await this.controller.store.findOne({
       slug: speakerId,
       eventId: eventId,
     });
   }
 
-  async findAllSpeakersForEvent(eventId: string): Promise {
+  async findAllSpeakersForEvent(eventId: string): Promise<Array<ISpeaker>> {
     const event = await Events.findOne({ slug: eventId });
     return await this.controller.store.findAll({
       eventId: event?._id.toString(),

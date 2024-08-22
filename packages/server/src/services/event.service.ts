@@ -7,13 +7,13 @@ import State from '@models/state.model';
 
 export default class EventService {
   private path: string;
-  private controller: BaseController;
+  private controller: BaseController<IEvent>;
   constructor() {
     this.path = 'events';
     this.controller = new BaseController<IEvent>('db', Events);
   }
 
-  async create(data: IEvent): Promise {
+  async create(data: IEvent): Promise<IEvent> {
     const findEvent = await this.controller.store.findOne(
       { name: data.name },
       `${this.path}/${data.organizationId}`,
@@ -26,12 +26,12 @@ export default class EventService {
     );
   }
 
-  async update(eventId: string, data: IEvent): Promise {
+  async update(eventId: string, data: IEvent): Promise<IEvent> {
     const event = await this.controller.store.update(eventId, data, data.name);
     return event;
   }
 
-  async get(eventId: string): Promise {
+  async get(eventId: string): Promise<IEvent> {
     let id = '';
     const isObjectId = /[0-9a-f]{24}/i.test(eventId);
     const isPathId = /events-[a-zA-Z0-9\-_]+/.test(eventId);
@@ -49,7 +49,10 @@ export default class EventService {
     return findEvent;
   }
 
-  async getAll(d: { organizationId: string; unlisted: boolean }): Promise {
+  async getAll(d: {
+    organizationId: string;
+    unlisted: boolean;
+  }): Promise<Array<IEvent>> {
     let filter = {};
     if (d.organizationId != undefined) {
       filter = { ...filter, organizationId: d.organizationId };
@@ -60,12 +63,12 @@ export default class EventService {
     return await this.controller.store.findAll(filter);
   }
 
-  async deleteOne(eventId: string): Promise {
+  async deleteOne(eventId: string): Promise<void> {
     await this.get(eventId);
     return await this.controller.store.delete(eventId);
   }
 
-  async eventImport(eventId: string): Promise {
+  async eventImport(eventId: string): Promise<void> {
     const findState = await State.findOne({ eventId: eventId });
     if (!findState) {
       let event = await this.get(eventId);

@@ -11,13 +11,13 @@ import UserService from './user.service';
 
 export default class OrganizationService {
   private path: string;
-  private controller: BaseController;
+  private controller: BaseController<IOrganization>;
   private userService = new UserService();
   constructor() {
     this.path = 'organizations';
     this.controller = new BaseController<IOrganization>('db', Organization);
   }
-  async create(data: IOrganization): Promise {
+  async create(data: IOrganization): Promise<IOrganization> {
     const findOrg = await this.controller.store.findOne(
       { name: data.name },
       this.path,
@@ -35,7 +35,10 @@ export default class OrganizationService {
     );
     return createOrg;
   }
-  async update(organizationId: string, organization: IOrganization): Promise {
+  async update(
+    organizationId: string,
+    organization: IOrganization,
+  ): Promise<IOrganization> {
     return await this.controller.store.update(
       organizationId,
       organization,
@@ -43,7 +46,7 @@ export default class OrganizationService {
     );
   }
 
-  async get(organizationId: string): Promise {
+  async get(organizationId: string): Promise<IOrganization> {
     let id = '';
     const isObjectId = /[0-9a-f]{24}/i.test(organizationId);
     const isPathId = /organizations-[a-zA-Z0-9\-_]+/.test(organizationId);
@@ -65,7 +68,7 @@ export default class OrganizationService {
     return findOrg;
   }
 
-  async getAll(): Promise {
+  async getAll(): Promise<Array<IOrganization>> {
     return await this.controller.store.findAll(
       {},
       {
@@ -76,12 +79,12 @@ export default class OrganizationService {
     );
   }
 
-  async deleteOne(organizationId: string): Promise {
+  async deleteOne(organizationId: string): Promise<void> {
     await this.get(organizationId);
     return await this.controller.store.delete(organizationId);
   }
 
-  async getOrgMembers(organizationId: string): Promise {
+  async getOrgMembers(organizationId: string): Promise<Array<IUser>> {
     const walletAddresses = config.wallets.trim().split(',');
     const users = await User.find(
       {

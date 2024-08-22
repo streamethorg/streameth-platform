@@ -5,16 +5,16 @@ import User from '@models/user.model';
 
 export default class UserService {
   private path: string;
-  private controller: BaseController;
+  private controller: BaseController<IUser>;
   constructor() {
     this.path = 'users';
     this.controller = new BaseController<IUser>('db', User);
   }
 
-  async create(data: IUser): Promise {
+  async create(data: IUser): Promise<IUser> {
     return this.controller.store.create('', data, this.path);
   }
-  async get(walletAddress: string): Promise {
+  async get(walletAddress: string): Promise<IUser> {
     const findUser = await User.findOne({
       walletAddress: walletAddress,
     }).populate('organizations');
@@ -22,7 +22,7 @@ export default class UserService {
     return findUser;
   }
 
-  async findOne(query: {}): Promise {
+  async findOne(query: {}): Promise<IUser> {
     return await this.controller.store.findOne(query);
   }
 }

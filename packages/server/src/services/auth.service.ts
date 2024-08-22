@@ -12,7 +12,7 @@ export default class AuthService {
     this.path = 'auth';
   }
 
-  async login(data: IUser): Promise {
+  async login(data: IUser): Promise<{ user: IUser; token: string }> {
     let verifyToken = await this.verifyAuthToken(data.token);
     let user = await privy.getUser(verifyToken.userId);
     let existingUser = await this.userService.findOne({
@@ -34,7 +34,9 @@ export default class AuthService {
     return { user: existingUser, token: token };
   }
 
-  async verifyAuthToken(token: string): Promise {
+  async verifyAuthToken(
+    token: string,
+  ): Promise<{ userId: string; sessionId: string }> {
     try {
       const authToken = await privy.verifyAuthToken(token);
       return {
@@ -48,7 +50,7 @@ export default class AuthService {
     }
   }
 
-  async verifyToken(token: string): Promise {
+  async verifyToken(token: string): Promise<boolean> {
     try {
       jwt.verify(token, config.jwt.secret);
       return true;

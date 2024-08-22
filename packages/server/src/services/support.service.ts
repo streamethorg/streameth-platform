@@ -6,13 +6,13 @@ import { Telegraf } from 'telegraf';
 
 export default class SupportService {
   private path: string;
-  private controller: BaseController;
+  private controller: BaseController<ISupport>;
   constructor() {
     this.path = 'support';
     this.controller = new BaseController<ISupport>('db', Support);
   }
 
-  async create(data: ISupport): Promise {
+  async create(data: ISupport): Promise<ISupport> {
     const bot = new Telegraf(config.telegram.apiKey);
     await bot.telegram.sendMessage(
       config.telegram.chatId,
@@ -23,7 +23,7 @@ export default class SupportService {
     return await this.controller.store.create(' ', data);
   }
 
-  async getAll(): Promise {
+  async getAll(): Promise<Array<ISupport>> {
     return await this.controller.store.findAll({});
   }
 }
