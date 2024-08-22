@@ -1,7 +1,6 @@
 'use client';
 
 import React, {
-  ChangeEvent,
   useCallback,
   useState,
   forwardRef,
@@ -11,7 +10,6 @@ import Image from 'next/image';
 import { X, Image as ImageLogo } from 'lucide-react';
 import { getImageUrl } from '@/lib/utils/utils';
 import { toast } from 'sonner';
-import { Label } from '@radix-ui/react-label';
 import {
   Dialog,
   DialogContent,
@@ -20,7 +18,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, FileRejection } from 'react-dropzone';
 import { resizeImage } from '@/lib/utils/resizeImage';
 
 function getImageData(file: File) {
@@ -46,7 +44,7 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
       <DialogTrigger>
         <X
           size={24}
-          className="absolute top-2 right-2 z-10 bg-white rounded-full border cursor-pointer border-muted-foreground text-muted-foreground"
+          className="absolute top-2 right-2 z-10 bg-white rounded-md border cursor-pointer border-muted-foreground text-muted-foreground"
         />
       </DialogTrigger>
 
@@ -74,7 +72,6 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
 };
 
 interface ImageUploadProps {
-  id?: string;
   options: {
     maxSize?: number;
     placeholder?: string;
@@ -95,7 +92,6 @@ export interface ImageUploadRef {
 const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
   (
     {
-      id,
       onChange,
       value,
       path,
@@ -151,16 +147,11 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
     };
 
     const onSubmit = async (file: File): Promise<string> => {
-      console.log('on Submit');
       if (!file) return '';
-      setIsUploading(true);
+
       const isValidSize = await validateImage(file);
       if (!isValidSize) {
         throw new Error(error || 'Invalid image size');
-      }
-
-      if (file.size > maxSize) {
-        throw new Error('File size is too big');
       }
 
       const data = new FormData();
@@ -182,10 +173,21 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
         '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
       );
       setPreview(uploadedPath);
-      setIsUploading(false);
 
       return uploadedPath;
     };
+
+    const onDropRejected = useCallback(
+      (fileRejections: FileRejection[]) => {
+        const { code, message } = fileRejections[0].errors[0];
+        if (code === 'file-too-large') {
+          setError(`File is too large. Max size is ${maxSize / 1000000}MB.`);
+        } else {
+          setError(message);
+        }
+      },
+      [maxSize]
+    );
 
     const onDrop = useCallback(
       async (acceptedFiles: File[]) => {
@@ -197,16 +199,19 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
           toast.promise(
             onSubmit(processedFile).then((uploadedPath) => {
               onChange(uploadedPath);
+              setIsUploading(true);
               return 'Image uploaded successfully';
             }),
             {
               loading: 'Uploading image',
               success: (message) => {
+                setIsUploading(false);
                 return message;
               },
               error: (error: Error) => {
                 onChange('');
                 setPreview('');
+                setIsUploading(false);
                 return error.message || 'Unknown error';
               },
             }
@@ -223,6 +228,7 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
       maxSize,
       maxFiles: 1,
       onDrop,
+      onDropRejected,
     });
 
     const containerClasses = isProfileImage
