@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { sortArray } from '@/lib/utils/utils';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
 import UploadVideoDialog from './library/components/UploadVideoDialog';
+import ImportSchedule from './livestreams/components/ImportSchedule';
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -39,6 +40,7 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <UploadVideoDialog organizationId={organization._id.toString()} />
+          <ImportSchedule organizationId={organization._id.toString()} />
         </div>
       </div>
       <div className="flex h-[80%] flex-col">
