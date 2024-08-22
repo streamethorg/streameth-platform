@@ -78,6 +78,7 @@ interface ImageUploadProps {
     aspectRatio: number;
     requireExactSize?: { width: number; height: number };
     isProfileImage?: boolean;
+    resize: boolean;
   };
   onChange: (value: string) => void;
   value: string | undefined;
@@ -102,6 +103,7 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
         placeholder = 'preview',
         maxSize = 2000000,
         isProfileImage = false,
+        resize = false,
       },
     },
     ref
@@ -192,12 +194,14 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
     const onDrop = useCallback(
       async (acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
-          const processedFile = await resizeImage(acceptedFiles[0]);
-          const { displayUrl } = getImageData(processedFile);
+          const file = resize
+            ? await resizeImage(acceptedFiles[0])
+            : acceptedFiles[0];
+          const { displayUrl } = getImageData(file);
 
           setPreview(displayUrl);
           toast.promise(
-            onSubmit(processedFile).then((uploadedPath) => {
+            onSubmit(file).then((uploadedPath) => {
               onChange(uploadedPath);
               setIsUploading(true);
               return 'Image uploaded successfully';
