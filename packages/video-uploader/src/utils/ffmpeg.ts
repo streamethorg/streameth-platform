@@ -48,7 +48,7 @@ export async function downloadM3U8ToMP3(
   m3u8Url: string,
   fileName: string,
   outputFilePath: string,
-) :Promise<void> {
+): Promise<void> {
   await ensureDirectoryExists(outputFilePath);
   const outputFile = path.join(outputFilePath, `${fileName}.mp3`);
 
