@@ -1,17 +1,17 @@
+import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { ISession, SessionType } from '@interfaces/session.interface';
+import { IUploadSession } from '@interfaces/upload.session.interface';
+import Event from '@models/event.model';
 import Organization from '@models/organization.model';
 import Session from '@models/session.model';
-import Event from '@models/event.model';
-import { config } from '@config';
-import { Types } from 'mongoose';
 import Stage from '@models/stage.model';
 import { getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
-import Fuse from 'fuse.js';
-import { IUploadSession } from '@interfaces/upload.session.interface';
 import { refreshAccessToken } from '@utils/oauth';
 import connection from '@utils/rabbitmq';
+import Fuse from 'fuse.js';
+import { Types } from 'mongoose';
 
 export default class SessionService {
   private path: string;
@@ -210,7 +210,7 @@ export default class SessionService {
       'streamSettings.streamId': payload.parentId,
     });
     await this.create({
-      name: payload.name,
+      name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
       description: payload.name,
       start: payload.createdAt,
       end: payload.lastSeen,
@@ -220,6 +220,7 @@ export default class SessionService {
       assetId: payload.assetId,
       type: SessionType.livestream,
     });
+    await stage.updateOne({ $inc: { recordingIndex: 1 } });
   }
 
   async uploadSessionToSocials(data: IUploadSession) {
