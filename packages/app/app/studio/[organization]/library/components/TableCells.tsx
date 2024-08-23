@@ -54,9 +54,9 @@ const TableCells = async ({
           <PublishCell item={item} />
         </div>
       </TableCell>
-      {item.updatedAt && (
+      {item.createdAt && (
         <TableCell className="truncate">
-          {formatDate(new Date(item.updatedAt as string), 'ddd. MMM. D, YYYY')}
+          {formatDate(new Date(item.createdAt as string), 'ddd. MMM. D, YYYY')}
         </TableCell>
       )}
 
