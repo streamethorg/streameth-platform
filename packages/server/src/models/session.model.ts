@@ -64,6 +64,7 @@ const SessionSchema = new Schema<ISessionModel>(
     firebaseId: { type: String, default: '' },
     talkType: { type: String, default: '' },
     clippingStatus: { type: String, enum: Object.keys(ClippingStatus) },
+    createdAt: { type: Date, default: Date.now },
   },
   {
     timestamps: true,

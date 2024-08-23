@@ -1390,7 +1390,15 @@
             "$ref": "#/components/schemas/SessionType"
           },
           "createdAt": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              }
+            ]
           },
           "nftCollections": {
             "anyOf": [
@@ -1573,7 +1581,15 @@
             "$ref": "#/components/schemas/SessionType"
           },
           "createdAt": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              }
+            ]
           },
           "nftCollections": {
             "anyOf": [
@@ -1719,7 +1735,15 @@
             "$ref": "#/components/schemas/SessionType"
           },
           "createdAt": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              }
+            ]
           },
           "nftCollections": {
             "anyOf": [
@@ -1902,6 +1926,9 @@
               "type": "object"
             },
             "type": "array"
+          },
+          "createdAt": {
+            "type": "string"
           }
         },
         "required": [

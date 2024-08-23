@@ -55,7 +55,7 @@ export interface ISession {
   mintable?: boolean;
   published?: boolean;
   type: SessionType;
-  createdAt?: string;
+  createdAt?: Date | string;
   nftCollections?: Types.ObjectId | string[];
   socials?: { name: string; date: number }[];
   firebaseId?: string;

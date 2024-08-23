@@ -374,16 +374,25 @@ export const createClip = async (data: {
     });
     const parsedClip = JSON.parse(clip.rawResponse.data.toString());
     let session = await SessionModel.findById(data.sessionId);
-    await SessionModel.findByIdAndUpdate(data.sessionId, {
-      assetId: parsedClip.asset.id,
-      playbackId: parsedClip.asset.playbackId,
-      start: new Date().getTime(),
-      end: new Date().getTime(),
-      startClipTime: data.start,
-      endClipTime: data.end,
-      type: SessionType.clip,
-      createdAt: new Date(),
-    });
+    await SessionModel.findOneAndUpdate(
+      { _id: data.sessionId },
+      {
+        $set: {
+          assetId: parsedClip.asset.id,
+          playbackId: parsedClip.asset.playbackId,
+          start: new Date().getTime(),
+          end: new Date().getTime(),
+          startClipTime: data.start,
+          endClipTime: data.end,
+          type: SessionType.clip,
+          createdAt: new Date(),
+        },
+      },
+      {
+        new: true,
+        timestamps: false, // Disable automatic timestamp handling
+      },
+    );
     if (session.firebaseId) {
       const speakerNames = session.speakers
         .map((speaker) => speaker.name)
