@@ -1,8 +1,8 @@
+import { config } from 'dotenv';
 import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
-import { config } from 'dotenv';
 config();
 
 // logs dir
