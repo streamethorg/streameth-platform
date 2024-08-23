@@ -64,8 +64,8 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
         </div>
 
         {/* Right Column - Player and Accordions (1/3 width) */}
-        <div className="w-1/3 overflow-auto">
-          <div className="space-y-4">
+        <div className="w-1/3 flex flex-col overflow-hidden">
+          <div className="flex-shrink-0 mb-4">
             <PlayerWithControls
               src={[
                 {
@@ -77,7 +77,9 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                 },
               ]}
             />
+          </div>
 
+          <div className="flex-grow overflow-auto">
             <Accordion
               className="space-y-2"
               type="multiple"
