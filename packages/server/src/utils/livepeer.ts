@@ -382,6 +382,7 @@ export const createClip = async (data: {
       startClipTime: data.start,
       endClipTime: data.end,
       type: SessionType.clip,
+      createdAt: new Date(),
     });
     if (session.firebaseId) {
       const speakerNames = session.speakers
