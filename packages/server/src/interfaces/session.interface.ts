@@ -1,5 +1,5 @@
-import { Document, Types } from 'mongoose';
-import { ISpeaker } from './speaker.interface';
+import type { Document, Types } from 'mongoose';
+import type { ISpeaker } from './speaker.interface';
 
 export interface ISource {
   streamUrl?: string;
@@ -19,6 +19,12 @@ export enum SessionType {
   clip = 'clip',
   livestream = 'livestream',
   video = 'video',
+}
+
+export enum ClippingStatus {
+  pending = 'pending',
+  failed = 'failed',
+  completed = 'completed',
 }
 
 export interface ISession {
@@ -49,11 +55,12 @@ export interface ISession {
   mintable?: boolean;
   published?: boolean;
   type: SessionType;
-  createdAt?: string;
+  createdAt?: Date | string;
   nftCollections?: Types.ObjectId | string[];
   socials?: { name: string; date: number }[];
   firebaseId?: string;
   talkType?: string;
+  clippingStatus?: ClippingStatus;
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

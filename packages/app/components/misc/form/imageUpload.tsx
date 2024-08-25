@@ -12,9 +12,11 @@ import {
   Dialog,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { imageUploadAction } from '@/lib/actions/imageUpload';
 
 function getImageData(event: ChangeEvent<HTMLInputElement>) {
   const dataTransfer = new DataTransfer();
@@ -44,8 +46,10 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
           className="absolute right-2 top-2 z-10 cursor-pointer rounded-full border border-muted-foreground bg-white text-muted-foreground"
         />
       </DialogTrigger>
-      <DialogContent className="flex flex-col items-center justify-center gap-5">
-        <p className="text-xl">Are you sure you want to remove this image?</p>
+
+      <DialogContent className="flex flex-col items-center justify-center gap-5 z-[99999999999] ">
+        <DialogTitle>Delete Image</DialogTitle>
+        <p className="text-xl">Are you sure you want to delete this image?</p>
         <DialogFooter className="flex items-center gap-4">
           <Button onClick={() => setOpen(false)} variant="ghost">
             Cancel
@@ -143,19 +147,13 @@ export default function ImageUpload({
           type: file.type,
         })
       );
-      data.set('path', path);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      });
-      if (!res.ok) {
-        throw new Error(await res.text());
+      data.set('directory', path);
+      const imageUrl = await imageUploadAction({ data });
+      if (!imageUrl) {
+        throw new Error('Error uploading image');
       }
-      const uploadedPath = getImageUrl(
-        '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
-      );
-      setPreview(uploadedPath);
-      return uploadedPath;
+      setPreview(imageUrl);
+      return imageUrl;
     } catch (e: any) {
       console.error(e);
       setPreview('');

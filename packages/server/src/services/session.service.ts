@@ -210,7 +210,7 @@ export default class SessionService {
       'streamSettings.streamId': payload.parentId,
     });
     await this.create({
-      name: payload.name,
+      name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
       description: payload.name,
       start: payload.createdAt,
       end: payload.lastSeen,
@@ -220,6 +220,7 @@ export default class SessionService {
       assetId: payload.assetId,
       type: SessionType.livestream,
     });
+    await stage.updateOne({ $inc: { recordingIndex: 1 } });
   }
 
   async sessionTranscriptions(
@@ -252,16 +253,21 @@ export default class SessionService {
     // if (!session.coverImage) {
     //   throw new HttpException(400, 'No cover image');
     // }
-    const org = await Organization.findOne({
-      _id: data.organizationId,
-      'socials._id': data.socialId,
-    });
-    const token = org.socials.find(
-      (e) => e.type == data.type && e._id == data.socialId,
-    );
+    let token;
+    if (data.socialId) {
+      const org = await Organization.findOne({
+        _id: data.organizationId,
+        'socials._id': data.socialId,
+      });
+      token = org.socials.find(
+        (e) => e.type == data.type && e._id == data.socialId,
+      );
+    }
     if (data.type == 'youtube') {
       data.token = {
-        secret: await refreshAccessToken(token.refreshToken),
+        secret: await refreshAccessToken(
+          token?.refreshToken ? token.refreshToken : data.refreshToken,
+        ),
       };
     }
     if (data.type == 'twitter') {

@@ -13,15 +13,10 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import NotFound from '@/not-found';
 import { sortArray } from '@/lib/utils/utils';
 import LibraryGridLayout from './components/LibraryGridLayout';
-import Pagination from '@/app/[organization]/videos/components/pagination';
+import Pagination from './components/Pagination';
 import SearchBar from '@/components/misc/SearchBar';
 import LibraryFilter from './components/LibraryFilter';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
-import { fetchAllStates } from '@/lib/services/stateService';
-import {
-  StateStatus,
-  StateType,
-} from 'streameth-new-server/src/interfaces/state.interface';
 
 const Loading = ({ layout }: { layout: string }) => {
   return (
@@ -72,15 +67,6 @@ const Library = async ({
     organizationId: organization._id,
   });
 
-  const statesSet = new Set(
-    (
-      await fetchAllStates({
-        type: StateType.video,
-        status: StateStatus.pending,
-      })
-    ).map((state) => state.sessionId) as unknown as Set<string>
-  );
-
   let sessions = await fetchAllSessions({
     organizationSlug: params.organization,
     limit: searchParams.limit || 20,
@@ -93,7 +79,7 @@ const Library = async ({
   });
 
   let filteredSession = sessions.sessions.filter(
-    (session) => session.videoUrl || statesSet.has(session._id.toString())
+    (session) => session.playbackId
   );
 
   const sortedSessions = sortArray(
@@ -148,12 +134,11 @@ const LibraryPage = async ({
 }) => {
   if (
     !searchParams.layout ||
-    !searchParams.sort ||
     (searchParams.layout !== eLayout.grid &&
       searchParams.layout !== eLayout.list)
   ) {
     redirect(
-      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.desc_date}&page=1&limit=20`
+      `/studio/${params.organization}/library?layout=${eLayout.list}&page=1&limit=20`
     );
   }
 

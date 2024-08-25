@@ -1,10 +1,125 @@
 import { ISessionModel } from 'streameth-new-server/src/interfaces/session.interface';
-import { IExtendedSession } from '../types';
+import {
+  IExtendedScheduleImporter,
+  IExtendedSession,
+  IPagination,
+} from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { Livepeer } from 'livepeer';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
+import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components';
+import FuzzySearch from 'fuzzy-search';
+
+interface ApiParams {
+  event?: string;
+  organization?: string;
+  stageId?: string;
+  page?: number;
+  size?: number;
+  onlyVideos?: boolean;
+  published?: boolean;
+  speakerIds?: string[]; // Assuming speakerIds is an array of strings
+  date?: Date;
+  type?: string;
+}
+
+function constructApiUrl(baseUrl: string, params: ApiParams): string {
+  const queryParams = Object.entries(params)
+    .filter(([_, value]) => value !== undefined && value !== null)
+    .map(([key, value]) => {
+      const formattedValue = Array.isArray(value) ? value.join(',') : value;
+      return `${encodeURIComponent(key)}=${encodeURIComponent(formattedValue)}`;
+    })
+    .join('&');
+  return `${baseUrl}?${queryParams}`;
+}
+
+export async function fetchAllSessions({
+  event,
+  organizationSlug,
+  stageId,
+  speakerIds,
+  onlyVideos,
+  published,
+  page = 1,
+  limit,
+  searchQuery = '',
+  type,
+}: {
+  event?: string;
+  organizationSlug?: string;
+  stageId?: string;
+  speakerIds?: string[];
+  onlyVideos?: boolean;
+  published?: boolean;
+  page?: number;
+  limit?: number;
+  searchQuery?: string;
+  type?: string;
+}): Promise<{
+  sessions: IExtendedSession[];
+  pagination: IPagination;
+}> {
+  const params: ApiParams = {
+    event,
+    stageId,
+    organization: organizationSlug,
+    page,
+    size: searchQuery ? 0 : limit,
+    onlyVideos,
+    published,
+    speakerIds,
+    type,
+  };
+
+  const response = await fetch(
+    constructApiUrl(`${apiUrl()}/sessions`, params),
+    {
+      cache: 'no-store',
+    }
+  );
+  const a = await response.json();
+  const allSessions = a.data;
+  if (searchQuery) {
+    const normalizedQuery = searchQuery.toLowerCase();
+    const fuzzySearch = new FuzzySearch(
+      allSessions?.sessions,
+      ['name', 'description', 'speakers.name'],
+      {
+        caseSensitive: false,
+        sort: true,
+      }
+    );
+
+    allSessions.sessions = fuzzySearch.search(normalizedQuery);
+  }
+
+  // Calculate total items and total pages
+  const totalItems = searchQuery
+    ? allSessions.sessions.length
+    : allSessions.totalDocuments;
+  const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
+
+  // Implement manual pagination for fuzzy search
+  const startIndex = (page - 1) * limit!;
+  const endIndex = startIndex + limit!;
+  const paginatedSessions = allSessions.sessions.slice(startIndex, endIndex);
+
+  // Return paginated data and pagination metadata
+  return {
+    sessions: searchQuery ? paginatedSessions : allSessions.sessions,
+    pagination: allSessions?.pagination
+      ? allSessions.pagination
+      : {
+          currentPage: page,
+          totalPages,
+          totalItems,
+          limit,
+        },
+  };
+}
 
 export const createSession = async ({
   session,
@@ -159,14 +274,6 @@ export const createClip = async ({
     });
 
     if (!response.ok) {
-      console.log({
-        end,
-        playbackId,
-        sessionId,
-        start,
-        recordingId,
-      });
-      console.log('error in createClip', await response.json());
       throw 'Error updating session';
     }
     revalidatePath('/studio');
@@ -312,6 +419,107 @@ export const uploadSessionToYouTube = async ({
     return (await response.json()).status;
   } catch (e) {
     console.log('error in upload session to social', e);
+    throw e;
+  }
+};
+
+export const sessionImport = async ({
+  url,
+  type,
+  organizationId,
+  authToken,
+}: {
+  url: string;
+  type: string;
+  organizationId: string;
+  authToken: string;
+}): Promise<IExtendedScheduleImporter> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        url,
+        type,
+        organizationId,
+      }),
+    });
+
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in sessionImport', e);
+    throw e;
+  }
+};
+
+export const stageSessionImport = async ({
+  url,
+  type,
+  organizationId,
+  authToken,
+  stageId,
+}: {
+  url: string;
+  type: string;
+  organizationId: string;
+  authToken: string;
+  stageId: string;
+}): Promise<IExtendedScheduleImporter> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import/stage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        url,
+        type,
+        organizationId,
+        stageId,
+      }),
+    });
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in sessionImport', e);
+    throw e;
+  }
+};
+
+export const saveSessionImport = async ({
+  authToken,
+  scheduleId,
+}: {
+  authToken: string;
+  scheduleId: string;
+}): Promise<string> => {
+  try {
+    const response = await fetch(`${apiUrl()}/schedule/import/save`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        scheduleId,
+      }),
+    });
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    revalidatePath('/studio');
+    return (await response.json()).message;
+  } catch (e) {
+    console.log('error in sessionImport', e);
     throw e;
   }
 };

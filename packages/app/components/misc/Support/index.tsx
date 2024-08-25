@@ -7,10 +7,8 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { useSIWE } from 'connectkit';
 import SupportForm from './SupportForm';
 import { Button } from '../../ui/button';
-import { SignInUserButton } from '../SignInUserButton';
 import {
   Credenza,
   CredenzaContent,
@@ -18,11 +16,14 @@ import {
   CredenzaTrigger,
 } from '@/components/ui/crezenda';
 import { usePrivy } from '@privy-io/react-auth';
+import { useAccount } from 'wagmi';
+import { ConnectWalletButton } from '../ConnectWalletButton';
 
 const Support = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const { authenticated } = usePrivy();
+  const { address } = useAccount();
   const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof supportSchema>>({
     resolver: zodResolver(supportSchema),
@@ -40,6 +41,7 @@ const Support = () => {
       toast.error('No wallet address found');
       return;
     }
+
     createSupportTicketAction({
       ...values,
     })
@@ -60,9 +62,11 @@ const Support = () => {
     setMessageSent(false);
     setOpen(false);
   };
+  const isAuthenticated = authenticated || address;
+
   return (
     <Credenza open={open} onOpenChange={setOpen}>
-      <CredenzaContent className="!z-[999999] max-h-[700px] p-6 md:overflow-auto">
+      <CredenzaContent className="max-h-[700px] p-6 md:overflow-auto">
         <CredenzaTitle>Contact Support</CredenzaTitle>
         <div>
           {messageSent && <p className="pb-2 font-bold">Message sent 🎉!!</p>}
@@ -88,10 +92,10 @@ const Support = () => {
             </a>
           </p>
 
-          {!authenticated ? (
+          {!isAuthenticated ? (
             <div>
               <p className="py-2">Sign in to send us a message</p>
-              <SignInUserButton />
+              <ConnectWalletButton />
             </div>
           ) : messageSent ? (
             <div>

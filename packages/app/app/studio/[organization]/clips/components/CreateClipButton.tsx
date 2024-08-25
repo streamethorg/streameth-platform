@@ -60,6 +60,16 @@ const ClipButton = ({
   const [dayFilter, setDayFilter] = React.useState('');
 
   const handleCreateClip = async () => {
+    if (!endTime || !startTime || endTime.unix < startTime.unix) {
+      toast.error('Start time must be earlier than end time.');
+      return;
+    }
+
+    if (!selectedRecording) {
+      toast.error('No recording selected.');
+      return;
+    }
+
     let customSession: ISession = {
       name,
       description: 'Clip',
@@ -79,16 +89,6 @@ const ClipButton = ({
     const session = custom
       ? customSession
       : sessions.find((s) => s._id === sessionId);
-
-    if (!endTime || !startTime || startTime < endTime) {
-      toast.error('Start time must be earlier than end time.');
-      return;
-    }
-
-    if (!selectedRecording) {
-      toast.error('No recording selected.');
-      return;
-    }
 
     if (!session) {
       toast.error('Session information is missing.');
@@ -124,13 +124,13 @@ const ClipButton = ({
         toast.error('Error creating clip');
       })
       .finally(() => {
+        setIsLoading(false);
         handleTermChange([
           {
             key: 'previewId',
             value: session._id as string,
           },
         ]);
-        setIsLoading(false);
       });
   };
 

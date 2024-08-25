@@ -14,6 +14,7 @@ import {
 import { generateThumbnailAction } from '@/lib/actions/sessions';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import PublishCell from './PublishCell';
+import { ClippingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 
 const TableCells = async ({
   item,
@@ -27,10 +28,14 @@ const TableCells = async ({
     await fetchSessionMetrics({ playbackId: item.playbackId ?? '' })
   ).viewCount;
 
-  if (!item.videoUrl) {
+  if (
+    item.clippingStatus === ClippingStatus.pending ||
+    item.clippingStatus === ClippingStatus.failed
+  ) {
     return <ProcessingSkeleton item={item} />;
   }
 
+  console.log(item);
   return (
     <>
       <TableCell className="relative max-w-[500px] font-medium">
@@ -49,9 +54,9 @@ const TableCells = async ({
           <PublishCell item={item} />
         </div>
       </TableCell>
-      {item.updatedAt && (
+      {item.createdAt && (
         <TableCell className="truncate">
-          {formatDate(new Date(item.updatedAt as string), 'ddd. MMM. D, YYYY')}
+          {formatDate(new Date(item.createdAt as string), 'ddd. MMM. D, YYYY')}
         </TableCell>
       )}
 

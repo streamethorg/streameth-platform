@@ -33,7 +33,7 @@ const SessionOptions = ({
       />
 
       <VideoDownloadClient
-        className="space-x-2 border"
+        className="space-x-1 border"
         variant={'outline'}
         videoName={name}
         assetId={assetId}

@@ -6,6 +6,7 @@ import LayoutSelection from './LayoutSelection';
 import VideoCardWithMenu from './misc/VideoCardWithMenu';
 import { PopoverActions } from './misc/PopoverActions';
 import VideoCardProcessing from '@/components/misc/VideoCard/VideoCardProcessing';
+import { ClippingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 
 const LibraryGridLayout = ({
   sessions,
@@ -23,7 +24,10 @@ const LibraryGridLayout = ({
       <div className="m-5 grid grid-cols-4 gap-4 overflow-auto">
         {sessions.map((session) => (
           <div key={session._id}>
-            {session.videoUrl ? (
+            {session.clippingStatus === ClippingStatus.pending ||
+            session.clippingStatus === ClippingStatus.failed ? (
+              <VideoCardProcessing session={session} />
+            ) : (
               <VideoCardWithMenu
                 session={session}
                 link={`/${organizationSlug}/watch?session=${session._id}`}
@@ -33,8 +37,6 @@ const LibraryGridLayout = ({
                   layout: eLayout.grid,
                 })}
               />
-            ) : (
-              <VideoCardProcessing session={session} />
             )}
           </div>
         ))}

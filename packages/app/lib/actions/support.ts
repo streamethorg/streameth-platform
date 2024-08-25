@@ -4,8 +4,14 @@ import { createSupportTicket } from '../services/supportService';
 
 export const createSupportTicketAction = async ({
   message,
+  telegram,
+  email,
+  image,
 }: {
   message: string;
+  telegram?: string;
+  email?: string;
+  image?: string;
 }) => {
   const authToken = cookies().get('user-session')?.value;
   if (!authToken) {
@@ -14,6 +20,9 @@ export const createSupportTicketAction = async ({
 
   const response = await createSupportTicket({
     message,
+    telegram,
+    email,
+    image,
     authToken,
   });
 
