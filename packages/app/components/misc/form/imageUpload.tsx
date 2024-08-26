@@ -123,62 +123,68 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
       },
     }));
 
-    const validateImage = (file: File): Promise<boolean> => {
-      return new Promise((resolve) => {
-        const img = document.createElement('img');
-        img.onload = () => {
-          if (requireExactSize) {
-            if (
-              img.width !== requireExactSize.width ||
-              img.height !== requireExactSize.height
-            ) {
-              setError(
-                `Image must be exactly ${requireExactSize.width}x${requireExactSize.height} pixels`
-              );
-              resolve(false);
+    const validateImage = useCallback(
+      (file: File): Promise<boolean> => {
+        return new Promise((resolve) => {
+          const img = document.createElement('img');
+          img.onload = () => {
+            if (requireExactSize) {
+              if (
+                img.width !== requireExactSize.width ||
+                img.height !== requireExactSize.height
+              ) {
+                setError(
+                  `Image must be exactly ${requireExactSize.width}x${requireExactSize.height} pixels`
+                );
+                resolve(false);
+              } else {
+                setError(null);
+                resolve(true);
+              }
             } else {
               setError(null);
               resolve(true);
             }
-          } else {
-            setError(null);
-            resolve(true);
+          };
+          img.src = URL.createObjectURL(file);
+        });
+      },
+      [requireExactSize]
+    );
+
+    const onSubmit = useCallback(
+      async (file: File): Promise<string> => {
+        if (!file) return '';
+
+        try {
+          const isValidSize = await validateImage(file);
+          if (!isValidSize) {
+            throw new Error('Invalid image size');
           }
-        };
-        img.src = URL.createObjectURL(file);
-      });
-    };
 
-    const onSubmit = async (file: File): Promise<string> => {
-      if (!file) return '';
+          const data = new FormData();
+          data.set(
+            'file',
+            new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
+              type: file.type,
+            })
+          );
+          data.set('directory', path);
+          const imageUrl = await imageUploadAction({ data });
+          if (!imageUrl) throw new Error('Error uploading image');
 
-      try {
-        const isValidSize = await validateImage(file);
-        if (!isValidSize) {
-          throw new Error('Invalid image size');
+          setPreview(imageUrl);
+          return imageUrl;
+        } catch (e) {
+          console.error(e);
+          setPreview('');
+          throw e;
+        } finally {
+          setIsUploading(false);
         }
-
-        const data = new FormData();
-        data.set(
-          'file',
-          new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
-            type: file.type,
-          })
-        );
-        data.set('directory', path);
-        const imageUrl = await imageUploadAction({ data });
-        if (!imageUrl) throw new Error('Error uploading image');
-
-        setPreview(imageUrl);
-        return imageUrl;
-      } catch (e) {
-        console.error(e);
-        setPreview('');
-        throw e;
-      } finally {
-        setIsUploading(false);
-      }
-    };
+      },
+      [path, validateImage]
+    );
 
     const onDropRejected = useCallback(
       (fileRejections: FileRejection[]) => {
@@ -223,7 +229,7 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
           );
         }
       },
-      [onChange]
+      [onSubmit, resize, onChange]
     );
 
     const { getRootProps, getInputProps } = useDropzone({
