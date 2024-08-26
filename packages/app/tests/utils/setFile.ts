@@ -10,15 +10,12 @@ export const setFile = async (page: Page) => {
     throw new Error(`Logo file not found at ${logoPath}`);
   }
 
-  const fileChooserPromise = page.waitForEvent('filechooser');
-
-  await page.locator('label').nth(1).click();
-  const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(logoPath);
+  const fileInput = page.locator('div.rounded-full input[type="file"]');
+  await fileInput.setInputFiles(logoPath);
 
   await expect(
     page.getByText('Image uploaded successfully').first()
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 20000 });
   console.log('Image upload successful');
   await expect(
     page.getByText('Image uploaded successfully').first()
